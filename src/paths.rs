@@ -25,11 +25,7 @@ pub fn setup_crate_paths(crate_path: &Path) -> Result<CratePaths> {
         .to_str()
         .context("Crate name is not valid UTF-8")?;
 
-    let current_dir = std::env::current_dir()?;
-    let relative_crate_path = crate_path.strip_prefix(&current_dir)
-        .unwrap_or(crate_path); // Fallback if not within current_dir
-
-    let output_crate_path = PathBuf::from("output2").join(relative_crate_path);
+    let output_crate_path = crate_path.to_path_buf();
 
     let lib_rs_path = crate_path.join("src").join("lib.rs");
 
