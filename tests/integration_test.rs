@@ -6,9 +6,7 @@ use tempfile::tempdir;
 use split_decls_types::SplitDeclsConfig;
 
 // Import the main function from our crate
-use split_decls_rs::process_crates_in_path; // Assuming process_crates_in_path is public
-use split_decls_rs::process_crate; // Also import process_crate directly
-use split_decls_rs::generate_wrapped_workspace; // Import the new function
+use split_decls_rs::{process_crates_in_path, process_crate, generate_wrapped_workspace};
 
 // Test for the overall functionality:
 // 1. Create a temporary workspace.
@@ -156,7 +154,7 @@ fn test_eager_splitting_and_patching() -> Result<()> {
             }
         }
     "#;
-    fs::write(test_crate_path.join("src").join("oldlib.rs"), lib_rs_content)?;
+    fs::write(test_crate_path.join("src").join("lib.rs"), lib_rs_content)?;
 
     // 3. Create a dummy patch file
     let patch_dir = temp_dir.path().join("patches");
@@ -231,7 +229,7 @@ fn test_eager_splitting_and_patching() -> Result<()> {
     assert!(build_rs_content.contains("cargo:rerun-if-changed=.split-decls-config.toml"));
     assert!(build_rs_content.contains(&format!("cargo:rerun-if-changed={}", my_patch_path.display())));
     assert!(!build_rs_content.contains("fs::create_dir_all")); // No longer creates dirs
-    assert!(!build_rs_content.contains("oldlib.rs content")); // No longer reads oldlib.rs
+    assert!(!build_rs_content.contains("lib.rs content")); // No longer reads lib.rs
 
     // Attempt to cargo check the generated crate
     let output = Command::new("cargo")

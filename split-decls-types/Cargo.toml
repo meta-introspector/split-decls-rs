@@ -1,9 +1,15 @@
 [package]
 name = "split-decls-types"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
 serde = { workspace = true, features = ["derive"] }
 toml = { workspace = true }
 anyhow = { workspace = true }
+
+[build-dependencies]
+anyhow = { workspace = true }
+syn = { workspace = true, features = ["full", "visit"] }
+serde = { workspace = true, features = ["derive"] }
+toml = { workspace = true }

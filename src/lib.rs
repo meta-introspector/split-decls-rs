@@ -1,21 +1,18 @@
-use std::{
-    fs,
-    path::{Path, PathBuf}, // For running git commands
-};
-pub mod macro_analyzer_parts; // Declare the new module
+use std::path::{Path, PathBuf};
+pub mod macro_analyzer_parts;
 pub mod special_print;
 use anyhow::{Context, Result};
-use quote::quote;
-use walkdir::WalkDir;
 
 use split_decls_types::SplitDeclsConfig;
+
+pub mod paths;
 
 pub mod resolve_crate_path_in_submodule;
 pub mod buildrs_ast_utils;
 pub mod buildrs_generator;
-pub mod git_manager; // New module
-pub mod patch_config; // New module
-pub mod workspace_manager; // New module
+pub mod git_manager;
+pub mod patch_config;
+pub mod workspace_manager;
 pub mod eager_splitter;
 pub mod extracted_decl;
 pub mod generate_wrapped_workspace;
@@ -24,11 +21,25 @@ pub mod generate_new_cargotoml;
 pub mod generate_new_lib_rs;
 pub mod generate_new_build_rs;
 pub mod apply_patches_to_syntax_tree;
+pub mod auto_workspace_generator;
 pub mod get_item_name;
 pub mod get_item_kind;
+pub mod process_crate;
+pub mod generate_new_workspace;
+pub mod crate_finder;
+pub mod workflow_executor;
+pub mod process_crates_in_path;
+pub mod goal_parser;
+pub mod backup_original_cargo;
+pub mod ecosystem_processor;
 pub use extracted_decl::*;
 
-use std::collections::HashMap;
+pub use crate::paths::{CratePaths, setup_crate_paths}; // Re-export from paths module
+
+// Re-export key functions for tests
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
     struct Package {
@@ -59,51 +70,7 @@ struct CargoToml {
 }
 
 
-/// Encapsulates all relevant file paths for a target crate.
-pub struct CratePaths {
-    pub crate_path: PathBuf,
-    pub crate_name: String,
-    pub lib_rs_path: PathBuf,
-    pub old_lib_rs_path: PathBuf,
-    pub build_rs_path: PathBuf,
-    pub old_build_rs_path: PathBuf,
-    pub cargo_toml_path: PathBuf, // New field for Cargo.toml
-    pub old_cargo_toml_path: PathBuf, // New field for old Cargo.toml
-    pub decls_output_dir: PathBuf,
-    pub target_config_path: PathBuf,
-}
 
-/// Sets up and returns all relevant file paths for a given crate.
-pub fn setup_crate_paths(crate_path: &Path) -> Result<CratePaths> {
-    let crate_name_os_str = crate_path
-        .file_name()
-        .context("Crate path has no file name")?;
-    let crate_name = crate_name_os_str
-        .to_str()
-        .context("Crate name is not valid UTF-8")?;
-
-    let lib_rs_path = crate_path.join("src").join("lib.rs");
-    let old_lib_rs_path = crate_path.join("src").join("oldlib.rs");
-    let build_rs_path = crate_path.join("build.rs");
-    let old_build_rs_path = crate_path.join("oldbuild.rs");
-    let cargo_toml_path = crate_path.join("Cargo.toml");
-    let old_cargo_toml_path = crate_path.join("oldCargo.toml"); // Define the path for the backed-up Cargo.toml
-    let decls_output_dir = crate_path.join("src").join("decls");
-    let target_config_path = crate_path.join(".split-decls-config.toml");
-
-    Ok(CratePaths {
-        crate_path: crate_path.to_path_buf(),
-        crate_name: crate_name.to_string(),
-        lib_rs_path,
-        old_lib_rs_path,
-        build_rs_path,
-        old_build_rs_path,
-        cargo_toml_path,
-        old_cargo_toml_path,
-        decls_output_dir,
-        target_config_path,
-    })
-}
 
 
 // Helper to convert local path dependencies to workspace dependencies if they exist in global_config.workspace_dependencies
