@@ -36,18 +36,7 @@ pub fn generate_wrapped_crate(
         fs::create_dir_all(&wrapped_crate_path.join("src"))
             .context(format!("Failed to create src directory for wrapped crate: {}", wrapped_crate_path.display()))?;
 
-        // Copy original crate contents to the wrapped crate directory, excluding Cargo.toml and src/lib.rs
-        // These will be generated or handled separately.
-        copy_dir_recursive::copy_dir_recursive(
-            original_crate_path,
-            &wrapped_crate_path,
-            &[
-                "Cargo.toml".to_string(),
-                "src/lib.rs".to_string(),
-                "target".to_string(), // Exclude target directory
-            ],
-            true, // Overwrite existing files
-        ).context(format!("Failed to copy original crate contents from {} to {}", original_crate_path.display(), wrapped_crate_path.display()))?;
+
     }
 
     // Setup CratePaths for the *wrapped* crate
