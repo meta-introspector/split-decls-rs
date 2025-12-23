@@ -57,6 +57,21 @@ pub fn handle_multi_crate_wrapping(
                 if verbose {
                     println!("    Added crate {} as workspace member and dependency candidate.", crate_info.name);
                 }
+                // Call generate_wrapped_crate for each discovered crate
+                if verbose {
+                    println!("  Calling generate_wrapped_crate for discovered crate '{}' at '{}'", crate_info.name, cargo_path.display());
+                }
+                generate_wrapped_crate::generate_wrapped_crate(
+                    output_dir,
+                    &crate_info.name, // Pass the actual crate name
+                    &cargo_path.parent().unwrap().to_path_buf(), // Pass the directory of the Cargo.toml
+                    global_config,
+                    patch_config,
+                    dry_run,
+                )?;
+                if verbose {
+                    println!("  Finished generate_wrapped_crate for discovered crate: {}", crate_info.name);
+                }
             }
         }
         if verbose {
