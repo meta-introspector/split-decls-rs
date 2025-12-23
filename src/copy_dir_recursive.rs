@@ -2,16 +2,43 @@ use anyhow::{Context, Result};
 use std::fs;
 use std::path::{Path, PathBuf};
 
+struct LockFileGuard {
+    path: PathBuf,
+}
+
+impl Drop for LockFileGuard {
+    fn drop(&mut self) {
+        if let Err(e) = fs::remove_file(&self.path) {
+            eprintln!("Warning: Failed to remove lock file at {}: {}", self.path.display(), e);
+        }
+    }
+}
+
 /// Recursively copies contents from `src` to `dst`, with optional `ignore` patterns.
 ///
 /// `ignore`: A list of file or directory names (relative to `src`) to ignore during the copy.
 /// `overwrite`: If true, existing files in `dst` will be overwritten.
+/// `current_depth`: The current recursion depth.
+/// `max_depth`: The maximum allowed recursion depth.
 pub fn copy_dir_recursive(
     src: &Path,
     dst: &Path,
     ignore: &[String],
     overwrite: bool,
+    current_depth: usize,
+    max_depth: usize,
 ) -> Result<()> {
+    if current_depth > max_depth {
+        anyhow::bail!("Maximum recursion depth ({}) exceeded while copying directory from {} to {}", max_depth, src.display(), dst.display());
+    }
+
+    let lock_file_path = dst.join(".copy_lock");
+    if lock_file_path.exists() {
+        anyhow::bail!("Detected potential infinite recursion: lock file exists at {}. Aborting copy from {} to {}", lock_file_path.display(), src.display(), dst.display());
+    }
+    fs::File::create(&lock_file_path).context(format!("Failed to create lock file at {}", lock_file_path.display()))?;
+    let _lock_guard = LockFileGuard { path: lock_file_path }; // This ensures the lock file is removed on exit
+
     fs::create_dir_all(dst).context(format!("Failed to create destination directory {}", dst.display()))?;
 
     for entry in fs::read_dir(src).context(format!("Failed to read source directory {}", src.display()))? {
@@ -27,7 +54,7 @@ pub fn copy_dir_recursive(
 
         let ty = entry.file_type()?;
         if ty.is_dir() {
-            copy_dir_recursive(&entry_path, &dest_path, ignore, overwrite)?;
+            copy_dir_recursive(&entry_path, &dest_path, ignore, overwrite, current_depth + 1, max_depth)?;
         } else {
             if dest_path.exists() && !overwrite {
                 continue; // Skip if file exists and overwrite is false
