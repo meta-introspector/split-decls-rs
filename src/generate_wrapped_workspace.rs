@@ -49,48 +49,23 @@ pub fn generate_wrapped_workspace(
 
     let main_crate_cargo_toml_path = scan_root.join("Cargo.toml");
 
-    // Condition to determine single vs multi-crate handling
-    if patch_config.generated_workspace_member.is_empty() && main_crate_cargo_toml_path.exists() {
-        if verbose {
-            println!(
-                "DEBUG: Detected single crate wrapping scenario. Generating [package] Cargo.toml."
-            );
-        }
-        let root_cargo_toml_content =
-            fs::read_to_string(&main_crate_cargo_toml_path).context(format!(
-                "Failed to read Cargo.toml from scan_root: {}",
-                main_crate_cargo_toml_path.display()
-            ))?;
-        let root_cargo_toml: Table = toml::from_str(&root_cargo_toml_content).context(format!(
-            "Failed to parse Cargo.toml from scan_root: {}",
-            main_crate_cargo_toml_path.display()
-        ))?;
-        
-        final_cargo_toml_content = single_crate::handle_single_crate_wrapping(
-            output_dir,
-            patch_config,
-            global_config,
-            scan_root,
-            dry_run,
-            verbose,
-            &main_crate_cargo_toml_path,
-            &root_cargo_toml,
-        )?;
-    } else {
-        final_cargo_toml_content = multi_crate::handle_multi_crate_wrapping(
-            output_dir,
-            patch_config,
-            global_config,
-            scan_root,
-            dry_run,
-            verbose,
-        )?;
-    }
+    // When generating a wrapped workspace, the output_dir's Cargo.toml should always be a workspace root.
+    // Individual packages within the workspace will have their own Cargo.toml files.
+    final_cargo_toml_content = multi_crate::handle_multi_crate_wrapping(
+        output_dir,
+        patch_config,
+        global_config,
+        scan_root,
+        dry_run,
+        verbose,
+    )?;
     
     if !dry_run {
         add_generated_header!(
             &workspace_cargo_toml_path,
-            final_cargo_toml_content.as_str()
+            final_cargo_toml_content.as_str(),
+            file!(),
+            line!()
         )
         .context(format!(
             "Failed to write Cargo.toml for workspace: {}",

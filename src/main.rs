@@ -97,14 +97,37 @@ fn run_wrapped_workspace_mode(
         .map(|p| p.to_path_buf())
         .unwrap_or_else(|| PathBuf::from("output2"));
     
-    let patch_config_path_str = "patch.toml";
-    let workspace_root = PathBuf::from("./");
-
     let root_cargo_toml_path = wrapped_workspace_output_dir.join("Cargo.toml");
-    
     let mut global_config_mut = global_config.clone(); // Clone to allow mutation
 
-    // --- Load generated Cargo.toml and extract workspace dependencies ---
+    let patch_config_path_str = "patch.toml";
+    let patch_config_path = PathBuf::from(patch_config_path_str);
+    let patch_config = if patch_config_path.exists() {
+        if verbose {
+            println!("Loading patch config from {}", patch_config_path.display());
+        }
+        PatchConfig::load_from_file(&patch_config_path)
+            .context("Failed to load patch config")?
+    } else {
+        if verbose {
+            println!("No patch.toml found, using default patch configuration.");
+        }
+        PatchConfig::default()
+    };
+    if verbose {
+        println!("Patch config loaded: {:?}", patch_config);
+    }
+
+    let current_dir_as_scan_root = PathBuf::from("./");
+
+    if root_cargo_toml_path.exists() {
+        if verbose {
+            println!("DEBUG: Deleting existing Cargo.toml at: {}", root_cargo_toml_path.display());
+        }
+        fs::remove_file(&root_cargo_toml_path)
+            .context(format!("Failed to delete existing Cargo.toml at {}", root_cargo_toml_path.display()))?;
+    }
+
     let root_cargo_toml_content = if root_cargo_toml_path.exists() {
         fs::read_to_string(&root_cargo_toml_path)
             .context(format!("Failed to read generated Cargo.toml from {}", root_cargo_toml_path.display()))?
@@ -149,25 +172,6 @@ fn run_wrapped_workspace_mode(
         global_config_mut.workspace_dependencies.extend(dep_to_toml_value_iter(patch_section.crates_io));
     }
     // --- END new logic ---
-
-    let patch_config_path = PathBuf::from(patch_config_path_str);
-    let patch_config = if patch_config_path.exists() {
-        if verbose {
-            println!("Loading patch config from {}", patch_config_path.display());
-        }
-        PatchConfig::load_from_file(&patch_config_path)
-            .context("Failed to load patch config")?
-    } else {
-        if verbose {
-            println!("No patch.toml found, using default patch configuration.");
-        }
-        PatchConfig::default()
-    };
-    if verbose {
-        println!("Patch config loaded: {:?}", patch_config);
-    }
-
-    let current_dir_as_scan_root = PathBuf::from("./");
 
     // Always generate a wrapped workspace in this mode
     if verbose {
@@ -370,15 +374,25 @@ fn dep_to_toml_value_iter<'a>(
 }
 
 fn main() -> Result<()> {
+
     let cli = Cli::parse();
 
+
+
     if cli.verbose {
+
         println!("Verbose mode enabled.");
+
         println!("CLI args: {:?}", cli);
+
     }
 
+
+
     // Load global config - this will be common to both modes
+
     let workspace_root = PathBuf::from("./");
+
     let global_config_path = workspace_root.join("split-decls-rs.toml");
     let global_config = if global_config_path.exists() {
         SplitDeclsConfig::load_from_file(&global_config_path)

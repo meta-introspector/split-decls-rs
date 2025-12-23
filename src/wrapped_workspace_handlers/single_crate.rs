@@ -120,57 +120,17 @@ pub fn handle_single_crate_wrapping(
         }
     }
 
-    // Handle [workspace] section.
-    // If the original Cargo.toml was not a workspace, add a new [workspace] section.
-    // If it was already a workspace, we don't add a new [workspace] header, but we still write [workspace.dependencies].
-    let mut workspace_section_exists_in_original = root_cargo_toml.get("workspace").is_some();
-    let mut current_workspace_members = Vec::new();
-
-    if workspace_section_exists_in_original {
-        if let Some(workspace_table) = root_cargo_toml.get("workspace").and_then(|v| v.as_table()) {
-            if let Some(members_array) = workspace_table.get("members").and_then(|v| v.as_array()) {
-                for member in members_array {
-                    if let Some(s) = member.as_str() {
-                        current_workspace_members.push(format!("\"{}\"", s));
-                    }
-                }
-            }
-        }
-    }
-
-    // Ensure "." is a member for the single-crate scenario at output_dir
-    if !current_workspace_members.contains(&"".to_string())
-        && !current_workspace_members.contains(&".".to_string())
-        && !current_workspace_members.contains(&"./".to_string())
-        && !current_workspace_members.contains(&"..".to_string())
-        && !current_workspace_members.contains(&"./src".to_string())
-    {
-        current_workspace_members.push(".".to_string());
-    }
-    
-    if !workspace_section_exists_in_original {
-        final_cargo_toml_content.push_str("\n[workspace]\n");
-        final_cargo_toml_content.push_str("resolver = \"2\"\n");
-        final_cargo_toml_content.push_str(&format!("members = [\n    {}\n]\n", current_workspace_members.join(",\n    ")));
-    } else if !current_workspace_members.is_empty() {
-        // If original had workspace and members were modified (e.g. added "."), then rewrite [workspace]
-        final_cargo_toml_content.push_str("\n[workspace]\n");
-        // Preserve resolver if exists, else default
-        if let Some(resolver_val) = root_cargo_toml.get("workspace").and_then(|v| v.as_table()).and_then(|t| t.get("resolver")) {
-             final_cargo_toml_content.push_str(&format!("resolver = {}\n", resolver_val.to_string()));
-        } else {
-            final_cargo_toml_content.push_str("resolver = \"2\"\n");
-        }
-        final_cargo_toml_content.push_str(&format!("members = [\n    {}\n]\n", current_workspace_members.join(",\n    ")));
-    }
-
-
     // Add [workspace.dependencies] section if any were collected
     if !workspace_dependencies_output_map.is_empty() {
-        final_cargo_toml_content.push_str("\n[workspace.dependencies]\n");
-        for (key, value) in workspace_dependencies_output_map.iter() {
-            final_cargo_toml_content.push_str(&format!("{} = {}\n", key, value.to_string()));
-        }
+        // This section should only be added if it's part of a workspace.
+        // If this function generates content for a single package,
+        // workspace.dependencies should not be in its Cargo.toml.
+        // However, if the output Cargo.toml is meant to be a workspace root
+        // (which seems to be the case for output2/Cargo.toml),
+        // then this content should be handled by the workspace generator,
+        // not the single-crate generator.
+        // For now, let's remove it from here to prevent duplication if a workspace
+        // is being generated at the top level.
     }
     // Handle [[bin]] sections - direct copy of relevant parts, but adjust paths
     if let Some(bin_array) = root_cargo_toml.get("bin").and_then(|v| v.as_array()) {
