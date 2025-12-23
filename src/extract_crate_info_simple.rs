@@ -1,0 +1,26 @@
+use anyhow::{Context, Result};
+use std::fs;
+use std::path::Path;
+use toml::Table;
+use crate::simple_crate_info::SimpleCrateInfo;
+
+pub fn extract_crate_info_simple(cargo_path: &Path) -> Result<Option<SimpleCrateInfo>> {
+    let cargo_toml_content = fs::read_to_string(cargo_path)
+        .context(format!("Failed to read Cargo.toml at {}", cargo_path.display()))?;
+    let cargo_toml: Table = toml::from_str(&cargo_toml_content)
+        .context(format!("Failed to parse Cargo.toml at {}", cargo_path.display()))?;
+
+    if let Some(package_table) = cargo_toml.get("package").and_then(|v| v.as_table()) {
+        let name = package_table.get("name").and_then(|v| v.as_str()).map(|s| s.to_string());
+        let version = package_table.get("version").and_then(|v| v.as_str()).map(|s| s.to_string());
+
+        if let (Some(name), Some(version)) = (name, version) {
+            return Ok(Some(SimpleCrateInfo {
+                name,
+                version,
+                manifest_path: cargo_path.to_path_buf(),
+            }));
+        }
+    }
+    Ok(None)
+}

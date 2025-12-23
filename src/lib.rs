@@ -1,6 +1,12 @@
 use std::path::{Path, PathBuf};
 pub mod macro_analyzer_parts;
 pub mod special_print;
+pub mod format_generated_rust_files; // Add this
+pub mod wrapped_workspace_handlers; // Add this
+pub mod path_diff; // Add this
+pub mod simple_crate_info; // Add this
+pub mod extract_crate_info_simple; // Add this
+pub mod find_all_cargo_tomls; // Add this
 use anyhow::{Context, Result};
 
 use split_decls_types::SplitDeclsConfig;
