@@ -46,6 +46,10 @@ pub struct SplitDeclsConfig {
     /// to their TOML Value representation.
     #[serde(default)]
     pub workspace_dependencies: HashMap<String, toml::Value>,
+    /// Overrides for specific workspace dependencies.
+    /// Use this to fix issues with generated dependency paths or versions without recompiling.
+    #[serde(default)]
+    pub workspace_dependency_overrides: HashMap<String, toml::Value>,
 }
 
 impl SplitDeclsConfig {
