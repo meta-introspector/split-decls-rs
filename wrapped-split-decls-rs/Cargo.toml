@@ -31,16 +31,25 @@ workspace = true
 features = ["derive"]
 workspace = true
 
+[dependencies.env_logger]
+workspace = true
+
 [dependencies.introspector_decl2_macros]
 workspace = true
 
 [dependencies.lazy_static]
 workspace = true
 
+[dependencies.log]
+workspace = true
+
 [dependencies.pagerank_rs]
 workspace = true
 
 [dependencies.pathdiff]
+workspace = true
+
+[dependencies.prettyplease]
 workspace = true
 
 [dependencies.proc-macro2]
