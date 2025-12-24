@@ -1,1 +1,0 @@
-impl_ordered_float_pow ! { f64 , f64 }

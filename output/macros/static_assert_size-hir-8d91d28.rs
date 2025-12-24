@@ -1,1 +1,0 @@
-static_assert_size ! (TraitItem <'_ >, 88) ;

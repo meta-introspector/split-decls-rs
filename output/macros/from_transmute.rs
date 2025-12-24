@@ -1,1 +1,0 @@
-from_transmute ! { unsafe f64x2 => float64x2_t }

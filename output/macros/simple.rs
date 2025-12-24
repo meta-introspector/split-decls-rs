@@ -1,1 +1,0 @@
-simple ! (utf8 , enum_unit : Enum = "Unit" => Enum :: Unit) ;

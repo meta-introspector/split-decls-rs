@@ -1,1 +1,0 @@
-declare_lint_pass ! (InvalidFromUtf8 => [INVALID_FROM_UTF8_UNCHECKED , INVALID_FROM_UTF8]) ;

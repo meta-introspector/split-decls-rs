@@ -1,1 +1,0 @@
-declare_lint_pass ! (# [doc = " Check for used feature gates in `INCOMPLETE_FEATURES` in `rustc_feature/src/unstable.rs`."] IncompleteInternalFeatures => [INCOMPLETE_FEATURES , INTERNAL_FEATURES]) ;

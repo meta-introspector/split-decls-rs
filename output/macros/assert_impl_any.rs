@@ -1,1 +1,0 @@
-assert_impl_any ! (() : From < u8 >, From < u16 >, Send) ;

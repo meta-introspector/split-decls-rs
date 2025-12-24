@@ -1,1 +1,0 @@
-deserialized_to ! (enum_unit : Enum = "Unit" => Enum :: Unit) ;

@@ -1,1 +1,0 @@
-pow_impl ! (f64 , f64 , f64 , < f64 as Float >:: powf) ;

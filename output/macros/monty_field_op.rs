@@ -1,1 +1,0 @@
-monty_field_op ! (Mul , mul , multiply) ;

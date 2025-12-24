@@ -1,1 +1,0 @@
-test_parse ! { test_query_permissive , "/?foo={bar|baz}\\^`" , [] , query = Some ("foo={bar|baz}\\^`") , }

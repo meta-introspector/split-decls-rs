@@ -1,1 +1,0 @@
-# [proc_macro_derive (RustEmbed)] pub fn rust_embed_derive (_input : TokenStream) -> TokenStream { TokenStream :: new () } . sig

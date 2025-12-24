@@ -1,1 +1,0 @@
-declare_lint_pass ! (UnusedResults => [UNUSED_MUST_USE , UNUSED_RESULTS]) ;

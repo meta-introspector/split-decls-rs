@@ -1,1 +1,0 @@
-rustc_hir :: arena_types ! (impl_arena_allocatable_decoders) ;

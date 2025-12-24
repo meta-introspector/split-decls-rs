@@ -1,1 +1,0 @@
-#[cfg (feature = "uuid")] from_value ! (uuid :: Uuid) ;

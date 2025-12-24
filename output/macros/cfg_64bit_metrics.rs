@@ -1,1 +1,0 @@
-cfg_64bit_metrics ! { use std :: sync :: atomic :: Ordering :: Relaxed ; }

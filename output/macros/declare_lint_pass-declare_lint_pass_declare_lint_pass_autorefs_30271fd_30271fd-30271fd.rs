@@ -1,1 +1,0 @@
-declare_lint_pass ! (ImplicitAutorefs => [DANGEROUS_IMPLICIT_AUTOREFS]) ;

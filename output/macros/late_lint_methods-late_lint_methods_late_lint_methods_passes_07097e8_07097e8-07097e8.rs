@@ -1,1 +1,0 @@
-late_lint_methods ! (declare_late_lint_pass , []) ;

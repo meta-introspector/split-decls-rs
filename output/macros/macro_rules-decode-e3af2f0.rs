@@ -1,1 +1,0 @@
-macro_rules ! or_overflow { ($ e : expr) => (match $ e { Some (val) => val , None => return Poll :: Ready (Err (io :: Error :: new (io :: ErrorKind :: InvalidData , "invalid chunk size: overflow" ,))) , }) }

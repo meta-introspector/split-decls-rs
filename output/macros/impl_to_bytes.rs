@@ -1,1 +1,0 @@
-impl_to_bytes ! { f64 , 8 }

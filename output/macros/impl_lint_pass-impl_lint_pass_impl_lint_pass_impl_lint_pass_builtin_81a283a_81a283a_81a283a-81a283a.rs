@@ -1,1 +1,0 @@
-impl_lint_pass ! (MissingDebugImplementations => [MISSING_DEBUG_IMPLEMENTATIONS]) ;

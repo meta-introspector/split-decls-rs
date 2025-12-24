@@ -1,1 +1,0 @@
-static_assertions :: const_assert ! (core :: mem :: size_of ::< String > () <= 24) ;

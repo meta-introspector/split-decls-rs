@@ -1,1 +1,0 @@
-assert_impl ! (for ('a , T : 'a) &'a mut T : ! Copy) ;

@@ -1,1 +1,0 @@
-declare_lint_pass ! (DerefIntoDynSupertrait => [DEREF_INTO_DYN_SUPERTRAIT]) ;

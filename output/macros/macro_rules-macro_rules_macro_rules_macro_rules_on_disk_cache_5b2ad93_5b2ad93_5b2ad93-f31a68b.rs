@@ -1,3 +1,0 @@
-macro_rules ! impl_ref_decoder { (<$ tcx : tt > $ ($ ty : ty ,) *) => { $ (impl <'a , $ tcx > Decodable < CacheDecoder <'a , $ tcx >> for &$ tcx [$ ty] { #[inline] fn decode (d : & mut CacheDecoder <'a , $ tcx >) -> Self { RefDecodable :: decode (d)}
-}) *}
-; }

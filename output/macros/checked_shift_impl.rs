@@ -1,1 +1,0 @@
-checked_shift_impl ! (CheckedShr , checked_shr , i128) ;

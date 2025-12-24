@@ -1,1 +1,0 @@
-impl_not_nan_binop ! { Rem , rem , RemAssign , rem_assign }

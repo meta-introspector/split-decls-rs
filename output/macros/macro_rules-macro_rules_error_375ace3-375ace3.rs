@@ -1,1 +1,0 @@
-# [macro_export] macro_rules ! throw_exhaust { ($ ($ tt : tt) *) => { do yeet $ crate :: err_exhaust ! ($ ($ tt) *) } ; }

@@ -1,1 +1,0 @@
-declare_lint_pass ! (NonCamelCaseTypes => [NON_CAMEL_CASE_TYPES]) ;

@@ -1,1 +1,0 @@
-ident ! (no_mangle) ;

@@ -1,1 +1,0 @@
-scoped_tls :: scoped_thread_local ! (static SESSION_GLOBALS : SessionGlobals) ;

@@ -1,1 +1,0 @@
-impl_close_no_error_no_flush ! (Vec < u8 >, "std") ;

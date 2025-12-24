@@ -1,1 +1,0 @@
-checked_euclid_forward_impl ! (usize u8 u16 u32 u64 u128) ;

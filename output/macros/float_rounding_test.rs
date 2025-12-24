@@ -1,1 +1,0 @@
-float_rounding_test ! { f64 , i64 }

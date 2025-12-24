@@ -1,2 +1,0 @@
-UNION ! { union RTL_IMAGE_MITIGATION_POLICY { Bitfields1 : ULONG64 , Bitfields2 : ULONG64 ,}
-}

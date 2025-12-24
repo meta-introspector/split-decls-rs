@@ -1,1 +1,0 @@
-#[cfg (target_pointer_width = "64")] wmul_impl_usize ! { u64 }

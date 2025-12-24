@@ -1,1 +1,0 @@
-impl_has_visibility ! (syn :: ItemType , syn :: ItemEnum , syn :: ItemFn , syn :: ItemMod , syn :: ItemTrait , syn :: ItemConst , syn :: ItemStatic , syn :: ItemUse ,) ;

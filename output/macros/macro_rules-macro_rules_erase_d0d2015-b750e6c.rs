@@ -1,2 +1,0 @@
-macro_rules ! tcx_lifetime { ($ ($ ($ fake_path : ident) ::+) ,+ $ (,) ?) => { $ (impl <'tcx > EraseType for $ ($ fake_path) ::+<'tcx > { type Result = [u8 ; size_of ::<$ ($ fake_path) ::+<'static >> ()] ; }) *}
-}

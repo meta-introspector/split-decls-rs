@@ -1,1 +1,0 @@
-impl_fmt_span_bit_assign_op ! (BitXorAssign , bitxor_assign , ^) ;

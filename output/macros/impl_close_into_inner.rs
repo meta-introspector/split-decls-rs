@@ -1,1 +1,0 @@
-impl_close_into_inner ! (std :: io :: LineWriter < W >, "std") ;

@@ -1,1 +1,0 @@
-declare_lint_pass ! (MissingCopyImplementations => [MISSING_COPY_IMPLEMENTATIONS]) ;

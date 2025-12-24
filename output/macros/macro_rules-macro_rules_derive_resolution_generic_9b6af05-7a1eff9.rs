@@ -1,2 +1,0 @@
-#[macro_export] macro_rules ! DeriveResolutionGeneric { ($ DRT : ident) => { pub struct DeriveResolution <$ DRT : crate :: resolver_traits :: OpaqueDeriveResolution + 'static >}
-; }

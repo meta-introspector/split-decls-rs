@@ -1,1 +1,0 @@
-static_assert_size ! (Body <'_ >, 24) ;

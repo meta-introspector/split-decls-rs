@@ -1,1 +1,0 @@
-#[cfg (feature = "fallible_uint")] to_sql_self_fallible ! (non_zero std :: num :: NonZeroUsize) ;

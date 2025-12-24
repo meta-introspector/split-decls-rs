@@ -1,1 +1,0 @@
-static_assert_size ! (QPath <'_ >, 24) ;

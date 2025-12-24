@@ -1,1 +1,0 @@
-declare_lint_pass ! (WhileTrue => [WHILE_TRUE]) ;

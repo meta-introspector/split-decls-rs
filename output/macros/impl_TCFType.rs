@@ -1,1 +1,0 @@
-impl_TCFType ! (SCDynamicStore , SCDynamicStoreRef , SCDynamicStoreGetTypeID) ;

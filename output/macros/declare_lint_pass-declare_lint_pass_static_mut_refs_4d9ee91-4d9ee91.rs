@@ -1,1 +1,0 @@
-declare_lint_pass ! (StaticMutRefs => [STATIC_MUT_REFS]) ;

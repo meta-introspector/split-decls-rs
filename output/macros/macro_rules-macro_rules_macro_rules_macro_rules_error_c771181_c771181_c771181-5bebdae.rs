@@ -1,2 +1,0 @@
-#[macro_export] macro_rules ! throw_ub { ($ ($ tt : tt) *) => { do yeet $ crate :: err_ub ! ($ ($ tt) *)}
-; }

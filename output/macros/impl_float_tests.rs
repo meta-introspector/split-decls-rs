@@ -1,1 +1,0 @@
-impl_float_tests ! { f64 , i64 }

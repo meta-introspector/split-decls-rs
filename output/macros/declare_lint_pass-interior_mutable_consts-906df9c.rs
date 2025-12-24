@@ -1,1 +1,0 @@
-declare_lint_pass ! (InteriorMutableConsts => [CONST_ITEM_INTERIOR_MUTATIONS]) ;

@@ -1,2 +1,0 @@
-macro_rules ! error { ($ reason : expr) => { #[allow (rustc :: untranslatable_diagnostic)] #[allow (rustc :: diagnostic_outside_of_impl)] dcx . fatal (format ! ("invalid `--cfg` argument: `{s}` ({})" , $ reason)) ;}
-; }

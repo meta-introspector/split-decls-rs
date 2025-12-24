@@ -1,1 +1,0 @@
-impl_int_div ! (NInt , NInt , PInt) ;

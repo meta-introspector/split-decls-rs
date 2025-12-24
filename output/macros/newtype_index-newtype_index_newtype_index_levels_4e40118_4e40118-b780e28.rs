@@ -1,2 +1,0 @@
-rustc_index :: newtype_index ! { struct LintStackIndex { const COMMAND_LINE = 0 ;}
-}

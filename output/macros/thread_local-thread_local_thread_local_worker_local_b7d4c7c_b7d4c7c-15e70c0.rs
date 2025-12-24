@@ -1,2 +1,0 @@
-thread_local ! { #[doc = " A thread local which contains the identifier of `REGISTRY` but allows for faster access."] #[doc = " It also holds the index of the current thread."] static THREAD_DATA : ThreadData = const { ThreadData { registry_id : Cell :: new (RegistryId (ptr :: null ())) , index : Cell :: new (0) ,}
-} ; }

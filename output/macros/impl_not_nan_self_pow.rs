@@ -1,1 +1,0 @@
-impl_not_nan_self_pow ! { f64 , f64 }

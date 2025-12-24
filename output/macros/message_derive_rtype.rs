@@ -1,1 +1,0 @@
-# [proc_macro_derive (Message , attributes (rtype))] pub fn message_derive_rtype (input : TokenStream) -> TokenStream { let ast : DeriveInput = syn :: parse (input) . unwrap () ; message :: expand (& ast) . into () } . sig

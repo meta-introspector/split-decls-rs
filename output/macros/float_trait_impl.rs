@@ -1,1 +1,0 @@
-float_trait_impl ! (Num for f32 f64) ;

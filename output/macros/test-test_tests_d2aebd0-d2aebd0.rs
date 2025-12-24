@@ -1,1 +1,0 @@
-test ! (case : newline_and_control_char_in_same_chunk , text : "01234\u{07}6789\nbcdef0123456789abcdef" , lines : vec ! [0 , 11] , multi_byte_chars : vec ! [] ,) ;

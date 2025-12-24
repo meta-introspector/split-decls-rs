@@ -1,1 +1,0 @@
-static_assert_size ! (WithCachedTypeInfo < PredicateKind <'_ >>, 56) ;

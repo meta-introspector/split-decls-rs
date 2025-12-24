@@ -1,1 +1,0 @@
-IntoEdgesDirected ! { delegate_impl [] }

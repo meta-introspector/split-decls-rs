@@ -1,1 +1,0 @@
-impl_digest ! (Groestl512 , Compressor1024 , U1024) ;

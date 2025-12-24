@@ -1,1 +1,0 @@
-impl_stable_traits_for_trivial_type ! (i8) ;

@@ -1,1 +1,0 @@
-# [proc_macro] pub fn use_the_dependency (_ : TokenStream) -> TokenStream { TokenStream :: new () } . sig

@@ -1,1 +1,0 @@
-defmac ! (recode ref g => decode ! (encode ! (g))) ;

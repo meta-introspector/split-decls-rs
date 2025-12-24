@@ -1,1 +1,0 @@
-impl_lint_pass ! (UnusedParens => [UNUSED_PARENS]) ;

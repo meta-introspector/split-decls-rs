@@ -1,1 +1,0 @@
-zipmap_impl ! (u32x4x4 , u32x4 , Add , add) ;

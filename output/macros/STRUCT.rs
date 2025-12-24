@@ -1,2 +1,0 @@
-STRUCT ! { struct KEY_OPEN_SUBKEYS_INFORMATION { Count : ULONG , KeyArray : [KEY_PID_ARRAY ; 1] ,}
-}

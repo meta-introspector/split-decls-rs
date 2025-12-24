@@ -1,1 +1,0 @@
-declare_lint_pass ! (NonPanicFmt => [NON_FMT_PANICS]) ;

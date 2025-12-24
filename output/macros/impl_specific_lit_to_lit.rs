@@ -1,1 +1,0 @@
-impl_specific_lit_to_lit ! (crate :: CStringLit < B >, CString) ;

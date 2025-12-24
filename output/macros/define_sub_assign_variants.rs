@@ -1,1 +1,0 @@
-define_sub_assign_variants ! (LHS = AffinePoint , RHS = EdwardsPoint) ;

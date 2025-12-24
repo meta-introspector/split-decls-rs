@@ -1,1 +1,0 @@
-macro_inner_input ! { }

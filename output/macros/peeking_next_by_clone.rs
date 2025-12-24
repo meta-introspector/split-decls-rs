@@ -1,1 +1,0 @@
-peeking_next_by_clone ! { [I : Clone + PeekingNext + DoubleEndedIterator] :: std :: iter :: Rev < I > }

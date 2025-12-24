@@ -1,1 +1,0 @@
-impl_threefish ! (Threefish1024 , 80 , 16 , U128 , R_1024 , P_1024) ;

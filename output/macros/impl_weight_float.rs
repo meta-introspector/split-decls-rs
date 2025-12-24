@@ -1,1 +1,0 @@
-impl_weight_float ! (f64) ;

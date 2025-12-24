@@ -1,1 +1,0 @@
-impl_lint_pass ! (Bar => [TEST_LINT]) ;

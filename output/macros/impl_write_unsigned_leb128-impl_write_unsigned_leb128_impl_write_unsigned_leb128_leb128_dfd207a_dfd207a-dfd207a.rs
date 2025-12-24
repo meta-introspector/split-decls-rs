@@ -1,1 +1,0 @@
-impl_write_unsigned_leb128 ! (write_u64_leb128 , u64) ;

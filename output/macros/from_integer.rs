@@ -1,1 +1,0 @@
-#[cfg (feature = "arbitrary_precision")] from_integer ! { i128 u128 }

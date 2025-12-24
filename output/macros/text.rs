@@ -1,1 +1,0 @@
-text ! (tuple_struct : Tuple ("first" , 42) => "first 42") ;

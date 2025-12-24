@@ -1,1 +1,0 @@
-spanless_eq_struct ! (WhereRegionPredicate ; lifetime bounds) ;

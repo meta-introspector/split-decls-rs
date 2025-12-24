@@ -1,1 +1,0 @@
-const_assert_eq ! (false , false) ;

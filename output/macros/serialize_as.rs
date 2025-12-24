@@ -1,1 +1,0 @@
-serialize_as ! (tuple_struct : Tuple ("first" , 42) => "first 42") ;

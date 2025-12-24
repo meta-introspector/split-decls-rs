@@ -1,1 +1,0 @@
-def_pool ! (OrdSetPool < A >, Node < Value < A >>) ;

@@ -1,1 +1,0 @@
-common_visitor_and_walkers ! (Visitor <'a >) ;

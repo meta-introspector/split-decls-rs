@@ -1,1 +1,0 @@
-define_punctuation_structs ! { "_" pub struct Underscore / 1 #[doc = " wildcard patterns, inferred types, unnamed items in constants, extern crates, use declarations, and destructuring assignment"] }

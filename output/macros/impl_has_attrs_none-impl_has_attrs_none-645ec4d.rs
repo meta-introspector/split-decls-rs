@@ -1,1 +1,0 @@
-impl_has_attrs_none ! (Attribute , AttrItem , Block , Pat , Path , Ty , Visibility) ;

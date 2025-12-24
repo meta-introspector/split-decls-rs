@@ -1,2 +1,0 @@
-extension_struct ! { pub (crate) struct NewSessionTicketExtensions { ExtensionType :: EarlyData => pub (crate) max_early_data_size : Option < u32 >,}
-}

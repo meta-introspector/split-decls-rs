@@ -1,1 +1,0 @@
-impl_write_signed_leb128 ! (write_i16_leb128 , i16) ;

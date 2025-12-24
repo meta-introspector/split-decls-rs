@@ -1,1 +1,0 @@
-wrapping_shift_impl ! (WrappingShr , wrapping_shr , i128) ;

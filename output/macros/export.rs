@@ -1,1 +1,0 @@
-wasip2 :: cli :: command :: export ! (Example) ;

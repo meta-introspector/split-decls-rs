@@ -1,1 +1,0 @@
-from_termion_for_modifier ! (Blink , SLOW_BLINK) ;

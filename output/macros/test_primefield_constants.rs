@@ -1,1 +1,0 @@
-primefield :: test_primefield_constants ! (Scalar , Uint) ;

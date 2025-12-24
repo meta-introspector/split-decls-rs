@@ -1,1 +1,0 @@
-mul_add_impl ! (MulAdd for usize u8 u16 u32 u64 u128) ;

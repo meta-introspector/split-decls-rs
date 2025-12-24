@@ -1,2 +1,0 @@
-cfg_signal ! { #[cfg (all (unix , not (loom)))] mod signal_unix ; #[cfg (all (unix , not (loom)))] pub use signal_unix :: SignalStream ; #[cfg (any (windows , docsrs))] mod signal_windows ; #[cfg (any (windows , docsrs))] pub use signal_windows :: { CtrlCStream , CtrlBreakStream}
-; }

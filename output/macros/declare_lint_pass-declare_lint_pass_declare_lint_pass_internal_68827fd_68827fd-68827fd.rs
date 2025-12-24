@@ -1,1 +1,0 @@
-declare_lint_pass ! (BadOptAccess => [BAD_OPT_ACCESS]) ;

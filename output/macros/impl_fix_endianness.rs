@@ -1,1 +1,0 @@
-impl_fix_endianness ! { u8 , u16 , u32 , u64 }

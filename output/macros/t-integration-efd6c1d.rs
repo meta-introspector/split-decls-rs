@@ -1,1 +1,0 @@
-t ! { get_2 , client : request : uri : "/1" , ; response : status : 200 , ; request : uri : "/2" , ; response : status : 200 , ; server : request : uri : "/1" , ; response : ; request : uri : "/2" , ; response : ; }

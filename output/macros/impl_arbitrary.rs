@@ -1,1 +1,0 @@
-impl_arbitrary ! { f32 , f64 }

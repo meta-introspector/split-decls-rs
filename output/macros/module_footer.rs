@@ -1,1 +1,0 @@
-# [proc_macro] pub fn module_footer (_input : ProcMacroTokenStream) -> ProcMacroTokenStream { quote ! { } . into () } . sig

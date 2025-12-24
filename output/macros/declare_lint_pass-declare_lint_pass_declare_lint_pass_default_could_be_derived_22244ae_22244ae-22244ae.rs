@@ -1,1 +1,0 @@
-declare_lint_pass ! (DefaultCouldBeDerived => [DEFAULT_OVERRIDES_DEFAULT_FIELDS]) ;

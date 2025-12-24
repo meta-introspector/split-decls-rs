@@ -1,1 +1,0 @@
-ecdsa_core :: new_verification_test ! (NistP521 , ECDSA_TEST_VECTORS) ;

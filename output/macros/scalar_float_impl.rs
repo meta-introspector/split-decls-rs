@@ -1,1 +1,0 @@
-scalar_float_impl ! (f64 , u64) ;

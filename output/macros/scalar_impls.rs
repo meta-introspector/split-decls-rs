@@ -1,1 +1,0 @@
-elliptic_curve :: scalar_impls ! (NistP521 , Scalar) ;

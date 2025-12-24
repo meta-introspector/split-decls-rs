@@ -1,1 +1,0 @@
-ident2 ! (export_name , "bars") ;

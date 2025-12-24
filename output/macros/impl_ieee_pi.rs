@@ -1,1 +1,0 @@
-impl_ieee_pi ! (f64 , DoubleS) ;

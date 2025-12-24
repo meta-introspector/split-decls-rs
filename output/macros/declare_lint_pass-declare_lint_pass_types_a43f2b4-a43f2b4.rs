@@ -1,1 +1,0 @@
-declare_lint_pass ! (InvalidAtomicOrdering => [INVALID_ATOMIC_ORDERING]) ;

@@ -1,1 +1,0 @@
-macro_wrapper_lib :: MODULE_HEADER ! () ;

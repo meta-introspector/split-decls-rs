@@ -1,1 +1,0 @@
-declare_lint_pass ! (PassByValue => [PASS_BY_VALUE]) ;

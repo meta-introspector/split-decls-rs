@@ -1,1 +1,0 @@
-impl_unsigned_tests ! { u8 }

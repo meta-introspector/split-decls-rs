@@ -1,1 +1,0 @@
-macro_rules ! ins_none { ($ key : expr) => { ret . insert (($ key , None)) ; } ; }

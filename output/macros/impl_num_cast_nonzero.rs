@@ -1,1 +1,0 @@
-impl_num_cast_nonzero ! (NonZeroI128 , to_i128) ;

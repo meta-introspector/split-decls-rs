@@ -1,1 +1,0 @@
-impl_mask ! { i8 , i16 , i32 , i64 , isize }

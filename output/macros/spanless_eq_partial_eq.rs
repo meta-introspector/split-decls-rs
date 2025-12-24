@@ -1,1 +1,0 @@
-spanless_eq_partial_eq ! (ErrorGuaranteed) ;

@@ -1,2 +1,0 @@
-pin_project ! { struct ConnMapErr < T , B > where B : Body , T : Read , T : Write , T : Unpin , { #[pin] conn : Either < Conn < T , B >, Connection < Compat < T >, SendBuf << B as Body >:: Data >>>, #[pin] is_terminated : bool ,}
-}

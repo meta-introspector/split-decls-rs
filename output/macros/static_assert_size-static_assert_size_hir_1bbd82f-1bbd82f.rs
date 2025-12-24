@@ -1,1 +1,0 @@
-static_assert_size ! (GenericBound <'_ >, 64) ;

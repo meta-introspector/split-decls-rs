@@ -1,1 +1,0 @@
-rustls_test :: provider_ring ! () ;

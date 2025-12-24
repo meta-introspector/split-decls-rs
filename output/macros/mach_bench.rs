@@ -1,1 +1,0 @@
-mach_bench ! (AVX2 , "avx2" , is_x86_feature_detected ! ("avx2")) ;

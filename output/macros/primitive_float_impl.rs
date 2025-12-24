@@ -1,1 +1,0 @@
-primitive_float_impl ! (NotNan < f64 >, "double") ;

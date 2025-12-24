@@ -1,1 +1,0 @@
-impl_int_from_uint ! { i128 , u128 }

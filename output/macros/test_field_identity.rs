@@ -1,1 +1,0 @@
-primefield :: test_field_identity ! (Scalar) ;

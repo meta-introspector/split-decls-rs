@@ -1,1 +1,0 @@
-#[cfg (bang)] try_in_macro_helper :: bang ! () ;

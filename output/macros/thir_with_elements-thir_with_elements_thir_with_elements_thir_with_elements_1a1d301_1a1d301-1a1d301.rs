@@ -1,1 +1,0 @@
-thir_with_elements ! { arms : ArmId => Arm <'tcx > => "a{}" , blocks : BlockId => Block => "b{}" , exprs : ExprId => Expr <'tcx > => "e{}" , stmts : StmtId => Stmt <'tcx > => "s{}" , params : ParamId => Param <'tcx > => "p{}" , }

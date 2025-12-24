@@ -1,1 +1,0 @@
-bounded_impl ! (f64 , f64 :: MIN , f64 :: MAX) ;

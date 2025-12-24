@@ -1,1 +1,0 @@
-impl_decodable_via_ref ! { &'tcx ty :: TypeckResults <'tcx >, &'tcx ty :: List < Ty <'tcx >>, &'tcx ty :: List < ty :: PolyExistentialPredicate <'tcx >>, &'tcx traits :: ImplSource <'tcx , () >, &'tcx mir :: Body <'tcx >, &'tcx ty :: List < ty :: BoundVariableKind >, &'tcx ty :: List < ty :: Pattern <'tcx >>, &'tcx ty :: ListWithCachedTypeInfo < ty :: Clause <'tcx >>, }

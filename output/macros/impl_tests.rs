@@ -1,1 +1,0 @@
-impl_tests ! { f64 }

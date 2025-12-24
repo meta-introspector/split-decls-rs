@@ -1,1 +1,0 @@
-static_assertions :: assert_impl_all ! (Stack < String >: Send , Sync , UnwindSafe) ;

@@ -1,1 +1,0 @@
-platforms ! { "android" ; "linux" ; "macos" ; "hurd" => linux_macos , "freebsd" ; "netbsd" => bsd }

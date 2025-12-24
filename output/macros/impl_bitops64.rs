@@ -1,1 +1,0 @@
-impl_bitops64 ! (u64x2_sse2) ;

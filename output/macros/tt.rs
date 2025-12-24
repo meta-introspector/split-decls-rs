@@ -1,1 +1,0 @@
-tt ! ([no_mangle]) ;

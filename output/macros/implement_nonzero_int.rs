@@ -1,1 +1,0 @@
-implement_nonzero_int ! { NonZeroUsize , usize }

@@ -1,1 +1,0 @@
-t ! { get_1 , client : request : uri : "/" , ; response : status : 200 , headers : { "date" => SOME , } , ; server : request : uri : "/" , ; response : ; }

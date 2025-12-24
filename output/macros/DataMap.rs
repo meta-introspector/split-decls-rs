@@ -1,1 +1,0 @@
-DataMap ! { delegate_impl [['a , G] , G , Frozen <'a , G >, deref_twice] }

@@ -1,1 +1,0 @@
-totalorder_impl ! (f32 , i32 , u32 , 32) ;

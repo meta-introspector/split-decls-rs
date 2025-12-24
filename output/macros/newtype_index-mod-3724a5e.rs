@@ -1,1 +1,0 @@
-rustc_index :: newtype_index ! { # [orderable] struct PreorderIndex { } }

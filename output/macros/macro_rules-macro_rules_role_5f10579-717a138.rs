@@ -1,2 +1,0 @@
-macro_rules ! smallvec_as_mut_slice { ($ smallvec_var : expr) => { $ smallvec_var . as_mut_slice ()}
-; }

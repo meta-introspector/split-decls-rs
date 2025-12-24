@@ -1,1 +1,0 @@
-# [macro_export] macro_rules ! ExtCtxtGeneric { ($ b : lifetime , $ DRT : ident) => { ExtCtxt <$ b , $ DRT > } ; }

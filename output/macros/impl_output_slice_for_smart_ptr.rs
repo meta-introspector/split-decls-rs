@@ -1,1 +1,0 @@
-impl_output_slice_for_smart_ptr ! (Arc < [T] >) ;

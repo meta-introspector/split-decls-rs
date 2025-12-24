@@ -1,1 +1,0 @@
-assert_impl_one ! (Foo : C , A , B) ;

@@ -1,1 +1,0 @@
-declare_lint_pass ! (# [doc = " Forbids using the `#[feature(...)]` attribute"] UnstableFeatures => [UNSTABLE_FEATURES]) ;

@@ -1,1 +1,0 @@
-detect_test ! (iso_2022_jp , ISO_2022_JP , "ISO-2022-JP" break) ;

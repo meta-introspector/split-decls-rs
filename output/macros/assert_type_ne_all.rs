@@ -1,1 +1,0 @@
-assert_type_ne_all ! (u8 , u16 , u32) ;

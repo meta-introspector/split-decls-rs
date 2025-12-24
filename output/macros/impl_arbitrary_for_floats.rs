@@ -1,1 +1,0 @@
-impl_arbitrary_for_floats ! { f32 : u32 ; f64 : u64 ; }

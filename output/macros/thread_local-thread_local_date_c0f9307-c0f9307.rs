@@ -1,1 +1,0 @@
-thread_local ! (static CACHED : RefCell < CachedDate > = RefCell :: new (CachedDate :: new ())) ;

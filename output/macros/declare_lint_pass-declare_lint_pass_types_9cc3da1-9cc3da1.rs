@@ -1,1 +1,0 @@
-declare_lint_pass ! (VariantSizeDifferences => [VARIANT_SIZE_DIFFERENCES]) ;

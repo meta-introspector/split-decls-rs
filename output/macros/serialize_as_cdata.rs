@@ -1,1 +1,0 @@
-serialize_as_cdata ! (tuple_cdata : ("first" , 42 , "third") => "<![CDATA[first 42 third]]>") ;

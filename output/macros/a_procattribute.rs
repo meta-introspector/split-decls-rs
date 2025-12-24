@@ -1,1 +1,0 @@
-# [proc_macro_attribute] pub fn a_procattribute (_ : TokenStream , _ : TokenStream) -> TokenStream { unimplemented ! () } . sig

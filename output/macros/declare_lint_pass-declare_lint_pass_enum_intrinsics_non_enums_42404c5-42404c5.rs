@@ -1,1 +1,0 @@
-declare_lint_pass ! (EnumIntrinsicsNonEnums => [ENUM_INTRINSICS_NON_ENUMS]) ;

@@ -1,1 +1,0 @@
-impl_float_const ! (NotNan , | x | unsafe { NotNan :: new_unchecked (x) }) ;

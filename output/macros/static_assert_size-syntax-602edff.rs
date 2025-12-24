@@ -1,1 +1,0 @@
-static_assert_size ! (PlaceElem <'_ >, 24) ;

@@ -1,1 +1,0 @@
-test_default ! { test_vec => | x | x ; test_slice => | x | & x [..] ; }

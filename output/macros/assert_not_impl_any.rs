@@ -1,1 +1,0 @@
-static_assertions :: assert_not_impl_any ! (Stack <* const String >: Send , Sync) ;

@@ -1,1 +1,0 @@
-impl_bitops32 ! (u32x4_sse2) ;

@@ -1,1 +1,0 @@
-#[cfg (feature = "std")] float_impl_std ! (f64 integer_decode_f64) ;

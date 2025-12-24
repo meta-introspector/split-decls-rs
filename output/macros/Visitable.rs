@@ -1,1 +1,0 @@
-Visitable ! { delegate_impl [] }

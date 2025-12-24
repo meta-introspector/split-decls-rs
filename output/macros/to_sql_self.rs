@@ -1,1 +1,0 @@
-#[cfg (feature = "uuid")] to_sql_self ! (uuid :: Uuid) ;

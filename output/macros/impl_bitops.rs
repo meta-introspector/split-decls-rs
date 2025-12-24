@@ -1,1 +1,0 @@
-impl_bitops ! (u128x1_generic) ;

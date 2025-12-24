@@ -1,1 +1,0 @@
-# [macro_export] macro_rules ! err_inval { ($ ($ tt : tt) *) => { $ crate :: mir :: interpret :: InterpErrorKind :: InvalidProgram ($ crate :: mir :: interpret :: InvalidProgramInfo ::$ ($ tt) *) } ; }

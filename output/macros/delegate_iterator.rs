@@ -1,1 +1,0 @@
-delegate_iterator ! ((IntoValues) => Value) ;

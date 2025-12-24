@@ -1,1 +1,0 @@
-declare_lint_pass ! (DefaultHashTypes => [DEFAULT_HASH_TYPES]) ;

@@ -1,1 +1,0 @@
-declare_lint_pass ! (SpecialModuleName => [SPECIAL_MODULE_NAME]) ;

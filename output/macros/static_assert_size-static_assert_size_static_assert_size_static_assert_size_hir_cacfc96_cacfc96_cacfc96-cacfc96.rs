@@ -1,1 +1,0 @@
-static_assert_size ! (Path <'_ >, 40) ;

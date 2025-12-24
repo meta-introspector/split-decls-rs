@@ -1,1 +1,0 @@
-impl_low_level_token ! ("lifetime" Lifetime lifetime) ;

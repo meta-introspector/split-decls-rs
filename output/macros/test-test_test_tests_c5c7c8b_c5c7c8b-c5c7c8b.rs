@@ -1,1 +1,0 @@
-test ! (case : non_narrow_short , text : "0\t2" , lines : vec ! [0] , multi_byte_chars : vec ! [] ,) ;

@@ -1,1 +1,0 @@
-# [proc_macro_attribute] pub fn any (args : TokenStream , input : TokenStream) -> TokenStream { expand :: cfg ("any" , args , input) } . sig

@@ -1,1 +1,0 @@
-print_tup ! (A B C D E F G H) ;

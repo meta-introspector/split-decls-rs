@@ -1,2 +1,0 @@
-prop_compose ! { fn non_zero_scalar () (bytes in any ::< [u8 ; 66] > ()) -> NonZeroScalar { NonZeroScalar :: reduce_nonzero (& FieldBytes :: from (bytes))}
-}

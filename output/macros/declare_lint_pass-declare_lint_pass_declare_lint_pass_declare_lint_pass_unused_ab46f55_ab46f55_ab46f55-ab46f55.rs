@@ -1,1 +1,0 @@
-declare_lint_pass ! (PathStatements => [PATH_STATEMENTS]) ;

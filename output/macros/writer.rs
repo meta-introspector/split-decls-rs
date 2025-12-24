@@ -1,1 +1,0 @@
-writer ! (WriteF64Le , f64 , put_f64_le) ;
