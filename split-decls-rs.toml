@@ -8,7 +8,7 @@ crates = [
     "rustmacrodoc",
     "pagerank_rs",
     "reson",
-    "example_crate",
+    "example_project",
     "cargo-toml-parts",
     "lib-zos",
     "test_crate",
@@ -16,4 +16,35 @@ crates = [
     "my_test_project",
     "introspector_decl_common",
     "introspector_decl_core",
+    # New crates from patch-build-rs
+    "patch-build-rs-macros",
+    "mkslop-core",
+    "mkslop-macros",
+    "nix2proc-macros",
+    "grast_core",
+    "grast_cli",
+    "code-finder",
+    "shebling_macros",
+    "solfun_macros",
+    "test_macros_app",
+    "introspector_decl2_macros",
 ]
+
+[crate_path_overrides]
+"split-decls-rs" = "."
+"cargo-toml-parts" = "build_helpers/cargo_toml_parts"
+"lib-zos" = "crates/lib-zos"
+"unimacro_derive" = "test_crates/unimacro_derive"
+"introspector_decl_common" = "../patch-build-rs/introspector_decl_common"
+"introspector_decl_core" = "../patch-build-rs/introspector_decl_core"
+"patch-build-rs-macros" = "../patch-build-rs/patch-build-rs-macros"
+"mkslop-core" = "../patch-build-rs/mkslop-core"
+"mkslop-macros" = "../patch-build-rs/mkslop-macros"
+"nix2proc-macros" = "../patch-build-rs/nix2proc-macros"
+"grast_core" = "../patch-build-rs/grast_core"
+"grast_cli" = "../patch-build-rs/grast_cli"
+"code-finder" = "../patch-build-rs/code-finder"
+"shebling_macros" = "../patch-build-rs/shebling_macros"
+"solfun_macros" = "../patch-build-rs/solfun_macros"
+"test_macros_app" = "../patch-build-rs/test_macros_app"
+"introspector_decl2_macros" = "../patch-build-rs/introspector_decl2_macros"

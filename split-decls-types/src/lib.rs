@@ -59,6 +59,10 @@ pub struct SplitDeclsConfig {
     /// Configuration for which crates to wrap.
     #[serde(default)]
     pub wrapping: WrappingConfig,
+    /// Optional: Overrides for the path of certain crates, relative to the scan root.
+    /// This is useful for crates not located directly under `scan_root/<crate_name>`
+    /// or `scan_root/submodules/<crate_name>`.
+    pub crate_path_overrides: Option<HashMap<String, PathBuf>>,
 }
 
 impl SplitDeclsConfig {

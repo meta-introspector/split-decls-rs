@@ -40,33 +40,43 @@ pub fn handle_multi_crate_wrapping(
         let wrapped_crate_name = format!("wrapped-{}", crate_name);
         workspace_members_content.push(format!("\"{}\"", wrapped_crate_name));
 
-        // Find the Cargo.toml for the crate. We assume it's in a directory with the same name.
-        let cargo_toml_path = scan_root.join(crate_name).join("Cargo.toml");
+        let mut found_cargo_toml_path: Option<PathBuf> = None;
 
-        if !cargo_toml_path.exists() {
-             // Look in submodules folder as a fallback
-            let submodule_cargo_toml_path = scan_root.join("submodules").join(crate_name).join("Cargo.toml");
-            if !submodule_cargo_toml_path.exists() {
-                return Err(anyhow::anyhow!("Could not find Cargo.toml for crate '{}'", crate_name));
+        if let Some(overrides) = &global_config.crate_path_overrides {
+            if let Some(override_path) = overrides.get(crate_name) {
+                let candidate_path = scan_root.join(override_path).join("Cargo.toml");
+                if candidate_path.exists() {
+                    found_cargo_toml_path = Some(candidate_path);
+                }
             }
-             generate_wrapped_crate::generate_wrapped_crate(
-                output_dir,
-                crate_name,
-                &submodule_cargo_toml_path.parent().unwrap().to_path_buf(),
-                global_config,
-                patch_config,
-                dry_run,
-            )?;
-        } else {
-             generate_wrapped_crate::generate_wrapped_crate(
-                output_dir,
-                crate_name,
-                &cargo_toml_path.parent().unwrap().to_path_buf(),
-                global_config,
-                patch_config,
-                dry_run,
-            )?;
         }
+
+        let cargo_toml_path = if let Some(path) = found_cargo_toml_path {
+            path
+        } else {
+            // Original logic for crates directly under scan_root
+            let direct_path = scan_root.join(crate_name).join("Cargo.toml");
+            if direct_path.exists() {
+                direct_path
+            } else {
+                // Fallback to submodules folder
+                let submodule_path = scan_root.join("submodules").join(crate_name).join("Cargo.toml");
+                if submodule_path.exists() {
+                    submodule_path
+                } else {
+                    return Err(anyhow::anyhow!("Could not find Cargo.toml for crate '{}'", crate_name));
+                }
+            }
+        };
+
+        generate_wrapped_crate::generate_wrapped_crate(
+            output_dir,
+            crate_name,
+            &cargo_toml_path.parent().unwrap().to_path_buf(),
+            global_config,
+            patch_config,
+            dry_run,
+        )?;
     }
     
     // Construct final workspace Cargo.toml content
