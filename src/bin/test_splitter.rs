@@ -19,6 +19,7 @@ fn main() -> Result<()> {
         default_branches_to_patch: vec![],
         repo_fork_mapping: std::collections::HashMap::new(),
         workspace_dependencies: std::collections::HashMap::new(),
+        workspace_dependency_overrides: Default::default(),
     };
     
     println!("Running decl splitter on unimacro_derive crate: {}", test_crate_path.display());

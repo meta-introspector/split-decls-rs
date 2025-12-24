@@ -24,6 +24,7 @@ fn main() -> Result<()> {
     
     let config = SplitDeclsConfig {
         active_overlay_modules: Some(vec![]),
+        workspace_dependency_overrides: Default::default(),
         custom_prelude_overlay: Some("// Split declarations prelude\nuse proc_macro::TokenStream;\nuse quote::quote;\nuse syn::*;".to_string()),
         rustc_source_path: None,
         patches: Some(std::collections::HashMap::new()),
