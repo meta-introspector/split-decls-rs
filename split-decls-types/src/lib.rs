@@ -63,6 +63,9 @@ pub struct SplitDeclsConfig {
     /// This is useful for crates not located directly under `scan_root/<crate_name>`
     /// or `scan_root/submodules/<crate_name>`.
     pub crate_path_overrides: Option<HashMap<String, PathBuf>>,
+    /// Explicitly defined crate path mappings, used to override default path resolution logic.
+    /// Key is the crate name, value is the path string relative to the current project root.
+    pub explicit_crate_path_mappings: Option<HashMap<String, String>>,
 }
 
 impl SplitDeclsConfig {

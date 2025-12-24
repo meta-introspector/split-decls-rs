@@ -140,13 +140,12 @@ fn main() -> Result<()> {
     sorted_overrides.sort_by(|a, b| a.0.cmp(&b.0));
     split_decls_data.crate_path_overrides = sorted_overrides.into_iter().collect();
 
-    // Explicitly set the correct path for proc-macro2 and others from current project's Cargo.toml
-    split_decls_data.crate_path_overrides.insert("proc-macro2".to_string(), "submodules/proc-macro2".to_string());
-    split_decls_data.crate_path_overrides.insert("split-decls-types".to_string(), "split-decls-types".to_string());
-    split_decls_data.crate_path_overrides.insert("cargo-toml-generator-types".to_string(), "cargo-toml-generator-types".to_string());
-    split_decls_data.crate_path_overrides.insert("cargo-toml-generator-macros".to_string(), "cargo-toml-generator-macros".to_string());
-    split_decls_data.crate_path_overrides.insert("cargo-toml-parts".to_string(), "build_helpers/cargo_toml_parts".to_string());
-    split_decls_data.crate_path_overrides.insert("pagerank_rs".to_string(), "submodules/pagerank_rs".to_string());
+    // Apply explicit_crate_path_mappings from config, giving them precedence
+    if let Some(explicit_mappings) = split_decls_data.explicit_crate_path_mappings {
+        for (crate_name, path_str) in explicit_mappings {
+            existing_path_overrides.insert(crate_name, path_str);
+        }
+    }
 
 
     // Write updated split-decls-rs.toml

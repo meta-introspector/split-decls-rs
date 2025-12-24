@@ -30,12 +30,6 @@ crates = [
     "introspector_decl2_macros",
     "introspector_macro_helpers",
     "proc-macro2",
-    # Additional local dependencies from split-decls-rs/Cargo.toml
-    "split-decls-types", # Already in list
-    "cargo-toml-generator-types", # Already in list
-    "cargo-toml-generator-macros", # Already in list
-    "cargo-toml-parts", # Already in list
-    "pagerank_rs", # Already in list
 ]
 
 [crate_path_overrides]
@@ -57,8 +51,27 @@ crates = [
 "test_macros_app" = "../patch-build-rs/test_macros_app"
 "introspector_decl2_macros" = "../patch-build-rs/introspector_decl2_macros"
 "introspector_macro_helpers" = "../patch-build-rs/introspector_macro_helpers"
+
+[explicit_crate_path_mappings]
+"split-decls-rs" = "."
+"cargo-toml-parts" = "build_helpers/cargo_toml_parts"
+"lib-zos" = "crates/lib-zos"
+"unimacro_derive" = "test_crates/unimacro_derive"
+"introspector_decl_common" = "../patch-build-rs/introspector_decl_common"
+"introspector_decl_core" = "../patch-build-rs/introspector_decl_core"
+"patch-build-rs-macros" = "../patch-build-rs/patch-build-rs-macros"
+"mkslop-core" = "../patch-build-rs/mkslop-core"
+"mkslop-macros" = "../patch-build-rs/mkslop-macros"
+"nix2proc-macros" = "../patch-build-rs/nix2proc-macros"
+"grast_core" = "../patch-build-rs/grast_core"
+"grast_cli" = "../patch-build-rs/grast_cli"
+"code-finder" = "../patch-build-rs/code-finder"
+"shebling_macros" = "../patch-build-rs/shebling_macros"
+"solfun_macros" = "../patch-build-rs/solfun_macros"
+"test_macros_app" = "../patch-build-rs/test_macros_app"
+"introspector_decl2_macros" = "../patch-build-rs/introspector_decl2_macros"
+"introspector_macro_helpers" = "../patch-build-rs/introspector_macro_helpers"
 "proc-macro2" = "../proc-macro2"
-# Additional local dependencies paths
 "split-decls-types" = "split-decls-types"
 "cargo-toml-generator-types" = "cargo-toml-generator-types"
 "cargo-toml-generator-macros" = "cargo-toml-generator-macros"
