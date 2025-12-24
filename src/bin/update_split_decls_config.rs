@@ -2,6 +2,7 @@ use clap::Parser;
 use anyhow::{Context, Result};
 use std::collections::{HashSet, HashMap};
 use std::fs;
+use std::env;
 use std::path::{Path, PathBuf};
 use toml::{self, Table, Value};
 use serde::{Deserialize, Serialize};
@@ -44,15 +45,27 @@ fn main() -> Result<()> {
     let mut existing_crates_to_wrap: HashSet<String> = split_decls_data.wrapping.crates.drain(..).collect();
     let mut existing_path_overrides: HashMap<String, String> = split_decls_data.crate_path_overrides.drain().collect();
 
+    let split_decls_rs_root = env::current_dir()?;
+    let cargo2nix_root = split_decls_rs_root.parent().context("Failed to get parent of split-decls-rs")?.parent().context("Failed to get cargo2nix root")?;
+
     // Use cargo-tree-macro to get dependency information
     for crate_info in get_cargo_tree_data() {
         existing_crates_to_wrap.insert(crate_info.name.to_string());
-        existing_path_overrides.insert(crate_info.name.to_string(), crate_info.path.to_string());
+
+        let crate_path = Path::new(crate_info.path);
+        let absolute_crate_path = if crate_path.is_absolute() {
+            crate_path.to_path_buf()
+        } else {
+            // Resolve all paths relative to the cargo2nix root
+            cargo2nix_root.join(crate_path).canonicalize()?
+        };
+        println!("DEBUG: Crate: {}, Original Path: {}, Absolute Path: {}", crate_info.name, crate_info.path, absolute_crate_path.display());
+        existing_path_overrides.insert(crate_info.name.to_string(), absolute_crate_path.to_string_lossy().into_owned());
     }
 
     // Special handling for the current project itself
     existing_crates_to_wrap.insert("split-decls-rs".to_string());
-    existing_path_overrides.insert("split-decls-rs".to_string(), ".".to_string());
+    existing_path_overrides.insert("split-decls-rs".to_string(), split_decls_rs_root.to_string_lossy().into_owned());
     
     // Filter out internal crates of split-decls-rs itself (if any from cargo tree)
     // and other crates that are part of the larger original workspace where RootCargo.toml is located

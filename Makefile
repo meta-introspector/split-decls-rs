@@ -18,21 +18,22 @@ run_bootstrap: clean_output2
 	@echo "Running bootstrap..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > temp_bootstrap.log 2>&1 && echo "Bootstrap completed successfully" || echo "Bootstrap finished"
 
 check_bootstrap_errors:
-	grep -E "error\[|error:" temp_bootstrap.log || true
+# 	grep -E "error\[|error:" temp_bootstrap.log || true
 
-bootstrap_only:
-	@echo "Running bootstrap..."
-	@RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > bootstrap_output.log 2>&1 && echo "Bootstrap completed"
-	@echo "Checking for errors..."
-	@grep -E "error\[|error:" bootstrap_output.log || echo "No errors found in bootstrap"
+# bootstrap_only:
+# 	@echo "Running bootstrap..."
+# 	@RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > bootstrap_output.log 2>&1 && echo "Bootstrap completed"
+# 	@echo "Checking for errors..."
+# 	@grep -E "error\[|error:" bootstrap_output.log || echo "No errors found in bootstrap"
 
-check_bootstrap_only: bootstrap_only
-	@echo "Checking for errors..." && grep -E "error\[|error:" bootstrap_output.log || echo "No errors found in bootstrap"
+# check_bootstrap_only: bootstrap_only
+# 	@echo "Checking for errors..." && grep -E "error\[|error:" bootstrap_output.log || echo "No errors found in bootstrap"
 
 
 
-build_output_module:
-	@echo "Building output2..." && cd output2 && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build 2>&1 | grep -E "error|^Compiling|^Finished" || true
+# build_output_module:
+# 	@echo "Building output2 
+..." && cd output2 && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build 2>&1 | grep -E "error|^Compiling|^Finished" || true
 
 clean_output2:
 	@if [ ! -d "output2/.git" ]; then \

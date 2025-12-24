@@ -54,16 +54,13 @@ fn main() -> Result<()> {
             println!("DEBUG:   Processing package: {}", package.name);
             println!("DEBUG:     package_path: {}", package_path.display());
 
-            let relative_path = pathdiff::diff_paths(&package_path, &current_project_root)
-                .unwrap_or_else(|| {
-                    println!("DEBUG:     pathdiff::diff_paths failed for {} relative to {}", package_path.display(), current_project_root.display());
-                    package_path.clone()
-                });
-            println!("DEBUG:     calculated relative_path: {}", relative_path.display());
+            let absolute_path = package_path.canonicalize()
+                .context(format!("Failed to canonicalize path for package {}", package.name))?;
+            println!("DEBUG:     calculated absolute_path: {}", absolute_path.display());
             
             crate_data_temp.push(TempCrateInfo {
                 name: package.name,
-                path: relative_path.to_string_lossy().into_owned(),
+                path: absolute_path.to_string_lossy().into_owned(),
             });
         }
     }
