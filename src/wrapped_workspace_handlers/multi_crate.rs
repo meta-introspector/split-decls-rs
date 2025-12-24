@@ -20,11 +20,12 @@ pub fn handle_multi_crate_wrapping(
     scan_root: &Path,
     dry_run: bool,
     verbose: bool,
-) -> Result<String> {
+) -> Result<(String, Vec<crate::eager_splitter::ModuleNotFoundReport>)> { // Changed return type
     let mut final_cargo_toml_content = String::new();
     let mut workspace_members_content = Vec::new();
     let mut workspace_dependencies_content_str = String::new();
     let mut patch_crates_io_content_str = String::new();
+    let mut all_collected_errors: Vec<crate::eager_splitter::ModuleNotFoundReport> = Vec::new(); // Initialize error collector
 
     // Collect all workspace dependencies using the helper
     let consolidated_workspace_deps_map = collect_and_format_workspace_dependencies(
@@ -36,8 +37,9 @@ pub fn handle_multi_crate_wrapping(
     }
 
     use rayon::prelude::*;
-    let new_members: Vec<_> = global_config.wrapping.crates.par_iter().map(|crate_name| {
+    let processed_crates: Vec<(Option<String>, Vec<crate::eager_splitter::ModuleNotFoundReport>)> = global_config.wrapping.crates.par_iter().map(|crate_name| {
         let mut found_cargo_toml_path: Option<PathBuf> = None;
+        let mut crate_errors: Vec<crate::eager_splitter::ModuleNotFoundReport> = Vec::new(); // Per-crate error collector
 
         if let Some(overrides) = &global_config.crate_path_overrides {
             if let Some(override_path) = overrides.get(crate_name) {
@@ -67,7 +69,7 @@ pub fn handle_multi_crate_wrapping(
                     submodule_path
                 } else {
                     eprintln!("Could not find Cargo.toml for crate '{}'", crate_name);
-                    return None;
+                    return (None, crate_errors); // Return empty errors for this crate
                 }
             }
         };
@@ -80,16 +82,24 @@ pub fn handle_multi_crate_wrapping(
             patch_config,
             dry_run,
         );
-        if let Err(e) = result {
-            eprintln!("Error processing crate {}: {}", crate_name, e);
-            None
-        } else {
-            let wrapped_crate_name = format!("wrapped-{}", crate_name);
-            Some(format!("\"{}\"", wrapped_crate_name))
+        match result {
+            Ok(errors) => {
+                let wrapped_crate_name = format!("wrapped-{}", crate_name);
+                (Some(format!("\"{}\"", wrapped_crate_name)), errors)
+            },
+            Err(e) => {
+                eprintln!("Error processing crate {}: {}", crate_name, e);
+                (None, crate_errors) // Return empty errors on processing failure
+            }
         }
-    }).flatten().collect();
+    }).collect();
 
-    workspace_members_content.extend(new_members);
+    for (member, errors) in processed_crates {
+        if let Some(m) = member {
+            workspace_members_content.push(m);
+        }
+        all_collected_errors.extend(errors); // Aggregate errors
+    }
     
     // Construct final workspace Cargo.toml content
     final_cargo_toml_content = format!(
@@ -108,5 +118,5 @@ members = [
             final_cargo_toml_content.push_str("\n[patch.crates-io]\n");
             final_cargo_toml_content.push_str(&patch_crates_io_content_str);
         }
-    Ok(final_cargo_toml_content)
+    Ok((final_cargo_toml_content, all_collected_errors)) // Return tuple
 }

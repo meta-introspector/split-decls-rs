@@ -19,7 +19,7 @@ pub fn generate_wrapped_workspace(
     scan_root: &Path,
     dry_run: bool,
     verbose: bool,
-) -> Result<()> {
+) -> Result<Vec<crate::eager_splitter::ModuleNotFoundReport>> { // Changed return type
     if verbose {
         println!(
             "DEBUG: generate_wrapped_workspace called with output_dir: {}",
@@ -46,19 +46,22 @@ pub fn generate_wrapped_workspace(
 
     let workspace_cargo_toml_path = output_dir.join("Cargo.toml");
     let final_cargo_toml_content;
+    let collected_errors: Vec<crate::eager_splitter::ModuleNotFoundReport>; // Declare to hold errors
 
     let main_crate_cargo_toml_path = scan_root.join("Cargo.toml");
 
     // When generating a wrapped workspace, the output_dir's Cargo.toml should always be a workspace root.
     // Individual packages within the workspace will have their own Cargo.toml files.
-    final_cargo_toml_content = multi_crate::handle_multi_crate_wrapping(
+    let (content, errors) = multi_crate::handle_multi_crate_wrapping(
         output_dir,
         patch_config,
         global_config,
         scan_root,
         dry_run,
         verbose,
-    )?;
+    )?; // Capture both content and errors
+    final_cargo_toml_content = content;
+    collected_errors = errors;
     
     if !dry_run {
         add_generated_header!(
@@ -81,5 +84,5 @@ pub fn generate_wrapped_workspace(
         );
         println!("DEBUG: Exiting generate_wrapped_workspace.");
     }
-    Ok(())
+    Ok(collected_errors) // Return collected errors
 }

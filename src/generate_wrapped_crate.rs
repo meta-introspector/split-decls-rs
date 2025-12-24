@@ -25,7 +25,7 @@ pub fn generate_wrapped_crate(
     global_config: &SplitDeclsConfig,
     patch_config: &patch_config::PatchConfig, // New: Pass patch_config here
     dry_run: bool,
-) -> Result<()> {
+) -> Result<Vec<eager_splitter::ModuleNotFoundReport>> { // Changed return type
     let wrapped_crate_name = format!("wrapped-{}", original_crate_name);
     println!("\n=== Generating wrapped crate: {} ===", wrapped_crate_name);
 
@@ -35,8 +35,6 @@ pub fn generate_wrapped_crate(
             .context(format!("Failed to create wrapped crate directory: {}", wrapped_crate_path.display()))?;
         fs::create_dir_all(&wrapped_crate_path.join("src"))
             .context(format!("Failed to create src directory for wrapped crate: {}", wrapped_crate_path.display()))?;
-
-
     }
 
     // Setup CratePaths for the *wrapped* crate
@@ -54,8 +52,6 @@ pub fn generate_wrapped_crate(
         String::new()
     };
  
-
-
     // Generate Cargo.toml for the wrapped crate
     // This will reference the original project's crates if they are part of the original workspace
     generate_new_cargotoml(
@@ -120,12 +116,15 @@ pub fn generate_wrapped_crate(
         &wrapped_crate_name.replace("-", "_"), // Use wrapped crate name for patching
         &crate_config,
     )?;
+    
+    let mut module_not_found_errors: Vec<eager_splitter::ModuleNotFoundReport> = Vec::new(); // Initialize here
 
     eager_splitter::split_and_generate_decls(
         &syntax_tree,
         &wrapped_crate_paths,
         &crate_config,
         dry_run,
+        &mut module_not_found_errors, // Pass the new parameter
     )?;
 
     // Generate build.rs for the wrapped crate (minimal version for monitoring patches)
@@ -134,5 +133,5 @@ pub fn generate_wrapped_crate(
         format_rust_file(&wrapped_crate_paths.build_rs_path)?;
     }
 
-    Ok(())
+    Ok(module_not_found_errors) // Return the collected errors
 }

@@ -88,7 +88,7 @@ fn run_wrapped_workspace_mode(
     dry_run: bool,
     output_dir_override: Option<&PathBuf>,
     global_config: &SplitDeclsConfig,
-) -> Result<()> {
+) -> Result<Vec<eager_splitter::ModuleNotFoundReport>> { // Changed return type
     if verbose {
         if dry_run {
             println!("*** Running in DRY-RUN mode. No files will be modified. ***");
@@ -172,7 +172,7 @@ fn run_wrapped_workspace_mode(
     if verbose {
         println!("Generating wrapped workspace in: {}", wrapped_workspace_output_dir.display());
     }
-    generate_wrapped_workspace(
+    let module_not_found_errors = generate_wrapped_workspace(
         &wrapped_workspace_output_dir,
         &patch_config,
         &global_config_mut, // Use mutable clone here
@@ -210,7 +210,7 @@ fn run_wrapped_workspace_mode(
     if verbose {
         println!("\nWrapped workspace generation finished.");
     }
-    Ok(())
+    Ok(module_not_found_errors)
 }
 
 fn run_ecosystem_scan_mode(
@@ -262,7 +262,10 @@ fn run_bootstrap_mode(
         .map(|p| p.to_path_buf())
         .unwrap_or_else(|| PathBuf::from("output2"));
 
-    // Define the workflow programmatically for the build stage
+    // First, run the wrapped workspace generation and collect module not found errors
+    let module_not_found_errors = run_wrapped_workspace_mode(verbose, dry_run, output_dir_override, global_config)?;
+
+    // Then, execute the build workflow using the WorkflowExecutor
     let build_workflow = Workflow {
         name: "Bootstrap Build Stage".to_string(),
         description: "Builds the generated code in the output directory.".to_string(),
@@ -303,11 +306,6 @@ fn run_bootstrap_mode(
             },
         ],
     };
-
-    // First, run the wrapped workspace generation directly
-    run_wrapped_workspace_mode(verbose, dry_run, output_dir_override, global_config)?;
-
-    // Then, execute the build workflow using the WorkflowExecutor
     let mut workflow_executor = WorkflowExecutor::new(verbose, dry_run, global_config.clone());
     workflow_executor.execute(&build_workflow)?;
 
@@ -321,6 +319,21 @@ fn run_bootstrap_mode(
                 }
             }
         }
+    }
+
+    // Print summary of module not found errors
+    if !module_not_found_errors.is_empty() {
+        warn!("\n--- Module Not Found Summary ---");
+        for error_report in module_not_found_errors {
+            warn!(
+                "  Crate: '{}', Module: '{}', Message: '{}', Generated File: '{}'",
+                error_report.crate_name,
+                error_report.module_name,
+                error_report.error_message,
+                error_report.generated_file_path.display()
+            );
+        }
+        warn!("------------------------------");
     }
 
     Ok(())
