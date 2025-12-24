@@ -26,15 +26,35 @@ pub fn collect_and_format_workspace_dependencies(
                     dep_table.insert("path".to_string(), Value::String(relative_path.display().to_string()));
                 }
             }
-            dep_table.remove("workspace"); // Ensure workspace = true is not propagated here
-                    } else if dep_value_clone.is_table() { // Handle cases where 'path' is not initially present, but it's a local wrapped crate
-                        // For local wrapped crates, the path should be "wrapped-<original_crate_name>"
-                        let wrapped_dep_name = format!("wrapped-{}", dep_name);
-                        let relative_path = PathBuf::from(&wrapped_dep_name);            
-            let mut new_dep_table = dep_value_clone.as_table_mut().unwrap().clone();
-            new_dep_table.insert("path".to_string(), Value::String(relative_path.display().to_string()));
-            dep_value_clone = Value::Table(new_dep_table);
-        }
+            // Check if the original dependency (from global_config) had a 'path' field
+            // and if it points to a local crate that will be wrapped.
+            let mut is_local_path_dep = false;
+            if let Some(dep_table_orig) = dep_value.as_table() { // Use original dep_value to check path
+                if dep_table_orig.contains_key("path") {
+                    is_local_path_dep = true;
+                }
+            }
+
+            if is_local_path_dep {
+                if let Some(dep_table_mut) = dep_value_clone.as_table_mut() {
+                    // This is a local path dependency, so its path in the generated workspace.dependencies
+                    // should point to the wrapped version of itself within output2/.
+                    let wrapped_dep_name_for_path = format!("wrapped-{}", dep_name);
+                    dep_table_mut.insert("path".to_string(), Value::String(wrapped_dep_name_for_path));
+                    // Ensure 'workspace = true' is not propagated.
+                    dep_table_mut.remove("workspace");
+                } else {
+                    // This case should ideally not happen for path dependencies (they are usually tables).
+                    // If it does, it implies a malformed original Cargo.toml or unexpected structure.
+                    eprintln!("Warning: Local path dependency '{}' does not have a table value. Skipping path rewriting.", dep_name);
+                }
+            } else {
+                // For non-local path dependencies (e.g., versioned dependencies from crates.io),
+                // just ensure 'workspace = true' is removed if present.
+                if let Some(dep_table_mut) = dep_value_clone.as_table_mut() {
+                    dep_table_mut.remove("workspace");
+                }
+            }
         workspace_deps.insert(dep_name.clone(), dep_value_clone);
     }
 

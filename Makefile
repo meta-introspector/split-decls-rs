@@ -10,10 +10,10 @@ build_core:
 	RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build
 
 run_bootstrap: clean_output2
-	RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > bootstrap.log 2>&1
+	RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > temp_bootstrap.log 2>&1
 
 check_bootstrap_errors:
-	grep -E "error\[|error:" bootstrap.log || true
+	grep -E "error\[|error:" temp_bootstrap.log || true
 
 
 build_output_module:
