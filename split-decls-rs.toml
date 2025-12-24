@@ -1,2 +1,15 @@
 [workspace_dependency_overrides]
 "cargo-toml-generator-types" = { path = "wrapped-cargo-toml-generator-types" }
+"cargo-toml-generator-macros" = { path = "wrapped-cargo-toml-generator-macros" }
+"split-decls-types" = { path = "wrapped-split-decls-types" }
+"split-decls-rs" = { path = "wrapped-split-decls-rs" }
+"workspace-merge" = { path = "wrapped-workspace-merge" }
+"rustmacrodoc" = { path = "wrapped-rustmacrodoc" }
+"pagerank_rs" = { path = "wrapped-pagerank_rs" }
+"reson" = { path = "wrapped-reson" }
+"example_crate" = { path = "wrapped-example_crate" }
+"cargo-toml-parts" = { path = "wrapped-cargo-toml-parts" }
+"lib-zos" = { path = "wrapped-lib-zos" }
+"test_crate" = { path = "wrapped-test_crate" }
+"unimacro_derive" = { path = "wrapped-unimacro_derive" }
+"my_test_project" = { path = "wrapped-my_test_project" }
