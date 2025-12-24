@@ -67,6 +67,7 @@ pagerank_rs = { path = "submodules/pagerank_rs" }
 chrono = "0.4"
 lazy_static.workspace = true
 pathdiff = "0.2"
+cargo-tree-macro = { path = "cargo-tree-macro" }
 
 
 
