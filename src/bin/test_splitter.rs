@@ -1,11 +1,4 @@
 use anyhow::Result;
-//use split_decls_rs::process_crate;
-use split_decls_rs::process_crate;
-use split_decls_types::SplitDeclsConfig;
-use std::path::PathBuf;
-
-use anyhow::Result;
-//use split_decls_rs::process_crate;
 use split_decls_rs::process_crate;
 use split_decls_types::SplitDeclsConfig;
 use std::path::PathBuf;
@@ -13,23 +6,10 @@ use split_decls_rs::mkwrapping;
 
 fn main() -> Result<()> {
     let test_crate_path = PathBuf::from("/mnt/data1/nix/vendor/rust/cargo2nix/unimacro_derive");
-    
-    // Create a minimal config
-    let config = SplitDeclsConfig {
-	wrapping: mkwrapping!(),
-        active_overlay_modules: Some(vec![]),
-        custom_prelude_overlay: Some("// Custom prelude\nuse proc_macro::TokenStream;\nuse quote::quote;\nuse syn::*;".to_string()),
-        rustc_source_path: None,
-        patches: Some(std::collections::HashMap::new()),
-        string_replacements: None,
-        crates_io_patches: Some(std::collections::HashMap::new()),
-        github_org: None,
-        default_branches_to_patch: vec![],
-        repo_fork_mapping: std::collections::HashMap::new(),
-        workspace_dependencies: std::collections::HashMap::new(),
-        workspace_dependency_overrides: Default::default(),
-    };
-    
+
+    let mut config = split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap().clone();
+    config.wrapping = mkwrapping!();
+
     println!("Running decl splitter on unimacro_derive crate: {}", test_crate_path.display());
     
     process_crate(&test_crate_path, &config, false)?;

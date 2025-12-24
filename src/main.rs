@@ -355,52 +355,30 @@ fn dep_to_toml_value_iter<'a>(
     })
 }
 
+use split_decls_rs::load_config;
+
 fn main() -> Result<()> {
+    load_config!("split-decls-rs.toml");
 
     let cli = Cli::parse();
 
-
-
     if cli.verbose {
-
         println!("Verbose mode enabled.");
-
         println!("CLI args: {:?}", cli);
-
-    }
-
-
-
-    // Load global config - this will be common to both modes
-
-    let workspace_root = PathBuf::from("./");
-
-    let global_config_path = workspace_root.join("split-decls-rs.toml");
-    let global_config = if global_config_path.exists() {
-        SplitDeclsConfig::load_from_file(&global_config_path)
-            .context("Failed to load global split-decls-rs config")?
-    } else {
-        if cli.verbose {
-            println!("No split-decls-rs.toml found at {}, using default configuration.", global_config_path.display());
-        }
-        SplitDeclsConfig::default()
-    };
-    if cli.verbose {
-        println!("Global config loaded: {:?}", global_config);
     }
 
     match &cli.command {
         Commands::WrappedWorkspace { output_dir, dry_run } => {
-            run_wrapped_workspace_mode(cli.verbose, *dry_run, output_dir.as_ref(), &global_config)?;
+            run_wrapped_workspace_mode(cli.verbose, *dry_run, output_dir.as_ref(), &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
         Commands::EcosystemScan { base_path, recursive, dry_run } => {
-            run_ecosystem_scan_mode(cli.verbose, *dry_run, base_path, *recursive, &global_config)?;
+            run_ecosystem_scan_mode(cli.verbose, *dry_run, base_path, *recursive, &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
         Commands::ExecuteGoalWorkflow { goal_file, dry_run } => {
-            run_execute_goal_workflow_mode(cli.verbose, *dry_run, goal_file, &global_config)?;
+            run_execute_goal_workflow_mode(cli.verbose, *dry_run, goal_file, &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
         Commands::Bootstrap { output_dir, dry_run } => {
-            run_bootstrap_mode(cli.verbose, *dry_run, output_dir.as_ref(), &global_config)?;
+            run_bootstrap_mode(cli.verbose, *dry_run, output_dir.as_ref(), &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
     }
 

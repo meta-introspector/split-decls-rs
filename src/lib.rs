@@ -1,4 +1,5 @@
 use std::path::{Path, PathBuf};
+pub mod config_macros;
 pub mod macro_analyzer_parts;
 pub mod special_print;
 pub mod format_generated_rust_files; // Add this
@@ -48,32 +49,6 @@ pub use process_dependencies_for_output_crate::*;
 pub use process_crate::process_crate;
 pub use process_crates_in_path::process_crates_in_path;
 pub use generate_wrapped_workspace::generate_wrapped_workspace;
-
-#[macro_export]
-macro_rules! mkwrapping {
-    () => {
-        split_decls_types::WrappingConfig {
-            crates: vec![
-                "cargo-toml-generator-types".to_string(),
-                "cargo-toml-generator-macros".to_string(),
-                "split-decls-types".to_string(),
-                "split-decls-rs".to_string(),
-                "workspace-merge".to_string(),
-                "rustmacrodoc".to_string(),
-                "pagerank_rs".to_string(),
-                "reson".to_string(),
-                "example_crate".to_string(),
-                "cargo-toml-parts".to_string(),
-                "lib-zos".to_string(),
-                "test_crate".to_string(),
-                "unimacro_derive".to_string(),
-                "my_test_project".to_string(),
-                "introspector_decl_common".to_string(),
-                "introspector_decl_core".to_string(),
-            ],
-        }
-    };
-}
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
     struct Package {

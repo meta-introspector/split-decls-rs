@@ -4,15 +4,6 @@ use split_decls_types::SplitDeclsConfig;
 use std::path::PathBuf;
 use std::fs;
 use std::time::Instant;
-use std::collections::HashMap;
-
-use anyhow::Result;
-use split_decls_rs::process_crate;
-use split_decls_types::SplitDeclsConfig;
-use std::path::PathBuf;
-use std::fs;
-use std::time::Instant;
-use std::collections::HashMap;
 use split_decls_rs::mkwrapping;
 
 fn main() -> Result<()> {
@@ -31,20 +22,8 @@ fn main() -> Result<()> {
     
     let start_time = Instant::now();
     
-    let config = SplitDeclsConfig {
-	wrapping: mkwrapping!(),
-        active_overlay_modules: Some(vec![]),
-        workspace_dependency_overrides: Default::default(),
-        custom_prelude_overlay: Some("// Split declarations prelude\nuse proc_macro::TokenStream;\nuse quote::quote;\nuse syn::*;".to_string()),
-        rustc_source_path: None,
-        patches: Some(std::collections::HashMap::new()),
-        string_replacements: None,
-        crates_io_patches: Some(std::collections::HashMap::new()),
-        github_org: None,
-        default_branches_to_patch: vec![],
-        repo_fork_mapping: std::collections::HashMap::new(),
-        workspace_dependencies: std::collections::HashMap::new(),
-    };
+    let mut config = split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap().clone();
+    config.wrapping = mkwrapping!();
     
     let mut processed = 0;
     let mut errors = 0;
