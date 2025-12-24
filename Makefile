@@ -14,8 +14,8 @@ build_core:
 check_build_errors:
 	grep -E "error\[|error:" build_core.log || true
 
-run_bootstrap: clean_output2
-	@echo "Running bootstrap..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > temp_bootstrap.log 2>&1 && echo "Bootstrap completed successfully" || echo "Bootstrap finished"
+run_bootstrap:
+	@echo "Running bootstrap..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap
 
 check_bootstrap_errors:
 # 	grep -E "error\[|error:" temp_bootstrap.log || true

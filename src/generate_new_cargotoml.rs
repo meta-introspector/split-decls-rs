@@ -15,7 +15,8 @@ pub fn generate_new_cargotoml(
     dry_run: bool,
 ) -> Result<()> {
     let original_cargo_toml_content = fs::read_to_string(original_cargo_toml_path)
-        .context(format!("Failed to read original Cargo.toml from {}", original_cargo_toml_path.display()))?;
+        .context(format!("Failed to read original Cargo.toml from {}", original_cargo_toml_path.display()))?
+        .replace("edition.workspace = true", "edition = \"2021\"");
     
     let mut cargo_toml: CargoToml = toml::from_str(&original_cargo_toml_content)
         .context(format!("Failed to parse original Cargo.toml from {}", original_cargo_toml_path.display()))?;

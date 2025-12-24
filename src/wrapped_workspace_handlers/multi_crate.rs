@@ -35,11 +35,8 @@ pub fn handle_multi_crate_wrapping(
 ", dep_name, dep_value.to_string()));
     }
 
-    // Use the new `wrapping.crates` list to drive the process
-    for crate_name in &global_config.wrapping.crates {
-        let wrapped_crate_name = format!("wrapped-{}", crate_name);
-        workspace_members_content.push(format!("\"{}\"", wrapped_crate_name));
-
+    use rayon::prelude::*;
+    let new_members: Vec<_> = global_config.wrapping.crates.par_iter().map(|crate_name| {
         let mut found_cargo_toml_path: Option<PathBuf> = None;
 
         if let Some(overrides) = &global_config.crate_path_overrides {
@@ -69,20 +66,30 @@ pub fn handle_multi_crate_wrapping(
                 if submodule_path.exists() {
                     submodule_path
                 } else {
-                    return Err(anyhow::anyhow!("Could not find Cargo.toml for crate '{}'", crate_name));
+                    eprintln!("Could not find Cargo.toml for crate '{}'", crate_name);
+                    return None;
                 }
             }
         };
 
-        generate_wrapped_crate::generate_wrapped_crate(
+        let result = generate_wrapped_crate::generate_wrapped_crate(
             output_dir,
             crate_name,
             &cargo_toml_path.parent().unwrap().to_path_buf(),
             global_config,
             patch_config,
             dry_run,
-        )?;
-    }
+        );
+        if let Err(e) = result {
+            eprintln!("Error processing crate {}: {}", crate_name, e);
+            None
+        } else {
+            let wrapped_crate_name = format!("wrapped-{}", crate_name);
+            Some(format!("\"{}\"", wrapped_crate_name))
+        }
+    }).flatten().collect();
+
+    workspace_members_content.extend(new_members);
     
     // Construct final workspace Cargo.toml content
     final_cargo_toml_content = format!(
