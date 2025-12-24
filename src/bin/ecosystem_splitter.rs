@@ -1,3 +1,4 @@
+use split_decls_rs::mkwrapping;
 use split_decls_rs::config_macros;
 use anyhow::Result;
 use split_decls_rs::process_crate;

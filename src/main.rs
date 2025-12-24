@@ -1,4 +1,6 @@
 use split_decls_rs::config_macros;
+
+use split_decls_rs::load_config;
 use anyhow::{Context, Result};
 use std::path::PathBuf;
 use split_decls_rs::patch_config::PatchConfig;
