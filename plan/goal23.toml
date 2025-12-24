@@ -1,0 +1,36 @@
+# goal23.toml - The Principle of Input Purity
+
+[input_purity_principle]
+name = "Principle of Input Purity"
+version = "1.0"
+description = "Asserts that all inputs to the system must be 'pure', originating either from the version-controlled Git repository or the immutable Nix store. The only exception to this rule is for external, explicitly-defined interactions, such as with Large Language Models (LLMs)."
+conceptual_status = "A foundational security and reproducibility principle, ensuring that the system's behavior is determined by a verifiable and immutable set of inputs."
+derived_from = "The ongoing effort to create a declarative, reproducible, and secure build system."
+
+# Core Tenets of Input Purity
+[input_purity_principle.tenets]
+  [[input_purity_principle.tenets.tenet]]
+  name = "Git as a Source of Truth"
+  description = "All source code, configuration files (like `split-decls-rs.toml`), and other assets necessary for the build process are stored in and sourced from the Git repository. This provides a verifiable history of all changes."
+
+  [[input_purity_principle.tenets.tenet]]
+  name = "Nix Store for Dependencies"
+  description = "All external dependencies (libraries, tools, etc.) are sourced from the Nix store, which provides hermetic, reproducible builds by referencing immutable, cryptographically-hashed paths."
+
+  [[input_purity_principle.tenets.tenet]]
+  name = "Controlled External Interactions"
+  description = "Any interaction with the outside world, such as API calls to LLMs, must be explicit, well-defined, and isolated from the core build process. This ensures that the non-deterministic nature of these interactions does not compromise the reproducibility of the build itself."
+
+# Implications for the System
+[input_purity_principle.implications]
+  [[input_purity_principle.implications.implication]]
+  name = "Enhanced Security"
+  description = "By restricting the sources of input, the attack surface of the system is significantly reduced. All inputs are either from a trusted, version-controlled source or from the secure, immutable Nix store."
+
+  [[input_purity_principle.implications.implication]]
+  name = "Reproducibility"
+  description = "The behavior of the system becomes highly reproducible. Given the same commit from the Git repository and the same state of the Nix store, the build process will always produce the same output."
+
+  [[input_purity_principle.implications.implication]]
+  name = "Simplified Auditing"
+  description = "Auditing the system becomes simpler, as the complete set of inputs is well-defined and verifiable. There are no hidden or implicit dependencies on the local machine's state."
