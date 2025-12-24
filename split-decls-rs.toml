@@ -13,3 +13,15 @@
 "test_crate" = { path = "wrapped-test_crate" }
 "unimacro_derive" = { path = "wrapped-unimacro_derive" }
 "my_test_project" = { path = "wrapped-my_test_project" }
+"anyhow" = { version = "1.0" }
+"toml" = { version = "0.8" }
+"serde" = { version = "1.0", features = ["derive"] }
+"serde_json" = { version = "1.0" }
+"syn" = { version = "2.0", features = ["full", "visit", "extra-traits"] }
+"quote" = { version = "1.0" }
+"proc-macro2" = { version = "1.0" }
+"walkdir" = { version = "2" }
+"tempfile" = { version = "3" }
+"clap" = { version = "4", features = ["derive"] }
+"url" = { version = "2" }
+"rayon" = { version = "1" }
