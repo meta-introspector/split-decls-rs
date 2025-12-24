@@ -67,6 +67,8 @@ pathdiff = { workspace = true }
 hex = "0.4"
 cargo-metadata-lib = { path = "cargo-metadata-lib" }
 prettyplease = { workspace = true }
+log = { workspace = true }
+env_logger = { workspace = true }
 
 
 

@@ -6,6 +6,7 @@ use std::fs;
 use chrono::{Local, Datelike}; // Added for signature generation
 use sha2::{Digest, Sha256}; // Added for metadata hashing
 use hex; // Added for hex encoding
+use log::{info, warn, error}; // Moved to top for module-wide scope
 use serde_json; // For serializing metadata
 
 //use crate::buildrs_ast_utils::ExtractedDecl;
@@ -102,13 +103,15 @@ pub fn write_declaration_file(
                 line!()
             )
             .context(format!("Failed to write formatting error to {}", error_file_path.display()))?;
-            println!("\n<blip style='color:red'>Formatting error for '{} {}' captured in {}</blip>", decl.kind, decl.name, error_file_path.display());
+
+
+            error!("\n<blip style='color:red'>Formatting error for '{} {}' captured in {}</blip>", decl.kind, decl.name, error_file_path.display());
 
         } else {
-            println!("Split '{} {}' to {}", decl.kind, decl.name, decl_file_path.display());
+            info!("Split '{} {}' to {}", decl.kind, decl.name, decl_file_path.display());
         }
     } else {
-        println!(
+        info!(
             "Dry-run: Would split '{} {}' to {}",
             decl.kind,
             decl.name,

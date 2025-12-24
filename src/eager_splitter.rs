@@ -2,11 +2,12 @@ use anyhow::{Context, Result};
 use proc_macro2::{Ident, Span, TokenStream}; // Added LineColumn
 use quote::ToTokens;
 use std::fs;
-use std::io::Write;
+// use std::io::Write; // commented out because it's no longer used
 use std::path::{Path, PathBuf}; // Added Path
 use syn::visit::Visit;
 use syn::{self, LitStr}; // Added LitStr
 use quote::quote; // Added quote
+use log::{info, warn, error};
 
 use crate::paths::CratePaths;
 use split_decls_types::SplitDeclsConfig;
@@ -400,15 +401,16 @@ pub fn copy_declarations_to_output(
     Ok(())
 }
 
+
 /// Main entry point for eager splitting of a crate
 pub fn eager_split_crate(paths: &CratePaths, config: &SplitDeclsConfig) -> Result<()> {
     // 1. Parse the original lib.rs
-    println!("📖 Parsing lib.rs...");
+    info!("📖 Parsing lib.rs...");
     let lib_content = fs::read_to_string(&paths.lib_rs_path)
         .context(format!("Failed to read {}", paths.lib_rs_path.display()))?;
     
-    println!("🔧 Parsing {} bytes of Rust code...", lib_content.len());
-    let syntax_tree: syn::File = match syn::parse_file(&lib_content) {
+    info!("🔧 Parsing {} bytes of Rust code...", lib_content.len());
+    let syntax_tree: syn::File = match syn::parse_str(&lib_content) {
         Ok(ast) => ast,
         Err(e) => {
             let file_path_display = paths.lib_rs_path.display();
@@ -439,10 +441,13 @@ pub fn eager_split_crate(paths: &CratePaths, config: &SplitDeclsConfig) -> Resul
     // 6. Generate new build.rs
     generate_new_build_rs(paths)?;
     
-    println!("Eager splitting completed for crate: {}", paths.crate_name);
-    println!("Output generated in: {}", paths.decls_output_dir.parent().unwrap().display());
+    info!("Eager splitting completed for crate: {}", paths.crate_name);
+    info!("Output generated in: {}", paths.decls_output_dir.parent().unwrap().display());
     Ok(())
 }
+
+// ...
+
 
 
 

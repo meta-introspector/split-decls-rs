@@ -59,7 +59,7 @@ fn main() -> Result<()> {
             // Resolve all paths relative to the cargo2nix root
             cargo2nix_root.join(crate_path).canonicalize()?
         };
-        println!("DEBUG: Crate: {}, Original Path: {}, Absolute Path: {}", crate_info.name, crate_info.path, absolute_crate_path.display());
+        // println!("DEBUG: Crate: {}, Original Path: {}, Absolute Path: {}", crate_info.name, crate_info.path, absolute_crate_path.display());
         existing_path_overrides.insert(crate_info.name.to_string(), absolute_crate_path.to_string_lossy().into_owned());
     }
 

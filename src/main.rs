@@ -350,14 +350,24 @@ fn dep_to_toml_value_iter<'a>(
     })
 }
 
+use log::{info, warn, error};
+use env_logger::{Builder, Target, WriteStyle};
+
+// ...
 fn main() -> Result<()> {
+    // Initialize logger
+    Builder::from_default_env()
+        .write_style(WriteStyle::Always)
+        .filter_level(log::LevelFilter::Info)
+        .init();
+
     load_config!("split-decls-rs.toml");
 
     let cli = Cli::parse();
 
     if cli.verbose {
-        println!("Verbose mode enabled.");
-        println!("CLI args: {:?}", cli);
+        info!("Verbose mode enabled.");
+        info!("CLI args: {:?}", cli);
     }
 
     match &cli.command {
