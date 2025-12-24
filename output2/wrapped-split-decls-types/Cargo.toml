@@ -1,0 +1,35 @@
+[package]
+name = "split-decls-types"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies.anyhow]
+workspace = true
+
+[dependencies.introspector_decl2_macros]
+workspace = true
+
+[dependencies.serde]
+features = ["derive"]
+workspace = true
+
+[dependencies.toml]
+workspace = true
+
+[dev-dependencies]
+
+[build-dependencies.anyhow]
+workspace = true
+
+[build-dependencies.serde]
+features = ["derive"]
+workspace = true
+
+[build-dependencies.syn]
+features = ["full", "visit"]
+workspace = true
+
+[build-dependencies.toml]
+workspace = true
+
+[patch]

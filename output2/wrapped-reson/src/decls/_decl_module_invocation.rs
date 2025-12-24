@@ -1,0 +1,7 @@
+use introspector_decl2_macros::decl_module;
+decl_module!(
+    wrapped_reson_decls_LARGE_CONTENT_LENGTH_THRESHOLD,
+    wrapped_reson_decls_LARGE_ARRAY_THRESHOLD,
+    wrapped_reson_decls_TREE_PARSING_MAX_DEPTH,
+    wrapped_reson_decls_POOL_STACK_SIZE
+);

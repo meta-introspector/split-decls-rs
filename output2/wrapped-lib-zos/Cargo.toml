@@ -1,0 +1,25 @@
+[package]
+name = "lib-zos"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies.introspector_decl2_macros]
+workspace = true
+
+[dev-dependencies]
+
+[build-dependencies.anyhow]
+workspace = true
+
+[build-dependencies.serde]
+features = ["derive"]
+workspace = true
+
+[build-dependencies.syn]
+features = ["full", "visit"]
+workspace = true
+
+[build-dependencies.toml]
+workspace = true
+
+[patch]

@@ -22,22 +22,22 @@ members = [
 ]
 
 [workspace.dependencies]
-syn = { features = ["full", "visit", "visit-mut", "extra-traits"] }
-serde = {}
-cargo-toml-parts = { path = ".././build_helpers/cargo_toml_parts" }
-anyhow = {}
-tempfile = {}
-rayon = {}
-cargo-toml-generator-types = {}
-split-decls-types = {}
-serde_json = {}
-url = {}
-pagerank_rs = { path = ".././submodules/pagerank_rs" }
-toml = {}
-quote = {}
-proc-macro2 = { path = ".././../proc-macro2" }
-serde_derive = {}
-clap = { features = ["derive"] }
 walkdir = {}
+split-decls-types = {}
+quote = {}
+syn = { features = ["full", "visit", "visit-mut", "extra-traits"] }
+serde_json = {}
+cargo-toml-parts = { path = ".././build_helpers/cargo_toml_parts" }
+serde_derive = {}
+pagerank_rs = { path = ".././submodules/pagerank_rs" }
+proc-macro2 = { path = ".././../proc-macro2" }
 introspector_decl2_macros = { path = "../../submodules/patch-build-rs/introspector_decl2_macros" }
 cargo-toml-generator-macros = {}
+anyhow = {}
+toml = {}
+tempfile = {}
+clap = { features = ["derive"] }
+url = {}
+rayon = {}
+cargo-toml-generator-types = {}
+serde = {}
