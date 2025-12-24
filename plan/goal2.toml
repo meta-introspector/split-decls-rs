@@ -71,3 +71,10 @@ contains = [
 ]
 
 # Note: The 'operation', 'inputs_item', and 'outputs_item' schemas are reused for nested operations and tasks.
+
+[schema_description.wrapping]
+type = "table"
+contains = [
+    { key = "crates", type = "array<string>", description = "A list of crate names to be wrapped." }
+]
+

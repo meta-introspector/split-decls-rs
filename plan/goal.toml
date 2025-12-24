@@ -1,5 +1,5 @@
 # goal.toml
-original-goal = "process all of ../../ cargo.tomls and extract all the decsl and copy them to output/ and generate a new cargo.toml workspace root and cargo tomls for them"
+original-goal = "process all crates declaratively specified in the [wrapping] section of split-decls-rs.toml, extract all their declarations, copy them to output/, and generate a new cargo.toml workspace root and cargo tomls for them"
 
 # Ansible-like playbook definition for a declaration processing workflow
 [workflow]
@@ -8,30 +8,29 @@ description = "Processes Rust crates to extract declarations and re-organize the
 style_influences = ["Ansible", "Lisp", "Lean4", "Rust", "LLVM", "Bash"]
 
 [[workflow.stages]]
-name = "Discover Crates"
-description = "Recursively finds all Rust crates (Cargo.toml + src/lib.rs) within the specified base path."
-processor_hint = "Bash-like directory traversal with Rust-like path filtering"
-operation = { type = "function_call", function = "find_crates", args = ["../../"], recursive = true }
-outputs = [{ name = "discovered_crates", type = "list<Path>", description = "Paths to detected crate roots." }]
-# Lean4-like: assert output is non-empty list of valid paths
+name = "Read Wrapping Configuration"
+description = "Reads the `split-decls-rs.toml` file to get the list of crates to wrap."
+processor_hint = "TOML parsing and validation"
+operation = { type = "function_call", function = "read_wrapping_config", args = ["split-decls-rs.toml"] }
+outputs = [{ name = "crates_to_wrap", type = "list<string>", description = "List of crate names to be wrapped." }]
 
 [[workflow.stages]]
 name = "Extract and Copy Declarations"
-description = "For each discovered crate, extracts all top-level declarations and copies them to the designated output directory."
+description = "For each crate in the wrapping list, finds it, extracts all top-level declarations, and copies them to the designated output directory."
 processor_hint = "LLVM-like pass over AST, Rust-like type extraction"
-inputs = [{ name = "crates_to_process", from_stage = "Discover Crates", output_name = "discovered_crates" }]
-operation = { type = "loop", over = "crates_to_process", loop_var = "crate_path" }
+inputs = [{ name = "crates_to_process", from_stage = "Read Wrapping Configuration", output_name = "crates_to_wrap" }]
+operation = { type = "loop", over = "crates_to_process", loop_var = "crate_name" }
 
   [[workflow.stages.operation.tasks]]
-  name = "Extract Declarations for Crate"
-  operation = { type = "function_call", function = "extract_declarations", args = ["{{ crate_path }}"], output_base = "output/" }
+  name = "Find and Extract Declarations for Crate"
+  operation = { type = "function_call", function = "find_and_extract_declarations", args = ["{{ crate_name }}"], output_base = "output/" }
   outputs = [{ name = "extracted_decls", type = "map<DeclName, TokenStream>", description = "Mapping of declaration names to their TokenStream representations." }]
   # Lean4-like: proof that extraction preserves semantics
 
   [[workflow.stages.operation.tasks]]
   name = "Copy Declarations to Output"
-  inputs = [{ name = "declarations", from_task = "Extract Declarations for Crate", output_name = "extracted_decls" }]
-  operation = { type = "function_call", function = "copy_to_output", args = ["{{ crate_path.name }}", "{{ declarations }}", "output/"] }
+  inputs = [{ name = "declarations", from_task = "Find and Extract Declarations for Crate", output_name = "extracted_decls" }]
+  operation = { type = "function_call", function = "copy_to_output", args = ["{{ crate_name }}", "{{ declarations }}", "output/"] }
   # Bash-like: cp -r ...
 
 [[workflow.stages]]

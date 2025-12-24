@@ -1,0 +1,30 @@
+# goal22.toml - Refinement of the Workflow: Declarative Crate Wrapping
+
+[workflow_refinement]
+name = "Declarative Crate Wrapping Workflow"
+version = "1.1"
+description = "Refines the workflow from goal.toml to use a declarative approach for selecting which crates to wrap, based on the [wrapping] section of split-decls-rs.toml. This replaces the previous, more imperative 'Discover Crates' stage."
+conceptual_status = "A shift from implicit discovery to explicit declaration, enhancing predictability and user control over the workspace generation process."
+derived_from = "goal.toml (Level 1)"
+
+# Core Change: From Discovery to Declaration
+[workflow_refinement.core_change]
+name = "Shift from Crate Discovery to Declarative Wrapping"
+statement = "The initial stage of the workflow is no longer a filesystem-based discovery of crates. Instead, it reads a declarative list of crate names from the `[wrapping].crates` section of the `split-decls-rs.toml` configuration file."
+implication = "This change makes the wrapping process more explicit, reproducible, and less prone to accidental inclusion of unwanted crates. It aligns with the principle of Declarative Configuration."
+new_stage_reference = "Read Wrapping Configuration"
+
+# Updated Workflow Stages
+[workflow_refinement.updated_workflow]
+stages = [
+  { name = "Read Wrapping Configuration", description = "Reads the declarative list of crates to be wrapped from split-decls-rs.toml." },
+  { name = "Extract and Copy Declarations", description = "Iterates over the declared list of crates to perform declaration splitting and copying." },
+  { name = "Generate New Workspace Structure", description = "Generates the workspace root and Cargo.toml files for the wrapped crates." }
+]
+
+# Connection to Architectural Principles
+[workflow_refinement.architectural_connection]
+principle_adherence = [
+  { principle = "Declarative Configuration", justification = "The wrapping process is now driven by a declarative list in a configuration file, rather than an imperative search of the filesystem." },
+  { principle = "Hermetic Reproducibility", justification = "By explicitly declaring the set of crates to be wrapped, the process becomes more reproducible and less dependent on the filesystem's state." }
+]
