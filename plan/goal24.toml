@@ -1,0 +1,42 @@
+# goal24.toml - Automorphic Verification and the Pure Build Environment
+
+[automorphic_verification]
+name = "Automorphic Verification in a Pure Build Environment"
+version = "1.0"
+description = "Describes how the Principle of Input Purity (goal23.toml) enables a new level of automorphic (self-verifying) behavior. The system can now leverage its pure environment to reason about its own properties and correctness."
+conceptual_status = "The first practical application of the input purity principle, moving from a theoretical assertion to a functional capability."
+derived_from = "plan/goal23.toml (The Principle of Input Purity)"
+
+# Core Concept: Purity Enables Introspection
+[automorphic_verification.purity_enables_introspection]
+name = "Purity as a Foundation for Introspection"
+statement = "Because all inputs to the build system are known, immutable, and verifiable (from Git or the Nix store), the system can safely introspect its own source code and configuration. It can reason about its own structure without the risk of external, unverified inputs."
+implication = "This enables the creation of powerful meta-programming tools that can analyze, transform, and even prove properties about the system itself, all within the context of a hermetic build."
+
+# The Role of Declarative Macros in Automorphic Verification
+[automorphic_verification.declarative_macros]
+name = "Declarative Macros as Tools for Introspection"
+description = "The declarative macros (`load_config!`, `mkwrapping!`, etc.) are not just for configuration; they are the tools by which the system performs introspection. They provide a safe, controlled way to access the pure inputs."
+  [[automorphic_verification.declarative_macros.macro]]
+  name = "assert_config!"
+  description = "A new macro that can be used to assert properties of the configuration at compile time. For example, `assert_config!(wrapping.crates.contains(\"split-decls-rs\"))`."
+  purity_enforcement = "This macro would read from the immutable `GLOBAL_CONFIG` static variable, ensuring that the assertions are made against the pure, known configuration."
+
+# Example: Automorphic Verification of the Wrapping Process
+[automorphic_verification.example]
+name = "Automorphic Verification of the Crate Wrapping Process"
+description = "An example of how the system can use its introspective capabilities to verify its own operations."
+  [[automorphic_verification.example.step]]
+  name = "1. Declarative Specification"
+  description = "The `split-decls-rs.toml` file declares the list of crates to be wrapped."
+  [[automorphic_verification.example.step]]
+  name = "2. Build-Time Assertion"
+  description = "A new build script, or a new stage in the `Makefile`, uses the `assert_config!` macro to verify that the `wrapping.crates` list contains the expected crates. If not, the build fails."
+  [[automorphic_verification.example.step]]
+  name = "3. Automorphic Test Generation"
+  description = "The system can generate its own tests to verify that the `output2` workspace contains the correct set of wrapped crates, as specified in the configuration. These tests can be run as part of the `build_output_module` stage."
+
+# Connection to the Grand Vision
+[automorphic_verification.grand_vision]
+name = "Towards a Self-Verifying System"
+description = "This is a concrete step towards the 'self-verifying cycles of observation, abstraction, and proof' described in goal19.toml. By enabling the system to reason about and verify its own configuration and behavior, we are building the foundation for a truly automorphic system."
