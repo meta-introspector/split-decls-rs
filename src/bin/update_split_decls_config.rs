@@ -80,9 +80,9 @@ fn main() -> Result<()> {
         // or whose paths are handled explicitly.
     ].iter().cloned().collect();
 
-    existing_crates_to_wrap.retain(|crate_name| {
-        !internal_crates_to_skip.contains(crate_name.as_str()) && !crate_name.starts_with("split-decls-rs-")
-    });
+    // existing_crates_to_wrap.retain(|crate_name| {
+    //     !internal_crates_to_skip.contains(crate_name.as_str()) && !crate_name.starts_with("split-decls-rs-")
+    // });
 
 
     // Sort crates for consistent output
