@@ -27,11 +27,10 @@ pub fn collect_and_format_workspace_dependencies(
                 }
             }
             dep_table.remove("workspace"); // Ensure workspace = true is not propagated here
-        } else if dep_value_clone.is_table() { // Handle cases where 'path' is not initially present, but it's a local wrapped crate
-            let original_crate_name = dep_name.as_str(); // Use dep_name directly
-            // The path for a wrapped local crate is simply its name relative to the output_dir
-            let relative_path = PathBuf::from(original_crate_name);
-            
+                    } else if dep_value_clone.is_table() { // Handle cases where 'path' is not initially present, but it's a local wrapped crate
+                        // For local wrapped crates, the path should be "wrapped-<original_crate_name>"
+                        let wrapped_dep_name = format!("wrapped-{}", dep_name);
+                        let relative_path = PathBuf::from(&wrapped_dep_name);            
             let mut new_dep_table = dep_value_clone.as_table_mut().unwrap().clone();
             new_dep_table.insert("path".to_string(), Value::String(relative_path.display().to_string()));
             dep_value_clone = Value::Table(new_dep_table);
