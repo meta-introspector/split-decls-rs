@@ -44,7 +44,12 @@ pub fn handle_multi_crate_wrapping(
 
         if let Some(overrides) = &global_config.crate_path_overrides {
             if let Some(override_path) = overrides.get(crate_name) {
-                let candidate_path = scan_root.join(override_path).join("Cargo.toml");
+                let path_buf = PathBuf::from(override_path);
+                let candidate_path = if path_buf.is_absolute() {
+                    path_buf.join("Cargo.toml")
+                } else {
+                    scan_root.join(override_path).join("Cargo.toml")
+                };
                 if candidate_path.exists() {
                     found_cargo_toml_path = Some(candidate_path);
                 }

@@ -33,7 +33,7 @@ check_bootstrap_errors:
 
 # build_output_module:
 # 	@echo "Building output2 
-..." && cd output2 && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build 2>&1 | grep -E "error|^Compiling|^Finished" || true
+#..." && cd output2 && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build 2>&1 | grep -E "error|^Compiling|^Finished" || true
 
 clean_output2:
 	@if [ ! -d "output2/.git" ]; then \
