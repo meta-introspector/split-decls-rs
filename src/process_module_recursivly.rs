@@ -8,8 +8,6 @@ use std::fs;
 use quote::quote;
 use crate::rustfmt_utils::format_rust_file;
 use crate::add_generated_rust_header;
-//use crate::declaration_extractor;
-//use crate::declaration_writer;
 use crate::eager_splitter::declaration_writer;
 use crate::eager_splitter::declaration_extractor;
 
