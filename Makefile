@@ -20,10 +20,14 @@ build_output_module:
 	cd output2 && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build
 
 clean_output2:
-	rm -rf output2
-	git init output2 # Initialize git repo inside output2
-	# git submodule add file://$(CURDIR)/output2 output2 || true # Submodule add is commented out for later
-	# cd output2 && git reset --hard HEAD || true # Ensure the submodule is clean before re-adding (related to submodule)
+	@if [ ! -d "output2" ]; then \
+		echo "output2 directory not found, creating and initializing git repo..."; \
+		mkdir output2; \
+		git init output2; \
+	else \
+		echo "output2 directory found, resetting and cleaning..."; \
+		(cd output2 && git reset --hard HEAD && git clean -fdx); \
+	fi
 
 .PHONY: clean
 clean:
