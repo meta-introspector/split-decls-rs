@@ -97,6 +97,7 @@ pub fn handle_multi_crate_wrapping(
         workspace_members_content.push(format!("\"{}\"", relative_path_for_member.display()));
 
         // Call generate_wrapped_crate for each member
+        let original_crate_location = scan_root.join(&member.path);
         
         if verbose {
             println!("  Calling generate_wrapped_crate for member '{}' at '{}'", member.name, original_crate_location.display());
