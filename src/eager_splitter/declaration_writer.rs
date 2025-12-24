@@ -4,6 +4,7 @@ use quote::quote;
 use std::fs;
 use chrono::{Local, Datelike}; // Added for signature generation
 use sha2::{Digest, Sha256}; // Added for metadata hashing
+use hex; // Added for hex encoding
 use serde_json; // For serializing metadata
 
 //use crate::buildrs_ast_utils::ExtractedDecl;
@@ -34,7 +35,7 @@ pub fn write_declaration_file(
         .context("Failed to serialize ExtractedDeclMetadata to JSON")?;
     let mut hasher = Sha256::new();
     hasher.update(metadata_json.as_bytes());
-    let metadata_hash = format!("{:x}", hasher.finalize());
+    let metadata_hash = hex::encode(hasher.finalize());
     // --- End Metadata Hash Generation ---
 
     // --- Generate Signature Comment ---

@@ -2,6 +2,7 @@ use quote::ToTokens;
 use syn::{self, Item};
 use syn::visit::Visit;
 use sha2::{Digest, Sha256};
+use hex;
 
 use crate::ExtractedDecl;
 use crate::ExtractedDeclMetadata;
@@ -84,7 +85,7 @@ pub fn extract_single_declaration(item: &Item, item_count: usize) -> Option<Extr
     let output_hash = {
         let mut hasher = Sha256::new();
         hasher.update(content_token_stream.to_string());
-        format!("{:x}", hasher.finalize())
+        hex::encode(hasher.finalize())
     };
 
     let metadata = ExtractedDeclMetadata {

@@ -11,6 +11,8 @@ build = "build.rs"
 #     "cargo-toml-generator-macros",
 #     "cargo-toml-generator-types", 
 #     "split-decls-types",
+#     "cargo-tree-macro",
+#     "cargo-metadata-lib", # Add this new crate
 # ]
 # exclude = [
 #     "cargo-toml-generator-macros",
@@ -36,13 +38,8 @@ build = "build.rs"
 # introspector_decl2_macros = { path = "../../submodules/patch-build-rs/introspector_decl2_macros" }
 # introspector_decl_core = { path = "../../submodules/patch-build-rs/introspector_decl_core" }
 # introspector_decl_common = { path = "../../submodules/patch-build-rs/introspector_decl_common" }
-# # serde_json = "1.0"
-# # url = "2.0"
-# # quote = "1.0"
-# # syn = { version = "2.0", features = ["full", "visit", "visit-mut", "extra-traits"] }
-# # walkdir = "2.3"
-# # proc-macro2 = "1.0"
-# # tempfile = "3.0"
+# lazy_static = "1.4"
+# rayon = { workspace = true }
 
 [dependencies]
 rayon = { workspace = true } # Added for multi-threaded processing
@@ -59,15 +56,16 @@ split-decls-types = { workspace = true } # Use workspace dependency
 proc-macro2 = { workspace = true, features = ["span-locations"] }
 tempfile = { workspace = true }
 cargo-toml-generator-types = { workspace = true } # Use workspace dependency
-sha2 = "0.10"
+sha2 = { workspace = true }
 clap = { workspace = true, features = ["derive"] }
 cargo-toml-generator-macros = { workspace = true }
 cargo-toml-parts = { path = "build_helpers/cargo_toml_parts" }
 pagerank_rs = { path = "submodules/pagerank_rs" }
-chrono = "0.4"
+chrono = { workspace = true }
 lazy_static.workspace = true
-pathdiff = "0.2"
+pathdiff = { workspace = true }
 cargo-tree-macro = { path = "cargo-tree-macro" }
+hex = "0.4"
 
 
 
