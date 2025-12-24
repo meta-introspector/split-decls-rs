@@ -1,3 +1,4 @@
+use split_decls_rs::config_macros;
 use anyhow::{Context, Result};
 use std::path::PathBuf;
 use split_decls_rs::patch_config::PatchConfig;
@@ -354,8 +355,6 @@ fn dep_to_toml_value_iter<'a>(
         }
     })
 }
-
-use split_decls_rs::load_config;
 
 fn main() -> Result<()> {
     load_config!("split-decls-rs.toml");

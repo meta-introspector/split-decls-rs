@@ -65,6 +65,7 @@ cargo-toml-generator-macros = { workspace = true }
 cargo-toml-parts = { path = "build_helpers/cargo_toml_parts" }
 pagerank_rs = { path = "submodules/pagerank_rs" }
 chrono = "0.4"
+lazy_static.workspace = true
 
 
 

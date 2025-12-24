@@ -1,4 +1,5 @@
 use std::path::{Path, PathBuf};
+#[macro_use]
 pub mod config_macros;
 pub mod macro_analyzer_parts;
 pub mod special_print;
