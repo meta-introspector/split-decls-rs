@@ -2,15 +2,18 @@ SCCACHE := $(HOME)/.cargo/bin/sccache
 # Use RUSTC_WRAPPER for sccache
 CARGO := cargo
 
-.PHONY: all build_core run_bootstrap build_output_module clean_output2
+.PHONY: all build_core run_bootstrap build_output_module clean_output2 check_build_errors check_bootstrap_errors
 
-all: build_core run_bootstrap check_bootstrap_errors build_output_module
+all: build_core check_build_errors run_bootstrap check_bootstrap_errors build_output_module
 
 build_core:
-	RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build
+	-RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build > build_core.log 2>&1
+
+check_build_errors:
+	grep -E "error\[|error:" build_core.log || true
 
 run_bootstrap: clean_output2
-	RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > temp_bootstrap.log 2>&1
+	-RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > temp_bootstrap.log 2>&1
 
 check_bootstrap_errors:
 	grep -E "error\[|error:" temp_bootstrap.log || true
