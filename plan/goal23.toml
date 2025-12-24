@@ -2,7 +2,7 @@
 
 [input_purity_principle]
 name = "Principle of Input Purity"
-version = "1.0"
+version = "1.1"
 description = "Asserts that all inputs to the system must be 'pure', originating either from the version-controlled Git repository or the immutable Nix store. The only exception to this rule is for external, explicitly-defined interactions, such as with Large Language Models (LLMs)."
 conceptual_status = "A foundational security and reproducibility principle, ensuring that the system's behavior is determined by a verifiable and immutable set of inputs."
 derived_from = "The ongoing effort to create a declarative, reproducible, and secure build system."
@@ -20,6 +20,24 @@ derived_from = "The ongoing effort to create a declarative, reproducible, and se
   [[input_purity_principle.tenets.tenet]]
   name = "Controlled External Interactions"
   description = "Any interaction with the outside world, such as API calls to LLMs, must be explicit, well-defined, and isolated from the core build process. This ensures that the non-deterministic nature of these interactions does not compromise the reproducibility of the build itself."
+
+# The Role of Declarative Macros
+[input_purity_principle.declarative_macros]
+  name = "Declarative Macros as the Interface to Purity"
+  description = "A set of declarative macros (e.g., `load_config!`, `mkwrapping!`) will serve as the primary interface for accessing configuration and other build-time information. These macros will enforce the input purity principle by design."
+  [[input_purity_principle.declarative_macros.macro]]
+    name = "load_config!"
+    description = "This macro is responsible for loading the `split-decls-rs.toml` configuration file into a global, lazily-initialized static variable. It is called once at the beginning of the program."
+    purity_enforcement = "By loading the configuration at the start and storing it in a static variable, the macro ensures that the configuration is immutable for the duration of the program's execution."
+  [[input_purity_principle.declarative_macros.macro]]
+    name = "mkwrapping!"
+    description = "This macro accesses the `wrapping` configuration from the global static variable. It does not perform any I/O itself, but instead relies on the data loaded by `load_config!`."
+    purity_enforcement = "This macro reads from an immutable, in-memory representation of the configuration, ensuring that its output is deterministic and pure."
+
+# Connection to the Automorphic Principle
+[input_purity_principle.automorphic_principle]
+  name = "Input Purity as a Prerequisite for Automorphism"
+  description = "The principle of input purity is a necessary prerequisite for the system to be truly 'automorphic' (self-building). By ensuring that the build process is deterministic and reproducible, we can create a system that can reliably build and test itself without being affected by the state of the machine on which it is running."
 
 # Implications for the System
 [input_purity_principle.implications]
