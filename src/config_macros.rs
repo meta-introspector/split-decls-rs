@@ -1,4 +1,4 @@
-use crate::split_decls_types::SplitDeclsConfig;
+use split_decls_types::SplitDeclsConfig;
 use lazy_static::lazy_static;
 use std::sync::Mutex;
 
