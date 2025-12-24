@@ -210,25 +210,7 @@ fn run_wrapped_workspace_mode(
     
     // The previous walkdir iteration and submodule processing logic is removed
     // as generate_wrapped_workspace now handles finding Cargo.toml files within the specified scan_root.
-    // However, eager_split_crate is still called for each crate found.
-    // For now, let's assume the current directory holds the crate we want to split.
-    let current_crate_path = PathBuf::from("./").canonicalize().context("Failed to canonicalize current path for eager splitter")?;
-    let lib_rs = current_crate_path.join("src/lib.rs");
-
-    if lib_rs.exists() {
-        if verbose {
-            println!("  Processing current crate: {}", current_crate_path.display());
-        }
-        let paths = setup_crate_paths(&current_crate_path)?;
-        eager_splitter::eager_split_crate(&paths, &global_config_mut)?; // Use mutable clone here
-        if verbose {
-            println!("  Finished processing current crate.");
-        }
-    } else {
-        if verbose {
-            println!("  No src/lib.rs found in current directory. Skipping eager_split_crate for current crate.");
-        }
-    }
+    // The eager splitting of declarations for wrapped crates is handled internally by generate_wrapped_crate.
     
     if verbose {
         println!("\nWrapped workspace generation finished.");
