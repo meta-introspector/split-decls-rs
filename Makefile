@@ -20,14 +20,18 @@ build_output_module:
 	cd output2 && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build
 
 clean_output2:
-	@if [ ! -d "output2" ]; then \
-		echo "output2 directory not found, creating and initializing git repo..."; \
-		mkdir output2; \
-		git init output2; \
+	@if [ ! -d "output2/.git" ]; then \
+		$(MAKE) reinit_output2; \
 	else \
 		echo "output2 directory found, resetting and cleaning..."; \
 		(cd output2 && git reset --hard HEAD && git clean -fdx); \
 	fi
+
+reinit_output2:
+	rm -rf output2
+	mkdir -p output2
+	git init output2
+	(cd output2 && touch .placeholder && git add .placeholder && git commit -m "Initial commit")
 
 .PHONY: clean
 clean:
