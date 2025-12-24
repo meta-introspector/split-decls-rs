@@ -48,12 +48,13 @@ pub fn handle_multi_crate_wrapping(
                 println!("  Extracting crate info from: {}", cargo_path.display());
             }
             if let Ok(Some(crate_info)) = extract_crate_info_simple(&cargo_path) {
-                let relative_path = cargo_path.parent().unwrap()
-                    .strip_prefix(scan_root)
-                    .unwrap_or(Path::new("."))
-                    .to_string_lossy();
+                let wrapped_crate_name = format!("wrapped-{}", crate_info.name);
+                // The member path should be the wrapped crate's directory relative to the output_dir
+                let wrapped_crate_path_in_output = output_dir.join(&wrapped_crate_name);
+                let relative_path_for_member = path_diff::path_diff(output_dir, &wrapped_crate_path_in_output)
+                    .context(format!("Failed to calculate relative path for wrapped crate member '{}'", wrapped_crate_name))?;
 
-                workspace_members_content.push(format!("\"{}\"", relative_path));
+                workspace_members_content.push(format!("\"{}\"", relative_path_for_member.display()));
                 if verbose {
                     println!("    Added crate {} as workspace member and dependency candidate.", crate_info.name);
                 }
@@ -88,11 +89,12 @@ pub fn handle_multi_crate_wrapping(
         if verbose {
             println!("Processing generated workspace member: {}", member.name);
         }
-        // Ensure relative path is correct for members
-        let original_crate_location = scan_root.join(&member.path);
-        let relative_to_output = path_diff::path_diff(output_dir, &original_crate_location)
-            .context(format!("Failed to calculate relative path for workspace member '{}'", member.name))?;
-        workspace_members_content.push(format!("\"{}\"", relative_to_output.display()));
+        let wrapped_crate_name = format!("wrapped-{}", member.name);
+        // The member path should be the wrapped crate's directory relative to the output_dir
+        let wrapped_crate_path_in_output = output_dir.join(&wrapped_crate_name);
+        let relative_path_for_member = path_diff::path_diff(output_dir, &wrapped_crate_path_in_output)
+            .context(format!("Failed to calculate relative path for wrapped crate member '{}'", wrapped_crate_name))?;
+        workspace_members_content.push(format!("\"{}\"", relative_path_for_member.display()));
 
         // Call generate_wrapped_crate for each member
         
