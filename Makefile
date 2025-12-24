@@ -2,9 +2,11 @@ SCCACHE := $(HOME)/.cargo/bin/sccache
 # Use RUSTC_WRAPPER for sccache
 CARGO := cargo
 
-.PHONY: all build_core run_bootstrap build_output_module clean_output2 check_build_errors check_bootstrap_errors
+.PHONY: all build_core run_bootstrap build_output_module clean_output2 check_build_errors check_bootstrap_errors debug-main
 
-all: build_core check_build_errors run_bootstrap check_bootstrap_errors build_output_module
+all: debug-main run_bootstrap check_bootstrap_errors build_output_module
+
+debug-main: build_core check_build_errors
 
 build_core:
 	-RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build > build_core.log 2>&1
