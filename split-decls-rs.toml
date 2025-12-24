@@ -28,6 +28,14 @@ crates = [
     "solfun_macros",
     "test_macros_app",
     "introspector_decl2_macros",
+    "introspector_macro_helpers",
+    "proc-macro2",
+    # Additional local dependencies from split-decls-rs/Cargo.toml
+    "split-decls-types", # Already in list
+    "cargo-toml-generator-types", # Already in list
+    "cargo-toml-generator-macros", # Already in list
+    "cargo-toml-parts", # Already in list
+    "pagerank_rs", # Already in list
 ]
 
 [crate_path_overrides]
@@ -48,3 +56,10 @@ crates = [
 "solfun_macros" = "../patch-build-rs/solfun_macros"
 "test_macros_app" = "../patch-build-rs/test_macros_app"
 "introspector_decl2_macros" = "../patch-build-rs/introspector_decl2_macros"
+"introspector_macro_helpers" = "../patch-build-rs/introspector_macro_helpers"
+"proc-macro2" = "../proc-macro2"
+# Additional local dependencies paths
+"split-decls-types" = "split-decls-types"
+"cargo-toml-generator-types" = "cargo-toml-generator-types"
+"cargo-toml-generator-macros" = "cargo-toml-generator-macros"
+"pagerank_rs" = "submodules/pagerank_rs"

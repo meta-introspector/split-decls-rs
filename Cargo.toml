@@ -66,6 +66,7 @@ cargo-toml-parts = { path = "build_helpers/cargo_toml_parts" }
 pagerank_rs = { path = "submodules/pagerank_rs" }
 chrono = "0.4"
 lazy_static.workspace = true
+pathdiff = "0.2"
 
 
 
@@ -100,6 +101,14 @@ path = "src/bin/submodule_decl_report.rs"
 [[bin]]
 name = "eigenmatrix_analyzer"
 path = "src/bin/eigenmatrix_analyzer.rs"
+
+[[bin]]
+name = "wrap_single_crate"
+path = "src/bin/wrap_single_crate.rs"
+
+[[bin]]
+name = "update_split_decls_config"
+path = "src/bin/update_split_decls_config.rs"
 
 [patch.'crates-io']
 proc-macro2 = { path = "../proc-macro2" }
