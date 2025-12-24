@@ -11,6 +11,7 @@ use syn::visit::Visit;
 use syn::{Attribute, ItemFn, ItemMacro, Lit, LitStr, Macro};
 use toml;
 use walkdir::WalkDir;
+use hex;
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
 struct MacroAnalysis {
@@ -334,7 +335,7 @@ fn main() -> Result<()> {
                             Err(_) => continue, // Ignore files we can't read
                         };
 
-                        let content_hash = format!("{:x}", Sha256::digest(&file_content_bytes));
+                        let content_hash = hex::encode(Sha256::digest(&file_content_bytes));
                         let file_content = match String::from_utf8(file_content_bytes) {
                             Ok(content) => content,
                             Err(_) => continue, // Ignore non-utf8 files

@@ -64,8 +64,8 @@ pagerank_rs = { path = "submodules/pagerank_rs" }
 chrono = { workspace = true }
 lazy_static.workspace = true
 pathdiff = { workspace = true }
-cargo-tree-macro = { path = "cargo-tree-macro" }
 hex = "0.4"
+cargo-metadata-lib = { path = "cargo-metadata-lib" }
 
 
 
