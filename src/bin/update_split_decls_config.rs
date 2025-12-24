@@ -42,8 +42,8 @@ fn main() -> Result<()> {
     let mut split_decls_config_content = fs::read_to_string(&args.split_decls_config_path).unwrap_or_default();
     let mut split_decls_data: SplitDeclsConfig = toml::from_str(&split_decls_config_content).unwrap_or_default();
 
-    let mut existing_crates_to_wrap: HashSet<String> = split_decls_data.wrapping.crates.drain(..).collect();
-    let mut existing_path_overrides: HashMap<String, String> = split_decls_data.crate_path_overrides.drain().collect();
+    let mut existing_crates_to_wrap: HashSet<String> = split_decls_data.wrapping.crates.iter().cloned().collect();
+    let mut existing_path_overrides: HashMap<String, String> = split_decls_data.crate_path_overrides.iter().map(|(k, v)| (k.clone(), v.clone())).collect();
 
     let split_decls_rs_root = env::current_dir()?;
     let cargo2nix_root = split_decls_rs_root.parent().context("Failed to get parent of split-decls-rs")?.parent().context("Failed to get cargo2nix root")?;
