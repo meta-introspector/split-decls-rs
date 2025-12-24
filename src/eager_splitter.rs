@@ -226,6 +226,7 @@ pub fn copy_declarations_to_output(
 
 /// Main entry point for eager splitting of a crate
 pub fn eager_split_crate(paths: &CratePaths, config: &SplitDeclsConfig) -> Result<Vec<ModuleNotFoundReport>> {
+    println!("DEBUG: Entering eager_split_crate for crate: {}", paths.crate_name);
     // 1. Parse the original lib.rs
     info!("📖 Parsing lib.rs...");
     let lib_content = fs::read_to_string(&paths.lib_rs_path)
@@ -254,19 +255,28 @@ pub fn eager_split_crate(paths: &CratePaths, config: &SplitDeclsConfig) -> Resul
     let mut module_not_found_errors: Vec<ModuleNotFoundReport> = Vec::new();
 
     // 3. Split declarations into individual files (to output directory)
+    println!("DEBUG: Before split_and_generate_decls call.");
     split_and_generate_decls(&syntax_tree, paths, config, false, &mut module_not_found_errors)?;
+    println!("DEBUG: After split_and_generate_decls call.");
     
     // 4. Generate new lib.rs in output directory
+    println!("DEBUG: Before generate_output_lib_rs call.");
     generate_output_lib_rs(paths)?;
+    println!("DEBUG: After generate_output_lib_rs call.");
     
     // 5. Generate new lib.rs in original location (for compatibility)
+    println!("DEBUG: Before generate_new_lib_rs call.");
     generate_new_lib_rs(paths)?;
+    println!("DEBUG: After generate_new_lib_rs call.");
     
     // 6. Generate new build.rs
+    println!("DEBUG: Before generate_new_build_rs call.");
     generate_new_build_rs(paths)?;
+    println!("DEBUG: After generate_new_build_rs call.");
     
     info!("Eager splitting completed for crate: {}", paths.crate_name);
     info!("Output generated in: {}", paths.decls_output_dir.parent().unwrap().display());
+    println!("DEBUG: Exiting eager_split_crate for crate: {}", paths.crate_name);
 
     Ok(module_not_found_errors)
 }
@@ -455,6 +465,5 @@ pub fn split_and_generate_decls(
     info!("DEBUG: Collected module names for decl_module!: {:?}", collected_module_names.iter().map(|i| i.to_string()).collect::<Vec<_>>()); // Changed println to info
     invocation_generator::generate_decl_module_invocation(collected_module_names, paths, dry_run)?;
 
-    info!(""); // Changed println to info // Add newline after declaration list
     Ok(())
 }

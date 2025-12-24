@@ -15,7 +15,8 @@ check_build_errors:
 	grep -E "error\[|error:" build_core.log || true
 
 run_bootstrap:
-	@echo "Running bootstrap..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap
+	@echo "Running bootstrap..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > bootstrap_run.log 2>&1
+
 
 check_bootstrap_errors:
 # 	grep -E "error\[|error:" temp_bootstrap.log || true
