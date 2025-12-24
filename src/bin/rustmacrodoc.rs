@@ -462,7 +462,7 @@ fn main() -> Result<()> {
                             let mut hasher = Sha256::new();
                             hasher.update(signature.as_bytes());
                             let hash_result = hasher.finalize();
-                            let short_hash = &format!("{:x}", hash_result)[..7];
+                            let short_hash = &hex::encode(hash_result)[..7];
 
                             let source_module = Path::new(&macro_info.file)
                                 .file_stem()

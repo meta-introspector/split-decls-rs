@@ -60,16 +60,15 @@ fn main() -> Result<()> {
 
     let mut data_entries = Vec::new();
     for info in &crate_data_temp {
-        // Convert TempCrateInfo to CrateInfo with &'static str using leak()
         data_entries.push(format!(
-            r#"CrateInfo {{ name: \"{}\" , path: \"{}\" }}"#, 
-            info.name.leak(), // Leak String to &'static str
-            info.path.leak(), // Leak String to &'static str
+            r#"CrateInfo {{ name: "{}", path: "{}" }}"#, 
+            info.name,
+            info.path,
         ));
     }
 
     let serialized_data = format!(
-        "pub const CARGO_TREE_DATA: &[CrateInfo] = &[\n    {}\n]";
+        "pub const CARGO_TREE_DATA: &[CrateInfo] = &[\n    {}\n];",
         data_entries.join(",\n    ")
     );
 

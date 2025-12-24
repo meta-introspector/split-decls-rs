@@ -46,8 +46,8 @@ fn main() -> Result<()> {
 
     // Use cargo-tree-macro to get dependency information
     for crate_info in get_cargo_tree_data() {
-        existing_crates_to_wrap.insert(crate_info.name.clone());
-        existing_path_overrides.insert(crate_info.name.clone(), crate_info.path.clone());
+        existing_crates_to_wrap.insert(crate_info.name.to_string());
+        existing_path_overrides.insert(crate_info.name.to_string(), crate_info.path.to_string());
     }
 
     // Special handling for the current project itself
@@ -107,9 +107,5 @@ struct Args {
     /// Path to the split-decls-rs.toml configuration file to update
     #[clap(long)]
     split_decls_config_path: PathBuf,
-
-    /// The current project root (where split-decls-rs Cargo.toml is located)
-    #[clap(long)]
-    current_project_root: PathBuf,
 }
 

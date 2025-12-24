@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use std::fs;
 use std::path::{Path, PathBuf};
 use syn::visit::Visit;
-use syn::{Attribute, Ident, Item, ItemFn, Lit, Macro, PathSegment};
+use syn::{Attribute, Ident, Item, ItemFn, ItemMacro, Lit, Macro, Meta, PathSegment};
 use walkdir::WalkDir;
 
 /// Represents information about a single macro.
@@ -89,8 +89,10 @@ fn get_doc_comment(attrs: &[Attribute]) -> Option<String> {
     for attr in attrs {
         if attr.path().is_ident("doc") {
             if let Meta::NameValue(nv) = &attr.meta {
-                if let Lit::Str(lit_str) = &nv.value {
-                    doc_comments.push(lit_str.value().trim().to_string());
+                if let syn::Expr::Lit(expr_lit) = &nv.value {
+                    if let syn::Lit::Str(lit_str) = &expr_lit.lit {
+                        doc_comments.push(lit_str.value().trim().to_string());
+                    }
                 }
             }
         }
