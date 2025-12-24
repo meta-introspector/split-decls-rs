@@ -5,8 +5,9 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use toml::{self, Table, Value};
 use serde::{Deserialize, Serialize};
-use cargo_tree_macro::get_cargo_tree_data;
-use cargo_tree_macro::CrateInfo;
+//use cargo_tree_macro::get_cargo_tree_data;
+use split_decls_rs::crate_finder::CrateInfo;
+//use cargo_tree_macro::CrateInfo;
 
 
 // --- Structs for SplitDeclsConfig (from split-decls-types/src/lib.rs) ---
