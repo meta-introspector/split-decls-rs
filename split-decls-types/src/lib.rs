@@ -19,6 +19,12 @@ pub struct PatchSpec {
     pub git_reference: Option<String>,
 }
 
+#[derive(Debug, Default, Serialize, Deserialize, Clone)]
+pub struct WrappingConfig {
+    #[serde(default)]
+    pub crates: Vec<String>,
+}
+
 #[derive(Debug, Default, Serialize, Deserialize, Clone)] // Added Clone for easier handling in main.rs
 pub struct SplitDeclsConfig {
     /// A list of names for active overlay modules or features.
@@ -50,6 +56,9 @@ pub struct SplitDeclsConfig {
     /// Use this to fix issues with generated dependency paths or versions without recompiling.
     #[serde(default)]
     pub workspace_dependency_overrides: HashMap<String, toml::Value>,
+    /// Configuration for which crates to wrap.
+    #[serde(default)]
+    pub wrapping: WrappingConfig,
 }
 
 impl SplitDeclsConfig {

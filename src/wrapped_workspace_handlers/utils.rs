@@ -19,12 +19,19 @@ pub fn collect_and_format_workspace_dependencies(
         workspace_deps.insert(dep_name.clone(), dep_value.clone());
     }
 
-    // 2. Apply overrides from workspace_dependency_overrides
+    // 2. Add all wrapped crates as path dependencies
+    for crate_name in &global_config.wrapping.crates {
+        let mut dep_table = Table::new();
+        dep_table.insert("path".to_string(), Value::String(format!("wrapped-{}", crate_name)));
+        workspace_deps.insert(crate_name.clone(), Value::Table(dep_table));
+    }
+
+    // 3. Apply overrides from workspace_dependency_overrides
     for (dep_name, override_value) in &global_config.workspace_dependency_overrides {
         workspace_deps.insert(dep_name.clone(), override_value.clone());
     }
     
-    // 3. Add hardcoded introspector_decl2_macros if not already present
+    // 4. Add hardcoded introspector_decl2_macros if not already present
     let hardcoded_dep_name = "introspector_decl2_macros".to_string();
     if !workspace_deps.contains_key(&hardcoded_dep_name) {
         let mut hardcoded_dep_table = Table::new();
