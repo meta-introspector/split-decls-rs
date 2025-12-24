@@ -42,14 +42,24 @@ fn main() -> Result<()> {
     let current_project_root = cargo_metadata_lib_dir.parent() 
         .context("Could not get parent directory of cargo-metadata-lib")?.to_path_buf();
 
+    println!("DEBUG: cargo_metadata_lib_dir: {}", cargo_metadata_lib_dir.display());
+    println!("DEBUG: current_project_root (split-decls-rs): {}", current_project_root.display());
+
 
     for package in metadata.packages {
         // Only consider packages that are part of this workspace and have a local path
         if package.source.is_none() || package.source.unwrap().repr.starts_with("file://") {
             let package_path = PathBuf::from(package.manifest_path.parent().context("Package manifest path has no parent")?);
             
+            println!("DEBUG:   Processing package: {}", package.name);
+            println!("DEBUG:     package_path: {}", package_path.display());
+
             let relative_path = pathdiff::diff_paths(&package_path, &current_project_root)
-                .unwrap_or_else(|| package_path.clone());
+                .unwrap_or_else(|| {
+                    println!("DEBUG:     pathdiff::diff_paths failed for {} relative to {}", package_path.display(), current_project_root.display());
+                    package_path.clone()
+                });
+            println!("DEBUG:     calculated relative_path: {}", relative_path.display());
             
             crate_data_temp.push(TempCrateInfo {
                 name: package.name,

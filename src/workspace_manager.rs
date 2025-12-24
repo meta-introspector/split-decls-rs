@@ -4,6 +4,7 @@ use std::path::{Path, PathBuf};
 use std::fs;
 use tempfile::tempdir;
 use toml::Value;
+use crate::add_generated_header;
 //pub mod resolve_crate_path_in_submodule;
 //pub use  resolve_crate_path_in_submodule::*;
 pub use crate::resolve_crate_path_in_submodule::*;
@@ -82,12 +83,22 @@ pub fn manage_workspace_dependencies(root_cargo_toml_path: &Path, deps_to_add: &
     
     if dry_run {
         let new_path = root_cargo_toml_path.with_extension("new");
-        fs::write(&new_path, new_cargo_toml_content)
-            .context(format!("Failed to write new root Cargo.toml to {}", new_path.display()))?;
+        add_generated_header!(
+            &new_path,
+            new_cargo_toml_content.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write new root Cargo.toml to {}", new_path.display()))?;
         println!("Dry-run: Generated new root Cargo.toml content to {} for workspace.", new_path.display());
     } else {
-        fs::write(root_cargo_toml_path, new_cargo_toml_content)
-            .context(format!("Failed to write new root Cargo.toml to {}", root_cargo_toml_path.display()))?;
+        add_generated_header!(
+            root_cargo_toml_path,
+            new_cargo_toml_content.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write new root Cargo.toml to {}", root_cargo_toml_path.display()))?;
         println!("Successfully managed workspace dependencies in {}", root_cargo_toml_path.display());
     }
 
@@ -143,12 +154,22 @@ pub fn apply_workspace_package_defaults_to_root(root_cargo_toml_path: &Path, dry
     
     if dry_run {
         let new_path = root_cargo_toml_path.with_extension("new");
-        fs::write(&new_path, new_cargo_toml_content)
-            .context(format!("Failed to write new root Cargo.toml to {}", new_path.display()))?;
+        add_generated_header!(
+            &new_path,
+            new_cargo_toml_content.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write new root Cargo.toml to {}", new_path.display()))?;
         println!("Dry-run: Generated new root Cargo.toml content to {} for root package.", new_path.display());
     } else {
-        fs::write(root_cargo_toml_path, new_cargo_toml_content)
-            .context(format!("Failed to write new root Cargo.toml to {}", root_cargo_toml_path.display()))?;
+        add_generated_header!(
+            root_cargo_toml_path,
+            new_cargo_toml_content.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write new root Cargo.toml to {}", root_cargo_toml_path.display()))?;
         println!("Successfully applied workspace package defaults to root package in {}", root_cargo_toml_path.display());
     }
 

@@ -335,8 +335,13 @@ pub fn copy_declarations_to_output(
 
     for (decl_name, decl_tokens_str) in declarations {
         let file_path = crate_output_dir.join(format!("{}.rs", decl_name));
-        std::fs::write(&file_path, decl_tokens_str)
-            .context(format!("Failed to write declaration to {}", file_path.display()))?;
+        add_generated_rust_header!(
+            &file_path,
+            decl_tokens_str.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write declaration to {}", file_path.display()))?;
     }
     Ok(())
 }
@@ -407,8 +412,13 @@ pub use introspector_decl2_macros::*;
     fs::create_dir_all(output_lib_path.parent().unwrap())
         .context("Failed to create output src directory")?;
     
-    fs::write(&output_lib_path, new_lib_content)
-        .context(format!("Failed to write output lib.rs at {}", output_lib_path.display()))?;
+    add_generated_rust_header!(
+        &output_lib_path,
+        new_lib_content.as_str(),
+        file!(),
+        line!()
+    )
+    .context(format!("Failed to write output lib.rs at {}", output_lib_path.display()))?;
     
     println!("Generated output lib.rs at {}", output_lib_path.display());
     Ok(())
@@ -433,8 +443,13 @@ pub use introspector_decl2_macros::*;
     fs::create_dir_all(output_lib_path.parent().unwrap())
         .context(format!("Failed to create output src directory for lib.rs at {}", output_lib_path.display()))?;
 
-    fs::write(&output_lib_path, new_lib_content)
-        .context(format!("Failed to write new lib.rs at {}", output_lib_path.display()))?;
+    add_generated_rust_header!(
+        &output_lib_path,
+        new_lib_content.as_str(),
+        file!(),
+        line!()
+    )
+    .context(format!("Failed to write new lib.rs at {}", output_lib_path.display()))?;
     
     println!("Generated new lib.rs at {}", output_lib_path.display());
     Ok(())
@@ -460,8 +475,13 @@ fn main() -> Result<()> {{
     fs::create_dir_all(output_build_path.parent().unwrap())
         .context(format!("Failed to create output directory for build.rs at {}", output_build_path.display()))?;
 
-    fs::write(&output_build_path, build_content)
-        .context(format!("Failed to write new build.rs at {}", output_build_path.display()))?;
+    add_generated_rust_header!(
+        &output_build_path,
+        build_content.as_str(),
+        file!(),
+        line!()
+    )
+    .context(format!("Failed to write new build.rs at {}", output_build_path.display()))?;
     
     println!("Generated new build.rs at {}", output_build_path.display());
     Ok(())

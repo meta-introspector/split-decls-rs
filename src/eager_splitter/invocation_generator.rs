@@ -5,6 +5,7 @@ use std::fs;
 use syn::punctuated::Punctuated;
 
 use crate::paths::CratePaths;
+use crate::add_generated_rust_header;
 
 /// Generates the `_decl_module_invocation.rs` file, which contains the `decl_module!` macro invocation.
 pub fn generate_decl_module_invocation(
@@ -21,8 +22,13 @@ pub fn generate_decl_module_invocation(
 
     let decl_invocation_file_path = paths.decls_output_dir.join("_decl_module_invocation.rs");
     if !dry_run {
-        fs::write(&decl_invocation_file_path, final_decl_module_code.to_string())
-            .context("Failed to write _decl_module_invocation.rs")?;
+        add_generated_rust_header!(
+            &decl_invocation_file_path,
+            final_decl_module_code.to_string().as_str(),
+            file!(),
+            line!()
+        )
+        .context("Failed to write _decl_module_invocation.rs")?;
         println!(
             "Generated _decl_module_invocation.rs at {}",
             decl_invocation_file_path.display()

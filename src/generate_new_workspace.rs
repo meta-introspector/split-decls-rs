@@ -1,6 +1,7 @@
 use anyhow::{Context, Result};
 use std::fs;
 use std::path::{Path, PathBuf};
+use crate::add_generated_header;
 
 /// Generates a Cargo.toml for a new workspace root.
 /// Takes the output directory and a list of paths to the member crates.
@@ -32,11 +33,16 @@ pub fn generate_root_toml(
         );
         println!("{}", workspace_cargo_toml_content);
     } else {
-        fs::write(&workspace_cargo_toml_path, workspace_cargo_toml_content)
-            .context(format!(
-                "Failed to write Cargo.toml for new workspace: {}",
-                workspace_cargo_toml_path.display()
-            ))?;
+        add_generated_header!(
+            &workspace_cargo_toml_path,
+            workspace_cargo_toml_content.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!(
+            "Failed to write Cargo.toml for new workspace: {}",
+            workspace_cargo_toml_path.display()
+        ))?;
         println!(
             "Generated workspace Cargo.toml at: {}",
             workspace_cargo_toml_path.display()

@@ -1,3 +1,5 @@
+use crate::add_generated_header;
+
 /// Generates the new Cargo.toml for the crate, adding necessary build-dependencies.
 pub fn generate_new_cargotoml(paths: &CratePaths, global_config: &SplitDeclsConfig, original_crate_real_path: &Path, dry_run: bool) -> Result<()> {
     // List of dependencies that should use `workspace = true`
@@ -120,12 +122,22 @@ pub fn generate_new_cargotoml(paths: &CratePaths, global_config: &SplitDeclsConf
     
     if dry_run {
         let new_path = paths.cargo_toml_path.with_extension("new"); // Changed to .new
-        fs::write(&new_path, new_cargo_toml_content)
-            .context(format!("Failed to write new Cargo.toml to {}", new_path.display()))?;
+        add_generated_header!(
+            &new_path,
+            new_cargo_toml_content.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write new Cargo.toml to {}", new_path.display()))?;
         println!("Dry-run: Generated new Cargo.toml content to {} for crate {}", new_path.display(), paths.crate_name);
     } else {
-        fs::write(&paths.cargo_toml_path, new_cargo_toml_content)
-            .context(format!("Failed to write new Cargo.toml to {}", paths.cargo_toml_path.display()))?;
+        add_generated_header!(
+            &paths.cargo_toml_path,
+            new_cargo_toml_content.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write new Cargo.toml to {}", paths.cargo_toml_path.display()))?;
         println!("Generated new Cargo.toml for crate {}", paths.crate_name);
     }
 

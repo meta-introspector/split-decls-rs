@@ -5,6 +5,7 @@ use syn::{self, visit::Visit, visit_mut::VisitMut, Item, ItemUse};
 use proc_macro2::TokenStream;
 use quote::quote; // Required for quote! macro
 use std::collections::{HashMap, HashSet};
+use crate::add_generated_rust_header;
 
 // Helper to get the name of a syn::Item
 fn get_item_name(item: &Item) -> Option<String> {
@@ -127,8 +128,13 @@ pub fn split_lib_rs(
                     }.to_string();
                     decl_file_content.push_str(&wrapped_decl);
 
-                    fs::write(&output_file_path, decl_file_content)
-                        .context(format!("Failed to write declaration to {}", output_file_path.display()))?;
+                    add_generated_rust_header!(
+                        &output_file_path,
+                        decl_file_content.as_str(),
+                        file!(),
+                        line!()
+                    )
+                    .context(format!("Failed to write declaration to {}", output_file_path.display()))?;
                     println!("Extracted {} {} to {}", kind, name, output_file_path.display());
                     generated_decls_modules.push(name);
                 } else {
@@ -163,8 +169,13 @@ pub fn split_lib_rs(
     new_lib_rs_content.push_str("pub use decls::*;
 ");
 
-    fs::write(lib_rs_path, new_lib_rs_content)
-        .context(format!("Failed to write new lib.rs to {}", lib_rs_path.display()))?;
+    add_generated_rust_header!(
+        lib_rs_path,
+        new_lib_rs_content.as_str(),
+        file!(),
+        line!()
+    )
+    .context(format!("Failed to write new lib.rs to {}", lib_rs_path.display()))?;
     println!("Rewrote {} to a minimalist version.", lib_rs_path.display());
 
     Ok(())

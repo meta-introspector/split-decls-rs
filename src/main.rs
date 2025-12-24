@@ -121,7 +121,7 @@ fn run_wrapped_workspace_mode(
         println!("Patch config loaded: {:?}", patch_config);
     }
 
-    let current_dir_as_scan_root = PathBuf::from("./")
+    let current_dir_as_scan_root = PathBuf::from("./");
 
     let root_cargo_toml_content = if root_cargo_toml_path.exists() {
         fs::read_to_string(&root_cargo_toml_path)

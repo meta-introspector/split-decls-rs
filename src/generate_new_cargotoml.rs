@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 use anyhow::{Context, Result};
-use crate::paths::CratePaths; use crate::{CargoToml, process_dependency_table};
+use crate::paths::CratePaths; use crate::{CargoToml, process_dependency_table, add_generated_header};
 use split_decls_types::SplitDeclsConfig;
 use crate::patch_config;
 
@@ -115,12 +115,22 @@ pub fn generate_new_cargotoml(
     
     if dry_run {
         let new_path = output_cargo_toml_path.with_extension("new");
-        fs::write(&new_path, new_cargo_toml_content)
-            .context(format!("Failed to write new Cargo.toml to {}", new_path.display()))?;
+        add_generated_header!(
+            &new_path,
+            new_cargo_toml_content.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write new Cargo.toml to {}", new_path.display()))?;
         println!("Dry-run: Generated new Cargo.toml content to {} for crate {}", new_path.display(), crate_name);
     } else {
-        fs::write(output_cargo_toml_path, new_cargo_toml_content)
-            .context(format!("Failed to write new Cargo.toml to {}", output_cargo_toml_path.display()))?;
+        add_generated_header!(
+            output_cargo_toml_path,
+            new_cargo_toml_content.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write new Cargo.toml to {}", output_cargo_toml_path.display()))?;
         println!("Generated new Cargo.toml for crate {}", crate_name);
     }
 

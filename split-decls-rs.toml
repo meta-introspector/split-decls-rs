@@ -12,12 +12,14 @@ crates = [
     "anstyle",
     "anstyle-parse",
     "anstyle-query",
+    "anstyle-wincon",
     "anyhow",
     "arbitrary",
     "arc-swap",
     "arrayref",
     "arrayvec",
     "assert-impl",
+    "ast-decoder",
     "ast_parser_impl",
     "async-graphql",
     "async-graphql-derive",
@@ -29,11 +31,13 @@ crates = [
     "atomic-maybe-uninit",
     "autocfg",
     "autowrap_tool",
+    "auxiliary",
     "backtrace",
     "base-db",
     "base64",
     "base64ct",
     "bincode",
+    "bincode_derive",
     "bitflags",
     "blake3",
     "block-buffer",
@@ -48,17 +52,16 @@ crates = [
     "cargo-credential-libsecret",
     "cargo-credential-macos-keychain",
     "cargo-credential-wincred",
+    "cargo-edit-lib",
     "cargo-feature-adapter",
     "cargo-llm-bootstrap",
+    "cargo-metadata-lib",
     "cargo-platform",
     "cargo-repo-sync",
     "cargo-repo-sync-lib",
     "cargo-submodule-tool-lib",
     "cargo-test-macro",
     "cargo-test-support",
-    "cargo-toml-generator-macros",
-    "cargo-toml-generator-types",
-    "cargo-toml-parts",
     "cargo-util",
     "cargo-util-schemas",
     "cargo-workspace-from-tree",
@@ -70,6 +73,8 @@ crates = [
     "clap",
     "clap_builder",
     "clap_complete",
+    "clap_derive",
+    "clap_lex",
     "clru",
     "code-finder",
     "color-print",
@@ -84,9 +89,11 @@ crates = [
     "crates-io",
     "crc32fast",
     "criterion",
+    "criterion-plot",
     "crossbeam",
     "crossbeam-channel",
     "crossbeam-deque",
+    "crossbeam-epoch",
     "crossbeam-utils",
     "crosstermion",
     "crypto-bigint",
@@ -99,6 +106,7 @@ crates = [
     "dashmap",
     "defmac",
     "dep2submodule",
+    "derive_arbitrary",
     "detone",
     "digest",
     "dissimilar",
@@ -116,6 +124,7 @@ crates = [
     "erased-serde",
     "example_project",
     "expand_utils_lib",
+    "expand_utils_macros",
     "expand_utils_test",
     "expect-test",
     "factory_abi",
@@ -127,6 +136,7 @@ crates = [
     "fiat-crypto",
     "find-msvc-tools",
     "fixedbitset",
+    "fluent-bundle",
     "fluent-syntax",
     "fnv",
     "foldhash",
@@ -241,6 +251,7 @@ crates = [
     "human_format",
     "hyper",
     "iana-time-zone",
+    "iana-time-zone-haiku",
     "icu_normalizer",
     "icu_normalizer_data",
     "icu_properties",
@@ -251,6 +262,7 @@ crates = [
     "ide-db",
     "ide-diagnostics",
     "ide-ssr",
+    "idna",
     "im-rc",
     "imara-diff",
     "include-dir-macro",
@@ -309,6 +321,8 @@ crates = [
     "mkslop-core",
     "mkslop-macros",
     "mockall",
+    "mockall_derive",
+    "mockall_double",
     "monster-grouper",
     "monster_math_traits",
     "my_test_project",
@@ -326,7 +340,6 @@ crates = [
     "orion",
     "os_info",
     "p384",
-    "pagerank_rs",
     "parking_lot",
     "parking_lot_core",
     "parser",
@@ -334,21 +347,25 @@ crates = [
     "patch-build-rs-macros",
     "pathdiff",
     "paths",
+    "pest",
     "pest_derive",
     "pest_generator",
     "pest_meta",
     "petgraph",
     "pin-project-lite",
     "pin-utils",
+    "pipeline-traits",
     "potential_utf",
     "powerfmt-macros",
     "ppv-lite86",
+    "prelude-generator",
     "primeorder",
     "proc",
     "proc-macro-api",
     "proc-macro-srv",
     "proc-macro-srv-cli",
     "proc-macro2",
+    "proc_static_assertions",
     "prodash",
     "profile",
     "project-model",
@@ -357,13 +374,17 @@ crates = [
     "quote",
     "ra-ap-rustc_index",
     "rand",
+    "rand_pcg",
     "rand_xorshift",
     "rayon",
     "rayon-core",
+    "real-regex-adapter-lib",
+    "real-rules-test",
     "real_rules_test",
     "regex",
     "regex-automata",
     "regex-syntax",
+    "regex-test",
     "repl_server",
     "reqwest",
     "reson",
@@ -379,18 +400,28 @@ crates = [
     "rustc-stable-hash",
     "rustc_abi",
     "rustc_apfloat",
+    "rustc_arena",
     "rustc_ast",
     "rustc_ast_ir",
+    "rustc_ast_lowering",
+    "rustc_ast_passes",
     "rustc_ast_pretty",
     "rustc_attr_parsing",
+    "rustc_baked_icu_data",
+    "rustc_borrowck",
     "rustc_builtin_macros",
+    "rustc_codegen_llvm",
+    "rustc_codegen_ssa",
+    "rustc_const_eval",
     "rustc_data_structures",
     "rustc_driver",
     "rustc_driver_impl",
     "rustc_error_codes",
+    "rustc_error_messages",
     "rustc_errors",
     "rustc_expand",
     "rustc_expand_base_lib",
+    "rustc_expand_base_lib_custom_macros",
     "rustc_expand_base_lib_errors",
     "rustc_expand_base_lib_macros",
     "rustc_expand_base_lib_test_driver",
@@ -398,27 +429,58 @@ crates = [
     "rustc_expand_patches",
     "rustc_feature",
     "rustc_fluent_macro",
+    "rustc_fs_util",
+    "rustc_graphviz",
+    "rustc_hashes",
     "rustc_hir",
+    "rustc_hir_analysis",
     "rustc_hir_id",
+    "rustc_hir_pretty",
+    "rustc_hir_typeck",
+    "rustc_incremental",
     "rustc_index",
+    "rustc_index_macros",
     "rustc_infer",
     "rustc_interface",
     "rustc_lexer",
     "rustc_lint",
     "rustc_lint_defs",
+    "rustc_llvm",
+    "rustc_log",
     "rustc_macros",
+    "rustc_metadata",
     "rustc_middle",
+    "rustc_mir_build",
+    "rustc_mir_dataflow",
+    "rustc_mir_transform",
+    "rustc_monomorphize",
     "rustc_next_trait_solver",
     "rustc_parse",
     "rustc_parse_format",
+    "rustc_passes",
     "rustc_pattern_analysis",
+    "rustc_privacy",
+    "rustc_proc_macro",
+    "rustc_public",
+    "rustc_public_bridge",
+    "rustc_query_impl",
+    "rustc_query_system",
+    "rustc_resolve",
+    "rustc_sanitizers",
     "rustc_serialize",
     "rustc_session",
     "rustc_span",
+    "rustc_symbol_mangling",
+    "rustc_target",
+    "rustc_thread_pool",
     "rustc_tools_util",
     "rustc_trait_selection",
+    "rustc_traits",
     "rustc_transmute",
+    "rustc_ty_utils",
     "rustc_type_ir",
+    "rustc_type_ir_macros",
+    "rustc_windows_rc",
     "rustfix",
     "rustix",
     "rustmacrodoc",
@@ -432,12 +494,15 @@ crates = [
     "sec1",
     "secret-manager-rs",
     "semver",
+    "serde",
     "serde-value",
     "serde_core",
     "serde_derive",
     "serde_ignored",
+    "serde_json",
     "serde_spanned",
     "serial_test",
+    "serial_test_derive",
     "sha1",
     "sha1-checked",
     "sha2",
@@ -455,17 +520,19 @@ crates = [
     "smallvec",
     "smol_str",
     "snapbox",
+    "snapbox-macros",
     "socket2",
     "solfun_macros",
     "span",
     "split-decls-rs",
-    "split-decls-types",
+    "split-expanded-lib",
     "static_assertions",
     "stdx",
     "strsim",
     "supports-hyperlinks",
     "supports-unicode",
     "sval",
+    "sval_derive_macros",
     "syn",
     "syn-adapter-lib",
     "syn-codegen",
@@ -492,6 +559,7 @@ crates = [
     "tinyvec_macros",
     "tokio",
     "tokio-core",
+    "tokio-macros",
     "tokio-stream",
     "tokio-test",
     "tokio-util",
@@ -506,8 +574,12 @@ crates = [
     "tracing-attributes",
     "tracing-chrome",
     "tracing-core",
+    "tracing-futures",
     "tracing-log",
+    "tracing-mock",
+    "tracing-serde",
     "tracing-subscriber",
+    "tracing-test",
     "tracing-tower",
     "tracing-tree",
     "trait-fixer",
@@ -526,6 +598,7 @@ crates = [
     "trait-fixer-lang-items-mock",
     "trait-fixer-lang-items-real",
     "trait-fixer-lang-items-trait",
+    "trait-fixer-mocks-test",
     "trait-fixer-query-context-mock",
     "trait-fixer-query-context-real",
     "trait-fixer-query-context-trait",
@@ -555,6 +628,8 @@ crates = [
     "unicode-width",
     "unimacro_derive",
     "uuid",
+    "uuid-macro-internal",
+    "uuid-rng-internal",
     "version_check",
     "vfs",
     "vfs-notify",
@@ -591,6 +666,7 @@ crates = [
     "xz2",
     "yoke-derive",
     "zerocopy",
+    "zerocopy-derive",
     "zerofrom-derive",
     "zerovec-derive",
     "zip",
@@ -598,592 +674,674 @@ crates = [
 ]
 
 [crate_path_overrides]
-fallible-iterator = "submodules/rust-fallible-iterator"
-icu_normalizer = "submodules/icu4x/components/normalizer"
-rustc_expand_patches = "submodules/rust/compiler/rustc_expand_patches"
-itoa = "submodules/itoa"
-trait-fixer-query-context-real = "crates/trait-fixer-query-context-real"
-os_info = "submodules/os_info/os_info"
-base64 = "submodules/rust-base64"
-gix-refspec = "submodules/gitoxide/gix-refspec"
-gix-revision = "submodules/gitoxide/gix-revision"
-human_format = "submodules/human-format-rs"
-futures-util = "submodules/futures-rs/futures-util"
-project-model = "submodules/rust-analyzer/crates/project-model"
-introspector_macro_helpers = "../patch-build-rs/introspector_macro_helpers"
-rayon-core = "submodules/rayon/rayon-core"
-rustc_middle = "submodules/rust/compiler/rustc_middle"
-async-graphql-parser = "submodules/async-graphql/parser"
-windows-collections = "submodules/windows-rs/crates/libs/collections"
-getrandom = "submodules/getrandom"
-tinystr = "submodules/icu4x/utils/tinystr"
-rust-nix-bootstrap = "crates/rust-nix-bootstrap"
-loom = "submodules/loom"
-gix-status = "submodules/gitoxide/gix-status"
-libgit2-sys = "submodules/git2-rs/libgit2-sys"
-rustc_next_trait_solver = "submodules/rust/compiler/rustc_next_trait_solver"
-pasetors = "submodules/pasetors"
-rustc_tools_util = "submodules/rust/src/tools/clippy/rustc_tools_util"
-cargo-credential-libsecret = "submodules/cargo/credential/cargo-credential-libsecret"
-cargo-llm-bootstrap = "tools/cargo-llm-bootstrap"
-la-arena = "submodules/rust-analyzer/lib/la-arena"
-regex = "submodules/regex"
-windows_i686_msvc = "submodules/windows-rs/crates/targets/i686_msvc"
-generate_workspace_deps = "tools/generate_workspace_deps"
-odds = "submodules/odds"
-fastrand = "submodules/fastrand"
-gix-traverse = "submodules/gitoxide/gix-traverse"
-cargo-submodule-tool-lib = "tools/cargo-submodule-tool-lib"
-typesize = "submodules/typesize"
-cpufeatures = "submodules/utils/cpufeatures"
-quote = "submodules/quote"
-windows-services = "submodules/windows-rs/crates/libs/services"
-annotate-snippets = "submodules/annotate-snippets-rs"
-stdx = "submodules/rust-analyzer/crates/stdx"
-proc-macro2 = "../proc-macro2"
-nom = "submodules/nom"
-async-graphql = "submodules/async-graphql"
-syntax = "submodules/rust-analyzer/crates/syntax"
-libc = "submodules/libc"
-equivalent = "submodules/equivalent"
-unicode-bom = "submodules/unicode-bom"
-tempfile = "submodules/tempfile"
-cfg_aliases = "submodules/cfg_aliases"
-mbe = "submodules/rust-analyzer/crates/mbe"
-zlib-rs = "submodules/zlib-rs/zlib-rs"
-assert-impl = "submodules/assert-impl"
-smol_str = "submodules/rust-analyzer/lib/smol_str"
-arrayvec = "submodules/arrayvec"
-query-group-macro = "submodules/rust-analyzer/crates/query-group-macro"
-mkslop-macros = "../patch-build-rs/mkslop-macros"
-foldhash = "submodules/foldhash"
-gix-validate = "submodules/gitoxide/gix-validate"
-code-finder = "../patch-build-rs/code-finder"
-unicode-width = "submodules/unicode-width"
-line-index = "submodules/rust-analyzer/lib/line-index"
-cargo-toml-generator-types = "cargo-toml-generator-types"
 gix-actor = "submodules/gitoxide/gix-actor"
-windows-sys = "submodules/windows-rs/crates/libs/sys"
-parking_lot_core = "submodules/parking_lot/core"
-miniz_oxide = "submodules/miniz_oxide/miniz_oxide"
-adler2 = "submodules/adler2"
-windows-interface = "submodules/windows-rs/crates/libs/interface"
-text-size = "submodules/text-size"
-linux-raw-sys = "submodules/linux-raw-sys"
-rustc-demangle = "submodules/rustc-demangle"
-rustc_parse = "submodules/rust/compiler/rustc_parse"
-addr2line-bin = "crates/addr2line-bin"
-powerfmt-macros = "submodules/powerfmt/powerfmt-macros"
-futures-task = "submodules/futures-rs/futures-task"
-rust-src-scanner = "tools/rust-src-scanner"
-dot-parser = "submodules/dot-parser"
-expand_utils_test = "submodules/rust/compiler/expand_utils_test"
-trait-fixer-core-real = "crates/trait-fixer-core-real"
-futures-core = "submodules/futures-rs/futures-core"
-hex = "submodules/rust-hex"
-gix-fs = "submodules/gitoxide/gix-fs"
-include-dir-macro = "submodules/include-dir-macro-rs"
-hir = "submodules/rust-analyzer/crates/hir"
-gix-pack = "submodules/gitoxide/gix-pack"
-fnv = "submodules/rust-fnv"
-introspector_decl_common = "../patch-build-rs/introspector_decl_common"
-windows = "submodules/windows-rs/crates/libs/windows"
-windows-registry = "submodules/windows-rs/crates/libs/registry"
-toolchain = "submodules/rust-analyzer/crates/toolchain"
-trait-fixer-trait-checker-real = "crates/trait-fixer-trait-checker-real"
-gemini_rustc_data_structures = "submodules/rust/crates/gemini_rustc_data_structures"
-gix-bitmap = "submodules/gitoxide/gix-bitmap"
-rustc_infer = "submodules/rust/compiler/rustc_infer"
-test-utils = "submodules/rust-analyzer/crates/test-utils"
-aho_corasick = "submodules/aho-corasick"
-find-msvc-tools = "submodules/cc-rs/find-msvc-tools"
-colorchoice = "submodules/anstyle/crates/colorchoice"
-windows-numerics = "submodules/windows-rs/crates/libs/numerics"
-minimal-lexical = "submodules/minimal-lexical"
-zerofrom-derive = "submodules/icu4x/utils/zerofrom/derive"
-crypto-bigint = "submodules/crypto-bigint"
-trait-fixer-compiler-host-trait = "crates/trait-fixer-compiler-host-trait"
-gix-packetline = "submodules/gitoxide/gix-packetline"
-dep2submodule = "tools/dep2submodule"
-gix-filter = "submodules/gitoxide/gix-filter"
-gix-hashtable = "submodules/gitoxide/gix-hashtable"
-gix-lock = "submodules/gitoxide/gix-lock"
-gix-url = "submodules/gitoxide/gix-url"
-gix-hash = "submodules/gitoxide/gix-hash"
-icu_normalizer_data = "*"
-anyhow = "submodules/anyhow"
-icu_properties = "submodules/icu4x/components/properties"
-libnghttp2-sys = "submodules/nghttp2-rs"
-crossbeam-utils = "submodules/crossbeam/crossbeam-utils"
-parking_lot = "submodules/parking_lot"
-chrono = "submodules/chrono"
-futures = "submodules/futures-rs/futures"
-gix-ref = "submodules/gitoxide/gix-ref"
-pest_meta = "submodules/pest/meta"
-petgraph = "submodules/petgraph"
-pin-utils = "submodules/pin-utils"
-gix-note = "submodules/gitoxide/gix-note"
-defmac = "submodules/defmac"
-ra-ap-rustc_index = "submodules/rust/compiler/rustc_index"
-cargo-util = "submodules/cargo/crates/cargo-util"
-nohash-hasher = "submodules/nohash-hasher"
-rustc_parse_format = "submodules/rust/compiler/rustc_parse_format"
-gix-features = "submodules/gitoxide/gix-features"
-proc-macro-api = "submodules/rust-analyzer/crates/proc-macro-api"
-signature = "submodules/traits/signature"
-tracing = "submodules/tracing/tracing"
-rayon = "submodules/rayon"
-tracing-tower = "submodules/tracing/tracing-tower"
-load-cargo = "submodules/rust-analyzer/crates/load-cargo"
-aho-corasick = "submodules/aho-corasick"
-trait-fixer-attribute-reader-real = "crates/trait-fixer-attribute-reader-real"
-twox-hash = "submodules/twox-hash"
-windows-implement = "submodules/windows-rs/crates/libs/implement"
-rustc_session = "submodules/rust/compiler/rustc_session"
-fluent-syntax = "submodules/fluent-rs/fluent-syntax"
-fxhash = "submodules/fxhash"
-windows_i686_gnullvm = "submodules/windows-rs/crates/targets/i686_gnullvm"
-xattr = "submodules/xattr"
-dissimilar = "submodules/dissimilar"
-xz2 = "submodules/xz2-rs"
-thiserror = "submodules/thiserror"
-digest = "submodules/traits/digest"
-ed25519-compact = "submodules/rust-ed25519-compact"
-is_terminal_polyfill = "submodules/is_terminal_polyfill"
-hkdf = "submodules/KDFs/hkdf"
-windows-future = "submodules/windows-rs/crates/libs/future"
-windows_x86_64_msvc = "submodules/windows-rs/crates/targets/x86_64_msvc"
-crossbeam = "submodules/crossbeam"
-base64ct = "submodules/formats/base64ct"
-bstr = "submodules/bstr"
-erased-serde = "submodules/erased-serde"
-gix-fetchhead = "submodules/gitoxide/gix-fetchhead"
+heapless = "submodules/heapless"
+find-msvc-tools = "../cc-rs/find-msvc-tools"
+pin-utils = "../pin-utils"
+lib-matcher-loc = "../rust/compiler/lib-matcher-loc"
+rustc_proc_macro = "../rust/compiler/rustc_proc_macro"
+span = "submodules/rust-analyzer/crates/span"
 introspector_decl2_macros = "../patch-build-rs/introspector_decl2_macros"
-rustc_span = "submodules/rust/compiler/rustc_span"
-same-file = "submodules/same-file"
-gix-dir = "submodules/gitoxide/gix-dir"
-pin-project-lite = "submodules/pin-project-lite"
+tracing-test = "../tracing/tracing-test"
+rustc_type_ir_macros = "../rust/compiler/rustc_type_ir_macros"
+atoi = "*"
+trait-fixer-attribute-reader-real = "../../crates/trait-fixer-attribute-reader-real"
+gix-lock = "submodules/gitoxide/gix-lock"
+rustc_expand_base_lib_macros = "../rust/compiler/rustc_expand_base_lib_macros"
+trait-fixer-attribute-reader-mock = "../../crates/trait-fixer-attribute-reader-mock"
+rustc_lint_defs = "../rust/compiler/rustc_lint_defs"
+hyper = "../hyper"
+windows-registry = "../windows-rs/crates/libs/registry"
+thin-vec = "../thin-vec"
+fluent-bundle = "../fluent-rs/fluent-bundle"
+cvs-macro-lib = "../rust/crates/cvs-macro-lib"
+generic-array = "submodules/generic-array"
+cargo_metadata = "../cargo_metadata"
+code-finder = "../patch-build-rs/code-finder"
+bitflags = "../bitflags"
+globwalk = "../globwalk"
+derive_arbitrary = "../arbitrary/derive"
+hir-ty = "submodules/rust-analyzer/crates/hir-ty"
+erased-serde = "../erased-serde"
+crc32fast = "../rust-crc32fast"
+factory_abi = "../../crates/factory_abi"
+secret-manager-rs = "../../tools/secret-manager-rs"
+iana-time-zone = "../iana-time-zone"
+rustc_index_macros = "../rust/compiler/rustc_index_macros"
+tokio-test = "../tokio/tokio-test"
+rand_pcg = "../rand/rand_pcg"
+rustc_expand = "../rust/compiler/rustc_expand"
+rustc_query_system = "../rust/compiler/rustc_query_system"
+salsa = "submodules/salsa"
+test-fixture = "submodules/rust-analyzer/crates/test-fixture"
+ast-decoder = "../../tools/rust-bootstrap-nix/ast-decoder"
+librocksdb-sys = "../rocksdb/librocksdb-sys"
+faster-hex = "../faster-hex"
+aho-corasick = "../aho-corasick"
+blocking = "../blocking"
+base-db = "submodules/rust-analyzer/crates/base-db"
+const-oid = "../formats/const-oid"
+clru = "submodules/clru-rs"
+git2-curl = "submodules/git2-rs/git2-curl"
+gix-date = "submodules/gitoxide/gix-date"
+gix-revwalk = "submodules/gitoxide/gix-revwalk"
+digest = "../traits/digest"
+rustc_middle = "../rust/compiler/rustc_middle"
+syn-codegen = "submodules/syn/json"
+tracing-attributes = "../tracing/tracing-attributes"
+trait-fixer-lang-items-trait = "../../crates/trait-fixer-lang-items-trait"
+async-graphql = "submodules/async-graphql"
+paths = "submodules/rust-analyzer/crates/paths"
+rustc_hir_id = "../rust/compiler/rustc_hir_id"
+gix-url = "submodules/gitoxide/gix-url"
+sha1 = "../hashes/sha1"
+fiat-crypto = "submodules/fiat-crypto/fiat-rust"
+futures-sink = "../futures-rs/futures-sink"
+hmac = "submodules/MACs/hmac"
+rustc_llvm = "../rust/compiler/rustc_llvm"
+typesize = "submodules/typesize"
+auxiliary = "../addr2line/tests/auxiliary"
+crosstermion = "submodules/crosstermion"
+rust-src-scanner = "../../tools/rust-src-scanner"
+unicode-ident = "../unicode-ident"
+byteorder = "../byteorder"
+load-cargo = "submodules/rust-analyzer/crates/load-cargo"
+cargo-workspace-from-tree = "../../tools/cargo-workspace-from-tree"
+graph-petal-generator = "../../tools/graph-petal-generator"
+tinystr = "../icu4x/utils/tinystr"
+either = "../either"
+trait-fixer-query-context-trait = "../../crates/trait-fixer-query-context-trait"
+hir-def = "submodules/rust-analyzer/crates/hir-def"
+rustc_hashes = "../rust/compiler/rustc_hashes"
+serial_test_derive = "../serial_test/serial_test_derive"
+windows-metadata = "submodules/windows-rs/crates/libs/metadata"
+mkslop-core = "../patch-build-rs/mkslop-core"
+reqwest = "../reqwest"
+xz2 = "submodules/xz2-rs"
+serde_ignored = "submodules/serde-ignored"
+curl = "submodules/curl-rust"
+cargo-test-macro = "submodules/cargo/crates/cargo-test-macro"
+rustc_borrowck = "../rust/compiler/rustc_borrowck"
+gix-prompt = "submodules/gitoxide/gix-prompt"
+pest_meta = "../pest/meta"
+num-conv = "submodules/num-conv"
+gix-tui = "submodules/gitoxide/gix-tui"
+rustc_apfloat = "../rustc_apfloat"
+opener = "submodules/opener/opener"
+quote = "../quote"
+assert-impl = "../assert-impl"
+rfc6979 = "submodules/signatures/rfc6979"
+rustc_macros = "../rust/compiler/rustc_macros"
+cargo-credential-libsecret = "submodules/cargo/credential/cargo-credential-libsecret"
+rustc_arena = "../rust/compiler/rustc_arena"
+rustc_resolve = "../rust/compiler/rustc_resolve"
+anstyle = "../anstyle/crates/anstyle"
+cpp_demangle = "../cpp_demangle"
+rustc_driver = "../rust/compiler/rustc_driver"
+uuid = "../uuid"
+windows-future = "submodules/windows-rs/crates/libs/future"
+tracing = "../tracing/tracing"
+is_terminal_polyfill = "../is_terminal_polyfill"
+is-terminal = "submodules/is-terminal"
+real-rules-test = "../../tests/real_rules_test"
+signal-hook-registry = "../signal-hook/signal-hook-registry"
+stdx = "submodules/rust-analyzer/crates/stdx"
+mockall = "../mockall/mockall"
+cargo-util-schemas = "submodules/cargo/crates/cargo-util-schemas"
+unicode-width = "../unicode-width"
+crossbeam-deque = "../crossbeam/crossbeam-deque"
+trait-fixer-compiler-host-real = "../../crates/trait-fixer-compiler-host-real"
+windows-link = "../windows-rs/crates/libs/link"
+proc-macro-api = "submodules/rust-analyzer/crates/proc-macro-api"
+trait-fixer-mocks-test = "../../tests/trait_fixer_mocks"
+toolchain = "submodules/rust-analyzer/crates/toolchain"
+windows_x86_64_gnu = "../windows-rs/crates/targets/x86_64_gnu"
+pathdiff = "../pathdiff"
+libgit2-sys = "../git2-rs/libgit2-sys"
+rustc_hir_typeck = "../rust/compiler/rustc_hir_typeck"
+rustc_expand_base_lib = "../rust/compiler/rustc_expand_base_lib"
+ct-codecs = "submodules/rust-ct-codecs"
+real-regex-adapter-lib = "../../tools/real-regex-adapter-lib"
+cfg_aliases = "../cfg_aliases"
+memoffset = "../memoffset"
+rusqlite = "submodules/rusqlite"
+dot-parser = "../dot-parser"
+anstyle-query = "../anstyle/crates/anstyle-query"
+query-group-macro = "submodules/rust-analyzer/crates/query-group-macro"
+cargo-edit-lib = "../../tools/cargo-edit-lib"
+repl_server = "../../repl_server"
+rustc_ast_pretty = "../rust/compiler/rustc_ast_pretty"
+rustc_lint = "../rust/compiler/rustc_lint"
+split-expanded-lib = "../../tools/rust-bootstrap-nix/split-expanded-lib"
+tinyvec_macros = "../tinyvec_macros"
+regex = "../regex"
+gix-commitgraph = "submodules/gitoxide/gix-commitgraph"
+temp-dir = "submodules/temp-dir/temp-dir"
+rayon = "../rayon"
+criterion-plot = "../criterion/plot"
+lzma-rust2 = "submodules/lzma-rust2"
+ide-db = "submodules/rust-analyzer/crates/ide-db"
+rustc_thread_pool = "../rust/compiler/rustc_thread_pool"
+base64 = "../rust-base64"
+dashmap = "submodules/dashmap"
+gix-odb = "submodules/gitoxide/gix-odb"
+expand_utils_lib = "submodules/rust/compiler/expand_utils_lib"
+nix = "../nix"
+rustversion = "../rustversion"
+cargo-toml-generator-types = "cargo-toml-generator-types"
+rustc_pattern_analysis = "../rust/compiler/rustc_pattern_analysis"
+orion = "submodules/orion"
+gix-hash = "submodules/gitoxide/gix-hash"
+cvs-macro-test-crate = "../rust/crates/cvs-macro-test-crate"
+crossbeam-channel = "../crossbeam/crossbeam-channel"
+async-std = "../async-std"
+gix-refspec = "submodules/gitoxide/gix-refspec"
+itoa = "../itoa"
+gix = "submodules/gitoxide/gix"
+futures-concurrency = "../futures-concurrency"
+rustc_traits = "../rust/compiler/rustc_traits"
+signal-hook = "../signal-hook"
+anstyle-parse = "../anstyle/crates/anstyle-parse"
+clap_lex = "../clap/clap_lex"
+gix-tempfile = "submodules/gitoxide/gix-tempfile"
+unicode-bom = "submodules/unicode-bom"
+vfs = "submodules/rust-analyzer/crates/vfs"
+trait-fixer = "../../tools/trait-fixer"
+clap_builder = "../clap/clap_builder"
+hashlink = "submodules/hashlink"
+line-index = "submodules/rust-analyzer/lib/line-index"
+rustc_passes = "../rust/compiler/rustc_passes"
+gix-quote = "submodules/gitoxide/gix-quote"
+gix-validate = "submodules/gitoxide/gix-validate"
+libloading = "../rust_libloading"
+syntax-bridge = "submodules/rust-analyzer/crates/syntax-bridge"
+gix-hashtable = "submodules/gitoxide/gix-hashtable"
+gix-pathspec = "submodules/gitoxide/gix-pathspec"
+sha2 = "../hashes/sha2"
+tokio = "../tokio/tokio"
+gix-fs = "submodules/gitoxide/gix-fs"
+signal-hook-async-std = "submodules/signal-hook/signal-hook-async-std"
+futures-lite = "../futures-lite"
+include-dir-macro = "../include-dir-macro-rs"
+cfg-if = "../cfg-if"
+oorandom = "../oorandom"
+bytes = "../bytes"
+chrono = "../chrono"
+colorchoice = "../anstyle/crates/colorchoice"
+gix-testtools = "submodules/gitoxide/tests/tools"
+serde_derive = "../serde/serde_derive"
+static_assertions = "../static-assertions-rs"
+trait-fixer-compiler-host-trait = "../../crates/trait-fixer-compiler-host-trait"
+fallible-iterator = "../rust-fallible-iterator"
+gix-tix = "submodules/gitoxide/gix-tix"
+text-size = "../text-size"
+bstr = "../bstr"
+gix-macros = "submodules/gitoxide/gix-macros"
+crossbeam = "submodules/crossbeam"
+futures-executor = "../futures-rs/futures-executor"
+rustc_metadata = "../rust/compiler/rustc_metadata"
+snapbox = "../snapbox/crates/snapbox"
+tokio-macros = "../tokio/tokio-macros"
+wasm_sync = "../wasm_sync"
+tool-traits-lib = "../../tools/tool-traits-lib"
+windows-version = "submodules/windows-rs/crates/libs/version"
+rustc_abi = "../rust/compiler/rustc_abi"
+litemap = "../icu4x/utils/litemap"
+gix-credentials = "submodules/gitoxide/gix-credentials"
+windows-services = "submodules/windows-rs/crates/libs/services"
+cfg = "submodules/rust-analyzer/crates/cfg"
+dot-parser-macros = "../dot-parser/macros"
+rustc_monomorphize = "../rust/compiler/rustc_monomorphize"
+snapbox-macros = "../snapbox/crates/snapbox-macros"
+ide-assists = "submodules/rust-analyzer/crates/ide-assists"
+cargo-credential = "submodules/cargo/credential/cargo-credential"
+bincode = "../bincode"
+fxhash = "../fxhash"
+rayon-core = "../rayon/rayon-core"
+trait-fixer-lang-items-mock = "../../crates/trait-fixer-lang-items-mock"
+async-graphql-value = "submodules/async-graphql/value"
+gix-utils = "submodules/gitoxide/gix-utils"
+gix-packetline = "submodules/gitoxide/gix-packetline"
+addr2line = "../addr2line"
+rust-nix-bootstrap = "../../crates/rust-nix-bootstrap"
+futures-test = "../futures-rs/futures-test"
+uluru = "submodules/uluru"
+colorify = "submodules/colorify"
+solfun_macros = "../patch-build-rs/solfun_macros"
+miniz_oxide = "../miniz_oxide/miniz_oxide"
+la-arena = "submodules/rust-analyzer/lib/la-arena"
+rustc_symbol_mangling = "../rust/compiler/rustc_symbol_mangling"
+rustc_windows_rc = "../rust/compiler/rustc_windows_rc"
+sharded-slab = "../sharded-slab"
+smallvec = "../rust-smallvec"
+real_rules_test = "tests/real_rules_test"
+rustc_mir_build = "../rust/compiler/rustc_mir_build"
+rustc_expand_base_lib_custom_macros = "../rust/compiler/rustc_expand_base_lib_custom_macros"
+expand_utils_macros = "../rust/compiler/expand_utils_macros"
+cargo-llm-bootstrap = "../../tools/cargo-llm-bootstrap"
+proc_static_assertions = "../static-assertions-rs/proc"
+rustc_next_trait_solver = "../rust/compiler/rustc_next_trait_solver"
+rustc_parse = "../rust/compiler/rustc_parse"
+gix-config = "submodules/gitoxide/gix-config"
+rustc_public_bridge = "../rust/compiler/rustc_public_bridge"
+ryu = "../ryu"
+itertools = "../itertools"
+libz-rs-sys = "submodules/zlib-rs/libz-rs-sys"
+ruzstd = "../zstd-rs/ruzstd"
+twox-hash = "../twox-hash"
+serde-value = "submodules/serde-value"
+clap_derive = "../clap/clap_derive"
+trait-fixer-attribute-reader-trait = "../../crates/trait-fixer-attribute-reader-trait"
+arrayref = "../arrayref"
+curl-sys = "submodules/curl-rust/curl-sys"
+gix-fetchhead = "submodules/gitoxide/gix-fetchhead"
+introspector_core = "../rust/compiler/introspector/core"
+signature = "submodules/traits/signature"
+tracing-tree = "../tracing-tree"
+glob = "../glob"
+crypto-bigint = "submodules/crypto-bigint"
+toml_datetime = "../toml/crates/toml_datetime"
+tokio-stream = "../tokio/tokio-stream"
+clap = "../clap"
+rowan = "../rowan"
+ide = "submodules/rust-analyzer/crates/ide"
+futures-io = "../futures-rs/futures-io"
+mockall_derive = "../mockall/mockall_derive"
+shebling_macros = "../patch-build-rs/shebling_macros"
+nu-ansi-term = "../nu-ansi-term"
+cpufeatures = "submodules/utils/cpufeatures"
+signal-hook-tokio = "submodules/signal-hook/signal-hook-tokio"
 introspector_decl_core = "../patch-build-rs/introspector_decl_core"
-snapbox = "submodules/snapbox/crates/snapbox"
-oorandom = "submodules/oorandom"
-gix-fsck = "submodules/gitoxide/gix-fsck"
-tokio-core = "submodules/tokio-core"
-primeorder = "submodules/elliptic-curves/primeorder"
+gix-worktree = "submodules/gitoxide/gix-worktree"
+typenum = "../typenum"
+trait-fixer-rules-trait = "../../crates/trait-fixer-rules-trait"
 cargo-credential-wincred = "submodules/cargo/credential/cargo-credential-wincred"
-gix-rebase = "submodules/gitoxide/gix-rebase"
-memmap2 = "submodules/memmap2-rs"
-rustc_macros = "submodules/rust/compiler/rustc_macros"
-tokio-test = "submodules/tokio/tokio-test"
+futures-util = "../futures-rs/futures-util"
+serde_json = "../json"
+sval_derive_macros = "../sval/derive_macros"
+im-rc = "submodules/im-rs/rc"
+rustc_tools_util = "../rust/src/tools/clippy/rustc_tools_util"
+trait-fixer-trait-checker-trait = "../../crates/trait-fixer-trait-checker-trait"
+crates-io = "submodules/cargo/crates/crates-io"
+rustc_parse_format = "../rust/compiler/rustc_parse_format"
+arc-swap = "submodules/arc-swap"
+lazy_static = "../lazy-static"
+mockall_double = "../mockall/mockall_double"
+md-5 = "submodules/hashes/md5"
+potential_utf = "../icu4x/utils/potential_utf"
+profile = "submodules/rust-analyzer/crates/profile"
+windows_aarch64_msvc = "../windows-rs/crates/targets/aarch64_msvc"
+same-file = "../same-file"
+yoke-derive = "../icu4x/utils/yoke/derive"
+equivalent = "../equivalent"
+zlib-rs = "submodules/zlib-rs/zlib-rs"
+test_macros_app = "../patch-build-rs/test_macros_app"
+pest_derive = "../pest/derive"
+cargo-credential-macos-keychain = "submodules/cargo/credential/cargo-credential-macos-keychain"
+gix-filter = "submodules/gitoxide/gix-filter"
+rustc_public = "../rust/compiler/rustc_public"
+pasetors = "submodules/pasetors"
+unimacro_derive = "test_crates/unimacro_derive"
+regex-test = "../regex/regex-test"
+serde_core = "../serde/serde_core"
+gix-path = "submodules/gitoxide/gix-path"
+tera = "../tera"
+rocksdb = "../rocksdb"
+windows-implement = "../windows-rs/crates/libs/implement"
+rustc_errors = "../rust/compiler/rustc_errors"
+workspace-merge = "workspace-merge"
+trait-fixer-core-trait = "../../crates/trait-fixer-core-trait"
+camino = "../camino"
+fastrand = "../fastrand"
+rustc_const_eval = "../rust/compiler/rustc_const_eval"
+generate_workspace_deps = "../../tools/generate_workspace_deps"
+fs_extra = "../fs_extra"
+gix-lfs = "submodules/gitoxide/gix-lfs"
+nom = "submodules/nom"
+signal-hook-mio = "submodules/signal-hook/signal-hook-mio"
+syn-adapter-lib = "../../tools/syn-adapter-lib"
+parking_lot_core = "../parking_lot/core"
+tracing-log = "../tracing/tracing-log"
+getrandom = "../getrandom"
+gix-note = "submodules/gitoxide/gix-note"
+rustc-demangle = "../rustc-demangle"
+rustc_expand_base_lib_test_driver = "../rust/compiler/rustc_expand_base_lib_test_driver"
+expect-test = "../expect-test"
+macrotest = "../macrotest"
+tracing-serde = "../tracing/tracing-serde"
+pagerank_rs = "submodules/pagerank_rs"
+io-uring = "../io-uring"
+criterion = "../criterion"
+cargo-platform = "../cargo/crates/cargo-platform"
+gix-config-value = "submodules/gitoxide/gix-config-value"
+rustc_type_ir = "../rust/compiler/rustc_type_ir"
+backtrace = "../backtrace-rs"
+lsp-server = "submodules/rust-analyzer/lib/lsp-server"
+pest = "../pest/pest"
+rustc_mir_dataflow = "../rust/compiler/rustc_mir_dataflow"
+pipeline-traits = "../../tools/rust-bootstrap-nix/pipeline-traits"
+gix-negotiate = "submodules/gitoxide/gix-negotiate"
+trait-fixer-rules-mock = "../../crates/trait-fixer-rules-mock"
+trait-fixer-rules-real = "../../crates/trait-fixer-rules-real"
+cargo-repo-sync = "../../tools/cargo-repo-sync"
+gix-chunk = "submodules/gitoxide/gix-chunk"
+windows_aarch64_gnullvm = "../windows-rs/crates/targets/aarch64_gnullvm"
+aho_corasick = "submodules/aho-corasick"
+windows_i686_gnullvm = "../windows-rs/crates/targets/i686_gnullvm"
+proc = "submodules/static-assertions-rs/proc"
+supports-unicode = "submodules/supports-unicode"
+toml_edit = "../toml/crates/toml_edit"
+color-print = "../color-print/color-print"
+rustc_incremental = "../rust/compiler/rustc_incremental"
+hkdf = "submodules/KDFs/hkdf"
+project-model = "submodules/rust-analyzer/crates/project-model"
+rustc_graphviz = "../rust/compiler/rustc_graphviz"
+vfs-notify = "submodules/rust-analyzer/crates/vfs-notify"
+futures-task = "../futures-rs/futures-task"
+terminal_size = "../terminal-size"
+type-reporter = "../../tools/type-reporter"
+trait-fixer-query-context-mock = "../../crates/trait-fixer-query-context-mock"
+iana-time-zone-haiku = "../iana-time-zone/haiku"
+intl-memoizer = "../fluent-rs/intl-memoizer"
+lib-token-tree = "../rust/compiler/lib-token-tree"
+defmac = "../defmac"
+gix-archive = "submodules/gitoxide/gix-archive"
+powerfmt-macros = "submodules/powerfmt/powerfmt-macros"
+libnghttp2-sys = "submodules/nghttp2-rs"
+crossbeam-utils = "../crossbeam/crossbeam-utils"
+gix-dir = "submodules/gitoxide/gix-dir"
+trait-fixer-hir-info-trait = "../../crates/trait-fixer-hir-info-trait"
+macros = "submodules/rust-analyzer/crates/macros"
+windows = "submodules/windows-rs/crates/libs/windows"
+cargo = "submodules/cargo"
+socket2 = "../socket2"
+base64ct = "submodules/formats/base64ct"
+regex-automata = "../regex/regex-automata"
+addr2line-bin = "../../crates/addr2line-bin"
+rustc_infer = "../rust/compiler/rustc_infer"
+rustfix = "submodules/cargo/crates/rustfix"
+cargo-toml-parts = "build_helpers/cargo_toml_parts"
+gix-sequencer = "submodules/gitoxide/gix-sequencer"
+serde_spanned = "../toml/crates/serde_spanned"
+gix-traverse = "submodules/gitoxide/gix-traverse"
+futures-macro = "../futures-rs/futures-macro"
+imara-diff = "submodules/imara-diff"
+rustc_interface = "../rust/compiler/rustc_interface"
+icu_properties_data = "submodules/icu4x/provider/data/properties"
+windows-collections = "submodules/windows-rs/crates/libs/collections"
+rustc_ast_passes = "../rust/compiler/rustc_ast_passes"
 edition = "submodules/rust-analyzer/crates/edition"
 is_executable = "submodules/is_executable"
-tt = "submodules/rust-analyzer/crates/tt"
-trait-fixer-attribute-reader-trait = "crates/trait-fixer-attribute-reader-trait"
-ide-completion = "submodules/rust-analyzer/crates/ide-completion"
-ryu = "submodules/ryu"
-gix-index = "submodules/gitoxide/gix-index"
-anstyle-query = "submodules/anstyle/crates/anstyle-query"
-icu_properties_data = "submodules/icu4x/provider/data/properties"
-rustc-hash = "submodules/rustc-hash"
-toml_writer = "submodules/toml/crates/toml_writer"
-clap = "submodules/clap"
-zip = "submodules/zip2"
-gix-macros = "submodules/gitoxide/gix-macros"
-signal-hook-async-std = "submodules/signal-hook/signal-hook-async-std"
-signal-hook-mio = "submodules/signal-hook/signal-hook-mio"
-gix-ignore = "submodules/gitoxide/gix-ignore"
-reqwest = "submodules/reqwest"
-uluru = "submodules/uluru"
-rustc_ast_pretty = "submodules/rust/compiler/rustc_ast_pretty"
-tracing-chrome = "submodules/tracing-chrome"
-rustc-stable-hash = "submodules/rustc-stable-hash"
-type-reporter = "tools/type-reporter"
-grast_cli = "../patch-build-rs/grast_cli"
-rand_xorshift = "submodules/rngs/rand_xorshift"
-gix-command = "submodules/gitoxide/gix-command"
-color-print = "submodules/color-print/color-print"
-blake3 = "submodules/BLAKE3"
-librocksdb-sys = "submodules/rocksdb/librocksdb-sys"
-lib-macro-rule = "submodules/rust/compiler/lib-macro-rule"
-either = "submodules/either"
-cargo = "submodules/cargo"
-cargo-feature-adapter = "tools/cargo-feature-adapter"
-rustc_error_codes = "submodules/rust/compiler/rustc_error_codes"
-trait-fixer-rules-real = "crates/trait-fixer-rules-real"
-bitflags = "submodules/bitflags"
-cargo-platform = "submodules/cargo/crates/cargo-platform"
-trait-fixer-query-context-mock = "crates/trait-fixer-query-context-mock"
-gix-submodule = "submodules/gitoxide/gix-submodule"
-mkslop-core = "../patch-build-rs/mkslop-core"
-ticket_data_generator = "ticket_data_generator"
-windows-targets = "submodules/rust/library/windows_targets"
-curl-sys = "submodules/curl-rust/curl-sys"
-pathdiff = "submodules/pathdiff"
-windows_i686_gnu = "submodules/windows-rs/crates/targets/i686_gnu"
-toml_edit = "submodules/toml/crates/toml_edit"
-proc = "submodules/static-assertions-rs/proc"
-gix-date = "submodules/gitoxide/gix-date"
-rand = "submodules/rand"
-static_assertions = "submodules/static-assertions-rs"
-ruzstd = "submodules/zstd-rs/ruzstd"
-windows_x86_64_gnullvm = "submodules/windows-rs/crates/targets/x86_64_gnullvm"
-curl = "submodules/curl-rust"
-rustc_data_structures = "submodules/rust/compiler/rustc_data_structures"
-ct-codecs = "submodules/rust-ct-codecs"
-futures-macro = "submodules/futures-rs/futures-macro"
-backtrace = "submodules/backtrace-rs"
-rustc_expand_base_lib = "submodules/rust/compiler/rustc_expand_base_lib"
-gix-pathspec = "submodules/gitoxide/gix-pathspec"
-rustc_expand_base_lib_test_driver = "submodules/rust/compiler/rustc_expand_base_lib_test_driver"
-trait-fixer-trait-checker-trait = "crates/trait-fixer-trait-checker-trait"
-dot-parser-macros = "submodules/dot-parser/macros"
-gix-object = "submodules/gitoxide/gix-object"
-tokio-stream = "submodules/tokio/tokio-stream"
-trait-fixer-trait-checker-mock = "crates/trait-fixer-trait-checker-mock"
-wasm_sync = "submodules/wasm_sync"
-cargo-repo-sync = "tools/cargo-repo-sync"
-crossbeam-deque = "submodules/crossbeam/crossbeam-deque"
-salsa = "submodules/salsa"
-solfun_macros = "../patch-build-rs/solfun_macros"
-arbitrary = "submodules/arbitrary"
-cfg-if = "submodules/cfg-if"
-feature-permutation-builder = "tools/feature-permutation-builder"
-rustc_driver_impl = "submodules/rust/compiler/rustc_driver_impl"
-serde_ignored = "submodules/serde-ignored"
-p384 = "submodules/elliptic-curves/p384"
-maybe-async = "submodules/maybe-async-rs"
-pest_generator = "submodules/pest/generator"
-detone = "*"
-base-db = "submodules/rust-analyzer/crates/base-db"
-core = "submodules/rust/compiler/introspector/core"
-rustc-literal-escaper = "submodules/rustc-literal-escaper"
-rustc_index = "submodules/rust/compiler/rustc_index"
-split-decls-rs = "."
-test_macros_app = "../patch-build-rs/test_macros_app"
-vfs-notify = "submodules/rust-analyzer/crates/vfs-notify"
-opener = "submodules/opener/opener"
-uuid = "submodules/uuid"
-hashlink = "submodules/hashlink"
-is-terminal = "submodules/is-terminal"
-rustc_driver = "submodules/rust/compiler/rustc_driver"
-pest_derive = "submodules/pest/derive"
-hir-ty = "submodules/rust-analyzer/crates/hir-ty"
-trait-fixer-lang-items-trait = "crates/trait-fixer-lang-items-trait"
-rustc_transmute = "submodules/rust/compiler/rustc_transmute"
-windows-strings = "submodules/windows-rs/crates/libs/strings"
-num-conv = "submodules/num-conv"
-temp-env = "submodules/temp-env"
-syn = "submodules/syn"
-im-rc = "submodules/im-rs/rc"
-trait-fixer-core-mock = "crates/trait-fixer-core-mock"
-gix-quote = "submodules/gitoxide/gix-quote"
-io-uring = "submodules/io-uring"
-signal-hook-tokio = "submodules/signal-hook/signal-hook-tokio"
-block-buffer = "submodules/utils/block-buffer"
-itertools = "submodules/itertools"
-document-features = "submodules/document-features"
-patch-build-rs-macros = "../patch-build-rs/patch-build-rs-macros"
-repl_server = "repl_server"
-rustc_hir_id = "submodules/rust/compiler/rustc_hir_id"
-serial_test = "submodules/serial_test/serial_test"
-trait-fixer-lang-items-real = "crates/trait-fixer-lang-items-real"
-futures-sink = "submodules/futures-rs/futures-sink"
-ide = "submodules/rust-analyzer/crates/ide"
-ecdsa = "submodules/signatures/ecdsa"
-regex-automata = "submodules/regex/regex-automata"
-gix-protocol = "submodules/gitoxide/gix-protocol"
-gix-prompt = "submodules/gitoxide/gix-prompt"
-gix-diff = "submodules/gitoxide/gix-diff"
-windows-link = "submodules/windows-rs/crates/libs/link"
-sec1 = "submodules/formats/sec1"
-rustc_expand_meta_macros = "submodules/rust/compiler/rustc_expand_meta_macros"
-futures-channel = "submodules/futures-rs/futures-channel"
-lsp-server = "submodules/rust-analyzer/lib/lsp-server"
-rustc_lint = "submodules/rust/compiler/rustc_lint"
-windows-version = "submodules/windows-rs/crates/libs/version"
-clap_complete = "submodules/clap/clap_complete"
-nix2proc-macros = "../patch-build-rs/nix2proc-macros"
-rustfix = "submodules/cargo/crates/rustfix"
-gix-merge = "submodules/gitoxide/gix-merge"
-indexmap = "submodules/indexmap"
-rustc_apfloat = "submodules/rustc_apfloat"
-trait-fixer-hir-info-mock = "crates/trait-fixer-hir-info-mock"
-arrayref = "submodules/arrayref"
-cargo-repo-sync-lib = "tools/cargo-repo-sync-lib"
-sha1 = "submodules/hashes/sha1"
-blocking = "submodules/blocking"
-gix-glob = "submodules/gitoxide/gix-glob"
-supports-unicode = "submodules/supports-unicode"
-trait_fixer_mocks = "tests/trait_fixer_mocks"
-rustc_expand_base_lib_errors = "submodules/rust/compiler/rustc_expand_base_lib_errors"
-trait-fixer-lang-items-mock = "crates/trait-fixer-lang-items-mock"
-proc-macro-srv-cli = "submodules/rust-analyzer/crates/proc-macro-srv-cli"
-gix-archive = "submodules/gitoxide/gix-archive"
-object = "submodules/object"
-span = "submodules/rust-analyzer/crates/span"
+rustc_ty_utils = "../rust/compiler/rustc_ty_utils"
 proc-macro-srv = "submodules/rust-analyzer/crates/proc-macro-srv"
-mio = "submodules/mio"
-rustc_feature = "submodules/rust/compiler/rustc_feature"
-lib-metavar-expr = "submodules/rust/compiler/lib-metavar-expr"
-md-5 = "submodules/hashes/md5"
-measureme = "submodules/measureme/measureme"
-gix-worktree-stream = "submodules/gitoxide/gix-worktree-stream"
-md5 = "submodules/md5"
-gix-transport = "submodules/gitoxide/gix-transport"
-criterion = "submodules/criterion"
-intern = "submodules/rust-analyzer/crates/intern"
-group = "submodules/group"
-serde_core = "submodules/serde/serde_core"
-sharded-slab = "submodules/sharded-slab"
-futures-io = "submodules/futures-rs/futures-io"
-unicode-ident = "submodules/unicode-ident"
-rustc_ast_ir = "submodules/rust/compiler/rustc_ast_ir"
-gix-negotiate = "submodules/gitoxide/gix-negotiate"
-graph-petal-generator = "tools/graph-petal-generator"
-macrotest = "submodules/macrotest"
-prodash = "submodules/prodash"
-gix-mailmap = "submodules/gitoxide/gix-mailmap"
-rustc_hir = "submodules/rust/compiler/rustc_hir"
-fs_extra = "submodules/fs_extra"
-crates-io = "submodules/cargo/crates/crates-io"
-memoffset = "submodules/memoffset"
-trait-fixer-compiler-host-real = "crates/trait-fixer-compiler-host-real"
-trait-fixer-rules-trait = "crates/trait-fixer-rules-trait"
-async-stream = "submodules/async-stream-vendored"
-lock_api = "submodules/parking_lot/lock_api"
-crossbeam-channel = "submodules/crossbeam/crossbeam-channel"
-gix-tempfile = "submodules/gitoxide/gix-tempfile"
-monster_math_traits = "crates/monster_math_traits"
-nix = "submodules/nix"
-bincode = "submodules/bincode"
-ast_parser_impl = "crates/ast_parser_impl"
-trait-fixer-compiler-host-mock = "crates/trait-fixer-compiler-host-mock"
-ide-ssr = "submodules/rust-analyzer/crates/ide-ssr"
-tera = "submodules/tera"
-async-graphql-value = "submodules/async-graphql/value"
-byteorder = "submodules/byteorder"
-ucd-trie = "submodules/ucd-generate/ucd-trie"
-expect-test = "submodules/expect-test"
-futures-executor = "submodules/futures-rs/futures-executor"
-gix-odb = "submodules/gitoxide/gix-odb"
-gix-testtools = "submodules/gitoxide/tests/tools"
-intl-memoizer = "submodules/fluent-rs/intl-memoizer"
-trybuild = "submodules/trybuild"
-git2 = "submodules/git2-rs"
-real_rules_test = "tests/real_rules_test"
-atomic-maybe-uninit = "submodules/atomic-maybe-uninit"
-openssl-probe = "submodules/openssl-probe"
-rustc_abi = "submodules/rust/compiler/rustc_abi"
-synstructure = "submodules/synstructure"
-tracing-core = "submodules/tracing/tracing-core"
-trait-fixer-hir-info-real = "crates/trait-fixer-hir-info-real"
-rustc_pattern_analysis = "submodules/rust/compiler/rustc_pattern_analysis"
-const-oid = "submodules/formats/const-oid"
-clap_builder = "submodules/clap/clap_builder"
-paths = "submodules/rust-analyzer/crates/paths"
-syntax-bridge = "submodules/rust-analyzer/crates/syntax-bridge"
-rustix = "submodules/rustix"
-zerocopy = "submodules/zerocopy"
-ide-db = "submodules/rust-analyzer/crates/ide-db"
-serde-value = "submodules/serde-value"
-http-auth = "submodules/http-auth"
-fallible-streaming-iterator = "submodules/fallible-streaming-iterator"
-anstyle-parse = "submodules/anstyle/crates/anstyle-parse"
-rustc_lint_defs = "submodules/rust/compiler/rustc_lint_defs"
-simd-adler32 = "submodules/simd-adler32"
-typenum = "submodules/typenum"
-windows-result = "submodules/windows-rs/crates/libs/result"
-tinyvec_macros = "submodules/tinyvec_macros"
-generic-array = "submodules/generic-array"
-smallvec = "submodules/rust-smallvec"
-strsim = "submodules/strsim-rs"
-tool-traits-lib = "tools/tool-traits-lib"
-rustc_serialize = "submodules/rust/compiler/rustc_serialize"
-cargo-toml-generator-macros = "cargo-toml-generator-macros"
-toml = "submodules/toml/crates/toml"
-fixedbitset = "submodules/fixedbitset"
-toml_parser = "submodules/toml/crates/toml_parser"
-globwalk = "submodules/globwalk"
-tracing-attributes = "submodules/tracing/tracing-attributes"
-gix-chunk = "submodules/gitoxide/gix-chunk"
-litrs = "submodules/litrs"
-fuzz = "submodules/quinn/fuzz"
-trait-fixer = "tools/trait-fixer"
-rusqlite = "submodules/rusqlite"
-gix-lfs = "submodules/gitoxide/gix-lfs"
-autocfg = "submodules/autocfg"
-bytesize = "submodules/bytesize"
-ppv-lite86 = "submodules/cryptocorrosion/utils-simd/ppv-lite86"
-hir-expand = "submodules/rust-analyzer/crates/hir-expand"
-lzma-rust2 = "submodules/lzma-rust2"
-trait-fixer-rules-mock = "crates/trait-fixer-rules-mock"
-lib-matcher-loc = "submodules/rust/compiler/lib-matcher-loc"
-rustc_attr_parsing = "submodules/rust/compiler/rustc_attr_parsing"
-gix-shallow = "submodules/gitoxide/gix-shallow"
-cargo_metadata = "submodules/cargo_metadata"
-windows-bindings = "submodules/jni-rs/windows-bindings"
-iana-time-zone = "submodules/iana-time-zone"
-regex-syntax = "submodules/regex/regex-syntax"
-supports-hyperlinks = "submodules/supports-hyperlinks"
-gix-config = "submodules/gitoxide/gix-config"
-libm = "submodules/compiler-builtins/libm"
-camino = "submodules/camino"
-ahash = "submodules/ahash"
-rustc_builtin_macros = "submodules/rust/compiler/rustc_builtin_macros"
-serde_derive = "submodules/serde/serde_derive"
-async-graphql-derive = "submodules/async-graphql/derive"
-constant_time_eq = "submodules/constant_time_eq"
-rustc_expand = "submodules/rust/compiler/rustc_expand"
-cargo-util-schemas = "submodules/cargo/crates/cargo-util-schemas"
-thread_local = "submodules/thread_local-rs"
-macro_wrapper_lib = "submodules/rust/compiler/macro_wrapper_lib"
-zerovec-derive = "submodules/icu4x/utils/zerovec/derive"
-serde_spanned = "submodules/toml/crates/serde_spanned"
-syn-adapter-lib = "tools/syn-adapter-lib"
+ahash = "../ahash"
 gix-sec = "submodules/gitoxide/gix-sec"
-home = "submodules/cargo/crates/home"
-anstyle = "submodules/anstyle/crates/anstyle"
-pagerank_rs = "submodules/pagerank_rs"
-sha1-checked = "submodules/hashes/sha1-checked"
-crc32fast = "submodules/rust-crc32fast"
-rocksdb = "submodules/rocksdb"
-gix-trace = "submodules/gitoxide/gix-trace"
-signal-hook-registry = "submodules/signal-hook/signal-hook-registry"
-tokio-util = "submodules/tokio/tokio-util"
-addr2line = "submodules/addr2line"
-ide-diagnostics = "submodules/rust-analyzer/crates/ide-diagnostics"
-rustc_fluent_macro = "submodules/rust/compiler/rustc_fluent_macro"
-litemap = "submodules/icu4x/utils/litemap"
-version_check = "submodules/version_check"
-futures-lite = "submodules/futures-lite"
-rustc_trait_selection = "submodules/rust/compiler/rustc_trait_selection"
-secret-manager-rs = "tools/secret-manager-rs"
-cvs-macro-test-crate = "submodules/rust/crates/cvs-macro-test-crate"
-crosstermion = "submodules/crosstermion"
-crypto-common = "submodules/traits/crypto-common"
-gix-revwalk = "submodules/gitoxide/gix-revwalk"
-sha2 = "submodules/hashes/sha2"
-syn-codegen = "submodules/syn/json"
-cvs-macro-lib = "submodules/rust/crates/cvs-macro-lib"
-imara-diff = "submodules/imara-diff"
-gix-tix = "submodules/gitoxide/gix-tix"
-thin-vec = "submodules/thin-vec"
-fiat-crypto = "submodules/fiat-crypto/fiat-rust"
-futures-concurrency = "submodules/futures-concurrency"
-vfs = "submodules/rust-analyzer/crates/vfs"
-rustc_ast = "submodules/rust/compiler/rustc_ast"
-cargo-credential = "submodules/cargo/credential/cargo-credential"
-quickcheck = "submodules/quickcheck"
-env_filter = "submodules/env_logger/crates/env_filter"
-rustc_type_ir = "submodules/rust/compiler/rustc_type_ir"
-socket2 = "submodules/socket2"
-factory_abi = "crates/factory_abi"
-windows-bindgen = "submodules/windows-rs/crates/libs/bindgen"
-windows-threading = "submodules/windows-rs/crates/libs/threading"
-generator = "submodules/generator-rs"
-memchr = "submodules/memchr"
-clru = "submodules/clru-rs"
-rustc_errors = "submodules/rust/compiler/rustc_errors"
-expand_utils_lib = "submodules/rust/compiler/expand_utils_lib"
-futures-test = "submodules/futures-rs/futures-test"
-toml_datetime = "submodules/toml/crates/toml_datetime"
-git-wrapper-lib = "tools/git-wrapper-lib"
-autowrap_tool = "submodules/patch-build-rs/autowrap_tool"
-git2-curl = "submodules/git2-rs/git2-curl"
-unimacro_derive = "test_crates/unimacro_derive"
-mockall = "submodules/mockall/mockall"
-windows_x86_64_gnu = "submodules/windows-rs/crates/targets/x86_64_gnu"
-gix-utils = "submodules/gitoxide/gix-utils"
-rfc6979 = "submodules/signatures/rfc6979"
-heapless = "submodules/heapless"
-grast_core = "../patch-build-rs/grast_core"
-gix-discover = "submodules/gitoxide/gix-discover"
-rustc_expand_base_lib_macros = "submodules/rust/compiler/rustc_expand_base_lib_macros"
-lib-kleene-op = "submodules/rust/compiler/lib-kleene-op"
-gix-config-value = "submodules/gitoxide/gix-config-value"
-gix-tui = "submodules/gitoxide/gix-tui"
-parser = "submodules/rust-analyzer/crates/parser"
-windows_aarch64_msvc = "submodules/windows-rs/crates/targets/aarch64_msvc"
-arc-swap = "submodules/arc-swap"
-windows-metadata = "submodules/windows-rs/crates/libs/metadata"
-cargo-workspace-from-tree = "tools/cargo-workspace-from-tree"
-rustc_lexer = "submodules/rust/compiler/rustc_lexer"
-colorify = "submodules/colorify"
-glob = "submodules/glob"
-unicase = "submodules/unicase"
-slab = "submodules/slab"
 lib-zos = "crates/lib-zos"
-trait-fixer-query-context-trait = "crates/trait-fixer-query-context-trait"
-bytes = "submodules/bytes"
-env_logger = "submodules/env_logger"
-test-fixture = "submodules/rust-analyzer/crates/test-fixture"
-yoke-derive = "submodules/icu4x/utils/yoke/derive"
-ide-assists = "submodules/rust-analyzer/crates/ide-assists"
-libz-rs-sys = "submodules/zlib-rs/libz-rs-sys"
-dashmap = "submodules/dashmap"
-hyper = "submodules/hyper"
-cpp_demangle = "submodules/cpp_demangle"
-macros = "submodules/rust-analyzer/crates/macros"
-gix-path = "submodules/gitoxide/gix-path"
-tracing-tree = "submodules/tracing-tree"
-gix = "submodules/gitoxide/gix"
-atoi = "*"
-potential_utf = "submodules/icu4x/utils/potential_utf"
-gix-worktree-state = "submodules/gitoxide/gix-worktree-state"
-cargo-credential-macos-keychain = "submodules/cargo/credential/cargo-credential-macos-keychain"
-split-decls-types = "split-decls-types"
-hashbrown = "submodules/hashbrown"
-trait-fixer-core-trait = "crates/trait-fixer-core-trait"
-futures-timer = "submodules/futures-timer"
-unicode-segmentation = "submodules/unicode-segmentation"
-rustversion = "submodules/rustversion"
-cargo-toml-parts = "build_helpers/cargo_toml_parts"
-tracing-subscriber = "submodules/tracing/tracing-subscriber"
-async-std = "submodules/async-std"
-rowan = "submodules/rowan"
-scoped-tls = "submodules/scoped-tls"
-temp-dir = "submodules/temp-dir/temp-dir"
-tokio = "submodules/tokio/tokio"
-tracing-log = "submodules/tracing/tracing-log"
-trycmd = "submodules/snapbox/crates/trycmd"
-cfg = "submodules/rust-analyzer/crates/cfg"
-terminal_size = "submodules/terminal-size"
-introspector_core = "submodules/rust/compiler/introspector/core"
-nu-ansi-term = "submodules/nu-ansi-term"
-sized-chunks = "submodules/sized-chunks"
-gix-commitgraph = "submodules/gitoxide/gix-commitgraph"
-rustc_interface = "submodules/rust/compiler/rustc_interface"
-shebling_macros = "../patch-build-rs/shebling_macros"
-gix-attributes = "submodules/gitoxide/gix-attributes"
-trait-fixer-hir-info-trait = "crates/trait-fixer-hir-info-trait"
-trait-fixer-attribute-reader-mock = "crates/trait-fixer-attribute-reader-mock"
-anstream = "submodules/anstyle/crates/anstream"
-typesize-derive = "submodules/typesize/typesize-derive"
-faster-hex = "submodules/faster-hex"
-monster-grouper = "tools/monster-grouper"
-windows-core = "submodules/windows-rs/crates/libs/core"
+rand = "../rand"
 gix-blame = "submodules/gitoxide/gix-blame"
-profile = "submodules/rust-analyzer/crates/profile"
-hir-def = "submodules/rust-analyzer/crates/hir-def"
+gix-object = "submodules/gitoxide/gix-object"
+petgraph = "../petgraph"
+tokio-util = "../tokio/tokio-util"
+constant_time_eq = "submodules/constant_time_eq"
+gix-ignore = "submodules/gitoxide/gix-ignore"
+icu_properties = "submodules/icu4x/components/properties"
+typesize-derive = "submodules/typesize/typesize-derive"
+rustc_hir_analysis = "../rust/compiler/rustc_hir_analysis"
+windows-bindings = "submodules/jni-rs/windows-bindings"
+cargo-feature-adapter = "../../tools/cargo-feature-adapter"
+gix-glob = "submodules/gitoxide/gix-glob"
+gix-rebase = "submodules/gitoxide/gix-rebase"
+sval = "../sval"
+gix-diff = "submodules/gitoxide/gix-diff"
+gix-merge = "submodules/gitoxide/gix-merge"
+measureme = "../measureme/measureme"
+feature-permutation-builder = "../../tools/feature-permutation-builder"
 hash32 = "submodules/hash32"
-libloading = "submodules/rust_libloading"
-color-print-proc-macro = "submodules/color-print/color-print-proc-macro"
-gix-sequencer = "submodules/gitoxide/gix-sequencer"
-cargo-test-support = "submodules/cargo/crates/cargo-test-support"
-gix-credentials = "submodules/gitoxide/gix-credentials"
-sval = "submodules/sval"
-unicode-normalization = "submodules/unicode-normalization"
-encoding_rs = "submodules/encoding_rs"
+annotate-snippets = "submodules/annotate-snippets-rs"
+async-graphql-derive = "submodules/async-graphql/derive"
+minimal-lexical = "../minimal-lexical"
+toml = "../toml/crates/toml"
+windows-bindgen = "../windows-rs/crates/libs/bindgen"
+idna = "../rust-url/idna"
+rustc_serialize = "../rust/compiler/rustc_serialize"
+core = "submodules/rust/compiler/introspector/core"
+hir-expand = "submodules/rust-analyzer/crates/hir-expand"
+lib-macro-rule = "../rust/compiler/lib-macro-rule"
+unicase = "../unicase"
+unicode-normalization = "../unicode-normalization"
+windows-targets = "submodules/rust/library/windows_targets"
+rustc_feature = "../rust/compiler/rustc_feature"
+tempfile = "../tempfile"
+home = "../cargo/crates/home"
+rustc_log = "../rust/compiler/rustc_log"
+hashbrown = "../hashbrown"
+parser = "submodules/rust-analyzer/crates/parser"
+fallible-streaming-iterator = "submodules/fallible-streaming-iterator"
+rustix = "../rustix"
+ed25519-compact = "submodules/rust-ed25519-compact"
+thiserror = "../thiserror"
 allocator-api2 = "submodules/allocator-api2"
-cargo-test-macro = "submodules/cargo/crates/cargo-test-macro"
-semver = "submodules/semver"
-trait-fixer-rustc-mock = "crates/trait-fixer-rustc-mock"
-gix-worktree = "submodules/gitoxide/gix-worktree"
-tinyvec = "submodules/tinyvec"
-signal-hook = "submodules/signal-hook"
-windows_aarch64_gnullvm = "submodules/windows-rs/crates/targets/aarch64_gnullvm"
-lazy_static = "submodules/lazy-static"
-hmac = "submodules/MACs/hmac"
-lib-token-tree = "submodules/rust/compiler/lib-token-tree"
-thiserror-impl = "submodules/thiserror/impl"
-orion = "submodules/orion"
+rand_xorshift = "../rngs/rand_xorshift"
+tinyvec = "../tinyvec"
+tracing-chrome = "submodules/tracing-chrome"
+windows-threading = "../windows-rs/crates/libs/threading"
+cargo-metadata-lib = "cargo-metadata-lib"
+rustc_codegen_llvm = "../rust/compiler/rustc_codegen_llvm"
+grast_cli = "../patch-build-rs/grast_cli"
+trait-fixer-hir-info-real = "../../crates/trait-fixer-hir-info-real"
+trait-fixer-trait-checker-mock = "../../crates/trait-fixer-trait-checker-mock"
+ticket_data_generator = "../../ticket_data_generator"
+cargo-repo-sync-lib = "../../tools/cargo-repo-sync-lib"
+dissimilar = "../dissimilar"
+pin-project-lite = "../pin-project-lite"
+rustc_attr_parsing = "../rust/compiler/rustc_attr_parsing"
+expand_utils_test = "../rust/compiler/expand_utils_test"
+fixedbitset = "../fixedbitset"
+rustc_ast = "../rust/compiler/rustc_ast"
+color-print-proc-macro = "../color-print/color-print-proc-macro"
+rustc_ast_ir = "../rust/compiler/rustc_ast_ir"
+rustc_expand_base_lib_errors = "../rust/compiler/rustc_expand_base_lib_errors"
+crypto-common = "../traits/crypto-common"
+gix-trace = "submodules/gitoxide/gix-trace"
+gix-bitmap = "submodules/gitoxide/gix-bitmap"
+serial_test = "../serial_test/serial_test"
+gix-protocol = "submodules/gitoxide/gix-protocol"
+hex = "../rust-hex"
+rustc-literal-escaper = "../rustc-literal-escaper"
+dep2submodule = "../../tools/dep2submodule"
+rustc_builtin_macros = "../rust/compiler/rustc_builtin_macros"
+rustc_driver_impl = "../rust/compiler/rustc_driver_impl"
+human_format = "submodules/human-format-rs"
+fluent-syntax = "../fluent-rs/fluent-syntax"
+ide-diagnostics = "submodules/rust-analyzer/crates/ide-diagnostics"
+libc = "../libc"
+nix2proc-macros = "../patch-build-rs/nix2proc-macros"
+arbitrary = "../arbitrary"
+regex-syntax = "../regex/regex-syntax"
+grast_core = "../patch-build-rs/grast_core"
+quickcheck = "../quickcheck"
+zerofrom-derive = "../icu4x/utils/zerofrom/derive"
+blake3 = "../BLAKE3"
+rustc_expand_meta_macros = "../rust/compiler/rustc_expand_meta_macros"
+rustc_privacy = "../rust/compiler/rustc_privacy"
+futures = "../futures-rs/futures"
+rustc_session = "../rust/compiler/rustc_session"
+zerocopy-derive = "../zerocopy/zerocopy-derive"
+mio = "../mio"
+pest_generator = "../pest/generator"
+gix-mailmap = "submodules/gitoxide/gix-mailmap"
+thiserror-impl = "../thiserror/impl"
+trycmd = "submodules/snapbox/crates/trycmd"
+windows_x86_64_msvc = "../windows-rs/crates/targets/x86_64_msvc"
+tracing-mock = "../tracing/tracing-mock"
+proc-macro2 = "../proc-macro2"
+zerovec-derive = "../icu4x/utils/zerovec/derive"
+windows-core = "../windows-rs/crates/libs/core"
+windows-result = "../windows-rs/crates/libs/result"
+version_check = "../version_check"
+nohash-hasher = "submodules/nohash-hasher"
+macro_wrapper_lib = "../rust/compiler/macro_wrapper_lib"
+memchr = "../memchr"
+gix-pack = "submodules/gitoxide/gix-pack"
+smol_str = "submodules/rust-analyzer/lib/smol_str"
+libm = "../compiler-builtins/libm"
+tracing-core = "../tracing/tracing-core"
+windows-interface = "../windows-rs/crates/libs/interface"
+ast_parser_impl = "../../crates/ast_parser_impl"
+rustc_codegen_ssa = "../rust/compiler/rustc_codegen_ssa"
+simd-adler32 = "submodules/simd-adler32"
+strsim = "../strsim-rs"
+rustc_fs_util = "../rust/compiler/rustc_fs_util"
+gix-attributes = "submodules/gitoxide/gix-attributes"
+test-utils = "submodules/rust-analyzer/crates/test-utils"
+anyhow = "../anyhow"
+sized-chunks = "submodules/sized-chunks"
+serde = "../serde/serde"
+gix-ref = "submodules/gitoxide/gix-ref"
+block-buffer = "../utils/block-buffer"
+rustc_expand_patches = "../rust/compiler/rustc_expand_patches"
+maybe-async = "submodules/maybe-async-rs"
+rustc-hash = "../rustc-hash"
+loom = "../loom"
+rustc_index = "../rust/compiler/rustc_index"
+intern = "submodules/rust-analyzer/crates/intern"
+monster_math_traits = "../../crates/monster_math_traits"
+rustc_mir_transform = "../rust/compiler/rustc_mir_transform"
+slab = "../slab"
+trait-fixer-lang-items-real = "../../crates/trait-fixer-lang-items-real"
+tt = "submodules/rust-analyzer/crates/tt"
+windows-strings = "../windows-rs/crates/libs/strings"
+windows-sys = "../windows-rs/crates/libs/sys"
+semver = "../semver"
+odds = "../odds"
+rustc_hir_pretty = "../rust/compiler/rustc_hir_pretty"
+futures-timer = "submodules/futures-timer"
+object = "../object"
+split-decls-types = "split-decls-types"
+env_logger = "../env_logger"
+gix-submodule = "submodules/gitoxide/gix-submodule"
+openssl-probe = "../openssl-probe"
+gix-shallow = "submodules/gitoxide/gix-shallow"
+gix-status = "submodules/gitoxide/gix-status"
+introspector_macro_helpers = "../patch-build-rs/introspector_macro_helpers"
+rustc_hir = "../rust/compiler/rustc_hir"
+toml_writer = "../toml/crates/toml_writer"
+foldhash = "../foldhash"
+trait-fixer-core-real = "../../crates/trait-fixer-core-real"
+unicode-segmentation = "../unicode-segmentation"
+proc-macro-srv-cli = "submodules/rust-analyzer/crates/proc-macro-srv-cli"
+lib-metavar-expr = "../rust/compiler/lib-metavar-expr"
+tracing-subscriber = "../tracing/tracing-subscriber"
+gix-transport = "submodules/gitoxide/gix-transport"
+ide-completion = "submodules/rust-analyzer/crates/ide-completion"
+async-stream = "../async-stream-vendored"
+gix-features = "submodules/gitoxide/gix-features"
+ra-ap-rustc_index = "submodules/rust/compiler/rustc_index"
+cargo-submodule-tool-lib = "../../tools/cargo-submodule-tool-lib"
+group = "submodules/group"
+litrs = "submodules/litrs"
+atomic-maybe-uninit = "../atomic-maybe-uninit"
+git-wrapper-lib = "../../tools/git-wrapper-lib"
+rustc_error_codes = "../rust/compiler/rustc_error_codes"
+rustc_trait_selection = "../rust/compiler/rustc_trait_selection"
+env_filter = "../env_logger/crates/env_filter"
+memmap2 = "../memmap2-rs"
+hir = "submodules/rust-analyzer/crates/hir"
+monster-grouper = "../../tools/monster-grouper"
+tokio-core = "submodules/tokio-core"
+gix-worktree-state = "submodules/gitoxide/gix-worktree-state"
+scoped-tls = "../scoped-tls"
+trait-fixer-hir-info-mock = "../../crates/trait-fixer-hir-info-mock"
+gix-revision = "submodules/gitoxide/gix-revision"
+anstream = "../anstyle/crates/anstream"
+rustc_fluent_macro = "../rust/compiler/rustc_fluent_macro"
+rustc_span = "../rust/compiler/rustc_span"
+fnv = "../rust-fnv"
+md5 = "../md5"
+clap_complete = "submodules/clap/clap_complete"
+bincode_derive = "../bincode/derive"
+ppv-lite86 = "../cryptocorrosion/utils-simd/ppv-lite86"
+windows_x86_64_gnullvm = "../windows-rs/crates/targets/x86_64_gnullvm"
+trybuild = "../trybuild"
+git2 = "../git2-rs"
+sec1 = "submodules/formats/sec1"
+introspector_decl_common = "../patch-build-rs/introspector_decl_common"
+trait-fixer-trait-checker-real = "../../crates/trait-fixer-trait-checker-real"
+uuid-macro-internal = "../uuid/macros"
+zip = "submodules/zip2"
+linux-raw-sys = "submodules/linux-raw-sys"
+gix-worktree-stream = "submodules/gitoxide/gix-worktree-stream"
+trait_fixer_mocks = "tests/trait_fixer_mocks"
+windows_i686_msvc = "../windows-rs/crates/targets/i686_msvc"
+cargo-test-support = "submodules/cargo/crates/cargo-test-support"
+anstyle-wincon = "../anstyle/crates/anstyle-wincon"
+document-features = "submodules/document-features"
+prelude-generator = "../../tools/rust-bootstrap-nix/prelude-generator"
 salsa-macros = "submodules/salsa/components/salsa-macros"
+syn = "../syn"
+parking_lot = "../parking_lot"
+primeorder = "submodules/elliptic-curves/primeorder"
+icu_normalizer = "submodules/icu4x/components/normalizer"
+futures-core = "../futures-rs/futures-core"
+rustc_ast_lowering = "../rust/compiler/rustc_ast_lowering"
+rustc_sanitizers = "../rust/compiler/rustc_sanitizers"
+xattr = "../xattr"
+mkslop-macros = "../patch-build-rs/mkslop-macros"
+patch-build-rs-macros = "../patch-build-rs/patch-build-rs-macros"
+mbe = "submodules/rust-analyzer/crates/mbe"
+prodash = "submodules/prodash"
+syntax = "submodules/rust-analyzer/crates/syntax"
+p384 = "submodules/elliptic-curves/p384"
+tracing-futures = "../tracing/tracing-futures"
+thread_local = "../thread_local-rs"
+futures-channel = "../futures-rs/futures-channel"
+generator = "../generator-rs"
+synstructure = "../synstructure"
+trait-fixer-compiler-host-mock = "../../crates/trait-fixer-compiler-host-mock"
+os_info = "submodules/os_info/os_info"
+trait-fixer-core-mock = "../../crates/trait-fixer-core-mock"
+windows_i686_gnu = "../windows-rs/crates/targets/i686_gnu"
+gix-index = "submodules/gitoxide/gix-index"
+tracing-tower = "submodules/tracing/tracing-tower"
+gix-command = "submodules/gitoxide/gix-command"
+rustc_baked_icu_data = "../rust/compiler/rustc_baked_icu_data"
+fuzz = "submodules/quinn/fuzz"
+rustc_error_messages = "../rust/compiler/rustc_error_messages"
+rustc_target = "../rust/compiler/rustc_target"
+trait-fixer-query-context-real = "../../crates/trait-fixer-query-context-real"
+http-auth = "submodules/http-auth"
+autowrap_tool = "../patch-build-rs/autowrap_tool"
+rustc_lexer = "../rust/compiler/rustc_lexer"
+crossbeam-epoch = "../crossbeam/crossbeam-epoch"
+cargo-util = "submodules/cargo/crates/cargo-util"
+rustc_query_impl = "../rust/compiler/rustc_query_impl"
+lib-kleene-op = "../rust/compiler/lib-kleene-op"
+async-graphql-parser = "submodules/async-graphql/parser"
+ecdsa = "submodules/signatures/ecdsa"
+split-decls-rs = "."
+toml_parser = "../toml/crates/toml_parser"
+rustc-stable-hash = "../rustc-stable-hash"
+rustc_data_structures = "../rust/compiler/rustc_data_structures"
+autocfg = "../autocfg"
+detone = "*"
+icu_normalizer_data = "*"
+lock_api = "../parking_lot/lock_api"
+temp-env = "submodules/temp-env"
+uuid-rng-internal = "../uuid/rng"
+gix-discover = "submodules/gitoxide/gix-discover"
+indexmap = "../indexmap"
+bytesize = "submodules/bytesize"
+ide-ssr = "submodules/rust-analyzer/crates/ide-ssr"
+windows-numerics = "submodules/windows-rs/crates/libs/numerics"
+trait-fixer-rustc-mock = "../../crates/trait-fixer-rustc-mock"
+arrayvec = "../arrayvec"
+gix-fsck = "submodules/gitoxide/gix-fsck"
+ucd-trie = "../ucd-generate/ucd-trie"
+cargo-toml-generator-macros = "cargo-toml-generator-macros"
+encoding_rs = "../encoding_rs"
+supports-hyperlinks = "submodules/supports-hyperlinks"
+gemini_rustc_data_structures = "../rust/crates/gemini_rustc_data_structures"
+sha1-checked = "submodules/hashes/sha1-checked"
+adler2 = "../adler2"
+rustc_transmute = "../rust/compiler/rustc_transmute"
+zerocopy = "../zerocopy"

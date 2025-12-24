@@ -7,6 +7,7 @@ use syn::{self, Item};
 
 use crate::buildrs_ast_utils::ExtractedDecl;
 use crate::CratePaths;
+use crate::add_generated_rust_header;
 use split_decls_types::SplitDeclsConfig;
 
 /// Iterates through the AST, extracts individual declarations, and writes them to separate files.
@@ -126,8 +127,13 @@ pub fn extract_and_write_declarations(
             };
             
             if !dry_run {
-                fs::write(&decl_file_path, file_content.to_string())
-                    .context(format!("Failed to write to {}", decl_file_path.display()))?;
+                add_generated_rust_header!(
+                    &decl_file_path,
+                    file_content.to_string().as_str(),
+                    file!(),
+                    line!()
+                )
+                .context(format!("Failed to write to {}", decl_file_path.display()))?;
                 println!("Split '{} {}' to {}", decl.kind, decl.name, decl_file_path.display());
             } else {
                 println!(

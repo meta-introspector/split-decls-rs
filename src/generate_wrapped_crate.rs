@@ -93,8 +93,13 @@ pub fn generate_wrapped_crate(
     let serialized_config = toml::to_string(&crate_config)
         .context("Failed to serialize SplitDeclsConfig for wrapped crate")?;
     if !dry_run {
-        fs::write(&wrapped_crate_paths.target_config_path, serialized_config)
-            .context(format!("Failed to write .split-decls-config.toml to {}", wrapped_crate_paths.target_config_path.display()))?;
+        crate::add_generated_header!(
+            &wrapped_crate_paths.target_config_path,
+            serialized_config.as_str(),
+            file!(),
+            line!()
+        )
+        .context(format!("Failed to write .split-decls-config.toml to {}", wrapped_crate_paths.target_config_path.display()))?;
     }
     println!("Wrote config to {}", wrapped_crate_paths.target_config_path.display());
 
