@@ -121,15 +121,7 @@ fn run_wrapped_workspace_mode(
         println!("Patch config loaded: {:?}", patch_config);
     }
 
-    let current_dir_as_scan_root = PathBuf::from("./");
-
-    if root_cargo_toml_path.exists() {
-        if verbose {
-            println!("DEBUG: Deleting existing Cargo.toml at: {}", root_cargo_toml_path.display());
-        }
-        fs::remove_file(&root_cargo_toml_path)
-            .context(format!("Failed to delete existing Cargo.toml at {}", root_cargo_toml_path.display()))?;
-    }
+    let current_dir_as_scan_root = PathBuf::from("./")
 
     let root_cargo_toml_content = if root_cargo_toml_path.exists() {
         fs::read_to_string(&root_cargo_toml_path)
