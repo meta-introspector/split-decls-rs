@@ -1,16 +1,12 @@
 use anyhow::{Context, Result};
 use std::path::Path;
-use std::process::Command;
+use std::fs;
 
 pub fn format_rust_file(path: &Path) -> Result<()> {
-    let output = Command::new("rustfmt")
-        .arg(path)
-        .output()
-        .context(format!("Failed to execute rustfmt on {}", path.display()))?;
-
-    if !output.status.success() {
-        eprintln!("WARNING: rustfmt failed on {}:", path.display());
-        eprintln!("{}", String::from_utf8_lossy(&output.stderr));
-    }
+    let content = fs::read_to_string(path)?;
+    let syntax_tree: syn::File = syn::parse_str(&content)
+        .context(format!("Failed to parse file: {}", path.display()))?;
+    let formatted = prettyplease::unparse(&syntax_tree);
+    fs::write(path, formatted)?;
     Ok(())
 }

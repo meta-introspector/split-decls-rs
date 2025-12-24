@@ -1,5 +1,6 @@
 use anyhow::{Context, Result};
-use proc_macro2::{Ident, TokenStream};
+use proc_macro2::{Ident, TokenStream, Span};
+use syn::LitStr;
 use quote::quote;
 use std::fs;
 use chrono::{Local, Datelike}; // Added for signature generation
@@ -72,8 +73,40 @@ pub fn write_declaration_file(
             line!()
         )
         .context(format!("Failed to write to {}", decl_file_path.display()))?;
-        format_rust_file(&decl_file_path)?;
-        println!("Split '{} {}' to {}", decl.kind, decl.name, decl_file_path.display());
+        if let Err(e) = format_rust_file(&decl_file_path) {
+            let error_message = e.to_string();
+            let crate_name_sanitized = paths.crate_name.replace("-", "_").replace(".", "_");
+            let error_module_name_str = format!("{}_decls_formatting_error_{}", crate_name_sanitized, decl.name);
+            let error_module_name_ident = Ident::new(&error_module_name_str, Span::call_site());
+            
+            let error_message_lit = LitStr::new(&error_message, Span::call_site());
+            let crate_name_sanitized_lit = LitStr::new(&crate_name_sanitized, Span::call_site());
+            let decl_name_lit = LitStr::new(&decl.name, Span::call_site());
+
+            let error_output_tokens = quote! {
+                #[llm_error_message(
+                    message = #error_message_lit
+                )]
+                #[llm_context(
+                    crate_name = #crate_name_sanitized_lit,
+                    declaration_name = #decl_name_lit
+                )]
+                pub struct #error_module_name_ident;
+            };
+
+            let error_file_path = paths.decls_output_dir.join(format!("{}.rs", error_module_name_str));
+            add_generated_rust_header!(
+                &error_file_path,
+                error_output_tokens.to_string().as_str(),
+                file!(),
+                line!()
+            )
+            .context(format!("Failed to write formatting error to {}", error_file_path.display()))?;
+            println!("\n<blip style='color:red'>Formatting error for '{} {}' captured in {}</blip>", decl.kind, decl.name, error_file_path.display());
+
+        } else {
+            println!("Split '{} {}' to {}", decl.kind, decl.name, decl_file_path.display());
+        }
     } else {
         println!(
             "Dry-run: Would split '{} {}' to {}",

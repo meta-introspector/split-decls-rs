@@ -66,6 +66,7 @@ lazy_static.workspace = true
 pathdiff = { workspace = true }
 hex = "0.4"
 cargo-metadata-lib = { path = "cargo-metadata-lib" }
+prettyplease = { workspace = true }
 
 
 
