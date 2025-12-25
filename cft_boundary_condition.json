@@ -1,0 +1,24 @@
+{
+  "emoji_8d_field": [
+    "🦄",
+    "🔮",
+    "🌟",
+    "🎨",
+    "🐉",
+    "💎",
+    "🎭",
+    "🦋"
+  ],
+  "conformal_center": "🎪",
+  "arrow_mappings": {
+    "trait_bound": "🎨",
+    "lifetime_flow": "🐉",
+    "impl_arrow": "🌟",
+    "borrow_ref": "🎭",
+    "fn_call": "🦄",
+    "ownership_move": "💎",
+    "control_flow": "🦋",
+    "type_ref": "🔮"
+  },
+  "holographic_ratio": 188.625
+}
