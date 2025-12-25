@@ -95,7 +95,7 @@ impl Output2MacroSystem {
     fn parse_declaration_info(filename: &str, content: &str) -> (String, String) {
         // Extract from filename pattern: crate_decls_name.rs
         let parts: Vec<&str> = filename.trim_end_matches(".rs").split('_').collect();
-        let decl_name = parts.last().unwrap_or("unknown").to_string();
+        let decl_name = parts.last().map_or("unknown", |v| v).to_string();
         
         // Determine type from content
         let decl_type = if content.contains("pub fn ") {

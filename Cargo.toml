@@ -117,5 +117,9 @@ path = "src/bin/wrap_single_crate.rs"
 name = "update_split_decls_config"
 path = "src/bin/update_split_decls_config.rs"
 
+[[bin]]
+name = "stateful_repl"
+path = "src/bin/stateful_repl.rs"
+
 [patch.'crates-io']
 proc-macro2 = { path = "../proc-macro2" }
