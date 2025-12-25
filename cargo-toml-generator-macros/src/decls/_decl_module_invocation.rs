@@ -1,1 +1,0 @@
-decl_module ! (cargo_toml_generator_macros_decls_dep_version , cargo_toml_generator_macros_decls_dep_path , cargo_toml_generator_macros_decls_dep_table , cargo_toml_generator_macros_decls_workspace_members_list , cargo_toml_generator_macros_decls_define_root_cargo_toml) ;
