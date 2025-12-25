@@ -1,0 +1,488 @@
+[
+  {
+    "layer": 0,
+    "input_size": 17377,
+    "output_size": 13901,
+    "ngram_2": [
+      {
+        "tokens": [
+          "output2",
+          "output2"
+        ],
+        "count": 14004,
+        "pattern_type": "generic_pair"
+      },
+      {
+        "tokens": [
+          "output2",
+          "wrapped"
+        ],
+        "count": 13999,
+        "pattern_type": "wrapped_module"
+      },
+      {
+        "tokens": [
+          "src",
+          "decls"
+        ],
+        "count": 11715,
+        "pattern_type": "source_declaration"
+      },
+      {
+        "tokens": [
+          "decls",
+          "wrapped"
+        ],
+        "count": 11077,
+        "pattern_type": "wrapped_module"
+      },
+      {
+        "tokens": [
+          "wrapped",
+          "rustc"
+        ],
+        "count": 4798,
+        "pattern_type": "wrapped_module"
+      },
+      {
+        "tokens": [
+          "output2",
+          "git"
+        ],
+        "count": 3308,
+        "pattern_type": "generic_pair"
+      },
+      {
+        "tokens": [
+          "git",
+          "objects"
+        ],
+        "count": 3274,
+        "pattern_type": "generic_pair"
+      },
+      {
+        "tokens": [
+          "decls",
+          "module"
+        ],
+        "count": 3159,
+        "pattern_type": "generic_pair"
+      },
+      {
+        "tokens": [
+          "module",
+          "not"
+        ],
+        "count": 3154,
+        "pattern_type": "generic_pair"
+      },
+      {
+        "tokens": [
+          "not",
+          "found"
+        ],
+        "count": 3154,
+        "pattern_type": "generic_pair"
+      }
+    ],
+    "ngram_3": [
+      {
+        "tokens": [
+          "output2",
+          "output2",
+          "wrapped"
+        ],
+        "count": 13999,
+        "pattern_type": "output_wrapped_path"
+      },
+      {
+        "tokens": [
+          "src",
+          "decls",
+          "wrapped"
+        ],
+        "count": 11076,
+        "pattern_type": "source_declaration_path"
+      },
+      {
+        "tokens": [
+          "output2",
+          "git",
+          "objects"
+        ],
+        "count": 3274,
+        "pattern_type": "generic_triple"
+      },
+      {
+        "tokens": [
+          "module",
+          "not",
+          "found"
+        ],
+        "count": 3154,
+        "pattern_type": "generic_triple"
+      },
+      {
+        "tokens": [
+          "decls",
+          "module",
+          "not"
+        ],
+        "count": 3154,
+        "pattern_type": "generic_triple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "wrapped",
+          "rustc"
+        ],
+        "count": 2613,
+        "pattern_type": "output_wrapped_path"
+      },
+      {
+        "tokens": [
+          "decls",
+          "wrapped",
+          "rustc"
+        ],
+        "count": 2185,
+        "pattern_type": "generic_triple"
+      },
+      {
+        "tokens": [
+          "decls",
+          "impl",
+          "for"
+        ],
+        "count": 1619,
+        "pattern_type": "generic_triple"
+      },
+      {
+        "tokens": [
+          "decls",
+          "decl",
+          "module"
+        ],
+        "count": 588,
+        "pattern_type": "generic_triple"
+      },
+      {
+        "tokens": [
+          "src",
+          "lib",
+          "rs"
+        ],
+        "count": 587,
+        "pattern_type": "generic_triple"
+      }
+    ],
+    "ngram_5": [
+      {
+        "tokens": [
+          "decls",
+          "decl",
+          "module",
+          "invocation",
+          "rs"
+        ],
+        "count": 586,
+        "pattern_type": "generic_quintuple"
+      },
+      {
+        "tokens": [
+          "src",
+          "decls",
+          "decl",
+          "module",
+          "invocation"
+        ],
+        "count": 586,
+        "pattern_type": "complete_module_path"
+      },
+      {
+        "tokens": [
+          "wrapped",
+          "patch",
+          "build",
+          "rs",
+          "macros"
+        ],
+        "count": 331,
+        "pattern_type": "generic_quintuple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "output2",
+          "wrapped",
+          "trait",
+          "fixer"
+        ],
+        "count": 227,
+        "pattern_type": "generic_quintuple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "output2",
+          "wrapped",
+          "rustc",
+          "hir"
+        ],
+        "count": 210,
+        "pattern_type": "full_wrapped_rustc_path"
+      },
+      {
+        "tokens": [
+          "output2",
+          "output2",
+          "wrapped",
+          "hir",
+          "src"
+        ],
+        "count": 196,
+        "pattern_type": "generic_quintuple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "wrapped",
+          "hir",
+          "src",
+          "decls"
+        ],
+        "count": 195,
+        "pattern_type": "generic_quintuple"
+      },
+      {
+        "tokens": [
+          "src",
+          "decls",
+          "wrapped",
+          "hir",
+          "decls"
+        ],
+        "count": 194,
+        "pattern_type": "generic_quintuple"
+      },
+      {
+        "tokens": [
+          "wrapped",
+          "hir",
+          "src",
+          "decls",
+          "wrapped"
+        ],
+        "count": 194,
+        "pattern_type": "generic_quintuple"
+      },
+      {
+        "tokens": [
+          "hir",
+          "src",
+          "decls",
+          "wrapped",
+          "hir"
+        ],
+        "count": 194,
+        "pattern_type": "generic_quintuple"
+      }
+    ],
+    "ngram_7": [
+      {
+        "tokens": [
+          "output2",
+          "wrapped",
+          "hir",
+          "src",
+          "decls",
+          "wrapped",
+          "hir"
+        ],
+        "count": 194,
+        "pattern_type": "generic_septuple"
+      },
+      {
+        "tokens": [
+          "wrapped",
+          "hir",
+          "src",
+          "decls",
+          "wrapped",
+          "hir",
+          "decls"
+        ],
+        "count": 194,
+        "pattern_type": "generic_septuple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "output2",
+          "wrapped",
+          "hir",
+          "src",
+          "decls",
+          "wrapped"
+        ],
+        "count": 194,
+        "pattern_type": "generic_septuple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "wrapped",
+          "git2",
+          "src",
+          "decls",
+          "wrapped",
+          "git2"
+        ],
+        "count": 177,
+        "pattern_type": "generic_septuple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "output2",
+          "wrapped",
+          "git2",
+          "src",
+          "decls",
+          "wrapped"
+        ],
+        "count": 177,
+        "pattern_type": "generic_septuple"
+      },
+      {
+        "tokens": [
+          "wrapped",
+          "git2",
+          "src",
+          "decls",
+          "wrapped",
+          "git2",
+          "decls"
+        ],
+        "count": 177,
+        "pattern_type": "generic_septuple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "output2",
+          "wrapped",
+          "patch",
+          "build",
+          "rs",
+          "macros"
+        ],
+        "count": 168,
+        "pattern_type": "generic_septuple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "output2",
+          "wrapped",
+          "encoding",
+          "rs",
+          "src",
+          "decls"
+        ],
+        "count": 165,
+        "pattern_type": "generic_septuple"
+      },
+      {
+        "tokens": [
+          "output2",
+          "wrapped",
+          "patch",
+          "build",
+          "rs",
+          "macros",
+          "src"
+        ],
+        "count": 165,
+        "pattern_type": "generic_septuple"
+      },
+      {
+        "tokens": [
+          "rs",
+          "src",
+          "decls",
+          "wrapped",
+          "encoding",
+          "rs",
+          "decls"
+        ],
+        "count": 164,
+        "pattern_type": "generic_septuple"
+      }
+    ]
+  },
+  {
+    "layer": 1,
+    "input_size": 13901,
+    "output_size": 9730,
+    "ngram_2": [],
+    "ngram_3": [],
+    "ngram_5": [],
+    "ngram_7": []
+  },
+  {
+    "layer": 2,
+    "input_size": 9730,
+    "output_size": 5838,
+    "ngram_2": [],
+    "ngram_3": [],
+    "ngram_5": [],
+    "ngram_7": []
+  },
+  {
+    "layer": 3,
+    "input_size": 5838,
+    "output_size": 2919,
+    "ngram_2": [],
+    "ngram_3": [],
+    "ngram_5": [],
+    "ngram_7": []
+  },
+  {
+    "layer": 4,
+    "input_size": 2919,
+    "output_size": 1167,
+    "ngram_2": [],
+    "ngram_3": [],
+    "ngram_5": [],
+    "ngram_7": []
+  },
+  {
+    "layer": 5,
+    "input_size": 1167,
+    "output_size": 350,
+    "ngram_2": [],
+    "ngram_3": [],
+    "ngram_5": [],
+    "ngram_7": []
+  },
+  {
+    "layer": 6,
+    "input_size": 350,
+    "output_size": 70,
+    "ngram_2": [],
+    "ngram_3": [],
+    "ngram_5": [],
+    "ngram_7": []
+  },
+  {
+    "layer": 7,
+    "input_size": 70,
+    "output_size": 7,
+    "ngram_2": [],
+    "ngram_3": [],
+    "ngram_5": [],
+    "ngram_7": []
+  }
+]
