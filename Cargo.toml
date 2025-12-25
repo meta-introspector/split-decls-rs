@@ -52,7 +52,7 @@ toml_edit = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_derive = { workspace = true }
 serde_json = { workspace = true } # Added for build.rs serialization
-tera = "1.19" # Template engine for Lean4 code generation
+tera = {workspace=true} # Template engine for Lean4 code generation
 url = { workspace = true }
 quote = { workspace = true }
 syn = { workspace = true, features= ["full","visit", "visit-mut", "extra-traits"] } # Added extra-traits
@@ -157,6 +157,10 @@ path = "src/bin/lean4_proof_system_v2.rs"
 [[bin]]
 name = "lean4_proof_system_simple"
 path = "src/bin/lean4_proof_system_simple.rs"
+
+[[bin]]
+name = "bootstrap_tracer"
+path = "src/bin/bootstrap_tracer.rs"
 
 [patch.'crates-io']
 proc-macro2 = { path = "../proc-macro2" }

@@ -27,6 +27,10 @@ proof-quiet:
 	@cargo build --bin lean4_proof_system_simple -q 2>/dev/null || echo "Build failed"
 	@../../target/debug/lean4_proof_system_simple 2>/dev/null || echo "Execution failed"
 
+# Run traced bootstrap with CFT proof generation
+run_bootstrap:
+	../../target/debug/bootstrap_tracer
+
 # Run stateful REPL directly  
 repl:
 	../../target/debug/stateful_repl

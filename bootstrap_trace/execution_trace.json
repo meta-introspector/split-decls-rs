@@ -1,0 +1,1297 @@
+{
+  "states": {
+    "state_11": {
+      "id": "state_11",
+      "step": "build_workspace",
+      "inputs": [
+        "output2/wrapped_crates/",
+        "output2/Cargo.toml"
+      ],
+      "outputs": [
+        "target/",
+        "build_artifacts"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_1": {
+      "id": "state_1",
+      "step": "complex_7_analysis_1",
+      "inputs": [
+        "object:rustc_driver::Compilation",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "session",
+        "compiler",
+        "input",
+        "output_dir",
+        "output_file",
+        "temps_dir",
+        "codegen_backend"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_3": {
+      "id": "state_3",
+      "step": "complex_7_analysis_3",
+      "inputs": [
+        "object:rustc_middle::ty::TyCtxt",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "gcx",
+        "interners",
+        "dep_graph",
+        "prof",
+        "types",
+        "all_traits",
+        "trait_map"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_4": {
+      "id": "state_4",
+      "step": "complex_7_analysis_4",
+      "inputs": [
+        "object:rustc_codegen_llvm::LlvmCodegenBackend",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "target_machine",
+        "module",
+        "builder",
+        "context",
+        "types",
+        "intrinsics",
+        "metadata"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_6": {
+      "id": "state_6",
+      "step": "complex_7_analysis_6",
+      "inputs": [
+        "object:rustc_resolve::Resolver",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "session",
+        "definitions",
+        "graph_root",
+        "prelude",
+        "extern_prelude",
+        "field_names",
+        "struct_constructors"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_7": {
+      "id": "state_7",
+      "step": "complex_7_analysis_7",
+      "inputs": [
+        "object:rustc_hir_typeck::FnCtxt",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "infcx",
+        "param_env",
+        "body_id",
+        "err_count_on_creation",
+        "ret_coercion",
+        "ret_type",
+        "fallback_has_occurred"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_8": {
+      "id": "state_8",
+      "step": "initialize_workspace",
+      "inputs": [
+        "Cargo.toml",
+        "src/"
+      ],
+      "outputs": [
+        "output2/"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_10": {
+      "id": "state_10",
+      "step": "generate_wrapped_crates",
+      "inputs": [
+        "dependency_graph",
+        "submodules/"
+      ],
+      "outputs": [
+        "output2/wrapped_crates/"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_2": {
+      "id": "state_2",
+      "step": "complex_7_analysis_2",
+      "inputs": [
+        "object:rustc_session::Session",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "opts",
+        "parse_sess",
+        "sysroot",
+        "io",
+        "code_stats",
+        "ctfe_backtrace",
+        "miri_unleashed_features"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_9": {
+      "id": "state_9",
+      "step": "process_dependencies",
+      "inputs": [
+        "output2/",
+        "split-decls-rs.toml"
+      ],
+      "outputs": [
+        "output2/Cargo.toml",
+        "dependency_graph"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_12": {
+      "id": "state_12",
+      "step": "validate_output",
+      "inputs": [
+        "build_artifacts",
+        "target/"
+      ],
+      "outputs": [
+        "validation_report",
+        "success_state"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_0": {
+      "id": "state_0",
+      "step": "complex_7_analysis_0",
+      "inputs": [
+        "object:rustc_interface::Config",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "opts",
+        "crate_cfg",
+        "crate_disambiguator",
+        "input",
+        "output_dir",
+        "output_file",
+        "file_loader"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    },
+    "state_5": {
+      "id": "state_5",
+      "step": "complex_7_analysis_5",
+      "inputs": [
+        "object:rustc_parse::Parser",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "sess",
+        "token",
+        "restrictions",
+        "expected_tokens",
+        "token_cursor",
+        "desugar_doc_comments",
+        "cfg"
+      ],
+      "dependencies": [],
+      "timestamp": 1766691684,
+      "success": true
+    }
+  },
+  "transitions": [
+    [
+      "state_0",
+      "state_1"
+    ],
+    [
+      "state_1",
+      "state_2"
+    ],
+    [
+      "state_2",
+      "state_3"
+    ],
+    [
+      "state_3",
+      "state_4"
+    ],
+    [
+      "state_4",
+      "state_5"
+    ],
+    [
+      "state_5",
+      "state_6"
+    ],
+    [
+      "state_6",
+      "state_7"
+    ],
+    [
+      "state_7",
+      "state_8"
+    ],
+    [
+      "state_8",
+      "state_9"
+    ],
+    [
+      "state_9",
+      "state_10"
+    ],
+    [
+      "state_10",
+      "state_11"
+    ],
+    [
+      "state_11",
+      "state_12"
+    ]
+  ],
+  "rdf_graph": [
+    {
+      "subject": "state_0",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:step",
+      "object": "complex_7_analysis_0"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasInput",
+      "object": "object:rustc_interface::Config"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasInput",
+      "object": "complexity:7"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasInput",
+      "object": "deps_count:7"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasOutput",
+      "object": "opts"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasOutput",
+      "object": "crate_cfg"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasOutput",
+      "object": "crate_disambiguator"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasOutput",
+      "object": "input"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasOutput",
+      "object": "output_dir"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasOutput",
+      "object": "output_file"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:hasOutput",
+      "object": "file_loader"
+    },
+    {
+      "subject": "rustc_interface::Config",
+      "predicate": "complexity:level",
+      "object": "7"
+    },
+    {
+      "subject": "rustc_interface::Config",
+      "predicate": "complexity:dependsOn",
+      "object": "opts"
+    },
+    {
+      "subject": "rustc_interface::Config",
+      "predicate": "complexity:dependsOn",
+      "object": "crate_cfg"
+    },
+    {
+      "subject": "rustc_interface::Config",
+      "predicate": "complexity:dependsOn",
+      "object": "crate_disambiguator"
+    },
+    {
+      "subject": "rustc_interface::Config",
+      "predicate": "complexity:dependsOn",
+      "object": "input"
+    },
+    {
+      "subject": "rustc_interface::Config",
+      "predicate": "complexity:dependsOn",
+      "object": "output_dir"
+    },
+    {
+      "subject": "rustc_interface::Config",
+      "predicate": "complexity:dependsOn",
+      "object": "output_file"
+    },
+    {
+      "subject": "rustc_interface::Config",
+      "predicate": "complexity:dependsOn",
+      "object": "file_loader"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:step",
+      "object": "complex_7_analysis_1"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasInput",
+      "object": "object:rustc_driver::Compilation"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasInput",
+      "object": "complexity:7"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasInput",
+      "object": "deps_count:7"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasOutput",
+      "object": "session"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasOutput",
+      "object": "compiler"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasOutput",
+      "object": "input"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasOutput",
+      "object": "output_dir"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasOutput",
+      "object": "output_file"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasOutput",
+      "object": "temps_dir"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:hasOutput",
+      "object": "codegen_backend"
+    },
+    {
+      "subject": "state_0",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_1"
+    },
+    {
+      "subject": "rustc_driver::Compilation",
+      "predicate": "complexity:level",
+      "object": "7"
+    },
+    {
+      "subject": "rustc_driver::Compilation",
+      "predicate": "complexity:dependsOn",
+      "object": "session"
+    },
+    {
+      "subject": "rustc_driver::Compilation",
+      "predicate": "complexity:dependsOn",
+      "object": "compiler"
+    },
+    {
+      "subject": "rustc_driver::Compilation",
+      "predicate": "complexity:dependsOn",
+      "object": "input"
+    },
+    {
+      "subject": "rustc_driver::Compilation",
+      "predicate": "complexity:dependsOn",
+      "object": "output_dir"
+    },
+    {
+      "subject": "rustc_driver::Compilation",
+      "predicate": "complexity:dependsOn",
+      "object": "output_file"
+    },
+    {
+      "subject": "rustc_driver::Compilation",
+      "predicate": "complexity:dependsOn",
+      "object": "temps_dir"
+    },
+    {
+      "subject": "rustc_driver::Compilation",
+      "predicate": "complexity:dependsOn",
+      "object": "codegen_backend"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:step",
+      "object": "complex_7_analysis_2"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasInput",
+      "object": "object:rustc_session::Session"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasInput",
+      "object": "complexity:7"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasInput",
+      "object": "deps_count:7"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasOutput",
+      "object": "opts"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasOutput",
+      "object": "parse_sess"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasOutput",
+      "object": "sysroot"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasOutput",
+      "object": "io"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasOutput",
+      "object": "code_stats"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasOutput",
+      "object": "ctfe_backtrace"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:hasOutput",
+      "object": "miri_unleashed_features"
+    },
+    {
+      "subject": "state_1",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_2"
+    },
+    {
+      "subject": "rustc_session::Session",
+      "predicate": "complexity:level",
+      "object": "7"
+    },
+    {
+      "subject": "rustc_session::Session",
+      "predicate": "complexity:dependsOn",
+      "object": "opts"
+    },
+    {
+      "subject": "rustc_session::Session",
+      "predicate": "complexity:dependsOn",
+      "object": "parse_sess"
+    },
+    {
+      "subject": "rustc_session::Session",
+      "predicate": "complexity:dependsOn",
+      "object": "sysroot"
+    },
+    {
+      "subject": "rustc_session::Session",
+      "predicate": "complexity:dependsOn",
+      "object": "io"
+    },
+    {
+      "subject": "rustc_session::Session",
+      "predicate": "complexity:dependsOn",
+      "object": "code_stats"
+    },
+    {
+      "subject": "rustc_session::Session",
+      "predicate": "complexity:dependsOn",
+      "object": "ctfe_backtrace"
+    },
+    {
+      "subject": "rustc_session::Session",
+      "predicate": "complexity:dependsOn",
+      "object": "miri_unleashed_features"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:step",
+      "object": "complex_7_analysis_3"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasInput",
+      "object": "object:rustc_middle::ty::TyCtxt"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasInput",
+      "object": "complexity:7"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasInput",
+      "object": "deps_count:7"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasOutput",
+      "object": "gcx"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasOutput",
+      "object": "interners"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasOutput",
+      "object": "dep_graph"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasOutput",
+      "object": "prof"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasOutput",
+      "object": "types"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasOutput",
+      "object": "all_traits"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:hasOutput",
+      "object": "trait_map"
+    },
+    {
+      "subject": "state_2",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_3"
+    },
+    {
+      "subject": "rustc_middle::ty::TyCtxt",
+      "predicate": "complexity:level",
+      "object": "7"
+    },
+    {
+      "subject": "rustc_middle::ty::TyCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "gcx"
+    },
+    {
+      "subject": "rustc_middle::ty::TyCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "interners"
+    },
+    {
+      "subject": "rustc_middle::ty::TyCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "dep_graph"
+    },
+    {
+      "subject": "rustc_middle::ty::TyCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "prof"
+    },
+    {
+      "subject": "rustc_middle::ty::TyCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "types"
+    },
+    {
+      "subject": "rustc_middle::ty::TyCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "all_traits"
+    },
+    {
+      "subject": "rustc_middle::ty::TyCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "trait_map"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:step",
+      "object": "complex_7_analysis_4"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasInput",
+      "object": "object:rustc_codegen_llvm::LlvmCodegenBackend"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasInput",
+      "object": "complexity:7"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasInput",
+      "object": "deps_count:7"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasOutput",
+      "object": "target_machine"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasOutput",
+      "object": "module"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasOutput",
+      "object": "builder"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasOutput",
+      "object": "context"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasOutput",
+      "object": "types"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasOutput",
+      "object": "intrinsics"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:hasOutput",
+      "object": "metadata"
+    },
+    {
+      "subject": "state_3",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_4"
+    },
+    {
+      "subject": "rustc_codegen_llvm::LlvmCodegenBackend",
+      "predicate": "complexity:level",
+      "object": "7"
+    },
+    {
+      "subject": "rustc_codegen_llvm::LlvmCodegenBackend",
+      "predicate": "complexity:dependsOn",
+      "object": "target_machine"
+    },
+    {
+      "subject": "rustc_codegen_llvm::LlvmCodegenBackend",
+      "predicate": "complexity:dependsOn",
+      "object": "module"
+    },
+    {
+      "subject": "rustc_codegen_llvm::LlvmCodegenBackend",
+      "predicate": "complexity:dependsOn",
+      "object": "builder"
+    },
+    {
+      "subject": "rustc_codegen_llvm::LlvmCodegenBackend",
+      "predicate": "complexity:dependsOn",
+      "object": "context"
+    },
+    {
+      "subject": "rustc_codegen_llvm::LlvmCodegenBackend",
+      "predicate": "complexity:dependsOn",
+      "object": "types"
+    },
+    {
+      "subject": "rustc_codegen_llvm::LlvmCodegenBackend",
+      "predicate": "complexity:dependsOn",
+      "object": "intrinsics"
+    },
+    {
+      "subject": "rustc_codegen_llvm::LlvmCodegenBackend",
+      "predicate": "complexity:dependsOn",
+      "object": "metadata"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:step",
+      "object": "complex_7_analysis_5"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasInput",
+      "object": "object:rustc_parse::Parser"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasInput",
+      "object": "complexity:7"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasInput",
+      "object": "deps_count:7"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasOutput",
+      "object": "sess"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasOutput",
+      "object": "token"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasOutput",
+      "object": "restrictions"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasOutput",
+      "object": "expected_tokens"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasOutput",
+      "object": "token_cursor"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasOutput",
+      "object": "desugar_doc_comments"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:hasOutput",
+      "object": "cfg"
+    },
+    {
+      "subject": "state_4",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_5"
+    },
+    {
+      "subject": "rustc_parse::Parser",
+      "predicate": "complexity:level",
+      "object": "7"
+    },
+    {
+      "subject": "rustc_parse::Parser",
+      "predicate": "complexity:dependsOn",
+      "object": "sess"
+    },
+    {
+      "subject": "rustc_parse::Parser",
+      "predicate": "complexity:dependsOn",
+      "object": "token"
+    },
+    {
+      "subject": "rustc_parse::Parser",
+      "predicate": "complexity:dependsOn",
+      "object": "restrictions"
+    },
+    {
+      "subject": "rustc_parse::Parser",
+      "predicate": "complexity:dependsOn",
+      "object": "expected_tokens"
+    },
+    {
+      "subject": "rustc_parse::Parser",
+      "predicate": "complexity:dependsOn",
+      "object": "token_cursor"
+    },
+    {
+      "subject": "rustc_parse::Parser",
+      "predicate": "complexity:dependsOn",
+      "object": "desugar_doc_comments"
+    },
+    {
+      "subject": "rustc_parse::Parser",
+      "predicate": "complexity:dependsOn",
+      "object": "cfg"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:step",
+      "object": "complex_7_analysis_6"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasInput",
+      "object": "object:rustc_resolve::Resolver"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasInput",
+      "object": "complexity:7"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasInput",
+      "object": "deps_count:7"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasOutput",
+      "object": "session"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasOutput",
+      "object": "definitions"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasOutput",
+      "object": "graph_root"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasOutput",
+      "object": "prelude"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasOutput",
+      "object": "extern_prelude"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasOutput",
+      "object": "field_names"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:hasOutput",
+      "object": "struct_constructors"
+    },
+    {
+      "subject": "state_5",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_6"
+    },
+    {
+      "subject": "rustc_resolve::Resolver",
+      "predicate": "complexity:level",
+      "object": "7"
+    },
+    {
+      "subject": "rustc_resolve::Resolver",
+      "predicate": "complexity:dependsOn",
+      "object": "session"
+    },
+    {
+      "subject": "rustc_resolve::Resolver",
+      "predicate": "complexity:dependsOn",
+      "object": "definitions"
+    },
+    {
+      "subject": "rustc_resolve::Resolver",
+      "predicate": "complexity:dependsOn",
+      "object": "graph_root"
+    },
+    {
+      "subject": "rustc_resolve::Resolver",
+      "predicate": "complexity:dependsOn",
+      "object": "prelude"
+    },
+    {
+      "subject": "rustc_resolve::Resolver",
+      "predicate": "complexity:dependsOn",
+      "object": "extern_prelude"
+    },
+    {
+      "subject": "rustc_resolve::Resolver",
+      "predicate": "complexity:dependsOn",
+      "object": "field_names"
+    },
+    {
+      "subject": "rustc_resolve::Resolver",
+      "predicate": "complexity:dependsOn",
+      "object": "struct_constructors"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:step",
+      "object": "complex_7_analysis_7"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasInput",
+      "object": "object:rustc_hir_typeck::FnCtxt"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasInput",
+      "object": "complexity:7"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasInput",
+      "object": "deps_count:7"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasOutput",
+      "object": "infcx"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasOutput",
+      "object": "param_env"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasOutput",
+      "object": "body_id"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasOutput",
+      "object": "err_count_on_creation"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasOutput",
+      "object": "ret_coercion"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasOutput",
+      "object": "ret_type"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:hasOutput",
+      "object": "fallback_has_occurred"
+    },
+    {
+      "subject": "state_6",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_7"
+    },
+    {
+      "subject": "rustc_hir_typeck::FnCtxt",
+      "predicate": "complexity:level",
+      "object": "7"
+    },
+    {
+      "subject": "rustc_hir_typeck::FnCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "infcx"
+    },
+    {
+      "subject": "rustc_hir_typeck::FnCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "param_env"
+    },
+    {
+      "subject": "rustc_hir_typeck::FnCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "body_id"
+    },
+    {
+      "subject": "rustc_hir_typeck::FnCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "err_count_on_creation"
+    },
+    {
+      "subject": "rustc_hir_typeck::FnCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "ret_coercion"
+    },
+    {
+      "subject": "rustc_hir_typeck::FnCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "ret_type"
+    },
+    {
+      "subject": "rustc_hir_typeck::FnCtxt",
+      "predicate": "complexity:dependsOn",
+      "object": "fallback_has_occurred"
+    },
+    {
+      "subject": "state_8",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_8",
+      "predicate": "bootstrap:step",
+      "object": "initialize_workspace"
+    },
+    {
+      "subject": "state_8",
+      "predicate": "bootstrap:hasInput",
+      "object": "Cargo.toml"
+    },
+    {
+      "subject": "state_8",
+      "predicate": "bootstrap:hasInput",
+      "object": "src/"
+    },
+    {
+      "subject": "state_8",
+      "predicate": "bootstrap:hasOutput",
+      "object": "output2/"
+    },
+    {
+      "subject": "state_7",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_8"
+    },
+    {
+      "subject": "state_9",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_9",
+      "predicate": "bootstrap:step",
+      "object": "process_dependencies"
+    },
+    {
+      "subject": "state_9",
+      "predicate": "bootstrap:hasInput",
+      "object": "output2/"
+    },
+    {
+      "subject": "state_9",
+      "predicate": "bootstrap:hasInput",
+      "object": "split-decls-rs.toml"
+    },
+    {
+      "subject": "state_9",
+      "predicate": "bootstrap:hasOutput",
+      "object": "output2/Cargo.toml"
+    },
+    {
+      "subject": "state_9",
+      "predicate": "bootstrap:hasOutput",
+      "object": "dependency_graph"
+    },
+    {
+      "subject": "state_8",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_9"
+    },
+    {
+      "subject": "state_10",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_10",
+      "predicate": "bootstrap:step",
+      "object": "generate_wrapped_crates"
+    },
+    {
+      "subject": "state_10",
+      "predicate": "bootstrap:hasInput",
+      "object": "dependency_graph"
+    },
+    {
+      "subject": "state_10",
+      "predicate": "bootstrap:hasInput",
+      "object": "submodules/"
+    },
+    {
+      "subject": "state_10",
+      "predicate": "bootstrap:hasOutput",
+      "object": "output2/wrapped_crates/"
+    },
+    {
+      "subject": "state_9",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_10"
+    },
+    {
+      "subject": "state_11",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_11",
+      "predicate": "bootstrap:step",
+      "object": "build_workspace"
+    },
+    {
+      "subject": "state_11",
+      "predicate": "bootstrap:hasInput",
+      "object": "output2/wrapped_crates/"
+    },
+    {
+      "subject": "state_11",
+      "predicate": "bootstrap:hasInput",
+      "object": "output2/Cargo.toml"
+    },
+    {
+      "subject": "state_11",
+      "predicate": "bootstrap:hasOutput",
+      "object": "target/"
+    },
+    {
+      "subject": "state_11",
+      "predicate": "bootstrap:hasOutput",
+      "object": "build_artifacts"
+    },
+    {
+      "subject": "state_10",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_11"
+    },
+    {
+      "subject": "state_12",
+      "predicate": "rdf:type",
+      "object": "bootstrap:ExecutionState"
+    },
+    {
+      "subject": "state_12",
+      "predicate": "bootstrap:step",
+      "object": "validate_output"
+    },
+    {
+      "subject": "state_12",
+      "predicate": "bootstrap:hasInput",
+      "object": "build_artifacts"
+    },
+    {
+      "subject": "state_12",
+      "predicate": "bootstrap:hasInput",
+      "object": "target/"
+    },
+    {
+      "subject": "state_12",
+      "predicate": "bootstrap:hasOutput",
+      "object": "validation_report"
+    },
+    {
+      "subject": "state_12",
+      "predicate": "bootstrap:hasOutput",
+      "object": "success_state"
+    },
+    {
+      "subject": "state_11",
+      "predicate": "bootstrap:transitionsTo",
+      "object": "state_12"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "complexity_level": 7,
+  "dependencies": [
+    "session",
+    "definitions",
+    "graph_root",
+    "prelude",
+    "extern_prelude",
+    "field_names",
+    "struct_constructors"
+  ],
+  "object_name": "rustc_resolve::Resolver",
+  "states": [
+    {
+      "dependencies": [],
+      "id": "state_6",
+      "inputs": [
+        "object:rustc_resolve::Resolver",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "session",
+        "definitions",
+        "graph_root",
+        "prelude",
+        "extern_prelude",
+        "field_names",
+        "struct_constructors"
+      ],
+      "step": "complex_7_analysis_6",
+      "success": true,
+      "timestamp": 1766691684
+    }
+  ],
+  "usage_count": 1
+}

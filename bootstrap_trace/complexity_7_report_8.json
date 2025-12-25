@@ -1,0 +1,37 @@
+{
+  "complexity_level": 7,
+  "dependencies": [
+    "infcx",
+    "param_env",
+    "body_id",
+    "err_count_on_creation",
+    "ret_coercion",
+    "ret_type",
+    "fallback_has_occurred"
+  ],
+  "object_name": "rustc_hir_typeck::FnCtxt",
+  "states": [
+    {
+      "dependencies": [],
+      "id": "state_7",
+      "inputs": [
+        "object:rustc_hir_typeck::FnCtxt",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "infcx",
+        "param_env",
+        "body_id",
+        "err_count_on_creation",
+        "ret_coercion",
+        "ret_type",
+        "fallback_has_occurred"
+      ],
+      "step": "complex_7_analysis_7",
+      "success": true,
+      "timestamp": 1766691684
+    }
+  ],
+  "usage_count": 1
+}

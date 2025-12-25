@@ -1,0 +1,37 @@
+{
+  "complexity_level": 7,
+  "dependencies": [
+    "opts",
+    "parse_sess",
+    "sysroot",
+    "io",
+    "code_stats",
+    "ctfe_backtrace",
+    "miri_unleashed_features"
+  ],
+  "object_name": "rustc_session::Session",
+  "states": [
+    {
+      "dependencies": [],
+      "id": "state_2",
+      "inputs": [
+        "object:rustc_session::Session",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "opts",
+        "parse_sess",
+        "sysroot",
+        "io",
+        "code_stats",
+        "ctfe_backtrace",
+        "miri_unleashed_features"
+      ],
+      "step": "complex_7_analysis_2",
+      "success": true,
+      "timestamp": 1766691684
+    }
+  ],
+  "usage_count": 1
+}

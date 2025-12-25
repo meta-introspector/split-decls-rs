@@ -19,7 +19,7 @@ fn main() -> Result<()> {
     let args = Args::parse();
     
     // Load config
-    let config = load_split_decls_config("split-decls-rs.toml")?;
+    let config = split_decls_types::SplitDeclsConfig::load_from_file("split-decls-rs.toml")?;
     
     // Generate wrapped crate
     let output_base = PathBuf::from("output2");
@@ -30,7 +30,15 @@ fn main() -> Result<()> {
     }
     
     // Use existing single crate generation logic
-    generate_wrapped_crate(&args.crate_path, &output_base, &config)?;
+    let patch_config = split_decls_rs::patch_config::PatchConfig::default();
+    let _errors = split_decls_rs::generate_wrapped_crate::generate_wrapped_crate(
+        &output_base,
+        "single_crate",
+        &args.crate_path,
+        &config,
+        &patch_config,
+        false
+    )?;
     
     println!("✅ Successfully wrapped crate to output2");
     Ok(())

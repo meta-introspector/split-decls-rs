@@ -1,0 +1,37 @@
+{
+  "complexity_level": 7,
+  "dependencies": [
+    "opts",
+    "crate_cfg",
+    "crate_disambiguator",
+    "input",
+    "output_dir",
+    "output_file",
+    "file_loader"
+  ],
+  "object_name": "rustc_interface::Config",
+  "states": [
+    {
+      "dependencies": [],
+      "id": "state_0",
+      "inputs": [
+        "object:rustc_interface::Config",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "opts",
+        "crate_cfg",
+        "crate_disambiguator",
+        "input",
+        "output_dir",
+        "output_file",
+        "file_loader"
+      ],
+      "step": "complex_7_analysis_0",
+      "success": true,
+      "timestamp": 1766691684
+    }
+  ],
+  "usage_count": 1
+}

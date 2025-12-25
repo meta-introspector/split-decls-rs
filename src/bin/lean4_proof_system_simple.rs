@@ -2,7 +2,7 @@ use std::fs;
 use anyhow::Result;
 
 fn main() -> Result<()> {
-    println!("🔥 LEAN4 PROOF SYSTEM v2.0 - SIMPLE TEMPLATES");
+    println!("LEAN4 PROOF SYSTEM v2.0 - SIMPLE TEMPLATES");
     
     // Step 1: K-theory analysis (from previous conversation summary)
     let k_complexity = 6.2;
@@ -142,7 +142,7 @@ theorem build_time_verification : True := by trivial
 fn execute_lean4_proof() -> bool {
     use std::process::Command;
     
-    println!("\n⚡ STEP 3: LEAN4 EXECUTION");
+    println!("\\nSTEP 3: LEAN4 EXECUTION");
     
     // Try to execute the Lean4 proof
     match Command::new("lean")
@@ -167,7 +167,7 @@ fn execute_lean4_proof() -> bool {
             }
         }
         Err(_) => {
-            println!("   📝 Lean4 not available (proof files generated)");
+            println!("   Lean4 not available (proof files generated)");
             false
         }
     }

@@ -25,7 +25,7 @@ fn main() -> Result<()> {
     let args = Args::parse();
     
     println!("🔧 EIGENMATRIX ANALYSIS: {}", args.path.display());
-    println!("=".repeat(50));
+    println!("{}", "=".repeat(50));
     
     let mut crates = Vec::new();
     analyze_directory(&args.path, &mut crates)?;

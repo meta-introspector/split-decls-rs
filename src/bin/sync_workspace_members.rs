@@ -44,7 +44,7 @@ fn find_local_workspace_crates(dir: &Path) -> Result<Vec<String>> {
 
 fn update_parent_workspace(cargo_path: &Path, new_members: &[String]) -> Result<()> {
     let content = fs::read_to_string(cargo_path)?;
-    let mut doc = content.parse::<Document>()?;
+    let mut doc = content.parse::<toml_edit::Document>()?;
     
     // Get or create workspace table
     if !doc.contains_key("workspace") {

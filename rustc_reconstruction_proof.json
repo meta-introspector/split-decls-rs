@@ -1,0 +1,222 @@
+{
+  "steps": [
+    {
+      "layer": 7,
+      "input_tokens": [
+        "🦄",
+        "🔮",
+        "🌟",
+        "🎨",
+        "🎪",
+        "🐉",
+        "💎",
+        "🎭",
+        "🦋"
+      ],
+      "output_patterns": [
+        "🎪",
+        "🔮",
+        "🔥",
+        "🎯",
+        "🌟",
+        "🎭",
+        "💎",
+        "🎨",
+        "🦄"
+      ],
+      "expansion_ratio": 1.0,
+      "description": "Ultra-compressed symbols expand to abstract operators"
+    },
+    {
+      "layer": 6,
+      "input_tokens": [
+        "🎪",
+        "🔮",
+        "🔥",
+        "🎯",
+        "🌟",
+        "🎭",
+        "💎",
+        "🎨",
+        "🦄"
+      ],
+      "output_patterns": [
+        "💎",
+        "🚀",
+        "🔥",
+        "✨",
+        "🎯",
+        "🎪",
+        "⚡",
+        "🎨",
+        "🔮"
+      ],
+      "expansion_ratio": 1.0,
+      "description": "Abstract operators become concrete code fragments"
+    },
+    {
+      "layer": 5,
+      "input_tokens": [
+        "💎",
+        "🚀",
+        "🔥",
+        "✨",
+        "🎯",
+        "🎪",
+        "⚡",
+        "🎨",
+        "🔮"
+      ],
+      "output_patterns": [
+        "🔮",
+        "f64",
+        "🚀",
+        "✨",
+        "contains",
+        "🦄",
+        "expr",
+        "🎭",
+        "🎪"
+      ],
+      "expansion_ratio": 1.0,
+      "description": "Code fragments expand to function calls and expressions"
+    },
+    {
+      "layer": 4,
+      "input_tokens": [
+        "🔮",
+        "f64",
+        "🚀",
+        "✨",
+        "contains",
+        "🦄",
+        "expr",
+        "🎭",
+        "🎪"
+      ],
+      "output_patterns": [
+        "line",
+        "f64",
+        "💎",
+        "🌟",
+        "contains",
+        "🔥",
+        "expr",
+        "c🌈",
+        "🎯s"
+      ],
+      "expansion_ratio": 1.0,
+      "description": "Expressions become method chains and complex operations"
+    },
+    {
+      "layer": 3,
+      "input_tokens": [
+        "line",
+        "f64",
+        "💎",
+        "🌟",
+        "contains",
+        "🔥",
+        "expr",
+        "c🌈",
+        "🎯s"
+      ],
+      "output_patterns": [
+        "line",
+        "f64",
+        "🦋",
+        "🎭",
+        "contains",
+        "🔥",
+        "expr",
+        "c🌈",
+        "🎯s"
+      ],
+      "expansion_ratio": 1.0,
+      "description": "Operations expand to full statement patterns"
+    },
+    {
+      "layer": 2,
+      "input_tokens": [
+        "line",
+        "f64",
+        "🦋",
+        "🎭",
+        "contains",
+        "🔥",
+        "expr",
+        "c🌈",
+        "🎯s"
+      ],
+      "output_patterns": [
+        "line",
+        "f64",
+        "\"println!\"",
+        "🎲s.macros",
+        "contains",
+        "💎",
+        "expr",
+        "c🌈",
+        "🎯s"
+      ],
+      "expansion_ratio": 1.0,
+      "description": "Statements become complete code blocks"
+    },
+    {
+      "layer": 1,
+      "input_tokens": [
+        "line",
+        "f64",
+        "\"println!\"",
+        "🎲s.macros",
+        "contains",
+        "💎",
+        "expr",
+        "c🌈",
+        "🎯s"
+      ],
+      "output_patterns": [
+        "line",
+        "f64",
+        "\"println!\"",
+        "🎲s.macros",
+        "contains",
+        "\"raw.githubuser🎭.com\"",
+        "expr",
+        "c🌈",
+        "🎯s"
+      ],
+      "expansion_ratio": 1.0,
+      "description": "Code blocks expand to full function implementations"
+    },
+    {
+      "layer": 0,
+      "input_tokens": [
+        "line",
+        "f64",
+        "\"println!\"",
+        "🎲s.macros",
+        "contains",
+        "\"raw.githubuser🎭.com\"",
+        "expr",
+        "c🌈",
+        "🎯s"
+      ],
+      "output_patterns": [
+        "line",
+        "f64",
+        "\"println!\"",
+        "🎲s.macros",
+        "contains",
+        "\"raw.githubuser🎭.com\"",
+        "expr",
+        "c🌈",
+        "🎯s"
+      ],
+      "expansion_ratio": 1.0,
+      "description": "Functions reconstruct into complete Rust source patterns"
+    }
+  ],
+  "final_complexity": "9 patterns from 9 tokens",
+  "total_expansion": 1.0
+}

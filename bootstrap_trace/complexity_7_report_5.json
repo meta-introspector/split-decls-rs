@@ -1,0 +1,37 @@
+{
+  "complexity_level": 7,
+  "dependencies": [
+    "target_machine",
+    "module",
+    "builder",
+    "context",
+    "types",
+    "intrinsics",
+    "metadata"
+  ],
+  "object_name": "rustc_codegen_llvm::LlvmCodegenBackend",
+  "states": [
+    {
+      "dependencies": [],
+      "id": "state_4",
+      "inputs": [
+        "object:rustc_codegen_llvm::LlvmCodegenBackend",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "target_machine",
+        "module",
+        "builder",
+        "context",
+        "types",
+        "intrinsics",
+        "metadata"
+      ],
+      "step": "complex_7_analysis_4",
+      "success": true,
+      "timestamp": 1766691684
+    }
+  ],
+  "usage_count": 1
+}

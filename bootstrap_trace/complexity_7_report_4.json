@@ -1,0 +1,37 @@
+{
+  "complexity_level": 7,
+  "dependencies": [
+    "gcx",
+    "interners",
+    "dep_graph",
+    "prof",
+    "types",
+    "all_traits",
+    "trait_map"
+  ],
+  "object_name": "rustc_middle::ty::TyCtxt",
+  "states": [
+    {
+      "dependencies": [],
+      "id": "state_3",
+      "inputs": [
+        "object:rustc_middle::ty::TyCtxt",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "gcx",
+        "interners",
+        "dep_graph",
+        "prof",
+        "types",
+        "all_traits",
+        "trait_map"
+      ],
+      "step": "complex_7_analysis_3",
+      "success": true,
+      "timestamp": 1766691684
+    }
+  ],
+  "usage_count": 1
+}

@@ -139,31 +139,3 @@ theorem build_time_verification : True := by trivial
     
     println!("🏗️  MKBUILDRS LEAN4 EXTRACTION: Generated BuildProof.lean");
 }
-"#;
-    
-    let _ = fs::create_dir_all("target/lean4_extracted");
-    let buildrs_generated = fs::write("build.rs", buildrs_content).is_ok();
-    
-    println!("\n🎯 FINAL PROOF STATUS:");
-    println!("   ✅ Compile-time proof: VERIFIED");
-    println!("   {} Lean4 extraction: {}", 
-        if lean4_executed { "✅" } else { "📝" },
-        if lean4_executed { "EXECUTED" } else { "GENERATED" }
-    );
-    println!("   {} Build.rs integration: {}", 
-        if buildrs_generated { "✅" } else { "❌" },
-        if buildrs_generated { "GENERATED" } else { "FAILED" }
-    );
-    
-    println!("\n💡 METACOQ-STYLE EXTRACTION COMPLETE:");
-    println!("   🔬 Mathematical isomorphism PROVEN in Rust");
-    println!("   📄 Lean4 proof files GENERATED and EXECUTED");
-    println!("   🏗️  Build system INTEGRATED with proof extraction");
-    println!("   🎯 Code complexity ↔ Elliptic curves VERIFIED!");
-    
-    // Show generated files
-    println!("\n📁 GENERATED FILES:");
-    println!("   lean4_proof/Main.lean - Executable Lean4 proof");
-    println!("   lean4_proof/lakefile.lean - Lean4 build config");
-    println!("   build.rs - Build-time proof extraction");
-}

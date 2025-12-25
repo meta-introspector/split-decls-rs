@@ -1,0 +1,37 @@
+{
+  "complexity_level": 7,
+  "dependencies": [
+    "session",
+    "compiler",
+    "input",
+    "output_dir",
+    "output_file",
+    "temps_dir",
+    "codegen_backend"
+  ],
+  "object_name": "rustc_driver::Compilation",
+  "states": [
+    {
+      "dependencies": [],
+      "id": "state_1",
+      "inputs": [
+        "object:rustc_driver::Compilation",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "session",
+        "compiler",
+        "input",
+        "output_dir",
+        "output_file",
+        "temps_dir",
+        "codegen_backend"
+      ],
+      "step": "complex_7_analysis_1",
+      "success": true,
+      "timestamp": 1766691684
+    }
+  ],
+  "usage_count": 1
+}

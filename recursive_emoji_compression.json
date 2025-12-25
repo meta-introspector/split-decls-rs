@@ -1,0 +1,186 @@
+{
+  "layers": [
+    {
+      "layer": 0,
+      "vocab": {
+        "🦄": ".\\n\"",
+        "🐉": "name.contains",
+        "🎯": "type_name",
+        "🔥": "entry_path.file_name",
+        "⚡": ".starts_with",
+        "🎭": "content",
+        "🌈": "blob",
+        "🎪": "Cargo.toml\"",
+        "🔮": "'_'",
+        "🍀": "\"macro_rules!\"",
+        "🎨": "\"macro\"",
+        "💫": "trimmed.contains",
+        "🌸": "RDF",
+        "🦋": "hash",
+        "💎": "Path",
+        "🌟": ".\\n\\n\"",
+        "🎲": "total",
+        "✨": "totals.enums",
+        "🚀": ".count"
+      },
+      "compression_ratio": 0.012591119946984758,
+      "parent_layer": null
+    },
+    {
+      "layer": 1,
+      "vocab": {
+        "🌸": "path.file_name",
+        "✨": "\"format!\"",
+        "⚡": ".as_ref",
+        "🦋": "map_or",
+        "💎": "\"raw.githubuser🎭.com\"",
+        "🎨": "\"_enum_\"",
+        "🐉": "1.0",
+        "🔮": "\"_struct_\"",
+        "🎲": "state\"",
+        "🌟": "count",
+        "🎭": "analysis",
+        "🚀": "turtle.push_str",
+        "🍀": "🎲_local_terms",
+        "🎪": ".to_string_lossy",
+        "🎯": "enum",
+        "🌈": "all",
+        "🔥": "is_uppercase",
+        "💫": "is_file",
+        "🦄": ".unwrap_or_default"
+      },
+      "compression_ratio": 0.08962264150943396,
+      "parent_layer": 0
+    },
+    {
+      "layer": 2,
+      "vocab": {
+        "🦄": "functions",
+        "🌈": "🚀",
+        "⚡": "⚡",
+        "🎲": "🌸",
+        "🦋": "\"println!\"",
+        "🌟": "🎲_crates",
+        "🐉": "🐉",
+        "🌸": "🎨",
+        "🔥": "💎",
+        "💫": "🎲",
+        "💎": ".🦋",
+        "🎪": "filename",
+        "🎨": "🎲_nodes",
+        "🔮": "\"@prefix",
+        "🚀": "\"Failed",
+        "🎭": "🎲s.macros",
+        "🎯": "essential_nodes",
+        "🍀": "100.0",
+        "✨": "line.contains"
+      },
+      "compression_ratio": 0.2676056338028169,
+      "parent_layer": 1
+    },
+    {
+      "layer": 3,
+      "vocab": {
+        "🔮": "path",
+        "💫": "file🐉",
+        "🎪": "false",
+        "🎭": "🎪",
+        "🍀": "\"🎪",
+        "🌈": "system",
+        "🐉": "name",
+        "🚀": "🦄",
+        "🔥": "🔥",
+        "🦋": "macros",
+        "🎲": "file_name",
+        "🎨": "path.💫",
+        "💎": "🦋",
+        "✨": "🐉",
+        "🌸": "structs",
+        "🎯": ".context",
+        "🦄": "🔮",
+        "🌟": "🎭",
+        "⚡": "🍀"
+      },
+      "compression_ratio": 0.5,
+      "parent_layer": 2
+    },
+    {
+      "layer": 4,
+      "vocab": {
+        "🔮": "line",
+        "🎯": "🌈",
+        "⚡": "🦄",
+        "🐉": "🎲",
+        "🔥": "⚡",
+        "💎": "🌸",
+        "🦋": "🎨",
+        "💫": "lit",
+        "🎨": "🚀",
+        "🎪": "🎯s",
+        "🎭": "c🌈",
+        "✨": "🌟",
+        "🌟": "🎯",
+        "🚀": "💎",
+        "🦄": "🔥",
+        "🌈": "💫s"
+      },
+      "compression_ratio": 0.5333333333333333,
+      "parent_layer": 3
+    },
+    {
+      "layer": 5,
+      "vocab": {
+        "💎": "🔮",
+        "🌟": "🎨",
+        "🚀": "f64",
+        "🔮": "🎪",
+        "🎯": "contains",
+        "🔥": "🚀",
+        "🎭": "🐉",
+        "🦄": "🦋",
+        "⚡": "expr",
+        "🎨": "🎭",
+        "🎪": "🦄"
+      },
+      "compression_ratio": 0.36666666666666664,
+      "parent_layer": 4
+    },
+    {
+      "layer": 6,
+      "vocab": {
+        "🎭": "🎪",
+        "🦄": "🔮",
+        "🚀": "💫",
+        "💎": "⚡",
+        "🎨": "🎨",
+        "⚡": "🌟",
+        "🔮": "🚀",
+        "🔥": "🔥",
+        "🎯": "✨",
+        "🌟": "🎯",
+        "🎪": "💎"
+      },
+      "compression_ratio": 0.44,
+      "parent_layer": 5
+    },
+    {
+      "layer": 7,
+      "vocab": {
+        "🦄": "🎪",
+        "🔮": "🔮",
+        "🌟": "🔥",
+        "🎨": "🎯",
+        "🎪": "🌟",
+        "🐉": "🎭",
+        "💎": "💎",
+        "🎭": "🎨",
+        "🦋": "🦄"
+      },
+      "compression_ratio": 0.36,
+      "parent_layer": 6
+    }
+  ],
+  "total_compression": 0.005964214711729622,
+  "original_patterns": 1509,
+  "final_vocab_size": 9
+}

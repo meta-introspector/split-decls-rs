@@ -1,0 +1,37 @@
+{
+  "complexity_level": 7,
+  "dependencies": [
+    "sess",
+    "token",
+    "restrictions",
+    "expected_tokens",
+    "token_cursor",
+    "desugar_doc_comments",
+    "cfg"
+  ],
+  "object_name": "rustc_parse::Parser",
+  "states": [
+    {
+      "dependencies": [],
+      "id": "state_5",
+      "inputs": [
+        "object:rustc_parse::Parser",
+        "complexity:7",
+        "deps_count:7"
+      ],
+      "outputs": [
+        "sess",
+        "token",
+        "restrictions",
+        "expected_tokens",
+        "token_cursor",
+        "desugar_doc_comments",
+        "cfg"
+      ],
+      "step": "complex_7_analysis_5",
+      "success": true,
+      "timestamp": 1766691684
+    }
+  ],
+  "usage_count": 1
+}
