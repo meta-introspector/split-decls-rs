@@ -131,14 +131,24 @@ fn process_all_rust_files(
 
                 let decl_file_path = paths.decls_output_dir.join(format!("{}.rs", error_module_name_str));
                 if !dry_run {
-                    add_generated_rust_header!(
-                        &decl_file_path,
-                        error_output_tokens.to_string().as_str(),
-                        file!(),
-                        line!()
-                    )
-                    .context(format!("Failed to write error declaration to {}", decl_file_path.display()))?;
-                    format_rust_file(&decl_file_path)?;
+                    let initial_content = error_output_tokens.to_string();
+                    match format_rust_file(&initial_content, &decl_file_path) {
+                        Ok(formatted_content) => {
+                            fs::write(&decl_file_path, formatted_content)
+                                .context(format!("Failed to write formatted error declaration to {}", decl_file_path.display()))?;
+                        },
+                        Err(e) => {
+                            let error_comment = format!(
+                                "// !!! Formatting failed for this error module. The following code is unformatted. !!!\n\
+                                // !!! Error: {} !!!\n\n",
+                                e
+                            );
+                            let content_with_error_comment = error_comment + &initial_content;
+                            fs::write(&decl_file_path, content_with_error_comment)
+                                .context(format!("Failed to write unformatted error declaration with comment to {}", decl_file_path.display()))?;
+                            error!("\n<blip style='color:red'>Formatting error for parsing error in '{}' (written to {})</blip>", rust_file.display(), decl_file_path.display());
+                        }
+                    }
                 } else {
                     println!("Dry-run: Would write error declaration to {}", decl_file_path.display());
                 }
@@ -212,13 +222,29 @@ pub fn copy_declarations_to_output(
 
     for (decl_name, decl_tokens_str) in declarations {
         let file_path = crate_output_dir.join(format!("{}.rs", decl_name));
-        add_generated_rust_header!(
-            &file_path,
+        let initial_content = add_generated_rust_header!(
             decl_tokens_str.as_str(),
             file!(),
             line!()
-        )
-        .context(format!("Failed to write declaration to {}", file_path.display()))?;
+        );
+
+        match format_rust_file(&initial_content, &file_path) {
+            Ok(formatted_content) => {
+                std::fs::write(&file_path, formatted_content)
+                    .context(format!("Failed to write formatted declaration to {}", file_path.display()))?;
+            },
+            Err(e) => {
+                let error_comment = format!(
+                    "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                    // !!! Error: {} !!!\n\n",
+                    e
+                );
+                let content_with_error_comment = error_comment + &initial_content;
+                std::fs::write(&file_path, content_with_error_comment)
+                    .context(format!("Failed to write unformatted declaration with error comment to {}", file_path.display()))?;
+                error!("\n<blip style='color:red'>Formatting error for '{} {}' (written to {})</blip>", "declaration", decl_name, file_path.display());
+            }
+        }
     }
     Ok(())
 }
@@ -306,13 +332,29 @@ pub use introspector_decl2_macros::*;
     fs::create_dir_all(output_lib_path.parent().unwrap())
         .context("Failed to create output src directory")?;
     
-    add_generated_rust_header!(
-        &output_lib_path,
+    let initial_content = add_generated_rust_header!(
         new_lib_content.as_str(),
         file!(),
         line!()
-    )
-    .context(format!("Failed to write output lib.rs at {}", output_lib_path.display()))?;
+    );
+
+    match format_rust_file(&initial_content, &output_lib_path) {
+        Ok(formatted_content) => {
+            fs::write(&output_lib_path, formatted_content)
+                .context(format!("Failed to write formatted output lib.rs at {}", output_lib_path.display()))?;
+        },
+        Err(e) => {
+            let error_comment = format!(
+                "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                // !!! Error: {} !!!\n\n",
+                e
+            );
+            let content_with_error_comment = error_comment + &initial_content;
+            fs::write(&output_lib_path, content_with_error_comment)
+                .context(format!("Failed to write unformatted output lib.rs with error comment at {}", output_lib_path.display()))?;
+            error!("\n<blip style='color:red'>Formatting error for output lib.rs (written to {})</blip>", output_lib_path.display());
+        }
+    }
     
     println!("Generated output lib.rs at {}", output_lib_path.display());
     Ok(())
@@ -320,6 +362,10 @@ pub use introspector_decl2_macros::*;
 
 /// Generate new lib.rs that re-exports the split declarations
 fn generate_new_lib_rs(paths: &CratePaths) -> Result<()> {
+    let output_lib_path = paths.output_crate_path.join("src").join("lib.rs");
+    fs::create_dir_all(output_lib_path.parent().unwrap())
+        .context(format!("Failed to create output src directory for lib.rs at {}", output_lib_path.display()))?;
+
     let new_lib_content = format!(r#"// Generated by split-decls-rs
 // Re-exports all split declarations
 
@@ -333,17 +379,29 @@ pub use decls::*;
 pub use introspector_decl2_macros::*;
 "#);
     
-    let output_lib_path = paths.output_crate_path.join("src").join("lib.rs");
-    fs::create_dir_all(output_lib_path.parent().unwrap())
-        .context(format!("Failed to create output src directory for lib.rs at {}", output_lib_path.display()))?;
-
-    add_generated_rust_header!(
-        &output_lib_path,
+    let initial_content = add_generated_rust_header!(
         new_lib_content.as_str(),
         file!(),
         line!()
-    )
-    .context(format!("Failed to write new lib.rs at {}", output_lib_path.display()))?;
+    );
+
+    match format_rust_file(&initial_content, &output_lib_path) {
+        Ok(formatted_content) => {
+            fs::write(&output_lib_path, formatted_content)
+                .context(format!("Failed to write formatted new lib.rs at {}", output_lib_path.display()))?;
+        },
+        Err(e) => {
+            let error_comment = format!(
+                "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                // !!! Error: {} !!!\n\n",
+                e
+            );
+            let content_with_error_comment = error_comment + &initial_content;
+            fs::write(&output_lib_path, content_with_error_comment)
+                .context(format!("Failed to write unformatted new lib.rs with error comment at {}", output_lib_path.display()))?;
+            error!("\n<blip style='color:red'>Formatting error for new lib.rs (written to {})</blip>", output_lib_path.display());
+        }
+    }
     
     println!("Generated new lib.rs at {}", output_lib_path.display());
     Ok(())
@@ -351,6 +409,10 @@ pub use introspector_decl2_macros::*;
 
 /// Generate new build.rs for monitoring changes
 fn generate_new_build_rs(paths: &CratePaths) -> Result<()> {
+    let output_build_path = paths.output_crate_path.join("build.rs");
+    fs::create_dir_all(output_build_path.parent().unwrap())
+        .context(format!("Failed to create output directory for build.rs at {}", output_build_path.display()))?;
+
     let build_content = format!(r#"// Generated by split-decls-rs
 use anyhow::Result;
 
@@ -365,17 +427,29 @@ fn main() -> Result<()> {{
 }}
 "#);
     
-    let output_build_path = paths.output_crate_path.join("build.rs");
-    fs::create_dir_all(output_build_path.parent().unwrap())
-        .context(format!("Failed to create output directory for build.rs at {}", output_build_path.display()))?;
-
-    add_generated_rust_header!(
-        &output_build_path,
+    let initial_content = add_generated_rust_header!(
         build_content.as_str(),
         file!(),
         line!()
-    )
-    .context(format!("Failed to write new build.rs at {}", output_build_path.display()))?;
+    );
+
+    match format_rust_file(&initial_content, &output_build_path) {
+        Ok(formatted_content) => {
+            fs::write(&output_build_path, formatted_content)
+                .context(format!("Failed to write formatted new build.rs at {}", output_build_path.display()))?;
+        },
+        Err(e) => {
+            let error_comment = format!(
+                "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                // !!! Error: {} !!!\n\n",
+                e
+            );
+            let content_with_error_comment = error_comment + &initial_content;
+            fs::write(&output_build_path, content_with_error_comment)
+                .context(format!("Failed to write unformatted new build.rs with error comment at {}", output_build_path.display()))?;
+            error!("\n<blip style='color:red'>Formatting error for new build.rs (written to {})</blip>", output_build_path.display());
+        }
+    }
     
     println!("Generated new build.rs at {}", output_build_path.display());
     Ok(())

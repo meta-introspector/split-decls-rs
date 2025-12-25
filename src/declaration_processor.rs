@@ -127,13 +127,30 @@ pub fn extract_and_write_declarations(
             };
             
             if !dry_run {
-                add_generated_rust_header!(
-                    &decl_file_path,
+                let decl_file_path = paths.decls_output_dir.join(format!("{}.rs", module_name_str));
+                let initial_content = add_generated_rust_header!(
                     file_content.to_string().as_str(),
                     file!(),
                     line!()
-                )
-                .context(format!("Failed to write to {}", decl_file_path.display()))?;
+                );
+
+                match crate::rustfmt_utils::format_rust_file(&initial_content, &decl_file_path) {
+                    Ok(formatted_content) => {
+                        fs::write(&decl_file_path, formatted_content)
+                            .context(format!("Failed to write formatted declaration to {}", decl_file_path.display()))?;
+                    },
+                    Err(e) => {
+                        let error_comment = format!(
+                            "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                            // !!! Error: {} !!!\n\n",
+                            e
+                        );
+                        let content_with_error_comment = error_comment + &initial_content;
+                        fs::write(&decl_file_path, content_with_error_comment)
+                            .context(format!("Failed to write unformatted declaration with error comment to {}", decl_file_path.display()))?;
+                        error!("\n<blip style='color:red'>Formatting error for '{} {}' (written to {})</blip>", decl.kind, decl.name, decl_file_path.display());
+                    }
+                }
                 println!("Split '{} {}' to {}", decl.kind, decl.name, decl_file_path.display());
             } else {
                 println!(

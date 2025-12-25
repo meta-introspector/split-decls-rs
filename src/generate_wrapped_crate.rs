@@ -66,7 +66,9 @@ pub fn generate_wrapped_crate(
     // Generate lib.rs for the wrapped crate
     generate_new_lib_rs(&wrapped_crate_paths, dry_run)?;
     if !dry_run {
-        format_rust_file(&wrapped_crate_paths.lib_rs_path)?;
+        let lib_rs_content = fs::read_to_string(&wrapped_crate_paths.lib_rs_path)
+            .context(format!("Failed to read generated lib.rs at {}", wrapped_crate_paths.lib_rs_path.display()))?;
+        format_rust_file(&lib_rs_content, &wrapped_crate_paths.lib_rs_path)?;
     }
 
     // Create a crate-specific config for writing to .split-decls-config.toml
@@ -89,7 +91,7 @@ pub fn generate_wrapped_crate(
     let serialized_config = toml::to_string(&crate_config)
         .context("Failed to serialize SplitDeclsConfig for wrapped crate")?;
     if !dry_run {
-        crate::add_generated_header!(
+        add_generated_header!(
             &wrapped_crate_paths.target_config_path,
             serialized_config.as_str(),
             file!(),
@@ -130,7 +132,9 @@ pub fn generate_wrapped_crate(
     // Generate build.rs for the wrapped crate (minimal version for monitoring patches)
     generate_new_build_rs(&wrapped_crate_paths, dry_run)?;
     if !dry_run {
-        format_rust_file(&wrapped_crate_paths.build_rs_path)?;
+        let build_rs_content = fs::read_to_string(&wrapped_crate_paths.build_rs_path)
+            .context(format!("Failed to read generated build.rs at {}", wrapped_crate_paths.build_rs_path.display()))?;
+        format_rust_file(&build_rs_content, &wrapped_crate_paths.build_rs_path)?;
     }
 
     Ok(module_not_found_errors) // Return the collected errors

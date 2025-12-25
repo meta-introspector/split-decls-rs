@@ -128,13 +128,28 @@ pub fn split_lib_rs(
                     }.to_string();
                     decl_file_content.push_str(&wrapped_decl);
 
-                    add_generated_rust_header!(
-                        &output_file_path,
+                    let initial_content = add_generated_rust_header!(
                         decl_file_content.as_str(),
                         file!(),
                         line!()
-                    )
-                    .context(format!("Failed to write declaration to {}", output_file_path.display()))?;
+                    );
+                    match crate::rustfmt_utils::format_rust_file(&initial_content, &output_file_path) {
+                        Ok(formatted_content) => {
+                            fs::write(&output_file_path, formatted_content)
+                                .context(format!("Failed to write formatted declaration to {}", output_file_path.display()))?;
+                        },
+                        Err(e) => {
+                            let error_comment = format!(
+                                "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                                // !!! Error: {} !!!\n\n",
+                                e
+                            );
+                            let content_with_error_comment = error_comment + &initial_content;
+                            fs::write(&output_file_path, content_with_error_comment)
+                                .context(format!("Failed to write unformatted declaration with error comment to {}", output_file_path.display()))?;
+                            eprintln!("\n<blip style='color:red'>Formatting error for '{} {}' (written to {})</blip>", kind, name, output_file_path.display());
+                        }
+                    }
                     println!("Extracted {} {} to {}", kind, name, output_file_path.display());
                     generated_decls_modules.push(name);
                 } else {
@@ -169,13 +184,28 @@ pub fn split_lib_rs(
     new_lib_rs_content.push_str("pub use decls::*;
 ");
 
-    add_generated_rust_header!(
-        lib_rs_path,
+    let initial_content = add_generated_rust_header!(
         new_lib_rs_content.as_str(),
         file!(),
         line!()
-    )
-    .context(format!("Failed to write new lib.rs to {}", lib_rs_path.display()))?;
+    );
+    match crate::rustfmt_utils::format_rust_file(&initial_content, lib_rs_path) {
+        Ok(formatted_content) => {
+            fs::write(lib_rs_path, formatted_content)
+                .context(format!("Failed to write formatted new lib.rs to {}", lib_rs_path.display()))?;
+        },
+        Err(e) => {
+            let error_comment = format!(
+                "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                // !!! Error: {} !!!\n\n",
+                e
+            );
+            let content_with_error_comment = error_comment + &initial_content;
+            fs::write(lib_rs_path, content_with_error_comment)
+                .context(format!("Failed to write unformatted new lib.rs with error comment to {}", lib_rs_path.display()))?;
+            eprintln!("\n<blip style='color:red'>Formatting error for new lib.rs (written to {})</blip>", lib_rs_path.display());
+        }
+    }
     println!("Rewrote {} to a minimalist version.", lib_rs_path.display());
 
     Ok(())

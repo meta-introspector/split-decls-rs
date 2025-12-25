@@ -20,4 +20,13 @@ pub struct ExtractedDecl {
     pub kind: String, // e.g., "fn", "struct", "enum"
     pub content: TokenStream,
     pub metadata: ExtractedDeclMetadata, // New field
+    pub source_map: std::collections::HashMap<usize, SourceLocation>, // Maps byte offset to source location
+}
+
+/// Struct to store source location information
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct SourceLocation {
+    pub file: String,
+    pub line: usize,
+    pub column: usize,
 }

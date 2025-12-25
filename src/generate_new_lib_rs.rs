@@ -1,3 +1,4 @@
+use log::error;
 use std::fs;
 use anyhow::{Context, Result};
 use quote::quote;
@@ -55,22 +56,52 @@ pub fn generate_new_lib_rs(paths: &CratePaths, dry_run: bool) -> Result<()> {
 
     if dry_run {
         let new_path = paths.lib_rs_path.with_extension("new");
-        add_generated_rust_header!(
-            &new_path,
+        let initial_content = add_generated_rust_header!(
             new_lib_rs_content.to_string().as_str(),
             file!(),
             line!()
-        )
-        .context(format!("Failed to write new lib.rs to {}", new_path.display()))?;
+        );
+        match crate::rustfmt_utils::format_rust_file(&initial_content, &new_path) {
+            Ok(formatted_content) => {
+                fs::write(&new_path, formatted_content)
+                    .context(format!("Failed to write formatted new lib.rs to {}", new_path.display()))?;
+            },
+            Err(e) => {
+                let error_comment = format!(
+                    "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                    // !!! Error: {} !!!\n\n",
+                    e
+                );
+                let content_with_error_comment = error_comment + &initial_content;
+                fs::write(&new_path, content_with_error_comment)
+                    .context(format!("Failed to write unformatted new lib.rs with error comment to {}", new_path.display()))?;
+                error!("\n<blip style='color:red'>Formatting error for new lib.rs (written to {})</blip>", new_path.display());
+            }
+        }
         println!("Dry-run: Generated new src/lib.rs content to {} for crate {}", new_path.display(), paths.crate_name);
     } else {
-        add_generated_rust_header!(
-            &paths.lib_rs_path,
+        let initial_content = add_generated_rust_header!(
             new_lib_rs_content.to_string().as_str(),
             file!(),
             line!()
-        )
-        .context(format!("Failed to write new lib.rs to {}", paths.lib_rs_path.display()))?;
+        );
+        match crate::rustfmt_utils::format_rust_file(&initial_content, &paths.lib_rs_path) {
+            Ok(formatted_content) => {
+                fs::write(&paths.lib_rs_path, formatted_content)
+                    .context(format!("Failed to write formatted new lib.rs to {}", paths.lib_rs_path.display()))?;
+            },
+            Err(e) => {
+                let error_comment = format!(
+                    "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                    // !!! Error: {} !!!\n\n",
+                    e
+                );
+                let content_with_error_comment = error_comment + &initial_content;
+                fs::write(&paths.lib_rs_path, content_with_error_comment)
+                    .context(format!("Failed to write unformatted new lib.rs with error comment to {}", paths.lib_rs_path.display()))?;
+                error!("\n<blip style='color:red'>Formatting error for new lib.rs (written to {})</blip>", paths.lib_rs_path.display());
+            }
+        }
         println!("Generated new src/lib.rs for crate {}", paths.crate_name);
     }
     Ok(())

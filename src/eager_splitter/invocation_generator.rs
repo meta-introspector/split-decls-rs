@@ -13,16 +13,22 @@ pub fn generate_decl_module_invocation(
     paths: &CratePaths,
     dry_run: bool,
 ) -> Result<()> {
-    let decl_module_invocation_args = Punctuated::<Ident, syn::token::Comma>::from_iter(collected_module_names.into_iter());
+    let mut args_token_stream = proc_macro2::TokenStream::new();
+    for (i, ident) in collected_module_names.iter().enumerate() {
+        args_token_stream.extend(quote! { #ident });
+        if i < collected_module_names.len() - 1 {
+            args_token_stream.extend(quote! { , });
+        }
+    }
 
     let final_decl_module_code = quote! {
         use introspector_decl2_macros::decl_module;
-        decl_module!(#decl_module_invocation_args);
+        decl_module!(#args_token_stream);
     };
 
     let decl_invocation_file_path = paths.decls_output_dir.join("_decl_module_invocation.rs");
     if !dry_run {
-        add_generated_rust_header!(
+        add_generated_rust_header_with_result!(
             &decl_invocation_file_path,
             final_decl_module_code.to_string().as_str(),
             file!(),

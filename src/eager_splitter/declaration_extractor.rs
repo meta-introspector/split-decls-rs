@@ -1,11 +1,13 @@
 use quote::ToTokens;
-use syn::{self, Item};
+use syn::{self, Item, spanned::Spanned};
 use syn::visit::Visit;
 use sha2::{Digest, Sha256};
 use hex;
 
 use crate::ExtractedDecl;
 use crate::ExtractedDeclMetadata;
+use crate::source_tracker::span_to_location;
+use crate::extracted_decl::SourceLocation;
 
 struct AstMetricVisitor {
     max_depth: usize,
@@ -97,11 +99,20 @@ pub fn extract_single_declaration(item: &Item, item_count: usize) -> Option<Extr
         zkp_witness_hash: None, // Placeholder, calculated later
     };
 
-    let extracted_decl_base = |name: String, kind: String| ExtractedDecl {
-        name,
-        kind,
-        content: content_token_stream.clone(),
-        metadata,
+    let extracted_decl_base = |name: String, kind: String| {
+        let source_location = span_to_location(item.span());
+        let mut source_map = std::collections::HashMap::new();
+        // For now, map the entire declaration to its source location
+        // In a more sophisticated implementation, we would map individual tokens
+        source_map.insert(0, source_location);
+        
+        ExtractedDecl {
+            name,
+            kind,
+            content: content_token_stream.clone(),
+            metadata,
+            source_map,
+        }
     };
 
     match item {
@@ -112,7 +123,7 @@ pub fn extract_single_declaration(item: &Item, item_count: usize) -> Option<Extr
         Item::Static(item_static) => Some(extracted_decl_base(item_static.ident.to_string(), "static".to_string())),
         Item::Trait(item_trait) => Some(extracted_decl_base(item_trait.ident.to_string(), "trait".to_string())),
         Item::Impl(item_impl) => {
-            let name = if let Some((_, path, _)) = &item_impl.trait_ {
+            let name = if let Some((_, path, _)) = item_impl.trait_.as_ref() {
                 let trait_name = path.to_token_stream().to_string()
                     .replace("::", "_")
                     .replace(" ", "")
@@ -150,10 +161,8 @@ pub fn extract_single_declaration(item: &Item, item_count: usize) -> Option<Extr
         },
         Item::Mod(item_mod) => {
             let mod_name = item_mod.ident.to_string();
-            println!("Processing module: {}", mod_name);
-            
-            // Return a placeholder declaration for the module itself
-            Some(extracted_decl_base(mod_name, "module".to_string()))
+            println!("Skipping module declaration: {} (handled by recursive processing)", mod_name);
+            None
         }
         _ => {
             println!("Skipping unsupported item type: {}", item.to_token_stream());

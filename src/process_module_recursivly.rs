@@ -1,4 +1,5 @@
 use anyhow::{Context, Result};
+use log::error;
 use crate::CratePaths;
 use crate::SplitDeclsConfig;
 use proc_macro2::{Ident, TokenStream, Span};
@@ -24,8 +25,13 @@ pub fn process_module_recursively(
     module_not_found_errors: &mut Vec<ModuleNotFoundReport>, // New parameter
 ) -> Result<()> {
     let src_dir = paths.crate_path.join("src");
-    let mod_file1 = src_dir.join(format!("{}.rs", mod_name));
-    let mod_file2 = src_dir.join(mod_name).join("mod.rs");
+    let sanitized_mod_name = if mod_name.starts_with("r#") {
+        &mod_name[2..]
+    } else {
+        mod_name
+    };
+    let mod_file1 = src_dir.join(format!("{}.rs", sanitized_mod_name));
+    let mod_file2 = src_dir.join(sanitized_mod_name).join("mod.rs");
     
     let mod_file = if mod_file1.exists() {
         mod_file1
@@ -35,7 +41,7 @@ pub fn process_module_recursively(
         // Collect the error instead of printing
         let crate_name_sanitized = paths.crate_name.replace("-", "_").replace(".", "_");
         let error_message = format!("Module file not found for: {}", mod_name);
-        let error_module_name_str = format!("{}_decls_module_not_found_{}", crate_name_sanitized, mod_name);
+        let error_module_name_str = format!("{}_decls_module_not_found_{}", crate_name_sanitized, sanitized_mod_name);
         let decl_file_path = paths.decls_output_dir.join(format!("{}.rs", error_module_name_str));
 
         module_not_found_errors.push(ModuleNotFoundReport {
@@ -64,14 +70,28 @@ pub fn process_module_recursively(
         };
 
         if !dry_run {
-            add_generated_rust_header!(
-                &decl_file_path,
+            let initial_content = add_generated_rust_header!(
                 error_output_tokens.to_string().as_str(),
                 file!(),
                 line!()
-            )
-            .context(format!("Failed to write module not found error to {}", decl_file_path.display()))?;
-            format_rust_file(&decl_file_path)?;
+            );
+            match format_rust_file(&initial_content, &decl_file_path) {
+                Ok(formatted_content) => {
+                    fs::write(&decl_file_path, formatted_content)
+                        .context(format!("Failed to write formatted module not found error to {}", decl_file_path.display()))?;
+                },
+                Err(e) => {
+                    let error_comment = format!(
+                        "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                        // !!! Error: {} !!!\n\n",
+                        e
+                    );
+                    let content_with_error_comment = error_comment + &initial_content;
+                    fs::write(&decl_file_path, content_with_error_comment)
+                        .context(format!("Failed to write unformatted module not found error with comment to {}", decl_file_path.display()))?;
+                    error!("\n<blip style='color:red'>Formatting error for module not found '{}' (written to {})</blip>", mod_name, decl_file_path.display());
+                }
+            }
         } else {
             // No need to print in dry-run, as it will be in the summary
         }
@@ -124,14 +144,28 @@ pub fn process_module_recursively(
 
             let decl_file_path = paths.decls_output_dir.join(format!("{}.rs", error_module_name_str));
             if !dry_run {
-                add_generated_rust_header!(
-                    &decl_file_path,
+                let initial_content = add_generated_rust_header!(
                     error_output_tokens.to_string().as_str(),
                     file!(),
                     line!()
-                )
-                .context(format!("Failed to write error declaration to {}", decl_file_path.display()))?;
-                format_rust_file(&decl_file_path)?;
+                );
+                match format_rust_file(&initial_content, &decl_file_path) {
+                    Ok(formatted_content) => {
+                        fs::write(&decl_file_path, formatted_content)
+                            .context(format!("Failed to write formatted error declaration to {}", decl_file_path.display()))?;
+                    },
+                    Err(e) => {
+                        let error_comment = format!(
+                            "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
+                            // !!! Error: {} !!!\n\n",
+                            e
+                        );
+                        let content_with_error_comment = error_comment + &initial_content;
+                        fs::write(&decl_file_path, content_with_error_comment)
+                            .context(format!("Failed to write unformatted error declaration with comment to {}", decl_file_path.display()))?;
+                        error!("\n<blip style='color:red'>Formatting error for parsing error in '{}' (written to {})</blip>", mod_file_display, decl_file_path.display());
+                    }
+                }
             } else {
                 println!("Dry-run: Would write error declaration to {}", decl_file_path.display());
             }
@@ -145,9 +179,9 @@ pub fn process_module_recursively(
     for item in &mod_ast.items {
         if let Some(decl) = declaration_extractor::extract_single_declaration(item, *item_count) {
             let full_path = if parent_path.is_empty() {
-                mod_name.to_string()
+                sanitized_mod_name.to_string()
             } else {
-                format!("{}_{}", parent_path, mod_name)
+                format!("{}_{}", parent_path, sanitized_mod_name)
             };
             
             let module_name_str = format!("{}_decls_{}_{}", 
@@ -172,17 +206,22 @@ pub fn process_module_recursively(
         
         // Recursively process nested modules
         if let syn::Item::Mod(item_mod) = item {
-            let nested_mod_name = item_mod.ident.to_string();
-            let new_parent_path = if parent_path.is_empty() {
-                mod_name.to_string()
+            let nested_mod_name_original = item_mod.ident.to_string();
+            let nested_mod_name = if nested_mod_name_original.starts_with("r#") {
+                &nested_mod_name_original[2..]
             } else {
-                format!("{}_{}", parent_path, mod_name)
+                &nested_mod_name_original
+            };
+            let new_parent_path = if parent_path.is_empty() {
+                sanitized_mod_name.to_string()
+            } else {
+                format!("{}_{}", parent_path, sanitized_mod_name)
             };
             
             process_module_recursively(
                 paths,
                 config,
-                &nested_mod_name,
+                nested_mod_name,
                 new_parent_path.as_str(), // Changed &new_parent_path to new_parent_path.as_str()
                 collected_module_names,
                 item_count,

@@ -3,6 +3,7 @@ use std::path::{Path, PathBuf};
 pub mod config_macros;
 pub mod process_module_recursivly;
 pub mod macro_analyzer_parts;
+#[macro_use]
 pub mod special_print;
 pub mod format_generated_rust_files; // Add this
 pub mod wrapped_workspace_handlers; // Add this
@@ -41,6 +42,8 @@ pub mod process_crates_in_path;
 pub mod goal_parser;
 pub mod rustfmt_utils;
 pub mod copy_dir_recursive; // Add this line
+pub mod source_tracker; // Add source tracking module
+pub mod string_tracker; // Add string tracking module
 pub use extracted_decl::*;
 
 pub use crate::paths::{CratePaths, setup_crate_paths}; // Re-export from paths module
