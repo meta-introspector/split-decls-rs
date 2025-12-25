@@ -28,7 +28,11 @@ impl fmt::Display for InactiveReason {
                 f.write_str(sep)?;
                 atom.fmt(f)?;
             }
-            let is_are = if self.disabled.len() == 1 { "is" } else { "are" };
+            let is_are = if self.disabled.len() == 1 {
+                "is"
+            } else {
+                "are"
+            };
             write!(f, " {is_are} disabled")?;
         }
         Ok(())

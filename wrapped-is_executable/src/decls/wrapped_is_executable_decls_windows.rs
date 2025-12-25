@@ -2,10 +2,10 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(target_os = "windows")]
 mod windows {
+    use super::IsExecutable;
     use std::os::windows::ffi::OsStrExt;
     use std::path::Path;
     use windows_sys::Win32::Storage::FileSystem::GetBinaryTypeW;
-    use super::IsExecutable;
     impl IsExecutable for Path {
         fn is_executable(&self) -> bool {
             if !self.exists() {

@@ -70,8 +70,8 @@ mod tests {
         assert_diff_paths("./foo/bar/baz", "./foo", Some("bar/baz"));
     }
     fn assert_diff_paths(path: &str, base: &str, expected: Option<&str>) {
-        assert_eq!(diff_paths(path, base), expected.map(| s | s.into()));
+        assert_eq!(diff_paths(path, base), expected.map(|s| s.into()));
         #[cfg(feature = "camino")]
-        assert_eq!(diff_utf8_paths(path, base), expected.map(| s | s.into()));
+        assert_eq!(diff_utf8_paths(path, base), expected.map(|s| s.into()));
     }
 }

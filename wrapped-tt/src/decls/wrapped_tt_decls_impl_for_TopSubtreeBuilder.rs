@@ -16,17 +16,14 @@ impl<S: Copy> TopSubtreeBuilder<S> {
     }
     pub fn open(&mut self, delimiter_kind: DelimiterKind, open_span: S) {
         self.unclosed_subtree_indices.push(self.token_trees.len());
-        self.token_trees
-            .push(
-                TokenTree::Subtree(Subtree {
-                    delimiter: Delimiter {
-                        open: open_span,
-                        close: open_span,
-                        kind: delimiter_kind,
-                    },
-                    len: 0,
-                }),
-            );
+        self.token_trees.push(TokenTree::Subtree(Subtree {
+            delimiter: Delimiter {
+                open: open_span,
+                close: open_span,
+                kind: delimiter_kind,
+            },
+            len: 0,
+        }));
     }
     pub fn close(&mut self, close_span: S) {
         let last_unclosed_index = self
@@ -34,8 +31,7 @@ impl<S: Copy> TopSubtreeBuilder<S> {
             .pop()
             .expect("attempt to close a `tt::Subtree` when none is open");
         let subtree_len = (self.token_trees.len() - last_unclosed_index - 1) as u32;
-        let TokenTree::Subtree(subtree) = &mut self.token_trees[last_unclosed_index]
-        else {
+        let TokenTree::Subtree(subtree) = &mut self.token_trees[last_unclosed_index] else {
             unreachable!("unclosed token tree is always a subtree");
         };
         subtree.len = subtree_len;
@@ -44,10 +40,17 @@ impl<S: Copy> TopSubtreeBuilder<S> {
     }
     /// You cannot call this consecutively, it will only work once after close.
     pub fn remove_last_subtree_if_invisible(&mut self) {
-        let Some(last_subtree_idx) = self.last_closed_subtree else { return };
-        if let TokenTree::Subtree(
-            Subtree { delimiter: Delimiter { kind: DelimiterKind::Invisible, .. }, .. },
-        ) = self.token_trees[last_subtree_idx]
+        let Some(last_subtree_idx) = self.last_closed_subtree else {
+            return;
+        };
+        if let TokenTree::Subtree(Subtree {
+            delimiter:
+                Delimiter {
+                    kind: DelimiterKind::Invisible,
+                    ..
+                },
+            ..
+        }) = self.token_trees[last_subtree_idx]
         {
             self.token_trees.remove(last_subtree_idx);
             self.last_closed_subtree = None;
@@ -57,7 +60,8 @@ impl<S: Copy> TopSubtreeBuilder<S> {
         self.token_trees.push(TokenTree::Leaf(leaf));
     }
     pub fn extend(&mut self, leaves: impl IntoIterator<Item = Leaf<S>>) {
-        self.token_trees.extend(leaves.into_iter().map(TokenTree::Leaf));
+        self.token_trees
+            .extend(leaves.into_iter().map(TokenTree::Leaf));
     }
     /// This does not check the token trees are valid, beware!
     pub fn extend_tt_dangerous(&mut self, tt: impl IntoIterator<Item = TokenTree<S>>) {

@@ -167,9 +167,7 @@ impl<T> Arena<T> {
     ///
     /// assert_eq!(arena[idx1], 10);
     /// ```
-    pub fn values_mut(
-        &mut self,
-    ) -> impl ExactSizeIterator<Item = &mut T> + DoubleEndedIterator {
+    pub fn values_mut(&mut self) -> impl ExactSizeIterator<Item = &mut T> + DoubleEndedIterator {
         self.data.iter_mut()
     }
     /// Reallocates the arena to make it take up as little space as possible.

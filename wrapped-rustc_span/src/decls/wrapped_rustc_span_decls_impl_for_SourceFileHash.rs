@@ -1,10 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl SourceFileHash {
-    pub fn new_in_memory(
-        kind: SourceFileHashAlgorithm,
-        src: impl AsRef<[u8]>,
-    ) -> SourceFileHash {
+    pub fn new_in_memory(kind: SourceFileHashAlgorithm, src: impl AsRef<[u8]>) -> SourceFileHash {
         let mut hash = SourceFileHash {
             kind,
             value: Default::default(),
@@ -22,16 +19,11 @@ impl SourceFileHash {
             SourceFileHashAlgorithm::Sha256 => {
                 value.copy_from_slice(&Sha256::digest(data));
             }
-            SourceFileHashAlgorithm::Blake3 => {
-                value.copy_from_slice(blake3::hash(data).as_bytes())
-            }
+            SourceFileHashAlgorithm::Blake3 => value.copy_from_slice(blake3::hash(data).as_bytes()),
         };
         hash
     }
-    pub fn new(
-        kind: SourceFileHashAlgorithm,
-        src: impl Read,
-    ) -> Result<SourceFileHash, io::Error> {
+    pub fn new(kind: SourceFileHashAlgorithm, src: impl Read) -> Result<SourceFileHash, io::Error> {
         let mut hash = SourceFileHash {
             kind,
             value: Default::default(),

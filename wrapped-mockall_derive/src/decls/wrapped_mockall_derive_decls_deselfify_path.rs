@@ -9,22 +9,18 @@ fn deselfify_path(path: &mut Path, actual: &Ident, generics: &Generics) {
                     let args = generics
                         .params
                         .iter()
-                        .map(|gp| {
-                            match gp {
-                                GenericParam::Type(tp) => {
-                                    let ident = tp.ident.clone();
-                                    GenericArgument::Type(
-                                        Type::Path(TypePath {
-                                            qself: None,
-                                            path: Path::from(ident),
-                                        }),
-                                    )
-                                }
-                                GenericParam::Lifetime(ld) => {
-                                    GenericArgument::Lifetime(ld.lifetime.clone())
-                                }
-                                _ => unimplemented!(),
+                        .map(|gp| match gp {
+                            GenericParam::Type(tp) => {
+                                let ident = tp.ident.clone();
+                                GenericArgument::Type(Type::Path(TypePath {
+                                    qself: None,
+                                    path: Path::from(ident),
+                                }))
                             }
+                            GenericParam::Lifetime(ld) => {
+                                GenericArgument::Lifetime(ld.lifetime.clone())
+                            }
+                            _ => unimplemented!(),
                         })
                         .collect::<Punctuated<_, _>>();
                     seg.arguments = PathArguments::AngleBracketed(AngleBracketedGenericArguments {
@@ -45,9 +41,7 @@ fn deselfify_path(path: &mut Path, actual: &Ident, generics: &Generics) {
             for arg in abga.args.iter_mut() {
                 match arg {
                     GenericArgument::Type(ty) => deselfify(ty, actual, generics),
-                    GenericArgument::AssocType(at) => {
-                        deselfify(&mut at.ty, actual, generics)
-                    }
+                    GenericArgument::AssocType(at) => deselfify(&mut at.ty, actual, generics),
                     _ => {}
                 }
             }

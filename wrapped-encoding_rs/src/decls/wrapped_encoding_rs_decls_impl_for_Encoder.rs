@@ -32,7 +32,11 @@ impl Encoder {
         byte_length: usize,
     ) -> Option<usize> {
         checked_add(
-            if self.encoding().can_encode_everything() { 0 } else { NCR_EXTRA },
+            if self.encoding().can_encode_everything() {
+                0
+            } else {
+                NCR_EXTRA
+            },
             self.max_buffer_length_from_utf8_without_replacement(byte_length),
         )
     }
@@ -48,7 +52,8 @@ impl Encoder {
         &self,
         byte_length: usize,
     ) -> Option<usize> {
-        self.variant.max_buffer_length_from_utf8_without_replacement(byte_length)
+        self.variant
+            .max_buffer_length_from_utf8_without_replacement(byte_length)
     }
     /// Incrementally encode into byte stream from UTF-8 with unmappable
     /// characters replaced with HTML (decimal) numeric character references.
@@ -79,12 +84,11 @@ impl Encoder {
         let mut total_read = 0usize;
         let mut total_written = 0usize;
         loop {
-            let (result, read, written) = self
-                .encode_from_utf8_without_replacement(
-                    &src[total_read..],
-                    &mut dst[total_written..effective_dst_len],
-                    last,
-                );
+            let (result, read, written) = self.encode_from_utf8_without_replacement(
+                &src[total_read..],
+                &mut dst[total_written..effective_dst_len],
+                last,
+            );
             total_read += read;
             total_written += written;
             match result {
@@ -111,8 +115,7 @@ impl Encoder {
                     debug_assert_ne!(self.encoding(), UTF_16LE);
                     total_written += write_ncr(unmappable, &mut dst[total_written..]);
                     if total_written >= effective_dst_len {
-                        if total_read == src.len() && !(last && self.has_pending_state())
-                        {
+                        if total_read == src.len() && !(last && self.has_pending_state()) {
                             return (
                                 CoderResult::InputEmpty,
                                 total_read,
@@ -150,8 +153,8 @@ impl Encoder {
             let old_len = dst.len();
             let capacity = dst.capacity();
             dst.set_len(capacity);
-            let (result, read, written, replaced) = self
-                .encode_from_utf8(src, &mut dst[old_len..], last);
+            let (result, read, written, replaced) =
+                self.encode_from_utf8(src, &mut dst[old_len..], last);
             dst.set_len(old_len + written);
             (result, read, replaced)
         }
@@ -188,8 +191,8 @@ impl Encoder {
             let old_len = dst.len();
             let capacity = dst.capacity();
             dst.set_len(capacity);
-            let (result, read, written) = self
-                .encode_from_utf8_without_replacement(src, &mut dst[old_len..], last);
+            let (result, read, written) =
+                self.encode_from_utf8_without_replacement(src, &mut dst[old_len..], last);
             dst.set_len(old_len + written);
             (result, read)
         }
@@ -208,7 +211,11 @@ impl Encoder {
         u16_length: usize,
     ) -> Option<usize> {
         checked_add(
-            if self.encoding().can_encode_everything() { 0 } else { NCR_EXTRA },
+            if self.encoding().can_encode_everything() {
+                0
+            } else {
+                NCR_EXTRA
+            },
             self.max_buffer_length_from_utf16_without_replacement(u16_length),
         )
     }
@@ -224,7 +231,8 @@ impl Encoder {
         &self,
         u16_length: usize,
     ) -> Option<usize> {
-        self.variant.max_buffer_length_from_utf16_without_replacement(u16_length)
+        self.variant
+            .max_buffer_length_from_utf16_without_replacement(u16_length)
     }
     /// Incrementally encode into byte stream from UTF-16 with unmappable
     /// characters replaced with HTML (decimal) numeric character references.
@@ -255,12 +263,11 @@ impl Encoder {
         let mut total_read = 0usize;
         let mut total_written = 0usize;
         loop {
-            let (result, read, written) = self
-                .encode_from_utf16_without_replacement(
-                    &src[total_read..],
-                    &mut dst[total_written..effective_dst_len],
-                    last,
-                );
+            let (result, read, written) = self.encode_from_utf16_without_replacement(
+                &src[total_read..],
+                &mut dst[total_written..effective_dst_len],
+                last,
+            );
             total_read += read;
             total_written += written;
             match result {
@@ -287,8 +294,7 @@ impl Encoder {
                     debug_assert_ne!(self.encoding(), UTF_16LE);
                     total_written += write_ncr(unmappable, &mut dst[total_written..]);
                     if total_written >= effective_dst_len {
-                        if total_read == src.len() && !(last && self.has_pending_state())
-                        {
+                        if total_read == src.len() && !(last && self.has_pending_state()) {
                             return (
                                 CoderResult::InputEmpty,
                                 total_read,

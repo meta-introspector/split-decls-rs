@@ -10,7 +10,9 @@ impl Complete {
             }
             let action = segments[1].symbol();
             if *action == sym::completions {
-                match ra_attr.token_tree_value().map(|tt| tt.token_trees().flat_tokens())
+                match ra_attr
+                    .token_tree_value()
+                    .map(|tt| tt.token_trees().flat_tokens())
                 {
                     Some([tt::TokenTree::Leaf(tt::Leaf::Ident(ident))]) => {
                         if ident.sym == sym::ignore_flyimport {

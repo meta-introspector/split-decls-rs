@@ -3,7 +3,10 @@ use std::collections::HashMap;
 #[cfg(feature = "encoder")]
 impl<W> CountingWriter<W> {
     fn new(inner: W) -> Self {
-        Self { inner, bytes_written: 0 }
+        Self {
+            inner,
+            bytes_written: 0,
+        }
     }
     fn bytes_written(&self) -> u64 {
         self.bytes_written

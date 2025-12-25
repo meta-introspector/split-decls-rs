@@ -12,14 +12,8 @@ impl PartialEq for Value {
             (&Value::I16(v0), &Value::I16(v1)) if v0 == v1 => true,
             (&Value::I32(v0), &Value::I32(v1)) if v0 == v1 => true,
             (&Value::I64(v0), &Value::I64(v1)) if v0 == v1 => true,
-            (
-                &Value::F32(v0),
-                &Value::F32(v1),
-            ) if OrderedFloat(v0) == OrderedFloat(v1) => true,
-            (
-                &Value::F64(v0),
-                &Value::F64(v1),
-            ) if OrderedFloat(v0) == OrderedFloat(v1) => true,
+            (&Value::F32(v0), &Value::F32(v1)) if OrderedFloat(v0) == OrderedFloat(v1) => true,
+            (&Value::F64(v0), &Value::F64(v1)) if OrderedFloat(v0) == OrderedFloat(v1) => true,
             (&Value::Char(v0), &Value::Char(v1)) if v0 == v1 => true,
             (&Value::String(ref v0), &Value::String(ref v1)) if v0 == v1 => true,
             (&Value::Unit, &Value::Unit) => true,

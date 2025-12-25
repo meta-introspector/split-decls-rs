@@ -7,7 +7,9 @@ where
     fn new(mut builder: ChromeLayerBuilder<S>) -> (ChromeLayer<S>, FlushGuard) {
         let (tx, rx) = mpsc::channel();
         OUT.with(|val| val.replace(Some(tx.clone())));
-        let out_writer = builder.out_writer.unwrap_or_else(|| create_default_writer());
+        let out_writer = builder
+            .out_writer
+            .unwrap_or_else(|| create_default_writer());
         let handle = std::thread::spawn(move || {
             let mut write = BufWriter::new(out_writer);
             write.write_all(b"[\n").unwrap();
@@ -40,16 +42,12 @@ where
                     continue;
                 }
                 let (ph, ts, callsite, id) = match &msg {
-                    Message::Enter(ts, callsite, None) => {
-                        ("B", Some(ts), Some(callsite), None)
-                    }
+                    Message::Enter(ts, callsite, None) => ("B", Some(ts), Some(callsite), None),
                     Message::Enter(ts, callsite, Some(root_id)) => {
                         ("b", Some(ts), Some(callsite), Some(root_id))
                     }
                     Message::Event(ts, callsite) => ("i", Some(ts), Some(callsite), None),
-                    Message::Exit(ts, callsite, None) => {
-                        ("E", Some(ts), Some(callsite), None)
-                    }
+                    Message::Exit(ts, callsite, None) => ("E", Some(ts), Some(callsite), None),
                     Message::Exit(ts, callsite, Some(root_id)) => {
                         ("e", Some(ts), Some(callsite), Some(root_id))
                     }
@@ -144,9 +142,11 @@ where
                     None
                 }
             }
-            EventOrSpan::Span(s) => {
-                s.extensions().get::<ArgsWrapper>().map(|e| &e.args).cloned()
-            }
+            EventOrSpan::Span(s) => s
+                .extensions()
+                .get::<ArgsWrapper>()
+                .map(|e| &e.args)
+                .cloned(),
         };
         let name = name.unwrap_or_else(|| meta.name().into());
         let target = target.unwrap_or_else(|| meta.target().into());
@@ -172,7 +172,13 @@ where
         }
     }
     fn get_root_id(span: SpanRef<S>) -> u64 {
-        span.scope().from_root().take(1).next().unwrap_or(span).id().into_u64()
+        span.scope()
+            .from_root()
+            .take(1)
+            .next()
+            .unwrap_or(span)
+            .id()
+            .into_u64()
     }
     fn enter_span(&self, span: SpanRef<S>, ts: f64) {
         let callsite = self.get_callsite(EventOrSpan::Span(&span));

@@ -24,11 +24,10 @@ fn normalize_newlines(src: &mut String, normalized_pos: &mut Vec<NormalizedPos>)
         }
         cursor += idx - gap_len;
         gap_len += 1;
-        normalized_pos
-            .push(NormalizedPos {
-                pos: RelativeBytePos::from_usize(cursor + 1),
-                diff: original_gap + gap_len as u32,
-            });
+        normalized_pos.push(NormalizedPos {
+            pos: RelativeBytePos::from_usize(cursor + 1),
+            diff: original_gap + gap_len as u32,
+        });
     }
     let new_len = buf.len() - gap_len;
     unsafe {

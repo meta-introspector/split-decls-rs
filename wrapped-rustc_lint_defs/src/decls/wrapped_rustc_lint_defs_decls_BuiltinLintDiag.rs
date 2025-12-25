@@ -19,12 +19,19 @@ pub enum BuiltinLintDiag {
         path: String,
         since_kind: DeprecatedSinceKind,
     },
-    PatternsInFnsWithoutBody { span: Span, ident: Ident, is_foreign: bool },
+    PatternsInFnsWithoutBody {
+        span: Span,
+        ident: Ident,
+        is_foreign: bool,
+    },
     ReservedPrefix(Span, String),
     /// `'r#` in edition < 2021.
     RawPrefix(Span),
     /// `##` or `#"` in edition < 2024.
-    ReservedString { is_string: bool, suggestion: Span },
+    ReservedString {
+        is_string: bool,
+        suggestion: Span,
+    },
     BreakWithLabelAndLoop(Span),
     UnicodeTextFlow(Span, String),
     UnexpectedCfgName((Symbol, Span), Option<(Symbol, Span)>),
@@ -54,8 +61,13 @@ pub enum BuiltinLintDiag {
         /// Indicates if the named argument is used as a width/precision for formatting
         is_formatting_arg: bool,
     },
-    ExternCrateNotIdiomatic { vis_span: Span, ident_span: Span },
-    AmbiguousGlobImports { diag: AmbiguityErrorDiag },
+    ExternCrateNotIdiomatic {
+        vis_span: Span,
+        ident_span: Span,
+    },
+    AmbiguousGlobImports {
+        diag: AmbiguityErrorDiag,
+    },
     AmbiguousGlobReexports {
         /// The name for which collision(s) have occurred.
         name: String,
@@ -80,20 +92,43 @@ pub enum BuiltinLintDiag {
         /// The span of the unnecessarily-qualified path to remove.
         removal_span: Span,
     },
-    UnsafeAttrOutsideUnsafe { attribute_name_span: Span, sugg_spans: (Span, Span) },
+    UnsafeAttrOutsideUnsafe {
+        attribute_name_span: Span,
+        sugg_spans: (Span, Span),
+    },
     AssociatedConstElidedLifetime {
         elided: bool,
         span: Span,
         lifetimes_in_scope: MultiSpan,
     },
-    RedundantImportVisibility { span: Span, max_vis: String, import_vis: String },
-    UnknownDiagnosticAttribute { span: Span, typo_name: Option<Symbol> },
-    PrivateExternCrateReexport { source: Ident, extern_crate_span: Span },
+    RedundantImportVisibility {
+        span: Span,
+        max_vis: String,
+        import_vis: String,
+    },
+    UnknownDiagnosticAttribute {
+        span: Span,
+        typo_name: Option<Symbol>,
+    },
+    PrivateExternCrateReexport {
+        source: Ident,
+        extern_crate_span: Span,
+    },
     MacroIsPrivate(Ident),
     UnusedMacroDefinition(Symbol),
     MacroRuleNeverUsed(usize, Symbol),
     UnstableFeature(DiagMessage),
-    UnusedCrateDependency { extern_crate: Symbol, local_crate: Symbol },
-    IllFormedAttributeInput { suggestions: Vec<String>, docs: Option<&'static str> },
-    OutOfScopeMacroCalls { span: Span, path: String, location: String },
+    UnusedCrateDependency {
+        extern_crate: Symbol,
+        local_crate: Symbol,
+    },
+    IllFormedAttributeInput {
+        suggestions: Vec<String>,
+        docs: Option<&'static str>,
+    },
+    OutOfScopeMacroCalls {
+        span: Span,
+        path: String,
+        location: String,
+    },
 }

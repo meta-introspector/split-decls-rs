@@ -1,7 +1,8 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl rustc_public_bridge::bridge::Allocation<compiler_interface::BridgeTys>
-for crate::ty::Allocation {
+    for crate::ty::Allocation
+{
     fn new<'tcx>(
         bytes: Vec<Option<u8>>,
         ptrs: Vec<(usize, rustc_middle::mir::interpret::AllocId)>,
@@ -13,7 +14,10 @@ for crate::ty::Allocation {
         Self {
             bytes,
             provenance: ProvenanceMap {
-                ptrs: ptrs.iter().map(|(i, aid)| (*i, tables.prov(*aid))).collect(),
+                ptrs: ptrs
+                    .iter()
+                    .map(|(i, aid)| (*i, tables.prov(*aid)))
+                    .collect(),
             },
             align,
             mutability: mutability.stable(tables, cx),

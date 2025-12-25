@@ -12,5 +12,6 @@ fn error() {
         Ok(())
     };
     assert!(res.is_err());
-    #[allow(deprecated)] res.unwrap_err().description();
+    #[allow(deprecated)]
+    res.unwrap_err().description();
 }

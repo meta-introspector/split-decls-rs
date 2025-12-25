@@ -9,23 +9,20 @@ impl SourceFile {
         checksum_hash_kind: Option<SourceFileHashAlgorithm>,
     ) -> Result<Self, OffsetOverflowError> {
         let src_hash = SourceFileHash::new_in_memory(hash_kind, src.as_bytes());
-        let checksum_hash = checksum_hash_kind
-            .map(|checksum_hash_kind| {
-                if checksum_hash_kind == hash_kind {
-                    src_hash
-                } else {
-                    SourceFileHash::new_in_memory(checksum_hash_kind, src.as_bytes())
-                }
-            });
-        let unnormalized_source_len = u32::try_from(src.len())
-            .map_err(|_| OffsetOverflowError)?;
+        let checksum_hash = checksum_hash_kind.map(|checksum_hash_kind| {
+            if checksum_hash_kind == hash_kind {
+                src_hash
+            } else {
+                SourceFileHash::new_in_memory(checksum_hash_kind, src.as_bytes())
+            }
+        });
+        let unnormalized_source_len = u32::try_from(src.len()).map_err(|_| OffsetOverflowError)?;
         if unnormalized_source_len > Self::MAX_FILE_SIZE {
             return Err(OffsetOverflowError);
         }
         let normalized_pos = normalize_src(&mut src);
         let stable_id = StableSourceFileId::from_filename_in_current_crate(&name);
-        let normalized_source_len = u32::try_from(src.len())
-            .map_err(|_| OffsetOverflowError)?;
+        let normalized_source_len = u32::try_from(src.len()).map_err(|_| OffsetOverflowError)?;
         if normalized_source_len > Self::MAX_FILE_SIZE {
             return Err(OffsetOverflowError);
         }
@@ -52,9 +49,13 @@ impl SourceFile {
         let mut guard = if let Some(guard) = self.lines.try_write() {
             guard
         } else {
-            return
+            return;
         };
-        let SourceFileDiffs { bytes_per_diff, num_diffs, raw_diffs } = match &*guard {
+        let SourceFileDiffs {
+            bytes_per_diff,
+            num_diffs,
+            raw_diffs,
+        } = match &*guard {
             SourceFileLines::Diffs(diffs) => diffs,
             SourceFileLines::Lines(..) => {
                 FreezeWriteGuard::freeze(guard);
@@ -65,49 +66,36 @@ impl SourceFile {
         let mut lines = Vec::with_capacity(num_lines);
         let mut line_start = RelativeBytePos(0);
         lines.push(line_start);
-        assert_eq!(* num_diffs, raw_diffs.len() / bytes_per_diff);
+        assert_eq!(*num_diffs, raw_diffs.len() / bytes_per_diff);
         match bytes_per_diff {
             1 => {
-                lines
-                    .extend(
-                        raw_diffs
-                            .into_iter()
-                            .map(|&diff| {
-                                line_start = line_start + RelativeBytePos(diff as u32);
-                                line_start
-                            }),
-                    );
+                lines.extend(raw_diffs.into_iter().map(|&diff| {
+                    line_start = line_start + RelativeBytePos(diff as u32);
+                    line_start
+                }));
             }
             2 => {
-                lines
-                    .extend(
-                        (0..*num_diffs)
-                            .map(|i| {
-                                let pos = bytes_per_diff * i;
-                                let bytes = [raw_diffs[pos], raw_diffs[pos + 1]];
-                                let diff = u16::from_le_bytes(bytes);
-                                line_start = line_start + RelativeBytePos(diff as u32);
-                                line_start
-                            }),
-                    );
+                lines.extend((0..*num_diffs).map(|i| {
+                    let pos = bytes_per_diff * i;
+                    let bytes = [raw_diffs[pos], raw_diffs[pos + 1]];
+                    let diff = u16::from_le_bytes(bytes);
+                    line_start = line_start + RelativeBytePos(diff as u32);
+                    line_start
+                }));
             }
             4 => {
-                lines
-                    .extend(
-                        (0..*num_diffs)
-                            .map(|i| {
-                                let pos = bytes_per_diff * i;
-                                let bytes = [
-                                    raw_diffs[pos],
-                                    raw_diffs[pos + 1],
-                                    raw_diffs[pos + 2],
-                                    raw_diffs[pos + 3],
-                                ];
-                                let diff = u32::from_le_bytes(bytes);
-                                line_start = line_start + RelativeBytePos(diff);
-                                line_start
-                            }),
-                    );
+                lines.extend((0..*num_diffs).map(|i| {
+                    let pos = bytes_per_diff * i;
+                    let bytes = [
+                        raw_diffs[pos],
+                        raw_diffs[pos + 1],
+                        raw_diffs[pos + 2],
+                        raw_diffs[pos + 3],
+                    ];
+                    let diff = u32::from_le_bytes(bytes);
+                    line_start = line_start + RelativeBytePos(diff);
+                    line_start
+                }));
             }
             _ => unreachable!(),
         }
@@ -143,32 +131,28 @@ impl SourceFile {
     {
         if !self.external_src.is_frozen() {
             let src = get_src();
-            let src = src
-                .and_then(|mut src| {
-                    self.src_hash
-                        .matches(&src)
-                        .then(|| {
-                            normalize_src(&mut src);
-                            src
-                        })
-                });
-            self.external_src
-                .try_write()
-                .map(|mut external_src| {
-                    if let ExternalSource::Foreign {
-                        kind: src_kind @ ExternalSourceKind::AbsentOk,
-                        ..
-                    } = &mut *external_src {
-                        *src_kind = if let Some(src) = src {
-                            ExternalSourceKind::Present(Arc::new(src))
-                        } else {
-                            ExternalSourceKind::AbsentErr
-                        };
+            let src = src.and_then(|mut src| {
+                self.src_hash.matches(&src).then(|| {
+                    normalize_src(&mut src);
+                    src
+                })
+            });
+            self.external_src.try_write().map(|mut external_src| {
+                if let ExternalSource::Foreign {
+                    kind: src_kind @ ExternalSourceKind::AbsentOk,
+                    ..
+                } = &mut *external_src
+                {
+                    *src_kind = if let Some(src) = src {
+                        ExternalSourceKind::Present(Arc::new(src))
                     } else {
-                        panic!("unexpected state {:?}", * external_src)
-                    }
-                    FreezeWriteGuard::freeze(external_src)
-                });
+                        ExternalSourceKind::AbsentErr
+                    };
+                } else {
+                    panic!("unexpected state {:?}", *external_src)
+                }
+                FreezeWriteGuard::freeze(external_src)
+            });
         }
         self.src.is_some() || self.external_src.read().get_source().is_some()
     }
@@ -233,10 +217,7 @@ impl SourceFile {
         if line_index == (lines.len() - 1) {
             self.absolute_position(lines[line_index])..self.end_position()
         } else {
-            self
-                .absolute_position(
-                    lines[line_index],
-                )..self.absolute_position(lines[line_index + 1])
+            self.absolute_position(lines[line_index])..self.absolute_position(lines[line_index + 1])
         }
     }
     /// Returns whether or not the file contains the given `SourceMap` byte
@@ -274,9 +255,7 @@ impl SourceFile {
     pub fn normalized_byte_pos(&self, offset: u32) -> BytePos {
         let diff = match self
             .normalized_pos
-            .binary_search_by(|np| {
-                (np.pos.0 + np.diff).cmp(&(self.start_pos.0 + offset))
-            })
+            .binary_search_by(|np| (np.pos.0 + np.diff).cmp(&(self.start_pos.0 + offset)))
         {
             Ok(i) => self.normalized_pos[i].diff,
             Err(0) => 0,
@@ -309,9 +288,13 @@ impl SourceFile {
                 let linebpos = self.lines()[a];
                 let linechpos = self.bytepos_to_file_charpos(linebpos);
                 let col = chpos - linechpos;
-                debug!("byte pos {:?} is on the line at byte pos {:?}", pos, linebpos);
                 debug!(
-                    "char pos {:?} is on the line at char pos {:?}", chpos, linechpos
+                    "byte pos {:?} is on the line at byte pos {:?}",
+                    pos, linebpos
+                );
+                debug!(
+                    "char pos {:?} is on the line at char pos {:?}",
+                    chpos, linechpos
                 );
                 debug!("byte is on line: {}", line);
                 assert!(chpos >= linechpos);
@@ -322,10 +305,7 @@ impl SourceFile {
     }
     /// Looks up the file's (1-based) line number, (0-based `CharPos`) column offset, and (0-based)
     /// column offset when displayed, for a given `BytePos`.
-    pub fn lookup_file_pos_with_col_display(
-        &self,
-        pos: BytePos,
-    ) -> (usize, CharPos, usize) {
+    pub fn lookup_file_pos_with_col_display(&self, pos: BytePos) -> (usize, CharPos, usize) {
         let pos = self.relative_position(pos);
         let (line, col_or_chpos) = self.lookup_file_pos(pos);
         if line > 0 {

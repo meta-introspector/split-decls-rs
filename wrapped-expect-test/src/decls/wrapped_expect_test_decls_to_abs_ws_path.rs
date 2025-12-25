@@ -21,8 +21,8 @@ fn to_abs_ws_path(path: &Path) -> PathBuf {
         })
         .unwrap_or_else(|_: env::VarError| {
             panic!(
-                "No CARGO_MANIFEST_DIR env var and the path is relative: {}", path
-                .display()
+                "No CARGO_MANIFEST_DIR env var and the path is relative: {}",
+                path.display()
             )
         })
         .join(path)

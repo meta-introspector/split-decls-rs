@@ -4,10 +4,8 @@ use std::collections::HashMap;
 pub mod __macro_support {
     pub use crate::callsite::Callsite;
     use crate::{subscriber::Interest, Metadata};
+    pub use core::{concat, file, format_args, iter::Iterator, line, option::Option, stringify};
     use core::{fmt, str};
-    pub use core::{
-        concat, file, format_args, iter::Iterator, line, option::Option, stringify,
-    };
     /// Callsite implementation used by macro-generated code.
     ///
     /// /!\ WARNING: This is *not* a stable API! /!\
@@ -24,8 +22,7 @@ pub mod __macro_support {
     /// Breaking changes to this module may occur in small-numbered versions
     /// without warning.
     pub fn __is_enabled(meta: &Metadata<'static>, interest: Interest) -> bool {
-        interest.is_always()
-            || crate::dispatcher::get_default(|default| default.enabled(meta))
+        interest.is_always() || crate::dispatcher::get_default(|default| default.enabled(meta))
     }
     /// /!\ WARNING: This is *not* a stable API! /!\
     /// This function, and all code contained in the `__macro_support` module, is
@@ -62,20 +59,21 @@ pub mod __macro_support {
         log_meta: log::Metadata<'_>,
         values: &tracing_core::field::ValueSet<'_>,
     ) {
-        logger
-            .log(
-                &crate::log::Record::builder()
-                    .file(meta.file())
-                    .module_path(meta.module_path())
-                    .line(meta.line())
-                    .metadata(log_meta)
-                    .args(
-                        format_args!(
-                            "{}", crate ::log::LogValueSet { values, is_first : true }
-                        ),
-                    )
-                    .build(),
-            );
+        logger.log(
+            &crate::log::Record::builder()
+                .file(meta.file())
+                .module_path(meta.module_path())
+                .line(meta.line())
+                .metadata(log_meta)
+                .args(format_args!(
+                    "{}",
+                    crate::log::LogValueSet {
+                        values,
+                        is_first: true
+                    }
+                ))
+                .build(),
+        );
     }
     /// Implementation detail used for constructing FieldSet names from raw
     /// identifiers. In `info!(..., r#type = "...")` the macro would end up
@@ -89,9 +87,7 @@ pub mod __macro_support {
             let mut read = 0;
             let mut write = 0;
             while read < input.len() {
-                if read + 1 < input.len() && input[read] == b'r'
-                    && input[read + 1] == b'#'
-                {
+                if read + 1 < input.len() && input[read] == b'r' && input[read + 1] == b'#' {
                     read += 2;
                 }
                 output[write] = input[read];
@@ -121,7 +117,10 @@ pub mod __macro_support {
     }
     impl<const N: usize> fmt::Debug for FieldName<N> {
         fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
-            formatter.debug_tuple("FieldName").field(&self.as_str()).finish()
+            formatter
+                .debug_tuple("FieldName")
+                .field(&self.as_str())
+                .finish()
         }
     }
 }

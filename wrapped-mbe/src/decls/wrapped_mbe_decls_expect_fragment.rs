@@ -6,7 +6,7 @@ pub fn expect_fragment<'t>(
     edition: ::parser::Edition,
     delim_span: DelimSpan<Span>,
 ) -> ExpandResult<tt::TokenTreesView<'t, Span>> {
-    use ::parser;
+    use parser;
     let buffer = tt_iter.remaining();
     let parser_input = to_parser_input(buffer, &mut |_ctx| edition);
     let tree_traversal = entry_point.parse(&parser_input, edition);
@@ -14,7 +14,10 @@ pub fn expect_fragment<'t>(
     let mut error = false;
     for step in tree_traversal.iter() {
         match step {
-            parser::Step::Token { kind, mut n_input_tokens } => {
+            parser::Step::Token {
+                kind,
+                mut n_input_tokens,
+            } => {
                 if kind == ::parser::SyntaxKind::LIFETIME_IDENT {
                     n_input_tokens = 2;
                 }
@@ -30,15 +33,13 @@ pub fn expect_fragment<'t>(
         }
     }
     let err = if error || !cursor.is_root() {
-        Some(
-            ExpandError::binding_error(
-                buffer
-                    .cursor()
-                    .token_tree()
-                    .map_or(delim_span.close, |tt| tt.first_span()),
-                format!("expected {entry_point:?}"),
-            ),
-        )
+        Some(ExpandError::binding_error(
+            buffer
+                .cursor()
+                .token_tree()
+                .map_or(delim_span.close, |tt| tt.first_span()),
+            format!("expected {entry_point:?}"),
+        ))
     } else {
         None
     };

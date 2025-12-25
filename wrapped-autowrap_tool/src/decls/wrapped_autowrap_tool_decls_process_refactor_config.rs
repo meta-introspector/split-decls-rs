@@ -1,8 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-pub fn process_refactor_config(
-    config_path: &str,
-) -> Result<(), Box<dyn std::error::Error>> {
+pub fn process_refactor_config(config_path: &str) -> Result<(), Box<dyn std::error::Error>> {
     let config_str = fs::read_to_string(config_path)?;
     let config: RefactorConfig = toml::from_str(&config_str)?;
     fs::create_dir_all(&config.export.target_dir)?;

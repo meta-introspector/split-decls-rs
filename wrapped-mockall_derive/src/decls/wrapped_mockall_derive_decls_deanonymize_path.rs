@@ -11,12 +11,7 @@ fn deanonymize_path(path: &mut Path) {
                     }
                 }
             }
-            _ => {
-                compile_error(
-                    seg.arguments.span(),
-                    "Methods returning functions are TODO",
-                )
-            }
+            _ => compile_error(seg.arguments.span(), "Methods returning functions are TODO"),
         }
     }
 }

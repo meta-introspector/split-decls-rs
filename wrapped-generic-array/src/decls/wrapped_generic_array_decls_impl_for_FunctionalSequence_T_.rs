@@ -14,14 +14,11 @@ where
             let mut array = ManuallyDrop::new(self);
             let mut source = IntrusiveArrayConsumer::new(&mut array);
             let (array_iter, position) = source.iter_position();
-            FromIterator::from_iter(
-                array_iter
-                    .map(|src| {
-                        let value = ptr::read(src);
-                        *position += 1;
-                        f(value)
-                    }),
-            )
+            FromIterator::from_iter(array_iter.map(|src| {
+                let value = ptr::read(src);
+                *position += 1;
+                f(value)
+            }))
         }
     }
     #[inline(always)]
@@ -35,20 +32,13 @@ where
             let mut array = ManuallyDrop::new(self);
             let mut source = IntrusiveArrayConsumer::new(&mut array);
             let (array_iter, position) = source.iter_position();
-            <Mapped<
-                Self,
-                T,
-                U,
-            > as FallibleGenericSequence<
-                U,
-            >>::from_fallible_iter(
-                array_iter
-                    .map(|src| {
-                        let value = ptr::read(src);
-                        *position += 1;
-                        f(value)
-                    }),
-            )
+            <Mapped<Self, T, U> as FallibleGenericSequence<U>>::from_fallible_iter(array_iter.map(
+                |src| {
+                    let value = ptr::read(src);
+                    *position += 1;
+                    f(value)
+                },
+            ))
         }
     }
     #[inline(always)]
@@ -70,15 +60,11 @@ where
             let mut array = ManuallyDrop::new(self);
             let mut source = IntrusiveArrayConsumer::new(&mut array);
             let (array_iter, position) = source.iter_position();
-            array_iter
-                .fold(
-                    init,
-                    |acc, src| {
-                        let value = ptr::read(src);
-                        *position += 1;
-                        f(acc, value)
-                    },
-                )
+            array_iter.fold(init, |acc, src| {
+                let value = ptr::read(src);
+                *position += 1;
+                f(acc, value)
+            })
         }
     }
     #[inline(always)]
@@ -90,15 +76,11 @@ where
             let mut array = ManuallyDrop::new(self);
             let mut source = IntrusiveArrayConsumer::new(&mut array);
             let (mut array_iter, position) = source.iter_position();
-            array_iter
-                .try_fold(
-                    init,
-                    |acc, src| {
-                        let value = ptr::read(src);
-                        *position += 1;
-                        f(acc, value)
-                    },
-                )
+            array_iter.try_fold(init, |acc, src| {
+                let value = ptr::read(src);
+                *position += 1;
+                f(acc, value)
+            })
         }
     }
 }

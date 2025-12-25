@@ -16,10 +16,13 @@ mod test {
         let (cs, _keys, _) = loglevel_to_cs(record.level());
         let cs_meta = cs.metadata();
         assert_eq!(
-            meta.callsite(), cs_meta.callsite(), "actual: {:#?}\nexpected: {:#?}", meta,
+            meta.callsite(),
+            cs_meta.callsite(),
+            "actual: {:#?}\nexpected: {:#?}",
+            meta,
             cs_meta
         );
-        assert_eq!(meta.level(), & level.as_trace());
+        assert_eq!(meta.level(), &level.as_trace());
     }
     #[test]
     fn error_callsite_is_correct() {

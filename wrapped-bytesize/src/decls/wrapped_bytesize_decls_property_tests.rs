@@ -2,8 +2,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod property_tests {
-    use alloc::string::{String, ToString as _};
     use super::*;
+    use alloc::string::{String, ToString as _};
     impl quickcheck::Arbitrary for ByteSize {
         fn arbitrary(g: &mut quickcheck::Gen) -> Self {
             Self(u64::arbitrary(g))

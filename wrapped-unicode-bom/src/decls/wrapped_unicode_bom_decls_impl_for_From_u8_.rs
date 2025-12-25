@@ -17,7 +17,9 @@ impl From<&[u8]> for Bom {
                 }
                 0x2b => {
                     if compare_tail!(slice, 4, [0x2f, 0x76], 1)
-                        && (slice[3] == 0x38 || slice[3] == 0x39 || slice[3] == 0x2b
+                        && (slice[3] == 0x38
+                            || slice[3] == 0x39
+                            || slice[3] == 0x2b
                             || slice[3] == 0x2f)
                     {
                         return Bom::Utf7;

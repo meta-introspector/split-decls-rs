@@ -7,9 +7,7 @@ impl InterfaceMethod {
                 if let Some(segment) = path.path.segments.last() {
                     let ident = segment.ident.to_string();
                     if ident == "Result" {
-                        if let syn::PathArguments::AngleBracketed(args) = &segment
-                            .arguments
-                        {
+                        if let syn::PathArguments::AngleBracketed(args) = &segment.arguments {
                             if args.args.len() == 1 {
                                 return true;
                             }
@@ -41,17 +39,13 @@ impl InterfaceMethod {
                 if let Some((ty, ident)) = a.borrow_type() {
                     let generic_ident = quote::format_ident!("P{generic_index}");
                     if ident == "Ref" {
-                        Some(
-                            quote! {
-                                # generic_ident : ::windows_core::Param <# ty >
-                            },
-                        )
+                        Some(quote! {
+                            # generic_ident : ::windows_core::Param <# ty >
+                        })
                     } else {
-                        Some(
-                            quote! {
-                                # generic_ident : ::windows_core::OutParam <# ty >
-                            },
-                        )
+                        Some(quote! {
+                            # generic_ident : ::windows_core::OutParam <# ty >
+                        })
                     }
                 } else {
                     None

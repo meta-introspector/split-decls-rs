@@ -3,14 +3,15 @@ use std::collections::HashMap;
 fn perform_decl_refactoring(
     config: &DeclRefactoringConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let _macro_crate_name_ident = Ident::new(
-        &config.macro_crate_name,
-        proc_macro2::Span::call_site(),
-    );
+    let _macro_crate_name_ident =
+        Ident::new(&config.macro_crate_name, proc_macro2::Span::call_site());
     if let Some(main_lib_path_str) = &config.main_macro_lib_path {
         let main_lib_path = PathBuf::from(main_lib_path_str);
         if main_lib_path.is_file() {
-            println!("Ensuring decl_module! invocation in: {}", main_lib_path.display());
+            println!(
+                "Ensuring decl_module! invocation in: {}",
+                main_lib_path.display()
+            );
             let original_code = fs::read_to_string(&main_lib_path)?;
             let mut syntax_tree = syn::parse_file(&original_code)?;
             let mut impl_calls: HashMap<String, HashSet<String>> = HashMap::new();
@@ -31,14 +32,12 @@ fn perform_decl_refactoring(
             let mut generated_uses: Vec<syn::ItemUse> = Vec::new();
             for (module_name, fn_names) in impl_calls {
                 let module_ident = Ident::new(&module_name, Span::call_site());
-                let mut group_items: Punctuated<syn::UseTree, syn::token::Comma> = Punctuated::new();
+                let mut group_items: Punctuated<syn::UseTree, syn::token::Comma> =
+                    Punctuated::new();
                 for fn_name in fn_names {
-                    group_items
-                        .push(
-                            syn::UseTree::Name(syn::UseName {
-                                ident: Ident::new(&fn_name, Span::call_site()),
-                            }),
-                        );
+                    group_items.push(syn::UseTree::Name(syn::UseName {
+                        ident: Ident::new(&fn_name, Span::call_site()),
+                    }));
                 }
                 let use_tree = if group_items.len() == 1 {
                     syn::UseTree::Path(syn::UsePath {
@@ -102,7 +101,7 @@ fn perform_decl_refactoring(
             let modified_code = quote! {
                 # syntax_tree
             }
-                .to_string();
+            .to_string();
             fs::write(&main_lib_path, modified_code)?;
         }
     }

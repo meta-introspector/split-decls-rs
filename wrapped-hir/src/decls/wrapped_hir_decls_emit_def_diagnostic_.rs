@@ -7,14 +7,17 @@ fn emit_def_diagnostic_<'db>(
     edition: Edition,
 ) {
     match diag {
-        DefDiagnosticKind::UnresolvedModule { ast: declaration, candidates } => {
+        DefDiagnosticKind::UnresolvedModule {
+            ast: declaration,
+            candidates,
+        } => {
             let decl = declaration.to_ptr(db);
             acc.push(
                 UnresolvedModule {
                     decl: InFile::new(declaration.file_id, decl),
                     candidates: candidates.clone(),
                 }
-                    .into(),
+                .into(),
             )
         }
         DefDiagnosticKind::UnresolvedExternCrate { ast } => {
@@ -23,12 +26,16 @@ fn emit_def_diagnostic_<'db>(
                 UnresolvedExternCrate {
                     decl: InFile::new(ast.file_id, item),
                 }
-                    .into(),
+                .into(),
             );
         }
         DefDiagnosticKind::MacroError { ast, path, err } => {
             let item = ast.to_ptr(db);
-            let RenderedExpandError { message, error, kind } = err.render_to_string(db);
+            let RenderedExpandError {
+                message,
+                error,
+                kind,
+            } = err.render_to_string(db);
             acc.push(
                 MacroError {
                     node: InFile::new(ast.file_id, item.syntax_node_ptr()),
@@ -37,7 +44,7 @@ fn emit_def_diagnostic_<'db>(
                     error,
                     kind,
                 }
-                    .into(),
+                .into(),
             )
         }
         DefDiagnosticKind::UnresolvedImport { id, index } => {
@@ -47,7 +54,7 @@ fn emit_def_diagnostic_<'db>(
                 UnresolvedImport {
                     decl: InFile::new(file_id, AstPtr::new(&use_tree)),
                 }
-                    .into(),
+                .into(),
             );
         }
         DefDiagnosticKind::UnconfiguredCode { ast_id, cfg, opts } => {
@@ -59,7 +66,7 @@ fn emit_def_diagnostic_<'db>(
                     cfg: cfg.clone(),
                     opts: opts.clone(),
                 }
-                    .into(),
+                .into(),
             );
         }
         DefDiagnosticKind::UnresolvedMacroCall { ast, path } => {
@@ -71,17 +78,19 @@ fn emit_def_diagnostic_<'db>(
                     path: path.clone(),
                     is_bang: matches!(ast, MacroCallKind::FnLike { .. }),
                 }
-                    .into(),
+                .into(),
             );
         }
         DefDiagnosticKind::UnimplementedBuiltinMacro { ast } => {
             let node = ast.to_node(db);
-            let name = node.name().expect("unimplemented builtin macro with no name");
+            let name = node
+                .name()
+                .expect("unimplemented builtin macro with no name");
             acc.push(
                 UnimplementedBuiltinMacro {
                     node: ast.with_value(SyntaxNodePtr::from(AstPtr::new(&name))),
                 }
-                    .into(),
+                .into(),
             );
         }
         DefDiagnosticKind::InvalidDeriveTarget { ast, id } => {
@@ -91,10 +100,9 @@ fn emit_def_diagnostic_<'db>(
                 Some(derive) => {
                     acc.push(
                         InvalidDeriveTarget {
-                            node: ast
-                                .with_value(SyntaxNodePtr::from(AstPtr::new(&derive))),
+                            node: ast.with_value(SyntaxNodePtr::from(AstPtr::new(&derive))),
                         }
-                            .into(),
+                        .into(),
                     );
                 }
                 None => {
@@ -109,10 +117,9 @@ fn emit_def_diagnostic_<'db>(
                 Some(derive) => {
                     acc.push(
                         MalformedDerive {
-                            node: ast
-                                .with_value(SyntaxNodePtr::from(AstPtr::new(&derive))),
+                            node: ast.with_value(SyntaxNodePtr::from(AstPtr::new(&derive))),
                         }
-                            .into(),
+                        .into(),
                     );
                 }
                 None => {
@@ -128,7 +135,7 @@ fn emit_def_diagnostic_<'db>(
                     name: node.name().map(|it| it.syntax().text_range()),
                     message: message.clone(),
                 }
-                    .into(),
+                .into(),
             );
         }
     }

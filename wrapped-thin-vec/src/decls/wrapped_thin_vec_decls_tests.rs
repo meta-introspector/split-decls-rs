@@ -7,8 +7,8 @@ mod tests {
     #[test]
     fn test_size_of() {
         use core::mem::size_of;
-        assert_eq!(size_of::< ThinVec < u8 >> (), size_of::<& u8 > ());
-        assert_eq!(size_of::< Option < ThinVec < u8 >>> (), size_of::<& u8 > ());
+        assert_eq!(size_of::<ThinVec<u8>>(), size_of::<&u8>());
+        assert_eq!(size_of::<Option<ThinVec<u8>>>(), size_of::<&u8>());
     }
     #[test]
     fn test_drop_empty() {
@@ -17,11 +17,11 @@ mod tests {
     #[test]
     fn test_data_ptr_alignment() {
         let v = ThinVec::<u16>::new();
-        assert!(v.data_raw() as usize % core::mem::align_of::< u16 > () == 0);
+        assert!(v.data_raw() as usize % core::mem::align_of::<u16>() == 0);
         let v = ThinVec::<u32>::new();
-        assert!(v.data_raw() as usize % core::mem::align_of::< u32 > () == 0);
+        assert!(v.data_raw() as usize % core::mem::align_of::<u32>() == 0);
         let v = ThinVec::<u64>::new();
-        assert!(v.data_raw() as usize % core::mem::align_of::< u64 > () == 0);
+        assert!(v.data_raw() as usize % core::mem::align_of::<u64>() == 0);
     }
     #[test]
     #[cfg_attr(feature = "gecko-ffi", should_panic)]
@@ -40,19 +40,19 @@ mod tests {
     #[test]
     fn test_alloc() {
         let mut v = ThinVec::new();
-        assert!(! v.has_allocation());
+        assert!(!v.has_allocation());
         v.push(1);
         assert!(v.has_allocation());
         v.pop();
         assert!(v.has_allocation());
         v.shrink_to_fit();
-        assert!(! v.has_allocation());
+        assert!(!v.has_allocation());
         v.reserve(64);
         assert!(v.has_allocation());
         v = ThinVec::with_capacity(64);
         assert!(v.has_allocation());
         v = ThinVec::with_capacity(0);
-        assert!(! v.has_allocation());
+        assert!(!v.has_allocation());
     }
     #[test]
     fn test_drain_items() {
@@ -94,16 +94,16 @@ mod tests {
     fn test_drain_range() {
         let mut v = thin_vec![1, 2, 3, 4, 5];
         for _ in v.drain(4..) {}
-        assert_eq!(v, & [1, 2, 3, 4]);
+        assert_eq!(v, &[1, 2, 3, 4]);
         let mut v: ThinVec<_> = (1..6).map(|x| x.to_string()).collect();
         for _ in v.drain(1..4) {}
-        assert_eq!(v, & [1.to_string(), 5.to_string()]);
+        assert_eq!(v, &[1.to_string(), 5.to_string()]);
         let mut v: ThinVec<_> = (1..6).map(|x| x.to_string()).collect();
         for _ in v.drain(1..4).rev() {}
-        assert_eq!(v, & [1.to_string(), 5.to_string()]);
+        assert_eq!(v, &[1.to_string(), 5.to_string()]);
         let mut v: ThinVec<_> = thin_vec![(); 5];
         for _ in v.drain(1..4).rev() {}
-        assert_eq!(v, & [(), ()]);
+        assert_eq!(v, &[(), ()]);
     }
     #[test]
     fn test_drain_max_vec_size() {
@@ -119,33 +119,33 @@ mod tests {
         let mut v = ThinVec::<i32>::new();
         assert_eq!(v.len(), 0);
         assert_eq!(v.capacity(), 0);
-        assert_eq!(& v[..], & []);
+        assert_eq!(&v[..], &[]);
         v.clear();
         assert_eq!(v.len(), 0);
         assert_eq!(v.capacity(), 0);
-        assert_eq!(& v[..], & []);
+        assert_eq!(&v[..], &[]);
         v.push(1);
         v.push(2);
         assert_eq!(v.len(), 2);
         assert!(v.capacity() >= 2);
-        assert_eq!(& v[..], & [1, 2]);
+        assert_eq!(&v[..], &[1, 2]);
         v.clear();
         assert_eq!(v.len(), 0);
         assert!(v.capacity() >= 2);
-        assert_eq!(& v[..], & []);
+        assert_eq!(&v[..], &[]);
         v.push(3);
         v.push(4);
         assert_eq!(v.len(), 2);
         assert!(v.capacity() >= 2);
-        assert_eq!(& v[..], & [3, 4]);
+        assert_eq!(&v[..], &[3, 4]);
         v.clear();
         assert_eq!(v.len(), 0);
         assert!(v.capacity() >= 2);
-        assert_eq!(& v[..], & []);
+        assert_eq!(&v[..], &[]);
         v.clear();
         assert_eq!(v.len(), 0);
         assert!(v.capacity() >= 2);
-        assert_eq!(& v[..], & []);
+        assert_eq!(&v[..], &[]);
     }
     #[test]
     fn test_empty_singleton_torture() {
@@ -154,12 +154,12 @@ mod tests {
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
             assert!(v.is_empty());
-            assert_eq!(& v[..], & []);
-            assert_eq!(& mut v[..], & mut []);
+            assert_eq!(&v[..], &[]);
+            assert_eq!(&mut v[..], &mut []);
             assert_eq!(v.pop(), None);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let v = ThinVec::<i32>::new();
@@ -179,7 +179,7 @@ mod tests {
             }
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
@@ -190,35 +190,35 @@ mod tests {
             }
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             v.truncate(1);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
             v.truncate(0);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             v.shrink_to_fit();
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             let new = v.split_off(0);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
             assert_eq!(new.len(), 0);
             assert_eq!(new.capacity(), 0);
-            assert_eq!(& new[..], & []);
+            assert_eq!(&new[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
@@ -226,78 +226,78 @@ mod tests {
             v.append(&mut other);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
             assert_eq!(other.len(), 0);
             assert_eq!(other.capacity(), 0);
-            assert_eq!(& other[..], & []);
+            assert_eq!(&other[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             v.reserve(0);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             v.reserve_exact(0);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             v.reserve(0);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let v = ThinVec::<i32>::with_capacity(0);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let v = ThinVec::<i32>::default();
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             v.retain(|_| unreachable!());
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             v.retain_mut(|_| unreachable!());
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             v.dedup_by_key(|x| *x);
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let mut v = ThinVec::<i32>::new();
             v.dedup_by(|_, _| unreachable!());
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
         {
             let v = ThinVec::<i32>::new();
             let v = v.clone();
             assert_eq!(v.len(), 0);
             assert_eq!(v.capacity(), 0);
-            assert_eq!(& v[..], & []);
+            assert_eq!(&v[..], &[]);
         }
     }
     #[test]
@@ -306,7 +306,7 @@ mod tests {
         assert!(v.is_singleton());
         v.push(0);
         v.pop();
-        assert!(! v.is_singleton());
+        assert!(!v.is_singleton());
         let v2 = v.clone();
         assert!(v2.is_singleton());
     }

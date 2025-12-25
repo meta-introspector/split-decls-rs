@@ -5,9 +5,7 @@ impl syn::parse::Parse for InterfaceMethod {
         let docs = input.call(syn::Attribute::parse_outer)?;
         let visibility = input.parse::<syn::Visibility>()?;
         let method = input.parse::<syn::TraitItemFn>()?;
-        unexpected_token!(
-            docs.iter().find(| a | ! a.path().is_ident("doc")), "attribute"
-        );
+        unexpected_token!(docs.iter().find(|a| !a.path().is_ident("doc")), "attribute");
         unexpected_token!(method.default, "default method implementation");
         let sig = method.sig;
         unexpected_token!(sig.abi, "abi declaration");
@@ -15,7 +13,8 @@ impl syn::parse::Parse for InterfaceMethod {
         unexpected_token!(sig.generics.params.iter().next(), "generics declaration");
         unexpected_token!(sig.constness, "const declaration");
         expected_token!(
-            sig.receiver(), "the method to have &self as its first argument"
+            sig.receiver(),
+            "the method to have &self as its first argument"
         );
         unexpected_token!(sig.variadic, "variadic args");
         let args = sig

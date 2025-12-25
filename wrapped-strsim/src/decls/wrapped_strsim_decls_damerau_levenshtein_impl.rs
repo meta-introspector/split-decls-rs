@@ -1,11 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-fn damerau_levenshtein_impl<Iter1, Iter2>(
-    s1: Iter1,
-    len1: usize,
-    s2: Iter2,
-    len2: usize,
-) -> usize
+fn damerau_levenshtein_impl<Iter1, Iter2>(s1: Iter1, len1: usize, s2: Iter2, len2: usize) -> usize
 where
     Iter1: Iterator<Item = char> + Clone,
     Iter2: Iterator<Item = char> + Clone,

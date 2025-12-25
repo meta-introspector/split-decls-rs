@@ -6,7 +6,10 @@ where
 {
     /// Create a new map visitor.
     pub fn new(serializer: S) -> Self {
-        Self { serializer, state: Ok(()) }
+        Self {
+            serializer,
+            state: Ok(()),
+        }
     }
     /// Completes serializing the visited object, returning `Ok(())` if all
     /// fields were serialized correctly, or `Error(S::Error)` if a field could

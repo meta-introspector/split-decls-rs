@@ -12,7 +12,8 @@ mod tests {
         }
     }
     fn normalize_path_sep<S: AsRef<str>>(s: S) -> String {
-        s.as_ref().replace("[/]", if cfg!(windows) { "\\" } else { "/" })
+        s.as_ref()
+            .replace("[/]", if cfg!(windows) { "\\" } else { "/" })
     }
     fn equate_to_expected(g: GlobWalker, mut expected: Vec<String>, dir_path: &Path) {
         for matched_file in g.into_iter().filter_map(Result::ok) {
@@ -50,7 +51,9 @@ mod tests {
         let dir_path = dir.path();
         touch(&dir, &["a.rs", "a.jpg", "a.png", "b.docx"][..]);
         let expected = ["a.jpg", "a.png"].iter().map(ToString::to_string).collect();
-        let g = GlobWalkerBuilder::new(dir_path, "*.{png,jpg,gif}").build().unwrap();
+        let g = GlobWalkerBuilder::new(dir_path, "*.{png,jpg,gif}")
+            .build()
+            .unwrap();
         equate_to_expected(g, expected, dir_path);
     }
     #[test]
@@ -85,9 +88,9 @@ mod tests {
             "contrib[/]README.md",
             "contrib[/]README.rst",
         ]
-            .iter()
-            .map(normalize_path_sep)
-            .collect();
+        .iter()
+        .map(normalize_path_sep)
+        .collect();
         let patterns = ["src/**/*.rs", "*.c", "**/lib.rs", "**/*.{md,rst}"];
         let glob = GlobWalkerBuilder::from_patterns(dir_path, &patterns)
             .build()
@@ -126,9 +129,9 @@ mod tests {
             "contrib[/]README.md",
             "contrib[/]README.rst",
         ]
-            .iter()
-            .map(normalize_path_sep)
-            .collect();
+        .iter()
+        .map(normalize_path_sep)
+        .collect();
         let patterns = ["src/**/*.rs", "*.c", "**/lib.rs", "**/*.{md,rst}"];
         let glob = GlobWalkerBuilder::from_patterns(dir_path, &patterns)
             .case_insensitive(true)
@@ -143,7 +146,14 @@ mod tests {
         create_dir_all(dir_path.join("mod")).expect("");
         touch(
             &dir,
-            &["a.png", "b.png", "c.png", "mod[/]a.png", "mod[/]b.png", "mod[/]c.png"][..],
+            &[
+                "a.png",
+                "b.png",
+                "c.png",
+                "mod[/]a.png",
+                "mod[/]b.png",
+                "mod[/]c.png",
+            ][..],
         );
         let expected: Vec<_> = ["mod"].iter().map(normalize_path_sep).collect();
         let glob = GlobWalkerBuilder::new(dir_path, "mod").build().unwrap();
@@ -180,10 +190,16 @@ mod tests {
             "contrib[/]README.md",
             "contrib[/]README.rst",
         ]
-            .iter()
-            .map(normalize_path_sep)
-            .collect();
-        let patterns = ["src/**/*.rs", "*.c", "**/lib.rs", "**/*.{md,rst}", "!world.rs"];
+        .iter()
+        .map(normalize_path_sep)
+        .collect();
+        let patterns = [
+            "src/**/*.rs",
+            "*.c",
+            "**/lib.rs",
+            "**/*.{md,rst}",
+            "!world.rs",
+        ];
         let glob = GlobWalkerBuilder::from_patterns(dir_path, &patterns)
             .build()
             .unwrap();

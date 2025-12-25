@@ -4,17 +4,15 @@ use std::collections::HashMap;
 /// case, updates the file and return an Error.
 pub fn try_ensure_file_contents(file: &Path, contents: &str) -> Result<(), ()> {
     match std::fs::read_to_string(file) {
-        Ok(
-            old_contents,
-        ) if normalize_newlines(&old_contents) == normalize_newlines(contents) => {
+        Ok(old_contents) if normalize_newlines(&old_contents) == normalize_newlines(contents) => {
             return Ok(());
         }
         _ => {}
     }
     let display_path = file.strip_prefix(project_root()).unwrap_or(file);
     eprintln!(
-        "\n\x1b[31;1merror\x1b[0m: {} was not up-to-date, updating\n", display_path
-        .display()
+        "\n\x1b[31;1merror\x1b[0m: {} was not up-to-date, updating\n",
+        display_path.display()
     );
     if is_ci() {
         eprintln!("    NOTE: run `cargo test` locally and commit the updated files\n");

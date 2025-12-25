@@ -94,10 +94,7 @@ impl AssocItem {
                     db.type_for_type_alias_with_diagnostics(type_alias.id).1,
                     &db.type_alias_signature_with_source_map(type_alias.id).1,
                 );
-                for diag in hir_ty::diagnostics::incorrect_case(
-                    db,
-                    type_alias.id.into(),
-                ) {
+                for diag in hir_ty::diagnostics::incorrect_case(db, type_alias.id.into()) {
                     acc.push(diag.into());
                 }
             }

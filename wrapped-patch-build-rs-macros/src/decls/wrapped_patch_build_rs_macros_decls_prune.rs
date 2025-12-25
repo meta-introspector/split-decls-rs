@@ -12,5 +12,5 @@ pub fn prune(input: TokenStream) -> TokenStream {
         println!("cargo:warning=✂️ Pruned: {} -> {} lines", # data.lines().count(),
         pruned.lines().count()); pruned }
     }
-        .into()
+    .into()
 }

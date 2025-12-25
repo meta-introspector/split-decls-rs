@@ -3,24 +3,24 @@ use std::collections::HashMap;
 #[doc(hidden)]
 pub mod __private {
     use self::not::Bool;
-    use crate::Error;
-    use alloc::fmt;
-    use core::fmt::Arguments;
     #[doc(hidden)]
     pub use crate::ensure::{BothDebug, NotBothDebug};
+    use crate::Error;
+    use alloc::fmt;
     #[doc(hidden)]
     pub use alloc::format;
+    use core::fmt::Arguments;
     #[doc(hidden)]
     pub use core::result::Result::Err;
     #[doc(hidden)]
     pub use core::{concat, format_args, stringify};
     #[doc(hidden)]
     pub mod kind {
-        #[doc(hidden)]
-        pub use crate::kind::{AdhocKind, TraitKind};
         #[cfg(any(feature = "std", not(anyhow_no_core_error)))]
         #[doc(hidden)]
         pub use crate::kind::BoxedKind;
+        #[doc(hidden)]
+        pub use crate::kind::{AdhocKind, TraitKind};
     }
     #[doc(hidden)]
     #[inline]

@@ -11,10 +11,7 @@ fn gen_arbitrary_method(
         lifetime: LifetimeParam,
         recursive_count: &syn::Ident,
     ) -> Result<TokenStream> {
-        let arbitrary = construct(
-            fields,
-            |_idx, field| gen_constructor_for_field(field),
-        )?;
+        let arbitrary = construct(fields, |_idx, field| gen_constructor_for_field(field))?;
         let body = quote! {
             arbitrary::details::with_recursive_count(u, &# recursive_count, | mut u | {
             Ok(# ident # arbitrary) })
@@ -24,14 +21,12 @@ fn gen_arbitrary_method(
             arbitrary::details::with_recursive_count(u, &# recursive_count, | mut u | {
             Ok(# ident # arbitrary_take_rest) })
         };
-        Ok(
-            quote! {
-                fn arbitrary(u : & mut arbitrary::Unstructured <# lifetime >) ->
-                arbitrary::Result < Self > { # body } fn arbitrary_take_rest(mut u :
-                arbitrary::Unstructured <# lifetime >) -> arbitrary::Result < Self > { #
-                take_rest_body }
-            },
-        )
+        Ok(quote! {
+            fn arbitrary(u : & mut arbitrary::Unstructured <# lifetime >) ->
+            arbitrary::Result < Self > { # body } fn arbitrary_take_rest(mut u :
+            arbitrary::Unstructured <# lifetime >) -> arbitrary::Result < Self > { #
+            take_rest_body }
+        })
     }
     fn arbitrary_variant(
         index: u64,
@@ -70,7 +65,9 @@ fn gen_arbitrary_method(
         recursive_count: &syn::Ident,
     ) -> Result<(TokenStream, bool)> {
         let filtered_variants = variants.iter().filter(not_skipped);
-        filtered_variants.clone().try_for_each(check_variant_attrs)?;
+        filtered_variants
+            .clone()
+            .try_for_each(check_variant_attrs)?;
         let enumerated_variants = filtered_variants
             .enumerate()
             .map(|(index, variant)| (index as u64, variant));
@@ -78,13 +75,12 @@ fn gen_arbitrary_method(
         let variants = enumerated_variants
             .clone()
             .map(|(index, Variant { fields, ident, .. })| {
-                construct(fields, |_, field| gen_constructor_for_field(field))
-                    .map(|ctor| {
-                        if !ctor.is_empty() {
-                            needs_recursive_count = true;
-                        }
-                        arbitrary_variant(index, enum_name, ident, ctor)
-                    })
+                construct(fields, |_, field| gen_constructor_for_field(field)).map(|ctor| {
+                    if !ctor.is_empty() {
+                        needs_recursive_count = true;
+                    }
+                    arbitrary_variant(index, enum_name, ident, ctor)
+                })
             })
             .collect::<Result<Vec<TokenStream>>>()?;
         let variants_take_rest = enumerated_variants
@@ -131,19 +127,15 @@ fn gen_arbitrary_method(
     let ident = &input.ident;
     let needs_recursive_count = true;
     match &input.data {
-        Data::Struct(data) => {
-            arbitrary_structlike(&data.fields, ident, lifetime, recursive_count)
-                .map(|ts| (ts, needs_recursive_count))
-        }
-        Data::Union(data) => {
-            arbitrary_structlike(
-                    &Fields::Named(data.fields.clone()),
-                    ident,
-                    lifetime,
-                    recursive_count,
-                )
-                .map(|ts| (ts, needs_recursive_count))
-        }
+        Data::Struct(data) => arbitrary_structlike(&data.fields, ident, lifetime, recursive_count)
+            .map(|ts| (ts, needs_recursive_count)),
+        Data::Union(data) => arbitrary_structlike(
+            &Fields::Named(data.fields.clone()),
+            ident,
+            lifetime,
+            recursive_count,
+        )
+        .map(|ts| (ts, needs_recursive_count)),
         Data::Enum(data) => arbitrary_enum(data, ident, lifetime, recursive_count),
     }
 }

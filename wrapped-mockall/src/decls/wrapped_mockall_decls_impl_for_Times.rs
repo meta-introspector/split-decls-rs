@@ -8,12 +8,11 @@ impl Times {
             if self.range.0.end == 1 {
                 Err("should not have been called".to_owned())
             } else {
-                Err(
-                    format!(
-                        "called {} times which is more than the expected {}", count, self
-                        .range.0.end - 1
-                    ),
-                )
+                Err(format!(
+                    "called {} times which is more than the expected {}",
+                    count,
+                    self.range.0.end - 1
+                ))
             }
         } else {
             Ok(())
@@ -39,10 +38,8 @@ impl Times {
     /// Has this expectation already been called the expected number of times?
     /// If not, was it too many or too few?
     pub fn is_satisfied(&self) -> ExpectedCalls {
-        let satisfied_lower_bound = self.count.load(Ordering::Relaxed)
-            >= self.range.0.start;
-        let satisfied_upper_bound = self.count.load(Ordering::Relaxed)
-            < self.range.0.end;
+        let satisfied_lower_bound = self.count.load(Ordering::Relaxed) >= self.range.0.start;
+        let satisfied_upper_bound = self.count.load(Ordering::Relaxed) < self.range.0.end;
         if satisfied_lower_bound && satisfied_upper_bound {
             ExpectedCalls::Satisfied
         } else if satisfied_lower_bound {

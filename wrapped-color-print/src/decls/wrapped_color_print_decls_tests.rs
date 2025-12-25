@@ -2,8 +2,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod tests {
-    use std::fmt::Write as _;
     use super::*;
+    use std::fmt::Write as _;
     #[cfg(feature = "terminfo")]
     pub mod color_print {
         pub use super::*;
@@ -21,16 +21,16 @@ mod tests {
         assert_eq!(cformat!("Hi {}", 12), "Hi 12");
         assert_eq!(cformat!("Hi {n} {}", 12, n = 24), "Hi 24 12");
         let mut s = String::new();
-        cwrite!(& mut s, "").unwrap();
+        cwrite!(&mut s, "").unwrap();
         assert_eq!(s, "");
         let mut s = String::new();
-        cwrite!(& mut s, "Hi").unwrap();
+        cwrite!(&mut s, "Hi").unwrap();
         assert_eq!(s, "Hi");
         let mut s = String::new();
-        cwrite!(& mut s, "Hi {}", 12).unwrap();
+        cwrite!(&mut s, "Hi {}", 12).unwrap();
         assert_eq!(s, "Hi 12");
         let mut s = String::new();
-        cwrite!(& mut s, "Hi {n} {}", 12, n = 24).unwrap();
+        cwrite!(&mut s, "Hi {n} {}", 12, n = 24).unwrap();
         assert_eq!(s, "Hi 24 12");
     }
     #[test]
@@ -80,7 +80,8 @@ mod tests {
     #[cfg(not(feature = "terminfo"))]
     fn bold_and_dim_should_be_optimized() {
         assert_eq!(
-            cformat!("<bold>BOLD</><dim>DIM</>"), "\u{1b}[1mBOLD\u{1b}[2mDIM\u{1b}[22m"
+            cformat!("<bold>BOLD</><dim>DIM</>"),
+            "\u{1b}[1mBOLD\u{1b}[2mDIM\u{1b}[22m"
         );
     }
     #[test]
@@ -99,7 +100,8 @@ mod tests {
             "\u{1b}[31mRED\u{1b}[34mBLUE\u{1b}[31mRED\u{1b}[39m"
         );
         assert_eq!(
-            cformat!("<red><blue>BLUE</>RED</>"), "\u{1b}[34mBLUE\u{1b}[31mRED\u{1b}[39m"
+            cformat!("<red><blue>BLUE</>RED</>"),
+            "\u{1b}[34mBLUE\u{1b}[31mRED\u{1b}[39m"
         );
         assert_eq!(cformat!("<red></>Text"), "Text");
     }
@@ -120,32 +122,33 @@ mod tests {
     #[test]
     #[cfg(feature = "terminfo")]
     fn terminfo_format_basic() {
-        assert_eq!(cformat!("<red>Hi</red>"), format!("{}Hi{}", * RED, * CLEAR));
+        assert_eq!(cformat!("<red>Hi</red>"), format!("{}Hi{}", *RED, *CLEAR));
         assert_eq!(
-            cformat!("Hi <bold>word</bold> !"), format!("Hi {}word{} !", * BOLD, * CLEAR)
+            cformat!("Hi <bold>word</bold> !"),
+            format!("Hi {}word{} !", *BOLD, *CLEAR)
         );
         let mut s = String::new();
-        cwrite!(& mut s, "<r>Hi</> {}", 12).unwrap();
-        assert_eq!(s, format!("{}Hi{} 12", * RED, * CLEAR));
+        cwrite!(&mut s, "<r>Hi</> {}", 12).unwrap();
+        assert_eq!(s, format!("{}Hi{} 12", *RED, *CLEAR));
     }
     #[test]
     #[cfg(feature = "terminfo")]
     fn terminfo_format_multiple() {
         assert_eq!(
             cformat!("Hi <bold>word</bold> <red>red</red> !"),
-            format!("Hi {}word{} {}red{} !", * BOLD, * CLEAR, * RED, * CLEAR)
+            format!("Hi {}word{} {}red{} !", *BOLD, *CLEAR, *RED, *CLEAR)
         );
     }
     #[test]
     #[cfg(feature = "terminfo")]
     fn terminfo_format_auto_close_tag() {
         assert_eq!(
-            cformat!("<red>RED<blue>BLUE"), format!("{}RED{}BLUE{}", * RED, * BLUE, *
-            CLEAR)
+            cformat!("<red>RED<blue>BLUE"),
+            format!("{}RED{}BLUE{}", *RED, *BLUE, *CLEAR)
         );
         assert_eq!(
-            cformat!("<red>RED<em>BOLD"), format!("{}RED{}BOLD{}", * RED, * BOLD, *
-            CLEAR)
+            cformat!("<red>RED<em>BOLD"),
+            format!("{}RED{}BOLD{}", *RED, *BOLD, *CLEAR)
         );
     }
     #[test]

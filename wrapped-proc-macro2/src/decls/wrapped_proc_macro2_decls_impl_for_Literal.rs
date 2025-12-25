@@ -2,7 +2,10 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl Literal {
     fn _new(inner: imp::Literal) -> Self {
-        Literal { inner, _marker: MARKER }
+        Literal {
+            inner,
+            _marker: MARKER,
+        }
     }
     fn _new_fallback(inner: fallback::Literal) -> Self {
         Literal {
@@ -136,17 +139,14 @@ impl Literal {
             let quoted = &repr[1..repr.len() - 1];
             let mut value = String::with_capacity(quoted.len());
             let mut error = None;
-            rustc_literal_escaper::unescape_str(
-                quoted,
-                |_range, res| match res {
-                    Ok(ch) => value.push(ch),
-                    Err(err) => {
-                        if err.is_fatal() {
-                            error = Some(ConversionErrorKind::FailedToUnescape(err));
-                        }
+            rustc_literal_escaper::unescape_str(quoted, |_range, res| match res {
+                Ok(ch) => value.push(ch),
+                Err(err) => {
+                    if err.is_fatal() {
+                        error = Some(ConversionErrorKind::FailedToUnescape(err));
                     }
-                },
-            );
+                }
+            });
             return match error {
                 Some(error) => Err(error),
                 None => Ok(value),
@@ -168,23 +168,17 @@ impl Literal {
             let quoted = &repr[2..repr.len() - 1];
             let mut value = Vec::with_capacity(quoted.len());
             let mut error = None;
-            rustc_literal_escaper::unescape_c_str(
-                quoted,
-                |_range, res| match res {
-                    Ok(MixedUnit::Char(ch)) => {
-                        value
-                            .extend_from_slice(
-                                ch.get().encode_utf8(&mut [0; 4]).as_bytes(),
-                            );
+            rustc_literal_escaper::unescape_c_str(quoted, |_range, res| match res {
+                Ok(MixedUnit::Char(ch)) => {
+                    value.extend_from_slice(ch.get().encode_utf8(&mut [0; 4]).as_bytes());
+                }
+                Ok(MixedUnit::HighByte(byte)) => value.push(byte.get()),
+                Err(err) => {
+                    if err.is_fatal() {
+                        error = Some(ConversionErrorKind::FailedToUnescape(err));
                     }
-                    Ok(MixedUnit::HighByte(byte)) => value.push(byte.get()),
-                    Err(err) => {
-                        if err.is_fatal() {
-                            error = Some(ConversionErrorKind::FailedToUnescape(err));
-                        }
-                    }
-                },
-            );
+                }
+            });
             return match error {
                 Some(error) => Err(error),
                 None => {
@@ -211,17 +205,14 @@ impl Literal {
             let quoted = &repr[2..repr.len() - 1];
             let mut value = Vec::with_capacity(quoted.len());
             let mut error = None;
-            rustc_literal_escaper::unescape_byte_str(
-                quoted,
-                |_range, res| match res {
-                    Ok(byte) => value.push(byte),
-                    Err(err) => {
-                        if err.is_fatal() {
-                            error = Some(ConversionErrorKind::FailedToUnescape(err));
-                        }
+            rustc_literal_escaper::unescape_byte_str(quoted, |_range, res| match res {
+                Ok(byte) => value.push(byte),
+                Err(err) => {
+                    if err.is_fatal() {
+                        error = Some(ConversionErrorKind::FailedToUnescape(err));
                     }
-                },
-            );
+                }
+            });
             return match error {
                 Some(error) => Err(error),
                 None => Ok(value),

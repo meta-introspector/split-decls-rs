@@ -17,11 +17,7 @@ impl<'tcx> PrivateItemsInPublicInterfacesChecker<'_, 'tcx> {
             skip_assoc_tys: false,
         }
     }
-    fn check_unnameable(
-        &self,
-        def_id: LocalDefId,
-        effective_vis: Option<EffectiveVisibility>,
-    ) {
+    fn check_unnameable(&self, def_id: LocalDefId, effective_vis: Option<EffectiveVisibility>) {
         let Some(effective_vis) = effective_vis else {
             return;
         };
@@ -30,23 +26,22 @@ impl<'tcx> PrivateItemsInPublicInterfacesChecker<'_, 'tcx> {
         if reachable_at_vis.is_public() && reexported_at_vis != reachable_at_vis {
             let hir_id = self.tcx.local_def_id_to_hir_id(def_id);
             let span = self.tcx.def_span(def_id.to_def_id());
-            self.tcx
-                .emit_node_span_lint(
-                    lint::builtin::UNNAMEABLE_TYPES,
-                    hir_id,
+            self.tcx.emit_node_span_lint(
+                lint::builtin::UNNAMEABLE_TYPES,
+                hir_id,
+                span,
+                UnnameableTypesLint {
                     span,
-                    UnnameableTypesLint {
-                        span,
-                        kind: self.tcx.def_descr(def_id.to_def_id()),
-                        descr: (&LazyDefPathStr {
-                            def_id: def_id.to_def_id(),
-                            tcx: self.tcx,
-                        })
-                            .into(),
-                        reachable_vis: &reachable_at_vis.to_string(def_id, self.tcx),
-                        reexported_vis: &reexported_at_vis.to_string(def_id, self.tcx),
-                    },
-                );
+                    kind: self.tcx.def_descr(def_id.to_def_id()),
+                    descr: (&LazyDefPathStr {
+                        def_id: def_id.to_def_id(),
+                        tcx: self.tcx,
+                    })
+                        .into(),
+                    reachable_vis: &reachable_at_vis.to_string(def_id, self.tcx),
+                    reexported_vis: &reexported_at_vis.to_string(def_id, self.tcx),
+                },
+            );
         }
     }
     fn check_assoc_item(
@@ -86,26 +81,27 @@ impl<'tcx> PrivateItemsInPublicInterfacesChecker<'_, 'tcx> {
                     .ty();
             }
             DefKind::OpaqueTy => {
-                self.check(def_id, item_visibility, effective_vis).generics().bounds();
+                self.check(def_id, item_visibility, effective_vis)
+                    .generics()
+                    .bounds();
             }
             DefKind::Trait => {
                 self.check_unnameable(def_id, effective_vis);
                 self.check(def_id, item_visibility, effective_vis)
                     .generics()
                     .predicates();
-                for assoc_item in tcx.associated_items(id.owner_id).in_definition_order()
-                {
+                for assoc_item in tcx.associated_items(id.owner_id).in_definition_order() {
                     if assoc_item.is_impl_trait_in_trait() {
                         continue;
                     }
                     self.check_assoc_item(assoc_item, item_visibility, effective_vis);
                     if assoc_item.is_type() {
                         self.check(
-                                assoc_item.def_id.expect_local(),
-                                item_visibility,
-                                effective_vis,
-                            )
-                            .bounds();
+                            assoc_item.def_id.expect_local(),
+                            item_visibility,
+                            effective_vis,
+                        )
+                        .bounds();
                     }
                 }
             }
@@ -134,17 +130,20 @@ impl<'tcx> PrivateItemsInPublicInterfacesChecker<'_, 'tcx> {
                 for field in adt.all_fields() {
                     let visibility = min(item_visibility, field.vis.expect_local(), tcx);
                     let field_ev = self.get(field.did.expect_local());
-                    self.check(field.did.expect_local(), visibility, field_ev).ty();
+                    self.check(field.did.expect_local(), visibility, field_ev)
+                        .ty();
                 }
             }
             DefKind::ForeignMod => {}
             DefKind::Impl { of_trait } => {
-                let impl_vis = ty::Visibility::of_impl::<
-                    false,
-                >(def_id, of_trait, tcx, &Default::default());
-                let impl_ev = EffectiveVisibility::of_impl::<
-                    false,
-                >(def_id, of_trait, tcx, self.effective_visibilities);
+                let impl_vis =
+                    ty::Visibility::of_impl::<false>(def_id, of_trait, tcx, &Default::default());
+                let impl_ev = EffectiveVisibility::of_impl::<false>(
+                    def_id,
+                    of_trait,
+                    tcx,
+                    self.effective_visibilities,
+                );
                 let mut check = self.check(def_id, impl_vis, Some(impl_ev));
                 if !of_trait {
                     check.generics().predicates();
@@ -154,8 +153,7 @@ impl<'tcx> PrivateItemsInPublicInterfacesChecker<'_, 'tcx> {
                 if of_trait {
                     check.trait_ref();
                 }
-                for assoc_item in tcx.associated_items(id.owner_id).in_definition_order()
-                {
+                for assoc_item in tcx.associated_items(id.owner_id).in_definition_order() {
                     if assoc_item.is_impl_trait_in_trait() {
                         continue;
                     }
@@ -188,6 +186,9 @@ impl<'tcx> PrivateItemsInPublicInterfacesChecker<'_, 'tcx> {
         if let DefKind::ForeignTy = self.tcx.def_kind(def_id) {
             self.check_unnameable(def_id, effective_vis);
         }
-        self.check(def_id, item_visibility, effective_vis).generics().predicates().ty();
+        self.check(def_id, item_visibility, effective_vis)
+            .generics()
+            .predicates()
+            .ty();
     }
 }

@@ -44,11 +44,15 @@ macro_rules! metadata {
         name : $name:expr, target : $target:expr, level : $level:expr, fields :
         $fields:expr, callsite : $callsite:expr, kind : $kind:expr,
     ) => {
-        $crate::metadata::Metadata::new($name, $target, $level,
-        $crate::__macro_support::Option::Some($crate::__macro_support::file!()),
-        $crate::__macro_support::Option::Some($crate::__macro_support::line!()),
-        $crate::__macro_support::Option::Some($crate::__macro_support::module_path!()),
-        $crate::field::FieldSet::new($fields, $crate::identify_callsite!($callsite)),
-        $kind,)
+        $crate::metadata::Metadata::new(
+            $name,
+            $target,
+            $level,
+            $crate::__macro_support::Option::Some($crate::__macro_support::file!()),
+            $crate::__macro_support::Option::Some($crate::__macro_support::line!()),
+            $crate::__macro_support::Option::Some($crate::__macro_support::module_path!()),
+            $crate::field::FieldSet::new($fields, $crate::identify_callsite!($callsite)),
+            $kind,
+        )
     };
 }

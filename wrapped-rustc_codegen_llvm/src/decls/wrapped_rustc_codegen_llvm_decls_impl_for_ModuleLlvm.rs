@@ -4,10 +4,7 @@ impl ModuleLlvm {
     fn new(tcx: TyCtxt<'_>, mod_name: &str) -> Self {
         unsafe {
             let llcx = llvm::LLVMContextCreate();
-            llvm::LLVMContextSetDiscardValueNames(
-                llcx,
-                tcx.sess.fewer_names().to_llvm_bool(),
-            );
+            llvm::LLVMContextSetDiscardValueNames(llcx, tcx.sess.fewer_names().to_llvm_bool());
             let llmod_raw = context::create_module(tcx, llcx, mod_name) as *const _;
             ModuleLlvm {
                 llmod_raw,
@@ -19,17 +16,12 @@ impl ModuleLlvm {
     fn new_metadata(tcx: TyCtxt<'_>, mod_name: &str) -> Self {
         unsafe {
             let llcx = llvm::LLVMContextCreate();
-            llvm::LLVMContextSetDiscardValueNames(
-                llcx,
-                tcx.sess.fewer_names().to_llvm_bool(),
-            );
+            llvm::LLVMContextSetDiscardValueNames(llcx, tcx.sess.fewer_names().to_llvm_bool());
             let llmod_raw = context::create_module(tcx, llcx, mod_name) as *const _;
             ModuleLlvm {
                 llmod_raw,
                 llcx,
-                tm: ManuallyDrop::new(
-                    create_informational_target_machine(tcx.sess, false),
-                ),
+                tm: ManuallyDrop::new(create_informational_target_machine(tcx.sess, false)),
             }
         }
     }

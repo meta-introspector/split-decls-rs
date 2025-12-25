@@ -16,9 +16,7 @@ fn contains_exterior_struct_lit(value: &hir::Expr<'_>) -> bool {
         | hir::ExprKind::Type(x, _)
         | hir::ExprKind::Field(x, _)
         | hir::ExprKind::Index(x, _, _) => contains_exterior_struct_lit(x),
-        hir::ExprKind::MethodCall(_, receiver, ..) => {
-            contains_exterior_struct_lit(receiver)
-        }
+        hir::ExprKind::MethodCall(_, receiver, ..) => contains_exterior_struct_lit(receiver),
         _ => false,
     }
 }

@@ -5,9 +5,9 @@ pub mod structs {
     #[cfg(feature = "use_alloc")]
     pub use crate::adaptors::MultiProduct;
     pub use crate::adaptors::{
-        Batching, Coalesce, Dedup, DedupBy, DedupByWithCount, DedupWithCount,
-        FilterMapOk, FilterOk, Interleave, InterleaveShortest, MapInto, MapOk, Positions,
-        Product, PutBack, TakeWhileRef, TupleCombinations, Update, WhileSome,
+        Batching, Coalesce, Dedup, DedupBy, DedupByWithCount, DedupWithCount, FilterMapOk,
+        FilterOk, Interleave, InterleaveShortest, MapInto, MapOk, Positions, Product, PutBack,
+        TakeWhileRef, TupleCombinations, Update, WhileSome,
     };
     #[cfg(feature = "use_alloc")]
     pub use crate::combinations::{ArrayCombinations, Combinations};

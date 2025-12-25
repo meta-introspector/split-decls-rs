@@ -22,16 +22,13 @@ pub fn resolve_completion_edits(
     let current_edition = current_crate.edition(db);
     let new_ast = scope.clone_for_update();
     let mut import_insert = TextEdit::builder();
-    imports
-        .into_iter()
-        .for_each(|full_import_path| {
-            insert_use::insert_use(
-                &new_ast,
-                make::path_from_text_with_edition(&full_import_path, current_edition),
-                &config.insert_use,
-            );
-        });
-    diff(scope.as_syntax_node(), new_ast.as_syntax_node())
-        .into_text_edit(&mut import_insert);
+    imports.into_iter().for_each(|full_import_path| {
+        insert_use::insert_use(
+            &new_ast,
+            make::path_from_text_with_edition(&full_import_path, current_edition),
+            &config.insert_use,
+        );
+    });
+    diff(scope.as_syntax_node(), new_ast.as_syntax_node()).into_text_edit(&mut import_insert);
     Some(vec![import_insert.finish()])
 }

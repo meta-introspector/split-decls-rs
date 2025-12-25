@@ -4,9 +4,7 @@ use std::collections::HashMap;
 mod tests {
     use crate::decode::{hex_decode, hex_decode_with_case, CheckCase};
     use crate::encode::{hex_encode, hex_string};
-    use crate::{
-        hex_encode_upper, hex_string_upper, vectorization_support, Vectorization,
-    };
+    use crate::{hex_encode_upper, hex_string_upper, vectorization_support, Vectorization};
     use proptest::proptest;
     #[cfg(not(feature = "alloc"))]
     const CAPACITY: usize = 128;
@@ -20,9 +18,9 @@ mod tests {
                 Vectorization::SSE41 => assert!(is_x86_feature_detected!("sse4.1")),
                 Vectorization::None => {
                     assert!(
-                        ! cfg!(target_feature = "sse") || !
-                        is_x86_feature_detected!("avx2") && !
-                        is_x86_feature_detected!("sse4.1")
+                        !cfg!(target_feature = "sse")
+                            || !is_x86_feature_detected!("avx2")
+                                && !is_x86_feature_detected!("sse4.1")
                     )
                 }
             }
@@ -34,16 +32,12 @@ mod tests {
             }
             Vectorization::None => {
                 assert!(
-                    ! cfg!(target_feature = "neon") || !
-                    std::arch::is_aarch64_feature_detected!("neon")
+                    !cfg!(target_feature = "neon")
+                        || !std::arch::is_aarch64_feature_detected!("neon")
                 )
             }
         }
-        #[cfg(
-            not(
-                any(target_arch = "x86", target_arch = "x86_64", target_arch = "aarch64")
-            )
-        )]
+        #[cfg(not(any(target_arch = "x86", target_arch = "x86_64", target_arch = "aarch64")))]
         assert_eq!(vector_support, Vectorization::None);
     }
     fn _test_hex_encode(s: &String) {
@@ -85,9 +79,8 @@ mod tests {
             #[cfg(not(feature = "alloc"))]
             let hex_string = hex_string::<CAPACITY>(s.as_bytes());
             hex_decode(hex_string.as_bytes(), &mut dst).unwrap();
-            hex_decode_with_case(hex_string.as_bytes(), &mut dst, CheckCase::Lower)
-                .unwrap();
-            assert_eq!(& dst[..], s.as_bytes());
+            hex_decode_with_case(hex_string.as_bytes(), &mut dst, CheckCase::Lower).unwrap();
+            assert_eq!(&dst[..], s.as_bytes());
         }
         {
             let mut dst = Vec::with_capacity(len);
@@ -96,9 +89,8 @@ mod tests {
             let hex_string_upper = hex_string_upper(s.as_bytes());
             #[cfg(not(feature = "alloc"))]
             let hex_string_upper = hex_string_upper::<CAPACITY>(s.as_bytes());
-            hex_decode_with_case(hex_string_upper.as_bytes(), &mut dst, CheckCase::Upper)
-                .unwrap();
-            assert_eq!(& dst[..], s.as_bytes());
+            hex_decode_with_case(hex_string_upper.as_bytes(), &mut dst, CheckCase::Upper).unwrap();
+            assert_eq!(&dst[..], s.as_bytes());
         }
     }
     #[cfg(feature = "alloc")]
@@ -113,7 +105,7 @@ mod tests {
         let len = s.as_bytes().len();
         let mut dst = Vec::with_capacity(len / 2);
         dst.resize(len / 2, 0);
-        assert!(hex_decode(s.as_bytes(), & mut dst).is_ok() == ok);
+        assert!(hex_decode(s.as_bytes(), &mut dst).is_ok() == ok);
     }
     proptest! {
         #[test] fn test_hex_decode_check(ref s in "([0-9a-fA-F][0-9a-fA-F])+") {

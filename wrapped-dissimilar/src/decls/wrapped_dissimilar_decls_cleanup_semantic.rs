@@ -28,15 +28,10 @@ fn cleanup_semantic(solution: &mut Solution) {
             Diff::Delete(text) => len_deletions2 += text.len,
             Diff::Insert(text) => len_insertions2 += text.len,
         }
-        if last_equality
-            .map_or(
-                false,
-                |(last_equality, _)| {
-                    last_equality.len <= cmp::max(len_insertions1, len_deletions1)
-                        && last_equality.len <= cmp::max(len_insertions2, len_deletions2)
-                },
-            )
-        {
+        if last_equality.map_or(false, |(last_equality, _)| {
+            last_equality.len <= cmp::max(len_insertions1, len_deletions1)
+                && last_equality.len <= cmp::max(len_insertions2, len_deletions2)
+        }) {
             pointer = equalities.pop_back().unwrap();
             diffs[pointer] = Diff::Delete(last_equality.unwrap().0);
             diffs.insert(pointer + 1, Diff::Insert(last_equality.unwrap().1));
@@ -64,40 +59,31 @@ fn cleanup_semantic(solution: &mut Solution) {
     let mut pointer = 1;
     while let Some(&this_diff) = diffs.get(pointer) {
         let prev_diff = diffs[pointer - 1];
-        if let (Diff::Delete(deletion), Diff::Insert(insertion)) = (
-            prev_diff,
-            this_diff,
-        ) {
+        if let (Diff::Delete(deletion), Diff::Insert(insertion)) = (prev_diff, this_diff) {
             let overlap_len1 = common_overlap(deletion, insertion);
             let overlap_len2 = common_overlap(insertion, deletion);
             let overlap_min = cmp::min(deletion.len, insertion.len);
             if overlap_len1 >= overlap_len2 && 2 * overlap_len1 >= overlap_min {
-                diffs
-                    .insert(
-                        pointer,
-                        Diff::Equal(
-                            deletion
-                                .substring(deletion.len - overlap_len1..deletion.len),
-                            insertion.substring(..overlap_len1),
-                        ),
-                    );
-                diffs[pointer - 1] = Diff::Delete(
-                    deletion.substring(..deletion.len - overlap_len1),
+                diffs.insert(
+                    pointer,
+                    Diff::Equal(
+                        deletion.substring(deletion.len - overlap_len1..deletion.len),
+                        insertion.substring(..overlap_len1),
+                    ),
                 );
+                diffs[pointer - 1] =
+                    Diff::Delete(deletion.substring(..deletion.len - overlap_len1));
                 diffs[pointer + 1] = Diff::Insert(insertion.substring(overlap_len1..));
             } else if overlap_len1 < overlap_len2 && 2 * overlap_len2 >= overlap_min {
-                diffs
-                    .insert(
-                        pointer,
-                        Diff::Equal(
-                            deletion.substring(..overlap_len2),
-                            insertion
-                                .substring(insertion.len - overlap_len2..insertion.len),
-                        ),
-                    );
-                diffs[pointer - 1] = Diff::Insert(
-                    insertion.substring(..insertion.len - overlap_len2),
+                diffs.insert(
+                    pointer,
+                    Diff::Equal(
+                        deletion.substring(..overlap_len2),
+                        insertion.substring(insertion.len - overlap_len2..insertion.len),
+                    ),
                 );
+                diffs[pointer - 1] =
+                    Diff::Insert(insertion.substring(..insertion.len - overlap_len2));
                 diffs[pointer + 1] = Diff::Delete(deletion.substring(overlap_len2..));
             }
             pointer += 1;

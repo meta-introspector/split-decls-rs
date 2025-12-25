@@ -42,6 +42,7 @@ impl<T> Instrumented<T> {
             let inner = unsafe { inner.read() };
             ManuallyDrop::into_inner(inner)
         }
-        #[cfg(not(feature = "std-future"))] self.inner
+        #[cfg(not(feature = "std-future"))]
+        self.inner
     }
 }

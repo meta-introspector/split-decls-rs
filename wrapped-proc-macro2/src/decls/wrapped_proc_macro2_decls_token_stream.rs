@@ -3,9 +3,9 @@ use std::collections::HashMap;
 /// Public implementation details for the `TokenStream` type, such as iterators.
 pub mod token_stream {
     use crate::marker::{ProcMacroAutoTraits, MARKER};
+    pub use crate::TokenStream;
     use crate::{imp, TokenTree};
     use core::fmt::{self, Debug};
-    pub use crate::TokenStream;
     /// An iterator over `TokenStream`'s `TokenTree`s.
     ///
     /// The iteration is "shallow", e.g. the iterator doesn't recurse into

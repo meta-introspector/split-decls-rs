@@ -23,11 +23,13 @@ impl Diff {
         num_tokens: u32,
     ) {
         assert!(
-            before.len() < i32::MAX as usize, "imara-diff only supports up to {} tokens",
+            before.len() < i32::MAX as usize,
+            "imara-diff only supports up to {} tokens",
             i32::MAX
         );
         assert!(
-            after.len() < i32::MAX as usize, "imara-diff only supports up to {} tokens",
+            after.len() < i32::MAX as usize,
+            "imara-diff only supports up to {} tokens",
             i32::MAX
         );
         self.removed.clear();
@@ -41,9 +43,7 @@ impl Diff {
         let range = common_prefix..self.added.len() - common_postfix as usize;
         let added = &mut self.added[range];
         match algorithm {
-            Algorithm::Histogram => {
-                histogram::diff(before, after, removed, added, num_tokens)
-            }
+            Algorithm::Histogram => histogram::diff(before, after, removed, added, num_tokens),
             Algorithm::Myers => myers::diff(before, after, removed, added, false),
             Algorithm::MyersMinimal => myers::diff(before, after, removed, added, true),
         }
@@ -89,10 +89,7 @@ impl Diff {
         self.postprocess_with_heuristic(
             input,
             IndentHeuristic::new(|token| {
-                IndentLevel::for_ascii_line(
-                    input.interner[token].as_ref().iter().copied(),
-                    8,
-                )
+                IndentLevel::for_ascii_line(input.interner[token].as_ref().iter().copied(), 8)
             }),
         )
     }

@@ -3,14 +3,14 @@ use std::collections::HashMap;
 impl TokenTree {
     /// Returns `true` if the given token tree is delimited.
     pub fn is_delimited(&self) -> bool {
-        matches!(* self, TokenTree::Delimited(..))
+        matches!(*self, TokenTree::Delimited(..))
     }
     /// Returns `true` if the given token tree is a token of the given kind.
     pub fn is_token(&self, expected_kind: &TokenKind) -> bool {
         match self {
-            TokenTree::Token(Token { kind: actual_kind, .. }) => {
-                actual_kind == expected_kind
-            }
+            TokenTree::Token(Token {
+                kind: actual_kind, ..
+            }) => actual_kind == expected_kind,
             _ => false,
         }
     }

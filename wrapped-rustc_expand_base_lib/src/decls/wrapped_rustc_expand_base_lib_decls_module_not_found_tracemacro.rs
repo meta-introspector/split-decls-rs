@@ -1,3 +1,6 @@
 #[llm_error_message(message = "Module file not found for: tracemacro")]
-#[llm_context(crate_name = "wrapped_rustc_expand_base_lib", module_name = "tracemacro")]
+#[llm_context(
+    crate_name = "wrapped_rustc_expand_base_lib",
+    module_name = "tracemacro"
+)]
 pub struct wrapped_rustc_expand_base_lib_decls_module_not_found_tracemacro;

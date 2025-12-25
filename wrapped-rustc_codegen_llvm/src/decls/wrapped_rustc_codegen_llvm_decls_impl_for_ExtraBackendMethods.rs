@@ -43,11 +43,9 @@ impl ExtraBackendMethods for LlvmCodegenBackend {
         F: Send + 'static,
         T: Send + 'static,
     {
-        std::thread::Builder::new()
-            .name(name)
-            .spawn(move || {
-                let _profiler = TimeTraceProfiler::new(time_trace);
-                f()
-            })
+        std::thread::Builder::new().name(name).spawn(move || {
+            let _profiler = TimeTraceProfiler::new(time_trace);
+            f()
+        })
     }
 }

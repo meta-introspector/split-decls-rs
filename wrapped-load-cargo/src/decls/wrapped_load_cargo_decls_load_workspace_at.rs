@@ -14,7 +14,8 @@ pub fn load_workspace_at(
         let build_scripts = workspace.run_build_scripts(cargo_config, progress)?;
         if let Some(error) = build_scripts.error() {
             tracing::debug!(
-                "Errors occurred while running build scripts for {}: {}", manifest_path,
+                "Errors occurred while running build scripts for {}: {}",
+                manifest_path,
                 error
             );
         }

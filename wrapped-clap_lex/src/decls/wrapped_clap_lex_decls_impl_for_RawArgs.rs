@@ -94,12 +94,8 @@ impl RawArgs {
     pub fn seek(&self, cursor: &mut ArgCursor, pos: SeekFrom) {
         let pos = match pos {
             SeekFrom::Start(pos) => pos,
-            SeekFrom::End(pos) => {
-                (self.items.len() as i64).saturating_add(pos).max(0) as u64
-            }
-            SeekFrom::Current(pos) => {
-                (cursor.cursor as i64).saturating_add(pos).max(0) as u64
-            }
+            SeekFrom::End(pos) => (self.items.len() as i64).saturating_add(pos).max(0) as u64,
+            SeekFrom::Current(pos) => (cursor.cursor as i64).saturating_add(pos).max(0) as u64,
         };
         let pos = (pos as usize).min(self.items.len());
         cursor.cursor = pos;
@@ -110,11 +106,10 @@ impl RawArgs {
         cursor: &ArgCursor,
         insert_items: impl IntoIterator<Item = impl Into<OsString>>,
     ) {
-        self.items
-            .splice(
-                cursor.cursor..cursor.cursor,
-                insert_items.into_iter().map(Into::into),
-            );
+        self.items.splice(
+            cursor.cursor..cursor.cursor,
+            insert_items.into_iter().map(Into::into),
+        );
     }
     /// Any remaining args?
     pub fn is_end(&self, cursor: &ArgCursor) -> bool {

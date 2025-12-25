@@ -24,9 +24,7 @@ impl<T: fmt::Debug> fmt::Debug for Unblock<T> {
             | State::Streaming(..)
             | State::Reading(..)
             | State::Writing(..)
-            | State::Seeking(..) => {
-                f.debug_struct("Unblock").field("io", &Blocked).finish()
-            }
+            | State::Seeking(..) => f.debug_struct("Unblock").field("io", &Blocked).finish(),
         }
     }
 }

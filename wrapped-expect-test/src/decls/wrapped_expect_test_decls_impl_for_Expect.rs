@@ -54,10 +54,9 @@ impl Expect {
         let (literal_start, line_indent) = target_line.unwrap();
         let lit_to_eof = &file[literal_start..];
         let lit_to_eof_trimmed = lit_to_eof.trim_start();
-        let literal_start = literal_start
-            + (lit_to_eof.len() - lit_to_eof_trimmed.len());
-        let literal_len = locate_end(lit_to_eof_trimmed)
-            .expect("Couldn't find closing delimiter for `expect!`.");
+        let literal_start = literal_start + (lit_to_eof.len() - lit_to_eof_trimmed.len());
+        let literal_len =
+            locate_end(lit_to_eof_trimmed).expect("Couldn't find closing delimiter for `expect!`.");
         let literal_range = literal_start..literal_start + literal_len;
         Location {
             line_indent,

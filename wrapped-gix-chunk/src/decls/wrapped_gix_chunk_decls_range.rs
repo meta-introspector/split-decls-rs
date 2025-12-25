@@ -2,12 +2,10 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 ///
 pub mod range {
-    use std::ops::Range;
     use crate::file;
+    use std::ops::Range;
     /// Turn a u64 Range into a usize range safely, to make chunk ranges useful in memory mapped files.
-    pub fn into_usize(
-        Range { start, end }: Range<file::Offset>,
-    ) -> Option<Range<usize>> {
+    pub fn into_usize(Range { start, end }: Range<file::Offset>) -> Option<Range<usize>> {
         let start = start.try_into().ok()?;
         let end = end.try_into().ok()?;
         Some(Range { start, end })

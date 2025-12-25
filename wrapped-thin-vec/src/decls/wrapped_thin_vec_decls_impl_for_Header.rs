@@ -15,7 +15,8 @@ impl Header {
     }
     fn set_cap_and_auto(&mut self, cap: usize, is_auto: bool) {
         debug_assert_eq!(
-            unpack_capacity(pack_capacity_and_auto(cap as SizeType, is_auto)), cap
+            unpack_capacity(pack_capacity_and_auto(cap as SizeType, is_auto)),
+            cap
         );
         self._cap = pack_capacity_and_auto(assert_size(cap), is_auto);
     }

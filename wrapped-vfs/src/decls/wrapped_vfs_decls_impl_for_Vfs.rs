@@ -37,11 +37,7 @@ impl Vfs {
     ///
     /// If the path does not currently exists in the `Vfs`, allocates a new
     /// [`FileId`] for it.
-    pub fn set_file_contents(
-        &mut self,
-        path: VfsPath,
-        contents: Option<Vec<u8>>,
-    ) -> bool {
+    pub fn set_file_contents(&mut self, path: VfsPath, contents: Option<Vec<u8>>) -> bool {
         let _p = span!(Level::INFO, "Vfs::set_file_contents").entered();
         let file_id = self.alloc_file_id(path);
         let state: FileState = self.get(file_id);
@@ -63,9 +59,7 @@ impl Vfs {
         };
         let mut set_data = |change_kind| {
             self.data[file_id.0 as usize] = match change_kind {
-                &Change::Create(_, hash) | &Change::Modify(_, hash) => {
-                    FileState::Exists(hash)
-                }
+                &Change::Create(_, hash) | &Change::Modify(_, hash) => FileState::Exists(hash),
                 Change::Delete => FileState::Deleted,
             };
         };
@@ -75,10 +69,7 @@ impl Vfs {
                 use Change::*;
                 match (&mut o.get_mut().change, changed_file.change) {
                     (change, Delete) => *change = Delete,
-                    (
-                        Create(prev, old_hash),
-                        Create(new, new_hash) | Modify(new, new_hash),
-                    ) => {
+                    (Create(prev, old_hash), Create(new, new_hash) | Modify(new, new_hash)) => {
                         *prev = new;
                         *old_hash = new_hash;
                     }
@@ -102,9 +93,7 @@ impl Vfs {
         true
     }
     /// Drain and returns all the changes in the `Vfs`.
-    pub fn take_changes(
-        &mut self,
-    ) -> IndexMap<FileId, ChangedFile, BuildHasherDefault<FxHasher>> {
+    pub fn take_changes(&mut self) -> IndexMap<FileId, ChangedFile, BuildHasherDefault<FxHasher>> {
         mem::take(&mut self.changes)
     }
     /// Provides a panic-less way to verify file_id validity.

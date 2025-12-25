@@ -15,12 +15,15 @@ fn ser_smoke_test() {
     };
     let expected = Value::Map(
         vec![
-            (Value::String("a".into()), Value::U32(15)), (Value::String("b".into()),
-            Value::String("hello".into())), (Value::String("c".into()),
-            Value::Seq(vec![Value::Bool(true), Value::Bool(false)]),),
+            (Value::String("a".into()), Value::U32(15)),
+            (Value::String("b".into()), Value::String("hello".into())),
+            (
+                Value::String("c".into()),
+                Value::Seq(vec![Value::Bool(true), Value::Bool(false)]),
+            ),
         ]
-            .into_iter()
-            .collect(),
+        .into_iter()
+        .collect(),
     );
     let value = to_value(&foo).unwrap();
     assert_eq!(expected, value);

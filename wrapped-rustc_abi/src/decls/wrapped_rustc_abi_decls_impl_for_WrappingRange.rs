@@ -61,7 +61,11 @@ impl WrappingRange {
     /// and `Err(..)` if the range is full so it depends how you think about it.
     #[inline]
     pub fn no_unsigned_wraparound(&self, size: Size) -> Result<bool, RangeFull> {
-        if self.is_full_for(size) { Err(..) } else { Ok(self.start <= self.end) }
+        if self.is_full_for(size) {
+            Err(..)
+        } else {
+            Ok(self.start <= self.end)
+        }
     }
     /// Checks whether this range is considered non-wrapping when the values are
     /// interpreted as *signed* numbers of width `size`.

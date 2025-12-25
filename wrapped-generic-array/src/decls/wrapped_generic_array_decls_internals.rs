@@ -8,6 +8,6 @@ pub mod internals {
     //! they can ensure elements are correctly dropped if something panics while using them.
     //!
     //! The API of these is not guaranteed to be stable, as they are not intended for general use.
-    pub use crate::internal::{IntrusiveArrayBuilder, IntrusiveArrayConsumer};
     pub use crate::internal::{ArrayBuilder, ArrayConsumer};
+    pub use crate::internal::{IntrusiveArrayBuilder, IntrusiveArrayConsumer};
 }

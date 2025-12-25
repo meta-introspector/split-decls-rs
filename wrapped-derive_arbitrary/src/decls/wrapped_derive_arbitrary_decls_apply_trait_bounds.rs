@@ -27,16 +27,13 @@ fn apply_trait_bounds(
             .map(|bounds| bounds.len())
             .sum::<usize>();
         if config_bounds_applied != config_bounds_supplied {
-            return Err(
-                Error::new(
-                    Span::call_site(),
-                    format!(
-                        "invalid `{}` attribute. too many bounds, only {} out of {} are applicable",
-                        ARBITRARY_ATTRIBUTE_NAME, config_bounds_applied,
-                        config_bounds_supplied,
-                    ),
+            return Err(Error::new(
+                Span::call_site(),
+                format!(
+                    "invalid `{}` attribute. too many bounds, only {} out of {} are applicable",
+                    ARBITRARY_ATTRIBUTE_NAME, config_bounds_applied, config_bounds_supplied,
                 ),
-            );
+            ));
         }
         Ok(generics)
     } else {

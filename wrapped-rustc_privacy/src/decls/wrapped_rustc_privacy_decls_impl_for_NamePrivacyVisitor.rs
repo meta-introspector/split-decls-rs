@@ -20,7 +20,9 @@ impl<'tcx> NamePrivacyVisitor<'tcx> {
             return true;
         }
         let ident = Ident::new(sym::dummy, use_ctxt);
-        let (_, def_id) = self.tcx.adjust_ident_and_get_scope(ident, def.did(), hir_id);
+        let (_, def_id) = self
+            .tcx
+            .adjust_ident_and_get_scope(ident, def.did(), hir_id);
         !field.vis.is_accessible_from(def_id, self.tcx)
     }
     fn emit_unreachable_field_error(
@@ -34,7 +36,7 @@ impl<'tcx> NamePrivacyVisitor<'tcx> {
             return;
         }
         let Some(field_names) = listify(&fields[..], |(n, _, _)| format!("`{n}`")) else {
-            return
+            return;
         };
         let span: MultiSpan = fields
             .iter()
@@ -47,14 +49,12 @@ impl<'tcx> NamePrivacyVisitor<'tcx> {
             .map(|(n, _, _)| n)
             .collect();
         let rest_len = rest_field_names.len();
-        let rest_field_names = listify(&rest_field_names[..], |n| format!("`{n}`"))
-            .unwrap_or_default();
+        let rest_field_names =
+            listify(&rest_field_names[..], |n| format!("`{n}`")).unwrap_or_default();
         let labels = fields
             .iter()
             .filter(|(_, _, is_present)| *is_present)
-            .map(|(_, span, _)| FieldIsPrivateLabel::Other {
-                span: *span,
-            })
+            .map(|(_, span, _)| FieldIsPrivateLabel::Other { span: *span })
             .chain(
                 update_syntax
                     .iter()
@@ -65,26 +65,24 @@ impl<'tcx> NamePrivacyVisitor<'tcx> {
                     }),
             )
             .collect();
-        self.tcx
-            .dcx()
-            .emit_err(FieldIsPrivate {
-                span,
-                struct_span: if self
-                    .tcx
-                    .sess
-                    .source_map()
-                    .is_multiline(fields[0].1.between(struct_span))
-                {
-                    Some(struct_span)
-                } else {
-                    None
-                },
-                field_names,
-                variant_descr: def.variant_descr(),
-                def_path_str: self.tcx.def_path_str(def.did()),
-                labels,
-                len: fields.len(),
-            });
+        self.tcx.dcx().emit_err(FieldIsPrivate {
+            span,
+            struct_span: if self
+                .tcx
+                .sess
+                .source_map()
+                .is_multiline(fields[0].1.between(struct_span))
+            {
+                Some(struct_span)
+            } else {
+                None
+            },
+            field_names,
+            variant_descr: def.variant_descr(),
+            def_path_str: self.tcx.def_path_str(def.did()),
+            labels,
+            len: fields.len(),
+        });
     }
     fn check_expanded_fields(
         &self,

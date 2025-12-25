@@ -27,14 +27,12 @@ pub fn sorensen_dice(a: &str, b: &str) -> f64 {
     }
     let mut intersection_size = 0_usize;
     for bigram in bigrams(&b) {
-        a_bigrams
-            .entry(bigram)
-            .and_modify(|bi| {
-                if *bi > 0 {
-                    *bi -= 1;
-                    intersection_size += 1;
-                }
-            });
+        a_bigrams.entry(bigram).and_modify(|bi| {
+            if *bi > 0 {
+                *bi -= 1;
+                intersection_size += 1;
+            }
+        });
     }
     (2 * intersection_size) as f64 / (a.len() + b.len() - 2) as f64
 }

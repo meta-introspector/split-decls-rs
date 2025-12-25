@@ -2,9 +2,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod tests {
+    use super::*;
     use ide_db::base_db::RootQueryDb;
     use vfs::file_set::FileSetConfigBuilder;
-    use super::*;
     #[test]
     fn test_loading_rust_analyzer() {
         let path = Path::new(env!("CARGO_MANIFEST_DIR"))
@@ -21,13 +21,8 @@ mod tests {
             with_proc_macro_server: ProcMacroServerChoice::None,
             prefill_caches: false,
         };
-        let (db, _vfs, _proc_macro) = load_workspace_at(
-                path,
-                &cargo_config,
-                &load_cargo_config,
-                &|_| {},
-            )
-            .unwrap();
+        let (db, _vfs, _proc_macro) =
+            load_workspace_at(path, &cargo_config, &load_cargo_config, &|_| {}).unwrap();
         let n_crates = db.all_crates().len();
         assert!(n_crates > 20);
     }
@@ -48,8 +43,7 @@ mod tests {
     fn unrelated_source_sharing_dirname() {
         let mut builder = FileSetConfigBuilder::default();
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc".to_owned())]);
-        builder
-            .add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/abc".to_owned())]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/abc".to_owned())]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
@@ -62,8 +56,7 @@ mod tests {
     fn basic_child_parent() {
         let mut builder = FileSetConfigBuilder::default();
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc".to_owned())]);
-        builder
-            .add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc/def".to_owned())]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc/def".to_owned())]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
@@ -77,8 +70,7 @@ mod tests {
         let mut builder = FileSetConfigBuilder::default();
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc".to_owned())]);
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def".to_owned())]);
-        builder
-            .add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/abc".to_owned())]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/abc".to_owned())]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
@@ -92,8 +84,7 @@ mod tests {
         let mut builder = FileSetConfigBuilder::default();
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc".to_owned())]);
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/ghi".to_owned())]);
-        builder
-            .add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/abc".to_owned())]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/abc".to_owned())]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
@@ -107,10 +98,9 @@ mod tests {
         let mut builder = FileSetConfigBuilder::default();
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc".to_owned())]);
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def".to_owned())]);
-        builder
-            .add_file_set(
-                vec![VfsPath::new_virtual_path("/ROOT/def/ghi/jkl".to_owned())],
-            );
+        builder.add_file_set(vec![VfsPath::new_virtual_path(
+            "/ROOT/def/ghi/jkl".to_owned(),
+        )]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
@@ -124,24 +114,25 @@ mod tests {
         let mut builder = FileSetConfigBuilder::default();
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc".to_owned())]);
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def".to_owned())]);
-        builder
-            .add_file_set(
-                vec![VfsPath::new_virtual_path("/ROOT/def/ghi/jkl".to_owned())],
-            );
-        builder
-            .add_file_set(
-                vec![VfsPath::new_virtual_path("/ROOT/def/ghi/klm".to_owned())],
-            );
+        builder.add_file_set(vec![VfsPath::new_virtual_path(
+            "/ROOT/def/ghi/jkl".to_owned(),
+        )]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path(
+            "/ROOT/def/ghi/klm".to_owned(),
+        )]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
             local_filesets: vec![0, 1, 2, 3],
         };
         let mut vc = src.source_root_parent_map().into_iter().collect::<Vec<_>>();
-        vc.sort_by(|x, y| x.0.0.cmp(&y.0.0));
+        vc.sort_by(|x, y| x.0 .0.cmp(&y.0 .0));
         assert_eq!(
-            vc, vec![(SourceRootId(2), SourceRootId(1)), (SourceRootId(3),
-            SourceRootId(1))]
+            vc,
+            vec![
+                (SourceRootId(2), SourceRootId(1)),
+                (SourceRootId(3), SourceRootId(1))
+            ]
         )
     }
     #[test]
@@ -149,19 +140,17 @@ mod tests {
         let mut builder = FileSetConfigBuilder::default();
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc".to_owned())]);
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def".to_owned())]);
-        builder
-            .add_file_set(
-                vec![VfsPath::new_virtual_path("/ROOT/def/ghi/jkl".to_owned())],
-            );
-        builder
-            .add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/klm".to_owned())]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path(
+            "/ROOT/def/ghi/jkl".to_owned(),
+        )]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/klm".to_owned())]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
             local_filesets: vec![0, 1, 3],
         };
         let mut vc = src.source_root_parent_map().into_iter().collect::<Vec<_>>();
-        vc.sort_by(|x, y| x.0.0.cmp(&y.0.0));
+        vc.sort_by(|x, y| x.0 .0.cmp(&y.0 .0));
         assert_eq!(vc, vec![(SourceRootId(3), SourceRootId(1)),])
     }
     #[test]
@@ -169,63 +158,53 @@ mod tests {
         let mut builder = FileSetConfigBuilder::default();
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/abc".to_owned())]);
         builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def".to_owned())]);
-        builder
-            .add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/klm".to_owned())]);
-        builder
-            .add_file_set(
-                vec![VfsPath::new_virtual_path("/ROOT/def/klm/jkl".to_owned())],
-            );
+        builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/klm".to_owned())]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path(
+            "/ROOT/def/klm/jkl".to_owned(),
+        )]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
             local_filesets: vec![0, 1, 3],
         };
         let mut vc = src.source_root_parent_map().into_iter().collect::<Vec<_>>();
-        vc.sort_by(|x, y| x.0.0.cmp(&y.0.0));
+        vc.sort_by(|x, y| x.0 .0.cmp(&y.0 .0));
         assert_eq!(vc, vec![(SourceRootId(3), SourceRootId(1)),])
     }
     #[test]
     fn parents_with_identical_root_id() {
         let mut builder = FileSetConfigBuilder::default();
-        builder
-            .add_file_set(
-                vec![
-                    VfsPath::new_virtual_path("/ROOT/def".to_owned()),
-                    VfsPath::new_virtual_path("/ROOT/def/abc/def".to_owned()),
-                ],
-            );
-        builder
-            .add_file_set(
-                vec![VfsPath::new_virtual_path("/ROOT/def/abc/def/ghi".to_owned())],
-            );
+        builder.add_file_set(vec![
+            VfsPath::new_virtual_path("/ROOT/def".to_owned()),
+            VfsPath::new_virtual_path("/ROOT/def/abc/def".to_owned()),
+        ]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path(
+            "/ROOT/def/abc/def/ghi".to_owned(),
+        )]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
             local_filesets: vec![0, 1],
         };
         let mut vc = src.source_root_parent_map().into_iter().collect::<Vec<_>>();
-        vc.sort_by(|x, y| x.0.0.cmp(&y.0.0));
+        vc.sort_by(|x, y| x.0 .0.cmp(&y.0 .0));
         assert_eq!(vc, vec![(SourceRootId(1), SourceRootId(0)),])
     }
     #[test]
     fn circular_reference() {
         let mut builder = FileSetConfigBuilder::default();
-        builder
-            .add_file_set(
-                vec![
-                    VfsPath::new_virtual_path("/ROOT/def".to_owned()),
-                    VfsPath::new_virtual_path("/ROOT/def/abc/def".to_owned()),
-                ],
-            );
-        builder
-            .add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/abc".to_owned())]);
+        builder.add_file_set(vec![
+            VfsPath::new_virtual_path("/ROOT/def".to_owned()),
+            VfsPath::new_virtual_path("/ROOT/def/abc/def".to_owned()),
+        ]);
+        builder.add_file_set(vec![VfsPath::new_virtual_path("/ROOT/def/abc".to_owned())]);
         let fsc = builder.build();
         let src = SourceRootConfig {
             fsc,
             local_filesets: vec![0, 1],
         };
         let mut vc = src.source_root_parent_map().into_iter().collect::<Vec<_>>();
-        vc.sort_by(|x, y| x.0.0.cmp(&y.0.0));
+        vc.sort_by(|x, y| x.0 .0.cmp(&y.0 .0));
         assert_eq!(vc, vec![(SourceRootId(1), SourceRootId(0)),])
     }
 }

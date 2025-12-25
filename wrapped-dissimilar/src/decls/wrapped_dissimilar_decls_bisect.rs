@@ -4,8 +4,8 @@ fn bisect<'a, 'b>(text1: Range<'a>, text2: Range<'b>) -> Vec<Diff<'a, 'b>> {
     let max_d = (text1.len + text2.len + 1) / 2;
     let v_offset = max_d;
     let v_len = 2 * max_d;
-    let mut v1 = vec![- 1isize; v_len];
-    let mut v2 = vec![- 1isize; v_len];
+    let mut v1 = vec![-1isize; v_len];
+    let mut v2 = vec![-1isize; v_len];
     v1[v_offset + 1] = 0;
     v2[v_offset + 1] = 0;
     let delta = text1.len as isize - text2.len as isize;
@@ -18,9 +18,7 @@ fn bisect<'a, 'b>(text1: Range<'a>, text2: Range<'b>) -> Vec<Diff<'a, 'b>> {
         let mut k1 = -d + k1start;
         while k1 <= d - k1end {
             let k1_offset = (v_offset as isize + k1) as usize;
-            let mut x1 = if k1 == -d
-                || (k1 != d && v1[k1_offset - 1] < v1[k1_offset + 1])
-            {
+            let mut x1 = if k1 == -d || (k1 != d && v1[k1_offset - 1] < v1[k1_offset + 1]) {
                 v1[k1_offset + 1]
             } else {
                 v1[k1_offset - 1] + 1
@@ -38,9 +36,7 @@ fn bisect<'a, 'b>(text1: Range<'a>, text2: Range<'b>) -> Vec<Diff<'a, 'b>> {
                 k1start += 2;
             } else if front {
                 let k2_offset = v_offset as isize + delta - k1;
-                if k2_offset >= 0 && k2_offset < v_len as isize
-                    && v2[k2_offset as usize] != -1
-                {
+                if k2_offset >= 0 && k2_offset < v_len as isize && v2[k2_offset as usize] != -1 {
                     let x2 = text1.len as isize - v2[k2_offset as usize];
                     if x1 as isize >= x2 {
                         return bisect_split(text1, text2, x1, y1);
@@ -52,9 +48,7 @@ fn bisect<'a, 'b>(text1: Range<'a>, text2: Range<'b>) -> Vec<Diff<'a, 'b>> {
         let mut k2 = -d + k2start;
         while k2 <= d - k2end {
             let k2_offset = (v_offset as isize + k2) as usize;
-            let mut x2 = if k2 == -d
-                || (k2 != d && v2[k2_offset - 1] < v2[k2_offset + 1])
-            {
+            let mut x2 = if k2 == -d || (k2 != d && v2[k2_offset - 1] < v2[k2_offset + 1]) {
                 v2[k2_offset + 1]
             } else {
                 v2[k2_offset - 1] + 1
@@ -75,9 +69,7 @@ fn bisect<'a, 'b>(text1: Range<'a>, text2: Range<'b>) -> Vec<Diff<'a, 'b>> {
                 k2start += 2;
             } else if !front {
                 let k1_offset = v_offset as isize + delta - k2;
-                if k1_offset >= 0 && k1_offset < v_len as isize
-                    && v1[k1_offset as usize] != -1
-                {
+                if k1_offset >= 0 && k1_offset < v_len as isize && v1[k1_offset as usize] != -1 {
                     let x1 = v1[k1_offset as usize] as usize;
                     let y1 = v_offset + x1 - k1_offset as usize;
                     x2 = text1.len - x2;

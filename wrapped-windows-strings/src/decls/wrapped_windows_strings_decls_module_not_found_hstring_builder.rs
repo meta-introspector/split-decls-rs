@@ -1,3 +1,6 @@
 #[llm_error_message(message = "Module file not found for: hstring_builder")]
-#[llm_context(crate_name = "wrapped_windows_strings", module_name = "hstring_builder")]
+#[llm_context(
+    crate_name = "wrapped_windows_strings",
+    module_name = "hstring_builder"
+)]
 pub struct wrapped_windows_strings_decls_module_not_found_hstring_builder;

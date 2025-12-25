@@ -12,10 +12,14 @@ pub fn utf8_error<E: EmissionGuarantee>(
     let note = format!("invalid utf-8 at byte `{start}`");
     let msg = if let Some(len) = utf8err.error_len() {
         format!(
-            "byte{s} `{bytes}` {are} not valid utf-8", bytes = if len == 1 {
-            format!("{:?}", contents[start]) } else { format!("{:?}", & contents[start
-            ..start + len]) }, s = pluralize!(len), are = if len == 1 { "is" } else {
-            "are" },
+            "byte{s} `{bytes}` {are} not valid utf-8",
+            bytes = if len == 1 {
+                format!("{:?}", contents[start])
+            } else {
+                format!("{:?}", &contents[start..start + len])
+            },
+            s = pluralize!(len),
+            are = if len == 1 { "is" } else { "are" },
         )
     } else {
         note.clone()

@@ -4,20 +4,17 @@ use std::collections::HashMap;
 fn deimplify(rt: &mut ReturnType) {
     if let ReturnType::Type(_, ty) = rt {
         if let Type::ImplTrait(ref tit) = &**ty {
-            let needs_pin = tit
-                .bounds
-                .iter()
-                .any(|tpb| {
-                    if let TypeParamBound::Trait(tb) = tpb {
-                        if let Some(seg) = tb.path.segments.last() {
-                            seg.ident == "Future" || seg.ident == "Stream"
-                        } else {
-                            false
-                        }
+            let needs_pin = tit.bounds.iter().any(|tpb| {
+                if let TypeParamBound::Trait(tb) = tpb {
+                    if let Some(seg) = tb.path.segments.last() {
+                        seg.ident == "Future" || seg.ident == "Stream"
                     } else {
                         false
                     }
-                });
+                } else {
+                    false
+                }
+            });
             let bounds = &tit.bounds;
             if needs_pin {
                 *ty = parse2(quote!(::std::pin::Pin < Box < dyn # bounds >>)).unwrap();

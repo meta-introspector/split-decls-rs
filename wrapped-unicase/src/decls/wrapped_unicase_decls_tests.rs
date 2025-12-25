@@ -38,9 +38,9 @@ mod tests {
         assert_eq!(d, a);
         assert_eq!(d, b);
         assert_eq!(d, c);
-        assert_eq!(hash(& a), hash(& b));
-        assert_eq!(hash(& a), hash(& c));
-        assert_eq!(hash(& a), hash(& d));
+        assert_eq!(hash(&a), hash(&b));
+        assert_eq!(hash(&a), hash(&c));
+        assert_eq!(hash(&a), hash(&d));
         assert!(a.is_ascii());
         assert!(b.is_ascii());
         assert!(c.is_ascii());
@@ -63,7 +63,7 @@ mod tests {
         let b = UniCase::new("στιγμασ");
         assert_eq!(a, b);
         assert_eq!(b, a);
-        assert_eq!(hash(& a), hash(& b));
+        assert_eq!(hash(&a), hash(&b));
     }
     #[test]
     fn test_eq_unicode_left_is_substring() {

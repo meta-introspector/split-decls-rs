@@ -8,21 +8,21 @@ mod test {
     fn test_encode_to_slice() {
         let mut output_1 = [0; 4 * 2];
         encode_to_slice(b"kiwi", &mut output_1).unwrap();
-        assert_eq!(& output_1, b"6b697769");
+        assert_eq!(&output_1, b"6b697769");
         encode_to_slice_upper(b"kiwi", &mut output_1).unwrap();
-        assert_eq!(& output_1, b"6B697769");
+        assert_eq!(&output_1, b"6B697769");
         let mut output_2 = [0; 5 * 2];
         encode_to_slice(b"kiwis", &mut output_2).unwrap();
-        assert_eq!(& output_2, b"6b69776973");
+        assert_eq!(&output_2, b"6b69776973");
         encode_to_slice_upper(b"kiwis", &mut output_2).unwrap();
-        assert_eq!(& output_2, b"6B69776973");
+        assert_eq!(&output_2, b"6B69776973");
         let mut output_3 = [0; 100];
         assert_eq!(
-            encode_to_slice(b"kiwis", & mut output_3),
+            encode_to_slice(b"kiwis", &mut output_3),
             Err(FromHexError::InvalidStringLength)
         );
         assert_eq!(
-            encode_to_slice_upper(b"kiwis", & mut output_3),
+            encode_to_slice_upper(b"kiwis", &mut output_3),
             Err(FromHexError::InvalidStringLength)
         );
     }
@@ -30,12 +30,15 @@ mod test {
     fn test_decode_to_slice() {
         let mut output_1 = [0; 4];
         decode_to_slice(b"6b697769", &mut output_1).unwrap();
-        assert_eq!(& output_1, b"kiwi");
+        assert_eq!(&output_1, b"kiwi");
         let mut output_2 = [0; 5];
         decode_to_slice(b"6b69776973", &mut output_2).unwrap();
-        assert_eq!(& output_2, b"kiwis");
+        assert_eq!(&output_2, b"kiwis");
         let mut output_3 = [0; 4];
-        assert_eq!(decode_to_slice(b"6", & mut output_3), Err(FromHexError::OddLength));
+        assert_eq!(
+            decode_to_slice(b"6", &mut output_3),
+            Err(FromHexError::OddLength)
+        );
     }
     #[test]
     #[cfg(feature = "alloc")]
@@ -45,7 +48,10 @@ mod test {
     #[test]
     #[cfg(feature = "alloc")]
     fn test_decode() {
-        assert_eq!(decode("666f6f626172"), Ok(String::from("foobar").into_bytes()));
+        assert_eq!(
+            decode("666f6f626172"),
+            Ok(String::from("foobar").into_bytes())
+        );
     }
     #[test]
     #[cfg(feature = "alloc")]
@@ -63,14 +69,17 @@ mod test {
     #[cfg(feature = "alloc")]
     pub fn test_invalid_length() {
         assert_eq!(Vec::from_hex("1").unwrap_err(), FromHexError::OddLength);
-        assert_eq!(Vec::from_hex("666f6f6261721").unwrap_err(), FromHexError::OddLength);
+        assert_eq!(
+            Vec::from_hex("666f6f6261721").unwrap_err(),
+            FromHexError::OddLength
+        );
     }
     #[test]
     #[cfg(feature = "alloc")]
     pub fn test_invalid_char() {
         assert_eq!(
-            Vec::from_hex("66ag").unwrap_err(), FromHexError::InvalidHexCharacter { c :
-            'g', index : 3 }
+            Vec::from_hex("66ag").unwrap_err(),
+            FromHexError::InvalidHexCharacter { c: 'g', index: 3 }
         );
     }
     #[test]
@@ -82,18 +91,18 @@ mod test {
     #[cfg(feature = "alloc")]
     pub fn test_from_hex_whitespace() {
         assert_eq!(
-            Vec::from_hex("666f 6f62617").unwrap_err(), FromHexError::InvalidHexCharacter
-            { c : ' ', index : 4 }
+            Vec::from_hex("666f 6f62617").unwrap_err(),
+            FromHexError::InvalidHexCharacter { c: ' ', index: 4 }
         );
     }
     #[test]
     pub fn test_from_hex_array() {
         assert_eq!(
-            < [u8; 6] as FromHex >::from_hex("666f6f626172"), Ok([0x66, 0x6f, 0x6f, 0x62,
-            0x61, 0x72])
+            <[u8; 6] as FromHex>::from_hex("666f6f626172"),
+            Ok([0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72])
         );
         assert_eq!(
-            < [u8; 5] as FromHex >::from_hex("666f6f626172"),
+            <[u8; 5] as FromHex>::from_hex("666f6f626172"),
             Err(FromHexError::InvalidStringLength)
         );
     }
@@ -101,11 +110,11 @@ mod test {
     #[cfg(feature = "alloc")]
     fn test_to_hex() {
         assert_eq!(
-            [0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72].encode_hex::< String > (),
+            [0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72].encode_hex::<String>(),
             "666f6f626172",
         );
         assert_eq!(
-            [0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72].encode_hex_upper::< String > (),
+            [0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72].encode_hex_upper::<String>(),
             "666F6F626172",
         );
     }
@@ -115,7 +124,8 @@ mod test {
         use alloc::string::ToString;
         let s: &str = "Hello, world!";
         assert_eq!(
-            < str >::encode_hex::< String > (s), "48656c6c6f2c20776f726c6421".to_string()
+            <str>::encode_hex::<String>(s),
+            "48656c6c6f2c20776f726c6421".to_string()
         );
     }
 }

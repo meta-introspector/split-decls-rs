@@ -25,13 +25,9 @@ pub mod cmsg_macros {
         }
         (*mhdr).msg_control as *mut cmsghdr
     }
-    pub unsafe fn CMSG_NXTHDR(
-        mhdr: *const msghdr,
-        cmsg: *const cmsghdr,
-    ) -> *mut cmsghdr {
+    pub unsafe fn CMSG_NXTHDR(mhdr: *const msghdr, cmsg: *const cmsghdr) -> *mut cmsghdr {
         let cmsg_len = (*cmsg).cmsg_len;
-        let next_cmsg = (cmsg as *mut u8).add(CMSG_ALIGN(cmsg_len as _) as usize)
-            as *mut cmsghdr;
+        let next_cmsg = (cmsg as *mut u8).add(CMSG_ALIGN(cmsg_len as _) as usize) as *mut cmsghdr;
         let max = ((*mhdr).msg_control as usize) + ((*mhdr).msg_controllen as usize);
         if cmsg_len < size_of::<cmsghdr>() as _ {
             return ptr::null_mut();

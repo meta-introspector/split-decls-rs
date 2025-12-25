@@ -46,7 +46,11 @@ impl Runtime {
 {}
 ----
 ",
-            position, help, expected, actual, format_chunks(diff)
+            position,
+            help,
+            expected,
+            actual,
+            format_chunks(diff)
         );
         panic::resume_unwind(Box::new(()));
     }

@@ -1,12 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-impl<
-    'tcx,
-    C: QueryCache,
-    const ANON: bool,
-    const DEPTH_LIMIT: bool,
-    const FEEDABLE: bool,
-> QueryConfig<QueryCtxt<'tcx>> for DynamicConfig<'tcx, C, ANON, DEPTH_LIMIT, FEEDABLE>
+impl<'tcx, C: QueryCache, const ANON: bool, const DEPTH_LIMIT: bool, const FEEDABLE: bool>
+    QueryConfig<QueryCtxt<'tcx>> for DynamicConfig<'tcx, C, ANON, DEPTH_LIMIT, FEEDABLE>
 where
     for<'a> C::Key: HashStable<StableHashingContext<'a>>,
 {

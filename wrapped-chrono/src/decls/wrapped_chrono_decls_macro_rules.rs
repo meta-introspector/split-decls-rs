@@ -5,6 +5,9 @@ use std::collections::HashMap;
 #[doc(hidden)]
 macro_rules! try_opt {
     ($e:expr) => {
-        match $e { Some(v) => v, None => return None, }
+        match $e {
+            Some(v) => v,
+            None => return None,
+        }
     };
 }

@@ -6,7 +6,9 @@ impl Size {
     /// not a multiple of 8.
     pub fn from_bits(bits: impl TryInto<u64>) -> Size {
         let bits = bits.try_into().ok().unwrap();
-        Size { raw: bits.div_ceil(8) }
+        Size {
+            raw: bits.div_ceil(8),
+        }
     }
     #[inline]
     pub fn from_bytes(bytes: impl TryInto<u64>) -> Size {
@@ -27,7 +29,9 @@ impl Size {
         fn overflow(bytes: u64) -> ! {
             panic!("Size::bits: {bytes} bytes in bits doesn't fit in u64")
         }
-        self.bytes().checked_mul(8).unwrap_or_else(|| overflow(self.bytes()))
+        self.bytes()
+            .checked_mul(8)
+            .unwrap_or_else(|| overflow(self.bytes()))
     }
     #[inline]
     pub fn bits_usize(self) -> usize {
@@ -47,13 +51,21 @@ impl Size {
     pub fn checked_add<C: HasDataLayout>(self, offset: Size, cx: &C) -> Option<Size> {
         let dl = cx.data_layout();
         let bytes = self.bytes().checked_add(offset.bytes())?;
-        if bytes < dl.obj_size_bound() { Some(Size::from_bytes(bytes)) } else { None }
+        if bytes < dl.obj_size_bound() {
+            Some(Size::from_bytes(bytes))
+        } else {
+            None
+        }
     }
     #[inline]
     pub fn checked_mul<C: HasDataLayout>(self, count: u64, cx: &C) -> Option<Size> {
         let dl = cx.data_layout();
         let bytes = self.bytes().checked_mul(count)?;
-        if bytes < dl.obj_size_bound() { Some(Size::from_bytes(bytes)) } else { None }
+        if bytes < dl.obj_size_bound() {
+            Some(Size::from_bytes(bytes))
+        } else {
+            None
+        }
     }
     /// Truncates `value` to `self` bits and then sign-extends it to 128 bits
     /// (i.e., if it is negative, fill with 1's on the left).

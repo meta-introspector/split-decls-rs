@@ -48,8 +48,7 @@ impl ReprOptions {
     /// Returns `true` if this type is valid for reordering and `-Z randomize-layout`
     /// was enabled for its declaration crate.
     pub fn can_randomize_type_layout(&self) -> bool {
-        !self.inhibit_struct_field_reordering()
-            && self.flags.contains(ReprFlags::RANDOMIZE_LAYOUT)
+        !self.inhibit_struct_field_reordering() && self.flags.contains(ReprFlags::RANDOMIZE_LAYOUT)
     }
     /// Returns `true` if this `#[repr()]` should inhibit union ABI optimisations.
     pub fn inhibits_union_abi_opt(&self) -> bool {

@@ -6,13 +6,9 @@ impl InterfaceMethodArg {
             if let Some(segment) = path.path.segments.last() {
                 let ident = segment.ident.to_string();
                 if matches!(ident.as_str(), "Ref" | "OutRef") {
-                    if let syn::PathArguments::AngleBracketed(args) = &segment.arguments
-                    {
+                    if let syn::PathArguments::AngleBracketed(args) = &segment.arguments {
                         if args.args.len() == 1 {
-                            if let Some(syn::GenericArgument::Type(ty)) = args
-                                .args
-                                .first()
-                            {
+                            if let Some(syn::GenericArgument::Type(ty)) = args.args.first() {
                                 return Some((ty.clone(), ident));
                             }
                         }

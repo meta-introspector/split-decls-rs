@@ -2,8 +2,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod tests {
-    use std::io::prelude::Write;
     use super::Context;
+    use std::io::prelude::Write;
     #[test]
     fn compute() {
         let inputs = [
@@ -39,8 +39,8 @@ mod tests {
     fn index() {
         let mut digest = super::compute(b"abc");
         assert_eq!(digest[0], 0x90);
-        assert_eq!(& digest[0], & 0x90);
-        assert_eq!(& mut digest[0], & mut 0x90);
+        assert_eq!(&digest[0], &0x90);
+        assert_eq!(&mut digest[0], &mut 0x90);
     }
     #[test]
     fn write_29() {
@@ -50,7 +50,8 @@ mod tests {
             context.write(&data).unwrap();
         }
         assert_eq!(
-            format!("{:x}", context.finalize()), "aa559b4e3523a6c931f08f4df52d58f2",
+            format!("{:x}", context.finalize()),
+            "aa559b4e3523a6c931f08f4df52d58f2",
         );
     }
     #[test]
@@ -59,7 +60,8 @@ mod tests {
         let mut context = Context::new();
         context.write(&data).unwrap();
         assert_eq!(
-            format!("{:x}", context.finalize()), "c9a5a6878d97b48cc965c1e41859f034",
+            format!("{:x}", context.finalize()),
+            "c9a5a6878d97b48cc965c1e41859f034",
         );
     }
 }

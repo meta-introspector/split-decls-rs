@@ -3,9 +3,7 @@ use std::collections::HashMap;
 impl<'a> Utf8Component<'a> {
     unsafe fn new(component: Component<'a>) -> Utf8Component<'a> {
         match component {
-            Component::Prefix(prefix) => {
-                Utf8Component::Prefix(Utf8PrefixComponent(prefix))
-            }
+            Component::Prefix(prefix) => Utf8Component::Prefix(Utf8PrefixComponent(prefix)),
             Component::RootDir => Utf8Component::RootDir,
             Component::CurDir => Utf8Component::CurDir,
             Component::ParentDir => Utf8Component::ParentDir,

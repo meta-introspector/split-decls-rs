@@ -2,14 +2,14 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(feature = "std")]
 mod if_std {
+    #[doc(no_inline)]
+    pub use io::{Error, ErrorKind, IoSlice, IoSliceMut, Result, SeekFrom};
     use std::boxed::Box;
     use std::io;
     use std::ops::DerefMut;
     use std::pin::Pin;
     use std::task::{Context, Poll};
     use std::vec::Vec;
-    #[doc(no_inline)]
-    pub use io::{Error, ErrorKind, IoSlice, IoSliceMut, Result, SeekFrom};
     /// Read bytes asynchronously.
     ///
     /// This trait is analogous to the `std::io::Read` trait, but integrates
@@ -244,10 +244,7 @@ mod if_std {
         /// `Interrupted`.  Implementations must convert `WouldBlock` into
         /// `Poll::Pending` and either internally retry or convert
         /// `Interrupted` into another error kind.
-        fn poll_fill_buf(
-            self: Pin<&mut Self>,
-            cx: &mut Context<'_>,
-        ) -> Poll<Result<&[u8]>>;
+        fn poll_fill_buf(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<&[u8]>>;
         /// Tells this buffer that `amt` bytes have been consumed from the buffer,
         /// so they should no longer be returned in calls to [`poll_read`].
         ///
@@ -267,11 +264,20 @@ mod if_std {
     }
     macro_rules! deref_async_read {
         () => {
-            fn poll_read(mut self : Pin <& mut Self >, cx : & mut Context <'_ >, buf : &
-            mut [u8],) -> Poll < Result < usize >> { Pin::new(& mut ** self)
-            .poll_read(cx, buf) } fn poll_read_vectored(mut self : Pin <& mut Self >, cx
-            : & mut Context <'_ >, bufs : & mut [IoSliceMut <'_ >],) -> Poll < Result <
-            usize >> { Pin::new(& mut ** self).poll_read_vectored(cx, bufs) }
+            fn poll_read(
+                mut self: Pin<&mut Self>,
+                cx: &mut Context<'_>,
+                buf: &mut [u8],
+            ) -> Poll<Result<usize>> {
+                Pin::new(&mut **self).poll_read(cx, buf)
+            }
+            fn poll_read_vectored(
+                mut self: Pin<&mut Self>,
+                cx: &mut Context<'_>,
+                bufs: &mut [IoSliceMut<'_>],
+            ) -> Poll<Result<usize>> {
+                Pin::new(&mut **self).poll_read_vectored(cx, bufs)
+            }
         };
     }
     impl<T: ?Sized + AsyncRead + Unpin> AsyncRead for Box<T> {
@@ -302,11 +308,20 @@ mod if_std {
     }
     macro_rules! delegate_async_read_to_stdio {
         () => {
-            fn poll_read(mut self : Pin <& mut Self >, _ : & mut Context <'_ >, buf : &
-            mut [u8],) -> Poll < Result < usize >> { Poll::Ready(io::Read::read(& mut *
-            self, buf)) } fn poll_read_vectored(mut self : Pin <& mut Self >, _ : & mut
-            Context <'_ >, bufs : & mut [IoSliceMut <'_ >],) -> Poll < Result < usize >>
-            { Poll::Ready(io::Read::read_vectored(& mut * self, bufs)) }
+            fn poll_read(
+                mut self: Pin<&mut Self>,
+                _: &mut Context<'_>,
+                buf: &mut [u8],
+            ) -> Poll<Result<usize>> {
+                Poll::Ready(io::Read::read(&mut *self, buf))
+            }
+            fn poll_read_vectored(
+                mut self: Pin<&mut Self>,
+                _: &mut Context<'_>,
+                bufs: &mut [IoSliceMut<'_>],
+            ) -> Poll<Result<usize>> {
+                Poll::Ready(io::Read::read_vectored(&mut *self, bufs))
+            }
         };
     }
     impl AsyncRead for &[u8] {
@@ -314,15 +329,26 @@ mod if_std {
     }
     macro_rules! deref_async_write {
         () => {
-            fn poll_write(mut self : Pin <& mut Self >, cx : & mut Context <'_ >, buf : &
-            [u8],) -> Poll < Result < usize >> { Pin::new(& mut ** self).poll_write(cx,
-            buf) } fn poll_write_vectored(mut self : Pin <& mut Self >, cx : & mut
-            Context <'_ >, bufs : & [IoSlice <'_ >],) -> Poll < Result < usize >> {
-            Pin::new(& mut ** self).poll_write_vectored(cx, bufs) } fn poll_flush(mut
-            self : Pin <& mut Self >, cx : & mut Context <'_ >) -> Poll < Result < () >>
-            { Pin::new(& mut ** self).poll_flush(cx) } fn poll_close(mut self : Pin <&
-            mut Self >, cx : & mut Context <'_ >) -> Poll < Result < () >> { Pin::new(&
-            mut ** self).poll_close(cx) }
+            fn poll_write(
+                mut self: Pin<&mut Self>,
+                cx: &mut Context<'_>,
+                buf: &[u8],
+            ) -> Poll<Result<usize>> {
+                Pin::new(&mut **self).poll_write(cx, buf)
+            }
+            fn poll_write_vectored(
+                mut self: Pin<&mut Self>,
+                cx: &mut Context<'_>,
+                bufs: &[IoSlice<'_>],
+            ) -> Poll<Result<usize>> {
+                Pin::new(&mut **self).poll_write_vectored(cx, bufs)
+            }
+            fn poll_flush(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<()>> {
+                Pin::new(&mut **self).poll_flush(cx)
+            }
+            fn poll_close(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<()>> {
+                Pin::new(&mut **self).poll_close(cx)
+            }
         };
     }
     impl<T: ?Sized + AsyncWrite + Unpin> AsyncWrite for Box<T> {
@@ -359,15 +385,26 @@ mod if_std {
     }
     macro_rules! delegate_async_write_to_stdio {
         () => {
-            fn poll_write(mut self : Pin <& mut Self >, _ : & mut Context <'_ >, buf : &
-            [u8],) -> Poll < Result < usize >> { Poll::Ready(io::Write::write(& mut *
-            self, buf)) } fn poll_write_vectored(mut self : Pin <& mut Self >, _ : & mut
-            Context <'_ >, bufs : & [IoSlice <'_ >],) -> Poll < Result < usize >> {
-            Poll::Ready(io::Write::write_vectored(& mut * self, bufs)) } fn
-            poll_flush(mut self : Pin <& mut Self >, _ : & mut Context <'_ >) -> Poll <
-            Result < () >> { Poll::Ready(io::Write::flush(& mut * self)) } fn
-            poll_close(self : Pin <& mut Self >, cx : & mut Context <'_ >) -> Poll <
-            Result < () >> { self.poll_flush(cx) }
+            fn poll_write(
+                mut self: Pin<&mut Self>,
+                _: &mut Context<'_>,
+                buf: &[u8],
+            ) -> Poll<Result<usize>> {
+                Poll::Ready(io::Write::write(&mut *self, buf))
+            }
+            fn poll_write_vectored(
+                mut self: Pin<&mut Self>,
+                _: &mut Context<'_>,
+                bufs: &[IoSlice<'_>],
+            ) -> Poll<Result<usize>> {
+                Poll::Ready(io::Write::write_vectored(&mut *self, bufs))
+            }
+            fn poll_flush(mut self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<Result<()>> {
+                Poll::Ready(io::Write::flush(&mut *self))
+            }
+            fn poll_close(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<()>> {
+                self.poll_flush(cx)
+            }
         };
     }
     impl AsyncWrite for Vec<u8> {
@@ -375,9 +412,13 @@ mod if_std {
     }
     macro_rules! deref_async_seek {
         () => {
-            fn poll_seek(mut self : Pin <& mut Self >, cx : & mut Context <'_ >, pos :
-            SeekFrom,) -> Poll < Result < u64 >> { Pin::new(& mut ** self).poll_seek(cx,
-            pos) }
+            fn poll_seek(
+                mut self: Pin<&mut Self>,
+                cx: &mut Context<'_>,
+                pos: SeekFrom,
+            ) -> Poll<Result<u64>> {
+                Pin::new(&mut **self).poll_seek(cx, pos)
+            }
         };
     }
     impl<T: ?Sized + AsyncSeek + Unpin> AsyncSeek for Box<T> {
@@ -401,10 +442,12 @@ mod if_std {
     }
     macro_rules! deref_async_buf_read {
         () => {
-            fn poll_fill_buf(self : Pin <& mut Self >, cx : & mut Context <'_ >) -> Poll
-            < Result <& [u8] >> { Pin::new(& mut ** self.get_mut()).poll_fill_buf(cx) }
-            fn consume(mut self : Pin <& mut Self >, amt : usize) { Pin::new(& mut **
-            self).consume(amt) }
+            fn poll_fill_buf(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<&[u8]>> {
+                Pin::new(&mut **self.get_mut()).poll_fill_buf(cx)
+            }
+            fn consume(mut self: Pin<&mut Self>, amt: usize) {
+                Pin::new(&mut **self).consume(amt)
+            }
         };
     }
     impl<T: ?Sized + AsyncBufRead + Unpin> AsyncBufRead for Box<T> {
@@ -418,10 +461,7 @@ mod if_std {
         P: DerefMut + Unpin,
         P::Target: AsyncBufRead,
     {
-        fn poll_fill_buf(
-            self: Pin<&mut Self>,
-            cx: &mut Context<'_>,
-        ) -> Poll<Result<&[u8]>> {
+        fn poll_fill_buf(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<&[u8]>> {
             self.get_mut().as_mut().poll_fill_buf(cx)
         }
         fn consume(self: Pin<&mut Self>, amt: usize) {
@@ -430,10 +470,12 @@ mod if_std {
     }
     macro_rules! delegate_async_buf_read_to_stdio {
         () => {
-            fn poll_fill_buf(self : Pin <& mut Self >, _ : & mut Context <'_ >) -> Poll <
-            Result <& [u8] >> { Poll::Ready(io::BufRead::fill_buf(self.get_mut())) } fn
-            consume(self : Pin <& mut Self >, amt : usize) { io::BufRead::consume(self
-            .get_mut(), amt) }
+            fn poll_fill_buf(self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<Result<&[u8]>> {
+                Poll::Ready(io::BufRead::fill_buf(self.get_mut()))
+            }
+            fn consume(self: Pin<&mut Self>, amt: usize) {
+                io::BufRead::consume(self.get_mut(), amt)
+            }
         };
     }
     impl AsyncBufRead for &[u8] {

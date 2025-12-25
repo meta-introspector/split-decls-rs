@@ -3,7 +3,9 @@ use std::collections::HashMap;
 impl HirId {
     /// Signal local id which should never be used.
     pub const INVALID: HirId = HirId {
-        owner: OwnerId { def_id: CRATE_DEF_ID },
+        owner: OwnerId {
+            def_id: CRATE_DEF_ID,
+        },
         local_id: ItemLocalId::INVALID,
     };
     #[inline]
@@ -13,7 +15,11 @@ impl HirId {
     }
     #[inline]
     pub fn as_owner(self) -> Option<OwnerId> {
-        if self.local_id.index() == 0 { Some(self.owner) } else { None }
+        if self.local_id.index() == 0 {
+            Some(self.owner)
+        } else {
+            None
+        }
     }
     #[inline]
     pub fn is_owner(self) -> bool {

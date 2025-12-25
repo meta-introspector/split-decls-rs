@@ -2,22 +2,20 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(windows)]
 mod win {
-    use cargo_credential::{
-        Action, CacheControl, CredentialResponse, RegistryInfo, read_token,
-    };
+    use cargo_credential::{read_token, Action, CacheControl, CredentialResponse, RegistryInfo};
     use cargo_credential::{Credential, Error};
     use std::ffi::OsStr;
     use std::os::windows::ffi::OsStrExt;
+    use windows_sys::core::PWSTR;
     use windows_sys::Win32::Foundation::ERROR_NOT_FOUND;
     use windows_sys::Win32::Foundation::FILETIME;
     use windows_sys::Win32::Foundation::TRUE;
-    use windows_sys::Win32::Security::Credentials::CRED_PERSIST_LOCAL_MACHINE;
-    use windows_sys::Win32::Security::Credentials::CRED_TYPE_GENERIC;
-    use windows_sys::Win32::Security::Credentials::CREDENTIALW;
     use windows_sys::Win32::Security::Credentials::CredReadW;
     use windows_sys::Win32::Security::Credentials::CredWriteW;
+    use windows_sys::Win32::Security::Credentials::CREDENTIALW;
+    use windows_sys::Win32::Security::Credentials::CRED_PERSIST_LOCAL_MACHINE;
+    use windows_sys::Win32::Security::Credentials::CRED_TYPE_GENERIC;
     use windows_sys::Win32::Security::Credentials::{CredDeleteW, CredFree};
-    use windows_sys::core::PWSTR;
     pub struct WindowsCredential;
     /// Converts a string to a nul-terminated wide UTF-16 byte sequence.
     fn wstr(s: &str) -> Vec<u16> {
@@ -41,8 +39,7 @@ mod win {
             match action {
                 Action::Get(_) => {
                     let target_name = target_name(registry.index_url);
-                    let mut p_credential: *mut CREDENTIALW = std::ptr::null_mut()
-                        as *mut _;
+                    let mut p_credential: *mut CREDENTIALW = std::ptr::null_mut() as *mut _;
                     let bytes = unsafe {
                         if CredReadW(
                             target_name.as_ptr(),
@@ -100,9 +97,7 @@ mod win {
                 }
                 Action::Logout => {
                     let target_name = target_name(registry.index_url);
-                    let result = unsafe {
-                        CredDeleteW(target_name.as_ptr(), CRED_TYPE_GENERIC, 0)
-                    };
+                    let result = unsafe { CredDeleteW(target_name.as_ptr(), CRED_TYPE_GENERIC, 0) };
                     if result != TRUE {
                         let err = std::io::Error::last_os_error();
                         if err.raw_os_error() == Some(ERROR_NOT_FOUND as i32) {

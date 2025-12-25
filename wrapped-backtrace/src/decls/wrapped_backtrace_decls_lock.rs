@@ -12,11 +12,10 @@ mod lock {
     impl Drop for LockGuard {
         fn drop(&mut self) {
             if self.0.is_some() {
-                LOCK_HELD
-                    .with(|slot| {
-                        assert!(slot.get());
-                        slot.set(false);
-                    });
+                LOCK_HELD.with(|slot| {
+                    assert!(slot.get());
+                    slot.set(false);
+                });
             }
         }
     }

@@ -14,45 +14,37 @@ fn core_setup(
     let mod_ast: SynResult<syn::ItemMod> = syn::parse2(input);
     match mod_ast {
         Ok(mut ast) => {
-            let new_content = ast
-                .content
-                .clone()
-                .map(|(brace, items)| {
-                    let new_items = items
-                        .into_iter()
-                        .map(|item| match item {
-                            syn::Item::Fn(
-                                item_fn,
-                            ) if item_fn
-                                .attrs
-                                .iter()
-                                .any(|attr| {
-                                    attr.meta
-                                        .path()
-                                        .segments
-                                        .iter()
-                                        .map(|s| s.ident.to_string())
-                                        .collect::<Vec<String>>()
-                                        .join("::")
-                                        .contains("test")
-                                }) => {
-                                let tokens = fn_setup(item_fn, config, prefix, kind);
-                                let token_display = format!("tokens: {tokens}");
-                                syn::parse2(tokens).expect(&token_display)
-                            }
-                            other => other,
-                        })
-                        .collect();
-                    (brace, new_items)
-                });
+            let new_content = ast.content.clone().map(|(brace, items)| {
+                let new_items = items
+                    .into_iter()
+                    .map(|item| match item {
+                        syn::Item::Fn(item_fn)
+                            if item_fn.attrs.iter().any(|attr| {
+                                attr.meta
+                                    .path()
+                                    .segments
+                                    .iter()
+                                    .map(|s| s.ident.to_string())
+                                    .collect::<Vec<String>>()
+                                    .join("::")
+                                    .contains("test")
+                            }) =>
+                        {
+                            let tokens = fn_setup(item_fn, config, prefix, kind);
+                            let token_display = format!("tokens: {tokens}");
+                            syn::parse2(tokens).expect(&token_display)
+                        }
+                        other => other,
+                    })
+                    .collect();
+                (brace, new_items)
+            });
             if let Some(nc) = new_content {
                 ast.content.replace(nc);
             }
-            ast.attrs
-                .retain(|attr| {
-                    attr.meta.path().segments.first().unwrap().ident.to_string()
-                        != "serial"
-                });
+            ast.attrs.retain(|attr| {
+                attr.meta.path().segments.first().unwrap().ident.to_string() != "serial"
+            });
             ast.into_token_stream()
         }
         Err(_) => {

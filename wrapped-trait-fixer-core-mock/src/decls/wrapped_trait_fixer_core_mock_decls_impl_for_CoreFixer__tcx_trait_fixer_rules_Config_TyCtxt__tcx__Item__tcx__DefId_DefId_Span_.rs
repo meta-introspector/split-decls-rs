@@ -1,16 +1,8 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-impl<
-    'tcx,
-> CoreFixer<
-    'tcx,
-    trait_fixer_rules::Config,
-    TyCtxt<'tcx>,
-    Item<'tcx>,
-    DefId,
-    DefId,
-    Span,
-> for MockTraitFixer<'tcx> {
+impl<'tcx> CoreFixer<'tcx, trait_fixer_rules::Config, TyCtxt<'tcx>, Item<'tcx>, DefId, DefId, Span>
+    for MockTraitFixer<'tcx>
+{
     fn new(tcx: TyCtxt<'tcx>, config: trait_fixer_rules::Config) -> Self {
         Self {
             tcx,

@@ -31,9 +31,7 @@ impl CrateItem {
     /// Emit MIR for this item body.
     pub fn emit_mir<W: io::Write>(&self, w: &mut W) -> io::Result<()> {
         self.body()
-            .ok_or_else(|| io::Error::other(
-                format!("No body found for `{}`", self.name()),
-            ))?
+            .ok_or_else(|| io::Error::other(format!("No body found for `{}`", self.name())))?
             .dump(w, &self.name())
     }
 }

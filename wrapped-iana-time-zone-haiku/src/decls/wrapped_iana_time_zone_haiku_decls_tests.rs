@@ -11,6 +11,6 @@ mod tests {
     #[cfg(target_os = "haiku")]
     fn test_retrieve_time_zone_on_haiku_platforms() {
         let timezone = super::get_timezone().unwrap();
-        assert!(! timezone.is_empty());
+        assert!(!timezone.is_empty());
     }
 }

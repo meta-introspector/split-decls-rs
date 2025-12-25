@@ -6,15 +6,14 @@ where
     I: Iterator<Item = char>,
 {
     let mut words = vec![];
-    s = s
-        .trim_start_matches(|c: char| {
-            if c == '_' {
-                words.push(String::new());
-                true
-            } else {
-                false
-            }
-        });
+    s = s.trim_start_matches(|c: char| {
+        if c == '_' {
+            words.push(String::new());
+            true
+        } else {
+            false
+        }
+    });
     for s in s.split('_') {
         let mut last_upper = false;
         let mut buf = String::new();

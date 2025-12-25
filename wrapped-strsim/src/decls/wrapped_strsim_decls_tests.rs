@@ -9,9 +9,12 @@ mod tests {
         };
         ($x:expr, $y:expr, $d:expr) => {
             if ($x - $y).abs() > $d {
-            panic!("assertion failed: actual: `{}`, expected: `{}`: \
+                panic!(
+                    "assertion failed: actual: `{}`, expected: `{}`: \
                     actual not within < {} of expected",
-            $x, $y, $d); }
+                    $x, $y, $d
+                );
+            }
         };
     }
     #[test]
@@ -36,7 +39,7 @@ mod tests {
     }
     #[test]
     fn hamming_numbers() {
-        assert_eq!(Ok(1), generic_hamming(& [1, 2, 4], & [1, 2, 3]));
+        assert_eq!(Ok(1), generic_hamming(&[1, 2, 4], &[1, 2, 3]));
     }
     #[test]
     fn hamming_diff() {
@@ -49,8 +52,8 @@ mod tests {
     #[test]
     fn hamming_unequal_length() {
         assert_eq!(
-            Err(StrSimError::DifferentLengthArgs), generic_hamming("ham".chars(),
-            "hamming".chars())
+            Err(StrSimError::DifferentLengthArgs),
+            generic_hamming("ham".chars(), "hamming".chars())
         );
     }
     #[test]
@@ -92,7 +95,7 @@ mod tests {
     }
     #[test]
     fn generic_jaro_diff() {
-        assert_eq!(0.0, generic_jaro(& [1, 2], & [3, 4]));
+        assert_eq!(0.0, generic_jaro(&[1, 2], &[3, 4]));
     }
     #[test]
     fn jaro_diff_one_and_two() {
@@ -113,7 +116,11 @@ mod tests {
     }
     #[test]
     fn jaro_names() {
-        assert_delta!(0.392, jaro("Friedrich Nietzsche", "Jean-Paul Sartre"), 0.001);
+        assert_delta!(
+            0.392,
+            jaro("Friedrich Nietzsche", "Jean-Paul Sartre"),
+            0.001
+        );
     }
     #[test]
     fn jaro_winkler_both_empty() {
@@ -161,7 +168,9 @@ mod tests {
     #[test]
     fn jaro_winkler_names() {
         assert_delta!(
-            0.452, jaro_winkler("Friedrich Nietzsche", "Fran-Paul Sartre"), 0.001
+            0.452,
+            jaro_winkler("Friedrich Nietzsche", "Fran-Paul Sartre"),
+            0.001
         );
     }
     #[test]
@@ -179,8 +188,8 @@ mod tests {
     #[test]
     fn jaro_winkler_very_long_prefix() {
         assert_delta!(
-            0.98519, jaro_winkler("thequickbrownfoxjumpedoverx",
-            "thequickbrownfoxjumpedovery")
+            0.98519,
+            jaro_winkler("thequickbrownfoxjumpedoverx", "thequickbrownfoxjumpedovery")
         );
     }
     #[test]
@@ -375,7 +384,8 @@ mod tests {
     #[test]
     fn normalized_damerau_levenshtein_diff_short() {
         assert_delta!(
-            0.27272, normalized_damerau_levenshtein("levenshtein", "löwenbräu")
+            0.27272,
+            normalized_damerau_levenshtein("levenshtein", "löwenbräu")
         );
     }
     #[test]
@@ -392,7 +402,10 @@ mod tests {
     }
     #[test]
     fn normalized_damerau_levenshtein_identical_strings() {
-        assert_delta!(1.0, normalized_damerau_levenshtein("sunglasses", "sunglasses"));
+        assert_delta!(
+            1.0,
+            normalized_damerau_levenshtein("sunglasses", "sunglasses")
+        );
     }
     #[test]
     fn sorensen_dice_all() {
@@ -408,29 +421,40 @@ mod tests {
         assert_delta!(0.2, sorensen_dice("fRaNce", "france"));
         assert_delta!(0.8, sorensen_dice("healed", "sealed"));
         assert_delta!(
-            0.78788, sorensen_dice("web applications", "applications of the web")
+            0.78788,
+            sorensen_dice("web applications", "applications of the web")
         );
         assert_delta!(
-            0.92, sorensen_dice("this will have a typo somewhere",
-            "this will huve a typo somewhere")
+            0.92,
+            sorensen_dice(
+                "this will have a typo somewhere",
+                "this will huve a typo somewhere"
+            )
         );
         assert_delta!(
             0.60606,
-            sorensen_dice("Olive-green table for sale, in extremely good condition.",
-            "For sale: table in very good  condition, olive green in colour.")
+            sorensen_dice(
+                "Olive-green table for sale, in extremely good condition.",
+                "For sale: table in very good  condition, olive green in colour."
+            )
         );
         assert_delta!(
             0.25581,
-            sorensen_dice("Olive-green table for sale, in extremely good condition.",
-            "For sale: green Subaru Impreza, 210,000 miles")
+            sorensen_dice(
+                "Olive-green table for sale, in extremely good condition.",
+                "For sale: green Subaru Impreza, 210,000 miles"
+            )
         );
         assert_delta!(
             0.14118,
-            sorensen_dice("Olive-green table for sale, in extremely good condition.",
-            "Wanted: mountain bike with at least 21 gears.")
+            sorensen_dice(
+                "Olive-green table for sale, in extremely good condition.",
+                "Wanted: mountain bike with at least 21 gears."
+            )
         );
         assert_delta!(
-            0.77419, sorensen_dice("this has one extra word", "this has one word")
+            0.77419,
+            sorensen_dice("this has one extra word", "this has one word")
         );
     }
 }

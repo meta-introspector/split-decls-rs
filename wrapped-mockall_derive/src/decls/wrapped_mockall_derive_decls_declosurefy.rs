@@ -5,10 +5,7 @@ fn declosurefy(
     args: &Punctuated<FnArg, Token![,]>,
 ) -> (Generics, Punctuated<FnArg, Token![,]>, Vec<TokenStream>) {
     let mut hm = HashMap::default();
-    let mut save_fn_types = |
-        ident: &Ident,
-        bounds: &Punctuated<TypeParamBound, Token![+]>|
-    {
+    let mut save_fn_types = |ident: &Ident, bounds: &Punctuated<TypeParamBound, Token![+]>| {
         for tpb in bounds.iter() {
             if let TypeParamBound::Trait(tb) = tpb {
                 let fident = &tb.path.segments.last().unwrap().ident;
@@ -34,7 +31,8 @@ fn declosurefy(
                 let bounded_ty = &pt.bounded_ty;
                 if let Ok(ident) = parse2::<Ident>(quote!(# bounded_ty)) {
                     save_fn_types(&ident, &pt.bounds);
-                } else {}
+                } else {
+                }
             }
         }
     }
@@ -46,7 +44,11 @@ fn declosurefy(
         .params
         .iter()
         .filter(|g| {
-            if let GenericParam::Type(tp) = g { !should_remove(&tp.ident) } else { true }
+            if let GenericParam::Type(tp) = g {
+                !should_remove(&tp.ident)
+            } else {
+                true
+            }
         })
         .cloned()
         .collect::<Punctuated<_, _>>();
@@ -74,8 +76,16 @@ fn declosurefy(
         }
     }
     let outg = Generics {
-        lt_token: if params.is_empty() { None } else { gen.lt_token },
-        gt_token: if params.is_empty() { None } else { gen.gt_token },
+        lt_token: if params.is_empty() {
+            None
+        } else {
+            gen.lt_token
+        },
+        gt_token: if params.is_empty() {
+            None
+        } else {
+            gen.gt_token
+        },
         params,
         where_clause: wc2,
     };
@@ -107,22 +117,20 @@ fn declosurefy(
         .collect();
     let callargs = args
         .iter()
-        .filter_map(|arg| {
-            match arg {
-                FnArg::Typed(pt) => {
-                    let mut pt2 = pt.clone();
-                    demutify_arg(&mut pt2);
-                    let pat = &pt2.pat;
-                    if pat_is_self(pat) {
-                        None
-                    } else if hm.contains_key(&pt.ty) {
-                        Some(quote!(Box::new(# pat)))
-                    } else {
-                        Some(quote!(# pat))
-                    }
+        .filter_map(|arg| match arg {
+            FnArg::Typed(pt) => {
+                let mut pt2 = pt.clone();
+                demutify_arg(&mut pt2);
+                let pat = &pt2.pat;
+                if pat_is_self(pat) {
+                    None
+                } else if hm.contains_key(&pt.ty) {
+                    Some(quote!(Box::new(# pat)))
+                } else {
+                    Some(quote!(# pat))
                 }
-                FnArg::Receiver(_) => None,
             }
+            FnArg::Receiver(_) => None,
         })
         .collect();
     (outg, outargs, callargs)

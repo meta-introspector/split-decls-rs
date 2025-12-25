@@ -32,9 +32,9 @@ mod test {
         assert_eq!(expected_len, len);
         let zeros = vec![0; len];
         let incr: Vec<u8> = (0..len as u8).collect();
-        assert_eq!(& zeros[..], & mmap[..]);
+        assert_eq!(&zeros[..], &mmap[..]);
         (&mut mmap[..]).write_all(&incr[..]).unwrap();
-        assert_eq!(& incr[..], & mmap[..]);
+        assert_eq!(&incr[..], &mmap[..]);
     }
     #[test]
     #[cfg(unix)]
@@ -55,9 +55,9 @@ mod test {
         assert_eq!(expected_len, len);
         let zeros = vec![0; len];
         let incr: Vec<u8> = (0..len as u8).collect();
-        assert_eq!(& zeros[..], & mmap[..]);
+        assert_eq!(&zeros[..], &mmap[..]);
         (&mut mmap[..]).write_all(&incr[..]).unwrap();
-        assert_eq!(& incr[..], & mmap[..]);
+        assert_eq!(&incr[..], &mmap[..]);
     }
     /// Checks that "mapping" a 0-length file derefs to an empty slice.
     #[test]
@@ -73,10 +73,10 @@ mod test {
             .unwrap();
         let mmap = unsafe { Mmap::map(&file).unwrap() };
         assert!(mmap.is_empty());
-        assert_eq!(mmap.as_ptr().align_offset(mem::size_of::< usize > ()), 0);
+        assert_eq!(mmap.as_ptr().align_offset(mem::size_of::<usize>()), 0);
         let mmap = unsafe { MmapMut::map_mut(&file).unwrap() };
         assert!(mmap.is_empty());
-        assert_eq!(mmap.as_ptr().align_offset(mem::size_of::< usize > ()), 0);
+        assert_eq!(mmap.as_ptr().align_offset(mem::size_of::<usize>()), 0);
     }
     #[test]
     fn map_anon() {
@@ -86,9 +86,9 @@ mod test {
         assert_eq!(expected_len, len);
         let zeros = vec![0; len];
         let incr: Vec<u8> = (0..len as u8).collect();
-        assert_eq!(& zeros[..], & mmap[..]);
+        assert_eq!(&zeros[..], &mmap[..]);
         (&mut mmap[..]).write_all(&incr[..]).unwrap();
-        assert_eq!(& incr[..], & mmap[..]);
+        assert_eq!(&incr[..], &mmap[..]);
     }
     #[test]
     fn map_anon_zero_len() {
@@ -98,7 +98,10 @@ mod test {
     #[cfg(target_pointer_width = "32")]
     fn map_anon_len_overflow() {
         let res = MmapMut::map_anon(0x80000000);
-        assert_eq!(res.unwrap_err().to_string(), "memory map length overflows isize");
+        assert_eq!(
+            res.unwrap_err().to_string(),
+            "memory map length overflows isize"
+        );
     }
     #[test]
     fn file_write() {
@@ -118,7 +121,7 @@ mod test {
         (&mut mmap[..]).write_all(write).unwrap();
         mmap.flush().unwrap();
         file.read_exact(&mut read).unwrap();
-        assert_eq!(write, & read);
+        assert_eq!(write, &read);
     }
     #[test]
     fn flush_range() {
@@ -134,7 +137,11 @@ mod test {
         file.set_len(128).unwrap();
         let write = b"abc123";
         let mut mmap = unsafe {
-            MmapOptions::new().offset(2).len(write.len()).map_mut(&file).unwrap()
+            MmapOptions::new()
+                .offset(2)
+                .len(write.len())
+                .map_mut(&file)
+                .unwrap()
         };
         (&mut mmap[..]).write_all(write).unwrap();
         mmap.flush_async_range(0, write.len()).unwrap();
@@ -159,12 +166,12 @@ mod test {
         (&mut mmap[..]).write_all(write).unwrap();
         mmap.flush().unwrap();
         (&mmap[..]).read_exact(&mut read).unwrap();
-        assert_eq!(write, & read);
+        assert_eq!(write, &read);
         file.read_exact(&mut read).unwrap();
-        assert_eq!(nulls, & read);
+        assert_eq!(nulls, &read);
         let mmap2 = unsafe { MmapOptions::new().map(&file).unwrap() };
         (&mmap2[..]).read_exact(&mut read).unwrap();
-        assert_eq!(nulls, & read);
+        assert_eq!(nulls, &read);
     }
     #[test]
     fn map_copy_read_only() {
@@ -182,10 +189,10 @@ mod test {
         let mut read = [0u8; 6];
         let mmap = unsafe { MmapOptions::new().map_copy_read_only(&file).unwrap() };
         (&mmap[..]).read_exact(&mut read).unwrap();
-        assert_eq!(nulls, & read);
+        assert_eq!(nulls, &read);
         let mmap2 = unsafe { MmapOptions::new().map(&file).unwrap() };
         (&mmap2[..]).read_exact(&mut read).unwrap();
-        assert_eq!(nulls, & read);
+        assert_eq!(nulls, &read);
     }
     #[test]
     fn map_offset() {
@@ -204,14 +211,18 @@ mod test {
         let mmap = unsafe { MmapOptions::new().offset(offset).map_mut(&file).unwrap() };
         assert_eq!(len, mmap.len());
         let mut mmap = unsafe {
-            MmapOptions::new().offset(offset).len(len).map_mut(&file).unwrap()
+            MmapOptions::new()
+                .offset(offset)
+                .len(len)
+                .map_mut(&file)
+                .unwrap()
         };
         assert_eq!(len, mmap.len());
         let zeros = vec![0; len];
         let incr: Vec<_> = (0..len).map(|i| i as u8).collect();
-        assert_eq!(& zeros[..], & mmap[..]);
+        assert_eq!(&zeros[..], &mmap[..]);
         (&mut mmap[..]).write_all(&incr[..]).unwrap();
-        assert_eq!(& incr[..], & mmap[..]);
+        assert_eq!(&incr[..], &mmap[..]);
     }
     #[test]
     fn index() {
@@ -224,7 +235,8 @@ mod test {
         fn is_sync_send<T>(_val: T)
         where
             T: Sync + Send,
-        {}
+        {
+        }
         let mmap = MmapMut::map_anon(129).unwrap();
         is_sync_send(mmap);
     }
@@ -250,7 +262,8 @@ mod test {
     fn jit_x86_file() {
         let tempdir = tempfile::tempdir().unwrap();
         let mut options = OpenOptions::new();
-        #[cfg(windows)] options.access_mode(GENERIC_ALL);
+        #[cfg(windows)]
+        options.access_mode(GENERIC_ALL);
         let file = options
             .read(true)
             .write(true)
@@ -266,7 +279,8 @@ mod test {
         let tempdir = tempfile::tempdir().unwrap();
         let path = tempdir.path().join("mmap");
         let mut options = OpenOptions::new();
-        #[cfg(windows)] options.access_mode(GENERIC_ALL);
+        #[cfg(windows)]
+        options.access_mode(GENERIC_ALL);
         let mut file = options
             .read(true)
             .write(true)
@@ -283,12 +297,12 @@ mod test {
         (&mut mmap[..]).write_all(write).unwrap();
         mmap.flush().unwrap();
         (&mmap[..]).read_exact(&mut read).unwrap();
-        assert_eq!(write, & read);
+        assert_eq!(write, &read);
         file.read_exact(&mut read).unwrap();
-        assert_eq!(write, & read);
+        assert_eq!(write, &read);
         let mmap2 = unsafe { MmapOptions::new().map(&file).unwrap() };
         (&mmap2[..]).read_exact(&mut read).unwrap();
-        assert_eq!(write, & read);
+        assert_eq!(write, &read);
         let mmap = mmap.make_exec().expect("make_exec");
         drop(mmap);
     }
@@ -297,7 +311,8 @@ mod test {
         let tempdir = tempfile::tempdir().unwrap();
         let path = tempdir.path().join("mmap");
         let mut options = OpenOptions::new();
-        #[cfg(windows)] options.access_mode(GENERIC_ALL);
+        #[cfg(windows)]
+        options.access_mode(GENERIC_ALL);
         let mut file = options
             .read(true)
             .write(true)
@@ -315,12 +330,12 @@ mod test {
         (&mut mmap[..]).write_all(write).unwrap();
         mmap.flush().unwrap();
         (&mmap[..]).read_exact(&mut read).unwrap();
-        assert_eq!(write, & read);
+        assert_eq!(write, &read);
         file.read_exact(&mut read).unwrap();
-        assert_eq!(nulls, & read);
+        assert_eq!(nulls, &read);
         let mmap2 = unsafe { MmapOptions::new().map(&file).unwrap() };
         (&mmap2[..]).read_exact(&mut read).unwrap();
-        assert_eq!(nulls, & read);
+        assert_eq!(nulls, &read);
         let mmap = mmap.make_exec().expect("make_exec");
         drop(mmap);
     }
@@ -347,7 +362,7 @@ mod test {
         file.write_all(b"abc123").unwrap();
         let mmap = MmapOptions::new().map_raw(&file).unwrap();
         assert_eq!(mmap.len(), 6);
-        assert!(! mmap.as_ptr().is_null());
+        assert!(!mmap.as_ptr().is_null());
         assert_eq!(unsafe { std::ptr::read(mmap.as_ptr()) }, b'a');
     }
     #[test]
@@ -359,7 +374,7 @@ mod test {
             .map_raw_read_only(&File::open(&path).unwrap())
             .unwrap();
         assert_eq!(mmap.len(), 6);
-        assert!(! mmap.as_ptr().is_null());
+        assert!(!mmap.as_ptr().is_null());
         assert_eq!(unsafe { std::ptr::read(mmap.as_ptr()) }, b'a');
     }
     /// Something that relies on StableDeref
@@ -391,19 +406,21 @@ mod test {
             .unwrap();
         file.set_len(expected_len as u64).unwrap();
         let mut mmap = unsafe { MmapMut::map_mut(&file).unwrap() };
-        mmap.advise(Advice::Random).expect("mmap advising should be supported on unix");
+        mmap.advise(Advice::Random)
+            .expect("mmap advising should be supported on unix");
         let len = mmap.len();
         assert_eq!(expected_len, len);
         let zeros = vec![0; len];
         let incr: Vec<u8> = (0..len as u8).collect();
-        assert_eq!(& zeros[..], & mmap[..]);
+        assert_eq!(&zeros[..], &mmap[..]);
         mmap.advise_range(Advice::Sequential, 0, mmap.len())
             .expect("mmap advising should be supported on unix");
         (&mut mmap[..]).write_all(&incr[..]).unwrap();
-        assert_eq!(& incr[..], & mmap[..]);
+        assert_eq!(&incr[..], &mmap[..]);
         let mmap = unsafe { Mmap::map(&file).unwrap() };
-        mmap.advise(Advice::Random).expect("mmap advising should be supported on unix");
-        assert_eq!(& incr[..], & mmap[..]);
+        mmap.advise(Advice::Random)
+            .expect("mmap advising should be supported on unix");
+        assert_eq!(&incr[..], &mmap[..]);
     }
     #[test]
     #[cfg(target_os = "linux")]
@@ -414,7 +431,8 @@ mod test {
         let mmap = mmap.make_read_only().unwrap();
         let a = mmap.as_ref()[0];
         unsafe {
-            mmap.unchecked_advise(crate::UncheckedAdvice::DontNeed).unwrap();
+            mmap.unchecked_advise(crate::UncheckedAdvice::DontNeed)
+                .unwrap();
         }
         let b = mmap.as_ref()[0];
         assert_eq!(a, 255);
@@ -430,11 +448,7 @@ mod test {
         let a = mmap.as_ref()[0];
         let b = mmap.as_ref()[page_size];
         unsafe {
-            mmap.unchecked_advise_range(
-                    crate::UncheckedAdvice::DontNeed,
-                    page_size,
-                    page_size,
-                )
+            mmap.unchecked_advise_range(crate::UncheckedAdvice::DontNeed, page_size, page_size)
                 .unwrap();
         }
         let c = mmap.as_ref()[0];
@@ -472,19 +486,22 @@ mod test {
         file.set_len(128).unwrap();
         let mmap = unsafe { Mmap::map(&file).unwrap() };
         #[cfg(target_os = "linux")]
-        assert!(! is_locked());
+        assert!(!is_locked());
         mmap.lock().expect("mmap lock should be supported on unix");
         #[cfg(target_os = "linux")]
         assert!(is_locked());
-        mmap.lock().expect("mmap lock again should not cause problems");
+        mmap.lock()
+            .expect("mmap lock again should not cause problems");
         #[cfg(target_os = "linux")]
         assert!(is_locked());
-        mmap.unlock().expect("mmap unlock should be supported on unix");
+        mmap.unlock()
+            .expect("mmap unlock should be supported on unix");
         #[cfg(target_os = "linux")]
-        assert!(! is_locked());
-        mmap.unlock().expect("mmap unlock again should not cause problems");
+        assert!(!is_locked());
+        mmap.unlock()
+            .expect("mmap unlock again should not cause problems");
         #[cfg(target_os = "linux")]
-        assert!(! is_locked());
+        assert!(!is_locked());
     }
     #[test]
     #[cfg(target_os = "linux")]
@@ -496,16 +513,15 @@ mod test {
         let incr: Vec<u8> = (0..final_len).map(|v| v as u8).collect();
         let file = tempfile::tempfile().unwrap();
         file.set_len(final_len as u64).unwrap();
-        let mut mmap = unsafe {
-            MmapOptions::new().len(initial_len).map_mut(&file).unwrap()
-        };
+        let mut mmap = unsafe { MmapOptions::new().len(initial_len).map_mut(&file).unwrap() };
         assert_eq!(mmap.len(), initial_len);
-        assert_eq!(& mmap[..], & zeros[..initial_len]);
+        assert_eq!(&mmap[..], &zeros[..initial_len]);
         unsafe {
-            mmap.remap(final_len, RemapOptions::new().may_move(true)).unwrap();
+            mmap.remap(final_len, RemapOptions::new().may_move(true))
+                .unwrap();
         }
         assert_eq!(mmap.len(), final_len);
-        assert_eq!(& mmap[..], & zeros);
+        assert_eq!(&mmap[..], &zeros);
         mmap.copy_from_slice(&incr);
     }
     #[test]
@@ -532,7 +548,10 @@ mod test {
         file.set_len(1024).unwrap();
         let mut mmap = unsafe { MmapOptions::new().len(1024).map(&file).unwrap() };
         let res = unsafe { mmap.remap(0x80000000, RemapOptions::new().may_move(true)) };
-        assert_eq!(res.unwrap_err().to_string(), "memory map length overflows isize");
+        assert_eq!(
+            res.unwrap_err().to_string(),
+            "memory map length overflows isize"
+        );
         assert_eq!(mmap.len(), 1024);
     }
     #[test]
@@ -547,15 +566,20 @@ mod test {
         let file = tempfile::tempfile().unwrap();
         file.set_len(final_len as u64 + offset).unwrap();
         let mut mmap = unsafe {
-            MmapOptions::new().len(initial_len).offset(offset).map_mut(&file).unwrap()
+            MmapOptions::new()
+                .len(initial_len)
+                .offset(offset)
+                .map_mut(&file)
+                .unwrap()
         };
         assert_eq!(mmap.len(), initial_len);
-        assert_eq!(& mmap[..], & zeros[..initial_len]);
+        assert_eq!(&mmap[..], &zeros[..initial_len]);
         unsafe {
-            mmap.remap(final_len, RemapOptions::new().may_move(true)).unwrap();
+            mmap.remap(final_len, RemapOptions::new().may_move(true))
+                .unwrap();
         }
         assert_eq!(mmap.len(), final_len);
-        assert_eq!(& mmap[..], & zeros);
+        assert_eq!(&mmap[..], &zeros);
         mmap.copy_from_slice(&incr);
     }
 }

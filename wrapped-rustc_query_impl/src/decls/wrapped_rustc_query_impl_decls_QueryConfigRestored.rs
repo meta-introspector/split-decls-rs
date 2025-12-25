@@ -7,7 +7,6 @@ trait QueryConfigRestored<'tcx> {
     type Config: QueryConfig<QueryCtxt<'tcx>>;
     const NAME: &'static &'static str;
     fn config(tcx: TyCtxt<'tcx>) -> Self::Config;
-    fn restore(
-        value: <Self::Config as QueryConfig<QueryCtxt<'tcx>>>::Value,
-    ) -> Self::RestoredValue;
+    fn restore(value: <Self::Config as QueryConfig<QueryCtxt<'tcx>>>::Value)
+        -> Self::RestoredValue;
 }

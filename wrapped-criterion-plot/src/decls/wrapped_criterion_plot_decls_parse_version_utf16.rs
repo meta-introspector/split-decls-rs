@@ -8,7 +8,6 @@ fn parse_version_utf16(output_bytes: &[u8]) -> Result<Version, VersionError> {
         .chunks_exact(2)
         .map(|chunk| u16::from_le_bytes([chunk[0], chunk[1]]))
         .collect();
-    let output = String::from_utf16(&output_as_u16)
-        .map_err(|_| VersionError::OutputError)?;
+    let output = String::from_utf16(&output_as_u16).map_err(|_| VersionError::OutputError)?;
     parse_version(&output).map_err(|_| VersionError::ParseError(output.to_owned()))
 }

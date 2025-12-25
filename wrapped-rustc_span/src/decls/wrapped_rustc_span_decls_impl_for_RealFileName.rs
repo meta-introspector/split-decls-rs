@@ -7,9 +7,10 @@ impl RealFileName {
     pub fn local_path(&self) -> Option<&Path> {
         match self {
             RealFileName::LocalPath(p) => Some(p),
-            RealFileName::Remapped { local_path, virtual_name: _ } => {
-                local_path.as_deref()
-            }
+            RealFileName::Remapped {
+                local_path,
+                virtual_name: _,
+            } => local_path.as_deref(),
         }
     }
     /// Returns the path suitable for reading from the file system on the local host,
@@ -18,7 +19,10 @@ impl RealFileName {
     pub fn into_local_path(self) -> Option<PathBuf> {
         match self {
             RealFileName::LocalPath(p) => Some(p),
-            RealFileName::Remapped { local_path: p, virtual_name: _ } => p,
+            RealFileName::Remapped {
+                local_path: p,
+                virtual_name: _,
+            } => p,
         }
     }
     /// Returns the path suitable for embedding into build artifacts. This would still
@@ -28,7 +32,10 @@ impl RealFileName {
     pub fn remapped_path_if_available(&self) -> &Path {
         match self {
             RealFileName::LocalPath(p)
-            | RealFileName::Remapped { local_path: _, virtual_name: p } => p,
+            | RealFileName::Remapped {
+                local_path: _,
+                virtual_name: p,
+            } => p,
         }
     }
     /// Returns the path suitable for reading from the file system on the local host,
@@ -37,8 +44,14 @@ impl RealFileName {
     pub fn local_path_if_available(&self) -> &Path {
         match self {
             RealFileName::LocalPath(path)
-            | RealFileName::Remapped { local_path: None, virtual_name: path }
-            | RealFileName::Remapped { local_path: Some(path), virtual_name: _ } => path,
+            | RealFileName::Remapped {
+                local_path: None,
+                virtual_name: path,
+            }
+            | RealFileName::Remapped {
+                local_path: Some(path),
+                virtual_name: _,
+            } => path,
         }
     }
     /// Return the path remapped or not depending on the [`FileNameDisplayPreference`].
@@ -52,22 +65,16 @@ impl RealFileName {
             FileNameDisplayPreference::Remapped => self.remapped_path_if_available(),
         }
     }
-    pub fn to_string_lossy(
-        &self,
-        display_pref: FileNameDisplayPreference,
-    ) -> Cow<'_, str> {
+    pub fn to_string_lossy(&self, display_pref: FileNameDisplayPreference) -> Cow<'_, str> {
         match display_pref {
-            FileNameDisplayPreference::Local => {
-                self.local_path_if_available().to_string_lossy()
-            }
+            FileNameDisplayPreference::Local => self.local_path_if_available().to_string_lossy(),
             FileNameDisplayPreference::Remapped => {
                 self.remapped_path_if_available().to_string_lossy()
             }
-            FileNameDisplayPreference::Short => {
-                self.local_path_if_available()
-                    .file_name()
-                    .map_or_else(|| "".into(), |f| f.to_string_lossy())
-            }
+            FileNameDisplayPreference::Short => self
+                .local_path_if_available()
+                .file_name()
+                .map_or_else(|| "".into(), |f| f.to_string_lossy()),
         }
     }
 }

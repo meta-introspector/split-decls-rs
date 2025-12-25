@@ -16,19 +16,19 @@ pub fn supports_hyperlinks() -> bool {
     }
     if let Ok(program) = std::env::var("TERM_PROGRAM") {
         if matches!(
-            & program[..], "Hyper" | "iTerm.app" | "terminology" | "WezTerm" | "vscode" |
-            "ghostty"
+            &program[..],
+            "Hyper" | "iTerm.app" | "terminology" | "WezTerm" | "vscode" | "ghostty"
         ) {
             return true;
         }
     }
     if let Ok(term) = std::env::var("TERM") {
-        if matches!(& term[..], "xterm-kitty" | "alacritty" | "alacritty-direct") {
+        if matches!(&term[..], "xterm-kitty" | "alacritty" | "alacritty-direct") {
             return true;
         }
     }
     if let Ok(term) = std::env::var("COLORTERM") {
-        if matches!(& term[..], "xfce4-terminal") {
+        if matches!(&term[..], "xfce4-terminal") {
             return true;
         }
     }

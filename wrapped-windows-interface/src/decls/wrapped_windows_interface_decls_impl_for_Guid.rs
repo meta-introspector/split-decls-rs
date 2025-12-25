@@ -14,24 +14,22 @@ impl Guid {
             let part = match part {
                 Some(p) => p,
                 None => {
-                    return Err(
-                        syn::Error::new(
-                            span,
-                            format!("The IID missing part at index {index}"),
-                        ),
-                    );
+                    return Err(syn::Error::new(
+                        span,
+                        format!("The IID missing part at index {index}"),
+                    ));
                 }
             };
             if part.len() != length {
-                return Err(
-                    syn::Error::new(
-                        span,
-                        format!(
-                            "The IID part at index {} must be {} characters long but was {} characters",
-                            index, length, part.len()
-                        ),
+                return Err(syn::Error::new(
+                    span,
+                    format!(
+                        "The IID part at index {} must be {} characters long but was {} characters",
+                        index,
+                        length,
+                        part.len()
                     ),
-                );
+                ));
             }
             Ok(part.to_owned())
         }
@@ -62,19 +60,15 @@ impl Guid {
             let (data4_7, data4_8) = rest.split_at(2);
             let data4_7 = hex_lit(data4_7);
             let data4_8 = hex_lit(data4_8);
-            Ok(
-                quote! {
-                    ::windows_core::GUID { data1 : # data1, data2 : # data2, data3 : #
-                    data3, data4 : [# data4_1, # data4_2, # data4_3, # data4_4, #
-                    data4_5, # data4_6, # data4_7, # data4_8] }
-                },
-            )
+            Ok(quote! {
+                ::windows_core::GUID { data1 : # data1, data2 : # data2, data3 : #
+                data3, data4 : [# data4_1, # data4_2, # data4_3, # data4_4, #
+                data4_5, # data4_6, # data4_7, # data4_8] }
+            })
         } else {
-            Ok(
-                quote! {
-                    ::windows_core::GUID::zeroed()
-                },
-            )
+            Ok(quote! {
+                ::windows_core::GUID::zeroed()
+            })
         }
     }
 }

@@ -4,7 +4,10 @@ use std::collections::HashMap;
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
 #[cfg_attr(feature = "nightly", derive(HashStable_Generic))]
 pub enum Scalar {
-    Initialized { value: Primitive, valid_range: WrappingRange },
+    Initialized {
+        value: Primitive,
+        valid_range: WrappingRange,
+    },
     Union {
         /// Even for unions, we need to use the correct registers for the kind of
         /// values inside the union, so we keep the `Primitive` type around. We

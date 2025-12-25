@@ -15,5 +15,12 @@ fn main() {
         .into_iter()
         .map(|(range, ann)| (&text[range], ann))
         .collect::<Vec<_>>();
-    assert_eq!(res, [("x", "a".into()), ("y", "b".into()), ("(x,   y)", "c".into())]);
+    assert_eq!(
+        res,
+        [
+            ("x", "a".into()),
+            ("y", "b".into()),
+            ("(x,   y)", "c".into())
+        ]
+    );
 }

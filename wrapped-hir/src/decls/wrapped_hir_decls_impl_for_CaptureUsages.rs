@@ -9,35 +9,30 @@ impl CaptureUsages {
             match span {
                 mir::MirSpan::ExprId(expr) => {
                     if let Ok(expr) = source_map.expr_syntax(expr) {
-                        result
-                            .push(CaptureUsageSource {
-                                is_ref,
-                                source: expr,
-                            })
+                        result.push(CaptureUsageSource {
+                            is_ref,
+                            source: expr,
+                        })
                     }
                 }
                 mir::MirSpan::PatId(pat) => {
                     if let Ok(pat) = source_map.pat_syntax(pat) {
-                        result
-                            .push(CaptureUsageSource {
-                                is_ref,
-                                source: pat,
-                            });
+                        result.push(CaptureUsageSource {
+                            is_ref,
+                            source: pat,
+                        });
                     }
                 }
-                mir::MirSpan::BindingId(binding) => {
-                    result
-                        .extend(
-                            source_map
-                                .patterns_for_binding(binding)
-                                .iter()
-                                .filter_map(|&pat| source_map.pat_syntax(pat).ok())
-                                .map(|pat| CaptureUsageSource {
-                                    is_ref,
-                                    source: pat,
-                                }),
-                        )
-                }
+                mir::MirSpan::BindingId(binding) => result.extend(
+                    source_map
+                        .patterns_for_binding(binding)
+                        .iter()
+                        .filter_map(|&pat| source_map.pat_syntax(pat).ok())
+                        .map(|pat| CaptureUsageSource {
+                            is_ref,
+                            source: pat,
+                        }),
+                ),
                 mir::MirSpan::SelfParam | mir::MirSpan::Unknown => {
                     unreachable!("invalid capture usage span")
                 }

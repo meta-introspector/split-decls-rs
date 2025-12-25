@@ -41,7 +41,9 @@ impl Rand64 {
     /// Produces a random `u64` in the range`[0, u64::MAX]`.
     pub fn rand_u64(&mut self) -> u64 {
         let oldstate: u128 = self.state;
-        self.state = oldstate.wrapping_mul(Self::MULTIPLIER).wrapping_add(self.inc);
+        self.state = oldstate
+            .wrapping_mul(Self::MULTIPLIER)
+            .wrapping_add(self.inc);
         let xorshifted: u64 = (((oldstate >> 29) ^ oldstate) >> 58) as u64;
         let rot: u32 = (oldstate >> 122) as u32;
         xorshifted.rotate_right(rot)

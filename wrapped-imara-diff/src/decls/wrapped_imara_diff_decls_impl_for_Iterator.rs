@@ -4,8 +4,7 @@ impl Iterator for HunkIter<'_> {
     type Item = Hunk;
     fn next(&mut self) -> Option<Self::Item> {
         loop {
-            let removed = (&mut self.removed).take_while(|&&removed| removed).count()
-                as u32;
+            let removed = (&mut self.removed).take_while(|&&removed| removed).count() as u32;
             let added = (&mut self.added).take_while(|&&added| added).count() as u32;
             if removed != 0 || added != 0 {
                 let start_before = self.pos_before;

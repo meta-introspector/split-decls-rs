@@ -11,7 +11,9 @@ where
     }
     #[inline]
     fn new_from_slice(key: &[u8]) -> Result<Self, InvalidLength> {
-        T::Inner::new_from_slice(key).map_err(|_| InvalidLength).map(Self::inner_init)
+        T::Inner::new_from_slice(key)
+            .map_err(|_| InvalidLength)
+            .map(Self::inner_init)
     }
     #[inline]
     fn weak_key_test(key: &Key<Self>) -> Result<(), WeakKeyError> {

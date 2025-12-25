@@ -14,7 +14,11 @@ where
             self.allocate();
         }
         let mut i = self.lookup(key);
-        if self.map.as_ref().expect("map should have been created above")[i].value
+        if self
+            .map
+            .as_ref()
+            .expect("map should have been created above")[i]
+            .value
             == Default::default()
         {
             self.fill += 1;
@@ -40,7 +44,10 @@ where
     fn lookup(&self, key: u32) -> usize {
         let hash = key;
         let mut i = hash as usize & self.mask as usize;
-        let map = self.map.as_ref().expect("callers have to ensure map is allocated");
+        let map = self
+            .map
+            .as_ref()
+            .expect("callers have to ensure map is allocated");
         if map[i].value == Default::default() || map[i].key == key {
             return i;
         }
@@ -61,8 +68,10 @@ where
         self.fill = self.used;
         self.mask = new_size - 1;
         let old_map = std::mem::replace(
-            self.map.as_mut().expect("callers have to ensure map is allocated"),
-            vec![GrowingHashmapMapElemChar::< ValueType >::default(); new_size as usize],
+            self.map
+                .as_mut()
+                .expect("callers have to ensure map is allocated"),
+            vec![GrowingHashmapMapElemChar::<ValueType>::default(); new_size as usize],
         );
         for elem in old_map {
             if elem.value != Default::default() {

@@ -8,32 +8,30 @@ fn compress_chunks_parallel(
     platform: Platform,
     out: &mut [u8],
 ) -> usize {
-    debug_assert!(! input.is_empty(), "empty chunks below the root");
+    debug_assert!(!input.is_empty(), "empty chunks below the root");
     debug_assert!(input.len() <= MAX_SIMD_DEGREE * CHUNK_LEN);
     let mut chunks_exact = input.chunks_exact(CHUNK_LEN);
     let mut chunks_array = ArrayVec::<&[u8; CHUNK_LEN], MAX_SIMD_DEGREE>::new();
     for chunk in &mut chunks_exact {
         chunks_array.push(array_ref!(chunk, 0, CHUNK_LEN));
     }
-    platform
-        .hash_many(
-            &chunks_array,
-            key,
-            chunk_counter,
-            IncrementCounter::Yes,
-            flags,
-            CHUNK_START,
-            CHUNK_END,
-            out,
-        );
+    platform.hash_many(
+        &chunks_array,
+        key,
+        chunk_counter,
+        IncrementCounter::Yes,
+        flags,
+        CHUNK_START,
+        CHUNK_END,
+        out,
+    );
     let chunks_so_far = chunks_array.len();
     if !chunks_exact.remainder().is_empty() {
         let counter = chunk_counter + chunks_so_far as u64;
         let mut chunk_state = ChunkState::new(key, counter, flags, platform);
         chunk_state.update(chunks_exact.remainder());
-        *array_mut_ref!(out, chunks_so_far * OUT_LEN, OUT_LEN) = chunk_state
-            .output()
-            .chaining_value();
+        *array_mut_ref!(out, chunks_so_far * OUT_LEN, OUT_LEN) =
+            chunk_state.output().chaining_value();
         chunks_so_far + 1
     } else {
         chunks_so_far

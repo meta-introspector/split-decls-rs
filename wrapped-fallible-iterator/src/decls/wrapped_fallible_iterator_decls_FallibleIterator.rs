@@ -173,7 +173,10 @@ pub trait FallibleIterator {
     where
         Self: Sized,
     {
-        Peekable { it: self, next: None }
+        Peekable {
+            it: self,
+            next: None,
+        }
     }
     /// Returns an iterator that skips elements based on a predicate.
     #[inline]
@@ -216,7 +219,10 @@ pub trait FallibleIterator {
     where
         Self: Sized,
     {
-        Take { it: self, remaining: n }
+        Take {
+            it: self,
+            remaining: n,
+        }
     }
     /// Returns an iterator which applies a stateful map to values of this
     /// iterator.
@@ -252,7 +258,10 @@ pub trait FallibleIterator {
         Self: Sized,
         Self::Item: IntoFallibleIterator<Error = Self::Error>,
     {
-        Flatten { it: self, cur: None }
+        Flatten {
+            it: self,
+            cur: None,
+        }
     }
     /// Returns an iterator which yields this iterator's elements and ends after
     /// the first `Ok(None)`.
@@ -265,7 +274,10 @@ pub trait FallibleIterator {
     where
         Self: Sized,
     {
-        Fuse { it: self, done: false }
+        Fuse {
+            it: self,
+            done: false,
+        }
     }
     /// Returns an iterator which passes each element to a closure before returning it.
     #[inline]
@@ -350,17 +362,14 @@ pub trait FallibleIterator {
         Self: Sized,
         F: FnMut(Self::Item) -> Result<bool, Self::Error>,
     {
-        self.try_fold(
-                (),
-                |(), v| {
-                    if !f(v)? {
-                        return Err(FoldStop::Break(false));
-                    }
-                    Ok(())
-                },
-            )
-            .map(|()| true)
-            .unpack_fold()
+        self.try_fold((), |(), v| {
+            if !f(v)? {
+                return Err(FoldStop::Break(false));
+            }
+            Ok(())
+        })
+        .map(|()| true)
+        .unpack_fold()
     }
     /// Determines if any element of this iterator matches a predicate.
     #[inline]
@@ -369,17 +378,14 @@ pub trait FallibleIterator {
         Self: Sized,
         F: FnMut(Self::Item) -> Result<bool, Self::Error>,
     {
-        self.try_fold(
-                (),
-                |(), v| {
-                    if f(v)? {
-                        return Err(FoldStop::Break(true));
-                    }
-                    Ok(())
-                },
-            )
-            .map(|()| false)
-            .unpack_fold()
+        self.try_fold((), |(), v| {
+            if f(v)? {
+                return Err(FoldStop::Break(true));
+            }
+            Ok(())
+        })
+        .map(|()| false)
+        .unpack_fold()
     }
     /// Returns the first element of the iterator that matches a predicate.
     #[inline]
@@ -388,17 +394,14 @@ pub trait FallibleIterator {
         Self: Sized,
         F: FnMut(&Self::Item) -> Result<bool, Self::Error>,
     {
-        self.try_fold(
-                (),
-                |(), v| {
-                    if f(&v)? {
-                        return Err(FoldStop::Break(Some(v)));
-                    }
-                    Ok(())
-                },
-            )
-            .map(|()| None)
-            .unpack_fold()
+        self.try_fold((), |(), v| {
+            if f(&v)? {
+                return Err(FoldStop::Break(Some(v)));
+            }
+            Ok(())
+        })
+        .map(|()| None)
+        .unpack_fold()
     }
     /// Applies a function to the elements of the iterator, returning the first non-`None` result.
     #[inline]
@@ -418,17 +421,14 @@ pub trait FallibleIterator {
         Self: Sized,
         F: FnMut(Self::Item) -> Result<bool, Self::Error>,
     {
-        self.try_fold(
-                0,
-                |n, v| {
-                    if f(v)? {
-                        return Err(FoldStop::Break(Some(n)));
-                    }
-                    Ok(n + 1)
-                },
-            )
-            .map(|_| None)
-            .unpack_fold()
+        self.try_fold(0, |n, v| {
+            if f(v)? {
+                return Err(FoldStop::Break(Some(n)));
+            }
+            Ok(n + 1)
+        })
+        .map(|_| None)
+        .unpack_fold()
     }
     /// Returns the maximal element of the iterator.
     #[inline]
@@ -452,14 +452,15 @@ pub trait FallibleIterator {
             Some(v) => (f(&v)?, v),
             None => return Ok(None),
         };
-        self.fold(
-                max,
-                |(key, max), v| {
-                    let new_key = f(&v)?;
-                    if key > new_key { Ok((key, max)) } else { Ok((new_key, v)) }
-                },
-            )
-            .map(|v| Some(v.1))
+        self.fold(max, |(key, max), v| {
+            let new_key = f(&v)?;
+            if key > new_key {
+                Ok((key, max))
+            } else {
+                Ok((new_key, v))
+            }
+        })
+        .map(|v| Some(v.1))
     }
     /// Returns the element that gives the maximum value with respect to the function.
     #[inline]
@@ -472,13 +473,14 @@ pub trait FallibleIterator {
             Some(v) => v,
             None => return Ok(None),
         };
-        self.fold(
-                max,
-                |max, v| {
-                    if f(&max, &v)? == Ordering::Greater { Ok(max) } else { Ok(v) }
-                },
-            )
-            .map(Some)
+        self.fold(max, |max, v| {
+            if f(&max, &v)? == Ordering::Greater {
+                Ok(max)
+            } else {
+                Ok(v)
+            }
+        })
+        .map(Some)
     }
     /// Returns the minimal element of the iterator.
     #[inline]
@@ -502,14 +504,15 @@ pub trait FallibleIterator {
             Some(v) => (f(&v)?, v),
             None => return Ok(None),
         };
-        self.fold(
-                min,
-                |(key, min), v| {
-                    let new_key = f(&v)?;
-                    if key < new_key { Ok((key, min)) } else { Ok((new_key, v)) }
-                },
-            )
-            .map(|v| Some(v.1))
+        self.fold(min, |(key, min), v| {
+            let new_key = f(&v)?;
+            if key < new_key {
+                Ok((key, min))
+            } else {
+                Ok((new_key, v))
+            }
+        })
+        .map(|v| Some(v.1))
     }
     /// Returns the element that gives the minimum value with respect to the function.
     #[inline]
@@ -522,11 +525,14 @@ pub trait FallibleIterator {
             Some(v) => v,
             None => return Ok(None),
         };
-        self.fold(
-                min,
-                |min, v| { if f(&min, &v)? == Ordering::Less { Ok(min) } else { Ok(v) } },
-            )
-            .map(Some)
+        self.fold(min, |min, v| {
+            if f(&min, &v)? == Ordering::Less {
+                Ok(min)
+            } else {
+                Ok(v)
+            }
+        })
+        .map(Some)
     }
     /// Returns an iterator that yields this iterator's items in the opposite
     /// order.
@@ -589,12 +595,10 @@ pub trait FallibleIterator {
                 (None, None) => return Ok(Ordering::Equal),
                 (None, _) => return Ok(Ordering::Less),
                 (_, None) => return Ok(Ordering::Greater),
-                (Some(x), Some(y)) => {
-                    match x.cmp(&y) {
-                        Ordering::Equal => {}
-                        o => return Ok(o),
-                    }
-                }
+                (Some(x), Some(y)) => match x.cmp(&y) {
+                    Ordering::Equal => {}
+                    o => return Ok(o),
+                },
             }
         }
     }
@@ -613,12 +617,10 @@ pub trait FallibleIterator {
                 (None, None) => return Ok(Some(Ordering::Equal)),
                 (None, _) => return Ok(Some(Ordering::Less)),
                 (_, None) => return Ok(Some(Ordering::Greater)),
-                (Some(x), Some(y)) => {
-                    match x.partial_cmp(&y) {
-                        Some(Ordering::Equal) => {}
-                        o => return Ok(o),
-                    }
-                }
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Equal) => {}
+                    o => return Ok(o),
+                },
             }
         }
     }
@@ -681,14 +683,12 @@ pub trait FallibleIterator {
                 (None, None) => return Ok(false),
                 (None, _) => return Ok(true),
                 (_, None) => return Ok(false),
-                (Some(x), Some(y)) => {
-                    match x.partial_cmp(&y) {
-                        Some(Ordering::Less) => return Ok(true),
-                        Some(Ordering::Equal) => {}
-                        Some(Ordering::Greater) => return Ok(false),
-                        None => return Ok(false),
-                    }
-                }
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Less) => return Ok(true),
+                    Some(Ordering::Equal) => {}
+                    Some(Ordering::Greater) => return Ok(false),
+                    None => return Ok(false),
+                },
             }
         }
     }
@@ -707,14 +707,12 @@ pub trait FallibleIterator {
                 (None, None) => return Ok(true),
                 (None, _) => return Ok(true),
                 (_, None) => return Ok(false),
-                (Some(x), Some(y)) => {
-                    match x.partial_cmp(&y) {
-                        Some(Ordering::Less) => return Ok(true),
-                        Some(Ordering::Equal) => {}
-                        Some(Ordering::Greater) => return Ok(false),
-                        None => return Ok(false),
-                    }
-                }
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Less) => return Ok(true),
+                    Some(Ordering::Equal) => {}
+                    Some(Ordering::Greater) => return Ok(false),
+                    None => return Ok(false),
+                },
             }
         }
     }
@@ -733,14 +731,12 @@ pub trait FallibleIterator {
                 (None, None) => return Ok(false),
                 (None, _) => return Ok(false),
                 (_, None) => return Ok(true),
-                (Some(x), Some(y)) => {
-                    match x.partial_cmp(&y) {
-                        Some(Ordering::Less) => return Ok(false),
-                        Some(Ordering::Equal) => {}
-                        Some(Ordering::Greater) => return Ok(true),
-                        None => return Ok(false),
-                    }
-                }
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Less) => return Ok(false),
+                    Some(Ordering::Equal) => {}
+                    Some(Ordering::Greater) => return Ok(true),
+                    None => return Ok(false),
+                },
             }
         }
     }
@@ -759,14 +755,12 @@ pub trait FallibleIterator {
                 (None, None) => return Ok(true),
                 (None, _) => return Ok(false),
                 (_, None) => return Ok(true),
-                (Some(x), Some(y)) => {
-                    match x.partial_cmp(&y) {
-                        Some(Ordering::Less) => return Ok(false),
-                        Some(Ordering::Equal) => {}
-                        Some(Ordering::Greater) => return Ok(true),
-                        None => return Ok(false),
-                    }
-                }
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Less) => return Ok(false),
+                    Some(Ordering::Equal) => {}
+                    Some(Ordering::Greater) => return Ok(true),
+                    None => return Ok(false),
+                },
             }
         }
     }

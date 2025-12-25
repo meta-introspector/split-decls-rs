@@ -2,7 +2,11 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(all(test, feature = "std"))]
 mod apitests {
-    use crate::{bstr::BStr, bstring::BString, ext_slice::{Finder, FinderReverse}};
+    use crate::{
+        bstr::BStr,
+        bstring::BString,
+        ext_slice::{Finder, FinderReverse},
+    };
     #[test]
     fn oibits() {
         use std::panic::{RefUnwindSafe, UnwindSafe};

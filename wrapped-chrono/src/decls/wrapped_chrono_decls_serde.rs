@@ -17,9 +17,9 @@ use std::collections::HashMap;
 /// [`deserialize_with`]: https://serde.rs/field-attrs.html#deserialize_with
 #[cfg(feature = "serde")]
 pub mod serde {
+    pub use super::datetime::serde::*;
     use core::fmt;
     use serde::de;
-    pub use super::datetime::serde::*;
     /// Create a custom `de::Error` with `SerdeError::InvalidTimestamp`.
     pub(crate) fn invalid_ts<E, T>(value: T) -> E
     where

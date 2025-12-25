@@ -19,11 +19,7 @@ impl<'tcx> TyCtxt<'tcx> {
     pub fn mk_trait_ref(self, _def_id: DefId, _args: MockGenericArgs) -> MockPredicate {
         MockPredicate
     }
-    pub fn mk_args_trait(
-        self,
-        _ty: MockTy<'tcx>,
-        _substs: MockSubsts,
-    ) -> MockGenericArgs {
+    pub fn mk_args_trait(self, _ty: MockTy<'tcx>, _substs: MockSubsts) -> MockGenericArgs {
         MockGenericArgs
     }
     pub fn typeck(self, _owner_id: OwnerId) -> MockTypeckResults {

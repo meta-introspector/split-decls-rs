@@ -5,18 +5,18 @@ mod t {
     use super::*;
     fn assert_contains(output: &str, tokens: TokenStream) {
         let s = tokens.to_string();
-        assert!(output.contains(& s), "output does not contain {:?}", & s);
+        assert!(output.contains(&s), "output does not contain {:?}", &s);
     }
     fn assert_not_contains(output: &str, tokens: TokenStream) {
         let s = tokens.to_string();
-        assert!(! output.contains(& s), "output contains {:?}", & s);
+        assert!(!output.contains(&s), "output contains {:?}", &s);
     }
     /// Various tests for overall code generation that are hard or impossible to
     /// write as integration tests
     mod mock {
-        use std::str::FromStr;
         use super::super::*;
         use super::*;
+        use std::str::FromStr;
         #[test]
         fn inherent_method_visibility() {
             let code = "
@@ -31,14 +31,14 @@ mod t {
             let ts = proc_macro2::TokenStream::from_str(code).unwrap();
             let output = do_mock(ts).to_string();
             assert_not_contains(&output, quote!(pub fn foo));
-            assert!(! output.contains(") fn foo"));
+            assert!(!output.contains(") fn foo"));
             assert_contains(&output, quote!(pub fn bar));
             assert_contains(&output, quote!(pub (crate) fn baz));
             assert_contains(&output, quote!(pub (super) fn bean));
             assert_contains(&output, quote!(pub (in crate ::outer) fn boom));
             assert_not_contains(&output, quote!(pub fn expect_foo));
-            assert!(! output.contains("pub fn expect_foo"));
-            assert!(! output.contains(") fn expect_foo"));
+            assert!(!output.contains("pub fn expect_foo"));
+            assert!(!output.contains(") fn expect_foo"));
             assert_contains(&output, quote!(pub fn expect_bar));
             assert_contains(&output, quote!(pub (crate) fn expect_baz));
             assert_contains(&output, quote!(pub (super) fn expect_bean));
@@ -95,9 +95,9 @@ mod t {
     /// Various tests for overall code generation that are hard or impossible to
     /// write as integration tests
     mod automock {
-        use std::str::FromStr;
         use super::super::*;
         use super::*;
+        use std::str::FromStr;
         #[test]
         fn doc_comments() {
             let code = "
@@ -125,9 +125,9 @@ mod t {
             let attrs_ts = proc_macro2::TokenStream::from_str("").unwrap();
             let output = do_automock(attrs_ts, ts).to_string();
             assert_not_contains(&output, quote!(pub fn foo));
-            assert!(! output.contains(") fn foo"));
+            assert!(!output.contains(") fn foo"));
             assert_not_contains(&output, quote!(pub fn expect_foo));
-            assert!(! output.contains(") fn expect_foo"));
+            assert!(!output.contains(") fn expect_foo"));
             assert_contains(&output, quote!(pub fn bar));
             assert_contains(&output, quote!(pub fn expect_bar));
             assert_contains(&output, quote!(pub (super) fn baz));
@@ -214,27 +214,24 @@ mod t {
             expected_sig_inputs: &[TokenStream],
         ) {
             let f: Signature = parse2(sig).unwrap();
-            let (generics, inputs, call_exprs, altsig) = concretize_args(
-                &f.generics,
-                &f,
-            );
+            let (generics, inputs, call_exprs, altsig) = concretize_args(&f.generics, &f);
             assert!(generics.params.is_empty());
             assert_eq!(inputs.len(), expected_inputs.len());
             assert_eq!(call_exprs.len(), expected_call_exprs.len());
             for i in 0..inputs.len() {
                 let actual = &inputs[i];
                 let exp = &expected_inputs[i];
-                assert_eq!(quote!(# actual) .to_string(), quote!(# exp) .to_string());
+                assert_eq!(quote!(# actual).to_string(), quote!(# exp).to_string());
             }
             for i in 0..call_exprs.len() {
                 let actual = &call_exprs[i];
                 let exp = &expected_call_exprs[i];
-                assert_eq!(quote!(# actual) .to_string(), quote!(# exp) .to_string());
+                assert_eq!(quote!(# actual).to_string(), quote!(# exp).to_string());
             }
             for i in 0..altsig.inputs.len() {
                 let actual = &altsig.inputs[i];
                 let exp = &expected_sig_inputs[i];
-                assert_eq!(quote!(# actual) .to_string(), quote!(# exp) .to_string());
+                assert_eq!(quote!(# actual).to_string(), quote!(# exp).to_string());
             }
         }
         #[test]
@@ -246,7 +243,7 @@ mod t {
                     quote!(p : & (dyn AsRef < Path >)),
                     quote!(y : & f64),
                 ],
-                &[quote!(x), quote!(& p), quote!(y)],
+                &[quote!(x), quote!(&p), quote!(y)],
                 &[quote!(x : i32), quote!(p : P), quote!(y : & f64)],
             );
         }
@@ -264,8 +261,13 @@ mod t {
                     quote!(f3 : & (dyn FnOnce(u32) -> u32)),
                     quote!(f4 : & (dyn Fn() + Send)),
                 ],
-                &[quote!(& f1), quote!(& mut f2), quote!(& f3), quote!(& f4)],
-                &[quote!(f1 : F1), quote!(mut f2 : F2), quote!(f3 : F3), quote!(f4 : F4)],
+                &[quote!(&f1), quote!(&mut f2), quote!(&f3), quote!(&f4)],
+                &[
+                    quote!(f1 : F1),
+                    quote!(mut f2 : F2),
+                    quote!(f3 : F3),
+                    quote!(f4 : F4),
+                ],
             );
         }
         #[test]
@@ -273,7 +275,7 @@ mod t {
             check_concretize(
                 quote!(fn foo < P : AsRef < String > + AsMut < String >> (p : P)),
                 &[quote!(p : & (dyn AsRef < String > + AsMut < String >))],
-                &[quote!(& p)],
+                &[quote!(&p)],
                 &[quote!(p : P)],
             );
         }
@@ -309,7 +311,7 @@ mod t {
             check_concretize(
                 quote!(fn foo < P : AsRef < Path >> (p : P)),
                 &[quote!(p : & (dyn AsRef < Path >))],
-                &[quote!(& p)],
+                &[quote!(&p)],
                 &[quote!(p : P)],
             );
         }
@@ -318,12 +320,9 @@ mod t {
             check_concretize(
                 quote!(fn foo < P : AsRef < Path >> (p : & [P])),
                 &[quote!(p : & [& (dyn AsRef < Path >)])],
-                &[
-                    quote!(
-                        & (0..p.len()).map(| __mockall_i | & p[__mockall_i] as & (dyn
-                        AsRef < Path >)).collect::< Vec < _ >> ()
-                    ),
-                ],
+                &[quote!(&(0..p.len())
+                    .map(|__mockall_i| &p[__mockall_i] as &(dyn AsRef<Path>))
+                    .collect::<Vec<_>>())],
                 &[quote!(p : & [P])],
             );
         }
@@ -332,12 +331,9 @@ mod t {
             check_concretize(
                 quote!(fn foo < P : AsRef < Path > + AsMut < String >> (p : & [P])),
                 &[quote!(p : & [& (dyn AsRef < Path > + AsMut < String >)])],
-                &[
-                    quote!(
-                        & (0..p.len()).map(| __mockall_i | & p[__mockall_i] as & (dyn
-                        AsRef < Path > + AsMut < String >)).collect::< Vec < _ >> ()
-                    ),
-                ],
+                &[quote!(&(0..p.len())
+                    .map(|__mockall_i| &p[__mockall_i] as &(dyn AsRef<Path> + AsMut<String>))
+                    .collect::<Vec<_>>())],
                 &[quote!(p : & [P])],
             );
         }
@@ -346,7 +342,7 @@ mod t {
             check_concretize(
                 quote!(fn foo < P > (p : P) where P : AsRef < Path >),
                 &[quote!(p : & (dyn AsRef < Path >))],
-                &[quote!(& p)],
+                &[quote!(&p)],
                 &[quote!(p : P)],
             );
         }
@@ -366,12 +362,12 @@ mod t {
             for i in 0..inputs.len() {
                 let actual = &inputs[i];
                 let exp = &expected_inputs[i];
-                assert_eq!(quote!(# actual) .to_string(), quote!(# exp) .to_string());
+                assert_eq!(quote!(# actual).to_string(), quote!(# exp).to_string());
             }
             for i in 0..call_exprs.len() {
                 let actual = &call_exprs[i];
                 let exp = &expected_call_exprs[i];
-                assert_eq!(quote!(# actual) .to_string(), quote!(# exp) .to_string());
+                assert_eq!(quote!(# actual).to_string(), quote!(# exp).to_string());
             }
         }
         #[test]
@@ -437,7 +433,7 @@ mod t {
             let mut orig: Signature = parse2(orig_ts).unwrap();
             let expected: Signature = parse2(expected_ts).unwrap();
             fix_elipses(&mut orig);
-            assert_eq!(quote!(# orig) .to_string(), quote!(# expected) .to_string());
+            assert_eq!(quote!(# orig).to_string(), quote!(# expected).to_string());
         }
         #[test]
         fn nopat() {
@@ -460,7 +456,7 @@ mod t {
             let mut orig: ReturnType = parse2(orig_ts).unwrap();
             let expected: ReturnType = parse2(expected_ts).unwrap();
             deimplify(&mut orig);
-            assert_eq!(quote!(# orig) .to_string(), quote!(# expected) .to_string());
+            assert_eq!(quote!(# orig).to_string(), quote!(# expected).to_string());
         }
         #[test]
         fn impl_future() {
@@ -508,16 +504,11 @@ mod t {
             let generics: Generics = parse2(generics_ts).unwrap();
             let expected: Type = parse2(expected_ts).unwrap();
             deselfify(&mut ty, &actual, &generics);
-            assert_eq!(quote!(# ty) .to_string(), quote!(# expected) .to_string());
+            assert_eq!(quote!(# ty).to_string(), quote!(# expected).to_string());
         }
         #[test]
         fn arc() {
-            check_deselfify(
-                quote!(Arc < Self >),
-                quote!(Foo),
-                quote!(),
-                quote!(Arc < Foo >),
-            );
+            check_deselfify(quote!(Arc<Self>), quote!(Foo), quote!(), quote!(Arc<Foo>));
         }
         #[test]
         fn future() {
@@ -531,10 +522,10 @@ mod t {
         #[test]
         fn qself() {
             check_deselfify(
-                quote!(< Self as Self >::Self),
+                quote!(<Self as Self>::Self),
                 quote!(Foo),
                 quote!(),
-                quote!(< Foo as Foo >::Foo),
+                quote!(<Foo as Foo>::Foo),
             );
         }
         #[test]
@@ -560,37 +551,62 @@ mod t {
         use super::*;
         #[test]
         fn lifetime() {
-            let mut meth: ImplItemFn = parse2(
-                    quote!(fn foo <'a > (& self) where 'a : 'static, Self : Sized {}),
-                )
-                .unwrap();
-            let expected: ImplItemFn = parse2(
-                    quote!(fn foo <'a > (& self) where 'a : 'static {}),
-                )
-                .unwrap();
+            let mut meth: ImplItemFn = parse2(quote!(
+                fn foo<'a>(&self)
+                where
+                    'a: 'static,
+                    Self: Sized,
+                {
+                }
+            ))
+            .unwrap();
+            let expected: ImplItemFn = parse2(quote!(
+                fn foo<'a>(&self)
+                where
+                    'a: 'static,
+                {
+                }
+            ))
+            .unwrap();
             dewhereselfify(&mut meth.sig.generics);
             assert_eq!(meth, expected);
         }
         #[test]
         fn normal_method() {
-            let mut meth: ImplItemFn = parse2(
-                    quote!(fn foo(& self) where Self : Sized {}),
-                )
-                .unwrap();
-            let expected: ImplItemFn = parse2(quote!(fn foo(& self) {})).unwrap();
+            let mut meth: ImplItemFn = parse2(quote!(
+                fn foo(&self)
+                where
+                    Self: Sized,
+                {
+                }
+            ))
+            .unwrap();
+            let expected: ImplItemFn = parse2(quote!(
+                fn foo(&self) {}
+            ))
+            .unwrap();
             dewhereselfify(&mut meth.sig.generics);
             assert_eq!(meth, expected);
         }
         #[test]
         fn with_real_generics() {
-            let mut meth: ImplItemFn = parse2(
-                    quote!(fn foo < T > (& self, t : T) where Self : Sized, T : Copy {}),
-                )
-                .unwrap();
-            let expected: ImplItemFn = parse2(
-                    quote!(fn foo < T > (& self, t : T) where T : Copy {}),
-                )
-                .unwrap();
+            let mut meth: ImplItemFn = parse2(quote!(
+                fn foo<T>(&self, t: T)
+                where
+                    Self: Sized,
+                    T: Copy,
+                {
+                }
+            ))
+            .unwrap();
+            let expected: ImplItemFn = parse2(quote!(
+                fn foo<T>(&self, t: T)
+                where
+                    T: Copy,
+                {
+                }
+            ))
+            .unwrap();
             dewhereselfify(&mut meth.sig.generics);
             assert_eq!(meth, expected);
         }
@@ -600,7 +616,7 @@ mod t {
         fn check_gen_keyid(orig: TokenStream, expected: TokenStream) {
             let g: Generics = parse2(orig).unwrap();
             let keyid = gen_keyid(&g);
-            assert_eq!(quote!(# keyid) .to_string(), quote!(# expected) .to_string());
+            assert_eq!(quote!(# keyid).to_string(), quote!(# expected).to_string());
         }
         #[test]
         fn empty() {
@@ -627,14 +643,11 @@ mod t {
             g2.where_clause = Some(wc2);
             let gm = super::merge_generics(&g1, &g2);
             let gm_wc = &gm.where_clause;
-            let ge: Generics = parse2(
-                    quote!(< T : 'static, V : Copy + Clone, Q : Send >),
-                )
-                .unwrap();
-            let wce: WhereClause = parse2(quote!(where T : Default + Sync, Q : Debug))
-                .unwrap();
+            let ge: Generics = parse2(quote!(< T : 'static, V : Copy + Clone, Q : Send >)).unwrap();
+            let wce: WhereClause = parse2(quote!(where T : Default + Sync, Q : Debug)).unwrap();
             assert_eq!(
-                quote!(# ge # wce) .to_string(), quote!(# gm # gm_wc) .to_string()
+                quote!(# ge # wce).to_string(),
+                quote!(# gm # gm_wc).to_string()
             );
         }
         #[test]
@@ -645,7 +658,8 @@ mod t {
             let gm = super::merge_generics(&g1, &g1);
             let gm_wc = &gm.where_clause;
             assert_eq!(
-                quote!(# g1 # wc1) .to_string(), quote!(# gm # gm_wc) .to_string()
+                quote!(# g1 # wc1).to_string(),
+                quote!(# gm # gm_wc).to_string()
             );
         }
         #[test]
@@ -657,7 +671,8 @@ mod t {
             let gm = super::merge_generics(&g1, &g2);
             let gm_wc = &gm.where_clause;
             assert_eq!(
-                quote!(# g1 # wc1) .to_string(), quote!(# gm # gm_wc) .to_string()
+                quote!(# g1 # wc1).to_string(),
+                quote!(# gm # gm_wc).to_string()
             );
         }
         #[test]
@@ -669,7 +684,8 @@ mod t {
             let gm = super::merge_generics(&g1, &g2);
             let gm_wc = &gm.where_clause;
             assert_eq!(
-                quote!(# g1 # wc1) .to_string(), quote!(# gm # gm_wc) .to_string()
+                quote!(# g1 # wc1).to_string(),
+                quote!(# gm # gm_wc).to_string()
             );
         }
         #[test]
@@ -681,7 +697,8 @@ mod t {
             let gm = super::merge_generics(&g1, &g2);
             let gm_wc = &gm.where_clause;
             assert_eq!(
-                quote!(# g2 # wc2) .to_string(), quote!(# gm # gm_wc) .to_string()
+                quote!(# g2 # wc2).to_string(),
+                quote!(# gm # gm_wc).to_string()
             );
         }
     }
@@ -692,7 +709,8 @@ mod t {
             let expected_ty: Type = parse2(expected).unwrap();
             let output = supersuperfy(&orig_ty, 1);
             assert_eq!(
-                quote!(# output) .to_string(), quote!(# expected_ty) .to_string()
+                quote!(# output).to_string(),
+                quote!(# expected_ty).to_string()
             );
         }
         #[test]
@@ -702,8 +720,8 @@ mod t {
         #[test]
         fn barefn() {
             check_supersuperfy(
-                quote!(fn (super::A) -> super::B),
-                quote!(fn (super::super::A) -> super::super::B),
+                quote!(fn(super::A) -> super::B),
+                quote!(fn(super::super::A) -> super::super::B),
             );
         }
         #[test]
@@ -717,7 +735,7 @@ mod t {
                 elem: Box::new(parse2(quote!(super::super::T)).unwrap()),
             };
             let output = supersuperfy(&Type::Group(orig), 1);
-            assert_eq!(quote!(# output) .to_string(), quote!(# expected) .to_string());
+            assert_eq!(quote!(# output).to_string(), quote!(# expected).to_string());
         }
         #[test]
         fn infer() {
@@ -734,37 +752,28 @@ mod t {
         #[test]
         fn path() {
             check_supersuperfy(
-                quote!(::super::SuperT < u32 >),
-                quote!(::super::super::SuperT < u32 >),
+                quote!(::super::SuperT<u32>),
+                quote!(::super::super::SuperT<u32>),
             );
         }
         #[test]
         fn path_with_qself() {
             check_supersuperfy(
-                quote!(< super::X as super::Y >::Foo < u32 >),
-                quote!(< super::super::X as super::super::Y >::Foo < u32 >),
+                quote!(<super::X as super::Y>::Foo<u32>),
+                quote!(<super::super::X as super::super::Y>::Foo<u32>),
             );
         }
         #[test]
         fn angle_bracketed_generic_arguments() {
-            check_supersuperfy(
-                quote!(mod_::T < super::X >),
-                quote!(mod_::T < super::super::X >),
-            );
+            check_supersuperfy(quote!(mod_::T<super::X>), quote!(mod_::T<super::super::X>));
         }
         #[test]
         fn ptr() {
-            check_supersuperfy(
-                quote!(* const super::X),
-                quote!(* const super::super::X),
-            );
+            check_supersuperfy(quote!(*const super::X), quote!(*const super::super::X));
         }
         #[test]
         fn reference() {
-            check_supersuperfy(
-                quote!(&'a mut super::X),
-                quote!(&'a mut super::super::X),
-            );
+            check_supersuperfy(quote!(&'a mut super::X), quote!(&'a mut super::super::X));
         }
         #[test]
         fn slice() {
@@ -801,9 +810,9 @@ mod t {
             supersuperfy_generics(&mut output, 1);
             let (o_ig, o_tg, o_wc) = output.split_for_impl();
             let (e_ig, e_tg, e_wc) = expected_g.split_for_impl();
-            assert_eq!(quote!(# o_ig) .to_string(), quote!(# e_ig) .to_string());
-            assert_eq!(quote!(# o_tg) .to_string(), quote!(# e_tg) .to_string());
-            assert_eq!(quote!(# o_wc) .to_string(), quote!(# e_wc) .to_string());
+            assert_eq!(quote!(# o_ig).to_string(), quote!(# e_ig).to_string());
+            assert_eq!(quote!(# o_tg).to_string(), quote!(# e_tg).to_string());
+            assert_eq!(quote!(# o_wc).to_string(), quote!(# e_wc).to_string());
         }
         #[test]
         fn default() {

@@ -8,18 +8,14 @@ impl<'a> Utf8PrefixComponent<'a> {
     #[must_use]
     pub fn kind(&self) -> Utf8Prefix<'a> {
         match self.0.kind() {
-            Prefix::Verbatim(prefix) => {
-                Utf8Prefix::Verbatim(unsafe { str_assume_utf8(prefix) })
-            }
+            Prefix::Verbatim(prefix) => Utf8Prefix::Verbatim(unsafe { str_assume_utf8(prefix) }),
             Prefix::VerbatimUNC(server, share) => {
                 let server = unsafe { str_assume_utf8(server) };
                 let share = unsafe { str_assume_utf8(share) };
                 Utf8Prefix::VerbatimUNC(server, share)
             }
             Prefix::VerbatimDisk(drive) => Utf8Prefix::VerbatimDisk(drive),
-            Prefix::DeviceNS(prefix) => {
-                Utf8Prefix::DeviceNS(unsafe { str_assume_utf8(prefix) })
-            }
+            Prefix::DeviceNS(prefix) => Utf8Prefix::DeviceNS(unsafe { str_assume_utf8(prefix) }),
             Prefix::UNC(server, share) => {
                 let server = unsafe { str_assume_utf8(server) };
                 let share = unsafe { str_assume_utf8(share) };

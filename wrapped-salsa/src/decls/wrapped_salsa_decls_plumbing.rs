@@ -7,49 +7,46 @@ use std::collections::HashMap;
 /// The contents of this module are NOT subject to semver.
 #[doc(hidden)]
 pub mod plumbing {
-    pub use std::any::TypeId;
-    pub use std::option::Option::{self, None, Some};
-    #[cfg(feature = "accumulator")]
-    pub use salsa_macro_rules::setup_accumulator_impl;
-    pub use salsa_macro_rules::{
-        gate_accumulated, macro_if, maybe_backdate, maybe_default, maybe_default_tt,
-        return_mode_expression, return_mode_ty, setup_input_struct,
-        setup_interned_struct, setup_tracked_assoc_fn_body, setup_tracked_fn,
-        setup_tracked_method_body, setup_tracked_struct, unexpected_cycle_initial,
-        unexpected_cycle_recovery,
-    };
     #[cfg(feature = "accumulator")]
     pub use crate::accumulator::Accumulator;
     pub use crate::attach::{attach, with_attached_database};
     pub use crate::cycle::CycleRecoveryStrategy;
-    pub use crate::database::{Database, current_revision};
+    pub use crate::database::{current_revision, Database};
     pub use crate::durability::Durability;
     pub use crate::id::{AsId, FromId, FromIdWithDb, Id};
     pub use crate::ingredient::{Ingredient, Jar, Location};
     pub use crate::ingredient_cache::IngredientCache;
     pub use crate::key::DatabaseKeyIndex;
     pub use crate::memo_ingredient_indices::{
-        IngredientIndices, MemoIngredientIndices, MemoIngredientMap,
-        MemoIngredientSingletonIndex, NewMemoIngredientIndices,
+        IngredientIndices, MemoIngredientIndices, MemoIngredientMap, MemoIngredientSingletonIndex,
+        NewMemoIngredientIndices,
     };
     pub use crate::revision::Revision;
-    pub use crate::runtime::{Runtime, Stamp, stamp};
+    pub use crate::runtime::{stamp, Runtime, Stamp};
     pub use crate::salsa_struct::SalsaStructInDb;
     pub use crate::storage::{HasStorage, Storage};
     pub use crate::table::memo::MemoTableWithTypes;
     pub use crate::tracked_struct::TrackedStructInDb;
-    pub use crate::update::helper::{
-        Dispatch as UpdateDispatch, Fallback as UpdateFallback,
-    };
-    pub use crate::update::{Update, always_update};
+    pub use crate::update::helper::{Dispatch as UpdateDispatch, Fallback as UpdateFallback};
+    pub use crate::update::{always_update, Update};
     pub use crate::views::DatabaseDownCaster;
     pub use crate::zalsa::{
-        ErasedJar, HasJar, IngredientIndex, JarKind, Zalsa, ZalsaDatabase, register_jar,
-        transmute_data_ptr, views,
+        register_jar, transmute_data_ptr, views, ErasedJar, HasJar, IngredientIndex, JarKind,
+        Zalsa, ZalsaDatabase,
     };
     pub use crate::zalsa_local::ZalsaLocal;
+    #[cfg(feature = "accumulator")]
+    pub use salsa_macro_rules::setup_accumulator_impl;
+    pub use salsa_macro_rules::{
+        gate_accumulated, macro_if, maybe_backdate, maybe_default, maybe_default_tt,
+        return_mode_expression, return_mode_ty, setup_input_struct, setup_interned_struct,
+        setup_tracked_assoc_fn_body, setup_tracked_fn, setup_tracked_method_body,
+        setup_tracked_struct, unexpected_cycle_initial, unexpected_cycle_recovery,
+    };
     #[cfg(feature = "persistence")]
     pub use serde;
+    pub use std::any::TypeId;
+    pub use std::option::Option::{self, None, Some};
     #[cfg(not(feature = "persistence"))]
     pub mod serde {
         pub trait Serializer {
@@ -69,9 +66,7 @@ pub mod plumbing {
         pub use crate::input::input_field::FieldIngredientImpl;
         pub use crate::input::setter::SetterImpl;
         pub use crate::input::singleton::{NotSingleton, Singleton};
-        pub use crate::input::{
-            Configuration, HasBuilder, IngredientImpl, JarImpl, Value,
-        };
+        pub use crate::input::{Configuration, HasBuilder, IngredientImpl, JarImpl, Value};
     }
     pub mod interned {
         pub use crate::interned::{

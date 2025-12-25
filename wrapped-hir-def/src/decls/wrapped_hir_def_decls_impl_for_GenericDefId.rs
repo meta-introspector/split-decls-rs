@@ -14,20 +14,17 @@ impl GenericDefId {
             Loc::Value: ast::HasGenericParams,
         {
             let src = def.lookup(db).source(db);
-            (src.file_id, ast::HasGenericParams::generic_param_list(&src.value))
+            (
+                src.file_id,
+                ast::HasGenericParams::generic_param_list(&src.value),
+            )
         }
         match self {
             GenericDefId::FunctionId(it) => file_id_and_params_of_item_loc(db, it),
             GenericDefId::TypeAliasId(it) => file_id_and_params_of_item_loc(db, it),
-            GenericDefId::AdtId(AdtId::StructId(it)) => {
-                file_id_and_params_of_item_loc(db, it)
-            }
-            GenericDefId::AdtId(AdtId::UnionId(it)) => {
-                file_id_and_params_of_item_loc(db, it)
-            }
-            GenericDefId::AdtId(AdtId::EnumId(it)) => {
-                file_id_and_params_of_item_loc(db, it)
-            }
+            GenericDefId::AdtId(AdtId::StructId(it)) => file_id_and_params_of_item_loc(db, it),
+            GenericDefId::AdtId(AdtId::UnionId(it)) => file_id_and_params_of_item_loc(db, it),
+            GenericDefId::AdtId(AdtId::EnumId(it)) => file_id_and_params_of_item_loc(db, it),
             GenericDefId::TraitId(it) => file_id_and_params_of_item_loc(db, it),
             GenericDefId::ImplId(it) => file_id_and_params_of_item_loc(db, it),
             GenericDefId::ConstId(it) => (it.lookup(db).id.file_id, None),

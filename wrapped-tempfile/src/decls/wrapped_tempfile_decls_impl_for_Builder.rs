@@ -497,12 +497,10 @@ impl<'a, 'b> Builder<'a, 'b> {
             self.suffix,
             self.random_len,
             move |path| {
-                Ok(
-                    NamedTempFile::from_parts(
-                        f(&path)?,
-                        TempPath::new(path, self.disable_cleanup),
-                    ),
-                )
+                Ok(NamedTempFile::from_parts(
+                    f(&path)?,
+                    TempPath::new(path, self.disable_cleanup),
+                ))
             },
         )
     }

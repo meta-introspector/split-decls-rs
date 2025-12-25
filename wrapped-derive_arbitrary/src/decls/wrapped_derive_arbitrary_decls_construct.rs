@@ -12,12 +12,11 @@ fn construct(
                 .enumerate()
                 .map(|(i, f)| {
                     let name = f.ident.as_ref().unwrap();
-                    ctor(i, f)
-                        .map(|ctor| {
-                            quote! {
-                                # name : # ctor
-                            }
-                        })
+                    ctor(i, f).map(|ctor| {
+                        quote! {
+                            # name : # ctor
+                        }
+                    })
                 })
                 .collect::<Result<_>>()?;
             quote! {
@@ -30,12 +29,11 @@ fn construct(
                 .iter()
                 .enumerate()
                 .map(|(i, f)| {
-                    ctor(i, f)
-                        .map(|ctor| {
-                            quote! {
-                                # ctor
-                            }
-                        })
+                    ctor(i, f).map(|ctor| {
+                        quote! {
+                            # ctor
+                        }
+                    })
                 })
                 .collect::<Result<_>>()?;
             quote! {

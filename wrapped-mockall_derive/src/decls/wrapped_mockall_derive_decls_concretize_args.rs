@@ -11,7 +11,12 @@ use std::collections::HashMap;
 fn concretize_args(
     gen: &Generics,
     sig: &Signature,
-) -> (Generics, Punctuated<FnArg, Token![,]>, Vec<TokenStream>, Signature) {
+) -> (
+    Generics,
+    Punctuated<FnArg, Token![,]>,
+    Vec<TokenStream>,
+    Signature,
+) {
     let args = &sig.inputs;
     let mut hm = HashMap::default();
     let mut needs_muts = HashMap::default();
@@ -20,8 +25,7 @@ fn concretize_args(
             let mut pat = quote!(& (dyn # tpb));
             let mut needs_mut = false;
             if let Some(TypeParamBound::Trait(t)) = tpb.first() {
-                if t
-                    .path
+                if t.path
                     .segments
                     .first()
                     .map(|seg| &seg.ident == "FnMut")
@@ -68,7 +72,8 @@ fn concretize_args(
                 let bounded_ty = &pt.bounded_ty;
                 if let Ok(ident) = parse2::<Ident>(quote!(# bounded_ty)) {
                     save_types(&ident, &pt.bounds);
-                } else {}
+                } else {
+                }
             }
         }
     }
@@ -106,37 +111,33 @@ fn concretize_args(
         .collect();
     let call_exprs = args
         .iter()
-        .filter_map(|arg| {
-            match arg {
-                FnArg::Typed(pt) => {
-                    let mut pt2 = pt.clone();
-                    demutify_arg(&mut pt2);
-                    let pat = &pt2.pat;
-                    if pat_is_self(pat) {
-                        None
-                    } else if let Some((_, newbound)) = hm.get(&pt.ty) {
-                        if let Type::Reference(tr) = &*pt.ty {
-                            if let Type::Slice(_ts) = &*tr.elem {
-                                Some(
-                                    quote!(
-                                        & (0..# pat.len()).map(| __mockall_i | &# pat[__mockall_i]
-                                        as & (dyn # newbound)).collect::< Vec < _ >> ()
-                                    ),
-                                )
-                            } else {
-                                Some(quote!(# pat))
-                            }
-                        } else if needs_muts.get(&pt.ty).cloned().unwrap_or(false) {
-                            Some(quote!(& mut # pat))
+        .filter_map(|arg| match arg {
+            FnArg::Typed(pt) => {
+                let mut pt2 = pt.clone();
+                demutify_arg(&mut pt2);
+                let pat = &pt2.pat;
+                if pat_is_self(pat) {
+                    None
+                } else if let Some((_, newbound)) = hm.get(&pt.ty) {
+                    if let Type::Reference(tr) = &*pt.ty {
+                        if let Type::Slice(_ts) = &*tr.elem {
+                            Some(quote!(
+                                & (0..# pat.len()).map(| __mockall_i | &# pat[__mockall_i]
+                                as & (dyn # newbound)).collect::< Vec < _ >> ()
+                            ))
                         } else {
-                            Some(quote!(&# pat))
+                            Some(quote!(# pat))
                         }
+                    } else if needs_muts.get(&pt.ty).cloned().unwrap_or(false) {
+                        Some(quote!(& mut # pat))
                     } else {
-                        Some(quote!(# pat))
+                        Some(quote!(&# pat))
                     }
+                } else {
+                    Some(quote!(# pat))
                 }
-                FnArg::Receiver(_) => None,
             }
+            FnArg::Receiver(_) => None,
         })
         .collect();
     let mut altsig = sig.clone();

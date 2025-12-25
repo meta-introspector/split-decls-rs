@@ -7,21 +7,31 @@ mod tests {
     fn test_trim_indent() {
         assert_eq!(trim_indent(""), "");
         assert_eq!(
-            trim_indent("
+            trim_indent(
+                "
             hello
             world
-"), "hello\nworld\n"
+"
+            ),
+            "hello\nworld\n"
         );
-        assert_eq!(trim_indent("
+        assert_eq!(
+            trim_indent(
+                "
             hello
-            world"), "hello\nworld");
+            world"
+            ),
+            "hello\nworld"
+        );
         assert_eq!(trim_indent("    hello\n    world\n"), "hello\nworld\n");
         assert_eq!(
-            trim_indent("
+            trim_indent(
+                "
             fn main() {
                 return 92;
             }
-        "),
+        "
+            ),
             "fn main() {\n    return 92;\n}\n"
         );
     }

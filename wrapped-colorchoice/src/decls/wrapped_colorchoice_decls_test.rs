@@ -6,7 +6,9 @@ mod test {
     #[test]
     fn choice_serialization() {
         let expected = vec![
-            ColorChoice::Auto, ColorChoice::AlwaysAnsi, ColorChoice::Always,
+            ColorChoice::Auto,
+            ColorChoice::AlwaysAnsi,
+            ColorChoice::Always,
             ColorChoice::Never,
         ];
         let values: Vec<_> = expected

@@ -12,18 +12,16 @@ impl SmolStrBuilder {
     /// Builds a [`SmolStr`] from `self`.
     #[must_use]
     pub fn finish(&self) -> SmolStr {
-        SmolStr(
-            match &self.0 {
-                &SmolStrBuilderRepr::Inline { len, buf } => {
-                    debug_assert!(len <= INLINE_CAP);
-                    Repr::Inline {
-                        len: unsafe { InlineSize::transmute_from_u8(len as u8) },
-                        buf,
-                    }
+        SmolStr(match &self.0 {
+            &SmolStrBuilderRepr::Inline { len, buf } => {
+                debug_assert!(len <= INLINE_CAP);
+                Repr::Inline {
+                    len: unsafe { InlineSize::transmute_from_u8(len as u8) },
+                    buf,
                 }
-                SmolStrBuilderRepr::Heap(heap) => Repr::new(heap),
-            },
-        )
+            }
+            SmolStrBuilderRepr::Heap(heap) => Repr::new(heap),
+        })
     }
     /// Appends the given [`char`] to the end of `self`'s buffer.
     pub fn push(&mut self, c: char) {

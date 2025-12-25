@@ -4,7 +4,8 @@ use std::collections::HashMap;
 /// variables, is known to support unicode rendering.
 pub fn supports_unicode() -> bool {
     if std::env::consts::OS == "windows" {
-        std::env::var("CI").is_ok() || std::env::var("WT_SESSION").is_ok()
+        std::env::var("CI").is_ok()
+            || std::env::var("WT_SESSION").is_ok()
             || std::env::var("ConEmuTask") == Ok("{cmd:Cmder}".into())
             || std::env::var("TERM_PROGRAM") == Ok("vscode".into())
             || std::env::var("TERM") == Ok("xterm-256color".into())

@@ -2,18 +2,17 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod test {
-    use crate::{
-        OptimisticTransactionDB, OptimisticTransactionOptions, Transaction,
-        TransactionDB, TransactionDBOptions, TransactionOptions,
-    };
     use super::{
         column_family::UnboundColumnFamily,
         db_options::{CacheWrapper, WriteBufferManagerWrapper},
         env::{Env, EnvWrapper},
-        BlockBasedOptions, BoundColumnFamily, Cache, ColumnFamily,
-        ColumnFamilyDescriptor, DBIterator, DBRawIterator, IngestExternalFileOptions,
-        Options, PlainTableFactoryOptions, ReadOptions, Snapshot, SstFileWriter,
-        WriteBatch, WriteBufferManager, WriteOptions, DB,
+        BlockBasedOptions, BoundColumnFamily, Cache, ColumnFamily, ColumnFamilyDescriptor,
+        DBIterator, DBRawIterator, IngestExternalFileOptions, Options, PlainTableFactoryOptions,
+        ReadOptions, Snapshot, SstFileWriter, WriteBatch, WriteBufferManager, WriteOptions, DB,
+    };
+    use crate::{
+        OptimisticTransactionDB, OptimisticTransactionOptions, Transaction, TransactionDB,
+        TransactionDBOptions, TransactionOptions,
     };
     #[test]
     fn is_send() {

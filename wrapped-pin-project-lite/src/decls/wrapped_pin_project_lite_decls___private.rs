@@ -7,12 +7,13 @@ pub mod __private {
     #[doc(hidden)]
     pub use core::{
         marker::{PhantomData, PhantomPinned, Unpin},
-        ops::Drop, pin::Pin, ptr,
+        ops::Drop,
+        pin::Pin,
+        ptr,
     };
     #[doc(hidden)]
-    pub type PinnedFieldsOf<T> = <PinnedFieldsOfHelperStruct<
-        T,
-    > as PinnedFieldsOfHelperTrait>::Actual;
+    pub type PinnedFieldsOf<T> =
+        <PinnedFieldsOfHelperStruct<T> as PinnedFieldsOfHelperTrait>::Actual;
     #[doc(hidden)]
     pub trait PinnedFieldsOfHelperTrait {
         type Actual: ?Sized;

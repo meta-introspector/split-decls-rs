@@ -49,11 +49,9 @@ impl Sha1 {
             compress::finalize(h, bs * self.block_len, last_block, ctx);
         } else {
             let bit_len = 8 * (buffer.get_pos() as u64 + bs * self.block_len);
-            buffer
-                .len64_padding_be(
-                    bit_len,
-                    |b| { sha1::block_api::compress(h, from_ref(b.into())) },
-                );
+            buffer.len64_padding_be(bit_len, |b| {
+                sha1::block_api::compress(h, from_ref(b.into()))
+            });
         }
         for (chunk, v) in out.chunks_exact_mut(4).zip(h.iter()) {
             chunk.copy_from_slice(&v.to_be_bytes());

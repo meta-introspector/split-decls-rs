@@ -4,8 +4,6 @@ use std::collections::HashMap;
 pub mod helpers {
     /// Functions helping writing tests
     pub mod tests {
-        pub use crate::builtins::testers::{
-            extract_string, number_args_allowed, value_defined,
-        };
+        pub use crate::builtins::testers::{extract_string, number_args_allowed, value_defined};
     }
 }

@@ -9,10 +9,7 @@ pub(crate) mod private {
     impl Sealed for f64 {}
     impl Sealed for bool {}
     impl Sealed for crate::Datetime {}
-    impl<T: ?Sized> Sealed for &T
-    where
-        T: Sealed,
-    {}
+    impl<T: ?Sized> Sealed for &T where T: Sealed {}
     impl Sealed for crate::Table {}
     impl Sealed for crate::InlineTable {}
 }

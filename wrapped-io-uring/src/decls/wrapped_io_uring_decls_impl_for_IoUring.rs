@@ -19,32 +19,22 @@ impl<S: squeue::EntryMarker, C: cqueue::EntryMarker> IoUring<S, C> {
         }
     }
     fn with_params(entries: u32, mut p: sys::io_uring_params) -> io::Result<Self> {
-        let fd: OwnedFd = unsafe {
-            OwnedFd::from_raw_fd(sys::io_uring_setup(entries, &mut p)?)
-        };
+        let fd: OwnedFd = unsafe { OwnedFd::from_raw_fd(sys::io_uring_setup(entries, &mut p)?) };
         unsafe { Self::with_fd_and_params(fd, p) }
     }
-    unsafe fn with_fd_and_params(
-        fd: OwnedFd,
-        p: sys::io_uring_params,
-    ) -> io::Result<Self> {
+    unsafe fn with_fd_and_params(fd: OwnedFd, p: sys::io_uring_params) -> io::Result<Self> {
         #[inline]
         unsafe fn setup_queue<S: squeue::EntryMarker, C: cqueue::EntryMarker>(
             fd: &OwnedFd,
             p: &sys::io_uring_params,
         ) -> io::Result<(MemoryMap, squeue::Inner<S>, cqueue::Inner<C>)> {
-            let sq_len = p.sq_off.array as usize
-                + p.sq_entries as usize * mem::size_of::<u32>();
-            let cq_len = p.cq_off.cqes as usize
-                + p.cq_entries as usize * mem::size_of::<C>();
+            let sq_len = p.sq_off.array as usize + p.sq_entries as usize * mem::size_of::<u32>();
+            let cq_len = p.cq_off.cqes as usize + p.cq_entries as usize * mem::size_of::<C>();
             let sqe_len = p.sq_entries as usize * mem::size_of::<S>();
             let sqe_mmap = Mmap::new(fd, sys::IORING_OFF_SQES as _, sqe_len)?;
             if p.features & sys::IORING_FEAT_SINGLE_MMAP != 0 {
-                let scq_mmap = Mmap::new(
-                    fd,
-                    sys::IORING_OFF_SQ_RING as _,
-                    cmp::max(sq_len, cq_len),
-                )?;
+                let scq_mmap =
+                    Mmap::new(fd, sys::IORING_OFF_SQ_RING as _, cmp::max(sq_len, cq_len))?;
                 let sq = squeue::Inner::new(&scq_mmap, &sqe_mmap, p);
                 let cq = cqueue::Inner::new(&scq_mmap, p);
                 let mm = MemoryMap {
@@ -79,7 +69,13 @@ impl<S: squeue::EntryMarker, C: cqueue::EntryMarker> IoUring<S, C> {
     /// events to the kernel for execution and to register files or buffers with it.
     #[inline]
     pub fn submitter(&self) -> Submitter<'_> {
-        Submitter::new(&self.fd, &self.params, self.sq.head, self.sq.tail, self.sq.flags)
+        Submitter::new(
+            &self.fd,
+            &self.params,
+            self.sq.head,
+            self.sq.tail,
+            self.sq.flags,
+        )
     }
     /// Get the parameters that were used to construct this instance.
     #[inline]
@@ -106,7 +102,11 @@ impl<S: squeue::EntryMarker, C: cqueue::EntryMarker> IoUring<S, C> {
     #[inline]
     pub fn split(
         &mut self,
-    ) -> (Submitter<'_>, SubmissionQueue<'_, S>, CompletionQueue<'_, C>) {
+    ) -> (
+        Submitter<'_>,
+        SubmissionQueue<'_, S>,
+        CompletionQueue<'_, C>,
+    ) {
         let submit = Submitter::new(
             &self.fd,
             &self.params,

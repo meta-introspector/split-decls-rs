@@ -2,9 +2,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(feature = "rustc")]
 mod rustc {
+    use super::*;
     use rustc_hir::lang_items::LangItem;
     use rustc_middle::ty::{Const, Region, Ty, TyCtxt};
-    use super::*;
     /// The source and destination types of a transmutation.
     #[derive(Debug, Clone, Copy)]
     pub struct Types<'tcx> {
@@ -26,12 +26,9 @@ mod rustc {
             assume: crate::Assume,
         ) -> crate::Answer<Region<'tcx>, Ty<'tcx>> {
             crate::maybe_transmutable::MaybeTransmutableQuery::new(
-                    types.src,
-                    types.dst,
-                    assume,
-                    self.tcx,
-                )
-                .answer()
+                types.src, types.dst, assume, self.tcx,
+            )
+            .answer()
         }
     }
     impl Assume {
@@ -44,13 +41,10 @@ mod rustc {
             };
             let adt_def = cv.ty.ty_adt_def()?;
             if !tcx.is_lang_item(adt_def.did(), LangItem::TransmuteOpts) {
-                tcx.dcx()
-                    .delayed_bug(
-                        format!(
-                            "The given `const` was not marked with the `{}` lang item.",
-                            LangItem::TransmuteOpts.name()
-                        ),
-                    );
+                tcx.dcx().delayed_bug(format!(
+                    "The given `const` was not marked with the `{}` lang item.",
+                    LangItem::TransmuteOpts.name()
+                ));
                 return Some(Self {
                     alignment: true,
                     lifetimes: true,

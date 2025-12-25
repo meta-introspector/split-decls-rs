@@ -26,7 +26,8 @@ impl<FieldIdx: Idx> FieldsShape<FieldIdx> {
             FieldsShape::Array { stride, count } => {
                 let i = u64::try_from(i).unwrap();
                 assert!(
-                    i < count, "tried to access field {i} of array with {count} fields"
+                    i < count,
+                    "tried to access field {i} of array with {count} fields"
                 );
                 stride * i
             }
@@ -40,9 +41,9 @@ impl<FieldIdx: Idx> FieldsShape<FieldIdx> {
                 unreachable!("FieldsShape::memory_index: `Primitive`s have no fields")
             }
             FieldsShape::Union(_) | FieldsShape::Array { .. } => i,
-            FieldsShape::Arbitrary { ref memory_index, .. } => {
-                memory_index[FieldIdx::new(i)].try_into().unwrap()
-            }
+            FieldsShape::Arbitrary {
+                ref memory_index, ..
+            } => memory_index[FieldIdx::new(i)].try_into().unwrap(),
         }
     }
     /// Gets source indices of the fields by increasing offsets.
@@ -51,7 +52,10 @@ impl<FieldIdx: Idx> FieldsShape<FieldIdx> {
         let mut inverse_small = [0u8; 64];
         let mut inverse_big = IndexVec::new();
         let use_small = self.count() <= inverse_small.len();
-        if let FieldsShape::Arbitrary { ref memory_index, .. } = *self {
+        if let FieldsShape::Arbitrary {
+            ref memory_index, ..
+        } = *self
+        {
             if use_small {
                 for (field_idx, &mem_idx) in memory_index.iter_enumerated() {
                     inverse_small[mem_idx as usize] = field_idx.index() as u8;
@@ -65,18 +69,15 @@ impl<FieldIdx: Idx> FieldsShape<FieldIdx> {
         } else {
             self.count()
         };
-        (0..pseudofield_count)
-            .map(move |i| match *self {
-                FieldsShape::Primitive
-                | FieldsShape::Union(_)
-                | FieldsShape::Array { .. } => i,
-                FieldsShape::Arbitrary { .. } => {
-                    if use_small {
-                        inverse_small[i] as usize
-                    } else {
-                        inverse_big[i as u32].index()
-                    }
+        (0..pseudofield_count).map(move |i| match *self {
+            FieldsShape::Primitive | FieldsShape::Union(_) | FieldsShape::Array { .. } => i,
+            FieldsShape::Arbitrary { .. } => {
+                if use_small {
+                    inverse_small[i] as usize
+                } else {
+                    inverse_big[i as u32].index()
                 }
-            })
+            }
+        })
     }
 }

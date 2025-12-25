@@ -9,7 +9,10 @@ use std::collections::HashMap;
 /// isn't parsed as (if true {...} else {...} | x) | 5
 fn expr_requires_semi_to_be_stmt(e: &hir::Expr<'_>) -> bool {
     !matches!(
-        e.kind, hir::ExprKind::If(..) | hir::ExprKind::Match(..) |
-        hir::ExprKind::Block(..) | hir::ExprKind::Loop(..)
+        e.kind,
+        hir::ExprKind::If(..)
+            | hir::ExprKind::Match(..)
+            | hir::ExprKind::Block(..)
+            | hir::ExprKind::Loop(..)
     )
 }

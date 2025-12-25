@@ -2,11 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 /// Renders directed graph `g` into the writer `w` in DOT syntax.
 /// (Main entry point for the library.)
-pub fn render_opts<'a, N, E, G, W>(
-    g: &'a G,
-    w: &mut W,
-    options: &[RenderOption],
-) -> io::Result<()>
+pub fn render_opts<'a, N, E, G, W>(g: &'a G, w: &mut W, options: &[RenderOption]) -> io::Result<()>
 where
     N: Clone + 'a,
     E: Clone + 'a,
@@ -17,16 +13,13 @@ where
     let mut graph_attrs = Vec::new();
     let mut content_attrs = Vec::new();
     let font;
-    if let Some(fontname) = options
-        .iter()
-        .find_map(|option| {
-            if let RenderOption::Fontname(fontname) = option {
-                Some(fontname)
-            } else {
-                None
-            }
-        })
-    {
+    if let Some(fontname) = options.iter().find_map(|option| {
+        if let RenderOption::Fontname(fontname) = option {
+            Some(fontname)
+        } else {
+            None
+        }
+    }) {
         font = format!(r#"fontname="{fontname}""#);
         graph_attrs.push(&font[..]);
         content_attrs.push(&font[..]);
@@ -57,7 +50,7 @@ where
             write!(text, "[style=\"{}\"]", style.as_slice()).unwrap();
         }
         if let Some(s) = g.node_shape(n) {
-            write!(text, "[shape={}]", & s.to_dot_string()).unwrap();
+            write!(text, "[shape={}]", &s.to_dot_string()).unwrap();
         }
         writeln!(text, ";").unwrap();
         w.write_all(&text)?;

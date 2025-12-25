@@ -6,10 +6,7 @@ use std::collections::HashMap;
 /// And then quote the string, which is needed to convert to `tt::Literal`
 ///
 /// Note that proc-macros desugar with string literals where as macro_rules macros desugar with raw string literals.
-pub fn desugar_doc_comment_text(
-    text: &str,
-    mode: DocCommentDesugarMode,
-) -> (Symbol, tt::LitKind) {
+pub fn desugar_doc_comment_text(text: &str, mode: DocCommentDesugarMode) -> (Symbol, tt::LitKind) {
     match mode {
         DocCommentDesugarMode::Mbe => {
             let mut num_of_hashes = 0;
@@ -24,11 +21,9 @@ pub fn desugar_doc_comment_text(
             }
             (Symbol::intern(text), tt::LitKind::StrRaw(num_of_hashes))
         }
-        DocCommentDesugarMode::ProcMacro => {
-            (
-                Symbol::intern(&format_smolstr!("{}", text.escape_debug())),
-                tt::LitKind::Str,
-            )
-        }
+        DocCommentDesugarMode::ProcMacro => (
+            Symbol::intern(&format_smolstr!("{}", text.escape_debug())),
+            tt::LitKind::Str,
+        ),
     }
 }

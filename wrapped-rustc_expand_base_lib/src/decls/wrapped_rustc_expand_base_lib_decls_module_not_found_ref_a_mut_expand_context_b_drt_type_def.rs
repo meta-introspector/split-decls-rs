@@ -1,6 +1,4 @@
-#[llm_error_message(
-    message = "Module file not found for: ref_a_mut_expand_context_b_drt_type_def"
-)]
+#[llm_error_message(message = "Module file not found for: ref_a_mut_expand_context_b_drt_type_def")]
 #[llm_context(
     crate_name = "wrapped_rustc_expand_base_lib",
     module_name = "ref_a_mut_expand_context_b_drt_type_def"

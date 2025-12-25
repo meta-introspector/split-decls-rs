@@ -22,7 +22,10 @@ fn compute_symbol_name<'tcx>(
     } else {
         CodegenFnAttrs::EMPTY
     };
-    if attrs.flags.contains(CodegenFnAttrFlags::RUSTC_STD_INTERNAL_SYMBOL) {
+    if attrs
+        .flags
+        .contains(CodegenFnAttrFlags::RUSTC_STD_INTERNAL_SYMBOL)
+    {
         let name = if let Some(name) = attrs.symbol_name {
             name
         } else {
@@ -31,8 +34,11 @@ fn compute_symbol_name<'tcx>(
         return v0::mangle_internal_symbol(tcx, name.as_str());
     }
     let wasm_import_module_exception_force_mangling = {
-        tcx.is_foreign_item(def_id) && tcx.sess.target.is_like_wasm
-            && tcx.wasm_import_module_map(def_id.krate).contains_key(&def_id.into())
+        tcx.is_foreign_item(def_id)
+            && tcx.sess.target.is_like_wasm
+            && tcx
+                .wasm_import_module_map(def_id.krate)
+                .contains_key(&def_id.into())
     };
     if !wasm_import_module_exception_force_mangling {
         if let Some(name) = attrs.symbol_name {
@@ -43,17 +49,18 @@ fn compute_symbol_name<'tcx>(
         }
     }
     let is_globally_shared_function = matches!(
-        tcx.def_kind(instance.def_id()), DefKind::Fn | DefKind::AssocFn |
-        DefKind::Closure | DefKind::SyntheticCoroutineBody | DefKind::Ctor(..)
-    )
-        && matches!(
-            MonoItem::Fn(instance).instantiation_mode(tcx),
-            InstantiationMode::GloballyShared { may_conflict : true }
-        );
-    let avoid_cross_crate_conflicts = is_generic(instance)
-        || is_globally_shared_function;
-    let instantiating_crate = avoid_cross_crate_conflicts
-        .then(compute_instantiating_crate);
+        tcx.def_kind(instance.def_id()),
+        DefKind::Fn
+            | DefKind::AssocFn
+            | DefKind::Closure
+            | DefKind::SyntheticCoroutineBody
+            | DefKind::Ctor(..)
+    ) && matches!(
+        MonoItem::Fn(instance).instantiation_mode(tcx),
+        InstantiationMode::GloballyShared { may_conflict: true }
+    );
+    let avoid_cross_crate_conflicts = is_generic(instance) || is_globally_shared_function;
+    let instantiating_crate = avoid_cross_crate_conflicts.then(compute_instantiating_crate);
     let mangling_version_crate = instantiating_crate.unwrap_or(def_id.krate);
     let mangling_version = if mangling_version_crate == LOCAL_CRATE {
         tcx.sess.opts.get_symbol_mangling_version()
@@ -63,31 +70,23 @@ fn compute_symbol_name<'tcx>(
     let symbol = match tcx.is_exportable(def_id) {
         true => {
             format!(
-                "{}.{}", v0::mangle(tcx, instance, instantiating_crate, true),
+                "{}.{}",
+                v0::mangle(tcx, instance, instantiating_crate, true),
                 export::compute_hash_of_export_fn(tcx, instance)
             )
         }
-        false => {
-            match mangling_version {
-                SymbolManglingVersion::Legacy => {
-                    legacy::mangle(tcx, instance, instantiating_crate)
-                }
-                SymbolManglingVersion::V0 => {
+        false => match mangling_version {
+            SymbolManglingVersion::Legacy => legacy::mangle(tcx, instance, instantiating_crate),
+            SymbolManglingVersion::V0 => v0::mangle(tcx, instance, instantiating_crate, false),
+            SymbolManglingVersion::Hashed => {
+                hashed::mangle(tcx, instance, instantiating_crate, || {
                     v0::mangle(tcx, instance, instantiating_crate, false)
-                }
-                SymbolManglingVersion::Hashed => {
-                    hashed::mangle(
-                        tcx,
-                        instance,
-                        instantiating_crate,
-                        || { v0::mangle(tcx, instance, instantiating_crate, false) },
-                    )
-                }
+                })
             }
-        }
+        },
     };
     debug_assert!(
-        rustc_demangle::try_demangle(& symbol).is_ok(),
+        rustc_demangle::try_demangle(&symbol).is_ok(),
         "compute_symbol_name: `{symbol}` cannot be demangled"
     );
     symbol

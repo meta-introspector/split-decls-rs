@@ -43,13 +43,11 @@ pub mod bufread {
                     hash.write(buf);
                     buf.len()
                 }
-                Err(err) => {
-                    match err.kind() {
-                        ErrorKind::Interrupted => continue,
-                        ErrorKind::UnexpectedEof => return Ok(hash.finish()),
-                        _ => return Err(err),
-                    }
-                }
+                Err(err) => match err.kind() {
+                    ErrorKind::Interrupted => continue,
+                    ErrorKind::UnexpectedEof => return Ok(hash.finish()),
+                    _ => return Err(err),
+                },
             };
             reader.consume(consumed);
         }

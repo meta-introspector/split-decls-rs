@@ -29,10 +29,7 @@ impl FileName {
             display_pref: FileNameDisplayPreference::Local,
         }
     }
-    pub fn display(
-        &self,
-        display_pref: FileNameDisplayPreference,
-    ) -> FileNameDisplay<'_> {
+    pub fn display(&self, display_pref: FileNameDisplayPreference) -> FileNameDisplay<'_> {
         FileNameDisplay {
             inner: self,
             display_pref,

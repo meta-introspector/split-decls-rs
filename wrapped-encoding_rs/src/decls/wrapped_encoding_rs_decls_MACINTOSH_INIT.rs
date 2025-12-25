@@ -14,10 +14,5 @@ use std::collections::HashMap;
 /// items.
 pub static MACINTOSH_INIT: Encoding = Encoding {
     name: "macintosh",
-    variant: VariantEncoding::SingleByte(
-        &data::SINGLE_BYTE_DATA.macintosh,
-        0x00CD,
-        106,
-        3,
-    ),
+    variant: VariantEncoding::SingleByte(&data::SINGLE_BYTE_DATA.macintosh, 0x00CD, 106, 3),
 };

@@ -105,8 +105,8 @@ mod tests {
         let attrs: Vec<_> = quote! {
             foo
         }
-            .into_iter()
-            .collect();
+        .into_iter()
+        .collect();
         let input = quote! {
             #[test] fn foo() {}
         };
@@ -143,8 +143,8 @@ mod tests {
         let attrs: Vec<_> = quote! {
             foo, path => "bar_path"
         }
-            .into_iter()
-            .collect();
+        .into_iter()
+        .collect();
         let input = quote! {
             #[test] fn foo() {}
         };
@@ -164,8 +164,8 @@ mod tests {
         let attrs: Vec<_> = quote! {
             one
         }
-            .into_iter()
-            .collect();
+        .into_iter()
+        .collect();
         let input = quote! {
             #[test] fn single() {}
         };
@@ -185,8 +185,8 @@ mod tests {
         let attrs: Vec<_> = quote! {
             two, one
         }
-            .into_iter()
-            .collect();
+        .into_iter()
+        .collect();
         let input = quote! {
             #[test] fn multiple() {}
         };
@@ -288,8 +288,8 @@ mod tests {
         let attrs: Vec<_> = quote! {
             crate = wrapper::__derive_refs::serial
         }
-            .into_iter()
-            .collect();
+        .into_iter()
+        .collect();
         let input = quote! {
             #[test] fn foo() {}
         };
@@ -309,8 +309,8 @@ mod tests {
         let attrs: Vec<_> = quote! {
             crate = wrapper::__derive_refs::serial, path => "/tmp/bar"
         }
-            .into_iter()
-            .collect();
+        .into_iter()
+        .collect();
         let input = quote! {
             #[test] fn foo() {}
         };
@@ -330,8 +330,8 @@ mod tests {
         let attrs: Vec<_> = quote! {
             key1, key2, path => "/tmp/bar", crate = wrapper::__derive_refs::serial
         }
-            .into_iter()
-            .collect();
+        .into_iter()
+        .collect();
         let input = quote! {
             #[test] fn foo() {}
         };

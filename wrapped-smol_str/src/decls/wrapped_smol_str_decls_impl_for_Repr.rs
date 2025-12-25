@@ -25,9 +25,7 @@ impl Repr {
                 .take_while(|&&b| b == b'\n')
                 .count();
             let possible_space_count = len - newlines;
-            if possible_space_count <= N_SPACES
-                && bytes[newlines..].iter().all(|&b| b == b' ')
-            {
+            if possible_space_count <= N_SPACES && bytes[newlines..].iter().all(|&b| b == b' ') {
                 let spaces = possible_space_count;
                 let substring = &WS[N_NEWLINES - newlines..N_NEWLINES + spaces];
                 return Some(Repr::Static(substring));
@@ -71,8 +69,14 @@ impl Repr {
             (Self::Heap(l0), Self::Heap(r0)) => Arc::ptr_eq(l0, r0),
             (Self::Static(l0), Self::Static(r0)) => core::ptr::eq(l0, r0),
             (
-                Self::Inline { len: l_len, buf: l_buf },
-                Self::Inline { len: r_len, buf: r_buf },
+                Self::Inline {
+                    len: l_len,
+                    buf: l_buf,
+                },
+                Self::Inline {
+                    len: r_len,
+                    buf: r_buf,
+                },
             ) => l_len == r_len && l_buf == r_buf,
             _ => false,
         }

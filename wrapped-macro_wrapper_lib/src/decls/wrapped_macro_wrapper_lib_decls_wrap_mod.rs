@@ -8,11 +8,8 @@ pub fn wrap_mod(
     let item_mod: ItemMod = parse_macro_input!(item_ts as ItemMod);
     let mut output_tokens = TokenStream::new();
     if is_public(&item_mod.vis) {
-        let hook_macro_def = generate_item_hook_macro(
-            "mod",
-            &Item::Mod(item_mod.clone()),
-            Some(&item_mod.ident),
-        );
+        let hook_macro_def =
+            generate_item_hook_macro("mod", &Item::Mod(item_mod.clone()), Some(&item_mod.ident));
         output_tokens.extend(hook_macro_def);
     }
     output_tokens.extend(item_mod.to_token_stream());

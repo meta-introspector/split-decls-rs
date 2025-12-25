@@ -5,5 +5,7 @@ pub fn probe_for_binary(path: Utf8PathBuf) -> Option<Utf8PathBuf> {
         "" => None,
         it => Some(path.with_extension(it)),
     };
-    iter::once(path).chain(with_extension).find(|it| it.is_file())
+    iter::once(path)
+        .chain(with_extension)
+        .find(|it| it.is_file())
 }

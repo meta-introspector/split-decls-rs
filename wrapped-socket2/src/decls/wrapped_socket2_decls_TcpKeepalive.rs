@@ -10,32 +10,24 @@ pub struct TcpKeepalive {
         allow(dead_code)
     )]
     time: Option<Duration>,
-    #[cfg(
-        not(
-            any(
-                target_os = "openbsd",
-                target_os = "redox",
-                target_os = "solaris",
-                target_os = "nto",
-                target_os = "espidf",
-                target_os = "vita",
-                target_os = "haiku",
-            )
-        )
-    )]
+    #[cfg(not(any(
+        target_os = "openbsd",
+        target_os = "redox",
+        target_os = "solaris",
+        target_os = "nto",
+        target_os = "espidf",
+        target_os = "vita",
+        target_os = "haiku",
+    )))]
     interval: Option<Duration>,
-    #[cfg(
-        not(
-            any(
-                target_os = "openbsd",
-                target_os = "redox",
-                target_os = "solaris",
-                target_os = "nto",
-                target_os = "espidf",
-                target_os = "vita",
-                target_os = "haiku",
-            )
-        )
-    )]
+    #[cfg(not(any(
+        target_os = "openbsd",
+        target_os = "redox",
+        target_os = "solaris",
+        target_os = "nto",
+        target_os = "espidf",
+        target_os = "vita",
+        target_os = "haiku",
+    )))]
     retries: Option<u32>,
 }

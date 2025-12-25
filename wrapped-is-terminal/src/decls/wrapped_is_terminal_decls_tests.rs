@@ -7,40 +7,58 @@ mod tests {
     #[test]
     #[cfg(windows)]
     fn stdin() {
-        assert_eq!(atty::is(atty::Stream::Stdin), std::io::stdin().is_terminal())
+        assert_eq!(
+            atty::is(atty::Stream::Stdin),
+            std::io::stdin().is_terminal()
+        )
     }
     #[test]
     #[cfg(windows)]
     fn stdout() {
-        assert_eq!(atty::is(atty::Stream::Stdout), std::io::stdout().is_terminal())
+        assert_eq!(
+            atty::is(atty::Stream::Stdout),
+            std::io::stdout().is_terminal()
+        )
     }
     #[test]
     #[cfg(windows)]
     fn stderr() {
-        assert_eq!(atty::is(atty::Stream::Stderr), std::io::stderr().is_terminal())
+        assert_eq!(
+            atty::is(atty::Stream::Stderr),
+            std::io::stderr().is_terminal()
+        )
     }
     #[test]
     #[cfg(any(unix, target_os = "wasi"))]
     fn stdin() {
-        assert_eq!(atty::is(atty::Stream::Stdin), rustix::stdio::stdin().is_terminal())
+        assert_eq!(
+            atty::is(atty::Stream::Stdin),
+            rustix::stdio::stdin().is_terminal()
+        )
     }
     #[test]
     #[cfg(any(unix, target_os = "wasi"))]
     fn stdout() {
-        assert_eq!(atty::is(atty::Stream::Stdout), rustix::stdio::stdout().is_terminal())
+        assert_eq!(
+            atty::is(atty::Stream::Stdout),
+            rustix::stdio::stdout().is_terminal()
+        )
     }
     #[test]
     #[cfg(any(unix, target_os = "wasi"))]
     fn stderr() {
-        assert_eq!(atty::is(atty::Stream::Stderr), rustix::stdio::stderr().is_terminal())
+        assert_eq!(
+            atty::is(atty::Stream::Stderr),
+            rustix::stdio::stderr().is_terminal()
+        )
     }
     #[test]
     #[cfg(any(unix, target_os = "wasi"))]
     fn stdin_vs_libc() {
         unsafe {
             assert_eq!(
-                libc::isatty(libc::STDIN_FILENO) != 0, rustix::stdio::stdin()
-                .is_terminal()
+                libc::isatty(libc::STDIN_FILENO) != 0,
+                rustix::stdio::stdin().is_terminal()
             )
         }
     }
@@ -49,8 +67,8 @@ mod tests {
     fn stdout_vs_libc() {
         unsafe {
             assert_eq!(
-                libc::isatty(libc::STDOUT_FILENO) != 0, rustix::stdio::stdout()
-                .is_terminal()
+                libc::isatty(libc::STDOUT_FILENO) != 0,
+                rustix::stdio::stdout().is_terminal()
             )
         }
     }
@@ -59,8 +77,8 @@ mod tests {
     fn stderr_vs_libc() {
         unsafe {
             assert_eq!(
-                libc::isatty(libc::STDERR_FILENO) != 0, rustix::stdio::stderr()
-                .is_terminal()
+                libc::isatty(libc::STDERR_FILENO) != 0,
+                rustix::stdio::stderr().is_terminal()
             )
         }
     }
@@ -73,6 +91,6 @@ mod tests {
         let file_path = dir.path().join("ten_chars_".repeat(25));
         assert!(file_path.to_string_lossy().len() > MAX_PATH as usize);
         let file = File::create(file_path).expect("Unable to create file");
-        assert!(! unsafe { crate ::msys_tty_on(file.as_raw_handle()) });
+        assert!(!unsafe { crate::msys_tty_on(file.as_raw_handle()) });
     }
 }

@@ -18,7 +18,8 @@ impl Default for TargetDataLayout {
             f128_align: align(128),
             aggregate_align: align(8),
             vector_align: vec![
-                (Size::from_bits(64), align(64)), (Size::from_bits(128), align(128)),
+                (Size::from_bits(64), align(64)),
+                (Size::from_bits(128), align(128)),
             ],
             default_address_space: AddressSpace::ZERO,
             default_address_space_pointer_spec: PointerSpec {

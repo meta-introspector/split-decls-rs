@@ -7,7 +7,7 @@ pub fn create_session_globals_then<R>(
     f: impl FnOnce() -> R,
 ) -> R {
     assert!(
-        ! SESSION_GLOBALS.is_set(),
+        !SESSION_GLOBALS.is_set(),
         "SESSION_GLOBALS should never be overwritten! \
          Use another thread if you need another SessionGlobals"
     );

@@ -366,9 +366,7 @@ pub trait Arbitrary<'a>: Sized {
     /// }
     /// ```
     #[inline]
-    fn try_size_hint(
-        depth: usize,
-    ) -> Result<(usize, Option<usize>), MaxRecursionReached> {
+    fn try_size_hint(depth: usize) -> Result<(usize, Option<usize>), MaxRecursionReached> {
         Ok(Self::size_hint(depth))
     }
 }

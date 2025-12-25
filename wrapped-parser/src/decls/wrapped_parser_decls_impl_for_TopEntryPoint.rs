@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl TopEntryPoint {
     pub fn parse(&self, input: &Input, edition: Edition) -> Output {
-        let _p = tracing::info_span!("TopEntryPoint::parse", ? self).entered();
+        let _p = tracing::info_span!("TopEntryPoint::parse", ?self).entered();
         let entry_point: fn(&'_ mut parser::Parser<'_>) = match self {
             TopEntryPoint::SourceFile => grammar::entry::top::source_file,
             TopEntryPoint::MacroStmts => grammar::entry::top::macro_stmts,
@@ -25,13 +25,15 @@ impl TopEntryPoint {
                 match step {
                     Step::Enter { .. } => depth += 1,
                     Step::Exit => depth -= 1,
-                    Step::FloatSplit { ends_in_dot: has_pseudo_dot } => {
+                    Step::FloatSplit {
+                        ends_in_dot: has_pseudo_dot,
+                    } => {
                         depth -= 1 + !has_pseudo_dot as usize;
                     }
                     Step::Token { .. } | Step::Error { .. } => {}
                 }
             }
-            assert!(! first, "no tree at all");
+            assert!(!first, "no tree at all");
             assert_eq!(depth, 0, "unbalanced tree");
         }
         res

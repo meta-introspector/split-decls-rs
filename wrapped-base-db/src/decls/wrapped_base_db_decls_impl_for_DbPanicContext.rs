@@ -5,22 +5,20 @@ impl DbPanicContext {
         #[expect(clippy::print_stderr, reason = "already panicking anyway")]
         fn set_hook() {
             let default_hook = panic::take_hook();
-            panic::set_hook(
-                Box::new(move |panic_info| {
-                    default_hook(panic_info);
-                    if let Some(backtrace) = salsa::Backtrace::capture() {
-                        eprintln!("{backtrace:#}");
-                    }
-                    DbPanicContext::with_ctx(|ctx| {
-                        if !ctx.is_empty() {
-                            eprintln!("additional context:");
-                            for (idx, frame) in ctx.iter().enumerate() {
-                                eprintln!("{idx:>4}: {frame}\n");
-                            }
+            panic::set_hook(Box::new(move |panic_info| {
+                default_hook(panic_info);
+                if let Some(backtrace) = salsa::Backtrace::capture() {
+                    eprintln!("{backtrace:#}");
+                }
+                DbPanicContext::with_ctx(|ctx| {
+                    if !ctx.is_empty() {
+                        eprintln!("additional context:");
+                        for (idx, frame) in ctx.iter().enumerate() {
+                            eprintln!("{idx:>4}: {frame}\n");
                         }
-                    });
-                }),
-            );
+                    }
+                });
+            }));
         }
         static SET_HOOK: Once = Once::new();
         SET_HOOK.call_once(set_hook);

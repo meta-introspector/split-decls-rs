@@ -2,8 +2,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod testoibits {
-    use std::panic::{RefUnwindSafe, UnwindSafe};
     use super::*;
+    use std::panic::{RefUnwindSafe, UnwindSafe};
     fn assert_all<T: Send + Sync + UnwindSafe + RefUnwindSafe>() {}
     #[test]
     fn oibits_main() {

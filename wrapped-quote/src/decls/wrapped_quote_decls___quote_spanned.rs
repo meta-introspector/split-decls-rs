@@ -2,7 +2,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(not(doc))]
 __quote_spanned![
-    #[macro_export] macro_rules! quote_spanned { ($span : expr =>) => { { let _ :
+    #[macro_export]
+    macro_rules! quote_spanned { ($span : expr =>) => { { let _ :
     $crate::__private::Span = $crate::__private::get_span($span).__into_span();
     $crate::__private::TokenStream::new() } }; ($span : expr => $tt : tt) => { { let mut
     _s = $crate::__private::TokenStream::new(); let _span : $crate::__private::Span =

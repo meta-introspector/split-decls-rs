@@ -9,6 +9,9 @@ use std::collections::HashMap;
 /// [runtime-block-on]: https://docs.rs/tokio/1.3.0/tokio/runtime/struct.Runtime.html#method.block_on
 pub fn block_on<F: std::future::Future>(future: F) -> F::Output {
     use tokio::runtime;
-    let rt = runtime::Builder::new_current_thread().enable_all().build().unwrap();
+    let rt = runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .unwrap();
     rt.block_on(future)
 }

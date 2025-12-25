@@ -48,7 +48,9 @@ impl Rand32 {
     /// Produces a random `u32` in the range `[0, u32::MAX]`.
     pub fn rand_u32(&mut self) -> u32 {
         let oldstate: u64 = self.state;
-        self.state = oldstate.wrapping_mul(Self::MULTIPLIER).wrapping_add(self.inc);
+        self.state = oldstate
+            .wrapping_mul(Self::MULTIPLIER)
+            .wrapping_add(self.inc);
         let xorshifted: u32 = (((oldstate >> 18) ^ oldstate) >> 27) as u32;
         let rot: u32 = (oldstate >> 59) as u32;
         xorshifted.rotate_right(rot)

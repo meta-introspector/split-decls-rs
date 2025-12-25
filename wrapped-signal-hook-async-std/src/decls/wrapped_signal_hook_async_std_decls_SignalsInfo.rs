@@ -4,6 +4,4 @@ use std::collections::HashMap;
 ///
 /// The stream doesn't return the signals in the order they were recieved by
 /// the process and may merge signals received multiple times.
-pub struct SignalsInfo<E: Exfiltrator = SignalOnly>(
-    OwningSignalIterator<Async<UnixStream>, E>,
-);
+pub struct SignalsInfo<E: Exfiltrator = SignalOnly>(OwningSignalIterator<Async<UnixStream>, E>);

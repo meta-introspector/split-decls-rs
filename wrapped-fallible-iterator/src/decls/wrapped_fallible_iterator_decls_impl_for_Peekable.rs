@@ -16,10 +16,7 @@ where
     ///
     /// If func returns true for the next value of this iterator, consume and return it. Otherwise, return None.
     #[inline]
-    pub fn next_if(
-        &mut self,
-        f: impl Fn(&I::Item) -> bool,
-    ) -> Result<Option<I::Item>, I::Error> {
+    pub fn next_if(&mut self, f: impl Fn(&I::Item) -> bool) -> Result<Option<I::Item>, I::Error> {
         match self.peek()? {
             Some(item) if f(item) => self.next(),
             _ => Ok(None),

@@ -32,7 +32,11 @@ impl ModuleId {
             .children
             .iter()
             .find_map(|(name, module_id)| {
-                if *module_id == self.local_id { Some(name.clone()) } else { None }
+                if *module_id == self.local_id {
+                    Some(name.clone())
+                } else {
+                    None
+                }
             })
     }
     /// Returns the module containing `self`, either the parent `mod`, or the module (or block) containing
@@ -52,18 +56,14 @@ impl ModuleId {
     /// Returns the [`CrateRootModuleId`] for this module if it is the crate root module.
     pub fn as_crate_root(&self) -> Option<CrateRootModuleId> {
         if self.local_id == DefMap::ROOT && self.block.is_none() {
-            Some(CrateRootModuleId {
-                krate: self.krate,
-            })
+            Some(CrateRootModuleId { krate: self.krate })
         } else {
             None
         }
     }
     /// Returns the [`CrateRootModuleId`] for this module.
     pub fn derive_crate_root(&self) -> CrateRootModuleId {
-        CrateRootModuleId {
-            krate: self.krate,
-        }
+        CrateRootModuleId { krate: self.krate }
     }
     /// Whether this module represents the crate root module
     pub fn is_crate_root(&self) -> bool {

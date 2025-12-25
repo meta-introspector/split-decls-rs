@@ -16,21 +16,19 @@ fn compress_parents_parallel(
     for parent in &mut parents_exact {
         parents_array.push(array_ref!(parent, 0, BLOCK_LEN));
     }
-    platform
-        .hash_many(
-            &parents_array,
-            key,
-            0,
-            IncrementCounter::No,
-            flags | PARENT,
-            0,
-            0,
-            out,
-        );
+    platform.hash_many(
+        &parents_array,
+        key,
+        0,
+        IncrementCounter::No,
+        flags | PARENT,
+        0,
+        0,
+        out,
+    );
     let parents_so_far = parents_array.len();
     if !parents_exact.remainder().is_empty() {
-        out[parents_so_far * OUT_LEN..][..OUT_LEN]
-            .copy_from_slice(parents_exact.remainder());
+        out[parents_so_far * OUT_LEN..][..OUT_LEN].copy_from_slice(parents_exact.remainder());
         parents_so_far + 1
     } else {
         parents_so_far

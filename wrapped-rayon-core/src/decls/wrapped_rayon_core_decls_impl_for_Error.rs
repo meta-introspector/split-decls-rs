@@ -11,8 +11,7 @@ impl Error for ThreadPoolBuildError {
     }
     fn source(&self) -> Option<&(dyn Error + 'static)> {
         match &self.kind {
-            ErrorKind::GlobalPoolAlreadyInitialized
-            | ErrorKind::CurrentThreadAlreadyInPool => None,
+            ErrorKind::GlobalPoolAlreadyInitialized | ErrorKind::CurrentThreadAlreadyInPool => None,
             ErrorKind::IOError(e) => Some(e),
         }
     }

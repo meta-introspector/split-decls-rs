@@ -3,8 +3,7 @@ use std::collections::HashMap;
 #[cfg(target_os = "macos")]
 mod macos {
     use cargo_credential::{
-        Action, CacheControl, Credential, CredentialResponse, Error, RegistryInfo,
-        read_token,
+        read_token, Action, CacheControl, Credential, CredentialResponse, Error, RegistryInfo,
     };
     use security_framework::os::macos::keychain::SecKeychain;
     pub struct MacKeychain;
@@ -25,21 +24,18 @@ mod macos {
             let service_name = registry(reg.index_url);
             let not_found = security_framework::base::Error::from(NOT_FOUND).code();
             match action {
-                Action::Get(_) => {
-                    match keychain.find_generic_password(&service_name, ACCOUNT) {
-                        Err(e) if e.code() == not_found => Err(Error::NotFound),
-                        Err(e) => Err(Box::new(e).into()),
-                        Ok((pass, _)) => {
-                            let token = String::from_utf8(pass.as_ref().to_vec())
-                                .map_err(Box::new)?;
-                            Ok(CredentialResponse::Get {
-                                token: token.into(),
-                                cache: CacheControl::Session,
-                                operation_independent: true,
-                            })
-                        }
+                Action::Get(_) => match keychain.find_generic_password(&service_name, ACCOUNT) {
+                    Err(e) if e.code() == not_found => Err(Error::NotFound),
+                    Err(e) => Err(Box::new(e).into()),
+                    Ok((pass, _)) => {
+                        let token = String::from_utf8(pass.as_ref().to_vec()).map_err(Box::new)?;
+                        Ok(CredentialResponse::Get {
+                            token: token.into(),
+                            cache: CacheControl::Session,
+                            operation_independent: true,
+                        })
                     }
-                }
+                },
                 Action::Login(options) => {
                     let token = read_token(options, reg)?;
                     match keychain.find_generic_password(&service_name, ACCOUNT) {
@@ -61,16 +57,14 @@ mod macos {
                     }
                     Ok(CredentialResponse::Login)
                 }
-                Action::Logout => {
-                    match keychain.find_generic_password(&service_name, ACCOUNT) {
-                        Err(e) if e.code() == not_found => Err(Error::NotFound),
-                        Err(e) => Err(Box::new(e).into()),
-                        Ok((_, item)) => {
-                            item.delete();
-                            Ok(CredentialResponse::Logout)
-                        }
+                Action::Logout => match keychain.find_generic_password(&service_name, ACCOUNT) {
+                    Err(e) if e.code() == not_found => Err(Error::NotFound),
+                    Err(e) => Err(Box::new(e).into()),
+                    Ok((_, item)) => {
+                        item.delete();
+                        Ok(CredentialResponse::Logout)
                     }
-                }
+                },
                 _ => Err(Error::OperationNotSupported),
             }
         }

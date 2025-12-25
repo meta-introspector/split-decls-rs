@@ -4,10 +4,7 @@ use std::collections::HashMap;
 /// the case where a substring of the suggestion is "sandwiched" in the original, like
 /// `BB` is. Return the length of the prefix, the "trimmed" suggestion, and the length
 /// of the suffix.
-fn as_substr<'a>(
-    original: &'a str,
-    suggestion: &'a str,
-) -> Option<(usize, &'a str, usize)> {
+fn as_substr<'a>(original: &'a str, suggestion: &'a str) -> Option<(usize, &'a str, usize)> {
     let common_prefix = original
         .chars()
         .zip(suggestion.chars())

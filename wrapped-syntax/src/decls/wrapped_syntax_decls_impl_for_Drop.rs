@@ -6,9 +6,8 @@ impl<T> Drop for Parse<T> {
         let Some(green) = self.green.take() else {
             return;
         };
-        static PARSE_DROP_THREAD: std::sync::OnceLock<
-            std::sync::mpsc::Sender<GreenNode>,
-        > = std::sync::OnceLock::new();
+        static PARSE_DROP_THREAD: std::sync::OnceLock<std::sync::mpsc::Sender<GreenNode>> =
+            std::sync::OnceLock::new();
         PARSE_DROP_THREAD
             .get_or_init(|| {
                 let (sender, receiver) = std::sync::mpsc::channel::<GreenNode>();

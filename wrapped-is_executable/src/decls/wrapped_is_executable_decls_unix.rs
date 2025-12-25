@@ -2,9 +2,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(unix)]
 mod unix {
+    use super::IsExecutable;
     use std::os::unix::fs::PermissionsExt;
     use std::path::Path;
-    use super::IsExecutable;
     impl IsExecutable for Path {
         fn is_executable(&self) -> bool {
             let metadata = match self.metadata() {

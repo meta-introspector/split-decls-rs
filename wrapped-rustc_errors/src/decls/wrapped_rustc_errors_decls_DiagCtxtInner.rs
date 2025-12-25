@@ -42,10 +42,8 @@ struct DiagCtxtInner {
     /// add more information). All stashed diagnostics must be emitted with
     /// `emit_stashed_diagnostics` by the time the `DiagCtxtInner` is dropped,
     /// otherwise an assertion failure will occur.
-    stashed_diagnostics: FxIndexMap<
-        StashKey,
-        FxIndexMap<Span, (DiagInner, Option<ErrorGuaranteed>)>,
-    >,
+    stashed_diagnostics:
+        FxIndexMap<StashKey, FxIndexMap<Span, (DiagInner, Option<ErrorGuaranteed>)>>,
     future_breakage_diagnostics: Vec<DiagInner>,
     /// expected diagnostic will have the level `Expect` which additionally
     /// carries the [`LintExpectationId`] of the expectation that can be

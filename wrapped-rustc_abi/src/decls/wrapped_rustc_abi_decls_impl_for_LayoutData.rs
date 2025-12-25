@@ -32,7 +32,8 @@ impl<FieldIdx: Idx, VariantIdx: Idx> LayoutData<FieldIdx, VariantIdx> {
     /// aggregates are passed via `PassMode::Indirect` or `PassMode::Cast`; more strict
     /// checks would otherwise be required.
     pub fn eq_abi(&self, other: &Self) -> bool {
-        self.size == other.size && self.is_sized() == other.is_sized()
+        self.size == other.size
+            && self.is_sized() == other.is_sized()
             && self.backend_repr.eq_up_to_validity(&other.backend_repr)
             && self.backend_repr.is_bool() == other.backend_repr.is_bool()
             && self.align.abi == other.align.abi

@@ -13,30 +13,27 @@ pub fn diff<'a>(text1: &'a str, text2: &'a str) -> Vec<Chunk<'a>> {
     let mut pos1 = 0;
     let mut pos2 = 0;
     for diff in solution.diffs {
-        chunks
-            .push(
-                match diff {
-                    Diff::Equal(range, _) => {
-                        let len = range.len_bytes();
-                        let chunk = Chunk::Equal(&text1[pos1..pos1 + len]);
-                        pos1 += len;
-                        pos2 += len;
-                        chunk
-                    }
-                    Diff::Delete(range) => {
-                        let len = range.len_bytes();
-                        let chunk = Chunk::Delete(&text1[pos1..pos1 + len]);
-                        pos1 += len;
-                        chunk
-                    }
-                    Diff::Insert(range) => {
-                        let len = range.len_bytes();
-                        let chunk = Chunk::Insert(&text2[pos2..pos2 + len]);
-                        pos2 += len;
-                        chunk
-                    }
-                },
-            );
+        chunks.push(match diff {
+            Diff::Equal(range, _) => {
+                let len = range.len_bytes();
+                let chunk = Chunk::Equal(&text1[pos1..pos1 + len]);
+                pos1 += len;
+                pos2 += len;
+                chunk
+            }
+            Diff::Delete(range) => {
+                let len = range.len_bytes();
+                let chunk = Chunk::Delete(&text1[pos1..pos1 + len]);
+                pos1 += len;
+                chunk
+            }
+            Diff::Insert(range) => {
+                let len = range.len_bytes();
+                let chunk = Chunk::Insert(&text2[pos2..pos2 + len]);
+                pos2 += len;
+                chunk
+            }
+        });
     }
     chunks
 }

@@ -7,5 +7,8 @@ fn test_extract_tags() {
         .into_iter()
         .map(|(range, attr)| (&text[range], attr))
         .collect::<Vec<_>>();
-    assert_eq!(actual, vec![("fn main() {}", Some("fn".into())), ("main", None),]);
+    assert_eq!(
+        actual,
+        vec![("fn main() {}", Some("fn".into())), ("main", None),]
+    );
 }

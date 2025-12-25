@@ -7,6 +7,4 @@ use std::collections::HashMap;
 ///      us(840) ansi-X9-62(10045) signatures(4) ecdsa-with-SHA2(3) 1 }
 /// ```
 #[cfg(feature = "digest")]
-pub const ECDSA_SHA224_OID: ObjectIdentifier = ObjectIdentifier::new_unwrap(
-    "1.2.840.10045.4.3.1",
-);
+pub const ECDSA_SHA224_OID: ObjectIdentifier = ObjectIdentifier::new_unwrap("1.2.840.10045.4.3.1");

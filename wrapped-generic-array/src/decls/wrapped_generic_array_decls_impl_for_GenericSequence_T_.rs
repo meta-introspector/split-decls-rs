@@ -15,12 +15,10 @@ where
             let mut array = MaybeUninit::<GenericArray<T, N>>::uninit();
             let mut builder = IntrusiveArrayBuilder::new_alt(&mut array);
             let (builder_iter, position) = builder.iter_position();
-            builder_iter
-                .enumerate()
-                .for_each(|(i, dst)| {
-                    dst.write(f(i));
-                    *position += 1;
-                });
+            builder_iter.enumerate().for_each(|(i, dst)| {
+                dst.write(f(i));
+                *position += 1;
+            });
             builder.finish_and_assume_init()
         }
     }
@@ -31,10 +29,8 @@ where
         mut f: F,
     ) -> MappedSequence<GenericArray<B, Self::Length>, B, U>
     where
-        GenericArray<
-            B,
-            Self::Length,
-        >: GenericSequence<B, Length = Self::Length> + MappedGenericSequence<B, U>,
+        GenericArray<B, Self::Length>:
+            GenericSequence<B, Length = Self::Length> + MappedGenericSequence<B, U>,
         Self: MappedGenericSequence<T, U>,
         F: FnMut(B, Self::Item) -> U,
     {
@@ -46,23 +42,18 @@ where
                 let mut right = IntrusiveArrayConsumer::new(&mut right);
                 let (left_array_iter, left_position) = left.iter_position();
                 let (right_array_iter, right_position) = right.iter_position();
-                FromIterator::from_iter(
-                    left_array_iter
-                        .zip(right_array_iter)
-                        .map(|(l, r)| {
-                            let left_value = ptr::read(l);
-                            let right_value = ptr::read(r);
-                            *left_position += 1;
-                            *right_position = *left_position;
-                            f(left_value, right_value)
-                        }),
-                )
+                FromIterator::from_iter(left_array_iter.zip(right_array_iter).map(|(l, r)| {
+                    let left_value = ptr::read(l);
+                    let right_value = ptr::read(r);
+                    *left_position += 1;
+                    *right_position = *left_position;
+                    f(left_value, right_value)
+                }))
             } else {
                 FromIterator::from_iter(
-                    left
-                        .iter()
+                    left.iter()
                         .zip(right.iter())
-                        .map(|(l, r)| { f(ptr::read(l), ptr::read(r)) }),
+                        .map(|(l, r)| f(ptr::read(l), ptr::read(r))),
                 )
             }
         }
@@ -79,22 +70,18 @@ where
                 let mut right = ManuallyDrop::new(self);
                 let mut right = IntrusiveArrayConsumer::new(&mut right);
                 let (right_array_iter, right_position) = right.iter_position();
-                FromIterator::from_iter(
-                    right_array_iter
-                        .zip(lhs)
-                        .map(|(r, left_value)| {
-                            let right_value = ptr::read(r);
-                            *right_position += 1;
-                            f(left_value, right_value)
-                        }),
-                )
+                FromIterator::from_iter(right_array_iter.zip(lhs).map(|(r, left_value)| {
+                    let right_value = ptr::read(r);
+                    *right_position += 1;
+                    f(left_value, right_value)
+                }))
             } else {
                 let right = ManuallyDrop::new(self);
                 FromIterator::from_iter(
                     right
                         .iter()
                         .zip(lhs)
-                        .map(|(r, left_value)| { f(left_value, ptr::read(r)) }),
+                        .map(|(r, left_value)| f(left_value, ptr::read(r))),
                 )
             }
         }

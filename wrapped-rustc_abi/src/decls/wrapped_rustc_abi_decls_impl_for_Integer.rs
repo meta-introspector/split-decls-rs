@@ -43,15 +43,13 @@ impl Integer {
     pub fn align<C: HasDataLayout>(self, cx: &C) -> AbiAlign {
         use Integer::*;
         let dl = cx.data_layout();
-        AbiAlign::new(
-            match self {
-                I8 => dl.i8_align,
-                I16 => dl.i16_align,
-                I32 => dl.i32_align,
-                I64 => dl.i64_align,
-                I128 => dl.i128_align,
-            },
-        )
+        AbiAlign::new(match self {
+            I8 => dl.i8_align,
+            I16 => dl.i16_align,
+            I32 => dl.i32_align,
+            I64 => dl.i64_align,
+            I128 => dl.i128_align,
+        })
     }
     /// Returns the largest signed value that can be represented by this Integer.
     #[inline]
@@ -105,21 +103,16 @@ impl Integer {
     pub fn for_align<C: HasDataLayout>(cx: &C, wanted: Align) -> Option<Integer> {
         use Integer::*;
         let dl = cx.data_layout();
-        [I8, I16, I32, I64, I128]
-            .into_iter()
-            .find(|&candidate| {
-                wanted == candidate.align(dl).abi
-                    && wanted.bytes() == candidate.size().bytes()
-            })
+        [I8, I16, I32, I64, I128].into_iter().find(|&candidate| {
+            wanted == candidate.align(dl).abi && wanted.bytes() == candidate.size().bytes()
+        })
     }
     /// Find the largest integer with the given alignment or less.
     pub fn approximate_align<C: HasDataLayout>(cx: &C, wanted: Align) -> Integer {
         use Integer::*;
         let dl = cx.data_layout();
         for candidate in [I64, I32, I16] {
-            if wanted >= candidate.align(dl).abi
-                && wanted.bytes() >= candidate.size().bytes()
-            {
+            if wanted >= candidate.align(dl).abi && wanted.bytes() >= candidate.size().bytes() {
                 return candidate;
             }
         }
@@ -133,7 +126,10 @@ impl Integer {
             32 => Ok(Integer::I32),
             64 => Ok(Integer::I64),
             128 => Ok(Integer::I128),
-            _ => Err(format!("rust does not support integers with {} bits", size.bits())),
+            _ => Err(format!(
+                "rust does not support integers with {} bits",
+                size.bits()
+            )),
         }
     }
 }

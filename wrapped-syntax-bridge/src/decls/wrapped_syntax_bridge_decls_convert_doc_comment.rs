@@ -6,8 +6,12 @@ fn convert_doc_comment<S: Copy>(
     mode: DocCommentDesugarMode,
     builder: &mut tt::TopSubtreeBuilder<S>,
 ) {
-    let Some(comment) = ast::Comment::cast(token.clone()) else { return };
-    let Some(doc) = comment.kind().doc else { return };
+    let Some(comment) = ast::Comment::cast(token.clone()) else {
+        return;
+    };
+    let Some(doc) = comment.kind().doc else {
+        return;
+    };
     let mk_ident = |s: &str| {
         tt::Leaf::from(tt::Ident {
             sym: Symbol::intern(s),
@@ -15,11 +19,13 @@ fn convert_doc_comment<S: Copy>(
             is_raw: tt::IdentIsRaw::No,
         })
     };
-    let mk_punct = |c: char| tt::Leaf::from(tt::Punct {
-        char: c,
-        spacing: tt::Spacing::Alone,
-        span,
-    });
+    let mk_punct = |c: char| {
+        tt::Leaf::from(tt::Punct {
+            char: c,
+            spacing: tt::Spacing::Alone,
+            span,
+        })
+    };
     let mk_doc_literal = |comment: &ast::Comment| {
         let prefix_len = comment.prefix().len();
         let mut text = &comment.text()[prefix_len..];

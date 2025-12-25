@@ -14,11 +14,11 @@ fn seek() {
         Right(io::Cursor::new(&mockdata[..]))
     };
     let mut buf = [0u8; 16];
-    assert_eq!(reader.read(& mut buf).unwrap(), buf.len());
+    assert_eq!(reader.read(&mut buf).unwrap(), buf.len());
     assert_eq!(buf, mockdata[..buf.len()]);
-    assert_eq!(reader.read(& mut buf).unwrap(), buf.len());
+    assert_eq!(reader.read(&mut buf).unwrap(), buf.len());
     assert_ne!(buf, mockdata[..buf.len()]);
     reader.seek(io::SeekFrom::Start(0)).unwrap();
-    assert_eq!(reader.read(& mut buf).unwrap(), buf.len());
+    assert_eq!(reader.read(&mut buf).unwrap(), buf.len());
     assert_eq!(buf, mockdata[..buf.len()]);
 }

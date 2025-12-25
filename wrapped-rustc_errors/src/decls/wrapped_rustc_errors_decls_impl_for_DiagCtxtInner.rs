@@ -30,9 +30,7 @@ impl DiagCtxtInner {
     fn emit_stashed_diagnostics(&mut self) -> Option<ErrorGuaranteed> {
         let mut guar = None;
         let has_errors = !self.err_guars.is_empty();
-        for (_, stashed_diagnostics) in std::mem::take(&mut self.stashed_diagnostics)
-            .into_iter()
-        {
+        for (_, stashed_diagnostics) in std::mem::take(&mut self.stashed_diagnostics).into_iter() {
             for (_, (diag, _guar)) in stashed_diagnostics {
                 if !diag.is_error() {
                     if !diag.is_force_warn() && has_errors {
@@ -51,7 +49,8 @@ impl DiagCtxtInner {
     ) -> Option<ErrorGuaranteed> {
         if diagnostic.has_future_breakage() {
             assert_matches!(
-                diagnostic.level, Error | ForceWarning | Warning | Allow | Expect
+                diagnostic.level,
+                Error | ForceWarning | Warning | Allow | Expect
             );
             self.future_breakage_diagnostics.push(diagnostic.clone());
         }
@@ -76,11 +75,10 @@ impl DiagCtxtInner {
                         let backtrace = std::backtrace::Backtrace::capture();
                         #[allow(deprecated)]
                         let guar = ErrorGuaranteed::unchecked_error_guaranteed();
-                        self.delayed_bugs
-                            .push((
-                                DelayedDiagInner::with_backtrace(diagnostic, backtrace),
-                                guar,
-                            ));
+                        self.delayed_bugs.push((
+                            DelayedDiagInner::with_backtrace(diagnostic, backtrace),
+                            guar,
+                        ));
                         Some(guar)
                     };
                 }
@@ -104,7 +102,8 @@ impl DiagCtxtInner {
                 return None;
             }
             Expect | ForceWarning => {
-                self.fulfilled_expectations.insert(diagnostic.lint_id.unwrap());
+                self.fulfilled_expectations
+                    .insert(diagnostic.lint_id.unwrap());
                 if let Expect = diagnostic.level {
                     TRACK_DIAGNOSTIC(diagnostic, &mut |_| None);
                     self.suppressed_expected_diag = true;
@@ -112,70 +111,67 @@ impl DiagCtxtInner {
                 }
             }
         }
-        TRACK_DIAGNOSTIC(
-            diagnostic,
-            &mut |mut diagnostic| {
-                if let Some(code) = diagnostic.code {
-                    self.emitted_diagnostic_codes.insert(code);
-                }
-                let already_emitted = {
+        TRACK_DIAGNOSTIC(diagnostic, &mut |mut diagnostic| {
+            if let Some(code) = diagnostic.code {
+                self.emitted_diagnostic_codes.insert(code);
+            }
+            let already_emitted = {
+                let mut hasher = StableHasher::new();
+                diagnostic.hash(&mut hasher);
+                let diagnostic_hash = hasher.finish();
+                !self.emitted_diagnostics.insert(diagnostic_hash)
+            };
+            let is_error = diagnostic.is_error();
+            let is_lint = diagnostic.is_lint.is_some();
+            if !(self.flags.deduplicate_diagnostics && already_emitted) {
+                debug!(?diagnostic);
+                debug!(? self.emitted_diagnostics);
+                let not_yet_emitted = |sub: &mut Subdiag| {
+                    debug!(?sub);
+                    if sub.level != OnceNote && sub.level != OnceHelp {
+                        return true;
+                    }
                     let mut hasher = StableHasher::new();
-                    diagnostic.hash(&mut hasher);
+                    sub.hash(&mut hasher);
                     let diagnostic_hash = hasher.finish();
-                    !self.emitted_diagnostics.insert(diagnostic_hash)
+                    debug!(?diagnostic_hash);
+                    self.emitted_diagnostics.insert(diagnostic_hash)
                 };
-                let is_error = diagnostic.is_error();
-                let is_lint = diagnostic.is_lint.is_some();
-                if !(self.flags.deduplicate_diagnostics && already_emitted) {
-                    debug!(? diagnostic);
-                    debug!(? self.emitted_diagnostics);
-                    let not_yet_emitted = |sub: &mut Subdiag| {
-                        debug!(? sub);
-                        if sub.level != OnceNote && sub.level != OnceHelp {
-                            return true;
-                        }
-                        let mut hasher = StableHasher::new();
-                        sub.hash(&mut hasher);
-                        let diagnostic_hash = hasher.finish();
-                        debug!(? diagnostic_hash);
-                        self.emitted_diagnostics.insert(diagnostic_hash)
-                    };
-                    diagnostic.children.retain_mut(not_yet_emitted);
-                    if already_emitted {
-                        let msg = "duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`";
-                        diagnostic.sub(Note, msg, MultiSpan::new());
-                    }
-                    if is_error {
-                        self.deduplicated_err_count += 1;
-                    } else if matches!(diagnostic.level, ForceWarning | Warning) {
-                        self.deduplicated_warn_count += 1;
-                    }
-                    self.has_printed = true;
-                    self.emitter.emit_diagnostic(diagnostic, &self.registry);
+                diagnostic.children.retain_mut(not_yet_emitted);
+                if already_emitted {
+                    let msg = "duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`";
+                    diagnostic.sub(Note, msg, MultiSpan::new());
                 }
                 if is_error {
-                    if !self.delayed_bugs.is_empty() {
-                        assert_eq!(self.lint_err_guars.len() + self.err_guars.len(), 0);
-                        self.delayed_bugs.clear();
-                        self.delayed_bugs.shrink_to_fit();
-                    }
-                    #[allow(deprecated)]
-                    let guar = ErrorGuaranteed::unchecked_error_guaranteed();
-                    if is_lint {
-                        self.lint_err_guars.push(guar);
-                    } else {
-                        if let Some(taint) = taint {
-                            taint.set(Some(guar));
-                        }
-                        self.err_guars.push(guar);
-                    }
-                    self.panic_if_treat_err_as_bug();
-                    Some(guar)
-                } else {
-                    None
+                    self.deduplicated_err_count += 1;
+                } else if matches!(diagnostic.level, ForceWarning | Warning) {
+                    self.deduplicated_warn_count += 1;
                 }
-            },
-        )
+                self.has_printed = true;
+                self.emitter.emit_diagnostic(diagnostic, &self.registry);
+            }
+            if is_error {
+                if !self.delayed_bugs.is_empty() {
+                    assert_eq!(self.lint_err_guars.len() + self.err_guars.len(), 0);
+                    self.delayed_bugs.clear();
+                    self.delayed_bugs.shrink_to_fit();
+                }
+                #[allow(deprecated)]
+                let guar = ErrorGuaranteed::unchecked_error_guaranteed();
+                if is_lint {
+                    self.lint_err_guars.push(guar);
+                } else {
+                    if let Some(taint) = taint {
+                        taint.set(Some(guar));
+                    }
+                    self.err_guars.push(guar);
+                }
+                self.panic_if_treat_err_as_bug();
+                Some(guar)
+            } else {
+                None
+            }
+        })
     }
     fn treat_err_as_bug(&self) -> bool {
         self.flags
@@ -185,26 +181,21 @@ impl DiagCtxtInner {
     fn treat_next_err_as_bug(&self) -> bool {
         self.flags
             .treat_err_as_bug
-            .is_some_and(|c| {
-                self.err_guars.len() + self.lint_err_guars.len() + 1 >= c.get()
-            })
+            .is_some_and(|c| self.err_guars.len() + self.lint_err_guars.len() + 1 >= c.get())
     }
     fn has_errors_excluding_lint_errors(&self) -> Option<ErrorGuaranteed> {
-        self.err_guars
-            .get(0)
-            .copied()
-            .or_else(|| {
-                if let Some((_diag, guar)) = self
-                    .stashed_diagnostics
-                    .values()
-                    .flat_map(|stashed_diagnostics| stashed_diagnostics.values())
-                    .find(|(diag, guar)| guar.is_some() && diag.is_lint.is_none())
-                {
-                    *guar
-                } else {
-                    None
-                }
-            })
+        self.err_guars.get(0).copied().or_else(|| {
+            if let Some((_diag, guar)) = self
+                .stashed_diagnostics
+                .values()
+                .flat_map(|stashed_diagnostics| stashed_diagnostics.values())
+                .find(|(diag, guar)| guar.is_some() && diag.is_lint.is_none())
+            {
+                *guar
+            } else {
+                None
+            }
+        })
     }
     fn has_errors(&self) -> Option<ErrorGuaranteed> {
         self.err_guars
@@ -229,9 +220,7 @@ impl DiagCtxtInner {
         message: DiagMessage,
         args: impl Iterator<Item = DiagArg<'a>>,
     ) -> SubdiagMessage {
-        SubdiagMessage::Translated(
-            Cow::from(self.eagerly_translate_to_string(message, args)),
-        )
+        SubdiagMessage::Translated(Cow::from(self.eagerly_translate_to_string(message, args)))
     }
     /// Translate `message` eagerly with `args` to `String`.
     fn eagerly_translate_to_string<'a>(
@@ -267,15 +256,15 @@ impl DiagCtxtInner {
             .into_iter()
             .map(|(b, _)| b)
             .collect();
-        let backtrace = std::env::var_os("RUST_BACKTRACE").as_deref()
-            != Some(OsStr::new("0"));
+        let backtrace = std::env::var_os("RUST_BACKTRACE").as_deref() != Some(OsStr::new("0"));
         let decorate = backtrace || self.ice_file.is_none();
-        let mut out = self
-            .ice_file
-            .as_ref()
-            .and_then(|file| {
-                std::fs::File::options().create(true).append(true).open(file).ok()
-            });
+        let mut out = self.ice_file.as_ref().and_then(|file| {
+            std::fs::File::options()
+                .create(true)
+                .append(true)
+                .open(file)
+                .ok()
+        });
         let note1 = "no errors encountered even though delayed bugs were created";
         let note2 = "those delayed bugs will now be shown as internal compiler errors";
         self.emit_diagnostic(DiagInner::new(Note, note1), None);
@@ -283,11 +272,21 @@ impl DiagCtxtInner {
         for bug in bugs {
             if let Some(out) = &mut out {
                 _ = write!(
-                    out, "delayed bug: {}\n{}\n", bug.inner.messages.iter().filter_map(|
-                    (msg, _) | msg.as_str()).collect::< String > (), & bug.note
+                    out,
+                    "delayed bug: {}\n{}\n",
+                    bug.inner
+                        .messages
+                        .iter()
+                        .filter_map(|(msg, _)| msg.as_str())
+                        .collect::<String>(),
+                    &bug.note
                 );
             }
-            let mut bug = if decorate { bug.decorate(self) } else { bug.inner };
+            let mut bug = if decorate {
+                bug.decorate(self)
+            } else {
+                bug.inner
+            };
             if bug.level != DelayedBug {
                 bug.arg("level", bug.level);
                 let msg = crate::fluent_generated::errors_invalid_flushed_delayed_diagnostic_level;

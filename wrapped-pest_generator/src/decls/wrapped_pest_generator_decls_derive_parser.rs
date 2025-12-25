@@ -42,5 +42,12 @@ pub fn derive_parser(input: TokenStream, include_grammar: bool) -> TokenStream {
     let doc_comment = docs::consume(pairs.clone());
     let ast = unwrap_or_report(parser::consume_rules(pairs));
     let optimized = optimizer::optimize(ast);
-    generate(parsed_derive, paths, optimized, defaults, &doc_comment, include_grammar)
+    generate(
+        parsed_derive,
+        paths,
+        optimized,
+        defaults,
+        &doc_comment,
+        include_grammar,
+    )
 }

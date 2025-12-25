@@ -6,10 +6,7 @@ impl ImplId {
         &self.impl_items_with_diagnostics(db).0
     }
     #[inline]
-    pub fn impl_items_with_diagnostics(
-        self,
-        db: &dyn DefDatabase,
-    ) -> &(ImplItems, DefDiagnostics) {
+    pub fn impl_items_with_diagnostics(self, db: &dyn DefDatabase) -> &(ImplItems, DefDiagnostics) {
         ImplItems::of(db, self)
     }
 }

@@ -33,13 +33,11 @@ pub fn find_nix_rustc(input: TokenStream) -> TokenStream {
             }
         }
     }
-    let quoted_paths = rustc_paths
-        .iter()
-        .map(|s| {
-            quote! {
-                # s.to_string()
-            }
-        });
+    let quoted_paths = rustc_paths.iter().map(|s| {
+        quote! {
+            # s.to_string()
+        }
+    });
     let output = quote! {
         vec![# (# quoted_paths),*]
     };

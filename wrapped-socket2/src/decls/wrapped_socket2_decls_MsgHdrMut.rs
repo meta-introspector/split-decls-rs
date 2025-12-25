@@ -8,7 +8,9 @@ use std::collections::HashMap;
 pub struct MsgHdrMut<'addr, 'bufs, 'control> {
     inner: sys::msghdr,
     #[allow(clippy::type_complexity)]
-    _lifetimes: PhantomData<
-        (&'addr mut SockAddr, &'bufs mut MaybeUninitSlice<'bufs>, &'control mut [u8]),
-    >,
+    _lifetimes: PhantomData<(
+        &'addr mut SockAddr,
+        &'bufs mut MaybeUninitSlice<'bufs>,
+        &'control mut [u8],
+    )>,
 }

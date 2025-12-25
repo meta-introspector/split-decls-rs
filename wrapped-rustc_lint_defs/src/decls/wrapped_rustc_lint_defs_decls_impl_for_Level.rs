@@ -24,10 +24,9 @@ impl Level {
         }
     }
     /// Converts an `Attribute` to a level.
-    pub fn from_attr(
-        attr: &impl AttributeExt,
-    ) -> Option<(Self, Option<LintExpectationId>)> {
-        attr.name().and_then(|name| Self::from_symbol(name, || Some(attr.id())))
+    pub fn from_attr(attr: &impl AttributeExt) -> Option<(Self, Option<LintExpectationId>)> {
+        attr.name()
+            .and_then(|name| Self::from_symbol(name, || Some(attr.id())))
     }
     /// Converts a `Symbol` to a level.
     pub fn from_symbol(

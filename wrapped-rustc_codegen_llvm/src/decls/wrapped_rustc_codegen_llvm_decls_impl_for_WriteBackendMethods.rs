@@ -8,15 +8,11 @@ impl WriteBackendMethods for LlvmCodegenBackend {
     type ThinData = back::lto::ThinData;
     type ThinBuffer = back::lto::ThinBuffer;
     fn print_pass_timings(&self) {
-        let timings = llvm::build_string(|s| unsafe {
-                llvm::LLVMRustPrintPassTimings(s)
-            })
-            .unwrap();
+        let timings = llvm::build_string(|s| unsafe { llvm::LLVMRustPrintPassTimings(s) }).unwrap();
         print!("{timings}");
     }
     fn print_statistics(&self) {
-        let stats = llvm::build_string(|s| unsafe { llvm::LLVMRustPrintStatistics(s) })
-            .unwrap();
+        let stats = llvm::build_string(|s| unsafe { llvm::LLVMRustPrintStatistics(s) }).unwrap();
         print!("{stats}");
     }
     fn run_and_optimize_fat_lto(
@@ -75,9 +71,10 @@ impl WriteBackendMethods for LlvmCodegenBackend {
     fn prepare_thin(module: ModuleCodegen<Self::Module>) -> (String, Self::ThinBuffer) {
         back::lto::prepare_thin(module)
     }
-    fn serialize_module(
-        module: ModuleCodegen<Self::Module>,
-    ) -> (String, Self::ModuleBuffer) {
-        (module.name, back::lto::ModuleBuffer::new(module.module_llvm.llmod()))
+    fn serialize_module(module: ModuleCodegen<Self::Module>) -> (String, Self::ModuleBuffer) {
+        (
+            module.name,
+            back::lto::ModuleBuffer::new(module.module_llvm.llmod()),
+        )
     }
 }

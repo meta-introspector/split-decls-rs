@@ -43,11 +43,7 @@ impl<'a, K: 'a + Eq + Hash, V: 'a, S: 'a + BuildHasher + Clone> DashMap<K, V, S>
             None
         }
     }
-    fn _remove_if_mut<Q>(
-        &self,
-        key: &Q,
-        f: impl FnOnce(&K, &mut V) -> bool,
-    ) -> Option<(K, V)>
+    fn _remove_if_mut<Q>(&self, key: &Q, f: impl FnOnce(&K, &mut V) -> bool) -> Option<(K, V)>
     where
         Q: Hash + Equivalent<K> + ?Sized,
     {
@@ -135,28 +131,20 @@ impl<'a, K: 'a + Eq + Hash, V: 'a, S: 'a + BuildHasher + Clone> DashMap<K, V, S>
         }
     }
     fn _shrink_to_fit(&self) {
-        self.shards
-            .iter()
-            .for_each(|s| {
-                let mut shard = s.write();
-                let size = shard.len();
-                shard
-                    .shrink_to(
-                        size,
-                        |(k, _v)| {
-                            let mut hasher = self.hasher.build_hasher();
-                            k.hash(&mut hasher);
-                            hasher.finish()
-                        },
-                    )
-            });
+        self.shards.iter().for_each(|s| {
+            let mut shard = s.write();
+            let size = shard.len();
+            shard.shrink_to(size, |(k, _v)| {
+                let mut hasher = self.hasher.build_hasher();
+                k.hash(&mut hasher);
+                hasher.finish()
+            })
+        });
     }
     fn _retain(&self, mut f: impl FnMut(&K, &mut V) -> bool) {
-        self.shards
-            .iter()
-            .for_each(|s| {
-                s.write().retain(|(k, v)| f(k, v));
-            });
+        self.shards.iter().for_each(|s| {
+            s.write().retain(|(k, v)| f(k, v));
+        });
     }
     fn _len(&self) -> usize {
         self.shards.iter().map(|s| s.read().len()).sum()
@@ -173,40 +161,36 @@ impl<'a, K: 'a + Eq + Hash, V: 'a, S: 'a + BuildHasher + Clone> DashMap<K, V, S>
         }
     }
     fn _alter_all(&self, mut f: impl FnMut(&K, V) -> V) {
-        self.iter_mut().for_each(|mut m| util::map_in_place_2(m.pair_mut(), &mut f));
+        self.iter_mut()
+            .for_each(|mut m| util::map_in_place_2(m.pair_mut(), &mut f));
     }
     fn _view<Q, R>(&self, key: &Q, f: impl FnOnce(&K, &V) -> R) -> Option<R>
     where
         Q: Hash + Equivalent<K> + ?Sized,
     {
-        self.get(key)
-            .map(|r| {
-                let (k, v) = r.pair();
-                f(k, v)
-            })
+        self.get(key).map(|r| {
+            let (k, v) = r.pair();
+            f(k, v)
+        })
     }
     fn _entry(&'a self, key: K) -> Entry<'a, K, V> {
         let hash = self.hash_u64(&key);
         let idx = self.determine_shard(hash as usize);
         let shard = self.shards[idx].write();
         let (guard, shard) = unsafe { RwLockWriteGuardDetached::detach_from(shard) };
-        match shard
-            .entry(
-                hash,
-                |(k, _v)| k == &key,
-                |(k, _v)| {
-                    let mut hasher = self.hasher.build_hasher();
-                    k.hash(&mut hasher);
-                    hasher.finish()
-                },
-            )
-        {
+        match shard.entry(
+            hash,
+            |(k, _v)| k == &key,
+            |(k, _v)| {
+                let mut hasher = self.hasher.build_hasher();
+                k.hash(&mut hasher);
+                hasher.finish()
+            },
+        ) {
             hash_table::Entry::Occupied(entry) => {
                 Entry::Occupied(OccupiedEntry::new(guard, key, entry))
             }
-            hash_table::Entry::Vacant(entry) => {
-                Entry::Vacant(VacantEntry::new(guard, key, entry))
-            }
+            hash_table::Entry::Vacant(entry) => Entry::Vacant(VacantEntry::new(guard, key, entry)),
         }
     }
     fn _try_entry(&'a self, key: K) -> Option<Entry<'a, K, V>> {
@@ -217,17 +201,15 @@ impl<'a, K: 'a + Eq + Hash, V: 'a, S: 'a + BuildHasher + Clone> DashMap<K, V, S>
             None => return None,
         };
         let (guard, shard) = unsafe { RwLockWriteGuardDetached::detach_from(shard) };
-        match shard
-            .entry(
-                hash,
-                |(k, _v)| k == &key,
-                |(k, _v)| {
-                    let mut hasher = self.hasher.build_hasher();
-                    k.hash(&mut hasher);
-                    hasher.finish()
-                },
-            )
-        {
+        match shard.entry(
+            hash,
+            |(k, _v)| k == &key,
+            |(k, _v)| {
+                let mut hasher = self.hasher.build_hasher();
+                k.hash(&mut hasher);
+                hasher.finish()
+            },
+        ) {
             hash_table::Entry::Occupied(entry) => {
                 Some(Entry::Occupied(OccupiedEntry::new(guard, key, entry)))
             }
@@ -244,17 +226,15 @@ impl<'a, K: 'a + Eq + Hash, V: 'a, S: 'a + BuildHasher + Clone> DashMap<K, V, S>
         let idx = self.determine_shard(hash as usize);
         let shard = self.shards[idx].write();
         let (guard, shard) = unsafe { RwLockWriteGuardDetached::detach_from(shard) };
-        match shard
-            .entry(
-                hash,
-                |(k, _v)| key.equivalent(k),
-                |(k, _v)| {
-                    let mut hasher = self.hasher.build_hasher();
-                    k.hash(&mut hasher);
-                    hasher.finish()
-                },
-            )
-        {
+        match shard.entry(
+            hash,
+            |(k, _v)| key.equivalent(k),
+            |(k, _v)| {
+                let mut hasher = self.hasher.build_hasher();
+                k.hash(&mut hasher);
+                hasher.finish()
+            },
+        ) {
             hash_table::Entry::Occupied(entry) => {
                 EntryRef::Occupied(OccupiedEntryRef::new(guard, key, entry))
             }
@@ -274,17 +254,15 @@ impl<'a, K: 'a + Eq + Hash, V: 'a, S: 'a + BuildHasher + Clone> DashMap<K, V, S>
             None => return None,
         };
         let (guard, shard) = unsafe { RwLockWriteGuardDetached::detach_from(shard) };
-        match shard
-            .entry(
-                hash,
-                |(k, _v)| key.equivalent(k),
-                |(k, _v)| {
-                    let mut hasher = self.hasher.build_hasher();
-                    k.hash(&mut hasher);
-                    hasher.finish()
-                },
-            )
-        {
+        match shard.entry(
+            hash,
+            |(k, _v)| key.equivalent(k),
+            |(k, _v)| {
+                let mut hasher = self.hasher.build_hasher();
+                k.hash(&mut hasher);
+                hasher.finish()
+            },
+        ) {
             hash_table::Entry::Occupied(entry) => {
                 Some(EntryRef::Occupied(OccupiedEntryRef::new(guard, key, entry)))
             }

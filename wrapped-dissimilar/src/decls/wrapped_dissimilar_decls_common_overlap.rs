@@ -22,8 +22,7 @@ fn common_overlap(mut text1: Range, mut text2: Range) -> usize {
         };
         length += found;
         if found == 0
-            || slice(text1.substring(text1.len - length..))
-                == slice(text2.substring(..length))
+            || slice(text1.substring(text1.len - length..)) == slice(text2.substring(..length))
         {
             best = length;
             length += 1;

@@ -7,9 +7,7 @@ impl ParseOptions {
     /// The default value is 96, which will not overflow the stack even in
     /// a debug build.
     pub fn recursion_limit(mut self, limit: u32) -> Self {
-        self.recursion_limit = Some(
-            NonZeroU32::new(limit).expect("Recursion limit must be > 0"),
-        );
+        self.recursion_limit = Some(NonZeroU32::new(limit).expect("Recursion limit must be > 0"));
         self
     }
 }

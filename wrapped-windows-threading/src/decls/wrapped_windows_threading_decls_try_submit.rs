@@ -1,9 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-unsafe fn try_submit<F: FnOnce() + Send>(
-    environment: *const TP_CALLBACK_ENVIRON_V3,
-    f: F,
-) {
+unsafe fn try_submit<F: FnOnce() + Send>(environment: *const TP_CALLBACK_ENVIRON_V3, f: F) {
     unsafe extern "system" fn callback<F: FnOnce() + Send>(
         _: PTP_CALLBACK_INSTANCE,
         callback: *mut c_void,
@@ -13,12 +10,10 @@ unsafe fn try_submit<F: FnOnce() + Send>(
         }
     }
     unsafe {
-        check(
-            TrySubmitThreadpoolCallback(
-                Some(callback::<F>),
-                Box::into_raw(Box::new(f)) as _,
-                environment,
-            ),
-        );
+        check(TrySubmitThreadpoolCallback(
+            Some(callback::<F>),
+            Box::into_raw(Box::new(f)) as _,
+            environment,
+        ));
     }
 }

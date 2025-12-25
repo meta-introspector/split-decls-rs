@@ -2,8 +2,11 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 /// The futures concurrency prelude.
 pub mod prelude {
+    #[cfg(feature = "alloc")]
+    pub use super::concurrent_stream::{
+        ConcurrentStream, FromConcurrentStream, IntoConcurrentStream,
+    };
     pub use super::future::FutureExt as _;
-    pub use super::stream::StreamExt as _;
     pub use super::future::Join as _;
     pub use super::future::Race as _;
     pub use super::future::RaceOk as _;
@@ -11,9 +14,6 @@ pub mod prelude {
     pub use super::stream::Chain as _;
     pub use super::stream::IntoStream as _;
     pub use super::stream::Merge as _;
+    pub use super::stream::StreamExt as _;
     pub use super::stream::Zip as _;
-    #[cfg(feature = "alloc")]
-    pub use super::concurrent_stream::{
-        ConcurrentStream, FromConcurrentStream, IntoConcurrentStream,
-    };
 }

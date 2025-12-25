@@ -27,7 +27,10 @@ pub enum Reason<T> {
         dst_size: usize,
     },
     /// Src should have a stricter alignment than Dst, but it does not.
-    DstHasStricterAlignment { src_min_align: usize, dst_min_align: usize },
+    DstHasStricterAlignment {
+        src_min_align: usize,
+        dst_min_align: usize,
+    },
     /// Can't go from shared pointer to unique pointer
     DstIsMoreUnique,
     /// Encountered a type error

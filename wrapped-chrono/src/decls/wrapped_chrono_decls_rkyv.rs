@@ -3,9 +3,12 @@ use std::collections::HashMap;
 /// Zero-copy serialization/deserialization with rkyv.
 ///
 /// This module re-exports the `Archived*` versions of chrono's types.
-#[cfg(
-    any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64")
-)]
+#[cfg(any(
+    feature = "rkyv",
+    feature = "rkyv-16",
+    feature = "rkyv-32",
+    feature = "rkyv-64"
+))]
 pub mod rkyv {
     pub use crate::datetime::ArchivedDateTime;
     pub use crate::month::ArchivedMonth;

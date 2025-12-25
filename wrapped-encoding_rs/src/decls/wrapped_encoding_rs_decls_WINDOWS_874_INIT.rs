@@ -14,10 +14,5 @@ use std::collections::HashMap;
 /// items.
 pub static WINDOWS_874_INIT: Encoding = Encoding {
     name: "windows-874",
-    variant: VariantEncoding::SingleByte(
-        &data::SINGLE_BYTE_DATA.windows_874,
-        0x0E01,
-        33,
-        58,
-    ),
+    variant: VariantEncoding::SingleByte(&data::SINGLE_BYTE_DATA.windows_874, 0x0E01, 33, 58),
 };

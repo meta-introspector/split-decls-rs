@@ -11,27 +11,27 @@ mod tests {
     fn load_cnt() {
         let a = Arc::new(0);
         let shared = ArcSwap::from(Arc::clone(&a));
-        assert_eq!(2, Arc::strong_count(& a));
+        assert_eq!(2, Arc::strong_count(&a));
         let guard = shared.load();
-        assert_eq!(0, ** guard);
-        assert_eq!(2, Arc::strong_count(& a));
+        assert_eq!(0, **guard);
+        assert_eq!(2, Arc::strong_count(&a));
         let guard_2 = shared.load();
         shared.store(Arc::new(1));
-        assert_eq!(3, Arc::strong_count(& a));
+        assert_eq!(3, Arc::strong_count(&a));
         drop(guard_2);
-        assert_eq!(2, Arc::strong_count(& a));
+        assert_eq!(2, Arc::strong_count(&a));
         let _b = Arc::clone(&guard);
-        assert_eq!(3, Arc::strong_count(& a));
+        assert_eq!(3, Arc::strong_count(&a));
         drop(guard);
-        assert_eq!(2, Arc::strong_count(& a));
+        assert_eq!(2, Arc::strong_count(&a));
         let guard = shared.load();
-        assert_eq!(1, ** guard);
+        assert_eq!(1, **guard);
         drop(shared);
-        assert_eq!(1, ** guard);
+        assert_eq!(1, **guard);
         let ptr = Arc::clone(&guard);
-        assert_eq!(2, Arc::strong_count(& ptr));
+        assert_eq!(2, Arc::strong_count(&ptr));
         drop(guard);
-        assert_eq!(1, Arc::strong_count(& ptr));
+        assert_eq!(1, Arc::strong_count(&ptr));
     }
     /// There can be only limited amount of leases on one thread. Following ones are
     /// created, but contain full Arcs.
@@ -43,17 +43,17 @@ mod tests {
         const GUARD_COUNT: usize = 1000;
         let a = Arc::new(0);
         let shared = ArcSwap::from(Arc::clone(&a));
-        assert_eq!(2, Arc::strong_count(& a));
+        assert_eq!(2, Arc::strong_count(&a));
         let mut guards = (0..GUARD_COUNT).map(|_| shared.load()).collect::<Vec<_>>();
         let count = Arc::strong_count(&a);
         assert!(count > 2);
         let guard = shared.load();
-        assert_eq!(count + 1, Arc::strong_count(& a));
+        assert_eq!(count + 1, Arc::strong_count(&a));
         drop(guard);
-        assert_eq!(count, Arc::strong_count(& a));
+        assert_eq!(count, Arc::strong_count(&a));
         guards.swap_remove(0);
-        assert_eq!(count, Arc::strong_count(& a));
+        assert_eq!(count, Arc::strong_count(&a));
         let _guard = shared.load();
-        assert_eq!(count, Arc::strong_count(& a));
+        assert_eq!(count, Arc::strong_count(&a));
     }
 }

@@ -1,13 +1,11 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-#[cfg(
-    any(
-        feature = "support-v0_6",
-        feature = "support-v0_7",
-        feature = "support-v0_8",
-        feature = "support-v1_0"
-    )
-)]
+#[cfg(any(
+    feature = "support-v0_6",
+    feature = "support-v0_7",
+    feature = "support-v0_8",
+    feature = "support-v1_0"
+))]
 macro_rules! implement_signals_with_pipe {
     ($pipe:path) => {
         use std::borrow::Borrow; use std::io::Error; use signal_hook::iterator::backend::

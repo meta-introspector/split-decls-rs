@@ -88,7 +88,12 @@ mod tests {
     }
     #[test]
     fn with_seed_actually_different() {
-        let seeds = [[1, 2], [42, 17], [124436707, 99237], [usize::MIN, usize::MAX]];
+        let seeds = [
+            [1, 2],
+            [42, 17],
+            [124436707, 99237],
+            [usize::MIN, usize::MAX],
+        ];
         for [a_seed, b_seed] in seeds {
             let a = || FxHasher::with_seed(a_seed);
             let b = || FxHasher::with_seed(b_seed);

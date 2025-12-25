@@ -11,15 +11,13 @@ impl TargetDataLayout {
         default_address_space: AddressSpace,
     ) -> Result<TargetDataLayout, TargetDataLayoutErrors<'a>> {
         let parse_address_space = |s: &'a str, cause: &'a str| {
-            s.parse::<u32>()
-                .map(AddressSpace)
-                .map_err(|err| {
-                    TargetDataLayoutErrors::InvalidAddressSpace {
-                        addr_space: s,
-                        cause,
-                        err,
-                    }
-                })
+            s.parse::<u32>().map(AddressSpace).map_err(|err| {
+                TargetDataLayoutErrors::InvalidAddressSpace {
+                    addr_space: s,
+                    cause,
+                    err,
+                }
+            })
         };
         let parse_bits = |s: &'a str, kind: &'a str, cause: &'a str| {
             s.parse::<u64>()
@@ -30,25 +28,19 @@ impl TargetDataLayout {
                     err,
                 })
         };
-        let parse_size = |s: &'a str, cause: &'a str| {
-            parse_bits(s, "size", cause).map(Size::from_bits)
-        };
+        let parse_size =
+            |s: &'a str, cause: &'a str| parse_bits(s, "size", cause).map(Size::from_bits);
         let parse_align_str = |s: &'a str, cause: &'a str| {
             let align_from_bits = |bits| {
                 Align::from_bits(bits)
-                    .map_err(|err| TargetDataLayoutErrors::InvalidAlignment {
-                        cause,
-                        err,
-                    })
+                    .map_err(|err| TargetDataLayoutErrors::InvalidAlignment { cause, err })
             };
             let abi = parse_bits(s, "alignment", cause)?;
             Ok(align_from_bits(abi)?)
         };
         let parse_align_seq = |s: &[&'a str], cause: &'a str| {
             if s.is_empty() {
-                return Err(TargetDataLayoutErrors::MissingAlignment {
-                    cause,
-                });
+                return Err(TargetDataLayoutErrors::MissingAlignment { cause });
             }
             parse_align_str(s[0], cause)
         };
@@ -184,11 +176,10 @@ impl TargetDataLayout {
                 .find(|(a, _)| *a == dl.instruction_address_space)
                 .is_none()
         {
-            dl.address_space_info
-                .push((
-                    dl.instruction_address_space,
-                    dl.default_address_space_pointer_spec.clone(),
-                ));
+            dl.address_space_info.push((
+                dl.instruction_address_space,
+                dl.default_address_space_pointer_spec.clone(),
+            ));
         }
         Ok(dl)
     }
@@ -305,15 +296,12 @@ impl TargetDataLayout {
     /// Get the pointer alignment in a specific address space.
     #[inline]
     pub fn pointer_align_in(&self, c: AddressSpace) -> AbiAlign {
-        AbiAlign::new(
-            if c == self.default_address_space {
-                self.default_address_space_pointer_spec.pointer_align
-            } else if let Some(e) = self.address_space_info.iter().find(|(a, _)| a == &c)
-            {
-                e.1.pointer_align
-            } else {
-                panic!("Use of unknown address space {c:?}");
-            },
-        )
+        AbiAlign::new(if c == self.default_address_space {
+            self.default_address_space_pointer_spec.pointer_align
+        } else if let Some(e) = self.address_space_info.iter().find(|(a, _)| a == &c) {
+            e.1.pointer_align
+        } else {
+            panic!("Use of unknown address space {c:?}");
+        })
     }
 }

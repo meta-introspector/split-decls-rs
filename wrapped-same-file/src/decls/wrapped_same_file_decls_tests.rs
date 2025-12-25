@@ -2,13 +2,13 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod tests {
+    use super::is_same_file;
     use std::env;
     use std::error;
     use std::fs::{self, File};
     use std::io;
     use std::path::{Path, PathBuf};
     use std::result;
-    use super::is_same_file;
     type Result<T> = result::Result<T, Box<dyn error::Error + Send + Sync>>;
     /// Create an error from a format!-like syntax.
     macro_rules! err {
@@ -44,9 +44,7 @@ mod tests {
                     continue;
                 }
                 fs::create_dir_all(&path)
-                    .map_err(|e| {
-                        err!("failed to create {}: {}", path.display(), e)
-                    })?;
+                    .map_err(|e| err!("failed to create {}: {}", path.display(), e))?;
                 return Ok(TempDir(path));
             }
             Err(err!("failed to create temp dir after {} tries", TRIES))
@@ -60,33 +58,21 @@ mod tests {
         TempDir::new().unwrap()
     }
     #[cfg(unix)]
-    pub fn soft_link_dir<P: AsRef<Path>, Q: AsRef<Path>>(
-        src: P,
-        dst: Q,
-    ) -> io::Result<()> {
+    pub fn soft_link_dir<P: AsRef<Path>, Q: AsRef<Path>>(src: P, dst: Q) -> io::Result<()> {
         use std::os::unix::fs::symlink;
         symlink(src, dst)
     }
     #[cfg(unix)]
-    pub fn soft_link_file<P: AsRef<Path>, Q: AsRef<Path>>(
-        src: P,
-        dst: Q,
-    ) -> io::Result<()> {
+    pub fn soft_link_file<P: AsRef<Path>, Q: AsRef<Path>>(src: P, dst: Q) -> io::Result<()> {
         soft_link_dir(src, dst)
     }
     #[cfg(windows)]
-    pub fn soft_link_dir<P: AsRef<Path>, Q: AsRef<Path>>(
-        src: P,
-        dst: Q,
-    ) -> io::Result<()> {
+    pub fn soft_link_dir<P: AsRef<Path>, Q: AsRef<Path>>(src: P, dst: Q) -> io::Result<()> {
         use std::os::windows::fs::symlink_dir;
         symlink_dir(src, dst)
     }
     #[cfg(windows)]
-    pub fn soft_link_file<P: AsRef<Path>, Q: AsRef<Path>>(
-        src: P,
-        dst: Q,
-    ) -> io::Result<()> {
+    pub fn soft_link_file<P: AsRef<Path>, Q: AsRef<Path>>(src: P, dst: Q) -> io::Result<()> {
         use std::os::windows::fs::symlink_file;
         symlink_file(src, dst)
     }
@@ -110,7 +96,7 @@ mod tests {
         let dir = tdir.path();
         File::create(dir.join("a")).unwrap();
         File::create(dir.join("b")).unwrap();
-        assert!(! is_same_file(dir.join("a"), dir.join("b")).unwrap());
+        assert!(!is_same_file(dir.join("a"), dir.join("b")).unwrap());
     }
     #[test]
     fn not_same_dir_trivial() {
@@ -118,7 +104,7 @@ mod tests {
         let dir = tdir.path();
         fs::create_dir(dir.join("a")).unwrap();
         fs::create_dir(dir.join("b")).unwrap();
-        assert!(! is_same_file(dir.join("a"), dir.join("b")).unwrap());
+        assert!(!is_same_file(dir.join("a"), dir.join("b")).unwrap());
     }
     #[test]
     fn same_file_hard() {

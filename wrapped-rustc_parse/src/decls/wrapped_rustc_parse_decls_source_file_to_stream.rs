@@ -9,19 +9,14 @@ fn source_file_to_stream<'psess>(
     override_span: Option<Span>,
     strip_tokens: StripTokens,
 ) -> Result<TokenStream, Vec<Diag<'psess>>> {
-    let src = source_file
-        .src
-        .as_ref()
-        .unwrap_or_else(|| {
+    let src = source_file.src.as_ref().unwrap_or_else(|| {
+        psess.dcx().bug(format!(
+            "cannot lex `source_file` without source: {}",
             psess
-                .dcx()
-                .bug(
-                    format!(
-                        "cannot lex `source_file` without source: {}", psess.source_map()
-                        .filename_for_diagnostics(& source_file.name)
-                    ),
-                );
-        });
+                .source_map()
+                .filename_for_diagnostics(&source_file.name)
+        ));
+    });
     lexer::lex_token_trees(
         psess,
         src.as_str(),

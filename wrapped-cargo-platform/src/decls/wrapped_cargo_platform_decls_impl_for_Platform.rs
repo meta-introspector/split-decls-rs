@@ -16,24 +16,21 @@ impl Platform {
             .find(|&c| !(c.is_alphanumeric() || c == '_' || c == '-' || c == '.'))
         {
             if name.chars().any(|c| c == '(') {
-                return Err(
-                    ParseError::new(
-                        name,
-                        ParseErrorKind::InvalidTarget(
-                            "unexpected `(` character, cfg expressions must start with `cfg(`"
-                                .to_string(),
-                        ),
-                    ),
-                );
-            }
-            return Err(
-                ParseError::new(
+                return Err(ParseError::new(
                     name,
                     ParseErrorKind::InvalidTarget(
-                        format!("unexpected character {} in target name", ch),
+                        "unexpected `(` character, cfg expressions must start with `cfg(`"
+                            .to_string(),
                     ),
-                ),
-            );
+                ));
+            }
+            return Err(ParseError::new(
+                name,
+                ParseErrorKind::InvalidTarget(format!(
+                    "unexpected character {} in target name",
+                    ch
+                )),
+            ));
         }
         Ok(())
     }
@@ -99,11 +96,10 @@ impl Platform {
                     }
                 }
                 CfgExpr::True | CfgExpr::False => {}
-                CfgExpr::Value(ref e) => {
-                    match e {
-                        Cfg::Name(name) | Cfg::KeyPair(name, _) => {
-                            if !name.raw && KEYWORDS.contains(&name.as_str()) {
-                                warnings
+                CfgExpr::Value(ref e) => match e {
+                    Cfg::Name(name) | Cfg::KeyPair(name, _) => {
+                        if !name.raw && KEYWORDS.contains(&name.as_str()) {
+                            warnings
                                     .push(
                                         format!(
                                             "[{}] future-incompatibility: `cfg({e})` is deprecated as `{name}` is a keyword \
@@ -114,10 +110,9 @@ impl Platform {
                                             path.display()
                                         ),
                                     );
-                            }
                         }
                     }
-                }
+                },
             }
         }
         if let Platform::Cfg(cfg) = self {

@@ -77,6 +77,5 @@ use std::collections::HashMap;
 pub fn absolute_utf8<P: AsRef<Path>>(path: P) -> io::Result<Utf8PathBuf> {
     let path = path.as_ref();
     #[allow(clippy::incompatible_msrv)]
-    Utf8PathBuf::try_from(std::path::absolute(path)?)
-        .map_err(|error| error.into_io_error())
+    Utf8PathBuf::try_from(std::path::absolute(path)?).map_err(|error| error.into_io_error())
 }

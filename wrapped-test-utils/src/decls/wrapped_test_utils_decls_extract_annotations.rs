@@ -41,21 +41,25 @@ pub fn extract_annotations(text: &str) -> Vec<(TextRange, String)> {
             let annotation_offset = TextSize::of(prefix) + ss_len;
             for annotation in extract_line_annotations(suffix.trim_end_matches('\n')) {
                 match annotation {
-                    LineAnnotation::Annotation { mut range, content, file } => {
+                    LineAnnotation::Annotation {
+                        mut range,
+                        content,
+                        file,
+                    } => {
                         range += annotation_offset;
                         this_line_annotations.push((range.end(), res.len()));
                         let range = if file {
                             TextRange::up_to(TextSize::of(text))
                         } else {
-                            let line_start = line_start_map
-                                .range(range.end()..)
-                                .next()
-                                .unwrap();
+                            let line_start = line_start_map.range(range.end()..).next().unwrap();
                             range + line_start.1
                         };
                         res.push((range, content));
                     }
-                    LineAnnotation::Continuation { mut offset, content } => {
+                    LineAnnotation::Continuation {
+                        mut offset,
+                        content,
+                    } => {
                         offset += annotation_offset;
                         let &(_, idx) = prev_line_annotations
                             .iter()

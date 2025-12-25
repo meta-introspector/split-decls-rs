@@ -34,21 +34,13 @@ where
         let ts = self.get_ts();
         self.exit_span(ctx.span(id).expect("Span not found."), ts);
     }
-    fn on_new_span(
-        &self,
-        attrs: &span::Attributes<'_>,
-        id: &span::Id,
-        ctx: Context<'_, S>,
-    ) {
+    fn on_new_span(&self, attrs: &span::Attributes<'_>, id: &span::Id, ctx: Context<'_, S>) {
         if self.include_args {
             let mut args = Object::new();
             attrs.record(&mut JsonVisitor { object: &mut args });
-            ctx.span(id)
-                .unwrap()
-                .extensions_mut()
-                .insert(ArgsWrapper {
-                    args: Arc::new(args),
-                });
+            ctx.span(id).unwrap().extensions_mut().insert(ArgsWrapper {
+                args: Arc::new(args),
+            });
         }
         if let TraceStyle::Threaded = self.trace_style {
             return;

@@ -2,8 +2,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 mod sealed {
     use crate::{
-        ATerm, Bit, Equal, Greater, Less, NInt, NonZero, PInt, TArr, UInt, UTerm,
-        Unsigned, B0, B1, Z0,
+        ATerm, Bit, Equal, Greater, Less, NInt, NonZero, PInt, TArr, UInt, UTerm, Unsigned, B0, B1,
+        Z0,
     };
     pub trait Sealed {}
     impl Sealed for B0 {}

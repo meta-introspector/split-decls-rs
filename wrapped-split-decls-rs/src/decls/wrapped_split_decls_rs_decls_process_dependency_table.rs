@@ -15,16 +15,13 @@ fn process_dependency_table(
                     if global_config.workspace_dependencies.contains_key(dep_name) {
                         deps_to_update_to_workspace.push(dep_name.clone());
                     } else {
-                        let absolute_path = resolved_original_dep_path
-                            .canonicalize()
-                            .context(
-                                format!(
-                                    "Failed to canonicalize path for dependency '{}': {}",
-                                    dep_name, resolved_original_dep_path.display()
-                                ),
-                            )?;
-                        deps_to_update_to_absolute_path
-                            .push((dep_name.clone(), absolute_path));
+                        let absolute_path =
+                            resolved_original_dep_path.canonicalize().context(format!(
+                                "Failed to canonicalize path for dependency '{}': {}",
+                                dep_name,
+                                resolved_original_dep_path.display()
+                            ))?;
+                        deps_to_update_to_absolute_path.push((dep_name.clone(), absolute_path));
                     }
                 }
             }
@@ -45,16 +42,15 @@ fn process_dependency_table(
     for (dep_name, absolute_path) in deps_to_update_to_absolute_path {
         if let Some(dep_value) = table.get_mut(&dep_name) {
             if let Some(dep_table) = dep_value.as_table_mut() {
-                dep_table
-                    .insert(
-                        "path".to_string(),
-                        toml::Value::String(
-                            absolute_path
-                                .to_str()
-                                .context("Path not valid UTF-8")?
-                                .to_string(),
-                        ),
-                    );
+                dep_table.insert(
+                    "path".to_string(),
+                    toml::Value::String(
+                        absolute_path
+                            .to_str()
+                            .context("Path not valid UTF-8")?
+                            .to_string(),
+                    ),
+                );
             }
         }
     }

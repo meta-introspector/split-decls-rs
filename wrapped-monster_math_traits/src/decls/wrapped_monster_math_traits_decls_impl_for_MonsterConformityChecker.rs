@@ -10,10 +10,9 @@ impl MonsterConformityChecker for DummyMonsterConformityChecker {
         let base_conformity = declaration
             .monster_factors
             .as_ref()
-            .map_or(
-                false,
-                |factors| { !factors.is_empty() && declaration.semantic_hash.is_some() },
-            );
+            .map_or(false, |factors| {
+                !factors.is_empty() && declaration.semantic_hash.is_some()
+            });
         if base_conformity {
             if let Some(bott_checker) = bott_periodicity_checker {
                 println!(

@@ -6,51 +6,33 @@ mod if_alloc {
     use core::convert::Infallible;
     impl<T> Sink<T> for alloc::vec::Vec<T> {
         type Error = Infallible;
-        fn poll_ready(
-            self: Pin<&mut Self>,
-            _: &mut Context<'_>,
-        ) -> Poll<Result<(), Self::Error>> {
+        fn poll_ready(self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
         fn start_send(self: Pin<&mut Self>, item: T) -> Result<(), Self::Error> {
             unsafe { self.get_unchecked_mut() }.push(item);
             Ok(())
         }
-        fn poll_flush(
-            self: Pin<&mut Self>,
-            _: &mut Context<'_>,
-        ) -> Poll<Result<(), Self::Error>> {
+        fn poll_flush(self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
-        fn poll_close(
-            self: Pin<&mut Self>,
-            _: &mut Context<'_>,
-        ) -> Poll<Result<(), Self::Error>> {
+        fn poll_close(self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
     }
     impl<T> Sink<T> for alloc::collections::VecDeque<T> {
         type Error = Infallible;
-        fn poll_ready(
-            self: Pin<&mut Self>,
-            _: &mut Context<'_>,
-        ) -> Poll<Result<(), Self::Error>> {
+        fn poll_ready(self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
         fn start_send(self: Pin<&mut Self>, item: T) -> Result<(), Self::Error> {
             unsafe { self.get_unchecked_mut() }.push_back(item);
             Ok(())
         }
-        fn poll_flush(
-            self: Pin<&mut Self>,
-            _: &mut Context<'_>,
-        ) -> Poll<Result<(), Self::Error>> {
+        fn poll_flush(self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
-        fn poll_close(
-            self: Pin<&mut Self>,
-            _: &mut Context<'_>,
-        ) -> Poll<Result<(), Self::Error>> {
+        fn poll_close(self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
     }

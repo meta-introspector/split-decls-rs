@@ -2,10 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 /// Inline version of std fn `convert_while_ascii`. `s` must have len <= 23.
 #[inline]
-fn inline_convert_while_ascii(
-    s: &str,
-    convert: fn(&u8) -> u8,
-) -> ([u8; INLINE_CAP], &str) {
+fn inline_convert_while_ascii(s: &str, convert: fn(&u8) -> u8) -> ([u8; INLINE_CAP], &str) {
     const N: usize = 16;
     debug_assert!(s.len() <= INLINE_CAP, "only for inline-able strings");
     let mut slice = s.as_bytes();

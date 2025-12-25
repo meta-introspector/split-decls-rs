@@ -1,6 +1,4 @@
-#[llm_error_message(
-    message = "Module file not found for: annotate_snippet_emitter_writer"
-)]
+#[llm_error_message(message = "Module file not found for: annotate_snippet_emitter_writer")]
 #[llm_context(
     crate_name = "wrapped_rustc_errors",
     module_name = "annotate_snippet_emitter_writer"

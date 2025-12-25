@@ -6,4 +6,5 @@ where
     C: EcdsaCurve,
     SignatureSize<C>: ArraySize,
     <SignatureSize<C> as ArraySize>::ArrayType<u8>: Copy,
-{}
+{
+}

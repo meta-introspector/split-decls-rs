@@ -114,7 +114,9 @@ impl<S> ThreadPoolBuilder<S> {
             self.num_threads
         } else {
             let default = || {
-                thread::available_parallelism().map(|n| n.get()).unwrap_or(1)
+                thread::available_parallelism()
+                    .map(|n| n.get())
+                    .unwrap_or(1)
             };
             match env::var("RAYON_NUM_THREADS")
                 .ok()

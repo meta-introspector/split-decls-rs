@@ -12,32 +12,29 @@ impl Analysis {
         let mut crate_graph = CrateGraphBuilder::default();
         let mut cfg_options = CfgOptions::default();
         let proc_macro_cwd = Arc::new(
-            TryFrom::try_from(
-                    &*std::env::current_dir().unwrap().as_path().to_string_lossy(),
-                )
+            TryFrom::try_from(&*std::env::current_dir().unwrap().as_path().to_string_lossy())
                 .unwrap(),
         );
         cfg_options.insert_atom(sym::test);
-        crate_graph
-            .add_crate_root(
-                file_id,
-                Edition::CURRENT,
-                None,
-                None,
-                cfg_options,
-                None,
-                Env::default(),
-                CrateOrigin::Local {
-                    repo: None,
-                    name: None,
-                },
-                false,
-                proc_macro_cwd,
-                Arc::new(CrateWorkspaceData {
-                    target: Err("fixture has no layout".into()),
-                    toolchain: None,
-                }),
-            );
+        crate_graph.add_crate_root(
+            file_id,
+            Edition::CURRENT,
+            None,
+            None,
+            cfg_options,
+            None,
+            Env::default(),
+            CrateOrigin::Local {
+                repo: None,
+                name: None,
+            },
+            false,
+            proc_macro_cwd,
+            Arc::new(CrateWorkspaceData {
+                target: Err("fixture has no layout".into()),
+                toolchain: None,
+            }),
+        );
         change.change_file(file_id, Some(text));
         change.set_crate_graph(crate_graph);
         host.apply_change(change);
@@ -49,13 +46,7 @@ impl Analysis {
         expanded: &ast::String,
         minicore: MiniCore<'_>,
     ) -> Option<(Analysis, RaFixtureAnalysis)> {
-        Self::from_ra_fixture_with_on_cursor(
-            sema,
-            literal,
-            expanded,
-            minicore,
-            &mut |_| {},
-        )
+        Self::from_ra_fixture_with_on_cursor(sema, literal, expanded, minicore, &mut |_| {})
     }
     /// Like [`Analysis::from_ra_fixture()`], but also calls `on_cursor` with the cursor position.
     pub(crate) fn from_ra_fixture_with_on_cursor(
@@ -65,13 +56,8 @@ impl Analysis {
         minicore: MiniCore<'_>,
         on_cursor: &mut dyn FnMut(TextRange),
     ) -> Option<(Analysis, RaFixtureAnalysis)> {
-        let analysis = RaFixtureAnalysis::analyze_ra_fixture(
-            sema,
-            literal,
-            expanded,
-            minicore,
-            on_cursor,
-        )?;
+        let analysis =
+            RaFixtureAnalysis::analyze_ra_fixture(sema, literal, expanded, minicore, on_cursor)?;
         Some((
             Analysis {
                 db: analysis.db.clone(),
@@ -86,28 +72,17 @@ impl Analysis {
     pub fn source_root_id(&self, file_id: FileId) -> Cancellable<SourceRootId> {
         self.with_db(|db| db.file_source_root(file_id).source_root_id(db))
     }
-    pub fn is_local_source_root(
-        &self,
-        source_root_id: SourceRootId,
-    ) -> Cancellable<bool> {
+    pub fn is_local_source_root(&self, source_root_id: SourceRootId) -> Cancellable<bool> {
         self.with_db(|db| {
             let sr = db.source_root(source_root_id).source_root(db);
             !sr.is_library
         })
     }
-    pub fn parallel_prime_caches<F>(
-        &self,
-        num_worker_threads: usize,
-        cb: F,
-    ) -> Cancellable<()>
+    pub fn parallel_prime_caches<F>(&self, num_worker_threads: usize, cb: F) -> Cancellable<()>
     where
         F: Fn(ParallelPrimeCachesProgress) + Sync + std::panic::UnwindSafe,
     {
-        self.with_db(move |db| prime_caches::parallel_prime_caches(
-            db,
-            num_worker_threads,
-            &cb,
-        ))
+        self.with_db(move |db| prime_caches::parallel_prime_caches(db, num_worker_threads, &cb))
     }
     /// Gets the text of the source file.
     pub fn file_text(&self, file_id: FileId) -> Cancellable<Arc<str>> {
@@ -116,10 +91,7 @@ impl Analysis {
     /// Gets the syntax tree of the file.
     pub fn parse(&self, file_id: FileId) -> Cancellable<SourceFile> {
         self.with_db(|db| {
-            let editioned_file_id_wrapper = EditionedFileId::current_edition(
-                &self.db,
-                file_id,
-            );
+            let editioned_file_id_wrapper = EditionedFileId::current_edition(&self.db, file_id);
             db.parse(editioned_file_id_wrapper).tree()
         })
     }
@@ -141,10 +113,7 @@ impl Analysis {
     }
     /// Returns position of the matching brace (all types of braces are
     /// supported).
-    pub fn matching_brace(
-        &self,
-        position: FilePosition,
-    ) -> Cancellable<Option<TextSize>> {
+    pub fn matching_brace(&self, position: FilePosition) -> Cancellable<Option<TextSize>> {
         self.with_db(|db| {
             let file_id = EditionedFileId::current_edition(&self.db, position.file_id);
             let parse = db.parse(file_id);
@@ -170,19 +139,10 @@ impl Analysis {
     pub fn discover_test_roots(&self) -> Cancellable<Vec<TestItem>> {
         self.with_db(test_explorer::discover_test_roots)
     }
-    pub fn discover_tests_in_crate_by_test_id(
-        &self,
-        crate_id: &str,
-    ) -> Cancellable<Vec<TestItem>> {
-        self.with_db(|db| test_explorer::discover_tests_in_crate_by_test_id(
-            db,
-            crate_id,
-        ))
+    pub fn discover_tests_in_crate_by_test_id(&self, crate_id: &str) -> Cancellable<Vec<TestItem>> {
+        self.with_db(|db| test_explorer::discover_tests_in_crate_by_test_id(db, crate_id))
     }
-    pub fn discover_tests_in_crate(
-        &self,
-        crate_id: Crate,
-    ) -> Cancellable<Vec<TestItem>> {
+    pub fn discover_tests_in_crate(&self, crate_id: Crate) -> Cancellable<Vec<TestItem>> {
         self.with_db(|db| test_explorer::discover_tests_in_crate(db, crate_id))
     }
     pub fn discover_tests_in_file(&self, file_id: FileId) -> Cancellable<Vec<TestItem>> {
@@ -195,24 +155,15 @@ impl Analysis {
     pub fn fetch_crates(&self) -> Cancellable<FxIndexSet<CrateInfo>> {
         self.with_db(fetch_crates::fetch_crates)
     }
-    pub fn expand_macro(
-        &self,
-        position: FilePosition,
-    ) -> Cancellable<Option<ExpandedMacro>> {
+    pub fn expand_macro(&self, position: FilePosition) -> Cancellable<Option<ExpandedMacro>> {
         self.with_db(|db| expand_macro::expand_macro(db, position))
     }
     /// Returns an edit to remove all newlines in the range, cleaning up minor
     /// stuff like trailing commas.
-    pub fn join_lines(
-        &self,
-        config: &JoinLinesConfig,
-        frange: FileRange,
-    ) -> Cancellable<TextEdit> {
+    pub fn join_lines(&self, config: &JoinLinesConfig, frange: FileRange) -> Cancellable<TextEdit> {
         self.with_db(|db| {
-            let editioned_file_id_wrapper = EditionedFileId::current_edition(
-                &self.db,
-                frange.file_id,
-            );
+            let editioned_file_id_wrapper =
+                EditionedFileId::current_edition(&self.db, frange.file_id);
             let parse = db.parse(editioned_file_id_wrapper);
             join_lines::join_lines(config, &parse.tree(), frange.range)
         })
@@ -246,10 +197,7 @@ impl Analysis {
         file_id: FileId,
     ) -> Cancellable<Vec<StructureNode>> {
         self.with_db(|db| {
-            let editioned_file_id_wrapper = EditionedFileId::current_edition(
-                &self.db,
-                file_id,
-            );
+            let editioned_file_id_wrapper = EditionedFileId::current_edition(&self.db, file_id);
             let source_file = db.parse(editioned_file_id_wrapper).tree();
             file_structure::file_structure(&source_file, config)
         })
@@ -272,45 +220,28 @@ impl Analysis {
         hasher: impl Fn(&InlayHint) -> u64 + Send + UnwindSafe,
     ) -> Cancellable<Option<InlayHint>> {
         self.with_db(|db| {
-            inlay_hints::inlay_hints_resolve(
-                db,
-                file_id,
-                resolve_range,
-                hash,
-                config,
-                hasher,
-            )
+            inlay_hints::inlay_hints_resolve(db, file_id, resolve_range, hash, config, hasher)
         })
     }
     /// Returns the set of folding ranges.
     pub fn folding_ranges(&self, file_id: FileId) -> Cancellable<Vec<Fold>> {
         self.with_db(|db| {
-            let editioned_file_id_wrapper = EditionedFileId::current_edition(
-                &self.db,
-                file_id,
-            );
+            let editioned_file_id_wrapper = EditionedFileId::current_edition(&self.db, file_id);
             folding_ranges::folding_ranges(&db.parse(editioned_file_id_wrapper).tree())
         })
     }
     /// Fuzzy searches for a symbol.
-    pub fn symbol_search(
-        &self,
-        query: Query,
-        limit: usize,
-    ) -> Cancellable<Vec<NavigationTarget>> {
+    pub fn symbol_search(&self, query: Query, limit: usize) -> Cancellable<Vec<NavigationTarget>> {
         Cancelled::catch(|| {
             let symbols = symbol_index::world_symbols(&self.db, query);
-            hir::attach_db(
-                &self.db,
-                || {
-                    symbols
-                        .into_iter()
-                        .filter_map(|s| s.try_to_nav(&Semantics::new(&self.db)))
-                        .take(limit)
-                        .map(UpmappingResult::call_site)
-                        .collect::<Vec<_>>()
-                },
-            )
+            hir::attach_db(&self.db, || {
+                symbols
+                    .into_iter()
+                    .filter_map(|s| s.try_to_nav(&Semantics::new(&self.db)))
+                    .take(limit)
+                    .map(UpmappingResult::call_site)
+                    .collect::<Vec<_>>()
+            })
         })
     }
     /// Returns the definitions from the symbol at `position`.
@@ -350,11 +281,7 @@ impl Analysis {
         config: &FindAllRefsConfig<'_>,
     ) -> Cancellable<Option<Vec<ReferenceSearchResult>>> {
         let config = AssertUnwindSafe(config);
-        self.with_db(|db| references::find_all_refs(
-            &Semantics::new(db),
-            position,
-            &config,
-        ))
+        self.with_db(|db| references::find_all_refs(&Semantics::new(db), position, &config))
     }
     /// Returns a short text describing element at position.
     pub fn hover(
@@ -382,15 +309,11 @@ impl Analysis {
         sysroot: Option<&str>,
     ) -> Cancellable<doc_links::DocumentationLinks> {
         self.with_db(|db| {
-            doc_links::external_docs(db, position, target_dir, sysroot)
-                .unwrap_or_default()
+            doc_links::external_docs(db, position, target_dir, sysroot).unwrap_or_default()
         })
     }
     /// Computes parameter information at the given position.
-    pub fn signature_help(
-        &self,
-        position: FilePosition,
-    ) -> Cancellable<Option<SignatureHelp>> {
+    pub fn signature_help(&self, position: FilePosition) -> Cancellable<Option<SignatureHelp>> {
         self.with_db(|db| signature_help::signature_help(db, position))
     }
     /// Computes call hierarchy candidates for the given file position.
@@ -418,17 +341,11 @@ impl Analysis {
         self.with_db(|db| call_hierarchy::outgoing_calls(db, config, position))
     }
     /// Returns a `mod name;` declaration which created the current module.
-    pub fn parent_module(
-        &self,
-        position: FilePosition,
-    ) -> Cancellable<Vec<NavigationTarget>> {
+    pub fn parent_module(&self, position: FilePosition) -> Cancellable<Vec<NavigationTarget>> {
         self.with_db(|db| parent_module::parent_module(db, position))
     }
     /// Returns vec of `mod name;` declaration which are created by the current module.
-    pub fn child_modules(
-        &self,
-        position: FilePosition,
-    ) -> Cancellable<Vec<NavigationTarget>> {
+    pub fn child_modules(&self, position: FilePosition) -> Cancellable<Vec<NavigationTarget>> {
         self.with_db(|db| child_modules::child_modules(db, position))
     }
     /// Returns crates that this file belongs to.
@@ -491,12 +408,7 @@ impl Analysis {
         highlight_config: HighlightConfig<'_>,
         file_id: FileId,
     ) -> Cancellable<Vec<HlRange>> {
-        self.with_db(|db| syntax_highlighting::highlight(
-            db,
-            &highlight_config,
-            file_id,
-            None,
-        ))
+        self.with_db(|db| syntax_highlighting::highlight(db, &highlight_config, file_id, None))
     }
     /// Computes syntax highlighting for the given file range.
     pub fn highlight_range(
@@ -521,20 +433,11 @@ impl Analysis {
         rainbow: bool,
     ) -> Cancellable<String> {
         self.with_db(|db| {
-            syntax_highlighting::highlight_as_html_with_config(
-                db,
-                &config,
-                file_id,
-                rainbow,
-            )
+            syntax_highlighting::highlight_as_html_with_config(db, &config, file_id, rainbow)
         })
     }
     /// Computes syntax highlighting for the given file.
-    pub fn highlight_as_html(
-        &self,
-        file_id: FileId,
-        rainbow: bool,
-    ) -> Cancellable<String> {
+    pub fn highlight_as_html(&self, file_id: FileId, rainbow: bool) -> Cancellable<String> {
         self.with_db(|db| syntax_highlighting::highlight_as_html(db, file_id, rainbow))
     }
     /// Computes completions at the given position.
@@ -544,12 +447,7 @@ impl Analysis {
         position: FilePosition,
         trigger_character: Option<char>,
     ) -> Cancellable<Option<Vec<CompletionItem>>> {
-        self.with_db(|db| ide_completion::completions(
-            db,
-            config,
-            position,
-            trigger_character,
-        ))
+        self.with_db(|db| ide_completion::completions(db, config, position, trigger_character))
     }
     /// Resolves additional completion data at the position given.
     pub fn resolve_completion_edits(
@@ -558,16 +456,9 @@ impl Analysis {
         position: FilePosition,
         imports: impl IntoIterator<Item = String> + std::panic::UnwindSafe,
     ) -> Cancellable<Vec<TextEdit>> {
-        Ok(
-            self
-                .with_db(|db| ide_completion::resolve_completion_edits(
-                    db,
-                    config,
-                    position,
-                    imports,
-                ))?
-                .unwrap_or_default(),
-        )
+        Ok(self
+            .with_db(|db| ide_completion::resolve_completion_edits(db, config, position, imports))?
+            .unwrap_or_default())
     }
     /// Computes the set of parser level diagnostics for the given file.
     pub fn syntax_diagnostics(
@@ -584,12 +475,7 @@ impl Analysis {
         resolve: AssistResolveStrategy,
         file_id: FileId,
     ) -> Cancellable<Vec<Diagnostic>> {
-        self.with_db(|db| ide_diagnostics::semantic_diagnostics(
-            db,
-            config,
-            &resolve,
-            file_id,
-        ))
+        self.with_db(|db| ide_diagnostics::semantic_diagnostics(db, config, &resolve, file_id))
     }
     /// Computes the set of both syntax and semantic diagnostics for the given file.
     pub fn full_diagnostics(
@@ -598,12 +484,7 @@ impl Analysis {
         resolve: AssistResolveStrategy,
         file_id: FileId,
     ) -> Cancellable<Vec<Diagnostic>> {
-        self.with_db(|db| ide_diagnostics::full_diagnostics(
-            db,
-            config,
-            &resolve,
-            file_id,
-        ))
+        self.with_db(|db| ide_diagnostics::full_diagnostics(db, config, &resolve, file_id))
     }
     /// Convenience function to return assists + quick fixes for diagnostics
     pub fn assists_with_fixes(
@@ -619,12 +500,7 @@ impl Analysis {
         };
         self.with_db(|db| {
             let diagnostic_assists = if diagnostics_config.enabled && include_fixes {
-                ide_diagnostics::full_diagnostics(
-                        db,
-                        diagnostics_config,
-                        &resolve,
-                        frange.file_id,
-                    )
+                ide_diagnostics::full_diagnostics(db, diagnostics_config, &resolve, frange.file_id)
                     .into_iter()
                     .flat_map(|it| it.fixes.unwrap_or_default())
                     .filter(|it| it.target.intersect(frange.range).is_some())
@@ -672,11 +548,8 @@ impl Analysis {
     ) -> Cancellable<Result<SourceChange, SsrError>> {
         self.with_db(|db| {
             let rule: ide_ssr::SsrRule = query.parse()?;
-            let mut match_finder = ide_ssr::MatchFinder::in_context(
-                db,
-                resolve_context,
-                selections,
-            )?;
+            let mut match_finder =
+                ide_ssr::MatchFinder::in_context(db, resolve_context, selections)?;
             match_finder.add_rule(rule)?;
             let edits = if parse_only {
                 Default::default()

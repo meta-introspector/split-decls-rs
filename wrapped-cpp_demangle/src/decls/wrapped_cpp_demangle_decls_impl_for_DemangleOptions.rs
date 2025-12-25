@@ -28,9 +28,7 @@ impl DemangleOptions {
     /// allow pathological symbols to overflow the stack during demangling.
     /// The default value is 128.
     pub fn recursion_limit(mut self, limit: u32) -> Self {
-        self.recursion_limit = Some(
-            NonZeroU32::new(limit).expect("Recursion limit must be > 0"),
-        );
+        self.recursion_limit = Some(NonZeroU32::new(limit).expect("Recursion limit must be > 0"));
         self
     }
 }

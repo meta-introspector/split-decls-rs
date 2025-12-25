@@ -33,6 +33,6 @@ use std::collections::HashMap;
     Decodable,
     Default,
     PartialOrd,
-    Ord
+    Ord,
 )]
 pub struct StableSourceFileId(Hash128);

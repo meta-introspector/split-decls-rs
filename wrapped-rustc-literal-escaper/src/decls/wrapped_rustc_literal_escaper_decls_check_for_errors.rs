@@ -25,65 +25,35 @@ pub fn check_for_errors(
                 error_callback(0..(src.len() - chars.as_str().len()), e);
             }
         }
-        Mode::Str => {
-            unescape_str(
-                src,
-                |range, res| {
-                    if let Err(e) = res {
-                        error_callback(range, e);
-                    }
-                },
-            )
-        }
-        Mode::ByteStr => {
-            unescape_byte_str(
-                src,
-                |range, res| {
-                    if let Err(e) = res {
-                        error_callback(range, e);
-                    }
-                },
-            )
-        }
-        Mode::CStr => {
-            unescape_c_str(
-                src,
-                |range, res| {
-                    if let Err(e) = res {
-                        error_callback(range, e);
-                    }
-                },
-            )
-        }
-        Mode::RawStr => {
-            check_raw_str(
-                src,
-                |range, res| {
-                    if let Err(e) = res {
-                        error_callback(range, e);
-                    }
-                },
-            )
-        }
-        Mode::RawByteStr => {
-            check_raw_byte_str(
-                src,
-                |range, res| {
-                    if let Err(e) = res {
-                        error_callback(range, e);
-                    }
-                },
-            )
-        }
-        Mode::RawCStr => {
-            check_raw_c_str(
-                src,
-                |range, res| {
-                    if let Err(e) = res {
-                        error_callback(range, e);
-                    }
-                },
-            )
-        }
+        Mode::Str => unescape_str(src, |range, res| {
+            if let Err(e) = res {
+                error_callback(range, e);
+            }
+        }),
+        Mode::ByteStr => unescape_byte_str(src, |range, res| {
+            if let Err(e) = res {
+                error_callback(range, e);
+            }
+        }),
+        Mode::CStr => unescape_c_str(src, |range, res| {
+            if let Err(e) = res {
+                error_callback(range, e);
+            }
+        }),
+        Mode::RawStr => check_raw_str(src, |range, res| {
+            if let Err(e) = res {
+                error_callback(range, e);
+            }
+        }),
+        Mode::RawByteStr => check_raw_byte_str(src, |range, res| {
+            if let Err(e) = res {
+                error_callback(range, e);
+            }
+        }),
+        Mode::RawCStr => check_raw_c_str(src, |range, res| {
+            if let Err(e) = res {
+                error_callback(range, e);
+            }
+        }),
     }
 }

@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 fn unresolved_fix(id: &'static str, label: &str, target: TextRange) -> Assist {
-    assert!(! id.contains(' '));
+    assert!(!id.contains(' '));
     Assist {
         id: AssistId::quick_fix(id),
         label: Label::new(label.to_owned()),

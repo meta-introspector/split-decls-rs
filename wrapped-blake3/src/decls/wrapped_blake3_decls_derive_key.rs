@@ -52,9 +52,7 @@ use std::collections::HashMap;
 pub fn derive_key(context: &str, key_material: &[u8]) -> [u8; OUT_LEN] {
     let context_key = hazmat::hash_derive_key_context(context);
     let context_key_words = platform::words_from_le_bytes_32(&context_key);
-    hash_all_at_once::<
-        join::SerialJoin,
-    >(key_material, &context_key_words, DERIVE_KEY_MATERIAL)
+    hash_all_at_once::<join::SerialJoin>(key_material, &context_key_words, DERIVE_KEY_MATERIAL)
         .root_hash()
         .0
 }

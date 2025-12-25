@@ -12,7 +12,8 @@ impl fmt::Display for VersionError {
             }
             VersionError::ParseError(msg) => {
                 write!(
-                    f, "`gnuplot --version` returned an unparsable version string: {}",
+                    f,
+                    "`gnuplot --version` returned an unparsable version string: {}",
                     msg
                 )
             }

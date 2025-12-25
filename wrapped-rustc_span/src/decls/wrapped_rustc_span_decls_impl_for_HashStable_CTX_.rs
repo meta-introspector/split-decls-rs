@@ -37,8 +37,8 @@ where
                 return;
             }
         }
-        let Some((file, line_lo, col_lo, line_hi, col_hi)) = ctx
-            .span_data_to_lines_and_cols(&span) else {
+        let Some((file, line_lo, col_lo, line_hi, col_hi)) = ctx.span_data_to_lines_and_cols(&span)
+        else {
             Hash::hash(&TAG_INVALID_SPAN, hasher);
             return;
         };

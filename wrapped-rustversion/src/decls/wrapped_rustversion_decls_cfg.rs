@@ -12,5 +12,5 @@ pub fn cfg(input: TokenStream) -> TokenStream {
         let ident = Ident::new(&boolean.to_string(), Span::call_site());
         Ok(TokenStream::from(TokenTree::Ident(ident)))
     })()
-        .unwrap_or_else(Error::into_compile_error)
+    .unwrap_or_else(Error::into_compile_error)
 }

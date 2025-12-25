@@ -4,14 +4,14 @@ impl ObjectType {
     /// Convert an object type to its string representation.
     pub fn str(&self) -> &'static str {
         unsafe {
-            let ptr = call!(raw::git_object_type2string(* self)) as *const _;
+            let ptr = call!(raw::git_object_type2string(*self)) as *const _;
             let data = CStr::from_ptr(ptr).to_bytes();
             str::from_utf8(data).unwrap()
         }
     }
     /// Determine if the given git_object_t is a valid loose object type.
     pub fn is_loose(&self) -> bool {
-        unsafe { call!(raw::git_object_typeisloose(* self)) == 1 }
+        unsafe { call!(raw::git_object_typeisloose(*self)) == 1 }
     }
     /// Convert a raw git_object_t to an ObjectType
     pub fn from_raw(raw: raw::git_object_t) -> Option<ObjectType> {
@@ -30,9 +30,7 @@ impl ObjectType {
     }
     /// Convert a string object type representation to its object type.
     pub fn from_str(s: &str) -> Option<ObjectType> {
-        let raw = unsafe {
-            call!(raw::git_object_string2type(CString::new(s).unwrap()))
-        };
+        let raw = unsafe { call!(raw::git_object_string2type(CString::new(s).unwrap())) };
         ObjectType::from_raw(raw)
     }
 }

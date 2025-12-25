@@ -9,17 +9,16 @@ impl GeneralConstId {
     }
     pub fn name(self, db: &dyn DefDatabase) -> String {
         match self {
-            GeneralConstId::StaticId(it) => {
-                db.static_signature(it).name.display(db, Edition::CURRENT).to_string()
-            }
+            GeneralConstId::StaticId(it) => db
+                .static_signature(it)
+                .name
+                .display(db, Edition::CURRENT)
+                .to_string(),
             GeneralConstId::ConstId(const_id) => {
-                db.const_signature(const_id)
-                    .name
-                    .as_ref()
-                    .map_or_else(
-                        || "_".to_owned(),
-                        |name| name.display(db, Edition::CURRENT).to_string(),
-                    )
+                db.const_signature(const_id).name.as_ref().map_or_else(
+                    || "_".to_owned(),
+                    |name| name.display(db, Edition::CURRENT).to_string(),
+                )
             }
         }
     }

@@ -9,7 +9,9 @@ mod private {
     ///
     /// The implementer must guarantee that `align_of::<Self::Align>() == size_of::<Self>()`.
     #[allow(unknown_lints, unnameable_types)]
-    pub unsafe trait PrimitivePriv: Copy + Send + Sync + Unpin + UnwindSafe + RefUnwindSafe {
+    pub unsafe trait PrimitivePriv:
+        Copy + Send + Sync + Unpin + UnwindSafe + RefUnwindSafe
+    {
         type Align: Send + Sync + Unpin + UnwindSafe + RefUnwindSafe;
     }
     #[repr(align(1))]
@@ -37,10 +39,10 @@ mod private {
     pub(crate) type AlignPtr = Align16;
     #[allow(unused_imports)]
     use crate::{
-        AtomicMaybeUninit, cfg_has_atomic_8, cfg_has_atomic_16, cfg_has_atomic_32,
-        cfg_has_atomic_64, cfg_has_atomic_128, cfg_has_atomic_cas, cfg_has_atomic_ptr,
-        cfg_no_atomic_8, cfg_no_atomic_16, cfg_no_atomic_32, cfg_no_atomic_64,
-        cfg_no_atomic_128, cfg_no_atomic_cas, cfg_no_atomic_ptr,
+        cfg_has_atomic_128, cfg_has_atomic_16, cfg_has_atomic_32, cfg_has_atomic_64,
+        cfg_has_atomic_8, cfg_has_atomic_cas, cfg_has_atomic_ptr, cfg_no_atomic_128,
+        cfg_no_atomic_16, cfg_no_atomic_32, cfg_no_atomic_64, cfg_no_atomic_8, cfg_no_atomic_cas,
+        cfg_no_atomic_ptr, AtomicMaybeUninit,
     };
     cfg_has_atomic_8! {
         type _AtomicMaybeUninitI8 = AtomicMaybeUninit < i8 >; type _AtomicMaybeUninitU8 =

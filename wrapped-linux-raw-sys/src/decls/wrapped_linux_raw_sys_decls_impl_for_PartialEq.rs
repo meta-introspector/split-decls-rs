@@ -6,10 +6,9 @@ impl PartialEq for general::__kernel_timespec {
         ({
             let Self { tv_sec, tv_nsec } = self;
             (tv_sec, tv_nsec)
+        }) == ({
+            let Self { tv_sec, tv_nsec } = other;
+            (tv_sec, tv_nsec)
         })
-            == ({
-                let Self { tv_sec, tv_nsec } = other;
-                (tv_sec, tv_nsec)
-            })
     }
 }

@@ -12,8 +12,10 @@ impl SeqInner {
     /// Verify that the call identified by `seq` was called in the correct order
     fn verify<F: Fn() -> String>(&self, seq: usize, desc: F) {
         assert_eq!(
-            seq, self.satisfaction_level.load(Ordering::Relaxed),
-            "{}: Method sequence violation", & desc()
+            seq,
+            self.satisfaction_level.load(Ordering::Relaxed),
+            "{}: Method sequence violation",
+            &desc()
         )
     }
 }

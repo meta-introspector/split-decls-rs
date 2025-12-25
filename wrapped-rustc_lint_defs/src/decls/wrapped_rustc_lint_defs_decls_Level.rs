@@ -14,7 +14,7 @@ use std::collections::HashMap;
     Hash,
     Encodable,
     Decodable,
-    HashStable_Generic
+    HashStable_Generic,
 )]
 pub enum Level {
     /// The `allow` level will not issue any message.

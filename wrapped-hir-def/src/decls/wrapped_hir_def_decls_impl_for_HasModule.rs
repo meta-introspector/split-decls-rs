@@ -14,14 +14,12 @@ impl HasModule for AttrDefId {
             AttrDefId::TypeAliasId(it) => it.module(db),
             AttrDefId::ImplId(it) => it.module(db),
             AttrDefId::ExternBlockId(it) => it.module(db),
-            AttrDefId::GenericParamId(it) => {
-                match it {
-                    GenericParamId::TypeParamId(it) => it.parent(),
-                    GenericParamId::ConstParamId(it) => it.parent(),
-                    GenericParamId::LifetimeParamId(it) => it.parent,
-                }
-                    .module(db)
+            AttrDefId::GenericParamId(it) => match it {
+                GenericParamId::TypeParamId(it) => it.parent(),
+                GenericParamId::ConstParamId(it) => it.parent(),
+                GenericParamId::LifetimeParamId(it) => it.parent,
             }
+            .module(db),
             AttrDefId::MacroId(it) => it.module(db),
             AttrDefId::ExternCrateId(it) => it.module(db),
             AttrDefId::UseId(it) => it.module(db),

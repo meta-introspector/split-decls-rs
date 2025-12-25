@@ -10,7 +10,10 @@ impl std::fmt::Debug for Parameters {
             .field("is_feature_nodrop", &self.is_feature_nodrop())
             .field("is_feature_submit_stable", &self.is_feature_submit_stable())
             .field("is_feature_rw_cur_pos", &self.is_feature_rw_cur_pos())
-            .field("is_feature_cur_personality", &self.is_feature_cur_personality())
+            .field(
+                "is_feature_cur_personality",
+                &self.is_feature_cur_personality(),
+            )
             .field("is_feature_poll_32bits", &self.is_feature_poll_32bits())
             .field("sq_entries", &self.0.sq_entries)
             .field("cq_entries", &self.0.cq_entries)

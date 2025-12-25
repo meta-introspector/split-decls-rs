@@ -9,10 +9,16 @@ pub enum TokenKind {
     ///
     /// Block comments can be recursive, so a sequence like `/* /* */`
     /// will not be considered terminated and will result in a parsing error.
-    BlockComment { doc_style: Option<DocStyle>, terminated: bool },
+    BlockComment {
+        doc_style: Option<DocStyle>,
+        terminated: bool,
+    },
     /// Any whitespace character sequence.
     Whitespace,
-    Frontmatter { has_invalid_preceding_whitespace: bool, invalid_infostring: bool },
+    Frontmatter {
+        has_invalid_preceding_whitespace: bool,
+        invalid_infostring: bool,
+    },
     /// An identifier or keyword, e.g. `ident` or `continue`.
     Ident,
     /// An identifier that is invalid because it contains emoji.
@@ -47,7 +53,10 @@ pub enum TokenKind {
     /// this type will need to check for and reject that case.
     ///
     /// See [LiteralKind] for more details.
-    Literal { kind: LiteralKind, suffix_start: u32 },
+    Literal {
+        kind: LiteralKind,
+        suffix_start: u32,
+    },
     /// A lifetime, e.g. `'a`.
     Lifetime { starts_with_number: bool },
     /// `;`

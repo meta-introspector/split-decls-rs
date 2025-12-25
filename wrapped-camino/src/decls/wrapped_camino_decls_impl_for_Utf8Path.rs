@@ -247,7 +247,9 @@ impl Utf8Path {
     #[inline]
     #[must_use]
     pub fn parent(&self) -> Option<&Utf8Path> {
-        self.0.parent().map(|path| { unsafe { Utf8Path::assume_utf8(path) } })
+        self.0
+            .parent()
+            .map(|path| unsafe { Utf8Path::assume_utf8(path) })
     }
     /// Produces an iterator over [`Utf8Path`] and its ancestors.
     ///
@@ -303,7 +305,7 @@ impl Utf8Path {
     #[inline]
     #[must_use]
     pub fn file_name(&self) -> Option<&str> {
-        self.0.file_name().map(|s| { unsafe { str_assume_utf8(s) } })
+        self.0.file_name().map(|s| unsafe { str_assume_utf8(s) })
     }
     /// Returns a path that, when joined onto `base`, yields `self`.
     ///
@@ -334,11 +336,10 @@ impl Utf8Path {
     /// assert_eq!(path.strip_prefix(prefix), Ok(Utf8Path::new("haha/foo.txt")));
     /// ```
     #[inline]
-    pub fn strip_prefix(
-        &self,
-        base: impl AsRef<Path>,
-    ) -> Result<&Utf8Path, StripPrefixError> {
-        self.0.strip_prefix(base).map(|path| { unsafe { Utf8Path::assume_utf8(path) } })
+    pub fn strip_prefix(&self, base: impl AsRef<Path>) -> Result<&Utf8Path, StripPrefixError> {
+        self.0
+            .strip_prefix(base)
+            .map(|path| unsafe { Utf8Path::assume_utf8(path) })
     }
     /// Determines whether `base` is a prefix of `self`.
     ///
@@ -412,7 +413,7 @@ impl Utf8Path {
     #[inline]
     #[must_use]
     pub fn file_stem(&self) -> Option<&str> {
-        self.0.file_stem().map(|s| { unsafe { str_assume_utf8(s) } })
+        self.0.file_stem().map(|s| unsafe { str_assume_utf8(s) })
     }
     /// Extracts the extension of [`self.file_name`], if possible.
     ///
@@ -436,7 +437,7 @@ impl Utf8Path {
     #[inline]
     #[must_use]
     pub fn extension(&self) -> Option<&str> {
-        self.0.extension().map(|s| { unsafe { str_assume_utf8(s) } })
+        self.0.extension().map(|s| unsafe { str_assume_utf8(s) })
     }
     /// Creates an owned [`Utf8PathBuf`] with `path` adjoined to `self`.
     ///
@@ -569,7 +570,9 @@ impl Utf8Path {
     /// ```
     #[inline]
     pub fn iter(&self) -> Iter<'_> {
-        Iter { inner: self.components() }
+        Iter {
+            inner: self.components(),
+        }
     }
     /// Queries the file system to get information about a file, directory, etc.
     ///
@@ -906,7 +909,9 @@ impl Utf8Path {
     /// [`fs::Metadata::is_symlink`] if it was [`Ok`].
     #[must_use]
     pub fn is_symlink(&self) -> bool {
-        self.symlink_metadata().map(|m| m.file_type().is_symlink()).unwrap_or(false)
+        self.symlink_metadata()
+            .map(|m| m.file_type().is_symlink())
+            .unwrap_or(false)
     }
     /// Converts a [`Box<Utf8Path>`] into a [`Utf8PathBuf`] without copying or allocating.
     #[must_use = "`self` will be dropped if the result is not used"]

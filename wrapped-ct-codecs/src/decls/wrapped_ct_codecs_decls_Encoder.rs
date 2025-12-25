@@ -39,10 +39,7 @@ pub trait Encoder {
     ///
     /// * `Ok(&str)` - A string slice containing the encoded data
     /// * `Err(Error::Overflow)` - If the output buffer is too small
-    fn encode_to_str<IN: AsRef<[u8]>>(
-        encoded: &mut [u8],
-        bin: IN,
-    ) -> Result<&str, Error> {
+    fn encode_to_str<IN: AsRef<[u8]>>(encoded: &mut [u8], bin: IN) -> Result<&str, Error> {
         Ok(core::str::from_utf8(Self::encode(encoded, bin)?).unwrap())
     }
     /// Encodes binary data and returns the result as a String.
@@ -59,7 +56,7 @@ pub trait Encoder {
     /// * `Err(Error::Overflow)` - If the calculation would overflow
     #[cfg(feature = "std")]
     fn encode_to_string<IN: AsRef<[u8]>>(bin: IN) -> Result<String, Error> {
-        let mut encoded = vec![0u8; Self::encoded_len(bin.as_ref().len()) ?];
+        let mut encoded = vec![0u8; Self::encoded_len(bin.as_ref().len())?];
         let encoded_len = Self::encode(&mut encoded, bin)?.len();
         encoded.truncate(encoded_len);
         Ok(String::from_utf8(encoded).unwrap())

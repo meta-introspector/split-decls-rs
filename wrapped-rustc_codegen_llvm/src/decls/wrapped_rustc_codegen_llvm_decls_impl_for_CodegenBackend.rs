@@ -11,10 +11,8 @@ impl CodegenBackend for LlvmCodegenBackend {
         llvm_util::init(sess);
     }
     fn provide(&self, providers: &mut Providers) {
-        providers.global_backend_features = |tcx, ()| llvm_util::global_llvm_features(
-            tcx.sess,
-            false,
-        );
+        providers.global_backend_features =
+            |tcx, ()| llvm_util::global_llvm_features(tcx.sess, false);
     }
     fn print(&self, req: &PrintRequest, out: &mut String, sess: &Session) {
         use std::fmt::Write;
@@ -69,7 +67,7 @@ impl CodegenBackend for LlvmCodegenBackend {
         Do not generate stack canaries.
 "#
                 )
-                    .unwrap();
+                .unwrap();
             }
             _other => llvm_util::print(req, out, sess),
         }
@@ -84,13 +82,11 @@ impl CodegenBackend for LlvmCodegenBackend {
         target_config(sess)
     }
     fn codegen_crate<'tcx>(&self, tcx: TyCtxt<'tcx>) -> Box<dyn Any> {
-        Box::new(
-            rustc_codegen_ssa::base::codegen_crate(
-                LlvmCodegenBackend(()),
-                tcx,
-                crate::llvm_util::target_cpu(tcx.sess).to_string(),
-            ),
-        )
+        Box::new(rustc_codegen_ssa::base::codegen_crate(
+            LlvmCodegenBackend(()),
+            tcx,
+            crate::llvm_util::target_cpu(tcx.sess).to_string(),
+        ))
     }
     fn join_codegen(
         &self,
@@ -99,19 +95,14 @@ impl CodegenBackend for LlvmCodegenBackend {
         outputs: &OutputFilenames,
     ) -> (CodegenResults, FxIndexMap<WorkProductId, WorkProduct>) {
         let (codegen_results, work_products) = ongoing_codegen
-            .downcast::<
-                rustc_codegen_ssa::back::write::OngoingCodegen<LlvmCodegenBackend>,
-            >()
+            .downcast::<rustc_codegen_ssa::back::write::OngoingCodegen<LlvmCodegenBackend>>()
             .expect("Expected LlvmCodegenBackend's OngoingCodegen, found Box<Any>")
             .join(sess);
         if sess.opts.unstable_opts.llvm_time_trace {
-            sess.time(
-                "llvm_dump_timing_file",
-                || {
-                    let file_name = outputs.with_extension("llvm_timings.json");
-                    llvm_util::time_trace_profiler_finish(&file_name);
-                },
-            );
+            sess.time("llvm_dump_timing_file", || {
+                let file_name = outputs.with_extension("llvm_timings.json");
+                llvm_util::time_trace_profiler_finish(&file_name);
+            });
         }
         (codegen_results, work_products)
     }
@@ -122,8 +113,8 @@ impl CodegenBackend for LlvmCodegenBackend {
         metadata: EncodedMetadata,
         outputs: &OutputFilenames,
     ) {
-        use rustc_codegen_ssa::back::link::link_binary;
         use crate::back::archive::LlvmArchiveBuilderBuilder;
+        use rustc_codegen_ssa::back::link::link_binary;
         link_binary(
             sess,
             &LlvmArchiveBuilderBuilder,

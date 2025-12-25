@@ -5,14 +5,10 @@ impl TempDir {
         match std::fs::remove_dir_all(path) {
             Ok(()) => Ok(()),
             Err(e) if e.kind() == ErrorKind::NotFound => Ok(()),
-            Err(e) => {
-                Err(
-                    std::io::Error::new(
-                        e.kind(),
-                        format!("error removing directory and contents {path:?}: {e}"),
-                    ),
-                )
-            }
+            Err(e) => Err(std::io::Error::new(
+                e.kind(),
+                format!("error removing directory and contents {path:?}: {e}"),
+            )),
         }
     }
     /// Create a new empty directory in a system temporary directory.
@@ -53,25 +49,21 @@ impl TempDir {
     /// ```
     pub fn with_prefix(prefix: impl AsRef<str>) -> Result<Self, std::io::Error> {
         loop {
-            let path_buf = std::env::temp_dir()
-                .join(
-                    format!(
-                        "{}{:x}-{:x}", prefix.as_ref(), std::process::id(),
-                        INTERNAL_COUNTER.fetch_add(1, Ordering::AcqRel),
-                    ),
-                );
+            let path_buf = std::env::temp_dir().join(format!(
+                "{}{:x}-{:x}",
+                prefix.as_ref(),
+                std::process::id(),
+                INTERNAL_COUNTER.fetch_add(1, Ordering::AcqRel),
+            ));
             match std::fs::create_dir(&path_buf) {
-                Err(
-                    e,
-                ) if e.kind() == ErrorKind::AlreadyExists
-                    && INTERNAL_RETRY.load(Ordering::Acquire) => {}
+                Err(e)
+                    if e.kind() == ErrorKind::AlreadyExists
+                        && INTERNAL_RETRY.load(Ordering::Acquire) => {}
                 Err(e) => {
-                    return Err(
-                        std::io::Error::new(
-                            e.kind(),
-                            format!("error creating directory {path_buf:?}: {e}"),
-                        ),
-                    );
+                    return Err(std::io::Error::new(
+                        e.kind(),
+                        format!("error creating directory {path_buf:?}: {e}"),
+                    ));
                 }
                 Ok(()) => {
                     return Ok(Self {

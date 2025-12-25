@@ -75,8 +75,7 @@ mod spec_traits {
             }
         }
     }
-    impl<T, const N: usize, const M: usize> SpecExtend<T, IntoIter<T, M>>
-    for SmallVec<T, N> {
+    impl<T, const N: usize, const M: usize> SpecExtend<T, IntoIter<T, M>> for SmallVec<T, N> {
         fn spec_extend(&mut self, mut iter: IntoIter<T, M>) {
             let slice = iter.as_slice();
             let len = slice.len();
@@ -103,8 +102,7 @@ mod spec_traits {
             self.spec_extend(iterator.cloned())
         }
     }
-    impl<'a, T: 'a, const N: usize> SpecExtend<&'a T, core::slice::Iter<'a, T>>
-    for SmallVec<T, N>
+    impl<'a, T: 'a, const N: usize> SpecExtend<&'a T, core::slice::Iter<'a, T>> for SmallVec<T, N>
     where
         T: Copy,
     {
@@ -138,10 +136,7 @@ mod spec_traits {
         unsafe fn spec_extend_from_within(&mut self, src: core::ops::Range<usize>);
     }
     impl<T: Clone, const N: usize> SpecExtendFromWithin<T> for SmallVec<T, N> {
-        default unsafe fn spec_extend_from_within(
-            &mut self,
-            src: core::ops::Range<usize>,
-        ) {
+        default unsafe fn spec_extend_from_within(&mut self, src: core::ops::Range<usize>) {
             unsafe {
                 self.extend_from_within_fallback(src);
             }

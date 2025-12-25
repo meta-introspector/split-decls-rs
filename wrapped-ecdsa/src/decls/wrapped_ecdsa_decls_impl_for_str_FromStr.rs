@@ -19,8 +19,12 @@ where
             return Err(Error::new());
         }
         let (r_hex, s_hex) = hex.split_at(C::FieldBytesSize::USIZE * 2);
-        let r = r_hex.parse::<NonZeroScalar<C>>().map_err(|_| Error::new())?;
-        let s = s_hex.parse::<NonZeroScalar<C>>().map_err(|_| Error::new())?;
+        let r = r_hex
+            .parse::<NonZeroScalar<C>>()
+            .map_err(|_| Error::new())?;
+        let s = s_hex
+            .parse::<NonZeroScalar<C>>()
+            .map_err(|_| Error::new())?;
         Self::from_scalars(r, s)
     }
 }

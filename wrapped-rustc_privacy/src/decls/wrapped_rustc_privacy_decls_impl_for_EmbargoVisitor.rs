@@ -8,15 +8,9 @@ impl<'tcx> EmbargoVisitor<'tcx> {
             DefKind::Mod => {}
             DefKind::Macro { .. } => {
                 if let Some(item_ev) = item_ev {
-                    let (_, macro_def, _) = self
-                        .tcx
-                        .hir_expect_item(owner_id.def_id)
-                        .expect_macro();
-                    self.update_reachability_from_macro(
-                        owner_id.def_id,
-                        macro_def,
-                        item_ev,
-                    );
+                    let (_, macro_def, _) =
+                        self.tcx.hir_expect_item(owner_id.def_id).expect_macro();
+                    self.update_reachability_from_macro(owner_id.def_id, macro_def, item_ev);
                 }
             }
             DefKind::ForeignTy
@@ -25,17 +19,16 @@ impl<'tcx> EmbargoVisitor<'tcx> {
             | DefKind::Fn
             | DefKind::TyAlias => {
                 if let Some(item_ev) = item_ev {
-                    self.reach(owner_id.def_id, item_ev).generics().predicates().ty();
+                    self.reach(owner_id.def_id, item_ev)
+                        .generics()
+                        .predicates()
+                        .ty();
                 }
             }
             DefKind::Trait => {
                 if let Some(item_ev) = item_ev {
                     self.reach(owner_id.def_id, item_ev).generics().predicates();
-                    for assoc_item in self
-                        .tcx
-                        .associated_items(owner_id)
-                        .in_definition_order()
-                    {
+                    for assoc_item in self.tcx.associated_items(owner_id).in_definition_order() {
                         if assoc_item.is_impl_trait_in_trait() {
                             continue;
                         }
@@ -44,9 +37,8 @@ impl<'tcx> EmbargoVisitor<'tcx> {
                         let tcx = self.tcx;
                         let mut reach = self.reach(def_id, item_ev);
                         reach.generics().predicates();
-                        if assoc_item.is_type()
-                            && !assoc_item.defaultness(tcx).has_value()
-                        {} else {
+                        if assoc_item.is_type() && !assoc_item.defaultness(tcx).has_value() {
+                        } else {
                             reach.ty();
                         }
                     }
@@ -58,9 +50,12 @@ impl<'tcx> EmbargoVisitor<'tcx> {
                 }
             }
             DefKind::Impl { of_trait } => {
-                let item_ev = EffectiveVisibility::of_impl::<
-                    true,
-                >(owner_id.def_id, of_trait, self.tcx, &self.effective_visibilities);
+                let item_ev = EffectiveVisibility::of_impl::<true>(
+                    owner_id.def_id,
+                    of_trait,
+                    self.tcx,
+                    &self.effective_visibilities,
+                );
                 self.update_eff_vis(owner_id.def_id, item_ev, None, Level::Direct);
                 {
                     let mut reach = self.reach(owner_id.def_id, item_ev);
@@ -69,11 +64,7 @@ impl<'tcx> EmbargoVisitor<'tcx> {
                         reach.trait_ref();
                     }
                 }
-                for assoc_item in self
-                    .tcx
-                    .associated_items(owner_id)
-                    .in_definition_order()
-                {
+                for assoc_item in self.tcx.associated_items(owner_id).in_definition_order() {
                     if assoc_item.is_impl_trait_in_trait() {
                         continue;
                     }
@@ -85,7 +76,10 @@ impl<'tcx> EmbargoVisitor<'tcx> {
                     };
                     self.update_eff_vis(def_id, item_ev, max_vis, Level::Direct);
                     if let Some(impl_item_ev) = self.get(def_id) {
-                        self.reach(def_id, impl_item_ev).generics().predicates().ty();
+                        self.reach(def_id, impl_item_ev)
+                            .generics()
+                            .predicates()
+                            .ty();
                     }
                 }
             }
@@ -96,19 +90,11 @@ impl<'tcx> EmbargoVisitor<'tcx> {
                 let def = self.tcx.adt_def(owner_id);
                 for variant in def.variants() {
                     if let Some(item_ev) = item_ev {
-                        self.update(
-                            variant.def_id.expect_local(),
-                            item_ev,
-                            Level::Reachable,
-                        );
+                        self.update(variant.def_id.expect_local(), item_ev, Level::Reachable);
                     }
                     if let Some(variant_ev) = self.get(variant.def_id.expect_local()) {
                         if let Some(ctor_def_id) = variant.ctor_def_id() {
-                            self.update(
-                                ctor_def_id.expect_local(),
-                                variant_ev,
-                                Level::Reachable,
-                            );
+                            self.update(ctor_def_id.expect_local(), variant_ev, Level::Reachable);
                         }
                         for field in &variant.fields {
                             let field = field.did.expect_local();
@@ -138,11 +124,7 @@ impl<'tcx> EmbargoVisitor<'tcx> {
                 }
                 if let Some(ctor_def_id) = def.ctor_def_id() {
                     if let Some(item_ev) = item_ev {
-                        self.update(
-                            ctor_def_id.expect_local(),
-                            item_ev,
-                            Level::Reachable,
-                        );
+                        self.update(ctor_def_id.expect_local(), item_ev, Level::Reachable);
                     }
                     if let Some(ctor_ev) = self.get(ctor_def_id.expect_local()) {
                         self.reach(owner_id.def_id, ctor_ev).ty();

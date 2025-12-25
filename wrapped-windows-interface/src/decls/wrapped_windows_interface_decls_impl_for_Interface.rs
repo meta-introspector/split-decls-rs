@@ -13,17 +13,15 @@ impl Interface {
         let com_trait = self.get_com_trait();
         let vtable = self.gen_vtable(&vtable_name);
         let conversions = self.gen_conversions();
-        Ok(
-            quote! {
-                #[repr(transparent)] # (# docs) * # vis struct # name(# parent); #
-                implementation unsafe impl ::windows_core::Interface for # name { type
-                Vtable = # vtable_name; const IID : ::windows_core::GUID = # guid; } impl
-                ::windows_core::RuntimeName for # name {} impl ::core::ops::Deref for #
-                name { type Target = # parent; fn deref(& self) -> & Self::Target {
-                unsafe { ::core::mem::transmute(self) } } } # com_trait # vtable #
-                conversions
-            },
-        )
+        Ok(quote! {
+            #[repr(transparent)] # (# docs) * # vis struct # name(# parent); #
+            implementation unsafe impl ::windows_core::Interface for # name { type
+            Vtable = # vtable_name; const IID : ::windows_core::GUID = # guid; } impl
+            ::windows_core::RuntimeName for # name {} impl ::core::ops::Deref for #
+            name { type Target = # parent; fn deref(& self) -> & Self::Target {
+            unsafe { ::core::mem::transmute(self) } } } # com_trait # vtable #
+            conversions
+        })
     }
     /// Generates the methods users can call on the COM interface pointer
     fn gen_implementation(&self) -> proc_macro2::TokenStream {
@@ -228,17 +226,15 @@ impl Interface {
         if let Some(parent) = &self.parent {
             quote!(# parent)
         } else {
-            quote!(::core::ptr::NonNull <::core::ffi::c_void >)
+            quote!(::core::ptr::NonNull<::core::ffi::c_void>)
         }
     }
     fn parent_vtable(&self) -> Option<proc_macro2::TokenStream> {
         if let Some((ident, path)) = self.parent_path().split_last() {
             let ident = quote::format_ident!("{}_Vtbl", ident);
-            Some(
-                quote! {
-                    # (# path::) * # ident
-                },
-            )
+            Some(quote! {
+                # (# path::) * # ident
+            })
         } else {
             None
         }
@@ -252,7 +248,11 @@ impl Interface {
     }
     fn parent_path(&self) -> Vec<syn::Ident> {
         if let Some(parent) = &self.parent {
-            parent.segments.iter().map(|segment| segment.ident.clone()).collect()
+            parent
+                .segments
+                .iter()
+                .map(|segment| segment.ident.clone())
+                .collect()
         } else {
             vec![]
         }

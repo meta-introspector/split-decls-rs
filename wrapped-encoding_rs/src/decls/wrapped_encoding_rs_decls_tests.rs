@@ -12,18 +12,17 @@ mod tests {
         breaks: &[usize],
     ) {
         let mut decoder = initial_encoding.new_decoder();
-        let mut dest: Vec<u16> = Vec::with_capacity(
-            decoder.max_utf16_buffer_length(bytes.len()).unwrap(),
-        );
+        let mut dest: Vec<u16> =
+            Vec::with_capacity(decoder.max_utf16_buffer_length(bytes.len()).unwrap());
         let capacity = dest.capacity();
         dest.resize(capacity, 0u16);
         let mut total_written = 0usize;
         let mut start = 0usize;
         for br in breaks {
-            let (result, read, written, _) = decoder
-                .decode_to_utf16(&bytes[start..*br], &mut dest[total_written..], false);
+            let (result, read, written, _) =
+                decoder.decode_to_utf16(&bytes[start..*br], &mut dest[total_written..], false);
             total_written += written;
-            assert_eq!(read, * br - start);
+            assert_eq!(read, *br - start);
             match result {
                 CoderResult::InputEmpty => {}
                 CoderResult::OutputFull => {
@@ -32,8 +31,8 @@ mod tests {
             }
             start = *br;
         }
-        let (result, read, written, _) = decoder
-            .decode_to_utf16(&bytes[start..], &mut dest[total_written..], true);
+        let (result, read, written, _) =
+            decoder.decode_to_utf16(&bytes[start..], &mut dest[total_written..], true);
         total_written += written;
         match result {
             CoderResult::InputEmpty => {}
@@ -43,7 +42,7 @@ mod tests {
         }
         assert_eq!(read, bytes.len() - start);
         assert_eq!(total_written, expect.len());
-        assert_eq!(& dest[..total_written], expect);
+        assert_eq!(&dest[..total_written], expect);
         assert_eq!(decoder.encoding(), expected_encoding);
     }
     #[test]
@@ -215,7 +214,8 @@ mod tests {
         assert_eq!(Encoding::for_label(b"utf-8"), Some(UTF_8));
         assert_eq!(Encoding::for_label(b"UTF-8"), Some(UTF_8));
         assert_eq!(
-            Encoding::for_label(b" \t \n \x0C \n utf-8 \r \n \t \x0C "), Some(UTF_8)
+            Encoding::for_label(b" \t \n \x0C \n utf-8 \r \n \t \x0C "),
+            Some(UTF_8)
         );
         assert_eq!(Encoding::for_label(b"utf-8 _"), None);
         assert_eq!(Encoding::for_label(b"bogus"), None);
@@ -231,7 +231,7 @@ mod tests {
             }
         }
         assert_eq!(encoding, WINDOWS_1257);
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_invalid_windows_1257_to_cow() {
@@ -255,12 +255,11 @@ mod tests {
             Cow::Owned(_) => unreachable!(),
         }
         assert_eq!(encoding, WINDOWS_1257);
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_bomful_valid_utf8_as_windows_1257_to_cow() {
-        let (cow, encoding, had_errors) = WINDOWS_1257
-            .decode(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
+        let (cow, encoding, had_errors) = WINDOWS_1257.decode(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
         match cow {
             Cow::Borrowed(s) => {
                 assert_eq!(s, "\u{20AC}\u{00E4}");
@@ -268,12 +267,12 @@ mod tests {
             Cow::Owned(_) => unreachable!(),
         }
         assert_eq!(encoding, UTF_8);
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_bomful_invalid_utf8_as_windows_1257_to_cow() {
-        let (cow, encoding, had_errors) = WINDOWS_1257
-            .decode(b"\xEF\xBB\xBF\xE2\x82\xAC\x80\xC3\xA4");
+        let (cow, encoding, had_errors) =
+            WINDOWS_1257.decode(b"\xEF\xBB\xBF\xE2\x82\xAC\x80\xC3\xA4");
         match cow {
             Cow::Borrowed(_) => unreachable!(),
             Cow::Owned(s) => {
@@ -285,8 +284,7 @@ mod tests {
     }
     #[test]
     fn test_decode_bomful_valid_utf8_as_utf_8_to_cow() {
-        let (cow, encoding, had_errors) = UTF_8
-            .decode(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
+        let (cow, encoding, had_errors) = UTF_8.decode(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
         match cow {
             Cow::Borrowed(s) => {
                 assert_eq!(s, "\u{20AC}\u{00E4}");
@@ -294,12 +292,11 @@ mod tests {
             Cow::Owned(_) => unreachable!(),
         }
         assert_eq!(encoding, UTF_8);
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_bomful_invalid_utf8_as_utf_8_to_cow() {
-        let (cow, encoding, had_errors) = UTF_8
-            .decode(b"\xEF\xBB\xBF\xE2\x82\xAC\x80\xC3\xA4");
+        let (cow, encoding, had_errors) = UTF_8.decode(b"\xEF\xBB\xBF\xE2\x82\xAC\x80\xC3\xA4");
         match cow {
             Cow::Borrowed(_) => unreachable!(),
             Cow::Owned(s) => {
@@ -311,29 +308,29 @@ mod tests {
     }
     #[test]
     fn test_decode_bomful_valid_utf8_as_utf_8_to_cow_with_bom_removal() {
-        let (cow, had_errors) = UTF_8
-            .decode_with_bom_removal(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
+        let (cow, had_errors) = UTF_8.decode_with_bom_removal(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
         match cow {
             Cow::Borrowed(s) => {
                 assert_eq!(s, "\u{20AC}\u{00E4}");
             }
             Cow::Owned(_) => unreachable!(),
         }
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_bomful_valid_utf8_as_windows_1257_to_cow_with_bom_removal() {
-        let (cow, had_errors) = WINDOWS_1257
-            .decode_with_bom_removal(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
+        let (cow, had_errors) =
+            WINDOWS_1257.decode_with_bom_removal(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
         match cow {
             Cow::Borrowed(_) => unreachable!(),
             Cow::Owned(s) => {
                 assert_eq!(
-                    s, "\u{013C}\u{00BB}\u{00E6}\u{0101}\u{201A}\u{00AC}\u{0106}\u{00A4}"
+                    s,
+                    "\u{013C}\u{00BB}\u{00E6}\u{0101}\u{201A}\u{00AC}\u{0106}\u{00A4}"
                 );
             }
         }
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_valid_windows_1257_to_cow_with_bom_removal() {
@@ -344,7 +341,7 @@ mod tests {
                 assert_eq!(s, "abc\u{20AC}\u{00E4}");
             }
         }
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_invalid_windows_1257_to_cow_with_bom_removal() {
@@ -366,24 +363,24 @@ mod tests {
             }
             Cow::Owned(_) => unreachable!(),
         }
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_bomful_valid_utf8_to_cow_without_bom_handling() {
-        let (cow, had_errors) = UTF_8
-            .decode_without_bom_handling(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
+        let (cow, had_errors) =
+            UTF_8.decode_without_bom_handling(b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4");
         match cow {
             Cow::Borrowed(s) => {
                 assert_eq!(s, "\u{FEFF}\u{20AC}\u{00E4}");
             }
             Cow::Owned(_) => unreachable!(),
         }
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_bomful_invalid_utf8_to_cow_without_bom_handling() {
-        let (cow, had_errors) = UTF_8
-            .decode_without_bom_handling(b"\xEF\xBB\xBF\xE2\x82\xAC\x80\xC3\xA4");
+        let (cow, had_errors) =
+            UTF_8.decode_without_bom_handling(b"\xEF\xBB\xBF\xE2\x82\xAC\x80\xC3\xA4");
         match cow {
             Cow::Borrowed(_) => unreachable!(),
             Cow::Owned(s) => {
@@ -401,12 +398,11 @@ mod tests {
                 assert_eq!(s, "abc\u{20AC}\u{00E4}");
             }
         }
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_invalid_windows_1257_to_cow_without_bom_handling() {
-        let (cow, had_errors) = WINDOWS_1257
-            .decode_without_bom_handling(b"abc\x80\xA1\xE4");
+        let (cow, had_errors) = WINDOWS_1257.decode_without_bom_handling(b"abc\x80\xA1\xE4");
         match cow {
             Cow::Borrowed(_) => unreachable!(),
             Cow::Owned(s) => {
@@ -424,69 +420,57 @@ mod tests {
             }
             Cow::Owned(_) => unreachable!(),
         }
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_decode_bomful_valid_utf8_to_cow_without_bom_handling_and_without_replacement() {
-        match UTF_8
-            .decode_without_bom_handling_and_without_replacement(
-                b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4",
-            )
-        {
-            Some(cow) => {
-                match cow {
-                    Cow::Borrowed(s) => {
-                        assert_eq!(s, "\u{FEFF}\u{20AC}\u{00E4}");
-                    }
-                    Cow::Owned(_) => unreachable!(),
+        match UTF_8.decode_without_bom_handling_and_without_replacement(
+            b"\xEF\xBB\xBF\xE2\x82\xAC\xC3\xA4",
+        ) {
+            Some(cow) => match cow {
+                Cow::Borrowed(s) => {
+                    assert_eq!(s, "\u{FEFF}\u{20AC}\u{00E4}");
                 }
-            }
+                Cow::Owned(_) => unreachable!(),
+            },
             None => unreachable!(),
         }
     }
     #[test]
     fn test_decode_bomful_invalid_utf8_to_cow_without_bom_handling_and_without_replacement() {
-        assert!(
-            UTF_8
-            .decode_without_bom_handling_and_without_replacement(b"\xEF\xBB\xBF\xE2\x82\xAC\x80\xC3\xA4")
-            .is_none()
-        );
+        assert!(UTF_8
+            .decode_without_bom_handling_and_without_replacement(
+                b"\xEF\xBB\xBF\xE2\x82\xAC\x80\xC3\xA4"
+            )
+            .is_none());
     }
     #[test]
     fn test_decode_valid_windows_1257_to_cow_without_bom_handling_and_without_replacement() {
-        match WINDOWS_1257
-            .decode_without_bom_handling_and_without_replacement(b"abc\x80\xE4")
-        {
-            Some(cow) => {
-                match cow {
-                    Cow::Borrowed(_) => unreachable!(),
-                    Cow::Owned(s) => {
-                        assert_eq!(s, "abc\u{20AC}\u{00E4}");
-                    }
+        match WINDOWS_1257.decode_without_bom_handling_and_without_replacement(b"abc\x80\xE4") {
+            Some(cow) => match cow {
+                Cow::Borrowed(_) => unreachable!(),
+                Cow::Owned(s) => {
+                    assert_eq!(s, "abc\u{20AC}\u{00E4}");
                 }
-            }
+            },
             None => unreachable!(),
         }
     }
     #[test]
     fn test_decode_invalid_windows_1257_to_cow_without_bom_handling_and_without_replacement() {
-        assert!(
-            WINDOWS_1257
+        assert!(WINDOWS_1257
             .decode_without_bom_handling_and_without_replacement(b"abc\x80\xA1\xE4")
-            .is_none()
-        );
+            .is_none());
     }
     #[test]
     fn test_decode_ascii_only_windows_1257_to_cow_without_bom_handling_and_without_replacement() {
         match WINDOWS_1257.decode_without_bom_handling_and_without_replacement(b"abc") {
-            Some(cow) => {
-                match cow {
-                    Cow::Borrowed(s) => {
-                        assert_eq!(s, "abc");
-                    }
-                    Cow::Owned(_) => unreachable!(),
+            Some(cow) => match cow {
+                Cow::Borrowed(s) => {
+                    assert_eq!(s, "abc");
                 }
-            }
+                Cow::Owned(_) => unreachable!(),
+            },
             None => unreachable!(),
         }
     }
@@ -500,7 +484,7 @@ mod tests {
             Cow::Owned(_) => unreachable!(),
         }
         assert_eq!(encoding, WINDOWS_1257);
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_encode_valid_windows_1257_to_cow() {
@@ -512,7 +496,7 @@ mod tests {
             }
         }
         assert_eq!(encoding, WINDOWS_1257);
-        assert!(! had_errors);
+        assert!(!had_errors);
     }
     #[test]
     fn test_utf16_space_with_one_bom_byte() {
@@ -520,14 +504,12 @@ mod tests {
         let mut dst = [0u16; 12];
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xFF", &mut dst[..needed], false);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xFF", &mut dst[..needed], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xFF", &mut dst[..needed], true);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xFF", &mut dst[..needed], true);
             assert_eq!(result, CoderResult::InputEmpty);
         }
     }
@@ -537,14 +519,12 @@ mod tests {
         let mut dst = [0u16; 12];
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xFF", &mut dst[..needed], false);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xFF", &mut dst[..needed], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xFF", &mut dst[..needed], true);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xFF", &mut dst[..needed], true);
             assert_eq!(result, CoderResult::InputEmpty);
         }
     }
@@ -554,20 +534,17 @@ mod tests {
         let mut dst = [0u16; 12];
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xEF", &mut dst[..needed], false);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xEF", &mut dst[..needed], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xBB", &mut dst[..needed], false);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xBB", &mut dst[..needed], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xFF", &mut dst[..needed], true);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xFF", &mut dst[..needed], true);
             assert_eq!(result, CoderResult::InputEmpty);
         }
     }
@@ -577,20 +554,17 @@ mod tests {
         let mut dst = [0u16; 12];
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xEF", &mut dst[..needed], false);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xEF", &mut dst[..needed], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xBB", &mut dst[..needed], false);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xBB", &mut dst[..needed], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let needed = decoder.max_utf16_buffer_length(1).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xFF", &mut dst[..needed], true);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xFF", &mut dst[..needed], true);
             assert_eq!(result, CoderResult::InputEmpty);
         }
     }
@@ -600,8 +574,7 @@ mod tests {
         let mut dst = [0u16; 12];
         {
             let needed = decoder.max_utf16_buffer_length(2).unwrap();
-            let (result, _, _, _) = decoder
-                .decode_to_utf16(b"\xFF\xFF", &mut dst[..needed], true);
+            let (result, _, _, _) = decoder.decode_to_utf16(b"\xFF\xFF", &mut dst[..needed], true);
             assert_eq!(result, CoderResult::InputEmpty);
         }
     }
@@ -623,8 +596,7 @@ mod tests {
         let mut dst = [0u8; 16];
         let mut encoder = ISO_2022_JP.new_encoder();
         {
-            let (result, _, _, _) = encoder
-                .encode_from_utf8("\u{A5}", &mut dst[..], false);
+            let (result, _, _, _) = encoder.encode_from_utf8("\u{A5}", &mut dst[..], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
@@ -641,26 +613,23 @@ mod tests {
         let mut dst = [0u8; 18];
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf8("\u{A5}\u{1F4A9}", &mut dst[..], false);
+            let (result, _, _, _) =
+                encoder.encode_from_utf8("\u{A5}\u{1F4A9}", &mut dst[..], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf8("\u{A5}\u{1F4A9}", &mut dst[..], true);
+            let (result, _, _, _) = encoder.encode_from_utf8("\u{A5}\u{1F4A9}", &mut dst[..], true);
             assert_eq!(result, CoderResult::OutputFull);
         }
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf8("\u{1F4A9}", &mut dst[..13], false);
+            let (result, _, _, _) = encoder.encode_from_utf8("\u{1F4A9}", &mut dst[..13], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf8("\u{1F4A9}", &mut dst[..13], true);
+            let (result, _, _, _) = encoder.encode_from_utf8("\u{1F4A9}", &mut dst[..13], true);
             assert_eq!(result, CoderResult::InputEmpty);
         }
     }
@@ -669,13 +638,11 @@ mod tests {
         let mut dst = [0u8; 8];
         let mut encoder = ISO_2022_JP.new_encoder();
         {
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(&[0u16; 0], &mut dst[..], false);
+            let (result, _, _, _) = encoder.encode_from_utf16(&[0u16; 0], &mut dst[..], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(&[0u16; 0], &mut dst[..], true);
+            let (result, _, _, _) = encoder.encode_from_utf16(&[0u16; 0], &mut dst[..], true);
             assert_eq!(result, CoderResult::InputEmpty);
         }
     }
@@ -684,18 +651,15 @@ mod tests {
         let mut dst = [0u8; 16];
         let mut encoder = ISO_2022_JP.new_encoder();
         {
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(&[0xA5u16], &mut dst[..], false);
+            let (result, _, _, _) = encoder.encode_from_utf16(&[0xA5u16], &mut dst[..], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(&[0u16; 0], &mut dst[..8], false);
+            let (result, _, _, _) = encoder.encode_from_utf16(&[0u16; 0], &mut dst[..8], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(&[0u16; 0], &mut dst[..8], true);
+            let (result, _, _, _) = encoder.encode_from_utf16(&[0u16; 0], &mut dst[..8], true);
             assert_eq!(result, CoderResult::OutputFull);
         }
     }
@@ -704,30 +668,26 @@ mod tests {
         let mut dst = [0u8; 18];
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(
-                    &[0xA5u16, 0xD83Du16, 0xDCA9u16],
-                    &mut dst[..],
-                    false,
-                );
+            let (result, _, _, _) =
+                encoder.encode_from_utf16(&[0xA5u16, 0xD83Du16, 0xDCA9u16], &mut dst[..], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(&[0xA5u16, 0xD83Du16, 0xDCA9u16], &mut dst[..], true);
+            let (result, _, _, _) =
+                encoder.encode_from_utf16(&[0xA5u16, 0xD83Du16, 0xDCA9u16], &mut dst[..], true);
             assert_eq!(result, CoderResult::OutputFull);
         }
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(&[0xD83Du16, 0xDCA9u16], &mut dst[..13], false);
+            let (result, _, _, _) =
+                encoder.encode_from_utf16(&[0xD83Du16, 0xDCA9u16], &mut dst[..13], false);
             assert_eq!(result, CoderResult::InputEmpty);
         }
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(&[0xD83Du16, 0xDCA9u16], &mut dst[..13], true);
+            let (result, _, _, _) =
+                encoder.encode_from_utf16(&[0xD83Du16, 0xDCA9u16], &mut dst[..13], true);
             assert_eq!(result, CoderResult::InputEmpty);
         }
     }
@@ -736,7 +696,7 @@ mod tests {
         let mut decoder = UTF_16BE.new_decoder_without_bom_handling();
         let mut dest = [0u8; 4];
         assert_eq!(
-            decoder.decode_to_utf8(& [0xD8, 0x00], & mut dest, false),
+            decoder.decode_to_utf8(&[0xD8, 0x00], &mut dest, false),
             (CoderResult::InputEmpty, 2, 0, false)
         );
         let _ = decoder.decode_to_utf8(&[0xD8, 0x00], &mut dest, true);
@@ -748,17 +708,17 @@ mod tests {
         encodings.insert(ISO_2022_JP);
         assert!(encodings.contains(UTF_8));
         assert!(encodings.contains(ISO_2022_JP));
-        assert!(! encodings.contains(WINDOWS_1252));
+        assert!(!encodings.contains(WINDOWS_1252));
         encodings.remove(ISO_2022_JP);
-        assert!(! encodings.contains(ISO_2022_JP));
+        assert!(!encodings.contains(ISO_2022_JP));
     }
     #[test]
     fn test_iso_2022_jp_ncr_extra_from_utf16() {
         let mut dst = [0u8; 17];
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf16(&[0x3041u16, 0xFFFFu16], &mut dst[..], true);
+            let (result, _, _, _) =
+                encoder.encode_from_utf16(&[0x3041u16, 0xFFFFu16], &mut dst[..], true);
             assert_eq!(result, CoderResult::OutputFull);
         }
     }
@@ -767,8 +727,8 @@ mod tests {
         let mut dst = [0u8; 17];
         {
             let mut encoder = ISO_2022_JP.new_encoder();
-            let (result, _, _, _) = encoder
-                .encode_from_utf8("\u{3041}\u{FFFF}", &mut dst[..], true);
+            let (result, _, _, _) =
+                encoder.encode_from_utf8("\u{3041}\u{FFFF}", &mut dst[..], true);
             assert_eq!(result, CoderResult::OutputFull);
         }
     }
@@ -781,8 +741,8 @@ mod tests {
             let needed = decoder
                 .max_utf8_buffer_length_without_replacement(input.len())
                 .unwrap();
-            let (result, read, written) = decoder
-                .decode_to_utf8_without_replacement(input, &mut output[..needed], true);
+            let (result, read, written) =
+                decoder.decode_to_utf8_without_replacement(input, &mut output[..needed], true);
             assert_eq!(result, DecoderResult::InputEmpty);
             assert_eq!(read, input.len());
             assert_eq!(written, 1);
@@ -806,17 +766,17 @@ mod tests {
     }
     #[test]
     fn test_is_single_byte() {
-        assert!(! BIG5.is_single_byte());
-        assert!(! EUC_JP.is_single_byte());
-        assert!(! EUC_KR.is_single_byte());
-        assert!(! GB18030.is_single_byte());
-        assert!(! GBK.is_single_byte());
-        assert!(! REPLACEMENT.is_single_byte());
-        assert!(! SHIFT_JIS.is_single_byte());
-        assert!(! UTF_8.is_single_byte());
-        assert!(! UTF_16BE.is_single_byte());
-        assert!(! UTF_16LE.is_single_byte());
-        assert!(! ISO_2022_JP.is_single_byte());
+        assert!(!BIG5.is_single_byte());
+        assert!(!EUC_JP.is_single_byte());
+        assert!(!EUC_KR.is_single_byte());
+        assert!(!GB18030.is_single_byte());
+        assert!(!GBK.is_single_byte());
+        assert!(!REPLACEMENT.is_single_byte());
+        assert!(!SHIFT_JIS.is_single_byte());
+        assert!(!UTF_8.is_single_byte());
+        assert!(!UTF_16BE.is_single_byte());
+        assert!(!UTF_16LE.is_single_byte());
+        assert!(!ISO_2022_JP.is_single_byte());
         assert!(IBM866.is_single_byte());
         assert!(ISO_8859_2.is_single_byte());
         assert!(ISO_8859_3.is_single_byte());
@@ -851,166 +811,278 @@ mod tests {
     fn test_latin1_byte_compatible_up_to() {
         let buffer = b"a\x81\xB6\xF6\xF0\x82\xB4";
         assert_eq!(
-            BIG5.new_decoder_without_bom_handling().latin1_byte_compatible_up_to(buffer)
-            .unwrap(), 1
+            BIG5.new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            EUC_JP.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            EUC_JP
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            EUC_KR.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            EUC_KR
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            GB18030.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            GB18030
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            GBK.new_decoder_without_bom_handling().latin1_byte_compatible_up_to(buffer)
-            .unwrap(), 1
+            GBK.new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
-        assert!(
-            REPLACEMENT.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).is_none()
+        assert!(REPLACEMENT
+            .new_decoder_without_bom_handling()
+            .latin1_byte_compatible_up_to(buffer)
+            .is_none());
+        assert_eq!(
+            SHIFT_JIS
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            SHIFT_JIS.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            UTF_8
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
+        );
+        assert!(UTF_16BE
+            .new_decoder_without_bom_handling()
+            .latin1_byte_compatible_up_to(buffer)
+            .is_none());
+        assert!(UTF_16LE
+            .new_decoder_without_bom_handling()
+            .latin1_byte_compatible_up_to(buffer)
+            .is_none());
+        assert_eq!(
+            ISO_2022_JP
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            UTF_8.new_decoder_without_bom_handling().latin1_byte_compatible_up_to(buffer)
-            .unwrap(), 1
-        );
-        assert!(
-            UTF_16BE.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).is_none()
-        );
-        assert!(
-            UTF_16LE.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).is_none()
+            IBM866
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            ISO_2022_JP.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            ISO_8859_2
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            2
         );
         assert_eq!(
-            IBM866.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            ISO_8859_3
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            2
         );
         assert_eq!(
-            ISO_8859_2.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 2
+            ISO_8859_4
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            2
         );
         assert_eq!(
-            ISO_8859_3.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 2
+            ISO_8859_5
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            2
         );
         assert_eq!(
-            ISO_8859_4.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 2
+            ISO_8859_6
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            2
         );
         assert_eq!(
-            ISO_8859_5.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 2
+            ISO_8859_7
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            2
         );
         assert_eq!(
-            ISO_8859_6.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 2
+            ISO_8859_8
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            3
         );
         assert_eq!(
-            ISO_8859_7.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 2
+            ISO_8859_10
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            2
         );
         assert_eq!(
-            ISO_8859_8.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 3
+            ISO_8859_13
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            4
         );
         assert_eq!(
-            ISO_8859_10.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 2
+            ISO_8859_14
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            4
         );
         assert_eq!(
-            ISO_8859_13.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 4
+            ISO_8859_15
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            6
         );
         assert_eq!(
-            ISO_8859_14.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 4
+            ISO_8859_16
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            4
         );
         assert_eq!(
-            ISO_8859_15.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 6
+            ISO_8859_8_I
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            3
         );
         assert_eq!(
-            ISO_8859_16.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 4
+            KOI8_R
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            ISO_8859_8_I.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 3
+            KOI8_U
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            KOI8_R.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            MACINTOSH
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            KOI8_U.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            WINDOWS_874
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            2
         );
         assert_eq!(
-            MACINTOSH.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            WINDOWS_1250
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            4
         );
         assert_eq!(
-            WINDOWS_874.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 2
+            WINDOWS_1251
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            WINDOWS_1250.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 4
+            WINDOWS_1252
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            5
         );
         assert_eq!(
-            WINDOWS_1251.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            WINDOWS_1253
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            3
         );
         assert_eq!(
-            WINDOWS_1252.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 5
+            WINDOWS_1254
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            4
         );
         assert_eq!(
-            WINDOWS_1253.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 3
+            WINDOWS_1255
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            3
         );
         assert_eq!(
-            WINDOWS_1254.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 4
+            WINDOWS_1256
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            WINDOWS_1255.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 3
+            WINDOWS_1257
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            4
         );
         assert_eq!(
-            WINDOWS_1256.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
+            WINDOWS_1258
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            4
         );
         assert_eq!(
-            WINDOWS_1257.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 4
+            X_MAC_CYRILLIC
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
         assert_eq!(
-            WINDOWS_1258.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 4
+            X_USER_DEFINED
+                .new_decoder_without_bom_handling()
+                .latin1_byte_compatible_up_to(buffer)
+                .unwrap(),
+            1
         );
-        assert_eq!(
-            X_MAC_CYRILLIC.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
-        );
-        assert_eq!(
-            X_USER_DEFINED.new_decoder_without_bom_handling()
-            .latin1_byte_compatible_up_to(buffer).unwrap(), 1
-        );
-        assert!(UTF_8.new_decoder().latin1_byte_compatible_up_to(buffer).is_none());
+        assert!(UTF_8
+            .new_decoder()
+            .latin1_byte_compatible_up_to(buffer)
+            .is_none());
         let mut decoder = UTF_8.new_decoder();
         let mut output = [0u16; 4];
         let _ = decoder.decode_to_utf16(b"\xEF", &mut output, false);

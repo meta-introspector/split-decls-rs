@@ -14,7 +14,7 @@ pub fn shebling(input: TokenStream) -> TokenStream {
                 span => compile_error!(format!("Failed to read shell script at {}: {}", #
                 script_path, # e));
             }
-                .into();
+            .into();
         }
     };
     let parsed_ast_string = match parse(&script_content) {
@@ -24,7 +24,7 @@ pub fn shebling(input: TokenStream) -> TokenStream {
                 span => compile_error!(format!("Failed to parse shell script at {}: {}",
                 # script_path, # e));
             }
-                .into();
+            .into();
         }
     };
     let expanded = quote! {

@@ -37,17 +37,14 @@ trait Unescape {
                 .map(|b| Self::nonzero_byte2unit(b))
                 .or_else(|c| match c {
                     'x' => Self::hex2unit(hex_escape(chars)?),
-                    'u' => {
-                        Self::unicode2unit({
-                            let value = unicode_escape(chars)?;
-                            if value > char::MAX as u32 {
-                                Err(EscapeError::OutOfRangeUnicodeEscape)
-                            } else {
-                                char::from_u32(value)
-                                    .ok_or(EscapeError::LoneSurrogateUnicodeEscape)
-                            }
-                        })
-                    }
+                    'u' => Self::unicode2unit({
+                        let value = unicode_escape(chars)?;
+                        if value > char::MAX as u32 {
+                            Err(EscapeError::OutOfRangeUnicodeEscape)
+                        } else {
+                            char::from_u32(value).ok_or(EscapeError::LoneSurrogateUnicodeEscape)
+                        }
+                    }),
                     _ => Err(EscapeError::InvalidEscape),
                 })
         }

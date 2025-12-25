@@ -18,7 +18,10 @@ impl Tool {
     ///    first that exists
     /// 4) If all else fails, we just try to use the executable name directly
     pub fn prefer_proxy(self) -> Utf8PathBuf {
-        invoke(&[cargo_proxy, lookup_as_env_var, lookup_in_path], self.name())
+        invoke(
+            &[cargo_proxy, lookup_as_env_var, lookup_in_path],
+            self.name(),
+        )
     }
     /// Return a `PathBuf` to use for the given executable.
     ///
@@ -34,7 +37,10 @@ impl Tool {
     ///    It seems that this is a reasonable place to try for cargo, rustc, and rustup
     /// 4) If all else fails, we just try to use the executable name directly
     pub fn path(self) -> Utf8PathBuf {
-        invoke(&[lookup_as_env_var, lookup_in_path, cargo_proxy], self.name())
+        invoke(
+            &[lookup_as_env_var, lookup_in_path, cargo_proxy],
+            self.name(),
+        )
     }
     pub fn path_in(self, path: &Utf8Path) -> Option<Utf8PathBuf> {
         probe_for_binary(path.join(self.name()))

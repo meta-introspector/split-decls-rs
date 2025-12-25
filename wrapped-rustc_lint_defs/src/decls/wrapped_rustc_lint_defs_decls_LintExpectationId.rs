@@ -22,10 +22,17 @@ use std::collections::HashMap;
 pub enum LintExpectationId {
     /// Used for lints emitted during the `EarlyLintPass`. This id is not
     /// hash stable and should not be cached.
-    Unstable { attr_id: AttrId, lint_index: Option<u16> },
+    Unstable {
+        attr_id: AttrId,
+        lint_index: Option<u16>,
+    },
     /// The [`HirId`] that the lint expectation is attached to. This id is
     /// stable and can be cached. The additional index ensures that nodes with
     /// several expectations can correctly match diagnostics to the individual
     /// expectation.
-    Stable { hir_id: HirId, attr_index: u16, lint_index: Option<u16> },
+    Stable {
+        hir_id: HirId,
+        attr_index: u16,
+        lint_index: Option<u16>,
+    },
 }

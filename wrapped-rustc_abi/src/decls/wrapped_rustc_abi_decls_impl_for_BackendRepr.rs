@@ -27,7 +27,7 @@ impl BackendRepr {
     /// Returns `true` if this is a scalar type
     #[inline]
     pub fn is_scalar(&self) -> bool {
-        matches!(* self, BackendRepr::Scalar(_))
+        matches!(*self, BackendRepr::Scalar(_))
     }
     /// Returns `true` if this is a bool
     #[inline]
@@ -52,8 +52,7 @@ impl BackendRepr {
             BackendRepr::Scalar(s) => Some(s.size(cx)),
             BackendRepr::ScalarPair(s1, s2) => {
                 let field2_offset = s1.size(cx).align_to(s2.align(cx).abi);
-                let size = (field2_offset + s2.size(cx))
-                    .align_to(self.scalar_align(cx).unwrap());
+                let size = (field2_offset + s2.size(cx)).align_to(self.scalar_align(cx).unwrap());
                 Some(size)
             }
             BackendRepr::SimdVector { .. } | BackendRepr::Memory { .. } => None,
@@ -66,23 +65,25 @@ impl BackendRepr {
             BackendRepr::ScalarPair(s1, s2) => {
                 BackendRepr::ScalarPair(s1.to_union(), s2.to_union())
             }
-            BackendRepr::SimdVector { element, count } => {
-                BackendRepr::SimdVector {
-                    element: element.to_union(),
-                    count,
-                }
-            }
+            BackendRepr::SimdVector { element, count } => BackendRepr::SimdVector {
+                element: element.to_union(),
+                count,
+            },
             BackendRepr::Memory { .. } => BackendRepr::Memory { sized: true },
         }
     }
     pub fn eq_up_to_validity(&self, other: &Self) -> bool {
         match (self, other) {
-            (BackendRepr::Scalar(l), BackendRepr::Scalar(r)) => {
-                l.primitive() == r.primitive()
-            }
+            (BackendRepr::Scalar(l), BackendRepr::Scalar(r)) => l.primitive() == r.primitive(),
             (
-                BackendRepr::SimdVector { element: element_l, count: count_l },
-                BackendRepr::SimdVector { element: element_r, count: count_r },
+                BackendRepr::SimdVector {
+                    element: element_l,
+                    count: count_l,
+                },
+                BackendRepr::SimdVector {
+                    element: element_r,
+                    count: count_r,
+                },
             ) => element_l.primitive() == element_r.primitive() && count_l == count_r,
             (BackendRepr::ScalarPair(l1, l2), BackendRepr::ScalarPair(r1, r2)) => {
                 l1.primitive() == r1.primitive() && l2.primitive() == r2.primitive()

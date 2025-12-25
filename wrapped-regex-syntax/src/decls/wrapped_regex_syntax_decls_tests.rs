@@ -2,19 +2,19 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod tests {
-    use alloc::string::ToString;
     use super::*;
+    use alloc::string::ToString;
     #[test]
     fn escape_meta() {
         assert_eq!(
-            escape(r"\.+*?()|[]{}^$#&-~"), r"\\\.\+\*\?\(\)\|\[\]\{\}\^\$\#\&\-\~"
-            .to_string()
+            escape(r"\.+*?()|[]{}^$#&-~"),
+            r"\\\.\+\*\?\(\)\|\[\]\{\}\^\$\#\&\-\~".to_string()
         );
     }
     #[test]
     fn word_byte() {
         assert!(is_word_byte(b'a'));
-        assert!(! is_word_byte(b'-'));
+        assert!(!is_word_byte(b'-'));
     }
     #[test]
     #[cfg(feature = "unicode-perl")]
@@ -28,8 +28,8 @@ mod tests {
         assert!(is_word_character('\u{17828}'), "Tangut (Unicode 9.0)");
         assert!(is_word_character('\u{1B1B1}'), "Nushu (Unicode 10.0)");
         assert!(is_word_character('\u{16E40}'), "Medefaidrin (Unicode 11.0)");
-        assert!(! is_word_character('-'));
-        assert!(! is_word_character('☃'));
+        assert!(!is_word_character('-'));
+        assert!(!is_word_character('☃'));
     }
     #[test]
     #[should_panic]

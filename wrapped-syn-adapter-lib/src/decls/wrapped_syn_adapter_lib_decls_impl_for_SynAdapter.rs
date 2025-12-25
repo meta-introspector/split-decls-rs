@@ -4,10 +4,9 @@ use std::collections::HashMap;
 impl SynAdapter for LibSynAdapter {
     fn parse_file(&self, path: &Path) -> Result<File> {
         println!("[LibSynAdapter] Parsing file: {:?}", path);
-        let content = fs::read_to_string(path)
-            .context(format!("Failed to read file {:?}", path))?;
-        syn::parse_file(&content)
-            .context(format!("Failed to parse Rust file {:?}", path))
+        let content =
+            fs::read_to_string(path).context(format!("Failed to read file {:?}", path))?;
+        syn::parse_file(&content).context(format!("Failed to parse Rust file {:?}", path))
     }
     fn parse_str(&self, code: &str) -> Result<File> {
         println!("[LibSynAdapter] Parsing string: {}", code);

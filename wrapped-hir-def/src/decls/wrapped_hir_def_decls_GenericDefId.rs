@@ -1,16 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-#[derive(
-    Debug,
-    PartialOrd,
-    Ord,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    salsa_macros::Supertype
-)]
+#[derive(Debug, PartialOrd, Ord, Clone, Copy, PartialEq, Eq, Hash, salsa_macros::Supertype)]
 pub enum GenericDefId {
     AdtId(AdtId),
     ConstId(ConstId),

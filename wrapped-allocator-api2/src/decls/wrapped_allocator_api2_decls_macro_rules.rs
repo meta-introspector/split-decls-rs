@@ -21,8 +21,9 @@ use std::collections::HashMap;
 #[macro_export]
 #[cfg(feature = "alloc")]
 macro_rules! unsize_box {
-    ($boxed:expr $(,)?) => {
-        { let (ptr, allocator) = $crate::boxed::Box::into_raw_with_allocator($boxed); let
-        ptr : * mut _ = ptr; unsafe { $crate::boxed::Box::from_raw_in(ptr, allocator) } }
-    };
+    ($boxed:expr $(,)?) => {{
+        let (ptr, allocator) = $crate::boxed::Box::into_raw_with_allocator($boxed);
+        let ptr: *mut _ = ptr;
+        unsafe { $crate::boxed::Box::from_raw_in(ptr, allocator) }
+    }};
 }

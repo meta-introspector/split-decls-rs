@@ -7,16 +7,18 @@ fn dewhereselfify(generics: &mut Generics) {
             .predicates
             .iter()
             .filter(|wp| match wp {
-                WherePredicate::Type(pt) => {
-                    pt.bounded_ty != parse2(quote!(Self)).unwrap()
-                }
+                WherePredicate::Type(pt) => pt.bounded_ty != parse2(quote!(Self)).unwrap(),
                 _ => true,
             })
             .cloned()
             .collect::<Punctuated<WherePredicate, Token![,]>>();
         wc.predicates = new_predicates;
     }
-    if generics.where_clause.as_ref().map(|wc| wc.predicates.is_empty()).unwrap_or(false)
+    if generics
+        .where_clause
+        .as_ref()
+        .map(|wc| wc.predicates.is_empty())
+        .unwrap_or(false)
     {
         generics.where_clause = None;
     }

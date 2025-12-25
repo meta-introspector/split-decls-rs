@@ -19,11 +19,10 @@ pub fn domain_to_ascii_from_cow(
     domain: Cow<'_, [u8]>,
     ascii_deny_list: AsciiDenyList,
 ) -> Result<Cow<'_, str>, Errors> {
-    Uts46::new()
-        .to_ascii_from_cow(
-            domain,
-            ascii_deny_list,
-            uts46::Hyphens::Allow,
-            uts46::DnsLength::Ignore,
-        )
+    Uts46::new().to_ascii_from_cow(
+        domain,
+        ascii_deny_list,
+        uts46::Hyphens::Allow,
+        uts46::DnsLength::Ignore,
+    )
 }

@@ -15,11 +15,10 @@ use std::collections::HashMap;
 /// errors to the user. When the second item of the return tuple signals an error,
 /// the first item of the tuple must not be used in a network protocol.
 pub fn domain_to_unicode(domain: &str) -> (String, Result<(), Errors>) {
-    let (cow, result) = Uts46::new()
-        .to_unicode(
-            domain.as_bytes(),
-            uts46::AsciiDenyList::EMPTY,
-            uts46::Hyphens::Allow,
-        );
+    let (cow, result) = Uts46::new().to_unicode(
+        domain.as_bytes(),
+        uts46::AsciiDenyList::EMPTY,
+        uts46::Hyphens::Allow,
+    );
     (cow.into_owned(), result)
 }

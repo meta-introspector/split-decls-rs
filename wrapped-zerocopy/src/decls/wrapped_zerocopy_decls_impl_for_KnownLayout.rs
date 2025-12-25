@@ -1,0 +1,32 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+unsafe impl<T> KnownLayout for [T] {
+    #[allow(clippy::missing_inline_in_public_items, dead_code)]
+    #[cfg_attr(
+        all(
+            coverage_nightly,
+            __ZEROCOPY_INTERNAL_USE_ONLY_NIGHTLY_FEATURES_IN_TESTS
+        ),
+        coverage(off)
+    )]
+    fn only_derive_is_allowed_to_implement_this_trait()
+    where
+        Self: Sized,
+    {
+    }
+    type PointerMetadata = usize;
+    type MaybeUninit = [CoreMaybeUninit<T>];
+    const LAYOUT: DstLayout = DstLayout::for_slice::<T>();
+    #[inline(always)]
+    fn raw_from_ptr_len(data: NonNull<u8>, elems: usize) -> NonNull<Self> {
+        #[allow(unstable_name_collisions)]
+        NonNull::slice_from_raw_parts(data.cast::<T>(), elems)
+    }
+    #[inline(always)]
+    fn pointer_to_metadata(ptr: *mut [T]) -> usize {
+        #[allow(clippy::as_conversions)]
+        let slc = ptr as *const [()];
+        let slc = unsafe { &*slc };
+        slc.len()
+    }
+}

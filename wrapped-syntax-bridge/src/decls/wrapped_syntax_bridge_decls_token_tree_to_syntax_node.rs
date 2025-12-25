@@ -17,12 +17,13 @@ where
     let mut tree_sink = TtTreeSink::new(buffer.cursor());
     for event in parser_output.iter() {
         match event {
-            parser::Step::Token { kind, n_input_tokens: n_raw_tokens } => {
-                tree_sink.token(kind, n_raw_tokens)
-            }
-            parser::Step::FloatSplit { ends_in_dot: has_pseudo_dot } => {
-                tree_sink.float_split(has_pseudo_dot)
-            }
+            parser::Step::Token {
+                kind,
+                n_input_tokens: n_raw_tokens,
+            } => tree_sink.token(kind, n_raw_tokens),
+            parser::Step::FloatSplit {
+                ends_in_dot: has_pseudo_dot,
+            } => tree_sink.float_split(has_pseudo_dot),
             parser::Step::Enter { kind } => tree_sink.start_node(kind),
             parser::Step::Exit => tree_sink.finish_node(),
             parser::Step::Error { msg } => tree_sink.error(msg.to_owned()),

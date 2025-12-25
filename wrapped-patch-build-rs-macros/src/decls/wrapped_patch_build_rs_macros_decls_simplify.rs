@@ -11,5 +11,5 @@ pub fn simplify(input: TokenStream) -> TokenStream {
         println!("cargo:warning=📉 Simplified: {} -> {} lines", # data.lines().count(),
         simplified.lines().count()); simplified }
     }
-        .into()
+    .into()
 }

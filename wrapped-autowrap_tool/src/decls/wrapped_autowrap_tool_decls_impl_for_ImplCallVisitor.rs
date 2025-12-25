@@ -4,8 +4,6 @@ impl ImplCallVisitor {
     fn new(
         init_calls: std::collections::HashMap<String, std::collections::HashSet<String>>,
     ) -> Self {
-        ImplCallVisitor {
-            calls: init_calls,
-        }
+        ImplCallVisitor { calls: init_calls }
     }
 }

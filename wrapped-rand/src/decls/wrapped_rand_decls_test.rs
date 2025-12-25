@@ -41,9 +41,9 @@ mod test {
             255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
         ];
         RngReader(&mut rng).read_exact(&mut buf).unwrap();
-        assert_eq!(& buf, & expected);
+        assert_eq!(&buf, &expected);
         RngReader(StepRng(255, 1)).read_exact(&mut buf).unwrap();
-        assert_eq!(& buf, & expected);
+        assert_eq!(&buf, &expected);
     }
     #[test]
     #[cfg(feature = "thread_rng")]

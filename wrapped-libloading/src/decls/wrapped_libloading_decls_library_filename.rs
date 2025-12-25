@@ -22,9 +22,8 @@ use std::collections::HashMap;
 pub fn library_filename<S: AsRef<std::ffi::OsStr>>(name: S) -> std::ffi::OsString {
     use std::env::consts::{DLL_PREFIX, DLL_SUFFIX};
     let name = name.as_ref();
-    let mut string = std::ffi::OsString::with_capacity(
-        name.len() + DLL_PREFIX.len() + DLL_SUFFIX.len(),
-    );
+    let mut string =
+        std::ffi::OsString::with_capacity(name.len() + DLL_PREFIX.len() + DLL_SUFFIX.len());
     string.push(DLL_PREFIX);
     string.push(name);
     string.push(DLL_SUFFIX);

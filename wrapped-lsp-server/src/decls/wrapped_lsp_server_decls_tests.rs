@@ -2,12 +2,12 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod tests {
+    use crate::{Connection, Message, ProtocolError, RequestId};
     use crossbeam_channel::unbounded;
     use lsp_types::notification::{Exit, Initialized, Notification};
     use lsp_types::request::{Initialize, Request};
     use lsp_types::{InitializeParams, InitializedParams};
     use serde_json::to_value;
-    use crate::{Connection, Message, ProtocolError, RequestId};
     struct TestCase {
         test_messages: Vec<Message>,
         expected_resp: Result<(RequestId, serde_json::Value), ProtocolError>,
@@ -24,9 +24,9 @@ mod tests {
         }
         let resp = conn.initialize_start();
         assert_eq!(test_case.expected_resp, resp);
-        assert!(
-            writer_receiver.recv_timeout(std::time::Duration::from_secs(1)).is_err()
-        );
+        assert!(writer_receiver
+            .recv_timeout(std::time::Duration::from_secs(1))
+            .is_err());
     }
     #[test]
     fn not_exit_notification() {
@@ -55,11 +55,9 @@ mod tests {
         let notification_msg = Message::from(notification);
         initialize_start_test(TestCase {
             test_messages: vec![notification_msg.clone()],
-            expected_resp: Err(
-                ProtocolError::new(
-                    format!("expected initialize request, got {notification_msg:?}"),
-                ),
-            ),
+            expected_resp: Err(ProtocolError::new(format!(
+                "expected initialize request, got {notification_msg:?}"
+            ))),
         });
     }
 }

@@ -31,10 +31,9 @@ fn merge_generics(x: &Generics, y: &Generics) -> Generics {
         'outer_param: for yparam in y.params.iter() {
             for outparam in out.params.iter_mut() {
                 if cmp_gp_idents(outparam, yparam) {
-                    if let (GenericParam::Type(ref mut ot), GenericParam::Type(yt)) = (
-                        outparam,
-                        yparam,
-                    ) {
+                    if let (GenericParam::Type(ref mut ot), GenericParam::Type(yt)) =
+                        (outparam, yparam)
+                    {
                         ot.attrs.extend(yt.attrs.iter().cloned());
                         ot.colon_token = ot.colon_token.or(yt.colon_token);
                         ot.eq_token = ot.eq_token.or(yt.eq_token);
@@ -59,10 +58,9 @@ fn merge_generics(x: &Generics, y: &Generics) -> Generics {
             'outer_wc: for ypred in y_wc.predicates.iter() {
                 for outpred in out_wc.predicates.iter_mut() {
                     if cmp_wp_idents(outpred, ypred) {
-                        if let (
-                            WherePredicate::Type(ref mut ot),
-                            WherePredicate::Type(yt),
-                        ) = (outpred, ypred) {
+                        if let (WherePredicate::Type(ref mut ot), WherePredicate::Type(yt)) =
+                            (outpred, ypred)
+                        {
                             match (&mut ot.lifetimes, &yt.lifetimes) {
                                 (_, None) => {}
                                 (None, Some(bl)) => ot.lifetimes = Some(bl.clone()),

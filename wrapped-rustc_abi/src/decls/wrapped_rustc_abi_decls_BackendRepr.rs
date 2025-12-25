@@ -15,7 +15,10 @@ use std::collections::HashMap;
 pub enum BackendRepr {
     Scalar(Scalar),
     ScalarPair(Scalar, Scalar),
-    SimdVector { element: Scalar, count: u64 },
+    SimdVector {
+        element: Scalar,
+        count: u64,
+    },
     Memory {
         /// If true, the size is exact, otherwise it's only a lower bound.
         sized: bool,

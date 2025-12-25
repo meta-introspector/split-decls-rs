@@ -13,11 +13,9 @@ fn impl_include_dir(args: Vec<TokenTree>) -> Result<quote::Tokens, &'static str>
         .map(|path| ::std::fs::canonicalize(path).expect("found"))
         .map(path_to_str_literal)
         .collect();
-    Ok(
-        quote! {
-            { let mut __include_dir_hashmap = ::std::collections::HashMap::new(); #
-            (__include_dir_hashmap.insert(::std::path::Path::new(# keys), &
-            include_bytes!(# vals) [..]);) * __include_dir_hashmap }
-        },
-    )
+    Ok(quote! {
+        { let mut __include_dir_hashmap = ::std::collections::HashMap::new(); #
+        (__include_dir_hashmap.insert(::std::path::Path::new(# keys), &
+        include_bytes!(# vals) [..]);) * __include_dir_hashmap }
+    })
 }

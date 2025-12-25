@@ -8,10 +8,7 @@ impl StableSourceFileId {
         filename: &FileName,
         local_crate_stable_crate_id: StableCrateId,
     ) -> Self {
-        Self::from_filename_and_stable_crate_id(
-            filename,
-            Some(local_crate_stable_crate_id),
-        )
+        Self::from_filename_and_stable_crate_id(filename, Some(local_crate_stable_crate_id))
     }
     fn from_filename_and_stable_crate_id(
         filename: &FileName,

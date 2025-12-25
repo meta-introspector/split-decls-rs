@@ -17,16 +17,12 @@ impl TypeOrConstParam {
     pub fn split(self, db: &dyn HirDatabase) -> Either<ConstParam, TypeParam> {
         let params = db.generic_params(self.id.parent);
         match &params[self.id.local_id] {
-            TypeOrConstParamData::TypeParamData(_) => {
-                Either::Right(TypeParam {
-                    id: TypeParamId::from_unchecked(self.id),
-                })
-            }
-            TypeOrConstParamData::ConstParamData(_) => {
-                Either::Left(ConstParam {
-                    id: ConstParamId::from_unchecked(self.id),
-                })
-            }
+            TypeOrConstParamData::TypeParamData(_) => Either::Right(TypeParam {
+                id: TypeParamId::from_unchecked(self.id),
+            }),
+            TypeOrConstParamData::ConstParamData(_) => Either::Left(ConstParam {
+                id: ConstParamId::from_unchecked(self.id),
+            }),
         }
     }
     pub fn ty(self, db: &dyn HirDatabase) -> Type<'_> {
@@ -38,11 +34,9 @@ impl TypeOrConstParam {
     pub fn as_type_param(self, db: &dyn HirDatabase) -> Option<TypeParam> {
         let params = db.generic_params(self.id.parent);
         match &params[self.id.local_id] {
-            TypeOrConstParamData::TypeParamData(_) => {
-                Some(TypeParam {
-                    id: TypeParamId::from_unchecked(self.id),
-                })
-            }
+            TypeOrConstParamData::TypeParamData(_) => Some(TypeParam {
+                id: TypeParamId::from_unchecked(self.id),
+            }),
             TypeOrConstParamData::ConstParamData(_) => None,
         }
     }
@@ -50,11 +44,9 @@ impl TypeOrConstParam {
         let params = db.generic_params(self.id.parent);
         match &params[self.id.local_id] {
             TypeOrConstParamData::TypeParamData(_) => None,
-            TypeOrConstParamData::ConstParamData(_) => {
-                Some(ConstParam {
-                    id: ConstParamId::from_unchecked(self.id),
-                })
-            }
+            TypeOrConstParamData::ConstParamData(_) => Some(ConstParam {
+                id: ConstParamId::from_unchecked(self.id),
+            }),
         }
     }
 }

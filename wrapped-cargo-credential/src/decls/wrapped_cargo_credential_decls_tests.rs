@@ -7,8 +7,8 @@ mod tests {
     fn unsupported_version() {
         let msg = r#"{"v":999, "registry": {"index-url":""}, "args":[], "kind": "unexpected"}"#;
         assert_eq!(
-            "unsupported protocol version 999", deserialize_request(msg).unwrap_err()
-            .to_string()
+            "unsupported protocol version 999",
+            deserialize_request(msg).unwrap_err().to_string()
         );
     }
     #[test]
@@ -21,12 +21,13 @@ mod tests {
         let cc = CacheControl::Session;
         let json = serde_json::to_string(&cc).unwrap();
         assert_eq!(json, r#"{"cache":"session"}"#);
-        let cc: CacheControl = serde_json::from_str(r#"{"cache":"unknown-kind"}"#)
-            .unwrap();
+        let cc: CacheControl = serde_json::from_str(r#"{"cache":"unknown-kind"}"#).unwrap();
         assert_eq!(cc, CacheControl::Unknown);
         assert_eq!(
-            "missing field `expiration`", serde_json::from_str::< CacheControl >
-            (r#"{"cache":"expires"}"#).unwrap_err().to_string()
+            "missing field `expiration`",
+            serde_json::from_str::<CacheControl>(r#"{"cache":"expires"}"#)
+                .unwrap_err()
+                .to_string()
         );
     }
     #[test]
@@ -44,23 +45,23 @@ mod tests {
         let cr = CredentialResponse::Login;
         let json = serde_json::to_string(&cr).unwrap();
         assert_eq!(json, r#"{"kind":"login"}"#);
-        let cr: CredentialResponse = serde_json::from_str(
-                r#"{"kind":"unknown-kind","extra-data":true}"#,
-            )
-            .unwrap();
+        let cr: CredentialResponse =
+            serde_json::from_str(r#"{"kind":"unknown-kind","extra-data":true}"#).unwrap();
         assert_eq!(cr, CredentialResponse::Unknown);
-        let cr: CredentialResponse = serde_json::from_str(
-                r#"{"kind":"login","extra-data":true}"#,
-            )
-            .unwrap();
+        let cr: CredentialResponse =
+            serde_json::from_str(r#"{"kind":"login","extra-data":true}"#).unwrap();
         assert_eq!(cr, CredentialResponse::Login);
         let cr: CredentialResponse = serde_json::from_str(
                 r#"{"kind":"get","token":"value","cache":"never","operation_independent":true,"extra-field-ignored":123}"#,
             )
             .unwrap();
         assert_eq!(
-            cr, CredentialResponse::Get { cache : CacheControl::Never,
-            operation_independent : true, token : Secret::from("value".to_string()) }
+            cr,
+            CredentialResponse::Get {
+                cache: CacheControl::Never,
+                operation_independent: true,
+                token: Secret::from("value".to_string())
+            }
         );
     }
     #[test]
@@ -99,9 +100,9 @@ mod tests {
             action: Action::Logout,
         };
         let cr: CredentialRequest<'_> = serde_json::from_str(
-                r#"{"v":1,"registry":{"index-url":"url"},"kind":"logout","extra-1":true,"args":[]}"#,
-            )
-            .unwrap();
+            r#"{"v":1,"registry":{"index-url":"url"},"kind":"logout","extra-1":true,"args":[]}"#,
+        )
+        .unwrap();
         assert_eq!(cr, unknown);
     }
     #[test]
@@ -117,9 +118,9 @@ mod tests {
             action: Action::Unknown,
         };
         let cr: CredentialRequest<'_> = serde_json::from_str(
-                r#"{"v":1,"registry":{"index-url":""},"kind":"unexpected-1","extra-1":true,"args":[]}"#,
-            )
-            .unwrap();
+            r#"{"v":1,"registry":{"index-url":""},"kind":"unexpected-1","extra-1":true,"args":[]}"#,
+        )
+        .unwrap();
         assert_eq!(cr, unknown);
     }
 }

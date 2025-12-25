@@ -8,7 +8,8 @@ fn cleanup_semantic_lossless(solution: &mut Solution) {
         if let (
             Diff::Equal(mut prev_equal1, mut prev_equal2),
             Diff::Equal(mut next_equal1, mut next_equal2),
-        ) = (prev_diff, next_diff) {
+        ) = (prev_diff, next_diff)
+        {
             let mut edit = diffs[pointer];
             let common_offset = common_suffix(prev_equal1, edit.text());
             let original_prev_len = prev_equal1.len;
@@ -24,9 +25,9 @@ fn cleanup_semantic_lossless(solution: &mut Solution) {
             let mut best_next_equal = (next_equal1, next_equal2);
             let mut best_score = cleanup_semantic_score(prev_equal1, edit.text())
                 + cleanup_semantic_score(edit.text(), next_equal1);
-            while !edit.text().is_empty() && !next_equal1.is_empty()
-                && edit.text().chars().next().unwrap()
-                    == next_equal1.chars().next().unwrap()
+            while !edit.text().is_empty()
+                && !next_equal1.is_empty()
+                && edit.text().chars().next().unwrap() == next_equal1.chars().next().unwrap()
             {
                 prev_equal1.len += 1;
                 prev_equal2.len += 1;
@@ -48,20 +49,14 @@ fn cleanup_semantic_lossless(solution: &mut Solution) {
                 if best_next_equal.0.is_empty() {
                     diffs.remove(pointer + 1);
                 } else {
-                    diffs[pointer + 1] = Diff::Equal(
-                        best_next_equal.0,
-                        best_next_equal.1,
-                    );
+                    diffs[pointer + 1] = Diff::Equal(best_next_equal.0, best_next_equal.1);
                 }
                 diffs[pointer] = best_edit;
                 if best_prev_equal.0.is_empty() {
                     diffs.remove(pointer - 1);
                     pointer -= 1;
                 } else {
-                    diffs[pointer - 1] = Diff::Equal(
-                        best_prev_equal.0,
-                        best_prev_equal.1,
-                    );
+                    diffs[pointer - 1] = Diff::Equal(best_prev_equal.0, best_prev_equal.1);
                 }
             }
         }

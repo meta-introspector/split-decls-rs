@@ -85,9 +85,7 @@ impl Connection {
     ///    Ok(())
     /// }
     /// ```
-    pub fn initialize_start(
-        &self,
-    ) -> Result<(RequestId, serde_json::Value), ProtocolError> {
+    pub fn initialize_start(&self) -> Result<(RequestId, serde_json::Value), ProtocolError> {
         self.initialize_start_while(|| true)
     }
     /// Starts the initialization process by waiting for an initialize as described in
@@ -127,7 +125,9 @@ impl Connection {
         C: Fn() -> bool,
     {
         while running() {
-            let msg = match self.receiver.recv_timeout(std::time::Duration::from_secs(1))
+            let msg = match self
+                .receiver
+                .recv_timeout(std::time::Duration::from_secs(1))
             {
                 Ok(msg) => msg,
                 Err(RecvTimeoutError::Timeout) => {
@@ -154,19 +154,15 @@ impl Connection {
                     continue;
                 }
                 msg => {
-                    return Err(
-                        ProtocolError::new(
-                            format!("expected initialize request, got {msg:?}"),
-                        ),
-                    );
+                    return Err(ProtocolError::new(format!(
+                        "expected initialize request, got {msg:?}"
+                    )));
                 }
             };
         }
-        Err(
-            ProtocolError::new(
-                String::from("Initialization has been aborted during initialization"),
-            ),
-        )
+        Err(ProtocolError::new(String::from(
+            "Initialization has been aborted during initialization",
+        )))
     }
     /// Finishes the initialization process by sending an `InitializeResult` to the client
     pub fn initialize_finish(
@@ -178,13 +174,9 @@ impl Connection {
         self.sender.send(resp.into()).unwrap();
         match &self.receiver.recv() {
             Ok(Message::Notification(n)) if n.is_initialized() => Ok(()),
-            Ok(msg) => {
-                Err(
-                    ProtocolError::new(
-                        format!(r#"expected initialized notification, got: {msg:?}"#),
-                    ),
-                )
-            }
+            Ok(msg) => Err(ProtocolError::new(format!(
+                r#"expected initialized notification, got: {msg:?}"#
+            ))),
             Err(RecvError) => Err(ProtocolError::disconnected()),
         }
     }
@@ -203,7 +195,9 @@ impl Connection {
         let resp = Response::new_ok(initialize_id, initialize_result);
         self.sender.send(resp.into()).unwrap();
         while running() {
-            let msg = match self.receiver.recv_timeout(std::time::Duration::from_secs(1))
+            let msg = match self
+                .receiver
+                .recv_timeout(std::time::Duration::from_secs(1))
             {
                 Ok(msg) => msg,
                 Err(RecvTimeoutError::Timeout) => {
@@ -218,19 +212,15 @@ impl Connection {
                     return Ok(());
                 }
                 msg => {
-                    return Err(
-                        ProtocolError::new(
-                            format!(r#"expected initialized notification, got: {msg:?}"#),
-                        ),
-                    );
+                    return Err(ProtocolError::new(format!(
+                        r#"expected initialized notification, got: {msg:?}"#
+                    )));
                 }
             }
         }
-        Err(
-            ProtocolError::new(
-                String::from("Initialization has been aborted during initialization"),
-            ),
-        )
+        Err(ProtocolError::new(String::from(
+            "Initialization has been aborted during initialization",
+        )))
     }
     /// Initialize the connection. Sends the server capabilities
     /// to the client and returns the serialized client capabilities
@@ -325,28 +315,25 @@ impl Connection {
         }
         let resp = Response::new_ok(req.id.clone(), ());
         let _ = self.sender.send(resp.into());
-        match &self.receiver.recv_timeout(std::time::Duration::from_secs(30)) {
+        match &self
+            .receiver
+            .recv_timeout(std::time::Duration::from_secs(30))
+        {
             Ok(Message::Notification(n)) if n.is_exit() => {}
             Ok(msg) => {
-                return Err(
-                    ProtocolError::new(
-                        format!("unexpected message during shutdown: {msg:?}"),
-                    ),
-                );
+                return Err(ProtocolError::new(format!(
+                    "unexpected message during shutdown: {msg:?}"
+                )));
             }
             Err(RecvTimeoutError::Timeout) => {
-                return Err(
-                    ProtocolError::new(
-                        "timed out waiting for exit notification".to_owned(),
-                    ),
-                );
+                return Err(ProtocolError::new(
+                    "timed out waiting for exit notification".to_owned(),
+                ));
             }
             Err(RecvTimeoutError::Disconnected) => {
-                return Err(
-                    ProtocolError::new(
-                        "channel disconnected waiting for exit notification".to_owned(),
-                    ),
-                );
+                return Err(ProtocolError::new(
+                    "channel disconnected waiting for exit notification".to_owned(),
+                ));
             }
         }
         Ok(true)

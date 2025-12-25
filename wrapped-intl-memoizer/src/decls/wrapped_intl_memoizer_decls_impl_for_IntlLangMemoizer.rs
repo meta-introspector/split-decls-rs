@@ -25,11 +25,7 @@ impl IntlLangMemoizer {
     ///
     /// U - The callback function. Takes an instance of `I` as the first parameter and
     ///     returns the R value.
-    pub fn with_try_get<I, R, U>(
-        &self,
-        construct_args: I::Args,
-        callback: U,
-    ) -> Result<R, I::Error>
+    pub fn with_try_get<I, R, U>(&self, construct_args: I::Args, callback: U) -> Result<R, I::Error>
     where
         Self: Sized,
         I: Memoizable + 'static,
@@ -39,7 +35,9 @@ impl IntlLangMemoizer {
             .map
             .try_borrow_mut()
             .expect("Cannot use memoizer reentrantly");
-        let cache = map.entry::<HashMap<I::Args, I>>().or_insert_with(HashMap::new);
+        let cache = map
+            .entry::<HashMap<I::Args, I>>()
+            .or_insert_with(HashMap::new);
         let e = match cache.entry(construct_args.clone()) {
             Entry::Occupied(entry) => entry.into_mut(),
             Entry::Vacant(entry) => {

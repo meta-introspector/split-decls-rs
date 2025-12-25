@@ -2,8 +2,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 /// Dummy things for testing where spans don't matter.
 pub mod dummy_test_span_utils {
-    use span::{Span, SyntaxContext};
     use super::*;
+    use span::{Span, SyntaxContext};
     pub const DUMMY: Span = Span {
         range: TextRange::empty(TextSize::new(0)),
         anchor: span::SpanAnchor {

@@ -10,15 +10,13 @@ impl FileMeta {
                 cfg.insert_atom(Symbol::intern(&k));
             }
         }
-        let introduce_new_source_root = f
-            .introduce_new_source_root
-            .map(|kind| match &*kind {
-                "local" => SourceRootKind::Local,
-                "library" => SourceRootKind::Library,
-                invalid => panic!("invalid source root kind '{invalid}'"),
-            });
-        let current_source_root_kind = introduce_new_source_root
-            .unwrap_or(current_source_root_kind);
+        let introduce_new_source_root = f.introduce_new_source_root.map(|kind| match &*kind {
+            "local" => SourceRootKind::Local,
+            "library" => SourceRootKind::Library,
+            invalid => panic!("invalid source root kind '{invalid}'"),
+        });
+        let current_source_root_kind =
+            introduce_new_source_root.unwrap_or(current_source_root_kind);
         let deps = f.deps;
         Self {
             path: f.path,

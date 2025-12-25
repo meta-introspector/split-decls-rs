@@ -40,7 +40,11 @@ mod utf8_paths {
         let path = path.as_ref();
         let base = base.as_ref();
         if path.is_absolute() != base.is_absolute() {
-            if path.is_absolute() { Some(Utf8PathBuf::from(path)) } else { None }
+            if path.is_absolute() {
+                Some(Utf8PathBuf::from(path))
+            } else {
+                None
+            }
         } else {
             let mut ita = path.components();
             let mut itb = base.components();

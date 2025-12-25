@@ -10,27 +10,23 @@ mod tests {
     #[test]
     fn test_format_patch() {
         let patch = format_patch(None, "hello\nworld\n");
-        expect![
-            [r##"
+        expect![[r##"
             [r#"
             hello
             world
-            "#]"##]
-        ]
-            .assert_eq(&patch);
+            "#]"##]]
+        .assert_eq(&patch);
         let patch = format_patch(None, r"hello\tworld");
         expect![[r##"[r#"hello\tworld"#]"##]].assert_eq(&patch);
         let patch = format_patch(None, "{\"foo\": 42}");
         expect![[r##"[r#"{"foo": 42}"#]"##]].assert_eq(&patch);
         let patch = format_patch(Some(0), "hello\nworld\n");
-        expect![
-            [r##"
+        expect![[r##"
             [r#"
                 hello
                 world
-            "#]"##]
-        ]
-            .assert_eq(&patch);
+            "#]"##]]
+        .assert_eq(&patch);
         let patch = format_patch(Some(4), "single line");
         expect![[r#""single line""#]].assert_eq(&patch);
     }
@@ -40,8 +36,7 @@ mod tests {
         patchwork.patch(4..7, "zwei");
         patchwork.patch(0..3, "один");
         patchwork.patch(8..13, "3");
-        expect![
-            [r#"
+        expect![[r#"
             Patchwork {
                 text: "один zwei 3",
                 indels: [
@@ -59,9 +54,8 @@ mod tests {
                     ),
                 ],
             }
-        "#]
-        ]
-            .assert_debug_eq(&patchwork);
+        "#]]
+        .assert_debug_eq(&patchwork);
     }
     #[test]
     fn test_expect_file() {
@@ -87,13 +81,16 @@ line1
                   line2
             "#]],
         );
-        check_not_indented("\
+        check_not_indented(
+            "\
 line1
   line2
-", expect![[r#"
+",
+            expect![[r#"
 line1
   line2
-"#]]);
+"#]],
+        );
     }
     #[test]
     fn test_locate() {
@@ -104,7 +101,9 @@ line1
             };
         }
         check_locate!(
-            [[r#"{ arr: [[1, 2], [3, 4]], other: "foo" } "#]], [["]]"]], [["\"]]"]],
+            [[r#"{ arr: [[1, 2], [3, 4]], other: "foo" } "#]],
+            [["]]"]],
+            [["\"]]"]],
             [[r#""]]"#]],
         );
         assert_eq!(locate_end("]]"), Some(0));
@@ -118,11 +117,15 @@ line1
             };
         }
         check_str_lit_len![
-            r##"foa\""#"##, r##"
+            r##"foa\""#"##,
+            r##"
 
                 asdf][]]""""#
-            "##, "",
-            "\"", "\"\"", "#\"#\"#",
+            "##,
+            "",
+            "\"",
+            "\"\"",
+            "#\"#\"#",
         ];
     }
 }

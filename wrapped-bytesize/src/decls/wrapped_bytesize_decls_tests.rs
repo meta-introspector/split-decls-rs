@@ -2,8 +2,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[cfg(test)]
 mod tests {
-    use alloc::format;
     use super::*;
+    use alloc::format;
     #[test]
     fn test_arithmetic_op() {
         let mut x = ByteSize::mb(1);

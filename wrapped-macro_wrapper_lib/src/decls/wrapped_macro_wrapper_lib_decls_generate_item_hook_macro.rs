@@ -9,16 +9,17 @@ fn generate_item_hook_macro(
 ) -> proc_macro2::TokenStream {
     let original_item_token_stream = item.to_token_stream();
     let item_string = LitStr::new(&original_item_token_stream.to_string(), item.span());
-    let item_name_str_lit = item_ident
-        .map_or_else(
-            || LitStr::new("unnamed_item", item.span()),
-            |i| LitStr::new(&i.to_string(), i.span()),
-        );
+    let item_name_str_lit = item_ident.map_or_else(
+        || LitStr::new("unnamed_item", item.span()),
+        |i| LitStr::new(&i.to_string(), i.span()),
+    );
     let unique_id = hash_span(item.span().into());
-    let base_name_for_ident_string = item_ident
-        .map_or_else(|| "unnamed".to_string(), |i| i.to_string().to_lowercase());
+    let base_name_for_ident_string =
+        item_ident.map_or_else(|| "unnamed".to_string(), |i| i.to_string().to_lowercase());
     let generated_hook_macro_name = format_ident!(
-        "__generated_macro_hook_{}_{}_{}", item_type_prefix, base_name_for_ident_string,
+        "__generated_macro_hook_{}_{}_{}",
+        item_type_prefix,
+        base_name_for_ident_string,
         unique_id
     );
     let output = quote! {

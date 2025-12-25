@@ -4,8 +4,8 @@ use std::collections::HashMap;
 mod tests {
     /**Matches dar
 
-Match dar description
-*/
+    Match dar description
+    */
     #[test]
     fn test_generate_doc() {
         let input = quote! {
@@ -24,7 +24,9 @@ Match dar description
         };
         assert!(
             token.to_string().contains(expected.to_string().as_str()),
-            "{}\n\nExpected to contains:\n{}", token, expected
+            "{}\n\nExpected to contains:\n{}",
+            token,
+            expected
         );
     }
 }

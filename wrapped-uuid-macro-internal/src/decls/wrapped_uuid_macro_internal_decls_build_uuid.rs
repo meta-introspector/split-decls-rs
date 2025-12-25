@@ -5,8 +5,8 @@ fn build_uuid(input: TokenStream) -> Result<TokenStream, Error> {
         Ok(syn::Lit::Str(literal)) => literal,
         _ => return Err(Error::NonStringLiteral),
     };
-    let bytes = parser::try_parse(&str_lit.value())
-        .map_err(|e| Error::UuidParse(str_lit, e.into_err()))?;
+    let bytes =
+        parser::try_parse(&str_lit.value()).map_err(|e| Error::UuidParse(str_lit, e.into_err()))?;
     let tokens = bytes
         .iter()
         .map(|byte| {
@@ -15,10 +15,8 @@ fn build_uuid(input: TokenStream) -> Result<TokenStream, Error> {
             }
         })
         .collect::<TokenStream2>();
-    Ok(
-        quote! {
-            [# tokens]
-        }
-            .into(),
-    )
+    Ok(quote! {
+        [# tokens]
+    }
+    .into())
 }

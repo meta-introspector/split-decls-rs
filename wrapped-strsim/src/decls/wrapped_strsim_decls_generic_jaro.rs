@@ -2,10 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 /// Calculates the Jaro similarity between two sequences. The returned value
 /// is between 0.0 and 1.0 (higher value means more similar).
-pub fn generic_jaro<'a, 'b, Iter1, Iter2, Elem1, Elem2>(
-    a: &'a Iter1,
-    b: &'b Iter2,
-) -> f64
+pub fn generic_jaro<'a, 'b, Iter1, Iter2, Elem1, Elem2>(a: &'a Iter1, b: &'b Iter2) -> f64
 where
     &'a Iter1: IntoIterator<Item = Elem1>,
     &'b Iter2: IntoIterator<Item = Elem2>,
@@ -24,7 +21,11 @@ where
     let (a_flags, b_flags) = flags_memory.split_at_mut(a_len);
     let mut matches = 0_usize;
     for (i, a_elem) in a.into_iter().enumerate() {
-        let min_bound = if i > search_range { i - search_range } else { 0 };
+        let min_bound = if i > search_range {
+            i - search_range
+        } else {
+            0
+        };
         let max_bound = min(b_len, i + search_range + 1);
         for (j, b_elem) in b.into_iter().enumerate().take(max_bound) {
             if min_bound <= j && a_elem == b_elem && !b_flags[j] {
@@ -58,7 +59,9 @@ where
     if matches == 0 {
         0.0
     } else {
-        ((matches as f64 / a_len as f64) + (matches as f64 / b_len as f64)
-            + ((matches - transpositions) as f64 / matches as f64)) / 3.0
+        ((matches as f64 / a_len as f64)
+            + (matches as f64 / b_len as f64)
+            + ((matches - transpositions) as f64 / matches as f64))
+            / 3.0
     }
 }

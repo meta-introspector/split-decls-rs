@@ -5,6 +5,5 @@ use std::collections::HashMap;
 ///
 /// The `()` field is necessary: it is non-`pub`, which means values of this
 /// type cannot be constructed outside of this crate.
-#[derive(Clone, Copy, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
-#[derive(HashStable_Generic)]
+#[derive(Clone, Copy, Debug, Hash, PartialEq, Eq, PartialOrd, Ord, HashStable_Generic)]
 pub struct ErrorGuaranteed(());

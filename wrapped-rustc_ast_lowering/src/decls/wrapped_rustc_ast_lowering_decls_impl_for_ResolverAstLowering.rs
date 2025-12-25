@@ -7,11 +7,7 @@ impl ResolverAstLowering {
             if path.segments.last().unwrap().args.is_some() {
                 return None;
             }
-            if let Res::Def(DefKind::Fn, def_id) = self
-                .partial_res_map
-                .get(&expr.id)?
-                .full_res()?
-            {
+            if let Res::Def(DefKind::Fn, def_id) = self.partial_res_map.get(&expr.id)?.full_res()? {
                 if def_id.is_local() {
                     return None;
                 }
@@ -44,10 +40,10 @@ impl ResolverAstLowering {
     ///
     /// The extra lifetimes that appear from the parenthesized `Fn`-trait desugaring
     /// should appear at the enclosing `PolyTraitRef`.
-    fn extra_lifetime_params(
-        &mut self,
-        id: NodeId,
-    ) -> Vec<(Ident, NodeId, LifetimeRes)> {
-        self.extra_lifetime_params_map.get(&id).cloned().unwrap_or_default()
+    fn extra_lifetime_params(&mut self, id: NodeId) -> Vec<(Ident, NodeId, LifetimeRes)> {
+        self.extra_lifetime_params_map
+            .get(&id)
+            .cloned()
+            .unwrap_or_default()
     }
 }

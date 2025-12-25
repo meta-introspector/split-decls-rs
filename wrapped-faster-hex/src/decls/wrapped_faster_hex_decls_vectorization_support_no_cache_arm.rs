@@ -7,6 +7,8 @@ fn vectorization_support_no_cache_arm() -> Vectorization {
     if std::arch::is_aarch64_feature_detected!("neon") {
         return Vectorization::Neon;
     }
-    #[cfg(target_feature = "neon")] return Vectorization::Neon;
-    #[allow(unreachable_code)] Vectorization::None
+    #[cfg(target_feature = "neon")]
+    return Vectorization::Neon;
+    #[allow(unreachable_code)]
+    Vectorization::None
 }

@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 pub mod tt {
     pub use span::Span;
-    pub use tt::{DelimiterKind, IdentIsRaw, LitKind, Spacing, token_to_literal};
+    pub use tt::{token_to_literal, DelimiterKind, IdentIsRaw, LitKind, Spacing};
     pub type Delimiter = ::tt::Delimiter<Span>;
     pub type DelimSpan = ::tt::DelimSpan<Span>;
     pub type Subtree = ::tt::Subtree<Span>;

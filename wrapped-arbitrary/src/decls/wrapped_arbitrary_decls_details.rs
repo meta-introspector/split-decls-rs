@@ -25,21 +25,19 @@ pub mod details {
     ) -> Result<R> {
         let guard_against_recursion = u.is_empty();
         if guard_against_recursion {
-            recursive_count
-                .with(|count| {
-                    if count.get() > 0 {
-                        return Err(Error::NotEnoughData);
-                    }
-                    count.set(count.get() + 1);
-                    Ok(())
-                })?;
+            recursive_count.with(|count| {
+                if count.get() > 0 {
+                    return Err(Error::NotEnoughData);
+                }
+                count.set(count.get() + 1);
+                Ok(())
+            })?;
         }
         let result = f(u);
         if guard_against_recursion {
-            recursive_count
-                .with(|count| {
-                    count.set(count.get() - 1);
-                });
+            recursive_count.with(|count| {
+                count.set(count.get() - 1);
+            });
         }
         result
     }

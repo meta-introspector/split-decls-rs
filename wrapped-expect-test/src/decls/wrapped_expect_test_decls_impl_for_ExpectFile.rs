@@ -16,7 +16,9 @@ impl ExpectFile {
     }
     /// Returns the content of this expect.
     pub fn data(&self) -> String {
-        fs::read_to_string(self.abs_path()).unwrap_or_default().replace("\r\n", "\n")
+        fs::read_to_string(self.abs_path())
+            .unwrap_or_default()
+            .replace("\r\n", "\n")
     }
     fn write(&self, contents: &str) {
         fs::write(self.abs_path(), contents).unwrap()

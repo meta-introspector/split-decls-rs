@@ -5,19 +5,17 @@ impl ModuleDefId {
     ///
     /// Returns `None` if `self` refers to a primitive type.
     pub fn module(&self, db: &dyn DefDatabase) -> Option<ModuleId> {
-        Some(
-            match self {
-                ModuleDefId::ModuleId(id) => *id,
-                ModuleDefId::FunctionId(id) => id.module(db),
-                ModuleDefId::AdtId(id) => id.module(db),
-                ModuleDefId::EnumVariantId(id) => id.module(db),
-                ModuleDefId::ConstId(id) => id.module(db),
-                ModuleDefId::StaticId(id) => id.module(db),
-                ModuleDefId::TraitId(id) => id.module(db),
-                ModuleDefId::TypeAliasId(id) => id.module(db),
-                ModuleDefId::MacroId(id) => id.module(db),
-                ModuleDefId::BuiltinType(_) => return None,
-            },
-        )
+        Some(match self {
+            ModuleDefId::ModuleId(id) => *id,
+            ModuleDefId::FunctionId(id) => id.module(db),
+            ModuleDefId::AdtId(id) => id.module(db),
+            ModuleDefId::EnumVariantId(id) => id.module(db),
+            ModuleDefId::ConstId(id) => id.module(db),
+            ModuleDefId::StaticId(id) => id.module(db),
+            ModuleDefId::TraitId(id) => id.module(db),
+            ModuleDefId::TypeAliasId(id) => id.module(db),
+            ModuleDefId::MacroId(id) => id.module(db),
+            ModuleDefId::BuiltinType(_) => return None,
+        })
     }
 }

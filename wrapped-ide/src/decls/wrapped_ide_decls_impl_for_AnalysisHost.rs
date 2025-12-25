@@ -18,7 +18,9 @@ impl AnalysisHost {
     /// Returns a snapshot of the current state, which you can query for
     /// semantic information.
     pub fn analysis(&self) -> Analysis {
-        Analysis { db: self.db.clone() }
+        Analysis {
+            db: self.db.clone(),
+        }
     }
     /// Applies changes to the current state of the world. If there are
     /// outstanding snapshots, they will be canceled.

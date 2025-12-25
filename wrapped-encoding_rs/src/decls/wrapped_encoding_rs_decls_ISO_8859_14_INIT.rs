@@ -14,10 +14,5 @@ use std::collections::HashMap;
 /// items.
 pub static ISO_8859_14_INIT: Encoding = Encoding {
     name: "ISO-8859-14",
-    variant: VariantEncoding::SingleByte(
-        &data::SINGLE_BYTE_DATA.iso_8859_14,
-        0x00DF,
-        95,
-        17,
-    ),
+    variant: VariantEncoding::SingleByte(&data::SINGLE_BYTE_DATA.iso_8859_14, 0x00DF, 95, 17),
 };

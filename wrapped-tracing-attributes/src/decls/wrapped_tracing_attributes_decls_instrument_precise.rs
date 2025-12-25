@@ -9,24 +9,20 @@ fn instrument_precise(
     let input = syn::parse::<ItemFn>(item)?;
     let instrumented_function_name = input.sig.ident.to_string();
     if input.sig.constness.is_some() {
-        return Ok(
-            quote! {
-                compile_error!("the `#[instrument]` attribute may not be used with `const fn`s")
-            }
-                .into(),
-        );
+        return Ok(quote! {
+            compile_error!("the `#[instrument]` attribute may not be used with `const fn`s")
+        }
+        .into());
     }
     if let Some(async_like) = expand::AsyncInfo::from_fn(&input) {
         return async_like.gen_async(args, instrumented_function_name.as_str());
     }
     let input = MaybeItemFn::from(input);
-    Ok(
-        expand::gen_function(
-                input.as_ref(),
-                args,
-                instrumented_function_name.as_str(),
-                None,
-            )
-            .into(),
+    Ok(expand::gen_function(
+        input.as_ref(),
+        args,
+        instrumented_function_name.as_str(),
+        None,
     )
+    .into())
 }

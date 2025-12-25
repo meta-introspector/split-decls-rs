@@ -12,7 +12,7 @@ pub fn bash(input: TokenStream) -> TokenStream {
             return quote_spanned! {
                 span => compile_error!(format!("Failed to parse bash snippet: {}", # e));
             }
-                .into();
+            .into();
         }
     };
     let mut cnf = Cnf::new();
@@ -27,8 +27,7 @@ pub fn bash(input: TokenStream) -> TokenStream {
     cnf.add_unit(Lit::new(var_has_grep_filter));
     let mut solver = BatSat::new(BatSatConfig::default());
     let sat_result = solver.solve(&cnf);
-    let is_simulated_unsat = script_content.contains("grep")
-        && script_content.contains("echo");
+    let is_simulated_unsat = script_content.contains("grep") && script_content.contains("echo");
     let sat_check_code = if is_simulated_unsat {
         quote_spanned! {
             span =>
@@ -61,7 +60,9 @@ pub fn bash(input: TokenStream) -> TokenStream {
         valid_script :- !has_pipeline, empty_script.
         empty_script :- "True". // Placeholder for a rule indicating an empty script is valid
     "#;
-    datalog_program.load_str(datalog_rules).expect("Failed to load Datalog rules.");
+    datalog_program
+        .load_str(datalog_rules)
+        .expect("Failed to load Datalog rules.");
     datalog_engine.load_program(datalog_program);
     let datalog_query_result = datalog_engine
         .query("?- valid_script.")
