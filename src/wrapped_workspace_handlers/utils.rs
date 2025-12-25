@@ -17,29 +17,25 @@ pub fn collect_and_format_workspace_dependencies(
     eprintln!("DEBUG: global_config.workspace_dependencies: {:?}", global_config.workspace_dependencies);
     eprintln!("DEBUG: global_config.workspace_dependency_overrides: {:?}", global_config.workspace_dependency_overrides);
 
-    // 1. Start with dependencies from global_config.workspace_dependencies
-    for (dep_name, dep_value) in global_config.workspace_dependencies.iter() {
-        workspace_deps.insert(dep_name.clone(), dep_value.clone());
-    }
-
-    // 2. Add all wrapped crates as path dependencies
+    // Add all wrapped crates as path dependencies first
     for crate_name in &global_config.wrapping.crates {
         let mut dep_table = Table::new();
         dep_table.insert("path".to_string(), Value::String(format!("wrapped-{}", crate_name)));
         workspace_deps.insert(crate_name.clone(), Value::Table(dep_table));
     }
 
-    // 3. Apply/override with explicit dependencies from workspace_dependency_overrides
-    for (dep_name, override_value) in &global_config.workspace_dependency_overrides {
-        workspace_deps.insert(dep_name.clone(), override_value.clone());
+    // Then, apply entries from global_config.workspace_dependencies, but only if they don't
+    // correspond to a crate that is already wrapped. This ensures wrapped versions take precedence.
+    for (dep_name, dep_value) in global_config.workspace_dependencies.iter() {
+        if !global_config.wrapping.crates.contains(dep_name) {
+            workspace_deps.insert(dep_name.clone(), dep_value.clone());
+        }
     }
     
-    // 4. Add hardcoded introspector_decl2_macros if not already present or overridden
-    let hardcoded_dep_name = "introspector_decl2_macros".to_string();
-    if !workspace_deps.contains_key(&hardcoded_dep_name) {
-        let mut hardcoded_dep_table = Table::new();
-        hardcoded_dep_table.insert("path".to_string(), Value::String("../../submodules/patch-build-rs/introspector_decl2_macros".to_string()));
-        workspace_deps.insert(hardcoded_dep_name, Value::Table(hardcoded_dep_table));
+    // Finally, apply/override with explicit dependencies from workspace_dependency_overrides
+    // These take the highest precedence.
+    for (dep_name, override_value) in &global_config.workspace_dependency_overrides {
+        workspace_deps.insert(dep_name.clone(), override_value.clone());
     }
 
     eprintln!("DEBUG: Final workspace_deps: {:?}", workspace_deps);
