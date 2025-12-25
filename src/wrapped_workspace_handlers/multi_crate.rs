@@ -102,7 +102,16 @@ pub fn handle_multi_crate_wrapping(
     }
     
     eprintln!("DEBUG: workspace_dependencies_content_str:\n{}", workspace_dependencies_content_str);
-    // Construct final workspace Cargo.toml content
+    // Since all crates are wrapped, generate [patch.crates-io] entries for all of them
+    for crate_name in &global_config.wrapping.crates {
+        let mut patched_dep_table = Table::new();
+        patched_dep_table.insert("path".to_string(), Value::String(format!("wrapped-{}", crate_name)));
+        patch_crates_io_content_str.push_str(&format!(
+            "{} = {}\n",
+            crate_name,
+            format_toml_value_for_dependency_string(&Value::Table(patched_dep_table))
+        ));
+    }
     final_cargo_toml_content = format!(
         r#"[workspace]
 resolver = "2"

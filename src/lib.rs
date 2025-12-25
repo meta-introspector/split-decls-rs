@@ -104,10 +104,10 @@ fn process_dependency_table(
                     let resolved_original_dep_path = original_crate_path.join(path_str);
 
                     // Check if this path dependency corresponds to a workspace dependency
-                    if global_config.workspace_dependencies.contains_key(dep_name) {
+                    if global_config.wrapping.crates.contains(dep_name) {
                         deps_to_update_to_workspace.push(dep_name.clone());
                     } else {
-                        // If not a workspace dependency, convert to an absolute path
+                        // If not a wrapped dependency, convert to an absolute path
                         let absolute_path = resolved_original_dep_path.canonicalize()
                             .context(format!("Failed to canonicalize path for dependency '{}': {}", dep_name, resolved_original_dep_path.display()))?;
                         deps_to_update_to_absolute_path.push((dep_name.clone(), absolute_path));
@@ -126,6 +126,9 @@ fn process_dependency_table(
             if let Some(original_dep_table) = original_dep.as_table() {
                 if let Some(features) = original_dep_table.get("features") {
                     new_dep_table.insert("features".to_string(), features.clone());
+                }
+                if let Some(optional) = original_dep_table.get("optional") {
+                    new_dep_table.insert("optional".to_string(), optional.clone());
                 }
             }
         }
