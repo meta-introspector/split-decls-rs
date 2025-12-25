@@ -1,0 +1,17 @@
+[package]
+name = "wrapper-test-harness"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+module-wrapper-macros = { path = "../module-wrapper-macros" }
+
+# Test individual wrappers
+nom = { path = "../../output1/nom", optional = true }
+hashbrown = { path = "../../output1/hashbrown", optional = true }
+
+[features]
+default = []
+test-nom = ["nom"]
+test-hashbrown = ["hashbrown"]
+test-alloc = []

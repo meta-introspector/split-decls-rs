@@ -27,3 +27,4 @@ output2/\#*
 /src/#bad.rs#
 /bootstrap.log
 /output2/b2.log
+/bootstrap_run.log

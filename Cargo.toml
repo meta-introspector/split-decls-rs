@@ -13,6 +13,9 @@ build = "build.rs"
 #     "split-decls-types",
 #     "cargo-tree-macro",
 #     "cargo-metadata-lib", # Add this new crate
+#     "cargo-lock-import",
+#     "module-wrapper-macros",
+#     "wrapper-test-harness",
 # ]
 # exclude = [
 #     "cargo-toml-generator-macros",

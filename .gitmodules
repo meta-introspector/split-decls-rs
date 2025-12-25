@@ -6,3 +6,4 @@
 	url = https://github.com/meta-introspector/reson
 [submodule "output2"]
 	url = https://github.com/meta-introspector/split-decls-rs
+	path = output2
