@@ -14,26 +14,36 @@ impl ProcMacroSrv<'_> {
         mixed_site: S,
     ) -> Result<Vec<tt::TokenTree<S>>, PanicMessage> {
         let snapped_env = self.env;
-        let expander = self.expander(lib.as_ref()).map_err(|err| PanicMessage {
-            message: Some(format!("failed to load macro: {err}")),
-        })?;
-        let prev_env = EnvChange::apply(snapped_env, env, current_dir.as_ref().map(<_>::as_ref));
+        let expander = self
+            .expander(lib.as_ref())
+            .map_err(|err| PanicMessage {
+                message: Some(format!("failed to load macro: {err}")),
+            })?;
+        let prev_env = EnvChange::apply(
+            snapped_env,
+            env,
+            current_dir.as_ref().map(<_>::as_ref),
+        );
         let result = thread::scope(|s| {
             let thread = thread::Builder::new()
                 .stack_size(EXPANDER_STACK_SIZE)
                 .name(macro_name.to_owned())
-                .spawn_scoped(s, move || {
-                    expander
-                        .expand(
-                            macro_name,
-                            server_impl::TopSubtree(macro_body.0.into_vec()),
-                            attribute.map(|it| server_impl::TopSubtree(it.0.into_vec())),
-                            def_site,
-                            call_site,
-                            mixed_site,
-                        )
-                        .map(|tt| tt.0)
-                });
+                .spawn_scoped(
+                    s,
+                    move || {
+                        expander
+                            .expand(
+                                macro_name,
+                                server_impl::TopSubtree(macro_body.0.into_vec()),
+                                attribute
+                                    .map(|it| server_impl::TopSubtree(it.0.into_vec())),
+                                def_site,
+                                call_site,
+                                mixed_site,
+                            )
+                            .map(|tt| tt.0)
+                    },
+                );
             match thread.unwrap().join() {
                 Ok(res) => res,
                 Err(e) => std::panic::resume_unwind(e),
@@ -47,10 +57,7 @@ impl ProcMacroSrv<'_> {
         dylib_path: &Utf8Path,
     ) -> Result<Vec<(String, ProcMacroKind)>, String> {
         let expander = self.expander(dylib_path)?;
-        Ok(expander
-            .list_macros()
-            .map(|(k, v)| (k.to_owned(), v))
-            .collect())
+        Ok(expander.list_macros().map(|(k, v)| (k.to_owned(), v)).collect())
     }
     fn expander(&self, path: &Utf8Path) -> Result<Arc<dylib::Expander>, String> {
         let expander = || {

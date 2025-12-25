@@ -59,7 +59,8 @@ impl Hash {
         }
         let mut hash_bytes: [u8; OUT_LEN] = [0; OUT_LEN];
         for i in 0..OUT_LEN {
-            hash_bytes[i] = 16 * hex_val(hex_bytes[2 * i])? + hex_val(hex_bytes[2 * i + 1])?;
+            hash_bytes[i] = 16 * hex_val(hex_bytes[2 * i])?
+                + hex_val(hex_bytes[2 * i + 1])?;
         }
         Ok(Hash::from(hash_bytes))
     }

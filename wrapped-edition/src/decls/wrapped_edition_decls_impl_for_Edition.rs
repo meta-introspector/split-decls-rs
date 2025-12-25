@@ -39,7 +39,7 @@ impl Edition {
             Edition::Edition2021,
             Edition::Edition2024,
         ]
-        .iter()
-        .copied()
+            .iter()
+            .copied()
     }
 }

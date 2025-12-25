@@ -24,8 +24,8 @@ impl DoubleEndedIterator for IntoOnes {
             };
         }
         Some(
-            self.block_idx_back - Self::first_positive_bit_and_unset(&mut self.bitset_back) + BITS
-                - 1,
+            self.block_idx_back
+                - Self::first_positive_bit_and_unset(&mut self.bitset_back) + BITS - 1,
         )
     }
 }

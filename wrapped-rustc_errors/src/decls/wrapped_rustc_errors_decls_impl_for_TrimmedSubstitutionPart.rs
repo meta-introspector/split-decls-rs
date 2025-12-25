@@ -18,7 +18,9 @@ impl TrimmedSubstitutionPart {
         self.is_replacement(sm)
             && !sm
                 .span_to_snippet(self.span)
-                .is_ok_and(|snippet| as_substr(snippet.trim(), self.snippet.trim()).is_some())
+                .is_ok_and(|snippet| {
+                    as_substr(snippet.trim(), self.snippet.trim()).is_some()
+                })
     }
     fn replaces_meaningful_content(&self, sm: &SourceMap) -> bool {
         sm.span_to_snippet(self.span)

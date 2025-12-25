@@ -65,15 +65,16 @@ impl<T, C: cfg::Config> Slab<T, C> {
     pub fn vacant_entry(&self) -> Option<VacantEntry<'_, T, C>> {
         let (tid, shard) = self.shards.current();
         test_println!("vacant_entry {:?}", tid);
-        shard.init_with(|idx, slot| {
-            let inner = slot.init()?;
-            let key = inner.generation().pack(tid.pack(idx));
-            Some(VacantEntry {
-                inner,
-                key,
-                _lt: PhantomData,
+        shard
+            .init_with(|idx, slot| {
+                let inner = slot.init()?;
+                let key = inner.generation().pack(tid.pack(idx));
+                Some(VacantEntry {
+                    inner,
+                    key,
+                    _lt: PhantomData,
+                })
             })
-        })
     }
     /// Remove the value at the given index in the slab, returning `true` if a
     /// value was removed.
@@ -186,11 +187,7 @@ impl<T, C: cfg::Config> Slab<T, C> {
         let tid = C::unpack_tid(idx);
         test_println!("rm {:?}", tid);
         let shard = self.shards.get(tid.as_usize())?;
-        if tid.is_current() {
-            shard.take_local(idx)
-        } else {
-            shard.take_remote(idx)
-        }
+        if tid.is_current() { shard.take_local(idx) } else { shard.take_remote(idx) }
     }
     /// Return a reference to the value associated with the given key.
     ///
@@ -209,18 +206,17 @@ impl<T, C: cfg::Config> Slab<T, C> {
     /// ```
     pub fn get(&self, key: usize) -> Option<Entry<'_, T, C>> {
         let tid = C::unpack_tid(key);
-        test_println!("get {:?}; current={:?}", tid, Tid::<C>::current());
+        test_println!("get {:?}; current={:?}", tid, Tid::< C >::current());
         let shard = self.shards.get(tid.as_usize())?;
-        shard.with_slot(key, |slot| {
-            let inner = slot.get(C::unpack_gen(key))?;
-            let value = ptr::NonNull::from(slot.value().as_ref().unwrap());
-            Some(Entry {
-                inner,
-                value,
-                shard,
+        shard
+            .with_slot(
                 key,
-            })
-        })
+                |slot| {
+                    let inner = slot.get(C::unpack_gen(key))?;
+                    let value = ptr::NonNull::from(slot.value().as_ref().unwrap());
+                    Some(Entry { inner, value, shard, key })
+                },
+            )
     }
     /// Return an owned reference to the value at the given index.
     ///
@@ -305,18 +301,22 @@ impl<T, C: cfg::Config> Slab<T, C> {
     /// [`Arc`]: std::sync::Arc
     pub fn get_owned(self: Arc<Self>, key: usize) -> Option<OwnedEntry<T, C>> {
         let tid = C::unpack_tid(key);
-        test_println!("get_owned {:?}; current={:?}", tid, Tid::<C>::current());
+        test_println!("get_owned {:?}; current={:?}", tid, Tid::< C >::current());
         let shard = self.shards.get(tid.as_usize())?;
-        shard.with_slot(key, |slot| {
-            let inner = slot.get(C::unpack_gen(key))?;
-            let value = ptr::NonNull::from(slot.value().as_ref().unwrap());
-            Some(OwnedEntry {
-                inner,
-                value,
-                slab: self.clone(),
+        shard
+            .with_slot(
                 key,
-            })
-        })
+                |slot| {
+                    let inner = slot.get(C::unpack_gen(key))?;
+                    let value = ptr::NonNull::from(slot.value().as_ref().unwrap());
+                    Some(OwnedEntry {
+                        inner,
+                        value,
+                        slab: self.clone(),
+                        key,
+                    })
+                },
+            )
     }
     /// Returns `true` if the slab contains a value for the given key.
     ///

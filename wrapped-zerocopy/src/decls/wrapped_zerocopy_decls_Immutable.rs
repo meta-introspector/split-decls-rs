@@ -67,7 +67,9 @@ use std::collections::HashMap;
 )]
 #[cfg_attr(
     zerocopy_diagnostic_on_unimplemented_1_78_0,
-    diagnostic::on_unimplemented(note = "Consider adding `#[derive(Immutable)]` to `{Self}`")
+    diagnostic::on_unimplemented(
+        note = "Consider adding `#[derive(Immutable)]` to `{Self}`"
+    )
 )]
 pub unsafe trait Immutable {
     #[doc(hidden)]

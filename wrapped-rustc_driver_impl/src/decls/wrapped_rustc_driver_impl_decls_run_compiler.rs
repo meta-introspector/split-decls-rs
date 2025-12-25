@@ -11,12 +11,7 @@ pub fn run_compiler(at_args: &[String], callbacks: &mut (dyn Callbacks + Send)) 
     let sopts = config::build_session_options(&mut default_early_dcx, &matches);
     let ice_file = ice_path_with_config(Some(&sopts.unstable_opts)).clone();
     if let Some(ref code) = matches.opt_str("explain") {
-        handle_explain(
-            &default_early_dcx,
-            diagnostics_registry(),
-            code,
-            sopts.color,
-        );
+        handle_explain(&default_early_dcx, diagnostics_registry(), code, sopts.color);
         return;
     }
     let input = make_input(&default_early_dcx, &matches.free);
@@ -45,93 +40,115 @@ pub fn run_compiler(at_args: &[String], callbacks: &mut (dyn Callbacks + Send)) 
     };
     callbacks.config(&mut config);
     let registered_lints = config.register_lints.is_some();
-    interface::run_compiler(config, |compiler| {
-        let sess = &compiler.sess;
-        let codegen_backend = &*compiler.codegen_backend;
-        let early_exit = || {
-            sess.dcx().abort_if_errors();
-        };
-        if sess.opts.describe_lints {
-            describe_lints(sess, registered_lints);
-            return early_exit();
-        }
-        if print_crate_info(codegen_backend, sess, has_input) == Compilation::Stop {
-            return early_exit();
-        }
-        if !has_input {
-            #[allow(rustc::diagnostic_outside_of_impl)]
-            sess.dcx().fatal("no input filename given");
-        }
-        if !sess.opts.unstable_opts.ls.is_empty() {
-            list_metadata(sess, &*codegen_backend.metadata_loader());
-            return early_exit();
-        }
-        if sess.opts.unstable_opts.link_only {
-            process_rlink(sess, compiler);
-            return early_exit();
-        }
-        let mut krate = passes::parse(sess);
-        if let Some(pp_mode) = sess.opts.pretty {
-            if pp_mode.needs_ast_map() {
-                create_and_enter_global_ctxt(compiler, krate, |tcx| {
-                    tcx.ensure_ok().early_lint_checks(());
-                    pretty::print(sess, pp_mode, pretty::PrintExtra::NeedsAstMap { tcx });
-                    passes::write_dep_info(tcx);
-                });
-            } else {
-                pretty::print(
-                    sess,
-                    pp_mode,
-                    pretty::PrintExtra::AfterParsing { krate: &krate },
-                );
-            }
-            trace!("finished pretty-printing");
-            return early_exit();
-        }
-        if callbacks.after_crate_root_parsing(compiler, &mut krate) == Compilation::Stop {
-            return early_exit();
-        }
-        if sess.opts.unstable_opts.parse_crate_root_only {
-            return early_exit();
-        }
-        let linker = create_and_enter_global_ctxt(compiler, krate, |tcx| {
+    interface::run_compiler(
+        config,
+        |compiler| {
+            let sess = &compiler.sess;
+            let codegen_backend = &*compiler.codegen_backend;
             let early_exit = || {
                 sess.dcx().abort_if_errors();
-                None
             };
-            let _ = tcx.resolver_for_lowering();
-            if callbacks.after_expansion(compiler, tcx) == Compilation::Stop {
+            if sess.opts.describe_lints {
+                describe_lints(sess, registered_lints);
                 return early_exit();
             }
-            passes::write_dep_info(tcx);
-            passes::write_interface(tcx);
-            if sess.opts.output_types.contains_key(&OutputType::DepInfo)
-                && sess.opts.output_types.len() == 1
+            if print_crate_info(codegen_backend, sess, has_input) == Compilation::Stop {
+                return early_exit();
+            }
+            if !has_input {
+                #[allow(rustc::diagnostic_outside_of_impl)]
+                sess.dcx().fatal("no input filename given");
+            }
+            if !sess.opts.unstable_opts.ls.is_empty() {
+                list_metadata(sess, &*codegen_backend.metadata_loader());
+                return early_exit();
+            }
+            if sess.opts.unstable_opts.link_only {
+                process_rlink(sess, compiler);
+                return early_exit();
+            }
+            let mut krate = passes::parse(sess);
+            if let Some(pp_mode) = sess.opts.pretty {
+                if pp_mode.needs_ast_map() {
+                    create_and_enter_global_ctxt(
+                        compiler,
+                        krate,
+                        |tcx| {
+                            tcx.ensure_ok().early_lint_checks(());
+                            pretty::print(
+                                sess,
+                                pp_mode,
+                                pretty::PrintExtra::NeedsAstMap {
+                                    tcx,
+                                },
+                            );
+                            passes::write_dep_info(tcx);
+                        },
+                    );
+                } else {
+                    pretty::print(
+                        sess,
+                        pp_mode,
+                        pretty::PrintExtra::AfterParsing {
+                            krate: &krate,
+                        },
+                    );
+                }
+                trace!("finished pretty-printing");
+                return early_exit();
+            }
+            if callbacks.after_crate_root_parsing(compiler, &mut krate)
+                == Compilation::Stop
             {
                 return early_exit();
             }
-            if sess.opts.unstable_opts.no_analysis {
+            if sess.opts.unstable_opts.parse_crate_root_only {
                 return early_exit();
             }
-            tcx.ensure_ok().analysis(());
-            if let Some(metrics_dir) = &sess.opts.unstable_opts.metrics_dir {
-                dump_feature_usage_metrics(tcx, metrics_dir);
+            let linker = create_and_enter_global_ctxt(
+                compiler,
+                krate,
+                |tcx| {
+                    let early_exit = || {
+                        sess.dcx().abort_if_errors();
+                        None
+                    };
+                    let _ = tcx.resolver_for_lowering();
+                    if callbacks.after_expansion(compiler, tcx) == Compilation::Stop {
+                        return early_exit();
+                    }
+                    passes::write_dep_info(tcx);
+                    passes::write_interface(tcx);
+                    if sess.opts.output_types.contains_key(&OutputType::DepInfo)
+                        && sess.opts.output_types.len() == 1
+                    {
+                        return early_exit();
+                    }
+                    if sess.opts.unstable_opts.no_analysis {
+                        return early_exit();
+                    }
+                    tcx.ensure_ok().analysis(());
+                    if let Some(metrics_dir) = &sess.opts.unstable_opts.metrics_dir {
+                        dump_feature_usage_metrics(tcx, metrics_dir);
+                    }
+                    if callbacks.after_analysis(compiler, tcx) == Compilation::Stop {
+                        return early_exit();
+                    }
+                    if tcx.sess.opts.output_types.contains_key(&OutputType::Mir) {
+                        if let Err(error) = rustc_mir_transform::dump_mir::emit_mir(
+                            tcx,
+                        ) {
+                            tcx.dcx().emit_fatal(CantEmitMIR { error });
+                        }
+                    }
+                    Some(
+                        Linker::codegen_and_build_linker(tcx, &*compiler.codegen_backend),
+                    )
+                },
+            );
+            if let Some(linker) = linker {
+                linker.link(sess, codegen_backend);
             }
-            if callbacks.after_analysis(compiler, tcx) == Compilation::Stop {
-                return early_exit();
-            }
-            if tcx.sess.opts.output_types.contains_key(&OutputType::Mir) {
-                if let Err(error) = rustc_mir_transform::dump_mir::emit_mir(tcx) {
-                    tcx.dcx().emit_fatal(CantEmitMIR { error });
-                }
-            }
-            Some(Linker::codegen_and_build_linker(
-                tcx,
-                &*compiler.codegen_backend,
-            ))
-        });
-        if let Some(linker) = linker {
-            linker.link(sess, codegen_backend);
-        }
-    })
+        },
+    )
 }

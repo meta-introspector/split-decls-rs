@@ -5,8 +5,8 @@ fn get_may_borrow_attr(attrs: &[syn::Attribute]) -> Result<HashSet<Ident>, Span>
     for attr in attrs {
         if let Ok(list) = attr.parse_args::<MetaList>() {
             if list.path.is_ident("may_borrow") {
-                if let Ok(list) =
-                    list.parse_args_with(Punctuated::<Ident, Token![,]>::parse_terminated)
+                if let Ok(list) = list
+                    .parse_args_with(Punctuated::<Ident, Token![,]>::parse_terminated)
                 {
                     params.extend(list)
                 } else {

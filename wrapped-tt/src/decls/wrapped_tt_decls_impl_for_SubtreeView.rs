@@ -7,8 +7,7 @@ impl<'a, S: Copy> SubtreeView<'a, S> {
                 panic!("first token tree must be a subtree in `SubtreeView`");
             };
             assert_eq!(
-                subtree.usize_len(),
-                tts.len() - 1,
+                subtree.usize_len(), tts.len() - 1,
                 "subtree must cover the entire `SubtreeView`"
             );
         }

@@ -7,10 +7,7 @@ pub enum CacheControl {
     /// Do not cache this result.
     Never,
     /// Cache this result and use it for subsequent requests in the current Cargo invocation until the specified time.
-    Expires {
-        #[serde(with = "time::serde::timestamp")]
-        expiration: OffsetDateTime,
-    },
+    Expires { #[serde(with = "time::serde::timestamp")] expiration: OffsetDateTime },
     /// Cache this result and use it for all subsequent requests in the current Cargo invocation.
     Session,
     #[serde(other)]

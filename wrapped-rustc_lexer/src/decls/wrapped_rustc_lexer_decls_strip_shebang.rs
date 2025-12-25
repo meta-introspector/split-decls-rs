@@ -8,13 +8,8 @@ pub fn strip_shebang(input: &str) -> Option<usize> {
             .map(|tok| tok.kind)
             .find(|tok| {
                 !matches!(
-                    tok,
-                    TokenKind::Whitespace
-                        | TokenKind::LineComment { doc_style: None }
-                        | TokenKind::BlockComment {
-                            doc_style: None,
-                            ..
-                        }
+                    tok, TokenKind::Whitespace | TokenKind::LineComment { doc_style :
+                    None } | TokenKind::BlockComment { doc_style : None, .. }
                 )
             });
         if next_non_whitespace_token != Some(TokenKind::OpenBracket) {

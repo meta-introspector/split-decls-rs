@@ -46,19 +46,16 @@ impl Project {
     /// Path to a dynamic library.
     /// ex: `/path/to/cargo/target/cit/t0/foo/target/debug/examples/libex.dylib`
     pub fn dylib(&self, name: &str) -> PathBuf {
-        self.target_debug_dir().join(format!(
-            "{}{name}{}",
-            env::consts::DLL_PREFIX,
-            env::consts::DLL_SUFFIX
-        ))
+        self.target_debug_dir()
+            .join(
+                format!("{}{name}{}", env::consts::DLL_PREFIX, env::consts::DLL_SUFFIX),
+            )
     }
     /// Path to a debug binary.
     ///
     /// ex: `$CARGO_TARGET_TMPDIR/cit/t0/foo/target/debug/foo`
     pub fn bin(&self, b: &str) -> PathBuf {
-        self.build_dir()
-            .join("debug")
-            .join(&format!("{}{}", b, env::consts::EXE_SUFFIX))
+        self.build_dir().join("debug").join(&format!("{}{}", b, env::consts::EXE_SUFFIX))
     }
     /// Path to a release binary.
     ///
@@ -72,11 +69,10 @@ impl Project {
     ///
     /// ex: `$CARGO_TARGET_TMPDIR/cit/t0/foo/target/i686-apple-darwin/debug/foo`
     pub fn target_bin(&self, target: &str, b: &str) -> PathBuf {
-        self.build_dir().join(target).join("debug").join(&format!(
-            "{}{}",
-            b,
-            env::consts::EXE_SUFFIX
-        ))
+        self.build_dir()
+            .join(target)
+            .join("debug")
+            .join(&format!("{}{}", b, env::consts::EXE_SUFFIX))
     }
     /// Returns an iterator of paths within [`Project::root`] matching the glob pattern
     pub fn glob<P: AsRef<Path>>(&self, pattern: P) -> glob::Paths {
@@ -128,7 +124,9 @@ impl Project {
         let src = self.bin(src);
         let dst = self.bin(dst);
         fs::rename(&src, &dst)
-            .unwrap_or_else(|e| panic!("Failed to rename `{:?}` to `{:?}`: {}", src, dst, e));
+            .unwrap_or_else(|e| {
+                panic!("Failed to rename `{:?}` to `{:?}`: {}", src, dst, e)
+            });
         self.process(dst)
     }
     /// Returns the contents of `Cargo.lock`.

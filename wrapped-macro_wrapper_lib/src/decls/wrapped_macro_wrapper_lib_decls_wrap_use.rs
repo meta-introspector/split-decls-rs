@@ -7,7 +7,11 @@ pub fn wrap_use(
 ) -> ProcMacroTokenStream {
     let item_use: ItemUse = parse_macro_input!(item_ts as ItemUse);
     let mut output_tokens = TokenStream::new();
-    let hook_macro_def = generate_item_hook_macro("use", &Item::Use(item_use.clone()), None);
+    let hook_macro_def = generate_item_hook_macro(
+        "use",
+        &Item::Use(item_use.clone()),
+        None,
+    );
     output_tokens.extend(hook_macro_def);
     output_tokens.extend(item_use.to_token_stream());
     output_tokens.into()

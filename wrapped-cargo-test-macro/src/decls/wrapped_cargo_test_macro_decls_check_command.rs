@@ -8,7 +8,9 @@ fn check_command(command_path: &Path, args: &[&str]) -> bool {
         Ok(output) => output,
         Err(e) => {
             if is_ci() && !matches!(command_name.as_str(), "hg" | "lldb") {
-                panic!("expected command `{command_name}` to be somewhere in PATH: {e}",);
+                panic!(
+                    "expected command `{command_name}` to be somewhere in PATH: {e}",
+                );
             }
             return false;
         }
@@ -18,9 +20,8 @@ fn check_command(command_path: &Path, args: &[&str]) -> bool {
             "expected command `{command_name}` to be runnable, got error {}:\n\
             stderr:{}\n\
             stdout:{}\n",
-            output.status,
-            String::from_utf8_lossy(&output.stderr),
-            String::from_utf8_lossy(&output.stdout)
+            output.status, String::from_utf8_lossy(& output.stderr),
+            String::from_utf8_lossy(& output.stdout)
         );
     }
     true

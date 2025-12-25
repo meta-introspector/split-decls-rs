@@ -13,7 +13,9 @@ impl TryReserveError {
                     TryReserveErrorKind::CapacityOverflow
                 }
                 hashbrown::TryReserveError::AllocError { layout } => {
-                    TryReserveErrorKind::AllocError { layout }
+                    TryReserveErrorKind::AllocError {
+                        layout,
+                    }
                 }
             },
         }

@@ -27,10 +27,6 @@ impl From<&mut File> for Bom {
                 }
             }
         }
-        if result.is_ok() {
-            Bom::from(&data[0..])
-        } else {
-            Bom::Null
-        }
+        if result.is_ok() { Bom::from(&data[0..]) } else { Bom::Null }
     }
 }

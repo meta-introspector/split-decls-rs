@@ -11,7 +11,9 @@ unsafe impl<const N: usize> BufMut for SmallVec<u8, N> {
         let len = self.len();
         let remaining = self.capacity() - len;
         if remaining < cnt {
-            panic!("advance out of bounds: the len is {remaining} but advancing by {cnt}");
+            panic!(
+                "advance out of bounds: the len is {remaining} but advancing by {cnt}"
+            );
         }
         self.set_len(len + cnt);
     }

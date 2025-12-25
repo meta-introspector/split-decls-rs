@@ -9,9 +9,7 @@ pub fn map_node_range_up_aggregated(
 ) -> FxHashMap<(SpanAnchor, SyntaxContext), TextRange> {
     let mut map = FxHashMap::default();
     for span in exp_map.spans_for_range(range) {
-        let range = map
-            .entry((span.anchor, span.ctx))
-            .or_insert_with(|| span.range);
+        let range = map.entry((span.anchor, span.ctx)).or_insert_with(|| span.range);
         *range = TextRange::new(
             range.start().min(span.range.start()),
             range.end().max(span.range.end()),

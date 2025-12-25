@@ -1,27 +1,33 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl<'a> VariantInfo<'a> {
-    fn new(ast: VariantAst<'a>, prefix: Option<&'a Ident>, generics: &'a Generics) -> Self {
+    fn new(
+        ast: VariantAst<'a>,
+        prefix: Option<&'a Ident>,
+        generics: &'a Generics,
+    ) -> Self {
         let bindings = match ast.fields {
             Fields::Unit => vec![],
-            Fields::Unnamed(FieldsUnnamed {
-                unnamed: fields, ..
-            })
-            | Fields::Named(FieldsNamed { named: fields, .. }) => fields
-                .into_iter()
-                .enumerate()
-                .map(|(i, field)| {
-                    let binding_span = Span::call_site().located_at(field.span());
-                    BindingInfo {
-                        binding: format_ident!("__binding_{}", i, span = binding_span),
-                        style: BindStyle::Ref,
-                        field,
-                        generics,
-                        seen_generics: get_ty_params(field, generics),
-                        index: i,
-                    }
-                })
-                .collect::<Vec<_>>(),
+            Fields::Unnamed(FieldsUnnamed { unnamed: fields, .. })
+            | Fields::Named(FieldsNamed { named: fields, .. }) => {
+                fields
+                    .into_iter()
+                    .enumerate()
+                    .map(|(i, field)| {
+                        let binding_span = Span::call_site().located_at(field.span());
+                        BindingInfo {
+                            binding: format_ident!(
+                                "__binding_{}", i, span = binding_span
+                            ),
+                            style: BindStyle::Ref,
+                            field,
+                            generics,
+                            seen_generics: get_ty_params(field, generics),
+                            index: i,
+                        }
+                    })
+                    .collect::<Vec<_>>()
+            }
         };
         let original_length = bindings.len();
         VariantInfo {
@@ -80,32 +86,44 @@ impl<'a> VariantInfo<'a> {
             Fields::Unit => {
                 assert!(self.bindings.is_empty());
             }
-            Fields::Unnamed(..) => token::Paren(Span::call_site()).surround(&mut t, |t| {
-                let mut expected_index = 0;
-                for binding in &self.bindings {
-                    while expected_index < binding.index {
-                        quote!(_,).to_tokens(t);
-                        expected_index += 1;
-                    }
-                    binding.pat().to_tokens(t);
-                    quote!(,).to_tokens(t);
-                    expected_index += 1;
-                }
-                if expected_index != self.original_length {
-                    quote!(..).to_tokens(t);
-                }
-            }),
-            Fields::Named(..) => token::Brace(Span::call_site()).surround(&mut t, |t| {
-                for binding in &self.bindings {
-                    binding.field.ident.to_tokens(t);
-                    quote!(:).to_tokens(t);
-                    binding.pat().to_tokens(t);
-                    quote!(,).to_tokens(t);
-                }
-                if self.omitted_bindings() {
-                    quote!(..).to_tokens(t);
-                }
-            }),
+            Fields::Unnamed(..) => {
+                token::Paren(Span::call_site())
+                    .surround(
+                        &mut t,
+                        |t| {
+                            let mut expected_index = 0;
+                            for binding in &self.bindings {
+                                while expected_index < binding.index {
+                                    quote!(_,).to_tokens(t);
+                                    expected_index += 1;
+                                }
+                                binding.pat().to_tokens(t);
+                                quote!(,).to_tokens(t);
+                                expected_index += 1;
+                            }
+                            if expected_index != self.original_length {
+                                quote!(..).to_tokens(t);
+                            }
+                        },
+                    )
+            }
+            Fields::Named(..) => {
+                token::Brace(Span::call_site())
+                    .surround(
+                        &mut t,
+                        |t| {
+                            for binding in &self.bindings {
+                                binding.field.ident.to_tokens(t);
+                                quote!(:).to_tokens(t);
+                                binding.pat().to_tokens(t);
+                                quote!(,).to_tokens(t);
+                            }
+                            if self.omitted_bindings() {
+                                quote!(..).to_tokens(t);
+                            }
+                        },
+                    )
+            }
         }
         t
     }
@@ -154,22 +172,30 @@ impl<'a> VariantInfo<'a> {
         match &self.ast.fields {
             Fields::Unit => {}
             Fields::Unnamed(FieldsUnnamed { unnamed, .. }) => {
-                token::Paren::default().surround(&mut t, |t| {
-                    for (i, field) in unnamed.into_iter().enumerate() {
-                        func(field, i).to_tokens(t);
-                        quote!(,).to_tokens(t);
-                    }
-                });
+                token::Paren::default()
+                    .surround(
+                        &mut t,
+                        |t| {
+                            for (i, field) in unnamed.into_iter().enumerate() {
+                                func(field, i).to_tokens(t);
+                                quote!(,).to_tokens(t);
+                            }
+                        },
+                    );
             }
             Fields::Named(FieldsNamed { named, .. }) => {
-                token::Brace::default().surround(&mut t, |t| {
-                    for (i, field) in named.into_iter().enumerate() {
-                        field.ident.to_tokens(t);
-                        quote!(:).to_tokens(t);
-                        func(field, i).to_tokens(t);
-                        quote!(,).to_tokens(t);
-                    }
-                });
+                token::Brace::default()
+                    .surround(
+                        &mut t,
+                        |t| {
+                            for (i, field) in named.into_iter().enumerate() {
+                                field.ident.to_tokens(t);
+                                quote!(:).to_tokens(t);
+                                func(field, i).to_tokens(t);
+                                quote!(,).to_tokens(t);
+                            }
+                        },
+                    );
             }
         }
         t
@@ -210,9 +236,13 @@ impl<'a> VariantInfo<'a> {
         let pat = self.pat();
         let mut body = TokenStream::new();
         for binding in &self.bindings {
-            token::Brace::default().surround(&mut body, |body| {
-                f(binding).to_tokens(body);
-            });
+            token::Brace::default()
+                .surround(
+                    &mut body,
+                    |body| {
+                        f(binding).to_tokens(body);
+                    },
+                );
         }
         quote!(# pat => { # body })
     }
@@ -251,10 +281,16 @@ impl<'a> VariantInfo<'a> {
         R: ToTokens,
     {
         let pat = self.pat();
-        let body = self.bindings.iter().fold(quote!(# init), |i, bi| {
-            let r = f(i, bi);
-            quote!(# r)
-        });
+        let body = self
+            .bindings
+            .iter()
+            .fold(
+                quote!(# init),
+                |i, bi| {
+                    let r = f(i, bi);
+                    quote!(# r)
+                },
+            );
         quote!(# pat => { # body })
     }
     /// Filter the bindings created by this `Variant` object. This has 2 effects:

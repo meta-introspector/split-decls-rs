@@ -8,8 +8,8 @@ fn derive_try_from_bytes_struct(
     top_level: Trait,
     zerocopy_crate: &Path,
 ) -> Result<TokenStream, Error> {
-    let extras =
-        try_gen_trivial_is_bit_valid(ast, top_level, zerocopy_crate).unwrap_or_else(|| {
+    let extras = try_gen_trivial_is_bit_valid(ast, top_level, zerocopy_crate)
+        .unwrap_or_else(|| {
             let fields = strct.fields();
             let field_names = fields.iter().map(|(_vis, name, _ty)| name);
             let field_tys = fields.iter().map(|(_vis, _name, ty)| ty);
@@ -29,13 +29,15 @@ fn derive_try_from_bytes_struct(
                 zerocopy_crate::TryFromBytes >::is_bit_valid(field_candidate) }) * }
             )
         });
-    Ok(ImplBlockBuilder::new(
-        ast,
-        strct,
-        Trait::TryFromBytes,
-        FieldBounds::ALL_SELF,
-        zerocopy_crate,
+    Ok(
+        ImplBlockBuilder::new(
+                ast,
+                strct,
+                Trait::TryFromBytes,
+                FieldBounds::ALL_SELF,
+                zerocopy_crate,
+            )
+            .inner_extras(extras)
+            .build(),
     )
-    .inner_extras(extras)
-    .build())
 }

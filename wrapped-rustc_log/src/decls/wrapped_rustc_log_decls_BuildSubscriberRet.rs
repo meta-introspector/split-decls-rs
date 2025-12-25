@@ -5,7 +5,6 @@ use std::collections::HashMap;
 /// (e.g. `Registry::default().with(custom_layer)`) should be compatible with this type.
 /// Having an alias is also useful so rustc_driver_impl does not need to explicitly depend on
 /// `tracing_subscriber`.
-pub trait BuildSubscriberRet:
-    tracing::Subscriber + for<'span> tracing_subscriber::registry::LookupSpan<'span> + Send + Sync
-{
-}
+pub trait BuildSubscriberRet: tracing::Subscriber + for<'span> tracing_subscriber::registry::LookupSpan<
+        'span,
+    > + Send + Sync {}

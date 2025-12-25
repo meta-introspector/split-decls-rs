@@ -6,7 +6,9 @@ impl PaddingCheck {
     fn validator_trait_and_macro_idents(&self) -> (Ident, Ident) {
         let (trt, mcro) = match self {
             PaddingCheck::Struct => ("PaddingFree", "struct_padding"),
-            PaddingCheck::ReprCStruct => ("DynamicPaddingFree", "repr_c_struct_has_padding"),
+            PaddingCheck::ReprCStruct => {
+                ("DynamicPaddingFree", "repr_c_struct_has_padding")
+            }
             PaddingCheck::Union => ("PaddingFree", "union_padding"),
             PaddingCheck::Enum { .. } => ("PaddingFree", "enum_padding"),
         };
@@ -18,10 +20,10 @@ impl PaddingCheck {
     /// "context" code. For enums, this is the definition of the tag enum.
     fn validator_macro_context(&self) -> Option<&TokenStream> {
         match self {
-            PaddingCheck::Struct | PaddingCheck::ReprCStruct | PaddingCheck::Union => None,
-            PaddingCheck::Enum {
-                tag_type_definition,
-            } => Some(tag_type_definition),
+            PaddingCheck::Struct | PaddingCheck::ReprCStruct | PaddingCheck::Union => {
+                None
+            }
+            PaddingCheck::Enum { tag_type_definition } => Some(tag_type_definition),
         }
     }
 }

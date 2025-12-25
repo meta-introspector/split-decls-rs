@@ -11,11 +11,9 @@ impl ObjectIdentifierRef {
     /// Create an [`ObjectIdentifierRef`] from the given byte slice without first checking that it
     /// contains valid BER/DER.
     pub(crate) const fn from_bytes_unchecked(ber: &[u8]) -> &Self {
-        debug_assert!(!ber.is_empty());
+        debug_assert!(! ber.is_empty());
         #[allow(unsafe_code)]
-        unsafe {
-            &*(ber as *const [u8] as *const ObjectIdentifierRef)
-        }
+        unsafe { &*(ber as *const [u8] as *const ObjectIdentifierRef) }
     }
     /// Get the BER/DER serialization of this OID as bytes.
     ///

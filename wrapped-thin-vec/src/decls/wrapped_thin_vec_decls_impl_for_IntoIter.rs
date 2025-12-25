@@ -36,6 +36,11 @@ impl<T> IntoIter<T> {
         unsafe { &mut *self.as_raw_mut_slice() }
     }
     fn as_raw_mut_slice(&mut self) -> *mut [T] {
-        unsafe { ptr::slice_from_raw_parts_mut(self.vec.data_raw().add(self.start), self.len()) }
+        unsafe {
+            ptr::slice_from_raw_parts_mut(
+                self.vec.data_raw().add(self.start),
+                self.len(),
+            )
+        }
     }
 }

@@ -6,16 +6,18 @@ impl DeriveHelper {
     }
     pub fn name(&self, db: &dyn HirDatabase) -> Name {
         match self.derive {
-            makro @ MacroId::Macro2Id(_) => db
-                .attrs(makro.into())
-                .parse_rustc_builtin_macro()
-                .and_then(|(_, helpers)| helpers.get(self.idx as usize).cloned()),
+            makro @ MacroId::Macro2Id(_) => {
+                db.attrs(makro.into())
+                    .parse_rustc_builtin_macro()
+                    .and_then(|(_, helpers)| helpers.get(self.idx as usize).cloned())
+            }
             MacroId::MacroRulesId(_) => None,
-            makro @ MacroId::ProcMacroId(_) => db
-                .attrs(makro.into())
-                .parse_proc_macro_derive()
-                .and_then(|(_, helpers)| helpers.get(self.idx as usize).cloned()),
+            makro @ MacroId::ProcMacroId(_) => {
+                db.attrs(makro.into())
+                    .parse_proc_macro_derive()
+                    .and_then(|(_, helpers)| helpers.get(self.idx as usize).cloned())
+            }
         }
-        .unwrap_or_else(Name::missing)
+            .unwrap_or_else(Name::missing)
     }
 }

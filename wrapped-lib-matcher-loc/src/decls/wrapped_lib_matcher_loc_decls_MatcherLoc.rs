@@ -11,9 +11,7 @@ use std::collections::HashMap;
 /// simply incrementing the current matcher position index by one.
 #[derive(Debug, PartialEq, Clone)]
 pub enum MatcherLoc {
-    Token {
-        token: Token,
-    },
+    Token { token: Token },
     Delimited,
     Sequence {
         op: KleeneOp,
@@ -22,16 +20,9 @@ pub enum MatcherLoc {
         next_metavar: usize,
         seq_depth: usize,
     },
-    SequenceKleeneOpNoSep {
-        op: KleeneOp,
-        idx_first: usize,
-    },
-    SequenceSep {
-        separator: Token,
-    },
-    SequenceKleeneOpAfterSep {
-        idx_first: usize,
-    },
+    SequenceKleeneOpNoSep { op: KleeneOp, idx_first: usize },
+    SequenceSep { separator: Token },
+    SequenceKleeneOpAfterSep { idx_first: usize },
     MetaVarDecl {
         span: Span,
         bind: Ident,

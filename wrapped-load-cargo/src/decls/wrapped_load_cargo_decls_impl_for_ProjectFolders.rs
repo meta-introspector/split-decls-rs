@@ -57,8 +57,12 @@ impl ProjectFolders {
             }
         }
         for root in roots.into_iter().filter(|it| !it.include.is_empty()) {
-            let file_set_roots: Vec<VfsPath> =
-                root.include.iter().cloned().map(VfsPath::from).collect();
+            let file_set_roots: Vec<VfsPath> = root
+                .include
+                .iter()
+                .cloned()
+                .map(VfsPath::from)
+                .collect();
             let entry = {
                 let mut dirs = vfs::loader::Directories::default();
                 dirs.extensions.push("rs".into());

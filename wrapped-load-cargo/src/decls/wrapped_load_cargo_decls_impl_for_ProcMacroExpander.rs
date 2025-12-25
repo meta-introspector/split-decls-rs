@@ -11,15 +11,18 @@ impl ProcMacroExpander for Expander {
         mixed_site: Span,
         current_dir: String,
     ) -> Result<tt::TopSubtree<Span>, ProcMacroExpansionError> {
-        match self.0.expand(
-            subtree.view(),
-            attrs.map(|attrs| attrs.view()),
-            env.clone().into(),
-            def_site,
-            call_site,
-            mixed_site,
-            current_dir,
-        ) {
+        match self
+            .0
+            .expand(
+                subtree.view(),
+                attrs.map(|attrs| attrs.view()),
+                env.clone().into(),
+                def_site,
+                call_site,
+                mixed_site,
+                current_dir,
+            )
+        {
             Ok(Ok(subtree)) => Ok(subtree),
             Ok(Err(err)) => Err(ProcMacroExpansionError::Panic(err)),
             Err(err) => Err(ProcMacroExpansionError::System(err.to_string())),

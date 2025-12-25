@@ -11,7 +11,8 @@ pub fn get_suggestions_from_json<S: ::std::hash::BuildHasher>(
     filter: Filter,
 ) -> serde_json::error::Result<Vec<Suggestion>> {
     let mut result = Vec::new();
-    for cargo_msg in serde_json::Deserializer::from_str(input).into_iter::<Diagnostic>() {
+    for cargo_msg in serde_json::Deserializer::from_str(input).into_iter::<Diagnostic>()
+    {
         result.extend(collect_suggestions(&cargo_msg?, only, filter));
     }
     Ok(result)

@@ -28,8 +28,7 @@ impl<'tcx> BorrowckInferCtxt<'tcx> {
         let vid = next_region.as_var();
         if cfg!(debug_assertions) {
             debug!(
-                "inserting vid {:?} with origin {:?} into var_to_origin",
-                vid, origin
+                "inserting vid {:?} with origin {:?} into var_to_origin", vid, origin
             );
             let ctxt = get_ctxt_fn();
             let mut var_to_origin = self.reg_var_to_origin.borrow_mut();
@@ -50,8 +49,7 @@ impl<'tcx> BorrowckInferCtxt<'tcx> {
         let vid = next_region.as_var();
         if cfg!(debug_assertions) {
             debug!(
-                "inserting vid {:?} with origin {:?} into var_to_origin",
-                vid, origin
+                "inserting vid {:?} with origin {:?} into var_to_origin", vid, origin
             );
             let ctxt = get_ctxt_fn();
             let mut var_to_origin = self.reg_var_to_origin.borrow_mut();

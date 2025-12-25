@@ -10,7 +10,8 @@ impl<'de> Deserialize<'de> for Dependency {
         match value {
             toml::Value::String(s) => Ok(Dependency::Version(s)),
             toml::Value::Table(_) => {
-                let table = DependencyTable::deserialize(value).map_err(D::Error::custom)?;
+                let table = DependencyTable::deserialize(value)
+                    .map_err(D::Error::custom)?;
                 Ok(Dependency::Table(table))
             }
             _ => Err(D::Error::custom("Invalid dependency format")),

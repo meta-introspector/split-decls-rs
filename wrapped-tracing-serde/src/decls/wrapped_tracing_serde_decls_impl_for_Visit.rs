@@ -10,7 +10,10 @@ where
         if self.state.is_ok() {
             self.state = self
                 .serializer
-                .serialize_field(field.name(), &valuable_serde::Serializable::new(value));
+                .serialize_field(
+                    field.name(),
+                    &valuable_serde::Serializable::new(value),
+                );
         }
     }
     fn record_bool(&mut self, field: &Field, value: bool) {

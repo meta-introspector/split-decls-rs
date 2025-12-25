@@ -8,7 +8,8 @@ impl<'i> ParamValue<'i> {
         let mut escapes = 0;
         let mut pos = 0;
         while pos < escaped.len() {
-            let slash = memchr::memchr(b'\\', &escaped.as_bytes()[pos..]).map(|off| pos + off);
+            let slash = memchr::memchr(b'\\', &escaped.as_bytes()[pos..])
+                .map(|off| pos + off);
             for i in pos..slash.unwrap_or(escaped.len()) {
                 if (char_classes(escaped.as_bytes()[i]) & C_QDTEXT) == 0 {
                     return Err(format!("{:?} has non-qdtext at byte {}", escaped, i));
@@ -20,11 +21,12 @@ impl<'i> ParamValue<'i> {
                     return Err(format!("{:?} ends at a quoted-pair escape", escaped));
                 }
                 if (char_classes(escaped.as_bytes()[slash + 1]) & C_ESCAPABLE) == 0 {
-                    return Err(format!(
-                        "{:?} has an invalid quote-pair escape at byte {}",
-                        escaped,
-                        slash + 1
-                    ));
+                    return Err(
+                        format!(
+                            "{:?} has an invalid quote-pair escape at byte {}", escaped,
+                            slash + 1
+                        ),
+                    );
                 }
                 pos = slash + 2;
             } else {
@@ -43,17 +45,14 @@ impl<'i> ParamValue<'i> {
                 Some(rel_pos) => pos += rel_pos + 2,
                 None => {
                     panic!(
-                        "expected {} backslashes in {:?}, ran out after {}",
-                        escapes, escaped, escape
+                        "expected {} backslashes in {:?}, ran out after {}", escapes,
+                        escaped, escape
                     )
                 }
             };
         }
         if memchr::memchr(b'\\', &escaped.as_bytes()[pos..]).is_some() {
-            panic!(
-                "expected {} backslashes in {:?}, are more",
-                escapes, escaped
-            );
+            panic!("expected {} backslashes in {:?}, are more", escapes, escaped);
         }
         ParamValue { escapes, escaped }
     }
@@ -62,7 +61,10 @@ impl<'i> ParamValue<'i> {
         to.reserve(self.escaped.len() - self.escapes);
         let mut first_unwritten = 0;
         for _ in 0..self.escapes {
-            let i = match memchr::memchr(b'\\', &self.escaped.as_bytes()[first_unwritten..]) {
+            let i = match memchr::memchr(
+                b'\\',
+                &self.escaped.as_bytes()[first_unwritten..],
+            ) {
                 Some(rel_i) => first_unwritten + rel_i,
                 None => {
                     panic!("bad ParamValues; not as many backslash escapes as promised")

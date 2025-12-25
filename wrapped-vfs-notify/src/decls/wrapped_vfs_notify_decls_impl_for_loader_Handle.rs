@@ -4,7 +4,10 @@ impl loader::Handle for NotifyHandle {
     fn spawn(sender: loader::Sender) -> NotifyHandle {
         let actor = NotifyActor::new(sender);
         let (sender, receiver) = unbounded::<Message>();
-        let thread = stdx::thread::Builder::new(stdx::thread::ThreadIntent::Worker, "VfsLoader")
+        let thread = stdx::thread::Builder::new(
+                stdx::thread::ThreadIntent::Worker,
+                "VfsLoader",
+            )
             .spawn(move || actor.run(receiver))
             .expect("failed to spawn thread");
         NotifyHandle {

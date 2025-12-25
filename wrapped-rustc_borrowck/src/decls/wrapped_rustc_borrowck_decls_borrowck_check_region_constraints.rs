@@ -23,7 +23,7 @@ fn borrowck_check_region_constraints<'tcx>(
         polonius_context,
     }: CollectRegionConstraintsResult<'tcx>,
 ) -> PropagatedBorrowCheckResults<'tcx> {
-    assert!(!infcx.has_opaque_types_in_storage());
+    assert!(! infcx.has_opaque_types_in_storage());
     assert!(deferred_closure_requirements.is_empty());
     let tcx = root_cx.tcx;
     let body = &body_owned;
@@ -80,7 +80,9 @@ fn borrowck_check_region_constraints<'tcx>(
             used_mut_upvars: SmallVec::new(),
             borrow_set: &borrow_set,
             upvars: &[],
-            local_names: OnceCell::from(IndexVec::from_elem(None, &promoted_body.local_decls)),
+            local_names: OnceCell::from(
+                IndexVec::from_elem(None, &promoted_body.local_decls),
+            ),
             region_names: RefCell::default(),
             next_region_name: RefCell::new(1),
             polonius_output: None,
@@ -101,7 +103,7 @@ fn borrowck_check_region_constraints<'tcx>(
         MoveVisitor {
             ctxt: &mut promoted_mbcx,
         }
-        .visit_body(promoted_body);
+            .visit_body(promoted_body);
         promoted_mbcx.report_move_errors();
     }
     let mut mbcx = MirBorrowckCtxt {
@@ -163,18 +165,19 @@ fn borrowck_check_region_constraints<'tcx>(
         used_mut_upvars: mbcx.used_mut_upvars,
     };
     if let Some(consumer) = &mut root_cx.consumer {
-        consumer.insert_body(
-            def,
-            BodyWithBorrowckFacts {
-                body: body_owned,
-                promoted,
-                borrow_set,
-                region_inference_context: regioncx,
-                location_table: polonius_input.as_ref().map(|_| location_table),
-                input_facts: polonius_input,
-                output_facts: polonius_output,
-            },
-        );
+        consumer
+            .insert_body(
+                def,
+                BodyWithBorrowckFacts {
+                    body: body_owned,
+                    promoted,
+                    borrow_set,
+                    region_inference_context: regioncx,
+                    location_table: polonius_input.as_ref().map(|_| location_table),
+                    input_facts: polonius_input,
+                    output_facts: polonius_output,
+                },
+            );
     }
     debug!("do_mir_borrowck: result = {:#?}", result);
     result

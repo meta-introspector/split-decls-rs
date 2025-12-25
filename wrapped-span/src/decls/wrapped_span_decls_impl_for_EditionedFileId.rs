@@ -19,7 +19,9 @@ impl EditionedFileId {
     }
     pub fn from_raw(u32: u32) -> Self {
         assert!(u32 & Self::RESERVED_MASK == 0);
-        assert!((u32 & Self::EDITION_MASK) >> Self::FILE_ID_BITS <= Edition::LATEST as u32);
+        assert!(
+            (u32 & Self::EDITION_MASK) >> Self::FILE_ID_BITS <= Edition::LATEST as u32
+        );
         Self(u32)
     }
     pub const fn as_u32(self) -> u32 {

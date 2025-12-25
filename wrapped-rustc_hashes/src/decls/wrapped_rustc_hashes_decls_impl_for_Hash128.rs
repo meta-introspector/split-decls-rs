@@ -7,9 +7,7 @@ impl Hash128 {
     }
     #[inline]
     pub fn truncate(self) -> Hash64 {
-        Hash64 {
-            inner: self.inner as u64,
-        }
+        Hash64 { inner: self.inner as u64 }
     }
     #[inline]
     pub fn wrapping_add(self, other: Self) -> Self {

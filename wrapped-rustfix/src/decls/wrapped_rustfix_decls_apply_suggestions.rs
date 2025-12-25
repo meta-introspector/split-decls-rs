@@ -10,15 +10,17 @@ use std::collections::HashMap;
 /// The intent of this design is that the overall application process
 /// should repeatedly apply non-conflicting suggestions then rëevaluate the result,
 /// looping until either there are no more suggestions to apply or some budget is exhausted.
-pub fn apply_suggestions(code: &str, suggestions: &[Suggestion]) -> Result<String, Error> {
+pub fn apply_suggestions(
+    code: &str,
+    suggestions: &[Suggestion],
+) -> Result<String, Error> {
     let mut fix = CodeFix::new(code);
     for suggestion in suggestions.iter().rev() {
-        fix.apply(suggestion).or_else(|err| match err {
-            Error::AlreadyReplaced {
-                is_identical: true, ..
-            } => Ok(()),
-            _ => Err(err),
-        })?;
+        fix.apply(suggestion)
+            .or_else(|err| match err {
+                Error::AlreadyReplaced { is_identical: true, .. } => Ok(()),
+                _ => Err(err),
+            })?;
     }
     fix.finish()
 }

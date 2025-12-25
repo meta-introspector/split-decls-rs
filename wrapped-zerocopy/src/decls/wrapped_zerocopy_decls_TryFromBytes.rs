@@ -105,7 +105,9 @@ use std::collections::HashMap;
 )]
 #[cfg_attr(
     zerocopy_diagnostic_on_unimplemented_1_78_0,
-    diagnostic::on_unimplemented(note = "Consider adding `#[derive(TryFromBytes)]` to `{Self}`")
+    diagnostic::on_unimplemented(
+        note = "Consider adding `#[derive(TryFromBytes)]` to `{Self}`"
+    )
 )]
 pub unsafe trait TryFromBytes {
     #[doc(hidden)]
@@ -215,13 +217,21 @@ pub unsafe trait TryFromBytes {
         Self: KnownLayout + Immutable,
     {
         static_assert_dst_is_not_zst!(Self);
-        match Ptr::from_ref(source).try_cast_into_no_leftover::<Self, BecauseImmutable>(None) {
-            Ok(source) => match source.try_into_valid() {
-                Ok(valid) => Ok(valid.as_ref()),
-                Err(e) => Err(e
-                    .map_src(|src| src.as_bytes::<BecauseImmutable>().as_ref())
-                    .into()),
-            },
+        match Ptr::from_ref(source)
+            .try_cast_into_no_leftover::<Self, BecauseImmutable>(None)
+        {
+            Ok(source) => {
+                match source.try_into_valid() {
+                    Ok(valid) => Ok(valid.as_ref()),
+                    Err(e) => {
+                        Err(
+                            e
+                                .map_src(|src| src.as_bytes::<BecauseImmutable>().as_ref())
+                                .into(),
+                        )
+                    }
+                }
+            }
             Err(e) => Err(e.map_src(Ptr::as_ref).into()),
         }
     }
@@ -303,7 +313,9 @@ pub unsafe trait TryFromBytes {
     /// ```
     #[must_use = "has no side effects"]
     #[inline]
-    fn try_ref_from_prefix(source: &[u8]) -> Result<(&Self, &[u8]), TryCastError<&[u8], Self>>
+    fn try_ref_from_prefix(
+        source: &[u8],
+    ) -> Result<(&Self, &[u8]), TryCastError<&[u8], Self>>
     where
         Self: KnownLayout + Immutable,
     {
@@ -388,7 +400,9 @@ pub unsafe trait TryFromBytes {
     /// ```
     #[must_use = "has no side effects"]
     #[inline]
-    fn try_ref_from_suffix(source: &[u8]) -> Result<(&[u8], &Self), TryCastError<&[u8], Self>>
+    fn try_ref_from_suffix(
+        source: &[u8],
+    ) -> Result<(&[u8], &Self), TryCastError<&[u8], Self>>
     where
         Self: KnownLayout + Immutable,
     {
@@ -476,18 +490,28 @@ pub unsafe trait TryFromBytes {
     /// ```
     #[must_use = "has no side effects"]
     #[inline]
-    fn try_mut_from_bytes(bytes: &mut [u8]) -> Result<&mut Self, TryCastError<&mut [u8], Self>>
+    fn try_mut_from_bytes(
+        bytes: &mut [u8],
+    ) -> Result<&mut Self, TryCastError<&mut [u8], Self>>
     where
         Self: KnownLayout + IntoBytes,
     {
         static_assert_dst_is_not_zst!(Self);
-        match Ptr::from_mut(bytes).try_cast_into_no_leftover::<Self, BecauseExclusive>(None) {
-            Ok(source) => match source.try_into_valid() {
-                Ok(source) => Ok(source.as_mut()),
-                Err(e) => Err(e
-                    .map_src(|src| src.as_bytes::<BecauseExclusive>().as_mut())
-                    .into()),
-            },
+        match Ptr::from_mut(bytes)
+            .try_cast_into_no_leftover::<Self, BecauseExclusive>(None)
+        {
+            Ok(source) => {
+                match source.try_into_valid() {
+                    Ok(source) => Ok(source.as_mut()),
+                    Err(e) => {
+                        Err(
+                            e
+                                .map_src(|src| src.as_bytes::<BecauseExclusive>().as_mut())
+                                .into(),
+                        )
+                    }
+                }
+            }
             Err(e) => Err(e.map_src(Ptr::as_mut).into()),
         }
     }
@@ -762,14 +786,21 @@ pub unsafe trait TryFromBytes {
     where
         Self: KnownLayout<PointerMetadata = usize> + Immutable,
     {
-        match Ptr::from_ref(source).try_cast_into_no_leftover::<Self, BecauseImmutable>(Some(count))
+        match Ptr::from_ref(source)
+            .try_cast_into_no_leftover::<Self, BecauseImmutable>(Some(count))
         {
-            Ok(source) => match source.try_into_valid() {
-                Ok(source) => Ok(source.as_ref()),
-                Err(e) => Err(e
-                    .map_src(|src| src.as_bytes::<BecauseImmutable>().as_ref())
-                    .into()),
-            },
+            Ok(source) => {
+                match source.try_into_valid() {
+                    Ok(source) => Ok(source.as_ref()),
+                    Err(e) => {
+                        Err(
+                            e
+                                .map_src(|src| src.as_bytes::<BecauseImmutable>().as_ref())
+                                .into(),
+                        )
+                    }
+                }
+            }
             Err(e) => Err(e.map_src(Ptr::as_ref).into()),
         }
     }
@@ -1036,14 +1067,21 @@ pub unsafe trait TryFromBytes {
     where
         Self: KnownLayout<PointerMetadata = usize> + IntoBytes,
     {
-        match Ptr::from_mut(source).try_cast_into_no_leftover::<Self, BecauseExclusive>(Some(count))
+        match Ptr::from_mut(source)
+            .try_cast_into_no_leftover::<Self, BecauseExclusive>(Some(count))
         {
-            Ok(source) => match source.try_into_valid() {
-                Ok(source) => Ok(source.as_mut()),
-                Err(e) => Err(e
-                    .map_src(|src| src.as_bytes::<BecauseExclusive>().as_mut())
-                    .into()),
-            },
+            Ok(source) => {
+                match source.try_into_valid() {
+                    Ok(source) => Ok(source.as_mut()),
+                    Err(e) => {
+                        Err(
+                            e
+                                .map_src(|src| src.as_bytes::<BecauseExclusive>().as_mut())
+                                .into(),
+                        )
+                    }
+                }
+            }
             Err(e) => Err(e.map_src(Ptr::as_mut).into()),
         }
     }
@@ -1334,11 +1372,15 @@ pub unsafe trait TryFromBytes {
     /// ```
     #[must_use = "has no side effects"]
     #[inline]
-    fn try_read_from_prefix(source: &[u8]) -> Result<(Self, &[u8]), TryReadError<&[u8], Self>>
+    fn try_read_from_prefix(
+        source: &[u8],
+    ) -> Result<(Self, &[u8]), TryReadError<&[u8], Self>>
     where
         Self: Sized,
     {
-        let (candidate, suffix) = match CoreMaybeUninit::<Self>::read_from_prefix(source) {
+        let (candidate, suffix) = match CoreMaybeUninit::<
+            Self,
+        >::read_from_prefix(source) {
             Ok(candidate) => candidate,
             Err(e) => {
                 return Err(TryReadError::Size(e.with_dst()));
@@ -1393,11 +1435,15 @@ pub unsafe trait TryFromBytes {
     /// ```
     #[must_use = "has no side effects"]
     #[inline]
-    fn try_read_from_suffix(source: &[u8]) -> Result<(&[u8], Self), TryReadError<&[u8], Self>>
+    fn try_read_from_suffix(
+        source: &[u8],
+    ) -> Result<(&[u8], Self), TryReadError<&[u8], Self>>
     where
         Self: Sized,
     {
-        let (prefix, candidate) = match CoreMaybeUninit::<Self>::read_from_suffix(source) {
+        let (prefix, candidate) = match CoreMaybeUninit::<
+            Self,
+        >::read_from_suffix(source) {
             Ok(candidate) => candidate,
             Err(e) => {
                 return Err(TryReadError::Size(e.with_dst()));

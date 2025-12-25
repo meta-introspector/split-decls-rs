@@ -9,18 +9,14 @@ fn precise_macro_call_location(
             let node = ast_id.to_node(db);
             (
                 ast_id.with_value(SyntaxNodePtr::from(AstPtr::new(&node))),
-                node.path()
+                node
+                    .path()
                     .and_then(|it| it.segment())
                     .and_then(|it| it.name_ref())
                     .map(|it| it.syntax().text_range()),
             )
         }
-        MacroCallKind::Derive {
-            ast_id,
-            derive_attr_index,
-            derive_index,
-            ..
-        } => {
+        MacroCallKind::Derive { ast_id, derive_attr_index, derive_index, .. } => {
             let node = ast_id.to_node(db);
             let token = (|| {
                 let derive_attr = collect_attrs(&node)
@@ -46,11 +42,7 @@ fn precise_macro_call_location(
                 token.as_ref().map(|tok| tok.text_range()),
             )
         }
-        MacroCallKind::Attr {
-            ast_id,
-            invoc_attr_index,
-            ..
-        } => {
+        MacroCallKind::Attr { ast_id, invoc_attr_index, .. } => {
             let node = ast_id.to_node(db);
             let attr = collect_attrs(&node)
                 .nth(invoc_attr_index.ast_index())

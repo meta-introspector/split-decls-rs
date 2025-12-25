@@ -17,10 +17,10 @@ impl DiagnosticsContext<'_> {
                 }
             }
         })()
-        .map(|frange| ide_db::FileRange {
-            file_id: frange.file_id.file_id(self.sema.db),
-            range: frange.range,
-        })
-        .unwrap_or_else(|| sema.diagnostics_display_range(*node))
+            .map(|frange| ide_db::FileRange {
+                file_id: frange.file_id.file_id(self.sema.db),
+                range: frange.range,
+            })
+            .unwrap_or_else(|| sema.diagnostics_display_range(*node))
     }
 }

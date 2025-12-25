@@ -30,7 +30,9 @@ impl MacroCallId {
                 MacroKind::DeclarativeBuiltIn
             }
             MacroDefKind::BuiltInDerive(..) => MacroKind::DeriveBuiltIn,
-            MacroDefKind::ProcMacro(_, _, ProcMacroKind::CustomDerive) => MacroKind::Derive,
+            MacroDefKind::ProcMacro(_, _, ProcMacroKind::CustomDerive) => {
+                MacroKind::Derive
+            }
             MacroDefKind::ProcMacro(_, _, ProcMacroKind::Attr) => MacroKind::Attr,
             MacroDefKind::ProcMacro(_, _, ProcMacroKind::Bang) => MacroKind::ProcMacro,
             MacroDefKind::BuiltInAttr(..) => MacroKind::AttrBuiltIn,

@@ -3,23 +3,23 @@ use std::collections::HashMap;
 impl Uuid {
     /// UUID namespace for Domain Name System (DNS).
     pub const NAMESPACE_DNS: Self = Uuid([
-        0x6b, 0xa7, 0xb8, 0x10, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30,
-        0xc8,
+        0x6b, 0xa7, 0xb8, 0x10, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f,
+        0xd4, 0x30, 0xc8,
     ]);
     /// UUID namespace for ISO Object Identifiers (OIDs).
     pub const NAMESPACE_OID: Self = Uuid([
-        0x6b, 0xa7, 0xb8, 0x12, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30,
-        0xc8,
+        0x6b, 0xa7, 0xb8, 0x12, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f,
+        0xd4, 0x30, 0xc8,
     ]);
     /// UUID namespace for Uniform Resource Locators (URLs).
     pub const NAMESPACE_URL: Self = Uuid([
-        0x6b, 0xa7, 0xb8, 0x11, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30,
-        0xc8,
+        0x6b, 0xa7, 0xb8, 0x11, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f,
+        0xd4, 0x30, 0xc8,
     ]);
     /// UUID namespace for X.500 Distinguished Names (DNs).
     pub const NAMESPACE_X500: Self = Uuid([
-        0x6b, 0xa7, 0xb8, 0x14, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30,
-        0xc8,
+        0x6b, 0xa7, 0xb8, 0x14, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f,
+        0xd4, 0x30, 0xc8,
     ]);
     /// Returns the variant of the UUID structure.
     ///
@@ -164,10 +164,8 @@ impl Uuid {
     /// ```
     pub fn as_fields(&self) -> (u32, u16, u16, &[u8; 8]) {
         let bytes = self.as_bytes();
-        let d1 = (bytes[0] as u32) << 24
-            | (bytes[1] as u32) << 16
-            | (bytes[2] as u32) << 8
-            | (bytes[3] as u32);
+        let d1 = (bytes[0] as u32) << 24 | (bytes[1] as u32) << 16
+            | (bytes[2] as u32) << 8 | (bytes[3] as u32);
         let d2 = (bytes[4] as u16) << 8 | (bytes[5] as u16);
         let d3 = (bytes[6] as u16) << 8 | (bytes[7] as u16);
         let d4: &[u8; 8] = bytes[8..16].try_into().unwrap();
@@ -201,10 +199,8 @@ impl Uuid {
     /// # }
     /// ```
     pub fn to_fields_le(&self) -> (u32, u16, u16, &[u8; 8]) {
-        let d1 = (self.as_bytes()[0] as u32)
-            | (self.as_bytes()[1] as u32) << 8
-            | (self.as_bytes()[2] as u32) << 16
-            | (self.as_bytes()[3] as u32) << 24;
+        let d1 = (self.as_bytes()[0] as u32) | (self.as_bytes()[1] as u32) << 8
+            | (self.as_bytes()[2] as u32) << 16 | (self.as_bytes()[3] as u32) << 24;
         let d2 = (self.as_bytes()[4] as u16) | (self.as_bytes()[5] as u16) << 8;
         let d3 = (self.as_bytes()[6] as u16) | (self.as_bytes()[7] as u16) << 8;
         let d4: &[u8; 8] = self.as_bytes()[8..16].try_into().unwrap();
@@ -357,8 +353,21 @@ impl Uuid {
     /// ```
     pub const fn to_bytes_le(&self) -> Bytes {
         [
-            self.0[3], self.0[2], self.0[1], self.0[0], self.0[5], self.0[4], self.0[7], self.0[6],
-            self.0[8], self.0[9], self.0[10], self.0[11], self.0[12], self.0[13], self.0[14],
+            self.0[3],
+            self.0[2],
+            self.0[1],
+            self.0[0],
+            self.0[5],
+            self.0[4],
+            self.0[7],
+            self.0[6],
+            self.0[8],
+            self.0[9],
+            self.0[10],
+            self.0[11],
+            self.0[12],
+            self.0[13],
+            self.0[14],
             self.0[15],
         ]
     }
@@ -414,7 +423,9 @@ impl Uuid {
                 Some(Timestamp::from_gregorian(ticks, counter))
             }
             Some(Version::SortMac) => {
-                let (ticks, counter) = timestamp::decode_sorted_gregorian_timestamp(self);
+                let (ticks, counter) = timestamp::decode_sorted_gregorian_timestamp(
+                    self,
+                );
                 Some(Timestamp::from_gregorian(ticks, counter))
             }
             Some(Version::SortRand) => {

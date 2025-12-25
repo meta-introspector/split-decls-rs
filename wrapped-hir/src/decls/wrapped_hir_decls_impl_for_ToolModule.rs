@@ -1,7 +1,11 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl ToolModule {
-    pub(crate) fn by_name(db: &dyn HirDatabase, krate: Crate, name: &str) -> Option<Self> {
+    pub(crate) fn by_name(
+        db: &dyn HirDatabase,
+        krate: Crate,
+        name: &str,
+    ) -> Option<Self> {
         let krate = krate.id;
         let idx = crate_def_map(db, krate)
             .registered_tools()

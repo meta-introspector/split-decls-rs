@@ -11,34 +11,16 @@ impl MacroCallKind {
     /// Returns the file containing the macro invocation.
     pub fn file_id(&self) -> HirFileId {
         match *self {
-            MacroCallKind::FnLike {
-                ast_id: InFile { file_id, .. },
-                ..
-            }
-            | MacroCallKind::Derive {
-                ast_id: InFile { file_id, .. },
-                ..
-            }
-            | MacroCallKind::Attr {
-                ast_id: InFile { file_id, .. },
-                ..
-            } => file_id,
+            MacroCallKind::FnLike { ast_id: InFile { file_id, .. }, .. }
+            | MacroCallKind::Derive { ast_id: InFile { file_id, .. }, .. }
+            | MacroCallKind::Attr { ast_id: InFile { file_id, .. }, .. } => file_id,
         }
     }
     pub fn erased_ast_id(&self) -> ErasedFileAstId {
         match *self {
-            MacroCallKind::FnLike {
-                ast_id: InFile { value, .. },
-                ..
-            } => value.erase(),
-            MacroCallKind::Derive {
-                ast_id: InFile { value, .. },
-                ..
-            } => value.erase(),
-            MacroCallKind::Attr {
-                ast_id: InFile { value, .. },
-                ..
-            } => value.erase(),
+            MacroCallKind::FnLike { ast_id: InFile { value, .. }, .. } => value.erase(),
+            MacroCallKind::Derive { ast_id: InFile { value, .. }, .. } => value.erase(),
+            MacroCallKind::Attr { ast_id: InFile { value, .. }, .. } => value.erase(),
         }
     }
     /// Returns the original file range that best describes the location of this macro call.
@@ -88,36 +70,34 @@ impl MacroCallKind {
                     .text_range()
                     .cover(node.excl_token().unwrap().text_range())
             }
-            MacroCallKind::Derive {
-                ast_id,
-                derive_attr_index,
-                ..
-            } => collect_attrs(&ast_id.to_node(db))
-                .nth(derive_attr_index.ast_index())
-                .expect("missing derive")
-                .1
-                .expect_left("derive is a doc comment?")
-                .syntax()
-                .text_range(),
-            MacroCallKind::Attr {
-                ast_id,
-                invoc_attr_index,
-                ..
-            } => collect_attrs(&ast_id.to_node(db))
-                .nth(invoc_attr_index.ast_index())
-                .expect("missing attribute")
-                .1
-                .expect_left("attribute macro is a doc comment?")
-                .syntax()
-                .text_range(),
+            MacroCallKind::Derive { ast_id, derive_attr_index, .. } => {
+                collect_attrs(&ast_id.to_node(db))
+                    .nth(derive_attr_index.ast_index())
+                    .expect("missing derive")
+                    .1
+                    .expect_left("derive is a doc comment?")
+                    .syntax()
+                    .text_range()
+            }
+            MacroCallKind::Attr { ast_id, invoc_attr_index, .. } => {
+                collect_attrs(&ast_id.to_node(db))
+                    .nth(invoc_attr_index.ast_index())
+                    .expect("missing attribute")
+                    .1
+                    .expect_left("attribute macro is a doc comment?")
+                    .syntax()
+                    .text_range()
+            }
         };
         FileRange { range, file_id }
     }
     fn arg(&self, db: &dyn ExpandDatabase) -> InFile<Option<SyntaxNode>> {
         match self {
-            MacroCallKind::FnLike { ast_id, .. } => ast_id
-                .to_in_file_node(db)
-                .map(|it| Some(it.token_tree()?.syntax().clone())),
+            MacroCallKind::FnLike { ast_id, .. } => {
+                ast_id
+                    .to_in_file_node(db)
+                    .map(|it| Some(it.token_tree()?.syntax().clone()))
+            }
             MacroCallKind::Derive { ast_id, .. } => {
                 ast_id.to_in_file_node(db).syntax().cloned().map(Some)
             }

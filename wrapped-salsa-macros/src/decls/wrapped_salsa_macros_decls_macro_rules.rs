@@ -5,11 +5,7 @@ use std::collections::HashMap;
 /// with incomplete code.
 macro_rules! parse_macro_input {
     ($tokenstream:ident as $ty:ty) => {
-        match syn::parse::<$ty>($tokenstream.clone()) {
-            Ok(data) => data,
-            Err(err) => {
-                return $crate::token_stream_with_error($tokenstream, err);
-            }
-        }
+        match syn::parse::<$ty > ($tokenstream .clone()) { Ok(data) => data, Err(err) =>
+        { return $crate::token_stream_with_error($tokenstream, err); } }
     };
 }

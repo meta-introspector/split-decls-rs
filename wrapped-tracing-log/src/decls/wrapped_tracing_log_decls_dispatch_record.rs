@@ -13,15 +13,22 @@ pub(crate) fn dispatch_record(record: &log::Record<'_>) {
         let module = log_module.as_ref().map(|s| s as &dyn field::Value);
         let file = log_file.as_ref().map(|s| s as &dyn field::Value);
         let line = log_line.as_ref().map(|s| s as &dyn field::Value);
-        dispatch.event(&Event::new(
-            meta,
-            &meta.fields().value_set(&[
-                (&keys.message, Some(record.args() as &dyn field::Value)),
-                (&keys.target, Some(&record.target())),
-                (&keys.module, module),
-                (&keys.file, file),
-                (&keys.line, line),
-            ]),
-        ));
+        dispatch
+            .event(
+                &Event::new(
+                    meta,
+                    &meta
+                        .fields()
+                        .value_set(
+                            &[
+                                (&keys.message, Some(record.args() as &dyn field::Value)),
+                                (&keys.target, Some(&record.target())),
+                                (&keys.module, module),
+                                (&keys.file, file),
+                                (&keys.line, line),
+                            ],
+                        ),
+                ),
+            );
     });
 }

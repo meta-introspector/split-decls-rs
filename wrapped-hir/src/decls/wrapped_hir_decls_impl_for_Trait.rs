@@ -2,9 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl Trait {
     pub fn lang(db: &dyn HirDatabase, krate: Crate, name: &Name) -> Option<Trait> {
-        LangItem::from_name(name)?
-            .resolve_trait(db, krate.into())
-            .map(Into::into)
+        LangItem::from_name(name)?.resolve_trait(db, krate.into()).map(Into::into)
     }
     pub fn module(self, db: &dyn HirDatabase) -> Module {
         Module {
@@ -22,7 +20,11 @@ impl Trait {
         let traits = all_super_traits(db, self.into());
         traits.iter().map(|tr| Trait::from(*tr)).collect()
     }
-    pub fn function(self, db: &dyn HirDatabase, name: impl PartialEq<Name>) -> Option<Function> {
+    pub fn function(
+        self,
+        db: &dyn HirDatabase,
+        name: impl PartialEq<Name>,
+    ) -> Option<Function> {
         self.id
             .trait_items(db)
             .items
@@ -34,26 +36,16 @@ impl Trait {
             })
     }
     pub fn items(self, db: &dyn HirDatabase) -> Vec<AssocItem> {
-        self.id
-            .trait_items(db)
-            .items
-            .iter()
-            .map(|(_name, it)| (*it).into())
-            .collect()
+        self.id.trait_items(db).items.iter().map(|(_name, it)| (*it).into()).collect()
     }
     pub fn items_with_supertraits(self, db: &dyn HirDatabase) -> Vec<AssocItem> {
-        self.all_supertraits(db)
-            .into_iter()
-            .flat_map(|tr| tr.items(db))
-            .collect()
+        self.all_supertraits(db).into_iter().flat_map(|tr| tr.items(db)).collect()
     }
     pub fn is_auto(self, db: &dyn HirDatabase) -> bool {
         db.trait_signature(self.id).flags.contains(TraitFlags::AUTO)
     }
     pub fn is_unsafe(&self, db: &dyn HirDatabase) -> bool {
-        db.trait_signature(self.id)
-            .flags
-            .contains(TraitFlags::UNSAFE)
+        db.trait_signature(self.id).flags.contains(TraitFlags::UNSAFE)
     }
     pub fn type_or_const_param_count(
         &self,
@@ -71,7 +63,10 @@ impl Trait {
             .filter(|(_, ty)| !count_required_only || !ty.has_default())
             .count()
     }
-    pub fn dyn_compatibility(&self, db: &dyn HirDatabase) -> Option<DynCompatibilityViolation> {
+    pub fn dyn_compatibility(
+        &self,
+        db: &dyn HirDatabase,
+    ) -> Option<DynCompatibilityViolation> {
         hir_ty::dyn_compatibility::dyn_compatibility(db, self.id)
     }
     pub fn dyn_compatibility_all_violations(
@@ -89,12 +84,11 @@ impl Trait {
         );
         violations.is_empty().not().then_some(violations)
     }
-    fn all_macro_calls(&self, db: &dyn HirDatabase) -> Box<[(AstId<ast::Item>, MacroCallId)]> {
-        self.id
-            .trait_items(db)
-            .macro_calls
-            .to_vec()
-            .into_boxed_slice()
+    fn all_macro_calls(
+        &self,
+        db: &dyn HirDatabase,
+    ) -> Box<[(AstId<ast::Item>, MacroCallId)]> {
+        self.id.trait_items(db).macro_calls.to_vec().into_boxed_slice()
     }
     /// `#[rust_analyzer::completions(...)]` mode.
     pub fn complete(self, db: &dyn HirDatabase) -> Complete {

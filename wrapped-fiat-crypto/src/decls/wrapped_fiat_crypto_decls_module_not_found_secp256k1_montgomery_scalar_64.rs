@@ -1,4 +1,6 @@
-#[llm_error_message(message = "Module file not found for: secp256k1_montgomery_scalar_64")]
+#[llm_error_message(
+    message = "Module file not found for: secp256k1_montgomery_scalar_64"
+)]
 #[llm_context(
     crate_name = "wrapped_fiat_crypto",
     module_name = "secp256k1_montgomery_scalar_64"

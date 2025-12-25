@@ -4,7 +4,5 @@ use std::collections::HashMap;
 pub(crate) enum DeclOrigin {
     LetExpr,
     /// from `let x = ..`
-    LocalDecl {
-        has_else: bool,
-    },
+    LocalDecl { has_else: bool },
 }

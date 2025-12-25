@@ -2,17 +2,13 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl Static {
     pub fn module(self, db: &dyn HirDatabase) -> Module {
-        Module {
-            id: self.id.module(db),
-        }
+        Module { id: self.id.module(db) }
     }
     pub fn name(self, db: &dyn HirDatabase) -> Name {
         db.static_signature(self.id).name.clone()
     }
     pub fn is_mut(self, db: &dyn HirDatabase) -> bool {
-        db.static_signature(self.id)
-            .flags
-            .contains(StaticFlags::MUTABLE)
+        db.static_signature(self.id).flags.contains(StaticFlags::MUTABLE)
     }
     pub fn value(self, db: &dyn HirDatabase) -> Option<ast::Expr> {
         self.source(db)?.value.body()
@@ -27,12 +23,16 @@ impl Static {
         }
     }
     /// Evaluate the static initializer.
-    pub fn eval(self, db: &dyn HirDatabase) -> Result<EvaluatedConst<'_>, ConstEvalError<'_>> {
+    pub fn eval(
+        self,
+        db: &dyn HirDatabase,
+    ) -> Result<EvaluatedConst<'_>, ConstEvalError<'_>> {
         let ty = db.value_ty(self.id.into()).unwrap().instantiate_identity();
-        db.const_eval_static(self.id).map(|it| EvaluatedConst {
-            const_: it,
-            def: self.id.into(),
-            ty,
-        })
+        db.const_eval_static(self.id)
+            .map(|it| EvaluatedConst {
+                const_: it,
+                def: self.id.into(),
+                ty,
+            })
     }
 }

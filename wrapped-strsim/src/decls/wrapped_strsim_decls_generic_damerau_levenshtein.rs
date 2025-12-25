@@ -42,8 +42,8 @@ where
             };
             let insertion_cost = distances[flat_index(i, j + 1, width)] + 1;
             let deletion_cost = distances[flat_index(i + 1, j, width)] + 1;
-            let transposition_cost =
-                distances[flat_index(k, db, width)] + (i - k - 1) + 1 + (j - db - 1);
+            let transposition_cost = distances[flat_index(k, db, width)] + (i - k - 1)
+                + 1 + (j - db - 1);
             let mut substitution_cost = distances[flat_index(i, j, width)] + 1;
             if a_elems[i - 1] == b_elems[j - 1] {
                 db = j;

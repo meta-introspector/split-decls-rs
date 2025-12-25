@@ -21,7 +21,10 @@ where
         let token = self.pos;
         self.pos += 1;
         let range = self.lexed.text_range(token);
-        let range = TextRange::new(range.start.try_into().ok()?, range.end.try_into().ok()?);
+        let range = TextRange::new(
+            range.start.try_into().ok()?,
+            range.end.try_into().ok()?,
+        );
         Some((token, range))
     }
     fn peek(&self) -> Option<Self::Token> {

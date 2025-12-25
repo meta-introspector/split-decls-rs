@@ -6,10 +6,12 @@ impl<'db> TraitRef<'db> {
         resolver: &Resolver<'_>,
         trait_ref: hir_ty::next_solver::TraitRef<'db>,
     ) -> Self {
-        let env = resolver.generic_def().map_or_else(
-            || TraitEnvironment::empty(resolver.krate()),
-            |d| db.trait_environment(d),
-        );
+        let env = resolver
+            .generic_def()
+            .map_or_else(
+                || TraitEnvironment::empty(resolver.krate()),
+                |d| db.trait_environment(d),
+            );
         TraitRef { env, trait_ref }
     }
     pub fn trait_(&self) -> Trait {

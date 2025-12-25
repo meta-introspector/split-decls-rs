@@ -31,8 +31,9 @@ Available lint options:
         .partition(|&lint| lint.is_externally_loaded);
     let loaded = sort_lints(sess, loaded);
     let builtin = sort_lints(sess, builtin);
-    let (loaded_groups, builtin_groups): (Vec<_>, _) =
-        lint_store.get_lint_groups().partition(|&(.., p)| p);
+    let (loaded_groups, builtin_groups): (Vec<_>, _) = lint_store
+        .get_lint_groups()
+        .partition(|&(.., p)| p);
     let loaded_groups = sort_lint_groups(loaded_groups);
     let builtin_groups = sort_lint_groups(builtin_groups);
     let max_name_len = loaded
@@ -53,10 +54,8 @@ Available lint options:
         for lint in lints {
             let name = lint.name_lower().replace('_', "-");
             safe_println!(
-                "    {}  {:7.7}  {}",
-                padded(&name),
-                lint.default_level(sess.edition()).as_str(),
-                lint.desc
+                "    {}  {:7.7}  {}", padded(& name), lint.default_level(sess.edition())
+                .as_str(), lint.desc
             );
         }
         safe_println!("\n");
@@ -82,8 +81,7 @@ Available lint options:
         safe_println!("    {}  ---------", padded("----"));
         if all_warnings {
             safe_println!(
-                "    {}  all lints that are set to issue warnings",
-                padded("warnings")
+                "    {}  all lints that are set to issue warnings", padded("warnings")
             );
         }
         for (name, to) in lints {
@@ -93,18 +91,22 @@ Available lint options:
                 .map(|x| x.to_string().replace('_', "-"))
                 .collect::<Vec<String>>()
                 .join(", ");
-            safe_println!("    {}  {}", padded(&name), desc);
+            safe_println!("    {}  {}", padded(& name), desc);
         }
         safe_println!("\n");
     };
     print_lint_groups(builtin_groups, true);
     match (registered_lints, loaded.len(), loaded_groups.len()) {
         (false, 0, _) | (false, _, 0) => {
-            safe_println!("Lint tools like Clippy can load additional lints and lint groups.");
+            safe_println!(
+                "Lint tools like Clippy can load additional lints and lint groups."
+            );
         }
         (false, ..) => panic!("didn't load additional lints but got them anyway!"),
         (true, 0, 0) => {
-            safe_println!("This crate does not load any additional lints or lint groups.")
+            safe_println!(
+                "This crate does not load any additional lints or lint groups."
+            )
         }
         (true, l, g) => {
             if l > 0 {

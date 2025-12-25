@@ -75,9 +75,11 @@ impl DeclarativeMacro {
                 rules.push(rule);
                 if let Err(()) = src.expect_any_char(&[';', ',']) {
                     if !src.is_empty() {
-                        err = Some(Box::new(ParseError::expected(
-                            "expected `;` or `,` to delimit rules",
-                        )));
+                        err = Some(
+                            Box::new(
+                                ParseError::expected("expected `;` or `,` to delimit rules"),
+                            ),
+                        );
                     }
                     break;
                 }

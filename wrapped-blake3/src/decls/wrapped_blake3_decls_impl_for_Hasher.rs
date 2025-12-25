@@ -46,8 +46,8 @@ impl Hasher {
         self
     }
     fn merge_cv_stack(&mut self, chunk_counter: u64) {
-        let post_merge_stack_len =
-            (chunk_counter - self.initial_chunk_counter).count_ones() as usize;
+        let post_merge_stack_len = (chunk_counter - self.initial_chunk_counter)
+            .count_ones() as usize;
         while self.cv_stack.len() > post_merge_stack_len {
             let right_child = self.cv_stack.pop().unwrap();
             let left_child = self.cv_stack.pop().unwrap();
@@ -82,9 +82,7 @@ impl Hasher {
             assert!(
                 input.len() as u64 <= remaining,
                 "the subtree starting at {} contains at most {} bytes (found {})",
-                CHUNK_LEN as u64 * self.initial_chunk_counter,
-                max,
-                input.len(),
+                CHUNK_LEN as u64 * self.initial_chunk_counter, max, input.len(),
             );
         }
         if self.chunk_state.count() > 0 {
@@ -119,18 +117,20 @@ impl Hasher {
                 debug_assert_eq!(subtree_len, CHUNK_LEN);
                 self.push_cv(
                     &ChunkState::new(
-                        &self.key,
-                        self.chunk_state.chunk_counter,
-                        self.chunk_state.flags,
-                        self.chunk_state.platform,
-                    )
-                    .update(&input[..subtree_len])
-                    .output()
-                    .chaining_value(),
+                            &self.key,
+                            self.chunk_state.chunk_counter,
+                            self.chunk_state.flags,
+                            self.chunk_state.platform,
+                        )
+                        .update(&input[..subtree_len])
+                        .output()
+                        .chaining_value(),
                     self.chunk_state.chunk_counter,
                 );
             } else {
-                let cv_pair = compress_subtree_to_parent_node::<J>(
+                let cv_pair = compress_subtree_to_parent_node::<
+                    J,
+                >(
                     &input[..subtree_len],
                     &self.key,
                     self.chunk_state.chunk_counter,
@@ -164,8 +164,8 @@ impl Hasher {
         let mut num_cvs_remaining = self.cv_stack.len();
         if self.chunk_state.count() > 0 {
             debug_assert_eq!(
-                self.cv_stack.len(),
-                (self.chunk_state.chunk_counter - self.initial_chunk_counter).count_ones() as usize,
+                self.cv_stack.len(), (self.chunk_state.chunk_counter - self
+                .initial_chunk_counter).count_ones() as usize,
                 "cv stack does not need a merge",
             );
             output = self.chunk_state.output();
@@ -265,7 +265,10 @@ impl Hasher {
     /// # }
     /// ```
     #[cfg(feature = "std")]
-    pub fn update_reader(&mut self, reader: impl std::io::Read) -> std::io::Result<&mut Self> {
+    pub fn update_reader(
+        &mut self,
+        reader: impl std::io::Read,
+    ) -> std::io::Result<&mut Self> {
         io::copy_wide(reader, self)?;
         Ok(self)
     }
@@ -335,7 +338,10 @@ impl Hasher {
     /// # }
     /// ```
     #[cfg(feature = "mmap")]
-    pub fn update_mmap(&mut self, path: impl AsRef<std::path::Path>) -> std::io::Result<&mut Self> {
+    pub fn update_mmap(
+        &mut self,
+        path: impl AsRef<std::path::Path>,
+    ) -> std::io::Result<&mut Self> {
         let file = std::fs::File::open(path.as_ref())?;
         if let Some(mmap) = io::maybe_mmap_file(&file)? {
             self.update(&mmap);

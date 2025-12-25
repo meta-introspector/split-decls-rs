@@ -18,12 +18,14 @@ fn derive_unaligned_enum(
             ),
         );
     }
-    Ok(ImplBlockBuilder::new(
-        ast,
-        enm,
-        Trait::Unaligned,
-        FieldBounds::ALL_SELF,
-        zerocopy_crate,
+    Ok(
+        ImplBlockBuilder::new(
+                ast,
+                enm,
+                Trait::Unaligned,
+                FieldBounds::ALL_SELF,
+                zerocopy_crate,
+            )
+            .build(),
     )
-    .build())
 }

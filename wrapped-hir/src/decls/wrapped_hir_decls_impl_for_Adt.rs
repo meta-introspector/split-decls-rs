@@ -8,11 +8,16 @@ impl Adt {
         let env = db.trait_environment(self.into());
         let interner = DbInterner::new_with(db, Some(env.krate), env.block);
         let adt_id = AdtId::from(self);
-        let args = GenericArgs::for_item_with_defaults(interner, adt_id.into(), |_, id, _| {
-            GenericArg::error_from_id(interner, id)
-        });
+        let args = GenericArgs::for_item_with_defaults(
+            interner,
+            adt_id.into(),
+            |_, id, _| { GenericArg::error_from_id(interner, id) },
+        );
         db.layout_of_adt(adt_id, args, env)
-            .map(|layout| Layout(layout, db.target_data_layout(self.krate(db).id).unwrap()))
+            .map(|layout| Layout(
+                layout,
+                db.target_data_layout(self.krate(db).id).unwrap(),
+            ))
     }
     /// Turns this ADT into a type. Any type parameters of the ADT will be
     /// turned into unknown types, which is good for e.g. finding the most
@@ -60,21 +65,13 @@ impl Adt {
         };
         resolver
             .generic_params()
-            .and_then(|gp| gp.iter_lt().nth(0))
+            .and_then(|gp| { gp.iter_lt().nth(0) })
             .map(|arena| arena.1.clone())
     }
     pub fn as_struct(&self) -> Option<Struct> {
-        if let Self::Struct(v) = self {
-            Some(*v)
-        } else {
-            None
-        }
+        if let Self::Struct(v) = self { Some(*v) } else { None }
     }
     pub fn as_enum(&self) -> Option<Enum> {
-        if let Self::Enum(v) = self {
-            Some(*v)
-        } else {
-            None
-        }
+        if let Self::Enum(v) = self { Some(*v) } else { None }
     }
 }

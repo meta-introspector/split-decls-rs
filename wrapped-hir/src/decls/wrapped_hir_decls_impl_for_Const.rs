@@ -2,9 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl Const {
     pub fn module(self, db: &dyn HirDatabase) -> Module {
-        Module {
-            id: self.id.module(db),
-        }
+        Module { id: self.id.module(db) }
     }
     pub fn name(self, db: &dyn HirDatabase) -> Option<Name> {
         db.const_signature(self.id).name.clone()
@@ -16,7 +14,10 @@ impl Const {
         Type::from_value_def(db, self.id)
     }
     /// Evaluate the constant.
-    pub fn eval(self, db: &dyn HirDatabase) -> Result<EvaluatedConst<'_>, ConstEvalError<'_>> {
+    pub fn eval(
+        self,
+        db: &dyn HirDatabase,
+    ) -> Result<EvaluatedConst<'_>, ConstEvalError<'_>> {
         let interner = DbInterner::new_with(db, None, None);
         let ty = db.value_ty(self.id.into()).unwrap().instantiate_identity();
         db.const_eval(self.id, GenericArgs::new_from_iter(interner, []), None)

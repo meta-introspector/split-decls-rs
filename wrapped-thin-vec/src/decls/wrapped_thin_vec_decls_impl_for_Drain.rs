@@ -11,7 +11,10 @@ impl<T> Drain<'_, T> {
         let range_start = vec.len();
         let range_end = self.end;
         let range_slice = unsafe {
-            slice::from_raw_parts_mut(vec.data_raw().add(range_start), range_end - range_start)
+            slice::from_raw_parts_mut(
+                vec.data_raw().add(range_start),
+                range_end - range_start,
+            )
         };
         for place in range_slice {
             if let Some(new_item) = replace_with.next() {

@@ -40,26 +40,28 @@ impl ProjectBuilder {
         self
     }
     fn _file(&mut self, path: &Path, body: &str, executable: bool) {
-        self.files.push(FileBuilder::new(
-            self.root.root().join(path),
-            body,
-            executable,
-        ));
+        self.files.push(FileBuilder::new(self.root.root().join(path), body, executable));
     }
     /// Adds a symlink to a file to the project.
     pub fn symlink(mut self, dst: impl AsRef<Path>, src: impl AsRef<Path>) -> Self {
-        self.symlinks.push(SymlinkBuilder::new(
-            self.root.root().join(dst),
-            self.root.root().join(src),
-        ));
+        self.symlinks
+            .push(
+                SymlinkBuilder::new(
+                    self.root.root().join(dst),
+                    self.root.root().join(src),
+                ),
+            );
         self
     }
     /// Create a symlink to a directory
     pub fn symlink_dir(mut self, dst: impl AsRef<Path>, src: impl AsRef<Path>) -> Self {
-        self.symlinks.push(SymlinkBuilder::new_dir(
-            self.root.root().join(dst),
-            self.root.root().join(src),
-        ));
+        self.symlinks
+            .push(
+                SymlinkBuilder::new_dir(
+                    self.root.root().join(dst),
+                    self.root.root().join(src),
+                ),
+            );
         self
     }
     pub fn no_manifest(mut self) -> Self {
@@ -72,11 +74,7 @@ impl ProjectBuilder {
         self.root.root().mkdir_p();
         let manifest_path = self.root.root().join("Cargo.toml");
         if !self.no_manifest && self.files.iter().all(|fb| fb.path != manifest_path) {
-            self._file(
-                Path::new("Cargo.toml"),
-                &basic_manifest("foo", "0.0.1"),
-                false,
-            )
+            self._file(Path::new("Cargo.toml"), &basic_manifest("foo", "0.0.1"), false)
         }
         let past = time::SystemTime::now() - Duration::new(1, 0);
         let ftime = filetime::FileTime::from_system_time(past);

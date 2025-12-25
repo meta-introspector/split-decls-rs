@@ -4,11 +4,14 @@ impl Executor {
     #[cfg(not(target_family = "wasm"))]
     fn max_threads() -> NonZeroUsize {
         match env::var(MAX_THREADS_ENV) {
-            Ok(v) => v
-                .parse::<usize>()
-                .ok()
-                .and_then(|v| NonZeroUsize::new(v.clamp(MIN_MAX_THREADS, MAX_MAX_THREADS)))
-                .unwrap_or(DEFAULT_MAX_THREADS),
+            Ok(v) => {
+                v.parse::<usize>()
+                    .ok()
+                    .and_then(|v| NonZeroUsize::new(
+                        v.clamp(MIN_MAX_THREADS, MAX_MAX_THREADS),
+                    ))
+                    .unwrap_or(DEFAULT_MAX_THREADS)
+            }
             Err(_) => DEFAULT_MAX_THREADS,
         }
     }
@@ -32,20 +35,23 @@ impl Executor {
             };
             &EXECUTOR
         }
-        #[cfg(target_family = "wasm")]
-        panic!("cannot spawn a blocking task on WASM")
+        #[cfg(target_family = "wasm")] panic!("cannot spawn a blocking task on WASM")
     }
     /// Spawns a future onto this executor.
     ///
     /// Returns a [`Task`] handle for the spawned task.
-    fn spawn<T: Send + 'static>(future: impl Future<Output = T> + Send + 'static) -> Task<T> {
-        let (runnable, task) = async_task::Builder::new().propagate_panic(true).spawn(
-            move |()| future,
-            |r| {
-                let executor = Self::get();
-                executor.schedule(r)
-            },
-        );
+    fn spawn<T: Send + 'static>(
+        future: impl Future<Output = T> + Send + 'static,
+    ) -> Task<T> {
+        let (runnable, task) = async_task::Builder::new()
+            .propagate_panic(true)
+            .spawn(
+                move |()| future,
+                |r| {
+                    let executor = Self::get();
+                    executor.schedule(r)
+                },
+            );
         runnable.schedule();
         task
     }
@@ -66,7 +72,7 @@ impl Executor {
             inner.idle_count += 1;
             let timeout = Duration::from_millis(500);
             #[cfg(feature = "tracing")]
-            tracing::trace!(?timeout, "going to sleep");
+            tracing::trace!(? timeout, "going to sleep");
             let (lock, res) = self.cvar.wait_timeout(inner, timeout).unwrap();
             inner = lock;
             if (Some(inner.thread_count) > inner.thread_limit.map(NonZeroUsize::get))
@@ -93,17 +99,17 @@ impl Executor {
     fn grow_pool(&'static self, mut inner: MutexGuard<'static, Inner>) {
         #[cfg(feature = "tracing")]
         let _span = tracing::trace_span!(
-            "grow_pool",
-            queue_len = inner.queue.len(),
-            idle_count = inner.idle_count,
+            "grow_pool", queue_len = inner.queue.len(), idle_count = inner.idle_count,
             thread_count = inner.thread_count,
         )
-        .entered();
+            .entered();
         let thread_limit = inner
             .thread_limit
             .get_or_insert_with(Self::max_threads)
             .get();
-        while inner.queue.len() > inner.idle_count * 5 && inner.thread_count < thread_limit {
+        while inner.queue.len() > inner.idle_count * 5
+            && inner.thread_count < thread_limit
+        {
             #[cfg(feature = "tracing")]
             tracing::trace!("spawning a new thread to handle blocking tasks");
             inner.idle_count += 1;
@@ -121,13 +127,16 @@ impl Executor {
                 inner.thread_count -= 1;
                 inner.thread_limit = {
                     let new_limit = inner.thread_count;
-                    Some(NonZeroUsize::new(new_limit).unwrap_or_else(|| {
-                        #[cfg(feature = "tracing")]
-                        tracing::warn!(
-                            "attempted to lower thread_limit to zero; setting to one instead"
-                        );
-                        NonZeroUsize::new(1).unwrap()
-                    }))
+                    Some(
+                        NonZeroUsize::new(new_limit)
+                            .unwrap_or_else(|| {
+                                #[cfg(feature = "tracing")]
+                                tracing::warn!(
+                                    "attempted to lower thread_limit to zero; setting to one instead"
+                                );
+                                NonZeroUsize::new(1).unwrap()
+                            }),
+                    )
                 };
             }
         }

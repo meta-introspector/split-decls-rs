@@ -7,7 +7,7 @@ fn mir_borrowck(
     tcx: TyCtxt<'_>,
     def: LocalDefId,
 ) -> Result<&FxIndexMap<LocalDefId, ty::DefinitionSiteHiddenType<'_>>, ErrorGuaranteed> {
-    assert!(!tcx.is_typeck_child(def.to_def_id()));
+    assert!(! tcx.is_typeck_child(def.to_def_id()));
     let (input_body, _) = tcx.mir_promoted(def);
     debug!("run query mir_borrowck: {}", tcx.def_path_str(def));
     let input_body: &Body<'_> = &input_body.borrow();

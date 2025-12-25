@@ -14,7 +14,9 @@ pub fn a_or_an(s: &str) -> &'static str {
         };
         first_alpha_char = next;
     }
-    if ["a", "e", "i", "o", "u", "&"].contains(&&first_alpha_char.to_lowercase().to_string()[..]) {
+    if ["a", "e", "i", "o", "u", "&"]
+        .contains(&&first_alpha_char.to_lowercase().to_string()[..])
+    {
         "an"
     } else {
         "a"

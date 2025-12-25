@@ -33,16 +33,12 @@ impl Formatter {
     /// Formats the number into a string
     pub fn format(&self, value: f64) -> String {
         if value < 0.0 {
-            return format!("-{}", self.format(value * -1.0));
+            return format!("-{}", self.format(value * - 1.0));
         }
         let scaled_value = self.scales.to_scaled_value(value);
         format!(
-            "{:.width$}{}{}{}",
-            scaled_value.value,
-            self.separator,
-            scaled_value.suffix,
-            self.forced_units,
-            width = self.decimals
+            "{:.width$}{}{}{}", scaled_value.value, self.separator, scaled_value.suffix,
+            self.forced_units, width = self.decimals
         )
     }
     /// Parse a string back into a float value.

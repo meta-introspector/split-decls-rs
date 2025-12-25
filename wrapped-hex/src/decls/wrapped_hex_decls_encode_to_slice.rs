@@ -33,6 +33,9 @@ use std::collections::HashMap;
 /// # Ok(())
 /// # }
 /// ```
-pub fn encode_to_slice<T: AsRef<[u8]>>(input: T, output: &mut [u8]) -> Result<(), FromHexError> {
+pub fn encode_to_slice<T: AsRef<[u8]>>(
+    input: T,
+    output: &mut [u8],
+) -> Result<(), FromHexError> {
     encode_to_slice_inner(input.as_ref(), output, HEX_CHARS_LOWER)
 }

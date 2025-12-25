@@ -45,14 +45,16 @@ impl OutputReader {
         let full_blocks_len = full_blocks * BLOCK_LEN;
         if full_blocks > 0 {
             debug_assert_eq!(0, self.position_within_block);
-            self.inner.platform.xof_many(
-                &self.inner.input_chaining_value,
-                &self.inner.block,
-                self.inner.block_len,
-                self.inner.counter,
-                self.inner.flags | ROOT,
-                &mut buf[..full_blocks_len],
-            );
+            self.inner
+                .platform
+                .xof_many(
+                    &self.inner.input_chaining_value,
+                    &self.inner.block,
+                    self.inner.block_len,
+                    self.inner.counter,
+                    self.inner.flags | ROOT,
+                    &mut buf[..full_blocks_len],
+                );
             self.inner.counter += full_blocks as u64;
             buf = &mut buf[full_blocks * BLOCK_LEN..];
         }

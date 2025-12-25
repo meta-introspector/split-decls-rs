@@ -20,17 +20,14 @@ impl Hasher for FxHasher {
     #[inline]
     fn write_u64(&mut self, i: u64) {
         self.add_to_hash(i as usize);
-        #[cfg(target_pointer_width = "32")]
-        self.add_to_hash((i >> 32) as usize);
+        #[cfg(target_pointer_width = "32")] self.add_to_hash((i >> 32) as usize);
     }
     #[inline]
     fn write_u128(&mut self, i: u128) {
         self.add_to_hash(i as usize);
-        #[cfg(target_pointer_width = "32")]
-        self.add_to_hash((i >> 32) as usize);
+        #[cfg(target_pointer_width = "32")] self.add_to_hash((i >> 32) as usize);
         self.add_to_hash((i >> 64) as usize);
-        #[cfg(target_pointer_width = "32")]
-        self.add_to_hash((i >> 96) as usize);
+        #[cfg(target_pointer_width = "32")] self.add_to_hash((i >> 96) as usize);
     }
     #[inline]
     fn write_usize(&mut self, i: usize) {

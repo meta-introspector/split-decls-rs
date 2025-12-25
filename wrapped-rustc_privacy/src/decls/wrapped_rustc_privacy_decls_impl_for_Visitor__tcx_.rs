@@ -12,8 +12,11 @@ impl<'tcx> Visitor<'tcx> for TypePrivacyVisitor<'tcx> {
         self.span = hir_ty.span;
         if self
             .visit(
-                self.maybe_typeck_results
-                    .unwrap_or_else(|| span_bug!(hir_ty.span, "`hir::Ty` outside of a body"))
+                self
+                    .maybe_typeck_results
+                    .unwrap_or_else(|| {
+                        span_bug!(hir_ty.span, "`hir::Ty` outside of a body")
+                    })
                     .node_type(hir_ty.hir_id),
             )
             .is_break()
@@ -31,14 +34,15 @@ impl<'tcx> Visitor<'tcx> for TypePrivacyVisitor<'tcx> {
         self.span = inf_span;
         if let Some(ty) = self
             .maybe_typeck_results
-            .unwrap_or_else(|| span_bug!(inf_span, "Inference variable outside of a body"))
+            .unwrap_or_else(|| {
+                span_bug!(inf_span, "Inference variable outside of a body")
+            })
             .node_type_opt(inf_id)
         {
             if self.visit(ty).is_break() {
                 return;
             }
-        } else {
-        }
+        } else {}
         self.visit_id(inf_id)
     }
     fn visit_expr(&mut self, expr: &'tcx hir::Expr<'tcx>) {
@@ -55,7 +59,9 @@ impl<'tcx> Visitor<'tcx> for TypePrivacyVisitor<'tcx> {
                 self.span = segment.ident.span;
                 let typeck_results = self
                     .maybe_typeck_results
-                    .unwrap_or_else(|| span_bug!(self.span, "`hir::Expr` outside of a body"));
+                    .unwrap_or_else(|| {
+                        span_bug!(self.span, "`hir::Expr` outside of a body")
+                    });
                 if let Some(def_id) = typeck_results.type_dependent_def_id(expr.hir_id) {
                     if self
                         .visit(self.tcx.type_of(def_id).instantiate_identity())
@@ -66,30 +72,43 @@ impl<'tcx> Visitor<'tcx> for TypePrivacyVisitor<'tcx> {
                 } else {
                     self.tcx
                         .dcx()
-                        .span_delayed_bug(expr.span, "no type-dependent def for method call");
+                        .span_delayed_bug(
+                            expr.span,
+                            "no type-dependent def for method call",
+                        );
                 }
             }
             _ => {}
         }
         intravisit::walk_expr(self, expr);
     }
-    fn visit_qpath(&mut self, qpath: &'tcx hir::QPath<'tcx>, id: hir::HirId, span: Span) {
+    fn visit_qpath(
+        &mut self,
+        qpath: &'tcx hir::QPath<'tcx>,
+        id: hir::HirId,
+        span: Span,
+    ) {
         let def = match qpath {
-            hir::QPath::Resolved(_, path) => match path.res {
-                Res::Def(kind, def_id) => Some((kind, def_id)),
-                _ => None,
-            },
-            hir::QPath::TypeRelative(..) => match self.maybe_typeck_results {
-                Some(typeck_results) => typeck_results.type_dependent_def(id),
-                None => None,
-            },
+            hir::QPath::Resolved(_, path) => {
+                match path.res {
+                    Res::Def(kind, def_id) => Some((kind, def_id)),
+                    _ => None,
+                }
+            }
+            hir::QPath::TypeRelative(..) => {
+                match self.maybe_typeck_results {
+                    Some(typeck_results) => typeck_results.type_dependent_def(id),
+                    None => None,
+                }
+            }
         };
-        let def = def.filter(|(kind, _)| {
-            matches!(
-                kind,
-                DefKind::AssocFn | DefKind::AssocConst | DefKind::AssocTy | DefKind::Static { .. }
-            )
-        });
+        let def = def
+            .filter(|(kind, _)| {
+                matches!(
+                    kind, DefKind::AssocFn | DefKind::AssocConst | DefKind::AssocTy |
+                    DefKind::Static { .. }
+                )
+            });
         if let Some((kind, def_id)) = def {
             let is_local_static = if let DefKind::Static { .. } = kind {
                 def_id.is_local()
@@ -98,17 +117,24 @@ impl<'tcx> Visitor<'tcx> for TypePrivacyVisitor<'tcx> {
             };
             if !self.item_is_accessible(def_id) && !is_local_static {
                 let name = match *qpath {
-                    hir::QPath::Resolved(_, path) => Some(self.tcx.def_path_str(path.res.def_id())),
-                    hir::QPath::TypeRelative(_, segment) => Some(segment.ident.to_string()),
+                    hir::QPath::Resolved(_, path) => {
+                        Some(self.tcx.def_path_str(path.res.def_id()))
+                    }
+                    hir::QPath::TypeRelative(_, segment) => {
+                        Some(segment.ident.to_string())
+                    }
                 };
                 let kind = self.tcx.def_descr(def_id);
                 let sess = self.tcx.sess;
                 let _ = match name {
-                    Some(name) => sess.dcx().emit_err(ItemIsPrivate {
-                        span,
-                        kind,
-                        descr: (&name).into(),
-                    }),
+                    Some(name) => {
+                        sess.dcx()
+                            .emit_err(ItemIsPrivate {
+                                span,
+                                kind,
+                                descr: (&name).into(),
+                            })
+                    }
                     None => sess.dcx().emit_err(UnnamedItemIsPrivate { span, kind }),
                 };
                 return;

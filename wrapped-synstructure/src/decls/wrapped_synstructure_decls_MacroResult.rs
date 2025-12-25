@@ -13,10 +13,17 @@ pub trait MacroResult {
     ///
     /// *This method is available if `synstructure` is built with the
     /// `"proc-macro"` feature.*
-    #[cfg(all(
-        not(all(target_arch = "wasm32", any(target_os = "unknown", target_os = "wasi"))),
-        feature = "proc-macro"
-    ))]
+    #[cfg(
+        all(
+            not(
+                all(
+                    target_arch = "wasm32",
+                    any(target_os = "unknown", target_os = "wasi")
+                )
+            ),
+            feature = "proc-macro"
+        )
+    )]
     fn into_stream(self) -> proc_macro::TokenStream
     where
         Self: Sized,

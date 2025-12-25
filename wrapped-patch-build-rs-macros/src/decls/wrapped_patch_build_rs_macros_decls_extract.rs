@@ -9,5 +9,5 @@ pub fn extract(input: TokenStream) -> TokenStream {
         fs::create_dir_all(& dir).ok(); println!("cargo:warning=🔧 Extracted: {}",
         dir); }
     }
-    .into()
+        .into()
 }

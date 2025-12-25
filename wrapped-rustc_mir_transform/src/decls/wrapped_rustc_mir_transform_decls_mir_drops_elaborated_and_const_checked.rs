@@ -3,13 +3,15 @@ use std::collections::HashMap;
 /// Obtain just the main MIR (no promoteds) and run some cleanups on it. This also runs
 /// mir borrowck *before* doing so in order to ensure that borrowck can be run and doesn't
 /// end up missing the source MIR due to stealing happening.
-fn mir_drops_elaborated_and_const_checked(tcx: TyCtxt<'_>, def: LocalDefId) -> &Steal<Body<'_>> {
+fn mir_drops_elaborated_and_const_checked(
+    tcx: TyCtxt<'_>,
+    def: LocalDefId,
+) -> &Steal<Body<'_>> {
     if tcx.is_coroutine(def.to_def_id()) {
         tcx.ensure_done().mir_coroutine_witnesses(def);
     }
     let tainted_by_errors = if !tcx.is_synthetic_mir(def) {
-        tcx.mir_borrowck(tcx.typeck_root_def_id(def.to_def_id()).expect_local())
-            .err()
+        tcx.mir_borrowck(tcx.typeck_root_def_id(def.to_def_id()).expect_local()).err()
     } else {
         None
     };

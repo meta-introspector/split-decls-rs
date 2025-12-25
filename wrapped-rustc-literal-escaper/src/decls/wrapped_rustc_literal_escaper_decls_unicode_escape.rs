@@ -12,9 +12,7 @@ fn unicode_escape(chars: &mut impl Iterator<Item = char>) -> Result<u32, EscapeE
     let mut value: u32 = match chars.next().ok_or(EscapeError::UnclosedUnicodeEscape)? {
         '_' => return Err(EscapeError::LeadingUnderscoreUnicodeEscape),
         '}' => return Err(EscapeError::EmptyUnicodeEscape),
-        c => c
-            .to_digit(16)
-            .ok_or(EscapeError::InvalidCharInUnicodeEscape)?,
+        c => c.to_digit(16).ok_or(EscapeError::InvalidCharInUnicodeEscape)?,
     };
     let mut n_digits = 1;
     loop {

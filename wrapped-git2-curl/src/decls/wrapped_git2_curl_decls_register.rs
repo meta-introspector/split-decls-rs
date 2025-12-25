@@ -21,7 +21,12 @@ pub unsafe fn register(handle: Easy) {
     let handle = Arc::new(Mutex::new(handle));
     let handle2 = handle.clone();
     INIT.call_once(move || {
-        git2::transport::register("http", move |remote| factory(remote, handle.clone())).unwrap();
-        git2::transport::register("https", move |remote| factory(remote, handle2.clone())).unwrap();
+        git2::transport::register("http", move |remote| factory(remote, handle.clone()))
+            .unwrap();
+        git2::transport::register(
+                "https",
+                move |remote| factory(remote, handle2.clone()),
+            )
+            .unwrap();
     });
 }

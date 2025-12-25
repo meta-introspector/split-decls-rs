@@ -24,12 +24,14 @@ fn derive_unaligned_union(
             ),
         );
     };
-    Ok(ImplBlockBuilder::new(
-        ast,
-        unn,
-        Trait::Unaligned,
-        field_type_trait_bounds,
-        zerocopy_crate,
+    Ok(
+        ImplBlockBuilder::new(
+                ast,
+                unn,
+                Trait::Unaligned,
+                field_type_trait_bounds,
+                zerocopy_crate,
+            )
+            .build(),
     )
-    .build())
 }

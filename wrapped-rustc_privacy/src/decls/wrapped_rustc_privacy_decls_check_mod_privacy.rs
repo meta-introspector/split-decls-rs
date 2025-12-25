@@ -30,11 +30,12 @@ fn check_mod_privacy(tcx: TyCtxt<'_>, module_def_id: LocalModDefId) {
                 .trait_ref
                 .path
                 .span;
-            let _ = visitor.visit_def_id(
-                trait_ref.def_id,
-                "trait",
-                &trait_ref.print_only_trait_path(),
-            );
+            let _ = visitor
+                .visit_def_id(
+                    trait_ref.def_id,
+                    "trait",
+                    &trait_ref.print_only_trait_path(),
+                );
         }
     }
 }

@@ -7,10 +7,12 @@ impl SelfParam {
             .params
             .first()
             .map(|&param| match &func_data.store[param] {
-                TypeRef::Reference(ref_) => match ref_.mutability {
-                    hir_def::type_ref::Mutability::Shared => Access::Shared,
-                    hir_def::type_ref::Mutability::Mut => Access::Exclusive,
-                },
+                TypeRef::Reference(ref_) => {
+                    match ref_.mutability {
+                        hir_def::type_ref::Mutability::Shared => Access::Shared,
+                        hir_def::type_ref::Mutability::Mut => Access::Exclusive,
+                    }
+                }
                 _ => Access::Owned,
             })
             .unwrap_or(Access::Owned)
@@ -25,10 +27,7 @@ impl SelfParam {
             .skip_binder();
         let environment = db.trait_environment(self.func.into());
         let ty = callable_sig.inputs().as_slice()[0];
-        Type {
-            env: environment,
-            ty,
-        }
+        Type { env: environment, ty }
     }
     pub fn ty_with_args<'db>(
         &self,
@@ -36,16 +35,17 @@ impl SelfParam {
         generics: impl Iterator<Item = Type<'db>>,
     ) -> Type<'db> {
         let interner = DbInterner::new_with(db, None, None);
-        let args = generic_args_from_tys(interner, self.func.into(), generics.map(|ty| ty.ty));
+        let args = generic_args_from_tys(
+            interner,
+            self.func.into(),
+            generics.map(|ty| ty.ty),
+        );
         let callable_sig = db
             .callable_item_signature(self.func.into())
             .instantiate(interner, args)
             .skip_binder();
         let environment = db.trait_environment(self.func.into());
         let ty = callable_sig.inputs().as_slice()[0];
-        Type {
-            env: environment,
-            ty,
-        }
+        Type { env: environment, ty }
     }
 }

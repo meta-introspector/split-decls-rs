@@ -6,10 +6,7 @@ impl<T> MallocShallowSizeOf for ThinVec<T> {
         if self.capacity() == 0 {
             return 0;
         }
-        assert_eq!(
-            std::mem::size_of::<Self>(),
-            std::mem::size_of::<*const ()>()
-        );
+        assert_eq!(std::mem::size_of::< Self > (), std::mem::size_of::<* const () > ());
         unsafe { ops.malloc_size_of(*(self as *const Self as *const *const ())) }
     }
 }

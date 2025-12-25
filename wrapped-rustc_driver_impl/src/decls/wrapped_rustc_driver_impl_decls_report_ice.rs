@@ -13,10 +13,12 @@ fn report_ice(
     using_internal_features: &AtomicBool,
 ) {
     let translator = default_translator();
-    let emitter = Box::new(rustc_errors::emitter::HumanEmitter::new(
-        stderr_destination(rustc_errors::ColorConfig::Auto),
-        translator,
-    ));
+    let emitter = Box::new(
+        rustc_errors::emitter::HumanEmitter::new(
+            stderr_destination(rustc_errors::ColorConfig::Auto),
+            translator,
+        ),
+    );
     let dcx = rustc_errors::DiagCtxt::new(emitter);
     let dcx = dcx.handle();
     if !info.payload().is::<rustc_errors::ExplicitBug>()
@@ -27,7 +29,9 @@ fn report_ice(
     if using_internal_features.load(std::sync::atomic::Ordering::Relaxed) {
         dcx.emit_note(session_diagnostics::IceBugReportInternalFeature);
     } else {
-        dcx.emit_note(session_diagnostics::IceBugReport { bug_report_url });
+        dcx.emit_note(session_diagnostics::IceBugReport {
+            bug_report_url,
+        });
         if rustc_feature::UnstableFeatures::from_environment(None).is_nightly_build() {
             dcx.emit_note(session_diagnostics::UpdateNightlyNote);
         }
@@ -36,15 +40,15 @@ fn report_ice(
     let tuple = config::host_tuple();
     static FIRST_PANIC: AtomicBool = AtomicBool::new(true);
     let file = if let Some(path) = ice_path() {
-        match crate::fs::File::options()
-            .create(true)
-            .append(true)
-            .open(path)
-        {
+        match crate::fs::File::options().create(true).append(true).open(path) {
             Ok(mut file) => {
-                dcx.emit_note(session_diagnostics::IcePath { path: path.clone() });
+                dcx.emit_note(session_diagnostics::IcePath {
+                    path: path.clone(),
+                });
                 if FIRST_PANIC.swap(false, Ordering::SeqCst) {
-                    let _ = write!(file, "\n\nrustc version: {version}\nplatform: {tuple}");
+                    let _ = write!(
+                        file, "\n\nrustc version: {version}\nplatform: {tuple}"
+                    );
                 }
                 Some(file)
             }
@@ -54,7 +58,9 @@ fn report_ice(
                     error: err.to_string(),
                     env_var: std::env::var_os("RUSTC_ICE")
                         .map(PathBuf::from)
-                        .map(|env_var| session_diagnostics::IcePathErrorEnv { env_var }),
+                        .map(|env_var| session_diagnostics::IcePathErrorEnv {
+                            env_var,
+                        }),
                 });
                 dcx.emit_note(session_diagnostics::IceVersion {
                     version,

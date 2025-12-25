@@ -2,10 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl<R> CountingReader<R> {
     fn new(inner: R) -> Self {
-        Self {
-            inner,
-            bytes_read: 0,
-        }
+        Self { inner, bytes_read: 0 }
     }
     fn with_count(inner: R, bytes_read: u64) -> Self {
         Self { inner, bytes_read }

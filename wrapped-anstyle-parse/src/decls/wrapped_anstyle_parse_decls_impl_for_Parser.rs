@@ -39,7 +39,13 @@ where
         }
     }
     #[inline]
-    fn perform_state_change<P>(&mut self, performer: &mut P, state: State, action: Action, byte: u8)
+    fn perform_state_change<P>(
+        &mut self,
+        performer: &mut P,
+        state: State,
+        action: Action,
+        byte: u8,
+    )
     where
         P: Perform,
     {
@@ -84,20 +90,27 @@ where
     /// The aliasing is needed here for multiple slices into `self.osc_raw`
     #[inline]
     fn osc_dispatch<P: Perform>(&self, performer: &mut P, byte: u8) {
-        let mut slices: [MaybeUninit<&[u8]>; MAX_OSC_PARAMS] =
-            unsafe { MaybeUninit::uninit().assume_init() };
+        let mut slices: [MaybeUninit<&[u8]>; MAX_OSC_PARAMS] = unsafe {
+            MaybeUninit::uninit().assume_init()
+        };
         for (i, slice) in slices.iter_mut().enumerate().take(self.osc_num_params) {
             let indices = self.osc_params[i];
             *slice = MaybeUninit::new(&self.osc_raw[indices.0..indices.1]);
         }
         unsafe {
             let num_params = self.osc_num_params;
-            let params = &slices[..num_params] as *const [MaybeUninit<&[u8]>] as *const [&[u8]];
+            let params = &slices[..num_params] as *const [MaybeUninit<&[u8]>]
+                as *const [&[u8]];
             performer.osc_dispatch(&*params, byte == 0x07);
         }
     }
     #[inline]
-    fn perform_action<P: Perform>(&mut self, performer: &mut P, action: Action, byte: u8) {
+    fn perform_action<P: Perform>(
+        &mut self,
+        performer: &mut P,
+        action: Action,
+        byte: u8,
+    ) {
         match action {
             Action::Print => performer.print(byte as char),
             Action::Execute => performer.execute(byte),
@@ -165,7 +178,13 @@ where
                 } else {
                     self.params.push(self.param);
                 }
-                performer.csi_dispatch(self.params(), self.intermediates(), self.ignoring, byte);
+                performer
+                    .csi_dispatch(
+                        self.params(),
+                        self.intermediates(),
+                        self.ignoring,
+                        byte,
+                    );
             }
             Action::EscDispatch => {
                 performer.esc_dispatch(self.intermediates(), self.ignoring, byte);

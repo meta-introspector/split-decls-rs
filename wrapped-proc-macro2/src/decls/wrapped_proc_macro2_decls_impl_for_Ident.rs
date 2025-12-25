@@ -2,10 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl Ident {
     fn _new(inner: imp::Ident) -> Self {
-        Ident {
-            inner,
-            _marker: MARKER,
-        }
+        Ident { inner, _marker: MARKER }
     }
     fn _new_fallback(inner: fallback::Ident) -> Self {
         Ident {

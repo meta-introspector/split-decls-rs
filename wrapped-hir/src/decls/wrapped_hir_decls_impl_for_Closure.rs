@@ -4,19 +4,29 @@ impl<'db> Closure<'db> {
     fn as_ty(&self, db: &'db dyn HirDatabase) -> Ty<'db> {
         let interner = DbInterner::new_with(db, None, None);
         match self.id {
-            AnyClosureId::ClosureId(id) => Ty::new_closure(interner, id.into(), self.subst),
+            AnyClosureId::ClosureId(id) => {
+                Ty::new_closure(interner, id.into(), self.subst)
+            }
             AnyClosureId::CoroutineClosureId(id) => {
                 Ty::new_coroutine_closure(interner, id.into(), self.subst)
             }
         }
     }
-    pub fn display_with_id(&self, db: &dyn HirDatabase, display_target: DisplayTarget) -> String {
+    pub fn display_with_id(
+        &self,
+        db: &dyn HirDatabase,
+        display_target: DisplayTarget,
+    ) -> String {
         self.as_ty(db)
             .display(db, display_target)
             .with_closure_style(ClosureStyle::ClosureWithId)
             .to_string()
     }
-    pub fn display_with_impl(&self, db: &dyn HirDatabase, display_target: DisplayTarget) -> String {
+    pub fn display_with_impl(
+        &self,
+        db: &dyn HirDatabase,
+        display_target: DisplayTarget,
+    ) -> String {
         self.as_ty(db)
             .display(db, display_target)
             .with_closure_style(ClosureStyle::ImplFn)

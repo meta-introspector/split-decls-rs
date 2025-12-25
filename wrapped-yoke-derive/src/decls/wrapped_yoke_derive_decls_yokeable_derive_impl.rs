@@ -11,10 +11,7 @@ fn yokeable_derive_impl(input: &DeriveInput) -> TokenStream2 {
             ty
         })
         .collect::<Vec<_>>();
-    let typarams = tybounds
-        .iter()
-        .map(|ty| ty.ident.clone())
-        .collect::<Vec<_>>();
+    let typarams = tybounds.iter().map(|ty| ty.ident.clone()).collect::<Vec<_>>();
     let wherebounds = input
         .generics
         .where_clause
@@ -41,20 +38,23 @@ fn yokeable_derive_impl(input: &DeriveInput) -> TokenStream2 {
     } else {
         if lts != 1 {
             return syn::Error::new(
-                input.generics.span(),
-                "derive(Yokeable) cannot have multiple lifetime parameters",
-            )
-            .to_compile_error();
+                    input.generics.span(),
+                    "derive(Yokeable) cannot have multiple lifetime parameters",
+                )
+                .to_compile_error();
         }
         let name = &input.ident;
-        let manual_covariance = input.attrs.iter().any(|a| {
-            if let Ok(i) = a.parse_args::<Ident>() {
-                if i == "prove_covariance_manually" {
-                    return true;
+        let manual_covariance = input
+            .attrs
+            .iter()
+            .any(|a| {
+                if let Ok(i) = a.parse_args::<Ident>() {
+                    if i == "prove_covariance_manually" {
+                        return true;
+                    }
                 }
-            }
-            false
-        });
+                false
+            });
         if manual_covariance {
             let mut structure = Structure::new(input);
             let generics_env = typarams.iter().cloned().collect();
@@ -64,51 +64,65 @@ fn yokeable_derive_impl(input: &DeriveInput) -> TokenStream2 {
                 .collect();
             let mut yoke_bounds: Vec<WherePredicate> = vec![];
             structure.bind_with(|_| synstructure::BindStyle::Move);
-            let owned_body = structure.each_variant(|vi| {
-                vi.construct(|f, i| {
-                    let binding = format!("__binding_{i}");
-                    let field = Ident::new(&binding, Span::call_site());
-                    let fty_static = replace_lifetime(&f.ty, static_lt());
-                    let (has_ty, has_lt) = visitor::check_type_for_parameters(&f.ty, &generics_env);
-                    if has_ty {
-                        if has_lt {
-                            let fty_a = replace_lifetime(&f.ty, custom_lt("'a"));
-                            yoke_bounds.push(parse_quote!(
-                                # fty_static : yoke::Yokeable <'a, Output = # fty_a >
-                            ));
-                        } else {
-                            yoke_bounds.push(parse_quote!(
-                                # fty_static : yoke::Yokeable <'a, Output = # fty_static >
-                            ));
+            let owned_body = structure
+                .each_variant(|vi| {
+                    vi.construct(|f, i| {
+                        let binding = format!("__binding_{i}");
+                        let field = Ident::new(&binding, Span::call_site());
+                        let fty_static = replace_lifetime(&f.ty, static_lt());
+                        let (has_ty, has_lt) = visitor::check_type_for_parameters(
+                            &f.ty,
+                            &generics_env,
+                        );
+                        if has_ty {
+                            if has_lt {
+                                let fty_a = replace_lifetime(&f.ty, custom_lt("'a"));
+                                yoke_bounds
+                                    .push(
+                                        parse_quote!(
+                                            # fty_static : yoke::Yokeable <'a, Output = # fty_a >
+                                        ),
+                                    );
+                            } else {
+                                yoke_bounds
+                                    .push(
+                                        parse_quote!(
+                                            # fty_static : yoke::Yokeable <'a, Output = # fty_static >
+                                        ),
+                                    );
+                            }
                         }
-                    }
+                        if has_ty || has_lt {
+                            quote! {
+                                <# fty_static as yoke::Yokeable <'a >>::transform_owned(#
+                                field)
+                            }
+                        } else {
+                            quote! {
+                                # field
+                            }
+                        }
+                    })
+                });
+            let borrowed_body = structure
+                .each(|binding| {
+                    let f = binding.ast();
+                    let field = &binding.binding;
+                    let (has_ty, has_lt) = visitor::check_type_for_parameters(
+                        &f.ty,
+                        &generics_env,
+                    );
                     if has_ty || has_lt {
+                        let fty_static = replace_lifetime(&f.ty, static_lt());
+                        let fty_a = replace_lifetime(&f.ty, custom_lt("'a"));
                         quote! {
-                            <# fty_static as yoke::Yokeable <'a >>::transform_owned(#
-                            field)
+                            let _ : &# fty_a = &<# fty_static as yoke::Yokeable <'a
+                            >>::transform(# field);
                         }
                     } else {
-                        quote! {
-                            # field
-                        }
+                        quote! {}
                     }
-                })
-            });
-            let borrowed_body = structure.each(|binding| {
-                let f = binding.ast();
-                let field = &binding.binding;
-                let (has_ty, has_lt) = visitor::check_type_for_parameters(&f.ty, &generics_env);
-                if has_ty || has_lt {
-                    let fty_static = replace_lifetime(&f.ty, static_lt());
-                    let fty_a = replace_lifetime(&f.ty, custom_lt("'a"));
-                    quote! {
-                        let _ : &# fty_a = &<# fty_static as yoke::Yokeable <'a
-                        >>::transform(# field);
-                    }
-                } else {
-                    quote! {}
-                }
-            });
+                });
             return quote! {
                 unsafe impl <'a, # (# tybounds),*> yoke::Yokeable <'a > for # name
                 <'static, # (# typarams),*> where # (# static_bounds,) * # (#

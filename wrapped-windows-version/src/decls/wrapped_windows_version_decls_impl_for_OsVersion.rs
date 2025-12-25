@@ -3,12 +3,7 @@ use std::collections::HashMap;
 impl OsVersion {
     /// Creates a new `OsVersion` with the given values.
     pub const fn new(major: u32, minor: u32, pack: u32, build: u32) -> Self {
-        Self {
-            major,
-            minor,
-            pack,
-            build,
-        }
+        Self { major, minor, pack, build }
     }
     /// Gets the version information of the currently running operating system.
     #[cfg(not(test))]

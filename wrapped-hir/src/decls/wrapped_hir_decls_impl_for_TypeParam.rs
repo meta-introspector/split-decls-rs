@@ -2,7 +2,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl TypeParam {
     pub fn merge(self) -> TypeOrConstParam {
-        TypeOrConstParam { id: self.id.into() }
+        TypeOrConstParam {
+            id: self.id.into(),
+        }
     }
     pub fn name(self, db: &dyn HirDatabase) -> Name {
         self.merge().name(db)
@@ -20,7 +22,9 @@ impl TypeParam {
         let data = &params[self.id.local_id()];
         match data.type_param().unwrap().provenance {
             TypeParamProvenance::TypeParamList => false,
-            TypeParamProvenance::TraitSelf | TypeParamProvenance::ArgumentImplTrait => true,
+            TypeParamProvenance::TraitSelf | TypeParamProvenance::ArgumentImplTrait => {
+                true
+            }
         }
     }
     pub fn ty(self, db: &dyn HirDatabase) -> Type<'_> {

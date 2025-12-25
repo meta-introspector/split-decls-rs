@@ -2,7 +2,10 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 /// Copies `p` into `q`, preferring to use hard-linking if possible.
 /// The result indicates which of the two operations has been performed.
-pub fn link_or_copy<P: AsRef<Path>, Q: AsRef<Path>>(p: P, q: Q) -> io::Result<LinkOrCopy> {
+pub fn link_or_copy<P: AsRef<Path>, Q: AsRef<Path>>(
+    p: P,
+    q: Q,
+) -> io::Result<LinkOrCopy> {
     let p = p.as_ref();
     let q = q.as_ref();
     let err = match fs::hard_link(p, q) {

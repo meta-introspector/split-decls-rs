@@ -16,12 +16,12 @@ fn get_macro(macro_name: &str, input: TokenStream, is_write_macro: bool) -> Toke
         (quote! {
             # macro_name!(# dst, # format_args)
         })
-        .into()
+            .into()
     } else {
         let format_args = fmt_args(input);
         (quote! {
             # macro_name!(# format_args)
         })
-        .into()
+            .into()
     }
 }

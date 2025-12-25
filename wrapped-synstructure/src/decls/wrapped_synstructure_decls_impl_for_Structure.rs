@@ -18,38 +18,34 @@ impl<'a> Structure<'a> {
     /// node represents an untagged union.
     pub fn try_new(ast: &'a DeriveInput) -> Result<Self> {
         let variants = match &ast.data {
-            Data::Enum(data) => (&data.variants)
-                .into_iter()
-                .map(|v| {
-                    VariantInfo::new(
-                        VariantAst {
-                            attrs: &v.attrs,
-                            ident: &v.ident,
-                            fields: &v.fields,
-                            discriminant: &v.discriminant,
-                        },
-                        Some(&ast.ident),
-                        &ast.generics,
-                    )
-                })
-                .collect::<Vec<_>>(),
+            Data::Enum(data) => {
+                (&data.variants)
+                    .into_iter()
+                    .map(|v| {
+                        VariantInfo::new(
+                            VariantAst {
+                                attrs: &v.attrs,
+                                ident: &v.ident,
+                                fields: &v.fields,
+                                discriminant: &v.discriminant,
+                            },
+                            Some(&ast.ident),
+                            &ast.generics,
+                        )
+                    })
+                    .collect::<Vec<_>>()
+            }
             Data::Struct(data) => {
-                vec![VariantInfo::new(
-                    VariantAst {
-                        attrs: &ast.attrs,
-                        ident: &ast.ident,
-                        fields: &data.fields,
-                        discriminant: &None,
-                    },
-                    None,
-                    &ast.generics,
-                )]
+                vec![
+                    VariantInfo::new(VariantAst { attrs : & ast.attrs, ident : & ast
+                    .ident, fields : & data.fields, discriminant : & None, }, None, & ast
+                    .generics,)
+                ]
             }
             Data::Union(_) => {
-                return Err(Error::new_spanned(
-                    ast,
-                    "unexpected unsupported untagged union",
-                ));
+                return Err(
+                    Error::new_spanned(ast, "unexpected unsupported untagged union"),
+                );
             }
         };
         Ok(Structure {
@@ -706,30 +702,40 @@ impl<'a> Structure<'a> {
         mode: AddBounds,
     ) {
         if !self.extra_predicates.is_empty() {
-            let clause = get_or_insert_with(&mut *where_clause, || WhereClause {
-                where_token: Default::default(),
-                predicates: punctuated::Punctuated::new(),
-            });
-            clause
-                .predicates
-                .extend(self.extra_predicates.iter().cloned());
+            let clause = get_or_insert_with(
+                &mut *where_clause,
+                || WhereClause {
+                    where_token: Default::default(),
+                    predicates: punctuated::Punctuated::new(),
+                },
+            );
+            clause.predicates.extend(self.extra_predicates.iter().cloned());
         }
         let mut seen = HashSet::new();
         let mut pred = |ty: Type| {
             if !seen.contains(&ty) {
                 seen.insert(ty.clone());
-                let clause = get_or_insert_with(&mut *where_clause, || WhereClause {
-                    where_token: Default::default(),
-                    predicates: punctuated::Punctuated::new(),
-                });
-                clause.predicates.push(WherePredicate::Type(PredicateType {
-                    lifetimes: None,
-                    bounded_ty: ty,
-                    colon_token: Default::default(),
-                    bounds: Some(punctuated::Pair::End(TypeParamBound::Trait(bound.clone())))
-                        .into_iter()
-                        .collect(),
-                }));
+                let clause = get_or_insert_with(
+                    &mut *where_clause,
+                    || WhereClause {
+                        where_token: Default::default(),
+                        predicates: punctuated::Punctuated::new(),
+                    },
+                );
+                clause
+                    .predicates
+                    .push(
+                        WherePredicate::Type(PredicateType {
+                            lifetimes: None,
+                            bounded_ty: ty,
+                            colon_token: Default::default(),
+                            bounds: Some(
+                                    punctuated::Pair::End(TypeParamBound::Trait(bound.clone())),
+                                )
+                                .into_iter()
+                                .collect(),
+                        }),
+                    );
             }
         };
         for variant in &self.variants {
@@ -748,10 +754,12 @@ impl<'a> Structure<'a> {
                 match mode {
                     AddBounds::Both | AddBounds::Generics => {
                         for param in binding.referenced_ty_params() {
-                            pred(Type::Path(TypePath {
-                                qself: None,
-                                path: (*param).clone().into(),
-                            }));
+                            pred(
+                                Type::Path(TypePath {
+                                    qself: None,
+                                    path: (*param).clone().into(),
+                                }),
+                            );
                         }
                     }
                     _ => {}
@@ -889,7 +897,11 @@ impl<'a> Structure<'a> {
     ///     }.to_string()
     /// );
     /// ```
-    pub fn unsafe_bound_impl<P: ToTokens, B: ToTokens>(&self, path: P, body: B) -> TokenStream {
+    pub fn unsafe_bound_impl<P: ToTokens, B: ToTokens>(
+        &self,
+        path: P,
+        body: B,
+    ) -> TokenStream {
         self.impl_internal(
             path.into_token_stream(),
             body.into_token_stream(),
@@ -946,7 +958,11 @@ impl<'a> Structure<'a> {
     ///     }.to_string()
     /// );
     /// ```
-    pub fn unbound_impl<P: ToTokens, B: ToTokens>(&self, path: P, body: B) -> TokenStream {
+    pub fn unbound_impl<P: ToTokens, B: ToTokens>(
+        &self,
+        path: P,
+        body: B,
+    ) -> TokenStream {
         self.impl_internal(
             path.into_token_stream(),
             body.into_token_stream(),
@@ -1004,7 +1020,11 @@ impl<'a> Structure<'a> {
     /// );
     /// ```
     #[deprecated]
-    pub fn unsafe_unbound_impl<P: ToTokens, B: ToTokens>(&self, path: P, body: B) -> TokenStream {
+    pub fn unsafe_unbound_impl<P: ToTokens, B: ToTokens>(
+        &self,
+        path: P,
+        body: B,
+    ) -> TokenStream {
         self.impl_internal(
             path.into_token_stream(),
             body.into_token_stream(),
@@ -1248,10 +1268,12 @@ impl<'a> Structure<'a> {
     /// Use `add_bounds` to change which bounds are generated.
     pub fn gen_impl(&self, cfg: TokenStream) -> TokenStream {
         Parser::parse2(
-            |input: ParseStream<'_>| -> Result<TokenStream> { self.gen_impl_parse(input, true) },
-            cfg,
-        )
-        .expect("Failed to parse gen_impl")
+                |input: ParseStream<'_>| -> Result<TokenStream> {
+                    self.gen_impl_parse(input, true)
+                },
+                cfg,
+            )
+            .expect("Failed to parse gen_impl")
     }
     fn gen_impl_parse(&self, input: ParseStream<'_>, wrap: bool) -> Result<TokenStream> {
         fn parse_prefix(input: ParseStream<'_>) -> Result<Option<Token![unsafe]>> {
@@ -1297,9 +1319,11 @@ impl<'a> Structure<'a> {
             # where_clause { # body } # after
         };
         if wrap {
-            Ok(quote! {
-                const _ : () = { # generated };
-            })
+            Ok(
+                quote! {
+                    const _ : () = { # generated };
+                },
+            )
         } else {
             Ok(generated)
         }

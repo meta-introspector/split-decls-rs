@@ -4,7 +4,7 @@ use std::collections::HashMap;
 /// problem with a `RawStr`/`RawByteStr` with a `None` field.
 #[inline]
 pub fn validate_raw_str(input: &str, prefix_len: u32) -> Result<(), RawStrError> {
-    debug_assert!(!input.is_empty());
+    debug_assert!(! input.is_empty());
     let mut cursor = Cursor::new(input, FrontmatterAllowed::No);
     for _ in 0..prefix_len {
         cursor.bump().unwrap();

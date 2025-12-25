@@ -66,11 +66,7 @@ impl Rng {
             panic!("base cannot be larger than 36");
         }
         let num = self.u8(..base as u8);
-        if num < 10 {
-            (b'0' + num) as char
-        } else {
-            (b'a' + num - 10) as char
-        }
+        if num < 10 { (b'0' + num) as char } else { (b'a' + num - 10) as char }
     }
     /// Generates a random `f32` in range `0..=1`.
     #[inline]
@@ -118,7 +114,11 @@ impl Rng {
     ///
     /// Complexity is `O(n)` where `n` is the length of the iterable.
     #[cfg(feature = "alloc")]
-    pub fn choose_multiple<I: IntoIterator>(&mut self, source: I, amount: usize) -> Vec<I::Item> {
+    pub fn choose_multiple<I: IntoIterator>(
+        &mut self,
+        source: I,
+        amount: usize,
+    ) -> Vec<I::Item> {
         let mut reservoir = Vec::with_capacity(amount);
         let mut iter = source.into_iter();
         reservoir.extend(iter.by_ref().take(amount));
@@ -138,62 +138,34 @@ impl Rng {
         reservoir
     }
     rng_integer!(
-        i8,
-        u8,
-        gen_u32,
-        gen_mod_u32,
-        "Generates a random `i8` in the given range."
+        i8, u8, gen_u32, gen_mod_u32, "Generates a random `i8` in the given range."
     );
     rng_integer!(
-        i16,
-        u16,
-        gen_u32,
-        gen_mod_u32,
-        "Generates a random `i16` in the given range."
+        i16, u16, gen_u32, gen_mod_u32, "Generates a random `i16` in the given range."
     );
     rng_integer!(
-        i32,
-        u32,
-        gen_u32,
-        gen_mod_u32,
-        "Generates a random `i32` in the given range."
+        i32, u32, gen_u32, gen_mod_u32, "Generates a random `i32` in the given range."
     );
     rng_integer!(
-        i64,
-        u64,
-        gen_u64,
-        gen_mod_u64,
-        "Generates a random `i64` in the given range."
+        i64, u64, gen_u64, gen_mod_u64, "Generates a random `i64` in the given range."
     );
     rng_integer!(
-        i128,
-        u128,
-        gen_u128,
-        gen_mod_u128,
+        i128, u128, gen_u128, gen_mod_u128,
         "Generates a random `i128` in the given range."
     );
     #[cfg(target_pointer_width = "16")]
     rng_integer!(
-        isize,
-        usize,
-        gen_u32,
-        gen_mod_u32,
+        isize, usize, gen_u32, gen_mod_u32,
         "Generates a random `isize` in the given range."
     );
     #[cfg(target_pointer_width = "32")]
     rng_integer!(
-        isize,
-        usize,
-        gen_u32,
-        gen_mod_u32,
+        isize, usize, gen_u32, gen_mod_u32,
         "Generates a random `isize` in the given range."
     );
     #[cfg(target_pointer_width = "64")]
     rng_integer!(
-        isize,
-        usize,
-        gen_u64,
-        gen_mod_u64,
+        isize, usize, gen_u64, gen_mod_u64,
         "Generates a random `isize` in the given range."
     );
     /// Generates a random `char` in range a-z.
@@ -253,62 +225,34 @@ impl Rng {
         }
     }
     rng_integer!(
-        u8,
-        u8,
-        gen_u32,
-        gen_mod_u32,
-        "Generates a random `u8` in the given range."
+        u8, u8, gen_u32, gen_mod_u32, "Generates a random `u8` in the given range."
     );
     rng_integer!(
-        u16,
-        u16,
-        gen_u32,
-        gen_mod_u32,
-        "Generates a random `u16` in the given range."
+        u16, u16, gen_u32, gen_mod_u32, "Generates a random `u16` in the given range."
     );
     rng_integer!(
-        u32,
-        u32,
-        gen_u32,
-        gen_mod_u32,
-        "Generates a random `u32` in the given range."
+        u32, u32, gen_u32, gen_mod_u32, "Generates a random `u32` in the given range."
     );
     rng_integer!(
-        u64,
-        u64,
-        gen_u64,
-        gen_mod_u64,
-        "Generates a random `u64` in the given range."
+        u64, u64, gen_u64, gen_mod_u64, "Generates a random `u64` in the given range."
     );
     rng_integer!(
-        u128,
-        u128,
-        gen_u128,
-        gen_mod_u128,
+        u128, u128, gen_u128, gen_mod_u128,
         "Generates a random `u128` in the given range."
     );
     #[cfg(target_pointer_width = "16")]
     rng_integer!(
-        usize,
-        usize,
-        gen_u32,
-        gen_mod_u32,
+        usize, usize, gen_u32, gen_mod_u32,
         "Generates a random `usize` in the given range."
     );
     #[cfg(target_pointer_width = "32")]
     rng_integer!(
-        usize,
-        usize,
-        gen_u32,
-        gen_mod_u32,
+        usize, usize, gen_u32, gen_mod_u32,
         "Generates a random `usize` in the given range."
     );
     #[cfg(target_pointer_width = "64")]
     rng_integer!(
-        usize,
-        usize,
-        gen_u64,
-        gen_mod_u64,
+        usize, usize, gen_u64, gen_mod_u64,
         "Generates a random `usize` in the given range."
     );
     /// Generates a random `char` in range A-Z.
@@ -323,11 +267,7 @@ impl Rng {
     #[inline]
     pub fn char(&mut self, range: impl RangeBounds<char>) -> char {
         let panic_empty_range = || {
-            panic!(
-                "empty range: {:?}..{:?}",
-                range.start_bound(),
-                range.end_bound()
-            )
+            panic!("empty range: {:?}..{:?}", range.start_bound(), range.end_bound())
         };
         let surrogate_start = 0xd800u32;
         let surrogate_len = 0x800u32;

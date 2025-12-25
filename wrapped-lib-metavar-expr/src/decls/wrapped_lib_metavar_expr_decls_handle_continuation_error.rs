@@ -22,16 +22,10 @@ fn handle_continuation_error<'psess, T>(
     match continuation.continue_execution(state) {
         Resolution::Continue => {
             panic!(
-                "LLM resolved to Continue. Manual intervention needed for: {}",
-                message
+                "LLM resolved to Continue. Manual intervention needed for: {}", message
             );
         }
-        Resolution::ModifyCode {
-            file,
-            line,
-            column,
-            new_code,
-        } => {
+        Resolution::ModifyCode { file, line, column, new_code } => {
             panic!(
                 "LLM resolved to ModifyCode. Manual intervention needed: file={}, line={}, col={}, code='{}'",
                 file, line, column, new_code

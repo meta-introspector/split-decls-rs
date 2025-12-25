@@ -2,10 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 #[inline(always)]
 pub(crate) fn vectorization_support() -> Vectorization {
-    #[cfg(all(
-        any(target_arch = "x86", target_arch = "x86_64"),
-        target_feature = "sse"
-    ))]
+    #[cfg(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "sse"))]
     {
         use core::sync::atomic::{AtomicU8, Ordering};
         static FLAGS: AtomicU8 = AtomicU8::new(u8::MAX);
@@ -38,6 +35,5 @@ pub(crate) fn vectorization_support() -> Vectorization {
         FLAGS.store(val as u8, Ordering::Relaxed);
         return val;
     }
-    #[allow(unreachable_code)]
-    Vectorization::None
+    #[allow(unreachable_code)] Vectorization::None
 }

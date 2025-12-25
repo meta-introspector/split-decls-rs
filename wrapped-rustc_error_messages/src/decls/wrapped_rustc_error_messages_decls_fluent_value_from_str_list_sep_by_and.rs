@@ -7,11 +7,19 @@ pub fn fluent_value_from_str_list_sep_by_and(l: Vec<Cow<'_, str>>) -> FluentValu
         fn duplicate(&self) -> Box<dyn FluentType + Send> {
             Box::new(self.clone())
         }
-        fn as_string(&self, intls: &intl_memoizer::IntlLangMemoizer) -> Cow<'static, str> {
+        fn as_string(
+            &self,
+            intls: &intl_memoizer::IntlLangMemoizer,
+        ) -> Cow<'static, str> {
             let result = intls
-                .with_try_get::<MemoizableListFormatter, _, _>((), |list_formatter| {
-                    list_formatter.format_to_string(self.0.iter())
-                })
+                .with_try_get::<
+                    MemoizableListFormatter,
+                    _,
+                    _,
+                >(
+                    (),
+                    |list_formatter| { list_formatter.format_to_string(self.0.iter()) },
+                )
                 .unwrap();
             Cow::Owned(result)
         }
@@ -20,9 +28,14 @@ pub fn fluent_value_from_str_list_sep_by_and(l: Vec<Cow<'_, str>>) -> FluentValu
             intls: &intl_memoizer::concurrent::IntlLangMemoizer,
         ) -> Cow<'static, str> {
             let result = intls
-                .with_try_get::<MemoizableListFormatter, _, _>((), |list_formatter| {
-                    list_formatter.format_to_string(self.0.iter())
-                })
+                .with_try_get::<
+                    MemoizableListFormatter,
+                    _,
+                    _,
+                >(
+                    (),
+                    |list_formatter| { list_formatter.format_to_string(self.0.iter()) },
+                )
                 .unwrap();
             Cow::Owned(result)
         }
@@ -37,19 +50,22 @@ pub fn fluent_value_from_str_list_sep_by_and(l: Vec<Cow<'_, str>>) -> FluentValu
     impl intl_memoizer::Memoizable for MemoizableListFormatter {
         type Args = ();
         type Error = ();
-        fn construct(lang: LanguageIdentifier, _args: Self::Args) -> Result<Self, Self::Error>
+        fn construct(
+            lang: LanguageIdentifier,
+            _args: Self::Args,
+        ) -> Result<Self, Self::Error>
         where
             Self: Sized,
         {
             let locale = icu_locale_from_unic_langid(lang)
                 .unwrap_or_else(|| rustc_baked_icu_data::supported_locales::EN);
             let list_formatter = icu_list::ListFormatter::try_new_and_unstable(
-                &rustc_baked_icu_data::BakedDataProvider,
-                locale.into(),
-                icu_list::options::ListFormatterOptions::default()
-                    .with_length(icu_list::options::ListLength::Wide),
-            )
-            .expect("Failed to create list formatter");
+                    &rustc_baked_icu_data::BakedDataProvider,
+                    locale.into(),
+                    icu_list::options::ListFormatterOptions::default()
+                        .with_length(icu_list::options::ListLength::Wide),
+                )
+                .expect("Failed to create list formatter");
             Ok(MemoizableListFormatter(list_formatter))
         }
     }

@@ -24,7 +24,9 @@ unsafe fn analyze_source_file_neon(
             let newlines_test = vceqq_s8(chunk, newline);
             let mut newlines_mask = unsafe { move_mask(newlines_test) };
             if newlines_mask != 0 {
-                let output_offset = TextSize::from((chunk_index * CHUNK_SIZE + 1) as u32);
+                let output_offset = TextSize::from(
+                    (chunk_index * CHUNK_SIZE + 1) as u32,
+                );
                 while newlines_mask != 0 {
                     let trailing_zeros = newlines_mask.trailing_zeros();
                     let index = trailing_zeros / 4;

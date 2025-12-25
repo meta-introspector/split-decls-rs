@@ -44,24 +44,21 @@ impl MacroDefId {
     }
     pub fn is_attribute(&self) -> bool {
         matches!(
-            self.kind,
-            MacroDefKind::BuiltInAttr(..) | MacroDefKind::ProcMacro(_, _, ProcMacroKind::Attr)
+            self.kind, MacroDefKind::BuiltInAttr(..) | MacroDefKind::ProcMacro(_, _,
+            ProcMacroKind::Attr)
         )
     }
     pub fn is_derive(&self) -> bool {
         matches!(
-            self.kind,
-            MacroDefKind::BuiltInDerive(..)
-                | MacroDefKind::ProcMacro(_, _, ProcMacroKind::CustomDerive)
+            self.kind, MacroDefKind::BuiltInDerive(..) | MacroDefKind::ProcMacro(_, _,
+            ProcMacroKind::CustomDerive)
         )
     }
     pub fn is_fn_like(&self) -> bool {
         matches!(
-            self.kind,
-            MacroDefKind::BuiltIn(..)
-                | MacroDefKind::ProcMacro(_, _, ProcMacroKind::Bang)
-                | MacroDefKind::BuiltInEager(..)
-                | MacroDefKind::Declarative(..)
+            self.kind, MacroDefKind::BuiltIn(..) | MacroDefKind::ProcMacro(_, _,
+            ProcMacroKind::Bang) | MacroDefKind::BuiltInEager(..) |
+            MacroDefKind::Declarative(..)
         )
     }
     pub fn is_attribute_derive(&self) -> bool {

@@ -16,16 +16,15 @@ impl<SpanMap, S> SrcToken<Converter<SpanMap, S>, S> for SynToken<S> {
     fn to_char(&self, _ctx: &Converter<SpanMap, S>) -> Option<char> {
         match self {
             SynToken::Ordinary(_) => None,
-            SynToken::Punct {
-                token: it,
-                offset: i,
-            } => it.text().chars().nth(*i),
+            SynToken::Punct { token: it, offset: i } => it.text().chars().nth(*i),
             SynToken::Leaf(_) => None,
         }
     }
     fn to_text(&self, _ctx: &Converter<SpanMap, S>) -> SmolStr {
         match self {
-            SynToken::Ordinary(token) | SynToken::Punct { token, offset: _ } => token.text().into(),
+            SynToken::Ordinary(token) | SynToken::Punct { token, offset: _ } => {
+                token.text().into()
+            }
             SynToken::Leaf(_) => {
                 never!();
                 "".into()

@@ -52,8 +52,7 @@ pub trait PatCx: Sized + fmt::Debug {
         _pat: &DeconstructedPat<Self>,
         _overlaps_on: IntRange,
         _overlaps_with: &[&DeconstructedPat<Self>],
-    ) {
-    }
+    ) {}
     /// The maximum pattern complexity limit was reached.
     fn complexity_exceeded(&self) -> Result<(), Self::Error>;
     /// Lint that there is a gap `gap` between `pat` and all of `gapped_with` such that the gap is
@@ -65,8 +64,7 @@ pub trait PatCx: Sized + fmt::Debug {
         _pat: &DeconstructedPat<Self>,
         _gap: IntRange,
         _gapped_with: &[&DeconstructedPat<Self>],
-    ) {
-    }
+    ) {}
     /// Check if we may need to perform additional deref-pattern-specific validation.
     fn match_may_contain_deref_pats(&self) -> bool {
         true

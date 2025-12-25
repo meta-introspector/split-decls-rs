@@ -20,11 +20,34 @@ impl ExpandTo {
             MACRO_STMTS | EXPR_STMT | STMT_LIST => ExpandTo::Statements,
             MACRO_PAT => ExpandTo::Pattern,
             MACRO_TYPE => ExpandTo::Type,
-            ARG_LIST | ARRAY_EXPR | AWAIT_EXPR | BIN_EXPR | BREAK_EXPR | CALL_EXPR | CAST_EXPR
-            | CLOSURE_EXPR | FIELD_EXPR | FOR_EXPR | IF_EXPR | INDEX_EXPR | LET_EXPR
-            | MATCH_ARM | MATCH_EXPR | MATCH_GUARD | METHOD_CALL_EXPR | PAREN_EXPR | PATH_EXPR
-            | PREFIX_EXPR | RANGE_EXPR | RECORD_EXPR_FIELD | REF_EXPR | RETURN_EXPR | TRY_EXPR
-            | TUPLE_EXPR | WHILE_EXPR | MACRO_EXPR => ExpandTo::Expr,
+            ARG_LIST
+            | ARRAY_EXPR
+            | AWAIT_EXPR
+            | BIN_EXPR
+            | BREAK_EXPR
+            | CALL_EXPR
+            | CAST_EXPR
+            | CLOSURE_EXPR
+            | FIELD_EXPR
+            | FOR_EXPR
+            | IF_EXPR
+            | INDEX_EXPR
+            | LET_EXPR
+            | MATCH_ARM
+            | MATCH_EXPR
+            | MATCH_GUARD
+            | METHOD_CALL_EXPR
+            | PAREN_EXPR
+            | PATH_EXPR
+            | PREFIX_EXPR
+            | RANGE_EXPR
+            | RECORD_EXPR_FIELD
+            | REF_EXPR
+            | RETURN_EXPR
+            | TRY_EXPR
+            | TUPLE_EXPR
+            | WHILE_EXPR
+            | MACRO_EXPR => ExpandTo::Expr,
             _ => ExpandTo::Items,
         }
     }

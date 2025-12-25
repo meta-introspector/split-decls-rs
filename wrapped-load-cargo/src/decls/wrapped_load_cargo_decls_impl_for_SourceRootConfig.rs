@@ -38,11 +38,12 @@ impl SourceRootConfig {
                 continue;
             }
             for (root2, root2_id) in roots[..idx].iter().rev() {
-                if self.local_filesets.contains(root2_id)
-                    && root_id != root2_id
+                if self.local_filesets.contains(root2_id) && root_id != root2_id
                     && root.starts_with(root2)
                 {
-                    if find_parent(&mut dsu, *root_id) != find_parent(&mut dsu, *root2_id) {
+                    if find_parent(&mut dsu, *root_id)
+                        != find_parent(&mut dsu, *root2_id)
+                    {
                         map.insert(
                             SourceRootId(*root_id as u32),
                             SourceRootId(*root2_id as u32),

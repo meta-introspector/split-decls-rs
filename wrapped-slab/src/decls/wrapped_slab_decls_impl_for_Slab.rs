@@ -265,7 +265,11 @@ impl<T> Slab<T> {
         let mut occupied_until = 0;
         while guard.slab.entries.len() > guard.slab.len {
             if let Some(Entry::Occupied(mut value)) = guard.slab.entries.pop() {
-                while let Some(&Entry::Occupied(_)) = guard.slab.entries.get(occupied_until) {
+                while let Some(&Entry::Occupied(_)) = guard
+                    .slab
+                    .entries
+                    .get(occupied_until)
+                {
                     occupied_until += 1;
                 }
                 if !rekey(&mut value, guard.slab.entries.len(), occupied_until) {
@@ -604,7 +608,11 @@ impl<T> Slab<T> {
     /// assert_eq!(slab[key1], 2);
     /// assert_eq!(slab[key2], 1);
     /// ```
-    pub unsafe fn get2_unchecked_mut(&mut self, key1: usize, key2: usize) -> (&mut T, &mut T) {
+    pub unsafe fn get2_unchecked_mut(
+        &mut self,
+        key1: usize,
+        key2: usize,
+    ) -> (&mut T, &mut T) {
         debug_assert_ne!(key1, key2);
         let ptr = self.entries.as_mut_ptr();
         let ptr1 = ptr.add(key1);
@@ -823,7 +831,7 @@ impl<T> Slab<T> {
     /// assert!(!slab.contains(hello));
     /// ```
     pub fn contains(&self, key: usize) -> bool {
-        matches!(self.entries.get(key), Some(&Entry::Occupied(_)))
+        matches!(self.entries.get(key), Some(& Entry::Occupied(_)))
     }
     /// Retain only the elements specified by the predicate.
     ///

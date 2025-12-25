@@ -18,8 +18,7 @@ unsafe fn try_read_from<S, T: TryFromBytes>(
     where
         Wrapping<T>: pointer::TransmuteFrom<T, invariant::Valid, invariant::Valid>,
         T: pointer::TransmuteFrom<Wrapping<T>, invariant::Valid, invariant::Valid>,
-    {
-    }
+    {}
     _assert_same_size_and_validity::<T>();
     Ok(unsafe { candidate.assume_init() })
 }

@@ -43,7 +43,9 @@ impl DefWithBody {
     pub fn debug_mir(self, db: &dyn HirDatabase) -> String {
         let body = db.mir_body(self.id());
         match body {
-            Ok(body) => body.pretty_print(db, self.module(db).krate().to_display_target(db)),
+            Ok(body) => {
+                body.pretty_print(db, self.module(db).krate().to_display_target(db))
+            }
             Err(e) => format!("error:\n{e:?}"),
         }
     }
@@ -56,7 +58,9 @@ impl DefWithBody {
         let krate = self.module(db).id.krate();
         let (body, source_map) = db.body_with_source_map(self.into());
         let sig_source_map = match self {
-            DefWithBody::Function(id) => db.function_signature_with_source_map(id.into()).1,
+            DefWithBody::Function(id) => {
+                db.function_signature_with_source_map(id.into()).1
+            }
             DefWithBody::Static(id) => db.static_signature_with_source_map(id.into()).1,
             DefWithBody::Const(id) => db.const_signature_with_source_map(id.into()).1,
             DefWithBody::Variant(variant) => {
@@ -68,77 +72,83 @@ impl DefWithBody {
             Module {
                 id: def_map.module_id(DefMap::ROOT),
             }
-            .diagnostics(db, acc, style_lints);
+                .diagnostics(db, acc, style_lints);
         }
         expr_store_diagnostics(db, acc, &source_map);
         let infer = db.infer(self.into());
         for d in infer.diagnostics() {
-            acc.extend(AnyDiagnostic::inference_diagnostic(
-                db,
-                self.into(),
-                d,
-                &source_map,
-                &sig_source_map,
-            ));
+            acc.extend(
+                AnyDiagnostic::inference_diagnostic(
+                    db,
+                    self.into(),
+                    d,
+                    &source_map,
+                    &sig_source_map,
+                ),
+            );
         }
         for (pat_or_expr, mismatch) in infer.type_mismatches() {
             let expr_or_pat = match pat_or_expr {
-                ExprOrPatId::ExprId(expr) => source_map.expr_syntax(expr).map(Either::Left),
+                ExprOrPatId::ExprId(expr) => {
+                    source_map.expr_syntax(expr).map(Either::Left)
+                }
                 ExprOrPatId::PatId(pat) => source_map.pat_syntax(pat).map(Either::Right),
             };
             let expr_or_pat = match expr_or_pat {
                 Ok(Either::Left(expr)) => expr,
-                Ok(Either::Right(InFile {
-                    file_id,
-                    value: pat,
-                })) => {
+                Ok(Either::Right(InFile { file_id, value: pat })) => {
                     let Some(ptr) = AstPtr::try_from_raw(pat.syntax_node_ptr()) else {
                         continue;
                     };
-                    InFile {
-                        file_id,
-                        value: ptr,
-                    }
+                    InFile { file_id, value: ptr }
                 }
                 Err(SyntheticSyntax) => continue,
             };
             acc.push(
                 TypeMismatch {
                     expr_or_pat,
-                    expected: Type::new(db, DefWithBodyId::from(self), mismatch.expected),
+                    expected: Type::new(
+                        db,
+                        DefWithBodyId::from(self),
+                        mismatch.expected,
+                    ),
                     actual: Type::new(db, DefWithBodyId::from(self), mismatch.actual),
                 }
-                .into(),
+                    .into(),
             );
         }
         let missing_unsafe = hir_ty::diagnostics::missing_unsafe(db, self.into());
         for (node, reason) in missing_unsafe.unsafe_exprs {
             match source_map.expr_or_pat_syntax(node) {
-                Ok(node) => acc.push(
-                    MissingUnsafe {
-                        node,
-                        lint: if missing_unsafe.fn_is_unsafe {
-                            UnsafeLint::UnsafeOpInUnsafeFn
-                        } else {
-                            UnsafeLint::HardError
-                        },
-                        reason,
-                    }
-                    .into(),
-                ),
+                Ok(node) => {
+                    acc.push(
+                        MissingUnsafe {
+                            node,
+                            lint: if missing_unsafe.fn_is_unsafe {
+                                UnsafeLint::UnsafeOpInUnsafeFn
+                            } else {
+                                UnsafeLint::HardError
+                            },
+                            reason,
+                        }
+                            .into(),
+                    )
+                }
                 Err(SyntheticSyntax) => {}
             }
         }
         for node in missing_unsafe.deprecated_safe_calls {
             match source_map.expr_syntax(node) {
-                Ok(node) => acc.push(
-                    MissingUnsafe {
-                        node,
-                        lint: UnsafeLint::DeprecatedSafe2024,
-                        reason: UnsafetyReason::UnsafeFnCall,
-                    }
-                    .into(),
-                ),
+                Ok(node) => {
+                    acc.push(
+                        MissingUnsafe {
+                            node,
+                            lint: UnsafeLint::DeprecatedSafe2024,
+                            reason: UnsafetyReason::UnsafeFnCall,
+                        }
+                            .into(),
+                    )
+                }
                 Err(SyntheticSyntax) => never!("synthetic DeprecatedSafe2024"),
             }
         }
@@ -147,18 +157,24 @@ impl DefWithBody {
                 let mir_body = &borrowck_result.mir_body;
                 for moof in &borrowck_result.moved_out_of_ref {
                     let span: InFile<SyntaxNodePtr> = match moof.span {
-                        mir::MirSpan::ExprId(e) => match source_map.expr_syntax(e) {
-                            Ok(s) => s.map(|it| it.into()),
-                            Err(_) => continue,
-                        },
-                        mir::MirSpan::PatId(p) => match source_map.pat_syntax(p) {
-                            Ok(s) => s.map(|it| it.into()),
-                            Err(_) => continue,
-                        },
-                        mir::MirSpan::SelfParam => match source_map.self_param_syntax() {
-                            Some(s) => s.map(|it| it.into()),
-                            None => continue,
-                        },
+                        mir::MirSpan::ExprId(e) => {
+                            match source_map.expr_syntax(e) {
+                                Ok(s) => s.map(|it| it.into()),
+                                Err(_) => continue,
+                            }
+                        }
+                        mir::MirSpan::PatId(p) => {
+                            match source_map.pat_syntax(p) {
+                                Ok(s) => s.map(|it| it.into()),
+                                Err(_) => continue,
+                            }
+                        }
+                        mir::MirSpan::SelfParam => {
+                            match source_map.self_param_syntax() {
+                                Some(s) => s.map(|it| it.into()),
+                                None => continue,
+                            }
+                        }
                         mir::MirSpan::BindingId(b) => {
                             match source_map
                                 .patterns_for_binding(b)
@@ -176,7 +192,7 @@ impl DefWithBody {
                             ty: Type::new_for_crate(krate, moof.ty),
                             span,
                         }
-                        .into(),
+                            .into(),
                     )
                 }
                 let mol = &borrowck_result.mutability_of_locals;
@@ -207,7 +223,10 @@ impl DefWithBody {
                     let is_mut = body[binding_id].mode == BindingAnnotation::Mutable;
                     match (need_mut, is_mut) {
                         (mir::MutabilityReason::Unused, _) => {
-                            let should_ignore = body[binding_id].name.as_str().starts_with('_');
+                            let should_ignore = body[binding_id]
+                                .name
+                                .as_str()
+                                .starts_with('_');
                             if !should_ignore {
                                 acc.push(UnusedVariable { local }.into())
                             }
@@ -217,14 +236,18 @@ impl DefWithBody {
                         (mir::MutabilityReason::Mut { spans }, false) => {
                             for span in spans {
                                 let span: InFile<SyntaxNodePtr> = match span {
-                                    mir::MirSpan::ExprId(e) => match source_map.expr_syntax(*e) {
-                                        Ok(s) => s.map(|it| it.into()),
-                                        Err(_) => continue,
-                                    },
-                                    mir::MirSpan::PatId(p) => match source_map.pat_syntax(*p) {
-                                        Ok(s) => s.map(|it| it.into()),
-                                        Err(_) => continue,
-                                    },
+                                    mir::MirSpan::ExprId(e) => {
+                                        match source_map.expr_syntax(*e) {
+                                            Ok(s) => s.map(|it| it.into()),
+                                            Err(_) => continue,
+                                        }
+                                    }
+                                    mir::MirSpan::PatId(p) => {
+                                        match source_map.pat_syntax(*p) {
+                                            Ok(s) => s.map(|it| it.into()),
+                                            Err(_) => continue,
+                                        }
+                                    }
                                     mir::MirSpan::BindingId(b) => {
                                         match source_map
                                             .patterns_for_binding(*b)
@@ -248,7 +271,10 @@ impl DefWithBody {
                         }
                         (mir::MutabilityReason::Not, true) => {
                             if !infer.mutated_bindings_in_closure.contains(&binding_id) {
-                                let should_ignore = body[binding_id].name.as_str().starts_with('_');
+                                let should_ignore = body[binding_id]
+                                    .name
+                                    .as_str()
+                                    .starts_with('_');
                                 if !should_ignore {
                                     acc.push(UnusedMut { local }.into())
                                 }
@@ -258,12 +284,14 @@ impl DefWithBody {
                 }
             }
         }
-        for diagnostic in BodyValidationDiagnostic::collect(db, self.into(), style_lints) {
-            acc.extend(AnyDiagnostic::body_validation_diagnostic(
-                db,
-                diagnostic,
-                &source_map,
-            ));
+        for diagnostic in BodyValidationDiagnostic::collect(
+            db,
+            self.into(),
+            style_lints,
+        ) {
+            acc.extend(
+                AnyDiagnostic::body_validation_diagnostic(db, diagnostic, &source_map),
+            );
         }
         let def: ModuleDef = match self {
             DefWithBody::Function(it) => it.into(),

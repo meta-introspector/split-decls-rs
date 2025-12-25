@@ -341,13 +341,10 @@ impl<T: Primitive> AtomicMaybeUninit<T> {
         let current = core::hint::black_box(current);
         #[cfg(atomic_maybe_uninit_pre_llvm_20)]
         let new = core::hint::black_box(new);
-        let (out, ok) =
-            unsafe { T::atomic_compare_exchange(self.v.get(), current, new, success, failure) };
-        if ok {
-            Ok(out)
-        } else {
-            Err(out)
-        }
+        let (out, ok) = unsafe {
+            T::atomic_compare_exchange(self.v.get(), current, new, success, failure)
+        };
+        if ok { Ok(out) } else { Err(out) }
     }
     /// Stores a value into the atomic value if the current value is the same as
     /// the `current` value. Here, "the same" is determined using byte-wise
@@ -424,11 +421,7 @@ impl<T: Primitive> AtomicMaybeUninit<T> {
         let (out, ok) = unsafe {
             T::atomic_compare_exchange_weak(self.v.get(), current, new, success, failure)
         };
-        if ok {
-            Ok(out)
-        } else {
-            Err(out)
-        }
+        if ok { Ok(out) } else { Err(out) }
     }
     /// Fetches the value, and applies a function to it that returns an optional
     /// new value. Returns a `Result` of `Ok(previous_value)` if the function returned `Some(_)`, else

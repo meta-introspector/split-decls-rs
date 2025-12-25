@@ -13,9 +13,6 @@ impl RustcInfo {
             .next()
             .expect("verbose version has host: field")
             .to_string();
-        RustcInfo {
-            verbose_version,
-            host,
-        }
+        RustcInfo { verbose_version, host }
     }
 }

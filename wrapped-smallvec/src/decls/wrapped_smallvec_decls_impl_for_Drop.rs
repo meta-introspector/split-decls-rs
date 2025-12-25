@@ -18,7 +18,8 @@ impl<T, const N: usize> Drop for IntoIter<T, N> {
             } else {
                 None
             };
-            core::ptr::slice_from_raw_parts_mut(ptr.add(begin), end - begin).drop_in_place();
+            core::ptr::slice_from_raw_parts_mut(ptr.add(begin), end - begin)
+                .drop_in_place();
         }
     }
 }

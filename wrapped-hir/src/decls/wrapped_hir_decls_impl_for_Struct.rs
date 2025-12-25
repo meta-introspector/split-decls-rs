@@ -14,10 +14,7 @@ impl Struct {
             .fields(db)
             .fields()
             .iter()
-            .map(|(id, _)| Field {
-                parent: self.into(),
-                id,
-            })
+            .map(|(id, _)| Field { parent: self.into(), id })
             .collect()
     }
     pub fn ty(self, db: &dyn HirDatabase) -> Type<'_> {
@@ -45,8 +42,14 @@ impl Struct {
     pub fn is_unstable(self, db: &dyn HirDatabase) -> bool {
         db.attrs(self.id.into()).is_unstable()
     }
-    pub fn instantiate_infer<'db>(self, infer_ctxt: &InferCtxt<'db>) -> InstantiatedStruct<'db> {
+    pub fn instantiate_infer<'db>(
+        self,
+        infer_ctxt: &InferCtxt<'db>,
+    ) -> InstantiatedStruct<'db> {
         let args = infer_ctxt.fresh_args_for_item(self.id.into());
-        InstantiatedStruct { inner: self, args }
+        InstantiatedStruct {
+            inner: self,
+            args,
+        }
     }
 }

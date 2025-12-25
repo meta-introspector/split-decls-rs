@@ -11,7 +11,11 @@ fn push_ty_diagnostics<'db>(
             diagnostics
                 .slice
                 .iter()
-                .filter_map(|diagnostic| AnyDiagnostic::ty_diagnostic(diagnostic, source_map, db)),
+                .filter_map(|diagnostic| AnyDiagnostic::ty_diagnostic(
+                    diagnostic,
+                    source_map,
+                    db,
+                )),
         );
     }
 }

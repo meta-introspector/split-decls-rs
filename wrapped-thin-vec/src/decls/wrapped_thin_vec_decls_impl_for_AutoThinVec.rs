@@ -7,8 +7,7 @@ impl<T, const N: usize> AutoThinVec<T, N> {
     #[doc(hidden)]
     pub fn new_unpinned() -> Self {
         assert!(
-            std::mem::align_of::<T>() <= 8,
-            "Can't handle alignments greater than 8"
+            std::mem::align_of::< T > () <= 8, "Can't handle alignments greater than 8"
         );
         assert_eq!(std::mem::offset_of!(Self, buffer), AUTO_ARRAY_HEADER_OFFSET);
         Self {

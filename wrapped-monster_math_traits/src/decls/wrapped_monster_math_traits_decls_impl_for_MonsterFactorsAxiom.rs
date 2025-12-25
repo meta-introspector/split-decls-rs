@@ -11,6 +11,6 @@ impl MonsterFactorsAxiom for DummyMonsterFactorsAxiom {
         declaration
             .monster_factors
             .as_ref()
-            .map_or(false, |factors| factors.len() >= 108)
+            .map_or(false, |factors| { factors.len() >= 108 })
     }
 }

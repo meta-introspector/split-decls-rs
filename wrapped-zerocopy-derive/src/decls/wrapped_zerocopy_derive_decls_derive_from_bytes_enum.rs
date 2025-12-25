@@ -22,21 +22,24 @@ fn derive_from_bytes_enum(
     let repr = EnumRepr::from_attrs(&ast.attrs)?;
     let variants_required = 1usize << enum_size_from_repr(&repr)?;
     if enm.variants.len() != variants_required {
-        return Err(Error::new_spanned(
-            ast,
-            format!(
-                "FromBytes only supported on {} enum with {} variants",
-                repr.repr_type_name(),
-                variants_required
+        return Err(
+            Error::new_spanned(
+                ast,
+                format!(
+                    "FromBytes only supported on {} enum with {} variants", repr
+                    .repr_type_name(), variants_required
+                ),
             ),
-        ));
+        );
     }
-    Ok(ImplBlockBuilder::new(
-        ast,
-        enm,
-        Trait::FromBytes,
-        FieldBounds::ALL_SELF,
-        zerocopy_crate,
+    Ok(
+        ImplBlockBuilder::new(
+                ast,
+                enm,
+                Trait::FromBytes,
+                FieldBounds::ALL_SELF,
+                zerocopy_crate,
+            )
+            .build(),
     )
-    .build())
 }

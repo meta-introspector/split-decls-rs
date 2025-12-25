@@ -20,10 +20,7 @@ fn check_trailing_tokens<'psess>(
     handle_continuation_error(
         psess,
         iter_span(iter).expect("checked is_none above"),
-        &format!(
-            "extra tokens in meta-variable expression for `{}`",
-            ident.name
-        ),
+        &format!("extra tokens in meta-variable expression for `{}`", ident.name),
         "mve_extra_tokens",
     )?
 }

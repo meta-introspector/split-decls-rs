@@ -13,7 +13,10 @@ use std::collections::HashMap;
 /// assert_eq!(&bytes, b"kiwi");
 /// ```
 #[inline]
-pub fn decode_to_slice<T: AsRef<[u8]>>(data: T, out: &mut [u8]) -> Result<(), FromHexError> {
+pub fn decode_to_slice<T: AsRef<[u8]>>(
+    data: T,
+    out: &mut [u8],
+) -> Result<(), FromHexError> {
     let data = data.as_ref();
     if data.len() % 2 != 0 {
         return Err(FromHexError::OddLength);

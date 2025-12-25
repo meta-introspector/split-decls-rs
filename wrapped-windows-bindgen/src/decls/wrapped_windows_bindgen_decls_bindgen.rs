@@ -232,27 +232,29 @@ where
             kind = ArgKind::None;
         }
         match kind {
-            ArgKind::None => match arg.as_str() {
-                "--in" => kind = ArgKind::Input,
-                "--out" => kind = ArgKind::Output,
-                "--filter" => kind = ArgKind::Filter,
-                "--rustfmt" => kind = ArgKind::Rustfmt,
-                "--reference" => kind = ArgKind::Reference,
-                "--derive" => kind = ArgKind::Derive,
-                "--flat" => flat = true,
-                "--no-allow" => no_allow = true,
-                "--no-comment" => no_comment = true,
-                "--no-deps" => no_deps = true,
-                "--no-toml" => no_toml = true,
-                "--package" => package = true,
-                "--sys" => sys = true,
-                "--sys-fn-ptrs" => sys_fn_ptrs = true,
-                "--implement" => implement = true,
-                "--specific-deps" => specific_deps = true,
-                "--link" => kind = ArgKind::Link,
-                "--index" => index = true,
-                _ => panic!("invalid option `{arg}`"),
-            },
+            ArgKind::None => {
+                match arg.as_str() {
+                    "--in" => kind = ArgKind::Input,
+                    "--out" => kind = ArgKind::Output,
+                    "--filter" => kind = ArgKind::Filter,
+                    "--rustfmt" => kind = ArgKind::Rustfmt,
+                    "--reference" => kind = ArgKind::Reference,
+                    "--derive" => kind = ArgKind::Derive,
+                    "--flat" => flat = true,
+                    "--no-allow" => no_allow = true,
+                    "--no-comment" => no_comment = true,
+                    "--no-deps" => no_deps = true,
+                    "--no-toml" => no_toml = true,
+                    "--package" => package = true,
+                    "--sys" => sys = true,
+                    "--sys-fn-ptrs" => sys_fn_ptrs = true,
+                    "--implement" => implement = true,
+                    "--specific-deps" => specific_deps = true,
+                    "--link" => kind = ArgKind::Link,
+                    "--index" => index = true,
+                    _ => panic!("invalid option `{arg}`"),
+                }
+            }
             ArgKind::Output => {
                 if output.is_empty() {
                     output = arg.to_string();
@@ -300,54 +302,80 @@ where
     let reader = Reader::new(expand_input(&input));
     if !sys && !no_deps {
         if reader.contains_key("Windows.Foundation") {
-            references.insert(
-                0,
-                ReferenceStage::parse("windows_collections,flat,Windows.Foundation.Collections"),
-            );
-            references.insert(
-                0,
-                ReferenceStage::parse("windows_numerics,flat,Windows.Foundation.Numerics"),
-            );
-            references.insert(
-                0,
-                ReferenceStage::parse("windows_future,flat,Windows.Foundation.Async*"),
-            );
-            references.insert(
-                0,
-                ReferenceStage::parse("windows_future,flat,Windows.Foundation.IAsync*"),
-            );
+            references
+                .insert(
+                    0,
+                    ReferenceStage::parse(
+                        "windows_collections,flat,Windows.Foundation.Collections",
+                    ),
+                );
+            references
+                .insert(
+                    0,
+                    ReferenceStage::parse(
+                        "windows_numerics,flat,Windows.Foundation.Numerics",
+                    ),
+                );
+            references
+                .insert(
+                    0,
+                    ReferenceStage::parse(
+                        "windows_future,flat,Windows.Foundation.Async*",
+                    ),
+                );
+            references
+                .insert(
+                    0,
+                    ReferenceStage::parse(
+                        "windows_future,flat,Windows.Foundation.IAsync*",
+                    ),
+                );
         }
         if reader.contains_key("Windows.Win32.Foundation") {
             if specific_deps {
-                references.insert(
-                    0,
-                    ReferenceStage::parse(
-                        "windows_result,flat,Windows.Win32.Foundation.WIN32_ERROR",
-                    ),
-                );
-                references.insert(
-                    0,
-                    ReferenceStage::parse("windows_result,flat,Windows.Win32.Foundation.NTSTATUS"),
-                );
-                references.insert(
-                    0,
-                    ReferenceStage::parse(
-                        "windows_result,flat,Windows.Win32.System.Rpc.RPC_STATUS",
-                    ),
-                );
+                references
+                    .insert(
+                        0,
+                        ReferenceStage::parse(
+                            "windows_result,flat,Windows.Win32.Foundation.WIN32_ERROR",
+                        ),
+                    );
+                references
+                    .insert(
+                        0,
+                        ReferenceStage::parse(
+                            "windows_result,flat,Windows.Win32.Foundation.NTSTATUS",
+                        ),
+                    );
+                references
+                    .insert(
+                        0,
+                        ReferenceStage::parse(
+                            "windows_result,flat,Windows.Win32.System.Rpc.RPC_STATUS",
+                        ),
+                    );
             } else {
-                references.insert(
-                    0,
-                    ReferenceStage::parse("windows_core,flat,Windows.Win32.Foundation.WIN32_ERROR"),
-                );
-                references.insert(
-                    0,
-                    ReferenceStage::parse("windows_core,flat,Windows.Win32.Foundation.NTSTATUS"),
-                );
-                references.insert(
-                    0,
-                    ReferenceStage::parse("windows_core,flat,Windows.Win32.System.Rpc.RPC_STATUS"),
-                );
+                references
+                    .insert(
+                        0,
+                        ReferenceStage::parse(
+                            "windows_core,flat,Windows.Win32.Foundation.WIN32_ERROR",
+                        ),
+                    );
+                references
+                    .insert(
+                        0,
+                        ReferenceStage::parse(
+                            "windows_core,flat,Windows.Win32.Foundation.NTSTATUS",
+                        ),
+                    );
+                references
+                    .insert(
+                        0,
+                        ReferenceStage::parse(
+                            "windows_core,flat,Windows.Win32.System.Rpc.RPC_STATUS",
+                        ),
+                    );
             }
         }
     }

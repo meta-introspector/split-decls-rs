@@ -8,8 +8,8 @@ use std::collections::HashMap;
 #[macro_export]
 macro_rules! auto_thin_vec {
     (let $name:ident : [$ty:ty; $cap:literal]) => {
-        let auto_vec = $crate::AutoThinVec::<$ty, $cap>::new_unpinned();
-        let mut $name = core::pin::pin!(auto_vec);
-        unsafe { $name.as_mut().shrink_to_fit_known_singleton() };
+        let auto_vec = $crate::AutoThinVec::<$ty, $cap >::new_unpinned(); let mut $name =
+        core::pin::pin!(auto_vec); unsafe { $name .as_mut()
+        .shrink_to_fit_known_singleton() };
     };
 }

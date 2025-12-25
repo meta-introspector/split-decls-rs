@@ -10,154 +10,98 @@ pub fn initialize_available_targets() {
         };
     }
     init_target!(
-        llvm_component = "x86",
-        LLVMInitializeX86TargetInfo,
-        LLVMInitializeX86Target,
-        LLVMInitializeX86TargetMC,
-        LLVMInitializeX86AsmPrinter,
+        llvm_component = "x86", LLVMInitializeX86TargetInfo, LLVMInitializeX86Target,
+        LLVMInitializeX86TargetMC, LLVMInitializeX86AsmPrinter,
         LLVMInitializeX86AsmParser
     );
     init_target!(
-        llvm_component = "arm",
-        LLVMInitializeARMTargetInfo,
-        LLVMInitializeARMTarget,
-        LLVMInitializeARMTargetMC,
-        LLVMInitializeARMAsmPrinter,
+        llvm_component = "arm", LLVMInitializeARMTargetInfo, LLVMInitializeARMTarget,
+        LLVMInitializeARMTargetMC, LLVMInitializeARMAsmPrinter,
         LLVMInitializeARMAsmParser
     );
     init_target!(
-        llvm_component = "aarch64",
-        LLVMInitializeAArch64TargetInfo,
-        LLVMInitializeAArch64Target,
-        LLVMInitializeAArch64TargetMC,
-        LLVMInitializeAArch64AsmPrinter,
-        LLVMInitializeAArch64AsmParser
+        llvm_component = "aarch64", LLVMInitializeAArch64TargetInfo,
+        LLVMInitializeAArch64Target, LLVMInitializeAArch64TargetMC,
+        LLVMInitializeAArch64AsmPrinter, LLVMInitializeAArch64AsmParser
     );
     init_target!(
-        llvm_component = "amdgpu",
-        LLVMInitializeAMDGPUTargetInfo,
-        LLVMInitializeAMDGPUTarget,
-        LLVMInitializeAMDGPUTargetMC,
-        LLVMInitializeAMDGPUAsmPrinter,
-        LLVMInitializeAMDGPUAsmParser
+        llvm_component = "amdgpu", LLVMInitializeAMDGPUTargetInfo,
+        LLVMInitializeAMDGPUTarget, LLVMInitializeAMDGPUTargetMC,
+        LLVMInitializeAMDGPUAsmPrinter, LLVMInitializeAMDGPUAsmParser
     );
     init_target!(
-        llvm_component = "avr",
-        LLVMInitializeAVRTargetInfo,
-        LLVMInitializeAVRTarget,
-        LLVMInitializeAVRTargetMC,
-        LLVMInitializeAVRAsmPrinter,
+        llvm_component = "avr", LLVMInitializeAVRTargetInfo, LLVMInitializeAVRTarget,
+        LLVMInitializeAVRTargetMC, LLVMInitializeAVRAsmPrinter,
         LLVMInitializeAVRAsmParser
     );
     init_target!(
-        llvm_component = "m68k",
-        LLVMInitializeM68kTargetInfo,
-        LLVMInitializeM68kTarget,
-        LLVMInitializeM68kTargetMC,
-        LLVMInitializeM68kAsmPrinter,
+        llvm_component = "m68k", LLVMInitializeM68kTargetInfo, LLVMInitializeM68kTarget,
+        LLVMInitializeM68kTargetMC, LLVMInitializeM68kAsmPrinter,
         LLVMInitializeM68kAsmParser
     );
     init_target!(
-        llvm_component = "csky",
-        LLVMInitializeCSKYTargetInfo,
-        LLVMInitializeCSKYTarget,
-        LLVMInitializeCSKYTargetMC,
-        LLVMInitializeCSKYAsmPrinter,
+        llvm_component = "csky", LLVMInitializeCSKYTargetInfo, LLVMInitializeCSKYTarget,
+        LLVMInitializeCSKYTargetMC, LLVMInitializeCSKYAsmPrinter,
         LLVMInitializeCSKYAsmParser
     );
     init_target!(
-        llvm_component = "loongarch",
-        LLVMInitializeLoongArchTargetInfo,
-        LLVMInitializeLoongArchTarget,
-        LLVMInitializeLoongArchTargetMC,
-        LLVMInitializeLoongArchAsmPrinter,
-        LLVMInitializeLoongArchAsmParser
+        llvm_component = "loongarch", LLVMInitializeLoongArchTargetInfo,
+        LLVMInitializeLoongArchTarget, LLVMInitializeLoongArchTargetMC,
+        LLVMInitializeLoongArchAsmPrinter, LLVMInitializeLoongArchAsmParser
     );
     init_target!(
-        llvm_component = "mips",
-        LLVMInitializeMipsTargetInfo,
-        LLVMInitializeMipsTarget,
-        LLVMInitializeMipsTargetMC,
-        LLVMInitializeMipsAsmPrinter,
+        llvm_component = "mips", LLVMInitializeMipsTargetInfo, LLVMInitializeMipsTarget,
+        LLVMInitializeMipsTargetMC, LLVMInitializeMipsAsmPrinter,
         LLVMInitializeMipsAsmParser
     );
     init_target!(
-        llvm_component = "powerpc",
-        LLVMInitializePowerPCTargetInfo,
-        LLVMInitializePowerPCTarget,
-        LLVMInitializePowerPCTargetMC,
-        LLVMInitializePowerPCAsmPrinter,
-        LLVMInitializePowerPCAsmParser
+        llvm_component = "powerpc", LLVMInitializePowerPCTargetInfo,
+        LLVMInitializePowerPCTarget, LLVMInitializePowerPCTargetMC,
+        LLVMInitializePowerPCAsmPrinter, LLVMInitializePowerPCAsmParser
     );
     init_target!(
-        llvm_component = "systemz",
-        LLVMInitializeSystemZTargetInfo,
-        LLVMInitializeSystemZTarget,
-        LLVMInitializeSystemZTargetMC,
-        LLVMInitializeSystemZAsmPrinter,
-        LLVMInitializeSystemZAsmParser
+        llvm_component = "systemz", LLVMInitializeSystemZTargetInfo,
+        LLVMInitializeSystemZTarget, LLVMInitializeSystemZTargetMC,
+        LLVMInitializeSystemZAsmPrinter, LLVMInitializeSystemZAsmParser
     );
     init_target!(
-        llvm_component = "msp430",
-        LLVMInitializeMSP430TargetInfo,
-        LLVMInitializeMSP430Target,
-        LLVMInitializeMSP430TargetMC,
-        LLVMInitializeMSP430AsmPrinter,
-        LLVMInitializeMSP430AsmParser
+        llvm_component = "msp430", LLVMInitializeMSP430TargetInfo,
+        LLVMInitializeMSP430Target, LLVMInitializeMSP430TargetMC,
+        LLVMInitializeMSP430AsmPrinter, LLVMInitializeMSP430AsmParser
     );
     init_target!(
-        llvm_component = "riscv",
-        LLVMInitializeRISCVTargetInfo,
-        LLVMInitializeRISCVTarget,
-        LLVMInitializeRISCVTargetMC,
-        LLVMInitializeRISCVAsmPrinter,
-        LLVMInitializeRISCVAsmParser
+        llvm_component = "riscv", LLVMInitializeRISCVTargetInfo,
+        LLVMInitializeRISCVTarget, LLVMInitializeRISCVTargetMC,
+        LLVMInitializeRISCVAsmPrinter, LLVMInitializeRISCVAsmParser
     );
     init_target!(
-        llvm_component = "sparc",
-        LLVMInitializeSparcTargetInfo,
-        LLVMInitializeSparcTarget,
-        LLVMInitializeSparcTargetMC,
-        LLVMInitializeSparcAsmPrinter,
-        LLVMInitializeSparcAsmParser
+        llvm_component = "sparc", LLVMInitializeSparcTargetInfo,
+        LLVMInitializeSparcTarget, LLVMInitializeSparcTargetMC,
+        LLVMInitializeSparcAsmPrinter, LLVMInitializeSparcAsmParser
     );
     init_target!(
-        llvm_component = "nvptx",
-        LLVMInitializeNVPTXTargetInfo,
-        LLVMInitializeNVPTXTarget,
-        LLVMInitializeNVPTXTargetMC,
+        llvm_component = "nvptx", LLVMInitializeNVPTXTargetInfo,
+        LLVMInitializeNVPTXTarget, LLVMInitializeNVPTXTargetMC,
         LLVMInitializeNVPTXAsmPrinter
     );
     init_target!(
-        llvm_component = "hexagon",
-        LLVMInitializeHexagonTargetInfo,
-        LLVMInitializeHexagonTarget,
-        LLVMInitializeHexagonTargetMC,
-        LLVMInitializeHexagonAsmPrinter,
-        LLVMInitializeHexagonAsmParser
+        llvm_component = "hexagon", LLVMInitializeHexagonTargetInfo,
+        LLVMInitializeHexagonTarget, LLVMInitializeHexagonTargetMC,
+        LLVMInitializeHexagonAsmPrinter, LLVMInitializeHexagonAsmParser
     );
     init_target!(
-        llvm_component = "xtensa",
-        LLVMInitializeXtensaTargetInfo,
-        LLVMInitializeXtensaTarget,
-        LLVMInitializeXtensaTargetMC,
-        LLVMInitializeXtensaAsmPrinter,
-        LLVMInitializeXtensaAsmParser
+        llvm_component = "xtensa", LLVMInitializeXtensaTargetInfo,
+        LLVMInitializeXtensaTarget, LLVMInitializeXtensaTargetMC,
+        LLVMInitializeXtensaAsmPrinter, LLVMInitializeXtensaAsmParser
     );
     init_target!(
-        llvm_component = "webassembly",
-        LLVMInitializeWebAssemblyTargetInfo,
-        LLVMInitializeWebAssemblyTarget,
-        LLVMInitializeWebAssemblyTargetMC,
-        LLVMInitializeWebAssemblyAsmPrinter,
-        LLVMInitializeWebAssemblyAsmParser
+        llvm_component = "webassembly", LLVMInitializeWebAssemblyTargetInfo,
+        LLVMInitializeWebAssemblyTarget, LLVMInitializeWebAssemblyTargetMC,
+        LLVMInitializeWebAssemblyAsmPrinter, LLVMInitializeWebAssemblyAsmParser
     );
     init_target!(
-        llvm_component = "bpf",
-        LLVMInitializeBPFTargetInfo,
-        LLVMInitializeBPFTarget,
-        LLVMInitializeBPFTargetMC,
-        LLVMInitializeBPFAsmPrinter,
+        llvm_component = "bpf", LLVMInitializeBPFTargetInfo, LLVMInitializeBPFTarget,
+        LLVMInitializeBPFTargetMC, LLVMInitializeBPFAsmPrinter,
         LLVMInitializeBPFAsmParser
     );
 }

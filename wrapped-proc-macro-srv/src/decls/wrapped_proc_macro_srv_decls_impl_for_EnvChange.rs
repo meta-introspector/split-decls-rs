@@ -6,9 +6,7 @@ impl<'snap> EnvChange<'snap> {
         new_vars: &'snap [(String, String)],
         current_dir: Option<&Path>,
     ) -> EnvChange<'snap> {
-        let guard = ENV_LOCK
-            .lock()
-            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        let guard = ENV_LOCK.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         let prev_working_dir = match current_dir {
             Some(dir) => {
                 let prev_working_dir = std::env::current_dir().ok();

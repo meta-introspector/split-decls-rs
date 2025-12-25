@@ -30,9 +30,7 @@ fn usage(verbose: bool, include_unstable_options: bool, nightly_build: bool) {
     -C help             Print codegen options
     -W help             \
               Print 'lint' options and default settings{nightly}{verbose}\n",
-        options = options.usage(message),
-        at_path = at_path,
-        nightly = nightly_help,
+        options = options.usage(message), at_path = at_path, nightly = nightly_help,
         verbose = verbose_help
     );
 }

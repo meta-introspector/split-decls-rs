@@ -8,7 +8,12 @@ impl Parse<SourceFile> {
         }
         buf
     }
-    pub fn reparse(&self, delete: TextRange, insert: &str, edition: Edition) -> Parse<SourceFile> {
+    pub fn reparse(
+        &self,
+        delete: TextRange,
+        insert: &str,
+        edition: Edition,
+    ) -> Parse<SourceFile> {
         self.incremental_reparse(delete, insert, edition)
             .unwrap_or_else(|| self.full_reparse(delete, insert, edition))
     }
@@ -19,23 +24,24 @@ impl Parse<SourceFile> {
         edition: Edition,
     ) -> Option<Parse<SourceFile>> {
         parsing::incremental_reparse(
-            self.tree().syntax(),
-            delete,
-            insert,
-            self.errors.as_deref().unwrap_or_default().iter().cloned(),
-            edition,
-        )
-        .map(|(green_node, errors, _reparsed_range)| Parse {
-            green: Some(green_node),
-            errors: if errors.is_empty() {
-                None
-            } else {
-                Some(errors.into())
-            },
-            _ty: PhantomData,
-        })
+                self.tree().syntax(),
+                delete,
+                insert,
+                self.errors.as_deref().unwrap_or_default().iter().cloned(),
+                edition,
+            )
+            .map(|(green_node, errors, _reparsed_range)| Parse {
+                green: Some(green_node),
+                errors: if errors.is_empty() { None } else { Some(errors.into()) },
+                _ty: PhantomData,
+            })
     }
-    fn full_reparse(&self, delete: TextRange, insert: &str, edition: Edition) -> Parse<SourceFile> {
+    fn full_reparse(
+        &self,
+        delete: TextRange,
+        insert: &str,
+        edition: Edition,
+    ) -> Parse<SourceFile> {
         let mut text = self.tree().syntax().text().to_string();
         text.replace_range(Range::<usize>::from(delete), insert);
         SourceFile::parse(&text, edition)

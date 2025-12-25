@@ -38,9 +38,13 @@ impl FixedBitSet {
     /// let bs = fixedbitset::FixedBitSet::with_capacity_and_blocks(4, data);
     /// assert_eq!(format!("{:b}", bs), "0010");
     /// ```
-    pub fn with_capacity_and_blocks<I: IntoIterator<Item = Block>>(bits: usize, blocks: I) -> Self {
+    pub fn with_capacity_and_blocks<I: IntoIterator<Item = Block>>(
+        bits: usize,
+        blocks: I,
+    ) -> Self {
         let mut bitset = Self::with_capacity(bits);
-        for (subblock, value) in bitset.as_mut_slice().iter_mut().zip(blocks.into_iter()) {
+        for (subblock, value) in bitset.as_mut_slice().iter_mut().zip(blocks.into_iter())
+        {
             *subblock = value;
         }
         bitset
@@ -100,11 +104,18 @@ impl FixedBitSet {
     }
     #[inline]
     fn as_simd_slice(&self) -> &[SimdBlock] {
-        unsafe { core::slice::from_raw_parts(self.data.as_ptr().cast(), self.simd_block_len()) }
+        unsafe {
+            core::slice::from_raw_parts(self.data.as_ptr().cast(), self.simd_block_len())
+        }
     }
     #[inline]
     fn as_mut_simd_slice(&mut self) -> &mut [SimdBlock] {
-        unsafe { core::slice::from_raw_parts_mut(self.data.as_ptr().cast(), self.simd_block_len()) }
+        unsafe {
+            core::slice::from_raw_parts_mut(
+                self.data.as_ptr().cast(),
+                self.simd_block_len(),
+            )
+        }
     }
     #[inline]
     fn as_simd_slice_uninit(&self) -> &[MaybeUninit<SimdBlock>] {
@@ -112,7 +123,9 @@ impl FixedBitSet {
     }
     #[inline]
     fn as_mut_simd_slice_uninit(&mut self) -> &mut [MaybeUninit<SimdBlock>] {
-        unsafe { core::slice::from_raw_parts_mut(self.data.as_ptr(), self.simd_block_len()) }
+        unsafe {
+            core::slice::from_raw_parts_mut(self.data.as_ptr(), self.simd_block_len())
+        }
     }
     /// Grows the internal size of the bitset before inserting a bit
     ///
@@ -271,11 +284,7 @@ impl FixedBitSet {
     /// Note: Also available with index syntax: `bitset[bit]`.
     #[inline]
     pub fn contains(&self, bit: usize) -> bool {
-        if bit < self.length {
-            unsafe { self.contains_unchecked(bit) }
-        } else {
-            false
-        }
+        if bit < self.length { unsafe { self.contains_unchecked(bit) } } else { false }
     }
     /// Return **true** if the bit is enabled in the **FixedBitSet**,
     /// **false** otherwise.
@@ -303,9 +312,7 @@ impl FixedBitSet {
     #[inline]
     pub fn insert(&mut self, bit: usize) {
         assert!(
-            bit < self.length,
-            "insert at index {} exceeds fixedbitset size {}",
-            bit,
+            bit < self.length, "insert at index {} exceeds fixedbitset size {}", bit,
             self.length
         );
         unsafe {
@@ -329,9 +336,7 @@ impl FixedBitSet {
     #[inline]
     pub fn remove(&mut self, bit: usize) {
         assert!(
-            bit < self.length,
-            "remove at index {} exceeds fixedbitset size {}",
-            bit,
+            bit < self.length, "remove at index {} exceeds fixedbitset size {}", bit,
             self.length
         );
         unsafe {
@@ -355,10 +360,8 @@ impl FixedBitSet {
     #[inline]
     pub fn put(&mut self, bit: usize) -> bool {
         assert!(
-            bit < self.length,
-            "put at index {} exceeds fixedbitset size {}",
-            bit,
-            self.length
+            bit < self.length, "put at index {} exceeds fixedbitset size {}", bit, self
+            .length
         );
         unsafe { self.put_unchecked(bit) }
     }
@@ -382,9 +385,7 @@ impl FixedBitSet {
     #[inline]
     pub fn toggle(&mut self, bit: usize) {
         assert!(
-            bit < self.length,
-            "toggle at index {} exceeds fixedbitset size {}",
-            bit,
+            bit < self.length, "toggle at index {} exceeds fixedbitset size {}", bit,
             self.length
         );
         unsafe {
@@ -408,10 +409,8 @@ impl FixedBitSet {
     #[inline]
     pub fn set(&mut self, bit: usize, enabled: bool) {
         assert!(
-            bit < self.length,
-            "set at index {} exceeds fixedbitset size {}",
-            bit,
-            self.length
+            bit < self.length, "set at index {} exceeds fixedbitset size {}", bit, self
+            .length
         );
         unsafe {
             self.set_unchecked(bit, enabled);
@@ -439,10 +438,8 @@ impl FixedBitSet {
     #[inline]
     pub fn copy_bit(&mut self, from: usize, to: usize) {
         assert!(
-            to < self.length,
-            "copy to index {} exceeds fixedbitset size {}",
-            to,
-            self.length
+            to < self.length, "copy to index {} exceeds fixedbitset size {}", to, self
+            .length
         );
         let enabled = self.contains(from);
         unsafe { self.set_unchecked(to, enabled) };
@@ -469,7 +466,7 @@ impl FixedBitSet {
     pub fn count_ones<T: IndexRange>(&self, range: T) -> usize {
         Self::batch_count_ones(
             Masks::new(range, self.length)
-                .map(|(block, mask)| unsafe { *self.get_unchecked(block) & mask }),
+                .map(|(block, mask)| { unsafe { *self.get_unchecked(block) & mask } }),
         )
     }
     /// Count the number of unset bits in the given bit range.
@@ -482,7 +479,7 @@ impl FixedBitSet {
     pub fn count_zeroes<T: IndexRange>(&self, range: T) -> usize {
         Self::batch_count_ones(
             Masks::new(range, self.length)
-                .map(|(block, mask)| unsafe { !*self.get_unchecked(block) & mask }),
+                .map(|(block, mask)| { unsafe { !*self.get_unchecked(block) & mask } }),
         )
     }
     /// Sets every bit in the given range to the given state (`enabled`)
@@ -593,13 +590,15 @@ impl FixedBitSet {
                     remaining_blocks: rem.iter(),
                 }
             }
-            None => Ones {
-                bitset_front: 0,
-                bitset_back: 0,
-                block_idx_front: 0,
-                block_idx_back: 0,
-                remaining_blocks: [].iter(),
-            },
+            None => {
+                Ones {
+                    bitset_front: 0,
+                    bitset_back: 0,
+                    block_idx_front: 0,
+                    block_idx_back: 0,
+                    remaining_blocks: [].iter(),
+                }
+            }
         }
     }
     /// Iterates over all enabled bits.
@@ -634,18 +633,22 @@ impl FixedBitSet {
     #[inline]
     pub fn zeroes(&self) -> Zeroes<'_> {
         match self.as_slice().split_first() {
-            Some((&block, rem)) => Zeroes {
-                bitset: !block,
-                block_idx: 0,
-                len: self.len(),
-                remaining_blocks: rem.iter(),
-            },
-            None => Zeroes {
-                bitset: !0,
-                block_idx: 0,
-                len: self.len(),
-                remaining_blocks: [].iter(),
-            },
+            Some((&block, rem)) => {
+                Zeroes {
+                    bitset: !block,
+                    block_idx: 0,
+                    len: self.len(),
+                    remaining_blocks: rem.iter(),
+                }
+            }
+            None => {
+                Zeroes {
+                    bitset: !0,
+                    block_idx: 0,
+                    len: self.len(),
+                    remaining_blocks: [].iter(),
+                }
+            }
         }
     }
     /// Returns a lazy iterator over the intersection of two `FixedBitSet`s
@@ -671,7 +674,10 @@ impl FixedBitSet {
     }
     /// Returns a lazy iterator over the symmetric difference of two `FixedBitSet`s.
     /// The symmetric difference of `a` and `b` is the elements of one, but not both, sets.
-    pub fn symmetric_difference<'a>(&'a self, other: &'a FixedBitSet) -> SymmetricDifference<'a> {
+    pub fn symmetric_difference<'a>(
+        &'a self,
+        other: &'a FixedBitSet,
+    ) -> SymmetricDifference<'a> {
         SymmetricDifference {
             iter: self.difference(other).chain(other.difference(self)),
         }
@@ -694,9 +700,11 @@ impl FixedBitSet {
     pub fn intersect_with(&mut self, other: &FixedBitSet) {
         let me = self.as_mut_simd_slice();
         let other = other.as_simd_slice();
-        me.iter_mut().zip(other.iter()).for_each(|(x, y)| {
-            *x &= *y;
-        });
+        me.iter_mut()
+            .zip(other.iter())
+            .for_each(|(x, y)| {
+                *x &= *y;
+            });
         let mn = core::cmp::min(me.len(), other.len());
         for wd in &mut me[mn..] {
             *wd = SimdBlock::NONE;
@@ -736,10 +744,16 @@ impl FixedBitSet {
     pub fn union_count(&self, other: &FixedBitSet) -> usize {
         let me = self.as_slice();
         let other = other.as_slice();
-        let count = Self::batch_count_ones(me.iter().zip(other.iter()).map(|(x, y)| *x | *y));
+        let count = Self::batch_count_ones(
+            me.iter().zip(other.iter()).map(|(x, y)| *x | *y),
+        );
         match other.len().cmp(&me.len()) {
-            Ordering::Greater => count + Self::batch_count_ones(other[me.len()..].iter().copied()),
-            Ordering::Less => count + Self::batch_count_ones(me[other.len()..].iter().copied()),
+            Ordering::Greater => {
+                count + Self::batch_count_ones(other[me.len()..].iter().copied())
+            }
+            Ordering::Less => {
+                count + Self::batch_count_ones(me[other.len()..].iter().copied())
+            }
             Ordering::Equal => count,
         }
     }
@@ -751,10 +765,7 @@ impl FixedBitSet {
     #[inline]
     pub fn intersection_count(&self, other: &FixedBitSet) -> usize {
         Self::batch_count_ones(
-            self.as_slice()
-                .iter()
-                .zip(other.as_slice())
-                .map(|(x, y)| *x & *y),
+            self.as_slice().iter().zip(other.as_slice()).map(|(x, y)| *x & *y),
         )
     }
     /// Computes how many bits would be set in the difference between two bitsets.
@@ -765,11 +776,11 @@ impl FixedBitSet {
     #[inline]
     pub fn difference_count(&self, other: &FixedBitSet) -> usize {
         Self::batch_count_ones(
-            self.as_slice()
-                .iter()
-                .zip(other.as_slice().iter())
-                .map(|(x, y)| *x & !*y),
-        ) + Self::batch_count_ones(self.as_slice().iter().skip(other.as_slice().len()).copied())
+            self.as_slice().iter().zip(other.as_slice().iter()).map(|(x, y)| *x & !*y),
+        )
+            + Self::batch_count_ones(
+                self.as_slice().iter().skip(other.as_slice().len()).copied(),
+            )
     }
     /// Computes how many bits would be set in the symmetric difference between two bitsets.
     ///
@@ -780,10 +791,16 @@ impl FixedBitSet {
     pub fn symmetric_difference_count(&self, other: &FixedBitSet) -> usize {
         let me = self.as_slice();
         let other = other.as_slice();
-        let count = Self::batch_count_ones(me.iter().zip(other.iter()).map(|(x, y)| *x ^ *y));
+        let count = Self::batch_count_ones(
+            me.iter().zip(other.iter()).map(|(x, y)| *x ^ *y),
+        );
         match other.len().cmp(&me.len()) {
-            Ordering::Greater => count + Self::batch_count_ones(other[me.len()..].iter().copied()),
-            Ordering::Less => count + Self::batch_count_ones(me[other.len()..].iter().copied()),
+            Ordering::Greater => {
+                count + Self::batch_count_ones(other[me.len()..].iter().copied())
+            }
+            Ordering::Less => {
+                count + Self::batch_count_ones(me[other.len()..].iter().copied())
+            }
             Ordering::Equal => count,
         }
     }
@@ -800,9 +817,7 @@ impl FixedBitSet {
     pub fn is_subset(&self, other: &FixedBitSet) -> bool {
         let me = self.as_simd_slice();
         let other = other.as_simd_slice();
-        me.iter()
-            .zip(other.iter())
-            .all(|(x, y)| x.andnot(*y).is_empty())
+        me.iter().zip(other.iter()).all(|(x, y)| x.andnot(*y).is_empty())
             && me.iter().skip(other.len()).all(|x| x.is_empty())
     }
     /// Returns `true` if the set is a superset of another, i.e. `self` contains

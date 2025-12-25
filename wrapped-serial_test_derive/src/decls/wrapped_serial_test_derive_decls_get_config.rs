@@ -21,8 +21,7 @@ fn get_config(attr: proc_macro2::TokenStream) -> Config {
             }
             x => {
                 panic!(
-                    "Expected literal as key args (or a 'path => '\"foo\"'), not {}",
-                    x
+                    "Expected literal as key args (or a 'path => '\"foo\"'), not {}", x
                 );
             }
         }
@@ -97,6 +96,7 @@ fn get_config(attr: proc_macro2::TokenStream) -> Config {
     Config {
         names: raw_args,
         path: QuoteOption(path),
-        crate_ident: crate_ident.unwrap_or(vec![TokenTree::Ident(format_ident!("serial_test"))]),
+        crate_ident: crate_ident
+            .unwrap_or(vec![TokenTree::Ident(format_ident!("serial_test"))]),
     }
 }

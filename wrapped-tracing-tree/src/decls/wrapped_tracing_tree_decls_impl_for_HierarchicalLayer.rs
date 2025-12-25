@@ -159,7 +159,8 @@ where
         bufs: &mut Buffers,
         ctx: &'a Context<S>,
         pre_open: bool,
-    ) where
+    )
+    where
         S: Subscriber + for<'new_span> LookupSpan<'new_span>,
     {
         let old_span_id = bufs.current_span.replace((new_span.id()).clone());
@@ -171,7 +172,10 @@ where
             let new_path = scope_path(new_span);
             let new_path = DifferenceIter::new(old_path, new_path, |v| v.id());
             for (i, span) in new_path.enumerate() {
-                let was_written = if let Some(data) = span.extensions_mut().get_mut::<Data>() {
+                let was_written = if let Some(data) = span
+                    .extensions_mut()
+                    .get_mut::<Data>()
+                {
                     mem::replace(&mut data.written, true)
                 } else {
                     false
@@ -218,25 +222,22 @@ where
             if self.config.targets {
                 let target = span.metadata().target();
                 write!(
-                    &mut current_buf,
-                    "{}::",
-                    self.styled(Style::new().dimmed(), target,),
+                    & mut current_buf, "{}::", self.styled(Style::new().dimmed(),
+                    target,),
                 )
-                .expect("Unable to write to buffer");
+                    .expect("Unable to write to buffer");
             }
             write!(
-                current_buf,
-                "{name}",
-                name = self.styled(Style::new().fg(Color::Green).bold(), span.metadata().name())
+                current_buf, "{name}", name = self.styled(Style::new().fg(Color::Green)
+                .bold(), span.metadata().name())
             )
-            .unwrap();
+                .unwrap();
             if self.config.bracketed_fields {
                 write!(
-                    current_buf,
-                    "{}",
-                    self.styled(Style::new().fg(Color::Green).bold(), "{")
+                    current_buf, "{}", self.styled(Style::new().fg(Color::Green).bold(),
+                    "{")
                 )
-                .unwrap();
+                    .unwrap();
             } else {
                 write!(current_buf, " ").unwrap();
             }
@@ -244,11 +245,10 @@ where
                 .unwrap();
             if self.config.bracketed_fields {
                 write!(
-                    current_buf,
-                    "{}",
-                    self.styled(Style::new().fg(Color::Green).bold(), "}")
+                    current_buf, "{}", self.styled(Style::new().fg(Color::Green).bold(),
+                    "}")
                 )
-                .unwrap();
+                    .unwrap();
             }
         }
         bufs.indent_current(indent, &self.config, style);
@@ -260,22 +260,19 @@ where
         S: Subscriber + for<'span> LookupSpan<'span>,
     {
         let ext = span.extensions();
-        let data = ext
-            .get::<Data>()
-            .expect("Data cannot be found in extensions");
-        self.timer
-            .style_timestamp(self.config.ansi, data.start.elapsed(), buf)
-            .unwrap()
+        let data = ext.get::<Data>().expect("Data cannot be found in extensions");
+        self.timer.style_timestamp(self.config.ansi, data.start.elapsed(), buf).unwrap()
     }
     fn is_recursive() -> Option<RecursiveGuard> {
         thread_local! {
             pub static IS_EMPTY : AtomicBool = const { AtomicBool::new(true) };
         }
-        IS_EMPTY.with(|is_empty| {
-            is_empty
-                .compare_exchange(true, false, Ordering::Relaxed, Ordering::Relaxed)
-                .ok()
-                .map(|_| RecursiveGuard(&IS_EMPTY))
-        })
+        IS_EMPTY
+            .with(|is_empty| {
+                is_empty
+                    .compare_exchange(true, false, Ordering::Relaxed, Ordering::Relaxed)
+                    .ok()
+                    .map(|_| RecursiveGuard(&IS_EMPTY))
+            })
     }
 }

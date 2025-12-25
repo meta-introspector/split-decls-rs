@@ -35,7 +35,10 @@ impl<const MAX_SIZE: usize> ObjectIdentifier<MAX_SIZE> {
         }
     }
     /// Does this OID start with the other OID?
-    pub const fn starts_with<const SIZE: usize>(&self, other: ObjectIdentifier<SIZE>) -> bool {
+    pub const fn starts_with<const SIZE: usize>(
+        &self,
+        other: ObjectIdentifier<SIZE>,
+    ) -> bool {
         let len = other.as_bytes().len();
         if self.as_bytes().len() < len {
             return false;

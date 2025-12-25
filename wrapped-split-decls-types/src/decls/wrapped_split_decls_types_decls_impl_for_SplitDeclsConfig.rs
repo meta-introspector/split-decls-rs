@@ -4,8 +4,8 @@ impl SplitDeclsConfig {
     pub fn load_from_file(path: &std::path::Path) -> anyhow::Result<Self> {
         if !path.exists() {
             println!(
-                "No split-decls-rs.toml found at {}, using default configuration.",
-                path.display()
+                "No split-decls-rs.toml found at {}, using default configuration.", path
+                .display()
             );
             return Ok(Self::default());
         }

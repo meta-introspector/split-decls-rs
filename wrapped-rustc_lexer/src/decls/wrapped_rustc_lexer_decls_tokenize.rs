@@ -13,10 +13,6 @@ pub fn tokenize(
     let mut cursor = Cursor::new(input, frontmatter_allowed);
     std::iter::from_fn(move || {
         let token = cursor.advance_token();
-        if token.kind != TokenKind::Eof {
-            Some(token)
-        } else {
-            None
-        }
+        if token.kind != TokenKind::Eof { Some(token) } else { None }
     })
 }

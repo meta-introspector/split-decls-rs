@@ -30,16 +30,18 @@ impl<'input> Iterator for Parser<'input> {
                         self.input_vec_index += 1;
                         Some(Piece::Lit(self.string(i)))
                     } else {
-                        self.errors.push(ParseError {
-                            description: "unmatched `}` found".into(),
-                            note: Some(
-                                "if you intended to print `}`, you can escape it using `}}`".into(),
-                            ),
-                            label: "unmatched `}`".into(),
-                            span: start..end,
-                            secondary_label: None,
-                            suggestion: Suggestion::None,
-                        });
+                        self.errors
+                            .push(ParseError {
+                                description: "unmatched `}` found".into(),
+                                note: Some(
+                                    "if you intended to print `}`, you can escape it using `}}`"
+                                        .into(),
+                                ),
+                                label: "unmatched `}`".into(),
+                                span: start..end,
+                                secondary_label: None,
+                                suggestion: Suggestion::None,
+                            });
                         None
                     }
                 }

@@ -24,5 +24,8 @@ fn derive_unaligned_struct(
             ),
         );
     };
-    Ok(ImplBlockBuilder::new(ast, strct, Trait::Unaligned, field_bounds, zerocopy_crate).build())
+    Ok(
+        ImplBlockBuilder::new(ast, strct, Trait::Unaligned, field_bounds, zerocopy_crate)
+            .build(),
+    )
 }

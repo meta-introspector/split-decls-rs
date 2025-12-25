@@ -713,7 +713,11 @@ pub trait Itertools: Iterator {
     /// ```
     #[inline]
     #[doc(alias = "comm")]
-    fn merge_join_by<J, F, T>(self, other: J, cmp_fn: F) -> MergeJoinBy<Self, J::IntoIter, F>
+    fn merge_join_by<J, F, T>(
+        self,
+        other: J,
+        cmp_fn: F,
+    ) -> MergeJoinBy<Self, J::IntoIter, F>
     where
         J: IntoIterator,
         F: FnMut(&Self::Item, &J::Item) -> T,
@@ -767,11 +771,17 @@ pub trait Itertools: Iterator {
     /// assert_eq!(it.last(), Some(-7.));
     /// ```
     #[cfg(feature = "use_alloc")]
-    fn kmerge_by<F>(self, first: F) -> KMergeBy<<Self::Item as IntoIterator>::IntoIter, F>
+    fn kmerge_by<F>(
+        self,
+        first: F,
+    ) -> KMergeBy<<Self::Item as IntoIterator>::IntoIter, F>
     where
         Self: Sized,
         Self::Item: IntoIterator,
-        F: FnMut(&<Self::Item as IntoIterator>::Item, &<Self::Item as IntoIterator>::Item) -> bool,
+        F: FnMut(
+            &<Self::Item as IntoIterator>::Item,
+            &<Self::Item as IntoIterator>::Item,
+        ) -> bool,
     {
         kmerge_by(self, first)
     }
@@ -832,7 +842,9 @@ pub trait Itertools: Iterator {
     /// assert_eq!(nullary_cartesian_product.next(), None);
     /// ```
     #[cfg(feature = "use_alloc")]
-    fn multi_cartesian_product(self) -> MultiProduct<<Self::Item as IntoIterator>::IntoIter>
+    fn multi_cartesian_product(
+        self,
+    ) -> MultiProduct<<Self::Item as IntoIterator>::IntoIter>
     where
         Self: Sized,
         Self::Item: IntoIterator,
@@ -1648,10 +1660,12 @@ pub trait Itertools: Iterator {
         T: traits::HomogeneousTuple,
     {
         match self.next_tuple() {
-            elt @ Some(_) => match self.next() {
-                Some(_) => None,
-                None => elt,
-            },
+            elt @ Some(_) => {
+                match self.next() {
+                    Some(_) => None,
+                    None => elt,
+                }
+            }
             _ => None,
         }
     }
@@ -1699,14 +1713,14 @@ pub trait Itertools: Iterator {
     {
         let mut prev = None;
         self.find_map(|x| {
-            if predicate(&x) {
-                Some(x)
-            } else {
-                prev = Some(x);
-                None
-            }
-        })
-        .or(prev)
+                if predicate(&x) {
+                    Some(x)
+                } else {
+                    prev = Some(x);
+                    None
+                }
+            })
+            .or(prev)
     }
     /// Find the value of the first element satisfying a predicate or return the first element, if any.
     ///
@@ -1735,11 +1749,13 @@ pub trait Itertools: Iterator {
         P: FnMut(&Self::Item) -> bool,
     {
         let first = self.next()?;
-        Some(if predicate(&first) {
-            first
-        } else {
-            self.find(|x| predicate(x)).unwrap_or(first)
-        })
+        Some(
+            if predicate(&first) {
+                first
+            } else {
+                self.find(|x| predicate(x)).unwrap_or(first)
+            },
+        )
     }
     /// Returns `true` if the given item is present in this iterator.
     ///
@@ -1825,11 +1841,7 @@ pub trait Itertools: Iterator {
     {
         let first = self.next().ok_or(None)?;
         let other = self.find(|x| x != &first);
-        if let Some(other) = other {
-            Err(Some((first, other)))
-        } else {
-            Ok(first)
-        }
+        if let Some(other) = other { Err(Some((first, other))) } else { Ok(first) }
     }
     /// Check whether all elements are unique (non equal).
     ///
@@ -1919,8 +1931,8 @@ pub trait Itertools: Iterator {
     fn concat(self) -> Self::Item
     where
         Self: Sized,
-        Self::Item:
-            Extend<<<Self as Iterator>::Item as IntoIterator>::Item> + IntoIterator + Default,
+        Self::Item: Extend<<<Self as Iterator>::Item as IntoIterator>::Item>
+            + IntoIterator + Default,
     {
         concat(self)
     }
@@ -1985,10 +1997,7 @@ pub trait Itertools: Iterator {
         Self: Iterator<Item = &'a mut A>,
         J: IntoIterator<Item = A>,
     {
-        from.into_iter()
-            .zip(self)
-            .map(|(new, old)| *old = new)
-            .count()
+        from.into_iter().zip(self).map(|(new, old)| *old = new).count()
     }
     /// Combine all iterator elements into one `String`, separated by `sep`.
     ///
@@ -2010,10 +2019,10 @@ pub trait Itertools: Iterator {
             Some(first_elt) => {
                 let (lower, _) = self.size_hint();
                 let mut result = String::with_capacity(sep.len() * lower);
-                write!(&mut result, "{first_elt}").unwrap();
+                write!(& mut result, "{first_elt}").unwrap();
                 self.for_each(|elt| {
                     result.push_str(sep);
-                    write!(&mut result, "{elt}").unwrap();
+                    write!(& mut result, "{elt}").unwrap();
                 });
                 result
             }
@@ -2075,7 +2084,10 @@ pub trait Itertools: Iterator {
     fn format_with<F>(self, sep: &str, format: F) -> FormatWith<'_, Self, F>
     where
         Self: Sized,
-        F: FnMut(Self::Item, &mut dyn FnMut(&dyn fmt::Display) -> fmt::Result) -> fmt::Result,
+        F: FnMut(
+            Self::Item,
+            &mut dyn FnMut(&dyn fmt::Display) -> fmt::Result,
+        ) -> fmt::Result,
     {
         format::new_format(self, sep, format)
     }
@@ -2383,14 +2395,15 @@ pub trait Itertools: Iterator {
         F: FnMut(B, Self::Item) -> FoldWhile<B>,
     {
         use Result::{Err as Break, Ok as Continue};
-        let result = self.try_fold(
-            init,
-            #[inline(always)]
-            |acc, v| match f(acc, v) {
-                FoldWhile::Continue(acc) => Continue(acc),
-                FoldWhile::Done(acc) => Break(acc),
-            },
-        );
+        let result = self
+            .try_fold(
+                init,
+                #[inline(always)]
+                |acc, v| match f(acc, v) {
+                    FoldWhile::Continue(acc) => Continue(acc),
+                    FoldWhile::Done(acc) => Break(acc),
+                },
+            );
         match result {
             Continue(acc) => FoldWhile::Continue(acc),
             Break(acc) => FoldWhile::Done(acc),
@@ -3109,21 +3122,21 @@ pub trait Itertools: Iterator {
                 let (low, _) = self.size_hint();
                 let mut iter = self.fuse().skip(low.saturating_sub(n));
                 let mut data: Vec<_> = iter.by_ref().take(n).collect();
-                let idx = iter.fold(0, |i, val| {
-                    debug_assert_eq!(data.len(), n);
-                    data[i] = val;
-                    if i + 1 == n {
-                        0
-                    } else {
-                        i + 1
-                    }
-                });
+                let idx = iter
+                    .fold(
+                        0,
+                        |i, val| {
+                            debug_assert_eq!(data.len(), n);
+                            data[i] = val;
+                            if i + 1 == n { 0 } else { i + 1 }
+                        },
+                    );
                 let mut data = VecDeque::from(data);
                 data.rotate_left(idx);
                 data
             }
         }
-        .into_iter()
+            .into_iter()
     }
     /// Collect all iterator elements into one of two
     /// partitions. Unlike [`Iterator::partition`], each partition may
@@ -3628,9 +3641,7 @@ pub trait Itertools: Iterator {
         Self: Sized,
         Self::Item: Ord,
     {
-        self.enumerate()
-            .max_by(|x, y| Ord::cmp(&x.1, &y.1))
-            .map(|x| x.0)
+        self.enumerate().max_by(|x, y| Ord::cmp(&x.1, &y.1)).map(|x| x.0)
     }
     /// Return the position of the maximum element in the iterator, as
     /// determined by the specified function.
@@ -3658,9 +3669,7 @@ pub trait Itertools: Iterator {
         K: Ord,
         F: FnMut(&Self::Item) -> K,
     {
-        self.enumerate()
-            .max_by(|x, y| Ord::cmp(&key(&x.1), &key(&y.1)))
-            .map(|x| x.0)
+        self.enumerate().max_by(|x, y| Ord::cmp(&key(&x.1), &key(&y.1))).map(|x| x.0)
     }
     /// Return the position of the maximum element in the iterator, as
     /// determined by the specified comparison function.
@@ -3687,9 +3696,7 @@ pub trait Itertools: Iterator {
         Self: Sized,
         F: FnMut(&Self::Item, &Self::Item) -> Ordering,
     {
-        self.enumerate()
-            .max_by(|x, y| compare(&x.1, &y.1))
-            .map(|x| x.0)
+        self.enumerate().max_by(|x, y| compare(&x.1, &y.1)).map(|x| x.0)
     }
     /// Return the position of the minimum element in the iterator.
     ///
@@ -3715,9 +3722,7 @@ pub trait Itertools: Iterator {
         Self: Sized,
         Self::Item: Ord,
     {
-        self.enumerate()
-            .min_by(|x, y| Ord::cmp(&x.1, &y.1))
-            .map(|x| x.0)
+        self.enumerate().min_by(|x, y| Ord::cmp(&x.1, &y.1)).map(|x| x.0)
     }
     /// Return the position of the minimum element in the iterator, as
     /// determined by the specified function.
@@ -3745,9 +3750,7 @@ pub trait Itertools: Iterator {
         K: Ord,
         F: FnMut(&Self::Item) -> K,
     {
-        self.enumerate()
-            .min_by(|x, y| Ord::cmp(&key(&x.1), &key(&y.1)))
-            .map(|x| x.0)
+        self.enumerate().min_by(|x, y| Ord::cmp(&key(&x.1), &key(&y.1))).map(|x| x.0)
     }
     /// Return the position of the minimum element in the iterator, as
     /// determined by the specified comparison function.
@@ -3774,9 +3777,7 @@ pub trait Itertools: Iterator {
         Self: Sized,
         F: FnMut(&Self::Item, &Self::Item) -> Ordering,
     {
-        self.enumerate()
-            .min_by(|x, y| compare(&x.1, &y.1))
-            .map(|x| x.0)
+        self.enumerate().min_by(|x, y| compare(&x.1, &y.1)).map(|x| x.0)
     }
     /// Return the positions of the minimum and maximum elements in
     /// the iterator.
@@ -3944,13 +3945,19 @@ pub trait Itertools: Iterator {
         Self: Sized,
     {
         match self.next() {
-            Some(first) => match self.next() {
-                Some(second) => Err(ExactlyOneError::new(
-                    Some(Either::Left([first, second])),
-                    self,
-                )),
-                None => Ok(first),
-            },
+            Some(first) => {
+                match self.next() {
+                    Some(second) => {
+                        Err(
+                            ExactlyOneError::new(
+                                Some(Either::Left([first, second])),
+                                self,
+                            ),
+                        )
+                    }
+                    None => Ok(first),
+                }
+            }
             None => Err(ExactlyOneError::new(None, self)),
         }
     }
@@ -3976,13 +3983,19 @@ pub trait Itertools: Iterator {
         Self: Sized,
     {
         match self.next() {
-            Some(first) => match self.next() {
-                Some(second) => Err(ExactlyOneError::new(
-                    Some(Either::Left([first, second])),
-                    self,
-                )),
-                None => Ok(Some(first)),
-            },
+            Some(first) => {
+                match self.next() {
+                    Some(second) => {
+                        Err(
+                            ExactlyOneError::new(
+                                Some(Either::Left([first, second])),
+                                self,
+                            ),
+                        )
+                    }
+                    None => Ok(Some(first)),
+                }
+            }
             None => Ok(None),
         }
     }

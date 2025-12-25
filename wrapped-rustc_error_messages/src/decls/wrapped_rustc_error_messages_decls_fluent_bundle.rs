@@ -17,12 +17,12 @@ pub fn fluent_bundle(
     }
     let fallback_locale = langid!("en-US");
     let requested_fallback_locale = requested_locale.as_ref() == Some(&fallback_locale);
-    trace!(?requested_fallback_locale);
+    trace!(? requested_fallback_locale);
     if requested_fallback_locale && additional_ftl_path.is_none() {
         return Ok(None);
     }
     let locale = requested_locale.clone().unwrap_or(fallback_locale);
-    trace!(?locale);
+    trace!(? locale);
     let mut bundle = new_bundle(vec![locale]);
     register_functions(&mut bundle);
     bundle.set_use_isolating(with_directionality_markers);
@@ -33,7 +33,7 @@ pub fn fluent_bundle(
             sysroot.push("share");
             sysroot.push("locale");
             sysroot.push(requested_locale.to_string());
-            trace!(?sysroot);
+            trace!(? sysroot);
             if !sysroot.exists() {
                 trace!("skipping");
                 continue;
@@ -47,19 +47,17 @@ pub fn fluent_bundle(
             {
                 let entry = entry.map_err(TranslationBundleError::ReadLocalesDirEntry)?;
                 let path = entry.path();
-                trace!(?path);
+                trace!(? path);
                 if path.extension().and_then(|s| s.to_str()) != Some("ftl") {
                     trace!("skipping");
                     continue;
                 }
-                let resource_str =
-                    fs::read_to_string(path).map_err(TranslationBundleError::ReadFtl)?;
-                let resource =
-                    FluentResource::try_new(resource_str).map_err(TranslationBundleError::from)?;
-                trace!(?resource);
-                bundle
-                    .add_resource(resource)
+                let resource_str = fs::read_to_string(path)
+                    .map_err(TranslationBundleError::ReadFtl)?;
+                let resource = FluentResource::try_new(resource_str)
                     .map_err(TranslationBundleError::from)?;
+                trace!(? resource);
+                bundle.add_resource(resource).map_err(TranslationBundleError::from)?;
                 found_resources = true;
             }
         }
@@ -68,11 +66,11 @@ pub fn fluent_bundle(
         }
     }
     if let Some(additional_ftl_path) = additional_ftl_path {
-        let resource_str =
-            fs::read_to_string(additional_ftl_path).map_err(TranslationBundleError::ReadFtl)?;
-        let resource =
-            FluentResource::try_new(resource_str).map_err(TranslationBundleError::from)?;
-        trace!(?resource);
+        let resource_str = fs::read_to_string(additional_ftl_path)
+            .map_err(TranslationBundleError::ReadFtl)?;
+        let resource = FluentResource::try_new(resource_str)
+            .map_err(TranslationBundleError::from)?;
+        trace!(? resource);
         bundle.add_resource_overriding(resource);
     }
     let bundle = Arc::new(bundle);

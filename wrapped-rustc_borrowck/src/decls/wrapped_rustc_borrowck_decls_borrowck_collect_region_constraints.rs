@@ -18,26 +18,26 @@ fn borrowck_collect_region_constraints<'tcx>(
     }
     let mut body_owned = input_body.clone();
     let mut promoted = input_promoted.to_owned();
-    let universal_regions = nll::replace_regions_in_mir(&infcx, &mut body_owned, &mut promoted);
+    let universal_regions = nll::replace_regions_in_mir(
+        &infcx,
+        &mut body_owned,
+        &mut promoted,
+    );
     let body = &body_owned;
     let location_table = PoloniusLocationTable::new(body);
     let move_data = MoveData::gather_moves(body, tcx, |_| true);
     let locals_are_invalidated_at_exit = tcx.hir_body_owner_kind(def).is_fn_or_closure();
-    let borrow_set = BorrowSet::build(tcx, body, locals_are_invalidated_at_exit, &move_data);
+    let borrow_set = BorrowSet::build(
+        tcx,
+        body,
+        locals_are_invalidated_at_exit,
+        &move_data,
+    );
     let location_map = Rc::new(DenseLocationMap::new(body));
-    let polonius_input = root_cx
-        .consumer
-        .as_ref()
-        .map_or(false, |c| c.polonius_input())
-        || infcx
-            .tcx
-            .sess
-            .opts
-            .unstable_opts
-            .polonius
-            .is_legacy_enabled();
-    let mut polonius_facts =
-        (polonius_input || PoloniusFacts::enabled(infcx.tcx)).then_some(PoloniusFacts::default());
+    let polonius_input = root_cx.consumer.as_ref().map_or(false, |c| c.polonius_input())
+        || infcx.tcx.sess.opts.unstable_opts.polonius.is_legacy_enabled();
+    let mut polonius_facts = (polonius_input || PoloniusFacts::enabled(infcx.tcx))
+        .then_some(PoloniusFacts::default());
     let MirTypeckResults {
         constraints,
         universal_region_relations,

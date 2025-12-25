@@ -7,5 +7,5 @@ pub fn value(input: TokenStream) -> TokenStream {
     quote! {
         println!("💰 Bounty: {}", # amount);
     }
-    .into()
+        .into()
 }

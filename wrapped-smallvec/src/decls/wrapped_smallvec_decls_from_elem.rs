@@ -10,11 +10,11 @@ pub fn from_elem<T: Clone, const N: usize>(elem: T, n: usize) -> SmallVec<T, N> 
     } else {
         #[cfg(feature = "specialization")]
         {
-            unsafe { <SmallVec<T, N> as spec_traits::SpecFromElem<T>>::spec_from_elem(elem, n) }
+            unsafe {
+                <SmallVec<T, N> as spec_traits::SpecFromElem<T>>::spec_from_elem(elem, n)
+            }
         }
         #[cfg(not(feature = "specialization"))]
-        {
-            unsafe { SmallVec::<T, N>::from_elem_fallback(elem, n) }
-        }
+        { unsafe { SmallVec::<T, N>::from_elem_fallback(elem, n) } }
     }
 }

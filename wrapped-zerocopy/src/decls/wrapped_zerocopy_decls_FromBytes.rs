@@ -121,7 +121,9 @@ use std::collections::HashMap;
 )]
 #[cfg_attr(
     zerocopy_diagnostic_on_unimplemented_1_78_0,
-    diagnostic::on_unimplemented(note = "Consider adding `#[derive(FromBytes)]` to `{Self}`")
+    diagnostic::on_unimplemented(
+        note = "Consider adding `#[derive(FromBytes)]` to `{Self}`"
+    )
 )]
 pub unsafe trait FromBytes: FromZeros {
     #[doc(hidden)]
@@ -203,7 +205,9 @@ pub unsafe trait FromBytes: FromZeros {
         Self: KnownLayout + Immutable,
     {
         static_assert_dst_is_not_zst!(Self);
-        match Ptr::from_ref(source).try_cast_into_no_leftover::<_, BecauseImmutable>(None) {
+        match Ptr::from_ref(source)
+            .try_cast_into_no_leftover::<_, BecauseImmutable>(None)
+        {
             Ok(ptr) => Ok(ptr.recall_validity().as_ref()),
             Err(err) => Err(err.map_src(|src| src.as_ref())),
         }
@@ -436,7 +440,9 @@ pub unsafe trait FromBytes: FromZeros {
         Self: IntoBytes + KnownLayout,
     {
         static_assert_dst_is_not_zst!(Self);
-        match Ptr::from_mut(source).try_cast_into_no_leftover::<_, BecauseExclusive>(None) {
+        match Ptr::from_mut(source)
+            .try_cast_into_no_leftover::<_, BecauseExclusive>(None)
+        {
             Ok(ptr) => Ok(ptr.recall_validity::<_, (_, (_, _))>().as_mut()),
             Err(err) => Err(err.map_src(|src| src.as_mut())),
         }
@@ -671,7 +677,8 @@ pub unsafe trait FromBytes: FromZeros {
         Self: KnownLayout<PointerMetadata = usize> + Immutable,
     {
         let source = Ptr::from_ref(source);
-        let maybe_slf = source.try_cast_into_no_leftover::<_, BecauseImmutable>(Some(count));
+        let maybe_slf = source
+            .try_cast_into_no_leftover::<_, BecauseImmutable>(Some(count));
         match maybe_slf {
             Ok(slf) => Ok(slf.recall_validity().as_ref()),
             Err(err) => Err(err.map_src(|s| s.as_ref())),
@@ -899,11 +906,19 @@ pub unsafe trait FromBytes: FromZeros {
         Self: IntoBytes + KnownLayout<PointerMetadata = usize> + Immutable,
     {
         let source = Ptr::from_mut(source);
-        let maybe_slf = source.try_cast_into_no_leftover::<_, BecauseImmutable>(Some(count));
+        let maybe_slf = source
+            .try_cast_into_no_leftover::<_, BecauseImmutable>(Some(count));
         match maybe_slf {
-            Ok(slf) => Ok(slf
-                .recall_validity::<_, (_, (_, (BecauseExclusive, BecauseExclusive)))>()
-                .as_mut()),
+            Ok(slf) => {
+                Ok(
+                    slf
+                        .recall_validity::<
+                            _,
+                            (_, (_, (BecauseExclusive, BecauseExclusive))),
+                        >()
+                        .as_mut(),
+                )
+            }
             Err(err) => Err(err.map_src(|s| s.as_mut())),
         }
     }
@@ -1103,8 +1118,10 @@ pub unsafe trait FromBytes: FromZeros {
         match Ref::<_, Unalign<Self>>::sized_from(source) {
             Ok(r) => Ok(Ref::read(&r).into_inner()),
             Err(CastError::Size(e)) => Err(e.with_dst()),
-            Err(CastError::Alignment(_)) => unsafe { core::hint::unreachable_unchecked() },
-            Err(CastError::Validity(i)) => match i {},
+            Err(CastError::Alignment(_)) => {
+                unsafe { core::hint::unreachable_unchecked() }
+            }
+            Err(CastError::Validity(i)) => match i {}
         }
     }
     /// Reads a copy of `Self` from the prefix of the given `source`.
@@ -1148,8 +1165,10 @@ pub unsafe trait FromBytes: FromZeros {
         match Ref::<_, Unalign<Self>>::sized_from_prefix(source) {
             Ok((r, suffix)) => Ok((Ref::read(&r).into_inner(), suffix)),
             Err(CastError::Size(e)) => Err(e.with_dst()),
-            Err(CastError::Alignment(_)) => unsafe { core::hint::unreachable_unchecked() },
-            Err(CastError::Validity(i)) => match i {},
+            Err(CastError::Alignment(_)) => {
+                unsafe { core::hint::unreachable_unchecked() }
+            }
+            Err(CastError::Validity(i)) => match i {}
         }
     }
     /// Reads a copy of `Self` from the suffix of the given `source`.
@@ -1187,8 +1206,10 @@ pub unsafe trait FromBytes: FromZeros {
         match Ref::<_, Unalign<Self>>::sized_from_suffix(source) {
             Ok((prefix, r)) => Ok((prefix, Ref::read(&r).into_inner())),
             Err(CastError::Size(e)) => Err(e.with_dst()),
-            Err(CastError::Alignment(_)) => unsafe { core::hint::unreachable_unchecked() },
-            Err(CastError::Validity(i)) => match i {},
+            Err(CastError::Alignment(_)) => {
+                unsafe { core::hint::unreachable_unchecked() }
+            }
+            Err(CastError::Validity(i)) => match i {}
         }
     }
     /// Reads a copy of `self` from an `io::Read`.
@@ -1283,7 +1304,10 @@ pub unsafe trait FromBytes: FromZeros {
     #[doc(hidden)]
     #[must_use = "has no side effects"]
     #[inline(always)]
-    fn mut_slice_from_prefix(source: &mut [u8], count: usize) -> Option<(&mut [Self], &mut [u8])>
+    fn mut_slice_from_prefix(
+        source: &mut [u8],
+        count: usize,
+    ) -> Option<(&mut [Self], &mut [u8])>
     where
         Self: Sized + IntoBytes,
     {
@@ -1296,7 +1320,10 @@ pub unsafe trait FromBytes: FromZeros {
     #[doc(hidden)]
     #[must_use = "has no side effects"]
     #[inline(always)]
-    fn mut_slice_from_suffix(source: &mut [u8], count: usize) -> Option<(&mut [u8], &mut [Self])>
+    fn mut_slice_from_suffix(
+        source: &mut [u8],
+        count: usize,
+    ) -> Option<(&mut [u8], &mut [Self])>
     where
         Self: Sized + IntoBytes,
     {

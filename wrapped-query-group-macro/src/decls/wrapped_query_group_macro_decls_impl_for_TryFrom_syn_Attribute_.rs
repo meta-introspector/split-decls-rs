@@ -19,7 +19,7 @@ impl TryFrom<syn::Attribute> for SalsaAttr {
             }
             syn::Meta::NameValue(nv) => nv.into_token_stream(),
         }
-        .into();
+            .into();
         Ok(SalsaAttr { name, tts, span })
     }
 }

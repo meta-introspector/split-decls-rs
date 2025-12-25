@@ -12,17 +12,19 @@ pub fn generate_patch_entries(
             .file_name()
             .and_then(|s| s.to_str())
             .unwrap_or_default();
-        let patch_section_header =
-            format!("https://github.com/meta-introspector/{}", submodule_name);
+        let patch_section_header = format!(
+            "https://github.com/meta-introspector/{}", submodule_name
+        );
         let mut entries = Vec::new();
         for member_name in &info.member_crates {
             let member_abs_path = project_root
                 .join(&info.submodule_base_path_rel)
                 .join(member_name);
-            entries.push(PatchEntry {
-                crate_name: member_name.clone(),
-                path: member_abs_path,
-            });
+            entries
+                .push(PatchEntry {
+                    crate_name: member_name.clone(),
+                    path: member_abs_path,
+                });
         }
         generated_patches.insert(patch_section_header, entries);
     }

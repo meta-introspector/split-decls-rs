@@ -1,4 +1,6 @@
-#[llm_error_message(message = "Module file not found for: combinations_with_replacement")]
+#[llm_error_message(
+    message = "Module file not found for: combinations_with_replacement"
+)]
 #[llm_context(
     crate_name = "wrapped_itertools",
     module_name = "combinations_with_replacement"

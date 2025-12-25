@@ -11,15 +11,9 @@ impl Scales {
         Scales {
             base: 1000,
             suffixes: vec![
-                "".to_owned(),
-                "k".to_owned(),
-                "M".to_owned(),
-                "G".to_owned(),
-                "T".to_owned(),
-                "P".to_owned(),
-                "E".to_owned(),
-                "Z".to_owned(),
-                "Y".to_owned(),
+                "".to_owned(), "k".to_owned(), "M".to_owned(), "G".to_owned(), "T"
+                .to_owned(), "P".to_owned(), "E".to_owned(), "Z".to_owned(), "Y"
+                .to_owned(),
             ],
         }
     }
@@ -29,15 +23,9 @@ impl Scales {
         Scales {
             base: 1024,
             suffixes: vec![
-                "".to_owned(),
-                "ki".to_owned(),
-                "Mi".to_owned(),
-                "Gi".to_owned(),
-                "Ti".to_owned(),
-                "Pi".to_owned(),
-                "Ei".to_owned(),
-                "Zi".to_owned(),
-                "Yi".to_owned(),
+                "".to_owned(), "ki".to_owned(), "Mi".to_owned(), "Gi".to_owned(), "Ti"
+                .to_owned(), "Pi".to_owned(), "Ei".to_owned(), "Zi".to_owned(), "Yi"
+                .to_owned(),
             ],
         }
     }
@@ -59,21 +47,13 @@ impl Scales {
             .iter()
             .enumerate()
             .find_map(|(idx, x)| {
-                if value == x {
-                    Some((self.base as f64).powi(idx as i32))
-                } else {
-                    None
-                }
+                if value == x { Some((self.base as f64).powi(idx as i32)) } else { None }
             })
             .ok_or_else(|| {
                 format!(
-                    "Unknown suffix: {value}, valid suffixes are: {}",
-                    self.suffixes
-                        .iter()
-                        .filter(|x| !x.trim().is_empty())
-                        .map(String::to_string)
-                        .collect::<Vec<_>>()
-                        .join(", ")
+                    "Unknown suffix: {value}, valid suffixes are: {}", self.suffixes
+                    .iter().filter(| x | ! x.trim().is_empty()).map(String::to_string)
+                    .collect::< Vec < _ >> ().join(", ")
                 )
             })
     }

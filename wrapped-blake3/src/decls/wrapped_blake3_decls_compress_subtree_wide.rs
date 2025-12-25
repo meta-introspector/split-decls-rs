@@ -12,7 +12,8 @@ fn compress_subtree_wide<J: join::Join>(
         return compress_chunks_parallel(input, key, chunk_counter, flags, platform, out);
     }
     debug_assert_eq!(platform.simd_degree().count_ones(), 1, "power of 2");
-    let (left, right) = input.split_at(hazmat::left_subtree_len(input.len() as u64) as usize);
+    let (left, right) = input
+        .split_at(hazmat::left_subtree_len(input.len() as u64) as usize);
     let right_chunk_counter = chunk_counter + (left.len() / CHUNK_LEN) as u64;
     let mut cv_array = [0; 2 * MAX_SIMD_DEGREE_OR_2 * OUT_LEN];
     let degree = if left.len() == CHUNK_LEN {
@@ -23,8 +24,12 @@ fn compress_subtree_wide<J: join::Join>(
     };
     let (left_out, right_out) = cv_array.split_at_mut(degree * OUT_LEN);
     let (left_n, right_n) = J::join(
-        || compress_subtree_wide::<J>(left, key, chunk_counter, flags, platform, left_out),
-        || compress_subtree_wide::<J>(right, key, right_chunk_counter, flags, platform, right_out),
+        || compress_subtree_wide::<
+            J,
+        >(left, key, chunk_counter, flags, platform, left_out),
+        || compress_subtree_wide::<
+            J,
+        >(right, key, right_chunk_counter, flags, platform, right_out),
     );
     debug_assert_eq!(left_n, degree);
     debug_assert!(right_n >= 1 && right_n <= left_n);

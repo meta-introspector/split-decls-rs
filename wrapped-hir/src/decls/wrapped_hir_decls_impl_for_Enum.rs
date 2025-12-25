@@ -35,40 +35,46 @@ impl Enum {
         Type::new_for_crate(
             self.id.lookup(db).container.krate(),
             match db.enum_signature(self.id).variant_body_type() {
-                layout::IntegerType::Pointer(sign) => match sign {
-                    true => Ty::new_int(interner, rustc_type_ir::IntTy::Isize),
-                    false => Ty::new_uint(interner, rustc_type_ir::UintTy::Usize),
-                },
-                layout::IntegerType::Fixed(i, sign) => match sign {
-                    true => Ty::new_int(
-                        interner,
-                        match i {
-                            layout::Integer::I8 => rustc_type_ir::IntTy::I8,
-                            layout::Integer::I16 => rustc_type_ir::IntTy::I16,
-                            layout::Integer::I32 => rustc_type_ir::IntTy::I32,
-                            layout::Integer::I64 => rustc_type_ir::IntTy::I64,
-                            layout::Integer::I128 => rustc_type_ir::IntTy::I128,
-                        },
-                    ),
-                    false => Ty::new_uint(
-                        interner,
-                        match i {
-                            layout::Integer::I8 => rustc_type_ir::UintTy::U8,
-                            layout::Integer::I16 => rustc_type_ir::UintTy::U16,
-                            layout::Integer::I32 => rustc_type_ir::UintTy::U32,
-                            layout::Integer::I64 => rustc_type_ir::UintTy::U64,
-                            layout::Integer::I128 => rustc_type_ir::UintTy::U128,
-                        },
-                    ),
-                },
+                layout::IntegerType::Pointer(sign) => {
+                    match sign {
+                        true => Ty::new_int(interner, rustc_type_ir::IntTy::Isize),
+                        false => Ty::new_uint(interner, rustc_type_ir::UintTy::Usize),
+                    }
+                }
+                layout::IntegerType::Fixed(i, sign) => {
+                    match sign {
+                        true => {
+                            Ty::new_int(
+                                interner,
+                                match i {
+                                    layout::Integer::I8 => rustc_type_ir::IntTy::I8,
+                                    layout::Integer::I16 => rustc_type_ir::IntTy::I16,
+                                    layout::Integer::I32 => rustc_type_ir::IntTy::I32,
+                                    layout::Integer::I64 => rustc_type_ir::IntTy::I64,
+                                    layout::Integer::I128 => rustc_type_ir::IntTy::I128,
+                                },
+                            )
+                        }
+                        false => {
+                            Ty::new_uint(
+                                interner,
+                                match i {
+                                    layout::Integer::I8 => rustc_type_ir::UintTy::U8,
+                                    layout::Integer::I16 => rustc_type_ir::UintTy::U16,
+                                    layout::Integer::I32 => rustc_type_ir::UintTy::U32,
+                                    layout::Integer::I64 => rustc_type_ir::UintTy::U64,
+                                    layout::Integer::I128 => rustc_type_ir::UintTy::U128,
+                                },
+                            )
+                        }
+                    }
+                }
             },
         )
     }
     /// Returns true if at least one variant of this enum is a non-unit variant.
     pub fn is_data_carrying(self, db: &dyn HirDatabase) -> bool {
-        self.variants(db)
-            .iter()
-            .any(|v| !matches!(v.kind(db), StructKind::Unit))
+        self.variants(db).iter().any(|v| !matches!(v.kind(db), StructKind::Unit))
     }
     pub fn layout(self, db: &dyn HirDatabase) -> Result<Layout, LayoutError> {
         Adt::from(self).layout(db)

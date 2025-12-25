@@ -7,15 +7,13 @@ fn build_lints_map(
 ) -> FxHashMap<&'static str, BuiltLint> {
     let mut map_with_prefixes: FxHashMap<_, _> = lints
         .iter()
-        .map(|lint| {
-            (
-                lint.label,
-                BuiltLint {
-                    lint,
-                    groups: vec![lint.label, "__RA_EVERY_LINT"],
-                },
-            )
-        })
+        .map(|lint| (
+            lint.label,
+            BuiltLint {
+                lint,
+                groups: vec![lint.label, "__RA_EVERY_LINT"],
+            },
+        ))
         .collect();
     for g in lint_group {
         let mut add_children = |label: &'static str| {

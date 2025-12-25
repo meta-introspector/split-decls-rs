@@ -23,9 +23,13 @@ pub fn osa_distance(a: &str, b: &str) -> usize {
                 curr_distances[j] + 1,
                 min(prev_distances[j + 1] + 1, prev_distances[j] + cost),
             );
-            if i > 0 && j > 0 && a_char != b_char && a_char == prev_b_char && b_char == prev_a_char
+            if i > 0 && j > 0 && a_char != b_char && a_char == prev_b_char
+                && b_char == prev_a_char
             {
-                curr_distances[j + 1] = min(curr_distances[j + 1], prev_two_distances[j - 1] + 1);
+                curr_distances[j + 1] = min(
+                    curr_distances[j + 1],
+                    prev_two_distances[j - 1] + 1,
+                );
             }
             prev_b_char = b_char;
         }

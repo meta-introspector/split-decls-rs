@@ -8,7 +8,6 @@ impl<T> Entry<T> {
     /// The caller must guarantee that there are no concurent mutable accesses into
     /// this entry's value.
     unsafe fn as_ref<'a>(&self) -> Option<&'a T> {
-        self.get_value_cell()
-            .map(|cell| unsafe { (&*cell.get()).assume_init_ref() })
+        self.get_value_cell().map(|cell| unsafe { (&*cell.get()).assume_init_ref() })
     }
 }

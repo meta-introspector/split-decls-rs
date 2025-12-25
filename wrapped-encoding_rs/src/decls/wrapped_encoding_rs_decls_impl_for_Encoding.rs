@@ -45,24 +45,26 @@ impl Encoding {
                 None => {
                     return None;
                 }
-                Some(byte) => match *byte {
-                    0x09u8 | 0x0Au8 | 0x0Cu8 | 0x0Du8 | 0x20u8 => {
-                        continue;
+                Some(byte) => {
+                    match *byte {
+                        0x09u8 | 0x0Au8 | 0x0Cu8 | 0x0Du8 | 0x20u8 => {
+                            continue;
+                        }
+                        b'A'..=b'Z' => {
+                            trimmed[trimmed_pos] = *byte + 0x20u8;
+                            trimmed_pos = 1usize;
+                            break;
+                        }
+                        b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b':' | b'.' => {
+                            trimmed[trimmed_pos] = *byte;
+                            trimmed_pos = 1usize;
+                            break;
+                        }
+                        _ => {
+                            return None;
+                        }
                     }
-                    b'A'..=b'Z' => {
-                        trimmed[trimmed_pos] = *byte + 0x20u8;
-                        trimmed_pos = 1usize;
-                        break;
-                    }
-                    b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b':' | b'.' => {
-                        trimmed[trimmed_pos] = *byte;
-                        trimmed_pos = 1usize;
-                        break;
-                    }
-                    _ => {
-                        return None;
-                    }
-                },
+                }
             }
         }
         loop {
@@ -70,30 +72,32 @@ impl Encoding {
                 None => {
                     break;
                 }
-                Some(byte) => match *byte {
-                    0x09u8 | 0x0Au8 | 0x0Cu8 | 0x0Du8 | 0x20u8 => {
-                        break;
-                    }
-                    b'A'..=b'Z' => {
-                        if trimmed_pos == LONGEST_LABEL_LENGTH {
+                Some(byte) => {
+                    match *byte {
+                        0x09u8 | 0x0Au8 | 0x0Cu8 | 0x0Du8 | 0x20u8 => {
+                            break;
+                        }
+                        b'A'..=b'Z' => {
+                            if trimmed_pos == LONGEST_LABEL_LENGTH {
+                                return None;
+                            }
+                            trimmed[trimmed_pos] = *byte + 0x20u8;
+                            trimmed_pos += 1usize;
+                            continue;
+                        }
+                        b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b':' | b'.' => {
+                            if trimmed_pos == LONGEST_LABEL_LENGTH {
+                                return None;
+                            }
+                            trimmed[trimmed_pos] = *byte;
+                            trimmed_pos += 1usize;
+                            continue;
+                        }
+                        _ => {
                             return None;
                         }
-                        trimmed[trimmed_pos] = *byte + 0x20u8;
-                        trimmed_pos += 1usize;
-                        continue;
                     }
-                    b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b':' | b'.' => {
-                        if trimmed_pos == LONGEST_LABEL_LENGTH {
-                            return None;
-                        }
-                        trimmed[trimmed_pos] = *byte;
-                        trimmed_pos += 1usize;
-                        continue;
-                    }
-                    _ => {
-                        return None;
-                    }
-                },
+                }
             }
         }
         loop {
@@ -101,27 +105,31 @@ impl Encoding {
                 None => {
                     break;
                 }
-                Some(byte) => match *byte {
-                    0x09u8 | 0x0Au8 | 0x0Cu8 | 0x0Du8 | 0x20u8 => {
-                        continue;
+                Some(byte) => {
+                    match *byte {
+                        0x09u8 | 0x0Au8 | 0x0Cu8 | 0x0Du8 | 0x20u8 => {
+                            continue;
+                        }
+                        _ => {
+                            return None;
+                        }
                     }
-                    _ => {
-                        return None;
-                    }
-                },
+                }
             }
         }
         let candidate = &trimmed[..trimmed_pos];
-        match LABELS_SORTED.binary_search_by(|probe| {
-            let bytes = probe.as_bytes();
-            let c = bytes.len().cmp(&candidate.len());
-            if c != Ordering::Equal {
-                return c;
-            }
-            let probe_iter = bytes.iter().rev();
-            let candidate_iter = candidate.iter().rev();
-            probe_iter.cmp(candidate_iter)
-        }) {
+        match LABELS_SORTED
+            .binary_search_by(|probe| {
+                let bytes = probe.as_bytes();
+                let c = bytes.len().cmp(&candidate.len());
+                if c != Ordering::Equal {
+                    return c;
+                }
+                let probe_iter = bytes.iter().rev();
+                let candidate_iter = candidate.iter().rev();
+                probe_iter.cmp(candidate_iter)
+            })
+        {
             Ok(i) => Some(ENCODINGS_IN_LABEL_SORT[i]),
             Err(_) => None,
         }
@@ -144,13 +152,7 @@ impl Encoding {
     pub fn for_label_no_replacement(label: &[u8]) -> Option<&'static Encoding> {
         match Encoding::for_label(label) {
             None => None,
-            Some(encoding) => {
-                if encoding == REPLACEMENT {
-                    None
-                } else {
-                    Some(encoding)
-                }
-            }
+            Some(encoding) => if encoding == REPLACEMENT { None } else { Some(encoding) }
         }
     }
     /// Performs non-incremental BOM sniffing.
@@ -200,7 +202,8 @@ impl Encoding {
     /// Available via the C wrapper.
     #[inline]
     pub fn is_ascii_compatible(&'static self) -> bool {
-        !(self == REPLACEMENT || self == UTF_16BE || self == UTF_16LE || self == ISO_2022_JP)
+        !(self == REPLACEMENT || self == UTF_16BE || self == UTF_16LE
+            || self == ISO_2022_JP)
     }
     /// Checks whether this encoding maps one byte to one Basic Multilingual
     /// Plane code point (i.e. byte length equals decoded UTF-16 length) and
@@ -276,7 +279,10 @@ impl Encoding {
     /// by default).
     #[cfg(feature = "alloc")]
     #[inline]
-    pub fn decode<'a>(&'static self, bytes: &'a [u8]) -> (Cow<'a, str>, &'static Encoding, bool) {
+    pub fn decode<'a>(
+        &'static self,
+        bytes: &'a [u8],
+    ) -> (Cow<'a, str>, &'static Encoding, bool) {
         let (encoding, without_bom) = match Encoding::for_bom(bytes) {
             Some((encoding, bom_length)) => (encoding, &bytes[bom_length..]),
             None => (self, bytes),
@@ -322,7 +328,10 @@ impl Encoding {
     /// by default).
     #[cfg(feature = "alloc")]
     #[inline]
-    pub fn decode_with_bom_removal<'a>(&'static self, bytes: &'a [u8]) -> (Cow<'a, str>, bool) {
+    pub fn decode_with_bom_removal<'a>(
+        &'static self,
+        bytes: &'a [u8],
+    ) -> (Cow<'a, str>, bool) {
         let without_bom = if self == UTF_8 && bytes.starts_with(b"\xEF\xBB\xBF") {
             &bytes[3..]
         } else if (self == UTF_16LE && bytes.starts_with(b"\xFF\xFE"))
@@ -369,8 +378,13 @@ impl Encoding {
     /// Available to Rust only and only with the `alloc` feature enabled (enabled
     /// by default).
     #[cfg(feature = "alloc")]
-    pub fn decode_without_bom_handling<'a>(&'static self, bytes: &'a [u8]) -> (Cow<'a, str>, bool) {
-        let (mut decoder, mut string, mut total_read) = if self.is_potentially_borrowable() {
+    pub fn decode_without_bom_handling<'a>(
+        &'static self,
+        bytes: &'a [u8],
+    ) -> (Cow<'a, str>, bool) {
+        let (mut decoder, mut string, mut total_read) = if self
+            .is_potentially_borrowable()
+        {
             let valid_up_to = if self == UTF_8 {
                 utf8_valid_up_to(bytes)
             } else if self == ISO_2022_JP {
@@ -383,10 +397,15 @@ impl Encoding {
                 return (Cow::Borrowed(str), false);
             }
             let decoder = self.new_decoder_without_bom_handling();
-            let rounded_without_replacement = checked_next_power_of_two(checked_add(
-                valid_up_to,
-                decoder.max_utf8_buffer_length_without_replacement(bytes.len() - valid_up_to),
-            ));
+            let rounded_without_replacement = checked_next_power_of_two(
+                checked_add(
+                    valid_up_to,
+                    decoder
+                        .max_utf8_buffer_length_without_replacement(
+                            bytes.len() - valid_up_to,
+                        ),
+                ),
+            );
             let with_replacement = checked_add(
                 valid_up_to,
                 decoder.max_utf8_buffer_length(bytes.len() - valid_up_to),
@@ -397,7 +416,11 @@ impl Encoding {
             unsafe {
                 let vec = string.as_mut_vec();
                 vec.set_len(valid_up_to);
-                core::ptr::copy_nonoverlapping(bytes.as_ptr(), vec.as_mut_ptr(), valid_up_to);
+                core::ptr::copy_nonoverlapping(
+                    bytes.as_ptr(),
+                    vec.as_mut_ptr(),
+                    valid_up_to,
+                );
             }
             (decoder, string, valid_up_to)
         } else {
@@ -413,8 +436,8 @@ impl Encoding {
         };
         let mut total_had_errors = false;
         loop {
-            let (result, read, had_errors) =
-                decoder.decode_to_string(&bytes[total_read..], &mut string, true);
+            let (result, read, had_errors) = decoder
+                .decode_to_string(&bytes[total_read..], &mut string, true);
             total_read += read;
             total_had_errors |= had_errors;
             match result {
@@ -423,7 +446,8 @@ impl Encoding {
                     return (Cow::Owned(string), total_had_errors);
                 }
                 CoderResult::OutputFull => {
-                    let needed = decoder.max_utf8_buffer_length(bytes.len() - total_read);
+                    let needed = decoder
+                        .max_utf8_buffer_length(bytes.len() - total_read);
                     string.reserve(needed.unwrap());
                 }
             }
@@ -486,27 +510,33 @@ impl Encoding {
             let decoder = self.new_decoder_without_bom_handling();
             let mut string = String::with_capacity(
                 checked_add(
-                    valid_up_to,
-                    decoder.max_utf8_buffer_length_without_replacement(bytes.len() - valid_up_to),
-                )
-                .unwrap(),
+                        valid_up_to,
+                        decoder
+                            .max_utf8_buffer_length_without_replacement(
+                                bytes.len() - valid_up_to,
+                            ),
+                    )
+                    .unwrap(),
             );
             unsafe {
                 let vec = string.as_mut_vec();
                 vec.set_len(valid_up_to);
-                core::ptr::copy_nonoverlapping(bytes.as_ptr(), vec.as_mut_ptr(), valid_up_to);
+                core::ptr::copy_nonoverlapping(
+                    bytes.as_ptr(),
+                    vec.as_mut_ptr(),
+                    valid_up_to,
+                );
             }
             (decoder, string, &bytes[valid_up_to..])
         } else {
             let decoder = self.new_decoder_without_bom_handling();
             let string = String::with_capacity(
-                decoder
-                    .max_utf8_buffer_length_without_replacement(bytes.len())
-                    .unwrap(),
+                decoder.max_utf8_buffer_length_without_replacement(bytes.len()).unwrap(),
             );
             (decoder, string, bytes)
         };
-        let (result, read) = decoder.decode_to_string_without_replacement(input, &mut string, true);
+        let (result, read) = decoder
+            .decode_to_string_without_replacement(input, &mut string, true);
         match result {
             DecoderResult::InputEmpty => {
                 debug_assert_eq!(read, input.len());
@@ -558,7 +588,10 @@ impl Encoding {
     /// Available to Rust only and only with the `alloc` feature enabled (enabled
     /// by default).
     #[cfg(feature = "alloc")]
-    pub fn encode<'a>(&'static self, string: &'a str) -> (Cow<'a, [u8]>, &'static Encoding, bool) {
+    pub fn encode<'a>(
+        &'static self,
+        string: &'a str,
+    ) -> (Cow<'a, [u8]>, &'static Encoding, bool) {
         let output_encoding = self.output_encoding();
         if output_encoding == UTF_8 {
             return (Cow::Borrowed(string.as_bytes()), output_encoding, false);
@@ -577,20 +610,27 @@ impl Encoding {
         let mut vec: Vec<u8> = Vec::with_capacity(
             (checked_add(
                 valid_up_to,
-                encoder.max_buffer_length_from_utf8_if_no_unmappables(string.len() - valid_up_to),
+                encoder
+                    .max_buffer_length_from_utf8_if_no_unmappables(
+                        string.len() - valid_up_to,
+                    ),
             ))
-            .unwrap()
-            .next_power_of_two(),
+                .unwrap()
+                .next_power_of_two(),
         );
         unsafe {
             vec.set_len(valid_up_to);
-            core::ptr::copy_nonoverlapping(bytes.as_ptr(), vec.as_mut_ptr(), valid_up_to);
+            core::ptr::copy_nonoverlapping(
+                bytes.as_ptr(),
+                vec.as_mut_ptr(),
+                valid_up_to,
+            );
         }
         let mut total_read = valid_up_to;
         let mut total_had_errors = false;
         loop {
-            let (result, read, had_errors) =
-                encoder.encode_from_utf8_to_vec(&string[total_read..], &mut vec, true);
+            let (result, read, had_errors) = encoder
+                .encode_from_utf8_to_vec(&string[total_read..], &mut vec, true);
             total_read += read;
             total_had_errors |= had_errors;
             match result {
@@ -600,7 +640,9 @@ impl Encoding {
                 }
                 CoderResult::OutputFull => {
                     let needed = encoder
-                        .max_buffer_length_from_utf8_if_no_unmappables(string.len() - total_read);
+                        .max_buffer_length_from_utf8_if_no_unmappables(
+                            string.len() - total_read,
+                        );
                     let rounded = (checked_add(vec.capacity(), needed))
                         .unwrap()
                         .next_power_of_two();

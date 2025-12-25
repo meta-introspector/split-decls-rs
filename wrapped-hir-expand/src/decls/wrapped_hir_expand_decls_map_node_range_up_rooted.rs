@@ -8,14 +8,8 @@ pub fn map_node_range_up_rooted(
     exp_map: &ExpansionSpanMap,
     range: TextRange,
 ) -> Option<FileRange> {
-    let mut spans = exp_map
-        .spans_for_range(range)
-        .filter(|span| span.ctx.is_root());
-    let Span {
-        range,
-        anchor,
-        ctx: _,
-    } = spans.next()?;
+    let mut spans = exp_map.spans_for_range(range).filter(|span| span.ctx.is_root());
+    let Span { range, anchor, ctx: _ } = spans.next()?;
     let mut start = range.start();
     let mut end = range.end();
     for span in spans {

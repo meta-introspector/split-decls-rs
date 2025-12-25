@@ -10,26 +10,33 @@ pub trait TestEnvCommandExt: Sized {
         }
         if env::var_os("RUSTUP_TOOLCHAIN").is_some() {
             static RUSTC_DIR: OnceLock<PathBuf> = OnceLock::new();
-            let rustc_dir = RUSTC_DIR.get_or_init(|| {
-                match ProcessBuilder::new("rustup")
-                    .args(&["which", "rustc"])
-                    .exec_with_output()
-                {
-                    Ok(output) => {
-                        let s = std::str::from_utf8(&output.stdout).expect("utf8").trim();
-                        let mut p = PathBuf::from(s);
-                        p.pop();
-                        p
+            let rustc_dir = RUSTC_DIR
+                .get_or_init(|| {
+                    match ProcessBuilder::new("rustup")
+                        .args(&["which", "rustc"])
+                        .exec_with_output()
+                    {
+                        Ok(output) => {
+                            let s = std::str::from_utf8(&output.stdout)
+                                .expect("utf8")
+                                .trim();
+                            let mut p = PathBuf::from(s);
+                            p.pop();
+                            p
+                        }
+                        Err(e) => {
+                            panic!(
+                                "RUSTUP_TOOLCHAIN was set, but could not run rustup: {}", e
+                            );
+                        }
                     }
-                    Err(e) => {
-                        panic!("RUSTUP_TOOLCHAIN was set, but could not run rustup: {}", e);
-                    }
-                }
-            });
+                });
             let path = env::var_os("PATH").unwrap_or_default();
             let paths = env::split_paths(&path);
-            let new_path =
-                env::join_paths(std::iter::once(rustc_dir.clone()).chain(paths)).unwrap();
+            let new_path = env::join_paths(
+                    std::iter::once(rustc_dir.clone()).chain(paths),
+                )
+                .unwrap();
             self = self.env("PATH", new_path);
         }
         self = self

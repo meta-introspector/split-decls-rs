@@ -28,14 +28,12 @@ impl<T, C: cfg::Config> VacantEntry<'_, T, C> {
     pub fn insert(mut self, val: T) {
         let value = unsafe { self.inner.value_mut() };
         debug_assert!(
-            value.is_none(),
-            "tried to insert to a slot that already had a value!"
+            value.is_none(), "tried to insert to a slot that already had a value!"
         );
         *value = Some(val);
         let _released = unsafe { self.inner.release() };
         debug_assert!(
-            !_released,
-            "removing a value before it was inserted should be a no-op"
+            ! _released, "removing a value before it was inserted should be a no-op"
         )
     }
     /// Return the integer index at which this entry will be inserted.

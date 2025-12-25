@@ -6,26 +6,8 @@ fn process_dependency_table(
     original_crate_path: &Path,
 ) -> Result<()> {
     let mut deps_to_update_to_workspace = Vec::new();
-    let mut deps_to_update_to_absolute_path: Vec<(String, PathBuf)> = Vec::new();
-    for (dep_name, dep_value) in table.iter_mut() {
-        if let Some(dep_table) = dep_value.as_table_mut() {
-            if let Some(path_value) = dep_table.get("path") {
-                if let Some(path_str) = path_value.as_str() {
-                    let resolved_original_dep_path = original_crate_path.join(path_str);
-                    if global_config.workspace_dependencies.contains_key(dep_name) {
-                        deps_to_update_to_workspace.push(dep_name.clone());
-                    } else {
-                        let absolute_path =
-                            resolved_original_dep_path.canonicalize().context(format!(
-                                "Failed to canonicalize path for dependency '{}': {}",
-                                dep_name,
-                                resolved_original_dep_path.display()
-                            ))?;
-                        deps_to_update_to_absolute_path.push((dep_name.clone(), absolute_path));
-                    }
-                }
-            }
-        }
+    for (dep_name, dep_value) in table.iter() {
+        deps_to_update_to_workspace.push(dep_name.clone());
     }
     for dep_name in deps_to_update_to_workspace {
         let mut new_dep_table = toml::Table::new();
@@ -35,24 +17,21 @@ fn process_dependency_table(
                 if let Some(features) = original_dep_table.get("features") {
                     new_dep_table.insert("features".to_string(), features.clone());
                 }
+                if let Some(optional) = original_dep_table.get("optional") {
+                    new_dep_table.insert("optional".to_string(), optional.clone());
+                }
+                if let Some(default_features) = original_dep_table
+                    .get("default-features")
+                {
+                    new_dep_table
+                        .insert(
+                            "default-features".to_string(),
+                            default_features.clone(),
+                        );
+                }
             }
         }
         table.insert(dep_name, toml::Value::Table(new_dep_table));
-    }
-    for (dep_name, absolute_path) in deps_to_update_to_absolute_path {
-        if let Some(dep_value) = table.get_mut(&dep_name) {
-            if let Some(dep_table) = dep_value.as_table_mut() {
-                dep_table.insert(
-                    "path".to_string(),
-                    toml::Value::String(
-                        absolute_path
-                            .to_str()
-                            .context("Path not valid UTF-8")?
-                            .to_string(),
-                    ),
-                );
-            }
-        }
     }
     Ok(())
 }

@@ -8,15 +8,21 @@ impl TestCases {
         }
     }
     pub fn pass<P: AsRef<Path>>(&self, path: P) {
-        self.runner.borrow_mut().tests.push(Test {
-            path: path.as_ref().to_owned(),
-            expected: Expected::Pass,
-        });
+        self.runner
+            .borrow_mut()
+            .tests
+            .push(Test {
+                path: path.as_ref().to_owned(),
+                expected: Expected::Pass,
+            });
     }
     pub fn compile_fail<P: AsRef<Path>>(&self, path: P) {
-        self.runner.borrow_mut().tests.push(Test {
-            path: path.as_ref().to_owned(),
-            expected: Expected::CompileFail,
-        });
+        self.runner
+            .borrow_mut()
+            .tests
+            .push(Test {
+                path: path.as_ref().to_owned(),
+                expected: Expected::CompileFail,
+            });
     }
 }

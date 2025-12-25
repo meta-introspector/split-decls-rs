@@ -9,10 +9,6 @@ impl Index<usize> for FixedBitSet {
     type Output = bool;
     #[inline]
     fn index(&self, bit: usize) -> &bool {
-        if self.contains(bit) {
-            &true
-        } else {
-            &false
-        }
+        if self.contains(bit) { &true } else { &false }
     }
 }

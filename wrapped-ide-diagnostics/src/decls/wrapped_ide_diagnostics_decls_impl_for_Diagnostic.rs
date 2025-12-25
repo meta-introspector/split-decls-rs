@@ -12,7 +12,9 @@ impl Diagnostic {
             message,
             range: range.into(),
             severity: match code {
-                DiagnosticCode::RustcHardError(_) | DiagnosticCode::SyntaxError => Severity::Error,
+                DiagnosticCode::RustcHardError(_) | DiagnosticCode::SyntaxError => {
+                    Severity::Error
+                }
                 DiagnosticCode::RustcLint(_) => Severity::Warning,
                 DiagnosticCode::Clippy(_) => Severity::WeakWarning,
                 DiagnosticCode::Ra(_, s) => s,

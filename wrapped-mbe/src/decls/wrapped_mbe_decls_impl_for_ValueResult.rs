@@ -2,10 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl<T, E> ValueResult<T, E> {
     pub fn new(value: T, err: E) -> Self {
-        Self {
-            value,
-            err: Some(err),
-        }
+        Self { value, err: Some(err) }
     }
     pub fn ok(value: T) -> Self {
         Self { value, err: None }

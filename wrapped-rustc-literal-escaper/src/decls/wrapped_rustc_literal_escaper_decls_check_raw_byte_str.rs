@@ -6,6 +6,9 @@ use std::collections::HashMap;
 /// and produces a sequence of bytes or errors,
 /// which are returned by invoking `callback`.
 /// NOTE: Does no escaping, but produces errors for bare carriage return ('\r').
-pub fn check_raw_byte_str(src: &str, callback: impl FnMut(Range<usize>, Result<u8, EscapeError>)) {
+pub fn check_raw_byte_str(
+    src: &str,
+    callback: impl FnMut(Range<usize>, Result<u8, EscapeError>),
+) {
     <[u8]>::check_raw(src, callback);
 }

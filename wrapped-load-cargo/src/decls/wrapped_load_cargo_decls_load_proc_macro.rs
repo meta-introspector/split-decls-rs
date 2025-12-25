@@ -8,25 +8,26 @@ pub fn load_proc_macro(
 ) -> ProcMacroLoadResult {
     let res: Result<Vec<_>, _> = (|| {
         let dylib = MacroDylib::new(path.to_path_buf());
-        let vec = server.load_dylib(dylib).map_err(|e| {
-            ProcMacroLoadingError::ProcMacroSrvError(format!("{e}").into_boxed_str())
-        })?;
+        let vec = server
+            .load_dylib(dylib)
+            .map_err(|e| {
+                ProcMacroLoadingError::ProcMacroSrvError(format!("{e}").into_boxed_str())
+            })?;
         if vec.is_empty() {
             return Err(ProcMacroLoadingError::NoProcMacros);
         }
-        Ok(vec
-            .into_iter()
-            .map(|expander| expander_to_proc_macro(expander, ignored_macros))
-            .collect())
+        Ok(
+            vec
+                .into_iter()
+                .map(|expander| expander_to_proc_macro(expander, ignored_macros))
+                .collect(),
+        )
     })();
     match res {
         Ok(proc_macros) => {
             tracing::info!(
-                "Loaded proc-macros for {path}: {:?}",
-                proc_macros
-                    .iter()
-                    .map(|it| it.name.clone())
-                    .collect::<Vec<_>>()
+                "Loaded proc-macros for {path}: {:?}", proc_macros.iter().map(| it | it
+                .name.clone()).collect::< Vec < _ >> ()
             );
             Ok(proc_macros)
         }

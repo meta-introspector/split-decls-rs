@@ -10,9 +10,13 @@ fn lint_attrs<'a>(
         .filter_map(|attr| {
             attr.as_simple_call()
                 .and_then(|(name, value)| match &*name {
-                    "allow" | "expect" => Some(Either::Left(iter::once((Severity::Allow, value)))),
+                    "allow" | "expect" => {
+                        Some(Either::Left(iter::once((Severity::Allow, value))))
+                    }
                     "warn" => Some(Either::Left(iter::once((Severity::Warning, value)))),
-                    "forbid" | "deny" => Some(Either::Left(iter::once((Severity::Error, value)))),
+                    "forbid" | "deny" => {
+                        Some(Either::Left(iter::once((Severity::Error, value))))
+                    }
                     "cfg_attr" => {
                         let mut lint_attrs = Vec::new();
                         cfg_attr_lint_attrs(sema, &value, &mut lint_attrs);
@@ -26,15 +30,18 @@ fn lint_attrs<'a>(
             parse_tt_as_comma_sep_paths(lints, edition)
                 .into_iter()
                 .flat_map(move |lints| {
-                    lints.into_iter().map(move |lint| {
-                        (
-                            lint.segments()
-                                .filter_map(|segment| segment.name_ref())
-                                .join("::")
-                                .into(),
-                            severity,
-                        )
-                    })
+                    lints
+                        .into_iter()
+                        .map(move |lint| {
+                            (
+                                lint
+                                    .segments()
+                                    .filter_map(|segment| segment.name_ref())
+                                    .join("::")
+                                    .into(),
+                                severity,
+                            )
+                        })
                 })
         })
 }

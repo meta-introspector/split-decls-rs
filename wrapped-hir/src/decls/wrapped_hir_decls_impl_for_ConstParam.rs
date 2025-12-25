@@ -2,7 +2,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl ConstParam {
     pub fn merge(self) -> TypeOrConstParam {
-        TypeOrConstParam { id: self.id.into() }
+        TypeOrConstParam {
+            id: self.id.into(),
+        }
     }
     pub fn name(self, db: &dyn HirDatabase) -> Name {
         let params = db.generic_params(self.id.parent());

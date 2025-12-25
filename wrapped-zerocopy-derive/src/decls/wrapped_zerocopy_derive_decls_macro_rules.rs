@@ -8,16 +8,11 @@ use std::collections::HashMap;
 /// specify the name in order to avoid name collisions.
 macro_rules! derive {
     ($trait:ident => $outer:ident => $inner:ident) => {
-        #[proc_macro_derive($trait, attributes(zerocopy))]
-        pub fn $outer(ts: proc_macro::TokenStream) -> proc_macro::TokenStream {
-            let ast = syn::parse_macro_input!(ts as DeriveInput);
-            let zerocopy_crate = match extract_zerocopy_crate(&ast.attrs) {
-                Ok(zerocopy_crate) => zerocopy_crate,
-                Err(e) => return e.into_compile_error().into(),
-            };
-            $inner(&ast, Trait::$trait, &zerocopy_crate)
-                .into_ts()
-                .into()
-        }
+        #[proc_macro_derive($trait, attributes(zerocopy))] pub fn $outer (ts :
+        proc_macro::TokenStream) -> proc_macro::TokenStream { let ast =
+        syn::parse_macro_input!(ts as DeriveInput); let zerocopy_crate = match
+        extract_zerocopy_crate(& ast.attrs) { Ok(zerocopy_crate) => zerocopy_crate,
+        Err(e) => return e.into_compile_error().into(), }; $inner (& ast, Trait::$trait,
+        & zerocopy_crate).into_ts().into() }
     };
 }

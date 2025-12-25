@@ -24,13 +24,13 @@ impl Iterator for IntoOnes {
                 }
             };
         }
-        Some(self.block_idx_front + Self::last_positive_bit_and_unset(&mut self.bitset_front))
+        Some(
+            self.block_idx_front
+                + Self::last_positive_bit_and_unset(&mut self.bitset_front),
+        )
     }
     #[inline]
     fn size_hint(&self) -> (usize, Option<usize>) {
-        (
-            0,
-            (Some(self.block_idx_back - self.block_idx_front + 2 * BITS)),
-        )
+        (0, (Some(self.block_idx_back - self.block_idx_front + 2 * BITS)))
     }
 }

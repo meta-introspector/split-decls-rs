@@ -1,7 +1,10 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 /// Like Jaro but gives a boost to sequences that have a common prefix.
-pub fn generic_jaro_winkler<'a, 'b, Iter1, Iter2, Elem1, Elem2>(a: &'a Iter1, b: &'b Iter2) -> f64
+pub fn generic_jaro_winkler<'a, 'b, Iter1, Iter2, Elem1, Elem2>(
+    a: &'a Iter1,
+    b: &'b Iter2,
+) -> f64
 where
     &'a Iter1: IntoIterator<Item = Elem1>,
     &'b Iter2: IntoIterator<Item = Elem2>,

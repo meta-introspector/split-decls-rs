@@ -5,14 +5,14 @@ fn list_metadata(sess: &Session, metadata_loader: &dyn MetadataLoader) {
         Input::File(ref path) => {
             let mut v = Vec::new();
             locator::list_file_metadata(
-                &sess.target,
-                path,
-                metadata_loader,
-                &mut v,
-                &sess.opts.unstable_opts.ls,
-                sess.cfg_version,
-            )
-            .unwrap();
+                    &sess.target,
+                    path,
+                    metadata_loader,
+                    &mut v,
+                    &sess.opts.unstable_opts.ls,
+                    sess.cfg_version,
+                )
+                .unwrap();
             safe_println!("{}", String::from_utf8(v).unwrap());
         }
         Input::Str { .. } => {

@@ -9,17 +9,13 @@ fn derive_split_at_inner(
     match &ast.data {
         Data::Struct(_) => {}
         Data::Enum(_) | Data::Union(_) => {
-            return Err(Error::new(
-                Span::call_site(),
-                "can only be applied to structs",
-            ));
+            return Err(Error::new(Span::call_site(), "can only be applied to structs"));
         }
     };
     if repr.get_packed().is_some() {
-        return Err(Error::new(
-            Span::call_site(),
-            "must not have #[repr(packed)] attribute",
-        ));
+        return Err(
+            Error::new(Span::call_site(), "must not have #[repr(packed)] attribute"),
+        );
     }
     if !(repr.is_c() || repr.is_transparent()) {
         return Err(
@@ -35,15 +31,19 @@ fn derive_split_at_inner(
     } else {
         return Err(Error::new(Span::call_site(), "must at least one field"));
     };
-    Ok(ImplBlockBuilder::new(
-        ast,
-        &ast.data,
-        Trait::SplitAt,
-        FieldBounds::TRAILING_SELF,
-        zerocopy_crate,
+    Ok(
+        ImplBlockBuilder::new(
+                ast,
+                &ast.data,
+                Trait::SplitAt,
+                FieldBounds::TRAILING_SELF,
+                zerocopy_crate,
+            )
+            .inner_extras(
+                quote! {
+                    type Elem = <# trailing_field as ::zerocopy::SplitAt >::Elem;
+                },
+            )
+            .build(),
     )
-    .inner_extras(quote! {
-        type Elem = <# trailing_field as ::zerocopy::SplitAt >::Elem;
-    })
-    .build())
 }

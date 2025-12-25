@@ -24,7 +24,13 @@ pub trait Perform {
     ///
     /// The `ignore` flag indicates that more than two intermediates arrived and
     /// subsequent characters were ignored.
-    fn hook(&mut self, _params: &Params, _intermediates: &[u8], _ignore: bool, _action: u8) {}
+    fn hook(
+        &mut self,
+        _params: &Params,
+        _intermediates: &[u8],
+        _ignore: bool,
+        _action: u8,
+    ) {}
     /// Pass bytes as part of a device control string to the handle chosen in `hook`. C0 controls
     /// will also be passed to the handler.
     fn put(&mut self, _byte: u8) {}
@@ -46,8 +52,7 @@ pub trait Perform {
         _intermediates: &[u8],
         _ignore: bool,
         _action: u8,
-    ) {
-    }
+    ) {}
     /// The final character of an escape sequence has arrived.
     ///
     /// The `ignore` flag indicates that more than two intermediates arrived and

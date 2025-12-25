@@ -3,17 +3,13 @@ use std::collections::HashMap;
 unsafe impl<T> KnownLayout for [T] {
     #[allow(clippy::missing_inline_in_public_items, dead_code)]
     #[cfg_attr(
-        all(
-            coverage_nightly,
-            __ZEROCOPY_INTERNAL_USE_ONLY_NIGHTLY_FEATURES_IN_TESTS
-        ),
+        all(coverage_nightly, __ZEROCOPY_INTERNAL_USE_ONLY_NIGHTLY_FEATURES_IN_TESTS),
         coverage(off)
     )]
     fn only_derive_is_allowed_to_implement_this_trait()
     where
         Self: Sized,
-    {
-    }
+    {}
     type PointerMetadata = usize;
     type MaybeUninit = [CoreMaybeUninit<T>];
     const LAYOUT: DstLayout = DstLayout::for_slice::<T>();

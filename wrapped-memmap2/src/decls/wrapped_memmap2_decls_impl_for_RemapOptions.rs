@@ -28,10 +28,6 @@ impl RemapOptions {
         self
     }
     pub(crate) fn into_flags(self) -> libc::c_int {
-        if self.may_move {
-            libc::MREMAP_MAYMOVE
-        } else {
-            0
-        }
+        if self.may_move { libc::MREMAP_MAYMOVE } else { 0 }
     }
 }

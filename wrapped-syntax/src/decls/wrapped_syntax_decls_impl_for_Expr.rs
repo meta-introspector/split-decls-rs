@@ -11,12 +11,15 @@ impl ast::Expr {
     /// ```
     pub fn parse(text: &str, edition: Edition) -> Parse<ast::Expr> {
         let _p = tracing::info_span!("Expr::parse").entered();
-        let (green, errors) = parsing::parse_text_at(text, parser::TopEntryPoint::Expr, edition);
+        let (green, errors) = parsing::parse_text_at(
+            text,
+            parser::TopEntryPoint::Expr,
+            edition,
+        );
         let root = SyntaxNode::new_root(green.clone());
         assert!(
             ast::Expr::can_cast(root.kind()) || root.kind() == SyntaxKind::ERROR,
-            "{:?} isn't an expression",
-            root.kind()
+            "{:?} isn't an expression", root.kind()
         );
         Parse::new(green, errors)
     }

@@ -8,5 +8,5 @@ pub fn ticket(input: TokenStream) -> TokenStream {
     quote! {
         println!("🎫 Ticket: {}", # issue);
     }
-    .into()
+        .into()
 }

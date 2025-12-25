@@ -6,12 +6,14 @@ impl CodeSuggestion {
     pub fn splice_lines(
         &self,
         sm: &SourceMap,
-    ) -> Vec<(
-        String,
-        Vec<TrimmedSubstitutionPart>,
-        Vec<Vec<SubstitutionHighlight>>,
-        ConfusionType,
-    )> {
+    ) -> Vec<
+        (
+            String,
+            Vec<TrimmedSubstitutionPart>,
+            Vec<Vec<SubstitutionHighlight>>,
+            ConfusionType,
+        ),
+    > {
         use rustc_span::{CharPos, Pos};
         /// Extracts a substring from the provided `line_opt` based on the specified low and high
         /// indices, appends it to the given buffer `buf`, and returns the count of newline
@@ -31,7 +33,8 @@ impl CodeSuggestion {
             let (lo, hi_opt) = (lo.col.to_usize(), hi_opt.map(|hi| hi.col.to_usize()));
             if let Some(line) = line_opt {
                 if let Some(lo) = line.char_indices().map(|(i, _)| i).nth(lo) {
-                    let hi_opt = hi_opt.and_then(|hi| line.char_indices().map(|(i, _)| i).nth(hi));
+                    let hi_opt = hi_opt
+                        .and_then(|hi| line.char_indices().map(|(i, _)| i).nth(hi));
                     match hi_opt {
                         Some(hi) if hi > lo => {
                             line_count = line[lo..hi].matches('\n').count();
@@ -50,7 +53,7 @@ impl CodeSuggestion {
             }
             line_count
         }
-        assert!(!self.substitutions.is_empty());
+        assert!(! self.substitutions.is_empty());
         self.substitutions
             .iter()
             .filter(|subst| {
@@ -60,8 +63,7 @@ impl CodeSuggestion {
                     .any(|item| sm.is_valid_span(item.span).is_err());
                 if invalid {
                     debug!(
-                        "splice_lines: suggestion contains an invalid span: {:?}",
-                        subst
+                        "splice_lines: suggestion contains an invalid span: {:?}", subst
                     );
                 }
                 !invalid
@@ -73,7 +75,7 @@ impl CodeSuggestion {
                 let hi = substitution.parts.iter().map(|part| part.span.hi()).max()?;
                 let bounding_span = Span::with_root_ctxt(lo, hi);
                 let lines = sm.span_to_lines(bounding_span).ok()?;
-                assert!(!lines.lines.is_empty() || bounding_span.is_dummy());
+                assert!(! lines.lines.is_empty() || bounding_span.is_dummy());
                 if !sm.ensure_source_file_source_present(&lines.file) {
                     return None;
                 }
@@ -95,12 +97,20 @@ impl CodeSuggestion {
                     .map(|part| part.trim_trivial_replacements(sm))
                     .collect::<Vec<_>>();
                 for part in &trimmed_parts {
-                    let part_confusion = detect_confusion_type(sm, &part.snippet, part.span);
+                    let part_confusion = detect_confusion_type(
+                        sm,
+                        &part.snippet,
+                        part.span,
+                    );
                     confusion_type = confusion_type.combine(part_confusion);
                     let cur_lo = sm.lookup_char_pos(part.span.lo());
                     if prev_hi.line == cur_lo.line {
-                        let mut count =
-                            push_trailing(&mut buf, prev_line.as_ref(), &prev_hi, Some(&cur_lo));
+                        let mut count = push_trailing(
+                            &mut buf,
+                            prev_line.as_ref(),
+                            &prev_hi,
+                            Some(&cur_lo),
+                        );
                         while count > 0 {
                             highlights.push(std::mem::take(&mut line_highlight));
                             acc = 0;
@@ -109,7 +119,12 @@ impl CodeSuggestion {
                     } else {
                         acc = 0;
                         highlights.push(std::mem::take(&mut line_highlight));
-                        let mut count = push_trailing(&mut buf, prev_line.as_ref(), &prev_hi, None);
+                        let mut count = push_trailing(
+                            &mut buf,
+                            prev_line.as_ref(),
+                            &prev_hi,
+                            None,
+                        );
                         while count > 0 {
                             highlights.push(std::mem::take(&mut line_highlight));
                             count -= 1;
@@ -122,7 +137,10 @@ impl CodeSuggestion {
                             }
                         }
                         if let Some(cur_line) = sf.get_line(cur_lo.line - 1) {
-                            let end = match cur_line.char_indices().nth(cur_lo.col.to_usize()) {
+                            let end = match cur_line
+                                .char_indices()
+                                .nth(cur_lo.col.to_usize())
+                            {
                                 Some((i, _)) => i,
                                 None => cur_line.len(),
                             };
@@ -140,12 +158,12 @@ impl CodeSuggestion {
                             _ => 1,
                         })
                         .sum();
-                    if !is_different(sm, &part.snippet, part.span) {
-                    } else {
-                        line_highlight.push(SubstitutionHighlight {
-                            start: (cur_lo.col.0 as isize + acc) as usize,
-                            end: (cur_lo.col.0 as isize + acc + len) as usize,
-                        });
+                    if !is_different(sm, &part.snippet, part.span) {} else {
+                        line_highlight
+                            .push(SubstitutionHighlight {
+                                start: (cur_lo.col.0 as isize + acc) as usize,
+                                end: (cur_lo.col.0 as isize + acc + len) as usize,
+                            });
                     }
                     buf.push_str(&part.snippet);
                     let cur_hi = sm.lookup_char_pos(part.span.hi());
@@ -162,7 +180,11 @@ impl CodeSuggestion {
                                 _ => 1,
                             })
                             .sum();
-                        line_highlight.push(SubstitutionHighlight { start: 0, end });
+                        line_highlight
+                            .push(SubstitutionHighlight {
+                                start: 0,
+                                end,
+                            });
                     }
                 }
                 highlights.push(std::mem::take(&mut line_highlight));

@@ -1,6 +1,11 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-fn check_c_variadic_abi(tcx: TyCtxt<'_>, decl: &hir::FnDecl<'_>, abi: ExternAbi, span: Span) {
+fn check_c_variadic_abi(
+    tcx: TyCtxt<'_>,
+    decl: &hir::FnDecl<'_>,
+    abi: ExternAbi,
+    span: Span,
+) {
     if !decl.c_variadic {
         return;
     }
@@ -17,12 +22,14 @@ fn check_c_variadic_abi(tcx: TyCtxt<'_>, decl: &hir::FnDecl<'_>, abi: ExternAbi,
         CVariadicStatus::Unstable { feature } => {
             if !tcx.features().enabled(feature) {
                 feature_err(
-                    &tcx.sess,
-                    feature,
-                    span,
-                    format!("C-variadic functions with the {abi} calling convention are unstable"),
-                )
-                .emit();
+                        &tcx.sess,
+                        feature,
+                        span,
+                        format!(
+                            "C-variadic functions with the {abi} calling convention are unstable"
+                        ),
+                    )
+                    .emit();
             }
         }
     }

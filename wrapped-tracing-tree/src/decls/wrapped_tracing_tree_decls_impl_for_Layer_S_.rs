@@ -82,21 +82,16 @@ where
         } else {
             level.to_string()
         };
-        write!(&mut event_buf, "{level}", level = level).expect("Unable to write to buffer");
+        write!(& mut event_buf, "{level}", level = level)
+            .expect("Unable to write to buffer");
         if self.config.targets {
             let target = metadata.target();
-            write!(
-                &mut event_buf,
-                " {}",
-                self.styled(Style::new().dimmed(), target,),
-            )
-            .expect("Unable to write to buffer");
+            write!(& mut event_buf, " {}", self.styled(Style::new().dimmed(), target,),)
+                .expect("Unable to write to buffer");
         }
         let mut visitor = FmtEvent { comma: false, bufs };
         event.record(&mut visitor);
-        visitor
-            .bufs
-            .indent_current(indent, &self.config, SpanMode::Event);
+        visitor.bufs.indent_current(indent, &self.config, SpanMode::Event);
         let writer = self.make_writer.make_writer();
         bufs.flush_current_buf(writer)
     }
@@ -125,7 +120,12 @@ where
             }
         }
     }
-    fn on_record(&self, id: &Id, values: &tracing_core::span::Record<'_>, ctx: Context<S>) {
+    fn on_record(
+        &self,
+        id: &Id,
+        values: &tracing_core::span::Record<'_>,
+        ctx: Context<S>,
+    ) {
         let Some(_guard) = Self::is_recursive() else {
             return;
         };

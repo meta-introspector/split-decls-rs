@@ -9,11 +9,19 @@ pub fn main() -> ! {
     let mut callbacks = TimePassesCallbacks::default();
     install_ice_hook(DEFAULT_BUG_REPORT_URL, |_| ());
     install_ctrlc_handler();
-    let exit_code =
-        catch_with_exit_code(|| run_compiler(&args::raw_args(&early_dcx), &mut callbacks));
+    let exit_code = catch_with_exit_code(|| run_compiler(
+        &args::raw_args(&early_dcx),
+        &mut callbacks,
+    ));
     if let Some(format) = callbacks.time_passes {
         let end_rss = get_resident_set_size();
-        print_time_passes_entry("total", start_time.elapsed(), start_rss, end_rss, format);
+        print_time_passes_entry(
+            "total",
+            start_time.elapsed(),
+            start_rss,
+            end_rss,
+            format,
+        );
     }
     process::exit(exit_code)
 }

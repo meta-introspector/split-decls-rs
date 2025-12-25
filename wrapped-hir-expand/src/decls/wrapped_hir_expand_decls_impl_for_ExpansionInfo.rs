@@ -12,8 +12,8 @@ impl ExpansionInfo {
     }
     pub fn is_attr(&self) -> bool {
         matches!(
-            self.loc.def.kind,
-            MacroDefKind::BuiltInAttr(..) | MacroDefKind::ProcMacro(_, _, ProcMacroKind::Attr)
+            self.loc.def.kind, MacroDefKind::BuiltInAttr(..) | MacroDefKind::ProcMacro(_,
+            _, ProcMacroKind::Attr)
         )
     }
     /// Maps the passed in file range down into a macro expansion if it is the input to a macro call.
@@ -27,11 +27,7 @@ impl ExpansionInfo {
             .exp_map
             .ranges_with_span_exact(span)
             .flat_map(move |(range, ctx)| {
-                self.expanded
-                    .value
-                    .covering_element(range)
-                    .into_token()
-                    .zip(Some(ctx))
+                self.expanded.value.covering_element(range).into_token().zip(Some(ctx))
             });
         Some(InMacroFile::new(self.expanded.file_id, tokens))
     }
@@ -47,11 +43,7 @@ impl ExpansionInfo {
             .exp_map
             .ranges_with_span(span)
             .flat_map(move |(range, ctx)| {
-                self.expanded
-                    .value
-                    .covering_element(range)
-                    .into_token()
-                    .zip(Some(ctx))
+                self.expanded.value.covering_element(range).into_token().zip(Some(ctx))
             });
         Some(InMacroFile::new(self.expanded.file_id, tokens))
     }
@@ -94,7 +86,10 @@ impl ExpansionInfo {
                     .start();
                 InFile {
                     file_id,
-                    value: SmallVec::<TextRange, 1>::from_vec(vec![span.range + anchor_offset]),
+                    value: SmallVec::<
+                        TextRange,
+                        1,
+                    >::from_vec(vec![span.range + anchor_offset]),
                 }
             }
             SpanMap::ExpansionSpanMap(arg_map) => {

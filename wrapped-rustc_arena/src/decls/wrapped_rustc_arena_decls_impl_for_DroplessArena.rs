@@ -4,7 +4,8 @@ impl DroplessArena {
     #[inline(never)]
     #[cold]
     fn grow(&self, layout: Layout) {
-        let additional = layout.size() + cmp::max(DROPLESS_ALIGNMENT, layout.align()) - 1;
+        let additional = layout.size() + cmp::max(DROPLESS_ALIGNMENT, layout.align())
+            - 1;
         unsafe {
             let mut chunks = self.chunks.borrow_mut();
             let mut new_cap;
@@ -45,8 +46,8 @@ impl DroplessArena {
     }
     #[inline]
     pub fn alloc<T>(&self, object: T) -> &mut T {
-        assert!(!mem::needs_drop::<T>());
-        assert!(size_of::<T>() != 0);
+        assert!(! mem::needs_drop::< T > ());
+        assert!(size_of::< T > () != 0);
         let mem = self.alloc_raw(Layout::new::<T>()) as *mut T;
         unsafe {
             ptr::write(mem, object);
@@ -65,9 +66,9 @@ impl DroplessArena {
     where
         T: Copy,
     {
-        assert!(!mem::needs_drop::<T>());
-        assert!(size_of::<T>() != 0);
-        assert!(!slice.is_empty());
+        assert!(! mem::needs_drop::< T > ());
+        assert!(size_of::< T > () != 0);
+        assert!(! slice.is_empty());
         let mem = self.alloc_raw(Layout::for_value::<[T]>(slice)) as *mut T;
         unsafe {
             mem.copy_from_nonoverlapping(slice.as_ptr(), slice.len());
@@ -125,8 +126,8 @@ impl DroplessArena {
     #[inline]
     pub fn alloc_from_iter<T, I: IntoIterator<Item = T>>(&self, iter: I) -> &mut [T] {
         let iter = iter.into_iter();
-        assert!(size_of::<T>() != 0);
-        assert!(!mem::needs_drop::<T>());
+        assert!(size_of::< T > () != 0);
+        assert!(! mem::needs_drop::< T > ());
         let size_hint = iter.size_hint();
         match size_hint {
             (min, Some(max)) if min == max => {
@@ -137,7 +138,9 @@ impl DroplessArena {
                 let mem = self.alloc_raw(Layout::array::<T>(len).unwrap()) as *mut T;
                 unsafe { self.write_from_iter(iter, len, mem) }
             }
-            (_, _) => outline(move || self.try_alloc_from_iter(iter.map(Ok::<T, !>)).into_ok()),
+            (_, _) => {
+                outline(move || self.try_alloc_from_iter(iter.map(Ok::<T, !>)).into_ok())
+            }
         }
     }
     #[inline]
@@ -145,7 +148,7 @@ impl DroplessArena {
         &self,
         iter: impl IntoIterator<Item = Result<T, E>>,
     ) -> Result<&mut [T], E> {
-        assert!(size_of::<T>() != 0);
+        assert!(size_of::< T > () != 0);
         let vec: Result<SmallVec<T, 8>, E> = iter.into_iter().collect();
         let mut vec = vec?;
         if vec.is_empty() {
@@ -153,7 +156,8 @@ impl DroplessArena {
         }
         let len = vec.len();
         Ok(unsafe {
-            let start_ptr = self.alloc_raw(Layout::for_value::<[T]>(vec.as_slice())) as *mut T;
+            let start_ptr = self.alloc_raw(Layout::for_value::<[T]>(vec.as_slice()))
+                as *mut T;
             vec.as_ptr().copy_to_nonoverlapping(start_ptr, len);
             vec.set_len(0);
             slice::from_raw_parts_mut(start_ptr, len)

@@ -17,8 +17,7 @@ where
         count += 1;
         if count > n {
             panic!(
-                "test did not finish within {n} attempts ({:?} total)",
-                start.elapsed()
+                "test did not finish within {n} attempts ({:?} total)", start.elapsed()
             );
         }
         sleep_ms(100);

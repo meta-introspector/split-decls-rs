@@ -5,11 +5,18 @@ impl Files {
         match self.files.get(&file_id) {
             Some(text) => *text,
             None => {
-                panic!("Unable to fetch file text for `vfs::FileId`: {file_id:?}; this is a bug")
+                panic!(
+                    "Unable to fetch file text for `vfs::FileId`: {file_id:?}; this is a bug"
+                )
             }
         }
     }
-    pub fn set_file_text(&self, db: &mut dyn SourceDatabase, file_id: vfs::FileId, text: &str) {
+    pub fn set_file_text(
+        &self,
+        db: &mut dyn SourceDatabase,
+        file_id: vfs::FileId,
+        text: &str,
+    ) {
         match self.files.entry(file_id) {
             Entry::Occupied(mut occupied) => {
                 occupied.get_mut().set_text(db).to(Arc::from(text));

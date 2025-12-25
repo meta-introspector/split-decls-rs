@@ -29,7 +29,13 @@ impl SourceDatabase for RootDatabase {
         durability: Durability,
     ) {
         let files = Arc::clone(&self.files);
-        files.set_source_root_with_durability(self, source_root_id, source_root, durability);
+        files
+            .set_source_root_with_durability(
+                self,
+                source_root_id,
+                source_root,
+                durability,
+            );
     }
     fn file_source_root(&self, id: vfs::FileId) -> FileSourceRootInput {
         self.files.file_source_root(id)
@@ -47,9 +53,6 @@ impl SourceDatabase for RootDatabase {
         self.crates_map.clone()
     }
     fn nonce_and_revision(&self) -> (Nonce, salsa::Revision) {
-        (
-            self.nonce,
-            salsa::plumbing::ZalsaDatabase::zalsa(self).current_revision(),
-        )
+        (self.nonce, salsa::plumbing::ZalsaDatabase::zalsa(self).current_revision())
     }
 }

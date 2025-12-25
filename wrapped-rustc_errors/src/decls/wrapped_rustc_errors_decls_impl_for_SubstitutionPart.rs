@@ -15,7 +15,10 @@ impl SubstitutionPart {
         let Ok(snippet) = sm.span_to_snippet(trimmed_part.span) else {
             return trimmed_part;
         };
-        if let Some((prefix, substr, suffix)) = as_substr(&snippet, &trimmed_part.snippet) {
+        if let Some((prefix, substr, suffix)) = as_substr(
+            &snippet,
+            &trimmed_part.snippet,
+        ) {
             trimmed_part.span = Span::new(
                 trimmed_part.span.lo() + BytePos(prefix as u32),
                 trimmed_part.span.hi() - BytePos(suffix as u32),

@@ -175,8 +175,7 @@ impl MmapMut {
     /// See [madvise()](https://man7.org/linux/man-pages/man2/madvise.2.html) map page.
     #[cfg(unix)]
     pub fn advise(&self, advice: Advice) -> Result<()> {
-        self.inner
-            .advise(advice as libc::c_int, 0, self.inner.len())
+        self.inner.advise(advice as libc::c_int, 0, self.inner.len())
     }
     /// Advise OS how this memory map will be accessed.
     ///
@@ -185,8 +184,7 @@ impl MmapMut {
     /// See [madvise()](https://man7.org/linux/man-pages/man2/madvise.2.html) map page.
     #[cfg(unix)]
     pub unsafe fn unchecked_advise(&self, advice: UncheckedAdvice) -> Result<()> {
-        self.inner
-            .advise(advice as libc::c_int, 0, self.inner.len())
+        self.inner.advise(advice as libc::c_int, 0, self.inner.len())
     }
     /// Advise OS how this range of memory map will be accessed.
     ///

@@ -12,8 +12,8 @@ where
 {
     match id.lookup(db).container {
         ItemContainerId::ExternBlockId(_) => Some(ctor(DEF::from(id))),
-        ItemContainerId::TraitId(_) | ItemContainerId::ImplId(_) | ItemContainerId::ModuleId(_) => {
-            None
-        }
+        ItemContainerId::TraitId(_)
+        | ItemContainerId::ImplId(_)
+        | ItemContainerId::ModuleId(_) => None,
     }
 }

@@ -35,19 +35,31 @@ impl<BS: ArraySize> BlockBuffer<BS, Eager> {
     /// Pad message with 0x80, zeros and 64-bit message length using
     /// big-endian byte order.
     #[inline]
-    pub fn len64_padding_be(&mut self, data_len: u64, compress: impl FnMut(&Array<u8, BS>)) {
+    pub fn len64_padding_be(
+        &mut self,
+        data_len: u64,
+        compress: impl FnMut(&Array<u8, BS>),
+    ) {
         self.digest_pad(0x80, &data_len.to_be_bytes(), compress);
     }
     /// Pad message with 0x80, zeros and 64-bit message length using
     /// little-endian byte order.
     #[inline]
-    pub fn len64_padding_le(&mut self, data_len: u64, compress: impl FnMut(&Array<u8, BS>)) {
+    pub fn len64_padding_le(
+        &mut self,
+        data_len: u64,
+        compress: impl FnMut(&Array<u8, BS>),
+    ) {
         self.digest_pad(0x80, &data_len.to_le_bytes(), compress);
     }
     /// Pad message with 0x80, zeros and 128-bit message length using
     /// big-endian byte order.
     #[inline]
-    pub fn len128_padding_be(&mut self, data_len: u128, compress: impl FnMut(&Array<u8, BS>)) {
+    pub fn len128_padding_be(
+        &mut self,
+        data_len: u128,
+        compress: impl FnMut(&Array<u8, BS>),
+    ) {
         self.digest_pad(0x80, &data_len.to_be_bytes(), compress);
     }
 }

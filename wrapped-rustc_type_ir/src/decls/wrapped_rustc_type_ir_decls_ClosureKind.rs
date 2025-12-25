@@ -7,10 +7,7 @@ use std::collections::HashMap;
 /// You can get the environment type of a closure using
 /// `tcx.closure_env_ty()`.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
-#[cfg_attr(
-    feature = "nightly",
-    derive(Encodable, Decodable, HashStable_NoContext)
-)]
+#[cfg_attr(feature = "nightly", derive(Encodable, Decodable, HashStable_NoContext))]
 pub enum ClosureKind {
     Fn,
     FnMut,

@@ -11,7 +11,9 @@ where
     LOC: AstIdNode,
 {
     match id.lookup(db).container {
-        ItemContainerId::TraitId(_) | ItemContainerId::ImplId(_) => Some(ctor(DEF::from(id))),
+        ItemContainerId::TraitId(_) | ItemContainerId::ImplId(_) => {
+            Some(ctor(DEF::from(id)))
+        }
         ItemContainerId::ModuleId(_) | ItemContainerId::ExternBlockId(_) => None,
     }
 }

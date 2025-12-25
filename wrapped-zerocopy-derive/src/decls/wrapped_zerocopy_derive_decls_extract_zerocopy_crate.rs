@@ -10,27 +10,28 @@ fn extract_zerocopy_crate(attrs: &[Attribute]) -> Result<Path, Error> {
                 attr.parse_nested_meta(|meta| {
                     if meta.path.is_ident("crate") {
                         let expr = meta.value().and_then(|value| value.parse());
-                        if let Ok(Expr::Lit(ExprLit {
-                            lit: Lit::Str(lit), ..
-                        })) = expr
-                        {
+                        if let Ok(Expr::Lit(ExprLit { lit: Lit::Str(lit), .. })) = expr {
                             if let Ok(path_lit) = lit.parse() {
                                 path = path_lit;
                                 return Ok(());
                             }
                         }
-                        return Err(Error::new(
-                            Span::call_site(),
-                            "`crate` attribute requires a path as the value",
-                        ));
+                        return Err(
+                            Error::new(
+                                Span::call_site(),
+                                "`crate` attribute requires a path as the value",
+                            ),
+                        );
                     }
-                    Err(Error::new(
-                        Span::call_site(),
-                        format!(
-                            "unknown attribute encountered: {}",
-                            meta.path.into_token_stream()
+                    Err(
+                        Error::new(
+                            Span::call_site(),
+                            format!(
+                                "unknown attribute encountered: {}", meta.path
+                                .into_token_stream()
+                            ),
                         ),
-                    ))
+                    )
                 })?;
             }
         }

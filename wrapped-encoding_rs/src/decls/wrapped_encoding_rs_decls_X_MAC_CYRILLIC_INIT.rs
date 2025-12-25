@@ -14,5 +14,10 @@ use std::collections::HashMap;
 /// items.
 pub static X_MAC_CYRILLIC_INIT: Encoding = Encoding {
     name: "x-mac-cyrillic",
-    variant: VariantEncoding::SingleByte(&data::SINGLE_BYTE_DATA.x_mac_cyrillic, 0x0430, 96, 31),
+    variant: VariantEncoding::SingleByte(
+        &data::SINGLE_BYTE_DATA.x_mac_cyrillic,
+        0x0430,
+        96,
+        31,
+    ),
 };

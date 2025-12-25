@@ -21,10 +21,7 @@ use std::collections::HashMap;
 ///
 /// [doc]: https://doc.rust-lang.org/stable/std/env/fn.set_var.html#safety
 pub unsafe fn try_init_openssl_env_vars() -> bool {
-    let ProbeResult {
-        cert_file,
-        cert_dir,
-    } = probe();
+    let ProbeResult { cert_file, cert_dir } = probe();
     if let Some(path) = &cert_file {
         unsafe {
             put(ENV_CERT_FILE, path);

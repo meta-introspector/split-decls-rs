@@ -6,26 +6,28 @@ fn merge_generics(into: &mut Generics, from: &Generics) -> Result<()> {
             match (op, p) {
                 (GenericParam::Type(otp), GenericParam::Type(tp)) => {
                     if otp.ident == tp.ident {
-                        return Err(Error::new_spanned(
-                            p,
-                            format!(
-                                "Attempted to merge conflicting generic parameters: {} and {}",
-                                quote!(# op),
-                                quote!(# p)
+                        return Err(
+                            Error::new_spanned(
+                                p,
+                                format!(
+                                    "Attempted to merge conflicting generic parameters: {} and {}",
+                                    quote!(# op), quote!(# p)
+                                ),
                             ),
-                        ));
+                        );
                     }
                 }
                 (GenericParam::Lifetime(olp), GenericParam::Lifetime(lp)) => {
                     if olp.lifetime == lp.lifetime {
-                        return Err(Error::new_spanned(
-                            p,
-                            format!(
-                                "Attempted to merge conflicting generic parameters: {} and {}",
-                                quote!(# op),
-                                quote!(# p)
+                        return Err(
+                            Error::new_spanned(
+                                p,
+                                format!(
+                                    "Attempted to merge conflicting generic parameters: {} and {}",
+                                    quote!(# op), quote!(# p)
+                                ),
                             ),
-                        ));
+                        );
                     }
                 }
                 _ => {}

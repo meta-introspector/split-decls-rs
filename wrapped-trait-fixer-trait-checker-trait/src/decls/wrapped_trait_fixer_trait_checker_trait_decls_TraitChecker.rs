@@ -7,5 +7,11 @@ where
     Y: Sized + 'tcx,
 {
     fn get_trait_def_id(&self, trait_name: &str) -> Option<D>;
-    fn type_implements_trait(&self, tcx: T, adt_ty: Y, item_def_id: D, trait_def_id: D) -> bool;
+    fn type_implements_trait(
+        &self,
+        tcx: T,
+        adt_ty: Y,
+        item_def_id: D,
+        trait_def_id: D,
+    ) -> bool;
 }

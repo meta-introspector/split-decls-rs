@@ -6,39 +6,42 @@ impl<'ast> Visit<'ast> for AstVisitor {
         let mut arg_types = Vec::new();
         for arg in &i.sig.inputs {
             if let syn::FnArg::Typed(pat_type) = arg {
-                arg_types.push(
-                    quote! {
-                        # pat_type.ty
-                    }
-                    .to_string(),
-                );
+                arg_types
+                    .push(
+                        quote! {
+                            # pat_type.ty
+                        }
+                            .to_string(),
+                    );
             }
         }
         let return_type = if let syn::ReturnType::Type(_, ty) = &i.sig.output {
             quote! {
                 # ty
             }
-            .to_string()
+                .to_string()
         } else {
             "()".to_string()
         };
         let visibility_str = match &i.vis {
             Visibility::Public(_) => "public".to_string(),
             Visibility::Restricted(r) => {
-                format!("restricted({})", quote! { # r.path }.to_string())
+                format!("restricted({})", quote! { # r.path } .to_string())
             }
             Visibility::Inherited => "private".to_string(),
         };
-        self.stats.function_definitions.push(FunctionInfo {
-            name: i.sig.ident.to_string(),
-            visibility: visibility_str,
-            arg_count: i.sig.inputs.len() as u32,
-            arg_types,
-            return_type,
-            is_async: i.sig.asyncness.is_some(),
-            is_unsafe: i.sig.unsafety.is_some(),
-            is_const: i.sig.constness.is_some(),
-        });
+        self.stats
+            .function_definitions
+            .push(FunctionInfo {
+                name: i.sig.ident.to_string(),
+                visibility: visibility_str,
+                arg_count: i.sig.inputs.len() as u32,
+                arg_types,
+                return_type,
+                is_async: i.sig.asyncness.is_some(),
+                is_unsafe: i.sig.unsafety.is_some(),
+                is_const: i.sig.constness.is_some(),
+            });
         visit::visit_item_fn(self, i);
     }
     fn visit_item_struct(&mut self, i: &'ast syn::ItemStruct) {
@@ -63,12 +66,14 @@ impl<'ast> Visit<'ast> for AstVisitor {
     }
     fn visit_pat_ident(&mut self, i: &'ast syn::PatIdent) {
         self.increment_node_type_count("variable");
-        self.stats.variable_declarations.push(VariableInfo {
-            name: i.ident.to_string(),
-            type_name: "unknown".to_string(),
-            is_mutable: i.by_ref.is_some() || i.mutability.is_some(),
-            scope: "unknown".to_string(),
-        });
+        self.stats
+            .variable_declarations
+            .push(VariableInfo {
+                name: i.ident.to_string(),
+                type_name: "unknown".to_string(),
+                is_mutable: i.by_ref.is_some() || i.mutability.is_some(),
+                scope: "unknown".to_string(),
+            });
         visit::visit_pat_ident(self, i);
     }
     fn visit_item(&mut self, i: &'ast syn::Item) {

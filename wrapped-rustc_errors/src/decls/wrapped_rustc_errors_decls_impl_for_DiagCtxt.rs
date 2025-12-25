@@ -25,7 +25,9 @@ impl DiagCtxt {
     pub fn make_silent(&self) {
         let mut inner = self.inner.borrow_mut();
         let translator = inner.emitter.translator().clone();
-        inner.emitter = Box::new(emitter::SilentEmitter { translator });
+        inner.emitter = Box::new(emitter::SilentEmitter {
+            translator,
+        });
     }
     pub fn set_emitter(&self, emitter: Box<dyn Emitter + DynSend>) {
         self.inner.borrow_mut().emitter = emitter;

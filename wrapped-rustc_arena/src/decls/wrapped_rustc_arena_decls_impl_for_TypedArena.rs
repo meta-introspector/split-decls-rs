@@ -29,7 +29,7 @@ impl<T> TypedArena<T> {
     }
     #[inline]
     fn alloc_raw_slice(&self, len: usize) -> *mut T {
-        assert!(size_of::<T>() != 0);
+        assert!(size_of::< T > () != 0);
         assert!(len != 0);
         if !self.can_allocate(len) {
             self.grow(len);
@@ -45,8 +45,7 @@ impl<T> TypedArena<T> {
     /// storing the elements in the arena.
     #[inline]
     pub fn alloc_from_iter<I: IntoIterator<Item = T>>(&self, iter: I) -> &mut [T] {
-        self.try_alloc_from_iter(iter.into_iter().map(Ok::<T, !>))
-            .into_ok()
+        self.try_alloc_from_iter(iter.into_iter().map(Ok::<T, !>)).into_ok()
     }
     /// Allocates the elements of this iterator into a contiguous slice in the `TypedArena`.
     ///

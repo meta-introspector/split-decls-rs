@@ -32,8 +32,5 @@ pub fn lower_to_hir(tcx: TyCtxt<'_>, (): ()) -> hir::Crate<'_> {
     } else {
         None
     };
-    hir::Crate {
-        owners,
-        opt_hir_hash,
-    }
+    hir::Crate { owners, opt_hir_hash }
 }

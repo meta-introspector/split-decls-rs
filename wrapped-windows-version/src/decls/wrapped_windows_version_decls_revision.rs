@@ -15,9 +15,5 @@ pub fn revision() -> u32 {
             &mut len,
         )
     };
-    if result == 0 {
-        u32::from_le_bytes(value)
-    } else {
-        0
-    }
+    if result == 0 { u32::from_le_bytes(value) } else { 0 }
 }

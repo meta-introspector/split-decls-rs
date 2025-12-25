@@ -10,11 +10,7 @@ pub fn borrow_decode_from_slice_with_context<
     Context,
     D: de::BorrowDecode<'a, Context>,
     C: Config,
->(
-    src: &'a [u8],
-    config: C,
-    context: Context,
-) -> Result<(D, usize), error::DecodeError> {
+>(src: &'a [u8], config: C, context: Context) -> Result<(D, usize), error::DecodeError> {
     let reader = de::read::SliceReader::new(src);
     let mut decoder = de::DecoderImpl::<_, C, Context>::new(reader, config, context);
     let result = D::borrow_decode(&mut decoder)?;

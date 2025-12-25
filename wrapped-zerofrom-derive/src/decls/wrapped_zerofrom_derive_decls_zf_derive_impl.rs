@@ -11,10 +11,7 @@ fn zf_derive_impl(input: &DeriveInput) -> TokenStream2 {
             ty
         })
         .collect::<Vec<_>>();
-    let typarams = tybounds
-        .iter()
-        .map(|ty| ty.ident.clone())
-        .collect::<Vec<_>>();
+    let typarams = tybounds.iter().map(|ty| ty.ident.clone()).collect::<Vec<_>>();
     let lts = input.generics.lifetimes().count();
     let name = &input.ident;
     let structure = Structure::new(input);
@@ -38,18 +35,18 @@ fn zf_derive_impl(input: &DeriveInput) -> TokenStream2 {
                 while let Some(bound_pair) = bounds.pop() {
                     let bound = bound_pair.into_value();
                     if let TypeParamBound::Trait(ref trait_bound) = bound {
-                        if trait_bound.path.get_ident().map(|ident| ident == "Sized") == Some(true)
-                            && matches!(trait_bound.modifier, TraitBoundModifier::Maybe(_))
+                        if trait_bound.path.get_ident().map(|ident| ident == "Sized")
+                            == Some(true)
+                            && matches!(
+                                trait_bound.modifier, TraitBoundModifier::Maybe(_)
+                            )
                         {
                             continue;
                         }
                     }
                     param.bounds.push(bound);
                 }
-                Some(Ident::new(
-                    &format!("{}ZFParamC", param.ident),
-                    param.ident.span(),
-                ))
+                Some(Ident::new(&format!("{}ZFParamC", param.ident), param.ident.span()))
             } else {
                 None
             };
@@ -66,7 +63,7 @@ fn zf_derive_impl(input: &DeriveInput) -> TokenStream2 {
         let (clone, clone_trait) = if has_clone {
             (quote!(this.clone()), quote!(Clone))
         } else {
-            (quote!(*this), quote!(Copy))
+            (quote!(* this), quote!(Copy))
         };
         let bounds: Vec<WherePredicate> = typarams
             .iter()
@@ -80,47 +77,60 @@ fn zf_derive_impl(input: &DeriveInput) -> TokenStream2 {
     } else {
         if lts > 1 {
             return syn::Error::new(
-                input.generics.span(),
-                "derive(ZeroFrom) cannot have multiple lifetime parameters",
-            )
-            .to_compile_error();
+                    input.generics.span(),
+                    "derive(ZeroFrom) cannot have multiple lifetime parameters",
+                )
+                .to_compile_error();
         }
         let mut zf_bounds: Vec<WherePredicate> = vec![];
-        let body = structure.each_variant(|vi| {
-            vi.construct(|f, i| {
-                let binding = format!("__binding_{i}");
-                let field = Ident::new(&binding, Span::call_site());
-                if has_attr(&f.attrs, "clone") {
-                    quote! {
-                        # field.clone()
-                    }
-                } else {
-                    let fty = replace_lifetime(&f.ty, custom_lt("'zf"));
-                    let lifetime_ty =
-                        replace_lifetime_and_type(&f.ty, custom_lt("'zf_inner"), &generics_env);
-                    let (has_ty, has_lt) = visitor::check_type_for_parameters(&f.ty, &generics_env);
-                    if has_ty {
-                        if has_lt {
-                            zf_bounds.push(parse_quote!(
-                                # fty : zerofrom::ZeroFrom <'zf, # lifetime_ty >
-                            ));
-                        } else {
-                            zf_bounds.push(parse_quote!(# fty : zerofrom::ZeroFrom <'zf, # fty >));
-                        }
-                    }
-                    if has_ty || has_lt {
+        let body = structure
+            .each_variant(|vi| {
+                vi.construct(|f, i| {
+                    let binding = format!("__binding_{i}");
+                    let field = Ident::new(&binding, Span::call_site());
+                    if has_attr(&f.attrs, "clone") {
                         quote! {
-                            <# fty as zerofrom::ZeroFrom <'zf, # lifetime_ty
-                            >>::zero_from(# field)
+                            # field.clone()
                         }
                     } else {
-                        quote! {
-                            *# field
+                        let fty = replace_lifetime(&f.ty, custom_lt("'zf"));
+                        let lifetime_ty = replace_lifetime_and_type(
+                            &f.ty,
+                            custom_lt("'zf_inner"),
+                            &generics_env,
+                        );
+                        let (has_ty, has_lt) = visitor::check_type_for_parameters(
+                            &f.ty,
+                            &generics_env,
+                        );
+                        if has_ty {
+                            if has_lt {
+                                zf_bounds
+                                    .push(
+                                        parse_quote!(
+                                            # fty : zerofrom::ZeroFrom <'zf, # lifetime_ty >
+                                        ),
+                                    );
+                            } else {
+                                zf_bounds
+                                    .push(
+                                        parse_quote!(# fty : zerofrom::ZeroFrom <'zf, # fty >),
+                                    );
+                            }
+                        }
+                        if has_ty || has_lt {
+                            quote! {
+                                <# fty as zerofrom::ZeroFrom <'zf, # lifetime_ty
+                                >>::zero_from(# field)
+                            }
+                        } else {
+                            quote! {
+                                *# field
+                            }
                         }
                     }
-                }
-            })
-        });
+                })
+            });
         let (maybe_zf_lifetime, maybe_zf_inner_lifetime) = if lts == 0 {
             (quote!(), quote!())
         } else {
@@ -131,9 +141,12 @@ fn zf_derive_impl(input: &DeriveInput) -> TokenStream2 {
             for typaram_c in &mut typarams_c {
                 if let Some(Some(replacement)) = generics_env.get(typaram_c) {
                     let typaram_t = mem::replace(typaram_c, replacement.clone());
-                    zf_bounds.push(parse_quote!(
-                        # typaram_c : zerofrom::ZeroFrom <'zf_inner, # typaram_t >
-                    ));
+                    zf_bounds
+                        .push(
+                            parse_quote!(
+                                # typaram_c : zerofrom::ZeroFrom <'zf_inner, # typaram_t >
+                            ),
+                        );
                     tybounds.push(parse_quote!(# typaram_c));
                 }
             }

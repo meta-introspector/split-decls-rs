@@ -3,9 +3,8 @@ use std::collections::HashMap;
 impl std::fmt::Debug for VersionInfo {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
-            f,
-            "VersionInfo {{ crate_name: \"{}\", major: {}, minor: {}, patch: {}",
-            self.crate_name, self.major, self.minor, self.patch,
+            f, "VersionInfo {{ crate_name: \"{}\", major: {}, minor: {}, patch: {}", self
+            .crate_name, self.major, self.minor, self.patch,
         )?;
         if let Some(ref commit_hash) = self.commit_hash {
             write!(f, ", commit_hash: \"{}\"", commit_hash.trim(),)?;

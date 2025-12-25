@@ -51,20 +51,23 @@ impl<'a, D: DataExt> ImplBlockBuilder<'a, D> {
             let traits = traits.map(|t| t.crate_path(zerocopy_crate));
             parse_quote!(# ty : # (# traits) +*)
         }
-        let field_type_bounds: Vec<_> = match (self.field_type_trait_bounds, &fields[..]) {
-            (FieldBounds::All(traits), _) => fields
-                .iter()
-                .map(|(_vis, _name, ty)| {
-                    bound_tt(ty, normalize_bounds(self.trt, traits), zerocopy_crate)
-                })
-                .collect(),
+        let field_type_bounds: Vec<_> = match (
+            self.field_type_trait_bounds,
+            &fields[..],
+        ) {
+            (FieldBounds::All(traits), _) => {
+                fields
+                    .iter()
+                    .map(|(_vis, _name, ty)| {
+                        bound_tt(ty, normalize_bounds(self.trt, traits), zerocopy_crate)
+                    })
+                    .collect()
+            }
             (FieldBounds::None, _) | (FieldBounds::Trailing(..), []) => vec![],
             (FieldBounds::Trailing(traits), [.., last]) => {
-                vec![bound_tt(
-                    last.2,
-                    normalize_bounds(self.trt, traits),
-                    zerocopy_crate,
-                )]
+                vec![
+                    bound_tt(last.2, normalize_bounds(self.trt, traits), zerocopy_crate)
+                ]
             }
             (FieldBounds::Explicit(bounds), _) => bounds,
         };
@@ -73,10 +76,12 @@ impl<'a, D: DataExt> ImplBlockBuilder<'a, D> {
             .padding_check
             .and_then(|check| (!fields.is_empty()).then_some(check))
             .map(|check| {
-                let variant_types = variants.iter().map(|var| {
-                    let types = var.iter().map(|(_vis, _name, ty)| ty);
-                    quote!([# (# types),*])
-                });
+                let variant_types = variants
+                    .iter()
+                    .map(|var| {
+                        let types = var.iter().map(|(_vis, _name, ty)| ty);
+                        quote!([# (# types),*])
+                    });
                 let validator_context = check.validator_macro_context();
                 let (trt, validator_macro) = check.validator_trait_and_macro_idents();
                 let t = tag.iter();
@@ -88,11 +93,11 @@ impl<'a, D: DataExt> ImplBlockBuilder<'a, D> {
             });
         let self_bounds: Option<WherePredicate> = match self.self_type_trait_bounds {
             SelfBounds::None => None,
-            SelfBounds::All(traits) => Some(bound_tt(
-                &parse_quote!(Self),
-                traits.iter().copied(),
-                zerocopy_crate,
-            )),
+            SelfBounds::All(traits) => {
+                Some(
+                    bound_tt(&parse_quote!(Self), traits.iter().copied(), zerocopy_crate),
+                )
+            }
         };
         let bounds = self
             .input
@@ -119,20 +124,25 @@ impl<'a, D: DataExt> ImplBlockBuilder<'a, D> {
                 }
                 quote!(# param)
             });
-        let param_idents = self.input.generics.params.iter().map(|param| match param {
-            GenericParam::Type(ty) => {
-                let ident = &ty.ident;
-                quote!(# ident)
-            }
-            GenericParam::Lifetime(l) => {
-                let ident = &l.lifetime;
-                quote!(# ident)
-            }
-            GenericParam::Const(cnst) => {
-                let ident = &cnst.ident;
-                quote!({ # ident })
-            }
-        });
+        let param_idents = self
+            .input
+            .generics
+            .params
+            .iter()
+            .map(|param| match param {
+                GenericParam::Type(ty) => {
+                    let ident = &ty.ident;
+                    quote!(# ident)
+                }
+                GenericParam::Lifetime(l) => {
+                    let ident = &l.lifetime;
+                    quote!(# ident)
+                }
+                GenericParam::Const(cnst) => {
+                    let ident = &cnst.ident;
+                    quote!({ # ident })
+                }
+            });
         let inner_extras = self.inner_extras;
         let impl_tokens = quote! {
             #[allow(deprecated)] #[automatically_derived] unsafe impl < # (# params),* >

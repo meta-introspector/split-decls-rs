@@ -79,7 +79,7 @@ pub fn from_dot_file(input: proc_macro::TokenStream) -> proc_macro::TokenStream 
             return quote! {
                 compile_error!(# msg)
             }
-            .into();
+                .into();
         }
         Ok(graph) => graph,
     };

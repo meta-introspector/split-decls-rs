@@ -7,14 +7,15 @@ fn derive_from_bytes_union(
     unn: &DataUnion,
     zerocopy_crate: &Path,
 ) -> TokenStream {
-    let field_type_trait_bounds =
-        FieldBounds::All(&[TraitBound::Slf, TraitBound::Other(Trait::Immutable)]);
+    let field_type_trait_bounds = FieldBounds::All(
+        &[TraitBound::Slf, TraitBound::Other(Trait::Immutable)],
+    );
     ImplBlockBuilder::new(
-        ast,
-        unn,
-        Trait::FromBytes,
-        field_type_trait_bounds,
-        zerocopy_crate,
-    )
-    .build()
+            ast,
+            unn,
+            Trait::FromBytes,
+            field_type_trait_bounds,
+            zerocopy_crate,
+        )
+        .build()
 }

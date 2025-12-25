@@ -42,7 +42,10 @@ pub trait Sink<Item> {
     ///
     /// In most cases, if the sink encounters an error, the sink will
     /// permanently be unable to receive items.
-    fn poll_ready(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>>;
+    fn poll_ready(
+        self: Pin<&mut Self>,
+        cx: &mut Context<'_>,
+    ) -> Poll<Result<(), Self::Error>>;
     /// Begin the process of sending a value to the sink.
     /// Each call to this function must be preceded by a successful call to
     /// `poll_ready` which returned `Poll::Ready(Ok(()))`.
@@ -75,7 +78,10 @@ pub trait Sink<Item> {
     ///
     /// In most cases, if the sink encounters an error, the sink will
     /// permanently be unable to receive items.
-    fn poll_flush(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>>;
+    fn poll_flush(
+        self: Pin<&mut Self>,
+        cx: &mut Context<'_>,
+    ) -> Poll<Result<(), Self::Error>>;
     /// Flush any remaining output and close this sink, if necessary.
     ///
     /// Returns `Poll::Ready(Ok(()))` when no buffered items remain and the sink
@@ -87,5 +93,8 @@ pub trait Sink<Item> {
     ///
     /// If this function encounters an error, the sink should be considered to
     /// have failed permanently, and no more `Sink` methods should be called.
-    fn poll_close(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>>;
+    fn poll_close(
+        self: Pin<&mut Self>,
+        cx: &mut Context<'_>,
+    ) -> Poll<Result<(), Self::Error>>;
 }

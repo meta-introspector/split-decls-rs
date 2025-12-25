@@ -16,12 +16,14 @@ where
         _ => EnvFilter::default().add_directive(Directive::from(LevelFilter::WARN)),
     };
     let color_logs = match cfg.color_logs {
-        Ok(value) => match value.as_ref() {
-            "always" => true,
-            "never" => false,
-            "auto" => stderr_isatty(),
-            _ => return Err(Error::InvalidColorValue(value)),
-        },
+        Ok(value) => {
+            match value.as_ref() {
+                "always" => true,
+                "never" => false,
+                "auto" => stderr_isatty(),
+                _ => return Err(Error::InvalidColorValue(value)),
+            }
+        }
         Err(VarError::NotPresent) => stderr_isatty(),
         Err(VarError::NotUnicode(_value)) => return Err(Error::NonUnicodeColorValue),
     };
@@ -59,12 +61,16 @@ where
             let fmt_layer = tracing_subscriber::fmt::layer()
                 .with_writer(io::stderr)
                 .without_time()
-                .event_format(BacktraceFormatter { backtrace_target });
+                .event_format(BacktraceFormatter {
+                    backtrace_target,
+                });
             let subscriber = subscriber.with(layer).with(fmt_layer).with(filter);
             tracing::subscriber::set_global_default(subscriber)?;
         }
         Err(_) => {
-            tracing::subscriber::set_global_default(subscriber.with(layer).with(filter))?;
+            tracing::subscriber::set_global_default(
+                subscriber.with(layer).with(filter),
+            )?;
         }
     };
     Ok(())

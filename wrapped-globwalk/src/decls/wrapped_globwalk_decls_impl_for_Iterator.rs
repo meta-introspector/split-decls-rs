@@ -21,7 +21,10 @@ impl Iterator for GlobWalker {
                         } else {
                             None
                         };
-                        let file_type_matches = match (self.file_type_filter.as_ref(), file_type) {
+                        let file_type_matches = match (
+                            self.file_type_filter.as_ref(),
+                            file_type,
+                        ) {
                             (None, _) => true,
                             (Some(_), None) => false,
                             (Some(filter), Some(actual)) => filter.contains(actual),

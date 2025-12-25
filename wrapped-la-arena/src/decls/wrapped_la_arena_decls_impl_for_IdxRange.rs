@@ -37,7 +37,9 @@ impl<T> IdxRange<T> {
     /// ```
     pub fn new_inclusive(range: RangeInclusive<Idx<T>>) -> Self {
         Self {
-            range: u32::from(range.start().into_raw())..u32::from(range.end().into_raw()) + 1,
+            range: u32::from(
+                range.start().into_raw(),
+            )..u32::from(range.end().into_raw()) + 1,
             _p: PhantomData,
         }
     }

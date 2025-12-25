@@ -18,20 +18,20 @@ impl SymlinkBuilder {
     #[cfg(unix)]
     fn mk(&self) {
         self.dirname().mkdir_p();
-        t!(os::unix::fs::symlink(&self.dst, &self.src));
+        t!(os::unix::fs::symlink(& self.dst, & self.src));
     }
     #[cfg(windows)]
     fn mk(&mut self) {
         self.dirname().mkdir_p();
         if self.src_is_dir {
-            t!(os::windows::fs::symlink_dir(&self.dst, &self.src));
+            t!(os::windows::fs::symlink_dir(& self.dst, & self.src));
         } else {
             if let Some(ext) = self.dst.extension() {
                 if ext == env::consts::EXE_EXTENSION {
                     self.src.set_extension(ext);
                 }
             }
-            t!(os::windows::fs::symlink_file(&self.dst, &self.src));
+            t!(os::windows::fs::symlink_file(& self.dst, & self.src));
         }
     }
     fn dirname(&self) -> &Path {

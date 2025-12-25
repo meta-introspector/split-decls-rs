@@ -146,9 +146,7 @@ impl GlobWalkerBuilder {
     /// Finalize and build a `GlobWalker` instance.
     pub fn build(self) -> Result<GlobWalker, GlobError> {
         let mut builder = OverrideBuilder::new(self.root);
-        builder
-            .case_insensitive(self.case_insensitive)
-            .map_err(GlobError)?;
+        builder.case_insensitive(self.case_insensitive).map_err(GlobError)?;
         for pattern in self.patterns {
             builder.add(pattern.as_ref()).map_err(GlobError)?;
         }

@@ -4,18 +4,23 @@ impl Local {
     pub fn is_param(self, db: &dyn HirDatabase) -> bool {
         let src = self.primary_source(db);
         match src.source.value {
-            Either::Left(pat) => pat
-                .syntax()
-                .ancestors()
-                .map(|it| it.kind())
-                .take_while(|&kind| ast::Pat::can_cast(kind) || ast::Param::can_cast(kind))
-                .any(ast::Param::can_cast),
+            Either::Left(pat) => {
+                pat.syntax()
+                    .ancestors()
+                    .map(|it| it.kind())
+                    .take_while(|&kind| {
+                        ast::Pat::can_cast(kind) || ast::Param::can_cast(kind)
+                    })
+                    .any(ast::Param::can_cast)
+            }
             Either::Right(_) => true,
         }
     }
     pub fn as_self_param(self, db: &dyn HirDatabase) -> Option<SelfParam> {
         match self.parent {
-            DefWithBodyId::FunctionId(func) if self.is_self(db) => Some(SelfParam { func }),
+            DefWithBodyId::FunctionId(func) if self.is_self(db) => {
+                Some(SelfParam { func })
+            }
             _ => None,
         }
     }
@@ -33,8 +38,8 @@ impl Local {
     pub fn is_ref(self, db: &dyn HirDatabase) -> bool {
         let body = db.body(self.parent);
         matches!(
-            body[self.binding_id].mode,
-            BindingAnnotation::Ref | BindingAnnotation::RefMut
+            body[self.binding_id].mode, BindingAnnotation::Ref |
+            BindingAnnotation::RefMut
         )
     }
     pub fn parent(self, _db: &dyn HirDatabase) -> DefWithBody {
@@ -55,26 +60,29 @@ impl Local {
         match body.self_param.zip(source_map.self_param_syntax()) {
             Some((param, source)) if param == self.binding_id => {
                 let root = source.file_syntax(db);
-                vec![LocalSource {
-                    local: self,
-                    source: source.map(|ast| Either::Right(ast.to_node(&root))),
-                }]
+                vec![
+                    LocalSource { local : self, source : source.map(| ast |
+                    Either::Right(ast.to_node(& root))), }
+                ]
             }
-            _ => source_map
-                .patterns_for_binding(self.binding_id)
-                .iter()
-                .map(|&definition| {
-                    let src = source_map.pat_syntax(definition).unwrap();
-                    let root = src.file_syntax(db);
-                    LocalSource {
-                        local: self,
-                        source: src.map(|ast| match ast.to_node(&root) {
-                            Either::Right(ast::Pat::IdentPat(it)) => Either::Left(it),
-                            _ => unreachable!("local with non ident-pattern"),
-                        }),
-                    }
-                })
-                .collect(),
+            _ => {
+                source_map
+                    .patterns_for_binding(self.binding_id)
+                    .iter()
+                    .map(|&definition| {
+                        let src = source_map.pat_syntax(definition).unwrap();
+                        let root = src.file_syntax(db);
+                        LocalSource {
+                            local: self,
+                            source: src
+                                .map(|ast| match ast.to_node(&root) {
+                                    Either::Right(ast::Pat::IdentPat(it)) => Either::Left(it),
+                                    _ => unreachable!("local with non ident-pattern"),
+                                }),
+                        }
+                    })
+                    .collect()
+            }
         }
     }
     /// The leftmost definition for this local. Example: `let (a$0, _) | (_, a) = it;`
@@ -88,21 +96,24 @@ impl Local {
                     source: source.map(|ast| Either::Right(ast.to_node(&root))),
                 }
             }
-            _ => source_map
-                .patterns_for_binding(self.binding_id)
-                .first()
-                .map(|&definition| {
-                    let src = source_map.pat_syntax(definition).unwrap();
-                    let root = src.file_syntax(db);
-                    LocalSource {
-                        local: self,
-                        source: src.map(|ast| match ast.to_node(&root) {
-                            Either::Right(ast::Pat::IdentPat(it)) => Either::Left(it),
-                            _ => unreachable!("local with non ident-pattern"),
-                        }),
-                    }
-                })
-                .unwrap(),
+            _ => {
+                source_map
+                    .patterns_for_binding(self.binding_id)
+                    .first()
+                    .map(|&definition| {
+                        let src = source_map.pat_syntax(definition).unwrap();
+                        let root = src.file_syntax(db);
+                        LocalSource {
+                            local: self,
+                            source: src
+                                .map(|ast| match ast.to_node(&root) {
+                                    Either::Right(ast::Pat::IdentPat(it)) => Either::Left(it),
+                                    _ => unreachable!("local with non ident-pattern"),
+                                }),
+                        }
+                    })
+                    .unwrap()
+            }
         }
     }
 }

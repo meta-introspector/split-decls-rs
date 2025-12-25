@@ -24,10 +24,7 @@ fn skip_ascii_whitespace(
     *chars = rest.chars();
     if let Some(c) = chars.clone().next() {
         if c.is_whitespace() {
-            callback(
-                start..end + c.len_utf8(),
-                EscapeError::UnskippedWhitespaceWarning,
-            );
+            callback(start..end + c.len_utf8(), EscapeError::UnskippedWhitespaceWarning);
         }
     }
 }

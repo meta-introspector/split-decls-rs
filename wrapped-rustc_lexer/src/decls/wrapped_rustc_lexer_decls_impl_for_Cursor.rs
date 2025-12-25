@@ -8,8 +8,7 @@ impl Cursor<'_> {
         };
         let token_kind = match first_char {
             c if matches!(self.frontmatter_allowed, FrontmatterAllowed::Yes)
-                && is_whitespace(c) =>
-            {
+                && is_whitespace(c) => {
                 let mut last = first_char;
                 while is_whitespace(self.first()) {
                     let Some(c) = self.bump() else {
@@ -25,39 +24,44 @@ impl Cursor<'_> {
                 }
             }
             '-' if matches!(self.frontmatter_allowed, FrontmatterAllowed::Yes)
-                && self.as_str().starts_with("--") =>
-            {
-                self.frontmatter(false)
-            }
-            '/' => match self.first() {
-                '/' => self.line_comment(),
-                '*' => self.block_comment(),
-                _ => Slash,
-            },
-            c if is_whitespace(c) => self.whitespace(),
-            'r' => match (self.first(), self.second()) {
-                ('#', c1) if is_id_start(c1) => self.raw_ident(),
-                ('#', _) | ('"', _) => {
-                    let res = self.raw_double_quoted_string(1);
-                    let suffix_start = self.pos_within_token();
-                    if res.is_ok() {
-                        self.eat_literal_suffix();
-                    }
-                    let kind = RawStr { n_hashes: res.ok() };
-                    Literal { kind, suffix_start }
+                && self.as_str().starts_with("--") => self.frontmatter(false),
+            '/' => {
+                match self.first() {
+                    '/' => self.line_comment(),
+                    '*' => self.block_comment(),
+                    _ => Slash,
                 }
-                _ => self.ident_or_unknown_prefix(),
-            },
-            'b' => self.c_or_byte_string(
-                |terminated| ByteStr { terminated },
-                |n_hashes| RawByteStr { n_hashes },
-                Some(|terminated| Byte { terminated }),
-            ),
-            'c' => self.c_or_byte_string(
-                |terminated| CStr { terminated },
-                |n_hashes| RawCStr { n_hashes },
-                None,
-            ),
+            }
+            c if is_whitespace(c) => self.whitespace(),
+            'r' => {
+                match (self.first(), self.second()) {
+                    ('#', c1) if is_id_start(c1) => self.raw_ident(),
+                    ('#', _) | ('"', _) => {
+                        let res = self.raw_double_quoted_string(1);
+                        let suffix_start = self.pos_within_token();
+                        if res.is_ok() {
+                            self.eat_literal_suffix();
+                        }
+                        let kind = RawStr { n_hashes: res.ok() };
+                        Literal { kind, suffix_start }
+                    }
+                    _ => self.ident_or_unknown_prefix(),
+                }
+            }
+            'b' => {
+                self.c_or_byte_string(
+                    |terminated| ByteStr { terminated },
+                    |n_hashes| RawByteStr { n_hashes },
+                    Some(|terminated| Byte { terminated }),
+                )
+            }
+            'c' => {
+                self.c_or_byte_string(
+                    |terminated| CStr { terminated },
+                    |n_hashes| RawCStr { n_hashes },
+                    None,
+                )
+            }
             c if is_id_start(c) => self.ident_or_unknown_prefix(),
             c @ '0'..='9' => {
                 let literal_kind = self.number(c);
@@ -152,7 +156,9 @@ impl Cursor<'_> {
             if potential_closing.is_none() {
                 let mut base_index = 0;
                 while let Some(closing) = rest.find("---") {
-                    let preceding_chars_start = rest[..closing].rfind("\n").map_or(0, |i| i + 1);
+                    let preceding_chars_start = rest[..closing]
+                        .rfind("\n")
+                        .map_or(0, |i| i + 1);
                     if rest[preceding_chars_start..closing]
                         .chars()
                         .all(is_horizontal_whitespace)
@@ -224,7 +230,9 @@ impl Cursor<'_> {
         Whitespace
     }
     fn raw_ident(&mut self) -> TokenKind {
-        debug_assert!(self.prev() == 'r' && self.first() == '#' && is_id_start(self.second()));
+        debug_assert!(
+            self.prev() == 'r' && self.first() == '#' && is_id_start(self.second())
+        );
         self.bump();
         self.eat_identifier();
         RawIdent
@@ -241,7 +249,8 @@ impl Cursor<'_> {
     fn invalid_ident(&mut self) -> TokenKind {
         self.eat_while(|c| {
             const ZERO_WIDTH_JOINER: char = '\u{200d}';
-            is_id_continue(c) || (!c.is_ascii() && c.is_emoji_char()) || c == ZERO_WIDTH_JOINER
+            is_id_continue(c) || (!c.is_ascii() && c.is_emoji_char())
+                || c == ZERO_WIDTH_JOINER
         });
         InvalidIdent
     }
@@ -294,42 +303,28 @@ impl Cursor<'_> {
                     base = Base::Binary;
                     self.bump();
                     if !self.eat_decimal_digits() {
-                        return Int {
-                            base,
-                            empty_int: true,
-                        };
+                        return Int { base, empty_int: true };
                     }
                 }
                 'o' => {
                     base = Base::Octal;
                     self.bump();
                     if !self.eat_decimal_digits() {
-                        return Int {
-                            base,
-                            empty_int: true,
-                        };
+                        return Int { base, empty_int: true };
                     }
                 }
                 'x' => {
                     base = Base::Hexadecimal;
                     self.bump();
                     if !self.eat_hexadecimal_digits() {
-                        return Int {
-                            base,
-                            empty_int: true,
-                        };
+                        return Int { base, empty_int: true };
                     }
                 }
                 '0'..='9' | '_' => {
                     self.eat_decimal_digits();
                 }
                 '.' | 'e' | 'E' => {}
-                _ => {
-                    return Int {
-                        base,
-                        empty_int: false,
-                    }
-                }
+                _ => return Int { base, empty_int: false },
             }
         } else {
             self.eat_decimal_digits();
@@ -348,23 +343,14 @@ impl Cursor<'_> {
                         _ => {}
                     }
                 }
-                Float {
-                    base,
-                    empty_exponent,
-                }
+                Float { base, empty_exponent }
             }
             'e' | 'E' => {
                 self.bump();
                 let empty_exponent = !self.eat_float_exponent();
-                Float {
-                    base,
-                    empty_exponent,
-                }
+                Float { base, empty_exponent }
             }
-            _ => Int {
-                base,
-                empty_int: false,
-            },
+            _ => Int { base, empty_int: false },
         }
     }
     fn lifetime_or_char(&mut self) -> TokenKind {
@@ -499,7 +485,11 @@ impl Cursor<'_> {
         let n_hashes = self.raw_string_unvalidated(prefix_len)?;
         match u8::try_from(n_hashes) {
             Ok(num) => Ok(num),
-            Err(_) => Err(RawStrError::TooManyDelimiters { found: n_hashes }),
+            Err(_) => {
+                Err(RawStrError::TooManyDelimiters {
+                    found: n_hashes,
+                })
+            }
         }
     }
     fn raw_string_unvalidated(&mut self, prefix_len: u32) -> Result<u32, RawStrError> {
@@ -517,7 +507,9 @@ impl Cursor<'_> {
             Some('"') => {}
             c => {
                 let c = c.unwrap_or(EOF_CHAR);
-                return Err(RawStrError::InvalidStarter { bad_char: c });
+                return Err(RawStrError::InvalidStarter {
+                    bad_char: c,
+                });
             }
         }
         loop {
@@ -538,8 +530,9 @@ impl Cursor<'_> {
             if n_end_hashes == n_start_hashes {
                 return Ok(n_start_hashes);
             } else if n_end_hashes > max_hashes {
-                possible_terminator_offset =
-                    Some(self.pos_within_token() - start_pos - n_end_hashes + prefix_len);
+                possible_terminator_offset = Some(
+                    self.pos_within_token() - start_pos - n_end_hashes + prefix_len,
+                );
                 max_hashes = n_end_hashes;
             }
         }

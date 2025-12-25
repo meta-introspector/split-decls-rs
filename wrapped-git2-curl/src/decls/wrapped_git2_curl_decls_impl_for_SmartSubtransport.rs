@@ -11,7 +11,9 @@ impl SmartSubtransport for CurlTransport {
             *base_url = url.to_string();
         }
         let (service, path, method) = match action {
-            Service::UploadPackLs => ("upload-pack", "/info/refs?service=git-upload-pack", "GET"),
+            Service::UploadPackLs => {
+                ("upload-pack", "/info/refs?service=git-upload-pack", "GET")
+            }
             Service::UploadPack => ("upload-pack", "/git-upload-pack", "POST"),
             Service::ReceivePackLs => {
                 ("receive-pack", "/info/refs?service=git-receive-pack", "GET")
@@ -19,15 +21,17 @@ impl SmartSubtransport for CurlTransport {
             Service::ReceivePack => ("receive-pack", "/git-receive-pack", "POST"),
         };
         info!("action {} {}", service, path);
-        Ok(Box::new(CurlSubtransport {
-            handle: self.handle.clone(),
-            service: service,
-            url_path: path,
-            base_url: self.base_url.clone(),
-            method: method,
-            reader: None,
-            sent_request: false,
-        }))
+        Ok(
+            Box::new(CurlSubtransport {
+                handle: self.handle.clone(),
+                service: service,
+                url_path: path,
+                base_url: self.base_url.clone(),
+                method: method,
+                reader: None,
+                sent_request: false,
+            }),
+        )
     }
     fn close(&self) -> Result<(), Error> {
         Ok(())

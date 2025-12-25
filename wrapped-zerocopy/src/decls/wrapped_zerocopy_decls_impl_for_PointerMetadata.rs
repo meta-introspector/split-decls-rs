@@ -11,7 +11,8 @@ impl PointerMetadata for usize {
             SizeInfo::SliceDst(TrailingSliceLayout { offset, elem_size }) => {
                 let slice_len = elem_size.checked_mul(self)?;
                 let without_padding = offset.checked_add(slice_len)?;
-                without_padding.checked_add(util::padding_needed_for(without_padding, layout.align))
+                without_padding
+                    .checked_add(util::padding_needed_for(without_padding, layout.align))
             }
             SizeInfo::Sized { .. } => None,
         }

@@ -11,9 +11,7 @@ use std::collections::HashMap;
 #[macro_export]
 macro_rules! t {
     ($e:expr) => {
-        match $e {
-            Ok(e) => e,
-            Err(e) => $crate::panic_error(&format!("failed running {}", stringify!($e)), e),
-        }
+        match $e { Ok(e) => e, Err(e) => $crate::panic_error(&
+        format!("failed running {}", stringify!($e)), e), }
     };
 }

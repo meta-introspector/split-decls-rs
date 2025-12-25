@@ -10,7 +10,9 @@ impl ItemInNs {
     /// Returns the crate defining this item (or `None` if `self` is built-in).
     pub fn krate(&self, db: &dyn HirDatabase) -> Option<Crate> {
         match self {
-            ItemInNs::Types(did) | ItemInNs::Values(did) => did.module(db).map(|m| m.krate()),
+            ItemInNs::Types(did) | ItemInNs::Values(did) => {
+                did.module(db).map(|m| m.krate())
+            }
             ItemInNs::Macros(id) => Some(id.module(db).krate()),
         }
     }

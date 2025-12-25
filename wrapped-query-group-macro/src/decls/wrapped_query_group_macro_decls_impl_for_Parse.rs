@@ -11,19 +11,25 @@ impl Parse for Cycle {
             match &*name {
                 "cycle_fn" => {
                     if cycle_fn.is_some() {
-                        return Err(syn::Error::new_spanned(&option.name, "duplicate option"));
+                        return Err(
+                            syn::Error::new_spanned(&option.name, "duplicate option"),
+                        );
                     }
                     cycle_fn = Some((option.name, option.value));
                 }
                 "cycle_initial" => {
                     if cycle_initial.is_some() {
-                        return Err(syn::Error::new_spanned(&option.name, "duplicate option"));
+                        return Err(
+                            syn::Error::new_spanned(&option.name, "duplicate option"),
+                        );
                     }
                     cycle_initial = Some((option.name, option.value));
                 }
                 "cycle_result" => {
                     if cycle_result.is_some() {
-                        return Err(syn::Error::new_spanned(&option.name, "duplicate option"));
+                        return Err(
+                            syn::Error::new_spanned(&option.name, "duplicate option"),
+                        );
                     }
                     cycle_result = Some((option.name, option.value));
                 }

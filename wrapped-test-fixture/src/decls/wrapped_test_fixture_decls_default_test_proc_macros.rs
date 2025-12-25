@@ -9,7 +9,7 @@ pub fn identity(_attr: TokenStream, item: TokenStream) -> TokenStream {
     item
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("identity"),
                 kind: ProcMacroKind::Attr,
@@ -24,7 +24,7 @@ pub fn derive_identity(item: TokenStream) -> TokenStream {
     item
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("DeriveIdentity"),
                 kind: ProcMacroKind::CustomDerive,
@@ -39,7 +39,7 @@ pub fn input_replace(attr: TokenStream, _item: TokenStream) -> TokenStream {
     attr
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("input_replace"),
                 kind: ProcMacroKind::Attr,
@@ -54,7 +54,7 @@ pub fn mirror(input: TokenStream) -> TokenStream {
     input
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("mirror"),
                 kind: ProcMacroKind::Bang,
@@ -69,7 +69,7 @@ pub fn shorten(input: TokenStream) -> TokenStream {
     loop {}
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("shorten"),
                 kind: ProcMacroKind::Bang,
@@ -84,7 +84,7 @@ pub fn issue_18089(_attr: TokenStream, _item: TokenStream) -> TokenStream {
     loop {}
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("issue_18089"),
                 kind: ProcMacroKind::Attr,
@@ -99,7 +99,7 @@ pub fn issue_18840(_attr: TokenStream, _item: TokenStream) -> TokenStream {
     loop {}
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("issue_18840"),
                 kind: ProcMacroKind::Attr,
@@ -114,7 +114,7 @@ pub fn issue_17479(input: TokenStream) -> TokenStream {
     input
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("issue_17479"),
                 kind: ProcMacroKind::Bang,
@@ -129,7 +129,7 @@ pub fn issue_18898(_attr: TokenStream, input: TokenStream) -> TokenStream {
     input
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("issue_18898"),
                 kind: ProcMacroKind::Bang,
@@ -144,7 +144,7 @@ pub fn disallow_cfg(_attr: TokenStream, input: TokenStream) -> TokenStream {
     input
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("disallow_cfg"),
                 kind: ProcMacroKind::Attr,
@@ -159,7 +159,7 @@ pub fn generate_suffixed_type(_attr: TokenStream, input: TokenStream) -> TokenSt
     input
 }
 "#
-            .into(),
+                .into(),
             ProcMacro {
                 name: Symbol::intern("generate_suffixed_type"),
                 kind: ProcMacroKind::Attr,

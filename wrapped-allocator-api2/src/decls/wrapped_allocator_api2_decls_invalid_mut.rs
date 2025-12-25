@@ -4,7 +4,5 @@ use std::collections::HashMap;
 #[inline(always)]
 fn invalid_mut<T>(addr: usize) -> *mut T {
     #[allow(clippy::useless_transmute, clippy::transmutes_expressible_as_ptr_casts)]
-    unsafe {
-        core::mem::transmute(addr)
-    }
+    unsafe { core::mem::transmute(addr) }
 }

@@ -5,13 +5,10 @@ use std::collections::HashMap;
 ///
 /// Panics if $src.len() * size_of::<$ty>() != $dst.len().
 macro_rules! write_slice {
-    ($src:expr, $dst:expr, $ty:ty, $to_bytes:ident) => {{
-        const SIZE: usize = core::mem::size_of::<$ty>();
-        let src: &[$ty] = $src;
-        let dst: &mut [u8] = $dst;
-        assert_eq!(src.len() * SIZE, dst.len());
-        for (src, dst) in src.iter().zip(dst.chunks_exact_mut(SIZE)) {
-            dst.copy_from_slice(&src.$to_bytes());
-        }
-    }};
+    ($src:expr, $dst:expr, $ty:ty, $to_bytes:ident) => {
+        { const SIZE : usize = core::mem::size_of::<$ty > (); let src : & [$ty] = $src;
+        let dst : & mut [u8] = $dst; assert_eq!(src.len() * SIZE, dst.len()); for (src,
+        dst) in src.iter().zip(dst.chunks_exact_mut(SIZE)) { dst.copy_from_slice(& src
+        .$to_bytes ()); } }
+    };
 }

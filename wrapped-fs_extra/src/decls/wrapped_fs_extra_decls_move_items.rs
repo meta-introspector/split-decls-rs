@@ -31,15 +31,18 @@ use std::collections::HashMap;
 ///  move_items(&from_paths, "target", &options)?;
 /// ```
 ///
-pub fn move_items<P, Q>(from_items: &[P], to: Q, options: &dir::CopyOptions) -> Result<u64>
+pub fn move_items<P, Q>(
+    from_items: &[P],
+    to: Q,
+    options: &dir::CopyOptions,
+) -> Result<u64>
 where
     P: AsRef<Path>,
     Q: AsRef<Path>,
 {
     if options.content_only {
         err!(
-            "Options 'content_only' not access for move_items function",
-            ErrorKind::Other
+            "Options 'content_only' not access for move_items function", ErrorKind::Other
         );
     }
     let mut total_size = 0;

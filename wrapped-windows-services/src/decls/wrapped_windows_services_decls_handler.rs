@@ -1,6 +1,11 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-extern "system" fn handler(control: u32, ty: u32, data: *mut c_void, context: *mut c_void) -> u32 {
+extern "system" fn handler(
+    control: u32,
+    ty: u32,
+    data: *mut c_void,
+    context: *mut c_void,
+) -> u32 {
     let service = unsafe { &*(context as *const Service) };
     match control {
         SERVICE_CONTROL_CONTINUE if service.state() == State::Paused => {
@@ -18,7 +23,16 @@ extern "system" fn handler(control: u32, ty: u32, data: *mut c_void, context: *m
             service.command(Command::Stop);
             service.set_state(State::Stopped);
         }
-        _ => service.command(Command::Extended(ExtendedCommand { control, ty, data })),
+        _ => {
+            service
+                .command(
+                    Command::Extended(ExtendedCommand {
+                        control,
+                        ty,
+                        data,
+                    }),
+                )
+        }
     }
     NO_ERROR
 }

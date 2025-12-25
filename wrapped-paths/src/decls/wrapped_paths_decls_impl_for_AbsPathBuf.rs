@@ -18,7 +18,9 @@ impl AbsPathBuf {
     pub fn assert_utf8(path: PathBuf) -> AbsPathBuf {
         AbsPathBuf::assert(
             Utf8PathBuf::from_path_buf(path)
-                .unwrap_or_else(|path| panic!("expected utf8 path, got {}", path.display())),
+                .unwrap_or_else(|path| {
+                    panic!("expected utf8 path, got {}", path.display())
+                }),
         )
     }
     /// Coerces to an `AbsPath` slice.

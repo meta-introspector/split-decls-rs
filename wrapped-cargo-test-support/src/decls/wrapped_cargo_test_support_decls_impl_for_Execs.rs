@@ -29,28 +29,28 @@ impl Execs {
     #[track_caller]
     pub fn run_json(&mut self) -> serde_json::Value {
         let output = self.run();
-        serde_json::from_slice(&output.stdout).unwrap_or_else(|e| {
-            panic!(
-                "\nfailed to parse JSON: {}\n\
+        serde_json::from_slice(&output.stdout)
+            .unwrap_or_else(|e| {
+                panic!(
+                    "\nfailed to parse JSON: {}\n\
                      output was:\n{}\n",
-                e,
-                String::from_utf8_lossy(&output.stdout)
-            );
-        })
+                    e, String::from_utf8_lossy(& output.stdout)
+                );
+            })
     }
     #[track_caller]
     pub fn run_output(&mut self, output: &Output) {
         self.ran = true;
-        if let Err(e) = self.match_output(output.status.code(), &output.stdout, &output.stderr) {
+        if let Err(e) = self
+            .match_output(output.status.code(), &output.stdout, &output.stderr)
+        {
             panic_error("process did not return the expected result", e)
         }
     }
     #[track_caller]
     fn verify_checks_output(&self, stdout: &[u8], stderr: &[u8]) {
-        if self.expect_exit_code.unwrap_or(0) != 0
-            && self.expect_stdin.is_none()
-            && self.expect_stdout_data.is_none()
-            && self.expect_stderr_data.is_none()
+        if self.expect_exit_code.unwrap_or(0) != 0 && self.expect_stdin.is_none()
+            && self.expect_stdout_data.is_none() && self.expect_stderr_data.is_none()
             && self.expect_stdout_contains.is_empty()
             && self.expect_stderr_contains.is_empty()
             && self.expect_stdout_not_contains.is_empty()
@@ -61,8 +61,7 @@ impl Execs {
                 "`with_status()` is used, but no output is checked.\n\
                  The test must check the output to ensure the correct error is triggered.\n\
                  --- stdout\n{}\n--- stderr\n{}",
-                String::from_utf8_lossy(stdout),
-                String::from_utf8_lossy(stderr),
+                String::from_utf8_lossy(stdout), String::from_utf8_lossy(stderr),
             );
         }
     }
@@ -73,17 +72,18 @@ impl Execs {
             if is_ci() {
                 panic!("`.stream()` is for local debugging")
             }
-            process.exec_with_streaming(
-                &mut |out| {
-                    println!("{}", out);
-                    Ok(())
-                },
-                &mut |err| {
-                    eprintln!("{}", err);
-                    Ok(())
-                },
-                true,
-            )
+            process
+                .exec_with_streaming(
+                    &mut |out| {
+                        println!("{}", out);
+                        Ok(())
+                    },
+                    &mut |err| {
+                        eprintln!("{}", err);
+                        Ok(())
+                    },
+                    true,
+                )
         } else {
             process.exec_with_output()
         };
@@ -97,12 +97,9 @@ impl Execs {
                 });
             }
             Err(e) => {
-                if let Some(ProcessError {
-                    stdout: Some(stdout),
-                    stderr: Some(stderr),
-                    code,
-                    ..
-                }) = e.downcast_ref::<ProcessError>()
+                if let Some(
+                    ProcessError { stdout: Some(stdout), stderr: Some(stderr), code, .. },
+                ) = e.downcast_ref::<ProcessError>()
                 {
                     self.match_output(*code, stdout, stderr)?;
                     return Ok(RawOutput {
@@ -116,7 +113,12 @@ impl Execs {
         }
     }
     #[track_caller]
-    fn match_output(&self, code: Option<i32>, stdout: &[u8], stderr: &[u8]) -> Result<()> {
+    fn match_output(
+        &self,
+        code: Option<i32>,
+        stdout: &[u8],
+        stderr: &[u8],
+    ) -> Result<()> {
         self.verify_checks_output(stdout, stderr);
         let stdout = std::str::from_utf8(stdout).expect("stdout is not utf8");
         let stderr = std::str::from_utf8(stderr).expect("stderr is not utf8");
@@ -126,28 +128,23 @@ impl Execs {
             Some(expected) => {
                 bail!(
                     "process exited with code {} (expected {})\n--- stdout\n{}\n--- stderr\n{}",
-                    code.unwrap_or(-1),
-                    expected,
-                    stdout,
-                    stderr
+                    code.unwrap_or(- 1), expected, stdout, stderr
                 )
             }
         }
         if let Some(expect_stdout_data) = &self.expect_stdout_data {
-            if let Err(err) = self.assert.try_eq(
-                Some(&"stdout"),
-                stdout.into_data(),
-                expect_stdout_data.clone(),
-            ) {
+            if let Err(err) = self
+                .assert
+                .try_eq(Some(&"stdout"), stdout.into_data(), expect_stdout_data.clone())
+            {
                 panic!("{err}")
             }
         }
         if let Some(expect_stderr_data) = &self.expect_stderr_data {
-            if let Err(err) = self.assert.try_eq(
-                Some(&"stderr"),
-                stderr.into_data(),
-                expect_stderr_data.clone(),
-            ) {
+            if let Err(err) = self
+                .assert
+                .try_eq(Some(&"stderr"), stderr.into_data(), expect_stderr_data.clone())
+            {
                 panic!("{err}")
             }
         }
@@ -164,7 +161,12 @@ impl Execs {
             compare::match_does_not_contain(expect, stderr, self.assert.redactions())?;
         }
         for (with, without) in self.expect_stderr_with_without.iter() {
-            compare::match_with_without(stderr, with, without, self.assert.redactions())?;
+            compare::match_with_without(
+                stderr,
+                with,
+                without,
+                self.assert.redactions(),
+            )?;
         }
         Ok(())
     }

@@ -4,7 +4,7 @@ use std::collections::HashMap;
 #[macro_export]
 macro_rules! assert_type {
     ($a:ty) => {
-        const _: core::marker::PhantomData<<$a as $crate::Same<True>>::Output> =
-            core::marker::PhantomData;
+        const _ : core::marker::PhantomData <<$a as $crate::Same < True >>::Output > =
+        core::marker::PhantomData;
     };
 }

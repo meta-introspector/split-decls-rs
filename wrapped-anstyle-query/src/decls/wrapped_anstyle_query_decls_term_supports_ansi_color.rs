@@ -6,10 +6,7 @@ use std::collections::HashMap;
 /// is opt-in, rather than assumed.
 #[inline]
 pub fn term_supports_ansi_color() -> bool {
-    #[cfg(not(windows))]
-    {
-        term_supports_color()
-    }
+    #[cfg(not(windows))] { term_supports_color() }
     #[cfg(windows)]
     {
         match std::env::var_os("TERM") {

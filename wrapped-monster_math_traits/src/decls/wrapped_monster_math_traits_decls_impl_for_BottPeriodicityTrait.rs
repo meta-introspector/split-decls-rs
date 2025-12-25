@@ -9,8 +9,8 @@ impl BottPeriodicityTrait for DummyBottPeriodicity {
     }
     fn test_fixed_point_convergence(&self) {
         println!(
-            "Dummy BottPeriodicity: Testing fixed-point convergence for period {}",
-            self.data.period
+            "Dummy BottPeriodicity: Testing fixed-point convergence for period {}", self
+            .data.period
         );
     }
     fn test_mathematical_structure_extraction(&self) {
