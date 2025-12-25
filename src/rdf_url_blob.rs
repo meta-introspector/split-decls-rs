@@ -159,6 +159,14 @@ impl RdfUrlBlob {
                         code.push_str("\n\n");
                     }
                 }
+            } else if line.contains("sys:name") {
+                // Extract macro name for context
+                if let Some(name_start) = line.find('"') {
+                    if let Some(name_end) = line.rfind('"') {
+                        let name = &line[name_start+1..name_end];
+                        code.push_str(&format!("// Macro: {}\n", name));
+                    }
+                }
             }
         }
         

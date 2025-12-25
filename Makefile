@@ -1,81 +1,21 @@
-SCCACHE := $(HOME)/.cargo/bin/sccache
-# Use RUSTC_WRAPPER for sccache with filtered output
-CARGO := cargo
-QUIET_BUILD := 2>&1 | grep -E "(error\[|Finished|Compiling.*macro_runner)" || true
+.PHONY: build scanner repl clean
 
-.PHONY: all build_core run_bootstrap build_output_module clean_output2 check_build_errors check_bootstrap_errors debug-main bootstrap_only check_bootstrap_only run_single_crate macro_runner
+# Use sccache for faster builds
+export RUSTC_WRAPPER=sccache
 
-all: debug-main run_bootstrap check_bootstrap_errors build_output_module
+# Build all binaries once
+build:
+	cargo build --bins
 
-debug-main: build_core check_build_errors
+# Run bootstrap scanner directly
+scanner:
+	../../target/debug/bootstrap_scanner
 
-build_core:
-	-RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build > build_core.log 2>&1 || true
+# Run stateful REPL directly  
+repl:
+	../../target/debug/stateful_repl
 
-# Quiet build for macro_runner and lisp_macro
-macro_runner:
-	@echo "🔧 Building macro_runner..."
-	@RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build --bin macro_runner $(QUIET_BUILD)
-	@echo "✅ macro_runner built successfully"
-
-lisp_macro:
-	@echo "🧠 Building lisp_macro..."
-	@RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build --bin lisp_macro $(QUIET_BUILD)
-	@echo "✅ lisp_macro built successfully"
-
-check_build_errors:
-	grep -E "error\[|error:" build_core.log || true
-
-run_bootstrap:
-	@echo "Running bootstrap..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > bootstrap_run.log 2>&1
-
-run_single_crate:
-	@if [ -z "$(CRATE)" ]; then echo "Usage: make run_single_crate CRATE=<crate_name>"; exit 1; fi
-	@echo "Running single crate wrapper on $(CRATE)..." && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) run --bin wrap_single_crate -- $(CRATE) --verbose > single_crate_run.log 2>&1
-	@echo "Single crate run completed. Check single_crate_run.log for details."
-	@echo "Key results:"
-	@grep -E "Processing crate|Generated|Error|Warning" single_crate_run.log || echo "No key results found"
-
-
-check_bootstrap_errors:
-# 	grep -E "error\[|error:" temp_bootstrap.log || true
-
-# bootstrap_only:
-# 	@echo "Running bootstrap..."
-# 	@RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > bootstrap_output.log 2>&1 && echo "Bootstrap completed"
-# 	@echo "Checking for errors..."
-# 	@grep -E "error\[|error:" bootstrap_output.log || echo "No errors found in bootstrap"
-
-# check_bootstrap_only: bootstrap_only
-# 	@echo "Checking for errors..." && grep -E "error\[|error:" bootstrap_output.log || echo "No errors found in bootstrap"
-
-
-
-# build_output_module:
-# 	@echo "Building output2 
-#..." && cd output2 && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build 2>&1 | grep -E "error|^Compiling|^Finished" || true
-
-clean_output2:
-	@if [ ! -d "output2/.git" ]; then \
-		$(MAKE) reinit_output2; \
-	else \
-		echo "output2 directory found, resetting and cleaning..."; \
-		(cd output2 && git reset --hard HEAD && git clean -fdx); \
-	fi
-
-reinit_output2:
-	rm -rf output2
-	mkdir -p output2
-	git init output2
-	(cd output2 && touch .placeholder && git add .placeholder && git commit -m "Initial commit")
-
-.PHONY: clean
+# Clean build artifacts
 clean:
-	$(CARGO) clean
-	rm -rf output2
-	# git submodule deinit -f output2 # Related to submodule
-	# git rm -f output2 # Related to submodule
-	# rm -rf .git/modules/output2 # Related to submodule
-add_wrapped_crate:
-	@if [ -z "$(CRATE)" ]; then echo "Usage: make add_wrapped_crate CRATE=<crate_path>"; exit 1; fi
-	@echo "Adding wrapped crate $(CRATE) to root workspace..." && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) run --bin add_wrapped_crate -- $(CRATE) $(if $(VERBOSE),--verbose,)
+	cargo clean
+	sccache --zero-stats

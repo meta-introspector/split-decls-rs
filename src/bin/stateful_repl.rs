@@ -33,8 +33,12 @@ impl ReplState {
     }
     
     fn load_from_file() -> Result<Self> {
-        if Path::new(STATE_FILE).exists() {
-            let rdf_content = fs::read_to_string(STATE_FILE)?;
+        Self::load_from_file_path(STATE_FILE)
+    }
+    
+    fn load_from_file_path(path: &str) -> Result<Self> {
+        if Path::new(path).exists() {
+            let rdf_content = fs::read_to_string(path)?;
             let blob = RdfUrlBlob::from_url_blob(&rdf_content)?;
             
             // Parse RDF back to system state (simplified)
@@ -49,12 +53,53 @@ impl ReplState {
                 }
             }
             
-            println!("📂 Loaded state from {}", STATE_FILE);
+            println!("📂 Loaded state from {}", path);
             Ok(state)
         } else {
             println!("🆕 Starting fresh REPL session");
             Ok(Self::new())
         }
+    }
+    
+    fn load_from_url(url: &str) -> Result<Self> {
+        println!("🌐 Loading state from URL: {}", url);
+        
+        // Convert GitHub blob URL to raw URL
+        let raw_url = if url.contains("github.com") && url.contains("/blob/") {
+            url.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/")
+        } else {
+            url.to_string()
+        };
+        
+        // Fetch content (simplified - in production use reqwest)
+        let content = std::process::Command::new("curl")
+            .arg("-s")
+            .arg(&raw_url)
+            .output()?;
+            
+        if !content.status.success() {
+            return Err(anyhow::anyhow!("Failed to fetch URL: {}", raw_url));
+        }
+        
+        let code_content = String::from_utf8(content.stdout)?;
+        
+        // Create a macro from the fetched declaration
+        let mut state = Self::new();
+        let filename = url.split('/').last().unwrap_or("unknown");
+        let macro_name = filename.trim_end_matches(".rs").replace("_decls_", "_");
+        
+        let decl = MacroDeclaration {
+            name: macro_name.clone(),
+            source_path: url.to_string(),
+            declaration_type: "declaration".to_string(),
+            content: code_content,
+            wrapper: None,
+        };
+        
+        state.system.macros.insert(macro_name.clone(), decl);
+        println!("✅ Loaded declaration as macro: {}", macro_name);
+        
+        Ok(state)
     }
     
     fn save_to_file(&self) -> Result<()> {
@@ -156,7 +201,17 @@ fn execute_command(state: &mut ReplState, input: &str) -> Result<bool> {
         }
         
         Some(&"load") => {
-            *state = ReplState::load_from_file()?;
+            if let Some(source) = parts.get(1) {
+                if source.starts_with("http") {
+                    // Load from URL
+                    *state = ReplState::load_from_url(source)?;
+                } else {
+                    // Load from file
+                    *state = ReplState::load_from_file_path(source)?;
+                }
+            } else {
+                *state = ReplState::load_from_file()?;
+            }
         }
         
         Some(&"export") => {
@@ -213,13 +268,35 @@ fn execute_command(state: &mut ReplState, input: &str) -> Result<bool> {
             println!("✅ Added macro: {}", name);
         }
         
+        Some(&"call") => {
+            if let Some(macro_name) = parts.get(1) {
+                if let Some(decl) = state.system.macros.get(*macro_name) {
+                    println!("🎭 Calling macro: {}", macro_name);
+                    println!("📄 Content:");
+                    println!("{}", decl.content);
+                    
+                    // For demonstration, we'll show the macro content
+                    // In a real implementation, you'd compile and execute it
+                    if let Some(wrapper) = &decl.wrapper {
+                        println!("🔧 Wrapper:");
+                        println!("{}", wrapper);
+                    }
+                } else {
+                    println!("❌ Macro '{}' not found", macro_name);
+                }
+            } else {
+                println!("Usage: call <macro_name>");
+            }
+        }
+        
         Some(&"help") => {
             println!("📖 Available Commands:");
             println!("  set <var>=<value>  - Set a variable");
             println!("  get [var]          - Get variable or list all");
             println!("  macro <name> <code> - Define a macro");
+            println!("  call <macro_name>  - Execute a loaded macro");
             println!("  save               - Save state to file");
-            println!("  load               - Load state from file");
+            println!("  load [url|file]    - Load state from file or GitHub URL");
             println!("  export <type>      - Export (macros|code|docs|workspace|rdf|url)");
             println!("  info               - Show state information");
             println!("  history            - Show command history");

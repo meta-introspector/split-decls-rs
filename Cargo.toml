@@ -121,5 +121,9 @@ path = "src/bin/update_split_decls_config.rs"
 name = "stateful_repl"
 path = "src/bin/stateful_repl.rs"
 
+[[bin]]
+name = "bootstrap_scanner"
+path = "src/bin/bootstrap_scanner.rs"
+
 [patch.'crates-io']
 proc-macro2 = { path = "../proc-macro2" }
