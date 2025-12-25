@@ -127,12 +127,12 @@ impl<'a> Service<'a> {
         (write.as_deref_mut().unwrap())(self, command);
     }
     /// Low-level dispatcher to send control commands directly to the service.
-    pub fn handler(
-        &self,
-        control: u32,
-        event_type: u32,
-        event_data: *const c_void,
-    ) -> u32 {
-        handler(control, event_type, event_data as *mut _, self as *const _ as _)
+    pub fn handler(&self, control: u32, event_type: u32, event_data: *const c_void) -> u32 {
+        handler(
+            control,
+            event_type,
+            event_data as *mut _,
+            self as *const _ as _,
+        )
     }
 }

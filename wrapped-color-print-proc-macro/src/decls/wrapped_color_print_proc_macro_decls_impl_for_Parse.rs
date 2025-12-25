@@ -8,7 +8,7 @@ impl Parse for WriteInput {
         let rest = quote! {
             # rest
         }
-            .into();
+        .into();
         Ok(Self { dst, rest })
     }
 }

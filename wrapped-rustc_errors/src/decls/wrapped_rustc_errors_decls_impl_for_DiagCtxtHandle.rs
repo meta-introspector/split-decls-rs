@@ -18,11 +18,7 @@ impl<'a> DiagCtxtHandle<'a> {
         self.struct_bug(msg).with_span(span)
     }
     #[track_caller]
-    pub fn span_bug(
-        self,
-        span: impl Into<MultiSpan>,
-        msg: impl Into<Cow<'static, str>>,
-    ) -> ! {
+    pub fn span_bug(self, span: impl Into<MultiSpan>, msg: impl Into<Cow<'static, str>>) -> ! {
         self.struct_span_bug(span, msg.into()).emit()
     }
     #[track_caller]
@@ -54,18 +50,11 @@ impl<'a> DiagCtxtHandle<'a> {
     }
     #[rustc_lint_diagnostics]
     #[track_caller]
-    pub fn span_fatal(
-        self,
-        span: impl Into<MultiSpan>,
-        msg: impl Into<DiagMessage>,
-    ) -> ! {
+    pub fn span_fatal(self, span: impl Into<MultiSpan>, msg: impl Into<DiagMessage>) -> ! {
         self.struct_span_fatal(span, msg).emit()
     }
     #[track_caller]
-    pub fn create_fatal(
-        self,
-        fatal: impl Diagnostic<'a, FatalAbort>,
-    ) -> Diag<'a, FatalAbort> {
+    pub fn create_fatal(self, fatal: impl Diagnostic<'a, FatalAbort>) -> Diag<'a, FatalAbort> {
         fatal.into_diag(self, Fatal)
     }
     #[track_caller]
@@ -80,10 +69,7 @@ impl<'a> DiagCtxtHandle<'a> {
         fatal.into_diag(self, Fatal)
     }
     #[track_caller]
-    pub fn emit_almost_fatal(
-        self,
-        fatal: impl Diagnostic<'a, FatalError>,
-    ) -> FatalError {
+    pub fn emit_almost_fatal(self, fatal: impl Diagnostic<'a, FatalError>) -> FatalError {
         self.create_almost_fatal(fatal).emit()
     }
     #[rustc_lint_diagnostics]
@@ -137,7 +123,9 @@ impl<'a> DiagCtxtHandle<'a> {
         sp: impl Into<MultiSpan>,
         msg: impl Into<Cow<'static, str>>,
     ) -> ErrorGuaranteed {
-        Diag::<ErrorGuaranteed>::new(self, DelayedBug, msg.into()).with_span(sp).emit()
+        Diag::<ErrorGuaranteed>::new(self, DelayedBug, msg.into())
+            .with_span(sp)
+            .emit()
     }
     #[rustc_lint_diagnostics]
     #[track_caller]
@@ -220,11 +208,7 @@ impl<'a> DiagCtxtHandle<'a> {
     }
     #[rustc_lint_diagnostics]
     #[track_caller]
-    pub fn struct_expect(
-        self,
-        msg: impl Into<DiagMessage>,
-        id: LintExpectationId,
-    ) -> Diag<'a, ()> {
+    pub fn struct_expect(self, msg: impl Into<DiagMessage>, id: LintExpectationId) -> Diag<'a, ()> {
         Diag::new(self, Expect, msg).with_lint_id(id)
     }
 }

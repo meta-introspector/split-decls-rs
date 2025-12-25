@@ -54,9 +54,7 @@ pub fn run_optimization_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
             &dest_prop::DestinationPropagation,
             &simplify::SimplifyLocals::Final,
             &multiple_return_terminators::MultipleReturnTerminators,
-            &large_enums::EnumSizeOpt {
-                discrepancy: 128,
-            },
+            &large_enums::EnumSizeOpt { discrepancy: 128 },
             &add_call_guards::CriticalCallEdges,
             &prettify::ReorderBasicBlocks,
             &prettify::ReorderLocals,

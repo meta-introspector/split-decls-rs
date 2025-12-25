@@ -31,9 +31,7 @@ unsafe fn analyze_source_file_sse2(
             let newlines_mask = _mm_movemask_epi8(newlines_test);
             if newlines_mask != 0 {
                 let mut newlines_mask = 0xFFFF0000 | newlines_mask as u32;
-                let output_offset = TextSize::from(
-                    (chunk_index * CHUNK_SIZE + 1) as u32,
-                );
+                let output_offset = TextSize::from((chunk_index * CHUNK_SIZE + 1) as u32);
                 loop {
                     let index = newlines_mask.trailing_zeros();
                     if index >= CHUNK_SIZE as u32 {

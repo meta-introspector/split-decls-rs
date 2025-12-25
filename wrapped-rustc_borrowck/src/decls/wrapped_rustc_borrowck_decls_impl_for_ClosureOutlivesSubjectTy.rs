@@ -4,20 +4,16 @@ impl<'tcx> ClosureOutlivesSubjectTy<'tcx> {
     /// All regions of `ty` must be of kind `ReVar` and must represent
     /// universal regions *external* to the closure.
     pub fn bind(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Self {
-        let inner = fold_regions(
-            tcx,
-            ty,
-            |r, depth| match r.kind() {
-                ty::ReVar(vid) => {
-                    let br = ty::BoundRegion {
-                        var: ty::BoundVar::from_usize(vid.index()),
-                        kind: ty::BoundRegionKind::Anon,
-                    };
-                    ty::Region::new_bound(tcx, depth, br)
-                }
-                _ => bug!("unexpected region in ClosureOutlivesSubjectTy: {r:?}"),
-            },
-        );
+        let inner = fold_regions(tcx, ty, |r, depth| match r.kind() {
+            ty::ReVar(vid) => {
+                let br = ty::BoundRegion {
+                    var: ty::BoundVar::from_usize(vid.index()),
+                    kind: ty::BoundRegionKind::Anon,
+                };
+                ty::Region::new_bound(tcx, depth, br)
+            }
+            _ => bug!("unexpected region in ClosureOutlivesSubjectTy: {r:?}"),
+        });
         Self { inner }
     }
     pub fn instantiate(
@@ -25,16 +21,12 @@ impl<'tcx> ClosureOutlivesSubjectTy<'tcx> {
         tcx: TyCtxt<'tcx>,
         mut map: impl FnMut(ty::RegionVid) -> ty::Region<'tcx>,
     ) -> Ty<'tcx> {
-        fold_regions(
-            tcx,
-            self.inner,
-            |r, depth| match r.kind() {
-                ty::ReBound(ty::BoundVarIndexKind::Bound(debruijn), br) => {
-                    debug_assert_eq!(debruijn, depth);
-                    map(ty::RegionVid::from_usize(br.var.index()))
-                }
-                _ => bug!("unexpected region {r:?}"),
-            },
-        )
+        fold_regions(tcx, self.inner, |r, depth| match r.kind() {
+            ty::ReBound(ty::BoundVarIndexKind::Bound(debruijn), br) => {
+                debug_assert_eq!(debruijn, depth);
+                map(ty::RegionVid::from_usize(br.var.index()))
+            }
+            _ => bug!("unexpected region {r:?}"),
+        })
     }
 }

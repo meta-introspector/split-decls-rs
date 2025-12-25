@@ -3,7 +3,7 @@ use std::collections::HashMap;
 pub fn setup_tracing() -> Option<tracing::subscriber::DefaultGuard> {
     use std::env;
     use std::sync::LazyLock;
-    use tracing_subscriber::{Registry, layer::SubscriberExt};
+    use tracing_subscriber::{layer::SubscriberExt, Registry};
     use tracing_tree::HierarchicalLayer;
     static ENABLE: LazyLock<bool> = LazyLock::new(|| env::var("CHALK_DEBUG").is_ok());
     if !*ENABLE {

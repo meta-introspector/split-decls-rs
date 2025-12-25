@@ -8,6 +8,10 @@ impl AstVisitor {
         }
     }
     fn increment_node_type_count(&mut self, node_type: &str) {
-        *self.stats.node_type_counts.entry(node_type.to_string()).or_insert(0) += 1;
+        *self
+            .stats
+            .node_type_counts
+            .entry(node_type.to_string())
+            .or_insert(0) += 1;
     }
 }

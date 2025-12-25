@@ -3,8 +3,7 @@ use std::collections::HashMap;
 pub trait WithFixture: Default + ExpandDatabase + SourceDatabase + 'static {
     #[track_caller]
     fn with_single_file(
-        #[rust_analyzer::rust_fixture]
-        ra_fixture: &str,
+        #[rust_analyzer::rust_fixture] ra_fixture: &str,
     ) -> (Self, EditionedFileId) {
         let mut db = Self::default();
         let fixture = ChangeFixture::parse(&db, ra_fixture);
@@ -14,8 +13,7 @@ pub trait WithFixture: Default + ExpandDatabase + SourceDatabase + 'static {
     }
     #[track_caller]
     fn with_many_files(
-        #[rust_analyzer::rust_fixture]
-        ra_fixture: &str,
+        #[rust_analyzer::rust_fixture] ra_fixture: &str,
     ) -> (Self, Vec<EditionedFileId>) {
         let mut db = Self::default();
         let fixture = ChangeFixture::parse(&db, ra_fixture);
@@ -33,8 +31,7 @@ pub trait WithFixture: Default + ExpandDatabase + SourceDatabase + 'static {
     }
     #[track_caller]
     fn with_files_extra_proc_macros(
-        #[rust_analyzer::rust_fixture]
-        ra_fixture: &str,
+        #[rust_analyzer::rust_fixture] ra_fixture: &str,
         proc_macros: Vec<(String, ProcMacro)>,
     ) -> Self {
         let mut db = Self::default();
@@ -49,10 +46,7 @@ pub trait WithFixture: Default + ExpandDatabase + SourceDatabase + 'static {
         db
     }
     #[track_caller]
-    fn with_position(
-        #[rust_analyzer::rust_fixture]
-        ra_fixture: &str,
-    ) -> (Self, FilePosition) {
+    fn with_position(#[rust_analyzer::rust_fixture] ra_fixture: &str) -> (Self, FilePosition) {
         let (db, file_id, range_or_offset) = Self::with_range_or_offset(ra_fixture);
         let offset = range_or_offset.expect_offset();
         (db, FilePosition { file_id, offset })
@@ -65,17 +59,14 @@ pub trait WithFixture: Default + ExpandDatabase + SourceDatabase + 'static {
     }
     #[track_caller]
     fn with_range_or_offset(
-        #[rust_analyzer::rust_fixture]
-        ra_fixture: &str,
+        #[rust_analyzer::rust_fixture] ra_fixture: &str,
     ) -> (Self, EditionedFileId, RangeOrOffset) {
         let mut db = Self::default();
         let fixture = ChangeFixture::parse(&db, ra_fixture);
         fixture.change.apply(&mut db);
         let (file_id, range_or_offset) = fixture
             .file_position
-            .expect(
-                "Could not find file position in fixture. Did you forget to add an `$0`?",
-            );
+            .expect("Could not find file position in fixture. Did you forget to add an `$0`?");
         (db, file_id, range_or_offset)
     }
     fn test_crate(&self) -> Crate {

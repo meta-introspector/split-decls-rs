@@ -10,8 +10,7 @@ impl CurlSubtransport {
         }
         let agent = format!("git/1.0 (git2-curl {})", env!("CARGO_PKG_VERSION"));
         let url = format!("{}{}", self.base_url.lock().unwrap(), self.url_path);
-        let parsed = Url::parse(&url)
-            .map_err(|_| self.err("invalid url, failed to parse"))?;
+        let parsed = Url::parse(&url).map_err(|_| self.err("invalid url, failed to parse"))?;
         let host = match parsed.host_str() {
             Some(host) => host,
             None => return Err(self.err("invalid url, did not have a host")),
@@ -31,16 +30,15 @@ impl CurlSubtransport {
         headers.append(&format!("Host: {}", host))?;
         if data.len() > 0 {
             h.post_fields_copy(data)?;
-            headers
-                .append(&format!("Accept: application/x-git-{}-result", self.service))?;
-            headers
-                .append(
-                    &format!(
-                        "Content-Type: \
+            headers.append(&format!(
+                "Accept: application/x-git-{}-result",
+                self.service
+            ))?;
+            headers.append(&format!(
+                "Content-Type: \
                  application/x-git-{}-request",
-                        self.service
-                    ),
-                )?;
+                self.service
+            ))?;
         } else {
             headers.append("Accept: */*")?;
         }
@@ -74,16 +72,13 @@ impl CurlSubtransport {
         }
         let code = h.response_code()?;
         if code != 200 {
-            return Err(
-                self
-                    .err(
-                        &format!(
-                            "failed to receive HTTP 200 response: \
+            return Err(self.err(
+                &format!(
+                    "failed to receive HTTP 200 response: \
                      got {}",
-                            code
-                        )[..],
-                    ),
-            );
+                    code
+                )[..],
+            ));
         }
         let expected = match self.method {
             "GET" => format!("application/x-git-{}-advertisement", self.service),
@@ -91,29 +86,23 @@ impl CurlSubtransport {
         };
         match content_type {
             Some(ref content_type) if *content_type != expected => {
-                return Err(
-                    self
-                        .err(
-                            &format!(
-                                "expected a Content-Type header \
+                return Err(self.err(
+                    &format!(
+                        "expected a Content-Type header \
                          with `{}` but found `{}`",
-                                expected, content_type
-                            )[..],
-                        ),
-                );
+                        expected, content_type
+                    )[..],
+                ));
             }
             Some(..) => {}
             None => {
-                return Err(
-                    self
-                        .err(
-                            &format!(
-                                "expected a Content-Type header \
+                return Err(self.err(
+                    &format!(
+                        "expected a Content-Type header \
                          with `{}` but didn't find one",
-                                expected
-                            )[..],
-                        ),
-                );
+                        expected
+                    )[..],
+                ));
             }
         }
         let rdr = Cursor::new(data);

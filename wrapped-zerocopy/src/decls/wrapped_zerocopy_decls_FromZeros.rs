@@ -85,9 +85,7 @@ use std::collections::HashMap;
 )]
 #[cfg_attr(
     zerocopy_diagnostic_on_unimplemented_1_78_0,
-    diagnostic::on_unimplemented(
-        note = "Consider adding `#[derive(FromZeros)]` to `{Self}`"
-    )
+    diagnostic::on_unimplemented(note = "Consider adding `#[derive(FromZeros)]` to `{Self}`")
 )]
 pub unsafe trait FromZeros: TryFromBytes {
     #[doc(hidden)]
@@ -201,7 +199,8 @@ pub unsafe trait FromZeros: TryFromBytes {
         if ptr.is_null() {
             return Err(AllocError);
         }
-        #[allow(clippy::undocumented_unsafe_blocks)] Ok(unsafe { Box::from_raw(ptr) })
+        #[allow(clippy::undocumented_unsafe_blocks)]
+        Ok(unsafe { Box::from_raw(ptr) })
     }
     /// Creates a `Box<[Self]>` (a boxed slice) from zeroed bytes.
     ///
@@ -317,7 +316,8 @@ pub unsafe trait FromZeros: TryFromBytes {
             ptr.add(position)
                 .copy_to(ptr.add(position + additional), v.len() - position);
             ptr.add(position).write_bytes(0, additional);
-            #[allow(clippy::arithmetic_side_effects)] v.set_len(v.len() + additional);
+            #[allow(clippy::arithmetic_side_effects)]
+            v.set_len(v.len() + additional);
         }
         Ok(())
     }

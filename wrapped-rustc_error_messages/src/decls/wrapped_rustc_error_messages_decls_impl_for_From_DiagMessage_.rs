@@ -10,12 +10,8 @@ impl From<DiagMessage> for SubdiagMessage {
         match val {
             DiagMessage::Str(s) => SubdiagMessage::Str(s),
             DiagMessage::Translated(s) => SubdiagMessage::Translated(s),
-            DiagMessage::FluentIdentifier(id, None) => {
-                SubdiagMessage::FluentIdentifier(id)
-            }
-            DiagMessage::FluentIdentifier(_, Some(attr)) => {
-                SubdiagMessage::FluentAttr(attr)
-            }
+            DiagMessage::FluentIdentifier(id, None) => SubdiagMessage::FluentIdentifier(id),
+            DiagMessage::FluentIdentifier(_, Some(attr)) => SubdiagMessage::FluentAttr(attr),
         }
     }
 }

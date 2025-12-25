@@ -20,14 +20,8 @@ fn process_dependency_table(
                 if let Some(optional) = original_dep_table.get("optional") {
                     new_dep_table.insert("optional".to_string(), optional.clone());
                 }
-                if let Some(default_features) = original_dep_table
-                    .get("default-features")
-                {
-                    new_dep_table
-                        .insert(
-                            "default-features".to_string(),
-                            default_features.clone(),
-                        );
+                if let Some(default_features) = original_dep_table.get("default-features") {
+                    new_dep_table.insert("default-features".to_string(), default_features.clone());
                 }
             }
         }

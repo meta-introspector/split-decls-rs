@@ -20,12 +20,10 @@ impl Figure {
     }
     fn script(&self) -> Vec<u8> {
         let mut s = String::new();
-        s.push_str(
-            &format!(
-                "set output '{}'\n", self.output.display().to_string().replace('\'',
-                "''")
-            ),
-        );
+        s.push_str(&format!(
+            "set output '{}'\n",
+            self.output.display().to_string().replace('\'', "''")
+        ));
         if let Some(width) = self.box_width {
             s.push_str(&format!("set boxwidth {}\n", width))
         }
@@ -68,12 +66,10 @@ impl Figure {
             } else {
                 s.push_str(", ");
             }
-            s.push_str(
-                &format!(
-                    "'-' binary endian=little record={} format='%float64' using ", data
-                    .nrows()
-                ),
-            );
+            s.push_str(&format!(
+                "'-' binary endian=little record={} format='%float64' using ",
+                data.nrows()
+            ));
             let mut is_first_col = true;
             for col in 0..data.ncols() {
                 if is_first_col {

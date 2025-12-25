@@ -8,8 +8,10 @@ impl Rule {
         let (_, lhs) = src
             .expect_subtree()
             .map_err(|()| ParseError::expected("expected subtree"))?;
-        src.expect_char('=').map_err(|()| ParseError::expected("expected `=`"))?;
-        src.expect_char('>').map_err(|()| ParseError::expected("expected `>`"))?;
+        src.expect_char('=')
+            .map_err(|()| ParseError::expected("expected `=`"))?;
+        src.expect_char('>')
+            .map_err(|()| ParseError::expected("expected `>`"))?;
         let (_, rhs) = src
             .expect_subtree()
             .map_err(|()| ParseError::expected("expected subtree"))?;

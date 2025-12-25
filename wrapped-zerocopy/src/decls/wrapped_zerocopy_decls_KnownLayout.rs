@@ -193,9 +193,7 @@ use std::collections::HashMap;
 )]
 #[cfg_attr(
     zerocopy_diagnostic_on_unimplemented_1_78_0,
-    diagnostic::on_unimplemented(
-        note = "Consider adding `#[derive(KnownLayout)]` to `{Self}`"
-    )
+    diagnostic::on_unimplemented(note = "Consider adding `#[derive(KnownLayout)]` to `{Self}`")
 )]
 pub unsafe trait KnownLayout {
     #[doc(hidden)]
@@ -238,10 +236,7 @@ pub unsafe trait KnownLayout {
     /// `bytes`. If `Self` is a DST, the returned pointer's referent has `elems`
     /// elements in its trailing slice.
     #[doc(hidden)]
-    fn raw_from_ptr_len(
-        bytes: NonNull<u8>,
-        meta: Self::PointerMetadata,
-    ) -> NonNull<Self>;
+    fn raw_from_ptr_len(bytes: NonNull<u8>, meta: Self::PointerMetadata) -> NonNull<Self>;
     /// Extracts the metadata from a pointer to `Self`.
     ///
     /// # Safety

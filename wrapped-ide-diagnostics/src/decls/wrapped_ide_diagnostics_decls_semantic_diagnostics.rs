@@ -18,12 +18,7 @@ pub fn semantic_diagnostics(
     let parse = sema.parse(editioned_file_id);
     for node in parse.syntax().descendants() {
         handlers::useless_braces::useless_braces(db, &mut res, editioned_file_id, &node);
-        handlers::field_shorthand::field_shorthand(
-            db,
-            &mut res,
-            editioned_file_id,
-            &node,
-        );
+        handlers::field_shorthand::field_shorthand(db, &mut res, editioned_file_id, &node);
         handlers::json_is_not_rust::json_in_items(
             &sema,
             &mut res,
@@ -35,17 +30,15 @@ pub fn semantic_diagnostics(
     }
     let module = sema.file_to_module_def(file_id);
     let is_nightly = matches!(
-        module.and_then(| m | db.toolchain_channel(m.krate().into())),
+        module.and_then(|m| db.toolchain_channel(m.krate().into())),
         Some(ReleaseChannel::Nightly) | None
     );
     let krate = match module {
         Some(module) => module.krate(),
-        None => {
-            match db.all_crates().last() {
-                Some(last) => (*last).into(),
-                None => return vec![],
-            }
-        }
+        None => match db.all_crates().last() {
+            Some(last) => (*last).into(),
+            None => return vec![],
+        },
     };
     let display_target = krate.to_display_target(db);
     let ctx = DiagnosticsContext {
@@ -59,16 +52,15 @@ pub fn semantic_diagnostics(
     let mut diags = Vec::new();
     match module {
         Some(m) => {
-            if db.parse_errors(editioned_file_id).is_none_or(|es| es.len() < 16) {
+            if db
+                .parse_errors(editioned_file_id)
+                .is_none_or(|es| es.len() < 16)
+            {
                 m.diagnostics(db, &mut diags, config.style_lints);
             }
         }
         None => {
-            handlers::unlinked_file::unlinked_file(
-                &ctx,
-                &mut res,
-                editioned_file_id.file_id(db),
-            )
+            handlers::unlinked_file::unlinked_file(&ctx, &mut res, editioned_file_id.file_id(db))
         }
     }
     for diag in diags {
@@ -298,17 +290,16 @@ pub fn semantic_diagnostics(
     let mut lints = res
         .iter_mut()
         .filter(|it| {
-            matches!(it.code, DiagnosticCode::Clippy(_) | DiagnosticCode::RustcLint(_))
+            matches!(
+                it.code,
+                DiagnosticCode::Clippy(_) | DiagnosticCode::RustcLint(_)
+            )
         })
         .filter_map(|it| {
             Some((
-                it
-                    .main_node
-                    .map(|ptr| {
-                        ptr.map(|node| {
-                            node.to_node(&ctx.sema.parse_or_expand(ptr.file_id))
-                        })
-                    })?,
+                it.main_node.map(|ptr| {
+                    ptr.map(|node| node.to_node(&ctx.sema.parse_or_expand(ptr.file_id)))
+                })?,
                 it,
             ))
         })
@@ -318,9 +309,7 @@ pub fn semantic_diagnostics(
     res.retain_mut(|diag| {
         if let Some(node) = diag
             .main_node
-            .map(|ptr| {
-                ptr.map(|node| node.to_node(&ctx.sema.parse_or_expand(ptr.file_id)))
-            })
+            .map(|ptr| ptr.map(|node| node.to_node(&ctx.sema.parse_or_expand(ptr.file_id))))
         {
             handle_diag_from_macros(&ctx.sema, diag, &node)
         } else {

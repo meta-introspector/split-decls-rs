@@ -1,11 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl Decoder {
-    fn new(
-        enc: &'static Encoding,
-        decoder: VariantDecoder,
-        sniffing: BomHandling,
-    ) -> Decoder {
+    fn new(enc: &'static Encoding, decoder: VariantDecoder, sniffing: BomHandling) -> Decoder {
         Decoder {
             encoding: enc,
             variant: decoder,
@@ -61,13 +57,10 @@ impl Decoder {
                     ) {
                         let utf_bom = core::cmp::max(utf8_bom, utf16_bom);
                         let encoding = self.encoding();
-                        if encoding == UTF_8 || encoding == UTF_16LE
-                            || encoding == UTF_16BE
-                        {
+                        if encoding == UTF_8 || encoding == UTF_16LE || encoding == UTF_16BE {
                             return Some(utf_bom);
-                        } else if let Some(non_bom) = self
-                            .variant
-                            .max_utf8_buffer_length(byte_length)
+                        } else if let Some(non_bom) =
+                            self.variant.max_utf8_buffer_length(byte_length)
                         {
                             return Some(core::cmp::max(utf_bom, non_bom));
                         }
@@ -79,10 +72,7 @@ impl Decoder {
                     if let Some(utf8_bom) = checked_add(3, sum.checked_mul(3)) {
                         if self.encoding() == UTF_8 {
                             return Some(utf8_bom);
-                        } else if let Some(non_bom) = self
-                            .variant
-                            .max_utf8_buffer_length(sum)
-                        {
+                        } else if let Some(non_bom) = self.variant.max_utf8_buffer_length(sum) {
                             return Some(core::cmp::max(utf8_bom, non_bom));
                         }
                     }
@@ -95,17 +85,13 @@ impl Decoder {
             }
             DecoderLifeCycle::SeenUtf16LeFirst | DecoderLifeCycle::SeenUtf16BeFirst => {
                 if let Some(sum) = byte_length.checked_add(2) {
-                    if let Some(utf16_bom) = checked_add(
-                        1,
-                        checked_mul(3, checked_div(sum.checked_add(1), 2)),
-                    ) {
+                    if let Some(utf16_bom) =
+                        checked_add(1, checked_mul(3, checked_div(sum.checked_add(1), 2)))
+                    {
                         let encoding = self.encoding();
                         if encoding == UTF_16LE || encoding == UTF_16BE {
                             return Some(utf16_bom);
-                        } else if let Some(non_bom) = self
-                            .variant
-                            .max_utf8_buffer_length(sum)
-                        {
+                        } else if let Some(non_bom) = self.variant.max_utf8_buffer_length(sum) {
                             return Some(core::cmp::max(utf16_bom, non_bom));
                         }
                     }
@@ -128,10 +114,7 @@ impl Decoder {
     /// Use `max_utf8_buffer_length()` for that case.
     ///
     /// Available via the C wrapper.
-    pub fn max_utf8_buffer_length_without_replacement(
-        &self,
-        byte_length: usize,
-    ) -> Option<usize> {
+    pub fn max_utf8_buffer_length_without_replacement(&self, byte_length: usize) -> Option<usize> {
         match self.life_cycle {
             DecoderLifeCycle::Converting
             | DecoderLifeCycle::AtUtf8Start
@@ -149,9 +132,7 @@ impl Decoder {
                     ) {
                         let utf_bom = core::cmp::max(utf8_bom, utf16_bom);
                         let encoding = self.encoding();
-                        if encoding == UTF_8 || encoding == UTF_16LE
-                            || encoding == UTF_16BE
-                        {
+                        if encoding == UTF_8 || encoding == UTF_16LE || encoding == UTF_16BE {
                             return Some(utf_bom);
                         } else if let Some(non_bom) = self
                             .variant
@@ -167,9 +148,8 @@ impl Decoder {
                     if let Some(utf8_bom) = sum.checked_add(3) {
                         if self.encoding() == UTF_8 {
                             return Some(utf8_bom);
-                        } else if let Some(non_bom) = self
-                            .variant
-                            .max_utf8_buffer_length_without_replacement(sum)
+                        } else if let Some(non_bom) =
+                            self.variant.max_utf8_buffer_length_without_replacement(sum)
                         {
                             return Some(core::cmp::max(utf8_bom, non_bom));
                         }
@@ -183,16 +163,14 @@ impl Decoder {
             }
             DecoderLifeCycle::SeenUtf16LeFirst | DecoderLifeCycle::SeenUtf16BeFirst => {
                 if let Some(sum) = byte_length.checked_add(2) {
-                    if let Some(utf16_bom) = checked_add(
-                        1,
-                        checked_mul(3, checked_div(sum.checked_add(1), 2)),
-                    ) {
+                    if let Some(utf16_bom) =
+                        checked_add(1, checked_mul(3, checked_div(sum.checked_add(1), 2)))
+                    {
                         let encoding = self.encoding();
                         if encoding == UTF_16LE || encoding == UTF_16BE {
                             return Some(utf16_bom);
-                        } else if let Some(non_bom) = self
-                            .variant
-                            .max_utf8_buffer_length_without_replacement(sum)
+                        } else if let Some(non_bom) =
+                            self.variant.max_utf8_buffer_length_without_replacement(sum)
                         {
                             return Some(core::cmp::max(utf16_bom, non_bom));
                         }
@@ -222,12 +200,11 @@ impl Decoder {
         let mut total_read = 0usize;
         let mut total_written = 0usize;
         loop {
-            let (result, read, written) = self
-                .decode_to_utf8_without_replacement(
-                    &src[total_read..],
-                    &mut dst[total_written..],
-                    last,
-                );
+            let (result, read, written) = self.decode_to_utf8_without_replacement(
+                &src[total_read..],
+                &mut dst[total_written..],
+                last,
+            );
             total_read += read;
             total_written += written;
             match result {
@@ -324,8 +301,8 @@ impl Decoder {
             let old_len = vec.len();
             let capacity = vec.capacity();
             vec.set_len(capacity);
-            let (result, read, written, replaced) = self
-                .decode_to_utf8(src, &mut vec[old_len..], last);
+            let (result, read, written, replaced) =
+                self.decode_to_utf8(src, &mut vec[old_len..], last);
             vec.set_len(old_len + written);
             (result, read, replaced)
         }
@@ -359,8 +336,7 @@ impl Decoder {
         last: bool,
     ) -> (DecoderResult, usize, usize) {
         let bytes: &mut [u8] = unsafe { dst.as_bytes_mut() };
-        let (result, read, written) = self
-            .decode_to_utf8_without_replacement(src, bytes, last);
+        let (result, read, written) = self.decode_to_utf8_without_replacement(src, bytes, last);
         let len = bytes.len();
         let mut trail = written;
         if self.encoding != UTF_8 {
@@ -404,8 +380,8 @@ impl Decoder {
             let old_len = vec.len();
             let capacity = vec.capacity();
             vec.set_len(capacity);
-            let (result, read, written) = self
-                .decode_to_utf8_without_replacement(src, &mut vec[old_len..], last);
+            let (result, read, written) =
+                self.decode_to_utf8_without_replacement(src, &mut vec[old_len..], last);
             vec.set_len(old_len + written);
             (result, read)
         }
@@ -432,19 +408,15 @@ impl Decoder {
             }
             DecoderLifeCycle::AtStart => {
                 if let Some(utf8_bom) = byte_length.checked_add(1) {
-                    if let Some(utf16_bom) = checked_add(
-                        1,
-                        checked_div(byte_length.checked_add(1), 2),
-                    ) {
+                    if let Some(utf16_bom) =
+                        checked_add(1, checked_div(byte_length.checked_add(1), 2))
+                    {
                         let utf_bom = core::cmp::max(utf8_bom, utf16_bom);
                         let encoding = self.encoding();
-                        if encoding == UTF_8 || encoding == UTF_16LE
-                            || encoding == UTF_16BE
-                        {
+                        if encoding == UTF_8 || encoding == UTF_16LE || encoding == UTF_16BE {
                             return Some(utf_bom);
-                        } else if let Some(non_bom) = self
-                            .variant
-                            .max_utf16_buffer_length(byte_length)
+                        } else if let Some(non_bom) =
+                            self.variant.max_utf16_buffer_length(byte_length)
                         {
                             return Some(core::cmp::max(utf_bom, non_bom));
                         }
@@ -456,10 +428,7 @@ impl Decoder {
                     if let Some(utf8_bom) = sum.checked_add(1) {
                         if self.encoding() == UTF_8 {
                             return Some(utf8_bom);
-                        } else if let Some(non_bom) = self
-                            .variant
-                            .max_utf16_buffer_length(sum)
-                        {
+                        } else if let Some(non_bom) = self.variant.max_utf16_buffer_length(sum) {
                             return Some(core::cmp::max(utf8_bom, non_bom));
                         }
                     }
@@ -472,17 +441,11 @@ impl Decoder {
             }
             DecoderLifeCycle::SeenUtf16LeFirst | DecoderLifeCycle::SeenUtf16BeFirst => {
                 if let Some(sum) = byte_length.checked_add(2) {
-                    if let Some(utf16_bom) = checked_add(
-                        1,
-                        checked_div(sum.checked_add(1), 2),
-                    ) {
+                    if let Some(utf16_bom) = checked_add(1, checked_div(sum.checked_add(1), 2)) {
                         let encoding = self.encoding();
                         if encoding == UTF_16LE || encoding == UTF_16BE {
                             return Some(utf16_bom);
-                        } else if let Some(non_bom) = self
-                            .variant
-                            .max_utf16_buffer_length(sum)
-                        {
+                        } else if let Some(non_bom) = self.variant.max_utf16_buffer_length(sum) {
                             return Some(core::cmp::max(utf16_bom, non_bom));
                         }
                     }
@@ -511,12 +474,11 @@ impl Decoder {
         let mut total_read = 0usize;
         let mut total_written = 0usize;
         loop {
-            let (result, read, written) = self
-                .decode_to_utf16_without_replacement(
-                    &src[total_read..],
-                    &mut dst[total_written..],
-                    last,
-                );
+            let (result, read, written) = self.decode_to_utf16_without_replacement(
+                &src[total_read..],
+                &mut dst[total_written..],
+                last,
+            );
             total_read += read;
             total_written += written;
             match result {

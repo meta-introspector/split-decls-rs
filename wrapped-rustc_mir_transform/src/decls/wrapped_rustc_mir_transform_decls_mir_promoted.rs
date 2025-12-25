@@ -6,13 +6,16 @@ fn mir_promoted(
     def: LocalDefId,
 ) -> (&Steal<Body<'_>>, &Steal<IndexVec<Promoted, Body<'_>>>) {
     debug_assert!(
-        ! tcx.is_trivial_const(def), "Tried to get mir_promoted of a trivial const"
+        !tcx.is_trivial_const(def),
+        "Tried to get mir_promoted of a trivial const"
     );
     let const_qualifs = match tcx.def_kind(def) {
-        DefKind::Fn
-        | DefKind::AssocFn
-        | DefKind::Closure if tcx.constness(def) == hir::Constness::Const
-            || tcx.is_const_default_method(def.to_def_id()) => tcx.mir_const_qualif(def),
+        DefKind::Fn | DefKind::AssocFn | DefKind::Closure
+            if tcx.constness(def) == hir::Constness::Const
+                || tcx.is_const_default_method(def.to_def_id()) =>
+        {
+            tcx.mir_const_qualif(def)
+        }
         DefKind::AssocConst
         | DefKind::Const
         | DefKind::Static { .. }
@@ -44,5 +47,8 @@ fn mir_promoted(
     );
     lint_tail_expr_drop_order::run_lint(tcx, def, &body);
     let promoted = promote_pass.promoted_fragments.into_inner();
-    (tcx.alloc_steal_mir(body), tcx.alloc_steal_promoted(promoted))
+    (
+        tcx.alloc_steal_mir(body),
+        tcx.alloc_steal_promoted(promoted),
+    )
 }

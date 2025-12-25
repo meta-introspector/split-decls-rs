@@ -18,7 +18,9 @@ pub trait KeyInit: KeySizeUser + Sized {
     /// Create new value from variable size key.
     #[inline]
     fn new_from_slice(key: &[u8]) -> Result<Self, InvalidLength> {
-        <&Key<Self>>::try_from(key).map(Self::new).map_err(|_| InvalidLength)
+        <&Key<Self>>::try_from(key)
+            .map(Self::new)
+            .map_err(|_| InvalidLength)
     }
     /// Generate random key using the operating system's secure RNG.
     #[cfg(feature = "getrandom")]

@@ -4,5 +4,7 @@ use std::collections::HashMap;
 #[inline(always)]
 fn addr<T>(x: *const T) -> usize {
     #[allow(clippy::useless_transmute, clippy::transmutes_expressible_as_ptr_casts)]
-    unsafe { core::mem::transmute(x) }
+    unsafe {
+        core::mem::transmute(x)
+    }
 }

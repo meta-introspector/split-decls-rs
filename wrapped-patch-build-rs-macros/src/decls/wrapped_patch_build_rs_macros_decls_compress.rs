@@ -9,5 +9,5 @@ pub fn compress(input: TokenStream) -> TokenStream {
         println!("cargo:warning=🗜️ Compressed: {} -> {} chars", # data.len(),
         compressed.len()); compressed }
     }
-        .into()
+    .into()
 }

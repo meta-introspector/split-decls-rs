@@ -29,18 +29,11 @@ impl Level {
         }
     }
     pub fn is_failure_note(&self) -> bool {
-        matches!(* self, FailureNote)
+        matches!(*self, FailureNote)
     }
     fn can_be_subdiag(&self) -> bool {
         match self {
-            Bug
-            | DelayedBug
-            | Fatal
-            | Error
-            | ForceWarning
-            | FailureNote
-            | Allow
-            | Expect => false,
+            Bug | DelayedBug | Fatal | Error | ForceWarning | FailureNote | Allow | Expect => false,
             Warning | Note | Help | OnceNote | OnceHelp => true,
         }
     }

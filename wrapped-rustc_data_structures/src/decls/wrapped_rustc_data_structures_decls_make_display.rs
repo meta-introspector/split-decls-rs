@@ -1,9 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 /// Turns a closure that takes an `&mut Formatter` into something that can be display-formatted.
-pub fn make_display(
-    f: impl Fn(&mut fmt::Formatter<'_>) -> fmt::Result,
-) -> impl fmt::Display {
+pub fn make_display(f: impl Fn(&mut fmt::Formatter<'_>) -> fmt::Result) -> impl fmt::Display {
     struct Printer<F> {
         f: F,
     }

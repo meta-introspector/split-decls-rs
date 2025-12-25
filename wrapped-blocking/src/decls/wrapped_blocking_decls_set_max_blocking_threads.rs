@@ -27,7 +27,10 @@ use std::collections::HashMap;
 /// ```
 pub fn set_max_blocking_threads(threads: NonZeroUsize) {
     let executor = Executor::get();
-    let mut inner = executor.inner.lock().unwrap_or_else(PoisonError::into_inner);
+    let mut inner = executor
+        .inner
+        .lock()
+        .unwrap_or_else(PoisonError::into_inner);
     let old_limit = inner.thread_limit;
     inner.thread_limit = Some(threads);
     if let Some(old_limit) = old_limit {

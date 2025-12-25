@@ -27,60 +27,50 @@ use std::collections::HashMap;
 /// This does not need to be `pub` for rustc itself, but @chaosite needs it to
 /// be public when using rustc as a library, see
 /// <https://github.com/rust-lang/rust/commit/2b4c33817a5aaecabf4c6598d41e190080ec119e>
-pub fn handle_options(
-    early_dcx: &EarlyDiagCtxt,
-    args: &[String],
-) -> Option<getopts::Matches> {
+pub fn handle_options(early_dcx: &EarlyDiagCtxt, args: &[String]) -> Option<getopts::Matches> {
     let mut options = getopts::Options::new();
     let optgroups = config::rustc_optgroups();
     for option in &optgroups {
         option.apply(&mut options);
     }
-    let matches = options
-        .parse(args)
-        .unwrap_or_else(|e| {
-            let msg: Option<String> = match e {
-                getopts::Fail::UnrecognizedOption(ref opt) => {
-                    CG_OPTIONS
-                        .iter()
-                        .map(|opt_desc| ('C', opt_desc.name()))
-                        .chain(Z_OPTIONS.iter().map(|opt_desc| ('Z', opt_desc.name())))
-                        .find(|&(_, name)| *opt == name.replace('_', "-"))
-                        .map(|(flag, _)| format!("{e}. Did you mean `-{flag} {opt}`?"))
-                }
-                getopts::Fail::ArgumentMissing(ref opt) => {
-                    optgroups
-                        .iter()
-                        .find(|option| option.name == opt)
-                        .map(|option| {
-                            let mut options = getopts::Options::new();
-                            option.apply(&mut options);
-                            options
-                                .usage_with_format(|it| {
-                                    it.fold(format!("{e}\nUsage:"), |a, b| a + "\n" + &b)
-                                })
-                        })
-                }
-                _ => None,
-            };
-            early_dcx.early_fatal(msg.unwrap_or_else(|| e.to_string()));
-        });
-    nightly_options::check_nightly_options(
-        early_dcx,
-        &matches,
-        &config::rustc_optgroups(),
-    );
+    let matches = options.parse(args).unwrap_or_else(|e| {
+        let msg: Option<String> = match e {
+            getopts::Fail::UnrecognizedOption(ref opt) => CG_OPTIONS
+                .iter()
+                .map(|opt_desc| ('C', opt_desc.name()))
+                .chain(Z_OPTIONS.iter().map(|opt_desc| ('Z', opt_desc.name())))
+                .find(|&(_, name)| *opt == name.replace('_', "-"))
+                .map(|(flag, _)| format!("{e}. Did you mean `-{flag} {opt}`?")),
+            getopts::Fail::ArgumentMissing(ref opt) => optgroups
+                .iter()
+                .find(|option| option.name == opt)
+                .map(|option| {
+                    let mut options = getopts::Options::new();
+                    option.apply(&mut options);
+                    options.usage_with_format(|it| {
+                        it.fold(format!("{e}\nUsage:"), |a, b| a + "\n" + &b)
+                    })
+                }),
+            _ => None,
+        };
+        early_dcx.early_fatal(msg.unwrap_or_else(|| e.to_string()));
+    });
+    nightly_options::check_nightly_options(early_dcx, &matches, &config::rustc_optgroups());
     if args.is_empty() || matches.opt_present("h") || matches.opt_present("help") {
         let unstable_enabled = nightly_options::is_unstable_enabled(&matches);
         let nightly_build = nightly_options::match_is_nightly_build(&matches);
-        usage(matches.opt_present("verbose"), unstable_enabled, nightly_build);
+        usage(
+            matches.opt_present("verbose"),
+            unstable_enabled,
+            nightly_build,
+        );
         return None;
     }
     if describe_flag_categories(early_dcx, &matches) {
         return None;
     }
     if matches.opt_present("version") {
-        version!(early_dcx, "rustc", & matches);
+        version!(early_dcx, "rustc", &matches);
         return None;
     }
     warn_on_confusing_output_filename_flag(early_dcx, &matches, args);

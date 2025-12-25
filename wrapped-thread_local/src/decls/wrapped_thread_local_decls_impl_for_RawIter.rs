@@ -10,10 +10,7 @@ impl RawIter {
             index: 0,
         }
     }
-    fn next<'a, T: Send + Sync>(
-        &mut self,
-        thread_local: &'a ThreadLocal<T>,
-    ) -> Option<&'a T> {
+    fn next<'a, T: Send + Sync>(&mut self, thread_local: &'a ThreadLocal<T>) -> Option<&'a T> {
         while let Some(bucket) = thread_local.buckets.get(self.bucket) {
             let bucket = bucket.load(Ordering::Acquire);
             if !bucket.is_null() {
@@ -59,17 +56,11 @@ impl RawIter {
         self.bucket += 1;
         self.index = 0;
     }
-    fn size_hint<T: Send>(
-        &self,
-        thread_local: &ThreadLocal<T>,
-    ) -> (usize, Option<usize>) {
+    fn size_hint<T: Send>(&self, thread_local: &ThreadLocal<T>) -> (usize, Option<usize>) {
         let total = thread_local.values.load(Ordering::Relaxed);
         (total.saturating_sub(self.yielded), None)
     }
-    fn size_hint_frozen<T: Send>(
-        &self,
-        thread_local: &ThreadLocal<T>,
-    ) -> (usize, Option<usize>) {
+    fn size_hint_frozen<T: Send>(&self, thread_local: &ThreadLocal<T>) -> (usize, Option<usize>) {
         let total = thread_local.values.load(Ordering::Relaxed);
         let remaining = total - self.yielded;
         (remaining, Some(remaining))

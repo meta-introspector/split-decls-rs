@@ -7,7 +7,10 @@ impl Masks {
         let end = range.end().unwrap_or(length);
         assert!(
             start <= end && end <= length,
-            "invalid range {}..{} for a fixedbitset of size {}", start, end, length
+            "invalid range {}..{} for a fixedbitset of size {}",
+            start,
+            end,
+            length
         );
         let (first_block, first_rem) = div_rem(start, BITS);
         let (last_block, last_rem) = div_rem(end, BITS);

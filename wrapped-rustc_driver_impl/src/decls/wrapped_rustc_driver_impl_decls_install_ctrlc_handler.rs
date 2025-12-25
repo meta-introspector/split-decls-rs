@@ -5,9 +5,9 @@ use std::collections::HashMap;
 pub fn install_ctrlc_handler() {
     #[cfg(all(not(miri), not(target_family = "wasm")))]
     ctrlc::set_handler(move || {
-            rustc_const_eval::CTRL_C_RECEIVED.store(true, Ordering::Relaxed);
-            std::thread::sleep(std::time::Duration::from_millis(100));
-            std::process::exit(1);
-        })
-        .expect("Unable to install ctrlc handler");
+        rustc_const_eval::CTRL_C_RECEIVED.store(true, Ordering::Relaxed);
+        std::thread::sleep(std::time::Duration::from_millis(100));
+        std::process::exit(1);
+    })
+    .expect("Unable to install ctrlc handler");
 }

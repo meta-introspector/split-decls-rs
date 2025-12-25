@@ -25,8 +25,8 @@ pub fn collect_suggestions<S: ::std::hash::BuildHasher>(
                 .spans
                 .iter()
                 .filter(|span| {
-                    use crate::Filter::*;
                     use crate::diagnostics::Applicability::*;
+                    use crate::Filter::*;
                     match (filter, &span.suggestion_applicability) {
                         (MachineApplicableOnly, Some(MachineApplicable)) => true,
                         (MachineApplicableOnly, _) => false,

@@ -76,12 +76,11 @@ impl MultiSpan {
             .collect::<Vec<_>>();
         for &span in &self.primary_spans {
             if !span_labels.iter().any(|sl| sl.span == span) {
-                span_labels
-                    .push(SpanLabel {
-                        span,
-                        is_primary: true,
-                        label: None,
-                    });
+                span_labels.push(SpanLabel {
+                    span,
+                    is_primary: true,
+                    label: None,
+                });
             }
         }
         span_labels

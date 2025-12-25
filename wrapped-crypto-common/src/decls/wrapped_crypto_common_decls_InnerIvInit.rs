@@ -9,10 +9,7 @@ pub trait InnerIvInit: InnerUser + IvSizeUser + Sized {
     fn inner_iv_init(inner: Self::Inner, iv: &Iv<Self>) -> Self;
     /// Initialize value using `inner` and `iv` slice.
     #[inline]
-    fn inner_iv_slice_init(
-        inner: Self::Inner,
-        iv: &[u8],
-    ) -> Result<Self, InvalidLength> {
+    fn inner_iv_slice_init(inner: Self::Inner, iv: &[u8]) -> Result<Self, InvalidLength> {
         let iv = <&Iv<Self>>::try_from(iv).map_err(|_| InvalidLength)?;
         Ok(Self::inner_iv_init(inner, iv))
     }

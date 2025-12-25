@@ -15,7 +15,11 @@ impl<T, const N: usize> LRUCache<T, N> {
     /// This item becomes the front (most-recently-used) item in the cache.  If the cache is full,
     /// the back (least-recently-used) item will be removed and returned.
     pub fn insert(&mut self, val: T) -> Option<T> {
-        let new_entry = Entry { val, prev: 0, next: 0 };
+        let new_entry = Entry {
+            val,
+            prev: 0,
+            next: 0,
+        };
         if self.entries.is_full() {
             let i = self.pop_back();
             let old_entry = replace(self.entry(i), new_entry);
@@ -34,7 +38,11 @@ impl<T, const N: usize> LRUCache<T, N> {
     where
         F: FnMut(&T) -> bool,
     {
-        if self.touch(pred) { self.front_mut() } else { None }
+        if self.touch(pred) {
+            self.front_mut()
+        } else {
+            None
+        }
     }
     /// Performs a lookup on the cache with the given test routine. Touches
     /// the result on a hit.

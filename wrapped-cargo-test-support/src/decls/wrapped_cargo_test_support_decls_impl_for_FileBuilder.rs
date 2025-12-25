@@ -16,9 +16,7 @@ impl FileBuilder {
         }
         self.dirname().mkdir_p();
         fs::write(&self.path, &self.body)
-            .unwrap_or_else(|e| {
-                panic!("could not create file {}: {}", self.path.display(), e)
-            });
+            .unwrap_or_else(|e| panic!("could not create file {}: {}", self.path.display(), e));
         #[cfg(unix)]
         if self.executable {
             use std::os::unix::fs::PermissionsExt;

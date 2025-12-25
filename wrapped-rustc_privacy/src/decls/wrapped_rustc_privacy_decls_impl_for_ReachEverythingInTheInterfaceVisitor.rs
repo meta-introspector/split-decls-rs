@@ -22,7 +22,10 @@ impl ReachEverythingInTheInterfaceVisitor<'_, '_> {
     }
     fn trait_ref(&mut self) -> &mut Self {
         self.visit_trait(
-            self.ev.tcx.impl_trait_ref(self.item_def_id).instantiate_identity(),
+            self.ev
+                .tcx
+                .impl_trait_ref(self.item_def_id)
+                .instantiate_identity(),
         );
         self
     }

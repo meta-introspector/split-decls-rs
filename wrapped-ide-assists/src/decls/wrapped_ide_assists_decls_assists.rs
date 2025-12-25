@@ -21,10 +21,8 @@ pub fn assists(
         },
     );
     let mut acc = Assists::new(&ctx, resolve);
-    handlers::all()
-        .iter()
-        .for_each(|handler| {
-            handler(&mut acc, &ctx);
-        });
+    handlers::all().iter().for_each(|handler| {
+        handler(&mut acc, &ctx);
+    });
     acc.finish()
 }

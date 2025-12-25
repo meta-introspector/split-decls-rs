@@ -2,7 +2,10 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl Span {
     fn _new(inner: imp::Span) -> Self {
-        Span { inner, _marker: MARKER }
+        Span {
+            inner,
+            _marker: MARKER,
+        }
     }
     fn _new_fallback(inner: fallback::Span) -> Self {
         Span {

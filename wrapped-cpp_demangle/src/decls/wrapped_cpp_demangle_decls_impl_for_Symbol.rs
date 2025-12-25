@@ -71,7 +71,9 @@ where
 AST = {:#?}
 
 substitutions = {:#?}",
-            String::from_utf8_lossy(symbol.raw), symbol.parsed, symbol.substitutions
+            String::from_utf8_lossy(symbol.raw),
+            symbol.parsed,
+            symbol.substitutions
         );
         Ok((symbol, tail.into()))
     }

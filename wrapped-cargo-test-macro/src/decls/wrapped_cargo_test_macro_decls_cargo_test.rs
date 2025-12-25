@@ -61,7 +61,7 @@ pub fn cargo_test(attr: TokenStream, item: TokenStream) -> TokenStream {
             "build_std_real" => {
                 set_ignore!(is_not_nightly, "requires nightly");
                 set_ignore!(
-                    option_env!("CARGO_RUN_BUILD_STD_TESTS") .is_none(),
+                    option_env!("CARGO_RUN_BUILD_STD_TESTS").is_none(),
                     "CARGO_RUN_BUILD_STD_TESTS must be set"
                 );
             }
@@ -74,13 +74,13 @@ pub fn cargo_test(attr: TokenStream, item: TokenStream) -> TokenStream {
             }
             "container_test" => {
                 set_ignore!(
-                    option_env!("CARGO_CONTAINER_TESTS") .is_none(),
+                    option_env!("CARGO_CONTAINER_TESTS").is_none(),
                     "CARGO_CONTAINER_TESTS must be set"
                 );
             }
             "public_network_test" => {
                 set_ignore!(
-                    option_env!("CARGO_PUBLIC_NETWORK_TESTS") .is_none(),
+                    option_env!("CARGO_PUBLIC_NETWORK_TESTS").is_none(),
                     "CARGO_PUBLIC_NETWORK_TESTS must be set"
                 );
             }
@@ -90,7 +90,8 @@ pub fn cargo_test(attr: TokenStream, item: TokenStream) -> TokenStream {
             }
             "requires_rustup_stable" => {
                 set_ignore!(
-                    ! has_rustup_stable(), "rustup or stable toolchain not installed"
+                    !has_rustup_stable(),
+                    "rustup or stable toolchain not installed"
                 );
             }
             s if s.starts_with("requires=") => {
@@ -101,10 +102,11 @@ pub fn cargo_test(attr: TokenStream, item: TokenStream) -> TokenStream {
                 let literal = literal.to_string();
                 let Some(command) = literal
                     .strip_prefix('"')
-                    .and_then(|lit| lit.strip_suffix('"')) else {
+                    .and_then(|lit| lit.strip_suffix('"'))
+                else {
                     panic!("expect a quoted string literal, found: {literal}");
                 };
-                set_ignore!(! has_command(command), "{command} not installed");
+                set_ignore!(!has_command(command), "{command} not installed");
             }
             s if s.starts_with(">=1.") => {
                 requires_reason = true;
@@ -116,7 +118,7 @@ pub fn cargo_test(attr: TokenStream, item: TokenStream) -> TokenStream {
                 explicit_reason = Some(s[7..].parse().unwrap());
             }
             s if s.starts_with("ignore_windows=") => {
-                set_ignore!(cfg!(windows), "{}", & s[16..s.len() - 1]);
+                set_ignore!(cfg!(windows), "{}", &s[16..s.len() - 1]);
             }
             _ => panic!("unknown rule {:?}", rule),
         }
@@ -136,17 +138,17 @@ pub fn cargo_test(attr: TokenStream, item: TokenStream) -> TokenStream {
         if let Some(input) = attr_input {
             attr_stream.extend(input);
         }
-        ret.extend(Some(TokenTree::from(Group::new(Delimiter::Bracket, attr_stream))));
+        ret.extend(Some(TokenTree::from(Group::new(
+            Delimiter::Bracket,
+            attr_stream,
+        ))));
     };
     add_attr(&mut ret, "test", None);
     if ignore {
         let reason = explicit_reason
             .or_else(|| {
                 (!implicit_reasons.is_empty())
-                    .then(|| {
-                        TokenTree::from(Literal::string(&implicit_reasons.join(", ")))
-                            .into()
-                    })
+                    .then(|| TokenTree::from(Literal::string(&implicit_reasons.join(", "))).into())
             })
             .map(|reason: TokenStream| {
                 let mut stream = TokenStream::new();
@@ -178,7 +180,10 @@ pub fn cargo_test(attr: TokenStream, item: TokenStream) -> TokenStream {
             };"#,
         );
         new_body.extend(group.stream());
-        ret.extend(Some(TokenTree::from(Group::new(group.delimiter(), new_body))));
+        ret.extend(Some(TokenTree::from(Group::new(
+            group.delimiter(),
+            new_body,
+        ))));
     }
     ret
 }

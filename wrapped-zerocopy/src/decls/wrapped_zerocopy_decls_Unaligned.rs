@@ -76,9 +76,7 @@ use std::collections::HashMap;
 )]
 #[cfg_attr(
     zerocopy_diagnostic_on_unimplemented_1_78_0,
-    diagnostic::on_unimplemented(
-        note = "Consider adding `#[derive(Unaligned)]` to `{Self}`"
-    )
+    diagnostic::on_unimplemented(note = "Consider adding `#[derive(Unaligned)]` to `{Self}`")
 )]
 pub unsafe trait Unaligned {
     #[doc(hidden)]

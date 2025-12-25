@@ -23,27 +23,23 @@ impl IntTy {
         }
     }
     pub fn bit_width(&self) -> Option<u64> {
-        Some(
-            match *self {
-                IntTy::Isize => return None,
-                IntTy::I8 => 8,
-                IntTy::I16 => 16,
-                IntTy::I32 => 32,
-                IntTy::I64 => 64,
-                IntTy::I128 => 128,
-            },
-        )
+        Some(match *self {
+            IntTy::Isize => return None,
+            IntTy::I8 => 8,
+            IntTy::I16 => 16,
+            IntTy::I32 => 32,
+            IntTy::I64 => 64,
+            IntTy::I128 => 128,
+        })
     }
     pub fn normalize(&self, target_width: u16) -> Self {
         match self {
-            IntTy::Isize => {
-                match target_width {
-                    16 => IntTy::I16,
-                    32 => IntTy::I32,
-                    64 => IntTy::I64,
-                    _ => unreachable!(),
-                }
-            }
+            IntTy::Isize => match target_width {
+                16 => IntTy::I16,
+                32 => IntTy::I32,
+                64 => IntTy::I64,
+                _ => unreachable!(),
+            },
             _ => *self,
         }
     }

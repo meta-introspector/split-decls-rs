@@ -1,9 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-fn factory(
-    remote: &git2::Remote<'_>,
-    handle: Arc<Mutex<Easy>>,
-) -> Result<Transport, Error> {
+fn factory(remote: &git2::Remote<'_>, handle: Arc<Mutex<Easy>>) -> Result<Transport, Error> {
     Transport::smart(
         remote,
         true,

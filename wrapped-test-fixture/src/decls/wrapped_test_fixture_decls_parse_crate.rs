@@ -5,9 +5,7 @@ fn parse_crate(
     current_source_root_kind: SourceRootKind,
     explicit_non_workspace_member: bool,
 ) -> (String, CrateOrigin, Option<String>) {
-    let (crate_str, force_non_lang_origin) = if let Some(s) = crate_str
-        .strip_prefix("r#")
-    {
+    let (crate_str, force_non_lang_origin) = if let Some(s) = crate_str.strip_prefix("r#") {
         (s.to_owned(), ForceNoneLangOrigin::Yes)
     } else {
         (crate_str, ForceNoneLangOrigin::No)
@@ -16,7 +14,11 @@ fn parse_crate(
         let (version, repo) = remain
             .split_once(',')
             .expect("crate meta: found '@' without version and url");
-        (name.to_owned(), Some(repo.to_owned()), Some(version.to_owned()))
+        (
+            name.to_owned(),
+            Some(repo.to_owned()),
+            Some(version.to_owned()),
+        )
     } else {
         (crate_str, None, None)
     };

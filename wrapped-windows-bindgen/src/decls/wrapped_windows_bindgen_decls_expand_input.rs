@@ -44,9 +44,9 @@ fn expand_input(input: &[&str]) -> Vec<File> {
             std::include_bytes!("../default/Windows.Win32.winmd").to_vec(),
             std::include_bytes!("../default/Windows.Wdk.winmd").to_vec(),
         ]
-            .into_iter()
-            .map(|bytes| File::new(bytes).unwrap())
-            .collect();
+        .into_iter()
+        .map(|bytes| File::new(bytes).unwrap())
+        .collect();
     }
     for path in &paths {
         let Ok(bytes) = std::fs::read(path) else {

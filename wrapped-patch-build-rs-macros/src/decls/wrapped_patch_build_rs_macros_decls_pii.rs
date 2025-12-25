@@ -10,5 +10,5 @@ pub fn pii(input: TokenStream) -> TokenStream {
         "/Users/<user>/").replace("@gmail.com", "@<email>").replace("@company.com",
         "@<company>"); println!("cargo:warning=🔒 PII cleaned"); cleaned }
     }
-        .into()
+    .into()
 }

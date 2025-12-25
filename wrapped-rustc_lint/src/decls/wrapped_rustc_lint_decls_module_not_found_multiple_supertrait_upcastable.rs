@@ -1,6 +1,4 @@
-#[llm_error_message(
-    message = "Module file not found for: multiple_supertrait_upcastable"
-)]
+#[llm_error_message(message = "Module file not found for: multiple_supertrait_upcastable")]
 #[llm_context(
     crate_name = "wrapped_rustc_lint",
     module_name = "multiple_supertrait_upcastable"

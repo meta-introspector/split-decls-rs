@@ -3,9 +3,7 @@ use std::collections::HashMap;
 impl<'db> MemoryMap<'db> {
     pub fn vtable_ty(&self, id: usize) -> Result<Ty<'db>, MirEvalError<'db>> {
         match self {
-            MemoryMap::Empty | MemoryMap::Simple(_) => {
-                Err(MirEvalError::InvalidVTableId(id))
-            }
+            MemoryMap::Empty | MemoryMap::Simple(_) => Err(MirEvalError::InvalidVTableId(id)),
             MemoryMap::Complex(cm) => cm.vtable.ty(id),
         }
     }
@@ -30,20 +28,16 @@ impl<'db> MemoryMap<'db> {
         };
         match self {
             MemoryMap::Empty => Ok(Default::default()),
-            MemoryMap::Simple(m) => {
-                transform((&0, m))
-                    .map(|(addr, val)| {
-                        let mut map = FxHashMap::with_capacity_and_hasher(
-                            1,
-                            rustc_hash::FxBuildHasher,
-                        );
-                        map.insert(addr, val);
-                        map
-                    })
-            }
-            MemoryMap::Complex(cm) => {
-                cm.memory.iter().map(|(addr, val)| transform((addr, val))).collect()
-            }
+            MemoryMap::Simple(m) => transform((&0, m)).map(|(addr, val)| {
+                let mut map = FxHashMap::with_capacity_and_hasher(1, rustc_hash::FxBuildHasher);
+                map.insert(addr, val);
+                map
+            }),
+            MemoryMap::Complex(cm) => cm
+                .memory
+                .iter()
+                .map(|(addr, val)| transform((addr, val)))
+                .collect(),
         }
     }
     fn get(&self, addr: usize, size: usize) -> Option<&[u8]> {

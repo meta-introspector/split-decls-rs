@@ -21,12 +21,15 @@ fn analyze_source_file_generic(
             let pos = TextSize::from(i as u32) + output_offset
                 - lines.last().unwrap_or(&TextSize::default());
             if char_len > 1 {
-                assert!((2..= 4).contains(& char_len));
+                assert!((2..=4).contains(&char_len));
                 let mbc = WideChar {
                     start: pos,
                     end: pos + TextSize::from(char_len as u32),
                 };
-                multi_byte_chars.entry(lines.len() as u32).or_default().push(mbc);
+                multi_byte_chars
+                    .entry(lines.len() as u32)
+                    .or_default()
+                    .push(mbc);
             }
         }
         i += char_len;

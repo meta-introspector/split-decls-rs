@@ -1,15 +1,9 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-#[cfg(
-    not(
-        any(
-            target_arch = "aarch64",
-            target_arch = "loongarch64",
-            target_arch = "x86",
-            target_arch = "x86_64"
-        )
-    )
-)]
-compile_error!(
-    "This crate works only on `aarch64`, `loongarch64`, `x86`, and `x86-64` targets."
-);
+#[cfg(not(any(
+    target_arch = "aarch64",
+    target_arch = "loongarch64",
+    target_arch = "x86",
+    target_arch = "x86_64"
+)))]
+compile_error!("This crate works only on `aarch64`, `loongarch64`, `x86`, and `x86-64` targets.");

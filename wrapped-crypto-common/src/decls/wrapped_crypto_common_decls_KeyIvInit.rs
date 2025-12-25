@@ -85,9 +85,7 @@ pub trait KeyIvInit: KeySizeUser + IvSizeUser + Sized {
     /// Generate random key and IV using the provided [`CryptoRng`].
     #[cfg(feature = "rand_core")]
     #[inline]
-    fn generate_key_iv_with_rng<R: CryptoRng + ?Sized>(
-        rng: &mut R,
-    ) -> (Key<Self>, Iv<Self>) {
+    fn generate_key_iv_with_rng<R: CryptoRng + ?Sized>(rng: &mut R) -> (Key<Self>, Iv<Self>) {
         let key = Self::generate_key_with_rng(rng);
         let iv = Self::generate_iv_with_rng(rng);
         (key, iv)

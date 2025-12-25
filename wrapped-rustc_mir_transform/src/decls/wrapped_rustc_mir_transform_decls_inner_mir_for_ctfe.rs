@@ -6,9 +6,7 @@ fn inner_mir_for_ctfe(tcx: TyCtxt<'_>, def: LocalDefId) -> Body<'_> {
     }
     let body = tcx.mir_drops_elaborated_and_const_checked(def);
     let body = match tcx.hir_body_const_context(def) {
-        Some(hir::ConstContext::Const { .. } | hir::ConstContext::Static(_)) => {
-            body.steal()
-        }
+        Some(hir::ConstContext::Const { .. } | hir::ConstContext::Static(_)) => body.steal(),
         Some(hir::ConstContext::ConstFn) => body.borrow().clone(),
         None => bug!("`mir_for_ctfe` called on non-const {def:?}"),
     };

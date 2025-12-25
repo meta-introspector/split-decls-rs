@@ -88,7 +88,11 @@ impl LineIndex {
     /// Returns the given line's range.
     pub fn line(&self, line: u32) -> Option<TextRange> {
         let start = self.start_offset(line as usize)?;
-        let next_newline = self.newlines.get(line as usize).copied().unwrap_or(self.len);
+        let next_newline = self
+            .newlines
+            .get(line as usize)
+            .copied()
+            .unwrap_or(self.len);
         let line_length = next_newline - start;
         Some(TextRange::new(start, start + line_length))
     }

@@ -34,11 +34,9 @@ pub fn from_dot_string(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
             return quote! {
                 compile_error!(# msg)
             }
-                .into();
+            .into();
         }
-        Ok(graph) => {
-            graph.filter_map(&|(s1, s2): (ID<'_>, ID<'_>)| Some((s1.into(), s2.into())))
-        }
+        Ok(graph) => graph.filter_map(&|(s1, s2): (ID<'_>, ID<'_>)| Some((s1.into(), s2.into()))),
     };
     let output: proc_macro2::TokenStream = quote! {
         # graph

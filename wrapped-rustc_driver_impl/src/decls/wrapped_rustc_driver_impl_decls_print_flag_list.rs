@@ -8,8 +8,11 @@ fn print_flag_list<T>(cmdline_opt: &str, flag_list: &[OptionDesc<T>]) {
         .unwrap_or(0);
     for opt_desc in flag_list {
         safe_println!(
-            "    {} {:>width$}=val -- {}", cmdline_opt, opt_desc.name().replace('_',
-            "-"), opt_desc.desc(), width = max_len
+            "    {} {:>width$}=val -- {}",
+            cmdline_opt,
+            opt_desc.name().replace('_', "-"),
+            opt_desc.desc(),
+            width = max_len
         );
     }
 }

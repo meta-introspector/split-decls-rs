@@ -35,7 +35,9 @@ use std::collections::HashMap;
 ///
 /// [`BigEndian`]: enum.BigEndian.html
 /// [`LittleEndian`]: enum.LittleEndian.html
-pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialEq + PartialOrd + private::Sealed {
+pub trait ByteOrder:
+    Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialEq + PartialOrd + private::Sealed
+{
     /// Reads an unsigned 16 bit integer from `buf`.
     ///
     /// # Panics
@@ -863,9 +865,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// ```
     #[inline]
     fn read_i16_into(src: &[u8], dst: &mut [i16]) {
-        let dst = unsafe {
-            slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u16, dst.len())
-        };
+        let dst = unsafe { slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u16, dst.len()) };
         Self::read_u16_into(src, dst)
     }
     /// Reads signed 32 bit integers from `src` into `dst`.
@@ -891,9 +891,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// ```
     #[inline]
     fn read_i32_into(src: &[u8], dst: &mut [i32]) {
-        let dst = unsafe {
-            slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u32, dst.len())
-        };
+        let dst = unsafe { slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u32, dst.len()) };
         Self::read_u32_into(src, dst);
     }
     /// Reads signed 64 bit integers from `src` into `dst`.
@@ -919,9 +917,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// ```
     #[inline]
     fn read_i64_into(src: &[u8], dst: &mut [i64]) {
-        let dst = unsafe {
-            slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u64, dst.len())
-        };
+        let dst = unsafe { slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u64, dst.len()) };
         Self::read_u64_into(src, dst);
     }
     /// Reads signed 128 bit integers from `src` into `dst`.
@@ -947,9 +943,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// ```
     #[inline]
     fn read_i128_into(src: &[u8], dst: &mut [i128]) {
-        let dst = unsafe {
-            slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u128, dst.len())
-        };
+        let dst = unsafe { slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u128, dst.len()) };
         Self::read_u128_into(src, dst);
     }
     /// Reads IEEE754 single-precision (4 bytes) floating point numbers from
@@ -977,7 +971,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     #[inline]
     fn read_f32_into(src: &[u8], dst: &mut [f32]) {
         let dst = unsafe {
-            const _: () = assert!(align_of::< u32 > () <= align_of::< f32 > ());
+            const _: () = assert!(align_of::<u32>() <= align_of::<f32>());
             slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u32, dst.len())
         };
         Self::read_u32_into(src, dst);
@@ -1037,7 +1031,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     #[inline]
     fn read_f64_into(src: &[u8], dst: &mut [f64]) {
         let dst = unsafe {
-            const _: () = assert!(align_of::< u64 > () <= align_of::< f64 > ());
+            const _: () = assert!(align_of::<u64>() <= align_of::<f64>());
             slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u64, dst.len())
         };
         Self::read_u64_into(src, dst);
@@ -1214,9 +1208,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// assert_eq!(numbers_given, numbers_got);
     /// ```
     fn write_i16_into(src: &[i16], dst: &mut [u8]) {
-        let src = unsafe {
-            slice::from_raw_parts(src.as_ptr() as *const u16, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts(src.as_ptr() as *const u16, src.len()) };
         Self::write_u16_into(src, dst);
     }
     /// Writes signed 32 bit integers from `src` into `dst`.
@@ -1241,9 +1233,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// assert_eq!(numbers_given, numbers_got);
     /// ```
     fn write_i32_into(src: &[i32], dst: &mut [u8]) {
-        let src = unsafe {
-            slice::from_raw_parts(src.as_ptr() as *const u32, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts(src.as_ptr() as *const u32, src.len()) };
         Self::write_u32_into(src, dst);
     }
     /// Writes signed 64 bit integers from `src` into `dst`.
@@ -1268,9 +1258,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// assert_eq!(numbers_given, numbers_got);
     /// ```
     fn write_i64_into(src: &[i64], dst: &mut [u8]) {
-        let src = unsafe {
-            slice::from_raw_parts(src.as_ptr() as *const u64, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts(src.as_ptr() as *const u64, src.len()) };
         Self::write_u64_into(src, dst);
     }
     /// Writes signed 128 bit integers from `src` into `dst`.
@@ -1295,9 +1283,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// assert_eq!(numbers_given, numbers_got);
     /// ```
     fn write_i128_into(src: &[i128], dst: &mut [u8]) {
-        let src = unsafe {
-            slice::from_raw_parts(src.as_ptr() as *const u128, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts(src.as_ptr() as *const u128, src.len()) };
         Self::write_u128_into(src, dst);
     }
     /// Writes IEEE754 single-precision (4 bytes) floating point numbers from
@@ -1323,9 +1309,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// assert_eq!(numbers_given, numbers_got);
     /// ```
     fn write_f32_into(src: &[f32], dst: &mut [u8]) {
-        let src = unsafe {
-            slice::from_raw_parts(src.as_ptr() as *const u32, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts(src.as_ptr() as *const u32, src.len()) };
         Self::write_u32_into(src, dst);
     }
     /// Writes IEEE754 double-precision (8 bytes) floating point numbers from
@@ -1351,9 +1335,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// assert_eq!(numbers_given, numbers_got);
     /// ```
     fn write_f64_into(src: &[f64], dst: &mut [u8]) {
-        let src = unsafe {
-            slice::from_raw_parts(src.as_ptr() as *const u64, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts(src.as_ptr() as *const u64, src.len()) };
         Self::write_u64_into(src, dst);
     }
     /// Converts the given slice of unsigned 16 bit integers to a particular
@@ -1447,9 +1429,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// ```
     #[inline]
     fn from_slice_i16(src: &mut [i16]) {
-        let src = unsafe {
-            slice::from_raw_parts_mut(src.as_mut_ptr() as *mut u16, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts_mut(src.as_mut_ptr() as *mut u16, src.len()) };
         Self::from_slice_u16(src);
     }
     /// Converts the given slice of signed 32 bit integers to a particular
@@ -1471,9 +1451,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// ```
     #[inline]
     fn from_slice_i32(src: &mut [i32]) {
-        let src = unsafe {
-            slice::from_raw_parts_mut(src.as_mut_ptr() as *mut u32, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts_mut(src.as_mut_ptr() as *mut u32, src.len()) };
         Self::from_slice_u32(src);
     }
     /// Converts the given slice of signed 64 bit integers to a particular
@@ -1495,9 +1473,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// ```
     #[inline]
     fn from_slice_i64(src: &mut [i64]) {
-        let src = unsafe {
-            slice::from_raw_parts_mut(src.as_mut_ptr() as *mut u64, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts_mut(src.as_mut_ptr() as *mut u64, src.len()) };
         Self::from_slice_u64(src);
     }
     /// Converts the given slice of signed 128 bit integers to a particular
@@ -1519,9 +1495,7 @@ pub trait ByteOrder: Clone + Copy + Debug + Default + Eq + Hash + Ord + PartialE
     /// ```
     #[inline]
     fn from_slice_i128(src: &mut [i128]) {
-        let src = unsafe {
-            slice::from_raw_parts_mut(src.as_mut_ptr() as *mut u128, src.len())
-        };
+        let src = unsafe { slice::from_raw_parts_mut(src.as_mut_ptr() as *mut u128, src.len()) };
         Self::from_slice_u128(src);
     }
     /// Converts the given slice of IEEE754 single-precision (4 bytes) floating

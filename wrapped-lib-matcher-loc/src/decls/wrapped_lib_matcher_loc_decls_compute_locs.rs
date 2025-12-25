@@ -13,22 +13,12 @@ pub fn compute_locs(matcher: &[TokenTree]) -> Vec<MatcherLoc> {
                     locs.push(MatcherLoc::Token { token: *token });
                 }
                 TokenTree::Delimited(span, _, delimited) => {
-                    let open_token = Token::new(
-                        delimited.delim.as_open_token_kind(),
-                        span.open,
-                    );
-                    let close_token = Token::new(
-                        delimited.delim.as_close_token_kind(),
-                        span.close,
-                    );
+                    let open_token = Token::new(delimited.delim.as_open_token_kind(), span.open);
+                    let close_token = Token::new(delimited.delim.as_close_token_kind(), span.close);
                     locs.push(MatcherLoc::Delimited);
-                    locs.push(MatcherLoc::Token {
-                        token: open_token,
-                    });
+                    locs.push(MatcherLoc::Token { token: open_token });
                     inner(&delimited.tts, locs, next_metavar, seq_depth);
-                    locs.push(MatcherLoc::Token {
-                        token: close_token,
-                    });
+                    locs.push(MatcherLoc::Token { token: close_token });
                 }
                 TokenTree::Sequence(_, seq) => {
                     let dummy = MatcherLoc::Eof;
@@ -42,14 +32,9 @@ pub fn compute_locs(matcher: &[TokenTree]) -> Vec<MatcherLoc> {
                         locs.push(MatcherLoc::SequenceSep {
                             separator: separator.clone(),
                         });
-                        locs.push(MatcherLoc::SequenceKleeneOpAfterSep {
-                            idx_first,
-                        });
+                        locs.push(MatcherLoc::SequenceKleeneOpAfterSep { idx_first });
                     } else {
-                        locs.push(MatcherLoc::SequenceKleeneOpNoSep {
-                            op,
-                            idx_first,
-                        });
+                        locs.push(MatcherLoc::SequenceKleeneOpNoSep { op, idx_first });
                     }
                     locs[idx_seq] = MatcherLoc::Sequence {
                         op,
@@ -59,7 +44,11 @@ pub fn compute_locs(matcher: &[TokenTree]) -> Vec<MatcherLoc> {
                         seq_depth,
                     };
                 }
-                &TokenTree::MetaVarDecl { span, name: bind, kind } => {
+                &TokenTree::MetaVarDecl {
+                    span,
+                    name: bind,
+                    kind,
+                } => {
                     locs.push(MatcherLoc::MetaVarDecl {
                         span,
                         bind,

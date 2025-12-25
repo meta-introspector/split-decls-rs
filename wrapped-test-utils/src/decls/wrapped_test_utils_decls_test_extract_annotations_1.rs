@@ -19,8 +19,12 @@ fn main() {
         .map(|(range, ann)| (&text[range], ann))
         .collect::<Vec<_>>();
     assert_eq!(
-        res[..3], [("x", "def".into()), ("y", "def".into()), ("zoo", "type:\ni32\n"
-        .into())]
+        res[..3],
+        [
+            ("x", "def".into()),
+            ("y", "def".into()),
+            ("zoo", "type:\ni32\n".into())
+        ]
     );
     assert_eq!(res[3].0.len(), 115);
 }

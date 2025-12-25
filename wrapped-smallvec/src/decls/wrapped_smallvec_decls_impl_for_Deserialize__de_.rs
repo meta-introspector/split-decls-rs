@@ -7,9 +7,8 @@ where
     T: Deserialize<'de>,
 {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        deserializer
-            .deserialize_seq(SmallVecVisitor {
-                phantom: PhantomData,
-            })
+        deserializer.deserialize_seq(SmallVecVisitor {
+            phantom: PhantomData,
+        })
     }
 }

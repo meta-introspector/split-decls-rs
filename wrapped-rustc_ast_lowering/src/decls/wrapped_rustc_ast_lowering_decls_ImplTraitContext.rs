@@ -14,7 +14,9 @@ enum ImplTraitContext {
     /// Example: `fn foo() -> impl Debug`, where `impl Debug` is conceptually
     /// equivalent to a new opaque type like `type T = impl Debug; fn foo() -> T`.
     ///
-    OpaqueTy { origin: hir::OpaqueTyOrigin<LocalDefId> },
+    OpaqueTy {
+        origin: hir::OpaqueTyOrigin<LocalDefId>,
+    },
     /// Treat `impl Trait` as a "trait ascription", which is like a type
     /// variable but that also enforces that a set of trait goals hold.
     ///

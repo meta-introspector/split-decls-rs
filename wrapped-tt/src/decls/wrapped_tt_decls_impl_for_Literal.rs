@@ -23,22 +23,28 @@ impl<S> Literal<S> {
                     LitKind::StrRaw(num_of_hashes) => {
                         let num_of_hashes = num_of_hashes as usize;
                         write!(
-                            f, r#"r{0:#<num_of_hashes$}"{text}"{0:#<num_of_hashes$}"#,
-                            "", text = symbol
+                            f,
+                            r#"r{0:#<num_of_hashes$}"{text}"{0:#<num_of_hashes$}"#,
+                            "",
+                            text = symbol
                         )
                     }
                     LitKind::ByteStrRaw(num_of_hashes) => {
                         let num_of_hashes = num_of_hashes as usize;
                         write!(
-                            f, r#"br{0:#<num_of_hashes$}"{text}"{0:#<num_of_hashes$}"#,
-                            "", text = symbol
+                            f,
+                            r#"br{0:#<num_of_hashes$}"{text}"{0:#<num_of_hashes$}"#,
+                            "",
+                            text = symbol
                         )
                     }
                     LitKind::CStrRaw(num_of_hashes) => {
                         let num_of_hashes = num_of_hashes as usize;
                         write!(
-                            f, r#"cr{0:#<num_of_hashes$}"{text}"{0:#<num_of_hashes$}"#,
-                            "", text = symbol
+                            f,
+                            r#"cr{0:#<num_of_hashes$}"{text}"{0:#<num_of_hashes$}"#,
+                            "",
+                            text = symbol
                         )
                     }
                 }?;

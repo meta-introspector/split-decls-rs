@@ -34,7 +34,10 @@ unsafe fn msys_tty_on(handle: HANDLE) -> bool {
     if res == 0 {
         return false;
     }
-    let s = match name_info.FileName.get(..name_info.FileNameLength as usize / 2) {
+    let s = match name_info
+        .FileName
+        .get(..name_info.FileNameLength as usize / 2)
+    {
         None => return false,
         Some(s) => s,
     };

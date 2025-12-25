@@ -8,10 +8,7 @@ fn parse_cfg(s: &str) -> Result<cfg::CfgAtom, String> {
             }
             let key = intern::Symbol::intern(key);
             let value = intern::Symbol::intern(&value[1..value.len() - 1]);
-            cfg::CfgAtom::KeyValue {
-                key,
-                value,
-            }
+            cfg::CfgAtom::KeyValue { key, value }
         }
         None => cfg::CfgAtom::Flag(intern::Symbol::intern(s)),
     };

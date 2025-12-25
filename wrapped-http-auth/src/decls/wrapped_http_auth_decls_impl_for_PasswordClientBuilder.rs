@@ -54,9 +54,7 @@ impl PasswordClientBuilder {
             return self;
         }
         #[cfg(feature = "basic-scheme")]
-        if challenge.scheme.eq_ignore_ascii_case("Basic")
-            && !matches!(self.0, Some(Ok(_)))
-        {
+        if challenge.scheme.eq_ignore_ascii_case("Basic") && !matches!(self.0, Some(Ok(_))) {
             match BasicClient::try_from(challenge) {
                 Ok(c) => self.0 = Some(Ok(PasswordClient::Basic(c))),
                 Err(e) if self.0.is_none() => self.0 = Some(Err(e)),

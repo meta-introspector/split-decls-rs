@@ -5,6 +5,9 @@ where
     T: Debug + RefCnt,
 {
     fn fmt(&self, formatter: &mut Formatter) -> FmtResult {
-        formatter.debug_tuple("ArcSwapAny").field(&self.load()).finish()
+        formatter
+            .debug_tuple("ArcSwapAny")
+            .field(&self.load())
+            .finish()
     }
 }

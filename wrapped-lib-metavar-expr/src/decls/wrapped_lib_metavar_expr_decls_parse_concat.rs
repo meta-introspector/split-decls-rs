@@ -13,20 +13,20 @@ fn parse_concat<'psess>(
         let token = parse_token(iter, psess, outer_span)?;
         let element = if is_var {
             MetaVarExprConcatElem::Var(parse_ident_from_token(psess, token)?)
-        } else if let TokenKind::Literal(
-            Lit { kind: token::LitKind::Str, symbol, suffix: None },
-        ) = token.kind
+        } else if let TokenKind::Literal(Lit {
+            kind: token::LitKind::Str,
+            symbol,
+            suffix: None,
+        }) = token.kind
         {
             MetaVarExprConcatElem::Literal(symbol)
         } else {
             match parse_ident_from_token(psess, token) {
                 Err(err) => {
                     err.cancel();
-                    return Err(
-                        psess
-                            .dcx()
-                            .struct_span_err(token.span, UNSUPPORTED_CONCAT_ELEM_ERR),
-                    );
+                    return Err(psess
+                        .dcx()
+                        .struct_span_err(token.span, UNSUPPORTED_CONCAT_ELEM_ERR));
                 }
                 Ok(elem) => MetaVarExprConcatElem::Ident(elem),
             }
@@ -40,14 +40,9 @@ fn parse_concat<'psess>(
         }
     }
     if result.len() < 2 {
-        return Err(
-            psess
-                .dcx()
-                .struct_span_err(
-                    expr_ident_span,
-                    "`concat` must have at least two elements",
-                ),
-        );
+        return Err(psess
+            .dcx()
+            .struct_span_err(expr_ident_span, "`concat` must have at least two elements"));
     }
     Ok(MetaVarExpr::Concat(result.into()))
 }

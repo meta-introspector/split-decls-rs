@@ -8,8 +8,10 @@ impl WorkspaceInfoProvider for CargoConfigGeneratorImpl {
         project_root: &Path,
     ) -> Result<Vec<WorkspaceInfo>, anyhow::Error> {
         let members_file_path = project_root.join("submodules/members.txt");
-        let members_file_content = std::fs::read_to_string(&members_file_path)
-            .context(format!("Failed to read members file at {:?}", members_file_path))?;
+        let members_file_content = std::fs::read_to_string(&members_file_path).context(format!(
+            "Failed to read members file at {:?}",
+            members_file_path
+        ))?;
         let mut workspace_infos = Vec::new();
         for line in members_file_content.lines() {
             let line = line.trim();
@@ -29,11 +31,10 @@ impl WorkspaceInfoProvider for CargoConfigGeneratorImpl {
                 .map(|s| s.trim().to_string())
                 .filter(|s| !s.is_empty())
                 .collect();
-            workspace_infos
-                .push(WorkspaceInfo {
-                    member_crates,
-                    submodule_base_path_rel,
-                });
+            workspace_infos.push(WorkspaceInfo {
+                member_crates,
+                submodule_base_path_rel,
+            });
         }
         Ok(workspace_infos)
     }

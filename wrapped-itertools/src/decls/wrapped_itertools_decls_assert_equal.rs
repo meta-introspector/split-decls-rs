@@ -31,8 +31,11 @@ where
                     _ => false,
                 };
                 assert!(
-                    equal, "Failed assertion {a:?} == {b:?} for iteration {i}", i = i, a
-                    = a, b = b
+                    equal,
+                    "Failed assertion {a:?} == {b:?} for iteration {i}",
+                    i = i,
+                    a = a,
+                    b = b
                 );
                 i += 1;
             }

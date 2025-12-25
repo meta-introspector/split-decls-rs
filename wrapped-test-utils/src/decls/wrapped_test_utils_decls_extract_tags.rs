@@ -1,10 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 /// Extracts ranges, marked with `<tag> </tag>` pairs from the `text`
-pub fn extract_tags(
-    mut text: &str,
-    tag: &str,
-) -> (Vec<(TextRange, Option<String>)>, String) {
+pub fn extract_tags(mut text: &str, tag: &str) -> (Vec<(TextRange, Option<String>)>, String) {
     let open = format!("<{tag}");
     let close = format!("</{tag}>");
     let mut ranges = Vec::new();
@@ -32,9 +29,7 @@ pub fn extract_tags(
                     stack.push((from, attr));
                 } else if text.starts_with(&close) {
                     text = &text[close.len()..];
-                    let (from, attr) = stack
-                        .pop()
-                        .unwrap_or_else(|| panic!("unmatched </{tag}>"));
+                    let (from, attr) = stack.pop().unwrap_or_else(|| panic!("unmatched </{tag}>"));
                     let to = TextSize::of(&res);
                     ranges.push((TextRange::new(from, to), attr));
                 } else {

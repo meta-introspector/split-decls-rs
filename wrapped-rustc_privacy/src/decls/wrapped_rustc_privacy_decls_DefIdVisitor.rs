@@ -18,12 +18,8 @@ pub trait DefIdVisitor<'tcx> {
     /// NOTE: Def-id visiting should be idempotent (or at least produce duplicated errors),
     /// because `DefIdVisitorSkeleton` will use caching and sometimes avoid visiting duplicate
     /// def-ids. All the current visitors follow this rule.
-    fn visit_def_id(
-        &mut self,
-        def_id: DefId,
-        kind: &str,
-        descr: &dyn fmt::Display,
-    ) -> Self::Result;
+    fn visit_def_id(&mut self, def_id: DefId, kind: &str, descr: &dyn fmt::Display)
+        -> Self::Result;
     /// Not overridden, but used to actually visit types and traits.
     fn skeleton(&mut self) -> DefIdVisitorSkeleton<'_, 'tcx, Self> {
         DefIdVisitorSkeleton {
@@ -38,10 +34,7 @@ pub trait DefIdVisitor<'tcx> {
     fn visit_trait(&mut self, trait_ref: TraitRef<'tcx>) -> Self::Result {
         self.skeleton().visit_trait(trait_ref)
     }
-    fn visit_predicates(
-        &mut self,
-        predicates: ty::GenericPredicates<'tcx>,
-    ) -> Self::Result {
+    fn visit_predicates(&mut self, predicates: ty::GenericPredicates<'tcx>) -> Self::Result {
         self.skeleton().visit_clauses(predicates.predicates)
     }
     fn visit_clauses(&mut self, clauses: &[(ty::Clause<'tcx>, Span)]) -> Self::Result {

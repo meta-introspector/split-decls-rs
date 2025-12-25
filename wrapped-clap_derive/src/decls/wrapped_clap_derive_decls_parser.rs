@@ -12,12 +12,14 @@ pub fn parser(input: TokenStream) -> TokenStream {
     derives::derive_parser(&input)
         .unwrap_or_else(|err| {
             let specific_dummy = match input.data {
-                Data::Struct(DataStruct { fields: Fields::Named(ref _fields), .. }) => {
-                    Some(dummies::args(&input.ident))
-                }
-                Data::Struct(DataStruct { fields: Fields::Unit, .. }) => {
-                    Some(dummies::args(&input.ident))
-                }
+                Data::Struct(DataStruct {
+                    fields: Fields::Named(ref _fields),
+                    ..
+                }) => Some(dummies::args(&input.ident)),
+                Data::Struct(DataStruct {
+                    fields: Fields::Unit,
+                    ..
+                }) => Some(dummies::args(&input.ident)),
                 Data::Enum(_) => Some(dummies::subcommand(&input.ident)),
                 _ => None,
             };

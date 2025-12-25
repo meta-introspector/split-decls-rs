@@ -15,11 +15,10 @@ impl UnstableFeatures {
         krate: Option<&str>,
         env_var_rustc_bootstrap: Result<String, std::env::VarError>,
     ) -> Self {
-        let disable_unstable_features = option_env!("CFG_DISABLE_UNSTABLE_FEATURES")
-            .is_some_and(|s| s != "0");
-        let is_unstable_crate = |var: &str| {
-            krate.is_some_and(|name| var.split(',').any(|new_krate| new_krate == name))
-        };
+        let disable_unstable_features =
+            option_env!("CFG_DISABLE_UNSTABLE_FEATURES").is_some_and(|s| s != "0");
+        let is_unstable_crate =
+            |var: &str| krate.is_some_and(|name| var.split(',').any(|new_krate| new_krate == name));
         let bootstrap = env_var_rustc_bootstrap.ok();
         if let Some(val) = bootstrap.as_deref() {
             match val {

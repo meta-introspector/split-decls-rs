@@ -1,7 +1,14 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl From<ItemFn> for MaybeItemFn {
-    fn from(ItemFn { attrs, vis, sig, block }: ItemFn) -> Self {
+    fn from(
+        ItemFn {
+            attrs,
+            vis,
+            sig,
+            block,
+        }: ItemFn,
+    ) -> Self {
         let (outer_attrs, inner_attrs) = attrs
             .into_iter()
             .partition(|attr| attr.style == syn::AttrStyle::Outer);

@@ -15,15 +15,14 @@ fn find_outline_mod_lint_severity(
     let mut result = None;
     let lint_groups = lint_groups(&diag.code, edition);
     lint_attrs(
-            sema,
-            ast::AnyHasAttrs::cast(module_source_file.value)
-                .expect("SourceFile always has attrs"),
-            edition,
-        )
-        .for_each(|(lint, severity)| {
-            if lint_groups.contains(&lint) {
-                result = Some(severity);
-            }
-        });
+        sema,
+        ast::AnyHasAttrs::cast(module_source_file.value).expect("SourceFile always has attrs"),
+        edition,
+    )
+    .for_each(|(lint, severity)| {
+        if lint_groups.contains(&lint) {
+            result = Some(severity);
+        }
+    });
     result
 }

@@ -47,9 +47,7 @@ impl Value {
             Value::Bytes(ref b) => serde::de::Unexpected::Bytes(b),
         }
     }
-    pub fn deserialize_into<'de, T: Deserialize<'de>>(
-        self,
-    ) -> Result<T, DeserializerError> {
+    pub fn deserialize_into<'de, T: Deserialize<'de>>(self) -> Result<T, DeserializerError> {
         T::deserialize(self)
     }
 }
