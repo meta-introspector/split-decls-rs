@@ -64,3 +64,6 @@ clean:
 	# git submodule deinit -f output2 # Related to submodule
 	# git rm -f output2 # Related to submodule
 	# rm -rf .git/modules/output2 # Related to submodule
+add_wrapped_crate:
+	@if [ -z "$(CRATE)" ]; then echo "Usage: make add_wrapped_crate CRATE=<crate_path>"; exit 1; fi
+	@echo "Adding wrapped crate $(CRATE) to root workspace..." && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) run --bin add_wrapped_crate -- $(CRATE) $(if $(VERBOSE),--verbose,)
