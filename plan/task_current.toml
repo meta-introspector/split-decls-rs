@@ -1,0 +1,173 @@
+# task_current.toml - Current Active Tasks for Split-Decls-Rs
+
+[current_tasks]
+name = "Active Development Tasks"
+date = "2025-12-25"
+phase = "Phase 2 - Iterative Single Module Fixing"
+priority = "High"
+
+# Immediate Tasks (Next 1-2 days)
+[current_tasks.immediate]
+name = "Immediate Priority Tasks"
+
+  [[current_tasks.immediate.task]]
+  id = "T1"
+  name = "Analyze Bootstrap Output"
+  description = "Review bootstrap_run.log and identify all crates with compilation errors"
+  command = "make run_bootstrap 2>&1 | tee bootstrap_run.log"
+  deliverable = "List of problematic crates with specific error types"
+  estimated_time = "30 minutes"
+  status = "COMPLETED"
+  notes = "Analysis complete - main issue is alloc feature flag handling"
+  
+  [[current_tasks.immediate.task]]
+  id = "T2"
+  name = "Fix Alloc Feature Flag Handling"
+  description = "Update AST processing to handle extern crate alloc declarations and feature flags properly"
+  dependencies = ["T1"]
+  deliverable = "Updated src/lib.rs that preserves feature-gated extern crate statements"
+  estimated_time = "2-3 hours"
+  status = "IN_PROGRESS"
+  notes = "Root cause identified: AST processing skips extern crate declarations with feature flags"
+  technical_details = """
+  Issues found:
+  - Skipping unsupported item type: # [cfg (feature = "alloc")] extern crate alloc ;
+  - Skipping unsupported item type: # [cfg (not (feature = "core"))] extern crate alloc ;
+  - Skipping unsupported item type: # [cfg (any (test , feature = "alloc"))] extern crate alloc ;
+  
+  Solution approach:
+  1. Update AST processing to handle extern crate declarations
+  2. Preserve feature-gated statements in generated code
+  3. Test with crates using alloc features (hashbrown, nom, etc.)
+  """
+  
+  [[current_tasks.immediate.task]]
+  id = "T3"
+  name = "Fix High-Priority Crates"
+  description = "Use wrap_single_crate to fix the most critical/blocking crates first"
+  command = "cargo run --bin wrap_single_crate -- <crate_path> --verbose"
+  dependencies = ["T2"]
+  deliverable = "Working fixes for top 3-5 problematic crates"
+  estimated_time = "2-4 hours"
+
+# Short-term Tasks (Next week)
+[current_tasks.short_term]
+name = "Short-term Development Goals"
+
+  [[current_tasks.short_term.task]]
+  id = "T4"
+  name = "Complete Phase 2 Iteration"
+  description = "Fix all remaining problematic crates through iterative single-crate processing"
+  dependencies = ["T3"]
+  deliverable = "All crates in output2 compile successfully"
+  estimated_time = "3-5 days"
+  
+  [[current_tasks.short_term.task]]
+  id = "T5"
+  name = "Full Bootstrap Validation"
+  description = "Run complete clean bootstrap to validate all fixes work together"
+  command = "make clean_output2 && make run_bootstrap"
+  dependencies = ["T4"]
+  deliverable = "Clean bootstrap run with no errors"
+  estimated_time = "1 hour"
+  
+  [[current_tasks.short_term.task]]
+  id = "T6"
+  name = "Integration Testing"
+  description = "Verify output2 workspace functions correctly as a whole"
+  command = "cd output2 && cargo check --workspace"
+  dependencies = ["T5"]
+  deliverable = "Successful workspace-level compilation"
+  estimated_time = "30 minutes"
+
+# Medium-term Goals (Next 2 weeks)
+[current_tasks.medium_term]
+name = "Medium-term Objectives"
+
+  [[current_tasks.medium_term.task]]
+  id = "T7"
+  name = "Recursive Generation Setup"
+  description = "Prepare output2 for running bootstrap to generate output3"
+  dependencies = ["T6"]
+  deliverable = "output2 configured for self-bootstrap"
+  estimated_time = "1-2 days"
+  
+  [[current_tasks.medium_term.task]]
+  id = "T8"
+  name = "Execute Recursive Generation"
+  description = "Run bootstrap inside output2 to generate output2/output3"
+  command = "cd output2 && make run_bootstrap"
+  dependencies = ["T7"]
+  deliverable = "Successfully generated output2/output3"
+  estimated_time = "2-4 hours"
+  
+  [[current_tasks.medium_term.task]]
+  id = "T9"
+  name = "Step 1 Validation"
+  description = "Verify that recursive generation represents successful Step 1 completion"
+  dependencies = ["T8"]
+  deliverable = "Validated self-generating overlay system"
+  estimated_time = "1 day"
+
+# Technical Debt and Improvements
+[current_tasks.technical_debt]
+name = "Technical Improvements"
+
+  [[current_tasks.technical_debt.task]]
+  id = "TD1"
+  name = "Improve Error Reporting"
+  description = "Enhance bootstrap error reporting to make problem identification easier"
+  priority = "Medium"
+  estimated_time = "4-6 hours"
+  
+  [[current_tasks.technical_debt.task]]
+  id = "TD2"
+  name = "Automated Patch Generation"
+  description = "Create tools to automatically generate common patch patterns"
+  priority = "Low"
+  estimated_time = "1-2 days"
+  
+  [[current_tasks.technical_debt.task]]
+  id = "TD3"
+  name = "Documentation Updates"
+  description = "Update README and documentation to reflect current workflow"
+  priority = "Medium"
+  estimated_time = "2-3 hours"
+
+# Success Metrics
+[current_tasks.success_metrics]
+name = "Success Metrics"
+
+  [[current_tasks.success_metrics.metric]]
+  name = "Bootstrap Success Rate"
+  target = "100% of crates compile successfully"
+  current = "Unknown - needs T1 analysis"
+  
+  [[current_tasks.success_metrics.metric]]
+  name = "Iteration Speed"
+  target = "Single crate fix cycle < 10 minutes"
+  current = "~5-15 minutes depending on complexity"
+  
+  [[current_tasks.success_metrics.metric]]
+  name = "Recursive Generation"
+  target = "output2 successfully generates output3"
+  current = "Not yet attempted"
+
+# Risk Mitigation
+[current_tasks.risks]
+name = "Risk Mitigation"
+
+  [[current_tasks.risks.risk]]
+  name = "Complex Dependency Chains"
+  description = "Some crates may have complex interdependencies that are hard to resolve"
+  mitigation = "Use wrap_single_crate to isolate and test individual fixes"
+  
+  [[current_tasks.risks.risk]]
+  name = "Configuration Complexity"
+  description = "split-decls-rs.toml may become unwieldy with many patches"
+  mitigation = "Consider modular patch organization and per-crate overrides"
+  
+  [[current_tasks.risks.risk]]
+  name = "Recursive Generation Failure"
+  description = "output2 may not be able to bootstrap itself successfully"
+  mitigation = "Ensure output2 has all necessary tools and configurations"

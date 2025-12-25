@@ -1,0 +1,153 @@
+# goal25.toml - Iterative Development Workflow for Split-Decls-Rs
+
+[iterative_workflow]
+name = "Iterative Development Workflow for Split-Decls-Rs"
+version = "1.0"
+description = "Documents the complete iterative development process for the split-decls-rs overlay system, from initial configuration through final bootstrap generation."
+status = "Active - Step 1 Implementation"
+derived_from = "Practical experience with split-decls-rs development cycle"
+
+# Phase 1: Configuration and Initial Bootstrap
+[iterative_workflow.phase1]
+name = "Configuration and Initial Bootstrap"
+description = "The foundational phase where we establish the configuration and run the initial bootstrap to identify issues."
+
+  [[iterative_workflow.phase1.step]]
+  name = "1. Configure split-decls-rs.toml"
+  description = "Define the overlay configuration including patches, string replacements, and custom prelude overlays."
+  artifacts = ["split-decls-rs.toml"]
+  
+  [[iterative_workflow.phase1.step]]
+  name = "2. Run Initial Bootstrap"
+  description = "Execute `make run_bootstrap` or `cargo run --bin split-decls-rs -- bootstrap` to process all dependencies and generate output2 workspace."
+  command = "make run_bootstrap"
+  artifacts = ["output2/ workspace structure", "bootstrap_run.log"]
+  expected_outcome = "Identifies compilation errors, missing dependencies, and code issues in generated crates"
+
+# Phase 2: Iterative Single Module Fixing
+[iterative_workflow.phase2]
+name = "Iterative Single Module Fixing"
+description = "The core development loop where individual problematic crates are isolated, fixed, and tested."
+
+  [[iterative_workflow.phase2.step]]
+  name = "3. Identify Problem Crates"
+  description = "Analyze bootstrap output and logs to identify crates with compilation errors or missing dependencies."
+  tools = ["bootstrap_run.log analysis", "cargo check in output2 subdirectories"]
+  
+  [[iterative_workflow.phase2.step]]
+  name = "4. Single Crate Processing"
+  description = "Use wrap_single_crate to process individual problematic crates with targeted fixes."
+  command = "cargo run --bin wrap_single_crate -- <crate_path> [--output <output_dir>] [--verbose]"
+  benefits = ["Faster iteration", "Isolated testing", "Precise debugging"]
+  
+  [[iterative_workflow.phase2.step]]
+  name = "5. Apply Targeted Patches"
+  description = "Modify split-decls-rs.toml to add specific patches, string replacements, or prelude modifications for the problematic crate."
+  patch_types = ["Code fixes", "Dependency additions", "Edition updates", "Feature flag adjustments"]
+  
+  [[iterative_workflow.phase2.step]]
+  name = "6. Test Single Crate Fix"
+  description = "Verify the fix works by reprocessing the single crate and checking compilation."
+  validation = ["cargo check in wrapped crate", "Unit test execution", "Dependency resolution"]
+  
+  [[iterative_workflow.phase2.step]]
+  name = "7. Iterate Until Fixed"
+  description = "Repeat steps 4-6 until the crate compiles cleanly and all tests pass."
+  loop_condition = "All identified issues resolved"
+
+# Phase 3: Full Regeneration Validation
+[iterative_workflow.phase3]
+name = "Full Regeneration Validation"
+description = "Validate that all fixes work together in the complete bootstrap process."
+
+  [[iterative_workflow.phase3.step]]
+  name = "8. Clean Full Bootstrap"
+  description = "Run complete bootstrap again to ensure all fixes work together and no regressions occurred."
+  command = "make clean_output2 && make run_bootstrap"
+  validation = ["All crates compile", "No dependency conflicts", "Consistent behavior"]
+  
+  [[iterative_workflow.phase3.step]]
+  name = "9. Integration Testing"
+  description = "Verify the complete output2 workspace functions as expected."
+  tests = ["Workspace-level cargo check", "Cross-crate dependency resolution", "Generated code quality"]
+
+# Phase 4: Recursive Generation (Future)
+[iterative_workflow.phase4]
+name = "Recursive Generation - Step 1 Completion"
+description = "The final phase where the system generates the next iteration of itself."
+
+  [[iterative_workflow.phase4.step]]
+  name = "10. Bootstrap Self-Application"
+  description = "Run bootstrap inside output2 to generate output2/output3 as the next version iteration."
+  location = "output2/"
+  command = "cd output2 && make run_bootstrap"
+  output = "output2/output3/ - Next generation of the overlay system"
+  
+  [[iterative_workflow.phase4.step]]
+  name = "11. Version Validation"
+  description = "Verify that output2/output3 represents a valid evolution of the system."
+  criteria = ["Functional equivalence", "Improved capabilities", "Maintained compatibility"]
+  
+  [[iterative_workflow.phase4.step]]
+  name = "12. Step 1 Completion"
+  description = "Mark Step 1 of the grand vision complete when recursive generation succeeds."
+  milestone = "Self-generating overlay system achieved"
+
+# Key Tools and Commands
+[iterative_workflow.tools]
+name = "Essential Tools and Commands"
+
+  [[iterative_workflow.tools.command]]
+  name = "make run_bootstrap"
+  purpose = "Full bootstrap processing of all dependencies"
+  
+  [[iterative_workflow.tools.command]]
+  name = "cargo run --bin wrap_single_crate -- <path> --verbose"
+  purpose = "Process individual crates for targeted debugging"
+  
+  [[iterative_workflow.tools.command]]
+  name = "make clean_output2"
+  purpose = "Clean generated output for fresh bootstrap"
+  
+  [[iterative_workflow.tools.command]]
+  name = "make build_output_module"
+  purpose = "Build and test the output2 workspace"
+
+# Success Criteria
+[iterative_workflow.success_criteria]
+name = "Success Criteria for Step 1"
+description = "Conditions that must be met to consider Step 1 of the overlay system complete."
+
+  [[iterative_workflow.success_criteria.criterion]]
+  name = "Clean Bootstrap"
+  description = "Bootstrap runs without errors and generates complete output2 workspace"
+  
+  [[iterative_workflow.success_criteria.criterion]]
+  name = "All Crates Compile"
+  description = "Every generated crate in output2 compiles successfully with cargo check"
+  
+  [[iterative_workflow.success_criteria.criterion]]
+  name = "Recursive Generation"
+  description = "Bootstrap running inside output2 successfully generates output2/output3"
+  
+  [[iterative_workflow.success_criteria.criterion]]
+  name = "Functional Equivalence"
+  description = "output2/output3 demonstrates the same capabilities as the original system"
+
+# Current Status
+[iterative_workflow.current_status]
+name = "Current Implementation Status"
+phase = "Phase 2 - Iterative Single Module Fixing"
+completed = [
+  "Configuration established (split-decls-rs.toml)",
+  "Bootstrap infrastructure working",
+  "Single crate wrapper (wrap_single_crate) functional",
+  "Edition 2024 compatibility fixed",
+  "Workspace management improved"
+]
+next_steps = [
+  "Identify and fix remaining problematic crates",
+  "Refine patch application process",
+  "Complete Phase 3 validation",
+  "Achieve recursive generation"
+]
