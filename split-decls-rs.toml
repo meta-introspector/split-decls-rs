@@ -173,6 +173,7 @@ crates = [
     "git-wrapper-lib",
     "git2",
     "git2-curl",
+    "gimli",
     "gix",
     "gix-actor",
     "gix-archive",
