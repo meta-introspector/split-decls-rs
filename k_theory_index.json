@@ -1,0 +1,88 @@
+{
+  "nodes": {
+    "k7.4": {
+      "name": "type_resolver.rs",
+      "level": 7,
+      "index": 4,
+      "complexity": 6.5,
+      "depth": 3,
+      "file_path": "output2/type_resolver.rs",
+      "content": "// High complexity K7 node\npub struct type_resolver {}"
+    },
+    "k7.7": {
+      "name": "semantic_analyzer.rs",
+      "level": 7,
+      "index": 7,
+      "complexity": 6.800000000000001,
+      "depth": 3,
+      "file_path": "output2/semantic_analyzer.rs",
+      "content": "// High complexity K7 node\npub struct semantic_analyzer {}"
+    },
+    "k7.2": {
+      "name": "deep_impl.rs",
+      "level": 7,
+      "index": 2,
+      "complexity": 6.3,
+      "depth": 3,
+      "file_path": "output2/deep_impl.rs",
+      "content": "// High complexity K7 node\npub struct deep_impl {}"
+    },
+    "k7.5": {
+      "name": "dependency_graph.rs",
+      "level": 7,
+      "index": 5,
+      "complexity": 6.6000000000000005,
+      "depth": 3,
+      "file_path": "output2/dependency_graph.rs",
+      "content": "// High complexity K7 node\npub struct dependency_graph {}"
+    },
+    "k7.8": {
+      "name": "code_generator.rs",
+      "level": 7,
+      "index": 8,
+      "complexity": 6.9,
+      "depth": 3,
+      "file_path": "output2/code_generator.rs",
+      "content": "// High complexity K7 node\npub struct code_generator {}"
+    },
+    "k7.1": {
+      "name": "complex_trait.rs",
+      "level": 7,
+      "index": 1,
+      "complexity": 6.2,
+      "depth": 3,
+      "file_path": "output2/complex_trait.rs",
+      "content": "// High complexity K7 node\npub struct complex_trait {}"
+    },
+    "k7.3": {
+      "name": "macro_system.rs",
+      "level": 7,
+      "index": 3,
+      "complexity": 6.4,
+      "depth": 3,
+      "file_path": "output2/macro_system.rs",
+      "content": "// High complexity K7 node\npub struct macro_system {}"
+    },
+    "k7.6": {
+      "name": "ast_transformer.rs",
+      "level": 7,
+      "index": 6,
+      "complexity": 6.7,
+      "depth": 3,
+      "file_path": "output2/ast_transformer.rs",
+      "content": "// High complexity K7 node\npub struct ast_transformer {}"
+    }
+  },
+  "levels": {
+    "7": [
+      "k7.1",
+      "k7.2",
+      "k7.3",
+      "k7.4",
+      "k7.5",
+      "k7.6",
+      "k7.7",
+      "k7.8"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+import Lake
+open Lake DSL
+
+package «lean4_proof» where
+  -- add package configuration options here
+
+lean_lib «Lean4Proof» where
+  -- add library configuration options here
+
+@[default_target]
+lean_exe «lean4_proof» where
+  root := `Main
+  -- Enables the main function
+  supportInterpreter := true

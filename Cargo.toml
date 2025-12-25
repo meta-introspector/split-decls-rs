@@ -52,6 +52,7 @@ toml_edit = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_derive = { workspace = true }
 serde_json = { workspace = true } # Added for build.rs serialization
+tera = "1.19" # Template engine for Lean4 code generation
 url = { workspace = true }
 quote = { workspace = true }
 syn = { workspace = true, features= ["full","visit", "visit-mut", "extra-traits"] } # Added extra-traits
@@ -126,8 +127,36 @@ name = "bootstrap_scanner"
 path = "src/bin/bootstrap_scanner.rs"
 
 [[bin]]
-name = "rust_eigenmatrix"
-path = "src/bin/rust_eigenmatrix.rs"
+name = "k_theory_deps"
+path = "src/bin/k_theory_deps.rs"
+
+[[bin]]
+name = "k_theory_indexer"
+path = "src/bin/k_theory_indexer.rs"
+
+[[bin]]
+name = "lmfdb_query"
+path = "src/bin/lmfdb_query.rs"
+
+[[bin]]
+name = "math_similarity_demo"
+path = "src/bin/math_similarity_demo.rs"
+
+[[bin]]
+name = "extreme_proof_demo"
+path = "src/bin/extreme_proof_demo.rs"
+
+[[bin]]
+name = "lean4_proof_system"
+path = "src/bin/lean4_proof_system.rs"
+
+[[bin]]
+name = "lean4_proof_system_v2"
+path = "src/bin/lean4_proof_system_v2.rs"
+
+[[bin]]
+name = "lean4_proof_system_simple"
+path = "src/bin/lean4_proof_system_simple.rs"
 
 [patch.'crates-io']
 proc-macro2 = { path = "../proc-macro2" }
