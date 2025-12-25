@@ -125,5 +125,9 @@ path = "src/bin/stateful_repl.rs"
 name = "bootstrap_scanner"
 path = "src/bin/bootstrap_scanner.rs"
 
+[[bin]]
+name = "rust_eigenmatrix"
+path = "src/bin/rust_eigenmatrix.rs"
+
 [patch.'crates-io']
 proc-macro2 = { path = "../proc-macro2" }

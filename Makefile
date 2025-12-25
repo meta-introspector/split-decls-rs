@@ -7,9 +7,9 @@ export RUSTC_WRAPPER=sccache
 build:
 	cargo build --bins
 
-# Run bootstrap scanner directly
-scanner:
-	../../target/debug/bootstrap_scanner
+# Run Rust eigenmatrix diagonalization
+eigenmatrix:
+	../../target/debug/rust_eigenmatrix
 
 # Run stateful REPL directly  
 repl:
