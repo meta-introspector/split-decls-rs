@@ -16,7 +16,8 @@ pub fn generate_new_cargotoml(
 ) -> Result<()> {
     let original_cargo_toml_content = fs::read_to_string(original_cargo_toml_path)
         .context(format!("Failed to read original Cargo.toml from {}", original_cargo_toml_path.display()))?
-        .replace("edition.workspace = true", "edition = \"2021\"");
+        .replace("edition.workspace = true", "edition = \"2024\"")
+        .replace("edition = \"2021\"", "edition = \"2024\"");
     
     let mut cargo_toml: CargoToml = toml::from_str(&original_cargo_toml_content)
         .context(format!("Failed to parse original Cargo.toml from {}", original_cargo_toml_path.display()))?;
@@ -50,15 +51,15 @@ pub fn generate_new_cargotoml(
 
     let build_deps_table = &mut cargo_toml.build_dependencies;
     let essential_build_deps = [
-        ("anyhow", None),
-        ("syn", Some(vec!["full", "visit"])),
-        ("serde", Some(vec!["derive"])),
-        ("toml", None),
+        ("anyhow", "1.0", None),
+        ("syn", "2.0", Some(vec!["full", "visit"])),
+        ("serde", "1.0", Some(vec!["derive"])),
+        ("toml", "0.8", None),
     ];
 
-    for (dep_name, features) in essential_build_deps {
+    for (dep_name, version, features) in essential_build_deps {
         let mut dep_table_value = toml::Table::new();
-        dep_table_value.insert("workspace".to_string(), toml::Value::Boolean(true));
+        dep_table_value.insert("version".to_string(), toml::Value::String(version.to_string()));
         if let Some(feats) = features {
             let features_array = toml::Value::Array(
                 feats.into_iter().map(|f| toml::Value::String(f.to_string())).collect()
@@ -68,9 +69,10 @@ pub fn generate_new_cargotoml(
         build_deps_table.insert(dep_name.to_string(), toml::Value::Table(dep_table_value));
     }
 
-    let mut macro_dep = toml::Table::new();
-    macro_dep.insert("workspace".to_string(), toml::Value::Boolean(true));
-    cargo_toml.dependencies.insert("introspector_decl2_macros".to_string(), toml::Value::Table(macro_dep));
+    // Skip introspector_decl2_macros for now since it's not available on crates.io
+    // let mut macro_dep = toml::Table::new();
+    // macro_dep.insert("version".to_string(), toml::Value::String("0.1.0".to_string()));
+    // cargo_toml.dependencies.insert("introspector_decl2_macros".to_string(), toml::Value::Table(macro_dep));
 
     for dep_entry in &patch_config.generated_crate_dependency {
         if dep_entry.crate_name != crate_name {

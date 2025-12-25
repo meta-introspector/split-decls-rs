@@ -28,7 +28,7 @@ pub fn generate_new_cargotoml(paths: &CratePaths, global_config: &SplitDeclsConf
     // If the file was empty (no Cargo.toml existed), initialize with a minimal structure
     if cargo_toml_content.trim().is_empty() {
         cargo_toml_content = format!(
-            "[package]\nname = \"{}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            "[package]\nname = \"{}\"\nversion = \"0.1.0\"\nedition = \"2024\"\n",
             paths.crate_name
         );
     }

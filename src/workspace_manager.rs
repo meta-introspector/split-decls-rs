@@ -207,7 +207,7 @@ mod tests {
 
         let initial_content = r#"
 [workspace.package]
-edition = "2021"
+edition = "2024"
 version = "0.1.0"
 authors = ["Test Author"]
 
