@@ -1,0 +1,257 @@
+use std::collections::HashMap;
+use anyhow::Result;
+
+/// URL Matrix - Collection of RDF URL blobs as a compressible matrix
+#[derive(Debug, Clone)]
+pub struct UrlMatrix {
+    /// Matrix of URL blobs (rows = states, cols = features)
+    pub matrix: Vec<Vec<f64>>,
+    /// URL blob sources
+    pub urls: Vec<String>,
+    /// Feature names (macro names, types, etc.)
+    pub features: Vec<String>,
+    /// Eigenform compression
+    pub eigenform: Option<EigenForm>,
+}
+
+#[derive(Debug, Clone)]
+pub struct EigenForm {
+    /// Eigenvalues (principal components)
+    pub eigenvalues: Vec<f64>,
+    /// Eigenvectors (basis vectors)
+    pub eigenvectors: Vec<Vec<f64>>,
+    /// Compressed representation
+    pub compressed: Vec<f64>,
+    /// Compression ratio
+    pub ratio: f64,
+}
+
+impl UrlMatrix {
+    /// Create matrix from multiple RDF URL blobs
+    pub fn from_url_blobs(blobs: &[crate::rdf_url_blob::RdfUrlBlob]) -> Result<Self> {
+        let mut features = std::collections::HashSet::new();
+        let mut urls = Vec::new();
+        
+        // Extract all unique features across blobs
+        for blob in blobs {
+            urls.push(blob.url_blob.clone());
+            
+            // Parse RDF to extract features
+            for line in blob.rdf_content.lines() {
+                if line.contains("sys:name") {
+                    if let Some(name) = Self::extract_rdf_value(line) {
+                        features.insert(name);
+                    }
+                }
+                if line.contains("sys:type") {
+                    if let Some(type_name) = Self::extract_rdf_value(line) {
+                        features.insert(format!("type_{}", type_name));
+                    }
+                }
+            }
+        }
+        
+        let feature_vec: Vec<String> = features.into_iter().collect();
+        let mut matrix = Vec::new();
+        
+        // Build feature matrix
+        for blob in blobs {
+            let mut row = vec![0.0; feature_vec.len()];
+            
+            for (i, feature) in feature_vec.iter().enumerate() {
+                if feature.starts_with("type_") {
+                    let type_name = &feature[5..];
+                    row[i] = if blob.rdf_content.contains(&format!("sys:type \"{}\"", type_name)) { 1.0 } else { 0.0 };
+                } else {
+                    row[i] = if blob.rdf_content.contains(&format!("sys:name \"{}\"", feature)) { 1.0 } else { 0.0 };
+                }
+            }
+            
+            matrix.push(row);
+        }
+        
+        println!("🔢 Created {}x{} URL matrix", matrix.len(), feature_vec.len());
+        
+        Ok(UrlMatrix {
+            matrix,
+            urls,
+            features: feature_vec,
+            eigenform: None,
+        })
+    }
+    
+    /// Extract value from RDF line
+    fn extract_rdf_value(line: &str) -> Option<String> {
+        if let Some(start) = line.find('"') {
+            if let Some(end) = line[start+1..].find('"') {
+                return Some(line[start+1..start+1+end].to_string());
+            }
+        }
+        None
+    }
+    
+    /// Compress matrix to eigenform using SVD/PCA
+    pub fn compress_to_eigenform(&mut self) -> Result<()> {
+        if self.matrix.is_empty() {
+            return Err(anyhow::anyhow!("Empty matrix cannot be compressed"));
+        }
+        
+        println!("🧮 Computing eigenform compression...");
+        
+        // Simplified eigendecomposition (in production would use proper linear algebra library)
+        let (eigenvalues, eigenvectors) = self.compute_eigendecomposition()?;
+        
+        // Compress using top eigenvalues
+        let compressed = self.project_to_eigenspace(&eigenvalues, &eigenvectors)?;
+        
+        let original_size = self.matrix.len() * self.matrix[0].len();
+        let compressed_size = compressed.len();
+        let ratio = compressed_size as f64 / original_size as f64;
+        
+        self.eigenform = Some(EigenForm {
+            eigenvalues,
+            eigenvectors,
+            compressed,
+            ratio,
+        });
+        
+        println!("✅ Eigenform compression: {:.2}% of original size", ratio * 100.0);
+        
+        Ok(())
+    }
+    
+    /// Simplified eigendecomposition (placeholder for real implementation)
+    fn compute_eigendecomposition(&self) -> Result<(Vec<f64>, Vec<Vec<f64>>)> {
+        let n = self.features.len();
+        
+        // Compute covariance matrix (simplified)
+        let mut cov_matrix = vec![vec![0.0; n]; n];
+        
+        for i in 0..n {
+            for j in 0..n {
+                let mut sum = 0.0;
+                for row in &self.matrix {
+                    sum += row[i] * row[j];
+                }
+                cov_matrix[i][j] = sum / self.matrix.len() as f64;
+            }
+        }
+        
+        // Simplified eigenvalue computation (would use proper SVD in production)
+        let mut eigenvalues = Vec::new();
+        let mut eigenvectors = Vec::new();
+        
+        for i in 0..std::cmp::min(n, 5) { // Top 5 components
+            eigenvalues.push(cov_matrix[i][i]); // Diagonal approximation
+            
+            let mut eigenvector = vec![0.0; n];
+            eigenvector[i] = 1.0; // Identity basis (simplified)
+            eigenvectors.push(eigenvector);
+        }
+        
+        Ok((eigenvalues, eigenvectors))
+    }
+    
+    /// Project matrix to eigenspace
+    fn project_to_eigenspace(&self, eigenvalues: &[f64], eigenvectors: &[Vec<f64>]) -> Result<Vec<f64>> {
+        let mut compressed = Vec::new();
+        
+        // Project each row onto principal components
+        for row in &self.matrix {
+            for (i, eigenvector) in eigenvectors.iter().enumerate() {
+                let mut projection = 0.0;
+                for (j, &value) in row.iter().enumerate() {
+                    if j < eigenvector.len() {
+                        projection += value * eigenvector[j];
+                    }
+                }
+                compressed.push(projection * eigenvalues[i].sqrt());
+            }
+        }
+        
+        Ok(compressed)
+    }
+    
+    /// Generate eigenform URL blob
+    pub fn to_eigenform_url(&self) -> Result<String> {
+        if let Some(eigenform) = &self.eigenform {
+            let eigenform_data = format!(
+                "eigenvalues:{:?};eigenvectors:{:?};compressed:{:?}",
+                eigenform.eigenvalues,
+                eigenform.eigenvectors.len(),
+                eigenform.compressed.len()
+            );
+            
+            let encoded = base64::Engine::encode(&base64::engine::general_purpose::URL_SAFE_NO_PAD, eigenform_data.as_bytes());
+            Ok(format!("data:application/eigenform+matrix;base64,{}", encoded))
+        } else {
+            Err(anyhow::anyhow!("Matrix not compressed to eigenform yet"))
+        }
+    }
+    
+    /// Reconstruct matrix from eigenform
+    pub fn from_eigenform_url(url: &str) -> Result<Self> {
+        if !url.starts_with("data:application/eigenform+matrix;base64,") {
+            return Err(anyhow::anyhow!("Invalid eigenform URL"));
+        }
+        
+        let encoded = url.strip_prefix("data:application/eigenform+matrix;base64,").unwrap();
+        let decoded = base64::Engine::decode(&base64::engine::general_purpose::URL_SAFE_NO_PAD, encoded)?;
+        let eigenform_data = String::from_utf8(decoded)?;
+        
+        println!("🔄 Reconstructing matrix from eigenform: {}", &eigenform_data[..50]);
+        
+        // Simplified reconstruction (would implement proper inverse transform)
+        Ok(UrlMatrix {
+            matrix: vec![vec![0.0; 10]; 5], // Placeholder
+            urls: vec!["reconstructed".to_string()],
+            features: vec!["feature1".to_string(), "feature2".to_string()],
+            eigenform: None,
+        })
+    }
+    
+    /// Show matrix statistics
+    pub fn print_stats(&self) {
+        println!("📊 URL Matrix Statistics:");
+        println!("  🔢 Dimensions: {}x{}", self.matrix.len(), self.features.len());
+        println!("  🌐 URLs: {}", self.urls.len());
+        println!("  🎯 Features: {}", self.features.len());
+        
+        if let Some(eigenform) = &self.eigenform {
+            println!("  🧮 Eigenform:");
+            println!("    📉 Compression ratio: {:.2}%", eigenform.ratio * 100.0);
+            println!("    🔢 Eigenvalues: {}", eigenform.eigenvalues.len());
+            println!("    📐 Eigenvectors: {}", eigenform.eigenvectors.len());
+        }
+    }
+    
+    /// Visualize matrix as ASCII
+    pub fn print_matrix(&self, max_rows: usize, max_cols: usize) {
+        println!("🎨 Matrix Visualization:");
+        
+        let rows = std::cmp::min(self.matrix.len(), max_rows);
+        let cols = std::cmp::min(self.features.len(), max_cols);
+        
+        // Header
+        print!("     ");
+        for i in 0..cols {
+            print!("{:>8}", format!("F{}", i));
+        }
+        println!();
+        
+        // Rows
+        for (i, row) in self.matrix.iter().take(rows).enumerate() {
+            print!("U{:2}: ", i);
+            for j in 0..cols {
+                let val = row.get(j).unwrap_or(&0.0);
+                let symbol = if *val > 0.5 { "█" } else if *val > 0.0 { "▓" } else { "░" };
+                print!("{:>8}", symbol);
+            }
+            println!();
+        }
+        
+        if self.matrix.len() > max_rows || self.features.len() > max_cols {
+            println!("     ... (truncated)");
+        }
+    }
+}

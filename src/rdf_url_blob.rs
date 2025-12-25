@@ -1,0 +1,209 @@
+use std::collections::HashMap;
+use anyhow::Result;
+use base64::{Engine as _, engine::general_purpose};
+
+/// RDF URL Blob - Complete system state as a URL that can be piped as stdin
+#[derive(Debug, Clone)]
+pub struct RdfUrlBlob {
+    /// RDF/Turtle representation of system state
+    pub rdf_content: String,
+    /// Base64 encoded blob for URL transport
+    pub url_blob: String,
+    /// Metadata about the state
+    pub metadata: BlobMetadata,
+}
+
+#[derive(Debug, Clone)]
+pub struct BlobMetadata {
+    pub timestamp: String,
+    pub system_version: String,
+    pub macro_count: usize,
+    pub export_capabilities: Vec<String>,
+}
+
+impl RdfUrlBlob {
+    /// Create RDF URL blob from current system state
+    pub fn from_system_state(system: &crate::output2_macro_system::Output2MacroSystem) -> Result<Self> {
+        let rdf_content = Self::generate_rdf_turtle(system)?;
+        let url_blob = Self::encode_as_url_blob(&rdf_content)?;
+        
+        let metadata = BlobMetadata {
+            timestamp: chrono::Utc::now().to_rfc3339(),
+            system_version: "0.1.0".to_string(),
+            macro_count: system.macros.len(),
+            export_capabilities: vec![
+                "macros".to_string(),
+                "code".to_string(), 
+                "docs".to_string(),
+                "workspace".to_string(),
+            ],
+        };
+        
+        Ok(RdfUrlBlob {
+            rdf_content,
+            url_blob,
+            metadata,
+        })
+    }
+    
+    /// Generate RDF/Turtle representation of system state
+    fn generate_rdf_turtle(system: &crate::output2_macro_system::Output2MacroSystem) -> Result<String> {
+        let mut rdf = String::new();
+        
+        // RDF prefixes
+        rdf.push_str("@prefix sys: <http://split-decls.rs/system#> .\n");
+        rdf.push_str("@prefix macro: <http://split-decls.rs/macro#> .\n");
+        rdf.push_str("@prefix state: <http://split-decls.rs/state#> .\n\n");
+        
+        // System state
+        rdf.push_str("state:current a sys:SystemState ;\n");
+        rdf.push_str(&format!("  sys:timestamp \"{}\" ;\n", chrono::Utc::now().to_rfc3339()));
+        rdf.push_str(&format!("  sys:macroCount {} ;\n", system.macros.len()));
+        rdf.push_str("  sys:capabilities ( \"export\" \"import\" \"eval\" \"generate\" ) .\n\n");
+        
+        // Each macro as RDF
+        for (name, decl) in &system.macros {
+            let safe_name = name.replace("-", "_").replace(".", "_");
+            rdf.push_str(&format!("macro:{} a sys:MacroDeclaration ;\n", safe_name));
+            rdf.push_str(&format!("  sys:name \"{}\" ;\n", name));
+            rdf.push_str(&format!("  sys:type \"{}\" ;\n", decl.declaration_type));
+            rdf.push_str(&format!("  sys:sourcePath \"{}\" ;\n", decl.source_path));
+            
+            if let Some(wrapper) = &decl.wrapper {
+                let encoded_wrapper = wrapper.replace("\"", "\\\"").replace("\n", "\\n");
+                rdf.push_str(&format!("  sys:wrapper \"{}\" ;\n", encoded_wrapper));
+            }
+            
+            rdf.push_str("  sys:callable true .\n\n");
+        }
+        
+        Ok(rdf)
+    }
+    
+    /// Encode RDF as URL blob for transport
+    fn encode_as_url_blob(rdf_content: &str) -> Result<String> {
+        let compressed = Self::compress_content(rdf_content)?;
+        let encoded = general_purpose::URL_SAFE_NO_PAD.encode(&compressed);
+        Ok(format!("data:application/rdf+xml;base64,{}", encoded))
+    }
+    
+    /// Simple compression (in real system would use proper compression)
+    fn compress_content(content: &str) -> Result<Vec<u8>> {
+        // For now, just return bytes (would use gzip/zstd in production)
+        Ok(content.as_bytes().to_vec())
+    }
+    
+    /// Parse RDF URL blob from stdin
+    pub fn from_stdin() -> Result<Self> {
+        use std::io::Read;
+        let mut input = String::new();
+        std::io::stdin().read_to_string(&mut input)?;
+        
+        Self::from_url_blob(&input.trim())
+    }
+    
+    /// Parse RDF URL blob from URL string
+    pub fn from_url_blob(url_blob: &str) -> Result<Self> {
+        if !url_blob.starts_with("data:application/rdf+xml;base64,") {
+            return Err(anyhow::anyhow!("Invalid RDF URL blob format"));
+        }
+        
+        let encoded_data = url_blob.strip_prefix("data:application/rdf+xml;base64,").unwrap();
+        let compressed = general_purpose::URL_SAFE_NO_PAD.decode(encoded_data)?;
+        let rdf_content = String::from_utf8(compressed)?;
+        
+        // Parse metadata from RDF (simplified)
+        let macro_count = rdf_content.matches("a sys:MacroDeclaration").count();
+        
+        let metadata = BlobMetadata {
+            timestamp: chrono::Utc::now().to_rfc3339(),
+            system_version: "0.1.0".to_string(),
+            macro_count,
+            export_capabilities: vec!["macros".to_string(), "code".to_string()],
+        };
+        
+        Ok(RdfUrlBlob {
+            rdf_content,
+            url_blob: url_blob.to_string(),
+            metadata,
+        })
+    }
+    
+    /// Export specific parts of the system
+    pub fn export(&self, capability: &str) -> Result<String> {
+        match capability {
+            "macros" => self.export_macros(),
+            "code" => self.export_code(),
+            "docs" => self.export_docs(),
+            "workspace" => self.export_workspace(),
+            "rdf" => Ok(self.rdf_content.clone()),
+            "url" => Ok(self.url_blob.clone()),
+            _ => Err(anyhow::anyhow!("Unknown export capability: {}", capability)),
+        }
+    }
+    
+    /// Export all macros as Rust code
+    fn export_macros(&self) -> Result<String> {
+        let mut code = String::new();
+        code.push_str("// Exported macros from RDF state\n\n");
+        
+        // Parse RDF and extract macro definitions (simplified)
+        for line in self.rdf_content.lines() {
+            if line.contains("sys:wrapper") {
+                // Extract and format wrapper macro
+                if let Some(wrapper_start) = line.find('"') {
+                    if let Some(wrapper_end) = line.rfind('"') {
+                        let wrapper = &line[wrapper_start+1..wrapper_end];
+                        let unescaped = wrapper.replace("\\\"", "\"").replace("\\n", "\n");
+                        code.push_str(&unescaped);
+                        code.push_str("\n\n");
+                    }
+                }
+            }
+        }
+        
+        Ok(code)
+    }
+    
+    /// Export generated code
+    fn export_code(&self) -> Result<String> {
+        Ok(format!(
+            "// Generated code from RDF state blob\n// Timestamp: {}\n// Macros: {}\n\nfn main() {{\n    println!(\"System restored from RDF blob\");\n}}\n",
+            self.metadata.timestamp,
+            self.metadata.macro_count
+        ))
+    }
+    
+    /// Export documentation
+    fn export_docs(&self) -> Result<String> {
+        Ok(format!(
+            "# System State Documentation\n\n- **Timestamp**: {}\n- **Macros**: {}\n- **Capabilities**: {:?}\n\n## RDF Content\n\n```turtle\n{}\n```\n",
+            self.metadata.timestamp,
+            self.metadata.macro_count,
+            self.metadata.export_capabilities,
+            self.rdf_content
+        ))
+    }
+    
+    /// Export workspace configuration
+    fn export_workspace(&self) -> Result<String> {
+        Ok(format!(
+            "[workspace]\nmembers = [\n    # Generated from RDF state\n    # {} macros available\n]\n",
+            self.metadata.macro_count
+        ))
+    }
+    
+    /// Print blob as URL for piping
+    pub fn print_url(&self) {
+        println!("{}", self.url_blob);
+    }
+    
+    /// Print blob info
+    pub fn print_info(&self) {
+        println!("🌐 RDF URL Blob Info:");
+        println!("  📅 Timestamp: {}", self.metadata.timestamp);
+        println!("  🎭 Macros: {}", self.metadata.macro_count);
+        println!("  🔧 Capabilities: {:?}", self.metadata.export_capabilities);
+        println!("  📏 Size: {} bytes", self.url_blob.len());
+    }
+}

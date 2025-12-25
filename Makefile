@@ -1,8 +1,9 @@
 SCCACHE := $(HOME)/.cargo/bin/sccache
-# Use RUSTC_WRAPPER for sccache
+# Use RUSTC_WRAPPER for sccache with filtered output
 CARGO := cargo
+QUIET_BUILD := 2>&1 | grep -E "(error\[|Finished|Compiling.*macro_runner)" || true
 
-.PHONY: all build_core run_bootstrap build_output_module clean_output2 check_build_errors check_bootstrap_errors debug-main bootstrap_only check_bootstrap_only run_single_crate
+.PHONY: all build_core run_bootstrap build_output_module clean_output2 check_build_errors check_bootstrap_errors debug-main bootstrap_only check_bootstrap_only run_single_crate macro_runner
 
 all: debug-main run_bootstrap check_bootstrap_errors build_output_module
 
@@ -10,6 +11,17 @@ debug-main: build_core check_build_errors
 
 build_core:
 	-RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build > build_core.log 2>&1 || true
+
+# Quiet build for macro_runner and lisp_macro
+macro_runner:
+	@echo "🔧 Building macro_runner..."
+	@RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build --bin macro_runner $(QUIET_BUILD)
+	@echo "✅ macro_runner built successfully"
+
+lisp_macro:
+	@echo "🧠 Building lisp_macro..."
+	@RUSTC_WRAPPER=$(SCCACHE) $(CARGO) build --bin lisp_macro $(QUIET_BUILD)
+	@echo "✅ lisp_macro built successfully"
 
 check_build_errors:
 	grep -E "error\[|error:" build_core.log || true

@@ -3,7 +3,7 @@
 [current_tasks]
 name = "Active Development Tasks"
 date = "2025-12-25"
-phase = "Phase 2 - Iterative Single Module Fixing"
+phase = "Phase 2.5 - DWIM Declarative Bootstrap System"
 priority = "High"
 
 # Immediate Tasks (Next 1-2 days)
@@ -11,44 +11,47 @@ priority = "High"
 name = "Immediate Priority Tasks"
 
   [[current_tasks.immediate.task]]
+  id = "T2.5.1"
+  name = "Design DWIM Macro System"
+  description = "Create declarative macro syntax for bootstrap infrastructure generation"
+  deliverable = "dwim!, mkbootstrap!, somelib!, sometool! macro definitions"
+  estimated_time = "4-6 hours"
+  status = "PLANNED"
+  notes = "Key insight: Each module declares its bootstrap needs, system auto-generates everything"
+  
+  [[current_tasks.immediate.task]]
+  id = "T2.5.2"
+  name = "Implement Infrastructure Generator"
+  description = "Create system to generate bootstrap scripts, configs, and tools from macro declarations"
+  dependencies = ["T2.5.1"]
+  deliverable = "Bootstrap infrastructure generator that creates complete self-contained environments"
+  estimated_time = "6-8 hours"
+  status = "PLANNED"
+  
+  [[current_tasks.immediate.task]]
+  id = "T2.5.3"
+  name = "Test DWIM Recursive Generation"
+  description = "Validate that output2 can auto-generate output2/output2 with complete bootstrap capability"
+  dependencies = ["T2.5.2"]
+  deliverable = "Working output2 → output2/output2 → output2/output2/output2 chain"
+  estimated_time = "2-3 hours"
+  status = "PLANNED"
+
+# Previous Tasks (Completed/In Progress)
+[current_tasks.previous]
+name = "Previous Task Status"
+
+  [[current_tasks.previous.task]]
   id = "T1"
   name = "Analyze Bootstrap Output"
-  description = "Review bootstrap_run.log and identify all crates with compilation errors"
-  command = "make run_bootstrap 2>&1 | tee bootstrap_run.log"
-  deliverable = "List of problematic crates with specific error types"
-  estimated_time = "30 minutes"
   status = "COMPLETED"
   notes = "Analysis complete - main issue is alloc feature flag handling"
   
-  [[current_tasks.immediate.task]]
+  [[current_tasks.previous.task]]
   id = "T2"
   name = "Fix Alloc Feature Flag Handling"
-  description = "Update AST processing to handle extern crate alloc declarations and feature flags properly"
-  dependencies = ["T1"]
-  deliverable = "Updated src/lib.rs that preserves feature-gated extern crate statements"
-  estimated_time = "2-3 hours"
   status = "IN_PROGRESS"
   notes = "Root cause identified: AST processing skips extern crate declarations with feature flags"
-  technical_details = """
-  Issues found:
-  - Skipping unsupported item type: # [cfg (feature = "alloc")] extern crate alloc ;
-  - Skipping unsupported item type: # [cfg (not (feature = "core"))] extern crate alloc ;
-  - Skipping unsupported item type: # [cfg (any (test , feature = "alloc"))] extern crate alloc ;
-  
-  Solution approach:
-  1. Update AST processing to handle extern crate declarations
-  2. Preserve feature-gated statements in generated code
-  3. Test with crates using alloc features (hashbrown, nom, etc.)
-  """
-  
-  [[current_tasks.immediate.task]]
-  id = "T3"
-  name = "Fix High-Priority Crates"
-  description = "Use wrap_single_crate to fix the most critical/blocking crates first"
-  command = "cargo run --bin wrap_single_crate -- <crate_path> --verbose"
-  dependencies = ["T2"]
-  deliverable = "Working fixes for top 3-5 problematic crates"
-  estimated_time = "2-4 hours"
 
 # Short-term Tasks (Next week)
 [current_tasks.short_term]

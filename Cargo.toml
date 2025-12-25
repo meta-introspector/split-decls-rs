@@ -58,6 +58,7 @@ syn = { workspace = true, features= ["full","visit", "visit-mut", "extra-traits"
 walkdir = { workspace = true }
 split-decls-types = { workspace = true } # Use workspace dependency
 proc-macro2 = { workspace = true, features = ["span-locations"] }
+base64 = "0.21" # For RDF URL blob encoding
 tempfile = { workspace = true }
 cargo-toml-generator-types = { workspace = true } # Use workspace dependency
 sha2 = { workspace = true }

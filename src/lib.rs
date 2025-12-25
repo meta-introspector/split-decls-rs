@@ -5,6 +5,11 @@ pub mod process_module_recursivly;
 pub mod macro_analyzer_parts;
 #[macro_use]
 pub mod special_print;
+// pub mod dwim_macros; // TODO: Fix compilation errors
+pub mod output2_macro_system; // Lisp-like macro system
+pub mod rdf_url_blob; // RDF URL blob state system
+pub mod url_matrix; // URL matrix eigenform compression
+pub mod rustc_eigenmatrix; // Rustc compiler eigenmatrix
 pub mod format_generated_rust_files; // Add this
 pub mod wrapped_workspace_handlers; // Add this
 pub mod path_diff; // Add this

@@ -1,0 +1,187 @@
+# goal26.toml - DWIM Declarative Bootstrap System
+
+[dwim_bootstrap_system]
+name = "DWIM Declarative Bootstrap System"
+version = "1.0"
+description = "Declarative macro-based system for automatic bootstrap infrastructure generation"
+status = "Planning - Phase 2.5 Enhancement"
+derived_from = "Recursive generation requirements analysis"
+
+# Core Concept
+[dwim_bootstrap_system.concept]
+name = "Do What I Mean (DWIM) Philosophy"
+description = """
+Each module declares its bootstrap requirements through declarative macros.
+The system automatically generates all necessary infrastructure:
+- Bootstrap scripts and tools
+- Configuration files (split-decls-rs.toml)
+- Workspace setup (Cargo.toml)
+- Makefile targets
+- Recursive generation capabilities
+
+Pattern: dwim! mkbootstrap! somelib! sometool! something! somewhere! somehow! askyourmom! dwim!
+"""
+
+# Declarative Macro System
+[dwim_bootstrap_system.macros]
+name = "Declarative Bootstrap Macros"
+
+  [[dwim_bootstrap_system.macros.macro]]
+  name = "dwim!"
+  purpose = "Top-level DWIM wrapper - figures out what needs to be done"
+  syntax = "dwim! { ... }"
+  
+  [[dwim_bootstrap_system.macros.macro]]
+  name = "mkbootstrap!"
+  purpose = "Declares bootstrap requirements for a module"
+  syntax = """
+  mkbootstrap! {
+      tools: ["wrap_single_crate", "bootstrap", "add_wrapped_crate"],
+      config: "split-decls-rs.toml",
+      workspace: true,
+      recursive: true,
+      makefile: true
+  }
+  """
+  
+  [[dwim_bootstrap_system.macros.macro]]
+  name = "somelib!"
+  purpose = "Declares library dependencies and capabilities"
+  syntax = "somelib! { name: \"split-decls-rs\", version: \"0.1.0\" }"
+  
+  [[dwim_bootstrap_system.macros.macro]]
+  name = "sometool!"
+  purpose = "Declares tool binaries to be included"
+  syntax = "sometool! { bin: \"wrap_single_crate\", features: [\"cli\"] }"
+
+# Auto-Generated Infrastructure
+[dwim_bootstrap_system.generated]
+name = "Auto-Generated Bootstrap Infrastructure"
+
+  [[dwim_bootstrap_system.generated.component]]
+  name = "Bootstrap Scripts"
+  files = ["bootstrap.sh", "self_bootstrap.sh", "bootstrap_to_output3.sh"]
+  purpose = "Executable scripts for recursive generation"
+  
+  [[dwim_bootstrap_system.generated.component]]
+  name = "Configuration Files"
+  files = ["split-decls-rs.toml", "Cargo.toml", "Makefile"]
+  purpose = "Complete workspace and build configuration"
+  
+  [[dwim_bootstrap_system.generated.component]]
+  name = "Tool Binaries"
+  files = ["src/bin/wrap_single_crate.rs", "src/bin/bootstrap.rs", "src/bin/add_wrapped_crate.rs"]
+  purpose = "Self-contained tooling for next-level generation"
+  
+  [[dwim_bootstrap_system.generated.component]]
+  name = "Workspace Structure"
+  structure = """
+  output2/
+  ├── Cargo.toml (workspace)
+  ├── split-decls-rs.toml
+  ├── Makefile
+  ├── bootstrap.sh
+  ├── wrapped-split-decls-rs/
+  │   ├── Cargo.toml (with dwim! macros)
+  │   ├── src/bin/ (all tools)
+  │   └── src/lib.rs (with bootstrap capabilities)
+  └── wrapped-*/
+  """
+
+# Implementation Phases
+[dwim_bootstrap_system.implementation]
+name = "Implementation Roadmap"
+
+  [[dwim_bootstrap_system.implementation.phase]]
+  name = "Phase 2.5: Macro Infrastructure"
+  description = "Create the declarative macro system"
+  tasks = [
+    "Design dwim! macro syntax",
+    "Implement mkbootstrap! macro",
+    "Create infrastructure generation logic",
+    "Test with single wrapped crate"
+  ]
+  estimated_time = "2-3 days"
+  
+  [[dwim_bootstrap_system.implementation.phase]]
+  name = "Phase 2.6: Integration"
+  description = "Integrate DWIM system into existing tools"
+  tasks = [
+    "Update wrap_single_crate to use dwim! macros",
+    "Modify bootstrap process to generate infrastructure",
+    "Test recursive generation with new system",
+    "Validate output2 → output2/output2 → output2/output2/output2"
+  ]
+  estimated_time = "1-2 days"
+  
+  [[dwim_bootstrap_system.implementation.phase]]
+  name = "Phase 2.7: Validation"
+  description = "Validate complete DWIM bootstrap system"
+  tasks = [
+    "Full bootstrap with DWIM infrastructure",
+    "Multi-level recursive generation test",
+    "Performance and reliability validation",
+    "Documentation and examples"
+  ]
+  estimated_time = "1 day"
+
+# Success Criteria
+[dwim_bootstrap_system.success_criteria]
+name = "DWIM System Success Criteria"
+
+  [[dwim_bootstrap_system.success_criteria.criterion]]
+  name = "Zero Manual Configuration"
+  description = "No manual copying of config files or scripts required"
+  
+  [[dwim_bootstrap_system.success_criteria.criterion]]
+  name = "Infinite Recursion Capability"
+  description = "Any outputN can generate outputN/outputN automatically"
+  
+  [[dwim_bootstrap_system.success_criteria.criterion]]
+  name = "Declarative Simplicity"
+  description = "Adding bootstrap capability requires only adding dwim! macro"
+  
+  [[dwim_bootstrap_system.success_criteria.criterion]]
+  name = "Self-Contained Generations"
+  description = "Each generated level has complete bootstrap infrastructure"
+
+# Integration with Existing Plan
+[dwim_bootstrap_system.integration]
+name = "Integration with Current Workflow"
+description = "How DWIM system enhances the existing iterative development workflow"
+
+  [[dwim_bootstrap_system.integration.enhancement]]
+  phase = "Phase 2 - Iterative Single Module Fixing"
+  enhancement = "Add dwim! macros to problematic crates as they're fixed"
+  
+  [[dwim_bootstrap_system.integration.enhancement]]
+  phase = "Phase 3 - Full Regeneration Validation"
+  enhancement = "Validate DWIM-generated infrastructure works in full bootstrap"
+  
+  [[dwim_bootstrap_system.integration.enhancement]]
+  phase = "Phase 4 - Recursive Generation"
+  enhancement = "Use DWIM system for automatic recursive generation capability"
+
+# Technical Architecture
+[dwim_bootstrap_system.architecture]
+name = "Technical Architecture"
+
+  [[dwim_bootstrap_system.architecture.component]]
+  name = "Macro Processor"
+  location = "src/dwim_macros.rs"
+  purpose = "Parse and process dwim! macro declarations"
+  
+  [[dwim_bootstrap_system.architecture.component]]
+  name = "Infrastructure Generator"
+  location = "src/bootstrap_generator.rs"
+  purpose = "Generate bootstrap files based on macro declarations"
+  
+  [[dwim_bootstrap_system.architecture.component]]
+  name = "Template System"
+  location = "templates/"
+  purpose = "Templates for generated scripts, configs, and makefiles"
+  
+  [[dwim_bootstrap_system.architecture.component]]
+  name = "Integration Layer"
+  location = "src/lib.rs"
+  purpose = "Integrate DWIM system with existing split-decls-rs tools"
