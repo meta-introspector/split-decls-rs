@@ -49,7 +49,7 @@ rayon = { workspace = true } # Added for multi-threaded processing
 anyhow = { workspace = true }
 toml = { workspace = true }
 toml_edit = { workspace = true }
-serde = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
 serde_derive = { workspace = true }
 serde_json = { workspace = true } # Added for build.rs serialization
 url = { workspace = true }
