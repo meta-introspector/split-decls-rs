@@ -1,10 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl ImplementAttributes {
-    fn parse_implement(
-        &mut self,
-        cursor: syn::parse::ParseStream,
-    ) -> syn::parse::Result<()> {
+    fn parse_implement(&mut self, cursor: syn::parse::ParseStream) -> syn::parse::Result<()> {
         let tree = cursor.parse::<UseTree2>()?;
         self.walk_implement(&tree, &mut String::new())?;
         if !cursor.is_empty() {

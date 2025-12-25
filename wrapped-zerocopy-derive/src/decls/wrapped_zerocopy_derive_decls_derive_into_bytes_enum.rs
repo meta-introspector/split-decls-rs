@@ -20,17 +20,15 @@ fn derive_into_bytes_enum(
         );
     }
     let tag_type_definition = r#enum::generate_tag_enum(&repr, enm);
-    Ok(
-        ImplBlockBuilder::new(
-                ast,
-                enm,
-                Trait::IntoBytes,
-                FieldBounds::ALL_SELF,
-                zerocopy_crate,
-            )
-            .padding_check(PaddingCheck::Enum {
-                tag_type_definition,
-            })
-            .build(),
+    Ok(ImplBlockBuilder::new(
+        ast,
+        enm,
+        Trait::IntoBytes,
+        FieldBounds::ALL_SELF,
+        zerocopy_crate,
     )
+    .padding_check(PaddingCheck::Enum {
+        tag_type_definition,
+    })
+    .build())
 }

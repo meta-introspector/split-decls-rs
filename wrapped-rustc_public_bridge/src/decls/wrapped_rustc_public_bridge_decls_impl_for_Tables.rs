@@ -31,10 +31,7 @@ impl<'tcx, B: Bridge> Tables<'tcx, B> {
     pub fn adt_def(&mut self, did: rustc_span::def_id::DefId) -> B::AdtDef {
         B::AdtDef::new(self.create_def_id(did))
     }
-    pub fn foreign_module_def(
-        &mut self,
-        did: rustc_span::def_id::DefId,
-    ) -> B::ForeignModuleDef {
+    pub fn foreign_module_def(&mut self, did: rustc_span::def_id::DefId) -> B::ForeignModuleDef {
         B::ForeignModuleDef::new(self.create_def_id(did))
     }
     pub fn foreign_def(&mut self, did: rustc_span::def_id::DefId) -> B::ForeignDef {

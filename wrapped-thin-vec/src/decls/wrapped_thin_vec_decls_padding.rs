@@ -7,7 +7,8 @@ fn padding<T>() -> usize {
     if alloc_align > header_size {
         if cfg!(feature = "gecko-ffi") {
             panic!(
-                "nsTArray does not handle alignment above > {} correctly", header_size
+                "nsTArray does not handle alignment above > {} correctly",
+                header_size
             );
         }
         alloc_align - header_size

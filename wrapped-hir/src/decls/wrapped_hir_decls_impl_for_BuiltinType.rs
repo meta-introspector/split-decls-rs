@@ -8,9 +8,7 @@ impl BuiltinType {
     }
     pub fn i32() -> BuiltinType {
         BuiltinType {
-            inner: hir_def::builtin_type::BuiltinType::Int(
-                hir_ty::primitive::BuiltinInt::I32,
-            ),
+            inner: hir_def::builtin_type::BuiltinType::Int(hir_ty::primitive::BuiltinInt::I32),
         }
     }
     pub fn ty<'db>(self, db: &'db dyn HirDatabase) -> Type<'db> {

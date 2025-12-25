@@ -15,6 +15,8 @@ fn alloc_size<T>(cap: usize) -> usize {
         let elem_size = mem::size_of::<T>() as isize;
         elem_size.checked_mul(cap).unwrap_cap_overflow()
     };
-    let final_size = data_size.checked_add(header_size + padding).unwrap_cap_overflow();
+    let final_size = data_size
+        .checked_add(header_size + padding)
+        .unwrap_cap_overflow();
     final_size as usize
 }

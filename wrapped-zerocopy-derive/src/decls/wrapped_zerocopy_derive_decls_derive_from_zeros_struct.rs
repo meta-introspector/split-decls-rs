@@ -8,11 +8,11 @@ fn derive_from_zeros_struct(
     zerocopy_crate: &Path,
 ) -> TokenStream {
     ImplBlockBuilder::new(
-            ast,
-            strct,
-            Trait::FromZeros,
-            FieldBounds::ALL_SELF,
-            zerocopy_crate,
-        )
-        .build()
+        ast,
+        strct,
+        Trait::FromZeros,
+        FieldBounds::ALL_SELF,
+        zerocopy_crate,
+    )
+    .build()
 }

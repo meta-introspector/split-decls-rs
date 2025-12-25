@@ -6,35 +6,29 @@ fn derive_no_cell_inner(
     zerocopy_crate: &Path,
 ) -> TokenStream {
     match &ast.data {
-        Data::Struct(strct) => {
-            ImplBlockBuilder::new(
-                    ast,
-                    strct,
-                    Trait::Immutable,
-                    FieldBounds::ALL_SELF,
-                    zerocopy_crate,
-                )
-                .build()
-        }
-        Data::Enum(enm) => {
-            ImplBlockBuilder::new(
-                    ast,
-                    enm,
-                    Trait::Immutable,
-                    FieldBounds::ALL_SELF,
-                    zerocopy_crate,
-                )
-                .build()
-        }
-        Data::Union(unn) => {
-            ImplBlockBuilder::new(
-                    ast,
-                    unn,
-                    Trait::Immutable,
-                    FieldBounds::ALL_SELF,
-                    zerocopy_crate,
-                )
-                .build()
-        }
+        Data::Struct(strct) => ImplBlockBuilder::new(
+            ast,
+            strct,
+            Trait::Immutable,
+            FieldBounds::ALL_SELF,
+            zerocopy_crate,
+        )
+        .build(),
+        Data::Enum(enm) => ImplBlockBuilder::new(
+            ast,
+            enm,
+            Trait::Immutable,
+            FieldBounds::ALL_SELF,
+            zerocopy_crate,
+        )
+        .build(),
+        Data::Union(unn) => ImplBlockBuilder::new(
+            ast,
+            unn,
+            Trait::Immutable,
+            FieldBounds::ALL_SELF,
+            zerocopy_crate,
+        )
+        .build(),
     }
 }

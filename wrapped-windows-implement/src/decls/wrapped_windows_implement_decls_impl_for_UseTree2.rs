@@ -1,10 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl UseTree2 {
-    fn to_element_type(
-        &self,
-        namespace: &mut String,
-    ) -> syn::parse::Result<ImplementType> {
+    fn to_element_type(&self, namespace: &mut String) -> syn::parse::Result<ImplementType> {
         match self {
             Self::Path(input) => {
                 if !namespace.is_empty() {
@@ -29,14 +26,10 @@ impl UseTree2 {
                     span,
                 })
             }
-            Self::Group(input) => {
-                Err(
-                    syn::parse::Error::new(
-                        input.brace_token.span.join(),
-                        "Syntax not supported",
-                    ),
-                )
-            }
+            Self::Group(input) => Err(syn::parse::Error::new(
+                input.brace_token.span.join(),
+                "Syntax not supported",
+            )),
             _ => unimplemented!(),
         }
     }

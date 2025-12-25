@@ -11,17 +11,13 @@ impl ExternCrateDecl {
         if name == sym::self_ {
             Some(krate.into())
         } else {
-            krate
-                .data(db)
-                .dependencies
-                .iter()
-                .find_map(|dep| {
-                    if dep.name.symbol() == name.symbol() {
-                        Some(dep.crate_id.into())
-                    } else {
-                        None
-                    }
-                })
+            krate.data(db).dependencies.iter().find_map(|dep| {
+                if dep.name.symbol() == name.symbol() {
+                    Some(dep.crate_id.into())
+                } else {
+                    None
+                }
+            })
         }
     }
     pub fn name(self, db: &dyn HirDatabase) -> Name {

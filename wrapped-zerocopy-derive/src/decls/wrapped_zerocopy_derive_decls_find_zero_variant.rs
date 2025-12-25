@@ -10,41 +10,47 @@ fn find_zero_variant(enm: &DataEnum) -> Result<usize, bool> {
     let mut has_unknown_discriminants = false;
     for (i, v) in enm.variants.iter().enumerate() {
         match v.discriminant.as_ref() {
-            None => {
-                match next_negative_discriminant.as_mut() {
-                    Some(0) => return Ok(i),
-                    Some(n) => *n -= 1,
-                    None => {}
+            None => match next_negative_discriminant.as_mut() {
+                Some(0) => return Ok(i),
+                Some(n) => *n -= 1,
+                None => {}
+            },
+            Some((
+                _,
+                Expr::Lit(ExprLit {
+                    lit: Lit::Int(int), ..
+                }),
+            )) => match int.base10_parse::<u128>().ok() {
+                Some(0) => return Ok(i),
+                Some(_) => next_negative_discriminant = None,
+                None => {
+                    has_unknown_discriminants = true;
+                    next_negative_discriminant = None;
                 }
-            }
-            Some((_, Expr::Lit(ExprLit { lit: Lit::Int(int), .. }))) => {
-                match int.base10_parse::<u128>().ok() {
+            },
+            Some((
+                _,
+                Expr::Unary(ExprUnary {
+                    op: UnOp::Neg(_),
+                    expr,
+                    ..
+                }),
+            )) => match &**expr {
+                Expr::Lit(ExprLit {
+                    lit: Lit::Int(int), ..
+                }) => match int.base10_parse::<u128>().ok() {
                     Some(0) => return Ok(i),
-                    Some(_) => next_negative_discriminant = None,
+                    Some(x) => next_negative_discriminant = Some(x - 1),
                     None => {
                         has_unknown_discriminants = true;
                         next_negative_discriminant = None;
                     }
+                },
+                _ => {
+                    has_unknown_discriminants = true;
+                    next_negative_discriminant = None;
                 }
-            }
-            Some((_, Expr::Unary(ExprUnary { op: UnOp::Neg(_), expr, .. }))) => {
-                match &**expr {
-                    Expr::Lit(ExprLit { lit: Lit::Int(int), .. }) => {
-                        match int.base10_parse::<u128>().ok() {
-                            Some(0) => return Ok(i),
-                            Some(x) => next_negative_discriminant = Some(x - 1),
-                            None => {
-                                has_unknown_discriminants = true;
-                                next_negative_discriminant = None;
-                            }
-                        }
-                    }
-                    _ => {
-                        has_unknown_discriminants = true;
-                        next_negative_discriminant = None;
-                    }
-                }
-            }
+            },
             _ => {
                 has_unknown_discriminants = true;
                 next_negative_discriminant = None;

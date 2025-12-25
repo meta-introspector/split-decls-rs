@@ -32,7 +32,8 @@ pub fn compile_windows_resource_file(
         .expect("can execute resource compiler");
     assert!(status.success(), "rc.exe failed with status {}", status);
     assert!(
-        res_path.try_exists().unwrap_or(false), "resource file {} was not created",
+        res_path.try_exists().unwrap_or(false),
+        "resource file {} was not created",
         res_path.display()
     );
     res_path

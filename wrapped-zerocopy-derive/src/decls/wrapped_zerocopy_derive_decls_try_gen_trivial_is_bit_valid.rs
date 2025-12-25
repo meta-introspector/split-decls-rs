@@ -27,18 +27,16 @@ fn try_gen_trivial_is_bit_valid(
     zerocopy_crate: &Path,
 ) -> Option<proc_macro2::TokenStream> {
     if top_level == Trait::FromBytes && ast.generics.params.is_empty() {
-        Some(
-            quote!(
-                fn is_bit_valid < ___ZerocopyAliasing > (_candidate : #
-                zerocopy_crate::Maybe < Self, ___ZerocopyAliasing >,) -> #
-                zerocopy_crate::util::macro_util::core_reexport::primitive::bool where
-                ___ZerocopyAliasing : # zerocopy_crate::pointer::invariant::Reference, {
-                if false { fn assert_is_from_bytes < T > () where T : #
-                zerocopy_crate::FromBytes, T : ?#
-                zerocopy_crate::util::macro_util::core_reexport::marker::Sized, {}
-                assert_is_from_bytes::< Self > (); } true }
-            ),
-        )
+        Some(quote!(
+            fn is_bit_valid < ___ZerocopyAliasing > (_candidate : #
+            zerocopy_crate::Maybe < Self, ___ZerocopyAliasing >,) -> #
+            zerocopy_crate::util::macro_util::core_reexport::primitive::bool where
+            ___ZerocopyAliasing : # zerocopy_crate::pointer::invariant::Reference, {
+            if false { fn assert_is_from_bytes < T > () where T : #
+            zerocopy_crate::FromBytes, T : ?#
+            zerocopy_crate::util::macro_util::core_reexport::marker::Sized, {}
+            assert_is_from_bytes::< Self > (); } true }
+        ))
     } else {
         None
     }

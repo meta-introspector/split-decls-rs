@@ -11,9 +11,7 @@ use std::collections::HashMap;
 ///
 /// The caller must ensure that all initialized bit patterns are valid for
 /// `Self`.
-unsafe fn gen_trivial_is_bit_valid_unchecked(
-    zerocopy_crate: &Path,
-) -> proc_macro2::TokenStream {
+unsafe fn gen_trivial_is_bit_valid_unchecked(zerocopy_crate: &Path) -> proc_macro2::TokenStream {
     quote!(
         fn is_bit_valid < ___ZerocopyAliasing > (_candidate : # zerocopy_crate::Maybe <
         Self, ___ZerocopyAliasing >,) -> #

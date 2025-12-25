@@ -12,14 +12,14 @@ fn derive_borrow_decode_inner(input: TokenStream) -> Result<TokenStream> {
                 fields: body.fields,
                 attributes,
             }
-                .generate_borrow_decode(&mut generator)?;
+            .generate_borrow_decode(&mut generator)?;
         }
         Body::Enum(body) => {
             derive_enum::DeriveEnum {
                 variants: body.variants,
                 attributes,
             }
-                .generate_borrow_decode(&mut generator)?;
+            .generate_borrow_decode(&mut generator)?;
         }
     }
     generator.export_to_file("bincode", "BorrowDecode");

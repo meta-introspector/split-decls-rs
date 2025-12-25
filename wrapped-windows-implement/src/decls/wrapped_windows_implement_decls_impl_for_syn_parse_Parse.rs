@@ -8,12 +8,10 @@ impl syn::parse::Parse for UseTree2 {
             let ident = input.call(syn::Ident::parse_any)?;
             if input.peek(syn::Token![::]) {
                 input.parse::<syn::Token![::]>()?;
-                Ok(
-                    Self::Path(UsePath2 {
-                        ident,
-                        tree: Box::new(input.parse()?),
-                    }),
-                )
+                Ok(Self::Path(UsePath2 {
+                    ident,
+                    tree: Box::new(input.parse()?),
+                }))
             } else if input.peek(syn::Token![=]) {
                 if ident == "TrustLevel" {
                     input.parse::<syn::Token![=]>()?;
@@ -22,14 +20,10 @@ impl syn::parse::Parse for UseTree2 {
                     match value.to_string().as_str() {
                         "Partial" => Ok(Self::TrustLevel(1)),
                         "Full" => Ok(Self::TrustLevel(2)),
-                        _ => {
-                            Err(
-                                syn::parse::Error::new(
-                                    span,
-                                    "`TrustLevel` must be `Partial` or `Full`",
-                                ),
-                            )
-                        }
+                        _ => Err(syn::parse::Error::new(
+                            span,
+                            "`TrustLevel` must be `Partial` or `Full`",
+                        )),
                     }
                 } else if ident == "Agile" {
                     input.parse::<syn::Token![=]>()?;
@@ -38,22 +32,16 @@ impl syn::parse::Parse for UseTree2 {
                     match value.to_string().as_str() {
                         "true" => Ok(Self::Agile(true)),
                         "false" => Ok(Self::Agile(false)),
-                        _ => {
-                            Err(
-                                syn::parse::Error::new(
-                                    span,
-                                    "`Agile` must be `true` or `false`",
-                                ),
-                            )
-                        }
+                        _ => Err(syn::parse::Error::new(
+                            span,
+                            "`Agile` must be `true` or `false`",
+                        )),
                     }
                 } else {
-                    Err(
-                        syn::parse::Error::new(
-                            ident.span(),
-                            "Unrecognized key-value pair",
-                        ),
-                    )
+                    Err(syn::parse::Error::new(
+                        ident.span(),
+                        "Unrecognized key-value pair",
+                    ))
                 }
             } else {
                 let generics = if input.peek(syn::Token![<]) {

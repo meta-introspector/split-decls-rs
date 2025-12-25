@@ -30,9 +30,7 @@ impl GenericParam {
         };
         let generics = hir_ty::generics::generics(db, parent);
         let index = match self {
-            GenericParam::TypeParam(it) => {
-                generics.type_or_const_param_idx(it.id.into())?
-            }
+            GenericParam::TypeParam(it) => generics.type_or_const_param_idx(it.id.into())?,
             GenericParam::ConstParam(_) => return None,
             GenericParam::LifetimeParam(it) => generics.lifetime_idx(it.id)?,
         };

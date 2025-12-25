@@ -28,7 +28,11 @@ impl Crate {
             .iter()
             .copied()
             .filter(|&krate| {
-                krate.data(db).dependencies.iter().any(|it| it.crate_id == self.id)
+                krate
+                    .data(db)
+                    .dependencies
+                    .iter()
+                    .any(|it| it.crate_id == self.id)
             })
             .map(|id| Crate { id })
             .collect()
@@ -37,12 +41,12 @@ impl Crate {
         self,
         db: &dyn HirDatabase,
     ) -> impl Iterator<Item = Crate> {
-        self.id.transitive_rev_deps(db).into_iter().map(|id| Crate { id })
+        self.id
+            .transitive_rev_deps(db)
+            .into_iter()
+            .map(|id| Crate { id })
     }
-    pub fn notable_traits_in_deps(
-        self,
-        db: &dyn HirDatabase,
-    ) -> impl Iterator<Item = &TraitId> {
+    pub fn notable_traits_in_deps(self, db: &dyn HirDatabase) -> impl Iterator<Item = &TraitId> {
         self.id
             .transitive_deps(db)
             .into_iter()
@@ -56,7 +60,10 @@ impl Crate {
     }
     pub fn modules(self, db: &dyn HirDatabase) -> Vec<Module> {
         let def_map = crate_def_map(db, self.id);
-        def_map.modules().map(|(id, _)| def_map.module_id(id).into()).collect()
+        def_map
+            .modules()
+            .map(|(id, _)| def_map.module_id(id).into())
+            .collect()
     }
     pub fn root_file(self, db: &dyn HirDatabase) -> FileId {
         self.id.data(db).root_file_id
@@ -80,9 +87,7 @@ impl Crate {
             .into_iter()
             .map(|(item, do_not_complete)| {
                 let item = match ItemInNs::from(item) {
-                    ItemInNs::Types(mod_id) | ItemInNs::Values(mod_id) => {
-                        Either::Left(mod_id)
-                    }
+                    ItemInNs::Types(mod_id) | ItemInNs::Values(mod_id) => Either::Left(mod_id),
                     ItemInNs::Macros(mac_id) => Either::Right(mac_id),
                 };
                 (item, do_not_complete)
@@ -94,7 +99,9 @@ impl Crate {
     /// Try to get the root URL of the documentation of a crate.
     pub fn get_html_root_url(self: &Crate, db: &dyn HirDatabase) -> Option<String> {
         let attrs = db.attrs(AttrDefId::ModuleId(self.root_module().into()));
-        let doc_url = attrs.by_key(sym::doc).find_string_value_in_tt(sym::html_root_url);
+        let doc_url = attrs
+            .by_key(sym::doc)
+            .find_string_value_in_tt(sym::html_root_url);
         doc_url.map(|s| s.trim_matches('"').trim_end_matches('/').to_owned() + "/")
     }
     pub fn cfg<'db>(&self, db: &'db dyn HirDatabase) -> &'db CfgOptions {
@@ -102,7 +109,9 @@ impl Crate {
     }
     pub fn potential_cfg<'db>(&self, db: &'db dyn HirDatabase) -> &'db CfgOptions {
         let data = self.id.extra_data(db);
-        data.potential_cfg_options.as_ref().unwrap_or_else(|| self.id.cfg_options(db))
+        data.potential_cfg_options
+            .as_ref()
+            .unwrap_or_else(|| self.id.cfg_options(db))
     }
     pub fn to_display_target(self, db: &dyn HirDatabase) -> DisplayTarget {
         DisplayTarget::from_crate(db, self.id)
@@ -112,7 +121,10 @@ impl Crate {
             .iter()
             .copied()
             .find(|&krate| {
-                matches!(krate.data(db).origin, CrateOrigin::Lang(LangCrateOrigin::Core))
+                matches!(
+                    krate.data(db).origin,
+                    CrateOrigin::Lang(LangCrateOrigin::Core)
+                )
             })
             .map(Crate::from)
     }

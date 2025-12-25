@@ -23,7 +23,11 @@ impl ChunkState {
         *input = &input[take..];
     }
     fn start_flag(&self) -> u8 {
-        if self.blocks_compressed == 0 { CHUNK_START } else { 0 }
+        if self.blocks_compressed == 0 {
+            CHUNK_START
+        } else {
+            0
+        }
     }
     fn update(&mut self, mut input: &[u8]) -> &mut Self {
         if self.buf_len > 0 {
@@ -31,14 +35,13 @@ impl ChunkState {
             if !input.is_empty() {
                 debug_assert_eq!(self.buf_len as usize, BLOCK_LEN);
                 let block_flags = self.flags | self.start_flag();
-                self.platform
-                    .compress_in_place(
-                        &mut self.cv,
-                        &self.buf,
-                        BLOCK_LEN as u8,
-                        self.chunk_counter,
-                        block_flags,
-                    );
+                self.platform.compress_in_place(
+                    &mut self.cv,
+                    &self.buf,
+                    BLOCK_LEN as u8,
+                    self.chunk_counter,
+                    block_flags,
+                );
                 self.buf_len = 0;
                 self.buf = [0; BLOCK_LEN];
                 self.blocks_compressed += 1;
@@ -47,14 +50,13 @@ impl ChunkState {
         while input.len() > BLOCK_LEN {
             debug_assert_eq!(self.buf_len, 0);
             let block_flags = self.flags | self.start_flag();
-            self.platform
-                .compress_in_place(
-                    &mut self.cv,
-                    array_ref!(input, 0, BLOCK_LEN),
-                    BLOCK_LEN as u8,
-                    self.chunk_counter,
-                    block_flags,
-                );
+            self.platform.compress_in_place(
+                &mut self.cv,
+                array_ref!(input, 0, BLOCK_LEN),
+                BLOCK_LEN as u8,
+                self.chunk_counter,
+                block_flags,
+            );
             self.blocks_compressed += 1;
             input = &input[BLOCK_LEN..];
         }

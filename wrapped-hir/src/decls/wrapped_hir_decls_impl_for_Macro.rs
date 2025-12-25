@@ -2,7 +2,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 impl Macro {
     pub fn module(self, db: &dyn HirDatabase) -> Module {
-        Module { id: self.id.module(db) }
+        Module {
+            id: self.id.module(db),
+        }
     }
     pub fn name(self, db: &dyn HirDatabase) -> Name {
         match self.id {
@@ -20,17 +22,11 @@ impl Macro {
                 let loc = id.lookup(db);
                 let source = loc.source(db);
                 match loc.kind {
-                    ProcMacroKind::CustomDerive => {
-                        db.attrs(id.into())
-                            .parse_proc_macro_derive()
-                            .map_or_else(
-                                || as_name_opt(source.value.name()),
-                                |(it, _)| it,
-                            )
-                    }
-                    ProcMacroKind::Bang | ProcMacroKind::Attr => {
-                        as_name_opt(source.value.name())
-                    }
+                    ProcMacroKind::CustomDerive => db
+                        .attrs(id.into())
+                        .parse_proc_macro_derive()
+                        .map_or_else(|| as_name_opt(source.value.name()), |(it, _)| it),
+                    ProcMacroKind::Bang | ProcMacroKind::Attr => as_name_opt(source.value.name()),
                 }
             }
         }
@@ -46,39 +42,33 @@ impl Macro {
     }
     pub fn kind(&self, db: &dyn HirDatabase) -> MacroKind {
         match self.id {
-            MacroId::Macro2Id(it) => {
-                match it.lookup(db).expander {
-                    MacroExpander::Declarative => MacroKind::Declarative,
-                    MacroExpander::BuiltIn(_) | MacroExpander::BuiltInEager(_) => {
-                        MacroKind::DeclarativeBuiltIn
-                    }
-                    MacroExpander::BuiltInAttr(_) => MacroKind::AttrBuiltIn,
-                    MacroExpander::BuiltInDerive(_) => MacroKind::DeriveBuiltIn,
+            MacroId::Macro2Id(it) => match it.lookup(db).expander {
+                MacroExpander::Declarative => MacroKind::Declarative,
+                MacroExpander::BuiltIn(_) | MacroExpander::BuiltInEager(_) => {
+                    MacroKind::DeclarativeBuiltIn
                 }
-            }
-            MacroId::MacroRulesId(it) => {
-                match it.lookup(db).expander {
-                    MacroExpander::Declarative => MacroKind::Declarative,
-                    MacroExpander::BuiltIn(_) | MacroExpander::BuiltInEager(_) => {
-                        MacroKind::DeclarativeBuiltIn
-                    }
-                    MacroExpander::BuiltInAttr(_) => MacroKind::AttrBuiltIn,
-                    MacroExpander::BuiltInDerive(_) => MacroKind::DeriveBuiltIn,
+                MacroExpander::BuiltInAttr(_) => MacroKind::AttrBuiltIn,
+                MacroExpander::BuiltInDerive(_) => MacroKind::DeriveBuiltIn,
+            },
+            MacroId::MacroRulesId(it) => match it.lookup(db).expander {
+                MacroExpander::Declarative => MacroKind::Declarative,
+                MacroExpander::BuiltIn(_) | MacroExpander::BuiltInEager(_) => {
+                    MacroKind::DeclarativeBuiltIn
                 }
-            }
-            MacroId::ProcMacroId(it) => {
-                match it.lookup(db).kind {
-                    ProcMacroKind::CustomDerive => MacroKind::Derive,
-                    ProcMacroKind::Bang => MacroKind::ProcMacro,
-                    ProcMacroKind::Attr => MacroKind::Attr,
-                }
-            }
+                MacroExpander::BuiltInAttr(_) => MacroKind::AttrBuiltIn,
+                MacroExpander::BuiltInDerive(_) => MacroKind::DeriveBuiltIn,
+            },
+            MacroId::ProcMacroId(it) => match it.lookup(db).kind {
+                ProcMacroKind::CustomDerive => MacroKind::Derive,
+                ProcMacroKind::Bang => MacroKind::ProcMacro,
+                ProcMacroKind::Attr => MacroKind::Attr,
+            },
         }
     }
     pub fn is_fn_like(&self, db: &dyn HirDatabase) -> bool {
         matches!(
-            self.kind(db), MacroKind::Declarative | MacroKind::DeclarativeBuiltIn |
-            MacroKind::ProcMacro
+            self.kind(db),
+            MacroKind::Declarative | MacroKind::DeclarativeBuiltIn | MacroKind::ProcMacro
         )
     }
     pub fn is_builtin_derive(&self, db: &dyn HirDatabase) -> bool {

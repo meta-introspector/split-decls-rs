@@ -15,12 +15,8 @@ impl ModuleDef {
             ModuleDef::BuiltinType(_) => None,
         }
     }
-    pub fn canonical_path(
-        &self,
-        db: &dyn HirDatabase,
-        edition: Edition,
-    ) -> Option<String> {
-        let mut segments = vec![self.name(db) ?];
+    pub fn canonical_path(&self, db: &dyn HirDatabase, edition: Edition) -> Option<String> {
+        let mut segments = vec![self.name(db)?];
         for m in self.module(db)?.path_to_root(db) {
             segments.extend(m.name(db))
         }
@@ -31,7 +27,8 @@ impl ModuleDef {
         &self,
         db: &dyn HirDatabase,
     ) -> Option<impl Iterator<Item = Module>> {
-        self.module(db).map(|it| it.path_to_root(db).into_iter().rev())
+        self.module(db)
+            .map(|it| it.path_to_root(db).into_iter().rev())
     }
     pub fn name(self, db: &dyn HirDatabase) -> Option<Name> {
         let name = match self {
@@ -54,13 +51,11 @@ impl ModuleDef {
         style_lints: bool,
     ) -> Vec<AnyDiagnostic<'db>> {
         let id = match self {
-            ModuleDef::Adt(it) => {
-                match it {
-                    Adt::Struct(it) => it.id.into(),
-                    Adt::Enum(it) => it.id.into(),
-                    Adt::Union(it) => it.id.into(),
-                }
-            }
+            ModuleDef::Adt(it) => match it {
+                Adt::Struct(it) => it.id.into(),
+                Adt::Enum(it) => it.id.into(),
+                Adt::Union(it) => it.id.into(),
+            },
             ModuleDef::Trait(it) => it.id.into(),
             ModuleDef::Function(it) => it.id.into(),
             ModuleDef::TypeAlias(it) => it.id.into(),
@@ -116,19 +111,17 @@ impl ModuleDef {
         }
     }
     pub fn attrs(&self, db: &dyn HirDatabase) -> Option<AttrsWithOwner> {
-        Some(
-            match self {
-                ModuleDef::Module(it) => it.attrs(db),
-                ModuleDef::Function(it) => it.attrs(db),
-                ModuleDef::Adt(it) => it.attrs(db),
-                ModuleDef::Variant(it) => it.attrs(db),
-                ModuleDef::Const(it) => it.attrs(db),
-                ModuleDef::Static(it) => it.attrs(db),
-                ModuleDef::Trait(it) => it.attrs(db),
-                ModuleDef::TypeAlias(it) => it.attrs(db),
-                ModuleDef::Macro(it) => it.attrs(db),
-                ModuleDef::BuiltinType(_) => return None,
-            },
-        )
+        Some(match self {
+            ModuleDef::Module(it) => it.attrs(db),
+            ModuleDef::Function(it) => it.attrs(db),
+            ModuleDef::Adt(it) => it.attrs(db),
+            ModuleDef::Variant(it) => it.attrs(db),
+            ModuleDef::Const(it) => it.attrs(db),
+            ModuleDef::Static(it) => it.attrs(db),
+            ModuleDef::Trait(it) => it.attrs(db),
+            ModuleDef::TypeAlias(it) => it.attrs(db),
+            ModuleDef::Macro(it) => it.attrs(db),
+            ModuleDef::BuiltinType(_) => return None,
+        })
     }
 }

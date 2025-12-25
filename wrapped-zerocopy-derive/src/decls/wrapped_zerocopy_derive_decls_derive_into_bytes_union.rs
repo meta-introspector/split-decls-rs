@@ -21,27 +21,26 @@ please let us know you use this feature: https://github.com/google/zerocopy/disc
         )
     };
     if !ast.generics.params.is_empty() {
-        return Err(
-            Error::new(Span::call_site(), "unsupported on types with type parameters"),
-        );
+        return Err(Error::new(
+            Span::call_site(),
+            "unsupported on types with type parameters",
+        ));
     }
     let repr = StructUnionRepr::from_attrs(&ast.attrs)?;
     if !repr.is_c() && !repr.is_transparent() && !repr.is_packed_1() {
-        return Err(
-            Error::new(
-                Span::call_site(),
-                "must be #[repr(C)], #[repr(packed)], or #[repr(transparent)]",
-            ),
-        );
+        return Err(Error::new(
+            Span::call_site(),
+            "must be #[repr(C)], #[repr(packed)], or #[repr(transparent)]",
+        ));
     }
     let impl_block = ImplBlockBuilder::new(
-            ast,
-            unn,
-            Trait::IntoBytes,
-            FieldBounds::ALL_SELF,
-            zerocopy_crate,
-        )
-        .padding_check(PaddingCheck::Union)
-        .build();
+        ast,
+        unn,
+        Trait::IntoBytes,
+        FieldBounds::ALL_SELF,
+        zerocopy_crate,
+    )
+    .padding_check(PaddingCheck::Union)
+    .build();
     Ok(quote!(# cfg_compile_error # impl_block))
 }

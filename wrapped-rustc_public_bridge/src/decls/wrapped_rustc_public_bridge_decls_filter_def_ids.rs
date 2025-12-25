@@ -6,7 +6,9 @@ where
     F: FnMut(DefId) -> Option<T>,
 {
     if krate == LOCAL_CRATE {
-        tcx.iter_local_def_id().filter_map(|did| func(did.to_def_id())).collect()
+        tcx.iter_local_def_id()
+            .filter_map(|did| func(did.to_def_id()))
+            .collect()
     } else {
         let num_definitions = tcx.num_extern_def_ids(krate);
         (0..num_definitions)

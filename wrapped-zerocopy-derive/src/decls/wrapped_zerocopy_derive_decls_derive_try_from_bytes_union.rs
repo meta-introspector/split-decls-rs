@@ -8,11 +8,10 @@ fn derive_try_from_bytes_union(
     top_level: Trait,
     zerocopy_crate: &Path,
 ) -> TokenStream {
-    let field_type_trait_bounds = FieldBounds::All(
-        &[TraitBound::Slf, TraitBound::Other(Trait::Immutable)],
-    );
-    let extras = try_gen_trivial_is_bit_valid(ast, top_level, zerocopy_crate)
-        .unwrap_or_else(|| {
+    let field_type_trait_bounds =
+        FieldBounds::All(&[TraitBound::Slf, TraitBound::Other(Trait::Immutable)]);
+    let extras =
+        try_gen_trivial_is_bit_valid(ast, top_level, zerocopy_crate).unwrap_or_else(|| {
             let fields = unn.fields();
             let field_names = fields.iter().map(|(_vis, name, _ty)| name);
             let field_tys = fields.iter().map(|(_vis, _name, ty)| ty);
@@ -33,12 +32,12 @@ fn derive_try_from_bytes_union(
             )
         });
     ImplBlockBuilder::new(
-            ast,
-            unn,
-            Trait::TryFromBytes,
-            field_type_trait_bounds,
-            zerocopy_crate,
-        )
-        .inner_extras(extras)
-        .build()
+        ast,
+        unn,
+        Trait::TryFromBytes,
+        field_type_trait_bounds,
+        zerocopy_crate,
+    )
+    .inner_extras(extras)
+    .build()
 }

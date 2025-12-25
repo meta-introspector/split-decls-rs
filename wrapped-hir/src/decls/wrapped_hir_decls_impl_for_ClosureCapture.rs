@@ -22,14 +22,12 @@ impl<'db> ClosureCapture<'db> {
             hir_ty::CaptureKind::ByRef(
                 hir_ty::mir::BorrowKind::Shallow | hir_ty::mir::BorrowKind::Shared,
             ) => CaptureKind::SharedRef,
-            hir_ty::CaptureKind::ByRef(
-                hir_ty::mir::BorrowKind::Mut { kind: MutBorrowKind::ClosureCapture },
-            ) => CaptureKind::UniqueSharedRef,
-            hir_ty::CaptureKind::ByRef(
-                hir_ty::mir::BorrowKind::Mut {
-                    kind: MutBorrowKind::Default | MutBorrowKind::TwoPhasedBorrow,
-                },
-            ) => CaptureKind::MutableRef,
+            hir_ty::CaptureKind::ByRef(hir_ty::mir::BorrowKind::Mut {
+                kind: MutBorrowKind::ClosureCapture,
+            }) => CaptureKind::UniqueSharedRef,
+            hir_ty::CaptureKind::ByRef(hir_ty::mir::BorrowKind::Mut {
+                kind: MutBorrowKind::Default | MutBorrowKind::TwoPhasedBorrow,
+            }) => CaptureKind::MutableRef,
             hir_ty::CaptureKind::ByValue => CaptureKind::Move,
         }
     }

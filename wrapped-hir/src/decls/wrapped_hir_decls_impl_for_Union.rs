@@ -30,7 +30,10 @@ impl Union {
             .fields(db)
             .fields()
             .iter()
-            .map(|(id, _)| Field { parent: self.into(), id })
+            .map(|(id, _)| Field {
+                parent: self.into(),
+                id,
+            })
             .collect()
     }
     pub fn is_unstable(self, db: &dyn HirDatabase) -> bool {

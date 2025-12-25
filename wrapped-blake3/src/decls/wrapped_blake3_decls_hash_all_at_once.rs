@@ -3,7 +3,9 @@ use std::collections::HashMap;
 fn hash_all_at_once<J: join::Join>(input: &[u8], key: &CVWords, flags: u8) -> Output {
     let platform = Platform::detect();
     if input.len() <= CHUNK_LEN {
-        return ChunkState::new(key, 0, flags, platform).update(input).output();
+        return ChunkState::new(key, 0, flags, platform)
+            .update(input)
+            .output();
     }
     Output {
         input_chaining_value: *key,

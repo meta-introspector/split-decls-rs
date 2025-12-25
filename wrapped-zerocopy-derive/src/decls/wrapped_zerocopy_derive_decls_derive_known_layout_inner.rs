@@ -8,7 +8,11 @@ fn derive_known_layout_inner(
     let is_repr_c_struct = match &ast.data {
         Data::Struct(..) => {
             let repr = StructUnionRepr::from_attrs(&ast.attrs)?;
-            if repr.is_c() { Some(repr) } else { None }
+            if repr.is_c() {
+                Some(repr)
+            } else {
+                None
+            }
         }
         Data::Enum(..) | Data::Union(..) => None,
     };
@@ -16,7 +20,8 @@ fn derive_known_layout_inner(
     let (self_bounds, inner_extras, outer_extras) = if let (
         Some(repr),
         Some((trailing_field, leading_fields)),
-    ) = (is_repr_c_struct, fields.split_last()) {
+    ) = (is_repr_c_struct, fields.split_last())
+    {
         let (_vis, trailing_field_name, trailing_field_ty) = trailing_field;
         let leading_fields_tys = leading_fields.iter().map(|(_vis, _name, ty)| ty);
         let core_path = quote!(# zerocopy_crate::util::macro_util::core_reexport);
@@ -69,40 +74,30 @@ fn derive_known_layout_inner(
             let ident = &ast.ident;
             let vis = &ast.vis;
             let params = &ast.generics.params;
-            let (impl_generics, ty_generics, where_clause) = ast
-                .generics
-                .split_for_impl();
+            let (impl_generics, ty_generics, where_clause) = ast.generics.split_for_impl();
             let predicates = if let Some(where_clause) = where_clause {
                 where_clause.predicates.clone()
             } else {
                 Default::default()
             };
-            let field_index = |name| Ident::new(
-                &format!("__Zerocopy_Field_{}", name),
-                ident.span(),
-            );
+            let field_index =
+                |name| Ident::new(&format!("__Zerocopy_Field_{}", name), ident.span());
             let field_indices: Vec<_> = fields
                 .iter()
                 .map(|(_vis, name, _ty)| field_index(name))
                 .collect();
-            let field_defs = field_indices
-                .iter()
-                .zip(&fields)
-                .map(|(idx, (vis, _, _))| {
-                    quote! {
-                        #[allow(non_camel_case_types)] # vis struct # idx;
-                    }
-                });
-            let field_impls = field_indices
-                .iter()
-                .zip(&fields)
-                .map(|(idx, (_, _, ty))| {
-                    quote! {
-                        unsafe impl # impl_generics #
-                        zerocopy_crate::util::macro_util::Field <# idx > for # ident #
-                        ty_generics where # predicates { type Type = # ty; }
-                    }
-                });
+            let field_defs = field_indices.iter().zip(&fields).map(|(idx, (vis, _, _))| {
+                quote! {
+                    #[allow(non_camel_case_types)] # vis struct # idx;
+                }
+            });
+            let field_impls = field_indices.iter().zip(&fields).map(|(idx, (_, _, ty))| {
+                quote! {
+                    unsafe impl # impl_generics #
+                    zerocopy_crate::util::macro_util::Field <# idx > for # ident #
+                    ty_generics where # predicates { type Type = # ty; }
+                }
+            });
             let trailing_field_index = field_index(trailing_field_name);
             let leading_field_indices = leading_fields
                 .iter()
@@ -111,11 +106,9 @@ fn derive_known_layout_inner(
                 <# ident # ty_generics as # zerocopy_crate::util::macro_util::Field <#
                 trailing_field_index > >::Type
             };
-            let methods = make_methods(
-                &parse_quote! {
-                    <# trailing_field_ty as # zerocopy_crate::KnownLayout >::MaybeUninit
-                },
-            );
+            let methods = make_methods(&parse_quote! {
+                <# trailing_field_ty as # zerocopy_crate::KnownLayout >::MaybeUninit
+            });
             quote! {
                 # (# field_defs) * # (# field_impls) * # repr #[doc(hidden)]
                 #[allow(private_bounds)] # vis struct __ZerocopyKnownLayoutMaybeUninit <#
@@ -156,54 +149,46 @@ fn derive_known_layout_inner(
             None,
         )
     };
-    Ok(
-        match &ast.data {
-            Data::Struct(strct) => {
-                let require_trait_bound_on_field_types = if self_bounds
-                    == SelfBounds::SIZED
-                {
-                    FieldBounds::None
-                } else {
-                    FieldBounds::TRAILING_SELF
-                };
-                ImplBlockBuilder::new(
-                        ast,
-                        strct,
-                        Trait::KnownLayout,
-                        require_trait_bound_on_field_types,
-                        zerocopy_crate,
-                    )
-                    .self_type_trait_bounds(self_bounds)
-                    .inner_extras(inner_extras)
-                    .outer_extras(outer_extras)
-                    .build()
-            }
-            Data::Enum(enm) => {
-                ImplBlockBuilder::new(
-                        ast,
-                        enm,
-                        Trait::KnownLayout,
-                        FieldBounds::None,
-                        zerocopy_crate,
-                    )
-                    .self_type_trait_bounds(SelfBounds::SIZED)
-                    .inner_extras(inner_extras)
-                    .outer_extras(outer_extras)
-                    .build()
-            }
-            Data::Union(unn) => {
-                ImplBlockBuilder::new(
-                        ast,
-                        unn,
-                        Trait::KnownLayout,
-                        FieldBounds::None,
-                        zerocopy_crate,
-                    )
-                    .self_type_trait_bounds(SelfBounds::SIZED)
-                    .inner_extras(inner_extras)
-                    .outer_extras(outer_extras)
-                    .build()
-            }
-        },
-    )
+    Ok(match &ast.data {
+        Data::Struct(strct) => {
+            let require_trait_bound_on_field_types = if self_bounds == SelfBounds::SIZED {
+                FieldBounds::None
+            } else {
+                FieldBounds::TRAILING_SELF
+            };
+            ImplBlockBuilder::new(
+                ast,
+                strct,
+                Trait::KnownLayout,
+                require_trait_bound_on_field_types,
+                zerocopy_crate,
+            )
+            .self_type_trait_bounds(self_bounds)
+            .inner_extras(inner_extras)
+            .outer_extras(outer_extras)
+            .build()
+        }
+        Data::Enum(enm) => ImplBlockBuilder::new(
+            ast,
+            enm,
+            Trait::KnownLayout,
+            FieldBounds::None,
+            zerocopy_crate,
+        )
+        .self_type_trait_bounds(SelfBounds::SIZED)
+        .inner_extras(inner_extras)
+        .outer_extras(outer_extras)
+        .build(),
+        Data::Union(unn) => ImplBlockBuilder::new(
+            ast,
+            unn,
+            Trait::KnownLayout,
+            FieldBounds::None,
+            zerocopy_crate,
+        )
+        .self_type_trait_bounds(SelfBounds::SIZED)
+        .inner_extras(inner_extras)
+        .outer_extras(outer_extras)
+        .build(),
+    })
 }

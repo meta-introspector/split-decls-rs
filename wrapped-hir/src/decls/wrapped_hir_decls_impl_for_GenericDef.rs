@@ -3,20 +3,18 @@ use std::collections::HashMap;
 impl GenericDef {
     pub fn params(self, db: &dyn HirDatabase) -> Vec<GenericParam> {
         let generics = db.generic_params(self.into());
-        let ty_params = generics
-            .iter_type_or_consts()
-            .map(|(local_id, _)| {
-                let toc = TypeOrConstParam {
-                    id: TypeOrConstParamId {
-                        parent: self.into(),
-                        local_id,
-                    },
-                };
-                match toc.split(db) {
-                    Either::Left(it) => GenericParam::ConstParam(it),
-                    Either::Right(it) => GenericParam::TypeParam(it),
-                }
-            });
+        let ty_params = generics.iter_type_or_consts().map(|(local_id, _)| {
+            let toc = TypeOrConstParam {
+                id: TypeOrConstParamId {
+                    parent: self.into(),
+                    local_id,
+                },
+            };
+            match toc.split(db) {
+                Either::Left(it) => GenericParam::ConstParam(it),
+                Either::Right(it) => GenericParam::TypeParam(it),
+            }
+        });
         self.lifetime_params(db)
             .into_iter()
             .map(GenericParam::LifetimeParam)
@@ -58,34 +56,22 @@ impl GenericDef {
             GenericDef::Static(it) => it.id.into(),
         }
     }
-    pub fn diagnostics<'db>(
-        self,
-        db: &'db dyn HirDatabase,
-        acc: &mut Vec<AnyDiagnostic<'db>>,
-    ) {
+    pub fn diagnostics<'db>(self, db: &'db dyn HirDatabase, acc: &mut Vec<AnyDiagnostic<'db>>) {
         let def = self.id();
         let generics = db.generic_params(def);
         if generics.is_empty() && generics.has_no_predicates() {
             return;
         }
         let source_map = match def {
-            GenericDefId::AdtId(AdtId::EnumId(it)) => {
-                db.enum_signature_with_source_map(it).1
-            }
-            GenericDefId::AdtId(AdtId::StructId(it)) => {
-                db.struct_signature_with_source_map(it).1
-            }
-            GenericDefId::AdtId(AdtId::UnionId(it)) => {
-                db.union_signature_with_source_map(it).1
-            }
+            GenericDefId::AdtId(AdtId::EnumId(it)) => db.enum_signature_with_source_map(it).1,
+            GenericDefId::AdtId(AdtId::StructId(it)) => db.struct_signature_with_source_map(it).1,
+            GenericDefId::AdtId(AdtId::UnionId(it)) => db.union_signature_with_source_map(it).1,
             GenericDefId::ConstId(_) => return,
             GenericDefId::FunctionId(it) => db.function_signature_with_source_map(it).1,
             GenericDefId::ImplId(it) => db.impl_signature_with_source_map(it).1,
             GenericDefId::StaticId(_) => return,
             GenericDefId::TraitId(it) => db.trait_signature_with_source_map(it).1,
-            GenericDefId::TypeAliasId(it) => {
-                db.type_alias_signature_with_source_map(it).1
-            }
+            GenericDefId::TypeAliasId(it) => db.type_alias_signature_with_source_map(it).1,
         };
         expr_store_diagnostics(db, acc, &source_map);
         push_ty_diagnostics(
@@ -105,14 +91,13 @@ impl GenericDef {
                 push_ty_diagnostics(
                     db,
                     acc,
-                    db
-                        .const_param_ty_with_diagnostics(
-                            ConstParamId::from_unchecked(TypeOrConstParamId {
-                                parent: def,
-                                local_id: param_id,
-                            }),
-                        )
-                        .1,
+                    db.const_param_ty_with_diagnostics(ConstParamId::from_unchecked(
+                        TypeOrConstParamId {
+                            parent: def,
+                            local_id: param_id,
+                        },
+                    ))
+                    .1,
                     &source_map,
                 );
             }

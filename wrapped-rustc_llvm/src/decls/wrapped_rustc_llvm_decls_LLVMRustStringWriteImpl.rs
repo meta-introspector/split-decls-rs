@@ -12,5 +12,8 @@ pub unsafe extern "C" fn LLVMRustStringWriteImpl(
     slice_len: size_t,
 ) {
     let slice = unsafe { slice::from_raw_parts(slice_ptr, slice_len) };
-    RustStringInner::from_opaque(buf).bytes.borrow_mut().extend_from_slice(slice);
+    RustStringInner::from_opaque(buf)
+        .bytes
+        .borrow_mut()
+        .extend_from_slice(slice);
 }

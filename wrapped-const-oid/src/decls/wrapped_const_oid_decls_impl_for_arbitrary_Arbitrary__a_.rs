@@ -9,7 +9,9 @@ impl<'a> arbitrary::Arbitrary<'a> for ObjectIdentifier {
         let mut oid = Self::from_arcs([first, second, third])
             .map_err(|_| arbitrary::Error::IncorrectFormat)?;
         for arc in u.arbitrary_iter()? {
-            oid = oid.push_arc(arc?).map_err(|_| arbitrary::Error::IncorrectFormat)?;
+            oid = oid
+                .push_arc(arc?)
+                .map_err(|_| arbitrary::Error::IncorrectFormat)?;
         }
         Ok(oid)
     }

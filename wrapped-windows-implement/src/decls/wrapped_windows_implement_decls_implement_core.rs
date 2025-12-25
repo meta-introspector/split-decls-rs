@@ -11,7 +11,7 @@ fn implement_core(
         interface_chains: convert_implements_to_interface_chains(attributes.implement),
         trust_level: attributes.trust_level,
         agile: attributes.agile,
-        impl_ident: quote::format_ident!("{}_Impl", & original_type.ident),
+        impl_ident: quote::format_ident!("{}_Impl", &original_type.ident),
         constraints: {
             if let Some(where_clause) = &original_type.generics.where_clause {
                 where_clause.predicates.to_token_stream()

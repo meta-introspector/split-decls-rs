@@ -5,11 +5,11 @@ impl ProcMacroClient {
     pub fn spawn<'a>(
         process_path: &AbsPath,
         env: impl IntoIterator<
-            Item = (
-                impl AsRef<std::ffi::OsStr>,
-                &'a Option<impl 'a + AsRef<std::ffi::OsStr>>,
-            ),
-        > + Clone,
+                Item = (
+                    impl AsRef<std::ffi::OsStr>,
+                    &'a Option<impl 'a + AsRef<std::ffi::OsStr>>,
+                ),
+            > + Clone,
     ) -> io::Result<ProcMacroClient> {
         let process = ProcMacroServerProcess::run(process_path, env)?;
         Ok(ProcMacroClient {
@@ -30,20 +30,16 @@ impl ProcMacroClient {
             .ok()
             .and_then(|metadata| metadata.modified().ok());
         match macros {
-            Ok(macros) => {
-                Ok(
-                    macros
-                        .into_iter()
-                        .map(|(name, kind)| ProcMacro {
-                            process: self.process.clone(),
-                            name: name.into(),
-                            kind,
-                            dylib_path: dylib_path.clone(),
-                            dylib_last_modified,
-                        })
-                        .collect(),
-                )
-            }
+            Ok(macros) => Ok(macros
+                .into_iter()
+                .map(|(name, kind)| ProcMacro {
+                    process: self.process.clone(),
+                    name: name.into(),
+                    kind,
+                    dylib_path: dylib_path.clone(),
+                    dylib_last_modified,
+                })
+                .collect()),
             Err(message) => Err(ServerError { message, io: None }),
         }
     }
