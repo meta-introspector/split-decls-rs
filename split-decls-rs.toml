@@ -1416,3 +1416,6 @@ version = "1.18.0"
 [workspace_dependency_overrides.syn]
 features = ["full"]
 version = "2.0"
+
+[workspace_dependency_overrides.fallible-iterator]
+version = "0.3.0"
