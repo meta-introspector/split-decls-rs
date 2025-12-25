@@ -10,7 +10,7 @@ use crate::extract_crate_info_simple::extract_crate_info_simple; // Assuming the
 use crate::patch_config;
 use split_decls_types::SplitDeclsConfig;
 use crate::generate_wrapped_crate;
-use super::utils::collect_and_format_workspace_dependencies; // Use the new helper
+use super::utils::{collect_and_format_workspace_dependencies, format_toml_value_for_dependency_string}; // Use the new helper
 
 
 pub fn handle_multi_crate_wrapping(
@@ -33,7 +33,7 @@ pub fn handle_multi_crate_wrapping(
     )?;
     for (dep_name, dep_value) in consolidated_workspace_deps_map.iter() {
         workspace_dependencies_content_str.push_str(&format!("{} = {}
-", dep_name, dep_value.to_string()));
+", dep_name, format_toml_value_for_dependency_string(dep_value)));
     }
 
     use rayon::prelude::*;
@@ -101,6 +101,7 @@ pub fn handle_multi_crate_wrapping(
         all_collected_errors.extend(errors); // Aggregate errors
     }
     
+    eprintln!("DEBUG: workspace_dependencies_content_str:\n{}", workspace_dependencies_content_str);
     // Construct final workspace Cargo.toml content
     final_cargo_toml_content = format!(
         r#"[workspace]

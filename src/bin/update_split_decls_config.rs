@@ -85,6 +85,8 @@ struct SplitDeclsConfig {
     #[serde(default)]
     crate_path_overrides: HashMap<String, String>, // Changed from PathBuf for simpler TOML serialization
     pub explicit_crate_path_mappings: Option<HashMap<String, String>>, // Corrected to Option
+    #[serde(default)]
+    pub workspace_dependency_overrides: Option<HashMap<String, Value>>,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
