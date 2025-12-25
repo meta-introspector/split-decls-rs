@@ -71,8 +71,7 @@ use std::env;
 use std::path::{Path, PathBuf};
 use toml::{self, Table, Value};
 use serde::{Deserialize, Serialize};
-use cargo_metadata_lib::get_cargo_tree_data;
-use cargo_metadata_lib::CrateInfo;
+use cargo_lock_import::import_cargo_lock;
 
 
 // --- Structs for SplitDeclsConfig (from split-decls-types/src/lib.rs) ---
@@ -115,8 +114,9 @@ fn main() -> Result<()> {
     let split_decls_rs_root = env::current_dir()?;
     let cargo2nix_root = split_decls_rs_root.parent().context("Failed to get parent of split-decls-rs")?.parent().context("Failed to get cargo2nix root")?;
 
-    // Use cargo-tree-macro to get dependency information
-    for crate_info in get_cargo_tree_data() {
+    // Use cargo-lock import to get dependency information
+    let cargo_lock_data = import_cargo_lock!("../../../Cargo.lock");
+    for crate_info in cargo_lock_data {
         existing_crates_to_wrap.insert(crate_info.name.to_string());
 
         let crate_path = Path::new(crate_info.path);
@@ -124,7 +124,15 @@ fn main() -> Result<()> {
             crate_path.to_path_buf()
         } else {
             // Resolve all paths relative to the cargo2nix root
-            cargo2nix_root.join(crate_path).canonicalize()?
+            let candidate_path = cargo2nix_root.join(crate_path);
+            match candidate_path.canonicalize() {
+                Ok(path) => path,
+                Err(_) => {
+                    // If canonicalize fails, just use the joined path
+                    // This handles cases where the path doesn't exist yet
+                    candidate_path
+                }
+            }
         };
         // println!("DEBUG: Crate: {}, Original Path: {}, Absolute Path: {}", crate_info.name, crate_info.path, absolute_crate_path.display());
         existing_path_overrides.insert(crate_info.name.to_string(), absolute_crate_path.to_string_lossy().into_owned());

@@ -128,6 +128,89 @@ let report = llm! {
 
 
 
+## How to Contribute
+
+We're actively seeking contributors to help complete Step 1 of the split-decls-rs overlay system! Here's how you can help:
+
+### 🚀 Current Priority: Phase 2 - Iterative Single Module Fixing
+
+**What we need:** Help fixing problematic crates that fail during bootstrap processing.
+
+**Current Focus:** Resolving `alloc` feature flag and extern crate handling issues that affect multiple crates.
+
+**Skills needed:** 
+- Basic Rust knowledge
+- Understanding of feature flags and conditional compilation
+- Debugging compilation errors
+- Understanding dependency management
+
+**How to start:**
+1. Run bootstrap to identify problem crates: `make run_bootstrap`
+2. Use single crate wrapper to isolate issues: `cargo run --bin wrap_single_crate -- <crate_path> --verbose`
+3. Fix issues by updating `split-decls-rs.toml` with patches or string replacements
+4. Test your fixes and submit PRs
+
+### 📋 Specific Tasks Needing Help
+
+**Immediate (T1-T3):**
+- ✅ Analyze `bootstrap_run.log` to categorize compilation errors
+- 🔄 Fix `alloc` feature flag and extern crate handling in AST processing
+- ⏳ Resolve edition compatibility issues
+- ⏳ Address syntax errors in wrapped code
+
+**Short-term (T4-T6):**
+- Complete iterative fixing of all problematic crates
+- Validate full bootstrap runs cleanly
+- Test workspace-level compilation
+
+**Medium-term (T7-T9):**
+- Prepare recursive generation (output2 → output3)
+- Achieve Step 1 completion milestone
+
+### 🔧 Current Issue: `alloc` Feature Flag Handling
+
+**Problem**: The split-decls-rs tool encounters `extern crate alloc` declarations and `alloc` feature flags that it cannot properly handle, causing warnings like:
+- `Skipping unsupported item type: # [cfg (feature = "alloc")] extern crate alloc ;`
+
+**Root Cause**: AST processing skips feature-gated extern crate declarations
+
+**Solution Needed**: Update AST processing in `src/lib.rs` to:
+1. Handle `extern crate` declarations properly
+2. Preserve feature-gated statements in generated code
+3. Test with crates that use `alloc` features (hashbrown, nom, etc.)
+
+### 🛠️ Contribution Workflow
+
+1. **Fork and clone** the repository
+2. **Run initial bootstrap** to see current state: `make run_bootstrap 2>&1 | tee bootstrap_run.log`
+3. **Pick a problematic crate** from the logs
+4. **Use single crate processing** to debug: `cargo run --bin wrap_single_crate -- <crate> --verbose`
+5. **Create fixes** in `split-decls-rs.toml` (patches, string replacements, prelude modifications)
+6. **Test your fix** works in isolation
+7. **Submit PR** with your fix and test results
+
+### 📚 Learning Resources
+
+- Read [beginners_readme.md](beginners_readme.md) for tool usage
+- Check [plan/goal25.toml](plan/goal25.toml) for the complete development workflow
+- Review [plan/task_current.toml](plan/task_current.toml) for current priorities
+- See [QA_REPORT.md](QA_REPORT.md) and [ECOSYSTEM_TRANSFORMATION.md](ECOSYSTEM_TRANSFORMATION.md) for project status
+
+### 🎯 Success Metrics
+
+We're aiming for:
+- **100% bootstrap success rate** (all crates compile)
+- **Fast iteration cycles** (<10 min per crate fix)
+- **Recursive generation capability** (output2 generates output3)
+
+### 💬 Getting Help
+
+- Open issues for questions about specific crates
+- Check existing issues for known problems
+- Review the `plan/` directory for context and goals
+
+**Ready to contribute?** Start with `make run_bootstrap` and help us achieve the self-generating overlay system!
+
 ## Testing 
 
 ```

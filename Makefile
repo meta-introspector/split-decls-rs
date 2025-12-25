@@ -2,7 +2,7 @@ SCCACHE := $(HOME)/.cargo/bin/sccache
 # Use RUSTC_WRAPPER for sccache
 CARGO := cargo
 
-.PHONY: all build_core run_bootstrap build_output_module clean_output2 check_build_errors check_bootstrap_errors debug-main bootstrap_only check_bootstrap_only
+.PHONY: all build_core run_bootstrap build_output_module clean_output2 check_build_errors check_bootstrap_errors debug-main bootstrap_only check_bootstrap_only run_single_crate
 
 all: debug-main run_bootstrap check_bootstrap_errors build_output_module
 
@@ -16,6 +16,13 @@ check_build_errors:
 
 run_bootstrap:
 	@echo "Running bootstrap..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full $(CARGO) run --bin split-decls-rs -- bootstrap > bootstrap_run.log 2>&1
+
+run_single_crate:
+	@if [ -z "$(CRATE)" ]; then echo "Usage: make run_single_crate CRATE=<crate_name>"; exit 1; fi
+	@echo "Running single crate wrapper on $(CRATE)..." && RUSTC_WRAPPER=$(SCCACHE) $(CARGO) run --bin wrap_single_crate -- $(CRATE) --verbose > single_crate_run.log 2>&1
+	@echo "Single crate run completed. Check single_crate_run.log for details."
+	@echo "Key results:"
+	@grep -E "Processing crate|Generated|Error|Warning" single_crate_run.log || echo "No key results found"
 
 
 check_bootstrap_errors:

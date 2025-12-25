@@ -4,7 +4,52 @@
                                                                                                                                               
 Split-Decls-RS is a tool that helps you modify Rust code from other projects without changing the original files. Think of it like putting a t
 ransparent overlay on a map - you can draw on the overlay without damaging the original map underneath.                                       
-                                                                                                                                              
+## 🚀 Want to Help? Start Here!
+
+**We need your help to fix problematic crates!** This is a great way to learn Rust and contribute to an innovative project.
+
+### Quick Contribution Start (10 minutes)
+
+1. **Clone and build:**
+```bash
+git clone <repo-url>
+cd split-decls-rs
+cargo build --release
+```
+
+2. **See what needs fixing:**
+```bash
+make run_bootstrap 2>&1 | tee bootstrap_run.log
+# Look for compilation errors in the log
+```
+
+3. **Fix a single crate:**
+```bash
+# Pick a failing crate from the log
+cargo run --bin wrap_single_crate -- <crate_path> --verbose
+# This will show you exactly what's wrong
+```
+
+4. **Apply your fix:**
+Edit `split-decls-rs.toml` to add string replacements or patches, then test:
+```bash
+cargo run --bin wrap_single_crate -- <crate_path> --verbose
+```
+
+### What Kind of Help We Need
+
+- **Fix compilation errors** (missing dependencies, syntax issues)
+- **Update edition compatibility** (2021 → 2024)
+- **Resolve dependency conflicts**
+- **Test and validate fixes**
+
+**No advanced Rust knowledge required!** Most fixes are simple text replacements or dependency additions.
+
+### Current Development Phase
+
+We're in **Phase 2: Iterative Single Module Fixing** - the core development loop where individual problematic crates are isolated, fixed, and tested. See [plan/task_current.toml](plan/task_current.toml) for detailed tasks.
+
+**Goal:** Get all crates compiling so we can achieve recursive generation (output2 → output3) and complete Step 1 of the overlay system.                                                                                                                                              
 ## Quick Start (5 Minutes)                                                                                                                    
                                                                                                                                               
 ### Step 1: Build the Tool                                                                                                                    

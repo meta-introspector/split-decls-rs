@@ -65,7 +65,7 @@ chrono = { workspace = true }
 lazy_static.workspace = true
 pathdiff = { workspace = true }
 hex = "0.4"
-cargo-metadata-lib = { path = "cargo-metadata-lib" }
+cargo-lock-import = { path = "cargo-lock-import" }
 prettyplease = { workspace = true }
 log = { workspace = true }
 env_logger = { workspace = true }

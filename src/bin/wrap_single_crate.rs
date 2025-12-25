@@ -15,7 +15,7 @@ struct Args {
     /// Path to the crate directory (containing Cargo.toml)
     crate_path: PathBuf,
 
-    /// Output directory (optional, defaults to ./output)
+    /// Output directory (optional, defaults to ./output2)
     #[clap(short, long)]
     output: Option<PathBuf>,
 
@@ -27,7 +27,7 @@ struct Args {
 fn main() -> Result<()> {
     let args = Args::parse();
     
-    let output_dir = args.output.unwrap_or_else(|| PathBuf::from("output"));
+    let output_dir = args.output.unwrap_or_else(|| PathBuf::from("output2"));
     
     // Extract crate name from Cargo.toml
     let cargo_toml_path = args.crate_path.join("Cargo.toml");

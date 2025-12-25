@@ -59,7 +59,10 @@ pub fn generate_new_cargotoml(
 
     for (dep_name, version, features) in essential_build_deps {
         let mut dep_table_value = toml::Table::new();
-        dep_table_value.insert("version".to_string(), toml::Value::String(version.to_string()));
+        
+        // Always use workspace = true for all build dependencies
+        dep_table_value.insert("workspace".to_string(), toml::Value::Boolean(true));
+        
         if let Some(feats) = features {
             let features_array = toml::Value::Array(
                 feats.into_iter().map(|f| toml::Value::String(f.to_string())).collect()
