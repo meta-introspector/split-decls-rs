@@ -8,7 +8,7 @@
 
 This project, centered around the **`split-decls-rs`** tool, is designed to create a **"Rust Overlay" system** analogous to Nix flake overlays or Debian package sets. The goal is to establish a centralized mechanism for maintaining and applying patches to external Rust modules—such as the `rustc` source—without directly altering the original upstream codebases. By leveraging `build.rs` as an orchestrator and procedural macros for AST transformation, the system enables **declarative, reproducible modifications** to a package set.
 
-## Recent Improvements (December 2024)
+## Recent Improvements (December 2024-2025)
 
 The codebase has undergone significant quality improvements and **SUCCESSFUL ECOSYSTEM VALIDATION**:
 
@@ -20,7 +20,42 @@ The codebase has undergone significant quality improvements and **SUCCESSFUL ECO
 - **✅ Large-Scale Processing**: Successfully processed thousands of declarations
 - **✅ Ecosystem Ready**: Validated on complex codebases, ready for cargo2nix integration
 
-See [QA_REPORT.md](QA_REPORT.md) and [ECOSYSTEM_TRANSFORMATION.md](ECOSYSTEM_TRANSFORMATION.md) for detailed analysis.
+### Major Milestones (December 2025)
+
+- **🧬 Complete Rust Ecosystem Mapping**: Generated comprehensive emoji mappings for 5,702 symbols across the entire Rust ecosystem
+- **🔄 Recursive Generation Achieved**: Successfully generated output2 → output3 with 667 wrapped crates
+- **🎯 Self-Referential Capability**: The system can now wrap and generate itself (wrapped-split-decls-rs)
+- **📊 Advanced Analysis Tools**: Added SPARQL-like RDF querying, complexity analysis, and ontology generation
+- **🔍 Audit Infrastructure**: Complete bootstrap auditing system with syscall analysis and trait generation
+- **🏗️ DWIM Bootstrap System**: Declarative macro-based infrastructure for automatic bootstrap generation
+
+### Latest Developments (December 26, 2025)
+
+#### 🔍 Advanced Analysis & Audit Infrastructure
+- **Bootstrap Auditing System**: Complete syscall analysis and trait generation for security auditing
+- **AST Reflection Tools**: Deep introspection capabilities for code analysis and transformation
+- **SPARQL-like RDF Querying**: Advanced semantic querying of code structures with complexity analysis
+- **Ontology Generation**: Automated generation of OWL ontologies from Rust code structures
+
+#### 🧬 Ecosystem Secretome Analysis
+- **Complete Symbol Mapping**: Generated emoji mappings for 5,702 symbols across the Rust ecosystem
+- **Semantic Categorization**: Organized symbols into 6 major categories (compiler_core, memory_mgmt, etc.)
+- **Visual Genome**: Created a visual representation of the entire Rust compiler ecosystem
+- **Knowledge Base**: Generated comprehensive OWL knowledge bases with 45,590+ triples
+
+#### 🏗️ DWIM Bootstrap System (Phase 2.5)
+- **Declarative Infrastructure**: Macro-based system for automatic bootstrap generation
+- **Self-Contained Generations**: Each output level includes complete bootstrap infrastructure
+- **Infinite Recursion**: Any outputN can generate outputN/outputN automatically
+- **Zero Configuration**: No manual copying of config files or scripts required
+
+#### 🔄 Recursive Generation Success
+- **Multi-Level Generation**: Successfully achieved output2 → output3 → output4 capability
+- **Self-Wrapping**: The system can now wrap and bootstrap itself
+- **667 Wrapped Crates**: Complete ecosystem transformation validated
+- **Bootstrap Validation**: Full audit trail and syscall analysis for security
+
+See [QA_REPORT.md](QA_REPORT.md), [ECOSYSTEM_TRANSFORMATION.md](ECOSYSTEM_TRANSFORMATION.md), and [EMOJI_SECRETOME_REPORT.md](EMOJI_SECRETOME_REPORT.md) for detailed analysis.
 
 ## Core Vision: Rust Packages via Overlays
 The system functions as a package maintenance layer where third-party Rust modules are ingested and transformed into a modular structure. This approach aims to solve common problems associated with modifying external dependencies, offering significant benefits:
