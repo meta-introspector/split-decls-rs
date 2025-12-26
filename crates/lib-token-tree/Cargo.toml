@@ -1,0 +1,12 @@
+[package]
+name = "lib-token-tree"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rustc_ast = { workspace = true }
+rustc_macros = { workspace = true }
+rustc_span = { workspace = true }
+rustc_serialize = { workspace = true }
+lib-kleene-op = { path = "../lib-kleene-op" }
+lib-metavar-expr = { path = "../lib-metavar-expr" }

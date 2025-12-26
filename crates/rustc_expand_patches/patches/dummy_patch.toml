@@ -1,0 +1,5 @@
+[[edits]]
+type = "AddUse"
+target_file = "submodules/rust/compiler/rustc_expand_patches/test_target.rs"
+path = "use std::collections::HashMap;"
+position = "start"

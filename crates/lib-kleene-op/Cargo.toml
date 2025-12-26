@@ -1,0 +1,9 @@
+[package]
+name = "lib-kleene-op"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rustc_macros = { workspace = true }
+rustc_serialize = { workspace = true }
+rustc_span = { workspace = true }

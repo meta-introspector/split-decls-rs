@@ -1,0 +1,38 @@
+[package]
+name = "rustc_expand_base_lib"
+version = "0.0.0"
+edition = "2024"
+build = false
+
+[lib]
+doctest = false
+
+[dependencies]
+rustc_span = { workspace=true }
+rustc_ast = { workspace=true }
+rustc_errors = { workspace=true }
+rustc_session = { workspace = true }
+rustc_feature = { workspace = true }
+rustc_hir = { workspace = true }
+thin-vec = { workspace = true }
+smallvec = { workspace=true }
+rustc_data_structures = { workspace=true }
+rustc_ast_pretty = { workspace = true }
+rustc_attr_parsing = { workspace = true }
+rustc_parse = { workspace = true }
+rustc_lint_defs = { workspace = true }
+rustc_macros = { workspace = true }
+rustc_expand_base_lib_errors = { workspace=true } # path = "../rustc_expand_base_lib_errors"
+introspector_core = { workspace = true }
+uuid = { workspace = true, features = ["v4"] }
+rustc_expand_meta_macros = { workspace=true } #path = "../rustc_expand_meta_macros"
+macro_wrapper_lib = { workspace = true }
+# Other dependencies that MacResult or DummyResult might need after moving.
+# We'll add them as we discover them during compilation.
+
+[lints]
+workspace = true
+
+[build-dependencies]
+syn = { version = "2.0", features = ["full"] }
+quote = { version = "1.0" }

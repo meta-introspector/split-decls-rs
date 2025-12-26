@@ -1,0 +1,1 @@
+// This is a dummy Rust file for testing code_editor patches.

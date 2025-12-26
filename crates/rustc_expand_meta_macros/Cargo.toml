@@ -1,0 +1,10 @@
+[package]
+name = "rustc_expand_meta_macros"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[dependencies]
+# No direct dependencies needed for macro_rules! that just generates tokens.
+# The types like `ExtCtxt` or `InvocationCollector` are resolved in the context
+# of the crate that *uses* these macros.

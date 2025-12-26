@@ -1,0 +1,7 @@
+[package]
+name = "trait-fixer-compiler-host-real"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+gemini_rustc_data_structures = { path = "../gemini_rustc_data_structures" }

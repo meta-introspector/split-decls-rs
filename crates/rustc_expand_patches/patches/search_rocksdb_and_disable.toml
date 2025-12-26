@@ -1,0 +1,41 @@
+[[edits]]
+type = "RunSearch"
+command = "rg -l \"rocksdb\" --glob \"*.toml\" --glob \"!target/*\""
+
+# This patch file defines actions to disable rocksdb and librocksdb-sys.
+
+# Remove librocksdb-sys dependency from the 'rocksdb' crate's Cargo.toml
+[[edits]]
+type = "RemoveCargoDependency"
+target_file = "../../../../submodules/rocksdb/Cargo.toml"
+package_name = "librocksdb-sys"
+
+# Remove rocksdb dependency from the root Cargo.toml
+[[edits]]
+type = "RemoveCargoDependency"
+target_file = "../../../../Cargo.toml"
+package_name = "rocksdb"
+
+# Remove librocksdb-sys dependency from the root Cargo.toml
+[[edits]]
+type = "RemoveCargoDependency"
+target_file = "../../../../Cargo.toml"
+package_name = "librocksdb-sys"
+
+# Remove "submodules/rocksdb" from workspace members in root Cargo.toml
+[[edits]]
+type = "RemoveCargoDependency"
+target_file = "../../../../Cargo.toml"
+package_name = "submodules/rocksdb"
+
+# Remove "submodules/rocksdb/librocksdb-sys" from workspace members in root Cargo.toml
+[[edits]]
+type = "RemoveCargoDependency"
+target_file = "../../../../Cargo.toml"
+package_name = "submodules/rocksdb/librocksdb-sys"
+
+# Remove use rocksdb::{Options, DB}; from tools/rust-src-scanner/src/main.rs
+[[edits]]
+type = "RemoveUse"
+target_file = "./tools/rust-src-scanner/src/main.rs"
+use_path = "rocksdb::{Options, DB}"

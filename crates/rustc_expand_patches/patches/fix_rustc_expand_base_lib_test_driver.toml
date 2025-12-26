@@ -1,0 +1,14 @@
+# Patch to fix imports in rustc_expand_base_lib_test_driver/src/main.rs
+
+# Remove problematic imports
+[[edits]]
+type = "RemoveUse"
+target_file = "../../../../submodules/rust/compiler/rustc_expand_base_lib_test_driver/src/main.rs"
+use_path = "rustc_expand_base_lib_errors::{TraceMacroBase, TraceMacroNote, Diagnostic, Subdiagnostic}"
+
+# Add back the non-problematic imports
+[[edits]]
+type = "AddUse"
+target_file = "../../../../submodules/rust/compiler/rustc_expand_base_lib_test_driver/src/main.rs"
+path = "rustc_expand_base_lib_errors::{TraceMacroBase, TraceMacroNote}"
+position = "start"

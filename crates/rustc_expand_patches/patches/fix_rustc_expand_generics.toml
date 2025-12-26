@@ -1,0 +1,56 @@
+# Patch to fix generic argument issues in rustc_expand
+
+# Fix ExtCtxt in proc_macro_server.rs
+[[edits]]
+type = "ReplaceExpression"
+target_file = "../../../../submodules/rust/compiler/rustc_expand/src/proc_macro_server.rs"
+function_name = "proc_macro_server" # Dummy function name
+old_code_snippet = "ecx: &'a mut ExtCtxt<'b>"
+new_code_snippet = "ecx: &'a mut ExtCtxt<'b, DRT>"
+
+[[edits]]
+type = "ReplaceExpression"
+target_file = "../../../../submodules/rust/compiler/rustc_expand/src/proc_macro_server.rs"
+function_name = "proc_macro_server" # Dummy function name
+old_code_snippet = "pub fn new(ecx: &'a mut ExtCtxt<'b>) -> Self {"
+new_code_snippet = "pub fn new<DRT: OpaqueDeriveResolution + 'static>(ecx: &'a mut ExtCtxt<'b, DRT>) -> Self {"
+
+# Fix ExtCtxt in build.rs (this is the actual build script of rustc_expand)
+[[edits]]
+type = "ReplaceExpression"
+target_file = "../../../../submodules/rust/compiler/rustc_expand/src/build.rs"
+function_name = "build" # Dummy function name
+old_code_snippet = "impl<'a> ExtCtxt<'a> {"
+new_code_snippet = "impl<'a, DRT: OpaqueDeriveResolution + 'static> ExtCtxt<'a, DRT> {"
+
+# Fix SyntaxExtension struct definition in base.rs
+[[edits]]
+type = "ReplaceExpression"
+target_file = "../../../../submodules/rust/compiler/rustc_expand/src/base.rs"
+function_name = "base" # Dummy name
+old_code_snippet = "pub struct SyntaxExtension<DRT: OpaqueDeriveResolution + 'static> {"
+new_code_snippet = "pub struct SyntaxExtension<DRT: OpaqueDeriveResolution + 'static, MacroRulesMacroExpanderDRT> {"
+
+# Fix SyntaxExtension.kind field in base.rs
+[[edits]]
+type = "ReplaceExpression"
+target_file = "../../../../submodules/rust/compiler/rustc_expand/src/base.rs"
+function_name = "base" # Dummy name
+old_code_snippet = "pub kind: SyntaxExtensionKind<DRT>,"
+new_code_snippet = "pub kind: SyntaxExtensionKind<DRT, MacroRulesMacroExpanderDRT>,"
+
+# Fix SyntaxExtensionTrait in base.rs
+[[edits]]
+type = "ReplaceExpression"
+target_file = "../../../../submodules/rust/compiler/rustc_expand/src/base.rs"
+function_name = "base" # Dummy name
+old_code_snippet = "pub exts: Option<Arc<dyn SyntaxExtensionTrait>>,"
+new_code_snippet = "pub exts: Option<Arc<dyn SyntaxExtensionTrait<DRT>>>,"
+
+# Fix DeriveResolution struct definition in base.rs
+[[edits]]
+type = "ReplaceExpression"
+target_file = "../../../../submodules/rust/compiler/rustc_expand/src/base.rs"
+function_name = "base" # Dummy name
+old_code_snippet = "pub struct DeriveResolution {"
+new_code_snippet = "pub struct DeriveResolution<DRT: OpaqueDeriveResolution + 'static> {"

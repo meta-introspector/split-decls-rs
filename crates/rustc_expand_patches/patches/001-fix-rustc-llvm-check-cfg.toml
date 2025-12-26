@@ -1,0 +1,7 @@
+[[edits]]
+type = "ReplaceExpression"
+target_file = "../../../../submodules/rust/compiler/rustc_llvm/build.rs"
+function_name = "main"
+old_code_snippet = "println!(\"cargo:rustc-cfg=llvm_component=\\\"aarch64\\\"");"
+new_code_snippet = """println!(\"cargo:rustc-check-cfg=cfg(llvm_component, values(\\\"aarch64\\\", \\\"ipo\\\", \\\"bitreader\\\", \\\"bitwriter\\\", \\\"linker\\\", \\\"asmparser\\\", \\\"lto\\\", \\\"coverage\\\", \\\"instrumentation\\\"))\");
+    println!(\"cargo:rustc-cfg=llvm_component=\\\"aarch64\\\"");"""

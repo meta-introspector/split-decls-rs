@@ -1,0 +1,9 @@
+[package]
+name = "rustc_expand_base_lib_test_driver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rustc_expand_base_lib_errors = { path = "../rustc_expand_base_lib_errors" }
+rustc_expand_base_lib_macros = { path = "../rustc_expand_base_lib_macros" }
+rustc_span = { workspace = true }

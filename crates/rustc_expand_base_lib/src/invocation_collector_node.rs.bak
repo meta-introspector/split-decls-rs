@@ -1,0 +1,297 @@
+//! This module defines the `InvocationCollectorNode` trait and related structures, which are
+//! crucial for how the Rust compiler's macro expansion engine processes different types of
+//! Abstract Syntax Tree (AST) nodes.
+//!
+//! For n00bs: Imagine the compiler is walking through your code, looking for places where macros
+//! are used. The `InvocationCollectorNode` trait tells the compiler, for each different kind
+//! of code structure (like a function, a variable, an expression, etc.), "how to behave"
+//! when it encounters a macro call within that structure.
+//!
+//! This trait provides a standardized way for the macro expansion system to:
+//! - Identify macro invocations within an AST node.
+//! - Extract information about those invocations (like their attributes or associated data).
+//! - Replace the original macro call with the expanded code, or a placeholder if expansion fails.
+//!
+//! By having this trait in `rustc_expand_base_lib`, it becomes a fundamental building block
+//! for any part of the compiler that needs to interact with the macro expansion process,
+//! ensuring consistent handling of macro calls across various AST nodes.
+
+use rustc_ast::{self as ast, Attribute, AttrVec, HasAttrs, HasNodeId, NodeId, AstNodeWrapper};
+use rustc_span::{Ident, Span};
+use smallvec::SmallVec;
+
+// Newtype wrappers to overcome the orphan rule for InvocationCollectorNode implementations.
+// These wrap Boxed AST nodes or direct AST nodes from `rustc_ast`.
+pub struct ExpandedItem(pub Box<ast::Item>);
+pub struct ExpandedAssocItem(pub Box<ast::AssocItem>);
+pub struct ExpandedForeignItem(pub Box<ast::ForeignItem>);
+pub struct ExpandedVariant(pub ast::Variant);
+pub struct ExpandedWherePredicate(pub ast::WherePredicate);
+pub struct ExpandedFieldDef(pub ast::FieldDef);
+pub struct ExpandedPatField(pub ast::PatField);
+pub struct ExpandedExprField(pub ast::ExprField);
+pub struct ExpandedParam(pub ast::Param);
+pub struct ExpandedGenericParam(pub ast::GenericParam);
+pub struct ExpandedArm(pub ast::Arm);
+pub struct ExpandedStmt(pub ast::Stmt);
+pub struct ExpandedCrate(pub ast::Crate);
+pub struct ExpandedTy(pub Box<ast::Ty>);
+pub struct ExpandedPat(pub Box<ast::Pat>);
+pub struct ExpandedExpr(pub Box<ast::Expr>);
+
+impl HasNodeId for ExpandedItem {
+    fn node_id(&self) -> NodeId {
+        self.0.id
+    }
+    fn node_id_mut(&mut self) -> &mut NodeId {
+        &mut self.0.id
+    }
+}
+
+impl HasAttrs for ExpandedItem {
+    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false;
+
+    fn attrs(&self) -> &[Attribute] {
+        self.0.attrs.as_slice()
+    }
+    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
+        f(&mut self.0.attrs);
+    }
+}
+
+impl HasNodeId for ExpandedExpr {
+    fn node_id(&self) -> NodeId {
+        self.0.id
+    }
+    fn node_id_mut(&mut self) -> &mut NodeId {
+        &mut self.0.id
+    }
+}
+
+impl HasAttrs for ExpandedExpr {
+    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false;
+
+    fn attrs(&self) -> &[Attribute] {
+        self.0.attrs.as_slice()
+    }
+    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
+        f(&mut self.0.attrs);
+    }
+}
+
+impl HasNodeId for ExpandedCrate {
+    fn node_id(&self) -> NodeId {
+        self.0.id
+    }
+    fn node_id_mut(&mut self) -> &mut NodeId {
+        &mut self.0.id
+    }
+}
+
+impl HasAttrs for ExpandedCrate {
+    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false;
+
+    fn attrs(&self) -> &[Attribute] {
+        self.0.attrs.as_slice()
+    }
+    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
+        f(&mut self.0.attrs);
+    }
+}
+
+impl HasNodeId for ExpandedTy {
+    fn node_id(&self) -> NodeId {
+        self.0.id
+    }
+    fn node_id_mut(&mut self) -> &mut NodeId {
+        &mut self.0.id
+    }
+}
+
+impl HasAttrs for ExpandedTy {
+    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false; // Ty does not directly support inner attributes
+
+    fn attrs(&self) -> &[Attribute] {
+        &[] // Ty does not have attributes directly
+    }
+    fn visit_attrs(&mut self, _f: impl FnOnce(&mut AttrVec)) {
+        // Ty does not have attributes, so do nothing
+    }
+}
+
+impl HasNodeId for ExpandedPat {
+    fn node_id(&self) -> NodeId {
+        self.0.id
+    }
+    fn node_id_mut(&mut self) -> &mut NodeId {
+        &mut self.0.id
+    }
+}
+
+impl HasAttrs for ExpandedPat {
+    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false; // Pat does not directly support inner attributes
+
+    fn attrs(&self) -> &[Attribute] {
+        &[] // Pat does not have attributes directly
+    }
+    fn visit_attrs(&mut self, _f: impl FnOnce(&mut AttrVec)) {
+        // Pat does not have attributes, so do nothing
+    }
+}
+
+impl HasNodeId for ExpandedStmt {
+    fn node_id(&self) -> NodeId {
+        self.0.id
+    }
+
+    fn node_id_mut(&mut self) -> &mut NodeId {
+        &mut self.0.id
+    }
+}
+
+impl HasAttrs for ExpandedStmt {
+    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false;
+
+    fn attrs(&self) -> &[Attribute] {
+        match &self.0.kind {
+            ast::StmtKind::Let(local) => local.attrs.as_slice(), // Changed from Local to Let
+            ast::StmtKind::Item(item) => item.attrs.as_slice(),
+            ast::StmtKind::Expr(expr) | ast::StmtKind::Semi(expr) => expr.attrs.as_slice(),
+            ast::StmtKind::MacCall(mac) => mac.attrs.as_slice(),
+            ast::StmtKind::Empty => &[],
+        }
+    }
+
+    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
+        match &mut self.0.kind {
+            ast::StmtKind::Let(local) => f(&mut local.attrs), // Changed from Local to Let
+            ast::StmtKind::Item(item) => f(&mut item.attrs),
+            ast::StmtKind::Expr(expr) | ast::StmtKind::Semi(expr) => f(&mut expr.attrs),
+            ast::StmtKind::MacCall(mac) => f(&mut mac.attrs),
+            ast::StmtKind::Empty => {}, // No attributes for empty statements
+        }
+    }
+}
+
+pub struct ExpandedAstNodeWrapper<T, Tag>(pub ast::AstNodeWrapper<T, Tag>);
+
+// Use types now residing in rustc_expand_base_lib
+use crate::{Annotatable, AstFragment, AstFragmentKind, AddSemicolon};
+${NEW_USE_STATEMENT}
+
+// InvocationCollector is not moved here yet, so its dependencies are commented out for now.
+// It will be moved in a later step.
+// use crate::InvocationCollector;
+// use crate::StripUnconfigured; // Will be moved later
+// use crate::errors::RemoveNodeNotSupported; // Will be moved later
+
+/// A trait implemented for various AST nodes, providing all pieces
+/// of functionality used by `InvocationCollector`.
+///
+/// This trait acts as an adapter, allowing the `InvocationCollector` to interact with
+/// different AST node types in a generic way. Each implementor defines how it should be
+/// processed during macro invocation collection and expansion.
+///
+/// For n00bs: This is like a "how-to guide" for each type of code snippet (like a function,
+/// or a variable declaration). It tells the macro system:
+/// - How to get its unique ID (`HasNodeId`).
+/// - How to check for attributes (`HasAttrs`).
+/// - What kind of output it expects after a macro is expanded (`VisitOutputTy`, `FlatMapOutputTy`).
+/// - How to convert itself into a generic `Annotatable` type.
+/// - How to handle attributes (`pre_flat_map_node_collect_attr`, `post_flat_map_node_collect_bang`).
+/// - How to "walk" its internal structure to find more macro calls (`walk`, `walk_flat_map`).
+pub trait InvocationCollectorNode: HasAttrs + HasNodeId + Sized {
+    /// The output type when visiting a node (e.g., `Option<Self>`).
+    type VisitOutputTy;
+    /// The output type when flat-mapping a node (e.g., `SmallVec<Self, 1>`).
+    type FlatMapOutputTy: Default;
+    /// The kind of item this node represents (e.g., `ast::ItemKind`).
+    type ItemKind = ast::ItemKind; // Depends on ast
+    /// The specific `AstFragmentKind` that this node corresponds to.
+    const KIND: AstFragmentKind; // Depends on AstFragmentKind
+
+    /// Converts this node into an `Annotatable` enum variant.
+    fn to_annotatable(self) -> Annotatable; // Depends on Annotatable
+
+    /// Converts an `AstFragment` into the expected `VisitOutputTy` for this node type.
+    fn fragment_to_visit_output(fragment: AstFragment) -> Self::VisitOutputTy; // Depends on AstFragment
+
+    /// Converts an `AstFragment` into the expected `FlatMapOutputTy` for this node type.
+    fn fragment_to_flat_map_output(fragment: AstFragment) -> Self::FlatMapOutputTy; // Depends on AstFragment
+
+    /// Provides a human-readable description of the node type.
+    fn descr() -> &'static str { unreachable!() }
+
+    /// Walks the internal structure of the node, collecting macro invocations.
+    ///
+    /// The `_collector` argument is commented out for now to avoid compilation errors
+    /// until `InvocationCollector` is moved.
+    fn walk_flat_map<D>(self, _collector: &mut D) -> Self::FlatMapOutputTy;
+    fn walk<D>(&mut self, _collector: &mut D);
+
+    /// Checks if the node represents a macro call.
+    fn is_mac_call(&self) -> bool { false }
+
+    /// Takes ownership of the macro call information from the node.
+//     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) { unreachable!() } // Depends on ast::MacCall, ast::AttrVec, AddSemicolon
+        fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
+        let (mac, attrs, add_semicolon) = match self.0.kind {
+            ast::StmtKind::MacCall(mac_stmt) => (mac_stmt.mac, mac_stmt.attrs, AddSemicolon::Yes),
+            _ => panic!("called take_mac_call on non-macro statement"),
+        };
+        (mac, attrs, add_semicolon)
+    }
+
+
+    /// Handles delegation macros.
+    fn delegation(&self) -> Option<(&ast::DelegationMac, &ast::Item<Self::ItemKind>)> { None } // Depends on ast::DelegationMac, ast::Item
+    fn delegation_item_kind(_deleg: Box<ast::Delegation>) -> Self::ItemKind { unreachable!() } // Depends on ast::Delegation
+    fn from_item(_item: ast::Item<Self::ItemKind>) -> Self { unreachable!() } // Depends on ast::Item
+
+    /// Flattens an iterator of `FlatMapOutputTy` into a single `FlatMapOutputTy`.
+    fn flatten_outputs(_outputs: impl Iterator<Item = Self::FlatMapOutputTy>) -> Self::FlatMapOutputTy { unreachable!() }
+
+    /// Hook for collecting attributes before flat-mapping the node.
+    ///
+    /// The `_cfg` argument is commented out for now to avoid compilation errors
+    /// until `StripUnconfigured` is moved.
+    fn pre_flat_map_node_collect_attr<F>(_cfg: &F, _attr: &ast::Attribute) {} // Depends on ast::Attribute
+
+    /// Hook for collecting attributes after flat-mapping the node with a bang macro.
+    fn post_flat_map_node_collect_bang(_output: &mut Self::FlatMapOutputTy, _add_semicolon: AddSemicolon) {} // Depends on AddSemicolon
+
+    /// Wraps the `walk_flat_map` call, allowing for custom pre/post processing.
+    ///
+    /// The `collector` argument is commented out for now.
+    fn wrap_flat_map_node_walk_flat_map<D>(
+        node: Self,
+        _collector: &mut D,
+        walk_flat_map: impl FnOnce(Self, &mut D) -> Self::FlatMapOutputTy,
+    ) -> Result<Self::FlatMapOutputTy, Self> {
+        Ok(walk_flat_map(node, _collector))
+    }
+
+    /// Expands the node when a `#[cfg(FALSE)]` attribute is encountered.
+    ///
+    /// The `collector` and `span` arguments are commented out for now.
+    // fn expand_cfg_false(&mut self, collector: &mut InvocationCollector<'_, '_'>, pos: usize, span: Span) {
+    //     // Handle cfg_false logic for statement
+    //     collector.cx.sess.psess.buffer_lint(
+    //         StripUnconfigured::get_unused_attribute_lint(true),
+    //         span,
+    //         collector.cx.current_expansion.lint_node_id,
+    //         errors::CfgFalseRemoved { span },
+    //     );
+    //     self.visit_attrs(|attrs| {
+    //         attrs.remove(pos);
+    //     });
+    // }
+
+
+    /// Returns a list of identifiers declared by this node. Used for diagnostics.
+    fn declared_idents(&self) -> Vec<Ident> { vec![] }
+}
+
+// TODO: Move `impl InvocationCollectorNode for ...` blocks here after moving
+// their dependencies (like `AstNodeWrapper`, `TraitItemTag`, etc.).
+// These will eventually be moved from `rustc_expand/src/ast_fragments_split/ast_fragments_node_impls.rs`.

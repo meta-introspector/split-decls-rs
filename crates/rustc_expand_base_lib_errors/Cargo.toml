@@ -1,0 +1,17 @@
+[package]
+name = "rustc_expand_base_lib_errors"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rustc_span = { workspace = true }
+rustc_errors = { workspace = true }
+rustc_error_codes = { workspace = true }
+rustc_expand_base_lib_macros = { path = "../rustc_expand_base_lib_macros" }
+rustc_expand_base_lib_custom_macros = { path = "../rustc_expand_base_lib_custom_macros" }
+
+[build-dependencies]
+syn = { version = "1.0", features = ["full"] }
+quote = "1.0"
+
+

@@ -1,0 +1,21 @@
+[package]
+name = "lib-macro-rule"
+version = "0.0.1"
+edition = "2024"
+
+[dependencies]
+rustc_span = { workspace = true }
+rustc_ast = { workspace = true }
+rustc_serialize = { workspace = true }
+lib-matcher-loc = { path = "../lib-matcher-loc" }
+lib-token-tree = { path = "../lib-token-tree" }
+rustc_data_structures = { workspace = true }
+rustc_errors = { workspace = true }
+rustc_session = { workspace = true }
+rustc_parse = { workspace = true }
+rustc_ast_pretty = { workspace = true }
+rustc_expand_base_lib = { workspace = true }
+smallvec = { workspace = true }
+tracing = { workspace = true }
+include-dir-macro = { workspace = true }
+#never include this to create a cycle rustc_expand = { workspace = true } break it up an out via traits.
