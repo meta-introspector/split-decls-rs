@@ -38,7 +38,15 @@ run_bootstrap:
 
 # Regenerate Cargo.toml files only (fast, no syn parsing) - using lib-cargo
 regen_cargo:
-	@echo "Regenerating Cargo.toml files with sccache..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin regen_cargo_v2 -- --verbose 2>&1 | tee regen_cargo.log
+	@echo "Regenerating Cargo.toml files with sccache..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin regen_cargo_v2 -- --output-dir output2 --verbose 2>&1 | tee regen_cargo.log
+
+# Regenerate output2 workspace only (isolated)
+regen_output2:
+	@echo "Regenerating output2 workspace..." && cd output2 && RUSTC_WRAPPER=$(SCCACHE) ../target/debug/regen_cargo_v2 --output-dir . --verbose 2>&1 | tee ../regen_output2.log
+
+# Build regen tool first
+build_regen:
+	@echo "Building regen tool..." && RUSTC_WRAPPER=$(SCCACHE) cargo build --bin regen_cargo_v2
 
 # Regenerate and build test Cargo.toml files
 regen_build:
