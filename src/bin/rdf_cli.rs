@@ -49,13 +49,42 @@ impl RdfInterpreter {
     
     fn load_kb(&mut self, file: &str) -> Result<()> {
         let content = fs::read_to_string(file)?;
+        let mut current_subject = String::new();
         
         for line in content.lines() {
-            if let Some((s, p, o)) = self.parse_line(line) {
-                self.triples.push((s.clone(), p.clone(), o.clone()));
-                *self.predicates.entry(p).or_insert(0) += 1;
-                *self.subjects.entry(s).or_insert(0) += 1;
-                *self.objects.entry(o).or_insert(0) += 1;
+            let line = line.trim();
+            
+            // Skip comments, prefixes, and empty lines
+            if line.starts_with('#') || line.is_empty() || line.starts_with('@') || line.starts_with('<') {
+                continue;
+            }
+            
+            // Check if this is a new subject (starts with identifier and contains rdf:type or similar)
+            if line.contains("rdf:type") || line.contains("rdfs:") {
+                let parts: Vec<&str> = line.split_whitespace().collect();
+                if parts.len() >= 3 {
+                    current_subject = parts[0].to_string();
+                    let predicate = parts[1].to_string();
+                    let object = parts[2..].join(" ").replace(" ;", "").replace(" .", "").trim_matches('"').to_string();
+                    
+                    self.triples.push((current_subject.clone(), predicate.clone(), object.clone()));
+                    *self.predicates.entry(predicate).or_insert(0) += 1;
+                    *self.subjects.entry(current_subject.clone()).or_insert(0) += 1;
+                    *self.objects.entry(object).or_insert(0) += 1;
+                }
+            }
+            // Handle property lines (indented, start with lmdfb: or similar)
+            else if line.starts_with("lmdfb:") || line.starts_with("rdfs:") {
+                let parts: Vec<&str> = line.split_whitespace().collect();
+                if parts.len() >= 2 && !current_subject.is_empty() {
+                    let predicate = parts[0].to_string();
+                    let object = parts[1..].join(" ").replace(" ;", "").replace(" .", "").trim_matches('"').to_string();
+                    
+                    self.triples.push((current_subject.clone(), predicate.clone(), object.clone()));
+                    *self.predicates.entry(predicate).or_insert(0) += 1;
+                    *self.subjects.entry(current_subject.clone()).or_insert(0) += 1;
+                    *self.objects.entry(object).or_insert(0) += 1;
+                }
             }
         }
         
@@ -68,17 +97,27 @@ impl RdfInterpreter {
             return None;
         }
         
-        // Parse "subject predicate object ;"
-        if line.contains(" ; ") || line.ends_with(" .") {
+        // Parse "subject predicate object ;" or "predicate object ;"
+        if line.contains(" ; ") || line.ends_with(" .") || line.ends_with(" ;") {
             let clean_line = line.replace(" ;", "").replace(" .", "");
             let parts: Vec<&str> = clean_line.split_whitespace().collect();
             
-            if parts.len() >= 3 {
-                return Some((
-                    parts[0].to_string(),
-                    parts[1].to_string(), 
-                    parts[2..].join(" ").trim_matches('"').to_string()
-                ));
+            if parts.len() >= 2 {
+                // Handle both "subject predicate object" and "predicate object" formats
+                if parts.len() >= 3 {
+                    return Some((
+                        parts[0].to_string(),
+                        parts[1].to_string(), 
+                        parts[2..].join(" ").trim_matches('"').to_string()
+                    ));
+                } else if parts.len() == 2 {
+                    // This is a continuation line like "lmdfb:hasComplexity 3.30 ;"
+                    return Some((
+                        "current_subject".to_string(), // We'll need to track current subject
+                        parts[0].to_string(),
+                        parts[1].trim_matches('"').to_string()
+                    ));
+                }
             }
         }
         
@@ -93,6 +132,8 @@ impl RdfInterpreter {
         println!("  subjects - Show subject counts");  
         println!("  objects - Show object counts");
         println!("  query <predicate> - Find triples with predicate");
+        println!("  maxcomplexity - Find declarations with maximum complexity");
+        println!("  complexity <threshold> - Find declarations above complexity threshold");
         println!("  bookmark <name> <query> - Save query as bookmark");
         println!("  run <bookmark> - Run saved bookmark");
         println!("  history - Show query history");
@@ -138,6 +179,18 @@ impl RdfInterpreter {
                     self.query_predicate(predicate);
                 } else {
                     println!("Usage: query <predicate>");
+                }
+            }
+            Some(&"maxcomplexity") => self.find_max_complexity(),
+            Some(&"complexity") => {
+                if let Some(threshold) = parts.get(1) {
+                    if let Ok(thresh) = threshold.parse::<f64>() {
+                        self.find_complexity_above(thresh);
+                    } else {
+                        println!("Usage: complexity <number>");
+                    }
+                } else {
+                    println!("Usage: complexity <threshold>");
                 }
             }
             Some(&"bookmark") => {
@@ -227,6 +280,67 @@ impl RdfInterpreter {
         
         if matches.len() > 10 {
             println!("   ... and {} more", matches.len() - 10);
+        }
+    }
+    
+    fn find_max_complexity(&self) {
+        let mut complexity_triples: Vec<(String, f64)> = Vec::new();
+        
+        for (s, p, o) in &self.triples {
+            if p.contains("hasComplexity") {
+                if let Ok(complexity) = o.parse::<f64>() {
+                    complexity_triples.push((s.clone(), complexity));
+                }
+            }
+        }
+        
+        if complexity_triples.is_empty() {
+            println!("❌ No complexity data found");
+            return;
+        }
+        
+        // Find maximum complexity
+        let max_complexity = complexity_triples.iter()
+            .map(|(_, c)| *c)
+            .fold(0.0, f64::max);
+        
+        // Find all declarations with max complexity
+        let max_decls: Vec<_> = complexity_triples.iter()
+            .filter(|(_, c)| (*c - max_complexity).abs() < 0.01)
+            .collect();
+        
+        println!("🎯 Maximum Complexity: {:.2}", max_complexity);
+        println!("📊 Declarations with maximum complexity ({} found):", max_decls.len());
+        
+        for (i, (decl, complexity)) in max_decls.iter().enumerate() {
+            println!("   {}. {} (complexity: {:.2})", i+1, decl, complexity);
+        }
+    }
+    
+    fn find_complexity_above(&self, threshold: f64) {
+        let mut complexity_triples: Vec<(String, f64)> = Vec::new();
+        
+        for (s, p, o) in &self.triples {
+            if p.contains("hasComplexity") {
+                if let Ok(complexity) = o.parse::<f64>() {
+                    if complexity >= threshold {
+                        complexity_triples.push((s.clone(), complexity));
+                    }
+                }
+            }
+        }
+        
+        // Sort by complexity descending
+        complexity_triples.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
+        
+        println!("🔍 Declarations with complexity >= {:.2} ({} found):", threshold, complexity_triples.len());
+        
+        for (i, (decl, complexity)) in complexity_triples.iter().take(20).enumerate() {
+            println!("   {}. {} (complexity: {:.2})", i+1, decl, complexity);
+        }
+        
+        if complexity_triples.len() > 20 {
+            println!("   ... and {} more", complexity_triples.len() - 20);
         }
     }
     

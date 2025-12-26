@@ -1,8 +1,13 @@
 {
-  "last_query": "predicates",
+  "last_query": "complexity 10",
   "query_history": [
     "stats",
-    "predicates"
+    "predicates",
+    "query complexity",
+    "query weight",
+    "maxcomplexity",
+    "maxcomplexity",
+    "complexity 10"
   ],
   "bookmarks": {}
 }
