@@ -108,3 +108,6 @@ repl:
 clean:
 	cargo clean
 	sccache --zero-stats
+eval_main:
+	@echo "🎯 Evaluating wrapped split-decls-rs main..."
+	@cargo run --bin eval_split_decl_main

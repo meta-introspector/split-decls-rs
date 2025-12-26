@@ -5,6 +5,7 @@ use toml::{Table, Value};
 
 use crate::SplitDeclsConfig;
 use crate::path_diff;
+use lib_cargo::collect_dependencies_with_metadata;
 
 
 pub fn collect_and_format_workspace_dependencies(
