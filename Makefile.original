@@ -36,10 +36,6 @@ proof-quiet:
 run_bootstrap:
 	@echo "Running bootstrap with sccache..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full cargo run --bin split-decls-rs -- bootstrap 2>&1 | tee bootstrap_run.log
 
-# Run AUDITED bootstrap with full syscall tracking
-run_audited_bootstrap:
-	@echo "Running AUDITED bootstrap with full syscall tracking..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full cargo run --bin bootstrap-self-apply_audited 2>&1 | tee audited_bootstrap_run.log
-
 # Regenerate Cargo.toml files only (fast, no syn parsing) - using lib-cargo
 regen_cargo:
 	@echo "Regenerating Cargo.toml files with sccache..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin regen_cargo_v2 -- --output-dir output2 --verbose 2>&1 | tee regen_cargo.log
