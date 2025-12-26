@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/subexpression_analyzer.rs
+// Original file: ./src/bin/subexpression_analyzer.rs
+// Function: main
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_subexpression_analyzer]
+fn main () -> Result < () > { println ! ("🔍 SUBEXPRESSION ANALYZER - Finding Common Patterns") ; println ! ("==================================================") ; let search_paths = vec ! ["src"] ; let mut all_expressions : HashMap < String , Vec < String > > = HashMap :: new () ; for search_path in search_paths { let path = Path :: new (search_path) ; if path . exists () { println ! ("\n📂 Analyzing: {}" , search_path) ; let rust_files = find_rust_files (path) ; println ! ("   Found {} Rust files" , rust_files . len ()) ; for file_path in rust_files . iter () . take (50) { if let Ok (expressions) = analyze_expressions_in_file (file_path) { for (pattern , locations) in expressions { all_expressions . entry (pattern) . or_insert_with (Vec :: new) . extend (locations) ; } } } } } let mut reports : Vec < SubexpressionReport > = all_expressions . into_iter () . map (| (pattern , locations) | { let count = locations . len () ; let emoji_hash = generate_emoji_hash (& pattern) ; SubexpressionReport { pattern : pattern . clone () , count , emoji_hash , locations , } }) . collect () ; reports . sort_by (| a , b | b . count . cmp (& a . count)) ; println ! ("\n🎯 TOP 20 MOST COMMON SUBEXPRESSIONS:") ; println ! ("=====================================") ; for (i , report) in reports . iter () . take (20) . enumerate () { println ! ("{}. {} {} (Count: {})" , i + 1 , report . emoji_hash , report . pattern , report . count) ; let sample_locations : Vec < _ > = report . locations . iter () . take (3) . collect () ; println ! ("   Found in: {:?}" , sample_locations) ; println ! () ; } println ! ("🎨 EMOJI CONTENT HASH SUMMARY:") ; println ! ("==============================") ; for report in reports . iter () . take (10) { println ! ("{} = {} ({}x)" , report . emoji_hash , report . pattern . chars () . take (50) . collect ::< String > () , report . count) ; } println ! ("\n📊 ANALYSIS SUMMARY:") ; println ! ("Unique subexpressions: {}" , reports . len ()) ; println ! ("Total occurrences: {}" , reports . iter () . map (| r | r . count) . sum ::< usize > ()) ; let emoji_map : HashMap < String , String > = reports . iter () . map (| r | (r . emoji_hash . clone () , r . pattern . clone ())) . collect () ; let emoji_json = serde_json :: to_string_pretty (& emoji_map) ? ; fs :: write ("emoji_subexpression_map.json" , emoji_json) ? ; println ! ("💾 Saved emoji mapping to emoji_subexpression_map.json") ; Ok (()) }

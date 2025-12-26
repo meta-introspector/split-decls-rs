@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/math_similarity_demo.rs
+// Original file: ./src/bin/math_similarity_demo.rs
+// Function: demonstrate_mathematical_similarity
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_math_similarity_demo]
+fn demonstrate_mathematical_similarity () -> Result < () > { let elliptic_curves = extract_lmfdb_data () ; let rust_structure = analyze_k71_structure () ; println ! ("🔬 Mathematical Similarity Analysis: K7.1 ↔ Elliptic Curves") ; println ! ("═══════════════════════════════════════════════════════════") ; println ! ("\n📊 Rust Code Structure (K7.1):") ; println ! ("   Name: {}" , rust_structure . name) ; println ! ("   Complexity: {}" , rust_structure . complexity) ; println ! ("   Depth: {}" , rust_structure . depth) ; println ! ("   Abstraction Ratio: {:.2}" , rust_structure . abstraction_level) ; println ! ("\n🌐 LMFDB Elliptic Curves (Degree 3, Conductor ~620):") ; for curve in & elliptic_curves { println ! ("   Field: {} | Conductor: {} | Complexity Ratio: {:.2}" , curve . field , curve . conductor_norm , curve . complexity_ratio) ; } println ! ("\n🎯 Structural Similarities:") ; println ! ("   1. DEGREE CORRESPONDENCE:") ; println ! ("      • Rust K7.1 depth: {} ↔ Elliptic curve degree: 3" , rust_structure . depth) ; println ! ("   2. COMPLEXITY RATIOS:") ; println ! ("      • Rust abstraction ratio: {:.2}" , rust_structure . abstraction_level) ; for curve in & elliptic_curves { println ! ("      • {} complexity ratio: {:.2}" , curve . field , curve . complexity_ratio) ; } println ! ("   3. CONDUCTOR-COMPLEXITY MAPPING:") ; println ! ("      • K7.1 complexity 6.2 → conductor 620 (×100 scaling)") ; println ! ("      • LMFDB field 3.3.621.1 has conductor norm 621 (exact match!)") ; println ! ("\n🧮 Mathematical Interpretation:") ; println ! ("   • Both systems exhibit HIERARCHICAL STRUCTURE") ; println ! ("   • Complexity ratios ~2.0-2.7 indicate SIMILAR BRANCHING PATTERNS") ; println ! ("   • Conductor norms correlate with CODE COMPLEXITY METRICS") ; println ! ("   • Isogeny classes ↔ Dependency clusters in K-theory analysis") ; println ! ("\n💡 LLM Reflect Execution:") ; println ! ("llm! {{") ; println ! ("    reflect! {{") ; println ! ("        mathematical_structure: \"Elliptic curves over cubic fields\",") ; println ! ("        code_structure: \"K7.1 high-complexity dependency node\",") ; println ! ("        similarity_evidence: [") ; println ! ("            \"Degree 3 ↔ Depth 3 correspondence\",") ; println ! ("            \"Complexity ratios 2.0-2.7 in both systems\",") ; println ! ("            \"Conductor 621 ≈ scaled complexity 620\",") ; println ! ("            \"Isogeny classes mirror dependency clusters\"") ; println ! ("        ],") ; println ! ("        insight: \"Code complexity exhibits algebraic structure patterns identical to elliptic curve invariants, suggesting deep mathematical principles govern both software architecture and arithmetic geometry.\"") ; println ! ("    }}") ; println ! ("}}") ; Ok (()) }

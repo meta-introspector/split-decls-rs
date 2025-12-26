@@ -37,6 +37,7 @@ pub mod buildrs_generator;
 pub mod git_manager;
 pub mod patch_config;
 pub mod workspace_manager;
+pub mod all_file_scanner;
 pub mod eager_splitter;
 pub mod extracted_decl;
 pub mod generate_wrapped_workspace;

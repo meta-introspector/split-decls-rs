@@ -1,0 +1,18 @@
+// Generated from: ./src/wrapped_workspace_handlers/utils.rs
+// Original file: ./src/wrapped_workspace_handlers/utils.rs
+// Function: format_toml_value_for_dependency_string
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_utils]
+pub fn format_toml_value_for_dependency_string (value : & Value) -> String { match value { Value :: String (s) => format ! ("\"{}\"" , s) , Value :: Integer (i) => i . to_string () , Value :: Float (f) => f . to_string () , Value :: Boolean (b) => b . to_string () , Value :: Datetime (d) => format ! ("\"{}\"" , d) , Value :: Array (arr) => { let elements : Vec < String > = arr . iter () . map (format_toml_value_for_dependency_string) . collect () ; format ! ("[{}]" , elements . join (", ")) } , Value :: Table (table) => { let mut parts = Vec :: new () ; for (key , val) in table . iter () { parts . push (format ! ("{} = {}" , key , format_toml_value_for_dependency_string (val))) ; } format ! ("{{ {} }}" , parts . join (", ")) } , _ => value . to_string () , } }

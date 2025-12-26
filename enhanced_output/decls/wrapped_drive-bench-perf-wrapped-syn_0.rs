@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/drive-bench-perf-wrapped-syn.rs
+// Original file: ./src/bin/drive-bench-perf-wrapped-syn.rs
+// Function: main
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_drive-bench-perf-wrapped-syn]
+fn main () { println ! ("🔥 DRIVE-BENCH-PERF-WRAPPED-SYN") ; println ! ("Benchmarking syn hotspots using macro interpreter with RDF capture\n") ; let mut rdf_state = RdfStateMachine :: new () ; let syn_hotspots = [("syn::token::parsing::peek_punct" , "output2/wrapped-syn/src/decls/wrapped_syn_decls_module_not_found_token.rs") , ("syn::lit::value::parse_lit_str" , "output2/wrapped-syn/src/decls/wrapped_syn_decls_module_not_found_lit.rs") , ("syn::buffer::Cursor::group" , "output2/wrapped-syn/src/decls/wrapped_syn_decls_module_not_found_buffer.rs") , ("syn::ident::parsing::accept_as_ident" , "output2/wrapped-syn/src/decls/wrapped_syn_decls_module_not_found_ident.rs") , ("syn::parse::span_of_unexpected_ignoring_nones" , "output2/wrapped-syn/src/decls/wrapped_syn_decls_parse.rs") , ("syn::expr::parsing::trailer_helper" , "output2/wrapped-syn/src/decls/wrapped_syn_decls_module_not_found_expr.rs") , ("syn::parse::ParseBuffer::step" , "output2/wrapped-syn/src/decls/wrapped_syn_decls_parse.rs") , ("syn::error::Error::new" , "output2/wrapped-syn/src/decls/wrapped_syn_decls_module_not_found_error.rs") ,] ; let mut total_time = std :: time :: Duration :: new (0 , 0) ; let mut found_count = 0 ; for (func_name , wrap_path) in & syn_hotspots { let elapsed = bench_wrapped_syn_rdf ! (rdf_state , func_name , wrap_path) ; total_time += elapsed ; if Path :: new (wrap_path) . exists () { found_count += 1 ; } } println ! ("\n📊 RESULTS:") ; println ! ("Found: {}/{} wrapped declarations" , found_count , syn_hotspots . len ()) ; println ! ("Total benchmark time: {:?}" , total_time) ; println ! ("RDF triples captured: {}" , rdf_state . triples . len ()) ; println ! ("\n🔗 RDF EXECUTION TRACE:") ; for triple in & rdf_state . triples { println ! ("  {} -> {} -> {} ({})" , triple . subject , triple . predicate , triple . object , triple . timestamp) ; } if found_count > 0 { println ! ("\n✅ Macro interpreter ready for full AST execution") ; } else { println ! ("\n❌ Need to locate correct wrapped declarations") ; } }

@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/comprehensive_ngram_analyzer.rs
+// Original file: ./src/bin/comprehensive_ngram_analyzer.rs
+// Function: classify_ngram_pattern
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_comprehensive_ngram_analyzer]
+fn classify_ngram_pattern (tokens : & [String] , n : usize) -> String { let joined = tokens . join (" ") ; match n { 2 => { if tokens . iter () . any (| t | t . contains ("src")) && tokens . iter () . any (| t | t . contains ("decls")) { "source_declaration" . to_string () } else if tokens . iter () . any (| t | t . contains ("cargo")) && tokens . iter () . any (| t | t . contains ("toml")) { "config_file" . to_string () } else if tokens . iter () . any (| t | t . contains ("wrapped")) { "wrapped_module" . to_string () } else { "generic_pair" . to_string () } } , 3 => { if joined . contains ("src") && joined . contains ("decls") { "source_declaration_path" . to_string () } else if joined . contains ("output2") && joined . contains ("wrapped") { "output_wrapped_path" . to_string () } else if joined . contains ("cargo") && joined . contains ("toml") { "cargo_config_path" . to_string () } else { "generic_triple" . to_string () } } , 5 => { if joined . contains ("output2") && joined . contains ("wrapped") && joined . contains ("rustc") { "full_wrapped_rustc_path" . to_string () } else if joined . contains ("src") && joined . contains ("decls") && joined . contains ("module") { "complete_module_path" . to_string () } else if joined . contains ("cargo") && joined . contains ("toml") && joined . contains ("generator") { "cargo_generator_path" . to_string () } else { "generic_quintuple" . to_string () } } , 7 => { if joined . contains ("output2") && joined . contains ("wrapped") && joined . contains ("rustc") && joined . contains ("src") { "complete_rustc_source_path" . to_string () } else if joined . contains ("cargo") && joined . contains ("toml") && joined . contains ("generator") && joined . contains ("macros") { "complete_cargo_macro_path" . to_string () } else { "generic_septuple" . to_string () } } , _ => "unknown_pattern" . to_string () , } }

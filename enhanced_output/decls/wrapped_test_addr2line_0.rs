@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/test_addr2line.rs
+// Original file: ./src/bin/test_addr2line.rs
+// Function: main
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_test_addr2line]
+# [doc = " Test routine to exercise the entire wrapped addr2line crate"] # [doc = " Each declaration becomes a callable macro in the lisp-like eval system"] fn main () -> Result < () > { println ! ("🔥 Exercising entire wrapped addr2line crate as macros") ; let mut system = Output2MacroSystem :: import_from_output2 () . unwrap_or_else (| _ | { Output2MacroSystem { macros : std :: collections :: HashMap :: new () , interpreter : LispInterpreter :: new () , } }) ; let rdf_blob = RdfUrlBlob :: from_system_state (& system) ? ; println ! ("📦 Loaded {} macro declarations" , system . macros . len ()) ; let addr2line_macros : Vec < _ > = system . macros . iter () . filter (| (name , _) | name . contains ("addr2line")) . map (| (name , decl) | (name . clone () , decl . clone ())) . collect () ; println ! ("🎯 Found {} addr2line declarations:" , addr2line_macros . len ()) ; let mut exercise_count = 0 ; for (name , decl) in & addr2line_macros { println ! ("  📋 {} ({})" , name , decl . declaration_type) ; let expr = format ! ("(call {} \"test_input\")" , name) ; match eval_declaration (& expr , & decl) { Ok (result) => { println ! ("    ✅ {}" , result) ; exercise_count += 1 ; } Err (e) => { println ! ("    ❌ Error: {}" , e) ; } } } println ! ("\n🧪 Testing specific addr2line operations:") ; let test_cases = vec ! [("Error" , "type") , ("DebugFile" , "enum") , ("Context" , "impl") , ("RangeAttributes" , "struct") ,] ; for (target , _expected_type) in test_cases { if let Some ((macro_name , decl)) = find_addr2line_macro (& addr2line_macros , target) { let expr = format ! ("(invoke {} \"0x1234\")" , macro_name) ; match eval_declaration (& expr , & decl) { Ok (result) => { println ! ("  ✅ {}: {}" , target , result) ; exercise_count += 1 ; } Err (e) => { println ! ("  ❌ {}: {}" , target , e) ; } } } else { println ! ("  ⚠️  {} not found" , target) ; } } println ! ("\n📊 Exercise Summary:") ; println ! ("  Total addr2line macros: {}" , addr2line_macros . len ()) ; println ! ("  Successfully exercised: {}" , exercise_count) ; println ! ("  RDF blob size: {} bytes" , rdf_blob . url_blob . len ()) ; println ! ("  System timestamp: {}" , rdf_blob . metadata . timestamp) ; if exercise_count > 0 { println ! ("🎉 Successfully exercised wrapped addr2line crate as macros!") ; } else { println ! ("⚠️  No macros were successfully exercised") ; } Ok (()) }

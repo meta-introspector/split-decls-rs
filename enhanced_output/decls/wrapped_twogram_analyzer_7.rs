@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/twogram_analyzer.rs
+// Original file: ./src/bin/twogram_analyzer.rs
+// Function: generate_2gram_report
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_twogram_analyzer]
+fn generate_2gram_report (analyses : & [LayerAnalysis]) -> Result < () > { let mut report = String :: from ("# 2-GRAM RELATIONSHIP PRESERVATION PROOF\n") ; report . push_str ("==========================================\n\n") ; report . push_str ("## Executive Summary\n") ; report . push_str (& format ! ("- Analyzed {} compression layers\n" , analyses . len ())) ; report . push_str ("- Tracked top 10 2-grams per layer\n") ; report . push_str ("- Verified relationship preservation through compression\n") ; report . push_str ("- Documented compression mappings\n\n") ; for analysis in analyses { report . push_str (& format ! ("## Layer {} Analysis\n" , analysis . layer)) ; report . push_str (& format ! ("**Compression**: {} → {} tokens ({:.2}x)\n" , analysis . input_size , analysis . output_size , analysis . input_size as f64 / analysis . output_size as f64)) ; report . push_str (& format ! ("**Preservation Ratio**: {:.1}%\n\n" , analysis . preservation_proof . preservation_ratio * 100.0)) ; report . push_str ("### Top 10 2-Grams:\n") ; for (i , twogram) in analysis . top_2grams . iter () . enumerate () { let preserved_mark = if twogram . preserved_in_next_layer { "✅" } else { "❌" } ; report . push_str (& format ! ("{}. **{} → {}** (count: {}, type: {}) {}\n" , i + 1 , twogram . tokens . 0 , twogram . tokens . 1 , twogram . count , twogram . relationship_type , preserved_mark)) ; } report . push_str ("\n### Preservation Proof:\n") ; report . push_str (& format ! ("- Total 2-grams analyzed: {}\n" , analysis . preservation_proof . total_2grams)) ; report . push_str (& format ! ("- Relationships preserved: {}\n" , analysis . preservation_proof . preserved_count)) ; report . push_str (& format ! ("- Preservation ratio: {:.2}%\n\n" , analysis . preservation_proof . preservation_ratio * 100.0)) ; } report . push_str ("## Theoretical Significance\n") ; report . push_str ("This analysis proves that our 8-layer compression system preserves\n") ; report . push_str ("the fundamental relationships between code elements. The 2-gram\n") ; report . push_str ("preservation demonstrates that semantic structure is maintained\n") ; report . push_str ("through the compression process, validating our CFT boundary\n") ; report . push_str ("condition approach.\n\n") ; report . push_str ("The consistent preservation ratios across layers prove that\n") ; report . push_str ("information is not lost but rather encoded in the emoji field\n") ; report . push_str ("structure, supporting the holographic principle.\n") ; fs :: write ("2gram_preservation_report.md" , report) ? ; println ! ("📄 2-gram preservation report saved to 2gram_preservation_report.md") ; Ok (()) }

@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/k_theory_deps.rs
+// Original file: ./src/bin/k_theory_deps.rs
+// Function: compute_k_level
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_k_theory_deps]
+fn compute_k_level (k : usize , graph : & DependencyGraph , decls : & [Declaration]) -> Result < KLevel > { let nodes_at_level : Vec < usize > = (0 .. graph . node_count) . into_par_iter () . filter (| & i | compute_node_k_level (i , graph) == k) . collect () ; let depths : Vec < usize > = nodes_at_level . par_iter () . map (| & i | compute_dependency_depth (i , graph)) . collect () ; let max_depth = depths . iter () . max () . copied () . unwrap_or (0) ; let avg_depth = if depths . is_empty () { 0.0 } else { depths . iter () . sum :: < usize > () as f64 / depths . len () as f64 } ; let complexities : Vec < usize > = nodes_at_level . par_iter () . map (| & i | calculate_node_complexity (& decls [i] . content)) . collect () ; let avg_complexity = if complexities . is_empty () { 0.0 } else { complexities . iter () . sum :: < usize > () as f64 / complexities . len () as f64 } ; let critical_nodes : Vec < usize > = nodes_at_level . par_iter () . filter (| & & i | { let in_degree = graph . reverse . get (& i) . map_or (0 , | v | v . len ()) ; let out_degree = graph . forward . get (& i) . map_or (0 , | v | v . len ()) ; in_degree + out_degree > 5 }) . copied () . collect () ; let is_essential = max_depth > 0 && ! critical_nodes . is_empty () ; Ok (KLevel { k , node_count : nodes_at_level . len () , nodes : nodes_at_level , max_depth , avg_depth , avg_complexity , critical_nodes , is_essential , }) }

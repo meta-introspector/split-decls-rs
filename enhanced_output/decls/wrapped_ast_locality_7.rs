@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/ast_locality.rs
+// Original file: ./src/bin/ast_locality.rs
+// Function: report_locality_findings
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_ast_locality]
+fn report_locality_findings (analysis : & LocalityAnalysis , sparse_matrix : & SparseMatrix) { println ! ("\n🎯 AST Locality Analysis Results:") ; println ! ("═══════════════════════════════════") ; let avg_local_ratio : f64 = analysis . nodes . par_iter () . map (| node | node . local_ratio) . sum :: < f64 > () / analysis . nodes . len () as f64 ; let high_local_nodes = analysis . nodes . par_iter () . filter (| node | node . local_ratio > 0.95) . count () ; let global_nodes = analysis . nodes . par_iter () . filter (| node | node . local_ratio < 0.5) . count () ; println ! ("📊 Average locality ratio: {:.1}%" , avg_local_ratio * 100.0) ; println ! ("🏠 High locality nodes (>95%): {}" , high_local_nodes) ; println ! ("🌐 Global nodes (<50% local): {}" , global_nodes) ; println ! ("🕸️  Sparse connections: {}" , sparse_matrix . connections . len ()) ; println ! ("💾 Memory saved vs full matrix: {:.1}%" , (1.0 - sparse_matrix . connections . len () as f64 / (analysis . nodes . len () * analysis . nodes . len ()) as f64) * 100.0) ; println ! ("\n🔝 Most Global Nodes:") ; let mut global_sorted = analysis . nodes . clone () ; global_sorted . par_sort_by (| a , b | a . local_ratio . partial_cmp (& b . local_ratio) . unwrap ()) ; for node in global_sorted . iter () . take (5) { println ! ("   {:.1}% local - {} (complexity: {})" , node . local_ratio * 100.0 , node . name . chars () . take (40) . collect ::< String > () , node . complexity) ; } println ! ("\n🏠 Most Local Nodes:") ; global_sorted . reverse () ; for node in global_sorted . iter () . take (5) { println ! ("   {:.1}% local - {} (complexity: {})" , node . local_ratio * 100.0 , node . name . chars () . take (40) . collect ::< String > () , node . complexity) ; } }

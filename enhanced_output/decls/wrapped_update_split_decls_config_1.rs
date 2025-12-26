@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/update_split_decls_config.rs
+// Original file: ./src/bin/update_split_decls_config.rs
+// Function: main
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_update_split_decls_config]
+fn main () -> Result < () > { let args = Args :: parse () ; let mut split_decls_config_content = fs :: read_to_string (& args . split_decls_config_path) . unwrap_or_default () ; let mut split_decls_data : SplitDeclsConfig = toml :: from_str (& split_decls_config_content) . unwrap_or_default () ; let mut existing_crates_to_wrap : HashSet < String > = split_decls_data . wrapping . crates . iter () . cloned () . collect () ; let mut existing_path_overrides : HashMap < String , String > = split_decls_data . crate_path_overrides . iter () . map (| (k , v) | (k . clone () , v . clone ())) . collect () ; let split_decls_rs_root = env :: current_dir () ? ; let cargo2nix_root = split_decls_rs_root . parent () . context ("Failed to get parent of split-decls-rs") ? . parent () . context ("Failed to get cargo2nix root") ? ; let cargo_lock_data = import_cargo_lock ! ("../../../Cargo.lock") ; for crate_info in cargo_lock_data { existing_crates_to_wrap . insert (crate_info . name . to_string ()) ; let crate_path = Path :: new (crate_info . path) ; let absolute_crate_path = if crate_path . is_absolute () { crate_path . to_path_buf () } else { let candidate_path = cargo2nix_root . join (crate_path) ; match candidate_path . canonicalize () { Ok (path) => path , Err (_) => { candidate_path } } } ; existing_path_overrides . insert (crate_info . name . to_string () , absolute_crate_path . to_string_lossy () . into_owned ()) ; } existing_crates_to_wrap . insert ("split-decls-rs" . to_string ()) ; existing_path_overrides . insert ("split-decls-rs" . to_string () , split_decls_rs_root . to_string_lossy () . into_owned ()) ; let internal_crates_to_skip : HashSet < & str > = ["split-decls-types" , "cargo-toml-generator-types" , "cargo-toml-generator-macros" , "cargo-toml-parts" , "pagerank_rs" ,] . iter () . cloned () . collect () ; let mut sorted_crates : Vec < String > = existing_crates_to_wrap . into_iter () . collect () ; sorted_crates . sort () ; split_decls_data . wrapping . crates = sorted_crates ; if let Some (explicit_mappings) = split_decls_data . explicit_crate_path_mappings . take () { for (crate_name , path_str) in explicit_mappings { existing_path_overrides . insert (crate_name , path_str) ; } } let mut sorted_overrides : Vec < (String , String) > = existing_path_overrides . into_iter () . collect () ; sorted_overrides . sort_by (| a , b | a . 0 . cmp (& b . 0)) ; split_decls_data . crate_path_overrides = sorted_overrides . into_iter () . collect () ; let preservation_proof = generate_preservation_proof (& split_decls_data , & cargo2nix_root) ? ; let updated_toml_content = toml :: to_string_pretty (& split_decls_data) . context ("Failed to serialize updated split-decls-rs.toml") ? ; fs :: write (& args . split_decls_config_path , updated_toml_content) . context (format ! ("Failed to write to {}" , args . split_decls_config_path . display ())) ? ; fs :: write ("crate_preservation_proof.md" , preservation_proof) . context ("Failed to write preservation proof") ? ; println ! ("Successfully updated {}" , args . split_decls_config_path . display ()) ; println ! ("Generated crate preservation proof: crate_preservation_proof.md") ; Ok (()) }

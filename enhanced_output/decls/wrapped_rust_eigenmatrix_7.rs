@@ -1,0 +1,18 @@
+// Generated from: ./src/bin/rust_eigenmatrix.rs
+// Original file: ./src/bin/rust_eigenmatrix.rs
+// Function: analyze_eigenmatrix
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::*;
+use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
+use split_decls_types::SplitDeclsConfig;
+pub use extracted_decl::*;
+pub use process_crate::process_crate;
+pub use process_crates_in_path::process_crates_in_path;
+pub use generate_wrapped_workspace::generate_wrapped_workspace;
+prelude!{}
+
+#[decl_split_decls_rs_rust_eigenmatrix]
+fn analyze_eigenmatrix (matrix : & [Vec < f64 >] , decls : & [Declaration]) { println ! ("\n🎯 PARALLEL Eigenmatrix Analysis Results:") ; println ! ("═══════════════════════════════════════") ; let mut similarities : Vec < (f64 , usize , usize) > = (0 .. matrix . len ()) . into_par_iter () . flat_map (| i | { ((i + 1) .. matrix [i] . len ()) . into_par_iter () . map (move | j | (matrix [i] [j] , i , j)) }) . collect () ; similarities . par_sort_by (| a , b | b . 0 . partial_cmp (& a . 0) . unwrap ()) ; println ! ("🔝 Top 15 Similar Declaration Pairs:") ; for (score , i , j) in similarities . iter () . take (15) { println ! ("   {:.1}% - {} ↔ {}" , score * 100.0 , decls [* i] . name . chars () . take (35) . collect ::< String > () , decls [* j] . name . chars () . take (35) . collect ::< String > ()) ; } let eigenvals : Vec < (f64 , usize) > = matrix . par_iter () . enumerate () . map (| (i , row) | (row . par_iter () . sum :: < f64 > () , i)) . collect () ; let mut eigenvals = eigenvals ; eigenvals . par_sort_by (| a , b | b . 0 . partial_cmp (& a . 0) . unwrap ()) ; println ! ("\n🧮 Top Eigenvalue Approximations:") ; for (eigenval , i) in eigenvals . iter () . take (8) { println ! ("   λ={:.2} - {}" , eigenval , decls [* i] . name . chars () . take (45) . collect ::< String > ()) ; } let avg_similarity : f64 = similarities . par_iter () . map (| (s , _ , _) | s) . sum :: < f64 > () / similarities . len () as f64 ; let high_similarity_count = similarities . par_iter () . filter (| (s , _ , _) | * s > 0.5) . count () ; println ! ("\n📈 BEAST MODE Matrix Statistics:") ; println ! ("   🔥 Dimensions: {}x{}" , matrix . len () , matrix [0] . len ()) ; println ! ("   🔥 Total comparisons: {}" , similarities . len ()) ; println ! ("   🔥 Average similarity: {:.1}%" , avg_similarity * 100.0) ; println ! ("   🔥 Max similarity: {:.1}%" , similarities [0] . 0 * 100.0) ; println ! ("   🔥 High similarity pairs (>50%): {}" , high_similarity_count) ; println ! ("   🔥 CPU cores utilized: {}" , rayon :: current_num_threads ()) ; }
