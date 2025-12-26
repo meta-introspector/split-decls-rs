@@ -50,11 +50,23 @@ impl MonsterCompressor {
             triple_emojis: HashMap::new(),
             penta_emojis: HashMap::new(),
             hepta_emojis: HashMap::new(),
-            champion_signature: None,
+            eleven_emojis: HashMap::new(),
+            thirteen_emojis: HashMap::new(),
+            singleton_17: None,
+            singleton_19: None,
+            singleton_23: None,
+            singleton_29: None,
+            singleton_31: None,
+            singleton_41: None,
+            singleton_47: None,
+            singleton_59: None,
+            singleton_71: None,
             pair_frequencies: HashMap::new(),
             triple_frequencies: HashMap::new(),
             penta_frequencies: HashMap::new(),
             hepta_frequencies: HashMap::new(),
+            eleven_frequencies: HashMap::new(),
+            thirteen_frequencies: HashMap::new(),
         }
     }
 
@@ -301,6 +313,14 @@ impl MonsterCompressor {
             "🌀", "🌊", "🌈", "🌙", "⭐", "💫", "✨", "🔮", "💎"
         ];
         penta_emojis.get(index).unwrap_or(&"🌀").to_string()
+    }
+
+    /// Monster Group emoji assignments for 7-grams (7^6)
+    fn get_hepta_emoji(&self, index: usize) -> String {
+        let hepta_emojis = [
+            "👑", "💍", "🏆", "🎖️", "🏅", "🎗️"
+        ];
+        hepta_emojis.get(index).unwrap_or(&"👑").to_string()
     }
 
     /// Monster Group emoji assignments for 11-grams (11^2)

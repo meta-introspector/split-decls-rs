@@ -1,0 +1,120 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl CurlSubtransport {
+    fn err<E: Into<Box<dyn error::Error + Send + Sync>>>(&self, err: E) -> io::Error {
+        io::Error::new(io::ErrorKind::Other, err)
+    }
+    fn execute(&mut self, data: &[u8]) -> io::Result<()> {
+        if self.sent_request {
+            return Err(self.err("already sent HTTP request"));
+        }
+        let agent = format!("git/1.0 (git2-curl {})", env!("CARGO_PKG_VERSION"));
+        let url = format!("{}{}", self.base_url.lock().unwrap(), self.url_path);
+        let parsed = Url::parse(&url).map_err(|_| self.err("invalid url, failed to parse"))?;
+        let host = match parsed.host_str() {
+            Some(host) => host,
+            None => return Err(self.err("invalid url, did not have a host")),
+        };
+        debug!("request to {}", url);
+        let mut h = self.handle.lock().unwrap();
+        h.url(&url)?;
+        h.useragent(&agent)?;
+        h.follow_location(true)?;
+        match self.method {
+            "GET" => h.get(true)?,
+            "PUT" => h.put(true)?,
+            "POST" => h.post(true)?,
+            other => h.custom_request(other)?,
+        }
+        let mut headers = List::new();
+        headers.append(&format!("Host: {}", host))?;
+        if data.len() > 0 {
+            h.post_fields_copy(data)?;
+            headers.append(&format!(
+                "Accept: application/x-git-{}-result",
+                self.service
+            ))?;
+            headers.append(&format!(
+                "Content-Type: \
+                 application/x-git-{}-request",
+                self.service
+            ))?;
+        } else {
+            headers.append("Accept: */*")?;
+        }
+        headers.append("Expect:")?;
+        h.http_headers(headers)?;
+        let mut content_type = None;
+        let mut data = Vec::new();
+        {
+            let mut h = h.transfer();
+            h.header_function(|header| {
+                let header = match str::from_utf8(header) {
+                    Ok(s) => s,
+                    Err(..) => return true,
+                };
+                let mut parts = header.splitn(2, ": ");
+                let name = parts.next().unwrap();
+                let value = match parts.next() {
+                    Some(value) => value,
+                    None => return true,
+                };
+                if name.eq_ignore_ascii_case("Content-Type") {
+                    content_type = Some(value.trim().to_string());
+                }
+                true
+            })?;
+            h.write_function(|buf| {
+                data.extend_from_slice(buf);
+                Ok(buf.len())
+            })?;
+            h.perform()?;
+        }
+        let code = h.response_code()?;
+        if code != 200 {
+            return Err(self.err(
+                &format!(
+                    "failed to receive HTTP 200 response: \
+                     got {}",
+                    code
+                )[..],
+            ));
+        }
+        let expected = match self.method {
+            "GET" => format!("application/x-git-{}-advertisement", self.service),
+            _ => format!("application/x-git-{}-result", self.service),
+        };
+        match content_type {
+            Some(ref content_type) if *content_type != expected => {
+                return Err(self.err(
+                    &format!(
+                        "expected a Content-Type header \
+                         with `{}` but found `{}`",
+                        expected, content_type
+                    )[..],
+                ));
+            }
+            Some(..) => {}
+            None => {
+                return Err(self.err(
+                    &format!(
+                        "expected a Content-Type header \
+                         with `{}` but didn't find one",
+                        expected
+                    )[..],
+                ));
+            }
+        }
+        let rdr = Cursor::new(data);
+        self.reader = Some(rdr);
+        if let Ok(Some(effective_url)) = h.effective_url() {
+            let new_base = if effective_url.ends_with(self.url_path) {
+                &effective_url[..effective_url.len() - self.url_path.len()]
+            } else {
+                effective_url
+            };
+            *self.base_url.lock().unwrap() = new_base.to_string();
+        }
+        Ok(())
+    }
+}

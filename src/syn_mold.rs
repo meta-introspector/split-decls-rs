@@ -3,7 +3,7 @@ use quote::quote;
 use syn::{Item, visit::Visit, visit_mut::VisitMut};
 use std::collections::HashMap;
 
-/// Static analysis mold that extracts signatures and complexity from syn usage
+#[derive(Debug, Clone)]
 pub struct SynMold {
     pub signatures: Vec<SynSignature>,
     pub complexity_metrics: ComplexityMetrics,
@@ -20,8 +20,7 @@ pub struct SynSignature {
     pub dependencies: Vec<String>,
 }
 
-/// Complexity metrics for syn operations
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Clone)]
 pub struct ComplexityMetrics {
     pub parse_operations: u32,
     pub visit_operations: u32,
@@ -79,9 +78,6 @@ impl SynMold {
 
     /// Generate inside-out wrapper that can replace syn usage
     pub fn generate_mold_wrapper(&self) -> Result<TokenStream, anyhow::Error> {
-        let signatures = &self.signatures;
-        let complexity = &self.complexity_metrics;
-        
         Ok(quote! {
             // Generated mold wrapper - replaces syn with compile-time checked version
             pub mod syn_mold_wrapper {
@@ -100,24 +96,9 @@ impl SynMold {
                 pub fn mold_parse<T>() -> impl SynMoldCheck 
                 where T: syn::parse::Parse {
                     MoldedParse::<T> {
-                        complexity: #(#complexity.total_complexity),
+                        complexity: 1.0,
                         phantom: std::marker::PhantomData,
                     }
-                }
-                
-                // Inside-out wrapper for syn::visit
-                pub fn mold_visit<V>() -> impl SynMoldCheck
-                where V: syn::visit::Visit {
-                    MoldedVisit::<V> {
-                        complexity: calculate_visit_complexity::<V>(),
-                        phantom: std::marker::PhantomData,
-                    }
-                }
-                
-                // Compile-time complexity calculation
-                const fn calculate_visit_complexity<V>() -> f64 {
-                    // Static analysis of visitor complexity
-                    1.0 // Placeholder - would be computed at compile time
                 }
                 
                 // Molded parse wrapper
@@ -127,40 +108,16 @@ impl SynMold {
                 }
                 
                 impl<T> SynMoldCheck for MoldedParse<T> {
-                    const COMPLEXITY_SCORE: f64 = 1.0; // Computed statically
+                    const COMPLEXITY_SCORE: f64 = 1.0;
                     const OPERATION_TYPE: &'static str = "parse";
                     
                     fn check_signature() -> bool {
-                        // Compile-time signature validation
                         true
                     }
                     
                     fn extract_pattern() -> UsagePattern {
                         UsagePattern {
                             pattern_type: PatternType::ParseQuote,
-                            frequency: 1,
-                            locations: vec!["compile_time".to_string()],
-                        }
-                    }
-                }
-                
-                // Molded visit wrapper  
-                pub struct MoldedVisit<V> {
-                    complexity: f64,
-                    phantom: std::marker::PhantomData<V>,
-                }
-                
-                impl<V> SynMoldCheck for MoldedVisit<V> {
-                    const COMPLEXITY_SCORE: f64 = 2.0; // Computed statically
-                    const OPERATION_TYPE: &'static str = "visit";
-                    
-                    fn check_signature() -> bool {
-                        true
-                    }
-                    
-                    fn extract_pattern() -> UsagePattern {
-                        UsagePattern {
-                            pattern_type: PatternType::VisitMut,
                             frequency: 1,
                             locations: vec!["compile_time".to_string()],
                         }
@@ -259,9 +216,7 @@ impl<'ast> Visit<'ast> for SynUsageVisitor {
         let fn_name = node.sig.ident.to_string();
         
         // Look for syn-related patterns in function body
-        if let Some(block) = &node.block {
-            self.analyze_block_for_syn_usage(&fn_name, block);
-        }
+        self.analyze_block_for_syn_usage(&fn_name, &node.block);
         
         syn::visit::visit_item_fn(self, node);
     }

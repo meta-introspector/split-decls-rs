@@ -1,0 +1,6 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+#[derive(Debug, Default)]
+pub struct SsrMatches {
+    pub matches: Vec<Match>,
+}

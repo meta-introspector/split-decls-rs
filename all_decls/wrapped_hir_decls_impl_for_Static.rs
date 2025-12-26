@@ -1,0 +1,38 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl Static {
+    pub fn module(self, db: &dyn HirDatabase) -> Module {
+        Module {
+            id: self.id.module(db),
+        }
+    }
+    pub fn name(self, db: &dyn HirDatabase) -> Name {
+        db.static_signature(self.id).name.clone()
+    }
+    pub fn is_mut(self, db: &dyn HirDatabase) -> bool {
+        db.static_signature(self.id)
+            .flags
+            .contains(StaticFlags::MUTABLE)
+    }
+    pub fn value(self, db: &dyn HirDatabase) -> Option<ast::Expr> {
+        self.source(db)?.value.body()
+    }
+    pub fn ty(self, db: &dyn HirDatabase) -> Type<'_> {
+        Type::from_value_def(db, self.id)
+    }
+    pub fn extern_block(self, db: &dyn HirDatabase) -> Option<ExternBlock> {
+        match self.id.lookup(db).container {
+            ItemContainerId::ExternBlockId(id) => Some(ExternBlock { id }),
+            _ => None,
+        }
+    }
+    /// Evaluate the static initializer.
+    pub fn eval(self, db: &dyn HirDatabase) -> Result<EvaluatedConst<'_>, ConstEvalError<'_>> {
+        let ty = db.value_ty(self.id.into()).unwrap().instantiate_identity();
+        db.const_eval_static(self.id).map(|it| EvaluatedConst {
+            const_: it,
+            def: self.id.into(),
+            ty,
+        })
+    }
+}

@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: signature")]
+#[llm_context(crate_name = "wrapped_git2", module_name = "signature")]
+pub struct wrapped_git2_decls_module_not_found_signature;

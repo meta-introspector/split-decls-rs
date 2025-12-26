@@ -1,0 +1,82 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn gen_size_hint_method(input: &DeriveInput, needs_recursive_count: bool) -> Result<TokenStream> {
+    let size_hint_fields = |fields: &Fields| {
+        fields
+            .iter()
+            .map(|f| {
+                let ty = &f.ty;
+                determine_field_constructor(f).map(|field_constructor| match field_constructor {
+                    FieldConstructor::Default | FieldConstructor::Value(_) => {
+                        quote!(Ok((0, Some(0))))
+                    }
+                    FieldConstructor::Arbitrary => {
+                        quote! {
+                            <# ty as arbitrary::Arbitrary >::try_size_hint(depth)
+                        }
+                    }
+                    FieldConstructor::With(_) => {
+                        quote! {
+                            Ok((::core::mem::size_of::<# ty > (), None))
+                        }
+                    }
+                })
+            })
+            .collect::<Result<Vec<TokenStream>>>()
+            .map(|hints| {
+                quote! {
+                    Ok(arbitrary::size_hint::and_all(& [# (# hints ?),*]))
+                }
+            })
+    };
+    let size_hint_structlike = |fields: &Fields| {
+        assert!(needs_recursive_count);
+        size_hint_fields(fields).map(|hint| {
+            quote! {
+                #[inline] fn size_hint(depth : usize) -> (usize,
+                ::core::option::Option < usize >) { Self::try_size_hint(depth)
+                .unwrap_or_default() } #[inline] fn try_size_hint(depth : usize) ->
+                ::core::result::Result < (usize, ::core::option::Option < usize >),
+                arbitrary::MaxRecursionReached, > {
+                arbitrary::size_hint::try_recursion_guard(depth, | depth | # hint) }
+            }
+        })
+    };
+    match &input.data {
+        Data::Struct(data) => size_hint_structlike(&data.fields),
+        Data::Union(data) => size_hint_structlike(&Fields::Named(data.fields.clone())),
+        Data::Enum(data) => data
+            .variants
+            .iter()
+            .filter(not_skipped)
+            .map(|Variant { fields, .. }| {
+                if !needs_recursive_count {
+                    assert!(fields.is_empty());
+                }
+                size_hint_fields(fields)
+            })
+            .collect::<Result<Vec<TokenStream>>>()
+            .map(|variants| {
+                if needs_recursive_count {
+                    quote! {
+                        fn size_hint(depth : usize) -> (usize, ::core::option::Option
+                        < usize >) { Self::try_size_hint(depth).unwrap_or_default() }
+                        #[inline] fn try_size_hint(depth : usize) ->
+                        ::core::result::Result < (usize, ::core::option::Option <
+                        usize >), arbitrary::MaxRecursionReached, > {
+                        Ok(arbitrary::size_hint::and(< u32 as arbitrary::Arbitrary
+                        >::size_hint(depth),
+                        arbitrary::size_hint::try_recursion_guard(depth, | depth | {
+                        Ok(arbitrary::size_hint::or_all(& [# (# variants ?),*])) })
+                        ?,)) }
+                    }
+                } else {
+                    quote! {
+                        fn size_hint(depth : usize) -> (usize, ::core::option::Option
+                        < usize >) { < u32 as arbitrary::Arbitrary
+                        >::size_hint(depth) }
+                    }
+                }
+            }),
+    }
+}

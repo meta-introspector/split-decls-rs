@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: uts46")]
+#[llm_context(crate_name = "wrapped_idna", module_name = "uts46")]
+pub struct wrapped_idna_decls_module_not_found_uts46;

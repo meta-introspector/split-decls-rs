@@ -38,10 +38,12 @@ impl SignatureCompressor {
         let bindings = self.parse_macro_bindings(decl_code)?;
         let signature_string = bindings.join("|");
         
-        // Update frequency
-        let frequency = self.frequency_map.entry(signature_string.clone())
-            .and_modify(|f| *f += 1)
-            .or_insert(1);
+        // Update frequency first
+        let frequency = {
+            let entry = self.frequency_map.entry(signature_string.clone()).or_insert(0);
+            *entry += 1;
+            *entry
+        };
         
         // Get or assign prime and emoji
         let prime_key = self.get_or_assign_prime(&signature_string);
@@ -52,7 +54,7 @@ impl SignatureCompressor {
             signature_string,
             prime_key,
             emoji_key,
-            frequency: *frequency,
+            frequency,
         })
     }
 

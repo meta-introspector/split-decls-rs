@@ -1,0 +1,9 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl<T: Primitive> From<T> for AtomicMaybeUninit<T> {
+    /// Creates a new atomic value from an initialized value.
+    #[inline]
+    fn from(v: T) -> Self {
+        Self::new(MaybeUninit::new(v))
+    }
+}

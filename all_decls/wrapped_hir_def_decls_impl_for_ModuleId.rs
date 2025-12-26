@@ -1,0 +1,72 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl ModuleId {
+    pub fn def_map(self, db: &dyn DefDatabase) -> &DefMap {
+        match self.block {
+            Some(block) => block_def_map(db, block),
+            None => crate_def_map(db, self.krate),
+        }
+    }
+    pub(crate) fn local_def_map(self, db: &dyn DefDatabase) -> (&DefMap, &LocalDefMap) {
+        match self.block {
+            Some(block) => (block_def_map(db, block), self.only_local_def_map(db)),
+            None => {
+                let def_map = crate_local_def_map(db, self.krate);
+                (def_map.def_map(db), def_map.local(db))
+            }
+        }
+    }
+    pub(crate) fn only_local_def_map(self, db: &dyn DefDatabase) -> &LocalDefMap {
+        crate_local_def_map(db, self.krate).local(db)
+    }
+    pub fn crate_def_map(self, db: &dyn DefDatabase) -> &DefMap {
+        crate_def_map(db, self.krate)
+    }
+    pub fn krate(self) -> Crate {
+        self.krate
+    }
+    pub fn name(self, db: &dyn DefDatabase) -> Option<Name> {
+        let def_map = self.def_map(db);
+        let parent = def_map[self.local_id].parent?;
+        def_map[parent]
+            .children
+            .iter()
+            .find_map(|(name, module_id)| {
+                if *module_id == self.local_id {
+                    Some(name.clone())
+                } else {
+                    None
+                }
+            })
+    }
+    /// Returns the module containing `self`, either the parent `mod`, or the module (or block) containing
+    /// the block, if `self` corresponds to a block expression.
+    pub fn containing_module(self, db: &dyn DefDatabase) -> Option<ModuleId> {
+        self.def_map(db).containing_module(self.local_id)
+    }
+    pub fn containing_block(self) -> Option<BlockId> {
+        self.block
+    }
+    pub fn is_block_module(self) -> bool {
+        self.block.is_some() && self.local_id == DefMap::ROOT
+    }
+    pub fn is_within_block(self) -> bool {
+        self.block.is_some()
+    }
+    /// Returns the [`CrateRootModuleId`] for this module if it is the crate root module.
+    pub fn as_crate_root(&self) -> Option<CrateRootModuleId> {
+        if self.local_id == DefMap::ROOT && self.block.is_none() {
+            Some(CrateRootModuleId { krate: self.krate })
+        } else {
+            None
+        }
+    }
+    /// Returns the [`CrateRootModuleId`] for this module.
+    pub fn derive_crate_root(&self) -> CrateRootModuleId {
+        CrateRootModuleId { krate: self.krate }
+    }
+    /// Whether this module represents the crate root module
+    pub fn is_crate_root(&self) -> bool {
+        self.local_id == DefMap::ROOT && self.block.is_none()
+    }
+}

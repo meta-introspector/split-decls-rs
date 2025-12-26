@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: task")]
+#[llm_context(crate_name = "wrapped_futures_core", module_name = "task")]
+pub struct wrapped_futures_core_decls_module_not_found_task;

@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Returns the storage directory used by Cargo within `cwd`.
+/// For more details, see [`cargo_home`](fn.cargo_home.html).
+pub fn cargo_home_with_cwd(cwd: &Path) -> io::Result<PathBuf> {
+    env::cargo_home_with_cwd_env(&env::OS_ENV, cwd)
+}

@@ -35,13 +35,28 @@ pub enum AstOperation {
 #[derive(Debug)]
 pub struct SecurityError(pub String);
 
+/// Security and ACL enum for AST operations  
+pub enum SecurityContext {
+    Default(DefaultSecurity),
+    Strict(StrictSecurity),
+}
+
+impl SecurityContext {
+    pub fn check_permission(&self, operation: &AstOperation) -> bool {
+        match self {
+            SecurityContext::Default(s) => s.check_permission(operation),
+            SecurityContext::Strict(s) => s.check_permission(operation),
+        }
+    }
+}
+
 /// Main syn2macro converter
 pub struct Syn2MacroConverter {
-    security: Box<dyn SecureExecution>,
+    security: SecurityContext,
 }
 
 impl Syn2MacroConverter {
-    pub fn new(security: Box<dyn SecureExecution>) -> Self {
+    pub fn new(security: SecurityContext) -> Self {
         Self { security }
     }
     

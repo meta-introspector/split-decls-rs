@@ -1,0 +1,68 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Emit a trace event.
+#[macro_export]
+macro_rules! trace {
+    (target : $target:expr, { $($field:tt)* }, $($arg:tt)*) => {
+        $crate::event!(target : $target, $crate::event::Level::TRACE, { $($field)* },
+        $($arg)*)
+    };
+    (target : $target:expr, $($k:ident).+ $($field:tt)*) => {
+        $crate::event!(target : $target, $crate::event::Level::TRACE, { $($k).+
+        $($field)* })
+    };
+    (target : $target:expr, ?$($k:ident).+ $($field:tt)*) => {
+        $crate::event!(target : $target, $crate::event::Level::TRACE, { ?$($k).+
+        $($field)* })
+    };
+    (target : $target:expr, %$($k:ident).+ $($field:tt)*) => {
+        $crate::event!(target : $target, $crate::event::Level::TRACE, { %$($k).+
+        $($field)* })
+    };
+    (target : $target:expr, $($arg:tt)+) => {
+        $crate::event!(target : $target, $crate::event::Level::TRACE, {}, $($arg)+)
+    };
+    ({ $($field:tt)+ }, $($arg:tt)+) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { $($field)+
+        }, $($arg)+)
+    };
+    ($($k:ident).+ = $($field:tt)*) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { $($k).+ =
+        $($field)* })
+    };
+    (?$($k:ident).+ = $($field:tt)*) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { ?$($k).+ =
+        $($field)* })
+    };
+    (%$($k:ident).+ = $($field:tt)*) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { %$($k).+ =
+        $($field)* })
+    };
+    ($($k:ident).+, $($field:tt)*) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { $($k).+,
+        $($field)* })
+    };
+    (?$($k:ident).+, $($field:tt)*) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { ?$($k).+,
+        $($field)* })
+    };
+    (%$($k:ident).+, $($field:tt)*) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { %$($k).+,
+        $($field)* })
+    };
+    (?$($k:ident).+) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { ?$($k).+
+        })
+    };
+    (%$($k:ident).+) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { %$($k).+
+        })
+    };
+    ($($k:ident).+) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, { $($k).+ })
+    };
+    ($($arg:tt)+) => {
+        $crate::event!(target : module_path!(), $crate::event::Level::TRACE, {},
+        $($arg)+)
+    };
+}
