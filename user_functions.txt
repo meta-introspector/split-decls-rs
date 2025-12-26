@@ -1,0 +1,50 @@
+     0.04%  split-decls-rs  [.] proc_macro2::parse::token_stream
+     0.04%  split-decls-rs  [.] <proc_macro2::fallback::TokenStream as core::ops::drop::Drop>::drop
+     0.03%  split-decls-rs  [.] proc_macro2::parse::ident_not_raw
+     0.03%  split-decls-rs  [.] syn::token::parsing::peek_punct
+     0.02%  split-decls-rs  [.] _ZN12prettyplease9algorithm7Printer12advance_left17h0b7b7aa3fe5ba067E.llvm.18435974128375316606
+     0.02%  split-decls-rs  [.] _ZN3syn6buffer11TokenBuffer13recursive_new17h30e28866a505f074E.llvm.7704114969360031944
+     0.02%  split-decls-rs  [.] <alloc::boxed::Box<str> as core::clone::Clone>::clone
+     0.02%  split-decls-rs  [.] core::slice::memchr::memchr_aligned
+     0.02%  split-decls-rs  [.] <proc_macro2::fallback::TokenStream as core::fmt::Display>::fmt
+     0.02%  split-decls-rs  [.] syn::lit::value::parse_lit_str
+     0.02%  split-decls-rs  [.] <alloc::vec::Vec<T,A> as core::clone::Clone>::clone
+     0.02%  split-decls-rs  [.] syn::token::parsing::peek_keyword
+     0.01%  split-decls-rs  [.] _ZN4core3ptr43drop_in_place$LT$proc_macro2..TokenTree$GT$17h7179645b7e7eee0aE.llvm.7460256167786511629
+     0.01%  split-decls-rs  [.] _ZN11proc_macro28fallback14validate_ident17h6821dc1636b8ac58E.llvm.7460256167786511629
+     0.01%  split-decls-rs  [.] core::fmt::write
+     0.01%  split-decls-rs  [.] <syn::parse::ParseBuffer as core::ops::drop::Drop>::drop
+     0.01%  split-decls-rs  [.] proc_macro2::parse::literal
+     0.01%  split-decls-rs  [.] core::str::count::char_count_general_case
+     0.01%  split-decls-rs  [.] <proc_macro2::imp::TokenTreeIter as core::iter::traits::iterator::Iterator>::next
+     0.01%  split-decls-rs  [.] proc_macro2::fallback::push_token_from_proc_macro
+     0.01%  split-decls-rs  [.] core::str::count::do_count_chars
+     0.01%  split-decls-rs  [.] syn::buffer::Cursor::group
+     0.01%  split-decls-rs  [.] syn::ident::parsing::accept_as_ident
+     0.01%  split-decls-rs  [.] <proc_macro2::imp::Ident as core::cmp::PartialEq<T>>::eq
+     0.01%  split-decls-rs  [.] _RNvCsgfh17s2Mneg_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+     0.01%  split-decls-rs  [.] syn::op::parsing::<impl syn::parse::Parse for syn::op::BinOp>::parse
+     0.01%  split-decls-rs  [.] _ZN12prettyplease9algorithm7Printer11check_stack17h7bb5fbcf76bcb612E.llvm.18435974128375316606
+     0.01%  split-decls-rs  [.] _ZN12prettyplease9algorithm7Printer11scan_string17h476cda1bc9f28ec3E.llvm.18435974128375316606
+     0.01%  split-decls-rs  [.] core::ptr::drop_in_place<syn::buffer::Entry>
+     0.01%  split-decls-rs  [.] _ZN4core3ptr36drop_in_place$LT$syn..expr..Expr$GT$17ha5b1e84b308102efE.llvm.8351996241628087022
+     0.01%  split-decls-rs  [.] syn::ident::parsing::<impl syn::parse::Parse for proc_macro2::Ident>::parse
+     0.01%  split-decls-rs  [.] _RNvCsgfh17s2Mneg_7___rustc13___rdl_dealloc
+     0.01%  split-decls-rs  [.] _ZN12prettyplease9algorithm7Printer12print_string17hf2f62eaac502603eE.llvm.18435974128375316606
+     0.01%  split-decls-rs  [.] proc_macro2::TokenTree::set_span
+     0.01%  split-decls-rs  [.] proc_macro2::fallback::SourceMap::add_file
+     0.01%  split-decls-rs  [.] syn::parse::span_of_unexpected_ignoring_nones
+     0.01%  split-decls-rs  [.] proc_macro2::parse::ident_any
+     0.01%  split-decls-rs  [.] _ZN4core4char7methods22_$LT$impl$u20$char$GT$16escape_debug_ext17h67cfec16591972d3E.llvm.7460256167786511629
+     0.01%  split-decls-rs  [.] proc_macro2::parse::punct_char
+     0.01%  split-decls-rs  [.] alloc::raw_vec::RawVecInner<A>::reserve::do_reserve_and_handle
+     0.01%  split-decls-rs  [.] proc_macro2::Punct::new
+     0.01%  split-decls-rs  [.] <core::str::lossy::Utf8Chunks as core::iter::traits::iterator::Iterator>::next
+     0.01%  split-decls-rs  [.] _ZN3syn5parse16inner_unexpected17h2eb87ea1c986ccd4E.llvm.8147643585779151557
+     0.01%  split-decls-rs  [.] syn::expr::parsing::trailer_helper
+     0.01%  split-decls-rs  [.] syn::parse::ParseBuffer::step
+     0.01%  split-decls-rs  [.] _RNvCsgfh17s2Mneg_7___rustc14___rust_dealloc
+     0.01%  split-decls-rs  [.] proc_macro2::parse::take_until_newline_or_eof
+     0.00%  split-decls-rs  [.] syn::error::Error::new::new
+     0.00%  split-decls-rs  [.] alloc::fmt::format::format_inner
+     0.00%  split-decls-rs  [.] prettyplease::mac::<impl prettyplease::algorithm::Printer>::macro_rules_tokens
