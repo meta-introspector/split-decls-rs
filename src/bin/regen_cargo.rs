@@ -60,12 +60,13 @@ fn main() -> Result<()> {
     workspace_content.push_str("]\n\n[workspace.dependencies]\n");
     
     for crate_name in &global_config.wrapping.crates {
-        if let Some(path_override) = global_config.crate_path_overrides.get(crate_name) {
-            if path_override == "*" {
+        if let Some(path_override) = global_config.crate_path_overrides.as_ref().and_then(|overrides| overrides.get(crate_name)) {
+            if path_override.to_string_lossy() == "*" {
                 workspace_content.push_str(&format!("{} = {{ version = \"*\" }}\n", crate_name));
             } else {
-                let relative_path = if path_override.contains("/submodules/") {
-                    let parts: Vec<&str> = path_override.split("/submodules/").collect();
+                let path_str = path_override.to_string_lossy();
+                let relative_path = if path_str.contains("/submodules/") {
+                    let parts: Vec<&str> = path_str.split("/submodules/").collect();
                     format!("../submodules/{}", parts[1])
                 } else {
                     format!("../{}", crate_name)

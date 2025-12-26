@@ -80,6 +80,7 @@ cargo-lock-import = { path = "cargo-lock-import" }
 prettyplease = { workspace = true }
 log = { workspace = true }
 env_logger = { workspace = true }
+lib-cargo = { path = "lib-cargo" }
 
 
 
