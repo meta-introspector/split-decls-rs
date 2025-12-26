@@ -1,9 +1,12 @@
 [package]
 name = "split-decls-rs"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 authors = []
 build = "build.rs"
+
+[profile.release]
+debug = true
 
 # [workspace]
 # members = [

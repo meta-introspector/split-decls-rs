@@ -140,35 +140,36 @@ theorem build_time_verification : True := by trivial
 }
 
 fn execute_lean4_proof() -> bool {
-    use std::process::Command;
+    // use std::process::Command;
     
-    println!("\\nSTEP 3: LEAN4 EXECUTION");
+    // println!("\nSTEP 3: LEAN4 EXECUTION");
     
     // Try to execute the Lean4 proof
-    match Command::new("lean")
-        .args(&["--run", "lean4_proof/Main.lean"])
-        .current_dir(".")
-        .output() 
-    {
-        Ok(output) => {
-            if output.status.success() {
-                println!("   ✅ Lean4 proof executed successfully!");
-                if !output.stdout.is_empty() {
-                    println!("   📤 Lean4 output:");
-                    println!("{}", String::from_utf8_lossy(&output.stdout));
-                }
-                true
-            } else {
-                println!("   📝 Lean4 execution failed (proof files generated)");
-                if !output.stderr.is_empty() {
-                    println!("   ⚠️  Error: {}", String::from_utf8_lossy(&output.stderr));
-                }
-                false
-            }
-        }
-        Err(_) => {
-            println!("   Lean4 not available (proof files generated)");
-            false
-        }
-    }
+    // match Command::new("lean")
+    //     .args(&["--run", "lean4_proof/Main.lean"])
+    //     .current_dir(".")
+    //     .output() 
+    // {
+    //     Ok(output) => {
+    //         if output.status.success() {
+    //             println!("   ✅ Lean4 proof executed successfully!");
+    //             if !output.stdout.is_empty() {
+    //                 println!("   📤 Lean4 output:");
+    //                 println!("{}", String::from_utf8_lossy(&output.stdout));
+    //             }
+    //             true
+    //         } else {
+    //             println!("   📝 Lean4 execution failed (proof files generated)");
+    //             if !output.stderr.is_empty() {
+    //                 println!("   ⚠️  Error: {}", String::from_utf8_lossy(&output.stderr));
+    //             }
+    //             false
+    //         }
+    //     }
+    //     Err(_) => {
+    //         println!("   Lean4 not available (proof files generated)");
+    //         false
+    //     }
+    // }
+    false
 }

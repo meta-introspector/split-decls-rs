@@ -19,7 +19,7 @@ fn main() -> Result<()> {
     let args = Args::parse();
     
     // Load config
-    let config = split_decls_types::SplitDeclsConfig::load_from_file("split-decls-rs.toml")?;
+    let config = split_decls_types::SplitDeclsConfig::load_from_file(&PathBuf::from("split-decls-rs.toml"))?;
     
     // Generate wrapped crate
     let output_base = PathBuf::from("output2");
