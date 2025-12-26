@@ -2,19 +2,19 @@
 -- Self-carrying CFT proof of state preservation
 
 inductive BootstrapState where
-  | state_0 : BootstrapState
-  | state_9 : BootstrapState
-  | state_5 : BootstrapState
-  | state_6 : BootstrapState
+  | state_10 : BootstrapState
   | state_2 : BootstrapState
-  | state_4 : BootstrapState
+  | state_0 : BootstrapState
   | state_7 : BootstrapState
   | state_8 : BootstrapState
-  | state_10 : BootstrapState
-  | state_1 : BootstrapState
-  | state_11 : BootstrapState
   | state_12 : BootstrapState
+  | state_6 : BootstrapState
   | state_3 : BootstrapState
+  | state_1 : BootstrapState
+  | state_5 : BootstrapState
+  | state_9 : BootstrapState
+  | state_11 : BootstrapState
+  | state_4 : BootstrapState
 
 inductive Transition : BootstrapState → BootstrapState → Prop where
   | trans_state_0_state_1 : Transition state_0 state_1
@@ -85,7 +85,7 @@ theorem bootstrap_self_carrying :
   trace.length > 0 ∧ 
   (∀ i : Nat, i + 1 < trace.length → 
    Transition (trace.get! i) (trace.get! (i + 1))) := by
-  use [state_0, state_9, state_5, state_6, state_2, state_4, state_7, state_8, state_10, state_1, state_11, state_12, state_3]
+  use [state_10, state_2, state_0, state_7, state_8, state_12, state_6, state_3, state_1, state_5, state_9, state_11, state_4]
   constructor
   · simp
   · intro i h

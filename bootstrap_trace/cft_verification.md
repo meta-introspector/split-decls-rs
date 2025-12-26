@@ -3,19 +3,19 @@
 ## Category Theory Properties
 
 ### Identity Arrows
-- State `state_0` has identity arrow: ✅
-- State `state_9` has identity arrow: ✅
-- State `state_5` has identity arrow: ✅
-- State `state_6` has identity arrow: ✅
+- State `state_10` has identity arrow: ✅
 - State `state_2` has identity arrow: ✅
-- State `state_4` has identity arrow: ✅
+- State `state_0` has identity arrow: ✅
 - State `state_7` has identity arrow: ✅
 - State `state_8` has identity arrow: ✅
-- State `state_10` has identity arrow: ✅
-- State `state_1` has identity arrow: ✅
-- State `state_11` has identity arrow: ✅
 - State `state_12` has identity arrow: ✅
+- State `state_6` has identity arrow: ✅
 - State `state_3` has identity arrow: ✅
+- State `state_1` has identity arrow: ✅
+- State `state_5` has identity arrow: ✅
+- State `state_9` has identity arrow: ✅
+- State `state_11` has identity arrow: ✅
+- State `state_4` has identity arrow: ✅
 
 ### Composition Arrows
 - Composition `state_0 → state_1 → state_2`: ✅

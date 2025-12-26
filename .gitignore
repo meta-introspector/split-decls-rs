@@ -28,3 +28,5 @@ output2/\#*
 /bootstrap.log
 /output2/b2.log
 /bootstrap_run.log
+/perf.data
+/perf.data.old

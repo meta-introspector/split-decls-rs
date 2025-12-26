@@ -25,6 +25,8 @@ pub mod paths;
 pub mod resolve_crate_path_in_submodule;
 pub mod buildrs_ast_utils;
 pub mod bootstrap_tracer;
+pub mod bootstrap_cache;
+pub mod macro_interpreter;
 pub mod buildrs_generator;
 pub mod git_manager;
 pub mod patch_config;
