@@ -1,21 +1,21 @@
-// use anyhow::Result;
-// use std::path::Path;
-// use std::fs;
-// use toml_edit::{Document, Array, value};
+use anyhow::Result;
+use std::path::Path;
+use std::fs;
+use toml_edit::{Document, Array, value};
 
-fn main() -> anyhow::Result<()> {
-    // let parent_cargo_path = Path::new("../../Cargo.toml");
-    // let current_dir = Path::new(".");
+fn main() -> Result<()> {
+    let parent_cargo_path = Path::new("../../Cargo.toml");
+    let current_dir = Path::new(".");
     
     println!("Syncing workspace members to parent Cargo.toml...");
     
     // Find all local crates that should be workspace members
-    // let local_crates = find_local_workspace_crates(current_dir)?;
+    let local_crates = find_local_workspace_crates(current_dir)?;
     
     // Update parent Cargo.toml
-    // update_parent_workspace(&parent_cargo_path, &local_crates)?;
+    update_parent_workspace(&parent_cargo_path, &local_crates)?;
     
-    // println!("Successfully synced {} workspace members", local_crates.len());
+    println!("Successfully synced {} workspace members", local_crates.len());
     
     Ok(())
 }
@@ -44,7 +44,7 @@ fn find_local_workspace_crates(dir: &Path) -> Result<Vec<String>> {
 
 fn update_parent_workspace(cargo_path: &Path, new_members: &[String]) -> Result<()> {
     let content = fs::read_to_string(cargo_path)?;
-    let mut doc: toml_edit::Document = content.parse()?;
+    let mut doc = content.parse::<toml_edit::DocumentMut>()?;
     
     // Get or create workspace table
     if !doc.contains_key("workspace") {

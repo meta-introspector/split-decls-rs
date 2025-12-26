@@ -1,12 +1,12 @@
 use std::fs;
 use anyhow::Result;
-use split_decls_rs::bootstrap_tracer::BootstrapTracer;
-use split_decls_rs::{trace_step, trace_complex};
+// use split_decls_rs::bootstrap_tracer::BootstrapTracer;
+// use split_decls_rs::{trace_step, trace_complex};
 
 fn main() -> Result<()> {
     println!("🔥 BOOTSTRAP TRACER - Self-Carrying CFT Proof System");
     
-    let mut tracer = BootstrapTracer::new();
+    // let mut tracer = BootstrapTracer::new();
     
     // Trace the bootstrap execution
     println!("\n🔬 STEP 1: TRACING BOOTSTRAP EXECUTION");

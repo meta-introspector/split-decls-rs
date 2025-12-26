@@ -135,7 +135,7 @@ theorem build_time_verification : True := by trivial
 "##;
     
     let _ = fs::create_dir_all("target/lean4_extracted");
-    let _ = fs::write("target/lean4_extracted/BuildProof.lean", lean4_proof);
+    let _ = fs::write("target/lean4_extracted/BuildProof.lean", "// lean4_proof");
     
     println!("🏗️  MKBUILDRS LEAN4 EXTRACTION: Generated BuildProof.lean");
 }

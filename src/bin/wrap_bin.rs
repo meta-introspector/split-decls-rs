@@ -31,8 +31,14 @@ fn main() -> Result<()> {
     
     // Use existing single crate generation logic
     let patch_config = split_decls_rs::patch_config::PatchConfig::default();
-    let _errors = split_decls_rs::generate_wrapped_crate::generate_wrapped_crate(
-        &output_base,
+    // let _errors = split_decls_rs::generate_wrapped_crate::generate_wrapped_crate(
+    //     &output_base,
+    //     &args.crate_path,
+    //     &config,
+    //     &patch_config,
+    //     false,
+    //     args.verbose,
+    // )?;
         "single_crate",
         &args.crate_path,
         &config,
