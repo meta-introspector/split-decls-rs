@@ -228,6 +228,7 @@ impl CFTSimulation {
         for (field_name, c1_angle) in field_data {
             // Find corresponding C2 field
             if let Some(c2_field) = self.find_corresponding_c2_field(&field_name) {
+                let c2_field_name = c2_field.name.clone(); // Clone to avoid borrow issues
                 let c2_angle = c2_field.source_location.angle;
                 let error = (c1_angle - c2_angle).abs();
                 let preserved = error < 1e-10; // Numerical precision
@@ -243,7 +244,7 @@ impl CFTSimulation {
                 
                 println!("  {} → {}: {:.6} → {:.6} (Δ = {:.2e}) {}",
                     field_name,
-                    c2_field.name,
+                    c2_field_name,
                     c1_angle,
                     c2_angle,
                     error,

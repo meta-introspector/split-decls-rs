@@ -1,14 +1,18 @@
 use anyhow::Result;
 use clap::Parser;
-use split_decls_rs::*;
 use std::path::PathBuf;
+use std::fs;
 
 #[derive(Parser)]
 #[command(name = "wrap-bin")]
-#[command(about = "Wrap a single crate and generate it in output2")]
+#[command(about = "Generate wrapped binary main.rs and Cargo.toml in output2")]
 struct Args {
-    /// Path to the crate to wrap
-    crate_path: PathBuf,
+    /// Name of the binary to wrap (e.g., "split-decls-rs")
+    binary_name: String,
+    
+    /// Output directory (default: output2)
+    #[arg(short, long, default_value = "output2")]
+    output_dir: PathBuf,
     
     /// Verbose output
     #[arg(short, long)]
@@ -18,34 +22,63 @@ struct Args {
 fn main() -> Result<()> {
     let args = Args::parse();
     
-    // Load config
-    let config = split_decls_types::SplitDeclsConfig::load_from_file(&PathBuf::from("split-decls-rs.toml"))?;
-    
-    // Generate wrapped crate
-    let output_base = PathBuf::from("output2");
-    
     if args.verbose {
-        println!("Wrapping crate: {:?}", args.crate_path);
-        println!("Output directory: {:?}", output_base);
+        println!("Generating wrapped binary for: {}", args.binary_name);
+        println!("Output directory: {}", args.output_dir.display());
     }
     
-    // Use existing single crate generation logic
-    let patch_config = split_decls_rs::patch_config::PatchConfig::default();
-    // let _errors = split_decls_rs::generate_wrapped_crate::generate_wrapped_crate(
-    //     &output_base,
-    //     &args.crate_path,
-    //     &config,
-    //     &patch_config,
-    //     false,
-    //     args.verbose,
-    // )?;
-        "single_crate",
-        &args.crate_path,
-        &config,
-        &patch_config,
-        false
-    )?;
+    // Create output directory structure
+    let src_dir = args.output_dir.join("src");
+    fs::create_dir_all(&src_dir)?;
     
-    println!("✅ Successfully wrapped crate to output2");
+    // Generate main.rs that uses wrapped library
+    let main_content = generate_wrapped_main(&args.binary_name)?;
+    let main_path = src_dir.join("main.rs");
+    fs::write(&main_path, main_content)?;
+    
+    // Generate Cargo.toml for the wrapped binary
+    let cargo_content = generate_wrapped_cargo_toml(&args.binary_name)?;
+    let cargo_path = args.output_dir.join("Cargo.toml");
+    fs::write(&cargo_path, cargo_content)?;
+    
+    if args.verbose {
+        println!("✅ Generated wrapped binary files:");
+        println!("  - {}", main_path.display());
+        println!("  - {}", cargo_path.display());
+    }
+    
     Ok(())
+}
+
+fn generate_wrapped_main(binary_name: &str) -> Result<String> {
+    let wrapped_crate_name = format!("wrapped_{}", binary_name.replace("-", "_"));
+    
+    Ok(format!(r#"// Generated wrapped main.rs for {}
+// This calls the main function from the wrapped library
+
+use anyhow::Result;
+
+fn main() -> Result<()> {{
+    // Import and call the wrapped main function
+    {}::main()
+}}
+"#, binary_name, wrapped_crate_name))
+}
+
+fn generate_wrapped_cargo_toml(binary_name: &str) -> Result<String> {
+    let wrapped_crate_name = format!("wrapped_{}", binary_name.replace("-", "_"));
+    
+    Ok(format!(r#"[package]
+name = "{}-wrapped"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "{}"
+path = "src/main.rs"
+
+[dependencies]
+{} = {{ path = "./{}" }}
+anyhow = "1.0"
+"#, binary_name, binary_name, wrapped_crate_name, wrapped_crate_name))
 }

@@ -3,7 +3,6 @@ use serde::{Serialize, Deserialize};
 use crate::ast_statistics::TypeManifold;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Level8DPoint {
     pub coordinates: [f64; 8],
     pub level: u8,
@@ -109,7 +108,7 @@ impl BottPeriodicityCache {
     }
 
     fn create_quasi_fiber_bundle(&mut self, base_point: Level8DPoint, structure: BranchingStructure) {
-        let mut next_8_levels = [None; 8];
+        let mut next_8_levels: [Option<Level8DPoint>; 8] = [const { None }; 8];
         
         // Generate next 8 levels from current structure
         for (i, branch) in structure.branches.iter().take(8).enumerate() {

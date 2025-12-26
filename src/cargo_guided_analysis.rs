@@ -359,7 +359,8 @@ checksum = "ijkl9012"
         println!("\n🔍 ANALYZING ALL CRATES IN WORKSPACE");
         
         // Analyze root crate
-        if let Ok(build_order) = self.capture_cargo_build_order(&self.root_path) {
+        let root_path = self.root_path.clone();
+        if let Ok(build_order) = self.capture_cargo_build_order(&root_path) {
             self.build_orders.insert("root".to_string(), build_order);
         }
         

@@ -1,5 +1,6 @@
 use std::collections::HashMap;
-use syn::{Item, Expr, Type, Pat, Stmt, visit::Visit, File};
+use crate::interpret_wrapped_decl;
+use syn::{Item, Type, Pat, visit::Visit, File};
 use serde::{Serialize, Deserialize};
 use crate::macro_interpreter::RdfStateMachine;
 use crate::interpret_syn_function;
