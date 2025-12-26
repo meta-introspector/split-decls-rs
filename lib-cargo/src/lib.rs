@@ -2,6 +2,8 @@ use anyhow::Result;
 use std::collections::HashMap;
 use std::path::Path;
 
+pub use toml;
+
 pub mod workspace;
 pub mod manifest;
 pub mod dependencies;

@@ -1,7 +1,8 @@
 .PHONY: build scanner repl clean
 
 # Use sccache for faster builds
-export RUSTC_WRAPPER=sccache
+SCCACHE := ~/.cargo/bin/sccache
+export RUSTC_WRAPPER=$(SCCACHE)
 
 # Build all binaries once
 build:
@@ -33,11 +34,11 @@ proof-quiet:
 
 # Run bootstrap with split-decls-rs
 run_bootstrap:
-	@echo "Running bootstrap..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full cargo run --bin split-decls-rs -- bootstrap > bootstrap_run.log 2>&1
+	@echo "Running bootstrap with sccache..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full cargo run --bin split-decls-rs -- bootstrap 2>&1 | tee bootstrap_run.log
 
 # Regenerate Cargo.toml files only (fast, no syn parsing) - using lib-cargo
 regen_cargo:
-	@echo "Regenerating Cargo.toml files..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin regen_cargo_v2 -q -- --verbose 2>/dev/null
+	@echo "Regenerating Cargo.toml files with sccache..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin regen_cargo_v2 -- --verbose 2>&1 | tee regen_cargo.log
 
 # Regenerate and build test Cargo.toml files
 regen_build:

@@ -19,6 +19,14 @@ struct Cli {
 fn main() -> Result<()> {
     let cli = Cli::parse();
     
+    // Load split-decls-rs.toml configuration
+    let content = std::fs::read_to_string("split-decls-rs.toml").unwrap_or_default();
+    let config: split_decls_types::SplitDeclsConfig = if content.is_empty() {
+        split_decls_types::SplitDeclsConfig::default()
+    } else {
+        toml::from_str(&content).unwrap()
+    };
+    
     if cli.verbose {
         println!("Regenerating Cargo.toml files in {}", cli.output_dir.display());
     }
@@ -57,8 +65,22 @@ fn main() -> Result<()> {
         }
     }
     
-    // Collect all dependencies from updated crates
-    let all_deps = collect_all_workspace_dependencies(&cli.output_dir)?;
+    // Collect all dependencies from updated crates and existing config
+    let mut all_deps = collect_all_workspace_dependencies(&cli.output_dir)?;
+    
+    // Add dependencies from split-decls-rs.toml configuration
+    println!("Config loaded, crate_path_overrides: {:?}", config.crate_path_overrides.is_some());
+    if let Some(overrides) = &config.crate_path_overrides {
+        println!("Found {} package aliases", overrides.len());
+        for (name, path) in overrides {
+            println!("Package alias: {} = {}", name, path.display());
+            let mut workspace_entry = lib_cargo::toml::map::Map::new();
+            workspace_entry.insert("path".to_string(), lib_cargo::toml::Value::String(path.to_string_lossy().to_string()));
+            all_deps.insert(name.clone(), lib_cargo::toml::Value::Table(workspace_entry));
+        }
+    } else {
+        println!("No crate_path_overrides found in config");
+    }
     
     // Generate workspace Cargo.toml
     generate_workspace_toml(&members, &all_deps, &cli.output_dir.join("Cargo.toml"))?;

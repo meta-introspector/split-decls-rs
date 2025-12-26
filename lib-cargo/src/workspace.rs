@@ -59,11 +59,18 @@ pub fn collect_all_workspace_dependencies(workspace_dir: &Path) -> Result<HashMa
         if path.file_name() == Some(std::ffi::OsStr::new("Cargo.toml")) && path != workspace_dir.join("Cargo.toml") {
             if let Ok(manifest) = crate::manifest::read_manifest(path) {
                 let deps = crate::dependencies::collect_dependencies(&manifest);
-                for (name, value) in deps {
-                    // Convert to workspace format - just set workspace = true for all deps
-                    let mut workspace_entry = toml::map::Map::new();
-                    workspace_entry.insert("workspace".to_string(), Value::Boolean(true));
-                    all_deps.insert(name, Value::Table(workspace_entry));
+                for (name, _value) in deps {
+                    // Special handling for alloc alias
+                    if name == "alloc" {
+                        let mut workspace_entry = toml::map::Map::new();
+                        workspace_entry.insert("path".to_string(), Value::String("./wrapped-rustc-std-workspace-alloc".to_string()));
+                        all_deps.insert(name, Value::Table(workspace_entry));
+                    } else {
+                        // Convert to workspace format - just set workspace = true for all deps
+                        let mut workspace_entry = toml::map::Map::new();
+                        workspace_entry.insert("workspace".to_string(), Value::Boolean(true));
+                        all_deps.insert(name, Value::Table(workspace_entry));
+                    }
                 }
             }
         }

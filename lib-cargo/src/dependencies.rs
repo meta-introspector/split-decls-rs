@@ -10,7 +10,17 @@ pub fn collect_dependencies(manifest: &Value) -> HashMap<String, Value> {
     for section in ["dependencies", "dev-dependencies", "build-dependencies"] {
         if let Some(section_deps) = manifest.get(section).and_then(|v| v.as_table()) {
             for (name, value) in section_deps {
-                deps.insert(name.clone(), value.clone());
+                // Check if this dependency has a package attribute (alias)
+                if let Some(table) = value.as_table() {
+                    if let Some(package_name) = table.get("package").and_then(|v| v.as_str()) {
+                        // Use the package name as the key, not the dependency name
+                        deps.insert(package_name.to_string(), value.clone());
+                    } else {
+                        deps.insert(name.clone(), value.clone());
+                    }
+                } else {
+                    deps.insert(name.clone(), value.clone());
+                }
             }
         }
     }
