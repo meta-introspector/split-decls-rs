@@ -20,6 +20,7 @@ pub fn handle_multi_crate_wrapping(
     scan_root: &Path,
     dry_run: bool,
     verbose: bool,
+    cargo_only: bool,
 ) -> Result<(String, Vec<crate::eager_splitter::ModuleNotFoundReport>)> { // Changed return type
     let mut final_cargo_toml_content = String::new();
     let mut workspace_members_content = Vec::new();
@@ -81,6 +82,7 @@ pub fn handle_multi_crate_wrapping(
             global_config,
             patch_config,
             dry_run,
+            cargo_only,
         );
         match result {
             Ok(errors) => {

@@ -2,19 +2,19 @@ digraph BootstrapTrace {
   rankdir=TB;
   node [shape=box, style=filled, fillcolor=lightblue];
 
-  "state_10" [label="state_10\ngenerate_wrapped_crates"];
-  "state_2" [label="state_2\ncomplex_7_analysis_2"];
-  "state_0" [label="state_0\ncomplex_7_analysis_0"];
-  "state_7" [label="state_7\ncomplex_7_analysis_7"];
   "state_8" [label="state_8\ninitialize_workspace"];
-  "state_12" [label="state_12\nvalidate_output"];
-  "state_6" [label="state_6\ncomplex_7_analysis_6"];
-  "state_3" [label="state_3\ncomplex_7_analysis_3"];
-  "state_1" [label="state_1\ncomplex_7_analysis_1"];
+  "state_7" [label="state_7\ncomplex_7_analysis_7"];
   "state_5" [label="state_5\ncomplex_7_analysis_5"];
+  "state_6" [label="state_6\ncomplex_7_analysis_6"];
+  "state_0" [label="state_0\ncomplex_7_analysis_0"];
+  "state_4" [label="state_4\ncomplex_7_analysis_4"];
+  "state_10" [label="state_10\ngenerate_wrapped_crates"];
+  "state_12" [label="state_12\nvalidate_output"];
+  "state_3" [label="state_3\ncomplex_7_analysis_3"];
   "state_9" [label="state_9\nprocess_dependencies"];
   "state_11" [label="state_11\nbuild_workspace"];
-  "state_4" [label="state_4\ncomplex_7_analysis_4"];
+  "state_1" [label="state_1\ncomplex_7_analysis_1"];
+  "state_2" [label="state_2\ncomplex_7_analysis_2"];
 
   "state_0" -> "state_1";
   "state_1" -> "state_2";

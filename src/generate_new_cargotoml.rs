@@ -22,12 +22,30 @@ pub fn generate_new_cargotoml(
     let mut cargo_toml: CargoToml = toml::from_str(&original_cargo_toml_content)
         .context(format!("Failed to parse original Cargo.toml from {}", original_cargo_toml_path.display()))?;
 
-    // Extract crate name from the package section
-    let crate_name = cargo_toml.package.name.clone();
+    // Extract crate name from the package section and create wrapped name
+    let original_crate_name = cargo_toml.package.name.clone();
+    let wrapped_crate_name = format!("wrapped-{}", original_crate_name.replace("_", "-"));
+    
+    // Update package name to wrapped version
+    cargo_toml.package.name = wrapped_crate_name.clone();
 
     // Remove unwanted top-level sections for submodules
     cargo_toml.other.remove("workspace");
     cargo_toml.other.remove("profile");
+    
+    // Convert workspace dependency references to local dependencies
+    // This prevents "error inheriting from workspace.dependencies" issues
+    for (_, dep_value) in cargo_toml.dependencies.iter_mut() {
+        if let toml::Value::Table(dep_table) = dep_value {
+            if dep_table.contains_key("workspace") {
+                // Remove workspace = true and add default version
+                dep_table.remove("workspace");
+                if !dep_table.contains_key("version") {
+                    dep_table.insert("version".to_string(), toml::Value::String("*".to_string()));
+                }
+            }
+        }
+    }
     cargo_toml.other.remove("lints");
     cargo_toml.other.remove("bench");
 
@@ -78,7 +96,7 @@ pub fn generate_new_cargotoml(
     // cargo_toml.dependencies.insert("introspector_decl2_macros".to_string(), toml::Value::Table(macro_dep));
 
     for dep_entry in &patch_config.generated_crate_dependency {
-        if dep_entry.crate_name != crate_name {
+        if dep_entry.crate_name != original_crate_name {
             continue;
         }
 
@@ -128,7 +146,7 @@ pub fn generate_new_cargotoml(
             line!()
         )
         .context(format!("Failed to write new Cargo.toml to {}", new_path.display()))?;
-        println!("Dry-run: Generated new Cargo.toml content to {} for crate {}", new_path.display(), crate_name);
+        println!("Dry-run: Generated new Cargo.toml content to {} for crate {}", new_path.display(), wrapped_crate_name);
     } else {
         add_generated_header!(
             output_cargo_toml_path,
@@ -137,7 +155,7 @@ pub fn generate_new_cargotoml(
             line!()
         )
         .context(format!("Failed to write new Cargo.toml to {}", output_cargo_toml_path.display()))?;
-        println!("Generated new Cargo.toml for crate {}", crate_name);
+        println!("Generated new Cargo.toml for crate {}", wrapped_crate_name);
     }
 
     Ok(())

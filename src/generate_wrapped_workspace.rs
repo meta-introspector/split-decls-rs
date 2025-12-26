@@ -19,6 +19,7 @@ pub fn generate_wrapped_workspace(
     scan_root: &Path,
     dry_run: bool,
     verbose: bool,
+    cargo_only: bool,
 ) -> Result<Vec<crate::eager_splitter::ModuleNotFoundReport>> { // Changed return type
     if verbose {
         println!(
@@ -59,6 +60,7 @@ pub fn generate_wrapped_workspace(
         scan_root,
         dry_run,
         verbose,
+        cargo_only,
     )?; // Capture both content and errors
     final_cargo_toml_content = content;
     collected_errors = errors;

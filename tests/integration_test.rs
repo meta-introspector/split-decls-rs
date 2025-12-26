@@ -328,6 +328,8 @@ fn test_generate_wrapped_workspace() -> Result<()> {
         &global_config,
         current_crate_name,
         false,
+        false,
+        false, // cargo_only = false for tests
     )?;
 
     // Assertions for wrapped-workspace

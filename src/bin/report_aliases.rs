@@ -1,0 +1,43 @@
+use anyhow::Result;
+use std::collections::HashMap;
+use std::fs;
+use walkdir::WalkDir;
+use toml::Value;
+
+fn main() -> Result<()> {
+    let mut aliases = HashMap::new();
+    
+    for entry in WalkDir::new("../..").max_depth(3) {
+        let entry = entry?;
+        if entry.file_name() == "Cargo.toml" && entry.path().to_string_lossy().contains("submodules") {
+            let content = fs::read_to_string(entry.path())?;
+            let crate_name = entry.path().parent().unwrap().file_name().unwrap().to_str().unwrap();
+            
+            if crate_name == "addr2line" {
+                println!("DEBUG: Checking addr2line Cargo.toml");
+            }
+            
+            if let Ok(toml) = toml::from_str::<Value>(&content) {
+                for section in ["dependencies", "dev-dependencies", "build-dependencies"] {
+                    if let Some(deps) = toml.get(section).and_then(|v| v.as_table()) {
+                        for (dep_name, dep_spec) in deps {
+                            if let Some(table) = dep_spec.as_table() {
+                                if let Some(package) = table.get("package").and_then(|v| v.as_str()) {
+                                    aliases.insert(dep_name.clone(), (package.to_string(), crate_name.to_string()));
+                                    println!("DEBUG: Found alias {} -> {} in {}", dep_name, package, crate_name);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    println!("Found {} dependency aliases:", aliases.len());
+    for (alias, (real_name, crate_name)) in aliases {
+        println!("  {} -> {} (in {})", alias, real_name, crate_name);
+    }
+    
+    Ok(())
+}

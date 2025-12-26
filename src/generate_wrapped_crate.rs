@@ -25,6 +25,7 @@ pub fn generate_wrapped_crate(
     global_config: &SplitDeclsConfig,
     patch_config: &patch_config::PatchConfig, // New: Pass patch_config here
     dry_run: bool,
+    cargo_only: bool,
 ) -> Result<Vec<eager_splitter::ModuleNotFoundReport>> { // Changed return type
     let wrapped_crate_name = format!("wrapped-{}", original_crate_name);
     println!("\n=== Generating wrapped crate: {} ===", wrapped_crate_name);
@@ -110,31 +111,36 @@ pub fn generate_wrapped_crate(
         }
     }
 
-    let mut syntax_tree = syn::parse_file(&old_lib_rs_content)
-        .context("Failed to parse .rs content for eager splitting in wrapped crate")?;
-
-    apply_patches_to_syntax_tree(
-        &mut syntax_tree,
-        &wrapped_crate_name.replace("-", "_"), // Use wrapped crate name for patching
-        &crate_config,
-    )?;
-    
     let mut module_not_found_errors: Vec<eager_splitter::ModuleNotFoundReport> = Vec::new(); // Initialize here
 
-    eager_splitter::split_and_generate_decls(
-        &syntax_tree,
-        &wrapped_crate_paths,
-        &crate_config,
-        dry_run,
-        &mut module_not_found_errors, // Pass the new parameter
-    )?;
+    // Skip expensive syn parsing if cargo_only is true
+    if !cargo_only {
+        let mut syntax_tree = syn::parse_file(&old_lib_rs_content)
+            .context("Failed to parse .rs content for eager splitting in wrapped crate")?;
 
-    // Generate build.rs for the wrapped crate (minimal version for monitoring patches)
-    generate_new_build_rs(&wrapped_crate_paths, dry_run)?;
-    if !dry_run {
-        let build_rs_content = fs::read_to_string(&wrapped_crate_paths.build_rs_path)
-            .context(format!("Failed to read generated build.rs at {}", wrapped_crate_paths.build_rs_path.display()))?;
-        format_rust_file(&build_rs_content, &wrapped_crate_paths.build_rs_path)?;
+        apply_patches_to_syntax_tree(
+            &mut syntax_tree,
+            &wrapped_crate_name.replace("-", "_"), // Use wrapped crate name for patching
+            &crate_config,
+        )?;
+
+        eager_splitter::split_and_generate_decls(
+            &syntax_tree,
+            &wrapped_crate_paths,
+            &crate_config,
+            dry_run,
+            &mut module_not_found_errors, // Pass the new parameter
+        )?;
+
+        // Generate build.rs for the wrapped crate (minimal version for monitoring patches)
+        generate_new_build_rs(&wrapped_crate_paths, dry_run)?;
+        if !dry_run {
+            let build_rs_content = fs::read_to_string(&wrapped_crate_paths.build_rs_path)
+                .context(format!("Failed to read generated build.rs at {}", wrapped_crate_paths.build_rs_path.display()))?;
+            format_rust_file(&build_rs_content, &wrapped_crate_paths.build_rs_path)?;
+        }
+    } else {
+        println!("Skipping Rust parsing for {} (cargo-only mode)", wrapped_crate_name);
     }
 
     Ok(module_not_found_errors) // Return the collected errors

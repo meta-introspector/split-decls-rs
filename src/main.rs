@@ -79,6 +79,9 @@ enum Commands {
         /// Run in dry-run mode, no files will be modified
         #[arg(short, long)]
         dry_run: bool,
+        /// Only update Cargo.toml files, skip Rust parsing
+        #[arg(long)]
+        cargo_only: bool,
     },
 }
 
@@ -88,6 +91,7 @@ fn run_wrapped_workspace_mode(
     dry_run: bool,
     output_dir_override: Option<&PathBuf>,
     global_config: &SplitDeclsConfig,
+    cargo_only: bool,
 ) -> Result<Vec<eager_splitter::ModuleNotFoundReport>> { // Changed return type
     if verbose {
         if dry_run {
@@ -184,6 +188,7 @@ fn run_wrapped_workspace_mode(
         &current_dir_as_scan_root, // Pass current directory as scan_root
         dry_run,
         verbose,
+        cargo_only,
     )?;
 
     // --- NEW: Generate a sample build.rs using the new composer ---
@@ -254,6 +259,7 @@ fn run_bootstrap_mode(
     verbose: bool,
     dry_run: bool,
     output_dir_override: Option<&PathBuf>,
+    cargo_only: bool,
     global_config: &SplitDeclsConfig,
 ) -> Result<()> {
     if verbose {
@@ -268,7 +274,7 @@ fn run_bootstrap_mode(
         .unwrap_or_else(|| PathBuf::from("output2"));
 
     // First, run the wrapped workspace generation and collect module not found errors
-    let module_not_found_errors = run_wrapped_workspace_mode(verbose, dry_run, output_dir_override, global_config)?;
+    let module_not_found_errors = run_wrapped_workspace_mode(verbose, dry_run, output_dir_override, global_config, cargo_only)?;
 
     // Then, execute the build workflow using the WorkflowExecutor
     let build_workflow = Workflow {
@@ -390,7 +396,7 @@ fn main() -> Result<()> {
 
     match &cli.command {
         Commands::WrappedWorkspace { output_dir, dry_run } => {
-            run_wrapped_workspace_mode(cli.verbose, *dry_run, output_dir.as_ref(), &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
+            run_wrapped_workspace_mode(cli.verbose, *dry_run, output_dir.as_ref(), &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap(), false)?;
         }
         Commands::EcosystemScan { base_path, recursive, dry_run } => {
             run_ecosystem_scan_mode(cli.verbose, *dry_run, base_path, *recursive, &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
@@ -398,8 +404,8 @@ fn main() -> Result<()> {
         Commands::ExecuteGoalWorkflow { goal_file, dry_run } => {
             run_execute_goal_workflow_mode(cli.verbose, *dry_run, goal_file, &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
-        Commands::Bootstrap { output_dir, dry_run } => {
-            run_bootstrap_mode(cli.verbose, *dry_run, output_dir.as_ref(), &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
+        Commands::Bootstrap { output_dir, dry_run, cargo_only } => {
+            run_bootstrap_mode(cli.verbose, *dry_run, output_dir.as_ref(), *cargo_only, &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
     }
 
