@@ -122,20 +122,10 @@ lean_exe «k_theory_proof» where
     // Step 4: Generate build.rs integration
     println!("\n🔥 STEP 3: MKBUILDRS LEAN4 INTEGRATION");
     
-    let buildrs_content = r#"
-fn main() {
-    println!("cargo:rerun-if-changed=src/");
+//    let buildrs_content = "";
     
-    // Extract mathematical proof to Lean4 during build
-    use std::fs;
-    
-    let lean4_proof = r##"-- Build-time extracted proof
-theorem build_time_verification : True := by trivial
-#eval IO.println \"🔥 BUILD-TIME LEAN4 EXTRACTION COMPLETE!\"
-"##;
-    
-    let _ = fs::create_dir_all("target/lean4_extracted");
-    let _ = fs::write("target/lean4_extracted/BuildProof.lean", lean4_proof);
+//    let _ = fs::create_dir_all("target/lean4_extracted");
+//    let _ = fs::write("target/lean4_extracted/BuildProof.lean", lean4_proof);
     
     println!("🏗️  MKBUILDRS LEAN4 EXTRACTION: Generated BuildProof.lean");
 }
