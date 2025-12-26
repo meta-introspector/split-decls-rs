@@ -68,6 +68,38 @@ gen_workspace:
 gen_workspace_quiet:
 	@RUSTC_WRAPPER=$(SCCACHE) cargo run --bin gen_workspace -q >/dev/null 2>&1 || echo "gen_workspace failed"
 
+# Wrap single crate: addr2line
+wrap_addr2line:
+	@echo "Wrapping addr2line crate..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin wrap_single_crate -- ../addr2line --verbose 2>&1 | grep -E "(error|Error|failed|panic|WARN)" || echo "✅ addr2line wrapped successfully"
+
+# Test wrapped addr2line with lisp eval RDF system
+test_addr2line:
+	@echo "Testing wrapped addr2line..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin test_addr2line 2>&1 | tee test_addr2line.log | grep -E "(error|Error|failed|panic)" || echo "✅ Test completed"
+
+# Test wrapped addr2line module directly
+test_addr2line_module:
+	@echo "Testing wrapped addr2line module..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin test_addr2line_module 2>&1 | tee test_module.log | grep -E "(error|Error|failed|panic)" || echo "✅ Module test completed"
+
+# PROOF: !wrap_bin macro that actually uses addr2line
+proof_wrap_bin:
+	@echo "🔥 PROOF: !wrap_bin macro..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin proof_wrap_bin
+
+# PROOF: decl2addr! and alldecls! macros for declaration mapping
+proof_decl2addr:
+	@echo "🔥 PROOF: decl2addr! and alldecls! macros..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin proof_decl2addr
+
+# Analyze common terms and real addresses
+analyze_terms:
+	@echo "🔍 Analyzing common terms and real addresses..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin analyze_common_terms
+
+# Extract standalone crate with dependencies
+extract_crate:
+	@echo "📦 Extracting crate..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin extract_crate -- $(CRATE) --output $(OUTPUT) --verbose
+
+# Extract addr2line as example
+extract_addr2line:
+	@echo "📦 Extracting addr2line..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin extract_crate -- addr2line --output extracted-addr2line --verbose
+
 # Run stateful REPL directly  
 repl:
 	../../target/debug/stateful_repl
