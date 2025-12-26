@@ -1,4 +1,5 @@
 use split_decls_rs::conformal_field_theory::CFTSimulation;
+use split_decls_rs::bott_periodicity::{BottPeriodicityCache, Level8DPoint};
 use anyhow::Result;
 
 fn main() -> anyhow::Result<()> {

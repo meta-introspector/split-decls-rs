@@ -186,9 +186,9 @@ fn inspect_wrapped_crate(crate_name: &str, details: bool) -> anyhow::Result<()> 
         
         if details {
             for entry in decl_files.iter().take(10) {
-                let file_name = entry.file_name().to_string_lossy();
+                let file_name_string = entry.file_name().to_string_lossy().to_string();
                 if let Ok(metadata) = entry.metadata() {
-                    println!("  {} ({} bytes)", file_name, metadata.len());
+                    println!("  {} ({} bytes)", file_name_string, metadata.len());
                 }
             }
         }

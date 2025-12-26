@@ -39,12 +39,13 @@ fn main() -> Result<()> {
     let mut workspace_deps = HashMap::new();
     
     for crate_name in &config.wrapping.crates {
-        if let Some(path_override) = config.crate_path_overrides.get(crate_name) {
-            if path_override == "*" {
+        if let Some(path_override) = config.crate_path_overrides.as_ref().and_then(|map| map.get(crate_name)) {
+            if path_override.to_string_lossy() == "*" {
                 // External crate - use version override or default
                 if let Some(overrides) = &config.workspace_dependency_overrides {
                     if let Some(override_spec) = overrides.get(crate_name) {
-                        workspace_deps.insert(crate_name.clone(), format!("{}", toml::to_string(override_spec)?.trim()));
+                        let toml_string = toml::to_string(override_spec)?;
+                        workspace_deps.insert(crate_name.clone(), toml_string.trim().to_string());
                     } else {
                         workspace_deps.insert(crate_name.clone(), "{ version = \"*\" }".to_string());
                     }
@@ -53,8 +54,8 @@ fn main() -> Result<()> {
                 }
             } else {
                 // Local crate - convert absolute path to relative
-                let relative_path = if path_override.contains("/submodules/") {
-                    let parts: Vec<&str> = path_override.split("/submodules/").collect();
+                let relative_path = if path_override.to_string_lossy().contains("/submodules/") {
+                    let parts: Vec<&str> = path_override.to_string_lossy().split("/submodules/").collect();
                     if parts.len() == 2 {
                         format!("../submodules/{}", parts[1])
                     } else {
@@ -74,7 +75,8 @@ fn main() -> Result<()> {
     // Apply workspace dependency overrides
     if let Some(overrides) = &config.workspace_dependency_overrides {
         for (name, override_spec) in overrides {
-            workspace_deps.insert(name.clone(), format!("{}", toml::to_string(override_spec)?.trim()));
+            let toml_string = toml::to_string(override_spec)?;
+            workspace_deps.insert(name.clone(), toml_string.trim().to_string());
         }
     }
     

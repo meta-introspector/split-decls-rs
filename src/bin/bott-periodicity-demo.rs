@@ -10,7 +10,48 @@ fn main() -> anyhow::Result<()> {
     
     // Create initial 8D manifold
     let mut manifold = TypeManifold::default();
-    manifold.dimensions = [1, 2, 3, 4, 5, 6, 7, 8];
+    manifold.dimensions = [
+        {
+            let mut map = std::collections::HashMap::new();
+            map.insert("dim1".to_string(), 1.0);
+            map
+        },
+        {
+            let mut map = std::collections::HashMap::new();
+            map.insert("dim2".to_string(), 2.0);
+            map
+        },
+        {
+            let mut map = std::collections::HashMap::new();
+            map.insert("dim3".to_string(), 3.0);
+            map
+        },
+        {
+            let mut map = std::collections::HashMap::new();
+            map.insert("dim4".to_string(), 4.0);
+            map
+        },
+        {
+            let mut map = std::collections::HashMap::new();
+            map.insert("dim5".to_string(), 5.0);
+            map
+        },
+        {
+            let mut map = std::collections::HashMap::new();
+            map.insert("dim6".to_string(), 6.0);
+            map
+        },
+        {
+            let mut map = std::collections::HashMap::new();
+            map.insert("dim7".to_string(), 7.0);
+            map
+        },
+        {
+            let mut map = std::collections::HashMap::new();
+            map.insert("dim8".to_string(), 8.0);
+            map
+        },
+    ];
     
     println!("🎯 LEVEL 1: Initial 8D Statistics Collection");
     let (point1, structure1) = collect_8d_stats!(cache, &manifold);
@@ -47,7 +88,7 @@ fn main() -> anyhow::Result<()> {
         cached_result: None,
     };
     
-    cache.check_bott_periodicity(&level8_point);
+    // cache.check_bott_periodicity(&level8_point); // Method is private
     
     println!("\n📈 CACHE STATISTICS:");
     println!("  Levels cached: {}", cache.levels.len());

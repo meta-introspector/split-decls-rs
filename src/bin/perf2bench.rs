@@ -52,8 +52,8 @@ fn find_matching_decl(function_name: &str, output2_path: &Path) -> Option<String
     let decls_dir = wrapped_dir.join("src/decls");
     if let Ok(entries) = fs::read_dir(&decls_dir) {
         for entry in entries.flatten() {
-            let file_name = entry.file_name().to_string_lossy();
-            if file_name.contains(&function_name.replace("::", "_")) {
+            let file_name_string = entry.file_name().to_string_lossy().to_string();
+            if file_name_string.contains(&function_name.replace("::", "_")) {
                 return Some(entry.path().to_string_lossy().to_string());
             }
         }

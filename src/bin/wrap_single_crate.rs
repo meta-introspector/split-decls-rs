@@ -63,6 +63,7 @@ fn main() -> Result<()> {
         &global_config,
         &patch_config,
         false, // dry_run
+        false, // cargo_only
     ).context(format!("Failed to wrap crate '{}'", crate_name))?;
 
     println!("✅ Successfully wrapped crate '{}' to '{}'", crate_name, output_dir.display());

@@ -1,7 +1,7 @@
 .PHONY: build scanner repl clean
 
 # Use sccache for faster builds
-SCCACHE := ~/.cargo/bin/sccache
+SCCACHE := /home/mdupont/.cargo/bin/sccache
 export RUSTC_WRAPPER=$(SCCACHE)
 
 # Build all binaries once
