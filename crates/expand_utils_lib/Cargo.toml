@@ -8,6 +8,6 @@ build = false
 doctest = false
 path="./src/"
 [dependencies]
-rustc_expand = { path = "../rustc_expand" }
+rustc_expand = { workspace = true }
 rustc_ast = { path = "../rustc_ast" }
 rustc_expand_base_lib = { path = "../rustc_expand_base_lib" }

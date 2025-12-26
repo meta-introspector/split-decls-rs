@@ -17,7 +17,7 @@ include.workspace = true
 # The macro crate we want to test
 expand_utils_macros = { path = "../expand_utils_macros" }
 # rustc_expand for types used by the macro output
-rustc_expand = { path = "../rustc_expand" }
+rustc_expand = { workspace = true }
 # For basic AST types like NodeId, etc.
 rustc_ast = { workspace = true }
 rustc_span = { workspace = true }

@@ -8,7 +8,7 @@ rustc_span = { workspace = true }
 rustc_ast = { workspace = true }
 rustc_serialize = { workspace = true }
 lib-matcher-loc = { path = "../lib-matcher-loc" }
-lib-token-tree = { path = "../lib-token-tree" }
+lib-token-tree = { workspace = true }
 rustc_data_structures = { workspace = true }
 rustc_errors = { workspace = true }
 rustc_session = { workspace = true }
