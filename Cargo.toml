@@ -93,6 +93,10 @@ toml = { workspace = true }
 cargo-toml-parts = { path = "build_helpers/cargo_toml_parts" }
 
 [[bin]]
+name = "regen_cargo_v2"
+path = "src/bin/regen_cargo_v2.rs"
+
+[[bin]]
 name = "rustmacrodoc"
 path = "src/bin/rustmacrodoc.rs"
 

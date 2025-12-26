@@ -2,6 +2,7 @@ use anyhow::Result;
 use std::collections::HashMap;
 use std::path::Path;
 use toml::Value;
+use walkdir::WalkDir;
 
 /// Generate workspace Cargo.toml with members and dependencies
 pub fn generate_workspace_toml(
@@ -30,7 +31,7 @@ pub fn generate_workspace_toml(
 pub fn collect_workspace_members(dir: &Path) -> Result<Vec<String>> {
     let mut members = Vec::new();
     
-    for entry in walkdir::WalkDir::new(dir).max_depth(1) {
+    for entry in WalkDir::new(dir).max_depth(1) {
         let entry = entry?;
         let path = entry.path();
         
@@ -45,4 +46,28 @@ pub fn collect_workspace_members(dir: &Path) -> Result<Vec<String>> {
     
     members.sort();
     Ok(members)
+}
+
+/// Scan all Cargo.toml files in workspace and collect their dependencies
+pub fn collect_all_workspace_dependencies(workspace_dir: &Path) -> Result<HashMap<String, Value>> {
+    let mut all_deps = HashMap::new();
+    
+    for entry in WalkDir::new(workspace_dir).max_depth(2) {
+        let entry = entry?;
+        let path = entry.path();
+        
+        if path.file_name() == Some(std::ffi::OsStr::new("Cargo.toml")) && path != workspace_dir.join("Cargo.toml") {
+            if let Ok(manifest) = crate::manifest::read_manifest(path) {
+                let deps = crate::dependencies::collect_dependencies(&manifest);
+                for (name, value) in deps {
+                    // Convert to workspace format - just set workspace = true for all deps
+                    let mut workspace_entry = toml::map::Map::new();
+                    workspace_entry.insert("workspace".to_string(), Value::Boolean(true));
+                    all_deps.insert(name, Value::Table(workspace_entry));
+                }
+            }
+        }
+    }
+    
+    Ok(all_deps)
 }

@@ -35,9 +35,9 @@ proof-quiet:
 run_bootstrap:
 	@echo "Running bootstrap..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full cargo run --bin split-decls-rs -- bootstrap > bootstrap_run.log 2>&1
 
-# Regenerate Cargo.toml files only (fast, no syn parsing)
+# Regenerate Cargo.toml files only (fast, no syn parsing) - using lib-cargo
 regen_cargo:
-	@echo "Regenerating Cargo.toml files..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin regen_cargo -q -- --verbose 2>/dev/null
+	@echo "Regenerating Cargo.toml files..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin regen_cargo_v2 -q -- --verbose 2>/dev/null
 
 # Regenerate and build test Cargo.toml files
 regen_build:
