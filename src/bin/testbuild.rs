@@ -1,5 +1,5 @@
-use cargo_toml_generator_macros::define_root_cargo_toml;
-use cargo_toml_generator_types::CargoToml;
+use lib_cargo::define_root_cargo_toml;
+use lib_cargo::CargoToml;
 use toml;
 
 fn main() -> anyhow::Result<()> { // Change return type to Result

@@ -5,6 +5,7 @@ use std::fs;
 use std::path::PathBuf;
 use walkdir::WalkDir;
 use split_decls_rs::config_macros::GLOBAL_CONFIG;
+use toml;
 
 #[derive(Parser)]
 #[command(name = "gen-workspace")]
@@ -74,12 +75,47 @@ fn main() -> Result<()> {
         }
     }
     
-    // Apply workspace dependency overrides
+    // Scan all wrapped crates for missing workspace dependencies
+    println!("Scanning wrapped crates for missing dependencies...");
+    let mut missing_deps = std::collections::HashSet::new();
+    
+    for entry in WalkDir::new(&cli.output_dir).max_depth(2) {
+        let entry = entry?;
+        if entry.file_name() == "Cargo.toml" && entry.path() != cli.output_dir.join("Cargo.toml") {
+            if let Ok(content) = fs::read_to_string(entry.path()) {
+                if let Ok(cargo_toml) = toml::from_str::<toml::Value>(&content) {
+                    // Check dependencies sections for workspace = true
+                    for section in ["dependencies", "build-dependencies", "dev-dependencies"] {
+                        if let Some(deps) = cargo_toml.get(section).and_then(|v| v.as_table()) {
+                            for (dep_name, dep_value) in deps {
+                                if let Some(table) = dep_value.as_table() {
+                                    if table.get("workspace") == Some(&toml::Value::Boolean(true)) {
+                                        missing_deps.insert(dep_name.clone());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Add missing dependencies with default versions
+    for dep_name in missing_deps {
+        if !workspace_deps.contains_key(&dep_name) {
+            workspace_deps.insert(dep_name.clone(), "{ version = \"*\" }".to_string());
+        }
+    }
+    
+    // Apply workspace dependency overrides (only if not already present)
     let overrides = &config.workspace_dependency_overrides;
     if !overrides.is_empty() {
         for (name, override_spec) in overrides {
-            let toml_string = toml::to_string(override_spec)?;
-            workspace_deps.insert(name.clone(), toml_string.trim().to_string());
+            if !workspace_deps.contains_key(name) {  // Prevent duplicates
+                let toml_string = toml::to_string(override_spec)?;
+                workspace_deps.insert(name.clone(), toml_string.trim().to_string());
+            }
         }
     }
     

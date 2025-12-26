@@ -64,6 +64,10 @@ fix_deps:
 gen_workspace:
 	@echo "Generating workspace..." && RUSTC_WRAPPER=$(SCCACHE) cargo run --bin gen_workspace -q 2>/dev/null
 
+# Generate workspace quietly with sccache (no output unless error)
+gen_workspace_quiet:
+	@RUSTC_WRAPPER=$(SCCACHE) cargo run --bin gen_workspace -q >/dev/null 2>&1 || echo "gen_workspace failed"
+
 # Run stateful REPL directly  
 repl:
 	../../target/debug/stateful_repl

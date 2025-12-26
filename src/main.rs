@@ -153,7 +153,7 @@ fn run_wrapped_workspace_mode(
             if verbose {
                 println!("Warning: No root Cargo.toml found at {}, using empty content for dependency extraction.", target_cargo_path.display());
             }
-            "[package]\nname = \"dummy\"\nversion = \"0.1.0\"\nedition = \"2021\"\n".to_string()
+            "[package]\nname = \"dummy\"\nversion = \"0.1.0\"\nedition = \"2024\"\n".to_string()
         }
     };
 

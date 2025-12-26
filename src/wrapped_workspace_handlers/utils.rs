@@ -35,7 +35,9 @@ pub fn collect_and_format_workspace_dependencies(
     // Finally, apply/override with explicit dependencies from workspace_dependency_overrides
     // These take the highest precedence.
     for (dep_name, override_value) in &global_config.workspace_dependency_overrides {
-        workspace_deps.insert(dep_name.clone(), override_value.clone());
+        if !workspace_deps.contains_key(dep_name) {  // Prevent duplicates
+            workspace_deps.insert(dep_name.clone(), override_value.clone());
+        }
     }
 
     eprintln!("DEBUG: Final workspace_deps: {:?}", workspace_deps);
