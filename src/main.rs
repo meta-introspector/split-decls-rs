@@ -130,12 +130,17 @@ fn run_wrapped_workspace_mode(
         if verbose {
             println!("No {} found, using target directory Cargo.toml or default.", root_cargo_toml_path.display());
         }
-        let target_dir = PathBuf::from("./"); // Default if not overridden
-        let target_cargo_path = target_dir.join("Cargo.toml"); // This should probably be the root Cargo.toml of the project
         
-        // This logic seems a bit off. It should likely load the *main* Cargo.toml of the project
-        // if output2/Cargo.toml doesn't exist, to get workspace dependencies from it.
-        // For now, mirroring original logic:
+        // Smart path resolution: if we're in output2, use current Cargo.toml
+        // Otherwise, look for parent workspace Cargo.toml
+        let target_cargo_path = if std::env::current_dir()
+            .map(|p| p.file_name().and_then(|n| n.to_str()) == Some("output2"))
+            .unwrap_or(false) {
+            PathBuf::from("./Cargo.toml") // Use current directory if in output2
+        } else {
+            PathBuf::from("../../Cargo.toml") // Use parent workspace otherwise
+        };
+        
         if target_cargo_path.exists() {
             fs::read_to_string(&target_cargo_path)
                 .context(format!("Failed to read target Cargo.toml from {}", target_cargo_path.display()))?

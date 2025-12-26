@@ -51,6 +51,7 @@ pub struct AnglePreservation {
     pub error: f64,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CFTSimulation {
     pub rustc_cft: ConformalFieldTheory,    // C1
     pub output2_cft: ConformalFieldTheory,  // C2
@@ -160,10 +161,15 @@ impl CFTSimulation {
     pub fn compute_conformal_map(&mut self) -> Result<()> {
         println!("🌀 COMPUTING CONFORMAL MAP φ: C1 → N1 → C2");
         
+        // Collect field names first to avoid borrow checker issues
+        let field_names: Vec<String> = self.rustc_cft.primary_fields.iter()
+            .map(|field| field.name.clone())
+            .collect();
+        
         // Map C1 to N1 (rustc to neutral space)
-        for field in &self.rustc_cft.primary_fields {
-            let neutral_key = self.map_to_neutral_space(&field.name)?;
-            self.conformal_map.c1_to_n1.insert(field.name.clone(), neutral_key.clone());
+        for field_name in field_names {
+            let neutral_key = self.map_to_neutral_space(&field_name)?;
+            self.conformal_map.c1_to_n1.insert(field_name, neutral_key.clone());
             
             // Map N1 to C2 (neutral space to output2)
             let output2_key = self.map_from_neutral_space(&neutral_key)?;
@@ -214,11 +220,14 @@ impl CFTSimulation {
     pub fn verify_angle_preservation(&mut self) -> Result<()> {
         println!("\n📐 VERIFYING ANGLE PRESERVATION");
         
-        for c1_field in &self.rustc_cft.primary_fields {
-            let c1_angle = c1_field.source_location.angle;
-            
+        // Collect field data first to avoid borrow checker issues
+        let field_data: Vec<(String, f64)> = self.rustc_cft.primary_fields.iter()
+            .map(|field| (field.name.clone(), field.source_location.angle))
+            .collect();
+        
+        for (field_name, c1_angle) in field_data {
             // Find corresponding C2 field
-            if let Some(c2_field) = self.find_corresponding_c2_field(&c1_field.name) {
+            if let Some(c2_field) = self.find_corresponding_c2_field(&field_name) {
                 let c2_angle = c2_field.source_location.angle;
                 let error = (c1_angle - c2_angle).abs();
                 let preserved = error < 1e-10; // Numerical precision
@@ -233,7 +242,7 @@ impl CFTSimulation {
                 self.conformal_map.angle_preservation.push(preservation);
                 
                 println!("  {} → {}: {:.6} → {:.6} (Δ = {:.2e}) {}",
-                    c1_field.name,
+                    field_name,
                     c2_field.name,
                     c1_angle,
                     c2_angle,
@@ -267,7 +276,7 @@ impl CFTSimulation {
                 let key = format!("⟨{}{}⟩", field1.name, field2.name);
                 
                 self.rustc_cft.correlation_functions.insert(key.clone(), correlation.clone());
-                self.output2_cft.correlation_functions.insert(key.clone(), correlation);
+                self.output2_cft.correlation_functions.insert(key.clone(), correlation.clone());
                 
                 println!("  {}: {:.6} (invariant: {})",
                     key, correlation.value, correlation.conformal_invariant);

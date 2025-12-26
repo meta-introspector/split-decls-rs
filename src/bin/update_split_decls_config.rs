@@ -73,6 +73,51 @@ use toml::{self, Table, Value};
 use serde::{Deserialize, Serialize};
 use cargo_lock_import::import_cargo_lock;
 
+fn generate_preservation_proof(config: &SplitDeclsConfig, cargo2nix_root: &Path) -> Result<String> {
+    let mut proof = String::new();
+    proof.push_str("# Crate Preservation Proof\n\n");
+    proof.push_str(&format!("Generated: {}\n", chrono::Utc::now().format("%Y-%m-%d %H:%M:%S UTC")));
+    proof.push_str(&format!("Total crates: {}\n\n", config.wrapping.crates.len()));
+    
+    proof.push_str("## Preservation Verification\n\n");
+    
+    let mut preserved_count = 0;
+    let mut missing_count = 0;
+    
+    for crate_name in &config.wrapping.crates {
+        if let Some(path_str) = config.crate_path_overrides.get(crate_name) {
+            let path = Path::new(path_str);
+            let exists = path.exists();
+            let cargo_toml_exists = path.join("Cargo.toml").exists();
+            
+            if exists && cargo_toml_exists {
+                preserved_count += 1;
+                proof.push_str(&format!("✅ `{}` → `{}`\n", crate_name, path_str));
+            } else {
+                missing_count += 1;
+                proof.push_str(&format!("❌ `{}` → `{}` (missing)\n", crate_name, path_str));
+            }
+        } else {
+            missing_count += 1;
+            proof.push_str(&format!("❌ `{}` → (no path mapping)\n", crate_name));
+        }
+    }
+    
+    proof.push_str(&format!("\n## Summary\n\n"));
+    proof.push_str(&format!("- **Preserved**: {}\n", preserved_count));
+    proof.push_str(&format!("- **Missing**: {}\n", missing_count));
+    proof.push_str(&format!("- **Preservation Rate**: {:.1}%\n", 
+        (preserved_count as f64 / config.wrapping.crates.len() as f64) * 100.0));
+    
+    if missing_count == 0 {
+        proof.push_str("\n🎉 **ALL CRATES PRESERVED** - Ready for bootstrap!\n");
+    } else {
+        proof.push_str(&format!("\n⚠️  {} crates need attention before bootstrap\n", missing_count));
+    }
+    
+    Ok(proof)
+}
+
 
 // --- Structs for SplitDeclsConfig (from split-decls-types/src/lib.rs) ---
 // Duplicated here to avoid circular dependency for this tool.
@@ -178,13 +223,21 @@ fn main() -> Result<()> {
     split_decls_data.crate_path_overrides = sorted_overrides.into_iter().collect();
 
 
+    // Generate preservation proof
+    let preservation_proof = generate_preservation_proof(&split_decls_data, &cargo2nix_root)?;
+    
     // Write updated split-decls-rs.toml
     let updated_toml_content = toml::to_string_pretty(&split_decls_data)
         .context("Failed to serialize updated split-decls-rs.toml")?;
     fs::write(&args.split_decls_config_path, updated_toml_content)
         .context(format!("Failed to write to {}", args.split_decls_config_path.display()))?;
 
+    // Write preservation proof
+    fs::write("crate_preservation_proof.md", preservation_proof)
+        .context("Failed to write preservation proof")?;
+
     println!("Successfully updated {}", args.split_decls_config_path.display());
+    println!("Generated crate preservation proof: crate_preservation_proof.md");
 
     Ok(())
 }

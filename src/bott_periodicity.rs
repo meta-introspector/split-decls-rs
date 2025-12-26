@@ -3,6 +3,7 @@ use serde::{Serialize, Deserialize};
 use crate::ast_statistics::TypeManifold;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Level8DPoint {
     pub coordinates: [f64; 8],
     pub level: u8,
@@ -42,14 +43,14 @@ impl BottPeriodicityCache {
 
     pub fn collect_8d_statistics(&mut self, manifold: &TypeManifold) -> Level8DPoint {
         let coordinates = [
-            manifold.dimensions[0] as f64,
-            manifold.dimensions[1] as f64,
-            manifold.dimensions[2] as f64,
-            manifold.dimensions[3] as f64,
-            manifold.dimensions[4] as f64,
-            manifold.dimensions[5] as f64,
-            manifold.dimensions[6] as f64,
-            manifold.dimensions[7] as f64,
+            manifold.dimensions[0].values().sum::<f64>(),
+            manifold.dimensions[1].values().sum::<f64>(),
+            manifold.dimensions[2].values().sum::<f64>(),
+            manifold.dimensions[3].values().sum::<f64>(),
+            manifold.dimensions[4].values().sum::<f64>(),
+            manifold.dimensions[5].values().sum::<f64>(),
+            manifold.dimensions[6].values().sum::<f64>(),
+            manifold.dimensions[7].values().sum::<f64>(),
         ];
 
         Level8DPoint {
@@ -98,7 +99,7 @@ impl BottPeriodicityCache {
         
         // Create quasi fiber bundle if at level N
         if level <= 8 {
-            self.create_quasi_fiber_bundle(cached_point, structure);
+            self.create_quasi_fiber_bundle(cached_point.clone(), structure);
         }
         
         // Check for Bott periodicity (level 8 -> level 1)
