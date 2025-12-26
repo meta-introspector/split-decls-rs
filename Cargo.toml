@@ -5,6 +5,10 @@ edition = "2021"
 authors = []
 build = "build.rs"
 
+[[bin]]
+name = "rdf_cli"
+path = "src/bin/rdf_cli.rs"
+
 [profile.release]
 debug = true
 
@@ -32,7 +36,10 @@ debug = true
 # serde_derive = "1.0"
 # paste = "1.0"
 serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
 regex = "1.0"
+syn = { version = "2.0", features = ["full", "visit"] }
+petgraph = "0.6"
 # url = "2.0"
 # quote = "1.0"
 # syn = { version = "2.0", features = ["full", "visit", "visit-mut", "extra-traits"] }

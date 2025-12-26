@@ -1,0 +1,3560 @@
+[
+  {
+    "integer_value": 2,
+    "total_usage_count": 4664,
+    "field_usage": {
+      "hash_field_2": 9,
+      "level": 4222,
+      "id_field_2": 4,
+      "error_field_2": 5,
+      "index_field_2": 4,
+      "counter_field_2": 2,
+      "generic_field_2": 250,
+      "complexity_score": 165,
+      "version_field_2": 3
+    },
+    "field_types": {
+      "u32": 4222,
+      "f64": 165,
+      "power_of_two": 277
+    },
+    "usage_contexts": {
+      "application_code": 48,
+      "networking_io": 16,
+      "testing_framework": 10,
+      "standard_library": 1,
+      "compiler_internals": 1,
+      "node_metadata": 4387,
+      "overlay_system": 201
+    }
+  },
+  {
+    "integer_value": 5,
+    "total_usage_count": 1610,
+    "field_usage": {
+      "complexity_score": 462,
+      "generic_field_5": 11,
+      "id_field_5": 2,
+      "level": 1135
+    },
+    "field_types": {
+      "small_integer": 13,
+      "f64": 462,
+      "u32": 1135
+    },
+    "usage_contexts": {
+      "overlay_system": 6,
+      "application_code": 5,
+      "node_metadata": 1597,
+      "testing_framework": 2
+    }
+  },
+  {
+    "integer_value": 7,
+    "total_usage_count": 989,
+    "field_usage": {
+      "complexity_score": 987,
+      "generic_field_7": 1,
+      "id_field_7": 1
+    },
+    "field_types": {
+      "f64": 987,
+      "small_integer": 2
+    },
+    "usage_contexts": {
+      "overlay_system": 1,
+      "node_metadata": 987,
+      "networking_io": 1
+    }
+  },
+  {
+    "integer_value": 6,
+    "total_usage_count": 917,
+    "field_usage": {
+      "generic_field_6": 1,
+      "id_field_6": 1,
+      "complexity_score": 915
+    },
+    "field_types": {
+      "small_integer": 2,
+      "f64": 915
+    },
+    "usage_contexts": {
+      "node_metadata": 915,
+      "overlay_system": 1,
+      "networking_io": 1
+    }
+  },
+  {
+    "integer_value": 3,
+    "total_usage_count": 882,
+    "field_usage": {
+      "counter_field_3": 3,
+      "error_field_3": 2,
+      "complexity_score": 747,
+      "id_field_3": 2,
+      "version_field_3": 1,
+      "level": 84,
+      "hash_field_3": 6,
+      "generic_field_3": 37
+    },
+    "field_types": {
+      "small_integer": 51,
+      "f64": 747,
+      "u32": 84
+    },
+    "usage_contexts": {
+      "networking_io": 3,
+      "application_code": 17,
+      "cryptography": 4,
+      "node_metadata": 831,
+      "overlay_system": 25,
+      "testing_framework": 2
+    }
+  },
+  {
+    "integer_value": 4,
+    "total_usage_count": 880,
+    "field_usage": {
+      "counter_field_4": 1,
+      "complexity_score": 786,
+      "version_field_4": 1,
+      "id_field_4": 1,
+      "level": 91
+    },
+    "field_types": {
+      "u32": 91,
+      "power_of_two": 3,
+      "f64": 786
+    },
+    "usage_contexts": {
+      "networking_io": 1,
+      "overlay_system": 2,
+      "node_metadata": 877
+    }
+  },
+  {
+    "integer_value": 8,
+    "total_usage_count": 751,
+    "field_usage": {
+      "id_field_8": 2,
+      "error_field_8": 1,
+      "generic_field_8": 17,
+      "complexity_score": 731
+    },
+    "field_types": {
+      "f64": 731,
+      "power_of_two": 20
+    },
+    "usage_contexts": {
+      "node_metadata": 731,
+      "application_code": 13,
+      "compiler_internals": 2,
+      "networking_io": 1,
+      "overlay_system": 4
+    }
+  },
+  {
+    "integer_value": 100,
+    "total_usage_count": 504,
+    "field_usage": {
+      "weight": 504
+    },
+    "field_types": {
+      "f64": 504
+    },
+    "usage_contexts": {
+      "node_metadata": 504
+    }
+  },
+  {
+    "integer_value": 9,
+    "total_usage_count": 462,
+    "field_usage": {
+      "complexity_score": 462
+    },
+    "field_types": {
+      "f64": 462
+    },
+    "usage_contexts": {
+      "node_metadata": 462
+    }
+  },
+  {
+    "integer_value": 32,
+    "total_usage_count": 207,
+    "field_usage": {
+      "hash_field_32": 7,
+      "generic_field_32": 43,
+      "weight": 157
+    },
+    "field_types": {
+      "power_of_two": 50,
+      "f64": 157
+    },
+    "usage_contexts": {
+      "node_metadata": 157,
+      "overlay_system": 13,
+      "testing_framework": 3,
+      "cryptography": 21,
+      "application_code": 13
+    }
+  },
+  {
+    "integer_value": 10,
+    "total_usage_count": 180,
+    "field_usage": {
+      "complexity_score": 180
+    },
+    "field_types": {
+      "f64": 180
+    },
+    "usage_contexts": {
+      "node_metadata": 180
+    }
+  },
+  {
+    "integer_value": 37,
+    "total_usage_count": 175,
+    "field_usage": {
+      "weight": 175
+    },
+    "field_types": {
+      "f64": 175
+    },
+    "usage_contexts": {
+      "node_metadata": 175
+    }
+  },
+  {
+    "integer_value": 31,
+    "total_usage_count": 161,
+    "field_usage": {
+      "weight": 161
+    },
+    "field_types": {
+      "f64": 161
+    },
+    "usage_contexts": {
+      "node_metadata": 161
+    }
+  },
+  {
+    "integer_value": 40,
+    "total_usage_count": 154,
+    "field_usage": {
+      "weight": 154
+    },
+    "field_types": {
+      "f64": 154
+    },
+    "usage_contexts": {
+      "node_metadata": 154
+    }
+  },
+  {
+    "integer_value": 35,
+    "total_usage_count": 152,
+    "field_usage": {
+      "weight": 152
+    },
+    "field_types": {
+      "f64": 152
+    },
+    "usage_contexts": {
+      "node_metadata": 152
+    }
+  },
+  {
+    "integer_value": 33,
+    "total_usage_count": 143,
+    "field_usage": {
+      "weight": 143
+    },
+    "field_types": {
+      "f64": 143
+    },
+    "usage_contexts": {
+      "node_metadata": 143
+    }
+  },
+  {
+    "integer_value": 28,
+    "total_usage_count": 134,
+    "field_usage": {
+      "weight": 134
+    },
+    "field_types": {
+      "f64": 134
+    },
+    "usage_contexts": {
+      "node_metadata": 134
+    }
+  },
+  {
+    "integer_value": 29,
+    "total_usage_count": 122,
+    "field_usage": {
+      "weight": 122
+    },
+    "field_types": {
+      "f64": 122
+    },
+    "usage_contexts": {
+      "node_metadata": 122
+    }
+  },
+  {
+    "integer_value": 64,
+    "total_usage_count": 115,
+    "field_usage": {
+      "generic_field_64": 47,
+      "error_field_64": 12,
+      "size_field_64": 2,
+      "hash_field_64": 2,
+      "weight": 52
+    },
+    "field_types": {
+      "power_of_two": 63,
+      "f64": 52
+    },
+    "usage_contexts": {
+      "testing_framework": 4,
+      "cryptography": 18,
+      "overlay_system": 34,
+      "application_code": 6,
+      "node_metadata": 52,
+      "compiler_internals": 1
+    }
+  },
+  {
+    "integer_value": 30,
+    "total_usage_count": 112,
+    "field_usage": {
+      "weight": 112
+    },
+    "field_types": {
+      "f64": 112
+    },
+    "usage_contexts": {
+      "node_metadata": 112
+    }
+  },
+  {
+    "integer_value": 86,
+    "total_usage_count": 106,
+    "field_usage": {
+      "generic_field_86": 7,
+      "weight": 99
+    },
+    "field_types": {
+      "f64": 99,
+      "small_integer": 7
+    },
+    "usage_contexts": {
+      "application_code": 1,
+      "overlay_system": 6,
+      "node_metadata": 99
+    }
+  },
+  {
+    "integer_value": 74,
+    "total_usage_count": 103,
+    "field_usage": {
+      "weight": 103
+    },
+    "field_types": {
+      "f64": 103
+    },
+    "usage_contexts": {
+      "node_metadata": 103
+    }
+  },
+  {
+    "integer_value": 39,
+    "total_usage_count": 101,
+    "field_usage": {
+      "weight": 101
+    },
+    "field_types": {
+      "f64": 101
+    },
+    "usage_contexts": {
+      "node_metadata": 101
+    }
+  },
+  {
+    "integer_value": 83,
+    "total_usage_count": 99,
+    "field_usage": {
+      "weight": 99
+    },
+    "field_types": {
+      "f64": 99
+    },
+    "usage_contexts": {
+      "node_metadata": 99
+    }
+  },
+  {
+    "integer_value": 68,
+    "total_usage_count": 97,
+    "field_usage": {
+      "weight": 97
+    },
+    "field_types": {
+      "f64": 97
+    },
+    "usage_contexts": {
+      "node_metadata": 97
+    }
+  },
+  {
+    "integer_value": 27,
+    "total_usage_count": 95,
+    "field_usage": {
+      "weight": 95
+    },
+    "field_types": {
+      "f64": 95
+    },
+    "usage_contexts": {
+      "node_metadata": 95
+    }
+  },
+  {
+    "integer_value": 95,
+    "total_usage_count": 91,
+    "field_usage": {
+      "weight": 91
+    },
+    "field_types": {
+      "f64": 91
+    },
+    "usage_contexts": {
+      "node_metadata": 91
+    }
+  },
+  {
+    "integer_value": 80,
+    "total_usage_count": 91,
+    "field_usage": {
+      "weight": 91
+    },
+    "field_types": {
+      "f64": 91
+    },
+    "usage_contexts": {
+      "node_metadata": 91
+    }
+  },
+  {
+    "integer_value": 71,
+    "total_usage_count": 88,
+    "field_usage": {
+      "weight": 88
+    },
+    "field_types": {
+      "f64": 88
+    },
+    "usage_contexts": {
+      "node_metadata": 88
+    }
+  },
+  {
+    "integer_value": 36,
+    "total_usage_count": 86,
+    "field_usage": {
+      "weight": 86
+    },
+    "field_types": {
+      "f64": 86
+    },
+    "usage_contexts": {
+      "node_metadata": 86
+    }
+  },
+  {
+    "integer_value": 76,
+    "total_usage_count": 85,
+    "field_usage": {
+      "weight": 85
+    },
+    "field_types": {
+      "f64": 85
+    },
+    "usage_contexts": {
+      "node_metadata": 85
+    }
+  },
+  {
+    "integer_value": -2,
+    "total_usage_count": 85,
+    "field_usage": {
+      "size_field_-2": 2,
+      "generic_field_-2": 62,
+      "version_field_-2": 1,
+      "error_field_-2": 13,
+      "counter_field_-2": 4,
+      "index_field_-2": 1,
+      "id_field_-2": 2
+    },
+    "field_types": {
+      "error_code_or_offset": 85
+    },
+    "usage_contexts": {
+      "networking_io": 5,
+      "cryptography": 4,
+      "overlay_system": 34,
+      "application_code": 41,
+      "compiler_internals": 1
+    }
+  },
+  {
+    "integer_value": 38,
+    "total_usage_count": 80,
+    "field_usage": {
+      "weight": 80
+    },
+    "field_types": {
+      "f64": 80
+    },
+    "usage_contexts": {
+      "node_metadata": 80
+    }
+  },
+  {
+    "integer_value": 11,
+    "total_usage_count": 78,
+    "field_usage": {
+      "complexity_score": 78
+    },
+    "field_types": {
+      "f64": 78
+    },
+    "usage_contexts": {
+      "node_metadata": 78
+    }
+  },
+  {
+    "integer_value": 43,
+    "total_usage_count": 76,
+    "field_usage": {
+      "weight": 76
+    },
+    "field_types": {
+      "f64": 76
+    },
+    "usage_contexts": {
+      "node_metadata": 76
+    }
+  },
+  {
+    "integer_value": 34,
+    "total_usage_count": 72,
+    "field_usage": {
+      "weight": 72
+    },
+    "field_types": {
+      "f64": 72
+    },
+    "usage_contexts": {
+      "node_metadata": 72
+    }
+  },
+  {
+    "integer_value": 41,
+    "total_usage_count": 72,
+    "field_usage": {
+      "weight": 71,
+      "generic_field_41": 1
+    },
+    "field_types": {
+      "small_integer": 1,
+      "f64": 71
+    },
+    "usage_contexts": {
+      "overlay_system": 1,
+      "node_metadata": 71
+    }
+  },
+  {
+    "integer_value": 26,
+    "total_usage_count": 69,
+    "field_usage": {
+      "weight": 69
+    },
+    "field_types": {
+      "f64": 69
+    },
+    "usage_contexts": {
+      "node_metadata": 69
+    }
+  },
+  {
+    "integer_value": 66,
+    "total_usage_count": 68,
+    "field_usage": {
+      "weight": 68
+    },
+    "field_types": {
+      "f64": 68
+    },
+    "usage_contexts": {
+      "node_metadata": 68
+    }
+  },
+  {
+    "integer_value": 25,
+    "total_usage_count": 67,
+    "field_usage": {
+      "weight": 67
+    },
+    "field_types": {
+      "f64": 67
+    },
+    "usage_contexts": {
+      "node_metadata": 67
+    }
+  },
+  {
+    "integer_value": 42,
+    "total_usage_count": 65,
+    "field_usage": {
+      "weight": 65
+    },
+    "field_types": {
+      "f64": 65
+    },
+    "usage_contexts": {
+      "node_metadata": 65
+    }
+  },
+  {
+    "integer_value": 44,
+    "total_usage_count": 62,
+    "field_usage": {
+      "weight": 62
+    },
+    "field_types": {
+      "f64": 62
+    },
+    "usage_contexts": {
+      "node_metadata": 62
+    }
+  },
+  {
+    "integer_value": 55,
+    "total_usage_count": 61,
+    "field_usage": {
+      "weight": 61
+    },
+    "field_types": {
+      "f64": 61
+    },
+    "usage_contexts": {
+      "node_metadata": 61
+    }
+  },
+  {
+    "integer_value": 54,
+    "total_usage_count": 60,
+    "field_usage": {
+      "weight": 60
+    },
+    "field_types": {
+      "f64": 60
+    },
+    "usage_contexts": {
+      "node_metadata": 60
+    }
+  },
+  {
+    "integer_value": 90,
+    "total_usage_count": 58,
+    "field_usage": {
+      "weight": 58
+    },
+    "field_types": {
+      "f64": 58
+    },
+    "usage_contexts": {
+      "node_metadata": 58
+    }
+  },
+  {
+    "integer_value": 58,
+    "total_usage_count": 54,
+    "field_usage": {
+      "weight": 54
+    },
+    "field_types": {
+      "f64": 54
+    },
+    "usage_contexts": {
+      "node_metadata": 54
+    }
+  },
+  {
+    "integer_value": 62,
+    "total_usage_count": 51,
+    "field_usage": {
+      "weight": 51
+    },
+    "field_types": {
+      "f64": 51
+    },
+    "usage_contexts": {
+      "node_metadata": 51
+    }
+  },
+  {
+    "integer_value": 52,
+    "total_usage_count": 51,
+    "field_usage": {
+      "weight": 51
+    },
+    "field_types": {
+      "f64": 51
+    },
+    "usage_contexts": {
+      "node_metadata": 51
+    }
+  },
+  {
+    "integer_value": 50,
+    "total_usage_count": 49,
+    "field_usage": {
+      "weight": 49
+    },
+    "field_types": {
+      "f64": 49
+    },
+    "usage_contexts": {
+      "node_metadata": 49
+    }
+  },
+  {
+    "integer_value": 60,
+    "total_usage_count": 47,
+    "field_usage": {
+      "weight": 47
+    },
+    "field_types": {
+      "f64": 47
+    },
+    "usage_contexts": {
+      "node_metadata": 47
+    }
+  },
+  {
+    "integer_value": 130,
+    "total_usage_count": 46,
+    "field_usage": {
+      "weight": 46
+    },
+    "field_types": {
+      "f64": 46
+    },
+    "usage_contexts": {
+      "node_metadata": 46
+    }
+  },
+  {
+    "integer_value": 51,
+    "total_usage_count": 44,
+    "field_usage": {
+      "weight": 44
+    },
+    "field_types": {
+      "f64": 44
+    },
+    "usage_contexts": {
+      "node_metadata": 44
+    }
+  },
+  {
+    "integer_value": 57,
+    "total_usage_count": 42,
+    "field_usage": {
+      "weight": 42
+    },
+    "field_types": {
+      "f64": 42
+    },
+    "usage_contexts": {
+      "node_metadata": 42
+    }
+  },
+  {
+    "integer_value": 75,
+    "total_usage_count": 37,
+    "field_usage": {
+      "weight": 37
+    },
+    "field_types": {
+      "f64": 37
+    },
+    "usage_contexts": {
+      "node_metadata": 37
+    }
+  },
+  {
+    "integer_value": 23,
+    "total_usage_count": 36,
+    "field_usage": {
+      "weight": 36
+    },
+    "field_types": {
+      "f64": 36
+    },
+    "usage_contexts": {
+      "node_metadata": 36
+    }
+  },
+  {
+    "integer_value": 200,
+    "total_usage_count": 35,
+    "field_usage": {
+      "weight": 35
+    },
+    "field_types": {
+      "f64": 35
+    },
+    "usage_contexts": {
+      "node_metadata": 35
+    }
+  },
+  {
+    "integer_value": 300,
+    "total_usage_count": 35,
+    "field_usage": {
+      "weight": 35
+    },
+    "field_types": {
+      "f64": 35
+    },
+    "usage_contexts": {
+      "node_metadata": 35
+    }
+  },
+  {
+    "integer_value": 46,
+    "total_usage_count": 34,
+    "field_usage": {
+      "id_field_46": 1,
+      "weight": 33
+    },
+    "field_types": {
+      "f64": 33,
+      "small_integer": 1
+    },
+    "usage_contexts": {
+      "overlay_system": 1,
+      "node_metadata": 33
+    }
+  },
+  {
+    "integer_value": 45,
+    "total_usage_count": 33,
+    "field_usage": {
+      "weight": 33
+    },
+    "field_types": {
+      "f64": 33
+    },
+    "usage_contexts": {
+      "node_metadata": 33
+    }
+  },
+  {
+    "integer_value": 48,
+    "total_usage_count": 32,
+    "field_usage": {
+      "weight": 32
+    },
+    "field_types": {
+      "f64": 32
+    },
+    "usage_contexts": {
+      "node_metadata": 32
+    }
+  },
+  {
+    "integer_value": 1,
+    "total_usage_count": 32,
+    "field_usage": {
+      "error_field_1": 2,
+      "id_field_1": 1,
+      "hash_field_1": 14,
+      "generic_field_1": 15
+    },
+    "field_types": {
+      "flag_or_boolean": 32
+    },
+    "usage_contexts": {
+      "application_code": 4,
+      "overlay_system": 20,
+      "networking_io": 2,
+      "cryptography": 6
+    }
+  },
+  {
+    "integer_value": 24,
+    "total_usage_count": 31,
+    "field_usage": {
+      "weight": 31
+    },
+    "field_types": {
+      "f64": 31
+    },
+    "usage_contexts": {
+      "node_metadata": 31
+    }
+  },
+  {
+    "integer_value": 22,
+    "total_usage_count": 29,
+    "field_usage": {
+      "weight": 29
+    },
+    "field_types": {
+      "f64": 29
+    },
+    "usage_contexts": {
+      "node_metadata": 29
+    }
+  },
+  {
+    "integer_value": 96,
+    "total_usage_count": 27,
+    "field_usage": {
+      "weight": 27
+    },
+    "field_types": {
+      "f64": 27
+    },
+    "usage_contexts": {
+      "node_metadata": 27
+    }
+  },
+  {
+    "integer_value": 85,
+    "total_usage_count": 26,
+    "field_usage": {
+      "weight": 26
+    },
+    "field_types": {
+      "f64": 26
+    },
+    "usage_contexts": {
+      "node_metadata": 26
+    }
+  },
+  {
+    "integer_value": 89,
+    "total_usage_count": 25,
+    "field_usage": {
+      "weight": 25
+    },
+    "field_types": {
+      "f64": 25
+    },
+    "usage_contexts": {
+      "node_metadata": 25
+    }
+  },
+  {
+    "integer_value": 47,
+    "total_usage_count": 25,
+    "field_usage": {
+      "weight": 25
+    },
+    "field_types": {
+      "f64": 25
+    },
+    "usage_contexts": {
+      "node_metadata": 25
+    }
+  },
+  {
+    "integer_value": 272,
+    "total_usage_count": 25,
+    "field_usage": {
+      "weight": 25
+    },
+    "field_types": {
+      "f64": 25
+    },
+    "usage_contexts": {
+      "node_metadata": 25
+    }
+  },
+  {
+    "integer_value": 82,
+    "total_usage_count": 25,
+    "field_usage": {
+      "weight": 25
+    },
+    "field_types": {
+      "f64": 25
+    },
+    "usage_contexts": {
+      "node_metadata": 25
+    }
+  },
+  {
+    "integer_value": 222,
+    "total_usage_count": 24,
+    "field_usage": {
+      "weight": 24
+    },
+    "field_types": {
+      "f64": 24
+    },
+    "usage_contexts": {
+      "node_metadata": 24
+    }
+  },
+  {
+    "integer_value": 88,
+    "total_usage_count": 24,
+    "field_usage": {
+      "weight": 24
+    },
+    "field_types": {
+      "f64": 24
+    },
+    "usage_contexts": {
+      "node_metadata": 24
+    }
+  },
+  {
+    "integer_value": 65,
+    "total_usage_count": 22,
+    "field_usage": {
+      "weight": 22
+    },
+    "field_types": {
+      "f64": 22
+    },
+    "usage_contexts": {
+      "node_metadata": 22
+    }
+  },
+  {
+    "integer_value": 206,
+    "total_usage_count": 22,
+    "field_usage": {
+      "weight": 22
+    },
+    "field_types": {
+      "f64": 22
+    },
+    "usage_contexts": {
+      "node_metadata": 22
+    }
+  },
+  {
+    "integer_value": 78,
+    "total_usage_count": 22,
+    "field_usage": {
+      "weight": 22
+    },
+    "field_types": {
+      "f64": 22
+    },
+    "usage_contexts": {
+      "node_metadata": 22
+    }
+  },
+  {
+    "integer_value": 84,
+    "total_usage_count": 22,
+    "field_usage": {
+      "weight": 22
+    },
+    "field_types": {
+      "f64": 22
+    },
+    "usage_contexts": {
+      "node_metadata": 22
+    }
+  },
+  {
+    "integer_value": 73,
+    "total_usage_count": 21,
+    "field_usage": {
+      "weight": 21
+    },
+    "field_types": {
+      "f64": 21
+    },
+    "usage_contexts": {
+      "node_metadata": 21
+    }
+  },
+  {
+    "integer_value": 92,
+    "total_usage_count": 21,
+    "field_usage": {
+      "weight": 21
+    },
+    "field_types": {
+      "f64": 21
+    },
+    "usage_contexts": {
+      "node_metadata": 21
+    }
+  },
+  {
+    "integer_value": 25519,
+    "total_usage_count": 20,
+    "field_usage": {
+      "generic_field_25519": 16,
+      "error_field_25519": 2,
+      "hash_field_25519": 2
+    },
+    "field_types": {
+      "large_constant": 20
+    },
+    "usage_contexts": {
+      "overlay_system": 20
+    }
+  },
+  {
+    "integer_value": 93,
+    "total_usage_count": 20,
+    "field_usage": {
+      "weight": 20
+    },
+    "field_types": {
+      "f64": 20
+    },
+    "usage_contexts": {
+      "node_metadata": 20
+    }
+  },
+  {
+    "integer_value": 181,
+    "total_usage_count": 20,
+    "field_usage": {
+      "weight": 20
+    },
+    "field_types": {
+      "f64": 20
+    },
+    "usage_contexts": {
+      "node_metadata": 20
+    }
+  },
+  {
+    "integer_value": 260,
+    "total_usage_count": 20,
+    "field_usage": {
+      "weight": 20
+    },
+    "field_types": {
+      "f64": 20
+    },
+    "usage_contexts": {
+      "node_metadata": 20
+    }
+  },
+  {
+    "integer_value": 250,
+    "total_usage_count": 19,
+    "field_usage": {
+      "weight": 19
+    },
+    "field_types": {
+      "f64": 19
+    },
+    "usage_contexts": {
+      "node_metadata": 19
+    }
+  },
+  {
+    "integer_value": 72,
+    "total_usage_count": 19,
+    "field_usage": {
+      "weight": 19
+    },
+    "field_types": {
+      "f64": 19
+    },
+    "usage_contexts": {
+      "node_metadata": 19
+    }
+  },
+  {
+    "integer_value": 81,
+    "total_usage_count": 19,
+    "field_usage": {
+      "weight": 19
+    },
+    "field_types": {
+      "f64": 19
+    },
+    "usage_contexts": {
+      "node_metadata": 19
+    }
+  },
+  {
+    "integer_value": 240,
+    "total_usage_count": 18,
+    "field_usage": {
+      "weight": 18
+    },
+    "field_types": {
+      "f64": 18
+    },
+    "usage_contexts": {
+      "node_metadata": 18
+    }
+  },
+  {
+    "integer_value": 77,
+    "total_usage_count": 18,
+    "field_usage": {
+      "weight": 18
+    },
+    "field_types": {
+      "f64": 18
+    },
+    "usage_contexts": {
+      "node_metadata": 18
+    }
+  },
+  {
+    "integer_value": 162,
+    "total_usage_count": 18,
+    "field_usage": {
+      "weight": 18
+    },
+    "field_types": {
+      "f64": 18
+    },
+    "usage_contexts": {
+      "node_metadata": 18
+    }
+  },
+  {
+    "integer_value": 98,
+    "total_usage_count": 17,
+    "field_usage": {
+      "weight": 17
+    },
+    "field_types": {
+      "f64": 17
+    },
+    "usage_contexts": {
+      "node_metadata": 17
+    }
+  },
+  {
+    "integer_value": 21,
+    "total_usage_count": 17,
+    "field_usage": {
+      "weight": 17
+    },
+    "field_types": {
+      "f64": 17
+    },
+    "usage_contexts": {
+      "node_metadata": 17
+    }
+  },
+  {
+    "integer_value": 193,
+    "total_usage_count": 17,
+    "field_usage": {
+      "weight": 17
+    },
+    "field_types": {
+      "f64": 17
+    },
+    "usage_contexts": {
+      "node_metadata": 17
+    }
+  },
+  {
+    "integer_value": 69,
+    "total_usage_count": 16,
+    "field_usage": {
+      "weight": 16
+    },
+    "field_types": {
+      "f64": 16
+    },
+    "usage_contexts": {
+      "node_metadata": 16
+    }
+  },
+  {
+    "integer_value": 285,
+    "total_usage_count": 16,
+    "field_usage": {
+      "weight": 16
+    },
+    "field_types": {
+      "f64": 16
+    },
+    "usage_contexts": {
+      "node_metadata": 16
+    }
+  },
+  {
+    "integer_value": 153,
+    "total_usage_count": 15,
+    "field_usage": {
+      "weight": 15
+    },
+    "field_types": {
+      "f64": 15
+    },
+    "usage_contexts": {
+      "node_metadata": 15
+    }
+  },
+  {
+    "integer_value": 12,
+    "total_usage_count": 15,
+    "field_usage": {
+      "complexity_score": 15
+    },
+    "field_types": {
+      "f64": 15
+    },
+    "usage_contexts": {
+      "node_metadata": 15
+    }
+  },
+  {
+    "integer_value": 150,
+    "total_usage_count": 15,
+    "field_usage": {
+      "weight": 15
+    },
+    "field_types": {
+      "f64": 15
+    },
+    "usage_contexts": {
+      "node_metadata": 15
+    }
+  },
+  {
+    "integer_value": 171,
+    "total_usage_count": 14,
+    "field_usage": {
+      "weight": 14
+    },
+    "field_types": {
+      "f64": 14
+    },
+    "usage_contexts": {
+      "node_metadata": 14
+    }
+  },
+  {
+    "integer_value": 70,
+    "total_usage_count": 14,
+    "field_usage": {
+      "weight": 14
+    },
+    "field_types": {
+      "f64": 14
+    },
+    "usage_contexts": {
+      "node_metadata": 14
+    }
+  },
+  {
+    "integer_value": 101,
+    "total_usage_count": 14,
+    "field_usage": {
+      "weight": 14
+    },
+    "field_types": {
+      "f64": 14
+    },
+    "usage_contexts": {
+      "node_metadata": 14
+    }
+  },
+  {
+    "integer_value": 166,
+    "total_usage_count": 13,
+    "field_usage": {
+      "weight": 13
+    },
+    "field_types": {
+      "f64": 13
+    },
+    "usage_contexts": {
+      "node_metadata": 13
+    }
+  },
+  {
+    "integer_value": 157,
+    "total_usage_count": 13,
+    "field_usage": {
+      "weight": 13
+    },
+    "field_types": {
+      "f64": 13
+    },
+    "usage_contexts": {
+      "node_metadata": 13
+    }
+  },
+  {
+    "integer_value": 123,
+    "total_usage_count": 13,
+    "field_usage": {
+      "weight": 13
+    },
+    "field_types": {
+      "f64": 13
+    },
+    "usage_contexts": {
+      "node_metadata": 13
+    }
+  },
+  {
+    "integer_value": 187,
+    "total_usage_count": 13,
+    "field_usage": {
+      "weight": 13
+    },
+    "field_types": {
+      "f64": 13
+    },
+    "usage_contexts": {
+      "node_metadata": 13
+    }
+  },
+  {
+    "integer_value": -4,
+    "total_usage_count": 12,
+    "field_usage": {
+      "counter_field_-4": 2,
+      "generic_field_-4": 8,
+      "id_field_-4": 2
+    },
+    "field_types": {
+      "error_code_or_offset": 12
+    },
+    "usage_contexts": {
+      "compiler_internals": 1,
+      "application_code": 6,
+      "overlay_system": 5
+    }
+  },
+  {
+    "integer_value": 63,
+    "total_usage_count": 12,
+    "field_usage": {
+      "weight": 12
+    },
+    "field_types": {
+      "f64": 12
+    },
+    "usage_contexts": {
+      "node_metadata": 12
+    }
+  },
+  {
+    "integer_value": 214,
+    "total_usage_count": 12,
+    "field_usage": {
+      "weight": 12
+    },
+    "field_types": {
+      "f64": 12
+    },
+    "usage_contexts": {
+      "node_metadata": 12
+    }
+  },
+  {
+    "integer_value": 128,
+    "total_usage_count": 12,
+    "field_usage": {
+      "hash_field_128": 2,
+      "size_field_128": 1,
+      "generic_field_128": 9
+    },
+    "field_types": {
+      "power_of_two": 12
+    },
+    "usage_contexts": {
+      "compiler_internals": 2,
+      "overlay_system": 5,
+      "cryptography": 1,
+      "application_code": 4
+    }
+  },
+  {
+    "integer_value": -256,
+    "total_usage_count": 11,
+    "field_usage": {
+      "hash_field_-256": 1,
+      "generic_field_-256": 10
+    },
+    "field_types": {
+      "error_code_or_offset": 11
+    },
+    "usage_contexts": {
+      "cryptography": 10,
+      "overlay_system": 1
+    }
+  },
+  {
+    "integer_value": 230,
+    "total_usage_count": 11,
+    "field_usage": {
+      "weight": 11
+    },
+    "field_types": {
+      "f64": 11
+    },
+    "usage_contexts": {
+      "node_metadata": 11
+    }
+  },
+  {
+    "integer_value": 105,
+    "total_usage_count": 10,
+    "field_usage": {
+      "weight": 10
+    },
+    "field_types": {
+      "f64": 10
+    },
+    "usage_contexts": {
+      "node_metadata": 10
+    }
+  },
+  {
+    "integer_value": 127,
+    "total_usage_count": 10,
+    "field_usage": {
+      "weight": 10
+    },
+    "field_types": {
+      "f64": 10
+    },
+    "usage_contexts": {
+      "node_metadata": 10
+    }
+  },
+  {
+    "integer_value": -32,
+    "total_usage_count": 10,
+    "field_usage": {
+      "hash_field_-32": 2,
+      "error_field_-32": 2,
+      "generic_field_-32": 6
+    },
+    "field_types": {
+      "error_code_or_offset": 10
+    },
+    "usage_contexts": {
+      "overlay_system": 4,
+      "testing_framework": 1,
+      "application_code": 3,
+      "cryptography": 2
+    }
+  },
+  {
+    "integer_value": 136,
+    "total_usage_count": 10,
+    "field_usage": {
+      "weight": 10
+    },
+    "field_types": {
+      "f64": 10
+    },
+    "usage_contexts": {
+      "node_metadata": 10
+    }
+  },
+  {
+    "integer_value": 67,
+    "total_usage_count": 9,
+    "field_usage": {
+      "weight": 9
+    },
+    "field_types": {
+      "f64": 9
+    },
+    "usage_contexts": {
+      "node_metadata": 9
+    }
+  },
+  {
+    "integer_value": 108,
+    "total_usage_count": 9,
+    "field_usage": {
+      "weight": 9
+    },
+    "field_types": {
+      "f64": 9
+    },
+    "usage_contexts": {
+      "node_metadata": 9
+    }
+  },
+  {
+    "integer_value": 113,
+    "total_usage_count": 9,
+    "field_usage": {
+      "weight": 9
+    },
+    "field_types": {
+      "f64": 9
+    },
+    "usage_contexts": {
+      "node_metadata": 9
+    }
+  },
+  {
+    "integer_value": 49,
+    "total_usage_count": 9,
+    "field_usage": {
+      "weight": 9
+    },
+    "field_types": {
+      "f64": 9
+    },
+    "usage_contexts": {
+      "node_metadata": 9
+    }
+  },
+  {
+    "integer_value": 133,
+    "total_usage_count": 9,
+    "field_usage": {
+      "weight": 9
+    },
+    "field_types": {
+      "f64": 9
+    },
+    "usage_contexts": {
+      "node_metadata": 9
+    }
+  },
+  {
+    "integer_value": 104,
+    "total_usage_count": 9,
+    "field_usage": {
+      "weight": 9
+    },
+    "field_types": {
+      "f64": 9
+    },
+    "usage_contexts": {
+      "node_metadata": 9
+    }
+  },
+  {
+    "integer_value": 120,
+    "total_usage_count": 8,
+    "field_usage": {
+      "weight": 8
+    },
+    "field_types": {
+      "f64": 8
+    },
+    "usage_contexts": {
+      "node_metadata": 8
+    }
+  },
+  {
+    "integer_value": 118,
+    "total_usage_count": 8,
+    "field_usage": {
+      "weight": 8
+    },
+    "field_types": {
+      "f64": 8
+    },
+    "usage_contexts": {
+      "node_metadata": 8
+    }
+  },
+  {
+    "integer_value": 56,
+    "total_usage_count": 8,
+    "field_usage": {
+      "weight": 8
+    },
+    "field_types": {
+      "f64": 8
+    },
+    "usage_contexts": {
+      "node_metadata": 8
+    }
+  },
+  {
+    "integer_value": 137,
+    "total_usage_count": 8,
+    "field_usage": {
+      "weight": 8
+    },
+    "field_types": {
+      "f64": 8
+    },
+    "usage_contexts": {
+      "node_metadata": 8
+    }
+  },
+  {
+    "integer_value": 61,
+    "total_usage_count": 8,
+    "field_usage": {
+      "weight": 8
+    },
+    "field_types": {
+      "f64": 8
+    },
+    "usage_contexts": {
+      "node_metadata": 8
+    }
+  },
+  {
+    "integer_value": 53,
+    "total_usage_count": 8,
+    "field_usage": {
+      "weight": 8
+    },
+    "field_types": {
+      "f64": 8
+    },
+    "usage_contexts": {
+      "node_metadata": 8
+    }
+  },
+  {
+    "integer_value": 176,
+    "total_usage_count": 8,
+    "field_usage": {
+      "weight": 8
+    },
+    "field_types": {
+      "f64": 8
+    },
+    "usage_contexts": {
+      "node_metadata": 8
+    }
+  },
+  {
+    "integer_value": 190,
+    "total_usage_count": 7,
+    "field_usage": {
+      "weight": 7
+    },
+    "field_types": {
+      "f64": 7
+    },
+    "usage_contexts": {
+      "node_metadata": 7
+    }
+  },
+  {
+    "integer_value": 142,
+    "total_usage_count": 7,
+    "field_usage": {
+      "weight": 7
+    },
+    "field_types": {
+      "f64": 7
+    },
+    "usage_contexts": {
+      "node_metadata": 7
+    }
+  },
+  {
+    "integer_value": 6979,
+    "total_usage_count": 7,
+    "field_usage": {
+      "generic_field_6979": 7
+    },
+    "field_types": {
+      "large_constant": 7
+    },
+    "usage_contexts": {
+      "application_code": 3,
+      "overlay_system": 2,
+      "testing_framework": 2
+    }
+  },
+  {
+    "integer_value": 500,
+    "total_usage_count": 6,
+    "field_usage": {
+      "weight": 6
+    },
+    "field_types": {
+      "f64": 6
+    },
+    "usage_contexts": {
+      "node_metadata": 6
+    }
+  },
+  {
+    "integer_value": 202,
+    "total_usage_count": 6,
+    "field_usage": {
+      "weight": 6
+    },
+    "field_types": {
+      "f64": 6
+    },
+    "usage_contexts": {
+      "node_metadata": 6
+    }
+  },
+  {
+    "integer_value": 115,
+    "total_usage_count": 6,
+    "field_usage": {
+      "weight": 6
+    },
+    "field_types": {
+      "f64": 6
+    },
+    "usage_contexts": {
+      "node_metadata": 6
+    }
+  },
+  {
+    "integer_value": 125,
+    "total_usage_count": 6,
+    "field_usage": {
+      "weight": 6
+    },
+    "field_types": {
+      "f64": 6
+    },
+    "usage_contexts": {
+      "node_metadata": 6
+    }
+  },
+  {
+    "integer_value": 139,
+    "total_usage_count": 6,
+    "field_usage": {
+      "weight": 6
+    },
+    "field_types": {
+      "f64": 6
+    },
+    "usage_contexts": {
+      "node_metadata": 6
+    }
+  },
+  {
+    "integer_value": 59,
+    "total_usage_count": 6,
+    "field_usage": {
+      "weight": 6
+    },
+    "field_types": {
+      "f64": 6
+    },
+    "usage_contexts": {
+      "node_metadata": 6
+    }
+  },
+  {
+    "integer_value": 0,
+    "total_usage_count": 6,
+    "field_usage": {
+      "generic_field_0": 6
+    },
+    "field_types": {
+      "flag_or_boolean": 6
+    },
+    "usage_contexts": {
+      "compiler_internals": 1,
+      "standard_library": 1,
+      "networking_io": 4
+    }
+  },
+  {
+    "integer_value": 197,
+    "total_usage_count": 6,
+    "field_usage": {
+      "weight": 6
+    },
+    "field_types": {
+      "f64": 6
+    },
+    "usage_contexts": {
+      "node_metadata": 6
+    }
+  },
+  {
+    "integer_value": 194,
+    "total_usage_count": 6,
+    "field_usage": {
+      "weight": 6
+    },
+    "field_types": {
+      "f64": 6
+    },
+    "usage_contexts": {
+      "node_metadata": 6
+    }
+  },
+  {
+    "integer_value": 160,
+    "total_usage_count": 5,
+    "field_usage": {
+      "weight": 5
+    },
+    "field_types": {
+      "f64": 5
+    },
+    "usage_contexts": {
+      "node_metadata": 5
+    }
+  },
+  {
+    "integer_value": 109,
+    "total_usage_count": 5,
+    "field_usage": {
+      "weight": 5
+    },
+    "field_types": {
+      "f64": 5
+    },
+    "usage_contexts": {
+      "node_metadata": 5
+    }
+  },
+  {
+    "integer_value": -86,
+    "total_usage_count": 5,
+    "field_usage": {
+      "generic_field_-86": 5
+    },
+    "field_types": {
+      "error_code_or_offset": 5
+    },
+    "usage_contexts": {
+      "networking_io": 1,
+      "overlay_system": 4
+    }
+  },
+  {
+    "integer_value": 169,
+    "total_usage_count": 5,
+    "field_usage": {
+      "weight": 5
+    },
+    "field_types": {
+      "f64": 5
+    },
+    "usage_contexts": {
+      "node_metadata": 5
+    }
+  },
+  {
+    "integer_value": 210,
+    "total_usage_count": 5,
+    "field_usage": {
+      "weight": 5
+    },
+    "field_types": {
+      "f64": 5
+    },
+    "usage_contexts": {
+      "node_metadata": 5
+    }
+  },
+  {
+    "integer_value": 116,
+    "total_usage_count": 5,
+    "field_usage": {
+      "weight": 5
+    },
+    "field_types": {
+      "f64": 5
+    },
+    "usage_contexts": {
+      "node_metadata": 5
+    }
+  },
+  {
+    "integer_value": -25519,
+    "total_usage_count": 5,
+    "field_usage": {
+      "generic_field_-25519": 5
+    },
+    "field_types": {
+      "error_code_or_offset": 5
+    },
+    "usage_contexts": {
+      "cryptography": 5
+    }
+  },
+  {
+    "integer_value": -3,
+    "total_usage_count": 5,
+    "field_usage": {
+      "hash_field_-3": 3,
+      "counter_field_-3": 2
+    },
+    "field_types": {
+      "error_code_or_offset": 5
+    },
+    "usage_contexts": {
+      "overlay_system": 2,
+      "cryptography": 3
+    }
+  },
+  {
+    "integer_value": -8,
+    "total_usage_count": 5,
+    "field_usage": {
+      "version_field_-8": 1,
+      "generic_field_-8": 4
+    },
+    "field_types": {
+      "error_code_or_offset": 5
+    },
+    "usage_contexts": {
+      "application_code": 3,
+      "networking_io": 1,
+      "overlay_system": 1
+    }
+  },
+  {
+    "integer_value": 189,
+    "total_usage_count": 5,
+    "field_usage": {
+      "weight": 5
+    },
+    "field_types": {
+      "f64": 5
+    },
+    "usage_contexts": {
+      "node_metadata": 5
+    }
+  },
+  {
+    "integer_value": 208,
+    "total_usage_count": 4,
+    "field_usage": {
+      "weight": 4
+    },
+    "field_types": {
+      "f64": 4
+    },
+    "usage_contexts": {
+      "node_metadata": 4
+    }
+  },
+  {
+    "integer_value": 16,
+    "total_usage_count": 4,
+    "field_usage": {
+      "generic_field_16": 4
+    },
+    "field_types": {
+      "power_of_two": 4
+    },
+    "usage_contexts": {
+      "overlay_system": 1,
+      "application_code": 3
+    }
+  },
+  {
+    "integer_value": 117,
+    "total_usage_count": 4,
+    "field_usage": {
+      "weight": 4
+    },
+    "field_types": {
+      "f64": 4
+    },
+    "usage_contexts": {
+      "node_metadata": 4
+    }
+  },
+  {
+    "integer_value": -384,
+    "total_usage_count": 4,
+    "field_usage": {
+      "generic_field_-384": 4
+    },
+    "field_types": {
+      "error_code_or_offset": 4
+    },
+    "usage_contexts": {
+      "cryptography": 4
+    }
+  },
+  {
+    "integer_value": 13,
+    "total_usage_count": 4,
+    "field_usage": {
+      "complexity_score": 4
+    },
+    "field_types": {
+      "f64": 4
+    },
+    "usage_contexts": {
+      "node_metadata": 4
+    }
+  },
+  {
+    "integer_value": 79,
+    "total_usage_count": 4,
+    "field_usage": {
+      "weight": 4
+    },
+    "field_types": {
+      "f64": 4
+    },
+    "usage_contexts": {
+      "node_metadata": 4
+    }
+  },
+  {
+    "integer_value": 428,
+    "total_usage_count": 4,
+    "field_usage": {
+      "weight": 4
+    },
+    "field_types": {
+      "f64": 4
+    },
+    "usage_contexts": {
+      "node_metadata": 4
+    }
+  },
+  {
+    "integer_value": 111,
+    "total_usage_count": 4,
+    "field_usage": {
+      "weight": 4
+    },
+    "field_types": {
+      "f64": 4
+    },
+    "usage_contexts": {
+      "node_metadata": 4
+    }
+  },
+  {
+    "integer_value": 205,
+    "total_usage_count": 4,
+    "field_usage": {
+      "weight": 4
+    },
+    "field_types": {
+      "f64": 4
+    },
+    "usage_contexts": {
+      "node_metadata": 4
+    }
+  },
+  {
+    "integer_value": 103,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 512,
+    "total_usage_count": 3,
+    "field_usage": {
+      "hash_field_512": 2,
+      "generic_field_512": 1
+    },
+    "field_types": {
+      "power_of_two": 3
+    },
+    "usage_contexts": {
+      "overlay_system": 3
+    }
+  },
+  {
+    "integer_value": 413,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 152,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 177,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": -5,
+    "total_usage_count": 3,
+    "field_usage": {
+      "generic_field_-5": 3
+    },
+    "field_types": {
+      "error_code_or_offset": 3
+    },
+    "usage_contexts": {
+      "overlay_system": 3
+    }
+  },
+  {
+    "integer_value": 363,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 146,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 180,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 164,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 173,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 148,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 107,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 400,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 342,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 195,
+    "total_usage_count": 3,
+    "field_usage": {
+      "weight": 3
+    },
+    "field_types": {
+      "f64": 3
+    },
+    "usage_contexts": {
+      "node_metadata": 3
+    }
+  },
+  {
+    "integer_value": 333,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 217,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 468,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 185,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 387,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 268,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 480,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 394,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 571,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": -448,
+    "total_usage_count": 2,
+    "field_usage": {
+      "generic_field_-448": 2
+    },
+    "field_types": {
+      "error_code_or_offset": 2
+    },
+    "usage_contexts": {
+      "cryptography": 2
+    }
+  },
+  {
+    "integer_value": 124,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 307,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": -224,
+    "total_usage_count": 2,
+    "field_usage": {
+      "generic_field_-224": 2
+    },
+    "field_types": {
+      "error_code_or_offset": 2
+    },
+    "usage_contexts": {
+      "cryptography": 2
+    }
+  },
+  {
+    "integer_value": 243,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": -64,
+    "total_usage_count": 2,
+    "field_usage": {
+      "error_field_-64": 1,
+      "hash_field_-64": 1
+    },
+    "field_types": {
+      "error_code_or_offset": 2
+    },
+    "usage_contexts": {
+      "overlay_system": 1,
+      "cryptography": 1
+    }
+  },
+  {
+    "integer_value": 454,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 196,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": -1305,
+    "total_usage_count": 2,
+    "field_usage": {
+      "generic_field_-1305": 2
+    },
+    "field_types": {
+      "error_code_or_offset": 2
+    },
+    "usage_contexts": {
+      "cryptography": 2
+    }
+  },
+  {
+    "integer_value": 18030,
+    "total_usage_count": 2,
+    "field_usage": {
+      "generic_field_18030": 2
+    },
+    "field_types": {
+      "large_constant": 2
+    },
+    "usage_contexts": {
+      "overlay_system": 2
+    }
+  },
+  {
+    "integer_value": 384,
+    "total_usage_count": 2,
+    "field_usage": {
+      "generic_field_384": 2
+    },
+    "field_types": {
+      "medium_constant": 2
+    },
+    "usage_contexts": {
+      "overlay_system": 2
+    }
+  },
+  {
+    "integer_value": 600,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": -1,
+    "total_usage_count": 2,
+    "field_usage": {
+      "generic_field_-1": 2
+    },
+    "field_types": {
+      "flag_or_boolean": 2
+    },
+    "usage_contexts": {
+      "networking_io": 2
+    }
+  },
+  {
+    "integer_value": -521,
+    "total_usage_count": 2,
+    "field_usage": {
+      "generic_field_-521": 2
+    },
+    "field_types": {
+      "error_code_or_offset": 2
+    },
+    "usage_contexts": {
+      "cryptography": 2
+    }
+  },
+  {
+    "integer_value": 140,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 2022,
+    "total_usage_count": 2,
+    "field_usage": {
+      "generic_field_2022": 2
+    },
+    "field_types": {
+      "large_constant": 2
+    },
+    "usage_contexts": {
+      "overlay_system": 2
+    }
+  },
+  {
+    "integer_value": 155,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 236,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 535,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 20,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 19,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 278,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": 227,
+    "total_usage_count": 2,
+    "field_usage": {
+      "weight": 2
+    },
+    "field_types": {
+      "f64": 2
+    },
+    "usage_contexts": {
+      "node_metadata": 2
+    }
+  },
+  {
+    "integer_value": -434,
+    "total_usage_count": 1,
+    "field_usage": {
+      "generic_field_-434": 1
+    },
+    "field_types": {
+      "error_code_or_offset": 1
+    },
+    "usage_contexts": {
+      "cryptography": 1
+    }
+  },
+  {
+    "integer_value": 326,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 576,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 255,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 122,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 165,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 450,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 168,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 352,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": -128,
+    "total_usage_count": 1,
+    "field_usage": {
+      "hash_field_-128": 1
+    },
+    "field_types": {
+      "error_code_or_offset": 1
+    },
+    "usage_contexts": {
+      "compiler_internals": 1
+    }
+  },
+  {
+    "integer_value": 365,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 235,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 106,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 315,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 159,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 437,
+    "total_usage_count": 1,
+    "field_usage": {
+      "generic_field_437": 1
+    },
+    "field_types": {
+      "medium_constant": 1
+    },
+    "usage_contexts": {
+      "overlay_system": 1
+    }
+  },
+  {
+    "integer_value": 216,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 557,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 179,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 270,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 151,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 421,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 483,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 312,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 375,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 461,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 121,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 192,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 405,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 256,
+    "total_usage_count": 1,
+    "field_usage": {
+      "hash_field_256": 1
+    },
+    "field_types": {
+      "power_of_two": 1
+    },
+    "usage_contexts": {
+      "overlay_system": 1
+    }
+  },
+  {
+    "integer_value": 416,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": -16,
+    "total_usage_count": 1,
+    "field_usage": {
+      "version_field_-16": 1
+    },
+    "field_types": {
+      "error_code_or_offset": 1
+    },
+    "usage_contexts": {
+      "networking_io": 1
+    }
+  },
+  {
+    "integer_value": 354,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 273,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": -18089,
+    "total_usage_count": 1,
+    "field_usage": {
+      "generic_field_-18089": 1
+    },
+    "field_types": {
+      "error_code_or_offset": 1
+    },
+    "usage_contexts": {
+      "testing_framework": 1
+    }
+  },
+  {
+    "integer_value": -18840,
+    "total_usage_count": 1,
+    "field_usage": {
+      "generic_field_-18840": 1
+    },
+    "field_types": {
+      "error_code_or_offset": 1
+    },
+    "usage_contexts": {
+      "testing_framework": 1
+    }
+  },
+  {
+    "integer_value": 229,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 129,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 362,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 211,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 2024,
+    "total_usage_count": 1,
+    "field_usage": {
+      "generic_field_2024": 1
+    },
+    "field_types": {
+      "large_constant": 1
+    },
+    "usage_contexts": {
+      "compiler_internals": 1
+    }
+  },
+  {
+    "integer_value": 102,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 521,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 238,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 339,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": -18898,
+    "total_usage_count": 1,
+    "field_usage": {
+      "generic_field_-18898": 1
+    },
+    "field_types": {
+      "error_code_or_offset": 1
+    },
+    "usage_contexts": {
+      "testing_framework": 1
+    }
+  },
+  {
+    "integer_value": 132,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 87,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 112,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 97,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 203,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 218,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 182,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 503,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 163,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 341,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": -17479,
+    "total_usage_count": 1,
+    "field_usage": {
+      "generic_field_-17479": 1
+    },
+    "field_types": {
+      "error_code_or_offset": 1
+    },
+    "usage_contexts": {
+      "testing_framework": 1
+    }
+  },
+  {
+    "integer_value": 520,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  },
+  {
+    "integer_value": 517,
+    "total_usage_count": 1,
+    "field_usage": {
+      "weight": 1
+    },
+    "field_types": {
+      "f64": 1
+    },
+    "usage_contexts": {
+      "node_metadata": 1
+    }
+  }
+]

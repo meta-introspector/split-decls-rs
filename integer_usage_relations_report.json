@@ -1,0 +1,1080 @@
+[
+  {
+    "integer_value": 2,
+    "total_usage_count": 277,
+    "user_types": {
+      "unknown": 53,
+      "wrapped_declaration": 224
+    },
+    "relations": {
+      "missing_dependency": 224,
+      "namespace_relation": 53
+    },
+    "ast_contexts": {
+      "level_3": 8,
+      "level_4": 1,
+      "compiler_core": 1,
+      "layer_compiler": 1,
+      "input_output": 15,
+      "layer_foundation": 267,
+      "memory_management": 8,
+      "application_code": 242,
+      "standard_library": 1,
+      "testing": 10,
+      "level_5": 1,
+      "level_2": 267,
+      "layer_system": 9
+    },
+    "crate_distribution": {
+      "introspector_decl2_macros": 3,
+      "allocator-api2": 8,
+      "proc-macro2": 12,
+      "xz2": 8,
+      "socket2": 16,
+      "hex": 1,
+      "git2-curl": 4,
+      "memmap2": 12,
+      "sha2": 8,
+      "blake3": 2,
+      "git2": 148,
+      "introspector_decl_core": 1,
+      "addr2line": 19,
+      "adler2": 7,
+      "constant_time_eq": 1,
+      "syn": 1,
+      "lzma-rust2": 16,
+      "nix2proc-macros": 2,
+      "ryu": 6,
+      "pasetors": 1,
+      "windows-numerics": 1
+    }
+  },
+  {
+    "integer_value": -2,
+    "total_usage_count": 85,
+    "user_types": {
+      "unknown": 43,
+      "wrapped_declaration": 42
+    },
+    "relations": {
+      "missing_dependency": 42,
+      "namespace_relation": 43
+    },
+    "ast_contexts": {
+      "memory_management": 11,
+      "level_5": 1,
+      "application_code": 65,
+      "layer_compiler": 1,
+      "cryptography": 4,
+      "layer_system": 11,
+      "level_3": 11,
+      "layer_foundation": 73,
+      "input_output": 4,
+      "compiler_core": 1,
+      "level_2": 73
+    },
+    "crate_distribution": {
+      "fiat-crypto": 4,
+      "split-decls-rs": 1,
+      "faster-hex": 1,
+      "cargo-util": 1,
+      "hir-def": 1,
+      "windows-numerics": 1,
+      "lzma-rust2": 32,
+      "windows-implement": 4,
+      "nix2proc-macros": 1,
+      "proc-macro2": 24,
+      "serde-value": 1,
+      "allocator-api2": 11,
+      "line-index": 1,
+      "rustc-literal-escaper": 1,
+      "test-utils": 1
+    }
+  },
+  {
+    "integer_value": 64,
+    "total_usage_count": 63,
+    "user_types": {
+      "wrapped_declaration": 56,
+      "unknown": 7
+    },
+    "relations": {
+      "missing_dependency": 56,
+      "namespace_relation": 7
+    },
+    "ast_contexts": {
+      "cryptography": 18,
+      "level_3": 1,
+      "level_5": 1,
+      "layer_system": 1,
+      "layer_compiler": 1,
+      "application_code": 40,
+      "testing": 4,
+      "layer_foundation": 61,
+      "level_2": 61,
+      "compiler_core": 1
+    },
+    "crate_distribution": {
+      "ppv-lite86": 1,
+      "cpufeatures": 2,
+      "rand_pcg": 1,
+      "twox-hash": 1,
+      "base64ct": 14,
+      "constant_time_eq": 1,
+      "fiat-crypto": 17,
+      "oorandom": 1,
+      "fastrand": 1,
+      "base64": 20,
+      "getrandom": 1,
+      "bytes": 2,
+      "rustc_hashes": 1
+    }
+  },
+  {
+    "integer_value": 3,
+    "total_usage_count": 51,
+    "user_types": {
+      "unknown": 20,
+      "wrapped_declaration": 31
+    },
+    "relations": {
+      "namespace_relation": 20,
+      "missing_dependency": 31
+    },
+    "ast_contexts": {
+      "cryptography": 4,
+      "layer_system": 4,
+      "level_3": 4,
+      "application_code": 42,
+      "testing": 2,
+      "level_2": 47,
+      "layer_foundation": 47,
+      "input_output": 3
+    },
+    "crate_distribution": {
+      "blake3": 48,
+      "uuid": 1,
+      "hash32": 1,
+      "pasetors": 1
+    }
+  },
+  {
+    "integer_value": 32,
+    "total_usage_count": 50,
+    "user_types": {
+      "unknown": 14,
+      "wrapped_declaration": 36
+    },
+    "relations": {
+      "namespace_relation": 14,
+      "missing_dependency": 36
+    },
+    "ast_contexts": {
+      "cryptography": 21,
+      "level_3": 6,
+      "testing": 3,
+      "layer_system": 6,
+      "application_code": 26,
+      "layer_foundation": 44,
+      "level_2": 44
+    },
+    "crate_distribution": {
+      "hash32": 4,
+      "simd-adler32": 7,
+      "encoding_rs": 2,
+      "zip": 1,
+      "oorandom": 1,
+      "constant_time_eq": 1,
+      "fastrand": 1,
+      "fiat-crypto": 15,
+      "getrandom": 1,
+      "blake3": 1,
+      "crc32fast": 13,
+      "adler2": 3
+    }
+  },
+  {
+    "integer_value": 1,
+    "total_usage_count": 32,
+    "user_types": {
+      "wrapped_declaration": 26,
+      "unknown": 6
+    },
+    "relations": {
+      "namespace_relation": 6,
+      "missing_dependency": 26
+    },
+    "ast_contexts": {
+      "input_output": 2,
+      "level_2": 32,
+      "cryptography": 6,
+      "layer_foundation": 32,
+      "application_code": 24
+    },
+    "crate_distribution": {
+      "sha1-checked": 9,
+      "sha1": 4,
+      "smol_str": 1,
+      "uuid": 2,
+      "sec1": 10,
+      "fiat-crypto": 6
+    }
+  },
+  {
+    "integer_value": 8,
+    "total_usage_count": 20,
+    "user_types": {
+      "wrapped_declaration": 6,
+      "unknown": 14
+    },
+    "relations": {
+      "namespace_relation": 14,
+      "missing_dependency": 6
+    },
+    "ast_contexts": {
+      "level_2": 18,
+      "input_output": 1,
+      "level_5": 2,
+      "application_code": 17,
+      "compiler_core": 2,
+      "layer_compiler": 2,
+      "layer_foundation": 18
+    },
+    "crate_distribution": {
+      "clap_lex": 1,
+      "encoding_rs": 2,
+      "rustc_parse": 1,
+      "camino": 11,
+      "rustc_lint": 1,
+      "uuid": 1,
+      "pathdiff": 1,
+      "signal-hook-mio": 1,
+      "bstr": 1
+    }
+  },
+  {
+    "integer_value": 25519,
+    "total_usage_count": 20,
+    "user_types": {
+      "wrapped_declaration": 20
+    },
+    "relations": {
+      "missing_dependency": 20
+    },
+    "ast_contexts": {
+      "level_2": 20,
+      "layer_foundation": 20,
+      "application_code": 20
+    },
+    "crate_distribution": {
+      "ed25519-compact": 20
+    }
+  },
+  {
+    "integer_value": 5,
+    "total_usage_count": 13,
+    "user_types": {
+      "wrapped_declaration": 8,
+      "unknown": 5
+    },
+    "relations": {
+      "missing_dependency": 8,
+      "namespace_relation": 5
+    },
+    "ast_contexts": {
+      "layer_foundation": 13,
+      "testing": 2,
+      "application_code": 11,
+      "level_2": 13
+    },
+    "crate_distribution": {
+      "encoding_rs": 1,
+      "md-5": 3,
+      "uuid": 2,
+      "md5": 7
+    }
+  },
+  {
+    "integer_value": -4,
+    "total_usage_count": 12,
+    "user_types": {
+      "wrapped_declaration": 5,
+      "unknown": 7
+    },
+    "relations": {
+      "missing_dependency": 5,
+      "namespace_relation": 7
+    },
+    "ast_contexts": {
+      "level_2": 11,
+      "layer_foundation": 11,
+      "level_5": 1,
+      "compiler_core": 1,
+      "application_code": 11,
+      "layer_compiler": 1
+    },
+    "crate_distribution": {
+      "patch-build-rs-macros": 10,
+      "windows-numerics": 2
+    }
+  },
+  {
+    "integer_value": 128,
+    "total_usage_count": 12,
+    "user_types": {
+      "wrapped_declaration": 7,
+      "unknown": 5
+    },
+    "relations": {
+      "namespace_relation": 5,
+      "missing_dependency": 7
+    },
+    "ast_contexts": {
+      "layer_system": 1,
+      "application_code": 9,
+      "level_2": 9,
+      "layer_compiler": 2,
+      "level_3": 1,
+      "layer_foundation": 9,
+      "cryptography": 1,
+      "level_5": 2,
+      "compiler_core": 2
+    },
+    "crate_distribution": {
+      "gimli": 1,
+      "serde": 1,
+      "rustc_serialize": 1,
+      "byteorder": 3,
+      "itoa": 1,
+      "fastrand": 1,
+      "rand_pcg": 2,
+      "rustc_hashes": 1,
+      "twox-hash": 1
+    }
+  },
+  {
+    "integer_value": -256,
+    "total_usage_count": 11,
+    "user_types": {
+      "wrapped_declaration": 11
+    },
+    "relations": {
+      "missing_dependency": 11
+    },
+    "ast_contexts": {
+      "level_2": 11,
+      "application_code": 1,
+      "layer_foundation": 11,
+      "cryptography": 10
+    },
+    "crate_distribution": {
+      "cargo-util": 1,
+      "fiat-crypto": 10
+    }
+  },
+  {
+    "integer_value": -32,
+    "total_usage_count": 10,
+    "user_types": {
+      "wrapped_declaration": 7,
+      "unknown": 3
+    },
+    "relations": {
+      "missing_dependency": 7,
+      "namespace_relation": 3
+    },
+    "ast_contexts": {
+      "testing": 1,
+      "layer_foundation": 8,
+      "level_2": 8,
+      "application_code": 7,
+      "cryptography": 2,
+      "layer_system": 2,
+      "level_3": 2
+    },
+    "crate_distribution": {
+      "windows-registry": 1,
+      "windows-result": 1,
+      "twox-hash": 1,
+      "simd-adler32": 7
+    }
+  },
+  {
+    "integer_value": 6979,
+    "total_usage_count": 7,
+    "user_types": {
+      "unknown": 3,
+      "wrapped_declaration": 4
+    },
+    "relations": {
+      "missing_dependency": 4,
+      "namespace_relation": 3
+    },
+    "ast_contexts": {
+      "application_code": 5,
+      "level_2": 7,
+      "testing": 2,
+      "layer_foundation": 7
+    },
+    "crate_distribution": {
+      "rfc6979": 7
+    }
+  },
+  {
+    "integer_value": 86,
+    "total_usage_count": 7,
+    "user_types": {
+      "wrapped_declaration": 6,
+      "unknown": 1
+    },
+    "relations": {
+      "namespace_relation": 1,
+      "missing_dependency": 6
+    },
+    "ast_contexts": {
+      "application_code": 7,
+      "layer_foundation": 7,
+      "level_2": 7
+    },
+    "crate_distribution": {
+      "ppv-lite86": 5,
+      "cpufeatures": 1,
+      "faster-hex": 1
+    }
+  },
+  {
+    "integer_value": 0,
+    "total_usage_count": 6,
+    "user_types": {
+      "wrapped_declaration": 6
+    },
+    "relations": {
+      "missing_dependency": 6
+    },
+    "ast_contexts": {
+      "layer_foundation": 4,
+      "level_4": 1,
+      "level_5": 1,
+      "input_output": 4,
+      "layer_compiler": 1,
+      "level_2": 4,
+      "standard_library": 1,
+      "compiler_core": 1,
+      "layer_system": 1
+    },
+    "crate_distribution": {
+      "signal-hook-mio": 4,
+      "ruzstd": 1,
+      "rustc_symbol_mangling": 1
+    }
+  },
+  {
+    "integer_value": -3,
+    "total_usage_count": 5,
+    "user_types": {
+      "wrapped_declaration": 5
+    },
+    "relations": {
+      "missing_dependency": 5
+    },
+    "ast_contexts": {
+      "level_2": 2,
+      "cryptography": 3,
+      "level_3": 3,
+      "layer_system": 3,
+      "application_code": 2,
+      "layer_foundation": 2
+    },
+    "crate_distribution": {
+      "windows-numerics": 2,
+      "twox-hash": 3
+    }
+  },
+  {
+    "integer_value": -25519,
+    "total_usage_count": 5,
+    "user_types": {
+      "wrapped_declaration": 5
+    },
+    "relations": {
+      "missing_dependency": 5
+    },
+    "ast_contexts": {
+      "layer_foundation": 5,
+      "cryptography": 5,
+      "level_2": 5
+    },
+    "crate_distribution": {
+      "fiat-crypto": 5
+    }
+  },
+  {
+    "integer_value": -8,
+    "total_usage_count": 5,
+    "user_types": {
+      "unknown": 4,
+      "wrapped_declaration": 1
+    },
+    "relations": {
+      "missing_dependency": 1,
+      "namespace_relation": 4
+    },
+    "ast_contexts": {
+      "input_output": 1,
+      "application_code": 4,
+      "level_2": 5,
+      "layer_foundation": 5
+    },
+    "crate_distribution": {
+      "project-model": 1,
+      "anstyle-parse": 2,
+      "criterion-plot": 1,
+      "regex-syntax": 1
+    }
+  },
+  {
+    "integer_value": -86,
+    "total_usage_count": 5,
+    "user_types": {
+      "unknown": 1,
+      "wrapped_declaration": 4
+    },
+    "relations": {
+      "namespace_relation": 1,
+      "missing_dependency": 4
+    },
+    "ast_contexts": {
+      "level_2": 5,
+      "layer_foundation": 5,
+      "application_code": 4,
+      "input_output": 1
+    },
+    "crate_distribution": {
+      "faster-hex": 1,
+      "ppv-lite86": 4
+    }
+  },
+  {
+    "integer_value": 16,
+    "total_usage_count": 4,
+    "user_types": {
+      "wrapped_declaration": 1,
+      "unknown": 3
+    },
+    "relations": {
+      "missing_dependency": 1,
+      "namespace_relation": 3
+    },
+    "ast_contexts": {
+      "level_2": 4,
+      "layer_foundation": 4,
+      "application_code": 4
+    },
+    "crate_distribution": {
+      "constant_time_eq": 1,
+      "encoding_rs": 3
+    }
+  },
+  {
+    "integer_value": -384,
+    "total_usage_count": 4,
+    "user_types": {
+      "wrapped_declaration": 4
+    },
+    "relations": {
+      "missing_dependency": 4
+    },
+    "ast_contexts": {
+      "cryptography": 4,
+      "level_2": 4,
+      "layer_foundation": 4
+    },
+    "crate_distribution": {
+      "fiat-crypto": 4
+    }
+  },
+  {
+    "integer_value": -5,
+    "total_usage_count": 3,
+    "user_types": {
+      "wrapped_declaration": 3
+    },
+    "relations": {
+      "missing_dependency": 3
+    },
+    "ast_contexts": {
+      "application_code": 3,
+      "layer_foundation": 3,
+      "level_2": 3
+    },
+    "crate_distribution": {
+      "md-5": 3
+    }
+  },
+  {
+    "integer_value": 4,
+    "total_usage_count": 3,
+    "user_types": {
+      "wrapped_declaration": 3
+    },
+    "relations": {
+      "missing_dependency": 3
+    },
+    "ast_contexts": {
+      "level_2": 3,
+      "layer_foundation": 3,
+      "application_code": 2,
+      "input_output": 1
+    },
+    "crate_distribution": {
+      "windows-numerics": 1,
+      "pasetors": 1,
+      "uuid": 1
+    }
+  },
+  {
+    "integer_value": 512,
+    "total_usage_count": 3,
+    "user_types": {
+      "wrapped_declaration": 3
+    },
+    "relations": {
+      "missing_dependency": 3
+    },
+    "ast_contexts": {
+      "application_code": 3,
+      "level_2": 3,
+      "layer_foundation": 3
+    },
+    "crate_distribution": {
+      "sha2": 1,
+      "ed25519-compact": 1,
+      "blake3": 1
+    }
+  },
+  {
+    "integer_value": 384,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "level_2": 2,
+      "application_code": 2,
+      "layer_foundation": 2
+    },
+    "crate_distribution": {
+      "p384": 2
+    }
+  },
+  {
+    "integer_value": -1,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 1,
+      "unknown": 1
+    },
+    "relations": {
+      "missing_dependency": 1,
+      "namespace_relation": 1
+    },
+    "ast_contexts": {
+      "input_output": 2,
+      "layer_foundation": 2,
+      "level_2": 2
+    },
+    "crate_distribution": {
+      "test-utils": 1,
+      "signal-hook-mio": 1
+    }
+  },
+  {
+    "integer_value": 2022,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "level_2": 2,
+      "application_code": 2,
+      "layer_foundation": 2
+    },
+    "crate_distribution": {
+      "encoding_rs": 2
+    }
+  },
+  {
+    "integer_value": -1305,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "layer_foundation": 2,
+      "cryptography": 2,
+      "level_2": 2
+    },
+    "crate_distribution": {
+      "fiat-crypto": 2
+    }
+  },
+  {
+    "integer_value": -64,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "level_2": 1,
+      "layer_system": 1,
+      "layer_foundation": 1,
+      "cryptography": 1,
+      "level_3": 1,
+      "application_code": 1
+    },
+    "crate_distribution": {
+      "ct-codecs": 1,
+      "twox-hash": 1
+    }
+  },
+  {
+    "integer_value": -224,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "cryptography": 2,
+      "layer_foundation": 2,
+      "level_2": 2
+    },
+    "crate_distribution": {
+      "fiat-crypto": 2
+    }
+  },
+  {
+    "integer_value": 6,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "input_output": 1,
+      "level_2": 2,
+      "layer_foundation": 2,
+      "application_code": 1
+    },
+    "crate_distribution": {
+      "signal-hook-mio": 1,
+      "uuid": 1
+    }
+  },
+  {
+    "integer_value": 18030,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "level_2": 2,
+      "application_code": 2,
+      "layer_foundation": 2
+    },
+    "crate_distribution": {
+      "encoding_rs": 2
+    }
+  },
+  {
+    "integer_value": -448,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "level_2": 2,
+      "layer_foundation": 2,
+      "cryptography": 2
+    },
+    "crate_distribution": {
+      "fiat-crypto": 2
+    }
+  },
+  {
+    "integer_value": -521,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "cryptography": 2,
+      "layer_foundation": 2,
+      "level_2": 2
+    },
+    "crate_distribution": {
+      "fiat-crypto": 2
+    }
+  },
+  {
+    "integer_value": 7,
+    "total_usage_count": 2,
+    "user_types": {
+      "wrapped_declaration": 2
+    },
+    "relations": {
+      "missing_dependency": 2
+    },
+    "ast_contexts": {
+      "level_2": 2,
+      "input_output": 1,
+      "application_code": 1,
+      "layer_foundation": 2
+    },
+    "crate_distribution": {
+      "uuid": 1,
+      "signal-hook-mio": 1
+    }
+  },
+  {
+    "integer_value": 41,
+    "total_usage_count": 1,
+    "user_types": {
+      "wrapped_declaration": 1
+    },
+    "relations": {
+      "missing_dependency": 1
+    },
+    "ast_contexts": {
+      "application_code": 1,
+      "level_2": 1,
+      "layer_foundation": 1
+    },
+    "crate_distribution": {
+      "blake3": 1
+    }
+  },
+  {
+    "integer_value": -18089,
+    "total_usage_count": 1,
+    "user_types": {
+      "unknown": 1
+    },
+    "relations": {
+      "namespace_relation": 1
+    },
+    "ast_contexts": {
+      "testing": 1,
+      "layer_foundation": 1,
+      "level_2": 1
+    },
+    "crate_distribution": {
+      "test-fixture": 1
+    }
+  },
+  {
+    "integer_value": 437,
+    "total_usage_count": 1,
+    "user_types": {
+      "wrapped_declaration": 1
+    },
+    "relations": {
+      "missing_dependency": 1
+    },
+    "ast_contexts": {
+      "layer_foundation": 1,
+      "application_code": 1,
+      "level_2": 1
+    },
+    "crate_distribution": {
+      "zip": 1
+    }
+  },
+  {
+    "integer_value": -18840,
+    "total_usage_count": 1,
+    "user_types": {
+      "unknown": 1
+    },
+    "relations": {
+      "namespace_relation": 1
+    },
+    "ast_contexts": {
+      "layer_foundation": 1,
+      "level_2": 1,
+      "testing": 1
+    },
+    "crate_distribution": {
+      "test-fixture": 1
+    }
+  },
+  {
+    "integer_value": -18898,
+    "total_usage_count": 1,
+    "user_types": {
+      "unknown": 1
+    },
+    "relations": {
+      "namespace_relation": 1
+    },
+    "ast_contexts": {
+      "level_2": 1,
+      "testing": 1,
+      "layer_foundation": 1
+    },
+    "crate_distribution": {
+      "test-fixture": 1
+    }
+  },
+  {
+    "integer_value": -17479,
+    "total_usage_count": 1,
+    "user_types": {
+      "unknown": 1
+    },
+    "relations": {
+      "namespace_relation": 1
+    },
+    "ast_contexts": {
+      "layer_foundation": 1,
+      "level_2": 1,
+      "testing": 1
+    },
+    "crate_distribution": {
+      "test-fixture": 1
+    }
+  },
+  {
+    "integer_value": -434,
+    "total_usage_count": 1,
+    "user_types": {
+      "wrapped_declaration": 1
+    },
+    "relations": {
+      "missing_dependency": 1
+    },
+    "ast_contexts": {
+      "cryptography": 1,
+      "layer_foundation": 1,
+      "level_2": 1
+    },
+    "crate_distribution": {
+      "fiat-crypto": 1
+    }
+  },
+  {
+    "integer_value": 256,
+    "total_usage_count": 1,
+    "user_types": {
+      "wrapped_declaration": 1
+    },
+    "relations": {
+      "missing_dependency": 1
+    },
+    "ast_contexts": {
+      "application_code": 1,
+      "level_2": 1,
+      "layer_foundation": 1
+    },
+    "crate_distribution": {
+      "sha2": 1
+    }
+  },
+  {
+    "integer_value": 46,
+    "total_usage_count": 1,
+    "user_types": {
+      "wrapped_declaration": 1
+    },
+    "relations": {
+      "missing_dependency": 1
+    },
+    "ast_contexts": {
+      "level_2": 1,
+      "application_code": 1,
+      "layer_foundation": 1
+    },
+    "crate_distribution": {
+      "idna": 1
+    }
+  },
+  {
+    "integer_value": 2024,
+    "total_usage_count": 1,
+    "user_types": {
+      "wrapped_declaration": 1
+    },
+    "relations": {
+      "missing_dependency": 1
+    },
+    "ast_contexts": {
+      "layer_compiler": 1,
+      "level_5": 1,
+      "compiler_core": 1
+    },
+    "crate_distribution": {
+      "rustc_lint": 1
+    }
+  },
+  {
+    "integer_value": -128,
+    "total_usage_count": 1,
+    "user_types": {
+      "wrapped_declaration": 1
+    },
+    "relations": {
+      "missing_dependency": 1
+    },
+    "ast_contexts": {
+      "level_5": 1,
+      "layer_compiler": 1,
+      "compiler_core": 1
+    },
+    "crate_distribution": {
+      "rustc-stable-hash": 1
+    }
+  },
+  {
+    "integer_value": -16,
+    "total_usage_count": 1,
+    "user_types": {
+      "unknown": 1
+    },
+    "relations": {
+      "namespace_relation": 1
+    },
+    "ast_contexts": {
+      "input_output": 1,
+      "layer_foundation": 1,
+      "level_2": 1
+    },
+    "crate_distribution": {
+      "criterion-plot": 1
+    }
+  }
+]

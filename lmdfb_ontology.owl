@@ -1,0 +1,170 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix lmdfb: <http://split-decls-rs.org/lmdfb#> .
+
+<http://split-decls-rs.org/lmdfb> rdf:type owl:Ontology ;
+    rdfs:label "LMDFB Lattice Ontology" ;
+    rdfs:comment "Ontology for Rust ecosystem lattice mapping" .
+
+# Classes
+lmdfb:ErrorCode rdf:type owl:Class .
+lmdfb:Symbol rdf:type owl:Class .
+lmdfb:Layer rdf:type owl:Class .
+lmdfb:CryptoConstant rdf:type owl:Class .
+lmdfb:Integer rdf:type owl:Class .
+lmdfb:Crate rdf:type owl:Class .
+lmdfb:SystemLayer rdf:type owl:Class .
+lmdfb:LatticeNode rdf:type owl:Class .
+lmdfb:FoundationLayer rdf:type owl:Class .
+lmdfb:CompilerLayer rdf:type owl:Class .
+lmdfb:PowerOfTwo rdf:type owl:Class .
+lmdfb:SmallInteger rdf:type owl:Class .
+lmdfb:Declaration rdf:type owl:Class .
+
+# Properties
+lmdfb:belongsToLayer rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:LatticeNode ;
+    rdfs:range lmdfb:Layer .
+
+lmdfb:hasWeight rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:LatticeNode ;
+    rdfs:range lmdfb:Integer .
+
+lmdfb:hasValue rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:Integer ;
+    rdfs:range lmdfb:Integer .
+
+lmdfb:hasComplexity rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:LatticeNode ;
+    rdfs:range lmdfb:Integer .
+
+lmdfb:hasEmoji rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:LatticeNode ;
+    rdfs:range lmdfb:Symbol .
+
+lmdfb:hasLevel rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:LatticeNode ;
+    rdfs:range lmdfb:Integer .
+
+lmdfb:hasSymbol rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:LatticeNode ;
+    rdfs:range lmdfb:Symbol .
+
+lmdfb:belongsToCrate rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:LatticeNode ;
+    rdfs:range lmdfb:Crate .
+
+lmdfb:dependsOn rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:LatticeNode ;
+    rdfs:range lmdfb:LatticeNode .
+
+lmdfb:usesInteger rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:Declaration ;
+    rdfs:range lmdfb:Integer .
+
+lmdfb:isTypeOf rdf:type owl:ObjectProperty ;
+    rdfs:domain lmdfb:Integer ;
+    rdfs:range lmdfb:Integer .
+
+# Sample Individuals and Relations
+lmdfb:node_addr2line__Context rdf:type lmdfb:LatticeNode .
+lmdfb:node_addr2line__Context lmdfb:hasSymbol "addr2line::Context" .
+lmdfb:level_2 rdf:type lmdfb:Integer .
+lmdfb:level_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__Context lmdfb:hasLevel lmdfb:level_2 .
+lmdfb:weight_100 rdf:type lmdfb:Integer .
+lmdfb:weight_100 lmdfb:hasValue lmdfb:100 .
+lmdfb:node_addr2line__Context lmdfb:hasWeight lmdfb:weight_100 .
+lmdfb:layer_foundation rdf:type lmdfb:FoundationLayer .
+lmdfb:node_addr2line__Context lmdfb:belongsToLayer lmdfb:layer_foundation .
+lmdfb:node_addr2line__Context lmdfb:hasEmoji "📦" .
+lmdfb:crate_addr2line rdf:type lmdfb:Crate .
+lmdfb:node_addr2line__Context lmdfb:belongsToCrate lmdfb:crate_addr2line .
+lmdfb:int_2 rdf:type lmdfb:PowerOfTwo .
+lmdfb:int_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__Context lmdfb:usesInteger lmdfb:int_2 .
+lmdfb:node_addr2line__DebugFile rdf:type lmdfb:LatticeNode .
+lmdfb:node_addr2line__DebugFile lmdfb:hasSymbol "addr2line::DebugFile" .
+lmdfb:level_2 rdf:type lmdfb:Integer .
+lmdfb:level_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__DebugFile lmdfb:hasLevel lmdfb:level_2 .
+lmdfb:weight_100 rdf:type lmdfb:Integer .
+lmdfb:weight_100 lmdfb:hasValue lmdfb:100 .
+lmdfb:node_addr2line__DebugFile lmdfb:hasWeight lmdfb:weight_100 .
+lmdfb:layer_foundation rdf:type lmdfb:FoundationLayer .
+lmdfb:node_addr2line__DebugFile lmdfb:belongsToLayer lmdfb:layer_foundation .
+lmdfb:node_addr2line__DebugFile lmdfb:hasEmoji "📦" .
+lmdfb:crate_addr2line rdf:type lmdfb:Crate .
+lmdfb:node_addr2line__DebugFile lmdfb:belongsToCrate lmdfb:crate_addr2line .
+lmdfb:int_2 rdf:type lmdfb:PowerOfTwo .
+lmdfb:int_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__DebugFile lmdfb:usesInteger lmdfb:int_2 .
+lmdfb:node_addr2line__RangeAttributes rdf:type lmdfb:LatticeNode .
+lmdfb:node_addr2line__RangeAttributes lmdfb:hasSymbol "addr2line::RangeAttributes" .
+lmdfb:level_2 rdf:type lmdfb:Integer .
+lmdfb:level_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__RangeAttributes lmdfb:hasLevel lmdfb:level_2 .
+lmdfb:weight_76 rdf:type lmdfb:Integer .
+lmdfb:weight_76 lmdfb:hasValue lmdfb:76 .
+lmdfb:node_addr2line__RangeAttributes lmdfb:hasWeight lmdfb:weight_76 .
+lmdfb:layer_foundation rdf:type lmdfb:FoundationLayer .
+lmdfb:node_addr2line__RangeAttributes lmdfb:belongsToLayer lmdfb:layer_foundation .
+lmdfb:node_addr2line__RangeAttributes lmdfb:hasEmoji "🎭" .
+lmdfb:crate_addr2line rdf:type lmdfb:Crate .
+lmdfb:node_addr2line__RangeAttributes lmdfb:belongsToCrate lmdfb:crate_addr2line .
+lmdfb:int_2 rdf:type lmdfb:PowerOfTwo .
+lmdfb:int_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__RangeAttributes lmdfb:usesInteger lmdfb:int_2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_frame rdf:type lmdfb:LatticeNode .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_frame lmdfb:hasSymbol "addr2line::wrapped_addr2line_decls_module_not_found_frame" .
+lmdfb:level_2 rdf:type lmdfb:Integer .
+lmdfb:level_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_frame lmdfb:hasLevel lmdfb:level_2 .
+lmdfb:weight_35 rdf:type lmdfb:Integer .
+lmdfb:weight_35 lmdfb:hasValue lmdfb:35 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_frame lmdfb:hasWeight lmdfb:weight_35 .
+lmdfb:layer_foundation rdf:type lmdfb:FoundationLayer .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_frame lmdfb:belongsToLayer lmdfb:layer_foundation .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_frame lmdfb:hasEmoji "📦" .
+lmdfb:crate_addr2line rdf:type lmdfb:Crate .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_frame lmdfb:belongsToCrate lmdfb:crate_addr2line .
+lmdfb:int_2 rdf:type lmdfb:PowerOfTwo .
+lmdfb:int_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_frame lmdfb:usesInteger lmdfb:int_2 .
+lmdfb:int_2 rdf:type lmdfb:PowerOfTwo .
+lmdfb:int_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_frame lmdfb:usesInteger lmdfb:int_2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_function rdf:type lmdfb:LatticeNode .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_function lmdfb:hasSymbol "addr2line::wrapped_addr2line_decls_module_not_found_function" .
+lmdfb:level_2 rdf:type lmdfb:Integer .
+lmdfb:level_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_function lmdfb:hasLevel lmdfb:level_2 .
+lmdfb:weight_43 rdf:type lmdfb:Integer .
+lmdfb:weight_43 lmdfb:hasValue lmdfb:43 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_function lmdfb:hasWeight lmdfb:weight_43 .
+lmdfb:layer_foundation rdf:type lmdfb:FoundationLayer .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_function lmdfb:belongsToLayer lmdfb:layer_foundation .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_function lmdfb:hasEmoji "🌟" .
+lmdfb:crate_addr2line rdf:type lmdfb:Crate .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_function lmdfb:belongsToCrate lmdfb:crate_addr2line .
+lmdfb:int_2 rdf:type lmdfb:PowerOfTwo .
+lmdfb:int_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_function lmdfb:usesInteger lmdfb:int_2 .
+lmdfb:int_2 rdf:type lmdfb:PowerOfTwo .
+lmdfb:int_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_function lmdfb:usesInteger lmdfb:int_2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_line rdf:type lmdfb:LatticeNode .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_line lmdfb:hasSymbol "addr2line::wrapped_addr2line_decls_module_not_found_line" .
+lmdfb:level_2 rdf:type lmdfb:Integer .
+lmdfb:level_2 lmdfb:hasValue lmdfb:2 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_line lmdfb:hasLevel lmdfb:level_2 .
+lmdfb:weight_35 rdf:type lmdfb:Integer .
+lmdfb:weight_35 lmdfb:hasValue lmdfb:35 .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_line lmdfb:hasWeight lmdfb:weight_35 .
+lmdfb:layer_foundation rdf:type lmdfb:FoundationLayer .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_line lmdfb:belongsToLayer lmdfb:layer_foundation .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_line lmdfb:hasEmoji "🎯" .
+lmdfb:crate_addr2line rdf:type lmdfb:Crate .
+lmdfb:node_addr2line__wrapped_addr2line_decls_module_not_found_line lmdfb:belongsToCrate lmdfb:crate_addr2line .
+lmdfb:int_2 rdf:type lmdfb:PowerOfTwo .

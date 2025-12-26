@@ -1,7 +1,0 @@
-error: failed to parse manifest at `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/output3/wrapped-split-decls-rs/Cargo.toml`
-
-Caused by:
-  error inheriting `cargo-lock-import` from workspace root manifest's `workspace.dependencies.cargo-lock-import`
-
-Caused by:
-  `dependency.cargo-lock-import` was not found in `workspace.dependencies`
