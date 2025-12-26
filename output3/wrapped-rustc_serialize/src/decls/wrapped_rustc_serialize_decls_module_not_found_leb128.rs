@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: leb128")]
+#[llm_context(crate_name = "wrapped_rustc_serialize", module_name = "leb128")]
+pub struct wrapped_rustc_serialize_decls_module_not_found_leb128;

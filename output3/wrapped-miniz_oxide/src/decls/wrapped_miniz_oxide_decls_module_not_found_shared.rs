@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: shared")]
+#[llm_context(crate_name = "wrapped_miniz_oxide", module_name = "shared")]
+pub struct wrapped_miniz_oxide_decls_module_not_found_shared;

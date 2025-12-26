@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: gather_locals")]
+#[llm_context(crate_name = "wrapped_rustc_hir_typeck", module_name = "gather_locals")]
+pub struct wrapped_rustc_hir_typeck_decls_module_not_found_gather_locals;

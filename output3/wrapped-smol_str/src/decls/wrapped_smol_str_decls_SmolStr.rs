@@ -1,0 +1,21 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// A `SmolStr` is a string type that has the following properties:
+///
+/// * `size_of::<SmolStr>() == 24` (therefor `== size_of::<String>()` on 64 bit platforms)
+/// * `Clone` is `O(1)`
+/// * Strings are stack-allocated if they are:
+///     * Up to 23 bytes long
+///     * Longer than 23 bytes, but substrings of `WS` (see below). Such strings consist
+///       solely of consecutive newlines, followed by consecutive spaces
+/// * If a string does not satisfy the aforementioned conditions, it is heap-allocated
+/// * Additionally, a `SmolStr` can be explicitly created from a `&'static str` without allocation
+///
+/// Unlike `String`, however, `SmolStr` is immutable. The primary use case for
+/// `SmolStr` is a good enough default storage for tokens of typical programming
+/// languages. Strings consisting of a series of newlines, followed by a series of
+/// whitespace are a typical pattern in computer programs because of indentation.
+/// Note that a specialized interner might be a better solution for some use cases.
+///
+/// `WS`: A string of 32 newlines followed by 128 spaces.
+pub struct SmolStr(Repr);

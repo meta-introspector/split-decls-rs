@@ -1,0 +1,138 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl<S, W, FT> Layer<S> for HierarchicalLayer<W, FT>
+where
+    S: Subscriber + for<'span> LookupSpan<'span>,
+    W: for<'writer> MakeWriter<'writer> + 'static,
+    FT: FormatTime + 'static,
+{
+    fn on_new_span(&self, attrs: &Attributes, id: &Id, ctx: Context<S>) {
+        let Some(_guard) = Self::is_recursive() else {
+            return;
+        };
+        let span = ctx.span(id).expect("in new_span but span does not exist");
+        if span.extensions().get::<Data>().is_none() {
+            let data = Data::new(attrs, !self.config.deferred_spans);
+            span.extensions_mut().insert(data);
+        }
+        if self.config.deferred_spans {
+            return;
+        }
+        let bufs = &mut *self.bufs.lock().unwrap();
+        if self.config.span_retrace {
+            self.write_retrace_span(&span, bufs, &ctx, self.config.verbose_entry);
+        } else {
+            if self.config.verbose_entry {
+                if let Some(span) = span.parent() {
+                    self.write_span_info(&span, bufs, SpanMode::PreOpen);
+                }
+            }
+            bufs.current_span = Some(span.id());
+            self.write_span_info(
+                &span,
+                bufs,
+                SpanMode::Open {
+                    verbose: self.config.verbose_entry,
+                },
+            );
+        }
+    }
+    fn on_event(&self, event: &Event<'_>, ctx: Context<S>) {
+        let Some(_guard) = Self::is_recursive() else {
+            return;
+        };
+        let span = ctx.current_span();
+        let span_id = span.id();
+        let span = span_id.and_then(|id| ctx.span(id));
+        let mut guard = self.bufs.lock().unwrap();
+        let bufs = &mut *guard;
+        if let Some(new_span) = &span {
+            if self.config.span_retrace || self.config.deferred_spans {
+                self.write_retrace_span(new_span, bufs, &ctx, self.config.verbose_entry);
+            }
+        }
+        let mut event_buf = &mut bufs.current_buf;
+        {
+            let prev_buffer_len = event_buf.len();
+            self.timer
+                .format_time(&mut event_buf)
+                .expect("Unable to write time to buffer");
+            if prev_buffer_len < event_buf.len() {
+                write!(event_buf, " ").expect("Unable to write to buffer");
+            }
+        }
+        let deindent = if self.config.indent_lines { 0 } else { 1 };
+        let indent = ctx
+            .event_scope(event)
+            .map(|scope| scope.count() - deindent)
+            .unwrap_or(0);
+        if let Some(span) = span {
+            self.write_timestamp(span, event_buf);
+            event_buf.push(' ');
+        }
+        #[cfg(feature = "tracing-log")]
+        let normalized_meta = event.normalized_metadata();
+        #[cfg(feature = "tracing-log")]
+        let metadata = normalized_meta.as_ref().unwrap_or_else(|| event.metadata());
+        #[cfg(not(feature = "tracing-log"))]
+        let metadata = event.metadata();
+        let level = metadata.level();
+        let level = if self.config.ansi {
+            ColorLevel(level).to_string()
+        } else {
+            level.to_string()
+        };
+        write!(&mut event_buf, "{level}", level = level).expect("Unable to write to buffer");
+        if self.config.targets {
+            let target = metadata.target();
+            write!(
+                &mut event_buf,
+                " {}",
+                self.styled(Style::new().dimmed(), target,),
+            )
+            .expect("Unable to write to buffer");
+        }
+        let mut visitor = FmtEvent { comma: false, bufs };
+        event.record(&mut visitor);
+        visitor
+            .bufs
+            .indent_current(indent, &self.config, SpanMode::Event);
+        let writer = self.make_writer.make_writer();
+        bufs.flush_current_buf(writer)
+    }
+    fn on_close(&self, id: Id, ctx: Context<S>) {
+        let Some(_guard) = Self::is_recursive() else {
+            return;
+        };
+        let bufs = &mut *self.bufs.lock().unwrap();
+        let span = ctx.span(&id).expect("invalid span in on_close");
+        if self.config.deferred_spans
+            && span.extensions().get::<Data>().map(|v| v.written) != Some(true)
+        {
+            return;
+        }
+        self.write_span_info(
+            &span,
+            bufs,
+            SpanMode::Close {
+                verbose: self.config.verbose_exit,
+            },
+        );
+        if let Some(parent_span) = span.parent() {
+            bufs.current_span = Some(parent_span.id());
+            if self.config.verbose_exit {
+                self.write_span_info(&parent_span, bufs, SpanMode::PostClose);
+            }
+        }
+    }
+    fn on_record(&self, id: &Id, values: &tracing_core::span::Record<'_>, ctx: Context<S>) {
+        let Some(_guard) = Self::is_recursive() else {
+            return;
+        };
+        if let Some(span) = ctx.span(id) {
+            if let Some(data) = span.extensions_mut().get_mut::<Data>() {
+                values.record(data);
+            }
+        }
+    }
+}

@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: sparse_chunk")]
+#[llm_context(crate_name = "wrapped_sized_chunks", module_name = "sparse_chunk")]
+pub struct wrapped_sized_chunks_decls_module_not_found_sparse_chunk;

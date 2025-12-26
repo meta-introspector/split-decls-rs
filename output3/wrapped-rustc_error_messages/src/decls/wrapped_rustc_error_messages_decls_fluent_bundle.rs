@@ -1,0 +1,80 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Returns Fluent bundle with the user's locale resources from
+/// `$sysroot/share/locale/$requested_locale/*.ftl`.
+///
+/// If `-Z additional-ftl-path` was provided, load that resource and add it  to the bundle
+/// (overriding any conflicting messages).
+#[instrument(level = "trace")]
+pub fn fluent_bundle(
+    sysroot_candidates: &[&Path],
+    requested_locale: Option<LanguageIdentifier>,
+    additional_ftl_path: Option<&Path>,
+    with_directionality_markers: bool,
+) -> Result<Option<Arc<FluentBundle>>, TranslationBundleError> {
+    if requested_locale.is_none() && additional_ftl_path.is_none() {
+        return Ok(None);
+    }
+    let fallback_locale = langid!("en-US");
+    let requested_fallback_locale = requested_locale.as_ref() == Some(&fallback_locale);
+    trace!(?requested_fallback_locale);
+    if requested_fallback_locale && additional_ftl_path.is_none() {
+        return Ok(None);
+    }
+    let locale = requested_locale.clone().unwrap_or(fallback_locale);
+    trace!(?locale);
+    let mut bundle = new_bundle(vec![locale]);
+    register_functions(&mut bundle);
+    bundle.set_use_isolating(with_directionality_markers);
+    if let Some(requested_locale) = requested_locale {
+        let mut found_resources = false;
+        for sysroot in sysroot_candidates {
+            let mut sysroot = sysroot.to_path_buf();
+            sysroot.push("share");
+            sysroot.push("locale");
+            sysroot.push(requested_locale.to_string());
+            trace!(?sysroot);
+            if !sysroot.exists() {
+                trace!("skipping");
+                continue;
+            }
+            if !sysroot.is_dir() {
+                return Err(TranslationBundleError::LocaleIsNotDir);
+            }
+            for entry in sysroot
+                .read_dir()
+                .map_err(TranslationBundleError::ReadLocalesDir)?
+            {
+                let entry = entry.map_err(TranslationBundleError::ReadLocalesDirEntry)?;
+                let path = entry.path();
+                trace!(?path);
+                if path.extension().and_then(|s| s.to_str()) != Some("ftl") {
+                    trace!("skipping");
+                    continue;
+                }
+                let resource_str =
+                    fs::read_to_string(path).map_err(TranslationBundleError::ReadFtl)?;
+                let resource =
+                    FluentResource::try_new(resource_str).map_err(TranslationBundleError::from)?;
+                trace!(?resource);
+                bundle
+                    .add_resource(resource)
+                    .map_err(TranslationBundleError::from)?;
+                found_resources = true;
+            }
+        }
+        if !found_resources {
+            return Err(TranslationBundleError::MissingLocale);
+        }
+    }
+    if let Some(additional_ftl_path) = additional_ftl_path {
+        let resource_str =
+            fs::read_to_string(additional_ftl_path).map_err(TranslationBundleError::ReadFtl)?;
+        let resource =
+            FluentResource::try_new(resource_str).map_err(TranslationBundleError::from)?;
+        trace!(?resource);
+        bundle.add_resource_overriding(resource);
+    }
+    let bundle = Arc::new(bundle);
+    Ok(Some(bundle))
+}

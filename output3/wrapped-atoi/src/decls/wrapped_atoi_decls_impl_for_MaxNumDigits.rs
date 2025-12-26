@@ -1,0 +1,29 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl<I> MaxNumDigits for I
+where
+    I: Bounded + Zero + DivAssign + Ord + Copy,
+{
+    /// Returns the maximum number of digits a nonnegative representation of `I` can have depending
+    /// on `radix`.
+    fn max_num_digits(radix: I) -> usize {
+        let mut max = I::max_value();
+        let mut d = 0;
+        while max > I::zero() {
+            d += 1;
+            max /= radix;
+        }
+        d
+    }
+    /// Returns the maximum number of digits a negative representation of `I` can have depending
+    /// on `radix`.
+    fn max_num_digits_negative(radix: I) -> usize {
+        let mut min = I::min_value();
+        let mut d = 0;
+        while min < I::zero() {
+            d += 1;
+            min /= radix;
+        }
+        d
+    }
+}

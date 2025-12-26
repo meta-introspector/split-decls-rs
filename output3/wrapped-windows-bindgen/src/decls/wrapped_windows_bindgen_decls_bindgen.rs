@@ -1,0 +1,385 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// The conventional way of calling the `bindgen` function is as follows:
+///
+/// ```rust,no_run
+/// let args = [
+///     "--out",
+///     "src/bindings.rs",
+///     "--filter",
+///     "GetTickCount",
+/// ];
+///
+/// windows_bindgen::bindgen(args).unwrap();
+/// ```
+///
+/// Here is a list of supported arguments.
+///
+/// | Argument | Description |
+/// |----------|-------------|
+/// | `--in` | .winmd files or directories to include. |
+/// | `--out` | File name where the generated bindings will be saved. |
+/// | `--filter` | APIs to include or exclude in the generated bindings. |
+/// | `--rustfmt` | Overrides the default Rust formatting. |
+/// | `--derive` | Extra traits for types to derive. |
+/// | `--flat` | Avoids the default namespace-to-module conversion. |
+/// | `--no-allow` | Avoids generating the default `allow` attribute. |
+/// | `--no-comment` | Avoids generating the code generation comment. |
+/// | `--no-deps` | Avoids dependencies on the various `windows-*` crates. |
+/// | `--sys` | Generates raw or sys-style Rust bindings. |
+/// | `--sys-fn-ptrs` | Additionally generates function pointers for sys-style Rust bindings. |
+/// | `--implement` | Includes implementation traits for WinRT interfaces. |
+/// | `--link` | Overrides the default `windows-link` implementation for system calls. |
+///
+///
+/// # `--out`
+///
+/// Exactly one `--out` argument is required and instructs the `bindgen` function where to write the bindings.
+///
+/// # `--filter`
+///
+/// At least one `--filter` is required and indicates what APIs to include in the generated bindings.
+/// The following will, for example, also include the `Sleep` function:
+///
+/// ```rust
+/// let args = [
+///     "--out",
+///     "src/bindings.rs",
+///     "--filter",
+///     "GetTickCount",
+///     "Sleep",
+/// ];
+/// ```
+///
+/// The `--filter` argument can refer to the function or type name and nothing more. You can also refer
+/// to the namespace that the API metadata uses to group functions and types:
+///
+/// ```rust
+/// let args = [
+///     "--out",
+///     "src/bindings.rs",
+///     "--filter",
+///     "Windows.Foundation.Numerics",
+///     "!Windows.Foundation.Numerics.Matrix3x2",
+/// ];
+/// ```
+///
+/// In this example, all types from the `Windows.Foundation.Numerics` namepace are included with the
+/// exception of `Matrix3x2` which is excluded due to the `!` preamble.
+///
+/// # `--in`
+///
+/// `--in` can indicate a .winmd file or directory containing .winmd files. Alternatively, the special
+/// "default" input can be used to include the particular .winmd files that ship with the `windows-bindgen`
+/// crate. This may used to combine the default metadata with specific .winmd files.
+///
+/// ```rust
+/// let args = [
+///     "--in",
+///     "default",
+///     "Sample.winmd",
+///     "--out",
+///     "src/bindings.rs",
+///     "--filter",
+///     "Sample",
+/// ];
+/// ```
+///
+/// # `--flat`
+///
+/// By default, the bindings include a mapping of namespaces to modules. Consider this example again:
+///
+/// ```rust
+/// let args = [
+///     "--out",
+///     "src/bindings.rs",
+///     "--filter",
+///     "GetTickCount",
+///     "Sleep",
+/// ];
+/// ```
+///
+/// The resulting bindings might look something like this:
+///
+/// ```rust
+/// pub mod Windows {
+///     pub mod Win32 {
+///         pub mod System {
+///             pub mod SystemInformation {
+///                 #[inline]
+///                 pub unsafe fn GetTickCount() -> u32 {
+///                     windows_link::link!("kernel32.dll" "system" fn GetTickCount() -> u32);
+///                     unsafe { GetTickCount() }
+///                 }
+///             }
+///             pub mod Threading {
+///                 #[inline]
+///                 pub unsafe fn Sleep(dwmilliseconds: u32) {
+///                     windows_link::link!("kernel32.dll" "system" fn Sleep(dwmilliseconds : u32));
+///                     unsafe { Sleep(dwmilliseconds) }
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// That's because the default metadata defines `GetTickCount` in the `Windows.Win32.System.SystemInformation`
+/// namespace while `Sleep` is defined in the `Windows.Win32.System.Threading` namespace. Fortunately, it's
+/// easy to turn that off by using the `--flat` argument:
+///
+/// ```rust
+/// let args = [
+///     "--out",
+///     "src/bindings.rs",
+///     "--flat",
+///     "--filter",
+///     "GetTickCount",
+///     "Sleep",
+/// ];
+/// ```
+///
+/// The resulting bindings now look something like this:
+///
+/// ```rust
+/// #[inline]
+/// pub unsafe fn GetTickCount() -> u32 {
+///     windows_link::link!("kernel32.dll" "system" fn GetTickCount() -> u32);
+///     unsafe { GetTickCount() }
+/// }
+/// #[inline]
+/// pub unsafe fn Sleep(dwmilliseconds: u32) {
+///     windows_link::link!("kernel32.dll" "system" fn Sleep(dwmilliseconds : u32));
+///     unsafe { Sleep(dwmilliseconds) }
+/// }
+/// ```
+///
+/// # `--no-allow`
+///
+/// The bindings also include an allow attribute that covers various common warnings inherent in
+/// generated bindings.
+///
+/// ```rust
+/// #![allow(
+///     non_snake_case,
+///     non_upper_case_globals,
+///     non_camel_case_types,
+///     dead_code,
+///     clippy::all
+/// )]
+/// ```
+///
+/// You can prevent this from being generated if you prefer to manage this yourself with the `--no-allow`
+/// argument.
+///
+/// # `--sys`
+///
+/// The `--sys` argument instruct the `bindgen` function to generate raw, sometimes called sys-style Rust
+/// bindings.
+///
+/// ```rust
+/// let args = [
+///     "--out",
+///     "src/bindings.rs",
+///     "--flat",
+///     "--sys",
+///     "--filter",
+///     "GetTickCount",
+///     "Sleep",
+/// ];
+/// ```
+///
+/// The resulting bindings now look something like this:
+///
+/// ```rust
+/// windows_link::link!("kernel32.dll" "system" fn GetTickCount() -> u32);
+/// windows_link::link!("kernel32.dll" "system" fn Sleep(dwmilliseconds : u32));
+/// ```
+///
+/// You'll notice that the bindings are simpler as there's no wrapper functions and other
+/// conveniences. You just need to add a dependency on the tiny [windows-link](https://crates.io/crates/windows-link) crate and you're all set.
+///
+#[track_caller]
+#[must_use]
+pub fn bindgen<I, S>(args: I) -> Warnings
+where
+    I: IntoIterator<Item = S>,
+    S: AsRef<str>,
+{
+    let args = expand_args(args);
+    let mut kind = ArgKind::None;
+    let mut input = Vec::new();
+    let mut include = Vec::new();
+    let mut exclude = Vec::new();
+    let mut references = Vec::new();
+    let mut derive = Vec::new();
+    let mut flat = false;
+    let mut no_allow = false;
+    let mut no_comment = false;
+    let mut no_deps = false;
+    let mut no_toml = false;
+    let mut package = false;
+    let mut implement = false;
+    let mut specific_deps = false;
+    let mut rustfmt = String::new();
+    let mut output = String::new();
+    let mut sys = false;
+    let mut sys_fn_ptrs = false;
+    let mut link = String::new();
+    let mut index = false;
+    for arg in &args {
+        if arg.starts_with('-') {
+            kind = ArgKind::None;
+        }
+        match kind {
+            ArgKind::None => match arg.as_str() {
+                "--in" => kind = ArgKind::Input,
+                "--out" => kind = ArgKind::Output,
+                "--filter" => kind = ArgKind::Filter,
+                "--rustfmt" => kind = ArgKind::Rustfmt,
+                "--reference" => kind = ArgKind::Reference,
+                "--derive" => kind = ArgKind::Derive,
+                "--flat" => flat = true,
+                "--no-allow" => no_allow = true,
+                "--no-comment" => no_comment = true,
+                "--no-deps" => no_deps = true,
+                "--no-toml" => no_toml = true,
+                "--package" => package = true,
+                "--sys" => sys = true,
+                "--sys-fn-ptrs" => sys_fn_ptrs = true,
+                "--implement" => implement = true,
+                "--specific-deps" => specific_deps = true,
+                "--link" => kind = ArgKind::Link,
+                "--index" => index = true,
+                _ => panic!("invalid option `{arg}`"),
+            },
+            ArgKind::Output => {
+                if output.is_empty() {
+                    output = arg.to_string();
+                } else {
+                    panic!("exactly one `--out` is required");
+                }
+            }
+            ArgKind::Input => input.push(arg.as_str()),
+            ArgKind::Filter => {
+                if let Some(rest) = arg.strip_prefix('!') {
+                    exclude.push(rest);
+                } else {
+                    include.push(arg.as_str());
+                }
+            }
+            ArgKind::Reference => {
+                references.push(ReferenceStage::parse(arg));
+            }
+            ArgKind::Derive => {
+                derive.push(arg.as_str());
+            }
+            ArgKind::Rustfmt => rustfmt = arg.to_string(),
+            ArgKind::Link => link = arg.to_string(),
+        }
+    }
+    if link.is_empty() {
+        if sys || specific_deps {
+            link = "windows_link".to_string();
+        } else {
+            link = "windows_core".to_string();
+        }
+    }
+    if package && flat {
+        panic!("cannot combine `--package` and `--flat`");
+    }
+    if input.is_empty() {
+        input.push("default");
+    }
+    if output.is_empty() {
+        panic!("exactly one `--out` is required");
+    }
+    if include.is_empty() {
+        panic!("at least one `--filter` required");
+    }
+    let reader = Reader::new(expand_input(&input));
+    if !sys && !no_deps {
+        if reader.contains_key("Windows.Foundation") {
+            references.insert(
+                0,
+                ReferenceStage::parse("windows_collections,flat,Windows.Foundation.Collections"),
+            );
+            references.insert(
+                0,
+                ReferenceStage::parse("windows_numerics,flat,Windows.Foundation.Numerics"),
+            );
+            references.insert(
+                0,
+                ReferenceStage::parse("windows_future,flat,Windows.Foundation.Async*"),
+            );
+            references.insert(
+                0,
+                ReferenceStage::parse("windows_future,flat,Windows.Foundation.IAsync*"),
+            );
+        }
+        if reader.contains_key("Windows.Win32.Foundation") {
+            if specific_deps {
+                references.insert(
+                    0,
+                    ReferenceStage::parse(
+                        "windows_result,flat,Windows.Win32.Foundation.WIN32_ERROR",
+                    ),
+                );
+                references.insert(
+                    0,
+                    ReferenceStage::parse("windows_result,flat,Windows.Win32.Foundation.NTSTATUS"),
+                );
+                references.insert(
+                    0,
+                    ReferenceStage::parse(
+                        "windows_result,flat,Windows.Win32.System.Rpc.RPC_STATUS",
+                    ),
+                );
+            } else {
+                references.insert(
+                    0,
+                    ReferenceStage::parse("windows_core,flat,Windows.Win32.Foundation.WIN32_ERROR"),
+                );
+                references.insert(
+                    0,
+                    ReferenceStage::parse("windows_core,flat,Windows.Win32.Foundation.NTSTATUS"),
+                );
+                references.insert(
+                    0,
+                    ReferenceStage::parse("windows_core,flat,Windows.Win32.System.Rpc.RPC_STATUS"),
+                );
+            }
+        }
+    }
+    let filter = Filter::new(&reader, &include, &exclude);
+    let references = References::new(&reader, references);
+    let types = TypeMap::filter(&reader, &filter, &references);
+    let derive = Derive::new(&reader, &types, &derive);
+    let warnings = WarningBuilder::default();
+    let config = Config {
+        types: &types,
+        flat,
+        references: &references,
+        derive: &derive,
+        no_allow,
+        no_comment,
+        no_deps,
+        no_toml,
+        package,
+        rustfmt: &rustfmt,
+        output: &output,
+        sys,
+        sys_fn_ptrs,
+        implement,
+        specific_deps,
+        link: &link,
+        warnings: &warnings,
+        namespace: "",
+    };
+    let tree = TypeTree::new(&types);
+    config.write(tree);
+    if index {
+        index::write(&types, &format!("{output}/features.json"));
+    }
+    warnings.build()
+}

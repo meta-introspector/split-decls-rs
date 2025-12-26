@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: read")]
+#[llm_context(crate_name = "wrapped_xz2", module_name = "read")]
+pub struct wrapped_xz2_decls_module_not_found_read;

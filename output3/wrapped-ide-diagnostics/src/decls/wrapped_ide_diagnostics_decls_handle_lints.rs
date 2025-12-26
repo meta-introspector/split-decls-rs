@@ -1,0 +1,29 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn handle_lints(
+    sema: &Semantics<'_, RootDatabase>,
+    diagnostics: &mut [(InFile<SyntaxNode>, &mut Diagnostic)],
+    edition: Edition,
+) {
+    for (node, diag) in diagnostics {
+        let lint = match diag.code {
+            DiagnosticCode::RustcLint(lint) => RUSTC_LINTS[lint].lint,
+            DiagnosticCode::Clippy(lint) => CLIPPY_LINTS[lint].lint,
+            _ => panic!("non-lint passed to `handle_lints()`"),
+        };
+        let default_severity = default_lint_severity(lint, edition);
+        if !(default_severity == Severity::Allow && diag.severity == Severity::WeakWarning) {
+            diag.severity = default_severity;
+        }
+        let mut diag_severity =
+            lint_severity_at(sema, node, &lint_groups(&diag.code, edition), edition);
+        if let outline_diag_severity @ Some(_) =
+            find_outline_mod_lint_severity(sema, node, diag, edition)
+        {
+            diag_severity = outline_diag_severity;
+        }
+        if let Some(diag_severity) = diag_severity {
+            diag.severity = diag_severity;
+        }
+    }
+}

@@ -1,0 +1,79 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn effective_visibilities(tcx: TyCtxt<'_>, (): ()) -> &EffectiveVisibilities {
+    let mut visitor = EmbargoVisitor {
+        tcx,
+        effective_visibilities: tcx.resolutions(()).effective_visibilities.clone(),
+        macro_reachable: Default::default(),
+        changed: false,
+    };
+    visitor.effective_visibilities.check_invariants(tcx);
+    let impl_trait_pass = !tcx.sess.opts.actually_rustdoc;
+    if impl_trait_pass {
+        let krate = tcx.hir_crate_items(());
+        for id in krate.opaques() {
+            let opaque = tcx.hir_node_by_def_id(id).expect_opaque_ty();
+            let should_visit = match opaque.origin {
+                hir::OpaqueTyOrigin::FnReturn {
+                    parent,
+                    in_trait_or_impl: Some(hir::RpitContext::Trait),
+                }
+                | hir::OpaqueTyOrigin::AsyncFn {
+                    parent,
+                    in_trait_or_impl: Some(hir::RpitContext::Trait),
+                } => {
+                    match tcx
+                        .hir_node_by_def_id(parent)
+                        .expect_trait_item()
+                        .expect_fn()
+                        .1
+                    {
+                        hir::TraitFn::Required(_) => false,
+                        hir::TraitFn::Provided(..) => true,
+                    }
+                }
+                hir::OpaqueTyOrigin::FnReturn {
+                    in_trait_or_impl: None | Some(hir::RpitContext::TraitImpl),
+                    ..
+                }
+                | hir::OpaqueTyOrigin::AsyncFn {
+                    in_trait_or_impl: None | Some(hir::RpitContext::TraitImpl),
+                    ..
+                }
+                | hir::OpaqueTyOrigin::TyAlias { .. } => true,
+            };
+            if should_visit {
+                let pub_ev = EffectiveVisibility::from_vis(ty::Visibility::Public);
+                visitor
+                    .reach_through_impl_trait(opaque.def_id, pub_ev)
+                    .generics()
+                    .predicates()
+                    .ty();
+            }
+        }
+        visitor.changed = false;
+    }
+    let crate_items = tcx.hir_crate_items(());
+    loop {
+        for id in crate_items.free_items() {
+            visitor.check_def_id(id.owner_id);
+        }
+        for id in crate_items.foreign_items() {
+            visitor.check_def_id(id.owner_id);
+        }
+        if visitor.changed {
+            visitor.changed = false;
+        } else {
+            break;
+        }
+    }
+    visitor.effective_visibilities.check_invariants(tcx);
+    let check_visitor = TestReachabilityVisitor {
+        tcx,
+        effective_visibilities: &visitor.effective_visibilities,
+    };
+    for id in crate_items.owners() {
+        check_visitor.check_def_id(id);
+    }
+    tcx.arena.alloc(visitor.effective_visibilities)
+}

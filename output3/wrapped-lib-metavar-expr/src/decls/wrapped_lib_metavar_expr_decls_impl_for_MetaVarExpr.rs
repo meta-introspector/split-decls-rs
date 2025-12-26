@@ -1,0 +1,119 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl MetaVarExpr {
+    /// Attempt to parse a meta-variable expression from a token stream.
+    pub fn parse<'psess>(
+        input: &TokenStream,
+        outer_span: Span,
+        psess: &'psess ParseSess,
+    ) -> PResult<'psess, MetaVarExpr> {
+        let mut iter = input.iter();
+        let ident = parse_ident(&mut iter, psess, outer_span)?;
+        let next = iter.next();
+        let Some(TokenTree::Delimited(.., Delimiter::Parenthesis, args)) = next else {
+            let (unexpected_span, insert_span) = match next {
+                Some(TokenTree::Delimited(..)) => (None, None),
+                Some(tt) => (Some(tt.span()), None),
+                None => (None, Some(ident.span.shrink_to_hi())),
+            };
+            let continuation = DefaultContinuation::new(
+                PathBuf::from("./introspector_state"),
+                PathBuf::from("./introspector_resolution"),
+            );
+            let state = CapturedState {
+                session_id: "mve_missing_paren_error".to_string(),
+                call_context: format!("MetaVarExpr::parse for {:?}", ident.name),
+                stack_trace: vec![],
+                variables: serde_json::to_value(format!("ident_span: {:?}", ident.span)).unwrap(),
+                file_path: file!().to_string(),
+                line_number: line!(),
+                column_number: column!(),
+            };
+            match continuation.continue_execution(state) {
+                Resolution::Continue => {
+                    panic!(
+                        "LLM resolved to Continue, but no automated fix implemented. Manual intervention needed for missing parenthesis."
+                    );
+                }
+                Resolution::ModifyCode {
+                    file,
+                    line,
+                    column,
+                    new_code,
+                } => {
+                    panic!(
+                        "LLM resolved to ModifyCode. Manual intervention needed: file={}, line={}, col={}, code='{}'",
+                        file, line, column, new_code
+                    );
+                }
+            }
+        };
+        if iter.peek().is_some() {
+            let span = iter_span(&iter).expect("checked is_some above");
+            let continuation = DefaultContinuation::new(
+                PathBuf::from("./introspector_state"),
+                PathBuf::from("./introspector_resolution"),
+            );
+            let state = CapturedState {
+                session_id: "mve_extra_tokens_error".to_string(),
+                call_context: format!("MetaVarExpr::parse for {:?}", ident.name),
+                stack_trace: vec![],
+                variables: serde_json::to_value(format!("span: {:?}", span)).unwrap(),
+                file_path: file!().to_string(),
+                line_number: line!(),
+                column_number: column!(),
+            };
+            match continuation.continue_execution(state) {
+                Resolution::Continue => {
+                    panic!(
+                        "LLM resolved to Continue, but no automated fix implemented. Manual intervention needed for extra tokens."
+                    );
+                }
+                Resolution::ModifyCode {
+                    file,
+                    line,
+                    column,
+                    new_code,
+                } => {
+                    panic!(
+                        "LLM resolved to ModifyCode. Manual intervention needed: file={}, line={}, col={}, code='{}'",
+                        file, line, column, new_code
+                    );
+                }
+            }
+        }
+        let mut iter = args.iter();
+        let rslt = match ident.name {
+            sym::concat => parse_concat(&mut iter, psess, outer_span, ident.span)?,
+            sym::count => parse_count(&mut iter, psess, ident.span)?,
+            sym::ignore => {
+                eat_dollar(&mut iter, psess, ident.span)?;
+                MetaVarExpr::Ignore(parse_ident(&mut iter, psess, ident.span)?)
+            }
+            sym::index => MetaVarExpr::Index(parse_depth(&mut iter, psess, ident.span)?),
+            sym::len => MetaVarExpr::Len(parse_depth(&mut iter, psess, ident.span)?),
+            _ => handle_continuation_error(
+                psess,
+                ident.span,
+                &format!("unrecognized meta-variable expression: `{}`", ident.name),
+                "unrecognized_expr",
+            )?,
+        };
+        check_trailing_tokens(&mut iter, psess, ident)?;
+        Ok(rslt)
+    }
+    pub fn for_each_metavar<A>(&self, mut aux: A, mut cb: impl FnMut(A, &Ident) -> A) -> A {
+        match self {
+            MetaVarExpr::Concat(elems) => {
+                for elem in elems {
+                    if let MetaVarExprConcatElem::Var(ident) = elem {
+                        aux = cb(aux, ident);
+                    }
+                }
+                aux
+            }
+            MetaVarExpr::Count(ident, _) | MetaVarExpr::Ignore(ident) => cb(aux, ident),
+            MetaVarExpr::Index(..) | MetaVarExpr::Len(..) => aux,
+        }
+    }
+}

@@ -1,0 +1,794 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// An `Iterator`-like trait that allows for calculation of items to fail.
+pub trait FallibleIterator {
+    /// The type being iterated over.
+    type Item;
+    /// The error type.
+    type Error;
+    /// Advances the iterator and returns the next value.
+    ///
+    /// Returns `Ok(None)` when iteration is finished.
+    ///
+    /// The behavior of calling this method after a previous call has returned
+    /// `Ok(None)` or `Err` is implementation defined.
+    fn next(&mut self) -> Result<Option<Self::Item>, Self::Error>;
+    /// Returns bounds on the remaining length of the iterator.
+    ///
+    /// Specifically, the first half of the returned tuple is a lower bound and
+    /// the second half is an upper bound.
+    ///
+    /// For the upper bound, `None` indicates that the upper bound is either
+    /// unknown or larger than can be represented as a `usize`.
+    ///
+    /// Both bounds assume that all remaining calls to `next` succeed. That is,
+    /// `next` could return an `Err` in fewer calls than specified by the lower
+    /// bound.
+    ///
+    /// The default implementation returns `(0, None)`, which is correct for
+    /// any iterator.
+    #[inline]
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        (0, None)
+    }
+    /// Consumes the iterator, returning the number of remaining items.
+    #[inline]
+    fn count(self) -> Result<usize, Self::Error>
+    where
+        Self: Sized,
+    {
+        self.fold(0, |n, _| Ok(n + 1))
+    }
+    #[inline]
+    /// Sums the iterator elements.
+    fn sum<I>(self) -> Result<I, Self::Error>
+    where
+        Self: Sized,
+        I: iter::Sum<Self::Item>,
+    {
+        iter::Sum::sum(self.iterator())
+    }
+    #[inline]
+    /// Returns the iterator elements product.
+    fn product<I>(self) -> Result<I, Self::Error>
+    where
+        Self: Sized,
+        I: iter::Product<Self::Item>,
+    {
+        iter::Product::product(self.iterator())
+    }
+    /// Returns the last element of the iterator.
+    #[inline]
+    fn last(self) -> Result<Option<Self::Item>, Self::Error>
+    where
+        Self: Sized,
+    {
+        self.fold(None, |_, v| Ok(Some(v)))
+    }
+    /// Returns the `n`th element of the iterator.
+    #[inline]
+    fn nth(&mut self, mut n: usize) -> Result<Option<Self::Item>, Self::Error> {
+        while let Some(e) = self.next()? {
+            if n == 0 {
+                return Ok(Some(e));
+            }
+            n -= 1;
+        }
+        Ok(None)
+    }
+    /// Returns an iterator starting at the same point, but stepping by the given amount at each iteration.
+    ///
+    /// # Panics
+    ///
+    /// Panics if `step` is 0.
+    #[inline]
+    fn step_by(self, step: usize) -> StepBy<Self>
+    where
+        Self: Sized,
+    {
+        assert!(step != 0);
+        StepBy {
+            it: self,
+            step: step - 1,
+            first_take: true,
+        }
+    }
+    /// Returns an iterator which yields the elements of this iterator followed
+    /// by another.
+    #[inline]
+    fn chain<I>(self, it: I) -> Chain<Self, I>
+    where
+        I: IntoFallibleIterator<Item = Self::Item, Error = Self::Error>,
+        Self: Sized,
+    {
+        Chain {
+            front: self,
+            back: it,
+            state: ChainState::Both,
+        }
+    }
+    /// Returns an iterator that yields pairs of this iterator's and another
+    /// iterator's values.
+    #[inline]
+    fn zip<I>(self, o: I) -> Zip<Self, I::IntoFallibleIter>
+    where
+        Self: Sized,
+        I: IntoFallibleIterator<Error = Self::Error>,
+    {
+        Zip(self, o.into_fallible_iter())
+    }
+    /// Returns an iterator which applies a fallible transform to the elements
+    /// of the underlying iterator.
+    #[inline]
+    fn map<F, B>(self, f: F) -> Map<Self, F>
+    where
+        Self: Sized,
+        F: FnMut(Self::Item) -> Result<B, Self::Error>,
+    {
+        Map { it: self, f }
+    }
+    /// Calls a fallible closure on each element of an iterator.
+    #[inline]
+    fn for_each<F>(self, mut f: F) -> Result<(), Self::Error>
+    where
+        Self: Sized,
+        F: FnMut(Self::Item) -> Result<(), Self::Error>,
+    {
+        self.fold((), move |(), item| f(item))
+    }
+    /// Returns an iterator which uses a predicate to determine which values
+    /// should be yielded. The predicate may fail; such failures are passed to
+    /// the caller.
+    #[inline]
+    fn filter<F>(self, f: F) -> Filter<Self, F>
+    where
+        Self: Sized,
+        F: FnMut(&Self::Item) -> Result<bool, Self::Error>,
+    {
+        Filter { it: self, f }
+    }
+    /// Returns an iterator which both filters and maps. The closure may fail;
+    /// such failures are passed along to the consumer.
+    #[inline]
+    fn filter_map<B, F>(self, f: F) -> FilterMap<Self, F>
+    where
+        Self: Sized,
+        F: FnMut(Self::Item) -> Result<Option<B>, Self::Error>,
+    {
+        FilterMap { it: self, f }
+    }
+    /// Returns an iterator which yields the current iteration count as well
+    /// as the value.
+    #[inline]
+    fn enumerate(self) -> Enumerate<Self>
+    where
+        Self: Sized,
+    {
+        Enumerate { it: self, n: 0 }
+    }
+    /// Returns an iterator that can peek at the next element without consuming
+    /// it.
+    #[inline]
+    fn peekable(self) -> Peekable<Self>
+    where
+        Self: Sized,
+    {
+        Peekable {
+            it: self,
+            next: None,
+        }
+    }
+    /// Returns an iterator that skips elements based on a predicate.
+    #[inline]
+    fn skip_while<P>(self, predicate: P) -> SkipWhile<Self, P>
+    where
+        Self: Sized,
+        P: FnMut(&Self::Item) -> Result<bool, Self::Error>,
+    {
+        SkipWhile {
+            it: self,
+            flag: false,
+            predicate,
+        }
+    }
+    /// Returns an iterator that yields elements based on a predicate.
+    #[inline]
+    fn take_while<P>(self, predicate: P) -> TakeWhile<Self, P>
+    where
+        Self: Sized,
+        P: FnMut(&Self::Item) -> Result<bool, Self::Error>,
+    {
+        TakeWhile {
+            it: self,
+            flag: false,
+            predicate,
+        }
+    }
+    /// Returns an iterator which skips the first `n` values of this iterator.
+    #[inline]
+    fn skip(self, n: usize) -> Skip<Self>
+    where
+        Self: Sized,
+    {
+        Skip { it: self, n }
+    }
+    /// Returns an iterator that yields only the first `n` values of this
+    /// iterator.
+    #[inline]
+    fn take(self, n: usize) -> Take<Self>
+    where
+        Self: Sized,
+    {
+        Take {
+            it: self,
+            remaining: n,
+        }
+    }
+    /// Returns an iterator which applies a stateful map to values of this
+    /// iterator.
+    #[inline]
+    fn scan<St, B, F>(self, initial_state: St, f: F) -> Scan<Self, St, F>
+    where
+        Self: Sized,
+        F: FnMut(&mut St, Self::Item) -> Result<Option<B>, Self::Error>,
+    {
+        Scan {
+            it: self,
+            f,
+            state: initial_state,
+        }
+    }
+    /// Returns an iterator which maps this iterator's elements to iterators, yielding those iterators' values.
+    #[inline]
+    fn flat_map<U, F>(self, f: F) -> FlatMap<Self, U, F>
+    where
+        Self: Sized,
+        U: IntoFallibleIterator<Error = Self::Error>,
+        F: FnMut(Self::Item) -> Result<U, Self::Error>,
+    {
+        FlatMap {
+            it: self.map(f),
+            cur: None,
+        }
+    }
+    /// Returns an iterator which flattens an iterator of iterators, yielding those iterators' values.
+    #[inline]
+    fn flatten(self) -> Flatten<Self>
+    where
+        Self: Sized,
+        Self::Item: IntoFallibleIterator<Error = Self::Error>,
+    {
+        Flatten {
+            it: self,
+            cur: None,
+        }
+    }
+    /// Returns an iterator which yields this iterator's elements and ends after
+    /// the first `Ok(None)`.
+    ///
+    /// The behavior of calling `next` after it has previously returned
+    /// `Ok(None)` is normally unspecified. The iterator returned by this method
+    /// guarantees that `Ok(None)` will always be returned.
+    #[inline]
+    fn fuse(self) -> Fuse<Self>
+    where
+        Self: Sized,
+    {
+        Fuse {
+            it: self,
+            done: false,
+        }
+    }
+    /// Returns an iterator which passes each element to a closure before returning it.
+    #[inline]
+    fn inspect<F>(self, f: F) -> Inspect<Self, F>
+    where
+        Self: Sized,
+        F: FnMut(&Self::Item) -> Result<(), Self::Error>,
+    {
+        Inspect { it: self, f }
+    }
+    /// Borrow an iterator rather than consuming it.
+    ///
+    /// This is useful to allow the use of iterator adaptors that would
+    /// otherwise consume the value.
+    #[inline]
+    fn by_ref(&mut self) -> &mut Self
+    where
+        Self: Sized,
+    {
+        self
+    }
+    /// Transforms the iterator into a collection.
+    ///
+    /// An `Err` will be returned if any invocation of `next` returns `Err`.
+    #[inline]
+    fn collect<T>(self) -> Result<T, Self::Error>
+    where
+        T: iter::FromIterator<Self::Item>,
+        Self: Sized,
+    {
+        self.iterator().collect()
+    }
+    /// Transforms the iterator into two collections, partitioning elements by a closure.
+    #[inline]
+    fn partition<B, F>(self, mut f: F) -> Result<(B, B), Self::Error>
+    where
+        Self: Sized,
+        B: Default + Extend<Self::Item>,
+        F: FnMut(&Self::Item) -> Result<bool, Self::Error>,
+    {
+        let mut a = B::default();
+        let mut b = B::default();
+        self.for_each(|i| {
+            if f(&i)? {
+                a.extend(Some(i));
+            } else {
+                b.extend(Some(i));
+            }
+            Ok(())
+        })?;
+        Ok((a, b))
+    }
+    /// Applies a function over the elements of the iterator, producing a single
+    /// final value.
+    #[inline]
+    fn fold<B, F>(mut self, init: B, f: F) -> Result<B, Self::Error>
+    where
+        Self: Sized,
+        F: FnMut(B, Self::Item) -> Result<B, Self::Error>,
+    {
+        self.try_fold(init, f)
+    }
+    /// Applies a function over the elements of the iterator, producing a single final value.
+    ///
+    /// This is used as the "base" of many methods on `FallibleIterator`.
+    #[inline]
+    fn try_fold<B, E, F>(&mut self, mut init: B, mut f: F) -> Result<B, E>
+    where
+        Self: Sized,
+        E: From<Self::Error>,
+        F: FnMut(B, Self::Item) -> Result<B, E>,
+    {
+        while let Some(v) = self.next()? {
+            init = f(init, v)?;
+        }
+        Ok(init)
+    }
+    /// Determines if all elements of this iterator match a predicate.
+    #[inline]
+    fn all<F>(&mut self, mut f: F) -> Result<bool, Self::Error>
+    where
+        Self: Sized,
+        F: FnMut(Self::Item) -> Result<bool, Self::Error>,
+    {
+        self.try_fold((), |(), v| {
+            if !f(v)? {
+                return Err(FoldStop::Break(false));
+            }
+            Ok(())
+        })
+        .map(|()| true)
+        .unpack_fold()
+    }
+    /// Determines if any element of this iterator matches a predicate.
+    #[inline]
+    fn any<F>(&mut self, mut f: F) -> Result<bool, Self::Error>
+    where
+        Self: Sized,
+        F: FnMut(Self::Item) -> Result<bool, Self::Error>,
+    {
+        self.try_fold((), |(), v| {
+            if f(v)? {
+                return Err(FoldStop::Break(true));
+            }
+            Ok(())
+        })
+        .map(|()| false)
+        .unpack_fold()
+    }
+    /// Returns the first element of the iterator that matches a predicate.
+    #[inline]
+    fn find<F>(&mut self, mut f: F) -> Result<Option<Self::Item>, Self::Error>
+    where
+        Self: Sized,
+        F: FnMut(&Self::Item) -> Result<bool, Self::Error>,
+    {
+        self.try_fold((), |(), v| {
+            if f(&v)? {
+                return Err(FoldStop::Break(Some(v)));
+            }
+            Ok(())
+        })
+        .map(|()| None)
+        .unpack_fold()
+    }
+    /// Applies a function to the elements of the iterator, returning the first non-`None` result.
+    #[inline]
+    fn find_map<B, F>(&mut self, f: F) -> Result<Option<B>, Self::Error>
+    where
+        Self: Sized,
+        F: FnMut(Self::Item) -> Result<Option<B>, Self::Error>,
+    {
+        self.filter_map(f).next()
+    }
+    /// Returns the position of the first element of this iterator that matches
+    /// a predicate. The predicate may fail; such failures are returned to the
+    /// caller.
+    #[inline]
+    fn position<F>(&mut self, mut f: F) -> Result<Option<usize>, Self::Error>
+    where
+        Self: Sized,
+        F: FnMut(Self::Item) -> Result<bool, Self::Error>,
+    {
+        self.try_fold(0, |n, v| {
+            if f(v)? {
+                return Err(FoldStop::Break(Some(n)));
+            }
+            Ok(n + 1)
+        })
+        .map(|_| None)
+        .unpack_fold()
+    }
+    /// Returns the maximal element of the iterator.
+    #[inline]
+    fn max(self) -> Result<Option<Self::Item>, Self::Error>
+    where
+        Self: Sized,
+        Self::Item: Ord,
+    {
+        self.max_by(|a, b| Ok(a.cmp(b)))
+    }
+    /// Returns the element of the iterator which gives the maximum value from
+    /// the function.
+    #[inline]
+    fn max_by_key<B, F>(mut self, mut f: F) -> Result<Option<Self::Item>, Self::Error>
+    where
+        Self: Sized,
+        B: Ord,
+        F: FnMut(&Self::Item) -> Result<B, Self::Error>,
+    {
+        let max = match self.next()? {
+            Some(v) => (f(&v)?, v),
+            None => return Ok(None),
+        };
+        self.fold(max, |(key, max), v| {
+            let new_key = f(&v)?;
+            if key > new_key {
+                Ok((key, max))
+            } else {
+                Ok((new_key, v))
+            }
+        })
+        .map(|v| Some(v.1))
+    }
+    /// Returns the element that gives the maximum value with respect to the function.
+    #[inline]
+    fn max_by<F>(mut self, mut f: F) -> Result<Option<Self::Item>, Self::Error>
+    where
+        Self: Sized,
+        F: FnMut(&Self::Item, &Self::Item) -> Result<Ordering, Self::Error>,
+    {
+        let max = match self.next()? {
+            Some(v) => v,
+            None => return Ok(None),
+        };
+        self.fold(max, |max, v| {
+            if f(&max, &v)? == Ordering::Greater {
+                Ok(max)
+            } else {
+                Ok(v)
+            }
+        })
+        .map(Some)
+    }
+    /// Returns the minimal element of the iterator.
+    #[inline]
+    fn min(self) -> Result<Option<Self::Item>, Self::Error>
+    where
+        Self: Sized,
+        Self::Item: Ord,
+    {
+        self.min_by(|a, b| Ok(a.cmp(b)))
+    }
+    /// Returns the element of the iterator which gives the minimum value from
+    /// the function.
+    #[inline]
+    fn min_by_key<B, F>(mut self, mut f: F) -> Result<Option<Self::Item>, Self::Error>
+    where
+        Self: Sized,
+        B: Ord,
+        F: FnMut(&Self::Item) -> Result<B, Self::Error>,
+    {
+        let min = match self.next()? {
+            Some(v) => (f(&v)?, v),
+            None => return Ok(None),
+        };
+        self.fold(min, |(key, min), v| {
+            let new_key = f(&v)?;
+            if key < new_key {
+                Ok((key, min))
+            } else {
+                Ok((new_key, v))
+            }
+        })
+        .map(|v| Some(v.1))
+    }
+    /// Returns the element that gives the minimum value with respect to the function.
+    #[inline]
+    fn min_by<F>(mut self, mut f: F) -> Result<Option<Self::Item>, Self::Error>
+    where
+        Self: Sized,
+        F: FnMut(&Self::Item, &Self::Item) -> Result<Ordering, Self::Error>,
+    {
+        let min = match self.next()? {
+            Some(v) => v,
+            None => return Ok(None),
+        };
+        self.fold(min, |min, v| {
+            if f(&min, &v)? == Ordering::Less {
+                Ok(min)
+            } else {
+                Ok(v)
+            }
+        })
+        .map(Some)
+    }
+    /// Returns an iterator that yields this iterator's items in the opposite
+    /// order.
+    #[inline]
+    fn rev(self) -> Rev<Self>
+    where
+        Self: Sized + DoubleEndedFallibleIterator,
+    {
+        Rev(self)
+    }
+    /// Converts an iterator of pairs into a pair of containers.
+    #[inline]
+    fn unzip<A, B, FromA, FromB>(self) -> Result<(FromA, FromB), Self::Error>
+    where
+        Self: Sized + FallibleIterator<Item = (A, B)>,
+        FromA: Default + Extend<A>,
+        FromB: Default + Extend<B>,
+    {
+        let mut from_a = FromA::default();
+        let mut from_b = FromB::default();
+        self.for_each(|(a, b)| {
+            from_a.extend(Some(a));
+            from_b.extend(Some(b));
+            Ok(())
+        })?;
+        Ok((from_a, from_b))
+    }
+    /// Returns an iterator which clones all of its elements.
+    #[inline]
+    fn cloned<'a, T>(self) -> Cloned<Self>
+    where
+        Self: Sized + FallibleIterator<Item = &'a T>,
+        T: 'a + Clone,
+    {
+        Cloned(self)
+    }
+    /// Returns an iterator which repeats this iterator endlessly.
+    #[inline]
+    fn cycle(self) -> Cycle<Self>
+    where
+        Self: Sized + Clone,
+    {
+        Cycle {
+            it: self.clone(),
+            cur: self,
+        }
+    }
+    /// Lexicographically compares the elements of this iterator to that of
+    /// another.
+    #[inline]
+    fn cmp<I>(mut self, other: I) -> Result<Ordering, Self::Error>
+    where
+        Self: Sized,
+        I: IntoFallibleIterator<Item = Self::Item, Error = Self::Error>,
+        Self::Item: Ord,
+    {
+        let mut other = other.into_fallible_iter();
+        loop {
+            match (self.next()?, other.next()?) {
+                (None, None) => return Ok(Ordering::Equal),
+                (None, _) => return Ok(Ordering::Less),
+                (_, None) => return Ok(Ordering::Greater),
+                (Some(x), Some(y)) => match x.cmp(&y) {
+                    Ordering::Equal => {}
+                    o => return Ok(o),
+                },
+            }
+        }
+    }
+    /// Lexicographically compares the elements of this iterator to that of
+    /// another.
+    #[inline]
+    fn partial_cmp<I>(mut self, other: I) -> Result<Option<Ordering>, Self::Error>
+    where
+        Self: Sized,
+        I: IntoFallibleIterator<Error = Self::Error>,
+        Self::Item: PartialOrd<I::Item>,
+    {
+        let mut other = other.into_fallible_iter();
+        loop {
+            match (self.next()?, other.next()?) {
+                (None, None) => return Ok(Some(Ordering::Equal)),
+                (None, _) => return Ok(Some(Ordering::Less)),
+                (_, None) => return Ok(Some(Ordering::Greater)),
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Equal) => {}
+                    o => return Ok(o),
+                },
+            }
+        }
+    }
+    /// Determines if the elements of this iterator are equal to those of
+    /// another.
+    #[inline]
+    fn eq<I>(mut self, other: I) -> Result<bool, Self::Error>
+    where
+        Self: Sized,
+        I: IntoFallibleIterator<Error = Self::Error>,
+        Self::Item: PartialEq<I::Item>,
+    {
+        let mut other = other.into_fallible_iter();
+        loop {
+            match (self.next()?, other.next()?) {
+                (None, None) => return Ok(true),
+                (None, _) | (_, None) => return Ok(false),
+                (Some(x), Some(y)) => {
+                    if x != y {
+                        return Ok(false);
+                    }
+                }
+            }
+        }
+    }
+    /// Determines if the elements of this iterator are not equal to those of
+    /// another.
+    #[inline]
+    fn ne<I>(mut self, other: I) -> Result<bool, Self::Error>
+    where
+        Self: Sized,
+        I: IntoFallibleIterator<Error = Self::Error>,
+        Self::Item: PartialEq<I::Item>,
+    {
+        let mut other = other.into_fallible_iter();
+        loop {
+            match (self.next()?, other.next()?) {
+                (None, None) => return Ok(false),
+                (None, _) | (_, None) => return Ok(true),
+                (Some(x), Some(y)) => {
+                    if x != y {
+                        return Ok(true);
+                    }
+                }
+            }
+        }
+    }
+    /// Determines if the elements of this iterator are lexicographically less
+    /// than those of another.
+    #[inline]
+    fn lt<I>(mut self, other: I) -> Result<bool, Self::Error>
+    where
+        Self: Sized,
+        I: IntoFallibleIterator<Error = Self::Error>,
+        Self::Item: PartialOrd<I::Item>,
+    {
+        let mut other = other.into_fallible_iter();
+        loop {
+            match (self.next()?, other.next()?) {
+                (None, None) => return Ok(false),
+                (None, _) => return Ok(true),
+                (_, None) => return Ok(false),
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Less) => return Ok(true),
+                    Some(Ordering::Equal) => {}
+                    Some(Ordering::Greater) => return Ok(false),
+                    None => return Ok(false),
+                },
+            }
+        }
+    }
+    /// Determines if the elements of this iterator are lexicographically less
+    /// than or equal to those of another.
+    #[inline]
+    fn le<I>(mut self, other: I) -> Result<bool, Self::Error>
+    where
+        Self: Sized,
+        I: IntoFallibleIterator<Error = Self::Error>,
+        Self::Item: PartialOrd<I::Item>,
+    {
+        let mut other = other.into_fallible_iter();
+        loop {
+            match (self.next()?, other.next()?) {
+                (None, None) => return Ok(true),
+                (None, _) => return Ok(true),
+                (_, None) => return Ok(false),
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Less) => return Ok(true),
+                    Some(Ordering::Equal) => {}
+                    Some(Ordering::Greater) => return Ok(false),
+                    None => return Ok(false),
+                },
+            }
+        }
+    }
+    /// Determines if the elements of this iterator are lexicographically
+    /// greater than those of another.
+    #[inline]
+    fn gt<I>(mut self, other: I) -> Result<bool, Self::Error>
+    where
+        Self: Sized,
+        I: IntoFallibleIterator<Error = Self::Error>,
+        Self::Item: PartialOrd<I::Item>,
+    {
+        let mut other = other.into_fallible_iter();
+        loop {
+            match (self.next()?, other.next()?) {
+                (None, None) => return Ok(false),
+                (None, _) => return Ok(false),
+                (_, None) => return Ok(true),
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Less) => return Ok(false),
+                    Some(Ordering::Equal) => {}
+                    Some(Ordering::Greater) => return Ok(true),
+                    None => return Ok(false),
+                },
+            }
+        }
+    }
+    /// Determines if the elements of this iterator are lexicographically
+    /// greater than or equal to those of another.
+    #[inline]
+    fn ge<I>(mut self, other: I) -> Result<bool, Self::Error>
+    where
+        Self: Sized,
+        I: IntoFallibleIterator<Error = Self::Error>,
+        Self::Item: PartialOrd<I::Item>,
+    {
+        let mut other = other.into_fallible_iter();
+        loop {
+            match (self.next()?, other.next()?) {
+                (None, None) => return Ok(true),
+                (None, _) => return Ok(false),
+                (_, None) => return Ok(true),
+                (Some(x), Some(y)) => match x.partial_cmp(&y) {
+                    Some(Ordering::Less) => return Ok(false),
+                    Some(Ordering::Equal) => {}
+                    Some(Ordering::Greater) => return Ok(true),
+                    None => return Ok(false),
+                },
+            }
+        }
+    }
+    /// Returns a normal (non-fallible) iterator over `Result<Item, Error>`.
+    #[inline]
+    fn iterator(self) -> Iterator<Self>
+    where
+        Self: Sized,
+    {
+        Iterator(self)
+    }
+    /// Returns an iterator which applies a transform to the errors of the
+    /// underlying iterator.
+    #[inline]
+    fn map_err<B, F>(self, f: F) -> MapErr<Self, F>
+    where
+        F: FnMut(Self::Error) -> B,
+        Self: Sized,
+    {
+        MapErr { it: self, f }
+    }
+    /// Returns an iterator which unwraps all of its elements.
+    #[inline]
+    fn unwrap<T>(self) -> Unwrap<Self>
+    where
+        Self: Sized + FallibleIterator<Item = T>,
+        Self::Error: core::fmt::Debug,
+    {
+        Unwrap(self)
+    }
+}

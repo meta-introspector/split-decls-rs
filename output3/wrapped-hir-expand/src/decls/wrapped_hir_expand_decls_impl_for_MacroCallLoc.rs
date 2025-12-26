@@ -1,0 +1,77 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl MacroCallLoc {
+    pub fn to_node(&self, db: &dyn ExpandDatabase) -> InFile<SyntaxNode> {
+        match self.kind {
+            MacroCallKind::FnLike { ast_id, .. } => {
+                ast_id.with_value(ast_id.to_node(db).syntax().clone())
+            }
+            MacroCallKind::Derive { ast_id, derive_attr_index, .. } => {
+                ast_id
+                    .with_value(ast_id.to_node(db))
+                    .map(|it| {
+                        collect_attrs(&it)
+                            .nth(derive_attr_index.ast_index())
+                            .and_then(|it| match it.1 {
+                                Either::Left(attr) => Some(attr.syntax().clone()),
+                                Either::Right(_) => None,
+                            })
+                            .unwrap_or_else(|| it.syntax().clone())
+                    })
+            }
+            MacroCallKind::Attr { ast_id, invoc_attr_index, .. } => {
+                if self.def.is_attribute_derive() {
+                    ast_id
+                        .with_value(ast_id.to_node(db))
+                        .map(|it| {
+                            collect_attrs(&it)
+                                .nth(invoc_attr_index.ast_index())
+                                .and_then(|it| match it.1 {
+                                    Either::Left(attr) => Some(attr.syntax().clone()),
+                                    Either::Right(_) => None,
+                                })
+                                .unwrap_or_else(|| it.syntax().clone())
+                        })
+                } else {
+                    ast_id.with_value(ast_id.to_node(db).syntax().clone())
+                }
+            }
+        }
+    }
+    pub fn to_node_item(&self, db: &dyn ExpandDatabase) -> InFile<ast::Item> {
+        match self.kind {
+            MacroCallKind::FnLike { ast_id, .. } => {
+                InFile::new(ast_id.file_id, ast_id.map(FileAstId::upcast).to_node(db))
+            }
+            MacroCallKind::Derive { ast_id, .. } => {
+                InFile::new(ast_id.file_id, ast_id.map(FileAstId::upcast).to_node(db))
+            }
+            MacroCallKind::Attr { ast_id, .. } => {
+                InFile::new(ast_id.file_id, ast_id.to_node(db))
+            }
+        }
+    }
+    fn expand_to(&self) -> ExpandTo {
+        match self.kind {
+            MacroCallKind::FnLike { expand_to, .. } => expand_to,
+            MacroCallKind::Derive { .. } => ExpandTo::Items,
+            MacroCallKind::Attr { .. } if self.def.is_attribute_derive() => {
+                ExpandTo::Items
+            }
+            MacroCallKind::Attr { .. } => ExpandTo::Items,
+        }
+    }
+    pub fn include_file_id(
+        &self,
+        db: &dyn ExpandDatabase,
+        macro_call_id: MacroCallId,
+    ) -> Option<EditionedFileId> {
+        if self.def.is_include()
+            && let MacroCallKind::FnLike { eager: Some(eager), .. } = &self.kind
+            && let Ok(it) = include_input_to_file_id(db, macro_call_id, &eager.arg)
+        {
+            return Some(it);
+        }
+        None
+    }
+}

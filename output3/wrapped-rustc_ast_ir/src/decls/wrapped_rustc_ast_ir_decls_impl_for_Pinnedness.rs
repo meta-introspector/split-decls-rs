@@ -1,0 +1,18 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl Pinnedness {
+    /// Return `true` if self is pinned
+    pub fn is_pinned(self) -> bool {
+        matches!(self, Self::Pinned)
+    }
+    /// Returns `""` (empty string), "mut", `"pin mut "` or `"pin const "` depending
+    /// on the pinnedness and mutability.
+    pub fn prefix_str(self, mutbl: Mutability) -> &'static str {
+        match (self, mutbl) {
+            (Pinnedness::Pinned, Mutability::Mut) => "pin mut ",
+            (Pinnedness::Pinned, Mutability::Not) => "pin const ",
+            (Pinnedness::Not, Mutability::Mut) => "mut ",
+            (Pinnedness::Not, Mutability::Not) => "",
+        }
+    }
+}

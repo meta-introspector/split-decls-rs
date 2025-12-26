@@ -100,7 +100,17 @@ fn main() -> Result<()> {
         // If we have wrapped crates, try to test one
         if wrapped_count > 0 {
             println!("Output3 generation successful!");
+            
+            // Check if we have the self-referential wrapped-split-decls-rs
+            let wrapped_self = output_dir.join("wrapped-split-decls-rs");
+            if wrapped_self.exists() {
+                println!("✅ Self-referential wrapped-split-decls-rs generated - recursive capability achieved!");
+            }
+        } else {
+            println!("⚠️  Warning: No wrapped crates were generated");
         }
+    } else {
+        println!("❌ Error: Output directory was not created");
     }
     
     Ok(())

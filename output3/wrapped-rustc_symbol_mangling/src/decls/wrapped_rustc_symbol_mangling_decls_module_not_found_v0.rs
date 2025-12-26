@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: v0")]
+#[llm_context(crate_name = "wrapped_rustc_symbol_mangling", module_name = "v0")]
+pub struct wrapped_rustc_symbol_mangling_decls_module_not_found_v0;

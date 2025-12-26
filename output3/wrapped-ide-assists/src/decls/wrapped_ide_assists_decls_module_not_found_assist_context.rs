@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: assist_context")]
+#[llm_context(crate_name = "wrapped_ide_assists", module_name = "assist_context")]
+pub struct wrapped_ide_assists_decls_module_not_found_assist_context;

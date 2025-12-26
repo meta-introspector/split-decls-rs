@@ -1,0 +1,75 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl Scalar {
+    #[inline]
+    pub fn is_bool(&self) -> bool {
+        use Integer::*;
+        matches!(
+            self,
+            Scalar::Initialized {
+                value: Primitive::Int(I8, false),
+                valid_range: WrappingRange { start: 0, end: 1 }
+            }
+        )
+    }
+    /// Get the primitive representation of this type, ignoring the valid range and whether the
+    /// value is allowed to be undefined (due to being a union).
+    pub fn primitive(&self) -> Primitive {
+        match *self {
+            Scalar::Initialized { value, .. } | Scalar::Union { value } => value,
+        }
+    }
+    pub fn align(self, cx: &impl HasDataLayout) -> AbiAlign {
+        self.primitive().align(cx)
+    }
+    pub fn size(self, cx: &impl HasDataLayout) -> Size {
+        self.primitive().size(cx)
+    }
+    #[inline]
+    pub fn to_union(&self) -> Self {
+        Self::Union {
+            value: self.primitive(),
+        }
+    }
+    #[inline]
+    pub fn valid_range(&self, cx: &impl HasDataLayout) -> WrappingRange {
+        match *self {
+            Scalar::Initialized { valid_range, .. } => valid_range,
+            Scalar::Union { value } => WrappingRange::full(value.size(cx)),
+        }
+    }
+    #[inline]
+    /// Allows the caller to mutate the valid range. This operation will panic if attempted on a
+    /// union.
+    pub fn valid_range_mut(&mut self) -> &mut WrappingRange {
+        match self {
+            Scalar::Initialized { valid_range, .. } => valid_range,
+            Scalar::Union { .. } => panic!("cannot change the valid range of a union"),
+        }
+    }
+    /// Returns `true` if all possible numbers are valid, i.e `valid_range` covers the whole
+    /// layout.
+    #[inline]
+    pub fn is_always_valid<C: HasDataLayout>(&self, cx: &C) -> bool {
+        match *self {
+            Scalar::Initialized { valid_range, .. } => valid_range.is_full_for(self.size(cx)),
+            Scalar::Union { .. } => true,
+        }
+    }
+    /// Returns `true` if this type can be left uninit.
+    #[inline]
+    pub fn is_uninit_valid(&self) -> bool {
+        match *self {
+            Scalar::Initialized { .. } => false,
+            Scalar::Union { .. } => true,
+        }
+    }
+    /// Returns `true` if this is a signed integer scalar
+    #[inline]
+    pub fn is_signed(&self) -> bool {
+        match self.primitive() {
+            Primitive::Int(_, signed) => signed,
+            _ => false,
+        }
+    }
+}

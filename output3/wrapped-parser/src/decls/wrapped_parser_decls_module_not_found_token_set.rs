@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: token_set")]
+#[llm_context(crate_name = "wrapped_parser", module_name = "token_set")]
+pub struct wrapped_parser_decls_module_not_found_token_set;

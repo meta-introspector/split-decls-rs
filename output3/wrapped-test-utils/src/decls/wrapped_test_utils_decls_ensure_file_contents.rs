@@ -1,0 +1,10 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Checks that the `file` has the specified `contents`. If that is not the
+/// case, updates the file and then fails the test.
+#[track_caller]
+pub fn ensure_file_contents(file: &Path, contents: &str) {
+    if let Err(()) = try_ensure_file_contents(file, contents) {
+        panic!("Some files were not up-to-date");
+    }
+}

@@ -1,0 +1,41 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+declare_passes! {
+    mod abort_unwinding_calls : AbortUnwindingCalls; mod add_call_guards : AddCallGuards
+    { AllCallEdges, CriticalCallEdges }; mod add_moves_for_packed_drops :
+    AddMovesForPackedDrops; mod add_retag : AddRetag; mod add_subtyping_projections :
+    Subtyper; mod check_inline : CheckForceInline; mod check_call_recursion :
+    CheckCallRecursion, CheckDropRecursion; mod check_inline_always_target_features :
+    CheckInlineAlwaysTargetFeature; mod check_alignment : CheckAlignment; mod check_enums
+    : CheckEnums; mod check_const_item_mutation : CheckConstItemMutation; mod check_null
+    : CheckNull; mod check_packed_ref : CheckPackedRef; pub mod cleanup_post_borrowck :
+    CleanupPostBorrowck; mod copy_prop : CopyProp; mod coroutine : StateTransform; mod
+    coverage : InstrumentCoverage; mod ctfe_limit : CtfeLimit; mod dataflow_const_prop :
+    DataflowConstProp; mod dead_store_elimination : DeadStoreElimination { Initial, Final
+    }; mod deref_separator : Derefer; mod dest_prop : DestinationPropagation; pub mod
+    dump_mir : Marker; mod early_otherwise_branch : EarlyOtherwiseBranch; mod
+    erase_deref_temps : EraseDerefTemps; mod elaborate_box_derefs : ElaborateBoxDerefs;
+    mod elaborate_drops : ElaborateDrops; mod function_item_references :
+    FunctionItemReferences; mod gvn : GVN; pub mod inline : Inline, ForceInline; mod
+    impossible_predicates : ImpossiblePredicates; mod instsimplify : InstSimplify {
+    BeforeInline, AfterSimplifyCfg }; mod jump_threading : JumpThreading; mod
+    known_panics_lint : KnownPanicsLint; mod large_enums : EnumSizeOpt; mod
+    lower_intrinsics : LowerIntrinsics; mod lower_slice_len : LowerSliceLenCalls; mod
+    match_branches : MatchBranchSimplification; mod mentioned_items : MentionedItems; mod
+    multiple_return_terminators : MultipleReturnTerminators; mod post_drop_elaboration :
+    CheckLiveDrops; mod prettify : ReorderBasicBlocks, ReorderLocals; mod promote_consts
+    : PromoteTemps; mod ref_prop : ReferencePropagation; mod remove_noop_landing_pads :
+    RemoveNoopLandingPads; mod remove_place_mention : RemovePlaceMention; mod
+    remove_storage_markers : RemoveStorageMarkers; mod remove_uninit_drops :
+    RemoveUninitDrops; mod remove_unneeded_drops : RemoveUnneededDrops; mod remove_zsts :
+    RemoveZsts; mod required_consts : RequiredConstsVisitor; mod post_analysis_normalize
+    : PostAnalysisNormalize; mod sanity_check : SanityCheck; pub mod simplify :
+    SimplifyCfg { Initial, PromoteConsts, RemoveFalseEdges, PostAnalysis,
+    PreOptimizations, Final, MakeShim, AfterUnreachableEnumBranching }, SimplifyLocals {
+    BeforeConstProp, AfterGVN, Final }; mod simplify_branches : SimplifyConstCondition {
+    AfterInstSimplify, AfterConstProp, Final }; mod simplify_comparison_integral :
+    SimplifyComparisonIntegral; mod single_use_consts : SingleUseConsts; mod sroa :
+    ScalarReplacementOfAggregates; mod strip_debuginfo : StripDebugInfo; mod
+    unreachable_enum_branching : UnreachableEnumBranching; mod unreachable_prop :
+    UnreachablePropagation; mod validate : Validator;
+}

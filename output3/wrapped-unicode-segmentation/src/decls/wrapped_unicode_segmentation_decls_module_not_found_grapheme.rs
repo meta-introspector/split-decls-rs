@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: grapheme")]
+#[llm_context(crate_name = "wrapped_unicode_segmentation", module_name = "grapheme")]
+pub struct wrapped_unicode_segmentation_decls_module_not_found_grapheme;

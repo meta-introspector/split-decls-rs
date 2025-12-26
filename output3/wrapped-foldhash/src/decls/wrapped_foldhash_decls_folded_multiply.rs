@@ -1,0 +1,40 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+#[inline(always)]
+const fn folded_multiply(x: u64, y: u64) -> u64 {
+    #[cfg(any(
+        all(
+            target_pointer_width = "64",
+            not(any(target_arch = "sparc64", target_arch = "wasm64")),
+        ),
+        target_arch = "aarch64",
+        target_arch = "x86_64",
+        all(target_family = "wasm", target_feature = "wide-arithmetic"),
+    ))]
+    {
+        let full = (x as u128).wrapping_mul(y as u128);
+        let lo = full as u64;
+        let hi = (full >> 64) as u64;
+        lo ^ hi
+    }
+    #[cfg(not(any(
+        all(
+            target_pointer_width = "64",
+            not(any(target_arch = "sparc64", target_arch = "wasm64")),
+        ),
+        target_arch = "aarch64",
+        target_arch = "x86_64",
+        all(target_family = "wasm", target_feature = "wide-arithmetic"),
+    )))]
+    {
+        let lx = x as u32;
+        let ly = y as u32;
+        let hx = (x >> 32) as u32;
+        let hy = (y >> 32) as u32;
+        let ll = (lx as u64).wrapping_mul(ly as u64);
+        let lh = (lx as u64).wrapping_mul(hy as u64);
+        let hl = (hx as u64).wrapping_mul(ly as u64);
+        let hh = (hx as u64).wrapping_mul(hy as u64);
+        (hh ^ ll) ^ (hl ^ lh).rotate_right(32)
+    }
+}

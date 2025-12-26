@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: data_structures")]
+#[llm_context(crate_name = "wrapped_rustc_type_ir", module_name = "data_structures")]
+pub struct wrapped_rustc_type_ir_decls_module_not_found_data_structures;

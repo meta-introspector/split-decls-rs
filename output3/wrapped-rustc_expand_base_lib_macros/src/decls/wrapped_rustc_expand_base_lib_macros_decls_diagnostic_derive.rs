@@ -1,0 +1,25 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+#[proc_macro_derive(
+    Diagnostic,
+    attributes(
+        diag,
+        help,
+        help_once,
+        note,
+        note_once,
+        warning,
+        skip_arg,
+        primary_span,
+        label,
+        subdiagnostic,
+        suggestion,
+        suggestion_short,
+        suggestion_hidden,
+        suggestion_verbose
+    )
+)]
+pub fn diagnostic_derive(input: TokenStream) -> TokenStream {
+    let s = parse_macro_input!(input as DeriveInput);
+    diagnostic::diagnostic_derive(Structure::new(&s)).into()
+}

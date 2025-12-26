@@ -1,0 +1,16 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+#[derive(Debug, Deserialize, Clone)]
+pub struct RustConfig {
+    pub rustc: Option<String>,
+    pub cargo: Option<String>,
+    pub channel: Option<String>,
+    #[serde(rename = "download-rustc")]
+    pub download_rustc: Option<bool>,
+    #[serde(rename = "parallel-compiler")]
+    pub parallel_compiler: Option<bool>,
+    #[serde(rename = "llvm-tools")]
+    pub llvm_tools: Option<bool>,
+    #[serde(rename = "debuginfo-level")]
+    pub debuginfo_level: Option<usize>,
+}

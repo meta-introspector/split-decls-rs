@@ -1,0 +1,12 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+pub enum PointerKind {
+    /// Shared reference. `frozen` indicates the absence of any `UnsafeCell`.
+    SharedRef { frozen: bool },
+    /// Mutable reference. `unpin` indicates the absence of any pinned data.
+    MutableRef { unpin: bool },
+    /// Box. `unpin` indicates the absence of any pinned data. `global` indicates whether this box
+    /// uses the global allocator or a custom one.
+    Box { unpin: bool, global: bool },
+}

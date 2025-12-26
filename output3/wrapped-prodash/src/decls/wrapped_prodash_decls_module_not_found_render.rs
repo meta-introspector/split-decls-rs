@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: render")]
+#[llm_context(crate_name = "wrapped_prodash", module_name = "render")]
+pub struct wrapped_prodash_decls_module_not_found_render;

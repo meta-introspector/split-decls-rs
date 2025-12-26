@@ -1,0 +1,124 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Fallback functions for various specialized methods. These are kept in
+/// a separate implementation block for easy access whenever specialization is disabled.
+impl<T, const N: usize> SmallVec<T, N> {
+    /// Creates a `Smallvec` value where `elem` is repeated `n` times.
+    /// This will use the inline storage, not the heap.
+    ///
+    /// # Safety
+    ///
+    /// The caller must ensure that `n <= Self::inline_size()`.
+    unsafe fn from_elem_fallback(elem: T, n: usize) -> Self
+    where
+        T: Clone,
+    {
+        let mut result = Self::new();
+        if n > 0 {
+            let ptr = result.raw.as_mut_ptr_inline();
+            let mut guard = DropGuard { ptr, len: 0 };
+            unsafe {
+                for i in 0..(n - 1) {
+                    ptr.add(i).write(elem.clone());
+                    guard.len += 1;
+                }
+                core::mem::forget(guard);
+                ptr.add(n - 1).write(elem);
+            }
+        }
+        unsafe {
+            result.set_len(n);
+        }
+        result
+    }
+    fn extend_fallback<I>(&mut self, iter: I)
+    where
+        I: IntoIterator<Item = T>,
+    {
+        let iter = iter.into_iter();
+        let (size, _) = iter.size_hint();
+        self.reserve(size);
+        for x in iter {
+            self.push(x);
+        }
+    }
+    /// Main worker for [`extend_from_within`].
+    ///
+    /// # Safety
+    ///
+    /// * The length of the vector is larger than or equal to `src.len()`.
+    /// * The spare capacity of the vector is larger than or equal to `src.len()`.
+    ///
+    /// [`extend_from_within`]: SmallVec::extend_from_within
+    unsafe fn extend_from_within_fallback(&mut self, src: core::ops::Range<usize>)
+    where
+        T: Clone,
+    {
+        let old_len = self.len();
+        let start = src.start;
+        let len = src.len();
+        unsafe {
+            let ptr = self.as_mut_ptr();
+            let dst = ptr.add(old_len);
+            let src = ptr.add(start);
+            let mut guard = DropGuard { ptr: dst, len: 0 };
+            for i in 0..len {
+                let val = (*src.add(i)).clone();
+                dst.add(i).write(val);
+                guard.len += 1;
+            }
+            core::mem::forget(guard);
+        }
+        unsafe {
+            self.set_len(old_len + len);
+        }
+    }
+    fn from_iter_fallback<I>(iter: I) -> Self
+    where
+        I: Iterator<Item = T>,
+    {
+        let (size, _) = iter.size_hint();
+        let mut v = Self::with_capacity(size);
+        for x in iter {
+            v.push(x);
+        }
+        v
+    }
+    fn clone_from_fallback(&mut self, source: &[T])
+    where
+        T: Clone,
+    {
+        self.truncate(source.len());
+        let (init, tail) = unsafe { source.split_at_unchecked(self.len()) };
+        self.clone_from_slice(init);
+        self.extend(tail.iter().cloned());
+    }
+    /// Creates a `SmallVec` value based on the contents of `slice`.
+    /// This will use the inline storage, not the heap.
+    ///
+    /// # Safety
+    ///
+    /// The caller must ensure that `slice.len() <= Self::inline_size()`.
+    unsafe fn from_slice_fallback(slice: &[T]) -> Self
+    where
+        T: Clone,
+    {
+        let mut v = Self::new();
+        let src = slice.as_ptr();
+        let len = slice.len();
+        let dst = v.as_mut_ptr();
+        unsafe {
+            let mut guard = DropGuard { ptr: dst, len: 0 };
+            for i in 0..len {
+                let val = (*src.add(i)).clone();
+                dst.add(i).write(val);
+                guard.len += 1;
+            }
+            core::mem::forget(guard);
+        }
+        unsafe {
+            v.set_len(len);
+        }
+        v
+    }
+}

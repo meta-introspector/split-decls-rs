@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// A potential output from `Cmp`, this is the type equivalent to the enum variant
+/// `core::cmp::Ordering::Equal`.
+#[derive(Eq, PartialEq, Ord, PartialOrd, Clone, Copy, Hash, Debug, Default)]
+#[cfg_attr(feature = "scale_info", derive(scale_info::TypeInfo))]
+pub struct Equal;

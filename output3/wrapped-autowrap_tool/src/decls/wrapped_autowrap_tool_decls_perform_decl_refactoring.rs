@@ -1,0 +1,109 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn perform_decl_refactoring(
+    config: &DeclRefactoringConfig,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let _macro_crate_name_ident =
+        Ident::new(&config.macro_crate_name, proc_macro2::Span::call_site());
+    if let Some(main_lib_path_str) = &config.main_macro_lib_path {
+        let main_lib_path = PathBuf::from(main_lib_path_str);
+        if main_lib_path.is_file() {
+            println!(
+                "Ensuring decl_module! invocation in: {}",
+                main_lib_path.display()
+            );
+            let original_code = fs::read_to_string(&main_lib_path)?;
+            let mut syntax_tree = syn::parse_file(&original_code)?;
+            let mut impl_calls: HashMap<String, HashSet<String>> = HashMap::new();
+            for item in &mut syntax_tree.items {
+                if let syn::Item::Macro(item_macro) = item {
+                    if item_macro.mac.path.is_ident("proc_macro") {
+                        let body_tokens = item_macro.mac.tokens.clone();
+                        let body_file = syn::parse_file(&body_tokens.to_string())
+                            .unwrap_or_else(|_| syn::parse_file("").unwrap());
+                        let mut visitor = ImplCallVisitor::new(HashMap::new());
+                        syn::visit::visit_file(&mut visitor, &body_file);
+                        for (module_name, fn_names) in visitor.calls {
+                            impl_calls.entry(module_name).or_default().extend(fn_names);
+                        }
+                    }
+                }
+            }
+            let mut generated_uses: Vec<syn::ItemUse> = Vec::new();
+            for (module_name, fn_names) in impl_calls {
+                let module_ident = Ident::new(&module_name, Span::call_site());
+                let mut group_items: Punctuated<syn::UseTree, syn::token::Comma> =
+                    Punctuated::new();
+                for fn_name in fn_names {
+                    group_items.push(syn::UseTree::Name(syn::UseName {
+                        ident: Ident::new(&fn_name, Span::call_site()),
+                    }));
+                }
+                let use_tree = if group_items.len() == 1 {
+                    syn::UseTree::Path(syn::UsePath {
+                        ident: module_ident.clone(),
+                        colon2_token: Some(syn::token::Colon2::new(Span::call_site())),
+                        tree: Box::new(group_items.into_iter().next().unwrap()),
+                    })
+                } else {
+                    syn::UseTree::Group(syn::UseGroup {
+                        brace_token: syn::token::Brace(Span::call_site()),
+                        items: group_items,
+                    })
+                };
+                let item_use: syn::ItemUse = parse_quote! {
+                    pub use # module_ident:: # use_tree;
+                };
+                generated_uses.push(item_use);
+            }
+            syntax_tree
+                .items
+                .splice(0..0, generated_uses.into_iter().map(syn::Item::Use));
+            let modules_list_idents: Vec<Ident> = config
+                .main_macro_invocation_modules
+                .iter()
+                .map(|s| Ident::new(s, proc_macro2::Span::call_site()))
+                .collect();
+            let decl_module_invocation: syn::ItemMacro = parse_quote! {
+                decl_module!(# (# modules_list_idents),*);
+            };
+            let decl_module_use: syn::ItemUse = parse_quote! {
+                use introspector_decl2_macros::decl_module;
+            };
+            let mut found_decl_module_use = false;
+            let mut found_decl_module_invocation = false;
+            for item in &mut syntax_tree.items {
+                if let syn::Item::Use(item_use) = item {
+                    if is_use_decl_module!(item_use) {
+                        *item_use = decl_module_use.clone();
+                        found_decl_module_use = true;
+                    }
+                } else if let syn::Item::Macro(item_macro) = item {
+                    if item_macro.mac.path.is_ident("decl_module") {
+                        *item_macro = decl_module_invocation.clone();
+                        found_decl_module_invocation = true;
+                    }
+                }
+            }
+            if !found_decl_module_use {
+                syntax_tree.items.insert(0, syn::Item::Use(decl_module_use));
+            }
+            if !found_decl_module_invocation {
+                let insert_idx = syntax_tree
+                    .items
+                    .iter()
+                    .position(|i| matches!(i, syn::Item::Mod(_)))
+                    .unwrap_or(0);
+                syntax_tree
+                    .items
+                    .insert(insert_idx, syn::Item::Macro(decl_module_invocation));
+            }
+            let modified_code = quote! {
+                # syntax_tree
+            }
+            .to_string();
+            fs::write(&main_lib_path, modified_code)?;
+        }
+    }
+    Ok(())
+}

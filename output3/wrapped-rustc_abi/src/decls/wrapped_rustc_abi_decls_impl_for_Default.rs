@@ -1,0 +1,36 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl Default for TargetDataLayout {
+    /// Creates an instance of `TargetDataLayout`.
+    fn default() -> TargetDataLayout {
+        let align = |bits| Align::from_bits(bits).unwrap();
+        TargetDataLayout {
+            endian: Endian::Big,
+            i1_align: align(8),
+            i8_align: align(8),
+            i16_align: align(16),
+            i32_align: align(32),
+            i64_align: align(32),
+            i128_align: align(32),
+            f16_align: align(16),
+            f32_align: align(32),
+            f64_align: align(64),
+            f128_align: align(128),
+            aggregate_align: align(8),
+            vector_align: vec![
+                (Size::from_bits(64), align(64)),
+                (Size::from_bits(128), align(128)),
+            ],
+            default_address_space: AddressSpace::ZERO,
+            default_address_space_pointer_spec: PointerSpec {
+                pointer_size: Size::from_bits(64),
+                pointer_align: align(64),
+                pointer_offset: Size::from_bits(64),
+                _is_fat: false,
+            },
+            address_space_info: vec![],
+            instruction_address_space: AddressSpace::ZERO,
+            c_enum_min_size: Integer::I32,
+        }
+    }
+}

@@ -1,0 +1,194 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn derive_known_layout_inner(
+    ast: &DeriveInput,
+    _top_level: Trait,
+    zerocopy_crate: &Path,
+) -> Result<TokenStream, Error> {
+    let is_repr_c_struct = match &ast.data {
+        Data::Struct(..) => {
+            let repr = StructUnionRepr::from_attrs(&ast.attrs)?;
+            if repr.is_c() {
+                Some(repr)
+            } else {
+                None
+            }
+        }
+        Data::Enum(..) | Data::Union(..) => None,
+    };
+    let fields = ast.data.fields();
+    let (self_bounds, inner_extras, outer_extras) = if let (
+        Some(repr),
+        Some((trailing_field, leading_fields)),
+    ) = (is_repr_c_struct, fields.split_last())
+    {
+        let (_vis, trailing_field_name, trailing_field_ty) = trailing_field;
+        let leading_fields_tys = leading_fields.iter().map(|(_vis, _name, ty)| ty);
+        let core_path = quote!(# zerocopy_crate::util::macro_util::core_reexport);
+        let repr_align = repr
+            .get_align()
+            .map(|align| {
+                let align = align.t.get();
+                quote!(# core_path::num::NonZeroUsize::new(# align as usize))
+            })
+            .unwrap_or_else(|| quote!(# core_path::option::Option::None));
+        let repr_packed = repr
+            .get_packed()
+            .map(|packed| {
+                let packed = packed.get();
+                quote!(# core_path::num::NonZeroUsize::new(# packed as usize))
+            })
+            .unwrap_or_else(|| quote!(# core_path::option::Option::None));
+        let make_methods = |trailing_field_ty| {
+            quote! {
+                #[inline(always)] fn raw_from_ptr_len(bytes : #
+                zerocopy_crate::util::macro_util::core_reexport::ptr::NonNull < u8 >,
+                meta : Self::PointerMetadata,) -> #
+                zerocopy_crate::util::macro_util::core_reexport::ptr::NonNull < Self > {
+                use # zerocopy_crate::KnownLayout; let trailing = <# trailing_field_ty as
+                KnownLayout >::raw_from_ptr_len(bytes, meta); let slf = trailing.as_ptr()
+                as * mut Self; unsafe { #
+                zerocopy_crate::util::macro_util::core_reexport::ptr::NonNull::new_unchecked(slf)
+                } } #[inline(always)] fn pointer_to_metadata(ptr : * mut Self) ->
+                Self::PointerMetadata { <# trailing_field_ty >::pointer_to_metadata(ptr
+                as * mut _) }
+            }
+        };
+        let inner_extras = {
+            let leading_fields_tys = leading_fields_tys.clone();
+            let methods = make_methods(*trailing_field_ty);
+            let (_, ty_generics, _) = ast.generics.split_for_impl();
+            quote!(
+                type PointerMetadata = <# trailing_field_ty as #
+                zerocopy_crate::KnownLayout >::PointerMetadata; type MaybeUninit =
+                __ZerocopyKnownLayoutMaybeUninit # ty_generics; const LAYOUT : #
+                zerocopy_crate::DstLayout = { use #
+                zerocopy_crate::util::macro_util::core_reexport::num::NonZeroUsize; use #
+                zerocopy_crate:: { DstLayout, KnownLayout };
+                DstLayout::for_repr_c_struct(# repr_align, # repr_packed, & [#
+                (DstLayout::for_type::<# leading_fields_tys > (),) * <# trailing_field_ty
+                as KnownLayout >::LAYOUT],) }; # methods
+            )
+        };
+        let outer_extras = {
+            let ident = &ast.ident;
+            let vis = &ast.vis;
+            let params = &ast.generics.params;
+            let (impl_generics, ty_generics, where_clause) = ast.generics.split_for_impl();
+            let predicates = if let Some(where_clause) = where_clause {
+                where_clause.predicates.clone()
+            } else {
+                Default::default()
+            };
+            let field_index =
+                |name| Ident::new(&format!("__Zerocopy_Field_{}", name), ident.span());
+            let field_indices: Vec<_> = fields
+                .iter()
+                .map(|(_vis, name, _ty)| field_index(name))
+                .collect();
+            let field_defs = field_indices.iter().zip(&fields).map(|(idx, (vis, _, _))| {
+                quote! {
+                    #[allow(non_camel_case_types)] # vis struct # idx;
+                }
+            });
+            let field_impls = field_indices.iter().zip(&fields).map(|(idx, (_, _, ty))| {
+                quote! {
+                    unsafe impl # impl_generics #
+                    zerocopy_crate::util::macro_util::Field <# idx > for # ident #
+                    ty_generics where # predicates { type Type = # ty; }
+                }
+            });
+            let trailing_field_index = field_index(trailing_field_name);
+            let leading_field_indices = leading_fields
+                .iter()
+                .map(|(_vis, name, _ty)| field_index(name));
+            let trailing_field_ty = quote! {
+                <# ident # ty_generics as # zerocopy_crate::util::macro_util::Field <#
+                trailing_field_index > >::Type
+            };
+            let methods = make_methods(&parse_quote! {
+                <# trailing_field_ty as # zerocopy_crate::KnownLayout >::MaybeUninit
+            });
+            quote! {
+                # (# field_defs) * # (# field_impls) * # repr #[doc(hidden)]
+                #[allow(private_bounds)] # vis struct __ZerocopyKnownLayoutMaybeUninit <#
+                params > (# (#
+                zerocopy_crate::util::macro_util::core_reexport::mem::MaybeUninit < <#
+                ident # ty_generics as # zerocopy_crate::util::macro_util::Field <#
+                leading_field_indices > >::Type >,) * #
+                zerocopy_crate::util::macro_util::core_reexport::mem::ManuallyDrop < <#
+                trailing_field_ty as # zerocopy_crate::KnownLayout >::MaybeUninit >)
+                where # trailing_field_ty : # zerocopy_crate::KnownLayout, # predicates;
+                unsafe impl # impl_generics # zerocopy_crate::KnownLayout for
+                __ZerocopyKnownLayoutMaybeUninit # ty_generics where # trailing_field_ty
+                : # zerocopy_crate::KnownLayout, # predicates {
+                #[allow(clippy::missing_inline_in_public_items)] fn
+                only_derive_is_allowed_to_implement_this_trait() {} type PointerMetadata
+                = <# ident # ty_generics as # zerocopy_crate::KnownLayout
+                >::PointerMetadata; type MaybeUninit = Self; const LAYOUT : #
+                zerocopy_crate::DstLayout = <# ident # ty_generics as #
+                zerocopy_crate::KnownLayout >::LAYOUT; # methods }
+            }
+        };
+        (SelfBounds::None, inner_extras, Some(outer_extras))
+    } else {
+        (
+            SelfBounds::SIZED,
+            quote!(
+                type PointerMetadata = (); type MaybeUninit = #
+                zerocopy_crate::util::macro_util::core_reexport::mem::MaybeUninit < Self
+                >; const LAYOUT : # zerocopy_crate::DstLayout = #
+                zerocopy_crate::DstLayout::for_type::< Self > (); #[inline(always)] fn
+                raw_from_ptr_len(bytes : #
+                zerocopy_crate::util::macro_util::core_reexport::ptr::NonNull < u8 >,
+                _meta : (),) -> #
+                zerocopy_crate::util::macro_util::core_reexport::ptr::NonNull < Self > {
+                bytes.cast::< Self > () } #[inline(always)] fn pointer_to_metadata(_ptr :
+                * mut Self) -> () {}
+            ),
+            None,
+        )
+    };
+    Ok(match &ast.data {
+        Data::Struct(strct) => {
+            let require_trait_bound_on_field_types = if self_bounds == SelfBounds::SIZED {
+                FieldBounds::None
+            } else {
+                FieldBounds::TRAILING_SELF
+            };
+            ImplBlockBuilder::new(
+                ast,
+                strct,
+                Trait::KnownLayout,
+                require_trait_bound_on_field_types,
+                zerocopy_crate,
+            )
+            .self_type_trait_bounds(self_bounds)
+            .inner_extras(inner_extras)
+            .outer_extras(outer_extras)
+            .build()
+        }
+        Data::Enum(enm) => ImplBlockBuilder::new(
+            ast,
+            enm,
+            Trait::KnownLayout,
+            FieldBounds::None,
+            zerocopy_crate,
+        )
+        .self_type_trait_bounds(SelfBounds::SIZED)
+        .inner_extras(inner_extras)
+        .outer_extras(outer_extras)
+        .build(),
+        Data::Union(unn) => ImplBlockBuilder::new(
+            ast,
+            unn,
+            Trait::KnownLayout,
+            FieldBounds::None,
+            zerocopy_crate,
+        )
+        .self_type_trait_bounds(SelfBounds::SIZED)
+        .inner_extras(inner_extras)
+        .outer_extras(outer_extras)
+        .build(),
+    })
+}

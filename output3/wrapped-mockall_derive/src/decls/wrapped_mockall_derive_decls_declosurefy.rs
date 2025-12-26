@@ -1,0 +1,137 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn declosurefy(
+    gen: &Generics,
+    args: &Punctuated<FnArg, Token![,]>,
+) -> (Generics, Punctuated<FnArg, Token![,]>, Vec<TokenStream>) {
+    let mut hm = HashMap::default();
+    let mut save_fn_types = |ident: &Ident, bounds: &Punctuated<TypeParamBound, Token![+]>| {
+        for tpb in bounds.iter() {
+            if let TypeParamBound::Trait(tb) = tpb {
+                let fident = &tb.path.segments.last().unwrap().ident;
+                if ["Fn", "FnMut", "FnOnce"].iter().any(|s| fident == *s) {
+                    let newty: Type = parse2(quote!(Box < dyn # bounds >)).unwrap();
+                    let subst_ty: Type = parse2(quote!(# ident)).unwrap();
+                    assert!(
+                        hm.insert(subst_ty, newty).is_none(),
+                        "A generic parameter had two Fn bounds?"
+                    );
+                }
+            }
+        }
+    };
+    for g in gen.params.iter() {
+        if let GenericParam::Type(tp) = g {
+            save_fn_types(&tp.ident, &tp.bounds);
+        }
+    }
+    if let Some(wc) = &gen.where_clause {
+        for pred in wc.predicates.iter() {
+            if let WherePredicate::Type(pt) = pred {
+                let bounded_ty = &pt.bounded_ty;
+                if let Ok(ident) = parse2::<Ident>(quote!(# bounded_ty)) {
+                    save_fn_types(&ident, &pt.bounds);
+                } else {
+                }
+            }
+        }
+    }
+    let should_remove = |ident: &Ident| {
+        let ty: Type = parse2(quote!(# ident)).unwrap();
+        hm.contains_key(&ty)
+    };
+    let params = gen
+        .params
+        .iter()
+        .filter(|g| {
+            if let GenericParam::Type(tp) = g {
+                !should_remove(&tp.ident)
+            } else {
+                true
+            }
+        })
+        .cloned()
+        .collect::<Punctuated<_, _>>();
+    let mut wc2 = gen.where_clause.clone();
+    if let Some(wc) = &mut wc2 {
+        wc.predicates = wc
+            .predicates
+            .iter()
+            .filter(|wp| {
+                if let WherePredicate::Type(pt) = wp {
+                    let bounded_ty = &pt.bounded_ty;
+                    if let Ok(ident) = parse2::<Ident>(quote!(# bounded_ty)) {
+                        !should_remove(&ident)
+                    } else {
+                        true
+                    }
+                } else {
+                    true
+                }
+            })
+            .cloned()
+            .collect::<Punctuated<_, _>>();
+        if wc.predicates.is_empty() {
+            wc2 = None;
+        }
+    }
+    let outg = Generics {
+        lt_token: if params.is_empty() {
+            None
+        } else {
+            gen.lt_token
+        },
+        gt_token: if params.is_empty() {
+            None
+        } else {
+            gen.gt_token
+        },
+        params,
+        where_clause: wc2,
+    };
+    let outargs = args
+        .iter()
+        .map(|arg| {
+            if let FnArg::Typed(pt) = arg {
+                let mut immutable_pt = pt.clone();
+                demutify_arg(&mut immutable_pt);
+                if let Some(newty) = hm.get(&pt.ty) {
+                    FnArg::Typed(PatType {
+                        attrs: Vec::default(),
+                        pat: immutable_pt.pat,
+                        colon_token: pt.colon_token,
+                        ty: Box::new(newty.clone()),
+                    })
+                } else {
+                    FnArg::Typed(PatType {
+                        attrs: Vec::default(),
+                        pat: immutable_pt.pat,
+                        colon_token: pt.colon_token,
+                        ty: pt.ty.clone(),
+                    })
+                }
+            } else {
+                arg.clone()
+            }
+        })
+        .collect();
+    let callargs = args
+        .iter()
+        .filter_map(|arg| match arg {
+            FnArg::Typed(pt) => {
+                let mut pt2 = pt.clone();
+                demutify_arg(&mut pt2);
+                let pat = &pt2.pat;
+                if pat_is_self(pat) {
+                    None
+                } else if hm.contains_key(&pt.ty) {
+                    Some(quote!(Box::new(# pat)))
+                } else {
+                    Some(quote!(# pat))
+                }
+            }
+            FnArg::Receiver(_) => None,
+        })
+        .collect();
+    (outg, outargs, callargs)
+}

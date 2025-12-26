@@ -1,0 +1,138 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl<'a> Service<'a> {
+    /// Creates a new `Service` object.
+    ///
+    /// By default, the service does not accept any service commands other than start.
+    pub fn new() -> Self {
+        Self {
+            accept: 0,
+            fallback: None,
+            handle: RwLock::new(std::ptr::null_mut()),
+            callback: RwLock::new(None),
+            status: RwLock::new(SERVICE_STATUS {
+                dwServiceType: SERVICE_WIN32_OWN_PROCESS,
+                dwCurrentState: SERVICE_STOPPED,
+                dwControlsAccepted: 0,
+                dwWin32ExitCode: 0,
+                dwServiceSpecificExitCode: 0,
+                dwCheckPoint: 0,
+                dwWaitHint: 0,
+            }),
+        }
+    }
+    /// The service accepts stop and shutdown commands.
+    pub fn can_stop(&mut self) -> &mut Self {
+        self.accept |= SERVICE_ACCEPT_STOP | SERVICE_ACCEPT_SHUTDOWN;
+        self
+    }
+    /// The service accepts pause and resume commands.
+    pub fn can_pause(&mut self) -> &mut Self {
+        self.accept |= SERVICE_ACCEPT_PAUSE_CONTINUE;
+        self
+    }
+    /// The service accepts other specified commands.
+    pub fn can_accept(&mut self, accept: u32) -> &mut Self {
+        self.accept |= accept;
+        self
+    }
+    /// Runs the fallback closure if the service is not started by the Service Control Manager.
+    pub fn can_fallback<F: FnOnce(&Service) + Send + 'a>(&mut self, f: F) -> &mut Self {
+        self.fallback = Some(Box::new(f));
+        self
+    }
+    /// Runs the service with the given callback closure to receive commands sent by the service
+    /// control manager.
+    ///
+    /// This method will block for the life of the service. It will never return and immediately
+    /// terminate the current process after indicating to the service control manager that the
+    /// service has stopped.
+    pub fn run<F: FnMut(&Service, Command) + Send + Sync + 'a>(
+        &mut self,
+        callback: F,
+    ) -> Result<(), &'static str> {
+        debug_assert!(self.status.read().unwrap().dwCurrentState == SERVICE_STOPPED);
+        self.status.write().unwrap().dwControlsAccepted = self.accept;
+        {
+            let mut write = self.callback.write().unwrap();
+            if write.is_some() {
+                panic!("`run` was already called")
+            }
+            *write = Some(Box::new(callback));
+        }
+        let table = [
+            SERVICE_TABLE_ENTRYW {
+                lpServiceName: &mut 0,
+                lpServiceProc: Some(service_main),
+            },
+            SERVICE_TABLE_ENTRYW::default(),
+        ];
+        SERVICE_CONTEXT.write().unwrap().0 = self as *const _ as _;
+        let fallback = unsafe { StartServiceCtrlDispatcherW(table.as_ptr()) == 0 };
+        if fallback {
+            if let Some(fallback) = self.fallback.take() {
+                self.set_state(State::StartPending);
+                self.command(Command::Start);
+                self.set_state(State::Running);
+                fallback(self);
+                self.set_state(State::StopPending);
+                self.command(Command::Stop);
+            } else {
+                return Err("Use service control manager to start service");
+            }
+        }
+        Ok(())
+    }
+    /// Sets the current state of the service.
+    ///
+    /// In most cases, the service state is updated automatically and does not need to be set directly.
+    pub fn set_state(&self, state: State) {
+        let mut writer = self.status.write().unwrap();
+        writer.dwCurrentState = match state {
+            State::ContinuePending => SERVICE_CONTINUE_PENDING,
+            State::Paused => SERVICE_PAUSED,
+            State::PausePending => SERVICE_PAUSE_PENDING,
+            State::Running => SERVICE_RUNNING,
+            State::StartPending => SERVICE_START_PENDING,
+            State::Stopped => SERVICE_STOPPED,
+            State::StopPending => SERVICE_STOP_PENDING,
+        };
+        let status: SERVICE_STATUS = *writer;
+        drop(writer);
+        unsafe {
+            SetServiceStatus(self.handle(), &status);
+        }
+    }
+    /// The raw handle representing the service.
+    pub fn handle(&self) -> *mut core::ffi::c_void {
+        *self.handle.read().unwrap()
+    }
+    /// The current state the service.
+    pub fn state(&self) -> State {
+        let reader = self.status.read().unwrap();
+        match reader.dwCurrentState {
+            SERVICE_CONTINUE_PENDING => State::ContinuePending,
+            SERVICE_PAUSED => State::Paused,
+            SERVICE_PAUSE_PENDING => State::PausePending,
+            SERVICE_RUNNING => State::Running,
+            SERVICE_START_PENDING => State::StartPending,
+            SERVICE_STOPPED => State::Stopped,
+            SERVICE_STOP_PENDING => State::StopPending,
+            _ => panic!("unexpected state"),
+        }
+    }
+    /// Sends the command to the service callback.
+    pub fn command(&self, command: Command) {
+        let mut write = self.callback.write().unwrap();
+        (write.as_deref_mut().unwrap())(self, command);
+    }
+    /// Low-level dispatcher to send control commands directly to the service.
+    pub fn handler(&self, control: u32, event_type: u32, event_data: *const c_void) -> u32 {
+        handler(
+            control,
+            event_type,
+            event_data as *mut _,
+            self as *const _ as _,
+        )
+    }
+}

@@ -1,0 +1,6 @@
+#[llm_error_message(message = "Module file not found for: hir_ty_lowering")]
+#[llm_context(
+    crate_name = "wrapped_rustc_hir_analysis",
+    module_name = "hir_ty_lowering"
+)]
+pub struct wrapped_rustc_hir_analysis_decls_module_not_found_hir_ty_lowering;

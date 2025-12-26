@@ -1,0 +1,9 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// A sharded slab.
+///
+/// See the [crate-level documentation](crate) for details on using this type.
+pub struct Slab<T, C: cfg::Config = DefaultConfig> {
+    shards: shard::Array<Option<T>, C>,
+    _cfg: PhantomData<C>,
+}

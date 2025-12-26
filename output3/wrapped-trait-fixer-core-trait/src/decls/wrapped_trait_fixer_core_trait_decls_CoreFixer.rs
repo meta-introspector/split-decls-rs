@@ -1,0 +1,17 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+pub trait CoreFixer<'tcx, C, T, I, D, ID, S>
+where
+    C: ConfigTrait,
+    T: Sized + 'tcx,
+    I: Sized + 'tcx,
+    D: Sized + 'tcx,
+    ID: Sized + 'tcx,
+    S: Sized + 'tcx + Copy + Debug,
+{
+    fn new(tcx: T, config: C) -> Self;
+    fn add_fix(&mut self, fix: Fix<S, D, ID>);
+    fn get_fixes(&self) -> &Vec<Fix<S, D, ID>>;
+    fn process_hir(&mut self);
+    fn check_item(&mut self, item: &'tcx I);
+}

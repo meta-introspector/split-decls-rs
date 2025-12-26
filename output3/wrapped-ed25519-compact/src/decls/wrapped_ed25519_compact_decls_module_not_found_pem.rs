@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: pem")]
+#[llm_context(crate_name = "wrapped_ed25519_compact", module_name = "pem")]
+pub struct wrapped_ed25519_compact_decls_module_not_found_pem;

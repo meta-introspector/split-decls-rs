@@ -1,0 +1,47 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn cfg_attr_lint_attrs(
+    sema: &Semantics<'_, RootDatabase>,
+    value: &ast::TokenTree,
+    lint_attrs: &mut Vec<(Severity, ast::TokenTree)>,
+) {
+    let prev_len = lint_attrs.len();
+    let mut iter = value
+        .token_trees_and_tokens()
+        .filter(|it| match it {
+            NodeOrToken::Node(_) => true,
+            NodeOrToken::Token(it) => !it.kind().is_trivia(),
+        });
+    for value in &mut iter {
+        if value.as_token().is_some_and(|it| it.kind() == T![,]) {
+            break;
+        }
+    }
+    while let Some(value) = iter.next() {
+        if let Some(token) = value.as_token() && token.kind() == SyntaxKind::IDENT {
+            let severity = match token.text() {
+                "allow" | "expect" => Some(Severity::Allow),
+                "warn" => Some(Severity::Warning),
+                "forbid" | "deny" => Some(Severity::Error),
+                "cfg_attr" => {
+                    if let Some(NodeOrToken::Node(value)) = iter.next() {
+                        cfg_attr_lint_attrs(sema, &value, lint_attrs);
+                    }
+                    None
+                }
+                _ => None,
+            };
+            if let Some(severity) = severity {
+                let lints = iter.next();
+                if let Some(NodeOrToken::Node(lints)) = lints {
+                    lint_attrs.push((severity, lints));
+                }
+            }
+        }
+    }
+    if prev_len != lint_attrs.len()
+        && let Some(false) | None = sema.check_cfg_attr(value)
+    {
+        lint_attrs.truncate(prev_len);
+    }
+}

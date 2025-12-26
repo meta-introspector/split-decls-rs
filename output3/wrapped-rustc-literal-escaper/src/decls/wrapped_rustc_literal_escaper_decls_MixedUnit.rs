@@ -1,0 +1,22 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Enum representing either a char or a byte
+///
+/// Used for mixed utf8 string literals, i.e. those that allow both unicode
+/// chars and high bytes.
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub enum MixedUnit {
+    /// Used for ASCII chars (written directly or via `\x00`..`\x7f` escapes)
+    /// and Unicode chars (written directly or via `\u` escapes).
+    ///
+    /// For example, if '¥' appears in a string it is represented here as
+    /// `MixedUnit::Char('¥')`, and it will be appended to the relevant byte
+    /// string as the two-byte UTF-8 sequence `[0xc2, 0xa5]`
+    Char(NonZero<char>),
+    /// Used for high bytes (`\x80`..`\xff`).
+    ///
+    /// For example, if `\xa5` appears in a string it is represented here as
+    /// `MixedUnit::HighByte(0xa5)`, and it will be appended to the relevant
+    /// byte string as the single byte `0xa5`.
+    HighByte(NonZero<u8>),
+}

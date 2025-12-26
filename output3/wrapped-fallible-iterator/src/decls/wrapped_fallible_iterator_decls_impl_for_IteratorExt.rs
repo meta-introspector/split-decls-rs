@@ -1,0 +1,23 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl<I> IteratorExt for I
+where
+    I: iter::Iterator,
+{
+    /// Convert an iterator of `Result`s into `FallibleIterator` by transposition
+    fn transpose_into_fallible<T, E>(self) -> Convert<Self>
+    where
+        Self: iter::Iterator<Item = Result<T, E>> + Sized,
+    {
+        Convert(self)
+    }
+    /// Convert an iterator of anything into `FallibleIterator` by wrapping
+    /// into `Result<T, Infallible>` where `Infallible` is an error that can never actually
+    /// happen.
+    fn into_fallible<T>(self) -> IntoFallible<Self>
+    where
+        Self: iter::Iterator<Item = T> + Sized,
+    {
+        IntoFallible(self)
+    }
+}

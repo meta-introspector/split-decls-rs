@@ -1,0 +1,13 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Unescape a C string literal
+///
+/// Takes the contents of a C string literal (without quotes)
+/// and produces a sequence of escaped MixedUnits or errors,
+/// which are returned by invoking `callback`.
+pub fn unescape_c_str(
+    src: &str,
+    callback: impl FnMut(Range<usize>, Result<MixedUnit, EscapeError>),
+) {
+    CStr::unescape(src, callback)
+}

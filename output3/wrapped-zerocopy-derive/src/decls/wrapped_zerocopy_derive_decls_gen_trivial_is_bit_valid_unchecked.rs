@@ -1,0 +1,21 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Generates a `TryFromBytes::is_bit_valid` instance that unconditionally
+/// returns true.
+///
+/// This should be used where possible, (although `try_gen_trivial_is_bit_valid`
+/// should be preferred over this for safety reasons). Using this impl is faster
+/// to codegen, faster to compile, and is friendlier on the optimizer.
+///
+/// # Safety
+///
+/// The caller must ensure that all initialized bit patterns are valid for
+/// `Self`.
+unsafe fn gen_trivial_is_bit_valid_unchecked(zerocopy_crate: &Path) -> proc_macro2::TokenStream {
+    quote!(
+        fn is_bit_valid < ___ZerocopyAliasing > (_candidate : # zerocopy_crate::Maybe <
+        Self, ___ZerocopyAliasing >,) -> #
+        zerocopy_crate::util::macro_util::core_reexport::primitive::bool where
+        ___ZerocopyAliasing : # zerocopy_crate::pointer::invariant::Reference, { true }
+    )
+}

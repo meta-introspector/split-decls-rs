@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: public")]
+#[llm_context(crate_name = "wrapped_pasetors", module_name = "public")]
+pub struct wrapped_pasetors_decls_module_not_found_public;

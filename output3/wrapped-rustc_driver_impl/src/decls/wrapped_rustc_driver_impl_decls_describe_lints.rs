@@ -1,0 +1,120 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Write to stdout lint command options, together with a list of all available lints
+pub fn describe_lints(sess: &Session, registered_lints: bool) {
+    safe_println!(
+        "
+Available lint options:
+    -W <foo>           Warn about <foo>
+    -A <foo>           Allow <foo>
+    -D <foo>           Deny <foo>
+    -F <foo>           Forbid <foo> (deny <foo> and all attempts to override)
+
+"
+    );
+    fn sort_lints(sess: &Session, mut lints: Vec<&'static Lint>) -> Vec<&'static Lint> {
+        lints.sort_by_cached_key(|x: &&Lint| (x.default_level(sess.edition()), x.name));
+        lints
+    }
+    fn sort_lint_groups(
+        lints: Vec<(&'static str, Vec<LintId>, bool)>,
+    ) -> Vec<(&'static str, Vec<LintId>)> {
+        let mut lints: Vec<_> = lints.into_iter().map(|(x, y, _)| (x, y)).collect();
+        lints.sort_by_key(|l| l.0);
+        lints
+    }
+    let lint_store = unerased_lint_store(sess);
+    let (loaded, builtin): (Vec<_>, _) = lint_store
+        .get_lints()
+        .iter()
+        .cloned()
+        .partition(|&lint| lint.is_externally_loaded);
+    let loaded = sort_lints(sess, loaded);
+    let builtin = sort_lints(sess, builtin);
+    let (loaded_groups, builtin_groups): (Vec<_>, _) =
+        lint_store.get_lint_groups().partition(|&(.., p)| p);
+    let loaded_groups = sort_lint_groups(loaded_groups);
+    let builtin_groups = sort_lint_groups(builtin_groups);
+    let max_name_len = loaded
+        .iter()
+        .chain(&builtin)
+        .map(|&s| s.name.chars().count())
+        .max()
+        .unwrap_or(0);
+    let padded = |x: &str| {
+        let mut s = " ".repeat(max_name_len - x.chars().count());
+        s.push_str(x);
+        s
+    };
+    safe_println!("Lint checks provided by rustc:\n");
+    let print_lints = |lints: Vec<&Lint>| {
+        safe_println!("    {}  {:7.7}  {}", padded("name"), "default", "meaning");
+        safe_println!("    {}  {:7.7}  {}", padded("----"), "-------", "-------");
+        for lint in lints {
+            let name = lint.name_lower().replace('_', "-");
+            safe_println!(
+                "    {}  {:7.7}  {}",
+                padded(&name),
+                lint.default_level(sess.edition()).as_str(),
+                lint.desc
+            );
+        }
+        safe_println!("\n");
+    };
+    print_lints(builtin);
+    let max_name_len = max(
+        "warnings".len(),
+        loaded_groups
+            .iter()
+            .chain(&builtin_groups)
+            .map(|&(s, _)| s.chars().count())
+            .max()
+            .unwrap_or(0),
+    );
+    let padded = |x: &str| {
+        let mut s = " ".repeat(max_name_len - x.chars().count());
+        s.push_str(x);
+        s
+    };
+    safe_println!("Lint groups provided by rustc:\n");
+    let print_lint_groups = |lints: Vec<(&'static str, Vec<LintId>)>, all_warnings| {
+        safe_println!("    {}  sub-lints", padded("name"));
+        safe_println!("    {}  ---------", padded("----"));
+        if all_warnings {
+            safe_println!(
+                "    {}  all lints that are set to issue warnings",
+                padded("warnings")
+            );
+        }
+        for (name, to) in lints {
+            let name = name.to_lowercase().replace('_', "-");
+            let desc = to
+                .into_iter()
+                .map(|x| x.to_string().replace('_', "-"))
+                .collect::<Vec<String>>()
+                .join(", ");
+            safe_println!("    {}  {}", padded(&name), desc);
+        }
+        safe_println!("\n");
+    };
+    print_lint_groups(builtin_groups, true);
+    match (registered_lints, loaded.len(), loaded_groups.len()) {
+        (false, 0, _) | (false, _, 0) => {
+            safe_println!("Lint tools like Clippy can load additional lints and lint groups.");
+        }
+        (false, ..) => panic!("didn't load additional lints but got them anyway!"),
+        (true, 0, 0) => {
+            safe_println!("This crate does not load any additional lints or lint groups.")
+        }
+        (true, l, g) => {
+            if l > 0 {
+                safe_println!("Lint checks loaded by this crate:\n");
+                print_lints(loaded);
+            }
+            if g > 0 {
+                safe_println!("Lint groups loaded by this crate:\n");
+                print_lint_groups(loaded_groups, false);
+            }
+        }
+    }
+}

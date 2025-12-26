@@ -1,0 +1,6 @@
+#[llm_error_message(message = "Module file not found for: container_attributes")]
+#[llm_context(
+    crate_name = "wrapped_derive_arbitrary",
+    module_name = "container_attributes"
+)]
+pub struct wrapped_derive_arbitrary_decls_module_not_found_container_attributes;

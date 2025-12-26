@@ -1,0 +1,19 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Grammatical tool for displaying messages to end users in a nice form.
+///
+/// Take a list of items and a function to turn those items into a `String`, and output a display
+/// friendly comma separated list of those items.
+pub fn listify<T>(list: &[T], fmt: impl Fn(&T) -> String) -> Option<String> {
+    Some(match list {
+        [only] => fmt(&only),
+        [others @ .., last] => {
+            format!(
+                "{} and {}",
+                others.iter().map(|i| fmt(i)).collect::<Vec<_>>().join(", "),
+                fmt(&last),
+            )
+        }
+        [] => return None,
+    })
+}

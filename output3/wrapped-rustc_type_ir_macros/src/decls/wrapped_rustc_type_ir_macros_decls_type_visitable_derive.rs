@@ -1,0 +1,35 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn type_visitable_derive(mut s: synstructure::Structure<'_>) -> proc_macro2::TokenStream {
+    if let syn::Data::Union(_) = s.ast().data {
+        panic!("cannot derive on union")
+    }
+    if !s.ast().generics.type_params().any(|ty| ty.ident == "I") {
+        s.add_impl_generic(parse_quote! {
+            I
+        });
+    }
+    s.filter(|bi| !has_ignore_attr(&bi.ast().attrs, "type_visitable", "ignore"));
+    s.add_where_predicate(parse_quote! {
+        I : Interner
+    });
+    s.add_bounds(synstructure::AddBounds::Fields);
+    let body_visit = s.each(|bind| {
+        quote! {
+            match
+            ::rustc_type_ir::VisitorResult::branch(::rustc_type_ir::TypeVisitable::visit_with(#
+            bind, __visitor)) { ::core::ops::ControlFlow::Continue(()) => {},
+            ::core::ops::ControlFlow::Break(r) => { return
+            ::rustc_type_ir::VisitorResult::from_residual(r); }, }
+        }
+    });
+    s.bind_with(|_| synstructure::BindStyle::Move);
+    s.bound_impl(
+        quote!(::rustc_type_ir::TypeVisitable<I>),
+        quote! {
+            fn visit_with < __V : ::rustc_type_ir::TypeVisitor < I >> (& self, __visitor
+            : & mut __V) -> __V::Result { match * self { # body_visit } < __V::Result as
+            ::rustc_type_ir::VisitorResult >::output() }
+        },
+    )
+}

@@ -1,0 +1,72 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn fn_setup(
+    ast: syn::ItemFn,
+    config: &Config,
+    prefix: &str,
+    kind: &str,
+) -> proc_macro2::TokenStream {
+    let asyncness = ast.sig.asyncness;
+    if asyncness.is_some() && cfg!(not(feature = "async")) {
+        panic!("async testing attempted with async feature disabled in serial_test!");
+    }
+    let vis = ast.vis;
+    let name = ast.sig.ident;
+    #[cfg(all(feature = "test_logging", not(test)))]
+    let print_name = {
+        let print_str = format!("Starting {name}");
+        quote! {
+            println!(# print_str);
+        }
+    };
+    #[cfg(any(not(feature = "test_logging"), test))]
+    let print_name = quote! {};
+    let return_type = match ast.sig.output {
+        syn::ReturnType::Default => None,
+        syn::ReturnType::Type(_rarrow, ref box_type) => Some(box_type.deref()),
+    };
+    let block = ast.block;
+    let attrs: Vec<syn::Attribute> = ast.attrs.into_iter().collect();
+    let names = config.names.clone();
+    let path = config.path.clone();
+    let crate_ident = config.crate_ident.clone();
+    if let Some(ret) = return_type {
+        match asyncness {
+            Some(_) => {
+                let fnname = format_ident!("{}_async_{}_core_with_return", prefix, kind);
+                let temp_fn = format_ident!("_{}_internal", name);
+                quote! {
+                    # (# attrs) * # vis async fn # name() -> # ret { async fn # temp_fn()
+                    -> # ret # block # print_name # (# crate_ident) *::# fnname(vec![# (#
+                    names),*], # path, # temp_fn()). await }
+                }
+            }
+            None => {
+                let fnname = format_ident!("{}_{}_core_with_return", prefix, kind);
+                quote! {
+                    # (# attrs) * # vis fn # name() -> # ret { # print_name # (#
+                    crate_ident) *::# fnname(vec![# (# names),*], # path, || # block) }
+                }
+            }
+        }
+    } else {
+        match asyncness {
+            Some(_) => {
+                let fnname = format_ident!("{}_async_{}_core", prefix, kind);
+                let temp_fn = format_ident!("_{}_internal", name);
+                quote! {
+                    # (# attrs) * # vis async fn # name() { async fn # temp_fn() # block
+                    # print_name # (# crate_ident) *::# fnname(vec![# (# names),*], #
+                    path, # temp_fn()). await; }
+                }
+            }
+            None => {
+                let fnname = format_ident!("{}_{}_core", prefix, kind);
+                quote! {
+                    # (# attrs) * # vis fn # name() { # print_name # (# crate_ident) *::#
+                    fnname(vec![# (# names),*], # path, || # block); }
+                }
+            }
+        }
+    }
+}

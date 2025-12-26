@@ -1,0 +1,49 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+fn derive_split_at_inner(
+    ast: &DeriveInput,
+    _top_level: Trait,
+    zerocopy_crate: &Path,
+) -> Result<TokenStream, Error> {
+    let repr = StructUnionRepr::from_attrs(&ast.attrs)?;
+    match &ast.data {
+        Data::Struct(_) => {}
+        Data::Enum(_) | Data::Union(_) => {
+            return Err(Error::new(
+                Span::call_site(),
+                "can only be applied to structs",
+            ));
+        }
+    };
+    if repr.get_packed().is_some() {
+        return Err(Error::new(
+            Span::call_site(),
+            "must not have #[repr(packed)] attribute",
+        ));
+    }
+    if !(repr.is_c() || repr.is_transparent()) {
+        return Err(
+            Error::new(
+                Span::call_site(),
+                "must have #[repr(C)] or #[repr(transparent)] in order to guarantee this type's layout is splitable",
+            ),
+        );
+    }
+    let fields = ast.data.fields();
+    let trailing_field = if let Some(((_, _, trailing_field), _)) = fields.split_last() {
+        trailing_field
+    } else {
+        return Err(Error::new(Span::call_site(), "must at least one field"));
+    };
+    Ok(ImplBlockBuilder::new(
+        ast,
+        &ast.data,
+        Trait::SplitAt,
+        FieldBounds::TRAILING_SELF,
+        zerocopy_crate,
+    )
+    .inner_extras(quote! {
+        type Elem = <# trailing_field as ::zerocopy::SplitAt >::Elem;
+    })
+    .build())
+}

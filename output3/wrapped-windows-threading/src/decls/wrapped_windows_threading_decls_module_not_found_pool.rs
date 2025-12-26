@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: pool")]
+#[llm_context(crate_name = "wrapped_windows_threading", module_name = "pool")]
+pub struct wrapped_windows_threading_decls_module_not_found_pool;

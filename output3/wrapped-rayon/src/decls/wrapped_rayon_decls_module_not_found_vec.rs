@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: vec")]
+#[llm_context(crate_name = "wrapped_rayon", module_name = "vec")]
+pub struct wrapped_rayon_decls_module_not_found_vec;

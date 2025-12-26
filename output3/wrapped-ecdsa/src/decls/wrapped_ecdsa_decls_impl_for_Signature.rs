@@ -1,0 +1,31 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+#[cfg(feature = "algorithm")]
+impl<C> Signature<C>
+where
+    C: EcdsaCurve + CurveArithmetic,
+    SignatureSize<C>: ArraySize,
+{
+    /// Get the `r` component of this signature
+    pub fn r(&self) -> NonZeroScalar<C> {
+        NonZeroScalar::new(self.r.into()).unwrap()
+    }
+    /// Get the `s` component of this signature
+    pub fn s(&self) -> NonZeroScalar<C> {
+        NonZeroScalar::new(self.s.into()).unwrap()
+    }
+    /// Split the signature into its `r` and `s` scalars.
+    pub fn split_scalars(&self) -> (NonZeroScalar<C>, NonZeroScalar<C>) {
+        (self.r(), self.s())
+    }
+    /// Normalize signature into "low S" form as described in
+    /// [BIP 0062: Dealing with Malleability][1].
+    ///
+    /// [1]: https://github.com/bitcoin/bips/blob/master/bip-0062.mediawiki
+    pub fn normalize_s(&self) -> Self {
+        let mut result = self.clone();
+        let s_inv = ScalarValue::from(-self.s());
+        result.s.conditional_assign(&s_inv, self.s.is_high());
+        result
+    }
+}

@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: apitests")]
+#[llm_context(crate_name = "wrapped_bstr", module_name = "apitests")]
+pub struct wrapped_bstr_decls_module_not_found_apitests;

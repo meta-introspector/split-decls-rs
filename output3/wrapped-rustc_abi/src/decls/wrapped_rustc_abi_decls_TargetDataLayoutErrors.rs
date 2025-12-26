@@ -1,0 +1,36 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+pub enum TargetDataLayoutErrors<'a> {
+    InvalidAddressSpace {
+        addr_space: &'a str,
+        cause: &'a str,
+        err: ParseIntError,
+    },
+    InvalidBits {
+        kind: &'a str,
+        bit: &'a str,
+        cause: &'a str,
+        err: ParseIntError,
+    },
+    MissingAlignment {
+        cause: &'a str,
+    },
+    InvalidAlignment {
+        cause: &'a str,
+        err: AlignFromBytesError,
+    },
+    InconsistentTargetArchitecture {
+        dl: &'a str,
+        target: &'a str,
+    },
+    InconsistentTargetPointerWidth {
+        pointer_size: u64,
+        target: u16,
+    },
+    InvalidBitsSize {
+        err: String,
+    },
+    UnknownPointerSpecification {
+        err: String,
+    },
+}

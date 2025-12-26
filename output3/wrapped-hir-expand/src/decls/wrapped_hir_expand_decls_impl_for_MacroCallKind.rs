@@ -1,0 +1,129 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl MacroCallKind {
+    pub fn descr(&self) -> &'static str {
+        match self {
+            MacroCallKind::FnLike { .. } => "macro call",
+            MacroCallKind::Derive { .. } => "derive macro",
+            MacroCallKind::Attr { .. } => "attribute macro",
+        }
+    }
+    /// Returns the file containing the macro invocation.
+    pub fn file_id(&self) -> HirFileId {
+        match *self {
+            MacroCallKind::FnLike {
+                ast_id: InFile { file_id, .. },
+                ..
+            }
+            | MacroCallKind::Derive {
+                ast_id: InFile { file_id, .. },
+                ..
+            }
+            | MacroCallKind::Attr {
+                ast_id: InFile { file_id, .. },
+                ..
+            } => file_id,
+        }
+    }
+    pub fn erased_ast_id(&self) -> ErasedFileAstId {
+        match *self {
+            MacroCallKind::FnLike {
+                ast_id: InFile { value, .. },
+                ..
+            } => value.erase(),
+            MacroCallKind::Derive {
+                ast_id: InFile { value, .. },
+                ..
+            } => value.erase(),
+            MacroCallKind::Attr {
+                ast_id: InFile { value, .. },
+                ..
+            } => value.erase(),
+        }
+    }
+    /// Returns the original file range that best describes the location of this macro call.
+    ///
+    /// This spans the entire macro call, including its input. That is for
+    /// - fn_like! {}, it spans the path and token tree
+    /// - #\[derive], it spans the `#[derive(...)]` attribute and the annotated item
+    /// - #\[attr], it spans the `#[attr(...)]` attribute and the annotated item
+    pub fn original_call_range_with_input(self, db: &dyn ExpandDatabase) -> FileRange {
+        let mut kind = self;
+        let file_id = loop {
+            match kind.file_id() {
+                HirFileId::MacroFile(file) => {
+                    kind = db.lookup_intern_macro_call(file).kind;
+                }
+                HirFileId::FileId(file_id) => break file_id,
+            }
+        };
+        let range = match kind {
+            MacroCallKind::FnLike { ast_id, .. } => ast_id.to_ptr(db).text_range(),
+            MacroCallKind::Derive { ast_id, .. } => ast_id.to_ptr(db).text_range(),
+            MacroCallKind::Attr { ast_id, .. } => ast_id.to_ptr(db).text_range(),
+        };
+        FileRange { range, file_id }
+    }
+    /// Returns the original file range that best describes the location of this macro call.
+    ///
+    /// Here we try to roughly match what rustc does to improve diagnostics: fn-like macros
+    /// get the macro path (rustc shows the whole `ast::MacroCall`), attribute macros get the
+    /// attribute's range, and derives get only the specific derive that is being referred to.
+    pub fn original_call_range(self, db: &dyn ExpandDatabase) -> FileRange {
+        let mut kind = self;
+        let file_id = loop {
+            match kind.file_id() {
+                HirFileId::MacroFile(file) => {
+                    kind = db.lookup_intern_macro_call(file).kind;
+                }
+                HirFileId::FileId(file_id) => break file_id,
+            }
+        };
+        let range = match kind {
+            MacroCallKind::FnLike { ast_id, .. } => {
+                let node = ast_id.to_node(db);
+                node.path()
+                    .unwrap()
+                    .syntax()
+                    .text_range()
+                    .cover(node.excl_token().unwrap().text_range())
+            }
+            MacroCallKind::Derive {
+                ast_id,
+                derive_attr_index,
+                ..
+            } => collect_attrs(&ast_id.to_node(db))
+                .nth(derive_attr_index.ast_index())
+                .expect("missing derive")
+                .1
+                .expect_left("derive is a doc comment?")
+                .syntax()
+                .text_range(),
+            MacroCallKind::Attr {
+                ast_id,
+                invoc_attr_index,
+                ..
+            } => collect_attrs(&ast_id.to_node(db))
+                .nth(invoc_attr_index.ast_index())
+                .expect("missing attribute")
+                .1
+                .expect_left("attribute macro is a doc comment?")
+                .syntax()
+                .text_range(),
+        };
+        FileRange { range, file_id }
+    }
+    fn arg(&self, db: &dyn ExpandDatabase) -> InFile<Option<SyntaxNode>> {
+        match self {
+            MacroCallKind::FnLike { ast_id, .. } => ast_id
+                .to_in_file_node(db)
+                .map(|it| Some(it.token_tree()?.syntax().clone())),
+            MacroCallKind::Derive { ast_id, .. } => {
+                ast_id.to_in_file_node(db).syntax().cloned().map(Some)
+            }
+            MacroCallKind::Attr { ast_id, .. } => {
+                ast_id.to_in_file_node(db).syntax().cloned().map(Some)
+            }
+        }
+    }
+}

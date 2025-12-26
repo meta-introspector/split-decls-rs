@@ -1,0 +1,40 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// Create and compile a Windows resource file with the product and file version information for the rust compiler.
+///
+/// Returns the path to the compiled resource file
+///
+/// Does not emit any cargo directives, the caller is responsible for that.
+pub fn compile_windows_resource_file(
+    file_stem: &path::Path,
+    file_description: &str,
+    filetype: VersionInfoFileType,
+) -> path::PathBuf {
+    let mut resources_dir = path::PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    resources_dir.push("resources");
+    fs::create_dir_all(&resources_dir).unwrap();
+    let resource_compiler = if let Ok(path) = env::var("RUSTC_WINDOWS_RC") {
+        path.into()
+    } else {
+        find_msvc_tools::find_tool(&env::var("CARGO_CFG_TARGET_ARCH").unwrap(), "rc.exe")
+            .expect("found rc.exe")
+            .path()
+            .to_owned()
+    };
+    let rc_path = resources_dir.join(file_stem.with_extension("rc"));
+    write_resource_script_file(&rc_path, file_description, filetype);
+    let res_path = resources_dir.join(file_stem.with_extension("res"));
+    let status = process::Command::new(resource_compiler)
+        .arg("/fo")
+        .arg(&res_path)
+        .arg(&rc_path)
+        .status()
+        .expect("can execute resource compiler");
+    assert!(status.success(), "rc.exe failed with status {}", status);
+    assert!(
+        res_path.try_exists().unwrap_or(false),
+        "resource file {} was not created",
+        res_path.display()
+    );
+    res_path
+}

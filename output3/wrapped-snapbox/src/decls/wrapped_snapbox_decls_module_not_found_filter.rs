@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: filter")]
+#[llm_context(crate_name = "wrapped_snapbox", module_name = "filter")]
+pub struct wrapped_snapbox_decls_module_not_found_filter;

@@ -1,0 +1,8 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// The hash of the on-disk source file used for debug info and cargo freshness checks.
+#[derive(Copy, Clone, PartialEq, Eq, Debug, Hash, HashStable_Generic, Encodable, Decodable)]
+pub struct SourceFileHash {
+    pub kind: SourceFileHashAlgorithm,
+    value: [u8; 32],
+}

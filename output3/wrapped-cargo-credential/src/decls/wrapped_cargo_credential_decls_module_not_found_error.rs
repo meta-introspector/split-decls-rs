@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: error")]
+#[llm_context(crate_name = "wrapped_cargo_credential", module_name = "error")]
+pub struct wrapped_cargo_credential_decls_module_not_found_error;

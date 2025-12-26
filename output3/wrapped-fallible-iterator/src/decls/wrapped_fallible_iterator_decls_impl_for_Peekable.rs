@@ -1,0 +1,34 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl<I> Peekable<I>
+where
+    I: FallibleIterator,
+{
+    /// Returns a reference to the next value without advancing the iterator.
+    #[inline]
+    pub fn peek(&mut self) -> Result<Option<&I::Item>, I::Error> {
+        if self.next.is_none() {
+            self.next = self.it.next()?;
+        }
+        Ok(self.next.as_ref())
+    }
+    /// Consume and return the next value of this iterator if a condition is true.
+    ///
+    /// If func returns true for the next value of this iterator, consume and return it. Otherwise, return None.
+    #[inline]
+    pub fn next_if(&mut self, f: impl Fn(&I::Item) -> bool) -> Result<Option<I::Item>, I::Error> {
+        match self.peek()? {
+            Some(item) if f(item) => self.next(),
+            _ => Ok(None),
+        }
+    }
+    /// Consume and return the next item if it is equal to `expected`.
+    #[inline]
+    pub fn next_if_eq<T>(&mut self, expected: &T) -> Result<Option<I::Item>, I::Error>
+    where
+        T: ?Sized,
+        I::Item: PartialEq<T>,
+    {
+        self.next_if(|found| found == expected)
+    }
+}

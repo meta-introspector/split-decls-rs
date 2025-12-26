@@ -1,0 +1,19 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl Sequence {
+    /// Create a new empty [`Sequence`]
+    pub fn new() -> Self {
+        Self::default()
+    }
+    /// Not for public consumption, but it must be public so the generated code
+    /// can call it.
+    #[doc(hidden)]
+    pub fn next_handle(&mut self) -> SeqHandle {
+        let handle = SeqHandle {
+            inner: self.inner.clone(),
+            seq: self.next_seq,
+        };
+        self.next_seq += 1;
+        handle
+    }
+}

@@ -1,0 +1,52 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+impl<M> ModuleCodegen<M> {
+    pub fn new_regular(name: impl Into<String>, module: M) -> Self {
+        Self {
+            name: name.into(),
+            module_llvm: module,
+            kind: ModuleKind::Regular,
+            thin_lto_buffer: None,
+        }
+    }
+    pub fn new_allocator(name: impl Into<String>, module: M) -> Self {
+        Self {
+            name: name.into(),
+            module_llvm: module,
+            kind: ModuleKind::Allocator,
+            thin_lto_buffer: None,
+        }
+    }
+    pub fn into_compiled_module(
+        self,
+        emit_obj: bool,
+        emit_dwarf_obj: bool,
+        emit_bc: bool,
+        emit_asm: bool,
+        emit_ir: bool,
+        outputs: &OutputFilenames,
+        invocation_temp: Option<&str>,
+    ) -> CompiledModule {
+        let object = emit_obj
+            .then(|| outputs.temp_path_for_cgu(OutputType::Object, &self.name, invocation_temp));
+        let dwarf_object =
+            emit_dwarf_obj.then(|| outputs.temp_path_dwo_for_cgu(&self.name, invocation_temp));
+        let bytecode = emit_bc
+            .then(|| outputs.temp_path_for_cgu(OutputType::Bitcode, &self.name, invocation_temp));
+        let assembly = emit_asm
+            .then(|| outputs.temp_path_for_cgu(OutputType::Assembly, &self.name, invocation_temp));
+        let llvm_ir = emit_ir.then(|| {
+            outputs.temp_path_for_cgu(OutputType::LlvmAssembly, &self.name, invocation_temp)
+        });
+        CompiledModule {
+            name: self.name,
+            kind: self.kind,
+            object,
+            dwarf_object,
+            bytecode,
+            assembly,
+            llvm_ir,
+            links_from_incr_cache: Vec::new(),
+        }
+    }
+}

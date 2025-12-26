@@ -1,0 +1,30 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// An incremental reader for extended output, returned by
+/// [`Hasher::finalize_xof`](struct.Hasher.html#method.finalize_xof).
+///
+/// Shorter BLAKE3 outputs are prefixes of longer ones, and explicitly requesting a short output is
+/// equivalent to truncating the default-length output. Note that this is a difference between
+/// BLAKE2 and BLAKE3.
+///
+/// # Security notes
+///
+/// Outputs shorter than the default length of 32 bytes (256 bits) provide less security. An N-bit
+/// BLAKE3 output is intended to provide N bits of first and second preimage resistance and N/2
+/// bits of collision resistance, for any N up to 256. Longer outputs don't provide any additional
+/// security.
+///
+/// Avoid relying on the secrecy of the output offset, that is, the number of output bytes read or
+/// the arguments to [`seek`](struct.OutputReader.html#method.seek) or
+/// [`set_position`](struct.OutputReader.html#method.set_position). [_Block-Cipher-Based Tree
+/// Hashing_ by Aldo Gunsing](https://eprint.iacr.org/2022/283) shows that an attacker who knows
+/// both the message and the key (if any) can easily determine the offset of an extended output.
+/// For comparison, AES-CTR has a similar property: if you know the key, you can decrypt a block
+/// from an unknown position in the output stream to recover its block index. Callers with strong
+/// secret keys aren't affected in practice, but secret offsets are a [design
+/// smell](https://en.wikipedia.org/wiki/Design_smell) in any case.
+#[derive(Clone)]
+pub struct OutputReader {
+    inner: Output,
+    position_within_block: u8,
+}

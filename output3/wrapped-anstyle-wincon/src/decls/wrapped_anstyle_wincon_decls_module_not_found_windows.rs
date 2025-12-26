@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: windows")]
+#[llm_context(crate_name = "wrapped_anstyle_wincon", module_name = "windows")]
+pub struct wrapped_anstyle_wincon_decls_module_not_found_windows;

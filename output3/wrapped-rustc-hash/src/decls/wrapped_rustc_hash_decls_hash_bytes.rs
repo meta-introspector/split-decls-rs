@@ -1,0 +1,48 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+/// A wyhash-inspired non-collision-resistant hash for strings/slices designed
+/// by Orson Peters, with a focus on small strings and small codesize.
+///
+/// The 64-bit version of this hash passes the SMHasher3 test suite on the full
+/// 64-bit output, that is, f(hash_bytes(b) ^ f(seed)) for some good avalanching
+/// permutation f() passed all tests with zero failures. When using the 32-bit
+/// version of multiply_mix this hash has a few non-catastrophic failures where
+/// there are a handful more collisions than an optimal hash would give.
+///
+/// We don't bother avalanching here as we'll feed this hash into a
+/// multiplication after which we take the high bits, which avalanches for us.
+#[inline]
+fn hash_bytes(bytes: &[u8]) -> u64 {
+    let len = bytes.len();
+    let mut s0 = SEED1;
+    let mut s1 = SEED2;
+    if len <= 16 {
+        if len >= 8 {
+            s0 ^= u64::from_le_bytes(bytes[0..8].try_into().unwrap());
+            s1 ^= u64::from_le_bytes(bytes[len - 8..].try_into().unwrap());
+        } else if len >= 4 {
+            s0 ^= u32::from_le_bytes(bytes[0..4].try_into().unwrap()) as u64;
+            s1 ^= u32::from_le_bytes(bytes[len - 4..].try_into().unwrap()) as u64;
+        } else if len > 0 {
+            let lo = bytes[0];
+            let mid = bytes[len / 2];
+            let hi = bytes[len - 1];
+            s0 ^= lo as u64;
+            s1 ^= ((hi as u64) << 8) | mid as u64;
+        }
+    } else {
+        let mut off = 0;
+        while off < len - 16 {
+            let x = u64::from_le_bytes(bytes[off..off + 8].try_into().unwrap());
+            let y = u64::from_le_bytes(bytes[off + 8..off + 16].try_into().unwrap());
+            let t = multiply_mix(s0 ^ x, PREVENT_TRIVIAL_ZERO_COLLAPSE ^ y);
+            s0 = s1;
+            s1 = t;
+            off += 16;
+        }
+        let suffix = &bytes[len - 16..];
+        s0 ^= u64::from_le_bytes(suffix[0..8].try_into().unwrap());
+        s1 ^= u64::from_le_bytes(suffix[8..16].try_into().unwrap());
+    }
+    multiply_mix(s0, s1) ^ (len as u64)
+}

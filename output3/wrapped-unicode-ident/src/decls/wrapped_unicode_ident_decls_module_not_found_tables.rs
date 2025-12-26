@@ -1,0 +1,3 @@
+#[llm_error_message(message = "Module file not found for: tables")]
+#[llm_context(crate_name = "wrapped_unicode_ident", module_name = "tables")]
+pub struct wrapped_unicode_ident_decls_module_not_found_tables;
