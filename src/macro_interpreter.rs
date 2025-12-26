@@ -71,19 +71,12 @@ impl RdfStateMachine {
 
 #[macro_export]
 macro_rules! interpret_wrapped_decl {
-    ($rdf_state:expr, $func_name:expr, $wrap_path:expr, $block:block) => {
+    ($rdf_state:expr, $func_name:expr, $wrap_path:expr, $body:block) => {
         {
             $rdf_state.enter_function($func_name);
-            let start_time = Instant::now();
-            
-            // Execute the wrapped declaration
-            let result = $block;
-            
-            let duration = start_time.elapsed();
-            $rdf_state.capture_data("execution_time_ns", &duration.as_nanos().to_string());
             $rdf_state.capture_data("wrap_path", $wrap_path);
+            let result = $body;
             $rdf_state.exit_function($func_name);
-            
             result
         }
     };

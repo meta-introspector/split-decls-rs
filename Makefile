@@ -7,6 +7,10 @@ export RUSTC_WRAPPER=sccache
 build:
 	cargo build --bins
 
+# Build output2-wrapper specifically
+build_output2_wrapper:
+	cargo build --bin output2-wrapper
+
 # Run 8-level K-theory dependency analysis
 ktheory:
 	../../target/debug/k_theory_deps
