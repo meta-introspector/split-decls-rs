@@ -30,3 +30,4 @@ output2/\#*
 /bootstrap_run.log
 /perf.data
 /perf.data.old
+/recursive-eval/target/
