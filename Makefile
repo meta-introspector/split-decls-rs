@@ -111,3 +111,8 @@ clean:
 eval_main:
 	@echo "🎯 Evaluating wrapped split-decls-rs main..."
 	@cargo run --bin eval_split_decl_main
+
+run_enhanced:
+	@echo "Running enhanced generation..."
+	@RUSTC_WRAPPER=$(SCCACHE) cargo build --release --quiet
+	@RUSTC_WRAPPER=$(SCCACHE) cargo run --release --bin generate_output3_from_enhanced --quiet 2>/dev/null || true
