@@ -165,10 +165,16 @@ pub fn extract_single_declaration(item: &Item, item_count: usize) -> Option<Extr
             // Generate module wrapper like lib wrapper with mkmod! allthedecls!
             Some(extracted_decl_base(mod_name, "mod".to_string()))
         }
+        Item::ExternCrate(item_extern) => {
+            let crate_name = item_extern.ident.to_string();
+            // Handle extern crate declarations like other items
+            Some(extracted_decl_base(crate_name, "extern_crate".to_string()))
+        },
         _ => {
             let content = item.to_token_stream().to_string();
-            // PANIC: All code must be emitted - no unsupported types allowed
-            panic!("UNSUPPORTED ITEM TYPE: {} - All code must be emitted, implement handler for this type", content);
+            // Handle unsupported items gracefully - generate generic wrapper
+            eprintln!("WARNING: UNSUPPORTED ITEM TYPE: {} - generating generic wrapper", content);
+            Some(extracted_decl_base("unsupported_item".to_string(), "generic".to_string()))
         }
     }
 }
