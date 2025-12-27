@@ -61,17 +61,7 @@ debug = true
 #     ".", # This crate itself
 #     "cargo-toml-generator-macros",
 #     "cargo-toml-generator-types", 
-#     "split-decls-types",
-#     "cargo-tree-macro",
-#     "cargo-metadata-lib", # Add this new crate
-#     "cargo-lock-import",
-#     "module-wrapper-macros",
-#     "wrapper-test-harness",
-# ]
-# exclude = [
-#     "cargo-toml-generator-macros",
-#     "cargo-toml-generator-types",
-# ]
+
 
 # [workspace.dependencies]
 # anyhow = "1.0"
@@ -98,6 +88,7 @@ debug = true
 
 [dependencies]
 rayon = { workspace = true } # Added for multi-threaded processing
+split-decls-syscall-macros = { path = "./syscall-macros" }
 anyhow = { workspace = true }
 toml = { workspace = true }
 toml_edit = { workspace = true }

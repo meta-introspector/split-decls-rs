@@ -5,6 +5,7 @@ use quote::{quote, ToTokens};
 use proc_macro2::TokenStream;
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
+use crate::syscall_prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SyscallInterceptor {
@@ -183,16 +184,17 @@ pub fn create_default_syscall_interceptor() -> SyscallInterceptor {
     let mut syscall_mappings = HashMap::new();
     
     // File system operations
-    syscall_mappings.insert("#[syscall="read"]
-    std::fs::read".to_string(), SyscallWrapper {
-        original_call: "#[syscall="read"]
-    std::fs::read".to_string(),
-        wrapper_macro: "safe_fs_read".to_string(),
-        oracle_type: OracleType::FileSystem,
-        safety_wrapper: "FileSystemOracle".to_string(),
-        mock_implementation: Some("mock_file_read()".to_string()),
-        dao_policy: Some("filesystem_read_policy".to_string()),
-    });
+    syscall_mappings.insert(
+        "#[syscall=\"read\"]\nstd::fs::read".to_string(), 
+        SyscallWrapper {
+            original_call: "#[syscall=\"read\"]\nstd::fs::read".to_string(),
+            wrapper_macro: "safe_fs_read".to_string(),
+            oracle_type: OracleType::FileSystem,
+            safety_wrapper: "FileSystemOracle".to_string(),
+            mock_implementation: Some("mock_file_read()".to_string()),
+            dao_policy: Some("filesystem_read_policy".to_string()),
+        }
+    );
     
     syscall_mappings.insert("std::fs::write".to_string(), SyscallWrapper {
         original_call: "std::fs::write".to_string(),

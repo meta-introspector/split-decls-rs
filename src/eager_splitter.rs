@@ -1,3 +1,4 @@
+use crate::syscall;
 use anyhow::{Context, Result};
 use proc_macro2::{Ident, Span, TokenStream}; // Added LineColumn
 use crate::process_module_recursivly::process_module_recursively;

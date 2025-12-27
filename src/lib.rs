@@ -41,6 +41,16 @@ pub mod rust_to_monster_reporter;
 pub mod sparql_probe_bridge;
 pub mod syscall_oracle;
 pub mod syscall_decoupling_template;
+pub mod syscall_macros;
+pub mod syscall_traits;
+pub mod syscall_prelude;
+pub mod syscall_compat;
+
+// Re-export syscall functionality
+pub use syscall_macros::*;
+pub use syscall_traits::*;
+pub use syscall_prelude::*;
+pub use syscall_compat::*;
 pub mod ast_statistics;
 pub mod syn_type_discovery;
 pub mod meta_pattern_visitor;
