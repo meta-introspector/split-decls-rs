@@ -3,7 +3,7 @@ use clap::{Arg, Command};
 use std::fs;
 use std::path::Path;
 
-use crate::signature_compressor::{SignatureCompressor, SignatureLookup};
+use split_decls_rs::signature_compressor::{SignatureCompressor, SignatureLookup};
 
 fn main() -> Result<()> {
     let matches = Command::new("signature-compress")
@@ -97,7 +97,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn print_statistics(stats: &crate::signature_compressor::SignatureStats) {
+fn print_statistics(stats: &split_decls_rs::signature_compressor::SignatureStats) {
     println!("\n📊 Signature Compression Statistics:");
     println!("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     println!("📈 Total unique signatures: {}", stats.total_signatures);

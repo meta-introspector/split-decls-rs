@@ -1,4 +1,4 @@
-use crate::{setup_crate_paths, eager_splitter};
+use split_decls_rs::{setup_crate_paths, eager_splitter};
 use split_decls_types::SplitDeclsConfig;
 use std::path::PathBuf;
 

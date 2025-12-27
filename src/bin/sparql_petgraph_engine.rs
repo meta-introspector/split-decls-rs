@@ -1,8 +1,27 @@
 use std::collections::HashMap;
-use std::fs;
 use anyhow::Result;
 use petgraph::{Graph, Directed};
 use petgraph::graph::NodeIndex;
+
+// SPARQL macro for safe query construction
+macro_rules! sparql_select {
+    ($var:ident has_type $type:ident) => {
+        format!("SELECT ?{} WHERE {{ ?{} rdf:type lmdfb:{} }}", 
+            stringify!($var), stringify!($var), stringify!($type))
+    };
+    
+    ($var:ident has_property $prop:ident as $value:ident) => {
+        format!("SELECT ?{} ?{} WHERE {{ ?{} lmdfb:{} ?{} }}", 
+            stringify!($var), stringify!($value), 
+            stringify!($var), stringify!($prop), stringify!($value))
+    };
+}
+
+macro_rules! println_sparql {
+    ($label:expr, $query:expr) => {
+        println!("\n{}. {}", $label, $query);
+    };
+}
 
 #[derive(Debug)]
 struct SparqlEngine {
@@ -186,17 +205,19 @@ fn main() -> Result<()> {
     println!("\n🔍 Running SPARQL Queries:");
     
     // Query 1: Find all RustcComponents
-    println!("\n1. SELECT ?s WHERE { ?s rdf:type lmdfb:RustcComponent }");
+    let query1 = sparql_select!(s has_type RustcComponent);
+    println_sparql!("1", query1);
     let components = engine.select_where("?s rdf:type lmdfb:RustcComponent");
     println!("   Found {} components", components.len());
     
     // Query 2: Find nodes by level
-    println!("\n2. SELECT ?s ?level WHERE { ?s lmdfb:hasLevel ?level }");
+    let query2 = sparql_select!(s has_property hasLevel as level);
+    println_sparql!("2", query2);
     let levels = engine.select_where("?s lmdfb:hasLevel ?level");
     println!("   Found {} nodes with levels", levels.len());
     
     // Query 3: Find semantic patterns
-    println!("\n3. SELECT ?s ?pattern WHERE { ?s lmdfb:hasSemanticPattern ?pattern }");
+    println!("\n3. SELECT ?s ?pattern WHERE {{ ?s lmdfb:hasSemanticPattern ?pattern }}");
     let patterns = engine.select_where("?s lmdfb:hasSemanticPattern ?pattern");
     println!("   Found {} semantic patterns", patterns.len());
     

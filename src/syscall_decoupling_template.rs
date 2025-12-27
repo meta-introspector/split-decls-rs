@@ -351,7 +351,7 @@ impl SyscallDecouplingGenerator {
         tokens
     }
     
-    fn generate_trait_code(&self, trait_def: &SyscallTrait) -> TokenStream {
+    pub fn generate_trait_code(&self, trait_def: &SyscallTrait) -> TokenStream {
         let trait_name = format_ident!("{}", trait_def.name);
         let methods: Vec<TokenStream> = trait_def.methods.iter().map(|method| {
             let method_name = format_ident!("{}", method.name);

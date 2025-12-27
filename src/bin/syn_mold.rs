@@ -4,7 +4,7 @@ use std::fs;
 use proc_macro2::TokenStream;
 use quote::quote;
 
-use crate::syn_mold::{SynMold, MoldExtraction};
+use split_decls_rs::syn_mold::{SynMold, MoldExtraction};
 
 fn main() -> Result<()> {
     let matches = Command::new("syn-mold")
@@ -42,7 +42,7 @@ fn main() -> Result<()> {
 
     // Read and parse input file
     let input_content = fs::read_to_string(input_file)?;
-    let input_tokens: TokenStream = input_content.parse()?;
+    let input_tokens: proc_macro2::TokenStream = input_content.parse()?;
 
     // Create mold and extract signatures
     let mut mold = SynMold::new();

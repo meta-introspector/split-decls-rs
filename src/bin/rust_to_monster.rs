@@ -1,8 +1,8 @@
 use anyhow::Result;
 use clap::{Arg, Command};
 use std::fs;
-use crate::monster_compressor::MonsterCompressor;
-use crate::rust_to_monster_reporter::RustToMonsterReporter;
+use split_decls_rs::monster_compressor::MonsterCompressor;
+use split_decls_rs::rust_to_monster_reporter::RustToMonsterReporter;
 
 fn main() -> Result<()> {
     let matches = Command::new("rust-to-monster")

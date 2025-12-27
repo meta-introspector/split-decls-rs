@@ -5,12 +5,12 @@ use toml;
 use clap::Parser;
 
 
-use crate::macro_analyzer_parts::terms::Term;
-use crate::macro_analyzer_parts::analysis_data::TermAnalysis;
-use crate::macro_analyzer_parts::file_analyzer::analyze_file_macros;
-use crate::macro_analyzer_parts::scoring::get_closest_prime_reciprocal;
-use crate::macro_analyzer_parts::output_format::MacroAnalysisOutput;
-use crate::special_print::specialprint;
+use split_decls_rs::macro_analyzer_parts::terms::Term;
+use split_decls_rs::macro_analyzer_parts::analysis_data::TermAnalysis;
+use split_decls_rs::macro_analyzer_parts::file_analyzer::analyze_file_macros;
+use split_decls_rs::macro_analyzer_parts::scoring::get_closest_prime_reciprocal;
+use split_decls_rs::macro_analyzer_parts::output_format::MacroAnalysisOutput;
+use split_decls_rs::special_print::specialprint;
 
 
 /// Command-line arguments for the macro analyzer.

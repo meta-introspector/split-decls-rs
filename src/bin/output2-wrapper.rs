@@ -1,7 +1,7 @@
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
-use crate::macro_interpreter::RdfStateMachine;
-use crate::{interpret_wrapped_decl, interpret_syn_function};
+use split_decls_rs::macro_interpreter::RdfStateMachine;
+use split_decls_rs::{interpret_wrapped_decl, interpret_syn_function};
 
 #[derive(Parser)]
 #[command(name = "output2-wrapper")]

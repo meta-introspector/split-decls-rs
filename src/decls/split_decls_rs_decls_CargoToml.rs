@@ -1,1 +1,22 @@
-use proc_macro :: TokenStream ; use quote :: quote ; use syn ::*; use std :: path :: { Path , PathBuf } ; use anyhow :: { Context , Result } ; use split_decls_types :: SplitDeclsConfig ; pub use extracted_decl :: * ; pub use process_crate :: process_crate ; pub use process_crates_in_path :: process_crates_in_path ; pub use generate_wrapped_workspace :: generate_wrapped_workspace ; prelude ! { } # [decl_ split_decls_rs_decls_CargoToml] # [derive (Debug , serde :: Serialize , serde :: Deserialize)] struct CargoToml { package : Package , lib : Option < toml :: Table > , # [serde (default)] dependencies : toml :: Table , # [serde (rename = "dev-dependencies")] # [serde (default)] dev_dependencies : toml :: Table , # [serde (rename = "build-dependencies")] # [serde (default)] build_dependencies : toml :: Table , # [serde (flatten)] # [serde (default)] other : toml :: Table , # [serde (default)] patch : toml :: Table , }
+use std::path::Path;
+use anyhow::Result;
+use split_decls_types::SplitDeclsConfig;
+
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
+pub struct CargoToml {
+    pub package: super::package::Package,
+    pub lib: Option<toml::Table>,
+    #[serde(default)]
+    pub dependencies: toml::Table,
+    #[serde(rename = "dev-dependencies")]
+    #[serde(default)]
+    pub dev_dependencies: toml::Table,
+    #[serde(rename = "build-dependencies")]
+    #[serde(default)]
+    pub build_dependencies: toml::Table,
+    #[serde(flatten)]
+    #[serde(default)]
+    pub other: toml::Table,
+    #[serde(default)]
+    pub patch: toml::Table,
+}

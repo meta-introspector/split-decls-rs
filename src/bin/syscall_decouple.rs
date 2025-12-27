@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use anyhow::Result;
 use clap::{Parser, Subcommand};
-use crate::syscall_decoupling_template::{SyscallDecouplingGenerator, SyscallAnalysisReport};
+use split_decls_rs::syscall_decoupling_template::{SyscallDecouplingGenerator, SyscallAnalysisReport};
 
 #[derive(Parser)]
 #[command(name = "syscall-decouple")]

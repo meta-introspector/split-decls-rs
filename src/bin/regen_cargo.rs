@@ -2,7 +2,7 @@ use anyhow::Result;
 use clap::Parser;
 use std::path::PathBuf;
 use std::process::Command;
-use crate::{generate_new_cargotoml, patch_config};
+use split_decls_rs::{generate_new_cargotoml, patch_config};
 use std::fs;
 use walkdir::WalkDir;
 
@@ -40,7 +40,7 @@ fn main() -> Result<()> {
         patch_config::PatchConfig::default()
     };
 
-    let global_config = &crate::config_macros::GLOBAL_CONFIG.lock().unwrap();
+    let global_config = &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap();
     
     // Generate workspace Cargo.toml first
     let mut workspace_content = String::new();

@@ -5,7 +5,7 @@ use std::path::Path;
 use proc_macro2::TokenStream;
 use quote::quote;
 
-use crate::syn2macro::{Syn2MacroConverter, DefaultSecurity, StrictSecurity, AstOperation};
+use split_decls_rs::syn2macro::{Syn2MacroConverter, DefaultSecurity, StrictSecurity, AstOperation};
 
 fn main() -> Result<()> {
     let matches = Command::new("syn2macro")
@@ -47,7 +47,7 @@ fn main() -> Result<()> {
 
     // Read input file
     let input_content = fs::read_to_string(input_file)?;
-    let input_tokens: TokenStream = input_content.parse()?;
+    let input_tokens: proc_macro2::TokenStream = input_content.parse()?;
 
     // Create security context
     let security = match security_level.as_str() {

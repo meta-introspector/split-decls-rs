@@ -1,5 +1,15 @@
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
+use anyhow::Result;
+use split_decls_types::SplitDeclsConfig;
+
+pub fn load_config() -> Result<SplitDeclsConfig> {
+    // Load from the default config file
+    let config_path = "split-decls-rs.toml";
+    let config_content = std::fs::read_to_string(config_path)?;
+    let config: SplitDeclsConfig = toml::from_str(&config_content)?;
+    Ok(config)
+}
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct GeneratedWorkspaceMember {

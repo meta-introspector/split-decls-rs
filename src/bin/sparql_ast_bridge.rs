@@ -1,8 +1,8 @@
 use std::path::Path;
 use anyhow::Result;
 use clap::{Parser, Subcommand};
-use crate::sparql_probe_bridge::{SparqlProbeGenerator, create_example_sparql_config};
-use crate::ast_reflector::AstReflector;
+use split_decls_rs::sparql_probe_bridge::{SparqlProbeGenerator, create_example_sparql_config};
+use split_decls_rs::ast_reflector::AstReflector;
 
 #[derive(Parser)]
 #[command(name = "sparql-ast-bridge")]

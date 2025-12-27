@@ -1,5 +1,5 @@
 use anyhow::Result;
-use crate::{
+use split_decls_rs::{
     output2_macro_system::{Output2MacroSystem, LispInterpreter},
     rdf_url_blob::RdfUrlBlob,
 };

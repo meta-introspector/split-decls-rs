@@ -1,7 +1,9 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 use anyhow::{Context, Result};
-use crate::paths::CratePaths; use crate::{process_dependency_table, add_generated_header, CargoToml};
+use crate::paths::CratePaths; use crate::add_generated_header;
+use crate::decls::process_dependency_table::process_dependency_table;
+use crate::decls::cargo_toml::CargoToml;
 use split_decls_types::SplitDeclsConfig;
 use crate::patch_config;
 

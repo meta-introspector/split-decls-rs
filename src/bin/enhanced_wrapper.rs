@@ -1,5 +1,5 @@
 use anyhow::Result;
-use crate::all_file_scanner::{scan_all_rust_files, generate_wrapped_decl_with_origin};
+use split_decls_rs::all_file_scanner::{scan_all_rust_files, generate_wrapped_decl_with_origin};
 use std::fs;
 use std::path::Path;
 

@@ -1,4 +1,4 @@
-use crate::cargo_guided_analysis::CargoGuidedAnalysis;
+use split_decls_rs::cargo_guided_analysis::CargoGuidedAnalysis;
 use std::path::PathBuf;
 use anyhow::Result;
 

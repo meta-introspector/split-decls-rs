@@ -1,7 +1,7 @@
 use anyhow::Result;
 use std::collections::HashMap;
 use std::process::Command;
-use crate::output2_macro_system::Output2MacroSystem;
+use split_decls_rs::output2_macro_system::Output2MacroSystem;
 
 /// decl2addr! - Maps a declaration to its REAL memory address
 macro_rules! decl2addr {

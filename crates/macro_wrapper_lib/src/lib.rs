@@ -4,7 +4,7 @@ use quote::{quote, format_ident, ToTokens};
 use syn::{parse_macro_input, Item, Ident, LitStr, ItemFn, ItemStruct, ItemEnum, ItemTrait, ItemImpl, ItemMod, ItemStatic, ItemConst, ItemUse, Visibility}; // Removed parse_quote
 use std::hash::{Hasher, DefaultHasher, Hash}; // For generating unique identifiers and Hash trait
 use syn::spanned::Spanned; // For the Spanned trait
-use gemini_rustc_data_structures::{get_diagnostics, SerializableDiagnostic}; // New use statement
+//use gemini_rustc_data_structures::{get_diagnostics, SerializableDiagnostic}; // New use statement
 use serde_json; // New use statement
 
 // Placeholder for the user's proc macro hook

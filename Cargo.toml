@@ -226,6 +226,4 @@ proc-macro2 = { path = "../proc-macro2" }
 name = "bootstrap_audited"
 path = "src/bin/bootstrap-self-apply_audited.rs"
 
-[[bin]]
-name = "split_decls_rs_audited"
-path = "src/bin/split-decls-rs_audited.rs"
+# Removed missing binary

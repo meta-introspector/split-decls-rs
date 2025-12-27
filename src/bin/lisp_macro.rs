@@ -1,9 +1,9 @@
 use clap::Parser;
 use anyhow::Result;
-use crate::output2_macro_system::*;
-use crate::rdf_url_blob::*;
-use crate::url_matrix::*;
-use crate::rustc_eigenmatrix::*;
+use split_decls_rs::output2_macro_system::*;
+use split_decls_rs::rdf_url_blob::*;
+use split_decls_rs::url_matrix::*;
+use split_decls_rs::rustc_eigenmatrix::*;
 use std::path::Path;
 
 /// Lisp-like macro system for output2 declarations

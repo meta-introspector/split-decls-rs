@@ -1,7 +1,7 @@
 use anyhow::Result;
 use std::collections::HashMap;
 use std::process::Command;
-use crate::output2_macro_system::Output2MacroSystem;
+use split_decls_rs::output2_macro_system::Output2MacroSystem;
 
 /// Find common terms and check real addresses
 fn main() -> Result<()> {
