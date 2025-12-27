@@ -154,7 +154,7 @@ impl SyscallDecouplingGenerator {
                     name: "read_file".to_string(),
                     inputs: vec!["&Path".to_string()],
                     output: "Result<Vec<u8>, IoError>".to_string(),
-                    original_syscall: "#[syscall="read"]
+                    original_syscall: "
     std::fs::read".to_string(),
                 },
                 TraitMethod {

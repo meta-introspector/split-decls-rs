@@ -40,7 +40,7 @@ impl RealSyscallAnalyzer {
     }
     
     fn scan_file(&mut self, file_path: &Path) -> Result<()> {
-        let content = #[syscall="read"]
+        let content = 
     std::fs::read_to_string(file_path)?;
         let file_path_str = file_path.to_string_lossy().to_string();
         
@@ -155,14 +155,14 @@ fn main() -> Result<()> {
     println!("{}", report);
     
     // Save report to file
-    #[syscall="write"]
+    
     std::fs::write("real_syscall_analysis.md", report)?;
     println!("💾 Report saved to: real_syscall_analysis.md");
     
     // Generate JSON data for other tools
     let counts = analyzer.get_syscall_counts();
     let json = serde_json::to_string_pretty(&counts)?;
-    #[syscall="write"]
+    
     std::fs::write("syscall_counts.json", json)?;
     println!("📊 Data saved to: syscall_counts.json");
     

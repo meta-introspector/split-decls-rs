@@ -1,6 +1,7 @@
 #![feature(stmt_expr_attributes)]
 
-use crate::syscall;
+
+use crate::{ignore_syscall, syscallexec};
 use std::collections::HashMap;
 use std::path::Path;
 use anyhow::Result;
@@ -45,7 +46,7 @@ impl Output2MacroSystem {
         let output2_path = Path::new("output2");
         
         // Scan all wrapped crates in output2
-        for entry in ignore_syscall!(#[syscall="read"] std::fs::read_dir(output2_path))? {
+        for entry in ignore_syscall!( std::fs::read_dir(output2_path))? {
             let entry = entry?;
             if entry.file_type()?.is_dir() {
                 let crate_name = entry.file_name().to_string_lossy().to_string();
@@ -70,11 +71,11 @@ impl Output2MacroSystem {
             return Ok(());
         }
         
-        for entry in ignore_syscall!(#[syscall="read"] std::fs::read_dir(decls_path))? {
+        for entry in ignore_syscall!( std::fs::read_dir(decls_path))? {
             let entry = entry?;
             if entry.path().extension().map_or(false, |ext| ext == "rs") {
                 let file_name = entry.file_name().to_string_lossy().to_string();
-                let content = ignore_syscall!(#[syscall="read"] std::fs::read_to_string(entry.path()))?;
+                let content = ignore_syscall!( std::fs::read_to_string(entry.path()))?;
                 
                 // Extract declaration info from filename and content
                 let (decl_name, decl_type) = Self::parse_declaration_info(&file_name, &content);

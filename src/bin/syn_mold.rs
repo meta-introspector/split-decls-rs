@@ -7,7 +7,7 @@ use quote::quote;
 use split_decls_rs::syn_mold::{SynMold, MoldExtraction};
 
 fn main() -> Result<()> {
-    let matches = #[syscall="exec"]
+    let matches = 
     Command::new("syn-mold")
         .version("0.1.0")
         .about("Extract syn usage signatures and generate compile-time checked replacements")

@@ -1,4 +1,4 @@
-use crate::syscall;
+
 use anyhow::{Context, Result};
 use proc_macro2::Ident;
 use quote::quote;

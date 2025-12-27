@@ -75,7 +75,7 @@ fn generate_decoupling_traits(output: &str, sparql_data: Option<&str>, all_impls
     
     // Load SPARQL complexity data if provided
     if let Some(sparql_file) = sparql_data {
-        if let Ok(content) = #[syscall="read"]
+        if let Ok(content) = 
     std::fs::read_to_string(sparql_file) {
             if let Ok(complexity_data) = serde_json::from_str::<HashMap<String, f64>>(&content) {
                 generator.load_sparql_complexity(complexity_data);
@@ -93,7 +93,7 @@ fn generate_decoupling_traits(output: &str, sparql_data: Option<&str>, all_impls
         rust_code.to_string()
     );
     
-    #[syscall="write"]
+    
     std::fs::write(output, formatted_code)?;
     
     println!("✅ Generated syscall decoupling traits: {}", output);
@@ -200,7 +200,7 @@ fn generate_specific_trait(category: &str, output: &str) -> Result<()> {
             rust_code.to_string()
         );
         
-        #[syscall="write"]
+        
     std::fs::write(output, formatted_code)?;
         
         println!("✅ Generated {} trait: {}", trait_def.name, output);
@@ -258,7 +258,7 @@ fn run_interactive_mode() -> Result<()> {
                 complexity_data.insert("network_ops".to_string(), 9.7);
                 
                 let json = serde_json::to_string_pretty(&complexity_data)?;
-                #[syscall="write"]
+                
     std::fs::write("sample_complexity.json", json)?;
                 
                 generate_decoupling_traits("sparql_enhanced_traits.rs", Some("sample_complexity.json"), true)?;

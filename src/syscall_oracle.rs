@@ -72,7 +72,7 @@ impl SyscallAstTransformer {
     }
     
     pub fn transform_file(&mut self, file_path: &Path) -> Result<String> {
-        let content = #[syscall="read"]
+        let content = 
     std::fs::read_to_string(file_path)?;
         let mut syntax_tree: File = syn::parse_str(&content)?;
         
@@ -360,7 +360,7 @@ pub fn generate_oracle_types() -> TokenStream {
                     Ok(_) => {
                         let result = oracle.transform(path_buf);
                         oracle.audit_log("fs_read", &result);
-                        #[syscall="read"]
+                        
     std::fs::read(result.value)
                     }
                     Err(e) => Err(std::io::Error::new(std::io::ErrorKind::PermissionDenied, e))
@@ -376,7 +376,7 @@ pub fn generate_oracle_types() -> TokenStream {
                     Ok(_) => {
                         let result = oracle.transform(path_buf);
                         oracle.audit_log("fs_write", &result);
-                        #[syscall="write"]
+                        
     std::fs::write(result.value, $contents)
                     }
                     Err(e) => Err(std::io::Error::new(std::io::ErrorKind::PermissionDenied, e))
@@ -392,7 +392,7 @@ pub fn generate_oracle_types() -> TokenStream {
                     Ok(_) => {
                         let result = oracle.transform(cmd_string);
                         oracle.audit_log("process_exec", &result);
-                        std::process::#[syscall="exec"]
+                        std::process::
     Command::new(&result.value)
                     }
                     Err(e) => {

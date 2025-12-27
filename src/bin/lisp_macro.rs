@@ -45,7 +45,7 @@ fn main() -> Result<()> {
             system.overlay_wrappers();
             
             let doc = system.generate_rustdoc()?;
-            #[syscall="write"]
+            
     std::fs::write("output2_macros.md", &doc)?;
             
             println!("📚 Generated rustdoc: output2_macros.md");

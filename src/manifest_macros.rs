@@ -24,7 +24,7 @@ macro_rules! report_manifest {
 macro_rules! track_file_read {
     ($path:expr) => {
         eprintln!("MANIFEST_READ: {}", $path);
-        #[syscall="read"]
+        
     std::fs::read_to_string($path)
     };
 }
@@ -33,7 +33,7 @@ macro_rules! track_file_read {
 macro_rules! track_file_write {
     ($path:expr, $content:expr) => {
         eprintln!("MANIFEST_WRITE: {}", $path);
-        #[syscall="write"]
+        
     std::fs::write($path, $content)
     };
 }
@@ -50,5 +50,5 @@ macro_rules! track_command {
 // report_manifest!("report_aliases");
 // let content = track_file_read!("split-decls-rs.toml")?;
 // track_file_write!("output.txt", "data")?;
-// track_command!(#[syscall="exec"]
+// track_command!(
     Command::new("cargo").arg("build"))

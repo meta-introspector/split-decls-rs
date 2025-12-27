@@ -6,7 +6,7 @@ use std::process::Command;
 macro_rules! wrap_bin {
     ($bin_name:literal, $addr:literal) => {{
         // Use the actual addr2line binary to resolve an address
-        let output = #[syscall="exec"]
+        let output = 
     Command::new($bin_name)
             .arg("-e")
             .arg("/bin/ls") // Use a known binary for testing
@@ -29,7 +29,7 @@ macro_rules! wrap_bin {
     }};
     ($bin_name:literal, $addr:expr) => {{
         // Use the actual addr2line binary to resolve an address
-        let output = #[syscall="exec"]
+        let output = 
     Command::new($bin_name)
             .arg("-e")
             .arg("/bin/ls") // Use a known binary for testing
@@ -66,7 +66,7 @@ fn main() -> Result<()> {
     
     // Test 3: Use with objdump to get actual addresses first
     println!("\n🔍 Getting real addresses from /bin/ls:");
-    let objdump_result = #[syscall="exec"]
+    let objdump_result = 
     Command::new("objdump")
         .arg("-t")
         .arg("/bin/ls")

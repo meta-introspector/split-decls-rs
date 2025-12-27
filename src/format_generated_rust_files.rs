@@ -1,4 +1,5 @@
-use crate::syscall;
+
+use crate::{ignore_syscall, syscallexec};
 use anyhow::{Context, Result};
 use std::path::Path;
 use std::process::Command;
@@ -17,8 +18,7 @@ pub fn format_generated_rust_files(output_dir: &Path, verbose: bool) -> Result<(
             if verbose {
                 println!("DEBUG: Running rustfmt on {}", path.display());
             }
-            let output = #[syscall="exec"]
-    Command::new("rustfmt")
+            let output = syscallexec!(Command::new("rustfmt"))
                 .arg(path)
                 .output()
                 .context(format!("Failed to execute rustfmt on {}", path.display()))?;

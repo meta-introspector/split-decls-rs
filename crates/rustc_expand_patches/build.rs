@@ -16,7 +16,7 @@ use syn::{
 };
 use toml;
 use proc_macro2;
-use toml_edit::{self, Document, Table}; // Import Document and Table from toml_edit
+use toml_edit::{self, DocumentMut, Table}; // Import DocumentMut and Table from toml_edit
 
 /// --- Configuration Structures for Edit Jobs ---
 
@@ -421,14 +421,13 @@ fn apply_remove_cargo_dependency(details: &RemoveCargoDependencyDetails) -> Resu
     let content = fs::read_to_string(&details.target_file)
         .with_context(|| format!("Failed to read Cargo.toml: {:?}", details.target_file))?;
 
-    let mut doc = content.parse::<Document<String>>()
+    let mut doc = content.parse::<DocumentMut>()
         .with_context(|| format!("Failed to parse Cargo.toml: {:?}", details.target_file))?;
 
     let mut changed = false;
 
     // Get mutable reference to the root Table of the document
-    let root_table = doc.as_table_mut()
-        .with_context(|| format!("Cargo.toml root is not a table: {:?}", details.target_file))?;
+    let root_table = doc.as_table_mut();
 
     // Helper to remove dependency from a section, operating on a &mut Table
     let mut remove_from_table_section = |table: &mut toml_edit::Table, section_key: &str, package_name: &str| {

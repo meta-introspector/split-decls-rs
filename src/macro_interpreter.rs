@@ -87,8 +87,7 @@ macro_rules! interpret_syn_function {
     ($rdf_state:expr, $func_name:expr, $wrap_path:expr) => {
         interpret_wrapped_decl!($rdf_state, $func_name, $wrap_path, {
             // Load and interpret the wrapped declaration
-            let decl_content = #[syscall="read"]
-    std::fs::read_to_string($wrap_path)
+            let decl_content = std::fs::read_to_string($wrap_path)
                 .unwrap_or_else(|_| format!("// Wrapped declaration for {}", $func_name));
             
             $rdf_state.capture_data("decl_size", &decl_content.len().to_string());

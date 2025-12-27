@@ -44,6 +44,7 @@ pub mod syscall_decoupling_template;
 pub mod syscall_macros;
 pub mod syscall_traits;
 pub mod syscall_prelude;
+pub mod syscall;
 pub mod syscall_compat;
 
 // Re-export syscall functionality

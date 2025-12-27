@@ -104,7 +104,7 @@ fn reflect_directory(dir: &str, probes_file: Option<&str>, _output: Option<&str>
 fn generate_example_probes(output: &str) -> Result<()> {
     let probes = create_example_probes();
     let json = serde_json::to_string_pretty(&probes)?;
-    #[syscall="write"]
+    
     std::fs::write(output, json)?;
     
     println!("📋 Generated example probes configuration: {}", output);
@@ -169,7 +169,7 @@ fn analyze_directory(dir: &str, generate: bool) -> Result<()> {
         if entry.file_type().is_file() && 
            entry.path().extension().map_or(false, |ext| ext == "rs") {
             
-            let content = #[syscall="read"]
+            let content = 
     std::fs::read_to_string(entry.path())?;
             if let Ok(syntax_tree) = syn::parse_str::<syn::File>(&content) {
                 for item in &syntax_tree.items {
@@ -245,7 +245,7 @@ fn analyze_directory(dir: &str, generate: bool) -> Result<()> {
         }
         
         let json = serde_json::to_string_pretty(&probes)?;
-        #[syscall="write"]
+        
     std::fs::write("generated_probes.json", json)?;
         println!("💾 Generated probes saved to: generated_probes.json");
     }

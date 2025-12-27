@@ -4,7 +4,7 @@ use std::fs;
 use std::collections::HashMap;
 
 fn main() -> Result<()> {
-    let matches = #[syscall="exec"]
+    let matches = 
     Command::new("rust-to-monster-simple")
         .version("0.1.0")
         .about("Generate simplified Rust to Monster Group transformation report")

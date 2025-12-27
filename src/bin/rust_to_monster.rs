@@ -5,7 +5,7 @@ use split_decls_rs::monster_compressor::MonsterCompressor;
 use split_decls_rs::rust_to_monster_reporter::RustToMonsterReporter;
 
 fn main() -> Result<()> {
-    let matches = #[syscall="exec"]
+    let matches = 
     Command::new("rust-to-monster")
         .version("0.1.0")
         .about("Generate the epic Rust to Monster Group transformation report")

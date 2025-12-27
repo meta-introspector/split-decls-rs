@@ -6,7 +6,7 @@ use std::path::Path;
 use split_decls_rs::signature_compressor::{SignatureCompressor, SignatureLookup};
 
 fn main() -> Result<()> {
-    let matches = #[syscall="exec"]
+    let matches = 
     Command::new("signature-compress")
         .version("0.1.0")
         .about("Compress macro binding signatures using prime numbers and emojis")

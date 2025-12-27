@@ -240,52 +240,52 @@ impl PlaceholderExpander {
 }
 
 impl MutVisitor for PlaceholderExpander {
-    fn flat_map_arm(&mut self, arm: ast::Arm) -> SmallVec<ast::Arm, 1> {
-        if arm.is_placeholder {
-            // Original code commented out to avoid deletion and replace with panic.
-            // Reason: User instruction to temporarily disable placeholder functionality.
-            panic!("flat_map_arm called for a placeholder arm with id {:?}", arm.id);
-            // self.remove(arm.id).make_arms().unwrap()
-        } else {
-            walk_flat_map_arm(self, arm)
-        }
-    }
+    // fn flat_map_arm(&mut self, arm: ast::Arm) -> SmallVec<ast::Arm, 1> {
+    //     if arm.is_placeholder {
+    //         // Original code commented out to avoid deletion and replace with panic.
+    //         // Reason: User instruction to temporarily disable placeholder functionality.
+    //         panic!("flat_map_arm called for a placeholder arm with id {:?}", arm.id);
+    //         // self.remove(arm.id).make_arms().unwrap()
+    //     } else {
+    //         walk_flat_map_arm(self, arm)
+    //     }
+    // }
 
-    fn flat_map_expr_field(&mut self, field: ast::ExprField) -> SmallVec<ast::ExprField, 1> {
-        if field.is_placeholder {
-            // Original code commented out to avoid deletion and replace with panic.
-            // Reason: User instruction to temporarily disable placeholder functionality.
-            panic!("flat_map_expr_field called for a placeholder expr field with id {:?}", field.id);
-            // self.remove(field.id).make_expr_fields().unwrap()
-        } else {
-            walk_flat_map_expr_field(self, field)
-        }
-    }
+    // fn flat_map_expr_field(&mut self, field: ast::ExprField) -> SmallVec<ast::ExprField, 1> {
+    //     if field.is_placeholder {
+    //         // Original code commented out to avoid deletion and replace with panic.
+    //         // Reason: User instruction to temporarily disable placeholder functionality.
+    //         panic!("flat_map_expr_field called for a placeholder expr field with id {:?}", field.id);
+    //         // self.remove(field.id).make_expr_fields().unwrap()
+    //     } else {
+    //         walk_flat_map_expr_field(self, field)
+    //     }
+    // }
 
-    fn flat_map_pat_field(&mut self, fp: ast::PatField) -> SmallVec<ast::PatField, 1> {
-        if fp.is_placeholder {
-            // Original code commented out to avoid deletion and replace with panic.
-            // Reason: User instruction to temporarily disable placeholder functionality.
-            panic!("flat_map_pat_field called for a placeholder pat field with id {:?}", fp.id);
-            // self.remove(fp.id).make_pat_fields().unwrap()
-        } else {
-            walk_flat_map_pat_field(self, fp)
-        }
-    }
+    // fn flat_map_pat_field(&mut self, fp: ast::PatField) -> SmallVec<ast::PatField, 1> {
+    //     if fp.is_placeholder {
+    //         // Original code commented out to avoid deletion and replace with panic.
+    //         // Reason: User instruction to temporarily disable placeholder functionality.
+    //         panic!("flat_map_pat_field called for a placeholder pat field with id {:?}", fp.id);
+    //         // self.remove(fp.id).make_pat_fields().unwrap()
+    //     } else {
+    //         walk_flat_map_pat_field(self, fp)
+    //     }
+    // }
 
-    fn flat_map_generic_param(
-        &mut self,
-        param: ast::GenericParam,
-    ) -> SmallVec<ast::GenericParam, 1> {
-        if param.is_placeholder {
-            // Original code commented out to avoid deletion and replace with panic.
-            // Reason: User instruction to temporarily disable placeholder functionality.
-            panic!("flat_map_generic_param called for a placeholder generic param with id {:?}", param.id);
-            // self.remove(param.id).make_generic_params().unwrap()
-        } else {
-            walk_flat_map_generic_param(self, param)
-        }
-    }
+    // fn flat_map_generic_param(
+    //     &mut self,
+    //     param: ast::GenericParam,
+    // ) -> SmallVec<ast::GenericParam, 1> {
+    //     if param.is_placeholder {
+    //         // Original code commented out to avoid deletion and replace with panic.
+    //         // Reason: User instruction to temporarily disable placeholder functionality.
+    //         panic!("flat_map_generic_param called for a placeholder generic param with id {:?}", param.id);
+    //         // self.remove(param.id).make_generic_params().unwrap()
+    //     } else {
+    //         walk_flat_map_generic_param(self, param)
+    //     }
+    // }
 
     fn flat_map_param(&mut self, p: ast::Param) -> SmallVec<ast::Param, 1> {
         if p.is_placeholder {

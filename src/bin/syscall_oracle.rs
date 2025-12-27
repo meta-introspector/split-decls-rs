@@ -107,7 +107,7 @@ fn generate_oracle_code(output: &str) -> Result<()> {
         oracle_code.to_string()
     );
     
-    #[syscall="write"]
+    
     std::fs::write(output, formatted_code)?;
     
     println!("✅ Generated oracle types: {}", output);
@@ -161,7 +161,7 @@ fn transform_directory(dir: &str, output: &str, mock: bool, safety: &str, dao: b
                         std::fs::create_dir_all(parent)?;
                     }
                     
-                    #[syscall="write"]
+                    
     std::fs::write(&output_path, transformed_code)?;
                     transformed_count += 1;
                     
@@ -185,7 +185,7 @@ fn transform_directory(dir: &str, output: &str, mock: bool, safety: &str, dao: b
 fn generate_config(output: &str) -> Result<()> {
     let interceptor = create_default_syscall_interceptor();
     let json = serde_json::to_string_pretty(&interceptor)?;
-    #[syscall="write"]
+    
     std::fs::write(output, json)?;
     
     println!("📋 Generated syscall interceptor config: {}", output);
@@ -264,7 +264,7 @@ fn analyze_syscalls(dir: &str, generate_config: bool) -> Result<()> {
         if entry.file_type().is_file() && 
            entry.path().extension().map_or(false, |ext| ext == "rs") {
             
-            if let Ok(content) = #[syscall="read"]
+            if let Ok(content) = 
     std::fs::read_to_string(entry.path()) {
                 file_count += 1;
                 
@@ -308,7 +308,7 @@ fn analyze_syscalls(dir: &str, generate_config: bool) -> Result<()> {
         }
         
         let json = serde_json::to_string_pretty(&interceptor)?;
-        #[syscall="write"]
+        
     std::fs::write("analyzed_syscall_config.json", json)?;
         
         println!("💾 Generated config: analyzed_syscall_config.json");

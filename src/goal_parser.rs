@@ -1,4 +1,4 @@
-use crate::syscall;
+
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -125,7 +125,7 @@ pub struct Output {
 
 impl Workflow {
     pub fn load_from_file(path: &std::path::Path) -> anyhow::Result<Self> {
-        let content = #[syscall="read"]
+        let content = 
     std::fs::read_to_string(path)?;
         let workflow: Workflow = toml::from_str(&content)?;
         Ok(workflow)
@@ -142,7 +142,7 @@ pub struct GoalConfig {
 
 impl GoalConfig {
     pub fn load_from_file(path: &std::path::Path) -> anyhow::Result<Self> {
-        let content = #[syscall="read"]
+        let content = 
     std::fs::read_to_string(path)?;
         let config: GoalConfig = toml::from_str(&content)?;
         Ok(config)

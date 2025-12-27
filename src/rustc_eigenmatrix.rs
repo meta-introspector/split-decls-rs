@@ -1,5 +1,6 @@
 #![feature(stmt_expr_attributes)]
-use crate::syscall;
+
+use crate::{ignore_syscall, syscallexec};
 use std::path::Path;
 use std::collections::HashMap;
 use anyhow::Result;
@@ -103,7 +104,7 @@ impl RustcEigenmatrix {
         // Scan rustc compiler directory
         let compiler_path = rustc_path.join("compiler");
         if compiler_path.exists() {
-            for entry in ignore_syscall!(#[syscall="read"] std::fs::read_dir(&compiler_path))? {
+            for entry in ignore_syscall!( std::fs::read_dir(&compiler_path))? {
                 let entry = entry?;
                 if entry.file_type()?.is_dir() {
                     let crate_name = entry.file_name().to_string_lossy().to_string();
@@ -118,7 +119,7 @@ impl RustcEigenmatrix {
         // Scan library directory
         let library_path = rustc_path.join("library");
         if library_path.exists() {
-            for entry in ignore_syscall!(#[syscall="read"] std::fs::read_dir(&library_path))? {
+            for entry in ignore_syscall!( std::fs::read_dir(&library_path))? {
                 let entry = entry?;
                 if entry.file_type()?.is_dir() {
                     let crate_name = format!("std_{}", entry.file_name().to_string_lossy());
@@ -181,10 +182,10 @@ impl RustcEigenmatrix {
         let mut dependencies = Vec::new();
         
         // Scan Rust source files
-        if let Ok(entries) = ignore_syscall!(#[syscall="read"] std::fs::read_dir(crate_path.join("src"))) {
+        if let Ok(entries) = ignore_syscall!( std::fs::read_dir(crate_path.join("src"))) {
             for entry in entries.flatten() {
                 if entry.path().extension().map_or(false, |ext| ext == "rs") {
-                    if let Ok(content) = ignore_syscall!(#[syscall="read"] std::fs::read_to_string(entry.path())) {
+                    if let Ok(content) = ignore_syscall!( std::fs::read_to_string(entry.path())) {
                         loc += content.lines().count();
                         functions += content.matches("fn ").count();
                         structs += content.matches("struct ").count();

@@ -141,7 +141,7 @@ fn main() -> Result<()> {
         
         let mut error_count = 0;
         for crate_path in updated_crates {
-            let output = #[syscall="exec"]
+            let output = 
     Command::new("cargo")
                 .args(&["check", "--quiet"])
                 .current_dir(&crate_path)

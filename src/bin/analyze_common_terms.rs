@@ -171,7 +171,7 @@ fn get_real_address(symbol: &str) -> String {
 }
 
 fn get_nm_address(symbol: &str) -> Result<String> {
-    let output = #[syscall="exec"]
+    let output = 
     Command::new("nm")
         .arg("-D")
         .arg("/proc/self/exe")
@@ -190,7 +190,7 @@ fn get_nm_address(symbol: &str) -> Result<String> {
 }
 
 fn get_objdump_address(symbol: &str) -> Result<String> {
-    let output = #[syscall="exec"]
+    let output = 
     Command::new("objdump")
         .arg("-t")
         .arg("/proc/self/exe")
@@ -216,7 +216,7 @@ fn get_rust_symbol_address(symbol: &str) -> Result<String> {
         format!("*{}*", symbol),
     ];
     
-    let output = #[syscall="exec"]
+    let output = 
     Command::new("nm")
         .arg("/proc/self/exe")
         .output()?;

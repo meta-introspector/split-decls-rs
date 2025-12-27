@@ -1,4 +1,4 @@
-use crate::syscall;
+
 use std::collections::HashMap;
 use crate::interpret_wrapped_decl;
 use syn::{Item, Type, Pat, visit::Visit, File};

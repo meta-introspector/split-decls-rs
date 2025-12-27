@@ -119,7 +119,7 @@ fn generate_probes_from_sparql(kb_file: &str, top_n: usize, output: &str, comple
     
     // Save probes
     let json = serde_json::to_string_pretty(&all_probes)?;
-    #[syscall="write"]
+    
     std::fs::write(output, json)?;
     
     println!("✅ Generated {} probes from SPARQL queries", all_probes.len());
@@ -156,7 +156,7 @@ fn apply_sparql_probes(dir: &str, probes_file: &str, verbose: bool) -> Result<()
 fn generate_sparql_config(output: &str) -> Result<()> {
     let config = create_example_sparql_config();
     let json = serde_json::to_string_pretty(&config)?;
-    #[syscall="write"]
+    
     std::fs::write(output, json)?;
     
     println!("📋 Generated SPARQL configuration: {}", output);
@@ -206,7 +206,7 @@ fn run_interactive_mode(kb_file: &str, target_dir: &str) -> Result<()> {
                 
                 let probes = generator.generate_complexity_wrapper_probes(n);
                 let json = serde_json::to_string_pretty(&probes)?;
-                #[syscall="write"]
+                
     std::fs::write("interactive_probes.json", json)?;
                 
                 println!("✅ Generated {} probes for top {} complex functions", probes.len(), n);
@@ -227,7 +227,7 @@ fn run_interactive_mode(kb_file: &str, target_dir: &str) -> Result<()> {
             }
             
             "4" => {
-                if let Ok(content) = #[syscall="read"]
+                if let Ok(content) = 
     std::fs::read_to_string("interactive_probes.json") {
                     if let Ok(probes) = serde_json::from_str::<Vec<split_decls_rs::ast_reflector::AstProbe>>(&content) {
                         println!("📊 Current probe statistics:");

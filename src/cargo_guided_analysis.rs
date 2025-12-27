@@ -1,4 +1,4 @@
-use crate::syscall;
+
 use std::collections::{HashMap, HashSet};
 use std::path::{Path, PathBuf};
 use serde::{Serialize, Deserialize};
@@ -85,7 +85,7 @@ impl CargoGuidedAnalysis {
             self.create_minimal_cargo_lock()?;
         }
         
-        let lock_content = #[syscall="read"]
+        let lock_content = 
     std::fs::read_to_string(&self.cargo_lock.original_lock)?;
         
         // Simple TOML parsing for Cargo.lock
@@ -170,7 +170,7 @@ version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ijkl9012"
 "#;
-        #[syscall="write"]
+        
     std::fs::write(&self.cargo_lock.original_lock, minimal_lock)?;
         Ok(())
     }
@@ -222,7 +222,7 @@ checksum = "ijkl9012"
     }
 
     fn find_toml_reference(&self, package_name: &str) -> Result<String> {
-        if let Ok(toml_content) = #[syscall="read"]
+        if let Ok(toml_content) = 
     std::fs::read_to_string(&self.cargo_lock.split_decls_toml) {
             if toml_content.contains(package_name) {
                 return Ok(format!("Referenced in split-decls-rs.toml"));
@@ -233,10 +233,10 @@ checksum = "ijkl9012"
 
     fn find_bootstrap_reference(&self, package_name: &str) -> Result<String> {
         let bootstrap_path = self.root_path.join("submodules/split-decls-rs/src");
-        if let Ok(entries) = #[syscall="read"]
+        if let Ok(entries) = 
     std::fs::read_dir(bootstrap_path) {
             for entry in entries.flatten() {
-                if let Ok(content) = #[syscall="read"]
+                if let Ok(content) = 
     std::fs::read_to_string(entry.path()) {
                     if content.contains(package_name) {
                         return Ok(format!("Found in {}", entry.file_name().to_string_lossy()));
@@ -250,7 +250,7 @@ checksum = "ijkl9012"
     fn find_output2_reference(&self, package_name: &str) -> Result<String> {
         let output2_path = self.root_path.join("submodules/split-decls-rs/output2");
         if output2_path.exists() {
-            if let Ok(entries) = #[syscall="read"]
+            if let Ok(entries) = 
     std::fs::read_dir(&output2_path) {
                 for entry in entries.flatten() {
                     let wrapped_name = format!("wrapped-{}", package_name);
@@ -273,7 +273,7 @@ checksum = "ijkl9012"
         }
         
         // Try cargo build --dry-run, fallback to simulated output
-        let output = std::process::#[syscall="exec"]
+        let output = std::process::
     Command::new("cargo")
             .args(&["build", "--dry-run", "-v"])
             .current_dir(crate_path)
@@ -325,7 +325,7 @@ checksum = "ijkl9012"
         // Extract dependencies from Cargo.toml
         let mut dependencies = Vec::new();
         
-        if let Ok(toml_content) = #[syscall="read"]
+        if let Ok(toml_content) = 
     std::fs::read_to_string(&cargo_toml_path) {
             if let Ok(toml_value) = toml_content.parse::<toml::Value>() {
                 if let Some(deps) = toml_value.get("dependencies").and_then(|d| d.as_table()) {
@@ -382,7 +382,7 @@ checksum = "ijkl9012"
         // Analyze output2 crates
         let output2_path = self.root_path.join("submodules/split-decls-rs/output2");
         if output2_path.exists() {
-            if let Ok(entries) = #[syscall="read"]
+            if let Ok(entries) = 
     std::fs::read_dir(&output2_path) {
                 for entry in entries.flatten() {
                     if entry.path().is_dir() {
@@ -439,7 +439,7 @@ checksum = "ijkl9012"
 
     pub fn save_preservation_report(&self, path: &str) -> Result<()> {
         let json = serde_json::to_string_pretty(&self.cargo_lock)?;
-        #[syscall="write"]
+        
     std::fs::write(path, json)?;
         
         // Also create a summary report
@@ -469,7 +469,7 @@ checksum = "ijkl9012"
             summary.push_str("\n");
         }
         
-        #[syscall="write"]
+        
     std::fs::write(path.replace(".json", "_summary.md"), summary)?;
         Ok(())
     }

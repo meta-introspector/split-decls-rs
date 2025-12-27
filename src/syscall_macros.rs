@@ -1,2 +1,17 @@
 // Re-export syscall macros from separate proc-macro crate
-pub use split_decls_syscall_macros::*;
+// pub use split_decls_syscall_macros::*;
+
+// Define stub macros to replace syscall functionality
+#[macro_export]
+macro_rules! ignore_syscall {
+    ($($tt:tt)*) => {
+        $($tt)*
+    };
+}
+
+#[macro_export]
+macro_rules! syscallexec {
+    ($($tt:tt)*) => {
+        $($tt)*
+    };
+}

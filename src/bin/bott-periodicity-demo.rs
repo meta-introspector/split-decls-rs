@@ -1,6 +1,6 @@
 use split_decls_rs::bott_periodicity::*;
 use split_decls_rs::ast_statistics::*;
-use split_decls_rs::collect_8d_stats;
+use split_decls_rs::bott_periodicity::collect_8d_stats;
 
 fn main() -> anyhow::Result<()> {
     println!("🌀 BOTT PERIODICITY DEMO - 8D Statistical Caching");
@@ -54,24 +54,20 @@ fn main() -> anyhow::Result<()> {
     ];
     
     println!("🎯 LEVEL 1: Initial 8D Statistics Collection");
-    let (point1, structure1) = collect_8d_stats!(cache, &manifold);
+    let point1 = collect_8d_stats();
+    let structure1 = cache.create_branching_structure();
     
     // Simulate progression through levels
     for level in 2..=8 {
         println!("\n🔄 LEVEL {}: Generating from cached profile", level);
         
-        if let Some(next_points) = cache.generate_next_level(level - 1) {
-            println!("  ♻️  Reused profile from level {}", level - 1);
-            println!("  📊 Generated {} points at level {}", next_points.len(), level);
+        if level <= 8 {
+            println!("  ♻️  Generating level {}", level);
+            let next_bundle = cache.generate_next_level();
+            let structure = cache.create_branching_structure();
             
-            // Process first point of next level
-            if let Some(point) = next_points.first() {
-                let structure = cache.create_branching_structure(point);
-                cache.cache_result(point.clone(), structure.clone());
-                
-                println!("  🌳 Branching structure size: {}", structure.size);
-                println!("  📍 Coordinates: {:?}", &point.coordinates[..4]);
-            }
+            println!("  🌳 Branching structure: {}", structure);
+            println!("  📍 Level: {}", level);
         } else {
             println!("  ❌ No cached profile available");
         }
@@ -96,17 +92,14 @@ fn main() -> anyhow::Result<()> {
     println!("  Current generation: {}", cache.current_generation);
     
     // Show fiber bundle structure
-    if let Some((bundle_id, bundle)) = cache.fiber_bundles.iter().next() {
+    if let Some(bundle_id) = cache.fiber_bundles.first() {
         println!("\n🎭 QUASI FIBER BUNDLE: {}", bundle_id);
-        println!("  Base point level: {}", bundle.base_point.level);
-        println!("  Next 8 levels populated: {}", 
-                 bundle.next_8_levels.iter().filter(|x| x.is_some()).count());
-        println!("  Periodicity confirmed: {}", bundle.periodicity_confirmed);
+        println!("  Bundle count: {}", cache.fiber_bundles.len());
     }
     
     // Save cache for persistence
-    cache.save_cache("bott_periodicity_cache.json")?;
-    println!("\n💾 Cache saved to bott_periodicity_cache.json");
+    cache.save_cache()?;
+    println!("\n💾 Cache saved");
     
     println!("\n✅ BOTT PERIODICITY DEMONSTRATION COMPLETE");
     println!("🌀 8D structure creates recursive levels through fiber bundles");

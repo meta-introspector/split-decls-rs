@@ -21,7 +21,7 @@ fn main() -> Result<()> {
     println!("Generating wrapped crate for: {}", args.crate_path);
     
     // 1. Run single crate wrapper
-    let output = #[syscall="exec"]
+    let output = 
     Command::new("make")
         .arg("run_single_crate")
         .arg(&format!("CRATE={}", args.crate_path))

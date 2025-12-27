@@ -1,4 +1,4 @@
-use crate::syscall;
+// 
 use std::collections::HashMap;
 use serde::{Serialize, Deserialize};
 use anyhow::Result;
@@ -357,7 +357,7 @@ theorem eight_d_structure_is_conformal_map :
 
     pub fn save_simulation(&self, path: &str) -> Result<()> {
         let json = serde_json::to_string_pretty(self).map_err(|e| anyhow::anyhow!(e))?;
-        #[syscall="write"]
+        
     std::fs::write(path, json).map_err(|e| anyhow::anyhow!(e))?;
         Ok(())
     }

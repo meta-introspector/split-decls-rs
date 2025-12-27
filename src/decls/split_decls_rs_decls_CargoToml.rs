@@ -1,6 +1,6 @@
 use std::path::Path;
 use anyhow::Result;
-use split_decls_types::SplitDeclsConfig;
+// use split_decls_types::SplitDeclsConfig;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct CargoToml {

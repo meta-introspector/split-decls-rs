@@ -8,7 +8,7 @@ use quote::quote;
 use split_decls_rs::syn2macro::{Syn2MacroConverter, DefaultSecurity, StrictSecurity, AstOperation};
 
 fn main() -> Result<()> {
-    let matches = #[syscall="exec"]
+    let matches = 
     Command::new("syn2macro")
         .version("0.1.0")
         .about("Convert syn-based code to universal trait-based macros")

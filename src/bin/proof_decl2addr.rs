@@ -38,7 +38,7 @@ fn real_address_lookup(decl_name: &str) -> String {
 
 /// Get symbol address from debug symbols
 fn get_symbol_address(symbol: &str) -> Result<String> {
-    let output = #[syscall="exec"]
+    let output = 
     Command::new("nm")
         .arg("-D")
         .arg("/proc/self/exe") // Current binary
@@ -61,7 +61,7 @@ fn get_symbol_address(symbol: &str) -> Result<String> {
 /// Get runtime address from loaded symbols
 fn get_runtime_address(symbol: &str) -> Result<String> {
     // Try objdump on current process
-    let output = #[syscall="exec"]
+    let output = 
     Command::new("objdump")
         .arg("-t")
         .arg("/proc/self/exe")
@@ -84,7 +84,7 @@ fn get_runtime_address(symbol: &str) -> Result<String> {
 /// Get address from binary symbols
 fn get_binary_address(symbol: &str) -> Result<String> {
     // Use readelf to get symbol table
-    let output = #[syscall="exec"]
+    let output = 
     Command::new("readelf")
         .arg("-s")
         .arg("/proc/self/exe")

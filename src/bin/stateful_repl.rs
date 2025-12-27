@@ -72,7 +72,7 @@ impl ReplState {
         };
         
         // Fetch content (simplified - in production use reqwest)
-        let content = std::process::#[syscall="exec"]
+        let content = std::process::
     Command::new("curl")
             .arg("-s")
             .arg(&raw_url)

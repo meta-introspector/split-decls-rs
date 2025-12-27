@@ -1,4 +1,4 @@
-use crate::syscall;
+
 use anyhow::{Context, Result};
 use proc_macro2::{Ident, Span, TokenStream}; // Added LineColumn
 use crate::process_module_recursivly::process_module_recursively;
@@ -28,7 +28,7 @@ fn find_all_rust_files(src_dir: &std::path::Path) -> Result<Vec<std::path::PathB
         return Ok(rust_files);
     }
     
-    for entry in #[syscall="read"]
+    for entry in 
     std::fs::read_dir(src_dir)? {
         let entry = entry?;
         let path = entry.path();
@@ -232,7 +232,7 @@ pub fn copy_declarations_to_output(
 
         match format_rust_file(&initial_content, &file_path) {
             Ok(formatted_content) => {
-                #[syscall="write"]
+                
     std::fs::write(&file_path, formatted_content)
                     .context(format!("Failed to write formatted declaration to {}", file_path.display()))?;
             },
@@ -243,7 +243,7 @@ pub fn copy_declarations_to_output(
                     e
                 );
                 let content_with_error_comment = error_comment + &initial_content;
-                #[syscall="write"]
+                
     std::fs::write(&file_path, content_with_error_comment)
                     .context(format!("Failed to write unformatted declaration with error comment to {}", file_path.display()))?;
                 error!("\n<blip style='color:red'>Formatting error for '{} {}' (written to {})</blip>", "declaration", decl_name, file_path.display());

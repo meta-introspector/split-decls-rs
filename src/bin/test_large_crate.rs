@@ -13,7 +13,7 @@ fn main() -> anyhow::Result<()> {
     
     eager_splitter::eager_split_crate(&paths, &config)?;
     
-    let decl_count = #[syscall="read"]
+    let decl_count = 
     std::fs::read_dir(&paths.decls_output_dir)?.count();
     println!("✅ Generated {} declaration files!", decl_count);
     

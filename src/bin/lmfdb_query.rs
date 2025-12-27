@@ -82,7 +82,7 @@ impl LMFDBQuery {
 
 fn main() -> Result<()> {
     // Load K-theory index
-    let index_content = #[syscall="read"]
+    let index_content = 
     std::fs::read_to_string("k_theory_index.json")?;
     let index: serde_json::Value = serde_json::from_str(&index_content)?;
     

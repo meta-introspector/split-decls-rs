@@ -1,4 +1,4 @@
-use crate::syscall;
+
 use anyhow::{Context, Result};
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
@@ -328,7 +328,7 @@ impl WorkflowExecutor {
         let program = command_parts.next().context("Shell command cannot be empty")?;
         let args = command_parts;
 
-        let mut command = #[syscall="exec"]
+        let mut command = 
     Command::new(program);
         command.args(args);
 
