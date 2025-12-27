@@ -1,0 +1,85 @@
+use anyhow::Result;
+use bootstrap2::Bootstrap2Auditor;
+use std::env;
+
+fn main() -> Result<()> {
+    let args: Vec<String> = env::args().collect();
+    
+    if args.len() < 2 {
+        println!("Bootstrap2: Audited reconstruction of split-decls-rs");
+        println!("Usage:");
+        println!("  {} audit                    - Run full audit", args[0]);
+        println!("  {} emulate <function_name>  - Emulate specific function", args[0]);
+        println!("  {} main <entry_point>       - Step through main routine with RDF", args[0]);
+        println!("  {} workflow                 - Debug complete workflow", args[0]);
+        println!("  {} workflow --debug         - Debug workflow with step control", args[0]);
+        return Ok(());
+    }
+    
+    match args[1].as_str() {
+        "audit" => {
+            let mut auditor = Bootstrap2Auditor::new(false);
+            auditor.audit_core_functions()?;
+            println!("\nAudit completed successfully!");
+            println!("Audit log entries: {}", auditor.get_audit_log().len());
+        }
+        "emulate" => {
+            if args.len() < 3 {
+                println!("Error: Function name required for emulate command");
+                return Ok(());
+            }
+            
+            let function_name = &args[2];
+            let slow_mode = args.contains(&"--slow".to_string());
+            
+            println!("Bootstrap2: Emulating function '{}'", function_name);
+            if slow_mode {
+                println!("🐌 Slow mode enabled - press Enter to step through");
+            }
+            
+            let mut auditor = Bootstrap2Auditor::new(slow_mode);
+            auditor.emulate_function(function_name)?;
+            
+            println!("\nEmulation completed!");
+            println!("Total log entries: {}", auditor.get_audit_log().len());
+        }
+        "main" => {
+            if args.len() < 3 {
+                println!("Error: Entry point required for main command");
+                return Ok(());
+            }
+            
+            let entry_point = &args[2];
+            
+            println!("Bootstrap2: Interpreting main routine '{}'", entry_point);
+            println!("🧠 Using RDF-backed step-by-step execution");
+            
+            let mut auditor = Bootstrap2Auditor::new(true); // Always use interactive mode for main
+            auditor.interpret_main_routine(entry_point)?;
+            
+            println!("\nMain routine interpretation completed!");
+            println!("Total log entries: {}", auditor.get_audit_log().len());
+        }
+        "workflow" => {
+            let debug_mode = args.contains(&"--debug".to_string());
+            
+            println!("Bootstrap2: Debugging complete split-decls-rs workflow");
+            if debug_mode {
+                println!("🔍 Debug mode enabled - interactive step control");
+                println!("Controls: Enter=continue, s=skip step, q=quit");
+            }
+            
+            let mut auditor = Bootstrap2Auditor::new(debug_mode);
+            auditor.debug_full_workflow()?;
+            
+            println!("\nWorkflow debugging completed!");
+            println!("Total log entries: {}", auditor.get_audit_log().len());
+        }
+        _ => {
+            println!("Unknown command: {}", args[1]);
+            println!("Use 'audit', 'emulate <function_name>', 'interpret <function_name>', or 'workflow'");
+        }
+    }
+    
+    Ok(())
+}

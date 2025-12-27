@@ -1,0 +1,18 @@
+[package]
+name = "bootstrap2"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+anyhow = "1.0"
+syn = { version = "2.0", features = ["full", "visit"] }
+quote = "1.0"
+proc-macro2 = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+
+# Use individual declaration modules instead of full wrapped crate
+# [dependencies.split-decls-rs]
+# path = "../output2/wrapped-split-decls-rs"

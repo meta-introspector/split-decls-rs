@@ -1,0 +1,191 @@
+use anyhow::Result;
+use std::path::Path;
+
+mod analyzer;
+mod emulator;
+mod workflow;
+mod syn_interpreter;
+mod rdf_syn_interpreter;
+
+use analyzer::{DeclarationAnalyzer, DeclarationStats};
+use emulator::EmulatedExecutor;
+use workflow::WorkflowExecutor;
+use syn_interpreter::{SynInterpreter, SynValue};
+use rdf_syn_interpreter::RdfSynInterpreter;
+
+/// Bootstrap2: Audited reconstruction of split-decls-rs using generated declarations
+pub struct Bootstrap2Auditor {
+    audit_log: Vec<String>,
+    analyzer: Option<DeclarationAnalyzer>,
+    emulator: EmulatedExecutor,
+    workflow: WorkflowExecutor,
+    interpreter: SynInterpreter,
+    rdf_interpreter: RdfSynInterpreter,
+}
+
+impl Bootstrap2Auditor {
+    pub fn new(slow_mode: bool) -> Self {
+        Self {
+            audit_log: Vec::new(),
+            analyzer: None,
+            emulator: EmulatedExecutor::new(slow_mode),
+            workflow: WorkflowExecutor::new(slow_mode),
+            interpreter: SynInterpreter::new(),
+            rdf_interpreter: RdfSynInterpreter::new(),
+        }
+    }
+
+    /// Execute the main routine step-by-step with RDF state tracking
+    pub fn interpret_main_routine(&mut self, entry_point: &str) -> Result<()> {
+        self.log(&format!("🧠 Starting RDF-backed interpretation of main routine: {}", entry_point));
+        
+        // Load declarations into RDF interpreter
+        let decls_path = Path::new("../output2/wrapped-split-decls-rs/src/decls");
+        self.rdf_interpreter.load_main_routine(decls_path)?;
+        
+        // Execute step by step
+        self.rdf_interpreter.interpret_main_step_by_step(entry_point)?;
+        
+        // Export final RDF state
+        let turtle = self.rdf_interpreter.export_rdf_turtle();
+        std::fs::write("main_execution_trace.ttl", turtle)?;
+        self.log("💾 Saved execution trace to main_execution_trace.ttl");
+        
+        Ok(())
+    }
+
+    /// Execute functions using the syn interpreter
+    pub fn interpret_function(&mut self, function_name: &str) -> Result<()> {
+        self.log(&format!("🧠 Starting syn interpretation of: {}", function_name));
+        
+        // Load declarations into interpreter
+        let decls_path = Path::new("../output2/wrapped-split-decls-rs/src/decls");
+        self.interpreter.load_declarations(decls_path)?;
+        
+        // Execute the function
+        let args = vec![]; // Start with no args for now
+        let result = self.interpreter.execute_function(function_name, args)?;
+        
+        self.log(&format!("✅ Interpretation result: {:?}", result));
+        Ok(())
+    }
+
+    /// Execute the complete split-decls-rs workflow with debugging
+    pub fn debug_full_workflow(&mut self) -> Result<()> {
+        self.log("🎯 Starting full workflow debugging");
+        self.workflow.execute_full_workflow()?;
+        
+        // Merge workflow logs
+        for log_entry in self.workflow.get_audit_log() {
+            self.audit_log.push(log_entry.clone());
+        }
+        
+        Ok(())
+    }
+
+    /// Execute a specific function from split-decls-rs in emulated mode
+    pub fn emulate_function(&mut self, function_name: &str) -> Result<()> {
+        self.log(&format!("🚀 Starting emulated execution of function: {}", function_name));
+        self.emulator.execute_function(function_name)?;
+        
+        // Merge emulator logs
+        for log_entry in self.emulator.get_audit_log() {
+            self.audit_log.push(log_entry.clone());
+        }
+        
+        Ok(())
+    }
+
+    /// Audit and reconstruct core functionality piece by piece
+    pub fn audit_core_functions(&mut self) -> Result<()> {
+        self.log("Starting Bootstrap2 audit");
+        
+        // Initialize analyzer
+        let decls_path = Path::new("../output2/wrapped-split-decls-rs/src/decls");
+        if decls_path.exists() {
+            self.analyzer = Some(DeclarationAnalyzer::new(decls_path));
+            self.audit_generated_declarations()?;
+            self.audit_bootstrap_functions()?;
+            self.audit_function_patterns()?;
+        } else {
+            self.log("Generated declarations directory not found");
+        }
+        
+        Ok(())
+    }
+
+    fn audit_generated_declarations(&mut self) -> Result<()> {
+        self.log("Auditing generated declarations");
+        
+        if let Some(analyzer) = &self.analyzer {
+            let stats = analyzer.get_statistics()?;
+            self.log(&format!("Declaration Statistics:"));
+            self.log(&format!("  Total files: {}", stats.total_files));
+            self.log(&format!("  Function files: {}", stats.function_files));
+            self.log(&format!("  Struct files: {}", stats.struct_files));
+            self.log(&format!("  Enum files: {}", stats.enum_files));
+        }
+        
+        Ok(())
+    }
+
+    fn audit_bootstrap_functions(&mut self) -> Result<()> {
+        self.log("Auditing bootstrap functions");
+        
+        if let Some(analyzer) = &self.analyzer {
+            let bootstrap_files = analyzer.analyze_bootstrap_declarations()?;
+            self.log(&format!("Found {} bootstrap-related files:", bootstrap_files.len()));
+            for file in bootstrap_files.iter().take(5) {
+                self.log(&format!("  - {}", file));
+            }
+            if bootstrap_files.len() > 5 {
+                self.log(&format!("  ... and {} more", bootstrap_files.len() - 5));
+            }
+        }
+        
+        Ok(())
+    }
+
+    fn audit_function_patterns(&mut self) -> Result<()> {
+        self.log("Auditing key function patterns");
+        
+        let patterns = ["generate_", "process_", "run_", "setup_"];
+        
+        for pattern in patterns {
+            if let Some(analyzer) = &self.analyzer {
+                let functions = analyzer.analyze_function_declarations(pattern)?;
+                if !functions.is_empty() {
+                    let msg = format!("Functions matching '{}': {}", pattern, functions.len());
+                    self.log(&msg);
+                    for (file, signature) in functions.iter().take(3) {
+                        let detail = format!("  {} -> {}", file, signature);
+                        self.log(&detail);
+                    }
+                }
+            }
+        }
+        
+        Ok(())
+    }
+
+    fn log(&mut self, message: &str) {
+        println!("[AUDIT] {}", message);
+        self.audit_log.push(message.to_string());
+    }
+
+    pub fn get_audit_log(&self) -> &[String] {
+        &self.audit_log
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_bootstrap2_audit() {
+        let mut auditor = Bootstrap2Auditor::new();
+        auditor.audit_core_functions().unwrap();
+        assert!(!auditor.get_audit_log().is_empty());
+    }
+}
