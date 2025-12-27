@@ -4,7 +4,10 @@ use anyhow::{Context, Result};
 use split_decls_types::SplitDeclsConfig;
 
 #[macro_use]
+pub mod trace_header;
 pub mod config_macros;
+pub mod line_counter;
+pub mod cargo_feature_fixer;
 pub mod process_module_recursivly;
 pub mod macro_analyzer_parts;
 #[macro_use]
@@ -45,6 +48,7 @@ pub mod syscall_macros;
 pub mod syscall_traits;
 pub mod syscall_prelude;
 pub mod syscall;
+pub mod syn_cache;
 pub mod syscall_compat;
 
 // Re-export syscall functionality

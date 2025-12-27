@@ -110,7 +110,7 @@ impl SparqlProbeGenerator {
     
     fn get_functions_above_complexity(&self, threshold: f64, limit: usize) -> Vec<ComplexityResult> {
         let mut results: Vec<_> = self.rdf_data.iter()
-            .filter(|(_, &complexity)| complexity >= threshold)
+            .filter(|&(_, &complexity)| complexity >= threshold)
             .map(|(name, &complexity)| ComplexityResult {
                 function_name: name.clone(),
                 complexity,
@@ -126,7 +126,7 @@ impl SparqlProbeGenerator {
     
     fn get_high_frequency_functions(&self, min_freq: usize, limit: usize) -> Vec<ComplexityResult> {
         let mut results: Vec<_> = self.frequency_data.iter()
-            .filter(|(_, &freq)| freq >= min_freq)
+            .filter(|&(_, &freq)| freq >= min_freq)
             .map(|(name, &frequency)| ComplexityResult {
                 function_name: name.clone(),
                 complexity: self.rdf_data.get(name).copied().unwrap_or(0.0),

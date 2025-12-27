@@ -8,19 +8,25 @@ use syn::{self, Item};
 use crate::buildrs_ast_utils::ExtractedDecl;
 use crate::CratePaths;
 use crate::add_generated_rust_header;
+use crate::line_counter::{LineCountReport, count_lines_in_string};
 use split_decls_types::SplitDeclsConfig;
 
 /// Iterates through the AST, extracts individual declarations, and writes them to separate files.
-/// Returns a vector of Identifiers for the collected module names.
+/// Returns a vector of Identifiers for the collected module names and a line count report.
 pub fn extract_and_write_declarations(
     syntax_tree: &syn::File,
     paths: &CratePaths,
     config: &SplitDeclsConfig,
     dry_run: bool,
     common_uses: TokenStream,
-) -> Result<Vec<Ident>> {
+) -> Result<(Vec<Ident>, LineCountReport)> {
     let mut collected_module_names: Vec<Ident> = Vec::new();
     let mut item_count = 0; // For generating unique names for impls without explicit paths
+    let mut report = LineCountReport::new();
+    
+    // Count input lines
+    let input_content = std::fs::read_to_string(&paths.old_lib_rs_path)?;
+    report.add_input_lines(count_lines_in_string(&input_content));
 
     // Extract and split declarations
     for item in &syntax_tree.items { // Iterate over references since we don't need to consume them here
@@ -84,20 +90,24 @@ pub fn extract_and_write_declarations(
                 content: item_union.to_token_stream(),
             }),
             Item::Use(item_use) => {
-                println!("Skipping top-level use statement in splitting: {}", item_use.to_token_stream());
+                let content = item_use.to_token_stream().to_string();
+                report.add_skipped_item("use".to_string(), "top-level use statements handled separately".to_string(), &content);
                 None
             },
             Item::Macro(item_macro) => {
-                println!("Including top-level macro invocation: {}", item_macro.mac.path.to_token_stream());
-                None // Macros are not treated as separate decls but as part of the overall file content
+                let content = item_macro.to_token_stream().to_string();
+                // PANIC: All code must be emitted - macros should be processed
+                panic!("UNHANDLED MACRO: {} - All code must be emitted, no skipping allowed", content);
             },
             Item::Mod(item_mod) => {
-                println!("Skipping top-level module: {}", item_mod.ident);
-                None
+                let content = item_mod.to_token_stream().to_string();
+                // PANIC: All code must be emitted - modules should be processed recursively
+                panic!("UNHANDLED MODULE: {} - All code must be emitted, modules should be processed recursively", item_mod.ident);
             }
             _ => {
-                println!("Skipping unsupported item type: {}", item.to_token_stream());
-                None
+                let content = item.to_token_stream().to_string();
+                // PANIC: All code must be emitted - no unsupported types allowed
+                panic!("UNSUPPORTED ITEM TYPE: {} - All code must be emitted, implement handler for this type", content);
             }
         };
 
@@ -134,6 +144,9 @@ pub fn extract_and_write_declarations(
                     line!()
                 );
 
+                // Count output lines
+                report.add_output_lines(count_lines_in_string(&initial_content));
+
                 match crate::rustfmt_utils::format_rust_file(&initial_content, &decl_file_path) {
                     Ok(formatted_content) => {
                         fs::write(&decl_file_path, formatted_content)
@@ -148,6 +161,13 @@ pub fn extract_and_write_declarations(
                         let content_with_error_comment = error_comment + &initial_content;
                         fs::write(&decl_file_path, content_with_error_comment)
                             .context(format!("Failed to write unformatted declaration with error comment to {}", decl_file_path.display()))?;
+                        
+                        // Report formatting error
+                        report.add_error_item(
+                            decl.kind.clone(),
+                            format!("Formatting failed: {}", e),
+                            &initial_content
+                        );
                         error!("\n<blip style='color:red'>Formatting error for '{} {}' (written to {})</blip>", decl.kind, decl.name, decl_file_path.display());
                     }
                 }
@@ -160,8 +180,12 @@ pub fn extract_and_write_declarations(
                     decl_file_path.display()
                 );
             }
+            
+            report.add_processed_item();
         }
         item_count += 1;
     }
-    Ok(collected_module_names)
+    
+    report.print_summary();
+    Ok((collected_module_names, report))
 }

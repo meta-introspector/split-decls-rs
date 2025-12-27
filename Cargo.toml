@@ -1,9 +1,12 @@
 [package]
 name = "split-decls-rs"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 authors = []
-build = "build.rs"
+
+[features]
+default = ["tokio_unstable"]
+tokio_unstable = []
 
 [[bin]]
 name = "rdf_cli"

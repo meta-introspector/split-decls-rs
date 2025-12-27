@@ -59,14 +59,16 @@ pub fn handle_single_crate_wrapping(
                     }
                 }
 
-                // If it's a workspace dependency, it should be in workspace_dependencies_output_map.
-                // Replace the reference in the current dependency group with `workspace = true`.
+                // Only use workspace = true for dependencies that are actually in workspace_dependencies_output_map
+                // This prevents errors for external dependencies that aren't defined in [workspace.dependencies]
                 if workspace_dependencies_output_map.contains_key(dep_name) {
                     output_map.insert(dep_name.clone(), toml::Value::Table(Table::from_iter(vec![("workspace".to_string(), Value::Boolean(true))] )) );
                 } else if is_workspace_dep_ref {
                     // If it explicitly said `workspace = true` but is not in our collected workspace_dependencies,
-                    // keep it as-is. This might lead to a Cargo error if not globally defined.
-                    output_map.insert(dep_name.clone(), dep_value_clone);
+                    // convert it back to a regular dependency to avoid Cargo errors
+                    if let Some(original_dep) = deps_table.get(dep_name) {
+                        output_map.insert(dep_name.clone(), original_dep.clone());
+                    }
                 }
                 else {
                     // Regular direct dependency

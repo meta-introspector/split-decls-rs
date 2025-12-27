@@ -38,66 +38,16 @@ pub fn process_module_recursively(
     } else if mod_file2.exists() {
         mod_file2
     } else {
-        // Collect the error instead of printing
-        let crate_name_sanitized = paths.crate_name.replace("-", "_").replace(".", "_");
-        let error_message = format!("Module file not found for: {}", mod_name);
-        let error_module_name_str = format!("{}_decls_module_not_found_{}", crate_name_sanitized, sanitized_mod_name);
-        let decl_file_path = paths.decls_output_dir.join(format!("{}.rs", error_module_name_str));
-
-        module_not_found_errors.push(ModuleNotFoundReport {
-            crate_name: crate_name_sanitized.clone(),
-            module_name: mod_name.to_string(),
-            error_message: error_message.clone(),
-            generated_file_path: decl_file_path.clone(),
-        });
-        
-        let error_module_name_ident = Ident::new(&error_module_name_str, Span::call_site());
-        collected_module_names.push(error_module_name_ident.clone());
-
-        let error_message_lit = LitStr::new(&error_message, Span::call_site());
-        let crate_name_sanitized_lit = LitStr::new(&crate_name_sanitized, Span::call_site());
-        let mod_name_lit = LitStr::new(mod_name, Span::call_site());
-
-        let error_output_tokens = quote! {
-            #[llm_error_message(
-                message = #error_message_lit
-            )]
-            #[llm_context(
-                crate_name = #crate_name_sanitized_lit,
-                module_name = #mod_name_lit
-            )]
-            pub struct #error_module_name_ident;
-        };
-
-        if !dry_run {
-            let initial_content = add_generated_rust_header!(
-                error_output_tokens.to_string().as_str(),
-                file!(),
-                line!()
-            );
-            match format_rust_file(&initial_content, &decl_file_path) {
-                Ok(formatted_content) => {
-                    fs::write(&decl_file_path, formatted_content)
-                        .context(format!("Failed to write formatted module not found error to {}", decl_file_path.display()))?;
-                },
-                Err(e) => {
-                    let error_comment = format!(
-                        "// !!! Formatting failed for this module. The following code is unformatted. !!!\n\
-                        // !!! Error: {} !!!\n\n",
-                        e
-                    );
-                    let content_with_error_comment = error_comment + &initial_content;
-                    fs::write(&decl_file_path, content_with_error_comment)
-                        .context(format!("Failed to write unformatted module not found error with comment to {}", decl_file_path.display()))?;
-                    error!("\n<blip style='color:red'>Formatting error for module not found '{}' (written to {})</blip>", mod_name, decl_file_path.display());
-                }
-            }
-        } else {
-            // No need to print in dry-run, as it will be in the summary
+        // Check if this is a test/conditional module that can be skipped
+        if mod_name.contains("test") || mod_name.contains("private") || mod_name.starts_with("_") {
+            println!("⚠️  SKIPPED TEST/PRIVATE MODULE: {} (not found at {} or {})", 
+                     mod_name, mod_file1.display(), mod_file2.display());
+            return Ok(());
         }
-
-        *item_count += 1;
-        return Ok(());
+        
+        // PANIC: All code must be emitted - missing modules should be handled
+        panic!("MISSING MODULE: {} (not found at {} or {}) - All code must be emitted, ensure module exists or handle conditionally", 
+               mod_name, mod_file1.display(), mod_file2.display());
     };
     
     let mod_content = fs::read_to_string(&mod_file)

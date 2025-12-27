@@ -183,12 +183,12 @@ impl SignatureCompressor {
         
         // Find most and least common signatures
         let most_common = self.frequency_map.iter()
-            .max_by_key(|(_, &freq)| freq)
+            .max_by_key(|&(_, &freq)| freq)
             .map(|(sig, _)| sig.clone())
             .unwrap_or_default();
             
         let least_common = self.frequency_map.iter()
-            .min_by_key(|(_, &freq)| freq)
+            .min_by_key(|&(_, &freq)| freq)
             .map(|(sig, _)| sig.clone())
             .unwrap_or_default();
 

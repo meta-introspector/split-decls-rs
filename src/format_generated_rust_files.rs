@@ -8,10 +8,14 @@ use walkdir::WalkDir;
 pub fn format_generated_rust_files(output_dir: &Path, verbose: bool) -> Result<()> {
     if verbose {
         println!(
-            "DEBUG: Formatting generated Rust files in {}",
+            "DEBUG: Skipping rustfmt formatting in {} (disabled due to edition issues)",
             output_dir.display()
         );
     }
+    // Rustfmt disabled to avoid edition compatibility issues
+    Ok(())
+    
+    /* Original rustfmt code disabled:
     for entry in WalkDir::new(output_dir).into_iter().filter_map(|e| e.ok()) {
         let path = entry.path();
         if path.is_file() && path.extension().map_or(false, |ext| ext == "rs") {
@@ -29,4 +33,5 @@ pub fn format_generated_rust_files(output_dir: &Path, verbose: bool) -> Result<(
         }
     }
     Ok(())
+    */
 }

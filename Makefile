@@ -1,4 +1,4 @@
-.PHONY: build scanner repl clean
+.PHONY: build scanner repl clean perf_record perf_report perf_functions
 
 # Use sccache for faster builds
 SCCACHE := /home/mdupont/.cargo/bin/sccache
@@ -6,11 +6,47 @@ export RUSTC_WRAPPER=$(SCCACHE)
 
 # Build all binaries once
 build:
-	cargo build --bins
+	RUSTC_WRAPPER=$(SCCACHE) cargo build --bins
+
+# Build split-decls-rs specifically  
+build_split_decls:
+	RUSTC_WRAPPER=$(SCCACHE) cargo build --bin split-decls-rs
 
 # Build output2-wrapper specifically
 build_output2_wrapper:
 	cargo build --bin output2-wrapper
+
+# Step 1: Update split-decls-rs.toml configuration
+step1_update_config:
+	@echo "Step 1: Updating configuration..."
+	@cargo run --bin update_split_decls_config -- --split-decls-config-path split-decls-rs.toml > step1_update_config.log 2>&1
+	@echo "✅ Step 1 complete - logs saved to step1_update_config.log"
+
+# Step 2: Run bootstrap process
+step2_bootstrap:
+	@echo "Step 2: Running bootstrap..."
+	@cargo run --bin split-decls-rs -- bootstrap > step2_bootstrap.log 2>&1
+	@echo "✅ Step 2 complete - logs saved to step2_bootstrap.log"
+
+# Step 3: Build output2 workspace
+step3_build_output2:
+	@echo "Step 3: Building output2 workspace..."
+	@cd output2 && cargo build > ../step3_build_output2.log 2>&1
+	@echo "✅ Step 3 complete - logs saved to step3_build_output2.log"
+
+# Chain all steps together
+bootstrap_chain_steps: step1_update_config step2_bootstrap step3_build_output2
+	@echo "=== BOOTSTRAP CHAIN COMPLETE ==="
+	@echo "All logs saved to: step1_update_config.log, step2_bootstrap.log, step3_build_output2.log"
+	@echo "=== SUMMARY ==="
+	@echo "Step 1 errors:" && (grep -E "(error|Error|failed|Failed)" step1_update_config.log | head -5 || echo "No errors")
+	@echo "Step 2 errors:" && (grep -E "(error|Error|failed|Failed)" step2_bootstrap.log | head -5 || echo "No errors") 
+	@echo "Step 3 errors:" && (grep -E "(error|Error|failed|Failed)" step3_build_output2.log | head -5 || echo "No errors")
+
+# Legacy targets (keep for compatibility)
+update_config: step1_update_config
+bootstrap_chain: bootstrap_chain_steps
+bootstrap_quiet: bootstrap_chain_steps
 
 # Run 8-level K-theory dependency analysis
 ktheory:
@@ -32,9 +68,9 @@ proof-quiet:
 	@cargo build --bin lean4_proof_system_simple -q 2>/dev/null || echo "Build failed"
 	@../../target/debug/lean4_proof_system_simple 2>/dev/null || echo "Execution failed"
 
-# Run bootstrap with split-decls-rs
+# Run bootstrap with split-decls-rs (no building)
 run_bootstrap:
-	@echo "Running bootstrap with sccache..." && RUSTC_WRAPPER=$(SCCACHE) RUST_BACKTRACE=full cargo run --bin split-decls-rs -- bootstrap 2>&1 | tee bootstrap_run.log
+	@echo "Running bootstrap (no build)..." && RUST_BACKTRACE=full cargo run --bin split-decls-rs -- bootstrap 2>&1 | tee bootstrap_run.log
 
 # Run AUDITED bootstrap with full syscall tracking
 run_audited_bootstrap:
@@ -117,6 +153,16 @@ repl:
 clean:
 	cargo clean
 	sccache --zero-stats
+
+perf_record:
+	perf record -o bootstrap.perf -g ../../target/debug/split-decls-rs bootstrap
+
+perf_report: bootstrap.perf
+	perf report -i bootstrap.perf --stdio | grep -E "^\s*[0-9]+\.[0-9]+%" | head -20
+
+perf_functions: bootstrap.perf
+	perf report -i bootstrap.perf --stdio | grep -E "^\s*[0-9]+\.[0-9]+%" > perf_functions.txt
+	@echo "Function execution data saved to perf_functions.txt"
 eval_main:
 	@echo "🎯 Evaluating wrapped split-decls-rs main..."
 	@cargo run --bin eval_split_decl_main

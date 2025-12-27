@@ -159,6 +159,34 @@ fn main() -> Result<()> {
     let split_decls_rs_root = env::current_dir()?;
     let cargo2nix_root = split_decls_rs_root.parent().context("Failed to get parent of split-decls-rs")?.parent().context("Failed to get cargo2nix root")?;
 
+    // Read and parse the root Cargo.toml to get workspace dependencies
+    let root_cargo_toml_path = cargo2nix_root.join("Cargo.toml");
+    if root_cargo_toml_path.exists() {
+        let root_cargo_content = fs::read_to_string(&root_cargo_toml_path)?;
+        let root_cargo_toml: Table = toml::from_str(&root_cargo_content)?;
+        
+        // Extract workspace dependencies and store them in the config
+        if let Some(workspace) = root_cargo_toml.get("workspace").and_then(|w| w.as_table()) {
+            if let Some(deps) = workspace.get("dependencies").and_then(|d| d.as_table()) {
+                let mut workspace_deps = HashMap::new();
+                for (name, value) in deps {
+                    workspace_deps.insert(name.clone(), value.clone());
+                    
+                    // Parse package aliases (package = "actual-name")
+                    if let Some(dep_table) = value.as_table() {
+                        if let Some(package_name) = dep_table.get("package").and_then(|p| p.as_str()) {
+                            // Create bidirectional mapping for package aliases
+                            let mut alias_value = dep_table.clone();
+                            alias_value.remove("package"); // Remove package field for the alias
+                            workspace_deps.insert(package_name.to_string(), toml::Value::Table(alias_value));
+                        }
+                    }
+                }
+                split_decls_data.workspace_dependency_overrides = Some(workspace_deps);
+            }
+        }
+    }
+
     // Use cargo-lock import to get dependency information
     let cargo_lock_data = import_cargo_lock!("../../../Cargo.lock");
     for crate_info in cargo_lock_data {
@@ -168,18 +196,12 @@ fn main() -> Result<()> {
         let absolute_crate_path = if crate_path.is_absolute() {
             crate_path.to_path_buf()
         } else {
-            // Resolve all paths relative to the cargo2nix root
             let candidate_path = cargo2nix_root.join(crate_path);
             match candidate_path.canonicalize() {
                 Ok(path) => path,
-                Err(_) => {
-                    // If canonicalize fails, just use the joined path
-                    // This handles cases where the path doesn't exist yet
-                    candidate_path
-                }
+                Err(_) => candidate_path
             }
         };
-        // println!("DEBUG: Crate: {}, Original Path: {}, Absolute Path: {}", crate_info.name, crate_info.path, absolute_crate_path.display());
         existing_path_overrides.insert(crate_info.name.to_string(), absolute_crate_path.to_string_lossy().into_owned());
     }
 

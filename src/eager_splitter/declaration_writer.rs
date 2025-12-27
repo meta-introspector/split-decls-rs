@@ -9,6 +9,7 @@ use log::{info, warn, error}; // Moved to top for module-wide scope
 use serde_json; // For serializing metadata
 use crate::source_tracker::SourceMap;
 use crate::extracted_decl::SourceLocation; // Import SourceLocation from extracted_decl
+use crate::trace_header;
 
 //use crate::buildrs_ast_utils::ExtractedDecl;
 use crate::paths::CratePaths;
@@ -78,14 +79,23 @@ pub fn write_declaration_file(
     });
 
     let initial_file_content = final_content_ts.to_string(); // Convert to string once
+    
+    // Add trace header for complete traceability
+    let trace_header = trace_header::generate_trace_header(
+        "declaration_split",
+        Some(&paths.lib_rs_path.display().to_string()),
+        "write_declaration_file",
+        &format!("{}:{}", file!(), line!())
+    );
+    let traced_content = format!("{}\n{}", trace_header, initial_file_content);
 
     if !dry_run {
-        // Write initial unformatted content
-        fs::write(&decl_file_path, &initial_file_content)
+        // Write initial unformatted content with trace header
+        fs::write(&decl_file_path, &traced_content)
             .context(format!("Failed to write initial content to {}", decl_file_path.display()))?;
 
         // Attempt to format the file
-        match format_rust_file(&initial_file_content, &decl_file_path) {
+        match format_rust_file(&traced_content, &decl_file_path) {
             Ok(formatted_content) => {
                 // If successful, overwrite with formatted content
                 fs::write(&decl_file_path, formatted_content)
@@ -99,7 +109,7 @@ pub fn write_declaration_file(
                      // !!! Error: {} !!!\n\n",
                     e
                 );
-                let content_with_error_comment = error_comment + &initial_file_content;
+                let content_with_error_comment = error_comment + &traced_content;
                 fs::write(&decl_file_path, content_with_error_comment)
                     .context(format!("Failed to write unformatted content with error comment to {}", decl_file_path.display()))?;
                 error!("\n<blip style='color:red'>Formatting error for '{} {}' (written to {})</blip>", decl.kind, decl.name, decl_file_path.display());

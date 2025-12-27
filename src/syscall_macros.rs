@@ -15,3 +15,11 @@ macro_rules! syscallexec {
         $($tt)*
     };
 }
+
+// Cached file reading macro
+#[macro_export]
+macro_rules! cached_fs_read_to_string {
+    ($path:expr) => {
+        crate::syscall::cached_read_to_string($path)
+    };
+}

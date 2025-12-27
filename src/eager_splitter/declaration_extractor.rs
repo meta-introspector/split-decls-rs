@@ -151,22 +151,24 @@ pub fn extract_single_declaration(item: &Item, item_count: usize) -> Option<Extr
         Item::Type(item_type) => Some(extracted_decl_base(item_type.ident.to_string(), "type".to_string())),
         Item::Union(item_union) => Some(extracted_decl_base(item_union.ident.to_string(), "union".to_string())),
         Item::Use(item_use) => {
-            println!("Skipping top-level use statement in splitting: {}", item_use.to_token_stream());
+            // Use statements are handled separately - this is expected
             None
         },
         Item::Macro(item_macro) => {
             let macro_name = item_macro.mac.path.segments.last()
                 .map_or("unknown_macro".to_string(), |s| s.ident.to_string());
+            // EMIT ALL CODE: Process macros instead of skipping
             Some(extracted_decl_base(macro_name, "macro".to_string()))
         },
         Item::Mod(item_mod) => {
             let mod_name = item_mod.ident.to_string();
-            println!("Skipping module declaration: {} (handled by recursive processing)", mod_name);
-            None
+            // PANIC: All code must be emitted - modules should be processed recursively
+            panic!("UNHANDLED MODULE: {} - All code must be emitted, modules should be processed recursively", mod_name);
         }
         _ => {
-            println!("Skipping unsupported item type: {}", item.to_token_stream());
-            None
+            let content = item.to_token_stream().to_string();
+            // PANIC: All code must be emitted - no unsupported types allowed
+            panic!("UNSUPPORTED ITEM TYPE: {} - All code must be emitted, implement handler for this type", content);
         }
     }
 }

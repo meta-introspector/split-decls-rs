@@ -112,6 +112,7 @@ crates = [
     "dep2submodule",
     "derive_arbitrary",
     "detone",
+    "diff",
     "digest",
     "dissimilar",
     "document-features",
@@ -709,714 +710,2472 @@ crates = [
 ]
 
 [crate_path_overrides]
-aho_corasick = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/aho-corasick"
-minimal-lexical = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/minimal-lexical"
-serde_json = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/json"
-num-conv = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/num-conv"
-split-expanded-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-bootstrap-nix/split-expanded-lib"
+encoding_rs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/encoding_rs"
+scoped-tls = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/scoped-tls"
+pin-project-lite = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pin-project-lite"
+libgit2-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/git2-rs/libgit2-sys"
+trait-fixer-rules-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-rules-real"
+rustc_ty_utils = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ty_utils"
 tokio-stream = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio/tokio-stream"
-cargo-credential = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/credential/cargo-credential"
-gix-odb = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-odb"
-zerocopy = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zerocopy"
-paths = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/paths"
-criterion-plot = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/criterion/plot"
-gix-command = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-command"
-openssl-probe = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/openssl-probe"
-flake_auditor = "/mnt/data1/nix/vendor/rust/cargo2nix/flake_auditor"
-parser = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/parser"
-rustc_expand_base_lib_test_driver = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_test_driver"
-rustc_symbol_mangling = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_symbol_mangling"
-toml_parser = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml_parser"
-cfg = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/cfg"
-futures-executor = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-executor"
-linux-raw-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/linux-raw-sys"
-rustc_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_macros"
-thiserror-impl = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/thiserror/impl"
-tera = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tera"
-syn-adapter-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/syn-adapter-lib"
-uuid-rng-internal = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/uuid/rng"
-rustc_codegen_ssa = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_codegen_ssa"
-is_executable = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/is_executable"
-parking_lot = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/parking_lot"
-gix-mailmap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-mailmap"
-wasm_sync = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/wasm_sync"
-libz-rs-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zlib-rs/libz-rs-sys"
-gix-tempfile = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-tempfile"
-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/macros"
-camino = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/camino"
-futures-sink = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-sink"
-colorchoice = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/colorchoice"
-document-features = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/document-features"
-hir-expand = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/hir-expand"
-icu_normalizer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/components/normalizer"
-indexmap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/indexmap"
-report-analyzer-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/report-analyzer-rs"
-rand_pcg = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rand/rand_pcg"
-crossbeam-deque = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam/crossbeam-deque"
-rustc_ast_ir = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_ir"
-socket2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/socket2"
-signal-hook = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook"
-trait-fixer-core-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-core-mock"
-windows_aarch64_gnullvm = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/aarch64_gnullvm"
-gix-date = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-date"
-prelude-generator = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-bootstrap-nix/prelude-generator"
-gix-commitgraph = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-commitgraph"
-trait-fixer-trait-checker-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-trait-checker-trait"
-rustc_expand_meta_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_meta_macros"
-gix-lock = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-lock"
-nu-ansi-term = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nu-ansi-term"
-bytes = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bytes"
-cargo = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo"
-async-graphql-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-graphql/derive"
-digest = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/traits/digest"
-rustc_middle = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_middle"
-trait-fixer-lang-items-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-lang-items-trait"
-synstructure = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/synstructure"
-windows-targets = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/library/windows_targets"
-serde = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serde/serde"
-bincode = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bincode"
-autowrap_tool = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/autowrap_tool"
-iana-time-zone-haiku = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/iana-time-zone/haiku"
-intern = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/intern"
-load-cargo = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/load-cargo"
-md-5 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashes/md5"
-grast_core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/grast_core"
-rustc-hash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-hash"
-ucd-trie = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/ucd-generate/ucd-trie"
-introspector_decl2_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_decl2_macros"
-windows-numerics = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/numerics"
-rustc_const_eval = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_const_eval"
-quickcheck = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/quickcheck"
-arbitrary = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arbitrary"
-gix-negotiate = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-negotiate"
-base64ct = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/formats/base64ct"
-gix-quote = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-quote"
-macro_wrapper_lib = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/macro_wrapper_lib"
-nix-analyzer-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/nix-analyzer-rs"
-cargo-credential-wincred = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/credential/cargo-credential-wincred"
-futures-io = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-io"
-pagerank_rs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/submodules/pagerank_rs"
-fluent-syntax = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fluent-rs/fluent-syntax"
-query-group-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/query-group-macro"
-gix-submodule = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-submodule"
-rustc_hir = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir"
-p384 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/elliptic-curves/p384"
-rustc_hir_pretty = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_pretty"
-memoffset = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/memoffset"
-cargo_metadata = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo_metadata"
-serde-value = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serde-value"
-icu_properties = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/components/properties"
-trait-fixer-trait-checker-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-trait-checker-real"
-thiserror = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/thiserror"
-windows-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/sys"
-trait-fixer-hir-info-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-hir-info-trait"
-typesize = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/typesize"
-regex-syntax = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/regex/regex-syntax"
-uluru = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/uluru"
-intl-memoizer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fluent-rs/intl-memoizer"
-dissimilar = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dissimilar"
-rustc_expand_base_lib_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_macros"
-rnix_parser_new = "/mnt/data1/nix/vendor/rust/cargo2nix/rnix_parser_new"
-rustc_index = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index"
-log-analyzer = "/mnt/data1/nix/vendor/rust/cargo2nix/log-analyzer"
-tracing-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-test"
-prodash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/prodash"
-trait-fixer-attribute-reader-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-attribute-reader-real"
-mio = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/mio"
-test-utils = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/test-utils"
-strsim = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/strsim-rs"
-tracing-log = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-log"
-async-graphql-parser = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-graphql/parser"
-crypto-common = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/traits/crypto-common"
-mbe = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/mbe"
-futures-concurrency = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-concurrency"
-rustc_ast = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast"
-proc-macro-api = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/proc-macro-api"
-rustc_monomorphize = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_monomorphize"
-hir-def = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/hir-def"
-nix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nix"
-gix-ref = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-ref"
-gix-fetchhead = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-fetchhead"
-static_assertions = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/static-assertions-rs"
-hmac = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/MACs/hmac"
-repl_server = "/mnt/data1/nix/vendor/rust/cargo2nix/repl_server"
-gix-fsck = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-fsck"
 rustix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustix"
-windows-threading = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/threading"
-sharded-slab = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/sharded-slab"
-rustc_abi = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_abi"
-rustc_expand_patches = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_patches"
-trait-fixer-compiler-host-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-compiler-host-mock"
-derive_arbitrary = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arbitrary/derive"
-gix-filter = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-filter"
-trait-fixer-attribute-reader-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-attribute-reader-trait"
-trait-fixer-rustc-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-rustc-mock"
-rustc_interface = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_interface"
+lib-zos = "crates/lib-zos"
+bincode = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bincode"
 expand_utils_test = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/expand_utils_test"
-ra-ap-rustc_index = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_index"
-hkdf = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/KDFs/hkdf"
-serde_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serde/serde_derive"
-rustc_infer = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_infer"
-maybe-async = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/maybe-async-rs"
-trait-fixer-core-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-core-real"
-gix-object = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-object"
-imara-diff = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/imara-diff"
-unimacro_derive = "test_crates/unimacro_derive"
-tokio-util = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio/tokio-util"
-monster_math_traits = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/monster_math_traits"
-proc-macro2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/proc-macro2"
-clap_complete = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap/clap_complete"
-potential_utf = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/potential_utf"
-is_terminal_polyfill = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/is_terminal_polyfill"
-arc-swap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arc-swap"
-rustc_query_impl = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_query_impl"
-rustc_resolve = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_resolve"
-unicode-normalization = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-normalization"
-gix-revwalk = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-revwalk"
-auxiliary = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/addr2line/tests/auxiliary"
-aho-corasick = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/aho-corasick"
-cargo-metadata-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/cargo-metadata-lib"
-gix-discover = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-discover"
-oorandom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/oorandom"
-gix-lfs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-lfs"
-rustc_target = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_target"
-rustc_hir_typeck = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_typeck"
-tracing-subscriber = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-subscriber"
-windows-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/core"
-zlib-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zlib-rs/zlib-rs"
-rustc_error_codes = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_error_codes"
-nixpkgs-lint = "/mnt/data1/nix/vendor/rust/cargo2nix/nixpkgs-lint"
-cargo-toml-parts = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/build_helpers/cargo_toml_parts"
-expand_utils_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/expand_utils_macros"
-windows_aarch64_msvc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/aarch64_msvc"
-is-terminal = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/is-terminal"
-byteorder = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/byteorder"
-rustc-std-workspace-alloc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-alloc"
-iana-time-zone = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/iana-time-zone"
-cargo-util-schemas = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-util-schemas"
 span = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/span"
-ide-diagnostics = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-diagnostics"
-rustc_passes = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_passes"
-nom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nom"
-terminal_size = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/terminal-size"
-gix-pack = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-pack"
-cfg_aliases = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cfg_aliases"
-rustc_baked_icu_data = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_baked_icu_data"
-toolchain = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/toolchain"
-fxhash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fxhash"
-lib-matcher-loc = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-matcher-loc"
-rustc_traits = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_traits"
-stdx = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/stdx"
-rustfix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/rustfix"
-trait-fixer-mocks-test = "/mnt/data1/nix/vendor/rust/cargo2nix/tests/trait_fixer_mocks"
-trait-fixer-trait-checker-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-trait-checker-mock"
-sval = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/sval"
-autocfg = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/autocfg"
+getrandom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/getrandom"
+gix-worktree-stream = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-worktree-stream"
+rustc_hir = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir"
+graph-petal-generator = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/graph-petal-generator"
+split-decls-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs"
+supports-hyperlinks = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/supports-hyperlinks"
+tracing-subscriber = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-subscriber"
+gix-negotiate = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-negotiate"
+cargo-metadata-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/cargo-metadata-lib"
+orion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/orion"
+thiserror = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/thiserror"
+test-fixture = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/test-fixture"
+trait-fixer-trait-checker-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-trait-checker-trait"
+camino = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/camino"
+anyhow = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anyhow"
+zlib-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zlib-rs/zlib-rs"
+human_format = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/human-format-rs"
+ticket_data_generator = "/mnt/data1/nix/vendor/rust/cargo2nix/ticket_data_generator"
+arrayref = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arrayref"
+rustc_log = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_log"
+zerovec-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/zerovec/derive"
+alloc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-alloc"
+cargo-credential-macos-keychain = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/credential/cargo-credential-macos-keychain"
+sized-chunks = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/sized-chunks"
+is_terminal_polyfill = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/is_terminal_polyfill"
+monster_math_traits = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/monster_math_traits"
+twox-hash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/twox-hash"
+allocator-api2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/allocator-api2"
+either = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/either"
+group = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/group"
+parser = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/parser"
+syn = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/syn"
+windows-interface = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/interface"
+base64ct = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/formats/base64ct"
+rustc_monomorphize = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_monomorphize"
+gix-index = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-index"
+xattr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/xattr"
+gix-dir = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-dir"
+nohash-hasher = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nohash-hasher"
+zip = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zip2"
+clap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap"
+rustc_hashes = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hashes"
+icu_properties_data = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/provider/data/properties"
+cargo-credential-wincred = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/credential/cargo-credential-wincred"
+rustc_fluent_macro = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_fluent_macro"
+glob = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/glob"
+cargo-platform = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-platform"
+rustc_tools_util = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/src/tools/clippy/rustc_tools_util"
+text-size = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/text-size"
+futures-concurrency = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-concurrency"
+vfs-notify = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/vfs-notify"
+unimacro_derive = "test_crates/unimacro_derive"
+rustc-stable-hash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-stable-hash"
+typesize = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/typesize"
+mkslop-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/mkslop-core"
+regex-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/regex/regex-test"
+pasetors = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pasetors"
+unicode-bom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-bom"
+static_assertions = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/static-assertions-rs"
+hir-def = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/hir-def"
+gimli = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gimli"
+windows-result = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/result"
+wasm_sync = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/wasm_sync"
+windows-registry = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/registry"
+rfc6979 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signatures/rfc6979"
+aho_corasick = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/aho-corasick"
+anstyle = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstyle"
+bincode_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bincode/derive"
+memchr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/memchr"
+rustc_expand_meta_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_meta_macros"
+rustc_lint_defs = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lint_defs"
+rustc_metadata = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_metadata"
+trait-fixer-lang-items-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-lang-items-trait"
+windows_aarch64_gnullvm = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/aarch64_gnullvm"
+memmap2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/memmap2-rs"
+vfs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/vfs"
+futures-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-test"
+lib-kleene-op = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-kleene-op"
+rustc_hir_analysis = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_analysis"
+futures-util = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-util"
+gix-diff = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-diff"
+expand_utils_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/expand_utils_macros"
+git2-curl = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/git2-rs/git2-curl"
+grast_cli = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/grast_cli"
+libc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/libc"
+cargo-util-schemas = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-util-schemas"
+memoffset = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/memoffset"
+nix2proc-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/nix2proc-macros"
+rustc_trait_selection = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_trait_selection"
 gix-config = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-config"
 lib-metavar-expr = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-metavar-expr"
-secret-manager-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/secret-manager-rs"
-http-auth = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/http-auth"
-rnix-attempt = "/mnt/data1/nix/vendor/rust/cargo2nix/rnix-attempt"
-tracing-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-mock"
+async-graphql-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-graphql/derive"
+openssl-probe = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/openssl-probe"
+rustc_hir_pretty = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_pretty"
 salsa = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/salsa"
-base64 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-base64"
-gix-index = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-index"
-real-rules-test = "/mnt/data1/nix/vendor/rust/cargo2nix/tests/real_rules_test"
-adler2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/adler2"
-gix-packetline = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-packetline"
-typesize-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/typesize/typesize-derive"
-cargo-repo-sync = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-repo-sync"
-tiktok_viewer_tracker = "/mnt/data1/nix/vendor/rust/cargo2nix/tiktok_viewer_tracker"
-neo = "/mnt/data1/nix/vendor/rust/cargo2nix/neo"
-dashmap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dashmap"
-fastrand = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fastrand"
-generic-array = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/generic-array"
-hyper = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hyper"
-ide-completion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-completion"
-loom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/loom"
-rustc_codegen_llvm = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_codegen_llvm"
-rocksdb = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rocksdb"
 serde_core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serde/serde_core"
-either = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/either"
-crc32fast = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-crc32fast"
-futures-channel = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-channel"
-hir-ty = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/hir-ty"
-rustc_incremental = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_incremental"
-tt = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/tt"
-rustc_type_ir_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_type_ir_macros"
-futures-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-macro"
-version_check = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/version_check"
-anstyle = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstyle"
-blake3 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/BLAKE3"
-encoding_rs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/encoding_rs"
-gix-refspec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-refspec"
-hir = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/hir"
-trait-fixer-attribute-reader-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-attribute-reader-mock"
-ecdsa = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signatures/ecdsa"
-fixedbitset = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fixedbitset"
-gix-hashtable = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-hashtable"
-gix-revision = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-revision"
-cargo-toml-generator-types = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/cargo-toml-generator-types"
-getrandom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/getrandom"
-atoi = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/atoi"
-md5 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/md5"
-blocking = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/blocking"
-enum-self = "/mnt/data1/nix/vendor/rust/cargo2nix/enum-self"
-libc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/libc"
-gix-traverse = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-traverse"
-rustc_attr_parsing = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_attr_parsing"
-rustc_hir_id = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_id"
-tracing-tower = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-tower"
-json_to_memes_extractor = "/mnt/data1/nix/vendor/rust/cargo2nix/json_to_memes_extractor"
-rustc_error_messages = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_error_messages"
-scoped-tls = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/scoped-tls"
-tracing-tree = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing-tree"
-pest = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pest/pest"
-rustc-stable-hash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-stable-hash"
-windows-implement = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/implement"
-gix-worktree-stream = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-worktree-stream"
-fnv = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-fnv"
-tool-traits-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/tool-traits-lib"
-unicode-width = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-width"
-rustc_driver = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_driver"
-expand_utils_lib = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/expand_utils_lib"
-gix-url = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-url"
-libloading = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust_libloading"
-litemap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/litemap"
-rustversion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustversion"
-gix-protocol = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-protocol"
-chrono = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/chrono"
-rustc_arena = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_arena"
-cfg-if = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cfg-if"
-gemini_rustc_data_structures = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/gemini_rustc_data_structures"
-quote = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/quote"
-rustc_graphviz = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_graphviz"
-trait-fixer-query-context-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-query-context-trait"
-snapbox = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/snapbox/crates/snapbox"
-gix-archive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-archive"
-semver = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/semver"
-env_logger = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/env_logger"
-annotate-snippets = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/annotate-snippets-rs"
-serial_test_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serial_test/serial_test_derive"
-trait-fixer-hir-info-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-hir-info-real"
-vfs-notify = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/vfs-notify"
-human_format = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/human-format-rs"
-xz2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/xz2-rs"
-windows_i686_msvc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/i686_msvc"
-trybuild = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/trybuild"
-dot-parser = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dot-parser"
-regex-automata = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/regex/regex-automata"
-cvs-macro-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/cvs-macro-lib"
-rustc_hashes = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hashes"
-sval_derive_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/sval/derive_macros"
-rustc_log = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_log"
-trait-fixer-rules-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-rules-real"
-generate_workspace_deps = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/generate_workspace_deps"
-io-uring = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/io-uring"
-expect-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/expect-test"
-lock_api = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/parking_lot/lock_api"
-gix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix"
-grast_cli = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/grast_cli"
-lang-c = "/mnt/data1/nix/vendor/rust/cargo2nix/lang-c"
-normal-ast = "/mnt/data1/nix/vendor/rust/cargo2nix/normal-ast"
-serde_spanned = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/serde_spanned"
-slab = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/slab"
-uuid-macro-internal = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/uuid/macros"
-erased-serde = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/erased-serde"
-real_rules_test = "tests/real_rules_test"
-foldhash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/foldhash"
-gix-actor = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-actor"
-trait-fixer-rules-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-rules-mock"
-rayon-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rayon/rayon-core"
-windows_i686_gnullvm = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/i686_gnullvm"
-rustc_thread_pool = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_thread_pool"
-petgraph = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/petgraph"
-if-counter = "/mnt/data1/nix/vendor/rust/cargo2nix/if-counter"
-ruzstd = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zstd-rs/ruzstd"
-lib-macro-rule = "./crates/lib-macro-rule"
-cargo-workspace-from-tree = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-workspace-from-tree"
-itertools = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/itertools"
-cargo-toml-generator-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/cargo-toml-generator-macros"
-rustc_type_ir = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_type_ir"
-zerofrom-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/zerofrom/derive"
-cargo-llm-bootstrap = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-llm-bootstrap"
-memchr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/memchr"
-trycmd = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/snapbox/crates/trycmd"
-bitflags = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bitflags"
-windows-version = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/version"
-windows-link = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/link"
-gix-ignore = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-ignore"
-ed25519-compact = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-ed25519-compact"
-assert-impl = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/assert-impl"
-rustc_builtin_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_builtin_macros"
-gix-worktree-state = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-worktree-state"
-gix-hash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-hash"
-trait-fixer-hir-info-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-hir-info-mock"
-introspector_core = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-core"
-text-size = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/text-size"
-fixed_point_traits = "/mnt/data1/nix/vendor/rust/cargo2nix/fixed_point_traits"
-twox-hash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/twox-hash"
-ast-decoder = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-bootstrap-nix/ast-decoder"
-cargo-platform = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-platform"
-heapless = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/heapless"
-ide-assists = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-assists"
-crossbeam-utils = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam/crossbeam-utils"
-mockall = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/mockall/mockall"
-ppv-lite86 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cryptocorrosion/utils-simd/ppv-lite86"
-futures-lite = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-lite"
-anstyle-query = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstyle-query"
-colorify = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/colorify"
-toml_writer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml_writer"
-lib-kleene-op = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-kleene-op"
-profile = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/profile"
-cargo-feature-adapter = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-feature-adapter"
-crossbeam-channel = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam/crossbeam-channel"
-lib-zos = "crates/lib-zos"
-cargo-util = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-util"
-crosstermion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crosstermion"
-gix-path = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-path"
-futures = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures"
-rustc_lint = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lint"
-anstyle-parse = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstyle-parse"
-edition = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/edition"
-la-arena = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/la-arena"
-glob = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/glob"
-bstr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bstr"
-addr2line-bin = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/addr2line-bin"
-futures-timer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-timer"
-mockall_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/mockall/mockall_derive"
-signal-hook-registry = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook/signal-hook-registry"
-unicase = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicase"
-windows-services = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/services"
-split_rustc_data_structures = "./crates/split_rustc_data_structures"
 hex = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-hex"
-mkslop-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/mkslop-core"
-tinyvec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tinyvec"
+fs_extra = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fs_extra"
+project-model = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/project-model"
+strsim = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/strsim-rs"
+tokio-util = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio/tokio-util"
+toml_writer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml_writer"
+windows-link = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/link"
+windows_i686_gnullvm = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/i686_gnullvm"
+windows_x86_64_msvc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/x86_64_msvc"
+hir-ty = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/hir-ty"
+mockall_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/mockall/mockall_derive"
+ide-diagnostics = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-diagnostics"
+rustc_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_macros"
+md-5 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashes/md5"
+ruzstd = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zstd-rs/ruzstd"
 gix-fs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-fs"
-lsp-server = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/lsp-server"
-windows-result = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/result"
-rustc_parse = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_parse"
-temp-dir = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/temp-dir/temp-dir"
+colorchoice = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/colorchoice"
+introspector_decl_common = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_decl_common"
+gix-discover = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-discover"
+pest_generator = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pest/generator"
+rocksdb = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rocksdb"
 rust-src-scanner = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-src-scanner"
-equivalent = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/equivalent"
+rustc_borrowck = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_borrowck"
+tokio-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio/tokio-test"
+dissimilar = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dissimilar"
+unicode-ident = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-ident"
+dot-parser-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dot-parser/macros"
+cargo_metadata = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo_metadata"
+gix-protocol = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-protocol"
+rustc_attr_parsing = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_attr_parsing"
+cargo-workspace-from-tree = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-workspace-from-tree"
+rustversion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustversion"
+gix-path = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-path"
+rustc-demangle = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-demangle"
+cargo-llm-bootstrap = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-llm-bootstrap"
+crossbeam-epoch = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam/crossbeam-epoch"
+rustc_fs_util = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_fs_util"
+io-uring = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/io-uring"
+libnghttp2-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nghttp2-rs"
+load-cargo = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/load-cargo"
+hkdf = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/KDFs/hkdf"
+rustc_codegen_llvm = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_codegen_llvm"
+type-reporter = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/type-reporter"
+macro_wrapper_lib = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/macro_wrapper_lib"
+windows-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/core"
+gix-validate = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-validate"
+rustc_lint = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lint"
+introspector_decl_core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_decl_core"
+nix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nix"
+tracing = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing"
+rustc_feature = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_feature"
+git2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/git2-rs"
+arc-swap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arc-swap"
+lsp-server = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/lsp-server"
+chrono = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/chrono"
+clru = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clru-rs"
+fixed_point_traits = "/mnt/data1/nix/vendor/rust/cargo2nix/fixed_point_traits"
+line-index = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/line-index"
+rustc_transmute = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_transmute"
+trait-fixer-trait-checker-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-trait-checker-mock"
+serde_spanned = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/serde_spanned"
+lang-c = "/mnt/data1/nix/vendor/rust/cargo2nix/lang-c"
+linux-raw-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/linux-raw-sys"
+criterion-plot = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/criterion/plot"
+gix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix"
+icu_normalizer_data = "*"
+backtrace = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/backtrace-rs"
+libm = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/compiler-builtins/libm"
+pest = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pest/pest"
+rustc_mir_build = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_build"
+gix-fsck = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-fsck"
+rustc_const_eval = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_const_eval"
+tracing-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-test"
+trybuild = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/trybuild"
+tt = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/tt"
+windows-metadata = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/metadata"
+gix-commitgraph = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-commitgraph"
+rustc_incremental = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_incremental"
+quote = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/quote"
+tracing-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-core"
+windows-strings = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/strings"
+curl = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/curl-rust"
+gix-hash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-hash"
+ast-decoder = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-bootstrap-nix/ast-decoder"
+serde = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serde/serde"
+nix-analyzer-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/nix-analyzer-rs"
+gix-glob = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-glob"
+supports-unicode = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/supports-unicode"
+gix-lfs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-lfs"
+rust-nix-bootstrap = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/rust-nix-bootstrap"
+pest_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pest/derive"
+ahash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/ahash"
+reqwest = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/reqwest"
+cargo-test-support = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-test-support"
+normal-ast = "/mnt/data1/nix/vendor/rust/cargo2nix/normal-ast"
+proc-macro2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/proc-macro2"
+rustc_thread_pool = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_thread_pool"
+aho-corasick = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/aho-corasick"
+rustc_expand_base_lib_errors = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_errors"
+color-print = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/color-print/color-print"
+snapbox-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/snapbox/crates/snapbox-macros"
+gix-tui = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-tui"
+windows = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/windows"
+anstyle-parse = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstyle-parse"
+cfg-if = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cfg-if"
+cvs-macro-test-crate = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/cvs-macro-test-crate"
+cpp_demangle = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cpp_demangle"
+rustc_error_messages = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_error_messages"
+futures-executor = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-executor"
+gix-worktree-state = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-worktree-state"
+rustc_errors = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_errors"
+syntax-bridge = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/syntax-bridge"
+tracing-tree = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing-tree"
+zerocopy-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zerocopy/zerocopy-derive"
+env_logger = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/env_logger"
+gix-trace = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-trace"
+syn-adapter-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/syn-adapter-lib"
+rustc_serialize = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_serialize"
+trait-fixer-hir-info-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-hir-info-real"
+version_check = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/version_check"
+tokio = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio/tokio"
+zerofrom-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/zerofrom/derive"
+gix-note = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-note"
+tera = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tera"
+autocfg = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/autocfg"
+gix-ref = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-ref"
+cfg = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/cfg"
+gix-worktree = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-worktree"
+rustc_sanitizers = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_sanitizers"
+gix-mailmap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-mailmap"
+la-arena = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/la-arena"
+tracing-futures = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-futures"
+rustc_error_codes = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_error_codes"
+pick-up-nix-cli = "/mnt/data1/nix/vendor/rust/cargo2nix/pick-up-nix-cli"
+secret-manager-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/secret-manager-rs"
+crypto-bigint = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crypto-bigint"
+mockall_double = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/mockall/mockall_double"
+rustc_codegen_ssa = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_codegen_ssa"
+rustc_expand_base_lib = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib"
+rustc_ast_ir = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_ir"
+hash32 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hash32"
+serde_json = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/json"
+tiktok_cli_adaptor = "/mnt/data1/nix/vendor/rust/cargo2nix/tiktok_cli_adaptor"
+rustc_ast_lowering = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_lowering"
+trait-fixer-attribute-reader-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-attribute-reader-mock"
+fallible-streaming-iterator = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fallible-streaming-iterator"
+maybe-async = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/maybe-async-rs"
+bytesize = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bytesize"
 tokio-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio-core"
 cargo-submodule-tool-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-submodule-tool-lib"
-include-dir-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/include-dir-macro-rs"
-fixed_point_enum = "/mnt/data1/nix/vendor/rust/cargo2nix/fixed_point_enum"
-ryu = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/ryu"
-ticket_data_generator = "/mnt/data1/nix/vendor/rust/cargo2nix/ticket_data_generator"
-block-buffer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/utils/block-buffer"
-object = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/object"
-yoke-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/yoke/derive"
-zerocopy-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zerocopy/zerocopy-derive"
-icu_properties_data = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/provider/data/properties"
-async-graphql-value = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-graphql/value"
-cvs-macro-test-crate = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/cvs-macro-test-crate"
-rustc-literal-escaper = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-literal-escaper"
-gix-bitmap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-bitmap"
-supports-unicode = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/supports-unicode"
-temp-env = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/temp-env"
-rust-nix-bootstrap = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/rust-nix-bootstrap"
-lib-token-tree = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-token-tree"
-lazy_static = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/lazy-static"
-project-model = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/project-model"
-patch-build-rs-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/patch-build-rs-macros"
-windows-collections = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/collections"
-trait-fixer-rules-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-rules-trait"
-zip = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zip2"
-macrotest = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/macrotest"
-crates-io = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/crates-io"
-rustc_query_system = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_query_system"
-anstyle-wincon = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstyle-wincon"
-cpp_demangle = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cpp_demangle"
-rfc6979 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signatures/rfc6979"
-rustc_expand_base_lib_custom_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_custom_macros"
-lzma-rust2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/lzma-rust2"
-fiat-crypto = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fiat-crypto/fiat-rust"
-introspector_macro_helpers = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_macro_helpers"
-rustc_errors = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_errors"
-rustc_mir_build = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_build"
-syntax = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/syntax"
-base-db = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/base-db"
-rustc_pattern_analysis = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_pattern_analysis"
-tracing-serde = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-serde"
-windows-future = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/future"
-gix-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-macros"
-log_processor = "/mnt/data1/nix/vendor/rust/cargo2nix/log_processor"
-serde_ignored = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serde-ignored"
-const-oid = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/formats/const-oid"
-graph-petal-generator = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/graph-petal-generator"
-gix-merge = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-merge"
-proc_static_assertions = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/static-assertions-rs/proc"
-zerovec-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/zerovec/derive"
-simd-adler32 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/simd-adler32"
-clap_lex = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap/clap_lex"
-gix-note = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-note"
-rustc_expand_base_lib = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib"
-tiktok_cli_adaptor = "/mnt/data1/nix/vendor/rust/cargo2nix/tiktok_cli_adaptor"
-find-msvc-tools = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cc-rs/find-msvc-tools"
-pipeline-traits = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-bootstrap-nix/pipeline-traits"
-toml_datetime = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml_datetime"
-serial_test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serial_test/serial_test"
-gix-diff = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-diff"
-syn-wrapper = "/mnt/data1/nix/vendor/rust/cargo2nix/syn-wrapper"
-gix-transport = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-transport"
-cargo-credential-macos-keychain = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/credential/cargo-credential-macos-keychain"
-feature-permutation-builder = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/feature-permutation-builder"
-rustc_ty_utils = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ty_utils"
-primeorder = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/elliptic-curves/primeorder"
-arrayvec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arrayvec"
-rustc_mir_transform = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_transform"
-split-decls-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs"
-tempfile = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tempfile"
-real-regex-adapter-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/real-regex-adapter-lib"
-gix-worktree = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-worktree"
-rustc_borrowck = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_borrowck"
-windows_x86_64_msvc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/x86_64_msvc"
-backtrace = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/backtrace-rs"
-solfun_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/solfun_macros"
-rustc_index_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index_macros"
-anstream = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstream"
-futures-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-core"
-monster-grouper = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/monster-grouper"
-rustc_expand_base_lib_errors = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_errors"
-librocksdb-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rocksdb/librocksdb-sys"
-measureme = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/measureme/measureme"
-supports-hyperlinks = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/supports-hyperlinks"
-gix-utils = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-utils"
-test_macros_app = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/test_macros_app"
-cargo-test-support = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-test-support"
-rand_xorshift = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rngs/rand_xorshift"
-toml_edit = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml_edit"
-rustc_metadata = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_metadata"
-generator = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/generator-rs"
-gix-credentials = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-credentials"
-introspector_decl_core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_decl_core"
-itoa = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/itoa"
-same-file = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/same-file"
-cargo-credential-libsecret = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/credential/cargo-credential-libsecret"
 sec1 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/formats/sec1"
-type-reporter = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/type-reporter"
-futures-task = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-task"
-trait-fixer-lang-items-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-lang-items-mock"
-windows = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/windows"
-gix-features = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-features"
-windows-interface = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/interface"
-gix-attributes = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-attributes"
-parking_lot_core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/parking_lot/core"
-ct-codecs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-ct-codecs"
-snapbox-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/snapbox/crates/snapbox-macros"
-fallible-iterator = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-fallible-iterator"
-gix-blame = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-blame"
-gix-glob = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-glob"
-clru = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clru-rs"
-detone = "*"
-rustc_public_bridge = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_public_bridge"
-hashlink = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashlink"
-code-finder = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/code-finder"
-pin-utils = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pin-utils"
-rustc_hir_analysis = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_analysis"
-litrs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/litrs"
-constant_time_eq = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/constant_time_eq"
-defmac = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/defmac"
-test-fixture = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/test-fixture"
-line-index = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/line-index"
-trait-fixer-compiler-host-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-compiler-host-trait"
-os_info = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/os_info/os_info"
-trait-fixer-core-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-core-trait"
-rustc_next_trait_solver = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_next_trait_solver"
-tracing = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing"
-fallible-streaming-iterator = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fallible-streaming-iterator"
-clap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap"
-windows_x86_64_gnu = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/x86_64_gnu"
-gix-dir = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-dir"
-rustc_trait_selection = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_trait_selection"
-allocator-api2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/allocator-api2"
-rustc_proc_macro = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_proc_macro"
-home = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/home"
-hash32 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hash32"
-core = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-core"
-trait-fixer-compiler-host-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-compiler-host-real"
-reqwest = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/reqwest"
-windows_x86_64_gnullvm = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/x86_64_gnullvm"
-orion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/orion"
-rustc_privacy = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_privacy"
-gix-pathspec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-pathspec"
-cargo-test-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-test-macro"
-rustc_mir_dataflow = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_dataflow"
-trait-fixer-query-context-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-query-context-real"
-libm = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/compiler-builtins/libm"
-gix-tui = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-tui"
-nohash-hasher = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nohash-hasher"
-regex-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/regex/regex-test"
-proc-macro-srv-cli = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/proc-macro-srv-cli"
-signal-hook-tokio = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook/signal-hook-tokio"
-thin-vec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/thin-vec"
-trait_fixer_mocks = "tests/trait_fixer_mocks"
-im-rc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/im-rs/rc"
-memmap2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/memmap2-rs"
-windows-bindgen = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/bindgen"
-curl = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/curl-rust"
-pathdiff = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pathdiff"
-file_analyzer = "/mnt/data1/nix/vendor/rust/cargo2nix/file_analyzer"
-rustc_ast_lowering = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_lowering"
-factory_abi = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/factory_abi"
-powerfmt-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/powerfmt/powerfmt-macros"
-hashbrown = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashbrown"
-libgit2-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/git2-rs/libgit2-sys"
-renix = "/mnt/data1/nix/vendor/rust/cargo2nix/renix"
-rowan = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rowan"
-rustc_fluent_macro = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_fluent_macro"
-split-decls-types = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/split-decls-types"
-ast_parser_impl = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/ast_parser_impl"
-ide-ssr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-ssr"
-tokio-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio/tokio-macros"
-miniz_oxide = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/miniz_oxide/miniz_oxide"
-smallvec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-smallvec"
-fs_extra = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fs_extra"
-rusqlite = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rusqlite"
-tinyvec_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tinyvec_macros"
-emoji_llm_machine_rust = "/mnt/data1/nix/vendor/rust/cargo2nix/emoji_llm_machine_rust"
-gix-config-value = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-config-value"
-windows-metadata = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/metadata"
-ahash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/ahash"
-crypto-bigint = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crypto-bigint"
-env_filter = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/env_logger/crates/env_filter"
-rayon = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rayon"
-git-wrapper-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/git-wrapper-lib"
-fluent-bundle = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fluent-rs/fluent-bundle"
-curl-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/curl-rust/curl-sys"
-pest_meta = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pest/meta"
-color-print = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/color-print/color-print"
-rustc_tools_util = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/src/tools/clippy/rustc_tools_util"
-sha1-checked = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashes/sha1-checked"
-rand = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rand"
-dep2submodule = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/dep2submodule"
-icu_normalizer_data = "*"
-async-std = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-std"
-rustc_fs_util = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_fs_util"
-sized-chunks = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/sized-chunks"
-rstrace-cuda-sniff = "/mnt/data1/nix/vendor/rust/cargo2nix/rstrace-cuda-sniff"
-toml = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml"
-color-print-proc-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/color-print/color-print-proc-macro"
-sha1 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashes/sha1"
-async-stream = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-stream-vendored"
-syn-codegen = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/syn/json"
-git2-curl = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/git2-rs/git2-curl"
-windows_i686_gnu = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/i686_gnu"
-atomic-maybe-uninit = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/atomic-maybe-uninit"
-rustc-demangle = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-demangle"
-typenum = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/typenum"
-gix-prompt = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-prompt"
-gix-validate = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-validate"
-syn = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/syn"
-xattr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/xattr"
-git2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/git2-rs"
-async-graphql = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-graphql"
-globwalk = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/globwalk"
-opener = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/opener/opener"
-rustc_expand = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand"
-rustc_public = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_public"
-mockall_double = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/mockall/mockall_double"
-gix-testtools = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/tests/tools"
-tinystr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/tinystr"
-trait-fixer = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/trait-fixer"
-rustc_sanitizers = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_sanitizers"
-rustc_ast_pretty = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_pretty"
-shebling_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/shebling_macros"
-clap_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap/clap_derive"
-gix-tix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-tix"
-ide = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide"
-tracing-futures = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-futures"
-windows-strings = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/strings"
-rustc_transmute = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_transmute"
-gix-status = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-status"
-rustc_apfloat = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc_apfloat"
-idna = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-url/idna"
-libnghttp2-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nghttp2-rs"
-clap_builder = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap/clap_builder"
-vfs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/vfs"
-rustc_lexer = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lexer"
-smol_str = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/smol_str"
-gix-chunk = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-chunk"
-pasetors = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pasetors"
-mkslop-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/mkslop-macros"
-prettyplease = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/prettyplease"
-dot-parser-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dot-parser/macros"
-rustc_feature = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_feature"
-trait-fixer-lang-items-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-lang-items-real"
-trait-fixer-query-context-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-query-context-mock"
-sha2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashes/sha2"
-rustc_serialize = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_serialize"
-unicode-segmentation = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-segmentation"
-cargo-edit-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-edit-lib"
-signature = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/traits/signature"
-criterion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/criterion"
-salsa-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/salsa/components/salsa-macros"
-rustc_driver_impl = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_driver_impl"
-ide-db = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-db"
-pest_generator = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pest/generator"
-regex = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/regex"
-cargo-repo-sync-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-repo-sync-lib"
-fuzz = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/quinn/fuzz"
-gix-sec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-sec"
-gix-sequencer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-sequencer"
-addr2line = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/addr2line"
-arrayref = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arrayref"
-tracing-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-core"
-futures-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-test"
-gix-trace = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-trace"
-nix2proc-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/nix2proc-macros"
-gix-shallow = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-shallow"
-crossbeam = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam"
-pest_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pest/derive"
-rustc_parse_format = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_parse_format"
-proc-macro-srv = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/proc-macro-srv"
-introspector_decl_common = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_decl_common"
-windows-bindings = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/jni-rs/windows-bindings"
-pick-up-nix-cli = "/mnt/data1/nix/vendor/rust/cargo2nix/pick-up-nix-cli"
-rustc_session = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_session"
-syntax-bridge = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/syntax-bridge"
-bytesize = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bytesize"
-unicode-bom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-bom"
-crossbeam-epoch = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam/crossbeam-epoch"
-tracing-chrome = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing-chrome"
-cpufeatures = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/utils/cpufeatures"
-rustc_windows_rc = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_windows_rc"
-proc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/static-assertions-rs/proc"
-nixtract = "/mnt/data1/nix/vendor/rust/cargo2nix/nixtract"
-gimli = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gimli"
-signal-hook-mio = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook/signal-hook-mio"
-rstrace = "/mnt/data1/nix/vendor/rust/cargo2nix/rstrace"
-uuid = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/uuid"
-thread_local = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/thread_local-rs"
-windows-registry = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/registry"
-faster-hex = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/faster-hex"
-futures-util = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-util"
-tokio-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio/tokio-test"
-rustc_ast_passes = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_passes"
+clap_lex = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap/clap_lex"
+generate_workspace_deps = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/generate_workspace_deps"
+ucd-trie = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/ucd-generate/ucd-trie"
+cargo-toml-generator-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/cargo-toml-generator-macros"
+hmac = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/MACs/hmac"
 rustc_llvm = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_llvm"
-group = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/group"
-rustc_lint_defs = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lint_defs"
-tokio = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio/tokio"
-tracing-attributes = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-attributes"
-rustc_span = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_span"
-signal-hook-async-std = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook/signal-hook-async-std"
-anyhow = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anyhow"
-bincode_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bincode/derive"
-unicode-ident = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-ident"
-pin-project-lite = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pin-project-lite"
-alloc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-alloc"
-gix-rebase = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-rebase"
+regex = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/regex"
+zerocopy = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zerocopy"
+gix-revision = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-revision"
+fxhash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fxhash"
+proc-macro-srv-cli = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/proc-macro-srv-cli"
+lzma-rust2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/lzma-rust2"
+proc-macro-api = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/proc-macro-api"
+typenum = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/typenum"
+uluru = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/uluru"
+librocksdb-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rocksdb/librocksdb-sys"
+smallvec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-smallvec"
+signal-hook-registry = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook/signal-hook-registry"
+gix-chunk = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-chunk"
+code-finder = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/code-finder"
+neo = "/mnt/data1/nix/vendor/rust/cargo2nix/neo"
+pagerank_rs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/submodules/pagerank_rs"
+toml = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml"
+cvs-macro-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/cvs-macro-lib"
+git-wrapper-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/git-wrapper-lib"
+trait_fixer_mocks = "tests/trait_fixer_mocks"
+gix-credentials = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-credentials"
 odds = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/odds"
+anstyle-wincon = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstyle-wincon"
+gix-fetchhead = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-fetchhead"
+rustc_arena = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_arena"
+typesize-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/typesize/typesize-derive"
+windows-services = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/services"
+derive_arbitrary = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arbitrary/derive"
+trait-fixer-compiler-host-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-compiler-host-real"
+rustc_driver = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_driver"
+measureme = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/measureme/measureme"
+gix-archive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-archive"
+rustc_span = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_span"
+trait-fixer-compiler-host-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-compiler-host-mock"
+repl_server = "/mnt/data1/nix/vendor/rust/cargo2nix/repl_server"
+signal-hook-mio = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook/signal-hook-mio"
+smol_str = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/smol_str"
+atomic-maybe-uninit = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/atomic-maybe-uninit"
+crossbeam-utils = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam/crossbeam-utils"
+arbitrary = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arbitrary"
+futures = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures"
+cargo-toml-parts = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/build_helpers/cargo_toml_parts"
+globwalk = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/globwalk"
+rustc_privacy = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_privacy"
+opener = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/opener/opener"
+rayon = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rayon"
+clap_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap/clap_derive"
+parking_lot_core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/parking_lot/core"
+ra-ap-rustc_index = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_index"
+async-graphql-value = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-graphql/value"
+env_filter = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/env_logger/crates/env_filter"
+rustc_ast_pretty = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_pretty"
+toolchain = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/toolchain"
+trait-fixer-attribute-reader-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-attribute-reader-real"
+ide-completion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-completion"
+tracing-serde = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-serde"
+lock_api = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/parking_lot/lock_api"
+gix-sec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-sec"
+real-regex-adapter-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/real-regex-adapter-lib"
+grast_core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/grast_core"
+rustc_expand_base_lib_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_macros"
+addr2line = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/addr2line"
+curl-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/curl-rust/curl-sys"
+rstrace = "/mnt/data1/nix/vendor/rust/cargo2nix/rstrace"
+tempfile = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tempfile"
+windows-collections = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/collections"
+windows_i686_gnu = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/i686_gnu"
+gix-shallow = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-shallow"
+futures-channel = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-channel"
+gix-config-value = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-config-value"
+serde_ignored = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serde-ignored"
+ryu = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/ryu"
+anstream = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstream"
+colorify = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/colorify"
+trait-fixer-query-context-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-query-context-real"
+crossbeam-deque = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam/crossbeam-deque"
+hashlink = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashlink"
+windows-numerics = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/numerics"
+windows-targets = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/library/windows_targets"
+trait-fixer-core-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-core-real"
+core = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-core"
+defmac = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/defmac"
+cargo-util = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-util"
+emoji_llm_machine_rust = "/mnt/data1/nix/vendor/rust/cargo2nix/emoji_llm_machine_rust"
+salsa-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/salsa/components/salsa-macros"
+cargo-repo-sync = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-repo-sync"
+detone = "*"
+tinyvec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tinyvec"
+dot-parser = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dot-parser"
+gix-revwalk = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-revwalk"
+tracing-log = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-log"
+rustc_target = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_target"
+windows_aarch64_msvc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/aarch64_msvc"
+synstructure = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/synstructure"
+gix-actor = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-actor"
+gix-features = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-features"
+introspector_core = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-core"
+quickcheck = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/quickcheck"
+hir = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/hir"
+rustc_type_ir_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_type_ir_macros"
+same-file = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/same-file"
+rustc_parse_format = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_parse_format"
+thiserror-impl = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/thiserror/impl"
+socket2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/socket2"
+nixpkgs-lint = "/mnt/data1/nix/vendor/rust/cargo2nix/nixpkgs-lint"
+bitflags = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bitflags"
+paths = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/paths"
+log_processor = "/mnt/data1/nix/vendor/rust/cargo2nix/log_processor"
+tracing-attributes = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-attributes"
+rustc_infer = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_infer"
+edition = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/edition"
+dep2submodule = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/dep2submodule"
+futures-io = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-io"
+macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/macros"
+trait-fixer-query-context-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-query-context-trait"
+windows-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/sys"
+mbe = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/mbe"
+async-std = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-std"
+miniz_oxide = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/miniz_oxide/miniz_oxide"
+toml_edit = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml_edit"
+rustc_index_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index_macros"
+rustc_hir_id = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_id"
+test_macros_app = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/test_macros_app"
+trait-fixer-mocks-test = "/mnt/data1/nix/vendor/rust/cargo2nix/tests/trait_fixer_mocks"
+windows_x86_64_gnu = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/x86_64_gnu"
+serde_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serde/serde_derive"
+litrs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/litrs"
+anstyle-query = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/anstyle/crates/anstyle-query"
+auxiliary = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/addr2line/tests/auxiliary"
+base64 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-base64"
+itoa = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/itoa"
+gix-sequencer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-sequencer"
+proc-macro-srv = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/proc-macro-srv"
+rusqlite = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rusqlite"
+rustc_driver_impl = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_driver_impl"
+include-dir-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/include-dir-macro-rs"
+gix-ignore = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-ignore"
+trait-fixer-rules-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-rules-mock"
+ide = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide"
+tracing-tower = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-tower"
+ecdsa = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signatures/ecdsa"
+gix-blame = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-blame"
+async-graphql-parser = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-graphql/parser"
+cfg_aliases = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cfg_aliases"
+clap_complete = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap/clap_complete"
+rustc_proc_macro = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_proc_macro"
+gix-date = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-date"
+p384 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/elliptic-curves/p384"
+rustc_ast_passes = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_passes"
+snapbox = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/snapbox/crates/snapbox"
+rustc_query_system = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_query_system"
+home = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/home"
+icu_normalizer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/components/normalizer"
+unicode-segmentation = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-segmentation"
+fixed_point_enum = "/mnt/data1/nix/vendor/rust/cargo2nix/fixed_point_enum"
+split-decls-types = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/split-decls-types"
+trait-fixer-trait-checker-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-trait-checker-real"
+gix-hashtable = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-hashtable"
+powerfmt-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/powerfmt/powerfmt-macros"
+rustc-literal-escaper = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-literal-escaper"
+json_to_memes_extractor = "/mnt/data1/nix/vendor/rust/cargo2nix/json_to_memes_extractor"
+windows-bindings = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/jni-rs/windows-bindings"
+cargo-edit-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-edit-lib"
+sharded-slab = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/sharded-slab"
+base-db = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/base-db"
+gix-pathspec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-pathspec"
+monster-grouper = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/monster-grouper"
+gix-transport = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-transport"
+futures-task = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-task"
+crossbeam = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam"
+num-conv = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/num-conv"
+is-terminal = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/is-terminal"
+rustc_next_trait_solver = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_next_trait_solver"
+gix-tempfile = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-tempfile"
+trait-fixer-hir-info-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-hir-info-trait"
+block-buffer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/utils/block-buffer"
+crc32fast = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-crc32fast"
+gix-tix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-tix"
+trait-fixer-core-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-core-mock"
+generator = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/generator-rs"
+gix-utils = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-utils"
+yoke-derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/yoke/derive"
+rand_xorshift = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rngs/rand_xorshift"
+tiktok_viewer_tracker = "/mnt/data1/nix/vendor/rust/cargo2nix/tiktok_viewer_tracker"
+rustc-hash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-hash"
+lazy_static = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/lazy-static"
+nu-ansi-term = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nu-ansi-term"
+sval = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/sval"
+sha1 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashes/sha1"
+trait-fixer-rules-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-rules-trait"
+slab = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/slab"
+factory_abi = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/factory_abi"
+mkslop-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/mkslop-macros"
+uuid-macro-internal = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/uuid/macros"
+http-auth = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/http-auth"
+rustc_public = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_public"
+syntax = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/syntax"
+windows_x86_64_gnullvm = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/x86_64_gnullvm"
+itertools = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/itertools"
+pathdiff = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pathdiff"
+annotate-snippets = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/annotate-snippets-rs"
+ide-db = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-db"
+mockall = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/mockall/mockall"
+rustc_traits = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_traits"
+gix-quote = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-quote"
+hir-expand = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/hir-expand"
+solfun_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/solfun_macros"
+uuid = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/uuid"
+gix-packetline = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-packetline"
+expand_utils_lib = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/expand_utils_lib"
+gix-prompt = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-prompt"
+signature = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/traits/signature"
+cpufeatures = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/utils/cpufeatures"
+windows-future = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/future"
+temp-dir = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/temp-dir/temp-dir"
+iana-time-zone = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/iana-time-zone"
+parking_lot = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/parking_lot"
+potential_utf = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/potential_utf"
+crossbeam-channel = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crossbeam/crossbeam-channel"
+digest = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/traits/digest"
+foldhash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/foldhash"
+loom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/loom"
+rustc_expand_patches = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_patches"
+rustc_hir_typeck = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_typeck"
+rustc_public_bridge = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_public_bridge"
+stdx = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/stdx"
+tokio-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tokio/tokio-macros"
+dashmap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dashmap"
+gix-traverse = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-traverse"
+sha2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashes/sha2"
+trait-fixer-query-context-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-query-context-mock"
+unicode-width = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-width"
+trait-fixer-lang-items-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-lang-items-mock"
+lib-macro-rule = "./crates/lib-macro-rule"
+rustc_builtin_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_builtin_macros"
+rustc_mir_dataflow = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_dataflow"
+rayon-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rayon/rayon-core"
+cargo-test-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/cargo-test-macro"
+crates-io = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/crates-io"
+icu_properties = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/components/properties"
+hashbrown = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashbrown"
+ast_parser_impl = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/ast_parser_impl"
+mio = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/mio"
+real_rules_test = "tests/real_rules_test"
+shebling_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/shebling_macros"
+fluent-syntax = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fluent-rs/fluent-syntax"
+gix-object = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-object"
+oorandom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/oorandom"
+rustc_baked_icu_data = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_baked_icu_data"
+pest_meta = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pest/meta"
+trait-fixer-lang-items-real = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-lang-items-real"
+trait-fixer-compiler-host-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-compiler-host-trait"
+const-oid = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/formats/const-oid"
+faster-hex = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/faster-hex"
+constant_time_eq = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/constant_time_eq"
+rustc_graphviz = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_graphviz"
+rustc_symbol_mangling = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_symbol_mangling"
+prelude-generator = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-bootstrap-nix/prelude-generator"
+log-analyzer = "/mnt/data1/nix/vendor/rust/cargo2nix/log-analyzer"
+rustc_lexer = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lexer"
+ed25519-compact = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-ed25519-compact"
+semver = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/semver"
+gix-status = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-status"
+windows_i686_msvc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/targets/i686_msvc"
+ide-ssr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-ssr"
+tool-traits-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/tool-traits-lib"
+lib-matcher-loc = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-matcher-loc"
+ide-assists = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/ide-assists"
+rustc_interface = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_interface"
+gix-odb = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-odb"
+libloading = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust_libloading"
+byteorder = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/byteorder"
+gix-filter = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-filter"
+query-group-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/query-group-macro"
+is_executable = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/is_executable"
+regex-automata = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/regex/regex-automata"
+gix-command = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-command"
+test-utils = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/test-utils"
+gix-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-macros"
+trait-fixer-rustc-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-rustc-mock"
+libz-rs-sys = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/zlib-rs/libz-rs-sys"
+futures-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-macro"
+gix-merge = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-merge"
+introspector_decl2_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_decl2_macros"
+ppv-lite86 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cryptocorrosion/utils-simd/ppv-lite86"
+autowrap_tool = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/autowrap_tool"
+rustc_ast = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast"
+rustc_index = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index"
+thin-vec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/thin-vec"
+gix-pack = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-pack"
+document-features = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/document-features"
+enum-self = "/mnt/data1/nix/vendor/rust/cargo2nix/enum-self"
+arrayvec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arrayvec"
+expect-test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/expect-test"
+clap_builder = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/clap/clap_builder"
+primeorder = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/elliptic-curves/primeorder"
+tracing-chrome = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing-chrome"
+toml_datetime = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml_datetime"
+introspector_macro_helpers = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_macro_helpers"
+equivalent = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/equivalent"
+unicode-normalization = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicode-normalization"
+assert-impl = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/assert-impl"
+generic-array = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/generic-array"
+fiat-crypto = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fiat-crypto/fiat-rust"
+windows-threading = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/threading"
+futures-timer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-timer"
+trait-fixer-attribute-reader-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-attribute-reader-trait"
+serde-value = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serde-value"
+futures-core = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-core"
+cargo-toml-generator-types = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/cargo-toml-generator-types"
+cargo-credential-libsecret = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/credential/cargo-credential-libsecret"
+fallible-iterator = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-fallible-iterator"
+hyper = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hyper"
+rustc-std-workspace-alloc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-alloc"
+intl-memoizer = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fluent-rs/intl-memoizer"
+prettyplease = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/prettyplease"
+imara-diff = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/imara-diff"
+syn-codegen = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/syn/json"
+windows-implement = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/implement"
+windows-bindgen = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/bindgen"
+atoi = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/atoi"
+report-analyzer-rs = "/mnt/data1/nix/vendor/rust/cargo2nix/report-analyzer-rs"
+rustc_apfloat = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc_apfloat"
+adler2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/adler2"
+uuid-rng-internal = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/uuid/rng"
+bytes = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bytes"
+gix-bitmap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-bitmap"
+regex-syntax = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/regex/regex-syntax"
+blocking = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/blocking"
+cargo-credential = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/credential/cargo-credential"
+split_rustc_data_structures = "./crates/split_rustc_data_structures"
+xz2 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/xz2-rs"
+md5 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/md5"
+litemap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/litemap"
+signal-hook-async-std = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook/signal-hook-async-std"
+async-stream = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-stream-vendored"
+fnv = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-fnv"
+rustc_query_impl = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_query_impl"
+split-expanded-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-bootstrap-nix/split-expanded-lib"
+thread_local = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/thread_local-rs"
+intern = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/intern"
+pin-utils = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/pin-utils"
+os_info = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/os_info/os_info"
+terminal_size = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/terminal-size"
+windows-version = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/windows-rs/crates/libs/version"
+criterion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/criterion"
+serial_test = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serial_test/serial_test"
+ct-codecs = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-ct-codecs"
+color-print-proc-macro = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/color-print/color-print-proc-macro"
+pipeline-traits = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-bootstrap-nix/pipeline-traits"
+iana-time-zone-haiku = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/iana-time-zone/haiku"
+patch-build-rs-macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/patch-build-rs-macros"
+futures-sink = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-sink"
+flake_auditor = "/mnt/data1/nix/vendor/rust/cargo2nix/flake_auditor"
+futures-lite = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-lite"
+fixedbitset = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fixedbitset"
+gix-submodule = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-submodule"
+petgraph = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/petgraph"
+rowan = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rowan"
+rustc_expand = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand"
+addr2line-bin = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/addr2line-bin"
+rand_pcg = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rand/rand_pcg"
+rustc_middle = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_middle"
+rustc_windows_rc = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_windows_rc"
+signal-hook = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook"
+find-msvc-tools = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cc-rs/find-msvc-tools"
+proc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/static-assertions-rs/proc"
+trait-fixer = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/trait-fixer"
+trait-fixer-core-trait = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-core-trait"
+trycmd = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/snapbox/crates/trycmd"
+gix-rebase = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-rebase"
+renix = "/mnt/data1/nix/vendor/rust/cargo2nix/renix"
+indexmap = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/indexmap"
+rnix_parser_new = "/mnt/data1/nix/vendor/rust/cargo2nix/rnix_parser_new"
+file_analyzer = "/mnt/data1/nix/vendor/rust/cargo2nix/file_analyzer"
+erased-serde = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/erased-serde"
+rustc_resolve = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_resolve"
+rand = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rand"
+cargo-feature-adapter = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-feature-adapter"
+cargo-repo-sync-lib = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/cargo-repo-sync-lib"
+rustc_type_ir = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_type_ir"
+tinystr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/icu4x/utils/tinystr"
+gix-lock = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-lock"
+gix-url = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-url"
+lib-token-tree = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-token-tree"
+tinyvec_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tinyvec_macros"
+rnix-attempt = "/mnt/data1/nix/vendor/rust/cargo2nix/rnix-attempt"
+tracing-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/tracing/tracing-mock"
+rustc_parse = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_parse"
+trait-fixer-hir-info-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-hir-info-mock"
+crosstermion = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/crosstermion"
+fuzz = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/quinn/fuzz"
+real-rules-test = "/mnt/data1/nix/vendor/rust/cargo2nix/tests/real_rules_test"
+blake3 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/BLAKE3"
+rustc_mir_transform = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_transform"
+simd-adler32 = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/simd-adler32"
+unicase = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/unicase"
+heapless = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/heapless"
+rustc_expand_base_lib_test_driver = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_test_driver"
+rustfix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/rustfix"
+sha1-checked = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/hashes/sha1-checked"
+sval_derive_macros = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/sval/derive_macros"
+profile = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/profile"
+gix-testtools = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/tests/tools"
+async-graphql = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-graphql"
+crypto-common = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/traits/crypto-common"
+prodash = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/prodash"
+signal-hook-tokio = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/signal-hook/signal-hook-tokio"
+cargo = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo"
+idna = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-url/idna"
+macrotest = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/macrotest"
+gix-attributes = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-attributes"
+feature-permutation-builder = "/mnt/data1/nix/vendor/rust/cargo2nix/tools/feature-permutation-builder"
+if-counter = "/mnt/data1/nix/vendor/rust/cargo2nix/if-counter"
+rustc_session = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_session"
+syn-wrapper = "/mnt/data1/nix/vendor/rust/cargo2nix/syn-wrapper"
+bstr = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/bstr"
+fluent-bundle = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fluent-rs/fluent-bundle"
+rustc_expand_base_lib_custom_macros = "/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_custom_macros"
+rustc_pattern_analysis = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_pattern_analysis"
+gix-refspec = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix-refspec"
+nixtract = "/mnt/data1/nix/vendor/rust/cargo2nix/nixtract"
+temp-env = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/temp-env"
+im-rc = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/im-rs/rc"
+rustc_passes = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_passes"
+serial_test_derive = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/serial_test/serial_test_derive"
+toml_parser = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml_parser"
+gemini_rustc_data_structures = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/gemini_rustc_data_structures"
+nom = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/nom"
+object = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/object"
+proc_static_assertions = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/static-assertions-rs/proc"
+minimal-lexical = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/minimal-lexical"
+fastrand = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fastrand"
+rstrace-cuda-sniff = "/mnt/data1/nix/vendor/rust/cargo2nix/rstrace-cuda-sniff"
+rustc_abi = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_abi"
 
-[workspace_dependency_overrides.fallible-iterator]
-version = "0.3.0"
+[workspace_dependency_overrides]
+unicode-bidi = "*"
+schemars = "1.0.5"
+utf16_iter = "*"
+openssl = "0.10.74"
+unic-langid = "0.9"
+write16 = "*"
+darling = "*"
+postcard = "*"
+jobserver = "0.1.34"
+serde-untagged = "0.1.9"
+rkyv = "*"
+similar = "2.7.0"
+fluent-langneg = "0.13"
+security-framework = "3.5.1"
+rustyline = "14.0.0"
+yoke = "*"
+shell-escape = "0.1.5"
+icu_provider = "*"
+databake = "*"
+icu_collections = "*"
+log = "0.4"
+async-trait = "0.1.79"
+dot = "*"
+pulldown-cmark-to-cmark = "*"
+zerovec = "*"
+intl_pluralrules = "7.0"
+notify = "6.1.1"
+displaydoc = "*"
+filetime = "0.2.26"
+harfbuzz-traits = "*"
+proptest = "1.9.0"
+icu_locale_core = "*"
+ignore = "0.4.25"
+percent-encoding = "2.3.2"
+memfd = "0.6.5"
+zerotrie = "*"
+writeable = "*"
+utf8_iter = "*"
+iai = "0.1"
+winnow = "0.7.13"
+arraystring = "*"
+miow = "0.6.1"
+perf-event-open-sys = "3.0.0"
 
-[workspace_dependency_overrides.syn]
-features = ["full"]
-version = "2.0"
+[workspace_dependency_overrides.cargo-credential-libsecret]
+path = "submodules/cargo/credential/cargo-credential-libsecret"
+
+[workspace_dependency_overrides.rustc-stable-hash]
+features = ["nightly"]
+path = "submodules/rustc-stable-hash"
+
+[workspace_dependency_overrides.triomphe]
+features = ["std"]
+version = "0.1.14"
+
+[workspace_dependency_overrides.autowrap_tool]
+path = "submodules/patch-build-rs/autowrap_tool/"
+
+[workspace_dependency_overrides.rustc-hash]
+path = "submodules/rustc-hash"
+
+[workspace_dependency_overrides.unicase]
+path = "submodules/unicase"
+
+[workspace_dependency_overrides.criterion]
+path = "submodules/criterion"
+
+[workspace_dependency_overrides.arc-swap]
+path = "submodules/arc-swap"
+
+[workspace_dependency_overrides.crates-io]
+path = "submodules/cargo/crates/crates-io"
+
+[workspace_dependency_overrides.camino]
+path = "submodules/camino"
+
+[workspace_dependency_overrides.futures-io]
+path = "submodules/futures-rs/futures-io"
+
+[workspace_dependency_overrides.parking_lot_core]
+path = "submodules/parking_lot/core"
+version = "0.9.13"
+
+[workspace_dependency_overrides.nix]
+path = "submodules/nix"
+
+[workspace_dependency_overrides.rustc_session]
+path = "submodules/rust/compiler/rustc_session"
+
+[workspace_dependency_overrides.dissimilar]
+path = "submodules/dissimilar"
+
+[workspace_dependency_overrides.gix-revwalk]
+path = "submodules/gitoxide/gix-revwalk"
+
+[workspace_dependency_overrides.http-auth]
+path = "submodules/http-auth"
+
+[workspace_dependency_overrides.pest_meta]
+path = "submodules/pest/meta"
+
+[workspace_dependency_overrides.lock_api]
+path = "submodules/parking_lot/lock_api"
+
+[workspace_dependency_overrides.serde_spanned]
+path = "submodules/toml/crates/serde_spanned"
+
+[workspace_dependency_overrides.windows_aarch64_gnullvm]
+path = "submodules/windows-rs/crates/targets/aarch64_gnullvm"
+
+[workspace_dependency_overrides.aho_corasick]
+path = "submodules/aho-corasick"
+
+[workspace_dependency_overrides.gix-url]
+path = "submodules/gitoxide/gix-url"
+
+[workspace_dependency_overrides.clap]
+features = ["derive"]
+path = "submodules/clap"
+
+[workspace_dependency_overrides.rustc_data_structures]
+path = "submodules/rust/compiler/rustc_data_structures"
+
+[workspace_dependency_overrides.wasm_sync]
+path = "submodules/wasm_sync"
+
+[workspace_dependency_overrides.typesize-derive]
+path = "submodules/typesize/typesize-derive"
+
+[workspace_dependency_overrides.windows-sys]
+path = "submodules/windows-rs/crates/libs/sys"
+
+[workspace_dependency_overrides.rustc_pattern_analysis]
+path = "./submodules/rust/compiler/rustc_pattern_analysis"
+
+[workspace_dependency_overrides.axum]
+version = "0.7.5"
+
+[workspace_dependency_overrides.ryu]
+path = "submodules/ryu"
+
+[workspace_dependency_overrides.proc-macro-api]
+path = "submodules/rust-analyzer/crates/proc-macro-api"
+
+[workspace_dependency_overrides.gix-tempfile]
+features = []
+path = "submodules/gitoxide/gix-tempfile"
+
+[workspace_dependency_overrides.socket2]
+path = "submodules/socket2"
+
+[workspace_dependency_overrides.ide-assists]
+path = "submodules/rust-analyzer/crates/ide-assists"
+
+[workspace_dependency_overrides.serde_core]
+path = "submodules/serde/serde_core"
+
+[workspace_dependency_overrides.gix-glob]
+path = "submodules/gitoxide/gix-glob"
+
+[workspace_dependency_overrides.ide-diagnostics]
+path = "submodules/rust-analyzer/crates/ide-diagnostics"
+
+[workspace_dependency_overrides.windows]
+path = "submodules/windows-rs/crates/libs/windows"
+
+[workspace_dependency_overrides.signal-hook-tokio]
+path = "submodules/signal-hook/signal-hook-tokio"
+
+[workspace_dependency_overrides.fnv]
+path = "submodules/rust-fnv"
+
+[workspace_dependency_overrides.rustc-demangle]
+path = "submodules/rustc-demangle"
+
+[workspace_dependency_overrides.gix-shallow]
+path = "submodules/gitoxide/gix-shallow"
+
+[workspace_dependency_overrides.chrono]
+path = "submodules/chrono"
+
+[workspace_dependency_overrides.gix-utils]
+path = "submodules/gitoxide/gix-utils"
+
+[workspace_dependency_overrides.async-graphql-value]
+path = "submodules/async-graphql/value"
+
+[workspace_dependency_overrides.rustc_attr_parsing]
+path = "submodules/rust/compiler/rustc_attr_parsing"
+
+[workspace_dependency_overrides.introspector_decl_core]
+path = "submodules/patch-build-rs/introspector_decl_core"
+
+[workspace_dependency_overrides.p384]
+path = "submodules/elliptic-curves/p384"
+
+[workspace_dependency_overrides.gix-tui]
+path = "submodules/gitoxide/gix-tui"
+
+[workspace_dependency_overrides.signature]
+path = "submodules/traits/signature"
+
+[workspace_dependency_overrides.trait-fixer-query-context-trait]
+path = "crates/trait-fixer-query-context-trait"
+
+[workspace_dependency_overrides.typesize]
+path = "submodules/typesize"
+
+[workspace_dependency_overrides.cargo-toml-generator-types]
+path = "submodules/split-decls-rs/cargo-toml-generator-types"
+
+[workspace_dependency_overrides.find-msvc-tools]
+path = "submodules/cc-rs/find-msvc-tools"
+
+[workspace_dependency_overrides.gix-traverse]
+path = "submodules/gitoxide/gix-traverse"
+
+[workspace_dependency_overrides.linux-raw-sys]
+path = "submodules/linux-raw-sys"
+
+[workspace_dependency_overrides.zip]
+path = "submodules/zip2"
+
+[workspace_dependency_overrides.cargo-util]
+path = "submodules/cargo/crates/cargo-util"
+
+[workspace_dependency_overrides.rayon]
+path = "submodules/rayon"
+
+[workspace_dependency_overrides.hmac]
+path = "submodules/MACs/hmac"
+
+[workspace_dependency_overrides.lib-macro-rule]
+path = "submodules/split-decls-rs/crates/lib-macro-rule"
+
+[workspace_dependency_overrides.gix-sequencer]
+path = "submodules/gitoxide/gix-sequencer"
+
+[workspace_dependency_overrides.signal-hook-mio]
+path = "submodules/signal-hook/signal-hook-mio"
+
+[workspace_dependency_overrides.gix-macros]
+path = "submodules/gitoxide/gix-macros"
+
+[workspace_dependency_overrides.clap_complete]
+path = "submodules/clap/clap_complete"
+
+[workspace_dependency_overrides.rustc_driver_impl]
+path = "submodules/rust/compiler/rustc_driver_impl"
+
+[workspace_dependency_overrides.async-std]
+path = "submodules/async-std"
+
+[workspace_dependency_overrides.oorandom]
+path = "submodules/oorandom"
+
+[workspace_dependency_overrides.expect-test]
+path = "submodules/expect-test"
+
+[workspace_dependency_overrides.cfg]
+features = ["tt"]
+path = "submodules/rust-analyzer/crates/cfg"
+
+[workspace_dependency_overrides.introspector_macro_helpers]
+path = "submodules/patch-build-rs/introspector_macro_helpers"
+
+[workspace_dependency_overrides.query-group]
+package = "query-group-macro"
+path = "./submodules/rust-analyzer/crates/query-group-macro"
+
+[workspace_dependency_overrides.libc]
+features = ["extra_traits"]
+path = "submodules/libc"
+
+[workspace_dependency_overrides.sha1]
+path = "submodules/hashes/sha1"
+
+[workspace_dependency_overrides.gix-submodule]
+path = "submodules/gitoxide/gix-submodule"
+
+[workspace_dependency_overrides.gix-testtools]
+path = "submodules/gitoxide/tests/tools"
+
+[workspace_dependency_overrides.terminal_size]
+path = "submodules/terminal-size"
+
+[workspace_dependency_overrides.gix-note]
+path = "submodules/gitoxide/gix-note"
+
+[workspace_dependency_overrides.gix-status]
+path = "submodules/gitoxide/gix-status"
+
+[workspace_dependency_overrides.ra-ap-rustc_pattern_analysis]
+package = "rustc_pattern_analysis"
+path = "./submodules/rust/compiler/rustc_pattern_analysis"
+
+[workspace_dependency_overrides.zerovec-derive]
+path = "submodules/icu4x/utils/zerovec/derive"
+
+[workspace_dependency_overrides.hashbrown]
+path = "submodules/hashbrown"
+
+[workspace_dependency_overrides.rusqlite]
+features = ["fallible_uint"]
+path = "submodules/rusqlite"
+
+[workspace_dependency_overrides.itoa]
+path = "submodules/itoa"
+
+[workspace_dependency_overrides.rayon-core]
+path = "submodules/rayon/rayon-core"
+
+[workspace_dependency_overrides.gix-transport]
+path = "submodules/gitoxide/gix-transport"
+
+[workspace_dependency_overrides.dot-parser]
+path = "submodules/dot-parser"
+
+[workspace_dependency_overrides.anstyle-query]
+path = "submodules/anstyle/crates/anstyle-query"
+
+[workspace_dependency_overrides.rustc_apfloat]
+path = "submodules/rustc_apfloat"
+
+[workspace_dependency_overrides.temp-dir]
+path = "submodules/temp-dir/temp-dir"
+
+[workspace_dependency_overrides.tracing-attributes]
+path = "submodules/tracing/tracing-attributes"
+
+[workspace_dependency_overrides.tokio-util]
+path = "submodules/tokio/tokio-util"
+
+[workspace_dependency_overrides.curl-sys]
+path = "submodules/curl-rust/curl-sys"
+
+[workspace_dependency_overrides.gix-prompt]
+path = "submodules/gitoxide/gix-prompt"
+
+[workspace_dependency_overrides.memchr]
+path = "submodules/memchr"
+
+[workspace_dependency_overrides.gix-archive]
+path = "submodules/gitoxide/gix-archive"
+
+[workspace_dependency_overrides.version_check]
+path = "submodules/version_check"
+
+[workspace_dependency_overrides.windows-future]
+path = "submodules/windows-rs/crates/libs/future"
+
+[workspace_dependency_overrides.rustix]
+path = "submodules/rustix"
+
+[workspace_dependency_overrides.scoped-tls]
+path = "submodules/scoped-tls"
+
+[workspace_dependency_overrides.rustc_driver]
+path = "submodules/rust/compiler/rustc_driver"
+
+[workspace_dependency_overrides.serde_derive]
+path = "submodules/serde/serde_derive"
+
+[workspace_dependency_overrides.powerfmt-macros]
+path = "submodules/powerfmt/powerfmt-macros"
+
+[workspace_dependency_overrides.bytesize]
+path = "submodules/bytesize"
+
+[workspace_dependency_overrides.icu_properties_data]
+path = "submodules/icu4x/provider/data/properties"
+
+[workspace_dependency_overrides.base64ct]
+path = "submodules/formats/base64ct"
+
+[workspace_dependency_overrides.windows_x86_64_msvc]
+path = "submodules/windows-rs/crates/targets/x86_64_msvc"
+
+[workspace_dependency_overrides.curl]
+features = ["http2"]
+path = "submodules/curl-rust"
+
+[workspace_dependency_overrides.trycmd]
+path = "submodules/snapbox/crates/trycmd"
+
+[workspace_dependency_overrides.either]
+path = "submodules/either"
+
+[workspace_dependency_overrides.annotate-snippets]
+path = "submodules/annotate-snippets-rs"
+
+[workspace_dependency_overrides.gix-refspec]
+path = "submodules/gitoxide/gix-refspec"
+
+[workspace_dependency_overrides.lazy_static]
+path = "submodules/lazy-static"
+
+[workspace_dependency_overrides.odds]
+path = "submodules/odds"
+
+[workspace_dependency_overrides.hex]
+path = "submodules/rust-hex"
+
+[workspace_dependency_overrides.is-terminal]
+path = "submodules/is-terminal/"
+
+[workspace_dependency_overrides.rustc_ast_ir]
+path = "./submodules/rust/compiler/rustc_ast_ir"
+
+[workspace_dependency_overrides.faster-hex]
+path = "submodules/faster-hex"
+
+[workspace_dependency_overrides.rustc_lint]
+path = "submodules/rust/compiler/rustc_lint"
+
+[workspace_dependency_overrides.lib-matcher-loc]
+path = "submodules/split-decls-rs/crates/lib-matcher-loc"
+
+[workspace_dependency_overrides.gix-worktree-state]
+path = "submodules/gitoxide/gix-worktree-state"
+
+[workspace_dependency_overrides.primeorder]
+path = "submodules/elliptic-curves/primeorder"
+
+[workspace_dependency_overrides.project-model]
+path = "submodules/rust-analyzer/crates/project-model"
+
+[workspace_dependency_overrides.rowan]
+path = "submodules/rowan"
+
+[workspace_dependency_overrides.gix-pack]
+path = "submodules/gitoxide/gix-pack"
+
+[workspace_dependency_overrides.ra-ap-rustc_ast_ir]
+package = "rustc_ast_ir"
+path = "./submodules/rust/compiler/rustc_ast_ir"
+
+[workspace_dependency_overrides.tracing-tower]
+path = "submodules/tracing/tracing-tower"
+
+[workspace_dependency_overrides.cargo-repo-sync-lib]
+path = "tools/cargo-repo-sync-lib"
+
+[workspace_dependency_overrides.proc-macro-srv-cli]
+path = "submodules/rust-analyzer/crates/proc-macro-srv-cli"
+
+[workspace_dependency_overrides.cfg-if]
+path = "submodules/cfg-if"
+
+[workspace_dependency_overrides.openssl-probe]
+path = "submodules/openssl-probe"
 
 [workspace_dependency_overrides.once_cell]
-typed-arena = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust-typed-arena"
-version = "1.18.0"
+version = "1.19"
+
+[workspace_dependency_overrides.memmap2]
+path = "submodules/memmap2-rs"
+
+[workspace_dependency_overrides.gix-quote]
+path = "submodules/gitoxide/gix-quote"
+
+[workspace_dependency_overrides.heapless]
+path = "submodules/heapless"
+
+[workspace_dependency_overrides.colorchoice]
+path = "submodules/anstyle/crates/colorchoice"
+
+[workspace_dependency_overrides.gix-date]
+path = "submodules/gitoxide/gix-date"
+
+[workspace_dependency_overrides.litrs]
+path = "submodules/litrs"
+
+[workspace_dependency_overrides.petgraph]
+path = "submodules/petgraph"
+
+[workspace_dependency_overrides.windows-services]
+path = "submodules/windows-rs/crates/libs/services"
+
+[workspace_dependency_overrides.edition]
+path = "submodules/rust-analyzer/crates/edition"
+
+[workspace_dependency_overrides.flate2]
+features = ["zlib-rs"]
+version = "1.1.5"
+
+[workspace_dependency_overrides.windows-interface]
+path = "submodules/windows-rs/crates/libs/interface"
+
+[workspace_dependency_overrides.cfg_aliases]
+path = "submodules/cfg_aliases"
+
+[workspace_dependency_overrides.trait-fixer-rules-trait]
+path = "crates/trait-fixer-rules-trait"
+
+[workspace_dependency_overrides.rustc_trait_selection]
+path = "submodules/rust/compiler/rustc_trait_selection"
+
+[workspace_dependency_overrides.clap_builder]
+path = "submodules/clap/clap_builder"
+
+[workspace_dependency_overrides.macro_wrapper_lib]
+path = "submodules/split-decls-rs/crates/macro_wrapper_lib"
+
+[workspace_dependency_overrides.arrayvec]
+path = "submodules/arrayvec"
+
+[workspace_dependency_overrides.quote]
+path = "submodules/quote"
+
+[workspace_dependency_overrides.salsa]
+features = [
+    "rayon",
+    "salsa_unstable",
+    "macros",
+    "inventory",
+]
+path = "submodules/salsa"
+
+[workspace_dependency_overrides.twox-hash]
+path = "submodules/twox-hash"
+
+[workspace_dependency_overrides.blocking]
+path = "submodules/blocking"
+
+[workspace_dependency_overrides.cargo-credential-wincred]
+path = "submodules/cargo/credential/cargo-credential-wincred"
+
+[workspace_dependency_overrides.windows-collections]
+path = "submodules/windows-rs/crates/libs/collections"
+
+[workspace_dependency_overrides.rust-nix-bootstrap]
+path = "crates/rust-nix-bootstrap"
+
+[workspace_dependency_overrides.cargo-credential]
+path = "submodules/cargo/credential/cargo-credential"
+
+[workspace_dependency_overrides.thread_local]
+path = "submodules/thread_local-rs"
+
+[workspace_dependency_overrides.rustc_errors]
+path = "submodules/rust/compiler/rustc_errors"
+
+[workspace_dependency_overrides.cargo-toml-generator-macros]
+path = "submodules/split-decls-rs/cargo-toml-generator-macros"
+
+[workspace_dependency_overrides.autocfg]
+path = "submodules/autocfg"
+
+[workspace_dependency_overrides.futures-channel]
+path = "submodules/futures-rs/futures-channel"
+
+[workspace_dependency_overrides.litemap]
+path = "submodules/icu4x/utils/litemap"
+
+[workspace_dependency_overrides.gix-index]
+path = "submodules/gitoxide/gix-index"
+
+[workspace_dependency_overrides.gix-bitmap]
+path = "submodules/gitoxide/gix-bitmap"
+
+[workspace_dependency_overrides.io-uring]
+path = "submodules/io-uring"
+
+[workspace_dependency_overrides.erased-serde]
+path = "submodules/erased-serde"
+
+[workspace_dependency_overrides.git2-curl]
+path = "submodules/git2-rs/git2-curl"
+
+[workspace_dependency_overrides.minimal-lexical]
+path = "submodules/minimal-lexical"
+
+[workspace_dependency_overrides.toolchain]
+path = "submodules/rust-analyzer/crates/toolchain"
+
+[workspace_dependency_overrides.nom]
+path = "submodules/nom"
+
+[workspace_dependency_overrides.quickcheck]
+path = "submodules/quickcheck"
+
+[workspace_dependency_overrides.arbitrary]
+path = "submodules/arbitrary/"
+
+[workspace_dependency_overrides.ct-codecs]
+path = "submodules/rust-ct-codecs"
+
+[workspace_dependency_overrides.gix-trace]
+path = "submodules/gitoxide/gix-trace"
+
+[workspace_dependency_overrides.introspector_decl2_macros]
+path = "submodules/patch-build-rs/introspector_decl2_macros"
+
+[workspace_dependency_overrides.gix-protocol]
+path = "submodules/gitoxide/gix-protocol"
+
+[workspace_dependency_overrides.arrayref]
+path = "submodules/arrayref"
+
+[workspace_dependency_overrides.reqwest]
+path = "submodules/reqwest"
+
+[workspace_dependency_overrides.cargo-platform]
+path = "submodules/cargo/crates/cargo-platform"
+
+[workspace_dependency_overrides.rustc_transmute]
+path = "submodules/rust/compiler/rustc_transmute"
+
+[workspace_dependency_overrides.sha1-checked]
+path = "submodules/hashes/sha1-checked"
+
+[workspace_dependency_overrides.test-fixture]
+path = "submodules/rust-analyzer/crates/test-fixture"
+
+[workspace_dependency_overrides.trait-fixer-core-trait]
+path = "crates/trait-fixer-core-trait"
+
+[workspace_dependency_overrides.measureme]
+path = "submodules/measureme/measureme"
+
+[workspace_dependency_overrides.futures-sink]
+path = "submodules/futures-rs/futures-sink"
+
+[workspace_dependency_overrides.base64]
+path = "submodules/rust-base64"
+
+[workspace_dependency_overrides.env_filter]
+path = "submodules/env_logger/crates/env_filter"
+
+[workspace_dependency_overrides.ide-completion]
+path = "submodules/rust-analyzer/crates/ide-completion"
+
+[workspace_dependency_overrides.futures]
+path = "submodules/futures-rs/futures"
+
+[workspace_dependency_overrides.pulldown-cmark]
+version = "0.9.6"
+
+[workspace_dependency_overrides.uuid]
+path = "submodules/uuid"
+
+[workspace_dependency_overrides.windows-implement]
+path = "submodules/windows-rs/crates/libs/implement"
+
+[workspace_dependency_overrides.profile]
+path = "submodules/rust-analyzer/crates/profile"
+
+[workspace_dependency_overrides.load-cargo]
+path = "submodules/rust-analyzer/crates/load-cargo"
+
+[workspace_dependency_overrides.jiff]
+features = ["std"]
+version = "0.2.15"
+
+[workspace_dependency_overrides.ucd-trie]
+path = "submodules/ucd-generate/ucd-trie"
+
+[workspace_dependency_overrides.env_logger]
+path = "submodules/env_logger"
+
+[workspace_dependency_overrides.gix-validate]
+path = "submodules/gitoxide/gix-validate"
+
+[workspace_dependency_overrides.fuzz]
+path = "submodules/quinn/fuzz"
+
+[workspace_dependency_overrides.tokio-stream]
+path = "submodules/tokio/tokio-stream"
+
+[workspace_dependency_overrides.crypto-bigint]
+path = "submodules/crypto-bigint"
+
+[workspace_dependency_overrides.futures-test]
+path = "submodules/futures-rs/futures-test"
+
+[workspace_dependency_overrides.paths]
+path = "submodules/rust-analyzer/crates/paths"
+
+[workspace_dependency_overrides.line-index]
+path = "submodules/rust-analyzer/lib/line-index"
+
+[workspace_dependency_overrides.gix-config]
+path = "submodules/gitoxide/gix-config"
+
+[workspace_dependency_overrides.query-group-macro]
+path = "./submodules/rust-analyzer/crates/query-group-macro"
+
+[workspace_dependency_overrides.trait-fixer-attribute-reader-trait]
+path = "crates/trait-fixer-attribute-reader-trait"
+
+[workspace_dependency_overrides.document-features]
+path = "submodules/document-features"
+
+[workspace_dependency_overrides.sha2]
+path = "submodules/hashes/sha2"
+
+[workspace_dependency_overrides.unicode-ident]
+path = "submodules/unicode-ident"
+
+[workspace_dependency_overrides.anyhow]
+path = "submodules/anyhow"
+
+[workspace_dependency_overrides.hkdf]
+path = "submodules/KDFs/hkdf"
+
+[workspace_dependency_overrides.rustc_parse_format]
+path = "./submodules/rust/compiler/rustc_parse_format"
+
+[workspace_dependency_overrides.gix-credentials]
+path = "submodules/gitoxide/gix-credentials"
+
+[workspace_dependency_overrides.signal-hook-async-std]
+path = "submodules/signal-hook/signal-hook-async-std"
+
+[workspace_dependency_overrides.gix-discover]
+path = "submodules/gitoxide/gix-discover"
+
+[workspace_dependency_overrides.proc-macro2]
+path = "submodules/proc-macro2"
+
+[workspace_dependency_overrides.typenum]
+path = "submodules/typenum"
+
+[workspace_dependency_overrides.cargo-submodule-tool-lib]
+path = "tools/cargo-submodule-tool-lib"
+
+[workspace_dependency_overrides.futures-executor]
+path = "submodules/futures-rs/futures-executor"
+
+[workspace_dependency_overrides.windows-numerics]
+path = "submodules/windows-rs/crates/libs/numerics"
+
+[workspace_dependency_overrides.surf]
+path = "submodules/surf"
+
+[workspace_dependency_overrides.trait-fixer-hir-info-trait]
+path = "crates/trait-fixer-hir-info-trait"
+
+[workspace_dependency_overrides.xattr]
+path = "submodules/xattr"
+
+[workspace_dependency_overrides.intern]
+path = "./submodules/rust-analyzer/crates/intern"
+
+[workspace_dependency_overrides.tt]
+path = "./submodules/rust-analyzer/crates/tt"
+
+[workspace_dependency_overrides.windows-strings]
+path = "submodules/windows-rs/crates/libs/strings"
+
+[workspace_dependency_overrides.imara-diff]
+path = "submodules/imara-diff"
+
+[workspace_dependency_overrides.gix-sec]
+path = "submodules/gitoxide/gix-sec"
+
+[workspace_dependency_overrides.rustc_lint_defs]
+path = "submodules/rust/compiler/rustc_lint_defs"
+
+[workspace_dependency_overrides.icu_properties]
+path = "submodules/icu4x/components/properties"
+
+[workspace_dependency_overrides.cargo_metadata]
+path = "submodules/cargo_metadata"
+
+[workspace_dependency_overrides.atoi]
+path = "*"
+
+[workspace_dependency_overrides.rustc_middle]
+path = "submodules/rust/compiler/rustc_middle"
+
+[workspace_dependency_overrides.smol_str]
+path = "submodules/rust-analyzer/lib/smol_str"
+
+[workspace_dependency_overrides.rustversion]
+path = "submodules/rustversion"
+
+[workspace_dependency_overrides.trait-fixer-compiler-host-trait]
+path = "crates/trait-fixer-compiler-host-trait"
+
+[workspace_dependency_overrides.async-graphql-parser]
+path = "submodules/async-graphql/parser"
+
+[workspace_dependency_overrides.gix-fetchhead]
+path = "submodules/gitoxide/gix-fetchhead"
+
+[workspace_dependency_overrides.tar]
+version = "0.4.44"
+
+[workspace_dependency_overrides.syn-codegen]
+path = "submodules/syn/json"
+
+[workspace_dependency_overrides.gix-worktree-stream]
+path = "submodules/gitoxide/gix-worktree-stream"
+
+[workspace_dependency_overrides.toml_edit]
+path = "submodules/toml/crates/toml_edit"
+
+[workspace_dependency_overrides.gix-diff]
+path = "submodules/gitoxide/gix-diff"
+
+[workspace_dependency_overrides.tera]
+path = "submodules/tera"
+
+[workspace_dependency_overrides.crosstermion]
+path = "submodules/crosstermion/"
+
+[workspace_dependency_overrides.pin-project-lite]
+path = "submodules/pin-project-lite"
+
+[workspace_dependency_overrides.toml_writer]
+path = "submodules/toml/crates/toml_writer"
+
+[workspace_dependency_overrides.split-decls-types]
+path = "submodules/split-decls-rs/split-decls-types"
+
+[workspace_dependency_overrides.diff]
+path = "submodules/diff"
+
+[workspace_dependency_overrides.tinystr]
+path = "submodules/icu4x/utils/tinystr"
+
+[workspace_dependency_overrides.tempfile]
+path = "submodules/tempfile"
+
+[workspace_dependency_overrides.gix-tix]
+path = "submodules/gitoxide/gix-tix"
+
+[workspace_dependency_overrides.simd-adler32]
+path = "submodules/simd-adler32"
+
+[workspace_dependency_overrides.anstream]
+path = "submodules/anstyle/crates/anstream"
+
+[workspace_dependency_overrides.glob]
+path = "submodules/glob"
+
+[workspace_dependency_overrides.windows-version]
+path = "submodules/windows-rs/crates/libs/version"
+
+[workspace_dependency_overrides.dot-parser-macros]
+path = "submodules/dot-parser/macros"
+
+[workspace_dependency_overrides.gix-odb]
+path = "submodules/gitoxide/gix-odb"
+
+[workspace_dependency_overrides.cargo-util-schemas]
+path = "submodules/cargo/crates/cargo-util-schemas"
+
+[workspace_dependency_overrides.ed25519-compact]
+path = "submodules/rust-ed25519-compact"
+
+[workspace_dependency_overrides.gix-ref]
+path = "submodules/gitoxide/gix-ref"
+
+[workspace_dependency_overrides.pest_derive]
+path = "submodules/pest/derive"
+
+[workspace_dependency_overrides.rustc-literal-escaper]
+path = "submodules/rustc-literal-escaper"
+
+[workspace_dependency_overrides.prettyplease]
+path = "./submodules/prettyplease"
+
+[workspace_dependency_overrides.hir-ty]
+path = "submodules/rust-analyzer/crates/hir-ty"
+
+[workspace_dependency_overrides.byteorder]
+path = "submodules/byteorder"
+
+[workspace_dependency_overrides.rustc_serialize]
+path = "submodules/rust/compiler/rustc_serialize"
+
+[workspace_dependency_overrides.human_format]
+path = "submodules/human-format-rs"
+
+[workspace_dependency_overrides.regex-automata]
+path = "submodules/regex/regex-automata"
+
+[workspace_dependency_overrides.xz2]
+path = "submodules/xz2-rs"
+
+[workspace_dependency_overrides.windows_i686_msvc]
+path = "submodules/windows-rs/crates/targets/i686_msvc"
+
+[workspace_dependency_overrides.pathdiff]
+path = "submodules/pathdiff"
+
+[workspace_dependency_overrides.syntax]
+path = "./submodules/rust-analyzer/crates/syntax"
+
+[workspace_dependency_overrides.rustc_ast_pretty]
+path = "./submodules/rust/compiler/rustc_ast_pretty"
+
+[workspace_dependency_overrides.blake3]
+path = "submodules/BLAKE3"
+
+[workspace_dependency_overrides.indexmap]
+path = "submodules/indexmap"
+
+[workspace_dependency_overrides.potential_utf]
+path = "submodules/icu4x/utils/potential_utf"
+
+[workspace_dependency_overrides.gix-attributes]
+path = "submodules/gitoxide/gix-attributes"
+
+[workspace_dependency_overrides.windows-core]
+path = "submodules/windows-rs/crates/libs/core"
+
+[workspace_dependency_overrides.serial_test]
+path = "submodules/serial_test/serial_test"
+
+[workspace_dependency_overrides.snapbox]
+features = [
+    "dir",
+    "json",
+]
+path = "submodules/snapbox/crates/snapbox"
+
+[workspace_dependency_overrides.git-wrapper-lib]
+path = "tools/git-wrapper-lib"
+
+[workspace_dependency_overrides.rfc6979]
+path = "submodules/signatures/rfc6979"
+
+[workspace_dependency_overrides.async-graphql]
+path = "submodules/async-graphql"
+
+[workspace_dependency_overrides.fallible-streaming-iterator]
+path = "submodules/fallible-streaming-iterator"
+
+[workspace_dependency_overrides.toml_datetime]
+path = "submodules/toml/crates/toml_datetime"
+
+[workspace_dependency_overrides.fixedbitset]
+path = "submodules/fixedbitset"
+
+[workspace_dependency_overrides.intl-memoizer]
+path = "submodules/fluent-rs/intl-memoizer"
+
+[workspace_dependency_overrides.temp-env]
+path = "submodules/temp-env"
+
+[workspace_dependency_overrides.tinyvec_macros]
+path = "submodules/tinyvec_macros"
+
+[workspace_dependency_overrides.supports-hyperlinks]
+path = "submodules/supports-hyperlinks"
+
+[workspace_dependency_overrides.detone]
+path = "*"
+
+[workspace_dependency_overrides.expand_utils_lib]
+path = "submodules/split-decls-rs/crates/expand_utils_lib"
+
+[workspace_dependency_overrides.gix-filter]
+path = "submodules/gitoxide/gix-filter"
+
+[workspace_dependency_overrides.opener]
+path = "submodules/opener/opener"
+
+[workspace_dependency_overrides.gix-config-value]
+path = "submodules/gitoxide/gix-config-value"
+
+[workspace_dependency_overrides.url]
+version = "2.0"
+
+[workspace_dependency_overrides.gix-worktree]
+path = "submodules/gitoxide/gix-worktree"
+
+[workspace_dependency_overrides.rustc_abi]
+path = "./submodules/rust/compiler/rustc_abi"
+
+[workspace_dependency_overrides.signal-hook]
+path = "submodules/signal-hook"
+
+[workspace_dependency_overrides.cargo-test-support]
+path = "submodules/cargo/crates/cargo-test-support"
+
+[workspace_dependency_overrides.ra-ap-rustc_lexer]
+package = "rustc_lexer"
+path = "./submodules/rust/compiler/rustc_lexer"
+
+[workspace_dependency_overrides.gix-hashtable]
+path = "submodules/gitoxide/gix-hashtable"
+
+[workspace_dependency_overrides.unicode-normalization]
+path = "submodules/unicode-normalization"
+
+[workspace_dependency_overrides.gix-rebase]
+path = "submodules/gitoxide/gix-rebase"
+
+[workspace_dependency_overrides.rustc_interface]
+path = "submodules/rust/compiler/rustc_interface"
+
+[workspace_dependency_overrides.yoke-derive]
+path = "submodules/icu4x/utils/yoke/derive"
+
+[workspace_dependency_overrides.gix-mailmap]
+path = "submodules/gitoxide/gix-mailmap"
+
+[workspace_dependency_overrides.nu-ansi-term]
+path = "submodules/nu-ansi-term"
+
+[workspace_dependency_overrides.digest]
+path = "submodules/traits/digest"
+
+[workspace_dependency_overrides.uluru]
+path = "submodules/uluru"
+
+[workspace_dependency_overrides.trait-fixer-lang-items-trait]
+path = "crates/trait-fixer-lang-items-trait"
+
+[workspace_dependency_overrides.prodash]
+path = "submodules/prodash"
+
+[workspace_dependency_overrides.futures-concurrency]
+path = "submodules/futures-concurrency"
+
+[workspace_dependency_overrides.thin-vec]
+path = "submodules/thin-vec"
+version = "0.2.14"
+
+[workspace_dependency_overrides.rustc_tools_util]
+path = "submodules/rust/src/tools/clippy/rustc_tools_util"
+
+[workspace_dependency_overrides.time]
+features = [
+    "parsing",
+    "formatting",
+    "serde",
+]
+version = "0.3.44"
+
+[workspace_dependency_overrides.cc]
+version = "1.0.24"
+
+[workspace_dependency_overrides.async-graphql-derive]
+path = "submodules/async-graphql/derive"
+
+[workspace_dependency_overrides.rustc_span]
+path = "submodules/rust/compiler/rustc_span"
+
+[workspace_dependency_overrides.windows_x86_64_gnu]
+path = "submodules/windows-rs/crates/targets/x86_64_gnu"
+
+[workspace_dependency_overrides.ide-db]
+path = "submodules/rust-analyzer/crates/ide-db"
+
+[workspace_dependency_overrides.futures-task]
+path = "submodules/futures-rs/futures-task"
+
+[workspace_dependency_overrides.is_terminal_polyfill]
+path = "submodules/is_terminal_polyfill"
+
+[workspace_dependency_overrides.ppv-lite86]
+path = "submodules/cryptocorrosion/utils-simd/ppv-lite86"
+
+[workspace_dependency_overrides.lzma-rust2]
+path = "submodules/lzma-rust2"
+
+[workspace_dependency_overrides.assert-impl]
+path = "submodules/assert-impl"
+
+[workspace_dependency_overrides.futures-lite]
+path = "submodules/futures-lite"
+
+[workspace_dependency_overrides.md-5]
+path = "submodules/hashes/md5"
+
+[workspace_dependency_overrides.tracing-subscriber]
+features = ["env-filter"]
+path = "submodules/tracing/tracing-subscriber"
+
+[workspace_dependency_overrides.rustc_expand_meta_macros]
+path = "submodules/split-decls-rs/crates/rustc_expand_meta_macros"
+
+[workspace_dependency_overrides.gix-features]
+path = "submodules/gitoxide/gix-features"
+
+[workspace_dependency_overrides.hash32]
+path = "submodules/hash32"
+
+[workspace_dependency_overrides.gix-dir]
+path = "submodules/gitoxide/gix-dir"
+
+[workspace_dependency_overrides.bstr]
+path = "submodules/bstr"
+
+[workspace_dependency_overrides.is_executable]
+path = "submodules/is_executable"
+
+[workspace_dependency_overrides.generic-array]
+path = "submodules/generic-array"
+
+[workspace_dependency_overrides.la-arena]
+path = "submodules/rust-analyzer/lib/la-arena"
+
+[workspace_dependency_overrides.macrotest]
+path = "submodules/macrotest"
+
+[workspace_dependency_overrides.ide-ssr]
+path = "submodules/rust-analyzer/crates/ide-ssr"
+
+[workspace_dependency_overrides.ide]
+path = "submodules/rust-analyzer/crates/ide"
+
+[workspace_dependency_overrides.iana-time-zone]
+path = "submodules/iana-time-zone"
+
+[workspace_dependency_overrides.serde_ignored]
+path = "submodules/serde-ignored"
+
+[workspace_dependency_overrides.windows-result]
+path = "submodules/windows-rs/crates/libs/result"
+
+[workspace_dependency_overrides.crossbeam-deque]
+path = "submodules/crossbeam/crossbeam-deque"
+
+[workspace_dependency_overrides.split-decls-rs]
+path = "submodules/split-decls-rs"
+
+[workspace_dependency_overrides.core-foundation]
+features = ["mac_os_10_7_support"]
+version = "0.10.1"
+
+[workspace_dependency_overrides.mio]
+path = "submodules/mio"
+
+[workspace_dependency_overrides.windows_x86_64_gnullvm]
+path = "submodules/windows-rs/crates/targets/x86_64_gnullvm"
+
+[workspace_dependency_overrides.thiserror]
+path = "submodules/thiserror"
+
+[workspace_dependency_overrides.serde_json]
+version = "1.0"
+
+[workspace_dependency_overrides.gix-command]
+path = "submodules/gitoxide/gix-command"
+
+[workspace_dependency_overrides.gix-negotiate]
+path = "submodules/gitoxide/gix-negotiate"
+
+[workspace_dependency_overrides.hir-expand]
+path = "submodules/rust-analyzer/crates/hir-expand"
+
+[workspace_dependency_overrides.strsim]
+path = "submodules/strsim-rs"
+
+[workspace_dependency_overrides.rustc_next_trait_solver]
+path = "./submodules/rust/compiler/rustc_next_trait_solver"
+
+[workspace_dependency_overrides.color-print-proc-macro]
+path = "submodules/color-print/color-print-proc-macro"
+
+[workspace_dependency_overrides.pest_generator]
+path = "submodules/pest/generator"
+
+[workspace_dependency_overrides.text-size]
+path = "submodules/text-size"
+
+[workspace_dependency_overrides.bytes]
+path = "submodules/bytes"
+
+[workspace_dependency_overrides.gix-fsck]
+path = "submodules/gitoxide/gix-fsck"
+
+[workspace_dependency_overrides.constant_time_eq]
+path = "submodules/constant_time_eq"
+
+[workspace_dependency_overrides.gix-lfs]
+path = "submodules/gitoxide/gix-lfs"
+
+[workspace_dependency_overrides.gix-revision]
+path = "submodules/gitoxide/gix-revision"
+
+[workspace_dependency_overrides.ra-ap-rustc_next_trait_solver]
+package = "rustc_next_trait_solver"
+path = "./submodules/rust/compiler/rustc_next_trait_solver"
+
+[workspace_dependency_overrides.rustc_infer]
+path = "submodules/rust/compiler/rustc_infer"
+
+[workspace_dependency_overrides.split_decls_types]
+path = "submodules/split-decls-rs/split-decls-types"
+
+[workspace_dependency_overrides.fiat-crypto]
+path = "submodules/fiat-crypto/fiat-rust"
+
+[workspace_dependency_overrides.tokio-core]
+path = "submodules/tokio-core"
+
+[workspace_dependency_overrides.backtrace]
+path = "submodules/backtrace-rs"
+
+[workspace_dependency_overrides.zlib-rs]
+path = "submodules/zlib-rs/zlib-rs"
+
+[workspace_dependency_overrides.gix-blame]
+path = "submodules/gitoxide/gix-blame"
+
+[workspace_dependency_overrides.sec1]
+path = "submodules/formats/sec1"
+
+[workspace_dependency_overrides.libz-rs-sys]
+path = "submodules/zlib-rs/libz-rs-sys"
+
+[workspace_dependency_overrides.mbe]
+path = "submodules/rust-analyzer/crates/mbe"
+
+[workspace_dependency_overrides.thiserror-impl]
+path = "submodules/thiserror/impl"
+
+[workspace_dependency_overrides.trybuild]
+path = "submodules/trybuild"
+
+[workspace_dependency_overrides.home]
+path = "submodules/cargo/crates/home"
+
+[workspace_dependency_overrides.aho-corasick]
+path = "submodules/aho-corasick"
+
+[workspace_dependency_overrides.gix-lock]
+path = "submodules/gitoxide/gix-lock"
+
+[workspace_dependency_overrides.syntax-bridge]
+path = "./submodules/rust-analyzer/crates/syntax-bridge"
+
+[workspace_dependency_overrides.synstructure]
+path = "submodules/synstructure"
+
+[workspace_dependency_overrides.futures-util]
+path = "submodules/futures-rs/futures-util"
+
+[workspace_dependency_overrides.anstyle]
+path = "submodules/anstyle/crates/anstyle"
+
+[workspace_dependency_overrides.rustc_macros]
+path = "submodules/rust/compiler/rustc_macros"
+
+[workspace_dependency_overrides.syn]
+path = "submodules/syn"
+
+[workspace_dependency_overrides.colorify]
+path = "submodules/colorify"
+
+[workspace_dependency_overrides.regex]
+features = ["std"]
+path = "submodules/regex"
+
+[workspace_dependency_overrides.futures-core]
+path = "submodules/futures-rs/futures-core"
+
+[workspace_dependency_overrides.fluent-syntax]
+path = "submodules/fluent-rs/fluent-syntax"
+
+[workspace_dependency_overrides.os_info]
+path = "submodules/os_info/os_info"
+
+[workspace_dependency_overrides.ruzstd]
+path = "submodules/zstd-rs/ruzstd"
+
+[workspace_dependency_overrides.cpufeatures]
+path = "submodules/utils/cpufeatures"
+
+[workspace_dependency_overrides.globwalk]
+path = "submodules/globwalk"
+
+[workspace_dependency_overrides.gix-fs]
+path = "submodules/gitoxide/gix-fs"
+
+[workspace_dependency_overrides.salsa-macros]
+path = "submodules/salsa/components/salsa-macros"
+
+[workspace_dependency_overrides.slab]
+path = "submodules/slab"
+
+[workspace_dependency_overrides.regex-syntax]
+path = "submodules/regex/regex-syntax"
+
+[workspace_dependency_overrides.adler2]
+path = "submodules/adler2"
+
+[workspace_dependency_overrides.gix-packetline]
+path = "submodules/gitoxide/gix-packetline"
+
+[workspace_dependency_overrides.pin-utils]
+path = "submodules/pin-utils"
+
+[workspace_dependency_overrides.process-wrap]
+features = ["std"]
+version = "8.2.1"
+
+[workspace_dependency_overrides.introspector_core]
+path = "submodules/split-decls-rs/crates/introspector/core"
+
+[workspace_dependency_overrides.test-utils]
+path = "submodules/rust-analyzer/crates/test-utils"
+
+[workspace_dependency_overrides.toml]
+path = "submodules/toml/crates/toml"
+
+[workspace_dependency_overrides.toml_parser]
+path = "submodules/toml/crates/toml_parser"
+
+[workspace_dependency_overrides.macros]
+path = "submodules/rust-analyzer/crates/macros"
+
+[workspace_dependency_overrides.futures-timer]
+path = "submodules/futures-timer"
+
+[workspace_dependency_overrides.lib-token-tree]
+path = "submodules/split-decls-rs/crates/lib-token-tree"
+
+[workspace_dependency_overrides.libm]
+path = "submodules/compiler-builtins/libm"
+
+[workspace_dependency_overrides.rustc_feature]
+path = "submodules/rust/compiler/rustc_feature"
+
+[workspace_dependency_overrides.addr2line]
+path = "submodules/addr2line"
+
+[workspace_dependency_overrides.memoffset]
+path = "submodules/memoffset"
+
+[workspace_dependency_overrides.hir-def]
+path = "submodules/rust-analyzer/crates/hir-def"
+
+[workspace_dependency_overrides.clru]
+path = "submodules/clru-rs"
+
+[workspace_dependency_overrides.serde-value]
+path = "submodules/serde-value"
+
+[workspace_dependency_overrides.const-oid]
+path = "submodules/formats/const-oid"
+
+[workspace_dependency_overrides.libgit2-sys]
+path = "submodules/git2-rs/libgit2-sys"
+
+[workspace_dependency_overrides.parser]
+path = "submodules/rust-analyzer/crates/parser"
+
+[workspace_dependency_overrides.im-rc]
+path = "submodules/im-rs/rc"
+
+[workspace_dependency_overrides.lib-metavar-expr]
+path = "submodules/split-decls-rs/crates/lib-metavar-expr"
+
+[workspace_dependency_overrides.include-dir-macro]
+path = "submodules/include-dir-macro-rs/"
+
+[workspace_dependency_overrides.atomic-maybe-uninit]
+path = "submodules/atomic-maybe-uninit"
+
+[workspace_dependency_overrides.crossbeam-utils]
+path = "submodules/crossbeam/crossbeam-utils"
+
+[workspace_dependency_overrides.gix]
+features = [
+    "progress-tree",
+    "parallel",
+    "dirwalk",
+    "status",
+]
+path = "submodules/gitoxide/gix"
+
+[workspace_dependency_overrides.ahash]
+path = "submodules/ahash"
+
+[workspace_dependency_overrides.num-conv]
+path = "submodules/num-conv"
+
+[workspace_dependency_overrides.rustc_expand]
+path = "submodules/rust/compiler/rustc_expand"
+
+[workspace_dependency_overrides.ra-ap-rustc_index]
+package = "rustc_index"
+path = "./submodules/rust/compiler/rustc_index"
+
+[workspace_dependency_overrides.rustc_parse]
+path = "submodules/rust/compiler/rustc_parse"
+
+[workspace_dependency_overrides.cargo-credential-macos-keychain]
+path = "submodules/cargo/credential/cargo-credential-macos-keychain"
+
+[workspace_dependency_overrides.generator]
+path = "submodules/generator-rs"
+
+[workspace_dependency_overrides.same-file]
+path = "submodules/same-file"
+
+[workspace_dependency_overrides.windows_aarch64_msvc]
+path = "submodules/windows-rs/crates/targets/aarch64_msvc"
+
+[workspace_dependency_overrides.rustc_error_codes]
+path = "submodules/rust/compiler/rustc_error_codes"
+
+[workspace_dependency_overrides.defmac]
+path = "submodules/defmac"
+
+[workspace_dependency_overrides.rustc_hir_id]
+path = "submodules/rust/compiler/rustc_hir_id"
+
+[workspace_dependency_overrides.unicode-width]
+path = "submodules/unicode-width"
+
+[workspace_dependency_overrides.hir]
+path = "submodules/rust-analyzer/crates/hir"
+
+[workspace_dependency_overrides.introspector_decl_common]
+path = "submodules/patch-build-rs/introspector_decl_common"
+
+[workspace_dependency_overrides.cpp_demangle]
+path = "submodules/cpp_demangle"
+
+[workspace_dependency_overrides.windows-bindgen]
+path = "submodules/windows-rs/crates/libs/bindgen"
+
+[workspace_dependency_overrides.sized-chunks]
+path = "submodules/sized-chunks"
+
+[workspace_dependency_overrides.icu_normalizer]
+path = "submodules/icu4x/components/normalizer"
+
+[workspace_dependency_overrides.bitflags]
+path = "submodules/bitflags"
+
+[workspace_dependency_overrides.gix-merge]
+path = "submodules/gitoxide/gix-merge"
+
+[workspace_dependency_overrides.rustc_builtin_macros]
+path = "submodules/rust/compiler/rustc_builtin_macros"
+
+[workspace_dependency_overrides.smallvec]
+path = "submodules/rust-smallvec"
+
+[workspace_dependency_overrides.static_assertions]
+path = "submodules/static-assertions-rs"
+
+[workspace_dependency_overrides.gix-actor]
+path = "submodules/gitoxide/gix-actor"
+
+[workspace_dependency_overrides.windows-bindings]
+path = "submodules/jni-rs/windows-bindings"
+
+[workspace_dependency_overrides.zerofrom-derive]
+path = "submodules/icu4x/utils/zerofrom/derive"
+
+[workspace_dependency_overrides.gix-hash]
+path = "submodules/gitoxide/gix-hash"
+
+[workspace_dependency_overrides.async-stream]
+path = "submodules/async-stream-vendored"
+
+[workspace_dependency_overrides.windows_i686_gnu]
+path = "submodules/windows-rs/crates/targets/i686_gnu"
+
+[workspace_dependency_overrides.windows-metadata]
+path = "submodules/windows-rs/crates/libs/metadata"
+
+[workspace_dependency_overrides.fastrand]
+path = "submodules/fastrand"
+
+[workspace_dependency_overrides.miniz_oxide]
+path = "submodules/miniz_oxide/miniz_oxide"
+
+[workspace_dependency_overrides.signal-hook-registry]
+path = "submodules/signal-hook/signal-hook-registry"
+
+[workspace_dependency_overrides.ecdsa]
+path = "submodules/signatures/ecdsa"
+
+[workspace_dependency_overrides.rustc_lexer]
+path = "./submodules/rust/compiler/rustc_lexer"
+
+[workspace_dependency_overrides.tracing-log]
+path = "submodules/tracing/tracing-log"
+
+[workspace_dependency_overrides.windows-threading]
+path = "submodules/windows-rs/crates/libs/threading"
+
+[workspace_dependency_overrides.object]
+features = [
+    "read_core",
+    "elf",
+    "macho",
+    "pe",
+    "xcoff",
+    "unaligned",
+    "archive",
+]
+path = "submodules/object"
+
+[workspace_dependency_overrides.supports-unicode]
+path = "submodules/supports-unicode"
+
+[workspace_dependency_overrides.futures-macro]
+path = "submodules/futures-rs/futures-macro"
+
+[workspace_dependency_overrides.rustc_expand_base_lib_errors]
+path = "submodules/split-decls-rs/crates/rustc_expand_base_lib_errors"
+
+[workspace_dependency_overrides.zerocopy]
+path = "submodules/zerocopy"
+
+[workspace_dependency_overrides.gix-chunk]
+path = "submodules/gitoxide/gix-chunk"
+
+[workspace_dependency_overrides.rustc_hir]
+path = "submodules/rust/compiler/rustc_hir"
+
+[workspace_dependency_overrides.serde]
+features = ["derive"]
+version = "1.0"
+
+[workspace_dependency_overrides.git2]
+path = "submodules/git2-rs"
+
+[workspace_dependency_overrides.rustc_type_ir]
+path = "./submodules/rust/compiler/rustc_type_ir"
+
+[workspace_dependency_overrides.sval]
+path = "submodules/sval"
+
+[workspace_dependency_overrides.libloading]
+path = "submodules/rust_libloading"
+
+[workspace_dependency_overrides.loom]
+path = "submodules/loom"
+
+[workspace_dependency_overrides.rustc_expand_base_lib]
+path = "submodules/split-decls-rs/crates/rustc_expand_base_lib"
+
+[workspace_dependency_overrides.pasetors]
+features = [
+    "v3",
+    "serde",
+]
+path = "submodules/pasetors"
+
+[workspace_dependency_overrides.crossbeam-channel]
+path = "submodules/crossbeam/crossbeam-channel"
+
+[workspace_dependency_overrides.proc-macro-srv]
+path = "submodules/rust-analyzer/crates/proc-macro-srv"
+
+[workspace_dependency_overrides.libnghttp2-sys]
+path = "submodules/nghttp2-rs"
+
+[workspace_dependency_overrides.rand_xorshift]
+path = "submodules/rngs/rand_xorshift"
+
+[workspace_dependency_overrides.rustfix]
+path = "submodules/cargo/crates/rustfix"
+
+[workspace_dependency_overrides.vfs-notify]
+path = "submodules/rust-analyzer/crates/vfs-notify"
+
+[workspace_dependency_overrides.tinyvec]
+path = "submodules/tinyvec"
+
+[workspace_dependency_overrides.fallible-iterator]
+path = "submodules/rust-fallible-iterator"
+
+[workspace_dependency_overrides.ra-ap-rustc_parse_format]
+package = "rustc_parse_format"
+path = "./submodules/rust/compiler/rustc_parse_format"
+
+[workspace_dependency_overrides.windows-targets]
+path = "submodules/rust/library/windows_targets"
+
+[workspace_dependency_overrides.foldhash]
+path = "submodules/foldhash"
+
+[workspace_dependency_overrides.group]
+path = "submodules/group"
+
+[workspace_dependency_overrides.rand]
+path = "submodules/rand"
+
+[workspace_dependency_overrides.cargo]
+path = "submodules/cargo"
+
+[workspace_dependency_overrides.orion]
+path = "submodules/orion"
+
+[workspace_dependency_overrides.tokio]
+features = ["full"]
+path = "submodules/tokio/tokio"
+
+[workspace_dependency_overrides.windows-link]
+path = "submodules/windows-rs/crates/libs/link"
+
+[workspace_dependency_overrides.allocator-api2]
+path = "submodules/allocator-api2"
+
+[workspace_dependency_overrides.maybe-async]
+path = "submodules/maybe-async-rs"
+
+[workspace_dependency_overrides.tokio-test]
+path = "submodules/tokio/tokio-test"
+
+[workspace_dependency_overrides.gix-path]
+path = "submodules/gitoxide/gix-path"
+
+[workspace_dependency_overrides.gix-ignore]
+path = "submodules/gitoxide/gix-ignore"
+
+[workspace_dependency_overrides.gix-commitgraph]
+path = "submodules/gitoxide/gix-commitgraph"
+
+[workspace_dependency_overrides.unicode-segmentation]
+path = "submodules/unicode-segmentation"
+
+[workspace_dependency_overrides.vfs]
+path = "./submodules/rust-analyzer/crates/vfs"
+
+[workspace_dependency_overrides.windows_i686_gnullvm]
+path = "submodules/windows-rs/crates/targets/i686_gnullvm"
+
+[workspace_dependency_overrides.fxhash]
+path = "submodules/fxhash"
+
+[workspace_dependency_overrides.dashmap]
+features = [
+    "raw-api",
+    "inline",
+]
+path = "submodules/dashmap"
+version = "7.0.0-hack"
+
+[workspace_dependency_overrides.getrandom]
+path = "submodules/getrandom"
+
+[workspace_dependency_overrides.ra-ap-rustc_type_ir]
+package = "rustc_type_ir"
+path = "./submodules/rust/compiler/rustc_type_ir"
+
+[workspace_dependency_overrides.md5]
+path = "submodules/md5"
+
+[workspace_dependency_overrides.lsp-server]
+path = "submodules/rust-analyzer/lib/lsp-server"
+
+[workspace_dependency_overrides.sharded-slab]
+path = "submodules/sharded-slab"
+
+[workspace_dependency_overrides.tracing-tree]
+path = "submodules/tracing-tree"
+
+[workspace_dependency_overrides.windows-registry]
+path = "submodules/windows-rs/crates/libs/registry"
+
+[workspace_dependency_overrides.parking_lot]
+path = "submodules/parking_lot"
+version = "0.12.6"
+
+[workspace_dependency_overrides.encoding_rs]
+path = "submodules/encoding_rs"
+
+[workspace_dependency_overrides.itertools]
+path = "submodules/itertools"
+
+[workspace_dependency_overrides.span]
+path = "./submodules/rust-analyzer/crates/span"
+
+[workspace_dependency_overrides.fs_extra]
+path = "submodules/fs_extra"
+
+[workspace_dependency_overrides.stdx]
+path = "submodules/rust-analyzer/crates/stdx"
+
+[workspace_dependency_overrides.bincode]
+path = "submodules/bincode"
+
+[workspace_dependency_overrides.block-buffer]
+path = "submodules/utils/block-buffer"
+
+[workspace_dependency_overrides.ra-ap-rustc_abi]
+package = "rustc_abi"
+path = "./submodules/rust/compiler/rustc_abi"
+
+[workspace_dependency_overrides.anstyle-parse]
+path = "submodules/anstyle/crates/anstyle-parse"
+
+[workspace_dependency_overrides.color-print]
+path = "submodules/color-print/color-print"
+
+[workspace_dependency_overrides.tracing]
+path = "submodules/tracing/tracing"
+
+[workspace_dependency_overrides.tracing-core]
+path = "submodules/tracing/tracing-core"
+
+[workspace_dependency_overrides.lib-kleene-op]
+path = "submodules/split-decls-rs/crates/lib-kleene-op"
+
+[workspace_dependency_overrides.hashlink]
+path = "submodules/hashlink"
+
+[workspace_dependency_overrides.icu_normalizer_data]
+path = "*"
+
+[workspace_dependency_overrides.rustc_index]
+path = "submodules/rust/compiler/rustc_index"
+
+[workspace_dependency_overrides.walkdir]
+version = "2.5"
+
+[workspace_dependency_overrides.equivalent]
+path = "submodules/equivalent"
+
+[workspace_dependency_overrides.crossbeam]
+path = "submodules/crossbeam/"
+
+[workspace_dependency_overrides.syn-adapter-lib]
+path = "tools/syn-adapter-lib"
+
+[workspace_dependency_overrides.tracing-chrome]
+path = "submodules/tracing-chrome"
+
+[workspace_dependency_overrides.rustc_ast]
+path = "submodules/rust/compiler/rustc_ast"
+
+[workspace_dependency_overrides.cargo-test-macro]
+path = "submodules/cargo/crates/cargo-test-macro"
+
+[workspace_dependency_overrides.semver]
+features = ["serde"]
+path = "submodules/semver"
+
+[workspace_dependency_overrides.gix-pathspec]
+path = "submodules/gitoxide/gix-pathspec"
+
+[workspace_dependency_overrides.crypto-common]
+path = "submodules/traits/crypto-common"
+
+[workspace_dependency_overrides.unicode-bom]
+path = "submodules/unicode-bom"
+
+[workspace_dependency_overrides.rocksdb]
+path = "submodules/rocksdb"
+
+[workspace_dependency_overrides.base-db]
+path = "submodules/rust-analyzer/crates/base-db"
+
+[workspace_dependency_overrides.tool-traits-lib]
+path = "./tools/tool-traits-lib"
+
+[workspace_dependency_overrides.http]
+version = "1.1.0"
+
+[workspace_dependency_overrides.nohash-hasher]
+path = "submodules/nohash-hasher"
+
+[workspace_dependency_overrides.crc32fast]
+path = "submodules/rust-crc32fast"
+
+[workspace_dependency_overrides.mockall]
+path = "submodules/mockall/mockall"
+
+[workspace_dependency_overrides.gix-object]
+path = "submodules/gitoxide/gix-object"

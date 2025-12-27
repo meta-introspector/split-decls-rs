@@ -1,7 +1,7 @@
 # Crate Preservation Proof
 
-Generated: 2025-12-27 13:00:44 UTC
-Total crates: 706
+Generated: 2025-12-27 18:44:27 UTC
+Total crates: 707
 
 ## Preservation Verification
 
@@ -117,6 +117,7 @@ Total crates: 706
 ✅ `dep2submodule` → `/mnt/data1/nix/vendor/rust/cargo2nix/tools/dep2submodule`
 ✅ `derive_arbitrary` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/arbitrary/derive`
 ❌ `detone` → `*` (missing)
+❌ `diff` → (no path mapping)
 ✅ `digest` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/traits/digest`
 ✅ `dissimilar` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dissimilar`
 ✅ `document-features` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/document-features`
@@ -715,7 +716,7 @@ Total crates: 706
 ## Summary
 
 - **Preserved**: 649
-- **Missing**: 57
-- **Preservation Rate**: 91.9%
+- **Missing**: 58
+- **Preservation Rate**: 91.8%
 
-⚠️  57 crates need attention before bootstrap
+⚠️  58 crates need attention before bootstrap

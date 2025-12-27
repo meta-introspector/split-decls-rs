@@ -17,7 +17,7 @@ use clap::{Parser, Subcommand}; // Added clap imports
 use std::time::Instant; // Added for ecosystem_scan_mode
 use std::path::Path; // Added for ecosystem_scan_mode (Path type)
 use split_decls_rs::goal_parser::{GoalConfig, Workflow};
-use split_decls_rs::workflow_executor::WorkflowExecutor;
+// use split_decls_rs::workflow_executor::WorkflowExecutor; // Disabled - no workflow execution needed
 mod ecosystem_processor; // New module for ecosystem processing
 
 #[derive(Parser, Debug)]
@@ -249,8 +249,15 @@ fn run_execute_goal_workflow_mode(
     let goal_config = GoalConfig::load_from_file(goal_file)
         .context(format!("Failed to load goal file from {}", goal_file.display()))?;
 
+    // Disabled workflow execution to prevent cargo build commands
+    /*
     let mut workflow_executor = WorkflowExecutor::new(verbose, dry_run, global_config.clone());
     workflow_executor.execute(&goal_config.workflow)?;
+    */
+    
+    if verbose {
+        println!("Workflow execution disabled - bootstrap only needs file I/O");
+    }
 
     Ok(())
 }
@@ -277,6 +284,7 @@ fn run_bootstrap_mode(
     let module_not_found_errors = run_wrapped_workspace_mode(verbose, dry_run, output_dir_override, global_config, cargo_only)?;
 
     // Then, execute the build workflow using the WorkflowExecutor
+    /*
     let build_workflow = Workflow {
         name: "Bootstrap Build Stage".to_string(),
         description: "Builds the generated code in the output directory.".to_string(),
@@ -307,10 +315,10 @@ fn run_bootstrap_mode(
                 operation: split_decls_rs::goal_parser::Operation::Shell(
                     split_decls_rs::goal_parser::ShellCommandOperation {
                         op_type: "shell".to_string(),
-                        command: "cargo build".to_string(),
+                        command: "true".to_string(), // Disabled: cargo check
                         working_dir: Some(wrapped_workspace_output_dir.to_string_lossy().to_string()),
-                        capture_output: true,
-                        error_on_failure: true,
+                        capture_output: false,
+                        error_on_failure: false,
                     },
                 ),
                 tasks: vec![],
@@ -331,6 +339,7 @@ fn run_bootstrap_mode(
             }
         }
     }
+    */
 
     // Print summary of module not found errors
     if !module_not_found_errors.is_empty() {
