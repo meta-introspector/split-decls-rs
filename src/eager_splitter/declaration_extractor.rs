@@ -162,8 +162,8 @@ pub fn extract_single_declaration(item: &Item, item_count: usize) -> Option<Extr
         },
         Item::Mod(item_mod) => {
             let mod_name = item_mod.ident.to_string();
-            // PANIC: All code must be emitted - modules should be processed recursively
-            panic!("UNHANDLED MODULE: {} - All code must be emitted, modules should be processed recursively", mod_name);
+            // Generate module wrapper like lib wrapper with mkmod! allthedecls!
+            Some(extracted_decl_base(mod_name, "mod".to_string()))
         }
         _ => {
             let content = item.to_token_stream().to_string();

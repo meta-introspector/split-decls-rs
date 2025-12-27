@@ -70,9 +70,6 @@ pub fn fix_cargo_features(cargo_toml_path: &Path) -> Result<()> {
                                 changed = true;
                                 println!("⚠️  Removing unresolvable feature dependency: {} from feature {}", s, feature_name);
                             }
-                                changed = true;
-                                println!("⚠️  Removing unresolvable feature dependency: {} from feature {}", s, feature_name);
-                            }
                         } else {
                             new_deps.push(s.to_string());
                         }
