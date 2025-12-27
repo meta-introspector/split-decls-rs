@@ -31,3 +31,6 @@ output2/\#*
 /perf.data
 /perf.data.old
 /recursive-eval/target/
+/error.log
+/lib_error.log
+/sparql_error.log
