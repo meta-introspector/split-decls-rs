@@ -181,11 +181,10 @@ impl SparqlEngine {
     
     fn find_shortest_path(&self, from: &str, to: &str) -> Option<Vec<String>> {
         if let (Some(&from_idx), Some(&to_idx)) = (self.node_map.get(from), self.node_map.get(to)) {
-            if let Some(path) = petgraph::algo::dijkstra(&self.graph, from_idx, Some(to_idx), |_| 1) {
-                if path.contains_key(&to_idx) {
-                    // Reconstruct path (simplified)
-                    return Some(vec![from.to_string(), to.to_string()]);
-                }
+            let path_map = petgraph::algo::dijkstra(&self.graph, from_idx, Some(to_idx), |_| 1);
+            if path_map.contains_key(&to_idx) {
+                // Reconstruct path (simplified)
+                return Some(vec![from.to_string(), to.to_string()]);
             }
         }
         None

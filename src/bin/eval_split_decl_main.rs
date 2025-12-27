@@ -20,7 +20,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let main_files: Vec<_> = entries
         .filter_map(|entry| entry.ok())
         .filter(|entry| {
-            let name = entry.file_name().to_string_lossy();
+            let name = entry.file_name().to_string_lossy().to_string();
             name.starts_with("wrapped_main_") && name.ends_with(".rs")
         })
         .collect();
@@ -64,7 +64,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let total_wrapped = all_entries
         .filter_map(|entry| entry.ok())
         .filter(|entry| {
-            let name = entry.file_name().to_string_lossy();
+            let name = entry.file_name().to_string_lossy().to_string();
             name.starts_with("wrapped_") && name.ends_with(".rs")
         })
         .count();

@@ -57,7 +57,7 @@ fn main() -> Result<()> {
     let output_code = if generate_replacement {
         extraction.generate_replacement()
     } else {
-        extraction.mold_wrapper
+        extraction.mold_wrapper.clone()
     };
 
     // Write output

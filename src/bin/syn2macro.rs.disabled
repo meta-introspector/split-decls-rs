@@ -49,14 +49,14 @@ fn main() -> Result<()> {
     let input_content = fs::read_to_string(input_file)?;
     let input_tokens: proc_macro2::TokenStream = syn::parse_str(&input_content)?;
 
-    // Create security context
+    // Create security context - using enum variants
     let security = match security_level.as_str() {
-        "strict" => Box::new(StrictSecurity::new(vec![
+        "strict" => split_decls_rs::syn2macro::SecurityContext::Strict(vec![
             AstOperation::ParseItem,
             AstOperation::TransformItem,
             AstOperation::GenerateCode,
-        ])),
-        _ => Box::new(DefaultSecurity),
+        ]),
+        _ => split_decls_rs::syn2macro::SecurityContext::Default,
     };
 
     // Create converter
