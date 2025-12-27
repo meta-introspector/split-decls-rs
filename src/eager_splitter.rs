@@ -492,7 +492,9 @@ pub fn split_and_generate_decls(
     info!("🔍 Processing {} items in AST...", syntax_tree.items.len()); // Changed println to info
     for item in &syntax_tree.items {
         if let Some(decl) = declaration_extractor::extract_single_declaration(item, item_count) {
-            let module_name_str = format!("{}_decls_{}", paths.crate_name.replace("-", "_").replace(".", "_"), decl.name);
+            // Sanitize declaration name to create valid Rust identifier
+            let sanitized_name = decl.name.replace("r#", "").replace("#", "_");
+            let module_name_str = format!("{}_decls_{}", paths.crate_name.replace("-", "_").replace(".", "_"), sanitized_name);
             let module_name_ident = Ident::new(&module_name_str, Span::call_site());
             collected_module_names.push(module_name_ident.clone());
 
