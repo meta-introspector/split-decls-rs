@@ -1,0 +1,138 @@
+{
+  "rustc_cft": {
+    "name": "RustC_CFT",
+    "central_charge": 26.0,
+    "primary_fields": [
+      {
+        "name": "syn::parse_file",
+        "conformal_weight": [
+          1.0,
+          1.0
+        ],
+        "source_location": {
+          "file_path": "src/parse/mod.rs",
+          "line": 42,
+          "column": 8,
+          "angle": 0.0,
+          "length": 1.0
+        },
+        "target_location": {
+          "file_path": "output2/wrapped-syn/src/decls/wrapped_syn_decls_parse_file.rs",
+          "line": 1,
+          "column": 1,
+          "angle": 0.0,
+          "length": 1.0
+        }
+      },
+      {
+        "name": "proc_macro2::TokenStream",
+        "conformal_weight": [
+          0.5,
+          0.5
+        ],
+        "source_location": {
+          "file_path": "src/token_stream.rs",
+          "line": 100,
+          "column": 12,
+          "angle": 0.7853981633974483,
+          "length": 2.0
+        },
+        "target_location": {
+          "file_path": "output2/wrapped-proc-macro2/src/decls/wrapped_proc_macro2_decls_token_stream.rs",
+          "line": 1,
+          "column": 1,
+          "angle": 0.7853981633974483,
+          "length": 2.0
+        }
+      }
+    ],
+    "correlation_functions": {
+      "⟨syn::parse_fileproc_macro2::TokenStream⟩": {
+        "fields": [
+          "syn::parse_file",
+          "proc_macro2::TokenStream"
+        ],
+        "value": 0.0,
+        "conformal_invariant": true
+      }
+    }
+  },
+  "output2_cft": {
+    "name": "Output2_CFT",
+    "central_charge": 26.0,
+    "primary_fields": [
+      {
+        "name": "wrapped_syn_decls_parse_file",
+        "conformal_weight": [
+          1.0,
+          1.0
+        ],
+        "source_location": {
+          "file_path": "output2/wrapped-syn/src/decls/wrapped_syn_decls_parse_file.rs",
+          "line": 1,
+          "column": 1,
+          "angle": 0.0,
+          "length": 1.0
+        },
+        "target_location": {
+          "file_path": "output2/wrapped-syn/src/lib.rs",
+          "line": 5,
+          "column": 1,
+          "angle": 0.0,
+          "length": 1.0
+        }
+      }
+    ],
+    "correlation_functions": {
+      "⟨syn::parse_fileproc_macro2::TokenStream⟩": {
+        "fields": [
+          "syn::parse_file",
+          "proc_macro2::TokenStream"
+        ],
+        "value": 0.0,
+        "conformal_invariant": true
+      }
+    }
+  },
+  "neutral_space": {
+    "coordinates": [
+      0.3899511221436248,
+      0.3994912107587594,
+      0.2909727027616038,
+      0.3255555239914666,
+      0.3184004575301157,
+      0.35059825660619476,
+      0.3637158784520048,
+      0.37564098922092304
+    ],
+    "level": 4,
+    "generation": 0,
+    "cached_result": null
+  },
+  "conformal_map": {
+    "phi_8d": {
+      "coordinates": [
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "level": 1,
+      "generation": 0,
+      "cached_result": null
+    },
+    "c1_to_n1": {
+      "syn::parse_file": "N1_syn_parse_file",
+      "proc_macro2::TokenStream": "N1_proc_macro2_TokenStream"
+    },
+    "n1_to_c2": {
+      "N1_proc_macro2_TokenStream": "wrapped_decls_proc_decls_macro2_decls_TokenStream",
+      "N1_syn_parse_file": "wrapped_decls_syn_decls_parse_decls_file"
+    },
+    "angle_preservation": []
+  }
+}

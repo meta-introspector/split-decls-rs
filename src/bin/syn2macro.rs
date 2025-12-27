@@ -60,7 +60,7 @@ fn main() -> Result<()> {
     };
 
     // Create converter
-    let converter = Syn2MacroConverter::new(security);
+    let mut converter = Syn2MacroConverter::new(security);
 
     // Convert to universal traits
     let trait_code = converter.convert_syn_to_traits(input_tokens)?;

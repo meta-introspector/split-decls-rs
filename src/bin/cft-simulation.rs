@@ -79,11 +79,11 @@ fn main() -> anyhow::Result<()> {
         cached_result: None,
     };
     
-    let structure = bott_cache.create_branching_structure(&cft_point);
-    bott_cache.cache_result(cft_point, structure.clone());
+    let structure = bott_cache.create_branching_structure();
+    bott_cache.cache_result(structure.clone());
     
-    println!("  🌳 CFT structure generates {} branches in 8D space", structure.size);
-    println!("  🔄 Fiber bundle: {}", structure.fiber_bundle_id);
+    println!("  🌳 CFT structure generates branches in 8D space");
+    println!("  🔄 Fiber bundle: {}", structure);
     
     // Save complete simulation
     simulation.save_simulation("cft_simulation.json")?;

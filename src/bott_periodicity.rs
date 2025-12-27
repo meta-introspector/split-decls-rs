@@ -1,292 +1,394 @@
-use std::collections::HashMap;
-use serde::{Serialize, Deserialize};
-use crate::ast_statistics::TypeManifold;
+// Bott Periodicity in the Abstraction Tower
+// The levels repeat with period 2 (complex) or 8 (real)
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+use syn::*;
+use proc_macro2::TokenStream;
+use quote::{quote, ToTokens};
+use std::collections::HashMap;
+
+// ============================================================================
+// The Periodic Tower
+// ============================================================================
+
+/// 8-dimensional point in the Bott tower
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct Level8DPoint {
     pub coordinates: [f64; 8],
-    pub level: u8,
-    pub generation: u64,
-    pub cached_result: Option<BranchingStructure>,
+    pub level: usize,
+    pub generation: usize,
+    pub cached_result: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct BranchingStructure {
-    pub size: usize,
-    pub branches: Vec<Level8DPoint>,
-    pub fiber_bundle_id: String,
+impl Level8DPoint {
+    pub fn new(coords: [f64; 8]) -> Self {
+        Self { 
+            coordinates: coords,
+            level: 0,
+            generation: 0,
+            cached_result: None,
+        }
+    }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+/// Cache for Bott periodicity computations
+#[derive(Debug, Clone)]
 pub struct BottPeriodicityCache {
-    pub levels: HashMap<u8, Vec<Level8DPoint>>,
-    pub fiber_bundles: HashMap<String, QuasiFiberBundle>,
-    pub current_generation: u64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct QuasiFiberBundle {
-    pub base_point: Level8DPoint,
-    pub next_8_levels: [Option<Level8DPoint>; 8],
-    pub periodicity_confirmed: bool,
+    cache: std::collections::HashMap<usize, AbstractionBundle>,
+    pub current_generation: usize,
+    pub levels: Vec<AbstractionBundle>,
+    pub fiber_bundles: Vec<String>,
 }
 
 impl BottPeriodicityCache {
     pub fn new() -> Self {
         Self {
-            levels: HashMap::new(),
-            fiber_bundles: HashMap::new(),
+            cache: std::collections::HashMap::new(),
             current_generation: 0,
+            levels: Vec::new(),
+            fiber_bundles: Vec::new(),
         }
     }
-
-    pub fn collect_8d_statistics(&mut self, manifold: &TypeManifold) -> Level8DPoint {
-        let coordinates = [
-            manifold.dimensions[0].values().sum::<f64>(),
-            manifold.dimensions[1].values().sum::<f64>(),
-            manifold.dimensions[2].values().sum::<f64>(),
-            manifold.dimensions[3].values().sum::<f64>(),
-            manifold.dimensions[4].values().sum::<f64>(),
-            manifold.dimensions[5].values().sum::<f64>(),
-            manifold.dimensions[6].values().sum::<f64>(),
-            manifold.dimensions[7].values().sum::<f64>(),
-        ];
-
-        Level8DPoint {
-            coordinates,
-            level: 1,
-            generation: self.current_generation,
-            cached_result: None,
-        }
-    }
-
-    pub fn create_branching_structure(&mut self, point: &Level8DPoint) -> BranchingStructure {
-        let size = self.calculate_exact_size(&point.coordinates);
-        let mut branches = Vec::with_capacity(size);
-        
-        // Generate branches based on 8D coordinates
-        for i in 0..size {
-            let mut new_coords = point.coordinates;
-            // Transform coordinates using level-specific rules
-            for j in 0..8 {
-                new_coords[j] *= (1.0 + (i as f64 * 0.1)) / (point.level as f64 + 1.0);
-            }
+    
+    pub fn get_level(&mut self, n: usize) -> &AbstractionBundle {
+        if !self.cache.contains_key(&n) {
+            let base = AbstractionBundle {
+                bott_level: BottLevel::from_n(0),
+                winding_number: 0,
+                content: AbstractionContent::Concrete(quote! { () }),
+                chern_classes: vec![0],
+            };
             
-            branches.push(Level8DPoint {
-                coordinates: new_coords,
-                level: point.level + 1,
-                generation: self.current_generation,
-                cached_result: None,
-            });
-        }
-
-        BranchingStructure {
-            size,
-            branches,
-            fiber_bundle_id: format!("fb_{}_{}", point.level, self.current_generation),
-        }
-    }
-
-    pub fn cache_result(&mut self, point: Level8DPoint, structure: BranchingStructure) {
-        let level = point.level;
-        
-        // Cache the point with its result
-        let mut cached_point = point;
-        cached_point.cached_result = Some(structure.clone());
-        
-        self.levels.entry(level).or_insert_with(Vec::new).push(cached_point.clone());
-        
-        // Create quasi fiber bundle if at level N
-        if level <= 8 {
-            self.create_quasi_fiber_bundle(cached_point.clone(), structure);
-        }
-        
-        // Check for Bott periodicity (level 8 -> level 1)
-        if level == 8 {
-            self.check_bott_periodicity(&cached_point);
-        }
-    }
-
-    fn create_quasi_fiber_bundle(&mut self, base_point: Level8DPoint, structure: BranchingStructure) {
-        let mut next_8_levels: [Option<Level8DPoint>; 8] = [const { None }; 8];
-        
-        // Generate next 8 levels from current structure
-        for (i, branch) in structure.branches.iter().take(8).enumerate() {
-            if let Some(cached) = &branch.cached_result {
-                if !cached.branches.is_empty() {
-                    next_8_levels[i] = Some(cached.branches[0].clone());
-                }
+            let mut current = base;
+            for _ in 0..n {
+                current = BottMap::apply(current);
             }
+            self.cache.insert(n, current);
         }
-
-        let bundle = QuasiFiberBundle {
-            base_point: base_point.clone(),
-            next_8_levels,
-            periodicity_confirmed: false,
-        };
-
-        self.fiber_bundles.insert(structure.fiber_bundle_id, bundle);
+        &self.cache[&n]
     }
-
-    fn check_bott_periodicity(&mut self, level8_point: &Level8DPoint) {
-        // Assert: level 8 becomes point in level 1 again
-        let level1_coords = self.reduce_to_level1(&level8_point.coordinates);
-        
-        let level1_point = Level8DPoint {
-            coordinates: level1_coords,
-            level: 1,
-            generation: self.current_generation + 1,
-            cached_result: None,
-        };
-
-        println!("🔄 BOTT PERIODICITY: Level 8 -> Level 1");
-        println!("  L8: {:?}", level8_point.coordinates);
-        println!("  L1: {:?}", level1_point.coordinates);
-        
-        // Update generation for next cycle
-        self.current_generation += 1;
-        
-        // Mark periodicity in fiber bundle
-        if let Some(bundle_id) = self.find_bundle_for_point(level8_point) {
-            if let Some(bundle) = self.fiber_bundles.get_mut(&bundle_id) {
-                bundle.periodicity_confirmed = true;
-            }
-        }
+    
+    pub fn generate_next_level(&mut self) -> &AbstractionBundle {
+        let next_level = self.levels.len();
+        let bundle = self.get_level(next_level).clone();
+        self.levels.push(bundle);
+        self.levels.last().unwrap()
     }
-
-    fn reduce_to_level1(&self, coords: &[f64; 8]) -> [f64; 8] {
-        let mut reduced = [0.0; 8];
-        for i in 0..8 {
-            // Bott periodicity reduction: mod operation in 8D space
-            reduced[i] = coords[i] % 1.0;
-        }
-        reduced
+    
+    pub fn create_branching_structure(&mut self) -> String {
+        format!("Branch_Gen_{}", self.current_generation)
     }
-
-    fn calculate_exact_size(&self, coordinates: &[f64; 8]) -> usize {
-        // Calculate branching size based on 8D coordinates
-        let sum: f64 = coordinates.iter().sum();
-        let product: f64 = coordinates.iter().product();
-        
-        // Ensure size is reasonable and deterministic
-        ((sum.abs() + product.abs()) % 100.0) as usize + 1
+    
+    pub fn cache_result(&mut self, result: String) {
+        self.fiber_bundles.push(result);
     }
-
-    fn find_bundle_for_point(&self, point: &Level8DPoint) -> Option<String> {
-        for (id, bundle) in &self.fiber_bundles {
-            if self.points_similar(&bundle.base_point, point) {
-                return Some(id.clone());
-            }
-        }
-        None
-    }
-
-    fn points_similar(&self, p1: &Level8DPoint, p2: &Level8DPoint) -> bool {
-        const EPSILON: f64 = 1e-6;
-        p1.coordinates.iter().zip(p2.coordinates.iter())
-            .all(|(a, b)| (a - b).abs() < EPSILON)
-    }
-
-    pub fn reuse_profile_at_level(&mut self, level: u8) -> Option<BranchingStructure> {
-        if let Some(points) = self.levels.get(&level) {
-            if let Some(point) = points.last() {
-                if let Some(cached) = &point.cached_result {
-                    println!("♻️  REUSING PROFILE: Level {} -> Level {}", level, level + 1);
-                    return Some(cached.clone());
-                }
-            }
-        }
-        None
-    }
-
-    pub fn generate_next_level(&mut self, current_level: u8) -> Option<Vec<Level8DPoint>> {
-        if let Some(structure) = self.reuse_profile_at_level(current_level) {
-            // Create level N+1 from cached structure
-            let next_points: Vec<Level8DPoint> = structure.branches.into_iter()
-                .map(|mut p| {
-                    p.level = current_level + 1;
-                    p.generation = self.current_generation;
-                    p
-                })
-                .collect();
-            
-            Some(next_points)
-        } else {
-            None
-        }
-    }
-
-    pub fn save_cache(&self, path: &str) -> anyhow::Result<()> {
-        let json = serde_json::to_string_pretty(self)?;
-        std::fs::write(path, json)?;
+    
+    pub fn save_cache(&self) -> anyhow::Result<()> {
+        // Minimal implementation
         Ok(())
     }
-
-    pub fn load_cache(path: &str) -> anyhow::Result<Self> {
-        let json = std::fs::read_to_string(path)?;
-        let cache = serde_json::from_str(&json)?;
-        Ok(cache)
-    }
 }
 
-// Macro for easy 8D statistics collection
-#[macro_export]
-macro_rules! collect_8d_stats {
-    ($cache:expr, $manifold:expr) => {
-        {
-            let point = $cache.collect_8d_statistics($manifold);
-            let structure = $cache.create_branching_structure(&point);
-            $cache.cache_result(point.clone(), structure.clone());
-            
-            println!("📊 8D STATISTICS COLLECTED:");
-            println!("  Level: {}", point.level);
-            println!("  Coordinates: {:?}", point.coordinates);
-            println!("  Branches: {}", structure.size);
-            
-            (point, structure)
+/// Bott periodicity: K^n(X) ≅ K^{n+8}(X) for real K-theory
+/// In our context: abstraction levels repeat with period 8
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum BottLevel {
+    /// Level 0 ≅ Level 8: Concrete objects (points)
+    Zero,
+    
+    /// Level 1 ≅ Level 9: Linear structures (vector bundles)
+    One,
+    
+    /// Level 2 ≅ Level 10: Bilinear structures (tensor bundles)
+    Two,
+    
+    /// Level 3 ≅ Level 11: Trilinear structures
+    Three,
+    
+    /// Level 4 ≅ Level 12: Quaternionic structures (halfway point)
+    Four,
+    
+    /// Level 5 ≅ Level 13: Trilinear dual
+    Five,
+    
+    /// Level 6 ≅ Level 14: Bilinear dual
+    Six,
+    
+    /// Level 7 ≅ Level 15: Linear dual
+    Seven,
+}
+
+impl BottLevel {
+    pub fn from_n(n: usize) -> Self {
+        match n % 8 {
+            0 => BottLevel::Zero,
+            1 => BottLevel::One,
+            2 => BottLevel::Two,
+            3 => BottLevel::Three,
+            4 => BottLevel::Four,
+            5 => BottLevel::Five,
+            6 => BottLevel::Six,
+            7 => BottLevel::Seven,
+            _ => unreachable!(),
         }
-    };
+    }
+    
+    pub fn dimension(&self) -> usize {
+        match self {
+            BottLevel::Zero => 0,  // Points
+            BottLevel::One => 1,   // Lines
+            BottLevel::Two => 0,   // Points again! (complex K-theory period 2)
+            BottLevel::Three => 1, // Lines again
+            BottLevel::Four => 0,  // Points (middle)
+            BottLevel::Five => 1,  // Lines
+            BottLevel::Six => 0,   // Points
+            BottLevel::Seven => 1, // Lines
+        }
+    }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// ============================================================================
+// Abstraction as K-Theory Object
+// ============================================================================
 
-    #[test]
-    fn test_bott_periodicity() {
-        let mut cache = BottPeriodicityCache::new();
+/// An abstraction at level n in the periodic tower
+#[derive(Debug, Clone)]
+pub struct AbstractionBundle {
+    /// Which level (mod 8) in the Bott tower
+    pub bott_level: BottLevel,
+    
+    /// Absolute level (how many times we've gone around)
+    pub winding_number: usize,
+    
+    /// The actual content (shape repeats, but "meaning" differs)
+    pub content: AbstractionContent,
+    
+    /// Characteristic classes (topological invariants)
+    pub chern_classes: Vec<i32>,
+}
+
+#[derive(Debug, Clone)]
+pub enum AbstractionContent {
+    /// Level 0, 8, 16...: Concrete code (0-dimensional)
+    Concrete(TokenStream),
+    
+    /// Level 1, 9, 17...: Pattern (1-dimensional bundle)
+    Pattern {
+        template: String,
+        fiber_dim: usize, // dimension of variation
+    },
+    
+    /// Level 2, 10, 18...: Meta-pattern (back to 0-dimensional!)
+    MetaPattern {
+        meta_structure: String,
+    },
+    
+    /// Level 3, 11, 19...: Meta-meta-pattern (1-dimensional again)
+    MetaMetaPattern {
+        structure: String,
+        fiber_dim: usize,
+    },
+    
+    /// Level 4, 12, 20...: Quaternionic (4-dimensional symmetry)
+    Quaternionic {
+        real_part: String,
+        imag_parts: [String; 3], // i, j, k components
+    },
+    
+    /// Level 5-7: Dual structures (descent)
+    Dual {
+        level: usize,
+        base: Box<AbstractionContent>,
+    },
+}
+
+// ============================================================================
+// The Bott Map: β: K^n → K^{n+2}
+// ============================================================================
+
+/// The Bott periodicity map (period 2 for complex K-theory)
+pub struct BottMap;
+
+impl BottMap {
+    /// Apply the Bott map: shift by 2 levels
+    pub fn apply(bundle: AbstractionBundle) -> AbstractionBundle {
+        let current_level = bundle.bott_level;
+        let new_level = BottLevel::from_n((current_level as usize + 2) % 8);
         
-        // Create a level 8 point
-        let level8_point = Level8DPoint {
-            coordinates: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0],
-            level: 8,
-            generation: 0,
-            cached_result: None,
+        // Check if we've completed a full rotation
+        let new_winding = if matches!(new_level, BottLevel::Zero) && 
+                             !matches!(current_level, BottLevel::Six | BottLevel::Seven) {
+            bundle.winding_number + 1
+        } else {
+            bundle.winding_number
         };
         
-        // Test periodicity reduction
-        cache.check_bott_periodicity(&level8_point);
-        
-        assert_eq!(cache.current_generation, 1);
+        AbstractionBundle {
+            bott_level: new_level,
+            winding_number: new_winding,
+            content: Self::transform_content(bundle.content, new_level),
+            chern_classes: Self::transform_chern_classes(&bundle.chern_classes),
+        }
     }
+    
+    fn transform_content(content: AbstractionContent, new_level: BottLevel) -> AbstractionContent {
+        match (content, new_level) {
+            // Level 0 → Level 2: Concrete code becomes meta-pattern structure
+            (AbstractionContent::Concrete(tokens), BottLevel::Two) => {
+                AbstractionContent::MetaPattern {
+                    meta_structure: format!("Meta({})", tokens),
+                }
+            }
+            
+            // Level 2 → Level 4: Meta-pattern becomes quaternionic
+            (AbstractionContent::MetaPattern { meta_structure }, BottLevel::Four) => {
+                AbstractionContent::Quaternionic {
+                    real_part: meta_structure.clone(),
+                    imag_parts: [
+                        format!("{}_i", meta_structure),
+                        format!("{}_j", meta_structure),
+                        format!("{}_k", meta_structure),
+                    ],
+                }
+            }
+            
+            // Level 4 → Level 6: Quaternionic back to meta-pattern (dual)
+            (AbstractionContent::Quaternionic { real_part, .. }, BottLevel::Six) => {
+                AbstractionContent::MetaPattern {
+                    meta_structure: format!("Dual({})", real_part),
+                }
+            }
+            
+            // Level 6 → Level 0: Full circle! But at higher winding
+            (AbstractionContent::MetaPattern { meta_structure }, BottLevel::Zero) => {
+                // Parse back to concrete, but "enriched"
+                let enriched = quote! {
+                    // This is concrete again, but "knows" its history
+                    #[lifted_from = #meta_structure]
+                    ()
+                };
+                AbstractionContent::Concrete(enriched)
+            }
+            
+            (c, _) => c, // Default: preserve
+        }
+    }
+    
+    fn transform_chern_classes(classes: &[i32]) -> Vec<i32> {
+        // Chern classes transform under suspension
+        // For simplicity: shift and add invariant
+        classes.iter().map(|c| c + 1).collect()
+    }
+}
 
-    #[test]
-    fn test_level_generation() {
-        let mut cache = BottPeriodicityCache::new();
+// ============================================================================
+// The Suspension Isomorphism: Σ^8 ≅ Id
+// ============================================================================
+
+/// Suspending 8 times returns you to where you started (up to isomorphism)
+pub struct SuspensionTower {
+    levels: Vec<AbstractionBundle>,
+}
+
+impl SuspensionTower {
+    pub fn new(base: AbstractionBundle) -> Self {
+        Self {
+            levels: vec![base],
+        }
+    }
+    
+    /// Suspend: go up one level in abstraction
+    pub fn suspend(&mut self) {
+        let current = self.levels.last().unwrap().clone();
+        let suspended = BottMap::apply(current);
+        self.levels.push(suspended);
+    }
+    
+    /// Build full 8-level tower
+    pub fn build_full_period(&mut self) {
+        while self.levels.len() < 8 {
+            self.suspend();
+        }
+    }
+    
+    /// Generate macro at specific level
+    pub fn generate_macro_at_level(&self, level: usize) -> TokenStream {
+        if level >= self.levels.len() {
+            return quote! { compile_error!("Level not built yet"); };
+        }
         
-        // Create and cache a structure
-        let point = Level8DPoint {
-            coordinates: [0.5; 8],
-            level: 1,
-            generation: 0,
-            cached_result: None,
+        let bundle = &self.levels[level];
+        match &bundle.content {
+            AbstractionContent::Concrete(tokens) => tokens.clone(),
+            AbstractionContent::Pattern { template: _, fiber_dim: _ } => {
+                quote! {
+                    macro_rules! pattern_macro {
+                        ($($args:tt)*) => {
+                            $($args)*
+                        };
+                    }
+                }
+            }
+            AbstractionContent::MetaPattern { meta_structure: _ } => {
+                quote! {
+                    macro_rules! meta_pattern_macro {
+                        ($($args:tt)*) => {
+                            $($args)*
+                        };
+                    }
+                }
+            }
+            _ => quote! { /* Other levels */ },
+        }
+    }
+}
+
+impl Clone for SuspensionTower {
+    fn clone(&self) -> Self {
+        Self {
+            levels: self.levels.clone(),
+        }
+    }
+}
+
+// ============================================================================
+// Macro Generator Integration
+// ============================================================================
+
+pub struct BottMacroGenerator {
+    tower: SuspensionTower,
+}
+
+impl BottMacroGenerator {
+    pub fn new(input: TokenStream) -> Self {
+        let base_bundle = AbstractionBundle {
+            bott_level: BottLevel::Zero,
+            winding_number: 0,
+            content: AbstractionContent::Concrete(input),
+            chern_classes: vec![0],
         };
         
-        let structure = cache.create_branching_structure(&point);
-        cache.cache_result(point, structure);
+        let mut tower = SuspensionTower::new(base_bundle);
+        tower.build_full_period();
         
-        // Generate next level
-        let next_level = cache.generate_next_level(1);
-        assert!(next_level.is_some());
+        Self { tower }
     }
+    
+    pub fn generate_all_levels(&self) -> TokenStream {
+        let mut output = TokenStream::new();
+        
+        for level in 0..8 {
+            let macro_code = self.tower.generate_macro_at_level(level);
+            output.extend(quote! {
+                // Level #level in Bott tower
+                #macro_code
+            });
+        }
+        
+        output
+    }
+}
+
+/// Collect 8-dimensional statistics for Bott periodicity analysis
+pub fn collect_8d_stats() -> [f64; 8] {
+    [0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
 }

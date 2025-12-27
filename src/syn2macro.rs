@@ -2,6 +2,7 @@ use anyhow::Result;
 use syn::{parse_quote, Item, ItemFn, ItemStruct, ItemEnum, ItemTrait, ItemImpl};
 use proc_macro2::TokenStream;
 use quote::quote;
+use crate::bott_periodicity::{BottMacroGenerator, AbstractionBundle, BottLevel, AbstractionContent};
 
 /// Universal AST execution context trait
 pub trait UniversalAst {
@@ -36,41 +37,53 @@ pub enum AstOperation {
 pub struct SecurityError(pub String);
 
 /// Security and ACL enum for AST operations  
+#[derive(Debug, Clone)]
 pub enum SecurityContext {
-    Default(DefaultSecurity),
-    Strict(StrictSecurity),
+    Default,
+    Strict(Vec<AstOperation>),
 }
 
 impl SecurityContext {
     pub fn check_permission(&self, operation: &AstOperation) -> bool {
         match self {
-            SecurityContext::Default(s) => s.check_permission(operation),
-            SecurityContext::Strict(s) => s.check_permission(operation),
+            SecurityContext::Default => true, // Allow all in default mode
+            SecurityContext::Strict(allowed) => {
+                allowed.iter().any(|op| {
+                    std::mem::discriminant(op) == std::mem::discriminant(operation)
+                })
+            }
         }
     }
 }
 
-/// Main syn2macro converter
+/// Main syn2macro converter with Bott periodicity awareness
 pub struct Syn2MacroConverter {
     security: SecurityContext,
+    bott_generator: Option<BottMacroGenerator>,
 }
 
 impl Syn2MacroConverter {
     pub fn new(security: SecurityContext) -> Self {
-        Self { security }
+        Self { 
+            security,
+            bott_generator: None,
+        }
     }
     
-    /// Convert syn-based code to universal trait-based macro
-    pub fn convert_syn_to_traits(&self, input: TokenStream) -> Result<TokenStream> {
+    /// Convert syn-based code to universal trait-based macro using Bott periodicity
+    pub fn convert_syn_to_traits(&mut self, input: TokenStream) -> Result<TokenStream> {
         // Check permission
         if !self.security.check_permission(&AstOperation::ParseItem) {
             return Err(anyhow::anyhow!("Permission denied for ParseItem"));
         }
         
+        // Initialize Bott generator with input
+        self.bott_generator = Some(BottMacroGenerator::new(input.clone()));
+        
         // Parse the input
         let item: Item = syn::parse2(input)?;
         
-        // Convert based on item type
+        // Convert based on item type with Bott awareness
         let trait_impl = match item {
             Item::Fn(func) => self.convert_function_to_trait(func)?,
             Item::Struct(struct_item) => self.convert_struct_to_trait(struct_item)?,
@@ -80,7 +93,22 @@ impl Syn2MacroConverter {
             _ => return Err(anyhow::anyhow!("Unsupported item type")),
         };
         
-        Ok(trait_impl)
+        // Generate full Bott tower if requested
+        if let Some(ref generator) = self.bott_generator {
+            let bott_macros = generator.generate_all_levels();
+            Ok(quote! {
+                // Original trait implementation
+                #trait_impl
+                
+                // Bott periodicity tower (8 levels)
+                pub mod bott_tower {
+                    use super::*;
+                    #bott_macros
+                }
+            })
+        } else {
+            Ok(trait_impl)
+        }
     }
     
     fn convert_function_to_trait(&self, func: ItemFn) -> Result<TokenStream> {

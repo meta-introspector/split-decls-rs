@@ -45,6 +45,10 @@ path = "src/bin/real_syscall_analyzer.rs"
 name = "apply_process_audit"
 path = "src/bin/apply_process_audit.rs"
 
+[[bin]]
+name = "bott_macro_gen"
+path = "src/bin/bott_macro_gen.rs"
+
 [profile.release]
 debug = true
 
