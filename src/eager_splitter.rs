@@ -7,7 +7,7 @@ use std::fs;
 // use std::io::Write; // commented out because it's no longer used
 use std::path::{Path, PathBuf}; // Added Path
 use syn::visit::Visit;
-use syn::{self, LitStr}; // Added LitStr
+use syn::{self, LitStr, Item}; // Added LitStr and Item
 use quote::quote; // Added quote
 use log::{info, warn, error};
 
@@ -73,9 +73,9 @@ fn process_all_rust_files(
     
     
     for rust_file in rust_files {
-        // Skip lib.rs and main.rs as they're handled separately
+        // Skip main.rs but process lib.rs and all other files
         if let Some(file_name) = rust_file.file_name() {
-            if file_name == "lib.rs" || file_name == "main.rs" {
+            if file_name == "main.rs" {
                 continue;
             }
         }
@@ -89,16 +89,20 @@ fn process_all_rust_files(
         
         let file_content = fs::read_to_string(&rust_file)
             .context(format!("Failed to read file: {}", rust_file.display()))?;
-
+            
+        println!("  📁 File size: {} bytes", file_content.len());
+        
         // Sanitize crate name once
         let crate_name_sanitized = paths.crate_name.replace("-", "_").replace(".", "_");
-
-        // Handle parsing errors
+        
         let file_ast = match syn::parse_str::<syn::File>(&file_content) {
-            Ok(ast) => ast,
+            Ok(ast) => {
+                println!("  ✅ Successfully parsed {} items", ast.items.len());
+                ast
+            },
             Err(e) => {
                 let file_path_display = rust_file.display();
-                eprintln!("Error parsing file {}: {}", file_path_display, e);
+                eprintln!("  ❌ Error parsing file {}: {}", file_path_display, e);
 
                 let file_stem = rust_file.file_stem().unwrap().to_string_lossy();
                 let error_module_name_str = format!("{}_decls_error_{}", crate_name_sanitized, file_stem.replace("-", "_").replace(".", "_"));
@@ -165,7 +169,29 @@ fn process_all_rust_files(
         let rel_path = rust_file.strip_prefix(&src_dir).unwrap_or(&rust_file);
         let path_str = rel_path.to_string_lossy().replace("/", "_").replace("\\", "_").replace(".rs", "");
         
-        for item in &file_ast.items {
+        for (item_index, item) in file_ast.items.iter().enumerate() {
+            let item_name = match item {
+                Item::Fn(item_fn) => format!("fn {}", item_fn.sig.ident),
+                Item::Struct(item_struct) => format!("struct {}", item_struct.ident),
+                Item::Enum(item_enum) => format!("enum {}", item_enum.ident),
+                Item::Trait(item_trait) => format!("trait {}", item_trait.ident),
+                Item::Impl(item_impl) => {
+                    if let Some((_, path, _)) = &item_impl.trait_ {
+                        format!("impl {} for {:?}", quote!(#path), quote!(#item_impl.self_ty))
+                    } else {
+                        format!("impl {:?}", quote!(#item_impl.self_ty))
+                    }
+                },
+                Item::Mod(item_mod) => format!("mod {}", item_mod.ident),
+                Item::Use(_) => "use statement".to_string(),
+                Item::Const(item_const) => format!("const {}", item_const.ident),
+                Item::Static(item_static) => format!("static {}", item_static.ident),
+                Item::Type(item_type) => format!("type {}", item_type.ident),
+                _ => "other item".to_string(),
+            };
+            
+            println!("    📋 Item {}: {}", item_index + 1, item_name);
+            
             if let Some(decl) = declaration_extractor::extract_single_declaration(item, *item_count) {
                 let module_name_str = format!("{}_decls_{}_{}", 
                     crate_name_sanitized, 
@@ -257,37 +283,23 @@ pub fn copy_declarations_to_output(
 /// Main entry point for eager splitting of a crate
 pub fn eager_split_crate(paths: &CratePaths, config: &SplitDeclsConfig) -> Result<Vec<ModuleNotFoundReport>> {
     println!("DEBUG: Entering eager_split_crate for crate: {}", paths.crate_name);
-    // 1. Parse the original lib.rs
-    info!("📖 Parsing lib.rs...");
-    let lib_content = fs::read_to_string(&paths.lib_rs_path)
-        .context(format!("Failed to read {}", paths.lib_rs_path.display()))?;
-    
-    info!("🔧 Parsing {} bytes of Rust code...", lib_content.len());
-    let syntax_tree: syn::File = match syn::parse_str(&lib_content) {
-        Ok(ast) => ast,
-        Err(e) => {
-            let file_path_display = paths.lib_rs_path.display();
-            let error_message = e.to_string();
-            let error_line = e.span().start().line;
-            let error_column = e.span().start().column;
-
-            return Err(anyhow::anyhow!(
-                "Failed to parse lib.rs as Rust code: {}\nFile: {}\nLine: {}, Column: {}\nError: {}",
-                file_path_display,
-                paths.lib_rs_path.to_string_lossy(),
-                error_line,
-                error_column,
-                error_message
-            ));
-        }
-    };
     
     let mut module_not_found_errors: Vec<ModuleNotFoundReport> = Vec::new();
-
-    // 3. Split declarations into individual files (to output directory)
-    println!("DEBUG: Before split_and_generate_decls call.");
-    split_and_generate_decls(&syntax_tree, paths, config, false, &mut module_not_found_errors)?;
-    println!("DEBUG: After split_and_generate_decls call.");
+    let mut collected_module_names: Vec<Ident> = Vec::new();
+    let mut item_count: usize = 0;
+    let common_uses = quote! {}; // Empty for now, could be populated from config
+    
+    // Process ALL .rs files in the crate (including lib.rs and individual modules)
+    info!("📖 Processing all .rs files in crate...");
+    process_all_rust_files(
+        paths, 
+        config, 
+        &mut collected_module_names, 
+        &mut item_count, 
+        &common_uses, 
+        false, // dry_run
+        &mut module_not_found_errors
+    )?;
     
     // 4. Generate new lib.rs in output directory
     println!("DEBUG: Before generate_output_lib_rs call.");

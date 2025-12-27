@@ -82,6 +82,9 @@ enum Commands {
         /// Only update Cargo.toml files, skip Rust parsing
         #[arg(long)]
         cargo_only: bool,
+        /// Plan mode: Show what will be processed without making changes
+        #[arg(long)]
+        plan: bool,
     },
 }
 
@@ -267,11 +270,15 @@ fn run_bootstrap_mode(
     dry_run: bool,
     output_dir_override: Option<&PathBuf>,
     cargo_only: bool,
+    plan: bool,
     global_config: &SplitDeclsConfig,
 ) -> Result<()> {
     if verbose {
         if dry_run {
             println!("*** Running in DRY-RUN mode. No files will be modified. ***");
+        }
+        if plan {
+            println!("*** Running in PLAN mode. Showing what will be processed. ***");
         }
         println!("Running bootstrap mode.");
     }
@@ -281,7 +288,7 @@ fn run_bootstrap_mode(
         .unwrap_or_else(|| PathBuf::from("output2"));
 
     // First, run the wrapped workspace generation and collect module not found errors
-    let module_not_found_errors = run_wrapped_workspace_mode(verbose, dry_run, output_dir_override, global_config, cargo_only)?;
+    let module_not_found_errors = run_wrapped_workspace_mode(verbose, dry_run || plan, output_dir_override, global_config, cargo_only)?;
 
     // Then, execute the build workflow using the WorkflowExecutor
     /*
@@ -413,8 +420,8 @@ fn main() -> Result<()> {
         Commands::ExecuteGoalWorkflow { goal_file, dry_run } => {
             run_execute_goal_workflow_mode(cli.verbose, *dry_run, goal_file, &crate::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
-        Commands::Bootstrap { output_dir, dry_run, cargo_only } => {
-            run_bootstrap_mode(cli.verbose, *dry_run, output_dir.as_ref(), *cargo_only, &crate::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
+        Commands::Bootstrap { output_dir, dry_run, cargo_only, plan } => {
+            run_bootstrap_mode(cli.verbose, *dry_run, output_dir.as_ref(), *cargo_only, *plan, &crate::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
     }
 

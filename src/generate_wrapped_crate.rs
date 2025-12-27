@@ -125,9 +125,21 @@ pub fn generate_wrapped_crate(
             &crate_config,
         )?;
 
+        // Create a hybrid CratePaths that reads from original source but writes to wrapped output
+        let source_crate_paths = CratePaths {
+            crate_path: original_crate_path.to_path_buf(),
+            crate_name: wrapped_crate_paths.crate_name.clone(),
+            lib_rs_path: wrapped_crate_paths.lib_rs_path.clone(),
+            build_rs_path: wrapped_crate_paths.build_rs_path.clone(),
+            cargo_toml_path: wrapped_crate_paths.cargo_toml_path.clone(),
+            decls_output_dir: wrapped_crate_paths.decls_output_dir.clone(),
+            target_config_path: wrapped_crate_paths.target_config_path.clone(),
+            output_crate_path: wrapped_crate_paths.output_crate_path.clone(),
+        };
+        
         eager_splitter::split_and_generate_decls(
             &syntax_tree,
-            &wrapped_crate_paths,
+            &source_crate_paths,
             &crate_config,
             dry_run,
             &mut module_not_found_errors, // Pass the new parameter

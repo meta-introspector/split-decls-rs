@@ -1411,6 +1411,9 @@ fastrand = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fastrand"
 rstrace-cuda-sniff = "/mnt/data1/nix/vendor/rust/cargo2nix/rstrace-cuda-sniff"
 rustc_abi = "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_abi"
 
+[dependency_name_mappings]
+memmap2-rs = "memmap2"
+
 [workspace_dependency_overrides]
 unicode-bidi = "*"
 schemars = "1.0.5"

@@ -162,8 +162,16 @@ pub fn extract_single_declaration(item: &Item, item_count: usize) -> Option<Extr
         },
         Item::Mod(item_mod) => {
             let mod_name = item_mod.ident.to_string();
-            // Generate module wrapper like lib wrapper with mkmod! allthedecls!
-            Some(extracted_decl_base(mod_name, "mod".to_string()))
+            
+            // If the module has content (inline module), recursively extract its items
+            if let Some((_, items)) = &item_mod.content {
+                // For inline modules, we should extract each item separately
+                // But for now, treat as single module to avoid breaking existing logic
+                Some(extracted_decl_base(mod_name, "mod".to_string()))
+            } else {
+                // External module (mod foo;) - treat as single declaration
+                Some(extracted_decl_base(mod_name, "mod".to_string()))
+            }
         }
         Item::ExternCrate(item_extern) => {
             let crate_name = item_extern.ident.to_string();
