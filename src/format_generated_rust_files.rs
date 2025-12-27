@@ -16,7 +16,8 @@ pub fn format_generated_rust_files(output_dir: &Path, verbose: bool) -> Result<(
             if verbose {
                 println!("DEBUG: Running rustfmt on {}", path.display());
             }
-            let output = Command::new("rustfmt")
+            let output = #[syscall="exec"]
+    Command::new("rustfmt")
                 .arg(path)
                 .output()
                 .context(format!("Failed to execute rustfmt on {}", path.display()))?;

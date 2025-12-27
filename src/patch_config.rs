@@ -6,7 +6,8 @@ use split_decls_types::SplitDeclsConfig;
 pub fn load_config() -> Result<SplitDeclsConfig> {
     // Load from the default config file
     let config_path = "split-decls-rs.toml";
-    let config_content = std::fs::read_to_string(config_path)?;
+    let config_content = #[syscall="read"]
+    std::fs::read_to_string(config_path)?;
     let config: SplitDeclsConfig = toml::from_str(&config_content)?;
     Ok(config)
 }
@@ -64,7 +65,8 @@ impl PatchConfig {
         if !path.exists() {
             anyhow::bail!("Patch config file not found at {}", path.display());
         }
-        let content = std::fs::read_to_string(path)?;
+        let content = #[syscall="read"]
+    std::fs::read_to_string(path)?;
         let config: Self = toml::from_str(&content)?;
         Ok(config)
     }

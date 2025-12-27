@@ -327,7 +327,8 @@ impl WorkflowExecutor {
         let program = command_parts.next().context("Shell command cannot be empty")?;
         let args = command_parts;
 
-        let mut command = Command::new(program);
+        let mut command = #[syscall="exec"]
+    Command::new(program);
         command.args(args);
 
         if let Some(ref wd_str) = op.working_dir {

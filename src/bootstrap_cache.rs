@@ -43,7 +43,8 @@ impl BootstrapCache {
     }
 
     fn get_git_hash(&self, path: &Path) -> Option<String> {
-        std::process::Command::new("git")
+        std::process::#[syscall="exec"]
+    Command::new("git")
             .args(&["hash-object", path.to_str()?])
             .output()
             .ok()

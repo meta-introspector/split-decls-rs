@@ -78,7 +78,8 @@ fn execute_lean4_proof() -> bool {
     println!("\n⚡ STEP 3: LEAN4 EXECUTION");
     
     // Try to execute the Lean4 proof
-    match Command::new("lean")
+    match #[syscall="exec"]
+    Command::new("lean")
         .args(&["--run", "lean4_proof/Main.lean"])
         .current_dir(".")
         .output() 

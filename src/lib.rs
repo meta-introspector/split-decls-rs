@@ -1,3 +1,4 @@
+#![feature(stmt_expr_attributes)]
 use std::path::{Path, PathBuf};
 use anyhow::{Context, Result};
 use split_decls_types::SplitDeclsConfig;

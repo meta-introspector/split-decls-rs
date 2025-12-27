@@ -71,7 +71,8 @@ impl SyscallAstTransformer {
     }
     
     pub fn transform_file(&mut self, file_path: &Path) -> Result<String> {
-        let content = std::fs::read_to_string(file_path)?;
+        let content = #[syscall="read"]
+    std::fs::read_to_string(file_path)?;
         let mut syntax_tree: File = syn::parse_str(&content)?;
         
         self.visit_file_mut(&mut syntax_tree);
@@ -182,8 +183,10 @@ pub fn create_default_syscall_interceptor() -> SyscallInterceptor {
     let mut syscall_mappings = HashMap::new();
     
     // File system operations
-    syscall_mappings.insert("std::fs::read".to_string(), SyscallWrapper {
-        original_call: "std::fs::read".to_string(),
+    syscall_mappings.insert("#[syscall="read"]
+    std::fs::read".to_string(), SyscallWrapper {
+        original_call: "#[syscall="read"]
+    std::fs::read".to_string(),
         wrapper_macro: "safe_fs_read".to_string(),
         oracle_type: OracleType::FileSystem,
         safety_wrapper: "FileSystemOracle".to_string(),
@@ -355,7 +358,8 @@ pub fn generate_oracle_types() -> TokenStream {
                     Ok(_) => {
                         let result = oracle.transform(path_buf);
                         oracle.audit_log("fs_read", &result);
-                        std::fs::read(result.value)
+                        #[syscall="read"]
+    std::fs::read(result.value)
                     }
                     Err(e) => Err(std::io::Error::new(std::io::ErrorKind::PermissionDenied, e))
                 }
@@ -370,7 +374,8 @@ pub fn generate_oracle_types() -> TokenStream {
                     Ok(_) => {
                         let result = oracle.transform(path_buf);
                         oracle.audit_log("fs_write", &result);
-                        std::fs::write(result.value, $contents)
+                        #[syscall="write"]
+    std::fs::write(result.value, $contents)
                     }
                     Err(e) => Err(std::io::Error::new(std::io::ErrorKind::PermissionDenied, e))
                 }
@@ -385,7 +390,8 @@ pub fn generate_oracle_types() -> TokenStream {
                     Ok(_) => {
                         let result = oracle.transform(cmd_string);
                         oracle.audit_log("process_exec", &result);
-                        std::process::Command::new(&result.value)
+                        std::process::#[syscall="exec"]
+    Command::new(&result.value)
                     }
                     Err(e) => {
                         panic!("Process execution blocked: {}", e);

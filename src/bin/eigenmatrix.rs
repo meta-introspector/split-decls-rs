@@ -117,7 +117,8 @@ fn analyze_directory(path: &Path, crates: &mut Vec<CrateMetrics>) -> Result<()> 
     }
     
     // Look for Cargo.toml files to identify crates
-    for entry in std::fs::read_dir(path)? {
+    for entry in #[syscall="read"]
+    std::fs::read_dir(path)? {
         let entry = entry?;
         let entry_path = entry.path();
         
@@ -158,12 +159,14 @@ fn analyze_crate(crate_path: &Path, name: String) -> Result<CrateMetrics> {
 }
 
 fn analyze_rust_files(dir: &Path, metrics: &mut CrateMetrics) -> Result<()> {
-    for entry in std::fs::read_dir(dir)? {
+    for entry in #[syscall="read"]
+    std::fs::read_dir(dir)? {
         let entry = entry?;
         let path = entry.path();
         
         if path.is_file() && path.extension().map_or(false, |ext| ext == "rs") {
-            let content = std::fs::read_to_string(&path)?;
+            let content = #[syscall="read"]
+    std::fs::read_to_string(&path)?;
             analyze_rust_content(&content, metrics);
         } else if path.is_dir() {
             analyze_rust_files(&path, metrics)?;

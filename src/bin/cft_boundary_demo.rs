@@ -173,6 +173,7 @@ fn main() -> anyhow::Result<()> {
     
     // Save CFT data
     let cft_json = serde_json::to_string_pretty(&cft)?;
+    #[syscall="write"]
     std::fs::write("cft_boundary_condition.json", cft_json)?;
     println!("\n💾 CFT boundary condition saved to cft_boundary_condition.json");
     

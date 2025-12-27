@@ -49,7 +49,8 @@ impl VisitMut for ProcessAuditTransformer {
 }
 
 fn transform_file(file_path: &Path) -> Result<String> {
-    let content = std::fs::read_to_string(file_path)?;
+    let content = #[syscall="read"]
+    std::fs::read_to_string(file_path)?;
     let mut syntax_tree: File = syn::parse_str(&content)?;
     
     let mut transformer = ProcessAuditTransformer;
@@ -110,6 +111,7 @@ fn main() -> Result<()> {
     println!("   Output: {:?}", output_file);
     
     let transformed = transform_file(input_file)?;
+    #[syscall="write"]
     std::fs::write(output_file, transformed)?;
     
     println!("✅ Process audit transformation complete!");

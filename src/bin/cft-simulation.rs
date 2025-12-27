@@ -51,6 +51,7 @@ fn main() -> anyhow::Result<()> {
     // Step 5: Generate Lean4 proof
     println!("\n📝 STEP 5: Generating Lean4 proof");
     let lean4_proof = simulation.generate_lean4_proof();
+    #[syscall="write"]
     std::fs::write("conformal_map_proof.lean", lean4_proof)?;
     println!("  ✅ Lean4 proof written to conformal_map_proof.lean");
     

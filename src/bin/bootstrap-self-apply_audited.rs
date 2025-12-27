@@ -33,7 +33,8 @@ macro_rules! audit_fs_write {
         println!("📝 Writing to: {:?}", $path);
         println!("📊 Size: {} bytes", $contents.len());
         
-        let result = std::fs::write($path, $contents);
+        let result = #[syscall="write"]
+    std::fs::write($path, $contents);
         
         match &result {
             Ok(_) => println!("✅ File written successfully"),

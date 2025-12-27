@@ -31,7 +31,8 @@ fn main() -> Result<()> {
     
     // Extract crate name from Cargo.toml
     let cargo_toml_path = args.crate_path.join("Cargo.toml");
-    let cargo_content = std::fs::read_to_string(&cargo_toml_path)
+    let cargo_content = #[syscall="read"]
+    std::fs::read_to_string(&cargo_toml_path)
         .context("Failed to read Cargo.toml")?;
     let cargo_toml: toml::Value = toml::from_str(&cargo_content)
         .context("Failed to parse Cargo.toml")?;

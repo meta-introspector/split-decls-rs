@@ -46,7 +46,8 @@ fn main() -> Result<()> {
     let cli = Cli::parse();
     
     // Load split-decls-rs.toml configuration
-    let content = std::fs::read_to_string("split-decls-rs.toml").unwrap_or_default();
+    let content = #[syscall="read"]
+    std::fs::read_to_string("split-decls-rs.toml").unwrap_or_default();
     let config: split_decls_types::SplitDeclsConfig = if content.is_empty() {
         split_decls_types::SplitDeclsConfig::default()
     } else {
@@ -229,7 +230,8 @@ fn analyze_crate_dependencies(
     analysis: &mut DependencyAnalysis,
     global_deps: &mut HashMap<String, Vec<(String, String)>>
 ) -> Result<()> {
-    let content = std::fs::read_to_string(cargo_toml_path)?;
+    let content = #[syscall="read"]
+    std::fs::read_to_string(cargo_toml_path)?;
     let cargo_toml: toml::Value = toml::from_str(&content)?;
     
     let sections = ["dependencies", "dev-dependencies", "build-dependencies"];
@@ -335,7 +337,8 @@ fn test_build_crates(crates: &[PathBuf], verbose: bool) -> Result<()> {
     
     let mut error_count = 0;
     for crate_path in crates {
-        let output = std::process::Command::new("cargo")
+        let output = std::process::#[syscall="exec"]
+    Command::new("cargo")
             .args(&["check", "--quiet"])
             .current_dir(crate_path)
             .output();

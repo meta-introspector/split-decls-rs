@@ -137,7 +137,8 @@ fn precompile_bootstrap(rdf_state: &mut RdfStateMachine, output: &PathBuf, verbo
     ];
     
     for file_path in &bootstrap_files {
-        if let Ok(code) = std::fs::read_to_string(file_path) {
+        if let Ok(code) = #[syscall="read"]
+    std::fs::read_to_string(file_path) {
             let result = interpret_syn_function!(rdf_state, "syn::parse_file", "output2/wrapped-syn/src/decls/wrapped_syn_decls_parse_file.rs");
             rdf_state.capture_data("analyzed_file", file_path);
             rdf_state.capture_data("file_size", &code.len().to_string());
@@ -180,7 +181,8 @@ fn inspect_wrapped_crate(crate_name: &str, details: bool) -> anyhow::Result<()> 
     let wrapped_path = format!("output2/wrapped-{}", crate_name);
     let decls_path = format!("{}/src/decls", wrapped_path);
     
-    if let Ok(entries) = std::fs::read_dir(&decls_path) {
+    if let Ok(entries) = #[syscall="read"]
+    std::fs::read_dir(&decls_path) {
         let decl_files: Vec<_> = entries.flatten().collect();
         println!("📋 Found {} declarations in {}", decl_files.len(), wrapped_path);
         

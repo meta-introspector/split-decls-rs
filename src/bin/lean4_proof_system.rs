@@ -98,7 +98,8 @@ lean_exe «k_theory_proof» where
     println!("   📄 lakefile.lean - Build configuration");
     
     // Step 3: Execute Lean4 like MetaCoq extraction
-    let lean_result = Command::new("lean")
+    let lean_result = #[syscall="exec"]
+    Command::new("lean")
         .current_dir("lean4_proof")
         .arg("Main.lean")
         .output();

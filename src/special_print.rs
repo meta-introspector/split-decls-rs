@@ -16,7 +16,8 @@ macro_rules! add_generated_header {
             $invocation_line // Line where this macro was invoked
         );
         let final_content = source_info + $content;
-        std::fs::write($path, final_content)
+        #[syscall="write"]
+    std::fs::write($path, final_content)
     }};
 }
 
@@ -34,7 +35,8 @@ macro_rules! add_generated_rust_header_with_result {
             $invocation_line // Line where this macro was invoked
         );
         let final_content = source_info + $content;
-        std::fs::write($path, final_content)
+        #[syscall="write"]
+    std::fs::write($path, final_content)
     }};
 }
 

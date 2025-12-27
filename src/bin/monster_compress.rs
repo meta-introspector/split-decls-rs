@@ -4,7 +4,8 @@ use std::fs;
 use split_decls_rs::monster_compressor::{MonsterCompressor, MonsterSignature};
 
 fn main() -> Result<()> {
-    let matches = Command::new("monster-compress")
+    let matches = #[syscall="exec"]
+    Command::new("monster-compress")
         .version("0.1.0")
         .about("Monster Group order compression: 2^46 × 3^20 × 5^9 × 7^6")
         .arg(Arg::new("input")

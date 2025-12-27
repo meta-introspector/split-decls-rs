@@ -1,3 +1,4 @@
+#![feature(stmt_expr_attributes)]
 use anyhow::{Context, Result};
 use std::path::Path;
 use std::process::Command;
@@ -29,7 +30,8 @@ pub fn manage_git_repo(
 
     if !target_dir.exists() {
         println!("Cloning fork {} to {}...", fork_url, target_dir.display());
-        Command::new("git")
+        #[syscall="exec"]
+    Command::new("git")
             .arg("clone")
             .arg(&fork_url)
             .arg(target_dir)
@@ -37,7 +39,8 @@ pub fn manage_git_repo(
             .context(format!("Failed to clone repository {}", fork_url))?;
     } else {
         println!("Repository already exists at {}. Fetching latest...", target_dir.display());
-        Command::new("git")
+        #[syscall="exec"]
+    Command::new("git")
             .arg("-C") // Run command in target_dir
             .arg(target_dir)
             .arg("fetch")
@@ -46,7 +49,8 @@ pub fn manage_git_repo(
             .context(format!("Failed to fetch origin for {}", target_dir.display()))?;
         
         // Ensure origin is correctly set to the fork URL
-        Command::new("git")
+        #[syscall="exec"]
+    Command::new("git")
             .arg("-C")
             .arg(target_dir)
             .arg("remote")
@@ -59,6 +63,7 @@ pub fn manage_git_repo(
 
     // Set upstream remote
     println!("Setting upstream remote to {}...", repo_url);
+    #[syscall="exec"]
     Command::new("git")
         .arg("-C")
         .arg(target_dir)
@@ -70,7 +75,8 @@ pub fn manage_git_repo(
         .or_else(|e| {
             // If upstream already exists, try to set its URL
             if e.to_string().contains("already exists") {
-                Command::new("git")
+                #[syscall="exec"]
+    Command::new("git")
                     .arg("-C")
                     .arg(target_dir)
                     .arg("remote")
@@ -86,6 +92,7 @@ pub fn manage_git_repo(
 
 
     println!("Checking out {} in {}...", reference, target_dir.display());
+    #[syscall="exec"]
     Command::new("git")
         .arg("-C") // Run command in target_dir
         .arg(target_dir)
