@@ -42,7 +42,7 @@ fn main() -> Result<()> {
 
     // Read and parse input file
     let input_content = fs::read_to_string(input_file)?;
-    let input_tokens: proc_macro2::TokenStream = input_content.parse()?;
+    let input_tokens: proc_macro2::TokenStream = syn::parse_str(&input_content)?;
 
     // Create mold and extract signatures
     let mut mold = SynMold::new();

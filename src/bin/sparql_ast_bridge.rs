@@ -99,16 +99,16 @@ fn generate_probes_from_sparql(kb_file: &str, top_n: usize, output: &str, comple
     let mut all_probes = generator.generate_complexity_wrapper_probes(top_n);
     
     // Add high complexity probes
-    let high_complexity_query = crate::sparql_probe_bridge::SparqlQuery {
+    let high_complexity_query = split_decls_rs::sparql_probe_bridge::SparqlQuery {
         name: "high_complexity_monitor".to_string(),
-        query_type: crate::sparql_probe_bridge::QueryType::ComplexityAbove(complexity_threshold),
+        query_type: split_decls_rs::sparql_probe_bridge::QueryType::ComplexityAbove(complexity_threshold),
         threshold: Some(complexity_threshold),
         limit: Some(20),
         target_template: "complexity_wrapper".to_string(),
     };
     
-    let template = crate::sparql_probe_bridge::ProbeTemplate {
-        node_type: crate::ast_reflector::AstNodeType::Function,
+    let template = split_decls_rs::sparql_probe_bridge::ProbeTemplate {
+        node_type: split_decls_rs::ast_reflector::AstNodeType::Function,
         action_template: "monitor_complex".to_string(),
         wrapper_function: Some("complexity_ping".to_string()),
         priority: 2,
@@ -225,7 +225,7 @@ fn run_interactive_mode(kb_file: &str, target_dir: &str) -> Result<()> {
             
             "4" => {
                 if let Ok(content) = std::fs::read_to_string("interactive_probes.json") {
-                    if let Ok(probes) = serde_json::from_str::<Vec<crate::ast_reflector::AstProbe>>(&content) {
+                    if let Ok(probes) = serde_json::from_str::<Vec<split_decls_rs::ast_reflector::AstProbe>>(&content) {
                         println!("📊 Current probe statistics:");
                         println!("   Total probes: {}", probes.len());
                         println!("   Enabled probes: {}", probes.iter().filter(|p| p.enabled).count());
@@ -233,13 +233,13 @@ fn run_interactive_mode(kb_file: &str, target_dir: &str) -> Result<()> {
                         let mut action_counts = std::collections::HashMap::new();
                         for probe in &probes {
                             let action_type = match &probe.action {
-                                crate::ast_reflector::ProbeAction::Log { .. } => "Log",
-                                crate::ast_reflector::ProbeAction::AddAttribute { .. } => "AddAttribute",
-                                crate::ast_reflector::ProbeAction::WrapFunction { .. } => "WrapFunction",
-                                crate::ast_reflector::ProbeAction::InjectCode { .. } => "InjectCode",
-                                crate::ast_reflector::ProbeAction::Transform { .. } => "Transform",
-                                crate::ast_reflector::ProbeAction::Collect { .. } => "Collect",
-                                crate::ast_reflector::ProbeAction::Enhance { .. } => "Enhance",
+                                split_decls_rs::ast_reflector::ProbeAction::Log { .. } => "Log",
+                                split_decls_rs::ast_reflector::ProbeAction::AddAttribute { .. } => "AddAttribute",
+                                split_decls_rs::ast_reflector::ProbeAction::WrapFunction { .. } => "WrapFunction",
+                                split_decls_rs::ast_reflector::ProbeAction::InjectCode { .. } => "InjectCode",
+                                split_decls_rs::ast_reflector::ProbeAction::Transform { .. } => "Transform",
+                                split_decls_rs::ast_reflector::ProbeAction::Collect { .. } => "Collect",
+                                split_decls_rs::ast_reflector::ProbeAction::Enhance { .. } => "Enhance",
                             };
                             *action_counts.entry(action_type).or_insert(0) += 1;
                         }

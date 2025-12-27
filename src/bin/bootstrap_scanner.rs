@@ -25,7 +25,7 @@ impl DuplicateScanner {
         let system = Output2MacroSystem::import_from_output2().unwrap_or_else(|_| {
             Output2MacroSystem {
                 macros: HashMap::new(),
-                interpreter: crate::output2_macro_system::LispInterpreter::new(),
+                interpreter: split_decls_rs::output2_macro_system::LispInterpreter::new(),
             }
         });
         

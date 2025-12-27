@@ -298,7 +298,7 @@ fn analyze_syscalls(dir: &str, generate_config: bool) -> Result<()> {
         
         // Add high-frequency syscalls to interceptor
         for (pattern, count) in &sorted_syscalls {
-            if *count > 10 {
+            if *count > &10 {
                 println!("   Adding high-frequency pattern: {} ({} uses)", pattern, count);
             }
         }

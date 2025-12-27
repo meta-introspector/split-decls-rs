@@ -129,7 +129,8 @@ fn generate_signature_mappings(compressor: &SignatureCompressor, output_file: &s
     
     for (signature, &prime) in prime_assignments {
         let frequency = compressor.frequency_map.get(signature).unwrap_or(&0);
-        let emoji = compressor.emoji_assignments.get(signature).unwrap_or(&"❓".to_string());
+        let default_emoji = "❓".to_string();
+        let emoji = compressor.emoji_assignments.get(signature).unwrap_or(&default_emoji);
         output.push_str(&format!("{}: {} {} (freq: {})\n", prime, emoji, signature, frequency));
     }
     
@@ -195,15 +196,16 @@ fn demonstrate_compression(compressor: &SignatureCompressor) {
     freq_sorted.sort_by(|a, b| b.1.cmp(a.1));
     
     println!("🏆 Top 5 most common signatures:");
+    let default_emoji = "❓".to_string();
     for (i, (signature, frequency)) in freq_sorted.iter().take(5).enumerate() {
         let prime = compressor.prime_assignments.get(*signature).unwrap_or(&0);
-        let emoji = compressor.emoji_assignments.get(*signature).unwrap_or(&"❓".to_string());
+        let emoji = compressor.emoji_assignments.get(*signature).unwrap_or(&default_emoji);
         println!("  {}. {} {} → {} ({}% of total)", 
             i + 1, 
             emoji, 
             signature, 
             prime,
-            (*frequency as f64 / compressor.frequency_map.values().sum::<u64>() as f64 * 100.0) as u32
+            (**frequency as f64 / compressor.frequency_map.values().sum::<u64>() as f64 * 100.0) as u32
         );
     }
     
@@ -213,7 +215,7 @@ fn demonstrate_compression(compressor: &SignatureCompressor) {
     
     for (signature, &prime) in prime_sorted.iter().take(3) {
         let frequency = compressor.frequency_map.get(*signature).unwrap_or(&0);
-        let emoji = compressor.emoji_assignments.get(*signature).unwrap_or(&"❓".to_string());
+        let emoji = compressor.emoji_assignments.get(*signature).unwrap_or(&default_emoji);
         println!("  {} {} → {} (freq: {})", emoji, signature, prime, frequency);
     }
 }
