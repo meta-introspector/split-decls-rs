@@ -43,6 +43,7 @@ pub mod syscall_decoupling_template;
 pub mod ast_statistics;
 pub mod syn_type_discovery;
 pub mod meta_pattern_visitor;
+pub mod introspect_macro;
 pub mod conformal_field_theory;
 pub mod cargo_guided_analysis;
 pub mod buildrs_generator;

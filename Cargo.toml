@@ -49,6 +49,10 @@ path = "src/bin/apply_process_audit.rs"
 name = "bott_macro_gen"
 path = "src/bin/bott_macro_gen.rs"
 
+[[bin]]
+name = "introspect_demo"
+path = "src/bin/introspect_demo.rs"
+
 [profile.release]
 debug = true
 
