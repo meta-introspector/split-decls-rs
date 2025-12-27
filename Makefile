@@ -50,7 +50,12 @@ regen_output2:
 
 # Build regen tool first
 build_regen:
-	@echo "Building regen tool..." && RUSTC_WRAPPER=$(SCCACHE) cargo build --bin regen_cargo_v2
+	@echo "Building regen tool..." && RUSTC_WRAPPER=$(SCCACHE) cargo build --bin regen_cargo_v2 --quiet
+
+# Test the updated lib-cargo system
+test_lib_cargo:
+	@echo "Testing lib-cargo system..." && RUSTC_WRAPPER=$(SCCACHE) cargo check --bin regen_cargo_v2 --quiet
+	@../../target/debug/regen_cargo_v2 --output-dir output2 --verbose --dry-run 2>&1 | head -15
 
 # Regenerate and build test Cargo.toml files
 regen_build:

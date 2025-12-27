@@ -1,0 +1,141 @@
+# Executable Bootstrap Manifest (bootstrap_manifest.toml)
+
+[metadata]
+version = "1.0.0"
+description = "Self-executing bootstrap manifest - this TOML IS the bootstrap code"
+generated_at = "2025-12-27T09:03:00Z"
+
+# This manifest tracks ALL file operations and becomes the bootstrap itself
+[bootstrap_execution]
+# The manifest entries below define the exact bootstrap sequence
+entry_point = "split_decls_rs::main"
+workspace_root = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs"
+
+# Each binary must report its operations via this structure
+[binaries.report_aliases]
+source_file = "src/bin/report_aliases.rs"
+output_file = "output2/wrapped-split-decls-rs/src/decls/wrapped_split_decls_rs_decls_report_aliases.rs"
+
+[binaries.report_aliases.reads]
+files = [
+    "split-decls-rs.toml",
+    "../*/Cargo.toml"  # Glob pattern
+]
+commands = []
+
+[binaries.report_aliases.writes] 
+files = []
+stdout = ["alias mappings"]
+
+[binaries.regen_cargo]
+source_file = "src/bin/regen_cargo.rs"
+output_file = "output2/wrapped-split-decls-rs/src/decls/wrapped_split_decls_rs_decls_regen_cargo.rs"
+
+[binaries.regen_cargo.reads]
+files = [
+    "split-decls-rs.toml",
+    "output2/*/Cargo.toml"
+]
+commands = []
+
+[binaries.regen_cargo.writes]
+files = [
+    "output2/*/Cargo.toml",  # Modified Cargo.toml files
+    "regen_cargo.log"
+]
+
+[binaries.regen_cargo_v2]
+source_file = "src/bin/regen_cargo_v2.rs" 
+output_file = "output2/wrapped-split-decls-rs/src/decls/wrapped_split_decls_rs_decls_regen_cargo_v2.rs"
+
+[binaries.regen_cargo_v2.reads]
+files = [
+    "split-decls-rs.toml",
+    "lib-cargo/*"
+]
+commands = []
+
+[binaries.regen_cargo_v2.writes]
+files = [
+    "output2/Cargo.toml",
+    "output2/*/Cargo.toml"
+]
+
+# Core modules that exist
+[modules.generate_new_cargo]
+source_file = "src/generate_new_cargo.rs"
+output_file = "output2/wrapped-split-decls-rs/src/decls/wrapped_split_decls_rs_decls_module_not_found_generate_new_cargotoml.rs"
+status = "EXISTS"
+
+[modules.generate_new_cargo.reads]
+files = [
+    "*/Cargo.toml",
+    "split-decls-rs.toml"
+]
+
+[modules.generate_new_cargo.writes]
+files = ["*/Cargo.toml"]
+
+[modules.workspace_manager]
+source_file = "src/workspace_manager.rs"
+output_file = "output2/wrapped-split-decls-rs/src/decls/wrapped_split_decls_rs_decls_module_not_found_workspace_manager.rs"
+status = "EXISTS"
+
+[modules.workspace_manager.reads]
+files = ["Cargo.toml"]
+
+[modules.workspace_manager.writes]
+files = ["Cargo.toml"]
+
+# Dependency graph - this IS the bootstrap execution order
+[dependency_graph]
+# Each entry defines: what reads what, what writes what
+# This becomes the actual execution plan
+
+[dependency_graph.step_1]
+action = "read_config"
+reads = ["split-decls-rs.toml"]
+produces = ["config_object"]
+
+[dependency_graph.step_2] 
+action = "scan_crates"
+depends_on = ["config_object"]
+reads = ["submodules/*/Cargo.toml"]
+produces = ["crate_list"]
+
+[dependency_graph.step_3]
+action = "generate_workspace"
+depends_on = ["crate_list", "config_object"]
+reads = ["src/workspace_manager.rs"]
+writes = ["output2/Cargo.toml"]
+produces = ["workspace_manifest"]
+
+[dependency_graph.step_4]
+action = "process_each_crate"
+depends_on = ["workspace_manifest"]
+reads = ["src/generate_new_cargo.rs", "src/process_crate.rs"]
+writes = ["output2/*/Cargo.toml", "output2/*/src/lib.rs"]
+
+# Cargo.lock preservation - critical for reproducibility
+[cargo_lock_tracking]
+original = "Cargo.lock"
+output2 = "output2/Cargo.lock"
+dependencies_preserved = true
+
+# Nix-style content addressing
+[content_hashes]
+# Each file gets a hash, changes trigger rebuilds
+"split-decls-rs.toml" = "sha256:abc123..."
+"src/main.rs" = "sha256:def456..."
+
+# This section makes the TOML executable
+[execution_plan]
+# The manifest defines its own execution
+interpreter = "split_decls_rs"
+entry_point = "bootstrap_from_manifest"
+
+# Self-execution command
+execute = """
+# This TOML file IS the bootstrap program
+cargo run --bin split-decls-rs -- bootstrap --manifest bootstrap_manifest.toml
+"""

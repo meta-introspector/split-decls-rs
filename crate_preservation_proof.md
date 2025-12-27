@@ -1,6 +1,6 @@
 # Crate Preservation Proof
 
-Generated: 2025-12-26 14:04:03 UTC
+Generated: 2025-12-27 13:00:44 UTC
 Total crates: 706
 
 ## Preservation Verification
@@ -33,7 +33,7 @@ Total crates: 706
 ✅ `async-graphql-value` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-graphql/value`
 ✅ `async-std` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-std`
 ✅ `async-stream` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/async-stream-vendored`
-❌ `atoi` → `*` (missing)
+✅ `atoi` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/atoi`
 ✅ `atomic-maybe-uninit` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/atomic-maybe-uninit`
 ✅ `autocfg` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/autocfg`
 ✅ `autowrap_tool` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/autowrap_tool`
@@ -92,7 +92,7 @@ Total crates: 706
 ✅ `colorify` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/colorify`
 ✅ `const-oid` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/formats/const-oid`
 ✅ `constant_time_eq` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/constant_time_eq`
-✅ `core` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/introspector/core`
+✅ `core` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-core`
 ✅ `cpp_demangle` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cpp_demangle`
 ✅ `cpufeatures` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/utils/cpufeatures`
 ✅ `crates-io` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/crates-io`
@@ -110,8 +110,8 @@ Total crates: 706
 ✅ `ct-codecs` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-ct-codecs`
 ✅ `curl` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/curl-rust`
 ✅ `curl-sys` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/curl-rust/curl-sys`
-✅ `cvs-macro-lib` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/cvs-macro-lib`
-✅ `cvs-macro-test-crate` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/cvs-macro-test-crate`
+❌ `cvs-macro-lib` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/cvs-macro-lib` (missing)
+❌ `cvs-macro-test-crate` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/cvs-macro-test-crate` (missing)
 ✅ `dashmap` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/dashmap`
 ✅ `defmac` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/defmac`
 ✅ `dep2submodule` → `/mnt/data1/nix/vendor/rust/cargo2nix/tools/dep2submodule`
@@ -134,9 +134,9 @@ Total crates: 706
 ✅ `equivalent` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/equivalent`
 ✅ `erased-serde` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/erased-serde`
 ❌ `example_project` → (no path mapping)
-✅ `expand_utils_lib` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/expand_utils_lib`
-✅ `expand_utils_macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/expand_utils_macros`
-✅ `expand_utils_test` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/expand_utils_test`
+❌ `expand_utils_lib` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/expand_utils_lib` (missing)
+❌ `expand_utils_macros` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/expand_utils_macros` (missing)
+❌ `expand_utils_test` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/expand_utils_test` (missing)
 ✅ `expect-test` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/expect-test`
 ✅ `factory_abi` → `/mnt/data1/nix/vendor/rust/cargo2nix/crates/factory_abi`
 ✅ `fallible-iterator` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-fallible-iterator`
@@ -171,7 +171,7 @@ Total crates: 706
 ✅ `futures-util` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/futures-rs/futures-util`
 ✅ `fuzz` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/quinn/fuzz`
 ✅ `fxhash` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fxhash`
-✅ `gemini_rustc_data_structures` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/gemini_rustc_data_structures`
+❌ `gemini_rustc_data_structures` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/crates/gemini_rustc_data_structures` (missing)
 ✅ `generate_workspace_deps` → `/mnt/data1/nix/vendor/rust/cargo2nix/tools/generate_workspace_deps`
 ✅ `generator` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/generator-rs`
 ✅ `generic-array` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/generic-array`
@@ -286,7 +286,7 @@ Total crates: 706
 ✅ `indexmap` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/indexmap`
 ✅ `intern` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/intern`
 ✅ `intl-memoizer` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/fluent-rs/intl-memoizer`
-✅ `introspector_core` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/introspector/core`
+✅ `introspector_core` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-core`
 ✅ `introspector_decl2_macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_decl2_macros`
 ✅ `introspector_decl_common` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_decl_common`
 ✅ `introspector_decl_core` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/patch-build-rs/introspector_decl_core`
@@ -301,11 +301,11 @@ Total crates: 706
 ✅ `la-arena` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/la-arena`
 ❌ `lang-c` → `/mnt/data1/nix/vendor/rust/cargo2nix/lang-c` (missing)
 ✅ `lazy_static` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/lazy-static`
-✅ `lib-kleene-op` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/lib-kleene-op`
-✅ `lib-macro-rule` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/lib-macro-rule`
-✅ `lib-matcher-loc` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/lib-matcher-loc`
-✅ `lib-metavar-expr` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/lib-metavar-expr`
-✅ `lib-token-tree` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/lib-token-tree`
+❌ `lib-kleene-op` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-kleene-op` (missing)
+✅ `lib-macro-rule` → `./crates/lib-macro-rule`
+❌ `lib-matcher-loc` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-matcher-loc` (missing)
+❌ `lib-metavar-expr` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-metavar-expr` (missing)
+❌ `lib-token-tree` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/lib-token-tree` (missing)
 ✅ `lib-zos` → `crates/lib-zos`
 ✅ `libc` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/libc`
 ✅ `libgit2-sys` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/git2-rs/libgit2-sys`
@@ -325,7 +325,7 @@ Total crates: 706
 ✅ `loom` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/loom`
 ✅ `lsp-server` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/lib/lsp-server`
 ✅ `lzma-rust2` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/lzma-rust2`
-✅ `macro_wrapper_lib` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/macro_wrapper_lib`
+❌ `macro_wrapper_lib` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/macro_wrapper_lib` (missing)
 ✅ `macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/macros`
 ✅ `macrotest` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/macrotest`
 ✅ `maybe-async` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/maybe-async-rs`
@@ -401,7 +401,7 @@ Total crates: 706
 ✅ `query-group-macro` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/query-group-macro`
 ✅ `quickcheck` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/quickcheck`
 ✅ `quote` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/quote`
-✅ `ra-ap-rustc_index` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index`
+❌ `ra-ap-rustc_index` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_index` (missing)
 ✅ `rand` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rand`
 ✅ `rand_pcg` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rand/rand_pcg`
 ✅ `rand_xorshift` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rngs/rand_xorshift`
@@ -434,89 +434,88 @@ Total crates: 706
 ✅ `rustc-literal-escaper` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-literal-escaper`
 ✅ `rustc-stable-hash` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc-stable-hash`
 ✅ `rustc-std-workspace-alloc` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/library/rustc-std-workspace-alloc`
-✅ `rustc_abi` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_abi`
+✅ `rustc_abi` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_abi`
 ✅ `rustc_apfloat` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustc_apfloat`
-✅ `rustc_arena` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_arena`
-✅ `rustc_ast` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast`
-✅ `rustc_ast_ir` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_ir`
-✅ `rustc_ast_lowering` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_lowering`
-✅ `rustc_ast_passes` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_passes`
-✅ `rustc_ast_pretty` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_pretty`
-✅ `rustc_attr_parsing` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_attr_parsing`
-✅ `rustc_baked_icu_data` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_baked_icu_data`
-✅ `rustc_borrowck` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_borrowck`
-✅ `rustc_builtin_macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_builtin_macros`
-✅ `rustc_codegen_llvm` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_codegen_llvm`
-✅ `rustc_codegen_ssa` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_codegen_ssa`
-✅ `rustc_const_eval` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_const_eval`
-✅ `rustc_data_structures` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_data_structures`
-✅ `rustc_driver` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_driver`
-✅ `rustc_driver_impl` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_driver_impl`
-✅ `rustc_error_codes` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_error_codes`
-✅ `rustc_error_messages` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_error_messages`
-✅ `rustc_errors` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_errors`
-✅ `rustc_expand` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand`
-✅ `rustc_expand_base_lib` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand_base_lib`
-✅ `rustc_expand_base_lib_custom_macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand_base_lib_custom_macros`
-✅ `rustc_expand_base_lib_errors` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand_base_lib_errors`
-✅ `rustc_expand_base_lib_macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand_base_lib_macros`
-✅ `rustc_expand_base_lib_test_driver` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand_base_lib_test_driver`
-✅ `rustc_expand_meta_macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand_meta_macros`
-✅ `rustc_expand_patches` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand_patches`
-✅ `rustc_feature` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_feature`
-✅ `rustc_fluent_macro` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_fluent_macro`
-✅ `rustc_fs_util` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_fs_util`
-✅ `rustc_graphviz` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_graphviz`
-✅ `rustc_hashes` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hashes`
-✅ `rustc_hir` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir`
-✅ `rustc_hir_analysis` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_analysis`
-✅ `rustc_hir_id` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_id`
-✅ `rustc_hir_pretty` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_pretty`
-✅ `rustc_hir_typeck` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_typeck`
-✅ `rustc_incremental` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_incremental`
-✅ `rustc_index` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index`
-✅ `rustc_index_macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index_macros`
-✅ `rustc_infer` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_infer`
-✅ `rustc_interface` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_interface`
-✅ `rustc_lexer` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lexer`
-✅ `rustc_lint` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lint`
-✅ `rustc_lint_defs` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lint_defs`
-✅ `rustc_llvm` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_llvm`
-✅ `rustc_log` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_log`
-✅ `rustc_macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_macros`
-✅ `rustc_metadata` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_metadata`
-✅ `rustc_middle` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_middle`
-✅ `rustc_mir_build` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_build`
-✅ `rustc_mir_dataflow` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_dataflow`
-✅ `rustc_mir_transform` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_transform`
-✅ `rustc_monomorphize` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_monomorphize`
-✅ `rustc_next_trait_solver` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_next_trait_solver`
-✅ `rustc_parse` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_parse`
-✅ `rustc_parse_format` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_parse_format`
-✅ `rustc_passes` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_passes`
-✅ `rustc_pattern_analysis` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_pattern_analysis`
-✅ `rustc_privacy` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_privacy`
-✅ `rustc_proc_macro` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_proc_macro`
-✅ `rustc_public` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_public`
-✅ `rustc_public_bridge` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_public_bridge`
-✅ `rustc_query_impl` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_query_impl`
-✅ `rustc_query_system` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_query_system`
-✅ `rustc_resolve` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_resolve`
-✅ `rustc_sanitizers` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_sanitizers`
-✅ `rustc_serialize` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_serialize`
-✅ `rustc_session` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_session`
-✅ `rustc_span` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_span`
-✅ `rustc_symbol_mangling` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_symbol_mangling`
-✅ `rustc_target` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_target`
-✅ `rustc_thread_pool` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_thread_pool`
+✅ `rustc_arena` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_arena`
+✅ `rustc_ast` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast`
+✅ `rustc_ast_ir` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_ir`
+✅ `rustc_ast_lowering` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_lowering`
+✅ `rustc_ast_passes` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_passes`
+✅ `rustc_ast_pretty` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ast_pretty`
+✅ `rustc_attr_parsing` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_attr_parsing`
+✅ `rustc_baked_icu_data` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_baked_icu_data`
+✅ `rustc_borrowck` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_borrowck`
+✅ `rustc_builtin_macros` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_builtin_macros`
+✅ `rustc_codegen_llvm` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_codegen_llvm`
+✅ `rustc_codegen_ssa` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_codegen_ssa`
+✅ `rustc_const_eval` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_const_eval`
+✅ `rustc_driver` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_driver`
+✅ `rustc_driver_impl` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_driver_impl`
+✅ `rustc_error_codes` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_error_codes`
+✅ `rustc_error_messages` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_error_messages`
+✅ `rustc_errors` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_errors`
+✅ `rustc_expand` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_expand`
+❌ `rustc_expand_base_lib` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib` (missing)
+❌ `rustc_expand_base_lib_custom_macros` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_custom_macros` (missing)
+❌ `rustc_expand_base_lib_errors` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_errors` (missing)
+❌ `rustc_expand_base_lib_macros` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_macros` (missing)
+❌ `rustc_expand_base_lib_test_driver` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_base_lib_test_driver` (missing)
+❌ `rustc_expand_meta_macros` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_meta_macros` (missing)
+❌ `rustc_expand_patches` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_expand_patches` (missing)
+✅ `rustc_feature` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_feature`
+✅ `rustc_fluent_macro` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_fluent_macro`
+✅ `rustc_fs_util` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_fs_util`
+✅ `rustc_graphviz` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_graphviz`
+✅ `rustc_hashes` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hashes`
+✅ `rustc_hir` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir`
+✅ `rustc_hir_analysis` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_analysis`
+✅ `rustc_hir_id` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_id`
+✅ `rustc_hir_pretty` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_pretty`
+✅ `rustc_hir_typeck` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_hir_typeck`
+✅ `rustc_incremental` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_incremental`
+✅ `rustc_index` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index`
+✅ `rustc_index_macros` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index_macros`
+✅ `rustc_infer` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_infer`
+✅ `rustc_interface` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_interface`
+✅ `rustc_lexer` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lexer`
+✅ `rustc_lint` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lint`
+✅ `rustc_lint_defs` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_lint_defs`
+✅ `rustc_llvm` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_llvm`
+✅ `rustc_log` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_log`
+✅ `rustc_macros` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_macros`
+✅ `rustc_metadata` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_metadata`
+✅ `rustc_middle` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_middle`
+✅ `rustc_mir_build` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_build`
+✅ `rustc_mir_dataflow` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_dataflow`
+✅ `rustc_mir_transform` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_mir_transform`
+✅ `rustc_monomorphize` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_monomorphize`
+✅ `rustc_next_trait_solver` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_next_trait_solver`
+✅ `rustc_parse` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_parse`
+✅ `rustc_parse_format` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_parse_format`
+✅ `rustc_passes` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_passes`
+✅ `rustc_pattern_analysis` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_pattern_analysis`
+✅ `rustc_privacy` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_privacy`
+✅ `rustc_proc_macro` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_proc_macro`
+✅ `rustc_public` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_public`
+✅ `rustc_public_bridge` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_public_bridge`
+✅ `rustc_query_impl` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_query_impl`
+✅ `rustc_query_system` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_query_system`
+✅ `rustc_resolve` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_resolve`
+✅ `rustc_sanitizers` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_sanitizers`
+✅ `rustc_serialize` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_serialize`
+✅ `rustc_session` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_session`
+✅ `rustc_span` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_span`
+✅ `rustc_symbol_mangling` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_symbol_mangling`
+✅ `rustc_target` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_target`
+✅ `rustc_thread_pool` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_thread_pool`
 ✅ `rustc_tools_util` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/src/tools/clippy/rustc_tools_util`
-✅ `rustc_trait_selection` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_trait_selection`
-✅ `rustc_traits` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_traits`
-✅ `rustc_transmute` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_transmute`
-✅ `rustc_ty_utils` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ty_utils`
-✅ `rustc_type_ir` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_type_ir`
-✅ `rustc_type_ir_macros` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_type_ir_macros`
-✅ `rustc_windows_rc` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_windows_rc`
+✅ `rustc_trait_selection` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_trait_selection`
+✅ `rustc_traits` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_traits`
+✅ `rustc_transmute` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_transmute`
+✅ `rustc_ty_utils` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_ty_utils`
+✅ `rustc_type_ir` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_type_ir`
+✅ `rustc_type_ir_macros` → `/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_type_ir_macros`
+❌ `rustc_windows_rc` → `/home/mdupont/nix/vendor/rust/cargo2nix/crates/rustc_windows_rc` (missing)
 ✅ `rustfix` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/cargo/crates/rustfix`
 ✅ `rustix` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rustix`
 ❌ `rustmacrodoc` → (no path mapping)
@@ -563,6 +562,7 @@ Total crates: 706
 ✅ `split-decls-rs` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs`
 ✅ `split-decls-types` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/split-decls-types`
 ✅ `split-expanded-lib` → `/mnt/data1/nix/vendor/rust/cargo2nix/tools/rust-bootstrap-nix/split-expanded-lib`
+✅ `split_rustc_data_structures` → `./crates/split_rustc_data_structures`
 ✅ `static_assertions` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/static-assertions-rs`
 ✅ `stdx` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust-analyzer/crates/stdx`
 ✅ `strsim` → `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/strsim-rs`
@@ -714,8 +714,8 @@ Total crates: 706
 
 ## Summary
 
-- **Preserved**: 668
-- **Missing**: 38
-- **Preservation Rate**: 94.6%
+- **Preserved**: 649
+- **Missing**: 57
+- **Preservation Rate**: 91.9%
 
-⚠️  38 crates need attention before bootstrap
+⚠️  57 crates need attention before bootstrap

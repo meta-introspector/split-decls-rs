@@ -8,8 +8,10 @@ pub mod workspace;
 pub mod manifest;
 pub mod dependencies;
 pub mod generator;
+pub mod cargo_processor;
 
 pub use workspace::*;
 pub use manifest::*;
 pub use dependencies::*;
 pub use generator::*;
+pub use cargo_processor::*;

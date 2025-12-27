@@ -1,164 +1,29 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 use anyhow::{Context, Result};
-use crate::paths::CratePaths; use crate::add_generated_header;
-use crate::decls::process_dependency_table::process_dependency_table;
-use crate::decls::cargo_toml::CargoToml;
+use crate::paths::CratePaths; 
+use crate::add_generated_header;
 use split_decls_types::SplitDeclsConfig;
 use crate::patch_config;
+use lib_cargo::CargoProcessor;
 
-/// Generates the new Cargo.toml for the crate, adding necessary build-dependencies.
+/// Generates the new Cargo.toml for the crate using lib-cargo processor
 pub fn generate_new_cargotoml(
     original_cargo_toml_path: &Path,
     output_cargo_toml_path: &Path,
-    original_crate_root_path: &Path, // This is the path to the original crate's directory
+    original_crate_root_path: &Path,
     global_config: &SplitDeclsConfig,
     patch_config: &patch_config::PatchConfig,
     dry_run: bool,
 ) -> Result<()> {
-    let original_cargo_toml_content = fs::read_to_string(original_cargo_toml_path)
-        .context(format!("Failed to read original Cargo.toml from {}", original_cargo_toml_path.display()))?
-        .replace("edition.workspace = true", "edition = \"2024\"")
-        .replace("edition = \"2021\"", "edition = \"2024\"");
-    
-    let mut cargo_toml: CargoToml = toml::from_str(&original_cargo_toml_content)
-        .context(format!("Failed to parse original Cargo.toml from {}", original_cargo_toml_path.display()))?;
-
-    // Extract crate name from the package section and create wrapped name
-    let original_crate_name = cargo_toml.package.name.clone();
-    let wrapped_crate_name = format!("wrapped-{}", original_crate_name.replace("_", "-"));
-    
-    // Update package name to wrapped version
-    cargo_toml.package.name = wrapped_crate_name.clone();
-
-    // Remove unwanted top-level sections for submodules
-    cargo_toml.other.remove("workspace");
-    cargo_toml.other.remove("profile");
-    
-    // Convert workspace dependency references to local dependencies
-    // This prevents "error inheriting from workspace.dependencies" issues
-    for (_, dep_value) in cargo_toml.dependencies.iter_mut() {
-        if let toml::Value::Table(dep_table) = dep_value {
-            if dep_table.contains_key("workspace") {
-                // Remove workspace = true and add default version
-                dep_table.remove("workspace");
-                if !dep_table.contains_key("version") {
-                    dep_table.insert("version".to_string(), toml::Value::String("*".to_string()));
-                }
-            }
-        }
-    }
-    cargo_toml.other.remove("lints");
-    cargo_toml.other.remove("bench");
-
-    let keys_to_remove: Vec<String> = cargo_toml.other.keys()
-        .filter(|k| 
-            k.starts_with("profile.") || 
-            k.starts_with("lints.") || 
-            k.starts_with("bench.") ||
-            (k.contains("workspace") && *k != "workspace")
-        )
-        .cloned()
-        .collect();
-
-    for key in keys_to_remove {
-        cargo_toml.other.remove(&key);
-    }
-
-    process_dependency_table(&mut cargo_toml.dependencies, global_config, original_crate_root_path)?;
-    process_dependency_table(&mut cargo_toml.dev_dependencies, global_config, original_crate_root_path)?;
-    process_dependency_table(&mut cargo_toml.build_dependencies, global_config, original_crate_root_path)?;
-
-    let build_deps_table = &mut cargo_toml.build_dependencies;
-    let essential_build_deps = [
-        ("anyhow", "1.0", None),
-        ("syn", "2.0", Some(vec!["full", "visit"])),
-        ("serde", "1.0", Some(vec!["derive"])),
-        ("toml", "0.8", None),
-    ];
-
-    for (dep_name, version, features) in essential_build_deps {
-        let mut dep_table_value = toml::Table::new();
-        
-        // Always use workspace = true for all build dependencies
-        dep_table_value.insert("workspace".to_string(), toml::Value::Boolean(true));
-        
-        if let Some(feats) = features {
-            let features_array = toml::Value::Array(
-                feats.into_iter().map(|f| toml::Value::String(f.to_string())).collect()
-            );
-            dep_table_value.insert("features".to_string(), features_array);
-        }
-        build_deps_table.insert(dep_name.to_string(), toml::Value::Table(dep_table_value));
-    }
-
-    // Skip introspector_decl2_macros for now since it's not available on crates.io
-    // let mut macro_dep = toml::Table::new();
-    // macro_dep.insert("version".to_string(), toml::Value::String("0.1.0".to_string()));
-    // cargo_toml.dependencies.insert("introspector_decl2_macros".to_string(), toml::Value::Table(macro_dep));
-
-    for dep_entry in &patch_config.generated_crate_dependency {
-        if dep_entry.crate_name != original_crate_name {
-            continue;
-        }
-
-        let target_table = match dep_entry.section.as_str() {
-            "dependencies" => &mut cargo_toml.dependencies,
-            "dev-dependencies" => &mut cargo_toml.dev_dependencies,
-            "build-dependencies" => &mut cargo_toml.build_dependencies,
-            _ => {
-                eprintln!("Warning: Unknown dependency section '{}' for crate '{}'", dep_entry.section, dep_entry.name);
-                continue;
-            }
-        };
-
-        let mut dep_table_value = toml::Table::new();
-        if dep_entry.workspace {
-            dep_table_value.insert("workspace".to_string(), toml::Value::Boolean(true));
-        } else if let Some(version) = &dep_entry.version {
-            dep_table_value.insert("version".to_string(), toml::Value::String(version.clone()));
-        }
-
-        if let Some(features) = &dep_entry.features {
-            let features_array = toml::Value::Array(
-                features.iter().map(|f| toml::Value::String(f.clone())).
-                collect()
-            );
-            dep_table_value.insert("features".to_string(), features_array);
-        }
-
-        if let Some(package) = &dep_entry.package {
-            dep_table_value.insert("package".to_string(), toml::Value::String(package.clone()));
-        }
-
-        target_table.insert(dep_entry.name.clone(), toml::Value::Table(dep_table_value));
-    }
-
-    cargo_toml.patch.clear();
-
-    let new_cargo_toml_content = toml::to_string(&cargo_toml)
-        .context("Failed to serialize new Cargo.toml")?;
-    
-    if dry_run {
-        let new_path = output_cargo_toml_path.with_extension("new");
-        add_generated_header!(
-            &new_path,
-            new_cargo_toml_content.as_str(),
-            file!(),
-            line!()
-        )
-        .context(format!("Failed to write new Cargo.toml to {}", new_path.display()))?;
-        println!("Dry-run: Generated new Cargo.toml content to {} for crate {}", new_path.display(), wrapped_crate_name);
-    } else {
-        add_generated_header!(
-            output_cargo_toml_path,
-            new_cargo_toml_content.as_str(),
-            file!(),
-            line!()
-        )
-        .context(format!("Failed to write new Cargo.toml to {}", output_cargo_toml_path.display()))?;
-        println!("Generated new Cargo.toml for crate {}", wrapped_crate_name);
-    }
+    // Use the config directly - no conversion needed
+    let processor = CargoProcessor::new(global_config.clone());
+    processor.process_cargo_toml(
+        original_cargo_toml_path,
+        output_cargo_toml_path,
+        original_crate_root_path,
+        dry_run,
+    )?;
 
     Ok(())
 }

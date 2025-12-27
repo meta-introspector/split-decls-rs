@@ -220,7 +220,41 @@ fn main() -> Result<()> {
     // Sort overrides by key for consistent output
     let mut sorted_overrides: Vec<(String, String)> = existing_path_overrides.into_iter().collect();
     sorted_overrides.sort_by(|a, b| a.0.cmp(&b.0));
-    split_decls_data.crate_path_overrides = sorted_overrides.into_iter().collect();
+    
+    // Validate and fix paths
+    let mut validated_overrides = HashMap::new();
+    for (crate_name, path_str) in sorted_overrides {
+        let path = Path::new(&path_str);
+        if path.join("Cargo.toml").exists() {
+            validated_overrides.insert(crate_name, path_str);
+        } else {
+            // Try to find the correct path
+            let possible_paths = [
+                format!("/home/mdupont/nix/vendor/rust/cargo2nix/crates/{}", crate_name),
+                format!("/home/mdupont/nix/vendor/rust/cargo2nix/submodules/{}", crate_name),
+                format!("/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/compiler/{}", crate_name),
+                format!("/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/library/{}", crate_name),
+                format!("/home/mdupont/nix/vendor/rust/cargo2nix/tools/{}", crate_name),
+            ];
+            
+            let mut found = false;
+            for possible_path in &possible_paths {
+                if Path::new(possible_path).join("Cargo.toml").exists() {
+                    println!("Fixed path for {}: {} -> {}", crate_name, path_str, possible_path);
+                    validated_overrides.insert(crate_name.clone(), possible_path.clone());
+                    found = true;
+                    break;
+                }
+            }
+            
+            if !found {
+                println!("Warning: Could not find valid path for {}: {}", crate_name, path_str);
+                validated_overrides.insert(crate_name, path_str); // Keep original for now
+            }
+        }
+    }
+    
+    split_decls_data.crate_path_overrides = validated_overrides;
 
 
     // Generate preservation proof
