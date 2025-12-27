@@ -444,7 +444,7 @@ crates = [
     "rustc_codegen_llvm",
     "rustc_codegen_ssa",
     "rustc_const_eval",
-    "rustc_data_structures",
+    "split_rustc_data_structures",
     "rustc_driver",
     "rustc_driver_impl",
     "rustc_error_codes",
@@ -1306,7 +1306,7 @@ rnix_parser_new = "/mnt/data1/nix/vendor/rust/cargo2nix/rnix_parser_new"
 rusqlite = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rusqlite"
 toml_edit = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/toml/crates/toml_edit"
 trait-fixer-compiler-host-mock = "/mnt/data1/nix/vendor/rust/cargo2nix/crates/trait-fixer-compiler-host-mock"
-rustc_data_structures = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_data_structures"
+split_rustc_data_structures = "./crates/split_rustc_data_structures"
 gix = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/gitoxide/gix"
 curl = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/curl-rust"
 generic-array = "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/generic-array"

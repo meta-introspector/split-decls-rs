@@ -1,5 +1,5 @@
 [package]
-name = "rustc_data_structures"
+name = "split_rustc_data_structures"
 version = "0.0.0"
 edition = "2024"
 
