@@ -4,7 +4,7 @@ use std::fs;
 use proc_macro2::TokenStream;
 use quote::quote;
 
-use split_decls_rs::syn_mold::{SynMold, MoldExtraction};
+use crate::syn_mold::{SynMold, MoldExtraction};
 
 fn main() -> Result<()> {
     let matches = Command::new("syn-mold")

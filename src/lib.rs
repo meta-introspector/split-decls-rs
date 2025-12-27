@@ -33,7 +33,6 @@ pub mod syn_mold;
 pub mod signature_compressor;
 pub mod monster_compressor;
 pub mod rust_to_monster_reporter;
-pub mod monster_compressor;
 pub mod sparql_probe_bridge;
 pub mod syscall_oracle;
 pub mod syscall_decoupling_template;

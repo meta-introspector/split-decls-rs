@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fs;
 use std::path::Path;
 use anyhow::Result;
-use split_decls_rs::{
+use crate::{
     rdf_url_blob::RdfUrlBlob,
     output2_macro_system::{Output2MacroSystem, MacroDeclaration},
 };
@@ -25,7 +25,7 @@ impl DuplicateScanner {
         let system = Output2MacroSystem::import_from_output2().unwrap_or_else(|_| {
             Output2MacroSystem {
                 macros: HashMap::new(),
-                interpreter: split_decls_rs::output2_macro_system::LispInterpreter::new(),
+                interpreter: crate::output2_macro_system::LispInterpreter::new(),
             }
         });
         

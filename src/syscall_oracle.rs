@@ -35,6 +35,21 @@ pub enum OracleType {
     Custom(String),
 }
 
+impl ToTokens for OracleType {
+    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
+        let name = match self {
+            OracleType::FileSystem => "FileSystem",
+            OracleType::Network => "Network", 
+            OracleType::Process => "Process",
+            OracleType::Memory => "Memory",
+            OracleType::Time => "Time",
+            OracleType::Crypto => "Crypto",
+            OracleType::Custom(s) => return s.to_tokens(tokens),
+        };
+        tokens.extend(quote::quote! { #name });
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum TypeSafetyLevel {
     Permissive,  // Log only
@@ -101,7 +116,8 @@ impl SyscallAstTransformer {
                         }
                     }
                     TypeSafetyLevel::Paranoid => {
-                        let dao_policy = wrapper.dao_policy.as_ref().unwrap_or(&"default_policy".to_string());
+                        let default_policy = "default_policy".to_string();
+                        let dao_policy = wrapper.dao_policy.as_ref().unwrap_or(&default_policy);
                         quote! {
                             #wrapper_macro! {
                                 dao_governed_syscall::<#oracle_type>(
@@ -117,8 +133,8 @@ impl SyscallAstTransformer {
         }
     }
     
-    fn is_syscall_function(&self, path: &Path) -> Option<&SyscallWrapper> {
-        let path_str = path.to_token_stream().to_string();
+    fn is_syscall_function(&self, path: &syn::Path) -> Option<&SyscallWrapper> {
+        let path_str = path.segments.last()?.ident.to_string();
         
         // Check for common syscall patterns
         for (pattern, wrapper) in &self.interceptor.syscall_mappings {
@@ -136,8 +152,8 @@ impl VisitMut for SyscallAstTransformer {
         match expr {
             Expr::Call(call) => {
                 if let Expr::Path(path_expr) = &*call.func {
-                    if let Some(wrapper) = self.is_syscall_function(&path_expr.path) {
-                        let wrapped = self.wrap_syscall(expr, wrapper);
+                    if let Some(wrapper) = self.is_syscall_function(&path_expr.path).cloned() {
+                        let wrapped = self.wrap_syscall(expr, &wrapper);
                         if let Ok(new_expr) = syn::parse2::<Expr>(wrapped) {
                             *expr = new_expr;
                             return;
@@ -147,8 +163,8 @@ impl VisitMut for SyscallAstTransformer {
             }
             Expr::MethodCall(method_call) => {
                 let method_name = method_call.method.to_string();
-                if let Some(wrapper) = self.interceptor.syscall_mappings.get(&method_name) {
-                    let wrapped = self.wrap_syscall(expr, wrapper);
+                if let Some(wrapper) = self.interceptor.syscall_mappings.get(&method_name).cloned() {
+                    let wrapped = self.wrap_syscall(expr, &wrapper);
                     if let Ok(new_expr) = syn::parse2::<Expr>(wrapped) {
                         *expr = new_expr;
                         return;

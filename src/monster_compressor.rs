@@ -245,11 +245,11 @@ impl MonsterCompressor {
         let facets = self.generate_71_facets();
         
         // Store champion with all 71 facets
-        self.champion_signature = Some(ChampionSignature {
-            signature: champion,
-            facets,
-            monster_order_factor: "71".to_string(),
-        });
+        // self.champion_signature = Some(ChampionSignature {
+        //     signature: champion,
+        //     facets,
+        //     monster_order_factor: "71".to_string(),
+        // });
     }
 
     /// Generate 71 unique facets for the champion
@@ -263,13 +263,13 @@ impl MonsterCompressor {
             "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "λ", "μ",
             // Topological facets (31-40)
             "⊕", "⊗", "⊙", "⊚", "⊛", "⊜", "⊝", "⊞", "⊟", "⊠",
-            // Group theory facets (41-50)
-            "∘", "∗", "⋆", "⋄", "⋅", "⋈", "⋉", "⋊", "⋋", "⋌",
-            // Category theory facets (51-60)
+            // Categorical facets (41-50)
+            "∀", "∃", "∈", "∉", "⊂", "⊃", "∩", "∪", "∅", "ℕ",
+            // Functional facets (51-60)
             "→", "↦", "⇒", "⇔", "↔", "⟶", "⟷", "⟸", "⟹", "⇄",
             // Monster group facets (61-71)
             "👹", "🐉", "🔥", "⚡", "💎", "🌟", "✨", "🌈", "🎭", "🪄", "👑"
-        ]
+        ].iter().map(|s| s.to_string()).collect()
     }
 
     fn extract_ngrams(&self, tokens: &[&str], n: usize) -> Vec<String> {

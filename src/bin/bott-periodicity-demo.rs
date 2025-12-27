@@ -1,6 +1,6 @@
-use split_decls_rs::bott_periodicity::*;
-use split_decls_rs::ast_statistics::*;
-use split_decls_rs::collect_8d_stats;
+use crate::bott_periodicity::*;
+use crate::ast_statistics::*;
+use crate::collect_8d_stats;
 
 fn main() -> anyhow::Result<()> {
     println!("🌀 BOTT PERIODICITY DEMO - 8D Statistical Caching");

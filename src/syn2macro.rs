@@ -144,7 +144,7 @@ impl Syn2MacroConverter {
         let items = &trait_item.items;
         
         Ok(quote! {
-            pub trait Universal#trait_name: UniversalAst + SecureExecution {
+            pub trait Universal #trait_name: UniversalAst + SecureExecution {
                 #(#items)*
             }
         })

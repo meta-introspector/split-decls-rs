@@ -1,7 +1,7 @@
 use std::path::Path;
 use anyhow::Result;
 use clap::{Parser, Subcommand};
-use split_decls_rs::syscall_oracle::{
+use crate::syscall_oracle::{
     SyscallInterceptor, SyscallAstTransformer, create_default_syscall_interceptor, 
     generate_oracle_types, TypeSafetyLevel
 };

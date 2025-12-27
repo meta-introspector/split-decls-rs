@@ -3,7 +3,7 @@ use std::fs;
 use std::io::{self, Write};
 use std::path::Path;
 use anyhow::Result;
-use split_decls_rs::{
+use crate::{
     rdf_url_blob::RdfUrlBlob,
     output2_macro_system::{Output2MacroSystem, MacroDeclaration, LispInterpreter},
 };

@@ -1,7 +1,7 @@
-use split_decls_rs::mkwrapping;
-use split_decls_rs::config_macros;
+use crate::mkwrapping;
+use crate::config_macros;
 use anyhow::Result;
-use split_decls_rs::process_crate;
+use crate::process_crate;
 use split_decls_types::SplitDeclsConfig;
 use std::path::PathBuf;
 use std::fs;
@@ -23,7 +23,7 @@ fn main() -> Result<()> {
     
     let start_time = Instant::now();
     
-    let mut config = split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap().clone();
+    let mut config = crate::config_macros::GLOBAL_CONFIG.lock().unwrap().clone();
     config.wrapping = mkwrapping!();
     
     let mut processed = 0;

@@ -1,4 +1,4 @@
-use split_decls_rs::syn_type_discovery::SynTypeDiscovery;
+use crate::syn_type_discovery::SynTypeDiscovery;
 use std::fs;
 
 fn main() -> anyhow::Result<()> {

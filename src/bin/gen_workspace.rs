@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use std::fs;
 use std::path::PathBuf;
 use walkdir::WalkDir;
-use split_decls_rs::config_macros::GLOBAL_CONFIG;
+use crate::config_macros::GLOBAL_CONFIG;
 use toml;
 
 #[derive(Parser)]

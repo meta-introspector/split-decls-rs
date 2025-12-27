@@ -1,7 +1,7 @@
 use anyhow::Result;
 use std::fs;
 use std::collections::HashMap;
-use split_decls_rs::monster_compressor::MonsterCompressor;
+use crate::monster_compressor::MonsterCompressor;
 
 /// Generate the epic Rust to Monster Group transformation report
 pub struct RustToMonsterReporter {
@@ -192,6 +192,9 @@ correlates with prime magnitude.
             }
         }
         
+        hall
+    }
+    
     fn generate_mathematical_analysis(&self) -> String {
         let mut analysis = String::new();
         
@@ -368,5 +371,4 @@ This transformation opens doors to:
         
         used_factors / 15.0 // Total of 15 prime factors
     }
-}
 }

@@ -308,10 +308,8 @@ impl VisitMut for AstReflector {
         // Apply injections as comments for now (safer approach)
         for injection in injections {
             let comment = format!("AST Probe Function: {}", injection.to_string());
-            let doc_attr = quote! { #[doc = #comment] };
-            if let Ok(attr) = syn::parse2(doc_attr) {
-                node.attrs.push(attr);
-            }
+            let doc_attr = syn::parse_quote! { #[doc = #comment] };
+            node.attrs.push(doc_attr);
         }
         
         syn::visit_mut::visit_item_fn_mut(self, node);
@@ -323,10 +321,8 @@ impl VisitMut for AstReflector {
         
         for injection in injections {
             let comment = format!("AST Probe Struct: {}", injection.to_string());
-            let doc_attr = quote! { #[doc = #comment] };
-            if let Ok(attr) = syn::parse2(doc_attr) {
-                node.attrs.push(attr);
-            }
+            let doc_attr = syn::parse_quote! { #[doc = #comment] };
+            node.attrs.push(doc_attr);
         }
         
         syn::visit_mut::visit_item_struct_mut(self, node);
@@ -338,10 +334,8 @@ impl VisitMut for AstReflector {
         
         for injection in injections {
             let comment = format!("AST Probe Enum: {}", injection.to_string());
-            let doc_attr = quote! { #[doc = #comment] };
-            if let Ok(attr) = syn::parse2(doc_attr) {
-                node.attrs.push(attr);
-            }
+            let doc_attr = syn::parse_quote! { #[doc = #comment] };
+            node.attrs.push(doc_attr);
         }
         
         syn::visit_mut::visit_item_enum_mut(self, node);
@@ -354,10 +348,8 @@ impl VisitMut for AstReflector {
         
         for injection in injections {
             let comment = format!("AST Probe Impl: {}", injection.to_string());
-            let doc_attr = quote! { #[doc = #comment] };
-            if let Ok(attr) = syn::parse2(doc_attr) {
-                node.attrs.push(attr);
-            }
+            let doc_attr = syn::parse_quote! { #[doc = #comment] };
+            node.attrs.push(doc_attr);
         }
         
         syn::visit_mut::visit_item_impl_mut(self, node);
@@ -369,10 +361,8 @@ impl VisitMut for AstReflector {
         
         for injection in injections {
             let comment = format!("AST Probe Trait: {}", injection.to_string());
-            let doc_attr = quote! { #[doc = #comment] };
-            if let Ok(attr) = syn::parse2(doc_attr) {
-                node.attrs.push(attr);
-            }
+            let doc_attr = syn::parse_quote! { #[doc = #comment] };
+            node.attrs.push(doc_attr);
         }
         
         syn::visit_mut::visit_item_trait_mut(self, node);

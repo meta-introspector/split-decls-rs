@@ -3,7 +3,7 @@ use anyhow::{Result, Context};
 use std::path::PathBuf;
 use std::collections::HashMap;
 
-use split_decls_rs::{
+use crate::{
     generate_wrapped_crate::generate_wrapped_crate,
     patch_config::PatchConfig,
 };

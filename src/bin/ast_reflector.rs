@@ -1,7 +1,7 @@
 use std::path::Path;
 use anyhow::Result;
 use clap::{Parser, Subcommand};
-use split_decls_rs::ast_reflector::{AstReflector, create_example_probes, AstProbe};
+use crate::ast_reflector::{AstReflector, create_example_probes, AstProbe};
 
 #[derive(Parser)]
 #[command(name = "ast-reflector")]
@@ -204,8 +204,8 @@ fn analyze_directory(dir: &str, generate: bool) -> Result<()> {
         if !complex_functions.is_empty() {
             probes.push(AstProbe {
                 name: "monitor_complex_functions".to_string(),
-                node_type: split_decls_rs::ast_reflector::AstNodeType::Function,
-                filter: split_decls_rs::ast_reflector::ProbeFilter {
+                node_type: crate::ast_reflector::AstNodeType::Function,
+                filter: crate::ast_reflector::ProbeFilter {
                     name_pattern: None,
                     visibility: None,
                     attributes: vec![],
@@ -213,7 +213,7 @@ fn analyze_directory(dir: &str, generate: bool) -> Result<()> {
                     complexity_threshold: Some(8.0),
                     layer: None,
                 },
-                action: split_decls_rs::ast_reflector::ProbeAction::Log {
+                action: crate::ast_reflector::ProbeAction::Log {
                     message: "Complex function detected - consider refactoring".to_string(),
                 },
                 enabled: true,
@@ -225,8 +225,8 @@ fn analyze_directory(dir: &str, generate: bool) -> Result<()> {
         if struct_count > 10 {
             probes.push(AstProbe {
                 name: "document_public_structs".to_string(),
-                node_type: split_decls_rs::ast_reflector::AstNodeType::Struct,
-                filter: split_decls_rs::ast_reflector::ProbeFilter {
+                node_type: crate::ast_reflector::AstNodeType::Struct,
+                filter: crate::ast_reflector::ProbeFilter {
                     name_pattern: None,
                     visibility: Some("pub".to_string()),
                     attributes: vec![],
@@ -234,7 +234,7 @@ fn analyze_directory(dir: &str, generate: bool) -> Result<()> {
                     complexity_threshold: None,
                     layer: None,
                 },
-                action: split_decls_rs::ast_reflector::ProbeAction::AddAttribute {
+                action: crate::ast_reflector::ProbeAction::AddAttribute {
                     attr: "#[doc = \"Auto-generated documentation\"]".to_string(),
                 },
                 enabled: true,

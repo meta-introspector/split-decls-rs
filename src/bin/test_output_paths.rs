@@ -1,4 +1,4 @@
-use split_decls_rs::setup_crate_paths;
+use crate::setup_crate_paths;
 use std::path::PathBuf;
 
 fn main() {

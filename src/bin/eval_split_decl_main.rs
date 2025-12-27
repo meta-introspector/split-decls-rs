@@ -1,4 +1,4 @@
-use split_decls_rs::*;
+use crate::*;
 use std::fs;
 use std::path::Path;
 

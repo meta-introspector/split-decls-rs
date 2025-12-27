@@ -1,7 +1,7 @@
 use std::time::Instant;
 use std::path::Path;
-use split_decls_rs::macro_interpreter::RdfStateMachine;
-use split_decls_rs::{interpret_wrapped_decl, interpret_syn_function};
+use crate::macro_interpreter::RdfStateMachine;
+use crate::{interpret_wrapped_decl, interpret_syn_function};
 
 // Macro to benchmark wrapped syn functions with RDF capture
 macro_rules! bench_wrapped_syn_rdf {

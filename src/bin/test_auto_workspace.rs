@@ -3,7 +3,7 @@ use std::path::Path;
 fn main() -> anyhow::Result<()> {
     let project_root = Path::new("../../");
     
-    match split_decls_rs::auto_workspace_generator::generate_workspace_deps_from_project_root(&project_root) {
+    match crate::auto_workspace_generator::generate_workspace_deps_from_project_root(&project_root) {
         Ok((deps, patches)) => {
             println!("Found {} workspace deps and {} patches", deps.len(), patches.len());
             for (i, dep) in deps.iter().enumerate().take(5) {

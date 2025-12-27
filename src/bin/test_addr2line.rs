@@ -1,5 +1,5 @@
 use anyhow::Result;
-use split_decls_rs::{
+use crate::{
     output2_macro_system::{Output2MacroSystem, LispInterpreter},
     rdf_url_blob::RdfUrlBlob,
 };
@@ -94,14 +94,14 @@ fn main() -> Result<()> {
 }
 
 /// Find a specific addr2line macro by partial name match
-fn find_addr2line_macro(macros: &[(String, split_decls_rs::output2_macro_system::MacroDeclaration)], target: &str) -> Option<(String, split_decls_rs::output2_macro_system::MacroDeclaration)> {
+fn find_addr2line_macro(macros: &[(String, crate::output2_macro_system::MacroDeclaration)], target: &str) -> Option<(String, crate::output2_macro_system::MacroDeclaration)> {
     macros.iter()
         .find(|(name, _)| name.contains(target))
         .map(|(name, decl)| (name.clone(), decl.clone()))
 }
 
 /// Evaluate a declaration as a macro call
-fn eval_declaration(expr: &str, decl: &split_decls_rs::output2_macro_system::MacroDeclaration) -> Result<String> {
+fn eval_declaration(expr: &str, decl: &crate::output2_macro_system::MacroDeclaration) -> Result<String> {
     // Parse expression: (call/invoke macro_name arg)
     if (expr.starts_with("(call ") || expr.starts_with("(invoke ")) && expr.ends_with(")") {
         let start_pos = if expr.starts_with("(call ") { 6 } else { 8 };

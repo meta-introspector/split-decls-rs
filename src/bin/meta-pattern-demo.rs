@@ -1,6 +1,6 @@
-use split_decls_rs::meta_pattern_visitor::SynLangPatterns;
-use split_decls_rs::macro_interpreter::RdfStateMachine;
-use split_decls_rs::ast_statistics::AstStatistics;
+use crate::meta_pattern_visitor::SynLangPatterns;
+use crate::macro_interpreter::RdfStateMachine;
+use crate::ast_statistics::AstStatistics;
 use std::fs;
 
 fn main() -> anyhow::Result<()> {

@@ -1,14 +1,14 @@
-use split_decls_rs::config_macros;
+use crate::config_macros;
 
-use split_decls_rs::load_config;
+use crate::load_config;
 use anyhow::{Context, Result};
 use std::path::PathBuf;
-use split_decls_rs::patch_config::PatchConfig;
+use crate::patch_config::PatchConfig;
 use split_decls_types::SplitDeclsConfig;
-use split_decls_rs::generate_wrapped_workspace::generate_wrapped_workspace;
-use split_decls_rs::buildrs_generator::build_script_composer;
-use split_decls_rs::eager_splitter;
-use split_decls_rs::paths::{CratePaths, setup_crate_paths}; // Import CratePaths and setup_crate_paths
+use crate::generate_wrapped_workspace::generate_wrapped_workspace;
+use crate::buildrs_generator::build_script_composer;
+use crate::eager_splitter;
+use crate::paths::{CratePaths, setup_crate_paths}; // Import CratePaths and setup_crate_paths
 use toml;
 use std::fs;
 use cargo_toml_generator_types::{CargoToml, Dependency};
@@ -16,8 +16,8 @@ use walkdir;
 use clap::{Parser, Subcommand}; // Added clap imports
 use std::time::Instant; // Added for ecosystem_scan_mode
 use std::path::Path; // Added for ecosystem_scan_mode (Path type)
-use split_decls_rs::goal_parser::{GoalConfig, Workflow};
-use split_decls_rs::workflow_executor::WorkflowExecutor;
+use crate::goal_parser::{GoalConfig, Workflow};
+use crate::workflow_executor::WorkflowExecutor;
 mod ecosystem_processor; // New module for ecosystem processing
 
 #[derive(Parser, Debug)]
@@ -282,30 +282,30 @@ fn run_bootstrap_mode(
         description: "Builds the generated code in the output directory.".to_string(),
         style_influences: vec![],
         stages: vec![
-            split_decls_rs::goal_parser::Stage {
+            crate::goal_parser::Stage {
                 name: "Build Generated Code".to_string(),
                 description: format!("Runs 'cargo build' in the generated workspace at {}.", wrapped_workspace_output_dir.display()),
                 processor_hint: None,
                 inputs: vec![],
                 outputs: vec![
-                    split_decls_rs::goal_parser::Output {
+                    crate::goal_parser::Output {
                         name: "stdout".to_string(),
                         output_type: "string".to_string(),
                         description: "Standard output of the build command.".to_string(),
                     },
-                    split_decls_rs::goal_parser::Output {
+                    crate::goal_parser::Output {
                         name: "stderr".to_string(),
                         output_type: "string".to_string(),
                         description: "Standard error of the build command.".to_string(),
                     },
-                    split_decls_rs::goal_parser::Output {
+                    crate::goal_parser::Output {
                         name: "status".to_string(),
                         output_type: "integer".to_string(),
                         description: "Exit status code of the build command.".to_string(),
                     },
                 ],
-                operation: split_decls_rs::goal_parser::Operation::Shell(
-                    split_decls_rs::goal_parser::ShellCommandOperation {
+                operation: crate::goal_parser::Operation::Shell(
+                    crate::goal_parser::ShellCommandOperation {
                         op_type: "shell".to_string(),
                         command: "cargo build".to_string(),
                         working_dir: Some(wrapped_workspace_output_dir.to_string_lossy().to_string()),
@@ -396,16 +396,16 @@ fn main() -> Result<()> {
 
     match &cli.command {
         Commands::WrappedWorkspace { output_dir, dry_run } => {
-            run_wrapped_workspace_mode(cli.verbose, *dry_run, output_dir.as_ref(), &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap(), false)?;
+            run_wrapped_workspace_mode(cli.verbose, *dry_run, output_dir.as_ref(), &crate::config_macros::GLOBAL_CONFIG.lock().unwrap(), false)?;
         }
         Commands::EcosystemScan { base_path, recursive, dry_run } => {
-            run_ecosystem_scan_mode(cli.verbose, *dry_run, base_path, *recursive, &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
+            run_ecosystem_scan_mode(cli.verbose, *dry_run, base_path, *recursive, &crate::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
         Commands::ExecuteGoalWorkflow { goal_file, dry_run } => {
-            run_execute_goal_workflow_mode(cli.verbose, *dry_run, goal_file, &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
+            run_execute_goal_workflow_mode(cli.verbose, *dry_run, goal_file, &crate::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
         Commands::Bootstrap { output_dir, dry_run, cargo_only } => {
-            run_bootstrap_mode(cli.verbose, *dry_run, output_dir.as_ref(), *cargo_only, &split_decls_rs::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
+            run_bootstrap_mode(cli.verbose, *dry_run, output_dir.as_ref(), *cargo_only, &crate::config_macros::GLOBAL_CONFIG.lock().unwrap())?;
         }
     }
 

@@ -5,7 +5,7 @@ use std::path::Path;
 use proc_macro2::TokenStream;
 use quote::quote;
 
-use split_decls_rs::syn2macro::{Syn2MacroConverter, DefaultSecurity, StrictSecurity, AstOperation};
+use crate::syn2macro::{Syn2MacroConverter, DefaultSecurity, StrictSecurity, AstOperation};
 
 fn main() -> Result<()> {
     let matches = Command::new("syn2macro")

@@ -1,7 +1,7 @@
 use std::fs;
 use anyhow::Result;
 use split_decls_types::SplitDeclsConfig;
-use split_decls_rs::*;
+use crate::*;
 use std::path::{Path, PathBuf};
 
 fn main() -> Result<()> {
