@@ -16,7 +16,7 @@ rustc_feature = { workspace = true }
 rustc_hir = { workspace = true }
 thin-vec = { workspace = true }
 smallvec = { workspace=true }
-rustc_data_structures = { workspace=true }
+#rustc_data_structures = { workspace=true }
 rustc_ast_pretty = { workspace = true }
 rustc_attr_parsing = { workspace = true }
 rustc_parse = { workspace = true }
