@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn analyze_struct_complexity (s : & ItemStruct , file_path : & str) -> Option < ComplexityReport > { let field_count = match & s . fields { Fields :: Named (fields) => fields . named . len () , Fields :: Unnamed (fields) => fields . unnamed . len () , Fields :: Unit => 0 , } ; let nested_depth = calculate_nested_depth (& s . fields) ; let complexity = calculate_complexity_score (field_count , 0 , nested_depth) ; Some (ComplexityReport { name : s . ident . to_string () , complexity , field_count , variant_count : 0 , nested_depth , file_path : file_path . to_string () , }) }
+}

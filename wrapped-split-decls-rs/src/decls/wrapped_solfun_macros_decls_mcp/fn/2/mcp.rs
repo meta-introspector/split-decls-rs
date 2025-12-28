@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [proc_macro] # [decl (fn , name = "mcp" , vis = "pub" , hash = "b9e0e3db")] pub fn mcp (input : TokenStream) -> TokenStream { macros :: mcp :: mcp_impl (input) }
+}

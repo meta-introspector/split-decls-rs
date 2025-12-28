@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 pub fn pretty < S > (mut tkns : & [TokenTree < S >]) -> String { fn tokentree_to_text < S > (tkn : & TokenTree < S > , tkns : & mut & [TokenTree < S >]) -> String { match tkn { TokenTree :: Leaf (Leaf :: Ident (ident)) => { format ! ("{}{}" , ident . is_raw . as_str () , ident . sym) } TokenTree :: Leaf (Leaf :: Literal (literal)) => format ! ("{literal}") , TokenTree :: Leaf (Leaf :: Punct (punct)) => format ! ("{}" , punct . char) , TokenTree :: Subtree (subtree) => { let (subtree_content , rest) = tkns . split_at (subtree . usize_len ()) ; let content = pretty (subtree_content) ; * tkns = rest ; let (open , close) = match subtree . delimiter . kind { DelimiterKind :: Brace => ("{" , "}") , DelimiterKind :: Bracket => ("[" , "]") , DelimiterKind :: Parenthesis => ("(" , ")") , DelimiterKind :: Invisible => ("" , "") , } ; format ! ("{open}{content}{close}") } } } let mut last = String :: new () ; let mut last_to_joint = true ; while let Some ((tkn , rest)) = tkns . split_first () { tkns = rest ; last = [last , tokentree_to_text (tkn , & mut tkns)] . join (if last_to_joint { "" } else { " " }) ; last_to_joint = false ; if let TokenTree :: Leaf (Leaf :: Punct (punct)) = tkn && punct . spacing == Spacing :: Joint { last_to_joint = true ; } } last }
+}

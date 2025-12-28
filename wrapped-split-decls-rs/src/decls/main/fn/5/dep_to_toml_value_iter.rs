@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Helper function to convert an iterator of (String, cargo_toml_generator_types::Dependency)"] # [doc = " to an iterator of (String, toml::Value)."] fn dep_to_toml_value_iter < 'a > (iter : impl IntoIterator < Item = (String , Dependency) > + 'a ,) -> impl Iterator < Item = (String , toml :: Value) > + 'a { iter . into_iter () . filter_map (| (name , dep) | { match toml :: to_string (& dep) { Ok (serialized_dep) => { match toml :: from_str (& serialized_dep) { Ok (toml_value) => Some ((name , toml_value)) , Err (_) => { eprintln ! ("Warning: Failed to parse serialized Dependency TOML for {}" , name) ; None } } } Err (_) => { eprintln ! ("Warning: Failed to serialize Dependency to TOML for {}" , name) ; None } } }) }
+}

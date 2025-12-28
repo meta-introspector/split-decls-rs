@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl Default for PatchConfig { fn default () -> Self { Self { generated_workspace_member : Vec :: new () , generated_workspace_dependency : Vec :: new () , generated_crate_dependency : Vec :: new () , } } }
+}

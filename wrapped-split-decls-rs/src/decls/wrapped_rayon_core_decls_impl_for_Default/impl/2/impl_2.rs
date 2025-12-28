@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl Default for ThreadPoolBuilder { fn default () -> Self { ThreadPoolBuilder { num_threads : 0 , use_current_thread : false , panic_handler : None , get_thread_name : None , stack_size : None , start_handler : None , exit_handler : None , spawn_handler : DefaultSpawn , breadth_first : false , } } }
+}

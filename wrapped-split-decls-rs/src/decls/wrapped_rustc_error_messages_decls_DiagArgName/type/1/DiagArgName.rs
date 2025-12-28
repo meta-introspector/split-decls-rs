@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdecltype! {
 # [doc = " Name of a diagnostic argument."] pub type DiagArgName = Cow < 'static , str > ;
+}

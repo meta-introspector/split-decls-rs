@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn analyze_rust_content (content : & str , metrics : & mut CrateMetrics) { metrics . loc += content . lines () . count () ; for line in content . lines () { let trimmed = line . trim () ; if trimmed . starts_with ("fn ") || trimmed . contains (" fn ") { metrics . functions += 1 ; } if trimmed . starts_with ("struct ") || trimmed . contains (" struct ") { metrics . structs += 1 ; } if trimmed . starts_with ("enum ") || trimmed . contains (" enum ") { metrics . enums += 1 ; } if trimmed . starts_with ("macro_rules!") { metrics . macros += 1 ; } } }
+}

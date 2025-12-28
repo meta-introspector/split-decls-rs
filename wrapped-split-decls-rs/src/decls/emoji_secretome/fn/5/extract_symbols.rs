@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn extract_symbols (file : & syn :: File , secretome : & mut HashMap < String , SymbolInfo >) { for item in & file . items { match item { Item :: Fn (func) => { let key = format ! ("fn::{}" , func . sig . ident) ; secretome . insert (key , SymbolInfo :: Function (func . sig . ident . to_string ())) ; } Item :: Struct (s) => { let key = format ! ("struct::{}" , s . ident) ; secretome . insert (key , SymbolInfo :: Type (s . ident . to_string ())) ; } Item :: Enum (e) => { let key = format ! ("enum::{}" , e . ident) ; secretome . insert (key , SymbolInfo :: Type (e . ident . to_string ())) ; } Item :: Const (c) => { let key = format ! ("const::{}" , c . ident) ; secretome . insert (key , SymbolInfo :: Constant (c . ident . to_string ())) ; } _ => { } } } }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [derive (Debug , Serialize , Deserialize , Clone , Default)] struct MacroAnalysis { uses_syn : bool , defines_const : bool , defines_enum : bool , defines_struct : bool , calls_other_macros : Vec < String > , }
+}

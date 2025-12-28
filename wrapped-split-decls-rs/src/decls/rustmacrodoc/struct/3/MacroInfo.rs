@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [doc = " Represents information about a single macro."] # [derive (Debug , Serialize , Deserialize , Clone)] struct MacroInfo { name : String , kind : String , file : String , span_debug_string : String , # [serde (skip_serializing_if = "Option::is_none")] signature : Option < String > , # [serde (skip_serializing_if = "Option::is_none")] doc_comment : Option < String > , # [serde (skip_serializing_if = "Option::is_none")] analysis : Option < MacroAnalysis > , }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl FileSystemOps for ProductionFileSystemOps { fn read (& self , path : & Path) -> IoResult < Vec < u8 > > { std :: fs :: read (path) } fn write (& self , path : & Path , contents : & [u8]) -> IoResult < () > { std :: fs :: write (path , contents) } fn create_dir_all (& self , path : & Path) -> IoResult < () > { std :: fs :: create_dir_all (path) } fn remove_file (& self , path : & Path) -> IoResult < () > { std :: fs :: remove_file (path) } fn exists (& self , path : & Path) -> bool { path . exists () } fn metadata (& self , path : & Path) -> IoResult < std :: fs :: Metadata > { std :: fs :: metadata (path) } }
+}

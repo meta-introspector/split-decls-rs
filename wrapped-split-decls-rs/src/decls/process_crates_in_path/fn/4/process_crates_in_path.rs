@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Process all crates in a given path, applying the split-decls transformation."] pub fn process_crates_in_path (root_path : & Path , global_config : & SplitDeclsConfig , _is_rustc_source : bool , dry_run : bool ,) -> Result < () > { if dry_run { println ! ("DRY RUN: Would process crates in {}" , root_path . display ()) ; return Ok (()) ; } println ! ("Processing crates in path: {}" , root_path . display ()) ; let cargo_toml_path = root_path . join ("Cargo.toml") ; if cargo_toml_path . exists () { let _crate_name = root_path . file_name () . and_then (| n | n . to_str ()) . unwrap_or ("unknown") ; process_crate (root_path , global_config , dry_run) ? ; } Ok (()) }
+}

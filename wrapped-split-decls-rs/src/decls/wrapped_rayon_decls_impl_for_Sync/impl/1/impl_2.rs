@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 unsafe impl < T : Send > Sync for SendPtr < T > { }
+}

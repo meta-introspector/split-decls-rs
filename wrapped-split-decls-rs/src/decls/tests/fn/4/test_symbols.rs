@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn test_symbols () { static SYMBOL_RS_FILE : & str = include_str ! ("../../../rustc_span/src/symbol.rs") ; let file = syn :: parse_file (SYMBOL_RS_FILE) . unwrap () ; let symbols_path : syn :: Path = syn :: parse_quote ! (symbols) ; let m : & syn :: ItemMacro = file . items . iter () . find_map (| i | { if let syn :: Item :: Macro (m) = i { if m . mac . path == symbols_path { Some (m) } else { None } } else { None } }) . expect ("did not find `symbols!` macro invocation.") ; let body_tokens = m . mac . tokens . clone () ; test_symbols_macro (body_tokens , & ["proc_macro::tracked_env is not available in unit test"]) ; }
+}

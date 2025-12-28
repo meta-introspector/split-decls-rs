@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl < K , V , I > VecCache < K , V , I > where K : Eq + Idx + Copy + Debug , V : Copy , I : Idx + Copy , { # [inline (always)] pub fn lookup (& self , key : & K) -> Option < (V , I) > { let key = u32 :: try_from (key . index ()) . unwrap () ; let slot_idx = SlotIndex :: from_index (key) ; match unsafe { slot_idx . get (& self . buckets) } { Some ((value , idx)) => Some ((value , I :: new (idx as usize))) , None => None , } } # [inline] pub fn complete (& self , key : K , value : V , index : I) { let key = u32 :: try_from (key . index ()) . unwrap () ; let slot_idx = SlotIndex :: from_index (key) ; if slot_idx . put (& self . buckets , value , index . index () as u32) { let present_idx = self . len . fetch_add (1 , Ordering :: Relaxed) ; let slot = SlotIndex :: from_index (present_idx as u32) ; assert ! (slot . put (& self . present , () , key)) ; } } pub fn iter (& self , f : & mut dyn FnMut (& K , & V , I)) { for idx in 0 .. self . len . load (Ordering :: Acquire) { let key = SlotIndex :: from_index (idx as u32) ; match unsafe { key . get (& self . present) } { None => unreachable ! () , Some ((() , key)) => { let key = K :: new (key as usize) ; let value = self . lookup (& key) . unwrap () ; f (& key , & value . 0 , value . 1) ; } } } } }
+}

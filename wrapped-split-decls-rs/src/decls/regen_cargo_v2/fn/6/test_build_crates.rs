@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn test_build_crates (crates : & [PathBuf] , verbose : bool) -> Result < () > { if verbose { println ! ("Building updated crates...") ; } let mut error_count = 0 ; for crate_path in crates { let output = std :: process :: Command :: new ("cargo") . args (& ["check" , "--quiet"]) . current_dir (crate_path) . output () ; match output { Ok (result) if ! result . status . success () => { error_count += 1 ; let crate_name = crate_path . file_name () . unwrap () . to_str () . unwrap () ; println ! ("❌ {}: {}" , crate_name , String :: from_utf8_lossy (& result . stderr) . lines () . next () . unwrap_or ("Build failed")) ; } Err (e) => { error_count += 1 ; let crate_name = crate_path . file_name () . unwrap () . to_str () . unwrap () ; println ! ("❌ {}: {}" , crate_name , e) ; } _ => { } } } if error_count > 0 { println ! ("❌ {} crates failed to build" , error_count) ; std :: process :: exit (101) ; } else if verbose { println ! ("✅ All crates built successfully") ; } Ok (()) }
+}

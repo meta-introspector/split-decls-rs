@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdecltrait! {
 trait VisibilityLike : Sized { const MAX : Self ; fn new_min < const SHALLOW : bool > (find : & FindMin < '_ , '_ , Self , SHALLOW > , def_id : LocalDefId ,) -> Self ; fn of_impl < const SHALLOW : bool > (def_id : LocalDefId , of_trait : bool , tcx : TyCtxt < '_ > , effective_visibilities : & EffectiveVisibilities ,) -> Self { let mut find = FindMin :: < _ , SHALLOW > { tcx , effective_visibilities , min : Self :: MAX , } ; find . visit (tcx . type_of (def_id) . instantiate_identity ()) ; if of_trait { find . visit_trait (tcx . impl_trait_ref (def_id) . instantiate_identity ()) ; } find . min } }
+}

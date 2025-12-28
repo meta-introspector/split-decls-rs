@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [derive (Debug , Clone , PartialEq , Eq , Hash , Serialize , Deserialize , Default)] pub struct ExtractedDeclMetadata { pub ast_depth : usize , pub ast_node_count : usize , pub inputs_hash : Option < String > , pub output_hash : Option < String > , pub rings_of_sizes : Vec < usize > , pub zkp_witness_hash : Option < String > , }
+}

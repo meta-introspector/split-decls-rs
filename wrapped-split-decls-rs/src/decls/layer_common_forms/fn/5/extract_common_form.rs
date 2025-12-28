@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn extract_common_form (pattern : & str) -> String { if pattern . chars () . all (| c | c . is_ascii () && (c . is_alphabetic () || "🦄🔮🌟🎨🎪🐉💎🎭🦋" . contains (c))) { pattern . to_string () } else { let parts : Vec < & str > = pattern . split ('/') . collect () ; if parts . len () >= 3 { let first = parts . get (0) . unwrap_or (& "") ; let last = parts . last () . unwrap_or (& "") ; if parts . len () > 5 { format ! ("{}/.../{}/.../{}" , first , parts . get (parts . len () / 2) . unwrap_or (& "*") , last) } else if parts . len () > 3 { format ! ("{}/.../{}" , first , last) } else { format ! ("{}/{}/{}" , parts [0] , "*" , parts [parts . len () - 1]) } } else { pattern . replace (char :: is_numeric , "*") } } }
+}

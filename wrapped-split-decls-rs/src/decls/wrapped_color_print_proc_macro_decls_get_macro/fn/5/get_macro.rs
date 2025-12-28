@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Renders a whole processed macro."] fn get_macro (macro_name : & str , input : TokenStream , is_write_macro : bool) -> TokenStream { let macro_name = util :: ident (macro_name) ; let fmt_args = | input_tail | { # [cfg (not (feature = "terminfo"))] let format_args = crate :: ansi :: get_format_args (input_tail) ; # [cfg (feature = "terminfo")] let format_args = crate :: terminfo :: get_format_args (input_tail) ; format_args . unwrap_or_else (| err | err . to_token_stream ()) } ; if is_write_macro { let WriteInput { dst , rest } = parse_macro_input ! (input) ; let format_args = fmt_args (rest) ; (quote ! { # macro_name ! (# dst , # format_args) }) . into () } else { let format_args = fmt_args (input) ; (quote ! { # macro_name ! (# format_args) }) . into () } }
+}

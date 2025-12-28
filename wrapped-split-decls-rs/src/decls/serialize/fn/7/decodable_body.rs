@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn decodable_body (s : synstructure :: Structure < '_ > , decoder_ty : TokenStream ,) -> proc_macro2 :: TokenStream { if let syn :: Data :: Union (_) = s . ast () . data { panic ! ("cannot derive on union") } let ty_name = s . ast () . ident . to_string () ; let decode_body = match s . variants () { [] => { let message = format ! ("`{ty_name}` has no variants to decode") ; quote ! { panic ! (# message) } } [vi] => vi . construct (| field , _index | decode_field (field)) , variants => { let match_inner : TokenStream = variants . iter () . enumerate () . map (| (idx , vi) | { let construct = vi . construct (| field , _index | decode_field (field)) ; quote ! { # idx => { # construct } } }) . collect () ; let message = format ! ("invalid enum variant tag while decoding `{}`, expected 0..{}, actual {{}}" , ty_name , variants . len ()) ; let tag = if variants . len () < u8 :: MAX as usize { quote ! { :: rustc_serialize :: Decoder :: read_u8 (__decoder) as usize } } else { quote ! { :: rustc_serialize :: Decoder :: read_usize (__decoder) } } ; quote ! { match # tag { # match_inner n => panic ! (# message , n) , } } } } ; s . bound_impl (quote ! (:: rustc_serialize :: Decodable <# decoder_ty >) , quote ! { fn decode (__decoder : & mut # decoder_ty) -> Self { # decode_body } } ,) }
+}

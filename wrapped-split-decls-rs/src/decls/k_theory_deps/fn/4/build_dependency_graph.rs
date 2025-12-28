@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn build_dependency_graph (decls : & [Declaration]) -> Result < DependencyGraph > { println ! ("🕸️  Building dependency graph...") ; let mut graph = HashMap :: new () ; let mut reverse_graph = HashMap :: new () ; for (i , decl) in decls . iter () . enumerate () { let deps = extract_dependencies (& decl . content) ; graph . insert (i , deps . clone ()) ; for dep in deps { reverse_graph . entry (dep) . or_insert_with (Vec :: new) . push (i) ; } } Ok (DependencyGraph { forward : graph , reverse : reverse_graph , node_count : decls . len () }) }
+}

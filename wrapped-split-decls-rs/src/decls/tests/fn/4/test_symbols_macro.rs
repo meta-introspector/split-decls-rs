@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn test_symbols_macro (input : TokenStream , expected_errors : & [& str]) { let (output , found_errors) = symbols_with_errors (input) ; let _parsed_file = syn :: parse2 :: < syn :: File > (output) . unwrap () ; assert_eq ! (found_errors . len () , expected_errors . len () , "Macro generated a different number of errors than expected") ; for (found_error , & expected_error) in found_errors . iter () . zip (expected_errors) { let found_error_str = format ! ("{}" , found_error) ; assert_eq ! (found_error_str , expected_error) ; } }
+}

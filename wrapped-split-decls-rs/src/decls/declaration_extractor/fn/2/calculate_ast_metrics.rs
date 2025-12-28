@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn calculate_ast_metrics (item : & Item) -> (usize , usize) { let mut visitor = AstMetricVisitor { max_depth : 0 , current_depth : 0 , node_count : 0 , } ; visitor . visit_item (item) ; (visitor . max_depth , visitor . node_count) }
+}

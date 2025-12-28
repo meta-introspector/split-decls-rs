@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [derive (Debug , Default)] pub struct TermAnalysis { pub terms_per_macro : HashMap < String , Vec < Term > > , pub module_frequencies : HashMap < Term , usize > , pub global_frequencies : HashMap < Term , usize > , pub total_module_terms : usize , pub total_global_terms : usize , pub term_detailed_scores : HashMap < Term , (f64 , f64 , HashMap < String , f64 >) > , }
+}

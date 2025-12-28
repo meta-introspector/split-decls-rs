@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn print_analysis (extraction : & MoldExtraction) { let analysis = & extraction . static_analysis ; println ! ("\n📊 Static Analysis Results:") ; println ! ("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━") ; println ! ("🔢 Complexity Metrics:") ; println ! ("  Parse operations: {}" , analysis . complexity_metrics . parse_operations) ; println ! ("  Visit operations: {}" , analysis . complexity_metrics . visit_operations) ; println ! ("  Transform operations: {}" , analysis . complexity_metrics . transform_operations) ; println ! ("  Generation operations: {}" , analysis . complexity_metrics . generation_operations) ; println ! ("  Total complexity: {:.2}" , analysis . complexity_metrics . total_complexity) ; println ! ("\n🔍 Extracted Signatures:") ; for (i , sig) in analysis . signatures . iter () . enumerate () { println ! ("  {}. {} (complexity: {:.2})" , i + 1 , sig . operation , sig . complexity_score) ; println ! ("     Inputs: {:?}" , sig . input_types) ; println ! ("     Outputs: {:?}" , sig . output_types) ; println ! ("     Dependencies: {:?}" , sig . dependencies) ; } println ! ("\n🎯 Usage Patterns:") ; for (pattern , usage) in & analysis . usage_patterns { println ! ("  {}: {:?} (frequency: {})" , pattern , usage . pattern_type , usage . frequency) ; } }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstatic! {
 # [doc = " The initializer for the [windows-1250](static.WINDOWS_1250.html) encoding."] # [doc = ""] # [doc = " For use only for taking the address of this form when"] # [doc = " Rust prohibits the use of the non-`_INIT` form directly,"] # [doc = " such as in initializers of other `static`s. If in doubt,"] # [doc = " use the corresponding non-`_INIT` reference-typed `static`."] # [doc = ""] # [doc = " This part of the public API will go away if Rust changes"] # [doc = " to make the referent of `pub const FOO: &'static Encoding`"] # [doc = " unique cross-crate or if Rust starts allowing static arrays"] # [doc = " to be initialized with `pub static FOO: &'static Encoding`"] # [doc = " items."] pub static WINDOWS_1250_INIT : Encoding = Encoding { name : "windows-1250" , variant : VariantEncoding :: SingleByte (& data :: SINGLE_BYTE_DATA . windows_1250 , 0x00DC , 92 , 2) , } ;
+}

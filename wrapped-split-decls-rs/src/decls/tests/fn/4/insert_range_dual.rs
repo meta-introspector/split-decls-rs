@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn insert_range_dual () { let mut set = IntervalSet :: < u32 > :: new (300) ; set . insert_range (0 .. 3) ; assert_eq ! (set . iter () . collect ::< Vec < _ >> () , [0 , 1 , 2]) ; set . insert_range (5 .. 7) ; assert_eq ! (set . iter () . collect ::< Vec < _ >> () , [0 , 1 , 2 , 5 , 6]) ; set . insert_range (3 .. 4) ; assert_eq ! (set . iter () . collect ::< Vec < _ >> () , [0 , 1 , 2 , 3 , 5 , 6]) ; set . insert_range (3 .. 5) ; assert_eq ! (set . iter () . collect ::< Vec < _ >> () , [0 , 1 , 2 , 3 , 4 , 5 , 6]) ; }
+}

@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn generate_epic_monster_report (signatures : & HashMap < String , u64 > , total_files : usize) -> String { let mut report = String :: new () ; report . push_str (& format ! (r#"
 # 👹 RUST TO MONSTER GROUP TRANSFORMATION REPORT 👹
 ## The Epic Journey from Code to Mathematical Perfection
@@ -57,3 +58,4 @@ This transformation opens doors to:
 *"Making the impossible, inevitable"*
 
 "# , signatures . len () , signatures . values () . sum ::< u64 > ())) ; report }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn main () -> Result < () > { let source_dir = Path :: new (".") ; let ngram_sizes = vec ! [2 , 3 , 5 , 7 , 11 , 13 , 17 , 19] ; let top_counts = vec ! [2 , 3 , 5] ; println ! ("🦀 Rustc N-Gram Ontology Generator") ; println ! ("==================================") ; for & n in & ngram_sizes { for & top_k in & top_counts { println ! ("\n📊 Analyzing {}-grams (top {}):" , n , top_k) ; match analyze_ngrams_for_size (source_dir , n , top_k) { Ok (ontology) => { let filename = format ! ("rustc_ontology_{}gram_top{}.json" , n , top_k) ; let json = serde_json :: to_string_pretty (& ontology) ? ; fs :: write (& filename , json) ? ; println ! ("📈 Results for {}-grams (top {}):" , n , top_k) ; println ! ("   Total patterns: {}" , ontology . total_patterns) ; println ! ("   Coverage: {:.2}%" , ontology . coverage_percentage) ; for (i , pattern) in ontology . top_patterns . iter () . enumerate () { println ! ("   {}. {} {} \"{}\" (freq: {}, nodes: {})" , i + 1 , pattern . emoji , pattern . semantic_label , pattern . pattern , pattern . frequency , pattern . nodes . len ()) ; } println ! ("💾 Saved to {}" , filename) ; } Err (e) => { eprintln ! ("❌ Error analyzing {}-grams: {}" , n , e) ; } } } } println ! ("\n🎯 Core Rustc Ontology Generation Complete!") ; Ok (()) }
+}

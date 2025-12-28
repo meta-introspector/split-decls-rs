@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Generates [patch] entries for .cargo/config.toml for each workspace member."] pub fn generate_patch_entries (project_root : & Path , workspace_infos : & [WorkspaceInfo] ,) -> GeneratedPatches { let mut generated_patches = HashMap :: new () ; for info in workspace_infos { let submodule_name = info . submodule_base_path_rel . file_name () . and_then (| s | s . to_str ()) . unwrap_or_default () ; let patch_section_header = format ! ("https://github.com/meta-introspector/{}" , submodule_name) ; let mut entries = Vec :: new () ; for member_name in & info . member_crates { let member_abs_path = project_root . join (& info . submodule_base_path_rel) . join (member_name) ; entries . push (PatchEntry { crate_name : member_name . clone () , path : member_abs_path , }) ; } generated_patches . insert (patch_section_header , entries) ; } generated_patches }
+}

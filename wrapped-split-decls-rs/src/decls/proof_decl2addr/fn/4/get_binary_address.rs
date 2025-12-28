@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Get address from binary symbols"] fn get_binary_address (symbol : & str) -> Result < String > { let output = Command :: new ("readelf") . arg ("-s") . arg ("/proc/self/exe") . output () ? ; let stdout = String :: from_utf8_lossy (& output . stdout) ; for line in stdout . lines () { if line . contains (symbol) { let parts : Vec < & str > = line . split_whitespace () . collect () ; if parts . len () >= 2 { let addr = parts [1] ; if addr != "0" && addr . len () >= 8 { return Ok (format ! ("0x{}" , addr)) ; } } } } Err (anyhow :: anyhow ! ("Binary symbol not found")) }
+}

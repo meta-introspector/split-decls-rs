@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl Clone for Rng { # [doc = " Clones the generator by creating a new generator with the same seed."] fn clone (& self) -> Rng { Rng :: with_seed (self . 0) } }
+}

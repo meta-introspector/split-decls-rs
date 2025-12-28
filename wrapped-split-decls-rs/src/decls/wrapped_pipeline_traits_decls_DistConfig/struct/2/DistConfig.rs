@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [derive (Debug , Deserialize , Clone)] pub struct DistConfig { # [serde (rename = "sign-folder")] pub sign_folder : Option < String > , # [serde (rename = "upload-addr")] pub upload_addr : Option < String > , }
+}

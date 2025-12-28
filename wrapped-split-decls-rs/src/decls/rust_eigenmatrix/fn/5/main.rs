@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn main () -> Result < () > { println ! ("🔥 PARALLEL Rust Diagonalization - 24 CPU EIGENMATRIX BEAST") ; let decls = load_all_declarations () ? ; println ! ("📊 Loaded {} declarations" , decls . len ()) ; let cache_file = "eigenmatrix_cache.json" ; if let Ok (cached) = load_cached_matrix (cache_file) { if cached . decl_names . len () == decls . len () { println ! ("⚡ Using cached matrix!") ; analyze_eigenmatrix (& cached . matrix , & decls) ; return Ok (()) ; } } println ! ("🚀 Computing {}x{} eigenmatrix with PARALLEL POWER..." , decls . len () , decls . len ()) ; let eigenmatrix = create_parallel_eigenmatrix (& decls) ? ; save_cached_matrix (cache_file , & eigenmatrix , & decls) ? ; analyze_eigenmatrix (& eigenmatrix , & decls) ; Ok (()) }
+}

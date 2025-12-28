@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdecltrait! {
 # [salsa_macros :: db] pub trait SourceDatabase : salsa :: Database { # [doc = " Text of the file."] fn file_text (& self , file_id : vfs :: FileId) -> FileText ; fn set_file_text (& mut self , file_id : vfs :: FileId , text : & str) ; fn set_file_text_with_durability (& mut self , file_id : vfs :: FileId , text : & str , durability : Durability ,) ; # [doc = " Contents of the source root."] fn source_root (& self , id : SourceRootId) -> SourceRootInput ; fn file_source_root (& self , id : vfs :: FileId) -> FileSourceRootInput ; fn set_file_source_root_with_durability (& mut self , id : vfs :: FileId , source_root_id : SourceRootId , durability : Durability ,) ; # [doc = " Source root of the file."] fn set_source_root_with_durability (& mut self , source_root_id : SourceRootId , source_root : Arc < SourceRoot > , durability : Durability ,) ; fn resolve_path (& self , path : AnchoredPath < '_ >) -> Option < FileId > { let source_root = self . file_source_root (path . anchor) ; let source_root = self . source_root (source_root . source_root_id (self)) ; source_root . source_root (self) . resolve_path (path) } # [doc (hidden)] fn crates_map (& self) -> Arc < CratesMap > ; fn nonce_and_revision (& self) -> (Nonce , salsa :: Revision) ; }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Return the visibility that should be used for expectation!, given the"] # [doc = " original method's visibility."] # [doc = ""] # [doc = " # Arguments"] # [doc = " - `vis`:    Original visibility of the item"] # [doc = " - `levels`: How many modules will the mock item be nested in?"] fn expectation_visibility (vis : & Visibility , levels : usize) -> Visibility { if levels == 0 { return vis . clone () ; } let in_token = Token ! [in] (vis . span ()) ; let super_token = Token ! [super] (vis . span ()) ; match vis { Visibility :: Inherited => { let mut path = Path :: from (super_token) ; for _ in 1 .. levels { path . segments . push (super_token . into ()) ; } Visibility :: Restricted (VisRestricted { pub_token : Token ! [pub] (vis . span ()) , paren_token : token :: Paren :: default () , in_token : Some (in_token) , path : Box :: new (path) , }) } Visibility :: Restricted (vr) => { if vr . path . segments . first () . unwrap () . ident == "crate" { Visibility :: Restricted (vr . clone ()) } else { let mut out = vr . clone () ; out . in_token = Some (in_token) ; for _ in 0 .. levels { out . path . segments . insert (0 , super_token . into ()) ; } Visibility :: Restricted (out) } } _ => vis . clone () , } }
+}

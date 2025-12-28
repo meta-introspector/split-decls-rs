@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn generate_usage_example (input_file : & str , context : & str) -> Result < () > { let example_file = format ! ("{}_example.rs" , input_file . trim_end_matches (".rs")) ; let example_code = match context { "compiler" => quote ! { fn main () { let ctx = CompilerContext ; let input = get_rustc_tokenstream () ; let result = ctx . parse_item (input) . unwrap () ; println ! ("Processed in compiler context: {:?}" , result) ; } } , "abstract" => quote ! { fn main () { let engine = AbstractEngine { security_level : 2 , allowed_operations : vec ! ["parse" . to_string () , "transform" . to_string ()] , } ; let input = AbstractTokenStream { tokens : vec ! [] } ; let result = engine . parse_item (input) . unwrap () ; println ! ("Processed in abstract engine: {:?}" , result) ; } } , _ => quote ! { fn main () { let ctx = SynContext ; let input : TokenStream = "fn hello() {}" . parse () . unwrap () ; let result = ctx . parse_item (input) . unwrap () ; println ! ("Processed in syn context: {:?}" , result) ; } } , } ; fs :: write (& example_file , example_code . to_string ()) ? ; println ! ("📝 Usage example written to {}" , example_file) ; Ok (()) }
+}

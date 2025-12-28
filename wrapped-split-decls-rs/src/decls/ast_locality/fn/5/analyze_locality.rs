@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn analyze_locality (decls : & [Declaration]) -> Result < LocalityAnalysis > { println ! ("🔍 Analyzing AST locality patterns...") ; let analysis : Vec < NodeLocality > = decls . par_iter () . enumerate () . map (| (i , decl) | { let local_deps = find_local_dependencies (& decl . content) ; let global_deps = find_global_dependencies (& decl . content) ; let total_deps = local_deps . len () + global_deps . len () ; let local_ratio = if total_deps > 0 { local_deps . len () as f64 / total_deps as f64 } else { 1.0 } ; NodeLocality { index : i , name : decl . name . clone () , local_deps , global_deps , local_ratio , complexity : calculate_ast_complexity (& decl . content) , } }) . collect () ; Ok (LocalityAnalysis { nodes : analysis }) }
+}

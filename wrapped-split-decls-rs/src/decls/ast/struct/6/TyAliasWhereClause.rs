@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [doc = " The location of a where clause on a `TyAlias` (`Span`) and whether there was"] # [doc = " a `where` keyword (`bool`). This is split out from `WhereClause`, since there"] # [doc = " are two locations for where clause on type aliases, but their predicates"] # [doc = " are concatenated together."] # [doc = ""] # [doc = " Take this example:"] # [doc = " ```ignore (only-for-syntax-highlight)"] # [doc = " trait Foo {"] # [doc = "   type Assoc<'a, 'b> where Self: 'a, Self: 'b;"] # [doc = " }"] # [doc = " impl Foo for () {"] # [doc = "   type Assoc<'a, 'b> where Self: 'a = () where Self: 'b;"] # [doc = "   //                 ^^^^^^^^^^^^^^ first where clause"] # [doc = "   //                                     ^^^^^^^^^^^^^^ second where clause"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " If there is no where clause, then this is `false` with `DUMMY_SP`."] # [derive (Copy , Clone , Encodable , Decodable , Debug , Default , Walkable)] pub struct TyAliasWhereClause { pub has_where_token : bool , pub span : Span , }
+}

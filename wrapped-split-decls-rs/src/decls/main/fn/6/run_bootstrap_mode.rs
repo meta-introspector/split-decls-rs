@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn run_bootstrap_mode (verbose : bool , dry_run : bool , output_dir_override : Option < & PathBuf > , cargo_only : bool , plan : bool , global_config : & SplitDeclsConfig ,) -> Result < () > { if verbose { if dry_run { println ! ("*** Running in DRY-RUN mode. No files will be modified. ***") ; } if plan { println ! ("*** Running in PLAN mode. Showing what will be processed. ***") ; } println ! ("Running bootstrap mode.") ; } let wrapped_workspace_output_dir = output_dir_override . map (| p | p . to_path_buf ()) . unwrap_or_else (| | PathBuf :: from ("output2")) ; let module_not_found_errors = run_wrapped_workspace_mode (verbose , dry_run || plan , output_dir_override , global_config , cargo_only) ? ; if ! module_not_found_errors . is_empty () { warn ! ("\n--- Module Not Found Summary ---") ; for error_report in module_not_found_errors { warn ! ("  Crate: '{}', Module: '{}', Message: '{}', Generated File: '{}'" , error_report . crate_name , error_report . module_name , error_report . error_message , error_report . generated_file_path . display ()) ; } warn ! ("------------------------------") ; } Ok (()) }
+}

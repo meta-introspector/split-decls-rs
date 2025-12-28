@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdecltrait! {
 # [doc = " A trait representing the axiomatic properties of the 108 factors of the Monster Group."] pub trait MonsterFactorsAxiom { # [doc = " Returns the canonical list of the 15 supersingular primes that define the Monster Group order."] fn get_canonical_supersingular_primes (& self) -> Vec < u32 > ; # [doc = " Returns the canonical sum of exponents (108) for the Monster Group order."] fn get_canonical_sum_of_exponents (& self) -> u32 ; # [doc = " Predicate to check if a declaration's monster factors conform to the axiomatic 108 factors."] fn validate_factors (& self , declaration : & Declaration) -> bool ; }
+}

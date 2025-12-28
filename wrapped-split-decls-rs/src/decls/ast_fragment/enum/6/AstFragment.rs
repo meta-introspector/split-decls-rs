@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclenum! {
 # [doc = " A fragment of AST that can be produced by a single macro expansion."] # [doc = " Can also serve as an input and intermediate result for macro expansion operations."] # [derive (Debug)] pub enum AstFragment { OptExpr (Option < Box < ast :: Expr > >) , MethodReceiverExpr (Box < ast :: Expr >) , Expr (Box < ast :: Expr >) , Pat (Box < ast :: Pat >) , Ty (Box < ast :: Ty >) , Stmts (SmallVec < ast :: Stmt , 1 >) , Items (SmallVec < Box < ast :: Item > , 1 >) , TraitItems (SmallVec < Box < ast :: AssocItem > , 1 >) , ImplItems (SmallVec < Box < ast :: AssocItem > , 1 >) , TraitImplItems (SmallVec < Box < ast :: AssocItem > , 1 >) , ForeignItems (SmallVec < Box < ast :: ForeignItem > , 1 >) , Arms (SmallVec < ast :: Arm , 1 >) , ExprFields (SmallVec < ast :: ExprField , 1 >) , PatFields (SmallVec < ast :: PatField , 1 >) , GenericParams (SmallVec < ast :: GenericParam , 1 >) , Params (SmallVec < ast :: Param , 1 >) , FieldDefs (SmallVec < ast :: FieldDef , 1 >) , Variants (SmallVec < ast :: Variant , 1 >) , WherePredicates (SmallVec < ast :: WherePredicate , 1 >) , Crate (ast :: Crate) , }
+}

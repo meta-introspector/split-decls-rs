@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn main () -> Result < () > { println ! ("🚀 Stateful REPL - RDF Blob State System") ; println ! ("Commands: set <var>=<value>, get <var>, save, load, export <type>, quit") ; println ! ("State file: {}\n" , STATE_FILE) ; let mut state = ReplState :: load_from_file () ? ; loop { print ! ("repl> ") ; io :: stdout () . flush () ? ; let mut input = String :: new () ; io :: stdin () . read_line (& mut input) ? ; let input = input . trim () ; if input . is_empty () { continue ; } state . history . push (input . to_string ()) ; match execute_command (& mut state , input) { Ok (should_continue) => { if ! should_continue { break ; } } Err (e) => { println ! ("❌ Error: {}" , e) ; } } } state . save_to_file () ? ; println ! ("👋 Goodbye!") ; Ok (()) }
+}

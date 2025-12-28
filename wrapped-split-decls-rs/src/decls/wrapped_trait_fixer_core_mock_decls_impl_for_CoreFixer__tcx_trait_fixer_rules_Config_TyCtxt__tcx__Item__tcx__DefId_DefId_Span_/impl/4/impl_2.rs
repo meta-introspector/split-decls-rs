@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl < 'tcx > CoreFixer < 'tcx , trait_fixer_rules :: Config , TyCtxt < 'tcx > , Item < 'tcx > , DefId , DefId , Span > for MockTraitFixer < 'tcx > { fn new (tcx : TyCtxt < 'tcx > , config : trait_fixer_rules :: Config) -> Self { Self { tcx , config , fixes : Vec :: new () , } } fn add_fix (& mut self , fix : Fix < Span , DefId , DefId >) { self . fixes . push (fix) ; } fn get_fixes (& self) -> & Vec < Fix < Span , DefId , DefId > > { & self . fixes } fn process_hir (& mut self) { self . tcx . hir () . walk_tops (| _item | { }) ; } fn check_item (& mut self , item : & 'tcx Item < 'tcx >) { println ! ("Mock Checking item: {:?}" , item) ; } }
+}

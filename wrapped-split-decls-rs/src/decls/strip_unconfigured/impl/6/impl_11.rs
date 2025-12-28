@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl StripUnconfigured < '_ > { # [doc = " Returns `true` if the attributes and expression are to be stripped."] # [must_use] pub fn strip (& self , attrs : & [Attribute] ,) -> bool { let mut strip = false ; for attr in attrs { if ! is_cfg (attr) { continue ; } if let Some (meta_item) = attr . meta () { if ! self . configure (& meta_item) { strip = true ; break ; } } } strip } # [doc = " `true` if the MetaItem is true"] # [must_use] fn configure (& self , meta_item : & MetaItem) -> bool { let MetaItem { path , kind , span , .. } = meta_item ; configure (self . sess , self . features , path , kind , * span) } # [doc = " Strips any attributes that should not appear in the program based on the"] # [doc = " configuration of the session."] pub fn process_cfg_attrs (& self , attrs : & mut ast :: AttrVec) -> bool { let strip = self . strip (attrs) ; if self . keep_mode == KeepCfg :: No { attrs . retain (| attr | ! is_cfg (attr)) ; } strip } }
+}

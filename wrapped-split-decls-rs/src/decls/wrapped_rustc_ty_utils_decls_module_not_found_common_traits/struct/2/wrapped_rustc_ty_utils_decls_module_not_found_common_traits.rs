@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [llm_error_message (message = "Module file not found for: common_traits")] # [llm_context (crate_name = "wrapped_rustc_ty_utils" , module_name = "common_traits")] pub struct wrapped_rustc_ty_utils_decls_module_not_found_common_traits ;
+}

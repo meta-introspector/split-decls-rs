@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Tests `span_to_snippet` and `span_to_lines` for a span converting 3"] # [doc = " lines in the middle of a file."] # [test] fn span_to_snippet_and_lines_spanning_multiple_lines () { let sm = SourceMap :: new (FilePathMapping :: empty ()) ; let inputtext = "aaaaa\nbbbbBB\nCCC\nDDDDDddddd\neee\n" ; let selection = "     \n    ~~\n~~~\n~~~~~     \n   \n" ; sm . new_source_file (Path :: new ("blork.rs") . to_owned () . into () , inputtext . to_string ()) ; let span = span_from_selection (inputtext , selection) ; assert_eq ! (& sm . span_to_snippet (span) . unwrap () , "BB\nCCC\nDDDDD") ; let lines = sm . span_to_lines (span) . unwrap () ; let expected = vec ! [LineInfo { line_index : 1 , start_col : CharPos (4) , end_col : CharPos (6) } , LineInfo { line_index : 2 , start_col : CharPos (0) , end_col : CharPos (3) } , LineInfo { line_index : 3 , start_col : CharPos (0) , end_col : CharPos (5) } ,] ; assert_eq ! (lines . lines , expected) ; }
+}

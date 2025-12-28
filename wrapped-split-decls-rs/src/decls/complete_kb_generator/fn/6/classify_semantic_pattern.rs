@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn classify_semantic_pattern (symbol : & str) -> String { let lower = symbol . to_lowercase () ; if lower . contains ("rustc_parse") || lower . contains ("lexer") || lower . contains ("parser") { "compiler_frontend" } else if lower . contains ("rustc_typeck") || lower . contains ("rustc_hir") || lower . contains ("rustc_mir") { "compiler_middle" } else if lower . contains ("rustc_codegen") || lower . contains ("rustc_llvm") { "compiler_backend" } else if lower . contains ("alloc") || lower . contains ("heap") || lower . contains ("memory") { "memory_management" } else if lower . contains ("trait") || lower . contains ("type") || lower . contains ("generic") { "type_system" } else if lower . contains ("error") || lower . contains ("diagnostic") { "error_handling" } else if lower . contains ("macro") || lower . contains ("proc_macro") { "macro_system" } else if lower . contains ("async") || lower . contains ("future") || lower . contains ("tokio") { "async_runtime" } else { "general_utility" } . to_string () }
+}

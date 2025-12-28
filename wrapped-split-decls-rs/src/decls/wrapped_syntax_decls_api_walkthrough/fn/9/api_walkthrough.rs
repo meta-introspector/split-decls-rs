@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " This test does not assert anything and instead just shows off the crate's"] # [doc = " API."] # [test] fn api_walkthrough () { use ast :: { HasModuleItem , HasName } ; let source_code = "
         fn foo() {
             1 + 1
@@ -15,3 +16,4 @@ use std::collections::HashMap;
   "1" LITERAL
     "1" INT_NUMBER
 "# . trim ()) ; let exprs_cast : Vec < String > = file . syntax () . descendants () . filter_map (ast :: Expr :: cast) . map (| expr | expr . syntax () . text () . to_string ()) . collect () ; let mut exprs_visit = Vec :: new () ; for node in file . syntax () . descendants () { match_ast ! { match node { ast :: Expr (it) => { let res = it . syntax () . text () . to_string () ; exprs_visit . push (res) ; } , _ => () , } } } assert_eq ! (exprs_cast , exprs_visit) ; }
+}

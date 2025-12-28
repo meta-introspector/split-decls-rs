@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdecltype! {
 # [doc = " Indicates a range of tokens that should be replaced by an `AttrsTarget`"] # [doc = " (replacement) or be replaced by nothing (deletion). This is used in two"] # [doc = " places during token collection."] # [doc = ""] # [doc = " 1. Replacement. During the parsing of an AST node that may have a"] # [doc = "    `#[derive]` attribute, when we parse a nested AST node that has `#[cfg]`"] # [doc = "    or `#[cfg_attr]`, we replace the entire inner AST node with"] # [doc = "    `FlatToken::AttrsTarget`. This lets us perform eager cfg-expansion on an"] # [doc = "    `AttrTokenStream`."] # [doc = ""] # [doc = " 2. Deletion. We delete inner attributes from all collected token streams,"] # [doc = "    and instead track them through the `attrs` field on the AST node. This"] # [doc = "    lets us manipulate them similarly to outer attributes. When we create a"] # [doc = "    `TokenStream`, the inner attributes are inserted into the proper place"] # [doc = "    in the token stream."] # [doc = ""] # [doc = " Each replacement starts off in `ParserReplacement` form but is converted to"] # [doc = " `NodeReplacement` form when it is attached to a single AST node, via"] # [doc = " `LazyAttrTokenStreamImpl`."] pub type ParserReplacement = (ParserRange , Option < AttrsTarget >) ;
+}

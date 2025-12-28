@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl MacroDylib { # [doc = " Creates a new MacroDylib instance with the given path."] pub fn new (path : AbsPathBuf) -> MacroDylib { MacroDylib { path } } }
+}

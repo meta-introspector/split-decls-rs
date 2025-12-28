@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Implements one or more COM interfaces."] # [doc = ""] # [doc = " # Example"] # [doc = " ```rust,no_run"] # [doc = " use windows_core::*;"] # [doc = ""] # [doc = " #[interface(\"094d70d6-5202-44b8-abb8-43860da5aca2\")]"] # [doc = " unsafe trait IValue: IUnknown {"] # [doc = "     fn GetValue(&self, value: *mut i32) -> HRESULT;"] # [doc = " }"] # [doc = ""] # [doc = " #[implement(IValue)]"] # [doc = " struct Value(i32);"] # [doc = ""] # [doc = " impl IValue_Impl for Value_Impl {"] # [doc = "     unsafe fn GetValue(&self, value: *mut i32) -> HRESULT {"] # [doc = "         *value = self.0;"] # [doc = "         HRESULT(0)"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " let object: IValue = Value(123).into();"] # [doc = " // Call interface methods..."] # [doc = " ```"] # [proc_macro_attribute] pub fn implement (attributes : proc_macro :: TokenStream , type_tokens : proc_macro :: TokenStream ,) -> proc_macro :: TokenStream { implement_core (attributes . into () , type_tokens . into ()) . into () }
+}

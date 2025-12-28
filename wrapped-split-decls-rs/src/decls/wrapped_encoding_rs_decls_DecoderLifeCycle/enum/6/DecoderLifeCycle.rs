@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclenum! {
 # [doc = " Tracks the life cycle of a decoder from BOM sniffing to conversion to end."] # [derive (PartialEq , Debug , Copy , Clone)] enum DecoderLifeCycle { # [doc = " The decoder has seen no input yet."] AtStart , # [doc = " The decoder has seen no input yet but expects UTF-8."] AtUtf8Start , # [doc = " The decoder has seen no input yet but expects UTF-16BE."] AtUtf16BeStart , # [doc = " The decoder has seen no input yet but expects UTF-16LE."] AtUtf16LeStart , # [doc = " The decoder has seen EF."] SeenUtf8First , # [doc = " The decoder has seen EF, BB."] SeenUtf8Second , # [doc = " The decoder has seen FE."] SeenUtf16BeFirst , # [doc = " The decoder has seen FF."] SeenUtf16LeFirst , # [doc = " Saw EF, BB but not BF, there was a buffer boundary after BB and the"] # [doc = " underlying decoder reported EF as an error, so we need to remember to"] # [doc = " push BB before the next buffer."] ConvertingWithPendingBB , # [doc = " No longer looking for a BOM and EOF not yet seen."] Converting , # [doc = " EOF has been seen."] Finished , }
+}

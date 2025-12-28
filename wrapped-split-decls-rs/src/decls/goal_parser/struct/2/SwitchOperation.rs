@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [derive (Debug , Deserialize , Serialize , Clone)] pub struct SwitchOperation { # [serde (rename = "type")] pub op_type : String , pub match_on : String , pub cases : HashMap < String , Vec < Task > > , # [serde (default)] pub default : Option < Vec < Task > > , }
+}

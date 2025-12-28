@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn main () { let out_dir = PathBuf :: from (env :: var ("OUT_DIR") . unwrap ()) ; let dest_path = out_dir . join ("generated.rs") ; let mut generated_code = String :: new () ; let src_dir = PathBuf :: from (env :: var ("CARGO_MANIFEST_DIR") . unwrap ()) . join ("src") ; let mut file_names = Vec :: new () ; let mut test_routines = Vec :: new () ; for entry in fs :: read_dir (& src_dir) . unwrap () { let entry = entry . unwrap () ; let path = entry . path () ; if path . is_file () { if let Some (file_name_os) = path . file_stem () { if let Some (file_name) = file_name_os . to_str () { file_names . push (format ! ("\"{}\"" , file_name)) ; if path . extension () . map_or (false , | ext | ext == "rs") && file_name != "lib" { test_routines . push (format ! (r###"
                             #[test]
                             fn test_module_{0}() {{
@@ -17,3 +18,4 @@ fn main () { let out_dir = PathBuf :: from (env :: var ("OUT_DIR") . unwrap ()) 
         "### , file_names . join (", "))) ; generated_code . push_str ("#[cfg(test)]\nmod generated_tests {
 ") ; for test_routine in test_routines { generated_code . push_str (& test_routine) ; generated_code . push_str ("\n") ; } generated_code . push_str ("}
 ") ; fs :: write (& dest_path , & generated_code) . unwrap () ; println ! ("cargo:rerun-if-changed={}" , src_dir . display ()) ; }
+}

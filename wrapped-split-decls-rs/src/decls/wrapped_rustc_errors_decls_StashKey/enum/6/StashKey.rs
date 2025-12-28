@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclenum! {
 # [doc = " A key denoting where from a diagnostic was stashed."] # [derive (Copy , Clone , PartialEq , Eq , Hash , Debug)] pub enum StashKey { ItemNoType , UnderscoreForArrayLengths , EarlySyntaxWarning , CallIntoMethod , # [doc = " When an invalid lifetime e.g. `'2` should be reinterpreted"] # [doc = " as a char literal in the parser"] LifetimeIsChar , # [doc = " Maybe there was a typo where a comma was forgotten before"] # [doc = " FRU syntax"] MaybeFruTypo , CallAssocMethod , AssociatedTypeSuggestion , # [doc = " Query cycle detected, stashing in favor of a better error."] Cycle , UndeterminedMacroResolution , # [doc = " Used by `Parser::maybe_recover_trailing_expr`"] ExprInPat , # [doc = " If in the parser we detect a field expr with turbofish generic params it's possible that"] # [doc = " it's a method call without parens. If later on in `hir_typeck` we find out that this is"] # [doc = " the case we suppress this message and we give a better suggestion."] GenericInFieldExpr , }
+}

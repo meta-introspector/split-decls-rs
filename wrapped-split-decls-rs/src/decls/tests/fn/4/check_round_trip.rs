@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn check_round_trip < T : Encodable < FileEncoder > + for < 'a > Decodable < MemDecoder < 'a > > + PartialEq + Debug , > (values : Vec < T > ,) { let tmpfile = tempfile :: NamedTempFile :: new () . unwrap () ; let tmpfile = tmpfile . path () ; let mut encoder = FileEncoder :: new (& tmpfile) . unwrap () ; for value in & values { Encodable :: encode (value , & mut encoder) ; } encoder . finish () . unwrap () ; let data = fs :: read (& tmpfile) . unwrap () ; let mut decoder = MemDecoder :: new (& data [..] , 0) . unwrap () ; for value in values { let decoded = Decodable :: decode (& mut decoder) ; assert_eq ! (value , decoded) ; } }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Instrument the function, by fully parsing the function body,"] # [doc = " which allows us to rewrite some statements related to async-like patterns."] fn instrument_precise (args : attr :: InstrumentArgs , item : proc_macro :: TokenStream ,) -> Result < proc_macro :: TokenStream , syn :: Error > { let input = syn :: parse :: < ItemFn > (item) ? ; let instrumented_function_name = input . sig . ident . to_string () ; if input . sig . constness . is_some () { return Ok (quote ! { compile_error ! ("the `#[instrument]` attribute may not be used with `const fn`s") } . into ()) ; } if let Some (async_like) = expand :: AsyncInfo :: from_fn (& input) { return async_like . gen_async (args , instrumented_function_name . as_str ()) ; } let input = MaybeItemFn :: from (input) ; Ok (expand :: gen_function (input . as_ref () , args , instrumented_function_name . as_str () , None ,) . into ()) }
+}

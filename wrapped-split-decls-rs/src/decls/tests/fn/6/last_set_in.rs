@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn last_set_in () { fn easy (set : & IntervalSet < usize > , needle : impl RangeBounds < usize >) -> Option < usize > { let mut last_leq = None ; for e in set . iter () { if needle . contains (& e) { last_leq = Some (e) ; } } last_leq } # [track_caller] fn cmp (set : & IntervalSet < usize > , needle : impl RangeBounds < usize > + Clone + std :: fmt :: Debug) { assert_eq ! (set . last_set_in (needle . clone ()) , easy (set , needle . clone ()) , "{:?} in {:?}" , needle , set) ; } let mut set = IntervalSet :: new (300) ; cmp (& set , 50 ..= 50) ; set . insert (64) ; cmp (& set , 64 ..= 64) ; set . insert (64 - 1) ; cmp (& set , 0 ..= 64 - 1) ; cmp (& set , 0 ..= 5) ; cmp (& set , 10 .. 100) ; set . insert (100) ; cmp (& set , 100 .. 110) ; cmp (& set , 99 .. 100) ; cmp (& set , 99 ..= 100) ; for i in 0 ..= 30 { for j in i ..= 30 { for k in 0 .. 30 { let mut set = IntervalSet :: new (100) ; cmp (& set , .. j) ; cmp (& set , i ..) ; cmp (& set , i .. j) ; cmp (& set , i ..= j) ; set . insert (k) ; cmp (& set , .. j) ; cmp (& set , i ..) ; cmp (& set , i .. j) ; cmp (& set , i ..= j) ; } } } }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn pdub_crisscross_more () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "a1") ; relation . add ("a" , "b1") ; relation . add ("b" , "a1") ; relation . add ("b" , "b1") ; relation . add ("a1" , "a2") ; relation . add ("a1" , "b2") ; relation . add ("b1" , "a2") ; relation . add ("b1" , "b2") ; relation . add ("a2" , "a3") ; relation . add ("a3" , "x") ; relation . add ("b2" , "x") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["a1" , "b1"]) ; assert_eq ! (relation . minimal_upper_bounds ("a1" , "b1") , vec ! ["a2" , "b2"]) ; assert_eq ! (relation . postdom_upper_bound ("a" , "b") , Some ("x")) ; assert_eq ! (relation . postdom_parent ("a") , Some ("x")) ; assert_eq ! (relation . postdom_parent ("b") , Some ("x")) ; }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn update_field_report (integer : i32 , field_name : & str , field_type : & str , context : & str , reports : & mut HashMap < i32 , FieldUsageReport >) { let report = reports . entry (integer) . or_insert_with (| | FieldUsageReport { integer_value : integer , total_usage_count : 0 , field_usage : HashMap :: new () , field_types : HashMap :: new () , usage_contexts : HashMap :: new () , }) ; report . total_usage_count += 1 ; * report . field_usage . entry (field_name . to_string ()) . or_insert (0) += 1 ; * report . field_types . entry (field_type . to_string ()) . or_insert (0) += 1 ; * report . usage_contexts . entry (context . to_string ()) . or_insert (0) += 1 ; }
+}

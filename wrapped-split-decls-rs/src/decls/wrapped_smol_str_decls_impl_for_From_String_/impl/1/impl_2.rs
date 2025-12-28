@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl From < String > for SmolStr { # [inline (always)] fn from (text : String) -> Self { Self :: new (text) } }
+}

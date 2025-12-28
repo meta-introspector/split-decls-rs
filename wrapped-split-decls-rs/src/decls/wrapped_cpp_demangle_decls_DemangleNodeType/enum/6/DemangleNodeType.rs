@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclenum! {
 # [doc = " The type of a demangled AST node."] # [doc = " This is only partial, not all nodes are represented."] # [derive (Clone , Copy , Debug , Eq , PartialEq , Ord , PartialOrd , Hash)] pub enum DemangleNodeType { # [doc = " Entering a <prefix> production"] Prefix , # [doc = " Entering a <template-prefix> production"] TemplatePrefix , # [doc = " Entering a <template-args> production"] TemplateArgs , # [doc = " Entering a <unqualified-name> production"] UnqualifiedName , # [doc = " Entering a <template-param> production"] TemplateParam , # [doc = " Entering a <decltype> production"] Decltype , # [doc = " Entering a <data-member-prefix> production"] DataMemberPrefix , # [doc = " Entering a <nested-name> production"] NestedName , # [doc = " Entering a <special-name> production that is a vtable."] VirtualTable , # [doc = " Additional values may be added in the future. Use a"] # [doc = " _ pattern for compatibility."] __NonExhaustive , }
+}

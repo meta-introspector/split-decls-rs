@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn extract_ast_context (symbol : & str) -> String { if symbol . contains ("rustc_") { "compiler_core" . to_string () } else if symbol . contains ("std::") || symbol . contains ("core::") { "standard_library" . to_string () } else if symbol . contains ("alloc") { "memory_management" . to_string () } else if symbol . contains ("hash") || symbol . contains ("crypto") { "cryptography" . to_string () } else if symbol . contains ("io") || symbol . contains ("net") { "input_output" . to_string () } else if symbol . contains ("test") { "testing" . to_string () } else { "application_code" . to_string () } }
+}

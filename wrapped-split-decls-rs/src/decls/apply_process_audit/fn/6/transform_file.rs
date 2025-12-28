@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn transform_file (file_path : & Path) -> Result < String > { let content = std :: fs :: read_to_string (file_path) ? ; let mut syntax_tree : File = syn :: parse_str (& content) ? ; let mut transformer = ProcessAuditTransformer ; transformer . visit_file_mut (& mut syntax_tree) ; let audit_macro = quote ! { macro_rules ! audit_execute { ($ cmd : expr) => { { let start_time = std :: time :: Instant :: now () ; println ! ("🔍 AUDIT: Executing command at {:?}" , start_time) ; println ! ("📋 Command: {:?}" , stringify ! ($ cmd)) ; let result = $ cmd ; let duration = start_time . elapsed () ; match & result { Ok (output) => { println ! ("✅ SUCCESS: Command completed in {:?}" , duration) ; println ! ("📤 Exit status: {:?}" , output . status) ; if ! output . stdout . is_empty () { println ! ("📝 Stdout: {}" , String :: from_utf8_lossy (& output . stdout)) ; } if ! output . stderr . is_empty () { println ! ("⚠️ Stderr: {}" , String :: from_utf8_lossy (& output . stderr)) ; } } Err (e) => { println ! ("❌ ERROR: Command failed in {:?}: {}" , duration , e) ; } } result } } ; } } ; let final_code = quote ! { # audit_macro # syntax_tree } ; Ok (final_code . to_string ()) }
+}

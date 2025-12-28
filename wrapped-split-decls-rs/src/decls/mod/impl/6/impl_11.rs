@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl < 'a > BroadcastContext < 'a > { pub (super) fn with < R > (f : impl FnOnce (BroadcastContext < '_ >) -> R) -> R { let worker_thread = WorkerThread :: current () ; assert ! (! worker_thread . is_null ()) ; f (BroadcastContext { worker : unsafe { & * worker_thread } , _marker : PhantomData }) } # [doc = " Our index amongst the broadcast threads (ranges from `0..self.num_threads()`)."] # [inline] pub fn index (& self) -> usize { self . worker . index () } # [doc = " The number of threads receiving the broadcast in the thread pool."] # [doc = ""] # [doc = " # Future compatibility note"] # [doc = ""] # [doc = " Future versions of Rayon might vary the number of threads over time, but"] # [doc = " this method will always return the number of threads which are actually"] # [doc = " receiving your particular `broadcast` call."] # [inline] pub fn num_threads (& self) -> usize { self . worker . registry () . num_threads () } }
+}

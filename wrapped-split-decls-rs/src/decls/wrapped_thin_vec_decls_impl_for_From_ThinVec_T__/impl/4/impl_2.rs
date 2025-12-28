@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl < T > From < ThinVec < T > > for Box < [T] > { # [doc = " Convert a vector into a boxed slice."] # [doc = ""] # [doc = " If `v` has excess capacity, its items will be moved into a"] # [doc = " newly-allocated buffer with exactly the right capacity."] # [doc = ""] # [doc = " **NOTE:** unlike `std`, this must reallocate to change the layout!"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use thin_vec::{ThinVec, thin_vec};"] # [doc = " assert_eq!(Box::from(thin_vec![1, 2, 3]), thin_vec![1, 2, 3].into_iter().collect());"] # [doc = " ```"] fn from (v : ThinVec < T >) -> Self { v . into_iter () . collect () } }
+}

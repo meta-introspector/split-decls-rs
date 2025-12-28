@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [derive (Debug , Clone , PartialEq , Serialize , Deserialize)] pub struct TermScores { pub local_score : f64 , pub module_score : f64 , pub global_score : f64 , }
+}

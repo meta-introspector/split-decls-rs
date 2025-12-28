@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn analyze_field_usage (symbol : & str , node : & serde_json :: Value , reports : & mut HashMap < i32 , FieldUsageReport >) { let integers = extract_integers_from_symbol (symbol) ; if let Some (level) = node . get ("level") . and_then (| v | v . as_u64 ()) { let level_int = level as i32 ; update_field_report (level_int , "level" , "u32" , "node_metadata" , reports) ; } if let Some (weight) = node . get ("weight") . and_then (| v | v . as_f64 ()) { let weight_int = (weight * 100.0) as i32 ; if weight_int >= - 1000 && weight_int <= 1000 { update_field_report (weight_int , "weight" , "f64" , "node_metadata" , reports) ; } } if let Some (complexity) = node . get ("complexity_score") . and_then (| v | v . as_f64 ()) { let complexity_int = complexity as i32 ; if complexity_int >= - 100 && complexity_int <= 1000 { update_field_report (complexity_int , "complexity_score" , "f64" , "node_metadata" , reports) ; } } for integer in integers { let field_context = determine_field_context (symbol , integer) ; let field_type = infer_field_type (symbol , integer) ; let usage_context = extract_usage_context (symbol) ; update_field_report (integer , & field_context , & field_type , & usage_context , reports) ; } }
+}

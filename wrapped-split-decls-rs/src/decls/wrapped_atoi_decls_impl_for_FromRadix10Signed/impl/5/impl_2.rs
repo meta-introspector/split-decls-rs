@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl < I > FromRadix10Signed for I where I : Zero + One + AddAssign + SubAssign + MulAssign , { fn from_radix_10_signed (text : & [u8]) -> (Self , usize) { let mut index ; let mut number = I :: zero () ; let (sign , offset) = text . first () . and_then (| & byte | Sign :: try_from (byte)) . map (| sign | (sign , 1)) . unwrap_or ((Sign :: Plus , 0)) ; index = offset ; match sign { Sign :: Plus => { while index != text . len () { if let Some (digit) = ascii_to_digit :: < I > (text [index]) { number *= nth (10) ; number += digit ; index += 1 ; } else { break ; } } } Sign :: Minus => { while index != text . len () { if let Some (digit) = ascii_to_digit :: < I > (text [index]) { number *= nth (10) ; number -= digit ; index += 1 ; } else { break ; } } } } (number , index) } }
+}

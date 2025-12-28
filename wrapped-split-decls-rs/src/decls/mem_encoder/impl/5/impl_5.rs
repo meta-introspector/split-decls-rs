@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl Encoder for MemEncoder { write_leb128 ! (emit_usize , usize , write_usize_leb128) ; write_leb128 ! (emit_u128 , u128 , write_u128_leb128) ; write_leb128 ! (emit_u64 , u64 , write_u64_leb128) ; write_leb128 ! (emit_u32 , u32 , write_u32_leb128) ; # [inline] fn emit_u16 (& mut self , v : u16) { self . write_array (v . to_le_bytes ()) ; } # [inline] fn emit_u8 (& mut self , v : u8) { self . write_array ([v]) ; } write_leb128 ! (emit_isize , isize , write_isize_leb128) ; write_leb128 ! (emit_i128 , i128 , write_i128_leb128) ; write_leb128 ! (emit_i64 , i64 , write_i64_leb128) ; write_leb128 ! (emit_i32 , i32 , write_i32_leb128) ; # [inline] fn emit_i16 (& mut self , v : i16) { self . write_array (v . to_le_bytes ()) ; } # [inline] fn emit_raw_bytes (& mut self , s : & [u8]) { self . data . extend_from_slice (s) ; } }
+}

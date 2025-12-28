@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [llm_error_message (message = "Module file not found for: du")] # [llm_context (crate_name = "wrapped_cargo_util" , module_name = "du")] pub struct wrapped_cargo_util_decls_module_not_found_du ;
+}

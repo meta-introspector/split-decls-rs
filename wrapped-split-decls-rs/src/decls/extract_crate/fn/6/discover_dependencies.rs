@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Recursively discover all dependencies"] fn discover_dependencies (output2_path : & Path , crate_info : & CrateInfo , dependency_graph : & mut HashMap < String , CrateInfo > , all_crates : & mut HashSet < String > , max_depth : usize , include_dev_deps : bool , verbose : bool ,) -> Result < () > { if max_depth == 0 || all_crates . contains (& crate_info . name) { return Ok (()) ; } all_crates . insert (crate_info . name . clone ()) ; dependency_graph . insert (crate_info . name . clone () , crate_info . clone ()) ; if verbose { println ! ("  📋 Processing: {} ({} deps)" , crate_info . name , crate_info . dependencies . len ()) ; } for dep_name in & crate_info . dependencies { if let Ok (dep_crate) = find_wrapped_crate (output2_path , dep_name) { discover_dependencies (output2_path , & dep_crate , dependency_graph , all_crates , max_depth - 1 , include_dev_deps , verbose ,) ? ; } } if include_dev_deps { for dep_name in & crate_info . dev_dependencies { if let Ok (dep_crate) = find_wrapped_crate (output2_path , dep_name) { discover_dependencies (output2_path , & dep_crate , dependency_graph , all_crates , max_depth - 1 , include_dev_deps , verbose ,) ? ; } } } Ok (()) }
+}

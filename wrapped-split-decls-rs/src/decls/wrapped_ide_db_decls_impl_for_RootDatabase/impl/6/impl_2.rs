@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl RootDatabase { pub fn new (lru_capacity : Option < u16 >) -> RootDatabase { let mut db = RootDatabase { storage : ManuallyDrop :: new (salsa :: Storage :: default ()) , files : Default :: default () , crates_map : Default :: default () , nonce : Nonce :: new () , } ; db . set_all_crates (Arc :: new (Box :: new ([]))) ; CrateGraphBuilder :: default () . set_in_db (& mut db) ; db . set_proc_macros_with_durability (Default :: default () , Durability :: MEDIUM) ; _ = crate :: symbol_index :: LibraryRoots :: builder (Default :: default ()) . durability (Durability :: MEDIUM) . new (& db) ; _ = crate :: symbol_index :: LocalRoots :: builder (Default :: default ()) . durability (Durability :: MEDIUM) . new (& db) ; db . set_expand_proc_attr_macros_with_durability (false , Durability :: HIGH) ; db . update_base_query_lru_capacities (lru_capacity) ; db } pub fn enable_proc_attr_macros (& mut self) { self . set_expand_proc_attr_macros_with_durability (true , Durability :: HIGH) ; } pub fn update_base_query_lru_capacities (& mut self , _lru_capacity : Option < u16 >) { } pub fn update_lru_capacities (& mut self , _lru_capacities : & FxHashMap < Box < str > , u16 >) { } }
+}

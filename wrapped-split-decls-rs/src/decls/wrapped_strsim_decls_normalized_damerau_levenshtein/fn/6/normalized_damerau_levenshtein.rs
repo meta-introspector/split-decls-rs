@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Calculates a normalized score of the Damerau–Levenshtein algorithm between"] # [doc = " 0.0 and 1.0 (inclusive), where 1.0 means the strings are the same."] # [doc = ""] # [doc = " ```"] # [doc = " use strsim::normalized_damerau_levenshtein;"] # [doc = ""] # [doc = " assert!((normalized_damerau_levenshtein(\"levenshtein\", \"löwenbräu\") - 0.27272).abs() < 0.00001);"] # [doc = " assert!((normalized_damerau_levenshtein(\"\", \"\") - 1.0).abs() < 0.00001);"] # [doc = " assert!(normalized_damerau_levenshtein(\"\", \"flower\").abs() < 0.00001);"] # [doc = " assert!(normalized_damerau_levenshtein(\"tree\", \"\").abs() < 0.00001);"] # [doc = " assert!((normalized_damerau_levenshtein(\"sunglasses\", \"sunglasses\") - 1.0).abs() < 0.00001);"] # [doc = " ```"] pub fn normalized_damerau_levenshtein (a : & str , b : & str) -> f64 { if a . is_empty () && b . is_empty () { return 1.0 ; } let len1 = a . chars () . count () ; let len2 = b . chars () . count () ; let dist = damerau_levenshtein_impl (a . chars () , len1 , b . chars () , len2) ; 1.0 - (dist as f64) / (max (len1 , len2) as f64) }
+}

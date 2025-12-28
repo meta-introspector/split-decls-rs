@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [llm_error_message (message = "Module file not found for: as_symbol_name")] # [llm_context (crate_name = "wrapped_libloading" , module_name = "as_symbol_name")] pub struct wrapped_libloading_decls_module_not_found_as_symbol_name ;
+}

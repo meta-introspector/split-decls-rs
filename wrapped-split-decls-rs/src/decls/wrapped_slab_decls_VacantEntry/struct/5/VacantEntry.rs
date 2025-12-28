@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [doc = " A handle to a vacant entry in a `Slab`."] # [doc = ""] # [doc = " `VacantEntry` allows constructing values with the key that they will be"] # [doc = " assigned to."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use slab::*;"] # [doc = " let mut slab = Slab::new();"] # [doc = ""] # [doc = " let hello = {"] # [doc = "     let entry = slab.vacant_entry();"] # [doc = "     let key = entry.key();"] # [doc = ""] # [doc = "     entry.insert((key, \"hello\"));"] # [doc = "     key"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(hello, slab[hello].0);"] # [doc = " assert_eq!(\"hello\", slab[hello].1);"] # [doc = " ```"] # [derive (Debug)] pub struct VacantEntry < 'a , T > { slab : & 'a mut Slab < T > , key : usize , }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl RegistryId { # [inline (always)] # [doc = " Verifies that the current thread is associated with the registry and returns its unique"] # [doc = " index within the registry. This panics if the current thread is not associated with this"] # [doc = " registry."] # [doc = ""] # [doc = " Note that there's a race possible where the identifier in `THREAD_DATA` could be reused"] # [doc = " so this can succeed from a different registry."] fn verify (self) -> usize { let (id , index) = THREAD_DATA . with (| data | (data . registry_id . get () , data . index . get ())) ; if id == self { index } else { outline (| | panic ! ("Unable to verify registry association")) } } }
+}

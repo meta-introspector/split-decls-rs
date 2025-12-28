@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Find wrapped crate by name in output2"] fn find_wrapped_crate (output2_path : & Path , crate_name : & str) -> Result < CrateInfo > { let wrapped_name = format ! ("wrapped-{}" , crate_name) ; let crate_path = output2_path . join (& wrapped_name) ; if ! crate_path . exists () { return Err (anyhow :: anyhow ! ("Wrapped crate not found: {}" , wrapped_name)) ; } let cargo_toml = crate_path . join ("Cargo.toml") ; let (deps , dev_deps) = parse_dependencies (& cargo_toml) ? ; Ok (CrateInfo { name : wrapped_name , path : crate_path , dependencies : deps , dev_dependencies : dev_deps , }) }
+}

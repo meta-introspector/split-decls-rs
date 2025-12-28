@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 struct AstMetricVisitor { max_depth : usize , current_depth : usize , node_count : usize , }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [doc = " DashMap is an implementation of a concurrent associative array/hashmap in Rust."] # [doc = ""] # [doc = " DashMap tries to implement an easy to use API similar to `std::collections::HashMap`"] # [doc = " with some slight changes to handle concurrency."] # [doc = ""] # [doc = " DashMap tries to be very simple to use and to be a direct replacement for `RwLock<HashMap<K, V>>`."] # [doc = " To accomplish this, all methods take `&self` instead of modifying methods taking `&mut self`."] # [doc = " This allows you to put a DashMap in an `Arc<T>` and share it between threads while being able to modify it."] # [doc = ""] # [doc = " Documentation mentioning locking behaviour acts in the reference frame of the calling thread."] # [doc = " This means that it is safe to ignore it across multiple threads."] pub struct DashMap < K , V , S = RandomState > { shift : usize , shards : Box < [CachePadded < RwLock < HashMap < K , V > > >] > , hasher : S , }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn main () -> Result < () > { std :: panic :: set_hook (Box :: new (| panic_info | { eprintln ! ("🚨 PANIC DETECTED: {}" , panic_info) ; if let Some (location) = panic_info . location () { eprintln ! ("📍 Location: {}:{}:{}" , location . file () , location . line () , location . column ()) ; } if let Some (payload) = panic_info . payload () . downcast_ref :: < & str > () { eprintln ! ("💥 Payload: {}" , payload) ; } eprintln ! ("🔍 This may be a stack overflow - check for recursive function calls") ; std :: process :: exit (1) ; })) ; let builder = std :: thread :: Builder :: new () . name ("main_with_large_stack" . into ()) . stack_size (128 * 1024 * 1024) ; let handle = builder . spawn (| | { actual_main () }) ? ; handle . join () . unwrap () }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn union_two_sets () { let mut set1 : DenseBitSet < usize > = DenseBitSet :: new_empty (65) ; let mut set2 : DenseBitSet < usize > = DenseBitSet :: new_empty (65) ; assert ! (set1 . insert (3)) ; assert ! (! set1 . insert (3)) ; assert ! (set2 . insert (5)) ; assert ! (set2 . insert (64)) ; assert ! (set1 . union (& set2)) ; assert ! (! set1 . union (& set2)) ; assert ! (set1 . contains (3)) ; assert ! (! set1 . contains (4)) ; assert ! (set1 . contains (5)) ; assert ! (! set1 . contains (63)) ; assert ! (set1 . contains (64)) ; }
+}

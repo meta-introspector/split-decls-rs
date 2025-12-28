@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn left_aligned_text () { let labels = AllNodesLabelled (vec ! ["if test {\
        \\l    branch1\
        \\l} else {\
@@ -18,3 +19,4 @@ use std::collections::HashMap;
     N2 -> N3[label=";"];
 }
 "#) ; }
+}

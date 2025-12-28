@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-impl < 'a > fmt :: Debug for BroadcastContext < 'a > { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt . debug_struct ("BroadcastContext") . field ("index" , & self . index ()) . field ("num_threads" , & self . num_threads ()) . field ("pool_id" , & self . worker . registry () . id ()) . finish () } }
+mkdeclimpl! {
+impl MarkedAttrs { pub fn new () -> Self { MarkedAttrs (GrowableBitSet :: new_empty ()) } pub fn mark (& mut self , attr : & Attribute) { self . 0 . insert (attr . id) ; } pub fn is_marked (& self , attr : & Attribute) -> bool { self . 0 . contains (attr . id) } }
+}

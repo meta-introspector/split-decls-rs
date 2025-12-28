@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 pub (crate) fn print_attribute (input : Structure < '_ >) -> TokenStream { let span_error = | span , message : & str | { quote_spanned ! { span => const _ : () = :: core :: compile_error ! (# message) ; } } ; let code = match & input . ast () . data { Data :: Enum (e) => { let arms = e . variants . iter () . map (| x | { let ident = & x . ident ; let (pat , code) = print_fields (ident , & x . fields) ; quote ! { Self ::# ident # pat => { # code } } }) . collect :: < Vec < _ > > () ; quote ! { match self { # (# arms) * } } } Data :: Struct (s) => { let (pat , code) = print_fields (& input . ast () . ident , & s . fields) ; quote ! { let Self # pat = self ; # code } } Data :: Union (u) => { return span_error (u . union_token . span () , "can't derive PrintAttribute on unions") ; } } ; # [allow (keyword_idents_2024)] input . gen_impl (quote ! { # [allow (unused)] gen impl PrintAttribute for @ Self { fn should_render (& self) -> bool { true } fn print_attribute (& self , __p : & mut rustc_ast_pretty :: pp :: Printer) { # code } } }) }
+}

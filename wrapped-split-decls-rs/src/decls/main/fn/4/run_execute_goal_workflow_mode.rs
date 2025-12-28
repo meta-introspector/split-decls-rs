@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn run_execute_goal_workflow_mode (verbose : bool , dry_run : bool , goal_file : & PathBuf , global_config : & SplitDeclsConfig ,) -> Result < () > { if verbose { if dry_run { println ! ("*** Running in DRY-RUN mode. No files will be modified. ***") ; } println ! ("Executing workflow from: {}" , goal_file . display ()) ; } let goal_config = GoalConfig :: load_from_file (goal_file) . context (format ! ("Failed to load goal file from {}" , goal_file . display ())) ? ; if verbose { println ! ("Workflow execution disabled - bootstrap only needs file I/O") ; } Ok (()) }
+}

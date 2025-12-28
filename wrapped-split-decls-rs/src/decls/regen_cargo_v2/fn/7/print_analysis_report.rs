@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn print_analysis_report (analysis : & DependencyAnalysis) { println ! ("\n🔍 DEPENDENCY ANALYSIS REPORT") ; println ! ("============================") ; println ! ("Total crates analyzed: {}" , analysis . total_crates) ; println ! ("Dependency conflicts found: {}" , analysis . dependency_conflicts . len ()) ; if ! analysis . dependency_conflicts . is_empty () { println ! ("\n❌ CONFLICTS:") ; for conflict in & analysis . dependency_conflicts { println ! ("  📦 {}" , conflict . dependency_name) ; for detail in & conflict . conflict_details { println ! ("    - {}" , detail) ; } } } println ! ("\n📊 DEPENDENCY TYPE STATISTICS:") ; let mut sorted_deps : Vec < _ > = analysis . dependency_types . iter () . collect () ; sorted_deps . sort_by_key (| (name , _) | name . as_str ()) ; for (dep_name , stats) in sorted_deps . iter () . take (10) { if stats . string_deps > 0 || stats . table_deps > 0 { println ! ("  📦 {}: string={}, table={}, workspace={}, path={}, version={}" , dep_name , stats . string_deps , stats . table_deps , stats . workspace_deps , stats . path_deps , stats . version_deps) ; } } if sorted_deps . len () > 10 { println ! ("  ... and {} more dependencies" , sorted_deps . len () - 10) ; } println ! () ; }
+}

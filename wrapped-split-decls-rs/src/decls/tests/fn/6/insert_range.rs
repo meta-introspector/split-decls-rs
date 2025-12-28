@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn insert_range () { # [track_caller] fn check < R > (range : R) where R : RangeBounds < usize > + Clone + IntoIterator < Item = usize > + std :: fmt :: Debug , { let mut set = IntervalSet :: new (300) ; set . insert_range (range . clone ()) ; for i in set . iter () { assert ! (range . contains (& i)) ; } for i in range . clone () { assert ! (set . contains (i) , "A: {} in {:?}, inserted {:?}" , i , set , range) ; } set . insert_range (range . clone ()) ; for i in set . iter () { assert ! (range . contains (& i) , "{} in {:?}" , i , set) ; } for i in range . clone () { assert ! (set . contains (i) , "B: {} in {:?}, inserted {:?}" , i , set , range) ; } } check (10 .. 10) ; check (10 .. 100) ; check (10 .. 30) ; check (0 .. 5) ; check (0 .. 250) ; check (200 .. 250) ; check (10 ..= 10) ; check (10 ..= 100) ; check (10 ..= 30) ; check (0 ..= 5) ; check (0 ..= 250) ; check (200 ..= 250) ; for i in 0 .. 30 { for j in i .. 30 { check (i .. j) ; check (i ..= j) ; } } }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl < T > ChunkedBitSet < T > { pub fn domain_size (& self) -> usize { self . domain_size } # [inline] fn last_chunk_size (& self) -> ChunkSize { let n = self . domain_size % CHUNK_BITS ; if n == 0 { CHUNK_BITS as ChunkSize } else { n as ChunkSize } } # [doc = " All the chunks have a chunk_domain_size of `CHUNK_BITS` except the final one."] # [inline] fn chunk_domain_size (& self , chunk : usize) -> ChunkSize { if chunk == self . chunks . len () - 1 { self . last_chunk_size () } else { CHUNK_BITS as ChunkSize } } # [cfg (test)] fn assert_valid (& self) { if self . domain_size == 0 { assert ! (self . chunks . is_empty ()) ; return ; } assert ! ((self . chunks . len () - 1) * CHUNK_BITS <= self . domain_size) ; assert ! (self . chunks . len () * CHUNK_BITS >= self . domain_size) ; for (chunk_index , chunk) in self . chunks . iter () . enumerate () { let chunk_domain_size = self . chunk_domain_size (chunk_index) ; chunk . assert_valid (chunk_domain_size) ; } } }
+}

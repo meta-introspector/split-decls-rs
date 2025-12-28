@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [cold] fn find_best_match_for_name_impl (use_substring_score : bool , candidates : & [Symbol] , lookup_symbol : Symbol , dist : Option < usize > ,) -> Option < Symbol > { let lookup = lookup_symbol . as_str () ; let lookup_uppercase = lookup . to_uppercase () ; if let Some (c) = candidates . iter () . find (| c | c . as_str () . to_uppercase () == lookup_uppercase) { return Some (* c) ; } let lookup_len = lookup . chars () . count () ; let mut dist = dist . unwrap_or_else (| | cmp :: max (lookup_len , 3) / 3) ; let mut best = None ; let mut next_candidates = vec ! [] ; for c in candidates { match if use_substring_score { edit_distance_with_substrings (lookup , c . as_str () , dist) } else { edit_distance (lookup , c . as_str () , dist) } { Some (0) => return Some (* c) , Some (d) => { if use_substring_score { if d < dist { dist = d ; next_candidates . clear () ; } else { } next_candidates . push (* c) ; } else { dist = d - 1 ; } best = Some (* c) ; } None => { } } } if next_candidates . len () > 1 { debug_assert ! (use_substring_score) ; best = find_best_match_for_name_impl (false , & next_candidates , lookup_symbol , Some (lookup . len ()) ,) ; } if best . is_some () { return best ; } find_match_by_sorted_words (candidates , lookup) }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn handle_continuation_error < 'psess , T > (psess : & 'psess ParseSess , span : Span , message : & str , session_id_suffix : & str ,) -> PResult < 'psess , T > { let continuation = DefaultContinuation :: new (PathBuf :: from ("./introspector_state") , PathBuf :: from ("./introspector_resolution") ,) ; let state = CapturedState { session_id : format ! ("mve_error_{}" , session_id_suffix) , call_context : format ! ("Error during parsing: {}" , message) , stack_trace : vec ! [] , variables : serde_json :: to_value (format ! ("span: {:?}" , span)) . unwrap () , file_path : file ! () . to_string () , line_number : line ! () , column_number : column ! () , } ; match continuation . continue_execution (state) { Resolution :: Continue => { panic ! ("LLM resolved to Continue. Manual intervention needed for: {}" , message) ; } Resolution :: ModifyCode { file , line , column , new_code , } => { panic ! ("LLM resolved to ModifyCode. Manual intervention needed: file={}, line={}, col={}, code='{}'" , file , line , column , new_code) ; } } }
+}

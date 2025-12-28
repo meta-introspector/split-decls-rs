@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn sparse_matrix_iter () { let mut matrix : SparseBitMatrix < usize , usize > = SparseBitMatrix :: new (100) ; matrix . insert (3 , 22) ; matrix . insert (3 , 75) ; matrix . insert (2 , 99) ; matrix . insert (4 , 0) ; matrix . union_rows (3 , 5) ; let expected = [99] ; let mut iter = expected . iter () ; for i in matrix . iter (2) { let j = * iter . next () . unwrap () ; assert_eq ! (i , j) ; } assert ! (iter . next () . is_none ()) ; let expected = [22 , 75] ; let mut iter = expected . iter () ; for i in matrix . iter (3) { let j = * iter . next () . unwrap () ; assert_eq ! (i , j) ; } assert ! (iter . next () . is_none ()) ; let expected = [0] ; let mut iter = expected . iter () ; for i in matrix . iter (4) { let j = * iter . next () . unwrap () ; assert_eq ! (i , j) ; } assert ! (iter . next () . is_none ()) ; let expected = [22 , 75] ; let mut iter = expected . iter () ; for i in matrix . iter (5) { let j = * iter . next () . unwrap () ; assert_eq ! (i , j) ; } assert ! (iter . next () . is_none ()) ; }
+}

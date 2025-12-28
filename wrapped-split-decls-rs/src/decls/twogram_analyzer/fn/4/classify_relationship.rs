@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn classify_relationship (tokens : & (String , String)) -> String { let (first , second) = tokens ; match (first . as_str () , second . as_str ()) { (a , b) if a . contains ("src") && b . contains ("lib") => "source_library" . to_string () , (a , b) if a . contains ("cargo") && b . contains ("toml") => "config_file" . to_string () , (a , b) if a . contains ("decls") => "declaration_module" . to_string () , (a , b) if a . ends_with ("rs") => "rust_source" . to_string () , (a , b) if a . contains ("bin") => "binary_executable" . to_string () , (a , b) if a . contains ("test") => "test_module" . to_string () , _ => "generic_relationship" . to_string () , } }
+}

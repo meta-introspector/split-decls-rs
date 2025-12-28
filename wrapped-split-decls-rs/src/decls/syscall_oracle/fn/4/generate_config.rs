@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn generate_config (output : & str) -> Result < () > { let interceptor = create_default_syscall_interceptor () ; let json = serde_json :: to_string_pretty (& interceptor) ? ; std :: fs :: write (output , json) ? ; println ! ("📋 Generated syscall interceptor config: {}" , output) ; println ! ("🔧 Edit this file to customize syscall interception") ; println ! ("\n🛡️ Default syscall mappings:") ; for (call , wrapper) in & interceptor . syscall_mappings { println ! ("   • {} -> {} ({})" , call , wrapper . wrapper_macro , wrapper . safety_wrapper) ; } Ok (()) }
+}

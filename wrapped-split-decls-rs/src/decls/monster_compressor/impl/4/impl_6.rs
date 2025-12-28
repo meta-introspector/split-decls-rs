@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclimpl! {
 impl MonsterSignature { # [doc = " Calculate Monster Group compression ratio"] pub fn compression_ratio (& self) -> f64 { let original_size = self . original . len () as f64 ; let compressed_size = self . compressed_form . len () as f64 ; compressed_size / original_size } # [doc = " Generate Monster Group factorization"] pub fn monster_factorization (& self) -> String { format ! ("2^{} × 3^{} × 5^{} × 7^{}" , self . pairs . len () . min (46) , self . triples . len () . min (20) , self . pentas . len () . min (9) , self . heptas . len () . min (6)) } }
+}

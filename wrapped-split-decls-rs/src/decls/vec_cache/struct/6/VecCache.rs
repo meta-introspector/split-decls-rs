@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [doc = " In-memory cache for queries whose keys are densely-numbered IDs"] # [doc = " (e.g `CrateNum`, `LocalDefId`), and can therefore be used as indices"] # [doc = " into a dense vector of cached values."] # [doc = ""] # [doc = " (As of [#124780] the underlying storage is not an actual `Vec`, but rather"] # [doc = " a series of increasingly-large buckets, for improved performance when the"] # [doc = " parallel frontend is using multiple threads.)"] # [doc = ""] # [doc = " Each entry in the cache stores the query's return value (`V`), and also"] # [doc = " an associated index (`I`), which in practice is a `DepNodeIndex` used for"] # [doc = " query dependency tracking."] # [doc = ""] # [doc = " [#124780]: https://github.com/rust-lang/rust/pull/124780"] pub struct VecCache < K : Idx , V , I > { buckets : [AtomicPtr < Slot < V > > ; 21] , present : [AtomicPtr < Slot < () > > ; 21] , len : AtomicUsize , key : PhantomData < (K , I) > , }
+}

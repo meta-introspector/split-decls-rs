@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 pub fn debug_hygiene_data (verbose : bool) -> String { HygieneData :: with (| data | { if verbose { format ! ("{data:#?}") } else { let mut s = String :: from ("Expansions:") ; let mut debug_expn_data = | (id , expn_data) : (& ExpnId , & ExpnData) | { s . push_str (& format ! ("\n{:?}: parent: {:?}, call_site_ctxt: {:?}, def_site_ctxt: {:?}, kind: {:?}" , id , expn_data . parent , expn_data . call_site . ctxt () , expn_data . def_site . ctxt () , expn_data . kind ,)) } ; data . local_expn_data . iter_enumerated () . for_each (| (id , expn_data) | { let expn_data = expn_data . as_ref () . expect ("no expansion data for an expansion ID") ; debug_expn_data ((& id . to_expn_id () , expn_data)) }) ; # [allow (rustc :: potential_query_instability)] let mut foreign_expn_data : Vec < _ > = data . foreign_expn_data . iter () . collect () ; foreign_expn_data . sort_by_key (| (id , _) | (id . krate , id . local_id)) ; foreign_expn_data . into_iter () . for_each (debug_expn_data) ; s . push_str ("\n\nSyntaxContexts:") ; data . syntax_context_data . iter () . enumerate () . for_each (| (id , ctxt) | { s . push_str (& format ! ("\n#{}: parent: {:?}, outer_mark: ({:?}, {:?})" , id , ctxt . parent , ctxt . outer_expn , ctxt . outer_transparency ,)) ; }) ; s } }) }
+}

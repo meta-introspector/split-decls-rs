@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] # [allow (non_snake_case)] fn test_N3_Rem_P2 () { type A = NInt < UInt < UInt < UTerm , B1 > , B1 > > ; type B = PInt < UInt < UInt < UTerm , B1 > , B0 > > ; type N1 = NInt < UInt < UTerm , B1 > > ; # [allow (non_camel_case_types)] type N3RemP2 = < < A as Rem < B > > :: Output as Same < N1 > > :: Output ; assert_eq ! (< N3RemP2 as Integer >:: to_i64 () , < N1 as Integer >:: to_i64 ()) ; }
+}

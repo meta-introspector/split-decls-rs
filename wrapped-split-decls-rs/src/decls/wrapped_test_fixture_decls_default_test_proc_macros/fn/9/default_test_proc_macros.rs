@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn default_test_proc_macros () -> Box < [(String , ProcMacro)] > { Box :: new ([(r#"
 #[proc_macro_attribute]
 pub fn identity(_attr: TokenStream, item: TokenStream) -> TokenStream {
@@ -57,3 +58,4 @@ pub fn generate_suffixed_type(_attr: TokenStream, input: TokenStream) -> TokenSt
     input
 }
 "# . into () , ProcMacro { name : Symbol :: intern ("generate_suffixed_type") , kind : ProcMacroKind :: Attr , expander : sync :: Arc :: new (GenerateSuffixedTypeProcMacroExpander) , disabled : false , } ,) ,]) }
+}

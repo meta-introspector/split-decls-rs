@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn test_sorted_index_multi_map () { let entries : Vec < _ > = vec ! [(2 , 0) , (1 , 0) , (2 , 1) , (3 , 0) , (2 , 2)] ; let set : SortedIndexMultiMap < usize , _ , _ > = entries . iter () . copied () . collect () ; assert ! (entries . iter () . map (| (k , v) | (k , v)) . eq (set . iter ())) ; for (i , expect) in entries . iter () . enumerate () { assert_eq ! (set [i] , expect . 1) ; } assert_eq ! (set . get_by_key (3) . copied () . collect ::< Vec < _ >> () , vec ! [0]) ; assert ! (set . get_by_key (4) . next () . is_none ()) ; assert ! (set . contains_key (3)) ; assert ! (! set . contains_key (4)) ; let twos : Vec < _ > = set . get_by_key_enumerated (2) . collect () ; let idxs : Vec < usize > = twos . iter () . map (| (i , _) | * i) . collect () ; let values : Vec < usize > = twos . iter () . map (| & (_ , & v) | v) . collect () ; assert_eq ! (idxs , vec ! [0 , 2 , 4]) ; assert_eq ! (values , vec ! [0 , 1 , 2]) ; }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [doc = " Tests failing to merge two spans on different lines."] # [test] fn span_merging_fail () { let sm = SourceMap :: new (FilePathMapping :: empty ()) ; let inputtext = "bbbb BB\ncc CCC\n" ; let selection1 = "     ~~\n      \n" ; let selection2 = "       \n   ~~~\n" ; sm . new_source_file (Path :: new ("blork.rs") . to_owned () . into () , inputtext . to_owned ()) ; let span1 = span_from_selection (inputtext , selection1) ; let span2 = span_from_selection (inputtext , selection2) ; assert ! (sm . merge_spans (span1 , span2) . is_none ()) ; }
+}

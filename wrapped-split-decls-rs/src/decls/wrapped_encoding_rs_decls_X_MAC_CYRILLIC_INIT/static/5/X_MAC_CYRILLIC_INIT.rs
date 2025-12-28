@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstatic! {
 # [doc = " The initializer for the [x-mac-cyrillic](static.X_MAC_CYRILLIC.html) encoding."] # [doc = ""] # [doc = " For use only for taking the address of this form when"] # [doc = " Rust prohibits the use of the non-`_INIT` form directly,"] # [doc = " such as in initializers of other `static`s. If in doubt,"] # [doc = " use the corresponding non-`_INIT` reference-typed `static`."] # [doc = ""] # [doc = " This part of the public API will go away if Rust changes"] # [doc = " to make the referent of `pub const FOO: &'static Encoding`"] # [doc = " unique cross-crate or if Rust starts allowing static arrays"] # [doc = " to be initialized with `pub static FOO: &'static Encoding`"] # [doc = " items."] pub static X_MAC_CYRILLIC_INIT : Encoding = Encoding { name : "x-mac-cyrillic" , variant : VariantEncoding :: SingleByte (& data :: SINGLE_BYTE_DATA . x_mac_cyrillic , 0x0430 , 96 , 31) , } ;
+}

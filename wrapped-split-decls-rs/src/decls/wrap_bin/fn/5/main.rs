@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn main () -> Result < () > { let args = Args :: parse () ; if args . verbose { println ! ("Generating wrapped binary for: {}" , args . binary_name) ; println ! ("Output directory: {}" , args . output_dir . display ()) ; } let src_dir = args . output_dir . join ("src") ; fs :: create_dir_all (& src_dir) ? ; let main_content = generate_wrapped_main (& args . binary_name) ? ; let main_path = src_dir . join ("main.rs") ; fs :: write (& main_path , main_content) ? ; let cargo_content = generate_wrapped_cargo_toml (& args . binary_name) ? ; let cargo_path = args . output_dir . join ("Cargo.toml") ; fs :: write (& cargo_path , cargo_content) ? ; if args . verbose { println ! ("✅ Generated wrapped binary files:") ; println ! ("  - {}" , main_path . display ()) ; println ! ("  - {}" , cargo_path . display ()) ; } Ok (()) }
+}

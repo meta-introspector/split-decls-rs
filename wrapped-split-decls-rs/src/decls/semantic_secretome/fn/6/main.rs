@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 fn main () -> Result < () > { let output_dir = Path :: new ("output3") ; let mut secretome = SemanticSecretome { functions : HashMap :: new () , types : HashMap :: new () , constants : HashMap :: new () , modules : HashMap :: new () , total_symbols : 0 , semantic_groups : HashMap :: new () , } ; for entry in fs :: read_dir (output_dir) ? { let entry = entry ? ; if entry . file_name () . to_string_lossy () . starts_with ("wrapped-") { process_crate (& entry . path () , & mut secretome) ? ; } } generate_semantic_groups (& mut secretome) ; assign_semantic_emojis (& mut secretome) ; fs :: write ("rustc_semantic_secretome.json" , serde_json :: to_string_pretty (& secretome) ?) ? ; println ! ("🧬 Generated semantic rustc secretome:") ; println ! ("   🔧 Functions: {}" , secretome . functions . len ()) ; println ! ("   📦 Types: {}" , secretome . types . len ()) ; println ! ("   🔢 Constants: {}" , secretome . constants . len ()) ; println ! ("   📁 Modules: {}" , secretome . modules . len ()) ; println ! ("   🎯 Semantic groups: {}" , secretome . semantic_groups . len ()) ; println ! ("   🌟 Total symbols: {}" , secretome . total_symbols) ; Ok (()) }
+}

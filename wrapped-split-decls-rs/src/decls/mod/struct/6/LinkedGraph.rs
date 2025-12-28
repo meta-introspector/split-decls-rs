@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [doc = " A concrete graph implementation that supports:"] # [doc = " - Nodes and/or edges labelled with custom data types (`N` and `E` respectively)."] # [doc = " - Incremental addition of new nodes/edges (but not removal)."] # [doc = " - Flat storage of node/edge data in a pair of vectors."] # [doc = " - Iteration over any node's out-edges or in-edges, via linked lists"] # [doc = "   threaded through the node/edge data."] # [doc = ""] # [doc = " # Caution"] # [doc = " This is an older graph implementation that is still used by some pieces"] # [doc = " of diagnostic/debugging code. New code that needs a graph data structure"] # [doc = " should consider using `VecGraph` instead, or implementing its own"] # [doc = " special-purpose graph with the specific features needed."] # [doc = ""] # [doc = " This graph implementation predates the later [graph traits](crate::graph),"] # [doc = " and does not implement those traits, so it has its own implementations of a"] # [doc = " few basic graph algorithms."] pub struct LinkedGraph < N , E > { nodes : Vec < Node < N > > , edges : Vec < Edge < E > > , }
+}

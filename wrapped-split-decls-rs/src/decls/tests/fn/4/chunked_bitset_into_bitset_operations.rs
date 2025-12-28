@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclfn! {
 # [test] fn chunked_bitset_into_bitset_operations () { let a = vec ! [1 , 5 , 7 , 11 , 15 , 2000 , 3000] ; let b = vec ! [3 , 4 , 11 , 3000 , 4000] ; let aub = vec ! [1 , 3 , 4 , 5 , 7 , 11 , 15 , 2000 , 3000 , 4000] ; let aib = vec ! [11 , 3000] ; let b = with_elements_chunked (& b , 9876) ; let mut union = with_elements_standard (& a , 9876) ; assert ! (union . union (& b)) ; assert ! (! union . union (& b)) ; assert ! (union . iter () . eq (aub . iter () . copied ())) ; let mut intersection = with_elements_standard (& a , 9876) ; assert ! (intersection . intersect (& b)) ; assert ! (! intersection . intersect (& b)) ; assert ! (intersection . iter () . eq (aib . iter () . copied ())) ; }
+}

@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [doc = " This is a more flexible/imprecise `ItemFn` type,"] # [doc = " which's block is just a `TokenStream` (it may contain invalid code)."] # [derive (Debug , Clone)] struct MaybeItemFn { outer_attrs : Vec < Attribute > , inner_attrs : Vec < Attribute > , vis : Visibility , sig : Signature , brace_token : Brace , block : TokenStream , }
+}

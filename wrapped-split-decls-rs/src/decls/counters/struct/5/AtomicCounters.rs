@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 pub (super) struct AtomicCounters { # [doc = " Packs together a number of counters. The counters are ordered as"] # [doc = " follows, from least to most significant bits (here, we assuming"] # [doc = " that [`THREADS_BITS`] is equal to 10):"] # [doc = ""] # [doc = " * Bits 0..10: Stores the number of **sleeping threads**"] # [doc = " * Bits 10..20: Stores the number of **inactive threads**"] # [doc = " * Bits 20..: Stores the **job event counter** (JEC)"] # [doc = ""] # [doc = " This uses 10 bits ([`THREADS_BITS`]) to encode the number of threads. Note"] # [doc = " that the total number of bits (and hence the number of bits used for the"] # [doc = " JEC) will depend on whether we are using a 32- or 64-bit architecture."] value : AtomicUsize , }
+}

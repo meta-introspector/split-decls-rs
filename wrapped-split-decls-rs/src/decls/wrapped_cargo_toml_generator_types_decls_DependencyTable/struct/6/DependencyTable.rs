@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+mkdeclstruct! {
 # [derive (Debug , Default , Clone , PartialEq , Serialize , Deserialize)] pub struct DependencyTable { # [serde (skip_serializing_if = "Option::is_none")] pub version : Option < String > , # [serde (skip_serializing_if = "Option::is_none")] pub path : Option < String > , # [serde (skip_serializing_if = "Option::is_none")] pub git : Option < String > , # [serde (skip_serializing_if = "Option::is_none")] pub branch : Option < String > , # [serde (skip_serializing_if = "Option::is_none")] pub features : Option < Vec < String > > , # [serde (skip_serializing_if = "Option::is_none")] pub optional : Option < bool > , # [serde (skip_serializing_if = "Option::is_none")] pub default_features : Option < bool > , # [serde (skip_serializing_if = "Option::is_none")] pub package : Option < String > , # [serde (skip_serializing_if = "Option::is_none")] pub registry : Option < String > , # [serde (skip_serializing_if = "Option::is_none")] pub workspace : Option < bool > , }
+}
