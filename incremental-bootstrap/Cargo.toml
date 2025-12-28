@@ -1,0 +1,13 @@
+[package]
+name = "incremental-bootstrap"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+petgraph = "0.6"
+
+[[bin]]
+name = "incremental-bootstrap"
+path = "src/main.rs"

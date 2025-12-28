@@ -1,145 +1,95 @@
-use anyhow::{Result, Context};
-use std::path::{Path, PathBuf};
-use std::time::{Instant, SystemTime, UNIX_EPOCH};
+use std::path::Path;
+use std::fs;
 
-// Telemetry data structure
-#[derive(Debug, Clone)]
-pub struct TelemetryData {
-    pub function_name: String,
-    pub start_time: SystemTime,
-    pub duration_ms: u128,
-    pub input_hash: String,
-    pub output_hash: String,
-    pub success: bool,
-    pub call_id: u64,
-}
-
-static mut CALL_COUNTER: u64 = 0;
-static mut TELEMETRY_LOG: Vec<TelemetryData> = Vec::new();
-
-// Macro to wrap extracted functions with telemetry
-macro_rules! telemetry_wrap {
-    ($func_name:expr, $func_call:expr) => {{
-        let start = Instant::now();
-        let start_time = SystemTime::now();
-        
-        unsafe {
-            CALL_COUNTER += 1;
-        }
-        let call_id = unsafe { CALL_COUNTER };
-        
-        println!("📊 [TELEMETRY] Starting {}, Call ID: {}", $func_name, call_id);
-        
-        let result = $func_call;
-        
-        let duration = start.elapsed();
-        let success = result.is_ok();
-        
-        let telemetry = TelemetryData {
-            function_name: $func_name.to_string(),
-            start_time,
-            duration_ms: duration.as_millis(),
-            input_hash: "input_hash".to_string(), // Simplified for demo
-            output_hash: "output_hash".to_string(), // Simplified for demo
-            success,
-            call_id,
-        };
-        
-        unsafe {
-            TELEMETRY_LOG.push(telemetry.clone());
-        }
-        
-        println!("📊 [TELEMETRY] Completed {}, Duration: {}ms, Success: {}", 
-                $func_name, duration.as_millis(), success);
-        
-        result
+macro_rules! wrapped_fs_read_to_string {
+    ($path:expr) => {{
+        println!("🔧 WRAPPED: fs::read_to_string for: {}", $path.display());
+        fs::read_to_string($path)
     }};
 }
 
-// Include the extracted function
-include!("../../output2/wrapped-split-decls-rs/src/decls/wrapped_split_decls_rs_decls_paths_setup_crate_paths.rs");
-
-/// Bootstrap4: Telemetry-wrapped execution of extracted functions
-pub struct Bootstrap4Executor {
-    audit_log: Vec<String>,
+macro_rules! wrapped_fs_create_dir_all {
+    ($path:expr) => {{
+        println!("🔧 WRAPPED: fs::create_dir_all for: {}", $path.display());
+        fs::create_dir_all($path)
+    }};
 }
 
-impl Bootstrap4Executor {
-    pub fn new() -> Self {
-        Self {
-            audit_log: Vec::new(),
-        }
-    }
+macro_rules! wrapped_fs_write {
+    ($path:expr, $content:expr) => {{
+        println!("🔧 WRAPPED: fs::write for: {}", $path.display());
+        fs::write($path, $content)
+    }};
+}
 
-    /// Execute functions with telemetry wrapping
-    pub fn execute_with_telemetry(&mut self, crate_path: &Path) -> Result<()> {
-        self.log("🚀 Starting telemetry-wrapped execution");
-        
-        // Call the extracted function with telemetry wrapping
-        let paths = telemetry_wrap!(
-            "setup_crate_paths",
-            setup_crate_paths(crate_path)
-        )?;
-        
-        self.log(&format!("✅ Function executed with telemetry: {}", paths.crate_name));
-        
-        // Call it multiple times to show telemetry accumulation
-        for i in 1..=3 {
-            let _paths = telemetry_wrap!(
-                "setup_crate_paths",
-                setup_crate_paths(crate_path)
-            )?;
-            self.log(&format!("🔄 Telemetry call {}: completed", i));
-        }
-        
-        self.show_telemetry_report();
-        
-        Ok(())
-    }
+macro_rules! wrapped_fs_read_dir {
+    ($path:expr) => {{
+        println!("🔧 WRAPPED: fs::read_dir for: {}", $path.display());
+        fs::read_dir($path)
+    }};
+}
 
-    fn show_telemetry_report(&mut self) {
-        self.log("📊 TELEMETRY REPORT:");
-        
-        unsafe {
-            for (i, telemetry) in TELEMETRY_LOG.iter().enumerate() {
-                self.log(&format!(
-                    "  Call {}: {} (ID: {}) - {}ms - Success: {}",
-                    i + 1,
-                    telemetry.function_name,
-                    telemetry.call_id,
-                    telemetry.duration_ms,
-                    telemetry.success
-                ));
+pub fn process_crate(crate_path: &Path, output_dir: &Path) -> Result<(), Box<dyn std::error::Error>> {
+    println!("🔄 Processing crate: {}", crate_path.display());
+    
+    // Find lib.rs or main.rs using WRAPPED functions
+    let entry_file = if crate_path.join("src/lib.rs").exists() {
+        crate_path.join("src/lib.rs")
+    } else if crate_path.join("src/main.rs").exists() {
+        crate_path.join("src/main.rs")
+    } else {
+        return Ok(());
+    };
+    
+    let content = wrapped_fs_read_to_string!(&entry_file)?;
+    
+    let crate_name = crate_path.file_name()
+        .unwrap()
+        .to_string_lossy()
+        .replace('-', "_");
+    
+    let out_dir = output_dir.join(format!("wrapped-{}", crate_name));
+    wrapped_fs_create_dir_all!(&out_dir.join("src/decls"))?;
+    
+    // Simple macro wrapper for the entire crate content
+    let macro_content = format!(
+        "macro_rules! {} {{\n    () => {{\n        {}\n    }};\n}}\n\n{}!();",
+        crate_name, content, crate_name
+    );
+    
+    let file_path = out_dir.join("src/decls").join(format!("{}.rs", crate_name));
+    wrapped_fs_write!(&file_path, macro_content)?;
+    
+    // Generate lib.rs using WRAPPED functions
+    let lib_content = "pub mod decls;\npub use decls::*;\n";
+    wrapped_fs_write!(out_dir.join("src/lib.rs"), lib_content)?;
+    
+    // Generate Cargo.toml using WRAPPED functions
+    let cargo_content = format!(
+        "[package]\nname = \"wrapped-{}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        crate_name
+    );
+    wrapped_fs_write!(out_dir.join("Cargo.toml"), cargo_content)?;
+    
+    println!("✅ Processed crate using ALL WRAPPED functions");
+    Ok(())
+}
+
+pub fn bootstrap_from_output3(output3_dir: &Path, output4_dir: &Path) -> Result<(), Box<dyn std::error::Error>> {
+    println!("🚀 Bootstrap4: Using WRAPPED functions from output3 → output4");
+    
+    wrapped_fs_create_dir_all!(output4_dir)?;
+    
+    for entry in wrapped_fs_read_dir!(output3_dir)? {
+        let entry = entry?;
+        if entry.file_type()?.is_dir() {
+            let crate_path = entry.path();
+            if let Err(e) = process_crate(&crate_path, output4_dir) {
+                println!("⚠️  Skipped {}: {}", crate_path.display(), e);
             }
-            
-            let total_calls = TELEMETRY_LOG.len();
-            let total_duration: u128 = TELEMETRY_LOG.iter().map(|t| t.duration_ms).sum();
-            let success_rate = TELEMETRY_LOG.iter().filter(|t| t.success).count() as f64 / total_calls as f64 * 100.0;
-            
-            self.log(&format!("📈 SUMMARY: {} calls, {}ms total, {:.1}% success rate", 
-                            total_calls, total_duration, success_rate));
         }
     }
-
-    fn log(&mut self, message: &str) {
-        println!("[BOOTSTRAP4] {}", message);
-        self.audit_log.push(message.to_string());
-    }
-
-    pub fn get_audit_log(&self) -> &[String] {
-        &self.audit_log
-    }
-}
-
-// Define the CratePaths struct
-#[derive(Debug, Clone)]
-pub struct CratePaths {
-    pub crate_path: PathBuf,
-    pub crate_name: String,
-    pub lib_rs_path: PathBuf,
-    pub build_rs_path: PathBuf,
-    pub cargo_toml_path: PathBuf,
-    pub decls_output_dir: PathBuf,
-    pub target_config_path: PathBuf,
-    pub output_crate_path: PathBuf,
+    
+    println!("🎉 Bootstrap4 complete using ALL WRAPPED functions!");
+    Ok(())
 }

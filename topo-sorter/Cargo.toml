@@ -1,14 +1,13 @@
 [package]
-name = "bootstrap4"
+name = "topo-sorter"
 version = "0.1.0"
 edition = "2021"
 
 [workspace]
 
-[lib]
-name = "bootstrap4"
-path = "src/lib.rs"
+[dependencies]
+petgraph = "0.6"
 
 [[bin]]
-name = "bootstrap4"
+name = "topo-sorter"
 path = "src/main.rs"

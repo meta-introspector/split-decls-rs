@@ -49,3 +49,9 @@ output3/
 output4/
 partition_*.rs
 partition1-crate/
+
+# Incremental build artifacts
+incremental-crates/
+bootstrap3-incremental/
+incremental-progress.toml
+index.toml
