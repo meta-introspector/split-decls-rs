@@ -17,8 +17,10 @@ pub fn process_crate(crate_path: &Path, global_config: &SplitDeclsConfig, dry_ru
     println!("Processing crate: {}", paths.crate_name);
     
     // Check if lib.rs exists
-    if !paths.lib_rs_path.exists() {
-        println!("No lib.rs found at {}, skipping", paths.lib_rs_path.display());
+    let lib_rs_path = paths.source_files.iter()
+        .find(|p| p.file_name().and_then(|n| n.to_str()) == Some("lib.rs"));
+    if lib_rs_path.is_none() || !lib_rs_path.unwrap().exists() {
+        println!("No lib.rs found in source files, skipping");
         return Ok(());
     }
     

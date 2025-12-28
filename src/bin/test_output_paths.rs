@@ -10,8 +10,8 @@ fn main() {
     
     println!("Crate name: {}", paths.crate_name);
     println!("Crate path: {}", paths.crate_path.display());
-    println!("Lib.rs path: {}", paths.lib_rs_path.display());
-    println!("Lib.rs path: {}", paths.lib_rs_path.display());
+    println!("Source files: {:?}", paths.source_files.iter().map(|p| p.display().to_string()).collect::<Vec<_>>());
+    println!("First source file: {:?}", paths.source_files.first().map(|p| p.display().to_string()));
     println!("Decls output dir: {}", paths.decls_output_dir.display());
     
     // Verify the output directory structure

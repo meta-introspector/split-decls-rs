@@ -2,8 +2,7 @@ use anyhow::{Context, Result};
 use std::path::{Path, PathBuf};
 use split_decls_types::SplitDeclsConfig;
 use walkdir::WalkDir; // Added for finding Cargo.toml files
-    // DISABLED: Make single-threaded to debug stack overflow
-    // use rayon::prelude::*; // Added for parallel processing
+use rayon::prelude::*; // Re-enabled for parallel processing
 use crate::setup_crate_paths;
 use crate::eager_splitter; // Added eager_splitter and CratePaths
 //use crate::paths::{CratePaths, setup_crate_paths};
@@ -44,7 +43,17 @@ pub fn process_ecosystem(
         println!("Found {} Cargo.toml files.", cargo_toml_paths.len());
     }
 
-    // Single-threaded processing to debug stack overflow
+    // Configure rayon to use 1 thread to avoid stack overflow
+    rayon::ThreadPoolBuilder::new()
+        .num_threads(1)
+        .build_global()
+        .context("Failed to initialize thread pool")?;
+
+    if verbose {
+        println!("Using {} threads for parallel processing", rayon::current_num_threads());
+    }
+
+    // Parallel processing with 1 thread (sequential to avoid stack overflow)
     cargo_toml_paths.iter().try_for_each(|cargo_toml_path| {
         let crate_path = cargo_toml_path.parent().unwrap().to_path_buf();
         if verbose {

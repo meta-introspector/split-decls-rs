@@ -50,13 +50,14 @@ pub fn write_declaration_file(
                  decl.name, brace_depth);
     }
     
-    // DISABLED: Skip file writing to test if this causes stack overflow
-    println!("🚫 SKIPPING FILE WRITE: {} (testing stack overflow)", decl_file_path.display());
-    return Ok(());
+    // Skip extremely large items to prevent stack overflow
+    if token_count > 50000 || brace_depth > 1000 {
+        println!("🚫 SKIPPING LARGE ITEM: {} ({} chars, {} braces) - too large for processing", 
+                 decl.name, token_count, brace_depth);
+        return Ok(());
+    }
     
-    // Original file writing code disabled below:
-    /*
-    println!("   📂 Source file: {}", paths.lib_rs_path.display());
+    println!("   📂 Source files: {:?}", paths.source_files.iter().map(|p| p.display().to_string()).collect::<Vec<_>>());
     println!("   📄 Output file: {}", decl_file_path.display());
     
     let custom_prelude = if let Some(ref prelude_str) = config.custom_prelude_overlay {
@@ -114,7 +115,7 @@ pub fn write_declaration_file(
     // Add trace header for complete traceability
     let trace_header = trace_header::generate_trace_header(
         "declaration_split",
-        Some(&paths.lib_rs_path.display().to_string()),
+        paths.source_files.first().map(|p| p.display().to_string()).as_deref(),
         "write_declaration_file",
         &format!("{}:{}", file!(), line!())
     );
@@ -161,6 +162,6 @@ pub fn write_declaration_file(
         );
         println!("   🔍 DRY-RUN: Would write to {}", decl_file_path.display());
     }
-    */
+    
     Ok(())
 }

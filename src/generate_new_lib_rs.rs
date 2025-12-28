@@ -54,8 +54,12 @@ pub fn generate_new_lib_rs(paths: &CratePaths, dry_run: bool) -> Result<()> {
         }
     };
 
+    let lib_rs_path = paths.source_files.iter()
+        .find(|p| p.file_name().and_then(|n| n.to_str()) == Some("lib.rs"))
+        .ok_or_else(|| anyhow::anyhow!("No lib.rs found in source files"))?;
+
     if dry_run {
-        let new_path = paths.lib_rs_path.with_extension("new");
+        let new_path = lib_rs_path.with_extension("new");
         let initial_content = add_generated_rust_header!(
             new_lib_rs_content.to_string().as_str(),
             file!(),
@@ -85,10 +89,10 @@ pub fn generate_new_lib_rs(paths: &CratePaths, dry_run: bool) -> Result<()> {
             file!(),
             line!()
         );
-        match crate::rustfmt_utils::format_rust_file(&initial_content, &paths.lib_rs_path) {
+        match crate::rustfmt_utils::format_rust_file(&initial_content, lib_rs_path) {
             Ok(formatted_content) => {
-                fs::write(&paths.lib_rs_path, formatted_content)
-                    .context(format!("Failed to write formatted new lib.rs to {}", paths.lib_rs_path.display()))?;
+                fs::write(lib_rs_path, formatted_content)
+                    .context(format!("Failed to write formatted new lib.rs to {}", lib_rs_path.display()))?;
             },
             Err(e) => {
                 let error_comment = format!(
@@ -97,9 +101,9 @@ pub fn generate_new_lib_rs(paths: &CratePaths, dry_run: bool) -> Result<()> {
                     e
                 );
                 let content_with_error_comment = error_comment + &initial_content;
-                fs::write(&paths.lib_rs_path, content_with_error_comment)
-                    .context(format!("Failed to write unformatted new lib.rs with error comment to {}", paths.lib_rs_path.display()))?;
-                error!("\n<blip style='color:red'>Formatting error for new lib.rs (written to {})</blip>", paths.lib_rs_path.display());
+                fs::write(lib_rs_path, content_with_error_comment)
+                    .context(format!("Failed to write unformatted new lib.rs with error comment to {}", lib_rs_path.display()))?;
+                error!("\n<blip style='color:red'>Formatting error for new lib.rs (written to {})</blip>", lib_rs_path.display());
             }
         }
         println!("Generated new src/lib.rs for crate {}", paths.crate_name);

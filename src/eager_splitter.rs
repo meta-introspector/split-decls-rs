@@ -80,7 +80,7 @@ fn process_all_rust_files(
         depth + 1
     });
     
-    if current_depth > 100 {
+    if current_depth > 1000 {
         eprintln!("🚨 RECURSION DEPTH EXCEEDED: {} levels in crate: {}", current_depth, paths.crate_name);
         return Err(anyhow::anyhow!("Stack overflow prevention: recursion depth {} exceeded", current_depth));
     }
@@ -97,6 +97,7 @@ fn process_all_rust_files(
     for rust_file in rust_files {
         // Process ALL .rs files including main.rs - EMIT ALL CODE
         if let Some(file_name) = rust_file.file_name() {
+            println!("🔍 EXAMINING FILE: {}", rust_file.display());
             // Only skip if it's a generated file, not main.rs
             if file_name.to_string_lossy().starts_with("wrapped_") {
                 continue;
@@ -109,6 +110,18 @@ fn process_all_rust_files(
         }
         
         println!("📖 READING FILE: {}", rust_file.display());
+        
+        // Add detailed file processing debug
+        let file_content = match std::fs::read_to_string(&rust_file) {
+            Ok(content) => {
+                println!("   ✅ READ SUCCESS: {} bytes", content.len());
+                content
+            },
+            Err(e) => {
+                println!("   ❌ READ FAILED: {}", e);
+                continue;
+            }
+        };
     
     // Add thread-local tracking for stack overflow debugging
     thread_local! {
@@ -279,24 +292,32 @@ fn process_all_rust_files(
     Ok(())
 }
    
-/// Extracts declarations from a crate's lib.rs and returns them as a map.
+/// Extracts declarations from a crate's source files and returns them as a map.
 pub fn extract_declarations_to_map(paths: &CratePaths) -> Result<HashMap<String, TokenStream>> {
-    let lib_content = fs::read_to_string(&paths.lib_rs_path)
-        .context(format!("Failed to read {}", paths.lib_rs_path.display()))?;
+    let mut all_extracted_decls: HashMap<String, TokenStream> = HashMap::new();
     
-    let syntax_tree: syn::File = syn::parse_file(&lib_content)
-        .context("Failed to parse lib.rs as Rust code")?;
+    // Process each source file found in the crate
+    for source_file in &paths.source_files {
+        println!("🔍 PROCESSING SOURCE FILE: {}", source_file.display());
+        
+        let file_content = fs::read_to_string(source_file)
+            .context(format!("Failed to read {}", source_file.display()))?;
+    
+        let syntax_tree: syn::File = syn::parse_file(&file_content)
+            .context(format!("Failed to parse {} as Rust code", source_file.display()))?;
 
-    let mut extracted_decls: HashMap<String, TokenStream> = HashMap::new();
-    let mut item_count = 0; // for unique names if needed
+        let mut item_count = 0; // for unique names if needed
 
-    for item in &syntax_tree.items {
-        if let Some(decl) = declaration_extractor::extract_single_declaration(item, item_count) {
-            extracted_decls.insert(decl.name, decl.content);
-            item_count += 1;
+        for item in &syntax_tree.items {
+            if let Some(decl) = declaration_extractor::extract_single_declaration(item, item_count) {
+                let unique_key = format!("{}_{}", source_file.file_stem().unwrap().to_string_lossy(), decl.name);
+                all_extracted_decls.insert(unique_key, decl.content);
+                item_count += 1;
+            }
         }
     }
-    Ok(extracted_decls)
+    
+    Ok(all_extracted_decls)
 }
 
 /// Copies extracted declarations to the specified output directory.
@@ -345,7 +366,7 @@ pub fn copy_declarations_to_output(
 pub fn eager_split_crate(paths: &CratePaths, config: &SplitDeclsConfig) -> Result<Vec<ModuleNotFoundReport>> {
     println!("🚀 STARTING CRATE PROCESSING: {}", paths.crate_name);
     println!("   📂 Crate path: {}", paths.crate_path.display());
-    println!("   📄 Lib.rs path: {}", paths.lib_rs_path.display());
+    println!("   📄 Source files: {:?}", paths.source_files.iter().map(|p| p.display().to_string()).collect::<Vec<_>>());
     println!("   📁 Output directory: {}", paths.decls_output_dir.display());
     
     let mut module_not_found_errors: Vec<ModuleNotFoundReport> = Vec::new();

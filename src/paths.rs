@@ -5,7 +5,7 @@ use anyhow::{Context, Result};
 pub struct CratePaths {
     pub crate_path: PathBuf,
     pub crate_name: String,
-    pub lib_rs_path: PathBuf,
+    pub source_files: Vec<PathBuf>, // List of all .rs files to process
 
     pub build_rs_path: PathBuf,
 
@@ -28,6 +28,28 @@ pub fn setup_crate_paths(crate_path: &Path) -> Result<CratePaths> {
     let output_crate_path = crate_path.to_path_buf();
 
     let lib_rs_path = crate_path.join("src").join("lib.rs");
+    let main_rs_path = crate_path.join("src").join("main.rs");
+
+    println!("🔍 CHECKING PATHS for crate: {}", crate_name);
+    println!("   📚 lib.rs exists: {}", lib_rs_path.exists());
+    println!("   🎯 main.rs exists: {}", main_rs_path.exists());
+
+    // Find all .rs files in src directory
+    let src_dir = crate_path.join("src");
+    let mut source_files = Vec::new();
+    
+    if src_dir.exists() {
+        for entry in std::fs::read_dir(&src_dir)? {
+            let entry = entry?;
+            let path = entry.path();
+            if path.is_file() && path.extension().map_or(false, |ext| ext == "rs") {
+                println!("   📄 Found source file: {}", path.display());
+                source_files.push(path);
+            }
+        }
+    }
+    
+    println!("   📊 Total source files found: {}", source_files.len());
 
     let build_rs_path = crate_path.join("build.rs");
 
@@ -39,7 +61,7 @@ pub fn setup_crate_paths(crate_path: &Path) -> Result<CratePaths> {
     Ok(CratePaths {
         crate_path: crate_path.to_path_buf(),
         crate_name: crate_name.to_string(),
-        lib_rs_path,
+        source_files, // Use the discovered source files
 
         build_rs_path,
 

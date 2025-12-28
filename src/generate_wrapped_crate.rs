@@ -54,7 +54,7 @@ pub fn generate_wrapped_crate(
     // The `old_lib_rs_path` etc. for this `CratePaths` will refer to the copies *within* the wrapped crate.
     println!("   🛠️  Setting up crate paths...");
     let wrapped_crate_paths = setup_crate_paths(&wrapped_crate_path)?;
-    println!("   📄 Lib.rs path: {}", wrapped_crate_paths.lib_rs_path.display());
+    println!("   📄 Source files: {:?}", wrapped_crate_paths.source_files.iter().map(|p| p.display().to_string()).collect::<Vec<_>>());
     println!("   📄 Cargo.toml path: {}", wrapped_crate_paths.cargo_toml_path.display());
     println!("   📁 Decls output dir: {}", wrapped_crate_paths.decls_output_dir.display());
 
@@ -92,9 +92,12 @@ pub fn generate_wrapped_crate(
     // Generate lib.rs for the wrapped crate
     generate_new_lib_rs(&wrapped_crate_paths, dry_run)?;
     if !dry_run {
-        let lib_rs_content = fs::read_to_string(&wrapped_crate_paths.lib_rs_path)
-            .context(format!("Failed to read generated lib.rs at {}", wrapped_crate_paths.lib_rs_path.display()))?;
-        format_rust_file(&lib_rs_content, &wrapped_crate_paths.lib_rs_path)?;
+        let lib_rs_path = wrapped_crate_paths.source_files.iter()
+            .find(|p| p.file_name().and_then(|n| n.to_str()) == Some("lib.rs"))
+            .ok_or_else(|| anyhow::anyhow!("No lib.rs found in source files"))?;
+        let lib_rs_content = fs::read_to_string(lib_rs_path)
+            .context(format!("Failed to read generated lib.rs at {}", lib_rs_path.display()))?;
+        format_rust_file(&lib_rs_content, lib_rs_path)?;
     }
 
     // Create a crate-specific config for writing to .split-decls-config.toml
@@ -162,7 +165,7 @@ pub fn generate_wrapped_crate(
         let source_crate_paths = CratePaths {
             crate_path: original_crate_path.to_path_buf(),
             crate_name: wrapped_crate_paths.crate_name.clone(),
-            lib_rs_path: wrapped_crate_paths.lib_rs_path.clone(),
+            source_files: wrapped_crate_paths.source_files.clone(),
             build_rs_path: wrapped_crate_paths.build_rs_path.clone(),
             cargo_toml_path: wrapped_crate_paths.cargo_toml_path.clone(),
             decls_output_dir: wrapped_crate_paths.decls_output_dir.clone(),
