@@ -1,0 +1,40 @@
+use anyhow::Result;
+use bootstrap4::Bootstrap4Executor;
+use std::env;
+use std::path::Path;
+
+fn main() -> Result<()> {
+    let args: Vec<String> = env::args().collect();
+    
+    if args.len() < 2 {
+        println!("Bootstrap4: Telemetry-wrapped execution of extracted functions");
+        println!("Usage:");
+        println!("  {} telemetry <crate_path>   - Execute with telemetry", args[0]);
+        return Ok(());
+    }
+    
+    let mut executor = Bootstrap4Executor::new();
+    
+    match args[1].as_str() {
+        "telemetry" => {
+            if args.len() < 3 {
+                println!("Error: Crate path required for telemetry command");
+                return Ok(());
+            }
+            
+            let crate_path = Path::new(&args[2]);
+            println!("Bootstrap4: Telemetry execution on: {}", crate_path.display());
+            
+            executor.execute_with_telemetry(crate_path)?;
+            
+            println!("\n🎉 TELEMETRY EXECUTION COMPLETED!");
+            println!("📊 Audit log entries: {}", executor.get_audit_log().len());
+        }
+        _ => {
+            println!("Unknown command: {}", args[1]);
+            println!("Use 'telemetry <crate_path>'");
+        }
+    }
+    
+    Ok(())
+}
