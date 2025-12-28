@@ -57,9 +57,13 @@ fn split_crate(crate_path: &Path) -> Result<()> {
         return Ok(());
     }
     
-    let crate_name = crate_path.file_name()
-        .and_then(|n| n.to_str())
-        .unwrap_or("unknown");
+    let crate_name = if crate_path.to_string_lossy().ends_with("..") {
+        "split-decls-rs"  // Use proper name for parent directory
+    } else {
+        crate_path.file_name()
+            .and_then(|n| n.to_str())
+            .unwrap_or("unknown")
+    };
     
     println!("🔄 Processing {}: {} files", crate_name, rust_files.len());
     
@@ -71,9 +75,16 @@ fn split_crate(crate_path: &Path) -> Result<()> {
     for rust_file in rust_files {
         if let Ok(content) = fs::read_to_string(&rust_file) {
             if let Ok(parsed) = syn::parse_file(&content) {
-                let file_stem = rust_file.file_stem()
-                    .and_then(|s| s.to_str())
-                    .unwrap_or("unknown");
+                let module_name = if rust_file.to_string_lossy().contains("/bin/") {
+                    // Extract binary name from path like "src/bin/enhanced_wrapper.rs"
+                    rust_file.file_stem()
+                        .and_then(|s| s.to_str())
+                        .unwrap_or("unknown")
+                } else {
+                    rust_file.file_stem()
+                        .and_then(|s| s.to_str())
+                        .unwrap_or("lib")
+                };
                 
                 for (i, item) in parsed.items.iter().enumerate() {
                     let (decl_type, name) = match item {
@@ -90,12 +101,26 @@ fn split_crate(crate_path: &Path) -> Result<()> {
                     };
                     
                     let wrapped = format!(
-                        "use serde::{{Deserialize, Serialize}};\nuse std::collections::HashMap;\n\n{}",
+                        "use serde::{{Deserialize, Serialize}};\nuse std::collections::HashMap;\n\nmkdecl{}! {{\n{}\n}}",
+                        decl_type,
                         item.to_token_stream()
                     );
                     
                     let decl_size = wrapped.len();
-                    let module_dir = output_dir.join(file_stem).join(decl_type).join(decl_size.to_string());
+                    let complexity = match decl_size {
+                        0..=200 => 1,
+                        201..=400 => 2,
+                        401..=600 => 3,
+                        601..=800 => 4,
+                        801..=1000 => 5,
+                        1001..=1300 => 6,
+                        1301..=1700 => 7,
+                        1701..=2500 => 8,
+                        2501..=4000 => 9,
+                        _ => 10,
+                    };
+                    
+                    let module_dir = output_dir.join(module_name).join(decl_type).join(complexity.to_string());
                     fs::create_dir_all(&module_dir)?;
                     
                     let file_path = module_dir.join(format!("{}.rs", name));

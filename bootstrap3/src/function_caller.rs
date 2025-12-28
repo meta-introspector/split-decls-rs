@@ -1,11 +1,17 @@
 use anyhow::{Result, Context};
 use std::path::{Path, PathBuf};
 
+// Define simple mkdecl macros that just expand to their content
+macro_rules! mkdeclfn {
+    ($($content:tt)*) => { $($content)* };
+}
+
 // Define all the types that extracted functions need
 #[derive(Debug, Clone)]
 pub struct CratePaths {
     pub crate_path: PathBuf,
     pub crate_name: String,
+    pub source_files: Vec<PathBuf>,
     pub lib_rs_path: PathBuf,
     pub build_rs_path: PathBuf,
     pub cargo_toml_path: PathBuf,
@@ -33,7 +39,7 @@ pub struct ModuleNotFoundReport {
 }
 
 // Include multiple extracted functions
-include!("../../output2/wrapped-split-decls-rs/src/decls/wrapped_split_decls_rs_decls_paths_setup_crate_paths.rs");
+include!("../../output2/wrapped-split-decls-rs/src/decls/paths/fn/8/setup_crate_paths.rs");
 
 pub fn call_all_functions() -> Result<()> {
     println!("🚀 Bootstrap3: Calling ALL extracted functions");

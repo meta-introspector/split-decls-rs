@@ -57,6 +57,7 @@ pub fn test_process_crates_function() -> Result<()> {
     // Call the extracted function in dry-run mode
     process_crates_in_path(
         test_path,
+        "test-crate", // current_crate_name
         &config,
         false, // is_rustc_source
         true,  // dry_run

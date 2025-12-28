@@ -35,3 +35,4 @@ output2/\#*
 /error.log
 /lib_error.log
 /sparql_error.log
+simple-split/target
