@@ -214,9 +214,10 @@ fn demonstrate_compression(compressor: &SignatureCompressor) {
     let mut prime_sorted: Vec<_> = compressor.prime_assignments.iter().collect();
     prime_sorted.sort_by_key(|&(_, &prime)| std::cmp::Reverse(prime));
     
-    for (signature, &prime) in prime_sorted.iter().take(3) {
-        let frequency = compressor.frequency_map.get(&signature).unwrap_or(&0);
-        let emoji = compressor.emoji_assignments.get(&signature).unwrap_or(&default_emoji);
-        println!("  {} {} → {} (freq: {})", emoji, signature, prime, frequency);
+    for (signature, prime) in prime_sorted.iter().take(3) {
+        // let frequency = compressor.frequency_map.get(&signature).unwrap_or(&0);
+        // let emoji = compressor.emoji_assignments.get(&signature).unwrap_or(&default_emoji);
+        // println!("  {} {} → {} (freq: {})", emoji, signature, prime, frequency);
+        println!("  {} → {} (signature lookup disabled)", signature, prime);
     }
 }

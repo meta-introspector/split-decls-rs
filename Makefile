@@ -2,6 +2,7 @@
 
 # Use sccache for faster builds
 SCCACHE := /home/mdupont/.cargo/bin/sccache
+export RUST_BACKTRACE=FULL
 export RUSTC_WRAPPER=$(SCCACHE)
 
 # Build all binaries once
@@ -70,7 +71,8 @@ proof-quiet:
 
 # Run bootstrap with split-decls-rs (no building)
 run_bootstrap:
-	@echo "Running bootstrap (no build)..." && RUST_BACKTRACE=full cargo run --bin split-decls-rs -- bootstrap 2>&1 | tee bootstrap_run.log
+#	@echo "Running bootstrap (no build)..." && RUST_BACKTRACE=FULL cargo run --bin split-decls-rs -- bootstrap 2>&1 | tee bootstrap_run.log
+	@echo "Running bootstrap (no build)..." && RUST_BACKTRACE=FULL cargo run --bin split-decls-rs -- bootstrap  > bootstrap_run.log 2>&1
 
 # Run AUDITED bootstrap with full syscall tracking
 run_audited_bootstrap:

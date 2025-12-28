@@ -28,6 +28,37 @@ pub fn write_declaration_file(
 ) -> Result<()> {
     let decl_file_path = paths.decls_output_dir.join(format!("{}.rs", module_name_ident.to_string()));
     
+    // LOG: Function processing status
+    println!("📝 PROCESSING FUNCTION: '{}' ({})", decl.name, decl.kind);
+    
+    // Check size and complexity before processing
+    let content_str = decl.content.to_string();
+    let token_count = content_str.len();
+    let line_count = content_str.lines().count();
+    let brace_depth = content_str.matches('{').count();
+    
+    println!("📊 SIZE CHECK: {} - {} chars, {} lines, {} braces", 
+             decl.name, token_count, line_count, brace_depth);
+    
+    if token_count > 100000 {
+        println!("⚠️  LARGE ITEM WARNING: {} has {} characters - potential stack overflow risk", 
+                 decl.name, token_count);
+    }
+    
+    if brace_depth > 50 {
+        println!("⚠️  DEEP NESTING WARNING: {} has {} nested braces - potential recursion risk", 
+                 decl.name, brace_depth);
+    }
+    
+    // DISABLED: Skip file writing to test if this causes stack overflow
+    println!("🚫 SKIPPING FILE WRITE: {} (testing stack overflow)", decl_file_path.display());
+    return Ok(());
+    
+    // Original file writing code disabled below:
+    /*
+    println!("   📂 Source file: {}", paths.lib_rs_path.display());
+    println!("   📄 Output file: {}", decl_file_path.display());
+    
     let custom_prelude = if let Some(ref prelude_str) = config.custom_prelude_overlay {
         prelude_str.parse::<TokenStream>().map_err(|e| anyhow::anyhow!("Failed to parse custom prelude overlay: {}", e))?
     } else {
@@ -94,6 +125,9 @@ pub fn write_declaration_file(
         fs::write(&decl_file_path, &traced_content)
             .context(format!("Failed to write initial content to {}", decl_file_path.display()))?;
 
+        // LOG: File write status
+        println!("   ✅ WRITTEN: {} ({} bytes)", decl_file_path.display(), traced_content.len());
+
         // Attempt to format the file
         match format_rust_file(&traced_content, &decl_file_path) {
             Ok(formatted_content) => {
@@ -101,6 +135,7 @@ pub fn write_declaration_file(
                 fs::write(&decl_file_path, formatted_content)
                     .context(format!("Failed to write formatted content to {}", decl_file_path.display()))?;
                 info!("Split '{} {}' to {}", decl.kind, decl.name, decl_file_path.display());
+                println!("   🎨 FORMATTED: {}", decl_file_path.display());
             },
             Err(e) => {
                 // If formatting fails, prepend a comment to the unformatted content
@@ -113,6 +148,7 @@ pub fn write_declaration_file(
                 fs::write(&decl_file_path, content_with_error_comment)
                     .context(format!("Failed to write unformatted content with error comment to {}", decl_file_path.display()))?;
                 error!("\n<blip style='color:red'>Formatting error for '{} {}' (written to {})</blip>", decl.kind, decl.name, decl_file_path.display());
+                println!("   ⚠️  FORMAT FAILED: {} (kept unformatted)", decl_file_path.display());
             }
         }
     }
@@ -123,6 +159,8 @@ pub fn write_declaration_file(
             decl.name,
             decl_file_path.display()
         );
+        println!("   🔍 DRY-RUN: Would write to {}", decl_file_path.display());
     }
+    */
     Ok(())
 }

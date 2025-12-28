@@ -10,6 +10,7 @@ use syn::visit::Visit;
 use syn::{self, LitStr, Item}; // Added LitStr and Item
 use quote::quote; // Added quote
 use log::{info, warn, error};
+use std::thread;
 
 use crate::paths::CratePaths;
 use split_decls_types::SplitDeclsConfig;
@@ -68,9 +69,30 @@ fn process_all_rust_files(
     dry_run: bool,
     module_not_found_errors: &mut Vec<ModuleNotFoundReport>, // New parameter
 ) -> Result<()> {
+    thread_local! {
+        static RECURSION_DEPTH: std::cell::Cell<usize> = std::cell::Cell::new(0);
+    }
+    
+    // Check recursion depth
+    let current_depth = RECURSION_DEPTH.with(|d| {
+        let depth = d.get();
+        d.set(depth + 1);
+        depth + 1
+    });
+    
+    if current_depth > 100 {
+        eprintln!("🚨 RECURSION DEPTH EXCEEDED: {} levels in crate: {}", current_depth, paths.crate_name);
+        return Err(anyhow::anyhow!("Stack overflow prevention: recursion depth {} exceeded", current_depth));
+    }
+    
+    println!("🔄 PROCESSING CRATE: {} (recursion depth: {})", paths.crate_name, current_depth);
     let src_dir = paths.crate_path.join("src");
     let rust_files = find_all_rust_files(&src_dir)?;
     
+    println!("📁 FOUND {} RUST FILES TO PROCESS:", rust_files.len());
+    for (i, file) in rust_files.iter().enumerate() {
+        println!("   {}: {}", i + 1, file.display());
+    }
     
     for rust_file in rust_files {
         // Process ALL .rs files including main.rs - EMIT ALL CODE
@@ -86,19 +108,38 @@ fn process_all_rust_files(
             continue;
         }
         
-        println!("Processing file: {}", rust_file.display());
+        println!("📖 READING FILE: {}", rust_file.display());
+    
+    // Add thread-local tracking for stack overflow debugging
+    thread_local! {
+        static CURRENT_FILE: std::cell::RefCell<String> = std::cell::RefCell::new(String::new());
+    }
+    
+    CURRENT_FILE.with(|f| {
+        *f.borrow_mut() = format!("{}", rust_file.display());
+    });
+    
+    // Set up a panic hook for this thread to report the current file
+    let original_hook = std::panic::take_hook();
+    std::panic::set_hook(Box::new(move |panic_info| {
+        CURRENT_FILE.with(|f| {
+            eprintln!("🚨 STACK OVERFLOW IN FILE: {}", f.borrow());
+        });
+        eprintln!("💥 Thread panic: {}", panic_info);
+        original_hook(panic_info);
+    }));
         
         let file_content = fs::read_to_string(&rust_file)
             .context(format!("Failed to read file: {}", rust_file.display()))?;
             
-        println!("  📁 File size: {} bytes", file_content.len());
+        println!("   📏 File size: {} bytes", file_content.len());
         
         // Sanitize crate name once
         let crate_name_sanitized = paths.crate_name.replace("-", "_").replace(".", "_");
         
         let file_ast = match syn::parse_str::<syn::File>(&file_content) {
             Ok(ast) => {
-                println!("  ✅ Successfully parsed {} items", ast.items.len());
+                println!("   ✅ PARSED SUCCESSFULLY: {} items found", ast.items.len());
                 ast
             },
             Err(e) => {
@@ -191,21 +232,22 @@ fn process_all_rust_files(
                 _ => "other item".to_string(),
             };
             
-            println!("    📋 Item {}: {} ({})", item_index + 1, item_index + 1, 
-                     match &item {
-                         syn::Item::Fn(_) => "fn",
-                         syn::Item::Struct(_) => "struct", 
-                         syn::Item::Enum(_) => "enum",
-                         syn::Item::Impl(_) => "impl",
-                         syn::Item::Trait(_) => "trait",
-                         syn::Item::Const(_) => "const",
-                         syn::Item::Static(_) => "static",
-                         syn::Item::Type(_) => "type",
-                         syn::Item::Mod(_) => "mod",
-                         syn::Item::Use(_) => "use",
-                         syn::Item::Macro(_) => "macro",
-                         _ => "other",
-                     });
+            let item_type = match &item {
+                syn::Item::Fn(_) => "fn",
+                syn::Item::Struct(_) => "struct", 
+                syn::Item::Enum(_) => "enum",
+                syn::Item::Impl(_) => "impl",
+                syn::Item::Trait(_) => "trait",
+                syn::Item::Const(_) => "const",
+                syn::Item::Static(_) => "static",
+                syn::Item::Type(_) => "type",
+                syn::Item::Mod(_) => "mod",
+                syn::Item::Use(_) => "use",
+                syn::Item::Macro(_) => "macro",
+                _ => "other",
+            };
+            
+            // println!("      📋 Item {}: {} ({})", item_index + 1, item_name, item_type);
             
             if let Some(decl) = declaration_extractor::extract_single_declaration(item, *item_count) {
                 let module_name_str = format!("{}_decls_{}_{}", 
@@ -215,6 +257,8 @@ fn process_all_rust_files(
                 );
                 let module_name_ident = Ident::new(&module_name_str, Span::call_site());
                 collected_module_names.push(module_name_ident.clone());
+                
+                println!("         🔄 PROCESSING: {} -> {}.rs", decl.name, module_name_str);
                 
                 declaration_writer::write_declaration_file(
                     decl.clone(),
@@ -226,6 +270,8 @@ fn process_all_rust_files(
                 )?;
                 print!("{}, ", decl.name);
                 *item_count += 1;
+            } else {
+                println!("         ⏭️  SKIPPED: {} (unsupported item type)", item_name);
             }
         }
     }
@@ -297,7 +343,10 @@ pub fn copy_declarations_to_output(
 
 /// Main entry point for eager splitting of a crate
 pub fn eager_split_crate(paths: &CratePaths, config: &SplitDeclsConfig) -> Result<Vec<ModuleNotFoundReport>> {
-    println!("DEBUG: Entering eager_split_crate for crate: {}", paths.crate_name);
+    println!("🚀 STARTING CRATE PROCESSING: {}", paths.crate_name);
+    println!("   📂 Crate path: {}", paths.crate_path.display());
+    println!("   📄 Lib.rs path: {}", paths.lib_rs_path.display());
+    println!("   📁 Output directory: {}", paths.decls_output_dir.display());
     
     let mut module_not_found_errors: Vec<ModuleNotFoundReport> = Vec::new();
     let mut collected_module_names: Vec<Ident> = Vec::new();
@@ -306,6 +355,7 @@ pub fn eager_split_crate(paths: &CratePaths, config: &SplitDeclsConfig) -> Resul
     
     // Process ALL .rs files in the crate (including lib.rs and individual modules)
     info!("📖 Processing all .rs files in crate...");
+    println!("🔍 SCANNING FOR RUST FILES...");
     process_all_rust_files(
         paths, 
         config, 
@@ -315,6 +365,10 @@ pub fn eager_split_crate(paths: &CratePaths, config: &SplitDeclsConfig) -> Resul
         false, // dry_run
         &mut module_not_found_errors
     )?;
+    
+    println!("📊 PROCESSING SUMMARY:");
+    println!("   📋 Total items processed: {}", item_count);
+    println!("   📦 Total modules generated: {}", collected_module_names.len());
     
     // 4. Generate new lib.rs in output directory
     println!("DEBUG: Before generate_output_lib_rs call.");
@@ -571,6 +625,17 @@ pub fn split_and_generate_decls(
     // Generate decl_module! invocation
     info!("DEBUG: Collected module names for decl_module!: {:?}", collected_module_names.iter().map(|i| i.to_string()).collect::<Vec<_>>()); // Changed println to info
     invocation_generator::generate_decl_module_invocation(collected_module_names, paths, dry_run)?;
+
+    // Decrement recursion depth on exit
+    thread_local! {
+        static RECURSION_DEPTH: std::cell::Cell<usize> = std::cell::Cell::new(0);
+    }
+    RECURSION_DEPTH.with(|d| {
+        let depth = d.get();
+        if depth > 0 {
+            d.set(depth - 1);
+        }
+    });
 
     Ok(())
 }

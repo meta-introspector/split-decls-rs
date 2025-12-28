@@ -16,6 +16,7 @@ use walkdir;
 use clap::{Parser, Subcommand}; // Added clap imports
 use std::time::Instant; // Added for ecosystem_scan_mode
 use std::path::Path; // Added for ecosystem_scan_mode (Path type)
+use std::thread; // Added for stack overflow protection
 use split_decls_rs::goal_parser::{GoalConfig, Workflow};
 // use split_decls_rs::workflow_executor::WorkflowExecutor; // Disabled - no workflow execution needed
 mod ecosystem_processor; // New module for ecosystem processing
@@ -395,6 +396,32 @@ use env_logger::{Builder, Target, WriteStyle};
 
 // ...
 fn main() -> Result<()> {
+    // Set up panic hook to catch stack overflows
+    std::panic::set_hook(Box::new(|panic_info| {
+        eprintln!("🚨 PANIC DETECTED: {}", panic_info);
+        if let Some(location) = panic_info.location() {
+            eprintln!("📍 Location: {}:{}:{}", location.file(), location.line(), location.column());
+        }
+        if let Some(payload) = panic_info.payload().downcast_ref::<&str>() {
+            eprintln!("💥 Payload: {}", payload);
+        }
+        eprintln!("🔍 This may be a stack overflow - check for recursive function calls");
+        std::process::exit(1);
+    }));
+
+    // Increase stack size for the main thread
+    let builder = std::thread::Builder::new()
+        .name("main_with_large_stack".into())
+        .stack_size(128 * 1024 * 1024); // 128MB stack
+
+    let handle = builder.spawn(|| {
+        actual_main()
+    })?;
+
+    handle.join().unwrap()
+}
+
+fn actual_main() -> Result<()> {
     // Initialize logger
     Builder::from_default_env()
         .write_style(WriteStyle::Always)
