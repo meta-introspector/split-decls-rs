@@ -1,5 +1,4 @@
 pub mod decls {
-    pub mod lib_old;
-    pub use lib_old::*;
+    // Re-export all the split declarations
 }
 pub use decls::*;

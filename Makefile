@@ -173,3 +173,23 @@ run_enhanced:
 	@echo "Running enhanced generation..."
 	@RUSTC_WRAPPER=$(SCCACHE) cargo build --release --quiet
 	@RUSTC_WRAPPER=$(SCCACHE) cargo run --release --bin generate_output3_from_enhanced --quiet 2>/dev/null || true
+
+# Build specific package with errors only
+build_pkg:
+	@cargo build -p $(PKG) 2>$(PKG)_errors.log || true
+	@echo "Build completed. Errors saved to $(PKG)_errors.log"
+
+# Build smart compiler quietly and show only errors
+build_smart_compiler:
+	@cargo build --bin smart_compiler 2>smart_compiler_build.log || true
+	@grep -E "(error|Error)" smart_compiler_build.log || echo "✅ No errors found"
+
+# Run directory analysis quietly and show only errors
+build_directory_analysis:
+	@cargo build --bin directory_analysis 2>directory_analysis_build.log || true
+	@grep -E "(error|Error)" directory_analysis_build.log || echo "✅ Directory analysis built"
+
+# Run directory analysis
+run_directory_analysis:
+	@cargo run --bin directory_analysis 2>directory_analysis_run.log || true
+	@cat directory_analysis_run.log
