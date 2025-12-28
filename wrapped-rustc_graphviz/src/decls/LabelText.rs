@@ -1,0 +1,7 @@
+macro_rules! LabelText {
+    () => {
+        # [doc = " The text for a graphviz label on a node or edge."] pub enum LabelText < 'a > { # [doc = " This kind of label preserves the text directly as is."] # [doc = ""] # [doc = " Occurrences of backslashes (`\\`) are escaped, and thus appear"] # [doc = " as backslashes in the rendered label."] LabelStr (Cow < 'a , str >) , # [doc = " This kind of label uses the graphviz label escString type:"] # [doc = " <https://www.graphviz.org/docs/attr-types/escString>"] # [doc = ""] # [doc = " Occurrences of backslashes (`\\`) are not escaped; instead they"] # [doc = " are interpreted as initiating an escString escape sequence."] # [doc = ""] # [doc = " Escape sequences of particular interest: in addition to `\\n`"] # [doc = " to break a line (centering the line preceding the `\\n`), there"] # [doc = " are also the escape sequences `\\l` which left-justifies the"] # [doc = " preceding line and `\\r` which right-justifies it."] EscStr (Cow < 'a , str >) , # [doc = " This uses a graphviz [HTML string label][html]. The string is"] # [doc = " printed exactly as given, but between `<` and `>`. **No"] # [doc = " escaping is performed.**"] # [doc = ""] # [doc = " [html]: https://www.graphviz.org/doc/info/shapes.html#html"] HtmlStr (Cow < 'a , str >) , }
+    };
+}
+
+LabelText!()

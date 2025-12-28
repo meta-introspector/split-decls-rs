@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        PasswordClient!();
+        ChallengeParamRef!();
+    };
+}
+
+macro_rules! ChallengeRef {
+    () => {
+        deps!();
+        # [doc = " Parsed challenge (scheme and body) using references to the original header value."] # [doc = " Produced by [`crate::parser::ChallengeParser`]."] # [doc = ""] # [doc = " This is not directly useful for responding to a challenge; it's an"] # [doc = " intermediary for constructing a client that knows how to respond to a specific"] # [doc = " challenge scheme. In most cases, callers should construct a [`PasswordClient`]"] # [doc = " without directly using `ChallengeRef`."] # [doc = ""] # [doc = " Only supports the param form, not the apocryphal `token68` form, as described"] # [doc = " in [`crate::parser::ChallengeParser`]."] # [derive (Clone , Eq , PartialEq)] pub struct ChallengeRef < 'i > { # [doc = " The scheme name, which should be compared case-insensitively."] pub scheme : & 'i str , # [doc = " Zero or more parameters."] # [doc = ""] # [doc = " These are represented as a `Vec` of key-value pairs rather than a"] # [doc = " map. Given that the parameters are generally only used once when"] # [doc = " constructing a challenge client and each challenge only supports a few"] # [doc = " parameter types, it's more efficient in terms of CPU usage and code size"] # [doc = " to scan through them directly."] pub params : Vec < ChallengeParamRef < 'i > > , }
+    };
+}
+
+ChallengeRef!()

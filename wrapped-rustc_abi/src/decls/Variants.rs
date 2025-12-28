@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        TagEncoding!();
+        Scalar!();
+        LayoutData!();
+    };
+}
+
+macro_rules! Variants {
+    () => {
+        deps!();
+        # [derive (PartialEq , Eq , Hash , Clone , Debug)] # [cfg_attr (feature = "nightly" , derive (HashStable_Generic))] pub enum Variants < FieldIdx : Idx , VariantIdx : Idx > { # [doc = " A type with no valid variants. Must be uninhabited."] Empty , # [doc = " Single enum variants, structs/tuples, unions, and all non-ADTs."] Single { # [doc = " Always `0` for types that cannot have multiple variants."] index : VariantIdx , } , # [doc = " Enum-likes with more than one variant: each variant comes with"] # [doc = " a *discriminant* (usually the same as the variant index but the user can"] # [doc = " assign explicit discriminant values). That discriminant is encoded"] # [doc = " as a *tag* on the machine. The layout of each variant is"] # [doc = " a struct, and they all have space reserved for the tag."] # [doc = " For enums, the tag is the sole field of the layout."] Multiple { tag : Scalar , tag_encoding : TagEncoding < VariantIdx > , tag_field : FieldIdx , variants : IndexVec < VariantIdx , LayoutData < FieldIdx , VariantIdx > > , } , }
+    };
+}
+
+Variants!()

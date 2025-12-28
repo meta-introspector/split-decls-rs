@@ -1,0 +1,7 @@
+macro_rules! ToHex {
+    () => {
+        # [doc = " Encoding values as hex string."] # [doc = ""] # [doc = " This trait is implemented for all `T` which implement `AsRef<[u8]>`. This"] # [doc = " includes `String`, `str`, `Vec<u8>` and `[u8]`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use hex::ToHex;"] # [doc = ""] # [doc = " println!(\"{}\", \"Hello world!\".encode_hex::<String>());"] # [doc = " # assert_eq!(\"Hello world!\".encode_hex::<String>(), \"48656c6c6f20776f726c6421\".to_string());"] # [doc = " ```"] # [doc = ""] # [doc = " *Note*: instead of using this trait, you might want to use [`encode()`]."] pub trait ToHex { # [doc = " Encode the hex strict representing `self` into the result. Lower case"] # [doc = " letters are used (e.g. `f9b4ca`)"] fn encode_hex < T : iter :: FromIterator < char > > (& self) -> T ; # [doc = " Encode the hex strict representing `self` into the result. Upper case"] # [doc = " letters are used (e.g. `F9B4CA`)"] fn encode_hex_upper < T : iter :: FromIterator < char > > (& self) -> T ; }
+    };
+}
+
+ToHex!()

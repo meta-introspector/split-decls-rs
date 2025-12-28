@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        IntegerType!();
+        Align!();
+        ReprFlags!();
+    };
+}
+
+macro_rules! ReprOptions {
+    () => {
+        deps!();
+        # [doc = " Represents the repr options provided by the user."] # [derive (Copy , Clone , Debug , Eq , PartialEq , Default)] # [cfg_attr (feature = "nightly" , derive (Encodable_NoContext , Decodable_NoContext , HashStable_Generic))] pub struct ReprOptions { pub int : Option < IntegerType > , pub align : Option < Align > , pub pack : Option < Align > , pub flags : ReprFlags , # [doc = " The seed to be used for randomizing a type's layout"] # [doc = ""] # [doc = " Note: This could technically be a `u128` which would"] # [doc = " be the \"most accurate\" hash as it'd encompass the item and crate"] # [doc = " hash without loss, but it does pay the price of being larger."] # [doc = " Everything's a tradeoff, a 64-bit seed should be sufficient for our"] # [doc = " purposes (primarily `-Z randomize-layout`)"] pub field_shuffle_seed : Hash64 , }
+    };
+}
+
+ReprOptions!()

@@ -1,0 +1,7 @@
+macro_rules! inline_convert_while_ascii {
+    () => {
+        # [doc = " Inline version of std fn `convert_while_ascii`. `s` must have len <= 23."] # [inline] fn inline_convert_while_ascii (s : & str , convert : fn (& u8) -> u8) -> ([u8 ; INLINE_CAP] , & str) { const N : usize = 16 ; debug_assert ! (s . len () <= INLINE_CAP , "only for inline-able strings") ; let mut slice = s . as_bytes () ; let mut out = [0u8 ; INLINE_CAP] ; let mut out_slice = & mut out [.. slice . len ()] ; let mut is_ascii = [false ; N] ; while slice . len () >= N { let chunk = unsafe { slice . get_unchecked (.. N) } ; let out_chunk = unsafe { out_slice . get_unchecked_mut (.. N) } ; for j in 0 .. N { is_ascii [j] = chunk [j] <= 127 ; } if is_ascii . iter () . map (| x | * x as u8) . sum :: < u8 > () as usize != N { break ; } for j in 0 .. N { out_chunk [j] = convert (& chunk [j]) ; } slice = unsafe { slice . get_unchecked (N ..) } ; out_slice = unsafe { out_slice . get_unchecked_mut (N ..) } ; } while ! slice . is_empty () { let byte = slice [0] ; if byte > 127 { break ; } unsafe { * out_slice . get_unchecked_mut (0) = convert (& byte) ; } slice = unsafe { slice . get_unchecked (1 ..) } ; out_slice = unsafe { out_slice . get_unchecked_mut (1 ..) } ; } unsafe { let rest = core :: str :: from_utf8_unchecked (slice) ; (out , rest) } }
+    };
+}
+
+inline_convert_while_ascii!()

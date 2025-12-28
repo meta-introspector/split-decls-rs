@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        StreamResult!();
+        MZResult!();
+    };
+}
+
+macro_rules! MZStatus {
+    () => {
+        deps!();
+        # [doc = " A list of miniz successful status codes."] # [doc = ""] # [doc = " These are emitted as the [`Ok`] side of a [`MZResult`] in the [`StreamResult`] returned from"] # [doc = " [`deflate::stream::deflate()`] or [`inflate::stream::inflate()`]."] # [repr (i32)] # [derive (Copy , Clone , PartialEq , Eq)] # [cfg_attr (not (feature = "rustc-dep-of-std") , derive (Hash , Debug))] pub enum MZStatus { # [doc = " Operation succeeded."] # [doc = ""] # [doc = " Some data was decompressed or compressed; see the byte counters in the [`StreamResult`] for"] # [doc = " details."] Ok = 0 , # [doc = " Operation succeeded and end of deflate stream was found."] # [doc = ""] # [doc = " X-ref [`TINFLStatus::Done`][inflate::TINFLStatus::Done] or"] # [doc = " [`TDEFLStatus::Done`][deflate::core::TDEFLStatus::Done] for `inflate` or `deflate`"] # [doc = " respectively."] StreamEnd = 1 , # [doc = " Unused"] NeedDict = 2 , }
+    };
+}
+
+MZStatus!()

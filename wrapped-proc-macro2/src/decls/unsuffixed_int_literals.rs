@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        TokenStream!();
+        Literal!();
+    };
+}
+
+macro_rules! unsuffixed_int_literals {
+    () => {
+        deps!();
+        macro_rules ! unsuffixed_int_literals { ($ ($ name : ident => $ kind : ident ,) *) => ($ (# [doc = " Creates a new unsuffixed integer literal with the specified value."] # [doc = ""] # [doc = " This function will create an integer like `1` where the integer"] # [doc = " value specified is the first part of the token. No suffix is"] # [doc = " specified on this token, meaning that invocations like"] # [doc = " `Literal::i8_unsuffixed(1)` are equivalent to"] # [doc = " `Literal::u32_unsuffixed(1)`. Literals created from negative numbers"] # [doc = " may not survive roundtrips through `TokenStream` or strings and may"] # [doc = " be broken into two tokens (`-` and positive literal)."] # [doc = ""] # [doc = " Literals created through this method have the `Span::call_site()`"] # [doc = " span by default, which can be configured with the `set_span` method"] # [doc = " below."] pub fn $ name (n : $ kind) -> Literal { Literal :: _new (imp :: Literal ::$ name (n)) }) *) }
+    };
+}
+
+unsuffixed_int_literals!()

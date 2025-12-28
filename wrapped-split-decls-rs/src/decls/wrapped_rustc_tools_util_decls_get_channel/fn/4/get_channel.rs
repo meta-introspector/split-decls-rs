@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: get_channel");
+# [must_use] pub fn get_channel (compiler_version : Option < String >) -> String { if let Ok (channel) = std :: env :: var ("CFG_RELEASE_CHANNEL") { return channel ; } if let Some (rustc_output) = compiler_version { if rustc_output . contains ("beta") { return String :: from ("beta") ; } else if rustc_output . contains ("nightly") { return String :: from ("nightly") ; } else if rustc_output . contains ("dev") { return String :: from ("dev") ; } } String :: from ("stable") }
+}

@@ -1,0 +1,7 @@
+macro_rules! nghttp2_select_padding_callback {
+    () => {
+        # [doc = " @functypedef"] # [doc = ""] # [doc = " Callback function invoked when the library asks application how"] # [doc = " many padding bytes are required for the transmission of the"] # [doc = " |frame|.  The application must choose the total length of payload"] # [doc = " including padded bytes in range [frame->hd.length, max_payloadlen],"] # [doc = " inclusive.  Choosing number not in this range will be treated as"] # [doc = " :enum:`NGHTTP2_ERR_CALLBACK_FAILURE`.  Returning"] # [doc = " ``frame->hd.length`` means no padding is added.  Returning"] # [doc = " :enum:`NGHTTP2_ERR_CALLBACK_FAILURE` will make"] # [doc = " `nghttp2_session_send()` and `nghttp2_session_mem_send()` functions"] # [doc = " immediately return :enum:`NGHTTP2_ERR_CALLBACK_FAILURE`."] # [doc = ""] # [doc = " To set this callback to :type:`nghttp2_session_callbacks`, use"] # [doc = " `nghttp2_session_callbacks_set_select_padding_callback()`."] pub type nghttp2_select_padding_callback = :: std :: option :: Option < unsafe extern "C" fn (session : * mut nghttp2_session , frame : * const nghttp2_frame , max_payloadlen : usize , user_data : * mut :: std :: os :: raw :: c_void ,) -> isize , > ;
+    };
+}
+
+nghttp2_select_padding_callback!()

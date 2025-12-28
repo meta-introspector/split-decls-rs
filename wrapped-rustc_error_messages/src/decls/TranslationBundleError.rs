@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        FluentBundle!();
+    };
+}
+
+macro_rules! TranslationBundleError {
+    () => {
+        deps!();
+        # [derive (Debug)] pub enum TranslationBundleError { # [doc = " Failed to read from `.ftl` file."] ReadFtl (io :: Error) , # [doc = " Failed to parse contents of `.ftl` file."] ParseFtl (ParserError) , # [doc = " Failed to add `FluentResource` to `FluentBundle`."] AddResource (FluentError) , # [doc = " `$sysroot/share/locale/$locale` does not exist."] MissingLocale , # [doc = " Cannot read directory entries of `$sysroot/share/locale/$locale`."] ReadLocalesDir (io :: Error) , # [doc = " Cannot read directory entry of `$sysroot/share/locale/$locale`."] ReadLocalesDirEntry (io :: Error) , # [doc = " `$sysroot/share/locale/$locale` is not a directory."] LocaleIsNotDir , }
+    };
+}
+
+TranslationBundleError!()

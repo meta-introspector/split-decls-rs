@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: impl_include_dir");
+fn impl_include_dir (args : Vec < TokenTree >) -> Result < quote :: Tokens , & 'static str > { let dir = get_path_from_args (args) ? ; let paths : Vec < _ > = get_files (& dir) ; let keys : Vec < _ > = paths . iter () . map (| path | path . strip_prefix (& dir) . unwrap ()) . map (path_to_str_literal) . collect () ; let vals : Vec < _ > = paths . iter () . map (| path | :: std :: fs :: canonicalize (path) . expect ("found")) . map (path_to_str_literal) . collect () ; Ok (quote ! { { let mut __include_dir_hashmap = :: std :: collections :: HashMap :: new () ; # (__include_dir_hashmap . insert (:: std :: path :: Path :: new (# keys) , & include_bytes ! (# vals) [..]) ;) * __include_dir_hashmap } }) }
+}

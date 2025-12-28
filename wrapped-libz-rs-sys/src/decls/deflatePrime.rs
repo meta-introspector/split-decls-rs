@@ -1,0 +1,7 @@
+macro_rules! deflatePrime {
+    () => {
+        # [doc = " Inserts bits in the deflate output stream."] # [doc = ""] # [doc = " The intent is that this function is used to start off the deflate output with the bits leftover from a previous deflate stream when appending to it."] # [doc = " As such, this function can only be used for raw deflate, and must be used before the first [`deflate`] call after a [`deflateInit2_`] or [`deflateReset`]."] # [doc = " bits must be less than or equal to 16, and that many of the least significant bits of value will be inserted in the output."] # [doc = ""] # [doc = " # Returns"] # [doc = ""] # [doc = " - [`Z_OK`] if success"] # [doc = " - [`Z_BUF_ERROR`] if there was not enough room in the internal buffer to insert the bits"] # [doc = " - [`Z_STREAM_ERROR`] if the source stream state was inconsistent"] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must guarantee that"] # [doc = ""] # [doc = " * Either"] # [doc = "     - `strm` is `NULL`"] # [doc = "     - `strm` satisfies the requirements of `&mut *strm` and was initialized with [`deflateInit_`] or similar"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (deflatePrime))] pub unsafe extern "C-unwind" fn deflatePrime (strm : z_streamp , bits : c_int , value : c_int) -> c_int { match DeflateStream :: from_stream_mut (strm) { Some (stream) => zlib_rs :: deflate :: prime (stream , bits , value) as _ , None => ReturnCode :: StreamError as _ , } }
+    };
+}
+
+deflatePrime!()

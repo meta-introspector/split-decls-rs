@@ -1,0 +1,6 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclstruct! {
+# [doc = " Enum variant."] # [derive (Clone , Encodable , Decodable , Debug , Walkable)] pub struct Variant { # [doc = " Attributes of the variant."] pub attrs : AttrVec , # [doc = " Id of the variant (not the constructor, see `VariantData::ctor_id()`)."] pub id : NodeId , # [doc = " Span"] pub span : Span , # [doc = " The visibility of the variant. Syntactically accepted but not semantically."] pub vis : Visibility , # [doc = " Name of the variant."] pub ident : Ident , # [doc = " Fields and constructor id of the variant."] pub data : VariantData , # [doc = " Explicit discriminant, e.g., `Foo = 1`."] pub disr_expr : Option < AnonConst > , # [doc = " Is a macro placeholder."] pub is_placeholder : bool , }
+}

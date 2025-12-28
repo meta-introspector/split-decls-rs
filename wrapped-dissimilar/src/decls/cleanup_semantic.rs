@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Solution!();
+        Diff!();
+    };
+}
+
+macro_rules! cleanup_semantic {
+    () => {
+        deps!();
+        fn cleanup_semantic (solution : & mut Solution) { let mut diffs = & mut solution . diffs ; if diffs . is_empty () { return ; } let mut changes = false ; let mut equalities = VecDeque :: new () ; let mut last_equality = None ; let mut pointer = 0 ; let mut len_insertions1 = 0 ; let mut len_deletions1 = 0 ; let mut len_insertions2 = 0 ; let mut len_deletions2 = 0 ; while let Some (& this_diff) = diffs . get (pointer) { match this_diff { Diff :: Equal (text1 , text2) => { equalities . push_back (pointer) ; len_insertions1 = len_insertions2 ; len_deletions1 = len_deletions2 ; len_insertions2 = 0 ; len_deletions2 = 0 ; last_equality = Some ((text1 , text2)) ; pointer += 1 ; continue ; } Diff :: Delete (text) => len_deletions2 += text . len , Diff :: Insert (text) => len_insertions2 += text . len , } if last_equality . map_or (false , | (last_equality , _) | { last_equality . len <= cmp :: max (len_insertions1 , len_deletions1) && last_equality . len <= cmp :: max (len_insertions2 , len_deletions2) }) { pointer = equalities . pop_back () . unwrap () ; diffs [pointer] = Diff :: Delete (last_equality . unwrap () . 0) ; diffs . insert (pointer + 1 , Diff :: Insert (last_equality . unwrap () . 1)) ; len_insertions1 = 0 ; len_insertions2 = 0 ; len_deletions1 = 0 ; len_deletions2 = 0 ; last_equality = None ; changes = true ; equalities . pop_back () ; if let Some (back) = equalities . back () { pointer = * back ; } else { pointer = 0 ; continue ; } } pointer += 1 ; } if changes { cleanup_merge (solution) ; } cleanup_semantic_lossless (solution) ; diffs = & mut solution . diffs ; let mut pointer = 1 ; while let Some (& this_diff) = diffs . get (pointer) { let prev_diff = diffs [pointer - 1] ; if let (Diff :: Delete (deletion) , Diff :: Insert (insertion)) = (prev_diff , this_diff) { let overlap_len1 = common_overlap (deletion , insertion) ; let overlap_len2 = common_overlap (insertion , deletion) ; let overlap_min = cmp :: min (deletion . len , insertion . len) ; if overlap_len1 >= overlap_len2 && 2 * overlap_len1 >= overlap_min { diffs . insert (pointer , Diff :: Equal (deletion . substring (deletion . len - overlap_len1 .. deletion . len) , insertion . substring (.. overlap_len1) ,) ,) ; diffs [pointer - 1] = Diff :: Delete (deletion . substring (.. deletion . len - overlap_len1)) ; diffs [pointer + 1] = Diff :: Insert (insertion . substring (overlap_len1 ..)) ; } else if overlap_len1 < overlap_len2 && 2 * overlap_len2 >= overlap_min { diffs . insert (pointer , Diff :: Equal (deletion . substring (.. overlap_len2) , insertion . substring (insertion . len - overlap_len2 .. insertion . len) ,) ,) ; diffs [pointer - 1] = Diff :: Insert (insertion . substring (.. insertion . len - overlap_len2)) ; diffs [pointer + 1] = Diff :: Delete (deletion . substring (overlap_len2 ..)) ; } pointer += 1 ; } pointer += 1 ; } }
+    };
+}
+
+cleanup_semantic!()

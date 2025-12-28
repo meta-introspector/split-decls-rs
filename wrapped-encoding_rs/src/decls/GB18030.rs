@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Encoding!();
+    };
+}
+
+macro_rules! GB18030 {
+    () => {
+        deps!();
+        # [doc = " The gb18030 encoding."] # [doc = ""] # [doc = " This encoding matches GB18030-2022 except the two-byte sequence 0xA3 0xA0"] # [doc = " maps to U+3000 for compatibility with existing Web content and the four-byte"] # [doc = " sequences for the non-PUA characters that got two-byte sequences still decode"] # [doc = " to the same non-PUA characters as in GB18030-2005. As a result, this encoding"] # [doc = " can represent all of Unicode except for 19 private-use characters."] # [doc = ""] # [doc = " [Index visualization for the two-byte sequences](https://encoding.spec.whatwg.org/gb18030.html),"] # [doc = " [Visualization of BMP coverage of the two-byte index](https://encoding.spec.whatwg.org/gb18030-bmp.html)"] # [doc = ""] # [doc = " This encoding matches the Windows code page 54936."] # [doc = ""] # [doc = " This will change from `static` to `const` if Rust changes"] # [doc = " to make the referent of `pub const FOO: &'static Encoding`"] # [doc = " unique cross-crate, so don't take the address of this"] # [doc = " `static`."] pub static GB18030 : & 'static Encoding = & GB18030_INIT ;
+    };
+}
+
+GB18030!()

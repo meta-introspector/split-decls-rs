@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Axis!();
+        Figure!();
+        Default!();
+    };
+}
+
+macro_rules! impl_15 {
+    () => {
+        deps!();
+        impl Configure < Axis > for Figure { type Properties = axis :: Properties ; # [doc = " Configures an axis"] fn configure < F > (& mut self , axis : Axis , configure : F) -> & mut Figure where F : FnOnce (& mut axis :: Properties) -> & mut axis :: Properties , { if self . axes . contains_key (axis) { configure (self . axes . get_mut (axis) . unwrap ()) ; } else { let mut properties = Default :: default () ; configure (& mut properties) ; self . axes . insert (axis , properties) ; } self } }
+    };
+}
+
+impl_15!()

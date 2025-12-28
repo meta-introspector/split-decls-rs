@@ -1,0 +1,7 @@
+macro_rules! Suggestion {
+    () => {
+        pub enum Suggestion { None , # [doc = " Replace inline argument with positional argument:"] # [doc = " `format!(\"{foo.bar}\")` -> `format!(\"{}\", foo.bar)`"] UsePositional , # [doc = " Remove `r#` from identifier:"] # [doc = " `format!(\"{r#foo}\")` -> `format!(\"{foo}\")`"] RemoveRawIdent (Range < usize >) , # [doc = " Reorder format parameter:"] # [doc = " `format!(\"{foo:?#}\")` -> `format!(\"{foo:#?}\")`"] # [doc = " `format!(\"{foo:?x}\")` -> `format!(\"{foo:x?}\")`"] # [doc = " `format!(\"{foo:?X}\")` -> `format!(\"{foo:X?}\")`"] ReorderFormatParameter (Range < usize > , String) , }
+    };
+}
+
+Suggestion!()

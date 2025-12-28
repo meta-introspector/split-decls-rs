@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FileName!();
+        SourceFile!();
+    };
+}
+
+macro_rules! StableSourceFileId {
+    () => {
+        deps!();
+        # [doc = " This is a [SourceFile] identifier that is used to correlate source files between"] # [doc = " subsequent compilation sessions (which is something we need to do during"] # [doc = " incremental compilation)."] # [doc = ""] # [doc = " It is a hash value (so we can efficiently consume it when stable-hashing"] # [doc = " spans) that consists of the `FileName` and the `StableCrateId` of the crate"] # [doc = " the source file is from. The crate id is needed because sometimes the"] # [doc = " `FileName` is not unique within the crate graph (think `src/lib.rs`, for"] # [doc = " example)."] # [doc = ""] # [doc = " The way the crate-id part is handled is a bit special: source files of the"] # [doc = " local crate are hashed as `(filename, None)`, while source files from"] # [doc = " upstream crates have a hash of `(filename, Some(stable_crate_id))`. This"] # [doc = " is because SourceFiles for the local crate are allocated very early in the"] # [doc = " compilation process when the `StableCrateId` is not yet known. If, due to"] # [doc = " some refactoring of the compiler, the `StableCrateId` of the local crate"] # [doc = " were to become available, it would be better to uniformly make this a"] # [doc = " hash of `(filename, stable_crate_id)`."] # [doc = ""] # [doc = " When `SourceFile`s are exported in crate metadata, the `StableSourceFileId`"] # [doc = " is updated to incorporate the `StableCrateId` of the exporting crate."] # [derive (Debug , Clone , Copy , Hash , PartialEq , Eq , HashStable_Generic , Encodable , Decodable , Default , PartialOrd , Ord)] pub struct StableSourceFileId (Hash128) ;
+    };
+}
+
+StableSourceFileId!()

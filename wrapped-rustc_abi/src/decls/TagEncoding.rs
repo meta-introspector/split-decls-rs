@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Niche!();
+    };
+}
+
+macro_rules! TagEncoding {
+    () => {
+        deps!();
+        # [derive (PartialEq , Eq , Hash , Clone , Debug)] # [cfg_attr (feature = "nightly" , derive (HashStable_Generic))] pub enum TagEncoding < VariantIdx : Idx > { # [doc = " The tag directly stores the discriminant, but possibly with a smaller layout"] # [doc = " (so converting the tag to the discriminant can require sign extension)."] Direct , # [doc = " Niche (values invalid for a type) encoding the discriminant."] # [doc = " Note that for this encoding, the discriminant and variant index of each variant coincide!"] # [doc = " This invariant is codified as part of [`layout_sanity_check`](../rustc_ty_utils/layout/invariant/fn.layout_sanity_check.html)."] # [doc = ""] # [doc = " The variant `untagged_variant` contains a niche at an arbitrary"] # [doc = " offset (field [`Variants::Multiple::tag_field`] of the enum)."] # [doc = " For a variant with variant index `i`, such that `i != untagged_variant`,"] # [doc = " the tag is set to `(i - niche_variants.start).wrapping_add(niche_start)`"] # [doc = " (this is wrapping arithmetic using the type of the niche field, cf. the"] # [doc = " [`tag_for_variant`](../rustc_const_eval/interpret/struct.InterpCx.html#method.tag_for_variant)"] # [doc = " query implementation)."] # [doc = " To recover the variant index `i` from a `tag`, the above formula has to be reversed,"] # [doc = " i.e. `i = tag.wrapping_sub(niche_start) + niche_variants.start`. If `i` ends up outside"] # [doc = " `niche_variants`, the tag must have encoded the `untagged_variant`."] # [doc = ""] # [doc = " For example, `Option<(usize, &T)>`  is represented such that the tag for"] # [doc = " `None` is the null pointer in the second tuple field, and"] # [doc = " `Some` is the identity function (with a non-null reference)"] # [doc = " and has no additional tag, i.e. the reference being non-null uniquely identifies this variant."] # [doc = ""] # [doc = " Other variants that are not `untagged_variant` and that are outside the `niche_variants`"] # [doc = " range cannot be represented; they must be uninhabited."] # [doc = " Nonetheless, uninhabited variants can also fall into the range of `niche_variants`."] Niche { untagged_variant : VariantIdx , # [doc = " This range *may* contain `untagged_variant` or uninhabited variants;"] # [doc = " these are then just \"dead values\" and not used to encode anything."] niche_variants : RangeInclusive < VariantIdx > , # [doc = " This is inbounds of the type of the niche field"] # [doc = " (not sign-extended, i.e., all bits beyond the niche field size are 0)."] niche_start : u128 , } , }
+    };
+}
+
+TagEncoding!()

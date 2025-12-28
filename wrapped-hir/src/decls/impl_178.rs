@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Trait!();
+        TraitRef!();
+        Type!();
+        TypeNs!();
+    };
+}
+
+macro_rules! impl_178 {
+    () => {
+        deps!();
+        impl < 'db > TypeNs < 'db > { fn new (db : & 'db dyn HirDatabase , lexical_env : impl HasResolver , ty : Ty < 'db >) -> Self { let resolver = lexical_env . resolver (db) ; let environment = resolver . generic_def () . map_or_else (| | TraitEnvironment :: empty (resolver . krate ()) , | d | db . trait_environment (d)) ; TypeNs { env : environment , ty } } pub fn to_type (& self , _db : & 'db dyn HirDatabase) -> Type < 'db > { Type { env : self . env . clone () , ty : self . ty } } pub fn impls_trait (& self , infcx : InferCtxt < 'db > , trait_ : Trait , args : & [TypeNs < 'db >]) -> bool { let args = GenericArgs :: new_from_iter (infcx . interner , [self . ty] . into_iter () . chain (args . iter () . map (| t | t . ty)) . map (| t | t . into ()) ,) ; let trait_ref = hir_ty :: next_solver :: TraitRef :: new (infcx . interner , trait_ . id . into () , args) ; let pred_kind = rustc_type_ir :: Binder :: dummy (rustc_type_ir :: PredicateKind :: Clause (rustc_type_ir :: ClauseKind :: Trait (rustc_type_ir :: TraitPredicate { trait_ref , polarity : rustc_type_ir :: PredicatePolarity :: Positive , }) ,)) ; let predicate = hir_ty :: next_solver :: Predicate :: new (infcx . interner , pred_kind) ; let goal = hir_ty :: next_solver :: Goal :: new (infcx . interner , hir_ty :: next_solver :: ParamEnv :: empty () , predicate ,) ; let res = hir_ty :: traits :: next_trait_solve_in_ctxt (& infcx , goal) ; res . map_or (false , | res | matches ! (res . 1 , rustc_type_ir :: solve :: Certainty :: Yes)) } pub fn is_bool (& self) -> bool { matches ! (self . ty . kind () , rustc_type_ir :: TyKind :: Bool) } }
+    };
+}
+
+impl_178!()

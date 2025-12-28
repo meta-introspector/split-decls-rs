@@ -1,0 +1,7 @@
+macro_rules! quickcheck {
+    () => {
+        # [doc = " A macro for writing quickcheck tests."] # [doc = ""] # [doc = " This macro takes as input one or more property functions to test, and"] # [doc = " produces a proper `#[test]` function for each property. If the property"] # [doc = " fails, the behavior is as if `quickcheck` were called on the property"] # [doc = " (i.e., it panics and fails the test)."] # [doc = ""] # [doc = " Note that this macro doesn't support `mut` or patterns in parameters."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # #[macro_use] extern crate quickcheck; fn main() {"] # [doc = " quickcheck! {"] # [doc = "     fn prop_reverse_reverse(xs: Vec<usize>) -> bool {"] # [doc = "         let rev: Vec<_> = xs.clone().into_iter().rev().collect();"] # [doc = "         let revrev: Vec<_> = rev.into_iter().rev().collect();"] # [doc = "         xs == revrev"] # [doc = "     }"] # [doc = " };"] # [doc = " # }"] # [doc = " ```"] # [macro_export] macro_rules ! quickcheck { (@ as_items $ ($ i : item) *) => ($ ($ i) *) ; { $ ($ (# [$ m : meta]) * fn $ fn_name : ident ($ ($ arg_name : ident : $ arg_ty : ty) ,*) -> $ ret : ty { $ ($ code : tt) * }) * } => ($ crate :: quickcheck ! { @ as_items $ (# [test] $ (# [$ m]) * fn $ fn_name () { fn prop ($ ($ arg_name : $ arg_ty) ,*) -> $ ret { $ ($ code) * } $ crate :: quickcheck (prop as fn ($ ($ arg_ty) ,*) -> $ ret) ; }) * }) }
+    };
+}
+
+quickcheck!()

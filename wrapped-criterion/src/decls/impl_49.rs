@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        ActualSamplingMode!();
+    };
+}
+
+macro_rules! impl_49 {
+    () => {
+        deps!();
+        impl ActualSamplingMode { pub (crate) fn iteration_counts (& self , warmup_mean_execution_time : f64 , sample_count : u64 , target_time : & Duration ,) -> Vec < u64 > { match self { ActualSamplingMode :: Linear => { let n = sample_count ; let met = warmup_mean_execution_time ; let m_ns = target_time . as_nanos () ; let total_runs = n * (n + 1) / 2 ; let d = ((m_ns as f64 / met / total_runs as f64) . ceil () as u64) . max (1) ; let expected_ns = total_runs as f64 * d as f64 * met ; if d == 1 { let recommended_sample_size = ActualSamplingMode :: recommend_linear_sample_size (m_ns as f64 , met) ; let actual_time = Duration :: from_nanos (expected_ns as u64) ; eprint ! ("\nWarning: Unable to complete {} samples in {:.1?}. You may wish to increase target time to {:.1?}" , n , target_time , actual_time) ; if recommended_sample_size != n { eprintln ! (", enable flat sampling, or reduce sample count to {}." , recommended_sample_size) ; } else { eprintln ! (" or enable flat sampling.") ; } } (1 .. (n + 1)) . map (| a | a * d) . collect :: < Vec < u64 > > () } ActualSamplingMode :: Flat => { let n = sample_count ; let met = warmup_mean_execution_time ; let m_ns = target_time . as_nanos () as f64 ; let time_per_sample = m_ns / (n as f64) ; let iterations_per_sample = ((time_per_sample / met) . ceil () as u64) . max (1) ; let expected_ns = met * (iterations_per_sample * n) as f64 ; if iterations_per_sample == 1 { let recommended_sample_size = ActualSamplingMode :: recommend_flat_sample_size (m_ns , met) ; let actual_time = Duration :: from_nanos (expected_ns as u64) ; eprint ! ("\nWarning: Unable to complete {} samples in {:.1?}. You may wish to increase target time to {:.1?}" , n , target_time , actual_time) ; if recommended_sample_size != n { eprintln ! (", or reduce sample count to {}." , recommended_sample_size) ; } else { eprintln ! (".") ; } } vec ! [iterations_per_sample ; n as usize] } } } fn is_linear (& self) -> bool { matches ! (self , ActualSamplingMode :: Linear) } fn recommend_linear_sample_size (target_time : f64 , met : f64) -> u64 { let c = target_time / met ; let sample_size = (- 1.0 + (4.0 * c) . sqrt ()) / 2.0 ; let sample_size = sample_size as u64 ; let sample_size = (sample_size / 10) * 10 ; if sample_size < 10 { 10 } else { sample_size } } fn recommend_flat_sample_size (target_time : f64 , met : f64) -> u64 { let sample_size = (target_time / met) as u64 ; let sample_size = (sample_size / 10) * 10 ; if sample_size < 10 { 10 } else { sample_size } } }
+    };
+}
+
+impl_49!()

@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        AdtId!();
+        ModuleDefId!();
+        ModuleId!();
+        MacroId!();
+    };
+}
+
+macro_rules! impl_172 {
+    () => {
+        deps!();
+        impl ModuleDefId { # [doc = " Returns the module containing `self` (or `self`, if `self` is itself a module)."] # [doc = ""] # [doc = " Returns `None` if `self` refers to a primitive type."] pub fn module (& self , db : & dyn DefDatabase) -> Option < ModuleId > { Some (match self { ModuleDefId :: ModuleId (id) => * id , ModuleDefId :: FunctionId (id) => id . module (db) , ModuleDefId :: AdtId (id) => id . module (db) , ModuleDefId :: EnumVariantId (id) => id . module (db) , ModuleDefId :: ConstId (id) => id . module (db) , ModuleDefId :: StaticId (id) => id . module (db) , ModuleDefId :: TraitId (id) => id . module (db) , ModuleDefId :: TypeAliasId (id) => id . module (db) , ModuleDefId :: MacroId (id) => id . module (db) , ModuleDefId :: BuiltinType (_) => return None , }) } }
+    };
+}
+
+impl_172!()

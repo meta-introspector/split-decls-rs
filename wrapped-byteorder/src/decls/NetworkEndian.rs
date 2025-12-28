@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        BigEndian!();
+    };
+}
+
+macro_rules! NetworkEndian {
+    () => {
+        deps!();
+        # [doc = " Defines network byte order serialization."] # [doc = ""] # [doc = " Network byte order is defined by [RFC 1700][1] to be big-endian, and is"] # [doc = " referred to in several protocol specifications.  This type is an alias of"] # [doc = " [`BigEndian`]."] # [doc = ""] # [doc = " [1]: https://tools.ietf.org/html/rfc1700"] # [doc = ""] # [doc = " Note that this type has no value constructor. It is used purely at the"] # [doc = " type level."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Write and read `i16` numbers in big endian order:"] # [doc = ""] # [doc = " ```rust"] # [doc = " use byteorder::{ByteOrder, NetworkEndian, BigEndian};"] # [doc = ""] # [doc = " let mut buf = [0; 2];"] # [doc = " BigEndian::write_i16(&mut buf, -5_000);"] # [doc = " assert_eq!(-5_000, NetworkEndian::read_i16(&buf));"] # [doc = " ```"] # [doc = ""] # [doc = " [`BigEndian`]: enum.BigEndian.html"] pub type NetworkEndian = BigEndian ;
+    };
+}
+
+NetworkEndian!()

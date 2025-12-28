@@ -1,0 +1,7 @@
+macro_rules! provide {
+    () => {
+        pub fn provide (providers : & mut Providers) { coverage :: query :: provide (providers) ; ffi_unwind_calls :: provide (providers) ; shim :: provide (providers) ; cross_crate_inline :: provide (providers) ; providers . queries = query :: Providers { mir_keys , mir_built , mir_const_qualif , mir_promoted , mir_drops_elaborated_and_const_checked , mir_for_ctfe , mir_coroutine_witnesses : coroutine :: mir_coroutine_witnesses , optimized_mir , is_mir_available , is_ctfe_mir_available : is_mir_available , mir_callgraph_cyclic : inline :: cycle :: mir_callgraph_cyclic , mir_inliner_callees : inline :: cycle :: mir_inliner_callees , promoted_mir , deduced_param_attrs : deduce_param_attrs :: deduced_param_attrs , coroutine_by_move_body_def_id : coroutine :: coroutine_by_move_body_def_id , .. providers . queries } ; }
+    };
+}
+
+provide!()

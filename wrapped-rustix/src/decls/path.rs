@@ -1,0 +1,7 @@
+macro_rules! path {
+    () => {
+        # [cfg (not (windows))] # [cfg (not (any (feature = "fs" , feature = "mount" , feature = "net")))] # [cfg (all (linux_raw , not (feature = "use-libc-auxv") , not (feature = "use-explicitly-provided-auxv") , any (feature = "param" , feature = "runtime" , feature = "thread" , feature = "time" , target_arch = "x86" ,)))] pub (crate) mod path ;
+    };
+}
+
+path!()

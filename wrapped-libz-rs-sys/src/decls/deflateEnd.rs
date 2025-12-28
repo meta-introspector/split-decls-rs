@@ -1,0 +1,7 @@
+macro_rules! deflateEnd {
+    () => {
+        # [doc = " Deallocates all dynamically allocated data structures for this stream."] # [doc = ""] # [doc = " This function discards any unprocessed input and does not flush any pending output."] # [doc = ""] # [doc = " # Returns"] # [doc = ""] # [doc = " - [`Z_OK`] if success"] # [doc = " - [`Z_STREAM_ERROR`] if the stream state was inconsistent"] # [doc = " - [`Z_DATA_ERROR`] if the stream was freed prematurely (some input or output was discarded)"] # [doc = ""] # [doc = " In the error case, `strm.msg` may be set but then points to a static string (which must not be deallocated)."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " * Either"] # [doc = "     - `strm` is `NULL`"] # [doc = "     - `strm` satisfies the requirements of `&mut *strm` and was initialized with [`deflateInit_`] or similar"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (deflateEnd))] pub unsafe extern "C-unwind" fn deflateEnd (strm : * mut z_stream) -> i32 { match DeflateStream :: from_stream_mut (strm) { Some (stream) => match zlib_rs :: deflate :: end (stream) { Ok (_) => ReturnCode :: Ok as _ , Err (_) => ReturnCode :: DataError as _ , } , None => ReturnCode :: StreamError as _ , } }
+    };
+}
+
+deflateEnd!()

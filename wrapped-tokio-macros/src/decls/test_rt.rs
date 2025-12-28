@@ -1,0 +1,7 @@
+macro_rules! test_rt {
+    () => {
+        # [doc = " Marks async function to be executed by runtime, suitable to test environment"] # [doc = ""] # [doc = " ## Usage"] # [doc = ""] # [doc = " ```no_run"] # [doc = " #[tokio::test]"] # [doc = " async fn my_test() {"] # [doc = "     assert!(true);"] # [doc = " }"] # [doc = " ```"] # [proc_macro_attribute] pub fn test_rt (args : TokenStream , item : TokenStream) -> TokenStream { entry :: test (args . into () , item . into () , false) . into () }
+    };
+}
+
+test_rt!()

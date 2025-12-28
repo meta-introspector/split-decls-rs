@@ -1,0 +1,6 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclimpl! {
+impl PartialEq for LintId { fn eq (& self , other : & LintId) -> bool { std :: ptr :: eq (self . lint , other . lint) } }
+}

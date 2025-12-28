@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        InlineSize!();
+        SmolStr!();
+        Repr!();
+    };
+}
+
+macro_rules! impl_2 {
+    () => {
+        deps!();
+        impl SmolStr { # [doc = " Constructs an inline variant of `SmolStr`."] # [doc = ""] # [doc = " This never allocates."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if `text.len() > 23`."] # [inline] pub const fn new_inline (text : & str) -> SmolStr { assert ! (text . len () <= INLINE_CAP) ; let text = text . as_bytes () ; let mut buf = [0 ; INLINE_CAP] ; let mut i = 0 ; while i < text . len () { buf [i] = text [i] ; i += 1 } SmolStr (Repr :: Inline { len : unsafe { InlineSize :: transmute_from_u8 (text . len () as u8) } , buf , }) } # [doc = " Constructs a `SmolStr` from a statically allocated string."] # [doc = ""] # [doc = " This never allocates."] # [inline (always)] pub const fn new_static (text : & 'static str) -> SmolStr { SmolStr (Repr :: Static (text)) } # [doc = " Constructs a `SmolStr` from a `str`, heap-allocating if necessary."] # [inline (always)] pub fn new (text : impl AsRef < str >) -> SmolStr { SmolStr (Repr :: new (text . as_ref ())) } # [doc = " Returns a `&str` slice of this `SmolStr`."] # [inline (always)] pub fn as_str (& self) -> & str { self . 0 . as_str () } # [doc = " Returns the length of `self` in bytes."] # [inline (always)] pub fn len (& self) -> usize { self . 0 . len () } # [doc = " Returns `true` if `self` has a length of zero bytes."] # [inline (always)] pub fn is_empty (& self) -> bool { self . 0 . is_empty () } # [doc = " Returns `true` if `self` is heap-allocated."] # [inline (always)] pub const fn is_heap_allocated (& self) -> bool { matches ! (self . 0 , Repr :: Heap (..)) } }
+    };
+}
+
+impl_2!()

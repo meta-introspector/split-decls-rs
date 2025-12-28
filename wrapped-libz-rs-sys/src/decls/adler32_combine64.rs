@@ -1,0 +1,7 @@
+macro_rules! adler32_combine64 {
+    () => {
+        # [doc = " Combines the checksum of two slices into one."] # [doc = ""] # [doc = " The combined value is equivalent to calculating the checksum of the whole input."] # [doc = ""] # [doc = " This function can be used when input arrives in chunks, or when different threads"] # [doc = " calculate the checksum of different sections of the input."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use libz_rs_sys::{adler32, adler32_combine64};"] # [doc = ""] # [doc = " let input = [1, 2, 3, 4, 5, 6, 7, 8];"] # [doc = " let lo = &input[..4];"] # [doc = " let hi = &input[4..];"] # [doc = ""] # [doc = " unsafe {"] # [doc = "     let full = adler32(1, input.as_ptr(), input.len() as _);"] # [doc = ""] # [doc = "     let adler1 = adler32(1, lo.as_ptr(), lo.len() as _);"] # [doc = "     let adler2 = adler32(1, hi.as_ptr(), hi.len() as _);"] # [doc = ""] # [doc = "     let combined = adler32_combine64(adler1, adler2, hi.len() as _);"] # [doc = ""] # [doc = "     assert_eq!(full, combined);"] # [doc = " }"] # [doc = " ```"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (adler32_combine64))] pub extern "C-unwind" fn adler32_combine64 (adler1 : c_ulong , adler2 : c_ulong , len2 : z_off64_t ,) -> c_ulong { match u64 :: try_from (len2) { Ok (len2) => zlib_rs :: adler32_combine (adler1 as u32 , adler2 as u32 , len2) as c_ulong , Err (_) => { 0xFFFF_FFFF } } }
+    };
+}
+
+adler32_combine64!()

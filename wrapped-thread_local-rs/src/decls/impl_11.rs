@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        ThreadLocal!();
+        RawIter!();
+        IntoIter!();
+    };
+}
+
+macro_rules! impl_11 {
+    () => {
+        deps!();
+        impl < T : Send > IntoIterator for ThreadLocal < T > { type Item = T ; type IntoIter = IntoIter < T > ; fn into_iter (self) -> IntoIter < T > { IntoIter { thread_local : self , raw : RawIter :: new () , } } }
+    };
+}
+
+impl_11!()

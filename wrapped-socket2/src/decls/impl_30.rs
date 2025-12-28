@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        MsgHdr!();
+    };
+}
+
+macro_rules! impl_30 {
+    () => {
+        deps!();
+        # [cfg (not (target_os = "redox"))] impl < 'addr , 'bufs , 'control > MsgHdr < 'addr , 'bufs , 'control > { # [doc = " Create a new `MsgHdr` with all empty/zero fields."] # [allow (clippy :: new_without_default)] pub fn new () -> MsgHdr < 'addr , 'bufs , 'control > { MsgHdr { inner : unsafe { mem :: zeroed () } , _lifetimes : PhantomData , } } # [doc = " Set the address (name) of the message."] # [doc = ""] # [doc = " Corresponds to setting `msg_name` and `msg_namelen` on Unix and `name`"] # [doc = " and `namelen` on Windows."] pub fn with_addr (mut self , addr : & 'addr SockAddr) -> Self { sys :: set_msghdr_name (& mut self . inner , addr) ; self } # [doc = " Set the buffer(s) of the message."] # [doc = ""] # [doc = " Corresponds to setting `msg_iov` and `msg_iovlen` on Unix and `lpBuffers`"] # [doc = " and `dwBufferCount` on Windows."] pub fn with_buffers (mut self , bufs : & 'bufs [IoSlice < '_ >]) -> Self { let ptr = bufs . as_ptr () as * mut _ ; sys :: set_msghdr_iov (& mut self . inner , ptr , bufs . len ()) ; self } # [doc = " Set the control buffer of the message."] # [doc = ""] # [doc = " Corresponds to setting `msg_control` and `msg_controllen` on Unix and"] # [doc = " `Control` on Windows."] pub fn with_control (mut self , buf : & 'control [u8]) -> Self { let ptr = buf . as_ptr () as * mut _ ; sys :: set_msghdr_control (& mut self . inner , ptr , buf . len ()) ; self } # [doc = " Set the flags of the message."] # [doc = ""] # [doc = " Corresponds to setting `msg_flags` on Unix and `dwFlags` on Windows."] pub fn with_flags (mut self , flags : sys :: c_int) -> Self { sys :: set_msghdr_flags (& mut self . inner , flags) ; self } }
+    };
+}
+
+impl_30!()

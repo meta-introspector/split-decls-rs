@@ -1,0 +1,7 @@
+macro_rules! other_251 {
+    () => {
+        extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Submits PING frame.  You don't have to send PING back when you"] # [doc = " received PING frame.  The library automatically submits PING frame"] # [doc = " in this case."] # [doc = ""] # [doc = " The |flags| is bitwise OR of 0 or more of the following value."] # [doc = ""] # [doc = " * :enum:`NGHTTP2_FLAG_ACK`"] # [doc = ""] # [doc = " Unless `nghttp2_option_set_no_auto_ping_ack()` is used, the |flags|"] # [doc = " should be :enum:`NGHTTP2_FLAG_NONE`."] # [doc = ""] # [doc = " If the |opaque_data| is non ``NULL``, then it should point to the 8"] # [doc = " bytes array of memory to specify opaque data to send with PING"] # [doc = " frame.  If the |opaque_data| is ``NULL``, zero-cleared 8 bytes will"] # [doc = " be sent as opaque data."] # [doc = ""] # [doc = " This function returns 0 if it succeeds, or one of the following"] # [doc = " negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] pub fn nghttp2_submit_ping (session : * mut nghttp2_session , flags : u8 , opaque_data : * const u8 ,) -> :: std :: os :: raw :: c_int ; }
+    };
+}
+
+other_251!()

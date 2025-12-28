@@ -1,0 +1,7 @@
+macro_rules! FnAbi {
+    () => {
+        # [derive (Debug , Copy , Clone , Eq)] pub enum FnAbi { Aapcs , AapcsUnwind , AvrInterrupt , AvrNonBlockingInterrupt , C , CCmseNonsecureCall , CCmseNonsecureEntry , CDecl , CDeclUnwind , CUnwind , Efiapi , Fastcall , FastcallUnwind , Msp430Interrupt , PtxKernel , RiscvInterruptM , RiscvInterruptS , Rust , RustCall , RustCold , RustIntrinsic , Stdcall , StdcallUnwind , System , SystemUnwind , Sysv64 , Sysv64Unwind , Thiscall , ThiscallUnwind , Unadjusted , Vectorcall , VectorcallUnwind , Wasm , Win64 , Win64Unwind , X86Interrupt , Unknown , }
+    };
+}
+
+FnAbi!()

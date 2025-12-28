@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        BindingInfo!();
+    };
+}
+
+macro_rules! impl_11 {
+    () => {
+        deps!();
+        impl < 'a > BindingInfo < 'a > { # [doc = " Returns a reference to the underlying `syn` AST node which this"] # [doc = " `BindingInfo` references"] pub fn ast (& self) -> & 'a Field { self . field } # [doc = " Generates the pattern fragment for this field binding."] # [doc = ""] # [doc = " # Example"] # [doc = " ```"] # [doc = " # use synstructure::*;"] # [doc = " let di: syn::DeriveInput = syn::parse_quote! {"] # [doc = "     enum A {"] # [doc = "         B{ a: i32, b: i32 },"] # [doc = "         C(u32),"] # [doc = "     }"] # [doc = " };"] # [doc = " let s = Structure::new(&di);"] # [doc = ""] # [doc = " assert_eq!("] # [doc = "     s.variants()[0].bindings()[0].pat().to_string(),"] # [doc = "     quote! {"] # [doc = "         ref __binding_0"] # [doc = "     }.to_string()"] # [doc = " );"] # [doc = " ```"] pub fn pat (& self) -> TokenStream { let BindingInfo { binding , style , .. } = self ; quote ! (# style # binding) } # [doc = " Returns a list of the type parameters which are referenced in this"] # [doc = " field's type."] # [doc = ""] # [doc = " # Caveat"] # [doc = ""] # [doc = " If the field contains any macros in type position, all parameters will"] # [doc = " be considered bound. This is because we cannot determine which type"] # [doc = " parameters are bound by type macros."] # [doc = ""] # [doc = " # Example"] # [doc = " ```"] # [doc = " # use synstructure::*;"] # [doc = " let di: syn::DeriveInput = syn::parse_quote! {"] # [doc = "     struct A<T, U> {"] # [doc = "         a: Option<T>,"] # [doc = "         b: U,"] # [doc = "     }"] # [doc = " };"] # [doc = " let mut s = Structure::new(&di);"] # [doc = ""] # [doc = " assert_eq!("] # [doc = "     s.variants()[0].bindings()[0].referenced_ty_params(),"] # [doc = "     &[&quote::format_ident!(\"T\")]"] # [doc = " );"] # [doc = " ```"] pub fn referenced_ty_params (& self) -> Vec < & 'a Ident > { fetch_generics (& self . seen_generics , self . generics) } }
+    };
+}
+
+impl_11!()

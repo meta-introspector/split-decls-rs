@@ -1,0 +1,7 @@
+macro_rules! INIT_CTOR {
+    () => {
+        # [doc = " An exported constructor function. On supported platforms, this will be"] # [doc = " invoked automatically before the program's `main` is called. This is done"] # [doc = " for the convenience of library users since otherwise the thread-safety rules"] # [doc = " around initialization can be difficult to fulfill."] # [doc = ""] # [doc = " This is a hidden public item to ensure the symbol isn't optimized away by a"] # [doc = " rustc/LLVM bug: https://github.com/rust-lang/rust/issues/47384. As long as"] # [doc = " any item in this module is used by the final binary (which `init` will be)"] # [doc = " then this symbol should be preserved."] # [used] # [doc (hidden)] # [cfg_attr (any (target_os = "linux" , target_os = "freebsd" , target_os = "android") , link_section = ".init_array")] # [cfg_attr (target_os = "macos" , link_section = "__DATA,__mod_init_func")] # [cfg_attr (target_os = "windows" , link_section = ".CRT$XCU")] pub static INIT_CTOR : extern "C" fn () = { # [doc = " This is the body of our constructor function."] # [cfg_attr (any (target_os = "linux" , target_os = "android") , link_section = ".text.startup")] extern "C" fn init_ctor () { init () ; } init_ctor } ;
+    };
+}
+
+INIT_CTOR!()

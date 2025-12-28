@@ -1,0 +1,7 @@
+macro_rules! macro_0 {
+    () => {
+        lazy_static ! { static ref TOKIO_RUNTIME : Runtime = Runtime :: new () . expect ("Failed to create Tokio runtime") ; }
+    };
+}
+
+macro_0!()

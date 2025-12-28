@@ -1,0 +1,7 @@
+macro_rules! Count {
+    () => {
+        # [doc = " A count is used for the precision and width parameters of an integer, and"] # [doc = " can reference either an argument or a literal integer."] # [derive (Clone , Debug , PartialEq , Default)] pub enum Count < 'input > { # [doc = " The count is specified explicitly."] CountIs (u16) , # [doc = " The count is specified by the argument with the given name."] CountIsName (& 'input str , Range < usize >) , # [doc = " The count is specified by the argument at the given index."] CountIsParam (usize) , # [doc = " The count is specified by a star (like in `{:.*}`) that refers to the argument at the given index."] CountIsStar (usize) , # [doc = " The count is implied and cannot be explicitly specified."] # [default] CountImplied , }
+    };
+}
+
+Count!()

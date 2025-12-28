@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: is_large_array");
+fn is_large_array (node : & tree_sitter :: Node , source : & str , array_size_threshold : usize , content_length_threshold : usize) -> bool { let content = & source [node . start_byte () .. node . end_byte ()] ; if content . len () <= content_length_threshold { return false ; } let normalized_content = content . lines () . map (| line | line . trim ()) . collect :: < Vec < & str > > () . join ("") ; let parts : Vec < & str > = normalized_content . split (',') . collect () ; if normalized_content . len () > array_size_threshold && parts . iter () . all (| p | p . trim () . len () > 0 && ! p . trim () . contains (' ')) { log :: debug ! ("Large array detected: {:?}" , content) ; return true ; } false }
+}

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Utf8Component!();
+        Utf8Prefix!();
+        Utf8Path!();
+    };
+}
+
+macro_rules! Utf8PrefixComponent {
+    () => {
+        deps!();
+        # [doc = " A structure wrapping a Windows path prefix as well as its unparsed string"] # [doc = " representation."] # [doc = ""] # [doc = " In addition to the parsed [`Utf8Prefix`] information returned by [`kind`],"] # [doc = " [`Utf8PrefixComponent`] also holds the raw and unparsed [`str`] slice,"] # [doc = " returned by [`as_str`]."] # [doc = ""] # [doc = " Instances of this `struct` can be obtained by matching against the"] # [doc = " [`Prefix` variant] on [`Utf8Component`]."] # [doc = ""] # [doc = " Does not occur on Unix."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # if cfg!(windows) {"] # [doc = " use camino::{Utf8Component, Utf8Path, Utf8Prefix};"] # [doc = " use std::ffi::OsStr;"] # [doc = ""] # [doc = " let path = Utf8Path::new(r\"C:\\you\\later\\\");"] # [doc = " match path.components().next().unwrap() {"] # [doc = "     Utf8Component::Prefix(prefix_component) => {"] # [doc = "         assert_eq!(Utf8Prefix::Disk(b'C'), prefix_component.kind());"] # [doc = "         assert_eq!(\"C:\", prefix_component.as_str());"] # [doc = "     }"] # [doc = "     _ => unreachable!(),"] # [doc = " }"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " [`as_str`]: Utf8PrefixComponent::as_str"] # [doc = " [`kind`]: Utf8PrefixComponent::kind"] # [doc = " [`Prefix` variant]: Utf8Component::Prefix"] # [repr (transparent)] # [derive (Clone , Copy , Eq , PartialEq , Hash , Ord , PartialOrd)] pub struct Utf8PrefixComponent < 'a > (PrefixComponent < 'a >) ;
+    };
+}
+
+Utf8PrefixComponent!()

@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: dense_insert_range");
+# [test] fn dense_insert_range () { # [track_caller] fn check < R > (domain : usize , range : R) where R : RangeBounds < usize > + Clone + IntoIterator < Item = usize > + std :: fmt :: Debug , { let mut set = DenseBitSet :: new_empty (domain) ; set . insert_range (range . clone ()) ; for i in set . iter () { assert ! (range . contains (& i)) ; } for i in range . clone () { assert ! (set . contains (i) , "{} in {:?}, inserted {:?}" , i , set , range) ; } } check (300 , 10 .. 10) ; check (300 , WORD_BITS .. WORD_BITS * 2) ; check (300 , WORD_BITS - 1 .. WORD_BITS * 2) ; check (300 , WORD_BITS - 1 .. WORD_BITS) ; check (300 , 10 .. 100) ; check (300 , 10 .. 30) ; check (300 , 0 .. 5) ; check (300 , 0 .. 250) ; check (300 , 200 .. 250) ; check (300 , 10 ..= 10) ; check (300 , WORD_BITS ..= WORD_BITS * 2) ; check (300 , WORD_BITS - 1 ..= WORD_BITS * 2) ; check (300 , WORD_BITS - 1 ..= WORD_BITS) ; check (300 , 10 ..= 100) ; check (300 , 10 ..= 30) ; check (300 , 0 ..= 5) ; check (300 , 0 ..= 250) ; check (300 , 200 ..= 250) ; for i in 0 .. WORD_BITS * 2 { for j in i .. WORD_BITS * 2 { check (WORD_BITS * 2 , i .. j) ; check (WORD_BITS * 2 , i ..= j) ; check (300 , i .. j) ; check (300 , i ..= j) ; } } }
+}

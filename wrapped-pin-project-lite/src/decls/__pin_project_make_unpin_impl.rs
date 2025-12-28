@@ -1,0 +1,7 @@
+macro_rules! __pin_project_make_unpin_impl {
+    () => {
+        # [doc (hidden)] # [macro_export] macro_rules ! __pin_project_make_unpin_impl { ([] [$ vis : vis $ ident : ident] [$ ($ impl_generics : tt) *] [$ ($ ty_generics : tt) *] [$ (where $ ($ where_clause : tt) *) ?] $ ($ field : tt) *) => { # [allow (non_snake_case)] $ vis struct __Origin <'__pin , $ ($ impl_generics) *> $ (where $ ($ where_clause) *) ? { __dummy_lifetime : $ crate :: __private :: PhantomData <&'__pin () >, $ ($ field) * } impl <'__pin , $ ($ impl_generics) *> $ crate :: __private :: Unpin for $ ident <$ ($ ty_generics) *> where $ crate :: __private :: PinnedFieldsOf < __Origin <'__pin , $ ($ ty_generics) *>>: $ crate :: __private :: Unpin $ (, $ ($ where_clause) *) ? { } } ; ([$ proj_not_unpin_mark : ident] [$ vis : vis $ ident : ident] [$ ($ impl_generics : tt) *] [$ ($ ty_generics : tt) *] [$ (where $ ($ where_clause : tt) *) ?] $ ($ field : tt) *) => { # [doc (hidden)] impl <'__pin , $ ($ impl_generics) *> $ crate :: __private :: Unpin for $ ident <$ ($ ty_generics) *> where ($ crate :: __private :: PhantomData <&'__pin () >, $ crate :: __private :: PhantomPinned ,) : $ crate :: __private :: Unpin $ (, $ ($ where_clause) *) ? { } } }
+    };
+}
+
+__pin_project_make_unpin_impl!()

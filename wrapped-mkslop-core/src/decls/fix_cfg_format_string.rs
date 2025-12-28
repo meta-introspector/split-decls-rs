@@ -1,0 +1,7 @@
+macro_rules! fix_cfg_format_string {
+    () => {
+        # [doc = " Applies common auto-fixes to problematic format strings."] # [doc = ""] # [doc = " Specifically fixes the `cargo:rustc-cfg={0}=\"{1}\"` pattern"] # [doc = " which causes `invalid format string` errors when used with `println!`."] # [decl (fn , name = "fix_cfg_format_string" , vis = "pub" , hash = "b5115c3c")] pub fn fix_cfg_format_string (input_lit : LitStr) -> LitStr { let bad_format_str_value = "cargo:rustc-cfg={0}=\"{1}\"" ; if input_lit . value () == bad_format_str_value { let corrected_format_str_value = r#"cargo:rustc-cfg={0}="{1}""# ; LitStr :: new (& corrected_format_str_value , input_lit . span ()) } else { input_lit } }
+    };
+}
+
+fix_cfg_format_string!()

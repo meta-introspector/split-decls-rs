@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: is_small_path_graph");
+fn is_small_path_graph < G : ControlFlowGraph > (g : & G) -> bool { if g . start_node () . index () != 0 { return false ; } if g . num_nodes () == 1 { return true ; } if g . num_nodes () == 2 { return g . successors (g . start_node ()) . any (| n | n . index () == 1) ; } false }
+}

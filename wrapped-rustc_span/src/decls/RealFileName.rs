@@ -1,0 +1,7 @@
+macro_rules! RealFileName {
+    () => {
+        # [derive (Debug , Eq , PartialEq , Clone , Ord , PartialOrd , Decodable , Encodable)] pub enum RealFileName { LocalPath (PathBuf) , # [doc = " For remapped paths (namely paths into libstd that have been mapped"] # [doc = " to the appropriate spot on the local host's file system, and local file"] # [doc = " system paths that have been remapped with `FilePathMapping`),"] Remapped { # [doc = " `local_path` is the (host-dependent) local path to the file. This is"] # [doc = " None if the file was imported from another crate"] local_path : Option < PathBuf > , # [doc = " `virtual_name` is the stable path rustc will store internally within"] # [doc = " build artifacts."] virtual_name : PathBuf , } , }
+    };
+}
+
+RealFileName!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Level!();
+    };
+}
+
+macro_rules! debug {
+    () => {
+        deps!();
+        # [doc = " Emit a debug event."] # [macro_export] macro_rules ! debug { (target : $ target : expr , { $ ($ field : tt) * } , $ ($ arg : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: DEBUG , { $ ($ field) * } , $ ($ arg) *)) ; (target : $ target : expr , $ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: DEBUG , { $ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , ?$ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: DEBUG , { ?$ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , %$ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: DEBUG , { %$ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , $ ($ arg : tt) +) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: DEBUG , { } , $ ($ arg) +)) ; ({ $ ($ field : tt) + } , $ ($ arg : tt) +) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { $ ($ field) + } , $ ($ arg) +)) ; ($ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { $ ($ k) .+ = $ ($ field) * })) ; (?$ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { ?$ ($ k) .+ = $ ($ field) * })) ; (%$ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { %$ ($ k) .+ = $ ($ field) * })) ; ($ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { $ ($ k) .+, $ ($ field) * })) ; (?$ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { ?$ ($ k) .+, $ ($ field) * })) ; (%$ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { %$ ($ k) .+, $ ($ field) * })) ; (?$ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { ?$ ($ k) .+ })) ; (%$ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { %$ ($ k) .+ })) ; ($ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { $ ($ k) .+ })) ; ($ ($ arg : tt) +) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: DEBUG , { } , $ ($ arg) +)) ; }
+    };
+}
+
+debug!()

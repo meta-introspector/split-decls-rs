@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Level!();
+    };
+}
+
+macro_rules! warn {
+    () => {
+        deps!();
+        # [doc = " Emit a warn event."] # [macro_export] macro_rules ! warn { (target : $ target : expr , { $ ($ field : tt) * } , $ ($ arg : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: WARN , { $ ($ field) * } , $ ($ arg) *)) ; (target : $ target : expr , $ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: WARN , { $ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , ?$ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: WARN , { ?$ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , %$ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: WARN , { %$ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , $ ($ arg : tt) +) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: WARN , { } , $ ($ arg) +)) ; ({ $ ($ field : tt) + } , $ ($ arg : tt) +) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { $ ($ field) + } , $ ($ arg) +)) ; ($ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { $ ($ k) .+ = $ ($ field) * })) ; (?$ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { ?$ ($ k) .+ = $ ($ field) * })) ; (%$ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { %$ ($ k) .+ = $ ($ field) * })) ; ($ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { $ ($ k) .+, $ ($ field) * })) ; (?$ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { ?$ ($ k) .+, $ ($ field) * })) ; (%$ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { %$ ($ k) .+, $ ($ field) * })) ; (?$ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { ?$ ($ k) .+ })) ; (%$ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { %$ ($ k) .+ })) ; ($ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { $ ($ k) .+ })) ; ($ ($ arg : tt) +) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: WARN , { } , $ ($ arg) +)) ; }
+    };
+}
+
+warn!()

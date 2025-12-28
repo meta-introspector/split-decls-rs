@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        XorShiftRng!();
+    };
+}
+
+macro_rules! impl_3 {
+    () => {
+        deps!();
+        impl SeedableRng for XorShiftRng { type Seed = [u8 ; 16] ; fn from_seed (seed : Self :: Seed) -> Self { let mut seed_u32 = [0u32 ; 4] ; le :: read_u32_into (& seed , & mut seed_u32) ; if seed_u32 == [0 ; 4] { seed_u32 = [0xBAD_5EED , 0xBAD_5EED , 0xBAD_5EED , 0xBAD_5EED] ; } XorShiftRng { x : w (seed_u32 [0]) , y : w (seed_u32 [1]) , z : w (seed_u32 [2]) , w : w (seed_u32 [3]) , } } fn from_rng < R > (rng : & mut R) -> Self where R : RngCore + ? Sized , { let mut b = [0u8 ; 16] ; loop { rng . fill_bytes (b . as_mut ()) ; if b != [0 ; 16] { break ; } } XorShiftRng { x : w (u32 :: from_le_bytes ([b [0] , b [1] , b [2] , b [3]])) , y : w (u32 :: from_le_bytes ([b [4] , b [5] , b [6] , b [7]])) , z : w (u32 :: from_le_bytes ([b [8] , b [9] , b [10] , b [11]])) , w : w (u32 :: from_le_bytes ([b [12] , b [13] , b [14] , b [15]])) , } } fn try_from_rng < R > (rng : & mut R) -> Result < Self , R :: Error > where R : TryRngCore + ? Sized , { let mut b = [0u8 ; 16] ; loop { rng . try_fill_bytes (b . as_mut ()) ? ; if b != [0 ; 16] { break ; } } Ok (XorShiftRng { x : w (u32 :: from_le_bytes ([b [0] , b [1] , b [2] , b [3]])) , y : w (u32 :: from_le_bytes ([b [4] , b [5] , b [6] , b [7]])) , z : w (u32 :: from_le_bytes ([b [8] , b [9] , b [10] , b [11]])) , w : w (u32 :: from_le_bytes ([b [12] , b [13] , b [14] , b [15]])) , }) } }
+    };
+}
+
+impl_3!()

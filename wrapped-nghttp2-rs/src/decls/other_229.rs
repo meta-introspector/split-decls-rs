@@ -1,0 +1,7 @@
+macro_rules! other_229 {
+    () => {
+        extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Tells the |session| that |size| bytes for a stream denoted by"] # [doc = " |stream_id| were consumed by application and are ready to"] # [doc = " WINDOW_UPDATE.  The consumed bytes are counted towards both"] # [doc = " connection and stream level WINDOW_UPDATE (see"] # [doc = " `nghttp2_session_consume_connection()` and"] # [doc = " `nghttp2_session_consume_stream()` to update consumption"] # [doc = " independently).  This function is intended to be used without"] # [doc = " automatic window update (see"] # [doc = " `nghttp2_option_set_no_auto_window_update()`)."] # [doc = ""] # [doc = " This function returns 0 if it succeeds, or one of the following"] # [doc = " negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] # [doc = " :enum:`NGHTTP2_ERR_INVALID_ARGUMENT`"] # [doc = "     The |stream_id| is 0."] # [doc = " :enum:`NGHTTP2_ERR_INVALID_STATE`"] # [doc = "     Automatic WINDOW_UPDATE is not disabled."] pub fn nghttp2_session_consume (session : * mut nghttp2_session , stream_id : i32 , size : usize ,) -> :: std :: os :: raw :: c_int ; }
+    };
+}
+
+other_229!()

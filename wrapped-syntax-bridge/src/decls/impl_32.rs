@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        TtTreeSink!();
+    };
+}
+
+macro_rules! impl_32 {
+    () => {
+        deps!();
+        impl < 'a , Ctx > TtTreeSink < 'a , Ctx > where SpanData < Ctx > : Copy , { fn new (cursor : Cursor < 'a , SpanData < Ctx > >) -> Self { TtTreeSink { buf : String :: new () , cursor , text_pos : 0 . into () , inner : SyntaxTreeBuilder :: default () , token_map : SpanMap :: empty () , } } fn finish (mut self) -> (Parse < SyntaxNode > , SpanMap < Ctx >) { self . token_map . finish () ; (self . inner . finish () , self . token_map) } }
+    };
+}
+
+impl_32!()

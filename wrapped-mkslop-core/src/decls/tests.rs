@@ -1,0 +1,7 @@
+macro_rules! tests {
+    () => {
+        # [cfg (test)] mod tests { use super :: * ; use proc_macro2 :: Span ; # [test] fn test_fix_cfg_format_string_problematic () { let problematic_str = "cargo:rustc-cfg={0}=\"{1}\"" ; let input_lit = LitStr :: new (problematic_str , Span :: call_site ()) ; let fixed_lit = fix_cfg_format_string (input_lit) ; assert_eq ! (fixed_lit . value () , r#"cargo:rustc-cfg={0}="{1}""#) ; } # [test] fn test_fix_cfg_format_string_other () { let original_str = "Hello, {}!" ; let input_lit = LitStr :: new (original_str , Span :: call_site ()) ; let fixed_lit = fix_cfg_format_string (input_lit) ; assert_eq ! (fixed_lit . value () , original_str) ; } # [test] fn test_fix_cfg_format_string_check_cfg () { let original_str = r#"cargo:rustc-check-cfg=cfg({0}, values("{1}"))"# ; let input_lit = LitStr :: new (original_str , Span :: call_site ()) ; let fixed_lit = fix_cfg_format_string (input_lit) ; assert_eq ! (fixed_lit . value () , original_str) ; } }
+    };
+}
+
+tests!()

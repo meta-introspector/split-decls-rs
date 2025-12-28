@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Chain!();
+        FallibleIterator!();
+        ChainState!();
+    };
+}
+
+macro_rules! impl_20 {
+    () => {
+        deps!();
+        impl < T , U > FallibleIterator for Chain < T , U > where T : FallibleIterator , U : FallibleIterator < Item = T :: Item , Error = T :: Error > , { type Item = T :: Item ; type Error = T :: Error ; # [inline] fn next (& mut self) -> Result < Option < T :: Item > , T :: Error > { match self . state { ChainState :: Both => match self . front . next () ? { Some (e) => Ok (Some (e)) , None => { self . state = ChainState :: Back ; self . back . next () } } , ChainState :: Front => self . front . next () , ChainState :: Back => self . back . next () , } } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { let front_hint = self . front . size_hint () ; let back_hint = self . back . size_hint () ; let low = front_hint . 0 . saturating_add (back_hint . 0) ; let high = match (front_hint . 1 , back_hint . 1) { (Some (f) , Some (b)) => f . checked_add (b) , _ => None , } ; (low , high) } # [inline] fn count (self) -> Result < usize , T :: Error > { match self . state { ChainState :: Both => Ok (self . front . count () ? + self . back . count () ?) , ChainState :: Front => self . front . count () , ChainState :: Back => self . back . count () , } } # [inline] fn try_fold < B , E , F > (& mut self , init : B , mut f : F) -> Result < B , E > where E : From < T :: Error > , F : FnMut (B , T :: Item) -> Result < B , E > , { match self . state { ChainState :: Both => { let init = self . front . try_fold (init , & mut f) ? ; self . state = ChainState :: Back ; self . back . try_fold (init , f) } ChainState :: Front => self . front . try_fold (init , f) , ChainState :: Back => self . back . try_fold (init , f) , } } # [inline] fn find < F > (& mut self , mut f : F) -> Result < Option < T :: Item > , T :: Error > where F : FnMut (& T :: Item) -> Result < bool , T :: Error > , { match self . state { ChainState :: Both => match self . front . find (& mut f) ? { Some (v) => Ok (Some (v)) , None => { self . state = ChainState :: Back ; self . back . find (f) } } , ChainState :: Front => self . front . find (f) , ChainState :: Back => self . back . find (f) , } } # [inline] fn last (self) -> Result < Option < T :: Item > , T :: Error > { match self . state { ChainState :: Both => { self . front . last () ? ; self . back . last () } ChainState :: Front => self . front . last () , ChainState :: Back => self . back . last () , } } }
+    };
+}
+
+impl_20!()

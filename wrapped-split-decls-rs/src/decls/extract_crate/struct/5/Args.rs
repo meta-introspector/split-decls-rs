@@ -1,0 +1,6 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclstruct! {
+# [doc = " Extract a single crate with its dependencies into a standalone workspace"] # [derive (Parser , Debug)] # [clap (author , version , about = "Extract crate with dependencies for standalone checkout")] struct Args { # [doc = " Name of the crate to extract (e.g., \"addr2line\", \"serde\")"] crate_name : String , # [doc = " Output directory for standalone workspace"] # [clap (short , long , default_value = "extracted")] output : PathBuf , # [doc = " Include dev-dependencies"] # [clap (long)] include_dev_deps : bool , # [doc = " Maximum dependency depth (0 = direct deps only)"] # [clap (long , default_value = "3")] max_depth : usize , # [doc = " Verbose output"] # [clap (short , long)] verbose : bool , }
+}

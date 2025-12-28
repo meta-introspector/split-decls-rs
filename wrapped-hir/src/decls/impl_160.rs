@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Type!();
+        ConstParam!();
+        TypeParam!();
+        TypeOrConstParam!();
+        GenericDef!();
+        Module!();
+    };
+}
+
+macro_rules! impl_160 {
+    () => {
+        deps!();
+        impl TypeOrConstParam { pub fn name (self , db : & dyn HirDatabase) -> Name { let params = db . generic_params (self . id . parent) ; match params [self . id . local_id] . name () { Some (n) => n . clone () , _ => Name :: missing () , } } pub fn module (self , db : & dyn HirDatabase) -> Module { self . id . parent . module (db) . into () } pub fn parent (self , _db : & dyn HirDatabase) -> GenericDef { self . id . parent . into () } pub fn split (self , db : & dyn HirDatabase) -> Either < ConstParam , TypeParam > { let params = db . generic_params (self . id . parent) ; match & params [self . id . local_id] { TypeOrConstParamData :: TypeParamData (_) => { Either :: Right (TypeParam { id : TypeParamId :: from_unchecked (self . id) }) } TypeOrConstParamData :: ConstParamData (_) => { Either :: Left (ConstParam { id : ConstParamId :: from_unchecked (self . id) }) } } } pub fn ty (self , db : & dyn HirDatabase) -> Type < '_ > { match self . split (db) { Either :: Left (it) => it . ty (db) , Either :: Right (it) => it . ty (db) , } } pub fn as_type_param (self , db : & dyn HirDatabase) -> Option < TypeParam > { let params = db . generic_params (self . id . parent) ; match & params [self . id . local_id] { TypeOrConstParamData :: TypeParamData (_) => { Some (TypeParam { id : TypeParamId :: from_unchecked (self . id) }) } TypeOrConstParamData :: ConstParamData (_) => None , } } pub fn as_const_param (self , db : & dyn HirDatabase) -> Option < ConstParam > { let params = db . generic_params (self . id . parent) ; match & params [self . id . local_id] { TypeOrConstParamData :: TypeParamData (_) => None , TypeOrConstParamData :: ConstParamData (_) => { Some (ConstParam { id : ConstParamId :: from_unchecked (self . id) }) } } } }
+    };
+}
+
+impl_160!()

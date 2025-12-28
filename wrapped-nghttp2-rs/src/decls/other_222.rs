@@ -1,0 +1,7 @@
+macro_rules! other_222 {
+    () => {
+        extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Signals the session so that the connection should be terminated."] # [doc = ""] # [doc = " The last stream ID is the minimum value between the stream ID of a"] # [doc = " stream for which :type:`nghttp2_on_frame_recv_callback` was called"] # [doc = " most recently and the last stream ID we have sent to the peer"] # [doc = " previously."] # [doc = ""] # [doc = " The |error_code| is the error code of this GOAWAY frame.  The"] # [doc = " pre-defined error code is one of :enum:`nghttp2_error_code`."] # [doc = ""] # [doc = " After the transmission, both `nghttp2_session_want_read()` and"] # [doc = " `nghttp2_session_want_write()` return 0."] # [doc = ""] # [doc = " This function should be called when the connection should be"] # [doc = " terminated after sending GOAWAY.  If the remaining streams should"] # [doc = " be processed after GOAWAY, use `nghttp2_submit_goaway()` instead."] # [doc = ""] # [doc = " This function returns 0 if it succeeds, or one of the following"] # [doc = " negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] pub fn nghttp2_session_terminate_session (session : * mut nghttp2_session , error_code : u32 ,) -> :: std :: os :: raw :: c_int ; }
+    };
+}
+
+other_222!()

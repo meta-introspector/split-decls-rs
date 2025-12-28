@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: test_deep_linear");
+# [test] fn test_deep_linear () { # [cfg (not (miri))] const NR_NODES : usize = 1 << 14 ; # [cfg (miri)] const NR_NODES : usize = 1 << 3 ; let mut nodes = vec ! [] ; for i in 1 .. NR_NODES { nodes . push ((i - 1 , i)) ; } let graph = TestGraph :: new (0 , nodes . as_slice ()) ; let sccs : UsizeSccs = Sccs :: new (& graph) ; assert_eq ! (sccs . num_sccs () , NR_NODES) ; assert_eq ! (sccs . scc (0) , NR_NODES - 1) ; assert_eq ! (sccs . scc (NR_NODES - 1) , 0) ; }
+}

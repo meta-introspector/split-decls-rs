@@ -1,0 +1,7 @@
+macro_rules! NGHTTP2_SETTINGS_INITIAL_WINDOW_SIZE {
+    () => {
+        # [doc = " SETTINGS_INITIAL_WINDOW_SIZE"] pub const NGHTTP2_SETTINGS_INITIAL_WINDOW_SIZE : nghttp2_settings_id = 4 ;
+    };
+}
+
+NGHTTP2_SETTINGS_INITIAL_WINDOW_SIZE!()

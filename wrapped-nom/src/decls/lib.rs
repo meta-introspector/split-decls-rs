@@ -1,0 +1,7 @@
+macro_rules! lib {
+    () => {
+        # [doc = " Lib module to re-export everything needed from `std` or `core`/`alloc`. This is how `serde` does"] # [doc = " it, albeit there it is not public."] pub mod lib { # [doc = " `std` facade allowing `std`/`core` to be interchangeable. Reexports `alloc` crate optionally,"] # [doc = " as well as `core` or `std`"] # [cfg (not (feature = "std"))] # [doc = " internal std exports for no_std compatibility"] pub mod std { # [doc (hidden)] # [cfg (not (feature = "alloc"))] pub use core :: borrow ; # [cfg (feature = "alloc")] # [doc (hidden)] pub use alloc :: { borrow , boxed , string , vec } ; # [doc (hidden)] pub use core :: { cmp , convert , fmt , iter , mem , num , ops , option , result , slice , str } ; # [doc = " internal reproduction of std prelude"] # [doc (hidden)] pub mod prelude { pub use core :: prelude as v1 ; } } # [cfg (feature = "std")] # [doc = " internal std exports for no_std compatibility"] pub mod std { # [doc (hidden)] pub use std :: { alloc , borrow , boxed , cmp , collections , convert , fmt , hash , iter , mem , num , ops , option , result , slice , str , string , vec , } ; # [doc = " internal reproduction of std prelude"] # [doc (hidden)] pub mod prelude { pub use std :: prelude as v1 ; } } }
+    };
+}
+
+lib!()

@@ -1,0 +1,7 @@
+macro_rules! fill_uninit {
+    () => {
+        # [doc = " Fill potentially uninitialized buffer `dest` with random bytes from"] # [doc = " the system's preferred random number source and return a mutable"] # [doc = " reference to those bytes."] # [doc = ""] # [doc = " On successful completion this function is guaranteed to return a slice"] # [doc = " which points to the same memory as `dest` and has the same length."] # [doc = " In other words, it's safe to assume that `dest` is initialized after"] # [doc = " this function has returned `Ok`."] # [doc = ""] # [doc = " No part of `dest` will ever be de-initialized at any point, regardless"] # [doc = " of what is returned."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```ignore"] # [doc = " # // We ignore this test since `uninit_array` is unstable."] # [doc = " #![feature(maybe_uninit_uninit_array)]"] # [doc = " # fn main() -> Result<(), getrandom::Error> {"] # [doc = " let mut buf = core::mem::MaybeUninit::uninit_array::<1024>();"] # [doc = " let buf: &mut [u8] = getrandom::fill_uninit(&mut buf)?;"] # [doc = " # Ok(()) }"] # [doc = " ```"] # [inline] pub fn fill_uninit (dest : & mut [MaybeUninit < u8 >]) -> Result < & mut [u8] , Error > { if ! dest . is_empty () { backends :: fill_inner (dest) ? ; } # [cfg (getrandom_msan)] unsafe extern "C" { fn __msan_unpoison (a : * mut core :: ffi :: c_void , size : usize) ; } Ok (unsafe { util :: slice_assume_init_mut (dest) }) }
+    };
+}
+
+fill_uninit!()

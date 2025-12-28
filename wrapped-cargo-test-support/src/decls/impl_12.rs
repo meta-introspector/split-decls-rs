@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        FileBuilder!();
+    };
+}
+
+macro_rules! impl_12 {
+    () => {
+        deps!();
+        impl FileBuilder { pub fn new (path : PathBuf , body : & str , executable : bool) -> FileBuilder { FileBuilder { path , body : body . to_string () , executable : executable , } } fn mk (& mut self) { if self . executable { let mut path = self . path . clone () . into_os_string () ; write ! (path , "{}" , env :: consts :: EXE_SUFFIX) . unwrap () ; self . path = path . into () ; } self . dirname () . mkdir_p () ; fs :: write (& self . path , & self . body) . unwrap_or_else (| e | panic ! ("could not create file {}: {}" , self . path . display () , e)) ; # [cfg (unix)] if self . executable { use std :: os :: unix :: fs :: PermissionsExt ; let mut perms = fs :: metadata (& self . path) . unwrap () . permissions () ; let mode = perms . mode () ; perms . set_mode (mode | 0o111) ; fs :: set_permissions (& self . path , perms) . unwrap () ; } } fn dirname (& self) -> & Path { self . path . parent () . unwrap () } }
+    };
+}
+
+impl_12!()

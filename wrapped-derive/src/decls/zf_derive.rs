@@ -1,0 +1,7 @@
+macro_rules! zf_derive {
+    () => {
+        # [doc = " Custom derive for `zerofrom::ZeroFrom`,"] # [doc = ""] # [doc = " This implements `ZeroFrom<Ty> for Ty` for types"] # [doc = " without a lifetime parameter, and `ZeroFrom<Ty<'data>> for Ty<'static>`"] # [doc = " for types with a lifetime parameter."] # [doc = ""] # [doc = " Apply the `#[zerofrom(clone)]` attribute to a field if it doesn't implement"] # [doc = " Copy or ZeroFrom; this data will be cloned when the struct is zero_from'ed."] # [doc = ""] # [doc = " Apply the `#[zerofrom(maybe_borrow(T, U, V))]` attribute to the struct to indicate"] # [doc = " that certain type parameters may themselves contain borrows (by default"] # [doc = " the derives assume that type parameters perform no borrows and can be copied or cloned)."] # [doc = ""] # [doc = " In rust versions where [this issue](https://github.com/rust-lang/rust/issues/114393) is fixed,"] # [doc = " `#[zerofrom(may_borrow)]` can be applied directly to type parameters."] # [proc_macro_derive (ZeroFrom , attributes (zerofrom))] pub fn zf_derive (input : TokenStream) -> TokenStream { let input = parse_macro_input ! (input as DeriveInput) ; TokenStream :: from (zf_derive_impl (& input)) }
+    };
+}
+
+zf_derive!()

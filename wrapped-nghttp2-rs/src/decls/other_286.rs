@@ -1,0 +1,7 @@
+macro_rules! other_286 {
+    () => {
+        extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Changes header table size in the |inflater|.  This may trigger"] # [doc = " eviction in the dynamic table."] # [doc = ""] # [doc = " The |settings_max_dynamic_table_size| should be the value"] # [doc = " transmitted in SETTINGS_HEADER_TABLE_SIZE."] # [doc = ""] # [doc = " This function must not be called while header block is being"] # [doc = " inflated.  In other words, this function must be called after"] # [doc = " initialization of |inflater|, but before calling"] # [doc = " `nghttp2_hd_inflate_hd2()`, or after"] # [doc = " `nghttp2_hd_inflate_end_headers()`.  Otherwise,"] # [doc = " `NGHTTP2_ERR_INVALID_STATE` was returned."] # [doc = ""] # [doc = " This function returns 0 if it succeeds, or one of the following"] # [doc = " negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] # [doc = " :enum:`NGHTTP2_ERR_INVALID_STATE`"] # [doc = "     The function is called while header block is being inflated."] # [doc = "     Probably, application missed to call"] # [doc = "     `nghttp2_hd_inflate_end_headers()`."] pub fn nghttp2_hd_inflate_change_table_size (inflater : * mut nghttp2_hd_inflater , settings_max_dynamic_table_size : usize ,) -> :: std :: os :: raw :: c_int ; }
+    };
+}
+
+other_286!()

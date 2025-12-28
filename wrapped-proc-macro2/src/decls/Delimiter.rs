@@ -1,0 +1,7 @@
+macro_rules! Delimiter {
+    () => {
+        # [doc = " Describes how a sequence of token trees is delimited."] # [derive (Copy , Clone , Debug , Eq , PartialEq)] pub enum Delimiter { # [doc = " `( ... )`"] Parenthesis , # [doc = " `{ ... }`"] Brace , # [doc = " `[ ... ]`"] Bracket , # [doc = " `∅ ... ∅`"] # [doc = ""] # [doc = " An invisible delimiter, that may, for example, appear around tokens"] # [doc = " coming from a \"macro variable\" `$var`. It is important to preserve"] # [doc = " operator priorities in cases like `$var * 3` where `$var` is `1 + 2`."] # [doc = " Invisible delimiters may not survive roundtrip of a token stream through"] # [doc = " a string."] # [doc = ""] # [doc = " <div class=\"warning\">"] # [doc = ""] # [doc = " Note: rustc currently can ignore the grouping of tokens delimited by `None` in the output"] # [doc = " of a proc_macro. Only `None`-delimited groups created by a macro_rules macro in the input"] # [doc = " of a proc_macro macro are preserved, and only in very specific circumstances."] # [doc = " Any `None`-delimited groups (re)created by a proc_macro will therefore not preserve"] # [doc = " operator priorities as indicated above. The other `Delimiter` variants should be used"] # [doc = " instead in this context. This is a rustc bug. For details, see"] # [doc = " [rust-lang/rust#67062](https://github.com/rust-lang/rust/issues/67062)."] # [doc = ""] # [doc = " </div>"] None , }
+    };
+}
+
+Delimiter!()

@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: extract_signature_from_content");
+fn extract_signature_from_content (content : & str) -> String { let mut parts = Vec :: new () ; if content . contains ("prelude!") { parts . push ("prelude") ; } if content . contains ("#[decl_") { parts . push ("decl_attr") ; } if content . contains ("use ") { parts . push ("use_stmt") ; } if content . contains ("pub fn") { parts . push ("pub_fn") ; } if content . contains ("pub struct") { parts . push ("pub_struct") ; } if content . contains ("pub enum") { parts . push ("pub_enum") ; } if content . contains ("impl ") { parts . push ("impl_block") ; } if content . contains ("trait ") { parts . push ("trait_def") ; } if content . contains ("macro_rules!") { parts . push ("macro_def") ; } if content . contains ("derive(") { parts . push ("derive_attr") ; } if content . contains ("async fn") { parts . push ("async_fn") ; } if content . contains ("const ") { parts . push ("const_item") ; } if content . contains ("static ") { parts . push ("static_item") ; } if content . contains ("type ") { parts . push ("type_alias") ; } if content . contains ("mod ") { parts . push ("module") ; } parts . sort () ; parts . dedup () ; parts . join ("|") }
+}

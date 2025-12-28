@@ -1,0 +1,7 @@
+macro_rules! bench {
+    () => {
+        # [doc = " Utility for writing benchmark tests."] # [doc = ""] # [doc = " A benchmark test looks like this:"] # [doc = ""] # [doc = " ```ignore"] # [doc = " #[test]"] # [doc = " fn benchmark_foo() {"] # [doc = "     if skip_slow_tests() { return; }"] # [doc = ""] # [doc = "     let data = bench_fixture::some_fixture();"] # [doc = "     let analysis = some_setup();"] # [doc = ""] # [doc = "     let hash = {"] # [doc = "         let _b = bench(\"foo\");"] # [doc = "         actual_work(analysis)"] # [doc = "     };"] # [doc = "     assert_eq!(hash, 92);"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " * We skip benchmarks by default, to save time."] # [doc = "   Ideal benchmark time is 800 -- 1500 ms in debug."] # [doc = " * We don't count preparation as part of the benchmark"] # [doc = " * The benchmark itself returns some kind of numeric hash."] # [doc = "   The hash is used as a sanity check that some code is actually run."] # [doc = "   Otherwise, it's too easy to win the benchmark by just doing nothing."] pub fn bench (label : & 'static str) -> impl Drop { struct Bencher { sw : StopWatch , label : & 'static str , } impl Drop for Bencher { fn drop (& mut self) { eprintln ! ("{}: {}" , self . label , self . sw . elapsed ()) ; } } Bencher { sw : StopWatch :: start () , label } }
+    };
+}
+
+bench!()

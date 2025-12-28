@@ -1,0 +1,7 @@
+macro_rules! other_223 {
+    () => {
+        extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Signals the session so that the connection should be terminated."] # [doc = ""] # [doc = " This function behaves like `nghttp2_session_terminate_session()`,"] # [doc = " but the last stream ID can be specified by the application for fine"] # [doc = " grained control of stream.  The HTTP/2 specification does not allow"] # [doc = " last_stream_id to be increased.  So the actual value sent as"] # [doc = " last_stream_id is the minimum value between the given"] # [doc = " |last_stream_id| and the last_stream_id we have previously sent to"] # [doc = " the peer."] # [doc = ""] # [doc = " The |last_stream_id| is peer's stream ID or 0.  So if |session| is"] # [doc = " initialized as client, |last_stream_id| must be even or 0.  If"] # [doc = " |session| is initialized as server, |last_stream_id| must be odd or"] # [doc = " 0."] # [doc = ""] # [doc = " This function returns 0 if it succeeds, or one of the following"] # [doc = " negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] # [doc = " :enum:`NGHTTP2_ERR_INVALID_ARGUMENT`"] # [doc = "     The |last_stream_id| is invalid."] pub fn nghttp2_session_terminate_session2 (session : * mut nghttp2_session , last_stream_id : i32 , error_code : u32 ,) -> :: std :: os :: raw :: c_int ; }
+    };
+}
+
+other_223!()

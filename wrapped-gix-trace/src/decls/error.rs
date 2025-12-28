@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Level!();
+    };
+}
+
+macro_rules! error {
+    () => {
+        deps!();
+        # [doc = " Emit an error event."] # [macro_export] macro_rules ! error { (target : $ target : expr , { $ ($ field : tt) * } , $ ($ arg : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: ERROR , { $ ($ field) * } , $ ($ arg) *)) ; (target : $ target : expr , $ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: ERROR , { $ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , ?$ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: ERROR , { ?$ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , %$ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: ERROR , { %$ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , $ ($ arg : tt) +) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: ERROR , { } , $ ($ arg) +)) ; ({ $ ($ field : tt) + } , $ ($ arg : tt) +) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { $ ($ field) + } , $ ($ arg) +)) ; ($ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { $ ($ k) .+ = $ ($ field) * })) ; (?$ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { ?$ ($ k) .+ = $ ($ field) * })) ; (%$ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { %$ ($ k) .+ = $ ($ field) * })) ; ($ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { $ ($ k) .+, $ ($ field) * })) ; (?$ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { ?$ ($ k) .+, $ ($ field) * })) ; (%$ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { %$ ($ k) .+, $ ($ field) * })) ; (?$ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { ?$ ($ k) .+ })) ; (%$ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { %$ ($ k) .+ })) ; ($ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { $ ($ k) .+ })) ; ($ ($ arg : tt) +) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: ERROR , { } , $ ($ arg) +)) ; }
+    };
+}
+
+error!()

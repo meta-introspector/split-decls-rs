@@ -1,0 +1,7 @@
+macro_rules! DemangleOptions {
+    () => {
+        # [doc = " Options to control the demangling process."] # [derive (Clone , Copy , Debug , Default)] # [repr (C)] pub struct DemangleOptions { no_params : bool , no_return_type : bool , hide_expression_literal_types : bool , recursion_limit : Option < NonZeroU32 > , }
+    };
+}
+
+DemangleOptions!()

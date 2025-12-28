@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        SeqInner!();
+    };
+}
+
+macro_rules! impl_33 {
+    () => {
+        deps!();
+        impl SeqInner { # [doc = " Record the call identified by `seq` as fully satisfied."] fn satisfy (& self , seq : usize) { let old_sl = self . satisfaction_level . fetch_add (1 , Ordering :: Relaxed) ; assert_eq ! (old_sl , seq , "Method sequence violation.  Was an already-satisfied method called another time?") ; } # [doc = " Verify that the call identified by `seq` was called in the correct order"] fn verify < F : Fn () -> String > (& self , seq : usize , desc : F) { assert_eq ! (seq , self . satisfaction_level . load (Ordering :: Relaxed) , "{}: Method sequence violation" , & desc ()) } }
+    };
+}
+
+impl_33!()

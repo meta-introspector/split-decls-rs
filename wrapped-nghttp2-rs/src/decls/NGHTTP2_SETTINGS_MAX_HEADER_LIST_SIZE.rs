@@ -1,0 +1,7 @@
+macro_rules! NGHTTP2_SETTINGS_MAX_HEADER_LIST_SIZE {
+    () => {
+        # [doc = " SETTINGS_MAX_HEADER_LIST_SIZE"] pub const NGHTTP2_SETTINGS_MAX_HEADER_LIST_SIZE : nghttp2_settings_id = 6 ;
+    };
+}
+
+NGHTTP2_SETTINGS_MAX_HEADER_LIST_SIZE!()

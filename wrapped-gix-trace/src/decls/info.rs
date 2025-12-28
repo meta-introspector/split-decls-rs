@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Level!();
+    };
+}
+
+macro_rules! info {
+    () => {
+        deps!();
+        # [doc = " Emit an info event."] # [macro_export] macro_rules ! info { (target : $ target : expr , { $ ($ field : tt) * } , $ ($ arg : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: INFO , { $ ($ field) * } , $ ($ arg) *)) ; (target : $ target : expr , $ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: INFO , { $ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , ?$ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: INFO , { ?$ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , %$ ($ k : ident) .+ $ ($ field : tt) *) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: INFO , { %$ ($ k) .+ $ ($ field) * })) ; (target : $ target : expr , $ ($ arg : tt) +) => ($ crate :: event ! (target : $ target , $ crate :: event :: Level :: INFO , { } , $ ($ arg) +)) ; ({ $ ($ field : tt) + } , $ ($ arg : tt) +) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { $ ($ field) + } , $ ($ arg) +)) ; ($ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { $ ($ k) .+ = $ ($ field) * })) ; (?$ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { ?$ ($ k) .+ = $ ($ field) * })) ; (%$ ($ k : ident) .+ = $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { %$ ($ k) .+ = $ ($ field) * })) ; ($ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { $ ($ k) .+, $ ($ field) * })) ; (?$ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { ?$ ($ k) .+, $ ($ field) * })) ; (%$ ($ k : ident) .+, $ ($ field : tt) *) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { %$ ($ k) .+, $ ($ field) * })) ; (?$ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { ?$ ($ k) .+ })) ; (%$ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { %$ ($ k) .+ })) ; ($ ($ k : ident) .+) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { $ ($ k) .+ })) ; ($ ($ arg : tt) +) => ($ crate :: event ! (target : module_path ! () , $ crate :: event :: Level :: INFO , { } , $ ($ arg) +)) ; }
+    };
+}
+
+info!()

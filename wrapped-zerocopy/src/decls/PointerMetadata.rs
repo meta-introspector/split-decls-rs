@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        KnownLayout!();
+    };
+}
+
+macro_rules! PointerMetadata {
+    () => {
+        deps!();
+        # [doc = " The metadata associated with a [`KnownLayout`] type."] # [doc (hidden)] pub trait PointerMetadata : Copy + Eq + Debug { # [doc = " Constructs a `Self` from an element count."] # [doc = ""] # [doc = " If `Self = ()`, this returns `()`. If `Self = usize`, this returns"] # [doc = " `elems`. No other types are currently supported."] fn from_elem_count (elems : usize) -> Self ; # [doc = " Computes the size of the object with the given layout and pointer"] # [doc = " metadata."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " If `Self = ()`, `layout` must describe a sized type. If `Self = usize`,"] # [doc = " `layout` must describe a slice DST. Otherwise, `size_for_metadata` may"] # [doc = " panic."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " `size_for_metadata` promises to only return `None` if the resulting size"] # [doc = " would not fit in a `usize`."] fn size_for_metadata (self , layout : DstLayout) -> Option < usize > ; }
+    };
+}
+
+PointerMetadata!()

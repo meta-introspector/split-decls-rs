@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        AstDeclarationVisitor!();
+    };
+}
+
+macro_rules! impl_6 {
+    () => {
+        deps!();
+        impl < 'ast > Visit < 'ast > for AstDeclarationVisitor { fn visit_item_const (& mut self , i : & 'ast ItemConst) { self . add_declaration ("const" . to_string () , i . ident . to_string () , & i . attrs) ; syn :: visit :: visit_item_const (self , i) ; } fn visit_item_enum (& mut self , i : & 'ast ItemEnum) { self . add_declaration ("enum" . to_string () , i . ident . to_string () , & i . attrs) ; syn :: visit :: visit_item_enum (self , i) ; } fn visit_item_fn (& mut self , i : & 'ast ItemFn) { self . add_declaration ("fn" . to_string () , i . sig . ident . to_string () , & i . attrs) ; syn :: visit :: visit_item_fn (self , i) ; } fn visit_item_mod (& mut self , i : & 'ast ItemMod) { self . add_declaration ("mod" . to_string () , i . ident . to_string () , & i . attrs) ; syn :: visit :: visit_item_mod (self , i) ; } fn visit_item_static (& mut self , i : & 'ast ItemStatic) { self . add_declaration ("static" . to_string () , i . ident . to_string () , & i . attrs) ; syn :: visit :: visit_item_static (self , i) ; } fn visit_item_struct (& mut self , i : & 'ast ItemStruct) { self . add_declaration ("struct" . to_string () , i . ident . to_string () , & i . attrs) ; syn :: visit :: visit_item_struct (self , i) ; } fn visit_item_trait (& mut self , i : & 'ast ItemTrait) { self . add_declaration ("trait" . to_string () , i . ident . to_string () , & i . attrs) ; syn :: visit :: visit_item_trait (self , i) ; } fn visit_item_type (& mut self , i : & 'ast ItemType) { self . add_declaration ("type_alias" . to_string () , i . ident . to_string () , & i . attrs) ; syn :: visit :: visit_item_type (self , i) ; } fn visit_item_union (& mut self , i : & 'ast ItemUnion) { self . add_declaration ("union" . to_string () , i . ident . to_string () , & i . attrs) ; syn :: visit :: visit_item_union (self , i) ; } }
+    };
+}
+
+impl_6!()

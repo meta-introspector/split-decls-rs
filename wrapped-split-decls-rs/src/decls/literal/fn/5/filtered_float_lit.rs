@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: filtered_float_lit");
+fn filtered_float_lit (symbol : Symbol , suffix : Option < Symbol > , base : u32 ,) -> Result < LitKind , LitError > { debug ! ("filtered_float_lit: {:?}, {:?}, {:?}" , symbol , suffix , base) ; if base != 10 { return Err (LitError :: NonDecimalFloat (base)) ; } Ok (match suffix { Some (suffix) => LitKind :: Float (symbol , ast :: LitFloatType :: Suffixed (match suffix { sym :: f16 => ast :: FloatTy :: F16 , sym :: f32 => ast :: FloatTy :: F32 , sym :: f64 => ast :: FloatTy :: F64 , sym :: f128 => ast :: FloatTy :: F128 , _ => return Err (LitError :: InvalidFloatSuffix (suffix)) , }) ,) , None => LitKind :: Float (symbol , ast :: LitFloatType :: Unsuffixed) , }) }
+}

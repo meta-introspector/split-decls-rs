@@ -1,0 +1,7 @@
+macro_rules! get_backend_from_raw_matches {
+    () => {
+        # [doc = " Get the codegen backend based on the raw [`Matches`]."] # [doc = ""] # [doc = " `rustc -vV` and `rustc -Cpasses=list` need to get the codegen backend before we have parsed all"] # [doc = " arguments and created a [`Session`]. This function reads `-Zcodegen-backend`, `--target` and"] # [doc = " `--sysroot` without validating any other arguments and loads the codegen backend based on these"] # [doc = " arguments."] fn get_backend_from_raw_matches (early_dcx : & EarlyDiagCtxt , matches : & Matches ,) -> Box < dyn CodegenBackend > { let debug_flags = matches . opt_strs ("Z") ; let backend_name = debug_flags . iter () . find_map (| x | x . strip_prefix ("codegen-backend=") . or (x . strip_prefix ("codegen_backend="))) ; let target = parse_target_triple (early_dcx , matches) ; let sysroot = Sysroot :: new (matches . opt_str ("sysroot") . map (PathBuf :: from)) ; let target = config :: build_target_config (early_dcx , & target , sysroot . path ()) ; get_codegen_backend (early_dcx , & sysroot , backend_name , & target) }
+    };
+}
+
+get_backend_from_raw_matches!()

@@ -1,0 +1,7 @@
+macro_rules! other_236 {
+    () => {
+        extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Serializes the SETTINGS values |iv| in the |buf|.  The size of the"] # [doc = " |buf| is specified by |buflen|.  The number of entries in the |iv|"] # [doc = " array is given by |niv|.  The required space in |buf| for the |niv|"] # [doc = " entries is ``6*niv`` bytes and if the given buffer is too small, an"] # [doc = " error is returned.  This function is used mainly for creating a"] # [doc = " SETTINGS payload to be sent with the ``HTTP2-Settings`` header"] # [doc = " field in an HTTP Upgrade request.  The data written in |buf| is NOT"] # [doc = " base64url encoded and the application is responsible for encoding."] # [doc = ""] # [doc = " This function returns the number of bytes written in |buf|, or one"] # [doc = " of the following negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_INVALID_ARGUMENT`"] # [doc = "     The |iv| contains duplicate settings ID or invalid value."] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_INSUFF_BUFSIZE`"] # [doc = "     The provided |buflen| size is too small to hold the output."] pub fn nghttp2_pack_settings_payload (buf : * mut u8 , buflen : usize , iv : * const nghttp2_settings_entry , niv : usize ,) -> isize ; }
+    };
+}
+
+other_236!()

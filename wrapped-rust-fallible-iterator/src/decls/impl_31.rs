@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Iterator!();
+        IntoFallible!();
+    };
+}
+
+macro_rules! impl_31 {
+    () => {
+        deps!();
+        impl < T , I : iter :: Iterator < Item = T > > From < I > for IntoFallible < I > { fn from (value : I) -> Self { Self (value) } }
+    };
+}
+
+impl_31!()

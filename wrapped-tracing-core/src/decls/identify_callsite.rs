@@ -1,0 +1,7 @@
+macro_rules! identify_callsite {
+    () => {
+        # [doc = " Statically constructs an [`Identifier`] for the provided [`Callsite`]."] # [doc = ""] # [doc = " This may be used in contexts such as static initializers."] # [doc = ""] # [doc = " For example:"] # [doc = " ```rust"] # [doc = " use tracing_core::{callsite, identify_callsite};"] # [doc = " # use tracing_core::{Metadata, subscriber::Interest};"] # [doc = " # fn main() {"] # [doc = " pub struct MyCallsite {"] # [doc = "    // ..."] # [doc = " }"] # [doc = " impl callsite::Callsite for MyCallsite {"] # [doc = " # fn set_interest(&self, _: Interest) { unimplemented!() }"] # [doc = " # fn metadata(&self) -> &Metadata { unimplemented!() }"] # [doc = "     // ..."] # [doc = " }"] # [doc = ""] # [doc = " static CALLSITE: MyCallsite = MyCallsite {"] # [doc = "     // ..."] # [doc = " };"] # [doc = ""] # [doc = " static CALLSITE_ID: callsite::Identifier = identify_callsite!(&CALLSITE);"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " [`Identifier`]: callsite::Identifier"] # [doc = " [`Callsite`]: callsite::Callsite"] # [macro_export] macro_rules ! identify_callsite { ($ callsite : expr) => { $ crate :: callsite :: Identifier ($ callsite) } ; }
+    };
+}
+
+identify_callsite!()

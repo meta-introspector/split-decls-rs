@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Entry!();
+        Slab!();
+    };
+}
+
+macro_rules! IntoIter {
+    () => {
+        deps!();
+        # [doc = " A consuming iterator over the values stored in a `Slab`"] pub struct IntoIter < T > { entries : iter :: Enumerate < vec :: IntoIter < Entry < T > > > , len : usize , }
+    };
+}
+
+IntoIter!()

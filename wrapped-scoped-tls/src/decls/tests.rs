@@ -1,0 +1,7 @@
+macro_rules! tests {
+    () => {
+        # [cfg (test)] mod tests { use std :: { cell :: Cell , sync :: mpsc :: { channel , Sender } , thread , } ; scoped_thread_local ! (static FOO : u32) ; # [test] fn smoke () { scoped_thread_local ! (static BAR : u32) ; assert ! (! BAR . is_set ()) ; BAR . set (& 1 , | | { assert ! (BAR . is_set ()) ; BAR . with (| slot | { assert_eq ! (* slot , 1) ; }) ; }) ; assert ! (! BAR . is_set ()) ; } # [test] fn cell_allowed () { scoped_thread_local ! (static BAR : Cell < u32 >) ; BAR . set (& Cell :: new (1) , | | { BAR . with (| slot | { assert_eq ! (slot . get () , 1) ; }) ; }) ; } # [test] fn scope_item_allowed () { assert ! (! FOO . is_set ()) ; FOO . set (& 1 , | | { assert ! (FOO . is_set ()) ; FOO . with (| slot | { assert_eq ! (* slot , 1) ; }) ; }) ; assert ! (! FOO . is_set ()) ; } # [test] fn panic_resets () { struct Check (Sender < u32 >) ; impl Drop for Check { fn drop (& mut self) { FOO . with (| r | { self . 0 . send (* r) . unwrap () ; }) } } let (tx , rx) = channel () ; let t = thread :: spawn (| | { FOO . set (& 1 , | | { let _r = Check (tx) ; FOO . set (& 2 , | | panic ! ()) ; }) ; }) ; assert_eq ! (rx . recv () . unwrap () , 1) ; assert ! (t . join () . is_err ()) ; } # [test] fn attrs_allowed () { scoped_thread_local ! (# [doc = " Docs"] static BAZ : u32) ; scoped_thread_local ! (# [allow (non_upper_case_globals)] static quux : u32) ; let _ = BAZ ; let _ = quux ; } }
+    };
+}
+
+tests!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        VacantEntry!();
+    };
+}
+
+macro_rules! impl_26 {
+    () => {
+        deps!();
+        impl < T , C : cfg :: Config > VacantEntry < '_ , T , C > { # [doc = " Insert a value in the entry."] # [doc = ""] # [doc = " To get the integer index at which this value will be inserted, use"] # [doc = " [`key`] prior to calling `insert`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use sharded_slab::Slab;"] # [doc = " let mut slab = Slab::new();"] # [doc = ""] # [doc = " let hello = {"] # [doc = "     let entry = slab.vacant_entry().unwrap();"] # [doc = "     let key = entry.key();"] # [doc = ""] # [doc = "     entry.insert((key, \"hello\"));"] # [doc = "     key"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(hello, slab.get(hello).unwrap().0);"] # [doc = " assert_eq!(\"hello\", slab.get(hello).unwrap().1);"] # [doc = " ```"] # [doc = ""] # [doc = " [`key`]: VacantEntry::key"] pub fn insert (mut self , val : T) { let value = unsafe { self . inner . value_mut () } ; debug_assert ! (value . is_none () , "tried to insert to a slot that already had a value!") ; * value = Some (val) ; let _released = unsafe { self . inner . release () } ; debug_assert ! (! _released , "removing a value before it was inserted should be a no-op") } # [doc = " Return the integer index at which this entry will be inserted."] # [doc = ""] # [doc = " A value stored in this entry will be associated with this key."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use sharded_slab::*;"] # [doc = " let mut slab = Slab::new();"] # [doc = ""] # [doc = " let hello = {"] # [doc = "     let entry = slab.vacant_entry().unwrap();"] # [doc = "     let key = entry.key();"] # [doc = ""] # [doc = "     entry.insert((key, \"hello\"));"] # [doc = "     key"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(hello, slab.get(hello).unwrap().0);"] # [doc = " assert_eq!(\"hello\", slab.get(hello).unwrap().1);"] # [doc = " ```"] pub fn key (& self) -> usize { self . key } }
+    };
+}
+
+impl_26!()

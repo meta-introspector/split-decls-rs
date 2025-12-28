@@ -1,0 +1,7 @@
+macro_rules! nghttp2_on_extension_chunk_recv_callback {
+    () => {
+        # [doc = " @functypedef"] # [doc = ""] # [doc = " Callback function invoked when chunk of extension frame payload is"] # [doc = " received.  The |hd| points to frame header.  The received"] # [doc = " chunk is |data| of length |len|."] # [doc = ""] # [doc = " The implementation of this function must return 0 if it succeeds."] # [doc = ""] # [doc = " To abort processing this extension frame, return"] # [doc = " :enum:`NGHTTP2_ERR_CANCEL`."] # [doc = ""] # [doc = " If fatal error occurred, application should return"] # [doc = " :enum:`NGHTTP2_ERR_CALLBACK_FAILURE`.  In this case,"] # [doc = " `nghttp2_session_recv()` and `nghttp2_session_mem_recv()` functions"] # [doc = " immediately return :enum:`NGHTTP2_ERR_CALLBACK_FAILURE`.  If the"] # [doc = " other values are returned, currently they are treated as"] # [doc = " :enum:`NGHTTP2_ERR_CALLBACK_FAILURE`."] pub type nghttp2_on_extension_chunk_recv_callback = :: std :: option :: Option < unsafe extern "C" fn (session : * mut nghttp2_session , hd : * const nghttp2_frame_hd , data : * const u8 , len : usize , user_data : * mut :: std :: os :: raw :: c_void ,) -> :: std :: os :: raw :: c_int , > ;
+    };
+}
+
+nghttp2_on_extension_chunk_recv_callback!()

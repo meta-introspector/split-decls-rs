@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        DiagnosticsConfig!();
+        Diagnostic!();
+    };
+}
+
+macro_rules! full_diagnostics {
+    () => {
+        deps!();
+        # [doc = " Request both syntax and semantic diagnostics for the given [`FileId`]."] pub fn full_diagnostics (db : & RootDatabase , config : & DiagnosticsConfig , resolve : & AssistResolveStrategy , file_id : FileId ,) -> Vec < Diagnostic > { let mut res = syntax_diagnostics (db , config , file_id) ; let sema = semantic_diagnostics (db , config , resolve , file_id) ; res . extend (sema) ; res }
+    };
+}
+
+full_diagnostics!()

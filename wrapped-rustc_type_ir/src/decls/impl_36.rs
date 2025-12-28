@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Variance!();
+    };
+}
+
+macro_rules! impl_36 {
+    () => {
+        deps!();
+        impl Variance { # [doc = " `a.xform(b)` combines the variance of a context with the"] # [doc = " variance of a type with the following meaning. If we are in a"] # [doc = " context with variance `a`, and we encounter a type argument in"] # [doc = " a position with variance `b`, then `a.xform(b)` is the new"] # [doc = " variance with which the argument appears."] # [doc = ""] # [doc = " Example 1:"] # [doc = " ```ignore (illustrative)"] # [doc = " *mut Vec<i32>"] # [doc = " ```"] # [doc = " Here, the \"ambient\" variance starts as covariant. `*mut T` is"] # [doc = " invariant with respect to `T`, so the variance in which the"] # [doc = " `Vec<i32>` appears is `Covariant.xform(Invariant)`, which"] # [doc = " yields `Invariant`. Now, the type `Vec<T>` is covariant with"] # [doc = " respect to its type argument `T`, and hence the variance of"] # [doc = " the `i32` here is `Invariant.xform(Covariant)`, which results"] # [doc = " (again) in `Invariant`."] # [doc = ""] # [doc = " Example 2:"] # [doc = " ```ignore (illustrative)"] # [doc = " fn(*const Vec<i32>, *mut Vec<i32)"] # [doc = " ```"] # [doc = " The ambient variance is covariant. A `fn` type is"] # [doc = " contravariant with respect to its parameters, so the variance"] # [doc = " within which both pointer types appear is"] # [doc = " `Covariant.xform(Contravariant)`, or `Contravariant`. `*const"] # [doc = " T` is covariant with respect to `T`, so the variance within"] # [doc = " which the first `Vec<i32>` appears is"] # [doc = " `Contravariant.xform(Covariant)` or `Contravariant`. The same"] # [doc = " is true for its `i32` argument. In the `*mut T` case, the"] # [doc = " variance of `Vec<i32>` is `Contravariant.xform(Invariant)`,"] # [doc = " and hence the outermost type is `Invariant` with respect to"] # [doc = " `Vec<i32>` (and its `i32` argument)."] # [doc = ""] # [doc = " Source: Figure 1 of \"Taming the Wildcards:"] # [doc = " Combining Definition- and Use-Site Variance\" published in PLDI'11."] pub fn xform (self , v : Variance) -> Variance { match (self , v) { (Variance :: Covariant , Variance :: Covariant) => Variance :: Covariant , (Variance :: Covariant , Variance :: Contravariant) => Variance :: Contravariant , (Variance :: Covariant , Variance :: Invariant) => Variance :: Invariant , (Variance :: Covariant , Variance :: Bivariant) => Variance :: Bivariant , (Variance :: Contravariant , Variance :: Covariant) => Variance :: Contravariant , (Variance :: Contravariant , Variance :: Contravariant) => Variance :: Covariant , (Variance :: Contravariant , Variance :: Invariant) => Variance :: Invariant , (Variance :: Contravariant , Variance :: Bivariant) => Variance :: Bivariant , (Variance :: Invariant , _) => Variance :: Invariant , (Variance :: Bivariant , _) => Variance :: Bivariant , } } }
+    };
+}
+
+impl_36!()

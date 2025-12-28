@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Vectorization!();
+    };
+}
+
+macro_rules! vectorization_support {
+    () => {
+        deps!();
+        # [inline (always)] pub (crate) fn vectorization_support () -> Vectorization { # [cfg (all (any (target_arch = "x86" , target_arch = "x86_64") , target_feature = "sse"))] { use core :: sync :: atomic :: { AtomicU8 , Ordering } ; static FLAGS : AtomicU8 = AtomicU8 :: new (u8 :: MAX) ; let current_flags = FLAGS . load (Ordering :: Relaxed) ; if current_flags != u8 :: MAX { return match current_flags { 0 => Vectorization :: None , 1 => Vectorization :: SSE41 , 2 => Vectorization :: AVX2 , _ => unreachable ! () , } ; } let val = vectorization_support_no_cache_x86 () ; FLAGS . store (val as u8 , Ordering :: Relaxed) ; return val ; } # [cfg (all (target_arch = "aarch64" , target_feature = "neon"))] { use core :: sync :: atomic :: { AtomicU8 , Ordering } ; static FLAGS : AtomicU8 = AtomicU8 :: new (u8 :: MAX) ; let current_flags = FLAGS . load (Ordering :: Relaxed) ; if current_flags != u8 :: MAX { return match current_flags { 0 => Vectorization :: None , 3 => Vectorization :: Neon , _ => unreachable ! () , } ; } let val = vectorization_support_no_cache_arm () ; FLAGS . store (val as u8 , Ordering :: Relaxed) ; return val ; } # [allow (unreachable_code)] Vectorization :: None }
+    };
+}
+
+vectorization_support!()

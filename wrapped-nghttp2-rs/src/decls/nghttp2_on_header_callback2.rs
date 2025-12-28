@@ -1,0 +1,7 @@
+macro_rules! nghttp2_on_header_callback2 {
+    () => {
+        # [doc = " @functypedef"] # [doc = ""] # [doc = " Callback function invoked when a header name/value pair is received"] # [doc = " for the |frame|.  The |name| is header name.  The |value| is header"] # [doc = " value.  The |flags| is bitwise OR of one or more of"] # [doc = " :type:`nghttp2_nv_flag`."] # [doc = ""] # [doc = " This callback behaves like :type:`nghttp2_on_header_callback`,"] # [doc = " except that |name| and |value| are stored in reference counted"] # [doc = " buffer.  If application wishes to keep these references without"] # [doc = " copying them, use `nghttp2_rcbuf_incref()` to increment their"] # [doc = " reference count.  It is the application's responsibility to call"] # [doc = " `nghttp2_rcbuf_decref()` if they called `nghttp2_rcbuf_incref()` so"] # [doc = " as not to leak memory.  If the |session| is created by"] # [doc = " `nghttp2_session_server_new3()` or `nghttp2_session_client_new3()`,"] # [doc = " the function to free memory is the one belongs to the mem"] # [doc = " parameter.  As long as this free function alives, |name| and"] # [doc = " |value| can live after |session| was destroyed."] pub type nghttp2_on_header_callback2 = :: std :: option :: Option < unsafe extern "C" fn (session : * mut nghttp2_session , frame : * const nghttp2_frame , name : * mut nghttp2_rcbuf , value : * mut nghttp2_rcbuf , flags : u8 , user_data : * mut :: std :: os :: raw :: c_void ,) -> :: std :: os :: raw :: c_int , > ;
+    };
+}
+
+nghttp2_on_header_callback2!()

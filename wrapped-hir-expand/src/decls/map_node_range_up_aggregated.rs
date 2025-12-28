@@ -1,0 +1,7 @@
+macro_rules! map_node_range_up_aggregated {
+    () => {
+        # [doc = " Maps up the text range out of the expansion hierarchy back into the original file its from."] # [doc = " This version will aggregate the ranges of all spans with the same anchor and syntax context."] pub fn map_node_range_up_aggregated (db : & dyn ExpandDatabase , exp_map : & ExpansionSpanMap , range : TextRange ,) -> FxHashMap < (SpanAnchor , SyntaxContext) , TextRange > { let mut map = FxHashMap :: default () ; for span in exp_map . spans_for_range (range) { let range = map . entry ((span . anchor , span . ctx)) . or_insert_with (| | span . range) ; * range = TextRange :: new (range . start () . min (span . range . start ()) , range . end () . max (span . range . end ()) ,) ; } for ((anchor , _) , range) in & mut map { let file_id = EditionedFileId :: from_span (db , anchor . file_id) ; let anchor_offset = db . ast_id_map (file_id . into ()) . get_erased (anchor . ast_id) . text_range () . start () ; * range += anchor_offset ; } map }
+    };
+}
+
+map_node_range_up_aggregated!()

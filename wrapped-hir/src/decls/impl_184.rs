@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Closure!();
+        CallableKind!();
+        Callable!();
+        AnyClosureId!();
+        Function!();
+        SelfParam!();
+        Type!();
+        Callee!();
+        Param!();
+    };
+}
+
+macro_rules! impl_184 {
+    () => {
+        deps!();
+        impl < 'db > Callable < 'db > { pub fn kind (& self) -> CallableKind < 'db > { match self . callee { Callee :: Def (CallableDefId :: FunctionId (it)) => CallableKind :: Function (it . into ()) , Callee :: Def (CallableDefId :: StructId (it)) => CallableKind :: TupleStruct (it . into ()) , Callee :: Def (CallableDefId :: EnumVariantId (it)) => { CallableKind :: TupleEnumVariant (it . into ()) } Callee :: Closure (id , subst) => { CallableKind :: Closure (Closure { id : AnyClosureId :: ClosureId (id) , subst }) } Callee :: CoroutineClosure (id , subst) => { CallableKind :: Closure (Closure { id : AnyClosureId :: CoroutineClosureId (id) , subst }) } Callee :: FnPtr => CallableKind :: FnPtr , Callee :: FnImpl (fn_) => CallableKind :: FnImpl (fn_) , } } pub fn receiver_param (& self , db : & 'db dyn HirDatabase) -> Option < (SelfParam , Type < 'db >) > { let func = match self . callee { Callee :: Def (CallableDefId :: FunctionId (it)) if self . is_bound_method => it , _ => return None , } ; let func = Function { id : func } ; Some ((func . self_param (db) ? , self . ty . derived (self . sig . skip_binder () . inputs_and_output . inputs () [0]) ,)) } pub fn n_params (& self) -> usize { self . sig . skip_binder () . inputs_and_output . inputs () . len () - if self . is_bound_method { 1 } else { 0 } } pub fn params (& self) -> Vec < Param < 'db > > { self . sig . skip_binder () . inputs_and_output . inputs () . iter () . enumerate () . skip (if self . is_bound_method { 1 } else { 0 }) . map (| (idx , ty) | (idx , self . ty . derived (* ty))) . map (| (idx , ty) | Param { func : self . callee . clone () , idx , ty }) . collect () } pub fn return_type (& self) -> Type < 'db > { self . ty . derived (self . sig . skip_binder () . output ()) } pub fn sig (& self) -> impl Eq { & self . sig } pub fn ty (& self) -> & Type < 'db > { & self . ty } }
+    };
+}
+
+impl_184!()

@@ -1,0 +1,7 @@
+macro_rules! other_123 {
+    () => {
+        # [doc = " @union"] # [doc = ""] # [doc = " This union includes all frames to pass them to various function"] # [doc = " calls as nghttp2_frame type.  The CONTINUATION frame is omitted"] # [doc = " from here because the library deals with it internally."] # [repr (C)] # [derive (Copy , Clone)] pub union nghttp2_frame { # [doc = " The frame header, which is convenient to inspect frame header."] pub hd : nghttp2_frame_hd , # [doc = " The DATA frame."] pub data : nghttp2_data , # [doc = " The HEADERS frame."] pub headers : nghttp2_headers , # [doc = " The PRIORITY frame."] pub priority : nghttp2_priority , # [doc = " The RST_STREAM frame."] pub rst_stream : nghttp2_rst_stream , # [doc = " The SETTINGS frame."] pub settings : nghttp2_settings , # [doc = " The PUSH_PROMISE frame."] pub push_promise : nghttp2_push_promise , # [doc = " The PING frame."] pub ping : nghttp2_ping , # [doc = " The GOAWAY frame."] pub goaway : nghttp2_goaway , # [doc = " The WINDOW_UPDATE frame."] pub window_update : nghttp2_window_update , # [doc = " The extension frame."] pub ext : nghttp2_extension , _bindgen_union_align : [u64 ; 8usize] , }
+    };
+}
+
+other_123!()

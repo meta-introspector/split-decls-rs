@@ -1,0 +1,7 @@
+macro_rules! SuggestionStyle {
+    () => {
+        # [derive (Debug , PartialEq , Eq , Clone , Copy , Hash , Encodable , Decodable)] pub enum SuggestionStyle { # [doc = " Hide the suggested code when displaying this suggestion inline."] HideCodeInline , # [doc = " Always hide the suggested code but display the message."] HideCodeAlways , # [doc = " Do not display this suggestion in the cli output, it is only meant for tools."] CompletelyHidden , # [doc = " Always show the suggested code."] # [doc = " This will *not* show the code if the suggestion is inline *and* the suggested code is"] # [doc = " empty."] ShowCode , # [doc = " Always show the suggested code independently."] ShowAlways , }
+    };
+}
+
+SuggestionStyle!()

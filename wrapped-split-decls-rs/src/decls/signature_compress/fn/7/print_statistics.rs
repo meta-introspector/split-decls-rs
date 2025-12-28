@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: print_statistics");
+fn print_statistics (stats : & split_decls_rs :: signature_compressor :: SignatureStats) { println ! ("\n📊 Signature Compression Statistics:") ; println ! ("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━") ; println ! ("📈 Total unique signatures: {}" , stats . total_signatures) ; println ! ("🔢 Total declarations processed: {}" , stats . total_frequency) ; println ! ("🏆 Most common signature: {} (frequency: {})" , stats . most_common_signature , stats . most_common_frequency) ; println ! ("🎯 Least common signature: {} (frequency: {})" , stats . least_common_signature , stats . least_common_frequency) ; println ! ("📉 Compression ratio: {:.2}% (most common signature)" , stats . compression_ratio * 100.0) ; println ! ("🔢 Prime range: {} to {}" , stats . prime_range . 0 , stats . prime_range . 1) ; let theoretical_compression = 1.0 / (stats . total_signatures as f64) ; println ! ("🧮 Theoretical max compression: {:.2}%" , theoretical_compression * 100.0) ; println ! ("⚡ Actual vs theoretical: {:.2}x better than uniform" , stats . compression_ratio / theoretical_compression) ; }
+}

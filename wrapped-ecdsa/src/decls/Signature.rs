@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        EcdsaCurve!();
+    };
+}
+
+macro_rules! Signature {
+    () => {
+        deps!();
+        # [doc = " ECDSA signature (fixed-size, a.k.a. [IEEE P1363]). Generic over elliptic curve types."] # [doc = ""] # [doc = " Serialized as fixed-sized big endian scalar values with no added framing:"] # [doc = ""] # [doc = " - `r`: field element size for the given curve, big-endian"] # [doc = " - `s`: field element size for the given curve, big-endian"] # [doc = ""] # [doc = " Both `r` and `s` MUST be non-zero."] # [doc = ""] # [doc = " For example, in a curve with a 256-bit modulus like NIST P-256 or"] # [doc = " secp256k1, `r` and `s` will both be 32-bytes and serialized as big endian,"] # [doc = " resulting in a signature with a total of 64-bytes."] # [doc = ""] # [doc = " ASN.1 DER-encoded signatures also supported via the"] # [doc = " [`Signature::from_der`] and [`Signature::to_der`] methods."] # [doc = ""] # [doc = " # `serde` support"] # [doc = ""] # [doc = " When the `serde` feature of this crate is enabled, it provides support for"] # [doc = " serializing and deserializing ECDSA signatures using the `Serialize` and"] # [doc = " `Deserialize` traits."] # [doc = ""] # [doc = " The serialization uses a hexadecimal encoding when used with"] # [doc = " \"human readable\" text formats, and a binary encoding otherwise."] # [doc = ""] # [doc = " [IEEE P1363]: https://en.wikipedia.org/wiki/IEEE_P1363"] # [derive (Clone , Eq , PartialEq)] pub struct Signature < C : EcdsaCurve > { r : ScalarValue < C > , s : ScalarValue < C > , }
+    };
+}
+
+Signature!()

@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: encode_upper");
+# [doc = " Encodes `data` as hex string using uppercase characters."] # [doc = ""] # [doc = " Apart from the characters' casing, this works exactly like `encode()`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " assert_eq!(hex::encode_upper(\"Hello world!\"), \"48656C6C6F20776F726C6421\");"] # [doc = " assert_eq!(hex::encode_upper(vec![1, 2, 3, 15, 16]), \"0102030F10\");"] # [doc = " ```"] # [must_use] # [cfg (feature = "alloc")] pub fn encode_upper < T : AsRef < [u8] > > (data : T) -> String { let data = data . as_ref () ; let mut out = vec ! [0 ; data . len () * 2] ; encode_to_slice_upper (data , & mut out) . unwrap () ; String :: from_utf8 (out) . unwrap () }
+}

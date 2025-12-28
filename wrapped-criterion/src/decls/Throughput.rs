@@ -1,0 +1,7 @@
+macro_rules! Throughput {
+    () => {
+        # [doc = " Enum representing different ways of measuring the throughput of benchmarked code."] # [doc = " If the throughput setting is configured for a benchmark then the estimated throughput will"] # [doc = " be reported as well as the time per iteration."] # [derive (Debug , Clone , Serialize , Deserialize , PartialEq , Eq)] pub enum Throughput { # [doc = " Measure throughput in terms of bytes/second. The value should be the number of bytes"] # [doc = " processed by one iteration of the benchmarked code. Typically, this would be the length of"] # [doc = " an input string or `&[u8]`."] Bytes (u64) , # [doc = " Equivalent to Bytes, but the value will be reported in terms of"] # [doc = " kilobytes (1000 bytes) per second instead of kibibytes (1024 bytes) per"] # [doc = " second, megabytes instead of mibibytes, and gigabytes instead of gibibytes."] BytesDecimal (u64) , # [doc = " Measure throughput in terms of elements/second. The value should be the number of elements"] # [doc = " processed by one iteration of the benchmarked code. Typically, this would be the size of a"] # [doc = " collection, but could also be the number of lines of input text or the number of values to"] # [doc = " parse."] Elements (u64) , # [doc = " Measure throughput in terms of bits/second. The value should be the number of bits"] # [doc = " processed by one iteration of the benchmarked code. Typically, this would be the number of"] # [doc = " bits transferred by a networking function."] Bits (u64) , }
+    };
+}
+
+Throughput!()

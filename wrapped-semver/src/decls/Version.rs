@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Prerelease!();
+        BuildMetadata!();
+    };
+}
+
+macro_rules! Version {
+    () => {
+        deps!();
+        # [doc = " **SemVer version** as defined by <https://semver.org>."] # [doc = ""] # [doc = " # Syntax"] # [doc = ""] # [doc = " - The major, minor, and patch numbers may be any integer 0 through u64::MAX."] # [doc = "   When representing a SemVer version as a string, each number is written as"] # [doc = "   a base 10 integer. For example, `1.0.119`."] # [doc = ""] # [doc = " - Leading zeros are forbidden in those positions. For example `1.01.00` is"] # [doc = "   invalid as a SemVer version."] # [doc = ""] # [doc = " - The pre-release identifier, if present, must conform to the syntax"] # [doc = "   documented for [`Prerelease`]."] # [doc = ""] # [doc = " - The build metadata, if present, must conform to the syntax documented for"] # [doc = "   [`BuildMetadata`]."] # [doc = ""] # [doc = " - Whitespace is not allowed anywhere in the version."] # [doc = ""] # [doc = " # Total ordering"] # [doc = ""] # [doc = " Given any two SemVer versions, one is less than, greater than, or equal to"] # [doc = " the other. Versions may be compared against one another using Rust's usual"] # [doc = " comparison operators."] # [doc = ""] # [doc = " - The major, minor, and patch number are compared numerically from left to"] # [doc = "   right, lexicographically ordered as a 3-tuple of integers. So for example"] # [doc = "   version `1.5.0` is less than version `1.19.0`, despite the fact that"] # [doc = "   \"1.19.0\" &lt; \"1.5.0\" as ASCIIbetically compared strings and 1.19 &lt; 1.5"] # [doc = "   as real numbers."] # [doc = ""] # [doc = " - When major, minor, and patch are equal, a pre-release version is"] # [doc = "   considered less than the ordinary release:&ensp;version `1.0.0-alpha.1` is"] # [doc = "   less than version `1.0.0`."] # [doc = ""] # [doc = " - Two pre-releases of the same major, minor, patch are compared by"] # [doc = "   lexicographic ordering of dot-separated components of the pre-release"] # [doc = "   string."] # [doc = ""] # [doc = "   - Identifiers consisting of only digits are compared"] # [doc = "     numerically:&ensp;`1.0.0-pre.8` is less than `1.0.0-pre.12`."] # [doc = ""] # [doc = "   - Identifiers that contain a letter or hyphen are compared in ASCII sort"] # [doc = "     order:&ensp;`1.0.0-pre12` is less than `1.0.0-pre8`."] # [doc = ""] # [doc = "   - Any numeric identifier is always less than any non-numeric"] # [doc = "     identifier:&ensp;`1.0.0-pre.1` is less than `1.0.0-pre.x`."] # [doc = ""] # [doc = " Example:&ensp;`1.0.0-alpha`&ensp;&lt;&ensp;`1.0.0-alpha.1`&ensp;&lt;&ensp;`1.0.0-alpha.beta`&ensp;&lt;&ensp;`1.0.0-beta`&ensp;&lt;&ensp;`1.0.0-beta.2`&ensp;&lt;&ensp;`1.0.0-beta.11`&ensp;&lt;&ensp;`1.0.0-rc.1`&ensp;&lt;&ensp;`1.0.0`"] # [derive (Clone , Eq , PartialEq , Ord , PartialOrd , Hash)] pub struct Version { pub major : u64 , pub minor : u64 , pub patch : u64 , pub pre : Prerelease , pub build : BuildMetadata , }
+    };
+}
+
+Version!()

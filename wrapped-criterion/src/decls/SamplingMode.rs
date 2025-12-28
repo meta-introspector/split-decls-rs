@@ -1,0 +1,7 @@
+macro_rules! SamplingMode {
+    () => {
+        # [doc = " This enum allows the user to control how Criterion.rs chooses the iteration count when sampling."] # [doc = " The default is `Auto`, which will choose a method automatically based on the iteration time during"] # [doc = " the warm-up phase."] # [derive (Debug , Default , Clone , Copy)] pub enum SamplingMode { # [doc = " Criterion.rs should choose a sampling method automatically. This is the default, and is"] # [doc = " recommended for most users and most benchmarks."] # [default] Auto , # [doc = " Scale the iteration count in each sample linearly. This is suitable for most benchmarks,"] # [doc = " but it tends to require many iterations which can make it very slow for very long benchmarks."] Linear , # [doc = " Keep the iteration count the same for all samples. This is not recommended, as it affects"] # [doc = " the statistics that Criterion.rs can compute. However, it requires fewer iterations than"] # [doc = " the `Linear` method and therefore is more suitable for very long-running benchmarks where"] # [doc = " benchmark execution time is more of a problem and statistical precision is less important."] Flat , }
+    };
+}
+
+SamplingMode!()

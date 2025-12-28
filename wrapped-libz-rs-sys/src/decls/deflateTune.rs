@@ -1,0 +1,7 @@
+macro_rules! deflateTune {
+    () => {
+        # [doc = " Fine tune deflate's internal compression parameters."] # [doc = ""] # [doc = " This should only be used by someone who understands the algorithm used by zlib's deflate for searching"] # [doc = " for the best matching string, and even then only by the most fanatic optimizer trying to squeeze out"] # [doc = " the last compressed bit for their specific input data. Read the `deflate.rs` source code for the meaning"] # [doc = " of the `max_lazy`, `good_length`, `nice_length`, and `max_chain` parameters."] # [doc = ""] # [doc = " ## Returns"] # [doc = ""] # [doc = " - [`Z_OK`] if success"] # [doc = " - [`Z_STREAM_ERROR`] if the stream state was inconsistent"] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must guarantee that"] # [doc = ""] # [doc = " * Either"] # [doc = "     - `strm` is `NULL`"] # [doc = "     - `strm` satisfies the requirements of `&mut *strm` and was initialized with [`deflateInit_`] or similar"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (deflateTune))] pub unsafe extern "C-unwind" fn deflateTune (strm : z_streamp , good_length : c_int , max_lazy : c_int , nice_length : c_int , max_chain : c_int ,) -> c_int { let Some (stream) = (unsafe { DeflateStream :: from_stream_mut (strm) }) else { return ReturnCode :: StreamError as _ ; } ; zlib_rs :: deflate :: tune (stream , good_length as usize , max_lazy as usize , nice_length as usize , max_chain as usize ,) as _ }
+    };
+}
+
+deflateTune!()

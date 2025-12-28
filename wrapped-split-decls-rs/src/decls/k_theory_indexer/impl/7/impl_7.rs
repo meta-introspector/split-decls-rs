@@ -1,0 +1,6 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclimpl! {
+impl KIndex { pub fn new () -> Self { Self { nodes : HashMap :: new () , levels : HashMap :: new () , } } pub fn add_node (& mut self , level : u8 , index : i32 , name : String , complexity : f64 , depth : u32 , file_path : String , content : String) { let key = format ! ("k{}.{}" , level , index) ; let node = KNode { name , level , index , complexity , depth , file_path , content } ; self . nodes . insert (key . clone () , node) ; self . levels . entry (level) . or_insert_with (Vec :: new) . push (key) ; } pub fn get (& self , addr : & str) -> Option < & KNode > { if addr . contains (".-1") { let level : u8 = addr . chars () . skip (1) . take_while (| c | c . is_numeric ()) . collect :: < String > () . parse () . ok () ? ; let level_nodes = self . levels . get (& level) ? ; let last_key = level_nodes . last () ? ; return self . nodes . get (last_key) ; } self . nodes . get (addr) } pub fn summarize (& self , addr : & str) -> Option < String > { let node = self . get (addr) ? ; Some (format ! ("K{}.{}: {} (complexity: {:.1}, depth: {})\n{}" , node . level , node . index , node . name , node . complexity , node . depth , node . content . lines () . take (5) . collect ::< Vec < _ >> () . join ("\n"))) } }
+}

@@ -1,0 +1,7 @@
+macro_rules! other_192 {
+    () => {
+        extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Initializes |*session_ptr| for client use.  The all members of"] # [doc = " |callbacks| are copied to |*session_ptr|.  Therefore |*session_ptr|"] # [doc = " does not store |callbacks|.  The |user_data| is an arbitrary user"] # [doc = " supplied data, which will be passed to the callback functions."] # [doc = ""] # [doc = " The :type:`nghttp2_send_callback` must be specified.  If the"] # [doc = " application code uses `nghttp2_session_recv()`, the"] # [doc = " :type:`nghttp2_recv_callback` must be specified.  The other members"] # [doc = " of |callbacks| can be ``NULL``."] # [doc = ""] # [doc = " If this function fails, |*session_ptr| is left untouched."] # [doc = ""] # [doc = " This function returns 0 if it succeeds, or one of the following"] # [doc = " negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] pub fn nghttp2_session_client_new (session_ptr : * mut * mut nghttp2_session , callbacks : * const nghttp2_session_callbacks , user_data : * mut :: std :: os :: raw :: c_void ,) -> :: std :: os :: raw :: c_int ; }
+    };
+}
+
+other_192!()

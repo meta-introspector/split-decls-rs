@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Adler32!();
+    };
+}
+
+macro_rules! adler32 {
+    () => {
+        deps!();
+        # [doc = " Calculates the Adler-32 checksum of a `BufRead`'s contents."] # [doc = ""] # [doc = " The passed `BufRead` implementor will be read until it reaches EOF (or until it reports an"] # [doc = " error)."] # [doc = ""] # [doc = " If you only have a `Read` implementor, you can wrap it in `std::io::BufReader` before calling"] # [doc = " this function."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Any error returned by the reader are bubbled up by this function."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```no_run"] # [doc = " # fn run() -> Result<(), Box<dyn std::error::Error>> {"] # [doc = " use adler2::adler32;"] # [doc = ""] # [doc = " use std::fs::File;"] # [doc = " use std::io::BufReader;"] # [doc = ""] # [doc = " let file = File::open(\"input.txt\")?;"] # [doc = " let mut file = BufReader::new(file);"] # [doc = ""] # [doc = " adler32(&mut file)?;"] # [doc = " # Ok(()) }"] # [doc = " # fn main() { run().unwrap() }"] # [doc = " ```"] # [cfg (feature = "std")] # [cfg_attr (docsrs , doc (cfg (feature = "std")))] pub fn adler32 < R : BufRead > (mut reader : R) -> io :: Result < u32 > { let mut h = Adler32 :: new () ; loop { let len = { let buf = reader . fill_buf () ? ; if buf . is_empty () { return Ok (h . checksum ()) ; } h . write_slice (buf) ; buf . len () } ; reader . consume (len) ; } }
+    };
+}
+
+adler32!()

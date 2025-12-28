@@ -1,0 +1,7 @@
+macro_rules! inflateInit2_ {
+    () => {
+        # [doc = " Initializes the state for decompression"] # [doc = ""] # [doc = " # Returns"] # [doc = ""] # [doc = " - [`Z_OK`] if success"] # [doc = " - [`Z_MEM_ERROR`] if there was not enough memory"] # [doc = " - [`Z_VERSION_ERROR`] if the zlib library version is incompatible with the version assumed by the caller"] # [doc = " - [`Z_STREAM_ERROR`] if a parameter is invalid, such as a null pointer to the structure"] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must guarantee that"] # [doc = ""] # [doc = " * Either"] # [doc = "     - `strm` is `NULL`"] # [doc = "     - `strm` satisfies the requirements of `&mut *strm`"] # [doc = " * Either"] # [doc = "     - `version` is NULL"] # [doc = "     - `version` satisfies the requirements of [`core::ffi::CStr::from_ptr`]"] # [doc = " * If `strm` is not `NULL`, the following fields contain valid values"] # [doc = "     - `zalloc`"] # [doc = "     - `zfree`"] # [doc = "     - `opaque`"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (inflateInit2_))] pub unsafe extern "C-unwind" fn inflateInit2_ (strm : z_streamp , windowBits : c_int , version : * const c_char , stream_size : c_int ,) -> c_int { if ! is_version_compatible (version , stream_size) { ReturnCode :: VersionError as _ } else { inflateInit2 (strm , windowBits) } }
+    };
+}
+
+inflateInit2_!()

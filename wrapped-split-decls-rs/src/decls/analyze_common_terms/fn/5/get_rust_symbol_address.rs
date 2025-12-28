@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: get_rust_symbol_address");
+fn get_rust_symbol_address (symbol : & str) -> Result < String > { let mangled_patterns = vec ! [format ! ("_ZN*{}*" , symbol) , format ! ("{}*" , symbol) , format ! ("*{}*" , symbol) ,] ; let output = Command :: new ("nm") . arg ("/proc/self/exe") . output () ? ; let stdout = String :: from_utf8_lossy (& output . stdout) ; for line in stdout . lines () { for pattern in & mangled_patterns { if line . contains (symbol) && line . contains ("T ") { let parts : Vec < & str > = line . split_whitespace () . collect () ; if parts . len () >= 1 && parts [0] != "0000000000000000" { return Ok (format ! ("0x{}" , parts [0])) ; } } } } Err (anyhow :: anyhow ! ("Not found")) }
+}

@@ -1,0 +1,7 @@
+macro_rules! FileExt {
+    () => {
+        # [doc = " Extension trait to manipulate extended attributes on `File`-like objects."] pub trait FileExt : AsRawFd { # [doc = " Get an extended attribute for the specified file."] fn get_xattr < N > (& self , name : N) -> io :: Result < Option < Vec < u8 > > > where N : AsRef < OsStr > , { let fd = unsafe { BorrowedFd :: borrow_raw (self . as_raw_fd ()) } ; util :: extract_noattr (sys :: get_fd (fd , name . as_ref ())) } # [doc = " Set an extended attribute on the specified file."] fn set_xattr < N > (& self , name : N , value : & [u8]) -> io :: Result < () > where N : AsRef < OsStr > , { let fd = unsafe { BorrowedFd :: borrow_raw (self . as_raw_fd ()) } ; sys :: set_fd (fd , name . as_ref () , value) } # [doc = " Remove an extended attribute from the specified file."] fn remove_xattr < N > (& self , name : N) -> io :: Result < () > where N : AsRef < OsStr > , { let fd = unsafe { BorrowedFd :: borrow_raw (self . as_raw_fd ()) } ; sys :: remove_fd (fd , name . as_ref ()) } # [doc = " List extended attributes attached to the specified file."] # [doc = ""] # [doc = " Note: this may not list *all* attributes. Speficially, it definitely won't list any trusted"] # [doc = " attributes unless you are root and it may not list system attributes."] fn list_xattr (& self) -> io :: Result < XAttrs > { let fd = unsafe { BorrowedFd :: borrow_raw (self . as_raw_fd ()) } ; sys :: list_fd (fd) } }
+    };
+}
+
+FileExt!()

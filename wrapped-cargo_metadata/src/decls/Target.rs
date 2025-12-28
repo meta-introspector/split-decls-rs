@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Edition!();
+        CrateType!();
+        TargetKind!();
+    };
+}
+
+macro_rules! Target {
+    () => {
+        deps!();
+        # [derive (Clone , Serialize , Deserialize , Debug , PartialEq , Eq , Hash)] # [cfg_attr (feature = "builder" , derive (Builder))] # [cfg_attr (feature = "builder" , builder (pattern = "owned" , setter (into)))] # [non_exhaustive] # [doc = " A single target (lib, bin, example, ...) provided by a crate"] pub struct Target { # [doc = " Name as given in the `Cargo.toml` or generated from the file name"] pub name : String , # [doc = " Kind of target."] # [doc = ""] # [doc = " The possible values are `example`, `test`, `bench`, `custom-build` and"] # [doc = " [Cargo crate types](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field):"] # [doc = " `bin`, `lib`, `rlib`, `dylib`, `cdylib`, `staticlib`, `proc-macro`."] # [doc = ""] # [doc = " Other possible values may be added in the future."] pub kind : Vec < TargetKind > , # [doc = " Similar to `kind`, but only reports the"] # [doc = " [Cargo crate types](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field):"] # [doc = " `bin`, `lib`, `rlib`, `dylib`, `cdylib`, `staticlib`, `proc-macro`."] # [doc = " Everything that's not a proc macro or a library of some kind is reported as \"bin\"."] # [doc = ""] # [doc = " Other possible values may be added in the future."] # [serde (default)] # [cfg_attr (feature = "builder" , builder (default))] pub crate_types : Vec < CrateType > , # [serde (default)] # [cfg_attr (feature = "builder" , builder (default))] # [serde (rename = "required-features")] # [doc = " This target is built only if these features are enabled."] # [doc = " It doesn't apply to `lib` targets."] pub required_features : Vec < String > , # [doc = " Path to the main source file of the target"] pub src_path : Utf8PathBuf , # [doc = " Rust edition for this target"] # [serde (default)] # [cfg_attr (feature = "builder" , builder (default))] pub edition : Edition , # [doc = " Whether or not this target has doc tests enabled, and the target is"] # [doc = " compatible with doc testing."] # [doc = ""] # [doc = " This is always `true` if running with a version of Cargo older than 1.37."] # [serde (default = "default_true")] # [cfg_attr (feature = "builder" , builder (default = "true"))] pub doctest : bool , # [doc = " Whether or not this target is tested by default by `cargo test`."] # [doc = ""] # [doc = " This is always `true` if running with a version of Cargo older than 1.47."] # [serde (default = "default_true")] # [cfg_attr (feature = "builder" , builder (default = "true"))] pub test : bool , # [doc = " Whether or not this target is documented by `cargo doc`."] # [doc = ""] # [doc = " This is always `true` if running with a version of Cargo older than 1.50."] # [serde (default = "default_true")] # [cfg_attr (feature = "builder" , builder (default = "true"))] pub doc : bool , }
+    };
+}
+
+Target!()

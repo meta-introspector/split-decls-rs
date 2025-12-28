@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Utf8Components!();
+    };
+}
+
+macro_rules! impl_22 {
+    () => {
+        deps!();
+        impl FusedIterator for Utf8Components < '_ > { }
+    };
+}
+
+impl_22!()

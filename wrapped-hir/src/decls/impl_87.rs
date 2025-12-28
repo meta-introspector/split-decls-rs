@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        HasVisibility!();
+        Static!();
+    };
+}
+
+macro_rules! impl_87 {
+    () => {
+        deps!();
+        impl HasVisibility for Static { fn visibility (& self , db : & dyn HirDatabase) -> Visibility { let loc = self . id . lookup (db) ; let source = loc . source (db) ; visibility_from_ast (db , self . id , source . map (| src | src . visibility ())) } }
+    };
+}
+
+impl_87!()

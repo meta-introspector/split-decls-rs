@@ -1,0 +1,6 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclstruct! {
+# [derive (Parser)] pub struct CliArgs { # [clap (short = 's' , long = "source-path" , value_parser (clap :: value_parser ! (PathBuf)))] pub source_path : PathBuf , # [clap (short = 'l' , long = "languages" , value_parser (clap :: builder :: ValueParser :: string ()))] pub languages : Vec < String > , # [clap (short = 'e' , long = "excludes" , value_parser (clap :: builder :: ValueParser :: string ()))] pub excludes : Vec < String > , # [clap (short = 'o' , long = "output-format" , default_value = "json" , value_parser (clap :: builder :: ValueParser :: string ()))] pub output_format : String , # [clap (short = 'f' , long = "output-file" , default_value = "duplications" , value_parser (clap :: value_parser ! (PathBuf)))] pub output_file : Option < PathBuf > , # [clap (short = 't' , long = "threshold" , default_value = "5" , value_parser (clap :: value_parser ! (usize)))] pub threshold : usize , # [clap (short = 'n' , long = "threads" , default_value = "10" , value_parser (clap :: value_parser ! (usize)))] pub threads : usize , # [clap (long = "max-file-size" , value_parser (clap :: value_parser ! (u64)) , default_value = "1048576")] pub max_file_size : u64 , # [clap (long = "debug")] pub debug : bool , }
+}

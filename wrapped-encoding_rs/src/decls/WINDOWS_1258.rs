@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Encoding!();
+    };
+}
+
+macro_rules! WINDOWS_1258 {
+    () => {
+        deps!();
+        # [doc = " The windows-1258 encoding."] # [doc = ""] # [doc = " This is the Vietnamese encoding for Windows."] # [doc = ""] # [doc = " [Index visualization](https://encoding.spec.whatwg.org/windows-1258.html),"] # [doc = " [Visualization of BMP coverage](https://encoding.spec.whatwg.org/windows-1258-bmp.html)"] # [doc = ""] # [doc = " This encoding matches the Windows code page 1258 when used in the"] # [doc = " non-normalizing mode. Unlike with the other single-byte encodings, the"] # [doc = " result of decoding is not necessarily in Normalization Form C. On the"] # [doc = " other hand, input in the Normalization Form C is not encoded without"] # [doc = " replacement. In general, it's a bad idea to encode to encodings other"] # [doc = " than UTF-8, but this encoding is especially hazardous to encode to."] # [doc = ""] # [doc = " This will change from `static` to `const` if Rust changes"] # [doc = " to make the referent of `pub const FOO: &'static Encoding`"] # [doc = " unique cross-crate, so don't take the address of this"] # [doc = " `static`."] pub static WINDOWS_1258 : & 'static Encoding = & WINDOWS_1258_INIT ;
+    };
+}
+
+WINDOWS_1258!()

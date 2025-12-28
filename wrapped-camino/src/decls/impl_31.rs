@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Utf8Path!();
+        Iter!();
+    };
+}
+
+macro_rules! impl_31 {
+    () => {
+        deps!();
+        impl < 'a > Iter < 'a > { # [doc = " Extracts a slice corresponding to the portion of the path remaining for iteration."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use camino::Utf8Path;"] # [doc = ""] # [doc = " let mut iter = Utf8Path::new(\"/tmp/foo/bar.txt\").iter();"] # [doc = " iter.next();"] # [doc = " iter.next();"] # [doc = ""] # [doc = " assert_eq!(Utf8Path::new(\"foo/bar.txt\"), iter.as_path());"] # [doc = " ```"] # [must_use] # [inline] pub fn as_path (& self) -> & 'a Utf8Path { self . inner . as_path () } }
+    };
+}
+
+impl_31!()

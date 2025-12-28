@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        AnalysisHost!();
+        Analysis!();
+    };
+}
+
+macro_rules! impl_46 {
+    () => {
+        deps!();
+        impl AnalysisHost { pub fn new (lru_capacity : Option < u16 >) -> AnalysisHost { AnalysisHost { db : RootDatabase :: new (lru_capacity) } } pub fn with_database (db : RootDatabase) -> AnalysisHost { AnalysisHost { db } } pub fn update_lru_capacity (& mut self , lru_capacity : Option < u16 >) { self . db . update_base_query_lru_capacities (lru_capacity) ; } pub fn update_lru_capacities (& mut self , lru_capacities : & FxHashMap < Box < str > , u16 >) { self . db . update_lru_capacities (lru_capacities) ; } # [doc = " Returns a snapshot of the current state, which you can query for"] # [doc = " semantic information."] pub fn analysis (& self) -> Analysis { Analysis { db : self . db . clone () } } # [doc = " Applies changes to the current state of the world. If there are"] # [doc = " outstanding snapshots, they will be canceled."] pub fn apply_change (& mut self , change : ChangeWithProcMacros) { self . db . apply_change (change) ; } # [doc = " NB: this clears the database"] pub fn per_query_memory_usage (& mut self) -> Vec < (String , profile :: Bytes , usize) > { self . db . per_query_memory_usage () } pub fn request_cancellation (& mut self) { self . db . request_cancellation () ; } pub fn raw_database (& self) -> & RootDatabase { & self . db } pub fn raw_database_mut (& mut self) -> & mut RootDatabase { & mut self . db } }
+    };
+}
+
+impl_46!()

@@ -1,0 +1,7 @@
+macro_rules! init_openssl_env_vars {
+    () => {
+        # [doc = " Probe for SSL certificates on the system, then configure the SSL certificate `SSL_CERT_FILE`"] # [doc = " and `SSL_CERT_DIR` environment variables in this process for OpenSSL to use."] # [doc = ""] # [doc = " Preconfigured values in the environment variables will not be overwritten if the paths they"] # [doc = " point to exist and are accessible."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This function is not safe because it mutates the process's environment"] # [doc = " variables which is generally not safe. See the [documentation in libstd][doc]"] # [doc = " for information about why setting environment variables is not safe."] # [doc = ""] # [doc = " If possible use the [`probe`] function and directly configure OpenSSL"] # [doc = " methods instead of relying on environment variables."] # [doc = ""] # [doc = " [doc]: https://doc.rust-lang.org/stable/std/env/fn.set_var.html#safety"] pub unsafe fn init_openssl_env_vars () { try_init_openssl_env_vars () ; }
+    };
+}
+
+init_openssl_env_vars!()

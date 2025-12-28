@@ -1,0 +1,7 @@
+macro_rules! Commit {
+    () => {
+        # [doc = " A mutable git commit, representing an annotated state of a working tree along with a reference to its historical commits."] # [derive (PartialEq , Eq , Debug , Hash , Ord , PartialOrd , Clone)] # [cfg_attr (feature = "serde" , derive (serde :: Serialize , serde :: Deserialize))] pub struct Commit { # [doc = " The hash of recorded working tree state."] pub tree : gix_hash :: ObjectId , # [doc = " Hash of each parent commit. Empty for the first commit in repository."] pub parents : SmallVec < gix_hash :: ObjectId , 1 > , # [doc = " Who wrote this commit."] pub author : gix_actor :: Signature , # [doc = " Who committed this commit."] # [doc = ""] # [doc = " This may be different from the `author` in case the author couldn't write to the repository themselves and"] # [doc = " is commonly encountered with contributed commits."] pub committer : gix_actor :: Signature , # [doc = " The name of the message encoding, otherwise [UTF-8 should be assumed](https://github.com/git/git/blob/e67fbf927dfdf13d0b21dc6ea15dc3c7ef448ea0/commit.c#L1493:L1493)."] pub encoding : Option < BString > , # [doc = " The commit message documenting the change."] pub message : BString , # [doc = " Extra header fields, in order of them being encountered, made accessible with the iterator returned"] # [doc = " by [`extra_headers()`](Commit::extra_headers())."] pub extra_headers : Vec < (BString , BString) > , }
+    };
+}
+
+Commit!()

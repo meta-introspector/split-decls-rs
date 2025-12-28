@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ReadKind!();
+        WriteKind!();
+    };
+}
+
+macro_rules! ReadOrWrite {
+    () => {
+        deps!();
+        # [doc = " Kind of access to a value: read or write"] # [doc = " (For informational purposes only)"] # [derive (Copy , Clone , PartialEq , Eq , Debug)] enum ReadOrWrite { # [doc = " From the RFC: \"A *read* means that the existing data may be"] # [doc = " read, but will not be changed.\""] Read (ReadKind) , # [doc = " From the RFC: \"A *write* means that the data may be mutated to"] # [doc = " new values or otherwise invalidated (for example, it could be"] # [doc = " de-initialized, as in a move operation)."] Write (WriteKind) , # [doc = " For two-phase borrows, we distinguish a reservation (which is treated"] # [doc = " like a Read) from an activation (which is treated like a write), and"] # [doc = " each of those is furthermore distinguished from Reads/Writes above."] Reservation (WriteKind) , Activation (WriteKind , BorrowIndex) , }
+    };
+}
+
+ReadOrWrite!()

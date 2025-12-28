@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        LlvmCodegenBackend!();
+        ModuleLlvm!();
+    };
+}
+
+macro_rules! impl_29 {
+    () => {
+        deps!();
+        impl WriteBackendMethods for LlvmCodegenBackend { type Module = ModuleLlvm ; type ModuleBuffer = back :: lto :: ModuleBuffer ; type TargetMachine = OwnedTargetMachine ; type TargetMachineError = crate :: errors :: LlvmError < 'static > ; type ThinData = back :: lto :: ThinData ; type ThinBuffer = back :: lto :: ThinBuffer ; fn print_pass_timings (& self) { let timings = llvm :: build_string (| s | unsafe { llvm :: LLVMRustPrintPassTimings (s) }) . unwrap () ; print ! ("{timings}") ; } fn print_statistics (& self) { let stats = llvm :: build_string (| s | unsafe { llvm :: LLVMRustPrintStatistics (s) }) . unwrap () ; print ! ("{stats}") ; } fn run_and_optimize_fat_lto (cgcx : & CodegenContext < Self > , exported_symbols_for_lto : & [String] , each_linked_rlib_for_lto : & [PathBuf] , modules : Vec < FatLtoInput < Self > > ,) -> ModuleCodegen < Self :: Module > { let mut module = back :: lto :: run_fat (cgcx , exported_symbols_for_lto , each_linked_rlib_for_lto , modules) ; let dcx = cgcx . create_dcx () ; let dcx = dcx . handle () ; back :: lto :: run_pass_manager (cgcx , dcx , & mut module , false) ; module } fn run_thin_lto (cgcx : & CodegenContext < Self > , exported_symbols_for_lto : & [String] , each_linked_rlib_for_lto : & [PathBuf] , modules : Vec < (String , Self :: ThinBuffer) > , cached_modules : Vec < (SerializedModule < Self :: ModuleBuffer > , WorkProduct) > ,) -> (Vec < ThinModule < Self > > , Vec < WorkProduct >) { back :: lto :: run_thin (cgcx , exported_symbols_for_lto , each_linked_rlib_for_lto , modules , cached_modules ,) } fn optimize (cgcx : & CodegenContext < Self > , dcx : DiagCtxtHandle < '_ > , module : & mut ModuleCodegen < Self :: Module > , config : & ModuleConfig ,) { back :: write :: optimize (cgcx , dcx , module , config) } fn optimize_thin (cgcx : & CodegenContext < Self > , thin : ThinModule < Self > ,) -> ModuleCodegen < Self :: Module > { back :: lto :: optimize_thin_module (thin , cgcx) } fn codegen (cgcx : & CodegenContext < Self > , module : ModuleCodegen < Self :: Module > , config : & ModuleConfig ,) -> CompiledModule { back :: write :: codegen (cgcx , module , config) } fn prepare_thin (module : ModuleCodegen < Self :: Module >) -> (String , Self :: ThinBuffer) { back :: lto :: prepare_thin (module) } fn serialize_module (module : ModuleCodegen < Self :: Module >) -> (String , Self :: ModuleBuffer) { (module . name , back :: lto :: ModuleBuffer :: new (module . module_llvm . llmod ())) } }
+    };
+}
+
+impl_29!()

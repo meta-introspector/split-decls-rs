@@ -1,0 +1,20 @@
+macro_rules! api_walkthrough {
+    () => {
+        # [doc = " This test does not assert anything and instead just shows off the crate's"] # [doc = " API."] # [test] fn api_walkthrough () { use ast :: { HasModuleItem , HasName } ; let source_code = "
+        fn foo() {
+            1 + 1
+        }
+    " ; let parse = SourceFile :: parse (source_code , parser :: Edition :: CURRENT) ; assert ! (parse . errors () . is_empty ()) ; let file : SourceFile = parse . tree () ; let mut func = None ; for item in file . items () { match item { ast :: Item :: Fn (f) => func = Some (f) , _ => unreachable ! () , } } let func : ast :: Fn = func . unwrap () ; let name : Option < ast :: Name > = func . name () ; let name = name . unwrap () ; assert_eq ! (name . text () , "foo") ; let body : ast :: BlockExpr = func . body () . unwrap () ; let stmt_list : ast :: StmtList = body . stmt_list () . unwrap () ; let expr : ast :: Expr = stmt_list . tail_expr () . unwrap () ; let bin_expr : & ast :: BinExpr = match & expr { ast :: Expr :: BinExpr (e) => e , _ => unreachable ! () , } ; let expr_syntax : & SyntaxNode = expr . syntax () ; assert ! (expr_syntax == bin_expr . syntax ()) ; let _expr : ast :: Expr = match ast :: Expr :: cast (expr_syntax . clone ()) { Some (e) => e , None => unreachable ! () , } ; assert_eq ! (expr_syntax . kind () , SyntaxKind :: BIN_EXPR) ; assert_eq ! (expr_syntax . text_range () , TextRange :: new (32 . into () , 37 . into ())) ; let text : SyntaxText = expr_syntax . text () ; assert_eq ! (text . to_string () , "1 + 1") ; assert_eq ! (expr_syntax . parent () . as_ref () , Some (stmt_list . syntax ())) ; assert_eq ! (stmt_list . syntax () . first_child_or_token () . map (| it | it . kind ()) , Some (T ! ['{'])) ; assert_eq ! (expr_syntax . next_sibling_or_token () . map (| it | it . kind ()) , Some (SyntaxKind :: WHITESPACE)) ; let f = expr_syntax . ancestors () . find_map (ast :: Fn :: cast) ; assert_eq ! (f , Some (func)) ; assert ! (expr_syntax . siblings_with_tokens (Direction :: Next) . any (| it | it . kind () == T ! ['}'])) ; assert_eq ! (expr_syntax . descendants_with_tokens () . count () , 8 ,) ; let mut buf = String :: new () ; let mut indent = 0 ; for event in expr_syntax . preorder_with_tokens () { match event { WalkEvent :: Enter (node) => { let text = match & node { NodeOrToken :: Node (it) => it . text () . to_string () , NodeOrToken :: Token (it) => it . text () . to_owned () , } ; format_to ! (buf , "{:indent$}{:?} {:?}\n" , " " , text , node . kind () , indent = indent) ; indent += 2 ; } WalkEvent :: Leave (_) => indent -= 2 , } } assert_eq ! (indent , 0) ; assert_eq ! (buf . trim () , r#"
+"1 + 1" BIN_EXPR
+  "1" LITERAL
+    "1" INT_NUMBER
+  " " WHITESPACE
+  "+" PLUS
+  " " WHITESPACE
+  "1" LITERAL
+    "1" INT_NUMBER
+"# . trim ()) ; let exprs_cast : Vec < String > = file . syntax () . descendants () . filter_map (ast :: Expr :: cast) . map (| expr | expr . syntax () . text () . to_string ()) . collect () ; let mut exprs_visit = Vec :: new () ; for node in file . syntax () . descendants () { match_ast ! { match node { ast :: Expr (it) => { let res = it . syntax () . text () . to_string () ; exprs_visit . push (res) ; } , _ => () , } } } assert_eq ! (exprs_cast , exprs_visit) ; }
+    };
+}
+
+api_walkthrough!()

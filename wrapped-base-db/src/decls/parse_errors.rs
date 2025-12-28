@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        EditionedFileId!();
+        RootQueryDb!();
+    };
+}
+
+macro_rules! parse_errors {
+    () => {
+        deps!();
+        fn parse_errors (db : & dyn RootQueryDb , file_id : EditionedFileId) -> Option < & [SyntaxError] > { # [salsa_macros :: tracked (returns (ref))] fn parse_errors (db : & dyn RootQueryDb , file_id : EditionedFileId) -> Option < Box < [SyntaxError] > > { let errors = db . parse (file_id) . errors () ; match & * errors { [] => None , [..] => Some (errors . into ()) , } } parse_errors (db , file_id) . as_ref () . map (| it | & * * it) }
+    };
+}
+
+parse_errors!()

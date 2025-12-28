@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Utf8Path!();
+    };
+}
+
+macro_rules! FromPathError {
+    () => {
+        deps!();
+        # [doc = " A possible error value while converting a [`Path`] to a [`Utf8Path`]."] # [doc = ""] # [doc = " Produced by the [`TryFrom<&Path>`][tryfrom] implementation for [`&Utf8Path`](Utf8Path)."] # [doc = ""] # [doc = " [tryfrom]: Utf8Path#impl-TryFrom<%26Path>-for-%26Utf8Path"] # [doc = ""] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use camino::{Utf8Path, FromPathError};"] # [doc = " use std::convert::{TryFrom, TryInto};"] # [doc = " use std::ffi::OsStr;"] # [doc = " # #[cfg(unix)]"] # [doc = " use std::os::unix::ffi::OsStrExt;"] # [doc = " use std::path::Path;"] # [doc = ""] # [doc = " let unicode_path = Path::new(\"/valid/unicode\");"] # [doc = " let utf8_path: &Utf8Path = unicode_path.try_into().expect(\"valid Unicode path succeeded\");"] # [doc = ""] # [doc = " // Paths on Unix can be non-UTF-8."] # [doc = " # #[cfg(unix)]"] # [doc = " let non_unicode_str = OsStr::from_bytes(b\"\\xFF\\xFF\\xFF\");"] # [doc = " # #[cfg(unix)]"] # [doc = " let non_unicode_path = Path::new(non_unicode_str);"] # [doc = " # #[cfg(unix)]"] # [doc = " let err: FromPathError = <&Utf8Path>::try_from(non_unicode_path)"] # [doc = "     .expect_err(\"non-Unicode path failed\");"] # [doc = " ```"] # [derive (Copy , Clone , Debug , Eq , PartialEq)] pub struct FromPathError (()) ;
+    };
+}
+
+FromPathError!()

@@ -1,0 +1,7 @@
+macro_rules! PaddingCheck {
+    () => {
+        # [doc = " This enum describes what kind of padding check needs to be generated for the"] # [doc = " associated impl."] enum PaddingCheck { # [doc = " Check that the sum of the fields' sizes exactly equals the struct's"] # [doc = " size."] Struct , # [doc = " Check that a `repr(C)` struct has no padding."] ReprCStruct , # [doc = " Check that the size of each field exactly equals the union's size."] Union , # [doc = " Check that every variant of the enum contains no padding."] # [doc = ""] # [doc = " Because doing so requires a tag enum, this padding check requires an"] # [doc = " additional `TokenStream` which defines the tag enum as `___ZerocopyTag`."] Enum { tag_type_definition : TokenStream } , }
+    };
+}
+
+PaddingCheck!()

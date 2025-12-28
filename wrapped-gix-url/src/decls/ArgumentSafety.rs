@@ -1,0 +1,7 @@
+macro_rules! ArgumentSafety {
+    () => {
+        # [doc = " Classification of a portion of a URL by whether it is *syntactically* safe to pass as an argument to a command-line program."] # [doc = ""] # [doc = " Various parts of URLs can be specified to begin with `-`. If they are used as options to a command-line application"] # [doc = " such as an SSH client, they will be treated as options rather than as non-option arguments as the developer intended."] # [doc = " This is a security risk, because URLs are not always trusted and can often be composed or influenced by an attacker."] # [doc = " See <https://secure.phabricator.com/T12961> for details."] # [doc = ""] # [doc = " # Security Warning"] # [doc = ""] # [doc = " This type only expresses known *syntactic* risk. It does not cover other risks, such as passing a personal access"] # [doc = " token as a username rather than a password in an application that logs usernames."] # [derive (Debug , PartialEq , Eq , Copy , Clone)] pub enum ArgumentSafety < 'a > { # [doc = " May be safe. There is nothing to pass, so there is nothing dangerous."] Absent , # [doc = " May be safe. The argument does not begin with a `-` and so will not be confused as an option."] Usable (& 'a str) , # [doc = " Dangerous! Begins with `-` and could be treated as an option. Use the value in error messages only."] Dangerous (& 'a str) , }
+    };
+}
+
+ArgumentSafety!()

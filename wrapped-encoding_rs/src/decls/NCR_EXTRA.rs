@@ -1,0 +1,7 @@
+macro_rules! NCR_EXTRA {
+    () => {
+        # [doc = " This has to be the max length of an NCR instead of max"] # [doc = " minus one, because we can't rely on getting the minus"] # [doc = " one from the space reserved for the current unmappable,"] # [doc = " because the ISO-2022-JP encoder can fill up that space"] # [doc = " with a state transition escape."] const NCR_EXTRA : usize = 10 ;
+    };
+}
+
+NCR_EXTRA!()

@@ -1,0 +1,7 @@
+macro_rules! random_ratio {
+    () => {
+        # [doc = " Return a bool with a probability of `numerator/denominator` of being"] # [doc = " true."] # [doc = ""] # [doc = " That is, `random_ratio(2, 3)` has chance of 2 in 3, or about 67%, of"] # [doc = " returning true. If `numerator == denominator`, then the returned value"] # [doc = " is guaranteed to be `true`. If `numerator == 0`, then the returned"] # [doc = " value is guaranteed to be `false`."] # [doc = ""] # [doc = " See also the [`Bernoulli`] distribution, which may be faster if"] # [doc = " sampling from the same `numerator` and `denominator` repeatedly."] # [doc = ""] # [doc = " This function is shorthand for"] # [doc = " <code>[rng()].[random_ratio](Rng::random_ratio)(<var>numerator</var>, <var>denominator</var>)</code>."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " If `denominator == 0` or `numerator > denominator`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " println!(\"{}\", rand::random_ratio(2, 3));"] # [doc = " ```"] # [doc = ""] # [doc = " [`Bernoulli`]: distr::Bernoulli"] # [cfg (feature = "thread_rng")] # [inline] # [track_caller] pub fn random_ratio (numerator : u32 , denominator : u32) -> bool { rng () . random_ratio (numerator , denominator) }
+    };
+}
+
+random_ratio!()
