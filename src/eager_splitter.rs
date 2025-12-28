@@ -73,9 +73,10 @@ fn process_all_rust_files(
     
     
     for rust_file in rust_files {
-        // Skip main.rs but process lib.rs and all other files
+        // Process ALL .rs files including main.rs - EMIT ALL CODE
         if let Some(file_name) = rust_file.file_name() {
-            if file_name == "main.rs" {
+            // Only skip if it's a generated file, not main.rs
+            if file_name.to_string_lossy().starts_with("wrapped_") {
                 continue;
             }
         }
@@ -190,7 +191,21 @@ fn process_all_rust_files(
                 _ => "other item".to_string(),
             };
             
-            println!("    📋 Item {}: {}", item_index + 1, item_name);
+            println!("    📋 Item {}: {} ({})", item_index + 1, item_index + 1, 
+                     match &item {
+                         syn::Item::Fn(f) => format!("fn {}", f.sig.ident),
+                         syn::Item::Struct(s) => format!("struct {}", s.ident),
+                         syn::Item::Enum(e) => format!("enum {}", e.ident),
+                         syn::Item::Impl(_) => "impl".to_string(),
+                         syn::Item::Trait(t) => format!("trait {}", t.ident),
+                         syn::Item::Const(c) => format!("const {}", c.ident),
+                         syn::Item::Static(s) => format!("static {}", s.ident),
+                         syn::Item::Type(t) => format!("type {}", t.ident),
+                         syn::Item::Mod(m) => format!("mod {}", m.ident.to_string()),
+                         syn::Item::Use(_) => "use".to_string(),
+                         syn::Item::Macro(m) => format!("macro {}", m.ident.as_ref().map_or("_".to_string(), |i| i.to_string())),
+                         _ => "other".to_string(),
+                     });
             
             if let Some(decl) = declaration_extractor::extract_single_declaration(item, *item_count) {
                 let module_name_str = format!("{}_decls_{}_{}", 
