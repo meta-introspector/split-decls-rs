@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+pub fn get_language_mapping () -> HashMap < & 'static str , Vec < & 'static str > > { let mut mapping = HashMap :: new () ; mapping . insert ("c" , vec ! ["c" , "h"]) ; mapping . insert ("cpp" , vec ! ["cpp" , "cc" , "cxx" , "hpp" , "hxx"]) ; mapping . insert ("java" , vec ! ["java"]) ; mapping . insert ("javascript" , vec ! ["js" , "jsx"]) ; mapping . insert ("typescript" , vec ! ["ts" , "tsx"]) ; mapping . insert ("python" , vec ! ["py"]) ; mapping . insert ("golang" , vec ! ["go"]) ; mapping . insert ("rust" , vec ! ["rs"]) ; mapping }

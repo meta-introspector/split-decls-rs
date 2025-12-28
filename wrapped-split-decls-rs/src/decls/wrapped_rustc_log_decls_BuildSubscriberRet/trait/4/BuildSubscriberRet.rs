@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Trait alias for the complex return type of `build_subscriber` in"] # [doc = " [init_logger_with_additional_layer]. A [Registry] with any composition of [tracing::Subscriber]s"] # [doc = " (e.g. `Registry::default().with(custom_layer)`) should be compatible with this type."] # [doc = " Having an alias is also useful so rustc_driver_impl does not need to explicitly depend on"] # [doc = " `tracing_subscriber`."] pub trait BuildSubscriberRet : tracing :: Subscriber + for < 'span > tracing_subscriber :: registry :: LookupSpan < 'span > + Send + Sync { }

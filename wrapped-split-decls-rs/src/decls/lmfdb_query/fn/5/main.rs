@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn main () -> Result < () > { let index_content = std :: fs :: read_to_string ("k_theory_index.json") ? ; let index : serde_json :: Value = serde_json :: from_str (& index_content) ? ; if let Some (node) = index ["nodes"] ["k7.1"] . as_object () { let name = node ["name"] . as_str () . unwrap_or ("unknown") ; let complexity = node ["complexity"] . as_f64 () . unwrap_or (0.0) ; let depth = node ["depth"] . as_u64 () . unwrap_or (0) as u32 ; let query = LMFDBQuery :: from_k_node (7 , complexity , depth , name) ; let llm_call = query . generate_llm_reflect_call ("k7.1") ; println ! ("🔍 K7.1 → LMFDB Query:") ; println ! ("📊 Collection: {}" , query . collection) ; println ! ("🌐 URL: {}" , query . to_lmfdb_url ()) ; println ! ("🎯 Features: {:?}" , query . similarity_features) ; println ! ("\n🤖 LLM Reflect Call:") ; println ! ("{}" , llm_call) ; } Ok (()) }

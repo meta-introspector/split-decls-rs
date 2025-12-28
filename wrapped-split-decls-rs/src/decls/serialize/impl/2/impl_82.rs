@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+impl < E : Encoder , T : Encodable < E > > Encodable < E > for Arc < [T] > { fn encode (& self , s : & mut E) { let slice : & [T] = self ; slice . encode (s) ; } }

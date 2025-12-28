@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+impl InvocationKind { # [doc = " Determines the placeholder visibility for a given `InvocationKind`."] # [doc = ""] # [doc = " This is a heuristic to ensure that when a macro expands, any placeholder"] # [doc = " generated has appropriate visibility, particularly for fields in tuple"] # [doc = " structs/variants where visibility is determined early in the compilation"] # [doc = " process."] pub fn placeholder_visibility (& self) -> Option < ast :: Visibility > { match self { InvocationKind :: Attr { item : Annotatable :: FieldDef (field) , .. } | InvocationKind :: Derive { item : Annotatable :: FieldDef (field) , .. } if field . ident . is_none () => { Some (field . vis . clone ()) } _ => None , } } }

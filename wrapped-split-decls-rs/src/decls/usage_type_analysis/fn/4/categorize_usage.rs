@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn categorize_usage (value : i32 , contexts : & [String]) -> String { match value { 0 => "null_values" , 1 => "identity_values" , - 1 => "negation_values" , 2 | 4 | 8 | 16 | 32 | 64 => "power_of_two" , - 2 | - 4 | - 8 | - 16 | - 32 | - 64 => "negative_power_of_two" , 3 | 5 | 6 | 7 => "small_primes_composites" , _ if value > 0 && value <= 10 => "small_positive" , _ if value < 0 && value >= - 10 => "small_negative" , _ if value > 10 && value <= 100 => "medium_positive" , _ if value < - 10 && value >= - 100 => "medium_negative" , _ => "other" } . to_string () }

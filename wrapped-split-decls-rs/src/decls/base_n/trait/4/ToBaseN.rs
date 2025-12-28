@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+pub trait ToBaseN : Into < u128 > { fn encoded_len (base : usize) -> usize ; fn to_base_fixed_len (self , base : usize) -> BaseNString { let mut encoded = self . to_base (base) ; encoded . start = encoded . buf . len () - Self :: encoded_len (base) ; encoded } fn to_base (self , base : usize) -> BaseNString { let mut output = [ascii :: Char :: Digit0 ; 128] ; let mut n : u128 = self . into () ; let mut index = output . len () ; loop { index -= 1 ; output [index] = BASE_64 [(n % base as u128) as usize] ; n /= base as u128 ; if n == 0 { break ; } } assert_eq ! (n , 0) ; BaseNString { start : index , buf : output } } }

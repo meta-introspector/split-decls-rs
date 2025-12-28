@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [test] fn test_many_steps () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "b") ; relation . add ("a" , "c") ; relation . add ("a" , "f") ; relation . add ("b" , "c") ; relation . add ("b" , "d") ; relation . add ("b" , "e") ; relation . add ("e" , "g") ; let relation = relation . freeze () ; assert ! (relation . contains ("a" , "b")) ; assert ! (relation . contains ("a" , "c")) ; assert ! (relation . contains ("a" , "d")) ; assert ! (relation . contains ("a" , "e")) ; assert ! (relation . contains ("a" , "f")) ; assert ! (relation . contains ("a" , "g")) ; assert ! (relation . contains ("b" , "g")) ; assert ! (! relation . contains ("a" , "x")) ; assert ! (! relation . contains ("b" , "f")) ; }

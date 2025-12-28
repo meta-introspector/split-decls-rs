@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [derive (Debug)] pub struct SerializeId < 'a > (& 'a Id) ;

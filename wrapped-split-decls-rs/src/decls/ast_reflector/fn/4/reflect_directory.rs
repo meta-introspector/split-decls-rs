@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn reflect_directory (dir : & str , probes_file : Option < & str > , _output : Option < & str > , verbose : bool) -> Result < () > { let mut reflector = AstReflector :: new () ; if verbose { println ! ("🔍 Starting AST reflection on directory: {}" , dir) ; } if let Some (probes_path) = probes_file { reflector . load_probes (Path :: new (probes_path)) ? ; } else { println ! ("📋 Using default example probes") ; for probe in create_example_probes () { reflector . add_probe (probe) ; } } reflector . reflect_directory (Path :: new (dir)) ? ; println ! ("✅ AST reflection completed!") ; Ok (()) }

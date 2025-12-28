@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+impl fmt :: Display for InactiveReason { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if ! self . enabled . is_empty () { for (i , atom) in self . enabled . iter () . enumerate () { let sep = match i { 0 => "" , _ if i == self . enabled . len () - 1 => " and " , _ => ", " , } ; f . write_str (sep) ? ; atom . fmt (f) ? ; } let is_are = if self . enabled . len () == 1 { "is" } else { "are" } ; write ! (f , " {is_are} enabled") ? ; if ! self . disabled . is_empty () { f . write_str (" and ") ? ; } } if ! self . disabled . is_empty () { for (i , atom) in self . disabled . iter () . enumerate () { let sep = match i { 0 => "" , _ if i == self . disabled . len () - 1 => " and " , _ => ", " , } ; f . write_str (sep) ? ; atom . fmt (f) ? ; } let is_are = if self . disabled . len () == 1 { "is" } else { "are" } ; write ! (f , " {is_are} disabled") ? ; } Ok (()) } }

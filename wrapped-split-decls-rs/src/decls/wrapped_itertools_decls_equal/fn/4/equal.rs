@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Return `true` if both iterables produce equal sequences"] # [doc = " (elements pairwise equal and sequences of the same length),"] # [doc = " `false` otherwise."] # [doc = ""] # [doc = " [`IntoIterator`] enabled version of [`Iterator::eq`]."] # [doc = ""] # [doc = " ```"] # [doc = " assert!(itertools::equal(vec![1, 2, 3], 1..4));"] # [doc = " assert!(!itertools::equal(&[0, 0], &[0, 0, 0]));"] # [doc = " ```"] pub fn equal < I , J > (a : I , b : J) -> bool where I : IntoIterator , J : IntoIterator , I :: Item : PartialEq < J :: Item > , { a . into_iter () . eq (b) }

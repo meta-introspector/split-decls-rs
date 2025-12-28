@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+pub trait TupleExt { type Head ; type Tail ; fn head (self) -> Self :: Head ; fn tail (self) -> Self :: Tail ; }

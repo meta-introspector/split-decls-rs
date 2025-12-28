@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Scrub arguments so that they're valid for trait signatures."] fn scrub_header (mut sig : Signature) -> Signature { for (idx , input) in sig . inputs . iter_mut () . enumerate () { match input { syn :: FnArg :: Receiver (rcvr) => { if rcvr . reference . is_none () { rcvr . mutability . take () ; } } syn :: FnArg :: Typed (arg) => match & mut * arg . pat { Pat :: Ident (arg) => { arg . by_ref . take () ; arg . mutability . take () ; arg . subpat . take () ; } _ => { arg . pat = Box :: new (PatIdent { attrs : vec ! [] , by_ref : None , mutability : None , ident : Ident :: new (& format ! ("__arg{idx}") , arg . pat . span ()) , subpat : None , } . into () ,) } } , } } sig }

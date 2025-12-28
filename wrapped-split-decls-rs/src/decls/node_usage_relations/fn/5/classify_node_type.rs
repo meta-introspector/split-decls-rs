@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn classify_node_type (symbol : & str) -> String { if symbol . contains ("::fn::") || symbol . contains ("_fn_") { "function" . to_string () } else if symbol . contains ("::struct::") || symbol . contains ("_struct_") { "struct" . to_string () } else if symbol . contains ("::enum::") || symbol . contains ("_enum_") { "enum" . to_string () } else if symbol . contains ("::const::") || symbol . contains ("_const_") { "constant" . to_string () } else if symbol . contains ("::impl::") || symbol . contains ("_impl_") { "implementation" . to_string () } else if symbol . contains ("::trait::") || symbol . contains ("_trait_") { "trait" . to_string () } else if symbol . contains ("::mod::") || symbol . contains ("_mod_") { "module" . to_string () } else if symbol . contains ("wrapped_") { "wrapped_declaration" . to_string () } else { "unknown" . to_string () } }

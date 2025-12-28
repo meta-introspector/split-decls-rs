@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn main () { println ! ("🚀 8-LAYER META PATTERN SYSTEM DEMO") ; println ! ("Enum-driven parameter generation with no hardcoded strings\n") ; let mut counter = MetaPatternCounter :: new () ; let patterns = [SynLangPatterns :: File , SynLangPatterns :: ItemFn , SynLangPatterns :: Expr , SynLangPatterns :: Type ,] ; println ! ("📊 PATTERN METADATA GENERATION:") ; for pattern in & patterns { let name = pattern . as_str () ; let method = pattern . visit_method () ; println ! ("  {} -> {}" , name , method) ; counter . increment (name) ; } println ! ("\n🔗 LAYER FLOW DEMONSTRATION:") ; println ! ("Layer 1: Enum variants defined") ; println ! ("Layer 2: mkmeta! generates as_str() and visit_method()") ; println ! ("Layer 3: Metadata applied to enum") ; println ! ("Layer 4-8: Parameters flow through macro layers") ; counter . report () ; println ! ("\n✅ NO HARDCODED STRINGS - ALL GENERATED FROM ENUM!") ; }

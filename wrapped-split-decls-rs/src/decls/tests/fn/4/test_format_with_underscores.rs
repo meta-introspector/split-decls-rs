@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [test] fn test_format_with_underscores () { assert_eq ! ("" , format_with_underscores ("" . to_string ())) ; assert_eq ! ("0" , format_with_underscores ("0" . to_string ())) ; assert_eq ! ("12_345.67e14" , format_with_underscores ("12345.67e14" . to_string ())) ; assert_eq ! ("-1_234.5678e10" , format_with_underscores ("-1234.5678e10" . to_string ())) ; assert_eq ! ("------" , format_with_underscores ("------" . to_string ())) ; assert_eq ! ("abcdefgh" , format_with_underscores ("abcdefgh" . to_string ())) ; assert_eq ! ("-1b" , format_with_underscores ("-1b" . to_string ())) ; assert_eq ! ("-3_456xyz" , format_with_underscores ("-3456xyz" . to_string ())) ; }

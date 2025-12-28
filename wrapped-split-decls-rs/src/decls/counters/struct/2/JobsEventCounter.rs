@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " A value read from the **Jobs Event Counter**."] # [doc = " See the [`README.md`](README.md) for more"] # [doc = " coverage of how the jobs event counter works."] # [derive (Copy , Clone , Debug , PartialEq , PartialOrd)] pub (super) struct JobsEventCounter (usize) ;

@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Returns the trailing return type in the given path, if it has one."] # [doc = ""] # [doc = " ```ignore (illustrative)"] # [doc = " ::std::ops::FnOnce(&str) -> fn() -> *const c_void"] # [doc = "                             ^^^^^^^^^^^^^^^^^^^^^"] # [doc = " ```"] fn path_return_type (path : & ast :: Path) -> Option < & ast :: Ty > { let last_segment = path . segments . last () ? ; let args = last_segment . args . as_ref () ? ; match & * * args { ast :: GenericArgs :: Parenthesized (args) => match & args . output { ast :: FnRetTy :: Default (_) => None , ast :: FnRetTy :: Ty (ret) => Some (ret) , } , ast :: GenericArgs :: AngleBracketed (_) | ast :: GenericArgs :: ParenthesizedElided (_) => None , } }

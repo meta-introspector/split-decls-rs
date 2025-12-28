@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+impl BottLevel { pub fn from_n (n : usize) -> Self { match n % 8 { 0 => BottLevel :: Zero , 1 => BottLevel :: One , 2 => BottLevel :: Two , 3 => BottLevel :: Three , 4 => BottLevel :: Four , 5 => BottLevel :: Five , 6 => BottLevel :: Six , 7 => BottLevel :: Seven , _ => unreachable ! () , } } pub fn dimension (& self) -> usize { match self { BottLevel :: Zero => 0 , BottLevel :: One => 1 , BottLevel :: Two => 0 , BottLevel :: Three => 1 , BottLevel :: Four => 0 , BottLevel :: Five => 1 , BottLevel :: Six => 0 , BottLevel :: Seven => 1 , } } }

@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " This is the raw output from the process."] # [doc = ""] # [doc = " This is similar to `std::process::Output`, however the `status` is"] # [doc = " translated to the raw `code`. This is necessary because `ProcessError`"] # [doc = " does not have access to the raw `ExitStatus` because `ProcessError` needs"] # [doc = " to be serializable (for the Rustc cache), and `ExitStatus` does not"] # [doc = " provide a constructor."] pub struct RawOutput { pub code : Option < i32 > , pub stdout : Vec < u8 > , pub stderr : Vec < u8 > , }

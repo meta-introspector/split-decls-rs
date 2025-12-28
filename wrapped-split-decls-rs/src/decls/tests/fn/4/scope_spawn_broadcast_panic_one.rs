@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [test] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn scope_spawn_broadcast_panic_one () { let count = AtomicUsize :: new (0) ; let pool = ThreadPoolBuilder :: new () . num_threads (7) . build () . unwrap () ; let result = crate :: unwind :: halt_unwinding (| | { pool . scope (| s | { s . spawn_broadcast (| _ , ctx | { count . fetch_add (1 , Ordering :: Relaxed) ; if ctx . index () == 3 { panic ! ("Hello, world!") ; } }) ; }) ; }) ; assert_eq ! (count . into_inner () , 7) ; assert ! (result . is_err () , "broadcast panic should propagate!") ; }

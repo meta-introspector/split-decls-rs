@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [llm_error_message (message = "Module file not found for: submodule_manager")] # [llm_context (crate_name = "wrapped_git_wrapper_lib" , module_name = "submodule_manager")] pub struct wrapped_git_wrapper_lib_decls_module_not_found_submodule_manager ;

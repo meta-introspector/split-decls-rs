@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn process_layer (lmdfb : & serde_json :: Value , layer_name : & str) -> Result < (usize , String) > { let mut content = String :: new () ; let mut triple_count = 0 ; content . push_str (& format ! ("# {} Layer\n" , layer_name . to_uppercase ())) ; if let Some (nodes) = lmdfb ["nodes"] . as_object () { for (symbol , node) in nodes { if let Some (node_layer) = node . get ("layer") . and_then (| v | v . as_str ()) { if node_layer == layer_name { let (node_triples , node_content) = process_node (symbol , node , layer_name) ? ; content . push_str (& node_content) ; triple_count += node_triples ; } } } } content . push_str ("\n") ; Ok ((triple_count , content)) }

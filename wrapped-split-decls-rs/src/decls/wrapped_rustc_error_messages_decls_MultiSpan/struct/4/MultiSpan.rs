@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " A collection of `Span`s."] # [doc = ""] # [doc = " Spans have two orthogonal attributes:"] # [doc = ""] # [doc = " - They can be *primary spans*. In this case they are the locus of"] # [doc = "   the error, and would be rendered with `^^^`."] # [doc = " - They can have a *label*. In this case, the label is written next"] # [doc = "   to the mark in the snippet when we render."] # [derive (Clone , Debug , Hash , PartialEq , Eq , Encodable , Decodable)] pub struct MultiSpan { primary_spans : Vec < Span > , span_labels : Vec < (Span , DiagMessage) > , }

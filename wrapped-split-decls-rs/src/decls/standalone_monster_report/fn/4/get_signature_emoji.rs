@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn get_signature_emoji (signature : & str) -> & 'static str { match signature { s if s . contains ("pub_fn") => "🔧" , s if s . contains ("pub_struct") => "🏗️" , s if s . contains ("pub_enum") => "🎯" , s if s . contains ("impl_block") => "⚙️" , s if s . contains ("trait_def") => "🎭" , s if s . contains ("macro_def") => "🪄" , s if s . contains ("derive_attr") => "✨" , s if s . contains ("prelude") => "🌟" , s if s . contains ("use_stmt") => "📦" , s if s . contains ("async_fn") => "⚡" , s if s . contains ("const_item") => "💎" , s if s . contains ("static_item") => "🔥" , _ => "🔍" , } }

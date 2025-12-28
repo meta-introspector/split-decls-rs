@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [derive (Clone , Encodable , Decodable , Debug , Walkable)] pub enum FormatArgumentKind { # [doc = " `format_args(…, arg)`"] Normal , # [doc = " `format_args(…, arg = 1)`"] Named (Ident) , # [doc = " `format_args(\"… {arg} …\")`"] Captured (Ident) , }

@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+impl InlineCtxt { # [inline] fn data (self) -> SpanData { let len = self . len as u32 ; debug_assert ! (len <= MAX_LEN) ; SpanData { lo : BytePos (self . lo) , hi : BytePos (self . lo . debug_strict_add (len)) , ctxt : SyntaxContext :: from_u16 (self . ctxt) , parent : None , } } # [inline] fn span (lo : u32 , len : u16 , ctxt : u16) -> Span { Span { lo_or_index : lo , len_with_tag_or_marker : len , ctxt_or_parent_or_marker : ctxt } } # [inline] fn from_span (span : Span) -> InlineCtxt { let (lo , len , ctxt) = (span . lo_or_index , span . len_with_tag_or_marker , span . ctxt_or_parent_or_marker) ; InlineCtxt { lo , len , ctxt } } }

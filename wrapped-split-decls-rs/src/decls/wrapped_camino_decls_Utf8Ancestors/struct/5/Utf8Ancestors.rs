@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " An iterator over [`Utf8Path`] and its ancestors."] # [doc = ""] # [doc = " This `struct` is created by the [`ancestors`] method on [`Utf8Path`]."] # [doc = " See its documentation for more."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use camino::Utf8Path;"] # [doc = ""] # [doc = " let path = Utf8Path::new(\"/foo/bar\");"] # [doc = ""] # [doc = " for ancestor in path.ancestors() {"] # [doc = "     println!(\"{}\", ancestor);"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " [`ancestors`]: Utf8Path::ancestors"] # [derive (Copy , Clone)] # [must_use = "iterators are lazy and do nothing unless consumed"] # [repr (transparent)] pub struct Utf8Ancestors < 'a > (Ancestors < 'a >) ;

@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [cfg (feature = "typesize")] impl < K , V , S > typesize :: TypeSize for DashMap < K , V , S > where K : typesize :: TypeSize + Eq + Hash , V : typesize :: TypeSize , S : typesize :: TypeSize + Clone + BuildHasher , { fn extra_size (& self) -> usize { let shards_extra_size : usize = self . shards . iter () . map (| shard_lock | { core :: mem :: size_of :: < CachePadded < RwLock < HashMap < K , V > > > > () + shard_lock . read () . extra_size () }) . sum () ; self . hasher . extra_size () + shards_extra_size } typesize :: if_typesize_details ! { fn get_collection_item_count (& self) -> Option < usize > { Some (self . len ()) } } }

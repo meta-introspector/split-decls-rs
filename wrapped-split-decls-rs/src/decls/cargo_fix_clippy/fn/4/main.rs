@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn main () { println ! ("🔧 Cargo Fix Clippy - Mass Codebase Transformation") ; let mut single_cmd = cargo_fix_clippy ! ("println!" , "eprintln!") ; println ! ("✅ Single transform ready") ; let mut syscall_cmd = cargo_fix_clippy ! (syscalls) ; println ! ("✅ Syscall annotations ready") ; let mut manifest_cmd = cargo_fix_clippy ! (manifest) ; println ! ("✅ Manifest tracking ready") ; println ! ("\n🚀 Ready to transform large codebase!") ; println ! ("Usage:") ; println ! ("  cargo_fix_clippy!(syscalls).status()  // Add syscall annotations") ; println ! ("  cargo_fix_clippy!(manifest).status()  // Add manifest tracking") ; }

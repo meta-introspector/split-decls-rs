@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Collect all workspace members from a directory"] pub fn collect_workspace_members (dir : & Path) -> Result < Vec < String > > { let mut members = Vec :: new () ; for entry in WalkDir :: new (dir) . max_depth (1) { let entry = entry ? ; let path = entry . path () ; if path . is_dir () && path != dir { if let Some (name) = path . file_name () . and_then (| n | n . to_str ()) { if name . starts_with ("wrapped-") && path . join ("Cargo.toml") . exists () { members . push (name . to_string ()) ; } } } } members . sort () ; Ok (members) }

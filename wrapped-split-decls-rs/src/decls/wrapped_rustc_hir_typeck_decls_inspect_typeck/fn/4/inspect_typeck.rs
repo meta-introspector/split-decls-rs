@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Same as `typeck` but `inspect` is invoked on evaluation of each root obligation."] # [doc = " Inspecting obligations only works with the new trait solver."] # [doc = " This function is *only to be used* by external tools, it should not be"] # [doc = " called from within rustc. Note, this is not a query, and thus is not cached."] pub fn inspect_typeck < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : LocalDefId , inspect : ObligationInspector < 'tcx > ,) -> & 'tcx ty :: TypeckResults < 'tcx > { typeck_with_inspect (tcx , def_id , Some (inspect)) }

@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Defines little-endian serialization."] # [doc = ""] # [doc = " Note that this type has no value constructor. It is used purely at the"] # [doc = " type level."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Write and read `u32` numbers in little endian order:"] # [doc = ""] # [doc = " ```rust"] # [doc = " use byteorder::{ByteOrder, LittleEndian};"] # [doc = ""] # [doc = " let mut buf = [0; 4];"] # [doc = " LittleEndian::write_u32(&mut buf, 1_000_000);"] # [doc = " assert_eq!(1_000_000, LittleEndian::read_u32(&buf));"] # [doc = " ```"] # [derive (Clone , Copy , Debug , Eq , Hash , Ord , PartialEq , PartialOrd)] pub enum LittleEndian { }

@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [proc_macro] # [doc (hidden)] pub fn parse_lit (input : TokenStream) -> TokenStream { build_uuid (input . clone ()) . unwrap_or_else (| e | { let msg = e . to_string () ; let span = match e { Error :: UuidParse (lit , error :: Error (error :: ErrorKind :: Char { character , index })) => { let mut bytes = character as u32 ; let mut width = 0 ; while bytes != 0 { bytes >>= 4 ; width += 1 ; } let mut s = proc_macro2 :: Literal :: string ("") ; s . set_span (lit . span ()) ; s . subspan (index .. index + width - 1) } Error :: UuidParse (lit , error :: Error (error :: ErrorKind :: GroupLength { index , len , .. }) ,) => { let mut s = proc_macro2 :: Literal :: string ("") ; s . set_span (lit . span ()) ; s . subspan (index .. index + len) } _ => None , } . unwrap_or_else (| | TokenStream2 :: from (input) . span ()) ; TokenStream :: from (quote_spanned ! { span => compile_error ! (# msg) }) }) }

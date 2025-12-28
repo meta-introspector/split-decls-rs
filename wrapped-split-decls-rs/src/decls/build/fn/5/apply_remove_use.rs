@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn apply_remove_use (ast : & mut syn :: File , details : & RemoveUseDetails) -> Result < () > { let use_to_remove : ItemUse = syn :: parse_str (& format ! ("use {};" , details . use_path)) . with_context (| | format ! ("Invalid use statement path: {}" , details . use_path)) ? ; let use_to_remove_str = quote ! { # use_to_remove } . to_string () ; let mut removed = false ; ast . items . retain (| item | { if let Item :: Use (existing_use) = item { if quote ! { # existing_use } . to_string () == use_to_remove_str { removed = true ; return false ; } } true }) ; if removed { eprintln ! ("  Removed use statement: {}" , details . use_path) ; } else { eprintln ! ("  Warning: Use statement '{}' not found for removal." , details . use_path) ; } Ok (()) }

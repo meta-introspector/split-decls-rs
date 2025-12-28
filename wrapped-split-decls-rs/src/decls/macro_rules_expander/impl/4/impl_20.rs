@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+impl < DRT : OpaqueDeriveResolution + 'static > AttrProcMacro < DRT > for MacroRulesMacroExpander < DRT > { fn expand (& self , _cx : & mut ExtCtxt < '_ , DRT > , _sp : Span , _args : TokenStream , _body : TokenStream ,) -> Result < TokenStream , ErrorGuaranteed > { unreachable ! ("`expand` called on `MacroRulesMacroExpander`, expected `expand_with_safety`") } fn expand_with_safety (& self , cx : & mut ExtCtxt < '_ , DRT > , safety : ast :: Safety , sp : Span , args : TokenStream , body : TokenStream ,) -> Result < TokenStream , ErrorGuaranteed > { unimplemented ! () } }

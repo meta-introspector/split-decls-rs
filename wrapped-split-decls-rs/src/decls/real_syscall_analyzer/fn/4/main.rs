@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn main () -> Result < () > { let mut analyzer = RealSyscallAnalyzer :: new () ; analyzer . scan_directory (Path :: new (".")) ? ; let report = analyzer . generate_report () ; println ! ("{}" , report) ; std :: fs :: write ("real_syscall_analysis.md" , report) ? ; println ! ("💾 Report saved to: real_syscall_analysis.md") ; let counts = analyzer . get_syscall_counts () ; let json = serde_json :: to_string_pretty (& counts) ? ; std :: fs :: write ("syscall_counts.json" , json) ? ; println ! ("📊 Data saved to: syscall_counts.json") ; Ok (()) }

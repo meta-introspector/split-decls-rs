@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn build_from_str_iter < T > (mut iter : impl Iterator < Item = T >) -> SmolStr where T : AsRef < str > , String : iter :: Extend < T > , { let mut len = 0 ; let mut buf = [0u8 ; INLINE_CAP] ; while let Some (slice) = iter . next () { let slice = slice . as_ref () ; let size = slice . len () ; if size + len > INLINE_CAP { let mut heap = String :: with_capacity (size + len) ; heap . push_str (core :: str :: from_utf8 (& buf [.. len]) . unwrap ()) ; heap . push_str (slice) ; heap . extend (iter) ; return SmolStr (Repr :: Heap (heap . into_boxed_str () . into ())) ; } buf [len ..] [.. size] . copy_from_slice (slice . as_bytes ()) ; len += size ; } SmolStr (Repr :: Inline { len : unsafe { InlineSize :: transmute_from_u8 (len as u8) } , buf , }) }

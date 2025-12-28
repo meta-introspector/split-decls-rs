@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Trait that needs to be implemented by the higher-level type representation"] # [doc = " (e.g. `rustc_middle::ty::Ty`), to provide `rustc_target::abi` functionality."] pub trait TyAbiInterface < 'a , C > : Sized + std :: fmt :: Debug { fn ty_and_layout_for_variant (this : TyAndLayout < 'a , Self > , cx : & C , variant_index : VariantIdx ,) -> TyAndLayout < 'a , Self > ; fn ty_and_layout_field (this : TyAndLayout < 'a , Self > , cx : & C , i : usize) -> TyAndLayout < 'a , Self > ; fn ty_and_layout_pointee_info_at (this : TyAndLayout < 'a , Self > , cx : & C , offset : Size ,) -> Option < PointeeInfo > ; fn is_adt (this : TyAndLayout < 'a , Self >) -> bool ; fn is_never (this : TyAndLayout < 'a , Self >) -> bool ; fn is_tuple (this : TyAndLayout < 'a , Self >) -> bool ; fn is_unit (this : TyAndLayout < 'a , Self >) -> bool ; fn is_transparent (this : TyAndLayout < 'a , Self >) -> bool ; }

@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+pub trait HirInfo < 'tcx > { type OwnerId : Debug + Clone + Copy ; type ItemKind : Debug + Clone + 'tcx ; type Span : Debug + Clone + Copy + PartialEq + Eq + Hash ; fn get_owner_id (& self) -> Self :: OwnerId ; fn get_item_kind < 'a > (& 'a self) -> & 'a Self :: ItemKind ; fn get_item_span (& self) -> Self :: Span ; }

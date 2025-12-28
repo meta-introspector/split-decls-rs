@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+pub fn set_parser_language (parser : & mut Parser , language : & str) -> Result < () , String > { let language : Language = match language { "c" => c_language () , "cpp" => cpp_language () , "java" => java_language () , "javascript" => javascript_language () , "typescript" => typescript_language () , "python" => python_language () , "golang" => go_language () , "rust" => rust_language () , _ => return Err ("Unsupported file extension" . to_string ()) , } ; parser . set_language (language) . map_err (| _ | "Failed to set language" . to_string ()) }

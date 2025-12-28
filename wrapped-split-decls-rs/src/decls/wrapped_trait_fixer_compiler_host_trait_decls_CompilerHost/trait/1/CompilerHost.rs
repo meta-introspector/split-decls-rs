@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+pub trait CompilerHost < C > { fn run_compiler_callbacks (& self , args : Vec < String > , callbacks : & mut C) ; }

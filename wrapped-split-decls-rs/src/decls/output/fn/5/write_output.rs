@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Write output in JSON or other formats"] pub fn write_output < T : Serialize > (results : & T , output_format : & str , output_file : Option < & Path >) -> Result < () , std :: io :: Error > { let output = match output_format { "json" => serde_json :: to_string_pretty (results) ? , "xml" => { let wrapped = DuplicateReportXML { items : results } ; to_string (& wrapped) . map_err (| e | std :: io :: Error :: new (std :: io :: ErrorKind :: Other , e . to_string ())) ? } _ => return Err (std :: io :: Error :: new (std :: io :: ErrorKind :: InvalidInput , "Unsupported format")) , } ; if let Some (file_path) = output_file { let mut file = File :: create (file_path) ? ; file . write_all (output . as_bytes ()) ? ; } else { println ! ("{}" , output) ; } Ok (()) }

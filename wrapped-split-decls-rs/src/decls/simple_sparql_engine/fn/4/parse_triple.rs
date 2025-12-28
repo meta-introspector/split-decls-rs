@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn parse_triple (line : & str) -> Option < (String , String , String) > { let line = line . trim () ; if line . starts_with ('#') || line . is_empty () || line . starts_with ('@') { return None ; } if let Some (dot_pos) = line . rfind (" .") { let triple_part = & line [.. dot_pos] ; let parts : Vec < & str > = triple_part . split_whitespace () . collect () ; if parts . len () >= 3 { let subject = parts [0] . to_string () ; let predicate = parts [1] . to_string () ; let object = parts [2 ..] . join (" ") . trim_matches ('"') . to_string () ; return Some ((subject , predicate , object)) ; } } None }

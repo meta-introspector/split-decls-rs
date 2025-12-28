@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [llm_error_message (message = "Module file not found for: combinations_with_replacement")] # [llm_context (crate_name = "wrapped_itertools" , module_name = "combinations_with_replacement")] pub struct wrapped_itertools_decls_module_not_found_combinations_with_replacement ;

@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [cfg (target_os = "linux")] # [test] fn read_binary_file_handles_lying_stat () { let cmdline = Path :: new ("/proc/self/cmdline") ; let len = std :: fs :: metadata (cmdline) . unwrap () . len () as usize ; let real = std :: fs :: read (cmdline) . unwrap () ; assert ! (len < real . len ()) ; let bin = RealFileLoader . read_binary_file (cmdline) . unwrap () ; assert_eq ! (& real [..] , & bin [..]) ; let kernel_max = Path :: new ("/sys/devices/system/cpu/kernel_max") ; let len = std :: fs :: metadata (kernel_max) . unwrap () . len () as usize ; let real = std :: fs :: read (kernel_max) . unwrap () ; assert ! (len > real . len ()) ; let bin = RealFileLoader . read_binary_file (kernel_max) . unwrap () ; assert_eq ! (& real [..] , & bin [..]) ; }

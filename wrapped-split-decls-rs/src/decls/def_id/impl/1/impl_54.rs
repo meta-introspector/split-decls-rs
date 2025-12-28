@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+impl ModDefId { pub fn is_top_level_module (self) -> bool { self . 0 . is_top_level_module () } }

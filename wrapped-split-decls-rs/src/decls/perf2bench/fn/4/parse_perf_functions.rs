@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn parse_perf_functions (perf_file : & str) -> Result < Vec < PerfFunction > > { let content = fs :: read_to_string (perf_file) ? ; let mut functions = Vec :: new () ; for line in content . lines () { let parts : Vec < & str > = line . trim () . split_whitespace () . collect () ; if parts . len () >= 4 && parts [0] . ends_with ('%') { if let Ok (percentage) = parts [0] . trim_end_matches ('%') . parse :: < f64 > () { let binary = parts [1] . to_string () ; let function = parts [3 ..] . join (" ") ; functions . push (PerfFunction { percentage , binary , function , }) ; } } } Ok (functions) }

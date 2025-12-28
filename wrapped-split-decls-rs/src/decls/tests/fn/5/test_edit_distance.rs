@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [test] fn test_edit_distance () { for c in (0 .. char :: MAX as u32) . filter_map (char :: from_u32) . map (| i | i . to_string ()) { assert_eq ! (edit_distance (& c [..] , & c [..] , usize :: MAX) , Some (0)) ; } let a = "\nMäry häd ä little lämb\n\nLittle lämb\n" ; let b = "\nMary häd ä little lämb\n\nLittle lämb\n" ; let c = "Mary häd ä little lämb\n\nLittle lämb\n" ; assert_eq ! (edit_distance (a , b , usize :: MAX) , Some (1)) ; assert_eq ! (edit_distance (b , a , usize :: MAX) , Some (1)) ; assert_eq ! (edit_distance (a , c , usize :: MAX) , Some (2)) ; assert_eq ! (edit_distance (c , a , usize :: MAX) , Some (2)) ; assert_eq ! (edit_distance (b , c , usize :: MAX) , Some (1)) ; assert_eq ! (edit_distance (c , b , usize :: MAX) , Some (1)) ; }

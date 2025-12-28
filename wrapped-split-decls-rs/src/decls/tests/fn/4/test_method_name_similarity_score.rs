@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [test] fn test_method_name_similarity_score () { assert_eq ! (edit_distance_with_substrings ("empty" , "is_empty" , 1) , Some (1)) ; assert_eq ! (edit_distance_with_substrings ("shrunk" , "rchunks" , 2) , None) ; assert_eq ! (edit_distance_with_substrings ("abc" , "abcd" , 1) , Some (1)) ; assert_eq ! (edit_distance_with_substrings ("a" , "abcd" , 1) , None) ; assert_eq ! (edit_distance_with_substrings ("edf" , "eq" , 1) , None) ; assert_eq ! (edit_distance_with_substrings ("abc" , "xyz" , 3) , Some (3)) ; assert_eq ! (edit_distance_with_substrings ("abcdef" , "abcdef" , 2) , Some (0)) ; }

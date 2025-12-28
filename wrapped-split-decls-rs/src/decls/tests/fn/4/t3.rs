@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Tests `lookup_byte_offset`."] # [test] fn t3 () { let sm = init_source_map () ; let srcfbp1 = sm . lookup_byte_offset (BytePos (23)) ; assert_eq ! (srcfbp1 . sf . name , PathBuf :: from ("blork.rs") . into ()) ; assert_eq ! (srcfbp1 . pos , BytePos (23)) ; let srcfbp1 = sm . lookup_byte_offset (BytePos (24)) ; assert_eq ! (srcfbp1 . sf . name , PathBuf :: from ("empty.rs") . into ()) ; assert_eq ! (srcfbp1 . pos , BytePos (0)) ; let srcfbp2 = sm . lookup_byte_offset (BytePos (25)) ; assert_eq ! (srcfbp2 . sf . name , PathBuf :: from ("blork2.rs") . into ()) ; assert_eq ! (srcfbp2 . pos , BytePos (0)) ; }

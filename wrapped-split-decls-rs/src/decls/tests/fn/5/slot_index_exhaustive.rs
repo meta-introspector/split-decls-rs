@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [test] # [cfg (not (miri))] fn slot_index_exhaustive () { let mut buckets = [0u32 ; 21] ; for idx in 0 ..= u32 :: MAX { buckets [SlotIndex :: from_index (idx) . bucket_idx] += 1 ; } let slot_idx = SlotIndex :: from_index (0) ; assert_eq ! (slot_idx . index_in_bucket , 0) ; assert_eq ! (slot_idx . bucket_idx , 0) ; let mut prev = slot_idx ; for idx in 1 ..= u32 :: MAX { let slot_idx = SlotIndex :: from_index (idx) ; if prev . bucket_idx == slot_idx . bucket_idx { assert_eq ! (prev . index_in_bucket + 1 , slot_idx . index_in_bucket) ; } else { assert_eq ! (slot_idx . index_in_bucket , 0) ; } assert_eq ! (buckets [slot_idx . bucket_idx] , slot_idx . entries as u32) ; assert_eq ! (ENTRIES_BY_BUCKET [slot_idx . bucket_idx] , slot_idx . entries , "{}" , idx) ; prev = slot_idx ; } }

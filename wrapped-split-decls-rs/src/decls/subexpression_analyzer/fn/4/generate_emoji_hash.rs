@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn generate_emoji_hash (text : & str) -> String { let mut hasher = DefaultHasher :: new () ; text . hash (& mut hasher) ; let hash = hasher . finish () ; let emojis = ["🔥" , "⚡" , "🎯" , "🚀" , "💎" , "🌟" , "🔮" , "🎨" , "🎪" , "🎭" , "🎨" , "🎯" , "🔥" , "💫" , "✨" , "🌈" , "🦄" , "🐉" , "🦋" , "🌸" , "🍀" , "🎲" , "🎪" , "🎨"] ; let primary = emojis [(hash % emojis . len () as u64) as usize] ; let secondary = emojis [((hash >> 8) % emojis . len () as u64) as usize] ; let tertiary = emojis [((hash >> 16) % emojis . len () as u64) as usize] ; format ! ("{}{}{}" , primary , secondary , tertiary) }

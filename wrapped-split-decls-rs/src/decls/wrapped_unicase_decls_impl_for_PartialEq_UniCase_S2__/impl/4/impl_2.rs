@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+impl < S1 : AsRef < str > , S2 : AsRef < str > > PartialEq < UniCase < S2 > > for UniCase < S1 > { # [inline] fn eq (& self , other : & UniCase < S2 >) -> bool { match (& self . 0 , & other . 0) { (& Encoding :: Ascii (ref x) , & Encoding :: Ascii (ref y)) => x == y , (& Encoding :: Unicode (ref x) , & Encoding :: Unicode (ref y)) => x == y , (& Encoding :: Ascii (ref x) , & Encoding :: Unicode (ref y)) => & Unicode (x . as_ref ()) == y , (& Encoding :: Unicode (ref x) , & Encoding :: Ascii (ref y)) => x == & Unicode (y . as_ref ()) , } } }

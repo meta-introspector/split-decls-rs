@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " Finds the best match for given word in the given iterator where substrings are meaningful."] # [doc = ""] # [doc = " A version of [`find_best_match_for_name`] that uses [`edit_distance_with_substrings`] as the"] # [doc = " score for word similarity. This takes an optional distance limit which defaults to one-third of"] # [doc = " the given word."] # [doc = ""] # [doc = " We use case insensitive comparison to improve accuracy on an edge case with a lower(upper)case"] # [doc = " letters mismatch."] pub fn find_best_match_for_name_with_substrings (candidates : & [Symbol] , lookup : Symbol , dist : Option < usize > ,) -> Option < Symbol > { find_best_match_for_name_impl (true , candidates , lookup , dist) }

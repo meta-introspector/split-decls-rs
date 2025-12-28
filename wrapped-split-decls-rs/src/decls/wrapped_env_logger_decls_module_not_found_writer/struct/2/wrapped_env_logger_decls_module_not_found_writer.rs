@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [llm_error_message (message = "Module file not found for: writer")] # [llm_context (crate_name = "wrapped_env_logger" , module_name = "writer")] pub struct wrapped_env_logger_decls_module_not_found_writer ;

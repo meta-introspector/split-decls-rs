@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+fn analyze_layer_ngrams (translation : & serde_json :: Value , layer : u8) -> Result < LayerNGramAnalysis > { let compressions = translation ["layer_compressions"] . as_array () . unwrap () ; let layer_data = & compressions [layer as usize] ; let input_patterns = layer_data ["input_patterns"] . as_array () . unwrap () ; let output_patterns = layer_data ["output_emojis"] . as_array () . unwrap () ; let ngram_2 = extract_top_ngrams (input_patterns , 2) ; let ngram_3 = extract_top_ngrams (input_patterns , 3) ; let ngram_5 = extract_top_ngrams (input_patterns , 5) ; let ngram_7 = extract_top_ngrams (input_patterns , 7) ; Ok (LayerNGramAnalysis { layer , input_size : input_patterns . len () , output_size : output_patterns . len () , ngram_2 , ngram_3 , ngram_5 , ngram_7 , }) }

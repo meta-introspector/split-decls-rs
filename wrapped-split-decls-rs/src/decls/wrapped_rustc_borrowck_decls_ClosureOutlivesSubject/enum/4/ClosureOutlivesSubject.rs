@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [doc = " The subject of a `ClosureOutlivesRequirement` -- that is, the thing"] # [doc = " that must outlive some region."] # [derive (Copy , Clone , Debug)] pub enum ClosureOutlivesSubject < 'tcx > { # [doc = " Subject is a type, typically a type parameter, but could also"] # [doc = " be a projection. Indicates a requirement like `T: 'a` being"] # [doc = " passed to the caller, where the type here is `T`."] Ty (ClosureOutlivesSubjectTy < 'tcx >) , # [doc = " Subject is a free region from the closure. Indicates a requirement"] # [doc = " like `'a: 'b` being passed to the caller; the region here is `'a`."] Region (ty :: RegionVid) , }

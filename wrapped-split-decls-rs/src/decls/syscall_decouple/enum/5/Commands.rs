@@ -1,0 +1,4 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+# [derive (Subcommand)] enum Commands { # [doc = " Generate syscall decoupling traits and wrappers"] Generate { # [doc = " Output file for generated traits"] # [arg (short , long , default_value = "src/syscall_traits.rs")] output : String , # [doc = " Include SPARQL complexity data"] # [arg (short , long)] sparql_data : Option < String > , # [doc = " Generate all implementation variants"] # [arg (short , long)] all_impls : bool , } , # [doc = " Show syscall analysis report"] Report , # [doc = " Generate specific trait category"] Trait { # [doc = " Trait category (filesystem, process, environment, io, network, memory, time)"] # [arg (short , long)] category : String , # [doc = " Output file"] # [arg (short , long , default_value = "trait_output.rs")] output : String , } , # [doc = " Interactive trait generation"] Interactive , }
