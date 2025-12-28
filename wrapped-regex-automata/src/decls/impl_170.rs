@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        HalfMatch!();
-        Anchored!();
         MatchError!();
-        StartError!();
-        Config!();
         Input!();
-        StateID!();
-        PatternSet!();
+        HalfMatch!();
+        Prefilter!();
         Automaton!();
         PatternID!();
+        StartError!();
+        Anchored!();
+        PatternSet!();
+        Config!();
         OverlappingState!();
-        Prefilter!();
+        StateID!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

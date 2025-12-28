@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IResult!();
         ErrorKind!();
-        Needed!();
-        Error!();
         Parser!();
-        Input!();
+        Needed!();
         ParseError!();
+        Error!();
+        Input!();
         SeparatedList1!();
+        IResult!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! separated_list1 {
     };
 }
 
-separated_list1!()
+separated_list1!();

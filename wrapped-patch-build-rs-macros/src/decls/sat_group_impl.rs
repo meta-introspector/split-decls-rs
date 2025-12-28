@@ -10,4 +10,4 @@ c Each item must belong to exactly one group
     };
 }
 
-sat_group_impl!()
+sat_group_impl!();

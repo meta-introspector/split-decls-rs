@@ -4,4 +4,4 @@ macro_rules! DEPRECATED {
     };
 }
 
-DEPRECATED!()
+DEPRECATED!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SourceChange!();
         TextEdit!();
+        SourceChange!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_184 {
     };
 }
 
-impl_184!()
+impl_184!();

@@ -11,4 +11,4 @@ macro_rules! set_ip_tos {
     };
 }
 
-set_ip_tos!()
+set_ip_tos!();

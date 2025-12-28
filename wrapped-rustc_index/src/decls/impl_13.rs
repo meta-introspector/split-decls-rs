@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BitIter!();
         BitRelations!();
-        Idx!();
+        BitIter!();
         DenseBitSet!();
+        Idx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

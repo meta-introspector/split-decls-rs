@@ -4,4 +4,4 @@ macro_rules! trievalue {
     };
 }
 
-trievalue!()
+trievalue!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CorruptFile!();
         LoadResult!();
         Ok!();
+        CorruptFile!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! load_query_result_cache {
     };
 }
 
-load_query_result_cache!()
+load_query_result_cache!();

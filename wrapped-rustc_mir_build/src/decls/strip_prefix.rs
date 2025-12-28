@@ -4,4 +4,4 @@ macro_rules! strip_prefix {
     };
 }
 
-strip_prefix!()
+strip_prefix!();

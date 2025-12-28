@@ -13,4 +13,4 @@ macro_rules! copy_files {
     };
 }
 
-copy_files!()
+copy_files!();

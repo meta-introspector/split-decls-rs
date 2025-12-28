@@ -4,4 +4,4 @@ macro_rules! R_RISCV_TLSDESC_ADD_LO12 {
     };
 }
 
-R_RISCV_TLSDESC_ADD_LO12!()
+R_RISCV_TLSDESC_ADD_LO12!();

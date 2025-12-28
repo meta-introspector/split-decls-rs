@@ -4,4 +4,4 @@ macro_rules! scope_result {
     };
 }
 
-scope_result!()
+scope_result!();

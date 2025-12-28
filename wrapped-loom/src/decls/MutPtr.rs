@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnsafeCell!();
         Writing!();
+        UnsafeCell!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MutPtr {
     };
 }
 
-MutPtr!()
+MutPtr!();

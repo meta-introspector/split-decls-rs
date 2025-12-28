@@ -4,4 +4,4 @@ macro_rules! CoercePointeeNoField {
     };
 }
 
-CoercePointeeNoField!()
+CoercePointeeNoField!();

@@ -4,4 +4,4 @@ macro_rules! frame_decoder {
     };
 }
 
-frame_decoder!()
+frame_decoder!();

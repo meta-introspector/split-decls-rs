@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Substructure!();
         BlockOrExpr!();
+        Substructure!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! cs_clone_simple {
     };
 }
 
-cs_clone_simple!()
+cs_clone_simple!();

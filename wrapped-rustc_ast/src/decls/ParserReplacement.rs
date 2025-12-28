@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AttrTokenStream!();
         AttrsTarget!();
-        TokenStream!();
-        ParserRange!();
         NodeReplacement!();
+        AttrTokenStream!();
+        ParserRange!();
+        TokenStream!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ParserReplacement {
     };
 }
 
-ParserReplacement!()
+ParserReplacement!();

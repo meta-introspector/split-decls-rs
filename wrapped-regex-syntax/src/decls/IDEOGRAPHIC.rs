@@ -4,4 +4,4 @@ macro_rules! IDEOGRAPHIC {
     };
 }
 
-IDEOGRAPHIC!()
+IDEOGRAPHIC!();

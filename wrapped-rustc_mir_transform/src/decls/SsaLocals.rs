@@ -4,4 +4,4 @@ macro_rules! SsaLocals {
     };
 }
 
-SsaLocals!()
+SsaLocals!();

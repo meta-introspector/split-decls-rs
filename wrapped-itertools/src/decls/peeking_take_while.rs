@@ -4,4 +4,4 @@ macro_rules! peeking_take_while {
     };
 }
 
-peeking_take_while!()
+peeking_take_while!();

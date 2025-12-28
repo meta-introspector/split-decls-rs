@@ -4,4 +4,4 @@ macro_rules! is_public_assigned {
     };
 }
 
-is_public_assigned!()
+is_public_assigned!();

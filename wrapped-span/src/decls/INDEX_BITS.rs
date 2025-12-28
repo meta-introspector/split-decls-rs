@@ -4,4 +4,4 @@ macro_rules! INDEX_BITS {
     };
 }
 
-INDEX_BITS!()
+INDEX_BITS!();

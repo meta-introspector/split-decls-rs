@@ -11,4 +11,4 @@ macro_rules! print_skip {
     };
 }
 
-print_skip!()
+print_skip!();

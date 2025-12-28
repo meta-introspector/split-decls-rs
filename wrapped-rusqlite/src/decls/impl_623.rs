@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        VTabConnection!();
+        Error!();
+        CsvTab!();
         IndexInfo!();
         VTab!();
-        CsvTab!();
         CsvTabCursor!();
-        VTabConnection!();
-        Result!();
-        Error!();
         VTabConfig!();
+        Result!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_623 {
     };
 }
 
-impl_623!()
+impl_623!();

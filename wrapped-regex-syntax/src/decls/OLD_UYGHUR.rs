@@ -4,4 +4,4 @@ macro_rules! OLD_UYGHUR {
     };
 }
 
-OLD_UYGHUR!()
+OLD_UYGHUR!();

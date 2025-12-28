@@ -4,4 +4,4 @@ macro_rules! STT_ARM_16BIT {
     };
 }
 
-STT_ARM_16BIT!()
+STT_ARM_16BIT!();

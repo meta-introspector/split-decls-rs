@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NFA!();
-        Utf8SuffixKey!();
-        Utf8SuffixEntry!();
         StateID!();
+        Utf8SuffixKey!();
+        NFA!();
         Utf8SuffixMap!();
+        Utf8SuffixEntry!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_510 {
     };
 }
 
-impl_510!()
+impl_510!();

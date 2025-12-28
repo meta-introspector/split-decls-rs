@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        CrateNum!();
         BridgeTys!();
         Crate!();
-        CrateNum!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! smir_crate {
     };
 }
 
-smir_crate!()
+smir_crate!();

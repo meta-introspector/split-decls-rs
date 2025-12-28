@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ExpectedEvent!();
         MockHandle!();
-        NewSpan!();
         MockLayer!();
-        Expect!();
-        ExpectedSpan!();
+        NewSpan!();
         MockLayerBuilder!();
+        ExpectedSpan!();
+        ExpectedEvent!();
+        Expect!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

@@ -4,4 +4,4 @@ macro_rules! Equals {
     };
 }
 
-Equals!()
+Equals!();

@@ -26,4 +26,4 @@ macro_rules! replace_associated_trait_constant {
     };
 }
 
-replace_associated_trait_constant!()
+replace_associated_trait_constant!();

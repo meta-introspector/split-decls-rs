@@ -4,4 +4,4 @@ macro_rules! is_binary {
     };
 }
 
-is_binary!()
+is_binary!();

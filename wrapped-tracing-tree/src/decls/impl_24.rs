@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UtcDateTime!();
         FormatTime!();
+        UtcDateTime!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

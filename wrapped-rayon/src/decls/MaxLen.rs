@@ -11,4 +11,4 @@ macro_rules! MaxLen {
     };
 }
 
-MaxLen!()
+MaxLen!();

@@ -12,4 +12,4 @@ macro_rules! renumber_mir {
     };
 }
 
-renumber_mir!()
+renumber_mir!();

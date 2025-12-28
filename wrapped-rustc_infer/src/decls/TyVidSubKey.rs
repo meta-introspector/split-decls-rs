@@ -4,4 +4,4 @@ macro_rules! TyVidSubKey {
     };
 }
 
-TyVidSubKey!()
+TyVidSubKey!();

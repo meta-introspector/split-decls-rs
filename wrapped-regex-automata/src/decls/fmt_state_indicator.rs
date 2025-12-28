@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StateID!();
         Automaton!();
+        StateID!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fmt_state_indicator {
     };
 }
 
-fmt_state_indicator!()
+fmt_state_indicator!();

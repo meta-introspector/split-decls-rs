@@ -4,4 +4,4 @@ macro_rules! UsesPowerAlignment {
     };
 }
 
-UsesPowerAlignment!()
+UsesPowerAlignment!();

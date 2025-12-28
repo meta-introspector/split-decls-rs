@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        DyldCacheMappingIterator!();
+        DyldCacheMapping!();
         DyldCacheMappingVersion!();
         ReadRef!();
-        DyldCacheMappingIterator!();
-        Item!();
-        DyldCacheMapping!();
-        Endian!();
         DyldCacheMappingVersionIterator!();
+        Endian!();
+        Item!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_481 {
     };
 }
 
-impl_481!()
+impl_481!();

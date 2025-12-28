@@ -4,4 +4,4 @@ macro_rules! X3_IMM20_SIZE_X {
     };
 }
 
-X3_IMM20_SIZE_X!()
+X3_IMM20_SIZE_X!();

@@ -4,4 +4,4 @@ macro_rules! ImplicitSelfKind {
     };
 }
 
-ImplicitSelfKind!()
+ImplicitSelfKind!();

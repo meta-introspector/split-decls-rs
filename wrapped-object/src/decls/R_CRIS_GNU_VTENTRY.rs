@@ -4,4 +4,4 @@ macro_rules! R_CRIS_GNU_VTENTRY {
     };
 }
 
-R_CRIS_GNU_VTENTRY!()
+R_CRIS_GNU_VTENTRY!();

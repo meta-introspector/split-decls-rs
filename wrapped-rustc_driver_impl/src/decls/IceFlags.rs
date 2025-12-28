@@ -4,4 +4,4 @@ macro_rules! IceFlags {
     };
 }
 
-IceFlags!()
+IceFlags!();

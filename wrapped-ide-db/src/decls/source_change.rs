@@ -4,4 +4,4 @@ macro_rules! source_change {
     };
 }
 
-source_change!()
+source_change!();

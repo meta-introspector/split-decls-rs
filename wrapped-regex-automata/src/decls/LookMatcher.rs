@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Match!();
-        Input!();
         DebugByte!();
+        Input!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LookMatcher {
     };
 }
 
-LookMatcher!()
+LookMatcher!();

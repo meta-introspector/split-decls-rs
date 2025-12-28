@@ -4,4 +4,4 @@ macro_rules! R_PPC64_ADDR16_LO {
     };
 }
 
-R_PPC64_ADDR16_LO!()
+R_PPC64_ADDR16_LO!();

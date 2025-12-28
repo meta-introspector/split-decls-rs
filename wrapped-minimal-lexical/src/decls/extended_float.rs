@@ -4,4 +4,4 @@ macro_rules! extended_float {
     };
 }
 
-extended_float!()
+extended_float!();

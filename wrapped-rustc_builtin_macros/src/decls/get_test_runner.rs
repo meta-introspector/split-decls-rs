@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TestRunnerInvalid!();
-        Path!();
         TestRunnerNargs!();
+        Path!();
+        TestRunnerInvalid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_test_runner {
     };
 }
 
-get_test_runner!()
+get_test_runner!();

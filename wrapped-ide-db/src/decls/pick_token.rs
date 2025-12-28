@@ -4,4 +4,4 @@ macro_rules! pick_token {
     };
 }
 
-pick_token!()
+pick_token!();

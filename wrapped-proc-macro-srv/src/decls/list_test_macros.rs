@@ -18,4 +18,4 @@ macro_rules! list_test_macros {
     };
 }
 
-list_test_macros!()
+list_test_macros!();

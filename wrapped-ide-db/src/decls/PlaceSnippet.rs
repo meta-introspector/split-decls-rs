@@ -4,4 +4,4 @@ macro_rules! PlaceSnippet {
     };
 }
 
-PlaceSnippet!()
+PlaceSnippet!();

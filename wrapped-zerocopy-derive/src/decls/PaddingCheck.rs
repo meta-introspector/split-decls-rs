@@ -4,4 +4,4 @@ macro_rules! PaddingCheck {
     };
 }
 
-PaddingCheck!()
+PaddingCheck!();

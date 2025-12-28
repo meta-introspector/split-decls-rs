@@ -11,4 +11,4 @@ macro_rules! IWeakReferenceSource_Impl {
     };
 }
 
-IWeakReferenceSource_Impl!()
+IWeakReferenceSource_Impl!();

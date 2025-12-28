@@ -4,4 +4,4 @@ macro_rules! twitter_event_impl {
     };
 }
 
-twitter_event_impl!()
+twitter_event_impl!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         TtIter!();
+        Subtree!();
+        TokenTree!();
         TtElement!();
         Leaf!();
-        TokenTree!();
-        Subtree!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

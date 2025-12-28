@@ -4,4 +4,4 @@ macro_rules! CreateStructRetAttr {
     };
 }
 
-CreateStructRetAttr!()
+CreateStructRetAttr!();

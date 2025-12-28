@@ -16,4 +16,4 @@ macro_rules! get_codegen_sysroot {
     };
 }
 
-get_codegen_sysroot!()
+get_codegen_sysroot!();

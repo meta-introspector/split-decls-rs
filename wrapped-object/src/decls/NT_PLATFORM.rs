@@ -4,4 +4,4 @@ macro_rules! NT_PLATFORM {
     };
 }
 
-NT_PLATFORM!()
+NT_PLATFORM!();

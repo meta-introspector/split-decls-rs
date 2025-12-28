@@ -4,4 +4,4 @@ macro_rules! __pin_project_internal {
     };
 }
 
-__pin_project_internal!()
+__pin_project_internal!();

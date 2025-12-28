@@ -4,4 +4,4 @@ macro_rules! COMPRESSED_NONE {
     };
 }
 
-COMPRESSED_NONE!()
+COMPRESSED_NONE!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SourceMap!();
         FileInfo!();
         Span!();
+        SourceMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_103 {
     };
 }
 
-macro_103!()
+macro_103!();

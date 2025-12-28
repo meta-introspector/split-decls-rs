@@ -4,4 +4,4 @@ macro_rules! X3_TMPLT_SIZE_X {
     };
 }
 
-X3_TMPLT_SIZE_X!()
+X3_TMPLT_SIZE_X!();

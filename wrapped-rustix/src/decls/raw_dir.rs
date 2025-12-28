@@ -4,4 +4,4 @@ macro_rules! raw_dir {
     };
 }
 
-raw_dir!()
+raw_dir!();

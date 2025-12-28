@@ -4,4 +4,4 @@ macro_rules! ET_HIOS {
     };
 }
 
-ET_HIOS!()
+ET_HIOS!();

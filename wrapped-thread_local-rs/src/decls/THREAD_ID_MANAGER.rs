@@ -11,4 +11,4 @@ macro_rules! THREAD_ID_MANAGER {
     };
 }
 
-THREAD_ID_MANAGER!()
+THREAD_ID_MANAGER!();

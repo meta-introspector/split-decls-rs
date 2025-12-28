@@ -4,4 +4,4 @@ macro_rules! inflateUndermine {
     };
 }
 
-inflateUndermine!()
+inflateUndermine!();

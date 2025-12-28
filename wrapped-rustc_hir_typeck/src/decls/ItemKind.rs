@@ -4,4 +4,4 @@ macro_rules! ItemKind {
     };
 }
 
-ItemKind!()
+ItemKind!();

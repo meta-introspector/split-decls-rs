@@ -11,4 +11,4 @@ macro_rules! render_simple_string {
     };
 }
 
-render_simple_string!()
+render_simple_string!();

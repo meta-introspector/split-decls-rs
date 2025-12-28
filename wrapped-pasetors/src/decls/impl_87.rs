@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        V2!();
-        LocalToken!();
-        Error!();
-        SymmetricKey!();
-        UntrustedToken!();
         Local!();
+        Error!();
+        V2!();
+        SymmetricKey!();
+        LocalToken!();
+        UntrustedToken!();
         TrustedToken!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

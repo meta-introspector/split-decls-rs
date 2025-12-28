@@ -4,4 +4,4 @@ macro_rules! log10f {
     };
 }
 
-log10f!()
+log10f!();

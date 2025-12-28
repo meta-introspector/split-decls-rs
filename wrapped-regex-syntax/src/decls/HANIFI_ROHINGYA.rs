@@ -4,4 +4,4 @@ macro_rules! HANIFI_ROHINGYA {
     };
 }
 
-HANIFI_ROHINGYA!()
+HANIFI_ROHINGYA!();

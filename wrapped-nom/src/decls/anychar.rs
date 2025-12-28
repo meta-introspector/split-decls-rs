@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        IResult!();
-        AsChar!();
+        ParseError!();
         Err!();
         Error!();
-        ParseError!();
+        ErrorKind!();
+        AsChar!();
+        IResult!();
         Input!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! anychar {
     };
 }
 
-anychar!()
+anychar!();

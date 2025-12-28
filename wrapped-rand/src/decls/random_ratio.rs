@@ -11,4 +11,4 @@ macro_rules! random_ratio {
     };
 }
 
-random_ratio!()
+random_ratio!();

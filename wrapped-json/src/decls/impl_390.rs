@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Math!();
         Limb!();
         Bigint!();
-        Math!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_390 {
     };
 }
 
-impl_390!()
+impl_390!();

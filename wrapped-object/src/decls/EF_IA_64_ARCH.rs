@@ -4,4 +4,4 @@ macro_rules! EF_IA_64_ARCH {
     };
 }
 
-EF_IA_64_ARCH!()
+EF_IA_64_ARCH!();

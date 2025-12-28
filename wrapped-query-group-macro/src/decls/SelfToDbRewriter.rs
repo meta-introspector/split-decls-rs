@@ -4,4 +4,4 @@ macro_rules! SelfToDbRewriter {
     };
 }
 
-SelfToDbRewriter!()
+SelfToDbRewriter!();

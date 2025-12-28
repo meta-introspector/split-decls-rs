@@ -4,4 +4,4 @@ macro_rules! weighted_index {
     };
 }
 
-weighted_index!()
+weighted_index!();

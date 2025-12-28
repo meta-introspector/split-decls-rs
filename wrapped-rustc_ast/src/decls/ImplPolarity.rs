@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Type!();
         Walkable!();
+        Type!();
         Trait!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ImplPolarity {
     };
 }
 
-ImplPolarity!()
+ImplPolarity!();

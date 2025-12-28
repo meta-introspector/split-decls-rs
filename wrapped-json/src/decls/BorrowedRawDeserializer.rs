@@ -4,4 +4,4 @@ macro_rules! BorrowedRawDeserializer {
     };
 }
 
-BorrowedRawDeserializer!()
+BorrowedRawDeserializer!();

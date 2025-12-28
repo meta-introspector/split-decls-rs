@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TestItemKind!();
         Runnable!();
+        TestItemKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TestItem {
     };
 }
 
-TestItem!()
+TestItem!();

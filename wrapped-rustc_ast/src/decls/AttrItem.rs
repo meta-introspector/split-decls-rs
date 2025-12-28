@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LazyAttrTokenStream!();
-        Walkable!();
-        Path!();
         AttrArgs!();
         Safety!();
+        LazyAttrTokenStream!();
+        Path!();
+        Walkable!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! AttrItem {
     };
 }
 
-AttrItem!()
+AttrItem!();

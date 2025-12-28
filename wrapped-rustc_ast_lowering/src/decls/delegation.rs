@@ -4,4 +4,4 @@ macro_rules! delegation {
     };
 }
 
-delegation!()
+delegation!();

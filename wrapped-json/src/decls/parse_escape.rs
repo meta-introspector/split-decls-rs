@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         ErrorCode!();
+        Result!();
         Read!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! parse_escape {
     };
 }
 
-parse_escape!()
+parse_escape!();

@@ -4,4 +4,4 @@ macro_rules! RebootCommand {
     };
 }
 
-RebootCommand!()
+RebootCommand!();

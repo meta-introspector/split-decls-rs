@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TyConstId!();
         Error!();
-        TyConst!();
         TyConstKind!();
+        TyConst!();
         UintTy!();
+        TyConstId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_305 {
     };
 }
 
-impl_305!()
+impl_305!();

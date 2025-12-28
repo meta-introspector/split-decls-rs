@@ -12,4 +12,4 @@ macro_rules! derive_impl {
     };
 }
 
-derive_impl!()
+derive_impl!();

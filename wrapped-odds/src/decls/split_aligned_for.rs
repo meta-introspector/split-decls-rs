@@ -11,4 +11,4 @@ macro_rules! split_aligned_for {
     };
 }
 
-split_aligned_for!()
+split_aligned_for!();

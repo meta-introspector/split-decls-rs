@@ -4,4 +4,4 @@ macro_rules! TOOL_CLANG {
     };
 }
 
-TOOL_CLANG!()
+TOOL_CLANG!();

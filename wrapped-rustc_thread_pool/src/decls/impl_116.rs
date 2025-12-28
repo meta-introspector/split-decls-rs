@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        StackJob!();
-        ThreadInfo!();
-        Terminator!();
-        Tlv!();
-        RegistryId!();
-        SpinLatch!();
-        JobRef!();
+        ErrorKind!();
         OnceLatch!();
-        ThreadPool!();
-        LatchRef!();
-        ThreadPoolBuilder!();
-        ThreadBuilder!();
-        Registry!();
-        AbortIfPanic!();
         WorkerThread!();
-        LockLatch!();
+        ThreadPoolBuildError!();
         ThreadSpawn!();
         Sleep!();
-        ErrorKind!();
-        ThreadPoolBuildError!();
+        RegistryId!();
+        ThreadBuilder!();
+        ThreadPoolBuilder!();
+        ThreadInfo!();
+        Terminator!();
+        LatchRef!();
+        LockLatch!();
+        Tlv!();
+        JobRef!();
+        ThreadPool!();
+        SpinLatch!();
+        Registry!();
+        AbortIfPanic!();
+        StackJob!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

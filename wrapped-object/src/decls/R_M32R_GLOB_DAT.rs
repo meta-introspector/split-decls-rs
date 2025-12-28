@@ -4,4 +4,4 @@ macro_rules! R_M32R_GLOB_DAT {
     };
 }
 
-R_M32R_GLOB_DAT!()
+R_M32R_GLOB_DAT!();

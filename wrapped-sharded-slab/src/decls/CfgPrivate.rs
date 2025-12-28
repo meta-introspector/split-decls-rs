@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Config!();
+        Tid!();
+        DebugConfig!();
+        Addr!();
         Generation!();
         RefCount!();
         Pack!();
-        Addr!();
-        DebugConfig!();
-        Tid!();
+        Config!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! CfgPrivate {
     };
 }
 
-CfgPrivate!()
+CfgPrivate!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ValueIter!();
-        Values!();
         ValueRef!();
+        Values!();
+        ValueIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_574 {
     };
 }
 
-impl_574!()
+impl_574!();

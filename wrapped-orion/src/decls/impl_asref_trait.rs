@@ -4,4 +4,4 @@ macro_rules! impl_asref_trait {
     };
 }
 
-impl_asref_trait!()
+impl_asref_trait!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Argument!();
-        Piece!();
         ParseMode!();
+        Piece!();
+        Argument!();
         Parser!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! format_raw {
     };
 }
 
-format_raw!()
+format_raw!();

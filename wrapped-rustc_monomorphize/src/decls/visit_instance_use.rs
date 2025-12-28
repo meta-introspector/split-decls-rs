@@ -11,4 +11,4 @@ macro_rules! visit_instance_use {
     };
 }
 
-visit_instance_use!()
+visit_instance_use!();

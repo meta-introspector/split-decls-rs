@@ -4,4 +4,4 @@ macro_rules! TOKEN_HANDOFF {
     };
 }
 
-TOKEN_HANDOFF!()
+TOKEN_HANDOFF!();

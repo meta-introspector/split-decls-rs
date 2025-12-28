@@ -4,4 +4,4 @@ macro_rules! UNIFIED_IDEOGRAPH {
     };
 }
 
-UNIFIED_IDEOGRAPH!()
+UNIFIED_IDEOGRAPH!();

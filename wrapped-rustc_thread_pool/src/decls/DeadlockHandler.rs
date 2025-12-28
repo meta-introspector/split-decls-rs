@@ -4,4 +4,4 @@ macro_rules! DeadlockHandler {
     };
 }
 
-DeadlockHandler!()
+DeadlockHandler!();

@@ -4,4 +4,4 @@ macro_rules! EI_CLASS {
     };
 }
 
-EI_CLASS!()
+EI_CLASS!();

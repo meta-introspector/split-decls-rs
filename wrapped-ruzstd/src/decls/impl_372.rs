@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BitWriter!();
         State!();
         FSETable!();
+        BitWriter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_372 {
     };
 }
 
-impl_372!()
+impl_372!();

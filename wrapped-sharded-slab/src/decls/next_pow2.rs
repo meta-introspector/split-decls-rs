@@ -4,4 +4,4 @@ macro_rules! next_pow2 {
     };
 }
 
-next_pow2!()
+next_pow2!();

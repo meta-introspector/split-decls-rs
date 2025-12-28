@@ -4,4 +4,4 @@ macro_rules! reverse_inner {
     };
 }
 
-reverse_inner!()
+reverse_inner!();

@@ -4,4 +4,4 @@ macro_rules! test_vectors {
     };
 }
 
-test_vectors!()
+test_vectors!();

@@ -4,4 +4,4 @@ macro_rules! R_SCATTERED {
     };
 }
 
-R_SCATTERED!()
+R_SCATTERED!();

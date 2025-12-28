@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Match!();
-        Span!();
-        GroupInfo!();
         Input!();
-        NonMaxUsize!();
-        Cache!();
+        GroupInfo!();
+        Span!();
         Captures!();
-        Anchored!();
-        DFA!();
         PatternID!();
+        NonMaxUsize!();
         MatchError!();
+        Match!();
+        DFA!();
+        Anchored!();
+        Cache!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_72 {
     };
 }
 
-impl_72!()
+impl_72!();

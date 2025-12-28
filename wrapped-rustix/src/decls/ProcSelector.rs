@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IdType!();
         Pid!();
+        IdType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ProcSelector {
     };
 }
 
-ProcSelector!()
+ProcSelector!();

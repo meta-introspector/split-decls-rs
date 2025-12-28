@@ -4,4 +4,4 @@ macro_rules! MutableBorrowEscaping {
     };
 }
 
-MutableBorrowEscaping!()
+MutableBorrowEscaping!();

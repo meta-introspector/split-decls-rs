@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         DepNode!();
-        SerializedDepGraph!();
+        SerializedNodeHeader!();
         EdgesVec!();
+        SerializedDepGraph!();
         DepNodeColorMap!();
         Deps!();
-        SerializedNodeHeader!();
         NodeInfo!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

@@ -4,4 +4,4 @@ macro_rules! is_alphabetic {
     };
 }
 
-is_alphabetic!()
+is_alphabetic!();

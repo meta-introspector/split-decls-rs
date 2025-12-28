@@ -4,4 +4,4 @@ macro_rules! osa_distance {
     };
 }
 
-osa_distance!()
+osa_distance!();

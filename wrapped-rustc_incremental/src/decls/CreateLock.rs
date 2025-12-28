@@ -4,4 +4,4 @@ macro_rules! CreateLock {
     };
 }
 
-CreateLock!()
+CreateLock!();

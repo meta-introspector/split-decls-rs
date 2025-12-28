@@ -4,4 +4,4 @@ macro_rules! partition_dedup_by {
     };
 }
 
-partition_dedup_by!()
+partition_dedup_by!();

@@ -4,4 +4,4 @@ macro_rules! Failure {
     };
 }
 
-Failure!()
+Failure!();

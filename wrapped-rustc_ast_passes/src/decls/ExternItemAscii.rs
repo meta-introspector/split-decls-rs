@@ -4,4 +4,4 @@ macro_rules! ExternItemAscii {
     };
 }
 
-ExternItemAscii!()
+ExternItemAscii!();

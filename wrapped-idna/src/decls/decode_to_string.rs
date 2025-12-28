@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExternalCaller!();
         Decoder!();
+        ExternalCaller!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode_to_string {
     };
 }
 
-decode_to_string!()
+decode_to_string!();

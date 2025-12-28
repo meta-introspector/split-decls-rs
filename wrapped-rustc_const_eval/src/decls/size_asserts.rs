@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Place!();
-        PlaceTy!();
         MemPlace!();
-        MemPlaceMeta!();
         MPlaceTy!();
+        MemPlaceMeta!();
+        PlaceTy!();
+        Place!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! size_asserts {
     };
 }
 
-size_asserts!()
+size_asserts!();

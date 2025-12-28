@@ -4,4 +4,4 @@ macro_rules! associated_item {
     };
 }
 
-associated_item!()
+associated_item!();

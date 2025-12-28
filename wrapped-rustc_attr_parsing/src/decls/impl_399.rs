@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AllowedTargets!();
         Policy!();
+        AllowedTargets!();
         AllowedResult!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_399 {
     };
 }
 
-impl_399!()
+impl_399!();

@@ -4,4 +4,4 @@ macro_rules! SmolStrBuilderRepr {
     };
 }
 
-SmolStrBuilderRepr!()
+SmolStrBuilderRepr!();

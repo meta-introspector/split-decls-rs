@@ -4,4 +4,4 @@ macro_rules! eval_to_const_value_raw_provider {
     };
 }
 
-eval_to_const_value_raw_provider!()
+eval_to_const_value_raw_provider!();

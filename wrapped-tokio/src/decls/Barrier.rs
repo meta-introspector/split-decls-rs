@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Mutex!();
         BarrierState!();
+        Mutex!();
         Condvar!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Barrier {
     };
 }
 
-Barrier!()
+Barrier!();

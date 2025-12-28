@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TryFromBytes!();
-        Validity!();
         TryCastError!();
         Alignment!();
+        Validity!();
         CastError!();
+        TryFromBytes!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_219 {
     };
 }
 
-impl_219!()
+impl_219!();

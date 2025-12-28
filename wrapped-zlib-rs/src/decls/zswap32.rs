@@ -4,4 +4,4 @@ macro_rules! zswap32 {
     };
 }
 
-zswap32!()
+zswap32!();

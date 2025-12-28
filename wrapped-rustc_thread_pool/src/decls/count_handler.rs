@@ -4,4 +4,4 @@ macro_rules! count_handler {
     };
 }
 
-count_handler!()
+count_handler!();

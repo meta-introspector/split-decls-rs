@@ -4,4 +4,4 @@ macro_rules! log_notify_error {
     };
 }
 
-log_notify_error!()
+log_notify_error!();

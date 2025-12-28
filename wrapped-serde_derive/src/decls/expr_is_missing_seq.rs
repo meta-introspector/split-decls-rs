@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Default!();
         Field!();
+        Default!();
         Container!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! expr_is_missing_seq {
     };
 }
 
-expr_is_missing_seq!()
+expr_is_missing_seq!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Id!();
+        MemoIngredientMap!();
         IngredientIndices!();
         Revision!();
-        IngredientIndex!();
+        Id!();
         DatabaseKeyIndex!();
-        MemoIngredientMap!();
-        Zalsa!();
         Lookup!();
+        Zalsa!();
+        IngredientIndex!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! SalsaStructInDb {
     };
 }
 
-SalsaStructInDb!()
+SalsaStructInDb!();

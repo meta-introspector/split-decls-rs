@@ -4,4 +4,4 @@ macro_rules! IGNORED_LINTS {
     };
 }
 
-IGNORED_LINTS!()
+IGNORED_LINTS!();

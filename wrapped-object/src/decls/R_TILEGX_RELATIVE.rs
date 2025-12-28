@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_RELATIVE {
     };
 }
 
-R_TILEGX_RELATIVE!()
+R_TILEGX_RELATIVE!();

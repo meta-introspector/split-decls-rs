@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ExpectedFound!();
-        TypeError!();
-        Relate!();
         ExistentialProjection!();
-        VarianceDiagInfo!();
-        Interner!();
-        RelateResult!();
         TypeRelation!();
+        Relate!();
+        RelateResult!();
+        VarianceDiagInfo!();
+        TypeError!();
+        ExpectedFound!();
+        Interner!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_120 {
     };
 }
 
-impl_120!()
+impl_120!();

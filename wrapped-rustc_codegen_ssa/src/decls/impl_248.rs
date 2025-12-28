@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        CodegenResults!();
+        ExtraBackendMethods!();
+        Message!();
         OngoingCodegen!();
         CguMessage!();
-        ExtraBackendMethods!();
-        CodegenResults!();
-        Message!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_248 {
     };
 }
 
-impl_248!()
+impl_248!();

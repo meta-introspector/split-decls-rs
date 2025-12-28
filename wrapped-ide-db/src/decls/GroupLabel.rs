@@ -4,4 +4,4 @@ macro_rules! GroupLabel {
     };
 }
 
-GroupLabel!()
+GroupLabel!();

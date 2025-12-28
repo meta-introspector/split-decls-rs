@@ -4,4 +4,4 @@ macro_rules! FieldInnerTy {
     };
 }
 
-FieldInnerTy!()
+FieldInnerTy!();

@@ -4,4 +4,4 @@ macro_rules! assert_align_ne {
     };
 }
 
-assert_align_ne!()
+assert_align_ne!();

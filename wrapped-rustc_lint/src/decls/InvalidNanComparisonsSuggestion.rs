@@ -4,4 +4,4 @@ macro_rules! InvalidNanComparisonsSuggestion {
     };
 }
 
-InvalidNanComparisonsSuggestion!()
+InvalidNanComparisonsSuggestion!();

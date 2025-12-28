@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Container!();
-        Data!();
         Ctxt!();
+        Data!();
+        Container!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_getter {
     };
 }
 
-check_getter!()
+check_getter!();

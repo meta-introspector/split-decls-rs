@@ -4,4 +4,4 @@ macro_rules! PubTransparentParser {
     };
 }
 
-PubTransparentParser!()
+PubTransparentParser!();

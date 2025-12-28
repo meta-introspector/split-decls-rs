@@ -11,4 +11,4 @@ macro_rules! lex_err {
     };
 }
 
-lex_err!()
+lex_err!();

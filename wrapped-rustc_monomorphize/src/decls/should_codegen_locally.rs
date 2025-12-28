@@ -11,4 +11,4 @@ macro_rules! should_codegen_locally {
     };
 }
 
-should_codegen_locally!()
+should_codegen_locally!();

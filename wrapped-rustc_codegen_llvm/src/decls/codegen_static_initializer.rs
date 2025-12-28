@@ -11,4 +11,4 @@ macro_rules! codegen_static_initializer {
     };
 }
 
-codegen_static_initializer!()
+codegen_static_initializer!();

@@ -4,4 +4,4 @@ macro_rules! SHN_MIPS_TEXT {
     };
 }
 
-SHN_MIPS_TEXT!()
+SHN_MIPS_TEXT!();

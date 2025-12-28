@@ -4,4 +4,4 @@ macro_rules! EM_TPC {
     };
 }
 
-EM_TPC!()
+EM_TPC!();

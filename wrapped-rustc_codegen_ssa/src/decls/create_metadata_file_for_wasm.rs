@@ -4,4 +4,4 @@ macro_rules! create_metadata_file_for_wasm {
     };
 }
 
-create_metadata_file_for_wasm!()
+create_metadata_file_for_wasm!();

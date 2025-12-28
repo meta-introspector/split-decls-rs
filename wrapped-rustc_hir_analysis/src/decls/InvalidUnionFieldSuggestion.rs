@@ -4,4 +4,4 @@ macro_rules! InvalidUnionFieldSuggestion {
     };
 }
 
-InvalidUnionFieldSuggestion!()
+InvalidUnionFieldSuggestion!();

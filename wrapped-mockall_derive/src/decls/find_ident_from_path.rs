@@ -4,4 +4,4 @@ macro_rules! find_ident_from_path {
     };
 }
 
-find_ident_from_path!()
+find_ident_from_path!();

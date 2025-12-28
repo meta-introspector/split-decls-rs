@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Key!();
         MessageRingBuffer!();
         HashMap!();
-        Key!();
         StepShared!();
         Id!();
         Task!();
@@ -16,4 +16,4 @@ macro_rules! Item {
     };
 }
 
-Item!()
+Item!();

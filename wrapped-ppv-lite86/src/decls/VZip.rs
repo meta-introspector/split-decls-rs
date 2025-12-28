@@ -4,4 +4,4 @@ macro_rules! VZip {
     };
 }
 
-VZip!()
+VZip!();

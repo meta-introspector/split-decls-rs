@@ -4,4 +4,4 @@ macro_rules! get_max_level_inner {
     };
 }
 
-get_max_level_inner!()
+get_max_level_inner!();

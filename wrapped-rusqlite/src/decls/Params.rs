@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Connection!();
-        ToSql!();
-        Result!();
-        Named!();
         Statement!();
+        Named!();
+        Result!();
+        ToSql!();
         ParamsFromIter!();
+        Connection!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Params {
     };
 }
 
-Params!()
+Params!();

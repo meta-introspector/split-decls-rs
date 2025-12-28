@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        TransparencyParser!();
         Stage!();
         SingleAttributeParser!();
         AttributeOrder!();
-        AcceptContext!();
         AllowedTargets!();
-        ArgParser!();
-        TransparencyParser!();
         OnDuplicate!();
+        AcceptContext!();
+        ArgParser!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_233 {
     };
 }
 
-impl_233!()
+impl_233!();

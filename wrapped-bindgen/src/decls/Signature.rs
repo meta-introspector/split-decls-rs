@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Type!();
         Param!();
+        Type!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Signature {
     };
 }
 
-Signature!()
+Signature!();

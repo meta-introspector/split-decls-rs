@@ -4,4 +4,4 @@ macro_rules! STYP_DWARF {
     };
 }
 
-STYP_DWARF!()
+STYP_DWARF!();

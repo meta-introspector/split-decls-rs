@@ -11,4 +11,4 @@ macro_rules! add_assoc_type_bindings {
     };
 }
 
-add_assoc_type_bindings!()
+add_assoc_type_bindings!();

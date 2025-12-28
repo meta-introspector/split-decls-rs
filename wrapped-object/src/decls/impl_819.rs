@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        XcoffSymbol!();
         ReadRef!();
-        Item!();
         FileHeader!();
+        Item!();
+        XcoffSymbol!();
         XcoffSymbolIterator!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_819 {
     };
 }
 
-impl_819!()
+impl_819!();

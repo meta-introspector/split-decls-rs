@@ -4,4 +4,4 @@ macro_rules! asm_const_to_str {
     };
 }
 
-asm_const_to_str!()
+asm_const_to_str!();

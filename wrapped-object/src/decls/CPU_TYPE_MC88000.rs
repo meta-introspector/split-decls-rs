@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_MC88000 {
     };
 }
 
-CPU_TYPE_MC88000!()
+CPU_TYPE_MC88000!();

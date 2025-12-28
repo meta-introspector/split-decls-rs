@@ -4,4 +4,4 @@ macro_rules! R_LARCH_RELATIVE {
     };
 }
 
-R_LARCH_RELATIVE!()
+R_LARCH_RELATIVE!();

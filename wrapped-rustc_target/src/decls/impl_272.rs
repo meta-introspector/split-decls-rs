@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArgAttributes!();
         ArgExtension!();
+        ArgAttributes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_272 {
     };
 }
 
-impl_272!()
+impl_272!();

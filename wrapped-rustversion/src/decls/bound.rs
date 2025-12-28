@@ -4,4 +4,4 @@ macro_rules! bound {
     };
 }
 
-bound!()
+bound!();

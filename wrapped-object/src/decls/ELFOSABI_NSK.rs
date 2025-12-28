@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_NSK {
     };
 }
 
-ELFOSABI_NSK!()
+ELFOSABI_NSK!();

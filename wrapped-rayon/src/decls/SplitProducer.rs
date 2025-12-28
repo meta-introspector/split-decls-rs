@@ -4,4 +4,4 @@ macro_rules! SplitProducer {
     };
 }
 
-SplitProducer!()
+SplitProducer!();

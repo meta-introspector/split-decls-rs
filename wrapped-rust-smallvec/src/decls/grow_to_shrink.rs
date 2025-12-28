@@ -11,4 +11,4 @@ macro_rules! grow_to_shrink {
     };
 }
 
-grow_to_shrink!()
+grow_to_shrink!();

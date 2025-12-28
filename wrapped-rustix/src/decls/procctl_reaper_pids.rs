@@ -4,4 +4,4 @@ macro_rules! procctl_reaper_pids {
     };
 }
 
-procctl_reaper_pids!()
+procctl_reaper_pids!();

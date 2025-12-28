@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         InvalidReasonPhrase!();
         Error!();
-        Result!();
         ReasonPhrase!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

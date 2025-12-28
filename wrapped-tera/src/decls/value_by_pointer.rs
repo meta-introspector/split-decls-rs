@@ -11,4 +11,4 @@ macro_rules! value_by_pointer {
     };
 }
 
-value_by_pointer!()
+value_by_pointer!();

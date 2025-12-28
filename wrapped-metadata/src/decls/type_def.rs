@@ -4,4 +4,4 @@ macro_rules! type_def {
     };
 }
 
-type_def!()
+type_def!();

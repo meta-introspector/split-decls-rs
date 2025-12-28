@@ -6,4 +6,4 @@ Uncomment `default = [ "backtrace" ]` in `crates/stdx/Cargo.toml`.
     };
 }
 
-print_backtrace!()
+print_backtrace!();

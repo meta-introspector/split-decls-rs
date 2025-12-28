@@ -4,4 +4,4 @@ macro_rules! EM_NDS32 {
     };
 }
 
-EM_NDS32!()
+EM_NDS32!();

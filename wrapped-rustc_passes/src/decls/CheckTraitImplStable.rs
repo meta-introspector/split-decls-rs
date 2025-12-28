@@ -4,4 +4,4 @@ macro_rules! CheckTraitImplStable {
     };
 }
 
-CheckTraitImplStable!()
+CheckTraitImplStable!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Iter!();
-        ThreeIter!();
         Three!();
+        ThreeIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

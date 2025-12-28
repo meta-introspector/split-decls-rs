@@ -4,4 +4,4 @@ macro_rules! NT_S390_TODPREG {
     };
 }
 
-NT_S390_TODPREG!()
+NT_S390_TODPREG!();

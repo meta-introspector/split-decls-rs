@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        ChunkedBitIter!();
         Word!();
+        Chunk!();
         ChunkedBitSet!();
         ChunkIter!();
         BitIter!();
         Idx!();
-        Chunk!();
-        ChunkedBitIter!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

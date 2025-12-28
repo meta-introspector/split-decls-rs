@@ -4,4 +4,4 @@ macro_rules! EI_NIDENT {
     };
 }
 
-EI_NIDENT!()
+EI_NIDENT!();

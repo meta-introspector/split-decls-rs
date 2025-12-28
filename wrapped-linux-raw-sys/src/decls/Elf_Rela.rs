@@ -4,4 +4,4 @@ macro_rules! Elf_Rela {
     };
 }
 
-Elf_Rela!()
+Elf_Rela!();

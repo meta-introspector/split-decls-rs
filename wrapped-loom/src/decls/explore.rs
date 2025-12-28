@@ -4,4 +4,4 @@ macro_rules! explore {
     };
 }
 
-explore!()
+explore!();

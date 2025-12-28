@@ -4,4 +4,4 @@ macro_rules! MismatchedLifetimeSyntaxesSuggestion {
     };
 }
 
-MismatchedLifetimeSyntaxesSuggestion!()
+MismatchedLifetimeSyntaxesSuggestion!();

@@ -11,4 +11,4 @@ macro_rules! DynamicSymbolId {
     };
 }
 
-DynamicSymbolId!()
+DynamicSymbolId!();

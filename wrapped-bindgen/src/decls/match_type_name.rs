@@ -4,4 +4,4 @@ macro_rules! match_type_name {
     };
 }
 
-match_type_name!()
+match_type_name!();

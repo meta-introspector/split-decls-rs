@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AddressSpace!();
         BridgeTys!();
         Stable!();
+        AddressSpace!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

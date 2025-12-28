@@ -4,4 +4,4 @@ macro_rules! EM_MICROBLAZE {
     };
 }
 
-EM_MICROBLAZE!()
+EM_MICROBLAZE!();

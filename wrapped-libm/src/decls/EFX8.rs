@@ -4,4 +4,4 @@ macro_rules! EFX8 {
     };
 }
 
-EFX8!()
+EFX8!();

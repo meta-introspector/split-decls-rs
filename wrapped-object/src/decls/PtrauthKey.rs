@@ -4,4 +4,4 @@ macro_rules! PtrauthKey {
     };
 }
 
-PtrauthKey!()
+PtrauthKey!();

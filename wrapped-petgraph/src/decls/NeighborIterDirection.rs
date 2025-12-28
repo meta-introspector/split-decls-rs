@@ -4,4 +4,4 @@ macro_rules! NeighborIterDirection {
     };
 }
 
-NeighborIterDirection!()
+NeighborIterDirection!();

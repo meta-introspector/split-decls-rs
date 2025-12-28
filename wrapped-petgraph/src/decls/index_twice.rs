@@ -11,4 +11,4 @@ macro_rules! index_twice {
     };
 }
 
-index_twice!()
+index_twice!();

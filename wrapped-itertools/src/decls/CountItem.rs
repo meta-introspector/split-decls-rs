@@ -4,4 +4,4 @@ macro_rules! CountItem {
     };
 }
 
-CountItem!()
+CountItem!();

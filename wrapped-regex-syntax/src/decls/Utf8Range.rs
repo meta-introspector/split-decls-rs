@@ -4,4 +4,4 @@ macro_rules! Utf8Range {
     };
 }
 
-Utf8Range!()
+Utf8Range!();

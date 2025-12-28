@@ -4,4 +4,4 @@ macro_rules! sched_getcpu {
     };
 }
 
-sched_getcpu!()
+sched_getcpu!();

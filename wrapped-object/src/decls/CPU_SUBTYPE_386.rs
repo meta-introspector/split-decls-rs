@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_386 {
     };
 }
 
-CPU_SUBTYPE_386!()
+CPU_SUBTYPE_386!();

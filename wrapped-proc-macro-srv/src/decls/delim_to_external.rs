@@ -4,4 +4,4 @@ macro_rules! delim_to_external {
     };
 }
 
-delim_to_external!()
+delim_to_external!();

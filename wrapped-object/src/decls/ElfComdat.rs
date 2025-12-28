@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ObjectComdat!();
-        ReadRef!();
-        FileHeader!();
-        U32Bytes!();
-        Endian!();
-        ElfFile!();
         SectionHeader!();
+        U32Bytes!();
+        ObjectComdat!();
+        Endian!();
+        FileHeader!();
+        ReadRef!();
+        ElfFile!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! ElfComdat {
     };
 }
 
-ElfComdat!()
+ElfComdat!();

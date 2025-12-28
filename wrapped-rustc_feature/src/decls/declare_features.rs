@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FeatureStatus!();
         Features!();
         Feature!();
-        FeatureStatus!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! declare_features {
     };
 }
 
-declare_features!()
+declare_features!();

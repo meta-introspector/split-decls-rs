@@ -11,4 +11,4 @@ macro_rules! UseGroup2 {
     };
 }
 
-UseGroup2!()
+UseGroup2!();

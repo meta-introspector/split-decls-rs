@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ByteLines!();
         Token!();
+        ByteLines!();
         TokenSource!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

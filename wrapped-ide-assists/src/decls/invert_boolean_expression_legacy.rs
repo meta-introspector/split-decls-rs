@@ -4,4 +4,4 @@ macro_rules! invert_boolean_expression_legacy {
     };
 }
 
-invert_boolean_expression_legacy!()
+invert_boolean_expression_legacy!();

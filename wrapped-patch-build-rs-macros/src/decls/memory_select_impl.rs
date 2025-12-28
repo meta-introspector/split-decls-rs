@@ -28,4 +28,4 @@ pub trait MemoryItemSelector {{
     };
 }
 
-memory_select_impl!()
+memory_select_impl!();

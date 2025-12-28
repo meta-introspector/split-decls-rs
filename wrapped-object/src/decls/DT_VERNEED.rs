@@ -4,4 +4,4 @@ macro_rules! DT_VERNEED {
     };
 }
 
-DT_VERNEED!()
+DT_VERNEED!();

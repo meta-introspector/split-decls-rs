@@ -12,4 +12,4 @@ macro_rules! try_demangle {
     };
 }
 
-try_demangle!()
+try_demangle!();

@@ -11,4 +11,4 @@ macro_rules! filter_args_are_not_escaped {
     };
 }
 
-filter_args_are_not_escaped!()
+filter_args_are_not_escaped!();

@@ -4,4 +4,4 @@ macro_rules! f64_to_bits {
     };
 }
 
-f64_to_bits!()
+f64_to_bits!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Dot!();
-        ClassPerl!();
-        Span!();
-        Assertion!();
-        Concat!();
-        SetFlags!();
-        ClassUnicode!();
-        ClassBracketed!();
-        Repetition!();
-        Alternation!();
-        Flags!();
         Group!();
+        Concat!();
+        Flags!();
+        ClassUnicode!();
+        Assertion!();
+        Alternation!();
+        ClassPerl!();
+        ClassBracketed!();
         Literal!();
+        Repetition!();
+        SetFlags!();
+        Span!();
+        Dot!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! Ast {
     };
 }
 
-Ast!()
+Ast!();

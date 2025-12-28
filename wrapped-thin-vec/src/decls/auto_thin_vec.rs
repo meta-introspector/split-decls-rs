@@ -11,4 +11,4 @@ macro_rules! auto_thin_vec {
     };
 }
 
-auto_thin_vec!()
+auto_thin_vec!();

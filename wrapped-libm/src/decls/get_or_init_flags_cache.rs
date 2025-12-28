@@ -11,4 +11,4 @@ macro_rules! get_or_init_flags_cache {
     };
 }
 
-get_or_init_flags_cache!()
+get_or_init_flags_cache!();

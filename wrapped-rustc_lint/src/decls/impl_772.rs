@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ShadowedIntoIter!();
         LateContext!();
         ShadowedIntoIterDiagSub!();
         ShadowedIntoIterDiag!();
-        ShadowedIntoIter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_772 {
     };
 }
 
-impl_772!()
+impl_772!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Machine!();
-        ImmTy!();
-        InterpCx!();
         Projectable!();
         Writeable!();
         Coroutine!();
+        ImmTy!();
+        InterpCx!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_204 {
     };
 }
 
-impl_204!()
+impl_204!();

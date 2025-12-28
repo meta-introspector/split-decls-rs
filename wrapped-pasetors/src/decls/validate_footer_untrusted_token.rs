@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         UntrustedToken!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! validate_footer_untrusted_token {
     };
 }
 
-validate_footer_untrusted_token!()
+validate_footer_untrusted_token!();

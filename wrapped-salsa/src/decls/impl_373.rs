@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Slot!();
         Value!();
         Configuration!();
         Revision!();
-        Slot!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_373 {
     };
 }
 
-impl_373!()
+impl_373!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         UnindexedConsumer!();
-        SumConsumer!();
         Reducer!();
+        SumConsumer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_866 {
     };
 }
 
-impl_866!()
+impl_866!();

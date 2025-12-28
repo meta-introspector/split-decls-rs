@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MutRefSugg!();
-        LateContext!();
         RefOfMutStatic!();
+        LateContext!();
+        MutRefSugg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! emit_static_mut_refs {
     };
 }
 
-emit_static_mut_refs!()
+emit_static_mut_refs!();

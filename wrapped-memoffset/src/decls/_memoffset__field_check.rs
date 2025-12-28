@@ -4,4 +4,4 @@ macro_rules! _memoffset__field_check {
     };
 }
 
-_memoffset__field_check!()
+_memoffset__field_check!();

@@ -4,4 +4,4 @@ macro_rules! CASE_IGNORABLE {
     };
 }
 
-CASE_IGNORABLE!()
+CASE_IGNORABLE!();

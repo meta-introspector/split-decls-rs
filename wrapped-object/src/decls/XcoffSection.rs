@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        XcoffFile!();
-        SectionHeader!();
         FileHeader!();
-        ObjectSection!();
         ReadRef!();
+        SectionHeader!();
+        ObjectSection!();
+        XcoffFile!();
         SectionIndex!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! XcoffSection {
     };
 }
 
-XcoffSection!()
+XcoffSection!();

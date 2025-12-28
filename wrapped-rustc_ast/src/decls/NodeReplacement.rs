@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NodeRange!();
         ParserReplacement!();
         AttrsTarget!();
+        NodeRange!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! NodeReplacement {
     };
 }
 
-NodeReplacement!()
+NodeReplacement!();

@@ -4,4 +4,4 @@ macro_rules! recording_match_fail_reasons {
     };
 }
 
-recording_match_fail_reasons!()
+recording_match_fail_reasons!();

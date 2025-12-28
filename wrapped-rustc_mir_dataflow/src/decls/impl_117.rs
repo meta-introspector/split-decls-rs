@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MockAnalysis!();
-        Effect!();
         Direction!();
         Analysis!();
+        MockAnalysis!();
+        Effect!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

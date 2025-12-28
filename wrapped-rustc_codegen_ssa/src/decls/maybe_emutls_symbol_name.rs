@@ -4,4 +4,4 @@ macro_rules! maybe_emutls_symbol_name {
     };
 }
 
-maybe_emutls_symbol_name!()
+maybe_emutls_symbol_name!();

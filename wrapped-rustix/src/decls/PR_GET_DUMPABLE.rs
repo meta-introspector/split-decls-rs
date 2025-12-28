@@ -4,4 +4,4 @@ macro_rules! PR_GET_DUMPABLE {
     };
 }
 
-PR_GET_DUMPABLE!()
+PR_GET_DUMPABLE!();

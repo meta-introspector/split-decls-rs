@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Claims!();
         UntrustedToken!();
-        Error!();
-        TrustedToken!();
         LocalToken!();
+        TrustedToken!();
+        Local!();
+        Error!();
         SymmetricKey!();
-        ClaimsValidationRules!();
         Footer!();
         V4!();
-        Claims!();
-        Local!();
+        ClaimsValidationRules!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! local {
     };
 }
 
-local!()
+local!();

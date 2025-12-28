@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AssocTypeData!();
         Symbol!();
+        AssocTypeData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AssocKind {
     };
 }
 
-AssocKind!()
+AssocKind!();

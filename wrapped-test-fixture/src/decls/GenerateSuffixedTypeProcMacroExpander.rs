@@ -4,4 +4,4 @@ macro_rules! GenerateSuffixedTypeProcMacroExpander {
     };
 }
 
-GenerateSuffixedTypeProcMacroExpander!()
+GenerateSuffixedTypeProcMacroExpander!();

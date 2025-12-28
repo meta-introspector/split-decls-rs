@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        InherentTyOutsideNew!();
-        InherentCollect!();
         InherentPrimitiveTy!();
-        InherentTyOutsidePrimitive!();
-        InherentTyOutside!();
-        InherentDyn!();
+        InherentTyOutsideNew!();
         InherentNominal!();
-        InherentPrimitiveTyNote!();
+        InherentTyOutside!();
+        InherentCollect!();
+        InherentTyOutsidePrimitive!();
         InherentTyOutsideRelevant!();
+        InherentPrimitiveTyNote!();
+        InherentDyn!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

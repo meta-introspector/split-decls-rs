@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DHKEM_X25519_SHA256_CHACHA20!();
         Role!();
+        DHKEM_X25519_SHA256_CHACHA20!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ModeBase {
     };
 }
 
-ModeBase!()
+ModeBase!();

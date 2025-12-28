@@ -379,4 +379,4 @@ macro_rules! basic_strings {
     };
 }
 
-basic_strings!()
+basic_strings!();

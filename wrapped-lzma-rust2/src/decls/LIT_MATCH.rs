@@ -4,4 +4,4 @@ macro_rules! LIT_MATCH {
     };
 }
 
-LIT_MATCH!()
+LIT_MATCH!();

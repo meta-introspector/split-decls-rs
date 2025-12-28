@@ -4,4 +4,4 @@ macro_rules! fix_impl {
     };
 }
 
-fix_impl!()
+fix_impl!();

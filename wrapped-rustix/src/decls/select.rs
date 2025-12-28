@@ -4,4 +4,4 @@ macro_rules! select {
     };
 }
 
-select!()
+select!();

@@ -4,4 +4,4 @@ macro_rules! trim_start_matches {
     };
 }
 
-trim_start_matches!()
+trim_start_matches!();

@@ -34,4 +34,4 @@ macro_rules! replace_associated_function_with_generics {
     };
 }
 
-replace_associated_function_with_generics!()
+replace_associated_function_with_generics!();

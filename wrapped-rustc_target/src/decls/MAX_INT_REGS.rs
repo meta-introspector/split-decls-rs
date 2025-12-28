@@ -4,4 +4,4 @@ macro_rules! MAX_INT_REGS {
     };
 }
 
-MAX_INT_REGS!()
+MAX_INT_REGS!();

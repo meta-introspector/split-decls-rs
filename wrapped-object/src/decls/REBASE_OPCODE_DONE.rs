@@ -4,4 +4,4 @@ macro_rules! REBASE_OPCODE_DONE {
     };
 }
 
-REBASE_OPCODE_DONE!()
+REBASE_OPCODE_DONE!();

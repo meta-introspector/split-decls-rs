@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FormatAsPaserk!();
-        V2!();
-        SymmetricKey!();
         Error!();
+        FormatAsPaserk!();
+        SymmetricKey!();
+        V2!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_49 {
     };
 }
 
-impl_49!()
+impl_49!();

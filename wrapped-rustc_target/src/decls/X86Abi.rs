@@ -11,4 +11,4 @@ macro_rules! X86Abi {
     };
 }
 
-X86Abi!()
+X86Abi!();

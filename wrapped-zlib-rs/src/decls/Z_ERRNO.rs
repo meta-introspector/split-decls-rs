@@ -4,4 +4,4 @@ macro_rules! Z_ERRNO {
     };
 }
 
-Z_ERRNO!()
+Z_ERRNO!();

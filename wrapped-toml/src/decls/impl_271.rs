@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SerializeArrayOfTablesSerializer!();
+        Serializer!();
+        SerializeStructVariant!();
         ArrayOfTablesSerializer!();
         Buffer!();
-        SerializeStructVariant!();
+        SerializeMap!();
+        SerializeArrayOfTablesSerializer!();
         Error!();
         SerializeTupleVariant!();
-        Serializer!();
-        SerializeMap!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

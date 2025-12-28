@@ -4,4 +4,4 @@ macro_rules! pair_lookup_fk {
     };
 }
 
-pair_lookup_fk!()
+pair_lookup_fk!();

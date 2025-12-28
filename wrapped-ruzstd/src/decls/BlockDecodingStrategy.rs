@@ -4,4 +4,4 @@ macro_rules! BlockDecodingStrategy {
     };
 }
 
-BlockDecodingStrategy!()
+BlockDecodingStrategy!();

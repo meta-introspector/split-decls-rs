@@ -4,4 +4,4 @@ macro_rules! cfg_process {
     };
 }
 
-cfg_process!()
+cfg_process!();

@@ -51,4 +51,4 @@ br###"raw"###suffix
     };
 }
 
-literal_suffixes!()
+literal_suffixes!();

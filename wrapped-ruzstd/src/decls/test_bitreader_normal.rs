@@ -11,4 +11,4 @@ macro_rules! test_bitreader_normal {
     };
 }
 
-test_bitreader_normal!()
+test_bitreader_normal!();

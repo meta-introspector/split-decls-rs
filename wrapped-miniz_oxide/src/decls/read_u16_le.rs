@@ -11,4 +11,4 @@ macro_rules! read_u16_le {
     };
 }
 
-read_u16_le!()
+read_u16_le!();

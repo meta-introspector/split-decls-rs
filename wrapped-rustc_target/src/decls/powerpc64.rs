@@ -4,4 +4,4 @@ macro_rules! powerpc64 {
     };
 }
 
-powerpc64!()
+powerpc64!();

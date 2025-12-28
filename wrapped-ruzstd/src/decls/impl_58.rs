@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DecompressBlockError!();
-        DecodeBlockContentError!();
         Error!();
+        DecodeBlockContentError!();
+        DecompressBlockError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

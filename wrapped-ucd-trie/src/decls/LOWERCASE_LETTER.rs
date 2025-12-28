@@ -4,4 +4,4 @@ macro_rules! LOWERCASE_LETTER {
     };
 }
 
-LOWERCASE_LETTER!()
+LOWERCASE_LETTER!();

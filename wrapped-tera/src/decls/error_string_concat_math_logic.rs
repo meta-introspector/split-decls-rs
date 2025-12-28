@@ -12,4 +12,4 @@ macro_rules! error_string_concat_math_logic {
     };
 }
 
-error_string_concat_math_logic!()
+error_string_concat_math_logic!();

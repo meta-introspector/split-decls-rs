@@ -4,4 +4,4 @@ macro_rules! cfg_block_on {
     };
 }
 
-cfg_block_on!()
+cfg_block_on!();

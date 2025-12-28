@@ -4,4 +4,4 @@ macro_rules! EmptyLinkName {
     };
 }
 
-EmptyLinkName!()
+EmptyLinkName!();

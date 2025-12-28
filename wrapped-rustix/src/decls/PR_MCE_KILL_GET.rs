@@ -4,4 +4,4 @@ macro_rules! PR_MCE_KILL_GET {
     };
 }
 
-PR_MCE_KILL_GET!()
+PR_MCE_KILL_GET!();

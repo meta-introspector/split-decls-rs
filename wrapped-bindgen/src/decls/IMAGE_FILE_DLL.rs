@@ -11,4 +11,4 @@ macro_rules! IMAGE_FILE_DLL {
     };
 }
 
-IMAGE_FILE_DLL!()
+IMAGE_FILE_DLL!();

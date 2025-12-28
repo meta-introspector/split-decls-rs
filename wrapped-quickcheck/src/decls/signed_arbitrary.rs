@@ -12,4 +12,4 @@ macro_rules! signed_arbitrary {
     };
 }
 
-signed_arbitrary!()
+signed_arbitrary!();

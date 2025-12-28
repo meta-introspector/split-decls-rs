@@ -4,4 +4,4 @@ macro_rules! CargoFeatures {
     };
 }
 
-CargoFeatures!()
+CargoFeatures!();

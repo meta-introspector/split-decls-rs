@@ -4,4 +4,4 @@ macro_rules! check_cmp_direct {
     };
 }
 
-check_cmp_direct!()
+check_cmp_direct!();

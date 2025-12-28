@@ -12,4 +12,4 @@ macro_rules! parse_arguments_and_config {
     };
 }
 
-parse_arguments_and_config!()
+parse_arguments_and_config!();

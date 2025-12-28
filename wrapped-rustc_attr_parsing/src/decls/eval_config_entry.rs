@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ShouldEmit!();
         EvalConfigResult!();
+        ShouldEmit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! eval_config_entry {
     };
 }
 
-eval_config_entry!()
+eval_config_entry!();

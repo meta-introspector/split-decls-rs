@@ -4,4 +4,4 @@ macro_rules! SplitN {
     };
 }
 
-SplitN!()
+SplitN!();

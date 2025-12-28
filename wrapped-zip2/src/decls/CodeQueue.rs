@@ -4,4 +4,4 @@ macro_rules! CodeQueue {
     };
 }
 
-CodeQueue!()
+CodeQueue!();

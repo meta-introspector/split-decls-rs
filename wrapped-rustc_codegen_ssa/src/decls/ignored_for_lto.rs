@@ -11,4 +11,4 @@ macro_rules! ignored_for_lto {
     };
 }
 
-ignored_for_lto!()
+ignored_for_lto!();

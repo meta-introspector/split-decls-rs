@@ -4,4 +4,4 @@ macro_rules! server_impl {
     };
 }
 
-server_impl!()
+server_impl!();

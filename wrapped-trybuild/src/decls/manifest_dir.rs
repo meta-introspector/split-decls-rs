@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         Result!();
         Directory!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! manifest_dir {
     };
 }
 
-manifest_dir!()
+manifest_dir!();

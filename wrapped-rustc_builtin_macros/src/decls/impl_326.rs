@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ProcMacroDef!();
-        ProcMacro!();
-        ProcMacroDerive!();
         CollectProcMacros!();
+        ProcMacroDerive!();
+        ProcMacro!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_326 {
     };
 }
 
-impl_326!()
+impl_326!();

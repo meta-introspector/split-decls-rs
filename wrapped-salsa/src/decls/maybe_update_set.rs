@@ -4,4 +4,4 @@ macro_rules! maybe_update_set {
     };
 }
 
-maybe_update_set!()
+maybe_update_set!();

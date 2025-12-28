@@ -4,4 +4,4 @@ macro_rules! read_u128 {
     };
 }
 
-read_u128!()
+read_u128!();

@@ -4,4 +4,4 @@ macro_rules! nghttp2_ext_origin {
     };
 }
 
-nghttp2_ext_origin!()
+nghttp2_ext_origin!();

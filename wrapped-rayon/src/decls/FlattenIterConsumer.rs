@@ -4,4 +4,4 @@ macro_rules! FlattenIterConsumer {
     };
 }
 
-FlattenIterConsumer!()
+FlattenIterConsumer!();

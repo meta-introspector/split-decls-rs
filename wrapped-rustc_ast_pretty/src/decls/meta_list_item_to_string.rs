@@ -11,4 +11,4 @@ macro_rules! meta_list_item_to_string {
     };
 }
 
-meta_list_item_to_string!()
+meta_list_item_to_string!();

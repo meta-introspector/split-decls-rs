@@ -12,4 +12,4 @@ macro_rules! test_doc_comment_preserves_indents {
     };
 }
 
-test_doc_comment_preserves_indents!()
+test_doc_comment_preserves_indents!();

@@ -4,4 +4,4 @@ macro_rules! parser_invalid_pattern {
     };
 }
 
-parser_invalid_pattern!()
+parser_invalid_pattern!();

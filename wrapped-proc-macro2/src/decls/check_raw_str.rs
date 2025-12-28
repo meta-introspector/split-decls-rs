@@ -11,4 +11,4 @@ macro_rules! check_raw_str {
     };
 }
 
-check_raw_str!()
+check_raw_str!();

@@ -4,4 +4,4 @@ macro_rules! is_ascii_lowercase_hex {
     };
 }
 
-is_ascii_lowercase_hex!()
+is_ascii_lowercase_hex!();

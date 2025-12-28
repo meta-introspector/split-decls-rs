@@ -4,4 +4,4 @@ macro_rules! is_raw_identifier {
     };
 }
 
-is_raw_identifier!()
+is_raw_identifier!();

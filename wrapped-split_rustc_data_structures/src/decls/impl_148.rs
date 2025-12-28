@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ReversedGraph!();
         DirectedGraph!();
         Node!();
+        ReversedGraph!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_148 {
     };
 }
 
-impl_148!()
+impl_148!();

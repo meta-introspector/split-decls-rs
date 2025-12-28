@@ -4,4 +4,4 @@ macro_rules! NodeData {
     };
 }
 
-NodeData!()
+NodeData!();

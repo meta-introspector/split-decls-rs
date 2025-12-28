@@ -4,4 +4,4 @@ macro_rules! DT_HIOS {
     };
 }
 
-DT_HIOS!()
+DT_HIOS!();

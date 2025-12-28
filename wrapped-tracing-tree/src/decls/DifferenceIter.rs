@@ -4,4 +4,4 @@ macro_rules! DifferenceIter {
     };
 }
 
-DifferenceIter!()
+DifferenceIter!();

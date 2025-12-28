@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ExprField!();
+        AssocCtxt!();
+        FieldDef!();
         ForeignItem!();
-        WherePredicate!();
-        AssocItem!();
         Arm!();
         Variant!();
-        Item!();
         GenericParam!();
+        ExprField!();
+        Item!();
+        AssocItem!();
+        WherePredicate!();
         Param!();
-        FieldDef!();
-        AssocCtxt!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! macro_380 {
     };
 }
 
-macro_380!()
+macro_380!();

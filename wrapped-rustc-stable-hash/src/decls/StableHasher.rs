@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SipHasher128Hash!();
         FromStableHash!();
+        SipHasher128Hash!();
         ExtendedHasher!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! StableHasher {
     };
 }
 
-StableHasher!()
+StableHasher!();

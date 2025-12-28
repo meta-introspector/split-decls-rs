@@ -13,4 +13,4 @@ macro_rules! localize_statement_constraint {
     };
 }
 
-localize_statement_constraint!()
+localize_statement_constraint!();

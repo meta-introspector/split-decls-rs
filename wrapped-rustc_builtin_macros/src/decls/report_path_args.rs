@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DerivePathArgsList!();
         DerivePathArgsValue!();
+        DerivePathArgsList!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! report_path_args {
     };
 }
 
-report_path_args!()
+report_path_args!();

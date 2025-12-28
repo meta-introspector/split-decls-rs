@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TreeDesc!();
+        State!();
+        Strategy!();
+        StaticTreeDesc!();
         BitWriter!();
         Value!();
-        Strategy!();
-        State!();
-        StaticTreeDesc!();
+        TreeDesc!();
         DataType!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_162 {
     };
 }
 
-impl_162!()
+impl_162!();

@@ -4,4 +4,4 @@ macro_rules! AT_FDCWD {
     };
 }
 
-AT_FDCWD!()
+AT_FDCWD!();

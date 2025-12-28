@@ -4,4 +4,4 @@ macro_rules! R_CRIS_GNU_VTINHERIT {
     };
 }
 
-R_CRIS_GNU_VTINHERIT!()
+R_CRIS_GNU_VTINHERIT!();

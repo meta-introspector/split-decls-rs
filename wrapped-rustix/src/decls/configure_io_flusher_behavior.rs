@@ -11,4 +11,4 @@ macro_rules! configure_io_flusher_behavior {
     };
 }
 
-configure_io_flusher_behavior!()
+configure_io_flusher_behavior!();

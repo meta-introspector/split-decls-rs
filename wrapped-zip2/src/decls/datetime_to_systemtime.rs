@@ -11,4 +11,4 @@ macro_rules! datetime_to_systemtime {
     };
 }
 
-datetime_to_systemtime!()
+datetime_to_systemtime!();

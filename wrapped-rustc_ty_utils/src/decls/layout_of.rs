@@ -4,4 +4,4 @@ macro_rules! layout_of {
     };
 }
 
-layout_of!()
+layout_of!();

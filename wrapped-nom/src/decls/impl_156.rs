@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        Err!();
         Needed!();
+        Err!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_156 {
     };
 }
 
-impl_156!()
+impl_156!();

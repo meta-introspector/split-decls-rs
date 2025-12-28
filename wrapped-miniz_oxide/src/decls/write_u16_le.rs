@@ -4,4 +4,4 @@ macro_rules! write_u16_le {
     };
 }
 
-write_u16_le!()
+write_u16_le!();

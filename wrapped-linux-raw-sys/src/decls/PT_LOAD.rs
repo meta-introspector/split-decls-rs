@@ -4,4 +4,4 @@ macro_rules! PT_LOAD {
     };
 }
 
-PT_LOAD!()
+PT_LOAD!();

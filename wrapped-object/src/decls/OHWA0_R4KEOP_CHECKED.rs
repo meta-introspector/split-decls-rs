@@ -4,4 +4,4 @@ macro_rules! OHWA0_R4KEOP_CHECKED {
     };
 }
 
-OHWA0_R4KEOP_CHECKED!()
+OHWA0_R4KEOP_CHECKED!();

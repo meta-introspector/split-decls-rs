@@ -4,4 +4,4 @@ macro_rules! NT_LWPSTATUS {
     };
 }
 
-NT_LWPSTATUS!()
+NT_LWPSTATUS!();

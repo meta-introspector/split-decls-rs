@@ -11,4 +11,4 @@ macro_rules! stream_safe {
     };
 }
 
-stream_safe!()
+stream_safe!();

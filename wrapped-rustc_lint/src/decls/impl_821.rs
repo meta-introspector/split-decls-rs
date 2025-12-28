@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VariantSizeDifferencesDiag!();
         LateContext!();
+        VariantSizeDifferencesDiag!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_821 {
     };
 }
 
-impl_821!()
+impl_821!();

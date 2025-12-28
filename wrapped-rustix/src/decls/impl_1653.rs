@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawPid!();
         Pid!();
+        RawPid!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1653 {
     };
 }
 
-impl_1653!()
+impl_1653!();

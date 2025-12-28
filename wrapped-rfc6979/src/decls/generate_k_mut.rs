@@ -11,4 +11,4 @@ macro_rules! generate_k_mut {
     };
 }
 
-generate_k_mut!()
+generate_k_mut!();

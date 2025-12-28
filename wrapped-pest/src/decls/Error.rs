@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ErrorVariant!();
-        ParseAttempts!();
         InputLocation!();
         LineColLocation!();
+        ParseAttempts!();
+        ErrorVariant!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Error {
     };
 }
 
-Error!()
+Error!();

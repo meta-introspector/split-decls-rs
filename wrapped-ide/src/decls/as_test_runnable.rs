@@ -11,4 +11,4 @@ macro_rules! as_test_runnable {
     };
 }
 
-as_test_runnable!()
+as_test_runnable!();

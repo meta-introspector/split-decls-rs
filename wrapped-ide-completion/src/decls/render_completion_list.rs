@@ -11,4 +11,4 @@ macro_rules! render_completion_list {
     };
 }
 
-render_completion_list!()
+render_completion_list!();

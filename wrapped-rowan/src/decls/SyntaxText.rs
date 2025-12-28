@@ -11,4 +11,4 @@ macro_rules! SyntaxText {
     };
 }
 
-SyntaxText!()
+SyntaxText!();

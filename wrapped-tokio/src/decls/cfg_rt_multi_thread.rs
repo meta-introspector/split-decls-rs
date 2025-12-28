@@ -4,4 +4,4 @@ macro_rules! cfg_rt_multi_thread {
     };
 }
 
-cfg_rt_multi_thread!()
+cfg_rt_multi_thread!();

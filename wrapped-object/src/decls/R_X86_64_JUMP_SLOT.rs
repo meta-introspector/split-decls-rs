@@ -4,4 +4,4 @@ macro_rules! R_X86_64_JUMP_SLOT {
     };
 }
 
-R_X86_64_JUMP_SLOT!()
+R_X86_64_JUMP_SLOT!();

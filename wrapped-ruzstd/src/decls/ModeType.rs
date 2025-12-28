@@ -4,4 +4,4 @@ macro_rules! ModeType {
     };
 }
 
-ModeType!()
+ModeType!();

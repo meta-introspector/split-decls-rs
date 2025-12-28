@@ -4,4 +4,4 @@ macro_rules! warn_on_confusing_output_filename_flag {
     };
 }
 
-warn_on_confusing_output_filename_flag!()
+warn_on_confusing_output_filename_flag!();

@@ -4,4 +4,4 @@ macro_rules! R_SPARC_GNU_VTENTRY {
     };
 }
 
-R_SPARC_GNU_VTENTRY!()
+R_SPARC_GNU_VTENTRY!();

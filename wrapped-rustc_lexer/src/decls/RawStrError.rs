@@ -4,4 +4,4 @@ macro_rules! RawStrError {
     };
 }
 
-RawStrError!()
+RawStrError!();

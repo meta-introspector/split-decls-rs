@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        HasAttributes!();
         Value!();
         TokenStream!();
-        HasAttributes!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_arches {
     };
 }
 
-write_arches!()
+write_arches!();

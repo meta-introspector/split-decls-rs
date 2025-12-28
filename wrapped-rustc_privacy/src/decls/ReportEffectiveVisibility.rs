@@ -4,4 +4,4 @@ macro_rules! ReportEffectiveVisibility {
     };
 }
 
-ReportEffectiveVisibility!()
+ReportEffectiveVisibility!();

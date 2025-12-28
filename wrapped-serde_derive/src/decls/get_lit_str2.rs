@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ctxt!();
         Expr!();
         Symbol!();
-        Ctxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_lit_str2 {
     };
 }
 
-get_lit_str2!()
+get_lit_str2!();

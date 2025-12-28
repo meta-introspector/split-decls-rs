@@ -4,4 +4,4 @@ macro_rules! AddBounds {
     };
 }
 
-AddBounds!()
+AddBounds!();

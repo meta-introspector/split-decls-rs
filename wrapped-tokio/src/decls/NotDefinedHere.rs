@@ -4,4 +4,4 @@ macro_rules! NotDefinedHere {
     };
 }
 
-NotDefinedHere!()
+NotDefinedHere!();

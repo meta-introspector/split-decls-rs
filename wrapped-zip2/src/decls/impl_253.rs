@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
-        MaybeEncrypted!();
+        AesWriter!();
+        Zip64CentralDirectoryEndLocator!();
         EncryptWith!();
-        CompressionMethod!();
-        ZipFile!();
+        FileOptions!();
+        ZipFileData!();
         ZipRawValues!();
-        ZipLocalEntryBlock!();
-        Zip64ExtraFieldBlock!();
-        SimpleFileOptions!();
-        ZipCryptoWriter!();
+        Zip32CDEBlock!();
         ZipError!();
         Zip32CentralDirectoryEnd!();
-        AesWriter!();
-        Zip64CentralDirectoryEnd!();
-        Zip64CentralDirectoryEndLocator!();
-        AesVendorVersion!();
-        FileOptions!();
-        ExtendedFileOptions!();
-        ZipFileData!();
-        ZipResult!();
+        CompressionMethod!();
         DateTime!();
-        Zip32CDEBlock!();
+        ZipResult!();
+        AesVendorVersion!();
+        ZipFile!();
+        ExtendedFileOptions!();
+        Zip64ExtraFieldBlock!();
+        MaybeEncrypted!();
+        SimpleFileOptions!();
+        Zip64CentralDirectoryEnd!();
+        ZipLocalEntryBlock!();
+        ZipCryptoWriter!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

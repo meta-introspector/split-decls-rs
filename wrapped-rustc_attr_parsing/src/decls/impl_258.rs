@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        FinalizeContext!();
         Stage!();
+        FinalizeContext!();
+        AttributeParser!();
+        AcceptMapping!();
         AllowedTargets!();
         Combine!();
-        AttributeParser!();
         CombineAttributeParser!();
-        AcceptMapping!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_258 {
     };
 }
 
-impl_258!()
+impl_258!();

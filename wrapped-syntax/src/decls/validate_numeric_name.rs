@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxToken!();
         SyntaxError!();
+        SyntaxToken!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! validate_numeric_name {
     };
 }
 
-validate_numeric_name!()
+validate_numeric_name!();

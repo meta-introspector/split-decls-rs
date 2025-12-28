@@ -12,4 +12,4 @@ macro_rules! word_index_and_mask {
     };
 }
 
-word_index_and_mask!()
+word_index_and_mask!();

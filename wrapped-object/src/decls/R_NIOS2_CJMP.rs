@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_CJMP {
     };
 }
 
-R_NIOS2_CJMP!()
+R_NIOS2_CJMP!();

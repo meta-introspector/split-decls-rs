@@ -12,4 +12,4 @@ macro_rules! configure_capability_in_ambient_set {
     };
 }
 
-configure_capability_in_ambient_set!()
+configure_capability_in_ambient_set!();

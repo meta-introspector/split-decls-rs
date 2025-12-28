@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         FileHeader!();
+        XcoffComdat!();
+        ObjectComdat!();
+        XcoffComdatSectionIterator!();
+        ComdatKind!();
+        Result!();
+        SymbolIndex!();
         ReadRef!();
         SectionIterator!();
-        SymbolIndex!();
-        Result!();
-        ObjectComdat!();
-        ComdatKind!();
-        XcoffComdatSectionIterator!();
-        XcoffComdat!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_853 {
     };
 }
 
-impl_853!()
+impl_853!();

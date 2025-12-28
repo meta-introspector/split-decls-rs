@@ -4,4 +4,4 @@ macro_rules! type_variable {
     };
 }
 
-type_variable!()
+type_variable!();

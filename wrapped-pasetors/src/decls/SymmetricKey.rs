@@ -4,4 +4,4 @@ macro_rules! SymmetricKey {
     };
 }
 
-SymmetricKey!()
+SymmetricKey!();

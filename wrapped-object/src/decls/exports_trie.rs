@@ -4,4 +4,4 @@ macro_rules! exports_trie {
     };
 }
 
-exports_trie!()
+exports_trie!();

@@ -4,4 +4,4 @@ macro_rules! find_byte {
     };
 }
 
-find_byte!()
+find_byte!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Endian!();
-        Pod!();
         SymbolIndex!();
+        Pod!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Rela {
     };
 }
 
-Rela!()
+Rela!();

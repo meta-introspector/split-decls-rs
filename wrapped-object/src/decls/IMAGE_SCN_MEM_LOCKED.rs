@@ -4,4 +4,4 @@ macro_rules! IMAGE_SCN_MEM_LOCKED {
     };
 }
 
-IMAGE_SCN_MEM_LOCKED!()
+IMAGE_SCN_MEM_LOCKED!();

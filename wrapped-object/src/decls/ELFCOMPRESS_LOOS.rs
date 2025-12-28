@@ -4,4 +4,4 @@ macro_rules! ELFCOMPRESS_LOOS {
     };
 }
 
-ELFCOMPRESS_LOOS!()
+ELFCOMPRESS_LOOS!();

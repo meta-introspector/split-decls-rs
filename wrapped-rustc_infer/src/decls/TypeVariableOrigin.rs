@@ -4,4 +4,4 @@ macro_rules! TypeVariableOrigin {
     };
 }
 
-TypeVariableOrigin!()
+TypeVariableOrigin!();

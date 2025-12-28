@@ -11,4 +11,4 @@ macro_rules! diamond_post_order {
     };
 }
 
-diamond_post_order!()
+diamond_post_order!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CustomConfig!();
         DefaultConfig!();
+        CustomConfig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_284 {
     };
 }
 
-macro_284!()
+macro_284!();

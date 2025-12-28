@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Visibility!();
-        SimpleCx!();
+        CallConv!();
         UnnamedAddr!();
         SetFunctionCallConv!();
-        CallConv!();
+        SimpleCx!();
+        Visibility!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! declare_simple_fn {
     };
 }
 
-declare_simple_fn!()
+declare_simple_fn!();

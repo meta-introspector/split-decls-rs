@@ -4,4 +4,4 @@ macro_rules! type_usage_visitor {
     };
 }
 
-type_usage_visitor!()
+type_usage_visitor!();

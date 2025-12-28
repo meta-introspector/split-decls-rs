@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DefaultIx!();
-        Edge!();
         Directed!();
+        DefaultIx!();
         IdStorage!();
         Nullable!();
+        Edge!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MatrixGraph {
     };
 }
 
-MatrixGraph!()
+MatrixGraph!();

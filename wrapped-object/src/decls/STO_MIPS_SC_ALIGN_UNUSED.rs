@@ -4,4 +4,4 @@ macro_rules! STO_MIPS_SC_ALIGN_UNUSED {
     };
 }
 
-STO_MIPS_SC_ALIGN_UNUSED!()
+STO_MIPS_SC_ALIGN_UNUSED!();

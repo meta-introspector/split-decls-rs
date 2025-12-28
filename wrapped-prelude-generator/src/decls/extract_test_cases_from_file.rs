@@ -11,4 +11,4 @@ macro_rules! extract_test_cases_from_file {
     };
 }
 
-extract_test_cases_from_file!()
+extract_test_cases_from_file!();

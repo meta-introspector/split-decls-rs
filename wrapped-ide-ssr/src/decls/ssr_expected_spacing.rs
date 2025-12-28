@@ -4,4 +4,4 @@ macro_rules! ssr_expected_spacing {
     };
 }
 
-ssr_expected_spacing!()
+ssr_expected_spacing!();

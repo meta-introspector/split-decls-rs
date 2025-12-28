@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Matrix!();
+        WitnessMatrix!();
         UsefulnessCtxt!();
+        PlaceCtxt!();
         Constructor!();
+        PatCx!();
         IntRange!();
         PatOrWild!();
-        WitnessMatrix!();
-        PatCx!();
-        PlaceCtxt!();
+        Matrix!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! compute_exhaustiveness_and_usefulness {
     };
 }
 
-compute_exhaustiveness_and_usefulness!()
+compute_exhaustiveness_and_usefulness!();

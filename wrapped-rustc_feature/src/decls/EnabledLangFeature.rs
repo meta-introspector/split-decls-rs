@@ -4,4 +4,4 @@ macro_rules! EnabledLangFeature {
     };
 }
 
-EnabledLangFeature!()
+EnabledLangFeature!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        HeapString!();
         WIN32_ERROR!();
         HRESULT!();
+        Result!();
+        HeapString!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

@@ -4,4 +4,4 @@ macro_rules! invalid_guid {
     };
 }
 
-invalid_guid!()
+invalid_guid!();

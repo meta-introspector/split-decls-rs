@@ -11,4 +11,4 @@ macro_rules! ValueSerializeVec {
     };
 }
 
-ValueSerializeVec!()
+ValueSerializeVec!();

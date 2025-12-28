@@ -4,4 +4,4 @@ macro_rules! R_SPARC_GNU_VTINHERIT {
     };
 }
 
-R_SPARC_GNU_VTINHERIT!()
+R_SPARC_GNU_VTINHERIT!();

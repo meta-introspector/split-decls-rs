@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        StateBuilderNFA!();
-        LookSet!();
-        DFA!();
         NFA!();
-        Match!();
-        Look!();
-        State!();
         Start!();
+        StateBuilderNFA!();
+        Match!();
+        LookSet!();
         SparseSet!();
+        State!();
+        Look!();
+        DFA!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! add_nfa_states {
     };
 }
 
-add_nfa_states!()
+add_nfa_states!();

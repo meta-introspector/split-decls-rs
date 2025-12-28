@@ -4,4 +4,4 @@ macro_rules! SHF_ALPHA_GPREL {
     };
 }
 
-SHF_ALPHA_GPREL!()
+SHF_ALPHA_GPREL!();

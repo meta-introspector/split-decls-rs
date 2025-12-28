@@ -4,4 +4,4 @@ macro_rules! find_by_key {
     };
 }
 
-find_by_key!()
+find_by_key!();

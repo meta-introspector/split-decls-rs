@@ -4,4 +4,4 @@ macro_rules! file_serial {
     };
 }
 
-file_serial!()
+file_serial!();

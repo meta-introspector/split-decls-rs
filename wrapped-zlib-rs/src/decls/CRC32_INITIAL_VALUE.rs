@@ -4,4 +4,4 @@ macro_rules! CRC32_INITIAL_VALUE {
     };
 }
 
-CRC32_INITIAL_VALUE!()
+CRC32_INITIAL_VALUE!();

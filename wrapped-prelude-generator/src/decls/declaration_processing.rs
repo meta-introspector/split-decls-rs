@@ -4,4 +4,4 @@ macro_rules! declaration_processing {
     };
 }
 
-declaration_processing!()
+declaration_processing!();

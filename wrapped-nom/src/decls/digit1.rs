@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Streaming!();
         Needed!();
-        Parser!();
+        Error!();
+        Streaming!();
+        ParseError!();
+        Input!();
         IResult!();
         ErrorKind!();
-        Error!();
-        Input!();
-        AsChar!();
+        Parser!();
         Digit1!();
-        ParseError!();
+        AsChar!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! digit1 {
     };
 }
 
-digit1!()
+digit1!();

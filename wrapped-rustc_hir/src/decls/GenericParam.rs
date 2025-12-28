@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericParamSource!();
         GenericParamKind!();
+        GenericParamSource!();
         ParamName!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! GenericParam {
     };
 }
 
-GenericParam!()
+GenericParam!();

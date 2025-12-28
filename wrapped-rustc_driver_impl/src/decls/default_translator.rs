@@ -4,4 +4,4 @@ macro_rules! default_translator {
     };
 }
 
-default_translator!()
+default_translator!();

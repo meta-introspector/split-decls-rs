@@ -11,4 +11,4 @@ macro_rules! CallToFunctionWithRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     };
 }
 
-CallToFunctionWithRequiresUnsafeUnsafeOpInUnsafeFnAllowed!()
+CallToFunctionWithRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();

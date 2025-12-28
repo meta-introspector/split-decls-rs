@@ -4,4 +4,4 @@ macro_rules! tinyvec {
     };
 }
 
-tinyvec!()
+tinyvec!();

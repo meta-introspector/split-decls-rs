@@ -11,4 +11,4 @@ macro_rules! is_span_ctxt_call {
     };
 }
 
-is_span_ctxt_call!()
+is_span_ctxt_call!();

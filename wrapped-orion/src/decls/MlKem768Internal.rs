@@ -4,4 +4,4 @@ macro_rules! MlKem768Internal {
     };
 }
 
-MlKem768Internal!()
+MlKem768Internal!();

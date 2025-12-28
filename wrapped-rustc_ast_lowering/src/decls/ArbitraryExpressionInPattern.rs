@@ -4,4 +4,4 @@ macro_rules! ArbitraryExpressionInPattern {
     };
 }
 
-ArbitraryExpressionInPattern!()
+ArbitraryExpressionInPattern!();

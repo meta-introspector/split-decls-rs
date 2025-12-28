@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MockLayer!();
-        MockSubscriber!();
         MockLayerBuilder!();
         Expect!();
+        MockSubscriber!();
+        MockLayer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! mock {
     };
 }
 
-mock!()
+mock!();

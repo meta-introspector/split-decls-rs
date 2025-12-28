@@ -4,4 +4,4 @@ macro_rules! zero_low_word {
     };
 }
 
-zero_low_word!()
+zero_low_word!();

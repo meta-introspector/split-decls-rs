@@ -12,4 +12,4 @@ macro_rules! circular_tuple_windows {
     };
 }
 
-circular_tuple_windows!()
+circular_tuple_windows!();

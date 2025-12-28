@@ -11,4 +11,4 @@ macro_rules! validate_zlib_header {
     };
 }
 
-validate_zlib_header!()
+validate_zlib_header!();

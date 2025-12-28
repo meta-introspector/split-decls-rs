@@ -4,4 +4,4 @@ macro_rules! IsThirPolymorphic {
     };
 }
 
-IsThirPolymorphic!()
+IsThirPolymorphic!();

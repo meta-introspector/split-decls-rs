@@ -4,4 +4,4 @@ macro_rules! find_source_directory {
     };
 }
 
-find_source_directory!()
+find_source_directory!();

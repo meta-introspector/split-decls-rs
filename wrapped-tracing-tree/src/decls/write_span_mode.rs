@@ -11,4 +11,4 @@ macro_rules! write_span_mode {
     };
 }
 
-write_span_mode!()
+write_span_mode!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Rust2024IncompatiblePat!();
-        PatMigration!();
         Rust2024IncompatiblePatSugg!();
+        PatMigration!();
+        Rust2024IncompatiblePat!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_336 {
     };
 }
 
-impl_336!()
+impl_336!();

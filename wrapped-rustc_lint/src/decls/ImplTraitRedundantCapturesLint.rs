@@ -4,4 +4,4 @@ macro_rules! ImplTraitRedundantCapturesLint {
     };
 }
 
-ImplTraitRedundantCapturesLint!()
+ImplTraitRedundantCapturesLint!();

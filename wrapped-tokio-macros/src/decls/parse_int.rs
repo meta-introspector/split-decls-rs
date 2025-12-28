@@ -4,4 +4,4 @@ macro_rules! parse_int {
     };
 }
 
-parse_int!()
+parse_int!();

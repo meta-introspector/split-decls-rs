@@ -4,4 +4,4 @@ macro_rules! CmseEntryGeneric {
     };
 }
 
-CmseEntryGeneric!()
+CmseEntryGeneric!();

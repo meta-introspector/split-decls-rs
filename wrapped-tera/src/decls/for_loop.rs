@@ -4,4 +4,4 @@ macro_rules! for_loop {
     };
 }
 
-for_loop!()
+for_loop!();

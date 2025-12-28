@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ArmCall!();
         InterruptKind!();
         ExternAbi!();
-        ArmCall!();
         X86Call!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! CanonAbi {
     };
 }
 
-CanonAbi!()
+CanonAbi!();

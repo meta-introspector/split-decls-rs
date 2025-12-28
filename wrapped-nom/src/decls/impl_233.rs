@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        OutputMode!();
-        ErrorKind!();
-        Error!();
-        SeparatedList0!();
-        PResult!();
-        Parser!();
-        Check!();
-        ParseError!();
-        Input!();
         OutputM!();
+        PResult!();
         Err!();
+        Check!();
+        ErrorKind!();
+        Input!();
+        Error!();
+        ParseError!();
+        OutputMode!();
+        Parser!();
+        SeparatedList0!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_233 {
     };
 }
 
-impl_233!()
+impl_233!();

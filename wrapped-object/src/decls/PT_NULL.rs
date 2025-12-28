@@ -4,4 +4,4 @@ macro_rules! PT_NULL {
     };
 }
 
-PT_NULL!()
+PT_NULL!();

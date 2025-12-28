@@ -4,4 +4,4 @@ macro_rules! EM_VAX {
     };
 }
 
-EM_VAX!()
+EM_VAX!();

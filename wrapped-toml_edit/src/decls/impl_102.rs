@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        InlineTable!();
-        KeyMut!();
-        OccupiedEntry!();
-        Value!();
-        Entry!();
-        Item!();
-        Iter!();
-        Key!();
-        IterMut!();
         VacantEntry!();
         TableLike!();
+        Key!();
+        OccupiedEntry!();
+        Item!();
+        InlineTable!();
+        IterMut!();
+        Entry!();
+        KeyMut!();
+        Iter!();
+        Value!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

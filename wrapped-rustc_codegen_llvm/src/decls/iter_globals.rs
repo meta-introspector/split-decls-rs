@@ -11,4 +11,4 @@ macro_rules! iter_globals {
     };
 }
 
-iter_globals!()
+iter_globals!();

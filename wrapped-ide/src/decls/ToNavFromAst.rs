@@ -4,4 +4,4 @@ macro_rules! ToNavFromAst {
     };
 }
 
-ToNavFromAst!()
+ToNavFromAst!();

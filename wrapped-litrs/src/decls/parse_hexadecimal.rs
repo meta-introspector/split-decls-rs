@@ -4,4 +4,4 @@ macro_rules! parse_hexadecimal {
     };
 }
 
-parse_hexadecimal!()
+parse_hexadecimal!();

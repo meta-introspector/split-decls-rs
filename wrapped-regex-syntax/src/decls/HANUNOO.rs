@@ -4,4 +4,4 @@ macro_rules! HANUNOO {
     };
 }
 
-HANUNOO!()
+HANUNOO!();

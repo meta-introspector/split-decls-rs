@@ -4,4 +4,4 @@ macro_rules! RHF_NONE {
     };
 }
 
-RHF_NONE!()
+RHF_NONE!();

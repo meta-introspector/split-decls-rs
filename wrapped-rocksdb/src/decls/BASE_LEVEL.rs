@@ -11,4 +11,4 @@ macro_rules! BASE_LEVEL {
     };
 }
 
-BASE_LEVEL!()
+BASE_LEVEL!();

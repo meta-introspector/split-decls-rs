@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SizeInfo!();
-        TrailingSliceLayout!();
         SliceDst!();
+        SizeInfo!();
         DstLayout!();
+        TrailingSliceLayout!();
         PointerMetadata!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_433 {
     };
 }
 
-impl_433!()
+impl_433!();

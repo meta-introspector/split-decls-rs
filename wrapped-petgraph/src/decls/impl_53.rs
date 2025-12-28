@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GraphRef!();
-        Reversed!();
-        Topo!();
         Create!();
         VisitMap!();
+        Reversed!();
+        GraphRef!();
+        Topo!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

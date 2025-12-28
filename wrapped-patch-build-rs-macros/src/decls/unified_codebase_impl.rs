@@ -35,4 +35,4 @@ macro_rules! unified_codebase_impl {
     };
 }
 
-unified_codebase_impl!()
+unified_codebase_impl!();

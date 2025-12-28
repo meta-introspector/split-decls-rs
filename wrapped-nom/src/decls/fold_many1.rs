@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         Parser!();
+        ParseError!();
+        Needed!();
         IResult!();
         Input!();
-        Needed!();
-        ParseError!();
-        FoldMany1!();
         Error!();
+        ErrorKind!();
+        FoldMany1!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! fold_many1 {
     };
 }
 
-fold_many1!()
+fold_many1!();

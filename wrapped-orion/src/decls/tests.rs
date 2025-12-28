@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        KemTester!();
         KeyPair!();
         EncapsulationKey!();
-        TestableKem!();
-        KemTester!();
-        XWing!();
         UnknownCryptoError!();
+        XWing!();
+        TestableKem!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

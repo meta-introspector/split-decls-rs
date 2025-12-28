@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        MatchTreeBranch!();
         PatternExtraData!();
         MatchTreeSubBranch!();
         Candidate!();
-        MatchTreeBranch!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_129 {
     };
 }
 
-impl_129!()
+impl_129!();

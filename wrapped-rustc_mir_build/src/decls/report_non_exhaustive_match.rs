@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         NonExhaustiveMatchAllArmsGuarded!();
         AdtDefinedHere!();
-        Variant!();
         PatCtxt!();
         NonExhaustivePatternsTypeNotEmpty!();
+        Variant!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! report_non_exhaustive_match {
     };
 }
 
-report_non_exhaustive_match!()
+report_non_exhaustive_match!();

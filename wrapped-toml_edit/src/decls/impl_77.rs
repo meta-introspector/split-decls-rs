@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         InlineTable!();
-        Value!();
         Item!();
-        Table!();
         Index!();
         Key!();
+        Table!();
+        Value!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

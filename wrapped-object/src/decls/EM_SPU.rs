@@ -4,4 +4,4 @@ macro_rules! EM_SPU {
     };
 }
 
-EM_SPU!()
+EM_SPU!();

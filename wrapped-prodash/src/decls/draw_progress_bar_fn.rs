@@ -4,4 +4,4 @@ macro_rules! draw_progress_bar_fn {
     };
 }
 
-draw_progress_bar_fn!()
+draw_progress_bar_fn!();

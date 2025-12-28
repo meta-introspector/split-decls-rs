@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Walkable!();
+        CaptureBy!();
         Expr!();
         Const!();
-        CaptureBy!();
-        CoroutineKind!();
-        FnDecl!();
         ClosureBinder!();
+        FnDecl!();
+        CoroutineKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Closure {
     };
 }
 
-Closure!()
+Closure!();

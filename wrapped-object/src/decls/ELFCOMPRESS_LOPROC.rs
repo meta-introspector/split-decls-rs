@@ -4,4 +4,4 @@ macro_rules! ELFCOMPRESS_LOPROC {
     };
 }
 
-ELFCOMPRESS_LOPROC!()
+ELFCOMPRESS_LOPROC!();

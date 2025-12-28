@@ -4,4 +4,4 @@ macro_rules! DT_IA_64_PLT_RESERVE {
     };
 }
 
-DT_IA_64_PLT_RESERVE!()
+DT_IA_64_PLT_RESERVE!();

@@ -4,4 +4,4 @@ macro_rules! NodeTrait {
     };
 }
 
-NodeTrait!()
+NodeTrait!();

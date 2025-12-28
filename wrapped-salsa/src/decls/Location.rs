@@ -4,4 +4,4 @@ macro_rules! Location {
     };
 }
 
-Location!()
+Location!();

@@ -4,4 +4,4 @@ macro_rules! check_socket_for_blocking {
     };
 }
 
-check_socket_for_blocking!()
+check_socket_for_blocking!();

@@ -11,4 +11,4 @@ macro_rules! to_json_impl_num {
     };
 }
 
-to_json_impl_num!()
+to_json_impl_num!();

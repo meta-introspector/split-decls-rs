@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Err!();
-        Permutation!();
-        Tag!();
-        IResult!();
-        Needed!();
         ErrorKind!();
         Error!();
+        Needed!();
+        Tag!();
+        IResult!();
+        Permutation!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! permutation_test {
     };
 }
 
-permutation_test!()
+permutation_test!();

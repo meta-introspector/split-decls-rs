@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Fold!();
-        TokenId!();
         InlayHint!();
+        TokenId!();
+        Fold!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StaticIndexedFile {
     };
 }
 
-StaticIndexedFile!()
+StaticIndexedFile!();

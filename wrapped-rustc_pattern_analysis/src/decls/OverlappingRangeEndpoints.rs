@@ -11,4 +11,4 @@ macro_rules! OverlappingRangeEndpoints {
     };
 }
 
-OverlappingRangeEndpoints!()
+OverlappingRangeEndpoints!();

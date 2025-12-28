@@ -4,4 +4,4 @@ macro_rules! R_LARCH_SOP_SUB {
     };
 }
 
-R_LARCH_SOP_SUB!()
+R_LARCH_SOP_SUB!();

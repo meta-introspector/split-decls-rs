@@ -4,4 +4,4 @@ macro_rules! create_object_file {
     };
 }
 
-create_object_file!()
+create_object_file!();

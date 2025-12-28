@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AttributeReader!();
-        AttributeIndexIterator!();
         AttributesSubsubsection!();
+        AttributeIndexIterator!();
+        AttributeReader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_458 {
     };
 }
 
-impl_458!()
+impl_458!();

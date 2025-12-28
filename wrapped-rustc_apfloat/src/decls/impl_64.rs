@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Fallback!();
-        Category!();
-        Float!();
+        FloatConvert!();
         Round!();
+        Category!();
+        Fallback!();
+        Float!();
         DoubleFloat!();
+        StatusAnd!();
         ParseError!();
         ExpInt!();
-        FloatConvert!();
-        StatusAnd!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_64 {
     };
 }
 
-impl_64!()
+impl_64!();

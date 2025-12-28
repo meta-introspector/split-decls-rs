@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        METADATA_HEADER!();
         Blob!();
-        Table!();
-        IMAGE_COR20_HEADER!();
-        IMAGE_DOS_HEADER!();
-        AsRow!();
         Row!();
-        IMAGE_SECTION_HEADER!();
-        IMAGE_FILE_HEADER!();
-        IMAGE_OPTIONAL_HEADER64!();
+        Reader!();
         File!();
-        IMAGE_OPTIONAL_HEADER32!();
         RowIterator!();
+        METADATA_HEADER!();
+        IMAGE_OPTIONAL_HEADER64!();
+        IMAGE_FILE_HEADER!();
+        IMAGE_COR20_HEADER!();
+        AsRow!();
+        IMAGE_OPTIONAL_HEADER32!();
+        Table!();
+        IMAGE_SECTION_HEADER!();
+        IMAGE_DOS_HEADER!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_441 {
     };
 }
 
-impl_441!()
+impl_441!();

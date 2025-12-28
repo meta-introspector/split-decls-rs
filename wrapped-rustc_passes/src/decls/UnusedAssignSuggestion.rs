@@ -4,4 +4,4 @@ macro_rules! UnusedAssignSuggestion {
     };
 }
 
-UnusedAssignSuggestion!()
+UnusedAssignSuggestion!();

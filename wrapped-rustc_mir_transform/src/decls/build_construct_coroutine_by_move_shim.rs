@@ -5,4 +5,4 @@ macro_rules! build_construct_coroutine_by_move_shim {
     };
 }
 
-build_construct_coroutine_by_move_shim!()
+build_construct_coroutine_by_move_shim!();

@@ -13,4 +13,4 @@ macro_rules! RegionResolutionError {
     };
 }
 
-RegionResolutionError!()
+RegionResolutionError!();

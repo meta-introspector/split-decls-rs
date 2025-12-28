@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Sccs!();
+        MinMaxes!();
         TestGraph!();
         MinMaxIn!();
-        MinMaxes!();
+        Sccs!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_min_max_in {
     };
 }
 
-test_min_max_in!()
+test_min_max_in!();

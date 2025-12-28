@@ -11,4 +11,4 @@ macro_rules! all_simple_paths {
     };
 }
 
-all_simple_paths!()
+all_simple_paths!();

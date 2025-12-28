@@ -11,4 +11,4 @@ macro_rules! join_context_neither {
     };
 }
 
-join_context_neither!()
+join_context_neither!();

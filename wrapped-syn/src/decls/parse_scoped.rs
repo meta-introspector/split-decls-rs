@@ -12,4 +12,4 @@ macro_rules! parse_scoped {
     };
 }
 
-parse_scoped!()
+parse_scoped!();

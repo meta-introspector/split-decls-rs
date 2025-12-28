@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Path!();
+        FieldlessVariantsStrategy!();
         Bounds!();
         MethodDef!();
-        Path!();
-        TraitDef!();
-        FieldlessVariantsStrategy!();
         PathKind!();
+        TraitDef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! expand_deriving_hash {
     };
 }
 
-expand_deriving_hash!()
+expand_deriving_hash!();

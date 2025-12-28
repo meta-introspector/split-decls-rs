@@ -4,4 +4,4 @@ macro_rules! MoveSizeLimitParser {
     };
 }
 
-MoveSizeLimitParser!()
+MoveSizeLimitParser!();

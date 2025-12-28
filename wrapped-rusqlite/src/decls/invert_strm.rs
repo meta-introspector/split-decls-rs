@@ -11,4 +11,4 @@ macro_rules! invert_strm {
     };
 }
 
-invert_strm!()
+invert_strm!();

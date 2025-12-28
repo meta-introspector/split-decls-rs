@@ -4,4 +4,4 @@ macro_rules! MAX_PACKAGE_NAME {
     };
 }
 
-MAX_PACKAGE_NAME!()
+MAX_PACKAGE_NAME!();

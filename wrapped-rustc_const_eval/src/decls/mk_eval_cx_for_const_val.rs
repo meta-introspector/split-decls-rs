@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        OpTy!();
         CompileTimeInterpCx!();
         CanAccessMutGlobal!();
-        OpTy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! mk_eval_cx_for_const_val {
     };
 }
 
-mk_eval_cx_for_const_val!()
+mk_eval_cx_for_const_val!();

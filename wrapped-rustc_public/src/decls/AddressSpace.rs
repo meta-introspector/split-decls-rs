@@ -4,4 +4,4 @@ macro_rules! AddressSpace {
     };
 }
 
-AddressSpace!()
+AddressSpace!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UTerm!();
         B1!();
+        UTerm!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_411 {
     };
 }
 
-impl_411!()
+impl_411!();

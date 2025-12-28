@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Builder!();
         Version!();
         Variant!();
         Uuid!();
-        Builder!();
         Bytes!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

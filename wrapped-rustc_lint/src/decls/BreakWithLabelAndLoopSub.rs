@@ -4,4 +4,4 @@ macro_rules! BreakWithLabelAndLoopSub {
     };
 }
 
-BreakWithLabelAndLoopSub!()
+BreakWithLabelAndLoopSub!();

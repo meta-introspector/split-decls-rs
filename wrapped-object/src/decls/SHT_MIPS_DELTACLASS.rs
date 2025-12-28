@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_DELTACLASS {
     };
 }
 
-SHT_MIPS_DELTACLASS!()
+SHT_MIPS_DELTACLASS!();

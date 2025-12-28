@@ -11,4 +11,4 @@ macro_rules! pre_wasi_self_contained {
     };
 }
 
-pre_wasi_self_contained!()
+pre_wasi_self_contained!();

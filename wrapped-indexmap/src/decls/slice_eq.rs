@@ -4,4 +4,4 @@ macro_rules! slice_eq {
     };
 }
 
-slice_eq!()
+slice_eq!();

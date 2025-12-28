@@ -4,4 +4,4 @@ macro_rules! TimeTraceProfiler {
     };
 }
 
-TimeTraceProfiler!()
+TimeTraceProfiler!();

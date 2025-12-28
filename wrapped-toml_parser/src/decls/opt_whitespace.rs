@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ErrorSink!();
         EventReceiver!();
-        TokenKind!();
         Stream!();
+        TokenKind!();
+        ErrorSink!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! opt_whitespace {
     };
 }
 
-opt_whitespace!()
+opt_whitespace!();

@@ -4,4 +4,4 @@ macro_rules! ffi {
     };
 }
 
-ffi!()
+ffi!();

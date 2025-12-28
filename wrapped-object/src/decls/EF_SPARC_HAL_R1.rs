@@ -4,4 +4,4 @@ macro_rules! EF_SPARC_HAL_R1 {
     };
 }
 
-EF_SPARC_HAL_R1!()
+EF_SPARC_HAL_R1!();

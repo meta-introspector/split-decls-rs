@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NFA!();
+        StateID!();
         DFA!();
+        NFA!();
         SmallIndex!();
         NonMaxUsize!();
-        StateID!();
         PikeVM!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! FollowEpsilon {
     };
 }
 
-FollowEpsilon!()
+FollowEpsilon!();

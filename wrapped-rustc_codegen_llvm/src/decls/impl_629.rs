@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LlvmCodegenBackend!();
         ModuleLlvm!();
         OwnedTargetMachine!();
         ParseTargetMachineConfig!();
+        LlvmCodegenBackend!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_629 {
     };
 }
 
-impl_629!()
+impl_629!();

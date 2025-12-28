@@ -4,4 +4,4 @@ macro_rules! R_ARM_LDR_SBREL_11_0 {
     };
 }
 
-R_ARM_LDR_SBREL_11_0!()
+R_ARM_LDR_SBREL_11_0!();

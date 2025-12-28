@@ -4,4 +4,4 @@ macro_rules! operator {
     };
 }
 
-operator!()
+operator!();

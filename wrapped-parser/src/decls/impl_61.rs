@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LexError!();
         LexedStr!();
+        LexError!();
         Converter!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

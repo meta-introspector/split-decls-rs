@@ -11,4 +11,4 @@ macro_rules! encode_unix_timestamp_millis {
     };
 }
 
-encode_unix_timestamp_millis!()
+encode_unix_timestamp_millis!();

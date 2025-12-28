@@ -11,4 +11,4 @@ macro_rules! dep_node_debug {
     };
 }
 
-dep_node_debug!()
+dep_node_debug!();

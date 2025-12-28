@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MatchFinder!();
         Match!();
+        MatchFinder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! print_match_debug_info {
     };
 }
 
-print_match_debug_info!()
+print_match_debug_info!();

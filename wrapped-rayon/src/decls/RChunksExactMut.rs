@@ -4,4 +4,4 @@ macro_rules! RChunksExactMut {
     };
 }
 
-RChunksExactMut!()
+RChunksExactMut!();

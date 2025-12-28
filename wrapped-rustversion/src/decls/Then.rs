@@ -4,4 +4,4 @@ macro_rules! Then {
     };
 }
 
-Then!()
+Then!();

@@ -11,4 +11,4 @@ macro_rules! count_raw {
     };
 }
 
-count_raw!()
+count_raw!();

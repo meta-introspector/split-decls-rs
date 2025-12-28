@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Item!();
         InlineOccupiedEntry!();
-        KeyMut!();
         Value!();
         OccupiedEntry!();
-        Item!();
+        KeyMut!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

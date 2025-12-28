@@ -4,4 +4,4 @@ macro_rules! xmm_reg_index {
     };
 }
 
-xmm_reg_index!()
+xmm_reg_index!();

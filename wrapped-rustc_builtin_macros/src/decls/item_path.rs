@@ -4,4 +4,4 @@ macro_rules! item_path {
     };
 }
 
-item_path!()
+item_path!();

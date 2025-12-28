@@ -4,4 +4,4 @@ macro_rules! seek_from {
     };
 }
 
-seek_from!()
+seek_from!();

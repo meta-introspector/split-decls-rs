@@ -4,4 +4,4 @@ macro_rules! fence {
     };
 }
 
-fence!()
+fence!();

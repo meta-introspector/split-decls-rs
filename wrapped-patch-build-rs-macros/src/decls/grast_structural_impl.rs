@@ -52,4 +52,4 @@ SELECT ?item1 ?item2 ?hash WHERE {{
     };
 }
 
-grast_structural_impl!()
+grast_structural_impl!();

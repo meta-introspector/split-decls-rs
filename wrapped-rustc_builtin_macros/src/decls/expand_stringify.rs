@@ -4,4 +4,4 @@ macro_rules! expand_stringify {
     };
 }
 
-expand_stringify!()
+expand_stringify!();

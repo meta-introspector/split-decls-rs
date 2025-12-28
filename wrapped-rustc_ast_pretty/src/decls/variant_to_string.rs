@@ -4,4 +4,4 @@ macro_rules! variant_to_string {
     };
 }
 
-variant_to_string!()
+variant_to_string!();

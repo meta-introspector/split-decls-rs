@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Parser!();
-        Err!();
-        IResult!();
-        Tag!();
         ErrorKind!();
         Needed!();
+        Err!();
+        Parser!();
+        Tag!();
+        IResult!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! tuple_test {
     };
 }
 
-tuple_test!()
+tuple_test!();

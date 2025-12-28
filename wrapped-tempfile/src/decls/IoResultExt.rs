@@ -4,4 +4,4 @@ macro_rules! IoResultExt {
     };
 }
 
-IoResultExt!()
+IoResultExt!();

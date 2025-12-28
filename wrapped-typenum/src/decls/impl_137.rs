@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        NonZero!();
         Z0!();
         Max!();
-        Unsigned!();
         PInt!();
-        NonZero!();
+        Unsigned!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_137 {
     };
 }
 
-impl_137!()
+impl_137!();

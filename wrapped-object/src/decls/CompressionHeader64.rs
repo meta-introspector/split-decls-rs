@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Section!();
+        U64Bytes!();
         Note!();
         Endian!();
-        U64Bytes!();
         U32Bytes!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! CompressionHeader64 {
     };
 }
 
-CompressionHeader64!()
+CompressionHeader64!();

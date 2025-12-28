@@ -4,4 +4,4 @@ macro_rules! IfLetRescope {
     };
 }
 
-IfLetRescope!()
+IfLetRescope!();

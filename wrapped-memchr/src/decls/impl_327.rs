@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Pair!();
-        HeuristicFrequencyRank!();
-        Finder!();
-        PrefilterConfig!();
-        Searcher!();
         Prefilter!();
-        PrefilterState!();
+        Pair!();
         TwoWayWithPrefilter!();
+        PrefilterConfig!();
+        HeuristicFrequencyRank!();
+        Searcher!();
+        PrefilterState!();
+        Finder!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_327 {
     };
 }
 
-impl_327!()
+impl_327!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        WordLock!();
+        ThreadParkerT!();
         UnparkHandleT!();
         ThreadData!();
-        ThreadParkerT!();
-        WordLock!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! deadlock_impl {
     };
 }
 
-deadlock_impl!()
+deadlock_impl!();

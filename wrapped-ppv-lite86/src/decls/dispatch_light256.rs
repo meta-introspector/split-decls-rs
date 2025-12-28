@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Machine!();
         GenericMachine!();
+        Machine!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! dispatch_light256 {
     };
 }
 
-dispatch_light256!()
+dispatch_light256!();

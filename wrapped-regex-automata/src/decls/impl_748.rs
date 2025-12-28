@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Memchr2!();
-        Memchr3!();
-        ByteSet!();
-        Memmem!();
-        AhoCorasick!();
-        Memchr!();
-        Teddy!();
         MatchKind!();
+        Memchr3!();
+        Teddy!();
         Choice!();
+        Memchr!();
+        AhoCorasick!();
+        Memchr2!();
+        Memmem!();
+        ByteSet!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_748 {
     };
 }
 
-impl_748!()
+impl_748!();

@@ -4,4 +4,4 @@ macro_rules! bench_fixture {
     };
 }
 
-bench_fixture!()
+bench_fixture!();

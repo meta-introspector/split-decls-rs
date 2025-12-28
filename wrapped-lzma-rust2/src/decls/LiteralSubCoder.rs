@@ -4,4 +4,4 @@ macro_rules! LiteralSubCoder {
     };
 }
 
-LiteralSubCoder!()
+LiteralSubCoder!();

@@ -4,4 +4,4 @@ macro_rules! InlineParent {
     };
 }
 
-InlineParent!()
+InlineParent!();

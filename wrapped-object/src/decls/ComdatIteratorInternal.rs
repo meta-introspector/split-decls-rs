@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        WasmComdatIterator!();
-        MachOComdatIterator32!();
-        PeComdatIterator64!();
         ReadRef!();
-        CoffComdatIterator!();
+        CoffBigComdatIterator!();
         Endianness!();
-        MachO32!();
+        MachOComdatIterator32!();
+        ElfComdatIterator32!();
         PeComdatIterator32!();
         XcoffComdatIterator32!();
-        MachO64!();
         XcoffComdatIterator64!();
-        ElfComdatIterator64!();
-        CoffBigComdatIterator!();
         MachOComdatIterator64!();
-        ElfComdatIterator32!();
+        PeComdatIterator64!();
+        ElfComdatIterator64!();
+        MachO64!();
+        WasmComdatIterator!();
+        MachO32!();
+        CoffComdatIterator!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! ComdatIteratorInternal {
     };
 }
 
-ComdatIteratorInternal!()
+ComdatIteratorInternal!();

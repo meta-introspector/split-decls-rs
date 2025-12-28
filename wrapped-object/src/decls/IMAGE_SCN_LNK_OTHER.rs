@@ -4,4 +4,4 @@ macro_rules! IMAGE_SCN_LNK_OTHER {
     };
 }
 
-IMAGE_SCN_LNK_OTHER!()
+IMAGE_SCN_LNK_OTHER!();

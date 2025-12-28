@@ -4,4 +4,4 @@ macro_rules! MachineSize {
     };
 }
 
-MachineSize!()
+MachineSize!();

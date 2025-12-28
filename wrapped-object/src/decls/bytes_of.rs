@@ -11,4 +11,4 @@ macro_rules! bytes_of {
     };
 }
 
-bytes_of!()
+bytes_of!();

@@ -4,4 +4,4 @@ macro_rules! props {
     };
 }
 
-props!()
+props!();

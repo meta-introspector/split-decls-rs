@@ -12,4 +12,4 @@ macro_rules! def_to_ty {
     };
 }
 
-def_to_ty!()
+def_to_ty!();

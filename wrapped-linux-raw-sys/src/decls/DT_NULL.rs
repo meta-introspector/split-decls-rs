@@ -4,4 +4,4 @@ macro_rules! DT_NULL {
     };
 }
 
-DT_NULL!()
+DT_NULL!();

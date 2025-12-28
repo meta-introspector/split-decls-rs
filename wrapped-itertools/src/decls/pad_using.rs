@@ -11,4 +11,4 @@ macro_rules! pad_using {
     };
 }
 
-pad_using!()
+pad_using!();

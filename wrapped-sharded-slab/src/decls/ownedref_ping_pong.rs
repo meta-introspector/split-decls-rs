@@ -11,4 +11,4 @@ macro_rules! ownedref_ping_pong {
     };
 }
 
-ownedref_ping_pong!()
+ownedref_ping_pong!();

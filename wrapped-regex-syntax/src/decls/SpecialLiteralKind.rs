@@ -4,4 +4,4 @@ macro_rules! SpecialLiteralKind {
     };
 }
 
-SpecialLiteralKind!()
+SpecialLiteralKind!();

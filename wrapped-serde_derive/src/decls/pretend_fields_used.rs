@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Data!();
-        Style!();
         Container!();
+        Style!();
+        Data!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! pretend_fields_used {
     };
 }
 
-pretend_fields_used!()
+pretend_fields_used!();

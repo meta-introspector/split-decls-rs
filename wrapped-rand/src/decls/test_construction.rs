@@ -11,4 +11,4 @@ macro_rules! test_construction {
     };
 }
 
-test_construction!()
+test_construction!();

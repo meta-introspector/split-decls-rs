@@ -4,4 +4,4 @@ macro_rules! ONE_SLEEPING {
     };
 }
 
-ONE_SLEEPING!()
+ONE_SLEEPING!();

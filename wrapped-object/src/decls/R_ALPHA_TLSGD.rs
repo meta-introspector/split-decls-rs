@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_TLSGD {
     };
 }
 
-R_ALPHA_TLSGD!()
+R_ALPHA_TLSGD!();

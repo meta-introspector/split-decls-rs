@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Package!();
         TargetKind!();
+        Package!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TargetData {
     };
 }
 
-TargetData!()
+TargetData!();

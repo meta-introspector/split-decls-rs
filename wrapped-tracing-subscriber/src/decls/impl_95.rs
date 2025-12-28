@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Context!();
-        SpanRef!();
-        Scope!();
         Layer!();
+        Scope!();
         LookupSpan!();
+        SpanRef!();
+        Context!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_95 {
     };
 }
 
-impl_95!()
+impl_95!();

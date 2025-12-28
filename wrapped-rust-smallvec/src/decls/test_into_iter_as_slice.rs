@@ -11,4 +11,4 @@ macro_rules! test_into_iter_as_slice {
     };
 }
 
-test_into_iter_as_slice!()
+test_into_iter_as_slice!();

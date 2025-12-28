@@ -4,4 +4,4 @@ macro_rules! MapWithIter {
     };
 }
 
-MapWithIter!()
+MapWithIter!();

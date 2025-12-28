@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        YesS3!();
         BSwap!();
+        YesS3!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_162 {
     };
 }
 
-impl_162!()
+impl_162!();

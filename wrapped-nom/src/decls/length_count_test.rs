@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ErrorKind!();
-        Tag!();
-        IResult!();
         Needed!();
         Err!();
+        IResult!();
+        ErrorKind!();
+        Tag!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! length_count_test {
     };
 }
 
-length_count_test!()
+length_count_test!();

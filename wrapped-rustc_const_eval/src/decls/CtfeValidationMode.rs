@@ -4,4 +4,4 @@ macro_rules! CtfeValidationMode {
     };
 }
 
-CtfeValidationMode!()
+CtfeValidationMode!();

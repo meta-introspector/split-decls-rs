@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Drain!();
         SparseChunk!();
+        Drain!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_108 {
     };
 }
 
-impl_108!()
+impl_108!();

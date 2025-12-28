@@ -11,4 +11,4 @@ macro_rules! encode_key {
     };
 }
 
-encode_key!()
+encode_key!();

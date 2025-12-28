@@ -4,4 +4,4 @@ macro_rules! write_to_file {
     };
 }
 
-write_to_file!()
+write_to_file!();

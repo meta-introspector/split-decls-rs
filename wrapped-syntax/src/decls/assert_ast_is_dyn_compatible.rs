@@ -11,4 +11,4 @@ macro_rules! assert_ast_is_dyn_compatible {
     };
 }
 
-assert_ast_is_dyn_compatible!()
+assert_ast_is_dyn_compatible!();

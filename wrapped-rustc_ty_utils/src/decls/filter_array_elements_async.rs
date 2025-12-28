@@ -4,4 +4,4 @@ macro_rules! filter_array_elements_async {
     };
 }
 
-filter_array_elements_async!()
+filter_array_elements_async!();

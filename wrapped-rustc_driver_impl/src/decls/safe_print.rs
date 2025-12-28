@@ -4,4 +4,4 @@ macro_rules! safe_print {
     };
 }
 
-safe_print!()
+safe_print!();

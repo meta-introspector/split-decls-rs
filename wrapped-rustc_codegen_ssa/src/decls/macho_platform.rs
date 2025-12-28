@@ -4,4 +4,4 @@ macro_rules! macho_platform {
     };
 }
 
-macho_platform!()
+macho_platform!();

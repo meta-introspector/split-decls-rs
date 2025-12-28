@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StandardUniform!();
         Distribution!();
         Rng!();
+        StandardUniform!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

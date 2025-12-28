@@ -4,4 +4,4 @@ macro_rules! Ignored {
     };
 }
 
-Ignored!()
+Ignored!();

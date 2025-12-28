@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NodeFiltered!();
-        NodeIdentifiers!();
-        NodeFilteredNeighbors!();
         FilterNode!();
+        NodeFilteredNeighbors!();
+        NodeIdentifiers!();
+        NodeFiltered!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Input!();
-        MatchError!();
         DFA!();
         Cache!();
         LazyStateID!();
+        MatchError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! init_fwd {
     };
 }
 
-init_fwd!()
+init_fwd!();

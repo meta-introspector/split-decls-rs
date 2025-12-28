@@ -4,4 +4,4 @@ macro_rules! fminf16 {
     };
 }
 
-fminf16!()
+fminf16!();

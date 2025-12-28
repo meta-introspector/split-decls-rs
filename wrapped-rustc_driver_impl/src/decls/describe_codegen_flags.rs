@@ -4,4 +4,4 @@ macro_rules! describe_codegen_flags {
     };
 }
 
-describe_codegen_flags!()
+describe_codegen_flags!();

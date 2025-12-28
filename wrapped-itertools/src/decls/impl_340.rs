@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LazyBuffer!();
         SizeHint!();
+        LazyBuffer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_340 {
     };
 }
 
-impl_340!()
+impl_340!();

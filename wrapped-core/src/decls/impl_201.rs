@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Interface!();
-        IUnknown!();
         IUnknown_Vtbl!();
+        IUnknown!();
+        Interface!();
         GUID!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_201 {
     };
 }
 
-impl_201!()
+impl_201!();

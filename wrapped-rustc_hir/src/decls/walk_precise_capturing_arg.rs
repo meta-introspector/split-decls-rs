@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         PreciseCapturingArg!();
         Visitor!();
-        Param!();
-        PreciseCapturingNonLifetimeArg!();
         Lifetime!();
+        PreciseCapturingNonLifetimeArg!();
+        Param!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! walk_precise_capturing_arg {
     };
 }
 
-walk_precise_capturing_arg!()
+walk_precise_capturing_arg!();

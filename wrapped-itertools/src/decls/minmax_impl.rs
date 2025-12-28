@@ -11,4 +11,4 @@ macro_rules! minmax_impl {
     };
 }
 
-minmax_impl!()
+minmax_impl!();

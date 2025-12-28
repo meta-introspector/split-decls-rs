@@ -4,4 +4,4 @@ macro_rules! ThreadLocalAccess {
     };
 }
 
-ThreadLocalAccess!()
+ThreadLocalAccess!();

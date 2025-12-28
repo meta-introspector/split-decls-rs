@@ -12,4 +12,4 @@ macro_rules! scalar_mul {
     };
 }
 
-scalar_mul!()
+scalar_mul!();

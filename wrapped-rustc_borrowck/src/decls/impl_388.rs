@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegionRenumberer!();
         RegionCtxt!();
+        RegionRenumberer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_388 {
     };
 }
 
-impl_388!()
+impl_388!();

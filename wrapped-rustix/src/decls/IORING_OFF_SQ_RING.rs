@@ -4,4 +4,4 @@ macro_rules! IORING_OFF_SQ_RING {
     };
 }
 
-IORING_OFF_SQ_RING!()
+IORING_OFF_SQ_RING!();

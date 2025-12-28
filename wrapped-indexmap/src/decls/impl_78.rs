@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IndexMap!();
-        Bucket!();
-        TryReserveError!();
         IndexSet!();
+        TryReserveError!();
+        Bucket!();
+        IndexMap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

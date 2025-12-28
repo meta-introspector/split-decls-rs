@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         RegionOutlivesPredicate!();
         ProjectionPredicate!();
-        TypeOutlivesPredicate!();
-        TraitPredicate!();
-        TyConst!();
-        TermKind!();
         Ty!();
+        TraitPredicate!();
+        TermKind!();
+        TyConst!();
+        TypeOutlivesPredicate!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! ClauseKind {
     };
 }
 
-ClauseKind!()
+ClauseKind!();

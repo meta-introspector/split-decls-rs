@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Uid!();
         Result!();
+        Uid!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! getpriority_user {
     };
 }
 
-getpriority_user!()
+getpriority_user!();

@@ -4,4 +4,4 @@ macro_rules! shadowed_into_iter {
     };
 }
 
-shadowed_into_iter!()
+shadowed_into_iter!();

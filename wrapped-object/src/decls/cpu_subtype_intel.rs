@@ -4,4 +4,4 @@ macro_rules! cpu_subtype_intel {
     };
 }
 
-cpu_subtype_intel!()
+cpu_subtype_intel!();

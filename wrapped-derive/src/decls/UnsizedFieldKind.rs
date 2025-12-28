@@ -11,4 +11,4 @@ macro_rules! UnsizedFieldKind {
     };
 }
 
-UnsizedFieldKind!()
+UnsizedFieldKind!();

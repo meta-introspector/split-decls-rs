@@ -11,4 +11,4 @@ macro_rules! parse_optional_keyword {
     };
 }
 
-parse_optional_keyword!()
+parse_optional_keyword!();

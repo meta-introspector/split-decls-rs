@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        SectionHeader64!();
+        Rel64!();
+        Symbol!();
+        AuxHeader!();
+        FileAux!();
+        CsectAux64!();
+        FileAux64!();
+        Symbol64!();
+        FileHeader64!();
         SectionHeader!();
         CsectAux!();
-        Symbol64!();
-        Rel64!();
         FileHeader!();
-        FileHeader64!();
-        FileAux64!();
-        CsectAux64!();
-        AuxHeader!();
-        Symbol!();
-        FileAux!();
         AuxHeader64!();
-        SectionHeader64!();
         Rel!();
     };
 }
@@ -24,4 +24,4 @@ macro_rules! impl_783 {
     };
 }
 
-impl_783!()
+impl_783!();

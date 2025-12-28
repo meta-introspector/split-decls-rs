@@ -11,4 +11,4 @@ macro_rules! cancel_with_child {
     };
 }
 
-cancel_with_child!()
+cancel_with_child!();

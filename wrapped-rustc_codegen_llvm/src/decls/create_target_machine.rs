@@ -11,4 +11,4 @@ macro_rules! create_target_machine {
     };
 }
 
-create_target_machine!()
+create_target_machine!();

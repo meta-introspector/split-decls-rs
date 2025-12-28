@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SigningKey!();
         EncodedPoint!();
-        Signature!();
         NistP384!();
+        SigningKey!();
         VerifyingKey!();
         SecretKey!();
         AffinePoint!();
+        Signature!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

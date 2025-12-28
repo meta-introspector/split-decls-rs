@@ -4,4 +4,4 @@ macro_rules! zalloc_fail {
     };
 }
 
-zalloc_fail!()
+zalloc_fail!();

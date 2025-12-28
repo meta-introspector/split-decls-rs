@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ExpandedTest!();
-        ExpansionOutcome!();
         Project!();
-        Result!();
+        ExpansionOutcome!();
         ExpansionBehavior!();
+        Result!();
+        ExpandedTest!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

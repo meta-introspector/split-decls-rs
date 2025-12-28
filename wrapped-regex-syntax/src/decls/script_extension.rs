@@ -4,4 +4,4 @@ macro_rules! script_extension {
     };
 }
 
-script_extension!()
+script_extension!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MemoryEffects!();
-        AttributeKind!();
-        Funclet!();
         AttributePlace!();
-        Builder!();
+        Funclet!();
+        MemoryEffects!();
         AsmDialect!();
         SmallVec!();
+        Builder!();
+        AttributeKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

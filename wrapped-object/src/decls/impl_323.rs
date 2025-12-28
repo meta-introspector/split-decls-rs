@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ReadRef!();
         Result!();
-        FileHeader!();
-        SymbolIndex!();
-        SectionIndex!();
-        Sym!();
-        StringTable!();
-        Endian!();
-        SymbolTable!();
         Item!();
-        SymbolMap!();
+        ReadRef!();
         SectionHeader!();
+        SymbolTable!();
         SectionTable!();
         SymbolMapEntry!();
+        StringTable!();
+        SymbolIndex!();
+        SymbolMap!();
+        Sym!();
+        FileHeader!();
+        SectionIndex!();
+        Error!();
+        Endian!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_323 {
     };
 }
 
-impl_323!()
+impl_323!();

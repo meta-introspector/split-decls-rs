@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ParseMode!();
         Piece!();
         Parser!();
-        ParseMode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! format_open_brace_tab {
     };
 }
 
-format_open_brace_tab!()
+format_open_brace_tab!();

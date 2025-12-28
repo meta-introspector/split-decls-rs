@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SuffixStore!();
         MatchGenerator!();
         Matcher!();
+        SuffixStore!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MatchGeneratorDriver {
     };
 }
 
-MatchGeneratorDriver!()
+MatchGeneratorDriver!();

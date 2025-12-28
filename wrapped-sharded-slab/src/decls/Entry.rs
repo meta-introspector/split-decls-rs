@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Slab!();
-        Guard!();
         Config!();
         Shard!();
+        Slab!();
         DefaultConfig!();
+        Guard!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Entry {
     };
 }
 
-Entry!()
+Entry!();

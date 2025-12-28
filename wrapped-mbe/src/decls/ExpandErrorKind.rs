@@ -4,4 +4,4 @@ macro_rules! ExpandErrorKind {
     };
 }
 
-ExpandErrorKind!()
+ExpandErrorKind!();

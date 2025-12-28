@@ -4,4 +4,4 @@ macro_rules! TableEntry {
     };
 }
 
-TableEntry!()
+TableEntry!();

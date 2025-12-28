@@ -12,4 +12,4 @@ macro_rules! effective_visibilities {
     };
 }
 
-effective_visibilities!()
+effective_visibilities!();

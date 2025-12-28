@@ -4,4 +4,4 @@ macro_rules! LlvmInfoTrait {
     };
 }
 
-LlvmInfoTrait!()
+LlvmInfoTrait!();

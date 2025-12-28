@@ -4,4 +4,4 @@ macro_rules! TypeMismatchSource {
     };
 }
 
-TypeMismatchSource!()
+TypeMismatchSource!();

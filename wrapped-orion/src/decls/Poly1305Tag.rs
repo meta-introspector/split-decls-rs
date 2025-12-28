@@ -11,4 +11,4 @@ macro_rules! Poly1305Tag {
     };
 }
 
-Poly1305Tag!()
+Poly1305Tag!();

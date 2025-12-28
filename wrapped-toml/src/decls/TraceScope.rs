@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Style!();
         DebugDepthGuard!();
+        Style!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TraceScope {
     };
 }
 
-TraceScope!()
+TraceScope!();

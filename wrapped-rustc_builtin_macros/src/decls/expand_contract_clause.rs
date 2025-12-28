@@ -4,4 +4,4 @@ macro_rules! expand_contract_clause {
     };
 }
 
-expand_contract_clause!()
+expand_contract_clause!();

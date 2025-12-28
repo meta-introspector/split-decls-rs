@@ -4,4 +4,4 @@ macro_rules! GraphIndex {
     };
 }
 
-GraphIndex!()
+GraphIndex!();

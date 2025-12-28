@@ -9,4 +9,4 @@ macro_rules! no_match_split_expression {
     };
 }
 
-no_match_split_expression!()
+no_match_split_expression!();

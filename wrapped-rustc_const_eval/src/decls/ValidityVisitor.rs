@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        CtfeValidationMode!();
+        Machine!();
+        RefTracking!();
         InterpCx!();
         RangeSet!();
-        CtfeValidationMode!();
-        PathElem!();
-        Machine!();
         MPlaceTy!();
-        RefTracking!();
+        PathElem!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! ValidityVisitor {
     };
 }
 
-ValidityVisitor!()
+ValidityVisitor!();

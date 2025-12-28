@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BorrowckDomain!();
+        Borrowck!();
         BorrowSet!();
         RegionInferenceContext!();
         Borrows!();
-        Borrowck!();
+        BorrowckDomain!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! get_flow_results {
     };
 }
 
-get_flow_results!()
+get_flow_results!();

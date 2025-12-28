@@ -4,4 +4,4 @@ macro_rules! UnreachableDueToUninhabited {
     };
 }
 
-UnreachableDueToUninhabited!()
+UnreachableDueToUninhabited!();

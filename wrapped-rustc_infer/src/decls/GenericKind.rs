@@ -4,4 +4,4 @@ macro_rules! GenericKind {
     };
 }
 
-GenericKind!()
+GenericKind!();

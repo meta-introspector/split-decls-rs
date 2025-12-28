@@ -11,4 +11,4 @@ macro_rules! test_doc_comment_multi_line_block_strips_suffix {
     };
 }
 
-test_doc_comment_multi_line_block_strips_suffix!()
+test_doc_comment_multi_line_block_strips_suffix!();

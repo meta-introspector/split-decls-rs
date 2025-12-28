@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Stream!();
+        Token!();
+        Encoding!();
         EventReceiver!();
         ErrorSink!();
-        Encoding!();
-        Token!();
         TokenKind!();
-        Stream!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! on_scalar {
     };
 }
 
-on_scalar!()
+on_scalar!();

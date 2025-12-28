@@ -4,4 +4,4 @@ macro_rules! OLD_SOUTH_ARABIAN {
     };
 }
 
-OLD_SOUTH_ARABIAN!()
+OLD_SOUTH_ARABIAN!();

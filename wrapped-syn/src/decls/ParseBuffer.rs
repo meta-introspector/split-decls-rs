@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Cursor!();
-        Unexpected!();
         ParseStream!();
+        Cursor!();
         Parser!();
+        Unexpected!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ParseBuffer {
     };
 }
 
-ParseBuffer!()
+ParseBuffer!();

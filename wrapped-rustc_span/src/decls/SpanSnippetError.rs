@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Span!();
-        DistinctSources!();
         MalformedSourceMapPositions!();
         FileName!();
+        DistinctSources!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SpanSnippetError {
     };
 }
 
-SpanSnippetError!()
+SpanSnippetError!();

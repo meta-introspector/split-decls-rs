@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        NodeIndex!();
-        NodeIndices!();
-        EdgeIndex!();
         List!();
         WSuc!();
         EdgeIndices!();
         IndexType!();
+        NodeIndex!();
+        NodeIndices!();
+        EdgeIndex!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_295 {
     };
 }
 
-impl_295!()
+impl_295!();

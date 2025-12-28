@@ -4,4 +4,4 @@ macro_rules! VTabConnection {
     };
 }
 
-VTabConnection!()
+VTabConnection!();

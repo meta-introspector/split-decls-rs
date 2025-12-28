@@ -4,4 +4,4 @@ macro_rules! xchacha20 {
     };
 }
 
-xchacha20!()
+xchacha20!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Values!();
-        VTabCursor!();
         Filters!();
+        VTabCursor!();
+        Values!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! rust_filter {
     };
 }
 
-rust_filter!()
+rust_filter!();

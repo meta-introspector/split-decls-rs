@@ -4,4 +4,4 @@ macro_rules! wants_msvc_seh {
     };
 }
 
-wants_msvc_seh!()
+wants_msvc_seh!();

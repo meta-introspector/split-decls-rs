@@ -4,4 +4,4 @@ macro_rules! EM_BPF {
     };
 }
 
-EM_BPF!()
+EM_BPF!();

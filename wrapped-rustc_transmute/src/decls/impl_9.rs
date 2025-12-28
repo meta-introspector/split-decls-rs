@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Region!();
         Transitions!();
+        Region!();
         Type!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

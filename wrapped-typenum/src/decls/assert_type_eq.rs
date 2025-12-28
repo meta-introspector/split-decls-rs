@@ -11,4 +11,4 @@ macro_rules! assert_type_eq {
     };
 }
 
-assert_type_eq!()
+assert_type_eq!();

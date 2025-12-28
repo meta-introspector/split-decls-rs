@@ -12,4 +12,4 @@ macro_rules! macro_can_load_macro_from_macro_files {
     };
 }
 
-macro_can_load_macro_from_macro_files!()
+macro_can_load_macro_from_macro_files!();

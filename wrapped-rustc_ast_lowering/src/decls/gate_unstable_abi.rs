@@ -4,4 +4,4 @@ macro_rules! gate_unstable_abi {
     };
 }
 
-gate_unstable_abi!()
+gate_unstable_abi!();

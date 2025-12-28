@@ -4,4 +4,4 @@ macro_rules! TC {
     };
 }
 
-TC!()
+TC!();

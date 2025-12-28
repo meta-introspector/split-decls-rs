@@ -4,4 +4,4 @@ macro_rules! named_struct {
     };
 }
 
-named_struct!()
+named_struct!();

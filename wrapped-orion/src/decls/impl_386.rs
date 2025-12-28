@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Scalar!();
         PrivateKey!();
+        Scalar!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_386 {
     };
 }
 
-impl_386!()
+impl_386!();

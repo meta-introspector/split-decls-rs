@@ -4,4 +4,4 @@ macro_rules! TOKEN_EXCLUSIVE {
     };
 }
 
-TOKEN_EXCLUSIVE!()
+TOKEN_EXCLUSIVE!();

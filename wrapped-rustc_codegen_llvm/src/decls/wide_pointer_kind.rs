@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WidePtrKind!();
         CodegenCx!();
+        WidePtrKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! wide_pointer_kind {
     };
 }
 
-wide_pointer_kind!()
+wide_pointer_kind!();

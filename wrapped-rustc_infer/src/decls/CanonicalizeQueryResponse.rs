@@ -4,4 +4,4 @@ macro_rules! CanonicalizeQueryResponse {
     };
 }
 
-CanonicalizeQueryResponse!()
+CanonicalizeQueryResponse!();

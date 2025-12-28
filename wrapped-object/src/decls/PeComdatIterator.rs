@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ImageNtHeaders!();
-        PeFile!();
         ReadRef!();
+        PeFile!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PeComdatIterator {
     };
 }
 
-PeComdatIterator!()
+PeComdatIterator!();

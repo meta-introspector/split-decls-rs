@@ -4,4 +4,4 @@ macro_rules! exit_thread {
     };
 }
 
-exit_thread!()
+exit_thread!();

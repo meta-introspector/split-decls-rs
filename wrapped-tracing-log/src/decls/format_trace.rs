@@ -4,4 +4,4 @@ macro_rules! format_trace {
     };
 }
 
-format_trace!()
+format_trace!();

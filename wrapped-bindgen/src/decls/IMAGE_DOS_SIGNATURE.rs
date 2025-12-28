@@ -4,4 +4,4 @@ macro_rules! IMAGE_DOS_SIGNATURE {
     };
 }
 
-IMAGE_DOS_SIGNATURE!()
+IMAGE_DOS_SIGNATURE!();

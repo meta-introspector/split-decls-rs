@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        Cache!();
-        HalfMatch!();
         OverlappingState!();
+        DFA!();
         MatchError!();
+        Cache!();
         Input!();
+        HalfMatch!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! find_overlapping_rev {
     };
 }
 
-find_overlapping_rev!()
+find_overlapping_rev!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RefMutExpectation!();
         CommonExpectationMethods!();
+        RefMutExpectation!();
         Common!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

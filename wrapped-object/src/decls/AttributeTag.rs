@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SymbolId!();
-        Symbol!();
-        SectionId!();
         File!();
+        Symbol!();
+        SymbolId!();
         Section!();
+        SectionId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! AttributeTag {
     };
 }
 
-AttributeTag!()
+AttributeTag!();

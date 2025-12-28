@@ -13,4 +13,4 @@ macro_rules! negative_digit_comp {
     };
 }
 
-negative_digit_comp!()
+negative_digit_comp!();

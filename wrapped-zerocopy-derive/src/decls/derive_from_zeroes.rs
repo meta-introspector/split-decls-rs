@@ -4,4 +4,4 @@ macro_rules! derive_from_zeroes {
     };
 }
 
-derive_from_zeroes!()
+derive_from_zeroes!();

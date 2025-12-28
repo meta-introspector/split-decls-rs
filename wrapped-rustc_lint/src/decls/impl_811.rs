@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LateContext!();
-        UnusedComparisons!();
-        ComparisonOp!();
         TypeLimits!();
+        UnusedComparisons!();
+        LateContext!();
+        ComparisonOp!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_811 {
     };
 }
 
-impl_811!()
+impl_811!();

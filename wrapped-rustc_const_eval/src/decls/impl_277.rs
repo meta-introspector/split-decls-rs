@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Operand!();
         OpTy!();
+        Operand!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_277 {
     };
 }
 
-impl_277!()
+impl_277!();

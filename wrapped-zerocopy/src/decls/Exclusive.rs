@@ -4,4 +4,4 @@ macro_rules! Exclusive {
     };
 }
 
-Exclusive!()
+Exclusive!();

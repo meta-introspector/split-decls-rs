@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Equal!();
-        Internal!();
+        SetBitOut!();
         PrivateDivIf!();
+        Equal!();
         SetBit!();
         B1!();
-        SetBitOut!();
+        Internal!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_480 {
     };
 }
 
-impl_480!()
+impl_480!();

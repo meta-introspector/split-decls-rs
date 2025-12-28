@@ -4,4 +4,4 @@ macro_rules! combine_words {
     };
 }
 
-combine_words!()
+combine_words!();

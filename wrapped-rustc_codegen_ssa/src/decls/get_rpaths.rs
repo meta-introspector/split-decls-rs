@@ -11,4 +11,4 @@ macro_rules! get_rpaths {
     };
 }
 
-get_rpaths!()
+get_rpaths!();

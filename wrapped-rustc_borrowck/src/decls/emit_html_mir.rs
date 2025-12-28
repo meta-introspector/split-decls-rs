@@ -4,4 +4,4 @@ macro_rules! emit_html_mir {
     };
 }
 
-emit_html_mir!()
+emit_html_mir!();

@@ -4,4 +4,4 @@ macro_rules! EvalConfigResult {
     };
 }
 
-EvalConfigResult!()
+EvalConfigResult!();

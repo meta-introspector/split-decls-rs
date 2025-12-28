@@ -4,4 +4,4 @@ macro_rules! TomlSink {
     };
 }
 
-TomlSink!()
+TomlSink!();

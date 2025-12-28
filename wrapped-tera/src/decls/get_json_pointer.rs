@@ -4,4 +4,4 @@ macro_rules! get_json_pointer {
     };
 }
 
-get_json_pointer!()
+get_json_pointer!();

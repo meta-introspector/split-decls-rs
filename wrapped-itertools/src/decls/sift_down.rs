@@ -4,4 +4,4 @@ macro_rules! sift_down {
     };
 }
 
-sift_down!()
+sift_down!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Literal!();
         ExtractKind!();
-        Seq!();
+        Literal!();
         Hir!();
+        Seq!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Extractor {
     };
 }
 
-Extractor!()
+Extractor!();

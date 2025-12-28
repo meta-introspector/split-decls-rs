@@ -4,4 +4,4 @@ macro_rules! LowerRangeBoundMustBeLessThanUpper {
     };
 }
 
-LowerRangeBoundMustBeLessThanUpper!()
+LowerRangeBoundMustBeLessThanUpper!();

@@ -4,4 +4,4 @@ macro_rules! suggest {
     };
 }
 
-suggest!()
+suggest!();

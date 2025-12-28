@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Block!();
-        Closure!();
         CoroutineSource!();
+        Closure!();
+        Block!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_208 {
     };
 }
 
-impl_208!()
+impl_208!();

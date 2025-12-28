@@ -4,4 +4,4 @@ macro_rules! VERBOSE {
     };
 }
 
-VERBOSE!()
+VERBOSE!();

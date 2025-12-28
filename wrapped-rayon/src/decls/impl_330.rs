@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IndexedParallelIterator!();
-        ClonedProducer!();
-        Producer!();
-        Cloned!();
-        Consumer!();
-        ProducerCallback!();
         ClonedConsumer!();
+        ClonedProducer!();
+        Cloned!();
+        ProducerCallback!();
+        Producer!();
+        Consumer!();
+        IndexedParallelIterator!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_330 {
     };
 }
 
-impl_330!()
+impl_330!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Message!();
         CompiledModules!();
         ExtraBackendMethods!();
-        Message!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Coordinator {
     };
 }
 
-Coordinator!()
+Coordinator!();

@@ -4,4 +4,4 @@ macro_rules! UnallowedInlineAsm {
     };
 }
 
-UnallowedInlineAsm!()
+UnallowedInlineAsm!();

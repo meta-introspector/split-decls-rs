@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParamEnv!();
         Interner!();
+        ParamEnv!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Goal {
     };
 }
 
-Goal!()
+Goal!();

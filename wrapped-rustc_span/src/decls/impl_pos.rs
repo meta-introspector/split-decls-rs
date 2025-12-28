@@ -11,4 +11,4 @@ macro_rules! impl_pos {
     };
 }
 
-impl_pos!()
+impl_pos!();

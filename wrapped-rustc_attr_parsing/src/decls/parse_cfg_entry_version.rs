@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ExpectedSingleVersionLiteral!();
-        ExpectedVersionLiteral!();
-        UnknownVersionLiteral!();
-        AcceptContext!();
-        Stage!();
         MetaItemListParser!();
+        ExpectedSingleVersionLiteral!();
+        UnknownVersionLiteral!();
+        ExpectedVersionLiteral!();
+        Stage!();
+        AcceptContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_cfg_entry_version {
     };
 }
 
-parse_cfg_entry_version!()
+parse_cfg_entry_version!();

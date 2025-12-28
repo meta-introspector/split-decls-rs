@@ -4,4 +4,4 @@ macro_rules! TraitBoundConst {
     };
 }
 
-TraitBoundConst!()
+TraitBoundConst!();

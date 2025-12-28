@@ -11,4 +11,4 @@ macro_rules! find_source_directory_in_iter {
     };
 }
 
-find_source_directory_in_iter!()
+find_source_directory_in_iter!();

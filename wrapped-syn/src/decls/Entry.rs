@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TokenBuffer!();
         Group!();
+        TokenBuffer!();
         End!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Entry {
     };
 }
 
-Entry!()
+Entry!();

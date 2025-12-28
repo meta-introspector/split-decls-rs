@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_BFD_RELOC_16 {
     };
 }
 
-R_NIOS2_BFD_RELOC_16!()
+R_NIOS2_BFD_RELOC_16!();

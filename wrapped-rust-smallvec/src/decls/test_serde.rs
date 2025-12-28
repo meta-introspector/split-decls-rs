@@ -11,4 +11,4 @@ macro_rules! test_serde {
     };
 }
 
-test_serde!()
+test_serde!();

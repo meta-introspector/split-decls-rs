@@ -4,4 +4,4 @@ macro_rules! slice_chunk_by_mut {
     };
 }
 
-slice_chunk_by_mut!()
+slice_chunk_by_mut!();

@@ -4,4 +4,4 @@ macro_rules! MapSpecialCaseFnOk {
     };
 }
 
-MapSpecialCaseFnOk!()
+MapSpecialCaseFnOk!();

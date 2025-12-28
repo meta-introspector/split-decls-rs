@@ -4,4 +4,4 @@ macro_rules! vis {
     };
 }
 
-vis!()
+vis!();

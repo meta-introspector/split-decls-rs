@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
+        InterfaceImpl!();
+        IMAGE_COR20_HEADER!();
+        IMAGE_SECTION_HEADER!();
+        MemberRef!();
+        IMAGE_OPTIONAL_HEADER32!();
+        IMAGE_OPTIONAL_HEADER64!();
         ClassLayout!();
         MethodDef!();
-        IMAGE_COR20_HEADER!();
-        ImplMap!();
-        IMAGE_DOS_HEADER!();
-        Attribute!();
-        File!();
-        TypeSpec!();
-        IMAGE_OPTIONAL_HEADER64!();
-        MemberRef!();
-        TypeRef!();
-        ModuleRef!();
         NestedClass!();
-        IMAGE_OPTIONAL_HEADER32!();
-        Constant!();
-        GenericParam!();
-        METADATA_HEADER!();
-        TypeDef!();
-        IMAGE_SECTION_HEADER!();
-        Field!();
         IMAGE_FILE_HEADER!();
+        IMAGE_DOS_HEADER!();
+        ModuleRef!();
+        TypeSpec!();
+        Attribute!();
+        ImplMap!();
+        TypeRef!();
+        METADATA_HEADER!();
+        GenericParam!();
+        Field!();
+        TypeDef!();
+        File!();
         Table!();
-        InterfaceImpl!();
+        Constant!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

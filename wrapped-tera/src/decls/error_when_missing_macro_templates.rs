@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tera!();
         Template!();
+        Tera!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! error_when_missing_macro_templates {
     };
 }
 
-error_when_missing_macro_templates!()
+error_when_missing_macro_templates!();

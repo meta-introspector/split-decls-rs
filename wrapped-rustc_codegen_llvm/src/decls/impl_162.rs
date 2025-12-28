@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Funclet!();
+        GenericBuilder!();
         SCx!();
         GenericCx!();
-        GenericBuilder!();
+        Funclet!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_162 {
     };
 }
 
-impl_162!()
+impl_162!();

@@ -12,4 +12,4 @@ macro_rules! OpaqueTypeTable {
     };
 }
 
-OpaqueTypeTable!()
+OpaqueTypeTable!();

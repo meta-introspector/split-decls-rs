@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         IneffectiveUnstableImpl!();
-        TraitConstStability!();
-        TraitImplConstStable!();
-        Checker!();
-        ImplConstStability!();
-        CheckTraitImplStable!();
         TraitImplConstStabilityMismatch!();
+        Checker!();
+        TraitImplConstStable!();
+        TraitConstStability!();
+        CheckTraitImplStable!();
+        ImplConstStability!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_333 {
     };
 }
 
-impl_333!()
+impl_333!();

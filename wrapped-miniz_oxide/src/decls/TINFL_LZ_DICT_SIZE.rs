@@ -4,4 +4,4 @@ macro_rules! TINFL_LZ_DICT_SIZE {
     };
 }
 
-TINFL_LZ_DICT_SIZE!()
+TINFL_LZ_DICT_SIZE!();

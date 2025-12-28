@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
+        Interner!();
+        GenericArgs!();
+        AdtDef!();
+        FnSigTys!();
+        Const!();
+        FnHeader!();
         AliasTy!();
         DynKind!();
-        Ty!();
-        GenericArgs!();
-        AliasTyKind!();
-        Interner!();
-        BoundExistentialPredicates!();
-        Const!();
-        DefId!();
-        Region!();
-        FnSigTys!();
-        FnHeader!();
-        UnsafeBinderInner!();
         InferTy!();
+        BoundExistentialPredicates!();
         Tys!();
+        AliasTyKind!();
+        Ty!();
+        UnsafeBinderInner!();
+        Region!();
+        DefId!();
         Binder!();
-        AdtDef!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! TyKind {
     };
 }
 
-TyKind!()
+TyKind!();

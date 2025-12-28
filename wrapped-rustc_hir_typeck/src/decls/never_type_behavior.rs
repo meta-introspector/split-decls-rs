@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DivergingBlockBehavior!();
         DivergingFallbackBehavior!();
+        DivergingBlockBehavior!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! never_type_behavior {
     };
 }
 
-never_type_behavior!()
+never_type_behavior!();

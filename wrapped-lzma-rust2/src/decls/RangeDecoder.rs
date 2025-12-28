@@ -4,4 +4,4 @@ macro_rules! RangeDecoder {
     };
 }
 
-RangeDecoder!()
+RangeDecoder!();

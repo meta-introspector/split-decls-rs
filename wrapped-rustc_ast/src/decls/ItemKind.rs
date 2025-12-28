@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
-        Delegation!();
-        MacroDef!();
-        DelegationMac!();
-        StaticItem!();
-        ConstItem!();
-        GenericBounds!();
-        MacCall!();
         UseTree!();
         TyAlias!();
-        Impl!();
-        EnumDef!();
-        Trait!();
-        ForeignMod!();
-        Generics!();
-        Type!();
-        Const!();
-        ModKind!();
-        Safety!();
-        InlineAsm!();
         Fn!();
+        DelegationMac!();
+        Generics!();
+        ForeignMod!();
+        ModKind!();
+        Impl!();
+        Delegation!();
+        Const!();
         VariantData!();
+        GenericBounds!();
+        MacCall!();
+        Safety!();
+        Trait!();
+        StaticItem!();
+        Type!();
+        InlineAsm!();
+        ConstItem!();
+        EnumDef!();
+        MacroDef!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! ItemKind {
     };
 }
 
-ItemKind!()
+ItemKind!();

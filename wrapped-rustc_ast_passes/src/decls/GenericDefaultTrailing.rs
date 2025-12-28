@@ -4,4 +4,4 @@ macro_rules! GenericDefaultTrailing {
     };
 }
 
-GenericDefaultTrailing!()
+GenericDefaultTrailing!();

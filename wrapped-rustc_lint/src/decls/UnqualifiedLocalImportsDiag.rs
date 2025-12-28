@@ -4,4 +4,4 @@ macro_rules! UnqualifiedLocalImportsDiag {
     };
 }
 
-UnqualifiedLocalImportsDiag!()
+UnqualifiedLocalImportsDiag!();

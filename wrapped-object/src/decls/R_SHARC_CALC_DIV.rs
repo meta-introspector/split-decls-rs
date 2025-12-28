@@ -4,4 +4,4 @@ macro_rules! R_SHARC_CALC_DIV {
     };
 }
 
-R_SHARC_CALC_DIV!()
+R_SHARC_CALC_DIV!();

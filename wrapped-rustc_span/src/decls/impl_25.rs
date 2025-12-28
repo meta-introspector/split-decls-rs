@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FileNameDisplayPreference!();
-        FileNameEmbeddablePreference!();
         RealFileName!();
+        FileNameDisplayPreference!();
         FilePathMapping!();
+        FileNameEmbeddablePreference!();
         FileName!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

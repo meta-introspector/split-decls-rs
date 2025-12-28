@@ -4,4 +4,4 @@ macro_rules! ule_derive {
     };
 }
 
-ule_derive!()
+ule_derive!();

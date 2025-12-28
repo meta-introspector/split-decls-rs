@@ -11,4 +11,4 @@ macro_rules! IAgileObject_Impl {
     };
 }
 
-IAgileObject_Impl!()
+IAgileObject_Impl!();

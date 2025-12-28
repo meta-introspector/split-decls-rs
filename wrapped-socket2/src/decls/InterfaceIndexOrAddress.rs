@@ -4,4 +4,4 @@ macro_rules! InterfaceIndexOrAddress {
     };
 }
 
-InterfaceIndexOrAddress!()
+InterfaceIndexOrAddress!();

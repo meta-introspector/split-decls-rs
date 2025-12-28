@@ -4,4 +4,4 @@ macro_rules! Crc32Reader {
     };
 }
 
-Crc32Reader!()
+Crc32Reader!();

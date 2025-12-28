@@ -4,4 +4,4 @@ macro_rules! naked_functions {
     };
 }
 
-naked_functions!()
+naked_functions!();

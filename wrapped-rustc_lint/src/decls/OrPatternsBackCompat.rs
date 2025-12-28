@@ -4,4 +4,4 @@ macro_rules! OrPatternsBackCompat {
     };
 }
 
-OrPatternsBackCompat!()
+OrPatternsBackCompat!();

@@ -4,4 +4,4 @@ macro_rules! IGNORABLE_MARKER {
     };
 }
 
-IGNORABLE_MARKER!()
+IGNORABLE_MARKER!();

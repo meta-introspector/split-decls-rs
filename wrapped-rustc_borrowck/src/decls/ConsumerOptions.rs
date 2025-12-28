@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PoloniusOutput!();
-        BorrowSet!();
         RegionInferenceContext!();
+        BorrowSet!();
+        PoloniusOutput!();
         PoloniusLocationTable!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ConsumerOptions {
     };
 }
 
-ConsumerOptions!()
+ConsumerOptions!();

@@ -12,4 +12,4 @@ macro_rules! store_when_free {
     };
 }
 
-store_when_free!()
+store_when_free!();

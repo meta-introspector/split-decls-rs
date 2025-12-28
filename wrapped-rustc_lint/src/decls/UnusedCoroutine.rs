@@ -4,4 +4,4 @@ macro_rules! UnusedCoroutine {
     };
 }
 
-UnusedCoroutine!()
+UnusedCoroutine!();

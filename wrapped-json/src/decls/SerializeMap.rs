@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Value!();
-        RawValue!();
         Map!();
         Number!();
+        Value!();
+        RawValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SerializeMap {
     };
 }
 
-SerializeMap!()
+SerializeMap!();

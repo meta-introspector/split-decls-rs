@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ResolvedPat!();
         AdjustMode!();
         ResolvedPatKind!();
-        ResolvedPat!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_326 {
     };
 }
 
-impl_326!()
+impl_326!();

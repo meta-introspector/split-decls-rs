@@ -4,4 +4,4 @@ macro_rules! compress_to_vec {
     };
 }
 
-compress_to_vec!()
+compress_to_vec!();

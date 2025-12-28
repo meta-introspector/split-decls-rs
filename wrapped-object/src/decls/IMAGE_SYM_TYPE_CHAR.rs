@@ -4,4 +4,4 @@ macro_rules! IMAGE_SYM_TYPE_CHAR {
     };
 }
 
-IMAGE_SYM_TYPE_CHAR!()
+IMAGE_SYM_TYPE_CHAR!();

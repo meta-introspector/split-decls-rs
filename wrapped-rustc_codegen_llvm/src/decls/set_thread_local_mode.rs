@@ -11,4 +11,4 @@ macro_rules! set_thread_local_mode {
     };
 }
 
-set_thread_local_mode!()
+set_thread_local_mode!();

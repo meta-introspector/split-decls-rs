@@ -4,4 +4,4 @@ macro_rules! ET_LOOS {
     };
 }
 
-ET_LOOS!()
+ET_LOOS!();

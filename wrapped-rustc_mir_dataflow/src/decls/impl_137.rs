@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HasMoveData!();
         MaybeInitializedPlaces!();
+        HasMoveData!();
         MoveData!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_137 {
     };
 }
 
-impl_137!()
+impl_137!();

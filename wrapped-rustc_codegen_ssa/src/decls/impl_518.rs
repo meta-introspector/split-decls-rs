@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        PlaceRef!();
-        OperandRef!();
-        OverflowOp!();
-        LocalRef!();
         IntPredicate!();
-        PlaceValue!();
         UninhabitedVariantError!();
         OperandRefBuilder!();
-        OperandValue!();
         FunctionCx!();
+        OperandValue!();
+        PlaceRef!();
+        OperandRef!();
         BuilderMethods!();
+        PlaceValue!();
+        OverflowOp!();
+        LocalRef!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_518 {
     };
 }
 
-impl_518!()
+impl_518!();

@@ -11,4 +11,4 @@ macro_rules! ipv6_mtu {
     };
 }
 
-ipv6_mtu!()
+ipv6_mtu!();

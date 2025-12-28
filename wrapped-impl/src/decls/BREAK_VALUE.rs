@@ -12,4 +12,4 @@ macro_rules! BREAK_VALUE {
     };
 }
 
-BREAK_VALUE!()
+BREAK_VALUE!();

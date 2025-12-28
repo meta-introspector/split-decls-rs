@@ -4,4 +4,4 @@ macro_rules! RemapLateParam {
     };
 }
 
-RemapLateParam!()
+RemapLateParam!();

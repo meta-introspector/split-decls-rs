@@ -4,4 +4,4 @@ macro_rules! BuiltinUnreachablePub {
     };
 }
 
-BuiltinUnreachablePub!()
+BuiltinUnreachablePub!();

@@ -11,4 +11,4 @@ macro_rules! define_uuid_macro {
     };
 }
 
-define_uuid_macro!()
+define_uuid_macro!();

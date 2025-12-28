@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        ExpnData!();
-        DesugaringKind!();
         ExpnId!();
-        AstPass!();
-        SourceMap!();
         HygieneData!();
-        Symbol!();
         Edition!();
-        ExpnKind!();
-        SyntaxContext!();
-        MacroKind!();
         Transparency!();
+        AstPass!();
+        Symbol!();
+        SyntaxContext!();
         Span!();
+        SourceMap!();
+        DesugaringKind!();
+        MacroKind!();
+        ExpnKind!();
+        ExpnData!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

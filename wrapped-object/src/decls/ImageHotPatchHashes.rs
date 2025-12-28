@@ -4,4 +4,4 @@ macro_rules! ImageHotPatchHashes {
     };
 }
 
-ImageHotPatchHashes!()
+ImageHotPatchHashes!();

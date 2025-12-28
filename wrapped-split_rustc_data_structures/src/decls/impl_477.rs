@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StableOrd!();
         StableCompare!();
+        StableOrd!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_477 {
     };
 }
 
-impl_477!()
+impl_477!();

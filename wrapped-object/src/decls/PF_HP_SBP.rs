@@ -4,4 +4,4 @@ macro_rules! PF_HP_SBP {
     };
 }
 
-PF_HP_SBP!()
+PF_HP_SBP!();

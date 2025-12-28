@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        DwarfAux64!();
         SectionHeader64!();
-        FileHeader64!();
+        FunAux32!();
+        DwarfAux32!();
+        ExpAux!();
+        AuxHeader64!();
+        SectionHeader32!();
+        Symbol64!();
+        CsectAux32!();
+        FileAux32!();
         CsectAux64!();
         StatAux!();
-        FileAux32!();
-        Rel64!();
-        Symbol32!();
-        FileHeader32!();
-        FileAux64!();
-        FunAux64!();
-        AuxHeader64!();
-        Symbol64!();
-        ExpAux!();
-        SectionHeader32!();
-        BlockAux32!();
-        DwarfAux32!();
-        Rel32!();
-        CsectAux32!();
-        BlockAux64!();
         AuxHeader32!();
-        FunAux32!();
+        FunAux64!();
+        FileHeader64!();
+        DwarfAux64!();
+        Rel32!();
+        Rel64!();
         SymbolBytes!();
+        FileHeader32!();
+        Symbol32!();
+        BlockAux32!();
+        FileAux64!();
+        BlockAux64!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! macro_5694 {
     };
 }
 
-macro_5694!()
+macro_5694!();

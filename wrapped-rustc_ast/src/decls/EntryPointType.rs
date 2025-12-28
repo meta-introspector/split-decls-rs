@@ -4,4 +4,4 @@ macro_rules! EntryPointType {
     };
 }
 
-EntryPointType!()
+EntryPointType!();

@@ -4,4 +4,4 @@ macro_rules! CompletionFieldsToResolve {
     };
 }
 
-CompletionFieldsToResolve!()
+CompletionFieldsToResolve!();

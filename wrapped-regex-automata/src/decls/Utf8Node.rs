@@ -12,4 +12,4 @@ macro_rules! Utf8Node {
     };
 }
 
-Utf8Node!()
+Utf8Node!();

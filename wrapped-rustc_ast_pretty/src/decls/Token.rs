@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BeginToken!();
         BreakToken!();
+        BeginToken!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Token {
     };
 }
 
-Token!()
+Token!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Step!();
         StepShared!();
+        Step!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Count {
     };
 }
 
-Count!()
+Count!();

@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        RegionConstraintStorage!();
+        RegionConstraintData!();
         RegionSnapshot!();
-        RegionVariableInfo!();
-        RegionVariableOrigin!();
-        UnificationTable!();
+        Constraint!();
         CombineMapType!();
         GenericKind!();
-        UndoLog!();
-        CombineMap!();
-        Verify!();
-        RegionVariableValue!();
-        RegionConstraintCollector!();
-        VerifyBound!();
-        SubregionOrigin!();
-        RegionVidKey!();
-        ConstraintKind!();
         TwoRegions!();
-        Constraint!();
-        RegionConstraintData!();
+        RegionVidKey!();
+        RegionVariableValue!();
         Snapshot!();
+        RegionConstraintCollector!();
+        RegionVariableInfo!();
+        VerifyBound!();
+        UnificationTable!();
+        Verify!();
+        SubregionOrigin!();
+        RegionVariableOrigin!();
+        UndoLog!();
+        RegionConstraintStorage!();
+        ConstraintKind!();
+        CombineMap!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

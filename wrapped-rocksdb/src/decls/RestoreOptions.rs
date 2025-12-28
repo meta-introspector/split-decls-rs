@@ -4,4 +4,4 @@ macro_rules! RestoreOptions {
     };
 }
 
-RestoreOptions!()
+RestoreOptions!();

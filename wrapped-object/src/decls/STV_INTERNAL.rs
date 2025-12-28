@@ -4,4 +4,4 @@ macro_rules! STV_INTERNAL {
     };
 }
 
-STV_INTERNAL!()
+STV_INTERNAL!();

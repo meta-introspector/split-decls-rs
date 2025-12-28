@@ -11,4 +11,4 @@ macro_rules! classify_for_punycode {
     };
 }
 
-classify_for_punycode!()
+classify_for_punycode!();

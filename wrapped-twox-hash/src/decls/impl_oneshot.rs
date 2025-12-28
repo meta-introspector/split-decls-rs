@@ -4,4 +4,4 @@ macro_rules! impl_oneshot {
     };
 }
 
-impl_oneshot!()
+impl_oneshot!();

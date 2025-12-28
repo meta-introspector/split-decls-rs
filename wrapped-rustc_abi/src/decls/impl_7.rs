@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         X86Call!();
+        ExternAbi!();
         ArmCall!();
         InterruptKind!();
         CanonAbi!();
-        ExternAbi!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

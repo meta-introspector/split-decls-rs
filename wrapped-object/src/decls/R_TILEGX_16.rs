@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_16 {
     };
 }
 
-R_TILEGX_16!()
+R_TILEGX_16!();

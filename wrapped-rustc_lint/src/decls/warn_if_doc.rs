@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BuiltinUnusedDocComment!();
-        EarlyContext!();
         BuiltinUnusedDocCommentSub!();
+        EarlyContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! warn_if_doc {
     };
 }
 
-warn_if_doc!()
+warn_if_doc!();

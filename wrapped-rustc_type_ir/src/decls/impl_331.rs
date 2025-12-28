@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GlobalCache!();
-        Interner!();
         Cx!();
         QueryResult!();
         CanonicalInput!();
+        Interner!();
+        GlobalCache!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_331 {
     };
 }
 
-impl_331!()
+impl_331!();

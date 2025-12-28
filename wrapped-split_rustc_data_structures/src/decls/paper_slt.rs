@@ -11,4 +11,4 @@ macro_rules! paper_slt {
     };
 }
 
-paper_slt!()
+paper_slt!();

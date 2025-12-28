@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CguReuse!();
         OngoingCodegen!();
         ModuleCodegen!();
-        CpuRequired!();
         ExtraBackendMethods!();
+        CguReuse!();
+        CpuRequired!();
         CachedModuleCodegen!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! codegen_crate {
     };
 }
 
-codegen_crate!()
+codegen_crate!();

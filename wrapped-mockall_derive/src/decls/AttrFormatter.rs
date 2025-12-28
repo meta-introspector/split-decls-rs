@@ -4,4 +4,4 @@ macro_rules! AttrFormatter {
     };
 }
 
-AttrFormatter!()
+AttrFormatter!();

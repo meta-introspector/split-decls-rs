@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InferCtxtInner!();
-        RegionConstraintCollector!();
-        ProjectionCache!();
         UndoLog!();
+        RegionConstraintCollector!();
+        InferCtxtInner!();
+        ProjectionCache!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

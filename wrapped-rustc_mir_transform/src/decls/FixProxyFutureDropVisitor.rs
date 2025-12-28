@@ -4,4 +4,4 @@ macro_rules! FixProxyFutureDropVisitor {
     };
 }
 
-FixProxyFutureDropVisitor!()
+FixProxyFutureDropVisitor!();

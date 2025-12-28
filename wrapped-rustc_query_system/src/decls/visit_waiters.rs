@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Waiter!();
-        QueryMap!();
         QueryJobId!();
+        QueryMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! visit_waiters {
     };
 }
 
-visit_waiters!()
+visit_waiters!();

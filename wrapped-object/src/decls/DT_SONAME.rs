@@ -11,4 +11,4 @@ macro_rules! DT_SONAME {
     };
 }
 
-DT_SONAME!()
+DT_SONAME!();

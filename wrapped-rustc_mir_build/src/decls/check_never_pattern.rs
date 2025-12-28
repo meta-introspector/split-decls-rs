@@ -12,4 +12,4 @@ macro_rules! check_never_pattern {
     };
 }
 
-check_never_pattern!()
+check_never_pattern!();

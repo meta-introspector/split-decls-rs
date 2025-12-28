@@ -4,4 +4,4 @@ macro_rules! FRAME_TRAP {
     };
 }
 
-FRAME_TRAP!()
+FRAME_TRAP!();

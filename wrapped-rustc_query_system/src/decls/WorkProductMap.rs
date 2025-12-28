@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WorkProductId!();
         WorkProduct!();
+        WorkProductId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WorkProductMap {
     };
 }
 
-WorkProductMap!()
+WorkProductMap!();

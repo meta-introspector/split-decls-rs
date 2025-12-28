@@ -4,4 +4,4 @@ macro_rules! LC_VERSION_MIN_TVOS {
     };
 }
 
-LC_VERSION_MIN_TVOS!()
+LC_VERSION_MIN_TVOS!();

@@ -11,4 +11,4 @@ macro_rules! unicode_escape {
     };
 }
 
-unicode_escape!()
+unicode_escape!();

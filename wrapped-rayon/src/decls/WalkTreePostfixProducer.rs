@@ -4,4 +4,4 @@ macro_rules! WalkTreePostfixProducer {
     };
 }
 
-WalkTreePostfixProducer!()
+WalkTreePostfixProducer!();

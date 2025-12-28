@@ -4,4 +4,4 @@ macro_rules! rust_files_in_dir {
     };
 }
 
-rust_files_in_dir!()
+rust_files_in_dir!();

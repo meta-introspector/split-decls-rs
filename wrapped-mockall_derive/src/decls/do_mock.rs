@@ -4,4 +4,4 @@ macro_rules! do_mock {
     };
 }
 
-do_mock!()
+do_mock!();

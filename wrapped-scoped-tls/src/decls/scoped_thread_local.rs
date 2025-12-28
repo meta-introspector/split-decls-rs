@@ -11,4 +11,4 @@ macro_rules! scoped_thread_local {
     };
 }
 
-scoped_thread_local!()
+scoped_thread_local!();

@@ -4,4 +4,4 @@ macro_rules! MH_PIE {
     };
 }
 
-MH_PIE!()
+MH_PIE!();

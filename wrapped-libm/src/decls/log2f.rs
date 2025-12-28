@@ -4,4 +4,4 @@ macro_rules! log2f {
     };
 }
 
-log2f!()
+log2f!();

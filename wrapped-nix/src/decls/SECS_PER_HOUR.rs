@@ -4,4 +4,4 @@ macro_rules! SECS_PER_HOUR {
     };
 }
 
-SECS_PER_HOUR!()
+SECS_PER_HOUR!();

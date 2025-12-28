@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SsoHashSet!();
         SsoHashMap!();
+        SsoHashSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_466 {
     };
 }
 
-impl_466!()
+impl_466!();

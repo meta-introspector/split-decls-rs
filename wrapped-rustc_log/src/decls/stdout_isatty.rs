@@ -4,4 +4,4 @@ macro_rules! stdout_isatty {
     };
 }
 
-stdout_isatty!()
+stdout_isatty!();

@@ -4,4 +4,4 @@ macro_rules! DocCfgHideTakesList {
     };
 }
 
-DocCfgHideTakesList!()
+DocCfgHideTakesList!();

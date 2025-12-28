@@ -4,4 +4,4 @@ macro_rules! DBRecoveryMode {
     };
 }
 
-DBRecoveryMode!()
+DBRecoveryMode!();

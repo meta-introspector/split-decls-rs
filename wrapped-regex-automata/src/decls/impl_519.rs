@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        DenseTransitions!();
-        SmallIndex!();
+        StateID!();
         Transition!();
         Look!();
-        StateID!();
-        SparseTransitions!();
-        State!();
-        NFA!();
         Match!();
+        NFA!();
+        SmallIndex!();
+        DenseTransitions!();
+        State!();
+        SparseTransitions!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_519 {
     };
 }
 
-impl_519!()
+impl_519!();

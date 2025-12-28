@@ -4,4 +4,4 @@ macro_rules! EF_CSKY_PROCESSOR {
     };
 }
 
-EF_CSKY_PROCESSOR!()
+EF_CSKY_PROCESSOR!();

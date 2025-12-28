@@ -4,4 +4,4 @@ macro_rules! EF_RISCV_RV64ILP32 {
     };
 }
 
-EF_RISCV_RV64ILP32!()
+EF_RISCV_RV64ILP32!();

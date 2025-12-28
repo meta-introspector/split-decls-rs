@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Chunk!();
         Chunks!();
+        Chunk!();
         IntoChunks!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_278 {
     };
 }
 
-impl_278!()
+impl_278!();

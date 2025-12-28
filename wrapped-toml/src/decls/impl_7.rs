@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         VacantEntry!();
-        MapImpl!();
-        Entry!();
-        Values!();
         Iter!();
-        IterMut!();
-        OccupiedEntry!();
-        RandomState!();
-        Map!();
+        MapImpl!();
         Keys!();
+        Map!();
+        IterMut!();
+        RandomState!();
+        Entry!();
+        OccupiedEntry!();
+        Values!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

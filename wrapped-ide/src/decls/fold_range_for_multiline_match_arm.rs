@@ -4,4 +4,4 @@ macro_rules! fold_range_for_multiline_match_arm {
     };
 }
 
-fold_range_for_multiline_match_arm!()
+fold_range_for_multiline_match_arm!();

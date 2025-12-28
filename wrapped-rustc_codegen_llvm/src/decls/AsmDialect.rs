@@ -4,4 +4,4 @@ macro_rules! AsmDialect {
     };
 }
 
-AsmDialect!()
+AsmDialect!();

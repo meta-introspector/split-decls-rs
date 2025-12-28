@@ -4,4 +4,4 @@ macro_rules! translate_position {
     };
 }
 
-translate_position!()
+translate_position!();

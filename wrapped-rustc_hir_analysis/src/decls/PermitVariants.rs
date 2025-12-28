@@ -4,4 +4,4 @@ macro_rules! PermitVariants {
     };
 }
 
-PermitVariants!()
+PermitVariants!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ReverseHybrid!();
+        Prefilter!();
         ReverseDFA!();
+        ReverseHybrid!();
         Core!();
         NFA!();
-        Prefilter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ReverseInner {
     };
 }
 
-ReverseInner!()
+ReverseInner!();

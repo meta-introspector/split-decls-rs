@@ -11,4 +11,4 @@ macro_rules! this_type {
     };
 }
 
-this_type!()
+this_type!();

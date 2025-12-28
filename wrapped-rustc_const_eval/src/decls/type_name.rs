@@ -4,4 +4,4 @@ macro_rules! type_name {
     };
 }
 
-type_name!()
+type_name!();

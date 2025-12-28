@@ -11,4 +11,4 @@ macro_rules! bin_op_to_icmp_predicate {
     };
 }
 
-bin_op_to_icmp_predicate!()
+bin_op_to_icmp_predicate!();

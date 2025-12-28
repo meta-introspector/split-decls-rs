@@ -4,4 +4,4 @@ macro_rules! AsCoercionSite {
     };
 }
 
-AsCoercionSite!()
+AsCoercionSite!();

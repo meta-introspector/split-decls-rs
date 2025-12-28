@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Start!();
-        LazyStateID!();
+        NFA!();
         State!();
+        Start!();
         DFA!();
         ByteClasses!();
-        NFA!();
+        LazyStateID!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! minimum_cache_capacity {
     };
 }
 
-minimum_cache_capacity!()
+minimum_cache_capacity!();

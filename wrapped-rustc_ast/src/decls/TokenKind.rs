@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        CommentKind!();
         Token!();
+        CommentKind!();
         AttrStyle!();
-        IdentIsRaw!();
-        Lit!();
-        InvisibleOrigin!();
         Lifetime!();
+        InvisibleOrigin!();
+        Lit!();
+        IdentIsRaw!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! TokenKind {
     };
 }
 
-TokenKind!()
+TokenKind!();

@@ -4,4 +4,4 @@ macro_rules! panic_b_still_executes {
     };
 }
 
-panic_b_still_executes!()
+panic_b_still_executes!();

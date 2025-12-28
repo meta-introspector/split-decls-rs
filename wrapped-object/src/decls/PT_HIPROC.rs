@@ -4,4 +4,4 @@ macro_rules! PT_HIPROC {
     };
 }
 
-PT_HIPROC!()
+PT_HIPROC!();

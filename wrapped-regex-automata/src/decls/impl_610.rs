@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PatternID!();
         NonMaxUsize!();
         Captures!();
+        PatternID!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_610 {
     };
 }
 
-impl_610!()
+impl_610!();

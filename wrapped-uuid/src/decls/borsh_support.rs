@@ -4,4 +4,4 @@ macro_rules! borsh_support {
     };
 }
 
-borsh_support!()
+borsh_support!();

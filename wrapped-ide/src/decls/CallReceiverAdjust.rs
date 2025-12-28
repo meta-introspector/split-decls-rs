@@ -4,4 +4,4 @@ macro_rules! CallReceiverAdjust {
     };
 }
 
-CallReceiverAdjust!()
+CallReceiverAdjust!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Deserializer!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! from_document {
     };
 }
 
-from_document!()
+from_document!();

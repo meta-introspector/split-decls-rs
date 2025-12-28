@@ -4,4 +4,4 @@ macro_rules! write_style_timestamp {
     };
 }
 
-write_style_timestamp!()
+write_style_timestamp!();

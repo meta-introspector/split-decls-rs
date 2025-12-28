@@ -11,4 +11,4 @@ macro_rules! hf16 {
     };
 }
 
-hf16!()
+hf16!();

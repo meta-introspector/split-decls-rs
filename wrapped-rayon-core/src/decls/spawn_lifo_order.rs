@@ -4,4 +4,4 @@ macro_rules! spawn_lifo_order {
     };
 }
 
-spawn_lifo_order!()
+spawn_lifo_order!();

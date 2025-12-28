@@ -4,4 +4,4 @@ macro_rules! ok_if_any {
     };
 }
 
-ok_if_any!()
+ok_if_any!();

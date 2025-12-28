@@ -11,4 +11,4 @@ macro_rules! is_contextual_root {
     };
 }
 
-is_contextual_root!()
+is_contextual_root!();

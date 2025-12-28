@@ -64,4 +64,4 @@ impl Lean4MacroBridge {{
     };
 }
 
-lean4_macro_bridge_impl!()
+lean4_macro_bridge_impl!();

@@ -4,4 +4,4 @@ macro_rules! for_each_late_bound_region_in_recursive_scope {
     };
 }
 
-for_each_late_bound_region_in_recursive_scope!()
+for_each_late_bound_region_in_recursive_scope!();

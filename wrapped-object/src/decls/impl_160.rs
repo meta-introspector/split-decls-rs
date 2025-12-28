@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         SymbolIteratorInternal!();
-        Item!();
-        SymbolIterator!();
         Symbol!();
-        ReadRef!();
         SymbolInternal!();
+        ReadRef!();
+        SymbolIterator!();
+        Item!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

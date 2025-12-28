@@ -4,4 +4,4 @@ macro_rules! suggest_ref_mut {
     };
 }
 
-suggest_ref_mut!()
+suggest_ref_mut!();

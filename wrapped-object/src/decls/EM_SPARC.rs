@@ -4,4 +4,4 @@ macro_rules! EM_SPARC {
     };
 }
 
-EM_SPARC!()
+EM_SPARC!();

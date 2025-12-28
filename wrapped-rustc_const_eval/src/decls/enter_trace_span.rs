@@ -12,4 +12,4 @@ macro_rules! enter_trace_span {
     };
 }
 
-enter_trace_span!()
+enter_trace_span!();

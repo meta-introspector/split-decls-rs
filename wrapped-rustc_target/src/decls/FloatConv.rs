@@ -4,4 +4,4 @@ macro_rules! FloatConv {
     };
 }
 
-FloatConv!()
+FloatConv!();

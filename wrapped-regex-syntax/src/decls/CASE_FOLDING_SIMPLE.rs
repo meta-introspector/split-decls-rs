@@ -4,4 +4,4 @@ macro_rules! CASE_FOLDING_SIMPLE {
     };
 }
 
-CASE_FOLDING_SIMPLE!()
+CASE_FOLDING_SIMPLE!();

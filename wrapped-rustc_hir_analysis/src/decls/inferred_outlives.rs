@@ -4,4 +4,4 @@ macro_rules! inferred_outlives {
     };
 }
 
-inferred_outlives!()
+inferred_outlives!();

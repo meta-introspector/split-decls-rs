@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Container!();
-        Fragment!();
-        Style!();
-        Variant!();
-        StructVariant!();
         Parameters!();
+        Container!();
+        Style!();
+        StructVariant!();
+        Variant!();
+        Fragment!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! serialize_internally_tagged_variant {
     };
 }
 
-serialize_internally_tagged_variant!()
+serialize_internally_tagged_variant!();

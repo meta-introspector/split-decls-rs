@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PrivateSetBitOut!();
-        B1!();
-        PrivateSetBit!();
         UInt!();
         Sub1!();
+        PrivateSetBitOut!();
+        PrivateSetBit!();
+        B1!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_465 {
     };
 }
 
-impl_465!()
+impl_465!();

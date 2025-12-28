@@ -4,4 +4,4 @@ macro_rules! PF_R {
     };
 }
 
-PF_R!()
+PF_R!();

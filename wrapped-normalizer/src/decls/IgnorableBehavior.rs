@@ -4,4 +4,4 @@ macro_rules! IgnorableBehavior {
     };
 }
 
-IgnorableBehavior!()
+IgnorableBehavior!();

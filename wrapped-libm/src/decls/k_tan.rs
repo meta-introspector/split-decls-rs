@@ -4,4 +4,4 @@ macro_rules! k_tan {
     };
 }
 
-k_tan!()
+k_tan!();

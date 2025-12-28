@@ -4,4 +4,4 @@ macro_rules! new_body {
     };
 }
 
-new_body!()
+new_body!();

@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Mode!();
-        Candidate!();
         Pick!();
-        MethodError!();
+        Mode!();
         IsSuggestion!();
-        NoMatchData!();
-        PickKind!();
-        ProbeResult!();
-        FnCtxt!();
-        PickResult!();
         PickConstraintsForShadowed!();
-        ProbeContext!();
         AutorefOrPtrAdjustment!();
-        CandidateSource!();
+        MethodError!();
+        ProbeResult!();
+        PickResult!();
+        ProbeContext!();
+        NoMatchData!();
         PickDiagHints!();
+        FnCtxt!();
+        CandidateSource!();
+        PickKind!();
+        Candidate!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_269 {
     };
 }
 
-impl_269!()
+impl_269!();

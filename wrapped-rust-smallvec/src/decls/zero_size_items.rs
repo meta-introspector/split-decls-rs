@@ -11,4 +11,4 @@ macro_rules! zero_size_items {
     };
 }
 
-zero_size_items!()
+zero_size_items!();

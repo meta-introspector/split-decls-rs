@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_PCREL_IMM7BY4 {
     };
 }
 
-R_CKCORE_PCREL_IMM7BY4!()
+R_CKCORE_PCREL_IMM7BY4!();

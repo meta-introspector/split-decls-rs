@@ -4,4 +4,4 @@ macro_rules! TailExprDropOrder {
     };
 }
 
-TailExprDropOrder!()
+TailExprDropOrder!();

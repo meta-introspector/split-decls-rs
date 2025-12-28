@@ -11,4 +11,4 @@ macro_rules! worker_thread_index {
     };
 }
 
-worker_thread_index!()
+worker_thread_index!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         HuffmanScratch!();
+        Sequence!();
         FSEScratch!();
         DecodeBuffer!();
-        Sequence!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DecoderScratch {
     };
 }
 
-DecoderScratch!()
+DecoderScratch!();

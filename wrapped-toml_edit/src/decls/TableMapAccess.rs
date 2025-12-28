@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Item!();
-        Key!();
         IntoIter!();
+        Key!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TableMapAccess {
     };
 }
 
-TableMapAccess!()
+TableMapAccess!();

@@ -4,4 +4,4 @@ macro_rules! check_enumerate_rev {
     };
 }
 
-check_enumerate_rev!()
+check_enumerate_rev!();

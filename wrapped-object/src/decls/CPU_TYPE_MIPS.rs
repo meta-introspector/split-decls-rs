@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_MIPS {
     };
 }
 
-CPU_TYPE_MIPS!()
+CPU_TYPE_MIPS!();

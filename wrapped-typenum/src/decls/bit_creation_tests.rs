@@ -13,4 +13,4 @@ macro_rules! bit_creation_tests {
     };
 }
 
-bit_creation_tests!()
+bit_creation_tests!();

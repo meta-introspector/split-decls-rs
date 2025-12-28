@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImpliedFeatures!();
         Stability!();
+        ImpliedFeatures!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! POWERPC_FEATURES {
     };
 }
 
-POWERPC_FEATURES!()
+POWERPC_FEATURES!();

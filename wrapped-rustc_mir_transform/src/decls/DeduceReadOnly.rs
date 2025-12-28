@@ -4,4 +4,4 @@ macro_rules! DeduceReadOnly {
     };
 }
 
-DeduceReadOnly!()
+DeduceReadOnly!();

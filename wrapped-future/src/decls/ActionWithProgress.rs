@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IAsyncActionWithProgress!();
         SyncState!();
+        IAsyncActionWithProgress!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ActionWithProgress {
     };
 }
 
-ActionWithProgress!()
+ActionWithProgress!();

@@ -4,4 +4,4 @@ macro_rules! SECCOMP_MODE_STRICT {
     };
 }
 
-SECCOMP_MODE_STRICT!()
+SECCOMP_MODE_STRICT!();

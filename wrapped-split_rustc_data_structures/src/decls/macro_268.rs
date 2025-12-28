@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DynSend!();
-        Tag!();
-        TaggedRef!();
         RwLock!();
         DynSync!();
+        TaggedRef!();
+        DynSend!();
+        Tag!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! macro_268 {
     };
 }
 
-macro_268!()
+macro_268!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Item!();
         Result!();
         ExportSymbol!();
+        Item!();
         NodeIterator!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_515 {
     };
 }
 
-impl_515!()
+impl_515!();

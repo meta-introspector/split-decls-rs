@@ -4,4 +4,4 @@ macro_rules! has_alphanumeric {
     };
 }
 
-has_alphanumeric!()
+has_alphanumeric!();

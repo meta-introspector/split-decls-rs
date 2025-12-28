@@ -4,4 +4,4 @@ macro_rules! multiply_mix {
     };
 }
 
-multiply_mix!()
+multiply_mix!();

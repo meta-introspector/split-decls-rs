@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Validity!();
         Alignment!();
         TryFromBytes!();
         TryReadError!();
+        Validity!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_221 {
     };
 }
 
-impl_221!()
+impl_221!();

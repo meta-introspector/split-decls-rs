@@ -5,4 +5,4 @@ macro_rules! setup_dep_graph {
     };
 }
 
-setup_dep_graph!()
+setup_dep_graph!();

@@ -4,4 +4,4 @@ macro_rules! ARRAY_TYPE {
     };
 }
 
-ARRAY_TYPE!()
+ARRAY_TYPE!();

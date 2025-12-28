@@ -4,4 +4,4 @@ macro_rules! Code {
     };
 }
 
-Code!()
+Code!();

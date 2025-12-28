@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Mode!();
-        ExprKind!();
         MetaVarKind!();
         ParseError!();
+        ExprKind!();
+        Mode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! eat_fragment_kind {
     };
 }
 
-eat_fragment_kind!()
+eat_fragment_kind!();

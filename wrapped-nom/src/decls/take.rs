@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Error!();
-        IResult!();
         Input!();
-        Take!();
-        Parser!();
+        IResult!();
         ParseError!();
         Needed!();
+        Error!();
         ToUsize!();
+        Parser!();
+        Take!();
         Streaming!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! take {
     };
 }
 
-take!()
+take!();

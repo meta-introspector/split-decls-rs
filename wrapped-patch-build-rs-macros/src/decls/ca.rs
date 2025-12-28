@@ -4,4 +4,4 @@ macro_rules! ca {
     };
 }
 
-ca!()
+ca!();

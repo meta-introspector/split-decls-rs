@@ -4,4 +4,4 @@ macro_rules! MissingAbi {
     };
 }
 
-MissingAbi!()
+MissingAbi!();

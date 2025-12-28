@@ -11,4 +11,4 @@ macro_rules! wrap_trait {
     };
 }
 
-wrap_trait!()
+wrap_trait!();

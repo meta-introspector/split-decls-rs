@@ -4,4 +4,4 @@ macro_rules! InterfaceRef {
     };
 }
 
-InterfaceRef!()
+InterfaceRef!();

@@ -4,4 +4,4 @@ macro_rules! check_gt_direct {
     };
 }
 
-check_gt_direct!()
+check_gt_direct!();

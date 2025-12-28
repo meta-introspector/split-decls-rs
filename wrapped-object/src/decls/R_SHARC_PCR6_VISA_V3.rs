@@ -4,4 +4,4 @@ macro_rules! R_SHARC_PCR6_VISA_V3 {
     };
 }
 
-R_SHARC_PCR6_VISA_V3!()
+R_SHARC_PCR6_VISA_V3!();

@@ -11,4 +11,4 @@ macro_rules! SHT_GNU_VERSYM {
     };
 }
 
-SHT_GNU_VERSYM!()
+SHT_GNU_VERSYM!();

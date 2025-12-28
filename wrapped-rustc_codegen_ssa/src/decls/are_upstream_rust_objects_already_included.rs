@@ -4,4 +4,4 @@ macro_rules! are_upstream_rust_objects_already_included {
     };
 }
 
-are_upstream_rust_objects_already_included!()
+are_upstream_rust_objects_already_included!();

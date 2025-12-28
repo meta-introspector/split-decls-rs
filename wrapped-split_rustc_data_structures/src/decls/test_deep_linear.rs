@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UsizeSccs!();
-        Sccs!();
         TestGraph!();
+        Sccs!();
+        UsizeSccs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_deep_linear {
     };
 }
 
-test_deep_linear!()
+test_deep_linear!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Iter!();
         IterProducer!();
-        IntoIter!();
         Producer!();
+        IntoIter!();
+        Iter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1250 {
     };
 }
 
-impl_1250!()
+impl_1250!();

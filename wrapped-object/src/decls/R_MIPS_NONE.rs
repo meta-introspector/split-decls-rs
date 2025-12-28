@@ -4,4 +4,4 @@ macro_rules! R_MIPS_NONE {
     };
 }
 
-R_MIPS_NONE!()
+R_MIPS_NONE!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RawPtrToIntCast!();
         NonConstOp!();
-        ConstCx!();
+        RawPtrToIntCast!();
         RawPtrToIntErr!();
+        ConstCx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

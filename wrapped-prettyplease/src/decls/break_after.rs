@@ -4,4 +4,4 @@ macro_rules! break_after {
     };
 }
 
-break_after!()
+break_after!();

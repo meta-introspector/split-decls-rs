@@ -4,4 +4,4 @@ macro_rules! HASH3_SIZE {
     };
 }
 
-HASH3_SIZE!()
+HASH3_SIZE!();

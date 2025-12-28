@@ -4,4 +4,4 @@ macro_rules! contains_path {
     };
 }
 
-contains_path!()
+contains_path!();

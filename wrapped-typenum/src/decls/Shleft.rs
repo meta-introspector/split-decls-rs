@@ -4,4 +4,4 @@ macro_rules! Shleft {
     };
 }
 
-Shleft!()
+Shleft!();

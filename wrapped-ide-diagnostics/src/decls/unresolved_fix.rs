@@ -4,4 +4,4 @@ macro_rules! unresolved_fix {
     };
 }
 
-unresolved_fix!()
+unresolved_fix!();

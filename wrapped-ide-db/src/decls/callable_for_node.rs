@@ -11,4 +11,4 @@ macro_rules! callable_for_node {
     };
 }
 
-callable_for_node!()
+callable_for_node!();

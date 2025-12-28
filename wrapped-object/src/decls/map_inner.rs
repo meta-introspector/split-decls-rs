@@ -12,4 +12,4 @@ macro_rules! map_inner {
     };
 }
 
-map_inner!()
+map_inner!();

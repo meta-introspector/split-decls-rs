@@ -4,4 +4,4 @@ macro_rules! InterruptDrawInfo {
     };
 }
 
-InterruptDrawInfo!()
+InterruptDrawInfo!();

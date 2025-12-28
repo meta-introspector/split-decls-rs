@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        LoopMatchUnsupportedType!();
-        Category!();
-        RvalueFunc!();
-        NeedsTemporary!();
-        BlockFrame!();
-        LoopMatchArmWithGuard!();
-        DeclareLetBindings!();
-        Scope!();
-        Builder!();
-        HasMatchGuard!();
         BlockAnd!();
+        NeedsTemporary!();
+        Category!();
+        Scope!();
+        BlockFrame!();
+        RvalueFunc!();
+        HasMatchGuard!();
+        Builder!();
+        DeclareLetBindings!();
+        LoopMatchUnsupportedType!();
+        LoopMatchArmWithGuard!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

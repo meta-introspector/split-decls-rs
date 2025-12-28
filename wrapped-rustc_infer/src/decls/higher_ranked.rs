@@ -4,4 +4,4 @@ macro_rules! higher_ranked {
     };
 }
 
-higher_ranked!()
+higher_ranked!();

@@ -12,4 +12,4 @@ macro_rules! downcasts_to_subscriber {
     };
 }
 
-downcasts_to_subscriber!()
+downcasts_to_subscriber!();

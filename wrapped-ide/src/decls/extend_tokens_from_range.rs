@@ -11,4 +11,4 @@ macro_rules! extend_tokens_from_range {
     };
 }
 
-extend_tokens_from_range!()
+extend_tokens_from_range!();

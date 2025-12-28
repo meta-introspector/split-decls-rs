@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EventId!();
         Profiler!();
         StringId!();
+        EventId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TimingGuard {
     };
 }
 
-TimingGuard!()
+TimingGuard!();

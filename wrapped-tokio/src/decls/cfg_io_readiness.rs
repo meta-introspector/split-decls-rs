@@ -4,4 +4,4 @@ macro_rules! cfg_io_readiness {
     };
 }
 
-cfg_io_readiness!()
+cfg_io_readiness!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Read!();
-        ParserNumber!();
-        ErrorCode!();
-        Value!();
-        Result!();
         Error!();
+        ParserNumber!();
+        Result!();
+        Value!();
+        ErrorCode!();
         Deserializer!();
+        Read!();
         Map!();
         StreamDeserializer!();
     };
@@ -19,4 +19,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

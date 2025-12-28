@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_MASK {
     };
 }
 
-CPU_SUBTYPE_MASK!()
+CPU_SUBTYPE_MASK!();

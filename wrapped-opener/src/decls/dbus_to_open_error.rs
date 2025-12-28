@@ -11,4 +11,4 @@ macro_rules! dbus_to_open_error {
     };
 }
 
-dbus_to_open_error!()
+dbus_to_open_error!();

@@ -11,4 +11,4 @@ macro_rules! check_validity_requirement_lax {
     };
 }
 
-check_validity_requirement_lax!()
+check_validity_requirement_lax!();

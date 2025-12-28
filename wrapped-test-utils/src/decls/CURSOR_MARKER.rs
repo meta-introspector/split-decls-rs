@@ -4,4 +4,4 @@ macro_rules! CURSOR_MARKER {
     };
 }
 
-CURSOR_MARKER!()
+CURSOR_MARKER!();

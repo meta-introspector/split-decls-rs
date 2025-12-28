@@ -11,4 +11,4 @@ macro_rules! convert_options {
     };
 }
 
-convert_options!()
+convert_options!();

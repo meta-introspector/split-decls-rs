@@ -4,4 +4,4 @@ macro_rules! lint_mod {
     };
 }
 
-lint_mod!()
+lint_mod!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ArrayOfTables!();
         Item!();
-        Key!();
         Table!();
+        Key!();
+        ArrayOfTables!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! visit_nested_tables {
     };
 }
 
-visit_nested_tables!()
+visit_nested_tables!();

@@ -12,4 +12,4 @@ macro_rules! domain_to_ascii {
     };
 }
 
-domain_to_ascii!()
+domain_to_ascii!();

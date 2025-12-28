@@ -4,4 +4,4 @@ macro_rules! SELF_LIBRARY_ORDINAL {
     };
 }
 
-SELF_LIBRARY_ORDINAL!()
+SELF_LIBRARY_ORDINAL!();

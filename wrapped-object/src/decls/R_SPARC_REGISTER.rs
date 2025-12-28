@@ -4,4 +4,4 @@ macro_rules! R_SPARC_REGISTER {
     };
 }
 
-R_SPARC_REGISTER!()
+R_SPARC_REGISTER!();

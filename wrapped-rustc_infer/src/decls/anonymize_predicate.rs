@@ -4,4 +4,4 @@ macro_rules! anonymize_predicate {
     };
 }
 
-anonymize_predicate!()
+anonymize_predicate!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        KnownLayout!();
-        SizeError!();
         Immutable!();
+        KnownLayout!();
         FromBytes!();
+        SizeError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! IntoBytes {
     };
 }
 
-IntoBytes!()
+IntoBytes!();

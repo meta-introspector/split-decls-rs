@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        Time!();
+        List!();
         Directed!();
         NodeIndex!();
-        IndexType!();
-        List!();
         UnweightedList!();
         Direction!();
         Node!();
-        Time!();
+        IndexType!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! dag_to_toposorted_adjacency_list {
     };
 }
 
-dag_to_toposorted_adjacency_list!()
+dag_to_toposorted_adjacency_list!();

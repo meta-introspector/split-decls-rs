@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxElement!();
         SyntaxToken!();
+        SyntaxElement!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! previous_non_trivia_token {
     };
 }
 
-previous_non_trivia_token!()
+previous_non_trivia_token!();

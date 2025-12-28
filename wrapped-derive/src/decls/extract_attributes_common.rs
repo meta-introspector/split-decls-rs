@@ -11,4 +11,4 @@ macro_rules! extract_attributes_common {
     };
 }
 
-extract_attributes_common!()
+extract_attributes_common!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Initialized!();
         Uninit!();
+        Initialized!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CastableFrom {
     };
 }
 
-CastableFrom!()
+CastableFrom!();

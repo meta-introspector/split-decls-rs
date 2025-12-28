@@ -11,4 +11,4 @@ macro_rules! iterable_named_enum {
     };
 }
 
-iterable_named_enum!()
+iterable_named_enum!();

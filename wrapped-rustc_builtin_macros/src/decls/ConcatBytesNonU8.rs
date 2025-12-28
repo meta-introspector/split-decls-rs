@@ -4,4 +4,4 @@ macro_rules! ConcatBytesNonU8 {
     };
 }
 
-ConcatBytesNonU8!()
+ConcatBytesNonU8!();

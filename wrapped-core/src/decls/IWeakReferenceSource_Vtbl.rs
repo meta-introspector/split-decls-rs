@@ -12,4 +12,4 @@ macro_rules! IWeakReferenceSource_Vtbl {
     };
 }
 
-IWeakReferenceSource_Vtbl!()
+IWeakReferenceSource_Vtbl!();

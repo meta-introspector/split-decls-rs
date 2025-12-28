@@ -4,4 +4,4 @@ macro_rules! produce_fewer_items {
     };
 }
 
-produce_fewer_items!()
+produce_fewer_items!();

@@ -4,4 +4,4 @@ macro_rules! R_E2K_64_PC_LIT {
     };
 }
 
-R_E2K_64_PC_LIT!()
+R_E2K_64_PC_LIT!();

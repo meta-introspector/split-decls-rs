@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Fixed!();
         Entry!();
+        Fixed!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_103 {
     };
 }
 
-macro_103!()
+macro_103!();

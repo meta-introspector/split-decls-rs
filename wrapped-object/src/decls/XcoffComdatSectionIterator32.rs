@@ -12,4 +12,4 @@ macro_rules! XcoffComdatSectionIterator32 {
     };
 }
 
-XcoffComdatSectionIterator32!()
+XcoffComdatSectionIterator32!();

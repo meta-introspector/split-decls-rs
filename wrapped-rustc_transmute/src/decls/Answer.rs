@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reason!();
         Condition!();
+        Reason!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Answer {
     };
 }
 
-Answer!()
+Answer!();

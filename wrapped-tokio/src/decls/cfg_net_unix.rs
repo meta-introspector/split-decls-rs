@@ -4,4 +4,4 @@ macro_rules! cfg_net_unix {
     };
 }
 
-cfg_net_unix!()
+cfg_net_unix!();

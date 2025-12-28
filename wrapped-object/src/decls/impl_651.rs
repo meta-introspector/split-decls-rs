@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ImageThunkData!();
-        ImageThunkData32!();
         ImageOptionalHeader!();
+        ImageThunkData!();
         ImageFileHeader!();
         ImageNtHeaders32!();
-        ImageNtHeaders!();
         ImageOptionalHeader32!();
+        ImageNtHeaders!();
+        ImageThunkData32!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_651 {
     };
 }
 
-impl_651!()
+impl_651!();

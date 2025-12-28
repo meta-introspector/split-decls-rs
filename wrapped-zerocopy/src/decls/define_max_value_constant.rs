@@ -4,4 +4,4 @@ macro_rules! define_max_value_constant {
     };
 }
 
-define_max_value_constant!()
+define_max_value_constant!();

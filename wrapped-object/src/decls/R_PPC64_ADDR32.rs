@@ -4,4 +4,4 @@ macro_rules! R_PPC64_ADDR32 {
     };
 }
 
-R_PPC64_ADDR32!()
+R_PPC64_ADDR32!();

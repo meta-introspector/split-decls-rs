@@ -12,4 +12,4 @@ macro_rules! create_sample {
     };
 }
 
-create_sample!()
+create_sample!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Node!();
+        Kind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Dominators {
     };
 }
 
-Dominators!()
+Dominators!();

@@ -11,4 +11,4 @@ macro_rules! urlencode_strict {
     };
 }
 
-urlencode_strict!()
+urlencode_strict!();

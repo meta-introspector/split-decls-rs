@@ -4,4 +4,4 @@ macro_rules! assert_same_hash {
     };
 }
 
-assert_same_hash!()
+assert_same_hash!();

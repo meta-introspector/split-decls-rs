@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         Error!();
         StreamingBuffer!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1027 {
     };
 }
 
-impl_1027!()
+impl_1027!();

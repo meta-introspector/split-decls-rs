@@ -4,4 +4,4 @@ macro_rules! y1f {
     };
 }
 
-y1f!()
+y1f!();

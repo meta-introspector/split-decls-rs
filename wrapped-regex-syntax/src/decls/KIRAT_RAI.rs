@@ -4,4 +4,4 @@ macro_rules! KIRAT_RAI {
     };
 }
 
-KIRAT_RAI!()
+KIRAT_RAI!();

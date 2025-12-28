@@ -8,4 +8,4 @@ macro_rules! match_path {
     };
 }
 
-match_path!()
+match_path!();

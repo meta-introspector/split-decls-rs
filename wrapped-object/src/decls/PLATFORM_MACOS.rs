@@ -4,4 +4,4 @@ macro_rules! PLATFORM_MACOS {
     };
 }
 
-PLATFORM_MACOS!()
+PLATFORM_MACOS!();

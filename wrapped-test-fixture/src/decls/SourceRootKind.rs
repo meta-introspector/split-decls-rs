@@ -4,4 +4,4 @@ macro_rules! SourceRootKind {
     };
 }
 
-SourceRootKind!()
+SourceRootKind!();

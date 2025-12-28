@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Cursor!();
         Reject!();
+        Cursor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! trailing_backslash {
     };
 }
 
-trailing_backslash!()
+trailing_backslash!();

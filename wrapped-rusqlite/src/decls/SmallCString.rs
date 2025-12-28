@@ -4,4 +4,4 @@ macro_rules! SmallCString {
     };
 }
 
-SmallCString!()
+SmallCString!();

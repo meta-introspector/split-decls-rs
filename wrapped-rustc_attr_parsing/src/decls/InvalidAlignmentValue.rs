@@ -4,4 +4,4 @@ macro_rules! InvalidAlignmentValue {
     };
 }
 
-InvalidAlignmentValue!()
+InvalidAlignmentValue!();

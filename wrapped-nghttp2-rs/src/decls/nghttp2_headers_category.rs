@@ -4,4 +4,4 @@ macro_rules! nghttp2_headers_category {
     };
 }
 
-nghttp2_headers_category!()
+nghttp2_headers_category!();

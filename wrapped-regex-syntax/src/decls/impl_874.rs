@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Either!();
         Utf8Range!();
         ScalarRange!();
+        Either!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_874 {
     };
 }
 
-impl_874!()
+impl_874!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        MaybeInitializedPlaces!();
         DropFlagState!();
         InactiveVariants!();
         MaybeReachable!();
-        Analysis!();
-        LookupResult!();
         MaybePlacesSwitchIntData!();
-        MaybeInitializedPlaces!();
+        LookupResult!();
+        Analysis!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_146 {
     };
 }
 
-impl_146!()
+impl_146!();

@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_RLD_VERSION {
     };
 }
 
-DT_MIPS_RLD_VERSION!()
+DT_MIPS_RLD_VERSION!();

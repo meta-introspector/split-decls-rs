@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Config!();
-        Entry!();
-        Tid!();
-        VacantEntry!();
         Shared!();
         UniqueIter!();
-        Slab!();
         OwnedEntry!();
+        VacantEntry!();
+        Config!();
+        Slab!();
+        Entry!();
+        Tid!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_183 {
     };
 }
 
-impl_183!()
+impl_183!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AtomicOrderingLoad!();
-        LateContext!();
-        AtomicOrderingFence!();
         InvalidAtomicOrderingDiag!();
         AtomicOrderingStore!();
+        AtomicOrderingLoad!();
+        AtomicOrderingFence!();
+        LateContext!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_824 {
     };
 }
 
-impl_824!()
+impl_824!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Argument!();
         FormatSpec!();
+        Argument!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! format_counts {
     };
 }
 
-format_counts!()
+format_counts!();

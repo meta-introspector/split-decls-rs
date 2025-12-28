@@ -4,4 +4,4 @@ macro_rules! XorShift64Star {
     };
 }
 
-XorShift64Star!()
+XorShift64Star!();

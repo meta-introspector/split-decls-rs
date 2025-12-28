@@ -11,4 +11,4 @@ macro_rules! encode_b64 {
     };
 }
 
-encode_b64!()
+encode_b64!();

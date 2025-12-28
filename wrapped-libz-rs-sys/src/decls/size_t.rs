@@ -4,4 +4,4 @@ macro_rules! size_t {
     };
 }
 
-size_t!()
+size_t!();

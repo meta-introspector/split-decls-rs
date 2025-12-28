@@ -4,4 +4,4 @@ macro_rules! SearchScope {
     };
 }
 
-SearchScope!()
+SearchScope!();

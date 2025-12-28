@@ -11,4 +11,4 @@ macro_rules! DF_ORIGIN {
     };
 }
 
-DF_ORIGIN!()
+DF_ORIGIN!();

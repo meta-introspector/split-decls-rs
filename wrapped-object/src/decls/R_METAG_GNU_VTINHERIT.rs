@@ -4,4 +4,4 @@ macro_rules! R_METAG_GNU_VTINHERIT {
     };
 }
 
-R_METAG_GNU_VTINHERIT!()
+R_METAG_GNU_VTINHERIT!();

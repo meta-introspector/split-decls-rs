@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WritableBuffer!();
         Pod!();
+        WritableBuffer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1024 {
     };
 }
 
-impl_1024!()
+impl_1024!();

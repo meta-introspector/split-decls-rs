@@ -4,4 +4,4 @@ macro_rules! include_dir {
     };
 }
 
-include_dir!()
+include_dir!();

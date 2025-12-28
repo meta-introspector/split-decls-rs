@@ -4,4 +4,4 @@ macro_rules! token_stream {
     };
 }
 
-token_stream!()
+token_stream!();

@@ -4,4 +4,4 @@ macro_rules! LifetimeName {
     };
 }
 
-LifetimeName!()
+LifetimeName!();

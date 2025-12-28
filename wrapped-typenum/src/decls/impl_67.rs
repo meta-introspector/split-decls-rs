@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        NonZero!();
         PrivateIntegerAdd!();
         PInt!();
-        Greater!();
         Unsigned!();
-        NonZero!();
+        Greater!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

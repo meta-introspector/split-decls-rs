@@ -4,4 +4,4 @@ macro_rules! gate_alt {
     };
 }
 
-gate_alt!()
+gate_alt!();

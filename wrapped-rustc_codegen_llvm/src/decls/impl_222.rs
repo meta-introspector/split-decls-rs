@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SmallVec!();
         CodegenCx!();
-        CallConv!();
         UnnamedAddr!();
+        CallConv!();
+        SmallVec!();
         AttributePlace!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

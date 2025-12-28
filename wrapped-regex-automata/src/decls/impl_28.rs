@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Start!();
-        PatternID!();
-        StartError!();
-        StateID!();
-        DFA!();
-        Prefilter!();
         Automaton!();
+        StartError!();
+        Start!();
+        StateID!();
+        Prefilter!();
+        DFA!();
         Config!();
         Anchored!();
+        PatternID!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

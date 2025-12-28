@@ -11,4 +11,4 @@ macro_rules! linker_flavor_cli_impls {
     };
 }
 
-linker_flavor_cli_impls!()
+linker_flavor_cli_impls!();

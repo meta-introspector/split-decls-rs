@@ -12,4 +12,4 @@ macro_rules! matches_req {
     };
 }
 
-matches_req!()
+matches_req!();

@@ -4,4 +4,4 @@ macro_rules! cfg_io_util {
     };
 }
 
-cfg_io_util!()
+cfg_io_util!();

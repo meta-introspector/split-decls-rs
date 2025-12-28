@@ -4,4 +4,4 @@ macro_rules! EF_ARM_PIC {
     };
 }
 
-EF_ARM_PIC!()
+EF_ARM_PIC!();

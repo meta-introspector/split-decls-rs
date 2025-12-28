@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ParseError!();
-        Buffer!();
         ByteStringLit!();
+        Buffer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

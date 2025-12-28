@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_SWI8 {
     };
 }
 
-R_ARM_THM_SWI8!()
+R_ARM_THM_SWI8!();

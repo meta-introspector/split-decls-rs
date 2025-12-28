@@ -4,4 +4,4 @@ macro_rules! ROOT_NODE {
     };
 }
 
-ROOT_NODE!()
+ROOT_NODE!();

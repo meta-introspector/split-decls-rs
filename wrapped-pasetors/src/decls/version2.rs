@@ -4,4 +4,4 @@ macro_rules! version2 {
     };
 }
 
-version2!()
+version2!();

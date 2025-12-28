@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        DefId!();
         Ty!();
         GenericArgs!();
-        ExistentialTraitRef!();
-        Term!();
         ExistentialProjection!();
-        ProjectionPredicate!();
+        Term!();
         AliasTerm!();
-        DefId!();
         GenericArg!();
         Interner!();
+        ExistentialTraitRef!();
+        ProjectionPredicate!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_369 {
     };
 }
 
-impl_369!()
+impl_369!();

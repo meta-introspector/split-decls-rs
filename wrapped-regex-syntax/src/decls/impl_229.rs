@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Byte!();
         Bytes!();
         Formatter!();
         Class!();
+        Byte!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_229 {
     };
 }
 
-impl_229!()
+impl_229!();

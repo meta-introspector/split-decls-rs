@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ArmVer!();
         Arch!();
         AbiMapping!();
-        AbiMap!();
-        Target!();
         OsKind!();
+        AbiMap!();
+        ArmVer!();
+        Target!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_324 {
     };
 }
 
-impl_324!()
+impl_324!();

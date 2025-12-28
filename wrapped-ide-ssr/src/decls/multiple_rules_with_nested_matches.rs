@@ -10,4 +10,4 @@ macro_rules! multiple_rules_with_nested_matches {
     };
 }
 
-multiple_rules_with_nested_matches!()
+multiple_rules_with_nested_matches!();

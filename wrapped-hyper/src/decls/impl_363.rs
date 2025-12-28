@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BoxAny!();
-        IntoDynTaskType!();
         Result!();
+        IntoDynTaskType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_363 {
     };
 }
 
-impl_363!()
+impl_363!();

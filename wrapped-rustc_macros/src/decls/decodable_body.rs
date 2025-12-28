@@ -4,4 +4,4 @@ macro_rules! decodable_body {
     };
 }
 
-decodable_body!()
+decodable_body!();

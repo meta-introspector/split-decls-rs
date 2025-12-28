@@ -4,4 +4,4 @@ macro_rules! Enzyme_AD {
     };
 }
 
-Enzyme_AD!()
+Enzyme_AD!();

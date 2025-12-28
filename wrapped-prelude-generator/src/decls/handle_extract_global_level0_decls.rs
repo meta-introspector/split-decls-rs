@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Args!();
         RustcInfo!();
+        Args!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_extract_global_level0_decls {
     };
 }
 
-handle_extract_global_level0_decls!()
+handle_extract_global_level0_decls!();

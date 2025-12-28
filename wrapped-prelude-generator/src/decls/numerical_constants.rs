@@ -4,4 +4,4 @@ macro_rules! numerical_constants {
     };
 }
 
-numerical_constants!()
+numerical_constants!();

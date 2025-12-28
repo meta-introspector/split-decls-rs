@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LocalsStateAtExit!();
         BorrowData!();
+        LocalsStateAtExit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! GatherBorrows {
     };
 }
 
-GatherBorrows!()
+GatherBorrows!();

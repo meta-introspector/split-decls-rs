@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BitOps0!();
         BitOps128!();
+        BitOps0!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

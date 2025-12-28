@@ -11,4 +11,4 @@ macro_rules! test_resize {
     };
 }
 
-test_resize!()
+test_resize!();

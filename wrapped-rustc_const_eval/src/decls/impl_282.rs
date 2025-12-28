@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ImmTy!();
-        MemPlaceMeta!();
         Machine!();
+        MemPlaceMeta!();
+        ImmTy!();
         InterpCx!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_282 {
     };
 }
 
-impl_282!()
+impl_282!();

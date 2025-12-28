@@ -4,4 +4,4 @@ macro_rules! DIST_SLOTS {
     };
 }
 
-DIST_SLOTS!()
+DIST_SLOTS!();

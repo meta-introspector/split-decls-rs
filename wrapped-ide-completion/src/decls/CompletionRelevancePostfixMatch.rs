@@ -4,4 +4,4 @@ macro_rules! CompletionRelevancePostfixMatch {
     };
 }
 
-CompletionRelevancePostfixMatch!()
+CompletionRelevancePostfixMatch!();

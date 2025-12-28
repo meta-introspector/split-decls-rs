@@ -4,4 +4,4 @@ macro_rules! add_data_and_relocation {
     };
 }
 
-add_data_and_relocation!()
+add_data_and_relocation!();

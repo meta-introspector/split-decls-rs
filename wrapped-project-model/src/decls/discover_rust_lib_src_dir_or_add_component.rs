@@ -8,4 +8,4 @@ try installing `rust-src` the same way you installed `rustc`") }) }
     };
 }
 
-discover_rust_lib_src_dir_or_add_component!()
+discover_rust_lib_src_dir_or_add_component!();

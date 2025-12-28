@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Version!();
         Comparator!();
+        Version!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! pre_is_compatible {
     };
 }
 
-pre_is_compatible!()
+pre_is_compatible!();

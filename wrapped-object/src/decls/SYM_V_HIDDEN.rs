@@ -4,4 +4,4 @@ macro_rules! SYM_V_HIDDEN {
     };
 }
 
-SYM_V_HIDDEN!()
+SYM_V_HIDDEN!();

@@ -22,4 +22,4 @@ macro_rules! hasse_diagram {
     };
 }
 
-hasse_diagram!()
+hasse_diagram!();

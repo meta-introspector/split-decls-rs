@@ -4,4 +4,4 @@ macro_rules! READERS_MASK {
     };
 }
 
-READERS_MASK!()
+READERS_MASK!();

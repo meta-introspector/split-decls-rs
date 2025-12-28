@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MacroResult!();
         Structure!();
+        MacroResult!();
     };
 }
 
@@ -22,4 +22,4 @@ got:
     };
 }
 
-test_derive!()
+test_derive!();

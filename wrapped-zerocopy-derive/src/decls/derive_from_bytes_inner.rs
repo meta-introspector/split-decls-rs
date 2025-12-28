@@ -11,4 +11,4 @@ macro_rules! derive_from_bytes_inner {
     };
 }
 
-derive_from_bytes_inner!()
+derive_from_bytes_inner!();

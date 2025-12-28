@@ -4,4 +4,4 @@ macro_rules! R_AVR_MS8_LDI {
     };
 }
 
-R_AVR_MS8_LDI!()
+R_AVR_MS8_LDI!();

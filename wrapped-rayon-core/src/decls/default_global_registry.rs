@@ -14,4 +14,4 @@ macro_rules! default_global_registry {
     };
 }
 
-default_global_registry!()
+default_global_registry!();

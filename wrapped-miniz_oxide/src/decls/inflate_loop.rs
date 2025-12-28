@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        InflateState!();
-        MZError!();
-        MZStatus!();
-        MZFlush!();
         TINFLStatus!();
+        MZFlush!();
+        MZStatus!();
+        MZError!();
+        InflateState!();
         MZResult!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! inflate_loop {
     };
 }
 
-inflate_loop!()
+inflate_loop!();

@@ -4,4 +4,4 @@ macro_rules! Wal {
     };
 }
 
-Wal!()
+Wal!();

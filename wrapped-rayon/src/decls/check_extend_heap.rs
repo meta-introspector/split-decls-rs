@@ -4,4 +4,4 @@ macro_rules! check_extend_heap {
     };
 }
 
-check_extend_heap!()
+check_extend_heap!();

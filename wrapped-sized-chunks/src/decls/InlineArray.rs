@@ -4,4 +4,4 @@ macro_rules! InlineArray {
     };
 }
 
-InlineArray!()
+InlineArray!();

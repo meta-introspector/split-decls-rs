@@ -4,4 +4,4 @@ macro_rules! TAG_TWO_B {
     };
 }
 
-TAG_TWO_B!()
+TAG_TWO_B!();

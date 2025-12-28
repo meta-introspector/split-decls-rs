@@ -4,4 +4,4 @@ macro_rules! IdentifierUncommonCodepoints {
     };
 }
 
-IdentifierUncommonCodepoints!()
+IdentifierUncommonCodepoints!();

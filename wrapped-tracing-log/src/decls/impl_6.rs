@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LogTracer!();
         Builder!();
+        LogTracer!();
         InterestCacheConfig!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

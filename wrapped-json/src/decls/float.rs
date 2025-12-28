@@ -4,4 +4,4 @@ macro_rules! float {
     };
 }
 
-float!()
+float!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        B1!();
-        Same!();
         B0!();
+        Same!();
         Bit!();
+        B1!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! bit_op_tests {
     };
 }
 
-bit_op_tests!()
+bit_op_tests!();

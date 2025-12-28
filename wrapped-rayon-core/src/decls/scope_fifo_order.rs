@@ -4,4 +4,4 @@ macro_rules! scope_fifo_order {
     };
 }
 
-scope_fifo_order!()
+scope_fifo_order!();

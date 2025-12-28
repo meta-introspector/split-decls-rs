@@ -4,4 +4,4 @@ macro_rules! DT_TLSDESC_GOT {
     };
 }
 
-DT_TLSDESC_GOT!()
+DT_TLSDESC_GOT!();

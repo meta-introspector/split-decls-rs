@@ -4,4 +4,4 @@ macro_rules! fse {
     };
 }
 
-fse!()
+fse!();

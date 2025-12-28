@@ -11,4 +11,4 @@ macro_rules! panic_thread_name {
     };
 }
 
-panic_thread_name!()
+panic_thread_name!();

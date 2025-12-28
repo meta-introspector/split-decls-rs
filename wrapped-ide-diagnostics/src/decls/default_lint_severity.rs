@@ -4,4 +4,4 @@ macro_rules! default_lint_severity {
     };
 }
 
-default_lint_severity!()
+default_lint_severity!();

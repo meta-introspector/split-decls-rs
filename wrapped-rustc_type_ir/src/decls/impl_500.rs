@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         HasEscapingVarsVisitor!();
-        TypeVisitable!();
-        HasTypeFlagsVisitor!();
         TypeVisitableExt!();
+        HasErrorVisitor!();
+        HasTypeFlagsVisitor!();
+        TypeVisitable!();
         Interner!();
         FoundFlags!();
-        HasErrorVisitor!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_500 {
     };
 }
 
-impl_500!()
+impl_500!();

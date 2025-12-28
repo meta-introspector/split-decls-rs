@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Locks!();
         UniqueReentrantMutex!();
+        Locks!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

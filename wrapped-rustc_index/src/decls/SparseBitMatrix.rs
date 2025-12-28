@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IndexVec!();
-        DenseBitSet!();
         Idx!();
+        DenseBitSet!();
+        IndexVec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SparseBitMatrix {
     };
 }
 
-SparseBitMatrix!()
+SparseBitMatrix!();

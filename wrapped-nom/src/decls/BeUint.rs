@@ -4,4 +4,4 @@ macro_rules! BeUint {
     };
 }
 
-BeUint!()
+BeUint!();

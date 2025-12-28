@@ -4,4 +4,4 @@ macro_rules! BecauseExclusive {
     };
 }
 
-BecauseExclusive!()
+BecauseExclusive!();

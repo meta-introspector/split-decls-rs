@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_DYNSTR_ALIGN {
     };
 }
 
-DT_MIPS_DYNSTR_ALIGN!()
+DT_MIPS_DYNSTR_ALIGN!();

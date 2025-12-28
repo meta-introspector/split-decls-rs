@@ -11,4 +11,4 @@ macro_rules! check_sized_if_body {
     };
 }
 
-check_sized_if_body!()
+check_sized_if_body!();

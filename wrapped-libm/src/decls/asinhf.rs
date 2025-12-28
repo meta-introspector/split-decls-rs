@@ -4,4 +4,4 @@ macro_rules! asinhf {
     };
 }
 
-asinhf!()
+asinhf!();

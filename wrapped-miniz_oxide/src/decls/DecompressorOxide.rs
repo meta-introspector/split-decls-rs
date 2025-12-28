@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        State!();
         BitBuffer!();
         BigArray!();
+        State!();
         HuffmanTable!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! DecompressorOxide {
     };
 }
 
-DecompressorOxide!()
+DecompressorOxide!();

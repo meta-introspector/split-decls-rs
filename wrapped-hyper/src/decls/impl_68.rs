@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Read!();
         Compat!();
-        Result!();
-        ReadBuf!();
         Error!();
+        ReadBuf!();
+        Result!();
+        Read!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

@@ -4,4 +4,4 @@ macro_rules! scheduler {
     };
 }
 
-scheduler!()
+scheduler!();

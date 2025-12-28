@@ -4,4 +4,4 @@ macro_rules! PF_PARISC_SBP {
     };
 }
 
-PF_PARISC_SBP!()
+PF_PARISC_SBP!();

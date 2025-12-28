@@ -4,4 +4,4 @@ macro_rules! only_left_result {
     };
 }
 
-only_left_result!()
+only_left_result!();

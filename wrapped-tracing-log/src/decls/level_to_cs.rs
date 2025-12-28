@@ -11,4 +11,4 @@ macro_rules! level_to_cs {
     };
 }
 
-level_to_cs!()
+level_to_cs!();

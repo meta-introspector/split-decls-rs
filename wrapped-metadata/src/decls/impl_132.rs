@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NestedClass!();
-        File!();
-        TypeDef!();
-        TypeIndex!();
         Item!();
+        File!();
+        TypeIndex!();
+        TypeDef!();
+        NestedClass!();
         Row!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

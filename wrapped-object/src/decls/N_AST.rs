@@ -4,4 +4,4 @@ macro_rules! N_AST {
     };
 }
 
-N_AST!()
+N_AST!();

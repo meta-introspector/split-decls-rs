@@ -4,4 +4,4 @@ macro_rules! EF_SPARC_EXT_MASK {
     };
 }
 
-EF_SPARC_EXT_MASK!()
+EF_SPARC_EXT_MASK!();

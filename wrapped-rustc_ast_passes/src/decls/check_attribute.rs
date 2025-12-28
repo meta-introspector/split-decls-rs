@@ -11,4 +11,4 @@ macro_rules! check_attribute {
     };
 }
 
-check_attribute!()
+check_attribute!();

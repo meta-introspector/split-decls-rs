@@ -4,4 +4,4 @@ macro_rules! pbkdf2 {
     };
 }
 
-pbkdf2!()
+pbkdf2!();

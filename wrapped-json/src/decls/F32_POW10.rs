@@ -4,4 +4,4 @@ macro_rules! F32_POW10 {
     };
 }
 
-F32_POW10!()
+F32_POW10!();

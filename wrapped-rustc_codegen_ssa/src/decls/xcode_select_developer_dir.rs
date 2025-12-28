@@ -11,4 +11,4 @@ macro_rules! xcode_select_developer_dir {
     };
 }
 
-xcode_select_developer_dir!()
+xcode_select_developer_dir!();

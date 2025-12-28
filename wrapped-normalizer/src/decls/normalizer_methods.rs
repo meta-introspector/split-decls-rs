@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IsNormalizedSinkUtf16!();
         IsNormalizedSinkStr!();
+        IsNormalizedSinkUtf16!();
         IsNormalizedSinkUtf8!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! normalizer_methods {
     };
 }
 
-normalizer_methods!()
+normalizer_methods!();

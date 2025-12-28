@@ -4,4 +4,4 @@ macro_rules! BUFFER_WITH_SPILL_SIZE {
     };
 }
 
-BUFFER_WITH_SPILL_SIZE!()
+BUFFER_WITH_SPILL_SIZE!();

@@ -4,4 +4,4 @@ macro_rules! local_decls_for_sig {
     };
 }
 
-local_decls_for_sig!()
+local_decls_for_sig!();

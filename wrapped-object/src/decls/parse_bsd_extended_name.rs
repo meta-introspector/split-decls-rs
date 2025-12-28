@@ -12,4 +12,4 @@ macro_rules! parse_bsd_extended_name {
     };
 }
 
-parse_bsd_extended_name!()
+parse_bsd_extended_name!();

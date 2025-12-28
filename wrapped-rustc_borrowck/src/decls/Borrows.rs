@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BorrowSet!();
         BorrowData!();
+        BorrowSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Borrows {
     };
 }
 
-Borrows!()
+Borrows!();

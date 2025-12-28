@@ -4,4 +4,4 @@ macro_rules! SpawnStatus {
     };
 }
 
-SpawnStatus!()
+SpawnStatus!();

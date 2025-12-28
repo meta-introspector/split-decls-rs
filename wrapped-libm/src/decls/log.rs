@@ -4,4 +4,4 @@ macro_rules! log {
     };
 }
 
-log!()
+log!();

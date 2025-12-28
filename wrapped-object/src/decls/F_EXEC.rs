@@ -4,4 +4,4 @@ macro_rules! F_EXEC {
     };
 }
 
-F_EXEC!()
+F_EXEC!();

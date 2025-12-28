@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Token!();
-        UfcsCallInfo!();
-        SsrError!();
-        ResolvedPath!();
-        Resolver!();
         ResolvedPattern!();
+        Resolver!();
+        Token!();
+        SsrError!();
+        UfcsCallInfo!();
+        ResolvedPath!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

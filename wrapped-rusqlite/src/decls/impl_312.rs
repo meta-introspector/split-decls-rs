@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FromSqlResult!();
-        FromSqlError!();
         FromSql!();
         ValueRef!();
+        FromSqlResult!();
+        FromSqlError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_312 {
     };
 }
 
-impl_312!()
+impl_312!();

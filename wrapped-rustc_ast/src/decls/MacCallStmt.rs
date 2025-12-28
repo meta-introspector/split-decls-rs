@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Walkable!();
-        MacStmtStyle!();
         AttrVec!();
-        LazyAttrTokenStream!();
         MacCall!();
+        MacStmtStyle!();
+        LazyAttrTokenStream!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MacCallStmt {
     };
 }
 
-MacCallStmt!()
+MacCallStmt!();

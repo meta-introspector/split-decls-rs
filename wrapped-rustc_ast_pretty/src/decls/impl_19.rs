@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        PrintFrame!();
-        BufEntry!();
         IndentStyle!();
         Breaks!();
-        BreakToken!();
         BeginToken!();
+        BufEntry!();
+        BreakToken!();
         Token!();
-        Printer!();
+        PrintFrame!();
         BoxMarker!();
+        Printer!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TransmuteFrom!();
         Valid!();
+        TransmuteFrom!();
         SizeEq!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_transitive_transmute_from {
     };
 }
 
-impl_transitive_transmute_from!()
+impl_transitive_transmute_from!();

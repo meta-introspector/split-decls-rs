@@ -4,4 +4,4 @@ macro_rules! TINFL_STATUS_FAILED {
     };
 }
 
-TINFL_STATUS_FAILED!()
+TINFL_STATUS_FAILED!();

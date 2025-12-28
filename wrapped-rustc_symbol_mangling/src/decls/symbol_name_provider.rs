@@ -4,4 +4,4 @@ macro_rules! symbol_name_provider {
     };
 }
 
-symbol_name_provider!()
+symbol_name_provider!();

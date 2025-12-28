@@ -4,4 +4,4 @@ macro_rules! NonExhaustivePatternsTypeNotEmpty {
     };
 }
 
-NonExhaustivePatternsTypeNotEmpty!()
+NonExhaustivePatternsTypeNotEmpty!();

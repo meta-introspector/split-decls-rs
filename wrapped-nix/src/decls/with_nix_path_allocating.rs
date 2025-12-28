@@ -11,4 +11,4 @@ macro_rules! with_nix_path_allocating {
     };
 }
 
-with_nix_path_allocating!()
+with_nix_path_allocating!();

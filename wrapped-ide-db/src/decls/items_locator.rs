@@ -4,4 +4,4 @@ macro_rules! items_locator {
     };
 }
 
-items_locator!()
+items_locator!();

@@ -4,4 +4,4 @@ macro_rules! TAIL_BYTES {
     };
 }
 
-TAIL_BYTES!()
+TAIL_BYTES!();

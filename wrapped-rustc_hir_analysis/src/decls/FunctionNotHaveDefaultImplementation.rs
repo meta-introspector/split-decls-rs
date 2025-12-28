@@ -4,4 +4,4 @@ macro_rules! FunctionNotHaveDefaultImplementation {
     };
 }
 
-FunctionNotHaveDefaultImplementation!()
+FunctionNotHaveDefaultImplementation!();

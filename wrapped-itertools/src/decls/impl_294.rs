@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MinMaxResult!();
         Product!();
-        GroupingMap!();
+        MinMaxResult!();
         Groups!();
+        GroupingMap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_294 {
     };
 }
 
-impl_294!()
+impl_294!();

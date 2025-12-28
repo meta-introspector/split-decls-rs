@@ -4,4 +4,4 @@ macro_rules! LinkSelfContainedComponentsWrapper {
     };
 }
 
-LinkSelfContainedComponentsWrapper!()
+LinkSelfContainedComponentsWrapper!();

@@ -4,4 +4,4 @@ macro_rules! NistP384 {
     };
 }
 
-NistP384!()
+NistP384!();

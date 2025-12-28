@@ -11,4 +11,4 @@ macro_rules! SliceKind {
     };
 }
 
-SliceKind!()
+SliceKind!();

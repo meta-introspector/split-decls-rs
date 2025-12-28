@@ -4,4 +4,4 @@ macro_rules! FreeRegionMap {
     };
 }
 
-FreeRegionMap!()
+FreeRegionMap!();

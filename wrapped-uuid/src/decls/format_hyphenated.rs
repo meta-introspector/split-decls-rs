@@ -4,4 +4,4 @@ macro_rules! format_hyphenated {
     };
 }
 
-format_hyphenated!()
+format_hyphenated!();

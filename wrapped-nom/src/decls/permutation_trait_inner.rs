@@ -12,4 +12,4 @@ macro_rules! permutation_trait_inner {
     };
 }
 
-permutation_trait_inner!()
+permutation_trait_inner!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Job!();
+        StackJob!();
         JobResult!();
         Latch!();
-        StackJob!();
-        Job!();
         AbortIfPanic!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

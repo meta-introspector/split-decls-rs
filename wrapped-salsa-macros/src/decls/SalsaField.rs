@@ -4,4 +4,4 @@ macro_rules! SalsaField {
     };
 }
 
-SalsaField!()
+SalsaField!();

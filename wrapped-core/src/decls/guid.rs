@@ -4,4 +4,4 @@ macro_rules! guid {
     };
 }
 
-guid!()
+guid!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorCode!();
         Error!();
+        ErrorCode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! key_must_be_a_string {
     };
 }
 
-key_must_be_a_string!()
+key_must_be_a_string!();

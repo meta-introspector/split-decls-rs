@@ -4,4 +4,4 @@ macro_rules! View {
     };
 }
 
-View!()
+View!();

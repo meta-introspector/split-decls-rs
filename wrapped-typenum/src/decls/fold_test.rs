@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FoldProd!();
         FoldSum!();
+        FoldProd!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fold_test {
     };
 }
 
-fold_test!()
+fold_test!();

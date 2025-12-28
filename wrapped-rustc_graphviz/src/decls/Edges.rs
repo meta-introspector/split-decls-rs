@@ -4,4 +4,4 @@ macro_rules! Edges {
     };
 }
 
-Edges!()
+Edges!();

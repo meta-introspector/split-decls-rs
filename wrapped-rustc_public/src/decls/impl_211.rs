@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Stable!();
-        BoundRegion!();
-        BridgeTys!();
-        RegionKind!();
         EarlyParamRegion!();
+        Stable!();
+        RegionKind!();
         Placeholder!();
+        BridgeTys!();
+        BoundRegion!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_211 {
     };
 }
 
-impl_211!()
+impl_211!();

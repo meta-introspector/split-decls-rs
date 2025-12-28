@@ -11,4 +11,4 @@ macro_rules! llvm_asm_scalar_type {
     };
 }
 
-llvm_asm_scalar_type!()
+llvm_asm_scalar_type!();

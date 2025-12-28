@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         TrackedQuery!();
         InputQuery!();
+        Queries!();
         Transparent!();
         Intern!();
-        Queries!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

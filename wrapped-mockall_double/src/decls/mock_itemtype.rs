@@ -4,4 +4,4 @@ macro_rules! mock_itemtype {
     };
 }
 
-mock_itemtype!()
+mock_itemtype!();

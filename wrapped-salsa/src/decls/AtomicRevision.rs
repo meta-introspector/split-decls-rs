@@ -4,4 +4,4 @@ macro_rules! AtomicRevision {
     };
 }
 
-AtomicRevision!()
+AtomicRevision!();

@@ -4,4 +4,4 @@ macro_rules! err_validation_failure {
     };
 }
 
-err_validation_failure!()
+err_validation_failure!();

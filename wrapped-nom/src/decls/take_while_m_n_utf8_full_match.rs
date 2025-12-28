@@ -11,4 +11,4 @@ macro_rules! take_while_m_n_utf8_full_match {
     };
 }
 
-take_while_m_n_utf8_full_match!()
+take_while_m_n_utf8_full_match!();

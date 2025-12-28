@@ -4,4 +4,4 @@ macro_rules! doc_indent {
     };
 }
 
-doc_indent!()
+doc_indent!();

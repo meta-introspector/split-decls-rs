@@ -4,4 +4,4 @@ macro_rules! NakedFunctionsAsmBlock {
     };
 }
 
-NakedFunctionsAsmBlock!()
+NakedFunctionsAsmBlock!();

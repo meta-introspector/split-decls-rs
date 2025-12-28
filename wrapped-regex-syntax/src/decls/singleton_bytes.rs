@@ -13,4 +13,4 @@ macro_rules! singleton_bytes {
     };
 }
 
-singleton_bytes!()
+singleton_bytes!();

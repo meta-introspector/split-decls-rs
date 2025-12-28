@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Slab!();
         ActionKind!();
-        VacantEntry!();
         Config!();
         Active!();
+        Slab!();
+        VacantEntry!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! apply_action {
     };
 }
 
-apply_action!()
+apply_action!();

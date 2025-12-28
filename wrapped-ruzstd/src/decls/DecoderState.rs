@@ -4,4 +4,4 @@ macro_rules! DecoderState {
     };
 }
 
-DecoderState!()
+DecoderState!();

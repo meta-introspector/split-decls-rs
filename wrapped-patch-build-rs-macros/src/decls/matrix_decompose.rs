@@ -4,4 +4,4 @@ macro_rules! matrix_decompose {
     };
 }
 
-matrix_decompose!()
+matrix_decompose!();

@@ -4,4 +4,4 @@ macro_rules! DeprecatedSinceKind {
     };
 }
 
-DeprecatedSinceKind!()
+DeprecatedSinceKind!();

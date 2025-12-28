@@ -11,4 +11,4 @@ macro_rules! STT_GNU_IFUNC {
     };
 }
 
-STT_GNU_IFUNC!()
+STT_GNU_IFUNC!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TextEdit!();
-        SnippetEdit!();
         ChangeAnnotation!();
         FileSystemEdit!();
         ChangeAnnotationId!();
+        SnippetEdit!();
+        TextEdit!();
         SourceChange!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_179 {
     };
 }
 
-impl_179!()
+impl_179!();

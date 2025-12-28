@@ -4,4 +4,4 @@ macro_rules! is_below_max_level {
     };
 }
 
-is_below_max_level!()
+is_below_max_level!();

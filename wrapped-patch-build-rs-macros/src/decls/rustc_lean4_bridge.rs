@@ -4,4 +4,4 @@ macro_rules! rustc_lean4_bridge {
     };
 }
 
-rustc_lean4_bridge!()
+rustc_lean4_bridge!();

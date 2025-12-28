@@ -4,4 +4,4 @@ macro_rules! FieldOrTupleIdx {
     };
 }
 
-FieldOrTupleIdx!()
+FieldOrTupleIdx!();

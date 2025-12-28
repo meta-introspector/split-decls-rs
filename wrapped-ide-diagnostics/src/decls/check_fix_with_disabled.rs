@@ -11,4 +11,4 @@ macro_rules! check_fix_with_disabled {
     };
 }
 
-check_fix_with_disabled!()
+check_fix_with_disabled!();

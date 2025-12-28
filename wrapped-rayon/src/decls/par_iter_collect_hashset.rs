@@ -4,4 +4,4 @@ macro_rules! par_iter_collect_hashset {
     };
 }
 
-par_iter_collect_hashset!()
+par_iter_collect_hashset!();

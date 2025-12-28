@@ -4,4 +4,4 @@ macro_rules! draw {
     };
 }
 
-draw!()
+draw!();

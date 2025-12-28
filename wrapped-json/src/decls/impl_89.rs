@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Map!();
         Value!();
-        MapAccess!();
         Deserializer!();
-        Error!();
+        Map!();
+        MapAccess!();
         Formatter!();
+        Error!();
+        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

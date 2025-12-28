@@ -4,4 +4,4 @@ macro_rules! worker_local {
     };
 }
 
-worker_local!()
+worker_local!();

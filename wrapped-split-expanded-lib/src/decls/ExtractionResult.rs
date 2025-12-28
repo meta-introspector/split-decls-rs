@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FileMetadata!();
-        PublicSymbol!();
-        Declaration!();
         ErrorSample!();
+        PublicSymbol!();
+        FileMetadata!();
+        Declaration!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ExtractionResult {
     };
 }
 
-ExtractionResult!()
+ExtractionResult!();

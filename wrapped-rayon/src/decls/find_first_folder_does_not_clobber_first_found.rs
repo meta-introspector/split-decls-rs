@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MatchPosition!();
         FindFolder!();
+        MatchPosition!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! find_first_folder_does_not_clobber_first_found {
     };
 }
 
-find_first_folder_does_not_clobber_first_found!()
+find_first_folder_does_not_clobber_first_found!();

@@ -11,4 +11,4 @@ macro_rules! try_slice_owned {
     };
 }
 
-try_slice_owned!()
+try_slice_owned!();

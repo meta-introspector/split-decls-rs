@@ -4,4 +4,4 @@ macro_rules! minify_val {
     };
 }
 
-minify_val!()
+minify_val!();

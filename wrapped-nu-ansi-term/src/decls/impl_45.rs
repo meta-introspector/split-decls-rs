@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Style!();
         AnsiByteString!();
+        Style!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

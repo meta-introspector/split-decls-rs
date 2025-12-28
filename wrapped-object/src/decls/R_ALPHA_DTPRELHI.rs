@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_DTPRELHI {
     };
 }
 
-R_ALPHA_DTPRELHI!()
+R_ALPHA_DTPRELHI!();

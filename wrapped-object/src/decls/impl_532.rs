@@ -1,42 +1,42 @@
 macro_rules! deps {
     () => {
-        DynamicRelocationIterator!();
-        MachOSection!();
-        SymbolTable!();
-        Dynamic!();
-        ObjectMap!();
-        MachOSegment!();
-        ReadRef!();
-        Import!();
-        ComdatIterator!();
-        ObjectKind!();
-        MachOSymbolTable!();
-        SubArchitecture!();
-        MachO!();
-        Segment!();
-        Export!();
         Object!();
-        SymbolIndex!();
-        SymbolIterator!();
-        Architecture!();
-        FileFlags!();
-        Comdat!();
-        MachOSegmentIterator!();
-        SegmentIterator!();
-        SectionIterator!();
-        MachHeader!();
-        Symbol!();
-        MachOFile!();
-        NoDynamicRelocationIterator!();
-        MachOSymbol!();
-        MachOComdat!();
-        Result!();
-        Section!();
-        MachOSymbolIterator!();
-        MachOComdatIterator!();
-        SectionIndex!();
         MachOSectionIterator!();
+        Comdat!();
+        FileFlags!();
+        ObjectMap!();
+        MachOComdat!();
         ByteString!();
+        MachOSymbolTable!();
+        Symbol!();
+        ObjectKind!();
+        Architecture!();
+        SectionIndex!();
+        MachOSegmentIterator!();
+        ComdatIterator!();
+        MachHeader!();
+        SymbolIterator!();
+        Result!();
+        SymbolIndex!();
+        MachOSymbol!();
+        MachOComdatIterator!();
+        Section!();
+        Import!();
+        ReadRef!();
+        MachOSegment!();
+        MachOSymbolIterator!();
+        MachOFile!();
+        Dynamic!();
+        Export!();
+        MachOSection!();
+        Segment!();
+        SectionIterator!();
+        SymbolTable!();
+        SubArchitecture!();
+        DynamicRelocationIterator!();
+        SegmentIterator!();
+        NoDynamicRelocationIterator!();
+        MachO!();
     };
 }
 
@@ -47,4 +47,4 @@ macro_rules! impl_532 {
     };
 }
 
-impl_532!()
+impl_532!();

@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_ERR_PAUSE {
     };
 }
 
-NGHTTP2_ERR_PAUSE!()
+NGHTTP2_ERR_PAUSE!();

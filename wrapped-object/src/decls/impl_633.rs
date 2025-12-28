@@ -1,44 +1,44 @@
 macro_rules! deps {
     () => {
-        ObjectKind!();
-        PeFile!();
-        SymbolIndex!();
-        Comdat!();
-        Export!();
-        CoffSymbol!();
-        SectionIterator!();
-        PeComdatIterator!();
-        SymbolIterator!();
-        SubArchitecture!();
-        ComdatIterator!();
         SegmentIterator!();
-        NoDynamicRelocationIterator!();
-        Segment!();
-        Bytes!();
-        Dynamic!();
-        Symbol!();
-        Result!();
-        ByteString!();
-        PeSection!();
-        ReadRef!();
-        PeSegmentIterator!();
-        SectionIndex!();
         ImageDebugDirectory!();
-        FileFlags!();
-        PeSegment!();
-        SymbolTable!();
+        Bytes!();
+        PeComdatIterator!();
+        DynamicRelocationIterator!();
+        Export!();
         Section!();
-        Import!();
-        PeComdat!();
-        ImageNtHeaders!();
+        Comdat!();
+        Dynamic!();
         PeSectionIterator!();
-        Object!();
-        CodeView!();
-        Architecture!();
+        Import!();
+        Segment!();
         CoffSymbolIterator!();
         CoffSymbolTable!();
-        DynamicRelocationIterator!();
+        NoDynamicRelocationIterator!();
+        ComdatIterator!();
+        CoffSymbol!();
+        SymbolIterator!();
+        Object!();
+        SubArchitecture!();
+        SymbolTable!();
+        SectionIndex!();
+        PeSegment!();
+        SymbolIndex!();
+        Symbol!();
+        PeSection!();
+        SectionIterator!();
         U32!();
+        Result!();
+        FileFlags!();
+        PeSegmentIterator!();
+        CodeView!();
+        Architecture!();
+        PeFile!();
+        ImageNtHeaders!();
+        PeComdat!();
+        ReadRef!();
+        ByteString!();
+        ObjectKind!();
     };
 }
 
@@ -49,4 +49,4 @@ macro_rules! impl_633 {
     };
 }
 
-impl_633!()
+impl_633!();

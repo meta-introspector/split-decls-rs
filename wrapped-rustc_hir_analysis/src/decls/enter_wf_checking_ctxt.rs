@@ -11,4 +11,4 @@ macro_rules! enter_wf_checking_ctxt {
     };
 }
 
-enter_wf_checking_ctxt!()
+enter_wf_checking_ctxt!();

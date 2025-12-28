@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        ExportsTrieIterator!();
         Error!();
         LinkeditDataCommand!();
-        FunctionStartsIterator!();
-        Endian!();
+        ReadRef!();
+        ExportsTrieIterator!();
         Result!();
+        Endian!();
+        FunctionStartsIterator!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_562 {
     };
 }
 
-impl_562!()
+impl_562!();

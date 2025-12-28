@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         TextEdit!();
-        FileSystemEdit!();
         SnippetEdit!();
         ChangeAnnotationId!();
+        FileSystemEdit!();
         ChangeAnnotation!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! SourceChange {
     };
 }
 
-SourceChange!()
+SourceChange!();

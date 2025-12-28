@@ -4,4 +4,4 @@ macro_rules! test_generate_prelude_no_force_no_overwrite {
     };
 }
 
-test_generate_prelude_no_force_no_overwrite!()
+test_generate_prelude_no_force_no_overwrite!();

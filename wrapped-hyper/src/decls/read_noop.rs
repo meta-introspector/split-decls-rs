@@ -4,4 +4,4 @@ macro_rules! read_noop {
     };
 }
 
-read_noop!()
+read_noop!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EncryptWith!();
-        FileOptions!();
-        CompressionMethod!();
         FullFileOptions!();
-        DateTime!();
+        CompressionMethod!();
+        FileOptions!();
         ExtendedFileOptions!();
+        EncryptWith!();
+        DateTime!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

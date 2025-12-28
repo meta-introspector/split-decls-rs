@@ -4,4 +4,4 @@ macro_rules! FuncLR {
     };
 }
 
-FuncLR!()
+FuncLR!();

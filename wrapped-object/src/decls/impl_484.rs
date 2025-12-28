@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Endian!();
         ReadRef!();
-        DyldCacheMapping!();
         Result!();
+        DyldCacheMapping!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_484 {
     };
 }
 
-impl_484!()
+impl_484!();

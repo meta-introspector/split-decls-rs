@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        CompletionItemKind!();
-        RenderContext!();
         PathKind!();
         DotAccess!();
-        CompletionContext!();
-        Visible!();
-        Completions!();
-        PatternContext!();
-        PathCompletionCtx!();
         CompletionItem!();
+        RenderContext!();
+        PathCompletionCtx!();
+        Visible!();
+        CompletionContext!();
+        Completions!();
+        CompletionItemKind!();
+        PatternContext!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

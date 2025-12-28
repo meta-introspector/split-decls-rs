@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         LocalKind!();
+        PlaceRef!();
         BuilderMethods!();
         LocalAnalyzer!();
-        PlaceRef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_446 {
     };
 }
 
-impl_446!()
+impl_446!();

@@ -11,4 +11,4 @@ macro_rules! is_name_ref_in_test {
     };
 }
 
-is_name_ref_in_test!()
+is_name_ref_in_test!();

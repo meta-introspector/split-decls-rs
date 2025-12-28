@@ -4,4 +4,4 @@ macro_rules! R_MSP430_16_BYTE {
     };
 }
 
-R_MSP430_16_BYTE!()
+R_MSP430_16_BYTE!();

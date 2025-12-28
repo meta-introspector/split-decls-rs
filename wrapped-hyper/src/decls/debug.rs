@@ -4,4 +4,4 @@ macro_rules! debug {
     };
 }
 
-debug!()
+debug!();

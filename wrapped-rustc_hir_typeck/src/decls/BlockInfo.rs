@@ -4,4 +4,4 @@ macro_rules! BlockInfo {
     };
 }
 
-BlockInfo!()
+BlockInfo!();

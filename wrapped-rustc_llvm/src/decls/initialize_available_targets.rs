@@ -4,4 +4,4 @@ macro_rules! initialize_available_targets {
     };
 }
 
-initialize_available_targets!()
+initialize_available_targets!();

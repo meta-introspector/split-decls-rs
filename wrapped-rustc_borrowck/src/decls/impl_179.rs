@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SccAnnotations!();
         RegionDefinition!();
+        SccAnnotations!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_179 {
     };
 }
 
-impl_179!()
+impl_179!();

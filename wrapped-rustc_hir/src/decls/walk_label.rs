@@ -11,4 +11,4 @@ macro_rules! walk_label {
     };
 }
 
-walk_label!()
+walk_label!();

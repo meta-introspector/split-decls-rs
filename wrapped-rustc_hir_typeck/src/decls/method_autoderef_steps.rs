@@ -11,4 +11,4 @@ macro_rules! method_autoderef_steps {
     };
 }
 
-method_autoderef_steps!()
+method_autoderef_steps!();

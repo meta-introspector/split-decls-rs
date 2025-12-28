@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Initialized!();
         IntoBytes!();
-        Valid!();
+        Initialized!();
         TransmuteFrom!();
+        Valid!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_377 {
     };
 }
 
-impl_377!()
+impl_377!();

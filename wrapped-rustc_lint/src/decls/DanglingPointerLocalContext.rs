@@ -4,4 +4,4 @@ macro_rules! DanglingPointerLocalContext {
     };
 }
 
-DanglingPointerLocalContext!()
+DanglingPointerLocalContext!();

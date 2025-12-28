@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Error!();
+        V2!();
         Claims!();
         TrustedToken!();
-        V2!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

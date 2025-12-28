@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        OnDuplicate!();
-        DeprecationParser!();
-        Stage!();
-        AttributeOrder!();
-        InvalidSince!();
-        SingleAttributeParser!();
-        MissingNote!();
-        MissingSince!();
         DeprecatedItemSuggestion!();
-        AllowedTargets!();
-        ArgParser!();
         AcceptContext!();
+        AttributeOrder!();
+        ArgParser!();
+        DeprecationParser!();
+        OnDuplicate!();
+        InvalidSince!();
+        MissingSince!();
+        AllowedTargets!();
+        SingleAttributeParser!();
+        Stage!();
+        MissingNote!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

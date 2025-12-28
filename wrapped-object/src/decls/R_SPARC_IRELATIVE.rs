@@ -4,4 +4,4 @@ macro_rules! R_SPARC_IRELATIVE {
     };
 }
 
-R_SPARC_IRELATIVE!()
+R_SPARC_IRELATIVE!();

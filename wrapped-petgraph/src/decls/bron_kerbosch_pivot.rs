@@ -4,4 +4,4 @@ macro_rules! bron_kerbosch_pivot {
     };
 }
 
-bron_kerbosch_pivot!()
+bron_kerbosch_pivot!();

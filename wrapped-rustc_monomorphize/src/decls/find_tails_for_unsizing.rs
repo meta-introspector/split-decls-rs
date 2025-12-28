@@ -4,4 +4,4 @@ macro_rules! find_tails_for_unsizing {
     };
 }
 
-find_tails_for_unsizing!()
+find_tails_for_unsizing!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HighlightedRange!();
-        HighlightMap!();
         WalkExpandedExprCtx!();
+        HighlightMap!();
+        HighlightedRange!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! highlight_break_points {
     };
 }
 
-highlight_break_points!()
+highlight_break_points!();

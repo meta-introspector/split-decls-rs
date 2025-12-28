@@ -4,4 +4,4 @@ macro_rules! compute_pow5 {
     };
 }
 
-compute_pow5!()
+compute_pow5!();

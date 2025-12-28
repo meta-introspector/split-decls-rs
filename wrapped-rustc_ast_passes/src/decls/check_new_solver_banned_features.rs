@@ -11,4 +11,4 @@ macro_rules! check_new_solver_banned_features {
     };
 }
 
-check_new_solver_banned_features!()
+check_new_solver_banned_features!();

@@ -4,4 +4,4 @@ macro_rules! Identity {
     };
 }
 
-Identity!()
+Identity!();

@@ -11,4 +11,4 @@ macro_rules! get_declarations_by_type {
     };
 }
 
-get_declarations_by_type!()
+get_declarations_by_type!();

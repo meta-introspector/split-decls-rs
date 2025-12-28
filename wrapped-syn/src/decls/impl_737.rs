@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TokenTreeHelper!();
-        Group!();
         TokenStreamHelper!();
+        Group!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_737 {
     };
 }
 
-impl_737!()
+impl_737!();

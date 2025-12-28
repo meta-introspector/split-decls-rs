@@ -4,4 +4,4 @@ macro_rules! MAX_POS {
     };
 }
 
-MAX_POS!()
+MAX_POS!();

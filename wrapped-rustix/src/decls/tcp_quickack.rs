@@ -11,4 +11,4 @@ macro_rules! tcp_quickack {
     };
 }
 
-tcp_quickack!()
+tcp_quickack!();

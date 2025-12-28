@@ -4,4 +4,4 @@ macro_rules! type_foldable_derive {
     };
 }
 
-type_foldable_derive!()
+type_foldable_derive!();

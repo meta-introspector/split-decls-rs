@@ -11,4 +11,4 @@ macro_rules! fast_path {
     };
 }
 
-fast_path!()
+fast_path!();

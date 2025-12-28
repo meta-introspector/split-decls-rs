@@ -4,4 +4,4 @@ macro_rules! enum_internally {
     };
 }
 
-enum_internally!()
+enum_internally!();

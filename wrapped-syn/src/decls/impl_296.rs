@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        LifetimesMut!();
-        TypeParamsMut!();
-        TypeGenerics!();
-        ConstParamsMut!();
-        ConstParams!();
-        Punctuated!();
         Lifetimes!();
         TypeParams!();
+        TypeParamsMut!();
+        Punctuated!();
+        ConstParamsMut!();
         ImplGenerics!();
+        LifetimesMut!();
+        TypeGenerics!();
+        ConstParams!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_296 {
     };
 }
 
-impl_296!()
+impl_296!();

@@ -4,4 +4,4 @@ macro_rules! TAI_THAM {
     };
 }
 
-TAI_THAM!()
+TAI_THAM!();

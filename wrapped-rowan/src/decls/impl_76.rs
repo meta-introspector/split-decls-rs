@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SyntaxElement!();
-        PreorderWithTokens!();
-        Language!();
         WalkEvent!();
+        Language!();
+        PreorderWithTokens!();
+        SyntaxElement!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

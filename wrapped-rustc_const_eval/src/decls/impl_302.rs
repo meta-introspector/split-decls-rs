@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        AllocRefMut!();
-        Operand!();
-        Projectable!();
+        MemPlaceMeta!();
+        MPlaceTy!();
+        Machine!();
         AllocRef!();
+        Operand!();
+        OffsetMode!();
+        ImmTy!();
+        PlaceTy!();
         Place!();
         Immediate!();
-        MPlaceTy!();
-        PlaceTy!();
-        OffsetMode!();
-        InterpCx!();
-        ImmTy!();
-        MemPlaceMeta!();
-        MemoryKind!();
-        MemPlace!();
-        Machine!();
         Writeable!();
+        MemPlace!();
+        Projectable!();
+        AllocRefMut!();
+        InterpCx!();
+        MemoryKind!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_302 {
     };
 }
 
-impl_302!()
+impl_302!();

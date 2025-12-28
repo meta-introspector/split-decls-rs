@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Token!();
         Score!();
+        Token!();
         Indents!();
         IndentLevel!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

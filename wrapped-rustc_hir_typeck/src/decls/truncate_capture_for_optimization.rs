@@ -4,4 +4,4 @@ macro_rules! truncate_capture_for_optimization {
     };
 }
 
-truncate_capture_for_optimization!()
+truncate_capture_for_optimization!();

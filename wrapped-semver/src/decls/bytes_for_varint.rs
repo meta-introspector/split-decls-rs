@@ -4,4 +4,4 @@ macro_rules! bytes_for_varint {
     };
 }
 
-bytes_for_varint!()
+bytes_for_varint!();

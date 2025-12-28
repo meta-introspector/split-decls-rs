@@ -11,4 +11,4 @@ macro_rules! copy_error {
     };
 }
 
-copy_error!()
+copy_error!();

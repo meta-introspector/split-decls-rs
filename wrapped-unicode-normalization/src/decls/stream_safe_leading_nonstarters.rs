@@ -4,4 +4,4 @@ macro_rules! stream_safe_leading_nonstarters {
     };
 }
 
-stream_safe_leading_nonstarters!()
+stream_safe_leading_nonstarters!();

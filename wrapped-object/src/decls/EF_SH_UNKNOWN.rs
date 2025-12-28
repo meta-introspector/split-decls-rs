@@ -4,4 +4,4 @@ macro_rules! EF_SH_UNKNOWN {
     };
 }
 
-EF_SH_UNKNOWN!()
+EF_SH_UNKNOWN!();

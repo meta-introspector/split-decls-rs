@@ -11,4 +11,4 @@ macro_rules! jaro_winkler {
     };
 }
 
-jaro_winkler!()
+jaro_winkler!();

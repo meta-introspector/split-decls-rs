@@ -4,4 +4,4 @@ macro_rules! read_vari32 {
     };
 }
 
-read_vari32!()
+read_vari32!();

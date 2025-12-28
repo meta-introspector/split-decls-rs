@@ -11,4 +11,4 @@ macro_rules! handle_option_as_ref {
     };
 }
 
-handle_option_as_ref!()
+handle_option_as_ref!();

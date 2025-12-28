@@ -4,4 +4,4 @@ macro_rules! LateContext {
     };
 }
 
-LateContext!()
+LateContext!();

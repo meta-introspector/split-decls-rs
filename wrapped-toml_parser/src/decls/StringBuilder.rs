@@ -4,4 +4,4 @@ macro_rules! StringBuilder {
     };
 }
 
-StringBuilder!()
+StringBuilder!();

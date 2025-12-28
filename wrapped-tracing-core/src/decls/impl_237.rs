@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Current!();
         Subscriber!();
-        Id!();
         Metadata!();
+        Current!();
+        Id!();
         CurrentInner!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

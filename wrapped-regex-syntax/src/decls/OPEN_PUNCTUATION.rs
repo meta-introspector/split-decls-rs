@@ -4,4 +4,4 @@ macro_rules! OPEN_PUNCTUATION {
     };
 }
 
-OPEN_PUNCTUATION!()
+OPEN_PUNCTUATION!();

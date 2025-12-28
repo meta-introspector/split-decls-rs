@@ -4,4 +4,4 @@ macro_rules! splat {
     };
 }
 
-splat!()
+splat!();

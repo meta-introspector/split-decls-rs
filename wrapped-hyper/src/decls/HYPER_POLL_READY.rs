@@ -4,4 +4,4 @@ macro_rules! HYPER_POLL_READY {
     };
 }
 
-HYPER_POLL_READY!()
+HYPER_POLL_READY!();

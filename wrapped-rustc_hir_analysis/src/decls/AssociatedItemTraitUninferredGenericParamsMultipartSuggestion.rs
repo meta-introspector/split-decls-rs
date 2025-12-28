@@ -4,4 +4,4 @@ macro_rules! AssociatedItemTraitUninferredGenericParamsMultipartSuggestion {
     };
 }
 
-AssociatedItemTraitUninferredGenericParamsMultipartSuggestion!()
+AssociatedItemTraitUninferredGenericParamsMultipartSuggestion!();

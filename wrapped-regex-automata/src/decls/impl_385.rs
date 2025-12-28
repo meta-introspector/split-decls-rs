@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        PatternSet!();
-        ReverseHybridCache!();
-        Cache!();
         Match!();
-        HalfMatch!();
-        Strategy!();
-        Core!();
-        PikeVM!();
-        DFA!();
-        GroupInfo!();
-        Captures!();
         NonMaxUsize!();
-        Input!();
         PatternID!();
+        PatternSet!();
+        DFA!();
+        ReverseHybridCache!();
+        HalfMatch!();
+        GroupInfo!();
+        Input!();
+        Strategy!();
+        Cache!();
+        Captures!();
+        PikeVM!();
         Anchored!();
+        Core!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_385 {
     };
 }
 
-impl_385!()
+impl_385!();

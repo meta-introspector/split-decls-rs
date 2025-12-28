@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Attribute!();
-        LazyAttrTokenStream!();
-        Delimiter!();
         TokenStream!();
         AttrStyle!();
+        LazyAttrTokenStream!();
+        Attribute!();
+        Delimiter!();
         TokenTree!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! attrs_and_tokens_to_token_trees {
     };
 }
 
-attrs_and_tokens_to_token_trees!()
+attrs_and_tokens_to_token_trees!();

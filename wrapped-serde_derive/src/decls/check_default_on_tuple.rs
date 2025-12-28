@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Default!();
+        Container!();
+        Style!();
         Ctxt!();
         Data!();
-        Container!();
-        Default!();
-        Style!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! check_default_on_tuple {
     };
 }
 
-check_default_on_tuple!()
+check_default_on_tuple!();

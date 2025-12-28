@@ -4,4 +4,4 @@ macro_rules! runtime {
     };
 }
 
-runtime!()
+runtime!();

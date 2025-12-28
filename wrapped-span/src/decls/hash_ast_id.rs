@@ -11,4 +11,4 @@ macro_rules! hash_ast_id {
     };
 }
 
-hash_ast_id!()
+hash_ast_id!();

@@ -4,4 +4,4 @@ macro_rules! FAST_LOOKUP_SIZE {
     };
 }
 
-FAST_LOOKUP_SIZE!()
+FAST_LOOKUP_SIZE!();

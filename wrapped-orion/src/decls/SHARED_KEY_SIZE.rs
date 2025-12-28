@@ -4,4 +4,4 @@ macro_rules! SHARED_KEY_SIZE {
     };
 }
 
-SHARED_KEY_SIZE!()
+SHARED_KEY_SIZE!();

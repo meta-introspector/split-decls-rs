@@ -11,4 +11,4 @@ macro_rules! is_impl_slice {
     };
 }
 
-is_impl_slice!()
+is_impl_slice!();

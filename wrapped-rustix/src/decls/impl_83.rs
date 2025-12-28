@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UserDefinedFlags!();
-        Signal!();
         Pid!();
         Event!();
+        Signal!();
         EventFilter!();
+        UserDefinedFlags!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

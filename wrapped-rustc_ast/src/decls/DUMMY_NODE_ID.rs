@@ -4,4 +4,4 @@ macro_rules! DUMMY_NODE_ID {
     };
 }
 
-DUMMY_NODE_ID!()
+DUMMY_NODE_ID!();

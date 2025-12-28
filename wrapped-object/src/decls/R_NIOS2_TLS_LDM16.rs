@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_TLS_LDM16 {
     };
 }
 
-R_NIOS2_TLS_LDM16!()
+R_NIOS2_TLS_LDM16!();

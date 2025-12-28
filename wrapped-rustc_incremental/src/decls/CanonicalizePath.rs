@@ -4,4 +4,4 @@ macro_rules! CanonicalizePath {
     };
 }
 
-CanonicalizePath!()
+CanonicalizePath!();

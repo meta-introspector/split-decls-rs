@@ -4,4 +4,4 @@ macro_rules! R_68K_TLS_LE8 {
     };
 }
 
-R_68K_TLS_LE8!()
+R_68K_TLS_LE8!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NodeData!();
         Green!();
+        NodeData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! free {
     };
 }
 
-free!()
+free!();

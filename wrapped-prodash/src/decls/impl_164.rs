@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NestedProgress!();
-        Discard!();
         DoOrDiscard!();
         Either!();
+        NestedProgress!();
+        Discard!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_164 {
     };
 }
 
-impl_164!()
+impl_164!();

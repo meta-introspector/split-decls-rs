@@ -4,4 +4,4 @@ macro_rules! pattern_similarity {
     };
 }
 
-pattern_similarity!()
+pattern_similarity!();

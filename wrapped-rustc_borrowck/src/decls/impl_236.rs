@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ReadOrWrite!();
-        ReadKind!();
         AccessDepth!();
         LocalMutationIsAllowed!();
-        ArtificialField!();
-        WriteKind!();
         LoanInvalidationsGenerator!();
+        ReadKind!();
+        WriteKind!();
+        ArtificialField!();
+        ReadOrWrite!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_236 {
     };
 }
 
-impl_236!()
+impl_236!();

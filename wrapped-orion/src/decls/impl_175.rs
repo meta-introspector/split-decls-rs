@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
         Sha3!();
         Sha3_256!();
+        UnknownCryptoError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_175 {
     };
 }
 
-impl_175!()
+impl_175!();

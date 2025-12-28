@@ -4,4 +4,4 @@ macro_rules! NUL_REPLACE {
     };
 }
 
-NUL_REPLACE!()
+NUL_REPLACE!();

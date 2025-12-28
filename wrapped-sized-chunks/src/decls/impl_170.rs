@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Slice!();
         RingBuffer!();
         Iter!();
+        Slice!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

@@ -4,4 +4,4 @@ macro_rules! is_char_boundary {
     };
 }
 
-is_char_boundary!()
+is_char_boundary!();

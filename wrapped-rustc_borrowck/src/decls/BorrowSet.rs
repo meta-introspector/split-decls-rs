@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LocalsStateAtExit!();
-        BorrowData!();
         Locations!();
+        BorrowData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! BorrowSet {
     };
 }
 
-BorrowSet!()
+BorrowSet!();

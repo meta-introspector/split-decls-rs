@@ -4,4 +4,4 @@ macro_rules! IMAGE_SIZEOF_SYMBOL {
     };
 }
 
-IMAGE_SIZEOF_SYMBOL!()
+IMAGE_SIZEOF_SYMBOL!();

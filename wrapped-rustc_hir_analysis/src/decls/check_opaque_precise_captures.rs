@@ -4,4 +4,4 @@ macro_rules! check_opaque_precise_captures {
     };
 }
 
-check_opaque_precise_captures!()
+check_opaque_precise_captures!();

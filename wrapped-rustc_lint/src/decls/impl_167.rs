@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DropRefDiag!();
-        ForgetRefDiag!();
-        ForgetCopyDiag!();
-        DropCopyDiag!();
-        UndroppedManuallyDropsDiag!();
-        UndroppedManuallyDropsSuggestion!();
-        LateContext!();
         UseLetUnderscoreIgnoreSuggestion!();
+        UndroppedManuallyDropsDiag!();
+        DropRefDiag!();
+        LateContext!();
+        DropCopyDiag!();
+        ForgetCopyDiag!();
+        ForgetRefDiag!();
+        UndroppedManuallyDropsSuggestion!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

@@ -4,4 +4,4 @@ macro_rules! did_has_local_parent {
     };
 }
 
-did_has_local_parent!()
+did_has_local_parent!();

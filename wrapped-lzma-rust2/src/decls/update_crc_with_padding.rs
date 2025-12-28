@@ -4,4 +4,4 @@ macro_rules! update_crc_with_padding {
     };
 }
 
-update_crc_with_padding!()
+update_crc_with_padding!();

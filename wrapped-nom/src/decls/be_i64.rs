@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Needed!();
         ErrorKind!();
+        ParseError!();
         Input!();
         Parser!();
-        ParseError!();
+        Needed!();
         Error!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! be_i64 {
     };
 }
 
-be_i64!()
+be_i64!();

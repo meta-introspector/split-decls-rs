@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Delimiter!();
-        DelimSpan!();
-        Group!();
         Span!();
+        Delimiter!();
         TokenStream!();
+        Group!();
+        DelimSpan!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_216 {
     };
 }
 
-impl_216!()
+impl_216!();

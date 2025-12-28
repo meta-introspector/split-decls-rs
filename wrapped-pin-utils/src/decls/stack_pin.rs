@@ -4,4 +4,4 @@ macro_rules! stack_pin {
     };
 }
 
-stack_pin!()
+stack_pin!();

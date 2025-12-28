@@ -4,4 +4,4 @@ macro_rules! MappedSequenceVisitor {
     };
 }
 
-MappedSequenceVisitor!()
+MappedSequenceVisitor!();

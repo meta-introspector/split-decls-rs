@@ -11,4 +11,4 @@ macro_rules! count_dependencies {
     };
 }
 
-count_dependencies!()
+count_dependencies!();

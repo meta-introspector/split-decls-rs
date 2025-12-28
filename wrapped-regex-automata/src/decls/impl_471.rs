@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        ThompsonRef!();
-        NFA!();
-        WhichCaptures!();
         Start!();
-        Utf8Compiler!();
-        BuildError!();
-        Transition!();
-        PatternID!();
-        Look!();
-        StateID!();
         Compiler!();
-        Utf8SuffixKey!();
+        PatternID!();
         LiteralTrie!();
+        Look!();
+        Utf8Compiler!();
+        ThompsonRef!();
+        StateID!();
+        NFA!();
+        BuildError!();
+        Utf8SuffixKey!();
+        Transition!();
+        WhichCaptures!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_471 {
     };
 }
 
-impl_471!()
+impl_471!();

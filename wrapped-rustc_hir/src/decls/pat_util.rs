@@ -4,4 +4,4 @@ macro_rules! pat_util {
     };
 }
 
-pat_util!()
+pat_util!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TokenKind!();
         Span!();
         Token!();
-        TokenKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_122 {
     };
 }
 
-impl_122!()
+impl_122!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Stage!();
         AllowedTargets!();
         PointeeParser!();
         NoArgsAttributeParser!();
+        Stage!();
         OnDuplicate!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_230 {
     };
 }
 
-impl_230!()
+impl_230!();

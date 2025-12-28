@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Manifest!();
         Directory!();
         Update!();
-        Manifest!();
         PathDependency!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Project {
     };
 }
 
-Project!()
+Project!();

@@ -4,4 +4,4 @@ macro_rules! compute_relevant_live_locals {
     };
 }
 
-compute_relevant_live_locals!()
+compute_relevant_live_locals!();

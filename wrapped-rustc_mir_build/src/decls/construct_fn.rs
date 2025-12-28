@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BlockAnd!();
         Builder!();
         Scope!();
+        BlockAnd!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! construct_fn {
     };
 }
 
-construct_fn!()
+construct_fn!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FSEScratch!();
-        Sequence!();
         DecodeSequenceError!();
         BitReaderReversed!();
-        SequencesHeader!();
+        FSEScratch!();
         FSEDecoder!();
+        SequencesHeader!();
+        Sequence!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! decode_sequences_with_rle {
     };
 }
 
-decode_sequences_with_rle!()
+decode_sequences_with_rle!();

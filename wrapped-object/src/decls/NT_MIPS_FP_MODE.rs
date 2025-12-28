@@ -4,4 +4,4 @@ macro_rules! NT_MIPS_FP_MODE {
     };
 }
 
-NT_MIPS_FP_MODE!()
+NT_MIPS_FP_MODE!();

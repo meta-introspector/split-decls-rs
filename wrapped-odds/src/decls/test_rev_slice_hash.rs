@@ -11,4 +11,4 @@ macro_rules! test_rev_slice_hash {
     };
 }
 
-test_rev_slice_hash!()
+test_rev_slice_hash!();

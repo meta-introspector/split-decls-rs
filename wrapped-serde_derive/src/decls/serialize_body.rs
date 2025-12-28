@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Fragment!();
         Parameters!();
-        Container!();
-        Style!();
+        Fragment!();
         Data!();
+        Style!();
+        Container!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! serialize_body {
     };
 }
 
-serialize_body!()
+serialize_body!();

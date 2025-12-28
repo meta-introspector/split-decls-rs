@@ -4,4 +4,4 @@ macro_rules! MutblCap {
     };
 }
 
-MutblCap!()
+MutblCap!();

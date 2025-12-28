@@ -4,4 +4,4 @@ macro_rules! apply_capture_kind_on_capture_ty {
     };
 }
 
-apply_capture_kind_on_capture_ty!()
+apply_capture_kind_on_capture_ty!();

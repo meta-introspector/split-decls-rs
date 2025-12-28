@@ -4,4 +4,4 @@ macro_rules! vfs_path {
     };
 }
 
-vfs_path!()
+vfs_path!();

@@ -4,4 +4,4 @@ macro_rules! LL_EXACT_MATCH {
     };
 }
 
-LL_EXACT_MATCH!()
+LL_EXACT_MATCH!();

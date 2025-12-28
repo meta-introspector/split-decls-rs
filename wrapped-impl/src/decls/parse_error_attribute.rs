@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Transparent!();
-        Fmt!();
-        Attrs!();
         Display!();
+        Attrs!();
+        Fmt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_error_attribute {
     };
 }
 
-parse_error_attribute!()
+parse_error_attribute!();

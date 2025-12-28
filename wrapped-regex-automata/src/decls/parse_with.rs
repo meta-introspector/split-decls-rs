@@ -11,4 +11,4 @@ macro_rules! parse_with {
     };
 }
 
-parse_with!()
+parse_with!();

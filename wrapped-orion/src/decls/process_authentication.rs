@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Poly1305!();
         UnknownCryptoError!();
+        Poly1305!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! process_authentication {
     };
 }
 
-process_authentication!()
+process_authentication!();

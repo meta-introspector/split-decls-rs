@@ -12,4 +12,4 @@ macro_rules! decompress_to_vec {
     };
 }
 
-decompress_to_vec!()
+decompress_to_vec!();

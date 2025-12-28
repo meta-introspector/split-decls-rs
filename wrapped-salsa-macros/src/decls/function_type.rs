@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FunctionType!();
         SalsaStruct!();
+        FunctionType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! function_type {
     };
 }
 
-function_type!()
+function_type!();

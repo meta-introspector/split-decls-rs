@@ -4,4 +4,4 @@ macro_rules! SlicingSuggestion {
     };
 }
 
-SlicingSuggestion!()
+SlicingSuggestion!();

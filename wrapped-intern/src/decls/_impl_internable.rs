@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Internable!();
         Interned!();
         InternStorage!();
+        Internable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! _impl_internable {
     };
 }
 
-_impl_internable!()
+_impl_internable!();

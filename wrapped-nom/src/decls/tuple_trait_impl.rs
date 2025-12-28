@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Parser!();
+        IResult!();
+        ParseError!();
         Input!();
         Error!();
-        IResult!();
         Tuple!();
-        ParseError!();
-        Parser!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! tuple_trait_impl {
     };
 }
 
-tuple_trait_impl!()
+tuple_trait_impl!();

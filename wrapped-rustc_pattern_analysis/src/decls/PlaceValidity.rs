@@ -4,4 +4,4 @@ macro_rules! PlaceValidity {
     };
 }
 
-PlaceValidity!()
+PlaceValidity!();

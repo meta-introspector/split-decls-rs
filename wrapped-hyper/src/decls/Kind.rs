@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Io!();
-        Parse!();
         Error!();
+        Parse!();
         User!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Kind {
     };
 }
 
-Kind!()
+Kind!();

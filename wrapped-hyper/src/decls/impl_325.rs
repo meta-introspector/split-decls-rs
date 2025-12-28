@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Read!();
-        Result!();
-        Error!();
         Pending!();
+        Result!();
+        Read!();
         ReadBufCursor!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_325 {
     };
 }
 
-impl_325!()
+impl_325!();

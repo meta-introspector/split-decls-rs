@@ -4,4 +4,4 @@ macro_rules! nonnull_optimization_guaranteed {
     };
 }
 
-nonnull_optimization_guaranteed!()
+nonnull_optimization_guaranteed!();

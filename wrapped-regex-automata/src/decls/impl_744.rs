@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
         Memchr2!();
-        PrefilterI!();
-        ByteSet!();
         Memchr3!();
-        MatchKind!();
         Span!();
-        Prefilter!();
-        Teddy!();
         Choice!();
-        AhoCorasick!();
         Memchr!();
         Memmem!();
+        ByteSet!();
+        Teddy!();
+        MatchKind!();
+        AhoCorasick!();
+        PrefilterI!();
+        Prefilter!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_744 {
     };
 }
 
-impl_744!()
+impl_744!();

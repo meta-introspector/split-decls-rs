@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Folder!();
         ForEachConsumer!();
+        Folder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_584 {
     };
 }
 
-impl_584!()
+impl_584!();

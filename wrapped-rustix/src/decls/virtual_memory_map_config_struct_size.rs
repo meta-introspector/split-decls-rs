@@ -12,4 +12,4 @@ macro_rules! virtual_memory_map_config_struct_size {
     };
 }
 
-virtual_memory_map_config_struct_size!()
+virtual_memory_map_config_struct_size!();

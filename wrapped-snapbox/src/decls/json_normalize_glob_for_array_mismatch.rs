@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        NormalizeToExpected!();
         Data!();
         DataInner!();
-        NormalizeToExpected!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! json_normalize_glob_for_array_mismatch {
     };
 }
 
-json_normalize_glob_for_array_mismatch!()
+json_normalize_glob_for_array_mismatch!();

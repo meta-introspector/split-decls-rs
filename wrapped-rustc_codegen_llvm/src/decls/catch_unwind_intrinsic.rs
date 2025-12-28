@@ -11,4 +11,4 @@ macro_rules! catch_unwind_intrinsic {
     };
 }
 
-catch_unwind_intrinsic!()
+catch_unwind_intrinsic!();

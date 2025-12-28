@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        WorkItem!();
         SerializedModule!();
         WorkerFatalError!();
-        WorkItem!();
-        WriteBackendMethods!();
         WorkItemResult!();
+        WriteBackendMethods!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Message {
     };
 }
 
-Message!()
+Message!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Registry!();
         ThreadPoolBuilder!();
+        Registry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ThreadPool {
     };
 }
 
-ThreadPool!()
+ThreadPool!();

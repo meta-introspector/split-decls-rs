@@ -4,4 +4,4 @@ macro_rules! ValueOrPlace {
     };
 }
 
-ValueOrPlace!()
+ValueOrPlace!();

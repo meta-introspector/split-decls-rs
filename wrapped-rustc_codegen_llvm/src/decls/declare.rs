@@ -4,4 +4,4 @@ macro_rules! declare {
     };
 }
 
-declare!()
+declare!();

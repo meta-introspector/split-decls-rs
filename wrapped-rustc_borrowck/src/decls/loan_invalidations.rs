@@ -4,4 +4,4 @@ macro_rules! loan_invalidations {
     };
 }
 
-loan_invalidations!()
+loan_invalidations!();

@@ -4,4 +4,4 @@ macro_rules! ownify {
     };
 }
 
-ownify!()
+ownify!();

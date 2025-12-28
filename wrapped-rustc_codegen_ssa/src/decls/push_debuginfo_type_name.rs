@@ -5,4 +5,4 @@ macro_rules! push_debuginfo_type_name {
     };
 }
 
-push_debuginfo_type_name!()
+push_debuginfo_type_name!();

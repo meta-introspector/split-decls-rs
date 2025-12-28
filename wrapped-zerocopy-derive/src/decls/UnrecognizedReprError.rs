@@ -4,4 +4,4 @@ macro_rules! UnrecognizedReprError {
     };
 }
 
-UnrecognizedReprError!()
+UnrecognizedReprError!();

@@ -4,4 +4,4 @@ macro_rules! Memoizable {
     };
 }
 
-Memoizable!()
+Memoizable!();

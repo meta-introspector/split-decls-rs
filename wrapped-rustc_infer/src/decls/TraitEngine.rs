@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PredicateObligation!();
         PredicateObligations!();
         InferCtxt!();
-        PredicateObligation!();
         Obligation!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! TraitEngine {
     };
 }
 
-TraitEngine!()
+TraitEngine!();

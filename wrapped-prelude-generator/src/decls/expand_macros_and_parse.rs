@@ -4,4 +4,4 @@ macro_rules! expand_macros_and_parse {
     };
 }
 
-expand_macros_and_parse!()
+expand_macros_and_parse!();

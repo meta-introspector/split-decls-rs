@@ -11,4 +11,4 @@ macro_rules! signature_help_for_tuple_pat_ish {
     };
 }
 
-signature_help_for_tuple_pat_ish!()
+signature_help_for_tuple_pat_ish!();

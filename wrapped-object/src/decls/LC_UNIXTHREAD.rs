@@ -4,4 +4,4 @@ macro_rules! LC_UNIXTHREAD {
     };
 }
 
-LC_UNIXTHREAD!()
+LC_UNIXTHREAD!();

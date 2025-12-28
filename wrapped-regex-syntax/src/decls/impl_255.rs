@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Literal!();
         Hir!();
-        PropertiesI!();
         LookSet!();
+        Literal!();
         Properties!();
+        PropertiesI!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

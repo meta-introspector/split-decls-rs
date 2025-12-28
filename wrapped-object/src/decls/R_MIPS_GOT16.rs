@@ -4,4 +4,4 @@ macro_rules! R_MIPS_GOT16 {
     };
 }
 
-R_MIPS_GOT16!()
+R_MIPS_GOT16!();

@@ -11,4 +11,4 @@ macro_rules! check_no_parameters_use {
     };
 }
 
-check_no_parameters_use!()
+check_no_parameters_use!();

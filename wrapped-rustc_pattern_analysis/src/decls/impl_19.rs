@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Constructor!();
-        SliceKind!();
-        PatCx!();
-        Slice!();
         IntRange!();
+        PatCx!();
+        SliceKind!();
+        Constructor!();
+        Slice!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

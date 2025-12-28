@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NllTypeRelating!();
         Locations!();
-        TypeChecker!();
+        NllTypeRelating!();
         UniverseInfo!();
+        TypeChecker!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_465 {
     };
 }
 
-impl_465!()
+impl_465!();

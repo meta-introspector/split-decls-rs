@@ -4,4 +4,4 @@ macro_rules! WAIT_EVENT {
     };
 }
 
-WAIT_EVENT!()
+WAIT_EVENT!();

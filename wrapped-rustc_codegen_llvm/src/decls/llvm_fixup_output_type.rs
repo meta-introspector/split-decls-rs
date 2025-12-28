@@ -11,4 +11,4 @@ macro_rules! llvm_fixup_output_type {
     };
 }
 
-llvm_fixup_output_type!()
+llvm_fixup_output_type!();

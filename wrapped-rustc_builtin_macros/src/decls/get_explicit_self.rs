@@ -4,4 +4,4 @@ macro_rules! get_explicit_self {
     };
 }
 
-get_explicit_self!()
+get_explicit_self!();

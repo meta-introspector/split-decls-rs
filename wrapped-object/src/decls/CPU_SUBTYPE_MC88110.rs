@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_MC88110 {
     };
 }
 
-CPU_SUBTYPE_MC88110!()
+CPU_SUBTYPE_MC88110!();

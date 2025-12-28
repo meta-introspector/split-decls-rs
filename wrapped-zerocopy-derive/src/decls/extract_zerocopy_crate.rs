@@ -4,4 +4,4 @@ macro_rules! extract_zerocopy_crate {
     };
 }
 
-extract_zerocopy_crate!()
+extract_zerocopy_crate!();

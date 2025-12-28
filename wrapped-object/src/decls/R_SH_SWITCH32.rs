@@ -4,4 +4,4 @@ macro_rules! R_SH_SWITCH32 {
     };
 }
 
-R_SH_SWITCH32!()
+R_SH_SWITCH32!();

@@ -4,4 +4,4 @@ macro_rules! SerdeAdapter {
     };
 }
 
-SerdeAdapter!()
+SerdeAdapter!();

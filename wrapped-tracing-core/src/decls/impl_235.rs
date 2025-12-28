@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Attributes!();
+        Current!();
+        ValueSet!();
+        Visit!();
+        FieldSet!();
+        Field!();
         Metadata!();
         Parent!();
-        ValueSet!();
-        Current!();
         Id!();
-        FieldSet!();
-        Attributes!();
-        Visit!();
-        Field!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

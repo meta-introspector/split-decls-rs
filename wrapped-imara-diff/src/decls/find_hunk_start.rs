@@ -4,4 +4,4 @@ macro_rules! find_hunk_start {
     };
 }
 
-find_hunk_start!()
+find_hunk_start!();

@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_COPY {
     };
 }
 
-R_NIOS2_COPY!()
+R_NIOS2_COPY!();

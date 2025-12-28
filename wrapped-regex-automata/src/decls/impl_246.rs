@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HalfMatch!();
         OverlappingState!();
+        HalfMatch!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

@@ -4,4 +4,4 @@ macro_rules! list_significant_drop_tys {
     };
 }
 
-list_significant_drop_tys!()
+list_significant_drop_tys!();

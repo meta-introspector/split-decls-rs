@@ -4,4 +4,4 @@ macro_rules! test_edition_parsing {
     };
 }
 
-test_edition_parsing!()
+test_edition_parsing!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        HuffmanOxide!();
         ParamsOxide!();
         LZOxide!();
         DictOxide!();
-        HuffmanOxide!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CompressorOxide {
     };
 }
 
-CompressorOxide!()
+CompressorOxide!();

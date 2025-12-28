@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UnexpectedCfgRustcHelp!();
         UnexpectedCfgCargoHelp!();
         UnexpectedCfgCargoMacroHelp!();
-        UnexpectedCfgRustcHelp!();
         UnexpectedCfgRustcMacroHelp!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! unexpected_cfg_value {
     };
 }
 
-unexpected_cfg_value!()
+unexpected_cfg_value!();

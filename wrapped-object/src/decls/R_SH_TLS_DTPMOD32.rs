@@ -4,4 +4,4 @@ macro_rules! R_SH_TLS_DTPMOD32 {
     };
 }
 
-R_SH_TLS_DTPMOD32!()
+R_SH_TLS_DTPMOD32!();

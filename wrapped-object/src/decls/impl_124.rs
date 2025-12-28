@@ -1,30 +1,30 @@
 macro_rules! deps {
     () => {
-        ElfFile32!();
-        Endian!();
-        Result!();
-        File!();
-        DyldCacheImage!();
-        ReadRef!();
-        CoffFile!();
-        U64!();
-        U32!();
-        PeFile32!();
-        ElfFile64!();
         WasmFile!();
-        MachOFile64!();
+        U64!();
+        MachOFile32!();
+        ReadRef!();
+        File!();
+        Error!();
         PeFile64!();
+        MachOFile64!();
+        ElfFile64!();
         CoffBigFile!();
         MachO64!();
-        AddressSize!();
-        XcoffFile64!();
-        MachOFile32!();
-        BinaryFormat!();
-        MachO32!();
-        Error!();
-        MachO!();
         XcoffFile32!();
+        MachO!();
+        MachO32!();
+        XcoffFile64!();
+        U32!();
+        DyldCacheImage!();
+        Endian!();
+        PeFile32!();
+        CoffFile!();
+        Result!();
+        BinaryFormat!();
         FileKind!();
+        ElfFile32!();
+        AddressSize!();
     };
 }
 
@@ -35,4 +35,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

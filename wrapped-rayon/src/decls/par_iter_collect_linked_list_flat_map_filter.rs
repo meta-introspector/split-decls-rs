@@ -4,4 +4,4 @@ macro_rules! par_iter_collect_linked_list_flat_map_filter {
     };
 }
 
-par_iter_collect_linked_list_flat_map_filter!()
+par_iter_collect_linked_list_flat_map_filter!();

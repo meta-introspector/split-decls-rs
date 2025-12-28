@@ -11,4 +11,4 @@ macro_rules! fence_acqrel {
     };
 }
 
-fence_acqrel!()
+fence_acqrel!();

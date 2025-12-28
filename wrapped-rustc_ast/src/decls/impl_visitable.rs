@@ -11,4 +11,4 @@ macro_rules! impl_visitable {
     };
 }
 
-impl_visitable!()
+impl_visitable!();

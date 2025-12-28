@@ -4,4 +4,4 @@ macro_rules! unique_masks {
     };
 }
 
-unique_masks!()
+unique_masks!();

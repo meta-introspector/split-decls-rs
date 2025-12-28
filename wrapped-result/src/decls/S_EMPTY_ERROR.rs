@@ -4,4 +4,4 @@ macro_rules! S_EMPTY_ERROR {
     };
 }
 
-S_EMPTY_ERROR!()
+S_EMPTY_ERROR!();

@@ -4,4 +4,4 @@ macro_rules! DT_RISCV_VARIANT_CC {
     };
 }
 
-DT_RISCV_VARIANT_CC!()
+DT_RISCV_VARIANT_CC!();

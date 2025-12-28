@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WS!();
         Node!();
+        WS!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_ws_both_sides_for_raw_tag {
     };
 }
 
-handle_ws_both_sides_for_raw_tag!()
+handle_ws_both_sides_for_raw_tag!();

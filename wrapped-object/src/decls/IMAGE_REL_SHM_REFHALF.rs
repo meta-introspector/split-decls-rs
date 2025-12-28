@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_SHM_REFHALF {
     };
 }
 
-IMAGE_REL_SHM_REFHALF!()
+IMAGE_REL_SHM_REFHALF!();

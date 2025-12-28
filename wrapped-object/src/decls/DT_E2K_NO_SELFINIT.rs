@@ -4,4 +4,4 @@ macro_rules! DT_E2K_NO_SELFINIT {
     };
 }
 
-DT_E2K_NO_SELFINIT!()
+DT_E2K_NO_SELFINIT!();

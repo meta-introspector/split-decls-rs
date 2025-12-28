@@ -4,4 +4,4 @@ macro_rules! UnusedClosure {
     };
 }
 
-UnusedClosure!()
+UnusedClosure!();

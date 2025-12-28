@@ -4,4 +4,4 @@ macro_rules! dispatcher {
     };
 }
 
-dispatcher!()
+dispatcher!();

@@ -4,4 +4,4 @@ macro_rules! coroutine_closure_to_ambiguous_coroutine {
     };
 }
 
-coroutine_closure_to_ambiguous_coroutine!()
+coroutine_closure_to_ambiguous_coroutine!();

@@ -11,4 +11,4 @@ macro_rules! create_informational_target_machine {
     };
 }
 
-create_informational_target_machine!()
+create_informational_target_machine!();

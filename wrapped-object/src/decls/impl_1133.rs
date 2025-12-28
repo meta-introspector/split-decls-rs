@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         SymbolId!();
-        Id!();
         Symbol!();
         Item!();
+        Id!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1133 {
     };
 }
 
-impl_1133!()
+impl_1133!();

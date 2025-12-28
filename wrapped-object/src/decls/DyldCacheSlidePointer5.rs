@@ -4,4 +4,4 @@ macro_rules! DyldCacheSlidePointer5 {
     };
 }
 
-DyldCacheSlidePointer5!()
+DyldCacheSlidePointer5!();

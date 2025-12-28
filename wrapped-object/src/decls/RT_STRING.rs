@@ -4,4 +4,4 @@ macro_rules! RT_STRING {
     };
 }
 
-RT_STRING!()
+RT_STRING!();

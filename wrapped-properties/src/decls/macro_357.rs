@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PropertyCodePointMap!();
         Script!();
+        PropertyCodePointMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_357 {
     };
 }
 
-macro_357!()
+macro_357!();

@@ -4,4 +4,4 @@ macro_rules! EF_PARISC_EXT {
     };
 }
 
-EF_PARISC_EXT!()
+EF_PARISC_EXT!();

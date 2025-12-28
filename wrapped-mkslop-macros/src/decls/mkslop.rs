@@ -4,4 +4,4 @@ macro_rules! mkslop {
     };
 }
 
-mkslop!()
+mkslop!();

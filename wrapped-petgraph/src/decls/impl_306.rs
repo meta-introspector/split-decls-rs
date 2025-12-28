@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        List!();
-        IndexType!();
         NodeIndex!();
         Neighbors!();
         WSuc!();
+        List!();
+        IndexType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_306 {
     };
 }
 
-impl_306!()
+impl_306!();

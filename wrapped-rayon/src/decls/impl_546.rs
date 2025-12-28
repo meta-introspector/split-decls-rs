@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
         FlattenIterConsumer!();
         Reducer!();
+        UnindexedConsumer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_546 {
     };
 }
 
-impl_546!()
+impl_546!();

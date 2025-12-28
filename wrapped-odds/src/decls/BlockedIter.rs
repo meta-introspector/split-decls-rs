@@ -4,4 +4,4 @@ macro_rules! BlockedIter {
     };
 }
 
-BlockedIter!()
+BlockedIter!();

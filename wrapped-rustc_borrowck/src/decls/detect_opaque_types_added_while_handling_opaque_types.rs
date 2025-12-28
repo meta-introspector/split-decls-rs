@@ -4,4 +4,4 @@ macro_rules! detect_opaque_types_added_while_handling_opaque_types {
     };
 }
 
-detect_opaque_types_added_while_handling_opaque_types!()
+detect_opaque_types_added_while_handling_opaque_types!();

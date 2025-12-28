@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Binder!();
         HostEffectPredicate!();
+        TraitRef!();
+        Ty!();
         BoundConstness!();
+        Interner!();
         Clause!();
         ClauseKind!();
-        Interner!();
-        Ty!();
-        TraitRef!();
+        Binder!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_346 {
     };
 }
 
-impl_346!()
+impl_346!();

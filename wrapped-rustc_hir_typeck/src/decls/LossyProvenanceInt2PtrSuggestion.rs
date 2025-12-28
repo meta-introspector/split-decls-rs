@@ -4,4 +4,4 @@ macro_rules! LossyProvenanceInt2PtrSuggestion {
     };
 }
 
-LossyProvenanceInt2PtrSuggestion!()
+LossyProvenanceInt2PtrSuggestion!();

@@ -4,4 +4,4 @@ macro_rules! patch_rust_impl {
     };
 }
 
-patch_rust_impl!()
+patch_rust_impl!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        Match!();
-        Anchored!();
-        Input!();
-        Regex!();
         MatchError!();
+        Input!();
+        DFA!();
+        Regex!();
+        Anchored!();
+        Match!();
         Automaton!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

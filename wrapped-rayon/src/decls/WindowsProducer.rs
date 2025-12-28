@@ -4,4 +4,4 @@ macro_rules! WindowsProducer {
     };
 }
 
-WindowsProducer!()
+WindowsProducer!();

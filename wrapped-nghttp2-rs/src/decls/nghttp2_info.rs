@@ -4,4 +4,4 @@ macro_rules! nghttp2_info {
     };
 }
 
-nghttp2_info!()
+nghttp2_info!();

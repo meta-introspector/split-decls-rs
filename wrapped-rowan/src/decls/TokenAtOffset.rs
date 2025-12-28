@@ -4,4 +4,4 @@ macro_rules! TokenAtOffset {
     };
 }
 
-TokenAtOffset!()
+TokenAtOffset!();

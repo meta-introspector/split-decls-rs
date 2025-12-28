@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SignalsInfo!();
-        Forever!();
         Exfiltrator!();
+        Forever!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

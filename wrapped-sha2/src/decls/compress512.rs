@@ -4,4 +4,4 @@ macro_rules! compress512 {
     };
 }
 
-compress512!()
+compress512!();

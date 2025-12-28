@@ -4,4 +4,4 @@ macro_rules! RegionVariableValue {
     };
 }
 
-RegionVariableValue!()
+RegionVariableValue!();

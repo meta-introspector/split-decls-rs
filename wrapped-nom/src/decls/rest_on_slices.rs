@@ -4,4 +4,4 @@ macro_rules! rest_on_slices {
     };
 }
 
-rest_on_slices!()
+rest_on_slices!();

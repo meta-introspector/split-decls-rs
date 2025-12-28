@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        InvalidRegister!();
-        RegisterClassOnlyClobberStable!();
-        AllowReturnTypeNotation!();
-        InvalidAbiClobberAbi!();
-        ClobberAbiNotSupported!();
-        InvalidAsmTemplateModifierSym!();
-        AttSyntaxOnlyX86!();
-        InvalidAsmTemplateModifierLabel!();
-        AbiSpecifiedMultipleTimes!();
-        RegisterClassOnlyClobber!();
-        ParamMode!();
-        ImplTraitPosition!();
         InvalidAsmTemplateModifierRegClass!();
-        RegisterConflict!();
-        ImplTraitContext!();
-        LoweringContext!();
-        InvalidRegisterClass!();
+        ClobberAbiNotSupported!();
         InvalidAsmTemplateModifierRegClassSub!();
-        InvalidAsmTemplateModifierConst!();
+        RegisterClassOnlyClobberStable!();
+        RegisterClassOnlyClobber!();
+        AllowReturnTypeNotation!();
+        ImplTraitContext!();
+        ImplTraitPosition!();
+        InvalidAsmTemplateModifierLabel!();
+        LoweringContext!();
+        RegisterConflict!();
         InlineAsmUnsupportedTarget!();
+        InvalidAsmTemplateModifierConst!();
+        InvalidRegister!();
+        AbiSpecifiedMultipleTimes!();
+        AttSyntaxOnlyX86!();
+        InvalidAsmTemplateModifierSym!();
+        InvalidAbiClobberAbi!();
+        InvalidRegisterClass!();
+        ParamMode!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_1 {
     };
 }
 
-impl_1!()
+impl_1!();

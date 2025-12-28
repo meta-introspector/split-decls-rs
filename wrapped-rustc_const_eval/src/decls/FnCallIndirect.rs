@@ -4,4 +4,4 @@ macro_rules! FnCallIndirect {
     };
 }
 
-FnCallIndirect!()
+FnCallIndirect!();

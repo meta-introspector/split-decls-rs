@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
-        Relr!();
-        NoteHeader!();
-        ProgramHeader!();
-        Rel!();
-        FileHeader!();
-        Dyn!();
-        SectionHeader64!();
-        Relr64!();
-        Ident!();
-        CompressionHeader!();
-        Rela!();
-        Sym!();
         Dyn64!();
-        Rel64!();
+        ProgramHeader!();
+        Ident!();
+        FileHeader!();
         FileHeader64!();
-        ProgramHeader64!();
-        Rela64!();
-        Endian!();
-        NoteHeader32!();
-        SectionHeader!();
+        SectionHeader64!();
+        NoteHeader!();
+        Sym!();
+        Rel!();
         CompressionHeader64!();
+        ProgramHeader64!();
+        Dyn!();
+        Relr64!();
+        SectionHeader!();
+        Endian!();
         Sym64!();
+        Rela!();
+        CompressionHeader!();
+        Rel64!();
+        NoteHeader32!();
+        Rela64!();
+        Relr!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_287 {
     };
 }
 
-impl_287!()
+impl_287!();

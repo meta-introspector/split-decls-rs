@@ -4,4 +4,4 @@ macro_rules! init_rustc_env_logger {
     };
 }
 
-init_rustc_env_logger!()
+init_rustc_env_logger!();

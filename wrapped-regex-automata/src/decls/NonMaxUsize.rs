@@ -4,4 +4,4 @@ macro_rules! NonMaxUsize {
     };
 }
 
-NonMaxUsize!()
+NonMaxUsize!();

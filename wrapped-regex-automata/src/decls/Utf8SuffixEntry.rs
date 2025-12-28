@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StateID!();
         Utf8SuffixKey!();
+        StateID!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Utf8SuffixEntry {
     };
 }
 
-Utf8SuffixEntry!()
+Utf8SuffixEntry!();

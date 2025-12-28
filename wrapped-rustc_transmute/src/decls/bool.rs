@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Dfa!();
         Def!();
-        Tree!();
-        Answer!();
-        Reason!();
+        Dfa!();
         Assume!();
+        Tree!();
+        Reason!();
+        Answer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! bool {
     };
 }
 
-bool!()
+bool!();

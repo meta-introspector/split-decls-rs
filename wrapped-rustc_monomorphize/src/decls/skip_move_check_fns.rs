@@ -4,4 +4,4 @@ macro_rules! skip_move_check_fns {
     };
 }
 
-skip_move_check_fns!()
+skip_move_check_fns!();

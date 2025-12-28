@@ -4,4 +4,4 @@ macro_rules! lgammaf_r {
     };
 }
 
-lgammaf_r!()
+lgammaf_r!();

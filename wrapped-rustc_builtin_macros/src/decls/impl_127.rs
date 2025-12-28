@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FieldInfo!();
-        IsTuple!();
         TraitDef!();
         StaticFields!();
         Path!();
+        IsTuple!();
+        FieldInfo!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

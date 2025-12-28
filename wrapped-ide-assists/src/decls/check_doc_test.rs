@@ -4,4 +4,4 @@ macro_rules! check_doc_test {
     };
 }
 
-check_doc_test!()
+check_doc_test!();

@@ -4,4 +4,4 @@ macro_rules! PrivateMax {
     };
 }
 
-PrivateMax!()
+PrivateMax!();

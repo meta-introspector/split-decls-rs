@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SliceDst!();
         SizeEq!();
         SizeInfo!();
-        TrailingSliceLayout!();
         KnownLayout!();
+        TrailingSliceLayout!();
+        SliceDst!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_size_eq {
     };
 }
 
-impl_size_eq!()
+impl_size_eq!();

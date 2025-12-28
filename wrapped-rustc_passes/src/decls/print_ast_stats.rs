@@ -11,4 +11,4 @@ macro_rules! print_ast_stats {
     };
 }
 
-print_ast_stats!()
+print_ast_stats!();

@@ -4,4 +4,4 @@ macro_rules! UnexpectedCfgCargoMacroHelp {
     };
 }
 
-UnexpectedCfgCargoMacroHelp!()
+UnexpectedCfgCargoMacroHelp!();

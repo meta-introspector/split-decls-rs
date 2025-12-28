@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IVector!();
         IVector_Vtbl!();
         IVector_Impl!();
-        IVector!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

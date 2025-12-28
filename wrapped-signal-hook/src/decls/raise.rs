@@ -4,4 +4,4 @@ macro_rules! raise {
     };
 }
 
-raise!()
+raise!();

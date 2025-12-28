@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         StandardUniform!();
         Distribution!();
-        SampleString!();
         Rng!();
+        SampleString!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_145 {
     };
 }
 
-impl_145!()
+impl_145!();

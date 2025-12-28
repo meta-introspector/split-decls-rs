@@ -4,4 +4,4 @@ macro_rules! PR_SET_MM_BRK {
     };
 }
 
-PR_SET_MM_BRK!()
+PR_SET_MM_BRK!();

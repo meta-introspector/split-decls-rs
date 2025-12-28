@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Relocation!();
         Symbol!();
-        Section!();
         SectionIndex!();
         SymbolIndex!();
-        Relocation!();
+        Section!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! RelocationTarget {
     };
 }
 
-RelocationTarget!()
+RelocationTarget!();

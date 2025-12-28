@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Load!();
         AtomicPtr!();
+        Load!();
         Atomic!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Config!();
-        StartKind!();
-        MatchError!();
-        Automaton!();
-        PatternID!();
-        Regex!();
-        OverlappingState!();
-        NFA!();
-        HalfMatch!();
-        Input!();
-        Prefilter!();
-        Start!();
         Anchored!();
+        HalfMatch!();
+        Prefilter!();
         DFA!();
+        OverlappingState!();
+        Config!();
         ByteSet!();
+        Automaton!();
         MatchKind!();
+        MatchError!();
+        NFA!();
+        Start!();
+        Regex!();
+        StartKind!();
+        PatternID!();
+        Input!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

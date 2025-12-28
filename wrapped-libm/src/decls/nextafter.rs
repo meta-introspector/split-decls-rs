@@ -4,4 +4,4 @@ macro_rules! nextafter {
     };
 }
 
-nextafter!()
+nextafter!();

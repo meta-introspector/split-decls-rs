@@ -4,4 +4,4 @@ macro_rules! solana_lift {
     };
 }
 
-solana_lift!()
+solana_lift!();

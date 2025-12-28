@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Chunk!();
         IntervalSet!();
         MixedBitSet!();
-        Chunk!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ChunkedBitSet {
     };
 }
 
-ChunkedBitSet!()
+ChunkedBitSet!();

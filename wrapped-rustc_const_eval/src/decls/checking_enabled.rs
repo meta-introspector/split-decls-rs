@@ -11,4 +11,4 @@ macro_rules! checking_enabled {
     };
 }
 
-checking_enabled!()
+checking_enabled!();

@@ -4,4 +4,4 @@ macro_rules! HashStableMode {
     };
 }
 
-HashStableMode!()
+HashStableMode!();

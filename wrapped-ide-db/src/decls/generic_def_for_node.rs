@@ -11,4 +11,4 @@ macro_rules! generic_def_for_node {
     };
 }
 
-generic_def_for_node!()
+generic_def_for_node!();

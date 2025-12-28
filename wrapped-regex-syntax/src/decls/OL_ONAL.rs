@@ -4,4 +4,4 @@ macro_rules! OL_ONAL {
     };
 }
 
-OL_ONAL!()
+OL_ONAL!();

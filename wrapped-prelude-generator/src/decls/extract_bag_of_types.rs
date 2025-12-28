@@ -12,4 +12,4 @@ macro_rules! extract_bag_of_types {
     };
 }
 
-extract_bag_of_types!()
+extract_bag_of_types!();

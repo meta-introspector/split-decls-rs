@@ -4,4 +4,4 @@ macro_rules! NodeLabels {
     };
 }
 
-NodeLabels!()
+NodeLabels!();

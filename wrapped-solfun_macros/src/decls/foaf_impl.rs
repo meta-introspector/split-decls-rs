@@ -4,4 +4,4 @@ macro_rules! foaf_impl {
     };
 }
 
-foaf_impl!()
+foaf_impl!();

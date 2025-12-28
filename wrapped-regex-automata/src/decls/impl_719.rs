@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PrefilterI!();
         AhoCorasick!();
         Anchored!();
-        Input!();
         Span!();
+        Input!();
+        PrefilterI!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_719 {
     };
 }
 
-impl_719!()
+impl_719!();

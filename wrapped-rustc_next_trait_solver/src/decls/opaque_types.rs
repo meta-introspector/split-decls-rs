@@ -4,4 +4,4 @@ macro_rules! opaque_types {
     };
 }
 
-opaque_types!()
+opaque_types!();

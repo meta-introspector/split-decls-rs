@@ -4,4 +4,4 @@ macro_rules! allocator_shim_symbols {
     };
 }
 
-allocator_shim_symbols!()
+allocator_shim_symbols!();

@@ -4,4 +4,4 @@ macro_rules! compaction_filter {
     };
 }
 
-compaction_filter!()
+compaction_filter!();

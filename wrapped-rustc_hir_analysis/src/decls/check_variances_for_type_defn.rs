@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Parameter!();
         ItemCtxt!();
         HasErrorDeep!();
+        Parameter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_variances_for_type_defn {
     };
 }
 
-check_variances_for_type_defn!()
+check_variances_for_type_defn!();

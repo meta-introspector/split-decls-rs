@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_ARM_V4T {
     };
 }
 
-CPU_SUBTYPE_ARM_V4T!()
+CPU_SUBTYPE_ARM_V4T!();

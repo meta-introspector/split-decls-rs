@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Event!();
         Timespec!();
         Result!();
-        Event!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get {
     };
 }
 
-get!()
+get!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        StatementStatus!();
+        Null!();
+        SqliteMallocString!();
         ParamIndexCache!();
         RawStatement!();
-        SqliteMallocString!();
-        Null!();
+        StatementStatus!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

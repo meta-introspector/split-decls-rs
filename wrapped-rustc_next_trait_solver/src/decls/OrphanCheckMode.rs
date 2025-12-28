@@ -4,4 +4,4 @@ macro_rules! OrphanCheckMode {
     };
 }
 
-OrphanCheckMode!()
+OrphanCheckMode!();

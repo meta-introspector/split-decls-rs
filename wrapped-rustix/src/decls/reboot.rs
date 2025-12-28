@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RebootCommand!();
         Result!();
+        RebootCommand!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! reboot {
     };
 }
 
-reboot!()
+reboot!();

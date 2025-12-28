@@ -4,4 +4,4 @@ macro_rules! TrimTrailingZeros {
     };
 }
 
-TrimTrailingZeros!()
+TrimTrailingZeros!();

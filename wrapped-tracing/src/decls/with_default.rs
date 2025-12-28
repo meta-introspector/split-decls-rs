@@ -11,4 +11,4 @@ macro_rules! with_default {
     };
 }
 
-with_default!()
+with_default!();

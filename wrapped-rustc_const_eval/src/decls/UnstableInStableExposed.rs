@@ -4,4 +4,4 @@ macro_rules! UnstableInStableExposed {
     };
 }
 
-UnstableInStableExposed!()
+UnstableInStableExposed!();

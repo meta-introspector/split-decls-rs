@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endian!();
         Endianness!();
         FileHeader32!();
         ElfSymbolIterator!();
+        Endian!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ElfSymbolIterator32 {
     };
 }
 
-ElfSymbolIterator32!()
+ElfSymbolIterator32!();

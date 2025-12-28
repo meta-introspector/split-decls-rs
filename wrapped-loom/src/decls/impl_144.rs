@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Synchronize!();
         VersionVec!();
         Set!();
-        Synchronize!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

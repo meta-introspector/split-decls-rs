@@ -11,4 +11,4 @@ macro_rules! count_zero {
     };
 }
 
-count_zero!()
+count_zero!();

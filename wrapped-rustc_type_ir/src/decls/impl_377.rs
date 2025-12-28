@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Interner!();
         AliasTerm!();
         TraitRef!();
-        AliasTermKind!();
         Ty!();
+        AliasTermKind!();
+        Interner!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_377 {
     };
 }
 
-impl_377!()
+impl_377!();

@@ -4,4 +4,4 @@ macro_rules! RedundantLifetimeArgsLint {
     };
 }
 
-RedundantLifetimeArgsLint!()
+RedundantLifetimeArgsLint!();

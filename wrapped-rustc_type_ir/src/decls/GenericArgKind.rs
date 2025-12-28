@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Const!();
         Region!();
         Interner!();
-        Const!();
         Ty!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! GenericArgKind {
     };
 }
 
-GenericArgKind!()
+GenericArgKind!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Symbol!();
-        ObjectSymbol!();
         Item!();
+        Symbol!();
         Object!();
         SymbolIterator!();
         SymbolIndex!();
         Result!();
+        ObjectSymbol!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! ObjectSymbolTable {
     };
 }
 
-ObjectSymbolTable!()
+ObjectSymbolTable!();

@@ -4,4 +4,4 @@ macro_rules! indexed_parallel_iterator_methods {
     };
 }
 
-indexed_parallel_iterator_methods!()
+indexed_parallel_iterator_methods!();

@@ -4,4 +4,4 @@ macro_rules! get_test_name {
     };
 }
 
-get_test_name!()
+get_test_name!();

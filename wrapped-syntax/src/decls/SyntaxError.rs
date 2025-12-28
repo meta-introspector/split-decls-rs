@@ -4,4 +4,4 @@ macro_rules! SyntaxError {
     };
 }
 
-SyntaxError!()
+SyntaxError!();

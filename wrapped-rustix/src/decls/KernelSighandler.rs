@@ -4,4 +4,4 @@ macro_rules! KernelSighandler {
     };
 }
 
-KernelSighandler!()
+KernelSighandler!();

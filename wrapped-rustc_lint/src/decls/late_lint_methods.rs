@@ -4,4 +4,4 @@ macro_rules! late_lint_methods {
     };
 }
 
-late_lint_methods!()
+late_lint_methods!();

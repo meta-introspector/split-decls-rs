@@ -11,4 +11,4 @@ macro_rules! E_POINTER {
     };
 }
 
-E_POINTER!()
+E_POINTER!();

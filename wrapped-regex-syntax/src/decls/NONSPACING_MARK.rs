@@ -4,4 +4,4 @@ macro_rules! NONSPACING_MARK {
     };
 }
 
-NONSPACING_MARK!()
+NONSPACING_MARK!();

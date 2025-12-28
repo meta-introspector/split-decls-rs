@@ -4,4 +4,4 @@ macro_rules! RawEnum {
     };
 }
 
-RawEnum!()
+RawEnum!();

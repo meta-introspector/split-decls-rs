@@ -11,4 +11,4 @@ macro_rules! delete_session_dir_lock_file {
     };
 }
 
-delete_session_dir_lock_file!()
+delete_session_dir_lock_file!();

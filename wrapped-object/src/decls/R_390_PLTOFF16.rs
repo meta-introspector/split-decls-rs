@@ -4,4 +4,4 @@ macro_rules! R_390_PLTOFF16 {
     };
 }
 
-R_390_PLTOFF16!()
+R_390_PLTOFF16!();

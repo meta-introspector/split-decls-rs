@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        KeyPair!();
-        PublicKey!();
         EncapsulationKey!();
+        Shake256!();
         MlKem768!();
         PrivateKey!();
-        Shake256!();
         DecapsulationKey!();
         UnknownCryptoError!();
+        PublicKey!();
+        KeyPair!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_557 {
     };
 }
 
-impl_557!()
+impl_557!();

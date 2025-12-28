@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Braced!();
+        Uuid!();
+        Urn!();
         Hyphenated!();
         Simple!();
-        Urn!();
-        Uuid!();
-        Braced!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

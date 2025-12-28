@@ -4,4 +4,4 @@ macro_rules! ReprFlags {
     };
 }
 
-ReprFlags!()
+ReprFlags!();

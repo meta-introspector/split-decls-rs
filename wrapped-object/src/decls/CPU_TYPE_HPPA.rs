@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_HPPA {
     };
 }
 
-CPU_TYPE_HPPA!()
+CPU_TYPE_HPPA!();

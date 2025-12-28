@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefaultConfig!();
         Tid!();
+        DefaultConfig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_println {
     };
 }
 
-test_println!()
+test_println!();

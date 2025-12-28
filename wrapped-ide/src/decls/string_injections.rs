@@ -11,4 +11,4 @@ macro_rules! string_injections {
     };
 }
 
-string_injections!()
+string_injections!();

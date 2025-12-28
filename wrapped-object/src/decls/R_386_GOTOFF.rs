@@ -4,4 +4,4 @@ macro_rules! R_386_GOTOFF {
     };
 }
 
-R_386_GOTOFF!()
+R_386_GOTOFF!();

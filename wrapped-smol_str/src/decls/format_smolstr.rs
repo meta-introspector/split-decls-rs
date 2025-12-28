@@ -12,4 +12,4 @@ macro_rules! format_smolstr {
     };
 }
 
-format_smolstr!()
+format_smolstr!();

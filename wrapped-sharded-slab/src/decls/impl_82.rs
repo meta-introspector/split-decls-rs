@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Pack!();
         Generation!();
         Config!();
+        Pack!();
         Tid!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

@@ -11,4 +11,4 @@ macro_rules! parse_truncated_float {
     };
 }
 
-parse_truncated_float!()
+parse_truncated_float!();

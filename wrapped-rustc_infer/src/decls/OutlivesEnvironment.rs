@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RegionBoundPairs!();
-        RegionRelations!();
         FreeRegionMap!();
+        RegionRelations!();
+        RegionBoundPairs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! OutlivesEnvironment {
     };
 }
 
-OutlivesEnvironment!()
+OutlivesEnvironment!();

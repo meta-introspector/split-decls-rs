@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FnSig!();
-        Binder!();
-        Interner!();
         EarlyBinder!();
         DefId!();
+        Binder!();
+        Interner!();
+        FnSig!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_236 {
     };
 }
 
-impl_236!()
+impl_236!();

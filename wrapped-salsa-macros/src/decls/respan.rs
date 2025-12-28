@@ -4,4 +4,4 @@ macro_rules! respan {
     };
 }
 
-respan!()
+respan!();

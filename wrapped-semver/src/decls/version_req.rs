@@ -13,4 +13,4 @@ macro_rules! version_req {
     };
 }
 
-version_req!()
+version_req!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Automaton!();
         FindMatches!();
         Match!();
+        Automaton!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

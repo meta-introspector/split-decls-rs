@@ -4,4 +4,4 @@ macro_rules! getrandom {
     };
 }
 
-getrandom!()
+getrandom!();

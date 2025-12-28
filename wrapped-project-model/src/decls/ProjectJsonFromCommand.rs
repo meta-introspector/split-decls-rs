@@ -11,4 +11,4 @@ macro_rules! ProjectJsonFromCommand {
     };
 }
 
-ProjectJsonFromCommand!()
+ProjectJsonFromCommand!();

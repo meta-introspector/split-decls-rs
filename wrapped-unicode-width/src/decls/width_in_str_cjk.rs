@@ -11,4 +11,4 @@ macro_rules! width_in_str_cjk {
     };
 }
 
-width_in_str_cjk!()
+width_in_str_cjk!();

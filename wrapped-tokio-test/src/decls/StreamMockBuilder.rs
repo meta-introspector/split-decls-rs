@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StreamMock!();
         Action!();
+        StreamMock!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StreamMockBuilder {
     };
 }
 
-StreamMockBuilder!()
+StreamMockBuilder!();

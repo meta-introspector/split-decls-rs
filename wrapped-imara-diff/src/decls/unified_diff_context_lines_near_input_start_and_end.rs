@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InternedInput!();
-        Diff!();
-        UnifiedDiffConfig!();
         BasicLineDiffPrinter!();
+        UnifiedDiffConfig!();
+        Diff!();
+        InternedInput!();
         Algorithm!();
     };
 }
@@ -43,4 +43,4 @@ i
     };
 }
 
-unified_diff_context_lines_near_input_start_and_end!()
+unified_diff_context_lines_near_input_start_and_end!();

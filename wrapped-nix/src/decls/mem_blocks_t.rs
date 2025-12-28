@@ -4,4 +4,4 @@ macro_rules! mem_blocks_t {
     };
 }
 
-mem_blocks_t!()
+mem_blocks_t!();

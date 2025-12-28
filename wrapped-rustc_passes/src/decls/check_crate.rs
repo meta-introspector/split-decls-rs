@@ -11,4 +11,4 @@ macro_rules! check_crate {
     };
 }
 
-check_crate!()
+check_crate!();

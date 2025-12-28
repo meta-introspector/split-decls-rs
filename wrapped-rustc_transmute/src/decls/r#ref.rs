@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Condition!();
-        MaybeTransmutableQuery!();
+        Assume!();
+        Tree!();
+        Reference!();
         Answer!();
         Def!();
-        Tree!();
-        Assume!();
-        Reference!();
+        Condition!();
+        MaybeTransmutableQuery!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! r#ref {
     };
 }
 
-r#ref!()
+r#ref!();

@@ -4,4 +4,4 @@ macro_rules! MissingIfThisChanged {
     };
 }
 
-MissingIfThisChanged!()
+MissingIfThisChanged!();

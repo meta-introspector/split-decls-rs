@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        InternalBuilder!();
-        DFA!();
         Compiler!();
-        Config!();
-        Builder!();
         NFA!();
-        Match!();
         BuildError!();
+        InternalBuilder!();
+        Match!();
+        Builder!();
+        Config!();
+        DFA!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

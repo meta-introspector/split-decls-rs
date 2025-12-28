@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DeValue!();
         DeString!();
+        DeValue!();
         IntoIter!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TableMapAccess {
     };
 }
 
-TableMapAccess!()
+TableMapAccess!();

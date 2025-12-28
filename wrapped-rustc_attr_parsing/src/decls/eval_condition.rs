@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         CfgPredicateIdentifier!();
-        Condition!();
-        UnsupportedLiteral!();
+        UnsupportedLiteralReason!();
+        UnknownVersionLiteral!();
         InvalidPredicate!();
         ExpectedSingleVersionLiteral!();
-        ExpectedOneCfgPattern!();
-        UnsupportedLiteralReason!();
+        UnsupportedLiteral!();
         ExpectedVersionLiteral!();
-        UnknownVersionLiteral!();
+        Condition!();
+        ExpectedOneCfgPattern!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! eval_condition {
     };
 }
 
-eval_condition!()
+eval_condition!();

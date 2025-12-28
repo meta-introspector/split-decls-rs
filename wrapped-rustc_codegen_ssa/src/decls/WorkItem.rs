@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        WriteBackendMethods!();
         ModuleCodegen!();
         CachedModuleCodegen!();
+        SerializedModule!();
+        WriteBackendMethods!();
         FatLtoInput!();
         ThinModule!();
-        SerializedModule!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! WorkItem {
     };
 }
 
-WorkItem!()
+WorkItem!();

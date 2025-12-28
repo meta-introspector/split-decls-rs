@@ -4,4 +4,4 @@ macro_rules! RT_ANICURSOR {
     };
 }
 
-RT_ANICURSOR!()
+RT_ANICURSOR!();

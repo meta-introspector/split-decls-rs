@@ -4,4 +4,4 @@ macro_rules! INT_ENCODE_BASE {
     };
 }
 
-INT_ENCODE_BASE!()
+INT_ENCODE_BASE!();

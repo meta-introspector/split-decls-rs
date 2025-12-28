@@ -4,4 +4,4 @@ macro_rules! R_MIPS_DELETE {
     };
 }
 
-R_MIPS_DELETE!()
+R_MIPS_DELETE!();

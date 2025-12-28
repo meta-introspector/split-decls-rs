@@ -4,4 +4,4 @@ macro_rules! destrify {
     };
 }
 
-destrify!()
+destrify!();

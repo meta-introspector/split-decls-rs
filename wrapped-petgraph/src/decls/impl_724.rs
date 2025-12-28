@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IndexType!();
         NodeIndex!();
         NodeIndices!();
+        IndexType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_724 {
     };
 }
 
-impl_724!()
+impl_724!();

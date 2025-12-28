@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TopDown!();
         LintLevelsBuilder!();
+        TopDown!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EarlyContext {
     };
 }
 
-EarlyContext!()
+EarlyContext!();

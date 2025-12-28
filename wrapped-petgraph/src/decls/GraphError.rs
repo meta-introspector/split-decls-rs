@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Graph!();
         Node!();
+        Graph!();
         StableGraph!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! GraphError {
     };
 }
 
-GraphError!()
+GraphError!();

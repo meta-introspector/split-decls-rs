@@ -4,4 +4,4 @@ macro_rules! EM_SVX {
     };
 }
 
-EM_SVX!()
+EM_SVX!();

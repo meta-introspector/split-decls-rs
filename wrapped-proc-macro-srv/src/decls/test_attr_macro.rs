@@ -34,4 +34,4 @@ macro_rules! test_attr_macro {
     };
 }
 
-test_attr_macro!()
+test_attr_macro!();

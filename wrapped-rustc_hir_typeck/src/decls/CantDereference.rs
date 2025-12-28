@@ -4,4 +4,4 @@ macro_rules! CantDereference {
     };
 }
 
-CantDereference!()
+CantDereference!();

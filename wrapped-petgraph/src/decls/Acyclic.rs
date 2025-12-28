@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Graph!();
         Directed!();
         Build!();
-        Graph!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Acyclic {
     };
 }
 
-Acyclic!()
+Acyclic!();

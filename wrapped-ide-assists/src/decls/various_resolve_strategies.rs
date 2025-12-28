@@ -512,4 +512,4 @@ pub fn test_some_range(a: int) -> bool {
     };
 }
 
-various_resolve_strategies!()
+various_resolve_strategies!();

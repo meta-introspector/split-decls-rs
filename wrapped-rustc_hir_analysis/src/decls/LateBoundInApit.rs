@@ -4,4 +4,4 @@ macro_rules! LateBoundInApit {
     };
 }
 
-LateBoundInApit!()
+LateBoundInApit!();

@@ -4,4 +4,4 @@ macro_rules! output_dxsm {
     };
 }
 
-output_dxsm!()
+output_dxsm!();

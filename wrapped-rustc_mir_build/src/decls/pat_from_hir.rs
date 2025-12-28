@@ -12,4 +12,4 @@ macro_rules! pat_from_hir {
     };
 }
 
-pat_from_hir!()
+pat_from_hir!();

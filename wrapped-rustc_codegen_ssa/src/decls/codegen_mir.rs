@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         FunctionCx!();
-        CachedLlbb!();
-        PlaceRef!();
         Locals!();
         BuilderMethods!();
+        CachedLlbb!();
         LocalRef!();
+        PlaceRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! codegen_mir {
     };
 }
 
-codegen_mir!()
+codegen_mir!();

@@ -4,4 +4,4 @@ macro_rules! SLEEPING_SHIFT {
     };
 }
 
-SLEEPING_SHIFT!()
+SLEEPING_SHIFT!();

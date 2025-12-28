@@ -4,4 +4,4 @@ macro_rules! VarHereDenote {
     };
 }
 
-VarHereDenote!()
+VarHereDenote!();

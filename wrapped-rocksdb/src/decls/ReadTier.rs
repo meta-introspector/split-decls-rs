@@ -4,4 +4,4 @@ macro_rules! ReadTier {
     };
 }
 
-ReadTier!()
+ReadTier!();

@@ -4,4 +4,4 @@ macro_rules! normalize_expansion {
     };
 }
 
-normalize_expansion!()
+normalize_expansion!();

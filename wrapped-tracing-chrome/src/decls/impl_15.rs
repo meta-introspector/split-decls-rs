@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        JsonVisitor!();
         ChromeLayer!();
         TraceStyle!();
-        Object!();
-        JsonVisitor!();
+        ArgsWrapper!();
         EventOrSpan!();
         Message!();
-        ArgsWrapper!();
+        Object!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

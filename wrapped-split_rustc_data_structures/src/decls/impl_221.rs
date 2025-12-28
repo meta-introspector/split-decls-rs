@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Successors!();
         TestGraph!();
+        Successors!();
         Node!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_221 {
     };
 }
 
-impl_221!()
+impl_221!();

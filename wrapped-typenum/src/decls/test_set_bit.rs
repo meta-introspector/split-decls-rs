@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Same!();
         SetBitOut!();
+        B1!();
         Unsigned!();
         B0!();
-        B1!();
+        Same!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! test_set_bit {
     };
 }
 
-test_set_bit!()
+test_set_bit!();

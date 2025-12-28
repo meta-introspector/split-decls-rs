@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Fn!();
-        Type!();
-        AssocItemKind!();
-        Const!();
         TyAlias!();
-        MacCall!();
         Delegation!();
         DelegationMac!();
+        Const!();
+        AssocItemKind!();
+        Fn!();
+        Type!();
         ItemKind!();
+        MacCall!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

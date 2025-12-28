@@ -4,4 +4,4 @@ macro_rules! parse_lint_and_tool_name {
     };
 }
 
-parse_lint_and_tool_name!()
+parse_lint_and_tool_name!();

@@ -4,4 +4,4 @@ macro_rules! prune {
     };
 }
 
-prune!()
+prune!();

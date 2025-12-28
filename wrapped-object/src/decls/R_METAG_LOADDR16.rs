@@ -4,4 +4,4 @@ macro_rules! R_METAG_LOADDR16 {
     };
 }
 
-R_METAG_LOADDR16!()
+R_METAG_LOADDR16!();

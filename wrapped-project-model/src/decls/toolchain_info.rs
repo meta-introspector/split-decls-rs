@@ -13,4 +13,4 @@ macro_rules! toolchain_info {
     };
 }
 
-toolchain_info!()
+toolchain_info!();

@@ -4,4 +4,4 @@ macro_rules! MapOpt {
     };
 }
 
-MapOpt!()
+MapOpt!();

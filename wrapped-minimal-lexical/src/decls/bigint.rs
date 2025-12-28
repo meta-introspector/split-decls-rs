@@ -4,4 +4,4 @@ macro_rules! bigint {
     };
 }
 
-bigint!()
+bigint!();

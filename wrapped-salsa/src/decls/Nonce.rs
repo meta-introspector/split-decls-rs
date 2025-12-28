@@ -4,4 +4,4 @@ macro_rules! Nonce {
     };
 }
 
-Nonce!()
+Nonce!();

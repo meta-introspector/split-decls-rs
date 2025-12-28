@@ -4,4 +4,4 @@ macro_rules! IntEncodedWithFixedSize {
     };
 }
 
-IntEncodedWithFixedSize!()
+IntEncodedWithFixedSize!();

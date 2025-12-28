@@ -4,4 +4,4 @@ macro_rules! X3_OPCODE_INST_WORD_POS_X {
     };
 }
 
-X3_OPCODE_INST_WORD_POS_X!()
+X3_OPCODE_INST_WORD_POS_X!();

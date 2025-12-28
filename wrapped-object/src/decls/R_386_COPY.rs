@@ -4,4 +4,4 @@ macro_rules! R_386_COPY {
     };
 }
 
-R_386_COPY!()
+R_386_COPY!();

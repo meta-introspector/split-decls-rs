@@ -4,4 +4,4 @@ macro_rules! hide_trailing_numbers {
     };
 }
 
-hide_trailing_numbers!()
+hide_trailing_numbers!();

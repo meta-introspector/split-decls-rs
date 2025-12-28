@@ -11,4 +11,4 @@ macro_rules! CO_E_NOTINITIALIZED {
     };
 }
 
-CO_E_NOTINITIALIZED!()
+CO_E_NOTINITIALIZED!();

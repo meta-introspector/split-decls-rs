@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Subdiagnostic!();
+        SharedEmitter!();
         SharedEmitterMessage!();
         Diagnostic!();
-        SharedEmitter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_242 {
     };
 }
 
-impl_242!()
+impl_242!();

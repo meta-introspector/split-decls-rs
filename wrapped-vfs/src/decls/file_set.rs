@@ -4,4 +4,4 @@ macro_rules! file_set {
     };
 }
 
-file_set!()
+file_set!();

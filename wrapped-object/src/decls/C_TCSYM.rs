@@ -4,4 +4,4 @@ macro_rules! C_TCSYM {
     };
 }
 
-C_TCSYM!()
+C_TCSYM!();

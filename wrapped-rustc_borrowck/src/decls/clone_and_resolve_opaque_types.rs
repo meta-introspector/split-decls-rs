@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         UniversalRegionRelations!();
-        MirTypeckRegionConstraints!();
         BorrowckInferCtxt!();
+        MirTypeckRegionConstraints!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! clone_and_resolve_opaque_types {
     };
 }
 
-clone_and_resolve_opaque_types!()
+clone_and_resolve_opaque_types!();

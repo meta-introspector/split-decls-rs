@@ -11,4 +11,4 @@ macro_rules! DEFAULT_PARK_TOKEN {
     };
 }
 
-DEFAULT_PARK_TOKEN!()
+DEFAULT_PARK_TOKEN!();

@@ -11,4 +11,4 @@ macro_rules! get_node_tag {
     };
 }
 
-get_node_tag!()
+get_node_tag!();

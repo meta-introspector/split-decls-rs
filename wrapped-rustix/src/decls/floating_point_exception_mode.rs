@@ -11,4 +11,4 @@ macro_rules! floating_point_exception_mode {
     };
 }
 
-floating_point_exception_mode!()
+floating_point_exception_mode!();

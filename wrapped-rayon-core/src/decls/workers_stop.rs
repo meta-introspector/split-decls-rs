@@ -11,4 +11,4 @@ macro_rules! workers_stop {
     };
 }
 
-workers_stop!()
+workers_stop!();

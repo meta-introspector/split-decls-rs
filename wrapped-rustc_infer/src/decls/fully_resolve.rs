@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FullTypeResolver!();
-        FixupResult!();
         InferCtxt!();
+        FixupResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! fully_resolve {
     };
 }
 
-fully_resolve!()
+fully_resolve!();

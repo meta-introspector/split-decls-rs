@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         CreateAttrString!();
+        CodegenCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! backchain_attr {
     };
 }
 
-backchain_attr!()
+backchain_attr!();

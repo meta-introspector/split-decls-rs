@@ -4,4 +4,4 @@ macro_rules! div_rem {
     };
 }
 
-div_rem!()
+div_rem!();

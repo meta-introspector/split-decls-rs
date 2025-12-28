@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Stage!();
-        CustomMirParser!();
-        ArgParser!();
-        AttributeOrder!();
         AcceptContext!();
-        OnDuplicate!();
+        CustomMirParser!();
         SingleAttributeParser!();
         AllowedTargets!();
+        AttributeOrder!();
+        OnDuplicate!();
+        ArgParser!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_152 {
     };
 }
 
-impl_152!()
+impl_152!();

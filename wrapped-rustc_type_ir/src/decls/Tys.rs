@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Ty!();
-        SliceLike!();
         Interner!();
         TypeFoldable!();
+        SliceLike!();
+        Ty!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Tys {
     };
 }
 
-Tys!()
+Tys!();

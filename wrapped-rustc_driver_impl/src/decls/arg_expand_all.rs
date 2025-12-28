@@ -11,4 +11,4 @@ macro_rules! arg_expand_all {
     };
 }
 
-arg_expand_all!()
+arg_expand_all!();

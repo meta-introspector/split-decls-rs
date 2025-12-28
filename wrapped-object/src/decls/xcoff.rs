@@ -4,4 +4,4 @@ macro_rules! xcoff {
     };
 }
 
-xcoff!()
+xcoff!();

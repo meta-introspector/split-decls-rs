@@ -4,4 +4,4 @@ macro_rules! MIAO {
     };
 }
 
-MIAO!()
+MIAO!();

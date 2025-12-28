@@ -4,4 +4,4 @@ macro_rules! COMPRESSED_SIZE_MAX {
     };
 }
 
-COMPRESSED_SIZE_MAX!()
+COMPRESSED_SIZE_MAX!();

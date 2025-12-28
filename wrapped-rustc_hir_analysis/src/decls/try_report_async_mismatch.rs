@@ -11,4 +11,4 @@ macro_rules! try_report_async_mismatch {
     };
 }
 
-try_report_async_mismatch!()
+try_report_async_mismatch!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Next!();
-        Context!();
         Tera!();
+        Context!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! stateful_global_fn {
     };
 }
 
-stateful_global_fn!()
+stateful_global_fn!();

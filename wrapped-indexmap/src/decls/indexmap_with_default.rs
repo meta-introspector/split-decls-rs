@@ -11,4 +11,4 @@ macro_rules! indexmap_with_default {
     };
 }
 
-indexmap_with_default!()
+indexmap_with_default!();

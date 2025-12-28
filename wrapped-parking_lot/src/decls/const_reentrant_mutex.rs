@@ -13,4 +13,4 @@ macro_rules! const_reentrant_mutex {
     };
 }
 
-const_reentrant_mutex!()
+const_reentrant_mutex!();

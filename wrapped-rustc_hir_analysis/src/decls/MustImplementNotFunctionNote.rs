@@ -4,4 +4,4 @@ macro_rules! MustImplementNotFunctionNote {
     };
 }
 
-MustImplementNotFunctionNote!()
+MustImplementNotFunctionNote!();

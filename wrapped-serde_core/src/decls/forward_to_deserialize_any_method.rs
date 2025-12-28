@@ -4,4 +4,4 @@ macro_rules! forward_to_deserialize_any_method {
     };
 }
 
-forward_to_deserialize_any_method!()
+forward_to_deserialize_any_method!();

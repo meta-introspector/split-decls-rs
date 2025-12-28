@@ -4,4 +4,4 @@ macro_rules! owned_target_machine {
     };
 }
 
-owned_target_machine!()
+owned_target_machine!();

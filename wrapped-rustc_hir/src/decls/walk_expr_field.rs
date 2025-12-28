@@ -12,4 +12,4 @@ macro_rules! walk_expr_field {
     };
 }
 
-walk_expr_field!()
+walk_expr_field!();

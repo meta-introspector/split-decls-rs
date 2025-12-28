@@ -4,4 +4,4 @@ macro_rules! callsite2 {
     };
 }
 
-callsite2!()
+callsite2!();

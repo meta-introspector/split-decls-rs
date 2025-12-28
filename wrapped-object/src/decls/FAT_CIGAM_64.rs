@@ -4,4 +4,4 @@ macro_rules! FAT_CIGAM_64 {
     };
 }
 
-FAT_CIGAM_64!()
+FAT_CIGAM_64!();

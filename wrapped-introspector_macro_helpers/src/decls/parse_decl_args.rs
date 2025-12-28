@@ -4,4 +4,4 @@ macro_rules! parse_decl_args {
     };
 }
 
-parse_decl_args!()
+parse_decl_args!();

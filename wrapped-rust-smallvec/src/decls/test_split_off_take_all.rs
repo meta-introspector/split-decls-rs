@@ -11,4 +11,4 @@ macro_rules! test_split_off_take_all {
     };
 }
 
-test_split_off_take_all!()
+test_split_off_take_all!();

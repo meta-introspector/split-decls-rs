@@ -4,4 +4,4 @@ macro_rules! CaptureKey {
     };
 }
 
-CaptureKey!()
+CaptureKey!();

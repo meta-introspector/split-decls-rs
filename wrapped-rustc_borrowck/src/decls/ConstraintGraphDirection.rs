@@ -4,4 +4,4 @@ macro_rules! ConstraintGraphDirection {
     };
 }
 
-ConstraintGraphDirection!()
+ConstraintGraphDirection!();

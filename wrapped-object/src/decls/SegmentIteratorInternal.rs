@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        MachO32!();
-        XcoffSegmentIterator32!();
-        ReadRef!();
-        CoffSegmentIterator!();
-        PeSegmentIterator32!();
-        ElfSegmentIterator32!();
-        WasmSegmentIterator!();
-        ElfSegmentIterator64!();
-        PeSegmentIterator64!();
-        XcoffSegmentIterator64!();
-        MachO64!();
-        MachOSegmentIterator64!();
-        Endianness!();
-        CoffBigSegmentIterator!();
         MachOSegmentIterator32!();
+        ReadRef!();
+        CoffBigSegmentIterator!();
+        XcoffSegmentIterator64!();
+        CoffSegmentIterator!();
+        PeSegmentIterator64!();
+        PeSegmentIterator32!();
+        ElfSegmentIterator64!();
+        WasmSegmentIterator!();
+        MachO32!();
+        MachOSegmentIterator64!();
+        XcoffSegmentIterator32!();
+        MachO64!();
+        Endianness!();
+        ElfSegmentIterator32!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! SegmentIteratorInternal {
     };
 }
 
-SegmentIteratorInternal!()
+SegmentIteratorInternal!();

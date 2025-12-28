@@ -4,4 +4,4 @@ macro_rules! AttrShouldBeAppliedToStatic {
     };
 }
 
-AttrShouldBeAppliedToStatic!()
+AttrShouldBeAppliedToStatic!();

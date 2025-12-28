@@ -4,4 +4,4 @@ macro_rules! EM_STXP7X {
     };
 }
 
-EM_STXP7X!()
+EM_STXP7X!();

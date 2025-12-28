@@ -11,4 +11,4 @@ macro_rules! current_thread_has_pending_tasks {
     };
 }
 
-current_thread_has_pending_tasks!()
+current_thread_has_pending_tasks!();

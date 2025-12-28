@@ -11,4 +11,4 @@ macro_rules! broadcast_mutual {
     };
 }
 
-broadcast_mutual!()
+broadcast_mutual!();

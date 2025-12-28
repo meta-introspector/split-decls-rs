@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         AcceptContext!();
-        ArgParser!();
-        Stage!();
-        MetaItemOrLitParser!();
         InvalidPredicate!();
-        CfgPredicateIdentifier!();
         MetaItemParser!();
+        CfgPredicateIdentifier!();
+        ArgParser!();
+        MetaItemOrLitParser!();
+        Stage!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! parse_cfg_entry {
     };
 }
 
-parse_cfg_entry!()
+parse_cfg_entry!();

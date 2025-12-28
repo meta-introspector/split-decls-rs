@@ -4,4 +4,4 @@ macro_rules! request_code_write {
     };
 }
 
-request_code_write!()
+request_code_write!();

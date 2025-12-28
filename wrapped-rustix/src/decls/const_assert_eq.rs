@@ -4,4 +4,4 @@ macro_rules! const_assert_eq {
     };
 }
 
-const_assert_eq!()
+const_assert_eq!();

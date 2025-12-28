@@ -4,4 +4,4 @@ macro_rules! PartiallyInterned {
     };
 }
 
-PartiallyInterned!()
+PartiallyInterned!();

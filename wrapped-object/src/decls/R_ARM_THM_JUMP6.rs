@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_JUMP6 {
     };
 }
 
-R_ARM_THM_JUMP6!()
+R_ARM_THM_JUMP6!();

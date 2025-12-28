@@ -11,4 +11,4 @@ macro_rules! to_crate_graph {
     };
 }
 
-to_crate_graph!()
+to_crate_graph!();

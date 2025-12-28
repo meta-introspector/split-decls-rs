@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        NFA!();
-        State!();
-        Builder!();
-        ByteClasses!();
-        LookMatcher!();
-        GroupInfo!();
         StateID!();
+        NFA!();
+        Builder!();
+        State!();
         Match!();
-        ByteClassSet!();
+        GroupInfo!();
         LookSet!();
+        ByteClasses!();
+        ByteClassSet!();
+        LookMatcher!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! Inner {
     };
 }
 
-Inner!()
+Inner!();

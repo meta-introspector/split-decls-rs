@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Span!();
-        SpannedEventArgRecorder!();
         SourceMap!();
+        SpannedEventArgRecorder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_231 {
     };
 }
 
-impl_231!()
+impl_231!();

@@ -4,4 +4,4 @@ macro_rules! Align32 {
     };
 }
 
-Align32!()
+Align32!();

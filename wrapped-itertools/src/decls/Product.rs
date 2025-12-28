@@ -4,4 +4,4 @@ macro_rules! Product {
     };
 }
 
-Product!()
+Product!();

@@ -4,4 +4,4 @@ macro_rules! register_jar {
     };
 }
 
-register_jar!()
+register_jar!();

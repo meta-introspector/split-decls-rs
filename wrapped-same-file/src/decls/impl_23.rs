@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Handle!();
         HandleKind!();
+        Handle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

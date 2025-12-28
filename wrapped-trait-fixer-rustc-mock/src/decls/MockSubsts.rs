@@ -4,4 +4,4 @@ macro_rules! MockSubsts {
     };
 }
 
-MockSubsts!()
+MockSubsts!();

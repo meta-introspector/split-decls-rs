@@ -4,4 +4,4 @@ macro_rules! VernacularWalk {
     };
 }
 
-VernacularWalk!()
+VernacularWalk!();

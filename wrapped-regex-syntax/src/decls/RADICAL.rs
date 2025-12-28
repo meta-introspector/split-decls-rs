@@ -4,4 +4,4 @@ macro_rules! RADICAL {
     };
 }
 
-RADICAL!()
+RADICAL!();

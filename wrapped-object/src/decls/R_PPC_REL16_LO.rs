@@ -4,4 +4,4 @@ macro_rules! R_PPC_REL16_LO {
     };
 }
 
-R_PPC_REL16_LO!()
+R_PPC_REL16_LO!();

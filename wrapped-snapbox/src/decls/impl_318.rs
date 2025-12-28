@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Data!();
-        DataInner!();
-        FilterNewlines!();
         Error!();
         Filter!();
+        FilterNewlines!();
+        DataInner!();
+        Data!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_318 {
     };
 }
 
-impl_318!()
+impl_318!();

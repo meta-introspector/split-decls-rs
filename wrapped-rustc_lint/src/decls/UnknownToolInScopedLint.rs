@@ -4,4 +4,4 @@ macro_rules! UnknownToolInScopedLint {
     };
 }
 
-UnknownToolInScopedLint!()
+UnknownToolInScopedLint!();

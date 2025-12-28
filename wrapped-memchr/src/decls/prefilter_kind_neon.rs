@@ -11,4 +11,4 @@ macro_rules! prefilter_kind_neon {
     };
 }
 
-prefilter_kind_neon!()
+prefilter_kind_neon!();

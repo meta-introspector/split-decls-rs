@@ -4,4 +4,4 @@ macro_rules! RuntimeName {
     };
 }
 
-RuntimeName!()
+RuntimeName!();

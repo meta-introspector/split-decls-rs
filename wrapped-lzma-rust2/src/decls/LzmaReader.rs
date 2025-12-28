@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LzDecoder!();
         RangeDecoder!();
         LzmaDecoder!();
+        LzDecoder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LzmaReader {
     };
 }
 
-LzmaReader!()
+LzmaReader!();

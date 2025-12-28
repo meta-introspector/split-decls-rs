@@ -4,4 +4,4 @@ macro_rules! compiler_macro {
     };
 }
 
-compiler_macro!()
+compiler_macro!();

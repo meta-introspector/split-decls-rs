@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnparkHandleT!();
         ThreadData!();
+        UnparkHandleT!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ThreadParkerT {
     };
 }
 
-ThreadParkerT!()
+ThreadParkerT!();

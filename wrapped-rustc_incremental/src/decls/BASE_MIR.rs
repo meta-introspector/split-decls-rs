@@ -4,4 +4,4 @@ macro_rules! BASE_MIR {
     };
 }
 
-BASE_MIR!()
+BASE_MIR!();

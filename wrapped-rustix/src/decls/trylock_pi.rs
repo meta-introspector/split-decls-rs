@@ -11,4 +11,4 @@ macro_rules! trylock_pi {
     };
 }
 
-trylock_pi!()
+trylock_pi!();

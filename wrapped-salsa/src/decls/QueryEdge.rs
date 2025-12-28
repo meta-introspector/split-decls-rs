@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        QueryEdgeKind!();
         DatabaseKeyIndex!();
         IngredientIndex!();
-        QueryEdgeKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! QueryEdge {
     };
 }
 
-QueryEdge!()
+QueryEdge!();

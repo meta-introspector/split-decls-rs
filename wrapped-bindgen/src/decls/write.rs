@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Interface!();
         TypeMap!();
+        Index!();
         CppInterface!();
         Type!();
-        Index!();
-        Interface!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! write {
     };
 }
 
-write!()
+write!();

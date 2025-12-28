@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LoadCommandIterator!();
-        Endian!();
         LoadCommandData!();
         Result!();
         Item!();
+        Endian!();
+        LoadCommandIterator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_557 {
     };
 }
 
-impl_557!()
+impl_557!();

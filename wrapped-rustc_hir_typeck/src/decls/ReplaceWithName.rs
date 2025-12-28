@@ -4,4 +4,4 @@ macro_rules! ReplaceWithName {
     };
 }
 
-ReplaceWithName!()
+ReplaceWithName!();

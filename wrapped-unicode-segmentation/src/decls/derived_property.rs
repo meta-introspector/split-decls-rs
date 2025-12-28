@@ -4,4 +4,4 @@ macro_rules! derived_property {
     };
 }
 
-derived_property!()
+derived_property!();

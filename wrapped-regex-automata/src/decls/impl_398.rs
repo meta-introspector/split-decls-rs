@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RegexInfo!();
         PikeVM!();
-        NFA!();
         PikeVMCache!();
+        RegexInfo!();
         BuildError!();
-        PikeVMEngine!();
         Prefilter!();
+        PikeVMEngine!();
+        NFA!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_398 {
     };
 }
 
-impl_398!()
+impl_398!();

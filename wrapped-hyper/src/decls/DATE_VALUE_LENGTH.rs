@@ -4,4 +4,4 @@ macro_rules! DATE_VALUE_LENGTH {
     };
 }
 
-DATE_VALUE_LENGTH!()
+DATE_VALUE_LENGTH!();

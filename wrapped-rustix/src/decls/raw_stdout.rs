@@ -4,4 +4,4 @@ macro_rules! raw_stdout {
     };
 }
 
-raw_stdout!()
+raw_stdout!();

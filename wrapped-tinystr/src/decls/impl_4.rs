@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Aligned4!();
         AsciiByte!();
-        TinyAsciiStr!();
         Aligned8!();
+        TinyAsciiStr!();
         ParseError!();
+        Aligned4!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

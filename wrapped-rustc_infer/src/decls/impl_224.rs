@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         TypeVariableData!();
-        TypeVariableTable!();
-        TypeVariableOrigin!();
         TypeVariableValue!();
         TyVidEqKey!();
-        UnificationTable!();
         TyVidSubKey!();
+        TypeVariableOrigin!();
+        TypeVariableTable!();
+        UnificationTable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_224 {
     };
 }
 
-impl_224!()
+impl_224!();

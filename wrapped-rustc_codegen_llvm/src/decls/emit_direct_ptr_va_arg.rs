@@ -11,4 +11,4 @@ macro_rules! emit_direct_ptr_va_arg {
     };
 }
 
-emit_direct_ptr_va_arg!()
+emit_direct_ptr_va_arg!();

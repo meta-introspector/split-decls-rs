@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MPlaceTy!();
-        CompileTimeInterpCx!();
         PlaceTy!();
+        CompileTimeInterpCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! dump_place {
     };
 }
 
-dump_place!()
+dump_place!();

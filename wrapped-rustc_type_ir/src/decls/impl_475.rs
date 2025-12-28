@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CoroutineWitnessTypes!();
         Interner!();
+        CoroutineWitnessTypes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_475 {
     };
 }
 
-impl_475!()
+impl_475!();

@@ -11,4 +11,4 @@ macro_rules! read_next_byte {
     };
 }
 
-read_next_byte!()
+read_next_byte!();

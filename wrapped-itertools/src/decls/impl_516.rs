@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HomogeneousTuple!();
         TupleWindows!();
+        HomogeneousTuple!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_516 {
     };
 }
 
-impl_516!()
+impl_516!();

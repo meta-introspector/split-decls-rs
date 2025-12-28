@@ -1,33 +1,33 @@
 macro_rules! deps {
     () => {
-        SstFileWriter!();
-        TransactionDB!();
         DBRawIterator!();
         CacheWrapper!();
-        ColumnFamilyDescriptor!();
-        Options!();
-        Cache!();
-        ReadOptions!();
-        Snapshot!();
-        OptimisticTransactionOptions!();
-        BlockBasedOptions!();
-        UnboundColumnFamily!();
-        OptimisticTransactionDB!();
-        Transaction!();
-        IngestExternalFileOptions!();
-        Env!();
-        WriteBufferManagerWrapper!();
-        PlainTableFactoryOptions!();
-        EnvWrapper!();
-        DBIterator!();
-        DB!();
         WriteOptions!();
-        WriteBatch!();
-        TransactionOptions!();
-        ColumnFamily!();
-        BoundColumnFamily!();
-        TransactionDBOptions!();
+        OptimisticTransactionOptions!();
+        Options!();
+        OptimisticTransactionDB!();
+        DBIterator!();
         WriteBufferManager!();
+        WriteBufferManagerWrapper!();
+        BlockBasedOptions!();
+        DB!();
+        Env!();
+        IngestExternalFileOptions!();
+        Transaction!();
+        ColumnFamilyDescriptor!();
+        UnboundColumnFamily!();
+        TransactionDB!();
+        Cache!();
+        BoundColumnFamily!();
+        ColumnFamily!();
+        PlainTableFactoryOptions!();
+        TransactionOptions!();
+        EnvWrapper!();
+        Snapshot!();
+        ReadOptions!();
+        TransactionDBOptions!();
+        WriteBatch!();
+        SstFileWriter!();
     };
 }
 
@@ -38,4 +38,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

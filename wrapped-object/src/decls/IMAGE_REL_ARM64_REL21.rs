@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ARM64_REL21 {
     };
 }
 
-IMAGE_REL_ARM64_REL21!()
+IMAGE_REL_ARM64_REL21!();

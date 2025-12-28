@@ -4,4 +4,4 @@ macro_rules! wikidata_impl {
     };
 }
 
-wikidata_impl!()
+wikidata_impl!();

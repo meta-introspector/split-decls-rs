@@ -5,4 +5,4 @@ macro_rules! fatally_break_rust {
     };
 }
 
-fatally_break_rust!()
+fatally_break_rust!();

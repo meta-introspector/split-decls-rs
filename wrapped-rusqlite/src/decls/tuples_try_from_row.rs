@@ -4,4 +4,4 @@ macro_rules! tuples_try_from_row {
     };
 }
 
-tuples_try_from_row!()
+tuples_try_from_row!();

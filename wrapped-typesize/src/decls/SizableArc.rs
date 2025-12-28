@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Owned!();
-        Borrowed!();
         TypeSize!();
+        Borrowed!();
+        Owned!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SizableArc {
     };
 }
 
-SizableArc!()
+SizableArc!();

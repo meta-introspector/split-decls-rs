@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DFA!();
-        StateID!();
         Remappable!();
+        StateID!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! onepass {
     };
 }
 
-onepass!()
+onepass!();

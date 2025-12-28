@@ -4,4 +4,4 @@ macro_rules! C_BLOCK {
     };
 }
 
-C_BLOCK!()
+C_BLOCK!();

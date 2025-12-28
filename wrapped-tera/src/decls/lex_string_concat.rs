@@ -4,4 +4,4 @@ macro_rules! lex_string_concat {
     };
 }
 
-lex_string_concat!()
+lex_string_concat!();

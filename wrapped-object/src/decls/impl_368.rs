@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FileHeader!();
-        Endian!();
         Relr!();
+        Endian!();
         RelrIterator!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_368 {
     };
 }
 
-impl_368!()
+impl_368!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Val!();
-        ForLoop!();
-        FrameType!();
-        FrameContext!();
-        Context!();
         Template!();
         StackFrame!();
+        Context!();
+        FrameType!();
+        FrameContext!();
+        ForLoop!();
+        Val!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_530 {
     };
 }
 
-impl_530!()
+impl_530!();

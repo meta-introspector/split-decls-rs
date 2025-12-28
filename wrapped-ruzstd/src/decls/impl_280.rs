@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         BlockType!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_280 {
     };
 }
 
-impl_280!()
+impl_280!();

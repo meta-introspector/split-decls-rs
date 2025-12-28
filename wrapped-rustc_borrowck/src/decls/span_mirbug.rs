@@ -4,4 +4,4 @@ macro_rules! span_mirbug {
     };
 }
 
-span_mirbug!()
+span_mirbug!();

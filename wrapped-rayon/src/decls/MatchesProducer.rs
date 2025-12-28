@@ -4,4 +4,4 @@ macro_rules! MatchesProducer {
     };
 }
 
-MatchesProducer!()
+MatchesProducer!();

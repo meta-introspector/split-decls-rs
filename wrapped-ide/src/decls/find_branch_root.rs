@@ -4,4 +4,4 @@ macro_rules! find_branch_root {
     };
 }
 
-find_branch_root!()
+find_branch_root!();

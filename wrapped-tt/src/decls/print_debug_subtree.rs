@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         TtIter!();
+        DelimiterKind!();
         Subtree!();
         Delimiter!();
-        DelimiterKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! print_debug_subtree {
     };
 }
 
-print_debug_subtree!()
+print_debug_subtree!();

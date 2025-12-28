@@ -4,4 +4,4 @@ macro_rules! Z_BEST_COMPRESSION {
     };
 }
 
-Z_BEST_COMPRESSION!()
+Z_BEST_COMPRESSION!();

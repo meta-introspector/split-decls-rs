@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        FreeList!();
-        Addr!();
-        Shared!();
-        Slot!();
-        Iter!();
         Generation!();
         Config!();
+        Shared!();
+        Addr!();
+        Slot!();
+        Iter!();
+        FreeList!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_133 {
     };
 }
 
-impl_133!()
+impl_133!();

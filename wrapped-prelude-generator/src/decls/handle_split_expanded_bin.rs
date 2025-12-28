@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         Declaration!();
         ReferenceVisitor!();
-        GemConfig!();
-        SplitExpandedBinInputs!();
         DependencyValidator!();
-        RustcInfo!();
+        SplitExpandedBinInputs!();
+        GemConfig!();
         SymbolMap!();
+        RustcInfo!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! handle_split_expanded_bin {
     };
 }
 
-handle_split_expanded_bin!()
+handle_split_expanded_bin!();

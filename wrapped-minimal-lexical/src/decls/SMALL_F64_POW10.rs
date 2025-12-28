@@ -4,4 +4,4 @@ macro_rules! SMALL_F64_POW10 {
     };
 }
 
-SMALL_F64_POW10!()
+SMALL_F64_POW10!();

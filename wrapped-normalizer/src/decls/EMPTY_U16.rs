@@ -4,4 +4,4 @@ macro_rules! EMPTY_U16 {
     };
 }
 
-EMPTY_U16!()
+EMPTY_U16!();

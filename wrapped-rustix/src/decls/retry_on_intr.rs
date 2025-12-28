@@ -11,4 +11,4 @@ macro_rules! retry_on_intr {
     };
 }
 
-retry_on_intr!()
+retry_on_intr!();

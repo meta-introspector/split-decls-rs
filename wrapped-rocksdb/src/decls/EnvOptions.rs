@@ -4,4 +4,4 @@ macro_rules! EnvOptions {
     };
 }
 
-EnvOptions!()
+EnvOptions!();

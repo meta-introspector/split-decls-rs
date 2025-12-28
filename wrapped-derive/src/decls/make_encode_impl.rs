@@ -12,4 +12,4 @@ macro_rules! make_encode_impl {
     };
 }
 
-make_encode_impl!()
+make_encode_impl!();

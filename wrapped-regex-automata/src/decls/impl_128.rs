@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        State!();
-        Endian!();
         Seen!();
-        PatternID!();
-        SerializeError!();
+        Endian!();
+        Special!();
         DeserializeError!();
         StateID!();
         DFA!();
         StateIter!();
         Transitions!();
-        Special!();
+        PatternID!();
+        State!();
+        SerializeError!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

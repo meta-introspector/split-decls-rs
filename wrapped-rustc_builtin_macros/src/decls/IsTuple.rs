@@ -4,4 +4,4 @@ macro_rules! IsTuple {
     };
 }
 
-IsTuple!()
+IsTuple!();

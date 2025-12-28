@@ -4,4 +4,4 @@ macro_rules! Z_SYNC_FLUSH {
     };
 }
 
-Z_SYNC_FLUSH!()
+Z_SYNC_FLUSH!();

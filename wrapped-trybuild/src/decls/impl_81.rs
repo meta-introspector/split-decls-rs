@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Name!();
-        Error!();
         Test!();
+        Error!();
         ExpandedTestSet!();
         ExpandedTest!();
+        Name!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

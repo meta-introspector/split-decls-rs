@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_JUMP_SLOT {
     };
 }
 
-R_MICROBLAZE_JUMP_SLOT!()
+R_MICROBLAZE_JUMP_SLOT!();

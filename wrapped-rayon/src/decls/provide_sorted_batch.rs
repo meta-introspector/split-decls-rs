@@ -4,4 +4,4 @@ macro_rules! provide_sorted_batch {
     };
 }
 
-provide_sorted_batch!()
+provide_sorted_batch!();

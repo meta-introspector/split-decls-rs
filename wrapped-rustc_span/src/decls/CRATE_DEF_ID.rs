@@ -11,4 +11,4 @@ macro_rules! CRATE_DEF_ID {
     };
 }
 
-CRATE_DEF_ID!()
+CRATE_DEF_ID!();

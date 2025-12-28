@@ -4,4 +4,4 @@ macro_rules! MockTraitFixer {
     };
 }
 
-MockTraitFixer!()
+MockTraitFixer!();

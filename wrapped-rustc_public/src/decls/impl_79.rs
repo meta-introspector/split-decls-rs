@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ExistentialProjection!();
-        InternalCx!();
         ExistentialProjectionHelpers!();
-        RustcInternal!();
+        ExistentialProjection!();
         BridgeTys!();
+        InternalCx!();
+        RustcInternal!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

@@ -11,4 +11,4 @@ macro_rules! impl_fmt_trait {
     };
 }
 
-impl_fmt_trait!()
+impl_fmt_trait!();

@@ -4,4 +4,4 @@ macro_rules! query_cache_path {
     };
 }
 
-query_cache_path!()
+query_cache_path!();

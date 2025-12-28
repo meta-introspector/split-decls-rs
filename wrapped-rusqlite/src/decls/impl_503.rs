@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Blob!();
-        ValueRef!();
         FromSqlResult!();
-        FromSqlError!();
         Null!();
+        ValueRef!();
+        FromSqlError!();
+        Blob!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_503 {
     };
 }
 
-impl_503!()
+impl_503!();

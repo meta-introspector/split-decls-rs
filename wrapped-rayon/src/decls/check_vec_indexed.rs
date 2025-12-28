@@ -4,4 +4,4 @@ macro_rules! check_vec_indexed {
     };
 }
 
-check_vec_indexed!()
+check_vec_indexed!();

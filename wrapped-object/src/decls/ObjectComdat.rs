@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
+        ComdatKind!();
         Item!();
+        Object!();
         SymbolIndex!();
         SectionIterator!();
-        Object!();
-        ComdatKind!();
+        Result!();
         SectionIndex!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! ObjectComdat {
     };
 }
 
-ObjectComdat!()
+ObjectComdat!();

@@ -4,4 +4,4 @@ macro_rules! SHA3_512_RATE {
     };
 }
 
-SHA3_512_RATE!()
+SHA3_512_RATE!();

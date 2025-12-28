@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HeapVisitor!();
         Hir!();
         Result!();
         Visitor!();
+        HeapVisitor!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! visit {
     };
 }
 
-visit!()
+visit!();

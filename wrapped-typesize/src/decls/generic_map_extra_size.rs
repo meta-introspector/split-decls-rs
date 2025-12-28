@@ -12,4 +12,4 @@ macro_rules! generic_map_extra_size {
     };
 }
 
-generic_map_extra_size!()
+generic_map_extra_size!();

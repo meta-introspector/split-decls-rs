@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Align!();
         ProvenanceMap!();
+        Align!();
         Allocation!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! new_empty_allocation {
     };
 }
 
-new_empty_allocation!()
+new_empty_allocation!();

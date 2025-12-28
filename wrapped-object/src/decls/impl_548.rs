@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Nlist!();
-        MachHeader!();
-        Endian!();
         Section!();
-        SegmentCommand64!();
+        Endian!();
         Nlist64!();
+        BigEndian!();
+        MachHeader!();
         Segment!();
         Section64!();
-        BigEndian!();
         MachHeader64!();
+        Nlist!();
+        SegmentCommand64!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_548 {
     };
 }
 
-impl_548!()
+impl_548!();

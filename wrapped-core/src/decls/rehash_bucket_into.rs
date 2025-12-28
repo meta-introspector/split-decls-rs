@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         HashTable!();
-        Bucket!();
         ThreadData!();
+        Bucket!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! rehash_bucket_into {
     };
 }
 
-rehash_bucket_into!()
+rehash_bucket_into!();

@@ -4,4 +4,4 @@ macro_rules! lex_logic_expr {
     };
 }
 
-lex_logic_expr!()
+lex_logic_expr!();

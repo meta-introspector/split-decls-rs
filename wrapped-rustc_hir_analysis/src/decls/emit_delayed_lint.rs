@@ -4,4 +4,4 @@ macro_rules! emit_delayed_lint {
     };
 }
 
-emit_delayed_lint!()
+emit_delayed_lint!();

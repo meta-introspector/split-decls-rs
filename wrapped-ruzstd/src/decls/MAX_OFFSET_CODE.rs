@@ -4,4 +4,4 @@ macro_rules! MAX_OFFSET_CODE {
     };
 }
 
-MAX_OFFSET_CODE!()
+MAX_OFFSET_CODE!();

@@ -11,4 +11,4 @@ macro_rules! sizeof_impl {
     };
 }
 
-sizeof_impl!()
+sizeof_impl!();

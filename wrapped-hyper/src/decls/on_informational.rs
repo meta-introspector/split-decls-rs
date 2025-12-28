@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Response!();
         OnInformationalClosure!();
+        Response!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! on_informational {
     };
 }
 
-on_informational!()
+on_informational!();

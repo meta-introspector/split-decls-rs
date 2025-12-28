@@ -11,4 +11,4 @@ macro_rules! parse_concise_float {
     };
 }
 
-parse_concise_float!()
+parse_concise_float!();

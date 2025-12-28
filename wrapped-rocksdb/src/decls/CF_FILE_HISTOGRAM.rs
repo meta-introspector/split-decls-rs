@@ -11,4 +11,4 @@ macro_rules! CF_FILE_HISTOGRAM {
     };
 }
 
-CF_FILE_HISTOGRAM!()
+CF_FILE_HISTOGRAM!();

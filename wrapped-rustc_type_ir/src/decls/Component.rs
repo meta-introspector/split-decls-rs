@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Region!();
+        AliasTy!();
         InferTy!();
         Interner!();
-        AliasTy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Component {
     };
 }
 
-Component!()
+Component!();

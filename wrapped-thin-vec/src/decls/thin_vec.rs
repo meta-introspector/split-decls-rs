@@ -11,4 +11,4 @@ macro_rules! thin_vec {
     };
 }
 
-thin_vec!()
+thin_vec!();

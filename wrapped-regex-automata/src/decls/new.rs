@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         RegexInfo!();
-        Strategy!();
-        Prefilter!();
-        ReverseSuffix!();
-        ReverseInner!();
         Core!();
-        BuildError!();
+        Strategy!();
         Pre!();
         ReverseAnchored!();
+        ReverseSuffix!();
+        ReverseInner!();
+        Prefilter!();
+        BuildError!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! new {
     };
 }
 
-new!()
+new!();

@@ -12,4 +12,4 @@ macro_rules! format_mixture {
     };
 }
 
-format_mixture!()
+format_mixture!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IterParallelProducer!();
-        IterBridge!();
         UnindexedConsumer!();
-        Iter!();
+        IterBridge!();
         ParallelIterator!();
+        Iter!();
+        IterParallelProducer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_760 {
     };
 }
 
-impl_760!()
+impl_760!();

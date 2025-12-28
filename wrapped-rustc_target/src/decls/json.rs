@@ -4,4 +4,4 @@ macro_rules! json {
     };
 }
 
-json!()
+json!();

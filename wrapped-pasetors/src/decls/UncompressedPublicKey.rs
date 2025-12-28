@@ -4,4 +4,4 @@ macro_rules! UncompressedPublicKey {
     };
 }
 
-UncompressedPublicKey!()
+UncompressedPublicKey!();

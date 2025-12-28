@@ -4,4 +4,4 @@ macro_rules! descend_token {
     };
 }
 
-descend_token!()
+descend_token!();

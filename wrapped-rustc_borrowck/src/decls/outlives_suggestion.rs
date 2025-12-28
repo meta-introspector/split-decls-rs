@@ -4,4 +4,4 @@ macro_rules! outlives_suggestion {
     };
 }
 
-outlives_suggestion!()
+outlives_suggestion!();

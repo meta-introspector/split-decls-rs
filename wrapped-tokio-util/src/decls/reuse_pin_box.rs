@@ -11,4 +11,4 @@ macro_rules! reuse_pin_box {
     };
 }
 
-reuse_pin_box!()
+reuse_pin_box!();

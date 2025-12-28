@@ -4,4 +4,4 @@ macro_rules! deflateEnd {
     };
 }
 
-deflateEnd!()
+deflateEnd!();

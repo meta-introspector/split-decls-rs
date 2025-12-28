@@ -4,4 +4,4 @@ macro_rules! get_expr_int {
     };
 }
 
-get_expr_int!()
+get_expr_int!();

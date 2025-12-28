@@ -23,4 +23,4 @@ macro_rules! bad_comment {
     };
 }
 
-bad_comment!()
+bad_comment!();

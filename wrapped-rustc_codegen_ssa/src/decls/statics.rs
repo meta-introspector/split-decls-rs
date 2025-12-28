@@ -4,4 +4,4 @@ macro_rules! statics {
     };
 }
 
-statics!()
+statics!();

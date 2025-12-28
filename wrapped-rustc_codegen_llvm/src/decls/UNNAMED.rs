@@ -4,4 +4,4 @@ macro_rules! UNNAMED {
     };
 }
 
-UNNAMED!()
+UNNAMED!();

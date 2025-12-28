@@ -4,4 +4,4 @@ macro_rules! MIN_WBITS {
     };
 }
 
-MIN_WBITS!()
+MIN_WBITS!();

@@ -4,4 +4,4 @@ macro_rules! supersuperfy_generics {
     };
 }
 
-supersuperfy_generics!()
+supersuperfy_generics!();

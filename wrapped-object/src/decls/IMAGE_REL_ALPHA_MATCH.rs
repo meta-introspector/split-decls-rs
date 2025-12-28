@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ALPHA_MATCH {
     };
 }
 
-IMAGE_REL_ALPHA_MATCH!()
+IMAGE_REL_ALPHA_MATCH!();

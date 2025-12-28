@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ALPHA_LITUSE {
     };
 }
 
-IMAGE_REL_ALPHA_LITUSE!()
+IMAGE_REL_ALPHA_LITUSE!();

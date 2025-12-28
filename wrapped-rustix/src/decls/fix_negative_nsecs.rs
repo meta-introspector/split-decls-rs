@@ -4,4 +4,4 @@ macro_rules! fix_negative_nsecs {
     };
 }
 
-fix_negative_nsecs!()
+fix_negative_nsecs!();

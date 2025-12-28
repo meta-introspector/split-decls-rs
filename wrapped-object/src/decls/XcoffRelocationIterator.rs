@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         FileHeader!();
-        Rel!();
-        SectionHeader!();
-        ReadRef!();
         XcoffFile!();
+        ReadRef!();
+        SectionHeader!();
+        Rel!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! XcoffRelocationIterator {
     };
 }
 
-XcoffRelocationIterator!()
+XcoffRelocationIterator!();

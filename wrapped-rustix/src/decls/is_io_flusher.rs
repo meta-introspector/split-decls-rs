@@ -11,4 +11,4 @@ macro_rules! is_io_flusher {
     };
 }
 
-is_io_flusher!()
+is_io_flusher!();

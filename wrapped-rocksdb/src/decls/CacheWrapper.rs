@@ -4,4 +4,4 @@ macro_rules! CacheWrapper {
     };
 }
 
-CacheWrapper!()
+CacheWrapper!();

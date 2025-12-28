@@ -4,4 +4,4 @@ macro_rules! MultipleOutputTypesAdaption {
     };
 }
 
-MultipleOutputTypesAdaption!()
+MultipleOutputTypesAdaption!();

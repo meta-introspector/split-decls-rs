@@ -12,4 +12,4 @@ macro_rules! current_revision {
     };
 }
 
-current_revision!()
+current_revision!();

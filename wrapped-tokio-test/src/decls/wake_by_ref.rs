@@ -4,4 +4,4 @@ macro_rules! wake_by_ref {
     };
 }
 
-wake_by_ref!()
+wake_by_ref!();

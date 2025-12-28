@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Myers!();
         Algorithm!();
+        Myers!();
         Split!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

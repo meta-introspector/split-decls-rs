@@ -4,4 +4,4 @@ macro_rules! pin_as_deref_mut {
     };
 }
 
-pin_as_deref_mut!()
+pin_as_deref_mut!();

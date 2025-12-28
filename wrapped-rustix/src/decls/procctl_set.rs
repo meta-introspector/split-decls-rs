@@ -12,4 +12,4 @@ macro_rules! procctl_set {
     };
 }
 
-procctl_set!()
+procctl_set!();

@@ -4,4 +4,4 @@ macro_rules! StructForm {
     };
 }
 
-StructForm!()
+StructForm!();

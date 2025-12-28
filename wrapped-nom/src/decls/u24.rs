@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Needed!();
         Error!();
-        Either!();
         Input!();
+        Parser!();
         ParseError!();
         Endianness!();
+        Either!();
+        Needed!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! u24 {
     };
 }
 
-u24!()
+u24!();

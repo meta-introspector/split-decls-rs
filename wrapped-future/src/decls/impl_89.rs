@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IAsyncOperation!();
-        IAsyncOperation_Vtbl!();
         IAsyncOperation_Impl!();
+        IAsyncOperation_Vtbl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

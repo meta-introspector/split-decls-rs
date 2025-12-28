@@ -11,4 +11,4 @@ macro_rules! VER_NDX_LOCAL {
     };
 }
 
-VER_NDX_LOCAL!()
+VER_NDX_LOCAL!();

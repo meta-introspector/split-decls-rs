@@ -4,4 +4,4 @@ macro_rules! SHF_MIPS_NODUPE {
     };
 }
 
-SHF_MIPS_NODUPE!()
+SHF_MIPS_NODUPE!();

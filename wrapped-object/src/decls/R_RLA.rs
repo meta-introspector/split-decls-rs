@@ -4,4 +4,4 @@ macro_rules! R_RLA {
     };
 }
 
-R_RLA!()
+R_RLA!();

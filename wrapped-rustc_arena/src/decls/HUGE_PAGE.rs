@@ -4,4 +4,4 @@ macro_rules! HUGE_PAGE {
     };
 }
 
-HUGE_PAGE!()
+HUGE_PAGE!();

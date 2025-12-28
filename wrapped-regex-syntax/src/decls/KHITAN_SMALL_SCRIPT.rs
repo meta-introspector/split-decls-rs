@@ -4,4 +4,4 @@ macro_rules! KHITAN_SMALL_SCRIPT {
     };
 }
 
-KHITAN_SMALL_SCRIPT!()
+KHITAN_SMALL_SCRIPT!();

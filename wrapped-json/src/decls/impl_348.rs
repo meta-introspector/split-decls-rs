@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Value!();
+        Result!();
         Error!();
         SerializeVec!();
-        Result!();
-        Value!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_348 {
     };
 }
 
-impl_348!()
+impl_348!();

@@ -4,4 +4,4 @@ macro_rules! arbitrary_support {
     };
 }
 
-arbitrary_support!()
+arbitrary_support!();

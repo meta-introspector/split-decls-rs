@@ -4,4 +4,4 @@ macro_rules! processor {
     };
 }
 
-processor!()
+processor!();

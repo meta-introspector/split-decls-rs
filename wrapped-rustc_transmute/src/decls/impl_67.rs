@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Answer!();
-        Quantifier!();
-        Region!();
         Type!();
         Reason!();
+        Quantifier!();
+        Region!();
+        Answer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

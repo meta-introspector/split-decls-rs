@@ -4,4 +4,4 @@ macro_rules! tt_from_syntax {
     };
 }
 
-tt_from_syntax!()
+tt_from_syntax!();

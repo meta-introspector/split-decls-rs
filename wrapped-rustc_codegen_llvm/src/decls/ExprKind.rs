@@ -4,4 +4,4 @@ macro_rules! ExprKind {
     };
 }
 
-ExprKind!()
+ExprKind!();

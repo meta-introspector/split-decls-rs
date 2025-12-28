@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Probe!();
         Interner!();
         QueryResult!();
-        Probe!();
         CandidateSource!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ProbeKind {
     };
 }
 
-ProbeKind!()
+ProbeKind!();

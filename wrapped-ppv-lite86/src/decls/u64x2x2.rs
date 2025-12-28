@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        BitOps64!();
-        MultiLane!();
-        ArithOps!();
-        Vec2!();
         Machine!();
-        StoreBytes!();
+        BitOps64!();
+        Vec2!();
+        ArithOps!();
         Store!();
+        MultiLane!();
+        StoreBytes!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! u64x2x2 {
     };
 }
 
-u64x2x2!()
+u64x2x2!();

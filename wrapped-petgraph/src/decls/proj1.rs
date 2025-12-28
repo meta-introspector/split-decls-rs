@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WSuc!();
-        EdgeIndex!();
         EdgeReference!();
         IndexType!();
+        EdgeIndex!();
+        WSuc!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! proj1 {
     };
 }
 
-proj1!()
+proj1!();

@@ -11,4 +11,4 @@ macro_rules! private_if_absent {
     };
 }
 
-private_if_absent!()
+private_if_absent!();

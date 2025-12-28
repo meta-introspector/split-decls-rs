@@ -11,4 +11,4 @@ macro_rules! assert_no_match {
     };
 }
 
-assert_no_match!()
+assert_no_match!();

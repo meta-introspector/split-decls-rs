@@ -11,4 +11,4 @@ macro_rules! slice_transform_name_callback {
     };
 }
 
-slice_transform_name_callback!()
+slice_transform_name_callback!();

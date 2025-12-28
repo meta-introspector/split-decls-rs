@@ -4,4 +4,4 @@ macro_rules! MULTANI {
     };
 }
 
-MULTANI!()
+MULTANI!();

@@ -11,4 +11,4 @@ macro_rules! set_ipv6_v6only {
     };
 }
 
-set_ipv6_v6only!()
+set_ipv6_v6only!();

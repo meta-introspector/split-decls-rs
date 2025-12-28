@@ -4,4 +4,4 @@ macro_rules! adjustment {
     };
 }
 
-adjustment!()
+adjustment!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FerrisIdentifier!();
         EmojiIdentifier!();
+        FerrisIdentifier!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! early_lint_checks {
     };
 }
 
-early_lint_checks!()
+early_lint_checks!();

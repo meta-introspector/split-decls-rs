@@ -4,4 +4,4 @@ macro_rules! push_unqualified_item_name {
     };
 }
 
-push_unqualified_item_name!()
+push_unqualified_item_name!();

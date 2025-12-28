@@ -4,4 +4,4 @@ macro_rules! LinkageType {
     };
 }
 
-LinkageType!()
+LinkageType!();

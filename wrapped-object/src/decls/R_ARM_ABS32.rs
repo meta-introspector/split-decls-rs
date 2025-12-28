@@ -4,4 +4,4 @@ macro_rules! R_ARM_ABS32 {
     };
 }
 
-R_ARM_ABS32!()
+R_ARM_ABS32!();

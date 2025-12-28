@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UniversalRegions!();
-        LocalizedOutlivesConstraint!();
         LivenessValues!();
         OutlivesConstraint!();
+        LocalizedOutlivesConstraint!();
+        UniversalRegions!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! localize_terminator_constraint {
     };
 }
 
-localize_terminator_constraint!()
+localize_terminator_constraint!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DecompositionTables!();
-        NonRecursiveDecompositionSupplement!();
-        DecompositionData!();
         DecomposingNormalizer!();
+        DecompositionTables!();
+        DecompositionData!();
+        NonRecursiveDecompositionSupplement!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CanonicalDecompositionBorrowed {
     };
 }
 
-CanonicalDecompositionBorrowed!()
+CanonicalDecompositionBorrowed!();

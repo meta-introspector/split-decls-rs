@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reader!();
         TypeName!();
+        Reader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_431 {
     };
 }
 
-impl_431!()
+impl_431!();

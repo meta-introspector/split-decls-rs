@@ -4,4 +4,4 @@ macro_rules! test_unstable_options_tracking_hash {
     };
 }
 
-test_unstable_options_tracking_hash!()
+test_unstable_options_tracking_hash!();

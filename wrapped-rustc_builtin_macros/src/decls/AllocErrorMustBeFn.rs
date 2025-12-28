@@ -4,4 +4,4 @@ macro_rules! AllocErrorMustBeFn {
     };
 }
 
-AllocErrorMustBeFn!()
+AllocErrorMustBeFn!();

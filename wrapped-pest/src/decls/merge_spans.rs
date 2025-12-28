@@ -11,4 +11,4 @@ macro_rules! merge_spans {
     };
 }
 
-merge_spans!()
+merge_spans!();

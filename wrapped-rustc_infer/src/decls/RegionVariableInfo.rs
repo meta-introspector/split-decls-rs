@@ -11,4 +11,4 @@ macro_rules! RegionVariableInfo {
     };
 }
 
-RegionVariableInfo!()
+RegionVariableInfo!();

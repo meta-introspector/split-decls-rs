@@ -4,4 +4,4 @@ macro_rules! OpaqueId {
     };
 }
 
-OpaqueId!()
+OpaqueId!();

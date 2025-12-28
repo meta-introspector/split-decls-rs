@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Expr!();
         LazyAttrTokenStream!();
-        Item!();
         HasTokens!();
-        StmtKind!();
         MacCall!();
+        StmtKind!();
+        Expr!();
+        Item!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

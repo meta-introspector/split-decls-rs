@@ -4,4 +4,4 @@ macro_rules! SHT_IA_64_EXT {
     };
 }
 
-SHT_IA_64_EXT!()
+SHT_IA_64_EXT!();

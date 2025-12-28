@@ -4,4 +4,4 @@ macro_rules! inflateResetKeep {
     };
 }
 
-inflateResetKeep!()
+inflateResetKeep!();

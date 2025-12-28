@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TyConst!();
+        ClauseKind!();
+        TermKind!();
         CoercePredicate!();
         SubtypePredicate!();
-        TermKind!();
         AliasRelationDirection!();
-        ClauseKind!();
+        TyConst!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! PredicateKind {
     };
 }
 
-PredicateKind!()
+PredicateKind!();

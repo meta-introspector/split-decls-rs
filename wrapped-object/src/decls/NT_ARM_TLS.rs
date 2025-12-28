@@ -4,4 +4,4 @@ macro_rules! NT_ARM_TLS {
     };
 }
 
-NT_ARM_TLS!()
+NT_ARM_TLS!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SolverDelegate!();
-        GoalStalledOn!();
         GoalEvaluation!();
+        GoalStalledOn!();
+        SolverDelegate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SolverDelegateEvalExt {
     };
 }
 
-SolverDelegateEvalExt!()
+SolverDelegateEvalExt!();

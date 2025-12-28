@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Expr!();
         Node!();
         WS!();
-        Expr!();
+        Set!();
         FunctionCall!();
         ExprVal!();
-        Set!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_set_array_with_filter {
     };
 }
 
-parse_set_array_with_filter!()
+parse_set_array_with_filter!();

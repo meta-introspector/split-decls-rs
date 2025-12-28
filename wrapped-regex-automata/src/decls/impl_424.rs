@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        Input!();
-        HalfMatch!();
-        StartKind!();
-        RetryError!();
-        Config!();
-        Automaton!();
-        NFA!();
-        RetryFailError!();
-        Builder!();
-        DFAEngine!();
-        MatchKind!();
-        Prefilter!();
         Match!();
-        PatternSet!();
+        RetryError!();
+        NFA!();
+        Builder!();
+        MatchKind!();
+        Input!();
+        Prefilter!();
+        DFAEngine!();
+        HalfMatch!();
         Anchored!();
+        StartKind!();
+        Config!();
+        PatternSet!();
+        Automaton!();
         RegexInfo!();
+        RetryFailError!();
+        DFA!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_424 {
     };
 }
 
-impl_424!()
+impl_424!();

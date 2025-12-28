@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Item!();
-        ArchiveMember!();
         Members!();
+        Result!();
         ArchiveMemberIterator!();
+        Item!();
         ReadRef!();
+        ArchiveMember!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_178 {
     };
 }
 
-impl_178!()
+impl_178!();

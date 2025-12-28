@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TraitRef!();
         Interner!();
+        TraitRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Binder {
     };
 }
 
-Binder!()
+Binder!();

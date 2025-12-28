@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NopLayer2!();
         Layer!();
+        NopLayer2!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_111 {
     };
 }
 
-impl_111!()
+impl_111!();

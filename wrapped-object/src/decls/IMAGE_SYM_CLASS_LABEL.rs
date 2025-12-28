@@ -4,4 +4,4 @@ macro_rules! IMAGE_SYM_CLASS_LABEL {
     };
 }
 
-IMAGE_SYM_CLASS_LABEL!()
+IMAGE_SYM_CLASS_LABEL!();

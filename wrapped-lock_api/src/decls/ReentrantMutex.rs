@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Mutex!();
-        RawReentrantMutex!();
         ReentrantMutexGuard!();
+        RawReentrantMutex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ReentrantMutex {
     };
 }
 
-ReentrantMutex!()
+ReentrantMutex!();

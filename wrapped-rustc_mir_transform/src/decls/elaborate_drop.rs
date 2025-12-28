@@ -4,4 +4,4 @@ macro_rules! elaborate_drop {
     };
 }
 
-elaborate_drop!()
+elaborate_drop!();

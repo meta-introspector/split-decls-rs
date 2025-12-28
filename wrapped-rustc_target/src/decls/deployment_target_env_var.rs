@@ -4,4 +4,4 @@ macro_rules! deployment_target_env_var {
     };
 }
 
-deployment_target_env_var!()
+deployment_target_env_var!();

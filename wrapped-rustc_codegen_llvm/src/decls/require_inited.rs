@@ -4,4 +4,4 @@ macro_rules! require_inited {
     };
 }
 
-require_inited!()
+require_inited!();

@@ -12,4 +12,4 @@ macro_rules! not_thumb1 {
     };
 }
 
-not_thumb1!()
+not_thumb1!();

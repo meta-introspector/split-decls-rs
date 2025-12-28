@@ -4,4 +4,4 @@ macro_rules! project_root {
     };
 }
 
-project_root!()
+project_root!();

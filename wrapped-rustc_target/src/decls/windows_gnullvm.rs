@@ -4,4 +4,4 @@ macro_rules! windows_gnullvm {
     };
 }
 
-windows_gnullvm!()
+windows_gnullvm!();

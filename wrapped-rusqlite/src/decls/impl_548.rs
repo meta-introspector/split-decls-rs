@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IndexInfo!();
-        IndexConstraintIter!();
-        IndexConstraintUsage!();
         ValueRef!();
-        IndexConstraintAndUsageIter!();
-        DistinctMode!();
         OrderByIter!();
+        DistinctMode!();
         Result!();
+        IndexConstraintUsage!();
+        IndexConstraintAndUsageIter!();
+        IndexConstraintIter!();
+        IndexInfo!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_548 {
     };
 }
 
-impl_548!()
+impl_548!();

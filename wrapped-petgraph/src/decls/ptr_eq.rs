@@ -4,4 +4,4 @@ macro_rules! ptr_eq {
     };
 }
 
-ptr_eq!()
+ptr_eq!();

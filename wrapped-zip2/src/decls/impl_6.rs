@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         AesReader!();
         AesMode!();
-        Cipher!();
-        AesReaderValid!();
         ZipError!();
+        AesReaderValid!();
+        Cipher!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

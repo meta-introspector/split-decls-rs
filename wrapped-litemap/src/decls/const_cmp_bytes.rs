@@ -4,4 +4,4 @@ macro_rules! const_cmp_bytes {
     };
 }
 
-const_cmp_bytes!()
+const_cmp_bytes!();

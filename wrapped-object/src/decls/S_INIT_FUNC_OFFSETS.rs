@@ -4,4 +4,4 @@ macro_rules! S_INIT_FUNC_OFFSETS {
     };
 }
 
-S_INIT_FUNC_OFFSETS!()
+S_INIT_FUNC_OFFSETS!();

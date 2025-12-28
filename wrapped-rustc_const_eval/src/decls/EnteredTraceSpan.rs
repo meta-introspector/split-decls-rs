@@ -4,4 +4,4 @@ macro_rules! EnteredTraceSpan {
     };
 }
 
-EnteredTraceSpan!()
+EnteredTraceSpan!();

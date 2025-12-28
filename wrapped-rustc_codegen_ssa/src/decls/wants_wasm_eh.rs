@@ -4,4 +4,4 @@ macro_rules! wants_wasm_eh {
     };
 }
 
-wants_wasm_eh!()
+wants_wasm_eh!();

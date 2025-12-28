@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Reducer!();
-        Consumer!();
         ClonedFolder!();
         Folder!();
+        Reducer!();
         ClonedConsumer!();
+        Consumer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_335 {
     };
 }
 
-impl_335!()
+impl_335!();

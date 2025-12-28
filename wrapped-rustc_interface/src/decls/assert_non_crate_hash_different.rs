@@ -4,4 +4,4 @@ macro_rules! assert_non_crate_hash_different {
     };
 }
 
-assert_non_crate_hash_different!()
+assert_non_crate_hash_different!();

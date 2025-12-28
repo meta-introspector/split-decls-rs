@@ -4,4 +4,4 @@ macro_rules! Atomic {
     };
 }
 
-Atomic!()
+Atomic!();

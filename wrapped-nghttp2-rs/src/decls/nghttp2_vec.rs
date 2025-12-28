@@ -4,4 +4,4 @@ macro_rules! nghttp2_vec {
     };
 }
 
-nghttp2_vec!()
+nghttp2_vec!();

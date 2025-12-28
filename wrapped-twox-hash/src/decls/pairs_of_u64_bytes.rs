@@ -4,4 +4,4 @@ macro_rules! pairs_of_u64_bytes {
     };
 }
 
-pairs_of_u64_bytes!()
+pairs_of_u64_bytes!();

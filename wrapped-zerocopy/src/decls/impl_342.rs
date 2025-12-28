@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Aliasing!();
-        BecauseImmutable!();
         Immutable!();
         Read!();
+        BecauseImmutable!();
+        Aliasing!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_342 {
     };
 }
 
-impl_342!()
+impl_342!();

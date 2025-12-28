@@ -12,4 +12,4 @@ macro_rules! combine_libraries {
     };
 }
 
-combine_libraries!()
+combine_libraries!();

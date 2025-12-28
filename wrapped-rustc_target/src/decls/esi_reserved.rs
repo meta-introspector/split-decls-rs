@@ -12,4 +12,4 @@ macro_rules! esi_reserved {
     };
 }
 
-esi_reserved!()
+esi_reserved!();

@@ -4,4 +4,4 @@ macro_rules! parser_undefined_placeholder_in_replacement {
     };
 }
 
-parser_undefined_placeholder_in_replacement!()
+parser_undefined_placeholder_in_replacement!();

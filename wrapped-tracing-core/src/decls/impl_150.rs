@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Metadata!();
+        FieldSet!();
+        Interest!();
         Field!();
         Callsite!();
         Value!();
-        Interest!();
-        Metadata!();
-        FieldSet!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_150 {
     };
 }
 
-impl_150!()
+impl_150!();

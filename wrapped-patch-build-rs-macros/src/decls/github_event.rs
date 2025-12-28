@@ -4,4 +4,4 @@ macro_rules! github_event {
     };
 }
 
-github_event!()
+github_event!();

@@ -11,4 +11,4 @@ macro_rules! TRIE_START {
     };
 }
 
-TRIE_START!()
+TRIE_START!();

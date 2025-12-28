@@ -4,4 +4,4 @@ macro_rules! Qualifiers {
     };
 }
 
-Qualifiers!()
+Qualifiers!();

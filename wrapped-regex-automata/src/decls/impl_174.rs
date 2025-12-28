@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Anchored!();
         StartError!();
+        Anchored!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_174 {
     };
 }
 
-impl_174!()
+impl_174!();

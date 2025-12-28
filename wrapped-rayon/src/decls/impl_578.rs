@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
+        FoldChunksWith!();
+        ChunkProducer!();
         Producer!();
         Consumer!();
-        ProducerCallback!();
-        ChunkProducer!();
-        FoldChunksWith!();
         IndexedParallelIterator!();
+        IntoIter!();
+        ProducerCallback!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_578 {
     };
 }
 
-impl_578!()
+impl_578!();

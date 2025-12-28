@@ -11,4 +11,4 @@ macro_rules! parallel_page_rank {
     };
 }
 
-parallel_page_rank!()
+parallel_page_rank!();

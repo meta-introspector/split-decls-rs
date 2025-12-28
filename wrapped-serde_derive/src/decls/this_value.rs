@@ -11,4 +11,4 @@ macro_rules! this_value {
     };
 }
 
-this_value!()
+this_value!();

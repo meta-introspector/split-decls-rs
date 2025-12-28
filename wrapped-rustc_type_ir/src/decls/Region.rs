@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         RegionKind!();
-        Interner!();
-        Flags!();
-        Relate!();
         IntoKind!();
         GenericArg!();
+        Relate!();
+        Interner!();
+        Flags!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Region {
     };
 }
 
-Region!()
+Region!();

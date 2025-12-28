@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ColumnFamilyTtl!();
         Options!();
+        ColumnFamilyTtl!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ColumnFamilyDescriptor {
     };
 }
 
-ColumnFamilyDescriptor!()
+ColumnFamilyDescriptor!();

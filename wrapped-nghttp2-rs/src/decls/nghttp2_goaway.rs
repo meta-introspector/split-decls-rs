@@ -4,4 +4,4 @@ macro_rules! nghttp2_goaway {
     };
 }
 
-nghttp2_goaway!()
+nghttp2_goaway!();

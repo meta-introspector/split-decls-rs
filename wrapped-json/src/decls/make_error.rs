@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ErrorImpl!();
         ErrorCode!();
         Error!();
+        ErrorImpl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! make_error {
     };
 }
 
-make_error!()
+make_error!();

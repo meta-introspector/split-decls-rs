@@ -4,4 +4,4 @@ macro_rules! CompressionFormat {
     };
 }
 
-CompressionFormat!()
+CompressionFormat!();

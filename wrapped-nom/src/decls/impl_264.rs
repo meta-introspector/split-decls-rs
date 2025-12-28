@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        Emit!();
-        OutputM!();
+        Error!();
+        Input!();
         Needed!();
         Err!();
-        ErrorKind!();
-        PResult!();
-        ToUsize!();
-        OutputMode!();
-        LengthValue!();
-        Parser!();
         Complete!();
-        Input!();
-        Error!();
+        OutputMode!();
+        ToUsize!();
+        ParseError!();
+        PResult!();
+        OutputM!();
+        ErrorKind!();
+        Parser!();
+        LengthValue!();
+        Emit!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_264 {
     };
 }
 
-impl_264!()
+impl_264!();

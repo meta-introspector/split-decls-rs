@@ -4,4 +4,4 @@ macro_rules! list_pool {
     };
 }
 
-list_pool!()
+list_pool!();

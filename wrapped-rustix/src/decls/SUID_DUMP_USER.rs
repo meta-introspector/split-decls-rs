@@ -4,4 +4,4 @@ macro_rules! SUID_DUMP_USER {
     };
 }
 
-SUID_DUMP_USER!()
+SUID_DUMP_USER!();

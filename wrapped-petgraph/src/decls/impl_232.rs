@@ -13,4 +13,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

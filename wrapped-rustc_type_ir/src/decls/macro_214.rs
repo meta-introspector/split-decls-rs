@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        AliasRelationDirection!();
         BoundConstness!();
         PredicatePolarity!();
-        Variance!();
-        GoalSource!();
-        AliasRelationDirection!();
         BuiltinImplSource!();
+        Variance!();
         Certainty!();
+        GoalSource!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! macro_214 {
     };
 }
 
-macro_214!()
+macro_214!();

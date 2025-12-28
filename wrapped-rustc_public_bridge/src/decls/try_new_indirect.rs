@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Bridge!();
         CompilerCtxt!();
+        Bridge!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_new_indirect {
     };
 }
 
-try_new_indirect!()
+try_new_indirect!();

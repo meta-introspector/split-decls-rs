@@ -4,4 +4,4 @@ macro_rules! extract_tags {
     };
 }
 
-extract_tags!()
+extract_tags!();

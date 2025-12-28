@@ -4,4 +4,4 @@ macro_rules! ONE_OFF_TEMPLATE_NAME {
     };
 }
 
-ONE_OFF_TEMPLATE_NAME!()
+ONE_OFF_TEMPLATE_NAME!();

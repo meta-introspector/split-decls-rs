@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TryFromBytes!();
-        Validity!();
         ValidityError!();
+        TryFromBytes!();
         ConvertError!();
+        Validity!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_213 {
     };
 }
 
-impl_213!()
+impl_213!();

@@ -4,4 +4,4 @@ macro_rules! R_LARCH_PCALA64_HI12 {
     };
 }
 
-R_LARCH_PCALA64_HI12!()
+R_LARCH_PCALA64_HI12!();

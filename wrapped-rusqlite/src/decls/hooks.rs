@@ -4,4 +4,4 @@ macro_rules! hooks {
     };
 }
 
-hooks!()
+hooks!();

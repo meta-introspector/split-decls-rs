@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Suggestion!();
-        FormatSpec!();
         DebugHex!();
-        ParseMode!();
         Argument!();
+        FormatSpec!();
+        ParseError!();
+        ParseMode!();
+        Parser!();
+        Suggestion!();
+        Position!();
         Sign!();
         Count!();
-        Parser!();
-        Position!();
-        ParseError!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

@@ -4,4 +4,4 @@ macro_rules! transaction_db {
     };
 }
 
-transaction_db!()
+transaction_db!();

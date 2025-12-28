@@ -4,4 +4,4 @@ macro_rules! find_fn_or_blocks {
     };
 }
 
-find_fn_or_blocks!()
+find_fn_or_blocks!();

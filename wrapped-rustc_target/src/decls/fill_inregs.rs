@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        X86Options!();
-        FnAbi!();
         Flavor!();
+        FnAbi!();
         PassMode!();
+        X86Options!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! fill_inregs {
     };
 }
 
-fill_inregs!()
+fill_inregs!();

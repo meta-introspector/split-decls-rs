@@ -4,4 +4,4 @@ macro_rules! high_level {
     };
 }
 
-high_level!()
+high_level!();

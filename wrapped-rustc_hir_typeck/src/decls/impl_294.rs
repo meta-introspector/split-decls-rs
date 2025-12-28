@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ItemKind!();
         CheckInlineAssembly!();
+        ItemKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_294 {
     };
 }
 
-impl_294!()
+impl_294!();

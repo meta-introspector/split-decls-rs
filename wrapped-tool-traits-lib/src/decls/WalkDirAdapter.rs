@@ -4,4 +4,4 @@ macro_rules! WalkDirAdapter {
     };
 }
 
-WalkDirAdapter!()
+WalkDirAdapter!();

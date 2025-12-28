@@ -11,4 +11,4 @@ macro_rules! SHF_WRITE {
     };
 }
 
-SHF_WRITE!()
+SHF_WRITE!();

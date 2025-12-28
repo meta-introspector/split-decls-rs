@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MetaItemInner!();
-        CommentKind!();
         AttrStyle!();
+        CommentKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AttributeExt {
     };
 }
 
-AttributeExt!()
+AttributeExt!();

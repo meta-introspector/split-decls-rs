@@ -11,4 +11,4 @@ macro_rules! TableDeserializer {
     };
 }
 
-TableDeserializer!()
+TableDeserializer!();

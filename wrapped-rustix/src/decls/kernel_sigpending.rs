@@ -11,4 +11,4 @@ macro_rules! kernel_sigpending {
     };
 }
 
-kernel_sigpending!()
+kernel_sigpending!();

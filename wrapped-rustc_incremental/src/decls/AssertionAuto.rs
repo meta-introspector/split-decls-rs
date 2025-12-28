@@ -4,4 +4,4 @@ macro_rules! AssertionAuto {
     };
 }
 
-AssertionAuto!()
+AssertionAuto!();

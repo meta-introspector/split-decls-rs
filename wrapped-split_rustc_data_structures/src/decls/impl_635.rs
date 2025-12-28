@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnionFindEntry!();
         UnionFind!();
+        UnionFindEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_635 {
     };
 }
 
-impl_635!()
+impl_635!();

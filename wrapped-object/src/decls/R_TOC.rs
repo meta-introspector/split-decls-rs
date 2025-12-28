@@ -4,4 +4,4 @@ macro_rules! R_TOC {
     };
 }
 
-R_TOC!()
+R_TOC!();

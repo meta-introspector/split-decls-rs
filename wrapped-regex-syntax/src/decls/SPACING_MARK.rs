@@ -4,4 +4,4 @@ macro_rules! SPACING_MARK {
     };
 }
 
-SPACING_MARK!()
+SPACING_MARK!();

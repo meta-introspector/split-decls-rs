@@ -4,4 +4,4 @@ macro_rules! is_reference {
     };
 }
 
-is_reference!()
+is_reference!();

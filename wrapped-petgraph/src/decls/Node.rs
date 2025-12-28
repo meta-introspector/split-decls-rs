@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EdgeIndex!();
         DefaultIx!();
+        EdgeIndex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Node {
     };
 }
 
-Node!()
+Node!();

@@ -4,4 +4,4 @@ macro_rules! resolving {
     };
 }
 
-resolving!()
+resolving!();

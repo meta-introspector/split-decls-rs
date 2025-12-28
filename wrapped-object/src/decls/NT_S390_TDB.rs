@@ -4,4 +4,4 @@ macro_rules! NT_S390_TDB {
     };
 }
 
-NT_S390_TDB!()
+NT_S390_TDB!();

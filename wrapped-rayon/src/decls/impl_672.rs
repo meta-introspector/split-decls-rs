@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         Producer!();
         MaxLenProducer!();
+        IntoIter!();
         Folder!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_672 {
     };
 }
 
-impl_672!()
+impl_672!();

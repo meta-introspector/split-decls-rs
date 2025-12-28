@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         Builder!();
+        CodegenCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_169 {
     };
 }
 
-impl_169!()
+impl_169!();

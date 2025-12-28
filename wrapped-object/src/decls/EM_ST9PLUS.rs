@@ -4,4 +4,4 @@ macro_rules! EM_ST9PLUS {
     };
 }
 
-EM_ST9PLUS!()
+EM_ST9PLUS!();

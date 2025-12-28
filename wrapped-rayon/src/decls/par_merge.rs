@@ -11,4 +11,4 @@ macro_rules! par_merge {
     };
 }
 
-par_merge!()
+par_merge!();

@@ -4,4 +4,4 @@ macro_rules! fcntl_getlk {
     };
 }
 
-fcntl_getlk!()
+fcntl_getlk!();

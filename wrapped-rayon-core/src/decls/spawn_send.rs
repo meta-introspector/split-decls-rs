@@ -4,4 +4,4 @@ macro_rules! spawn_send {
     };
 }
 
-spawn_send!()
+spawn_send!();

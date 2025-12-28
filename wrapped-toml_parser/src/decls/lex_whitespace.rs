@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stream!();
-        Token!();
         Span!();
+        Token!();
+        Stream!();
         TokenKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! lex_whitespace {
     };
 }
 
-lex_whitespace!()
+lex_whitespace!();

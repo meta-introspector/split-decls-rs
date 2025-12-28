@@ -4,4 +4,4 @@ macro_rules! STYP_OVRFLO {
     };
 }
 
-STYP_OVRFLO!()
+STYP_OVRFLO!();

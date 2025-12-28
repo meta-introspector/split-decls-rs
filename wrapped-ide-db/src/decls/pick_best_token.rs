@@ -4,4 +4,4 @@ macro_rules! pick_best_token {
     };
 }
 
-pick_best_token!()
+pick_best_token!();

@@ -4,4 +4,4 @@ macro_rules! type_decodable_derive {
     };
 }
 
-type_decodable_derive!()
+type_decodable_derive!();

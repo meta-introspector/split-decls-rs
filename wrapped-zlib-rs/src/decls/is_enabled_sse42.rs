@@ -4,4 +4,4 @@ macro_rules! is_enabled_sse42 {
     };
 }
 
-is_enabled_sse42!()
+is_enabled_sse42!();

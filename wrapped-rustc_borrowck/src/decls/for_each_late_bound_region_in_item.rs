@@ -4,4 +4,4 @@ macro_rules! for_each_late_bound_region_in_item {
     };
 }
 
-for_each_late_bound_region_in_item!()
+for_each_late_bound_region_in_item!();

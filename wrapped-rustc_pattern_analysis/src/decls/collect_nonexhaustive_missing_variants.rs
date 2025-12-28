@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        RustcPatCtxt!();
         PatternColumn!();
         WitnessPat!();
         Constructor!();
-        RustcPatCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! collect_nonexhaustive_missing_variants {
     };
 }
 
-collect_nonexhaustive_missing_variants!()
+collect_nonexhaustive_missing_variants!();

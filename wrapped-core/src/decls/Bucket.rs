@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WordLock!();
         ThreadData!();
         FairTimeout!();
+        WordLock!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Bucket {
     };
 }
 
-Bucket!()
+Bucket!();

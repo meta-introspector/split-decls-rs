@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Error!();
+        WindowAggregate!();
         SqlFnOutput!();
         Context!();
-        WindowAggregate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! call_boxed_inverse {
     };
 }
 
-call_boxed_inverse!()
+call_boxed_inverse!();

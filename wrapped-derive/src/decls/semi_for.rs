@@ -4,4 +4,4 @@ macro_rules! semi_for {
     };
 }
 
-semi_for!()
+semi_for!();

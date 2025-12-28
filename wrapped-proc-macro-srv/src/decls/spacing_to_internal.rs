@@ -4,4 +4,4 @@ macro_rules! spacing_to_internal {
     };
 }
 
-spacing_to_internal!()
+spacing_to_internal!();

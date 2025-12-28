@@ -4,4 +4,4 @@ macro_rules! EM_ST200 {
     };
 }
 
-EM_ST200!()
+EM_ST200!();

@@ -4,4 +4,4 @@ macro_rules! HuffmanOxide {
     };
 }
 
-HuffmanOxide!()
+HuffmanOxide!();

@@ -12,4 +12,4 @@ macro_rules! impl_Integer128 {
     };
 }
 
-impl_Integer128!()
+impl_Integer128!();

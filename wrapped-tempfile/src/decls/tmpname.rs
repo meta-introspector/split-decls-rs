@@ -4,4 +4,4 @@ macro_rules! tmpname {
     };
 }
 
-tmpname!()
+tmpname!();

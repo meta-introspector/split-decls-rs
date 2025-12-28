@@ -4,4 +4,4 @@ macro_rules! SECT_DATA {
     };
 }
 
-SECT_DATA!()
+SECT_DATA!();

@@ -4,4 +4,4 @@ macro_rules! compiler_type_check {
     };
 }
 
-compiler_type_check!()
+compiler_type_check!();

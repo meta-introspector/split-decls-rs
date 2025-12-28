@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
+        Result!();
         Value!();
+        SeqAccess!();
+        Error!();
         ErrorCode!();
         Read!();
-        SeqAccess!();
-        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

@@ -11,4 +11,4 @@ macro_rules! test_unescape_char_bad {
     };
 }
 
-test_unescape_char_bad!()
+test_unescape_char_bad!();

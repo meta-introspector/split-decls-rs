@@ -11,4 +11,4 @@ macro_rules! TestableHpke {
     };
 }
 
-TestableHpke!()
+TestableHpke!();

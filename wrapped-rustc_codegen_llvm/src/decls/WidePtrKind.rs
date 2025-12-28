@@ -4,4 +4,4 @@ macro_rules! WidePtrKind {
     };
 }
 
-WidePtrKind!()
+WidePtrKind!();

@@ -4,4 +4,4 @@ macro_rules! SUNDANESE {
     };
 }
 
-SUNDANESE!()
+SUNDANESE!();

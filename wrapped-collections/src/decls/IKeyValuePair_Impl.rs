@@ -4,4 +4,4 @@ macro_rules! IKeyValuePair_Impl {
     };
 }
 
-IKeyValuePair_Impl!()
+IKeyValuePair_Impl!();

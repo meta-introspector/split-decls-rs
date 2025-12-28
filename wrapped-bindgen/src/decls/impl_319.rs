@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        CppEnum!();
-        GUID!();
-        Dependencies!();
-        Delegate!();
         CppDelegate!();
-        CppConst!();
-        Class!();
         CppFn!();
         Type!();
-        Interface!();
+        CppEnum!();
+        CppConst!();
+        Class!();
         TypeMap!();
+        Delegate!();
+        GUID!();
+        Dependencies!();
         CppStruct!();
+        Interface!();
         CppInterface!();
     };
 }
@@ -23,4 +23,4 @@ macro_rules! impl_319 {
     };
 }
 
-impl_319!()
+impl_319!();

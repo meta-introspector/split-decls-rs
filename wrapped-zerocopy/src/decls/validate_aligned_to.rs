@@ -12,4 +12,4 @@ macro_rules! validate_aligned_to {
     };
 }
 
-validate_aligned_to!()
+validate_aligned_to!();

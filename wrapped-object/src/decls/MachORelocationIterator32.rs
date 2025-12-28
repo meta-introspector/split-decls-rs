@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Endianness!();
-        MachORelocationIterator!();
         MachHeader32!();
+        MachORelocationIterator!();
         Endian!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! MachORelocationIterator32 {
     };
 }
 
-MachORelocationIterator32!()
+MachORelocationIterator32!();

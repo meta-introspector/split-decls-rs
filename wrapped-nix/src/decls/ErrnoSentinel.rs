@@ -4,4 +4,4 @@ macro_rules! ErrnoSentinel {
     };
 }
 
-ErrnoSentinel!()
+ErrnoSentinel!();

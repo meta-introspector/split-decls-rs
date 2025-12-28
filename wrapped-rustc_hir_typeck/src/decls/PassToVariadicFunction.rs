@@ -4,4 +4,4 @@ macro_rules! PassToVariadicFunction {
     };
 }
 
-PassToVariadicFunction!()
+PassToVariadicFunction!();

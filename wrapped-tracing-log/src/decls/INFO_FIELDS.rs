@@ -11,4 +11,4 @@ macro_rules! INFO_FIELDS {
     };
 }
 
-INFO_FIELDS!()
+INFO_FIELDS!();

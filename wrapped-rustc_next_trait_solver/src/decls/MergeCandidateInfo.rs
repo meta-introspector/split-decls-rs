@@ -4,4 +4,4 @@ macro_rules! MergeCandidateInfo {
     };
 }
 
-MergeCandidateInfo!()
+MergeCandidateInfo!();

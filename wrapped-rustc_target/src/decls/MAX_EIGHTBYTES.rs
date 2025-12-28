@@ -4,4 +4,4 @@ macro_rules! MAX_EIGHTBYTES {
     };
 }
 
-MAX_EIGHTBYTES!()
+MAX_EIGHTBYTES!();

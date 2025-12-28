@@ -4,4 +4,4 @@ macro_rules! _DEFAULT_FDICT {
     };
 }
 
-_DEFAULT_FDICT!()
+_DEFAULT_FDICT!();

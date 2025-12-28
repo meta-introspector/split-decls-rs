@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Reducer!();
         Consumer!();
-        FindConsumer!();
         FindReducer!();
         Folder!();
+        Reducer!();
+        FindConsumer!();
         FindFolder!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_501 {
     };
 }
 
-impl_501!()
+impl_501!();

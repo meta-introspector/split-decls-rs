@@ -11,4 +11,4 @@ macro_rules! with_vars {
     };
 }
 
-with_vars!()
+with_vars!();

@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_GOTTPREL {
     };
 }
 
-R_ALPHA_GOTTPREL!()
+R_ALPHA_GOTTPREL!();

@@ -4,4 +4,4 @@ macro_rules! EM_Z80 {
     };
 }
 
-EM_Z80!()
+EM_Z80!();

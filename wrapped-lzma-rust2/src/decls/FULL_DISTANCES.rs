@@ -4,4 +4,4 @@ macro_rules! FULL_DISTANCES {
     };
 }
 
-FULL_DISTANCES!()
+FULL_DISTANCES!();

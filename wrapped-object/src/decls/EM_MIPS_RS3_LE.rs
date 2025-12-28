@@ -4,4 +4,4 @@ macro_rules! EM_MIPS_RS3_LE {
     };
 }
 
-EM_MIPS_RS3_LE!()
+EM_MIPS_RS3_LE!();

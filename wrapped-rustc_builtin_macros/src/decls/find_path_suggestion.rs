@@ -11,4 +11,4 @@ macro_rules! find_path_suggestion {
     };
 }
 
-find_path_suggestion!()
+find_path_suggestion!();

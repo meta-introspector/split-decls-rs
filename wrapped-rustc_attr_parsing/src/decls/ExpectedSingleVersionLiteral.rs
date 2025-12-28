@@ -4,4 +4,4 @@ macro_rules! ExpectedSingleVersionLiteral {
     };
 }
 
-ExpectedSingleVersionLiteral!()
+ExpectedSingleVersionLiteral!();

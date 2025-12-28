@@ -4,4 +4,4 @@ macro_rules! BINARY_OPERATORS {
     };
 }
 
-BINARY_OPERATORS!()
+BINARY_OPERATORS!();

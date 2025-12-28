@@ -12,4 +12,4 @@ macro_rules! send_task {
     };
 }
 
-send_task!()
+send_task!();

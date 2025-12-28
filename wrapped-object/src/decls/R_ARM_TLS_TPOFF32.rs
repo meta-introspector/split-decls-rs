@@ -4,4 +4,4 @@ macro_rules! R_ARM_TLS_TPOFF32 {
     };
 }
 
-R_ARM_TLS_TPOFF32!()
+R_ARM_TLS_TPOFF32!();

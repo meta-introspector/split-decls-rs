@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NodeFiltered!();
         FilterNode!();
+        NodeFiltered!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_135 {
     };
 }
 
-impl_135!()
+impl_135!();

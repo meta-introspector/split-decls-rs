@@ -36,4 +36,4 @@ impl GraphWitness {{
     };
 }
 
-zk_witness_impl!()
+zk_witness_impl!();

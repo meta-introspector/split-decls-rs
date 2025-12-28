@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         WithOrigin!();
         Origin!();
-        Exfiltrator!();
         Slot!();
+        Exfiltrator!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

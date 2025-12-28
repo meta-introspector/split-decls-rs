@@ -11,4 +11,4 @@ macro_rules! dup2 {
     };
 }
 
-dup2!()
+dup2!();

@@ -4,4 +4,4 @@ macro_rules! SA2 {
     };
 }
 
-SA2!()
+SA2!();

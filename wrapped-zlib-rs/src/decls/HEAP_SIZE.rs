@@ -4,4 +4,4 @@ macro_rules! HEAP_SIZE {
     };
 }
 
-HEAP_SIZE!()
+HEAP_SIZE!();

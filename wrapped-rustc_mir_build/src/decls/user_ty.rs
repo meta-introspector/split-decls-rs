@@ -4,4 +4,4 @@ macro_rules! user_ty {
     };
 }
 
-user_ty!()
+user_ty!();

@@ -4,4 +4,4 @@ macro_rules! check_opaque {
     };
 }
 
-check_opaque!()
+check_opaque!();

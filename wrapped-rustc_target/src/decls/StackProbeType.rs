@@ -4,4 +4,4 @@ macro_rules! StackProbeType {
     };
 }
 
-StackProbeType!()
+StackProbeType!();

@@ -11,4 +11,4 @@ macro_rules! get_source_map {
     };
 }
 
-get_source_map!()
+get_source_map!();

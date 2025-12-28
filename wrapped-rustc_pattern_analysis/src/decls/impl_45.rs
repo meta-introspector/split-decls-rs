@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        PatCx!();
-        PatOrWild!();
-        PatId!();
-        Slice!();
-        IndexedPat!();
-        DeconstructedPat!();
-        SliceKind!();
         Constructor!();
+        PatCx!();
+        SliceKind!();
+        DeconstructedPat!();
+        Slice!();
+        PatOrWild!();
+        IndexedPat!();
+        PatId!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

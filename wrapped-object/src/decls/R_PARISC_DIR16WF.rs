@@ -4,4 +4,4 @@ macro_rules! R_PARISC_DIR16WF {
     };
 }
 
-R_PARISC_DIR16WF!()
+R_PARISC_DIR16WF!();

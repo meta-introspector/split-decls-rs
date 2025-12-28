@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ValueSet!();
         Subscriber!();
+        ValueSet!();
         Parent!();
         Metadata!();
     };
@@ -14,4 +14,4 @@ macro_rules! Attributes {
     };
 }
 
-Attributes!()
+Attributes!();

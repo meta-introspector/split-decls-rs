@@ -12,4 +12,4 @@ macro_rules! impl_from_int_literal {
     };
 }
 
-impl_from_int_literal!()
+impl_from_int_literal!();

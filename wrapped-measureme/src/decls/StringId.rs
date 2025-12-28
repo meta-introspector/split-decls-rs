@@ -4,4 +4,4 @@ macro_rules! StringId {
     };
 }
 
-StringId!()
+StringId!();

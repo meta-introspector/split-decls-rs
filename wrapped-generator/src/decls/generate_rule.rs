@@ -4,4 +4,4 @@ macro_rules! generate_rule {
     };
 }
 
-generate_rule!()
+generate_rule!();

@@ -4,4 +4,4 @@ macro_rules! func_len {
     };
 }
 
-func_len!()
+func_len!();

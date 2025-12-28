@@ -4,4 +4,4 @@ macro_rules! special_chars {
     };
 }
 
-special_chars!()
+special_chars!();

@@ -4,4 +4,4 @@ macro_rules! def_use {
     };
 }
 
-def_use!()
+def_use!();

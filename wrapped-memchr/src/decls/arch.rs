@@ -4,4 +4,4 @@ macro_rules! arch {
     };
 }
 
-arch!()
+arch!();

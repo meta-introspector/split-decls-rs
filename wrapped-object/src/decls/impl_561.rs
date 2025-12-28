@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        Result!();
-        StringTable!();
-        SymtabCommand!();
-        ReadRef!();
         MachHeader!();
+        ReadRef!();
         SymbolTable!();
+        StringTable!();
+        Endian!();
+        SymtabCommand!();
+        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_561 {
     };
 }
 
-impl_561!()
+impl_561!();

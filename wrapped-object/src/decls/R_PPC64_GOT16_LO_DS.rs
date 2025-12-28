@@ -4,4 +4,4 @@ macro_rules! R_PPC64_GOT16_LO_DS {
     };
 }
 
-R_PPC64_GOT16_LO_DS!()
+R_PPC64_GOT16_LO_DS!();

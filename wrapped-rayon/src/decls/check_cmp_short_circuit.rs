@@ -4,4 +4,4 @@ macro_rules! check_cmp_short_circuit {
     };
 }
 
-check_cmp_short_circuit!()
+check_cmp_short_circuit!();

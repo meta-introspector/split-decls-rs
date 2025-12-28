@@ -4,4 +4,4 @@ macro_rules! fx {
     };
 }
 
-fx!()
+fx!();

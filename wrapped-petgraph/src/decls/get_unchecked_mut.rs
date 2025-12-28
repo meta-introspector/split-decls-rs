@@ -4,4 +4,4 @@ macro_rules! get_unchecked_mut {
     };
 }
 
-get_unchecked_mut!()
+get_unchecked_mut!();

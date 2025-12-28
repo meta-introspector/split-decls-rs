@@ -11,4 +11,4 @@ macro_rules! set_tcp_user_timeout {
     };
 }
 
-set_tcp_user_timeout!()
+set_tcp_user_timeout!();

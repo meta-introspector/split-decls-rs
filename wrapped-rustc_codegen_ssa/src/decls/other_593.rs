@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DebugInfoCodegenMethods!();
-        AsmCodegenMethods!();
+        StaticCodegenMethods!();
         PreDefineCodegenMethods!();
         ConstCodegenMethods!();
-        StaticCodegenMethods!();
+        AsmCodegenMethods!();
+        DebugInfoCodegenMethods!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! other_593 {
     };
 }
 
-other_593!()
+other_593!();

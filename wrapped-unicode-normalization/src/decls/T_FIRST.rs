@@ -4,4 +4,4 @@ macro_rules! T_FIRST {
     };
 }
 
-T_FIRST!()
+T_FIRST!();

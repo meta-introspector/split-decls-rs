@@ -11,4 +11,4 @@ macro_rules! async_impl {
     };
 }
 
-async_impl!()
+async_impl!();

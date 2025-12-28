@@ -4,4 +4,4 @@ macro_rules! GrowingHashmapMapElemChar {
     };
 }
 
-GrowingHashmapMapElemChar!()
+GrowingHashmapMapElemChar!();

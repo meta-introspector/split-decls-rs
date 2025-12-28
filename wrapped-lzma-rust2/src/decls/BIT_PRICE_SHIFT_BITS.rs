@@ -4,4 +4,4 @@ macro_rules! BIT_PRICE_SHIFT_BITS {
     };
 }
 
-BIT_PRICE_SHIFT_BITS!()
+BIT_PRICE_SHIFT_BITS!();

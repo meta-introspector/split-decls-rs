@@ -11,4 +11,4 @@ macro_rules! load_vtable {
     };
 }
 
-load_vtable!()
+load_vtable!();

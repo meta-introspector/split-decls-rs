@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Assume!();
         Tree!();
         Answer!();
-        Assume!();
         Reason!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! size {
     };
 }
 
-size!()
+size!();

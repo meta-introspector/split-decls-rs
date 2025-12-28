@@ -11,4 +11,4 @@ macro_rules! ip_mtu {
     };
 }
 
-ip_mtu!()
+ip_mtu!();

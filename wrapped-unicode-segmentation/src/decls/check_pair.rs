@@ -11,4 +11,4 @@ macro_rules! check_pair {
     };
 }
 
-check_pair!()
+check_pair!();

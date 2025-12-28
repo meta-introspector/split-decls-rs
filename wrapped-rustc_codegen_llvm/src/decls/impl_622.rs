@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         TimeTraceProfiler!();
         ModuleLlvm!();
-        Builder!();
         SimpleCx!();
+        Builder!();
         LlvmCodegenBackend!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_622 {
     };
 }
 
-impl_622!()
+impl_622!();

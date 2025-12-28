@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Aes192!();
-        ExtendedTimestamp!();
-        ZipError!();
-        Aes256!();
-        ZipResult!();
-        UnicodeExtraField!();
-        AesMode!();
         Aes128!();
+        Aes192!();
+        Aes256!();
         AesVendorVersion!();
-        ZipFileData!();
-        Ntfs!();
-        CompressionMethod!();
+        UnicodeExtraField!();
         ExtraField!();
+        ZipError!();
+        ExtendedTimestamp!();
+        AesMode!();
+        CompressionMethod!();
+        Ntfs!();
+        ZipFileData!();
+        ZipResult!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! parse_single_extra_field {
     };
 }
 
-parse_single_extra_field!()
+parse_single_extra_field!();

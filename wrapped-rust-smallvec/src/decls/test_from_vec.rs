@@ -11,4 +11,4 @@ macro_rules! test_from_vec {
     };
 }
 
-test_from_vec!()
+test_from_vec!();

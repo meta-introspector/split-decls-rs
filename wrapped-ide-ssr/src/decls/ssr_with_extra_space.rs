@@ -4,4 +4,4 @@ macro_rules! ssr_with_extra_space {
     };
 }
 
-ssr_with_extra_space!()
+ssr_with_extra_space!();

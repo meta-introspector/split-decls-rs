@@ -4,4 +4,4 @@ macro_rules! vprintln {
     };
 }
 
-vprintln!()
+vprintln!();

@@ -4,4 +4,4 @@ macro_rules! test_unaligned {
     };
 }
 
-test_unaligned!()
+test_unaligned!();

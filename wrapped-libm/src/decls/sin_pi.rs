@@ -4,4 +4,4 @@ macro_rules! sin_pi {
     };
 }
 
-sin_pi!()
+sin_pi!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MakeOutput!();
         MakeVisitor!();
+        MakeOutput!();
         VisitOutput!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

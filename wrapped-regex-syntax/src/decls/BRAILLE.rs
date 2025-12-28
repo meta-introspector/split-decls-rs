@@ -4,4 +4,4 @@ macro_rules! BRAILLE {
     };
 }
 
-BRAILLE!()
+BRAILLE!();

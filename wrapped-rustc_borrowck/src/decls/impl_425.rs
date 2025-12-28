@@ -2,13 +2,13 @@ macro_rules! deps {
     () => {
         ConstraintConversion!();
         ClosureRegionRequirements!();
-        BorrowckInferCtxt!();
-        ClosureOutlivesSubject!();
-        OutlivesConstraint!();
-        Locations!();
         UniversalRegions!();
-        MirTypeckRegionConstraints!();
         TypeTest!();
+        OutlivesConstraint!();
+        BorrowckInferCtxt!();
+        Locations!();
+        MirTypeckRegionConstraints!();
+        ClosureOutlivesSubject!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_425 {
     };
 }
 
-impl_425!()
+impl_425!();

@@ -4,4 +4,4 @@ macro_rules! R_CRIS_NONE {
     };
 }
 
-R_CRIS_NONE!()
+R_CRIS_NONE!();

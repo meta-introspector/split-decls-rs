@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Enum!();
         Input!();
         Struct!();
-        Enum!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! try_expand {
     };
 }
 
-try_expand!()
+try_expand!();

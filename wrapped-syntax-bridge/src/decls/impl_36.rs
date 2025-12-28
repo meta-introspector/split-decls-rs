@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SpanMapper!();
-        TokenConverter!();
         SynToken!();
+        SpanMapper!();
         Converter!();
+        TokenConverter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

@@ -12,4 +12,4 @@ macro_rules! hchacha20 {
     };
 }
 
-hchacha20!()
+hchacha20!();

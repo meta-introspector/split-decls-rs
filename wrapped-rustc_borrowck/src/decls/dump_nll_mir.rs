@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegionInferenceContext!();
         BorrowSet!();
+        RegionInferenceContext!();
         ClosureRegionRequirements!();
         BorrowckInferCtxt!();
     };
@@ -14,4 +14,4 @@ macro_rules! dump_nll_mir {
     };
 }
 
-dump_nll_mir!()
+dump_nll_mir!();

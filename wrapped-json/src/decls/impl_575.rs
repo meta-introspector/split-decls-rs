@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IoRead!();
-        LineColIterator!();
         Read!();
+        LineColIterator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_575 {
     };
 }
 
-impl_575!()
+impl_575!();

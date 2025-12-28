@@ -12,4 +12,4 @@ macro_rules! LzmaEncoderModes {
     };
 }
 
-LzmaEncoderModes!()
+LzmaEncoderModes!();

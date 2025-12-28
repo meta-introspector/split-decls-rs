@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Lit!();
+        MetaItemLit!();
+        MetaItem!();
         Token!();
         Delimiter!();
-        MetaItemLit!();
-        Lit!();
         LitKind!();
-        MetaItem!();
-        TokenTree!();
         MetaItemInner!();
         TokenStreamIter!();
+        TokenTree!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_281 {
     };
 }
 
-impl_281!()
+impl_281!();

@@ -4,4 +4,4 @@ macro_rules! R_PPC64_TPREL16_HIGH {
     };
 }
 
-R_PPC64_TPREL16_HIGH!()
+R_PPC64_TPREL16_HIGH!();

@@ -4,4 +4,4 @@ macro_rules! rustc_peek {
     };
 }
 
-rustc_peek!()
+rustc_peek!();

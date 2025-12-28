@@ -11,4 +11,4 @@ macro_rules! SourceFileHash {
     };
 }
 
-SourceFileHash!()
+SourceFileHash!();

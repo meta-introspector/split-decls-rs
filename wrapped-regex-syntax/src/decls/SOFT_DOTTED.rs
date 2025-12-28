@@ -4,4 +4,4 @@ macro_rules! SOFT_DOTTED {
     };
 }
 
-SOFT_DOTTED!()
+SOFT_DOTTED!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Once!();
-        Empty!();
         StreamMap!();
+        Empty!();
+        Once!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StreamExt {
     };
 }
 
-StreamExt!()
+StreamExt!();

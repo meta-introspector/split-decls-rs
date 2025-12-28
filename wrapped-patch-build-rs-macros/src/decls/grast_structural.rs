@@ -4,4 +4,4 @@ macro_rules! grast_structural {
     };
 }
 
-grast_structural!()
+grast_structural!();

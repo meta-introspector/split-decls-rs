@@ -4,4 +4,4 @@ macro_rules! STYP_INFO {
     };
 }
 
-STYP_INFO!()
+STYP_INFO!();

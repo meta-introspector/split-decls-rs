@@ -4,4 +4,4 @@ macro_rules! PanicMessage {
     };
 }
 
-PanicMessage!()
+PanicMessage!();

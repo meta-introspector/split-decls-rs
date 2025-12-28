@@ -11,4 +11,4 @@ macro_rules! render_if_elif_else {
     };
 }
 
-render_if_elif_else!()
+render_if_elif_else!();

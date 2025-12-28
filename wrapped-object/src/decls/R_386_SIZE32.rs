@@ -4,4 +4,4 @@ macro_rules! R_386_SIZE32 {
     };
 }
 
-R_386_SIZE32!()
+R_386_SIZE32!();

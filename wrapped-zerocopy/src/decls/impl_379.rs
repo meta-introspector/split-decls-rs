@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Initialized!();
         TransmuteFrom!();
+        Initialized!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

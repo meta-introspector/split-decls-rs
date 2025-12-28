@@ -4,4 +4,4 @@ macro_rules! VER_DEF_NONE {
     };
 }
 
-VER_DEF_NONE!()
+VER_DEF_NONE!();

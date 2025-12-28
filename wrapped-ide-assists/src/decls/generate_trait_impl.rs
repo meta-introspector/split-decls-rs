@@ -4,4 +4,4 @@ macro_rules! generate_trait_impl {
     };
 }
 
-generate_trait_impl!()
+generate_trait_impl!();

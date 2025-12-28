@@ -4,4 +4,4 @@ macro_rules! VM_PROT_READ {
     };
 }
 
-VM_PROT_READ!()
+VM_PROT_READ!();

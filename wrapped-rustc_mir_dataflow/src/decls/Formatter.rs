@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        OutputStyle!();
         Results!();
         Analysis!();
-        OutputStyle!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Formatter {
     };
 }
 
-Formatter!()
+Formatter!();

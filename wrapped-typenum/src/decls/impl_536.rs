@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TArr!();
         FoldSum!();
-        FoldAdd!();
+        TArr!();
         Sum!();
+        FoldAdd!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_536 {
     };
 }
 
-impl_536!()
+impl_536!();

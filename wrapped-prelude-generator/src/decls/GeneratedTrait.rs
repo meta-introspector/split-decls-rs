@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GeneratedAssociatedType!();
         GeneratedTraitMethod!();
+        GeneratedAssociatedType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! GeneratedTrait {
     };
 }
 
-GeneratedTrait!()
+GeneratedTrait!();

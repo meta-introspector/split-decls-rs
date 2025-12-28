@@ -4,4 +4,4 @@ macro_rules! is_c_like_enum {
     };
 }
 
-is_c_like_enum!()
+is_c_like_enum!();

@@ -4,4 +4,4 @@ macro_rules! parse_line_col {
     };
 }
 
-parse_line_col!()
+parse_line_col!();

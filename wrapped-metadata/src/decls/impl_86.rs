@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Type!();
-        Value!();
         Constant!();
+        Value!();
+        Type!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

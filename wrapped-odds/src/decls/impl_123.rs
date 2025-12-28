@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         StrExt!();
-        Prefixes!();
         Suffixes!();
+        Prefixes!();
         Substrings!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

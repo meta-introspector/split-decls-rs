@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Const!();
-        CoercePredicate!();
-        Clause!();
-        AliasRelationDirection!();
-        ClauseKind!();
         NormalizesTo!();
-        Interner!();
-        Term!();
         SubtypePredicate!();
+        Term!();
+        Const!();
+        AliasRelationDirection!();
+        Clause!();
+        Interner!();
+        CoercePredicate!();
+        ClauseKind!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! PredicateKind {
     };
 }
 
-PredicateKind!()
+PredicateKind!();

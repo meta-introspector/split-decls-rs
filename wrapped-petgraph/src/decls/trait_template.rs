@@ -4,4 +4,4 @@ macro_rules! trait_template {
     };
 }
 
-trait_template!()
+trait_template!();

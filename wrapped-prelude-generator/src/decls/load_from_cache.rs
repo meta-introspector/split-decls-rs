@@ -11,4 +11,4 @@ macro_rules! load_from_cache {
     };
 }
 
-load_from_cache!()
+load_from_cache!();

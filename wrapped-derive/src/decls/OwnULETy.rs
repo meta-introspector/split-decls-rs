@@ -4,4 +4,4 @@ macro_rules! OwnULETy {
     };
 }
 
-OwnULETy!()
+OwnULETy!();

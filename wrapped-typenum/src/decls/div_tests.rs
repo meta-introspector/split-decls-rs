@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SetBitOut!();
-        Unsigned!();
         B1!();
         Same!();
+        SetBitOut!();
         Quot!();
+        Unsigned!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! div_tests {
     };
 }
 
-div_tests!()
+div_tests!();

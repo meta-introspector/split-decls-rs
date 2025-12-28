@@ -4,4 +4,4 @@ macro_rules! SockAddr {
     };
 }
 
-SockAddr!()
+SockAddr!();

@@ -12,4 +12,4 @@ macro_rules! peek_impl {
     };
 }
 
-peek_impl!()
+peek_impl!();

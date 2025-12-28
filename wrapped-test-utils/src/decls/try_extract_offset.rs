@@ -4,4 +4,4 @@ macro_rules! try_extract_offset {
     };
 }
 
-try_extract_offset!()
+try_extract_offset!();

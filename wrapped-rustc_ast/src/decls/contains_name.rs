@@ -11,4 +11,4 @@ macro_rules! contains_name {
     };
 }
 
-contains_name!()
+contains_name!();

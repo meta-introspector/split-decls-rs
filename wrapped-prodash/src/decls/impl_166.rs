@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Count!();
-        DoOrDiscard!();
         StepShared!();
+        DoOrDiscard!();
+        Count!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

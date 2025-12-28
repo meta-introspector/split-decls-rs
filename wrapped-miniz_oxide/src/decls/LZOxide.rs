@@ -4,4 +4,4 @@ macro_rules! LZOxide {
     };
 }
 
-LZOxide!()
+LZOxide!();

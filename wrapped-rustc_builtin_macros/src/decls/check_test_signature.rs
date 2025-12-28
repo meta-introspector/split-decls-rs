@@ -12,4 +12,4 @@ macro_rules! check_test_signature {
     };
 }
 
-check_test_signature!()
+check_test_signature!();

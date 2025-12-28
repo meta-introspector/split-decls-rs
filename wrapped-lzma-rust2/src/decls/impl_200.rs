@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NormalEncoderMode!();
+        Optimum!();
         LzmaEncoder!();
         State!();
         MfType!();
         LzEncoder!();
-        Optimum!();
+        NormalEncoderMode!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_200 {
     };
 }
 
-impl_200!()
+impl_200!();

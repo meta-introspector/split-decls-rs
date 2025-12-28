@@ -11,4 +11,4 @@ macro_rules! combine_substructure {
     };
 }
 
-combine_substructure!()
+combine_substructure!();

@@ -4,4 +4,4 @@ macro_rules! to_u32s {
     };
 }
 
-to_u32s!()
+to_u32s!();

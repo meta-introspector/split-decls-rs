@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Expr!();
-        In!();
         ExprVal!();
+        In!();
+        Expr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_in_condition {
     };
 }
 
-parse_in_condition!()
+parse_in_condition!();

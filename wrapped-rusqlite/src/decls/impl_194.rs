@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Params!();
-        ToSql!();
-        Result!();
         Statement!();
+        ToSql!();
         ParamsFromIter!();
+        Params!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

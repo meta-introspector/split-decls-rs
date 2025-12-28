@@ -4,4 +4,4 @@ macro_rules! syntax_kind {
     };
 }
 
-syntax_kind!()
+syntax_kind!();

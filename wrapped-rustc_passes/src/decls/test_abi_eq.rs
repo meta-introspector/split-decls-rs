@@ -4,4 +4,4 @@ macro_rules! test_abi_eq {
     };
 }
 
-test_abi_eq!()
+test_abi_eq!();

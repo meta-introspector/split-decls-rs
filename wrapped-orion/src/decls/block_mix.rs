@@ -4,4 +4,4 @@ macro_rules! block_mix {
     };
 }
 
-block_mix!()
+block_mix!();

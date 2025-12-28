@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        DyldRelocation!();
+        DyldCacheSlidePointer3!();
         PtrauthKey!();
+        DyldRelocation!();
+        DyldRelocationAuth!();
+        Result!();
+        DyldCacheRelocationIteratorV3!();
+        ReadRef!();
+        RelocationStateV3!();
         U64!();
         Endian!();
-        DyldCacheRelocationIteratorV3!();
-        Result!();
-        DyldCacheSlidePointer3!();
-        DyldRelocationAuth!();
-        RelocationStateV3!();
-        ReadRef!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_495 {
     };
 }
 
-impl_495!()
+impl_495!();

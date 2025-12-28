@@ -4,4 +4,4 @@ macro_rules! sqe_zeroed {
     };
 }
 
-sqe_zeroed!()
+sqe_zeroed!();

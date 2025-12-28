@@ -4,4 +4,4 @@ macro_rules! check_flatten_vec {
     };
 }
 
-check_flatten_vec!()
+check_flatten_vec!();

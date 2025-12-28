@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         KeyValuePairs!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! validate_struct_keys {
     };
 }
 
-validate_struct_keys!()
+validate_struct_keys!();

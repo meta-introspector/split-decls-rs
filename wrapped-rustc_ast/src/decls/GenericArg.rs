@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         Ty!();
         Lifetime!();
-        Type!();
         LifetimeCtxt!();
-        Walkable!();
         AnonConst!();
+        Type!();
+        Walkable!();
         Const!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! GenericArg {
     };
 }
 
-GenericArg!()
+GenericArg!();

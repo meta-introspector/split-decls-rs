@@ -4,4 +4,4 @@ macro_rules! BOPOMOFO {
     };
 }
 
-BOPOMOFO!()
+BOPOMOFO!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        U32!();
-        LcStr!();
         U64!();
         Endian!();
+        LcStr!();
+        U32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FilesetEntryCommand {
     };
 }
 
-FilesetEntryCommand!()
+FilesetEntryCommand!();

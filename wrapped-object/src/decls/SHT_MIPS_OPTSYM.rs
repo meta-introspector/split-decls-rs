@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_OPTSYM {
     };
 }
 
-SHT_MIPS_OPTSYM!()
+SHT_MIPS_OPTSYM!();

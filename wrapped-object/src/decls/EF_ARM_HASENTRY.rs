@@ -4,4 +4,4 @@ macro_rules! EF_ARM_HASENTRY {
     };
 }
 
-EF_ARM_HASENTRY!()
+EF_ARM_HASENTRY!();

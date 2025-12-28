@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LazyAttrTokenStream!();
-        AttrKind!();
         HasTokens!();
+        AttrKind!();
         Attribute!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

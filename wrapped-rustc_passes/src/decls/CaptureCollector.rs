@@ -4,4 +4,4 @@ macro_rules! CaptureCollector {
     };
 }
 
-CaptureCollector!()
+CaptureCollector!();

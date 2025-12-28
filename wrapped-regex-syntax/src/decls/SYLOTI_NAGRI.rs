@@ -4,4 +4,4 @@ macro_rules! SYLOTI_NAGRI {
     };
 }
 
-SYLOTI_NAGRI!()
+SYLOTI_NAGRI!();

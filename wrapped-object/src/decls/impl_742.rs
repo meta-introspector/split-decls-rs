@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReadError!();
         Error!();
+        ReadError!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_742 {
     };
 }
 
-impl_742!()
+impl_742!();

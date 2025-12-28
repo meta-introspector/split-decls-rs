@@ -4,4 +4,4 @@ macro_rules! FDFA_NFKD {
     };
 }
 
-FDFA_NFKD!()
+FDFA_NFKD!();

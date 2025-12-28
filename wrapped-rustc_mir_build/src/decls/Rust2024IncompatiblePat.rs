@@ -11,4 +11,4 @@ macro_rules! Rust2024IncompatiblePat {
     };
 }
 
-Rust2024IncompatiblePat!()
+Rust2024IncompatiblePat!();

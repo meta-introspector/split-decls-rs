@@ -13,4 +13,4 @@ macro_rules! encode_ty {
     };
 }
 
-encode_ty!()
+encode_ty!();

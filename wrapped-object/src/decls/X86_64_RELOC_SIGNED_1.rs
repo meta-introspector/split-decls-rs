@@ -4,4 +4,4 @@ macro_rules! X86_64_RELOC_SIGNED_1 {
     };
 }
 
-X86_64_RELOC_SIGNED_1!()
+X86_64_RELOC_SIGNED_1!();

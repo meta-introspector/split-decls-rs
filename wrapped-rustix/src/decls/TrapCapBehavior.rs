@@ -4,4 +4,4 @@ macro_rules! TrapCapBehavior {
     };
 }
 
-TrapCapBehavior!()
+TrapCapBehavior!();

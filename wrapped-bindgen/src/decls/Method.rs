@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TypeMap!();
         Signature!();
+        TypeMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Method {
     };
 }
 
-Method!()
+Method!();

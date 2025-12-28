@@ -4,4 +4,4 @@ macro_rules! compare_const_predicate_entailment {
     };
 }
 
-compare_const_predicate_entailment!()
+compare_const_predicate_entailment!();

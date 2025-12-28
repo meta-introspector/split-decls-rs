@@ -11,4 +11,4 @@ macro_rules! impl_pod {
     };
 }
 
-impl_pod!()
+impl_pod!();

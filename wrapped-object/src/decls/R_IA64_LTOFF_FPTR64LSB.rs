@@ -4,4 +4,4 @@ macro_rules! R_IA64_LTOFF_FPTR64LSB {
     };
 }
 
-R_IA64_LTOFF_FPTR64LSB!()
+R_IA64_LTOFF_FPTR64LSB!();

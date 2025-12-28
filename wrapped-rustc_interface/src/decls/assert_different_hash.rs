@@ -4,4 +4,4 @@ macro_rules! assert_different_hash {
     };
 }
 
-assert_different_hash!()
+assert_different_hash!();

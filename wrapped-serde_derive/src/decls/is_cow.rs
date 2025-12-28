@@ -4,4 +4,4 @@ macro_rules! is_cow {
     };
 }
 
-is_cow!()
+is_cow!();

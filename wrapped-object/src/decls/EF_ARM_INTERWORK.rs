@@ -4,4 +4,4 @@ macro_rules! EF_ARM_INTERWORK {
     };
 }
 
-EF_ARM_INTERWORK!()
+EF_ARM_INTERWORK!();

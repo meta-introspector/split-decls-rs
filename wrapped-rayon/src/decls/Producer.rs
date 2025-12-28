@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         Folder!();
         Split!();
+        IntoIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Producer {
     };
 }
 
-Producer!()
+Producer!();

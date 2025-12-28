@@ -11,4 +11,4 @@ macro_rules! IMAGE_SCN_MEM_SHARED {
     };
 }
 
-IMAGE_SCN_MEM_SHARED!()
+IMAGE_SCN_MEM_SHARED!();

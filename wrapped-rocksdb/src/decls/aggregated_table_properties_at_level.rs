@@ -11,4 +11,4 @@ macro_rules! aggregated_table_properties_at_level {
     };
 }
 
-aggregated_table_properties_at_level!()
+aggregated_table_properties_at_level!();

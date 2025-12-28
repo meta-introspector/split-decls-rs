@@ -4,4 +4,4 @@ macro_rules! CfgPredicateIdentifier {
     };
 }
 
-CfgPredicateIdentifier!()
+CfgPredicateIdentifier!();

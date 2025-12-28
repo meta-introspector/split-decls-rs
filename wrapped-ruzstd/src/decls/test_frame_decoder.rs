@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        BlockDecodingStrategy!();
+        FrameDecoder!();
         Error!();
         Write!();
-        FrameDecoder!();
-        BlockDecodingStrategy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_frame_decoder {
     };
 }
 
-test_frame_decoder!()
+test_frame_decoder!();

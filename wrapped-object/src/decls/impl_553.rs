@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         Item!();
         FunctionStartsIterator!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_553 {
     };
 }
 
-impl_553!()
+impl_553!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         PowerOfTwo!();
-        B1!();
-        UTerm!();
         UInt!();
+        UTerm!();
+        B1!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_346 {
     };
 }
 
-impl_346!()
+impl_346!();

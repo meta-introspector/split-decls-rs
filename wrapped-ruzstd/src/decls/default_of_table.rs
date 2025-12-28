@@ -11,4 +11,4 @@ macro_rules! default_of_table {
     };
 }
 
-default_of_table!()
+default_of_table!();

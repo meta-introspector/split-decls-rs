@@ -4,4 +4,4 @@ macro_rules! impl_from_trait {
     };
 }
 
-impl_from_trait!()
+impl_from_trait!();

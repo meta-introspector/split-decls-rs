@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ExponentialBlocks!();
         IndexedParallelIterator!();
         UnindexedConsumer!();
-        BlocksCallback!();
         ParallelIterator!();
+        BlocksCallback!();
+        ExponentialBlocks!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_296 {
     };
 }
 
-impl_296!()
+impl_296!();

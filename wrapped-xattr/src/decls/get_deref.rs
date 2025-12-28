@@ -4,4 +4,4 @@ macro_rules! get_deref {
     };
 }
 
-get_deref!()
+get_deref!();

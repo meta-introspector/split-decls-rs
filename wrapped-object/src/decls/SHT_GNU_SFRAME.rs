@@ -4,4 +4,4 @@ macro_rules! SHT_GNU_SFRAME {
     };
 }
 
-SHT_GNU_SFRAME!()
+SHT_GNU_SFRAME!();

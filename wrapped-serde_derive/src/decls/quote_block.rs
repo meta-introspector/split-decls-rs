@@ -11,4 +11,4 @@ macro_rules! quote_block {
     };
 }
 
-quote_block!()
+quote_block!();

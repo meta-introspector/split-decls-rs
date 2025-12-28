@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Node!();
         FilterSection!();
+        Expr!();
+        WS!();
         ExprVal!();
         FunctionCall!();
-        WS!();
-        Expr!();
+        Node!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_filter_section_with_args {
     };
 }
 
-parse_filter_section_with_args!()
+parse_filter_section_with_args!();

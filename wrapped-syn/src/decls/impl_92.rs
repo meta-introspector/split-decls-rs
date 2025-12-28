@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Group!();
-        Entry!();
-        End!();
         TokenBuffer!();
+        Entry!();
+        Group!();
+        End!();
         Cursor!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_92 {
     };
 }
 
-impl_92!()
+impl_92!();

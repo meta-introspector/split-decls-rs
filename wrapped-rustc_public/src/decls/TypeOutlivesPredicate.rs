@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        OutlivesPredicate!();
         Ty!();
         Region!();
-        OutlivesPredicate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TypeOutlivesPredicate {
     };
 }
 
-TypeOutlivesPredicate!()
+TypeOutlivesPredicate!();

@@ -4,4 +4,4 @@ macro_rules! asm_target_features {
     };
 }
 
-asm_target_features!()
+asm_target_features!();

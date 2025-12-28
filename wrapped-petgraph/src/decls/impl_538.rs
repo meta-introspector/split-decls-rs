@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Neighbors!();
         IndexType!();
-        EdgeType!();
-        Directed!();
         Csr!();
+        Neighbors!();
+        EdgeType!();
         Undirected!();
+        Directed!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_538 {
     };
 }
 
-impl_538!()
+impl_538!();

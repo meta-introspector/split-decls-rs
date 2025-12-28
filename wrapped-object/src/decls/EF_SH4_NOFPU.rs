@@ -4,4 +4,4 @@ macro_rules! EF_SH4_NOFPU {
     };
 }
 
-EF_SH4_NOFPU!()
+EF_SH4_NOFPU!();

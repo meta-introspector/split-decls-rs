@@ -4,4 +4,4 @@ macro_rules! RustcObjectLifetimeDefaultParser {
     };
 }
 
-RustcObjectLifetimeDefaultParser!()
+RustcObjectLifetimeDefaultParser!();

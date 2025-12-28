@@ -11,4 +11,4 @@ macro_rules! default_hash_impl {
     };
 }
 
-default_hash_impl!()
+default_hash_impl!();

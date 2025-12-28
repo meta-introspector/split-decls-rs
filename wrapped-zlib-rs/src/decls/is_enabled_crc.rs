@@ -4,4 +4,4 @@ macro_rules! is_enabled_crc {
     };
 }
 
-is_enabled_crc!()
+is_enabled_crc!();

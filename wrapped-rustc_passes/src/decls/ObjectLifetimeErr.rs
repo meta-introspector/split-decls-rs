@@ -4,4 +4,4 @@ macro_rules! ObjectLifetimeErr {
     };
 }
 
-ObjectLifetimeErr!()
+ObjectLifetimeErr!();

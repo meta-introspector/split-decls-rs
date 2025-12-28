@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        SectionIndex!();
-        SymbolKind!();
         SymbolIndex!();
-        ObjectSymbol!();
-        SymbolInternal!();
+        Result!();
         SymbolFlags!();
+        SymbolKind!();
         SymbolSection!();
         Symbol!();
-        Result!();
-        SymbolScope!();
         ReadRef!();
+        SymbolInternal!();
+        SymbolScope!();
+        SectionIndex!();
+        ObjectSymbol!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_165 {
     };
 }
 
-impl_165!()
+impl_165!();

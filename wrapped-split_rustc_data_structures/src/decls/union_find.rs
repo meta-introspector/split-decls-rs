@@ -4,4 +4,4 @@ macro_rules! union_find {
     };
 }
 
-union_find!()
+union_find!();

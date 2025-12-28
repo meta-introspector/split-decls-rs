@@ -4,4 +4,4 @@ macro_rules! weak {
     };
 }
 
-weak!()
+weak!();

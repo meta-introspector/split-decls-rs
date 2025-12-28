@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Start!();
-        Match!();
-        DFA!();
-        PikeVM!();
         NFA!();
+        PikeVM!();
+        Start!();
+        DFA!();
+        Match!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Look {
     };
 }
 
-Look!()
+Look!();

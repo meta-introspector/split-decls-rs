@@ -4,4 +4,4 @@ macro_rules! dyn_trait_in_self {
     };
 }
 
-dyn_trait_in_self!()
+dyn_trait_in_self!();

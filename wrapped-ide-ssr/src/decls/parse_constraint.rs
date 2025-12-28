@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Constraint!();
         NodeKind!();
-        Token!();
+        Constraint!();
         SsrError!();
+        Token!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_constraint {
     };
 }
 
-parse_constraint!()
+parse_constraint!();

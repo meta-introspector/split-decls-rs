@@ -4,4 +4,4 @@ macro_rules! perfect_hash {
     };
 }
 
-perfect_hash!()
+perfect_hash!();

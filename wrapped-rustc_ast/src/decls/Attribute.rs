@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Walkable!();
         AttrKind!();
         AttrStyle!();
+        Walkable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Attribute {
     };
 }
 
-Attribute!()
+Attribute!();

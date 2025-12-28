@@ -4,4 +4,4 @@ macro_rules! query_from_lru_cache {
     };
 }
 
-query_from_lru_cache!()
+query_from_lru_cache!();

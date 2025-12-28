@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         PatOrWild!();
-        MatrixRow!();
-        PatStack!();
-        MatchArm!();
         PatCx!();
         Constructor!();
+        PatStack!();
+        MatrixRow!();
+        MatchArm!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_108 {
     };
 }
 
-impl_108!()
+impl_108!();

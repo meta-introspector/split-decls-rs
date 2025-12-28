@@ -4,4 +4,4 @@ macro_rules! DefaultSpawn {
     };
 }
 
-DefaultSpawn!()
+DefaultSpawn!();

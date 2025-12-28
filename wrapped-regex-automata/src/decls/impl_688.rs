@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LookSetIter!();
         Start!();
         Look!();
-        UnicodeWordBoundaryError!();
+        LookSetIter!();
         LookSet!();
+        UnicodeWordBoundaryError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_688 {
     };
 }
 
-impl_688!()
+impl_688!();

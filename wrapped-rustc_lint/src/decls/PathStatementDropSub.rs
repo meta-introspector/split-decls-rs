@@ -4,4 +4,4 @@ macro_rules! PathStatementDropSub {
     };
 }
 
-PathStatementDropSub!()
+PathStatementDropSub!();

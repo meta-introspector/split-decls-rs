@@ -4,4 +4,4 @@ macro_rules! benchmark_expand_macro_rules {
     };
 }
 
-benchmark_expand_macro_rules!()
+benchmark_expand_macro_rules!();

@@ -12,4 +12,4 @@ macro_rules! call_with_sockaddr {
     };
 }
 
-call_with_sockaddr!()
+call_with_sockaddr!();

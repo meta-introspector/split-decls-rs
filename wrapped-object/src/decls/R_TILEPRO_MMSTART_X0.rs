@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_MMSTART_X0 {
     };
 }
 
-R_TILEPRO_MMSTART_X0!()
+R_TILEPRO_MMSTART_X0!();

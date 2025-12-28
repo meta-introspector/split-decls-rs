@@ -4,4 +4,4 @@ macro_rules! get_recursion_limit {
     };
 }
 
-get_recursion_limit!()
+get_recursion_limit!();

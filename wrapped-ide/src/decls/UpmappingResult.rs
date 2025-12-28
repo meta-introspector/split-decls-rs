@@ -4,4 +4,4 @@ macro_rules! UpmappingResult {
     };
 }
 
-UpmappingResult!()
+UpmappingResult!();

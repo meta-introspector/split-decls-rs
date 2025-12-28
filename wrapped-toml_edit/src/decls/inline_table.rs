@@ -4,4 +4,4 @@ macro_rules! inline_table {
     };
 }
 
-inline_table!()
+inline_table!();

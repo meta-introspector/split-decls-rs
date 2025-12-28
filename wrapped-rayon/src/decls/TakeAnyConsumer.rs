@@ -4,4 +4,4 @@ macro_rules! TakeAnyConsumer {
     };
 }
 
-TakeAnyConsumer!()
+TakeAnyConsumer!();

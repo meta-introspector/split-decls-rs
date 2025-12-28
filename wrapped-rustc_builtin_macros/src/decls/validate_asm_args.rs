@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        AsmAttributeNotSupported!();
-        AsmUnsupportedOption!();
-        AsmClobberNoReg!();
-        AsmMutuallyExclusive!();
-        AsmExpectedOther!();
-        AsmPureCombine!();
-        AsmNoReturn!();
-        AsmOptAlreadyprovided!();
-        AsmMayUnwind!();
         AsmUnsupportedClobberAbi!();
-        AsmPositionalAfter!();
         AsmExplicitRegisterName!();
-        AsmPureNoOutput!();
+        AsmOptAlreadyprovided!();
+        AsmPureCombine!();
+        AsmUnsupportedOption!();
         ValidatedAsmArgs!();
+        AsmMayUnwind!();
+        AsmClobberNoReg!();
+        AsmPositionalAfter!();
+        AsmExpectedOther!();
         AsmDuplicateArg!();
+        AsmMutuallyExclusive!();
+        AsmPureNoOutput!();
+        AsmNoReturn!();
+        AsmAttributeNotSupported!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! validate_asm_args {
     };
 }
 
-validate_asm_args!()
+validate_asm_args!();

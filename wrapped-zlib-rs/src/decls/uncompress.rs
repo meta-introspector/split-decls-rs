@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ReturnCode!();
+        InflateConfig!();
         InflateStream!();
         InflateFlush!();
-        InflateConfig!();
+        ReturnCode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! uncompress {
     };
 }
 
-uncompress!()
+uncompress!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         BorrowckInferCtxt!();
-        RegionCtxt!();
-        Locations!();
-        MirTypeckRegionConstraints!();
         DeferredOpaqueTypeError!();
+        Locations!();
         UniversalRegions!();
+        MirTypeckRegionConstraints!();
+        RegionCtxt!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! apply_computed_concrete_opaque_types {
     };
 }
 
-apply_computed_concrete_opaque_types!()
+apply_computed_concrete_opaque_types!();

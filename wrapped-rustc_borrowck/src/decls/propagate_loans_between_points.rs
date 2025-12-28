@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ConstraintDirection!();
         LocalizedOutlivesConstraintSet!();
         UniversalRegions!();
+        ConstraintDirection!();
         LocalizedOutlivesConstraint!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! propagate_loans_between_points {
     };
 }
 
-propagate_loans_between_points!()
+propagate_loans_between_points!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        StateID!();
-        PatternID!();
         StartTable!();
-        StartByteMap!();
+        DeserializeError!();
+        PatternID!();
         Start!();
         StartKind!();
-        DeserializeError!();
+        StartByteMap!();
+        StateID!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

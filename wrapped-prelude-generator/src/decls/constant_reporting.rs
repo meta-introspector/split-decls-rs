@@ -4,4 +4,4 @@ macro_rules! constant_reporting {
     };
 }
 
-constant_reporting!()
+constant_reporting!();

@@ -4,4 +4,4 @@ macro_rules! R_SH_PLT32 {
     };
 }
 
-R_SH_PLT32!()
+R_SH_PLT32!();

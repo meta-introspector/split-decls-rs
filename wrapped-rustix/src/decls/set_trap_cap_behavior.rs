@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ProcSelector!();
-        TrapCapBehavior!();
         Result!();
+        TrapCapBehavior!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! set_trap_cap_behavior {
     };
 }
 
-set_trap_cap_behavior!()
+set_trap_cap_behavior!();

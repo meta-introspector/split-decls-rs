@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         Ty!();
+        Const!();
+        ConstKind!();
+        Interner!();
+        GenericArg!();
         PlaceholderConst!();
+        CanonicalVarValues!();
+        CanonicalVarKind!();
         GenericArgKind!();
         Region!();
-        GenericArg!();
-        ConstKind!();
-        CanonicalVarValues!();
-        Const!();
-        CanonicalVarKind!();
-        Interner!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

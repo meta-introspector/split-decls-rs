@@ -4,4 +4,4 @@ macro_rules! INONCEBYTES {
     };
 }
 
-INONCEBYTES!()
+INONCEBYTES!();

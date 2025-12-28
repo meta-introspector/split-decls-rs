@@ -4,4 +4,4 @@ macro_rules! tokenize_ident_to_subwords {
     };
 }
 
-tokenize_ident_to_subwords!()
+tokenize_ident_to_subwords!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SalsaStruct!();
-        SalsaField!();
         Options!();
+        SalsaField!();
         SalsaStructAllowedOptions!();
+        SalsaStruct!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

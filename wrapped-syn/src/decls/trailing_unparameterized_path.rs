@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
-        Punctuated!();
         Group!();
+        Punctuated!();
+        Lifetime!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! trailing_unparameterized_path {
     };
 }
 
-trailing_unparameterized_path!()
+trailing_unparameterized_path!();

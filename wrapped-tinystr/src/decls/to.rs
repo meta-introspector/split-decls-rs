@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Aligned8!();
-        AsciiByte!();
         Aligned4!();
+        AsciiByte!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! to {
     };
 }
 
-to!()
+to!();

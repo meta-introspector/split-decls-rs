@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_AMD64_SECREL {
     };
 }
 
-IMAGE_REL_AMD64_SECREL!()
+IMAGE_REL_AMD64_SECREL!();

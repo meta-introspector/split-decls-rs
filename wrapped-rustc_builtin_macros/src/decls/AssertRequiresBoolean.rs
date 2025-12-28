@@ -4,4 +4,4 @@ macro_rules! AssertRequiresBoolean {
     };
 }
 
-AssertRequiresBoolean!()
+AssertRequiresBoolean!();

@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        Zalsa!();
-        Stamp!();
-        Value!();
-        EventKind!();
-        IdentityHash!();
-        Table!();
-        DatabaseKeyIndex!();
-        IngredientImpl!();
-        Identity!();
-        Configuration!();
-        OptionalAtomicRevision!();
-        AsId!();
-        FromId!();
-        Id!();
-        Revision!();
-        IngredientIndex!();
         ZalsaLocal!();
+        FromId!();
+        Stamp!();
+        Configuration!();
+        DatabaseKeyIndex!();
+        Identity!();
+        IngredientImpl!();
+        Revision!();
+        OptionalAtomicRevision!();
+        IngredientIndex!();
+        IdentityHash!();
+        Zalsa!();
+        Table!();
         Event!();
+        Value!();
+        Id!();
+        EventKind!();
+        AsId!();
         StructEntry!();
     };
 }
@@ -29,4 +29,4 @@ macro_rules! impl_367 {
     };
 }
 
-impl_367!()
+impl_367!();

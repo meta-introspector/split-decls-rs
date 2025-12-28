@@ -4,4 +4,4 @@ macro_rules! RANK {
     };
 }
 
-RANK!()
+RANK!();

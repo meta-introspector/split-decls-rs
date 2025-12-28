@@ -4,4 +4,4 @@ macro_rules! get_source {
     };
 }
 
-get_source!()
+get_source!();

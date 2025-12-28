@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IoringRegisterOp!();
         Result!();
+        IoringRegisterOp!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! io_uring_register {
     };
 }
 
-io_uring_register!()
+io_uring_register!();

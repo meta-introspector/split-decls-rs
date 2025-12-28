@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Graph!();
         IndexType!();
         NodeIndex!();
         MappedSequenceVisitor!();
+        Graph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! deser_graph_node_holes {
     };
 }
 
-deser_graph_node_holes!()
+deser_graph_node_holes!();

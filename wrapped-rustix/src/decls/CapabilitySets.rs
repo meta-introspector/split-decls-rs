@@ -4,4 +4,4 @@ macro_rules! CapabilitySets {
     };
 }
 
-CapabilitySets!()
+CapabilitySets!();

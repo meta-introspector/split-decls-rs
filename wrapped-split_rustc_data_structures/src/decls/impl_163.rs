@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MinMaxIn!();
         MinMaxes!();
+        MinMaxIn!();
         Annotations!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_163 {
     };
 }
 
-impl_163!()
+impl_163!();

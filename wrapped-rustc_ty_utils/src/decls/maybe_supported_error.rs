@@ -12,4 +12,4 @@ macro_rules! maybe_supported_error {
     };
 }
 
-maybe_supported_error!()
+maybe_supported_error!();

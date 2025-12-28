@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Formatter!();
         RawValue!();
         RawValueStrEmitter!();
-        Error!();
+        Formatter!();
+        Compound!();
         Number!();
         NumberStrEmitter!();
-        Result!();
+        Error!();
         Map!();
         SerializeMap!();
-        Compound!();
+        Result!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_201 {
     };
 }
 
-impl_201!()
+impl_201!();

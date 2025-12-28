@@ -4,4 +4,4 @@ macro_rules! EncodeUtf8Error {
     };
 }
 
-EncodeUtf8Error!()
+EncodeUtf8Error!();

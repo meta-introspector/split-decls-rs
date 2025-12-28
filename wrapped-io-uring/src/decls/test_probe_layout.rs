@@ -11,4 +11,4 @@ macro_rules! test_probe_layout {
     };
 }
 
-test_probe_layout!()
+test_probe_layout!();

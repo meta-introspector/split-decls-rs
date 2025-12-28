@@ -4,4 +4,4 @@ macro_rules! DocAliasBadChar {
     };
 }
 
-DocAliasBadChar!()
+DocAliasBadChar!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Punctuated!();
-        Result!();
         ParseStream!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_meta_path {
     };
 }
 
-parse_meta_path!()
+parse_meta_path!();

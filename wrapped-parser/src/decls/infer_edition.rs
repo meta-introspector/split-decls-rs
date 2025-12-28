@@ -4,4 +4,4 @@ macro_rules! infer_edition {
     };
 }
 
-infer_edition!()
+infer_edition!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        FromSql!();
-        Array!();
-        Result!();
-        Values!();
-        ValueRef!();
         Error!();
-        Value!();
-        ValueIter!();
+        Result!();
         FromSqlError!();
+        FromSql!();
+        Values!();
+        Array!();
+        Value!();
+        ValueRef!();
+        ValueIter!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_573 {
     };
 }
 
-impl_573!()
+impl_573!();

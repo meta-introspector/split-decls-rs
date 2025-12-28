@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         RawValue!();
-        Value!();
-        Error!();
         Deserializer!();
+        Error!();
         Result!();
+        Value!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_634 {
     };
 }
 
-impl_634!()
+impl_634!();

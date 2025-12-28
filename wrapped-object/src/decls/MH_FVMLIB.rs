@@ -4,4 +4,4 @@ macro_rules! MH_FVMLIB {
     };
 }
 
-MH_FVMLIB!()
+MH_FVMLIB!();

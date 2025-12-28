@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Greater!();
         Ord!();
+        Greater!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_563 {
     };
 }
 
-impl_563!()
+impl_563!();

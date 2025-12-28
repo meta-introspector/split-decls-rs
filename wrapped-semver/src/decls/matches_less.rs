@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Comparator!();
         Version!();
+        Comparator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! matches_less {
     };
 }
 
-matches_less!()
+matches_less!();

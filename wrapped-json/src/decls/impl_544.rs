@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Map!();
-        Error!();
-        MapAccess!();
-        Deserializer!();
         Value!();
+        NumberKey!();
         NumberFromString!();
         Number!();
-        NumberKey!();
         Formatter!();
+        Deserializer!();
+        Error!();
+        Result!();
+        MapAccess!();
+        Map!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_544 {
     };
 }
 
-impl_544!()
+impl_544!();

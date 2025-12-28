@@ -4,4 +4,4 @@ macro_rules! do_offset_history {
     };
 }
 
-do_offset_history!()
+do_offset_history!();

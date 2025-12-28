@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        EnteredSpan!();
         Entered!();
-        Span!();
-        Instrument!();
         Inner!();
         AsField!();
-        EnteredSpan!();
+        Span!();
+        Instrument!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

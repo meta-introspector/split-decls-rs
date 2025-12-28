@@ -4,4 +4,4 @@ macro_rules! mir_for_ctfe {
     };
 }
 
-mir_for_ctfe!()
+mir_for_ctfe!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UsePath2!();
-        UseName2!();
         UseGroup2!();
         UseTree2!();
+        UsePath2!();
+        UseName2!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

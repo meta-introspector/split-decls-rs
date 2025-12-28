@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TokenStream!();
-        TokenTree!();
         ProcMacroAutoTraits!();
+        TokenTree!();
         TokenTreeIter!();
+        TokenStream!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! token_stream {
     };
 }
 
-token_stream!()
+token_stream!();

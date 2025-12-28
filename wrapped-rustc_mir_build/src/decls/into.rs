@@ -4,4 +4,4 @@ macro_rules! into {
     };
 }
 
-into!()
+into!();

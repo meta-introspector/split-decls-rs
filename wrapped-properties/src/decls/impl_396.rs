@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PropertyCodePointMap!();
-        Baked!();
-        BidiMirroringGlyph!();
         EnumeratedProperty!();
+        Baked!();
+        PropertyCodePointMap!();
+        BidiMirroringGlyph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_396 {
     };
 }
 
-impl_396!()
+impl_396!();

@@ -11,4 +11,4 @@ macro_rules! render_for {
     };
 }
 
-render_for!()
+render_for!();

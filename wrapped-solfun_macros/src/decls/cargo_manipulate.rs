@@ -4,4 +4,4 @@ macro_rules! cargo_manipulate {
     };
 }
 
-cargo_manipulate!()
+cargo_manipulate!();

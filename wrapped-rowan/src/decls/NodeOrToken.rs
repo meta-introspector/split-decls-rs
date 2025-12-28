@@ -4,4 +4,4 @@ macro_rules! NodeOrToken {
     };
 }
 
-NodeOrToken!()
+NodeOrToken!();

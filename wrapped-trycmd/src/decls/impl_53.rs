@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
         TryCmd!();
-        Output!();
-        SpawnStatus!();
-        Mode!();
-        BinRegistry!();
-        FileStatus!();
         Bin!();
-        CommandStatus!();
-        Case!();
-        StreamStatus!();
-        Stream!();
-        Filesystem!();
         Step!();
+        CommandStatus!();
+        BinRegistry!();
+        Filesystem!();
+        Case!();
+        Output!();
+        Mode!();
+        Stream!();
+        StreamStatus!();
+        SpawnStatus!();
+        FileStatus!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

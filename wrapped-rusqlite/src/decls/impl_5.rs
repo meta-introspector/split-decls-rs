@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Type!();
-        Blob!();
-        Null!();
         FromSqlError!();
         Error!();
+        Blob!();
+        Type!();
+        Null!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

@@ -4,4 +4,4 @@ macro_rules! exporting_symbol_name_for_instance_in_crate {
     };
 }
 
-exporting_symbol_name_for_instance_in_crate!()
+exporting_symbol_name_for_instance_in_crate!();

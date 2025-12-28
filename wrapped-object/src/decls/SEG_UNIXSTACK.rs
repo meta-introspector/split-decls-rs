@@ -4,4 +4,4 @@ macro_rules! SEG_UNIXSTACK {
     };
 }
 
-SEG_UNIXSTACK!()
+SEG_UNIXSTACK!();

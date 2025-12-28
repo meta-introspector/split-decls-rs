@@ -11,4 +11,4 @@ macro_rules! assert_errors_are_present {
     };
 }
 
-assert_errors_are_present!()
+assert_errors_are_present!();

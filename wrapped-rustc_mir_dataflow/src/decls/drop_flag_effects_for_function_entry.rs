@@ -12,4 +12,4 @@ macro_rules! drop_flag_effects_for_function_entry {
     };
 }
 
-drop_flag_effects_for_function_entry!()
+drop_flag_effects_for_function_entry!();

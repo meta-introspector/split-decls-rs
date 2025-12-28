@@ -11,4 +11,4 @@ macro_rules! DESERIALIZE_WITH {
     };
 }
 
-DESERIALIZE_WITH!()
+DESERIALIZE_WITH!();

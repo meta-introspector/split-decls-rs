@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OperandRef!();
         BuilderMethods!();
-        IntPredicate!();
-        OperandValue!();
-        PlaceRef!();
         FunctionCx!();
+        PlaceRef!();
+        OperandValue!();
+        OperandRef!();
+        IntPredicate!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_501 {
     };
 }
 
-impl_501!()
+impl_501!();

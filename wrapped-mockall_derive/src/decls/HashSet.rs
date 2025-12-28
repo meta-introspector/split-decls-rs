@@ -4,4 +4,4 @@ macro_rules! HashSet {
     };
 }
 
-HashSet!()
+HashSet!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        State!();
-        DFA!();
-        StateID!();
-        Endian!();
         SerializeError!();
-        TransitionTable!();
+        Endian!();
         DeserializeError!();
         StateIter!();
+        TransitionTable!();
+        State!();
+        StateID!();
+        DFA!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

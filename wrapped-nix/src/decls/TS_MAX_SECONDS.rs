@@ -4,4 +4,4 @@ macro_rules! TS_MAX_SECONDS {
     };
 }
 
-TS_MAX_SECONDS!()
+TS_MAX_SECONDS!();

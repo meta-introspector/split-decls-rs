@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        TypeKind!();
-        CodegenCx!();
         SmallVec!();
+        AttributePlace!();
         AtomicOrdering!();
+        IntPredicate!();
         AtomicRmwBinOp!();
-        TailCallKind!();
-        AttributeKind!();
         RealPredicate!();
         PassMode!();
         Funclet!();
+        CodegenCx!();
+        TypeKind!();
         Builder!();
-        AttributePlace!();
-        IntPredicate!();
+        AttributeKind!();
+        TailCallKind!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

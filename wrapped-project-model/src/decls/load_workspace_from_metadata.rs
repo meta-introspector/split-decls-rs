@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ProjectWorkspace!();
-        ProjectWorkspaceKind!();
-        ManifestPath!();
-        WorkspaceBuildScripts!();
-        Sysroot!();
         CargoWorkspace!();
+        ProjectWorkspaceKind!();
+        WorkspaceBuildScripts!();
+        ProjectWorkspace!();
+        ManifestPath!();
+        Sysroot!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! load_workspace_from_metadata {
     };
 }
 
-load_workspace_from_metadata!()
+load_workspace_from_metadata!();

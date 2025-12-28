@@ -4,4 +4,4 @@ macro_rules! FunctionalRecordUpdateDestructuringAssignment {
     };
 }
 
-FunctionalRecordUpdateDestructuringAssignment!()
+FunctionalRecordUpdateDestructuringAssignment!();

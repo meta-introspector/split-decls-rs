@@ -4,4 +4,4 @@ macro_rules! decode_field {
     };
 }
 
-decode_field!()
+decode_field!();

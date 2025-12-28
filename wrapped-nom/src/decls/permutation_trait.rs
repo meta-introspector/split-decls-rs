@@ -4,4 +4,4 @@ macro_rules! permutation_trait {
     };
 }
 
-permutation_trait!()
+permutation_trait!();

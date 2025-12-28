@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         TraitRef!();
-        ExistentialTraitRef!();
-        Interner!();
         Binder!();
         Ty!();
+        ExistentialTraitRef!();
+        Interner!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_366 {
     };
 }
 
-impl_366!()
+impl_366!();

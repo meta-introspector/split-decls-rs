@@ -11,4 +11,4 @@ macro_rules! eq_str {
     };
 }
 
-eq_str!()
+eq_str!();

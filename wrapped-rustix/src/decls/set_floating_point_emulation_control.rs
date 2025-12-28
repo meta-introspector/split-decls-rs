@@ -11,4 +11,4 @@ macro_rules! set_floating_point_emulation_control {
     };
 }
 
-set_floating_point_emulation_control!()
+set_floating_point_emulation_control!();

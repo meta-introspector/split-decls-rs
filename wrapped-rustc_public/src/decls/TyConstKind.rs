@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        DebruijnIndex!();
+        Allocation!();
+        BoundVar!();
+        Ty!();
         ParamConst!();
         GenericArgs!();
-        BoundVar!();
-        Allocation!();
-        Ty!();
-        DebruijnIndex!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! TyConstKind {
     };
 }
 
-TyConstKind!()
+TyConstKind!();

@@ -4,4 +4,4 @@ macro_rules! link_output_kind {
     };
 }
 
-link_output_kind!()
+link_output_kind!();

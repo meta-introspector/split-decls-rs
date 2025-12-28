@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        SizeEq!();
+        TransmuteFrom!();
+        MutationCompatible!();
+        TryTransmuteFromPtr!();
+        BecauseMutationCompatible!();
         Aliasing!();
         Validity!();
-        TryTransmuteFromPtr!();
-        SizeEq!();
-        BecauseMutationCompatible!();
-        MutationCompatible!();
-        TransmuteFrom!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_358 {
     };
 }
 
-impl_358!()
+impl_358!();

@@ -4,4 +4,4 @@ macro_rules! EF_E2K_INCOMPAT {
     };
 }
 
-EF_E2K_INCOMPAT!()
+EF_E2K_INCOMPAT!();

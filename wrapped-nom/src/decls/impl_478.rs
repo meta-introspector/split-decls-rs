@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Needed!();
-        TakeUntil!();
-        Parser!();
-        Error!();
-        OutputMode!();
-        FindSubstring!();
         Input!();
-        ErrorKind!();
+        Parser!();
+        TakeUntil!();
         ParseError!();
         PResult!();
+        OutputMode!();
         Err!();
+        Error!();
+        ErrorKind!();
+        FindSubstring!();
+        Needed!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_478 {
     };
 }
 
-impl_478!()
+impl_478!();

@@ -4,4 +4,4 @@ macro_rules! hash_stable_discriminant {
     };
 }
 
-hash_stable_discriminant!()
+hash_stable_discriminant!();

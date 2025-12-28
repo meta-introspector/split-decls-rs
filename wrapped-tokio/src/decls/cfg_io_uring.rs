@@ -4,4 +4,4 @@ macro_rules! cfg_io_uring {
     };
 }
 
-cfg_io_uring!()
+cfg_io_uring!();

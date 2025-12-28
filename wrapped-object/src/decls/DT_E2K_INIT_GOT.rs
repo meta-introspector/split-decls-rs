@@ -4,4 +4,4 @@ macro_rules! DT_E2K_INIT_GOT {
     };
 }
 
-DT_E2K_INIT_GOT!()
+DT_E2K_INIT_GOT!();

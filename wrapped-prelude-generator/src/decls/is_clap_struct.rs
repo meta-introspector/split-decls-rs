@@ -11,4 +11,4 @@ macro_rules! is_clap_struct {
     };
 }
 
-is_clap_struct!()
+is_clap_struct!();

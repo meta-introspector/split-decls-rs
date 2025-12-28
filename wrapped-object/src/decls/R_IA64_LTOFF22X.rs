@@ -4,4 +4,4 @@ macro_rules! R_IA64_LTOFF22X {
     };
 }
 
-R_IA64_LTOFF22X!()
+R_IA64_LTOFF22X!();

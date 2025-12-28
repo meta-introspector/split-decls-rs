@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SectionHeader!();
         SectionIndex!();
+        SectionHeader!();
         FileHeader!();
+        ReadRef!();
         ObjectSection!();
         ElfFile!();
-        ReadRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ElfSection {
     };
 }
 
-ElfSection!()
+ElfSection!();

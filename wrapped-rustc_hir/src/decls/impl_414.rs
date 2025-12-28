@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Item!();
         LanguageItems!();
+        Item!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_414 {
     };
 }
 
-impl_414!()
+impl_414!();

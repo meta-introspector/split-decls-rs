@@ -4,4 +4,4 @@ macro_rules! OptionProducer {
     };
 }
 
-OptionProducer!()
+OptionProducer!();

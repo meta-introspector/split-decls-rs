@@ -12,4 +12,4 @@ macro_rules! show_fieldless_enum {
     };
 }
 
-show_fieldless_enum!()
+show_fieldless_enum!();

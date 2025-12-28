@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
         Hasher!();
         Blake2b!();
+        UnknownCryptoError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_234 {
     };
 }
 
-impl_234!()
+impl_234!();

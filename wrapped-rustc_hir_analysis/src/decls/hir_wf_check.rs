@@ -4,4 +4,4 @@ macro_rules! hir_wf_check {
     };
 }
 
-hir_wf_check!()
+hir_wf_check!();

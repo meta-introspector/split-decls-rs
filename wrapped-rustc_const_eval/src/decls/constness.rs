@@ -4,4 +4,4 @@ macro_rules! constness {
     };
 }
 
-constness!()
+constness!();

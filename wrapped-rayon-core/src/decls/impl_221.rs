@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Sleep!();
         IdleState!();
-        CoreLatch!();
+        Sleep!();
         JobsEventCounter!();
         AtomicCounters!();
+        CoreLatch!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_221 {
     };
 }
 
-impl_221!()
+impl_221!();

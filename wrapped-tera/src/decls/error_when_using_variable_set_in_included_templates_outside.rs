@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Context!();
         Tera!();
+        Context!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! error_when_using_variable_set_in_included_templates_outside {
     };
 }
 
-error_when_using_variable_set_in_included_templates_outside!()
+error_when_using_variable_set_in_included_templates_outside!();

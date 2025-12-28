@@ -31,4 +31,4 @@ Critical Path Analysis:
     };
 }
 
-lattice_dependencies_impl!()
+lattice_dependencies_impl!();

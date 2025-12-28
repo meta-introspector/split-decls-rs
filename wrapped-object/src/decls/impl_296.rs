@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ProgramHeader!();
         ReadRef!();
+        ElfFile!();
         Result!();
         FileHeader!();
-        ElfFile!();
         ElfSegment!();
-        ProgramHeader!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_296 {
     };
 }
 
-impl_296!()
+impl_296!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ValueDeserializer!();
         DeTable!();
+        ValueDeserializer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Deserializer {
     };
 }
 
-Deserializer!()
+Deserializer!();

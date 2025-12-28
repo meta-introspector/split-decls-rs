@@ -11,4 +11,4 @@ macro_rules! wrap_enum {
     };
 }
 
-wrap_enum!()
+wrap_enum!();

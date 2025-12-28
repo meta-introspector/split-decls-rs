@@ -4,4 +4,4 @@ macro_rules! tic2iic {
     };
 }
 
-tic2iic!()
+tic2iic!();

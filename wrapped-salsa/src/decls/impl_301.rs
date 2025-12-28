@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Coordinate!();
         CoordinateDrop!();
+        Coordinate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_301 {
     };
 }
 
-impl_301!()
+impl_301!();

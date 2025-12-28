@@ -4,4 +4,4 @@ macro_rules! assert_fields {
     };
 }
 
-assert_fields!()
+assert_fields!();

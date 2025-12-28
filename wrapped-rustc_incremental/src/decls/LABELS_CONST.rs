@@ -4,4 +4,4 @@ macro_rules! LABELS_CONST {
     };
 }
 
-LABELS_CONST!()
+LABELS_CONST!();

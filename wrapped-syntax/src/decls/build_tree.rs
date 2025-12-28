@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxTreeBuilder!();
         SyntaxError!();
+        SyntaxTreeBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! build_tree {
     };
 }
 
-build_tree!()
+build_tree!();

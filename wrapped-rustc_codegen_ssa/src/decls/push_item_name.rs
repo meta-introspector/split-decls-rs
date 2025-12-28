@@ -4,4 +4,4 @@ macro_rules! push_item_name {
     };
 }
 
-push_item_name!()
+push_item_name!();

@@ -4,4 +4,4 @@ macro_rules! ssse3 {
     };
 }
 
-ssse3!()
+ssse3!();

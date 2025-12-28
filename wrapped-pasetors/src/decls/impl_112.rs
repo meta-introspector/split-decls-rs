@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        V4!();
         Error!();
+        V4!();
         SymmetricKey!();
         Generate!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

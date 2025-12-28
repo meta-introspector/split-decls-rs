@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Test!();
         Context!();
+        Test!();
         Tera!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! error_gives_source_on_tests {
     };
 }
 
-error_gives_source_on_tests!()
+error_gives_source_on_tests!();

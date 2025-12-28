@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NeedsDropTypes!();
-        DtorType!();
         NeedsDropResult!();
+        DtorType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! drop_tys_helper {
     };
 }
 
-drop_tys_helper!()
+drop_tys_helper!();

@@ -12,4 +12,4 @@ macro_rules! compute_sig_of_foreign_fn_decl {
     };
 }
 
-compute_sig_of_foreign_fn_decl!()
+compute_sig_of_foreign_fn_decl!();

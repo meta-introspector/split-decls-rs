@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        KernelSigrestore!();
         KernelSigSet!();
         KernelSighandler!();
+        KernelSigrestore!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! KernelSigaction {
     };
 }
 
-KernelSigaction!()
+KernelSigaction!();

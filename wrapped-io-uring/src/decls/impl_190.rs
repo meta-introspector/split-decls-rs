@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SubmitArgs!();
         Timespec!();
+        SubmitArgs!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_190 {
     };
 }
 
-impl_190!()
+impl_190!();

@@ -4,4 +4,4 @@ macro_rules! sat_group {
     };
 }
 
-sat_group!()
+sat_group!();

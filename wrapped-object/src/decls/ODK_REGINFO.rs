@@ -4,4 +4,4 @@ macro_rules! ODK_REGINFO {
     };
 }
 
-ODK_REGINFO!()
+ODK_REGINFO!();

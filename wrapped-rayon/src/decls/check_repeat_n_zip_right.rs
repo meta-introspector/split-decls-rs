@@ -4,4 +4,4 @@ macro_rules! check_repeat_n_zip_right {
     };
 }
 
-check_repeat_n_zip_right!()
+check_repeat_n_zip_right!();

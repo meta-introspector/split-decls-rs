@@ -4,4 +4,4 @@ macro_rules! addr_of {
     };
 }
 
-addr_of!()
+addr_of!();

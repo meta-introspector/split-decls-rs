@@ -11,4 +11,4 @@ macro_rules! split_u64 {
     };
 }
 
-split_u64!()
+split_u64!();

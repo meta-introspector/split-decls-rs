@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LateContext!();
-        NonSnakeCaseDiagSub!();
         NonSnakeCaseDiag!();
+        NonSnakeCaseDiagSub!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_700 {
     };
 }
 
-impl_700!()
+impl_700!();

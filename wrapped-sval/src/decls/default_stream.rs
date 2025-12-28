@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Index!();
-        Result!();
-        Stream!();
-        Label!();
-        Computed!();
         Tag!();
+        Computed!();
         Value!();
+        Result!();
+        Label!();
+        Index!();
+        Stream!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! default_stream {
     };
 }
 
-default_stream!()
+default_stream!();

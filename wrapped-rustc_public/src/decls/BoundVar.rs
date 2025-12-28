@@ -4,4 +4,4 @@ macro_rules! BoundVar {
     };
 }
 
-BoundVar!()
+BoundVar!();

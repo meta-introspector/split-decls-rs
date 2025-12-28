@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_AM_REL32_1 {
     };
 }
 
-IMAGE_REL_AM_REL32_1!()
+IMAGE_REL_AM_REL32_1!();

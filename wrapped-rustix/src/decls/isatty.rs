@@ -4,4 +4,4 @@ macro_rules! isatty {
     };
 }
 
-isatty!()
+isatty!();

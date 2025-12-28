@@ -4,4 +4,4 @@ macro_rules! DependencyValidator {
     };
 }
 
-DependencyValidator!()
+DependencyValidator!();

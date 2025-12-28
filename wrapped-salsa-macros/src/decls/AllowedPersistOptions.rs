@@ -4,4 +4,4 @@ macro_rules! AllowedPersistOptions {
     };
 }
 
-AllowedPersistOptions!()
+AllowedPersistOptions!();

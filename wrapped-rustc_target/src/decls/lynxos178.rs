@@ -4,4 +4,4 @@ macro_rules! lynxos178 {
     };
 }
 
-lynxos178!()
+lynxos178!();

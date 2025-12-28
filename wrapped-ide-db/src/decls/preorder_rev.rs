@@ -4,4 +4,4 @@ macro_rules! preorder_rev {
     };
 }
 
-preorder_rev!()
+preorder_rev!();

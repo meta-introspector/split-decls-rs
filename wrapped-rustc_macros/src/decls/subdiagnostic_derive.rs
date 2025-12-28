@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Applicability!();
         SubdiagnosticDerive!();
+        Applicability!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! subdiagnostic_derive {
     };
 }
 
-subdiagnostic_derive!()
+subdiagnostic_derive!();

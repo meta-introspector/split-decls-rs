@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LzmaEncoderTrait!();
         LzmaEncoder!();
+        LzmaEncoderTrait!();
         LzmaEncoderModes!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

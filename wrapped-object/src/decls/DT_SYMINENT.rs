@@ -4,4 +4,4 @@ macro_rules! DT_SYMINENT {
     };
 }
 
-DT_SYMINENT!()
+DT_SYMINENT!();

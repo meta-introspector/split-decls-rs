@@ -11,4 +11,4 @@ macro_rules! XMC_TE {
     };
 }
 
-XMC_TE!()
+XMC_TE!();

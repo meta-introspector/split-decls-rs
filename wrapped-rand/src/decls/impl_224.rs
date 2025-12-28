@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReseedingCore!();
         Error!();
+        ReseedingCore!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_224 {
     };
 }
 
-impl_224!()
+impl_224!();

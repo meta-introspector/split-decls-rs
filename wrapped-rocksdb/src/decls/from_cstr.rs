@@ -4,4 +4,4 @@ macro_rules! from_cstr {
     };
 }
 
-from_cstr!()
+from_cstr!();

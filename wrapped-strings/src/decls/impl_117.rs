@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Decode!();
-        PCSTR!();
         PSTR!();
+        PCSTR!();
+        Decode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

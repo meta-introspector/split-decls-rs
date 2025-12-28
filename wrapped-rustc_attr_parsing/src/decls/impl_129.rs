@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        SingleAttributeParser!();
+        AttributeOrder!();
+        IllFormedAttributeInputLint!();
+        ArgParser!();
+        AcceptContext!();
+        AllowedTargets!();
         MustUseParser!();
         Stage!();
-        ArgParser!();
+        SingleAttributeParser!();
         OnDuplicate!();
-        AllowedTargets!();
-        IllFormedAttributeInputLint!();
-        AttributeOrder!();
-        AcceptContext!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_129 {
     };
 }
 
-impl_129!()
+impl_129!();

@@ -4,4 +4,4 @@ macro_rules! write_mantissa {
     };
 }
 
-write_mantissa!()
+write_mantissa!();

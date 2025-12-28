@@ -4,4 +4,4 @@ macro_rules! PP4 {
     };
 }
 
-PP4!()
+PP4!();

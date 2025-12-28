@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TableLike!();
         Visit!();
+        TableLike!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! visit_table_like {
     };
 }
 
-visit_table_like!()
+visit_table_like!();

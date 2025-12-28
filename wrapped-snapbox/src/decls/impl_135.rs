@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        DataFormat!();
-        FilterSet!();
-        DataSourceInner!();
-        Data!();
-        DataError!();
-        Result!();
         DataSource!();
+        DataFormat!();
         DataInner!();
+        DataSourceInner!();
         Inline!();
+        FilterSet!();
+        Data!();
+        Result!();
+        DataError!();
         Error!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! impl_135 {
     };
 }
 
-impl_135!()
+impl_135!();

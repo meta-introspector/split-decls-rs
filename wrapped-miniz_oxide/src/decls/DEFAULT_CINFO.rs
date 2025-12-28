@@ -4,4 +4,4 @@ macro_rules! DEFAULT_CINFO {
     };
 }
 
-DEFAULT_CINFO!()
+DEFAULT_CINFO!();

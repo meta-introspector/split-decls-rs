@@ -4,4 +4,4 @@ macro_rules! X86_64_RELOC_TLV {
     };
 }
 
-X86_64_RELOC_TLV!()
+X86_64_RELOC_TLV!();

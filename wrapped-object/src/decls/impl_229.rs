@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ImageAuxSymbolSection!();
-        StringTable!();
-        SymbolMapEntry!();
-        SymbolMap!();
-        ImageSymbol!();
-        ImageAuxSymbolFunction!();
-        ReadRef!();
-        SymbolIndex!();
+        SymbolTable!();
         U32Bytes!();
         ImageAuxSymbolWeak!();
-        Note!();
-        SymbolTable!();
-        SymbolIterator!();
-        CoffHeader!();
-        Pod!();
+        SymbolMap!();
         Bytes!();
+        SymbolIndex!();
+        SymbolMapEntry!();
+        ImageAuxSymbolFunction!();
+        CoffHeader!();
+        Result!();
+        Note!();
+        SymbolIterator!();
+        ReadRef!();
+        ImageSymbol!();
+        StringTable!();
+        Pod!();
+        ImageAuxSymbolSection!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_229 {
     };
 }
 
-impl_229!()
+impl_229!();

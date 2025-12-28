@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Pairs!();
         RuleType!();
+        Pairs!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Parser {
     };
 }
 
-Parser!()
+Parser!();

@@ -4,4 +4,4 @@ macro_rules! Render {
     };
 }
 
-Render!()
+Render!();

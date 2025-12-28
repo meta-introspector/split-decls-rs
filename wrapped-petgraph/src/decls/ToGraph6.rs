@@ -4,4 +4,4 @@ macro_rules! ToGraph6 {
     };
 }
 
-ToGraph6!()
+ToGraph6!();

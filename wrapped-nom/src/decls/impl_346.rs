@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Compare!();
         CompareResult!();
+        Compare!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_346 {
     };
 }
 
-impl_346!()
+impl_346!();

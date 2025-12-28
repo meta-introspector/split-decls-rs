@@ -4,4 +4,4 @@ macro_rules! timestamp {
     };
 }
 
-timestamp!()
+timestamp!();

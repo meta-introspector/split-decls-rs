@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        Relocation!();
         I32!();
+        Relocation!();
+        Endian!();
         U32!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Rela32 {
     };
 }
 
-Rela32!()
+Rela32!();

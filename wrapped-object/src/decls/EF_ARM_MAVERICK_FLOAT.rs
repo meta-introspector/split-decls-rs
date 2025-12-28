@@ -4,4 +4,4 @@ macro_rules! EF_ARM_MAVERICK_FLOAT {
     };
 }
 
-EF_ARM_MAVERICK_FLOAT!()
+EF_ARM_MAVERICK_FLOAT!();

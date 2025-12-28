@@ -4,4 +4,4 @@ macro_rules! get_rust_lib_src {
     };
 }
 
-get_rust_lib_src!()
+get_rust_lib_src!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Data!();
+        Derive!();
         Style!();
+        Data!();
         Container!();
         Ctxt!();
-        Derive!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! check_transparent {
     };
 }
 
-check_transparent!()
+check_transparent!();

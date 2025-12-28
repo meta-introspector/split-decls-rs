@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Reference!();
-        AlignmentError!();
-        SizeError!();
         ConvertError!();
+        SizeError!();
+        AlignmentError!();
+        Reference!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CastError {
     };
 }
 
-CastError!()
+CastError!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DedupEq!();
         DedupByWithCount!();
+        DedupEq!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DedupWithCount {
     };
 }
 
-DedupWithCount!()
+DedupWithCount!();

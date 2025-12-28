@@ -12,4 +12,4 @@ macro_rules! walk_chain_collapsed {
     };
 }
 
-walk_chain_collapsed!()
+walk_chain_collapsed!();

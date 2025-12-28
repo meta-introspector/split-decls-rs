@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegionSnapshot!();
         Snapshot!();
+        RegionSnapshot!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CombinedSnapshot {
     };
 }
 
-CombinedSnapshot!()
+CombinedSnapshot!();

@@ -4,4 +4,4 @@ macro_rules! RecordType {
     };
 }
 
-RecordType!()
+RecordType!();

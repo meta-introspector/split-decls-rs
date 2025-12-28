@@ -12,4 +12,4 @@ macro_rules! build_custom_mir {
     };
 }
 
-build_custom_mir!()
+build_custom_mir!();

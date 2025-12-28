@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Time!();
+        Cycle!();
         DfsSpace!();
         Reversed!();
-        Cycle!();
-        Time!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! toposort {
     };
 }
 
-toposort!()
+toposort!();

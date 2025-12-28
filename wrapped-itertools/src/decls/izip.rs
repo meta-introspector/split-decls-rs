@@ -4,4 +4,4 @@ macro_rules! izip {
     };
 }
 
-izip!()
+izip!();

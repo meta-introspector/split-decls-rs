@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CoffFile!();
-        ImageFileHeader!();
-        ReadRef!();
         CoffHeader!();
+        ImageFileHeader!();
         SymbolIndex!();
+        CoffFile!();
+        ReadRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! CoffComdatSectionIterator {
     };
 }
 
-CoffComdatSectionIterator!()
+CoffComdatSectionIterator!();

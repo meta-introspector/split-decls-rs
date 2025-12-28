@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ascription!();
-        Scope!();
         ThirBuildCx!();
+        Scope!();
+        Ascription!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_298 {
     };
 }
 
-impl_298!()
+impl_298!();

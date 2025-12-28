@@ -4,4 +4,4 @@ macro_rules! LittleEndianWriteExt {
     };
 }
 
-LittleEndianWriteExt!()
+LittleEndianWriteExt!();

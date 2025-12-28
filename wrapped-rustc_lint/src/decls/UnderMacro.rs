@@ -4,4 +4,4 @@ macro_rules! UnderMacro {
     };
 }
 
-UnderMacro!()
+UnderMacro!();

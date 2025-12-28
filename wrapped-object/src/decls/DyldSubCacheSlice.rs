@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endian!();
         DyldSubCacheEntryV1!();
+        Endian!();
         DyldSubCacheEntryV2!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! DyldSubCacheSlice {
     };
 }
 
-DyldSubCacheSlice!()
+DyldSubCacheSlice!();

@@ -4,4 +4,4 @@ macro_rules! SnippetCap {
     };
 }
 
-SnippetCap!()
+SnippetCap!();

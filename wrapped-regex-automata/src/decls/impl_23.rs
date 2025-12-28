@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        MatchStates!();
-        Endian!();
-        AlignAs!();
-        DeserializeError!();
-        Flags!();
-        Accels!();
-        Lazy!();
-        ByteSet!();
-        Input!();
-        StartTable!();
-        SerializeError!();
         StateID!();
+        Flags!();
+        Endian!();
+        Accels!();
+        AlignAs!();
+        Special!();
+        ByteSet!();
+        StartTable!();
+        Lazy!();
+        DeserializeError!();
+        TransitionTable!();
+        Input!();
         DFA!();
         HalfMatch!();
-        TransitionTable!();
-        Special!();
+        SerializeError!();
+        MatchStates!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

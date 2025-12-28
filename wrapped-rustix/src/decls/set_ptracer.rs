@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         PTracer!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_ptracer {
     };
 }
 
-set_ptracer!()
+set_ptracer!();

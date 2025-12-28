@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Symbol!();
         Span!();
+        Symbol!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Ident {
     };
 }
 
-Ident!()
+Ident!();

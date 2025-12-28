@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Ty!();
-        MirConst!();
         Visitor!();
-        ConstantKind!();
+        MirConst!();
         Visitable!();
+        ConstantKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_460 {
     };
 }
 
-impl_460!()
+impl_460!();

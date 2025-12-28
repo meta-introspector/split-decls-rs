@@ -4,4 +4,4 @@ macro_rules! is_mingw_gnu_toolchain {
     };
 }
 
-is_mingw_gnu_toolchain!()
+is_mingw_gnu_toolchain!();

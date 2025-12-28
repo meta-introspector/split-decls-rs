@@ -4,4 +4,4 @@ macro_rules! expectation {
     };
 }
 
-expectation!()
+expectation!();

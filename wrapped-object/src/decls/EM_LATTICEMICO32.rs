@@ -4,4 +4,4 @@ macro_rules! EM_LATTICEMICO32 {
     };
 }
 
-EM_LATTICEMICO32!()
+EM_LATTICEMICO32!();

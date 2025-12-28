@@ -11,4 +11,4 @@ macro_rules! unerased_lint_store {
     };
 }
 
-unerased_lint_store!()
+unerased_lint_store!();

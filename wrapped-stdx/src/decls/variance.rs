@@ -4,4 +4,4 @@ macro_rules! variance {
     };
 }
 
-variance!()
+variance!();

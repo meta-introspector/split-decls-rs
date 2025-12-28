@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImplTraitInTraitData!();
         Symbol!();
+        ImplTraitInTraitData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AssocTypeData {
     };
 }
 
-AssocTypeData!()
+AssocTypeData!();

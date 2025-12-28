@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Action!();
         State!();
-        Access!();
-        Channel!();
+        Action!();
         VersionVec!();
+        Channel!();
+        Access!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_109 {
     };
 }
 
-impl_109!()
+impl_109!();

@@ -4,4 +4,4 @@ macro_rules! transmute_data_mut_ptr {
     };
 }
 
-transmute_data_mut_ptr!()
+transmute_data_mut_ptr!();

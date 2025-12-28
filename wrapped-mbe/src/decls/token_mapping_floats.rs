@@ -44,4 +44,4 @@ fn main() {
     };
 }
 
-token_mapping_floats!()
+token_mapping_floats!();

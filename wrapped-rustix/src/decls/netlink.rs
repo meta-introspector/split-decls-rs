@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SocketAddrOpaque!();
         SocketAddrLen!();
         SocketAddrArg!();
-        Result!();
         Protocol!();
         SocketAddrAny!();
+        Result!();
+        SocketAddrOpaque!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! netlink {
     };
 }
 
-netlink!()
+netlink!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        U32!();
         U16!();
         Version!();
         Endian!();
-        U32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Vernaux {
     };
 }
 
-Vernaux!()
+Vernaux!();

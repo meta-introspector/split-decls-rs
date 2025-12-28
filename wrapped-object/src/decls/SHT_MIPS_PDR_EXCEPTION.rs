@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_PDR_EXCEPTION {
     };
 }
 
-SHT_MIPS_PDR_EXCEPTION!()
+SHT_MIPS_PDR_EXCEPTION!();

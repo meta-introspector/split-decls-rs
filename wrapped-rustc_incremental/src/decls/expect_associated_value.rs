@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AssociatedValueExpected!();
         AssociatedValueExpectedFor!();
+        AssociatedValueExpected!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! expect_associated_value {
     };
 }
 
-expect_associated_value!()
+expect_associated_value!();

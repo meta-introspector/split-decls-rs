@@ -12,4 +12,4 @@ macro_rules! ioctl_fionread {
     };
 }
 
-ioctl_fionread!()
+ioctl_fionread!();

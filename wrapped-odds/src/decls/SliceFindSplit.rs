@@ -4,4 +4,4 @@ macro_rules! SliceFindSplit {
     };
 }
 
-SliceFindSplit!()
+SliceFindSplit!();

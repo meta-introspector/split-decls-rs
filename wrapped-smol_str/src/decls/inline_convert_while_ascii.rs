@@ -4,4 +4,4 @@ macro_rules! inline_convert_while_ascii {
     };
 }
 
-inline_convert_while_ascii!()
+inline_convert_while_ascii!();

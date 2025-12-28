@@ -4,4 +4,4 @@ macro_rules! inherited_align {
     };
 }
 
-inherited_align!()
+inherited_align!();

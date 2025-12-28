@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        RunnerSpec!();
+        Runner!();
         Bin!();
         CaseSpec!();
         CommandStatus!();
-        RunnerSpec!();
         Case!();
-        Runner!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

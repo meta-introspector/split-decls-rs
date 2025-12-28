@@ -12,4 +12,4 @@ macro_rules! runnable_action {
     };
 }
 
-runnable_action!()
+runnable_action!();

@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_MOVW_PREL_NC {
     };
 }
 
-R_ARM_THM_MOVW_PREL_NC!()
+R_ARM_THM_MOVW_PREL_NC!();

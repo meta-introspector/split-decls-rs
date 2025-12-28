@@ -4,4 +4,4 @@ macro_rules! EnvNotDefinedWithUserMessage {
     };
 }
 
-EnvNotDefinedWithUserMessage!()
+EnvNotDefinedWithUserMessage!();

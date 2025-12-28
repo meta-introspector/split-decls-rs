@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IUnknown_Vtbl!();
         GUID!();
         HRESULT!();
-        IUnknown_Vtbl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IWeakReference_Vtbl {
     };
 }
 
-IWeakReference_Vtbl!()
+IWeakReference_Vtbl!();

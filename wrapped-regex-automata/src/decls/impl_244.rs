@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        StartByteMap!();
-        BuildError!();
-        DFA!();
-        Config!();
-        Compiler!();
-        NFA!();
-        Input!();
         WhichCaptures!();
+        Compiler!();
+        Input!();
+        BuildError!();
+        StartByteMap!();
         HalfMatch!();
+        DFA!();
+        Builder!();
+        Config!();
+        NFA!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_244 {
     };
 }
 
-impl_244!()
+impl_244!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Nullable!();
         EdgeType!();
         EdgeReferences!();
-        Nullable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_998 {
     };
 }
 
-impl_998!()
+impl_998!();

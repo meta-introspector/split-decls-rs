@@ -4,4 +4,4 @@ macro_rules! paxos_consensus {
     };
 }
 
-paxos_consensus!()
+paxos_consensus!();

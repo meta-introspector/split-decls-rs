@@ -4,4 +4,4 @@ macro_rules! temp_dir {
     };
 }
 
-temp_dir!()
+temp_dir!();

@@ -4,4 +4,4 @@ macro_rules! rev_for_each_ident {
     };
 }
 
-rev_for_each_ident!()
+rev_for_each_ident!();

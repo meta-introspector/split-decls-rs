@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Cc!();
-        Lld!();
         LinkerFlavor!();
+        Lld!();
+        Cc!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LinkerFlavorCli {
     };
 }
 
-LinkerFlavorCli!()
+LinkerFlavorCli!();

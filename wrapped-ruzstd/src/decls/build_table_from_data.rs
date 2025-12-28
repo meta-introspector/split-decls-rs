@@ -11,4 +11,4 @@ macro_rules! build_table_from_data {
     };
 }
 
-build_table_from_data!()
+build_table_from_data!();

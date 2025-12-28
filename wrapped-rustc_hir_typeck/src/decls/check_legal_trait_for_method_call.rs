@@ -12,4 +12,4 @@ macro_rules! check_legal_trait_for_method_call {
     };
 }
 
-check_legal_trait_for_method_call!()
+check_legal_trait_for_method_call!();

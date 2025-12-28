@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        VarHereDenote!();
-        OutlivesSuggestionBuilder!();
-        RegionErrorKind!();
         RegionErrors!();
-        RequireStaticErr!();
         LifetimeOutliveErr!();
         RegionName!();
-        BlameConstraint!();
-        RegionNameSource!();
+        VarHereDenote!();
         FnMutError!();
-        LifetimeReturnCategoryErr!();
-        DefiningTy!();
-        MirBorrowckCtxt!();
-        FnMutReturnTypeErr!();
-        GenericDoesNotLiveLongEnough!();
         ErrorConstraintInfo!();
+        RequireStaticErr!();
+        BlameConstraint!();
+        LifetimeReturnCategoryErr!();
+        OutlivesSuggestionBuilder!();
+        GenericDoesNotLiveLongEnough!();
+        MirBorrowckCtxt!();
+        RegionErrorKind!();
+        FnMutReturnTypeErr!();
+        RegionNameSource!();
+        DefiningTy!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_161 {
     };
 }
 
-impl_161!()
+impl_161!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Value!();
         Number!();
         Map!();
-        Value!();
         Error!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_288 {
     };
 }
 
-impl_288!()
+impl_288!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Expected!();
-        StringBuilder!();
-        ParseError!();
-        Raw!();
         ErrorSink!();
         Span!();
+        Expected!();
+        ParseError!();
+        Raw!();
+        StringBuilder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! decode_ml_basic_string {
     };
 }
 
-decode_ml_basic_string!()
+decode_ml_basic_string!();

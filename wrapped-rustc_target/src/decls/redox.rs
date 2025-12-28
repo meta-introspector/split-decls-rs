@@ -4,4 +4,4 @@ macro_rules! redox {
     };
 }
 
-redox!()
+redox!();

@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_DELTA_CLASS {
     };
 }
 
-DT_MIPS_DELTA_CLASS!()
+DT_MIPS_DELTA_CLASS!();

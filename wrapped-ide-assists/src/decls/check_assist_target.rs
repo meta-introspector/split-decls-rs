@@ -11,4 +11,4 @@ macro_rules! check_assist_target {
     };
 }
 
-check_assist_target!()
+check_assist_target!();

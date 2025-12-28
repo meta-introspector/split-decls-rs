@@ -1,51 +1,51 @@
 macro_rules! deps {
     () => {
-        DysymtabCommand!();
-        MachO64!();
-        SectionHeader!();
-        U16!();
-        Symbol!();
-        RelocationFlags!();
-        SectionFlags!();
-        SymtabCommand!();
-        RelocationInfo!();
-        U64!();
         BuildVersionCommand!();
-        Result!();
-        MachO!();
-        SectionKind!();
-        AddressSize!();
-        StringTable!();
+        SymbolId!();
         Object!();
-        Error!();
-        SectionOffsets!();
-        File!();
-        SymbolFlags!();
-        U32!();
-        SegmentCommand!();
-        Relocation!();
+        SubArchitecture!();
+        Section!();
         SymbolSection!();
-        SymbolOffsets!();
-        RelocationKind!();
-        GnuProperty!();
-        WritableBuffer!();
-        Dynamic!();
+        Result!();
         FileFlags!();
         MachHeader!();
-        SymbolId!();
-        Nlist!();
+        RelocationInfo!();
+        Error!();
         RelocationEncoding!();
-        SubArchitecture!();
-        MachO32!();
-        SymbolKind!();
-        Section!();
-        Endianness!();
+        SymbolFlags!();
+        U64!();
+        MachO!();
+        AddressSize!();
         SectionId!();
-        SymbolScope!();
-        Architecture!();
         StandardSection!();
+        MachO32!();
+        Relocation!();
+        SymbolScope!();
+        SectionHeader!();
+        SectionOffsets!();
+        SymbolOffsets!();
+        SymtabCommand!();
+        MachO64!();
+        Symbol!();
+        SectionKind!();
+        RelocationKind!();
+        Architecture!();
+        Dynamic!();
+        Endianness!();
+        DysymtabCommand!();
+        StringTable!();
+        SymbolKind!();
+        RelocationFlags!();
+        WritableBuffer!();
         StandardSegment!();
+        GnuProperty!();
         Note!();
+        U16!();
+        U32!();
+        SegmentCommand!();
+        Nlist!();
+        File!();
+        SectionFlags!();
     };
 }
 
@@ -56,4 +56,4 @@ macro_rules! impl_990 {
     };
 }
 
-impl_990!()
+impl_990!();

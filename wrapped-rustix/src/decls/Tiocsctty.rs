@@ -4,4 +4,4 @@ macro_rules! Tiocsctty {
     };
 }
 
-Tiocsctty!()
+Tiocsctty!();

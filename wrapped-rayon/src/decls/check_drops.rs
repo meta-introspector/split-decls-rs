@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Producer!();
         DropCounter!();
         ProducerCallback!();
-        Producer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_drops {
     };
 }
 
-check_drops!()
+check_drops!();

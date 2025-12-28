@@ -11,4 +11,4 @@ macro_rules! generate_chrono_datetime {
     };
 }
 
-generate_chrono_datetime!()
+generate_chrono_datetime!();

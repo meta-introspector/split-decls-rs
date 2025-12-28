@@ -4,4 +4,4 @@ macro_rules! LABELS_ADT {
     };
 }
 
-LABELS_ADT!()
+LABELS_ADT!();

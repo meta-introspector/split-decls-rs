@@ -4,4 +4,4 @@ macro_rules! mixed_lifo_fifo_order {
     };
 }
 
-mixed_lifo_fifo_order!()
+mixed_lifo_fifo_order!();

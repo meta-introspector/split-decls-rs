@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        State!();
-        MessageLevel!();
         Unit!();
-        Task!();
-        Progress!();
-        Id!();
+        MessageLevel!();
         Step!();
         Value!();
+        State!();
+        Progress!();
+        Id!();
+        Task!();
         Item!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

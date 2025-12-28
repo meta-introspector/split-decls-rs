@@ -11,4 +11,4 @@ macro_rules! dup2_stdout {
     };
 }
 
-dup2_stdout!()
+dup2_stdout!();

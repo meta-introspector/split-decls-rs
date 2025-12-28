@@ -13,4 +13,4 @@ macro_rules! def_path_hash_depends_on_crate_id {
     };
 }
 
-def_path_hash_depends_on_crate_id!()
+def_path_hash_depends_on_crate_id!();

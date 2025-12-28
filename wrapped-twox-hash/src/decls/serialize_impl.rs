@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        BufferData!();
+        Hasher!();
         Buffer!();
         Accumulators!();
-        Hasher!();
-        BufferData!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! serialize_impl {
     };
 }
 
-serialize_impl!()
+serialize_impl!();

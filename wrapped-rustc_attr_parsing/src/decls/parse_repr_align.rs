@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Stage!();
+        IncorrectReprFormatAlignOneArg!();
+        IncorrectReprFormatExpectInteger!();
+        InvalidReprGeneric!();
         AcceptContext!();
         IncorrectReprFormatPackedOneOrZeroArg!();
-        IncorrectReprFormatAlignOneArg!();
-        IncorrectReprFormatPackedExpectInteger!();
-        IncorrectReprFormatExpectInteger!();
-        Stage!();
         AlignKind!();
         MetaItemListParser!();
-        InvalidReprGeneric!();
+        IncorrectReprFormatPackedExpectInteger!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! parse_repr_align {
     };
 }
 
-parse_repr_align!()
+parse_repr_align!();

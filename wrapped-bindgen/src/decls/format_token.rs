@@ -11,4 +11,4 @@ macro_rules! format_token {
     };
 }
 
-format_token!()
+format_token!();

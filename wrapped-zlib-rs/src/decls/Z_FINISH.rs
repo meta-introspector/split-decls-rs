@@ -4,4 +4,4 @@ macro_rules! Z_FINISH {
     };
 }
 
-Z_FINISH!()
+Z_FINISH!();

@@ -11,4 +11,4 @@ macro_rules! find_struct_impl {
     };
 }
 
-find_struct_impl!()
+find_struct_impl!();

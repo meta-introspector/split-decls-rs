@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Style!();
-        AnsiGenericString!();
         OSControl!();
+        AnsiGenericString!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

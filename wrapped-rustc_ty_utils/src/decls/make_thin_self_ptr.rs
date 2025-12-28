@@ -4,4 +4,4 @@ macro_rules! make_thin_self_ptr {
     };
 }
 
-make_thin_self_ptr!()
+make_thin_self_ptr!();

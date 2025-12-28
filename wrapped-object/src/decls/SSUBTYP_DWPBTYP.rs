@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWPBTYP {
     };
 }
 
-SSUBTYP_DWPBTYP!()
+SSUBTYP_DWPBTYP!();

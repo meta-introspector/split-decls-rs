@@ -4,4 +4,4 @@ macro_rules! R_METAG_COPY {
     };
 }
 
-R_METAG_COPY!()
+R_METAG_COPY!();

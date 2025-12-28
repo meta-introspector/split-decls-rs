@@ -4,4 +4,4 @@ macro_rules! SlabVisitor {
     };
 }
 
-SlabVisitor!()
+SlabVisitor!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Ord!();
-        PrivateCmp!();
-        Unsigned!();
-        UInt!();
-        Equal!();
-        PrivateCmpOut!();
         B0!();
+        UInt!();
+        PrivateCmp!();
+        Equal!();
+        Unsigned!();
+        PrivateCmpOut!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_430 {
     };
 }
 
-impl_430!()
+impl_430!();

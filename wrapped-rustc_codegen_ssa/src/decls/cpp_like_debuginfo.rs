@@ -4,4 +4,4 @@ macro_rules! cpp_like_debuginfo {
     };
 }
 
-cpp_like_debuginfo!()
+cpp_like_debuginfo!();

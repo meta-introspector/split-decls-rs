@@ -4,4 +4,4 @@ macro_rules! C_ENTRY {
     };
 }
 
-C_ENTRY!()
+C_ENTRY!();

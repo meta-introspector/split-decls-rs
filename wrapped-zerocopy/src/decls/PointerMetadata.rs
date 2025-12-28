@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DstLayout!();
         KnownLayout!();
+        DstLayout!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PointerMetadata {
     };
 }
 
-PointerMetadata!()
+PointerMetadata!();

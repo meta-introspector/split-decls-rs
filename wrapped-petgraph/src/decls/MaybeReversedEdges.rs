@@ -4,4 +4,4 @@ macro_rules! MaybeReversedEdges {
     };
 }
 
-MaybeReversedEdges!()
+MaybeReversedEdges!();

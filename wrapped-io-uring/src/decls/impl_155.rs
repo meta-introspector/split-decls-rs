@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Probe!();
         SubmitArgs!();
         Restriction!();
-        CancelBuilder!();
-        Parameters!();
-        Submitter!();
         Timespec!();
+        Parameters!();
+        Probe!();
+        CancelBuilder!();
+        Submitter!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

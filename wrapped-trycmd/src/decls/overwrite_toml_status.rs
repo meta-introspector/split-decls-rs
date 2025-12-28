@@ -4,4 +4,4 @@ macro_rules! overwrite_toml_status {
     };
 }
 
-overwrite_toml_status!()
+overwrite_toml_status!();

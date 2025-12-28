@@ -4,4 +4,4 @@ macro_rules! trim_whitespace_prefix {
     };
 }
 
-trim_whitespace_prefix!()
+trim_whitespace_prefix!();

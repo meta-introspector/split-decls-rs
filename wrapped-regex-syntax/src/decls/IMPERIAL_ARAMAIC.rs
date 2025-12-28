@@ -4,4 +4,4 @@ macro_rules! IMPERIAL_ARAMAIC {
     };
 }
 
-IMPERIAL_ARAMAIC!()
+IMPERIAL_ARAMAIC!();

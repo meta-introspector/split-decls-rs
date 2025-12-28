@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_ERR_PROTO {
     };
 }
 
-NGHTTP2_ERR_PROTO!()
+NGHTTP2_ERR_PROTO!();

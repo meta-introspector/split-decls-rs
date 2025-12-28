@@ -4,4 +4,4 @@ macro_rules! DOUBLE_POW5_TABLE {
     };
 }
 
-DOUBLE_POW5_TABLE!()
+DOUBLE_POW5_TABLE!();

@@ -13,4 +13,4 @@ macro_rules! map_ok {
     };
 }
 
-map_ok!()
+map_ok!();

@@ -4,4 +4,4 @@ macro_rules! listify {
     };
 }
 
-listify!()
+listify!();

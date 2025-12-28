@@ -4,4 +4,4 @@ macro_rules! EXPANDER_STACK_SIZE {
     };
 }
 
-EXPANDER_STACK_SIZE!()
+EXPANDER_STACK_SIZE!();

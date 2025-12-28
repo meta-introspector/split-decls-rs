@@ -4,4 +4,4 @@ macro_rules! representability_adt_ty {
     };
 }
 
-representability_adt_ty!()
+representability_adt_ty!();

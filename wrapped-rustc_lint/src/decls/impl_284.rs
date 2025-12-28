@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TypeIrTraitUsage!();
-        LateContext!();
-        NonGlobImportTypeIrInherent!();
         TypeIrInherentUsage!();
+        LateContext!();
         TypeIrDirectUse!();
+        TypeIrTraitUsage!();
+        NonGlobImportTypeIrInherent!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_284 {
     };
 }
 
-impl_284!()
+impl_284!();

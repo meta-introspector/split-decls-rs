@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
         Store!();
-        Arc!();
         Atomic!();
-        RwLock!();
-        VersionVec!();
         Condvar!();
-        Mutex!();
-        Notify!();
         Channel!();
+        VersionVec!();
+        Mutex!();
         Access!();
         Operation!();
+        RwLock!();
+        Arc!();
+        Notify!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

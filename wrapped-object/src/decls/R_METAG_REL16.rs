@@ -4,4 +4,4 @@ macro_rules! R_METAG_REL16 {
     };
 }
 
-R_METAG_REL16!()
+R_METAG_REL16!();

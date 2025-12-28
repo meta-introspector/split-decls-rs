@@ -4,4 +4,4 @@ macro_rules! missing_expression_with_not {
     };
 }
 
-missing_expression_with_not!()
+missing_expression_with_not!();

@@ -11,4 +11,4 @@ macro_rules! remove_all {
     };
 }
 
-remove_all!()
+remove_all!();

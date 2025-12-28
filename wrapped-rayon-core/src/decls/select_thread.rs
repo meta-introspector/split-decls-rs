@@ -4,4 +4,4 @@ macro_rules! select_thread {
     };
 }
 
-select_thread!()
+select_thread!();

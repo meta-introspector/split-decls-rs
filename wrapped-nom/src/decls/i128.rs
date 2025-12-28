@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Error!();
-        ParseError!();
-        Endianness!();
-        Streaming!();
-        Either!();
         Needed!();
+        Parser!();
         Input!();
+        Either!();
+        ParseError!();
+        Error!();
+        Streaming!();
+        Endianness!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! i128 {
     };
 }
 
-i128!()
+i128!();

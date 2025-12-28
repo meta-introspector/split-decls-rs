@@ -4,4 +4,4 @@ macro_rules! LockState {
     };
 }
 
-LockState!()
+LockState!();

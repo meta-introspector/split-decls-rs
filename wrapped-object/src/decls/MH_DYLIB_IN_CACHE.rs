@@ -4,4 +4,4 @@ macro_rules! MH_DYLIB_IN_CACHE {
     };
 }
 
-MH_DYLIB_IN_CACHE!()
+MH_DYLIB_IN_CACHE!();

@@ -4,4 +4,4 @@ macro_rules! CargoInfoTrait {
     };
 }
 
-CargoInfoTrait!()
+CargoInfoTrait!();

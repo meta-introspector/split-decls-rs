@@ -11,4 +11,4 @@ macro_rules! HKEY_LOCAL_MACHINE {
     };
 }
 
-HKEY_LOCAL_MACHINE!()
+HKEY_LOCAL_MACHINE!();

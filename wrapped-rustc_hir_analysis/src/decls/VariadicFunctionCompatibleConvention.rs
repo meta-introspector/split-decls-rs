@@ -4,4 +4,4 @@ macro_rules! VariadicFunctionCompatibleConvention {
     };
 }
 
-VariadicFunctionCompatibleConvention!()
+VariadicFunctionCompatibleConvention!();

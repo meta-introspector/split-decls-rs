@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SuspiciousDoubleRefDerefDiag!();
+        LateContext!();
         SuspiciousDoubleRefCloneDiag!();
         NoopMethodCallDiag!();
-        LateContext!();
+        SuspiciousDoubleRefDerefDiag!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_714 {
     };
 }
 
-impl_714!()
+impl_714!();

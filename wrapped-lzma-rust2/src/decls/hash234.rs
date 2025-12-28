@@ -4,4 +4,4 @@ macro_rules! hash234 {
     };
 }
 
-hash234!()
+hash234!();

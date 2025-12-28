@@ -11,4 +11,4 @@ macro_rules! gcg_to_packed_u16 {
     };
 }
 
-gcg_to_packed_u16!()
+gcg_to_packed_u16!();

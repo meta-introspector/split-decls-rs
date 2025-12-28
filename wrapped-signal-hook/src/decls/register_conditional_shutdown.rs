@@ -4,4 +4,4 @@ macro_rules! register_conditional_shutdown {
     };
 }
 
-register_conditional_shutdown!()
+register_conditional_shutdown!();

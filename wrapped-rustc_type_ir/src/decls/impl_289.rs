@@ -1,32 +1,32 @@
 macro_rules! deps {
     () => {
-        GenericArgKind!();
-        Binder!();
-        PredicateKind!();
-        HostEffectPredicate!();
-        OutlivesPredicate!();
-        TermKind!();
-        NormalizesTo!();
-        Const!();
-        ExistentialPredicate!();
-        ClauseKind!();
-        SubtypePredicate!();
-        ProjectionPredicate!();
-        Interner!();
         Region!();
-        ExistentialProjection!();
-        FlagComputation!();
-        Clause!();
         Tys!();
-        AliasTy!();
-        CoercePredicate!();
-        Ty!();
+        GenericArgKind!();
+        Interner!();
         AliasTerm!();
+        HostEffectPredicate!();
+        NormalizesTo!();
+        ProjectionPredicate!();
+        TermKind!();
+        Clause!();
+        CoercePredicate!();
+        OutlivesPredicate!();
         Term!();
-        GenericArg!();
-        InferConst!();
-        TyKind!();
         ConstKind!();
+        TyKind!();
+        SubtypePredicate!();
+        Ty!();
+        ExistentialProjection!();
+        InferConst!();
+        FlagComputation!();
+        PredicateKind!();
+        AliasTy!();
+        Const!();
+        ClauseKind!();
+        GenericArg!();
+        Binder!();
+        ExistentialPredicate!();
     };
 }
 
@@ -37,4 +37,4 @@ macro_rules! impl_289 {
     };
 }
 
-impl_289!()
+impl_289!();

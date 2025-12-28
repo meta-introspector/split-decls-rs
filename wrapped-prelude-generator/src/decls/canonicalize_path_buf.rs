@@ -4,4 +4,4 @@ macro_rules! canonicalize_path_buf {
     };
 }
 
-canonicalize_path_buf!()
+canonicalize_path_buf!();

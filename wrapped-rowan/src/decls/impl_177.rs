@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AstPtr!();
         AstNode!();
+        AstPtr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_177 {
     };
 }
 
-impl_177!()
+impl_177!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Message!();
-        WorkItem!();
         CachedModuleCodegen!();
         ExtraBackendMethods!();
+        WorkItem!();
+        Message!();
         Coordinator!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! submit_post_lto_module_to_llvm {
     };
 }
 
-submit_post_lto_module_to_llvm!()
+submit_post_lto_module_to_llvm!();

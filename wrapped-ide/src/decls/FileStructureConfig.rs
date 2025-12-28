@@ -4,4 +4,4 @@ macro_rules! FileStructureConfig {
     };
 }
 
-FileStructureConfig!()
+FileStructureConfig!();

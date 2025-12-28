@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TINFLStatus!();
         DecompressError!();
+        TINFLStatus!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

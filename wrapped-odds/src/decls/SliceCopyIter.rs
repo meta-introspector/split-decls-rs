@@ -4,4 +4,4 @@ macro_rules! SliceCopyIter {
     };
 }
 
-SliceCopyIter!()
+SliceCopyIter!();

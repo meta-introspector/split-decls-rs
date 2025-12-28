@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CrateNum!();
-        BridgeTys!();
         RustcInternal!();
+        BridgeTys!();
         InternalCx!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

@@ -11,4 +11,4 @@ macro_rules! InitializingTypeWithUnsafeFieldRequiresUnsafeUnsafeOpInUnsafeFnAllo
     };
 }
 
-InitializingTypeWithUnsafeFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!()
+InitializingTypeWithUnsafeFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();

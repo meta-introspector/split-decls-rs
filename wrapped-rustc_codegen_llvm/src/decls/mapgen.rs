@@ -4,4 +4,4 @@ macro_rules! mapgen {
     };
 }
 
-mapgen!()
+mapgen!();

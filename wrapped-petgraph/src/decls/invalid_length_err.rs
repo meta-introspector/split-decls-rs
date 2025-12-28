@@ -11,4 +11,4 @@ macro_rules! invalid_length_err {
     };
 }
 
-invalid_length_err!()
+invalid_length_err!();

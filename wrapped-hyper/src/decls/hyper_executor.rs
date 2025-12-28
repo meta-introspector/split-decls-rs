@@ -12,4 +12,4 @@ macro_rules! hyper_executor {
     };
 }
 
-hyper_executor!()
+hyper_executor!();

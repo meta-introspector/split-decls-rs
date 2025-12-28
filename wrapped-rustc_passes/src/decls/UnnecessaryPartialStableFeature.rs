@@ -4,4 +4,4 @@ macro_rules! UnnecessaryPartialStableFeature {
     };
 }
 
-UnnecessaryPartialStableFeature!()
+UnnecessaryPartialStableFeature!();

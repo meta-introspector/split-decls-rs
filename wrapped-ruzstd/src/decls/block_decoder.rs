@@ -4,4 +4,4 @@ macro_rules! block_decoder {
     };
 }
 
-block_decoder!()
+block_decoder!();

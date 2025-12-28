@@ -4,4 +4,4 @@ macro_rules! R_E2K_32_RELATIVE {
     };
 }
 
-R_E2K_32_RELATIVE!()
+R_E2K_32_RELATIVE!();

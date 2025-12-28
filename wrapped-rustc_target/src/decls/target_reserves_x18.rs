@@ -11,4 +11,4 @@ macro_rules! target_reserves_x18 {
     };
 }
 
-target_reserves_x18!()
+target_reserves_x18!();

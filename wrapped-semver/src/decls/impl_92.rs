@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        VersionReq!();
-        Comparator!();
         Error!();
+        Comparator!();
         Version!();
+        VersionReq!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_92 {
     };
 }
 
-impl_92!()
+impl_92!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Config!();
-        Slot!();
-        FreeList!();
         Local!();
+        FreeList!();
+        Slot!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

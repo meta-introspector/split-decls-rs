@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         CountLatchKind!();
-        LockLatch!();
-        WorkerThread!();
         CountLatch!();
         CoreLatch!();
+        LockLatch!();
+        WorkerThread!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

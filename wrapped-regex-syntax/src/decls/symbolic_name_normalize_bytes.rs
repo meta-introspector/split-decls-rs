@@ -4,4 +4,4 @@ macro_rules! symbolic_name_normalize_bytes {
     };
 }
 
-symbolic_name_normalize_bytes!()
+symbolic_name_normalize_bytes!();

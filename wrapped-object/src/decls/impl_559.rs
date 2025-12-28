@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        SegmentCommand32!();
-        Result!();
-        DysymtabCommand!();
-        Endian!();
-        LoadCommandVariant!();
-        Pod!();
-        Note!();
-        Dylib!();
-        LcStr!();
-        UuidCommand!();
-        DyldInfoCommand!();
         BuildVersionCommand!();
+        Pod!();
+        DyldInfoCommand!();
+        Endian!();
+        DysymtabCommand!();
+        SegmentCommand64!();
+        Dylib!();
+        LoadCommandVariant!();
+        LoadCommandData!();
         SymtabCommand!();
         DylibCommand!();
+        Note!();
         EntryPointCommand!();
-        SegmentCommand64!();
-        LoadCommandData!();
+        LcStr!();
+        SegmentCommand32!();
+        UuidCommand!();
+        Result!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_559 {
     };
 }
 
-impl_559!()
+impl_559!();

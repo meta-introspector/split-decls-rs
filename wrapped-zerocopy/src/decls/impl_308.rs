@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        KnownLayout!();
         SplitAt!();
         PointerMetadata!();
-        KnownLayout!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_308 {
     };
 }
 
-impl_308!()
+impl_308!();

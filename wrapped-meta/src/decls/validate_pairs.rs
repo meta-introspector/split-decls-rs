@@ -11,4 +11,4 @@ macro_rules! validate_pairs {
     };
 }
 
-validate_pairs!()
+validate_pairs!();

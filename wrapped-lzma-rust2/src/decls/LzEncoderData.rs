@@ -4,4 +4,4 @@ macro_rules! LzEncoderData {
     };
 }
 
-LzEncoderData!()
+LzEncoderData!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReadCacheOps!();
         ReadCache!();
+        ReadCacheOps!();
         ReadRef!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ReadCacheRange {
     };
 }
 
-ReadCacheRange!()
+ReadCacheRange!();

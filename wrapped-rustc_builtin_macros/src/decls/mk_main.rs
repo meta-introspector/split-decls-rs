@@ -12,4 +12,4 @@ macro_rules! mk_main {
     };
 }
 
-mk_main!()
+mk_main!();

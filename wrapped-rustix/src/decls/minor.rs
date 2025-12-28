@@ -4,4 +4,4 @@ macro_rules! minor {
     };
 }
 
-minor!()
+minor!();

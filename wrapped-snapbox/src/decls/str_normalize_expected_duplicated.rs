@@ -21,4 +21,4 @@ macro_rules! str_normalize_expected_duplicated {
     };
 }
 
-str_normalize_expected_duplicated!()
+str_normalize_expected_duplicated!();

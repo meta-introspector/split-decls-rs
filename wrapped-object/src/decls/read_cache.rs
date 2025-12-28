@@ -4,4 +4,4 @@ macro_rules! read_cache {
     };
 }
 
-read_cache!()
+read_cache!();

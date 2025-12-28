@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         And!();
-        B0!();
         B1!();
+        B0!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

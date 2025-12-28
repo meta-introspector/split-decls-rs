@@ -4,4 +4,4 @@ macro_rules! PR_SET_TIMERSLACK {
     };
 }
 
-PR_SET_TIMERSLACK!()
+PR_SET_TIMERSLACK!();

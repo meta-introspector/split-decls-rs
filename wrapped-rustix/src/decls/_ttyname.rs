@@ -11,4 +11,4 @@ macro_rules! _ttyname {
     };
 }
 
-_ttyname!()
+_ttyname!();

@@ -4,4 +4,4 @@ macro_rules! case_folding_simple {
     };
 }
 
-case_folding_simple!()
+case_folding_simple!();

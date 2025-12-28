@@ -4,4 +4,4 @@ macro_rules! SupertraitItemShadower {
     };
 }
 
-SupertraitItemShadower!()
+SupertraitItemShadower!();

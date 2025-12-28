@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MultiThreaded!();
-        UnboundColumnFamily!();
-        Options!();
-        TransactionDB!();
-        Error!();
-        CStrLike!();
         BoundColumnFamily!();
+        MultiThreaded!();
+        TransactionDB!();
+        CStrLike!();
+        Options!();
+        Error!();
+        UnboundColumnFamily!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_460 {
     };
 }
 
-impl_460!()
+impl_460!();

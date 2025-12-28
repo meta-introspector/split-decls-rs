@@ -4,4 +4,4 @@ macro_rules! LITUSE_ALPHA_BYTOFF {
     };
 }
 
-LITUSE_ALPHA_BYTOFF!()
+LITUSE_ALPHA_BYTOFF!();

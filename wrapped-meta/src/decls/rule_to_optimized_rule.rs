@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Rule!();
-        OptimizedExpr!();
-        Expr!();
         OptimizedRule!();
+        Rule!();
+        Expr!();
+        OptimizedExpr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! rule_to_optimized_rule {
     };
 }
 
-rule_to_optimized_rule!()
+rule_to_optimized_rule!();

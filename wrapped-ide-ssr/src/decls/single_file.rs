@@ -4,4 +4,4 @@ macro_rules! single_file {
     };
 }
 
-single_file!()
+single_file!();

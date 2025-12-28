@@ -4,4 +4,4 @@ macro_rules! cargo_workspace {
     };
 }
 
-cargo_workspace!()
+cargo_workspace!();

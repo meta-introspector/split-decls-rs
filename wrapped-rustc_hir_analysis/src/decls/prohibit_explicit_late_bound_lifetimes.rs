@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericArgPosition!();
         HirTyLowerer!();
+        GenericArgPosition!();
         ExplicitLateBound!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! prohibit_explicit_late_bound_lifetimes {
     };
 }
 
-prohibit_explicit_late_bound_lifetimes!()
+prohibit_explicit_late_bound_lifetimes!();

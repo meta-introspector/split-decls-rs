@@ -4,4 +4,4 @@ macro_rules! kernel_sigset {
     };
 }
 
-kernel_sigset!()
+kernel_sigset!();

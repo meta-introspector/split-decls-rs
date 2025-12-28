@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ImplTraitPosition!();
         LoweringContext!();
         ImplTraitContext!();
+        ImplTraitPosition!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

@@ -4,4 +4,4 @@ macro_rules! ConstraintSccs {
     };
 }
 
-ConstraintSccs!()
+ConstraintSccs!();

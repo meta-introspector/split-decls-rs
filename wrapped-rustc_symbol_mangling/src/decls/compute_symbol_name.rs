@@ -4,4 +4,4 @@ macro_rules! compute_symbol_name {
     };
 }
 
-compute_symbol_name!()
+compute_symbol_name!();

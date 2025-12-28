@@ -39,4 +39,4 @@ represents the actual structure of the Rust compiler.
     };
 }
 
-prove_eigenvalues_impl!()
+prove_eigenvalues_impl!();

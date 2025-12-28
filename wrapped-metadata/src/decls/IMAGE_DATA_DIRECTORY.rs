@@ -4,4 +4,4 @@ macro_rules! IMAGE_DATA_DIRECTORY {
     };
 }
 
-IMAGE_DATA_DIRECTORY!()
+IMAGE_DATA_DIRECTORY!();

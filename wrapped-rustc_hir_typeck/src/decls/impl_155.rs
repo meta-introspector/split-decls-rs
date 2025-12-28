@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        RegisterTypeUnstable!();
         Error!();
         InlineAsmCtxt!();
-        FnCtxt!();
         NonAsmTypeReason!();
-        RegisterTypeUnstable!();
+        FnCtxt!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

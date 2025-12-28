@@ -4,4 +4,4 @@ macro_rules! HUFF_CODES_TABLE {
     };
 }
 
-HUFF_CODES_TABLE!()
+HUFF_CODES_TABLE!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Create!();
         VisitMap!();
+        Create!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_105 {
     };
 }
 
-macro_105!()
+macro_105!();

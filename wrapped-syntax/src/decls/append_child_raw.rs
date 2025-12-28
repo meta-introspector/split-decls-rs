@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Element!();
         Position!();
         SyntaxNode!();
-        Element!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! append_child_raw {
     };
 }
 
-append_child_raw!()
+append_child_raw!();

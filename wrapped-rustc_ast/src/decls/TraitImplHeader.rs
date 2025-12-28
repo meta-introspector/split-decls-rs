@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        TraitRef!();
+        Safety!();
         Defaultness!();
         Const!();
         ImplPolarity!();
-        Safety!();
-        TraitRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! TraitImplHeader {
     };
 }
 
-TraitImplHeader!()
+TraitImplHeader!();

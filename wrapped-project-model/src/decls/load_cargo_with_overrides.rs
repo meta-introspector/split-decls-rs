@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CfgOverrides!();
         ProjectWorkspace!();
+        CfgOverrides!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! load_cargo_with_overrides {
     };
 }
 
-load_cargo_with_overrides!()
+load_cargo_with_overrides!();

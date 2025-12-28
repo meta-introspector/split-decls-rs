@@ -11,4 +11,4 @@ macro_rules! do_packed_search {
     };
 }
 
-do_packed_search!()
+do_packed_search!();

@@ -11,4 +11,4 @@ macro_rules! check_static_inhabited {
     };
 }
 
-check_static_inhabited!()
+check_static_inhabited!();

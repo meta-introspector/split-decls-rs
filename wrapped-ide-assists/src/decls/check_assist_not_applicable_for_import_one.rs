@@ -11,4 +11,4 @@ macro_rules! check_assist_not_applicable_for_import_one {
     };
 }
 
-check_assist_not_applicable_for_import_one!()
+check_assist_not_applicable_for_import_one!();

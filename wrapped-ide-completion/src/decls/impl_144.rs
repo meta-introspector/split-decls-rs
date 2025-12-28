@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        CompletionRelevance!();
+        CompletionRelevanceReturnType!();
         CompletionRelevanceTypeMatch!();
         CompletionRelevancePostfixMatch!();
-        CompletionRelevanceReturnType!();
+        CompletionRelevance!();
+        Builder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

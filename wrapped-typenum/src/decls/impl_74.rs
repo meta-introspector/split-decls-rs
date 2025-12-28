@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Unsigned!();
         NonZero!();
-        PInt!();
         NInt!();
+        PInt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_74 {
     };
 }
 
-impl_74!()
+impl_74!();

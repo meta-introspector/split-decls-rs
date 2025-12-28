@@ -4,4 +4,4 @@ macro_rules! CHUNK_BITS {
     };
 }
 
-CHUNK_BITS!()
+CHUNK_BITS!();

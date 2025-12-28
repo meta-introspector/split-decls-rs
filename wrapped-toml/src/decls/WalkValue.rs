@@ -4,4 +4,4 @@ macro_rules! WalkValue {
     };
 }
 
-WalkValue!()
+WalkValue!();

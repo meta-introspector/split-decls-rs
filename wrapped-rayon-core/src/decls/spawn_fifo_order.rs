@@ -4,4 +4,4 @@ macro_rules! spawn_fifo_order {
     };
 }
 
-spawn_fifo_order!()
+spawn_fifo_order!();

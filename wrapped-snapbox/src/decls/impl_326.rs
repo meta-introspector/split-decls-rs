@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         NormalizeRedactions!();
-        Data!();
-        Filter!();
-        DataInner!();
         Error!();
+        Data!();
+        DataInner!();
+        Filter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_326 {
     };
 }
 
-impl_326!()
+impl_326!();

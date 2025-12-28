@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        AcceptContext!();
-        SoftNoArgs!();
-        InvalidIssueString!();
-        NonIdentFeature!();
-        ArgParser!();
-        MissingFeature!();
-        UnsupportedLiteral!();
-        MissingIssue!();
-        Stage!();
         UnsupportedLiteralReason!();
         UnknownMetaItem!();
+        MissingIssue!();
+        Stage!();
+        NonIdentFeature!();
+        SoftNoArgs!();
+        ArgParser!();
         InvalidIssueStringCause!();
+        InvalidIssueString!();
+        MissingFeature!();
+        UnsupportedLiteral!();
+        AcceptContext!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! parse_unstability {
     };
 }
 
-parse_unstability!()
+parse_unstability!();

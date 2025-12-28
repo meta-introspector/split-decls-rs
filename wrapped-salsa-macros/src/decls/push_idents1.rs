@@ -4,4 +4,4 @@ macro_rules! push_idents1 {
     };
 }
 
-push_idents1!()
+push_idents1!();

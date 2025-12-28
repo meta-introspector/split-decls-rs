@@ -4,4 +4,4 @@ macro_rules! DeeplyNormalizeQuery {
     };
 }
 
-DeeplyNormalizeQuery!()
+DeeplyNormalizeQuery!();

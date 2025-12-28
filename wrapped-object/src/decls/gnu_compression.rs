@@ -4,4 +4,4 @@ macro_rules! gnu_compression {
     };
 }
 
-gnu_compression!()
+gnu_compression!();

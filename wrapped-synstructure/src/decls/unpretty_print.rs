@@ -4,4 +4,4 @@ macro_rules! unpretty_print {
     };
 }
 
-unpretty_print!()
+unpretty_print!();

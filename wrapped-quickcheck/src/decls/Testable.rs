@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Gen!();
         TestResult!();
+        Gen!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Testable {
     };
 }
 
-Testable!()
+Testable!();

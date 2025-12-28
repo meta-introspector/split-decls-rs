@@ -11,4 +11,4 @@ macro_rules! debuginfo_locals {
     };
 }
 
-debuginfo_locals!()
+debuginfo_locals!();

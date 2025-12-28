@@ -13,4 +13,4 @@ macro_rules! configure_main {
     };
 }
 
-configure_main!()
+configure_main!();

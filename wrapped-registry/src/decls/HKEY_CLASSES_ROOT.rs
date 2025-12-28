@@ -11,4 +11,4 @@ macro_rules! HKEY_CLASSES_ROOT {
     };
 }
 
-HKEY_CLASSES_ROOT!()
+HKEY_CLASSES_ROOT!();

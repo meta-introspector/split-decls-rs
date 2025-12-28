@@ -4,4 +4,4 @@ macro_rules! add_method_to_adt {
     };
 }
 
-add_method_to_adt!()
+add_method_to_adt!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LocalizedOutlivesConstraintSet!();
-        LocalizedNode!();
         LocalizedConstraintGraph!();
+        LocalizedNode!();
         OutlivesConstraint!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_292 {
     };
 }
 
-impl_292!()
+impl_292!();

@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
-        Section!();
-        Error!();
-        Table!();
-        SymbolKind!();
-        Import!();
-        WasmFile!();
-        Export!();
-        Result!();
-        SectionId!();
-        ReadRef!();
-        SymbolFlags!();
-        SymbolScope!();
-        Version!();
-        SectionHeader!();
-        LocalFunctionKind!();
-        SymbolTable!();
         WasmSymbolInternal!();
-        File!();
-        SymbolSection!();
+        ReadRef!();
+        LocalFunctionKind!();
+        Table!();
         Dynamic!();
+        SymbolTable!();
+        SymbolFlags!();
+        Import!();
+        Export!();
+        SymbolKind!();
         SectionIndex!();
+        Error!();
+        Version!();
+        Result!();
+        SymbolScope!();
         Name!();
+        WasmFile!();
+        SectionHeader!();
+        File!();
+        Section!();
+        SymbolSection!();
+        SectionId!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_743 {
     };
 }
 
-impl_743!()
+impl_743!();

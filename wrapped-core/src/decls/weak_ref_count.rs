@@ -4,4 +4,4 @@ macro_rules! weak_ref_count {
     };
 }
 
-weak_ref_count!()
+weak_ref_count!();

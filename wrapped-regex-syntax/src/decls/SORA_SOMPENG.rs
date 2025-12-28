@@ -4,4 +4,4 @@ macro_rules! SORA_SOMPENG {
     };
 }
 
-SORA_SOMPENG!()
+SORA_SOMPENG!();

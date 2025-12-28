@@ -4,4 +4,4 @@ macro_rules! OwnedPcwstr {
     };
 }
 
-OwnedPcwstr!()
+OwnedPcwstr!();

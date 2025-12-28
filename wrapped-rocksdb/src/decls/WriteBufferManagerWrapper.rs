@@ -4,4 +4,4 @@ macro_rules! WriteBufferManagerWrapper {
     };
 }
 
-WriteBufferManagerWrapper!()
+WriteBufferManagerWrapper!();

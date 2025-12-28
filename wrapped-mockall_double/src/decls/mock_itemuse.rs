@@ -4,4 +4,4 @@ macro_rules! mock_itemuse {
     };
 }
 
-mock_itemuse!()
+mock_itemuse!();

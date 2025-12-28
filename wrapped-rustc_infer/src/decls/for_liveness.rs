@@ -4,4 +4,4 @@ macro_rules! for_liveness {
     };
 }
 
-for_liveness!()
+for_liveness!();

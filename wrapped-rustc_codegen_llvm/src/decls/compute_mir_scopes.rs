@@ -11,4 +11,4 @@ macro_rules! compute_mir_scopes {
     };
 }
 
-compute_mir_scopes!()
+compute_mir_scopes!();

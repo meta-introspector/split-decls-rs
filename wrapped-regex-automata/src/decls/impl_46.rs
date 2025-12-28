@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        DeserializeError!();
         SerializeError!();
         Endian!();
         DFA!();
-        Flags!();
-        DeserializeError!();
         NFA!();
+        Flags!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

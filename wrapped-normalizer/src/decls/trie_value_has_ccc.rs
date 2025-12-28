@@ -4,4 +4,4 @@ macro_rules! trie_value_has_ccc {
     };
 }
 
-trie_value_has_ccc!()
+trie_value_has_ccc!();

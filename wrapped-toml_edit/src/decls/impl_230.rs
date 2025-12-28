@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Key!();
-        Table!();
         Item!();
+        Table!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_230 {
     };
 }
 
-impl_230!()
+impl_230!();

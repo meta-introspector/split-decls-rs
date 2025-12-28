@@ -4,4 +4,4 @@ macro_rules! R_MIPS_JALR {
     };
 }
 
-R_MIPS_JALR!()
+R_MIPS_JALR!();

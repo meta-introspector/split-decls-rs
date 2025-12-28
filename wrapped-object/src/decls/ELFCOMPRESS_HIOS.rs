@@ -4,4 +4,4 @@ macro_rules! ELFCOMPRESS_HIOS {
     };
 }
 
-ELFCOMPRESS_HIOS!()
+ELFCOMPRESS_HIOS!();

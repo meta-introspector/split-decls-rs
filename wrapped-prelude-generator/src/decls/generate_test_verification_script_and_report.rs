@@ -11,4 +11,4 @@ macro_rules! generate_test_verification_script_and_report {
     };
 }
 
-generate_test_verification_script_and_report!()
+generate_test_verification_script_and_report!();

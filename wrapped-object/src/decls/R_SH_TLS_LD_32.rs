@@ -4,4 +4,4 @@ macro_rules! R_SH_TLS_LD_32 {
     };
 }
 
-R_SH_TLS_LD_32!()
+R_SH_TLS_LD_32!();

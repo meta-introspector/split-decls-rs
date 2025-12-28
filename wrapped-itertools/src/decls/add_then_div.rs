@@ -4,4 +4,4 @@ macro_rules! add_then_div {
     };
 }
 
-add_then_div!()
+add_then_div!();

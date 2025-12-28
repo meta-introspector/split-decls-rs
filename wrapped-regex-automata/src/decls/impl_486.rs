@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Captures!();
-        NFA!();
         BuildErrorKind!();
+        NFA!();
         BuildError!();
+        Captures!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_486 {
     };
 }
 
-impl_486!()
+impl_486!();

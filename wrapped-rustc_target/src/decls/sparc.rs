@@ -4,4 +4,4 @@ macro_rules! sparc {
     };
 }
 
-sparc!()
+sparc!();

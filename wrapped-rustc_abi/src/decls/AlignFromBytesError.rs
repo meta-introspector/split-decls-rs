@@ -4,4 +4,4 @@ macro_rules! AlignFromBytesError {
     };
 }
 
-AlignFromBytesError!()
+AlignFromBytesError!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TestGraph!();
         Sccs!();
+        TestGraph!();
         Maxes!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! test_bug_minimised {
     };
 }
 
-test_bug_minimised!()
+test_bug_minimised!();

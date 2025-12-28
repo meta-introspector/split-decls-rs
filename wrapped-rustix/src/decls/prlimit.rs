@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Rlimit!();
         Pid!();
         Result!();
+        Rlimit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! prlimit {
     };
 }
 
-prlimit!()
+prlimit!();

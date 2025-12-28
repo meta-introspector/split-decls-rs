@@ -4,4 +4,4 @@ macro_rules! db_options {
     };
 }
 
-db_options!()
+db_options!();

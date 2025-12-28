@@ -4,4 +4,4 @@ macro_rules! NonConstFnCall {
     };
 }
 
-NonConstFnCall!()
+NonConstFnCall!();

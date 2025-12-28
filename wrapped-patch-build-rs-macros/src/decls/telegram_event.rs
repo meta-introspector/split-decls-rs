@@ -4,4 +4,4 @@ macro_rules! telegram_event {
     };
 }
 
-telegram_event!()
+telegram_event!();

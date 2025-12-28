@@ -4,4 +4,4 @@ macro_rules! SerializeMetadata {
     };
 }
 
-SerializeMetadata!()
+SerializeMetadata!();

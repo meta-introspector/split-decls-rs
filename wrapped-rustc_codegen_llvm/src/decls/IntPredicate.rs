@@ -4,4 +4,4 @@ macro_rules! IntPredicate {
     };
 }
 
-IntPredicate!()
+IntPredicate!();

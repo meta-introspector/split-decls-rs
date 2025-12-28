@@ -14,4 +14,4 @@ macro_rules! FunAux64 {
     };
 }
 
-FunAux64!()
+FunAux64!();

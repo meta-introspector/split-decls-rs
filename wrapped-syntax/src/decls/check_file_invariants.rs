@@ -4,4 +4,4 @@ macro_rules! check_file_invariants {
     };
 }
 
-check_file_invariants!()
+check_file_invariants!();

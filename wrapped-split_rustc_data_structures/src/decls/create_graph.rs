@@ -11,4 +11,4 @@ macro_rules! create_graph {
     };
 }
 
-create_graph!()
+create_graph!();

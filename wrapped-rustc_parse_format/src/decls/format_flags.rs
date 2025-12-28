@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Sign!();
         Argument!();
+        Sign!();
         FormatSpec!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! format_flags {
     };
 }
 
-format_flags!()
+format_flags!();

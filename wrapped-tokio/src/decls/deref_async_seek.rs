@@ -4,4 +4,4 @@ macro_rules! deref_async_seek {
     };
 }
 
-deref_async_seek!()
+deref_async_seek!();

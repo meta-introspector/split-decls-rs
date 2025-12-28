@@ -4,4 +4,4 @@ macro_rules! rewrite_intra_doc_link {
     };
 }
 
-rewrite_intra_doc_link!()
+rewrite_intra_doc_link!();

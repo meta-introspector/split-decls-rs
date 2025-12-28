@@ -12,4 +12,4 @@ macro_rules! map_inner_option_mut {
     };
 }
 
-map_inner_option_mut!()
+map_inner_option_mut!();

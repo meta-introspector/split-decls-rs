@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        BitSetExt!();
+        PeekBitNotSet!();
         LookupResult!();
         HasMoveData!();
-        PeekBitNotSet!();
+        BitSetExt!();
         PeekCall!();
-        PeekArgumentUntracked!();
-        JoinSemiLattice!();
         RustcPeekAt!();
+        JoinSemiLattice!();
+        PeekArgumentUntracked!();
         Analysis!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_230 {
     };
 }
 
-impl_230!()
+impl_230!();

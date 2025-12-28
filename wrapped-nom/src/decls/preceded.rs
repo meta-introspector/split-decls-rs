@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Preceded!();
         ParseError!();
-        Needed!();
         Parser!();
         Error!();
+        Preceded!();
+        Needed!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! preceded {
     };
 }
 
-preceded!()
+preceded!();

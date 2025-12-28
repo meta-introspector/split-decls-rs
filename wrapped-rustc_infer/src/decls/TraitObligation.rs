@@ -11,4 +11,4 @@ macro_rules! TraitObligation {
     };
 }
 
-TraitObligation!()
+TraitObligation!();

@@ -4,4 +4,4 @@ macro_rules! SHARD_BITS {
     };
 }
 
-SHARD_BITS!()
+SHARD_BITS!();

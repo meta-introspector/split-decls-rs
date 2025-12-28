@@ -11,4 +11,4 @@ macro_rules! replace_receiver {
     };
 }
 
-replace_receiver!()
+replace_receiver!();

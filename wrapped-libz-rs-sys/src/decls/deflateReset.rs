@@ -4,4 +4,4 @@ macro_rules! deflateReset {
     };
 }
 
-deflateReset!()
+deflateReset!();

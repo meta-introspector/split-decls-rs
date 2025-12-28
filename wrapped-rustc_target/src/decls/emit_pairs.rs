@@ -4,4 +4,4 @@ macro_rules! emit_pairs {
     };
 }
 
-emit_pairs!()
+emit_pairs!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Slot!();
         Config!();
         DefaultConfig!();
-        Slot!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InitGuard {
     };
 }
 
-InitGuard!()
+InitGuard!();

@@ -4,4 +4,4 @@ macro_rules! remove_links {
     };
 }
 
-remove_links!()
+remove_links!();

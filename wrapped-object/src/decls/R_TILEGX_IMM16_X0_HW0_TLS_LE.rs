@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_IMM16_X0_HW0_TLS_LE {
     };
 }
 
-R_TILEGX_IMM16_X0_HW0_TLS_LE!()
+R_TILEGX_IMM16_X0_HW0_TLS_LE!();

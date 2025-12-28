@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Folder!();
         Reducer!();
-        NoopReducer!();
         NoopConsumer!();
+        NoopReducer!();
         Consumer!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_725 {
     };
 }
 
-impl_725!()
+impl_725!();

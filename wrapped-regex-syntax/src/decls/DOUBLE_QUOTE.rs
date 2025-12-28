@@ -4,4 +4,4 @@ macro_rules! DOUBLE_QUOTE {
     };
 }
 
-DOUBLE_QUOTE!()
+DOUBLE_QUOTE!();

@@ -4,4 +4,4 @@ macro_rules! normalize_canonicalized_inherent_projection_ty {
     };
 }
 
-normalize_canonicalized_inherent_projection_ty!()
+normalize_canonicalized_inherent_projection_ty!();

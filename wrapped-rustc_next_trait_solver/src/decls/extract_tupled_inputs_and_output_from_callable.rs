@@ -4,4 +4,4 @@ macro_rules! extract_tupled_inputs_and_output_from_callable {
     };
 }
 
-extract_tupled_inputs_and_output_from_callable!()
+extract_tupled_inputs_and_output_from_callable!();

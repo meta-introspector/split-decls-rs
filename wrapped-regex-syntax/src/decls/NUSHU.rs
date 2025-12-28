@@ -4,4 +4,4 @@ macro_rules! NUSHU {
     };
 }
 
-NUSHU!()
+NUSHU!();

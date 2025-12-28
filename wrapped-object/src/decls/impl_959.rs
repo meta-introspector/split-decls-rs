@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NoteHeader32!();
         U32!();
         StandardSection!();
-        BinaryFormat!();
         GnuProperty!();
+        BinaryFormat!();
         Object!();
+        NoteHeader32!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_959 {
     };
 }
 
-impl_959!()
+impl_959!();

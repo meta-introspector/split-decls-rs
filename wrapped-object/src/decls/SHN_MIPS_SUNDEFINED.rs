@@ -4,4 +4,4 @@ macro_rules! SHN_MIPS_SUNDEFINED {
     };
 }
 
-SHN_MIPS_SUNDEFINED!()
+SHN_MIPS_SUNDEFINED!();

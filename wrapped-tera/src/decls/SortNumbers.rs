@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OrderedF64!();
         SortPairs!();
+        OrderedF64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SortNumbers {
     };
 }
 
-SortNumbers!()
+SortNumbers!();

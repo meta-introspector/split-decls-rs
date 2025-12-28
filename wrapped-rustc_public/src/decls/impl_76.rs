@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        RustcInternal!();
-        BoundVariableKind!();
-        BoundRegionKind!();
-        InternalCx!();
-        BridgeTys!();
         Region!();
-        Ty!();
+        BoundVariableKind!();
+        BridgeTys!();
         BoundTyKind!();
+        Ty!();
+        BoundRegionKind!();
+        RustcInternal!();
+        InternalCx!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

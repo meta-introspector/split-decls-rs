@@ -4,4 +4,4 @@ macro_rules! set_math_builder_methods {
     };
 }
 
-set_math_builder_methods!()
+set_math_builder_methods!();

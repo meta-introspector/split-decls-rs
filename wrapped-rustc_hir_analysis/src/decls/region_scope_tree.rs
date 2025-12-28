@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ScopeResolutionVisitor!();
         Context!();
+        ScopeResolutionVisitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! region_scope_tree {
     };
 }
 
-region_scope_tree!()
+region_scope_tree!();

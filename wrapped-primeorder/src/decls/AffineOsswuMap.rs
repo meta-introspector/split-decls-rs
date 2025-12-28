@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         AffinePoint!();
-        OsswuMap!();
         PrimeCurveParams!();
+        OsswuMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AffineOsswuMap {
     };
 }
 
-AffineOsswuMap!()
+AffineOsswuMap!();

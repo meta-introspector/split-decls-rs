@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        GenericBounds!();
+        Ty!();
         Term!();
         Walkable!();
         BoundKind!();
-        Ty!();
-        GenericBounds!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! AssocItemConstraintKind {
     };
 }
 
-AssocItemConstraintKind!()
+AssocItemConstraintKind!();

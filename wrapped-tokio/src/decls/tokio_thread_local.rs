@@ -4,4 +4,4 @@ macro_rules! tokio_thread_local {
     };
 }
 
-tokio_thread_local!()
+tokio_thread_local!();

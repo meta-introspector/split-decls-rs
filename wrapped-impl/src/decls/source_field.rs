@@ -12,4 +12,4 @@ macro_rules! source_field {
     };
 }
 
-source_field!()
+source_field!();

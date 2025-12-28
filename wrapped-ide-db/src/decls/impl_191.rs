@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        SnippetCap!();
-        TreeMutator!();
-        SnippetBuilder!();
         FileSystemEdit!();
-        AnnotationSnippet!();
-        TextEdit!();
         Snippet!();
-        SnippetEdit!();
+        SnippetBuilder!();
+        TextEdit!();
+        SnippetCap!();
         SourceChangeBuilder!();
         PlaceSnippet!();
-        SourceChange!();
+        SnippetEdit!();
+        AnnotationSnippet!();
+        TreeMutator!();
         Command!();
+        SourceChange!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_191 {
     };
 }
 
-impl_191!()
+impl_191!();

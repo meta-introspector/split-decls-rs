@@ -55,4 +55,4 @@ impl RustcSTARK {{
     };
 }
 
-stark_proof_impl!()
+stark_proof_impl!();

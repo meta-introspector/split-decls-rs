@@ -4,4 +4,4 @@ macro_rules! XMC_GL {
     };
 }
 
-XMC_GL!()
+XMC_GL!();

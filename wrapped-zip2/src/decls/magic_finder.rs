@@ -4,4 +4,4 @@ macro_rules! magic_finder {
     };
 }
 
-magic_finder!()
+magic_finder!();

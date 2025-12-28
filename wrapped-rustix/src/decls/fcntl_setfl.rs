@@ -11,4 +11,4 @@ macro_rules! fcntl_setfl {
     };
 }
 
-fcntl_setfl!()
+fcntl_setfl!();

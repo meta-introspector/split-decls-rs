@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_EBC_SECREL {
     };
 }
 
-IMAGE_REL_EBC_SECREL!()
+IMAGE_REL_EBC_SECREL!();

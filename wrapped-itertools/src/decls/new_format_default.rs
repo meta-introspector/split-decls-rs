@@ -11,4 +11,4 @@ macro_rules! new_format_default {
     };
 }
 
-new_format_default!()
+new_format_default!();

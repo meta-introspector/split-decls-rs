@@ -4,4 +4,4 @@ macro_rules! PROC_REAP_ACQUIRE {
     };
 }
 
-PROC_REAP_ACQUIRE!()
+PROC_REAP_ACQUIRE!();

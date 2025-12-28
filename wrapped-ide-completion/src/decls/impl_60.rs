@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CompletionRelevance!();
         CompletionItemRefMode!();
-        CompletionItem!();
-        Builder!();
         CompletionItemKind!();
+        Builder!();
+        CompletionRelevance!();
+        CompletionItem!();
         CompletionRelevanceTypeMatch!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_60 {
     };
 }
 
-impl_60!()
+impl_60!();

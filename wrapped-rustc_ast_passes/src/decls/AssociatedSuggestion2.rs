@@ -4,4 +4,4 @@ macro_rules! AssociatedSuggestion2 {
     };
 }
 
-AssociatedSuggestion2!()
+AssociatedSuggestion2!();

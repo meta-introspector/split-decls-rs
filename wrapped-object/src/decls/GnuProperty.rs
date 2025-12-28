@@ -4,4 +4,4 @@ macro_rules! GnuProperty {
     };
 }
 
-GnuProperty!()
+GnuProperty!();

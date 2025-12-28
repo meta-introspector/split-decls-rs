@@ -4,4 +4,4 @@ macro_rules! PT_HP_FASTBIND {
     };
 }
 
-PT_HP_FASTBIND!()
+PT_HP_FASTBIND!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DeferredOpaqueTypeError!();
-        RegionCtxt!();
         DefiningUse!();
+        RegionCtxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! collect_defining_uses {
     };
 }
 
-collect_defining_uses!()
+collect_defining_uses!();

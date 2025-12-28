@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HMODULE!();
+        FARPROC!();
         BOOL!();
         DWORD!();
+        HMODULE!();
         HANDLE!();
-        FARPROC!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! windows_imports {
     };
 }
 
-windows_imports!()
+windows_imports!();

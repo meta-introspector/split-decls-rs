@@ -4,4 +4,4 @@ macro_rules! ManualImplementation {
     };
 }
 
-ManualImplementation!()
+ManualImplementation!();

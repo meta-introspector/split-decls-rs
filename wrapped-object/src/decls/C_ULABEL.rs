@@ -4,4 +4,4 @@ macro_rules! C_ULABEL {
     };
 }
 
-C_ULABEL!()
+C_ULABEL!();

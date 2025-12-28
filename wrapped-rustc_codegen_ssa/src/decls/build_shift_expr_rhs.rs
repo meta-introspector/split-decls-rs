@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BuilderMethods!();
         TypeKind!();
+        BuilderMethods!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! build_shift_expr_rhs {
     };
 }
 
-build_shift_expr_rhs!()
+build_shift_expr_rhs!();

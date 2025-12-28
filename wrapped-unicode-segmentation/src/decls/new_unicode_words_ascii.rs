@@ -11,4 +11,4 @@ macro_rules! new_unicode_words_ascii {
     };
 }
 
-new_unicode_words_ascii!()
+new_unicode_words_ascii!();

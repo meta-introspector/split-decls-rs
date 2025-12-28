@@ -4,4 +4,4 @@ macro_rules! generate_arg_methods {
     };
 }
 
-generate_arg_methods!()
+generate_arg_methods!();

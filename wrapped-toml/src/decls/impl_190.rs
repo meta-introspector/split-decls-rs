@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        DeArray!();
+        IntoIter!();
         DeValue!();
         Iter!();
-        IntoIter!();
-        DeArray!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_190 {
     };
 }
 
-impl_190!()
+impl_190!();

@@ -4,4 +4,4 @@ macro_rules! cfg_not_coop {
     };
 }
 
-cfg_not_coop!()
+cfg_not_coop!();

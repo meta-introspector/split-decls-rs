@@ -4,4 +4,4 @@ macro_rules! LC_DYSYMTAB {
     };
 }
 
-LC_DYSYMTAB!()
+LC_DYSYMTAB!();

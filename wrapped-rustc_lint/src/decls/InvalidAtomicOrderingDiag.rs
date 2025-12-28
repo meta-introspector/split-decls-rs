@@ -4,4 +4,4 @@ macro_rules! InvalidAtomicOrderingDiag {
     };
 }
 
-InvalidAtomicOrderingDiag!()
+InvalidAtomicOrderingDiag!();

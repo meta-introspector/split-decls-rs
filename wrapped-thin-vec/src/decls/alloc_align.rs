@@ -11,4 +11,4 @@ macro_rules! alloc_align {
     };
 }
 
-alloc_align!()
+alloc_align!();

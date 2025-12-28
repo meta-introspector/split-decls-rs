@@ -4,4 +4,4 @@ macro_rules! ssa {
     };
 }
 
-ssa!()
+ssa!();

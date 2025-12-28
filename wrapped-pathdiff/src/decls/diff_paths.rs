@@ -4,4 +4,4 @@ macro_rules! diff_paths {
     };
 }
 
-diff_paths!()
+diff_paths!();

@@ -4,4 +4,4 @@ macro_rules! shr_odd_rounding {
     };
 }
 
-shr_odd_rounding!()
+shr_odd_rounding!();

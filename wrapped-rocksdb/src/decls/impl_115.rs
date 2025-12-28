@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Error!();
-        MultiThreaded!();
-        Options!();
-        UnboundColumnFamily!();
         BoundColumnFamily!();
         DBInner!();
+        Options!();
+        MultiThreaded!();
         DBCommon!();
+        Error!();
+        UnboundColumnFamily!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

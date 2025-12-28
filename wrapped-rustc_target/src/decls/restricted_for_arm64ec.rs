@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InlineAsmArch!();
         Target!();
+        InlineAsmArch!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! restricted_for_arm64ec {
     };
 }
 
-restricted_for_arm64ec!()
+restricted_for_arm64ec!();

@@ -4,4 +4,4 @@ macro_rules! R_LARCH_JUMP_SLOT {
     };
 }
 
-R_LARCH_JUMP_SLOT!()
+R_LARCH_JUMP_SLOT!();

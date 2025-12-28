@@ -4,4 +4,4 @@ macro_rules! ELFDATA2LSB {
     };
 }
 
-ELFDATA2LSB!()
+ELFDATA2LSB!();

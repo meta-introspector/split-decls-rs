@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Connection!();
-        Module!();
         VTab!();
-        Result!();
+        Module!();
         Name!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_585 {
     };
 }
 
-impl_585!()
+impl_585!();

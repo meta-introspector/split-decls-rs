@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NoS4!();
-        Vec4!();
         MultiLane!();
+        Vec4!();
+        NoS4!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

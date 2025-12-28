@@ -4,4 +4,4 @@ macro_rules! ReturnPositionImplTraitInTraitRefinedLifetimes {
     };
 }
 
-ReturnPositionImplTraitInTraitRefinedLifetimes!()
+ReturnPositionImplTraitInTraitRefinedLifetimes!();

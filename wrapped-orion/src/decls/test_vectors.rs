@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ChaCha20!();
-        U32x4!();
         UnknownCryptoError!();
+        U32x4!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_vectors {
     };
 }
 
-test_vectors!()
+test_vectors!();

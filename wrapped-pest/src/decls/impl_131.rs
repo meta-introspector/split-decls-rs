@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Op!();
         Affix!();
-        Assoc!();
+        Op!();
         RuleType!();
+        Assoc!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

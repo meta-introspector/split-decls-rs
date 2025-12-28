@@ -4,4 +4,4 @@ macro_rules! GNU_PROPERTY_HIUSER {
     };
 }
 
-GNU_PROPERTY_HIUSER!()
+GNU_PROPERTY_HIUSER!();

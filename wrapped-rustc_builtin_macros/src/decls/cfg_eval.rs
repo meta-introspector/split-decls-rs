@@ -4,4 +4,4 @@ macro_rules! cfg_eval {
     };
 }
 
-cfg_eval!()
+cfg_eval!();

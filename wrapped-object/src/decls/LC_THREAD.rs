@@ -4,4 +4,4 @@ macro_rules! LC_THREAD {
     };
 }
 
-LC_THREAD!()
+LC_THREAD!();

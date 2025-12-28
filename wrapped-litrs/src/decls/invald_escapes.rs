@@ -11,4 +11,4 @@ macro_rules! invald_escapes {
     };
 }
 
-invald_escapes!()
+invald_escapes!();

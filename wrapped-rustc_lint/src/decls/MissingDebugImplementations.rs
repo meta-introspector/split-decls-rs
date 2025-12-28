@@ -4,4 +4,4 @@ macro_rules! MissingDebugImplementations {
     };
 }
 
-MissingDebugImplementations!()
+MissingDebugImplementations!();

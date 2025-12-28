@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_MOVW_SABS_G1 {
     };
 }
 
-R_AARCH64_MOVW_SABS_G1!()
+R_AARCH64_MOVW_SABS_G1!();

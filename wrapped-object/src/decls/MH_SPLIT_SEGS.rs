@@ -4,4 +4,4 @@ macro_rules! MH_SPLIT_SEGS {
     };
 }
 
-MH_SPLIT_SEGS!()
+MH_SPLIT_SEGS!();

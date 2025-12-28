@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Token!();
         State!();
+        Token!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! token_to_string {
     };
 }
 
-token_to_string!()
+token_to_string!();

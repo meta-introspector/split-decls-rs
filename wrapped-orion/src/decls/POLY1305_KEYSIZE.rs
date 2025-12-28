@@ -11,4 +11,4 @@ macro_rules! POLY1305_KEYSIZE {
     };
 }
 
-POLY1305_KEYSIZE!()
+POLY1305_KEYSIZE!();

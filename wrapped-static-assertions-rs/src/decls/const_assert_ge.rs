@@ -4,4 +4,4 @@ macro_rules! const_assert_ge {
     };
 }
 
-const_assert_ge!()
+const_assert_ge!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        DefineOpaqueTypes!();
         LatticeOp!();
-        InferOk!();
-        Obligation!();
         LatticeOpKind!();
-        InferResult!();
-        TypeRelating!();
-        ToTrace!();
-        At!();
         TypeTrace!();
+        At!();
+        DefineOpaqueTypes!();
+        Obligation!();
+        TypeRelating!();
+        InferResult!();
+        InferOk!();
+        ToTrace!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

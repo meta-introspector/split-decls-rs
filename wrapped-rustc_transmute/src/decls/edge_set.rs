@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Byte!();
         State!();
+        Byte!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! edge_set {
     };
 }
 
-edge_set!()
+edge_set!();

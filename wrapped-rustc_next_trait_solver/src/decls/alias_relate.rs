@@ -4,4 +4,4 @@ macro_rules! alias_relate {
     };
 }
 
-alias_relate!()
+alias_relate!();

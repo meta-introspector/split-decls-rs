@@ -4,4 +4,4 @@ macro_rules! X3_TMPLT_SIGN_VAL_POS_X {
     };
 }
 
-X3_TMPLT_SIGN_VAL_POS_X!()
+X3_TMPLT_SIGN_VAL_POS_X!();

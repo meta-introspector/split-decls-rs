@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        LazyStateID!();
-        StartError!();
-        DFA!();
         Unit!();
-        StateSaver!();
-        NFA!();
-        Lazy!();
-        LazyRef!();
-        StateBuilderNFA!();
-        Anchored!();
-        StateBuilderEmpty!();
-        Cache!();
-        Start!();
-        CacheError!();
+        DFA!();
         State!();
+        StateBuilderNFA!();
+        Lazy!();
+        StartError!();
+        NFA!();
+        CacheError!();
+        LazyStateID!();
+        LazyRef!();
+        Cache!();
+        StateSaver!();
+        StateBuilderEmpty!();
+        Anchored!();
+        Start!();
     };
 }
 
@@ -44,4 +44,4 @@ macro_rules! impl_236 {
     };
 }
 
-impl_236!()
+impl_236!();

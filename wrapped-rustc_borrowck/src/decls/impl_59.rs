@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Borrows!();
         BorrowsDomain!();
+        Borrows!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

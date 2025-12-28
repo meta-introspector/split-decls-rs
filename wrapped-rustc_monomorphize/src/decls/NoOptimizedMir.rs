@@ -4,4 +4,4 @@ macro_rules! NoOptimizedMir {
     };
 }
 
-NoOptimizedMir!()
+NoOptimizedMir!();

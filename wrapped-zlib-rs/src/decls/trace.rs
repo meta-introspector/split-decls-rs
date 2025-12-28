@@ -4,4 +4,4 @@ macro_rules! trace {
     };
 }
 
-trace!()
+trace!();

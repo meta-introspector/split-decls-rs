@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NodeOrToken!();
-        SyntaxToken!();
         SyntaxNode!();
+        SyntaxToken!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SyntaxElement {
     };
 }
 
-SyntaxElement!()
+SyntaxElement!();

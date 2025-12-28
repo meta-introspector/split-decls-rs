@@ -4,4 +4,4 @@ macro_rules! frame_header {
     };
 }
 
-frame_header!()
+frame_header!();

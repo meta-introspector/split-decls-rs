@@ -4,4 +4,4 @@ macro_rules! sharded {
     };
 }
 
-sharded!()
+sharded!();

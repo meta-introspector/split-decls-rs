@@ -4,4 +4,4 @@ macro_rules! GetTimezoneError {
     };
 }
 
-GetTimezoneError!()
+GetTimezoneError!();

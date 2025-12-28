@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EdgeType!();
-        FromDeserialized!();
         EdgeProperty!();
+        FromDeserialized!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_634 {
     };
 }
 
-impl_634!()
+impl_634!();

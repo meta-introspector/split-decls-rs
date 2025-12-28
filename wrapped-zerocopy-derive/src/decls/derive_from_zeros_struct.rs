@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FieldBounds!();
-        Trait!();
         ImplBlockBuilder!();
+        Trait!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! derive_from_zeros_struct {
     };
 }
 
-derive_from_zeros_struct!()
+derive_from_zeros_struct!();

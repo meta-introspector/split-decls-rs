@@ -28,4 +28,4 @@ macro_rules! left_aligned_text {
     };
 }
 
-left_aligned_text!()
+left_aligned_text!();

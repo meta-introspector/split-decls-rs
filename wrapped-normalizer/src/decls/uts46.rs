@@ -4,4 +4,4 @@ macro_rules! uts46 {
     };
 }
 
-uts46!()
+uts46!();

@@ -4,4 +4,4 @@ macro_rules! unicode_word_ok {
     };
 }
 
-unicode_word_ok!()
+unicode_word_ok!();

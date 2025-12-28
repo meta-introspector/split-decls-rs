@@ -4,4 +4,4 @@ macro_rules! R_SHARC_DATA6_V3 {
     };
 }
 
-R_SHARC_DATA6_V3!()
+R_SHARC_DATA6_V3!();

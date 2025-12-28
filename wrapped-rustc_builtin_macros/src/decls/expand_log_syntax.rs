@@ -4,4 +4,4 @@ macro_rules! expand_log_syntax {
     };
 }
 
-expand_log_syntax!()
+expand_log_syntax!();

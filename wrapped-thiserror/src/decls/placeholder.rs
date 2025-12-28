@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AsDisplay!();
         Sealed!();
+        AsDisplay!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! placeholder {
     };
 }
 
-placeholder!()
+placeholder!();

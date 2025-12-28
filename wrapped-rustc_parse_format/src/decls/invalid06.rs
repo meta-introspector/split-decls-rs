@@ -4,4 +4,4 @@ macro_rules! invalid06 {
     };
 }
 
-invalid06!()
+invalid06!();

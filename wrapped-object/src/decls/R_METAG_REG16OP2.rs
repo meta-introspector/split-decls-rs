@@ -4,4 +4,4 @@ macro_rules! R_METAG_REG16OP2 {
     };
 }
 
-R_METAG_REG16OP2!()
+R_METAG_REG16OP2!();

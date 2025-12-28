@@ -11,4 +11,4 @@ macro_rules! tables_equal {
     };
 }
 
-tables_equal!()
+tables_equal!();

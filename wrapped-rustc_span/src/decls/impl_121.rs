@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LocalDefId!();
-        SpanDecoder!();
         DefId!();
+        SpanDecoder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_121 {
     };
 }
 
-impl_121!()
+impl_121!();

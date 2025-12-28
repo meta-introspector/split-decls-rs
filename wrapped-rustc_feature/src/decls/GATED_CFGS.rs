@@ -12,4 +12,4 @@ macro_rules! GATED_CFGS {
     };
 }
 
-GATED_CFGS!()
+GATED_CFGS!();

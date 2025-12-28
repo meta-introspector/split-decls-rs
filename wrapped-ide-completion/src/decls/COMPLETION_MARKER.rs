@@ -4,4 +4,4 @@ macro_rules! COMPLETION_MARKER {
     };
 }
 
-COMPLETION_MARKER!()
+COMPLETION_MARKER!();

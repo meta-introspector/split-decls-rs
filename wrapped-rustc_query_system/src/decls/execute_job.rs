@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        QueryInfo!();
-        JobOwner!();
+        DepNode!();
         QueryJobId!();
-        QueryContext!();
         Value!();
+        QueryInfo!();
         QueryState!();
         QueryConfig!();
-        DepNode!();
+        JobOwner!();
+        QueryContext!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! execute_job {
     };
 }
 
-execute_job!()
+execute_job!();

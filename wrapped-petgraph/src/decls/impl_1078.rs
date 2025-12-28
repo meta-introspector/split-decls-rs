@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Undirected!();
         EdgeType!();
+        Undirected!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1078 {
     };
 }
 
-impl_1078!()
+impl_1078!();

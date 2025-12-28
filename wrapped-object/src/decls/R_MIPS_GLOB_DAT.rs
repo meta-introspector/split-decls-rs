@@ -4,4 +4,4 @@ macro_rules! R_MIPS_GLOB_DAT {
     };
 }
 
-R_MIPS_GLOB_DAT!()
+R_MIPS_GLOB_DAT!();

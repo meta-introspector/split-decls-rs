@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_AM_FUNCINFO {
     };
 }
 
-IMAGE_REL_AM_FUNCINFO!()
+IMAGE_REL_AM_FUNCINFO!();

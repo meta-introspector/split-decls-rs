@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         RChunksMut!();
+        IntoIter!();
         Producer!();
         RChunksMutProducer!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_1189 {
     };
 }
 
-impl_1189!()
+impl_1189!();

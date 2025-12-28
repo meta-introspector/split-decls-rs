@@ -4,4 +4,4 @@ macro_rules! ERROR_DETAIL {
     };
 }
 
-ERROR_DETAIL!()
+ERROR_DETAIL!();

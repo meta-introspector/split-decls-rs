@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AnonObjectHeaderBigobj!();
         ObjectSegment!();
         CoffSegment!();
-        AnonObjectHeaderBigobj!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CoffBigSegment {
     };
 }
 
-CoffBigSegment!()
+CoffBigSegment!();

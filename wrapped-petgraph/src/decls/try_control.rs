@@ -4,4 +4,4 @@ macro_rules! try_control {
     };
 }
 
-try_control!()
+try_control!();

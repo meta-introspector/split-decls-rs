@@ -4,4 +4,4 @@ macro_rules! NT_PRPSINFO {
     };
 }
 
-NT_PRPSINFO!()
+NT_PRPSINFO!();

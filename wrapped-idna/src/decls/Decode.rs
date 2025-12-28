@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PunycodeCodeUnit!();
         PunycodeCaller!();
+        PunycodeCodeUnit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Decode {
     };
 }
 
-Decode!()
+Decode!();

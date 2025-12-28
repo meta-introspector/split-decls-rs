@@ -11,4 +11,4 @@ macro_rules! create_hashtable {
     };
 }
 
-create_hashtable!()
+create_hashtable!();

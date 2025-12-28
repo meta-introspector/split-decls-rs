@@ -4,4 +4,4 @@ macro_rules! lookup_ml_code {
     };
 }
 
-lookup_ml_code!()
+lookup_ml_code!();

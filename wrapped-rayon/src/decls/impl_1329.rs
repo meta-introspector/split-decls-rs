@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ParallelIterator!();
         SplitAsciiWhitespace!();
         UnindexedConsumer!();
-        ParallelIterator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1329 {
     };
 }
 
-impl_1329!()
+impl_1329!();

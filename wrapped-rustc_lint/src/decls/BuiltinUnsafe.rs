@@ -4,4 +4,4 @@ macro_rules! BuiltinUnsafe {
     };
 }
 
-BuiltinUnsafe!()
+BuiltinUnsafe!();

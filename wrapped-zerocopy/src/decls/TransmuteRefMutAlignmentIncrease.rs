@@ -4,4 +4,4 @@ macro_rules! TransmuteRefMutAlignmentIncrease {
     };
 }
 
-TransmuteRefMutAlignmentIncrease!()
+TransmuteRefMutAlignmentIncrease!();

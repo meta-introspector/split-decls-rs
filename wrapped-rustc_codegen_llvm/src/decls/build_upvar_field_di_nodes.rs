@@ -12,4 +12,4 @@ macro_rules! build_upvar_field_di_nodes {
     };
 }
 
-build_upvar_field_di_nodes!()
+build_upvar_field_di_nodes!();

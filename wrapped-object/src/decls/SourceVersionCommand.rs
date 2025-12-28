@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U64!();
         Endian!();
+        U64!();
         U32!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! SourceVersionCommand {
     };
 }
 
-SourceVersionCommand!()
+SourceVersionCommand!();

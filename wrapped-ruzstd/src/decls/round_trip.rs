@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        HuffmanEncoder!();
         HuffmanDecoder!();
+        BitReaderReversed!();
         BitWriter!();
         HuffmanTable!();
-        HuffmanEncoder!();
-        BitReaderReversed!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! round_trip {
     };
 }
 
-round_trip!()
+round_trip!();

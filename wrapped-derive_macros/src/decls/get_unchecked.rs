@@ -11,4 +11,4 @@ macro_rules! get_unchecked {
     };
 }
 
-get_unchecked!()
+get_unchecked!();

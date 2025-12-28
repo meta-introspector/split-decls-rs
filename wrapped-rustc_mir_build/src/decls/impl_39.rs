@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CFG!();
         BranchInfo!();
-        Scope!();
-        CoverageInfoBuilder!();
-        BlockMarkerGen!();
         NotInfo!();
+        CoverageInfoBuilder!();
+        Scope!();
+        CFG!();
+        BlockMarkerGen!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

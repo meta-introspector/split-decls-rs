@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_UCODE {
     };
 }
 
-SHT_MIPS_UCODE!()
+SHT_MIPS_UCODE!();

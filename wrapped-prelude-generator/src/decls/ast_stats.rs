@@ -4,4 +4,4 @@ macro_rules! ast_stats {
     };
 }
 
-ast_stats!()
+ast_stats!();

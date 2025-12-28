@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LazyProperty!();
         InlayHintsConfig!();
+        LazyProperty!();
         InlayTooltip!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_252 {
     };
 }
 
-impl_252!()
+impl_252!();

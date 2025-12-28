@@ -4,4 +4,4 @@ macro_rules! R_PPC_ADDR14 {
     };
 }
 
-R_PPC_ADDR14!()
+R_PPC_ADDR14!();

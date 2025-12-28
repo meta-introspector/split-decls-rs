@@ -4,4 +4,4 @@ macro_rules! F_FDPR_PROF {
     };
 }
 
-F_FDPR_PROF!()
+F_FDPR_PROF!();

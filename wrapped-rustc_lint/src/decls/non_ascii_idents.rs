@@ -4,4 +4,4 @@ macro_rules! non_ascii_idents {
     };
 }
 
-non_ascii_idents!()
+non_ascii_idents!();

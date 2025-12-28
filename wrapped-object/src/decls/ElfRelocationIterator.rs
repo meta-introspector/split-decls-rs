@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         CrelIterator!();
         FileHeader!();
-        Endian!();
         Crel!();
-        Rel!();
         Rela!();
+        Rel!();
+        Endian!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ElfRelocationIterator {
     };
 }
 
-ElfRelocationIterator!()
+ElfRelocationIterator!();

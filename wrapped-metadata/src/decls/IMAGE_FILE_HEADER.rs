@@ -12,4 +12,4 @@ macro_rules! IMAGE_FILE_HEADER {
     };
 }
 
-IMAGE_FILE_HEADER!()
+IMAGE_FILE_HEADER!();

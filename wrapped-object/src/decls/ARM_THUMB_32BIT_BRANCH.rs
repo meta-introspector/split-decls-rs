@@ -4,4 +4,4 @@ macro_rules! ARM_THUMB_32BIT_BRANCH {
     };
 }
 
-ARM_THUMB_32BIT_BRANCH!()
+ARM_THUMB_32BIT_BRANCH!();

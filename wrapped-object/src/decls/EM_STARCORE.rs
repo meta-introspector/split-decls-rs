@@ -4,4 +4,4 @@ macro_rules! EM_STARCORE {
     };
 }
 
-EM_STARCORE!()
+EM_STARCORE!();

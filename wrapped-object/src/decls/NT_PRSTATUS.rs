@@ -4,4 +4,4 @@ macro_rules! NT_PRSTATUS {
     };
 }
 
-NT_PRSTATUS!()
+NT_PRSTATUS!();

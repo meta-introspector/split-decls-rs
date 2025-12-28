@@ -4,4 +4,4 @@ macro_rules! IGNORED_LINES {
     };
 }
 
-IGNORED_LINES!()
+IGNORED_LINES!();

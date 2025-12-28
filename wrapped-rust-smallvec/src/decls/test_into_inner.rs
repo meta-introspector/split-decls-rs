@@ -11,4 +11,4 @@ macro_rules! test_into_inner {
     };
 }
 
-test_into_inner!()
+test_into_inner!();

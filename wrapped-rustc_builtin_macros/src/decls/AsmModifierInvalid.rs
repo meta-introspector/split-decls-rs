@@ -4,4 +4,4 @@ macro_rules! AsmModifierInvalid {
     };
 }
 
-AsmModifierInvalid!()
+AsmModifierInvalid!();

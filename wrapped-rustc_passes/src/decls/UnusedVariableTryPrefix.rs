@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         UnusedVariableStringInterp!();
-        PatternTypo!();
         UnusedVariableSugg!();
+        PatternTypo!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UnusedVariableTryPrefix {
     };
 }
 
-UnusedVariableTryPrefix!()
+UnusedVariableTryPrefix!();

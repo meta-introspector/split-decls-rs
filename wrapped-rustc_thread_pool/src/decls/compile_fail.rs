@@ -4,4 +4,4 @@ macro_rules! compile_fail {
     };
 }
 
-compile_fail!()
+compile_fail!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ParseStream!();
         Result!();
-        Parse!();
         ErrorMessage!();
+        Parse!();
+        ParseStream!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Error {
     };
 }
 
-Error!()
+Error!();

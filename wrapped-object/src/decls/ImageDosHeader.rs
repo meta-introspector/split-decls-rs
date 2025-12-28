@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         File!();
-        U32!();
         Bytes!();
         U16!();
+        U32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ImageDosHeader {
     };
 }
 
-ImageDosHeader!()
+ImageDosHeader!();

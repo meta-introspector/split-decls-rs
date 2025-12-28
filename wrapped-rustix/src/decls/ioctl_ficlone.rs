@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ficlone!();
         Result!();
+        Ficlone!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ioctl_ficlone {
     };
 }
 
-ioctl_ficlone!()
+ioctl_ficlone!();

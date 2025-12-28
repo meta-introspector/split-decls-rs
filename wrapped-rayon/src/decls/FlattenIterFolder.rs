@@ -4,4 +4,4 @@ macro_rules! FlattenIterFolder {
     };
 }
 
-FlattenIterFolder!()
+FlattenIterFolder!();

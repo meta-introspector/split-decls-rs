@@ -4,4 +4,4 @@ macro_rules! is_newline {
     };
 }
 
-is_newline!()
+is_newline!();

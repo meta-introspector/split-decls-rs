@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CoroutineDesugaring!();
         CoroutineSource!();
+        CoroutineDesugaring!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CoroutineKind {
     };
 }
 
-CoroutineKind!()
+CoroutineKind!();

@@ -4,4 +4,4 @@ macro_rules! TIME_ENCODING {
     };
 }
 
-TIME_ENCODING!()
+TIME_ENCODING!();

@@ -4,4 +4,4 @@ macro_rules! associated_item_from_impl_item {
     };
 }
 
-associated_item_from_impl_item!()
+associated_item_from_impl_item!();

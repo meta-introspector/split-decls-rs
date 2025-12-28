@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Unit!();
-        StateID!();
-        OwnedDFA!();
-        Minimizer!();
-        PatternID!();
         StateSet!();
+        OwnedDFA!();
+        PatternID!();
+        StateID!();
+        Minimizer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_191 {
     };
 }
 
-impl_191!()
+impl_191!();

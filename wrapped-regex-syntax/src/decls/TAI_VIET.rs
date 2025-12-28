@@ -4,4 +4,4 @@ macro_rules! TAI_VIET {
     };
 }
 
-TAI_VIET!()
+TAI_VIET!();

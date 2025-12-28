@@ -4,4 +4,4 @@ macro_rules! AlgoResult {
     };
 }
 
-AlgoResult!()
+AlgoResult!();

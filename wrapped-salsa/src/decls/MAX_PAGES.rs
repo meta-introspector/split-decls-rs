@@ -4,4 +4,4 @@ macro_rules! MAX_PAGES {
     };
 }
 
-MAX_PAGES!()
+MAX_PAGES!();

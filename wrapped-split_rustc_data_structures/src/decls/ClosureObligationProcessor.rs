@@ -4,4 +4,4 @@ macro_rules! ClosureObligationProcessor {
     };
 }
 
-ClosureObligationProcessor!()
+ClosureObligationProcessor!();

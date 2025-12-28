@@ -11,4 +11,4 @@ macro_rules! expanded_sql {
     };
 }
 
-expanded_sql!()
+expanded_sql!();

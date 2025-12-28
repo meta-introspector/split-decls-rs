@@ -13,4 +13,4 @@ macro_rules! from_target_feature_attr {
     };
 }
 
-from_target_feature_attr!()
+from_target_feature_attr!();

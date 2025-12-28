@@ -4,4 +4,4 @@ macro_rules! R_IA64_SECREL32LSB {
     };
 }
 
-R_IA64_SECREL32LSB!()
+R_IA64_SECREL32LSB!();

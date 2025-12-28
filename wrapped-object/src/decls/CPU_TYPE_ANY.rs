@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_ANY {
     };
 }
 
-CPU_TYPE_ANY!()
+CPU_TYPE_ANY!();

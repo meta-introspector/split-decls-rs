@@ -4,4 +4,4 @@ macro_rules! frontrun_block {
     };
 }
 
-frontrun_block!()
+frontrun_block!();

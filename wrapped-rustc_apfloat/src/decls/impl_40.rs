@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DynPrecisionLimbVec!();
-        Category!();
         IeeeFloat!();
-        ExpInt!();
+        DynPrecisionLimbVec!();
         Loss!();
+        Category!();
+        ExpInt!();
         Limb!();
         Semantics!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

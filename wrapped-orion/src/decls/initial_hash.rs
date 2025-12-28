@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
         Blake2b!();
+        UnknownCryptoError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! initial_hash {
     };
 }
 
-initial_hash!()
+initial_hash!();

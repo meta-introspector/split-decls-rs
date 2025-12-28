@@ -11,4 +11,4 @@ macro_rules! check_zero_tts {
     };
 }
 
-check_zero_tts!()
+check_zero_tts!();

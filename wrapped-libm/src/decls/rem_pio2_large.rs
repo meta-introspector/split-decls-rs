@@ -4,4 +4,4 @@ macro_rules! rem_pio2_large {
     };
 }
 
-rem_pio2_large!()
+rem_pio2_large!();

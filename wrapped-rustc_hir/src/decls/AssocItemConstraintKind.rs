@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GenericBound!();
         Term!();
         Ty!();
+        GenericBound!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AssocItemConstraintKind {
     };
 }
 
-AssocItemConstraintKind!()
+AssocItemConstraintKind!();

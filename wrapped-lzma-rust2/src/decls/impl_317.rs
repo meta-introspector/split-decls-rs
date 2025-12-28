@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ByteReader!();
         Read!();
+        ByteReader!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_317 {
     };
 }
 
-impl_317!()
+impl_317!();

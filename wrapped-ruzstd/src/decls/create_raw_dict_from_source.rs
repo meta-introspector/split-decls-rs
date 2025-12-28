@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Write!();
+        DictParams!();
         Segment!();
         Context!();
-        Write!();
         Read!();
-        DictParams!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! create_raw_dict_from_source {
     };
 }
 
-create_raw_dict_from_source!()
+create_raw_dict_from_source!();

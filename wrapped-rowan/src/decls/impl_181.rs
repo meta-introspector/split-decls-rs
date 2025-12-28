@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Language!();
-        SyntaxNodePtr!();
-        AstPtr!();
         AstNode!();
+        Language!();
+        AstPtr!();
+        SyntaxNodePtr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

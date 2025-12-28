@@ -4,4 +4,4 @@ macro_rules! SG_PROTECTED_VERSION_1 {
     };
 }
 
-SG_PROTECTED_VERSION_1!()
+SG_PROTECTED_VERSION_1!();

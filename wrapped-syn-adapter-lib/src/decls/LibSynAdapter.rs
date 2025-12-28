@@ -4,4 +4,4 @@ macro_rules! LibSynAdapter {
     };
 }
 
-LibSynAdapter!()
+LibSynAdapter!();

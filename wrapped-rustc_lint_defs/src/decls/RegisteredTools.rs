@@ -4,4 +4,4 @@ macro_rules! RegisteredTools {
     };
 }
 
-RegisteredTools!()
+RegisteredTools!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SynInfoTrait!();
         SynDetails!();
+        SynInfoTrait!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

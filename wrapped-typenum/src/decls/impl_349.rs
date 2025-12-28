@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Len!();
-        Length!();
-        Unsigned!();
-        UInt!();
-        B1!();
         Bit!();
+        Length!();
+        UInt!();
         Add1!();
+        Unsigned!();
+        B1!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_349 {
     };
 }
 
-impl_349!()
+impl_349!();

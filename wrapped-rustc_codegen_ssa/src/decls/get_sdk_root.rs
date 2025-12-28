@@ -11,4 +11,4 @@ macro_rules! get_sdk_root {
     };
 }
 
-get_sdk_root!()
+get_sdk_root!();

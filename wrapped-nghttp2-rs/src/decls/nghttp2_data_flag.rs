@@ -4,4 +4,4 @@ macro_rules! nghttp2_data_flag {
     };
 }
 
-nghttp2_data_flag!()
+nghttp2_data_flag!();

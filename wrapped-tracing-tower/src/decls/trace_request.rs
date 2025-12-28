@@ -4,4 +4,4 @@ macro_rules! trace_request {
     };
 }
 
-trace_request!()
+trace_request!();

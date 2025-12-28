@@ -4,4 +4,4 @@ macro_rules! generate_impl_text {
     };
 }
 
-generate_impl_text!()
+generate_impl_text!();

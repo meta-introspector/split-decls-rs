@@ -4,4 +4,4 @@ macro_rules! min_sigstack_size {
     };
 }
 
-min_sigstack_size!()
+min_sigstack_size!();

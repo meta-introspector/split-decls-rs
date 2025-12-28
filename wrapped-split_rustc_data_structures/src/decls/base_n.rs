@@ -4,4 +4,4 @@ macro_rules! base_n {
     };
 }
 
-base_n!()
+base_n!();

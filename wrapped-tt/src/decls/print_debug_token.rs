@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Ident!();
-        Literal!();
         Leaf!();
         Subtree!();
-        Punct!();
+        Ident!();
+        Literal!();
         TtElement!();
         Spacing!();
+        Punct!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! print_debug_token {
     };
 }
 
-print_debug_token!()
+print_debug_token!();

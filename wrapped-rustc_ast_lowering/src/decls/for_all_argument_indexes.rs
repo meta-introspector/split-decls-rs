@@ -4,4 +4,4 @@ macro_rules! for_all_argument_indexes {
     };
 }
 
-for_all_argument_indexes!()
+for_all_argument_indexes!();

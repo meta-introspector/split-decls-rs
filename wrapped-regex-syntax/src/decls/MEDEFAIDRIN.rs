@@ -4,4 +4,4 @@ macro_rules! MEDEFAIDRIN {
     };
 }
 
-MEDEFAIDRIN!()
+MEDEFAIDRIN!();

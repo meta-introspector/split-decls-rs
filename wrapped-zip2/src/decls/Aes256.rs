@@ -4,4 +4,4 @@ macro_rules! Aes256 {
     };
 }
 
-Aes256!()
+Aes256!();

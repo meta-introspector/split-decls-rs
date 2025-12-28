@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ColumnFamily!();
-        DBInner!();
-        SingleThreaded!();
-        Error!();
-        DBCommon!();
         Options!();
+        DBCommon!();
+        Error!();
+        DBInner!();
+        ColumnFamily!();
+        SingleThreaded!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

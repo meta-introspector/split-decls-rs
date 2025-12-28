@@ -4,4 +4,4 @@ macro_rules! TransactionDBOptions {
     };
 }
 
-TransactionDBOptions!()
+TransactionDBOptions!();

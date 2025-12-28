@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         DeValue!();
-        DeString!();
-        Table!();
         DeTable!();
         TraceScope!();
         Entry!();
+        Table!();
+        DeString!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! descend_path {
     };
 }
 
-descend_path!()
+descend_path!();

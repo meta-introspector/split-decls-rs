@@ -4,4 +4,4 @@ macro_rules! ENOUGH_LENS {
     };
 }
 
-ENOUGH_LENS!()
+ENOUGH_LENS!();

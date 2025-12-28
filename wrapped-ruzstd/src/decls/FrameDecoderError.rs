@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BlockHeaderReadError!();
         ReadFrameHeaderError!();
-        DictionaryDecodeError!();
         DecodeBlockContentError!();
+        DictionaryDecodeError!();
+        BlockHeaderReadError!();
         FrameHeaderError!();
         Error!();
     };
@@ -16,4 +16,4 @@ macro_rules! FrameDecoderError {
     };
 }
 
-FrameDecoderError!()
+FrameDecoderError!();

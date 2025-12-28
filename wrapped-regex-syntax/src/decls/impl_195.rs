@@ -1,35 +1,35 @@
 macro_rules! deps {
     () => {
+        ClassUnicodeRange!();
         HirKind!();
         Ast!();
-        Alternation!();
-        Bytes!();
-        ClassSetBinaryOp!();
-        Concat!();
-        Visitor!();
-        Result!();
-        ClassBytesRange!();
-        Flags!();
-        Literal!();
-        Error!();
-        ClassUnicode!();
-        ClassBracketed!();
-        HirFrame!();
-        TranslatorI!();
-        Repetition!();
         ClassBytes!();
         Hir!();
+        Alternation!();
         ClassPerl!();
+        HirFrame!();
+        Dot!();
+        Literal!();
+        ErrorKind!();
+        Visitor!();
+        ClassSetBinaryOp!();
+        ClassSetBinaryOpKind!();
+        Flags!();
+        Bytes!();
+        ClassSetItem!();
+        ClassBytesRange!();
+        Error!();
+        ClassUnicode!();
+        Result!();
+        TranslatorI!();
+        Repetition!();
+        ClassBracketed!();
+        Group!();
+        Concat!();
+        Assertion!();
         Class!();
         Either!();
-        Dot!();
-        ClassSetItem!();
-        ClassUnicodeRange!();
-        Group!();
-        Assertion!();
         Range!();
-        ClassSetBinaryOpKind!();
-        ErrorKind!();
     };
 }
 
@@ -40,4 +40,4 @@ macro_rules! impl_195 {
     };
 }
 
-impl_195!()
+impl_195!();

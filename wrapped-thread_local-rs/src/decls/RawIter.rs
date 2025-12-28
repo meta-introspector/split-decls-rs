@@ -4,4 +4,4 @@ macro_rules! RawIter {
     };
 }
 
-RawIter!()
+RawIter!();

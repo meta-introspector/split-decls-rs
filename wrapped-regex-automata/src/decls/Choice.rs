@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Memchr2!();
-        Memchr3!();
         Teddy!();
         ByteSet!();
-        PrefilterI!();
         AhoCorasick!();
+        Memchr2!();
         Memchr!();
+        PrefilterI!();
         Strategy!();
+        Memchr3!();
         Memmem!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! Choice {
     };
 }
 
-Choice!()
+Choice!();

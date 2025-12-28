@@ -11,4 +11,4 @@ macro_rules! test_retain_nodes {
     };
 }
 
-test_retain_nodes!()
+test_retain_nodes!();

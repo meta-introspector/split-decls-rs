@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        XzEncoder!();
+        Check!();
         Status!();
         Stream!();
         Action!();
-        XzEncoder!();
-        Check!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

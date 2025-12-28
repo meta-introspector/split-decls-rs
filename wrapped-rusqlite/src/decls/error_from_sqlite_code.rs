@@ -11,4 +11,4 @@ macro_rules! error_from_sqlite_code {
     };
 }
 
-error_from_sqlite_code!()
+error_from_sqlite_code!();

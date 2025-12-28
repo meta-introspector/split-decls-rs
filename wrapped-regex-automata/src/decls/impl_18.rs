@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OwnedDFA!();
-        HalfMatch!();
-        Input!();
-        BuildError!();
         DFA!();
+        OwnedDFA!();
         Builder!();
+        BuildError!();
+        Input!();
+        HalfMatch!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

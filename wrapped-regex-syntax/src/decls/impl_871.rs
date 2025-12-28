@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ScalarRange!();
         Result!();
+        ScalarRange!();
         Formatter!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_871 {
     };
 }
 
-impl_871!()
+impl_871!();

@@ -4,4 +4,4 @@ macro_rules! push_integer_62 {
     };
 }
 
-push_integer_62!()
+push_integer_62!();

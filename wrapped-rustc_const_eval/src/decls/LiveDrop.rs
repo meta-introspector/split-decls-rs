@@ -4,4 +4,4 @@ macro_rules! LiveDrop {
     };
 }
 
-LiveDrop!()
+LiveDrop!();

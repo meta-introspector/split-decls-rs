@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        State!();
-        Slot!();
         Lifecycle!();
         LifecycleGen!();
-        RefCount!();
+        State!();
         Config!();
+        Slot!();
+        RefCount!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

@@ -4,4 +4,4 @@ macro_rules! SEGMENTS_PER_LANE {
     };
 }
 
-SEGMENTS_PER_LANE!()
+SEGMENTS_PER_LANE!();

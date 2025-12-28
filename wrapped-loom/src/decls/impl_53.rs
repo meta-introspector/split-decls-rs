@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Set!();
         State!();
+        Set!();
         LocationSet!();
         UnsafeCell!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

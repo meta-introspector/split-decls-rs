@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Results!();
-        Effect!();
-        Analysis!();
-        Direction!();
-        EffectIndex!();
-        CowMut!();
         CursorPosition!();
+        Direction!();
         ResultsCursor!();
+        Analysis!();
+        CowMut!();
+        Effect!();
+        EffectIndex!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

@@ -4,4 +4,4 @@ macro_rules! InlayFieldsToResolve {
     };
 }
 
-InlayFieldsToResolve!()
+InlayFieldsToResolve!();

@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        ClassLayout!();
-        InterfaceImpl!();
-        AssemblyRef!();
-        Field!();
-        TypeSpec!();
-        ImplMap!();
         TypeRef!();
-        MemberRef!();
-        GenericParam!();
-        NestedClass!();
-        ModuleRef!();
-        MethodDef!();
         Attribute!();
-        Module!();
         TypeDef!();
         Constant!();
+        Field!();
+        InterfaceImpl!();
+        ClassLayout!();
+        NestedClass!();
+        GenericParam!();
+        TypeSpec!();
+        Module!();
+        MemberRef!();
+        ModuleRef!();
+        AssemblyRef!();
+        MethodDef!();
+        ImplMap!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! macro_127 {
     };
 }
 
-macro_127!()
+macro_127!();

@@ -4,4 +4,4 @@ macro_rules! WantedConstant {
     };
 }
 
-WantedConstant!()
+WantedConstant!();

@@ -11,4 +11,4 @@ macro_rules! get_dict_size {
     };
 }
 
-get_dict_size!()
+get_dict_size!();

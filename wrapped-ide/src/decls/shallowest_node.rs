@@ -4,4 +4,4 @@ macro_rules! shallowest_node {
     };
 }
 
-shallowest_node!()
+shallowest_node!();

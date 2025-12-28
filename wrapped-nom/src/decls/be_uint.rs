@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BeUint!();
         ParseError!();
-        Parser!();
+        BeUint!();
         Error!();
         Input!();
+        Parser!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! be_uint {
     };
 }
 
-be_uint!()
+be_uint!();

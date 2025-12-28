@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWFRAME {
     };
 }
 
-SSUBTYP_DWFRAME!()
+SSUBTYP_DWFRAME!();

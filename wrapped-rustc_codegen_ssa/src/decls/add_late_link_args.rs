@@ -12,4 +12,4 @@ macro_rules! add_late_link_args {
     };
 }
 
-add_late_link_args!()
+add_late_link_args!();

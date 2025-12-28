@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        PrintFrame!();
-        Breaks!();
-        Token!();
         BeginToken!();
+        Printer!();
         BreakToken!();
+        Token!();
+        PrintFrame!();
         BufEntry!();
         RingBuffer!();
-        Printer!();
+        Breaks!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

@@ -4,4 +4,4 @@ macro_rules! UserDefinedFlags {
     };
 }
 
-UserDefinedFlags!()
+UserDefinedFlags!();

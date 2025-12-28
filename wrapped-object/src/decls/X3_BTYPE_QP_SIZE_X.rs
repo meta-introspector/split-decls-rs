@@ -4,4 +4,4 @@ macro_rules! X3_BTYPE_QP_SIZE_X {
     };
 }
 
-X3_BTYPE_QP_SIZE_X!()
+X3_BTYPE_QP_SIZE_X!();

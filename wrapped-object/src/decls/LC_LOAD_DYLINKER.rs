@@ -4,4 +4,4 @@ macro_rules! LC_LOAD_DYLINKER {
     };
 }
 
-LC_LOAD_DYLINKER!()
+LC_LOAD_DYLINKER!();

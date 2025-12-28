@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WorkerThread!();
         Registry!();
+        WorkerThread!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_in_place_thread_registry {
     };
 }
 
-get_in_place_thread_registry!()
+get_in_place_thread_registry!();

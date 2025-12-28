@@ -4,4 +4,4 @@ macro_rules! ast_traits {
     };
 }
 
-ast_traits!()
+ast_traits!();

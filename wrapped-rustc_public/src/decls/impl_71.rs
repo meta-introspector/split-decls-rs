@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         MirConst!();
         Ty!();
+        InternalCx!();
         RustcInternal!();
         BridgeTys!();
-        InternalCx!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

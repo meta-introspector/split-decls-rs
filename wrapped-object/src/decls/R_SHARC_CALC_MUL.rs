@@ -4,4 +4,4 @@ macro_rules! R_SHARC_CALC_MUL {
     };
 }
 
-R_SHARC_CALC_MUL!()
+R_SHARC_CALC_MUL!();

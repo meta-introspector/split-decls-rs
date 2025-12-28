@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Arena!();
         Idx!();
+        Arena!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_51 {
     };
 }
 
-impl_51!()
+impl_51!();

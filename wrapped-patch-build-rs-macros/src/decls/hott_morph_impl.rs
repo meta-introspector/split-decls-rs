@@ -5,4 +5,4 @@ macro_rules! hott_morph_impl {
     };
 }
 
-hott_morph_impl!()
+hott_morph_impl!();

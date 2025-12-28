@@ -11,4 +11,4 @@ macro_rules! scope_fifo {
     };
 }
 
-scope_fifo!()
+scope_fifo!();

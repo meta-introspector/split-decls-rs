@@ -4,4 +4,4 @@ macro_rules! UpdateFolder {
     };
 }
 
-UpdateFolder!()
+UpdateFolder!();

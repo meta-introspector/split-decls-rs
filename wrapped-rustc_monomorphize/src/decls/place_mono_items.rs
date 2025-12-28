@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PlacedMonoItems!();
-        UsageMap!();
         PartitioningCx!();
+        UsageMap!();
+        PlacedMonoItems!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! place_mono_items {
     };
 }
 
-place_mono_items!()
+place_mono_items!();

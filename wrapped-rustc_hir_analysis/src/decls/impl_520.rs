@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         CurrentItem!();
-        Constraint!();
-        InferredIndex!();
-        VarianceTermPtr!();
         ConstraintContext!();
+        VarianceTermPtr!();
+        InferredIndex!();
+        Constraint!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_520 {
     };
 }
 
-impl_520!()
+impl_520!();

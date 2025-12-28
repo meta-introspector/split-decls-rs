@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        RelocationEncoding!();
+        Endian!();
+        RelocationKind!();
+        FileHeader!();
+        Symbol!();
+        Relocation!();
         RelocationFlags!();
         RelocationTarget!();
-        FileHeader!();
-        RelocationKind!();
-        Endian!();
-        Symbol!();
+        RelocationEncoding!();
         Crel!();
-        Relocation!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! parse_relocation {
     };
 }
 
-parse_relocation!()
+parse_relocation!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ReduceDecoder!();
-        ZipError!();
-        Lzma!();
         Ppmd!();
-        ZipResult!();
         ImplodeDecoder!();
-        Decompressor!();
+        ZipError!();
         ShrinkDecoder!();
         CompressionMethod!();
+        Decompressor!();
+        Lzma!();
+        ZipResult!();
+        ReduceDecoder!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

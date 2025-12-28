@@ -4,4 +4,4 @@ macro_rules! automorphic_orbit {
     };
 }
 
-automorphic_orbit!()
+automorphic_orbit!();

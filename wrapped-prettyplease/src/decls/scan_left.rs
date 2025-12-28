@@ -12,4 +12,4 @@ macro_rules! scan_left {
     };
 }
 
-scan_left!()
+scan_left!();

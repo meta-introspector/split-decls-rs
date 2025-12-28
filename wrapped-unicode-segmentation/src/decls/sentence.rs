@@ -4,4 +4,4 @@ macro_rules! sentence {
     };
 }
 
-sentence!()
+sentence!();

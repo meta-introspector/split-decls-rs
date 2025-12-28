@@ -4,4 +4,4 @@ macro_rules! R_PARISC_TPREL32 {
     };
 }
 
-R_PARISC_TPREL32!()
+R_PARISC_TPREL32!();

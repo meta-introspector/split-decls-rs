@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SegmentId!();
         Segments!();
+        SegmentId!();
         SectionId!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Segment {
     };
 }
 
-Segment!()
+Segment!();

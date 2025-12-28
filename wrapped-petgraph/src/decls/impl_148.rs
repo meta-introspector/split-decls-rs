@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FilterEdge!();
-        NeighborsDirected!();
-        Direction!();
-        EdgeRef!();
-        EdgeFiltered!();
         EdgeFilteredNeighborsDirected!();
+        Direction!();
+        NeighborsDirected!();
+        EdgeFiltered!();
+        FilterEdge!();
+        EdgeRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_148 {
     };
 }
 
-impl_148!()
+impl_148!();

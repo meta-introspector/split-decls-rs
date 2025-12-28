@@ -4,4 +4,4 @@ macro_rules! NonConstPath {
     };
 }
 
-NonConstPath!()
+NonConstPath!();

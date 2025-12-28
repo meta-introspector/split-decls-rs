@@ -11,4 +11,4 @@ macro_rules! Sha256 {
     };
 }
 
-Sha256!()
+Sha256!();

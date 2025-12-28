@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         ZalsaDatabase!();
         DatabaseDownCaster!();
-        Ingredient!();
-        Durability!();
-        AsDynDatabase!();
         IngredientIndex!();
+        Durability!();
+        Ingredient!();
+        AsDynDatabase!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Database {
     };
 }
 
-Database!()
+Database!();

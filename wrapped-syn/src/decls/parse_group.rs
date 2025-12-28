@@ -13,4 +13,4 @@ macro_rules! parse_group {
     };
 }
 
-parse_group!()
+parse_group!();

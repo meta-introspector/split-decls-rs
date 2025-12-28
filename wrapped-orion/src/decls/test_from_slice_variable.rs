@@ -4,4 +4,4 @@ macro_rules! test_from_slice_variable {
     };
 }
 
-test_from_slice_variable!()
+test_from_slice_variable!();

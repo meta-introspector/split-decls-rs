@@ -4,4 +4,4 @@ macro_rules! EF_PPC_RELOCATABLE_LIB {
     };
 }
 
-EF_PPC_RELOCATABLE_LIB!()
+EF_PPC_RELOCATABLE_LIB!();

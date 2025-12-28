@@ -11,4 +11,4 @@ macro_rules! lm_init {
     };
 }
 
-lm_init!()
+lm_init!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        OnlyCurrentTraitsAdt!();
+        OnlyCurrentTraitsForeign!();
+        OnlyCurrentTraitsTy!();
         OnlyCurrentTraitsPointerSugg!();
         OnlyCurrentTraitsName!();
-        OnlyCurrentTraitsForeign!();
-        OnlyCurrentTraitsPointer!();
-        TyParamSome!();
-        OnlyCurrentTraits!();
         TyParamFirstLocal!();
+        OnlyCurrentTraits!();
         OnlyCurrentTraitsOpaque!();
-        OnlyCurrentTraitsTy!();
+        TyParamSome!();
+        OnlyCurrentTraitsPointer!();
+        OnlyCurrentTraitsAdt!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! emit_orphan_check_error {
     };
 }
 
-emit_orphan_check_error!()
+emit_orphan_check_error!();

@@ -4,4 +4,4 @@ macro_rules! get_assoc_item_fragment {
     };
 }
 
-get_assoc_item_fragment!()
+get_assoc_item_fragment!();

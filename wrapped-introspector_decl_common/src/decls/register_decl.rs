@@ -11,4 +11,4 @@ macro_rules! register_decl {
     };
 }
 
-register_decl!()
+register_decl!();

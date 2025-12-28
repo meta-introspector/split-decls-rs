@@ -4,4 +4,4 @@ macro_rules! alphanumeric {
     };
 }
 
-alphanumeric!()
+alphanumeric!();

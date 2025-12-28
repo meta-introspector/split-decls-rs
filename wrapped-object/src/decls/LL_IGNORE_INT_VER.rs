@@ -4,4 +4,4 @@ macro_rules! LL_IGNORE_INT_VER {
     };
 }
 
-LL_IGNORE_INT_VER!()
+LL_IGNORE_INT_VER!();

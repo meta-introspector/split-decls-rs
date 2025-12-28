@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DefId!();
-        InternalCx!();
         TraitRef!();
+        InternalCx!();
         TraitRefHelpers!();
+        DefId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_243 {
     };
 }
 
-impl_243!()
+impl_243!();

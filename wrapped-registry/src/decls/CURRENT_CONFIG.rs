@@ -11,4 +11,4 @@ macro_rules! CURRENT_CONFIG {
     };
 }
 
-CURRENT_CONFIG!()
+CURRENT_CONFIG!();

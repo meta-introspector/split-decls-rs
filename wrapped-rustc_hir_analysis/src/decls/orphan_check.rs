@@ -11,4 +11,4 @@ macro_rules! orphan_check {
     };
 }
 
-orphan_check!()
+orphan_check!();

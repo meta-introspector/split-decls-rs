@@ -4,4 +4,4 @@ macro_rules! hc4 {
     };
 }
 
-hc4!()
+hc4!();

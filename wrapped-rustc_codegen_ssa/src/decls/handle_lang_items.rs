@@ -11,4 +11,4 @@ macro_rules! handle_lang_items {
     };
 }
 
-handle_lang_items!()
+handle_lang_items!();

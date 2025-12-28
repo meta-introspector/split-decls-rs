@@ -4,4 +4,4 @@ macro_rules! cfg_net_or_uring {
     };
 }
 
-cfg_net_or_uring!()
+cfg_net_or_uring!();

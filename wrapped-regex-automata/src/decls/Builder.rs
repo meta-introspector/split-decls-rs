@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Config!();
-        NFA!();
-        Match!();
-        PikeVM!();
         Compiler!();
+        Match!();
+        Config!();
+        PikeVM!();
+        NFA!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Builder {
     };
 }
 
-Builder!()
+Builder!();

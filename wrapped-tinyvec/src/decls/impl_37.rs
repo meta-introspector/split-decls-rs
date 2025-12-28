@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TryFromSliceError!();
         ArrayVec!();
+        TryFromSliceError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

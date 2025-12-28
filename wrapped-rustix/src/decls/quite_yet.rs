@@ -4,4 +4,4 @@ macro_rules! quite_yet {
     };
 }
 
-quite_yet!()
+quite_yet!();

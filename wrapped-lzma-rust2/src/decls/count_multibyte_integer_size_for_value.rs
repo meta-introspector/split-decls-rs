@@ -4,4 +4,4 @@ macro_rules! count_multibyte_integer_size_for_value {
     };
 }
 
-count_multibyte_integer_size_for_value!()
+count_multibyte_integer_size_for_value!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SpecializationTraitParser!();
-        AllowedTargets!();
         NoArgsAttributeParser!();
+        AllowedTargets!();
         Stage!();
         OnDuplicate!();
+        SpecializationTraitParser!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_218 {
     };
 }
 
-impl_218!()
+impl_218!();

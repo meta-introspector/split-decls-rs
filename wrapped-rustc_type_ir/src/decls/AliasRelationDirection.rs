@@ -4,4 +4,4 @@ macro_rules! AliasRelationDirection {
     };
 }
 
-AliasRelationDirection!()
+AliasRelationDirection!();

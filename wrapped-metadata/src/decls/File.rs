@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Blobs!();
-        GenericParam!();
-        Strings!();
-        Records!();
-        ModuleRef!();
         MemberRef!();
-        Attribute!();
+        GenericParam!();
+        ModuleRef!();
         AssemblyRef!();
         Constant!();
+        Strings!();
+        Blobs!();
+        Records!();
+        Attribute!();
         TypeRef!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! File {
     };
 }
 
-File!()
+File!();

@@ -11,4 +11,4 @@ macro_rules! must_be_async {
     };
 }
 
-must_be_async!()
+must_be_async!();

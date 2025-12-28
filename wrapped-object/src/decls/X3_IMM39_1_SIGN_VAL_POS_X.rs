@@ -4,4 +4,4 @@ macro_rules! X3_IMM39_1_SIGN_VAL_POS_X {
     };
 }
 
-X3_IMM39_1_SIGN_VAL_POS_X!()
+X3_IMM39_1_SIGN_VAL_POS_X!();

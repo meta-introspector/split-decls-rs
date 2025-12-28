@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FasNodeIndex!();
         FasNodeContainer!();
+        FasNodeIndex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_368 {
     };
 }
 
-impl_368!()
+impl_368!();

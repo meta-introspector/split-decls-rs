@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ReadOptions!();
         Error!();
-        DBAccess!();
-        DBRawIteratorWithThreadMode!();
         Options!();
+        DBAccess!();
+        ReadOptions!();
+        DBRawIteratorWithThreadMode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

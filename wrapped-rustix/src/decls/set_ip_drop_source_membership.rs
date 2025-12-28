@@ -11,4 +11,4 @@ macro_rules! set_ip_drop_source_membership {
     };
 }
 
-set_ip_drop_source_membership!()
+set_ip_drop_source_membership!();

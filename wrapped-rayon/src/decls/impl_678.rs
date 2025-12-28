@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         Map!();
         Consumer!();
-        MapProducer!();
-        Producer!();
-        MapConsumer!();
-        ProducerCallback!();
         IndexedParallelIterator!();
+        Producer!();
+        ProducerCallback!();
+        MapProducer!();
+        MapConsumer!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_678 {
     };
 }
 
-impl_678!()
+impl_678!();

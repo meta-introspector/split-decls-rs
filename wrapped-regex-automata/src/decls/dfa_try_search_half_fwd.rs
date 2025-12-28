@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Automaton!();
-        DFA!();
         Input!();
+        DFA!();
         HalfMatch!();
-        RetryFailError!();
+        Automaton!();
         MatchError!();
+        RetryFailError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! dfa_try_search_half_fwd {
     };
 }
 
-dfa_try_search_half_fwd!()
+dfa_try_search_half_fwd!();

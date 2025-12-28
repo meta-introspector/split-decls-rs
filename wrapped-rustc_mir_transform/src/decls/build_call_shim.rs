@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DerefSource!();
         CallKind!();
+        DerefSource!();
         Adjustment!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! build_call_shim {
     };
 }
 
-build_call_shim!()
+build_call_shim!();

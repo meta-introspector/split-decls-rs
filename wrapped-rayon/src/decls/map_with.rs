@@ -4,4 +4,4 @@ macro_rules! map_with {
     };
 }
 
-map_with!()
+map_with!();

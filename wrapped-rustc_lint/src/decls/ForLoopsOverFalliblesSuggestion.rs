@@ -4,4 +4,4 @@ macro_rules! ForLoopsOverFalliblesSuggestion {
     };
 }
 
-ForLoopsOverFalliblesSuggestion!()
+ForLoopsOverFalliblesSuggestion!();

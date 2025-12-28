@@ -4,4 +4,4 @@ macro_rules! DT_PPC64_OPT {
     };
 }
 
-DT_PPC64_OPT!()
+DT_PPC64_OPT!();

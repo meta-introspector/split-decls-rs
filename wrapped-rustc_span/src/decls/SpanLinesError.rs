@@ -11,4 +11,4 @@ macro_rules! SpanLinesError {
     };
 }
 
-SpanLinesError!()
+SpanLinesError!();

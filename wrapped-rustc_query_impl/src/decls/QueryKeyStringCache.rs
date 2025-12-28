@@ -4,4 +4,4 @@ macro_rules! QueryKeyStringCache {
     };
 }
 
-QueryKeyStringCache!()
+QueryKeyStringCache!();

@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_JUMP_SLOT {
     };
 }
 
-R_AARCH64_JUMP_SLOT!()
+R_AARCH64_JUMP_SLOT!();

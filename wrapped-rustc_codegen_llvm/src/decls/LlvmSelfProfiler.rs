@@ -4,4 +4,4 @@ macro_rules! LlvmSelfProfiler {
     };
 }
 
-LlvmSelfProfiler!()
+LlvmSelfProfiler!();

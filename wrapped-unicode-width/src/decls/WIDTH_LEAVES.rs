@@ -11,4 +11,4 @@ macro_rules! WIDTH_LEAVES {
     };
 }
 
-WIDTH_LEAVES!()
+WIDTH_LEAVES!();

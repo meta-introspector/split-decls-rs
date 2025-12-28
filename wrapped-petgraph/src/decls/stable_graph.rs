@@ -4,4 +4,4 @@ macro_rules! stable_graph {
     };
 }
 
-stable_graph!()
+stable_graph!();

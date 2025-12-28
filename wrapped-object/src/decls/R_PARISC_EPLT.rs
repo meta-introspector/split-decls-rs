@@ -11,4 +11,4 @@ macro_rules! R_PARISC_EPLT {
     };
 }
 
-R_PARISC_EPLT!()
+R_PARISC_EPLT!();

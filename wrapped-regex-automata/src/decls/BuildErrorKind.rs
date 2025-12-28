@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        NFA!();
+        Captures!();
         UnicodeWordBoundaryError!();
         GroupInfoError!();
-        Captures!();
-        NFA!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! BuildErrorKind {
     };
 }
 
-BuildErrorKind!()
+BuildErrorKind!();

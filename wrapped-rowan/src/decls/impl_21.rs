@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Preorder!();
-        SyntaxText!();
-        Direction!();
-        SyntaxNode!();
-        NodeOrToken!();
-        SyntaxKind!();
         NodeData!();
         SyntaxElementChildren!();
-        SyntaxElement!();
         WalkEvent!();
-        PreorderWithTokens!();
-        SyntaxNodeChildren!();
+        SyntaxText!();
+        SyntaxElement!();
+        Preorder!();
         Green!();
-        SyntaxToken!();
+        NodeOrToken!();
+        SyntaxNode!();
+        Direction!();
+        SyntaxKind!();
+        PreorderWithTokens!();
         TokenAtOffset!();
+        SyntaxNodeChildren!();
+        SyntaxToken!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

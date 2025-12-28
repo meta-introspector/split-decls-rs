@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Clause!();
         Binder!();
-        Ty!();
         ExistentialPredicate!();
         TraitRef!();
-        Interner!();
         GenericArgs!();
+        Interner!();
+        Ty!();
+        Clause!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_362 {
     };
 }
 
-impl_362!()
+impl_362!();

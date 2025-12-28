@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LabelValue!();
         Label!();
+        LabelValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! label_or_ident {
     };
 }
 
-label_or_ident!()
+label_or_ident!();

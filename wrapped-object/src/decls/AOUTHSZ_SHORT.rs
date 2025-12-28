@@ -4,4 +4,4 @@ macro_rules! AOUTHSZ_SHORT {
     };
 }
 
-AOUTHSZ_SHORT!()
+AOUTHSZ_SHORT!();

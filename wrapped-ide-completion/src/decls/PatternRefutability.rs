@@ -4,4 +4,4 @@ macro_rules! PatternRefutability {
     };
 }
 
-PatternRefutability!()
+PatternRefutability!();

@@ -11,4 +11,4 @@ macro_rules! check_pat_variant_from_enum {
     };
 }
 
-check_pat_variant_from_enum!()
+check_pat_variant_from_enum!();

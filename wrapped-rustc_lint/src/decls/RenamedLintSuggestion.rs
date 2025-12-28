@@ -4,4 +4,4 @@ macro_rules! RenamedLintSuggestion {
     };
 }
 
-RenamedLintSuggestion!()
+RenamedLintSuggestion!();

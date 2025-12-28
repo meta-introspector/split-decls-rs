@@ -4,4 +4,4 @@ macro_rules! parser_fuzz_tests {
     };
 }
 
-parser_fuzz_tests!()
+parser_fuzz_tests!();

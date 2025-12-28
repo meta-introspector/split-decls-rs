@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
+        RangeEncoderBuffer!();
         Write!();
         RangeEncoder!();
-        RangeEncoderBuffer!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

@@ -4,4 +4,4 @@ macro_rules! EF_ARM_APCS_26 {
     };
 }
 
-EF_ARM_APCS_26!()
+EF_ARM_APCS_26!();

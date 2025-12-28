@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Id!();
-        Progress!();
-        Log!();
-        Unit!();
-        MessageLevel!();
         Step!();
+        Unit!();
+        Progress!();
+        MessageLevel!();
+        Id!();
+        Log!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_182 {
     };
 }
 
-impl_182!()
+impl_182!();

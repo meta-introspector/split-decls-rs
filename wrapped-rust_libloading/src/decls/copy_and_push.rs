@@ -4,4 +4,4 @@ macro_rules! copy_and_push {
     };
 }
 
-copy_and_push!()
+copy_and_push!();

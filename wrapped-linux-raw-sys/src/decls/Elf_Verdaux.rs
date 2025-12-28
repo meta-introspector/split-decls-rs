@@ -4,4 +4,4 @@ macro_rules! Elf_Verdaux {
     };
 }
 
-Elf_Verdaux!()
+Elf_Verdaux!();

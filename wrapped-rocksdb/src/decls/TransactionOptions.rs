@@ -4,4 +4,4 @@ macro_rules! TransactionOptions {
     };
 }
 
-TransactionOptions!()
+TransactionOptions!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Value!();
         NumberFromString!();
-        Deserializer!();
-        Result!();
         Number!();
-        KeyClassifier!();
+        Deserializer!();
+        Map!();
         Error!();
         RawValue!();
+        KeyClass!();
         Formatter!();
         SeqAccess!();
-        KeyClass!();
+        Result!();
+        KeyClassifier!();
+        Value!();
         BoxedFromString!();
-        Map!();
         MapAccess!();
     };
 }
@@ -24,4 +24,4 @@ macro_rules! impl_248 {
     };
 }
 
-impl_248!()
+impl_248!();

@@ -11,4 +11,4 @@ macro_rules! rust_rowid {
     };
 }
 
-rust_rowid!()
+rust_rowid!();

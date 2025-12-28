@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IgnoringOutDir!();
         IgnoringExtraFilename!();
         MultipleOutputTypesToStdout!();
-        IgnoringOutDir!();
         MultipleOutputTypesAdaption!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! build_output_filenames {
     };
 }
 
-build_output_filenames!()
+build_output_filenames!();

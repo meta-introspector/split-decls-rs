@@ -4,4 +4,4 @@ macro_rules! impl_default_trait {
     };
 }
 
-impl_default_trait!()
+impl_default_trait!();

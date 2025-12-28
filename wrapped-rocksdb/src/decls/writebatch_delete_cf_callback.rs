@@ -11,4 +11,4 @@ macro_rules! writebatch_delete_cf_callback {
     };
 }
 
-writebatch_delete_cf_callback!()
+writebatch_delete_cf_callback!();

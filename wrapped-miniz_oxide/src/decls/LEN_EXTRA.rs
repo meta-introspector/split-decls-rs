@@ -4,4 +4,4 @@ macro_rules! LEN_EXTRA {
     };
 }
 
-LEN_EXTRA!()
+LEN_EXTRA!();

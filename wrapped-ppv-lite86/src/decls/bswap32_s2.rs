@@ -4,4 +4,4 @@ macro_rules! bswap32_s2 {
     };
 }
 
-bswap32_s2!()
+bswap32_s2!();

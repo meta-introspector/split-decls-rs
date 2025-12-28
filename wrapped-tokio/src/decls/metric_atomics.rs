@@ -4,4 +4,4 @@ macro_rules! metric_atomics {
     };
 }
 
-metric_atomics!()
+metric_atomics!();

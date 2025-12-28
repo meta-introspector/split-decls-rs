@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Protocol!();
-        ServerError!();
-        Process!();
         ProcessSrvState!();
+        Protocol!();
         ProcMacroKind!();
         ProcMacroServerProcess!();
+        ServerError!();
+        Process!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

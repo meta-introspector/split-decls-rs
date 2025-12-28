@@ -4,4 +4,4 @@ macro_rules! CRC64 {
     };
 }
 
-CRC64!()
+CRC64!();

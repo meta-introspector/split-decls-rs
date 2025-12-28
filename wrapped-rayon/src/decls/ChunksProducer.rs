@@ -4,4 +4,4 @@ macro_rules! ChunksProducer {
     };
 }
 
-ChunksProducer!()
+ChunksProducer!();

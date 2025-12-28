@@ -4,4 +4,4 @@ macro_rules! is_temporary_rvalue {
     };
 }
 
-is_temporary_rvalue!()
+is_temporary_rvalue!();

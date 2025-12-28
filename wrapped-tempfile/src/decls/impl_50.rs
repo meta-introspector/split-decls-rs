@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TempPath!();
-        PathPersistError!();
-        NamedTempFile!();
         PersistError!();
+        NamedTempFile!();
+        PathPersistError!();
+        TempPath!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

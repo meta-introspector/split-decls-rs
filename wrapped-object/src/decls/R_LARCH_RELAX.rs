@@ -4,4 +4,4 @@ macro_rules! R_LARCH_RELAX {
     };
 }
 
-R_LARCH_RELAX!()
+R_LARCH_RELAX!();

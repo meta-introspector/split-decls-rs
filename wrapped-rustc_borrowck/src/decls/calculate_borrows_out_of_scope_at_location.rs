@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RegionInferenceContext!();
-        BorrowSet!();
         OutOfScopePrecomputer!();
+        BorrowSet!();
+        RegionInferenceContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! calculate_borrows_out_of_scope_at_location {
     };
 }
 
-calculate_borrows_out_of_scope_at_location!()
+calculate_borrows_out_of_scope_at_location!();

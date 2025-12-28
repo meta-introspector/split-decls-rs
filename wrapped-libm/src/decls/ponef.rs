@@ -4,4 +4,4 @@ macro_rules! ponef {
     };
 }
 
-ponef!()
+ponef!();

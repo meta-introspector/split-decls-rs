@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Node!();
-        DirectedGraph!();
-        SccData!();
         Annotations!();
         NodeState!();
+        DirectedGraph!();
+        Node!();
         Successors!();
+        SccData!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! SccsConstruction {
     };
 }
 
-SccsConstruction!()
+SccsConstruction!();

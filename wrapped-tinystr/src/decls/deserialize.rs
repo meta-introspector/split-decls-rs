@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TinyAsciiStr!();
         UnvalidatedTinyAsciiStr!();
+        TinyAsciiStr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! deserialize {
     };
 }
 
-deserialize!()
+deserialize!();

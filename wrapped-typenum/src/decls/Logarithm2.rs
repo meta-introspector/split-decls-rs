@@ -4,4 +4,4 @@ macro_rules! Logarithm2 {
     };
 }
 
-Logarithm2!()
+Logarithm2!();

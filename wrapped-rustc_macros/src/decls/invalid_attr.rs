@@ -11,4 +11,4 @@ macro_rules! invalid_attr {
     };
 }
 
-invalid_attr!()
+invalid_attr!();

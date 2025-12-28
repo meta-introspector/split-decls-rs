@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AsBytes!();
         CompareResult!();
         Compare!();
+        AsBytes!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_327 {
     };
 }
 
-impl_327!()
+impl_327!();

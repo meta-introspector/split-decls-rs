@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Ty!();
+        UnevaluatedConst!();
         ConstantKind!();
         MirConst!();
-        Ty!();
-        Stable!();
         BridgeTys!();
-        UnevaluatedConst!();
+        Stable!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_159 {
     };
 }
 
-impl_159!()
+impl_159!();

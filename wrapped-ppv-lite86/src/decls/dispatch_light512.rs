@@ -12,4 +12,4 @@ macro_rules! dispatch_light512 {
     };
 }
 
-dispatch_light512!()
+dispatch_light512!();

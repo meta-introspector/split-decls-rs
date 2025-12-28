@@ -4,4 +4,4 @@ macro_rules! hyper_request {
     };
 }
 
-hyper_request!()
+hyper_request!();

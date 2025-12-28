@@ -4,4 +4,4 @@ macro_rules! unsync_load {
     };
 }
 
-unsync_load!()
+unsync_load!();

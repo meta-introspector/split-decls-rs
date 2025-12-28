@@ -4,4 +4,4 @@ macro_rules! OrderBy {
     };
 }
 
-OrderBy!()
+OrderBy!();

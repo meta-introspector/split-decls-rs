@@ -4,4 +4,4 @@ macro_rules! FoldKind {
     };
 }
 
-FoldKind!()
+FoldKind!();

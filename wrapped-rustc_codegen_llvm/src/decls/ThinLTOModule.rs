@@ -4,4 +4,4 @@ macro_rules! ThinLTOModule {
     };
 }
 
-ThinLTOModule!()
+ThinLTOModule!();

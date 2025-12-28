@@ -11,4 +11,4 @@ macro_rules! test_blocked_index {
     };
 }
 
-test_blocked_index!()
+test_blocked_index!();

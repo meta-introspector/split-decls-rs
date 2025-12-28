@@ -4,4 +4,4 @@ macro_rules! graphviz {
     };
 }
 
-graphviz!()
+graphviz!();

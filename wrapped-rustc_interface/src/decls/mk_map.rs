@@ -4,4 +4,4 @@ macro_rules! mk_map {
     };
 }
 
-mk_map!()
+mk_map!();

@@ -4,4 +4,4 @@ macro_rules! ImplForTyRequires {
     };
 }
 
-ImplForTyRequires!()
+ImplForTyRequires!();

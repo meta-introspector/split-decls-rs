@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Walkable!();
-        Path!();
         UseTreeKind!();
+        Path!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UseTree {
     };
 }
 
-UseTree!()
+UseTree!();

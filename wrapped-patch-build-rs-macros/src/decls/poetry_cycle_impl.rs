@@ -26,4 +26,4 @@ And mathematics finds perfect expression in emojis.
     };
 }
 
-poetry_cycle_impl!()
+poetry_cycle_impl!();

@@ -4,4 +4,4 @@ macro_rules! DebugHaystack {
     };
 }
 
-DebugHaystack!()
+DebugHaystack!();

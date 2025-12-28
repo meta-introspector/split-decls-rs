@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EdgeType!();
-        NodeReferences!();
-        NodeTrait!();
         NodeRef!();
+        NodeReferences!();
+        EdgeType!();
         GraphMap!();
+        NodeTrait!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_928 {
     };
 }
 
-impl_928!()
+impl_928!();

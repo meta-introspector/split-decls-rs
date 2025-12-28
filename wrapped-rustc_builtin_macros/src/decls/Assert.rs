@@ -4,4 +4,4 @@ macro_rules! Assert {
     };
 }
 
-Assert!()
+Assert!();

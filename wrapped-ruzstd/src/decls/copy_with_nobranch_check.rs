@@ -4,4 +4,4 @@ macro_rules! copy_with_nobranch_check {
     };
 }
 
-copy_with_nobranch_check!()
+copy_with_nobranch_check!();

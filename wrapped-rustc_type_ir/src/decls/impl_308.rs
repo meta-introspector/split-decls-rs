@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        TypeFolder!();
-        Predicate!();
-        Interner!();
-        Region!();
-        Binder!();
-        Shifter!();
         Const!();
-        ConstKind!();
-        Ty!();
         TypeFoldable!();
+        ConstKind!();
+        Predicate!();
+        Region!();
+        Shifter!();
+        TypeFolder!();
+        Binder!();
+        Ty!();
+        Interner!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_308 {
     };
 }
 
-impl_308!()
+impl_308!();

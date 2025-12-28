@@ -4,4 +4,4 @@ macro_rules! MultipleModifiers {
     };
 }
 
-MultipleModifiers!()
+MultipleModifiers!();

@@ -4,4 +4,4 @@ macro_rules! WrappingConfig {
     };
 }
 
-WrappingConfig!()
+WrappingConfig!();

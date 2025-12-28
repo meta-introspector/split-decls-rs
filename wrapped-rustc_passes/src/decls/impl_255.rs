@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StatCollector!();
-        Node!();
         NodeStats!();
+        Node!();
+        StatCollector!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

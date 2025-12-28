@@ -4,4 +4,4 @@ macro_rules! test_normal_debug {
     };
 }
 
-test_normal_debug!()
+test_normal_debug!();

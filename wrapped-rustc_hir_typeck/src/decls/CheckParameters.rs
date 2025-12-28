@@ -4,4 +4,4 @@ macro_rules! CheckParameters {
     };
 }
 
-CheckParameters!()
+CheckParameters!();

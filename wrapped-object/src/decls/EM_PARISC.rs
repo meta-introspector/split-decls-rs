@@ -4,4 +4,4 @@ macro_rules! EM_PARISC {
     };
 }
 
-EM_PARISC!()
+EM_PARISC!();

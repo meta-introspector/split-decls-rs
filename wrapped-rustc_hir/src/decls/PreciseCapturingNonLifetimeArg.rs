@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
         Node!();
         Res!();
+        Lifetime!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PreciseCapturingNonLifetimeArg {
     };
 }
 
-PreciseCapturingNonLifetimeArg!()
+PreciseCapturingNonLifetimeArg!();

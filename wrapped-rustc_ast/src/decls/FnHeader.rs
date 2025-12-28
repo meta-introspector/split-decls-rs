@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Safety!();
-        Walkable!();
         CoroutineKind!();
-        Const!();
+        Walkable!();
+        Safety!();
         Extern!();
+        Const!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! FnHeader {
     };
 }
 
-FnHeader!()
+FnHeader!();

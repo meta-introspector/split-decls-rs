@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         IResult!();
-        ErrorKind!();
-        LengthValue!();
         Error!();
-        Parser!();
+        Needed!();
+        LengthValue!();
+        ErrorKind!();
         Input!();
         ToUsize!();
         ParseError!();
-        Needed!();
+        Parser!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! length_value {
     };
 }
 
-length_value!()
+length_value!();

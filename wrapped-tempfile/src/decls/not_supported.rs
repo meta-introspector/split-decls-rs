@@ -4,4 +4,4 @@ macro_rules! not_supported {
     };
 }
 
-not_supported!()
+not_supported!();

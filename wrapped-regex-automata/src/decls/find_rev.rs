@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HalfMatch!();
+        Cache!();
         MatchError!();
         Input!();
-        Cache!();
         DFA!();
+        HalfMatch!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! find_rev {
     };
 }
 
-find_rev!()
+find_rev!();

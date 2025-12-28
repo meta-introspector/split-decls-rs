@@ -11,4 +11,4 @@ macro_rules! construct_error {
     };
 }
 
-construct_error!()
+construct_error!();

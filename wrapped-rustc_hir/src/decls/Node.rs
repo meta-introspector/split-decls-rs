@@ -1,38 +1,38 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
-        PathSegment!();
-        Expr!();
-        TraitRef!();
-        Arm!();
-        WherePredicate!();
-        PreciseCapturingNonLifetimeArg!();
         VariantData!();
-        ForeignItem!();
-        Variant!();
-        AnonConst!();
-        TyPat!();
-        Item!();
-        LetStmt!();
-        ExprField!();
-        Ty!();
-        AssocItemConstraint!();
-        GenericParam!();
-        Crate!();
-        FieldDef!();
-        Stmt!();
-        ConstBlock!();
-        PatExpr!();
-        PatField!();
-        Mod!();
-        ConstArg!();
-        ImplItem!();
-        Pat!();
-        OpaqueTy!();
+        WherePredicate!();
         Param!();
-        Block!();
-        InferArg!();
+        PreciseCapturingNonLifetimeArg!();
+        Crate!();
+        Pat!();
+        ExprField!();
+        ForeignItem!();
+        PatExpr!();
+        Arm!();
+        PatField!();
+        GenericParam!();
+        AssocItemConstraint!();
+        TyPat!();
+        Mod!();
         TraitItem!();
+        TraitRef!();
+        Lifetime!();
+        ConstArg!();
+        Ty!();
+        ConstBlock!();
+        InferArg!();
+        OpaqueTy!();
+        Item!();
+        Variant!();
+        Expr!();
+        Stmt!();
+        PathSegment!();
+        Block!();
+        LetStmt!();
+        FieldDef!();
+        ImplItem!();
+        AnonConst!();
     };
 }
 
@@ -43,4 +43,4 @@ macro_rules! Node {
     };
 }
 
-Node!()
+Node!();

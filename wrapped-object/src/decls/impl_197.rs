@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        SectionTable!();
-        ReadRef!();
-        CoffFile!();
-        CoffCommon!();
-        SymbolTable!();
         CoffHeader!();
+        CoffFile!();
+        Result!();
+        ReadRef!();
+        SymbolTable!();
+        CoffCommon!();
+        SectionTable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

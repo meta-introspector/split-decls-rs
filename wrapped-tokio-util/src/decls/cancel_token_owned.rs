@@ -11,4 +11,4 @@ macro_rules! cancel_token_owned {
     };
 }
 
-cancel_token_owned!()
+cancel_token_owned!();

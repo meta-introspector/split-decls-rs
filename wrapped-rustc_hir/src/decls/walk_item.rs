@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FnKind!();
+        UseKind!();
         Visitor!();
+        ItemKind!();
+        Mod!();
+        Item!();
         TraitImplHeader!();
         Impl!();
-        Item!();
-        UseKind!();
-        Mod!();
-        ItemKind!();
+        FnKind!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! walk_item {
     };
 }
 
-walk_item!()
+walk_item!();

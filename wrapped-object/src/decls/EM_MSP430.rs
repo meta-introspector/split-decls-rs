@@ -4,4 +4,4 @@ macro_rules! EM_MSP430 {
     };
 }
 
-EM_MSP430!()
+EM_MSP430!();

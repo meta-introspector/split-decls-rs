@@ -4,4 +4,4 @@ macro_rules! has_implicit_borrow {
     };
 }
 
-has_implicit_borrow!()
+has_implicit_borrow!();

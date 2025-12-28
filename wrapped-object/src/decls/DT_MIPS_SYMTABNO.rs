@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_SYMTABNO {
     };
 }
 
-DT_MIPS_SYMTABNO!()
+DT_MIPS_SYMTABNO!();

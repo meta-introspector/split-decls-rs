@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tera!();
         Context!();
+        Tera!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! render_super_in_grandchild_without_redefining_works {
     };
 }
 
-render_super_in_grandchild_without_redefining_works!()
+render_super_in_grandchild_without_redefining_works!();

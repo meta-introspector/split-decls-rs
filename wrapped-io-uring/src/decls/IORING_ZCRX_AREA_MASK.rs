@@ -4,4 +4,4 @@ macro_rules! IORING_ZCRX_AREA_MASK {
     };
 }
 
-IORING_ZCRX_AREA_MASK!()
+IORING_ZCRX_AREA_MASK!();

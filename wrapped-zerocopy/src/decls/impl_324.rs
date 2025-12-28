@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Exclusive!();
         Aliasing!();
+        Exclusive!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_324 {
     };
 }
 
-impl_324!()
+impl_324!();

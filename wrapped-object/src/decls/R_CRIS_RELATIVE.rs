@@ -4,4 +4,4 @@ macro_rules! R_CRIS_RELATIVE {
     };
 }
 
-R_CRIS_RELATIVE!()
+R_CRIS_RELATIVE!();

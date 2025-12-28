@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Span!();
         GenericParamDef!();
+        Span!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Generics {
     };
 }
 
-Generics!()
+Generics!();

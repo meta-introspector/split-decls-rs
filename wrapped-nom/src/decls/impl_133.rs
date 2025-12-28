@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
         Input!();
+        Error!();
         ParserIterator!();
         Parser!();
-        Err!();
         State!();
+        Err!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_133 {
     };
 }
 
-impl_133!()
+impl_133!();

@@ -4,4 +4,4 @@ macro_rules! UnknownLintSuggestion {
     };
 }
 
-UnknownLintSuggestion!()
+UnknownLintSuggestion!();

@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWPBNMS {
     };
 }
 
-SSUBTYP_DWPBNMS!()
+SSUBTYP_DWPBNMS!();

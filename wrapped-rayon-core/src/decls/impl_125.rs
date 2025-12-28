@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        AbortIfPanic!();
+        Yield!();
+        JobRef!();
+        AsCoreLatch!();
         Latch!();
+        CoreLatch!();
         Registry!();
         WorkerThread!();
-        AbortIfPanic!();
-        JobRef!();
-        CoreLatch!();
-        Yield!();
-        AsCoreLatch!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

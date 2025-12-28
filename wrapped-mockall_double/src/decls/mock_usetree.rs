@@ -4,4 +4,4 @@ macro_rules! mock_usetree {
     };
 }
 
-mock_usetree!()
+mock_usetree!();

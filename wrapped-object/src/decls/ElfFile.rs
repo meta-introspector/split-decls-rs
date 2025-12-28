@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Endian!();
         Object!();
-        ReadRef!();
         RelocationSections!();
-        SectionTable!();
-        SymbolTable!();
+        Endian!();
         ProgramHeader!();
         FileHeader!();
+        ReadRef!();
+        SectionTable!();
+        SymbolTable!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! ElfFile {
     };
 }
 
-ElfFile!()
+ElfFile!();

@@ -4,4 +4,4 @@ macro_rules! R_SH_GLOB_DAT {
     };
 }
 
-R_SH_GLOB_DAT!()
+R_SH_GLOB_DAT!();

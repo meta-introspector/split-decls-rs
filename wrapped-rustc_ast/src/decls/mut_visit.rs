@@ -4,4 +4,4 @@ macro_rules! mut_visit {
     };
 }
 
-mut_visit!()
+mut_visit!();

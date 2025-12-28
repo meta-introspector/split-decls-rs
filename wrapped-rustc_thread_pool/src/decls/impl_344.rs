@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         ThreadPoolBuildError!();
+        ErrorKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_344 {
     };
 }
 
-impl_344!()
+impl_344!();

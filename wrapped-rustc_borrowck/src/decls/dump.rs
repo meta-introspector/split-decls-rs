@@ -4,4 +4,4 @@ macro_rules! dump {
     };
 }
 
-dump!()
+dump!();

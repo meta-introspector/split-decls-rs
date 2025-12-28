@@ -4,4 +4,4 @@ macro_rules! adt_dtorck_constraint {
     };
 }
 
-adt_dtorck_constraint!()
+adt_dtorck_constraint!();

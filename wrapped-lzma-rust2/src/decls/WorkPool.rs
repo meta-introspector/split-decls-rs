@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WorkerFunction!();
-        WorkPoolState!();
-        WorkStealingQueue!();
         Error!();
+        WorkerFunction!();
+        WorkStealingQueue!();
+        WorkPoolState!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! WorkPool {
     };
 }
 
-WorkPool!()
+WorkPool!();

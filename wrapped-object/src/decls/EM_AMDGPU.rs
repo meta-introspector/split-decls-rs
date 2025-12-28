@@ -4,4 +4,4 @@ macro_rules! EM_AMDGPU {
     };
 }
 
-EM_AMDGPU!()
+EM_AMDGPU!();

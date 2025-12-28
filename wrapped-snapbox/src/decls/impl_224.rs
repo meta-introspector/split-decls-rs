@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RedactedValue!();
-        RedactedValueInner!();
-        Redactions!();
         Result!();
+        Redactions!();
+        RedactedValueInner!();
+        RedactedValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_224 {
     };
 }
 
-impl_224!()
+impl_224!();

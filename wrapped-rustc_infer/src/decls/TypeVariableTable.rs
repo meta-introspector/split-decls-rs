@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InferCtxtUndoLogs!();
         TypeVariableStorage!();
+        InferCtxtUndoLogs!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TypeVariableTable {
     };
 }
 
-TypeVariableTable!()
+TypeVariableTable!();

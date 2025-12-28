@@ -4,4 +4,4 @@ macro_rules! DT_FINI_ARRAY {
     };
 }
 
-DT_FINI_ARRAY!()
+DT_FINI_ARRAY!();

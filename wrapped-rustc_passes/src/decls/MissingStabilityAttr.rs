@@ -4,4 +4,4 @@ macro_rules! MissingStabilityAttr {
     };
 }
 
-MissingStabilityAttr!()
+MissingStabilityAttr!();

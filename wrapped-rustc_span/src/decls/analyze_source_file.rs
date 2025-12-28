@@ -4,4 +4,4 @@ macro_rules! analyze_source_file {
     };
 }
 
-analyze_source_file!()
+analyze_source_file!();

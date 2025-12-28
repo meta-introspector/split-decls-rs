@@ -4,4 +4,4 @@ macro_rules! PropertyParserBorrowed {
     };
 }
 
-PropertyParserBorrowed!()
+PropertyParserBorrowed!();

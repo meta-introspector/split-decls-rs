@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FieldInfo!();
         ZeroVecAttrs!();
+        FieldInfo!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! make_ule_struct_impl {
     };
 }
 
-make_ule_struct_impl!()
+make_ule_struct_impl!();

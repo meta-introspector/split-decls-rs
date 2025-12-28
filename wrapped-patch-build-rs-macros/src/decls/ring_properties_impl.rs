@@ -12,4 +12,4 @@ Automorphic Ring Properties:
     };
 }
 
-ring_properties_impl!()
+ring_properties_impl!();

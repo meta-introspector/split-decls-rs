@@ -4,4 +4,4 @@ macro_rules! strip_file_header {
     };
 }
 
-strip_file_header!()
+strip_file_header!();

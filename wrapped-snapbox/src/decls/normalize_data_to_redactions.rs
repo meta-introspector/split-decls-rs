@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Data!();
         Redactions!();
+        Data!();
         DataInner!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! normalize_data_to_redactions {
     };
 }
 
-normalize_data_to_redactions!()
+normalize_data_to_redactions!();

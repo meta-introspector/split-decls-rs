@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Label!();
-        Stream!();
         Value!();
+        Stream!();
+        Label!();
         Index!();
         Result!();
         Tag!();
@@ -16,4 +16,4 @@ macro_rules! default_value {
     };
 }
 
-default_value!()
+default_value!();

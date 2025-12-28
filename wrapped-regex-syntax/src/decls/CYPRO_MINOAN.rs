@@ -4,4 +4,4 @@ macro_rules! CYPRO_MINOAN {
     };
 }
 
-CYPRO_MINOAN!()
+CYPRO_MINOAN!();

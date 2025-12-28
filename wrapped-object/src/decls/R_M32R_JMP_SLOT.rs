@@ -4,4 +4,4 @@ macro_rules! R_M32R_JMP_SLOT {
     };
 }
 
-R_M32R_JMP_SLOT!()
+R_M32R_JMP_SLOT!();

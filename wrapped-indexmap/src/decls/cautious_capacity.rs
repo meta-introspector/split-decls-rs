@@ -11,4 +11,4 @@ macro_rules! cautious_capacity {
     };
 }
 
-cautious_capacity!()
+cautious_capacity!();

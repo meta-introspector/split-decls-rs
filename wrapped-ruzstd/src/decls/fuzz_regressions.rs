@@ -4,4 +4,4 @@ macro_rules! fuzz_regressions {
     };
 }
 
-fuzz_regressions!()
+fuzz_regressions!();

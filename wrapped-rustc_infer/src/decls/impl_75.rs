@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InferCtxtUndoLogs!();
         OpaqueTypeTable!();
         OpaqueTypeStorageEntries!();
+        InferCtxtUndoLogs!();
         OpaqueTypeStorage!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

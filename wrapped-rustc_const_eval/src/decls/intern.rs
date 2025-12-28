@@ -4,4 +4,4 @@ macro_rules! intern {
     };
 }
 
-intern!()
+intern!();

@@ -11,4 +11,4 @@ macro_rules! test_parse_version {
     };
 }
 
-test_parse_version!()
+test_parse_version!();

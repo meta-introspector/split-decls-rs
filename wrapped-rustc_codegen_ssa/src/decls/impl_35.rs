@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArArchiveBuilder!();
         UnknownArchiveKind!();
+        ArArchiveBuilder!();
         ArchiveEntry!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

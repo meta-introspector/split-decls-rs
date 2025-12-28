@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MachOSegmentInternal!();
-        MachHeader!();
-        ObjectSegment!();
-        MachOFile!();
         ReadRef!();
+        MachOFile!();
+        MachHeader!();
+        MachOSegmentInternal!();
+        ObjectSegment!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MachOSegment {
     };
 }
 
-MachOSegment!()
+MachOSegment!();

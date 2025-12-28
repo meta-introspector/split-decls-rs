@@ -4,4 +4,4 @@ macro_rules! node_cache {
     };
 }
 
-node_cache!()
+node_cache!();

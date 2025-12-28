@@ -4,4 +4,4 @@ macro_rules! graph_partition {
     };
 }
 
-graph_partition!()
+graph_partition!();

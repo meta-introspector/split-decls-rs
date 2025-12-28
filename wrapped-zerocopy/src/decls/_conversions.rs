@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Aliasing!();
         Alignment!();
-        Aligned!();
-        Reference!();
-        Invariants!();
-        Unaligned!();
-        Valid!();
-        TransmuteFromPtr!();
-        Validity!();
+        Read!();
+        Shared!();
         Unalign!();
         Exclusive!();
-        Read!();
+        Validity!();
+        Valid!();
+        Reference!();
         SizeEq!();
-        Shared!();
+        Unaligned!();
+        TransmuteFromPtr!();
+        Invariants!();
+        Aliasing!();
+        Aligned!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! _conversions {
     };
 }
 
-_conversions!()
+_conversions!();

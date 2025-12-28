@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Hir!();
+        Repetition!();
+        Capture!();
+        Concat!();
         Alternation!();
         Literal!();
-        Look!();
-        Concat!();
-        Repetition!();
-        Hir!();
         Class!();
         HirKind!();
-        Capture!();
+        Look!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

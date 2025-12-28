@@ -4,4 +4,4 @@ macro_rules! CoroutineAndCVariadic {
     };
 }
 
-CoroutineAndCVariadic!()
+CoroutineAndCVariadic!();

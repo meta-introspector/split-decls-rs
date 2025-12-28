@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SparseChunk!();
-        IterMut!();
-        Drain!();
-        OptionDrain!();
-        OptionIter!();
-        Iter!();
         OptionIterMut!();
+        Iter!();
+        IterMut!();
+        OptionDrain!();
+        Drain!();
+        SparseChunk!();
+        OptionIter!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

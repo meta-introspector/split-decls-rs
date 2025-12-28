@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        RootDirFilter!();
-        AesReader!();
-        ZipReadOptions!();
-        ZipFileReader!();
-        ZipFile!();
-        AesInfo!();
-        ZipResult!();
-        CompressionMethod!();
         ZipFileSeekReader!();
+        ZipResult!();
+        ZipFile!();
+        ZipFileReader!();
         ZipFileData!();
+        AesInfo!();
+        CompressionMethod!();
         ZipFileSeek!();
+        ZipReadOptions!();
         ZipError!();
+        AesReader!();
         CentralDirectoryInfo!();
+        RootDirFilter!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

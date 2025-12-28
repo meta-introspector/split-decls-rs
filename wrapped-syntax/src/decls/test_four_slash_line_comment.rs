@@ -8,4 +8,4 @@ macro_rules! test_four_slash_line_comment {
     };
 }
 
-test_four_slash_line_comment!()
+test_four_slash_line_comment!();

@@ -4,4 +4,4 @@ macro_rules! MAX_BLANKS {
     };
 }
 
-MAX_BLANKS!()
+MAX_BLANKS!();

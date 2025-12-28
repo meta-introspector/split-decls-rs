@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_REGINFO {
     };
 }
 
-SHT_MIPS_REGINFO!()
+SHT_MIPS_REGINFO!();

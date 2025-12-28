@@ -11,4 +11,4 @@ macro_rules! MultiSpace0 {
     };
 }
 
-MultiSpace0!()
+MultiSpace0!();

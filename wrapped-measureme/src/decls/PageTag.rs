@@ -4,4 +4,4 @@ macro_rules! PageTag {
     };
 }
 
-PageTag!()
+PageTag!();

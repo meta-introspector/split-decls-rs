@@ -4,4 +4,4 @@ macro_rules! sieve_not_prime {
     };
 }
 
-sieve_not_prime!()
+sieve_not_prime!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Bucket!();
         ParValuesMut!();
+        Bucket!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_136 {
     };
 }
 
-impl_136!()
+impl_136!();

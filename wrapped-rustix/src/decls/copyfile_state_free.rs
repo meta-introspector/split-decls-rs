@@ -11,4 +11,4 @@ macro_rules! copyfile_state_free {
     };
 }
 
-copyfile_state_free!()
+copyfile_state_free!();

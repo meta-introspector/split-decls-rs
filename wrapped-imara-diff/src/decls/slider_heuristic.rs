@@ -4,4 +4,4 @@ macro_rules! slider_heuristic {
     };
 }
 
-slider_heuristic!()
+slider_heuristic!();

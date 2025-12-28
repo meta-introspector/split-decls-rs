@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EdgeHeader!();
         DepNode!();
+        EdgeHeader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SerializedDepGraph {
     };
 }
 
-SerializedDepGraph!()
+SerializedDepGraph!();

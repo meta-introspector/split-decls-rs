@@ -12,4 +12,4 @@ macro_rules! cons_tuples {
     };
 }
 
-cons_tuples!()
+cons_tuples!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stable!();
-        FloatLength!();
         BridgeTys!();
+        FloatLength!();
+        Stable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Throughput!();
         Duration!();
         Step!();
-        Throughput!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DisplayValue {
     };
 }
 
-DisplayValue!()
+DisplayValue!();

@@ -4,4 +4,4 @@ macro_rules! expect_methods_self {
     };
 }
 
-expect_methods_self!()
+expect_methods_self!();

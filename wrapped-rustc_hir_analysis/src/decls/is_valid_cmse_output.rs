@@ -4,4 +4,4 @@ macro_rules! is_valid_cmse_output {
     };
 }
 
-is_valid_cmse_output!()
+is_valid_cmse_output!();

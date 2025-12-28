@@ -4,4 +4,4 @@ macro_rules! check_ge_equal_to_seq {
     };
 }
 
-check_ge_equal_to_seq!()
+check_ge_equal_to_seq!();

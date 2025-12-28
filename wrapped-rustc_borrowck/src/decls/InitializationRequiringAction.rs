@@ -4,4 +4,4 @@ macro_rules! InitializationRequiringAction {
     };
 }
 
-InitializationRequiringAction!()
+InitializationRequiringAction!();

@@ -13,4 +13,4 @@ fn main() {
     };
 }
 
-test_extract_annotations_1!()
+test_extract_annotations_1!();

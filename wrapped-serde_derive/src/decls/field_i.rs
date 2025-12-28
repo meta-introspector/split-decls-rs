@@ -4,4 +4,4 @@ macro_rules! field_i {
     };
 }
 
-field_i!()
+field_i!();

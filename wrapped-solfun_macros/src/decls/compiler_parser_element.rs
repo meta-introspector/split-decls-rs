@@ -4,4 +4,4 @@ macro_rules! compiler_parser_element {
     };
 }
 
-compiler_parser_element!()
+compiler_parser_element!();

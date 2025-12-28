@@ -4,4 +4,4 @@ macro_rules! R_MIPS_TLS_GD {
     };
 }
 
-R_MIPS_TLS_GD!()
+R_MIPS_TLS_GD!();

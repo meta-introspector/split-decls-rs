@@ -4,4 +4,4 @@ macro_rules! to_parser_input {
     };
 }
 
-to_parser_input!()
+to_parser_input!();

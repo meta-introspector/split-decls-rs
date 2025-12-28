@@ -11,4 +11,4 @@ macro_rules! is_locked_file_serially {
     };
 }
 
-is_locked_file_serially!()
+is_locked_file_serially!();

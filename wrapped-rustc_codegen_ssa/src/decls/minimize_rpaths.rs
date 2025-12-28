@@ -4,4 +4,4 @@ macro_rules! minimize_rpaths {
     };
 }
 
-minimize_rpaths!()
+minimize_rpaths!();

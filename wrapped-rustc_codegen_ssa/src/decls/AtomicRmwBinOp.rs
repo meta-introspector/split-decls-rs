@@ -4,4 +4,4 @@ macro_rules! AtomicRmwBinOp {
     };
 }
 
-AtomicRmwBinOp!()
+AtomicRmwBinOp!();

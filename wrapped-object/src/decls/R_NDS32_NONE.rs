@@ -4,4 +4,4 @@ macro_rules! R_NDS32_NONE {
     };
 }
 
-R_NDS32_NONE!()
+R_NDS32_NONE!();

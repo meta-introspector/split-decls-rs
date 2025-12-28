@@ -12,4 +12,4 @@ macro_rules! rooted_project_json {
     };
 }
 
-rooted_project_json!()
+rooted_project_json!();

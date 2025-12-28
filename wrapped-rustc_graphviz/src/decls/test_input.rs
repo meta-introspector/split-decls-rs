@@ -11,4 +11,4 @@ macro_rules! test_input {
     };
 }
 
-test_input!()
+test_input!();

@@ -4,4 +4,4 @@ macro_rules! IAsyncOperationWithProgress {
     };
 }
 
-IAsyncOperationWithProgress!()
+IAsyncOperationWithProgress!();

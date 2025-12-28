@@ -4,4 +4,4 @@ macro_rules! stackvec {
     };
 }
 
-stackvec!()
+stackvec!();

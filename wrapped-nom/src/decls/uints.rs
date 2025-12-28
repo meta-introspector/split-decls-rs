@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        Complete!();
-        ErrorKind!();
-        Err!();
-        Needed!();
         Error!();
-        AsChar!();
         Input!();
+        AsChar!();
+        Complete!();
+        Needed!();
+        ErrorKind!();
+        ParseError!();
         IResult!();
+        Err!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! uints {
     };
 }
 
-uints!()
+uints!();

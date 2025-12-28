@@ -4,4 +4,4 @@ macro_rules! MARGIN {
     };
 }
 
-MARGIN!()
+MARGIN!();

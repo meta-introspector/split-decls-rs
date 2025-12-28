@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InvalidFormatStringSuggestion!();
         InvalidFormatStringNote!();
         InvalidFormatStringLabel!();
-        InvalidFormatStringSuggestion!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InvalidFormatString {
     };
 }
 
-InvalidFormatString!()
+InvalidFormatString!();

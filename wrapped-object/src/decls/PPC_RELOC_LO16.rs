@@ -4,4 +4,4 @@ macro_rules! PPC_RELOC_LO16 {
     };
 }
 
-PPC_RELOC_LO16!()
+PPC_RELOC_LO16!();

@@ -4,4 +4,4 @@ macro_rules! EM_MANIK {
     };
 }
 
-EM_MANIK!()
+EM_MANIK!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PCWSTR!();
         WIN32_ERROR!();
         HKEY!();
-        PCWSTR!();
         REG_VALUE_TYPE!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! macro_17 {
     };
 }
 
-macro_17!()
+macro_17!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        ExistentialProjection!();
-        SubtypePredicate!();
-        HostEffectPredicate!();
         ExistentialTraitRef!();
-        FnSig!();
-        ProjectionPredicate!();
         TraitRef!();
-        AliasTerm!();
+        HostEffectPredicate!();
         TraitPredicate!();
-        CoercePredicate!();
-        AliasTy!();
+        ProjectionPredicate!();
+        ExistentialProjection!();
         NormalizesTo!();
+        SubtypePredicate!();
+        CoercePredicate!();
+        AliasTerm!();
+        FnSig!();
+        AliasTy!();
         PatternKind!();
     };
 }
@@ -23,4 +23,4 @@ macro_rules! macro_89 {
     };
 }
 
-macro_89!()
+macro_89!();

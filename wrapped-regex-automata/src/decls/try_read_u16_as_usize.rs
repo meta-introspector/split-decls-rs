@@ -11,4 +11,4 @@ macro_rules! try_read_u16_as_usize {
     };
 }
 
-try_read_u16_as_usize!()
+try_read_u16_as_usize!();

@@ -11,4 +11,4 @@ macro_rules! walk_flat_map_pat_field {
     };
 }
 
-walk_flat_map_pat_field!()
+walk_flat_map_pat_field!();

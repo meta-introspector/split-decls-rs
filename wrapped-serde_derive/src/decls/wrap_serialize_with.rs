@@ -11,4 +11,4 @@ macro_rules! wrap_serialize_with {
     };
 }
 
-wrap_serialize_with!()
+wrap_serialize_with!();

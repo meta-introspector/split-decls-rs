@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         SectionTable!();
+        ImageDataDirectory!();
+        Result!();
         Error!();
         ReadRef!();
-        Result!();
-        ImageDataDirectory!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_683 {
     };
 }
 
-impl_683!()
+impl_683!();

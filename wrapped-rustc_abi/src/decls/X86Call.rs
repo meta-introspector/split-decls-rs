@@ -4,4 +4,4 @@ macro_rules! X86Call {
     };
 }
 
-X86Call!()
+X86Call!();

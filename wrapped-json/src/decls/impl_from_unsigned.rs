@@ -11,4 +11,4 @@ macro_rules! impl_from_unsigned {
     };
 }
 
-impl_from_unsigned!()
+impl_from_unsigned!();

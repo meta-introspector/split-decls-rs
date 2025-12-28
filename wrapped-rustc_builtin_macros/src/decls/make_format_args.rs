@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        FormatNoArgNamed!();
-        InvalidFormatStringNote!();
         InvalidFormatStringLabel!();
-        ExprToSpannedString!();
-        InvalidFormatString!();
-        Path!();
+        PositionUsedAs!();
         InvalidFormatStringSuggestion!();
         MacroInput!();
-        PositionUsedAs!();
+        Path!();
+        FormatNoArgNamed!();
+        InvalidFormatStringNote!();
+        ExprToSpannedString!();
+        InvalidFormatString!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! make_format_args {
     };
 }
 
-make_format_args!()
+make_format_args!();

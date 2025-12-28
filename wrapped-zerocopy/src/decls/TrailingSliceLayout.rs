@@ -4,4 +4,4 @@ macro_rules! TrailingSliceLayout {
     };
 }
 
-TrailingSliceLayout!()
+TrailingSliceLayout!();

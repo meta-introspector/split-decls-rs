@@ -11,4 +11,4 @@ macro_rules! fcntl_lock {
     };
 }
 
-fcntl_lock!()
+fcntl_lock!();

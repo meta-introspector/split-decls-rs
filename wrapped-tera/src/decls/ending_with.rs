@@ -11,4 +11,4 @@ macro_rules! ending_with {
     };
 }
 
-ending_with!()
+ending_with!();

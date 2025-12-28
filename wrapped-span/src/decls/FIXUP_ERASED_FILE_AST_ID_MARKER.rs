@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ErasedFileAstId!();
-        ErasedFileAstIdKind!();
         Span!();
+        ErasedFileAstIdKind!();
+        ErasedFileAstId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FIXUP_ERASED_FILE_AST_ID_MARKER {
     };
 }
 
-FIXUP_ERASED_FILE_AST_ID_MARKER!()
+FIXUP_ERASED_FILE_AST_ID_MARKER!();

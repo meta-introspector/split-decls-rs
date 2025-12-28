@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LateContext!();
         Info!();
-        LifetimeSyntaxCategories!();
+        LateContext!();
         MismatchedLifetimeSyntaxes!();
         MismatchedLifetimeSyntaxesSuggestion!();
+        LifetimeSyntaxCategories!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! emit_mismatch_diagnostic {
     };
 }
 
-emit_mismatch_diagnostic!()
+emit_mismatch_diagnostic!();

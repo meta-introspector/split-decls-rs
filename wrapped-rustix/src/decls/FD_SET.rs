@@ -4,4 +4,4 @@ macro_rules! FD_SET {
     };
 }
 
-FD_SET!()
+FD_SET!();

@@ -4,4 +4,4 @@ macro_rules! HUFFLEN_TABLE {
     };
 }
 
-HUFFLEN_TABLE!()
+HUFFLEN_TABLE!();

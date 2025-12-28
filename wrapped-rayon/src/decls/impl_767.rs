@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Positions!();
         IndexedParallelIterator!();
         ParallelIterator!();
         PositionsConsumer!();
-        Positions!();
         UnindexedConsumer!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_767 {
     };
 }
 
-impl_767!()
+impl_767!();

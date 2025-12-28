@@ -4,4 +4,4 @@ macro_rules! set_comdat {
     };
 }
 
-set_comdat!()
+set_comdat!();

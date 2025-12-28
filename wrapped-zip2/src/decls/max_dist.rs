@@ -4,4 +4,4 @@ macro_rules! max_dist {
     };
 }
 
-max_dist!()
+max_dist!();

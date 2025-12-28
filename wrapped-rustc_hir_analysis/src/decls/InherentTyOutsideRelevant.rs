@@ -4,4 +4,4 @@ macro_rules! InherentTyOutsideRelevant {
     };
 }
 
-InherentTyOutsideRelevant!()
+InherentTyOutsideRelevant!();

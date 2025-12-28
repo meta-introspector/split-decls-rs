@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ReseedingRng!();
-        OsRng!();
         StdRng!();
+        OsRng!();
+        ReseedingRng!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ThreadRng {
     };
 }
 
-ThreadRng!()
+ThreadRng!();

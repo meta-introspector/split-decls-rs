@@ -4,4 +4,4 @@ macro_rules! json_internal_vec {
     };
 }
 
-json_internal_vec!()
+json_internal_vec!();

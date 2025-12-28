@@ -4,4 +4,4 @@ macro_rules! test_required_hashes {
     };
 }
 
-test_required_hashes!()
+test_required_hashes!();

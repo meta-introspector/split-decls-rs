@@ -11,4 +11,4 @@ macro_rules! set_capabilities_secure_bits {
     };
 }
 
-set_capabilities_secure_bits!()
+set_capabilities_secure_bits!();

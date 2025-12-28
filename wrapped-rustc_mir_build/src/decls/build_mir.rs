@@ -4,4 +4,4 @@ macro_rules! build_mir {
     };
 }
 
-build_mir!()
+build_mir!();

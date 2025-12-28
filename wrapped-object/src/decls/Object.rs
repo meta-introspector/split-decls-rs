@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        StandardSection!();
         Symbol!();
-        SubArchitecture!();
-        MachOBuildVersion!();
-        Comdat!();
-        BinaryFormat!();
-        File!();
-        Section!();
         Mangling!();
+        SectionId!();
+        MachOBuildVersion!();
+        Section!();
         SymbolId!();
         Endianness!();
-        Architecture!();
-        SectionId!();
+        BinaryFormat!();
+        File!();
         FileFlags!();
+        Architecture!();
+        SubArchitecture!();
+        Comdat!();
+        StandardSection!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! Object {
     };
 }
 
-Object!()
+Object!();

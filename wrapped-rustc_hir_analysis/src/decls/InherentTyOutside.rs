@@ -4,4 +4,4 @@ macro_rules! InherentTyOutside {
     };
 }
 
-InherentTyOutside!()
+InherentTyOutside!();

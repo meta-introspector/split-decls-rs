@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Role!();
         DHKEM_X25519_SHA256_CHACHA20!();
+        Role!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ModePsk {
     };
 }
 
-ModePsk!()
+ModePsk!();

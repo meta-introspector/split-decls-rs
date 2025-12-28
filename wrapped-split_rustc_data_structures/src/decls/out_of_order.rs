@@ -11,4 +11,4 @@ macro_rules! out_of_order {
     };
 }
 
-out_of_order!()
+out_of_order!();

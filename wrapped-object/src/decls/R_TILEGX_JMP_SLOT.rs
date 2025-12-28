@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_JMP_SLOT {
     };
 }
 
-R_TILEGX_JMP_SLOT!()
+R_TILEGX_JMP_SLOT!();

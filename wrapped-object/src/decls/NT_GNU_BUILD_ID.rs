@@ -4,4 +4,4 @@ macro_rules! NT_GNU_BUILD_ID {
     };
 }
 
-NT_GNU_BUILD_ID!()
+NT_GNU_BUILD_ID!();

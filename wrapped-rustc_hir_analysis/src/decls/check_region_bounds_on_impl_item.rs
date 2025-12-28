@@ -11,4 +11,4 @@ macro_rules! check_region_bounds_on_impl_item {
     };
 }
 
-check_region_bounds_on_impl_item!()
+check_region_bounds_on_impl_item!();

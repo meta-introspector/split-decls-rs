@@ -4,4 +4,4 @@ macro_rules! panic_propagate_still_execute_4 {
     };
 }
 
-panic_propagate_still_execute_4!()
+panic_propagate_still_execute_4!();

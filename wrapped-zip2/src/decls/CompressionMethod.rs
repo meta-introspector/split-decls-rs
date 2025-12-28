@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ppmd!();
-        Lzma!();
         ZipFileData!();
+        Lzma!();
+        Ppmd!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CompressionMethod {
     };
 }
 
-CompressionMethod!()
+CompressionMethod!();

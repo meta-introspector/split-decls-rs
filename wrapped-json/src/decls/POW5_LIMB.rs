@@ -11,4 +11,4 @@ macro_rules! POW5_LIMB {
     };
 }
 
-POW5_LIMB!()
+POW5_LIMB!();

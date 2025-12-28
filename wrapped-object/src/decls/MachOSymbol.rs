@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        MachHeader!();
-        Nlist!();
-        SymbolIndex!();
         MachOFile!();
-        ReadRef!();
         ObjectSymbol!();
+        MachHeader!();
+        ReadRef!();
+        SymbolIndex!();
+        Nlist!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! MachOSymbol {
     };
 }
 
-MachOSymbol!()
+MachOSymbol!();

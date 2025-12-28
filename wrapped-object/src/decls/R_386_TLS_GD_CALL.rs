@@ -11,4 +11,4 @@ macro_rules! R_386_TLS_GD_CALL {
     };
 }
 
-R_386_TLS_GD_CALL!()
+R_386_TLS_GD_CALL!();

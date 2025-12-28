@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Shake256!();
         UnknownCryptoError!();
+        Shake256!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_208 {
     };
 }
 
-impl_208!()
+impl_208!();

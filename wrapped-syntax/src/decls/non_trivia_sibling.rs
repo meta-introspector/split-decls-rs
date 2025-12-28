@@ -11,4 +11,4 @@ macro_rules! non_trivia_sibling {
     };
 }
 
-non_trivia_sibling!()
+non_trivia_sibling!();

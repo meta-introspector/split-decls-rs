@@ -4,4 +4,4 @@ macro_rules! format_docs_ {
     };
 }
 
-format_docs_!()
+format_docs_!();

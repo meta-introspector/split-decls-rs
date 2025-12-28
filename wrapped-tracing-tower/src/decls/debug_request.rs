@@ -4,4 +4,4 @@ macro_rules! debug_request {
     };
 }
 
-debug_request!()
+debug_request!();

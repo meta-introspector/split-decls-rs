@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WitnessPat!();
         Usefulness!();
         PatCx!();
+        WitnessPat!();
         MatchArm!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! UsefulnessReport {
     };
 }
 
-UsefulnessReport!()
+UsefulnessReport!();

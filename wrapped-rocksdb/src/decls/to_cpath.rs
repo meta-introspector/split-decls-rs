@@ -11,4 +11,4 @@ macro_rules! to_cpath {
     };
 }
 
-to_cpath!()
+to_cpath!();

@@ -4,4 +4,4 @@ macro_rules! AcquireThreadHandler {
     };
 }
 
-AcquireThreadHandler!()
+AcquireThreadHandler!();

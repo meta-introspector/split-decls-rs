@@ -4,4 +4,4 @@ macro_rules! ML_MAX_LOG {
     };
 }
 
-ML_MAX_LOG!()
+ML_MAX_LOG!();

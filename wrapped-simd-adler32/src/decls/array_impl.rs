@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Adler32!();
         Adler32Hash!();
+        Adler32!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! array_impl {
     };
 }
 
-array_impl!()
+array_impl!();

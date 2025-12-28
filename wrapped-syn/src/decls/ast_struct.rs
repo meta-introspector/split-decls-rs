@@ -4,4 +4,4 @@ macro_rules! ast_struct {
     };
 }
 
-ast_struct!()
+ast_struct!();

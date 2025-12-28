@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DeArray!();
-        DeValue!();
         State!();
+        DeValue!();
+        DeArray!();
         TraceScope!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_178 {
     };
 }
 
-impl_178!()
+impl_178!();

@@ -4,4 +4,4 @@ macro_rules! Bah {
     };
 }
 
-Bah!()
+Bah!();

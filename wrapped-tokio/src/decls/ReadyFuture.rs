@@ -4,4 +4,4 @@ macro_rules! ReadyFuture {
     };
 }
 
-ReadyFuture!()
+ReadyFuture!();

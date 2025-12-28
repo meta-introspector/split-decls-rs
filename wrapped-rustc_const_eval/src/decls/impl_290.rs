@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MemPlace!();
         MPlaceTy!();
-        Immediate!();
         MemPlaceMeta!();
+        MemPlace!();
+        Immediate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_290 {
     };
 }
 
-impl_290!()
+impl_290!();

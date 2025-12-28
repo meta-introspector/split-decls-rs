@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Type!();
+        Field!();
         TypeDef!();
         MethodDef!();
-        Field!();
-        Type!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Item {
     };
 }
 
-Item!()
+Item!();

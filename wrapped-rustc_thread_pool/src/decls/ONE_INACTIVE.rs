@@ -4,4 +4,4 @@ macro_rules! ONE_INACTIVE {
     };
 }
 
-ONE_INACTIVE!()
+ONE_INACTIVE!();

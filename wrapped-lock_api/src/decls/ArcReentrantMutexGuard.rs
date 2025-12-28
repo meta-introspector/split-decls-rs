@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         GuardNoSend!();
         Mutex!();
-        ReentrantMutex!();
         ReentrantMutexGuard!();
         RawMutex!();
         GetThreadId!();
+        ReentrantMutex!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ArcReentrantMutexGuard {
     };
 }
 
-ArcReentrantMutexGuard!()
+ArcReentrantMutexGuard!();

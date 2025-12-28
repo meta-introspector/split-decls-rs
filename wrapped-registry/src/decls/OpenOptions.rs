@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Transaction!();
         Key!();
+        Transaction!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! OpenOptions {
     };
 }
 
-OpenOptions!()
+OpenOptions!();

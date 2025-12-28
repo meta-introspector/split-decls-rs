@@ -4,4 +4,4 @@ macro_rules! Notification {
     };
 }
 
-Notification!()
+Notification!();

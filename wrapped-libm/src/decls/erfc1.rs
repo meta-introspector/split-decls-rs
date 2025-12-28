@@ -4,4 +4,4 @@ macro_rules! erfc1 {
     };
 }
 
-erfc1!()
+erfc1!();

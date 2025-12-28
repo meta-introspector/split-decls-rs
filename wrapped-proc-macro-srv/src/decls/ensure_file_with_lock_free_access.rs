@@ -4,4 +4,4 @@ macro_rules! ensure_file_with_lock_free_access {
     };
 }
 
-ensure_file_with_lock_free_access!()
+ensure_file_with_lock_free_access!();

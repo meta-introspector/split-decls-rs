@@ -4,4 +4,4 @@ macro_rules! LISU {
     };
 }
 
-LISU!()
+LISU!();

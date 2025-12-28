@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        OnDuplicate!();
-        Stage!();
-        UnsafeSpecializationMarkerParser!();
         NoArgsAttributeParser!();
+        OnDuplicate!();
         AllowedTargets!();
+        UnsafeSpecializationMarkerParser!();
+        Stage!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

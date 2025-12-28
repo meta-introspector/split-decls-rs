@@ -11,4 +11,4 @@ macro_rules! unlock_notify_cb {
     };
 }
 
-unlock_notify_cb!()
+unlock_notify_cb!();

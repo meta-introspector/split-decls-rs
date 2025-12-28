@@ -11,4 +11,4 @@ macro_rules! slice_owned {
     };
 }
 
-slice_owned!()
+slice_owned!();

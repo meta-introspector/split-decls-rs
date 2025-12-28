@@ -4,4 +4,4 @@ macro_rules! BUF_LEN {
     };
 }
 
-BUF_LEN!()
+BUF_LEN!();

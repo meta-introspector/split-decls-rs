@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Formatter!();
         OutputStyle!();
         Results!();
-        Formatter!();
         Analysis!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

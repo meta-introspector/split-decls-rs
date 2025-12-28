@@ -3,8 +3,8 @@ macro_rules! deps {
         NonLocalDefinitions!();
         PathCollector!();
         LateContext!();
-        NonLocalDefinitionsDiag!();
         NonLocalDefinitionsCargoUpdateNote!();
+        NonLocalDefinitionsDiag!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_682 {
     };
 }
 
-impl_682!()
+impl_682!();

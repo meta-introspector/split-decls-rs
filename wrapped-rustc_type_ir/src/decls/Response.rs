@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Certainty!();
         Interner!();
+        Certainty!();
         CanonicalVarValues!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Response {
     };
 }
 
-Response!()
+Response!();

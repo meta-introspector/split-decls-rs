@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TP_CALLBACK_ENVIRON_V3!();
-        Pool!();
         Scope!();
+        Pool!();
+        TP_CALLBACK_ENVIRON_V3!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

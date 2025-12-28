@@ -4,4 +4,4 @@ macro_rules! missing {
     };
 }
 
-missing!()
+missing!();

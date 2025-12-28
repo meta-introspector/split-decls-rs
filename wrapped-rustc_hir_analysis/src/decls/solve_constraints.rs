@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SolveContext!();
-        ConstraintContext!();
         InferredIndex!();
+        ConstraintContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! solve_constraints {
     };
 }
 
-solve_constraints!()
+solve_constraints!();

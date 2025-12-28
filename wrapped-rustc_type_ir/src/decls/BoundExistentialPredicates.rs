@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ExistentialProjection!();
+        Relate!();
         SliceLike!();
-        Binder!();
+        ExistentialProjection!();
         ExistentialPredicate!();
         Interner!();
+        Binder!();
         ExistentialTraitRef!();
-        Relate!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! BoundExistentialPredicates {
     };
 }
 
-BoundExistentialPredicates!()
+BoundExistentialPredicates!();

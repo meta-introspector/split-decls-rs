@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IndexType!();
         SomeIter!();
         WSuc!();
-        IndexType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! proj2 {
     };
 }
 
-proj2!()
+proj2!();

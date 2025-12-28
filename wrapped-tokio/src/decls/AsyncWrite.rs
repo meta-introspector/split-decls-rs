@@ -4,4 +4,4 @@ macro_rules! AsyncWrite {
     };
 }
 
-AsyncWrite!()
+AsyncWrite!();

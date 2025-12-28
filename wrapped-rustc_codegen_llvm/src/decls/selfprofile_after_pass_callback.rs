@@ -11,4 +11,4 @@ macro_rules! selfprofile_after_pass_callback {
     };
 }
 
-selfprofile_after_pass_callback!()
+selfprofile_after_pass_callback!();

@@ -4,4 +4,4 @@ macro_rules! unsafe_impl_for_power_set {
     };
 }
 
-unsafe_impl_for_power_set!()
+unsafe_impl_for_power_set!();

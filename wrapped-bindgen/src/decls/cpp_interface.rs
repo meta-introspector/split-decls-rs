@@ -4,4 +4,4 @@ macro_rules! cpp_interface {
     };
 }
 
-cpp_interface!()
+cpp_interface!();

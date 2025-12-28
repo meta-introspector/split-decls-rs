@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CmseCallGeneric!();
-        CmseOutputStackSpill!();
-        CmseInputsStackSpill!();
         CmseEntryGeneric!();
+        CmseOutputStackSpill!();
+        CmseCallGeneric!();
+        CmseInputsStackSpill!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! validate_cmse_abi {
     };
 }
 
-validate_cmse_abi!()
+validate_cmse_abi!();

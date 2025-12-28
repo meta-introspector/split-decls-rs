@@ -4,4 +4,4 @@ macro_rules! SHN_LOOS {
     };
 }
 
-SHN_LOOS!()
+SHN_LOOS!();

@@ -4,4 +4,4 @@ macro_rules! WorkUnit {
     };
 }
 
-WorkUnit!()
+WorkUnit!();

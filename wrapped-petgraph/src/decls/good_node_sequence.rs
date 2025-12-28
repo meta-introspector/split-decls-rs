@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NodeIndex!();
+        FasNodeIndex!();
         FasNode!();
         FasNodeContainer!();
-        FasNodeIndex!();
-        NodeLinkedList!();
         Buckets!();
+        NodeIndex!();
+        NodeLinkedList!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! good_node_sequence {
     };
 }
 
-good_node_sequence!()
+good_node_sequence!();

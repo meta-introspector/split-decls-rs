@@ -4,4 +4,4 @@ macro_rules! Mcg128Xsl64 {
     };
 }
 
-Mcg128Xsl64!()
+Mcg128Xsl64!();

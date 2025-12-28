@@ -11,4 +11,4 @@ macro_rules! parse_braced {
     };
 }
 
-parse_braced!()
+parse_braced!();

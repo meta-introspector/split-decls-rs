@@ -4,4 +4,4 @@ macro_rules! compare256 {
     };
 }
 
-compare256!()
+compare256!();

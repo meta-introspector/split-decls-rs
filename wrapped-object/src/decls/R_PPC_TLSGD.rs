@@ -4,4 +4,4 @@ macro_rules! R_PPC_TLSGD {
     };
 }
 
-R_PPC_TLSGD!()
+R_PPC_TLSGD!();

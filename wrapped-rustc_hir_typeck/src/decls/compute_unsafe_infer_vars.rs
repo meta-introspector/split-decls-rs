@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnsafeUseReason!();
         FnCtxt!();
+        UnsafeUseReason!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! compute_unsafe_infer_vars {
     };
 }
 
-compute_unsafe_infer_vars!()
+compute_unsafe_infer_vars!();

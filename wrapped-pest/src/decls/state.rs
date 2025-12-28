@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Pairs!();
-        Error!();
-        ParserState!();
-        ParseResult!();
         ErrorVariant!();
+        ParseResult!();
+        Error!();
         Position!();
         RuleType!();
+        Pairs!();
+        ParserState!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! state {
     };
 }
 
-state!()
+state!();

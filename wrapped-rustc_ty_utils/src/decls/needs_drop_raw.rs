@@ -11,4 +11,4 @@ macro_rules! needs_drop_raw {
     };
 }
 
-needs_drop_raw!()
+needs_drop_raw!();

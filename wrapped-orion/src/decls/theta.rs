@@ -4,4 +4,4 @@ macro_rules! theta {
     };
 }
 
-theta!()
+theta!();

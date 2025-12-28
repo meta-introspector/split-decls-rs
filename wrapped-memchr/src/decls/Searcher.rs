@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Prefilter!();
         SearcherKindFn!();
         Finder!();
-        Prefilter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Searcher {
     };
 }
 
-Searcher!()
+Searcher!();

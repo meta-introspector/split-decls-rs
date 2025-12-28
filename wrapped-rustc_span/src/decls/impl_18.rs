@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FileLoader!();
         RealFileLoader!();
         SourceFile!();
+        FileLoader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

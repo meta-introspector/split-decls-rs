@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConstBuffer!();
         RuntimeName!();
         Interface!();
         RuntimeType!();
+        ConstBuffer!();
         GUID!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

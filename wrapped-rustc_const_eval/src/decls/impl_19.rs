@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConstCx!();
-        NonConstOp!();
-        FnCallNonConst!();
         NonConstImplNote!();
+        ConstCx!();
+        FnCallNonConst!();
+        NonConstOp!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

@@ -4,4 +4,4 @@ macro_rules! TypeIdHasher {
     };
 }
 
-TypeIdHasher!()
+TypeIdHasher!();

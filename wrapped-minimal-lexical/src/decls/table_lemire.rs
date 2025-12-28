@@ -4,4 +4,4 @@ macro_rules! table_lemire {
     };
 }
 
-table_lemire!()
+table_lemire!();

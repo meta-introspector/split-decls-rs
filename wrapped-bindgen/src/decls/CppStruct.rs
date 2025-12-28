@@ -4,4 +4,4 @@ macro_rules! CppStruct {
     };
 }
 
-CppStruct!()
+CppStruct!();

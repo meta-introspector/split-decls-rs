@@ -11,4 +11,4 @@ macro_rules! check_range_split_at_overflow {
     };
 }
 
-check_range_split_at_overflow!()
+check_range_split_at_overflow!();

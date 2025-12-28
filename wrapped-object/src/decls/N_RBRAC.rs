@@ -4,4 +4,4 @@ macro_rules! N_RBRAC {
     };
 }
 
-N_RBRAC!()
+N_RBRAC!();

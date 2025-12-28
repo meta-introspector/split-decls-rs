@@ -11,4 +11,4 @@ macro_rules! create_mono_items_for_vtable_methods {
     };
 }
 
-create_mono_items_for_vtable_methods!()
+create_mono_items_for_vtable_methods!();

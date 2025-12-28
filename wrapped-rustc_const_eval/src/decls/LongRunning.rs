@@ -4,4 +4,4 @@ macro_rules! LongRunning {
     };
 }
 
-LongRunning!()
+LongRunning!();

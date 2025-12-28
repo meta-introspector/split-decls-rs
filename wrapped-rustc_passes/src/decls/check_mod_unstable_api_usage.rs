@@ -12,4 +12,4 @@ macro_rules! check_mod_unstable_api_usage {
     };
 }
 
-check_mod_unstable_api_usage!()
+check_mod_unstable_api_usage!();

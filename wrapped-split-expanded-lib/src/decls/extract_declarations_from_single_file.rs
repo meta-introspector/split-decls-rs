@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PublicSymbol!();
-        ErrorSample!();
         FileMetadata!();
-        RustcInfo!();
         ExtractionResult!();
+        PublicSymbol!();
         DeclsVisitor!();
+        ErrorSample!();
+        RustcInfo!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! extract_declarations_from_single_file {
     };
 }
 
-extract_declarations_from_single_file!()
+extract_declarations_from_single_file!();

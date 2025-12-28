@@ -4,4 +4,4 @@ macro_rules! into_url {
     };
 }
 
-into_url!()
+into_url!();

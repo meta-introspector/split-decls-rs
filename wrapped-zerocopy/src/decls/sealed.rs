@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         Shared!();
-        Uninit!();
-        AsInitialized!();
-        BecauseImmutable!();
-        Aligned!();
-        Exclusive!();
         Unaligned!();
+        Aligned!();
+        Uninit!();
+        Exclusive!();
+        AsInitialized!();
         Initialized!();
-        Valid!();
+        BecauseImmutable!();
         BecauseExclusive!();
+        Valid!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! sealed {
     };
 }
 
-sealed!()
+sealed!();

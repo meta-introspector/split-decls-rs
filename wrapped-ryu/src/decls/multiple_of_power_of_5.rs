@@ -4,4 +4,4 @@ macro_rules! multiple_of_power_of_5 {
     };
 }
 
-multiple_of_power_of_5!()
+multiple_of_power_of_5!();

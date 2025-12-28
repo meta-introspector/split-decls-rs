@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Block!();
         Local!();
         Expr!();
         Walkable!();
-        Block!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! LocalKind {
     };
 }
 
-LocalKind!()
+LocalKind!();

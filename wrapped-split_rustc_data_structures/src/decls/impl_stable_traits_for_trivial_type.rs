@@ -12,4 +12,4 @@ macro_rules! impl_stable_traits_for_trivial_type {
     };
 }
 
-impl_stable_traits_for_trivial_type!()
+impl_stable_traits_for_trivial_type!();

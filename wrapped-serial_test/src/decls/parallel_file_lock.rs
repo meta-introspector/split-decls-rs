@@ -4,4 +4,4 @@ macro_rules! parallel_file_lock {
     };
 }
 
-parallel_file_lock!()
+parallel_file_lock!();

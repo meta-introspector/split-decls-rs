@@ -4,4 +4,4 @@ macro_rules! ReportOn {
     };
 }
 
-ReportOn!()
+ReportOn!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Error!();
-        V2!();
-        TrustedToken!();
-        Footer!();
-        Claims!();
         Public!();
         V3!();
-        UntrustedToken!();
+        V2!();
         V4!();
+        Footer!();
         Local!();
+        UntrustedToken!();
+        Error!();
+        Claims!();
+        TrustedToken!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! tests_untrusted {
     };
 }
 
-tests_untrusted!()
+tests_untrusted!();

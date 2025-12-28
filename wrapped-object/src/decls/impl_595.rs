@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endian!();
         Section64!();
+        Endian!();
         Section!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_595 {
     };
 }
 
-impl_595!()
+impl_595!();

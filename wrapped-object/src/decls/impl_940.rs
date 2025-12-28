@@ -1,43 +1,43 @@
 macro_rules! deps {
     () => {
-        SectionId!();
-        SectionIndex!();
+        SectionFlags!();
+        SymbolScope!();
+        Section!();
+        SymbolFlags!();
         ComdatKind!();
-        AuxSymbolWeak!();
-        SectionKind!();
-        WritableBuffer!();
+        BinaryFormat!();
         SymbolOffsets!();
-        File!();
-        RelocationEncoding!();
-        Symbol!();
         SymbolKind!();
-        Result!();
-        SymbolSection!();
+        AuxSymbolWeak!();
+        RelocationFlags!();
+        AuxSymbolSection!();
+        Architecture!();
         SymbolId!();
-        GnuProperty!();
         SubArchitecture!();
         Note!();
-        SymbolFlags!();
-        StandardSection!();
-        SectionFlags!();
-        Writer!();
-        AuxSymbolSection!();
-        Dynamic!();
-        FileFlags!();
-        FileHeader!();
-        Section!();
-        SectionOffsets!();
-        RelocationKind!();
-        BinaryFormat!();
-        Relocation!();
-        SymbolScope!();
-        SectionHeader!();
-        Architecture!();
-        RelocationFlags!();
-        CoffExportStyle!();
-        Error!();
-        Endianness!();
+        RelocationEncoding!();
         Object!();
+        File!();
+        RelocationKind!();
+        WritableBuffer!();
+        SectionId!();
+        Error!();
+        SectionIndex!();
+        StandardSection!();
+        SymbolSection!();
+        Result!();
+        CoffExportStyle!();
+        Relocation!();
+        FileHeader!();
+        FileFlags!();
+        SectionOffsets!();
+        SectionHeader!();
+        Writer!();
+        GnuProperty!();
+        Endianness!();
+        Symbol!();
+        SectionKind!();
+        Dynamic!();
     };
 }
 
@@ -48,4 +48,4 @@ macro_rules! impl_940 {
     };
 }
 
-impl_940!()
+impl_940!();

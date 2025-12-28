@@ -4,4 +4,4 @@ macro_rules! InvalidPattern {
     };
 }
 
-InvalidPattern!()
+InvalidPattern!();

@@ -4,4 +4,4 @@ macro_rules! R_MIPS_TLS_DTPMOD64 {
     };
 }
 
-R_MIPS_TLS_DTPMOD64!()
+R_MIPS_TLS_DTPMOD64!();

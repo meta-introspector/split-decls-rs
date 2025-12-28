@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Symbols!();
         File!();
+        Symbols!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FileAux64 {
     };
 }
 
-FileAux64!()
+FileAux64!();

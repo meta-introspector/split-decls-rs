@@ -4,4 +4,4 @@ macro_rules! STT_HIOS {
     };
 }
 
-STT_HIOS!()
+STT_HIOS!();

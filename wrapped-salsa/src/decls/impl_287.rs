@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Coordinate!();
-        Zalsa!();
         Event!();
-        Storage!();
-        ZalsaLocal!();
-        ErasedJar!();
-        CoordinateDrop!();
-        StorageHandle!();
         Database!();
+        ErasedJar!();
+        Zalsa!();
+        StorageHandle!();
+        ZalsaLocal!();
+        Storage!();
+        CoordinateDrop!();
+        Coordinate!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_287 {
     };
 }
 
-impl_287!()
+impl_287!();

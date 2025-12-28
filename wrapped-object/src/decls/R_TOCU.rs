@@ -4,4 +4,4 @@ macro_rules! R_TOCU {
     };
 }
 
-R_TOCU!()
+R_TOCU!();

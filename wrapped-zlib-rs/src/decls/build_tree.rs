@@ -13,4 +13,4 @@ macro_rules! build_tree {
     };
 }
 
-build_tree!()
+build_tree!();

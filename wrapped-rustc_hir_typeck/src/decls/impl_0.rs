@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Diverges!();
-        AsCoercionSite!();
-        ItemKind!();
-        CoerceMany!();
-        FnCtxt!();
-        RemoveSemiForCoerce!();
-        Needs!();
-        GatherLocalsVisitor!();
         Expectation!();
+        Diverges!();
+        CoerceMany!();
+        ItemKind!();
+        RemoveSemiForCoerce!();
+        GatherLocalsVisitor!();
+        Needs!();
+        AsCoercionSite!();
+        FnCtxt!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_0 {
     };
 }
 
-impl_0!()
+impl_0!();

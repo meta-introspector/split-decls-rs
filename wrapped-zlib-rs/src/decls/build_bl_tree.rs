@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         State!();
-        TreeDesc!();
         StaticTreeDesc!();
+        TreeDesc!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! build_bl_tree {
     };
 }
 
-build_bl_tree!()
+build_bl_tree!();

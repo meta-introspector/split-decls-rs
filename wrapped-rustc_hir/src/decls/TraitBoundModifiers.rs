@@ -4,4 +4,4 @@ macro_rules! TraitBoundModifiers {
     };
 }
 
-TraitBoundModifiers!()
+TraitBoundModifiers!();

@@ -11,4 +11,4 @@ macro_rules! AtomicU16 {
     };
 }
 
-AtomicU16!()
+AtomicU16!();

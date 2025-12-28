@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArcJob!();
         JobRefId!();
+        ArcJob!();
         JobRef!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

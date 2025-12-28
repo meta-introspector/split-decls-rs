@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SetUniqueComdat!();
         Linkage!();
         Builder!();
+        SetUniqueComdat!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! codegen_msvc_try {
     };
 }
 
-codegen_msvc_try!()
+codegen_msvc_try!();

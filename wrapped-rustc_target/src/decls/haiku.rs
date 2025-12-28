@@ -4,4 +4,4 @@ macro_rules! haiku {
     };
 }
 
-haiku!()
+haiku!();

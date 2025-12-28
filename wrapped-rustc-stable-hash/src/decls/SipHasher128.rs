@@ -11,4 +11,4 @@ macro_rules! SipHasher128 {
     };
 }
 
-SipHasher128!()
+SipHasher128!();

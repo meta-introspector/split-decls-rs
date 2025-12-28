@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImageRomOptionalHeader!();
         ImageFileHeader!();
+        ImageRomOptionalHeader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ImageRomHeaders {
     };
 }
 
-ImageRomHeaders!()
+ImageRomHeaders!();

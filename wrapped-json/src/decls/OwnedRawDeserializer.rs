@@ -4,4 +4,4 @@ macro_rules! OwnedRawDeserializer {
     };
 }
 
-OwnedRawDeserializer!()
+OwnedRawDeserializer!();

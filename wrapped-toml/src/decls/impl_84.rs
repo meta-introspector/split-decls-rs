@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ValueDeserializer!();
-        Value!();
         Error!();
+        Value!();
+        ValueDeserializer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_84 {
     };
 }
 
-impl_84!()
+impl_84!();

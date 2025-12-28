@@ -4,4 +4,4 @@ macro_rules! NumberFieldDeserializer {
     };
 }
 
-NumberFieldDeserializer!()
+NumberFieldDeserializer!();

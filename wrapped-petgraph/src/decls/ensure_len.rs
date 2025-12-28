@@ -4,4 +4,4 @@ macro_rules! ensure_len {
     };
 }
 
-ensure_len!()
+ensure_len!();

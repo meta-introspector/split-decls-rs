@@ -4,4 +4,4 @@ macro_rules! R_LARCH_TLS_LE_HI20 {
     };
 }
 
-R_LARCH_TLS_LE_HI20!()
+R_LARCH_TLS_LE_HI20!();

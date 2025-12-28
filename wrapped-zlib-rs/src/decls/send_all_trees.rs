@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         StaticTreeDesc!();
+        State!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! send_all_trees {
     };
 }
 
-send_all_trees!()
+send_all_trees!();

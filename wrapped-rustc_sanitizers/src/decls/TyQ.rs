@@ -4,4 +4,4 @@ macro_rules! TyQ {
     };
 }
 
-TyQ!()
+TyQ!();

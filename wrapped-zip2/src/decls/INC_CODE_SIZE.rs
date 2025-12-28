@@ -4,4 +4,4 @@ macro_rules! INC_CODE_SIZE {
     };
 }
 
-INC_CODE_SIZE!()
+INC_CODE_SIZE!();

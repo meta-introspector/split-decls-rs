@@ -4,4 +4,4 @@ macro_rules! AbiErrorUnsupportedVectorType {
     };
 }
 
-AbiErrorUnsupportedVectorType!()
+AbiErrorUnsupportedVectorType!();

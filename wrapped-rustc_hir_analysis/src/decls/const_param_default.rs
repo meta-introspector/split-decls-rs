@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FeedConstTy!();
         ItemCtxt!();
+        FeedConstTy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! const_param_default {
     };
 }
 
-const_param_default!()
+const_param_default!();

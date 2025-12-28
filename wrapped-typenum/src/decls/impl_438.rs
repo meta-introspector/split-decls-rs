@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Len!();
         UTerm!();
         Length!();
         BitDiff!();
         Unsigned!();
+        Len!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_438 {
     };
 }
 
-impl_438!()
+impl_438!();

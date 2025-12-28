@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U32!();
         Endian!();
         LcStr!();
+        U32!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SubLibraryCommand {
     };
 }
 
-SubLibraryCommand!()
+SubLibraryCommand!();

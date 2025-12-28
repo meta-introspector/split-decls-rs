@@ -4,4 +4,4 @@ macro_rules! LinkFrameworkApple {
     };
 }
 
-LinkFrameworkApple!()
+LinkFrameworkApple!();

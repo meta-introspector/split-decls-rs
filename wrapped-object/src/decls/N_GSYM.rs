@@ -4,4 +4,4 @@ macro_rules! N_GSYM {
     };
 }
 
-N_GSYM!()
+N_GSYM!();

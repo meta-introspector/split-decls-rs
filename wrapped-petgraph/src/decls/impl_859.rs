@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IndexType!();
-        NodeIndex!();
-        EdgeIndex!();
         EdgeReference!();
         EdgeRef!();
+        NodeIndex!();
+        IndexType!();
+        EdgeIndex!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_859 {
     };
 }
 
-impl_859!()
+impl_859!();

@@ -11,4 +11,4 @@ macro_rules! filter_on_array_literal_works {
     };
 }
 
-filter_on_array_literal_works!()
+filter_on_array_literal_works!();

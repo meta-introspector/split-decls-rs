@@ -4,4 +4,4 @@ macro_rules! check_for_each_with {
     };
 }
 
-check_for_each_with!()
+check_for_each_with!();

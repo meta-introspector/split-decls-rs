@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Lexer!();
-        Time!();
-        TokenKind!();
         Datetime!();
-        DatetimeParseError!();
-        Date!();
+        Lexer!();
+        TokenKind!();
         Offset!();
+        DatetimeParseError!();
+        Time!();
+        Date!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

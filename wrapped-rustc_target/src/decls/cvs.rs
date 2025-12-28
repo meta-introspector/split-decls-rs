@@ -4,4 +4,4 @@ macro_rules! cvs {
     };
 }
 
-cvs!()
+cvs!();

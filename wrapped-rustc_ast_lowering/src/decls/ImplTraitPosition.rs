@@ -4,4 +4,4 @@ macro_rules! ImplTraitPosition {
     };
 }
 
-ImplTraitPosition!()
+ImplTraitPosition!();

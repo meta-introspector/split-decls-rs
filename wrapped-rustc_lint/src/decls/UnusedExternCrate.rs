@@ -4,4 +4,4 @@ macro_rules! UnusedExternCrate {
     };
 }
 
-UnusedExternCrate!()
+UnusedExternCrate!();

@@ -14,4 +14,4 @@ macro_rules! run_thin {
     };
 }
 
-run_thin!()
+run_thin!();

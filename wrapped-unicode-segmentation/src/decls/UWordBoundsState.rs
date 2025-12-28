@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegionalState!();
         FormatExtendType!();
+        RegionalState!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UWordBoundsState {
     };
 }
 
-UWordBoundsState!()
+UWordBoundsState!();

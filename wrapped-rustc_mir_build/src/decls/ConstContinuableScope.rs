@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BuiltMatchTree!();
-        Scope!();
         DropTree!();
+        Scope!();
+        BuiltMatchTree!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ConstContinuableScope {
     };
 }
 
-ConstContinuableScope!()
+ConstContinuableScope!();

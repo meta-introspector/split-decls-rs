@@ -4,4 +4,4 @@ macro_rules! TupleTrait {
     };
 }
 
-TupleTrait!()
+TupleTrait!();

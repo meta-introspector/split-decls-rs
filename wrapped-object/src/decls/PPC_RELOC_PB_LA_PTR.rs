@@ -4,4 +4,4 @@ macro_rules! PPC_RELOC_PB_LA_PTR {
     };
 }
 
-PPC_RELOC_PB_LA_PTR!()
+PPC_RELOC_PB_LA_PTR!();

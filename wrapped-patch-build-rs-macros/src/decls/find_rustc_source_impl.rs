@@ -24,4 +24,4 @@ macro_rules! find_rustc_source_impl {
     };
 }
 
-find_rustc_source_impl!()
+find_rustc_source_impl!();

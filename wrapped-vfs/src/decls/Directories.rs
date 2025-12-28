@@ -4,4 +4,4 @@ macro_rules! Directories {
     };
 }
 
-Directories!()
+Directories!();

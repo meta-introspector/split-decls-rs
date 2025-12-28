@@ -4,4 +4,4 @@ macro_rules! IncompatibleFeatures {
     };
 }
 
-IncompatibleFeatures!()
+IncompatibleFeatures!();

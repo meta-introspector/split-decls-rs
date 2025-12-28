@@ -4,4 +4,4 @@ macro_rules! event_memory {
     };
 }
 
-event_memory!()
+event_memory!();

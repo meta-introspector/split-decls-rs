@@ -11,4 +11,4 @@ macro_rules! fn_setup {
     };
 }
 
-fn_setup!()
+fn_setup!();

@@ -11,4 +11,4 @@ macro_rules! bench_copy_nonarena {
     };
 }
 
-bench_copy_nonarena!()
+bench_copy_nonarena!();

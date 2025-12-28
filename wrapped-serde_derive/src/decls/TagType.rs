@@ -4,4 +4,4 @@ macro_rules! TagType {
     };
 }
 
-TagType!()
+TagType!();

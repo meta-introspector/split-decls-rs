@@ -4,4 +4,4 @@ macro_rules! sync_impl {
     };
 }
 
-sync_impl!()
+sync_impl!();

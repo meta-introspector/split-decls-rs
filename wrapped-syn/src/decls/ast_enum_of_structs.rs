@@ -4,4 +4,4 @@ macro_rules! ast_enum_of_structs {
     };
 }
 
-ast_enum_of_structs!()
+ast_enum_of_structs!();

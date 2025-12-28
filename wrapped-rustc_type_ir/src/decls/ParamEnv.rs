@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SliceLike!();
         Clause!();
+        SliceLike!();
         Interner!();
         TypeFoldable!();
     };
@@ -14,4 +14,4 @@ macro_rules! ParamEnv {
     };
 }
 
-ParamEnv!()
+ParamEnv!();

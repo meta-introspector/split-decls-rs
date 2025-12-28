@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Check!();
         Error!();
+        Stream!();
         Filters!();
         MtStreamBuilder!();
-        Check!();
-        Stream!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

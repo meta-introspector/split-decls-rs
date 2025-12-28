@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnknownCompression!();
         LlvmCodegenBackend!();
-        FloatAbi!();
         OwnedTargetMachine!();
+        FloatAbi!();
+        UnknownCompression!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! target_machine_factory {
     };
 }
 
-target_machine_factory!()
+target_machine_factory!();

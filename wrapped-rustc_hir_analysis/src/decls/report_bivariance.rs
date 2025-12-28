@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UnusedGenericParameter!();
         UnusedGenericParameterHelp!();
-        RecursiveGenericParameter!();
         IsProbablyCyclical!();
         CollectUsageSpans!();
+        RecursiveGenericParameter!();
+        UnusedGenericParameter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! report_bivariance {
     };
 }
 
-report_bivariance!()
+report_bivariance!();

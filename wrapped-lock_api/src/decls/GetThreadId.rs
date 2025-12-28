@@ -4,4 +4,4 @@ macro_rules! GetThreadId {
     };
 }
 
-GetThreadId!()
+GetThreadId!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MaybeReversedEdgeReference!();
-        MaybeReversedEdges!();
         EdgeRef!();
+        MaybeReversedEdges!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_202 {
     };
 }
 
-impl_202!()
+impl_202!();

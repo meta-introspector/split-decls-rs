@@ -4,4 +4,4 @@ macro_rules! expand_column {
     };
 }
 
-expand_column!()
+expand_column!();

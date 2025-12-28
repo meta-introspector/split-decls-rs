@@ -4,4 +4,4 @@ macro_rules! RT_MESSAGETABLE {
     };
 }
 
-RT_MESSAGETABLE!()
+RT_MESSAGETABLE!();

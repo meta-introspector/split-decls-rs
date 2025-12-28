@@ -4,4 +4,4 @@ macro_rules! slot {
     };
 }
 
-slot!()
+slot!();

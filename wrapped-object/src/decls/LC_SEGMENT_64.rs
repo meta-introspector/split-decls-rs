@@ -4,4 +4,4 @@ macro_rules! LC_SEGMENT_64 {
     };
 }
 
-LC_SEGMENT_64!()
+LC_SEGMENT_64!();

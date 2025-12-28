@@ -4,4 +4,4 @@ macro_rules! DuplicateFeatureErr {
     };
 }
 
-DuplicateFeatureErr!()
+DuplicateFeatureErr!();

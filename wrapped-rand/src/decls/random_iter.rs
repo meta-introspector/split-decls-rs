@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        StandardUniform!();
+        Distribution!();
         ThreadRng!();
         Iter!();
-        Distribution!();
-        StandardUniform!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! random_iter {
     };
 }
 
-random_iter!()
+random_iter!();

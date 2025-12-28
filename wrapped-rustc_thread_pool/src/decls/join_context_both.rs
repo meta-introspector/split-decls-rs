@@ -4,4 +4,4 @@ macro_rules! join_context_both {
     };
 }
 
-join_context_both!()
+join_context_both!();

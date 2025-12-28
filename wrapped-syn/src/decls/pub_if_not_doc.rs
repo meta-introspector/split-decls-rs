@@ -4,4 +4,4 @@ macro_rules! pub_if_not_doc {
     };
 }
 
-pub_if_not_doc!()
+pub_if_not_doc!();

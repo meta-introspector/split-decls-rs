@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParallelIterator!();
         UnindexedConsumer!();
+        ParallelIterator!();
         Once!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_733 {
     };
 }
 
-impl_733!()
+impl_733!();

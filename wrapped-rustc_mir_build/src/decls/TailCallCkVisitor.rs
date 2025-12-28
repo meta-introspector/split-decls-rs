@@ -4,4 +4,4 @@ macro_rules! TailCallCkVisitor {
     };
 }
 
-TailCallCkVisitor!()
+TailCallCkVisitor!();

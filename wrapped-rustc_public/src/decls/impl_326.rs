@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        DynKind!();
+        Binder!();
+        Ty!();
         GenericArgs!();
         AdtKind!();
-        Binder!();
         RigidTy!();
-        ExistentialTraitRef!();
-        ExistentialPredicate!();
-        Ty!();
-        PolyFnSig!();
-        TyKind!();
-        DynKind!();
         TypeAndMut!();
+        ExistentialTraitRef!();
+        PolyFnSig!();
+        ExistentialPredicate!();
+        TyKind!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_326 {
     };
 }
 
-impl_326!()
+impl_326!();

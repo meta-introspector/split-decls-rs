@@ -4,4 +4,4 @@ macro_rules! dot_parser {
     };
 }
 
-dot_parser!()
+dot_parser!();

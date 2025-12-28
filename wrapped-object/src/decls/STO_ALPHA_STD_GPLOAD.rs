@@ -4,4 +4,4 @@ macro_rules! STO_ALPHA_STD_GPLOAD {
     };
 }
 
-STO_ALPHA_STD_GPLOAD!()
+STO_ALPHA_STD_GPLOAD!();

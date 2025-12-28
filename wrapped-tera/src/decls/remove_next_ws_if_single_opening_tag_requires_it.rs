@@ -12,4 +12,4 @@ macro_rules! remove_next_ws_if_single_opening_tag_requires_it {
     };
 }
 
-remove_next_ws_if_single_opening_tag_requires_it!()
+remove_next_ws_if_single_opening_tag_requires_it!();

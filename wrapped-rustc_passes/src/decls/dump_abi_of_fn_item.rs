@@ -12,4 +12,4 @@ macro_rules! dump_abi_of_fn_item {
     };
 }
 
-dump_abi_of_fn_item!()
+dump_abi_of_fn_item!();

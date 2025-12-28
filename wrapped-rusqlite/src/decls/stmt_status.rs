@@ -11,4 +11,4 @@ macro_rules! stmt_status {
     };
 }
 
-stmt_status!()
+stmt_status!();

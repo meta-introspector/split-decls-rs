@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        CoffRelocationIterator!();
         SectionIndex!();
-        ReadRef!();
-        CoffHeader!();
+        SectionFlags!();
+        CompressedData!();
+        CoffRelocationIterator!();
+        Result!();
         SectionKind!();
         RelocationMap!();
-        SectionFlags!();
-        Result!();
-        CompressedFileRange!();
-        RelocationIterator!();
         CoffSection!();
-        CompressedData!();
+        CoffHeader!();
         ObjectSection!();
+        RelocationIterator!();
+        CompressedFileRange!();
+        ReadRef!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

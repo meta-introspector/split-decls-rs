@@ -4,4 +4,4 @@ macro_rules! FlatMapConsumer {
     };
 }
 
-FlatMapConsumer!()
+FlatMapConsumer!();

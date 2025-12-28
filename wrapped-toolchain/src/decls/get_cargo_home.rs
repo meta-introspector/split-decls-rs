@@ -4,4 +4,4 @@ macro_rules! get_cargo_home {
     };
 }
 
-get_cargo_home!()
+get_cargo_home!();

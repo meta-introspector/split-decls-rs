@@ -12,4 +12,4 @@ macro_rules! check_liveness {
     };
 }
 
-check_liveness!()
+check_liveness!();

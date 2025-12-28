@@ -4,4 +4,4 @@ macro_rules! SHA384_OUTSIZE {
     };
 }
 
-SHA384_OUTSIZE!()
+SHA384_OUTSIZE!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Anchored!();
-        Config!();
+        StartKind!();
         DFA!();
         MatchKind!();
-        StartKind!();
+        Anchored!();
         Teddy!();
+        Config!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_740 {
     };
 }
 
-impl_740!()
+impl_740!();

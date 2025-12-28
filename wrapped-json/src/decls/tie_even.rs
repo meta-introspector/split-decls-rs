@@ -11,4 +11,4 @@ macro_rules! tie_even {
     };
 }
 
-tie_even!()
+tie_even!();

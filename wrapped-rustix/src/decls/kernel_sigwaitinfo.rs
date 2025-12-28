@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        KernelSigSet!();
         Result!();
+        KernelSigSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! kernel_sigwaitinfo {
     };
 }
 
-kernel_sigwaitinfo!()
+kernel_sigwaitinfo!();

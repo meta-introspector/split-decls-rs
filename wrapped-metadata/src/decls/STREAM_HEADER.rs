@@ -4,4 +4,4 @@ macro_rules! STREAM_HEADER {
     };
 }
 
-STREAM_HEADER!()
+STREAM_HEADER!();

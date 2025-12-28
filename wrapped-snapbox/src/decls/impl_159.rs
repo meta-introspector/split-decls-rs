@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Palette!();
+        FileType!();
         PathDiff!();
         Result!();
-        FileType!();
-        Palette!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_159 {
     };
 }
 
-impl_159!()
+impl_159!();

@@ -4,4 +4,4 @@ macro_rules! COUNTERBYTES {
     };
 }
 
-COUNTERBYTES!()
+COUNTERBYTES!();

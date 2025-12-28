@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OutRef!();
         OutParam!();
+        OutRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_168 {
     };
 }
 
-impl_168!()
+impl_168!();

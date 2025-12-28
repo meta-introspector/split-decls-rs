@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HasFieldMap!();
         AllowMultipleAlternatives!();
+        HasFieldMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! build_suggestion_code {
     };
 }
 
-build_suggestion_code!()
+build_suggestion_code!();

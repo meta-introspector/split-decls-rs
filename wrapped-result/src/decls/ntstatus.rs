@@ -4,4 +4,4 @@ macro_rules! ntstatus {
     };
 }
 
-ntstatus!()
+ntstatus!();

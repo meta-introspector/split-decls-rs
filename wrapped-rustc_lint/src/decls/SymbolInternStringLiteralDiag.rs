@@ -4,4 +4,4 @@ macro_rules! SymbolInternStringLiteralDiag {
     };
 }
 
-SymbolInternStringLiteralDiag!()
+SymbolInternStringLiteralDiag!();

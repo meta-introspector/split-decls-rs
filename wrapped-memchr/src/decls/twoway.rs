@@ -4,4 +4,4 @@ macro_rules! twoway {
     };
 }
 
-twoway!()
+twoway!();

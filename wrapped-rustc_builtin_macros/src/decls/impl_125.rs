@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Ty!();
-        Path!();
         DeriveUnion!();
         TraitDef!();
+        Path!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

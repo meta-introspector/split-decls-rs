@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        NFA!();
-        Config!();
-        RegexInfo!();
         DFA!();
         WhichCaptures!();
-        RegexInfoI!();
+        RegexInfo!();
         Look!();
+        Config!();
         Input!();
-        Start!();
         PikeVM!();
+        Start!();
+        NFA!();
+        RegexInfoI!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_342 {
     };
 }
 
-impl_342!()
+impl_342!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DataFormat!();
         Data!();
+        DataFormat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! binary_to_json_not_utf8 {
     };
 }
 
-binary_to_json_not_utf8!()
+binary_to_json_not_utf8!();

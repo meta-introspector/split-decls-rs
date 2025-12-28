@@ -4,4 +4,4 @@ macro_rules! is_eval_always {
     };
 }
 
-is_eval_always!()
+is_eval_always!();

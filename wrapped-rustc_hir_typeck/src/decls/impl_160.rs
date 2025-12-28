@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TypeInformationCtxt!();
         Error!();
+        TypeInformationCtxt!();
         FnCtxt!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

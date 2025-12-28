@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Immediate!();
         LocalValue!();
-        LocalState!();
-        MemPlaceMeta!();
-        MemPlace!();
         Operand!();
+        MemPlaceMeta!();
+        LocalState!();
+        MemPlace!();
+        Immediate!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_320 {
     };
 }
 
-impl_320!()
+impl_320!();

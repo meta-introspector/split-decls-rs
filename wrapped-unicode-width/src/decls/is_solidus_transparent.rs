@@ -4,4 +4,4 @@ macro_rules! is_solidus_transparent {
     };
 }
 
-is_solidus_transparent!()
+is_solidus_transparent!();

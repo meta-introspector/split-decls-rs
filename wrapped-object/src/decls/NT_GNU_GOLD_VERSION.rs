@@ -11,4 +11,4 @@ macro_rules! NT_GNU_GOLD_VERSION {
     };
 }
 
-NT_GNU_GOLD_VERSION!()
+NT_GNU_GOLD_VERSION!();

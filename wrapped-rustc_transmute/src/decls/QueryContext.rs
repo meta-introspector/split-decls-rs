@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Def!();
-        Region!();
         Type!();
+        Region!();
+        Def!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! QueryContext {
     };
 }
 
-QueryContext!()
+QueryContext!();

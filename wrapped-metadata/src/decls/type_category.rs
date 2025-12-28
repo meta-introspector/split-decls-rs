@@ -4,4 +4,4 @@ macro_rules! type_category {
     };
 }
 
-type_category!()
+type_category!();

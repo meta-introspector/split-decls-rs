@@ -11,4 +11,4 @@ macro_rules! REG_BINARY {
     };
 }
 
-REG_BINARY!()
+REG_BINARY!();

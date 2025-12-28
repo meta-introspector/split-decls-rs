@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PartiallyInterned!();
         SyntaxContext!();
+        PartiallyInterned!();
         SpanData!();
         Span!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_156 {
     };
 }
 
-impl_156!()
+impl_156!();

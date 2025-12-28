@@ -4,4 +4,4 @@ macro_rules! PAGE_LEN {
     };
 }
 
-PAGE_LEN!()
+PAGE_LEN!();

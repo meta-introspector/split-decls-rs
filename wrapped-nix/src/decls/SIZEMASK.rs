@@ -4,4 +4,4 @@ macro_rules! SIZEMASK {
     };
 }
 
-SIZEMASK!()
+SIZEMASK!();

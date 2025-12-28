@@ -4,4 +4,4 @@ macro_rules! sandwich_detect {
     };
 }
 
-sandwich_detect!()
+sandwich_detect!();

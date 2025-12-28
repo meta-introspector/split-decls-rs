@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        XcrunError!();
         Command!();
+        XcrunError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! xcrun_show_sdk_path {
     };
 }
 
-xcrun_show_sdk_path!()
+xcrun_show_sdk_path!();

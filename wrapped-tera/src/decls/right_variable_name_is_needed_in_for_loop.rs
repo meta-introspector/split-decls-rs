@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tera!();
         Context!();
+        Tera!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! right_variable_name_is_needed_in_for_loop {
     };
 }
 
-right_variable_name_is_needed_in_for_loop!()
+right_variable_name_is_needed_in_for_loop!();

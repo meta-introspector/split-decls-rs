@@ -4,4 +4,4 @@ macro_rules! get_order_bytes_and_adj_matrix_bytes {
     };
 }
 
-get_order_bytes_and_adj_matrix_bytes!()
+get_order_bytes_and_adj_matrix_bytes!();

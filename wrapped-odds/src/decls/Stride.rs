@@ -4,4 +4,4 @@ macro_rules! Stride {
     };
 }
 
-Stride!()
+Stride!();

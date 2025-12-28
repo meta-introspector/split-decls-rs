@@ -11,4 +11,4 @@ macro_rules! FromStr2 {
     };
 }
 
-FromStr2!()
+FromStr2!();

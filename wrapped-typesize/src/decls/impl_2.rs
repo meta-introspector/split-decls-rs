@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Field!();
         TypeSize!();
+        Field!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

@@ -4,4 +4,4 @@ macro_rules! opt_unsafe_extern_c_fn {
     };
 }
 
-opt_unsafe_extern_c_fn!()
+opt_unsafe_extern_c_fn!();

@@ -4,4 +4,4 @@ macro_rules! INSTANT_MARKER {
     };
 }
 
-INSTANT_MARKER!()
+INSTANT_MARKER!();

@@ -12,4 +12,4 @@ macro_rules! error_out_of_range_index {
     };
 }
 
-error_out_of_range_index!()
+error_out_of_range_index!();

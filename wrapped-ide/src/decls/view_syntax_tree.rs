@@ -4,4 +4,4 @@ macro_rules! view_syntax_tree {
     };
 }
 
-view_syntax_tree!()
+view_syntax_tree!();

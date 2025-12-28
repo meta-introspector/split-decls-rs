@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Timespec!();
         Fixed!();
-        Fd!();
         CancelBuilder!();
+        Fd!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

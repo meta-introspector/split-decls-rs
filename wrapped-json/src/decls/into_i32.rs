@@ -4,4 +4,4 @@ macro_rules! into_i32 {
     };
 }
 
-into_i32!()
+into_i32!();

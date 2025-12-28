@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Ast!();
         Parser!();
-        Result!();
+        Hir!();
+        Ast!();
         Error!();
         ParserBuilder!();
-        Hir!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse {
     };
 }
 
-parse!()
+parse!();

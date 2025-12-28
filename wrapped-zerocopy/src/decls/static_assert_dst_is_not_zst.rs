@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TrailingSliceLayout!();
-        SliceDst!();
         SizeInfo!();
+        TrailingSliceLayout!();
         KnownLayout!();
+        SliceDst!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! static_assert_dst_is_not_zst {
     };
 }
 
-static_assert_dst_is_not_zst!()
+static_assert_dst_is_not_zst!();

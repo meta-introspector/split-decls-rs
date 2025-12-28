@@ -11,4 +11,4 @@ macro_rules! write_align {
     };
 }
 
-write_align!()
+write_align!();

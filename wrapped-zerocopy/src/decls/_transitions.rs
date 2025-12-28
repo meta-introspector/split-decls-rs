@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        Alignment!();
-        Aliasing!();
-        Validity!();
-        Immutable!();
-        FromBytes!();
-        ValidityError!();
         TryFromBytes!();
-        Read!();
-        Reference!();
-        Aligned!();
         TryTransmuteFromPtr!();
-        Valid!();
-        Shared!();
-        IntoBytes!();
-        Unaligned!();
-        Initialized!();
-        Exclusive!();
+        Read!();
         Invariants!();
+        Exclusive!();
+        Aliasing!();
+        Valid!();
+        FromBytes!();
+        Alignment!();
+        IntoBytes!();
         AlignmentError!();
+        Initialized!();
+        Unaligned!();
+        Shared!();
+        Reference!();
+        Validity!();
+        Aligned!();
+        Immutable!();
+        ValidityError!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! _transitions {
     };
 }
 
-_transitions!()
+_transitions!();

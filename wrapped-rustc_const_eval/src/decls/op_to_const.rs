@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         OpTy!();
-        CompileTimeInterpCx!();
         Immediate!();
+        CompileTimeInterpCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! op_to_const {
     };
 }
 
-op_to_const!()
+op_to_const!();

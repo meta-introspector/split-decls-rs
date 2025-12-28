@@ -4,4 +4,4 @@ macro_rules! IgnoreParser {
     };
 }
 
-IgnoreParser!()
+IgnoreParser!();

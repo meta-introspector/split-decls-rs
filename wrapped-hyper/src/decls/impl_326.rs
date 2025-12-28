@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Write!();
-        Pending!();
         Result!();
+        Pending!();
         Error!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_326 {
     };
 }
 
-impl_326!()
+impl_326!();

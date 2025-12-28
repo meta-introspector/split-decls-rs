@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TryFromBytes!();
-        PointerMetadata!();
-        Immutable!();
         KnownLayout!();
-        FromBytes!();
+        Immutable!();
         AllocError!();
+        PointerMetadata!();
+        FromBytes!();
+        TryFromBytes!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! FromZeros {
     };
 }
 
-FromZeros!()
+FromZeros!();

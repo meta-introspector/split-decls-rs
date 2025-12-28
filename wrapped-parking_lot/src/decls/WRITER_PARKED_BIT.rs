@@ -4,4 +4,4 @@ macro_rules! WRITER_PARKED_BIT {
     };
 }
 
-WRITER_PARKED_BIT!()
+WRITER_PARKED_BIT!();

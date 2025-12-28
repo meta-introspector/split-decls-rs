@@ -11,4 +11,4 @@ macro_rules! backslash_u {
     };
 }
 
-backslash_u!()
+backslash_u!();

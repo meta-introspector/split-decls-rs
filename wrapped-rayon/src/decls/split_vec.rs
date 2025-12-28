@@ -4,4 +4,4 @@ macro_rules! split_vec {
     };
 }
 
-split_vec!()
+split_vec!();

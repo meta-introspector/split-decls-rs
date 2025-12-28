@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         AnonConst!();
+        TyPat!();
         RangeEnd!();
         Walkable!();
-        TyPat!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TyPatKind {
     };
 }
 
-TyPatKind!()
+TyPatKind!();

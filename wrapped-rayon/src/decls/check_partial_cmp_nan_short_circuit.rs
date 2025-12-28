@@ -4,4 +4,4 @@ macro_rules! check_partial_cmp_nan_short_circuit {
     };
 }
 
-check_partial_cmp_nan_short_circuit!()
+check_partial_cmp_nan_short_circuit!();

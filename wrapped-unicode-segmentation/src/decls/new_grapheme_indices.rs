@@ -11,4 +11,4 @@ macro_rules! new_grapheme_indices {
     };
 }
 
-new_grapheme_indices!()
+new_grapheme_indices!();

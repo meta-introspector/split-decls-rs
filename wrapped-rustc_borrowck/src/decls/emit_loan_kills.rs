@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PoloniusFacts!();
         PoloniusLocationTable!();
         LoanKillsGenerator!();
-        PoloniusFacts!();
         BorrowSet!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! emit_loan_kills {
     };
 }
 
-emit_loan_kills!()
+emit_loan_kills!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HuffmanOxide!();
         LZOxide!();
+        HuffmanOxide!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! record_match {
     };
 }
 
-record_match!()
+record_match!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BitReader!();
-        LiteralsSectionType!();
-        LiteralsSectionParseError!();
         LiteralsSection!();
+        BitReader!();
+        LiteralsSectionParseError!();
+        LiteralsSectionType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_286 {
     };
 }
 
-impl_286!()
+impl_286!();

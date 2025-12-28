@@ -11,4 +11,4 @@ macro_rules! lint_ty_kind_usage {
     };
 }
 
-lint_ty_kind_usage!()
+lint_ty_kind_usage!();

@@ -4,4 +4,4 @@ macro_rules! assist_config {
     };
 }
 
-assist_config!()
+assist_config!();

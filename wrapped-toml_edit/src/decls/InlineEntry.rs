@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        InlineTable!();
-        InlineOccupiedEntry!();
         InlineVacantEntry!();
+        InlineOccupiedEntry!();
+        InlineTable!();
+        Entry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! InlineEntry {
     };
 }
 
-InlineEntry!()
+InlineEntry!();

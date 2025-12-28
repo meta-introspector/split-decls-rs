@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ModuleConfig!();
-        CrateInfo!();
-        ExtraBackendMethods!();
-        OngoingCodegen!();
-        SharedEmitter!();
-        ModuleCodegen!();
         ModuleKind!();
+        CrateInfo!();
+        ModuleConfig!();
+        SharedEmitter!();
+        ExtraBackendMethods!();
+        ModuleCodegen!();
+        OngoingCodegen!();
         Coordinator!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! start_async_codegen {
     };
 }
 
-start_async_codegen!()
+start_async_codegen!();

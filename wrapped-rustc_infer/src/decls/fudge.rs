@@ -4,4 +4,4 @@ macro_rules! fudge {
     };
 }
 
-fudge!()
+fudge!();

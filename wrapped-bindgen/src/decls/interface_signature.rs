@@ -11,4 +11,4 @@ macro_rules! interface_signature {
     };
 }
 
-interface_signature!()
+interface_signature!();

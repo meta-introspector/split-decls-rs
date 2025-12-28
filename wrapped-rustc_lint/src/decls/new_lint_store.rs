@@ -11,4 +11,4 @@ macro_rules! new_lint_store {
     };
 }
 
-new_lint_store!()
+new_lint_store!();

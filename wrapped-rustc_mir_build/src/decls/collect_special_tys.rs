@@ -11,4 +11,4 @@ macro_rules! collect_special_tys {
     };
 }
 
-collect_special_tys!()
+collect_special_tys!();

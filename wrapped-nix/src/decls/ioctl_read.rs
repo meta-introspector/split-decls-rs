@@ -11,4 +11,4 @@ macro_rules! ioctl_read {
     };
 }
 
-ioctl_read!()
+ioctl_read!();

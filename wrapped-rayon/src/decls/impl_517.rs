@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IntoParallelIterator!();
         FlatMapFolder!();
-        Folder!();
         UnindexedConsumer!();
+        IntoParallelIterator!();
+        Folder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_517 {
     };
 }
 
-impl_517!()
+impl_517!();

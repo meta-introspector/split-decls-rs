@@ -4,4 +4,4 @@ macro_rules! LocalCollector {
     };
 }
 
-LocalCollector!()
+LocalCollector!();

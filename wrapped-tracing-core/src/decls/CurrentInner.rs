@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Id!();
         Metadata!();
+        Id!();
         Current!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! CurrentInner {
     };
 }
 
-CurrentInner!()
+CurrentInner!();

@@ -4,4 +4,4 @@ macro_rules! CoreSchedulingScope {
     };
 }
 
-CoreSchedulingScope!()
+CoreSchedulingScope!();

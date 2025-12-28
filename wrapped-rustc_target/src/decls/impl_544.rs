@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        TargetWarnings!();
-        SmallDataThresholdSupport!();
-        Lld!();
-        AbiMap!();
         LinkerFlavor!();
+        TargetWarnings!();
         TargetKind!();
-        Target!();
+        AbiMap!();
+        SmallDataThresholdSupport!();
         ABI!();
+        Lld!();
         TargetTuple!();
         Cc!();
+        Target!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_544 {
     };
 }
 
-impl_544!()
+impl_544!();

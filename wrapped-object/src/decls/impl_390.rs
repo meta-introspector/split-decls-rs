@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ElfComdat!();
         ReadRef!();
+        ElfComdat!();
         FileHeader!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_390 {
     };
 }
 
-impl_390!()
+impl_390!();

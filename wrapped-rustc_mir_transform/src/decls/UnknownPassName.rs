@@ -4,4 +4,4 @@ macro_rules! UnknownPassName {
     };
 }
 
-UnknownPassName!()
+UnknownPassName!();

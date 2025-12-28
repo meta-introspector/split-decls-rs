@@ -11,4 +11,4 @@ macro_rules! tail_or_bufs_struct {
     };
 }
 
-tail_or_bufs_struct!()
+tail_or_bufs_struct!();

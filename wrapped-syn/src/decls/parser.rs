@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Parser!();
-        ParseNestedMeta!();
         Result!();
+        ParseNestedMeta!();
         ParseStream!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! parser {
     };
 }
 
-parser!()
+parser!();

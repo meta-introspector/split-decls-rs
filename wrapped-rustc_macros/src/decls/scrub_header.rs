@@ -4,4 +4,4 @@ macro_rules! scrub_header {
     };
 }
 
-scrub_header!()
+scrub_header!();

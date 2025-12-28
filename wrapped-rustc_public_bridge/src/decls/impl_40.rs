@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Bridge!();
-        TypingEnvHelpers!();
         CompilerCtxt!();
+        TypingEnvHelpers!();
+        Bridge!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

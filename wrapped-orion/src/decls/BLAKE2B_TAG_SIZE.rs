@@ -4,4 +4,4 @@ macro_rules! BLAKE2B_TAG_SIZE {
     };
 }
 
-BLAKE2B_TAG_SIZE!()
+BLAKE2B_TAG_SIZE!();

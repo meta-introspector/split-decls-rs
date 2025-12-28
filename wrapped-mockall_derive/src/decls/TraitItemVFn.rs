@@ -4,4 +4,4 @@ macro_rules! TraitItemVFn {
     };
 }
 
-TraitItemVFn!()
+TraitItemVFn!();

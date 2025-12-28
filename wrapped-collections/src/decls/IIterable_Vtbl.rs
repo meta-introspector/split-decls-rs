@@ -4,4 +4,4 @@ macro_rules! IIterable_Vtbl {
     };
 }
 
-IIterable_Vtbl!()
+IIterable_Vtbl!();

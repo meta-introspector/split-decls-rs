@@ -4,4 +4,4 @@ macro_rules! R_MN10300_COPY {
     };
 }
 
-R_MN10300_COPY!()
+R_MN10300_COPY!();

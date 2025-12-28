@@ -4,4 +4,4 @@ macro_rules! IAsyncOperation_Vtbl {
     };
 }
 
-IAsyncOperation_Vtbl!()
+IAsyncOperation_Vtbl!();

@@ -4,4 +4,4 @@ macro_rules! inferred_outlives_crate {
     };
 }
 
-inferred_outlives_crate!()
+inferred_outlives_crate!();

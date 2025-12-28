@@ -4,4 +4,4 @@ macro_rules! LENGTH_CODES {
     };
 }
 
-LENGTH_CODES!()
+LENGTH_CODES!();

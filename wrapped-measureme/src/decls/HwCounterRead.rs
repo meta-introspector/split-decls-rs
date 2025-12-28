@@ -4,4 +4,4 @@ macro_rules! HwCounterRead {
     };
 }
 
-HwCounterRead!()
+HwCounterRead!();

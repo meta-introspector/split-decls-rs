@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        U32!();
         AttributesWriter!();
         Endianness!();
-        U32!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_972 {
     };
 }
 
-impl_972!()
+impl_972!();

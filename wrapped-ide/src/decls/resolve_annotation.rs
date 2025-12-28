@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        FindAllRefsConfig!();
+        Annotation!();
         AnnotationKind!();
         AnnotationConfig!();
-        FindAllRefsConfig!();
         GotoImplementationConfig!();
-        Annotation!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! resolve_annotation {
     };
 }
 
-resolve_annotation!()
+resolve_annotation!();

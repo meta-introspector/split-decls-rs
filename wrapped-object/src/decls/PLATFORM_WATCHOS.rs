@@ -4,4 +4,4 @@ macro_rules! PLATFORM_WATCHOS {
     };
 }
 
-PLATFORM_WATCHOS!()
+PLATFORM_WATCHOS!();

@@ -4,4 +4,4 @@ macro_rules! ClosureBinder {
     };
 }
 
-ClosureBinder!()
+ClosureBinder!();

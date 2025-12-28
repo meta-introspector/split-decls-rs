@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NativeLib!();
-        StaticLibraryNativeArtifacts!();
         StaticLibraryNativeArtifactsToFile!();
+        StaticLibraryNativeArtifacts!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! print_native_static_libs {
     };
 }
 
-print_native_static_libs!()
+print_native_static_libs!();

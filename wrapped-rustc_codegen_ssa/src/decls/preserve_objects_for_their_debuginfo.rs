@@ -4,4 +4,4 @@ macro_rules! preserve_objects_for_their_debuginfo {
     };
 }
 
-preserve_objects_for_their_debuginfo!()
+preserve_objects_for_their_debuginfo!();

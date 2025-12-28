@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Result!();
         UserContext!();
-        ForLoop!();
-        FrameType!();
-        Error!();
-        StackFrame!();
-        ForLoopState!();
-        FrameContext!();
         Val!();
+        Error!();
         Template!();
-        Context!();
         CallStack!();
+        FrameContext!();
+        Result!();
+        Context!();
+        FrameType!();
+        ForLoopState!();
+        StackFrame!();
+        ForLoop!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_503 {
     };
 }
 
-impl_503!()
+impl_503!();

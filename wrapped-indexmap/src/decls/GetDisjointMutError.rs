@@ -4,4 +4,4 @@ macro_rules! GetDisjointMutError {
     };
 }
 
-GetDisjointMutError!()
+GetDisjointMutError!();

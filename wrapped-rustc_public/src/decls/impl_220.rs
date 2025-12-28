@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BridgeTys!();
         Stable!();
+        BridgeTys!();
         ImplTraitInTraitData!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

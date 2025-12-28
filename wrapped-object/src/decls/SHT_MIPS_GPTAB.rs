@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_GPTAB {
     };
 }
 
-SHT_MIPS_GPTAB!()
+SHT_MIPS_GPTAB!();

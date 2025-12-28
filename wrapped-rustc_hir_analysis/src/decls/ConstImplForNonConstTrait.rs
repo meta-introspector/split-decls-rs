@@ -4,4 +4,4 @@ macro_rules! ConstImplForNonConstTrait {
     };
 }
 
-ConstImplForNonConstTrait!()
+ConstImplForNonConstTrait!();

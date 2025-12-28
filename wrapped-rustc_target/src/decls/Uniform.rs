@@ -4,4 +4,4 @@ macro_rules! Uniform {
     };
 }
 
-Uniform!()
+Uniform!();

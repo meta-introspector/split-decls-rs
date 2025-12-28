@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Env!();
-        Bin!();
         CaseSpec!();
+        Bin!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RunnerSpec {
     };
 }
 
-RunnerSpec!()
+RunnerSpec!();

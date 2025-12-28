@@ -4,4 +4,4 @@ macro_rules! R_LARCH_TLS_TPREL32 {
     };
 }
 
-R_LARCH_TLS_TPREL32!()
+R_LARCH_TLS_TPREL32!();

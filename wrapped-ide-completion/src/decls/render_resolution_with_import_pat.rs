@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PatternContext!();
-        RenderContext!();
         Builder!();
+        RenderContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! render_resolution_with_import_pat {
     };
 }
 
-render_resolution_with_import_pat!()
+render_resolution_with_import_pat!();

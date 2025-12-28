@@ -11,4 +11,4 @@ macro_rules! hyper_error {
     };
 }
 
-hyper_error!()
+hyper_error!();

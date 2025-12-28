@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DFA!();
         AccelTy!();
+        DFA!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Accels {
     };
 }
 
-Accels!()
+Accels!();

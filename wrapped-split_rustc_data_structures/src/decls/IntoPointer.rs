@@ -4,4 +4,4 @@ macro_rules! IntoPointer {
     };
 }
 
-IntoPointer!()
+IntoPointer!();

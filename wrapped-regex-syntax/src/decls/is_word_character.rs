@@ -4,4 +4,4 @@ macro_rules! is_word_character {
     };
 }
 
-is_word_character!()
+is_word_character!();

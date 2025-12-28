@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         BlockOrExpr!();
-        IsTuple!();
         StaticFields!();
         Substructure!();
+        IsTuple!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! default_struct_substructure {
     };
 }
 
-default_struct_substructure!()
+default_struct_substructure!();

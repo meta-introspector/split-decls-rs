@@ -11,4 +11,4 @@ macro_rules! parse_kwarg {
     };
 }
 
-parse_kwarg!()
+parse_kwarg!();

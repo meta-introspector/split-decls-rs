@@ -4,4 +4,4 @@ macro_rules! checked_binomial {
     };
 }
 
-checked_binomial!()
+checked_binomial!();

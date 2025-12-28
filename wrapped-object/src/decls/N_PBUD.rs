@@ -4,4 +4,4 @@ macro_rules! N_PBUD {
     };
 }
 
-N_PBUD!()
+N_PBUD!();

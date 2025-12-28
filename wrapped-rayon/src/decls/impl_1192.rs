@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UnindexedConsumer!();
         ParallelIterator!();
         RChunksExactMut!();
-        UnindexedConsumer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1192 {
     };
 }
 
-impl_1192!()
+impl_1192!();

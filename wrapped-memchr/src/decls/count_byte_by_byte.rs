@@ -4,4 +4,4 @@ macro_rules! count_byte_by_byte {
     };
 }
 
-count_byte_by_byte!()
+count_byte_by_byte!();

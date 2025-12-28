@@ -4,4 +4,4 @@ macro_rules! make_ule_impl {
     };
 }
 
-make_ule_impl!()
+make_ule_impl!();

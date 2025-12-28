@@ -11,4 +11,4 @@ macro_rules! comments_are_ignored {
     };
 }
 
-comments_are_ignored!()
+comments_are_ignored!();

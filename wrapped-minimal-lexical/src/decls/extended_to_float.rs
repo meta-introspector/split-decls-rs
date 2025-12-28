@@ -12,4 +12,4 @@ macro_rules! extended_to_float {
     };
 }
 
-extended_to_float!()
+extended_to_float!();

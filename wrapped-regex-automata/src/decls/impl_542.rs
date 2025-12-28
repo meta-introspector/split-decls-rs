@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        PatternID!();
-        Input!();
-        Span!();
-        Cache!();
-        PatternSet!();
-        SlotTable!();
-        State!();
-        Match!();
-        Look!();
-        NFA!();
-        NonMaxUsize!();
-        StateID!();
         FollowEpsilon!();
-        HalfMatch!();
-        Anchored!();
-        PikeVM!();
-        Captures!();
+        StateID!();
+        Look!();
+        NonMaxUsize!();
         ActiveStates!();
+        Anchored!();
+        NFA!();
+        Span!();
+        PatternSet!();
+        Input!();
+        HalfMatch!();
+        Cache!();
+        Captures!();
+        State!();
+        PikeVM!();
+        SlotTable!();
+        PatternID!();
+        Match!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_542 {
     };
 }
 
-impl_542!()
+impl_542!();

@@ -4,4 +4,4 @@ macro_rules! MAX_CODE_SIZE {
     };
 }
 
-MAX_CODE_SIZE!()
+MAX_CODE_SIZE!();

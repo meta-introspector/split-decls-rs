@@ -4,4 +4,4 @@ macro_rules! ascii_word_ok {
     };
 }
 
-ascii_word_ok!()
+ascii_word_ok!();

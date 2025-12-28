@@ -12,4 +12,4 @@ macro_rules! lex_extends_with_imports {
     };
 }
 
-lex_extends_with_imports!()
+lex_extends_with_imports!();

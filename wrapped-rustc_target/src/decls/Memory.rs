@@ -4,4 +4,4 @@ macro_rules! Memory {
     };
 }
 
-Memory!()
+Memory!();

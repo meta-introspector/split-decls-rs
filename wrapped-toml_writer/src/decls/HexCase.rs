@@ -4,4 +4,4 @@ macro_rules! HexCase {
     };
 }
 
-HexCase!()
+HexCase!();

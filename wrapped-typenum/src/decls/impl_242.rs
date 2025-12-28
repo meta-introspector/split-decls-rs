@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        UInt!();
-        Bit!();
-        Unsigned!();
-        PrivateInvertOut!();
         PrivateInvert!();
+        UInt!();
+        Unsigned!();
         InvertedUnsigned!();
         InvertedUInt!();
+        Bit!();
+        PrivateInvertOut!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_242 {
     };
 }
 
-impl_242!()
+impl_242!();

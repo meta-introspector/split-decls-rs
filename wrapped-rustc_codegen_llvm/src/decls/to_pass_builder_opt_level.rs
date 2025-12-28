@@ -11,4 +11,4 @@ macro_rules! to_pass_builder_opt_level {
     };
 }
 
-to_pass_builder_opt_level!()
+to_pass_builder_opt_level!();

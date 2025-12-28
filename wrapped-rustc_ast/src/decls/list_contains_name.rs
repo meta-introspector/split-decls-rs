@@ -11,4 +11,4 @@ macro_rules! list_contains_name {
     };
 }
 
-list_contains_name!()
+list_contains_name!();

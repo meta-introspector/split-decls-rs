@@ -4,4 +4,4 @@ macro_rules! Noncopy {
     };
 }
 
-Noncopy!()
+Noncopy!();

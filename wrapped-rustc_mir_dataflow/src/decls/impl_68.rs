@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Analysis!();
-        StateDiffCollector!();
         OutputStyle!();
-        BlockFormatter!();
+        Analysis!();
         Background!();
         DebugWithAdapter!();
+        BlockFormatter!();
         Direction!();
+        StateDiffCollector!();
         DebugWithContext!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

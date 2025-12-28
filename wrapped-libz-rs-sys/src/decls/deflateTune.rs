@@ -4,4 +4,4 @@ macro_rules! deflateTune {
     };
 }
 
-deflateTune!()
+deflateTune!();

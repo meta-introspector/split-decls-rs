@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ctxt!();
         SerAndDe!();
         Symbol!();
-        Ctxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_renames {
     };
 }
 
-get_renames!()
+get_renames!();

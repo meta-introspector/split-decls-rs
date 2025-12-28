@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_GOT_HA {
     };
 }
 
-R_NIOS2_GOT_HA!()
+R_NIOS2_GOT_HA!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        State!();
+        RawString!();
+        Entry!();
+        Value!();
+        InlineTable!();
+        TraceScope!();
         Item!();
         Decor!();
         Key!();
-        Entry!();
-        State!();
-        Value!();
-        RawString!();
-        TraceScope!();
-        InlineTable!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_182 {
     };
 }
 
-impl_182!()
+impl_182!();

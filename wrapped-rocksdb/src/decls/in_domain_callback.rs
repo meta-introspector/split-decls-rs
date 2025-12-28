@@ -11,4 +11,4 @@ macro_rules! in_domain_callback {
     };
 }
 
-in_domain_callback!()
+in_domain_callback!();

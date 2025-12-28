@@ -11,4 +11,4 @@ macro_rules! enclosing_def_to_moniker {
     };
 }
 
-enclosing_def_to_moniker!()
+enclosing_def_to_moniker!();

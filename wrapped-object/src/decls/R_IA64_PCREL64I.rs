@@ -4,4 +4,4 @@ macro_rules! R_IA64_PCREL64I {
     };
 }
 
-R_IA64_PCREL64I!()
+R_IA64_PCREL64I!();

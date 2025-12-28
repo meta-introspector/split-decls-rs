@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Emit!();
-        Parser!();
         Err!();
-        OutputM!();
         Error!();
+        OutputM!();
         OutputMode!();
-        Cut!();
         PResult!();
+        Cut!();
+        Parser!();
+        Emit!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

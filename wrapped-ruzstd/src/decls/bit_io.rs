@@ -4,4 +4,4 @@ macro_rules! bit_io {
     };
 }
 
-bit_io!()
+bit_io!();

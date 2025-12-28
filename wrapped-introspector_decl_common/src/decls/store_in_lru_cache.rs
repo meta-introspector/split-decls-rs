@@ -4,4 +4,4 @@ macro_rules! store_in_lru_cache {
     };
 }
 
-store_in_lru_cache!()
+store_in_lru_cache!();

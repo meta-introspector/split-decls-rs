@@ -4,4 +4,4 @@ macro_rules! RequestedLevel {
     };
 }
 
-RequestedLevel!()
+RequestedLevel!();

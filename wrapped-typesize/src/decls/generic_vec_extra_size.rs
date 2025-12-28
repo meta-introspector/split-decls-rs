@@ -11,4 +11,4 @@ macro_rules! generic_vec_extra_size {
     };
 }
 
-generic_vec_extra_size!()
+generic_vec_extra_size!();

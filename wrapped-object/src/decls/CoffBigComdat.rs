@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AnonObjectHeaderBigobj!();
         ObjectComdat!();
         CoffComdat!();
+        AnonObjectHeaderBigobj!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CoffBigComdat {
     };
 }
 
-CoffBigComdat!()
+CoffBigComdat!();

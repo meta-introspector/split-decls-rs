@@ -3,8 +3,8 @@ macro_rules! deps {
         Unaligned!();
         CastError!();
         SplitByteSlice!();
-        KnownLayout!();
         Immutable!();
+        KnownLayout!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_162 {
     };
 }
 
-impl_162!()
+impl_162!();

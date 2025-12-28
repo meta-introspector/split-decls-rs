@@ -4,4 +4,4 @@ macro_rules! R_MIPS_32 {
     };
 }
 
-R_MIPS_32!()
+R_MIPS_32!();

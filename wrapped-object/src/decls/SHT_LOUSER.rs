@@ -4,4 +4,4 @@ macro_rules! SHT_LOUSER {
     };
 }
 
-SHT_LOUSER!()
+SHT_LOUSER!();

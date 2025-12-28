@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_CEF_ABSOLUTE {
     };
 }
 
-IMAGE_REL_CEF_ABSOLUTE!()
+IMAGE_REL_CEF_ABSOLUTE!();

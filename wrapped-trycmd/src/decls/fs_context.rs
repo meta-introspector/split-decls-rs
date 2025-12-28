@@ -11,4 +11,4 @@ macro_rules! fs_context {
     };
 }
 
-fs_context!()
+fs_context!();

@@ -4,4 +4,4 @@ macro_rules! extend_lower_triangular_matrix {
     };
 }
 
-extend_lower_triangular_matrix!()
+extend_lower_triangular_matrix!();

@@ -4,4 +4,4 @@ macro_rules! path_to_str_literal {
     };
 }
 
-path_to_str_literal!()
+path_to_str_literal!();

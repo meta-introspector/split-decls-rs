@@ -4,4 +4,4 @@ macro_rules! impl_extra_traits_for_custom_punctuation {
     };
 }
 
-impl_extra_traits_for_custom_punctuation!()
+impl_extra_traits_for_custom_punctuation!();

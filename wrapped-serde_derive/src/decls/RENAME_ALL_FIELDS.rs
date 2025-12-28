@@ -11,4 +11,4 @@ macro_rules! RENAME_ALL_FIELDS {
     };
 }
 
-RENAME_ALL_FIELDS!()
+RENAME_ALL_FIELDS!();

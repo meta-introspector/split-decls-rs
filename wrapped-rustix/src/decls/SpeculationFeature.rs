@@ -4,4 +4,4 @@ macro_rules! SpeculationFeature {
     };
 }
 
-SpeculationFeature!()
+SpeculationFeature!();

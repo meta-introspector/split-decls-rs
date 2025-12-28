@@ -4,4 +4,4 @@ macro_rules! is_emoji {
     };
 }
 
-is_emoji!()
+is_emoji!();

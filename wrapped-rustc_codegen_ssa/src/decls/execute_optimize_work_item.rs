@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ExtraBackendMethods!();
         ComputedLtoType!();
-        FatLtoInput!();
-        ModuleCodegen!();
-        SerializedModule!();
         WorkItemResult!();
+        ExtraBackendMethods!();
         CodegenContext!();
+        FatLtoInput!();
+        SerializedModule!();
         ModuleKind!();
+        ModuleCodegen!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! execute_optimize_work_item {
     };
 }
 
-execute_optimize_work_item!()
+execute_optimize_work_item!();

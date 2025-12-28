@@ -4,4 +4,4 @@ macro_rules! block_on_future {
     };
 }
 
-block_on_future!()
+block_on_future!();

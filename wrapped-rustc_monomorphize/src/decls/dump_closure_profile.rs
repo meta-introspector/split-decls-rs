@@ -4,4 +4,4 @@ macro_rules! dump_closure_profile {
     };
 }
 
-dump_closure_profile!()
+dump_closure_profile!();

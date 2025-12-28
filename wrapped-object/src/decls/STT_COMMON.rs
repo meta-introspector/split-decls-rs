@@ -11,4 +11,4 @@ macro_rules! STT_COMMON {
     };
 }
 
-STT_COMMON!()
+STT_COMMON!();

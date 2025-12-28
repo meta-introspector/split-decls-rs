@@ -4,4 +4,4 @@ macro_rules! extract_offset {
     };
 }
 
-extract_offset!()
+extract_offset!();

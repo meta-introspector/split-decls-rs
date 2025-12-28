@@ -4,4 +4,4 @@ macro_rules! NativeLib {
     };
 }
 
-NativeLib!()
+NativeLib!();

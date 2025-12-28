@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Deps!();
-        DepGraphData!();
         DepNode!();
+        DepGraphData!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! panic_on_forbidden_read {
     };
 }
 
-panic_on_forbidden_read!()
+panic_on_forbidden_read!();

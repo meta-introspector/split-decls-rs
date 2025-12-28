@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Presence!();
-        IntRange!();
-        Slice!();
-        Constructor!();
-        SplitConstructorSet!();
-        VariantVisibility!();
         ConstructorSet!();
+        IntRange!();
+        SplitConstructorSet!();
+        Slice!();
         PatCx!();
+        Constructor!();
+        VariantVisibility!();
+        Presence!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

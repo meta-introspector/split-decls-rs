@@ -4,4 +4,4 @@ macro_rules! lint_helpers {
     };
 }
 
-lint_helpers!()
+lint_helpers!();

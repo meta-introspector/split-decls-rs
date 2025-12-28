@@ -4,4 +4,4 @@ macro_rules! N_BINCL {
     };
 }
 
-N_BINCL!()
+N_BINCL!();

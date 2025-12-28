@@ -4,4 +4,4 @@ macro_rules! print_target_cpus {
     };
 }
 
-print_target_cpus!()
+print_target_cpus!();

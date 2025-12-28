@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FnSig!();
-        TraitPredicate!();
         TraitRef!();
-        HostEffectPredicate!();
         ExistentialTraitRef!();
         FnSigTys!();
+        HostEffectPredicate!();
+        TraitPredicate!();
+        FnSig!();
         ExistentialPredicate!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! macro_220 {
     };
 }
 
-macro_220!()
+macro_220!();

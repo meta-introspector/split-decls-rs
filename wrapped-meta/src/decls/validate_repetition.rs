@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ParserExpr!();
-        Rule!();
         ParserRule!();
+        Rule!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! validate_repetition {
     };
 }
 
-validate_repetition!()
+validate_repetition!();

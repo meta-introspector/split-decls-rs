@@ -4,4 +4,4 @@ macro_rules! print_stack_trace {
     };
 }
 
-print_stack_trace!()
+print_stack_trace!();

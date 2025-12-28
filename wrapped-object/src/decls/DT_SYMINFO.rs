@@ -4,4 +4,4 @@ macro_rules! DT_SYMINFO {
     };
 }
 
-DT_SYMINFO!()
+DT_SYMINFO!();

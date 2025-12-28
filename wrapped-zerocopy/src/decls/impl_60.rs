@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TransmuteMutDst!();
         Valid!();
-        PointerMetadata!();
-        IntoBytes!();
-        Initialized!();
-        Wrap!();
-        FromBytes!();
         KnownLayout!();
+        FromBytes!();
+        Initialized!();
+        TransmuteMutDst!();
+        PointerMetadata!();
+        Wrap!();
+        IntoBytes!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_60 {
     };
 }
 
-impl_60!()
+impl_60!();

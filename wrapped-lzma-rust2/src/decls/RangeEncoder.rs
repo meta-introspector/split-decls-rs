@@ -4,4 +4,4 @@ macro_rules! RangeEncoder {
     };
 }
 
-RangeEncoder!()
+RangeEncoder!();

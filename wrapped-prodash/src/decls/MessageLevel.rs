@@ -4,4 +4,4 @@ macro_rules! MessageLevel {
     };
 }
 
-MessageLevel!()
+MessageLevel!();

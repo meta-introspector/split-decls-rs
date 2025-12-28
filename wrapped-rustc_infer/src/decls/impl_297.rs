@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ProjectionCacheKey!();
-        ProjectionCacheEntry!();
         Selection!();
-        NormalizedTerm!();
+        InferCtxtUndoLogs!();
         ProjectionCache!();
         PredicateObligations!();
-        InferCtxtUndoLogs!();
+        ProjectionCacheKey!();
+        ProjectionCacheEntry!();
+        NormalizedTerm!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_297 {
     };
 }
 
-impl_297!()
+impl_297!();

@@ -4,4 +4,4 @@ macro_rules! AsyncCoroutinesNotSupported {
     };
 }
 
-AsyncCoroutinesNotSupported!()
+AsyncCoroutinesNotSupported!();

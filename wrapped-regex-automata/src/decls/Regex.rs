@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        PikeVM!();
-        Match!();
-        CachePool!();
-        Input!();
-        DFA!();
         Anchored!();
-        RegexI!();
+        DFA!();
         Cache!();
+        Match!();
+        Input!();
+        CachePool!();
+        PikeVM!();
+        RegexI!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! Regex {
     };
 }
 
-Regex!()
+Regex!();

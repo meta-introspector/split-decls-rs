@@ -11,4 +11,4 @@ macro_rules! expand_without_refresh {
     };
 }
 
-expand_without_refresh!()
+expand_without_refresh!();

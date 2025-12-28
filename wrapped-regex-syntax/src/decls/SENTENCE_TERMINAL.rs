@@ -4,4 +4,4 @@ macro_rules! SENTENCE_TERMINAL {
     };
 }
 
-SENTENCE_TERMINAL!()
+SENTENCE_TERMINAL!();

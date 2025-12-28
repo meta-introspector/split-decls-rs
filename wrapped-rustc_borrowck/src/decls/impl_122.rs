@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReferencedStatementsVisitor!();
         ConditionVisitor!();
+        ReferencedStatementsVisitor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_122 {
     };
 }
 
-impl_122!()
+impl_122!();

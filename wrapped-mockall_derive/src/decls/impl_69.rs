@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Methods!();
         MockItemStruct!();
         MockTrait!();
         MockableStruct!();
         Builder!();
+        Methods!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_69 {
     };
 }
 
-impl_69!()
+impl_69!();

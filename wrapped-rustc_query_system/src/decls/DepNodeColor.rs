@@ -4,4 +4,4 @@ macro_rules! DepNodeColor {
     };
 }
 
-DepNodeColor!()
+DepNodeColor!();

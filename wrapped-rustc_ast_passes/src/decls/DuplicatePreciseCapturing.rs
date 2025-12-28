@@ -4,4 +4,4 @@ macro_rules! DuplicatePreciseCapturing {
     };
 }
 
-DuplicatePreciseCapturing!()
+DuplicatePreciseCapturing!();

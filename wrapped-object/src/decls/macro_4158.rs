@@ -1,34 +1,34 @@
 macro_rules! deps {
     () => {
-        Sym64!();
-        Sym32!();
-        Rela64!();
-        SectionHeader64!();
-        Versym!();
-        NoteHeader32!();
-        Rel64!();
-        Rela32!();
-        Syminfo64!();
-        Dyn32!();
-        FileHeader64!();
-        FileHeader32!();
-        CompressionHeader64!();
-        Verneed!();
-        Verdaux!();
-        Relr64!();
-        Vernaux!();
-        Verdef!();
-        ProgramHeader64!();
-        GnuHashHeader!();
-        Relr32!();
-        Rel32!();
-        Dyn64!();
-        SectionHeader32!();
-        CompressionHeader32!();
         Syminfo32!();
         ProgramHeader32!();
+        Dyn64!();
+        NoteHeader32!();
+        Versym!();
+        Rela32!();
+        FileHeader64!();
+        Verneed!();
+        Rel32!();
+        Relr32!();
+        Rela64!();
+        Dyn32!();
         NoteHeader64!();
+        GnuHashHeader!();
+        SectionHeader64!();
+        Sym32!();
+        Rel64!();
+        FileHeader32!();
+        Verdaux!();
+        SectionHeader32!();
+        CompressionHeader32!();
+        Syminfo64!();
+        Verdef!();
+        Relr64!();
         HashHeader!();
+        CompressionHeader64!();
+        ProgramHeader64!();
+        Sym64!();
+        Vernaux!();
     };
 }
 
@@ -39,4 +39,4 @@ macro_rules! macro_4158 {
     };
 }
 
-macro_4158!()
+macro_4158!();

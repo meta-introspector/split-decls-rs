@@ -4,4 +4,4 @@ macro_rules! R_PARISC_LTOFF_TP14DR {
     };
 }
 
-R_PARISC_LTOFF_TP14DR!()
+R_PARISC_LTOFF_TP14DR!();

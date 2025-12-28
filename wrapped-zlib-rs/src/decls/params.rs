@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReturnCode!();
         DeflateStream!();
+        ReturnCode!();
         DeflateFlush!();
         Strategy!();
     };
@@ -14,4 +14,4 @@ macro_rules! params {
     };
 }
 
-params!()
+params!();

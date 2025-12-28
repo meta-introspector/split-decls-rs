@@ -74,4 +74,4 @@ impl ContextOptimizer {{
     };
 }
 
-context_optimize_impl!()
+context_optimize_impl!();

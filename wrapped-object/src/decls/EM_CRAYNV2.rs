@@ -4,4 +4,4 @@ macro_rules! EM_CRAYNV2 {
     };
 }
 
-EM_CRAYNV2!()
+EM_CRAYNV2!();

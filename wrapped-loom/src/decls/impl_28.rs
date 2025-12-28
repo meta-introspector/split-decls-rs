@@ -4,8 +4,8 @@ macro_rules! deps {
         State!();
         VersionVec!();
         Arc!();
-        Action!();
         RefModify!();
+        Action!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

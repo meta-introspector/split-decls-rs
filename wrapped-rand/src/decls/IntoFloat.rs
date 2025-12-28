@@ -4,4 +4,4 @@ macro_rules! IntoFloat {
     };
 }
 
-IntoFloat!()
+IntoFloat!();

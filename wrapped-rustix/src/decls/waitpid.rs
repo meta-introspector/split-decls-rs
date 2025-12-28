@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WaitStatus!();
         Pid!();
         Result!();
+        WaitStatus!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! waitpid {
     };
 }
 
-waitpid!()
+waitpid!();

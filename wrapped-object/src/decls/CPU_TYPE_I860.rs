@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_I860 {
     };
 }
 
-CPU_TYPE_I860!()
+CPU_TYPE_I860!();

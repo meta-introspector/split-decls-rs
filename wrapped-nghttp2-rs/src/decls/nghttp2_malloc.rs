@@ -4,4 +4,4 @@ macro_rules! nghttp2_malloc {
     };
 }
 
-nghttp2_malloc!()
+nghttp2_malloc!();

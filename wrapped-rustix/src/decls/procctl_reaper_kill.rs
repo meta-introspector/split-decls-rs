@@ -11,4 +11,4 @@ macro_rules! procctl_reaper_kill {
     };
 }
 
-procctl_reaper_kill!()
+procctl_reaper_kill!();

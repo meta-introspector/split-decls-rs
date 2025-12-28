@@ -4,4 +4,4 @@ macro_rules! ensure_removed {
     };
 }
 
-ensure_removed!()
+ensure_removed!();

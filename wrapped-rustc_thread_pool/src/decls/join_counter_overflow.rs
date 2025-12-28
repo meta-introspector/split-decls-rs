@@ -11,4 +11,4 @@ macro_rules! join_counter_overflow {
     };
 }
 
-join_counter_overflow!()
+join_counter_overflow!();

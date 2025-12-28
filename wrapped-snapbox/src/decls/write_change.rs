@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Palette!();
         Error!();
         Styled!();
+        Palette!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! write_change {
     };
 }
 
-write_change!()
+write_change!();

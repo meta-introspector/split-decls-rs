@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MutationCompatible!();
-        BecauseRead!();
+        Validity!();
         Read!();
         Aliasing!();
-        Validity!();
+        BecauseRead!();
+        MutationCompatible!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_362 {
     };
 }
 
-impl_362!()
+impl_362!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Unexpected!();
         ParseBuffer!();
+        Unexpected!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! inner_unexpected {
     };
 }
 
-inner_unexpected!()
+inner_unexpected!();

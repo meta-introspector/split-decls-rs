@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ResolvedRule!();
-        ResolutionScope!();
-        Resolver!();
-        SsrError!();
-        ParsedRule!();
         Placeholder!();
+        ResolvedRule!();
+        Resolver!();
+        ParsedRule!();
+        ResolutionScope!();
+        SsrError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

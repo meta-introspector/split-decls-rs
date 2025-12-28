@@ -4,4 +4,4 @@ macro_rules! AnnNode {
     };
 }
 
-AnnNode!()
+AnnNode!();

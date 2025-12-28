@@ -4,4 +4,4 @@ macro_rules! CallbackFunc {
     };
 }
 
-CallbackFunc!()
+CallbackFunc!();

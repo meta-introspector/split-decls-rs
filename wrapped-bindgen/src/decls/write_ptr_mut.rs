@@ -11,4 +11,4 @@ macro_rules! write_ptr_mut {
     };
 }
 
-write_ptr_mut!()
+write_ptr_mut!();

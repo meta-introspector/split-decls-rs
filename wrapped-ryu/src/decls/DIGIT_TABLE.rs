@@ -9,4 +9,4 @@ macro_rules! DIGIT_TABLE {
     };
 }
 
-DIGIT_TABLE!()
+DIGIT_TABLE!();

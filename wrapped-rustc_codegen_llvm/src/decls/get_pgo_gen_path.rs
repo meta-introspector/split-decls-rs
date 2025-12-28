@@ -4,4 +4,4 @@ macro_rules! get_pgo_gen_path {
     };
 }
 
-get_pgo_gen_path!()
+get_pgo_gen_path!();

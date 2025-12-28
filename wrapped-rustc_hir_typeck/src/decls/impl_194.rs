@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         ArgMatrix!();
+        Error!();
         Compatibility!();
         Issue!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

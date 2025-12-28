@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ProcMacroClient!();
-        ProcMacroServerProcess!();
         MacroDylib!();
-        ServerError!();
         ProcMacro!();
+        ServerError!();
+        ProcMacroServerProcess!();
+        ProcMacroClient!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

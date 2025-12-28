@@ -4,4 +4,4 @@ macro_rules! BackendTypes {
     };
 }
 
-BackendTypes!()
+BackendTypes!();

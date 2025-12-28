@@ -4,4 +4,4 @@ macro_rules! TypeIrInherentUsage {
     };
 }
 
-TypeIrInherentUsage!()
+TypeIrInherentUsage!();

@@ -4,4 +4,4 @@ macro_rules! pad_tail {
     };
 }
 
-pad_tail!()
+pad_tail!();

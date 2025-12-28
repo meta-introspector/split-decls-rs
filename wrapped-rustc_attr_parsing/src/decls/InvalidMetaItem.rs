@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InvalidMetaItemQuoteIdentSugg!();
         InvalidMetaItemRemoveNegSugg!();
+        InvalidMetaItemQuoteIdentSugg!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InvalidMetaItem {
     };
 }
 
-InvalidMetaItem!()
+InvalidMetaItem!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        RawValue!();
         Value!();
-        Error!();
-        MapAccess!();
-        Map!();
         RawKey!();
-        BoxedFromString!();
+        Map!();
         Result!();
-        Deserializer!();
+        Error!();
+        BoxedFromString!();
+        MapAccess!();
         Formatter!();
+        RawValue!();
+        Deserializer!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_618 {
     };
 }
 
-impl_618!()
+impl_618!();

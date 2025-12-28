@@ -12,4 +12,4 @@ macro_rules! not_e {
     };
 }
 
-not_e!()
+not_e!();

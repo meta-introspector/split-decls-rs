@@ -4,4 +4,4 @@ macro_rules! R_METAG_RELBRANCH_PLT {
     };
 }
 
-R_METAG_RELBRANCH_PLT!()
+R_METAG_RELBRANCH_PLT!();

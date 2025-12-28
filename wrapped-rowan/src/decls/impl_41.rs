@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SyntaxElementChildrenByKind!();
         SyntaxNode!();
         SyntaxKind!();
-        SyntaxElementChildrenByKind!();
         SyntaxElementChildren!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

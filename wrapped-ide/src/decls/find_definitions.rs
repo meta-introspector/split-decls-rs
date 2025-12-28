@@ -11,4 +11,4 @@ macro_rules! find_definitions {
     };
 }
 
-find_definitions!()
+find_definitions!();

@@ -4,4 +4,4 @@ macro_rules! vector {
     };
 }
 
-vector!()
+vector!();

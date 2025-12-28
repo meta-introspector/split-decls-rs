@@ -32,4 +32,4 @@ impl BootstrapCycle {
     };
 }
 
-bootstrap_cycle_impl!()
+bootstrap_cycle_impl!();

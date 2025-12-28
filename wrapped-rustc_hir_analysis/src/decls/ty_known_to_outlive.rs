@@ -4,4 +4,4 @@ macro_rules! ty_known_to_outlive {
     };
 }
 
-ty_known_to_outlive!()
+ty_known_to_outlive!();

@@ -4,4 +4,4 @@ macro_rules! RHF_RLD_ORDER_SAFE {
     };
 }
 
-RHF_RLD_ORDER_SAFE!()
+RHF_RLD_ORDER_SAFE!();

@@ -12,4 +12,4 @@ macro_rules! walk_qpath {
     };
 }
 
-walk_qpath!()
+walk_qpath!();

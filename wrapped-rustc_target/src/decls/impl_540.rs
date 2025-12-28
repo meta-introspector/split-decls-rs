@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LinkArgs!();
-        TargetOptions!();
         Lld!();
         LinkerFlavor!();
+        LinkArgs!();
+        TargetOptions!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_540 {
     };
 }
 
-impl_540!()
+impl_540!();

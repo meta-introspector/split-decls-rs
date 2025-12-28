@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Error!();
-        Result!();
         VariantAccess!();
-        Value!();
+        Result!();
         UnitOnly!();
+        Value!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_294 {
     };
 }
 
-impl_294!()
+impl_294!();

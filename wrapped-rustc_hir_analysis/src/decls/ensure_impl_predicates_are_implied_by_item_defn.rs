@@ -6,4 +6,4 @@ macro_rules! ensure_impl_predicates_are_implied_by_item_defn {
     };
 }
 
-ensure_impl_predicates_are_implied_by_item_defn!()
+ensure_impl_predicates_are_implied_by_item_defn!();

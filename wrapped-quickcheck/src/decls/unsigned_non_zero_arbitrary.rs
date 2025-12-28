@@ -12,4 +12,4 @@ macro_rules! unsigned_non_zero_arbitrary {
     };
 }
 
-unsigned_non_zero_arbitrary!()
+unsigned_non_zero_arbitrary!();

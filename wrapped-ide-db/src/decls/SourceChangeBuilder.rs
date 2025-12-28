@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TextEditBuilder!();
         SnippetBuilder!();
+        TextEditBuilder!();
+        Command!();
         AnnotationSnippet!();
         TreeMutator!();
-        Command!();
         SourceChange!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! SourceChangeBuilder {
     };
 }
 
-SourceChangeBuilder!()
+SourceChangeBuilder!();

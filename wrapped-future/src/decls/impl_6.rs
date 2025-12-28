@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AsyncActionCompletedHandler_Vtbl!();
-        AsyncStatus!();
         AsyncActionCompletedHandlerBox!();
+        AsyncStatus!();
+        AsyncActionCompletedHandler_Vtbl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

@@ -4,4 +4,4 @@ macro_rules! CoroutineDrop {
     };
 }
 
-CoroutineDrop!()
+CoroutineDrop!();

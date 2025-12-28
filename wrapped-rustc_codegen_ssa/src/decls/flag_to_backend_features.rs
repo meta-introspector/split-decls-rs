@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UnknownCTargetFeature!();
         PossibleFeature!();
+        ForbiddenCTargetFeature!();
+        UnknownCTargetFeature!();
         UnknownCTargetFeaturePrefix!();
         UnstableCTargetFeature!();
-        ForbiddenCTargetFeature!();
         TargetFeatureDisableOrEnable!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! flag_to_backend_features {
     };
 }
 
-flag_to_backend_features!()
+flag_to_backend_features!();

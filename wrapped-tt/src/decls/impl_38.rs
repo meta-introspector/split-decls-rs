@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TokenTree!();
         TtIter!();
-        Subtree!();
         TokenTreesView!();
-        DelimiterKind!();
+        Subtree!();
+        TokenTree!();
         SubtreeView!();
+        DelimiterKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

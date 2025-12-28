@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        RegionTracker!();
+        RegionDefinition!();
+        LivenessValues!();
+        UniverseInfo!();
+        TypeTest!();
         PlaceholderIndices!();
         OutlivesConstraintSet!();
-        UniverseInfo!();
-        RegionTracker!();
-        LivenessValues!();
-        RegionDefinition!();
-        TypeTest!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! LoweredConstraints {
     };
 }
 
-LoweredConstraints!()
+LoweredConstraints!();

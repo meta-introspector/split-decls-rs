@@ -4,4 +4,4 @@ macro_rules! OsVersion {
     };
 }
 
-OsVersion!()
+OsVersion!();

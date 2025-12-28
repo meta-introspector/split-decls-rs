@@ -4,4 +4,4 @@ macro_rules! R_METAG_TLS_LE_LO16 {
     };
 }
 
-R_METAG_TLS_LE_LO16!()
+R_METAG_TLS_LE_LO16!();

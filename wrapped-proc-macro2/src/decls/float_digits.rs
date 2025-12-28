@@ -12,4 +12,4 @@ macro_rules! float_digits {
     };
 }
 
-float_digits!()
+float_digits!();

@@ -4,4 +4,4 @@ macro_rules! EM_NS32K {
     };
 }
 
-EM_NS32K!()
+EM_NS32K!();

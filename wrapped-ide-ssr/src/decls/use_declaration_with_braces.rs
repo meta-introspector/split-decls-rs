@@ -14,4 +14,4 @@ macro_rules! use_declaration_with_braces {
     };
 }
 
-use_declaration_with_braces!()
+use_declaration_with_braces!();

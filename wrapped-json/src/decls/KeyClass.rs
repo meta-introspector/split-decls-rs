@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RawValue!();
-        Number!();
         Map!();
+        Number!();
+        RawValue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! KeyClass {
     };
 }
 
-KeyClass!()
+KeyClass!();

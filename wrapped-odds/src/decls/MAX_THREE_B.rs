@@ -4,4 +4,4 @@ macro_rules! MAX_THREE_B {
     };
 }
 
-MAX_THREE_B!()
+MAX_THREE_B!();

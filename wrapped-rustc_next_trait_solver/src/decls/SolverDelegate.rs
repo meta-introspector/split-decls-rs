@@ -4,4 +4,4 @@ macro_rules! SolverDelegate {
     };
 }
 
-SolverDelegate!()
+SolverDelegate!();

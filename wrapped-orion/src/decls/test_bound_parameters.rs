@@ -4,4 +4,4 @@ macro_rules! test_bound_parameters {
     };
 }
 
-test_bound_parameters!()
+test_bound_parameters!();

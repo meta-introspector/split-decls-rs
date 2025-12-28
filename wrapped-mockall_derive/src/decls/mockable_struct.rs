@@ -4,4 +4,4 @@ macro_rules! mockable_struct {
     };
 }
 
-mockable_struct!()
+mockable_struct!();

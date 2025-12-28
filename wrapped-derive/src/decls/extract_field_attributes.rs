@@ -4,4 +4,4 @@ macro_rules! extract_field_attributes {
     };
 }
 
-extract_field_attributes!()
+extract_field_attributes!();

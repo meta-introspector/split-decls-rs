@@ -4,4 +4,4 @@ macro_rules! inject_cargo_env {
     };
 }
 
-inject_cargo_env!()
+inject_cargo_env!();

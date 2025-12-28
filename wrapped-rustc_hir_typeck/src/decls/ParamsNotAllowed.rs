@@ -4,4 +4,4 @@ macro_rules! ParamsNotAllowed {
     };
 }
 
-ParamsNotAllowed!()
+ParamsNotAllowed!();

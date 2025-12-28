@@ -4,4 +4,4 @@ macro_rules! merge_size_hints {
     };
 }
 
-merge_size_hints!()
+merge_size_hints!();

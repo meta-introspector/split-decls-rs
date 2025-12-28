@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         CompletionItem!();
-        CompletionContext!();
-        Builder!();
-        CompletionItemLabel!();
         RenderContext!();
-        CompletionItemRefMode!();
-        CompletionRelevance!();
         PathCompletionCtx!();
+        CompletionItemRefMode!();
+        CompletionItemLabel!();
+        Builder!();
+        CompletionRelevance!();
+        CompletionContext!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_151 {
     };
 }
 
-impl_151!()
+impl_151!();

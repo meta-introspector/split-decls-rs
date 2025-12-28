@@ -4,4 +4,4 @@ macro_rules! R_390_PLT32DBL {
     };
 }
 
-R_390_PLT32DBL!()
+R_390_PLT32DBL!();

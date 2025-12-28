@@ -4,4 +4,4 @@ macro_rules! current_version {
     };
 }
 
-current_version!()
+current_version!();

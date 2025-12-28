@@ -11,4 +11,4 @@ macro_rules! lower_to_hir {
     };
 }
 
-lower_to_hir!()
+lower_to_hir!();

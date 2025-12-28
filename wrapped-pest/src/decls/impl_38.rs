@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Tokens!();
-        Pairs!();
         Pair!();
-        Token!();
         QueueableToken!();
-        RuleType!();
+        Tokens!();
+        Token!();
+        Pairs!();
         Span!();
+        RuleType!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

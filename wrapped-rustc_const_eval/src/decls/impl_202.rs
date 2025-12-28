@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         FnVal!();
-        Machine!();
-        Immediate!();
-        InterpCx!();
-        PlaceTy!();
-        OpTy!();
-        ImmTy!();
         Writeable!();
+        InterpCx!();
+        OpTy!();
+        PlaceTy!();
+        Machine!();
+        ImmTy!();
+        Immediate!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_202 {
     };
 }
 
-impl_202!()
+impl_202!();

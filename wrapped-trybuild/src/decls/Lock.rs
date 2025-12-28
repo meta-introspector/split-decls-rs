@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileLock!();
         Guard!();
+        FileLock!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Lock {
     };
 }
 
-Lock!()
+Lock!();

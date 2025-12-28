@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_RLD_MAP_REL {
     };
 }
 
-DT_MIPS_RLD_MAP_REL!()
+DT_MIPS_RLD_MAP_REL!();

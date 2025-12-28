@@ -4,4 +4,4 @@ macro_rules! WithDummy {
     };
 }
 
-WithDummy!()
+WithDummy!();

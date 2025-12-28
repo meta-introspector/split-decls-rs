@@ -11,4 +11,4 @@ macro_rules! core_setup {
     };
 }
 
-core_setup!()
+core_setup!();

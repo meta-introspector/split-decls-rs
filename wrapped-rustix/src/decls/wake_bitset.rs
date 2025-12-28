@@ -11,4 +11,4 @@ macro_rules! wake_bitset {
     };
 }
 
-wake_bitset!()
+wake_bitset!();

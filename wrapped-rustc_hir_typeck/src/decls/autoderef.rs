@@ -4,4 +4,4 @@ macro_rules! autoderef {
     };
 }
 
-autoderef!()
+autoderef!();

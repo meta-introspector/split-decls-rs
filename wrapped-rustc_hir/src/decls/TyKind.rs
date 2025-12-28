@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
-        PathSegment!();
-        UnsafeBinderTy!();
         TyPat!();
-        Ty!();
-        InferDelegationKind!();
+        MutTy!();
         QPath!();
-        AnonConst!();
-        GenericBounds!();
-        Pat!();
+        Lifetime!();
         FnPtrTy!();
-        Path!();
+        PathSegment!();
+        InferDelegationKind!();
         ConstArg!();
         PolyTraitRef!();
-        MutTy!();
+        UnsafeBinderTy!();
+        Pat!();
+        Path!();
+        AnonConst!();
+        GenericBounds!();
         OpaqueTy!();
+        Ty!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! TyKind {
     };
 }
 
-TyKind!()
+TyKind!();

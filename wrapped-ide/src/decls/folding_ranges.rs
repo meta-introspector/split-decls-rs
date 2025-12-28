@@ -4,4 +4,4 @@ macro_rules! folding_ranges {
     };
 }
 
-folding_ranges!()
+folding_ranges!();

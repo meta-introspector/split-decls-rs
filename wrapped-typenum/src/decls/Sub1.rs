@@ -11,4 +11,4 @@ macro_rules! Sub1 {
     };
 }
 
-Sub1!()
+Sub1!();

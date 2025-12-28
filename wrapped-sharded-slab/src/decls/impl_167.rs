@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Registration!();
         Config!();
+        Registration!();
         Tid!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

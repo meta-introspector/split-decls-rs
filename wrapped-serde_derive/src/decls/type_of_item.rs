@@ -11,4 +11,4 @@ macro_rules! type_of_item {
     };
 }
 
-type_of_item!()
+type_of_item!();

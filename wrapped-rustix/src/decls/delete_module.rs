@@ -11,4 +11,4 @@ macro_rules! delete_module {
     };
 }
 
-delete_module!()
+delete_module!();

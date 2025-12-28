@@ -4,4 +4,4 @@ macro_rules! CoerceMulti {
     };
 }
 
-CoerceMulti!()
+CoerceMulti!();

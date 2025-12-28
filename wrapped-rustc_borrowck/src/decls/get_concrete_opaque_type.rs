@@ -4,4 +4,4 @@ macro_rules! get_concrete_opaque_type {
     };
 }
 
-get_concrete_opaque_type!()
+get_concrete_opaque_type!();

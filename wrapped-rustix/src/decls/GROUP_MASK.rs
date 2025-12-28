@@ -11,4 +11,4 @@ macro_rules! GROUP_MASK {
     };
 }
 
-GROUP_MASK!()
+GROUP_MASK!();

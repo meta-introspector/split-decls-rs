@@ -4,4 +4,4 @@ macro_rules! BreakFinder {
     };
 }
 
-BreakFinder!()
+BreakFinder!();

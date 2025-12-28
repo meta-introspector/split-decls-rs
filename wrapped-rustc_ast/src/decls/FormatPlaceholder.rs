@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FormatArgPosition!();
-        FormatTrait!();
         FormatOptions!();
+        FormatArgPosition!();
         Walkable!();
+        FormatTrait!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FormatPlaceholder {
     };
 }
 
-FormatPlaceholder!()
+FormatPlaceholder!();

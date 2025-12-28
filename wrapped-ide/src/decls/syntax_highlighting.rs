@@ -4,4 +4,4 @@ macro_rules! syntax_highlighting {
     };
 }
 
-syntax_highlighting!()
+syntax_highlighting!();

@@ -4,4 +4,4 @@ macro_rules! is_unpin_raw {
     };
 }
 
-is_unpin_raw!()
+is_unpin_raw!();

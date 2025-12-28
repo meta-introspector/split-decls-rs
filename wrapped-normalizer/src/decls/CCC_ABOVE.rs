@@ -11,4 +11,4 @@ macro_rules! CCC_ABOVE {
     };
 }
 
-CCC_ABOVE!()
+CCC_ABOVE!();

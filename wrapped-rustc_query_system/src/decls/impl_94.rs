@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        CurrentDepGraph!();
-        LocalEncoderResult!();
-        SerializedDepGraph!();
         Deps!();
-        DepGraphQuery!();
-        DepNode!();
-        DepGraph!();
         NodeInfo!();
+        DepNode!();
         Stat!();
-        DepNodeColorMap!();
         EncoderState!();
         LocalEncoderState!();
+        CurrentDepGraph!();
+        DepNodeColorMap!();
+        DepGraph!();
+        LocalEncoderResult!();
+        SerializedDepGraph!();
+        DepGraphQuery!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

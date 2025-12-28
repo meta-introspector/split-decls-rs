@@ -11,4 +11,4 @@ macro_rules! sqrt_test {
     };
 }
 
-sqrt_test!()
+sqrt_test!();

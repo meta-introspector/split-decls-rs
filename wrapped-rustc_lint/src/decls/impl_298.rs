@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SpanUseEqCtxtDiag!();
         LateContext!();
+        SpanUseEqCtxtDiag!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_298 {
     };
 }
 
-impl_298!()
+impl_298!();

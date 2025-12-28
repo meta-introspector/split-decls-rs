@@ -4,4 +4,4 @@ macro_rules! R_LARCH_SOP_POP_32_U {
     };
 }
 
-R_LARCH_SOP_POP_32_U!()
+R_LARCH_SOP_POP_32_U!();

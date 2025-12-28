@@ -4,4 +4,4 @@ macro_rules! X3_IMM39_2_SIZE_X {
     };
 }
 
-X3_IMM39_2_SIZE_X!()
+X3_IMM39_2_SIZE_X!();

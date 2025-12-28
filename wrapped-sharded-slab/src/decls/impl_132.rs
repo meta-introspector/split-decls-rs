@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Config!();
-        Slot!();
-        Shared!();
-        TransferStack!();
         Local!();
-        FreeList!();
+        TransferStack!();
+        Slot!();
         Addr!();
+        Shared!();
+        FreeList!();
+        Config!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

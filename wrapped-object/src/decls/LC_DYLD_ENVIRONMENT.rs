@@ -4,4 +4,4 @@ macro_rules! LC_DYLD_ENVIRONMENT {
     };
 }
 
-LC_DYLD_ENVIRONMENT!()
+LC_DYLD_ENVIRONMENT!();

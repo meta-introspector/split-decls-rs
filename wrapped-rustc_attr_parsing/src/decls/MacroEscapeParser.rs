@@ -4,4 +4,4 @@ macro_rules! MacroEscapeParser {
     };
 }
 
-MacroEscapeParser!()
+MacroEscapeParser!();

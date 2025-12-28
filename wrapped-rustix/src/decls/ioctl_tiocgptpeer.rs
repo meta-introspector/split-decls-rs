@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tiocgptpeer!();
         Result!();
+        Tiocgptpeer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ioctl_tiocgptpeer {
     };
 }
 
-ioctl_tiocgptpeer!()
+ioctl_tiocgptpeer!();

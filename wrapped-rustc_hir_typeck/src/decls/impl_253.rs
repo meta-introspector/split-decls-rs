@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProbeContext!();
         FnCtxt!();
+        ProbeContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

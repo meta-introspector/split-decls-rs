@@ -4,4 +4,4 @@ macro_rules! map_transitional {
     };
 }
 
-map_transitional!()
+map_transitional!();

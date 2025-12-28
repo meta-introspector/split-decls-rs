@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Build!();
-        Graph!();
-        IndexType!();
         EdgeType!();
+        Build!();
+        IndexType!();
+        Graph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

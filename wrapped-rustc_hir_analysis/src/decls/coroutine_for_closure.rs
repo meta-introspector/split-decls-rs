@@ -4,4 +4,4 @@ macro_rules! coroutine_for_closure {
     };
 }
 
-coroutine_for_closure!()
+coroutine_for_closure!();

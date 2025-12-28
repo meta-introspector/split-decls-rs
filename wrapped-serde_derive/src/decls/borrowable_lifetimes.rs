@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Field!();
         Ctxt!();
         Name!();
+        Field!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! borrowable_lifetimes {
     };
 }
 
-borrowable_lifetimes!()
+borrowable_lifetimes!();

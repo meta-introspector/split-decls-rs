@@ -4,4 +4,4 @@ macro_rules! ScheduleDrops {
     };
 }
 
-ScheduleDrops!()
+ScheduleDrops!();

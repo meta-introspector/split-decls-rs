@@ -4,4 +4,4 @@ macro_rules! R_ARM_TARGET1 {
     };
 }
 
-R_ARM_TARGET1!()
+R_ARM_TARGET1!();

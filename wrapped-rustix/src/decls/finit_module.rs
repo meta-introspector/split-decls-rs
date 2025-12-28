@@ -11,4 +11,4 @@ macro_rules! finit_module {
     };
 }
 
-finit_module!()
+finit_module!();

@@ -6,4 +6,4 @@ macro_rules! maybe_check_static_with_link_section {
     };
 }
 
-maybe_check_static_with_link_section!()
+maybe_check_static_with_link_section!();

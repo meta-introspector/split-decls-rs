@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Clauses!();
-        Interner!();
-        Region!();
-        ArgFolder!();
-        Const!();
-        TypeFolder!();
-        Binder!();
-        GenericArgKind!();
-        TypeFoldable!();
-        Ty!();
         Predicate!();
+        GenericArgKind!();
+        Ty!();
+        TypeFolder!();
+        ArgFolder!();
+        TypeFoldable!();
+        Const!();
         ConstKind!();
+        Binder!();
+        Interner!();
+        Clauses!();
+        Region!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_257 {
     };
 }
 
-impl_257!()
+impl_257!();

@@ -4,4 +4,4 @@ macro_rules! BuildTarget {
     };
 }
 
-BuildTarget!()
+BuildTarget!();

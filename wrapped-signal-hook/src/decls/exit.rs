@@ -4,4 +4,4 @@ macro_rules! exit {
     };
 }
 
-exit!()
+exit!();

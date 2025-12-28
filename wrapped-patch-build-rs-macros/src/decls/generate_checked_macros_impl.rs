@@ -68,4 +68,4 @@ macro_rules! proc_macro_fn {
     };
 }
 
-generate_checked_macros_impl!()
+generate_checked_macros_impl!();

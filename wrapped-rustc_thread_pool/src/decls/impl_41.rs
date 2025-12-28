@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        JobRefId!();
         JobRef!();
-        Tlv!();
         HeapJob!();
+        JobRefId!();
+        Tlv!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

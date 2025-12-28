@@ -4,4 +4,4 @@ macro_rules! a64_reg_index {
     };
 }
 
-a64_reg_index!()
+a64_reg_index!();

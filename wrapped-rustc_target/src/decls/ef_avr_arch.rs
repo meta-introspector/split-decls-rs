@@ -4,4 +4,4 @@ macro_rules! ef_avr_arch {
     };
 }
 
-ef_avr_arch!()
+ef_avr_arch!();

@@ -4,4 +4,4 @@ macro_rules! R_RISCV_JUMP_SLOT {
     };
 }
 
-R_RISCV_JUMP_SLOT!()
+R_RISCV_JUMP_SLOT!();

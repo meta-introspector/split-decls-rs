@@ -11,4 +11,4 @@ macro_rules! round_nearest_tie_even {
     };
 }
 
-round_nearest_tie_even!()
+round_nearest_tie_even!();

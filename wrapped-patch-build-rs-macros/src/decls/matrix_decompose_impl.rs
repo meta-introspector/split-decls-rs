@@ -7,4 +7,4 @@ macro_rules! matrix_decompose_impl {
     };
 }
 
-matrix_decompose_impl!()
+matrix_decompose_impl!();

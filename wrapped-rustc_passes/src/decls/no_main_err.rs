@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EntryContext!();
         NoMainErr!();
+        EntryContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! no_main_err {
     };
 }
 
-no_main_err!()
+no_main_err!();

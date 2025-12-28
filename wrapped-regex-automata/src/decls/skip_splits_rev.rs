@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Input!();
         MatchError!();
+        Input!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! skip_splits_rev {
     };
 }
 
-skip_splits_rev!()
+skip_splits_rev!();

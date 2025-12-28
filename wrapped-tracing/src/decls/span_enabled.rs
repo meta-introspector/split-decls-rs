@@ -4,4 +4,4 @@ macro_rules! span_enabled {
     };
 }
 
-span_enabled!()
+span_enabled!();

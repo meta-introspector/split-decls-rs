@@ -4,4 +4,4 @@ macro_rules! range_dec {
     };
 }
 
-range_dec!()
+range_dec!();

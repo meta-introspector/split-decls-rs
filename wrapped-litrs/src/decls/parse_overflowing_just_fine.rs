@@ -4,4 +4,4 @@ macro_rules! parse_overflowing_just_fine {
     };
 }
 
-parse_overflowing_just_fine!()
+parse_overflowing_just_fine!();

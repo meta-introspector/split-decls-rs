@@ -4,4 +4,4 @@ macro_rules! ARM_RELOC_PB_LA_PTR {
     };
 }
 
-ARM_RELOC_PB_LA_PTR!()
+ARM_RELOC_PB_LA_PTR!();

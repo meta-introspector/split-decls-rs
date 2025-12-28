@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        DropData!();
-        CFG!();
         DropKind!();
         DropTree!();
-        DropNode!();
-        DropTreeBuilder!();
+        DropData!();
         DropNodeKey!();
+        DropTreeBuilder!();
+        DropNode!();
+        CFG!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

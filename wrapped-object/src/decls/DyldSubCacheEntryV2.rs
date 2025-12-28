@@ -12,4 +12,4 @@ macro_rules! DyldSubCacheEntryV2 {
     };
 }
 
-DyldSubCacheEntryV2!()
+DyldSubCacheEntryV2!();

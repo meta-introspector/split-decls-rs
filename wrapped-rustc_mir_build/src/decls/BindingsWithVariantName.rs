@@ -4,4 +4,4 @@ macro_rules! BindingsWithVariantName {
     };
 }
 
-BindingsWithVariantName!()
+BindingsWithVariantName!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        VerboseTimingGuard!();
         EventArgRecorder!();
         SelfProfilerRef!();
+        VerboseTimingGuard!();
         QueryInvocationId!();
+        TimingGuard!();
         SelfProfiler!();
         TimePassesFormat!();
-        TimingGuard!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_367 {
     };
 }
 
-impl_367!()
+impl_367!();

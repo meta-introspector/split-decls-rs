@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Library!();
         Symbol!();
+        Library!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! r0_7_2 {
     };
 }
 
-r0_7_2!()
+r0_7_2!();

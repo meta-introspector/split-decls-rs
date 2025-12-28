@@ -11,4 +11,4 @@ macro_rules! _assert_bounds {
     };
 }
 
-_assert_bounds!()
+_assert_bounds!();

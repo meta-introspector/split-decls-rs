@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Lazy!();
-        MatchError!();
-        Cache!();
-        DFA!();
         HalfMatch!();
+        Cache!();
+        Start!();
+        Match!();
         Input!();
         CacheError!();
-        Match!();
-        Start!();
+        DFA!();
+        MatchError!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! LazyStateID {
     };
 }
 
-LazyStateID!()
+LazyStateID!();

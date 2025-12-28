@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stage!();
         Late!();
+        Stage!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AttributeParser {
     };
 }
 
-AttributeParser!()
+AttributeParser!();

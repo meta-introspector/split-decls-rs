@@ -4,4 +4,4 @@ macro_rules! MapInitProducer {
     };
 }
 
-MapInitProducer!()
+MapInitProducer!();

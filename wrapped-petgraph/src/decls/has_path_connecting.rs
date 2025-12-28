@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Time!();
         DfsSpace!();
+        Time!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! has_path_connecting {
     };
 }
 
-has_path_connecting!()
+has_path_connecting!();

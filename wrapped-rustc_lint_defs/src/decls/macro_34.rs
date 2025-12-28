@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FutureIncompatibilityReason!();
         FutureIncompatibleInfo!();
+        FutureIncompatibilityReason!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_34 {
     };
 }
 
-macro_34!()
+macro_34!();

@@ -4,4 +4,4 @@ macro_rules! execute_pseudo_indexed_range {
     };
 }
 
-execute_pseudo_indexed_range!()
+execute_pseudo_indexed_range!();

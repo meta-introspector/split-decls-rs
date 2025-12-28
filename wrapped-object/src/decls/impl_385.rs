@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Item!();
-        FileHeader!();
         ElfComdatIterator!();
         ElfComdat!();
         ReadRef!();
+        FileHeader!();
+        Item!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_385 {
     };
 }
 
-impl_385!()
+impl_385!();

@@ -4,4 +4,4 @@ macro_rules! zip_unroll_4 {
     };
 }
 
-zip_unroll_4!()
+zip_unroll_4!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Item!();
         WasmSection!();
         WasmSectionIterator!();
+        Item!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_752 {
     };
 }
 
-impl_752!()
+impl_752!();

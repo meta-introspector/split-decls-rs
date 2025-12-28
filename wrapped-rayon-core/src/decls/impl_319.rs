@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         StartHandler!();
-        PanicHandler!();
         CustomSpawn!();
+        PanicHandler!();
         ExitHandler!();
-        ThreadPoolBuilder!();
         ThreadBuilder!();
+        ThreadPoolBuilder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_319 {
     };
 }
 
-impl_319!()
+impl_319!();

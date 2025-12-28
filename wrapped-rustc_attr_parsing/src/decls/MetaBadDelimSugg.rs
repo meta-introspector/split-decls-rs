@@ -4,4 +4,4 @@ macro_rules! MetaBadDelimSugg {
     };
 }
 
-MetaBadDelimSugg!()
+MetaBadDelimSugg!();

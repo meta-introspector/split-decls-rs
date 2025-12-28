@@ -4,4 +4,4 @@ macro_rules! metis_partition {
     };
 }
 
-metis_partition!()
+metis_partition!();

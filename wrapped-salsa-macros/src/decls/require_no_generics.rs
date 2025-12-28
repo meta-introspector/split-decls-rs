@@ -4,4 +4,4 @@ macro_rules! require_no_generics {
     };
 }
 
-require_no_generics!()
+require_no_generics!();

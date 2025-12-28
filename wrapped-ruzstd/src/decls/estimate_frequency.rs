@@ -4,4 +4,4 @@ macro_rules! estimate_frequency {
     };
 }
 
-estimate_frequency!()
+estimate_frequency!();

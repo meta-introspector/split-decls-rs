@@ -4,4 +4,4 @@ macro_rules! OnBrokenPipe {
     };
 }
 
-OnBrokenPipe!()
+OnBrokenPipe!();

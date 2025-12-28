@@ -4,4 +4,4 @@ macro_rules! R_386_TLS_DTPOFF32 {
     };
 }
 
-R_386_TLS_DTPOFF32!()
+R_386_TLS_DTPOFF32!();

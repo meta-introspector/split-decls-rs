@@ -4,4 +4,4 @@ macro_rules! TargetMachineFactoryConfig {
     };
 }
 
-TargetMachineFactoryConfig!()
+TargetMachineFactoryConfig!();

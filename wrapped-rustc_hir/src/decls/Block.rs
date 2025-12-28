@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stmt!();
         BlockCheckMode!();
+        Stmt!();
         Expr!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Block {
     };
 }
 
-Block!()
+Block!();

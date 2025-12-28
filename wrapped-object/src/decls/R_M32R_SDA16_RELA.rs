@@ -4,4 +4,4 @@ macro_rules! R_M32R_SDA16_RELA {
     };
 }
 
-R_M32R_SDA16_RELA!()
+R_M32R_SDA16_RELA!();

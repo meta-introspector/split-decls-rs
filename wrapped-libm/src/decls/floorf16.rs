@@ -4,4 +4,4 @@ macro_rules! floorf16 {
     };
 }
 
-floorf16!()
+floorf16!();

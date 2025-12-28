@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CfgSelectUnreachable!();
         CfgSelectNoMatches!();
+        CfgSelectUnreachable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! expand_cfg_select {
     };
 }
 
-expand_cfg_select!()
+expand_cfg_select!();

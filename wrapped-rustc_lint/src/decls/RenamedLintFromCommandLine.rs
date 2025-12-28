@@ -12,4 +12,4 @@ macro_rules! RenamedLintFromCommandLine {
     };
 }
 
-RenamedLintFromCommandLine!()
+RenamedLintFromCommandLine!();

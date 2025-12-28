@@ -12,4 +12,4 @@ macro_rules! test_grapheme_cursor_ris_precontext {
     };
 }
 
-test_grapheme_cursor_ris_precontext!()
+test_grapheme_cursor_ris_precontext!();

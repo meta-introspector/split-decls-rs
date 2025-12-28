@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        EdgeRef!();
         ReversedEdgeReference!();
         Reversed!();
         EdgeReferences!();
-        EdgeRef!();
         ReversedEdgeReferences!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_182 {
     };
 }
 
-impl_182!()
+impl_182!();

@@ -4,4 +4,4 @@ macro_rules! FDFA_MARKER {
     };
 }
 
-FDFA_MARKER!()
+FDFA_MARKER!();

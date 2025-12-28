@@ -11,4 +11,4 @@ macro_rules! recompression_step {
     };
 }
 
-recompression_step!()
+recompression_step!();

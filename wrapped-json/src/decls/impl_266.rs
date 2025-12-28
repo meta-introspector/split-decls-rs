@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
         MapAccess!();
         Result!();
         MapKeyDeserializer!();
         Value!();
         MapDeserializer!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_266 {
     };
 }
 
-impl_266!()
+impl_266!();

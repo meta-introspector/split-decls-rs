@@ -4,4 +4,4 @@ macro_rules! supports_feature {
     };
 }
 
-supports_feature!()
+supports_feature!();

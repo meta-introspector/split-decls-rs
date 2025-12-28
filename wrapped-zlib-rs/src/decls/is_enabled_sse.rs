@@ -4,4 +4,4 @@ macro_rules! is_enabled_sse {
     };
 }
 
-is_enabled_sse!()
+is_enabled_sse!();

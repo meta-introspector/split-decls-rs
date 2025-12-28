@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Literal!();
         Result!();
-        Formatter!();
         Bytes!();
+        Formatter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_226 {
     };
 }
 
-impl_226!()
+impl_226!();

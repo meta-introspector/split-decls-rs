@@ -11,4 +11,4 @@ macro_rules! invalid_escapes {
     };
 }
 
-invalid_escapes!()
+invalid_escapes!();

@@ -4,4 +4,4 @@ macro_rules! PtrCastAddAutoToObject {
     };
 }
 
-PtrCastAddAutoToObject!()
+PtrCastAddAutoToObject!();

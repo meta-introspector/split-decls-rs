@@ -11,4 +11,4 @@ macro_rules! Sha512VarCore {
     };
 }
 
-Sha512VarCore!()
+Sha512VarCore!();

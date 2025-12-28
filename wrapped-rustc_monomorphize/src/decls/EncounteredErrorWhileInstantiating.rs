@@ -4,4 +4,4 @@ macro_rules! EncounteredErrorWhileInstantiating {
     };
 }
 
-EncounteredErrorWhileInstantiating!()
+EncounteredErrorWhileInstantiating!();

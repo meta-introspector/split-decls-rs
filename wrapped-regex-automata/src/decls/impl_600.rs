@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ByteSet!();
-        Endian!();
-        DeserializeError!();
         BitSet!();
+        DeserializeError!();
+        ByteSet!();
         ByteSetRangeIter!();
-        SerializeError!();
         ByteSetIter!();
+        SerializeError!();
+        Endian!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_600 {
     };
 }
 
-impl_600!()
+impl_600!();

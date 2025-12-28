@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VecType!();
         Limb!();
+        VecType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! long_mul {
     };
 }
 
-long_mul!()
+long_mul!();

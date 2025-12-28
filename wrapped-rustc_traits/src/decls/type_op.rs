@@ -4,4 +4,4 @@ macro_rules! type_op {
     };
 }
 
-type_op!()
+type_op!();

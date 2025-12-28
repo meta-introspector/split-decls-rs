@@ -4,4 +4,4 @@ macro_rules! loader {
     };
 }
 
-loader!()
+loader!();

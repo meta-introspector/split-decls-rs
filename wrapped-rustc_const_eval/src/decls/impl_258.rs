@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AllocRef!();
         AllocRefMut!();
+        AllocRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_258 {
     };
 }
 
-impl_258!()
+impl_258!();

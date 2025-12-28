@@ -4,4 +4,4 @@ macro_rules! DistConfig {
     };
 }
 
-DistConfig!()
+DistConfig!();

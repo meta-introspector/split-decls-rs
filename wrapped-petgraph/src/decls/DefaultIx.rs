@@ -4,4 +4,4 @@ macro_rules! DefaultIx {
     };
 }
 
-DefaultIx!()
+DefaultIx!();

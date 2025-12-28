@@ -11,4 +11,4 @@ macro_rules! compose_non_hangul {
     };
 }
 
-compose_non_hangul!()
+compose_non_hangul!();

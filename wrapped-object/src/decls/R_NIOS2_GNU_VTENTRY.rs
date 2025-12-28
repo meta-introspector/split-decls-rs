@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_GNU_VTENTRY {
     };
 }
 
-R_NIOS2_GNU_VTENTRY!()
+R_NIOS2_GNU_VTENTRY!();

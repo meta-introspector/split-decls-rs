@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Receiver!();
+        Value!();
         Shared!();
         Sender!();
-        Value!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! channel {
     };
 }
 
-channel!()
+channel!();

@@ -11,4 +11,4 @@ macro_rules! new_sentence_bounds {
     };
 }
 
-new_sentence_bounds!()
+new_sentence_bounds!();

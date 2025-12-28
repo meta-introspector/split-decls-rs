@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PredicateKind!();
         BridgeTys!();
+        PredicateKind!();
         Stable!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

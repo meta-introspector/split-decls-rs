@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ArgParser!();
-        AcceptContext!();
         Stage!();
+        AcceptContext!();
+        ArgParser!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_cfg_attr {
     };
 }
 
-parse_cfg_attr!()
+parse_cfg_attr!();

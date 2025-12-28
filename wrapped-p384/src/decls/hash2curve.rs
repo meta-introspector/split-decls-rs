@@ -4,4 +4,4 @@ macro_rules! hash2curve {
     };
 }
 
-hash2curve!()
+hash2curve!();

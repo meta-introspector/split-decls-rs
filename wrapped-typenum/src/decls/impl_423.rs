@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        InternalMarker!();
         Cmp!();
         Equal!();
-        Zero!();
-        InternalMarker!();
         UTerm!();
+        Zero!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_423 {
     };
 }
 
-impl_423!()
+impl_423!();

@@ -13,4 +13,4 @@ macro_rules! max_refs {
     };
 }
 
-max_refs!()
+max_refs!();

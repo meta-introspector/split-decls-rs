@@ -11,4 +11,4 @@ macro_rules! leading_zeros {
     };
 }
 
-leading_zeros!()
+leading_zeros!();

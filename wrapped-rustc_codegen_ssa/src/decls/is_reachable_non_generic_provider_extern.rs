@@ -4,4 +4,4 @@ macro_rules! is_reachable_non_generic_provider_extern {
     };
 }
 
-is_reachable_non_generic_provider_extern!()
+is_reachable_non_generic_provider_extern!();

@@ -4,4 +4,4 @@ macro_rules! checktemplate {
     };
 }
 
-checktemplate!()
+checktemplate!();

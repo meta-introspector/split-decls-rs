@@ -4,4 +4,4 @@ macro_rules! is_e {
     };
 }
 
-is_e!()
+is_e!();

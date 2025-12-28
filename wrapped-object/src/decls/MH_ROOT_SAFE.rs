@@ -4,4 +4,4 @@ macro_rules! MH_ROOT_SAFE {
     };
 }
 
-MH_ROOT_SAFE!()
+MH_ROOT_SAFE!();

@@ -4,4 +4,4 @@ macro_rules! set_global_constant {
     };
 }
 
-set_global_constant!()
+set_global_constant!();

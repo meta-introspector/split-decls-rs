@@ -4,4 +4,4 @@ macro_rules! lean4_macro_bridge {
     };
 }
 
-lean4_macro_bridge!()
+lean4_macro_bridge!();

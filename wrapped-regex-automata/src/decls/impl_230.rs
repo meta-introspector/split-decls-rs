@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        HalfMatch!();
-        Lazy!();
-        SearchProgress!();
-        StateSaver!();
+        StateMap!();
         State!();
-        Cache!();
-        LazyStateID!();
+        Input!();
+        StateSaver!();
+        SearchProgress!();
         StateBuilderEmpty!();
         SparseSets!();
+        HalfMatch!();
         DFA!();
-        StateMap!();
-        Input!();
+        Lazy!();
+        LazyStateID!();
+        Cache!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_230 {
     };
 }
 
-impl_230!()
+impl_230!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Prec!();
-        PrattParserMap!();
-        Pair!();
-        Affix!();
         RuleType!();
+        PrattParserMap!();
         Assoc!();
+        Prec!();
+        Pair!();
         Pairs!();
+        Affix!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

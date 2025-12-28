@@ -4,4 +4,4 @@ macro_rules! InspectProducer {
     };
 }
 
-InspectProducer!()
+InspectProducer!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        SeqRefDeserializer!();
         Value!();
+        SeqRefDeserializer!();
         Error!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! visit_array_ref {
     };
 }
 
-visit_array_ref!()
+visit_array_ref!();

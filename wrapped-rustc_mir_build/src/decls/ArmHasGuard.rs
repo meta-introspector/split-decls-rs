@@ -4,4 +4,4 @@ macro_rules! ArmHasGuard {
     };
 }
 
-ArmHasGuard!()
+ArmHasGuard!();

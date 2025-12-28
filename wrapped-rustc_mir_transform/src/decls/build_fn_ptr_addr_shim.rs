@@ -4,4 +4,4 @@ macro_rules! build_fn_ptr_addr_shim {
     };
 }
 
-build_fn_ptr_addr_shim!()
+build_fn_ptr_addr_shim!();

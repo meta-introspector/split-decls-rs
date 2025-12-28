@@ -4,4 +4,4 @@ macro_rules! ListStringConsumer {
     };
 }
 
-ListStringConsumer!()
+ListStringConsumer!();

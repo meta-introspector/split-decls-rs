@@ -4,4 +4,4 @@ macro_rules! round_up_nonzero {
     };
 }
 
-round_up_nonzero!()
+round_up_nonzero!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        ParentInfo!();
+        IgnoredDerivedImpls!();
+        EnumVariantSameName!();
+        ChangeFields!();
+        Node!();
         ReportOn!();
         DeadVisitor!();
-        ParentInfo!();
         DeadItem!();
-        MultipleDeadCodes!();
         ShouldWarnAboutField!();
-        ChangeFields!();
-        IgnoredDerivedImpls!();
-        Node!();
-        EnumVariantSameName!();
+        MultipleDeadCodes!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

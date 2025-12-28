@@ -4,4 +4,4 @@ macro_rules! R_ARM_TLS_GD32 {
     };
 }
 
-R_ARM_TLS_GD32!()
+R_ARM_TLS_GD32!();

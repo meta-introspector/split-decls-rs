@@ -11,4 +11,4 @@ macro_rules! DUMMY_SP {
     };
 }
 
-DUMMY_SP!()
+DUMMY_SP!();

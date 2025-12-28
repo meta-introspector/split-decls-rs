@@ -4,4 +4,4 @@ macro_rules! PathCollector {
     };
 }
 
-PathCollector!()
+PathCollector!();

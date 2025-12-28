@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CrateDefType!();
-        DefId!();
         CrateDef!();
+        DefId!();
+        CrateDefType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! crate_def_with_ty {
     };
 }
 
-crate_def_with_ty!()
+crate_def_with_ty!();

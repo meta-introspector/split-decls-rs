@@ -4,4 +4,4 @@ macro_rules! path_interner {
     };
 }
 
-path_interner!()
+path_interner!();

@@ -11,4 +11,4 @@ macro_rules! testable_unit_panic {
     };
 }
 
-testable_unit_panic!()
+testable_unit_panic!();

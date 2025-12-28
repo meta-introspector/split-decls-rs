@@ -11,4 +11,4 @@ macro_rules! completion_list_with_config {
     };
 }
 
-completion_list_with_config!()
+completion_list_with_config!();

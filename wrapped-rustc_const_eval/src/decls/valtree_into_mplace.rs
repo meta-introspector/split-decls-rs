@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MPlaceTy!();
         CompileTimeInterpCx!();
         Immediate!();
+        MPlaceTy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! valtree_into_mplace {
     };
 }
 
-valtree_into_mplace!()
+valtree_into_mplace!();

@@ -4,4 +4,4 @@ macro_rules! decoding {
     };
 }
 
-decoding!()
+decoding!();

@@ -4,4 +4,4 @@ macro_rules! SsoHashMap {
     };
 }
 
-SsoHashMap!()
+SsoHashMap!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PrivatePow!();
         Unsigned!();
+        PrivatePow!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_441 {
     };
 }
 
-impl_441!()
+impl_441!();

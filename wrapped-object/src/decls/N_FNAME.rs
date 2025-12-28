@@ -4,4 +4,4 @@ macro_rules! N_FNAME {
     };
 }
 
-N_FNAME!()
+N_FNAME!();

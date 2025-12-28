@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FindFolder!();
         MatchPosition!();
         Folder!();
-        FindFolder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_504 {
     };
 }
 
-impl_504!()
+impl_504!();

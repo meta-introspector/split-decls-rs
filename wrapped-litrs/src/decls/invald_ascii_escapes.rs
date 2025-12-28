@@ -11,4 +11,4 @@ macro_rules! invald_ascii_escapes {
     };
 }
 
-invald_ascii_escapes!()
+invald_ascii_escapes!();

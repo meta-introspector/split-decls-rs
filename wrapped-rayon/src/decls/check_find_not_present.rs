@@ -4,4 +4,4 @@ macro_rules! check_find_not_present {
     };
 }
 
-check_find_not_present!()
+check_find_not_present!();

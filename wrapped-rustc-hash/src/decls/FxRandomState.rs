@@ -4,4 +4,4 @@ macro_rules! FxRandomState {
     };
 }
 
-FxRandomState!()
+FxRandomState!();

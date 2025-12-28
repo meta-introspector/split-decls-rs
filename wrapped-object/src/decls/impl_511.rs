@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExportSymbol!();
         ExportData!();
+        ExportSymbol!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_511 {
     };
 }
 
-impl_511!()
+impl_511!();

@@ -11,4 +11,4 @@ macro_rules! print_indented {
     };
 }
 
-print_indented!()
+print_indented!();

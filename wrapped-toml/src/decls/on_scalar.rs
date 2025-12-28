@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DeFloat!();
-        DeValue!();
         DeInteger!();
+        DeValue!();
         TraceScope!();
+        DeFloat!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! on_scalar {
     };
 }
 
-on_scalar!()
+on_scalar!();

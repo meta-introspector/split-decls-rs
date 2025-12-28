@@ -10,4 +10,4 @@ macro_rules! test_doc_comment_preserves_newlines {
     };
 }
 
-test_doc_comment_preserves_newlines!()
+test_doc_comment_preserves_newlines!();

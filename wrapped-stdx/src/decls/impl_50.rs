@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Builder!();
         JoinHandle!();
+        Builder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

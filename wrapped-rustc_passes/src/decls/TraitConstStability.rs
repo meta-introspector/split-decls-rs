@@ -4,4 +4,4 @@ macro_rules! TraitConstStability {
     };
 }
 
-TraitConstStability!()
+TraitConstStability!();

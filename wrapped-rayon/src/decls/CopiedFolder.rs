@@ -4,4 +4,4 @@ macro_rules! CopiedFolder {
     };
 }
 
-CopiedFolder!()
+CopiedFolder!();

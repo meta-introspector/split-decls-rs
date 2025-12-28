@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HmacFunction!();
         UnknownCryptoError!();
+        HmacFunction!();
         Hmac!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! _function_f {
     };
 }
 
-_function_f!()
+_function_f!();

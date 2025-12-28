@@ -4,4 +4,4 @@ macro_rules! cargo_proxy {
     };
 }
 
-cargo_proxy!()
+cargo_proxy!();

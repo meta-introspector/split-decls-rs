@@ -4,4 +4,4 @@ macro_rules! check_fixes {
     };
 }
 
-check_fixes!()
+check_fixes!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IsNotEqual!();
+        Compare!();
+        Cmp!();
         Internal!();
         IsNotEqualPrivate!();
-        Cmp!();
-        Compare!();
+        IsNotEqual!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_329 {
     };
 }
 
-impl_329!()
+impl_329!();

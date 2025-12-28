@@ -4,4 +4,4 @@ macro_rules! check_step_by_rev {
     };
 }
 
-check_step_by_rev!()
+check_step_by_rev!();

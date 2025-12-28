@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        SERVICE_STATUS!();
         State!();
         SERVICE_TABLE_ENTRYW!();
-        Service!();
         Command!();
-        SERVICE_STATUS!();
+        Service!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

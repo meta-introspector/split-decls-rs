@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        FileOptions!();
-        DateTime!();
-        EncryptWith!();
-        ExtendedFileOptions!();
-        FullFileOptions!();
-        SimpleFileOptions!();
         ZipCryptoKeys!();
-        Aes128!();
-        Aes256!();
+        ExtendedFileOptions!();
         CompressionMethod!();
+        Aes256!();
+        SimpleFileOptions!();
+        FullFileOptions!();
+        FileOptions!();
         ZipResult!();
+        EncryptWith!();
+        DateTime!();
+        Aes128!();
         AesMode!();
     };
 }
@@ -27,4 +27,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

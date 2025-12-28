@@ -4,4 +4,4 @@ macro_rules! GenerateProofTree {
     };
 }
 
-GenerateProofTree!()
+GenerateProofTree!();

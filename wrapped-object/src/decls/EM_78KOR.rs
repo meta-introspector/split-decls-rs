@@ -4,4 +4,4 @@ macro_rules! EM_78KOR {
     };
 }
 
-EM_78KOR!()
+EM_78KOR!();

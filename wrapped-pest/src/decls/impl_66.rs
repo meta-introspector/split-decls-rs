@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Tokens!();
-        RuleType!();
-        Token!();
         QueueableToken!();
+        Token!();
+        Tokens!();
         Position!();
+        RuleType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

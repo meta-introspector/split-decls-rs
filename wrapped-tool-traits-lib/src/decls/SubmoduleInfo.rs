@@ -4,4 +4,4 @@ macro_rules! SubmoduleInfo {
     };
 }
 
-SubmoduleInfo!()
+SubmoduleInfo!();

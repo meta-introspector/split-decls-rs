@@ -4,4 +4,4 @@ macro_rules! Tag_Symbol {
     };
 }
 
-Tag_Symbol!()
+Tag_Symbol!();

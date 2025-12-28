@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Dependencies!();
         TypeMap!();
+        Dependencies!();
         CppFn!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_264 {
     };
 }
 
-impl_264!()
+impl_264!();

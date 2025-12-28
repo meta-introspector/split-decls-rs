@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BitReaderReversed!();
-        FSEScratch!();
         Sequence!();
-        SequencesHeader!();
         DecodeSequenceError!();
+        BitReaderReversed!();
+        SequencesHeader!();
+        FSEScratch!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! decode_sequences {
     };
 }
 
-decode_sequences!()
+decode_sequences!();

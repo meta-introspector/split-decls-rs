@@ -4,4 +4,4 @@ macro_rules! throw_validation_failure {
     };
 }
 
-throw_validation_failure!()
+throw_validation_failure!();

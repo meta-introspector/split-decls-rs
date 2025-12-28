@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RawPid!();
         Pid!();
         Result!();
-        RawPid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! child_subreaper {
     };
 }
 
-child_subreaper!()
+child_subreaper!();

@@ -4,4 +4,4 @@ macro_rules! MIN_TABLE_SIZES {
     };
 }
 
-MIN_TABLE_SIZES!()
+MIN_TABLE_SIZES!();

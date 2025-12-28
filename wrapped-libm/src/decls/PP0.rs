@@ -4,4 +4,4 @@ macro_rules! PP0 {
     };
 }
 
-PP0!()
+PP0!();

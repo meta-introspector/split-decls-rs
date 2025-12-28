@@ -4,4 +4,4 @@ macro_rules! DepNodeFilter {
     };
 }
 
-DepNodeFilter!()
+DepNodeFilter!();

@@ -11,4 +11,4 @@ macro_rules! racy_take {
     };
 }
 
-racy_take!()
+racy_take!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         PatternSet!();
         PatternSetInsertError!();
-        PatternSetIter!();
         PatternID!();
+        PatternSetIter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_922 {
     };
 }
 
-impl_922!()
+impl_922!();

@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        ActiveQuery!();
+        Stamp!();
+        CycleHeads!();
         IdentityHash!();
-        Durability!();
         DatabaseKeyIndex!();
+        Durability!();
+        IdentityMap!();
         Accumulator!();
         QueryEdge!();
         Identity!();
-        IngredientIndex!();
-        IdentityMap!();
-        Disambiguator!();
         Id!();
-        Stamp!();
-        CycleHeads!();
+        IngredientIndex!();
+        ActiveQuery!();
         Revision!();
+        Disambiguator!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

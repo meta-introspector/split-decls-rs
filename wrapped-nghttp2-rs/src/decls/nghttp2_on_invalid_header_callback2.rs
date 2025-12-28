@@ -4,4 +4,4 @@ macro_rules! nghttp2_on_invalid_header_callback2 {
     };
 }
 
-nghttp2_on_invalid_header_callback2!()
+nghttp2_on_invalid_header_callback2!();

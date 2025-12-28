@@ -4,4 +4,4 @@ macro_rules! weak_slice {
     };
 }
 
-weak_slice!()
+weak_slice!();

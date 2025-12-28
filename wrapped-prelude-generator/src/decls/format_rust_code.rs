@@ -4,4 +4,4 @@ macro_rules! format_rust_code {
     };
 }
 
-format_rust_code!()
+format_rust_code!();

@@ -11,4 +11,4 @@ macro_rules! NT_VMCOREDD {
     };
 }
 
-NT_VMCOREDD!()
+NT_VMCOREDD!();

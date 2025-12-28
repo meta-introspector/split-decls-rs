@@ -4,4 +4,4 @@ macro_rules! DT_VALRNGHI {
     };
 }
 
-DT_VALRNGHI!()
+DT_VALRNGHI!();

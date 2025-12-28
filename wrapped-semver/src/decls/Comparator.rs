@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        VersionReq!();
         Op!();
         Prerelease!();
+        VersionReq!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Comparator {
     };
 }
 
-Comparator!()
+Comparator!();

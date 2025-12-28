@@ -11,4 +11,4 @@ macro_rules! NormalizedPos {
     };
 }
 
-NormalizedPos!()
+NormalizedPos!();

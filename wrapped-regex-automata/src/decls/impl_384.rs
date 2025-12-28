@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        BoundedBacktracker!();
-        WhichCaptures!();
+        Compiler!();
         OnePass!();
         HalfMatch!();
-        Cache!();
-        RetryFailError!();
-        LookMatcher!();
-        BuildError!();
-        NonMaxUsize!();
-        DFA!();
-        Prefilter!();
-        Config!();
-        Hybrid!();
-        Input!();
-        PatternID!();
-        RegexInfo!();
-        Compiler!();
-        Core!();
         PikeVM!();
+        BoundedBacktracker!();
+        DFA!();
+        RetryFailError!();
+        BuildError!();
+        LookMatcher!();
+        WhichCaptures!();
+        Config!();
+        Core!();
+        RegexInfo!();
+        Cache!();
+        Input!();
         Match!();
+        Prefilter!();
+        NonMaxUsize!();
+        PatternID!();
+        Hybrid!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_384 {
     };
 }
 
-impl_384!()
+impl_384!();

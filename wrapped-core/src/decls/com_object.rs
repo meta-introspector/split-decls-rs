@@ -4,4 +4,4 @@ macro_rules! com_object {
     };
 }
 
-com_object!()
+com_object!();

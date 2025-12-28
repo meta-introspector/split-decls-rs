@@ -4,4 +4,4 @@ macro_rules! find_invalid_byte {
     };
 }
 
-find_invalid_byte!()
+find_invalid_byte!();

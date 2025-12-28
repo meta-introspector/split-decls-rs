@@ -4,4 +4,4 @@ macro_rules! TypeVisitor {
     };
 }
 
-TypeVisitor!()
+TypeVisitor!();

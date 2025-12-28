@@ -4,4 +4,4 @@ macro_rules! contains_complex_attributes {
     };
 }
 
-contains_complex_attributes!()
+contains_complex_attributes!();

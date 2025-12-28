@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Direction!();
-        EdgeRef!();
         PositiveMeasure!();
+        EdgeRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! build_level_graph {
     };
 }
 
-build_level_graph!()
+build_level_graph!();

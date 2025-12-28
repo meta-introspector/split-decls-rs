@@ -4,4 +4,4 @@ macro_rules! MockableModule {
     };
 }
 
-MockableModule!()
+MockableModule!();

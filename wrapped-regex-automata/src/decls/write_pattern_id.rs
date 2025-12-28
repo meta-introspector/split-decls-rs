@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endian!();
         PatternID!();
+        Endian!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! write_pattern_id {
     };
 }
 
-write_pattern_id!()
+write_pattern_id!();

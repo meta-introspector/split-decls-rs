@@ -4,4 +4,4 @@ macro_rules! EventOrSpan {
     };
 }
 
-EventOrSpan!()
+EventOrSpan!();

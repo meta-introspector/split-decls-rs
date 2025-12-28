@@ -4,4 +4,4 @@ macro_rules! LC_DATA_IN_CODE {
     };
 }
 
-LC_DATA_IN_CODE!()
+LC_DATA_IN_CODE!();

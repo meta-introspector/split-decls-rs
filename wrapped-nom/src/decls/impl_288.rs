@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Preceded!();
-        Parser!();
-        ParseError!();
-        Error!();
-        Check!();
-        OutputM!();
         OutputMode!();
         PResult!();
+        OutputM!();
+        Parser!();
+        ParseError!();
+        Preceded!();
+        Error!();
+        Check!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_288 {
     };
 }
 
-impl_288!()
+impl_288!();

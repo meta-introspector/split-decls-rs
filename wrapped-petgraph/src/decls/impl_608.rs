@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Nullable!();
-        FromGraph6!();
         IndexType!();
         MatrixGraph!();
         Undirected!();
+        FromGraph6!();
+        Nullable!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_608 {
     };
 }
 
-impl_608!()
+impl_608!();

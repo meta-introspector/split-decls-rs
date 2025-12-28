@@ -4,4 +4,4 @@ macro_rules! get_required_uses_for_item_const {
     };
 }
 
-get_required_uses_for_item_const!()
+get_required_uses_for_item_const!();

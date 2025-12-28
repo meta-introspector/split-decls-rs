@@ -4,4 +4,4 @@ macro_rules! bernoulli {
     };
 }
 
-bernoulli!()
+bernoulli!();

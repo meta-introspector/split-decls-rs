@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Timespec!();
-        Event!();
         Result!();
         Buffer!();
+        Event!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! kevent {
     };
 }
 
-kevent!()
+kevent!();

@@ -12,4 +12,4 @@ macro_rules! find_last_folder_yields_last_match {
     };
 }
 
-find_last_folder_yields_last_match!()
+find_last_folder_yields_last_match!();

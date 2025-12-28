@@ -4,4 +4,4 @@ macro_rules! ZWJ {
     };
 }
 
-ZWJ!()
+ZWJ!();

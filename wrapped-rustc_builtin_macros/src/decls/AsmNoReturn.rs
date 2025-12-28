@@ -4,4 +4,4 @@ macro_rules! AsmNoReturn {
     };
 }
 
-AsmNoReturn!()
+AsmNoReturn!();

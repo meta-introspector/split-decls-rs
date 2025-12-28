@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         ImplicitUnsafeAutorefsMethodNote!();
         ImplicitUnsafeAutorefsDiag!();
-        LateContext!();
         ImplicitUnsafeAutorefsOrigin!();
         ImplicitUnsafeAutorefsSuggestion!();
+        LateContext!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

@@ -4,4 +4,4 @@ macro_rules! has_been_set {
     };
 }
 
-has_been_set!()
+has_been_set!();

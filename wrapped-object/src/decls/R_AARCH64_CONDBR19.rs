@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_CONDBR19 {
     };
 }
 
-R_AARCH64_CONDBR19!()
+R_AARCH64_CONDBR19!();

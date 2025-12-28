@@ -4,4 +4,4 @@ macro_rules! partition {
     };
 }
 
-partition!()
+partition!();

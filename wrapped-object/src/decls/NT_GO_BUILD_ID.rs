@@ -4,4 +4,4 @@ macro_rules! NT_GO_BUILD_ID {
     };
 }
 
-NT_GO_BUILD_ID!()
+NT_GO_BUILD_ID!();

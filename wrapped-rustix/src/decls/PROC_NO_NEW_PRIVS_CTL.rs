@@ -4,4 +4,4 @@ macro_rules! PROC_NO_NEW_PRIVS_CTL {
     };
 }
 
-PROC_NO_NEW_PRIVS_CTL!()
+PROC_NO_NEW_PRIVS_CTL!();

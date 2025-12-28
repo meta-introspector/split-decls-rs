@@ -11,4 +11,4 @@ macro_rules! extend_comments {
     };
 }
 
-extend_comments!()
+extend_comments!();

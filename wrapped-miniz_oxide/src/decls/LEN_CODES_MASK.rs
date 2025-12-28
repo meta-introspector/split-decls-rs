@@ -4,4 +4,4 @@ macro_rules! LEN_CODES_MASK {
     };
 }
 
-LEN_CODES_MASK!()
+LEN_CODES_MASK!();

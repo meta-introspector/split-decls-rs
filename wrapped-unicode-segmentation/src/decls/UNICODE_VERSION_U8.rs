@@ -4,4 +4,4 @@ macro_rules! UNICODE_VERSION_U8 {
     };
 }
 
-UNICODE_VERSION_U8!()
+UNICODE_VERSION_U8!();

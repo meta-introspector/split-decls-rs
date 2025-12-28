@@ -107,4 +107,4 @@ macro_rules! keylike {
     };
 }
 
-keylike!()
+keylike!();

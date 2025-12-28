@@ -4,4 +4,4 @@ macro_rules! maybe_update_vec {
     };
 }
 
-maybe_update_vec!()
+maybe_update_vec!();

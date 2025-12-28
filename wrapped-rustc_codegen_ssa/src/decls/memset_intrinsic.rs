@@ -11,4 +11,4 @@ macro_rules! memset_intrinsic {
     };
 }
 
-memset_intrinsic!()
+memset_intrinsic!();

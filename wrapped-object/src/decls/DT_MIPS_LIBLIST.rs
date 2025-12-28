@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_LIBLIST {
     };
 }
 
-DT_MIPS_LIBLIST!()
+DT_MIPS_LIBLIST!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Layer!();
-        DynFilterFn!();
-        SubscriberExt!();
         Context!();
+        SubscriberExt!();
+        DynFilterFn!();
+        Layer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! dynamic_filter_fn {
     };
 }
 
-dynamic_filter_fn!()
+dynamic_filter_fn!();

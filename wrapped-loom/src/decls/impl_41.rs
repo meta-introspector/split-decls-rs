@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        Action!();
         FirstSeen!();
         Store!();
-        VersionVec!();
         Synchronize!();
-        LocationSet!();
-        Load!();
-        State!();
-        Access!();
-        Action!();
-        Track!();
         Set!();
+        Track!();
+        VersionVec!();
+        Access!();
+        LocationSet!();
+        State!();
+        Load!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

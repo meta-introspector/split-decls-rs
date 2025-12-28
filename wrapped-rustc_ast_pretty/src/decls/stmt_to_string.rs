@@ -11,4 +11,4 @@ macro_rules! stmt_to_string {
     };
 }
 
-stmt_to_string!()
+stmt_to_string!();

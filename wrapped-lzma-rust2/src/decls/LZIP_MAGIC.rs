@@ -4,4 +4,4 @@ macro_rules! LZIP_MAGIC {
     };
 }
 
-LZIP_MAGIC!()
+LZIP_MAGIC!();

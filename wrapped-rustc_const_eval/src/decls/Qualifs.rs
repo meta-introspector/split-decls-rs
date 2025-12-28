@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         QualifResults!();
-        HasMutInterior!();
         NeedsDrop!();
         NeedsNonConstDrop!();
+        HasMutInterior!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Qualifs {
     };
 }
 
-Qualifs!()
+Qualifs!();

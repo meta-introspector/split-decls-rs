@@ -4,4 +4,4 @@ macro_rules! C_USTATIC {
     };
 }
 
-C_USTATIC!()
+C_USTATIC!();

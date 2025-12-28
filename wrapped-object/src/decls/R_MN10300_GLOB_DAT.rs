@@ -4,4 +4,4 @@ macro_rules! R_MN10300_GLOB_DAT {
     };
 }
 
-R_MN10300_GLOB_DAT!()
+R_MN10300_GLOB_DAT!();

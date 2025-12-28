@@ -4,4 +4,4 @@ macro_rules! set_env {
     };
 }
 
-set_env!()
+set_env!();

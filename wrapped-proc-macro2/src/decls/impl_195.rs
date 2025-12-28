@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TokenStream!();
         TokenTree!();
+        TokenStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_195 {
     };
 }
 
-impl_195!()
+impl_195!();

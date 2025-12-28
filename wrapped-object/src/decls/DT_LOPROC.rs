@@ -4,4 +4,4 @@ macro_rules! DT_LOPROC {
     };
 }
 
-DT_LOPROC!()
+DT_LOPROC!();

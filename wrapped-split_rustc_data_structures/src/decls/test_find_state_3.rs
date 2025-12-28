@@ -13,4 +13,4 @@ macro_rules! test_find_state_3 {
     };
 }
 
-test_find_state_3!()
+test_find_state_3!();

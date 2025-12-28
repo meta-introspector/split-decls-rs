@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         CaseFoldError!();
         SimpleCaseFolder!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_286 {
     };
 }
 
-impl_286!()
+impl_286!();

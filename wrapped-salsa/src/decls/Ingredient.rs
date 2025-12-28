@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        JarKind!();
-        Id!();
-        FxIndexSet!();
-        IterationCount!();
+        Table!();
         Memo!();
-        QueryEdge!();
-        DatabaseKeyIndex!();
+        ProvisionalStatus!();
+        Id!();
         Zalsa!();
+        Database!();
+        IngredientIndex!();
+        QueryOriginRef!();
         FxHashSet!();
         WaitForResult!();
-        QueryOriginRef!();
-        Revision!();
-        Table!();
-        Database!();
+        QueryEdge!();
         Location!();
+        Revision!();
+        DatabaseKeyIndex!();
+        IterationCount!();
+        FxIndexSet!();
+        JarKind!();
         RawDatabase!();
-        ProvisionalStatus!();
-        IngredientIndex!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! Ingredient {
     };
 }
 
-Ingredient!()
+Ingredient!();

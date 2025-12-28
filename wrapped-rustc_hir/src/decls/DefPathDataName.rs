@@ -4,4 +4,4 @@ macro_rules! DefPathDataName {
     };
 }
 
-DefPathDataName!()
+DefPathDataName!();

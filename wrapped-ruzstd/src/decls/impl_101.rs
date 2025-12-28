@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FSETableError!();
         Error!();
         GetBitsError!();
-        FSETableError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         UpdateTest!();
         Runnable!();
-        NavigationTarget!();
         RunnableKind!();
+        NavigationTarget!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! runnable_mod {
     };
 }
 
-runnable_mod!()
+runnable_mod!();

@@ -4,4 +4,4 @@ macro_rules! EDITION_NAME_LIST {
     };
 }
 
-EDITION_NAME_LIST!()
+EDITION_NAME_LIST!();

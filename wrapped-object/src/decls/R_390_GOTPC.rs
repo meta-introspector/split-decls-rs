@@ -4,4 +4,4 @@ macro_rules! R_390_GOTPC {
     };
 }
 
-R_390_GOTPC!()
+R_390_GOTPC!();

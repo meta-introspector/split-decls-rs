@@ -4,4 +4,4 @@ macro_rules! LineAnnotation {
     };
 }
 
-LineAnnotation!()
+LineAnnotation!();

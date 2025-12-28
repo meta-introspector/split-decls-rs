@@ -4,4 +4,4 @@ macro_rules! upcast {
     };
 }
 
-upcast!()
+upcast!();

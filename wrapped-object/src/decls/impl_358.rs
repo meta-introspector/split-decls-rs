@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Item!();
-        Relocation!();
-        Rela!();
-        CrelIterator!();
         ElfSectionRelocationIterator!();
-        ReadRef!();
         ElfRelocationIterator!();
-        Rel!();
-        Crel!();
         FileHeader!();
+        ReadRef!();
+        Item!();
+        Rela!();
+        Crel!();
+        Relocation!();
+        Rel!();
+        CrelIterator!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_358 {
     };
 }
 
-impl_358!()
+impl_358!();

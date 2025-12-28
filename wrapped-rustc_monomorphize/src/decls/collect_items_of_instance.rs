@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MonoItems!();
         MirUsedCollector!();
+        MonoItems!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! collect_items_of_instance {
     };
 }
 
-collect_items_of_instance!()
+collect_items_of_instance!();

@@ -4,4 +4,4 @@ macro_rules! div_ceil {
     };
 }
 
-div_ceil!()
+div_ceil!();

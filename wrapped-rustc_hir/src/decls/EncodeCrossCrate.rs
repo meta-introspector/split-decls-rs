@@ -4,4 +4,4 @@ macro_rules! EncodeCrossCrate {
     };
 }
 
-EncodeCrossCrate!()
+EncodeCrossCrate!();

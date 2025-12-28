@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         PrivateKey!();
-        PublicKey!();
-        UnknownCryptoError!();
         DhKem!();
+        UnknownCryptoError!();
+        PublicKey!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_409 {
     };
 }
 
-impl_409!()
+impl_409!();

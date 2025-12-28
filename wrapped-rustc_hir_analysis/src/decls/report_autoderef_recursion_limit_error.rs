@@ -11,4 +11,4 @@ macro_rules! report_autoderef_recursion_limit_error {
     };
 }
 
-report_autoderef_recursion_limit_error!()
+report_autoderef_recursion_limit_error!();

@@ -11,4 +11,4 @@ macro_rules! get_hashtable {
     };
 }
 
-get_hashtable!()
+get_hashtable!();

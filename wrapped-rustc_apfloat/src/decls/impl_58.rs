@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Fallback!();
-        ExpInt!();
-        Float!();
         FallbackExtendedS!();
+        Float!();
         Semantics!();
+        ExpInt!();
+        Fallback!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

@@ -4,4 +4,4 @@ macro_rules! resolve_instance_raw {
     };
 }
 
-resolve_instance_raw!()
+resolve_instance_raw!();

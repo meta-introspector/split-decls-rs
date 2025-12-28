@@ -4,4 +4,4 @@ macro_rules! RustcForceInlineParser {
     };
 }
 
-RustcForceInlineParser!()
+RustcForceInlineParser!();

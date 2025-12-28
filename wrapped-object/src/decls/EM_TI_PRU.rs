@@ -4,4 +4,4 @@ macro_rules! EM_TI_PRU {
     };
 }
 
-EM_TI_PRU!()
+EM_TI_PRU!();

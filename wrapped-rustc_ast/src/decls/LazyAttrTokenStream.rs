@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LazyAttrTokenStreamInner!();
         AttrTokenStream!();
+        LazyAttrTokenStreamInner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LazyAttrTokenStream {
     };
 }
 
-LazyAttrTokenStream!()
+LazyAttrTokenStream!();

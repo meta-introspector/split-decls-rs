@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FileKind!();
-        ReadRef!();
-        File!();
-        Result!();
-        MachO32!();
-        Error!();
         DyldCache!();
         MachO64!();
+        Result!();
+        FileKind!();
+        MachO32!();
+        File!();
+        ReadRef!();
+        Error!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_898 {
     };
 }
 
-impl_898!()
+impl_898!();

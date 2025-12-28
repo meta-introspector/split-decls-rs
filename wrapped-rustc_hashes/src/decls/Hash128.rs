@@ -4,4 +4,4 @@ macro_rules! Hash128 {
     };
 }
 
-Hash128!()
+Hash128!();

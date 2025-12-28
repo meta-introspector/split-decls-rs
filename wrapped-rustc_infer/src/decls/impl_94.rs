@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TypeOutlives!();
-        VerifyBoundCx!();
-        GenericKind!();
         TypeOutlivesDelegate!();
-        RegionBoundPairs!();
         SubregionOrigin!();
+        RegionBoundPairs!();
+        GenericKind!();
+        VerifyBoundCx!();
+        TypeOutlives!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

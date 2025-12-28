@@ -4,4 +4,4 @@ macro_rules! filter_nodes {
     };
 }
 
-filter_nodes!()
+filter_nodes!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         VariantData!();
+        Visitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_struct_def {
     };
 }
 
-walk_struct_def!()
+walk_struct_def!();

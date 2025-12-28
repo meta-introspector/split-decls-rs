@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IntegerToPtrTransmutes!();
         LateContext!();
         IntegerToPtrTransmutesSuggestion!();
+        IntegerToPtrTransmutes!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_int_to_ptr_transmute {
     };
 }
 
-check_int_to_ptr_transmute!()
+check_int_to_ptr_transmute!();

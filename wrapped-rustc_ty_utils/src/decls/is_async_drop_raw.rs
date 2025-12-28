@@ -4,4 +4,4 @@ macro_rules! is_async_drop_raw {
     };
 }
 
-is_async_drop_raw!()
+is_async_drop_raw!();

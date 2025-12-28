@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UCred!();
         AncillaryIter!();
+        UCred!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RecvAncillaryMessage {
     };
 }
 
-RecvAncillaryMessage!()
+RecvAncillaryMessage!();

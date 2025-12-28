@@ -4,4 +4,4 @@ macro_rules! OTHER_ALPHABETIC {
     };
 }
 
-OTHER_ALPHABETIC!()
+OTHER_ALPHABETIC!();

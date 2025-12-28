@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Protocol!();
-        SockAddr!();
-        RecvFlags!();
-        Domain!();
-        MsgHdr!();
         MsgHdrMut!();
-        MaybeUninitSlice!();
+        Protocol!();
         Socket!();
+        SockAddr!();
+        Domain!();
+        MaybeUninitSlice!();
+        RecvFlags!();
         Type!();
+        MsgHdr!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

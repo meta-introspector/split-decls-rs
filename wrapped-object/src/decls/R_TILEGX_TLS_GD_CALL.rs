@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_TLS_GD_CALL {
     };
 }
 
-R_TILEGX_TLS_GD_CALL!()
+R_TILEGX_TLS_GD_CALL!();

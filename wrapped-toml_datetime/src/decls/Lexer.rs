@@ -4,4 +4,4 @@ macro_rules! Lexer {
     };
 }
 
-Lexer!()
+Lexer!();

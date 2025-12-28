@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BorrowckInferCtxt!();
-        MirTypeckRegionConstraints!();
         UniversalRegions!();
         Locations!();
+        MirTypeckRegionConstraints!();
+        BorrowckInferCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ConstraintConversion {
     };
 }
 
-ConstraintConversion!()
+ConstraintConversion!();

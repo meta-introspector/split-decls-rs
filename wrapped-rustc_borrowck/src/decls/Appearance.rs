@@ -4,4 +4,4 @@ macro_rules! Appearance {
     };
 }
 
-Appearance!()
+Appearance!();

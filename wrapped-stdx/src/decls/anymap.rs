@@ -4,4 +4,4 @@ macro_rules! anymap {
     };
 }
 
-anymap!()
+anymap!();

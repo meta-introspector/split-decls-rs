@@ -4,4 +4,4 @@ macro_rules! reference_casting {
     };
 }
 
-reference_casting!()
+reference_casting!();

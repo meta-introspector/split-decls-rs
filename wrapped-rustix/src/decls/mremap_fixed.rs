@@ -11,4 +11,4 @@ macro_rules! mremap_fixed {
     };
 }
 
-mremap_fixed!()
+mremap_fixed!();

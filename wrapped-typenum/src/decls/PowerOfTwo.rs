@@ -4,4 +4,4 @@ macro_rules! PowerOfTwo {
     };
 }
 
-PowerOfTwo!()
+PowerOfTwo!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        RChunksExact!();
-        SplitInclusive!();
         Chunks!();
-        ChunksExact!();
-        ChunkBy!();
         Split!();
+        RChunksExact!();
         Windows!();
+        ChunkBy!();
+        ChunksExact!();
         RChunks!();
+        SplitInclusive!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! ParallelSlice {
     };
 }
 
-ParallelSlice!()
+ParallelSlice!();

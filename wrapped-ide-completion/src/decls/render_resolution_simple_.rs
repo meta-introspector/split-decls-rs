@@ -13,4 +13,4 @@ macro_rules! render_resolution_simple_ {
     };
 }
 
-render_resolution_simple_!()
+render_resolution_simple_!();

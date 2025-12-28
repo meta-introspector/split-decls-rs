@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Value!();
         TreeDesc!();
         StaticTreeDesc!();
+        Value!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_178 {
     };
 }
 
-impl_178!()
+impl_178!();

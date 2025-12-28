@@ -4,4 +4,4 @@ macro_rules! ByteSliceInPackedStructWithDerive {
     };
 }
 
-ByteSliceInPackedStructWithDerive!()
+ByteSliceInPackedStructWithDerive!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        RelocationKind!();
-        CoffRelocationIterator!();
-        Item!();
         RelocationEncoding!();
+        RelocationTarget!();
+        ReadRef!();
         SectionIndex!();
+        CoffHeader!();
+        Item!();
         Symbol!();
         Relocation!();
-        RelocationTarget!();
+        CoffRelocationIterator!();
         RelocationFlags!();
-        ReadRef!();
-        CoffHeader!();
+        RelocationKind!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

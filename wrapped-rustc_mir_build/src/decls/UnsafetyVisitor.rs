@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnusedUnsafeWarning!();
         SafetyContext!();
+        UnusedUnsafeWarning!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UnsafetyVisitor {
     };
 }
 
-UnsafetyVisitor!()
+UnsafetyVisitor!();

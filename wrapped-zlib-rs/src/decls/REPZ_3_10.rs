@@ -4,4 +4,4 @@ macro_rules! REPZ_3_10 {
     };
 }
 
-REPZ_3_10!()
+REPZ_3_10!();

@@ -11,4 +11,4 @@ macro_rules! header_with_capacity {
     };
 }
 
-header_with_capacity!()
+header_with_capacity!();

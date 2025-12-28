@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IterMut!();
         Shared!();
         Iter!();
+        IterMut!();
         Config!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! UniqueIter {
     };
 }
 
-UniqueIter!()
+UniqueIter!();

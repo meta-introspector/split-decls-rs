@@ -4,4 +4,4 @@ macro_rules! BIND_OPCODE_MASK {
     };
 }
 
-BIND_OPCODE_MASK!()
+BIND_OPCODE_MASK!();

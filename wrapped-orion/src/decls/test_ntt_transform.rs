@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RingElementNTT!();
         RingElement!();
+        RingElementNTT!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_ntt_transform {
     };
 }
 
-test_ntt_transform!()
+test_ntt_transform!();

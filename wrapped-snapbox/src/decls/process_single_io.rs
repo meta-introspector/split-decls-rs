@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Stream!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! process_single_io {
     };
 }
 
-process_single_io!()
+process_single_io!();

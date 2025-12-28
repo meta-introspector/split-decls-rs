@@ -4,4 +4,4 @@ macro_rules! SYMINFO_FLG_PASSTHRU {
     };
 }
 
-SYMINFO_FLG_PASSTHRU!()
+SYMINFO_FLG_PASSTHRU!();

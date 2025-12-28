@@ -11,4 +11,4 @@ macro_rules! UseName2 {
     };
 }
 
-UseName2!()
+UseName2!();

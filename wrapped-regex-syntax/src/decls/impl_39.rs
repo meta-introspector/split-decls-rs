@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        ClassBracketed!();
-        Frame!();
-        Concat!();
-        ClassSet!();
         Alternation!();
-        Repetition!();
-        ClassFrame!();
-        Visitor!();
         HeapVisitor!();
         Ast!();
-        ClassSetItem!();
-        Result!();
-        Group!();
+        Frame!();
+        ClassBracketed!();
         ClassInduct!();
+        Group!();
+        ClassFrame!();
+        ClassSet!();
+        Concat!();
+        Visitor!();
+        Result!();
+        ClassSetItem!();
+        Repetition!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

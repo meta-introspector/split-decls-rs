@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MachOBuildVersion!();
         Object!();
+        MachOBuildVersion!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_989 {
     };
 }
 
-impl_989!()
+impl_989!();

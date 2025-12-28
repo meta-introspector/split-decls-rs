@@ -12,4 +12,4 @@ macro_rules! IVector_Impl {
     };
 }
 
-IVector_Impl!()
+IVector_Impl!();

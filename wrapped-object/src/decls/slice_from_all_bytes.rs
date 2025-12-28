@@ -12,4 +12,4 @@ macro_rules! slice_from_all_bytes {
     };
 }
 
-slice_from_all_bytes!()
+slice_from_all_bytes!();

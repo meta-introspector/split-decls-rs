@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DIB!();
         CodegenCx!();
+        DIB!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! create_basic_type {
     };
 }
 
-create_basic_type!()
+create_basic_type!();

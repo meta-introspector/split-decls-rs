@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Immutable!();
-        Unaligned!();
-        KnownLayout!();
-        Alignment!();
-        Validity!();
         CastError!();
+        KnownLayout!();
         IntoBytes!();
         SizeError!();
+        Unaligned!();
+        Validity!();
+        Alignment!();
+        Immutable!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_216 {
     };
 }
 
-impl_216!()
+impl_216!();

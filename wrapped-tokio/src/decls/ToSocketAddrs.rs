@@ -4,4 +4,4 @@ macro_rules! ToSocketAddrs {
     };
 }
 
-ToSocketAddrs!()
+ToSocketAddrs!();

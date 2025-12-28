@@ -11,4 +11,4 @@ macro_rules! impl_weight_int {
     };
 }
 
-impl_weight_int!()
+impl_weight_int!();

@@ -4,4 +4,4 @@ macro_rules! post_drop_elaboration {
     };
 }
 
-post_drop_elaboration!()
+post_drop_elaboration!();

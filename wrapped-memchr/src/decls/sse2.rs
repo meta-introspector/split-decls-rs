@@ -4,4 +4,4 @@ macro_rules! sse2 {
     };
 }
 
-sse2!()
+sse2!();

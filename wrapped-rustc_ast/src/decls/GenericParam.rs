@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BoundKind!();
-        GenericParamKind!();
         AttrVec!();
-        GenericBounds!();
+        BoundKind!();
         Walkable!();
+        GenericParamKind!();
+        GenericBounds!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! GenericParam {
     };
 }
 
-GenericParam!()
+GenericParam!();

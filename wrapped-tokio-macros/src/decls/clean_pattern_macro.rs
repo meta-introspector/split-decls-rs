@@ -4,4 +4,4 @@ macro_rules! clean_pattern_macro {
     };
 }
 
-clean_pattern_macro!()
+clean_pattern_macro!();

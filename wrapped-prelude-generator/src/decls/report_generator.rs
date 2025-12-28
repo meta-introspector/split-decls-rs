@@ -4,4 +4,4 @@ macro_rules! report_generator {
     };
 }
 
-report_generator!()
+report_generator!();

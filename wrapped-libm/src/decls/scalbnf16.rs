@@ -4,4 +4,4 @@ macro_rules! scalbnf16 {
     };
 }
 
-scalbnf16!()
+scalbnf16!();

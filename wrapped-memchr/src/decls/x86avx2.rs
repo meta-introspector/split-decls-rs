@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SensibleMoveMask!();
         Mask!();
+        SensibleMoveMask!();
         Vector!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! x86avx2 {
     };
 }
 
-x86avx2!()
+x86avx2!();

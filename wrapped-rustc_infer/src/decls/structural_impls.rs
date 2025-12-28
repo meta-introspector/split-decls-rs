@@ -4,4 +4,4 @@ macro_rules! structural_impls {
     };
 }
 
-structural_impls!()
+structural_impls!();

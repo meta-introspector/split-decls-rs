@@ -4,4 +4,4 @@ macro_rules! looks_like_rust_object_file {
     };
 }
 
-looks_like_rust_object_file!()
+looks_like_rust_object_file!();

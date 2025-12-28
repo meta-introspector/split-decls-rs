@@ -11,4 +11,4 @@ macro_rules! udivmod_1e19 {
     };
 }
 
-udivmod_1e19!()
+udivmod_1e19!();

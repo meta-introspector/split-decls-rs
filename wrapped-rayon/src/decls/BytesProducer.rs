@@ -4,4 +4,4 @@ macro_rules! BytesProducer {
     };
 }
 
-BytesProducer!()
+BytesProducer!();

@@ -4,4 +4,4 @@ macro_rules! use_item_to_string {
     };
 }
 
-use_item_to_string!()
+use_item_to_string!();

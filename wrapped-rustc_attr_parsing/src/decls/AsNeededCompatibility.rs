@@ -4,4 +4,4 @@ macro_rules! AsNeededCompatibility {
     };
 }
 
-AsNeededCompatibility!()
+AsNeededCompatibility!();

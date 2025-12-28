@@ -4,4 +4,4 @@ macro_rules! remutex {
     };
 }
 
-remutex!()
+remutex!();

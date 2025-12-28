@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        StructUnionRepr!();
-        ImplBlockBuilder!();
-        Trait!();
         FieldBounds!();
         SelfBounds!();
+        StructUnionRepr!();
+        Trait!();
+        ImplBlockBuilder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! derive_known_layout_inner {
     };
 }
 
-derive_known_layout_inner!()
+derive_known_layout_inner!();

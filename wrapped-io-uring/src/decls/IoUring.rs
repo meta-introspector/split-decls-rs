@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EntryMarker!();
-        MemoryMap!();
-        Parameters!();
-        Entry!();
         Inner!();
+        Entry!();
+        EntryMarker!();
+        Parameters!();
+        MemoryMap!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! IoUring {
     };
 }
 
-IoUring!()
+IoUring!();

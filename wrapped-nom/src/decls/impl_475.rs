@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Take!();
-        Input!();
-        ParseError!();
-        ErrorKind!();
         OutputMode!();
-        PResult!();
-        Error!();
-        Err!();
+        ErrorKind!();
+        ParseError!();
+        Take!();
         Parser!();
+        Err!();
+        Error!();
+        PResult!();
+        Input!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_475 {
     };
 }
 
-impl_475!()
+impl_475!();

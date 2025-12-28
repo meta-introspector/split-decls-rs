@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Split!();
         Input!();
+        Split!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_352 {
     };
 }
 
-impl_352!()
+impl_352!();

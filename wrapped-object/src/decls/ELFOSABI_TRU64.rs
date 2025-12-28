@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_TRU64 {
     };
 }
 
-ELFOSABI_TRU64!()
+ELFOSABI_TRU64!();

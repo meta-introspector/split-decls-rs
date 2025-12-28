@@ -15,4 +15,4 @@ macro_rules! ssr_nested_function {
     };
 }
 
-ssr_nested_function!()
+ssr_nested_function!();

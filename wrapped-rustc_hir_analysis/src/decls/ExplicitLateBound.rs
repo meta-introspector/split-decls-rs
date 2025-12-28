@@ -4,4 +4,4 @@ macro_rules! ExplicitLateBound {
     };
 }
 
-ExplicitLateBound!()
+ExplicitLateBound!();

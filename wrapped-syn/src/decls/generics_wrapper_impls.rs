@@ -11,4 +11,4 @@ macro_rules! generics_wrapper_impls {
     };
 }
 
-generics_wrapper_impls!()
+generics_wrapper_impls!();

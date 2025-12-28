@@ -11,4 +11,4 @@ macro_rules! kernel_sigaltstack {
     };
 }
 
-kernel_sigaltstack!()
+kernel_sigaltstack!();

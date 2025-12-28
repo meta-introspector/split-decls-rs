@@ -4,4 +4,4 @@ macro_rules! EF_SPARCV9_MM {
     };
 }
 
-EF_SPARCV9_MM!()
+EF_SPARCV9_MM!();

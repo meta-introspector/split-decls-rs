@@ -4,4 +4,4 @@ macro_rules! FrameDescriptor {
     };
 }
 
-FrameDescriptor!()
+FrameDescriptor!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Unaligned!();
-        TransmuteFrom!();
         Immutable!();
-        Aliasing!();
-        Exclusive!();
         Validity!();
         SizeEq!();
+        TransmuteFrom!();
+        Aliasing!();
+        Unaligned!();
+        Exclusive!();
         Shared!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! TryTransmuteFromPtr {
     };
 }
 
-TryTransmuteFromPtr!()
+TryTransmuteFromPtr!();

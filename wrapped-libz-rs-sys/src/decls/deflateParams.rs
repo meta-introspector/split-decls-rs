@@ -4,4 +4,4 @@ macro_rules! deflateParams {
     };
 }
 
-deflateParams!()
+deflateParams!();

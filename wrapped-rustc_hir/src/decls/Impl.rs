@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Generics!();
         ImplItem!();
-        TraitImplHeader!();
         Ty!();
         ImplItemId!();
-        Generics!();
+        TraitImplHeader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Impl {
     };
 }
 
-Impl!()
+Impl!();

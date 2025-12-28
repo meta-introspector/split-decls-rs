@@ -4,4 +4,4 @@ macro_rules! YesS3 {
     };
 }
 
-YesS3!()
+YesS3!();

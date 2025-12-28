@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PikeVM!();
         Captures!();
+        PikeVM!();
         Input!();
         Span!();
     };
@@ -14,4 +14,4 @@ macro_rules! Searcher {
     };
 }
 
-Searcher!()
+Searcher!();

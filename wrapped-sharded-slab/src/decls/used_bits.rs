@@ -12,4 +12,4 @@ macro_rules! used_bits {
     };
 }
 
-used_bits!()
+used_bits!();

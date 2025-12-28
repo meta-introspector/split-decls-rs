@@ -4,4 +4,4 @@ macro_rules! hcx {
     };
 }
 
-hcx!()
+hcx!();

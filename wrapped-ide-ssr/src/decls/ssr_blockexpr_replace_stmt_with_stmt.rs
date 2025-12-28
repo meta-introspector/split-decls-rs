@@ -12,4 +12,4 @@ macro_rules! ssr_blockexpr_replace_stmt_with_stmt {
     };
 }
 
-ssr_blockexpr_replace_stmt_with_stmt!()
+ssr_blockexpr_replace_stmt_with_stmt!();

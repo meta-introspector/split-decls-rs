@@ -4,4 +4,4 @@ macro_rules! RegionalState {
     };
 }
 
-RegionalState!()
+RegionalState!();

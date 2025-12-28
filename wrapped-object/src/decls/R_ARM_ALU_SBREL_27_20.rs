@@ -4,4 +4,4 @@ macro_rules! R_ARM_ALU_SBREL_27_20 {
     };
 }
 
-R_ARM_ALU_SBREL_27_20!()
+R_ARM_ALU_SBREL_27_20!();

@@ -4,4 +4,4 @@ macro_rules! BadScheme {
     };
 }
 
-BadScheme!()
+BadScheme!();

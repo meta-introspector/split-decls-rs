@@ -4,4 +4,4 @@ macro_rules! walk_nodes {
     };
 }
 
-walk_nodes!()
+walk_nodes!();

@@ -4,4 +4,4 @@ macro_rules! will_rename_file {
     };
 }
 
-will_rename_file!()
+will_rename_file!();

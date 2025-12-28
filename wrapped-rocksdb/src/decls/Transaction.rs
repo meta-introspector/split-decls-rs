@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TransactionDB!();
         OptimisticTransactionDB!();
         DB!();
-        TransactionDB!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Transaction {
     };
 }
 
-Transaction!()
+Transaction!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SpecIntoSelfProfilingString!();
         QueryKeyStringBuilder!();
+        SpecIntoSelfProfilingString!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

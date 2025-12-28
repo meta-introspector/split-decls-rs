@@ -11,4 +11,4 @@ macro_rules! SERIALIZE_WITH {
     };
 }
 
-SERIALIZE_WITH!()
+SERIALIZE_WITH!();

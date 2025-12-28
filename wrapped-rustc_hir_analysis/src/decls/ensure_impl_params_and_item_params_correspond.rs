@@ -5,4 +5,4 @@ macro_rules! ensure_impl_params_and_item_params_correspond {
     };
 }
 
-ensure_impl_params_and_item_params_correspond!()
+ensure_impl_params_and_item_params_correspond!();

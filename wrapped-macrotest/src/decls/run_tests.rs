@@ -13,4 +13,4 @@ macro_rules! run_tests {
     };
 }
 
-run_tests!()
+run_tests!();

@@ -11,4 +11,4 @@ macro_rules! error_unsupported {
     };
 }
 
-error_unsupported!()
+error_unsupported!();

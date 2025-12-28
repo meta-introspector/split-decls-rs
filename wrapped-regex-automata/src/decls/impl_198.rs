@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StateID!();
         IndexMapper!();
+        StateID!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_198 {
     };
 }
 
-impl_198!()
+impl_198!();

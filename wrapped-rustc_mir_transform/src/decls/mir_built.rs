@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Optimizations!();
         Lint!();
+        Optimizations!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! mir_built {
     };
 }
 
-mir_built!()
+mir_built!();

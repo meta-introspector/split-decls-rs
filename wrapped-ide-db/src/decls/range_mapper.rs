@@ -4,4 +4,4 @@ macro_rules! range_mapper {
     };
 }
 
-range_mapper!()
+range_mapper!();

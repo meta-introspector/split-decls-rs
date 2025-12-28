@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Style!();
         AnsiString!();
+        Style!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Infix {
     };
 }
 
-Infix!()
+Infix!();

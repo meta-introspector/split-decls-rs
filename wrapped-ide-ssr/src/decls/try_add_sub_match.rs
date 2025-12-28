@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Match!();
         MatchCollector!();
+        Match!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_add_sub_match {
     };
 }
 
-try_add_sub_match!()
+try_add_sub_match!();

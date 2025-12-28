@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SplitProducer!();
         Folder!();
+        SplitProducer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Fissile {
     };
 }
 
-Fissile!()
+Fissile!();

@@ -4,4 +4,4 @@ macro_rules! llvm_target_features {
     };
 }
 
-llvm_target_features!()
+llvm_target_features!();

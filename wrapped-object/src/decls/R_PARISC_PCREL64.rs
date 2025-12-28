@@ -4,4 +4,4 @@ macro_rules! R_PARISC_PCREL64 {
     };
 }
 
-R_PARISC_PCREL64!()
+R_PARISC_PCREL64!();

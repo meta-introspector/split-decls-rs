@@ -12,4 +12,4 @@ macro_rules! write_row {
     };
 }
 
-write_row!()
+write_row!();

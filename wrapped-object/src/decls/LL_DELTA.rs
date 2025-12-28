@@ -4,4 +4,4 @@ macro_rules! LL_DELTA {
     };
 }
 
-LL_DELTA!()
+LL_DELTA!();

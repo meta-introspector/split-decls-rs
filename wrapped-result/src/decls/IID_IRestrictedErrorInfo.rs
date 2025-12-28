@@ -11,4 +11,4 @@ macro_rules! IID_IRestrictedErrorInfo {
     };
 }
 
-IID_IRestrictedErrorInfo!()
+IID_IRestrictedErrorInfo!();

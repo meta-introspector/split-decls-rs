@@ -11,4 +11,4 @@ macro_rules! impl_4_to_8_bytes {
     };
 }
 
-impl_4_to_8_bytes!()
+impl_4_to_8_bytes!();

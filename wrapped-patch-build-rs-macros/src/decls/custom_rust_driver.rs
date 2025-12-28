@@ -4,4 +4,4 @@ macro_rules! custom_rust_driver {
     };
 }
 
-custom_rust_driver!()
+custom_rust_driver!();

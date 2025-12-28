@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NoteHeader64!();
-        Endian!();
         NoteHeader!();
+        Endian!();
+        NoteHeader64!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_412 {
     };
 }
 
-impl_412!()
+impl_412!();

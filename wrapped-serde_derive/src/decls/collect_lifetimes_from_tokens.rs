@@ -4,4 +4,4 @@ macro_rules! collect_lifetimes_from_tokens {
     };
 }
 
-collect_lifetimes_from_tokens!()
+collect_lifetimes_from_tokens!();

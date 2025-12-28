@@ -32,4 +32,4 @@ impl MorphismVerifier {{
     };
 }
 
-snark_verify_impl!()
+snark_verify_impl!();

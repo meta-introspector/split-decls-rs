@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SectionId!();
         Result!();
+        SectionId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1119 {
     };
 }
 
-impl_1119!()
+impl_1119!();

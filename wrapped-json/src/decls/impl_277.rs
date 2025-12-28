@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         Value!();
         SeqRefDeserializer!();
+        Result!();
         SeqAccess!();
         Error!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_277 {
     };
 }
 
-impl_277!()
+impl_277!();

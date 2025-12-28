@@ -4,4 +4,4 @@ macro_rules! is_use_decl_module {
     };
 }
 
-is_use_decl_module!()
+is_use_decl_module!();

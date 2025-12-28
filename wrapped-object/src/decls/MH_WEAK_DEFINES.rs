@@ -4,4 +4,4 @@ macro_rules! MH_WEAK_DEFINES {
     };
 }
 
-MH_WEAK_DEFINES!()
+MH_WEAK_DEFINES!();

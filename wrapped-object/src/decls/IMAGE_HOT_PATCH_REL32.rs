@@ -4,4 +4,4 @@ macro_rules! IMAGE_HOT_PATCH_REL32 {
     };
 }
 
-IMAGE_HOT_PATCH_REL32!()
+IMAGE_HOT_PATCH_REL32!();

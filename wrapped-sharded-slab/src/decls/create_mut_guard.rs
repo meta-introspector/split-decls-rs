@@ -11,4 +11,4 @@ macro_rules! create_mut_guard {
     };
 }
 
-create_mut_guard!()
+create_mut_guard!();

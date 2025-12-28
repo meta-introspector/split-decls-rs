@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Match!();
-        Cache!();
         Input!();
         Regex!();
+        Cache!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_360 {
     };
 }
 
-impl_360!()
+impl_360!();

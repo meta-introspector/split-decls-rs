@@ -4,4 +4,4 @@ macro_rules! match_with_trailing_commas {
     };
 }
 
-match_with_trailing_commas!()
+match_with_trailing_commas!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Folder!();
         CopiedFolder!();
+        Folder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_390 {
     };
 }
 
-impl_390!()
+impl_390!();

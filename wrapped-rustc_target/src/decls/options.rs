@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LinkSelfContainedDefault!();
-        LinkerFlavor!();
-        Cc!();
         TargetOptions!();
+        Cc!();
+        LinkerFlavor!();
+        LinkSelfContainedDefault!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! options {
     };
 }
 
-options!()
+options!();

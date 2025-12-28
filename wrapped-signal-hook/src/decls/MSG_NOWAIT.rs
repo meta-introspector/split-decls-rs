@@ -4,4 +4,4 @@ macro_rules! MSG_NOWAIT {
     };
 }
 
-MSG_NOWAIT!()
+MSG_NOWAIT!();

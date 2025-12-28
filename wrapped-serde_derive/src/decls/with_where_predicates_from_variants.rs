@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Container!();
-        Variant!();
         Data!();
+        Variant!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! with_where_predicates_from_variants {
     };
 }
 
-with_where_predicates_from_variants!()
+with_where_predicates_from_variants!();

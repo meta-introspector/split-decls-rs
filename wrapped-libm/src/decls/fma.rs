@@ -4,4 +4,4 @@ macro_rules! fma {
     };
 }
 
-fma!()
+fma!();

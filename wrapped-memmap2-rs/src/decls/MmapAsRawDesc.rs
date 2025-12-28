@@ -11,4 +11,4 @@ macro_rules! MmapAsRawDesc {
     };
 }
 
-MmapAsRawDesc!()
+MmapAsRawDesc!();

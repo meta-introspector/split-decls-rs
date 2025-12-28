@@ -4,4 +4,4 @@ macro_rules! best_definition_site_of_opaque {
     };
 }
 
-best_definition_site_of_opaque!()
+best_definition_site_of_opaque!();

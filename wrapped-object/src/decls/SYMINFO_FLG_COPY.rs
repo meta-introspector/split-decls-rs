@@ -11,4 +11,4 @@ macro_rules! SYMINFO_FLG_COPY {
     };
 }
 
-SYMINFO_FLG_COPY!()
+SYMINFO_FLG_COPY!();

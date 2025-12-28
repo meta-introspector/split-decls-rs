@@ -4,4 +4,4 @@ macro_rules! get_apple_sdk_root {
     };
 }
 
-get_apple_sdk_root!()
+get_apple_sdk_root!();

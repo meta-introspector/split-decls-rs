@@ -4,4 +4,4 @@ macro_rules! C_ARG {
     };
 }
 
-C_ARG!()
+C_ARG!();

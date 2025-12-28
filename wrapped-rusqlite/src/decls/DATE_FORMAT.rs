@@ -4,4 +4,4 @@ macro_rules! DATE_FORMAT {
     };
 }
 
-DATE_FORMAT!()
+DATE_FORMAT!();

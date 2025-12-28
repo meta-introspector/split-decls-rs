@@ -4,4 +4,4 @@ macro_rules! rayon {
     };
 }
 
-rayon!()
+rayon!();

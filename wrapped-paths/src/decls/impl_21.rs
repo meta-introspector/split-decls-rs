@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AbsPath!();
-        AbsPathBuf!();
         RelPath!();
+        AbsPathBuf!();
+        AbsPath!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

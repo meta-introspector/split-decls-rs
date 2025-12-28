@@ -4,4 +4,4 @@ macro_rules! OpaqueCapturesHigherRankedLifetime {
     };
 }
 
-OpaqueCapturesHigherRankedLifetime!()
+OpaqueCapturesHigherRankedLifetime!();

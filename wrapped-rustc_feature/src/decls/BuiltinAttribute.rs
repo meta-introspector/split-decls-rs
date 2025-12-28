@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        AttributeTemplate!();
+        AttributeGate!();
         AttributeType!();
         AttributeSafety!();
-        AttributeTemplate!();
         AttributeDuplicates!();
-        AttributeGate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! BuiltinAttribute {
     };
 }
 
-BuiltinAttribute!()
+BuiltinAttribute!();

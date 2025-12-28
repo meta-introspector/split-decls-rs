@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Symbol!();
-        VecAttr!();
         Ctxt!();
+        VecAttr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_ser_and_de {
     };
 }
 
-get_ser_and_de!()
+get_ser_and_de!();

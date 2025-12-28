@@ -11,4 +11,4 @@ macro_rules! set_socket_send_buffer_size {
     };
 }
 
-set_socket_send_buffer_size!()
+set_socket_send_buffer_size!();

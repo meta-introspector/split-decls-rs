@@ -4,4 +4,4 @@ macro_rules! MAX_NONSTARTERS {
     };
 }
 
-MAX_NONSTARTERS!()
+MAX_NONSTARTERS!();

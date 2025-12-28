@@ -4,4 +4,4 @@ macro_rules! voidp {
     };
 }
 
-voidp!()
+voidp!();

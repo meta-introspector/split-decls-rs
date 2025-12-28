@@ -4,4 +4,4 @@ macro_rules! as_filename {
     };
 }
 
-as_filename!()
+as_filename!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WasmFile!();
         SectionHeader!();
         ObjectSection!();
+        WasmFile!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! WasmSection {
     };
 }
 
-WasmSection!()
+WasmSection!();

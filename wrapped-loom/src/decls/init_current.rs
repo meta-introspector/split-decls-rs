@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Execution!();
         Thread!();
         ThreadId!();
-        Execution!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! init_current {
     };
 }
 
-init_current!()
+init_current!();

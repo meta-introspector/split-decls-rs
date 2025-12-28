@@ -4,4 +4,4 @@ macro_rules! check_binary_heap {
     };
 }
 
-check_binary_heap!()
+check_binary_heap!();

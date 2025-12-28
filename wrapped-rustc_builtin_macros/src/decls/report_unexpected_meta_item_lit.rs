@@ -12,4 +12,4 @@ macro_rules! report_unexpected_meta_item_lit {
     };
 }
 
-report_unexpected_meta_item_lit!()
+report_unexpected_meta_item_lit!();

@@ -4,4 +4,4 @@ macro_rules! IMAGE_SYM_TYPE_MOE {
     };
 }
 
-IMAGE_SYM_TYPE_MOE!()
+IMAGE_SYM_TYPE_MOE!();

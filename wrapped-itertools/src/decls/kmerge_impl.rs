@@ -4,4 +4,4 @@ macro_rules! kmerge_impl {
     };
 }
 
-kmerge_impl!()
+kmerge_impl!();

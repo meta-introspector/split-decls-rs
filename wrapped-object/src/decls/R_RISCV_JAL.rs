@@ -4,4 +4,4 @@ macro_rules! R_RISCV_JAL {
     };
 }
 
-R_RISCV_JAL!()
+R_RISCV_JAL!();

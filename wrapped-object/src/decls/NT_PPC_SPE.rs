@@ -4,4 +4,4 @@ macro_rules! NT_PPC_SPE {
     };
 }
 
-NT_PPC_SPE!()
+NT_PPC_SPE!();

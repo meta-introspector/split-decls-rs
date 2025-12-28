@@ -4,4 +4,4 @@ macro_rules! enzyme_ffi {
     };
 }
 
-enzyme_ffi!()
+enzyme_ffi!();

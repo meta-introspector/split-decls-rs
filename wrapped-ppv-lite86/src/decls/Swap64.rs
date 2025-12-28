@@ -4,4 +4,4 @@ macro_rules! Swap64 {
     };
 }
 
-Swap64!()
+Swap64!();

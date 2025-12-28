@@ -11,4 +11,4 @@ macro_rules! float_reg {
     };
 }
 
-float_reg!()
+float_reg!();

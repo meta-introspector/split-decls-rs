@@ -11,4 +11,4 @@ macro_rules! poly1305 {
     };
 }
 
-poly1305!()
+poly1305!();

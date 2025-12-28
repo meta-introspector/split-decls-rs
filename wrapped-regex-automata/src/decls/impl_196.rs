@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Remapper!();
-        StateID!();
-        IndexMapper!();
         Remappable!();
+        IndexMapper!();
+        StateID!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_196 {
     };
 }
 
-impl_196!()
+impl_196!();

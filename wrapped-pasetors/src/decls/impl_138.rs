@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AsymmetricSecretKey!();
         FormatAsPaserk!();
         Error!();
+        AsymmetricSecretKey!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

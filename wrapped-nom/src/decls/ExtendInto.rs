@@ -4,4 +4,4 @@ macro_rules! ExtendInto {
     };
 }
 
-ExtendInto!()
+ExtendInto!();

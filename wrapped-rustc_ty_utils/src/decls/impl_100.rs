@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NotParam!();
-        DuplicateArg!();
         OpaqueTypeCollector!();
+        DuplicateArg!();
+        NotParam!();
         CollectionMode!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_100 {
     };
 }
 
-impl_100!()
+impl_100!();

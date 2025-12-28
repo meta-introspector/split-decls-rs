@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UselessPtrNullChecksDiag!();
         LateContext!();
+        UselessPtrNullChecksDiag!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! useless_check {
     };
 }
 
-useless_check!()
+useless_check!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Item!();
-        WasmSymbol!();
         SymbolIndex!();
+        WasmSymbol!();
         WasmSymbolIterator!();
+        Item!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_767 {
     };
 }
 
-impl_767!()
+impl_767!();

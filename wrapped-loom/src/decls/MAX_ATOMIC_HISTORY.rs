@@ -4,4 +4,4 @@ macro_rules! MAX_ATOMIC_HISTORY {
     };
 }
 
-MAX_ATOMIC_HISTORY!()
+MAX_ATOMIC_HISTORY!();

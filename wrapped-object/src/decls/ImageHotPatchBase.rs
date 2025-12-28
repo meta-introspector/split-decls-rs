@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U32!();
         Version!();
+        U32!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ImageHotPatchBase {
     };
 }
 
-ImageHotPatchBase!()
+ImageHotPatchBase!();

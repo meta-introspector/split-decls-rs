@@ -4,4 +4,4 @@ macro_rules! trait_goals {
     };
 }
 
-trait_goals!()
+trait_goals!();

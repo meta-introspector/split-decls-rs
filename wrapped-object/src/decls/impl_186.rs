@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
-        SymbolIteratorInternal!();
-        ArchiveSymbolIterator!();
-        ArchiveOffset!();
         Item!();
+        ArchiveOffset!();
         ArchiveSymbol!();
+        ArchiveSymbolIterator!();
+        SymbolIteratorInternal!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

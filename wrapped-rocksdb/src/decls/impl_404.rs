@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DB!();
-        EnvOptions!();
         Options!();
+        EnvOptions!();
         Error!();
         SstFileWriter!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_404 {
     };
 }
 
-impl_404!()
+impl_404!();

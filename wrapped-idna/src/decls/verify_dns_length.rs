@@ -4,4 +4,4 @@ macro_rules! verify_dns_length {
     };
 }
 
-verify_dns_length!()
+verify_dns_length!();

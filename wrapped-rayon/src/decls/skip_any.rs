@@ -4,4 +4,4 @@ macro_rules! skip_any {
     };
 }
 
-skip_any!()
+skip_any!();

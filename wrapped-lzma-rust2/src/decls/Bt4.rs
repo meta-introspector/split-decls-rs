@@ -11,4 +11,4 @@ macro_rules! Bt4 {
     };
 }
 
-Bt4!()
+Bt4!();

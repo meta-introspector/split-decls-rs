@@ -4,4 +4,4 @@ macro_rules! InputQuery {
     };
 }
 
-InputQuery!()
+InputQuery!();

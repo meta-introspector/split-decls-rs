@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        QueryEdge!();
-        IterationCount!();
-        DatabaseKeyIndex!();
         CycleHeads!();
-        Revision!();
         DisambiguatorMap!();
         IdentityMap!();
+        IterationCount!();
+        DatabaseKeyIndex!();
         FxIndexSet!();
+        QueryEdge!();
         Durability!();
+        Revision!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! ActiveQuery {
     };
 }
 
-ActiveQuery!()
+ActiveQuery!();

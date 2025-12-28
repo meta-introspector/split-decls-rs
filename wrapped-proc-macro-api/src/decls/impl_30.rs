@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProcMacro!();
         ProcMacroKind!();
+        ProcMacro!();
         ServerError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

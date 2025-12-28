@@ -4,4 +4,4 @@ macro_rules! CoherenceIsCoreParser {
     };
 }
 
-CoherenceIsCoreParser!()
+CoherenceIsCoreParser!();

@@ -4,4 +4,4 @@ macro_rules! pragma {
     };
 }
 
-pragma!()
+pragma!();

@@ -4,4 +4,4 @@ macro_rules! CHEROKEE {
     };
 }
 
-CHEROKEE!()
+CHEROKEE!();

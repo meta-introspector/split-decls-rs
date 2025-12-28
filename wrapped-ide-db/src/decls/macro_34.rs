@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Definition!();
         Label!();
+        Definition!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_34 {
     };
 }
 
-macro_34!()
+macro_34!();

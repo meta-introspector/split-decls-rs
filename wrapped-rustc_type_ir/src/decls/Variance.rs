@@ -4,4 +4,4 @@ macro_rules! Variance {
     };
 }
 
-Variance!()
+Variance!();

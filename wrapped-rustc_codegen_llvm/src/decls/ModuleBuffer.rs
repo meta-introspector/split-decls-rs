@@ -4,4 +4,4 @@ macro_rules! ModuleBuffer {
     };
 }
 
-ModuleBuffer!()
+ModuleBuffer!();

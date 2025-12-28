@@ -4,4 +4,4 @@ macro_rules! AbiFromStrErr {
     };
 }
 
-AbiFromStrErr!()
+AbiFromStrErr!();

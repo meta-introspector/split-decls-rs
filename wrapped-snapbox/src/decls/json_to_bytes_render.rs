@@ -11,4 +11,4 @@ macro_rules! json_to_bytes_render {
     };
 }
 
-json_to_bytes_render!()
+json_to_bytes_render!();

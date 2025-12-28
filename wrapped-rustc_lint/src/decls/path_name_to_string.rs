@@ -4,4 +4,4 @@ macro_rules! path_name_to_string {
     };
 }
 
-path_name_to_string!()
+path_name_to_string!();

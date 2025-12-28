@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         InterpCx!();
+        Machine!();
         Projectable!();
         MPlaceTy!();
-        Machine!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ValueVisitor {
     };
 }
 
-ValueVisitor!()
+ValueVisitor!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EdgeReference!();
         EdgeReferences!();
         IndexType!();
-        Row!();
         SomeIter!();
+        Row!();
         WSuc!();
+        EdgeReference!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! macro_308 {
     };
 }
 
-macro_308!()
+macro_308!();

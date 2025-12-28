@@ -12,4 +12,4 @@ macro_rules! EncryptionInfoCommand32 {
     };
 }
 
-EncryptionInfoCommand32!()
+EncryptionInfoCommand32!();

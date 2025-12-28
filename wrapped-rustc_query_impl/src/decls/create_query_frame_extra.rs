@@ -4,4 +4,4 @@ macro_rules! create_query_frame_extra {
     };
 }
 
-create_query_frame_extra!()
+create_query_frame_extra!();

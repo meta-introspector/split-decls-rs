@@ -12,4 +12,4 @@ macro_rules! convert_sync {
     };
 }
 
-convert_sync!()
+convert_sync!();

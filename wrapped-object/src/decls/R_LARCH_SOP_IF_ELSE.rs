@@ -4,4 +4,4 @@ macro_rules! R_LARCH_SOP_IF_ELSE {
     };
 }
 
-R_LARCH_SOP_IF_ELSE!()
+R_LARCH_SOP_IF_ELSE!();

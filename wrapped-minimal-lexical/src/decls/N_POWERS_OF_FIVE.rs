@@ -4,4 +4,4 @@ macro_rules! N_POWERS_OF_FIVE {
     };
 }
 
-N_POWERS_OF_FIVE!()
+N_POWERS_OF_FIVE!();

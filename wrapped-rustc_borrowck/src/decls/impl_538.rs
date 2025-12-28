@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        MirBorrowckCtxt!();
-        AccessDepth!();
-        LocalsStateAtExit!();
-        BorrowckDomain!();
         WriteKind!();
-        LocalMutationIsAllowed!();
-        StorageDeadOrDrop!();
-        Borrowck!();
+        AccessDepth!();
+        MirBorrowckCtxt!();
+        BorrowckDomain!();
         InitializationRequiringAction!();
+        LocalMutationIsAllowed!();
+        Borrowck!();
+        StorageDeadOrDrop!();
+        LocalsStateAtExit!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_538 {
     };
 }
 
-impl_538!()
+impl_538!();

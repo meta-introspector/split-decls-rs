@@ -4,4 +4,4 @@ macro_rules! assert_is_panic_with_message {
     };
 }
 
-assert_is_panic_with_message!()
+assert_is_panic_with_message!();

@@ -4,4 +4,4 @@ macro_rules! XCHACHA_NONCESIZE {
     };
 }
 
-XCHACHA_NONCESIZE!()
+XCHACHA_NONCESIZE!();

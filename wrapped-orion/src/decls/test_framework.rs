@@ -4,4 +4,4 @@ macro_rules! test_framework {
     };
 }
 
-test_framework!()
+test_framework!();

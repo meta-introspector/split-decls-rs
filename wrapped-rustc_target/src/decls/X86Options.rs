@@ -11,4 +11,4 @@ macro_rules! X86Options {
     };
 }
 
-X86Options!()
+X86Options!();

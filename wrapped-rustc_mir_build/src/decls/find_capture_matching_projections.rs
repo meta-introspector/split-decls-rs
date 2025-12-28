@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Capture!();
         CaptureMap!();
+        Capture!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! find_capture_matching_projections {
     };
 }
 
-find_capture_matching_projections!()
+find_capture_matching_projections!();

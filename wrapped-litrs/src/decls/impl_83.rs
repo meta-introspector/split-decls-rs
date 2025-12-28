@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Buffer!();
         ParseError!();
         CStringLit!();
+        Buffer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

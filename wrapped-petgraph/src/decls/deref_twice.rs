@@ -4,4 +4,4 @@ macro_rules! deref_twice {
     };
 }
 
-deref_twice!()
+deref_twice!();

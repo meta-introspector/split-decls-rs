@@ -4,4 +4,4 @@ macro_rules! XFT_CD {
     };
 }
 
-XFT_CD!()
+XFT_CD!();

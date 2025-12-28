@@ -7,4 +7,4 @@ macro_rules! macro_232 {
     };
 }
 
-macro_232!()
+macro_232!();

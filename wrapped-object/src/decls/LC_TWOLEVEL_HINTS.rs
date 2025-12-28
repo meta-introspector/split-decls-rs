@@ -4,4 +4,4 @@ macro_rules! LC_TWOLEVEL_HINTS {
     };
 }
 
-LC_TWOLEVEL_HINTS!()
+LC_TWOLEVEL_HINTS!();

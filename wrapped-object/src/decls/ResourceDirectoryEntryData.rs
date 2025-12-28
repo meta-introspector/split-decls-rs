@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ResourceDirectoryTable!();
         Table!();
+        ResourceDirectoryTable!();
         ImageResourceDataEntry!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ResourceDirectoryEntryData {
     };
 }
 
-ResourceDirectoryEntryData!()
+ResourceDirectoryEntryData!();

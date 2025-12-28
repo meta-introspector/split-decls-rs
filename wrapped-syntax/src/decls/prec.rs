@@ -4,4 +4,4 @@ macro_rules! prec {
     };
 }
 
-prec!()
+prec!();

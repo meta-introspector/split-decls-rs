@@ -11,4 +11,4 @@ macro_rules! rename_meta_rule {
     };
 }
 
-rename_meta_rule!()
+rename_meta_rule!();

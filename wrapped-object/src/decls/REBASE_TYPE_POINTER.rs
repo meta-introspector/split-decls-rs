@@ -4,4 +4,4 @@ macro_rules! REBASE_TYPE_POINTER {
     };
 }
 
-REBASE_TYPE_POINTER!()
+REBASE_TYPE_POINTER!();

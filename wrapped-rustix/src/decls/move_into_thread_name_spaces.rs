@@ -11,4 +11,4 @@ macro_rules! move_into_thread_name_spaces {
     };
 }
 
-move_into_thread_name_spaces!()
+move_into_thread_name_spaces!();

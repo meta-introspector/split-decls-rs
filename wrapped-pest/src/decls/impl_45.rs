@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Pair!();
         RuleType!();
-        Error!();
         Pairs!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

@@ -4,4 +4,4 @@ macro_rules! tag_base_type {
     };
 }
 
-tag_base_type!()
+tag_base_type!();

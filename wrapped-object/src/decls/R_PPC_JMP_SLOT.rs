@@ -4,4 +4,4 @@ macro_rules! R_PPC_JMP_SLOT {
     };
 }
 
-R_PPC_JMP_SLOT!()
+R_PPC_JMP_SLOT!();

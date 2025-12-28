@@ -13,4 +13,4 @@ macro_rules! make_enumerated_property {
     };
 }
 
-make_enumerated_property!()
+make_enumerated_property!();

@@ -4,4 +4,4 @@ macro_rules! ConstAndCVariadic {
     };
 }
 
-ConstAndCVariadic!()
+ConstAndCVariadic!();

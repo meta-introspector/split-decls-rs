@@ -4,4 +4,4 @@ macro_rules! graphmap {
     };
 }
 
-graphmap!()
+graphmap!();

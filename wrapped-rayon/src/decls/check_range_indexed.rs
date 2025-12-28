@@ -4,4 +4,4 @@ macro_rules! check_range_indexed {
     };
 }
 
-check_range_indexed!()
+check_range_indexed!();

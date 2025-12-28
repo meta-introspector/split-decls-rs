@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IntoByteSlice!();
         ByteSliceMut!();
         IntoByteSliceMut!();
-        IntoByteSlice!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ByteSlice {
     };
 }
 
-ByteSlice!()
+ByteSlice!();

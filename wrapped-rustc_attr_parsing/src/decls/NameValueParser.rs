@@ -4,4 +4,4 @@ macro_rules! NameValueParser {
     };
 }
 
-NameValueParser!()
+NameValueParser!();

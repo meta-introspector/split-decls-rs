@@ -4,4 +4,4 @@ macro_rules! IndentLevel {
     };
 }
 
-IndentLevel!()
+IndentLevel!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ParserBuilder!();
-        Position!();
         Ast!();
-        Result!();
-        WithComments!();
-        Parser!();
         ParserI!();
+        Position!();
+        Parser!();
+        WithComments!();
+        ParserBuilder!();
+        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

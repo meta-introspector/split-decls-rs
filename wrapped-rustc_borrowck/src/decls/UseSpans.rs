@@ -4,4 +4,4 @@ macro_rules! UseSpans {
     };
 }
 
-UseSpans!()
+UseSpans!();

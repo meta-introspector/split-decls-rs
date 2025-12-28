@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Algorithm!();
         Diff!();
+        Algorithm!();
         InternedInput!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! complex_diffs {
     };
 }
 
-complex_diffs!()
+complex_diffs!();

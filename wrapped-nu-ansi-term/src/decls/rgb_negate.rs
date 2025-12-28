@@ -11,4 +11,4 @@ macro_rules! rgb_negate {
     };
 }
 
-rgb_negate!()
+rgb_negate!();

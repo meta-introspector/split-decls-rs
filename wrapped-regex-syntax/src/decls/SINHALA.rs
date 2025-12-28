@@ -4,4 +4,4 @@ macro_rules! SINHALA {
     };
 }
 
-SINHALA!()
+SINHALA!();

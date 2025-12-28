@@ -4,4 +4,4 @@ macro_rules! parse_binary {
     };
 }
 
-parse_binary!()
+parse_binary!();

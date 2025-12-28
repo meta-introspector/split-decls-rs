@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U64!();
         U32!();
         Endian!();
+        U64!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DyldCacheSlideInfo2 {
     };
 }
 
-DyldCacheSlideInfo2!()
+DyldCacheSlideInfo2!();

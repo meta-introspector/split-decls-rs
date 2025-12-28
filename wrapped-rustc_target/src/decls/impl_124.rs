@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ABI!();
+        Target!();
+        InlineAsmReg!();
         InlineAsmClobberAbi!();
         InlineAsmArch!();
-        InlineAsmReg!();
-        Target!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

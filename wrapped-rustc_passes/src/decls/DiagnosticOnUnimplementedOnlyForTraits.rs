@@ -4,4 +4,4 @@ macro_rules! DiagnosticOnUnimplementedOnlyForTraits {
     };
 }
 
-DiagnosticOnUnimplementedOnlyForTraits!()
+DiagnosticOnUnimplementedOnlyForTraits!();

@@ -4,4 +4,4 @@ macro_rules! err_to_msg {
     };
 }
 
-err_to_msg!()
+err_to_msg!();

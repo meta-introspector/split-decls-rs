@@ -12,4 +12,4 @@ macro_rules! handle_control_flow_keywords {
     };
 }
 
-handle_control_flow_keywords!()
+handle_control_flow_keywords!();

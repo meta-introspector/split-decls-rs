@@ -4,4 +4,4 @@ macro_rules! rshift {
     };
 }
 
-rshift!()
+rshift!();

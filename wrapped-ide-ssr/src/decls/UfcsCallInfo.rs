@@ -4,4 +4,4 @@ macro_rules! UfcsCallInfo {
     };
 }
 
-UfcsCallInfo!()
+UfcsCallInfo!();

@@ -4,4 +4,4 @@ macro_rules! UnicodeExtraField {
     };
 }
 
-UnicodeExtraField!()
+UnicodeExtraField!();

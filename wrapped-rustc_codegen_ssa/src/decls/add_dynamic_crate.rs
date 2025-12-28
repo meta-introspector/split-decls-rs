@@ -11,4 +11,4 @@ macro_rules! add_dynamic_crate {
     };
 }
 
-add_dynamic_crate!()
+add_dynamic_crate!();

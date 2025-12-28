@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         References!();
         WarningBuilder!();
-        Derive!();
         TypeMap!();
+        Derive!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Config {
     };
 }
 
-Config!()
+Config!();

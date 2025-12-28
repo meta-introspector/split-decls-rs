@@ -4,4 +4,4 @@ macro_rules! int_ops {
     };
 }
 
-int_ops!()
+int_ops!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TimingGuard!();
         VerboseTimingGuard!();
         VerboseInfo!();
+        TimingGuard!();
         TimePassesFormat!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_376 {
     };
 }
 
-impl_376!()
+impl_376!();

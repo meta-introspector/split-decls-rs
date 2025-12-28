@@ -4,4 +4,4 @@ macro_rules! Sgn0 {
     };
 }
 
-Sgn0!()
+Sgn0!();

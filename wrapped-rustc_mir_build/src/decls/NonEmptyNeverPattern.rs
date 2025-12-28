@@ -4,4 +4,4 @@ macro_rules! NonEmptyNeverPattern {
     };
 }
 
-NonEmptyNeverPattern!()
+NonEmptyNeverPattern!();

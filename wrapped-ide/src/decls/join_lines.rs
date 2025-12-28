@@ -4,4 +4,4 @@ macro_rules! join_lines {
     };
 }
 
-join_lines!()
+join_lines!();

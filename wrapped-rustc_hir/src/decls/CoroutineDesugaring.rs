@@ -4,4 +4,4 @@ macro_rules! CoroutineDesugaring {
     };
 }
 
-CoroutineDesugaring!()
+CoroutineDesugaring!();

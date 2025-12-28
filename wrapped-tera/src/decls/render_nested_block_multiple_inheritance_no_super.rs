@@ -12,4 +12,4 @@ macro_rules! render_nested_block_multiple_inheritance_no_super {
     };
 }
 
-render_nested_block_multiple_inheritance_no_super!()
+render_nested_block_multiple_inheritance_no_super!();

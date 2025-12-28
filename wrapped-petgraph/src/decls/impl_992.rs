@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexType!();
         IdIterator!();
+        IndexType!();
         NodeIdentifiers!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_992 {
     };
 }
 
-impl_992!()
+impl_992!();

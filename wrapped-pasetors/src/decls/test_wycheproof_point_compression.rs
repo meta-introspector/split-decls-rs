@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UncompressedPublicKey!();
-        AsymmetricPublicKey!();
         V3!();
+        AsymmetricPublicKey!();
+        UncompressedPublicKey!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_wycheproof_point_compression {
     };
 }
 
-test_wycheproof_point_compression!()
+test_wycheproof_point_compression!();

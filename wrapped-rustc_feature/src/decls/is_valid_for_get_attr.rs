@@ -4,4 +4,4 @@ macro_rules! is_valid_for_get_attr {
     };
 }
 
-is_valid_for_get_attr!()
+is_valid_for_get_attr!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Memory!();
-        FnVal!();
         InterpCx!();
-        MemoryKind!();
-        ConstEvalErrKind!();
         Machine!();
+        ConstEvalErrKind!();
+        Memory!();
+        MemoryKind!();
+        FnVal!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

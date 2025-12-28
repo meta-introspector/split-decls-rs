@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Lit!();
-        Delimiter!();
         TokenKind!();
+        Lit!();
         LitKind!();
+        Delimiter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_410 {
     };
 }
 
-impl_410!()
+impl_410!();

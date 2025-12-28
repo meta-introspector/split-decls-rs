@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AltHead!();
         IfLetRescopeRewrite!();
         SingleArmMatchBegin!();
         ConsequentRewrite!();
+        AltHead!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

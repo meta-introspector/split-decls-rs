@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_64_NONE {
     };
 }
 
-R_MICROBLAZE_64_NONE!()
+R_MICROBLAZE_64_NONE!();

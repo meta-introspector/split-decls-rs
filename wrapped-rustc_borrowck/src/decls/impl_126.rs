@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LaterUseKind!();
         MirBorrowckCtxt!();
-        BorrowExplanation!();
+        LaterUseKind!();
         RegionName!();
+        BorrowExplanation!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_126 {
     };
 }
 
-impl_126!()
+impl_126!();

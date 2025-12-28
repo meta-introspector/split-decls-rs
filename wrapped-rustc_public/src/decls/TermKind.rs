@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TyConst!();
         Ty!();
+        TyConst!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TermKind {
     };
 }
 
-TermKind!()
+TermKind!();

@@ -4,4 +4,4 @@ macro_rules! defraw {
     };
 }
 
-defraw!()
+defraw!();

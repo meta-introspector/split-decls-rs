@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IngredientIndex!();
         Table!();
-        Configuration!();
         Value!();
         Id!();
+        Configuration!();
+        IngredientIndex!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! IngredientImpl {
     };
 }
 
-IngredientImpl!()
+IngredientImpl!();

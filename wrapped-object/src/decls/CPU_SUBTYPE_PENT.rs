@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_PENT {
     };
 }
 
-CPU_SUBTYPE_PENT!()
+CPU_SUBTYPE_PENT!();

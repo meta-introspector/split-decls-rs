@@ -4,4 +4,4 @@ macro_rules! PeekMustBePlaceOrRefPlace {
     };
 }
 
-PeekMustBePlaceOrRefPlace!()
+PeekMustBePlaceOrRefPlace!();

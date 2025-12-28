@@ -4,4 +4,4 @@ macro_rules! LangItemWithTrackCaller {
     };
 }
 
-LangItemWithTrackCaller!()
+LangItemWithTrackCaller!();

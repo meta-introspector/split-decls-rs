@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MapWithFolder!();
-        Folder!();
         Consumer!();
+        Folder!();
         MapInitConsumer!();
         Reducer!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_714 {
     };
 }
 
-impl_714!()
+impl_714!();

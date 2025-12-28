@@ -4,4 +4,4 @@ macro_rules! PR_SET_MM_MAP_SIZE {
     };
 }
 
-PR_SET_MM_MAP_SIZE!()
+PR_SET_MM_MAP_SIZE!();

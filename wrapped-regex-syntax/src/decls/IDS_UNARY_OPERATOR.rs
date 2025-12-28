@@ -4,4 +4,4 @@ macro_rules! IDS_UNARY_OPERATOR {
     };
 }
 
-IDS_UNARY_OPERATOR!()
+IDS_UNARY_OPERATOR!();

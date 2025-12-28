@@ -4,4 +4,4 @@ macro_rules! check_zip_into_mut_par_iter {
     };
 }
 
-check_zip_into_mut_par_iter!()
+check_zip_into_mut_par_iter!();

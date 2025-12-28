@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         BlockedOnInner!();
         BlockOnTransferredOwner!();
+        Cycle!();
         Running!();
         BlockResult!();
-        Cycle!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

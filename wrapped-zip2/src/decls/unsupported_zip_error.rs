@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ZipResult!();
         ZipError!();
+        ZipResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! unsupported_zip_error {
     };
 }
 
-unsupported_zip_error!()
+unsupported_zip_error!();

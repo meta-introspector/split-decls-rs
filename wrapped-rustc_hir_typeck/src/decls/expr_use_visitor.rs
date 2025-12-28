@@ -4,4 +4,4 @@ macro_rules! expr_use_visitor {
     };
 }
 
-expr_use_visitor!()
+expr_use_visitor!();

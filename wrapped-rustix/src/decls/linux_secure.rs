@@ -4,4 +4,4 @@ macro_rules! linux_secure {
     };
 }
 
-linux_secure!()
+linux_secure!();

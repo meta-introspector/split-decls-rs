@@ -4,4 +4,4 @@ macro_rules! S_16BYTE_LITERALS {
     };
 }
 
-S_16BYTE_LITERALS!()
+S_16BYTE_LITERALS!();

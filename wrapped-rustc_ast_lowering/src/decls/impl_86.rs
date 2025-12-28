@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
         GenericTypeWithParentheses!();
-        UseAngleBrackets!();
+        AsyncBoundOnlyForFnTraits!();
         RTNSuggestion!();
-        GenericArgsMode!();
-        ImplTraitContext!();
-        BadReturnTypeNotation!();
+        AsyncBoundNotOnTrait!();
+        AllowReturnTypeNotation!();
+        ImplTraitPosition!();
         ParamMode!();
         LoweringContext!();
-        AllowReturnTypeNotation!();
-        AsyncBoundNotOnTrait!();
+        GenericArgsMode!();
+        BadReturnTypeNotation!();
+        ImplTraitContext!();
+        UseAngleBrackets!();
         GenericArgsCtor!();
-        ImplTraitPosition!();
-        AsyncBoundOnlyForFnTraits!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

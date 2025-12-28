@@ -4,4 +4,4 @@ macro_rules! dup {
     };
 }
 
-dup!()
+dup!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PropertyParser!();
         PropertyParserBorrowed!();
         ParseableEnumeratedProperty!();
+        PropertyParser!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

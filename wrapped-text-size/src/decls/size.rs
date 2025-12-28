@@ -4,4 +4,4 @@ macro_rules! size {
     };
 }
 
-size!()
+size!();

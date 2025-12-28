@@ -11,4 +11,4 @@ macro_rules! is_integer {
     };
 }
 
-is_integer!()
+is_integer!();

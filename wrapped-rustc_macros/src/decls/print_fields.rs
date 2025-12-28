@@ -4,4 +4,4 @@ macro_rules! print_fields {
     };
 }
 
-print_fields!()
+print_fields!();

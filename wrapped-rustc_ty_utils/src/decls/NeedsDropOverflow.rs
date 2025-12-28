@@ -4,4 +4,4 @@ macro_rules! NeedsDropOverflow {
     };
 }
 
-NeedsDropOverflow!()
+NeedsDropOverflow!();

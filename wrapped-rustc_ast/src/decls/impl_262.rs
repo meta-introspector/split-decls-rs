@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Attribute!();
         Expr!();
-        StmtKind!();
-        HasAttrs!();
-        MacCall!();
-        Item!();
+        Attribute!();
         AttrVec!();
+        HasAttrs!();
+        StmtKind!();
+        Item!();
+        MacCall!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_262 {
     };
 }
 
-impl_262!()
+impl_262!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Symbols!();
         ByteString!();
         Symbol!();
-        Symbols!();
         VersionId!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_1136 {
     };
 }
 
-impl_1136!()
+impl_1136!();

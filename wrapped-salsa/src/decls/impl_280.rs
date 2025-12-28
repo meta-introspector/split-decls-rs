@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        BlockTransferredResult!();
-        Runtime!();
-        BlockResult!();
-        WaitResult!();
         DatabaseKeyIndex!();
-        Running!();
-        Cancelled!();
+        BlockResult!();
+        Cycle!();
         Revision!();
         Durability!();
-        Cycle!();
-        BlockOnTransferredOwner!();
-        Table!();
+        WaitResult!();
+        BlockTransferredResult!();
+        Running!();
         BlockedOnInner!();
+        Table!();
+        BlockOnTransferredOwner!();
+        Runtime!();
+        Cancelled!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_280 {
     };
 }
 
-impl_280!()
+impl_280!();

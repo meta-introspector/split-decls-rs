@@ -11,4 +11,4 @@ macro_rules! REGDB_E_CLASSNOTREG {
     };
 }
 
-REGDB_E_CLASSNOTREG!()
+REGDB_E_CLASSNOTREG!();

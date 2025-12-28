@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ConstArg!();
         AmbigArg!();
         ConstArgKind!();
+        ConstArg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_121 {
     };
 }
 
-impl_121!()
+impl_121!();

@@ -11,4 +11,4 @@ macro_rules! __lazy_static_internal {
     };
 }
 
-__lazy_static_internal!()
+__lazy_static_internal!();

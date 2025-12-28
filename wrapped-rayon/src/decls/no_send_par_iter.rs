@@ -4,4 +4,4 @@ macro_rules! no_send_par_iter {
     };
 }
 
-no_send_par_iter!()
+no_send_par_iter!();

@@ -4,4 +4,4 @@ macro_rules! LoadDepGraph {
     };
 }
 
-LoadDepGraph!()
+LoadDepGraph!();

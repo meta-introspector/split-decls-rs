@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         Bool!();
+        CodegenCx!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! spanned_type_di_node {
     };
 }
 
-spanned_type_di_node!()
+spanned_type_di_node!();

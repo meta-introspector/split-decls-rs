@@ -4,4 +4,4 @@ macro_rules! XFT_CT {
     };
 }
 
-XFT_CT!()
+XFT_CT!();

@@ -4,4 +4,4 @@ macro_rules! R_SPARC_WDISP30 {
     };
 }
 
-R_SPARC_WDISP30!()
+R_SPARC_WDISP30!();

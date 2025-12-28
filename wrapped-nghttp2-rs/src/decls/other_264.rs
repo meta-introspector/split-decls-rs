@@ -4,4 +4,4 @@ macro_rules! other_264 {
     };
 }
 
-other_264!()
+other_264!();

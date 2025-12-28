@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         SelfPipeWrite!();
-        AddSignal!();
-        DeliveryState!();
         Exfiltrator!();
-        SignalOnly!();
+        DeliveryState!();
         Handle!();
+        AddSignal!();
+        SignalOnly!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

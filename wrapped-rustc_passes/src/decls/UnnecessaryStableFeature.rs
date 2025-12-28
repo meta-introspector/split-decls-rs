@@ -4,4 +4,4 @@ macro_rules! UnnecessaryStableFeature {
     };
 }
 
-UnnecessaryStableFeature!()
+UnnecessaryStableFeature!();

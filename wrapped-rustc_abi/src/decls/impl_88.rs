@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        HasDataLayout!();
-        Integer!();
-        IntegerType!();
-        AbiAlign!();
         Size!();
+        HasDataLayout!();
         Align!();
+        IntegerType!();
+        Integer!();
+        AbiAlign!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

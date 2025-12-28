@@ -4,4 +4,4 @@ macro_rules! WeakSliceMut {
     };
 }
 
-WeakSliceMut!()
+WeakSliceMut!();

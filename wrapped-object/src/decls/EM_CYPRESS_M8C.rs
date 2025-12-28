@@ -4,4 +4,4 @@ macro_rules! EM_CYPRESS_M8C {
     };
 }
 
-EM_CYPRESS_M8C!()
+EM_CYPRESS_M8C!();

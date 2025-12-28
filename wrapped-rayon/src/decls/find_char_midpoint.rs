@@ -4,4 +4,4 @@ macro_rules! find_char_midpoint {
     };
 }
 
-find_char_midpoint!()
+find_char_midpoint!();

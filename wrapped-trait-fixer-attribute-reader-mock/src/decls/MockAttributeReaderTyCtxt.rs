@@ -4,4 +4,4 @@ macro_rules! MockAttributeReaderTyCtxt {
     };
 }
 
-MockAttributeReaderTyCtxt!()
+MockAttributeReaderTyCtxt!();

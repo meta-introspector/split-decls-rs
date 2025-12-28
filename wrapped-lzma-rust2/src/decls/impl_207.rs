@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EncodeMode!();
         MfType!();
-        Hc4!();
+        LzmaOptions!();
         Bt4!();
         LzmaEncoder!();
-        LzmaOptions!();
+        EncodeMode!();
+        Hc4!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_207 {
     };
 }
 
-impl_207!()
+impl_207!();

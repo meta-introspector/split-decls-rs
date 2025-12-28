@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        RelocationMap!();
+        ObjectSection!();
         CompressedFileRange!();
-        SectionIndex!();
+        Result!();
         MachO!();
+        RelocationIterator!();
+        ReadRef!();
         MachHeader!();
+        MachOSection!();
         SectionKind!();
         SectionFlags!();
-        Result!();
-        MachORelocationIterator!();
-        RelocationIterator!();
-        MachOSection!();
-        ObjectSection!();
+        RelocationMap!();
         CompressedData!();
+        MachORelocationIterator!();
+        SectionIndex!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_590 {
     };
 }
 
-impl_590!()
+impl_590!();

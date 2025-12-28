@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        IntoBytes!();
-        Immutable!();
-        BecauseExclusive!();
-        TryReadError!();
-        CastType!();
-        Shared!();
         Maybe!();
-        Unaligned!();
-        PointerMetadata!();
-        Reference!();
-        BecauseImmutable!();
-        TryCastError!();
         KnownLayout!();
+        Unaligned!();
+        Immutable!();
+        TryReadError!();
+        Shared!();
+        BecauseImmutable!();
+        BecauseExclusive!();
+        Reference!();
+        CastType!();
+        TryCastError!();
+        PointerMetadata!();
+        IntoBytes!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! TryFromBytes {
     };
 }
 
-TryFromBytes!()
+TryFromBytes!();

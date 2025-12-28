@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DatetimeFieldSerializer!();
         Datetime!();
         SerializerError!();
+        DatetimeFieldSerializer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IgnorableBehavior!();
-        DecompositionTables!();
-        CharacterAndTrieValue!();
-        DecompositionData!();
         DecomposingNormalizerBorrowed!();
         Decomposition!();
+        DecompositionData!();
+        IgnorableBehavior!();
+        CharacterAndTrieValue!();
+        DecompositionTables!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_120 {
     };
 }
 
-impl_120!()
+impl_120!();

@@ -4,4 +4,4 @@ macro_rules! suggest_ampmut_self {
     };
 }
 
-suggest_ampmut_self!()
+suggest_ampmut_self!();

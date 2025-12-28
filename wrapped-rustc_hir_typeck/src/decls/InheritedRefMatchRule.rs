@@ -4,4 +4,4 @@ macro_rules! InheritedRefMatchRule {
     };
 }
 
-InheritedRefMatchRule!()
+InheritedRefMatchRule!();

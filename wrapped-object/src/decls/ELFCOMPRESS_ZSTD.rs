@@ -4,4 +4,4 @@ macro_rules! ELFCOMPRESS_ZSTD {
     };
 }
 
-ELFCOMPRESS_ZSTD!()
+ELFCOMPRESS_ZSTD!();

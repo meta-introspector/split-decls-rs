@@ -4,4 +4,4 @@ macro_rules! rol {
     };
 }
 
-rol!()
+rol!();

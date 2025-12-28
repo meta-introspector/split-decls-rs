@@ -4,4 +4,4 @@ macro_rules! exponential_size {
     };
 }
 
-exponential_size!()
+exponential_size!();

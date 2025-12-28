@@ -4,4 +4,4 @@ macro_rules! NT_S390_VXRS_LOW {
     };
 }
 
-NT_S390_VXRS_LOW!()
+NT_S390_VXRS_LOW!();

@@ -4,4 +4,4 @@ macro_rules! ziptuple {
     };
 }
 
-ziptuple!()
+ziptuple!();

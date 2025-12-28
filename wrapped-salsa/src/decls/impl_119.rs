@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        SalsaStructInDb!();
-        Id!();
-        MemoIngredientIndex!();
         IngredientImpl!();
+        DatabaseDownCaster!();
         IngredientIndex!();
+        MemoIngredientIndex!();
         MemoIngredientMap!();
         Configuration!();
-        DatabaseKeyIndex!();
+        Id!();
         Memo!();
+        SalsaStructInDb!();
+        DatabaseKeyIndex!();
         Zalsa!();
-        DatabaseDownCaster!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

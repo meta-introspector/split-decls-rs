@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BuildMetadata!();
-        Prerelease!();
-        Error!();
-        VersionReq!();
         Version!();
+        Prerelease!();
+        VersionReq!();
+        BuildMetadata!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

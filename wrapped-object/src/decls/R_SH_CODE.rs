@@ -4,4 +4,4 @@ macro_rules! R_SH_CODE {
     };
 }
 
-R_SH_CODE!()
+R_SH_CODE!();

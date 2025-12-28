@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PrintAttribute!();
         StableSince!();
+        PrintAttribute!();
         UnstableReason!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! StabilityLevel {
     };
 }
 
-StabilityLevel!()
+StabilityLevel!();

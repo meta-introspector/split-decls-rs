@@ -11,4 +11,4 @@ macro_rules! derive_unaligned_inner {
     };
 }
 
-derive_unaligned_inner!()
+derive_unaligned_inner!();

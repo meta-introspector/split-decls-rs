@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExpandedTest!();
         Result!();
-        Error!();
+        ExpandedTest!();
         Name!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! expand_globs {
     };
 }
 
-expand_globs!()
+expand_globs!();

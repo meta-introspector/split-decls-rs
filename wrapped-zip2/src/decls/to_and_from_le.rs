@@ -4,4 +4,4 @@ macro_rules! to_and_from_le {
     };
 }
 
-to_and_from_le!()
+to_and_from_le!();

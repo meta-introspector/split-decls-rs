@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ObjectSegment!();
-        PeFile!();
-        ReadRef!();
-        ImageNtHeaders!();
         ImageSectionHeader!();
+        ImageNtHeaders!();
+        ReadRef!();
+        PeFile!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! PeSegment {
     };
 }
 
-PeSegment!()
+PeSegment!();

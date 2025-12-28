@@ -11,4 +11,4 @@ macro_rules! adt_drop_tys {
     };
 }
 
-adt_drop_tys!()
+adt_drop_tys!();

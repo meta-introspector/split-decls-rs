@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HoverResult!();
         HoverConfig!();
+        HoverResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! hover_for_definition {
     };
 }
 
-hover_for_definition!()
+hover_for_definition!();

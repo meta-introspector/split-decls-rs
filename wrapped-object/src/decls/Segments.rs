@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Table!();
         Segment!();
+        Table!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Segments {
     };
 }
 
-Segments!()
+Segments!();

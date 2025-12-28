@@ -11,4 +11,4 @@ macro_rules! from_raw {
     };
 }
 
-from_raw!()
+from_raw!();

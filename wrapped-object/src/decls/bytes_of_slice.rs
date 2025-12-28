@@ -11,4 +11,4 @@ macro_rules! bytes_of_slice {
     };
 }
 
-bytes_of_slice!()
+bytes_of_slice!();

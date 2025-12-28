@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         Error!();
         ErrorKind!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! specialize_err {
     };
 }
 
-specialize_err!()
+specialize_err!();

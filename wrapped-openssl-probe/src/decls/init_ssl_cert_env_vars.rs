@@ -4,4 +4,4 @@ macro_rules! init_ssl_cert_env_vars {
     };
 }
 
-init_ssl_cert_env_vars!()
+init_ssl_cert_env_vars!();

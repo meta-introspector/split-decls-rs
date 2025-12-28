@@ -4,4 +4,4 @@ macro_rules! external_bitflags_debug {
     };
 }
 
-external_bitflags_debug!()
+external_bitflags_debug!();

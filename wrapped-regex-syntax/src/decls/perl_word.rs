@@ -4,4 +4,4 @@ macro_rules! perl_word {
     };
 }
 
-perl_word!()
+perl_word!();

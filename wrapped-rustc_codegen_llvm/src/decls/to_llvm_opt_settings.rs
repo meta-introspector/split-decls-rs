@@ -12,4 +12,4 @@ macro_rules! to_llvm_opt_settings {
     };
 }
 
-to_llvm_opt_settings!()
+to_llvm_opt_settings!();

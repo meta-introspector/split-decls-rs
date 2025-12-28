@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         MapProducer!();
-        Producer!();
-        IntoIter!();
         Map!();
+        Producer!();
         Folder!();
         MapFolder!();
+        IntoIter!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_680 {
     };
 }
 
-impl_680!()
+impl_680!();

@@ -4,4 +4,4 @@ macro_rules! R_M32R_COPY {
     };
 }
 
-R_M32R_COPY!()
+R_M32R_COPY!();

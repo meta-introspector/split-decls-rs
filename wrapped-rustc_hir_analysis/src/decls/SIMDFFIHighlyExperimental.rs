@@ -4,4 +4,4 @@ macro_rules! SIMDFFIHighlyExperimental {
     };
 }
 
-SIMDFFIHighlyExperimental!()
+SIMDFFIHighlyExperimental!();

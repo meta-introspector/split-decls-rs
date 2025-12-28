@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PrimitiveRepr!();
-        Repr!();
         EnumRepr!();
         CompoundRepr!();
+        Repr!();
+        PrimitiveRepr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! enum_size_from_repr {
     };
 }
 
-enum_size_from_repr!()
+enum_size_from_repr!();

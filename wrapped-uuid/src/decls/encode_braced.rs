@@ -12,4 +12,4 @@ macro_rules! encode_braced {
     };
 }
 
-encode_braced!()
+encode_braced!();

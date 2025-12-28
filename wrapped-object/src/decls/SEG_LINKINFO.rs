@@ -4,4 +4,4 @@ macro_rules! SEG_LINKINFO {
     };
 }
 
-SEG_LINKINFO!()
+SEG_LINKINFO!();

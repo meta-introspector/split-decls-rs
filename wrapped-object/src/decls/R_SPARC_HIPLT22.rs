@@ -4,4 +4,4 @@ macro_rules! R_SPARC_HIPLT22 {
     };
 }
 
-R_SPARC_HIPLT22!()
+R_SPARC_HIPLT22!();

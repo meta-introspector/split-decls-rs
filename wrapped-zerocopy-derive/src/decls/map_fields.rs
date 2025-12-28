@@ -4,4 +4,4 @@ macro_rules! map_fields {
     };
 }
 
-map_fields!()
+map_fields!();

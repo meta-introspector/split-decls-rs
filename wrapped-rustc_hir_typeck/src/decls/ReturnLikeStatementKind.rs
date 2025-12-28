@@ -4,4 +4,4 @@ macro_rules! ReturnLikeStatementKind {
     };
 }
 
-ReturnLikeStatementKind!()
+ReturnLikeStatementKind!();

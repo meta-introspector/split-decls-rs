@@ -11,4 +11,4 @@ macro_rules! self_install {
     };
 }
 
-self_install!()
+self_install!();

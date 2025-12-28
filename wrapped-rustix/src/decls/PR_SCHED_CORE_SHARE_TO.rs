@@ -4,4 +4,4 @@ macro_rules! PR_SCHED_CORE_SHARE_TO {
     };
 }
 
-PR_SCHED_CORE_SHARE_TO!()
+PR_SCHED_CORE_SHARE_TO!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexType!();
         Build!();
+        IndexType!();
         Acyclic!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_260 {
     };
 }
 
-impl_260!()
+impl_260!();

@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        GroupInfo!();
-        OnePassCache!();
         ReverseHybridCache!();
-        HalfMatch!();
-        Captures!();
-        PatternID!();
-        Pre!();
-        PatternSet!();
-        Input!();
-        PrefilterI!();
-        NonMaxUsize!();
-        Strategy!();
-        HybridCache!();
         Match!();
         PikeVMCache!();
         Cache!();
+        Strategy!();
         BoundedBacktrackerCache!();
+        OnePassCache!();
+        HybridCache!();
+        HalfMatch!();
+        NonMaxUsize!();
+        GroupInfo!();
+        PatternSet!();
+        PatternID!();
+        PrefilterI!();
+        Captures!();
+        Pre!();
+        Input!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_382 {
     };
 }
 
-impl_382!()
+impl_382!();

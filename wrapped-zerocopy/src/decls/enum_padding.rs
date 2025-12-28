@@ -4,4 +4,4 @@ macro_rules! enum_padding {
     };
 }
 
-enum_padding!()
+enum_padding!();

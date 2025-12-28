@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ctxt!();
         Container!();
+        Ctxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_remote_generic {
     };
 }
 
-check_remote_generic!()
+check_remote_generic!();

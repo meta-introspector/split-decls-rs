@@ -4,4 +4,4 @@ macro_rules! add_ty_alias_where_clause {
     };
 }
 
-add_ty_alias_where_clause!()
+add_ty_alias_where_clause!();

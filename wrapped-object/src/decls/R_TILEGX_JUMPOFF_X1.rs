@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_JUMPOFF_X1 {
     };
 }
 
-R_TILEGX_JUMPOFF_X1!()
+R_TILEGX_JUMPOFF_X1!();

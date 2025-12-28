@@ -4,4 +4,4 @@ macro_rules! FutureIncompatibilityReason {
     };
 }
 
-FutureIncompatibilityReason!()
+FutureIncompatibilityReason!();

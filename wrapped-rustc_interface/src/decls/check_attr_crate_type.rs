@@ -4,4 +4,4 @@ macro_rules! check_attr_crate_type {
     };
 }
 
-check_attr_crate_type!()
+check_attr_crate_type!();

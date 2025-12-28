@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ImplTraitPosition!();
-        ExtraDoubleDot!();
-        AllowReturnTypeNotation!();
-        MisplacedDoubleDot!();
-        ParamMode!();
         LoweringContext!();
+        AllowReturnTypeNotation!();
+        ImplTraitPosition!();
+        ParamMode!();
+        ExtraDoubleDot!();
+        MisplacedDoubleDot!();
+        ImplTraitContext!();
         SubTupleBinding!();
         ArbitraryExpressionInPattern!();
-        ImplTraitContext!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_84 {
     };
 }
 
-impl_84!()
+impl_84!();

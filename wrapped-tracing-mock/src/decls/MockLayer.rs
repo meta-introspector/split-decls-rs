@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Expect!();
         MockLayerBuilder!();
+        Expect!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MockLayer {
     };
 }
 
-MockLayer!()
+MockLayer!();

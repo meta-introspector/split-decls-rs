@@ -4,4 +4,4 @@ macro_rules! frexp {
     };
 }
 
-frexp!()
+frexp!();

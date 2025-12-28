@@ -11,4 +11,4 @@ macro_rules! broadcast_mutual_sleepy {
     };
 }
 
-broadcast_mutual_sleepy!()
+broadcast_mutual_sleepy!();

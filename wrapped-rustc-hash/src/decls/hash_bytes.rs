@@ -4,4 +4,4 @@ macro_rules! hash_bytes {
     };
 }
 
-hash_bytes!()
+hash_bytes!();

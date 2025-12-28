@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FlowSensitiveAnalysis!();
         State!();
         Qualif!();
-        FlowSensitiveAnalysis!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

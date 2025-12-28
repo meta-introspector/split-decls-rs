@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         MPlaceTy!();
-        Projectable!();
         MemPlaceMeta!();
-        InterpCx!();
-        OffsetMode!();
         Machine!();
+        OffsetMode!();
+        Projectable!();
+        InterpCx!();
         OpTy!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_291 {
     };
 }
 
-impl_291!()
+impl_291!();

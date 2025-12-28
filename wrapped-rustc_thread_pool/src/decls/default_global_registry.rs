@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Registry!();
-        Latch!();
-        WorkerThread!();
-        ThreadPoolBuildError!();
         ThreadPoolBuilder!();
+        ThreadPoolBuildError!();
+        Registry!();
+        WorkerThread!();
+        Latch!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! default_global_registry {
     };
 }
 
-default_global_registry!()
+default_global_registry!();

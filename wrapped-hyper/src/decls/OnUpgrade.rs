@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Receiver!();
-        Result!();
-        Upgraded!();
         Error!();
+        Result!();
+        Receiver!();
+        Upgraded!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! OnUpgrade {
     };
 }
 
-OnUpgrade!()
+OnUpgrade!();

@@ -11,4 +11,4 @@ macro_rules! encode_key_path {
     };
 }
 
-encode_key_path!()
+encode_key_path!();

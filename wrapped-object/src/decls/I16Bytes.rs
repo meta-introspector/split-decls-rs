@@ -11,4 +11,4 @@ macro_rules! I16Bytes {
     };
 }
 
-I16Bytes!()
+I16Bytes!();

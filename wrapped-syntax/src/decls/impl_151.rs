@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SyntaxElement!();
-        PositionRepr!();
-        SyntaxNode!();
         ChangeKind!();
         Change!();
+        PositionRepr!();
+        SyntaxNode!();
+        SyntaxElement!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_151 {
     };
 }
 
-impl_151!()
+impl_151!();

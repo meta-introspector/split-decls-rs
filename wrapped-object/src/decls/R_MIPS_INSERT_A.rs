@@ -4,4 +4,4 @@ macro_rules! R_MIPS_INSERT_A {
     };
 }
 
-R_MIPS_INSERT_A!()
+R_MIPS_INSERT_A!();

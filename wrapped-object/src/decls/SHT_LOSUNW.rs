@@ -4,4 +4,4 @@ macro_rules! SHT_LOSUNW {
     };
 }
 
-SHT_LOSUNW!()
+SHT_LOSUNW!();

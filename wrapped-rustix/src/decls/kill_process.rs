@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         Signal!();
         Pid!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! kill_process {
     };
 }
 
-kill_process!()
+kill_process!();

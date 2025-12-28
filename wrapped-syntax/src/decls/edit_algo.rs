@@ -4,4 +4,4 @@ macro_rules! edit_algo {
     };
 }
 
-edit_algo!()
+edit_algo!();

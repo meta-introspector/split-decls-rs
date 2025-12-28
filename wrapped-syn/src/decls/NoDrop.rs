@@ -4,4 +4,4 @@ macro_rules! NoDrop {
     };
 }
 
-NoDrop!()
+NoDrop!();

@@ -11,4 +11,4 @@ macro_rules! TargetDependencies {
     };
 }
 
-TargetDependencies!()
+TargetDependencies!();

@@ -4,4 +4,4 @@ macro_rules! test_usize_with_underscores {
     };
 }
 
-test_usize_with_underscores!()
+test_usize_with_underscores!();

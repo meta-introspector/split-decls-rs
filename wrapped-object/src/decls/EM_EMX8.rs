@@ -4,4 +4,4 @@ macro_rules! EM_EMX8 {
     };
 }
 
-EM_EMX8!()
+EM_EMX8!();

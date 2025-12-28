@@ -4,4 +4,4 @@ macro_rules! dirty_clean {
     };
 }
 
-dirty_clean!()
+dirty_clean!();

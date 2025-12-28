@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        Alternation!();
+        ParserI!();
+        Flag!();
+        ClassSetUnion!();
         Position!();
-        Concat!();
         Either!();
-        ClassSet!();
         Group!();
         Result!();
-        ClassBracketed!();
-        ParserI!();
-        ErrorKind!();
+        Ast!();
+        ClassState!();
+        Alternation!();
         ClassSetItem!();
-        ClassSetBinaryOp!();
         GroupState!();
         Parser!();
-        CaptureName!();
-        ClassSetUnion!();
-        Flag!();
-        Comment!();
-        Error!();
-        ClassState!();
-        ClassSetBinaryOpKind!();
         Span!();
-        Ast!();
+        CaptureName!();
+        ClassBracketed!();
+        ClassSetBinaryOpKind!();
+        Error!();
+        Concat!();
+        Comment!();
+        ClassSet!();
+        ClassSetBinaryOp!();
+        ErrorKind!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

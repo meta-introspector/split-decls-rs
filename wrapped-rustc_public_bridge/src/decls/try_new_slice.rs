@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Allocation!();
         CompilerCtxt!();
-        Bridge!();
         Error!();
+        Bridge!();
+        Allocation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! try_new_slice {
     };
 }
 
-try_new_slice!()
+try_new_slice!();

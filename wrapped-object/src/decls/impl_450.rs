@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Bytes!();
+        AttributesSubsection!();
+        Result!();
         AttributesSubsectionIterator!();
         U32Bytes!();
         Endian!();
-        Result!();
-        Bytes!();
-        AttributesSubsection!();
         FileHeader!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_450 {
     };
 }
 
-impl_450!()
+impl_450!();

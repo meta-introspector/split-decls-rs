@@ -4,4 +4,4 @@ macro_rules! qonef {
     };
 }
 
-qonef!()
+qonef!();

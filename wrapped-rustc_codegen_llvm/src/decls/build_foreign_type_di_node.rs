@@ -11,4 +11,4 @@ macro_rules! build_foreign_type_di_node {
     };
 }
 
-build_foreign_type_di_node!()
+build_foreign_type_di_node!();

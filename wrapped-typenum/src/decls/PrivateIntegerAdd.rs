@@ -4,4 +4,4 @@ macro_rules! PrivateIntegerAdd {
     };
 }
 
-PrivateIntegerAdd!()
+PrivateIntegerAdd!();

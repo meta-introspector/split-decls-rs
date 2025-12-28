@@ -4,4 +4,4 @@ macro_rules! DT_RELASZ {
     };
 }
 
-DT_RELASZ!()
+DT_RELASZ!();

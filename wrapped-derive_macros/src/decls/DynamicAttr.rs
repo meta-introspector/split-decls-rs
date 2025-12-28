@@ -4,4 +4,4 @@ macro_rules! DynamicAttr {
     };
 }
 
-DynamicAttr!()
+DynamicAttr!();

@@ -4,4 +4,4 @@ macro_rules! check_slice_split {
     };
 }
 
-check_slice_split!()
+check_slice_split!();

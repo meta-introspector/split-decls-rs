@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Dependencies!();
         Type!();
-        Class!();
         TypeMap!();
+        Class!();
         Interface!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

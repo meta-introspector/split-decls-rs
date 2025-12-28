@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MonikerResult!();
         Moniker!();
+        MonikerResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! def_to_moniker {
     };
 }
 
-def_to_moniker!()
+def_to_moniker!();

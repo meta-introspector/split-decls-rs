@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U32!();
         Symbols!();
+        U32!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BlockAux64 {
     };
 }
 
-BlockAux64!()
+BlockAux64!();

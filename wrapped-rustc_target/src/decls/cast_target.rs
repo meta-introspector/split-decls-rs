@@ -12,4 +12,4 @@ macro_rules! cast_target {
     };
 }
 
-cast_target!()
+cast_target!();

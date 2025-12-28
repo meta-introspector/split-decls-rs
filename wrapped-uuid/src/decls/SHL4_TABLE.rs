@@ -4,4 +4,4 @@ macro_rules! SHL4_TABLE {
     };
 }
 
-SHL4_TABLE!()
+SHL4_TABLE!();

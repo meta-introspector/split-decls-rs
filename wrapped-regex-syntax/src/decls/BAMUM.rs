@@ -4,4 +4,4 @@ macro_rules! BAMUM {
     };
 }
 
-BAMUM!()
+BAMUM!();

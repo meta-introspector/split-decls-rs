@@ -4,4 +4,4 @@ macro_rules! R_SH_IND12W {
     };
 }
 
-R_SH_IND12W!()
+R_SH_IND12W!();

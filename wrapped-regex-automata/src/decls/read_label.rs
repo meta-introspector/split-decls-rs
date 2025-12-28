@@ -12,4 +12,4 @@ macro_rules! read_label {
     };
 }
 
-read_label!()
+read_label!();

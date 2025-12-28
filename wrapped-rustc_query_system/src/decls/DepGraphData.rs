@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         WorkProductMap!();
+        Deps!();
+        DepNode!();
         DepNodeColorMap!();
         SerializedDepGraph!();
-        DepNode!();
         CurrentDepGraph!();
-        Deps!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! DepGraphData {
     };
 }
 
-DepGraphData!()
+DepGraphData!();

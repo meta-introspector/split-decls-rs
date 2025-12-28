@@ -4,4 +4,4 @@ macro_rules! test_no_completions_in_for_loop_in_kw_pos {
     };
 }
 
-test_no_completions_in_for_loop_in_kw_pos!()
+test_no_completions_in_for_loop_in_kw_pos!();

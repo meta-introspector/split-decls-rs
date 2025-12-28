@@ -4,4 +4,4 @@ macro_rules! word_break {
     };
 }
 
-word_break!()
+word_break!();

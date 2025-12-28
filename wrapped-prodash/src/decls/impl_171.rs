@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Count!();
-        StepShared!();
-        ThroughputOnDrop!();
         NestedProgress!();
+        ThroughputOnDrop!();
+        StepShared!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_171 {
     };
 }
 
-impl_171!()
+impl_171!();

@@ -4,4 +4,4 @@ macro_rules! TokenId {
     };
 }
 
-TokenId!()
+TokenId!();

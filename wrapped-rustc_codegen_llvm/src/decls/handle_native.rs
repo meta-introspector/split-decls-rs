@@ -4,4 +4,4 @@ macro_rules! handle_native {
     };
 }
 
-handle_native!()
+handle_native!();

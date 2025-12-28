@@ -4,4 +4,4 @@ macro_rules! keys {
     };
 }
 
-keys!()
+keys!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
+        ReplaceCommaWithSemicolon!();
+        IsSuggestion!();
+        ProbeScope!();
+        FnCtxt!();
         OptionResultRefMismatch!();
+        Issue!();
+        ItemKind!();
         SuggestConvertViaMethod!();
         ExpectedReturnTypeLabel!();
-        Issue!();
-        IsSuggestion!();
-        AddReturnTypeSuggestion!();
         NoteCallerChoosesTyForTyParam!();
-        FnCtxt!();
-        ProbeScope!();
-        ReplaceCommaWithSemicolon!();
+        AddReturnTypeSuggestion!();
         SuggestBoxing!();
-        ItemKind!();
         Mode!();
     };
 }
@@ -30,4 +30,4 @@ macro_rules! impl_208 {
     };
 }
 
-impl_208!()
+impl_208!();

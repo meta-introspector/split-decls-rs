@@ -4,4 +4,4 @@ macro_rules! EnumDiscriminantOverflowed {
     };
 }
 
-EnumDiscriminantOverflowed!()
+EnumDiscriminantOverflowed!();

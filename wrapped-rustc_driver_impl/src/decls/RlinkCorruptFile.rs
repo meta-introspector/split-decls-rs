@@ -4,4 +4,4 @@ macro_rules! RlinkCorruptFile {
     };
 }
 
-RlinkCorruptFile!()
+RlinkCorruptFile!();

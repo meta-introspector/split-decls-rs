@@ -4,4 +4,4 @@ macro_rules! R_RISCV_SUB64 {
     };
 }
 
-R_RISCV_SUB64!()
+R_RISCV_SUB64!();

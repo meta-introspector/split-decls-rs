@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Signal!();
         Result!();
+        Signal!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1673 {
     };
 }
 
-impl_1673!()
+impl_1673!();

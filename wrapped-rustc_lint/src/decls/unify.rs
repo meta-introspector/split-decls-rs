@@ -4,4 +4,4 @@ macro_rules! unify {
     };
 }
 
-unify!()
+unify!();

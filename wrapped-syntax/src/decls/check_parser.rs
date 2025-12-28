@@ -4,4 +4,4 @@ macro_rules! check_parser {
     };
 }
 
-check_parser!()
+check_parser!();

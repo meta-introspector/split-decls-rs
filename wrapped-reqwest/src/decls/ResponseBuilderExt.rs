@@ -4,4 +4,4 @@ macro_rules! ResponseBuilderExt {
     };
 }
 
-ResponseBuilderExt!()
+ResponseBuilderExt!();

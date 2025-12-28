@@ -4,4 +4,4 @@ macro_rules! need_pre_lto_bitcode_for_incr_comp {
     };
 }
 
-need_pre_lto_bitcode_for_incr_comp!()
+need_pre_lto_bitcode_for_incr_comp!();

@@ -11,4 +11,4 @@ macro_rules! impl_has_node_id {
     };
 }
 
-impl_has_node_id!()
+impl_has_node_id!();

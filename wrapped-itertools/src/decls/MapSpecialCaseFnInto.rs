@@ -4,4 +4,4 @@ macro_rules! MapSpecialCaseFnInto {
     };
 }
 
-MapSpecialCaseFnInto!()
+MapSpecialCaseFnInto!();

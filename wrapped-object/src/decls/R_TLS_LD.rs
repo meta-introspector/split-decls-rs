@@ -4,4 +4,4 @@ macro_rules! R_TLS_LD {
     };
 }
 
-R_TLS_LD!()
+R_TLS_LD!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WindowsError!();
         DlError!();
+        WindowsError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Error {
     };
 }
 
-Error!()
+Error!();

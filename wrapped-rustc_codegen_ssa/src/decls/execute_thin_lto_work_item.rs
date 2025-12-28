@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ThinModule!();
-        CodegenContext!();
-        WorkItemResult!();
         ExtraBackendMethods!();
+        WorkItemResult!();
+        CodegenContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! execute_thin_lto_work_item {
     };
 }
 
-execute_thin_lto_work_item!()
+execute_thin_lto_work_item!();

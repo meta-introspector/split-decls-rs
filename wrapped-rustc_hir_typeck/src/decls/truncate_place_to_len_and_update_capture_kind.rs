@@ -4,4 +4,4 @@ macro_rules! truncate_place_to_len_and_update_capture_kind {
     };
 }
 
-truncate_place_to_len_and_update_capture_kind!()
+truncate_place_to_len_and_update_capture_kind!();

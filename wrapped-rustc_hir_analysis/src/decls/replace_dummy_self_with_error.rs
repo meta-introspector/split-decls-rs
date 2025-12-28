@@ -4,4 +4,4 @@ macro_rules! replace_dummy_self_with_error {
     };
 }
 
-replace_dummy_self_with_error!()
+replace_dummy_self_with_error!();

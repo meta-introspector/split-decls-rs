@@ -4,4 +4,4 @@ macro_rules! walkdir_adapter {
     };
 }
 
-walkdir_adapter!()
+walkdir_adapter!();

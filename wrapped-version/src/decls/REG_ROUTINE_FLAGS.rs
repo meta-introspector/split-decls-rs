@@ -4,4 +4,4 @@ macro_rules! REG_ROUTINE_FLAGS {
     };
 }
 
-REG_ROUTINE_FLAGS!()
+REG_ROUTINE_FLAGS!();

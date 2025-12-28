@@ -4,4 +4,4 @@ macro_rules! wasm_type {
     };
 }
 
-wasm_type!()
+wasm_type!();

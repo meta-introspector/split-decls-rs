@@ -4,4 +4,4 @@ macro_rules! random_01 {
     };
 }
 
-random_01!()
+random_01!();

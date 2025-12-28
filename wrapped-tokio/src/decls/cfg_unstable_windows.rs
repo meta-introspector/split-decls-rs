@@ -4,4 +4,4 @@ macro_rules! cfg_unstable_windows {
     };
 }
 
-cfg_unstable_windows!()
+cfg_unstable_windows!();

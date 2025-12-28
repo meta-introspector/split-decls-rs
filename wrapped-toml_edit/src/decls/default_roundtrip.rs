@@ -11,4 +11,4 @@ macro_rules! default_roundtrip {
     };
 }
 
-default_roundtrip!()
+default_roundtrip!();

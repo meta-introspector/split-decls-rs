@@ -11,4 +11,4 @@ macro_rules! set_ip_ttl {
     };
 }
 
-set_ip_ttl!()
+set_ip_ttl!();

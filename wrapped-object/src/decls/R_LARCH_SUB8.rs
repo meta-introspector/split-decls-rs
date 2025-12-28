@@ -4,4 +4,4 @@ macro_rules! R_LARCH_SUB8 {
     };
 }
 
-R_LARCH_SUB8!()
+R_LARCH_SUB8!();

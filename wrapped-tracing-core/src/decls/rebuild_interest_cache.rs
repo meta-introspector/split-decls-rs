@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Subscriber!();
         Callsite!();
+        Subscriber!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! rebuild_interest_cache {
     };
 }
 
-rebuild_interest_cache!()
+rebuild_interest_cache!();

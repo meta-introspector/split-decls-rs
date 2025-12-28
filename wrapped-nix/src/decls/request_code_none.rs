@@ -4,4 +4,4 @@ macro_rules! request_code_none {
     };
 }
 
-request_code_none!()
+request_code_none!();

@@ -11,4 +11,4 @@ macro_rules! deref_async_read {
     };
 }
 
-deref_async_read!()
+deref_async_read!();

@@ -12,4 +12,4 @@ macro_rules! append_error {
     };
 }
 
-append_error!()
+append_error!();

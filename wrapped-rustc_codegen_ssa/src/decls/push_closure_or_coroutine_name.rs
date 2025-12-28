@@ -4,4 +4,4 @@ macro_rules! push_closure_or_coroutine_name {
     };
 }
 
-push_closure_or_coroutine_name!()
+push_closure_or_coroutine_name!();

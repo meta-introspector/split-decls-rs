@@ -4,4 +4,4 @@ macro_rules! RT_VXD {
     };
 }
 
-RT_VXD!()
+RT_VXD!();

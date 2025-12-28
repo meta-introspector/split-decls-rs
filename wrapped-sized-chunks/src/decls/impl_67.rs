@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Chunk!();
         InlineArray!();
+        Chunk!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

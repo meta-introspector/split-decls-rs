@@ -4,4 +4,4 @@ macro_rules! ImplementType {
     };
 }
 
-ImplementType!()
+ImplementType!();

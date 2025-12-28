@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Node!();
         Predecessors!();
         VecGraph!();
-        Node!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_214 {
     };
 }
 
-impl_214!()
+impl_214!();

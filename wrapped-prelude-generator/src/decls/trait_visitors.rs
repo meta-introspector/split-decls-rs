@@ -4,4 +4,4 @@ macro_rules! trait_visitors {
     };
 }
 
-trait_visitors!()
+trait_visitors!();

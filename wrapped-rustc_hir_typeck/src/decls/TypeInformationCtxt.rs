@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ExprUseVisitor!();
         FnCtxt!();
         Error!();
-        ExprUseVisitor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TypeInformationCtxt {
     };
 }
 
-TypeInformationCtxt!()
+TypeInformationCtxt!();

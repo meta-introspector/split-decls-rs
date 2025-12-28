@@ -4,4 +4,4 @@ macro_rules! NoA1 {
     };
 }
 
-NoA1!()
+NoA1!();

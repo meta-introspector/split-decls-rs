@@ -4,4 +4,4 @@ macro_rules! test_codegen_options_tracking_hash {
     };
 }
 
-test_codegen_options_tracking_hash!()
+test_codegen_options_tracking_hash!();

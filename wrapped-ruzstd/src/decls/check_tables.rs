@@ -11,4 +11,4 @@ macro_rules! check_tables {
     };
 }
 
-check_tables!()
+check_tables!();

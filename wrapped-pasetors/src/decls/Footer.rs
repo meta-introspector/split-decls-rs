@@ -4,4 +4,4 @@ macro_rules! Footer {
     };
 }
 
-Footer!()
+Footer!();

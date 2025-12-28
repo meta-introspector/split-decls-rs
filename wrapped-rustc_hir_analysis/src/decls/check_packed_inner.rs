@@ -4,4 +4,4 @@ macro_rules! check_packed_inner {
     };
 }
 
-check_packed_inner!()
+check_packed_inner!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Expr!();
         ExprVal!();
-        WS!();
         Node!();
+        WS!();
         FunctionCall!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! parse_variable_tag_global_function_with_filter {
     };
 }
 
-parse_variable_tag_global_function_with_filter!()
+parse_variable_tag_global_function_with_filter!();

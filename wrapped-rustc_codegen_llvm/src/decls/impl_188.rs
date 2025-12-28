@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TypeKind!();
-        CodegenCx!();
-        Linkage!();
         UnnamedAddr!();
+        TypeKind!();
+        Linkage!();
+        CodegenCx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

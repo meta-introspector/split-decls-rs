@@ -11,4 +11,4 @@ macro_rules! const_generics {
     };
 }
 
-const_generics!()
+const_generics!();

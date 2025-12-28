@@ -11,4 +11,4 @@ macro_rules! max_dont_panic {
     };
 }
 
-max_dont_panic!()
+max_dont_panic!();

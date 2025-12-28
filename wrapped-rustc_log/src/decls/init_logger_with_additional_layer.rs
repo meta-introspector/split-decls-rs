@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BuildSubscriberRet!();
-        LoggerConfig!();
-        BacktraceFormatter!();
         Error!();
+        LoggerConfig!();
+        BuildSubscriberRet!();
+        BacktraceFormatter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! init_logger_with_additional_layer {
     };
 }
 
-init_logger_with_additional_layer!()
+init_logger_with_additional_layer!();

@@ -13,4 +13,4 @@ macro_rules! calculate_debuginfo_offset {
     };
 }
 
-calculate_debuginfo_offset!()
+calculate_debuginfo_offset!();

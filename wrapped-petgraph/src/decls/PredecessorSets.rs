@@ -4,4 +4,4 @@ macro_rules! PredecessorSets {
     };
 }
 
-PredecessorSets!()
+PredecessorSets!();

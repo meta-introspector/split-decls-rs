@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PeekMustBePlaceOrRefPlace!();
         RustcPeekAt!();
-        ResultsCursor!();
+        PeekMustBePlaceOrRefPlace!();
         PeekCall!();
+        ResultsCursor!();
         PeekCallKind!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! sanity_check_via_rustc_peek {
     };
 }
 
-sanity_check_via_rustc_peek!()
+sanity_check_via_rustc_peek!();

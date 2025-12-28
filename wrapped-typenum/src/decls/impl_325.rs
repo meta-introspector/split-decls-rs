@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IsGreater!();
         Cmp!();
-        Compare!();
+        IsGreater!();
         Internal!();
+        Compare!();
         IsGreaterPrivate!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_325 {
     };
 }
 
-impl_325!()
+impl_325!();

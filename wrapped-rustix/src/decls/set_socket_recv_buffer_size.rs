@@ -11,4 +11,4 @@ macro_rules! set_socket_recv_buffer_size {
     };
 }
 
-set_socket_recv_buffer_size!()
+set_socket_recv_buffer_size!();

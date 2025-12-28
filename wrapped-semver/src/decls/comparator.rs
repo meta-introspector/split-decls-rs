@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Position!();
-        Comparator!();
         ErrorKind!();
-        Op!();
         Prerelease!();
+        Comparator!();
+        Op!();
+        Position!();
         Error!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! comparator {
     };
 }
 
-comparator!()
+comparator!();

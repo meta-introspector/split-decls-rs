@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Table!();
-        Value!();
         IntoIter!();
+        Value!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MapDeserializer {
     };
 }
 
-MapDeserializer!()
+MapDeserializer!();

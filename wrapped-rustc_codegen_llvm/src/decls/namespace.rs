@@ -4,4 +4,4 @@ macro_rules! namespace {
     };
 }
 
-namespace!()
+namespace!();

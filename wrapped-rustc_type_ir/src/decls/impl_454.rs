@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         TypeAndMut!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_454 {
     };
 }
 
-impl_454!()
+impl_454!();

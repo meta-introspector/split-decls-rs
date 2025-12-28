@@ -4,4 +4,4 @@ macro_rules! canon_abi {
     };
 }
 
-canon_abi!()
+canon_abi!();

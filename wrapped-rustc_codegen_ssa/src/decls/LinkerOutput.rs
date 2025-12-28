@@ -4,4 +4,4 @@ macro_rules! LinkerOutput {
     };
 }
 
-LinkerOutput!()
+LinkerOutput!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ClockId!();
-        Result!();
         Timespec!();
+        Result!();
+        ClockId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! clock_settime {
     };
 }
 
-clock_settime!()
+clock_settime!();

@@ -4,4 +4,4 @@ macro_rules! hyper_io_read_callback {
     };
 }
 
-hyper_io_read_callback!()
+hyper_io_read_callback!();

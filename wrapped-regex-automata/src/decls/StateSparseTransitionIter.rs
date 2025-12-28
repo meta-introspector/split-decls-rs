@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        StateID!();
         StateTransitionIter!();
+        StateID!();
         Unit!();
+        DFA!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! StateSparseTransitionIter {
     };
 }
 
-StateSparseTransitionIter!()
+StateSparseTransitionIter!();

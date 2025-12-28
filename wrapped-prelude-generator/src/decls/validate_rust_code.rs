@@ -4,4 +4,4 @@ macro_rules! validate_rust_code {
     };
 }
 
-validate_rust_code!()
+validate_rust_code!();

@@ -4,4 +4,4 @@ macro_rules! EM_FT32 {
     };
 }
 
-EM_FT32!()
+EM_FT32!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         LazyAttrTokenStream!();
-        Walkable!();
         BlockCheckMode!();
         Stmt!();
+        Walkable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Block {
     };
 }
 
-Block!()
+Block!();

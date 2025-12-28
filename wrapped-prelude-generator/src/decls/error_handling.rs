@@ -4,4 +4,4 @@ macro_rules! error_handling {
     };
 }
 
-error_handling!()
+error_handling!();

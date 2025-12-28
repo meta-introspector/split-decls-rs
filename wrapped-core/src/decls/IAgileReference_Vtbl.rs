@@ -13,4 +13,4 @@ macro_rules! IAgileReference_Vtbl {
     };
 }
 
-IAgileReference_Vtbl!()
+IAgileReference_Vtbl!();

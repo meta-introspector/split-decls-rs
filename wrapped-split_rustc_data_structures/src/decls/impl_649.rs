@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         UnordCollection!();
-        ExtendUnord!();
         UnordItems!();
+        ExtendUnord!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_649 {
     };
 }
 
-impl_649!()
+impl_649!();

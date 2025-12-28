@@ -11,4 +11,4 @@ macro_rules! parse_urn {
     };
 }
 
-parse_urn!()
+parse_urn!();

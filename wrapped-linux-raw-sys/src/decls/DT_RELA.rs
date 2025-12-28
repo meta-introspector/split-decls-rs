@@ -4,4 +4,4 @@ macro_rules! DT_RELA {
     };
 }
 
-DT_RELA!()
+DT_RELA!();

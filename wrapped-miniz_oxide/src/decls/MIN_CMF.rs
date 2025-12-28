@@ -4,4 +4,4 @@ macro_rules! MIN_CMF {
     };
 }
 
-MIN_CMF!()
+MIN_CMF!();

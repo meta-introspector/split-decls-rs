@@ -4,4 +4,4 @@ macro_rules! PR_FP_MODE_FR {
     };
 }
 
-PR_FP_MODE_FR!()
+PR_FP_MODE_FR!();

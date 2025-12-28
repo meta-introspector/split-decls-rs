@@ -4,4 +4,4 @@ macro_rules! ConcatMissingLiteral {
     };
 }
 
-ConcatMissingLiteral!()
+ConcatMissingLiteral!();

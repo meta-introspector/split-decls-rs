@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        ByteSymbol!();
         InternerInner!();
         Symbol!();
+        ByteSymbol!();
+        Interner!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

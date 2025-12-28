@@ -4,4 +4,4 @@ macro_rules! Adler32Imp {
     };
 }
 
-Adler32Imp!()
+Adler32Imp!();

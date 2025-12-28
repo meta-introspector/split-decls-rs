@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Config!();
         Shard!();
         Shared!();
-        Iter!();
         Tid!();
-        Config!();
+        Iter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_152 {
     };
 }
 
-impl_152!()
+impl_152!();

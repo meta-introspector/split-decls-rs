@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericParam!();
         PredicateOrigin!();
+        GenericParam!();
         GenericBounds!();
         Ty!();
     };
@@ -14,4 +14,4 @@ macro_rules! WhereBoundPredicate {
     };
 }
 
-WhereBoundPredicate!()
+WhereBoundPredicate!();

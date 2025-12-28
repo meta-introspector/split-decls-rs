@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EdgeType!();
-        EdgeProperty!();
-        Undirected!();
         Directed!();
+        Undirected!();
+        EdgeProperty!();
+        EdgeType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_633 {
     };
 }
 
-impl_633!()
+impl_633!();

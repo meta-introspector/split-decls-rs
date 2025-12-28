@@ -4,4 +4,4 @@ macro_rules! hi {
     };
 }
 
-hi!()
+hi!();

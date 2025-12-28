@@ -11,4 +11,4 @@ macro_rules! required_table {
     };
 }
 
-required_table!()
+required_table!();

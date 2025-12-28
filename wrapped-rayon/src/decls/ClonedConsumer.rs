@@ -4,4 +4,4 @@ macro_rules! ClonedConsumer {
     };
 }
 
-ClonedConsumer!()
+ClonedConsumer!();

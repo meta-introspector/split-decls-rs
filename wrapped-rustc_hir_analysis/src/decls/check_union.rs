@@ -4,4 +4,4 @@ macro_rules! check_union {
     };
 }
 
-check_union!()
+check_union!();

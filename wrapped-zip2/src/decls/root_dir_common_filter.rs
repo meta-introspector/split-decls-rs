@@ -4,4 +4,4 @@ macro_rules! root_dir_common_filter {
     };
 }
 
-root_dir_common_filter!()
+root_dir_common_filter!();

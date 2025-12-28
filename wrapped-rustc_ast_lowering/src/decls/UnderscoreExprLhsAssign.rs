@@ -4,4 +4,4 @@ macro_rules! UnderscoreExprLhsAssign {
     };
 }
 
-UnderscoreExprLhsAssign!()
+UnderscoreExprLhsAssign!();

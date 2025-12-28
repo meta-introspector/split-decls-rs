@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_GLOB_DAT {
     };
 }
 
-R_NIOS2_GLOB_DAT!()
+R_NIOS2_GLOB_DAT!();

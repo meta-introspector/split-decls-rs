@@ -4,4 +4,4 @@ macro_rules! RHF_NO_MOVE {
     };
 }
 
-RHF_NO_MOVE!()
+RHF_NO_MOVE!();

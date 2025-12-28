@@ -4,4 +4,4 @@ macro_rules! PR_SET_PTRACER_ANY {
     };
 }
 
-PR_SET_PTRACER_ANY!()
+PR_SET_PTRACER_ANY!();

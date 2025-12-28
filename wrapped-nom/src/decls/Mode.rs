@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Emit!();
         Check!();
         Parser!();
+        Emit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Mode {
     };
 }
 
-Mode!()
+Mode!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OutlivesConstraintSet!();
         RegionGraph!();
-        EdgesFromStatic!();
+        EdgesFromGraph!();
         ConstraintGraph!();
         ConstraintGraphDirection!();
-        EdgesFromGraph!();
+        EdgesFromStatic!();
+        OutlivesConstraintSet!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

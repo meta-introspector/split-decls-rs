@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_PRIORITY {
     };
 }
 
-NGHTTP2_PRIORITY!()
+NGHTTP2_PRIORITY!();

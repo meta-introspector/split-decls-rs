@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IdentityHash!();
         Disambiguator!();
         DisambiguatorMap!();
+        IdentityHash!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_366 {
     };
 }
 
-impl_366!()
+impl_366!();

@@ -4,4 +4,4 @@ macro_rules! MAX_CLASS_NAME {
     };
 }
 
-MAX_CLASS_NAME!()
+MAX_CLASS_NAME!();

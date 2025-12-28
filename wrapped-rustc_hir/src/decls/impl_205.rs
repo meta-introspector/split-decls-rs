@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CoroutineDesugaring!();
-        CoroutineSource!();
+        Block!();
         Closure!();
         CoroutineKind!();
-        Block!();
+        CoroutineDesugaring!();
+        CoroutineSource!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_205 {
     };
 }
 
-impl_205!()
+impl_205!();

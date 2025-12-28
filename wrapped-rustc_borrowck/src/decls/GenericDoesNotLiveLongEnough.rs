@@ -4,4 +4,4 @@ macro_rules! GenericDoesNotLiveLongEnough {
     };
 }
 
-GenericDoesNotLiveLongEnough!()
+GenericDoesNotLiveLongEnough!();

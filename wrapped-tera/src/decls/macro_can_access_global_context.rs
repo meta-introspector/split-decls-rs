@@ -12,4 +12,4 @@ macro_rules! macro_can_access_global_context {
     };
 }
 
-macro_can_access_global_context!()
+macro_can_access_global_context!();

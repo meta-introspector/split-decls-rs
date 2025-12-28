@@ -11,4 +11,4 @@ macro_rules! find_attr {
     };
 }
 
-find_attr!()
+find_attr!();

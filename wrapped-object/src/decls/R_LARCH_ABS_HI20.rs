@@ -4,4 +4,4 @@ macro_rules! R_LARCH_ABS_HI20 {
     };
 }
 
-R_LARCH_ABS_HI20!()
+R_LARCH_ABS_HI20!();

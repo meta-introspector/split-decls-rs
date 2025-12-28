@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        BorrowckInferCtxt!();
         ClosureRegionRequirements!();
         RegionInferenceContext!();
-        BorrowckInferCtxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! dump_annotation {
     };
 }
 
-dump_annotation!()
+dump_annotation!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
+        DB!();
+        ThreadMode!();
+        DBCommon!();
         Checkpoint!();
         DBInner!();
-        DBCommon!();
-        ThreadMode!();
-        DB!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

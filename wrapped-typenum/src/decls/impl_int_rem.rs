@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        UInt!();
-        NonZero!();
+        Unsigned!();
         Z0!();
         PrivateRem!();
         Bit!();
-        Unsigned!();
+        NonZero!();
+        UInt!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_int_rem {
     };
 }
 
-impl_int_rem!()
+impl_int_rem!();

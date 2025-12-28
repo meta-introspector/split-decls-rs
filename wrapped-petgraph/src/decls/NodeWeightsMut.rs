@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Node!();
-        DefaultIx!();
         IndexType!();
+        DefaultIx!();
+        Node!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! NodeWeightsMut {
     };
 }
 
-NodeWeightsMut!()
+NodeWeightsMut!();

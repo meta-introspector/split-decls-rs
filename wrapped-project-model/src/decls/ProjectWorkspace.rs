@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CfgOverrides!();
         Sysroot!();
+        CfgOverrides!();
         ProjectWorkspaceKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ProjectWorkspace {
     };
 }
 
-ProjectWorkspace!()
+ProjectWorkspace!();

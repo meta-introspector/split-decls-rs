@@ -12,4 +12,4 @@ macro_rules! implement_core {
     };
 }
 
-implement_core!()
+implement_core!();

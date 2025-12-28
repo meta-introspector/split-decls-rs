@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        Const!();
         Clauses!();
-        TypeVisitor!();
-        Region!();
-        Binder!();
-        FoundFlags!();
-        Ty!();
-        HasTypeFlagsVisitor!();
         Predicate!();
+        Binder!();
+        Ty!();
+        Interner!();
+        TypeVisitor!();
+        Const!();
+        HasTypeFlagsVisitor!();
+        Region!();
         TypeVisitable!();
+        FoundFlags!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_504 {
     };
 }
 
-impl_504!()
+impl_504!();

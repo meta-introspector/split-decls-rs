@@ -4,4 +4,4 @@ macro_rules! LABELS_FN {
     };
 }
 
-LABELS_FN!()
+LABELS_FN!();

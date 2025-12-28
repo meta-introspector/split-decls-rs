@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Directed!();
         Undirected!();
+        Directed!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EdgeProperty {
     };
 }
 
-EdgeProperty!()
+EdgeProperty!();

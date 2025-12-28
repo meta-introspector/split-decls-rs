@@ -4,4 +4,4 @@ macro_rules! upgrade {
     };
 }
 
-upgrade!()
+upgrade!();

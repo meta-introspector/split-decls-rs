@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DefaultSpawn!();
-        DeadlockHandler!();
         StartHandler!();
-        PanicHandler!();
+        DefaultSpawn!();
+        ExitHandler!();
         AcquireThreadHandler!();
         ReleaseThreadHandler!();
+        PanicHandler!();
+        DeadlockHandler!();
         ThreadPool!();
-        ExitHandler!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! ThreadPoolBuilder {
     };
 }
 
-ThreadPoolBuilder!()
+ThreadPoolBuilder!();

@@ -4,4 +4,4 @@ macro_rules! incremental_interface {
     };
 }
 
-incremental_interface!()
+incremental_interface!();

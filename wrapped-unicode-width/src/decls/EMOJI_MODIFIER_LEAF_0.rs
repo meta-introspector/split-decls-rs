@@ -4,4 +4,4 @@ macro_rules! EMOJI_MODIFIER_LEAF_0 {
     };
 }
 
-EMOJI_MODIFIER_LEAF_0!()
+EMOJI_MODIFIER_LEAF_0!();

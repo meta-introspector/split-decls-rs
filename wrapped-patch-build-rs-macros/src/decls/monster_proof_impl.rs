@@ -44,4 +44,4 @@ theorem rustc_moonshine_property :
     };
 }
 
-monster_proof_impl!()
+monster_proof_impl!();

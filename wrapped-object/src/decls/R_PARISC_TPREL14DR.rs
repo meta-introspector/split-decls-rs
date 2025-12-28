@@ -4,4 +4,4 @@ macro_rules! R_PARISC_TPREL14DR {
     };
 }
 
-R_PARISC_TPREL14DR!()
+R_PARISC_TPREL14DR!();

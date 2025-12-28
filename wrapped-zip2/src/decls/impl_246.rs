@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DateTime!();
         ZipCryptoKeys!();
         CompressionMethod!();
+        DateTime!();
         AesMode!();
         EncryptWith!();
         FileOptions!();
@@ -16,4 +16,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

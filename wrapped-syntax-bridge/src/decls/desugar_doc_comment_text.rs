@@ -11,4 +11,4 @@ macro_rules! desugar_doc_comment_text {
     };
 }
 
-desugar_doc_comment_text!()
+desugar_doc_comment_text!();

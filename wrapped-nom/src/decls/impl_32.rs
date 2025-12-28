@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        ContextError!();
-        OutputMode!();
         PResult!();
+        OutputMode!();
         Err!();
+        Parser!();
         Error!();
         Context!();
+        ContextError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

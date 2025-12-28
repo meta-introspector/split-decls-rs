@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Endianness!();
-        Endian!();
-        MachOFile32!();
-        MachOComdat!();
         MachHeader32!();
+        MachOFile32!();
+        Endian!();
+        MachOComdat!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MachOComdat32 {
     };
 }
 
-MachOComdat32!()
+MachOComdat32!();

@@ -11,4 +11,4 @@ macro_rules! validate_generic_param_order {
     };
 }
 
-validate_generic_param_order!()
+validate_generic_param_order!();

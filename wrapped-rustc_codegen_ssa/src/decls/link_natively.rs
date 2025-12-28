@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        Linker!();
-        LinkingFailed!();
-        RepairVSBuildTools!();
-        CheckInstalledVisualStudio!();
-        InsufficientVSCodeProduct!();
-        ArchiveBuilderBuilder!();
-        UnableToRunDsymutil!();
-        AixStripNotUsed!();
-        ProcessingDymutilFailed!();
-        MsvcMissingLinker!();
-        Command!();
         LinkerOutput!();
-        VisualStudioNotInstalled!();
-        LinkExeUnexpectedError!();
-        UnableToExeLinker!();
-        SelectCppBuildToolWorkload!();
+        ProcessingDymutilFailed!();
         LinkExeStatusStackBufferOverrun!();
+        AixStripNotUsed!();
+        VisualStudioNotInstalled!();
+        UnableToExeLinker!();
+        UnableToRunDsymutil!();
+        Linker!();
+        MsvcMissingLinker!();
+        RepairVSBuildTools!();
+        InsufficientVSCodeProduct!();
+        CheckInstalledVisualStudio!();
+        LinkExeUnexpectedError!();
+        LinkingFailed!();
+        ArchiveBuilderBuilder!();
         LinkerNotFound!();
+        SelectCppBuildToolWorkload!();
         CodegenResults!();
         MissingCppBuildToolComponent!();
+        Command!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! link_natively {
     };
 }
 
-link_natively!()
+link_natively!();

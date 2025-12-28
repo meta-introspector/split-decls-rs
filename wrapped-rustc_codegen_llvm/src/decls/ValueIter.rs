@@ -4,4 +4,4 @@ macro_rules! ValueIter {
     };
 }
 
-ValueIter!()
+ValueIter!();

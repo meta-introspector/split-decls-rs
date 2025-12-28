@@ -4,4 +4,4 @@ macro_rules! invalid_precision {
     };
 }
 
-invalid_precision!()
+invalid_precision!();

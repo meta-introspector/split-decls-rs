@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StateID!();
         DeserializeError!();
+        StateID!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_read_state_id {
     };
 }
 
-try_read_state_id!()
+try_read_state_id!();

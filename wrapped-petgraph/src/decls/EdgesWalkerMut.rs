@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        DefaultIx!();
+        IndexType!();
         EdgeIndex!();
         Direction!();
         Edge!();
-        IndexType!();
-        DefaultIx!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! EdgesWalkerMut {
     };
 }
 
-EdgesWalkerMut!()
+EdgesWalkerMut!();

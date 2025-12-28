@@ -4,4 +4,4 @@ macro_rules! PROC_SUPER_MAGIC {
     };
 }
 
-PROC_SUPER_MAGIC!()
+PROC_SUPER_MAGIC!();

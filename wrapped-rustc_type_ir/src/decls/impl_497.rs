@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Interner!();
-        IndexSet!();
         TypeVisitor!();
         TypeVisitable!();
+        IndexSet!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_497 {
     };
 }
 
-impl_497!()
+impl_497!();

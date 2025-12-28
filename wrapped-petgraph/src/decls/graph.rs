@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
+        NodeIndices!();
+        NodeReferences!();
         UnGraph!();
         WalkNeighbors!();
-        Graph!();
-        GraphError!();
-        EdgeReference!();
-        NodeIndex!();
-        Node!();
-        GraphIndex!();
-        EdgeWeightsMut!();
-        DefaultIx!();
-        Neighbors!();
-        NodeReferences!();
-        IndexType!();
-        EdgeIndex!();
-        EdgesConnecting!();
-        EdgeReferences!();
-        NodeIndices!();
-        NodeWeightsMut!();
-        EdgeIndices!();
         Edges!();
-        DiGraph!();
-        Externals!();
+        NodeIndex!();
+        EdgeIndex!();
         Edge!();
+        NodeWeightsMut!();
+        IndexType!();
+        Externals!();
+        EdgeIndices!();
+        GraphError!();
+        EdgeReferences!();
+        Node!();
+        Neighbors!();
+        EdgeWeightsMut!();
+        DiGraph!();
+        DefaultIx!();
         Frozen!();
+        EdgesConnecting!();
+        Graph!();
+        EdgeReference!();
+        GraphIndex!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! graph {
     };
 }
 
-graph!()
+graph!();

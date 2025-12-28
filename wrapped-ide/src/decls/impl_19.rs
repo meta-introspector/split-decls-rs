@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TryToNav!();
         NavigationTarget!();
+        TryToNav!();
         UpmappingResult!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

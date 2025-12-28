@@ -11,4 +11,4 @@ macro_rules! duplicates_by {
     };
 }
 
-duplicates_by!()
+duplicates_by!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IoctlOutput!();
         Ioctl!();
-        Updater!();
-        Result!();
         Opcode!();
+        Result!();
+        IoctlOutput!();
+        Updater!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_464 {
     };
 }
 
-impl_464!()
+impl_464!();

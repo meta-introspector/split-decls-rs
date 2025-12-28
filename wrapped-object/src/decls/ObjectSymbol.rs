@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Note!();
+        SymbolScope!();
         Symbol!();
         SymbolFlags!();
         Object!();
-        SymbolSection!();
-        SymbolIndex!();
-        Result!();
-        SectionIndex!();
         SymbolKind!();
-        Note!();
-        SymbolScope!();
+        SymbolSection!();
+        SectionIndex!();
+        Result!();
+        SymbolIndex!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! ObjectSymbol {
     };
 }
 
-ObjectSymbol!()
+ObjectSymbol!();

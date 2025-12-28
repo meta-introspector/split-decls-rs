@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_JMP_SLOT {
     };
 }
 
-R_TILEPRO_JMP_SLOT!()
+R_TILEPRO_JMP_SLOT!();

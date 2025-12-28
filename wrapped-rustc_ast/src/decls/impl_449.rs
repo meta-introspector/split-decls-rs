@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TokenStream!();
         HashStableContext!();
+        TokenStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_449 {
     };
 }
 
-impl_449!()
+impl_449!();

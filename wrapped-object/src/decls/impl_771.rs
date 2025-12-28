@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ObjectSymbol!();
-        Result!();
-        SymbolSection!();
-        SymbolFlags!();
-        SymbolScope!();
         SymbolKind!();
         WasmSymbol!();
+        Result!();
+        SymbolScope!();
         SectionIndex!();
+        SymbolSection!();
+        SymbolFlags!();
+        ObjectSymbol!();
         SymbolIndex!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_771 {
     };
 }
 
-impl_771!()
+impl_771!();

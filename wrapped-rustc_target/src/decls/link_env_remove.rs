@@ -11,4 +11,4 @@ macro_rules! link_env_remove {
     };
 }
 
-link_env_remove!()
+link_env_remove!();

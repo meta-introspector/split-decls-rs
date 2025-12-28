@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Table!();
-        TraceScope!();
-        TableHeader!();
-        Array!();
         Error!();
+        Array!();
+        TraceScope!();
+        Table!();
+        TableHeader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! on_table {
     };
 }
 
-on_table!()
+on_table!();

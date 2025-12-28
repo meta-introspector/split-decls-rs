@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Relocation!();
         I64!();
         Endian!();
-        Relocation!();
         U64!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Rela64 {
     };
 }
 
-Rela64!()
+Rela64!();

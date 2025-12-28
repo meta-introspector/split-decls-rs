@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Table!();
-        SerializeTable!();
-        SerializeDatetime!();
-        Style!();
         SerializeMap!();
+        SerializeDatetime!();
         Error!();
+        Style!();
+        SerializeTable!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_339 {
     };
 }
 
-impl_339!()
+impl_339!();

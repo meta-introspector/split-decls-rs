@@ -4,4 +4,4 @@ macro_rules! either {
     };
 }
 
-either!()
+either!();

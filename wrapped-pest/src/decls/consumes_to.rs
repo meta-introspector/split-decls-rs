@@ -12,4 +12,4 @@ macro_rules! consumes_to {
     };
 }
 
-consumes_to!()
+consumes_to!();

@@ -4,4 +4,4 @@ macro_rules! IsNormalized {
     };
 }
 
-IsNormalized!()
+IsNormalized!();

@@ -4,4 +4,4 @@ macro_rules! ted {
     };
 }
 
-ted!()
+ted!();

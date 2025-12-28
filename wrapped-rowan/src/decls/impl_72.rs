@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Preorder!();
         Language!();
+        Preorder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_72 {
     };
 }
 
-impl_72!()
+impl_72!();

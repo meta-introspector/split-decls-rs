@@ -4,4 +4,4 @@ macro_rules! ExternalCaller {
     };
 }
 
-ExternalCaller!()
+ExternalCaller!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Reference!();
-        SliceRead!();
-        Result!();
-        ErrorCode!();
         IoRead!();
+        Result!();
+        SliceRead!();
+        Reference!();
         Position!();
+        ErrorCode!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_579 {
     };
 }
 
-impl_579!()
+impl_579!();

@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        IntrinsicCallBuilderMethods!();
+        SynchronizationScope!();
         AsmBuilderMethods!();
-        CoverageInfoBuilderMethods!();
-        IntPredicate!();
-        OverflowOp!();
-        AbiBuilderMethods!();
-        PlaceValue!();
         OperandValue!();
-        DebugInfoBuilderMethods!();
-        RealPredicate!();
         OperandRef!();
-        AtomicRmwBinOp!();
-        ArgAbiBuilderMethods!();
         TypeKind!();
         PlaceRef!();
+        ArgAbiBuilderMethods!();
+        PlaceValue!();
         StaticBuilderMethods!();
-        SynchronizationScope!();
+        CoverageInfoBuilderMethods!();
+        RealPredicate!();
+        IntPredicate!();
+        DebugInfoBuilderMethods!();
+        AbiBuilderMethods!();
+        AtomicRmwBinOp!();
+        OverflowOp!();
+        IntrinsicCallBuilderMethods!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! BuilderMethods {
     };
 }
 
-BuilderMethods!()
+BuilderMethods!();

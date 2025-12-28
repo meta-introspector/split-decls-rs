@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        IResult!();
         Parser!();
+        ParseError!();
         Input!();
         Error!();
-        IResult!();
         Tuple!();
-        ParseError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_295 {
     };
 }
 
-impl_295!()
+impl_295!();

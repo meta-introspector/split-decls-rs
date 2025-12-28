@@ -5,4 +5,4 @@ macro_rules! DEFAULT_BUG_REPORT_URL {
     };
 }
 
-DEFAULT_BUG_REPORT_URL!()
+DEFAULT_BUG_REPORT_URL!();

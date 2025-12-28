@@ -4,4 +4,4 @@ macro_rules! test_f64p1_with_underscores {
     };
 }
 
-test_f64p1_with_underscores!()
+test_f64p1_with_underscores!();

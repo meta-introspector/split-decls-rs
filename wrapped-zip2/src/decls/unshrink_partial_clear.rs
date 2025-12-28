@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Codetab!();
         CodeQueue!();
+        Codetab!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! unshrink_partial_clear {
     };
 }
 
-unshrink_partial_clear!()
+unshrink_partial_clear!();

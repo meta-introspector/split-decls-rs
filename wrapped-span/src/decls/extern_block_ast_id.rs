@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ErasedAstIdNextIndexMap!();
         ErasedFileAstId!();
         ErasedFileAstIdKind!();
+        ErasedAstIdNextIndexMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! extern_block_ast_id {
     };
 }
 
-extern_block_ast_id!()
+extern_block_ast_id!();

@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        OutputM!();
-        OutputMode!();
-        Needed!();
-        PResult!();
-        Check!();
+        Err!();
+        AsChar!();
         ParseError!();
+        OutputMode!();
+        Escaped!();
+        PResult!();
         Offset!();
         Error!();
+        OutputM!();
+        Check!();
         ErrorKind!();
-        Escaped!();
-        Err!();
-        Input!();
-        AsChar!();
         Parser!();
+        Needed!();
+        Input!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_484 {
     };
 }
 
-impl_484!()
+impl_484!();

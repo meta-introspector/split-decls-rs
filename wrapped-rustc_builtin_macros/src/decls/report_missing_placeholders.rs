@@ -13,4 +13,4 @@ macro_rules! report_missing_placeholders {
     };
 }
 
-report_missing_placeholders!()
+report_missing_placeholders!();

@@ -4,4 +4,4 @@ macro_rules! CHARS {
     };
 }
 
-CHARS!()
+CHARS!();

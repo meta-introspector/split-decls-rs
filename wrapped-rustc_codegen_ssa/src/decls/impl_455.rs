@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        CallKind!();
-        FunctionCx!();
-        ReturnDest!();
-        TerminatorCodegenHelper!();
         MergingSucc!();
+        CompilerBuiltinsCannotCall!();
         BuilderMethods!();
         InlineAsmOperandRef!();
-        CompilerBuiltinsCannotCall!();
+        ReturnDest!();
+        CallKind!();
+        TerminatorCodegenHelper!();
+        FunctionCx!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_455 {
     };
 }
 
-impl_455!()
+impl_455!();

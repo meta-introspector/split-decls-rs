@@ -4,4 +4,4 @@ macro_rules! delim_to_str {
     };
 }
 
-delim_to_str!()
+delim_to_str!();

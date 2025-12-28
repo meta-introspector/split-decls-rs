@@ -4,4 +4,4 @@ macro_rules! impl_serde_traits {
     };
 }
 
-impl_serde_traits!()
+impl_serde_traits!();

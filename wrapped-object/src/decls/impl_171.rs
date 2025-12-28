@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Relocation!();
         SectionRelocationIteratorInternal!();
         SectionRelocationIterator!();
-        Item!();
         ReadRef!();
+        Item!();
+        Relocation!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_171 {
     };
 }
 
-impl_171!()
+impl_171!();

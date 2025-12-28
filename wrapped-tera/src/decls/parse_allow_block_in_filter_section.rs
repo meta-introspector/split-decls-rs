@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FilterSection!();
-        WS!();
-        FunctionCall!();
         Block!();
+        WS!();
+        FilterSection!();
         Node!();
+        FunctionCall!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_allow_block_in_filter_section {
     };
 }
 
-parse_allow_block_in_filter_section!()
+parse_allow_block_in_filter_section!();

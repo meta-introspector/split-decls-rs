@@ -4,4 +4,4 @@ macro_rules! BASE_YEAR {
     };
 }
 
-BASE_YEAR!()
+BASE_YEAR!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ArchiveBuilderBuilder!();
-        RlibArchiveBuildFailure!();
         CodegenResults!();
+        ArchiveBuilderBuilder!();
         Linker!();
+        RlibArchiveBuildFailure!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! add_static_crate {
     };
 }
 
-add_static_crate!()
+add_static_crate!();

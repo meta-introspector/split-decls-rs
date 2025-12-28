@@ -4,4 +4,4 @@ macro_rules! check_builtin_meta_item {
     };
 }
 
-check_builtin_meta_item!()
+check_builtin_meta_item!();

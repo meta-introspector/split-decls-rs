@@ -4,4 +4,4 @@ macro_rules! STO_RISCV_VARIANT_CC {
     };
 }
 
-STO_RISCV_VARIANT_CC!()
+STO_RISCV_VARIANT_CC!();

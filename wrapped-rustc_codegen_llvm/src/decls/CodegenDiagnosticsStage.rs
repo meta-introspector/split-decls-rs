@@ -4,4 +4,4 @@ macro_rules! CodegenDiagnosticsStage {
     };
 }
 
-CodegenDiagnosticsStage!()
+CodegenDiagnosticsStage!();

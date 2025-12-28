@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NumberDeserializer!();
+        Result!();
+        Float!();
         Value!();
         Error!();
-        Float!();
-        Result!();
+        NumberDeserializer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! deserialize_any {
     };
 }
 
-deserialize_any!()
+deserialize_any!();

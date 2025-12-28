@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Uid!();
         Gid!();
         Pid!();
-        Uid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UCred {
     };
 }
 
-UCred!()
+UCred!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        QueryLatch!();
-        QueryJob!();
         QueryJobId!();
+        QueryJob!();
+        QueryLatch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

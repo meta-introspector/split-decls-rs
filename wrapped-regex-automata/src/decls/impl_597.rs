@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ByteSet!();
         ByteClasses!();
         ByteClassSet!();
+        ByteSet!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_597 {
     };
 }
 
-impl_597!()
+impl_597!();

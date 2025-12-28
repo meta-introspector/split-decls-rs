@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_GLOB_DAT {
     };
 }
 
-R_CKCORE_GLOB_DAT!()
+R_CKCORE_GLOB_DAT!();

@@ -8,4 +8,4 @@ macro_rules! test_inner_doc_comment_of_items {
     };
 }
 
-test_inner_doc_comment_of_items!()
+test_inner_doc_comment_of_items!();

@@ -11,4 +11,4 @@ macro_rules! should_not_have_compiled {
     };
 }
 
-should_not_have_compiled!()
+should_not_have_compiled!();

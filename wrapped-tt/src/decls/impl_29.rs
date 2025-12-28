@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        TtIter!();
-        TokenTreesView!();
         Delimiter!();
-        TopSubtree!();
-        Leaf!();
-        TokenTree!();
-        DelimSpan!();
-        Subtree!();
-        SubtreeView!();
+        TokenTreesView!();
         TopSubtreeBuilder!();
+        DelimSpan!();
+        TopSubtree!();
+        Subtree!();
+        TokenTree!();
+        Leaf!();
+        SubtreeView!();
+        TtIter!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

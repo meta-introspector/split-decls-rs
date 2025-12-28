@@ -4,4 +4,4 @@ macro_rules! ErrorVariant {
     };
 }
 
-ErrorVariant!()
+ErrorVariant!();

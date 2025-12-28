@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Point!();
         TypedArena!();
+        Point!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! bench_typed_arena_clear_100 {
     };
 }
 
-bench_typed_arena_clear_100!()
+bench_typed_arena_clear_100!();

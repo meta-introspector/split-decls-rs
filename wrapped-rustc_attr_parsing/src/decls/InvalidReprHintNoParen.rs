@@ -4,4 +4,4 @@ macro_rules! InvalidReprHintNoParen {
     };
 }
 
-InvalidReprHintNoParen!()
+InvalidReprHintNoParen!();

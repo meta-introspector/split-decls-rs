@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Mutex!();
         AtomicBool!();
         Scheduler!();
-        Mutex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! yield_now {
     };
 }
 
-yield_now!()
+yield_now!();

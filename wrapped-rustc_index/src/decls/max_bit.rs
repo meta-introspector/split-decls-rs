@@ -11,4 +11,4 @@ macro_rules! max_bit {
     };
 }
 
-max_bit!()
+max_bit!();

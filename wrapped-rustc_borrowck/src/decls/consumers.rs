@@ -4,4 +4,4 @@ macro_rules! consumers {
     };
 }
 
-consumers!()
+consumers!();

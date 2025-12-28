@@ -4,4 +4,4 @@ macro_rules! R_MIPS_TLS_DTPREL_HI16 {
     };
 }
 
-R_MIPS_TLS_DTPREL_HI16!()
+R_MIPS_TLS_DTPREL_HI16!();

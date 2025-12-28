@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ParamConst!();
         TyConst!();
         GenericArgs!();
-        ParamConst!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

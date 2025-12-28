@@ -4,4 +4,4 @@ macro_rules! DF_1_NODEFLIB {
     };
 }
 
-DF_1_NODEFLIB!()
+DF_1_NODEFLIB!();

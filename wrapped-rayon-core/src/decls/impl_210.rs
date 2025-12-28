@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         AtomicCounters!();
-        JobsEventCounter!();
         Counters!();
+        JobsEventCounter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_210 {
     };
 }
 
-impl_210!()
+impl_210!();

@@ -4,4 +4,4 @@ macro_rules! TomlError {
     };
 }
 
-TomlError!()
+TomlError!();

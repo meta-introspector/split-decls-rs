@@ -11,4 +11,4 @@ macro_rules! ONCE_A_SECOND {
     };
 }
 
-ONCE_A_SECOND!()
+ONCE_A_SECOND!();

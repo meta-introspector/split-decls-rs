@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExtendedFloat!();
         BellerophonPowers!();
+        ExtendedFloat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

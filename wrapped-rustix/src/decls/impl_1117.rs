@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WaitStatus!();
         Result!();
+        WaitStatus!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1117 {
     };
 }
 
-impl_1117!()
+impl_1117!();

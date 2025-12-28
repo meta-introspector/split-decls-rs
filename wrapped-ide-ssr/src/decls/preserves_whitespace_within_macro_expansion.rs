@@ -14,4 +14,4 @@ macro_rules! preserves_whitespace_within_macro_expansion {
     };
 }
 
-preserves_whitespace_within_macro_expansion!()
+preserves_whitespace_within_macro_expansion!();

@@ -11,4 +11,4 @@ macro_rules! str_windows_not_0 {
     };
 }
 
-str_windows_not_0!()
+str_windows_not_0!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Callsite!();
-        Field!();
-        FieldSet!();
         Identifier!();
+        Field!();
+        Callsite!();
+        FieldSet!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

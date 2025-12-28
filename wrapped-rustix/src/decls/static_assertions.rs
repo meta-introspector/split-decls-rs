@@ -4,4 +4,4 @@ macro_rules! static_assertions {
     };
 }
 
-static_assertions!()
+static_assertions!();

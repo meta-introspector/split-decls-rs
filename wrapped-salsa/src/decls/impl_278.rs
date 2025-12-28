@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Durability!();
-        Revision!();
         Runtime!();
+        Revision!();
+        Durability!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_278 {
     };
 }
 
-impl_278!()
+impl_278!();

@@ -11,4 +11,4 @@ macro_rules! Utf8SuffixMap {
     };
 }
 
-Utf8SuffixMap!()
+Utf8SuffixMap!();

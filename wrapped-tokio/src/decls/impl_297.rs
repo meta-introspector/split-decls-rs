@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LinkedList!();
         Link!();
+        LinkedList!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_297 {
     };
 }
 
-impl_297!()
+impl_297!();

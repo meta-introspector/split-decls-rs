@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         LookSet!();
         Formatter!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_259 {
     };
 }
 
-impl_259!()
+impl_259!();

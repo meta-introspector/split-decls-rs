@@ -4,4 +4,4 @@ macro_rules! N_OPT {
     };
 }
 
-N_OPT!()
+N_OPT!();

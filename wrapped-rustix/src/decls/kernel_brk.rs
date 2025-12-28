@@ -11,4 +11,4 @@ macro_rules! kernel_brk {
     };
 }
 
-kernel_brk!()
+kernel_brk!();

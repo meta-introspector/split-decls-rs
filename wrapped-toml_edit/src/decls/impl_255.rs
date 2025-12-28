@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TomlError!();
-        Value!();
         TomlSink!();
+        Value!();
+        TomlError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

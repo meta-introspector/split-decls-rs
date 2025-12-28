@@ -4,4 +4,4 @@ macro_rules! EM_CSKY {
     };
 }
 
-EM_CSKY!()
+EM_CSKY!();

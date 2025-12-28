@@ -4,4 +4,4 @@ macro_rules! try_u8 {
     };
 }
 
-try_u8!()
+try_u8!();

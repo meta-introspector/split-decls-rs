@@ -4,4 +4,4 @@ macro_rules! Matrix4x4 {
     };
 }
 
-Matrix4x4!()
+Matrix4x4!();

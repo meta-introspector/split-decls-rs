@@ -4,4 +4,4 @@ macro_rules! on_delimited_node_typed {
     };
 }
 
-on_delimited_node_typed!()
+on_delimited_node_typed!();

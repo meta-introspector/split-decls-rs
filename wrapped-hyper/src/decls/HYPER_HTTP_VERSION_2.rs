@@ -4,4 +4,4 @@ macro_rules! HYPER_HTTP_VERSION_2 {
     };
 }
 
-HYPER_HTTP_VERSION_2!()
+HYPER_HTTP_VERSION_2!();

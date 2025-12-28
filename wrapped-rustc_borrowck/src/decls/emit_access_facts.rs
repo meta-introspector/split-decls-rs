@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         PoloniusLocationTable!();
-        AccessFactsExtractor!();
         PoloniusFacts!();
         UniversalRegions!();
+        AccessFactsExtractor!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! emit_access_facts {
     };
 }
 
-emit_access_facts!()
+emit_access_facts!();

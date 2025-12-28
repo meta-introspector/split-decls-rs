@@ -4,4 +4,4 @@ macro_rules! EXPANDED_RS_SUFFIX {
     };
 }
 
-EXPANDED_RS_SUFFIX!()
+EXPANDED_RS_SUFFIX!();

@@ -12,4 +12,4 @@ macro_rules! format_type {
     };
 }
 
-format_type!()
+format_type!();

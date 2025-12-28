@@ -4,4 +4,4 @@ macro_rules! local_serial_core {
     };
 }
 
-local_serial_core!()
+local_serial_core!();

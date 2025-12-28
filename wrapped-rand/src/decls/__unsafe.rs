@@ -4,4 +4,4 @@ macro_rules! __unsafe {
     };
 }
 
-__unsafe!()
+__unsafe!();

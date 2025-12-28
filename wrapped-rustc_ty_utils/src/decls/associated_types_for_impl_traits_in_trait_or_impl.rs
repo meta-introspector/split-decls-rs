@@ -11,4 +11,4 @@ macro_rules! associated_types_for_impl_traits_in_trait_or_impl {
     };
 }
 
-associated_types_for_impl_traits_in_trait_or_impl!()
+associated_types_for_impl_traits_in_trait_or_impl!();

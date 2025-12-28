@@ -12,4 +12,4 @@ macro_rules! cross_crate_inlinable {
     };
 }
 
-cross_crate_inlinable!()
+cross_crate_inlinable!();

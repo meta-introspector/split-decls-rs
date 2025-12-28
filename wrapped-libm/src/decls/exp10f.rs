@@ -4,4 +4,4 @@ macro_rules! exp10f {
     };
 }
 
-exp10f!()
+exp10f!();

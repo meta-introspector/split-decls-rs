@@ -11,4 +11,4 @@ macro_rules! ownedref_send_out_of_local {
     };
 }
 
-ownedref_send_out_of_local!()
+ownedref_send_out_of_local!();

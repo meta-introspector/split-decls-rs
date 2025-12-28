@@ -4,4 +4,4 @@ macro_rules! WORKSPACE {
     };
 }
 
-WORKSPACE!()
+WORKSPACE!();

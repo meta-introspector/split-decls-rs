@@ -4,4 +4,4 @@ macro_rules! LineIndexDatabase {
     };
 }
 
-LineIndexDatabase!()
+LineIndexDatabase!();

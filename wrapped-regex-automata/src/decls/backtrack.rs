@@ -4,4 +4,4 @@ macro_rules! backtrack {
     };
 }
 
-backtrack!()
+backtrack!();

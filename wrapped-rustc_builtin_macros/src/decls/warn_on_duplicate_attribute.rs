@@ -4,4 +4,4 @@ macro_rules! warn_on_duplicate_attribute {
     };
 }
 
-warn_on_duplicate_attribute!()
+warn_on_duplicate_attribute!();

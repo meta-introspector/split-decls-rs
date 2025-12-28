@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Edge!();
         Label!();
+        Edge!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! augment_path {
     };
 }
 
-augment_path!()
+augment_path!();

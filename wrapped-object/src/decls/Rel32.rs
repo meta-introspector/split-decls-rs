@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Relocation!();
-        U32!();
         Symbol!();
+        U32!();
+        Relocation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Rel32 {
     };
 }
 
-Rel32!()
+Rel32!();

@@ -4,4 +4,4 @@ macro_rules! large_powers64 {
     };
 }
 
-large_powers64!()
+large_powers64!();

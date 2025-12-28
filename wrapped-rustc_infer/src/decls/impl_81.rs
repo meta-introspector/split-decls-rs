@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Obligation!();
+        InferCtxt!();
         OpaqueHiddenTypeDiag!();
         InferOk!();
         PredicateObligations!();
-        InferCtxt!();
-        Obligation!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

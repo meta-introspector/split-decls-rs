@@ -11,4 +11,4 @@ macro_rules! file_contains {
     };
 }
 
-file_contains!()
+file_contains!();

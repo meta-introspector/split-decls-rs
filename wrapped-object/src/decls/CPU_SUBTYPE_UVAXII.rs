@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_UVAXII {
     };
 }
 
-CPU_SUBTYPE_UVAXII!()
+CPU_SUBTYPE_UVAXII!();

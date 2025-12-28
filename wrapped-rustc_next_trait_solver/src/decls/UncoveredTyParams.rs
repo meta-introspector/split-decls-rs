@@ -4,4 +4,4 @@ macro_rules! UncoveredTyParams {
     };
 }
 
-UncoveredTyParams!()
+UncoveredTyParams!();

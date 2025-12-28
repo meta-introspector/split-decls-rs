@@ -4,4 +4,4 @@ macro_rules! RawKeyDeserializer {
     };
 }
 
-RawKeyDeserializer!()
+RawKeyDeserializer!();

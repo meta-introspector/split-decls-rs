@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Script!();
         ScriptWithExt!();
+        Script!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SCRIPT_VAL_LENGTH {
     };
 }
 
-SCRIPT_VAL_LENGTH!()
+SCRIPT_VAL_LENGTH!();

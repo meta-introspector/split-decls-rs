@@ -4,4 +4,4 @@ macro_rules! LC_FUNCTION_STARTS {
     };
 }
 
-LC_FUNCTION_STARTS!()
+LC_FUNCTION_STARTS!();

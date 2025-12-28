@@ -4,4 +4,4 @@ macro_rules! alloc_prelude {
     };
 }
 
-alloc_prelude!()
+alloc_prelude!();

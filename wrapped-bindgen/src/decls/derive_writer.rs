@@ -4,4 +4,4 @@ macro_rules! derive_writer {
     };
 }
 
-derive_writer!()
+derive_writer!();

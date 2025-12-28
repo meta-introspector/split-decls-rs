@@ -11,4 +11,4 @@ macro_rules! scalar_add {
     };
 }
 
-scalar_add!()
+scalar_add!();

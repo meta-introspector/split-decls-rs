@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        OutlivesPredicate!();
+        Stable!();
         ClauseKind!();
         BridgeTys!();
-        Stable!();
+        OutlivesPredicate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_200 {
     };
 }
 
-impl_200!()
+impl_200!();

@@ -4,4 +4,4 @@ macro_rules! OTHER_MATH {
     };
 }
 
-OTHER_MATH!()
+OTHER_MATH!();

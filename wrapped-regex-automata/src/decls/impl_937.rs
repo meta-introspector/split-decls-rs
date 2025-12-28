@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MatchError!();
-        DebugByte!();
         MatchErrorKind!();
+        DebugByte!();
         Anchored!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_937 {
     };
 }
 
-impl_937!()
+impl_937!();

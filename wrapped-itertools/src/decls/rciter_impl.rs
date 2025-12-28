@@ -4,4 +4,4 @@ macro_rules! rciter_impl {
     };
 }
 
-rciter_impl!()
+rciter_impl!();

@@ -4,4 +4,4 @@ macro_rules! elision {
     };
 }
 
-elision!()
+elision!();

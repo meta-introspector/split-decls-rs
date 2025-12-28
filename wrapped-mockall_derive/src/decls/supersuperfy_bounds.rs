@@ -4,4 +4,4 @@ macro_rules! supersuperfy_bounds {
     };
 }
 
-supersuperfy_bounds!()
+supersuperfy_bounds!();

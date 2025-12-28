@@ -4,4 +4,4 @@ macro_rules! TakeWhileInclusive {
     };
 }
 
-TakeWhileInclusive!()
+TakeWhileInclusive!();

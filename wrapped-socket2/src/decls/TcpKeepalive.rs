@@ -4,4 +4,4 @@ macro_rules! TcpKeepalive {
     };
 }
 
-TcpKeepalive!()
+TcpKeepalive!();

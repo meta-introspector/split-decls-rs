@@ -4,4 +4,4 @@ macro_rules! ZETA_ALL {
     };
 }
 
-ZETA_ALL!()
+ZETA_ALL!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         StringBuilder!();
-        ErrorSink!();
-        Span!();
-        Raw!();
         Expected!();
+        Raw!();
         ScalarKind!();
         ParseError!();
+        Span!();
+        ErrorSink!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! decode_symbol {
     };
 }
 
-decode_symbol!()
+decode_symbol!();

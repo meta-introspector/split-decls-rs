@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Filesystem!();
         Stream!();
+        Filesystem!();
         Spawn!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Output {
     };
 }
 
-Output!()
+Output!();

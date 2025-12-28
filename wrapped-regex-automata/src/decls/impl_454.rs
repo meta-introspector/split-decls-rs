@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NFA!();
         StateID!();
-        Input!();
-        MatchError!();
-        Visited!();
         BoundedBacktracker!();
+        Input!();
+        Visited!();
+        NFA!();
+        MatchError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_454 {
     };
 }
 
-impl_454!()
+impl_454!();

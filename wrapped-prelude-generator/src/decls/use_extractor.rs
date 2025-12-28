@@ -4,4 +4,4 @@ macro_rules! use_extractor {
     };
 }
 
-use_extractor!()
+use_extractor!();

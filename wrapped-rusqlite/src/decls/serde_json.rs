@@ -4,4 +4,4 @@ macro_rules! serde_json {
     };
 }
 
-serde_json!()
+serde_json!();

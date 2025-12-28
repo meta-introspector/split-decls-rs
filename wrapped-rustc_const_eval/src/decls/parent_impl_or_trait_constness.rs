@@ -4,4 +4,4 @@ macro_rules! parent_impl_or_trait_constness {
     };
 }
 
-parent_impl_or_trait_constness!()
+parent_impl_or_trait_constness!();

@@ -4,4 +4,4 @@ macro_rules! composition_table_astral {
     };
 }
 
-composition_table_astral!()
+composition_table_astral!();

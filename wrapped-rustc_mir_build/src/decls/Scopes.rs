@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DropTree!();
-        IfThenScope!();
-        BreakableScope!();
         CoroutineDrop!();
+        IfThenScope!();
         ConstContinuableScope!();
+        BreakableScope!();
+        DropTree!();
         Scope!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! Scopes {
     };
 }
 
-Scopes!()
+Scopes!();

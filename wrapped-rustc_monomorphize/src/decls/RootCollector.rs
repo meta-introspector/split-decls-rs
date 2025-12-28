@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MonoItems!();
         MonoItemCollectionStrategy!();
+        MonoItems!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RootCollector {
     };
 }
 
-RootCollector!()
+RootCollector!();

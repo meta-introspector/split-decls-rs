@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Formatter!();
-        Map!();
         StateData!();
+        Map!();
         HasBottom!();
+        Formatter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! debug_with_context {
     };
 }
 
-debug_with_context!()
+debug_with_context!();

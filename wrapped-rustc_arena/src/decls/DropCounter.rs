@@ -4,4 +4,4 @@ macro_rules! DropCounter {
     };
 }
 
-DropCounter!()
+DropCounter!();

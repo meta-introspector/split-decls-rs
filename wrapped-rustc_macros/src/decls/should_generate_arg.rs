@@ -4,4 +4,4 @@ macro_rules! should_generate_arg {
     };
 }
 
-should_generate_arg!()
+should_generate_arg!();

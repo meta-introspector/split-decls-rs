@@ -4,4 +4,4 @@ macro_rules! SHT_CSKY_ATTRIBUTES {
     };
 }
 
-SHT_CSKY_ATTRIBUTES!()
+SHT_CSKY_ATTRIBUTES!();

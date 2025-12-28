@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CompileTimeMachine!();
-        RawBytesNote!();
         InterpCx!();
+        RawBytesNote!();
+        CompileTimeMachine!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! report_validation_error {
     };
 }
 
-report_validation_error!()
+report_validation_error!();

@@ -4,4 +4,4 @@ macro_rules! mock_ident_in_type {
     };
 }
 
-mock_ident_in_type!()
+mock_ident_in_type!();

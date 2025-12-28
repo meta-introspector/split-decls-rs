@@ -12,4 +12,4 @@ macro_rules! walk_fn_ret_ty {
     };
 }
 
-walk_fn_ret_ty!()
+walk_fn_ret_ty!();

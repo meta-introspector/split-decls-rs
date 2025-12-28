@@ -4,4 +4,4 @@ macro_rules! get_dllimport {
     };
 }
 
-get_dllimport!()
+get_dllimport!();

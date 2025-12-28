@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         BoundVarLike!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PlaceholderLike {
     };
 }
 
-PlaceholderLike!()
+PlaceholderLike!();

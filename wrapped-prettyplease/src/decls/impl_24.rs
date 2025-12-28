@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Breaks!();
         Printer!();
         BeginToken!();
-        Breaks!();
         BreakToken!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

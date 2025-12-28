@@ -6,4 +6,4 @@ macro_rules! mk_lint {
     };
 }
 
-mk_lint!()
+mk_lint!();

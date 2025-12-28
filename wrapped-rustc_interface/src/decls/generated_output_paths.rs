@@ -4,4 +4,4 @@ macro_rules! generated_output_paths {
     };
 }
 
-generated_output_paths!()
+generated_output_paths!();

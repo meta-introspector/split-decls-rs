@@ -4,4 +4,4 @@ macro_rules! UNKNOWN_LINE_NUMBER {
     };
 }
 
-UNKNOWN_LINE_NUMBER!()
+UNKNOWN_LINE_NUMBER!();

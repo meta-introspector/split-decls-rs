@@ -4,4 +4,4 @@ macro_rules! cell_clone {
     };
 }
 
-cell_clone!()
+cell_clone!();

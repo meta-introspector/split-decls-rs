@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Pending!();
-        TaskFuture!();
-        ExecWaker!();
         WeakExec!();
+        ExecWaker!();
+        TaskFuture!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_345 {
     };
 }
 
-impl_345!()
+impl_345!();

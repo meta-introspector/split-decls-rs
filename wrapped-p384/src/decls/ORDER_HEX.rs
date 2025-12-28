@@ -4,4 +4,4 @@ macro_rules! ORDER_HEX {
     };
 }
 
-ORDER_HEX!()
+ORDER_HEX!();

@@ -12,4 +12,4 @@ macro_rules! filter_as_usize {
     };
 }
 
-filter_as_usize!()
+filter_as_usize!();

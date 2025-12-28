@@ -11,4 +11,4 @@ macro_rules! SHN_XINDEX {
     };
 }
 
-SHN_XINDEX!()
+SHN_XINDEX!();

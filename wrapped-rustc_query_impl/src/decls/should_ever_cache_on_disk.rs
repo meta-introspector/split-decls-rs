@@ -4,4 +4,4 @@ macro_rules! should_ever_cache_on_disk {
     };
 }
 
-should_ever_cache_on_disk!()
+should_ever_cache_on_disk!();

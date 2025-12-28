@@ -4,4 +4,4 @@ macro_rules! R_METAG_TLS_TPOFF {
     };
 }
 
-R_METAG_TLS_TPOFF!()
+R_METAG_TLS_TPOFF!();

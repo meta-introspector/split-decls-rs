@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CanonicalState!();
-        Interner!();
         CanonicalVarValues!();
+        Interner!();
+        CanonicalState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! State {
     };
 }
 
-State!()
+State!();

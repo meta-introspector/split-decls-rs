@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Valid!();
         TryFromBytes!();
         Unalign!();
+        Valid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! unsafe_impl_try_from_bytes_for_nonzero {
     };
 }
 
-unsafe_impl_try_from_bytes_for_nonzero!()
+unsafe_impl_try_from_bytes_for_nonzero!();

@@ -4,4 +4,4 @@ macro_rules! check_chain {
     };
 }
 
-check_chain!()
+check_chain!();

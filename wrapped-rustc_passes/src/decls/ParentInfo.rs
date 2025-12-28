@@ -4,4 +4,4 @@ macro_rules! ParentInfo {
     };
 }
 
-ParentInfo!()
+ParentInfo!();

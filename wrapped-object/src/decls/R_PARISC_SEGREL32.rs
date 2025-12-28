@@ -4,4 +4,4 @@ macro_rules! R_PARISC_SEGREL32 {
     };
 }
 
-R_PARISC_SEGREL32!()
+R_PARISC_SEGREL32!();

@@ -4,4 +4,4 @@ macro_rules! LazyProperty {
     };
 }
 
-LazyProperty!()
+LazyProperty!();

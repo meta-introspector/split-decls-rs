@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UTerm!();
         PrivateCmp!();
         Ord!();
-        UTerm!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_436 {
     };
 }
 
-impl_436!()
+impl_436!();

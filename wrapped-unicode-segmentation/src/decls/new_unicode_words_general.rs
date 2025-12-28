@@ -11,4 +11,4 @@ macro_rules! new_unicode_words_general {
     };
 }
 
-new_unicode_words_general!()
+new_unicode_words_general!();

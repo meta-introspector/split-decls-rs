@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        LzmaEncoder!();
-        Lzma2Writer!();
+        Write!();
         RangeEncoder!();
         Lzma2Options!();
         AutoFinisher!();
-        Write!();
+        LzmaEncoder!();
+        Lzma2Writer!();
         Result!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_213 {
     };
 }
 
-impl_213!()
+impl_213!();

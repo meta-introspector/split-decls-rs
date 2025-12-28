@@ -4,4 +4,4 @@ macro_rules! Frozen {
     };
 }
 
-Frozen!()
+Frozen!();

@@ -4,4 +4,4 @@ macro_rules! DF_1_TRANS {
     };
 }
 
-DF_1_TRANS!()
+DF_1_TRANS!();

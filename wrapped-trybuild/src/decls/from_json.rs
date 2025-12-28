@@ -12,4 +12,4 @@ macro_rules! from_json {
     };
 }
 
-from_json!()
+from_json!();

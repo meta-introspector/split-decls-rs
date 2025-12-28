@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Locations!();
-        RegionInferenceContext!();
         OutlivesConstraint!();
+        RegionInferenceContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_314 {
     };
 }
 
-impl_314!()
+impl_314!();

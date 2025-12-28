@@ -4,4 +4,4 @@ macro_rules! convert_ioctl_res {
     };
 }
 
-convert_ioctl_res!()
+convert_ioctl_res!();

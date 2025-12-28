@@ -4,4 +4,4 @@ macro_rules! R_ARM_TLS_DESCSEQ {
     };
 }
 
-R_ARM_TLS_DESCSEQ!()
+R_ARM_TLS_DESCSEQ!();

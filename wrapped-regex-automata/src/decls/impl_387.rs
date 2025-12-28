@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        HalfMatch!();
-        ReverseAnchored!();
-        Input!();
-        Cache!();
-        RetryFailError!();
-        DFA!();
         Core!();
+        RetryFailError!();
+        HalfMatch!();
         Anchored!();
+        ReverseAnchored!();
+        DFA!();
+        Cache!();
+        Input!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_387 {
     };
 }
 
-impl_387!()
+impl_387!();

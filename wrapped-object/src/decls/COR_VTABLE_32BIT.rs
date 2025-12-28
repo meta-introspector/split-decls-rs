@@ -4,4 +4,4 @@ macro_rules! COR_VTABLE_32BIT {
     };
 }
 
-COR_VTABLE_32BIT!()
+COR_VTABLE_32BIT!();

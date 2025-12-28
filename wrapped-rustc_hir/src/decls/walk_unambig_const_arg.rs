@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         ConstArg!();
         InferKind!();
+        Visitor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! walk_unambig_const_arg {
     };
 }
 
-walk_unambig_const_arg!()
+walk_unambig_const_arg!();

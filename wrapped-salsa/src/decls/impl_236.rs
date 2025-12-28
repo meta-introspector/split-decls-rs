@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Id!();
+        MemoIngredientSingletonIndex!();
         IngredientIndex!();
         Zalsa!();
-        MemoIngredientSingletonIndex!();
-        MemoIngredientIndex!();
         MemoIngredientMap!();
+        Id!();
+        MemoIngredientIndex!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_236 {
     };
 }
 
-impl_236!()
+impl_236!();

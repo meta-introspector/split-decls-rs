@@ -11,4 +11,4 @@ macro_rules! vis_to_string {
     };
 }
 
-vis_to_string!()
+vis_to_string!();

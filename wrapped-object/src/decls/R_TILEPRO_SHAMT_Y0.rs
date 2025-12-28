@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_SHAMT_Y0 {
     };
 }
 
-R_TILEPRO_SHAMT_Y0!()
+R_TILEPRO_SHAMT_Y0!();

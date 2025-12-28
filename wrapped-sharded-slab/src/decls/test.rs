@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Pack!();
         Addr!();
         DefaultConfig!();
+        Pack!();
         Generation!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

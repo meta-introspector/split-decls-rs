@@ -11,4 +11,4 @@ macro_rules! impl_dyn_sync {
     };
 }
 
-impl_dyn_sync!()
+impl_dyn_sync!();

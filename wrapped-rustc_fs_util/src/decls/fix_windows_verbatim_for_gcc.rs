@@ -4,4 +4,4 @@ macro_rules! fix_windows_verbatim_for_gcc {
     };
 }
 
-fix_windows_verbatim_for_gcc!()
+fix_windows_verbatim_for_gcc!();

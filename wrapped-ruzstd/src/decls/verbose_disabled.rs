@@ -4,4 +4,4 @@ macro_rules! verbose_disabled {
     };
 }
 
-verbose_disabled!()
+verbose_disabled!();

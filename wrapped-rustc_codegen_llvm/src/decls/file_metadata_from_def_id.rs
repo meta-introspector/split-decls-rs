@@ -12,4 +12,4 @@ macro_rules! file_metadata_from_def_id {
     };
 }
 
-file_metadata_from_def_id!()
+file_metadata_from_def_id!();

@@ -11,4 +11,4 @@ macro_rules! serialize_from_enum {
     };
 }
 
-serialize_from_enum!()
+serialize_from_enum!();

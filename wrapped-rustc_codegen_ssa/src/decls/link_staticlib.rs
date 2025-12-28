@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         LinkRlibError!();
-        CodegenResults!();
         RlibFlavor!();
         ArchiveBuilderBuilder!();
+        CodegenResults!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! link_staticlib {
     };
 }
 
-link_staticlib!()
+link_staticlib!();

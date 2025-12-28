@@ -4,4 +4,4 @@ macro_rules! EM_SEP {
     };
 }
 
-EM_SEP!()
+EM_SEP!();

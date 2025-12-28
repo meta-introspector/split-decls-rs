@@ -11,4 +11,4 @@ macro_rules! E_NOINTERFACE {
     };
 }
 
-E_NOINTERFACE!()
+E_NOINTERFACE!();

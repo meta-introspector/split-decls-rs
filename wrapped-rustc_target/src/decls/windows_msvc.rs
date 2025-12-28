@@ -4,4 +4,4 @@ macro_rules! windows_msvc {
     };
 }
 
-windows_msvc!()
+windows_msvc!();

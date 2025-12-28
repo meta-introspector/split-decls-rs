@@ -4,4 +4,4 @@ macro_rules! assumed_wf_types {
     };
 }
 
-assumed_wf_types!()
+assumed_wf_types!();

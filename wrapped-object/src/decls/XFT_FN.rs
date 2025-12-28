@@ -4,4 +4,4 @@ macro_rules! XFT_FN {
     };
 }
 
-XFT_FN!()
+XFT_FN!();

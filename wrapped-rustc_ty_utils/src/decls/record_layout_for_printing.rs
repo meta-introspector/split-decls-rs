@@ -4,4 +4,4 @@ macro_rules! record_layout_for_printing {
     };
 }
 
-record_layout_for_printing!()
+record_layout_for_printing!();

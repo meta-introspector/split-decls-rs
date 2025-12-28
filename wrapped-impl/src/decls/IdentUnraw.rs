@@ -4,4 +4,4 @@ macro_rules! IdentUnraw {
     };
 }
 
-IdentUnraw!()
+IdentUnraw!();

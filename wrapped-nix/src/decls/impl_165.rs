@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TimeSpec!();
         TimeValLike!();
+        TimeSpec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_165 {
     };
 }
 
-impl_165!()
+impl_165!();

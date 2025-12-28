@@ -4,4 +4,4 @@ macro_rules! encode_cross_crate {
     };
 }
 
-encode_cross_crate!()
+encode_cross_crate!();

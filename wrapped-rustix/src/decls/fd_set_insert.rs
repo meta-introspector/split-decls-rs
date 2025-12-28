@@ -12,4 +12,4 @@ macro_rules! fd_set_insert {
     };
 }
 
-fd_set_insert!()
+fd_set_insert!();

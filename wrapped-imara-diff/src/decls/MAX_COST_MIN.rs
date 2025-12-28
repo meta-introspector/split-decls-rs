@@ -4,4 +4,4 @@ macro_rules! MAX_COST_MIN {
     };
 }
 
-MAX_COST_MIN!()
+MAX_COST_MIN!();

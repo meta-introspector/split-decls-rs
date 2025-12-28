@@ -4,4 +4,4 @@ macro_rules! PIPE_BUF {
     };
 }
 
-PIPE_BUF!()
+PIPE_BUF!();

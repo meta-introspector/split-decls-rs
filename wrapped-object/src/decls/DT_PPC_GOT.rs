@@ -4,4 +4,4 @@ macro_rules! DT_PPC_GOT {
     };
 }
 
-DT_PPC_GOT!()
+DT_PPC_GOT!();

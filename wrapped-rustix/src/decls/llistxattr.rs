@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Buffer!();
+        Result!();
         Arg!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! llistxattr {
     };
 }
 
-llistxattr!()
+llistxattr!();

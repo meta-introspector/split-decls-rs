@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Status!();
-        Action!();
-        Filters!();
-        Stream!();
-        Check!();
         LzmaOptions!();
+        Stream!();
+        Action!();
+        Error!();
+        Check!();
+        Status!();
+        Filters!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

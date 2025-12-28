@@ -11,4 +11,4 @@ macro_rules! load_backend_from_dylib {
     };
 }
 
-load_backend_from_dylib!()
+load_backend_from_dylib!();

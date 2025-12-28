@@ -4,4 +4,4 @@ macro_rules! crates_export_threshold {
     };
 }
 
-crates_export_threshold!()
+crates_export_threshold!();

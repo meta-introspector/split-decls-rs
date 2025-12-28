@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxTreeCtx!();
         TextPosition!();
+        SyntaxTreeCtx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! syntax_node_to_json {
     };
 }
 
-syntax_node_to_json!()
+syntax_node_to_json!();

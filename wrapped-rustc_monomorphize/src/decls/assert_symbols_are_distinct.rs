@@ -11,4 +11,4 @@ macro_rules! assert_symbols_are_distinct {
     };
 }
 
-assert_symbols_are_distinct!()
+assert_symbols_are_distinct!();

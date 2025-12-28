@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_GOTOFF_32 {
     };
 }
 
-R_MICROBLAZE_GOTOFF_32!()
+R_MICROBLAZE_GOTOFF_32!();

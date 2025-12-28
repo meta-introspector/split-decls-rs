@@ -11,4 +11,4 @@ macro_rules! inline_len {
     };
 }
 
-inline_len!()
+inline_len!();

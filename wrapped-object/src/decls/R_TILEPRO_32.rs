@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_32 {
     };
 }
 
-R_TILEPRO_32!()
+R_TILEPRO_32!();

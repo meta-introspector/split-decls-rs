@@ -4,4 +4,4 @@ macro_rules! vtablog {
     };
 }
 
-vtablog!()
+vtablog!();

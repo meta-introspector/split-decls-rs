@@ -4,4 +4,4 @@ macro_rules! request_code_readwrite {
     };
 }
 
-request_code_readwrite!()
+request_code_readwrite!();

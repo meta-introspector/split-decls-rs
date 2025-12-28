@@ -11,4 +11,4 @@ macro_rules! NotifyActor {
     };
 }
 
-NotifyActor!()
+NotifyActor!();

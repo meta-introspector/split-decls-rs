@@ -11,4 +11,4 @@ macro_rules! all_trait_decls {
     };
 }
 
-all_trait_decls!()
+all_trait_decls!();

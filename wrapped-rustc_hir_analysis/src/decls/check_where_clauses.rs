@@ -11,4 +11,4 @@ macro_rules! check_where_clauses {
     };
 }
 
-check_where_clauses!()
+check_where_clauses!();

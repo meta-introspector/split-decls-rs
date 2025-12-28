@@ -4,4 +4,4 @@ macro_rules! SG_READ_ONLY {
     };
 }
 
-SG_READ_ONLY!()
+SG_READ_ONLY!();

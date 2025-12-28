@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HuffmanTable!();
         HuffmanDecoder!();
         BitReaderReversed!();
+        HuffmanTable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_395 {
     };
 }
 
-impl_395!()
+impl_395!();

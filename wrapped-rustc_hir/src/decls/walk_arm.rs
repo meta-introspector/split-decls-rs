@@ -12,4 +12,4 @@ macro_rules! walk_arm {
     };
 }
 
-walk_arm!()
+walk_arm!();

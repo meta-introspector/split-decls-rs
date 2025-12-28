@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OwnedRef!();
-        Tid!();
-        Shard!();
-        OwnedRefMut!();
         Config!();
+        OwnedRefMut!();
+        OwnedRef!();
+        Shard!();
         Clear!();
+        Tid!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

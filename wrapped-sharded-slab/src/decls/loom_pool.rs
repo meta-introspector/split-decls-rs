@@ -4,4 +4,4 @@ macro_rules! loom_pool {
     };
 }
 
-loom_pool!()
+loom_pool!();

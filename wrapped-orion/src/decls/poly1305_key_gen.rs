@@ -12,4 +12,4 @@ macro_rules! poly1305_key_gen {
     };
 }
 
-poly1305_key_gen!()
+poly1305_key_gen!();

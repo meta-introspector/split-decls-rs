@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
         MetaVarKind!();
+        Path!();
+        Lifetime!();
+        Ty!();
+        Block!();
+        Pat!();
         Stmt!();
         Expr!();
-        Pat!();
         Item!();
-        Ty!();
-        Path!();
-        Block!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_395 {
     };
 }
 
-impl_395!()
+impl_395!();

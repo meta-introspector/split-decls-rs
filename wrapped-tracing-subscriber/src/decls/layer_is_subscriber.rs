@@ -11,4 +11,4 @@ macro_rules! layer_is_subscriber {
     };
 }
 
-layer_is_subscriber!()
+layer_is_subscriber!();

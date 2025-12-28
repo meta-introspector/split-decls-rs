@@ -4,4 +4,4 @@ macro_rules! dep_graph_path {
     };
 }
 
-dep_graph_path!()
+dep_graph_path!();

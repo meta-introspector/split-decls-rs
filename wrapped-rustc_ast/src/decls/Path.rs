@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Walkable!();
-        PathSegment!();
         LazyAttrTokenStream!();
+        PathSegment!();
+        Walkable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Path {
     };
 }
 
-Path!()
+Path!();

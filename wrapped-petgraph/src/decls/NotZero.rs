@@ -4,4 +4,4 @@ macro_rules! NotZero {
     };
 }
 
-NotZero!()
+NotZero!();

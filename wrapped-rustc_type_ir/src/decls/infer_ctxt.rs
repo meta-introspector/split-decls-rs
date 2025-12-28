@@ -4,4 +4,4 @@ macro_rules! infer_ctxt {
     };
 }
 
-infer_ctxt!()
+infer_ctxt!();

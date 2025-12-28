@@ -4,4 +4,4 @@ macro_rules! R_MIPS_ADD_IMMEDIATE {
     };
 }
 
-R_MIPS_ADD_IMMEDIATE!()
+R_MIPS_ADD_IMMEDIATE!();

@@ -4,4 +4,4 @@ macro_rules! interval {
     };
 }
 
-interval!()
+interval!();

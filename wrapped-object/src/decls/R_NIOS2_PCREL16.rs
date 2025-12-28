@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_PCREL16 {
     };
 }
 
-R_NIOS2_PCREL16!()
+R_NIOS2_PCREL16!();

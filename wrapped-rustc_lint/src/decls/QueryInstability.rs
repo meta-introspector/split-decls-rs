@@ -4,4 +4,4 @@ macro_rules! QueryInstability {
     };
 }
 
-QueryInstability!()
+QueryInstability!();

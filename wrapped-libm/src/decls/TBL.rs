@@ -4,4 +4,4 @@ macro_rules! TBL {
     };
 }
 
-TBL!()
+TBL!();

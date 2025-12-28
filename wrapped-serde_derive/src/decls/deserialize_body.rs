@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Parameters!();
-        Data!();
-        TupleForm!();
         StructForm!();
-        Fragment!();
+        TupleForm!();
         Style!();
+        Fragment!();
         Container!();
         Identifier!();
+        Data!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! deserialize_body {
     };
 }
 
-deserialize_body!()
+deserialize_body!();

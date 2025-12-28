@@ -4,4 +4,4 @@ macro_rules! EM_AVR32 {
     };
 }
 
-EM_AVR32!()
+EM_AVR32!();

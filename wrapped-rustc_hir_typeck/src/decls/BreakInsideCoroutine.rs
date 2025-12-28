@@ -4,4 +4,4 @@ macro_rules! BreakInsideCoroutine {
     };
 }
 
-BreakInsideCoroutine!()
+BreakInsideCoroutine!();

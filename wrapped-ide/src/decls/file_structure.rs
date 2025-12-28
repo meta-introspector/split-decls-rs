@@ -4,4 +4,4 @@ macro_rules! file_structure {
     };
 }
 
-file_structure!()
+file_structure!();

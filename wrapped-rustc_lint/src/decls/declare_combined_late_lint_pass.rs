@@ -11,4 +11,4 @@ macro_rules! declare_combined_late_lint_pass {
     };
 }
 
-declare_combined_late_lint_pass!()
+declare_combined_late_lint_pass!();

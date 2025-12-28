@@ -4,4 +4,4 @@ macro_rules! time_trace_profiler_finish {
     };
 }
 
-time_trace_profiler_finish!()
+time_trace_profiler_finish!();

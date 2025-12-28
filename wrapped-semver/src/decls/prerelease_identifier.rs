@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Position!();
         Error!();
         Prerelease!();
         Identifier!();
-        Position!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! prerelease_identifier {
     };
 }
 
-prerelease_identifier!()
+prerelease_identifier!();

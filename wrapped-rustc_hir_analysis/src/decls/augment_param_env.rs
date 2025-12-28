@@ -4,4 +4,4 @@ macro_rules! augment_param_env {
     };
 }
 
-augment_param_env!()
+augment_param_env!();

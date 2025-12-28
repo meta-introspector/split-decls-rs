@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NomRange!();
         SaturatingIterator!();
+        NomRange!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_380 {
     };
 }
 
-impl_380!()
+impl_380!();

@@ -11,4 +11,4 @@ macro_rules! encrypt_decrypt_equals_expected {
     };
 }
 
-encrypt_decrypt_equals_expected!()
+encrypt_decrypt_equals_expected!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Read!();
         Result!();
         ErrorCode!();
-        StreamDeserializer!();
+        Error!();
+        Read!();
         Deserializer!();
+        StreamDeserializer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

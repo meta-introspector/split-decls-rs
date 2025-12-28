@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Serializer!();
-        RawValue!();
         Result!();
         Error!();
+        RawValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_616 {
     };
 }
 
-impl_616!()
+impl_616!();

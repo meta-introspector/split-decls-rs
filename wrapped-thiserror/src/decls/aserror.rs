@@ -4,4 +4,4 @@ macro_rules! aserror {
     };
 }
 
-aserror!()
+aserror!();

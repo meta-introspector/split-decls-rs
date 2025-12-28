@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Symbol!();
         VariantDef!();
+        Symbol!();
         FieldDef!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_361 {
     };
 }
 
-impl_361!()
+impl_361!();

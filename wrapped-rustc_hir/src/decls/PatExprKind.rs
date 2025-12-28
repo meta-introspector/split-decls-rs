@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Lit!();
-        Path!();
         QPath!();
+        Lit!();
         ConstBlock!();
+        Path!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! PatExprKind {
     };
 }
 
-PatExprKind!()
+PatExprKind!();

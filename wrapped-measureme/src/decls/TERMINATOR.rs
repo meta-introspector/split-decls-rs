@@ -4,4 +4,4 @@ macro_rules! TERMINATOR {
     };
 }
 
-TERMINATOR!()
+TERMINATOR!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Item!();
         TableEnumDeserializer!();
+        Item!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_313 {
     };
 }
 
-impl_313!()
+impl_313!();

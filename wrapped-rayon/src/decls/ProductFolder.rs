@@ -4,4 +4,4 @@ macro_rules! ProductFolder {
     };
 }
 
-ProductFolder!()
+ProductFolder!();

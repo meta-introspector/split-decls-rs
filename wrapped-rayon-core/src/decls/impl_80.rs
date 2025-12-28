@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SpinLatch!();
         CoreLatch!();
         AsCoreLatch!();
-        SpinLatch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_80 {
     };
 }
 
-impl_80!()
+impl_80!();

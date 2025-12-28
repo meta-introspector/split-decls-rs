@@ -4,4 +4,4 @@ macro_rules! AutodiffStage {
     };
 }
 
-AutodiffStage!()
+AutodiffStage!();

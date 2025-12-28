@@ -4,4 +4,4 @@ macro_rules! FLOAT_POW5_BITCOUNT {
     };
 }
 
-FLOAT_POW5_BITCOUNT!()
+FLOAT_POW5_BITCOUNT!();

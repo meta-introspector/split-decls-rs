@@ -4,4 +4,4 @@ macro_rules! check_btree_set {
     };
 }
 
-check_btree_set!()
+check_btree_set!();

@@ -4,4 +4,4 @@ macro_rules! auto_source_setup {
     };
 }
 
-auto_source_setup!()
+auto_source_setup!();

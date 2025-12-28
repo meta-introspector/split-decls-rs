@@ -4,4 +4,4 @@ macro_rules! ProbeResult {
     };
 }
 
-ProbeResult!()
+ProbeResult!();

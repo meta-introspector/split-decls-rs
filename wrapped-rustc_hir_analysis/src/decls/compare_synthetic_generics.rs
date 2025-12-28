@@ -4,4 +4,4 @@ macro_rules! compare_synthetic_generics {
     };
 }
 
-compare_synthetic_generics!()
+compare_synthetic_generics!();

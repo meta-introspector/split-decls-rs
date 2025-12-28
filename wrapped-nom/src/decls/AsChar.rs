@@ -4,4 +4,4 @@ macro_rules! AsChar {
     };
 }
 
-AsChar!()
+AsChar!();

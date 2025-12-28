@@ -4,4 +4,4 @@ macro_rules! SHF_IA_64_SHORT {
     };
 }
 
-SHF_IA_64_SHORT!()
+SHF_IA_64_SHORT!();

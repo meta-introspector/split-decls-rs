@@ -4,4 +4,4 @@ macro_rules! Directed {
     };
 }
 
-Directed!()
+Directed!();

@@ -4,4 +4,4 @@ macro_rules! FARPROC {
     };
 }
 
-FARPROC!()
+FARPROC!();

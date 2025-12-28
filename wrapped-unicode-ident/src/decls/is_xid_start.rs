@@ -4,4 +4,4 @@ macro_rules! is_xid_start {
     };
 }
 
-is_xid_start!()
+is_xid_start!();

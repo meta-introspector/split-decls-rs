@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ByteClasses!();
         LazyStateIDError!();
         LazyStateID!();
         DFA!();
+        ByteClasses!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! minimum_lazy_state_id {
     };
 }
 
-minimum_lazy_state_id!()
+minimum_lazy_state_id!();

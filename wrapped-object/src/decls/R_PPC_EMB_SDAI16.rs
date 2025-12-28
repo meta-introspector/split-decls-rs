@@ -4,4 +4,4 @@ macro_rules! R_PPC_EMB_SDAI16 {
     };
 }
 
-R_PPC_EMB_SDAI16!()
+R_PPC_EMB_SDAI16!();

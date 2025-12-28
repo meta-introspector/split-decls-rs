@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ErrorKind!();
+        IResult!();
         Input!();
         ParseError!();
-        IResult!();
-        ErrorKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! rest_len {
     };
 }
 
-rest_len!()
+rest_len!();

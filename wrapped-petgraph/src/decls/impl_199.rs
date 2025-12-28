@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        EdgesDirected!();
         UndirectedAdaptor!();
         MaybeReversedEdges!();
-        EdgesDirected!();
-        Direction!();
         Edges!();
+        Direction!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

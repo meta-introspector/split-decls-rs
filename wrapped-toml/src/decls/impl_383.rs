@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ErrorInner!();
-        Error!();
-        SerializeMap!();
-        Table!();
         Value!();
+        Error!();
+        ErrorInner!();
+        Table!();
+        SerializeMap!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_383 {
     };
 }
 
-impl_383!()
+impl_383!();

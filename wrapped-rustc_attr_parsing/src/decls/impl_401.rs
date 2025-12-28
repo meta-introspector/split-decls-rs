@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        AcceptContext!();
+        AllowedResult!();
         AllowedTargets!();
-        Stage!();
         AttributeParser!();
         InvalidTarget!();
-        AllowedResult!();
-        AcceptContext!();
+        Stage!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_401 {
     };
 }
 
-impl_401!()
+impl_401!();

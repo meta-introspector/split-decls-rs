@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PathKind!();
-        CompletionRelevance!();
-        RenderContext!();
         Builder!();
         PathCompletionCtx!();
+        RenderContext!();
+        CompletionRelevance!();
+        PathKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! render_resolution_path {
     };
 }
 
-render_resolution_path!()
+render_resolution_path!();

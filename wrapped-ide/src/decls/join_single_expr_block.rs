@@ -4,4 +4,4 @@ macro_rules! join_single_expr_block {
     };
 }
 
-join_single_expr_block!()
+join_single_expr_block!();

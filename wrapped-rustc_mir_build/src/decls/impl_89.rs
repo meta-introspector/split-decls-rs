@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        TestKind!();
-        MatchPairTree!();
-        TestBranch!();
-        Test!();
-        Variant!();
-        TestCase!();
         Candidate!();
+        MatchPairTree!();
+        Variant!();
+        Builder!();
+        Test!();
+        TestCase!();
+        TestKind!();
+        TestBranch!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

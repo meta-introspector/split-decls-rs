@@ -4,4 +4,4 @@ macro_rules! dbg {
     };
 }
 
-dbg!()
+dbg!();

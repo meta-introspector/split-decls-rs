@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InputWrapper!();
-        Action!();
         BitBuffer!();
         LocalVars!();
+        InputWrapper!();
+        Action!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! read_bits {
     };
 }
 
-read_bits!()
+read_bits!();

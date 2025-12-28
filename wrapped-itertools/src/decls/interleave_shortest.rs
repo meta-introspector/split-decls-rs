@@ -11,4 +11,4 @@ macro_rules! interleave_shortest {
     };
 }
 
-interleave_shortest!()
+interleave_shortest!();

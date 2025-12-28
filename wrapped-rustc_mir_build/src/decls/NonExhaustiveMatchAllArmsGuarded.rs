@@ -4,4 +4,4 @@ macro_rules! NonExhaustiveMatchAllArmsGuarded {
     };
 }
 
-NonExhaustiveMatchAllArmsGuarded!()
+NonExhaustiveMatchAllArmsGuarded!();

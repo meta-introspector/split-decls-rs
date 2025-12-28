@@ -4,4 +4,4 @@ macro_rules! par_iter_unindexed_flat_map {
     };
 }
 
-par_iter_unindexed_flat_map!()
+par_iter_unindexed_flat_map!();

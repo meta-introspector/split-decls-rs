@@ -4,4 +4,4 @@ macro_rules! does_pat_match_variant {
     };
 }
 
-does_pat_match_variant!()
+does_pat_match_variant!();

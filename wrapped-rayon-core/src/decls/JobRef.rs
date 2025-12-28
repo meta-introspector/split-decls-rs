@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Job!();
         StackJob!();
+        Job!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! JobRef {
     };
 }
 
-JobRef!()
+JobRef!();

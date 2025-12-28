@@ -4,4 +4,4 @@ macro_rules! hide_leading_numbers {
     };
 }
 
-hide_leading_numbers!()
+hide_leading_numbers!();

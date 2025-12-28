@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WitnessPat!();
         PatCx!();
-        PlaceCtxt!();
         Constructor!();
+        WitnessPat!();
+        PlaceCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_96 {
     };
 }
 
-impl_96!()
+impl_96!();

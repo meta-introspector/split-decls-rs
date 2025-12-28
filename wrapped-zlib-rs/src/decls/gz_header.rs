@@ -4,4 +4,4 @@ macro_rules! gz_header {
     };
 }
 
-gz_header!()
+gz_header!();

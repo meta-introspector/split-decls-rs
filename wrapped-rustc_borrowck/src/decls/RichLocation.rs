@@ -4,4 +4,4 @@ macro_rules! RichLocation {
     };
 }
 
-RichLocation!()
+RichLocation!();

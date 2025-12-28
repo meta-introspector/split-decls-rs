@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        VerdauxIterator!();
+        FileHeader!();
         Bytes!();
         Verdaux!();
-        Endian!();
-        FileHeader!();
         Result!();
-        VerdauxIterator!();
+        Endian!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_435 {
     };
 }
 
-impl_435!()
+impl_435!();

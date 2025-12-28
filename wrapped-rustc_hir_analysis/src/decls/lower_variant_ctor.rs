@@ -4,4 +4,4 @@ macro_rules! lower_variant_ctor {
     };
 }
 
-lower_variant_ctor!()
+lower_variant_ctor!();

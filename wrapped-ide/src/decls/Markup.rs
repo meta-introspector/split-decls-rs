@@ -4,4 +4,4 @@ macro_rules! Markup {
     };
 }
 
-Markup!()
+Markup!();

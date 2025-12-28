@@ -4,4 +4,4 @@ macro_rules! EM_SHARC {
     };
 }
 
-EM_SHARC!()
+EM_SHARC!();

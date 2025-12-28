@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VTab!();
         Error!();
+        VTab!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! rust_open {
     };
 }
 
-rust_open!()
+rust_open!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Stable!();
+        BridgeTys!();
         FnAbi!();
         Ty!();
-        BridgeTys!();
-        Stable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_103 {
     };
 }
 
-impl_103!()
+impl_103!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        VTab!();
-        ArrayTabCursor!();
-        VTabConnection!();
         ArrayTab!();
-        IndexConstraintOp!();
-        Result!();
         IndexInfo!();
+        IndexConstraintOp!();
+        ArrayTabCursor!();
+        VTab!();
+        Result!();
+        VTabConnection!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_614 {
     };
 }
 
-impl_614!()
+impl_614!();

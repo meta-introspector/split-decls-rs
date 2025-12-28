@@ -4,4 +4,4 @@ macro_rules! catch_fatal_errors {
     };
 }
 
-catch_fatal_errors!()
+catch_fatal_errors!();

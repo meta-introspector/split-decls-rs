@@ -4,4 +4,4 @@ macro_rules! E_BOUNDS {
     };
 }
 
-E_BOUNDS!()
+E_BOUNDS!();

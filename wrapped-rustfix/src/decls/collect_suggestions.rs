@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Diagnostic!();
         Suggestion!();
-        Solution!();
         Filter!();
+        Diagnostic!();
         Applicability!();
+        Solution!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! collect_suggestions {
     };
 }
 
-collect_suggestions!()
+collect_suggestions!();

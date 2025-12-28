@@ -5,4 +5,4 @@ macro_rules! make_input {
     };
 }
 
-make_input!()
+make_input!();

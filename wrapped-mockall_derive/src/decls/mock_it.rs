@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MockItem!();
         MockableItem!();
+        MockItem!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! mock_it {
     };
 }
 
-mock_it!()
+mock_it!();

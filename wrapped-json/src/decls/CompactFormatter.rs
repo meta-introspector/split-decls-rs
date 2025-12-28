@@ -4,4 +4,4 @@ macro_rules! CompactFormatter {
     };
 }
 
-CompactFormatter!()
+CompactFormatter!();

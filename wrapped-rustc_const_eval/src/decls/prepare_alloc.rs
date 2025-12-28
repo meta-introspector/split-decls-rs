@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InternError!();
         Machine!();
+        InternError!();
         MemoryKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! prepare_alloc {
     };
 }
 
-prepare_alloc!()
+prepare_alloc!();

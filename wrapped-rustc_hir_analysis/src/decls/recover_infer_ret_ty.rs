@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirPlaceholderCollector!();
         ItemCtxt!();
+        HirPlaceholderCollector!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! recover_infer_ret_ty {
     };
 }
 
-recover_infer_ret_ty!()
+recover_infer_ret_ty!();

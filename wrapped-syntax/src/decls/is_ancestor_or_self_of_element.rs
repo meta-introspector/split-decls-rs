@@ -12,4 +12,4 @@ macro_rules! is_ancestor_or_self_of_element {
     };
 }
 
-is_ancestor_or_self_of_element!()
+is_ancestor_or_self_of_element!();

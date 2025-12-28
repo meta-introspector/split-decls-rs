@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_ICHECKSUM {
     };
 }
 
-DT_MIPS_ICHECKSUM!()
+DT_MIPS_ICHECKSUM!();

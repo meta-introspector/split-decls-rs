@@ -4,4 +4,4 @@ macro_rules! NEG_INFINITY {
     };
 }
 
-NEG_INFINITY!()
+NEG_INFINITY!();

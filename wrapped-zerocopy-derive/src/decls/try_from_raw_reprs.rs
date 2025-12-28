@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FromRawReprError!();
-        RawRepr!();
         FromRawReprsError!();
+        RawRepr!();
+        FromRawReprError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! try_from_raw_reprs {
     };
 }
 
-try_from_raw_reprs!()
+try_from_raw_reprs!();

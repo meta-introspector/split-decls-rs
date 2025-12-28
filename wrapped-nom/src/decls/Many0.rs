@@ -11,4 +11,4 @@ macro_rules! Many0 {
     };
 }
 
-Many0!()
+Many0!();

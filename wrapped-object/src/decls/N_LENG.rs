@@ -4,4 +4,4 @@ macro_rules! N_LENG {
     };
 }
 
-N_LENG!()
+N_LENG!();

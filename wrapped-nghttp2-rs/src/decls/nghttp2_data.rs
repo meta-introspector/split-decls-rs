@@ -4,4 +4,4 @@ macro_rules! nghttp2_data {
     };
 }
 
-nghttp2_data!()
+nghttp2_data!();

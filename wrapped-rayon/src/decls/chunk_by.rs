@@ -4,4 +4,4 @@ macro_rules! chunk_by {
     };
 }
 
-chunk_by!()
+chunk_by!();

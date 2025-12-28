@@ -4,4 +4,4 @@ macro_rules! expand_or_pat {
     };
 }
 
-expand_or_pat!()
+expand_or_pat!();

@@ -4,4 +4,4 @@ macro_rules! Range {
     };
 }
 
-Range!()
+Range!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Rel!();
         SectionHeader!();
-        Rel64!();
+        Result!();
         FileHeader64!();
         ReadRef!();
+        Rel64!();
         SectionHeader64!();
+        Rel!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_803 {
     };
 }
 
-impl_803!()
+impl_803!();

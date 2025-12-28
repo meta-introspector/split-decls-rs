@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FileHeader!();
-        ReadRef!();
         ElfSegment!();
+        ReadRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_297 {
     };
 }
 
-impl_297!()
+impl_297!();

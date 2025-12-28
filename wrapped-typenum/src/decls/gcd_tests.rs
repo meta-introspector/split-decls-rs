@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Unsigned!();
         Gcf!();
+        Unsigned!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! gcd_tests {
     };
 }
 
-gcd_tests!()
+gcd_tests!();

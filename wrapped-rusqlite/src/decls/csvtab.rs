@@ -4,4 +4,4 @@ macro_rules! csvtab {
     };
 }
 
-csvtab!()
+csvtab!();

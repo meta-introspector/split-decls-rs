@@ -4,4 +4,4 @@ macro_rules! test_lint_cap_hash_different {
     };
 }
 
-test_lint_cap_hash_different!()
+test_lint_cap_hash_different!();

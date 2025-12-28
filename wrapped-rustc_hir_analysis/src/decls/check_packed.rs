@@ -4,4 +4,4 @@ macro_rules! check_packed {
     };
 }
 
-check_packed!()
+check_packed!();

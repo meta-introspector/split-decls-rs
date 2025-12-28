@@ -12,4 +12,4 @@ macro_rules! render_super_in_grandchild_without_redefining_in_parent_works {
     };
 }
 
-render_super_in_grandchild_without_redefining_in_parent_works!()
+render_super_in_grandchild_without_redefining_in_parent_works!();

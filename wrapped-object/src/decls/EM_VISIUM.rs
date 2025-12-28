@@ -4,4 +4,4 @@ macro_rules! EM_VISIUM {
     };
 }
 
-EM_VISIUM!()
+EM_VISIUM!();

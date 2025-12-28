@@ -4,4 +4,4 @@ macro_rules! follower_idx_bitlen {
     };
 }
 
-follower_idx_bitlen!()
+follower_idx_bitlen!();

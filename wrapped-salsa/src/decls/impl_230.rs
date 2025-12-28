@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IngredientIndices!();
         IngredientIndex!();
+        IngredientIndices!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_230 {
     };
 }
 
-impl_230!()
+impl_230!();

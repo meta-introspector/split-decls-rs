@@ -4,4 +4,4 @@ macro_rules! StringWrapper {
     };
 }
 
-StringWrapper!()
+StringWrapper!();

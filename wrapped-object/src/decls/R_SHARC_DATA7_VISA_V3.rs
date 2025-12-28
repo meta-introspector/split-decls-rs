@@ -4,4 +4,4 @@ macro_rules! R_SHARC_DATA7_VISA_V3 {
     };
 }
 
-R_SHARC_DATA7_VISA_V3!()
+R_SHARC_DATA7_VISA_V3!();

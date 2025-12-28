@@ -4,4 +4,4 @@ macro_rules! ITERATION_COUNT {
     };
 }
 
-ITERATION_COUNT!()
+ITERATION_COUNT!();

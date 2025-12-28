@@ -12,4 +12,4 @@ macro_rules! translate_fchown_args {
     };
 }
 
-translate_fchown_args!()
+translate_fchown_args!();

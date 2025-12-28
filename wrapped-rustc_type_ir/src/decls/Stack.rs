@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StackEntry!();
         Cx!();
+        StackEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Stack {
     };
 }
 
-Stack!()
+Stack!();

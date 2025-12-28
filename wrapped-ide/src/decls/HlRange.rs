@@ -4,4 +4,4 @@ macro_rules! HlRange {
     };
 }
 
-HlRange!()
+HlRange!();

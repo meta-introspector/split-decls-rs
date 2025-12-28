@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ReadRef!();
-        SectionTable!();
         ImageSectionHeader!();
+        SectionTable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_676 {
     };
 }
 
-impl_676!()
+impl_676!();

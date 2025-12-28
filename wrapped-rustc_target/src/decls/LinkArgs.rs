@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StaticCow!();
         LinkerFlavor!();
+        StaticCow!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LinkArgs {
     };
 }
 
-LinkArgs!()
+LinkArgs!();

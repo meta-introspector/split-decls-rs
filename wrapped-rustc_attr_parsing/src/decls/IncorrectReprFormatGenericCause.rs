@@ -4,4 +4,4 @@ macro_rules! IncorrectReprFormatGenericCause {
     };
 }
 
-IncorrectReprFormatGenericCause!()
+IncorrectReprFormatGenericCause!();

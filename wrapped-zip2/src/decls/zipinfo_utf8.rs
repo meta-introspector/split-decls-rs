@@ -4,4 +4,4 @@ macro_rules! zipinfo_utf8 {
     };
 }
 
-zipinfo_utf8!()
+zipinfo_utf8!();

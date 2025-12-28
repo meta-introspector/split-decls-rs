@@ -11,4 +11,4 @@ macro_rules! highlight_closure_captures {
     };
 }
 
-highlight_closure_captures!()
+highlight_closure_captures!();

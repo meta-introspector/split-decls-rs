@@ -11,4 +11,4 @@ macro_rules! test_append {
     };
 }
 
-test_append!()
+test_append!();

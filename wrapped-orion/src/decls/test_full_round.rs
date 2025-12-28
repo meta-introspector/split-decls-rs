@@ -4,4 +4,4 @@ macro_rules! test_full_round {
     };
 }
 
-test_full_round!()
+test_full_round!();

@@ -4,4 +4,4 @@ macro_rules! broken_link_clone_cb {
     };
 }
 
-broken_link_clone_cb!()
+broken_link_clone_cb!();

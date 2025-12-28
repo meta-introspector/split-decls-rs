@@ -11,4 +11,4 @@ macro_rules! transform_instance {
     };
 }
 
-transform_instance!()
+transform_instance!();

@@ -11,4 +11,4 @@ macro_rules! random_tree1 {
     };
 }
 
-random_tree1!()
+random_tree1!();

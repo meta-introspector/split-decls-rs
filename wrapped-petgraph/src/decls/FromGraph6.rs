@@ -4,4 +4,4 @@ macro_rules! FromGraph6 {
     };
 }
 
-FromGraph6!()
+FromGraph6!();

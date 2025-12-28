@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        DyldCacheMappingAndSlideInfo!();
-        Endianness!();
         DyldCacheMappingInfo!();
+        Endian!();
+        Endianness!();
+        DyldCacheMappingAndSlideInfo!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DyldCacheMappingSlice {
     };
 }
 
-DyldCacheMappingSlice!()
+DyldCacheMappingSlice!();

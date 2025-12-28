@@ -4,4 +4,4 @@ macro_rules! macho {
     };
 }
 
-macho!()
+macho!();

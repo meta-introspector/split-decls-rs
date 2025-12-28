@@ -4,4 +4,4 @@ macro_rules! NtPatKind {
     };
 }
 
-NtPatKind!()
+NtPatKind!();

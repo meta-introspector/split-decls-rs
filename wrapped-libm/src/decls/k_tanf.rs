@@ -4,4 +4,4 @@ macro_rules! k_tanf {
     };
 }
 
-k_tanf!()
+k_tanf!();

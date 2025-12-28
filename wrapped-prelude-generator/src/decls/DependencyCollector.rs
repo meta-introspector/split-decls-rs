@@ -4,4 +4,4 @@ macro_rules! DependencyCollector {
     };
 }
 
-DependencyCollector!()
+DependencyCollector!();

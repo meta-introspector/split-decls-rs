@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_HI16 {
     };
 }
 
-R_TILEPRO_HI16!()
+R_TILEPRO_HI16!();

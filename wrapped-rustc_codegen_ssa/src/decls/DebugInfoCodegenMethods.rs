@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FunctionDebugContext!();
-        VariableKind!();
         BackendTypes!();
+        VariableKind!();
+        FunctionDebugContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DebugInfoCodegenMethods {
     };
 }
 
-DebugInfoCodegenMethods!()
+DebugInfoCodegenMethods!();

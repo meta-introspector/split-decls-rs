@@ -12,4 +12,4 @@ macro_rules! render_outlives_constraint {
     };
 }
 
-render_outlives_constraint!()
+render_outlives_constraint!();

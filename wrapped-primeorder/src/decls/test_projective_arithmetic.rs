@@ -4,4 +4,4 @@ macro_rules! test_projective_arithmetic {
     };
 }
 
-test_projective_arithmetic!()
+test_projective_arithmetic!();

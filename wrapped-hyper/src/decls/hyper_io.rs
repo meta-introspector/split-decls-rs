@@ -4,4 +4,4 @@ macro_rules! hyper_io {
     };
 }
 
-hyper_io!()
+hyper_io!();

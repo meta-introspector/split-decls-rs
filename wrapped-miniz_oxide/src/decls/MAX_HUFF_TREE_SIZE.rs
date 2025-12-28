@@ -4,4 +4,4 @@ macro_rules! MAX_HUFF_TREE_SIZE {
     };
 }
 
-MAX_HUFF_TREE_SIZE!()
+MAX_HUFF_TREE_SIZE!();

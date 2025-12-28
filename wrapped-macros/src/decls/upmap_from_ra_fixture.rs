@@ -4,4 +4,4 @@ macro_rules! upmap_from_ra_fixture {
     };
 }
 
-upmap_from_ra_fixture!()
+upmap_from_ra_fixture!();

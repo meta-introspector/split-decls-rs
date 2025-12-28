@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Analysis!();
         Results!();
+        Analysis!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AnalysisAndResults {
     };
 }
 
-AnalysisAndResults!()
+AnalysisAndResults!();

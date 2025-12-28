@@ -4,4 +4,4 @@ macro_rules! Elf_Ehdr {
     };
 }
 
-Elf_Ehdr!()
+Elf_Ehdr!();

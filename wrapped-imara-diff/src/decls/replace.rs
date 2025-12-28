@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        UnifiedDiffConfig!();
+        Diff!();
         Algorithm!();
         BasicLineDiffPrinter!();
-        Diff!();
         InternedInput!();
-        UnifiedDiffConfig!();
     };
 }
 
@@ -39,4 +39,4 @@ fn foo() -> Bar{
     };
 }
 
-replace!()
+replace!();

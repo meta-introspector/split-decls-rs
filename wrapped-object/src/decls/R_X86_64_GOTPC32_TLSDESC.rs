@@ -4,4 +4,4 @@ macro_rules! R_X86_64_GOTPC32_TLSDESC {
     };
 }
 
-R_X86_64_GOTPC32_TLSDESC!()
+R_X86_64_GOTPC32_TLSDESC!();

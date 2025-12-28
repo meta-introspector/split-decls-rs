@@ -4,4 +4,4 @@ macro_rules! find_param_in_ty {
     };
 }
 
-find_param_in_ty!()
+find_param_in_ty!();

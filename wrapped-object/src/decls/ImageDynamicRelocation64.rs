@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U64!();
         U32!();
+        U64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ImageDynamicRelocation64 {
     };
 }
 
-ImageDynamicRelocation64!()
+ImageDynamicRelocation64!();

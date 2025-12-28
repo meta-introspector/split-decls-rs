@@ -4,4 +4,4 @@ macro_rules! completion_list_no_kw {
     };
 }
 
-completion_list_no_kw!()
+completion_list_no_kw!();

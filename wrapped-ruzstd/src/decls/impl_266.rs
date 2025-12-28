@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Read!();
+        CompressState!();
+        MatchGeneratorDriver!();
+        Write!();
+        FseTables!();
         CompressionLevel!();
         FrameCompressor!();
-        Write!();
-        CompressState!();
-        Read!();
-        MatchGeneratorDriver!();
-        FseTables!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_266 {
     };
 }
 
-impl_266!()
+impl_266!();

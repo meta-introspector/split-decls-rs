@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParallelExtend!();
         ListStringConsumer!();
+        ParallelExtend!();
         IntoParallelIterator!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_441 {
     };
 }
 
-impl_441!()
+impl_441!();

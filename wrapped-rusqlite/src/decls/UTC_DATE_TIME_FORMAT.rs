@@ -4,4 +4,4 @@ macro_rules! UTC_DATE_TIME_FORMAT {
     };
 }
 
-UTC_DATE_TIME_FORMAT!()
+UTC_DATE_TIME_FORMAT!();

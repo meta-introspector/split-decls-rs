@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_AM_CALL32 {
     };
 }
 
-IMAGE_REL_AM_CALL32!()
+IMAGE_REL_AM_CALL32!();

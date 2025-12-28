@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TestGraph!();
         Predecessors!();
         Node!();
+        TestGraph!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

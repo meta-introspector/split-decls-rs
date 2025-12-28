@@ -4,4 +4,4 @@ macro_rules! TrieSetOwned {
     };
 }
 
-TrieSetOwned!()
+TrieSetOwned!();

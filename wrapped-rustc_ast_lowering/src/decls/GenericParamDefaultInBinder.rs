@@ -4,4 +4,4 @@ macro_rules! GenericParamDefaultInBinder {
     };
 }
 
-GenericParamDefaultInBinder!()
+GenericParamDefaultInBinder!();

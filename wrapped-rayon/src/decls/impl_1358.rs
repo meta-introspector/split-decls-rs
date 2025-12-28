@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DrainProducer!();
         Producer!();
-        IntoIter!();
         SliceDrain!();
+        IntoIter!();
+        DrainProducer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1358 {
     };
 }
 
-impl_1358!()
+impl_1358!();

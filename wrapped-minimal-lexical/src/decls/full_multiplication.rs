@@ -4,4 +4,4 @@ macro_rules! full_multiplication {
     };
 }
 
-full_multiplication!()
+full_multiplication!();

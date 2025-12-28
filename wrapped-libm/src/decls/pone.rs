@@ -4,4 +4,4 @@ macro_rules! pone {
     };
 }
 
-pone!()
+pone!();

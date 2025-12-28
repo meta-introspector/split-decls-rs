@@ -4,4 +4,4 @@ macro_rules! atomic_cell {
     };
 }
 
-atomic_cell!()
+atomic_cell!();

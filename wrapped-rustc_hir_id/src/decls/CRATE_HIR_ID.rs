@@ -12,4 +12,4 @@ macro_rules! CRATE_HIR_ID {
     };
 }
 
-CRATE_HIR_ID!()
+CRATE_HIR_ID!();

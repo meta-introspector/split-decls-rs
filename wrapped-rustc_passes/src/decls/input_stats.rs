@@ -4,4 +4,4 @@ macro_rules! input_stats {
     };
 }
 
-input_stats!()
+input_stats!();

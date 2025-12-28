@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StateID!();
-        NFA!();
         Transition!();
+        NFA!();
+        StateID!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Utf8BoundedEntry {
     };
 }
 
-Utf8BoundedEntry!()
+Utf8BoundedEntry!();

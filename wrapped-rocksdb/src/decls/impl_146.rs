@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         WriteBufferManager!();
-        DB!();
         WriteBufferManagerWrapper!();
+        DB!();
         Cache!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_146 {
     };
 }
 
-impl_146!()
+impl_146!();

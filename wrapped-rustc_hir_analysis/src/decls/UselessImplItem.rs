@@ -4,4 +4,4 @@ macro_rules! UselessImplItem {
     };
 }
 
-UselessImplItem!()
+UselessImplItem!();

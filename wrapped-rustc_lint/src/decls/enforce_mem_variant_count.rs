@@ -12,4 +12,4 @@ macro_rules! enforce_mem_variant_count {
     };
 }
 
-enforce_mem_variant_count!()
+enforce_mem_variant_count!();

@@ -4,4 +4,4 @@ macro_rules! legacy_protocol {
     };
 }
 
-legacy_protocol!()
+legacy_protocol!();

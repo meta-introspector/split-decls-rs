@@ -4,4 +4,4 @@ macro_rules! DecompositionTables {
     };
 }
 
-DecompositionTables!()
+DecompositionTables!();

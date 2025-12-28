@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Accel!();
         DebugByte!();
+        Accel!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VirtualPath!();
         VfsPath!();
+        VirtualPath!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VfsPathRepr {
     };
 }
 
-VfsPathRepr!()
+VfsPathRepr!();

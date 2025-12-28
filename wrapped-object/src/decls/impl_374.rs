@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Crel!();
-        Endian!();
         Rel!();
-        Rela!();
+        Endian!();
+        Crel!();
         SymbolIndex!();
+        Rela!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_374 {
     };
 }
 
-impl_374!()
+impl_374!();

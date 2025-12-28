@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Interner!();
+        GenericArg!();
         AliasTy!();
-        GenericArgs!();
         DefId!();
         AliasTyKind!();
-        GenericArg!();
         Ty!();
+        GenericArgs!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_436 {
     };
 }
 
-impl_436!()
+impl_436!();

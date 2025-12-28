@@ -4,4 +4,4 @@ macro_rules! PROC_NO_NEW_PRIVS_ENABLE {
     };
 }
 
-PROC_NO_NEW_PRIVS_ENABLE!()
+PROC_NO_NEW_PRIVS_ENABLE!();

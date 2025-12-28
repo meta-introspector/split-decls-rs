@@ -4,4 +4,4 @@ macro_rules! record_llvm_cgu_instructions_stats {
     };
 }
 
-record_llvm_cgu_instructions_stats!()
+record_llvm_cgu_instructions_stats!();

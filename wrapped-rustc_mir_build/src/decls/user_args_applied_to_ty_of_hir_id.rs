@@ -11,4 +11,4 @@ macro_rules! user_args_applied_to_ty_of_hir_id {
     };
 }
 
-user_args_applied_to_ty_of_hir_id!()
+user_args_applied_to_ty_of_hir_id!();

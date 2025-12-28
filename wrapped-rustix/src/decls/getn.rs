@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Event!();
+        Result!();
         Buffer!();
         Timespec!();
-        Result!();
-        Event!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! getn {
     };
 }
 
-getn!()
+getn!();

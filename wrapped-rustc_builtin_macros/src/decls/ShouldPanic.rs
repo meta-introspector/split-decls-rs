@@ -4,4 +4,4 @@ macro_rules! ShouldPanic {
     };
 }
 
-ShouldPanic!()
+ShouldPanic!();

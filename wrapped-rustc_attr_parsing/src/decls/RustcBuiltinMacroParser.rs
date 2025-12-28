@@ -4,4 +4,4 @@ macro_rules! RustcBuiltinMacroParser {
     };
 }
 
-RustcBuiltinMacroParser!()
+RustcBuiltinMacroParser!();

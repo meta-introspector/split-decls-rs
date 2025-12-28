@@ -4,4 +4,4 @@ macro_rules! EF_SH3_DSP {
     };
 }
 
-EF_SH3_DSP!()
+EF_SH3_DSP!();

@@ -4,4 +4,4 @@ macro_rules! invalid_width {
     };
 }
 
-invalid_width!()
+invalid_width!();

@@ -4,4 +4,4 @@ macro_rules! has_ignore_attr {
     };
 }
 
-has_ignore_attr!()
+has_ignore_attr!();

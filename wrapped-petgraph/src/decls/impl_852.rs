@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NodeIdentifiers!();
         IndexType!();
-        EdgeType!();
+        NodeIdentifiers!();
         StableGraph!();
+        EdgeType!();
         NodeIndices!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_852 {
     };
 }
 
-impl_852!()
+impl_852!();

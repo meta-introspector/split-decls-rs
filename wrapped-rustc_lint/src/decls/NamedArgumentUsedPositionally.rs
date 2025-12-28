@@ -4,4 +4,4 @@ macro_rules! NamedArgumentUsedPositionally {
     };
 }
 
-NamedArgumentUsedPositionally!()
+NamedArgumentUsedPositionally!();

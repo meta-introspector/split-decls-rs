@@ -4,4 +4,4 @@ macro_rules! is_upper_snake_case {
     };
 }
 
-is_upper_snake_case!()
+is_upper_snake_case!();

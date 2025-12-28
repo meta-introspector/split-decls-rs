@@ -4,4 +4,4 @@ macro_rules! R_CRIS_8 {
     };
 }
 
-R_CRIS_8!()
+R_CRIS_8!();

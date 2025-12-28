@@ -4,4 +4,4 @@ macro_rules! DT_AARCH64_NUM {
     };
 }
 
-DT_AARCH64_NUM!()
+DT_AARCH64_NUM!();

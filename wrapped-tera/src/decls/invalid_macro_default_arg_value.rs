@@ -7,4 +7,4 @@ macro_rules! invalid_macro_default_arg_value {
     };
 }
 
-invalid_macro_default_arg_value!()
+invalid_macro_default_arg_value!();

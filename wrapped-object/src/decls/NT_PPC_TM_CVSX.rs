@@ -4,4 +4,4 @@ macro_rules! NT_PPC_TM_CVSX {
     };
 }
 
-NT_PPC_TM_CVSX!()
+NT_PPC_TM_CVSX!();

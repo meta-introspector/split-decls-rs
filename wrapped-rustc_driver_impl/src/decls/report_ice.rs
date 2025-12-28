@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        IcePathErrorEnv!();
-        IceBugReport!();
         IceExcludeCargoDefaults!();
         UpdateNightlyNote!();
-        IceVersion!();
-        IceBugReportInternalFeature!();
-        IceFlags!();
         Ice!();
-        IcePathError!();
+        IceBugReportInternalFeature!();
         IcePath!();
+        IceFlags!();
+        IceVersion!();
+        IcePathErrorEnv!();
+        IceBugReport!();
+        IcePathError!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! report_ice {
     };
 }
 
-report_ice!()
+report_ice!();

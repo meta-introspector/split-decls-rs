@@ -4,4 +4,4 @@ macro_rules! TOKEN_UPGRADABLE {
     };
 }
 
-TOKEN_UPGRADABLE!()
+TOKEN_UPGRADABLE!();

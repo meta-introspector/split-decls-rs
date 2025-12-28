@@ -4,4 +4,4 @@ macro_rules! rust_doc {
     };
 }
 
-rust_doc!()
+rust_doc!();

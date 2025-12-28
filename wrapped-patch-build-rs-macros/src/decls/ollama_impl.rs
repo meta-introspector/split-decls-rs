@@ -4,4 +4,4 @@ macro_rules! ollama_impl {
     };
 }
 
-ollama_impl!()
+ollama_impl!();

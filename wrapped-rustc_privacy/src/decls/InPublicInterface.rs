@@ -4,4 +4,4 @@ macro_rules! InPublicInterface {
     };
 }
 
-InPublicInterface!()
+InPublicInterface!();

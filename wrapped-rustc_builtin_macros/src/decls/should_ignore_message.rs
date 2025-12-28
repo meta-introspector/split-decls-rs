@@ -4,4 +4,4 @@ macro_rules! should_ignore_message {
     };
 }
 
-should_ignore_message!()
+should_ignore_message!();

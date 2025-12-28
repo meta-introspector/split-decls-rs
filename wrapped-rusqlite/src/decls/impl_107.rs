@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Context!();
-        Error!();
-        Aggregate!();
-        Name!();
-        WindowAggregate!();
-        SqlFnOutput!();
         Result!();
+        Context!();
+        WindowAggregate!();
+        Name!();
         InnerConnection!();
         Connection!();
+        Error!();
+        SqlFnOutput!();
+        Aggregate!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

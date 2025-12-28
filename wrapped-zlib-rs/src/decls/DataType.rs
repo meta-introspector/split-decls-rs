@@ -4,4 +4,4 @@ macro_rules! DataType {
     };
 }
 
-DataType!()
+DataType!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThreadMode!();
         DBCommon!();
+        ThreadMode!();
         DBInner!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

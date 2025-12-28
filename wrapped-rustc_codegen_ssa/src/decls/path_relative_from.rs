@@ -4,4 +4,4 @@ macro_rules! path_relative_from {
     };
 }
 
-path_relative_from!()
+path_relative_from!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Err!();
-        ErrorKind!();
         Error!();
+        ErrorKind!();
+        Err!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_all_consuming {
     };
 }
 
-test_all_consuming!()
+test_all_consuming!();

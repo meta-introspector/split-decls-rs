@@ -4,4 +4,4 @@ macro_rules! GENERIC_RELOC_PAIR {
     };
 }
 
-GENERIC_RELOC_PAIR!()
+GENERIC_RELOC_PAIR!();

@@ -4,4 +4,4 @@ macro_rules! Response {
     };
 }
 
-Response!()
+Response!();

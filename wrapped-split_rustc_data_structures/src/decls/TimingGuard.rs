@@ -4,4 +4,4 @@ macro_rules! TimingGuard {
     };
 }
 
-TimingGuard!()
+TimingGuard!();

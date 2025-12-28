@@ -4,4 +4,4 @@ macro_rules! ResponseUrl {
     };
 }
 
-ResponseUrl!()
+ResponseUrl!();

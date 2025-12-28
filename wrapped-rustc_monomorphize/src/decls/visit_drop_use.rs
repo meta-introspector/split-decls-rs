@@ -11,4 +11,4 @@ macro_rules! visit_drop_use {
     };
 }
 
-visit_drop_use!()
+visit_drop_use!();

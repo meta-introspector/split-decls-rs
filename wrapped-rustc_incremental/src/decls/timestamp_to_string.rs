@@ -4,4 +4,4 @@ macro_rules! timestamp_to_string {
     };
 }
 
-timestamp_to_string!()
+timestamp_to_string!();

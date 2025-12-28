@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ErrorKind!();
-        Result!();
-        ParserI!();
+        Ast!();
         Span!();
         Parser!();
-        Ast!();
+        ParserI!();
+        Result!();
         NestLimiter!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

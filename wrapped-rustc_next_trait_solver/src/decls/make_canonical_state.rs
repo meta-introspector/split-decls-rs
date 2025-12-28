@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SolverDelegate!();
         Canonicalizer!();
+        SolverDelegate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! make_canonical_state {
     };
 }
 
-make_canonical_state!()
+make_canonical_state!();

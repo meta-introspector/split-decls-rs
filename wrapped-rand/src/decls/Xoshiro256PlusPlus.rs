@@ -4,4 +4,4 @@ macro_rules! Xoshiro256PlusPlus {
     };
 }
 
-Xoshiro256PlusPlus!()
+Xoshiro256PlusPlus!();

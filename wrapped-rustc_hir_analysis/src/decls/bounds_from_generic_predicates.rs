@@ -4,4 +4,4 @@ macro_rules! bounds_from_generic_predicates {
     };
 }
 
-bounds_from_generic_predicates!()
+bounds_from_generic_predicates!();

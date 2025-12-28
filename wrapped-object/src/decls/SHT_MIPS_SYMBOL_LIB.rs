@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_SYMBOL_LIB {
     };
 }
 
-SHT_MIPS_SYMBOL_LIB!()
+SHT_MIPS_SYMBOL_LIB!();

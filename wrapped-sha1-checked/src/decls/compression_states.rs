@@ -4,4 +4,4 @@ macro_rules! compression_states {
     };
 }
 
-compression_states!()
+compression_states!();

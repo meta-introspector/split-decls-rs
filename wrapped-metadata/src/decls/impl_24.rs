@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         TypeName!();
-        Blob!();
         Type!();
-        Signature!();
+        Blob!();
         Decode!();
+        Signature!();
         TypeIndex!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

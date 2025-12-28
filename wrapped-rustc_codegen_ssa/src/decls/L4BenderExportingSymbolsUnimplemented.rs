@@ -11,4 +11,4 @@ macro_rules! L4BenderExportingSymbolsUnimplemented {
     };
 }
 
-L4BenderExportingSymbolsUnimplemented!()
+L4BenderExportingSymbolsUnimplemented!();

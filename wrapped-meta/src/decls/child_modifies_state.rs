@@ -11,4 +11,4 @@ macro_rules! child_modifies_state {
     };
 }
 
-child_modifies_state!()
+child_modifies_state!();

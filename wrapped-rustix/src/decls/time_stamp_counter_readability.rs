@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         TimeStampCounterReadability!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! time_stamp_counter_readability {
     };
 }
 
-time_stamp_counter_readability!()
+time_stamp_counter_readability!();

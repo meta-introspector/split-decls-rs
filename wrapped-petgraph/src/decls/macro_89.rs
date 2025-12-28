@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EdgeReferences!();
-        EdgeRef!();
         GraphRef!();
+        EdgeRef!();
+        EdgeReferences!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_89 {
     };
 }
 
-macro_89!()
+macro_89!();

@@ -4,4 +4,4 @@ macro_rules! OrderedF64 {
     };
 }
 
-OrderedF64!()
+OrderedF64!();

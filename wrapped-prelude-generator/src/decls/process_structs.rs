@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TypeInfo!();
         TypeCollector!();
         Args!();
-        TypeInfo!();
     };
 }
 
@@ -16,4 +16,4 @@ use crate::type_extractor::TypeInfo;
     };
 }
 
-process_structs!()
+process_structs!();

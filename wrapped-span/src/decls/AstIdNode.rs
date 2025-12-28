@@ -4,4 +4,4 @@ macro_rules! AstIdNode {
     };
 }
 
-AstIdNode!()
+AstIdNode!();

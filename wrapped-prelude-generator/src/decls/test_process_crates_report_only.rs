@@ -13,4 +13,4 @@ macro_rules! test_process_crates_report_only {
     };
 }
 
-test_process_crates_report_only!()
+test_process_crates_report_only!();

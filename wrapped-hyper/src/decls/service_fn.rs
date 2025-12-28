@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Service!();
         Response!();
         ServiceFn!();
-        Service!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! service_fn {
     };
 }
 
-service_fn!()
+service_fn!();

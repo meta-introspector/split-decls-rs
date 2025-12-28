@@ -4,4 +4,4 @@ macro_rules! FileReferenceNode {
     };
 }
 
-FileReferenceNode!()
+FileReferenceNode!();

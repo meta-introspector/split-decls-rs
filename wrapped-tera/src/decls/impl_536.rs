@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Node!();
         Result!();
-        Block!();
         MacroDefinition!();
         Error!();
+        Node!();
+        Block!();
         Template!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_536 {
     };
 }
 
-impl_536!()
+impl_536!();

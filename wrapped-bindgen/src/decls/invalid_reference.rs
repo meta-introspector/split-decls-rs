@@ -4,4 +4,4 @@ macro_rules! invalid_reference {
     };
 }
 
-invalid_reference!()
+invalid_reference!();

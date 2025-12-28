@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         CoverageInfoBuilder!();
         CFG!();
-        Scope!();
         BlockContext!();
-        LocalsForNode!();
         CaptureMap!();
         GuardFrame!();
         Scopes!();
+        LocalsForNode!();
+        Scope!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! Builder {
     };
 }
 
-Builder!()
+Builder!();

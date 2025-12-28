@@ -4,4 +4,4 @@ macro_rules! PT_LOPROC {
     };
 }
 
-PT_LOPROC!()
+PT_LOPROC!();

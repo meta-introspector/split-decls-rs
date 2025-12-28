@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DataInner!();
-        FilterSet!();
         DataSource!();
+        FilterSet!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Data {
     };
 }
 
-Data!()
+Data!();

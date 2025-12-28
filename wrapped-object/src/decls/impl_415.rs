@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Endian!();
-        GnuProperty!();
         Result!();
+        GnuProperty!();
         GnuPropertyIterator!();
         Item!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_415 {
     };
 }
 
-impl_415!()
+impl_415!();

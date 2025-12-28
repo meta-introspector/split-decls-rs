@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ClonedProducer!();
-        Folder!();
+        Producer!();
         IntoIter!();
         Cloned!();
         ClonedFolder!();
-        Producer!();
+        Folder!();
+        ClonedProducer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_332 {
     };
 }
 
-impl_332!()
+impl_332!();

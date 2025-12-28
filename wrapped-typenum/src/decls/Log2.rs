@@ -11,4 +11,4 @@ macro_rules! Log2 {
     };
 }
 
-Log2!()
+Log2!();

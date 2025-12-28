@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        Aggregate!();
         SqlFnOutput!();
+        Aggregate!();
         Context!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! call_boxed_step {
     };
 }
 
-call_boxed_step!()
+call_boxed_step!();

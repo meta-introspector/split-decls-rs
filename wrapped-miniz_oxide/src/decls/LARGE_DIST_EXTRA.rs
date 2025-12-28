@@ -4,4 +4,4 @@ macro_rules! LARGE_DIST_EXTRA {
     };
 }
 
-LARGE_DIST_EXTRA!()
+LARGE_DIST_EXTRA!();

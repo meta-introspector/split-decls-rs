@@ -11,4 +11,4 @@ macro_rules! impl_is_terminal {
     };
 }
 
-impl_is_terminal!()
+impl_is_terminal!();

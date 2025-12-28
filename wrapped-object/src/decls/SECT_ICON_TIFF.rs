@@ -4,4 +4,4 @@ macro_rules! SECT_ICON_TIFF {
     };
 }
 
-SECT_ICON_TIFF!()
+SECT_ICON_TIFF!();

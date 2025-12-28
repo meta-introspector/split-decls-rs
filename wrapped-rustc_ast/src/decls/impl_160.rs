@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        TyKind!();
         PatKind!();
-        BindingMode!();
-        ExplicitSelf!();
-        AttrVec!();
-        ByRef!();
-        Ty!();
-        MutTy!();
+        TyKind!();
         Param!();
-        Pat!();
+        MutTy!();
+        ByRef!();
         SelfKind!();
+        Pat!();
+        BindingMode!();
+        AttrVec!();
+        Ty!();
+        ExplicitSelf!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

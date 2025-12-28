@@ -11,4 +11,4 @@ macro_rules! wsa_cleanup {
     };
 }
 
-wsa_cleanup!()
+wsa_cleanup!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UseSpans!();
-        CaptureVarCause!();
-        CaptureArgLabel!();
         CaptureVarKind!();
+        UseSpans!();
         InitializationRequiringAction!();
+        CaptureArgLabel!();
+        CaptureVarCause!();
         CaptureVarPathUseCause!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Arg!();
         Timestamps!();
         Result!();
-        Arg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! utimensat {
     };
 }
 
-utimensat!()
+utimensat!();

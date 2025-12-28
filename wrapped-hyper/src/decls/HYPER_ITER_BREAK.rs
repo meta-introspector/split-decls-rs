@@ -4,4 +4,4 @@ macro_rules! HYPER_ITER_BREAK {
     };
 }
 
-HYPER_ITER_BREAK!()
+HYPER_ITER_BREAK!();

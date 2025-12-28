@@ -26,4 +26,4 @@ macro_rules! test_fn_like_fn_like_span_ops {
     };
 }
 
-test_fn_like_fn_like_span_ops!()
+test_fn_like_fn_like_span_ops!();

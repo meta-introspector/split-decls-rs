@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Span!();
-        Anchored!();
         Regex!();
+        Anchored!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Input {
     };
 }
 
-Input!()
+Input!();

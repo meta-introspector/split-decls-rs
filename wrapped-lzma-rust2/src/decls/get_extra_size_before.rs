@@ -4,4 +4,4 @@ macro_rules! get_extra_size_before {
     };
 }
 
-get_extra_size_before!()
+get_extra_size_before!();

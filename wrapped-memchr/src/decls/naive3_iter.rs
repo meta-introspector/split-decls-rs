@@ -4,4 +4,4 @@ macro_rules! naive3_iter {
     };
 }
 
-naive3_iter!()
+naive3_iter!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ComparisonKind!();
+        TrackerData!();
         IncorrectCguReuseType!();
         CguNotRecorded!();
-        TrackerData!();
         CguReuse!();
         CguReuseTracker!();
-        ComparisonKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

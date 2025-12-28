@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Finder!();
         TwoWayWithPrefilter!();
+        Finder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! other_329 {
     };
 }
 
-other_329!()
+other_329!();

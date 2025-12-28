@@ -4,4 +4,4 @@ macro_rules! deflate_compression_level_range {
     };
 }
 
-deflate_compression_level_range!()
+deflate_compression_level_range!();

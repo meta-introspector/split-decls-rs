@@ -4,4 +4,4 @@ macro_rules! SingleUseLifetimeSugg {
     };
 }
 
-SingleUseLifetimeSugg!()
+SingleUseLifetimeSugg!();

@@ -11,4 +11,4 @@ macro_rules! racy_take_local {
     };
 }
 
-racy_take_local!()
+racy_take_local!();

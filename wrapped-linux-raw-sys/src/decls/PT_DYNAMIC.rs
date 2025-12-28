@@ -4,4 +4,4 @@ macro_rules! PT_DYNAMIC {
     };
 }
 
-PT_DYNAMIC!()
+PT_DYNAMIC!();

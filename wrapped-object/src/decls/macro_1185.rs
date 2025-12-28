@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Header!();
-        AixHeader!();
         AixFileHeader!();
         AixMemberOffset!();
+        Header!();
+        AixHeader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_1185 {
     };
 }
 
-macro_1185!()
+macro_1185!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SignalOnly!();
-        Signals!();
         Exfiltrator!();
-        SignalDelivery!();
         Handle!();
+        SignalOnly!();
+        SignalDelivery!();
+        Signals!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! SignalsInfo {
     };
 }
 
-SignalsInfo!()
+SignalsInfo!();

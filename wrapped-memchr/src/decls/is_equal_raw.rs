@@ -4,4 +4,4 @@ macro_rules! is_equal_raw {
     };
 }
 
-is_equal_raw!()
+is_equal_raw!();

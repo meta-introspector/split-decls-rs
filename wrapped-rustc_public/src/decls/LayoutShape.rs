@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ValueAbi!();
-        FieldsShape!();
-        VariantsShape!();
-        Size!();
         Align!();
+        Size!();
+        VariantsShape!();
+        FieldsShape!();
+        ValueAbi!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! LayoutShape {
     };
 }
 
-LayoutShape!()
+LayoutShape!();

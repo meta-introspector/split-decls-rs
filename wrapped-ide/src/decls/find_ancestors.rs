@@ -11,4 +11,4 @@ macro_rules! find_ancestors {
     };
 }
 
-find_ancestors!()
+find_ancestors!();

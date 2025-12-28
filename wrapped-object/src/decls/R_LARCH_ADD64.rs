@@ -4,4 +4,4 @@ macro_rules! R_LARCH_ADD64 {
     };
 }
 
-R_LARCH_ADD64!()
+R_LARCH_ADD64!();

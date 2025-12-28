@@ -4,4 +4,4 @@ macro_rules! ZETA_ROOT_OF_UNIT {
     };
 }
 
-ZETA_ROOT_OF_UNIT!()
+ZETA_ROOT_OF_UNIT!();

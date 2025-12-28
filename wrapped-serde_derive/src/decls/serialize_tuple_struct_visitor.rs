@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Parameters!();
         TupleTrait!();
         Field!();
-        Parameters!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! serialize_tuple_struct_visitor {
     };
 }
 
-serialize_tuple_struct_visitor!()
+serialize_tuple_struct_visitor!();

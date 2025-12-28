@@ -11,4 +11,4 @@ macro_rules! get_doc_links {
     };
 }
 
-get_doc_links!()
+get_doc_links!();

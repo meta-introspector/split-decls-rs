@@ -4,4 +4,4 @@ macro_rules! AttrApplication {
     };
 }
 
-AttrApplication!()
+AttrApplication!();

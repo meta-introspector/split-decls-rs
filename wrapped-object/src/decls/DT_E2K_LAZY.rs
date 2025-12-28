@@ -4,4 +4,4 @@ macro_rules! DT_E2K_LAZY {
     };
 }
 
-DT_E2K_LAZY!()
+DT_E2K_LAZY!();

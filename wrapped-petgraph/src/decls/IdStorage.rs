@@ -4,4 +4,4 @@ macro_rules! IdStorage {
     };
 }
 
-IdStorage!()
+IdStorage!();

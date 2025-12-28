@@ -4,4 +4,4 @@ macro_rules! ProcessingError {
     };
 }
 
-ProcessingError!()
+ProcessingError!();

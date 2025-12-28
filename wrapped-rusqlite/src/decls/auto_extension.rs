@@ -4,4 +4,4 @@ macro_rules! auto_extension {
     };
 }
 
-auto_extension!()
+auto_extension!();

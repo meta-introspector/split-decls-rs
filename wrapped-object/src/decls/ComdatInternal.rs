@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        XcoffComdat64!();
-        MachOComdat64!();
-        PeComdat32!();
-        CoffBigComdat!();
         MachOComdat32!();
-        CoffComdat!();
-        PeComdat64!();
+        ReadRef!();
+        ElfComdat32!();
+        MachO64!();
         XcoffComdat32!();
         ElfComdat64!();
-        MachO64!();
-        ElfComdat32!();
+        MachOComdat64!();
         MachO32!();
-        Endianness!();
-        ReadRef!();
+        PeComdat32!();
+        CoffBigComdat!();
+        PeComdat64!();
+        CoffComdat!();
         WasmComdat!();
+        XcoffComdat64!();
+        Endianness!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! ComdatInternal {
     };
 }
 
-ComdatInternal!()
+ComdatInternal!();

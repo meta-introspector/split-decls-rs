@@ -4,4 +4,4 @@ macro_rules! STN_UNDEF {
     };
 }
 
-STN_UNDEF!()
+STN_UNDEF!();

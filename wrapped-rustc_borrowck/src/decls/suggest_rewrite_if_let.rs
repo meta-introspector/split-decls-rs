@@ -4,4 +4,4 @@ macro_rules! suggest_rewrite_if_let {
     };
 }
 
-suggest_rewrite_if_let!()
+suggest_rewrite_if_let!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Locatable!();
         FnCtxt!();
+        Locatable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Resolver {
     };
 }
 
-Resolver!()
+Resolver!();

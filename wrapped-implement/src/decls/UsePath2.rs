@@ -11,4 +11,4 @@ macro_rules! UsePath2 {
     };
 }
 
-UsePath2!()
+UsePath2!();

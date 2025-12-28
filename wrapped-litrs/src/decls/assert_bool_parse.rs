@@ -12,4 +12,4 @@ macro_rules! assert_bool_parse {
     };
 }
 
-assert_bool_parse!()
+assert_bool_parse!();

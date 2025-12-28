@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IndexType!();
-        Csr!();
-        Undirected!();
         ToGraph6!();
+        Undirected!();
+        Csr!();
+        IndexType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_622 {
     };
 }
 
-impl_622!()
+impl_622!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CaseFoldError!();
         Bound!();
         Result!();
+        CaseFoldError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Interval {
     };
 }
 
-Interval!()
+Interval!();

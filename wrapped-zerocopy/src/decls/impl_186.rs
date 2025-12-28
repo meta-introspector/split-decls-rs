@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SendSyncPhantomData!();
-        Alignment!();
-        ConvertError!();
-        AlignmentError!();
         KnownLayout!();
         AsAddress!();
+        ConvertError!();
+        AlignmentError!();
+        SendSyncPhantomData!();
+        Alignment!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

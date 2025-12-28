@@ -4,4 +4,4 @@ macro_rules! MachO32 {
     };
 }
 
-MachO32!()
+MachO32!();

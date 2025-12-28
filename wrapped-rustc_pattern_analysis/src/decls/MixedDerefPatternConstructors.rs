@@ -4,4 +4,4 @@ macro_rules! MixedDerefPatternConstructors {
     };
 }
 
-MixedDerefPatternConstructors!()
+MixedDerefPatternConstructors!();

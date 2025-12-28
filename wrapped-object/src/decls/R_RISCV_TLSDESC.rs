@@ -4,4 +4,4 @@ macro_rules! R_RISCV_TLSDESC {
     };
 }
 
-R_RISCV_TLSDESC!()
+R_RISCV_TLSDESC!();

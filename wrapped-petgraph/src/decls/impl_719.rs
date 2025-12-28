@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GraphIndex!();
-        EdgeIndex!();
         IndexType!();
+        EdgeIndex!();
+        GraphIndex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_719 {
     };
 }
 
-impl_719!()
+impl_719!();

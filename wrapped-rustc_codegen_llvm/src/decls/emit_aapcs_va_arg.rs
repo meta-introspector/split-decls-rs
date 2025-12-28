@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AllowHigherAlign!();
-        SlotSize!();
-        ForceRightAdjust!();
-        Builder!();
         PassMode!();
+        Builder!();
+        SlotSize!();
+        AllowHigherAlign!();
+        ForceRightAdjust!();
         IntPredicate!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! emit_aapcs_va_arg {
     };
 }
 
-emit_aapcs_va_arg!()
+emit_aapcs_va_arg!();

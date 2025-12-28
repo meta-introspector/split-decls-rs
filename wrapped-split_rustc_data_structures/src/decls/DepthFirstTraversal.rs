@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Direction!();
         LinkedGraph!();
         NodeIndex!();
-        Direction!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DepthFirstTraversal {
     };
 }
 
-DepthFirstTraversal!()
+DepthFirstTraversal!();

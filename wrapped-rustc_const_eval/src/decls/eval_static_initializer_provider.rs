@@ -4,4 +4,4 @@ macro_rules! eval_static_initializer_provider {
     };
 }
 
-eval_static_initializer_provider!()
+eval_static_initializer_provider!();

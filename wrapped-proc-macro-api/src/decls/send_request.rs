@@ -11,4 +11,4 @@ macro_rules! send_request {
     };
 }
 
-send_request!()
+send_request!();

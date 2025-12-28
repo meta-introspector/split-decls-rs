@@ -4,4 +4,4 @@ macro_rules! if_packet {
     };
 }
 
-if_packet!()
+if_packet!();

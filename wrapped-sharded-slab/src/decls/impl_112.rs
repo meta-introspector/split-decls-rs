@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LifecycleGen!();
         Generation!();
+        Pack!();
         Config!();
         RefCount!();
-        Pack!();
+        LifecycleGen!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

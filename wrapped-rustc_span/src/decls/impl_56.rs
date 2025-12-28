@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ExpnKind!();
+        ExpnId!();
+        SyntaxContext!();
+        Transparency!();
+        Span!();
+        ExpnData!();
+        HygieneData!();
         SyntaxContextData!();
         Edition!();
-        Transparency!();
-        SyntaxContext!();
         ExpnHash!();
-        HygieneData!();
-        ExpnData!();
-        ExpnId!();
-        Span!();
+        ExpnKind!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_56 {
     };
 }
 
-impl_56!()
+impl_56!();

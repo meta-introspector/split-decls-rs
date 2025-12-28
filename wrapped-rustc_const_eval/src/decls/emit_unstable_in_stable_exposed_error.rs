@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstCx!();
         UnstableInStableExposed!();
+        ConstCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! emit_unstable_in_stable_exposed_error {
     };
 }
 
-emit_unstable_in_stable_exposed_error!()
+emit_unstable_in_stable_exposed_error!();

@@ -11,4 +11,4 @@ macro_rules! report_bad_target {
     };
 }
 
-report_bad_target!()
+report_bad_target!();

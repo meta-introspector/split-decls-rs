@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         TypeMismatchSource!();
         ProbeScope!();
-        ItemKind!();
         FnCtxt!();
-        Mode!();
         CandidateKind!();
         IsSuggestion!();
+        ItemKind!();
+        Mode!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

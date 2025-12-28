@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        FSEDecoderError!();
+        Error!();
         GetBitsError!();
         DecodeSequenceError!();
-        Error!();
-        FSEDecoderError!();
         FSETableError!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

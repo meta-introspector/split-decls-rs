@@ -11,4 +11,4 @@ macro_rules! try_today {
     };
 }
 
-try_today!()
+try_today!();

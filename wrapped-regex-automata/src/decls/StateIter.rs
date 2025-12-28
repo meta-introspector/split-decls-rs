@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DFA!();
         Transitions!();
+        DFA!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StateIter {
     };
 }
 
-StateIter!()
+StateIter!();

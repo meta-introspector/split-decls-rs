@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
         Result!();
         Segment!();
+        ReadRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

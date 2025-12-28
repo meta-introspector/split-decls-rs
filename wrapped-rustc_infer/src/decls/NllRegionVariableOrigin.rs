@@ -4,4 +4,4 @@ macro_rules! NllRegionVariableOrigin {
     };
 }
 
-NllRegionVariableOrigin!()
+NllRegionVariableOrigin!();

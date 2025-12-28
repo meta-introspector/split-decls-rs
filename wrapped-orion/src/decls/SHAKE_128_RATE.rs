@@ -4,4 +4,4 @@ macro_rules! SHAKE_128_RATE {
     };
 }
 
-SHAKE_128_RATE!()
+SHAKE_128_RATE!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        B1!();
+        PrivateLogarithm2!();
+        UInt!();
         Add1!();
         Bit!();
         Logarithm2!();
-        B1!();
-        PrivateLogarithm2!();
         Log2!();
-        UInt!();
         Unsigned!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_501 {
     };
 }
 
-impl_501!()
+impl_501!();

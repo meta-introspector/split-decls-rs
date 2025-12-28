@@ -4,4 +4,4 @@ macro_rules! CALL_PENALTY {
     };
 }
 
-CALL_PENALTY!()
+CALL_PENALTY!();

@@ -4,4 +4,4 @@ macro_rules! parse_u64_digits {
     };
 }
 
-parse_u64_digits!()
+parse_u64_digits!();

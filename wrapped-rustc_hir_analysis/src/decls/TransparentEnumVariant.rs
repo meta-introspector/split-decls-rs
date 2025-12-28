@@ -4,4 +4,4 @@ macro_rules! TransparentEnumVariant {
     };
 }
 
-TransparentEnumVariant!()
+TransparentEnumVariant!();

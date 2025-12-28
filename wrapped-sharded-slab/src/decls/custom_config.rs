@@ -4,4 +4,4 @@ macro_rules! custom_config {
     };
 }
 
-custom_config!()
+custom_config!();

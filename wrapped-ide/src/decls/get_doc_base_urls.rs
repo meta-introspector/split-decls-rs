@@ -4,4 +4,4 @@ macro_rules! get_doc_base_urls {
     };
 }
 
-get_doc_base_urls!()
+get_doc_base_urls!();

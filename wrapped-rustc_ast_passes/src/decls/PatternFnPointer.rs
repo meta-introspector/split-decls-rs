@@ -4,4 +4,4 @@ macro_rules! PatternFnPointer {
     };
 }
 
-PatternFnPointer!()
+PatternFnPointer!();

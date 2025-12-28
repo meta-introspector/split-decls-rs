@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        SyntaxNode!();
+        SyntaxToken!();
         AstChildren!();
         AstNode!();
-        SyntaxToken!();
-        SyntaxNode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! support {
     };
 }
 
-support!()
+support!();

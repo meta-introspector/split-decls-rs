@@ -4,4 +4,4 @@ macro_rules! s390x {
     };
 }
 
-s390x!()
+s390x!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PreciseCapturingArg!();
         Param!();
+        PreciseCapturingArg!();
         Lifetime!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_275 {
     };
 }
 
-impl_275!()
+impl_275!();

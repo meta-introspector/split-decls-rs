@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FloatingPointMode!();
         Result!();
+        FloatingPointMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_floating_point_mode {
     };
 }
 
-set_floating_point_mode!()
+set_floating_point_mode!();

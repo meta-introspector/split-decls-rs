@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Errors!();
         Uts46!();
-        AsciiDenyList!();
         Hyphens!();
+        Errors!();
+        AsciiDenyList!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! domain_to_unicode {
     };
 }
 
-domain_to_unicode!()
+domain_to_unicode!();

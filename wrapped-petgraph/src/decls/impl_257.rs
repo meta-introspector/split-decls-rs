@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Cycle!();
-        DiGraph!();
-        Reversed!();
-        Acyclic!();
-        IndexType!();
-        Build!();
         AcyclicEdgeError!();
+        Acyclic!();
+        Reversed!();
+        DiGraph!();
         StableDiGraph!();
+        Build!();
+        IndexType!();
+        Cycle!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_257 {
     };
 }
 
-impl_257!()
+impl_257!();

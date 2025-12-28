@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MutexGuard!();
         Mutex!();
+        MutexGuard!();
         RawMutex!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ArcMutexGuard {
     };
 }
 
-ArcMutexGuard!()
+ArcMutexGuard!();

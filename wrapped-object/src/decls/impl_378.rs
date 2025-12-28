@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Crel!();
-        Error!();
         CrelIterator!();
         Result!();
-        Bytes!();
+        Error!();
         CrelIteratorHeader!();
+        Bytes!();
+        Crel!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_378 {
     };
 }
 
-impl_378!()
+impl_378!();

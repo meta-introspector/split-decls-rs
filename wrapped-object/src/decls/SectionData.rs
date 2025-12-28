@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Section!();
-        AttributesSection!();
-        Symbol!();
-        Note!();
-        Bytes!();
-        DynamicRelocation!();
-        Dynamic!();
         DynamicSymbol!();
+        Bytes!();
+        AttributesSection!();
+        Dynamic!();
+        Symbol!();
+        DynamicRelocation!();
+        Section!();
         Relocation!();
+        Note!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! SectionData {
     };
 }
 
-SectionData!()
+SectionData!();

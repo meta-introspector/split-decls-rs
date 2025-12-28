@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AcceptContext!();
         ExpectsFeatures!();
         ExpectsFeatureList!();
         ArgParser!();
+        AcceptContext!();
         Stage!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! parse_unstable {
     };
 }
 
-parse_unstable!()
+parse_unstable!();

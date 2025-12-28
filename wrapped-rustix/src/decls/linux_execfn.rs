@@ -4,4 +4,4 @@ macro_rules! linux_execfn {
     };
 }
 
-linux_execfn!()
+linux_execfn!();

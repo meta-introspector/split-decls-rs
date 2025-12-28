@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Flag!();
         Flags!();
         FlagsItemKind!();
+        Flag!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

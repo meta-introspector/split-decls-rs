@@ -20,4 +20,4 @@ macro_rules! str_normalize_reverse_order {
     };
 }
 
-str_normalize_reverse_order!()
+str_normalize_reverse_order!();

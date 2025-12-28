@@ -32,4 +32,4 @@ impl TokenContract {{
     };
 }
 
-token_macro_impl!()
+token_macro_impl!();

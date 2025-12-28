@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        NameRefContext!();
-        PathKind!();
         Completions!();
-        CompletionConfig!();
-        NameRefKind!();
         PathCompletionCtx!();
-        CompletionContext!();
         CompletionItem!();
         CompletionAnalysis!();
+        NameRefContext!();
+        CompletionConfig!();
+        PathKind!();
+        CompletionContext!();
+        NameRefKind!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! completions {
     };
 }
 
-completions!()
+completions!();

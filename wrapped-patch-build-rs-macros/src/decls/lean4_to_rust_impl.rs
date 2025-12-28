@@ -62,4 +62,4 @@ macro_rules! lean4_expr {{
     };
 }
 
-lean4_to_rust_impl!()
+lean4_to_rust_impl!();

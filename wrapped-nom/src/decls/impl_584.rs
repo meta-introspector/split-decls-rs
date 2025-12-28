@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Error!();
-        AsChar!();
-        OutputMode!();
-        Input!();
-        PResult!();
         MultiSpace0!();
+        OutputMode!();
+        Error!();
+        PResult!();
         ParseError!();
+        Parser!();
+        Input!();
+        AsChar!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_584 {
     };
 }
 
-impl_584!()
+impl_584!();

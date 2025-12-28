@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NegativeCycle!();
         EdgeRef!();
         BoundedMeasure!();
+        NegativeCycle!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! spfa_loop {
     };
 }
 
-spfa_loop!()
+spfa_loop!();

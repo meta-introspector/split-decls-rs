@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FileLock!();
+        Result!();
         Guard!();
         Lock!();
-        Result!();
+        FileLock!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_96 {
     };
 }
 
-impl_96!()
+impl_96!();

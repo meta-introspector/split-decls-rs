@@ -11,4 +11,4 @@ macro_rules! fcntl_nocache {
     };
 }
 
-fcntl_nocache!()
+fcntl_nocache!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Searcher!();
         Input!();
-        Captures!();
         MatchError!();
+        Captures!();
+        Searcher!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TryCapturesIter {
     };
 }
 
-TryCapturesIter!()
+TryCapturesIter!();

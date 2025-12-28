@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Safety!();
         HeaderSafety!();
+        Constness!();
         IsAsync!();
         FnHeader!();
-        Constness!();
-        Safety!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_321 {
     };
 }
 
-impl_321!()
+impl_321!();

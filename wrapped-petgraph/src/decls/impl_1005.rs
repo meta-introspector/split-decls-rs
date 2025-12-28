@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        NodeIndex!();
+        NeighborIterDirection!();
+        IndexType!();
+        EdgeType!();
         Nullable!();
         Edges!();
-        EdgeType!();
-        IndexType!();
-        NeighborIterDirection!();
-        NodeIndex!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_1005 {
     };
 }
 
-impl_1005!()
+impl_1005!();

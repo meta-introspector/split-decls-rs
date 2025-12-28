@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Read!();
         CompressionLevel!();
-        FrameCompressor!();
         StreamingDecoder!();
+        FrameCompressor!();
+        Read!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_encode_corpus_files_uncompressed_our_decompressor {
     };
 }
 
-test_encode_corpus_files_uncompressed_our_decompressor!()
+test_encode_corpus_files_uncompressed_our_decompressor!();

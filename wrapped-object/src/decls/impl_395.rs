@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SectionIndex!();
-        ElfComdatSectionIterator!();
-        Item!();
         ReadRef!();
+        Item!();
+        ElfComdatSectionIterator!();
         FileHeader!();
+        SectionIndex!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_395 {
     };
 }
 
-impl_395!()
+impl_395!();

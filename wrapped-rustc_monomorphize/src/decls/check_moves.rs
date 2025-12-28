@@ -11,4 +11,4 @@ macro_rules! check_moves {
     };
 }
 
-check_moves!()
+check_moves!();

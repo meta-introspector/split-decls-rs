@@ -4,4 +4,4 @@ macro_rules! DF_1_INITFIRST {
     };
 }
 
-DF_1_INITFIRST!()
+DF_1_INITFIRST!();

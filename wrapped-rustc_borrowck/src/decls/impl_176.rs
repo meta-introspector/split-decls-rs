@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        CaptureReasonLabel!();
-        CaptureReasonSuggest!();
-        CaptureReasonNote!();
-        Normal!();
-        BorrowData!();
-        CaptureVarCause!();
         CapturedMessageOpt!();
         UseSpans!();
+        CaptureVarCause!();
+        CaptureReasonSuggest!();
+        Normal!();
+        CaptureReasonLabel!();
+        CaptureReasonNote!();
         MirBorrowckCtxt!();
+        BorrowData!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

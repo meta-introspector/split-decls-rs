@@ -4,4 +4,4 @@ macro_rules! aes_ctr {
     };
 }
 
-aes_ctr!()
+aes_ctr!();

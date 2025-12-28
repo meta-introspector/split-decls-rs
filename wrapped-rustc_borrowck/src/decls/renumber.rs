@@ -4,4 +4,4 @@ macro_rules! renumber {
     };
 }
 
-renumber!()
+renumber!();

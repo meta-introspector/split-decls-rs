@@ -11,4 +11,4 @@ macro_rules! assert_dyn_sync {
     };
 }
 
-assert_dyn_sync!()
+assert_dyn_sync!();

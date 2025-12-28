@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PoloniusOutput!();
         ClosureRegionRequirements!();
         RegionErrors!();
         PoloniusDiagnosticsContext!();
-        PoloniusFacts!();
+        PoloniusOutput!();
         RegionInferenceContext!();
+        PoloniusFacts!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! NllOutput {
     };
 }
 
-NllOutput!()
+NllOutput!();

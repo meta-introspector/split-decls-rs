@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CargoMetadataConfig!();
         ProjectJson!();
+        CargoMetadataConfig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RustSourceWorkspaceConfig {
     };
 }
 
-RustSourceWorkspaceConfig!()
+RustSourceWorkspaceConfig!();

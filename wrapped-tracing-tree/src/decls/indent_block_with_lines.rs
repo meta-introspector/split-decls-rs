@@ -11,4 +11,4 @@ macro_rules! indent_block_with_lines {
     };
 }
 
-indent_block_with_lines!()
+indent_block_with_lines!();

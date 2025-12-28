@@ -4,4 +4,4 @@ macro_rules! EF_MIPS_FP64 {
     };
 }
 
-EF_MIPS_FP64!()
+EF_MIPS_FP64!();

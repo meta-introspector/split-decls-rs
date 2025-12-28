@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Delegate!();
-        CppStruct!();
-        Value!();
-        TokenStream!();
-        Interface!();
-        Class!();
+        DeriveWriter!();
         Literal!();
         Cfg!();
-        Type!();
-        DeriveWriter!();
-        TypeName!();
         CppInterface!();
+        Value!();
+        CppStruct!();
+        Interface!();
+        Delegate!();
+        TokenStream!();
+        Class!();
+        Type!();
         Config!();
+        TypeName!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_291 {
     };
 }
 
-impl_291!()
+impl_291!();

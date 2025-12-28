@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Value!();
-        MapAccess!();
-        OwnedRawDeserializer!();
-        Result!();
         RawKeyDeserializer!();
+        MapAccess!();
         Error!();
+        Result!();
+        OwnedRawDeserializer!();
+        Value!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_630 {
     };
 }
 
-impl_630!()
+impl_630!();

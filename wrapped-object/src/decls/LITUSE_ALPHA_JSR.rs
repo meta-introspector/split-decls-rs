@@ -4,4 +4,4 @@ macro_rules! LITUSE_ALPHA_JSR {
     };
 }
 
-LITUSE_ALPHA_JSR!()
+LITUSE_ALPHA_JSR!();

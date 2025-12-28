@@ -4,4 +4,4 @@ macro_rules! PPC_RELOC_PAIR {
     };
 }
 
-PPC_RELOC_PAIR!()
+PPC_RELOC_PAIR!();

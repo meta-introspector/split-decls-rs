@@ -12,4 +12,4 @@ macro_rules! params_from_iter {
     };
 }
 
-params_from_iter!()
+params_from_iter!();

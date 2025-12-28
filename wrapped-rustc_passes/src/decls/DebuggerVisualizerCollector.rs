@@ -4,4 +4,4 @@ macro_rules! DebuggerVisualizerCollector {
     };
 }
 
-DebuggerVisualizerCollector!()
+DebuggerVisualizerCollector!();

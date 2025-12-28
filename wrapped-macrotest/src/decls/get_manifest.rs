@@ -11,4 +11,4 @@ macro_rules! get_manifest {
     };
 }
 
-get_manifest!()
+get_manifest!();

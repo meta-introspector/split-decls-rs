@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        LowerRangeBoundMustBeLessThanUpper!();
         StaticInPattern!();
-        Variant!();
-        ConstParamInPattern!();
-        LowerRangeBoundMustBeLessThanOrEqualToUpper!();
-        Binding!();
-        PatCtxt!();
-        LiteralOutOfRange!();
-        Ascription!();
         NonConstPath!();
+        Binding!();
+        Variant!();
+        LowerRangeBoundMustBeLessThanUpper!();
+        Ascription!();
+        LowerRangeBoundMustBeLessThanOrEqualToUpper!();
+        PatCtxt!();
+        ConstParamInPattern!();
+        LiteralOutOfRange!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_340 {
     };
 }
 
-impl_340!()
+impl_340!();

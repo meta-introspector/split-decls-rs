@@ -4,4 +4,4 @@ macro_rules! expand_if_cached {
     };
 }
 
-expand_if_cached!()
+expand_if_cached!();

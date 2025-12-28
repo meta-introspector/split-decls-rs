@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         JobFifo!();
-        JobRef!();
         XorShift64Star!();
+        JobRef!();
         Registry!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! WorkerThread {
     };
 }
 
-WorkerThread!()
+WorkerThread!();

@@ -11,4 +11,4 @@ macro_rules! take_local {
     };
 }
 
-take_local!()
+take_local!();

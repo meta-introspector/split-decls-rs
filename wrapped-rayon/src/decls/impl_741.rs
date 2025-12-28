@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         UnindexedConsumer!();
         PanicFuse!();
-        ParallelIterator!();
         PanicFuseConsumer!();
+        ParallelIterator!();
         Fuse!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_741 {
     };
 }
 
-impl_741!()
+impl_741!();

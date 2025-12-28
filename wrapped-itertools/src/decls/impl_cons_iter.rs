@@ -12,4 +12,4 @@ macro_rules! impl_cons_iter {
     };
 }
 
-impl_cons_iter!()
+impl_cons_iter!();

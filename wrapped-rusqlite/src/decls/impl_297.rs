@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         DropBehavior!();
+        Savepoint!();
+        Connection!();
         Transaction!();
         TransactionBehavior!();
-        Connection!();
-        Savepoint!();
         Result!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_297 {
     };
 }
 
-impl_297!()
+impl_297!();

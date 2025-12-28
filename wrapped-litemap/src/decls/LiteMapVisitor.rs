@@ -4,4 +4,4 @@ macro_rules! LiteMapVisitor {
     };
 }
 
-LiteMapVisitor!()
+LiteMapVisitor!();

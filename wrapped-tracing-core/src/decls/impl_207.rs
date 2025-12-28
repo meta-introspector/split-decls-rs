@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LevelInner!();
-        LevelFilter!();
         Level!();
+        LevelFilter!();
         Subscriber!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_207 {
     };
 }
 
-impl_207!()
+impl_207!();

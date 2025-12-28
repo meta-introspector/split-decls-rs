@@ -4,4 +4,4 @@ macro_rules! INITIAL_H {
     };
 }
 
-INITIAL_H!()
+INITIAL_H!();

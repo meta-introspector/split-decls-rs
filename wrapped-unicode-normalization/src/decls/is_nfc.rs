@@ -11,4 +11,4 @@ macro_rules! is_nfc {
     };
 }
 
-is_nfc!()
+is_nfc!();

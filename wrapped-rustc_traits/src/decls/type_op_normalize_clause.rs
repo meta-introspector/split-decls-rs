@@ -4,4 +4,4 @@ macro_rules! type_op_normalize_clause {
     };
 }
 
-type_op_normalize_clause!()
+type_op_normalize_clause!();

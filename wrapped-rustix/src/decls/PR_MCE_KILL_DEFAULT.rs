@@ -4,4 +4,4 @@ macro_rules! PR_MCE_KILL_DEFAULT {
     };
 }
 
-PR_MCE_KILL_DEFAULT!()
+PR_MCE_KILL_DEFAULT!();

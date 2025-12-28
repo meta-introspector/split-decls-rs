@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         CoffSegment!();
-        Item!();
         CoffSegmentIterator!();
-        ReadRef!();
+        Item!();
         CoffHeader!();
+        ReadRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

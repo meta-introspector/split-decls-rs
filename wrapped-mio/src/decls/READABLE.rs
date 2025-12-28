@@ -4,4 +4,4 @@ macro_rules! READABLE {
     };
 }
 
-READABLE!()
+READABLE!();

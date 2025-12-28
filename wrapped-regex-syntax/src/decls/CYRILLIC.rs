@@ -4,4 +4,4 @@ macro_rules! CYRILLIC {
     };
 }
 
-CYRILLIC!()
+CYRILLIC!();

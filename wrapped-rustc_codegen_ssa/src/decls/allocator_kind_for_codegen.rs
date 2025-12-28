@@ -4,4 +4,4 @@ macro_rules! allocator_kind_for_codegen {
     };
 }
 
-allocator_kind_for_codegen!()
+allocator_kind_for_codegen!();

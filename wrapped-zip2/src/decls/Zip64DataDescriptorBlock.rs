@@ -11,4 +11,4 @@ macro_rules! Zip64DataDescriptorBlock {
     };
 }
 
-Zip64DataDescriptorBlock!()
+Zip64DataDescriptorBlock!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LlvmCodegenBackend!();
         DiagnosticHandlers!();
         ModuleLlvm!();
-        LlvmCodegenBackend!();
         CodegenDiagnosticsStage!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

@@ -4,4 +4,4 @@ macro_rules! YieldInClosure {
     };
 }
 
-YieldInClosure!()
+YieldInClosure!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UTerm!();
         ToInt!();
+        UTerm!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_505 {
     };
 }
 
-impl_505!()
+impl_505!();

@@ -4,4 +4,4 @@ macro_rules! log_syntax {
     };
 }
 
-log_syntax!()
+log_syntax!();

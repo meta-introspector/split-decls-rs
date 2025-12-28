@@ -4,4 +4,4 @@ macro_rules! check_with_base_items {
     };
 }
 
-check_with_base_items!()
+check_with_base_items!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiffActivity!();
         Const!();
+        DiffActivity!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_321 {
     };
 }
 
-impl_321!()
+impl_321!();

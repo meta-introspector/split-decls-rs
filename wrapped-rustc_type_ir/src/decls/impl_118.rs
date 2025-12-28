@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Relate!();
         TypeRelation!();
         Interner!();
-        RelateResult!();
-        Relate!();
         AliasTy!();
         TypeError!();
+        RelateResult!();
         ExpectedFound!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_118 {
     };
 }
 
-impl_118!()
+impl_118!();

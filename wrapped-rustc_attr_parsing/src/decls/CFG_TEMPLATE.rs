@@ -4,4 +4,4 @@ macro_rules! CFG_TEMPLATE {
     };
 }
 
-CFG_TEMPLATE!()
+CFG_TEMPLATE!();

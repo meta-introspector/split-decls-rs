@@ -11,4 +11,4 @@ macro_rules! write_label {
     };
 }
 
-write_label!()
+write_label!();

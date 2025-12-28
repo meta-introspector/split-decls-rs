@@ -4,4 +4,4 @@ macro_rules! MissingPanicHandler {
     };
 }
 
-MissingPanicHandler!()
+MissingPanicHandler!();

@@ -4,4 +4,4 @@ macro_rules! VariantIdx {
     };
 }
 
-VariantIdx!()
+VariantIdx!();

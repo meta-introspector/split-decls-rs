@@ -4,4 +4,4 @@ macro_rules! cfg_feature {
     };
 }
 
-cfg_feature!()
+cfg_feature!();

@@ -4,4 +4,4 @@ macro_rules! SectionRange {
     };
 }
 
-SectionRange!()
+SectionRange!();

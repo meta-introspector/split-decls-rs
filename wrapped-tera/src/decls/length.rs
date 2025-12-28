@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Filter!();
-        Result!();
         Error!();
+        Result!();
+        Filter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! length {
     };
 }
 
-length!()
+length!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Style!();
-        Buffer!();
         Table!();
+        Buffer!();
+        Style!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SerializeArrayOfTablesSerializer {
     };
 }
 
-SerializeArrayOfTablesSerializer!()
+SerializeArrayOfTablesSerializer!();

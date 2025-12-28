@@ -11,4 +11,4 @@ macro_rules! ODK_PAD {
     };
 }
 
-ODK_PAD!()
+ODK_PAD!();

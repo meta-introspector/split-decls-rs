@@ -4,4 +4,4 @@ macro_rules! StructurallyRelateAliases {
     };
 }
 
-StructurallyRelateAliases!()
+StructurallyRelateAliases!();

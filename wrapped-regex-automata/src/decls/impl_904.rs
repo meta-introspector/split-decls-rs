@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         DFA!();
-        Span!();
         Match!();
-        Look!();
         PatternID!();
-        PikeVM!();
+        Look!();
+        Span!();
         Anchored!();
         Input!();
+        PikeVM!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_904 {
     };
 }
 
-impl_904!()
+impl_904!();

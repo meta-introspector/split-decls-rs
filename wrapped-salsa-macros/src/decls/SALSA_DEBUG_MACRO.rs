@@ -4,4 +4,4 @@ macro_rules! SALSA_DEBUG_MACRO {
     };
 }
 
-SALSA_DEBUG_MACRO!()
+SALSA_DEBUG_MACRO!();

@@ -4,4 +4,4 @@ macro_rules! Aes192 {
     };
 }
 
-Aes192!()
+Aes192!();

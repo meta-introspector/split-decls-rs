@@ -4,4 +4,4 @@ macro_rules! streaming_decoder {
     };
 }
 
-streaming_decoder!()
+streaming_decoder!();

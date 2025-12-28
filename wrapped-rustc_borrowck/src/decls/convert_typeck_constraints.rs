@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        OutlivesConstraint!();
-        LivenessValues!();
         UniversalRegions!();
         LocalizedOutlivesConstraintSet!();
+        OutlivesConstraint!();
+        LivenessValues!();
         Locations!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! convert_typeck_constraints {
     };
 }
 
-convert_typeck_constraints!()
+convert_typeck_constraints!();

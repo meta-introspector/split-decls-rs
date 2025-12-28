@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Constraint!();
-        MatchFailed!();
         PatternIterator!();
-        PlaceholderMatch!();
-        Matcher!();
         Match!();
-        UfcsCallInfo!();
-        Token!();
         Phase!();
+        Matcher!();
         ResolvedRule!();
+        UfcsCallInfo!();
+        MatchFailed!();
+        Constraint!();
         Placeholder!();
+        PlaceholderMatch!();
+        Token!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

@@ -4,4 +4,4 @@ macro_rules! UnicodeWordBoundaryError {
     };
 }
 
-UnicodeWordBoundaryError!()
+UnicodeWordBoundaryError!();

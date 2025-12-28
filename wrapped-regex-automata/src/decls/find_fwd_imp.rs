@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Input!();
-        Prefilter!();
-        HalfMatch!();
         Cache!();
+        HalfMatch!();
+        Input!();
         MatchError!();
-        DFA!();
         Span!();
+        DFA!();
+        Prefilter!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! find_fwd_imp {
     };
 }
 
-find_fwd_imp!()
+find_fwd_imp!();

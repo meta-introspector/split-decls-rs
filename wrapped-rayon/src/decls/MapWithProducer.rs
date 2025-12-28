@@ -4,4 +4,4 @@ macro_rules! MapWithProducer {
     };
 }
 
-MapWithProducer!()
+MapWithProducer!();

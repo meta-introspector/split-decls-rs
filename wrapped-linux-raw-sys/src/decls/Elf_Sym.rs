@@ -4,4 +4,4 @@ macro_rules! Elf_Sym {
     };
 }
 
-Elf_Sym!()
+Elf_Sym!();

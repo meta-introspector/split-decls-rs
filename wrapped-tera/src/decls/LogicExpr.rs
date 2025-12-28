@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Expr!();
         LogicOperator!();
+        Expr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LogicExpr {
     };
 }
 
-LogicExpr!()
+LogicExpr!();

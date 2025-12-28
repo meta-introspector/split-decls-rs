@@ -12,4 +12,4 @@ macro_rules! remove_remote {
     };
 }
 
-remove_remote!()
+remove_remote!();

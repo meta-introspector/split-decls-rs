@@ -4,4 +4,4 @@ macro_rules! BASE_EXTRA_MASK {
     };
 }
 
-BASE_EXTRA_MASK!()
+BASE_EXTRA_MASK!();

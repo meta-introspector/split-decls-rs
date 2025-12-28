@@ -4,4 +4,4 @@ macro_rules! Value {
     };
 }
 
-Value!()
+Value!();

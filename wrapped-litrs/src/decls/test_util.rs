@@ -4,4 +4,4 @@ macro_rules! test_util {
     };
 }
 
-test_util!()
+test_util!();

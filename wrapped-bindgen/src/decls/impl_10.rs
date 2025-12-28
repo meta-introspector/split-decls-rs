@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Type!();
         GUID!();
-        TokenStream!();
         Config!();
+        TokenStream!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BridgeTys!();
         Allocation!();
+        BridgeTys!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! allocation_filter {
     };
 }
 
-allocation_filter!()
+allocation_filter!();

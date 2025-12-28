@@ -4,4 +4,4 @@ macro_rules! Shutdown {
     };
 }
 
-Shutdown!()
+Shutdown!();

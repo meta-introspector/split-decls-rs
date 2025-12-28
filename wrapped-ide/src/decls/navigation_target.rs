@@ -4,4 +4,4 @@ macro_rules! navigation_target {
     };
 }
 
-navigation_target!()
+navigation_target!();

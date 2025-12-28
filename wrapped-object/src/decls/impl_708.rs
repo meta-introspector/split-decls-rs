@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DelayLoadDescriptorIterator!();
-        ImageDelayloadDescriptor!();
         Result!();
+        ImageDelayloadDescriptor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_708 {
     };
 }
 
-impl_708!()
+impl_708!();

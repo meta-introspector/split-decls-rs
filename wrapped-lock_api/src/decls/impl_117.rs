@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RwLock!();
         ArcRwLockUpgradableReadGuard!();
         RawRwLockUpgrade!();
+        RwLock!();
         RwLockUpgradableReadGuard!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

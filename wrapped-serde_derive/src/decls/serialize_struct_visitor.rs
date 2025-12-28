@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Parameters!();
         StructTrait!();
         Field!();
-        Parameters!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! serialize_struct_visitor {
     };
 }
 
-serialize_struct_visitor!()
+serialize_struct_visitor!();

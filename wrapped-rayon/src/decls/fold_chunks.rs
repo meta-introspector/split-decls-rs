@@ -4,4 +4,4 @@ macro_rules! fold_chunks {
     };
 }
 
-fold_chunks!()
+fold_chunks!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        Config!();
-        NFA!();
-        Regex!();
-        StartKind!();
-        DFA!();
         BuildError!();
+        DFA!();
         MatchKind!();
-        Automaton!();
+        Builder!();
         Anchored!();
+        Config!();
+        Regex!();
+        Automaton!();
+        NFA!();
+        StartKind!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

@@ -4,4 +4,4 @@ macro_rules! LC_PREBIND_CKSUM {
     };
 }
 
-LC_PREBIND_CKSUM!()
+LC_PREBIND_CKSUM!();

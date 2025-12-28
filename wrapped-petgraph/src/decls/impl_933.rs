@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Neighbors!();
-        EdgeType!();
         GraphMap!();
+        EdgeType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_933 {
     };
 }
 
-impl_933!()
+impl_933!();

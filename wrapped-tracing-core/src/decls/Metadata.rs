@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Level!();
-        Kind!();
-        FieldSet!();
         Subscriber!();
+        FieldSet!();
+        Kind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Metadata {
     };
 }
 
-Metadata!()
+Metadata!();

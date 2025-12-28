@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GlobalFileTable!();
         VirtualFileMapping!();
+        GlobalFileTable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_265 {
     };
 }
 
-impl_265!()
+impl_265!();

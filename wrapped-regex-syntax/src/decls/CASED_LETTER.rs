@@ -4,4 +4,4 @@ macro_rules! CASED_LETTER {
     };
 }
 
-CASED_LETTER!()
+CASED_LETTER!();

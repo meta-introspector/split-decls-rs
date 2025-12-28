@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RootDatabase!();
-        ChangeAnnotation!();
         Result!();
-        FileRange!();
+        RootDatabase!();
+        SourceChange!();
         Definition!();
         TextEdit!();
-        SourceChange!();
+        ChangeAnnotation!();
+        FileRange!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! source_edit_from_def {
     };
 }
 
-source_edit_from_def!()
+source_edit_from_def!();

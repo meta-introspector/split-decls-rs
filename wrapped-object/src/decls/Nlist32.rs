@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        U32!();
         U16!();
+        U32!();
+        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Nlist32 {
     };
 }
 
-Nlist32!()
+Nlist32!();

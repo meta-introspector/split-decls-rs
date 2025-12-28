@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         SyntaxEdit!();
+        SyntaxElement!();
+        Change!();
         SyntaxEditor!();
         SyntaxAnnotation!();
-        Element!();
         Position!();
-        SyntaxElement!();
+        Element!();
         SyntaxNode!();
-        Change!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_141 {
     };
 }
 
-impl_141!()
+impl_141!();

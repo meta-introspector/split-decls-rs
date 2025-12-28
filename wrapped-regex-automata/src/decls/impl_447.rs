@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Match!();
         MatchError!();
+        Match!();
         TryFindMatches!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_447 {
     };
 }
 
-impl_447!()
+impl_447!();

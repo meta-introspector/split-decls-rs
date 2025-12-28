@@ -4,4 +4,4 @@ macro_rules! non_empty_vec {
     };
 }
 
-non_empty_vec!()
+non_empty_vec!();

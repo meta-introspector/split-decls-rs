@@ -4,4 +4,4 @@ macro_rules! OsKind {
     };
 }
 
-OsKind!()
+OsKind!();

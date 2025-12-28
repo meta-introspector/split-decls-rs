@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IndexedParallelIterator!();
-        Unzip!();
         UnzipConsumer!();
         Consumer!();
+        IndexedParallelIterator!();
+        Unzip!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! unzip_indexed {
     };
 }
 
-unzip_indexed!()
+unzip_indexed!();

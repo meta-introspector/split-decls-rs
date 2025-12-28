@@ -11,4 +11,4 @@ macro_rules! confirm_type_is_not_a_method_generic_param {
     };
 }
 
-confirm_type_is_not_a_method_generic_param!()
+confirm_type_is_not_a_method_generic_param!();

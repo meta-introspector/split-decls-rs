@@ -4,4 +4,4 @@ macro_rules! InherentNominal {
     };
 }
 
-InherentNominal!()
+InherentNominal!();

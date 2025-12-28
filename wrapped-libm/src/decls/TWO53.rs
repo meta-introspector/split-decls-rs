@@ -4,4 +4,4 @@ macro_rules! TWO53 {
     };
 }
 
-TWO53!()
+TWO53!();

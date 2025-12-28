@@ -4,4 +4,4 @@ macro_rules! starts_with_digit {
     };
 }
 
-starts_with_digit!()
+starts_with_digit!();

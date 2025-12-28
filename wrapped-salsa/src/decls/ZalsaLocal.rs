@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        QueryStack!();
-        IngredientIndex!();
         PageIndex!();
+        IngredientIndex!();
+        QueryStack!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ZalsaLocal {
     };
 }
 
-ZalsaLocal!()
+ZalsaLocal!();

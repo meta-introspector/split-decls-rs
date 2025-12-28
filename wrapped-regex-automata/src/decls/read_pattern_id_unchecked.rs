@@ -11,4 +11,4 @@ macro_rules! read_pattern_id_unchecked {
     };
 }
 
-read_pattern_id_unchecked!()
+read_pattern_id_unchecked!();

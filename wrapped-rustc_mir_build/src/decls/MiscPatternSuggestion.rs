@@ -4,4 +4,4 @@ macro_rules! MiscPatternSuggestion {
     };
 }
 
-MiscPatternSuggestion!()
+MiscPatternSuggestion!();

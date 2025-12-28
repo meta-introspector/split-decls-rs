@@ -4,4 +4,4 @@ macro_rules! ConstTraitParser {
     };
 }
 
-ConstTraitParser!()
+ConstTraitParser!();

@@ -4,4 +4,4 @@ macro_rules! STD_MIN_MATCH {
     };
 }
 
-STD_MIN_MATCH!()
+STD_MIN_MATCH!();

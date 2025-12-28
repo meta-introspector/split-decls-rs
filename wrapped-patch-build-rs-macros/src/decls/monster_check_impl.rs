@@ -9,4 +9,4 @@ macro_rules! monster_check_impl {
     };
 }
 
-monster_check_impl!()
+monster_check_impl!();

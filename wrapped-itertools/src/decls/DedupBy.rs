@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CoalesceBy!();
         DedupPred2CoalescePred!();
         NoCount!();
+        CoalesceBy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DedupBy {
     };
 }
 
-DedupBy!()
+DedupBy!();

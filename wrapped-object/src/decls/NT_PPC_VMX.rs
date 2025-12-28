@@ -4,4 +4,4 @@ macro_rules! NT_PPC_VMX {
     };
 }
 
-NT_PPC_VMX!()
+NT_PPC_VMX!();

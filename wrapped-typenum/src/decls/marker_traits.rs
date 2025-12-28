@@ -4,4 +4,4 @@ macro_rules! marker_traits {
     };
 }
 
-marker_traits!()
+marker_traits!();

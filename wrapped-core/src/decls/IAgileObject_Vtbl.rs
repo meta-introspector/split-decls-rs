@@ -11,4 +11,4 @@ macro_rules! IAgileObject_Vtbl {
     };
 }
 
-IAgileObject_Vtbl!()
+IAgileObject_Vtbl!();

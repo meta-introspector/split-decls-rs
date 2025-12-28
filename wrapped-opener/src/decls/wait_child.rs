@@ -11,4 +11,4 @@ macro_rules! wait_child {
     };
 }
 
-wait_child!()
+wait_child!();

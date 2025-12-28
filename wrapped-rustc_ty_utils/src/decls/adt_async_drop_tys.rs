@@ -11,4 +11,4 @@ macro_rules! adt_async_drop_tys {
     };
 }
 
-adt_async_drop_tys!()
+adt_async_drop_tys!();

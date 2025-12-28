@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ArArchiveBuilderBuilder!();
-        DefaultMetadataLoader!();
         CodegenResults!();
+        DefaultMetadataLoader!();
         TargetConfig!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! CodegenBackend {
     };
 }
 
-CodegenBackend!()
+CodegenBackend!();

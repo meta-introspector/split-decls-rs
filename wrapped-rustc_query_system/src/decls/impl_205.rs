@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        QueryContext!();
-        DepKind!();
-        QueryInfo!();
         QueryStackFrame!();
+        QueryInfo!();
+        DepKind!();
         QueryStackFrameExtra!();
+        QueryContext!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_205 {
     };
 }
 
-impl_205!()
+impl_205!();

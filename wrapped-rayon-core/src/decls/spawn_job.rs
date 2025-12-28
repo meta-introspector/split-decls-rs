@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Registry!();
         JobRef!();
         HeapJob!();
+        Registry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! spawn_job {
     };
 }
 
-spawn_job!()
+spawn_job!();

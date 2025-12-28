@@ -4,4 +4,4 @@ macro_rules! L_LAST {
     };
 }
 
-L_LAST!()
+L_LAST!();

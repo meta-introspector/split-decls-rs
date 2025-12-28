@@ -4,4 +4,4 @@ macro_rules! NoMangleAscii {
     };
 }
 
-NoMangleAscii!()
+NoMangleAscii!();

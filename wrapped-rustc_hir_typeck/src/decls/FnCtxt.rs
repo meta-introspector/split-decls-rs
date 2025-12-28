@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        TypeckRootCtxt!();
         CoroutineTypes!();
-        Diverges!();
         DynamicCoerceMany!();
-        DivergingFallbackBehavior!();
-        EnclosingBreakables!();
         DivergingBlockBehavior!();
+        Diverges!();
+        EnclosingBreakables!();
+        TypeckRootCtxt!();
+        DivergingFallbackBehavior!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! FnCtxt {
     };
 }
 
-FnCtxt!()
+FnCtxt!();

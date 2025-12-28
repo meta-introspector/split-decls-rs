@@ -12,4 +12,4 @@ macro_rules! dumpable_behavior {
     };
 }
 
-dumpable_behavior!()
+dumpable_behavior!();

@@ -4,4 +4,4 @@ macro_rules! EF_AVR_ARCH_AVR5 {
     };
 }
 
-EF_AVR_ARCH_AVR5!()
+EF_AVR_ARCH_AVR5!();

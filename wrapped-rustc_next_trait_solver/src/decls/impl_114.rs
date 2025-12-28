@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SolverDelegate!();
         EvalCtxt!();
         Ambiguous!();
-        SolverDelegate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

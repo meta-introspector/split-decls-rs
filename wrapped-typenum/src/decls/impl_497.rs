@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        B1!();
-        PrivateSquareRoot!();
         IsGreaterOrEqual!();
-        Square!();
-        Sqrt!();
         Bit!();
-        Sum!();
-        SquareRoot!();
-        UInt!();
-        Double!();
-        Add1!();
-        Unsigned!();
+        Sqrt!();
         GrEq!();
+        PrivateSquareRoot!();
+        Double!();
+        Unsigned!();
+        Add1!();
+        UInt!();
+        SquareRoot!();
+        Square!();
+        B1!();
+        Sum!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_497 {
     };
 }
 
-impl_497!()
+impl_497!();

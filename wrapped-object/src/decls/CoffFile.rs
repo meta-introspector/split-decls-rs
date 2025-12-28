@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ImageFileHeader!();
         CoffCommon!();
         ReadRef!();
-        Object!();
         CoffHeader!();
+        ImageFileHeader!();
+        Object!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! CoffFile {
     };
 }
 
-CoffFile!()
+CoffFile!();

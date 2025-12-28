@@ -34,4 +34,4 @@ The eigenmatrix successfully encodes the mathematical DNA of Rust!
     };
 }
 
-eigenform_verify_impl!()
+eigenform_verify_impl!();

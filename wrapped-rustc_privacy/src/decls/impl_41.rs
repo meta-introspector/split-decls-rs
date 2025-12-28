@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SearchInterfaceForPrivateItemsVisitor!();
-        LazyDefPathStr!();
         PrivateInterfacesOrBoundsLint!();
-        InPublicInterface!();
         FromPrivateDependencyInPublicInterface!();
+        LazyDefPathStr!();
+        InPublicInterface!();
+        SearchInterfaceForPrivateItemsVisitor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

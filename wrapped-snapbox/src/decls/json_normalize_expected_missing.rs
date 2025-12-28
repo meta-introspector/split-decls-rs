@@ -12,4 +12,4 @@ macro_rules! json_normalize_expected_missing {
     };
 }
 
-json_normalize_expected_missing!()
+json_normalize_expected_missing!();

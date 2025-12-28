@@ -4,4 +4,4 @@ macro_rules! NT_SIGINFO {
     };
 }
 
-NT_SIGINFO!()
+NT_SIGINFO!();

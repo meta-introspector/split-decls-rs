@@ -4,4 +4,4 @@ macro_rules! Mask {
     };
 }
 
-Mask!()
+Mask!();

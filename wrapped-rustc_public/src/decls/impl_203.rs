@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stable!();
         CoercePredicate!();
         BridgeTys!();
+        Stable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

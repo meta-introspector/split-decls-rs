@@ -4,4 +4,4 @@ macro_rules! md5 {
     };
 }
 
-md5!()
+md5!();

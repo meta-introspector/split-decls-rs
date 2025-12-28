@@ -4,4 +4,4 @@ macro_rules! BLOCK_SIZE {
     };
 }
 
-BLOCK_SIZE!()
+BLOCK_SIZE!();

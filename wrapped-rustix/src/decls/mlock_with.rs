@@ -11,4 +11,4 @@ macro_rules! mlock_with {
     };
 }
 
-mlock_with!()
+mlock_with!();

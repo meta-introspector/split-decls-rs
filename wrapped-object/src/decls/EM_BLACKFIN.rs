@@ -4,4 +4,4 @@ macro_rules! EM_BLACKFIN {
     };
 }
 
-EM_BLACKFIN!()
+EM_BLACKFIN!();

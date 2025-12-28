@@ -4,4 +4,4 @@ macro_rules! search_bounds_for {
     };
 }
 
-search_bounds_for!()
+search_bounds_for!();

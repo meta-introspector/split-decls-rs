@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Id!();
-        V2!();
-        Error!();
         V4!();
+        Id!();
+        Error!();
         V3!();
+        V2!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

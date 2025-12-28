@@ -4,4 +4,4 @@ macro_rules! FieldKind {
     };
 }
 
-FieldKind!()
+FieldKind!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Stream!();
-        TokenKind!();
-        ParseError!();
         ErrorSink!();
-        Encoding!();
+        ParseError!();
         EventReceiver!();
+        TokenKind!();
         Expected!();
+        Stream!();
+        Encoding!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! simple_key {
     };
 }
 
-simple_key!()
+simple_key!();

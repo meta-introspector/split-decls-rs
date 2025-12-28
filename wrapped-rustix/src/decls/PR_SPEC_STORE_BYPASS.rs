@@ -4,4 +4,4 @@ macro_rules! PR_SPEC_STORE_BYPASS {
     };
 }
 
-PR_SPEC_STORE_BYPASS!()
+PR_SPEC_STORE_BYPASS!();

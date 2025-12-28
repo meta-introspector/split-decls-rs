@@ -4,4 +4,4 @@ macro_rules! SHT_CREL {
     };
 }
 
-SHT_CREL!()
+SHT_CREL!();

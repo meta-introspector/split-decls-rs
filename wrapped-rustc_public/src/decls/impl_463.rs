@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         UnevaluatedConst!();
         Visitable!();
+        Visitor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_463 {
     };
 }
 
-impl_463!()
+impl_463!();

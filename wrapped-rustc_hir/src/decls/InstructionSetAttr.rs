@@ -4,4 +4,4 @@ macro_rules! InstructionSetAttr {
     };
 }
 
-InstructionSetAttr!()
+InstructionSetAttr!();

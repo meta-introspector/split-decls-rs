@@ -4,4 +4,4 @@ macro_rules! Background {
     };
 }
 
-Background!()
+Background!();

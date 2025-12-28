@@ -4,4 +4,4 @@ macro_rules! LC_REQ_DYLD {
     };
 }
 
-LC_REQ_DYLD!()
+LC_REQ_DYLD!();

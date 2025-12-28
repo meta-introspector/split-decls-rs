@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AdjustmentHints!();
-        LifetimeElisionHints!();
         DiscriminantHints!();
+        LifetimeElisionHints!();
         InlayFieldsToResolve!();
         ClosureReturnTypeHints!();
-        AdjustmentHintsMode!();
         GenericParameterHints!();
+        AdjustmentHints!();
+        AdjustmentHintsMode!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! InlayHintsConfig {
     };
 }
 
-InlayHintsConfig!()
+InlayHintsConfig!();

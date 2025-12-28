@@ -4,4 +4,4 @@ macro_rules! permutation_p {
     };
 }
 
-permutation_p!()
+permutation_p!();

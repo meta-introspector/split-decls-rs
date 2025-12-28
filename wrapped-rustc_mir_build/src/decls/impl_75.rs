@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BlockAnd!();
         DropKind!();
-        Builder!();
         Scope!();
+        Builder!();
+        BlockAnd!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        PlaceBase!();
         Scope!();
-        Category!();
-        BlockAnd!();
-        NeedsTemporary!();
         RvalueFunc!();
+        Category!();
+        Builder!();
+        NeedsTemporary!();
+        PlaceBase!();
+        BlockAnd!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

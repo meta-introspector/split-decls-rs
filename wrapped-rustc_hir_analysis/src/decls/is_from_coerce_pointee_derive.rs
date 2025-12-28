@@ -4,4 +4,4 @@ macro_rules! is_from_coerce_pointee_derive {
     };
 }
 
-is_from_coerce_pointee_derive!()
+is_from_coerce_pointee_derive!();

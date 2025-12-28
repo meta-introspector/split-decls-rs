@@ -4,4 +4,4 @@ macro_rules! setns {
     };
 }
 
-setns!()
+setns!();

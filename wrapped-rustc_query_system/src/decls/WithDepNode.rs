@@ -4,4 +4,4 @@ macro_rules! WithDepNode {
     };
 }
 
-WithDepNode!()
+WithDepNode!();

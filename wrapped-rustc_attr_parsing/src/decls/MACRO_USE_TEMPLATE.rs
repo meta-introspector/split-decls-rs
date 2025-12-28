@@ -4,4 +4,4 @@ macro_rules! MACRO_USE_TEMPLATE {
     };
 }
 
-MACRO_USE_TEMPLATE!()
+MACRO_USE_TEMPLATE!();

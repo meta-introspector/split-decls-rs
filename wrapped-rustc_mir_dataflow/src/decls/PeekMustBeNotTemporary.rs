@@ -4,4 +4,4 @@ macro_rules! PeekMustBeNotTemporary {
     };
 }
 
-PeekMustBeNotTemporary!()
+PeekMustBeNotTemporary!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         PatternID!();
-        Start!();
         StartStateIter!();
         StateID!();
+        Start!();
         Anchored!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_136 {
     };
 }
 
-impl_136!()
+impl_136!();

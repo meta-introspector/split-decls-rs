@@ -4,4 +4,4 @@ macro_rules! DEP_NODE_SIZE {
     };
 }
 
-DEP_NODE_SIZE!()
+DEP_NODE_SIZE!();

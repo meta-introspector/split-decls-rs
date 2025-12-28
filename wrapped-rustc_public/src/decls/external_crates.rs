@@ -11,4 +11,4 @@ macro_rules! external_crates {
     };
 }
 
-external_crates!()
+external_crates!();

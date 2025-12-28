@@ -11,4 +11,4 @@ macro_rules! shr2_round {
     };
 }
 
-shr2_round!()
+shr2_round!();

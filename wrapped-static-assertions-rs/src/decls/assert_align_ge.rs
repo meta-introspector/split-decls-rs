@@ -4,4 +4,4 @@ macro_rules! assert_align_ge {
     };
 }
 
-assert_align_ge!()
+assert_align_ge!();

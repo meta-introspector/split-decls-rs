@@ -4,4 +4,4 @@ macro_rules! RegexCaptures {
     };
 }
 
-RegexCaptures!()
+RegexCaptures!();

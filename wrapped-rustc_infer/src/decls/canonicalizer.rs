@@ -4,4 +4,4 @@ macro_rules! canonicalizer {
     };
 }
 
-canonicalizer!()
+canonicalizer!();

@@ -4,4 +4,4 @@ macro_rules! DEFLATE_PAD_BITS {
     };
 }
 
-DEFLATE_PAD_BITS!()
+DEFLATE_PAD_BITS!();

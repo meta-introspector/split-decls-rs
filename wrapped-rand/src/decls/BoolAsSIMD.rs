@@ -4,4 +4,4 @@ macro_rules! BoolAsSIMD {
     };
 }
 
-BoolAsSIMD!()
+BoolAsSIMD!();

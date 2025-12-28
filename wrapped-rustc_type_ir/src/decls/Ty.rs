@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        Tys!();
-        TypeSuperFoldable!();
-        DynKind!();
-        AliasTyKind!();
+        Relate!();
+        ClosureKind!();
         CollectAndApply!();
-        GenericArgs!();
-        Term!();
+        Interner!();
         DefId!();
         Flags!();
-        Const!();
-        GenericArg!();
-        AliasTy!();
-        Binder!();
-        BoundExistentialPredicates!();
         TyKind!();
-        FnSig!();
-        ClosureKind!();
-        IntoKind!();
-        Interner!();
-        InferTy!();
-        Region!();
-        TypeSuperVisitable!();
         AdtDef!();
-        Relate!();
+        BoundExistentialPredicates!();
+        IntoKind!();
+        FnSig!();
+        InferTy!();
+        Const!();
+        Tys!();
+        Binder!();
+        GenericArgs!();
+        DynKind!();
+        AliasTyKind!();
+        GenericArg!();
+        TypeSuperVisitable!();
+        AliasTy!();
+        Region!();
+        Term!();
+        TypeSuperFoldable!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! Ty {
     };
 }
 
-Ty!()
+Ty!();

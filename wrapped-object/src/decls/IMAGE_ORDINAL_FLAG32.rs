@@ -4,4 +4,4 @@ macro_rules! IMAGE_ORDINAL_FLAG32 {
     };
 }
 
-IMAGE_ORDINAL_FLAG32!()
+IMAGE_ORDINAL_FLAG32!();

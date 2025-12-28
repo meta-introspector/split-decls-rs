@@ -4,4 +4,4 @@ macro_rules! get_path_from_args {
     };
 }
 
-get_path_from_args!()
+get_path_from_args!();

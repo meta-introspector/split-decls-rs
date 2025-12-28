@@ -4,4 +4,4 @@ macro_rules! BlockTypeError {
     };
 }
 
-BlockTypeError!()
+BlockTypeError!();

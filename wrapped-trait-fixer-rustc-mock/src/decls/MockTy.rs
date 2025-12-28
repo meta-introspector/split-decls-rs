@@ -4,4 +4,4 @@ macro_rules! MockTy {
     };
 }
 
-MockTy!()
+MockTy!();

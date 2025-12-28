@@ -11,4 +11,4 @@ macro_rules! get_rpath_linker_args {
     };
 }
 
-get_rpath_linker_args!()
+get_rpath_linker_args!();

@@ -4,4 +4,4 @@ macro_rules! socklen_t {
     };
 }
 
-socklen_t!()
+socklen_t!();

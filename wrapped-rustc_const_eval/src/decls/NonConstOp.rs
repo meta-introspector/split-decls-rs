@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Status!();
-        ConstCx!();
         DiagImportance!();
+        ConstCx!();
+        Status!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! NonConstOp {
     };
 }
 
-NonConstOp!()
+NonConstOp!();

@@ -4,4 +4,4 @@ macro_rules! ARM_RELOC_HALF {
     };
 }
 
-ARM_RELOC_HALF!()
+ARM_RELOC_HALF!();

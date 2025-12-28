@@ -12,4 +12,4 @@ macro_rules! save_temp_bitcode {
     };
 }
 
-save_temp_bitcode!()
+save_temp_bitcode!();

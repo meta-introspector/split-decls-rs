@@ -4,4 +4,4 @@ macro_rules! PotentialUtf16 {
     };
 }
 
-PotentialUtf16!()
+PotentialUtf16!();

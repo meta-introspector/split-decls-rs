@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Write!();
         Lzma2WriterMt!();
+        Write!();
         AutoFinish!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

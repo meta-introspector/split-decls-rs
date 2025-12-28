@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AsymmetricPublicKey!();
         V2!();
+        AsymmetricPublicKey!();
         Id!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

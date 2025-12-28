@@ -4,4 +4,4 @@ macro_rules! CodegenErrors {
     };
 }
 
-CodegenErrors!()
+CodegenErrors!();

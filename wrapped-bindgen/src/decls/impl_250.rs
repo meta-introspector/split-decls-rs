@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Config!();
-        TokenStream!();
-        CppDelegate!();
         Cfg!();
         TypeName!();
+        TokenStream!();
+        Config!();
+        CppDelegate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_250 {
     };
 }
 
-impl_250!()
+impl_250!();

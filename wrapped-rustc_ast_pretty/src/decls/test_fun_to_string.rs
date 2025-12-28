@@ -4,4 +4,4 @@ macro_rules! test_fun_to_string {
     };
 }
 
-test_fun_to_string!()
+test_fun_to_string!();

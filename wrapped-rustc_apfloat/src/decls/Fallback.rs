@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FallbackS!();
         IeeeFloat!();
+        FallbackS!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Fallback {
     };
 }
 
-Fallback!()
+Fallback!();

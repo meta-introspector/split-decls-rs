@@ -4,4 +4,4 @@ macro_rules! nghttp2_before_frame_send_callback {
     };
 }
 
-nghttp2_before_frame_send_callback!()
+nghttp2_before_frame_send_callback!();

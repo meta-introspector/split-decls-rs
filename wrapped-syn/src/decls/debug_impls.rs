@@ -11,4 +11,4 @@ macro_rules! debug_impls {
     };
 }
 
-debug_impls!()
+debug_impls!();

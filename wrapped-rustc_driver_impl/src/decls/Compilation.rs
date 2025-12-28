@@ -4,4 +4,4 @@ macro_rules! Compilation {
     };
 }
 
-Compilation!()
+Compilation!();

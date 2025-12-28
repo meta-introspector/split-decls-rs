@@ -4,4 +4,4 @@ macro_rules! DebugVisualizerInvalid {
     };
 }
 
-DebugVisualizerInvalid!()
+DebugVisualizerInvalid!();

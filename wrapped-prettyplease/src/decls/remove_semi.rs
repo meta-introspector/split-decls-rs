@@ -4,4 +4,4 @@ macro_rules! remove_semi {
     };
 }
 
-remove_semi!()
+remove_semi!();

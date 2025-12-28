@@ -4,4 +4,4 @@ macro_rules! POWER_OF_FIVE_128 {
     };
 }
 
-POWER_OF_FIVE_128!()
+POWER_OF_FIVE_128!();

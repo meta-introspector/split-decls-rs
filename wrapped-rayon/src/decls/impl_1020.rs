@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Zip!();
         ZipEq!();
+        Zip!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1020 {
     };
 }
 
-impl_1020!()
+impl_1020!();

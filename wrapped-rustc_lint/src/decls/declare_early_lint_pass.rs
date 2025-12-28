@@ -11,4 +11,4 @@ macro_rules! declare_early_lint_pass {
     };
 }
 
-declare_early_lint_pass!()
+declare_early_lint_pass!();

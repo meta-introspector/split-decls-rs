@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        AlreadyBorrowed!();
-        AlreadyMutBorrowed!();
         MatchVisitor!();
+        MovedWhileBorrowed!();
+        AlreadyMutBorrowed!();
+        AlreadyBorrowed!();
         BorrowOfMovedValue!();
         Binding!();
-        Conflict!();
         MultipleMutBorrows!();
-        MovedWhileBorrowed!();
+        Conflict!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! check_borrow_conflicts_in_at_patterns {
     };
 }
 
-check_borrow_conflicts_in_at_patterns!()
+check_borrow_conflicts_in_at_patterns!();

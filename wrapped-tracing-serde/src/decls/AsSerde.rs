@@ -4,4 +4,4 @@ macro_rules! AsSerde {
     };
 }
 
-AsSerde!()
+AsSerde!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnicodeSentences!();
         UnicodeSegmentation!();
+        UnicodeSentences!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! new_unicode_sentences {
     };
 }
 
-new_unicode_sentences!()
+new_unicode_sentences!();

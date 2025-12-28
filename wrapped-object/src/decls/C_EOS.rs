@@ -4,4 +4,4 @@ macro_rules! C_EOS {
     };
 }
 
-C_EOS!()
+C_EOS!();

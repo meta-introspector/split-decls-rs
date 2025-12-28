@@ -4,4 +4,4 @@ macro_rules! R_ARM_RPC24 {
     };
 }
 
-R_ARM_RPC24!()
+R_ARM_RPC24!();

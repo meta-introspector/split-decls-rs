@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Object!();
-        Table!();
-        Import!();
-        U32!();
-        U16!();
         Name!();
+        Object!();
+        Import!();
+        Table!();
+        U16!();
+        U32!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ImageVxdHeader {
     };
 }
 
-ImageVxdHeader!()
+ImageVxdHeader!();

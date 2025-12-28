@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_TLS_TPREL {
     };
 }
 
-R_NIOS2_TLS_TPREL!()
+R_NIOS2_TLS_TPREL!();

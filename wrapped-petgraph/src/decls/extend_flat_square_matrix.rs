@@ -4,4 +4,4 @@ macro_rules! extend_flat_square_matrix {
     };
 }
 
-extend_flat_square_matrix!()
+extend_flat_square_matrix!();

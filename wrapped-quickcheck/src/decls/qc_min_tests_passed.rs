@@ -4,4 +4,4 @@ macro_rules! qc_min_tests_passed {
     };
 }
 
-qc_min_tests_passed!()
+qc_min_tests_passed!();

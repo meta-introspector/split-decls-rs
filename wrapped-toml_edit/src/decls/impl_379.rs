@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Array!();
+        VisitMut!();
         Value!();
         Pretty!();
-        Array!();
-        DocumentMut!();
-        VisitMut!();
-        Table!();
         Item!();
+        Table!();
+        DocumentMut!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Value!();
         Error!();
-        ValueDeserializer!();
+        Value!();
         ArraySeqAccess!();
+        ValueDeserializer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

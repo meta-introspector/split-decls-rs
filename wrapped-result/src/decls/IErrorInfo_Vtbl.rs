@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IUnknown_Vtbl!();
+        BSTR!();
         GUID!();
         HRESULT!();
-        BSTR!();
+        IUnknown_Vtbl!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! IErrorInfo_Vtbl {
     };
 }
 
-IErrorInfo_Vtbl!()
+IErrorInfo_Vtbl!();

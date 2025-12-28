@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PResult!();
-        Cursor!();
-        Reject!();
-        Spacing!();
         Punct!();
+        Spacing!();
+        Cursor!();
+        PResult!();
+        Reject!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! punct {
     };
 }
 
-punct!()
+punct!();

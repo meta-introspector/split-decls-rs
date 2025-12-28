@@ -4,4 +4,4 @@ macro_rules! asin {
     };
 }
 
-asin!()
+asin!();

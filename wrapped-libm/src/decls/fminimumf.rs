@@ -4,4 +4,4 @@ macro_rules! fminimumf {
     };
 }
 
-fminimumf!()
+fminimumf!();

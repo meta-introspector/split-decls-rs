@@ -4,4 +4,4 @@ macro_rules! RUSTC_VERSION_STRING {
     };
 }
 
-RUSTC_VERSION_STRING!()
+RUSTC_VERSION_STRING!();

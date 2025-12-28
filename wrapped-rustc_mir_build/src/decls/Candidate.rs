@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PatternExtraData!();
-        FlatPat!();
         MatchPairTree!();
+        FlatPat!();
+        PatternExtraData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Candidate {
     };
 }
 
-Candidate!()
+Candidate!();

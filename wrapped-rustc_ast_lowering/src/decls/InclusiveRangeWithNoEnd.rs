@@ -4,4 +4,4 @@ macro_rules! InclusiveRangeWithNoEnd {
     };
 }
 
-InclusiveRangeWithNoEnd!()
+InclusiveRangeWithNoEnd!();

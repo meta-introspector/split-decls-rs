@@ -4,4 +4,4 @@ macro_rules! quote_optional_tag {
     };
 }
 
-quote_optional_tag!()
+quote_optional_tag!();

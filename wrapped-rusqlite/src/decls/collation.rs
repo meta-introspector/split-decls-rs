@@ -4,4 +4,4 @@ macro_rules! collation {
     };
 }
 
-collation!()
+collation!();

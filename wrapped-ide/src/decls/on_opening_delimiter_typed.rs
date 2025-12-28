@@ -4,4 +4,4 @@ macro_rules! on_opening_delimiter_typed {
     };
 }
 
-on_opening_delimiter_typed!()
+on_opening_delimiter_typed!();

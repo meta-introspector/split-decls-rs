@@ -4,4 +4,4 @@ macro_rules! LC_VERSION_MIN_MACOSX {
     };
 }
 
-LC_VERSION_MIN_MACOSX!()
+LC_VERSION_MIN_MACOSX!();

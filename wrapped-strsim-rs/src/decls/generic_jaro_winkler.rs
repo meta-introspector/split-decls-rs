@@ -4,4 +4,4 @@ macro_rules! generic_jaro_winkler {
     };
 }
 
-generic_jaro_winkler!()
+generic_jaro_winkler!();

@@ -11,4 +11,4 @@ macro_rules! test_from {
     };
 }
 
-test_from!()
+test_from!();

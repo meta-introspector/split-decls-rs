@@ -4,4 +4,4 @@ macro_rules! R_390_GOTPCDBL {
     };
 }
 
-R_390_GOTPCDBL!()
+R_390_GOTPCDBL!();

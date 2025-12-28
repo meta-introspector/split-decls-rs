@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PassMode!();
         ArgAbi!();
+        PassMode!();
         ArgExtension!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! extend_integer_width_mips {
     };
 }
 
-extend_integer_width_mips!()
+extend_integer_width_mips!();

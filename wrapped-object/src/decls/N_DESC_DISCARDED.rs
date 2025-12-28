@@ -4,4 +4,4 @@ macro_rules! N_DESC_DISCARDED {
     };
 }
 
-N_DESC_DISCARDED!()
+N_DESC_DISCARDED!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        SegmentFlags!();
         Object!();
+        SegmentFlags!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ObjectSegment {
     };
 }
 
-ObjectSegment!()
+ObjectSegment!();

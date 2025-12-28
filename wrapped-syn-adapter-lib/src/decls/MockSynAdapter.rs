@@ -11,4 +11,4 @@ macro_rules! MockSynAdapter {
     };
 }
 
-MockSynAdapter!()
+MockSynAdapter!();

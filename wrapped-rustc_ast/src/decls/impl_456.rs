@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Spacing!();
+        Token!();
         TokenCursor!();
         TokenTreeCursor!();
+        Spacing!();
         TokenTree!();
-        Token!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_456 {
     };
 }
 
-impl_456!()
+impl_456!();

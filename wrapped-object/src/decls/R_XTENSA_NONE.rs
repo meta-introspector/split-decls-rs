@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_NONE {
     };
 }
 
-R_XTENSA_NONE!()
+R_XTENSA_NONE!();

@@ -4,4 +4,4 @@ macro_rules! get_bits_as_decimal {
     };
 }
 
-get_bits_as_decimal!()
+get_bits_as_decimal!();

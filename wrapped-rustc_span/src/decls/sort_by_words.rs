@@ -4,4 +4,4 @@ macro_rules! sort_by_words {
     };
 }
 
-sort_by_words!()
+sort_by_words!();

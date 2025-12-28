@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NodeReferences!();
         IndexType!();
+        NodeReferences!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_749 {
     };
 }
 
-impl_749!()
+impl_749!();

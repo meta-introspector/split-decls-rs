@@ -4,4 +4,4 @@ macro_rules! service_finder_impl {
     };
 }
 
-service_finder_impl!()
+service_finder_impl!();

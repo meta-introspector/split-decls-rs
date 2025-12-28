@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ConvertError!();
+        SendSyncPhantomData!();
+        KnownLayout!();
         Validity!();
         TryFromBytes!();
-        KnownLayout!();
-        SendSyncPhantomData!();
         ValidityError!();
-        ConvertError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

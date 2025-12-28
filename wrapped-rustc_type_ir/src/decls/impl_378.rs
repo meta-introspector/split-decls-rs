@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AliasTermKind!();
-        AliasTerm!();
-        Interner!();
         GenericArgs!();
+        AliasTerm!();
+        AliasTermKind!();
+        Interner!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_378 {
     };
 }
 
-impl_378!()
+impl_378!();

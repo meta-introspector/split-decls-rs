@@ -4,4 +4,4 @@ macro_rules! EM_OPENRISC {
     };
 }
 
-EM_OPENRISC!()
+EM_OPENRISC!();

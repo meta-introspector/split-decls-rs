@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Trim!();
         Xor!();
+        Trim!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PrivateXor {
     };
 }
 
-PrivateXor!()
+PrivateXor!();

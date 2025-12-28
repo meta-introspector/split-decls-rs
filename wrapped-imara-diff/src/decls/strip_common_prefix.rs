@@ -11,4 +11,4 @@ macro_rules! strip_common_prefix {
     };
 }
 
-strip_common_prefix!()
+strip_common_prefix!();

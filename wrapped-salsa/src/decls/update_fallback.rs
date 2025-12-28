@@ -4,4 +4,4 @@ macro_rules! update_fallback {
     };
 }
 
-update_fallback!()
+update_fallback!();

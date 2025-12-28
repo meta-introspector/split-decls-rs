@@ -4,4 +4,4 @@ macro_rules! PROC_TRACE_CTL_DISABLE {
     };
 }
 
-PROC_TRACE_CTL_DISABLE!()
+PROC_TRACE_CTL_DISABLE!();

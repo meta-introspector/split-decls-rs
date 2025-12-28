@@ -4,4 +4,4 @@ macro_rules! call_provider {
     };
 }
 
-call_provider!()
+call_provider!();

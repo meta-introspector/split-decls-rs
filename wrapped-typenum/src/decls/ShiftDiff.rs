@@ -4,4 +4,4 @@ macro_rules! ShiftDiff {
     };
 }
 
-ShiftDiff!()
+ShiftDiff!();

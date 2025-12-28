@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Stmts!();
+        Container!();
         StructVariant!();
+        Stmts!();
+        Style!();
         Fragment!();
         TupleVariant!();
         Parameters!();
-        Container!();
-        Style!();
         Variant!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! serialize_adjacently_tagged_variant {
     };
 }
 
-serialize_adjacently_tagged_variant!()
+serialize_adjacently_tagged_variant!();

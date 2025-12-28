@@ -4,4 +4,4 @@ macro_rules! R_SPARC_TLS_IE_LD {
     };
 }
 
-R_SPARC_TLS_IE_LD!()
+R_SPARC_TLS_IE_LD!();

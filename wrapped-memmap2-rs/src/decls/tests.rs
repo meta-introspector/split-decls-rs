@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Advice!();
         UncheckedAdvice!();
+        Advice!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

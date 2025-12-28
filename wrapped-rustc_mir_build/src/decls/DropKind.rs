@@ -4,4 +4,4 @@ macro_rules! DropKind {
     };
 }
 
-DropKind!()
+DropKind!();

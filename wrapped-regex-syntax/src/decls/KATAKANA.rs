@@ -4,4 +4,4 @@ macro_rules! KATAKANA {
     };
 }
 
-KATAKANA!()
+KATAKANA!();

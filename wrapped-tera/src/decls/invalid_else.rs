@@ -9,4 +9,4 @@ macro_rules! invalid_else {
     };
 }
 
-invalid_else!()
+invalid_else!();

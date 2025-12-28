@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Anchored!();
-        BuildError!();
-        State!();
-        StateBuilderNFA!();
         DFA!();
         Unit!();
-        NFA!();
+        StateBuilderNFA!();
+        BuildError!();
+        State!();
         Runner!();
-        StateID!();
+        Anchored!();
         PatternID!();
-        StateBuilderEmpty!();
         Start!();
+        StateBuilderEmpty!();
+        NFA!();
+        StateID!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

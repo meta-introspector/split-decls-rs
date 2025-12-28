@@ -11,4 +11,4 @@ macro_rules! should_skip_runnable {
     };
 }
 
-should_skip_runnable!()
+should_skip_runnable!();

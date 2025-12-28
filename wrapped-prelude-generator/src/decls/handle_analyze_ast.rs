@@ -11,4 +11,4 @@ macro_rules! handle_analyze_ast {
     };
 }
 
-handle_analyze_ast!()
+handle_analyze_ast!();

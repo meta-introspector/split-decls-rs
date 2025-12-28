@@ -4,4 +4,4 @@ macro_rules! prop_reverse_reverse {
     };
 }
 
-prop_reverse_reverse!()
+prop_reverse_reverse!();

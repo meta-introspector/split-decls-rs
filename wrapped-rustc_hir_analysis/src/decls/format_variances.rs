@@ -4,4 +4,4 @@ macro_rules! format_variances {
     };
 }
 
-format_variances!()
+format_variances!();

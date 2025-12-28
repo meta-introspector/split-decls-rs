@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AuxHeader64!();
         AuxHeader!();
+        AuxHeader64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_786 {
     };
 }
 
-impl_786!()
+impl_786!();

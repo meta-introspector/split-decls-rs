@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        QueuedSpawn!();
         Access!();
         Execution!();
-        State!();
+        QueuedSpawn!();
         Scheduler!();
         Thread!();
+        State!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

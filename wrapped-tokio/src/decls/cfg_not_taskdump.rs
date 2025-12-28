@@ -4,4 +4,4 @@ macro_rules! cfg_not_taskdump {
     };
 }
 
-cfg_not_taskdump!()
+cfg_not_taskdump!();

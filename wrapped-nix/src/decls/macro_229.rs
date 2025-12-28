@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NixPath!();
         Result!();
+        NixPath!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_229 {
     };
 }
 
-macro_229!()
+macro_229!();

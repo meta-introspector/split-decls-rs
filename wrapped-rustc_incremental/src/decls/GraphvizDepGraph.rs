@@ -4,4 +4,4 @@ macro_rules! GraphvizDepGraph {
     };
 }
 
-GraphvizDepGraph!()
+GraphvizDepGraph!();

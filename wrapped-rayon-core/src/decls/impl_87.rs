@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OnceLatch!();
         AsCoreLatch!();
+        OnceLatch!();
         CoreLatch!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

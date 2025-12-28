@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
+        Result!();
         ClassUnicode!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! sb {
     };
 }
 
-sb!()
+sb!();

@@ -4,4 +4,4 @@ macro_rules! contains_complex_attributes_for_const {
     };
 }
 
-contains_complex_attributes_for_const!()
+contains_complex_attributes_for_const!();

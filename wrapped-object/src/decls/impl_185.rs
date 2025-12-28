@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ArchiveSymbolIterator!();
-        SymbolIteratorInternal!();
-        U16Bytes!();
-        ArchiveKind!();
-        Result!();
-        U64Bytes!();
         Bytes!();
-        U32Bytes!();
+        U64Bytes!();
+        SymbolIteratorInternal!();
+        Result!();
+        ArchiveKind!();
+        ArchiveSymbolIterator!();
         ReadRef!();
+        U16Bytes!();
+        U32Bytes!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

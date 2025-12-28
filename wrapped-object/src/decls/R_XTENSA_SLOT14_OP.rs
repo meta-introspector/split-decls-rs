@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_SLOT14_OP {
     };
 }
 
-R_XTENSA_SLOT14_OP!()
+R_XTENSA_SLOT14_OP!();

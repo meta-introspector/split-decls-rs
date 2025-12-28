@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Version!();
-        Channel!();
-        Expr!();
         Release!();
         Date!();
+        Expr!();
+        Channel!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

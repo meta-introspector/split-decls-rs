@@ -11,4 +11,4 @@ macro_rules! run_driver {
     };
 }
 
-run_driver!()
+run_driver!();

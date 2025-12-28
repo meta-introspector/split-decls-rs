@@ -4,4 +4,4 @@ macro_rules! S_ATTR_DEBUG {
     };
 }
 
-S_ATTR_DEBUG!()
+S_ATTR_DEBUG!();

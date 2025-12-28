@@ -11,4 +11,4 @@ macro_rules! check_error_send_sync {
     };
 }
 
-check_error_send_sync!()
+check_error_send_sync!();

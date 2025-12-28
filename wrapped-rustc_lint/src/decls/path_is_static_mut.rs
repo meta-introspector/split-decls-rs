@@ -4,4 +4,4 @@ macro_rules! path_is_static_mut {
     };
 }
 
-path_is_static_mut!()
+path_is_static_mut!();

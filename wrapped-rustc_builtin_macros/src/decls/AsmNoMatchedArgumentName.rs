@@ -4,4 +4,4 @@ macro_rules! AsmNoMatchedArgumentName {
     };
 }
 
-AsmNoMatchedArgumentName!()
+AsmNoMatchedArgumentName!();

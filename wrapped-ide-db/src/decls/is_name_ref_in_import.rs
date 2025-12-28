@@ -4,4 +4,4 @@ macro_rules! is_name_ref_in_import {
     };
 }
 
-is_name_ref_in_import!()
+is_name_ref_in_import!();

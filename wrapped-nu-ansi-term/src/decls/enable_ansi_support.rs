@@ -4,4 +4,4 @@ macro_rules! enable_ansi_support {
     };
 }
 
-enable_ansi_support!()
+enable_ansi_support!();

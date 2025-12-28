@@ -11,4 +11,4 @@ macro_rules! fsconfig_reconfigure {
     };
 }
 
-fsconfig_reconfigure!()
+fsconfig_reconfigure!();

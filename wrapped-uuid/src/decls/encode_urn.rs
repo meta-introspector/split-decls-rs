@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Urn!();
         Hyphenated!();
+        Urn!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! encode_urn {
     };
 }
 
-encode_urn!()
+encode_urn!();

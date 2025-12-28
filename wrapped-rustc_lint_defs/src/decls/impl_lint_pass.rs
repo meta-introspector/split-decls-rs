@@ -13,4 +13,4 @@ macro_rules! impl_lint_pass {
     };
 }
 
-impl_lint_pass!()
+impl_lint_pass!();

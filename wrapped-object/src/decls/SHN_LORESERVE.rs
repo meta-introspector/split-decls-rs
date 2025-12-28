@@ -4,4 +4,4 @@ macro_rules! SHN_LORESERVE {
     };
 }
 
-SHN_LORESERVE!()
+SHN_LORESERVE!();

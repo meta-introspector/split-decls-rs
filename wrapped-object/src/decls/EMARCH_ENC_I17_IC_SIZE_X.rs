@@ -4,4 +4,4 @@ macro_rules! EMARCH_ENC_I17_IC_SIZE_X {
     };
 }
 
-EMARCH_ENC_I17_IC_SIZE_X!()
+EMARCH_ENC_I17_IC_SIZE_X!();

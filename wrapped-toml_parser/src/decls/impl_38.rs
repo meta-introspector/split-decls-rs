@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Token!();
-        Source!();
-        SourceIndex!();
         Raw!();
+        SourceIndex!();
+        Source!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

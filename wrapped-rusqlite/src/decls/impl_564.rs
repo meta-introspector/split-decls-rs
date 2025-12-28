@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Result!();
-        ToSql!();
         ConnectionRef!();
-        Context!();
+        ToSql!();
         Connection!();
+        Context!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_564 {
     };
 }
 
-impl_564!()
+impl_564!();

@@ -4,4 +4,4 @@ macro_rules! IMAGE_ARCHIVE_PAD {
     };
 }
 
-IMAGE_ARCHIVE_PAD!()
+IMAGE_ARCHIVE_PAD!();

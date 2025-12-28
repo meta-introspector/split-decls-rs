@@ -4,4 +4,4 @@ macro_rules! R_RISCV_SUB_ULEB128 {
     };
 }
 
-R_RISCV_SUB_ULEB128!()
+R_RISCV_SUB_ULEB128!();

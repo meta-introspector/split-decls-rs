@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        YesS3!();
         YesS4!();
-        SseMachine!();
         NoNI!();
+        YesS3!();
         AVX2!();
+        SseMachine!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! AVX {
     };
 }
 
-AVX!()
+AVX!();

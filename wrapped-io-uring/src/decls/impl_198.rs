@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CancelBuilder!();
         Fd!();
+        CancelBuilder!();
         Fixed!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_198 {
     };
 }
 
-impl_198!()
+impl_198!();

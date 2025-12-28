@@ -4,4 +4,4 @@ macro_rules! lexed_str {
     };
 }
 
-lexed_str!()
+lexed_str!();

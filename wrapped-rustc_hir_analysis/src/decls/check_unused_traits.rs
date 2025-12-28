@@ -4,4 +4,4 @@ macro_rules! check_unused_traits {
     };
 }
 
-check_unused_traits!()
+check_unused_traits!();

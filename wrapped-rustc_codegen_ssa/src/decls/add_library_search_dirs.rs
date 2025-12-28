@@ -11,4 +11,4 @@ macro_rules! add_library_search_dirs {
     };
 }
 
-add_library_search_dirs!()
+add_library_search_dirs!();

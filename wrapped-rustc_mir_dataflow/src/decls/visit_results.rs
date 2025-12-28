@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ResultsVisitor!();
-        Results!();
-        Direction!();
         Analysis!();
+        Direction!();
+        Results!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! visit_results {
     };
 }
 
-visit_results!()
+visit_results!();

@@ -4,4 +4,4 @@ macro_rules! get_or_insert_with {
     };
 }
 
-get_or_insert_with!()
+get_or_insert_with!();

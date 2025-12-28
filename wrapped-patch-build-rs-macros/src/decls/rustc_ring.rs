@@ -4,4 +4,4 @@ macro_rules! rustc_ring {
     };
 }
 
-rustc_ring!()
+rustc_ring!();

@@ -12,4 +12,4 @@ macro_rules! float_arbitrary {
     };
 }
 
-float_arbitrary!()
+float_arbitrary!();

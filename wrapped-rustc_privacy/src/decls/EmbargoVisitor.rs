@@ -4,4 +4,4 @@ macro_rules! EmbargoVisitor {
     };
 }
 
-EmbargoVisitor!()
+EmbargoVisitor!();

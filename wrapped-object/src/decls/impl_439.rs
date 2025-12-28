@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        VernauxIterator!();
         FileHeader!();
+        Endian!();
         Item!();
-        VerneedIterator!();
+        VernauxIterator!();
         Result!();
         Verneed!();
-        Endian!();
+        VerneedIterator!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_439 {
     };
 }
 
-impl_439!()
+impl_439!();

@@ -4,4 +4,4 @@ macro_rules! BASE_IMPL {
     };
 }
 
-BASE_IMPL!()
+BASE_IMPL!();

@@ -12,4 +12,4 @@ macro_rules! late_lint_mod_inner {
     };
 }
 
-late_lint_mod_inner!()
+late_lint_mod_inner!();

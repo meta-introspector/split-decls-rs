@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        AllowedTargets!();
-        OnDuplicate!();
-        AttributeOrder!();
-        Stage!();
-        SingleAttributeParser!();
-        AcceptContext!();
         ArgParser!();
+        AttributeOrder!();
         RustcForceInlineParser!();
+        OnDuplicate!();
+        AcceptContext!();
+        SingleAttributeParser!();
+        Stage!();
+        AllowedTargets!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

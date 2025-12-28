@@ -4,4 +4,4 @@ macro_rules! SHT_NOBITS {
     };
 }
 
-SHT_NOBITS!()
+SHT_NOBITS!();

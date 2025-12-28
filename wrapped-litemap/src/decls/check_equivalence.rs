@@ -12,4 +12,4 @@ macro_rules! check_equivalence {
     };
 }
 
-check_equivalence!()
+check_equivalence!();

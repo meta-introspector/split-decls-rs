@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Template!();
-        MacroDefinition!();
-        MacroNamespaceMap!();
-        Result!();
-        Tera!();
-        MacroCollection!();
-        MacroTemplateMap!();
         Error!();
+        Template!();
+        MacroTemplateMap!();
+        MacroCollection!();
+        Tera!();
+        MacroDefinition!();
+        Result!();
+        MacroNamespaceMap!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_517 {
     };
 }
 
-impl_517!()
+impl_517!();

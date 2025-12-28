@@ -12,4 +12,4 @@ macro_rules! bridge_impl {
     };
 }
 
-bridge_impl!()
+bridge_impl!();

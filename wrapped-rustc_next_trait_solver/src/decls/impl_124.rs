@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         EvalCtxt!();
-        SearchGraph!();
-        ProofTreeBuilder!();
         SearchGraphDelegate!();
+        SearchGraph!();
         SolverDelegate!();
+        ProofTreeBuilder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

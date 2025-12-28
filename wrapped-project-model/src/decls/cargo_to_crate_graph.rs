@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Sysroot!();
-        FileLoader!();
-        DepKind!();
-        TargetKind!();
         TargetData!();
         WorkspaceBuildScripts!();
-        CargoWorkspace!();
-        CfgOverrides!();
+        TargetKind!();
         Build!();
+        DepKind!();
+        CfgOverrides!();
+        FileLoader!();
+        CargoWorkspace!();
+        Sysroot!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! cargo_to_crate_graph {
     };
 }
 
-cargo_to_crate_graph!()
+cargo_to_crate_graph!();

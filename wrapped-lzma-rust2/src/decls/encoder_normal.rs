@@ -4,4 +4,4 @@ macro_rules! encoder_normal {
     };
 }
 
-encoder_normal!()
+encoder_normal!();

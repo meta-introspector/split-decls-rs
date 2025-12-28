@@ -4,4 +4,4 @@ macro_rules! overwrite_stderr {
     };
 }
 
-overwrite_stderr!()
+overwrite_stderr!();

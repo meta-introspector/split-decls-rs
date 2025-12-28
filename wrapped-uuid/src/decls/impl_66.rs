@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Uuid!();
         Urn!();
+        Uuid!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

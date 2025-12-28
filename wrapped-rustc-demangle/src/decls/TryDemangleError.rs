@@ -4,4 +4,4 @@ macro_rules! TryDemangleError {
     };
 }
 
-TryDemangleError!()
+TryDemangleError!();

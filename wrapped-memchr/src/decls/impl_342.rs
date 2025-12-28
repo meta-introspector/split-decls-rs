@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SearcherRevKind!();
         SearcherRev!();
+        SearcherRevKind!();
         FinderRev!();
         TwoWay!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_342 {
     };
 }
 
-impl_342!()
+impl_342!();

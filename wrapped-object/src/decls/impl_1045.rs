@@ -1,35 +1,35 @@
 macro_rules! deps {
     () => {
-        Object!();
-        SymbolScope!();
+        FileFlags!();
         ComdatId!();
-        SymbolId!();
+        SectionFlags!();
+        Error!();
+        SectionKind!();
+        Comdat!();
+        Section!();
+        Result!();
+        SymbolFlags!();
+        StandardSegment!();
+        U32!();
+        Mangling!();
+        Endianness!();
+        BinaryFormat!();
+        SymbolKind!();
         SymbolSection!();
+        MachO!();
+        Relocation!();
+        SymbolScope!();
+        StandardSection!();
+        Object!();
+        SubArchitecture!();
+        Architecture!();
+        SymbolId!();
+        Symbol!();
+        U64!();
+        SectionId!();
+        WritableBuffer!();
         File!();
         StreamingBuffer!();
-        SectionFlags!();
-        MachO!();
-        Section!();
-        SymbolFlags!();
-        Endianness!();
-        StandardSection!();
-        SymbolKind!();
-        FileFlags!();
-        Result!();
-        Error!();
-        SubArchitecture!();
-        U64!();
-        Comdat!();
-        Relocation!();
-        StandardSegment!();
-        WritableBuffer!();
-        BinaryFormat!();
-        U32!();
-        SectionKind!();
-        Architecture!();
-        Mangling!();
-        SectionId!();
-        Symbol!();
     };
 }
 
@@ -40,4 +40,4 @@ macro_rules! impl_1045 {
     };
 }
 
-impl_1045!()
+impl_1045!();

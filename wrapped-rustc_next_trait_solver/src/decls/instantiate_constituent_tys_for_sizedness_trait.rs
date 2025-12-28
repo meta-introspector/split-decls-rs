@@ -12,4 +12,4 @@ macro_rules! instantiate_constituent_tys_for_sizedness_trait {
     };
 }
 
-instantiate_constituent_tys_for_sizedness_trait!()
+instantiate_constituent_tys_for_sizedness_trait!();

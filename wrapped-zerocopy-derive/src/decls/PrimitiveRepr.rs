@@ -4,4 +4,4 @@ macro_rules! PrimitiveRepr {
     };
 }
 
-PrimitiveRepr!()
+PrimitiveRepr!();

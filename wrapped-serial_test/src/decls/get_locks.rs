@@ -11,4 +11,4 @@ macro_rules! get_locks {
     };
 }
 
-get_locks!()
+get_locks!();

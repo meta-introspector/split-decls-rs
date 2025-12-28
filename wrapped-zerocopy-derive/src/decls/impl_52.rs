@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        FromRawReprsError!();
-        RawRepr!();
-        FromAttrsError!();
+        PrimitiveRepr!();
         AlignRepr!();
         Repr!();
+        FromAttrsError!();
+        RawRepr!();
         CompoundRepr!();
-        PrimitiveRepr!();
+        FromRawReprsError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

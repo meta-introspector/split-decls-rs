@@ -4,4 +4,4 @@ macro_rules! UnstableAttrForAlreadyStableFeature {
     };
 }
 
-UnstableAttrForAlreadyStableFeature!()
+UnstableAttrForAlreadyStableFeature!();

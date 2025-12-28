@@ -4,4 +4,4 @@ macro_rules! SalsaAttr {
     };
 }
 
-SalsaAttr!()
+SalsaAttr!();

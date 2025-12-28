@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_IMM8_X1_TLS_GD_ADD {
     };
 }
 
-R_TILEGX_IMM8_X1_TLS_GD_ADD!()
+R_TILEGX_IMM8_X1_TLS_GD_ADD!();

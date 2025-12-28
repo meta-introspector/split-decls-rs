@@ -4,4 +4,4 @@ macro_rules! parse_closure {
     };
 }
 
-parse_closure!()
+parse_closure!();

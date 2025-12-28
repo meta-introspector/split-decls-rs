@@ -4,4 +4,4 @@ macro_rules! InvalidReprAlignForTarget {
     };
 }
 
-InvalidReprAlignForTarget!()
+InvalidReprAlignForTarget!();

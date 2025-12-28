@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CanonicalCombiningClassMap!();
         CanonicalCombiningClassMapBorrowed!();
+        CanonicalCombiningClassMap!();
         Baked!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

@@ -11,4 +11,4 @@ macro_rules! populate_litemap {
     };
 }
 
-populate_litemap!()
+populate_litemap!();

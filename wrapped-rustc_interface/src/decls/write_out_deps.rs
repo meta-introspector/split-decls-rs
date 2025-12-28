@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorWritingDependencies!();
         Result!();
+        ErrorWritingDependencies!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! write_out_deps {
     };
 }
 
-write_out_deps!()
+write_out_deps!();

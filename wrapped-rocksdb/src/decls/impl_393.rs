@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Error!();
-        DBIteratorWithThreadMode!();
         ReadOptions!();
+        DBPinnableSlice!();
         DBRawIteratorWithThreadMode!();
-        SnapshotWithThreadMode!();
-        IteratorMode!();
+        DBIteratorWithThreadMode!();
         ColumnFamily!();
         DBAccess!();
-        DBPinnableSlice!();
         AsColumnFamilyRef!();
+        Error!();
+        SnapshotWithThreadMode!();
+        IteratorMode!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_393 {
     };
 }
 
-impl_393!()
+impl_393!();

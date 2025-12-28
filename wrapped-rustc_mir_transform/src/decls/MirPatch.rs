@@ -4,4 +4,4 @@ macro_rules! MirPatch {
     };
 }
 
-MirPatch!()
+MirPatch!();

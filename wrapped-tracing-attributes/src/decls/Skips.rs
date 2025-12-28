@@ -4,4 +4,4 @@ macro_rules! Skips {
     };
 }
 
-Skips!()
+Skips!();

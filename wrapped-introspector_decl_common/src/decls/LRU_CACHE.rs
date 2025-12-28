@@ -4,4 +4,4 @@ macro_rules! LRU_CACHE {
     };
 }
 
-LRU_CACHE!()
+LRU_CACHE!();

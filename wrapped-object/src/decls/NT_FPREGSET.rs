@@ -4,4 +4,4 @@ macro_rules! NT_FPREGSET {
     };
 }
 
-NT_FPREGSET!()
+NT_FPREGSET!();

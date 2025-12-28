@@ -4,4 +4,4 @@ macro_rules! UnusedComparisons {
     };
 }
 
-UnusedComparisons!()
+UnusedComparisons!();

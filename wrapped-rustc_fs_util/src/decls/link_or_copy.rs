@@ -11,4 +11,4 @@ macro_rules! link_or_copy {
     };
 }
 
-link_or_copy!()
+link_or_copy!();

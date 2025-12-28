@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         SalsaStruct!();
-        FunctionType!();
         ToDbLifetimeVisitor!();
         ValidFn!();
+        FunctionType!();
         Macro!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

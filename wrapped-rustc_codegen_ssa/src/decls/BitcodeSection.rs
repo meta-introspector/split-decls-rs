@@ -4,4 +4,4 @@ macro_rules! BitcodeSection {
     };
 }
 
-BitcodeSection!()
+BitcodeSection!();

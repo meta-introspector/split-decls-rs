@@ -4,4 +4,4 @@ macro_rules! SpanGuard {
     };
 }
 
-SpanGuard!()
+SpanGuard!();

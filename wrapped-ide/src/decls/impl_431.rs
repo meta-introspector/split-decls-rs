@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        DiscriminantHints!();
-        Analysis!();
-        ClosureReturnTypeHints!();
-        InlayFieldsToResolve!();
-        HoverDocFormat!();
-        LifetimeElisionHints!();
         SubstTyLen!();
-        AdjustmentHints!();
-        GenericParameterHints!();
-        ReferenceData!();
-        AdjustmentHintsMode!();
-        VendoredLibrariesConfig!();
-        TokenStaticData!();
-        InlayHintsConfig!();
-        UpmappingResult!();
-        HoverConfig!();
         StaticIndexedFile!();
+        Analysis!();
+        VendoredLibrariesConfig!();
+        InlayFieldsToResolve!();
+        AdjustmentHintsMode!();
+        AdjustmentHints!();
+        LifetimeElisionHints!();
+        HoverConfig!();
+        TokenStaticData!();
+        GenericParameterHints!();
+        ClosureReturnTypeHints!();
+        DiscriminantHints!();
+        HoverDocFormat!();
+        ReferenceData!();
         StaticIndex!();
+        UpmappingResult!();
+        InlayHintsConfig!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_431 {
     };
 }
 
-impl_431!()
+impl_431!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Token!();
-        Spacing!();
-        LazyAttrTokenStream!();
-        AttrTokenStream!();
         AttrsTarget!();
+        AttrTokenStream!();
+        Token!();
+        LazyAttrTokenStream!();
+        Spacing!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! FlatToken {
     };
 }
 
-FlatToken!()
+FlatToken!();

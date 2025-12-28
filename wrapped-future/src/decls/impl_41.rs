@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         AsyncStatus!();
-        AsyncOperationWithProgressCompletedHandler_Vtbl!();
-        AsyncOperationWithProgressCompletedHandler!();
-        IAsyncOperationWithProgress!();
         AsyncOperationWithProgressCompletedHandlerBox!();
+        IAsyncOperationWithProgress!();
+        AsyncOperationWithProgressCompletedHandler!();
+        AsyncOperationWithProgressCompletedHandler_Vtbl!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

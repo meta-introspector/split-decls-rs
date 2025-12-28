@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RegionRelations!();
-        InferCtxt!();
-        SubregionOrigin!();
         ConstraintKind!();
-        RegionResolutionError!();
         UndoLog!();
         OutlivesEnvironment!();
+        SubregionOrigin!();
+        InferCtxt!();
+        RegionRelations!();
+        RegionResolutionError!();
         RegionConstraintData!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_108 {
     };
 }
 
-impl_108!()
+impl_108!();

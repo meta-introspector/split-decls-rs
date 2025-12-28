@@ -4,4 +4,4 @@ macro_rules! syncsearch {
     };
 }
 
-syncsearch!()
+syncsearch!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TypeDef!();
-        MethodDef!();
-        InterfaceImpl!();
-        TypeSpec!();
-        Field!();
-        TypeRef!();
-        MemberRef!();
         GenericParam!();
+        InterfaceImpl!();
+        TypeRef!();
+        Field!();
+        MemberRef!();
+        TypeSpec!();
+        MethodDef!();
+        TypeDef!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! macro_30 {
     };
 }
 
-macro_30!()
+macro_30!();

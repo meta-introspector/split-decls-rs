@@ -4,4 +4,4 @@ macro_rules! RustcPubTransparent {
     };
 }
 
-RustcPubTransparent!()
+RustcPubTransparent!();

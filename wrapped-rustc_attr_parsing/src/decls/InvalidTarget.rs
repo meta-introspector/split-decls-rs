@@ -4,4 +4,4 @@ macro_rules! InvalidTarget {
     };
 }
 
-InvalidTarget!()
+InvalidTarget!();

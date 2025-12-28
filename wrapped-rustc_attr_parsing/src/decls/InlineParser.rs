@@ -4,4 +4,4 @@ macro_rules! InlineParser {
     };
 }
 
-InlineParser!()
+InlineParser!();

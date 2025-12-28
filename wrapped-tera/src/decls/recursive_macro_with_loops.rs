@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Context!();
         Tera!();
         NestedObject!();
+        Context!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! recursive_macro_with_loops {
     };
 }
 
-recursive_macro_with_loops!()
+recursive_macro_with_loops!();

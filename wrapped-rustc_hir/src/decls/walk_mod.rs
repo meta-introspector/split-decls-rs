@@ -12,4 +12,4 @@ macro_rules! walk_mod {
     };
 }
 
-walk_mod!()
+walk_mod!();

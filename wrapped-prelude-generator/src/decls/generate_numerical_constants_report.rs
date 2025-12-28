@@ -4,4 +4,4 @@ macro_rules! generate_numerical_constants_report {
     };
 }
 
-generate_numerical_constants_report!()
+generate_numerical_constants_report!();

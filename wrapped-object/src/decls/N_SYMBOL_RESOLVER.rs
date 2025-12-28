@@ -4,4 +4,4 @@ macro_rules! N_SYMBOL_RESOLVER {
     };
 }
 
-N_SYMBOL_RESOLVER!()
+N_SYMBOL_RESOLVER!();

@@ -4,4 +4,4 @@ macro_rules! is_body_const {
     };
 }
 
-is_body_const!()
+is_body_const!();

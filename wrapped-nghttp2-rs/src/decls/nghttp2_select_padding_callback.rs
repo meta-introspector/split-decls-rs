@@ -4,4 +4,4 @@ macro_rules! nghttp2_select_padding_callback {
     };
 }
 
-nghttp2_select_padding_callback!()
+nghttp2_select_padding_callback!();

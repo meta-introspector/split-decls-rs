@@ -4,4 +4,4 @@ macro_rules! R_ARM_RXPC25 {
     };
 }
 
-R_ARM_RXPC25!()
+R_ARM_RXPC25!();

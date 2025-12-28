@@ -11,4 +11,4 @@ macro_rules! encode_hyphenated {
     };
 }
 
-encode_hyphenated!()
+encode_hyphenated!();

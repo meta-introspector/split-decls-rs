@@ -4,4 +4,4 @@ macro_rules! gate_multi {
     };
 }
 
-gate_multi!()
+gate_multi!();

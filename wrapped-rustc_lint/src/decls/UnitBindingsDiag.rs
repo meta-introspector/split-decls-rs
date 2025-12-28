@@ -4,4 +4,4 @@ macro_rules! UnitBindingsDiag {
     };
 }
 
-UnitBindingsDiag!()
+UnitBindingsDiag!();

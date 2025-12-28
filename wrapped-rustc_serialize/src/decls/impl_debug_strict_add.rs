@@ -11,4 +11,4 @@ macro_rules! impl_debug_strict_add {
     };
 }
 
-impl_debug_strict_add!()
+impl_debug_strict_add!();

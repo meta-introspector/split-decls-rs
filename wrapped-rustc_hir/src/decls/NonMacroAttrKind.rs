@@ -4,4 +4,4 @@ macro_rules! NonMacroAttrKind {
     };
 }
 
-NonMacroAttrKind!()
+NonMacroAttrKind!();

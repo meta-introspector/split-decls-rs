@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Context!();
-        DictParams!();
         Segment!();
+        DictParams!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! pick_best_segment {
     };
 }
 
-pick_best_segment!()
+pick_best_segment!();

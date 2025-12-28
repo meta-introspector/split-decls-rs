@@ -4,4 +4,4 @@ macro_rules! cpp_enum {
     };
 }
 
-cpp_enum!()
+cpp_enum!();

@@ -4,4 +4,4 @@ macro_rules! MAX_WINDOW_SIZE {
     };
 }
 
-MAX_WINDOW_SIZE!()
+MAX_WINDOW_SIZE!();

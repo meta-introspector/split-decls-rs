@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TestId!();
-        UpdateTest!();
         RunnableKind!();
+        UpdateTest!();
+        TestId!();
         Runnable!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! runnable_impl {
     };
 }
 
-runnable_impl!()
+runnable_impl!();

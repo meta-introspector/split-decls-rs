@@ -4,4 +4,4 @@ macro_rules! deselfify_args {
     };
 }
 
-deselfify_args!()
+deselfify_args!();

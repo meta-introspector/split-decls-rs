@@ -4,4 +4,4 @@ macro_rules! MH_FILESET {
     };
 }
 
-MH_FILESET!()
+MH_FILESET!();

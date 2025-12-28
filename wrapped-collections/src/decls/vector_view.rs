@@ -4,4 +4,4 @@ macro_rules! vector_view {
     };
 }
 
-vector_view!()
+vector_view!();

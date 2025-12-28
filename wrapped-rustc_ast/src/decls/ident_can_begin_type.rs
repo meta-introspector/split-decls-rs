@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Impl!();
         Token!();
-        Fn!();
         Extern!();
         IdentIsRaw!();
-        Impl!();
+        Fn!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ident_can_begin_type {
     };
 }
 
-ident_can_begin_type!()
+ident_can_begin_type!();

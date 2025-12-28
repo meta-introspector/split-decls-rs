@@ -4,4 +4,4 @@ macro_rules! Uninit {
     };
 }
 
-Uninit!()
+Uninit!();

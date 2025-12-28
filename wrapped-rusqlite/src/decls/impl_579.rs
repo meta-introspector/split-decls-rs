@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Inserts!();
         ConflictMode!();
+        Inserts!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_579 {
     };
 }
 
-impl_579!()
+impl_579!();

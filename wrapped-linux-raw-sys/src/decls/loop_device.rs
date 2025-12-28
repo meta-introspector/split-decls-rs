@@ -4,4 +4,4 @@ macro_rules! loop_device {
     };
 }
 
-loop_device!()
+loop_device!();

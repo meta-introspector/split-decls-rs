@@ -11,4 +11,4 @@ macro_rules! create_alloc_family_attr {
     };
 }
 
-create_alloc_family_attr!()
+create_alloc_family_attr!();

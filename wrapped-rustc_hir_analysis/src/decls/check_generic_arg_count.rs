@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GenericArgCountMismatch!();
-        ExplicitLateBound!();
         HirTyLowerer!();
         GenericArgPosition!();
         GenericArgCountResult!();
+        GenericArgCountMismatch!();
+        ExplicitLateBound!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! check_generic_arg_count {
     };
 }
 
-check_generic_arg_count!()
+check_generic_arg_count!();

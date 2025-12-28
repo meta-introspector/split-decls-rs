@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         StepResult!();
-        Result!();
-        Connection!();
-        Name!();
         Backup!();
         Progress!();
+        Name!();
+        Connection!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

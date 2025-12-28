@@ -4,4 +4,4 @@ macro_rules! flatten_format_args {
     };
 }
 
-flatten_format_args!()
+flatten_format_args!();

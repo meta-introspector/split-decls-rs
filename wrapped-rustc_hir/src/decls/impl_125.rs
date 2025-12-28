@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TyKind!();
         InferArg!();
         Ty!();
+        TyKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

@@ -4,4 +4,4 @@ macro_rules! Blobs {
     };
 }
 
-Blobs!()
+Blobs!();

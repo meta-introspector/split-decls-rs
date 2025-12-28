@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Consumer!();
-        RChunksExactMut!();
         RChunksExactMutProducer!();
         IndexedParallelIterator!();
         ProducerCallback!();
+        Consumer!();
+        RChunksExactMut!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1193 {
     };
 }
 
-impl_1193!()
+impl_1193!();

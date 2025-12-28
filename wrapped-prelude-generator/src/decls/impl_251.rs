@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Declaration!();
         DependencyValidator!();
         ValidationError!();
         DeclarationValidator!();
+        Declaration!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

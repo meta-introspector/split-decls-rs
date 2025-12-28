@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SpawnStatus!();
-        StreamStatus!();
         Stdio!();
-        Spawn!();
+        StreamStatus!();
+        SpawnStatus!();
         Output!();
         Stream!();
+        Spawn!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

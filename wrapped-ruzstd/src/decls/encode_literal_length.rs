@@ -4,4 +4,4 @@ macro_rules! encode_literal_length {
     };
 }
 
-encode_literal_length!()
+encode_literal_length!();

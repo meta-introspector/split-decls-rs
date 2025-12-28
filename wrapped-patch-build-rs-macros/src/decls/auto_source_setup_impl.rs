@@ -150,4 +150,4 @@ impl SourceAnalysis {
     };
 }
 
-auto_source_setup_impl!()
+auto_source_setup_impl!();

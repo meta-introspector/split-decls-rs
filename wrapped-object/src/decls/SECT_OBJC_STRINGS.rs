@@ -4,4 +4,4 @@ macro_rules! SECT_OBJC_STRINGS {
     };
 }
 
-SECT_OBJC_STRINGS!()
+SECT_OBJC_STRINGS!();

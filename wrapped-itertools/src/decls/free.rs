@@ -4,4 +4,4 @@ macro_rules! free {
     };
 }
 
-free!()
+free!();

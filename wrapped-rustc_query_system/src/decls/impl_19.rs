@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FingerprintStyle!();
-        DepNode!();
-        DepKind!();
-        DepContext!();
         DepNodeParams!();
+        DepContext!();
+        DepKind!();
+        DepNode!();
+        FingerprintStyle!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

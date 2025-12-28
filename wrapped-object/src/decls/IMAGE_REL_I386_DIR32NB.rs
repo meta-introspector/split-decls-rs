@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_I386_DIR32NB {
     };
 }
 
-IMAGE_REL_I386_DIR32NB!()
+IMAGE_REL_I386_DIR32NB!();

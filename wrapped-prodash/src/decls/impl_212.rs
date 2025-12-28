@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Task!();
         Throughput!();
-        Key!();
         Value!();
+        Key!();
+        Task!();
         State!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_212 {
     };
 }
 
-impl_212!()
+impl_212!();

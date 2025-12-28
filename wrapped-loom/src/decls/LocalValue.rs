@@ -4,4 +4,4 @@ macro_rules! LocalValue {
     };
 }
 
-LocalValue!()
+LocalValue!();

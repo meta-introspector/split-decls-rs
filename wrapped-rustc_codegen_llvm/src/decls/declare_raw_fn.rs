@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Visibility!();
+        CodegenCx!();
+        CallConv!();
+        UnnamedAddr!();
         SmallVec!();
         AttributeKind!();
-        CallConv!();
-        CodegenCx!();
-        UnnamedAddr!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! declare_raw_fn {
     };
 }
 
-declare_raw_fn!()
+declare_raw_fn!();

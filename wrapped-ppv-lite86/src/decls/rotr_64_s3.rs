@@ -4,4 +4,4 @@ macro_rules! rotr_64_s3 {
     };
 }
 
-rotr_64_s3!()
+rotr_64_s3!();

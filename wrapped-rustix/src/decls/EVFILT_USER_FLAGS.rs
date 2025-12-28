@@ -4,4 +4,4 @@ macro_rules! EVFILT_USER_FLAGS {
     };
 }
 
-EVFILT_USER_FLAGS!()
+EVFILT_USER_FLAGS!();

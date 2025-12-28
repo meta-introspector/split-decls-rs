@@ -4,4 +4,4 @@ macro_rules! DeprecatedLintName {
     };
 }
 
-DeprecatedLintName!()
+DeprecatedLintName!();

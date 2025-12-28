@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ChainProducer!();
         ChainSeq!();
         IntoIter!();
-        ChainProducer!();
         Folder!();
         Producer!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_308 {
     };
 }
 
-impl_308!()
+impl_308!();

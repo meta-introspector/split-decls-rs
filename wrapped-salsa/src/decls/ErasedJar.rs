@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         IngredientIndex!();
+        Zalsa!();
         Ingredient!();
         JarKind!();
         Jar!();
-        Zalsa!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ErasedJar {
     };
 }
 
-ErasedJar!()
+ErasedJar!();

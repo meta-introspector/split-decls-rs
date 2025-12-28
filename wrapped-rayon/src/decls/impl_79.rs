@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Iter!();
         ParallelDrainFull!();
         Drain!();
+        Iter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

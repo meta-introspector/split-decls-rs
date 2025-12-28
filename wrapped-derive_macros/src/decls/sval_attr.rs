@@ -4,4 +4,4 @@ macro_rules! sval_attr {
     };
 }
 
-sval_attr!()
+sval_attr!();

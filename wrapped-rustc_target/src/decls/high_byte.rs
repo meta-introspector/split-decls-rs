@@ -12,4 +12,4 @@ macro_rules! high_byte {
     };
 }
 
-high_byte!()
+high_byte!();

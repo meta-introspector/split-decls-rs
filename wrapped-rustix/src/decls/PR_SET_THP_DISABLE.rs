@@ -4,4 +4,4 @@ macro_rules! PR_SET_THP_DISABLE {
     };
 }
 
-PR_SET_THP_DISABLE!()
+PR_SET_THP_DISABLE!();

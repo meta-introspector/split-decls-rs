@@ -12,4 +12,4 @@ macro_rules! validate_ast {
     };
 }
 
-validate_ast!()
+validate_ast!();

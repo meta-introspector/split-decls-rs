@@ -11,4 +11,4 @@ macro_rules! parse_suggestion_values {
     };
 }
 
-parse_suggestion_values!()
+parse_suggestion_values!();

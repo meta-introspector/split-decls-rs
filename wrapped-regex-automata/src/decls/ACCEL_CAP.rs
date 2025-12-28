@@ -4,4 +4,4 @@ macro_rules! ACCEL_CAP {
     };
 }
 
-ACCEL_CAP!()
+ACCEL_CAP!();

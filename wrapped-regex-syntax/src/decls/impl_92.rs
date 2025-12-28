@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Literal!();
+        ClassSetItem!();
         Range!();
         Span!();
-        ClassSetItem!();
-        Literal!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_92 {
     };
 }
 
-impl_92!()
+impl_92!();

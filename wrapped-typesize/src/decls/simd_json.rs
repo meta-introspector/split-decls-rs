@@ -4,4 +4,4 @@ macro_rules! simd_json {
     };
 }
 
-simd_json!()
+simd_json!();

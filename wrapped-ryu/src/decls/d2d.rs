@@ -11,4 +11,4 @@ macro_rules! d2d {
     };
 }
 
-d2d!()
+d2d!();

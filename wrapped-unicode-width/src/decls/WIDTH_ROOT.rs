@@ -11,4 +11,4 @@ macro_rules! WIDTH_ROOT {
     };
 }
 
-WIDTH_ROOT!()
+WIDTH_ROOT!();

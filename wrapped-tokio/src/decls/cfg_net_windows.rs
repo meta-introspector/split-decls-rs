@@ -4,4 +4,4 @@ macro_rules! cfg_net_windows {
     };
 }
 
-cfg_net_windows!()
+cfg_net_windows!();

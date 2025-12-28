@@ -4,4 +4,4 @@ macro_rules! SVEVectorLengthConfig {
     };
 }
 
-SVEVectorLengthConfig!()
+SVEVectorLengthConfig!();

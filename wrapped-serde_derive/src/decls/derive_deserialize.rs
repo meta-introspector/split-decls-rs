@@ -4,4 +4,4 @@ macro_rules! derive_deserialize {
     };
 }
 
-derive_deserialize!()
+derive_deserialize!();

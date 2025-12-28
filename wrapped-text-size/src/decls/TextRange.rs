@@ -11,4 +11,4 @@ macro_rules! TextRange {
     };
 }
 
-TextRange!()
+TextRange!();

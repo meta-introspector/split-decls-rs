@@ -4,4 +4,4 @@ macro_rules! CreateAlignmentAttr {
     };
 }
 
-CreateAlignmentAttr!()
+CreateAlignmentAttr!();

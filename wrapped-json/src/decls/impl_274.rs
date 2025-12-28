@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         VariantAccess!();
-        Error!();
-        VariantRefDeserializer!();
         Value!();
+        VariantRefDeserializer!();
+        Error!();
         Result!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_274 {
     };
 }
 
-impl_274!()
+impl_274!();

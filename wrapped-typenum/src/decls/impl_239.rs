@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UTerm!();
         InvertedUTerm!();
         Invert!();
+        UTerm!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_239 {
     };
 }
 
-impl_239!()
+impl_239!();

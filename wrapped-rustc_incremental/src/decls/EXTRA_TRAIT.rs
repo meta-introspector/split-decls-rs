@@ -4,4 +4,4 @@ macro_rules! EXTRA_TRAIT {
     };
 }
 
-EXTRA_TRAIT!()
+EXTRA_TRAIT!();

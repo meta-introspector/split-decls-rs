@@ -4,4 +4,4 @@ macro_rules! take_ident {
     };
 }
 
-take_ident!()
+take_ident!();

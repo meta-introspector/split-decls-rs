@@ -4,4 +4,4 @@ macro_rules! get_self_string {
     };
 }
 
-get_self_string!()
+get_self_string!();

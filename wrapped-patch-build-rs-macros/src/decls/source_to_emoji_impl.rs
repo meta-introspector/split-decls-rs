@@ -30,4 +30,4 @@ macro_rules! source_to_emoji_impl {
     };
 }
 
-source_to_emoji_impl!()
+source_to_emoji_impl!();

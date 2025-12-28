@@ -11,4 +11,4 @@ macro_rules! fill_window {
     };
 }
 
-fill_window!()
+fill_window!();

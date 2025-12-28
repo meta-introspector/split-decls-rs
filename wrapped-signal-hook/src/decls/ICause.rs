@@ -4,4 +4,4 @@ macro_rules! ICause {
     };
 }
 
-ICause!()
+ICause!();

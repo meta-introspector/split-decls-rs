@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        BackupEngineOptions!();
+        ThreadMode!();
+        BackupEngineInfo!();
+        DBInner!();
         RestoreOptions!();
         BackupEngine!();
-        DBInner!();
-        BackupEngineInfo!();
-        ThreadMode!();
+        Error!();
+        BackupEngineOptions!();
         Env!();
         DBCommon!();
-        Error!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

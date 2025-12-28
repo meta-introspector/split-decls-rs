@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         Ty!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SubtypePredicate {
     };
 }
 
-SubtypePredicate!()
+SubtypePredicate!();

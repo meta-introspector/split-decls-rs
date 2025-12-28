@@ -11,4 +11,4 @@ macro_rules! reveal_in_windows_explorer {
     };
 }
 
-reveal_in_windows_explorer!()
+reveal_in_windows_explorer!();

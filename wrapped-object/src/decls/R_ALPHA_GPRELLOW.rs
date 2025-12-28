@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_GPRELLOW {
     };
 }
 
-R_ALPHA_GPRELLOW!()
+R_ALPHA_GPRELLOW!();

@@ -4,4 +4,4 @@ macro_rules! Sip13Rounds {
     };
 }
 
-Sip13Rounds!()
+Sip13Rounds!();

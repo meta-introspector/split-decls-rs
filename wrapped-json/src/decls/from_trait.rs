@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Deserializer!();
-        Result!();
         Read!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! from_trait {
     };
 }
 
-from_trait!()
+from_trait!();

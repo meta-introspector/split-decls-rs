@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BridgeTys!();
-        TagEncoding!();
         Stable!();
+        TagEncoding!();
         VariantIdx!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_109 {
     };
 }
 
-impl_109!()
+impl_109!();

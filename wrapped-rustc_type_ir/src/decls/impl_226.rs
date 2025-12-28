@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DefId!();
-        ValidateBoundVars!();
-        Interner!();
         TypeVisitable!();
         Binder!();
+        ValidateBoundVars!();
+        Interner!();
+        DefId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_226 {
     };
 }
 
-impl_226!()
+impl_226!();

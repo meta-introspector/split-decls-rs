@@ -12,4 +12,4 @@ macro_rules! create_member_type {
     };
 }
 
-create_member_type!()
+create_member_type!();

@@ -4,4 +4,4 @@ macro_rules! collect_user_names {
     };
 }
 
-collect_user_names!()
+collect_user_names!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Repr!();
         Key!();
+        RawString!();
+        Repr!();
         State!();
         Decor!();
-        RawString!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

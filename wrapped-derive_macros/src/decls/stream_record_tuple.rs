@@ -4,4 +4,4 @@ macro_rules! stream_record_tuple {
     };
 }
 
-stream_record_tuple!()
+stream_record_tuple!();

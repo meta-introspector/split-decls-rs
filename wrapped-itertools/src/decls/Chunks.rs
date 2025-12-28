@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Chunk!();
         IntoChunks!();
+        Chunk!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Chunks {
     };
 }
 
-Chunks!()
+Chunks!();

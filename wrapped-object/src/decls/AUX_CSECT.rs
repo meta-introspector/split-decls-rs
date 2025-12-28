@@ -4,4 +4,4 @@ macro_rules! AUX_CSECT {
     };
 }
 
-AUX_CSECT!()
+AUX_CSECT!();

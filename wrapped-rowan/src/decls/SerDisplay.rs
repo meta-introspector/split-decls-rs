@@ -4,4 +4,4 @@ macro_rules! SerDisplay {
     };
 }
 
-SerDisplay!()
+SerDisplay!();

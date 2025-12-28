@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Timespec!();
         LibcTimespec!();
+        Timespec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1689 {
     };
 }
 
-impl_1689!()
+impl_1689!();

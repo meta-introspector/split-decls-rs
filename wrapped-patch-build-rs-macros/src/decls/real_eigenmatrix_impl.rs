@@ -33,4 +33,4 @@ macro_rules! real_eigenmatrix_impl {
     };
 }
 
-real_eigenmatrix_impl!()
+real_eigenmatrix_impl!();

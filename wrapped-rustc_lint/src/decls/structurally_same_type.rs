@@ -4,4 +4,4 @@ macro_rules! structurally_same_type {
     };
 }
 
-structurally_same_type!()
+structurally_same_type!();

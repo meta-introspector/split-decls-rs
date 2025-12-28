@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Encoding!();
-        Ascii!();
         Unicode!();
+        Ascii!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! inner {
     };
 }
 
-inner!()
+inner!();

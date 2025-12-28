@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RequiresCfgPattern!();
         OneCfgPattern!();
+        RequiresCfgPattern!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_cfg {
     };
 }
 
-parse_cfg!()
+parse_cfg!();

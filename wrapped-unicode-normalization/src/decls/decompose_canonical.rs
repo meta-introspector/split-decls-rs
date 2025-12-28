@@ -4,4 +4,4 @@ macro_rules! decompose_canonical {
     };
 }
 
-decompose_canonical!()
+decompose_canonical!();

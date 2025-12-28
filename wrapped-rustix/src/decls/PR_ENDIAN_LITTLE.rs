@@ -4,4 +4,4 @@ macro_rules! PR_ENDIAN_LITTLE {
     };
 }
 
-PR_ENDIAN_LITTLE!()
+PR_ENDIAN_LITTLE!();

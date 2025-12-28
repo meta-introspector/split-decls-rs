@@ -4,4 +4,4 @@ macro_rules! Blocks {
     };
 }
 
-Blocks!()
+Blocks!();

@@ -4,4 +4,4 @@ macro_rules! __priv {
     };
 }
 
-__priv!()
+__priv!();

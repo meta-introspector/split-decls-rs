@@ -4,4 +4,4 @@ macro_rules! le64 {
     };
 }
 
-le64!()
+le64!();

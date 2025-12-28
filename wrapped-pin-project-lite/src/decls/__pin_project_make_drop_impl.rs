@@ -4,4 +4,4 @@ macro_rules! __pin_project_make_drop_impl {
     };
 }
 
-__pin_project_make_drop_impl!()
+__pin_project_make_drop_impl!();

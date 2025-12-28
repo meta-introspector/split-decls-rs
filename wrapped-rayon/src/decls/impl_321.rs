@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
-        ChunkSeq!();
-        ChunkProducer!();
         Producer!();
+        ChunkProducer!();
         Map!();
+        ChunkSeq!();
+        IntoIter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_321 {
     };
 }
 
-impl_321!()
+impl_321!();

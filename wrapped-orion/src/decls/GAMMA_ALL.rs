@@ -4,4 +4,4 @@ macro_rules! GAMMA_ALL {
     };
 }
 
-GAMMA_ALL!()
+GAMMA_ALL!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DB!();
         PropName!();
+        DB!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CURRENT_SUPER_VERSION_NUMBER {
     };
 }
 
-CURRENT_SUPER_VERSION_NUMBER!()
+CURRENT_SUPER_VERSION_NUMBER!();

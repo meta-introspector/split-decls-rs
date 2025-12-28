@@ -4,4 +4,4 @@ macro_rules! io_sqring_offsets {
     };
 }
 
-io_sqring_offsets!()
+io_sqring_offsets!();

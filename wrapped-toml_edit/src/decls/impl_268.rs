@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Item!();
         Value!();
         Array!();
+        Item!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_268 {
     };
 }
 
-impl_268!()
+impl_268!();

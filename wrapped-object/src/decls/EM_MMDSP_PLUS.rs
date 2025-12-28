@@ -4,4 +4,4 @@ macro_rules! EM_MMDSP_PLUS {
     };
 }
 
-EM_MMDSP_PLUS!()
+EM_MMDSP_PLUS!();

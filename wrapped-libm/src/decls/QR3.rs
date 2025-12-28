@@ -4,4 +4,4 @@ macro_rules! QR3 {
     };
 }
 
-QR3!()
+QR3!();

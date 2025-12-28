@@ -11,4 +11,4 @@ macro_rules! error_let_stmt {
     };
 }
 
-error_let_stmt!()
+error_let_stmt!();

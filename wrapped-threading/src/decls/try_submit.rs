@@ -12,4 +12,4 @@ macro_rules! try_submit {
     };
 }
 
-try_submit!()
+try_submit!();

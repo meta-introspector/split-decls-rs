@@ -4,4 +4,4 @@ macro_rules! since {
     };
 }
 
-since!()
+since!();

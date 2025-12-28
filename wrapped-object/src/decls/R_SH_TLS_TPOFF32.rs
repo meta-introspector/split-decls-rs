@@ -4,4 +4,4 @@ macro_rules! R_SH_TLS_TPOFF32 {
     };
 }
 
-R_SH_TLS_TPOFF32!()
+R_SH_TLS_TPOFF32!();

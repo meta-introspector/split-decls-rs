@@ -11,4 +11,4 @@ macro_rules! RefMutExpectations {
     };
 }
 
-RefMutExpectations!()
+RefMutExpectations!();

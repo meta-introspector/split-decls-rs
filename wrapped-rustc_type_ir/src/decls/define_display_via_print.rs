@@ -12,4 +12,4 @@ macro_rules! define_display_via_print {
     };
 }
 
-define_display_via_print!()
+define_display_via_print!();

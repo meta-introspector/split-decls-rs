@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         Prefilter!();
         MatchKind!();
-        NFA!();
-        Input!();
         HalfMatch!();
-        Config!();
+        Input!();
+        NFA!();
         Match!();
+        Config!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_439 {
     };
 }
 
-impl_439!()
+impl_439!();

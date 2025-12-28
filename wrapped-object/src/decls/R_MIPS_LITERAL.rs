@@ -4,4 +4,4 @@ macro_rules! R_MIPS_LITERAL {
     };
 }
 
-R_MIPS_LITERAL!()
+R_MIPS_LITERAL!();

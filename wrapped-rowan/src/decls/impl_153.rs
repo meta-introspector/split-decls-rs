@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         HeaderSlice!();
-        ThinArc!();
-        Arc!();
         ArcInner!();
+        Arc!();
+        ThinArc!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

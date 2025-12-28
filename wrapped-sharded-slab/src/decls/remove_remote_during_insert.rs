@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Slab!();
         AssertDropped!();
+        Slab!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! remove_remote_during_insert {
     };
 }
 
-remove_remote_during_insert!()
+remove_remote_during_insert!();

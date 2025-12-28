@@ -12,4 +12,4 @@ macro_rules! classify_ret_ty {
     };
 }
 
-classify_ret_ty!()
+classify_ret_ty!();

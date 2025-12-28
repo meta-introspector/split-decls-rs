@@ -4,4 +4,4 @@ macro_rules! argon2i {
     };
 }
 
-argon2i!()
+argon2i!();

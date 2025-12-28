@@ -4,4 +4,4 @@ macro_rules! CoerceResult {
     };
 }
 
-CoerceResult!()
+CoerceResult!();

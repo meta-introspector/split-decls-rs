@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        SourceMap!();
-        FileName!();
         SourceFile!();
-        StableSourceFileId!();
         SourceFileDiffs!();
-        ExternalSourceKind!();
-        SourceFileHash!();
-        ExternalSource!();
         SourceFileHashAlgorithm!();
-        SourceFileLines!();
         OffsetOverflowError!();
+        SourceFileLines!();
+        FileName!();
+        ExternalSource!();
+        ExternalSourceKind!();
+        StableSourceFileId!();
+        SourceMap!();
+        SourceFileHash!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_313 {
     };
 }
 
-impl_313!()
+impl_313!();

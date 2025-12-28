@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TaggedRef!();
-        Aligned!();
-        HashStable!();
         Tag!();
+        TaggedRef!();
+        HashStable!();
+        Aligned!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_589 {
     };
 }
 
-impl_589!()
+impl_589!();

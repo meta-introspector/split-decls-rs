@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Revision!();
         Durability!();
         Table!();
+        Revision!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Runtime {
     };
 }
 
-Runtime!()
+Runtime!();

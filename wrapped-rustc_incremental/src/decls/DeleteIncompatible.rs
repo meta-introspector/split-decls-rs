@@ -4,4 +4,4 @@ macro_rules! DeleteIncompatible {
     };
 }
 
-DeleteIncompatible!()
+DeleteIncompatible!();

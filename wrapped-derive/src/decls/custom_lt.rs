@@ -4,4 +4,4 @@ macro_rules! custom_lt {
     };
 }
 
-custom_lt!()
+custom_lt!();

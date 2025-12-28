@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Entry!();
         ArenaMap!();
+        Entry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VacantEntry {
     };
 }
 
-VacantEntry!()
+VacantEntry!();

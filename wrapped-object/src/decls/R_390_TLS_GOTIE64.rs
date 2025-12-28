@@ -4,4 +4,4 @@ macro_rules! R_390_TLS_GOTIE64 {
     };
 }
 
-R_390_TLS_GOTIE64!()
+R_390_TLS_GOTIE64!();

@@ -4,4 +4,4 @@ macro_rules! build_string {
     };
 }
 
-build_string!()
+build_string!();

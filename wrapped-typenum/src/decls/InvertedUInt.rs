@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UInt!();
         Bit!();
+        UInt!();
         InvertedUnsigned!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! InvertedUInt {
     };
 }
 
-InvertedUInt!()
+InvertedUInt!();

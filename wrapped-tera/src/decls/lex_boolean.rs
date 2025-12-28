@@ -4,4 +4,4 @@ macro_rules! lex_boolean {
     };
 }
 
-lex_boolean!()
+lex_boolean!();

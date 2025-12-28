@@ -4,4 +4,4 @@ macro_rules! frame_compressor {
     };
 }
 
-frame_compressor!()
+frame_compressor!();

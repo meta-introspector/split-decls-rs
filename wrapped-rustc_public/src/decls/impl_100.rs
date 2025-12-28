@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TyAndLayout!();
         BridgeTys!();
+        TyAndLayout!();
         Ty!();
         Stable!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_100 {
     };
 }
 
-impl_100!()
+impl_100!();

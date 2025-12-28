@@ -4,4 +4,4 @@ macro_rules! astar {
     };
 }
 
-astar!()
+astar!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        U32!();
         GnuPropertyIterator!();
-        GnuProperty!();
-        Endian!();
-        Bytes!();
         Result!();
+        GnuProperty!();
+        U32!();
+        Bytes!();
+        Endian!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_414 {
     };
 }
 
-impl_414!()
+impl_414!();

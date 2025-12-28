@@ -12,4 +12,4 @@ macro_rules! MachOFatFile32 {
     };
 }
 
-MachOFatFile32!()
+MachOFatFile32!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Walkable!();
         Inline!();
+        Walkable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InlineAsmRegOrRegClass {
     };
 }
 
-InlineAsmRegOrRegClass!()
+InlineAsmRegOrRegClass!();

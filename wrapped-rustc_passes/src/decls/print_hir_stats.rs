@@ -11,4 +11,4 @@ macro_rules! print_hir_stats {
     };
 }
 
-print_hir_stats!()
+print_hir_stats!();

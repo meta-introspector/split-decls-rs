@@ -4,4 +4,4 @@ macro_rules! R_ARM_LDRS_PC_G1 {
     };
 }
 
-R_ARM_LDRS_PC_G1!()
+R_ARM_LDRS_PC_G1!();

@@ -4,4 +4,4 @@ macro_rules! AttributePlace {
     };
 }
 
-AttributePlace!()
+AttributePlace!();

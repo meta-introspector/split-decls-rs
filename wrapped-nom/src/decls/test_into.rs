@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ParseError!();
+        IResult!();
         Err!();
         Error!();
-        IResult!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_into {
     };
 }
 
-test_into!()
+test_into!();

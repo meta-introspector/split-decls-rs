@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Raw!();
         Span!();
+        Raw!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

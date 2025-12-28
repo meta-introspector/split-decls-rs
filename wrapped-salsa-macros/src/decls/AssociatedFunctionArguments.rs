@@ -4,4 +4,4 @@ macro_rules! AssociatedFunctionArguments {
     };
 }
 
-AssociatedFunctionArguments!()
+AssociatedFunctionArguments!();

@@ -4,4 +4,4 @@ macro_rules! RustcLintOptDenyFieldAccess {
     };
 }
 
-RustcLintOptDenyFieldAccess!()
+RustcLintOptDenyFieldAccess!();

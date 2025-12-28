@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GraphemeState!();
-        PairResult!();
-        GraphemeCursor!();
         GraphemeIncomplete!();
+        PairResult!();
+        GraphemeState!();
+        GraphemeCursor!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

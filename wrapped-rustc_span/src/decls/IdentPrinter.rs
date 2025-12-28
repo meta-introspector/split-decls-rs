@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Symbol!();
-        IdentPrintMode!();
         Span!();
+        IdentPrintMode!();
+        Symbol!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IdentPrinter {
     };
 }
 
-IdentPrinter!()
+IdentPrinter!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SetMatches!();
         RegexSet!();
+        SetMatches!();
         SetMatchesIter!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

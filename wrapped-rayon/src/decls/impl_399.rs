@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Folder!();
-        Empty!();
-        EmptyProducer!();
         IntoIter!();
+        Empty!();
         Producer!();
+        EmptyProducer!();
+        Folder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_399 {
     };
 }
 
-impl_399!()
+impl_399!();

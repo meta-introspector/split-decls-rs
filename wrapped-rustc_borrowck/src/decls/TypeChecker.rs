@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        UniversalRegions!();
-        PoloniusFacts!();
-        MirTypeckRegionConstraints!();
         PoloniusLivenessContext!();
-        DeferredClosureRequirements!();
-        BorrowckInferCtxt!();
         PoloniusLocationTable!();
+        UniversalRegions!();
+        BorrowckInferCtxt!();
+        DeferredClosureRequirements!();
+        MirTypeckRegionConstraints!();
         BorrowSet!();
+        PoloniusFacts!();
         BorrowCheckRootCtxt!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! TypeChecker {
     };
 }
 
-TypeChecker!()
+TypeChecker!();

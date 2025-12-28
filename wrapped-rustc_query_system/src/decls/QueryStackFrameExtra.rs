@@ -4,4 +4,4 @@ macro_rules! QueryStackFrameExtra {
     };
 }
 
-QueryStackFrameExtra!()
+QueryStackFrameExtra!();

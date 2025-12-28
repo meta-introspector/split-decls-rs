@@ -4,4 +4,4 @@ macro_rules! BoxError {
     };
 }
 
-BoxError!()
+BoxError!();

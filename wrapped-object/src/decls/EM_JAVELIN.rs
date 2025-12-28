@@ -4,4 +4,4 @@ macro_rules! EM_JAVELIN {
     };
 }
 
-EM_JAVELIN!()
+EM_JAVELIN!();

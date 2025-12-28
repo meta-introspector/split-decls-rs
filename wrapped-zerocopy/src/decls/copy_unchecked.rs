@@ -4,4 +4,4 @@ macro_rules! copy_unchecked {
     };
 }
 
-copy_unchecked!()
+copy_unchecked!();

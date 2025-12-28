@@ -4,4 +4,4 @@ macro_rules! RustcToolInfo {
     };
 }
 
-RustcToolInfo!()
+RustcToolInfo!();

@@ -4,4 +4,4 @@ macro_rules! R_PPC_UADDR32 {
     };
 }
 
-R_PPC_UADDR32!()
+R_PPC_UADDR32!();

@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        Emit!();
-        FlatMap!();
-        Error!();
-        Or!();
-        Complete!();
+        MapRes!();
+        OutputMode!();
+        Streaming!();
+        And!();
+        Input!();
         PResult!();
+        Emit!();
         MapOpt!();
         OutputM!();
-        FromExternalError!();
-        Input!();
-        OutputMode!();
-        MapRes!();
-        IResult!();
-        Map!();
-        Streaming!();
-        Into!();
+        Error!();
+        Complete!();
         ParseError!();
+        Map!();
+        IResult!();
+        FromExternalError!();
+        FlatMap!();
+        Or!();
+        Into!();
         AndThen!();
-        And!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! Parser {
     };
 }
 
-Parser!()
+Parser!();

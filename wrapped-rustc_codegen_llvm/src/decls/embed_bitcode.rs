@@ -12,4 +12,4 @@ macro_rules! embed_bitcode {
     };
 }
 
-embed_bitcode!()
+embed_bitcode!();

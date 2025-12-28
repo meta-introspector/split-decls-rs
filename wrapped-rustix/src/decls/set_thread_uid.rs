@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Uid!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_thread_uid {
     };
 }
 
-set_thread_uid!()
+set_thread_uid!();

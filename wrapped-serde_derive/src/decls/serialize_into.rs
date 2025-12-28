@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Parameters!();
         Fragment!();
+        Parameters!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! serialize_into {
     };
 }
 
-serialize_into!()
+serialize_into!();

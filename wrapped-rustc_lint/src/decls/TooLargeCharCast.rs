@@ -4,4 +4,4 @@ macro_rules! TooLargeCharCast {
     };
 }
 
-TooLargeCharCast!()
+TooLargeCharCast!();

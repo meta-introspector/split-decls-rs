@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_I386_SECTION {
     };
 }
 
-IMAGE_REL_I386_SECTION!()
+IMAGE_REL_I386_SECTION!();

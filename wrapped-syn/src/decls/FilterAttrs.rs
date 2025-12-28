@@ -4,4 +4,4 @@ macro_rules! FilterAttrs {
     };
 }
 
-FilterAttrs!()
+FilterAttrs!();

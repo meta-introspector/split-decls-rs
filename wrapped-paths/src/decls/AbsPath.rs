@@ -4,4 +4,4 @@ macro_rules! AbsPath {
     };
 }
 
-AbsPath!()
+AbsPath!();

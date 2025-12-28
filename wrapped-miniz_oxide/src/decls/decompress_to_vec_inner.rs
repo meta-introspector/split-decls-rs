@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        DecompressError!();
+        TINFLStatus!();
         Result!();
         DecompressorOxide!();
-        TINFLStatus!();
-        DecompressError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! decompress_to_vec_inner {
     };
 }
 
-decompress_to_vec_inner!()
+decompress_to_vec_inner!();

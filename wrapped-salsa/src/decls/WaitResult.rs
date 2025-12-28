@@ -4,4 +4,4 @@ macro_rules! WaitResult {
     };
 }
 
-WaitResult!()
+WaitResult!();

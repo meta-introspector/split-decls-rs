@@ -4,4 +4,4 @@ macro_rules! MixedUnit {
     };
 }
 
-MixedUnit!()
+MixedUnit!();

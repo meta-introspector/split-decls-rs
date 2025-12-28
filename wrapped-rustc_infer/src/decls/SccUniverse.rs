@@ -4,4 +4,4 @@ macro_rules! SccUniverse {
     };
 }
 
-SccUniverse!()
+SccUniverse!();

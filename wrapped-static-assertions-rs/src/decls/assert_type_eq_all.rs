@@ -4,4 +4,4 @@ macro_rules! assert_type_eq_all {
     };
 }
 
-assert_type_eq_all!()
+assert_type_eq_all!();

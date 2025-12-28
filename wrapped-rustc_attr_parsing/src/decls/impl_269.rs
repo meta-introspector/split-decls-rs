@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Stage!();
-        Early!();
-        GroupType!();
         ShouldEmit!();
+        Stage!();
+        GroupType!();
+        Early!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_269 {
     };
 }
 
-impl_269!()
+impl_269!();

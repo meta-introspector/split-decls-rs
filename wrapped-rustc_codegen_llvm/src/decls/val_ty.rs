@@ -4,4 +4,4 @@ macro_rules! val_ty {
     };
 }
 
-val_ty!()
+val_ty!();

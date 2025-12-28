@@ -4,4 +4,4 @@ macro_rules! P_MAX {
     };
 }
 
-P_MAX!()
+P_MAX!();

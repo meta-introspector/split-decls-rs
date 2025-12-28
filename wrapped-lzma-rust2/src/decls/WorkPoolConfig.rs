@@ -4,4 +4,4 @@ macro_rules! WorkPoolConfig {
     };
 }
 
-WorkPoolConfig!()
+WorkPoolConfig!();

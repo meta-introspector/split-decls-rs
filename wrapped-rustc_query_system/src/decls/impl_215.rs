@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DepContext!();
         Value!();
+        DepContext!();
         CycleError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_215 {
     };
 }
 
-impl_215!()
+impl_215!();

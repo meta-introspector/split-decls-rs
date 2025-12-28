@@ -4,4 +4,4 @@ macro_rules! SMALL_INT_POW10 {
     };
 }
 
-SMALL_INT_POW10!()
+SMALL_INT_POW10!();

@@ -4,4 +4,4 @@ macro_rules! Latch {
     };
 }
 
-Latch!()
+Latch!();

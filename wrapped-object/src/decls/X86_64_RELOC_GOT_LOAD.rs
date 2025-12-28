@@ -4,4 +4,4 @@ macro_rules! X86_64_RELOC_GOT_LOAD {
     };
 }
 
-X86_64_RELOC_GOT_LOAD!()
+X86_64_RELOC_GOT_LOAD!();

@@ -4,4 +4,4 @@ macro_rules! PrivateSetBit {
     };
 }
 
-PrivateSetBit!()
+PrivateSetBit!();

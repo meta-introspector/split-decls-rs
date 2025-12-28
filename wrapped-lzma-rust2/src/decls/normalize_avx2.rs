@@ -4,4 +4,4 @@ macro_rules! normalize_avx2 {
     };
 }
 
-normalize_avx2!()
+normalize_avx2!();

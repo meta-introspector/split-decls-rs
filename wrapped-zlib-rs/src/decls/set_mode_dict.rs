@@ -12,4 +12,4 @@ macro_rules! set_mode_dict {
     };
 }
 
-set_mode_dict!()
+set_mode_dict!();

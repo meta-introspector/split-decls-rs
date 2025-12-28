@@ -12,4 +12,4 @@ macro_rules! impl_quickcheck {
     };
 }
 
-impl_quickcheck!()
+impl_quickcheck!();

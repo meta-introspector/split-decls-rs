@@ -4,4 +4,4 @@ macro_rules! ProcMacroSrvSpan {
     };
 }
 
-ProcMacroSrvSpan!()
+ProcMacroSrvSpan!();

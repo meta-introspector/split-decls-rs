@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BasicLineDiffPrinter!();
-        UnifiedDiffConfig!();
         Diff!();
         Algorithm!();
         InternedInput!();
+        UnifiedDiffConfig!();
+        BasicLineDiffPrinter!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! identical_files {
     };
 }
 
-identical_files!()
+identical_files!();

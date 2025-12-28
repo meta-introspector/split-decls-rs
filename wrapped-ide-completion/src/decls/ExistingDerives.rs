@@ -4,4 +4,4 @@ macro_rules! ExistingDerives {
     };
 }
 
-ExistingDerives!()
+ExistingDerives!();

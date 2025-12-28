@@ -4,4 +4,4 @@ macro_rules! pre_expansion_lint {
     };
 }
 
-pre_expansion_lint!()
+pre_expansion_lint!();

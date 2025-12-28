@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Walkable!();
-        TraitRef!();
-        Parens!();
         GenericParam!();
         TraitBoundModifiers!();
+        Parens!();
+        TraitRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! PolyTraitRef {
     };
 }
 
-PolyTraitRef!()
+PolyTraitRef!();

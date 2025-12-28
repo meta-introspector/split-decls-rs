@@ -4,4 +4,4 @@ macro_rules! N_WEAK_DEF {
     };
 }
 
-N_WEAK_DEF!()
+N_WEAK_DEF!();

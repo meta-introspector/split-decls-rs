@@ -11,4 +11,4 @@ macro_rules! global_locks {
     };
 }
 
-global_locks!()
+global_locks!();

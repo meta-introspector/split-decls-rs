@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
-        ConditionVisitor!();
-        UseSpans!();
-        InitializationRequiringAction!();
-        MoveSite!();
-        TwoPhaseActivation!();
-        CapturedMessageOpt!();
         BreakFinder!();
-        CaptureVarCause!();
-        DescribePlaceOpt!();
-        Normal!();
-        LaterUseKind!();
-        WriteKind!();
-        RegionNameSource!();
+        ConditionVisitor!();
         BorrowExplanation!();
-        MirBorrowckCtxt!();
-        RegionName!();
+        TwoPhaseActivation!();
         BorrowData!();
-        StorageDeadOrDrop!();
+        RegionName!();
         TypeNoCopy!();
-        CaptureArgLabel!();
+        CapturedMessageOpt!();
+        WriteKind!();
+        MoveSite!();
+        LaterUseKind!();
+        Normal!();
+        UseSpans!();
+        CaptureVarCause!();
+        MirBorrowckCtxt!();
         AnnotatedBorrowFnSignature!();
+        CaptureArgLabel!();
+        InitializationRequiringAction!();
+        RegionNameSource!();
+        StorageDeadOrDrop!();
+        DescribePlaceOpt!();
     };
 }
 
@@ -58,4 +58,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

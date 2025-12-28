@@ -4,4 +4,4 @@ macro_rules! int_traits {
     };
 }
 
-int_traits!()
+int_traits!();

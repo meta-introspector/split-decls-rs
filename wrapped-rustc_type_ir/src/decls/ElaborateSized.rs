@@ -4,4 +4,4 @@ macro_rules! ElaborateSized {
     };
 }
 
-ElaborateSized!()
+ElaborateSized!();

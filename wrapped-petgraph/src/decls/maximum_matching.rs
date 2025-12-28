@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Label!();
+        UnGraph!();
         Matching!();
         Time!();
-        UnGraph!();
+        Label!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! maximum_matching {
     };
 }
 
-maximum_matching!()
+maximum_matching!();

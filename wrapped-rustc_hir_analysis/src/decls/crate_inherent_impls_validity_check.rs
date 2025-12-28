@@ -4,4 +4,4 @@ macro_rules! crate_inherent_impls_validity_check {
     };
 }
 
-crate_inherent_impls_validity_check!()
+crate_inherent_impls_validity_check!();

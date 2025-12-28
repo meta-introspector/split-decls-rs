@@ -4,4 +4,4 @@ macro_rules! NotClean {
     };
 }
 
-NotClean!()
+NotClean!();

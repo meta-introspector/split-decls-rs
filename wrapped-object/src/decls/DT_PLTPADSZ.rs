@@ -4,4 +4,4 @@ macro_rules! DT_PLTPADSZ {
     };
 }
 
-DT_PLTPADSZ!()
+DT_PLTPADSZ!();

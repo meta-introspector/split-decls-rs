@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_GOT_64 {
     };
 }
 
-R_MICROBLAZE_GOT_64!()
+R_MICROBLAZE_GOT_64!();

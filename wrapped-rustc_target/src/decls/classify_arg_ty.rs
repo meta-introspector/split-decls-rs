@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArgAbi!();
         Uniform!();
+        ArgAbi!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! classify_arg_ty {
     };
 }
 
-classify_arg_ty!()
+classify_arg_ty!();

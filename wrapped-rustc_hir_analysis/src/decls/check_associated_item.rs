@@ -4,4 +4,4 @@ macro_rules! check_associated_item {
     };
 }
 
-check_associated_item!()
+check_associated_item!();

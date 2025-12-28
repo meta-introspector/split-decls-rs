@@ -12,4 +12,4 @@ macro_rules! parameters_for {
     };
 }
 
-parameters_for!()
+parameters_for!();

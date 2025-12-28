@@ -4,4 +4,4 @@ macro_rules! cp437 {
     };
 }
 
-cp437!()
+cp437!();

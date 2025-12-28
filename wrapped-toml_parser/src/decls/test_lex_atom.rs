@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stream!();
         Token!();
+        Stream!();
     };
 }
 
@@ -42,4 +42,4 @@ Token {
     };
 }
 
-test_lex_atom!()
+test_lex_atom!();

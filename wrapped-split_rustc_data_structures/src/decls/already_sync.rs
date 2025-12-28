@@ -11,4 +11,4 @@ macro_rules! already_sync {
     };
 }
 
-already_sync!()
+already_sync!();

@@ -13,4 +13,4 @@ macro_rules! Open01 {
     };
 }
 
-Open01!()
+Open01!();

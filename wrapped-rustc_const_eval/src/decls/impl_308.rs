@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         MemPlaceMeta!();
-        Machine!();
         OffsetMode!();
-        ArrayIterator!();
-        Projectable!();
         InterpCx!();
+        Projectable!();
+        ArrayIterator!();
+        Machine!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_308 {
     };
 }
 
-impl_308!()
+impl_308!();

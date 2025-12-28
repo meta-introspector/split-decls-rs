@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
         Hir!();
         Ast!();
-        TranslatorI!();
         TranslatorBuilder!();
+        Result!();
         Translator!();
+        TranslatorI!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_192 {
     };
 }
 
-impl_192!()
+impl_192!();

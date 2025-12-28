@@ -4,4 +4,4 @@ macro_rules! OLD_PERMIC {
     };
 }
 
-OLD_PERMIC!()
+OLD_PERMIC!();

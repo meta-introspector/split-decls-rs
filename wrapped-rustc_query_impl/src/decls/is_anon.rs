@@ -4,4 +4,4 @@ macro_rules! is_anon {
     };
 }
 
-is_anon!()
+is_anon!();

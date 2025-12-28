@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VfsPath!();
         FileId!();
+        VfsPath!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FileSet {
     };
 }
 
-FileSet!()
+FileSet!();

@@ -11,4 +11,4 @@ macro_rules! static_scope {
     };
 }
 
-static_scope!()
+static_scope!();

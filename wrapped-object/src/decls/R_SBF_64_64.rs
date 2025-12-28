@@ -4,4 +4,4 @@ macro_rules! R_SBF_64_64 {
     };
 }
 
-R_SBF_64_64!()
+R_SBF_64_64!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        RelocBlock!();
         U16!();
+        Section!();
         DataDirectory!();
         WritableBuffer!();
-        Section!();
-        RelocBlock!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Writer {
     };
 }
 
-Writer!()
+Writer!();

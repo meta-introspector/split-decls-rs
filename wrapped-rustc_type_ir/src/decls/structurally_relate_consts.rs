@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         RelateResult!();
+        ConstKind!();
+        Const!();
+        UnevaluatedConst!();
         ExpectedFound!();
         Interner!();
-        UnevaluatedConst!();
         VarianceDiagInfo!();
-        ConstKind!();
         TypeError!();
-        Const!();
         TypeRelation!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! structurally_relate_consts {
     };
 }
 
-structurally_relate_consts!()
+structurally_relate_consts!();

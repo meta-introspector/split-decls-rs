@@ -11,4 +11,4 @@ macro_rules! check_expr {
     };
 }
 
-check_expr!()
+check_expr!();

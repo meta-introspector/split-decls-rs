@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MirBorrowckCtxt!();
         RegionElement!();
-        UniverseInfo!();
         HigherRankedSubtypeError!();
+        UniverseInfo!();
+        MirBorrowckCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IgnorableBehavior!();
         CharacterAndTrieValue!();
+        DecompositionData!();
         Decomposition!();
         DecompositionTables!();
-        DecompositionData!();
-        Trie!();
         CharacterAndClass!();
+        Trie!();
+        IgnorableBehavior!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

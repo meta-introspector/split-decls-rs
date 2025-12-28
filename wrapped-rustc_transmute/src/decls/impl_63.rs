@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Answer!();
         MaybeTransmutableQuery!();
-        Tree!();
-        Reason!();
-        Region!();
-        Dfa!();
-        Def!();
-        QueryContext!();
         Type!();
+        Tree!();
+        Def!();
+        Answer!();
+        Dfa!();
         Uninhabited!();
+        Region!();
+        Reason!();
+        QueryContext!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_63 {
     };
 }
 
-impl_63!()
+impl_63!();

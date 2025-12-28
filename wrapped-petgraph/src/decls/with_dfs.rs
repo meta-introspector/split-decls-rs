@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DfsSpaceType!();
-        GraphRef!();
         Create!();
+        GraphRef!();
+        DfsSpaceType!();
         Dfs!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! with_dfs {
     };
 }
 
-with_dfs!()
+with_dfs!();

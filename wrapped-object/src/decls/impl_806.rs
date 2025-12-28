@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FileHeader!();
         ReadRef!();
-        StringTable!();
+        FileHeader!();
         SymbolTable!();
+        StringTable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_806 {
     };
 }
 
-impl_806!()
+impl_806!();

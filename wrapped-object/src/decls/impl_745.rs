@@ -1,36 +1,36 @@
 macro_rules! deps {
     () => {
-        Section!();
-        WasmSymbol!();
+        WasmSectionIterator!();
         SymbolIterator!();
         Symbol!();
-        SegmentIterator!();
-        Object!();
-        ReadRef!();
-        SymbolIndex!();
-        WasmComdatIterator!();
-        Export!();
-        WasmFile!();
-        Import!();
-        SectionIndex!();
-        Comdat!();
-        WasmSection!();
-        FileFlags!();
-        Architecture!();
-        WasmSegmentIterator!();
-        ComdatIterator!();
-        WasmSymbolIterator!();
         SectionIterator!();
-        DynamicRelocationIterator!();
-        WasmSymbolTable!();
-        WasmSectionIterator!();
-        NoDynamicRelocationIterator!();
-        Result!();
         Segment!();
-        WasmSegment!();
+        WasmSymbolTable!();
+        WasmSymbol!();
+        WasmComdatIterator!();
         ObjectKind!();
-        WasmComdat!();
+        SymbolIndex!();
+        WasmSymbolIterator!();
+        Architecture!();
+        Comdat!();
+        ComdatIterator!();
+        WasmSegmentIterator!();
+        ReadRef!();
+        Import!();
+        FileFlags!();
+        Section!();
         SymbolTable!();
+        Object!();
+        NoDynamicRelocationIterator!();
+        DynamicRelocationIterator!();
+        WasmFile!();
+        WasmComdat!();
+        Export!();
+        WasmSection!();
+        SectionIndex!();
+        WasmSegment!();
+        Result!();
+        SegmentIterator!();
     };
 }
 
@@ -41,4 +41,4 @@ macro_rules! impl_745 {
     };
 }
 
-impl_745!()
+impl_745!();

@@ -11,4 +11,4 @@ macro_rules! Entry32 {
     };
 }
 
-Entry32!()
+Entry32!();

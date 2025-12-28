@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_IMM6 {
     };
 }
 
-R_NIOS2_IMM6!()
+R_NIOS2_IMM6!();

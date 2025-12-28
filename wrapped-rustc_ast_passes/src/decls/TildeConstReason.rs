@@ -4,4 +4,4 @@ macro_rules! TildeConstReason {
     };
 }
 
-TildeConstReason!()
+TildeConstReason!();

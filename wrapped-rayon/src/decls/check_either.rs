@@ -11,4 +11,4 @@ macro_rules! check_either {
     };
 }
 
-check_either!()
+check_either!();

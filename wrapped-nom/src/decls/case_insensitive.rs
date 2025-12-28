@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        Err!();
-        Tag!();
+        Needed!();
         Error!();
         IResult!();
-        Needed!();
+        Tag!();
+        ErrorKind!();
+        Err!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! case_insensitive {
     };
 }
 
-case_insensitive!()
+case_insensitive!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        File!();
         ReadRef!();
         SegmentIteratorInternal!();
+        File!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SegmentIterator {
     };
 }
 
-SegmentIterator!()
+SegmentIterator!();

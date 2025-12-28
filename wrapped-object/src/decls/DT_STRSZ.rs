@@ -4,4 +4,4 @@ macro_rules! DT_STRSZ {
     };
 }
 
-DT_STRSZ!()
+DT_STRSZ!();

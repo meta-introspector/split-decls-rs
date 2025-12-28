@@ -4,4 +4,4 @@ macro_rules! IdRepr {
     };
 }
 
-IdRepr!()
+IdRepr!();

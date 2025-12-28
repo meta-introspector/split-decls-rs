@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstCx!();
         Qualif!();
+        ConstCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! in_rvalue {
     };
 }
 
-in_rvalue!()
+in_rvalue!();

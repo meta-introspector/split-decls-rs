@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        FloatLit!();
-        IntegerLit!();
         ByteStringLit!();
         Buffer!();
-        CharLit!();
+        FloatLit!();
         BoolLit!();
+        CharLit!();
         StringLit!();
+        IntegerLit!();
         ByteLit!();
         CStringLit!();
     };
@@ -19,4 +19,4 @@ macro_rules! Literal {
     };
 }
 
-Literal!()
+Literal!();

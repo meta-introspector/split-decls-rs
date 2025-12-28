@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        TypeRelation!();
         GenericArgs!();
-        RelateResult!();
         DefId!();
+        TypeRelation!();
+        Interner!();
         VarianceDiagInfo!();
+        RelateResult!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! relate_args_with_variances {
     };
 }
 
-relate_args_with_variances!()
+relate_args_with_variances!();

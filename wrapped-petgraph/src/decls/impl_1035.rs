@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Direction!();
-        Nullable!();
-        NodeIndex!();
-        NeighborsDirected!();
-        IndexType!();
         Neighbors!();
+        IndexType!();
+        NeighborsDirected!();
+        NodeIndex!();
         MatrixGraph!();
         Directed!();
+        Direction!();
+        Nullable!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_1035 {
     };
 }
 
-impl_1035!()
+impl_1035!();

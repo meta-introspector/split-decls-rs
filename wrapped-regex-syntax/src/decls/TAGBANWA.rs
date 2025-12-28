@@ -4,4 +4,4 @@ macro_rules! TAGBANWA {
     };
 }
 
-TAGBANWA!()
+TAGBANWA!();

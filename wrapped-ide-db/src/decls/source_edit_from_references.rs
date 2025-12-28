@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RootDatabase!();
         TextEdit!();
-        Definition!();
-        FileReference!();
         FileReferenceNode!();
+        FileReference!();
+        Definition!();
+        RootDatabase!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! source_edit_from_references {
     };
 }
 
-source_edit_from_references!()
+source_edit_from_references!();

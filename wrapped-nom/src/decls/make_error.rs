@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         ParseError!();
+        ErrorKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! make_error {
     };
 }
 
-make_error!()
+make_error!();

@@ -4,4 +4,4 @@ macro_rules! int_overflow {
     };
 }
 
-int_overflow!()
+int_overflow!();

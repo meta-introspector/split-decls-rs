@@ -4,4 +4,4 @@ macro_rules! CguNameCache {
     };
 }
 
-CguNameCache!()
+CguNameCache!();

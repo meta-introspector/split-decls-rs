@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ZipResult!();
-        Zip32CentralDirectoryEnd!();
         Zip32CDEBlock!();
+        Zip32CentralDirectoryEnd!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_163 {
     };
 }
 
-impl_163!()
+impl_163!();

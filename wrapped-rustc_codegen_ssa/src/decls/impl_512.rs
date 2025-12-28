@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BuilderMethods!();
         PlaceValue!();
-        IntPredicate!();
+        BuilderMethods!();
         UninhabitedVariantError!();
+        IntPredicate!();
         OperandValue!();
         PlaceRef!();
     };
@@ -16,4 +16,4 @@ macro_rules! impl_512 {
     };
 }
 
-impl_512!()
+impl_512!();

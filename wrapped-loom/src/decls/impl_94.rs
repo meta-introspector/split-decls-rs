@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Operation!();
-        Action!();
-        Object!();
         Ref!();
+        Action!();
+        Operation!();
+        Object!();
         Execution!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

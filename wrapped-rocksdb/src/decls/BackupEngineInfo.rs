@@ -4,4 +4,4 @@ macro_rules! BackupEngineInfo {
     };
 }
 
-BackupEngineInfo!()
+BackupEngineInfo!();

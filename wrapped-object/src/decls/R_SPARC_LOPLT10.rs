@@ -4,4 +4,4 @@ macro_rules! R_SPARC_LOPLT10 {
     };
 }
 
-R_SPARC_LOPLT10!()
+R_SPARC_LOPLT10!();

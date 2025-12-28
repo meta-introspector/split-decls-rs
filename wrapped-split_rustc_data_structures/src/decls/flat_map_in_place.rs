@@ -4,4 +4,4 @@ macro_rules! flat_map_in_place {
     };
 }
 
-flat_map_in_place!()
+flat_map_in_place!();

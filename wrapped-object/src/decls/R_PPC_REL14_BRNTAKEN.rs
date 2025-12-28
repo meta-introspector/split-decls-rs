@@ -4,4 +4,4 @@ macro_rules! R_PPC_REL14_BRNTAKEN {
     };
 }
 
-R_PPC_REL14_BRNTAKEN!()
+R_PPC_REL14_BRNTAKEN!();

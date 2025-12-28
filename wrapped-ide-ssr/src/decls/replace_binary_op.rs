@@ -4,4 +4,4 @@ macro_rules! replace_binary_op {
     };
 }
 
-replace_binary_op!()
+replace_binary_op!();

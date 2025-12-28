@@ -4,4 +4,4 @@ macro_rules! DEP_NODE_PAD {
     };
 }
 
-DEP_NODE_PAD!()
+DEP_NODE_PAD!();

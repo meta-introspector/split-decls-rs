@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MarkSymbolVisitor!();
         ComesFromAllowExpect!();
+        MarkSymbolVisitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! live_symbols_and_ignored_derived_traits {
     };
 }
 
-live_symbols_and_ignored_derived_traits!()
+live_symbols_and_ignored_derived_traits!();

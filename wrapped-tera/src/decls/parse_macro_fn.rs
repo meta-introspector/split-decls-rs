@@ -11,4 +11,4 @@ macro_rules! parse_macro_fn {
     };
 }
 
-parse_macro_fn!()
+parse_macro_fn!();

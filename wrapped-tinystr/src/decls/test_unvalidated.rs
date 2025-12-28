@@ -11,4 +11,4 @@ macro_rules! test_unvalidated {
     };
 }
 
-test_unvalidated!()
+test_unvalidated!();

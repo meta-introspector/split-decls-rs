@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Resolver!();
         EagerlyNormalizeConsts!();
         Locatable!();
         FnCtxt!();
-        Resolver!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_385 {
     };
 }
 
-impl_385!()
+impl_385!();

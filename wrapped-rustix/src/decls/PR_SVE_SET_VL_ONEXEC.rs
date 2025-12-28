@@ -4,4 +4,4 @@ macro_rules! PR_SVE_SET_VL_ONEXEC {
     };
 }
 
-PR_SVE_SET_VL_ONEXEC!()
+PR_SVE_SET_VL_ONEXEC!();

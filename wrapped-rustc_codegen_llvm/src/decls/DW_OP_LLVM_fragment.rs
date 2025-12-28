@@ -4,4 +4,4 @@ macro_rules! DW_OP_LLVM_fragment {
     };
 }
 
-DW_OP_LLVM_fragment!()
+DW_OP_LLVM_fragment!();

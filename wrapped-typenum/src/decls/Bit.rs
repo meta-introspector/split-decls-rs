@@ -4,4 +4,4 @@ macro_rules! Bit {
     };
 }
 
-Bit!()
+Bit!();

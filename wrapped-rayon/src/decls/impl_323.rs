@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         ChunkSeq!();
         Producer!();
+        IntoIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_323 {
     };
 }
 
-impl_323!()
+impl_323!();

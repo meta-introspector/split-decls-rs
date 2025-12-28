@@ -4,4 +4,4 @@ macro_rules! RPC_STATUS {
     };
 }
 
-RPC_STATUS!()
+RPC_STATUS!();

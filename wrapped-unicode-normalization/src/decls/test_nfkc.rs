@@ -4,4 +4,4 @@ macro_rules! test_nfkc {
     };
 }
 
-test_nfkc!()
+test_nfkc!();

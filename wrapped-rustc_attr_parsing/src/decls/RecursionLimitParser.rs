@@ -4,4 +4,4 @@ macro_rules! RecursionLimitParser {
     };
 }
 
-RecursionLimitParser!()
+RecursionLimitParser!();

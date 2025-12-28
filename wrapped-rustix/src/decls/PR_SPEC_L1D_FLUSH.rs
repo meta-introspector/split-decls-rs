@@ -4,4 +4,4 @@ macro_rules! PR_SPEC_L1D_FLUSH {
     };
 }
 
-PR_SPEC_L1D_FLUSH!()
+PR_SPEC_L1D_FLUSH!();

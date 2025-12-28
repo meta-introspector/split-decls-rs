@@ -11,4 +11,4 @@ macro_rules! shl_limbs {
     };
 }
 
-shl_limbs!()
+shl_limbs!();

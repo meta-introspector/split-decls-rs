@@ -4,4 +4,4 @@ macro_rules! is_finalized {
     };
 }
 
-is_finalized!()
+is_finalized!();

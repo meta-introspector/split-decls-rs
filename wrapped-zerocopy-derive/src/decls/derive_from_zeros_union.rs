@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ImplBlockBuilder!();
         FieldBounds!();
         TraitBound!();
         Trait!();
-        ImplBlockBuilder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! derive_from_zeros_union {
     };
 }
 
-derive_from_zeros_union!()
+derive_from_zeros_union!();

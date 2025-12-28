@@ -12,4 +12,4 @@ macro_rules! parse_continue_tag {
     };
 }
 
-parse_continue_tag!()
+parse_continue_tag!();

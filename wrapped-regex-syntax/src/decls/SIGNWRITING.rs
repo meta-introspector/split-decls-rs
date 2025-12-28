@@ -4,4 +4,4 @@ macro_rules! SIGNWRITING {
     };
 }
 
-SIGNWRITING!()
+SIGNWRITING!();

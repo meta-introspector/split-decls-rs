@@ -4,4 +4,4 @@ macro_rules! COMPOSITION_TABLE_KV {
     };
 }
 
-COMPOSITION_TABLE_KV!()
+COMPOSITION_TABLE_KV!();

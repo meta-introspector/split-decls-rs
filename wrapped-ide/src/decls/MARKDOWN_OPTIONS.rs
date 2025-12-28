@@ -4,4 +4,4 @@ macro_rules! MARKDOWN_OPTIONS {
     };
 }
 
-MARKDOWN_OPTIONS!()
+MARKDOWN_OPTIONS!();

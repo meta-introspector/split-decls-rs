@@ -4,4 +4,4 @@ macro_rules! should_inherit_track_caller {
     };
 }
 
-should_inherit_track_caller!()
+should_inherit_track_caller!();

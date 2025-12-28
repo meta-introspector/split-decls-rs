@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Invariants!();
-        Aliasing!();
         Reference!();
         KnownLayout!();
         PointerMetadata!();
+        Aliasing!();
+        Invariants!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! _project {
     };
 }
 
-_project!()
+_project!();

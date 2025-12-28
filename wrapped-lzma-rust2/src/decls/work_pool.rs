@@ -4,4 +4,4 @@ macro_rules! work_pool {
     };
 }
 
-work_pool!()
+work_pool!();

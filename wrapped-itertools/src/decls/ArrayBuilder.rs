@@ -4,4 +4,4 @@ macro_rules! ArrayBuilder {
     };
 }
 
-ArrayBuilder!()
+ArrayBuilder!();

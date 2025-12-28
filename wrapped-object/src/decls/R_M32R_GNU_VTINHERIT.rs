@@ -4,4 +4,4 @@ macro_rules! R_M32R_GNU_VTINHERIT {
     };
 }
 
-R_M32R_GNU_VTINHERIT!()
+R_M32R_GNU_VTINHERIT!();

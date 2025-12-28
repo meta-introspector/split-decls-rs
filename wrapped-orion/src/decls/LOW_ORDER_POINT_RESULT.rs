@@ -4,4 +4,4 @@ macro_rules! LOW_ORDER_POINT_RESULT {
     };
 }
 
-LOW_ORDER_POINT_RESULT!()
+LOW_ORDER_POINT_RESULT!();

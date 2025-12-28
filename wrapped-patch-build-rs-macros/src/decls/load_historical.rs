@@ -4,4 +4,4 @@ macro_rules! load_historical {
     };
 }
 
-load_historical!()
+load_historical!();

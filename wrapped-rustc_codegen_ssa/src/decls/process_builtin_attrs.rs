@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         InterestingAttributeDiagnosticSpans!();
-        NoMangleNameless!();
         RequiresRustAbi!();
+        NoMangleNameless!();
         Linker!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! process_builtin_attrs {
     };
 }
 
-process_builtin_attrs!()
+process_builtin_attrs!();

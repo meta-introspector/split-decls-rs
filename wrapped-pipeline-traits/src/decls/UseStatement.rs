@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        LinuxDetails!();
-        NixDetails!();
         CargoDetails!();
         LlvmDetails!();
-        GitDetails!();
-        SynDetails!();
-        RustDetails!();
+        LinuxDetails!();
         RustcToolDetails!();
+        GitDetails!();
+        RustDetails!();
+        SynDetails!();
+        NixDetails!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! UseStatement {
     };
 }
 
-UseStatement!()
+UseStatement!();

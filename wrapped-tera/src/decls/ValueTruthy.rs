@@ -4,4 +4,4 @@ macro_rules! ValueTruthy {
     };
 }
 
-ValueTruthy!()
+ValueTruthy!();

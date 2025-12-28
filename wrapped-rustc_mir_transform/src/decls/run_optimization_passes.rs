@@ -12,4 +12,4 @@ macro_rules! run_optimization_passes {
     };
 }
 
-run_optimization_passes!()
+run_optimization_passes!();

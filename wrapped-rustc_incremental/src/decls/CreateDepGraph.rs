@@ -4,4 +4,4 @@ macro_rules! CreateDepGraph {
     };
 }
 
-CreateDepGraph!()
+CreateDepGraph!();

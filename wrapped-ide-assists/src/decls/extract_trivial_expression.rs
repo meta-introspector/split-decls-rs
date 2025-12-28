@@ -4,4 +4,4 @@ macro_rules! extract_trivial_expression {
     };
 }
 
-extract_trivial_expression!()
+extract_trivial_expression!();

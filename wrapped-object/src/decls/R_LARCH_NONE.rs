@@ -4,4 +4,4 @@ macro_rules! R_LARCH_NONE {
     };
 }
 
-R_LARCH_NONE!()
+R_LARCH_NONE!();

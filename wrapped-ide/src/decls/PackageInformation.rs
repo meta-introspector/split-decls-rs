@@ -4,4 +4,4 @@ macro_rules! PackageInformation {
     };
 }
 
-PackageInformation!()
+PackageInformation!();

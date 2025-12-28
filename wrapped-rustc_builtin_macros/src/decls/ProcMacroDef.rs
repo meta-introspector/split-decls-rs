@@ -4,4 +4,4 @@ macro_rules! ProcMacroDef {
     };
 }
 
-ProcMacroDef!()
+ProcMacroDef!();

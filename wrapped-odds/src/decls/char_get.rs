@@ -4,4 +4,4 @@ macro_rules! char_get {
     };
 }
 
-char_get!()
+char_get!();

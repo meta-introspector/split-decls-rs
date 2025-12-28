@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefiningUse!();
         RegionCtxt!();
+        DefiningUse!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CollectMemberConstraintsVisitor {
     };
 }
 
-CollectMemberConstraintsVisitor!()
+CollectMemberConstraintsVisitor!();

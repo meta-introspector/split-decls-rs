@@ -11,4 +11,4 @@ macro_rules! IEK_ZERO {
     };
 }
 
-IEK_ZERO!()
+IEK_ZERO!();

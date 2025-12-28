@@ -11,4 +11,4 @@ macro_rules! TRY_FROM {
     };
 }
 
-TRY_FROM!()
+TRY_FROM!();

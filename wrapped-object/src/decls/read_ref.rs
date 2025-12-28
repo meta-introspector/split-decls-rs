@@ -4,4 +4,4 @@ macro_rules! read_ref {
     };
 }
 
-read_ref!()
+read_ref!();

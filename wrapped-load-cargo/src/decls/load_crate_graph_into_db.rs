@@ -11,4 +11,4 @@ macro_rules! load_crate_graph_into_db {
     };
 }
 
-load_crate_graph_into_db!()
+load_crate_graph_into_db!();

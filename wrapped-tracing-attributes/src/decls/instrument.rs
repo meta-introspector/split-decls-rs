@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Field!();
-        Level!();
-        InstrumentArgs!();
         Fields!();
+        Field!();
+        InstrumentArgs!();
+        Level!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! instrument {
     };
 }
 
-instrument!()
+instrument!();

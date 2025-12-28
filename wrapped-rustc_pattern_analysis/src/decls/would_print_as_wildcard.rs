@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IntRange!();
-        Constructor!();
         WitnessPat!();
         MaybeInfiniteInt!();
+        Constructor!();
+        IntRange!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! would_print_as_wildcard {
     };
 }
 
-would_print_as_wildcard!()
+would_print_as_wildcard!();

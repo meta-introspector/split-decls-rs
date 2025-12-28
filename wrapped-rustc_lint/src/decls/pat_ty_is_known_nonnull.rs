@@ -11,4 +11,4 @@ macro_rules! pat_ty_is_known_nonnull {
     };
 }
 
-pat_ty_is_known_nonnull!()
+pat_ty_is_known_nonnull!();

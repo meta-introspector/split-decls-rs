@@ -4,4 +4,4 @@ macro_rules! gem_parser {
     };
 }
 
-gem_parser!()
+gem_parser!();

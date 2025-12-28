@@ -4,4 +4,4 @@ macro_rules! test_from_bytes_struct {
     };
 }
 
-test_from_bytes_struct!()
+test_from_bytes_struct!();

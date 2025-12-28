@@ -4,4 +4,4 @@ macro_rules! lex_in_cond {
     };
 }
 
-lex_in_cond!()
+lex_in_cond!();

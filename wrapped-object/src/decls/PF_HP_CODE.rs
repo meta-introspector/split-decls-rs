@@ -4,4 +4,4 @@ macro_rules! PF_HP_CODE {
     };
 }
 
-PF_HP_CODE!()
+PF_HP_CODE!();

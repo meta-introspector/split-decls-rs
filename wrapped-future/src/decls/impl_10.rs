@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AsyncActionProgressHandlerBox!();
         AsyncActionProgressHandler!();
+        AsyncActionProgressHandlerBox!();
         IAsyncActionWithProgress!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

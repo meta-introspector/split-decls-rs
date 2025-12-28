@@ -11,4 +11,4 @@ macro_rules! socket_reuseport {
     };
 }
 
-socket_reuseport!()
+socket_reuseport!();

@@ -4,4 +4,4 @@ macro_rules! InternalMarker {
     };
 }
 
-InternalMarker!()
+InternalMarker!();

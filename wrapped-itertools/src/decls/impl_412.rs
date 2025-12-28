@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PeekingNext!();
         PeekingTakeWhile!();
+        PeekingNext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_412 {
     };
 }
 
-impl_412!()
+impl_412!();

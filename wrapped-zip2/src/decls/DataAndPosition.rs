@@ -4,4 +4,4 @@ macro_rules! DataAndPosition {
     };
 }
 
-DataAndPosition!()
+DataAndPosition!();

@@ -11,4 +11,4 @@ macro_rules! seal_plaintext_length {
     };
 }
 
-seal_plaintext_length!()
+seal_plaintext_length!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Needed!();
+        Tag!();
+        Error!();
+        ErrorKind!();
         Err!();
         IResult!();
-        ErrorKind!();
-        Tag!();
-        Needed!();
-        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! fold_many_m_n_test {
     };
 }
 
-fold_many_m_n_test!()
+fold_many_m_n_test!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Interner!();
-        Binder!();
         FilterToTraits!();
-        TraitRef!();
         Clause!();
+        TraitRef!();
+        Binder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

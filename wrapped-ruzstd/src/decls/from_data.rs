@@ -11,4 +11,4 @@ macro_rules! from_data {
     };
 }
 
-from_data!()
+from_data!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        IndexType!();
+        Graph!();
+        NodeRef!();
         NodeIndex!();
         NodeReferences!();
-        Graph!();
-        IndexType!();
         EdgeType!();
-        NodeRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_746 {
     };
 }
 
-impl_746!()
+impl_746!();

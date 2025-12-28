@@ -11,4 +11,4 @@ macro_rules! SynDetails {
     };
 }
 
-SynDetails!()
+SynDetails!();

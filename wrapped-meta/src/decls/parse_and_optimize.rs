@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Rule!();
         UsedBuiltinAndOptimized!();
+        Rule!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_and_optimize {
     };
 }
 
-parse_and_optimize!()
+parse_and_optimize!();

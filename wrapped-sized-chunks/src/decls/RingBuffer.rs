@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SliceMut!();
         Slice!();
         Chunk!();
-        SliceMut!();
         RawIndex!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! RingBuffer {
     };
 }
 
-RingBuffer!()
+RingBuffer!();

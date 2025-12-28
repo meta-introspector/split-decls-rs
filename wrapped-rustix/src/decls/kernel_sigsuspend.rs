@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         KernelSigSet!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! kernel_sigsuspend {
     };
 }
 
-kernel_sigsuspend!()
+kernel_sigsuspend!();

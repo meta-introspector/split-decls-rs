@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Linker!();
         AixLinker!();
         Command!();
+        Linker!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

@@ -12,4 +12,4 @@ macro_rules! extract_declarations_for_composer {
     };
 }
 
-extract_declarations_for_composer!()
+extract_declarations_for_composer!();

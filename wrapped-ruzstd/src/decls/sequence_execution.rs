@@ -4,4 +4,4 @@ macro_rules! sequence_execution {
     };
 }
 
-sequence_execution!()
+sequence_execution!();

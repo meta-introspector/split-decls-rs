@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endian!();
         FileHeader!();
+        Endian!();
         Bytes!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! VerneedIterator {
     };
 }
 
-VerneedIterator!()
+VerneedIterator!();

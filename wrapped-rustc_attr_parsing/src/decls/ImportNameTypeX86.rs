@@ -4,4 +4,4 @@ macro_rules! ImportNameTypeX86 {
     };
 }
 
-ImportNameTypeX86!()
+ImportNameTypeX86!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnordMap!();
         StdEntry!();
+        UnordMap!();
         UnordSet!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! define_id_collections {
     };
 }
 
-define_id_collections!()
+define_id_collections!();

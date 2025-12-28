@@ -4,4 +4,4 @@ macro_rules! lint_callback {
     };
 }
 
-lint_callback!()
+lint_callback!();

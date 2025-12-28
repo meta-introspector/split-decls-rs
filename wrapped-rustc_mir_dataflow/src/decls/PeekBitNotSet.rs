@@ -4,4 +4,4 @@ macro_rules! PeekBitNotSet {
     };
 }
 
-PeekBitNotSet!()
+PeekBitNotSet!();

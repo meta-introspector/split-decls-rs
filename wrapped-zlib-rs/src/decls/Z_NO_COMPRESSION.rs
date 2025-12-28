@@ -4,4 +4,4 @@ macro_rules! Z_NO_COMPRESSION {
     };
 }
 
-Z_NO_COMPRESSION!()
+Z_NO_COMPRESSION!();

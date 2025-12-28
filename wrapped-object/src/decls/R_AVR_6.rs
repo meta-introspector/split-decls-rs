@@ -4,4 +4,4 @@ macro_rules! R_AVR_6 {
     };
 }
 
-R_AVR_6!()
+R_AVR_6!();

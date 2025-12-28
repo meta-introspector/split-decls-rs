@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OperandValueBuilder!();
         OperandRef!();
+        OperandValueBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! OperandRefBuilder {
     };
 }
 
-OperandRefBuilder!()
+OperandRefBuilder!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DefaultIx!();
         Directed!();
         Graph!();
+        DefaultIx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DiGraph {
     };
 }
 
-DiGraph!()
+DiGraph!();

@@ -4,4 +4,4 @@ macro_rules! EF_PPC_EMB {
     };
 }
 
-EF_PPC_EMB!()
+EF_PPC_EMB!();

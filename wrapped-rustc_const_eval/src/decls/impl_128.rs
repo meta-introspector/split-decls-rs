@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PlaceTy!();
         CompileTimeInterpCx!();
+        PlaceTy!();
         FnArg!();
         ConstEvalErrKind!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

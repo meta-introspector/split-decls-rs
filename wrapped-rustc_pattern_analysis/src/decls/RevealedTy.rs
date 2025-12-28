@@ -4,4 +4,4 @@ macro_rules! RevealedTy {
     };
 }
 
-RevealedTy!()
+RevealedTy!();

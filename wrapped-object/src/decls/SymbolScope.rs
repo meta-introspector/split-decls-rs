@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Symbol!();
         Dynamic!();
+        Symbol!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SymbolScope {
     };
 }
 
-SymbolScope!()
+SymbolScope!();

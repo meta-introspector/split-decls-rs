@@ -4,4 +4,4 @@ macro_rules! LintLevelsProvider {
     };
 }
 
-LintLevelsProvider!()
+LintLevelsProvider!();

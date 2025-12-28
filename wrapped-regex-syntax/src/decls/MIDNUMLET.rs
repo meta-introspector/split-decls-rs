@@ -4,4 +4,4 @@ macro_rules! MIDNUMLET {
     };
 }
 
-MIDNUMLET!()
+MIDNUMLET!();

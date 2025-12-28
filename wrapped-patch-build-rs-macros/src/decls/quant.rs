@@ -4,4 +4,4 @@ macro_rules! quant {
     };
 }
 
-quant!()
+quant!();

@@ -4,4 +4,4 @@ macro_rules! EF_E2K_PACK_SEGMENTS {
     };
 }
 
-EF_E2K_PACK_SEGMENTS!()
+EF_E2K_PACK_SEGMENTS!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Set!();
         Node!();
         WS!();
+        Set!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_set_tag {
     };
 }
 
-parse_set_tag!()
+parse_set_tag!();

@@ -35,4 +35,4 @@ struct MyTraitMap2
     };
 }
 
-token_mapping_smoke_test!()
+token_mapping_smoke_test!();

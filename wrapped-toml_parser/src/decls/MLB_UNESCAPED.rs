@@ -4,4 +4,4 @@ macro_rules! MLB_UNESCAPED {
     };
 }
 
-MLB_UNESCAPED!()
+MLB_UNESCAPED!();

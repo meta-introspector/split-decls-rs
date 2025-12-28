@@ -12,4 +12,4 @@ macro_rules! apply_to_llfn {
     };
 }
 
-apply_to_llfn!()
+apply_to_llfn!();

@@ -4,4 +4,4 @@ macro_rules! internal_state {
     };
 }
 
-internal_state!()
+internal_state!();

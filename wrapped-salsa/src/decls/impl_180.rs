@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Configuration!();
         IngredientShard!();
+        Configuration!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_180 {
     };
 }
 
-impl_180!()
+impl_180!();

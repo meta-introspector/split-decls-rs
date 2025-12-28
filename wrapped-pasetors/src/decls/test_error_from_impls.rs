@@ -11,4 +11,4 @@ macro_rules! test_error_from_impls {
     };
 }
 
-test_error_from_impls!()
+test_error_from_impls!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PeekCall!();
         MaybeLiveLocals!();
-        PeekBitNotSet!();
+        PeekCall!();
         PeekArgumentNotALocal!();
+        PeekBitNotSet!();
         RustcPeekAt!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_231 {
     };
 }
 
-impl_231!()
+impl_231!();

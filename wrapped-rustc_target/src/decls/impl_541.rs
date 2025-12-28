@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        TargetOptions!();
+        LinkArgs!();
+        SmallDataThresholdSupport!();
         LinkerFlavor!();
-        LinkerFlavorCli!();
+        LinkSelfContainedDefault!();
+        Lld!();
+        SanitizerSet!();
         Cc!();
+        TargetOptions!();
+        LinkerFlavorCli!();
         LinkArgsCli!();
         StackProbeType!();
-        SmallDataThresholdSupport!();
-        LinkSelfContainedDefault!();
-        SanitizerSet!();
-        Lld!();
-        LinkArgs!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_541 {
     };
 }
 
-impl_541!()
+impl_541!();

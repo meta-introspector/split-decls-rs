@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpectedAncestry!();
         ExpectedSpan!();
+        ExpectedAncestry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! has_explicit_parent {
     };
 }
 
-has_explicit_parent!()
+has_explicit_parent!();

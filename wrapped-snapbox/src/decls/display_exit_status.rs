@@ -4,4 +4,4 @@ macro_rules! display_exit_status {
     };
 }
 
-display_exit_status!()
+display_exit_status!();

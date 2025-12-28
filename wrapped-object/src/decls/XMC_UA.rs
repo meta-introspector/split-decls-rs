@@ -4,4 +4,4 @@ macro_rules! XMC_UA {
     };
 }
 
-XMC_UA!()
+XMC_UA!();

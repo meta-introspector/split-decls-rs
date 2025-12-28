@@ -4,4 +4,4 @@ macro_rules! LaneWords4 {
     };
 }
 
-LaneWords4!()
+LaneWords4!();

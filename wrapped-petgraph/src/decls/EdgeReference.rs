@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StableGraph!();
-        EdgeIndex!();
         NodeIndex!();
         DefaultIx!();
+        EdgeIndex!();
+        StableGraph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! EdgeReference {
     };
 }
 
-EdgeReference!()
+EdgeReference!();

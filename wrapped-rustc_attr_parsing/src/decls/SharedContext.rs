@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Late!();
+        Early!();
         Stage!();
         AttributeParser!();
-        Early!();
-        Late!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SharedContext {
     };
 }
 
-SharedContext!()
+SharedContext!();

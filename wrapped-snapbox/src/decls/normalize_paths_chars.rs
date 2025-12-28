@@ -4,4 +4,4 @@ macro_rules! normalize_paths_chars {
     };
 }
 
-normalize_paths_chars!()
+normalize_paths_chars!();

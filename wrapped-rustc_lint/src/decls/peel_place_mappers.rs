@@ -4,4 +4,4 @@ macro_rules! peel_place_mappers {
     };
 }
 
-peel_place_mappers!()
+peel_place_mappers!();

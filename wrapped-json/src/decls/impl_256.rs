@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Value!();
-        EnumDeserializer!();
-        VariantDeserializer!();
-        Result!();
         Error!();
+        EnumDeserializer!();
+        Result!();
+        VariantDeserializer!();
+        Value!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_256 {
     };
 }
 
-impl_256!()
+impl_256!();

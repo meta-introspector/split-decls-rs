@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        CollectRegionConstraintsResult!();
-        MirTypeckResults!();
-        PoloniusFacts!();
-        BorrowCheckRootCtxt!();
         BorrowSet!();
+        PoloniusFacts!();
+        MirTypeckResults!();
         PoloniusLocationTable!();
+        CollectRegionConstraintsResult!();
         BorrowckInferCtxt!();
+        BorrowCheckRootCtxt!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! borrowck_collect_region_constraints {
     };
 }
 
-borrowck_collect_region_constraints!()
+borrowck_collect_region_constraints!();

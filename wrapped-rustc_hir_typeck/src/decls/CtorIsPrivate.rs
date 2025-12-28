@@ -4,4 +4,4 @@ macro_rules! CtorIsPrivate {
     };
 }
 
-CtorIsPrivate!()
+CtorIsPrivate!();

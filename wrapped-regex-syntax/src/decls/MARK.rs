@@ -4,4 +4,4 @@ macro_rules! MARK {
     };
 }
 
-MARK!()
+MARK!();

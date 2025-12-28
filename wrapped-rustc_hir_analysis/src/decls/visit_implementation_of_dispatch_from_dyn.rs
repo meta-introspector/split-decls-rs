@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        CoerceNoField!();
-        DispatchFromDynZST!();
-        CoerceUnsizedNonStruct!();
-        CoerceSameStruct!();
-        CoerceFieldValidity!();
         Checker!();
-        DispatchFromDynRepr!();
         CoerceMulti!();
+        CoerceUnsizedNonStruct!();
+        DispatchFromDynRepr!();
+        CoerceNoField!();
+        CoerceFieldValidity!();
+        CoerceSameStruct!();
+        DispatchFromDynZST!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! visit_implementation_of_dispatch_from_dyn {
     };
 }
 
-visit_implementation_of_dispatch_from_dyn!()
+visit_implementation_of_dispatch_from_dyn!();

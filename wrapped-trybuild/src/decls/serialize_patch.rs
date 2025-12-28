@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        Error!();
         RegistryPatch!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! serialize_patch {
     };
 }
 
-serialize_patch!()
+serialize_patch!();

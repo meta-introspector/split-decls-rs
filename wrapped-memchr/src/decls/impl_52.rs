@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Seed!();
         Test!();
+        Seed!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ExpectedAncestry!();
-        ActualSpan!();
         ExpectedMetadata!();
         ExpectedFields!();
-        MockSubscriber!();
+        ExpectedAncestry!();
+        ActualSpan!();
         ExpectedSpan!();
         NewSpan!();
         ExpectedId!();
+        MockSubscriber!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

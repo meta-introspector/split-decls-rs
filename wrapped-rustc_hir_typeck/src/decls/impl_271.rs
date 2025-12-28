@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Pick!();
-        ProbeContext!();
         MethodError!();
         Mode!();
-        IsSuggestion!();
+        ProbeContext!();
         ProbeResult!();
-        CandidateSource!();
+        Pick!();
         Candidate!();
+        CandidateSource!();
+        IsSuggestion!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Color!();
         Rgb!();
+        Color!();
         Style!();
     };
 }
@@ -26,4 +26,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

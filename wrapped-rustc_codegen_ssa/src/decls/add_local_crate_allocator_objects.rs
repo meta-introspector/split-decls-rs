@@ -12,4 +12,4 @@ macro_rules! add_local_crate_allocator_objects {
     };
 }
 
-add_local_crate_allocator_objects!()
+add_local_crate_allocator_objects!();

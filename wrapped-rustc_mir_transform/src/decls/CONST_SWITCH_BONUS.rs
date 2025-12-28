@@ -4,4 +4,4 @@ macro_rules! CONST_SWITCH_BONUS {
     };
 }
 
-CONST_SWITCH_BONUS!()
+CONST_SWITCH_BONUS!();

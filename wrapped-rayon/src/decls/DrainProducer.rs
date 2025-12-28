@@ -4,4 +4,4 @@ macro_rules! DrainProducer {
     };
 }
 
-DrainProducer!()
+DrainProducer!();

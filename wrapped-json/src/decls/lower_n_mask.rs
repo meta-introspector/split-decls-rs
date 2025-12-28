@@ -4,4 +4,4 @@ macro_rules! lower_n_mask {
     };
 }
 
-lower_n_mask!()
+lower_n_mask!();

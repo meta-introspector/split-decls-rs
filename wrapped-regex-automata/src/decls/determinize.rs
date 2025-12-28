@@ -4,4 +4,4 @@ macro_rules! determinize {
     };
 }
 
-determinize!()
+determinize!();

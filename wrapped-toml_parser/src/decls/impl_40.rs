@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SourceIndex!();
-        Source!();
         Event!();
         Raw!();
+        Source!();
+        SourceIndex!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

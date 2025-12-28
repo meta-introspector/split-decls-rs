@@ -4,4 +4,4 @@ macro_rules! interpret {
     };
 }
 
-interpret!()
+interpret!();

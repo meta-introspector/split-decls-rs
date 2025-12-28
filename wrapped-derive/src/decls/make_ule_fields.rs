@@ -11,4 +11,4 @@ macro_rules! make_ule_fields {
     };
 }
 
-make_ule_fields!()
+make_ule_fields!();

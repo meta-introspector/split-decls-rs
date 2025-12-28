@@ -4,4 +4,4 @@ macro_rules! ForceRightAdjust {
     };
 }
 
-ForceRightAdjust!()
+ForceRightAdjust!();

@@ -4,4 +4,4 @@ macro_rules! R_MN10300_JMP_SLOT {
     };
 }
 
-R_MN10300_JMP_SLOT!()
+R_MN10300_JMP_SLOT!();

@@ -11,4 +11,4 @@ macro_rules! IMAGE_SCN_LNK_INFO {
     };
 }
 
-IMAGE_SCN_LNK_INFO!()
+IMAGE_SCN_LNK_INFO!();

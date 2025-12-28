@@ -12,4 +12,4 @@ macro_rules! json_encode {
     };
 }
 
-json_encode!()
+json_encode!();

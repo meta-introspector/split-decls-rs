@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         TermVid!();
         ConstVariableValue!();
-        Generalizer!();
-        Generalization!();
         InferCtxt!();
+        Generalization!();
+        Generalizer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_152 {
     };
 }
 
-impl_152!()
+impl_152!();

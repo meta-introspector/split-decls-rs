@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        StepByProducer!();
-        Consumer!();
-        IndexedParallelIterator!();
         StepBy!();
-        ProducerCallback!();
+        StepByProducer!();
+        IndexedParallelIterator!();
         Producer!();
+        Consumer!();
+        ProducerCallback!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_856 {
     };
 }
 
-impl_856!()
+impl_856!();

@@ -11,4 +11,4 @@ macro_rules! WIDTH_MIDDLE {
     };
 }
 
-WIDTH_MIDDLE!()
+WIDTH_MIDDLE!();

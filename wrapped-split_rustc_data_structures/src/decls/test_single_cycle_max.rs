@@ -13,4 +13,4 @@ macro_rules! test_single_cycle_max {
     };
 }
 
-test_single_cycle_max!()
+test_single_cycle_max!();

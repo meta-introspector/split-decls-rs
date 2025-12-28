@@ -4,4 +4,4 @@ macro_rules! MustBeNameOfAssociatedFunction {
     };
 }
 
-MustBeNameOfAssociatedFunction!()
+MustBeNameOfAssociatedFunction!();

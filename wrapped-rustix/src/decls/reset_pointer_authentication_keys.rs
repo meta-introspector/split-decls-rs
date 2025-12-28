@@ -11,4 +11,4 @@ macro_rules! reset_pointer_authentication_keys {
     };
 }
 
-reset_pointer_authentication_keys!()
+reset_pointer_authentication_keys!();

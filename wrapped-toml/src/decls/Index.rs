@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Sealed!();
         DeValue!();
+        Sealed!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Index {
     };
 }
 
-Index!()
+Index!();

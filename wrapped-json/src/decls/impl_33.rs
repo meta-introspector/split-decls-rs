@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MapKey!();
-        Value!();
         MapAccess!();
         Error!();
-        Read!();
         Result!();
+        MapKey!();
+        Value!();
         ErrorCode!();
+        Read!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

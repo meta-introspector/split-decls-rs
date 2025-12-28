@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        State!();
         BlockBoundaryState!();
-        BitBuffer!();
+        State!();
         DecompressorOxide!();
+        BitBuffer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_142 {
     };
 }
 
-impl_142!()
+impl_142!();

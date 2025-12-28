@@ -4,4 +4,4 @@ macro_rules! acos {
     };
 }
 
-acos!()
+acos!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        Needed!();
+        Parser!();
+        AsChar!();
+        Input!();
+        ParseError!();
         Error!();
         Char!();
         IResult!();
-        Needed!();
-        AsChar!();
-        Parser!();
-        Input!();
-        ParseError!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! char {
     };
 }
 
-char!()
+char!();

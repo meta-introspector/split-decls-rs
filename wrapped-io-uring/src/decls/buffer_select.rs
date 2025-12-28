@@ -4,4 +4,4 @@ macro_rules! buffer_select {
     };
 }
 
-buffer_select!()
+buffer_select!();

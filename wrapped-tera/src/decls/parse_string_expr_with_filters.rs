@@ -12,4 +12,4 @@ macro_rules! parse_string_expr_with_filters {
     };
 }
 
-parse_string_expr_with_filters!()
+parse_string_expr_with_filters!();

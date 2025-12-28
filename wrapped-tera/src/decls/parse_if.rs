@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        If!();
         Node!();
         WS!();
-        If!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_if {
     };
 }
 
-parse_if!()
+parse_if!();

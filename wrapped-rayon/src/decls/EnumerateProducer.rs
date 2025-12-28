@@ -4,4 +4,4 @@ macro_rules! EnumerateProducer {
     };
 }
 
-EnumerateProducer!()
+EnumerateProducer!();

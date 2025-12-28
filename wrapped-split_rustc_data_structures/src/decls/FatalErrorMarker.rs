@@ -4,4 +4,4 @@ macro_rules! FatalErrorMarker {
     };
 }
 
-FatalErrorMarker!()
+FatalErrorMarker!();

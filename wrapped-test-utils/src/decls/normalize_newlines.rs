@@ -4,4 +4,4 @@ macro_rules! normalize_newlines {
     };
 }
 
-normalize_newlines!()
+normalize_newlines!();

@@ -4,4 +4,4 @@ macro_rules! ModSpans {
     };
 }
 
-ModSpans!()
+ModSpans!();

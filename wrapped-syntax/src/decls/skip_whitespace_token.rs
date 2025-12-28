@@ -11,4 +11,4 @@ macro_rules! skip_whitespace_token {
     };
 }
 
-skip_whitespace_token!()
+skip_whitespace_token!();

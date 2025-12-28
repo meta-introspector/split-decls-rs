@@ -4,4 +4,4 @@ macro_rules! XWing {
     };
 }
 
-XWing!()
+XWing!();

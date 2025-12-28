@@ -4,4 +4,4 @@ macro_rules! put_back_n_impl {
     };
 }
 
-put_back_n_impl!()
+put_back_n_impl!();

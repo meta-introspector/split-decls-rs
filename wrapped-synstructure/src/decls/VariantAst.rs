@@ -4,4 +4,4 @@ macro_rules! VariantAst {
     };
 }
 
-VariantAst!()
+VariantAst!();

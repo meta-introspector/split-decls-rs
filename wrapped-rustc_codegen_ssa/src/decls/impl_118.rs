@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MsvcLinker!();
-        NoNatvisDirectory!();
-        LibDefWriteFailure!();
-        Linker!();
         Command!();
+        NoNatvisDirectory!();
+        Linker!();
+        MsvcLinker!();
+        LibDefWriteFailure!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_118 {
     };
 }
 
-impl_118!()
+impl_118!();

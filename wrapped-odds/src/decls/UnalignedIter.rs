@@ -4,4 +4,4 @@ macro_rules! UnalignedIter {
     };
 }
 
-UnalignedIter!()
+UnalignedIter!();

@@ -4,4 +4,4 @@ macro_rules! generate_include {
     };
 }
 
-generate_include!()
+generate_include!();

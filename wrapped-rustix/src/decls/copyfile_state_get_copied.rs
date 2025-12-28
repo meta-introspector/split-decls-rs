@@ -11,4 +11,4 @@ macro_rules! copyfile_state_get_copied {
     };
 }
 
-copyfile_state_get_copied!()
+copyfile_state_get_copied!();

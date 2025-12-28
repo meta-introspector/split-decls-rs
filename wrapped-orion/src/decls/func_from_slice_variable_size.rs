@@ -11,4 +11,4 @@ macro_rules! func_from_slice_variable_size {
     };
 }
 
-func_from_slice_variable_size!()
+func_from_slice_variable_size!();

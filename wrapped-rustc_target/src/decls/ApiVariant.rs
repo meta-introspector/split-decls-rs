@@ -4,4 +4,4 @@ macro_rules! ApiVariant {
     };
 }
 
-ApiVariant!()
+ApiVariant!();

@@ -11,4 +11,4 @@ macro_rules! encode_work_product_index {
     };
 }
 
-encode_work_product_index!()
+encode_work_product_index!();

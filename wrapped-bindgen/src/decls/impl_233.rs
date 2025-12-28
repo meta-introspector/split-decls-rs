@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TypeTree!();
-        TypeMap!();
         Type!();
+        TypeMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_233 {
     };
 }
 
-impl_233!()
+impl_233!();

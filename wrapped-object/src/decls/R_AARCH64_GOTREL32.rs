@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_GOTREL32 {
     };
 }
 
-R_AARCH64_GOTREL32!()
+R_AARCH64_GOTREL32!();

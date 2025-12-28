@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LiteralsSection!();
         DecompressLiteralsError!();
-        LiteralsSectionType!();
         HuffmanScratch!();
+        LiteralsSectionType!();
+        LiteralsSection!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! decode_literals {
     };
 }
 
-decode_literals!()
+decode_literals!();

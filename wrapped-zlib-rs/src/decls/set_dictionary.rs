@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Mode!();
         InflateStream!();
         Flags!();
         ReturnCode!();
+        Mode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! set_dictionary {
     };
 }
 
-set_dictionary!()
+set_dictionary!();

@@ -4,4 +4,4 @@ macro_rules! record_all {
     };
 }
 
-record_all!()
+record_all!();

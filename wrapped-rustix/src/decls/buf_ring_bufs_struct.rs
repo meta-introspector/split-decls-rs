@@ -11,4 +11,4 @@ macro_rules! buf_ring_bufs_struct {
     };
 }
 
-buf_ring_bufs_struct!()
+buf_ring_bufs_struct!();

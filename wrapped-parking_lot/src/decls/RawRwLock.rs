@@ -4,4 +4,4 @@ macro_rules! RawRwLock {
     };
 }
 
-RawRwLock!()
+RawRwLock!();

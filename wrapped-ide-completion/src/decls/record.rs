@@ -4,4 +4,4 @@ macro_rules! record {
     };
 }
 
-record!()
+record!();

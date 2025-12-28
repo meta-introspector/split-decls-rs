@@ -4,4 +4,4 @@ macro_rules! UnusedCaptureMaybeCaptureRef {
     };
 }
 
-UnusedCaptureMaybeCaptureRef!()
+UnusedCaptureMaybeCaptureRef!();

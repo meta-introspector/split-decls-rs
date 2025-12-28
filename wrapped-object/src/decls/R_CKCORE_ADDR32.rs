@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_ADDR32 {
     };
 }
 
-R_CKCORE_ADDR32!()
+R_CKCORE_ADDR32!();

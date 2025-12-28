@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        U64!();
-        Architecture!();
         AddressSize!();
-        U16!();
+        U64!();
         U32!();
+        Architecture!();
+        U16!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

@@ -4,4 +4,4 @@ macro_rules! is_locked_serially {
     };
 }
 
-is_locked_serially!()
+is_locked_serially!();

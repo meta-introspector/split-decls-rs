@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_AMD64_REL32_4 {
     };
 }
 
-IMAGE_REL_AMD64_REL32_4!()
+IMAGE_REL_AMD64_REL32_4!();

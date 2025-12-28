@@ -11,4 +11,4 @@ macro_rules! is_nfd_stream_safe_quick {
     };
 }
 
-is_nfd_stream_safe_quick!()
+is_nfd_stream_safe_quick!();

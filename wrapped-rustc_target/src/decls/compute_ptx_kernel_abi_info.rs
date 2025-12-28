@@ -11,4 +11,4 @@ macro_rules! compute_ptx_kernel_abi_info {
     };
 }
 
-compute_ptx_kernel_abi_info!()
+compute_ptx_kernel_abi_info!();

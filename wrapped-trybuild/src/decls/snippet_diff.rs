@@ -11,4 +11,4 @@ macro_rules! snippet_diff {
     };
 }
 
-snippet_diff!()
+snippet_diff!();

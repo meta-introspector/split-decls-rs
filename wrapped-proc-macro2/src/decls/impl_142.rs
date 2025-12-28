@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Group!();
         Span!();
         DelimSpan!();
-        Group!();
         DelimSpanEnum!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_142 {
     };
 }
 
-impl_142!()
+impl_142!();

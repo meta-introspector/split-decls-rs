@@ -12,4 +12,4 @@ macro_rules! score_segment {
     };
 }
 
-score_segment!()
+score_segment!();

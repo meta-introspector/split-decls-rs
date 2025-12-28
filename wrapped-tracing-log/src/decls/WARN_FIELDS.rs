@@ -11,4 +11,4 @@ macro_rules! WARN_FIELDS {
     };
 }
 
-WARN_FIELDS!()
+WARN_FIELDS!();

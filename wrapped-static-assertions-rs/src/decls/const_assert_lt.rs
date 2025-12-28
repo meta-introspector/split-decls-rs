@@ -4,4 +4,4 @@ macro_rules! const_assert_lt {
     };
 }
 
-const_assert_lt!()
+const_assert_lt!();

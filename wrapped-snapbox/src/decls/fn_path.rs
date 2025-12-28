@@ -4,4 +4,4 @@ macro_rules! fn_path {
     };
 }
 
-fn_path!()
+fn_path!();

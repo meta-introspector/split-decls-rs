@@ -4,4 +4,4 @@ macro_rules! TryInitError {
     };
 }
 
-TryInitError!()
+TryInitError!();

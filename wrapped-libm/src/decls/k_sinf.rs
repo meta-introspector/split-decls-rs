@@ -4,4 +4,4 @@ macro_rules! k_sinf {
     };
 }
 
-k_sinf!()
+k_sinf!();

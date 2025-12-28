@@ -4,4 +4,4 @@ macro_rules! output_conflicts_with_dir {
     };
 }
 
-output_conflicts_with_dir!()
+output_conflicts_with_dir!();

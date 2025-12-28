@@ -12,4 +12,4 @@ macro_rules! rust_connect {
     };
 }
 
-rust_connect!()
+rust_connect!();

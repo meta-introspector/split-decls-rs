@@ -11,4 +11,4 @@ macro_rules! interface_hierarchy {
     };
 }
 
-interface_hierarchy!()
+interface_hierarchy!();

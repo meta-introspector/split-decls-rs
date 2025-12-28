@@ -11,4 +11,4 @@ macro_rules! lex_extends_tag {
     };
 }
 
-lex_extends_tag!()
+lex_extends_tag!();

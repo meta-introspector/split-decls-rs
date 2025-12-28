@@ -11,4 +11,4 @@ macro_rules! current_thread_index {
     };
 }
 
-current_thread_index!()
+current_thread_index!();

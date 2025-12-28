@@ -4,4 +4,4 @@ macro_rules! REG_SAM_FLAGS {
     };
 }
 
-REG_SAM_FLAGS!()
+REG_SAM_FLAGS!();

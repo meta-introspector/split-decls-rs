@@ -4,4 +4,4 @@ macro_rules! TextPosition {
     };
 }
 
-TextPosition!()
+TextPosition!();

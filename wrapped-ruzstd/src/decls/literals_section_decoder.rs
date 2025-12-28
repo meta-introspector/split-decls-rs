@@ -4,4 +4,4 @@ macro_rules! literals_section_decoder {
     };
 }
 
-literals_section_decoder!()
+literals_section_decoder!();

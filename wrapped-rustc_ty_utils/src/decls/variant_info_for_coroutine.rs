@@ -4,4 +4,4 @@ macro_rules! variant_info_for_coroutine {
     };
 }
 
-variant_info_for_coroutine!()
+variant_info_for_coroutine!();

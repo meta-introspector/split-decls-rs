@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExplicitLateBound!();
         GenericArgCountMismatch!();
+        ExplicitLateBound!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! GenericArgCountResult {
     };
 }
 
-GenericArgCountResult!()
+GenericArgCountResult!();

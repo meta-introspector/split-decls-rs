@@ -4,4 +4,4 @@ macro_rules! hover {
     };
 }
 
-hover!()
+hover!();

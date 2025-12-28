@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         IResult!();
-        ErrorKind!();
-        FindToken!();
+        SplitPosition1!();
         Error!();
         Needed!();
+        Parser!();
         ParseError!();
         Input!();
-        Parser!();
-        SplitPosition1!();
+        ErrorKind!();
+        FindToken!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! is_not {
     };
 }
 
-is_not!()
+is_not!();

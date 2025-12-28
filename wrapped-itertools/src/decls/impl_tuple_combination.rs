@@ -12,4 +12,4 @@ macro_rules! impl_tuple_combination {
     };
 }
 
-impl_tuple_combination!()
+impl_tuple_combination!();

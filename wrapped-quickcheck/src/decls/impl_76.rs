@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Gen!();
         Testable!();
         QuickCheck!();
         TestResult!();
-        Gen!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

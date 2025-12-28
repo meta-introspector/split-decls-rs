@@ -4,4 +4,4 @@ macro_rules! RHF_DELTA_C_PLUS_PLUS {
     };
 }
 
-RHF_DELTA_C_PLUS_PLUS!()
+RHF_DELTA_C_PLUS_PLUS!();

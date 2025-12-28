@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NormalizeToExpected!();
         Redactions!();
+        NormalizeToExpected!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! str_normalize_user_regex_unnamed {
     };
 }
 
-str_normalize_user_regex_unnamed!()
+str_normalize_user_regex_unnamed!();

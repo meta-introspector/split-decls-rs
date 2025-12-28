@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Data!();
         Result!();
-        Palette!();
         Error!();
+        Palette!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! write_diff {
     };
 }
 
-write_diff!()
+write_diff!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MacroDefinition!();
-        Node!();
         WS!();
+        Node!();
+        MacroDefinition!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! handle_ws_both_sides_for_macro_definitions {
     };
 }
 
-handle_ws_both_sides_for_macro_definitions!()
+handle_ws_both_sides_for_macro_definitions!();

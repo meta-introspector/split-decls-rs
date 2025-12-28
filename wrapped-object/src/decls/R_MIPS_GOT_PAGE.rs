@@ -4,4 +4,4 @@ macro_rules! R_MIPS_GOT_PAGE {
     };
 }
 
-R_MIPS_GOT_PAGE!()
+R_MIPS_GOT_PAGE!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Category!();
         PlaceBase!();
         Scope!();
         PlaceBuilder!();
-        BlockAnd!();
+        Category!();
         Builder!();
+        BlockAnd!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

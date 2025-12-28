@@ -4,4 +4,4 @@ macro_rules! thousands {
     };
 }
 
-thousands!()
+thousands!();

@@ -11,4 +11,4 @@ macro_rules! assert_expand_impl {
     };
 }
 
-assert_expand_impl!()
+assert_expand_impl!();

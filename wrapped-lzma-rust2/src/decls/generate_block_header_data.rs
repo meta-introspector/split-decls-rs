@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FilterType!();
         Result!();
         FilterConfig!();
-        FilterType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! generate_block_header_data {
     };
 }
 
-generate_block_header_data!()
+generate_block_header_data!();

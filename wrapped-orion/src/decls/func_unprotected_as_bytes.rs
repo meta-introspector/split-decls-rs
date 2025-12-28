@@ -4,4 +4,4 @@ macro_rules! func_unprotected_as_bytes {
     };
 }
 
-func_unprotected_as_bytes!()
+func_unprotected_as_bytes!();

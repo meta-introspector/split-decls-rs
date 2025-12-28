@@ -4,4 +4,4 @@ macro_rules! S_CSTRING_LITERALS {
     };
 }
 
-S_CSTRING_LITERALS!()
+S_CSTRING_LITERALS!();

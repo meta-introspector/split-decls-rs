@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DefId!();
-        RustcInternal!();
         BridgeTys!();
         InternalCx!();
+        RustcInternal!();
+        DefId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

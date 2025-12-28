@@ -4,4 +4,4 @@ macro_rules! assign_op {
     };
 }
 
-assign_op!()
+assign_op!();

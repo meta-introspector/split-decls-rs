@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ascription!();
         Binding!();
+        Ascription!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MatchTreeSubBranch {
     };
 }
 
-MatchTreeSubBranch!()
+MatchTreeSubBranch!();

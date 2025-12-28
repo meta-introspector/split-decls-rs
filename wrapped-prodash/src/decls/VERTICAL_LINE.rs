@@ -4,4 +4,4 @@ macro_rules! VERTICAL_LINE {
     };
 }
 
-VERTICAL_LINE!()
+VERTICAL_LINE!();

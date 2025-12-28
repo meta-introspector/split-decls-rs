@@ -4,4 +4,4 @@ macro_rules! deimplify {
     };
 }
 
-deimplify!()
+deimplify!();

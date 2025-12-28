@@ -4,4 +4,4 @@ macro_rules! SHT_PARISC_EXT {
     };
 }
 
-SHT_PARISC_EXT!()
+SHT_PARISC_EXT!();

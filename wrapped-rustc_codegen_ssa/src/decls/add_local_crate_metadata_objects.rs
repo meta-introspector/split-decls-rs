@@ -13,4 +13,4 @@ macro_rules! add_local_crate_metadata_objects {
     };
 }
 
-add_local_crate_metadata_objects!()
+add_local_crate_metadata_objects!();

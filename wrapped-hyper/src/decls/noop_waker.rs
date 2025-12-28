@@ -4,4 +4,4 @@ macro_rules! noop_waker {
     };
 }
 
-noop_waker!()
+noop_waker!();

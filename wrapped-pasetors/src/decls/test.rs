@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Claims!();
         ClaimsValidationRules!();
         Error!();
         ClaimValidationError!();
+        Claims!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

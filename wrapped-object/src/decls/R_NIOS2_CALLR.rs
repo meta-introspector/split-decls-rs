@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_CALLR {
     };
 }
 
-R_NIOS2_CALLR!()
+R_NIOS2_CALLR!();

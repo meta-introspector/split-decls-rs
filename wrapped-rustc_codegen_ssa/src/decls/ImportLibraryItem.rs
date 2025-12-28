@@ -4,4 +4,4 @@ macro_rules! ImportLibraryItem {
     };
 }
 
-ImportLibraryItem!()
+ImportLibraryItem!();

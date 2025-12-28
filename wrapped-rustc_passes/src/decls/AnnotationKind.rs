@@ -4,4 +4,4 @@ macro_rules! AnnotationKind {
     };
 }
 
-AnnotationKind!()
+AnnotationKind!();

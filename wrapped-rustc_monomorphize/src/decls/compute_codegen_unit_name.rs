@@ -11,4 +11,4 @@ macro_rules! compute_codegen_unit_name {
     };
 }
 
-compute_codegen_unit_name!()
+compute_codegen_unit_name!();

@@ -4,4 +4,4 @@ macro_rules! when {
     };
 }
 
-when!()
+when!();

@@ -11,4 +11,4 @@ macro_rules! skip_trivia_token {
     };
 }
 
-skip_trivia_token!()
+skip_trivia_token!();

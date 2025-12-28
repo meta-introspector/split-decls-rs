@@ -4,4 +4,4 @@ macro_rules! LittleEndian {
     };
 }
 
-LittleEndian!()
+LittleEndian!();

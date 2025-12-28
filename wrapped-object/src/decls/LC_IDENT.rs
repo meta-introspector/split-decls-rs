@@ -4,4 +4,4 @@ macro_rules! LC_IDENT {
     };
 }
 
-LC_IDENT!()
+LC_IDENT!();

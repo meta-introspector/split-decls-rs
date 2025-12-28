@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         IResult!();
-        Compare!();
         Tag!();
-        Needed!();
-        Parser!();
-        ParseError!();
-        Input!();
         ErrorKind!();
+        Needed!();
+        ParseError!();
+        Compare!();
         Error!();
+        Input!();
+        Parser!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! tag {
     };
 }
 
-tag!()
+tag!();

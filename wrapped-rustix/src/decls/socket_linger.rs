@@ -11,4 +11,4 @@ macro_rules! socket_linger {
     };
 }
 
-socket_linger!()
+socket_linger!();

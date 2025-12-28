@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MPlaceTy!();
         MemoryKind!();
         CompileTimeInterpCx!();
+        MPlaceTy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! create_static_alloc {
     };
 }
 
-create_static_alloc!()
+create_static_alloc!();

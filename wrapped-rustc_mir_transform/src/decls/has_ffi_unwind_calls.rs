@@ -11,4 +11,4 @@ macro_rules! has_ffi_unwind_calls {
     };
 }
 
-has_ffi_unwind_calls!()
+has_ffi_unwind_calls!();

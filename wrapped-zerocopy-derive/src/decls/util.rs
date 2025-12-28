@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FromRawReprError!();
         PrimitiveRepr!();
+        FromRawReprError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! util {
     };
 }
 
-util!()
+util!();

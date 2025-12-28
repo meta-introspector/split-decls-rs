@@ -4,4 +4,4 @@ macro_rules! test_word {
     };
 }
 
-test_word!()
+test_word!();

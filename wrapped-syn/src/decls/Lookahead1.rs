@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ParseStream!();
         Cursor!();
         Parse!();
-        Result!();
         Lifetime!();
+        Result!();
+        ParseStream!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Lookahead1 {
     };
 }
 
-Lookahead1!()
+Lookahead1!();

@@ -4,4 +4,4 @@ macro_rules! NT_S390_LAST_BREAK {
     };
 }
 
-NT_S390_LAST_BREAK!()
+NT_S390_LAST_BREAK!();

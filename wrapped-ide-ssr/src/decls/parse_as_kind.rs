@@ -4,4 +4,4 @@ macro_rules! parse_as_kind {
     };
 }
 
-parse_as_kind!()
+parse_as_kind!();

@@ -4,4 +4,4 @@ macro_rules! ring_properties {
     };
 }
 
-ring_properties!()
+ring_properties!();

@@ -4,4 +4,4 @@ macro_rules! LABELS_FN_IN_TRAIT {
     };
 }
 
-LABELS_FN_IN_TRAIT!()
+LABELS_FN_IN_TRAIT!();

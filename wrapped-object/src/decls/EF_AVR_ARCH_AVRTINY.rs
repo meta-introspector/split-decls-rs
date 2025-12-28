@@ -4,4 +4,4 @@ macro_rules! EF_AVR_ARCH_AVRTINY {
     };
 }
 
-EF_AVR_ARCH_AVRTINY!()
+EF_AVR_ARCH_AVRTINY!();

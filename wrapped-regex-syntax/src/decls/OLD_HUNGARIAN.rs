@@ -4,4 +4,4 @@ macro_rules! OLD_HUNGARIAN {
     };
 }
 
-OLD_HUNGARIAN!()
+OLD_HUNGARIAN!();

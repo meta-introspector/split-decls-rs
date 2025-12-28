@@ -4,4 +4,4 @@ macro_rules! ComparisonKind {
     };
 }
 
-ComparisonKind!()
+ComparisonKind!();

@@ -11,4 +11,4 @@ macro_rules! test_unterminated {
     };
 }
 
-test_unterminated!()
+test_unterminated!();

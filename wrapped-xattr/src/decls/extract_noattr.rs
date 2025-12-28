@@ -4,4 +4,4 @@ macro_rules! extract_noattr {
     };
 }
 
-extract_noattr!()
+extract_noattr!();

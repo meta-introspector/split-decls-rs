@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WriteKind!();
         ReadKind!();
+        WriteKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ReadOrWrite {
     };
 }
 
-ReadOrWrite!()
+ReadOrWrite!();

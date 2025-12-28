@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        TestBranch!();
         Builder!();
-        MatchPairTree!();
-        TestCase!();
-        HasMatchGuard!();
+        PlaceBuilder!();
         MatchTreeBranch!();
+        BlockAnd!();
+        TestBranch!();
         Candidate!();
+        HasMatchGuard!();
+        Test!();
+        TestCase!();
         CFG!();
         BuiltMatchTree!();
-        Test!();
-        BlockAnd!();
-        PlaceBuilder!();
+        MatchPairTree!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_133 {
     };
 }
 
-impl_133!()
+impl_133!();

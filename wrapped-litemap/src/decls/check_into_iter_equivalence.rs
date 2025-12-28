@@ -11,4 +11,4 @@ macro_rules! check_into_iter_equivalence {
     };
 }
 
-check_into_iter_equivalence!()
+check_into_iter_equivalence!();

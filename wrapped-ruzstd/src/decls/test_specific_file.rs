@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Read!();
-        Error!();
         Write!();
         FrameDecoder!();
         BlockDecodingStrategy!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! test_specific_file {
     };
 }
 
-test_specific_file!()
+test_specific_file!();

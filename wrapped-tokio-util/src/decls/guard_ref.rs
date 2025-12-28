@@ -4,4 +4,4 @@ macro_rules! guard_ref {
     };
 }
 
-guard_ref!()
+guard_ref!();

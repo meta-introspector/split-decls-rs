@@ -4,4 +4,4 @@ macro_rules! AixMemberOffset {
     };
 }
 
-AixMemberOffset!()
+AixMemberOffset!();

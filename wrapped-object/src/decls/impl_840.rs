@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        FileHeader!();
         Result!();
+        FileHeader!();
+        ReadRef!();
         XcoffRelocationIterator!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_840 {
     };
 }
 
-impl_840!()
+impl_840!();

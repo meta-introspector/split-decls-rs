@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Edge!();
-        TransitiveRelationBuilder!();
         Index!();
+        Edge!();
         Frozen!();
+        TransitiveRelationBuilder!();
         TransitiveRelation!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_622 {
     };
 }
 
-impl_622!()
+impl_622!();

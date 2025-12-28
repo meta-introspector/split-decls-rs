@@ -4,4 +4,4 @@ macro_rules! more_key {
     };
 }
 
-more_key!()
+more_key!();

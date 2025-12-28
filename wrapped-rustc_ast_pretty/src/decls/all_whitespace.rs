@@ -4,4 +4,4 @@ macro_rules! all_whitespace {
     };
 }
 
-all_whitespace!()
+all_whitespace!();

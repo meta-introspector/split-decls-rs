@@ -4,4 +4,4 @@ macro_rules! sat_lfunction {
     };
 }
 
-sat_lfunction!()
+sat_lfunction!();

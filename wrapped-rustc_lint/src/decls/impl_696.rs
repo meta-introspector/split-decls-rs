@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EarlyContext!();
-        NonCamelCaseType!();
         NonCamelCaseTypeSub!();
+        NonCamelCaseType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_696 {
     };
 }
 
-impl_696!()
+impl_696!();

@@ -4,4 +4,4 @@ macro_rules! SHF_MIPS_MERGE {
     };
 }
 
-SHF_MIPS_MERGE!()
+SHF_MIPS_MERGE!();

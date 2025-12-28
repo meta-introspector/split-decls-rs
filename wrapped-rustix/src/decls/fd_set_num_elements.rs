@@ -4,4 +4,4 @@ macro_rules! fd_set_num_elements {
     };
 }
 
-fd_set_num_elements!()
+fd_set_num_elements!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Connection!();
-        ChangesetItem!();
-        Result!();
         Changeset!();
-        ConflictType!();
+        Connection!();
+        Result!();
         ConflictAction!();
+        ChangesetItem!();
+        ConflictType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_264 {
     };
 }
 
-impl_264!()
+impl_264!();

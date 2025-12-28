@@ -4,4 +4,4 @@ macro_rules! parse_attribute {
     };
 }
 
-parse_attribute!()
+parse_attribute!();

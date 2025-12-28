@@ -11,4 +11,4 @@ macro_rules! validate_already_defined {
     };
 }
 
-validate_already_defined!()
+validate_already_defined!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FromLlvmOptimizationDiag!();
+        Diagnostic!();
         FromLlvmDiag!();
         LlvmCodegenBackend!();
-        Diagnostic!();
         Linker!();
+        FromLlvmOptimizationDiag!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! diagnostic_handler {
     };
 }
 
-diagnostic_handler!()
+diagnostic_handler!();

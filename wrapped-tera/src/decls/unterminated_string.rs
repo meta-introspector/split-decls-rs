@@ -4,4 +4,4 @@ macro_rules! unterminated_string {
     };
 }
 
-unterminated_string!()
+unterminated_string!();

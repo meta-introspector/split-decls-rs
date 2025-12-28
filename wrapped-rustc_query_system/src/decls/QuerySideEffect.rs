@@ -4,4 +4,4 @@ macro_rules! QuerySideEffect {
     };
 }
 
-QuerySideEffect!()
+QuerySideEffect!();

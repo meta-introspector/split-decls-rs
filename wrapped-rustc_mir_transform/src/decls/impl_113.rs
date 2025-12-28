@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        MirPatch!();
         DropStyle!();
+        DropFlagMode!();
         DropElaborator!();
         DropShimElaborator!();
-        DropFlagMode!();
-        MirPatch!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

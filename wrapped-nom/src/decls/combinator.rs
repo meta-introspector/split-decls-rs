@@ -4,4 +4,4 @@ macro_rules! combinator {
     };
 }
 
-combinator!()
+combinator!();

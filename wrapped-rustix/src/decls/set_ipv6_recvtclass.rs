@@ -11,4 +11,4 @@ macro_rules! set_ipv6_recvtclass {
     };
 }
 
-set_ipv6_recvtclass!()
+set_ipv6_recvtclass!();

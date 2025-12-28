@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         WalkNeighbors!();
-        IndexType!();
-        StableGraph!();
-        EdgeIndex!();
-        NodeIndex!();
         EdgeType!();
+        EdgeIndex!();
+        IndexType!();
+        NodeIndex!();
+        StableGraph!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_841 {
     };
 }
 
-impl_841!()
+impl_841!();

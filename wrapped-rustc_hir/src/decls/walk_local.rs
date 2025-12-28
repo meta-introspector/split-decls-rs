@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         LetStmt!();
+        Visitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_local {
     };
 }
 
-walk_local!()
+walk_local!();

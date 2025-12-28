@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ItemFollowingInnerAttr!();
         InvalidAttrAtCrateLevel!();
+        ItemFollowingInnerAttr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_invalid_crate_level_attr {
     };
 }
 
-check_invalid_crate_level_attr!()
+check_invalid_crate_level_attr!();

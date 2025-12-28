@@ -4,4 +4,4 @@ macro_rules! implode {
     };
 }
 
-implode!()
+implode!();

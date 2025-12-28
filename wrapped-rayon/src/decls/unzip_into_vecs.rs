@@ -11,4 +11,4 @@ macro_rules! unzip_into_vecs {
     };
 }
 
-unzip_into_vecs!()
+unzip_into_vecs!();

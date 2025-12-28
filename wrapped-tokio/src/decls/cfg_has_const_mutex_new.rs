@@ -4,4 +4,4 @@ macro_rules! cfg_has_const_mutex_new {
     };
 }
 
-cfg_has_const_mutex_new!()
+cfg_has_const_mutex_new!();

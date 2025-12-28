@@ -11,4 +11,4 @@ macro_rules! subscriber_is_none {
     };
 }
 
-subscriber_is_none!()
+subscriber_is_none!();

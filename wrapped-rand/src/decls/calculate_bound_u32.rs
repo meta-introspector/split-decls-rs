@@ -4,4 +4,4 @@ macro_rules! calculate_bound_u32 {
     };
 }
 
-calculate_bound_u32!()
+calculate_bound_u32!();

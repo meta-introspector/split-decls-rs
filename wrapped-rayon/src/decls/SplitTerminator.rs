@@ -4,4 +4,4 @@ macro_rules! SplitTerminator {
     };
 }
 
-SplitTerminator!()
+SplitTerminator!();

@@ -4,4 +4,4 @@ macro_rules! scope_mix {
     };
 }
 
-scope_mix!()
+scope_mix!();

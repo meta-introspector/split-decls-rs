@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Float!();
         Number!();
+        Float!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_565 {
     };
 }
 
-impl_565!()
+impl_565!();

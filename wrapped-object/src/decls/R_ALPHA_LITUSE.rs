@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_LITUSE {
     };
 }
 
-R_ALPHA_LITUSE!()
+R_ALPHA_LITUSE!();

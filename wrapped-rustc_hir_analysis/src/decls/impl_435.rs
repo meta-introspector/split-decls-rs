@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        AssocItemQSelf!();
-        GenericsArgsErrExtend!();
-        ReturnTypeNotationEqualityBound!();
-        ReturnTypeNotationIllegalParam!();
-        HirTyLowerer!();
-        RegionInferReason!();
         PredicateFilter!();
         ValueOfAssociatedStructAlreadySpecified!();
-        AssociatedItemTraitUninferredGenericParams!();
-        FeedConstTy!();
         ReturnTypeNotationOnNonRpitit!();
+        AssocItemQSelf!();
+        FeedConstTy!();
+        RegionInferReason!();
+        ReturnTypeNotationEqualityBound!();
+        ReturnTypeNotationIllegalParam!();
+        AssociatedItemTraitUninferredGenericParams!();
+        GenericsArgsErrExtend!();
+        HirTyLowerer!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_435 {
     };
 }
 
-impl_435!()
+impl_435!();

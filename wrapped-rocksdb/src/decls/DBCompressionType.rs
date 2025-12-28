@@ -4,4 +4,4 @@ macro_rules! DBCompressionType {
     };
 }
 
-DBCompressionType!()
+DBCompressionType!();

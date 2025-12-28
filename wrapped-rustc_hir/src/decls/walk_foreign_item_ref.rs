@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         ForeignItemId!();
+        Visitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_foreign_item_ref {
     };
 }
 
-walk_foreign_item_ref!()
+walk_foreign_item_ref!();

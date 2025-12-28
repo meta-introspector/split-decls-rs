@@ -4,4 +4,4 @@ macro_rules! DEFLATE_HEADER_BITS {
     };
 }
 
-DEFLATE_HEADER_BITS!()
+DEFLATE_HEADER_BITS!();

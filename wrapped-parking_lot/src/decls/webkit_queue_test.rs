@@ -13,4 +13,4 @@ macro_rules! webkit_queue_test {
     };
 }
 
-webkit_queue_test!()
+webkit_queue_test!();

@@ -4,4 +4,4 @@ macro_rules! UseIsEmpty {
     };
 }
 
-UseIsEmpty!()
+UseIsEmpty!();

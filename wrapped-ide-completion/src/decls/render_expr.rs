@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         CompletionItemKind!();
-        Builder!();
+        CompletionContext!();
         CompletionRelevance!();
         CompletionItem!();
-        CompletionContext!();
+        Builder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! render_expr {
     };
 }
 
-render_expr!()
+render_expr!();

@@ -15,4 +15,4 @@ macro_rules! lex_template {
     };
 }
 
-lex_template!()
+lex_template!();

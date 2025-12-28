@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        BreakNonLoop!();
-        BreakContextKind!();
-        UnlabeledCfInWhileCondition!();
-        ConstContinueBadLabel!();
         CheckLoopVisitor!();
-        ContinueLabeledBlock!();
+        BreakContextKind!();
         Context!();
+        BreakNonLoop!();
+        ConstContinueBadLabel!();
+        ContinueLabeledBlock!();
+        UnlabeledCfInWhileCondition!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_240 {
     };
 }
 
-impl_240!()
+impl_240!();

@@ -4,4 +4,4 @@ macro_rules! EM_TMM_GPP {
     };
 }
 
-EM_TMM_GPP!()
+EM_TMM_GPP!();

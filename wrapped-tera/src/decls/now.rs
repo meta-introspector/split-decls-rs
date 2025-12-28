@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Result!();
+        Error!();
         Function!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! now {
     };
 }
 
-now!()
+now!();

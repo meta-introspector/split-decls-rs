@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GUID!();
-        RuntimeType!();
         ConstBuffer!();
+        RuntimeType!();
+        GUID!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_133 {
     };
 }
 
-impl_133!()
+impl_133!();

@@ -11,4 +11,4 @@ macro_rules! def_to_nav {
     };
 }
 
-def_to_nav!()
+def_to_nav!();

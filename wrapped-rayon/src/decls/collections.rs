@@ -4,4 +4,4 @@ macro_rules! collections {
     };
 }
 
-collections!()
+collections!();

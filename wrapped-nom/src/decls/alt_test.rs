@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ErrorStr!();
-        Err!();
-        IResult!();
-        Parser!();
         Error!();
         ErrorKind!();
+        IResult!();
+        Parser!();
+        Err!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! alt_test {
     };
 }
 
-alt_test!()
+alt_test!();

@@ -3,8 +3,8 @@ macro_rules! deps {
         DocumentMut!();
         Iter!();
         Table!();
-        Item!();
         RawString!();
+        Item!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

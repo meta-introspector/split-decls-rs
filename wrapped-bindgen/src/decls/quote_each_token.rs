@@ -4,4 +4,4 @@ macro_rules! quote_each_token {
     };
 }
 
-quote_each_token!()
+quote_each_token!();

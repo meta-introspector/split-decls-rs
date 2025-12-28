@@ -4,4 +4,4 @@ macro_rules! AllocRangeHelpers {
     };
 }
 
-AllocRangeHelpers!()
+AllocRangeHelpers!();

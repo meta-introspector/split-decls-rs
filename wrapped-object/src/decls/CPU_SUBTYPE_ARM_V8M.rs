@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_ARM_V8M {
     };
 }
 
-CPU_SUBTYPE_ARM_V8M!()
+CPU_SUBTYPE_ARM_V8M!();

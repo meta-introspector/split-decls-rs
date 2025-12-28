@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RootDatabase!();
         Query!();
+        RootDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! find_items {
     };
 }
 
-find_items!()
+find_items!();

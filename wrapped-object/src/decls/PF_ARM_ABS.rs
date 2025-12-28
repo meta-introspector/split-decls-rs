@@ -4,4 +4,4 @@ macro_rules! PF_ARM_ABS {
     };
 }
 
-PF_ARM_ABS!()
+PF_ARM_ABS!();

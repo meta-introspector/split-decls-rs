@@ -4,4 +4,4 @@ macro_rules! EM_ALPHA {
     };
 }
 
-EM_ALPHA!()
+EM_ALPHA!();

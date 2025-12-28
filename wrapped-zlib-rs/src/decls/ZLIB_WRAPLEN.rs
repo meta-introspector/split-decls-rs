@@ -4,4 +4,4 @@ macro_rules! ZLIB_WRAPLEN {
     };
 }
 
-ZLIB_WRAPLEN!()
+ZLIB_WRAPLEN!();

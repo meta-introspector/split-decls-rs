@@ -4,4 +4,4 @@ macro_rules! codegen_fn_attrs {
     };
 }
 
-codegen_fn_attrs!()
+codegen_fn_attrs!();

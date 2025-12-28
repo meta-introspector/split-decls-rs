@@ -11,4 +11,4 @@ macro_rules! dataflow_successors {
     };
 }
 
-dataflow_successors!()
+dataflow_successors!();

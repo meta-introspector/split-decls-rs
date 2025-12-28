@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Candidate!();
-        FnCtxt!();
-        ProbeContext!();
-        Mode!();
-        IsSuggestion!();
-        PickResult!();
-        Error!();
-        NoMatchData!();
-        MethodError!();
         CandidateKind!();
+        FnCtxt!();
+        IsSuggestion!();
+        Error!();
         ProbeScope!();
+        PickResult!();
+        NoMatchData!();
+        Candidate!();
+        MethodError!();
+        Mode!();
+        ProbeContext!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_267 {
     };
 }
 
-impl_267!()
+impl_267!();

@@ -4,4 +4,4 @@ macro_rules! PrivateCmp {
     };
 }
 
-PrivateCmp!()
+PrivateCmp!();

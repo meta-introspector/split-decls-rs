@@ -4,4 +4,4 @@ macro_rules! apply_ascii_deny_list_to_lower_cased_unicode {
     };
 }
 
-apply_ascii_deny_list_to_lower_cased_unicode!()
+apply_ascii_deny_list_to_lower_cased_unicode!();

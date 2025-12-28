@@ -11,4 +11,4 @@ macro_rules! other_349 {
     };
 }
 
-other_349!()
+other_349!();

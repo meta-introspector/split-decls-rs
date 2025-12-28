@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MapOpt!();
         Error!();
+        MapOpt!();
         ErrorKind!();
         Err!();
     };
@@ -14,4 +14,4 @@ macro_rules! test_map_opt {
     };
 }
 
-test_map_opt!()
+test_map_opt!();

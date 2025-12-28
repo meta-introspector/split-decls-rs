@@ -4,4 +4,4 @@ macro_rules! Words4 {
     };
 }
 
-Words4!()
+Words4!();

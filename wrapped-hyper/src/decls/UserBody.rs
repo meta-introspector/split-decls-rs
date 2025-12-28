@@ -4,4 +4,4 @@ macro_rules! UserBody {
     };
 }
 
-UserBody!()
+UserBody!();

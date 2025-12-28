@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TraceScope!();
         Style!();
+        TraceScope!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

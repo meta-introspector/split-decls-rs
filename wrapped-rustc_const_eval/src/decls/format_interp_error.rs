@@ -4,4 +4,4 @@ macro_rules! format_interp_error {
     };
 }
 
-format_interp_error!()
+format_interp_error!();

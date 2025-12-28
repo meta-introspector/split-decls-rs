@@ -4,4 +4,4 @@ macro_rules! FloatType {
     };
 }
 
-FloatType!()
+FloatType!();

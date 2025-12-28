@@ -4,4 +4,4 @@ macro_rules! multi_product {
     };
 }
 
-multi_product!()
+multi_product!();

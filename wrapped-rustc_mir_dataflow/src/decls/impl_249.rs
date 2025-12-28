@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        HasBottom!();
-        TrackElem!();
         State!();
-        Map!();
-        HasTop!();
+        TrackElem!();
         StateData!();
+        HasTop!();
         ValueOrPlace!();
+        HasBottom!();
+        Map!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_249 {
     };
 }
 
-impl_249!()
+impl_249!();

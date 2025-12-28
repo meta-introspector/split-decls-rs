@@ -11,4 +11,4 @@ macro_rules! overflow_u8 {
     };
 }
 
-overflow_u8!()
+overflow_u8!();

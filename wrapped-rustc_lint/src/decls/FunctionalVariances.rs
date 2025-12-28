@@ -4,4 +4,4 @@ macro_rules! FunctionalVariances {
     };
 }
 
-FunctionalVariances!()
+FunctionalVariances!();

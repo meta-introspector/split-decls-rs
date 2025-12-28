@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArchiveSymbol!();
         ArchiveOffset!();
+        ArchiveSymbol!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

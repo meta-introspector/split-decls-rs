@@ -4,4 +4,4 @@ macro_rules! accesses {
     };
 }
 
-accesses!()
+accesses!();

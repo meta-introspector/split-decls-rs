@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MirPass!();
         Optimizations!();
+        MirPass!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! run_passes_no_validate {
     };
 }
 
-run_passes_no_validate!()
+run_passes_no_validate!();

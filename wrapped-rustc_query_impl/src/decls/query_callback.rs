@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueryCtxt!();
         QueryConfigRestored!();
+        QueryCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! query_callback {
     };
 }
 
-query_callback!()
+query_callback!();

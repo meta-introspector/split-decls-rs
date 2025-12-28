@@ -4,4 +4,4 @@ macro_rules! SanitizerSet {
     };
 }
 
-SanitizerSet!()
+SanitizerSet!();

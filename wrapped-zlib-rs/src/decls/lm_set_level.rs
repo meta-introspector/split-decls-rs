@@ -11,4 +11,4 @@ macro_rules! lm_set_level {
     };
 }
 
-lm_set_level!()
+lm_set_level!();

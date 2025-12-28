@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Qualif!();
         NeedsNonConstDrop!();
+        Qualif!();
         ConstCx!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_60 {
     };
 }
 
-impl_60!()
+impl_60!();

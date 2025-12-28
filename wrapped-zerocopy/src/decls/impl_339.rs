@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Uninit!();
         CastableFrom!();
+        Uninit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_339 {
     };
 }
 
-impl_339!()
+impl_339!();

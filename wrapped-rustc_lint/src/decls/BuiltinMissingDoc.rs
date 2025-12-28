@@ -4,4 +4,4 @@ macro_rules! BuiltinMissingDoc {
     };
 }
 
-BuiltinMissingDoc!()
+BuiltinMissingDoc!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        CapturesMatches!();
-        SplitN!();
-        Searcher!();
-        Span!();
+        Input!();
         FindMatches!();
         Regex!();
         Match!();
         Split!();
         PoolGuard!();
-        Input!();
         Captures!();
+        CapturesMatches!();
+        SplitN!();
+        Searcher!();
+        Span!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_335 {
     };
 }
 
-impl_335!()
+impl_335!();

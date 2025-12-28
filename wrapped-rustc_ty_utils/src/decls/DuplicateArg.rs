@@ -4,4 +4,4 @@ macro_rules! DuplicateArg {
     };
 }
 
-DuplicateArg!()
+DuplicateArg!();

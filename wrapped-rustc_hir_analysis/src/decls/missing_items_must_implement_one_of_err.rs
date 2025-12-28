@@ -11,4 +11,4 @@ macro_rules! missing_items_must_implement_one_of_err {
     };
 }
 
-missing_items_must_implement_one_of_err!()
+missing_items_must_implement_one_of_err!();

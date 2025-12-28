@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Literal!();
         TokenStream!();
+        Literal!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! unsuffixed_int_literals {
     };
 }
 
-unsuffixed_int_literals!()
+unsuffixed_int_literals!();

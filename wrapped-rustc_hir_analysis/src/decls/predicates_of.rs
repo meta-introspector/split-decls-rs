@@ -4,4 +4,4 @@ macro_rules! predicates_of {
     };
 }
 
-predicates_of!()
+predicates_of!();

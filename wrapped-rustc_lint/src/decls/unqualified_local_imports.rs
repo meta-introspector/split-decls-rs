@@ -4,4 +4,4 @@ macro_rules! unqualified_local_imports {
     };
 }
 
-unqualified_local_imports!()
+unqualified_local_imports!();

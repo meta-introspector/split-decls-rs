@@ -4,4 +4,4 @@ macro_rules! signed_problem_values {
     };
 }
 
-signed_problem_values!()
+signed_problem_values!();

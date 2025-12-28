@@ -11,4 +11,4 @@ macro_rules! open_browser {
     };
 }
 
-open_browser!()
+open_browser!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Encoder!();
         Encodable!();
+        Encoder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

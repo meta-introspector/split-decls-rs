@@ -4,4 +4,4 @@ macro_rules! SINGLE_QUOTE {
     };
 }
 
-SINGLE_QUOTE!()
+SINGLE_QUOTE!();

@@ -4,4 +4,4 @@ macro_rules! TOP_VALUE {
     };
 }
 
-TOP_VALUE!()
+TOP_VALUE!();

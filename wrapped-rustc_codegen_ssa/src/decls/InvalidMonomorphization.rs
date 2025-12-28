@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpectedPointerMutability!();
         Diagnostic!();
+        ExpectedPointerMutability!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InvalidMonomorphization {
     };
 }
 
-InvalidMonomorphization!()
+InvalidMonomorphization!();

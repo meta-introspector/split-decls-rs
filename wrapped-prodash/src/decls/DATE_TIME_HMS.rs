@@ -4,4 +4,4 @@ macro_rules! DATE_TIME_HMS {
     };
 }
 
-DATE_TIME_HMS!()
+DATE_TIME_HMS!();

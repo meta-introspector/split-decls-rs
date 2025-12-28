@@ -12,4 +12,4 @@ macro_rules! pidfd_open {
     };
 }
 
-pidfd_open!()
+pidfd_open!();

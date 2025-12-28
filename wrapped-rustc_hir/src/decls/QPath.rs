@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ty!();
         Path!();
+        Ty!();
         PathSegment!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! QPath {
     };
 }
 
-QPath!()
+QPath!();

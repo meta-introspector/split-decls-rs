@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Endian!();
-        Sym!();
         ReadRef!();
         FileHeader!();
+        Sym!();
         ElfSymbol!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_338 {
     };
 }
 
-impl_338!()
+impl_338!();

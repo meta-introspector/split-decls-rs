@@ -4,4 +4,4 @@ macro_rules! IncorrectDoNotRecommendLocation {
     };
 }
 
-IncorrectDoNotRecommendLocation!()
+IncorrectDoNotRecommendLocation!();

@@ -4,4 +4,4 @@ macro_rules! R_390_TLS_GD64 {
     };
 }
 
-R_390_TLS_GD64!()
+R_390_TLS_GD64!();

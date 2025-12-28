@@ -4,4 +4,4 @@ macro_rules! MATCH_LEN_MAX {
     };
 }
 
-MATCH_LEN_MAX!()
+MATCH_LEN_MAX!();

@@ -4,4 +4,4 @@ macro_rules! test_related_attribute_syn {
     };
 }
 
-test_related_attribute_syn!()
+test_related_attribute_syn!();

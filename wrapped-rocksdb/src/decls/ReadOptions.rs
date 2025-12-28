@@ -4,4 +4,4 @@ macro_rules! ReadOptions {
     };
 }
 
-ReadOptions!()
+ReadOptions!();

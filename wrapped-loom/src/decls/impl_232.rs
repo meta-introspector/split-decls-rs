@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Execution!();
         Arc!();
+        Execution!();
+        Set!();
         Builder!();
         Scheduler!();
-        Set!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

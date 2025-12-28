@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
+        Input!();
         Parser!();
+        ParseError!();
+        Needed!();
         IResult!();
         Error!();
-        Needed!();
-        ParseError!();
+        ErrorKind!();
         Many1Count!();
-        Input!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! many1_count {
     };
 }
 
-many1_count!()
+many1_count!();

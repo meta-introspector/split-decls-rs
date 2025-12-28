@@ -4,4 +4,4 @@ macro_rules! tuple_trait {
     };
 }
 
-tuple_trait!()
+tuple_trait!();

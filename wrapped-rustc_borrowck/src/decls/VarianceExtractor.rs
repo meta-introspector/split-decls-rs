@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UniversalRegions!();
         ConstraintDirection!();
+        UniversalRegions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VarianceExtractor {
     };
 }
 
-VarianceExtractor!()
+VarianceExtractor!();

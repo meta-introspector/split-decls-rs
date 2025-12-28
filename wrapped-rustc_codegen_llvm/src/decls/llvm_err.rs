@@ -12,4 +12,4 @@ macro_rules! llvm_err {
     };
 }
 
-llvm_err!()
+llvm_err!();

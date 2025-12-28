@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MapDeserializer!();
-        EnumDeserializer!();
-        Value!();
-        Deserializer!();
-        Error!();
         Map!();
         Result!();
+        MapDeserializer!();
+        Error!();
+        Value!();
+        EnumDeserializer!();
+        Deserializer!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

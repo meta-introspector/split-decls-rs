@@ -4,4 +4,4 @@ macro_rules! is_concretize {
     };
 }
 
-is_concretize!()
+is_concretize!();

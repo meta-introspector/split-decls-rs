@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Stage!();
-        ArgParser!();
         AcceptContext!();
+        ArgParser!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_single_integer {
     };
 }
 
-parse_single_integer!()
+parse_single_integer!();

@@ -4,4 +4,4 @@ macro_rules! chacha20poly1305blake2b {
     };
 }
 
-chacha20poly1305blake2b!()
+chacha20poly1305blake2b!();

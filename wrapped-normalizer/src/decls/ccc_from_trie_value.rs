@@ -11,4 +11,4 @@ macro_rules! ccc_from_trie_value {
     };
 }
 
-ccc_from_trie_value!()
+ccc_from_trie_value!();

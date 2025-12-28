@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FoldProd!();
-        TArr!();
         FoldMul!();
+        FoldProd!();
         Prod!();
+        TArr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_538 {
     };
 }
 
-impl_538!()
+impl_538!();

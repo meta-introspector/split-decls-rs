@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        StoreIntoIterator!();
         StoreBulkMut!();
+        StoreIntoIterator!();
         StoreIterableMut!();
-        StoreFromIterator!();
         StoreConstEmpty!();
+        StoreFromIterator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! test_extend {
     };
 }
 
-test_extend!()
+test_extend!();

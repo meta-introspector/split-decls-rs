@@ -4,4 +4,4 @@ macro_rules! DocKeywordConflict {
     };
 }
 
-DocKeywordConflict!()
+DocKeywordConflict!();

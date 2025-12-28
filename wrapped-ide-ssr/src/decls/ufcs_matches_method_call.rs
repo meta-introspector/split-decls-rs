@@ -46,4 +46,4 @@ macro_rules! ufcs_matches_method_call {
     };
 }
 
-ufcs_matches_method_call!()
+ufcs_matches_method_call!();

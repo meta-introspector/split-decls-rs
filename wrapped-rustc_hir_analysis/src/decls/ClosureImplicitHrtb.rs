@@ -4,4 +4,4 @@ macro_rules! ClosureImplicitHrtb {
     };
 }
 
-ClosureImplicitHrtb!()
+ClosureImplicitHrtb!();

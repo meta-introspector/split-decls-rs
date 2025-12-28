@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_ASM_EXPAND {
     };
 }
 
-R_XTENSA_ASM_EXPAND!()
+R_XTENSA_ASM_EXPAND!();

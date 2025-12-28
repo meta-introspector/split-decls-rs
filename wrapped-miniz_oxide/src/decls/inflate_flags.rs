@@ -4,4 +4,4 @@ macro_rules! inflate_flags {
     };
 }
 
-inflate_flags!()
+inflate_flags!();

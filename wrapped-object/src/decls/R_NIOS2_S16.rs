@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_S16 {
     };
 }
 
-R_NIOS2_S16!()
+R_NIOS2_S16!();

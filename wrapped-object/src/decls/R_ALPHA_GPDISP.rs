@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_GPDISP {
     };
 }
 
-R_ALPHA_GPDISP!()
+R_ALPHA_GPDISP!();

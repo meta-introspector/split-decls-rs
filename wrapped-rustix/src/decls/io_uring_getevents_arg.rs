@@ -4,4 +4,4 @@ macro_rules! io_uring_getevents_arg {
     };
 }
 
-io_uring_getevents_arg!()
+io_uring_getevents_arg!();

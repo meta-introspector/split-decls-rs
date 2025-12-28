@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        LangItemOnIncorrectTarget!();
-        Duplicate!();
         IncorrectTarget!();
+        Duplicate!();
         DuplicateLangItem!();
         LanguageItemCollector!();
         UnknownLangItem!();
+        LangItemOnIncorrectTarget!();
         IncorrectCrateType!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_262 {
     };
 }
 
-impl_262!()
+impl_262!();

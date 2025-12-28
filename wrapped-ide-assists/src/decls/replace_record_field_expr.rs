@@ -11,4 +11,4 @@ macro_rules! replace_record_field_expr {
     };
 }
 
-replace_record_field_expr!()
+replace_record_field_expr!();

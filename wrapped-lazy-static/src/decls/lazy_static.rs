@@ -4,4 +4,4 @@ macro_rules! lazy_static {
     };
 }
 
-lazy_static!()
+lazy_static!();

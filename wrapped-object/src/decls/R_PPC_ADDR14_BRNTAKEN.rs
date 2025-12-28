@@ -4,4 +4,4 @@ macro_rules! R_PPC_ADDR14_BRNTAKEN {
     };
 }
 
-R_PPC_ADDR14_BRNTAKEN!()
+R_PPC_ADDR14_BRNTAKEN!();

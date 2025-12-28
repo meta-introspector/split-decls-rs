@@ -11,4 +11,4 @@ macro_rules! orig_range {
     };
 }
 
-orig_range!()
+orig_range!();

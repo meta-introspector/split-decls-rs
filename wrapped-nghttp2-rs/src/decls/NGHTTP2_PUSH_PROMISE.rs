@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_PUSH_PROMISE {
     };
 }
 
-NGHTTP2_PUSH_PROMISE!()
+NGHTTP2_PUSH_PROMISE!();

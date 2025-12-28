@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CharChunks!();
         CharWindows!();
+        CharChunks!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StrChunksWindows {
     };
 }
 
-StrChunksWindows!()
+StrChunksWindows!();

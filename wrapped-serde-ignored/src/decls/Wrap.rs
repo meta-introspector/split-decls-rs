@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SeqAccess!();
         Path!();
+        SeqAccess!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Wrap {
     };
 }
 
-Wrap!()
+Wrap!();

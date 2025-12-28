@@ -4,4 +4,4 @@ macro_rules! UncheckedOptionExt {
     };
 }
 
-UncheckedOptionExt!()
+UncheckedOptionExt!();

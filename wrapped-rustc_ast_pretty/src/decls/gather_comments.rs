@@ -4,4 +4,4 @@ macro_rules! gather_comments {
     };
 }
 
-gather_comments!()
+gather_comments!();

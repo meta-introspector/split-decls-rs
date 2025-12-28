@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ty!();
         MutTy!();
         AmbigArg!();
-        Ty!();
         TyKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_266 {
     };
 }
 
-impl_266!()
+impl_266!();

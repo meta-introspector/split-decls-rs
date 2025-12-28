@@ -4,4 +4,4 @@ macro_rules! TOKEN_SHARED {
     };
 }
 
-TOKEN_SHARED!()
+TOKEN_SHARED!();

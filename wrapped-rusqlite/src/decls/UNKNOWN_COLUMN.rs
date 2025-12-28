@@ -4,4 +4,4 @@ macro_rules! UNKNOWN_COLUMN {
     };
 }
 
-UNKNOWN_COLUMN!()
+UNKNOWN_COLUMN!();

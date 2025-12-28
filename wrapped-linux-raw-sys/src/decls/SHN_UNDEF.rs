@@ -4,4 +4,4 @@ macro_rules! SHN_UNDEF {
     };
 }
 
-SHN_UNDEF!()
+SHN_UNDEF!();

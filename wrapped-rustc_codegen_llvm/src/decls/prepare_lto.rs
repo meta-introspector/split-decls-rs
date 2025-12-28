@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LlvmCodegenBackend!();
         ModuleBuffer!();
+        LlvmCodegenBackend!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! prepare_lto {
     };
 }
 
-prepare_lto!()
+prepare_lto!();

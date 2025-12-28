@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ItemCtxt!();
         FeedConstTy!();
+        ItemCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! lower_const_arg_for_rustdoc {
     };
 }
 
-lower_const_arg_for_rustdoc!()
+lower_const_arg_for_rustdoc!();

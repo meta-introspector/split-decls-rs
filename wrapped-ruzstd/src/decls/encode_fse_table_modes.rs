@@ -11,4 +11,4 @@ macro_rules! encode_fse_table_modes {
     };
 }
 
-encode_fse_table_modes!()
+encode_fse_table_modes!();

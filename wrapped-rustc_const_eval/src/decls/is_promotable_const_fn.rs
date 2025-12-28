@@ -4,4 +4,4 @@ macro_rules! is_promotable_const_fn {
     };
 }
 
-is_promotable_const_fn!()
+is_promotable_const_fn!();

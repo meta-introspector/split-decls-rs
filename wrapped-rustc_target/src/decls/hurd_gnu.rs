@@ -4,4 +4,4 @@ macro_rules! hurd_gnu {
     };
 }
 
-hurd_gnu!()
+hurd_gnu!();

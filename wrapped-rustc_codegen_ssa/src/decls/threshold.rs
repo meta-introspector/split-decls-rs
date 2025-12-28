@@ -4,4 +4,4 @@ macro_rules! threshold {
     };
 }
 
-threshold!()
+threshold!();

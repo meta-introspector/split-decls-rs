@@ -11,4 +11,4 @@ macro_rules! CHACHA_KEYSIZE {
     };
 }
 
-CHACHA_KEYSIZE!()
+CHACHA_KEYSIZE!();

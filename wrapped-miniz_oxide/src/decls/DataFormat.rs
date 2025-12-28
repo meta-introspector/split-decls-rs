@@ -4,4 +4,4 @@ macro_rules! DataFormat {
     };
 }
 
-DataFormat!()
+DataFormat!();

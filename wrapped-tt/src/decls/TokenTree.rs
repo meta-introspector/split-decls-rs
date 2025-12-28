@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Leaf!();
         Subtree!();
+        Leaf!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TokenTree {
     };
 }
 
-TokenTree!()
+TokenTree!();

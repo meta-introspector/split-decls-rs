@@ -4,4 +4,4 @@ macro_rules! NodeRef {
     };
 }
 
-NodeRef!()
+NodeRef!();

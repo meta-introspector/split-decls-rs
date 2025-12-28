@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endian!();
         U32!();
+        Endian!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UuidCommand {
     };
 }
 
-UuidCommand!()
+UuidCommand!();

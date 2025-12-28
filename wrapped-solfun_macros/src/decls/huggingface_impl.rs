@@ -4,4 +4,4 @@ macro_rules! huggingface_impl {
     };
 }
 
-huggingface_impl!()
+huggingface_impl!();

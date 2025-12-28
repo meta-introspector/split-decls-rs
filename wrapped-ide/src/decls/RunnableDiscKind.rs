@@ -4,4 +4,4 @@ macro_rules! RunnableDiscKind {
     };
 }
 
-RunnableDiscKind!()
+RunnableDiscKind!();

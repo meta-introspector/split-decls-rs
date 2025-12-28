@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MakeExtMarker!();
-        MakeExt!();
         MakeVisitor!();
+        MakeExt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

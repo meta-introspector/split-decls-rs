@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MatchPosition!();
         ParallelIterator!();
+        MatchPosition!();
         FindConsumer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! find_last {
     };
 }
 
-find_last!()
+find_last!();

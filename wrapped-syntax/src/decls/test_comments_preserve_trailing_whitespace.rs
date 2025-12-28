@@ -4,4 +4,4 @@ macro_rules! test_comments_preserve_trailing_whitespace {
     };
 }
 
-test_comments_preserve_trailing_whitespace!()
+test_comments_preserve_trailing_whitespace!();

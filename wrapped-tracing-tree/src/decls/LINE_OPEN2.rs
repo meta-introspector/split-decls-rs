@@ -4,4 +4,4 @@ macro_rules! LINE_OPEN2 {
     };
 }
 
-LINE_OPEN2!()
+LINE_OPEN2!();

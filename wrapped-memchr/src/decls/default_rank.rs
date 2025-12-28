@@ -4,4 +4,4 @@ macro_rules! default_rank {
     };
 }
 
-default_rank!()
+default_rank!();

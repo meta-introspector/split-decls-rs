@@ -4,4 +4,4 @@ macro_rules! is_valid_byte {
     };
 }
 
-is_valid_byte!()
+is_valid_byte!();

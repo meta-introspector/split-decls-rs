@@ -11,4 +11,4 @@ macro_rules! nonzero_hresult {
     };
 }
 
-nonzero_hresult!()
+nonzero_hresult!();

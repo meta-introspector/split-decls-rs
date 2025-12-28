@@ -4,4 +4,4 @@ macro_rules! HiddenGlobReexports {
     };
 }
 
-HiddenGlobReexports!()
+HiddenGlobReexports!();

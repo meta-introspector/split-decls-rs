@@ -4,4 +4,4 @@ macro_rules! AttributeTemplate {
     };
 }
 
-AttributeTemplate!()
+AttributeTemplate!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VersionDef!();
         VersionNeed!();
+        VersionDef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VersionData {
     };
 }
 
-VersionData!()
+VersionData!();

@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_PC8 {
     };
 }
 
-R_ARM_THM_PC8!()
+R_ARM_THM_PC8!();

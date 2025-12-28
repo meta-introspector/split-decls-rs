@@ -11,4 +11,4 @@ macro_rules! DENY_UNKNOWN_FIELDS {
     };
 }
 
-DENY_UNKNOWN_FIELDS!()
+DENY_UNKNOWN_FIELDS!();

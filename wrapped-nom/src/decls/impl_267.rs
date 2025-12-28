@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
         OutputM!();
-        Emit!();
-        ToUsize!();
-        Error!();
+        Count!();
         LengthCount!();
-        ParseError!();
-        Err!();
-        ErrorKind!();
         PResult!();
         Parser!();
-        Count!();
+        Err!();
+        ParseError!();
+        Error!();
+        ToUsize!();
+        Emit!();
         OutputMode!();
+        ErrorKind!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_267 {
     };
 }
 
-impl_267!()
+impl_267!();

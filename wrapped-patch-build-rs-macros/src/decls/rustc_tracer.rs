@@ -4,4 +4,4 @@ macro_rules! rustc_tracer {
     };
 }
 
-rustc_tracer!()
+rustc_tracer!();

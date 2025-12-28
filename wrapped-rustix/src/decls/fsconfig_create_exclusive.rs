@@ -11,4 +11,4 @@ macro_rules! fsconfig_create_exclusive {
     };
 }
 
-fsconfig_create_exclusive!()
+fsconfig_create_exclusive!();

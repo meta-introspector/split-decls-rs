@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        HygieneData!();
         Span!();
         SyntaxContext!();
-        HygieneData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! walk_chain {
     };
 }
 
-walk_chain!()
+walk_chain!();

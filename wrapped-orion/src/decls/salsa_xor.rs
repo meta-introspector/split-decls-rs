@@ -4,4 +4,4 @@ macro_rules! salsa_xor {
     };
 }
 
-salsa_xor!()
+salsa_xor!();

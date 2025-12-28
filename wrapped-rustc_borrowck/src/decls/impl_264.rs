@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FactRow!();
         PoloniusLocationTable!();
         FactCell!();
+        FactRow!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_264 {
     };
 }
 
-impl_264!()
+impl_264!();

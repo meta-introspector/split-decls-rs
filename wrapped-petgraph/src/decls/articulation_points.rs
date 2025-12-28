@@ -4,4 +4,4 @@ macro_rules! articulation_points {
     };
 }
 
-articulation_points!()
+articulation_points!();

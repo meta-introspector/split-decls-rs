@@ -12,4 +12,4 @@ macro_rules! render_include_tag_missing {
     };
 }
 
-render_include_tag_missing!()
+render_include_tag_missing!();

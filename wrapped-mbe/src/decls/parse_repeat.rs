@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParseError!();
         Separator!();
+        ParseError!();
         RepeatKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! parse_repeat {
     };
 }
 
-parse_repeat!()
+parse_repeat!();

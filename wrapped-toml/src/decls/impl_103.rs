@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ValueSerializeVec!();
-        Value!();
         Error!();
+        Value!();
+        ValueSerializeVec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_103 {
     };
 }
 
-impl_103!()
+impl_103!();

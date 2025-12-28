@@ -4,4 +4,4 @@ macro_rules! UnstableFeature {
     };
 }
 
-UnstableFeature!()
+UnstableFeature!();

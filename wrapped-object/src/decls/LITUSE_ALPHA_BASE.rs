@@ -4,4 +4,4 @@ macro_rules! LITUSE_ALPHA_BASE {
     };
 }
 
-LITUSE_ALPHA_BASE!()
+LITUSE_ALPHA_BASE!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Config!();
-        NodeRef!();
-        Graph!();
-        RankDir!();
-        Escaper!();
         Dot!();
+        RankDir!();
+        NodeRef!();
+        Escaper!();
+        Config!();
+        Graph!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

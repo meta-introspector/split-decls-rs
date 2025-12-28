@@ -4,4 +4,4 @@ macro_rules! SerdeMapVisitor {
     };
 }
 
-SerdeMapVisitor!()
+SerdeMapVisitor!();

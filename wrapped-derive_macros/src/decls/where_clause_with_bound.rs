@@ -4,4 +4,4 @@ macro_rules! where_clause_with_bound {
     };
 }
 
-where_clause_with_bound!()
+where_clause_with_bound!();

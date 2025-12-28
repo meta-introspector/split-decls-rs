@@ -12,4 +12,4 @@ macro_rules! XcoffSymbolTable64 {
     };
 }
 
-XcoffSymbolTable64!()
+XcoffSymbolTable64!();

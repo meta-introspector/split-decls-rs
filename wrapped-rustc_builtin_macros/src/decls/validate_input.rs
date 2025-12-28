@@ -12,4 +12,4 @@ macro_rules! validate_input {
     };
 }
 
-validate_input!()
+validate_input!();

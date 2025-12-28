@@ -4,4 +4,4 @@ macro_rules! EM_ARC {
     };
 }
 
-EM_ARC!()
+EM_ARC!();

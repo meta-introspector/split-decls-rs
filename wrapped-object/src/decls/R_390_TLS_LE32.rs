@@ -4,4 +4,4 @@ macro_rules! R_390_TLS_LE32 {
     };
 }
 
-R_390_TLS_LE32!()
+R_390_TLS_LE32!();

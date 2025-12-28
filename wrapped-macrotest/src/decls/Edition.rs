@@ -4,4 +4,4 @@ macro_rules! Edition {
     };
 }
 
-Edition!()
+Edition!();

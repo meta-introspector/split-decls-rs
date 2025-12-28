@@ -4,4 +4,4 @@ macro_rules! ImplicitUnsafeAutorefsMethodNote {
     };
 }
 
-ImplicitUnsafeAutorefsMethodNote!()
+ImplicitUnsafeAutorefsMethodNote!();

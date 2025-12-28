@@ -4,4 +4,4 @@ macro_rules! SHF_MIPS_GPREL {
     };
 }
 
-SHF_MIPS_GPREL!()
+SHF_MIPS_GPREL!();

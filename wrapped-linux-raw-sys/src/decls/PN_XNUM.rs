@@ -4,4 +4,4 @@ macro_rules! PN_XNUM {
     };
 }
 
-PN_XNUM!()
+PN_XNUM!();

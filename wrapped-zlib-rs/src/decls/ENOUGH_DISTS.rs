@@ -4,4 +4,4 @@ macro_rules! ENOUGH_DISTS {
     };
 }
 
-ENOUGH_DISTS!()
+ENOUGH_DISTS!();

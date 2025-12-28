@@ -4,4 +4,4 @@ macro_rules! LZ_HASH_SHIFT {
     };
 }
 
-LZ_HASH_SHIFT!()
+LZ_HASH_SHIFT!();

@@ -12,4 +12,4 @@ macro_rules! impl_bitops32 {
     };
 }
 
-impl_bitops32!()
+impl_bitops32!();

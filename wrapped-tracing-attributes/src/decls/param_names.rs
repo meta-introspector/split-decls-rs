@@ -11,4 +11,4 @@ macro_rules! param_names {
     };
 }
 
-param_names!()
+param_names!();

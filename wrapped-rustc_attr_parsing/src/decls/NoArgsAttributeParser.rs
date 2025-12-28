@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         AllowedTargets!();
-        Stage!();
-        SingleAttributeParser!();
         OnDuplicate!();
+        SingleAttributeParser!();
+        Stage!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! NoArgsAttributeParser {
     };
 }
 
-NoArgsAttributeParser!()
+NoArgsAttributeParser!();

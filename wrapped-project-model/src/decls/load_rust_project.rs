@@ -13,4 +13,4 @@ macro_rules! load_rust_project {
     };
 }
 
-load_rust_project!()
+load_rust_project!();

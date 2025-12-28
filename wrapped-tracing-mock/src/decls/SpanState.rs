@@ -4,4 +4,4 @@ macro_rules! SpanState {
     };
 }
 
-SpanState!()
+SpanState!();

@@ -4,4 +4,4 @@ macro_rules! DecodedLength {
     };
 }
 
-DecodedLength!()
+DecodedLength!();

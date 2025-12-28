@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         ProcSelector!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! procctl_get_optional {
     };
 }
 
-procctl_get_optional!()
+procctl_get_optional!();

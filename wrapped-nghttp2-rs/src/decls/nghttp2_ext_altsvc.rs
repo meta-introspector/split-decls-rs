@@ -4,4 +4,4 @@ macro_rules! nghttp2_ext_altsvc {
     };
 }
 
-nghttp2_ext_altsvc!()
+nghttp2_ext_altsvc!();

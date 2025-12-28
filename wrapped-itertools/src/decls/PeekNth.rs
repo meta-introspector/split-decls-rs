@@ -4,4 +4,4 @@ macro_rules! PeekNth {
     };
 }
 
-PeekNth!()
+PeekNth!();

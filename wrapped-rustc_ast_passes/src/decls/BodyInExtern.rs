@@ -4,4 +4,4 @@ macro_rules! BodyInExtern {
     };
 }
 
-BodyInExtern!()
+BodyInExtern!();

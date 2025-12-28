@@ -4,4 +4,4 @@ macro_rules! NonConstForLoopIntoIter {
     };
 }
 
-NonConstForLoopIntoIter!()
+NonConstForLoopIntoIter!();

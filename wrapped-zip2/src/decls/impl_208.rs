@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        FileOptions!();
-        ZipFileData!();
+        ZipRawValues!();
+        AesMode!();
         ZipLocalEntryBlock!();
-        System!();
+        CompressionMethod!();
+        FileOptions!();
+        Zip64DataDescriptorBlock!();
         ZipResult!();
         ZipError!();
-        AesMode!();
         DateTime!();
-        ZipDataDescriptorBlock!();
-        Zip64ExtraFieldBlock!();
-        Lzma!();
-        Zip64DataDescriptorBlock!();
         ZipCentralEntryBlock!();
+        ZipFileData!();
+        ZipDataDescriptorBlock!();
+        System!();
+        Lzma!();
+        Zip64ExtraFieldBlock!();
         AesVendorVersion!();
-        ZipRawValues!();
-        CompressionMethod!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_208 {
     };
 }
 
-impl_208!()
+impl_208!();

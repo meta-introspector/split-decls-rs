@@ -4,4 +4,4 @@ macro_rules! greedy_matching_inner {
     };
 }
 
-greedy_matching_inner!()
+greedy_matching_inner!();

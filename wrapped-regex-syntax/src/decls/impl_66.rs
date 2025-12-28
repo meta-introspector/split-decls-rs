@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Printer!();
+        Ast!();
         Result!();
         Formatter!();
-        Ast!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

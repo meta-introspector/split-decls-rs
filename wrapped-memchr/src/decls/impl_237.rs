@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Finder!();
         Pair!();
+        Finder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

@@ -4,4 +4,4 @@ macro_rules! NonExportedMacroInvalidAttrs {
     };
 }
 
-NonExportedMacroInvalidAttrs!()
+NonExportedMacroInvalidAttrs!();

@@ -12,4 +12,4 @@ macro_rules! push_sub_branch_bindings {
     };
 }
 
-push_sub_branch_bindings!()
+push_sub_branch_bindings!();

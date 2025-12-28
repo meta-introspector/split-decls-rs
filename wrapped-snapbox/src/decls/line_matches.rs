@@ -11,4 +11,4 @@ macro_rules! line_matches {
     };
 }
 
-line_matches!()
+line_matches!();

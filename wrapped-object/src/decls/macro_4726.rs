@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FatArch64!();
         FatHeader!();
         FatArch32!();
+        FatArch64!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_4726 {
     };
 }
 
-macro_4726!()
+macro_4726!();

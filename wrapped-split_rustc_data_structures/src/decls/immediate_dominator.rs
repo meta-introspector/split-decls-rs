@@ -11,4 +11,4 @@ macro_rules! immediate_dominator {
     };
 }
 
-immediate_dominator!()
+immediate_dominator!();

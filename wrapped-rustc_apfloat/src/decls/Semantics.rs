@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Category!();
         Float!();
-        X87DoubleExtended!();
-        ExpInt!();
-        NonfiniteBehavior!();
+        Category!();
         Limb!();
+        NonfiniteBehavior!();
+        ExpInt!();
+        X87DoubleExtended!();
         IeeeFloat!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! Semantics {
     };
 }
 
-Semantics!()
+Semantics!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Result!();
-        Formatter!();
-        Value!();
-        BoxedFromString!();
         Error!();
+        Formatter!();
+        BoxedFromString!();
+        Value!();
         RawValue!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_626 {
     };
 }
 
-impl_626!()
+impl_626!();

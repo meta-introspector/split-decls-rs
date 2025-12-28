@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Item!();
         HashType!();
+        Item!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! insert {
     };
 }
 
-insert!()
+insert!();

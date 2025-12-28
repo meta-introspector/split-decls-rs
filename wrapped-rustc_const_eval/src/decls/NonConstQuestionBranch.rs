@@ -4,4 +4,4 @@ macro_rules! NonConstQuestionBranch {
     };
 }
 
-NonConstQuestionBranch!()
+NonConstQuestionBranch!();

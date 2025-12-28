@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Immutable!();
-        Unaligned!();
         CastError!();
+        Unaligned!();
         SplitByteSlice!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_169 {
     };
 }
 
-impl_169!()
+impl_169!();

@@ -4,4 +4,4 @@ macro_rules! CouldNotEvalConstPattern {
     };
 }
 
-CouldNotEvalConstPattern!()
+CouldNotEvalConstPattern!();

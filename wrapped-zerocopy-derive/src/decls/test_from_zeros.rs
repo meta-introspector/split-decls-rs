@@ -4,4 +4,4 @@ macro_rules! test_from_zeros {
     };
 }
 
-test_from_zeros!()
+test_from_zeros!();

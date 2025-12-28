@@ -4,4 +4,4 @@ macro_rules! impl_arb_for_tuples {
     };
 }
 
-impl_arb_for_tuples!()
+impl_arb_for_tuples!();

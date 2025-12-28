@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InstrumentArgs!();
-        AsyncInfo!();
         MaybeItemFn!();
+        AsyncInfo!();
+        InstrumentArgs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! instrument_precise {
     };
 }
 
-instrument_precise!()
+instrument_precise!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         State!();
-        StateID!();
-        Match!();
-        NFA!();
-        Look!();
-        LookSet!();
         SparseSet!();
+        StateID!();
+        LookSet!();
+        Look!();
+        NFA!();
+        Match!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! epsilon_closure {
     };
 }
 
-epsilon_closure!()
+epsilon_closure!();

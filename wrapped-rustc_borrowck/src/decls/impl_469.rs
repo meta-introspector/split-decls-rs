@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NllTypeRelating!();
         InstantiateOpaqueType!();
+        NllTypeRelating!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_469 {
     };
 }
 
-impl_469!()
+impl_469!();

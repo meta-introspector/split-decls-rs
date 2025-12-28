@@ -11,4 +11,4 @@ macro_rules! copy_intrinsic {
     };
 }
 
-copy_intrinsic!()
+copy_intrinsic!();

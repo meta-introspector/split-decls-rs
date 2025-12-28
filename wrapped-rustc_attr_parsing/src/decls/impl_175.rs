@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Stage!();
-        AcceptContext!();
-        ArgParser!();
         RustcLayoutScalarValidRangeEnd!();
         AllowedTargets!();
-        OnDuplicate!();
         AttributeOrder!();
+        AcceptContext!();
+        OnDuplicate!();
         SingleAttributeParser!();
+        ArgParser!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_175 {
     };
 }
 
-impl_175!()
+impl_175!();

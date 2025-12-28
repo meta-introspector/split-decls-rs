@@ -4,4 +4,4 @@ macro_rules! check_export {
     };
 }
 
-check_export!()
+check_export!();

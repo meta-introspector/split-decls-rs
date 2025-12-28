@@ -4,4 +4,4 @@ macro_rules! as_impl {
     };
 }
 
-as_impl!()
+as_impl!();

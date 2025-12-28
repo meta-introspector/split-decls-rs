@@ -4,4 +4,4 @@ macro_rules! init {
     };
 }
 
-init!()
+init!();

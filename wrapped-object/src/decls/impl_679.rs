@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PeRelocationIterator!();
         Relocation!();
         Item!();
-        PeRelocationIterator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_679 {
     };
 }
 
-impl_679!()
+impl_679!();

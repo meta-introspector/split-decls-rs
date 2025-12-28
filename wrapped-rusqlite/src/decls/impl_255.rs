@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Result!();
+        ChangesetIter!();
         ChangesetItem!();
         Error!();
-        ChangesetIter!();
-        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

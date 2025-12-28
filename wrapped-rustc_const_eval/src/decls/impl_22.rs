@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Status!();
+        NonConstOp!();
+        ConstCx!();
+        CallUnstable!();
         UnstableConstTrait!();
         UnstableConstFn!();
-        CallUnstable!();
-        ConstCx!();
-        NonConstOp!();
-        Status!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

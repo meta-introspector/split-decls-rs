@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         Sender!();
         Upgraded!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Pending {
     };
 }
 
-Pending!()
+Pending!();

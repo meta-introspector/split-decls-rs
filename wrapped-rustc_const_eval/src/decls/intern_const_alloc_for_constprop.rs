@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompileTimeMachine!();
         InterpCx!();
+        CompileTimeMachine!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! intern_const_alloc_for_constprop {
     };
 }
 
-intern_const_alloc_for_constprop!()
+intern_const_alloc_for_constprop!();

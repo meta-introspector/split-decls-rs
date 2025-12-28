@@ -4,4 +4,4 @@ macro_rules! matrix_graph {
     };
 }
 
-matrix_graph!()
+matrix_graph!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SleepData!();
-        DeadlockHandler!();
-        AtomicCounters!();
-        IdleState!();
-        Sleep!();
-        CoreLatch!();
         JobsEventCounter!();
+        DeadlockHandler!();
+        Sleep!();
+        IdleState!();
+        SleepData!();
+        AtomicCounters!();
+        CoreLatch!();
         WorkerThread!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_223 {
     };
 }
 
-impl_223!()
+impl_223!();

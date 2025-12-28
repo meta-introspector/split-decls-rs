@@ -11,4 +11,4 @@ macro_rules! generate_test_report_json {
     };
 }
 
-generate_test_report_json!()
+generate_test_report_json!();

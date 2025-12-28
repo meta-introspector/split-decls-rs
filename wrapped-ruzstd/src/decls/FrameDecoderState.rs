@@ -12,4 +12,4 @@ macro_rules! FrameDecoderState {
     };
 }
 
-FrameDecoderState!()
+FrameDecoderState!();

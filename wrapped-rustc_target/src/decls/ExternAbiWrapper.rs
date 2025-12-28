@@ -4,4 +4,4 @@ macro_rules! ExternAbiWrapper {
     };
 }
 
-ExternAbiWrapper!()
+ExternAbiWrapper!();

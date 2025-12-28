@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArchiveBuilderBuilder!();
         CodegenResults!();
+        ArchiveBuilderBuilder!();
         Linker!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! add_upstream_rust_crates {
     };
 }
 
-add_upstream_rust_crates!()
+add_upstream_rust_crates!();

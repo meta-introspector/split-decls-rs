@@ -4,4 +4,4 @@ macro_rules! EquationAIsZero {
     };
 }
 
-EquationAIsZero!()
+EquationAIsZero!();

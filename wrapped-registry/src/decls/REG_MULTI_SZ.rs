@@ -11,4 +11,4 @@ macro_rules! REG_MULTI_SZ {
     };
 }
 
-REG_MULTI_SZ!()
+REG_MULTI_SZ!();

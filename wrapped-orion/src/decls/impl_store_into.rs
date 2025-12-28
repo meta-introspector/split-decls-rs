@@ -4,4 +4,4 @@ macro_rules! impl_store_into {
     };
 }
 
-impl_store_into!()
+impl_store_into!();

@@ -16,4 +16,4 @@ macro_rules! add_parenthesis_when_necessary {
     };
 }
 
-add_parenthesis_when_necessary!()
+add_parenthesis_when_necessary!();

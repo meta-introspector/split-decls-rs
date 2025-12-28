@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Binder!();
         DefId!();
         Interner!();
-        ProjectionPredicate!();
         Term!();
+        ProjectionPredicate!();
         TraitRef!();
-        Binder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_384 {
     };
 }
 
-impl_384!()
+impl_384!();

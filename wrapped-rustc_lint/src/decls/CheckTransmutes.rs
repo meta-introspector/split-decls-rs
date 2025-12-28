@@ -4,4 +4,4 @@ macro_rules! CheckTransmutes {
     };
 }
 
-CheckTransmutes!()
+CheckTransmutes!();

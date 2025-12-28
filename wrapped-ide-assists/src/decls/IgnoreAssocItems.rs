@@ -4,4 +4,4 @@ macro_rules! IgnoreAssocItems {
     };
 }
 
-IgnoreAssocItems!()
+IgnoreAssocItems!();

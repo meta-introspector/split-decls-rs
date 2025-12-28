@@ -4,4 +4,4 @@ macro_rules! cow {
     };
 }
 
-cow!()
+cow!();

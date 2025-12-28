@@ -4,4 +4,4 @@ macro_rules! discouraged {
     };
 }
 
-discouraged!()
+discouraged!();

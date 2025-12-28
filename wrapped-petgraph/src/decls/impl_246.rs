@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EdgeType!();
-        Element!();
-        FromElements!();
         NodeTrait!();
         GraphMap!();
+        Element!();
+        FromElements!();
+        EdgeType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

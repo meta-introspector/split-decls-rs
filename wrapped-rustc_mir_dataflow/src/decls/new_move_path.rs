@@ -11,4 +11,4 @@ macro_rules! new_move_path {
     };
 }
 
-new_move_path!()
+new_move_path!();

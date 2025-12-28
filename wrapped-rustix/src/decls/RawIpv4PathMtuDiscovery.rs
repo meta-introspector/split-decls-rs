@@ -4,4 +4,4 @@ macro_rules! RawIpv4PathMtuDiscovery {
     };
 }
 
-RawIpv4PathMtuDiscovery!()
+RawIpv4PathMtuDiscovery!();

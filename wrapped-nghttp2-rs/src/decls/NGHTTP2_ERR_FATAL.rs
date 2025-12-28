@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_ERR_FATAL {
     };
 }
 
-NGHTTP2_ERR_FATAL!()
+NGHTTP2_ERR_FATAL!();

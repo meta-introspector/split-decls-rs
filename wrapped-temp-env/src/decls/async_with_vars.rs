@@ -11,4 +11,4 @@ macro_rules! async_with_vars {
     };
 }
 
-async_with_vars!()
+async_with_vars!();

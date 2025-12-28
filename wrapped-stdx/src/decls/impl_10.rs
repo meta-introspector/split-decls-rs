@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Map!();
-        IntoBox!();
-        Entry!();
-        Downcast!();
-        OccupiedEntry!();
         VacantEntry!();
+        IntoBox!();
+        OccupiedEntry!();
+        Downcast!();
+        Entry!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

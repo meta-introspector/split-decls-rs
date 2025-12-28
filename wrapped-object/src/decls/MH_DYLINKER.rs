@@ -4,4 +4,4 @@ macro_rules! MH_DYLINKER {
     };
 }
 
-MH_DYLINKER!()
+MH_DYLINKER!();

@@ -11,4 +11,4 @@ macro_rules! property {
     };
 }
 
-property!()
+property!();

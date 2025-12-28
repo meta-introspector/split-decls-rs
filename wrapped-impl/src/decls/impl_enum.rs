@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Trait!();
+        Display!();
         MemberUnraw!();
         InferredBounds!();
-        Trait!();
-        From!();
         Enum!();
-        Display!();
+        From!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_enum {
     };
 }
 
-impl_enum!()
+impl_enum!();

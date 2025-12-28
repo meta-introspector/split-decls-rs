@@ -11,4 +11,4 @@ macro_rules! all_local_items {
     };
 }
 
-all_local_items!()
+all_local_items!();

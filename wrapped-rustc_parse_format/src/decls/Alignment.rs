@@ -4,4 +4,4 @@ macro_rules! Alignment {
     };
 }
 
-Alignment!()
+Alignment!();

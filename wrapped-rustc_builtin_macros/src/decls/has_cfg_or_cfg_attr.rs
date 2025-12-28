@@ -4,4 +4,4 @@ macro_rules! has_cfg_or_cfg_attr {
     };
 }
 
-has_cfg_or_cfg_attr!()
+has_cfg_or_cfg_attr!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        OutlivesConstraint!();
         LaterUseKind!();
         RegionName!();
+        OutlivesConstraint!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! BorrowExplanation {
     };
 }
 
-BorrowExplanation!()
+BorrowExplanation!();

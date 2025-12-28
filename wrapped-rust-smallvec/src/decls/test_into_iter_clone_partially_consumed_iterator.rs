@@ -11,4 +11,4 @@ macro_rules! test_into_iter_clone_partially_consumed_iterator {
     };
 }
 
-test_into_iter_clone_partially_consumed_iterator!()
+test_into_iter_clone_partially_consumed_iterator!();

@@ -11,4 +11,4 @@ macro_rules! try_lookup_macro_def_in_macro_use {
     };
 }
 
-try_lookup_macro_def_in_macro_use!()
+try_lookup_macro_def_in_macro_use!();

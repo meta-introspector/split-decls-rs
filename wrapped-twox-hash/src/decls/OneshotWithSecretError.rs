@@ -4,4 +4,4 @@ macro_rules! OneshotWithSecretError {
     };
 }
 
-OneshotWithSecretError!()
+OneshotWithSecretError!();

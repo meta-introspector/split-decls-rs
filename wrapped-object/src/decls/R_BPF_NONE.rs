@@ -4,4 +4,4 @@ macro_rules! R_BPF_NONE {
     };
 }
 
-R_BPF_NONE!()
+R_BPF_NONE!();

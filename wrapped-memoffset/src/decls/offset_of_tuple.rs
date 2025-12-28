@@ -4,4 +4,4 @@ macro_rules! offset_of_tuple {
     };
 }
 
-offset_of_tuple!()
+offset_of_tuple!();

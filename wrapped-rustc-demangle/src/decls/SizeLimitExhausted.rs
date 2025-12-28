@@ -4,4 +4,4 @@ macro_rules! SizeLimitExhausted {
     };
 }
 
-SizeLimitExhausted!()
+SizeLimitExhausted!();

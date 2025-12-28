@@ -11,4 +11,4 @@ macro_rules! check_abi_required_features {
     };
 }
 
-check_abi_required_features!()
+check_abi_required_features!();

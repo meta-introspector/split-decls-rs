@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DBAccess!();
-        Error!();
-        KVBytes!();
         DBIteratorWithThreadMode!();
+        Error!();
+        DBAccess!();
+        KVBytes!();
         Direction!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_135 {
     };
 }
 
-impl_135!()
+impl_135!();

@@ -4,4 +4,4 @@ macro_rules! task {
     };
 }
 
-task!()
+task!();

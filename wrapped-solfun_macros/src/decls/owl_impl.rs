@@ -4,4 +4,4 @@ macro_rules! owl_impl {
     };
 }
 
-owl_impl!()
+owl_impl!();

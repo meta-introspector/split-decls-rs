@@ -4,4 +4,4 @@ macro_rules! try_gate_cfg {
     };
 }
 
-try_gate_cfg!()
+try_gate_cfg!();

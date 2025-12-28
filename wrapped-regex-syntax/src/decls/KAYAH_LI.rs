@@ -4,4 +4,4 @@ macro_rules! KAYAH_LI {
     };
 }
 
-KAYAH_LI!()
+KAYAH_LI!();

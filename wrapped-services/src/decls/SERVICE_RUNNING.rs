@@ -11,4 +11,4 @@ macro_rules! SERVICE_RUNNING {
     };
 }
 
-SERVICE_RUNNING!()
+SERVICE_RUNNING!();

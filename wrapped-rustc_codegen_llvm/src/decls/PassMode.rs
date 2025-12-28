@@ -4,4 +4,4 @@ macro_rules! PassMode {
     };
 }
 
-PassMode!()
+PassMode!();

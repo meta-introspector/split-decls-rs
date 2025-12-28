@@ -4,4 +4,4 @@ macro_rules! PT_GNU_EH_FRAME {
     };
 }
 
-PT_GNU_EH_FRAME!()
+PT_GNU_EH_FRAME!();

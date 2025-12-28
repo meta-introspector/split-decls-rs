@@ -4,4 +4,4 @@ macro_rules! alloc_error_handler {
     };
 }
 
-alloc_error_handler!()
+alloc_error_handler!();

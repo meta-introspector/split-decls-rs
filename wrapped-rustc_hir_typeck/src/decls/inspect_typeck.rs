@@ -4,4 +4,4 @@ macro_rules! inspect_typeck {
     };
 }
 
-inspect_typeck!()
+inspect_typeck!();

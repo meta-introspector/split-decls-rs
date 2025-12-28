@@ -11,4 +11,4 @@ macro_rules! set_ipv6_unicast_hops {
     };
 }
 
-set_ipv6_unicast_hops!()
+set_ipv6_unicast_hops!();

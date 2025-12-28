@@ -4,4 +4,4 @@ macro_rules! WindowsError {
     };
 }
 
-WindowsError!()
+WindowsError!();

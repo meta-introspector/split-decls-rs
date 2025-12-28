@@ -11,4 +11,4 @@ macro_rules! socket_reuseport_lb {
     };
 }
 
-socket_reuseport_lb!()
+socket_reuseport_lb!();

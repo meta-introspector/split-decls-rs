@@ -4,4 +4,4 @@ macro_rules! ForeignRawFd {
     };
 }
 
-ForeignRawFd!()
+ForeignRawFd!();

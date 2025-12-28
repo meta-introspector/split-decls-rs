@@ -4,4 +4,4 @@ macro_rules! PermutationState {
     };
 }
 
-PermutationState!()
+PermutationState!();

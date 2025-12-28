@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TextEditBuilder!();
         Indel!();
         TextEdit!();
-        TextEditBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

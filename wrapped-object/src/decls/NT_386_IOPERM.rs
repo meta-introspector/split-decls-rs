@@ -4,4 +4,4 @@ macro_rules! NT_386_IOPERM {
     };
 }
 
-NT_386_IOPERM!()
+NT_386_IOPERM!();

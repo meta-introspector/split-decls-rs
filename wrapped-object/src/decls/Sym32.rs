@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        U32!();
         Symbol!();
-        Section!();
+        U32!();
         U16!();
+        Section!();
+        Endian!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Sym32 {
     };
 }
 
-Sym32!()
+Sym32!();

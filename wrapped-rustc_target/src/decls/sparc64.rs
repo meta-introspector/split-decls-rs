@@ -4,4 +4,4 @@ macro_rules! sparc64 {
     };
 }
 
-sparc64!()
+sparc64!();

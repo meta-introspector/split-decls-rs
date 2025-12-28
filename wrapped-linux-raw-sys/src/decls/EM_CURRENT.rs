@@ -4,4 +4,4 @@ macro_rules! EM_CURRENT {
     };
 }
 
-EM_CURRENT!()
+EM_CURRENT!();

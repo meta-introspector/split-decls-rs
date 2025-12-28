@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BorrowData!();
         TwoPhaseActivation!();
+        BorrowData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! is_active {
     };
 }
 
-is_active!()
+is_active!();

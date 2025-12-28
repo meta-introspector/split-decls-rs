@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RenameDefinition!();
+        RootDatabase!();
+        SourceChange!();
+        Result!();
         Label!();
         Definition!();
-        Result!();
-        RootDatabase!();
+        RenameDefinition!();
         FileRange!();
-        SourceChange!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

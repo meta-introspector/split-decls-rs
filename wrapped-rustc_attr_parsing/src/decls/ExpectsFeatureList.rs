@@ -4,4 +4,4 @@ macro_rules! ExpectsFeatureList {
     };
 }
 
-ExpectsFeatureList!()
+ExpectsFeatureList!();

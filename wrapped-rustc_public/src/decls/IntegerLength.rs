@@ -4,4 +4,4 @@ macro_rules! IntegerLength {
     };
 }
 
-IntegerLength!()
+IntegerLength!();

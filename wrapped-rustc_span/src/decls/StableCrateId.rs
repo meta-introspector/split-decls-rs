@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefPathHash!();
         DefId!();
+        DefPathHash!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StableCrateId {
     };
 }
 
-StableCrateId!()
+StableCrateId!();

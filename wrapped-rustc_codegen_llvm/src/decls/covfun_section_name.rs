@@ -4,4 +4,4 @@ macro_rules! covfun_section_name {
     };
 }
 
-covfun_section_name!()
+covfun_section_name!();

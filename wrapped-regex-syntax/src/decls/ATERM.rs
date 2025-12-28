@@ -4,4 +4,4 @@ macro_rules! ATERM {
     };
 }
 
-ATERM!()
+ATERM!();

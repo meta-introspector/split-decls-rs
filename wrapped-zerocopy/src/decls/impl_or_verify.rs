@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IntoBytes!();
-        Unaligned!();
         FromZeros!();
+        IntoBytes!();
         FromBytes!();
+        Unaligned!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_or_verify {
     };
 }
 
-impl_or_verify!()
+impl_or_verify!();

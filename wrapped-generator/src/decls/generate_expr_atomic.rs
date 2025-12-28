@@ -11,4 +11,4 @@ macro_rules! generate_expr_atomic {
     };
 }
 
-generate_expr_atomic!()
+generate_expr_atomic!();

@@ -4,4 +4,4 @@ macro_rules! method_names {
     };
 }
 
-method_names!()
+method_names!();

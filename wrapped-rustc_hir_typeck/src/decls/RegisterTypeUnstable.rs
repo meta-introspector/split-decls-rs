@@ -4,4 +4,4 @@ macro_rules! RegisterTypeUnstable {
     };
 }
 
-RegisterTypeUnstable!()
+RegisterTypeUnstable!();

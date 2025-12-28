@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Adjacency!();
-        Level!();
         SiblingLocation!();
+        Level!();
+        Adjacency!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

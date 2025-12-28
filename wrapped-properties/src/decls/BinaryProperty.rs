@@ -4,4 +4,4 @@ macro_rules! BinaryProperty {
     };
 }
 
-BinaryProperty!()
+BinaryProperty!();

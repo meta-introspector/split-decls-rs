@@ -4,4 +4,4 @@ macro_rules! check_potentially_region_dependent_goals {
     };
 }
 
-check_potentially_region_dependent_goals!()
+check_potentially_region_dependent_goals!();

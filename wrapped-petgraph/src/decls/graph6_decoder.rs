@@ -4,4 +4,4 @@ macro_rules! graph6_decoder {
     };
 }
 
-graph6_decoder!()
+graph6_decoder!();

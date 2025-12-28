@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Parameters!();
-        TupleTrait!();
         Fragment!();
-        TupleVariant!();
+        TupleTrait!();
         Field!();
+        TupleVariant!();
+        Parameters!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! serialize_tuple_variant {
     };
 }
 
-serialize_tuple_variant!()
+serialize_tuple_variant!();

@@ -4,4 +4,4 @@ macro_rules! blocked {
     };
 }
 
-blocked!()
+blocked!();

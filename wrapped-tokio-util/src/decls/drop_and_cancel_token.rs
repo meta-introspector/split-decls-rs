@@ -11,4 +11,4 @@ macro_rules! drop_and_cancel_token {
     };
 }
 
-drop_and_cancel_token!()
+drop_and_cancel_token!();

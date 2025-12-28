@@ -4,4 +4,4 @@ macro_rules! DOUBLE_POW5_INV_SPLIT {
     };
 }
 
-DOUBLE_POW5_INV_SPLIT!()
+DOUBLE_POW5_INV_SPLIT!();

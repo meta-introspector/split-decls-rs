@@ -4,4 +4,4 @@ macro_rules! invalid_checksum {
     };
 }
 
-invalid_checksum!()
+invalid_checksum!();

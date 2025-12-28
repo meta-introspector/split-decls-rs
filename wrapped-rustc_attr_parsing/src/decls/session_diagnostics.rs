@@ -4,4 +4,4 @@ macro_rules! session_diagnostics {
     };
 }
 
-session_diagnostics!()
+session_diagnostics!();

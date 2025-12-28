@@ -4,4 +4,4 @@ macro_rules! MZ_DEFAULT_WINDOW_BITS {
     };
 }
 
-MZ_DEFAULT_WINDOW_BITS!()
+MZ_DEFAULT_WINDOW_BITS!();

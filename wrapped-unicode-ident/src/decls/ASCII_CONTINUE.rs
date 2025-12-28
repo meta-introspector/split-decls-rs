@@ -4,4 +4,4 @@ macro_rules! ASCII_CONTINUE {
     };
 }
 
-ASCII_CONTINUE!()
+ASCII_CONTINUE!();

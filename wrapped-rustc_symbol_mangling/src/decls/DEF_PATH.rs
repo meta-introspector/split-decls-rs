@@ -4,4 +4,4 @@ macro_rules! DEF_PATH {
     };
 }
 
-DEF_PATH!()
+DEF_PATH!();

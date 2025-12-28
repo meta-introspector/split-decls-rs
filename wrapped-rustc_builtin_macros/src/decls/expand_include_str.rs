@@ -4,4 +4,4 @@ macro_rules! expand_include_str {
     };
 }
 
-expand_include_str!()
+expand_include_str!();

@@ -4,4 +4,4 @@ macro_rules! CompleteSemicolon {
     };
 }
 
-CompleteSemicolon!()
+CompleteSemicolon!();

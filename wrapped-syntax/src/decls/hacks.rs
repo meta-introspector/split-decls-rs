@@ -4,4 +4,4 @@ macro_rules! hacks {
     };
 }
 
-hacks!()
+hacks!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Filter!();
-        FilterConsumer!();
         UnindexedConsumer!();
         ParallelIterator!();
+        FilterConsumer!();
+        Filter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_461 {
     };
 }
 
-impl_461!()
+impl_461!();

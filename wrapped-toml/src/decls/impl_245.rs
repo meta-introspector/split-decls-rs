@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TraceScope!();
-        State!();
+        DeString!();
         DeValue!();
+        TraceScope!();
         DeTable!();
         Entry!();
-        DeString!();
+        State!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

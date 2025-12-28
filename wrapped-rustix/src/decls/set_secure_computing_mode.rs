@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SecureComputingMode!();
         Result!();
+        SecureComputingMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_secure_computing_mode {
     };
 }
 
-set_secure_computing_mode!()
+set_secure_computing_mode!();

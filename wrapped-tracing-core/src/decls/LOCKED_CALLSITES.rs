@@ -12,4 +12,4 @@ macro_rules! LOCKED_CALLSITES {
     };
 }
 
-LOCKED_CALLSITES!()
+LOCKED_CALLSITES!();

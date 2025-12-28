@@ -4,4 +4,4 @@ macro_rules! METADATA_SIGNATURE {
     };
 }
 
-METADATA_SIGNATURE!()
+METADATA_SIGNATURE!();

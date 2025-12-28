@@ -4,4 +4,4 @@ macro_rules! check_instance_abi {
     };
 }
 
-check_instance_abi!()
+check_instance_abi!();

@@ -4,4 +4,4 @@ macro_rules! other_255 {
     };
 }
 
-other_255!()
+other_255!();

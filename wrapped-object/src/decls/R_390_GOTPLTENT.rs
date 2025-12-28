@@ -4,4 +4,4 @@ macro_rules! R_390_GOTPLTENT {
     };
 }
 
-R_390_GOTPLTENT!()
+R_390_GOTPLTENT!();

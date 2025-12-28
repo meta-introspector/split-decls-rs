@@ -4,4 +4,4 @@ macro_rules! binop_right_homogeneous {
     };
 }
 
-binop_right_homogeneous!()
+binop_right_homogeneous!();

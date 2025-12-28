@@ -4,4 +4,4 @@ macro_rules! AllLocalUsesVisitor {
     };
 }
 
-AllLocalUsesVisitor!()
+AllLocalUsesVisitor!();

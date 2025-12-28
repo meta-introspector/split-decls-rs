@@ -11,4 +11,4 @@ macro_rules! convert_rule {
     };
 }
 
-convert_rule!()
+convert_rule!();

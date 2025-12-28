@@ -11,4 +11,4 @@ macro_rules! where_bound_predicate_to_string {
     };
 }
 
-where_bound_predicate_to_string!()
+where_bound_predicate_to_string!();

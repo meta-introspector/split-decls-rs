@@ -4,4 +4,4 @@ macro_rules! stopat {
     };
 }
 
-stopat!()
+stopat!();

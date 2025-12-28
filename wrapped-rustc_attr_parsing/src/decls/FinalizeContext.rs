@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PathParser!();
-        SharedContext!();
         Stage!();
+        SharedContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FinalizeContext {
     };
 }
 
-FinalizeContext!()
+FinalizeContext!();

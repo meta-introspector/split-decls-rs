@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WasmFile!();
         WasmSymbolInternal!();
+        WasmFile!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WasmSymbolIterator {
     };
 }
 
-WasmSymbolIterator!()
+WasmSymbolIterator!();

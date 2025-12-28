@@ -4,4 +4,4 @@ macro_rules! rehome_lib_path {
     };
 }
 
-rehome_lib_path!()
+rehome_lib_path!();

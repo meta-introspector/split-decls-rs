@@ -11,4 +11,4 @@ macro_rules! get_ty_params {
     };
 }
 
-get_ty_params!()
+get_ty_params!();

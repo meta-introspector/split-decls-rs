@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CtorKind!();
         ItemKind!();
+        CtorKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! new_item_kind {
     };
 }
 
-new_item_kind!()
+new_item_kind!();

@@ -11,4 +11,4 @@ macro_rules! SHF_GNU_RETAIN {
     };
 }
 
-SHF_GNU_RETAIN!()
+SHF_GNU_RETAIN!();

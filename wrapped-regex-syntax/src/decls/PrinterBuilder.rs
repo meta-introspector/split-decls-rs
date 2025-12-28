@@ -4,4 +4,4 @@ macro_rules! PrinterBuilder {
     };
 }
 
-PrinterBuilder!()
+PrinterBuilder!();

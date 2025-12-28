@@ -4,4 +4,4 @@ macro_rules! huff0_decoder {
     };
 }
 
-huff0_decoder!()
+huff0_decoder!();

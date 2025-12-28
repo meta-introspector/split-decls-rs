@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RPC_STATUS!();
         Error!();
+        RPC_STATUS!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

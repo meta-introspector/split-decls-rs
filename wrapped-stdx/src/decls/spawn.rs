@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        JoinHandle!();
         Builder!();
+        JoinHandle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! spawn {
     };
 }
 
-spawn!()
+spawn!();

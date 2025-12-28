@@ -12,4 +12,4 @@ macro_rules! cast_to_internal_error {
     };
 }
 
-cast_to_internal_error!()
+cast_to_internal_error!();

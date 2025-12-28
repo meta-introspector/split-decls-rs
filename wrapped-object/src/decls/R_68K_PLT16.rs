@@ -4,4 +4,4 @@ macro_rules! R_68K_PLT16 {
     };
 }
 
-R_68K_PLT16!()
+R_68K_PLT16!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U32Bytes!();
         U16Bytes!();
         Symbol!();
+        U32Bytes!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ImageLinenumber {
     };
 }
 
-ImageLinenumber!()
+ImageLinenumber!();

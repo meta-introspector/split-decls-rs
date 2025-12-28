@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Prerelease!();
         ErrorKind!();
+        Prerelease!();
+        Error!();
         Position!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_64 {
     };
 }
 
-impl_64!()
+impl_64!();

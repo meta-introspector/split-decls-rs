@@ -4,4 +4,4 @@ macro_rules! R_68K_RELATIVE {
     };
 }
 
-R_68K_RELATIVE!()
+R_68K_RELATIVE!();

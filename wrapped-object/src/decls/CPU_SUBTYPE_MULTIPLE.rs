@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_MULTIPLE {
     };
 }
 
-CPU_SUBTYPE_MULTIPLE!()
+CPU_SUBTYPE_MULTIPLE!();

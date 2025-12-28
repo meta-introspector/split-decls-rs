@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SymbolIndex!();
-        RootDatabase!();
         ParallelPrimeCachesProgress!();
+        RootDatabase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parallel_prime_caches {
     };
 }
 
-parallel_prime_caches!()
+parallel_prime_caches!();

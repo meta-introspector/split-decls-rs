@@ -12,4 +12,4 @@ macro_rules! normalize_bounds {
     };
 }
 
-normalize_bounds!()
+normalize_bounds!();

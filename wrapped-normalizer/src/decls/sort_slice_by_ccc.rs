@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Trie!();
         CharacterAndClass!();
+        Trie!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! sort_slice_by_ccc {
     };
 }
 
-sort_slice_by_ccc!()
+sort_slice_by_ccc!();

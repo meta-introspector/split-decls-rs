@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        DFA!();
-        NFA!();
-        HalfMatch!();
-        BuildError!();
-        Input!();
         MatchError!();
-        ByteClasses!();
         Config!();
         Lazy!();
+        NFA!();
+        Input!();
+        ByteClasses!();
+        Builder!();
         Cache!();
+        DFA!();
+        BuildError!();
         Regex!();
+        HalfMatch!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_226 {
     };
 }
 
-impl_226!()
+impl_226!();

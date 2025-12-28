@@ -4,4 +4,4 @@ macro_rules! Z_BLOCK {
     };
 }
 
-Z_BLOCK!()
+Z_BLOCK!();

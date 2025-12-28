@@ -4,4 +4,4 @@ macro_rules! intravisit {
     };
 }
 
-intravisit!()
+intravisit!();

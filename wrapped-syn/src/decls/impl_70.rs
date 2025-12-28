@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ParseStream!();
-        Parser!();
+        Parse!();
         Error!();
         Result!();
         ParseNestedMeta!();
-        Parse!();
+        Parser!();
+        ParseStream!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

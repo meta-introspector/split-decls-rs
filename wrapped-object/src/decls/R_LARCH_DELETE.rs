@@ -4,4 +4,4 @@ macro_rules! R_LARCH_DELETE {
     };
 }
 
-R_LARCH_DELETE!()
+R_LARCH_DELETE!();

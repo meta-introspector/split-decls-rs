@@ -4,4 +4,4 @@ macro_rules! mul_pow5_div_pow2 {
     };
 }
 
-mul_pow5_div_pow2!()
+mul_pow5_div_pow2!();

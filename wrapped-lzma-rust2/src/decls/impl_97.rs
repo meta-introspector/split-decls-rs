@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         RangeDecoderBuffer!();
-        Read!();
+        Result!();
         RangeDecoder!();
+        Read!();
         ByteReader!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

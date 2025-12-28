@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LlvmArchiveBuilderBuilder!();
         LlvmCodegenBackend!();
+        LlvmArchiveBuilderBuilder!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_625 {
     };
 }
 
-impl_625!()
+impl_625!();

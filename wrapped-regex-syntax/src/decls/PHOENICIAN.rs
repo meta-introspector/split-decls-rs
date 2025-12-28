@@ -4,4 +4,4 @@ macro_rules! PHOENICIAN {
     };
 }
 
-PHOENICIAN!()
+PHOENICIAN!();

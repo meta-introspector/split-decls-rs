@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LazyStateIDError!();
-        BuildErrorKind!();
         BuildError!();
+        BuildErrorKind!();
         NFA!();
+        LazyStateIDError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

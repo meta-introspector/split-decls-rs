@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Event!();
-        HasJar!();
-        ErasedJar!();
-        StorageHandle!();
         Storage!();
+        ZalsaLocal!();
         Database!();
         StorageBuilder!();
-        ZalsaLocal!();
+        ErasedJar!();
+        HasJar!();
+        Event!();
+        StorageHandle!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_295 {
     };
 }
 
-impl_295!()
+impl_295!();

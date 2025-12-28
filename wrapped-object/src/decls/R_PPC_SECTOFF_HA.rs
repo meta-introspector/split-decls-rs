@@ -4,4 +4,4 @@ macro_rules! R_PPC_SECTOFF_HA {
     };
 }
 
-R_PPC_SECTOFF_HA!()
+R_PPC_SECTOFF_HA!();

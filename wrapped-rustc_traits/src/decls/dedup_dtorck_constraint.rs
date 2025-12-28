@@ -4,4 +4,4 @@ macro_rules! dedup_dtorck_constraint {
     };
 }
 
-dedup_dtorck_constraint!()
+dedup_dtorck_constraint!();

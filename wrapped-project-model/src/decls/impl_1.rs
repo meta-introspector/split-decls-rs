@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ProjectJsonData!();
+        Runnable!();
+        ManifestPath!();
+        CrateArrayIdx!();
         ProjectJson!();
         Crate!();
-        CrateArrayIdx!();
         Build!();
-        ManifestPath!();
-        Runnable!();
+        ProjectJsonData!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_1 {
     };
 }
 
-impl_1!()
+impl_1!();

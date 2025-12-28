@@ -11,4 +11,4 @@ macro_rules! handle_copy {
     };
 }
 
-handle_copy!()
+handle_copy!();

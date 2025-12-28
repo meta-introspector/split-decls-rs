@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PoloniusLivenessContext!();
-        RegionInferenceContext!();
         PoloniusContext!();
-        LocalizedOutlivesConstraintSet!();
         BorrowSet!();
         PoloniusDiagnosticsContext!();
+        RegionInferenceContext!();
+        PoloniusLivenessContext!();
+        LocalizedOutlivesConstraintSet!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_304 {
     };
 }
 
-impl_304!()
+impl_304!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        BlockType!();
-        Matcher!();
-        CompressionLevel!();
-        BlockHeader!();
-        Write!();
-        FrameCompressor!();
         FrameHeader!();
+        CompressState!();
+        Write!();
+        Matcher!();
+        BlockType!();
+        CompressionLevel!();
         FseTables!();
         Read!();
-        CompressState!();
+        FrameCompressor!();
+        BlockHeader!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_267 {
     };
 }
 
-impl_267!()
+impl_267!();

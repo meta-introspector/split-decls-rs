@@ -4,4 +4,4 @@ macro_rules! LC_ENCRYPTION_INFO {
     };
 }
 
-LC_ENCRYPTION_INFO!()
+LC_ENCRYPTION_INFO!();

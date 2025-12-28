@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_INTERFACE_SIZE {
     };
 }
 
-DT_MIPS_INTERFACE_SIZE!()
+DT_MIPS_INTERFACE_SIZE!();

@@ -4,4 +4,4 @@ macro_rules! dead {
     };
 }
 
-dead!()
+dead!();

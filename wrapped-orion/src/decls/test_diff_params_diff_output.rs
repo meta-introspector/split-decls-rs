@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TestingRandom!();
         UnknownCryptoError!();
+        TestingRandom!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_diff_params_diff_output {
     };
 }
 
-test_diff_params_diff_output!()
+test_diff_params_diff_output!();

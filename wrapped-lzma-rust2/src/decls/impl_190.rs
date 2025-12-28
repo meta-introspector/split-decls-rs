@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
         RangeEncoder!();
+        Result!();
         LzEncoder!();
-        Write!();
         LiteralSubEncoder!();
         LiteralSubCoder!();
+        Write!();
         LzmaEncData!();
         LzmaCoder!();
     };
@@ -18,4 +18,4 @@ macro_rules! impl_190 {
     };
 }
 
-impl_190!()
+impl_190!();

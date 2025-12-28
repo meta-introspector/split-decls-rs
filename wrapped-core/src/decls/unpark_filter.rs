@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        UnparkResult!();
-        FilterOp!();
-        ThreadData!();
+        ParkToken!();
         UnparkToken!();
         ThreadParkerT!();
-        ParkToken!();
+        UnparkResult!();
+        ThreadData!();
+        FilterOp!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! unpark_filter {
     };
 }
 
-unpark_filter!()
+unpark_filter!();

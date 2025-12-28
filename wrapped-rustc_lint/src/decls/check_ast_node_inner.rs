@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EarlyContextAndPass!();
-        EarlyContext!();
         EarlyCheckNode!();
+        EarlyContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_ast_node_inner {
     };
 }
 
-check_ast_node_inner!()
+check_ast_node_inner!();

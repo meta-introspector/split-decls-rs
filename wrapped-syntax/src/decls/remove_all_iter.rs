@@ -11,4 +11,4 @@ macro_rules! remove_all_iter {
     };
 }
 
-remove_all_iter!()
+remove_all_iter!();

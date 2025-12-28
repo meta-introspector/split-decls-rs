@@ -12,4 +12,4 @@ macro_rules! x86_64_only {
     };
 }
 
-x86_64_only!()
+x86_64_only!();

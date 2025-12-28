@@ -11,4 +11,4 @@ macro_rules! is_node_local_to_unit {
     };
 }
 
-is_node_local_to_unit!()
+is_node_local_to_unit!();

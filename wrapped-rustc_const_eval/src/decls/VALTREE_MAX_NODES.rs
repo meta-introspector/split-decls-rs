@@ -4,4 +4,4 @@ macro_rules! VALTREE_MAX_NODES {
     };
 }
 
-VALTREE_MAX_NODES!()
+VALTREE_MAX_NODES!();

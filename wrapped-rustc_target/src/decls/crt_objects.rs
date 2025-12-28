@@ -4,4 +4,4 @@ macro_rules! crt_objects {
     };
 }
 
-crt_objects!()
+crt_objects!();

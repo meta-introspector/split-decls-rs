@@ -11,4 +11,4 @@ macro_rules! check_slice_len {
     };
 }
 
-check_slice_len!()
+check_slice_len!();

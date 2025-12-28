@@ -4,4 +4,4 @@ macro_rules! ARM64_RELOC_UNSIGNED {
     };
 }
 
-ARM64_RELOC_UNSIGNED!()
+ARM64_RELOC_UNSIGNED!();

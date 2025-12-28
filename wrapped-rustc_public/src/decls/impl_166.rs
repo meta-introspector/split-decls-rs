@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BridgeTys!();
-        DynKind!();
         Stable!();
+        DynKind!();
+        BridgeTys!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

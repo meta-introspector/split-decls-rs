@@ -28,4 +28,4 @@ macro_rules! replace_self {
     };
 }
 
-replace_self!()
+replace_self!();

@@ -4,4 +4,4 @@ macro_rules! DiagArgName {
     };
 }
 
-DiagArgName!()
+DiagArgName!();

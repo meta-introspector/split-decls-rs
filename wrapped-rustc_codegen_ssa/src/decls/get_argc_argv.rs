@@ -11,4 +11,4 @@ macro_rules! get_argc_argv {
     };
 }
 
-get_argc_argv!()
+get_argc_argv!();

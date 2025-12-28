@@ -4,4 +4,4 @@ macro_rules! LL_DELAY_LOAD {
     };
 }
 
-LL_DELAY_LOAD!()
+LL_DELAY_LOAD!();

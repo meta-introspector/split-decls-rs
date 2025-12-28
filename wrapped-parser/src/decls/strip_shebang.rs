@@ -4,4 +4,4 @@ macro_rules! strip_shebang {
     };
 }
 
-strip_shebang!()
+strip_shebang!();

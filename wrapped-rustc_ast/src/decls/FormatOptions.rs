@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FormatCount!();
+        FormatAlignment!();
         FormatDebugHex!();
         FormatSign!();
-        FormatAlignment!();
+        FormatCount!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FormatOptions {
     };
 }
 
-FormatOptions!()
+FormatOptions!();

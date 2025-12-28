@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DebugEventReceiver!();
-        Encoding!();
-        Span!();
         ErrorSink!();
+        Span!();
         EventReceiver!();
+        Encoding!();
+        DebugEventReceiver!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

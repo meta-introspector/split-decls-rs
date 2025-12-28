@@ -11,4 +11,4 @@ macro_rules! visibility_to_llvm {
     };
 }
 
-visibility_to_llvm!()
+visibility_to_llvm!();

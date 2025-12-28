@@ -4,4 +4,4 @@ macro_rules! R_ARM_RABS22 {
     };
 }
 
-R_ARM_RABS22!()
+R_ARM_RABS22!();

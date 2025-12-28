@@ -4,4 +4,4 @@ macro_rules! AttrCrateLevelOnlySugg {
     };
 }
 
-AttrCrateLevelOnlySugg!()
+AttrCrateLevelOnlySugg!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Version!();
         Op!();
         Comparator!();
+        Version!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! matches_impl {
     };
 }
 
-matches_impl!()
+matches_impl!();

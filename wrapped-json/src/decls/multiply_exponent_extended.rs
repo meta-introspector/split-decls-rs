@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Float!();
         ExtendedFloat!();
+        Float!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! multiply_exponent_extended {
     };
 }
 
-multiply_exponent_extended!()
+multiply_exponent_extended!();

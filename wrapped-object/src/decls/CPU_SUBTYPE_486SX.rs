@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_486SX {
     };
 }
 
-CPU_SUBTYPE_486SX!()
+CPU_SUBTYPE_486SX!();

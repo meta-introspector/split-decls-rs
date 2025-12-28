@@ -4,4 +4,4 @@ macro_rules! replace_function_call_with_placeholders {
     };
 }
 
-replace_function_call_with_placeholders!()
+replace_function_call_with_placeholders!();

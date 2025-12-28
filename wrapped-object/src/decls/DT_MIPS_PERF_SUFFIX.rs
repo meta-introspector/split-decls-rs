@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_PERF_SUFFIX {
     };
 }
 
-DT_MIPS_PERF_SUFFIX!()
+DT_MIPS_PERF_SUFFIX!();

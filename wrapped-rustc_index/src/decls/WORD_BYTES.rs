@@ -11,4 +11,4 @@ macro_rules! WORD_BYTES {
     };
 }
 
-WORD_BYTES!()
+WORD_BYTES!();

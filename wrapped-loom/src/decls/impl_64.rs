@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Execution!();
+        Thread!();
         Id!();
         Path!();
         Store!();
-        Thread!();
+        Execution!();
         Set!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_64 {
     };
 }
 
-impl_64!()
+impl_64!();

@@ -4,4 +4,4 @@ macro_rules! testers {
     };
 }
 
-testers!()
+testers!();

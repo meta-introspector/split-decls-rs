@@ -11,4 +11,4 @@ macro_rules! spawn_with_streaming_output {
     };
 }
 
-spawn_with_streaming_output!()
+spawn_with_streaming_output!();

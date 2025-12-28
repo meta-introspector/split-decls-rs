@@ -22,4 +22,4 @@ macro_rules! str_normalize_actual_duplicated {
     };
 }
 
-str_normalize_actual_duplicated!()
+str_normalize_actual_duplicated!();

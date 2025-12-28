@@ -11,4 +11,4 @@ macro_rules! collect_from_iter {
     };
 }
 
-collect_from_iter!()
+collect_from_iter!();

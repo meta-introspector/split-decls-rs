@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IsEnabled!();
         NoHashHasher!();
+        IsEnabled!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

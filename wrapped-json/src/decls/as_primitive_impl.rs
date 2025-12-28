@@ -11,4 +11,4 @@ macro_rules! as_primitive_impl {
     };
 }
 
-as_primitive_impl!()
+as_primitive_impl!();

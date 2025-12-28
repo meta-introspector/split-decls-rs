@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        TableEnumDeserializer!();
         Error!();
         TableMapAccess!();
         KeyDeserializer!();
-        TableEnumDeserializer!();
         Value!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_141 {
     };
 }
 
-impl_141!()
+impl_141!();

@@ -4,4 +4,4 @@ macro_rules! MAX_GLUED_PUNCT_LEN {
     };
 }
 
-MAX_GLUED_PUNCT_LEN!()
+MAX_GLUED_PUNCT_LEN!();

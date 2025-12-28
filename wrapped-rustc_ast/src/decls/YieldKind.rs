@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Walkable!();
         Expr!();
+        Walkable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! YieldKind {
     };
 }
 
-YieldKind!()
+YieldKind!();

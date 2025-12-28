@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_CONFLICT {
     };
 }
 
-SHT_MIPS_CONFLICT!()
+SHT_MIPS_CONFLICT!();

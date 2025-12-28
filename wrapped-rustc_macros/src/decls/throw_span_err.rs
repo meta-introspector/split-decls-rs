@@ -11,4 +11,4 @@ macro_rules! throw_span_err {
     };
 }
 
-throw_span_err!()
+throw_span_err!();

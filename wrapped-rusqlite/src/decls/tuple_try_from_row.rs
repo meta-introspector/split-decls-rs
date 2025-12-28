@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Row!();
-        Error!();
-        FromSql!();
         Result!();
+        Row!();
+        FromSql!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! tuple_try_from_row {
     };
 }
 
-tuple_try_from_row!()
+tuple_try_from_row!();

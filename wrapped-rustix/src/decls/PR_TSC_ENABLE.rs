@@ -4,4 +4,4 @@ macro_rules! PR_TSC_ENABLE {
     };
 }
 
-PR_TSC_ENABLE!()
+PR_TSC_ENABLE!();

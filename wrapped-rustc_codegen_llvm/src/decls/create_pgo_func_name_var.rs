@@ -4,4 +4,4 @@ macro_rules! create_pgo_func_name_var {
     };
 }
 
-create_pgo_func_name_var!()
+create_pgo_func_name_var!();

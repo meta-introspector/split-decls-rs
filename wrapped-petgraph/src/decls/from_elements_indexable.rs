@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Create!();
-        Element!();
-        Node!();
         Edge!();
+        Node!();
+        Element!();
+        Create!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! from_elements_indexable {
     };
 }
 
-from_elements_indexable!()
+from_elements_indexable!();

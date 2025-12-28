@@ -4,4 +4,4 @@ macro_rules! GenericsArgsErrExtend {
     };
 }
 
-GenericsArgsErrExtend!()
+GenericsArgsErrExtend!();

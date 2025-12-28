@@ -4,4 +4,4 @@ macro_rules! transition {
     };
 }
 
-transition!()
+transition!();

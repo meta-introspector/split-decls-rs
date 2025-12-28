@@ -4,4 +4,4 @@ macro_rules! INDENT_WEIGHT {
     };
 }
 
-INDENT_WEIGHT!()
+INDENT_WEIGHT!();

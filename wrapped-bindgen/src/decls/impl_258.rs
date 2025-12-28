@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TypeMap!();
         Dependencies!();
-        Value!();
         CppEnum!();
+        TypeMap!();
+        Value!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_258 {
     };
 }
 
-impl_258!()
+impl_258!();

@@ -11,4 +11,4 @@ macro_rules! error_from_handle {
     };
 }
 
-error_from_handle!()
+error_from_handle!();

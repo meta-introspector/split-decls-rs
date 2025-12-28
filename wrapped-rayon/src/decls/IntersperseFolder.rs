@@ -4,4 +4,4 @@ macro_rules! IntersperseFolder {
     };
 }
 
-IntersperseFolder!()
+IntersperseFolder!();

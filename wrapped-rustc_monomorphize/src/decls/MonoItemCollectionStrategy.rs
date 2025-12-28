@@ -4,4 +4,4 @@ macro_rules! MonoItemCollectionStrategy {
     };
 }
 
-MonoItemCollectionStrategy!()
+MonoItemCollectionStrategy!();

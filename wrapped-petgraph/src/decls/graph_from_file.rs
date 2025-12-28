@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Graph!();
         ParseFromDot!();
+        Graph!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! graph_from_file {
     };
 }
 
-graph_from_file!()
+graph_from_file!();

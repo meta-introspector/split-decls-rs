@@ -4,4 +4,4 @@ macro_rules! ReadyState {
     };
 }
 
-ReadyState!()
+ReadyState!();

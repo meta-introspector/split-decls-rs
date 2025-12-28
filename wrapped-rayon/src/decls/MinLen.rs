@@ -11,4 +11,4 @@ macro_rules! MinLen {
     };
 }
 
-MinLen!()
+MinLen!();

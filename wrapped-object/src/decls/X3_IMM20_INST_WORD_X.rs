@@ -4,4 +4,4 @@ macro_rules! X3_IMM20_INST_WORD_X {
     };
 }
 
-X3_IMM20_INST_WORD_X!()
+X3_IMM20_INST_WORD_X!();

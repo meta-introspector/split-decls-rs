@@ -4,4 +4,4 @@ macro_rules! PR_GET_CHILD_SUBREAPER {
     };
 }
 
-PR_GET_CHILD_SUBREAPER!()
+PR_GET_CHILD_SUBREAPER!();

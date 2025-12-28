@@ -4,4 +4,4 @@ macro_rules! F_LNNO {
     };
 }
 
-F_LNNO!()
+F_LNNO!();

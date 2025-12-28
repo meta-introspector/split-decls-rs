@@ -11,4 +11,4 @@ macro_rules! to_llvm_relocation_model {
     };
 }
 
-to_llvm_relocation_model!()
+to_llvm_relocation_model!();

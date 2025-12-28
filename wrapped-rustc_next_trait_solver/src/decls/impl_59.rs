@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AssembleCandidatesFrom!();
-        GoalKind!();
-        FailedCandidateInfo!();
-        AliasBoundKind!();
-        SolverDelegate!();
-        EvalCtxt!();
         Candidate!();
+        SolverDelegate!();
+        AliasBoundKind!();
+        FailedCandidateInfo!();
+        AssembleCandidatesFrom!();
+        EvalCtxt!();
+        GoalKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

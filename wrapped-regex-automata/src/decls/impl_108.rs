@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DFA!();
-        Regex!();
         Automaton!();
+        Regex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_108 {
     };
 }
 
-impl_108!()
+impl_108!();

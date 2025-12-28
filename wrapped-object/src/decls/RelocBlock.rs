@@ -4,4 +4,4 @@ macro_rules! RelocBlock {
     };
 }
 
-RelocBlock!()
+RelocBlock!();

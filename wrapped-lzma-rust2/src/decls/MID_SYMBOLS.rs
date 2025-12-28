@@ -4,4 +4,4 @@ macro_rules! MID_SYMBOLS {
     };
 }
 
-MID_SYMBOLS!()
+MID_SYMBOLS!();

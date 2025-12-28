@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         InvalidInstructionSet!();
-        MultipleInstructionSet!();
         UnsupportedInstructionSet!();
         BareInstructionSet!();
+        MultipleInstructionSet!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_instruction_set_attr {
     };
 }
 
-parse_instruction_set_attr!()
+parse_instruction_set_attr!();

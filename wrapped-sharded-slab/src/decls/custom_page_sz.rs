@@ -11,4 +11,4 @@ macro_rules! custom_page_sz {
     };
 }
 
-custom_page_sz!()
+custom_page_sz!();

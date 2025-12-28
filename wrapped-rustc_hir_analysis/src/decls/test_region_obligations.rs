@@ -4,4 +4,4 @@ macro_rules! test_region_obligations {
     };
 }
 
-test_region_obligations!()
+test_region_obligations!();

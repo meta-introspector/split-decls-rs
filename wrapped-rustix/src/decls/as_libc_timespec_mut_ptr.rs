@@ -11,4 +11,4 @@ macro_rules! as_libc_timespec_mut_ptr {
     };
 }
 
-as_libc_timespec_mut_ptr!()
+as_libc_timespec_mut_ptr!();

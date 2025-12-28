@@ -11,4 +11,4 @@ macro_rules! relevant_lib {
     };
 }
 
-relevant_lib!()
+relevant_lib!();

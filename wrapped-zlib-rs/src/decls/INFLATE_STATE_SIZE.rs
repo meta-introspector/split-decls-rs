@@ -11,4 +11,4 @@ macro_rules! INFLATE_STATE_SIZE {
     };
 }
 
-INFLATE_STATE_SIZE!()
+INFLATE_STATE_SIZE!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileHeader!();
         ReadRef!();
+        FileHeader!();
         SymbolTable!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! SymbolIterator {
     };
 }
 
-SymbolIterator!()
+SymbolIterator!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ref!();
         Thread!();
         State!();
-        Ref!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Schedule {
     };
 }
 
-Schedule!()
+Schedule!();

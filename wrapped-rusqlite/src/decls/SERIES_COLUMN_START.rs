@@ -4,4 +4,4 @@ macro_rules! SERIES_COLUMN_START {
     };
 }
 
-SERIES_COLUMN_START!()
+SERIES_COLUMN_START!();

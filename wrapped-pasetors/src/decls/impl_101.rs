@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        UntrustedToken!();
-        V3!();
         PublicToken!();
         TrustedToken!();
-        Public!();
+        V3!();
         AsymmetricPublicKey!();
-        AsymmetricSecretKey!();
+        Public!();
         Error!();
+        AsymmetricSecretKey!();
+        UntrustedToken!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

@@ -4,4 +4,4 @@ macro_rules! exponent {
     };
 }
 
-exponent!()
+exponent!();

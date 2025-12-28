@@ -4,4 +4,4 @@ macro_rules! PhantomNotSend {
     };
 }
 
-PhantomNotSend!()
+PhantomNotSend!();

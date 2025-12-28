@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Time!();
         Dominators!();
+        Time!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! simple_fast {
     };
 }
 
-simple_fast!()
+simple_fast!();

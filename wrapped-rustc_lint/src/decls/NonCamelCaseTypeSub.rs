@@ -4,4 +4,4 @@ macro_rules! NonCamelCaseTypeSub {
     };
 }
 
-NonCamelCaseTypeSub!()
+NonCamelCaseTypeSub!();

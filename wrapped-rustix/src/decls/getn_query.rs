@@ -11,4 +11,4 @@ macro_rules! getn_query {
     };
 }
 
-getn_query!()
+getn_query!();

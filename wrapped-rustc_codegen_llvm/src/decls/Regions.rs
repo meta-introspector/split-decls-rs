@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BranchRegion!();
         CodeRegion!();
+        BranchRegion!();
         ExpansionRegion!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Regions {
     };
 }
 
-Regions!()
+Regions!();

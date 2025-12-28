@@ -4,4 +4,4 @@ macro_rules! UNDEFINED {
     };
 }
 
-UNDEFINED!()
+UNDEFINED!();

@@ -4,4 +4,4 @@ macro_rules! mir_assign_valid_types {
     };
 }
 
-mir_assign_valid_types!()
+mir_assign_valid_types!();

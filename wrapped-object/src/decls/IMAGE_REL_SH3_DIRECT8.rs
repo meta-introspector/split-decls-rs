@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_SH3_DIRECT8 {
     };
 }
 
-IMAGE_REL_SH3_DIRECT8!()
+IMAGE_REL_SH3_DIRECT8!();

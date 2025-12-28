@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Cipher!();
         Aes128!();
         AesKind!();
-        Cipher!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

@@ -4,4 +4,4 @@ macro_rules! QueryJobId {
     };
 }
 
-QueryJobId!()
+QueryJobId!();

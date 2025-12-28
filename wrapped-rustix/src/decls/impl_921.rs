@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         DumpableBehavior!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_921 {
     };
 }
 
-impl_921!()
+impl_921!();

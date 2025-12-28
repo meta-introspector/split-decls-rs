@@ -4,4 +4,4 @@ macro_rules! path_for_name {
     };
 }
 
-path_for_name!()
+path_for_name!();

@@ -4,4 +4,4 @@ macro_rules! unity_proof {
     };
 }
 
-unity_proof!()
+unity_proof!();

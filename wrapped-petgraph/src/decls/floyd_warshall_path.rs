@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Time!();
         NegativeCycle!();
-        Graph!();
+        NodeIndex!();
+        BoundedMeasure!();
         Directed!();
         EdgeRef!();
-        NodeIndex!();
-        Time!();
-        BoundedMeasure!();
+        Graph!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! floyd_warshall_path {
     };
 }
 
-floyd_warshall_path!()
+floyd_warshall_path!();

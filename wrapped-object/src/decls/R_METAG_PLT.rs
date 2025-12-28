@@ -4,4 +4,4 @@ macro_rules! R_METAG_PLT {
     };
 }
 
-R_METAG_PLT!()
+R_METAG_PLT!();

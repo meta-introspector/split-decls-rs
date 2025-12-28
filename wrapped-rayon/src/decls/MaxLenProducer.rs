@@ -4,4 +4,4 @@ macro_rules! MaxLenProducer {
     };
 }
 
-MaxLenProducer!()
+MaxLenProducer!();

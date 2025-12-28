@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        Scalar!();
-        Niche!();
-        Align!();
-        WrappingRange!();
-        Integer!();
-        TagEncoding!();
-        LayoutCalculatorResult!();
-        LayoutData!();
-        Primitive!();
-        HasDataLayout!();
-        LayoutCalculatorError!();
         NicheBias!();
-        Variants!();
-        LayoutCalculator!();
-        AbiAlign!();
-        Size!();
+        Scalar!();
+        HasDataLayout!();
         FieldsShape!();
-        BackendRepr!();
         StructKind!();
+        LayoutCalculatorResult!();
+        Variants!();
+        Align!();
+        Size!();
+        BackendRepr!();
+        LayoutCalculator!();
+        WrappingRange!();
+        AbiAlign!();
+        Primitive!();
+        TagEncoding!();
+        Niche!();
         ReprOptions!();
+        Integer!();
+        LayoutCalculatorError!();
+        LayoutData!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

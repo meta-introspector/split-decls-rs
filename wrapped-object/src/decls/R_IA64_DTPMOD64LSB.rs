@@ -4,4 +4,4 @@ macro_rules! R_IA64_DTPMOD64LSB {
     };
 }
 
-R_IA64_DTPMOD64LSB!()
+R_IA64_DTPMOD64LSB!();

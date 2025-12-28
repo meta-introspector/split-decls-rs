@@ -4,4 +4,4 @@ macro_rules! use_panic_2021 {
     };
 }
 
-use_panic_2021!()
+use_panic_2021!();

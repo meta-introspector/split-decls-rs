@@ -11,4 +11,4 @@ macro_rules! ioctl_write_buf {
     };
 }
 
-ioctl_write_buf!()
+ioctl_write_buf!();

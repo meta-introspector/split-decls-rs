@@ -4,4 +4,4 @@ macro_rules! highlights {
     };
 }
 
-highlights!()
+highlights!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
-        UpdateSeq!();
-        UpdateProducer!();
         Producer!();
+        UpdateProducer!();
+        IntoIter!();
         UpdateFolder!();
         Folder!();
+        UpdateSeq!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_974 {
     };
 }
 
-impl_974!()
+impl_974!();

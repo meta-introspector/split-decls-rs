@@ -11,4 +11,4 @@ macro_rules! qc_nfc {
     };
 }
 
-qc_nfc!()
+qc_nfc!();

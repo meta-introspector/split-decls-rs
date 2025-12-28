@@ -4,4 +4,4 @@ macro_rules! PLATFORM_BRIDGEOS {
     };
 }
 
-PLATFORM_BRIDGEOS!()
+PLATFORM_BRIDGEOS!();

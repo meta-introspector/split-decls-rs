@@ -4,4 +4,4 @@ macro_rules! modify_file {
     };
 }
 
-modify_file!()
+modify_file!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         HashValue!();
-        GetDisjointMutError!();
         IndexMap!();
+        GetDisjointMutError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

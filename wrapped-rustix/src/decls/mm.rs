@@ -4,4 +4,4 @@ macro_rules! mm {
     };
 }
 
-mm!()
+mm!();

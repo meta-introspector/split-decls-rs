@@ -4,4 +4,4 @@ macro_rules! check_const_item {
     };
 }
 
-check_const_item!()
+check_const_item!();

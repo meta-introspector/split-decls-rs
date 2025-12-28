@@ -4,4 +4,4 @@ macro_rules! ml_kem {
     };
 }
 
-ml_kem!()
+ml_kem!();

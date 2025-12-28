@@ -4,4 +4,4 @@ macro_rules! EM_RS08 {
     };
 }
 
-EM_RS08!()
+EM_RS08!();

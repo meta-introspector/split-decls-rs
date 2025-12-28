@@ -4,4 +4,4 @@ macro_rules! check_type_defn {
     };
 }
 
-check_type_defn!()
+check_type_defn!();

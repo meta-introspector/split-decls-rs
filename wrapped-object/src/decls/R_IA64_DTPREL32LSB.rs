@@ -4,4 +4,4 @@ macro_rules! R_IA64_DTPREL32LSB {
     };
 }
 
-R_IA64_DTPREL32LSB!()
+R_IA64_DTPREL32LSB!();

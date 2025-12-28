@@ -4,4 +4,4 @@ macro_rules! LC_VERSION_MIN_WATCHOS {
     };
 }
 
-LC_VERSION_MIN_WATCHOS!()
+LC_VERSION_MIN_WATCHOS!();

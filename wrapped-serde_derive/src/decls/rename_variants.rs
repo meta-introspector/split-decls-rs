@@ -4,4 +4,4 @@ macro_rules! rename_variants {
     };
 }
 
-rename_variants!()
+rename_variants!();

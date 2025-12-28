@@ -4,4 +4,4 @@ macro_rules! partition_in_blocks {
     };
 }
 
-partition_in_blocks!()
+partition_in_blocks!();

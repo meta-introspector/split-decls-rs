@@ -12,4 +12,4 @@ macro_rules! is_signed_error {
     };
 }
 
-is_signed_error!()
+is_signed_error!();

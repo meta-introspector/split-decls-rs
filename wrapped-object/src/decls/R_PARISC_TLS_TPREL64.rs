@@ -4,4 +4,4 @@ macro_rules! R_PARISC_TLS_TPREL64 {
     };
 }
 
-R_PARISC_TLS_TPREL64!()
+R_PARISC_TLS_TPREL64!();

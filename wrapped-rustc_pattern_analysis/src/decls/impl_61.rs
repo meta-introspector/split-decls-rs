@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PatternColumn!();
-        DeconstructedPat!();
+        Constructor!();
         PatOrWild!();
         SplitConstructorSet!();
-        Constructor!();
+        DeconstructedPat!();
         PatCx!();
+        PatternColumn!();
         MatchArm!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

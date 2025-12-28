@@ -11,4 +11,4 @@ macro_rules! join_path_syms {
     };
 }
 
-join_path_syms!()
+join_path_syms!();

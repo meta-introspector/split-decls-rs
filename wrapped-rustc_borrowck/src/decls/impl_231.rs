@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AccessFactsExtractor!();
         DefUse!();
+        AccessFactsExtractor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_231 {
     };
 }
 
-impl_231!()
+impl_231!();

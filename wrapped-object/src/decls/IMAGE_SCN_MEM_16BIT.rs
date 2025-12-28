@@ -4,4 +4,4 @@ macro_rules! IMAGE_SCN_MEM_16BIT {
     };
 }
 
-IMAGE_SCN_MEM_16BIT!()
+IMAGE_SCN_MEM_16BIT!();

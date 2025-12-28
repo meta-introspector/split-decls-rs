@@ -4,4 +4,4 @@ macro_rules! header_from_level {
     };
 }
 
-header_from_level!()
+header_from_level!();

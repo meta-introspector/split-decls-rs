@@ -4,4 +4,4 @@ macro_rules! PrefilterState {
     };
 }
 
-PrefilterState!()
+PrefilterState!();

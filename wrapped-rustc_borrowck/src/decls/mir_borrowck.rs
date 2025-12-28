@@ -11,4 +11,4 @@ macro_rules! mir_borrowck {
     };
 }
 
-mir_borrowck!()
+mir_borrowck!();

@@ -4,4 +4,4 @@ macro_rules! StreamWriter {
     };
 }
 
-StreamWriter!()
+StreamWriter!();

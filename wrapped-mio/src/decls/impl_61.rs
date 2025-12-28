@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Token!();
-        Registry!();
         Interest!();
+        Registry!();
         Source!();
+        Token!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

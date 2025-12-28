@@ -4,4 +4,4 @@ macro_rules! invalid_import_macros_missing_filename {
     };
 }
 
-invalid_import_macros_missing_filename!()
+invalid_import_macros_missing_filename!();

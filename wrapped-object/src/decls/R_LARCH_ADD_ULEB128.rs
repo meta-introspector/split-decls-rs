@@ -4,4 +4,4 @@ macro_rules! R_LARCH_ADD_ULEB128 {
     };
 }
 
-R_LARCH_ADD_ULEB128!()
+R_LARCH_ADD_ULEB128!();

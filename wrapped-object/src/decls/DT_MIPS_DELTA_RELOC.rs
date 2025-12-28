@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_DELTA_RELOC {
     };
 }
 
-DT_MIPS_DELTA_RELOC!()
+DT_MIPS_DELTA_RELOC!();

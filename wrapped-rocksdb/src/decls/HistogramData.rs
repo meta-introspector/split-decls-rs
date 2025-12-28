@@ -4,4 +4,4 @@ macro_rules! HistogramData {
     };
 }
 
-HistogramData!()
+HistogramData!();

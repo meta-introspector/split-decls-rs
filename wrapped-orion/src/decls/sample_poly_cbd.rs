@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
-        Shake256!();
         FieldElement!();
+        Shake256!();
         RingElement!();
+        UnknownCryptoError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! sample_poly_cbd {
     };
 }
 
-sample_poly_cbd!()
+sample_poly_cbd!();

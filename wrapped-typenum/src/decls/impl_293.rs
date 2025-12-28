@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Equal!();
-        B1!();
         IsGreaterOrEqualPrivate!();
+        B1!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_293 {
     };
 }
 
-impl_293!()
+impl_293!();

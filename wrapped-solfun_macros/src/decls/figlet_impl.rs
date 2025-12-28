@@ -4,4 +4,4 @@ macro_rules! figlet_impl {
     };
 }
 
-figlet_impl!()
+figlet_impl!();

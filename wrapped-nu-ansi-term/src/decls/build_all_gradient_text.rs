@@ -12,4 +12,4 @@ macro_rules! build_all_gradient_text {
     };
 }
 
-build_all_gradient_text!()
+build_all_gradient_text!();

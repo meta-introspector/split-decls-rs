@@ -11,4 +11,4 @@ macro_rules! test_mixed_order {
     };
 }
 
-test_mixed_order!()
+test_mixed_order!();

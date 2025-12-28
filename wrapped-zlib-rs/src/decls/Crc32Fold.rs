@@ -4,4 +4,4 @@ macro_rules! Crc32Fold {
     };
 }
 
-Crc32Fold!()
+Crc32Fold!();

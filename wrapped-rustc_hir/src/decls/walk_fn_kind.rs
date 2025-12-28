@@ -13,4 +13,4 @@ macro_rules! walk_fn_kind {
     };
 }
 
-walk_fn_kind!()
+walk_fn_kind!();

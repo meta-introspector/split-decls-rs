@@ -4,4 +4,4 @@ macro_rules! rustfmt {
     };
 }
 
-rustfmt!()
+rustfmt!();

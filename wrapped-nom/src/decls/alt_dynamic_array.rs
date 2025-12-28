@@ -11,4 +11,4 @@ macro_rules! alt_dynamic_array {
     };
 }
 
-alt_dynamic_array!()
+alt_dynamic_array!();

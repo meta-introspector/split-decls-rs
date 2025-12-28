@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Lint!();
         Optimizations!();
+        Lint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! run_analysis_to_runtime_passes {
     };
 }
 
-run_analysis_to_runtime_passes!()
+run_analysis_to_runtime_passes!();

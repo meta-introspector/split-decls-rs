@@ -4,4 +4,4 @@ macro_rules! R_ARM_LDC_SB_G2 {
     };
 }
 
-R_ARM_LDC_SB_G2!()
+R_ARM_LDC_SB_G2!();

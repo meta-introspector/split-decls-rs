@@ -4,4 +4,4 @@ macro_rules! Dfa {
     };
 }
 
-Dfa!()
+Dfa!();

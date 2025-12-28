@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Value!();
-        TypeName!();
-        RowIterator!();
         Type!();
+        Value!();
+        RowIterator!();
+        TypeName!();
         CppFn!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

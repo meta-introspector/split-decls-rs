@@ -11,4 +11,4 @@ macro_rules! x86_64_sysv64_va_arg_from_memory {
     };
 }
 
-x86_64_sysv64_va_arg_from_memory!()
+x86_64_sysv64_va_arg_from_memory!();

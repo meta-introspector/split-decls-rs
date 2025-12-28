@@ -4,4 +4,4 @@ macro_rules! TargetFeatureOnMain {
     };
 }
 
-TargetFeatureOnMain!()
+TargetFeatureOnMain!();

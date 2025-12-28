@@ -4,4 +4,4 @@ macro_rules! emoji_to_math {
     };
 }
 
-emoji_to_math!()
+emoji_to_math!();

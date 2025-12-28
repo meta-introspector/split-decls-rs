@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExprKind!();
         Counter!();
+        ExprKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CounterExpression {
     };
 }
 
-CounterExpression!()
+CounterExpression!();

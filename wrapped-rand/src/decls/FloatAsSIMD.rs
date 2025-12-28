@@ -4,4 +4,4 @@ macro_rules! FloatAsSIMD {
     };
 }
 
-FloatAsSIMD!()
+FloatAsSIMD!();

@@ -4,4 +4,4 @@ macro_rules! RustConfig {
     };
 }
 
-RustConfig!()
+RustConfig!();

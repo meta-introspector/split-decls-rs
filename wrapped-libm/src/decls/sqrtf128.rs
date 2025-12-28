@@ -4,4 +4,4 @@ macro_rules! sqrtf128 {
     };
 }
 
-sqrtf128!()
+sqrtf128!();

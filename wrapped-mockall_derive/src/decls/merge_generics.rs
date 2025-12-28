@@ -4,4 +4,4 @@ macro_rules! merge_generics {
     };
 }
 
-merge_generics!()
+merge_generics!();

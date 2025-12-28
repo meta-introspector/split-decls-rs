@@ -4,4 +4,4 @@ macro_rules! delegate_iterator {
     };
 }
 
-delegate_iterator!()
+delegate_iterator!();

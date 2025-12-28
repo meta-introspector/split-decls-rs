@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        TokenTree!();
+        TokenKind!();
+        HasTokens!();
         TokenStream!();
         Delimiter!();
-        HasTokens!();
-        TokenTree!();
-        AttrStyle!();
-        TokenKind!();
-        DelimSpan!();
         DelimSpacing!();
-        IdentIsRaw!();
-        Spacing!();
-        HasAttrs!();
-        TokenStreamIter!();
         Token!();
+        HasAttrs!();
+        Spacing!();
+        DelimSpan!();
+        IdentIsRaw!();
+        TokenStreamIter!();
+        AttrStyle!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_445 {
     };
 }
 
-impl_445!()
+impl_445!();

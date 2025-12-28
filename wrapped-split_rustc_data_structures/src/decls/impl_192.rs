@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Sccs!();
         NumEdges!();
+        Sccs!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_192 {
     };
 }
 
-impl_192!()
+impl_192!();

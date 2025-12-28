@@ -18,4 +18,4 @@ macro_rules! match_within_macro_invocation {
     };
 }
 
-match_within_macro_invocation!()
+match_within_macro_invocation!();

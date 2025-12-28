@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Macros20NormalizedIdent!();
         Ident!();
+        Macros20NormalizedIdent!();
         Symbol!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_191 {
     };
 }
 
-impl_191!()
+impl_191!();

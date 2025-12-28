@@ -4,4 +4,4 @@ macro_rules! InferredBounds {
     };
 }
 
-InferredBounds!()
+InferredBounds!();

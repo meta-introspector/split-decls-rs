@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IResult!();
-        Error!();
         HexDisplay!();
+        IResult!();
         Err!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! dbg_dmp {
     };
 }
 
-dbg_dmp!()
+dbg_dmp!();

@@ -4,4 +4,4 @@ macro_rules! POISON_BIT {
     };
 }
 
-POISON_BIT!()
+POISON_BIT!();

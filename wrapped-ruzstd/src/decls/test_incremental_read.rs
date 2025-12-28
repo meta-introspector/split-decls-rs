@@ -11,4 +11,4 @@ macro_rules! test_incremental_read {
     };
 }
 
-test_incremental_read!()
+test_incremental_read!();

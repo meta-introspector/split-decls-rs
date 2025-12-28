@@ -4,4 +4,4 @@ macro_rules! GEORGIAN {
     };
 }
 
-GEORGIAN!()
+GEORGIAN!();

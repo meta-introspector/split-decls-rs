@@ -4,4 +4,4 @@ macro_rules! GrammarSource {
     };
 }
 
-GrammarSource!()
+GrammarSource!();

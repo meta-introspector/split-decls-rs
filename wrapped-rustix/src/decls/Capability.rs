@@ -4,4 +4,4 @@ macro_rules! Capability {
     };
 }
 
-Capability!()
+Capability!();

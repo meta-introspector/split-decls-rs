@@ -11,4 +11,4 @@ macro_rules! validate_let_expr {
     };
 }
 
-validate_let_expr!()
+validate_let_expr!();

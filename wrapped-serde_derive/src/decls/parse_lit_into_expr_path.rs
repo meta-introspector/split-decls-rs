@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ctxt!();
         Symbol!();
+        Ctxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_lit_into_expr_path {
     };
 }
 
-parse_lit_into_expr_path!()
+parse_lit_into_expr_path!();

@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_POWERPC {
     };
 }
 
-CPU_TYPE_POWERPC!()
+CPU_TYPE_POWERPC!();

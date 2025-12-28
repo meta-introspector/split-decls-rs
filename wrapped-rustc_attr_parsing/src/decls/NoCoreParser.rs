@@ -4,4 +4,4 @@ macro_rules! NoCoreParser {
     };
 }
 
-NoCoreParser!()
+NoCoreParser!();

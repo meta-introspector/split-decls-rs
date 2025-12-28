@@ -4,4 +4,4 @@ macro_rules! ODK_HWAND {
     };
 }
 
-ODK_HWAND!()
+ODK_HWAND!();

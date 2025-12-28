@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenUnitDebugContext!();
         ChecksumKind!();
+        CodegenUnitDebugContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! build_compile_unit_di_node {
     };
 }
 
-build_compile_unit_di_node!()
+build_compile_unit_di_node!();

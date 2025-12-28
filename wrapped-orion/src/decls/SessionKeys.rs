@@ -4,4 +4,4 @@ macro_rules! SessionKeys {
     };
 }
 
-SessionKeys!()
+SessionKeys!();

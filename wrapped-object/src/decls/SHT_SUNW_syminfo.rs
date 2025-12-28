@@ -4,4 +4,4 @@ macro_rules! SHT_SUNW_syminfo {
     };
 }
 
-SHT_SUNW_syminfo!()
+SHT_SUNW_syminfo!();

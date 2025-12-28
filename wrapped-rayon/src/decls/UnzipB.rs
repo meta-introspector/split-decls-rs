@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        UnzipOp!();
+        ParallelIterator!();
         UnindexedConsumer!();
         Consumer!();
-        ParallelIterator!();
-        UnzipOp!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! UnzipB {
     };
 }
 
-UnzipB!()
+UnzipB!();

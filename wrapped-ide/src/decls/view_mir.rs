@@ -4,4 +4,4 @@ macro_rules! view_mir {
     };
 }
 
-view_mir!()
+view_mir!();

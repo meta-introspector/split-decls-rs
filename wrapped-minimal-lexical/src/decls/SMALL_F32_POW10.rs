@@ -4,4 +4,4 @@ macro_rules! SMALL_F32_POW10 {
     };
 }
 
-SMALL_F32_POW10!()
+SMALL_F32_POW10!();

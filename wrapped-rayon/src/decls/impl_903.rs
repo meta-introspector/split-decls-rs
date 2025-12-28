@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
         Reducer!();
+        UnindexedConsumer!();
         TryFoldConsumer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_903 {
     };
 }
 
-impl_903!()
+impl_903!();

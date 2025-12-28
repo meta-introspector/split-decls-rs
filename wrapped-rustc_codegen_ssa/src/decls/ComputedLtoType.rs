@@ -4,4 +4,4 @@ macro_rules! ComputedLtoType {
     };
 }
 
-ComputedLtoType!()
+ComputedLtoType!();

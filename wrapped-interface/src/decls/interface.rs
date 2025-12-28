@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Guid!();
         Interface!();
+        Guid!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! interface {
     };
 }
 
-interface!()
+interface!();

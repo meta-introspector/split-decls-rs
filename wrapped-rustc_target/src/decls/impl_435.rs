@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TargetWarnings!();
-        LinkSelfContainedDefault!();
-        SanitizerSet!();
         AbiMap!();
-        Target!();
-        TargetFamiliesJson!();
-        TargetKind!();
+        TargetWarnings!();
         TargetSpecJson!();
+        SanitizerSet!();
+        Target!();
+        LinkSelfContainedDefault!();
+        TargetKind!();
+        TargetFamiliesJson!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_435 {
     };
 }
 
-impl_435!()
+impl_435!();

@@ -13,4 +13,4 @@ macro_rules! new_map_for_grouping {
     };
 }
 
-new_map_for_grouping!()
+new_map_for_grouping!();

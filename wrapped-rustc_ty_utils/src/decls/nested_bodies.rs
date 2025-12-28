@@ -4,4 +4,4 @@ macro_rules! nested_bodies {
     };
 }
 
-nested_bodies!()
+nested_bodies!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Hir!();
-        Alternation!();
-        Repetition!();
         Capture!();
+        Repetition!();
+        Alternation!();
         Concat!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! Frame {
     };
 }
 
-Frame!()
+Frame!();

@@ -4,4 +4,4 @@ macro_rules! NonConstDerefCoercion {
     };
 }
 
-NonConstDerefCoercion!()
+NonConstDerefCoercion!();

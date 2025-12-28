@@ -4,4 +4,4 @@ macro_rules! ErrorConvert {
     };
 }
 
-ErrorConvert!()
+ErrorConvert!();

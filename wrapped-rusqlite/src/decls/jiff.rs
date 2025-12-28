@@ -4,4 +4,4 @@ macro_rules! jiff {
     };
 }
 
-jiff!()
+jiff!();

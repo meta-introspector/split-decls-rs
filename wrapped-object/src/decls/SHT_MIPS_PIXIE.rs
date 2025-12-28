@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_PIXIE {
     };
 }
 
-SHT_MIPS_PIXIE!()
+SHT_MIPS_PIXIE!();

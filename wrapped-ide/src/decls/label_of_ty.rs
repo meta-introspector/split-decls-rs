@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InlayHintLabelBuilder!();
         InlayHintsConfig!();
         InlayHintLabel!();
-        InlayHintLabelBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! label_of_ty {
     };
 }
 
-label_of_ty!()
+label_of_ty!();

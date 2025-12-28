@@ -11,4 +11,4 @@ macro_rules! dup3 {
     };
 }
 
-dup3!()
+dup3!();

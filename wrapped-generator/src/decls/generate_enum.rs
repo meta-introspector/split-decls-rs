@@ -11,4 +11,4 @@ macro_rules! generate_enum {
     };
 }
 
-generate_enum!()
+generate_enum!();

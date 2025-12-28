@@ -12,4 +12,4 @@ macro_rules! insert_all {
     };
 }
 
-insert_all!()
+insert_all!();

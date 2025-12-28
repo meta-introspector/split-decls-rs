@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        RustcMirAttrs!();
+        DuplicateValuesFor!();
+        UnknownFormatter!();
         RequiresAnArgument!();
         PathMustEndInFilename!();
-        RustcMirAttrs!();
-        UnknownFormatter!();
-        DuplicateValuesFor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

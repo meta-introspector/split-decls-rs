@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         GenericArgs!();
-        Relate!();
         Interner!();
+        Relate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ExprConst {
     };
 }
 
-ExprConst!()
+ExprConst!();

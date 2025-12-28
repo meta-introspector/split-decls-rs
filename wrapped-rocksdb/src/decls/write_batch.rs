@@ -4,4 +4,4 @@ macro_rules! write_batch {
     };
 }
 
-write_batch!()
+write_batch!();

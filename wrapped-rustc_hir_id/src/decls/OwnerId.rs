@@ -4,4 +4,4 @@ macro_rules! OwnerId {
     };
 }
 
-OwnerId!()
+OwnerId!();

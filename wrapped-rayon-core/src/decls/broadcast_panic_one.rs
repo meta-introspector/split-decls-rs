@@ -11,4 +11,4 @@ macro_rules! broadcast_panic_one {
     };
 }
 
-broadcast_panic_one!()
+broadcast_panic_one!();

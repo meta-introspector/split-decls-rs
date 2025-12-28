@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Undirected!();
         Graph!();
+        Undirected!();
         Create!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_684 {
     };
 }
 
-impl_684!()
+impl_684!();

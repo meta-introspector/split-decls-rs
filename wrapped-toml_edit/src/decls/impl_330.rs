@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Document!();
         Deserializer!();
+        Document!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_330 {
     };
 }
 
-impl_330!()
+impl_330!();

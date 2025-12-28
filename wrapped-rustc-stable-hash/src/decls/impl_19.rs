@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        State!();
         Sip13Rounds!();
         SipHasher128!();
-        State!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

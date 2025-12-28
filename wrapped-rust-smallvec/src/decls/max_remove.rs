@@ -11,4 +11,4 @@ macro_rules! max_remove {
     };
 }
 
-max_remove!()
+max_remove!();

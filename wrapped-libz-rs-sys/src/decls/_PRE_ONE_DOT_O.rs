@@ -4,4 +4,4 @@ macro_rules! _PRE_ONE_DOT_O {
     };
 }
 
-_PRE_ONE_DOT_O!()
+_PRE_ONE_DOT_O!();

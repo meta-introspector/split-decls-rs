@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Read!();
-        Result!();
-        ErrorCode!();
-        BorrowedRawDeserializer!();
         Value!();
         Position!();
         Reference!();
+        BorrowedRawDeserializer!();
+        Result!();
+        ErrorCode!();
         SliceRead!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_581 {
     };
 }
 
-impl_581!()
+impl_581!();

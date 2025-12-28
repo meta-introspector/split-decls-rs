@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        Error!();
         BadScheme!();
+        Error!();
+        Kind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! url_bad_scheme {
     };
 }
 
-url_bad_scheme!()
+url_bad_scheme!();

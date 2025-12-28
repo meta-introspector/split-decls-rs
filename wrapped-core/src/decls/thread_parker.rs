@@ -4,4 +4,4 @@ macro_rules! thread_parker {
     };
 }
 
-thread_parker!()
+thread_parker!();

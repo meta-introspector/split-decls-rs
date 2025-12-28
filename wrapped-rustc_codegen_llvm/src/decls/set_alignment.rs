@@ -4,4 +4,4 @@ macro_rules! set_alignment {
     };
 }
 
-set_alignment!()
+set_alignment!();

@@ -4,4 +4,4 @@ macro_rules! DEFAULT_KEY_PATH_DECOR {
     };
 }
 
-DEFAULT_KEY_PATH_DECOR!()
+DEFAULT_KEY_PATH_DECOR!();

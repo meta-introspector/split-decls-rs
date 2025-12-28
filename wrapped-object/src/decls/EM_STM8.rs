@@ -4,4 +4,4 @@ macro_rules! EM_STM8 {
     };
 }
 
-EM_STM8!()
+EM_STM8!();

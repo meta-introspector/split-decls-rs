@@ -4,4 +4,4 @@ macro_rules! regex_adapter {
     };
 }
 
-regex_adapter!()
+regex_adapter!();

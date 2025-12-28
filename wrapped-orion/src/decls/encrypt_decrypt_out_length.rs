@@ -11,4 +11,4 @@ macro_rules! encrypt_decrypt_out_length {
     };
 }
 
-encrypt_decrypt_out_length!()
+encrypt_decrypt_out_length!();

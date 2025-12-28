@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PickKind!();
         Candidate!();
         AutorefOrPtrAdjustment!();
-        PickKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Pick {
     };
 }
 
-Pick!()
+Pick!();

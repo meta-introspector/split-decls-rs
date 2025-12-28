@@ -4,4 +4,4 @@ macro_rules! supported_locales {
     };
 }
 
-supported_locales!()
+supported_locales!();

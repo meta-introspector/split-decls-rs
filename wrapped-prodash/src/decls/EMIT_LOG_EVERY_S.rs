@@ -4,4 +4,4 @@ macro_rules! EMIT_LOG_EVERY_S {
     };
 }
 
-EMIT_LOG_EVERY_S!()
+EMIT_LOG_EVERY_S!();

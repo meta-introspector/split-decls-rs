@@ -11,4 +11,4 @@ macro_rules! dummy_spanned {
     };
 }
 
-dummy_spanned!()
+dummy_spanned!();

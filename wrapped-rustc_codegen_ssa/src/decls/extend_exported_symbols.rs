@@ -4,4 +4,4 @@ macro_rules! extend_exported_symbols {
     };
 }
 
-extend_exported_symbols!()
+extend_exported_symbols!();

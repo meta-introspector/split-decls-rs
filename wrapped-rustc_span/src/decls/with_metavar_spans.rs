@@ -11,4 +11,4 @@ macro_rules! with_metavar_spans {
     };
 }
 
-with_metavar_spans!()
+with_metavar_spans!();

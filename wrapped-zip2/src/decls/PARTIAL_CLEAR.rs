@@ -4,4 +4,4 @@ macro_rules! PARTIAL_CLEAR {
     };
 }
 
-PARTIAL_CLEAR!()
+PARTIAL_CLEAR!();

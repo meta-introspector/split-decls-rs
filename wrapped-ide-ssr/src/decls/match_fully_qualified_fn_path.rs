@@ -14,4 +14,4 @@ macro_rules! match_fully_qualified_fn_path {
     };
 }
 
-match_fully_qualified_fn_path!()
+match_fully_qualified_fn_path!();

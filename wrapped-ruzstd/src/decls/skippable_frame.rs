@@ -11,4 +11,4 @@ macro_rules! skippable_frame {
     };
 }
 
-skippable_frame!()
+skippable_frame!();

@@ -4,4 +4,4 @@ macro_rules! borrowed_locals {
     };
 }
 
-borrowed_locals!()
+borrowed_locals!();

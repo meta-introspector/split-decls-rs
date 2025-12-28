@@ -4,4 +4,4 @@ macro_rules! EM_FR20 {
     };
 }
 
-EM_FR20!()
+EM_FR20!();

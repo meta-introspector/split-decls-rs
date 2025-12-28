@@ -11,4 +11,4 @@ macro_rules! attach_allow_change {
     };
 }
 
-attach_allow_change!()
+attach_allow_change!();

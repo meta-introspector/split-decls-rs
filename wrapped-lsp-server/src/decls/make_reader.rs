@@ -12,4 +12,4 @@ macro_rules! make_reader {
     };
 }
 
-make_reader!()
+make_reader!();

@@ -4,4 +4,4 @@ macro_rules! BASE_64 {
     };
 }
 
-BASE_64!()
+BASE_64!();

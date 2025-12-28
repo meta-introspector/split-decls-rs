@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        UInt!();
-        PrivatePowOut!();
-        Bit!();
-        B1!();
         Square!();
-        Unsigned!();
-        Prod!();
+        Bit!();
         PrivatePow!();
+        UInt!();
+        Unsigned!();
+        B1!();
+        Prod!();
+        PrivatePowOut!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_444 {
     };
 }
 
-impl_444!()
+impl_444!();

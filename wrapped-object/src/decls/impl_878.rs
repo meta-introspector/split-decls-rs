@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NoDynamicRelocationIterator!();
-        Relocation!();
         Item!();
+        Relocation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_878 {
     };
 }
 
-impl_878!()
+impl_878!();

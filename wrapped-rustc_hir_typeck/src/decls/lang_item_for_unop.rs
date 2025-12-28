@@ -4,4 +4,4 @@ macro_rules! lang_item_for_unop {
     };
 }
 
-lang_item_for_unop!()
+lang_item_for_unop!();

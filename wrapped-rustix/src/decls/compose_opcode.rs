@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Opcode!();
         Direction!();
+        Opcode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! compose_opcode {
     };
 }
 
-compose_opcode!()
+compose_opcode!();

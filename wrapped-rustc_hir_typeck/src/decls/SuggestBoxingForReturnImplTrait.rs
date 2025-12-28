@@ -4,4 +4,4 @@ macro_rules! SuggestBoxingForReturnImplTrait {
     };
 }
 
-SuggestBoxingForReturnImplTrait!()
+SuggestBoxingForReturnImplTrait!();

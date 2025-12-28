@@ -4,4 +4,4 @@ macro_rules! GitInfoTrait {
     };
 }
 
-GitInfoTrait!()
+GitInfoTrait!();

@@ -4,4 +4,4 @@ macro_rules! update_target_reliable_float_cfg {
     };
 }
 
-update_target_reliable_float_cfg!()
+update_target_reliable_float_cfg!();

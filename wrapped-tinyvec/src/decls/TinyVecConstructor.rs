@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ArrayVec!();
-        Array!();
         TinyVec!();
+        Array!();
+        ArrayVec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TinyVecConstructor {
     };
 }
 
-TinyVecConstructor!()
+TinyVecConstructor!();

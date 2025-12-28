@@ -4,4 +4,4 @@ macro_rules! check_renamed_type {
     };
 }
 
-check_renamed_type!()
+check_renamed_type!();

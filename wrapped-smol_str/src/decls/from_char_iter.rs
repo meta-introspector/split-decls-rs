@@ -11,4 +11,4 @@ macro_rules! from_char_iter {
     };
 }
 
-from_char_iter!()
+from_char_iter!();

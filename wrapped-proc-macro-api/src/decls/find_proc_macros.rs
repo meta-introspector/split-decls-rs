@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ProcMacroServerProcess!();
-        ServerError!();
         ProcMacroKind!();
+        ServerError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! find_proc_macros {
     };
 }
 
-find_proc_macros!()
+find_proc_macros!();

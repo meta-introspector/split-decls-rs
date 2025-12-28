@@ -11,4 +11,4 @@ macro_rules! invalid_state {
     };
 }
 
-invalid_state!()
+invalid_state!();

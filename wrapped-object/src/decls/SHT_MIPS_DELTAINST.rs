@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_DELTAINST {
     };
 }
 
-SHT_MIPS_DELTAINST!()
+SHT_MIPS_DELTAINST!();

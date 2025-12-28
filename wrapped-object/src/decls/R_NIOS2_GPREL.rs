@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_GPREL {
     };
 }
 
-R_NIOS2_GPREL!()
+R_NIOS2_GPREL!();

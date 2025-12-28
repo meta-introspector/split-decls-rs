@@ -4,4 +4,4 @@ macro_rules! write_file_header {
     };
 }
 
-write_file_header!()
+write_file_header!();

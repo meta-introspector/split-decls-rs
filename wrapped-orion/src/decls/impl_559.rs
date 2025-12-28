@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DecapsulationKey!();
-        MlKem768!();
-        XWing!();
-        UnknownCryptoError!();
         PublicKey!();
-        Sha3_256!();
+        MlKem768!();
         PrivateKey!();
+        XWing!();
         EncapsulationKey!();
+        UnknownCryptoError!();
+        Sha3_256!();
+        DecapsulationKey!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_559 {
     };
 }
 
-impl_559!()
+impl_559!();

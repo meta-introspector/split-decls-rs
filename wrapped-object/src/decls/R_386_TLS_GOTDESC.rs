@@ -4,4 +4,4 @@ macro_rules! R_386_TLS_GOTDESC {
     };
 }
 
-R_386_TLS_GOTDESC!()
+R_386_TLS_GOTDESC!();

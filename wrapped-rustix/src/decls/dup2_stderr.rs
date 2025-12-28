@@ -11,4 +11,4 @@ macro_rules! dup2_stderr {
     };
 }
 
-dup2_stderr!()
+dup2_stderr!();

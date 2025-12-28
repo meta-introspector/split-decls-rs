@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        NonMacroAttrKind!();
         DefKind!();
         PrimTy!();
-        NonMacroAttrKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Res {
     };
 }
 
-Res!()
+Res!();

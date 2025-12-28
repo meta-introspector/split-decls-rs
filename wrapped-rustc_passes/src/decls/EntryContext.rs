@@ -4,4 +4,4 @@ macro_rules! EntryContext {
     };
 }
 
-EntryContext!()
+EntryContext!();

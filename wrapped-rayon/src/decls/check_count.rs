@@ -4,4 +4,4 @@ macro_rules! check_count {
     };
 }
 
-check_count!()
+check_count!();

@@ -4,4 +4,4 @@ macro_rules! remainder {
     };
 }
 
-remainder!()
+remainder!();

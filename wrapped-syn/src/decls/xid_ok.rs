@@ -4,4 +4,4 @@ macro_rules! xid_ok {
     };
 }
 
-xid_ok!()
+xid_ok!();

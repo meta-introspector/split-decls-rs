@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ValueRepr!();
         Repr!();
+        ValueRepr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

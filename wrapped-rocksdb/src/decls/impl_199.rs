@@ -1,44 +1,44 @@
 macro_rules! deps {
     () => {
-        FifoCompactOptions!();
-        CompactionFilterFn!();
-        HistogramData!();
-        DBPath!();
-        BackupEngine!();
-        CompactionFilterFactory!();
-        MergeOperatorCallback!();
-        PlainTableFactoryOptions!();
-        LogLevel!();
-        ColumnFamilyDescriptor!();
-        BlockBasedOptions!();
-        Error!();
-        Cache!();
         DBCompactionStyle!();
-        CompactionFilterCallback!();
-        UniversalCompactOptions!();
-        OptimisticTransactionDB!();
-        Env!();
-        WriteBufferManager!();
-        StatsLevel!();
-        CuckooTableOptions!();
-        DB!();
-        ComparatorWithTsCallback!();
-        DBCompressionType!();
-        DBRecoveryMode!();
+        DBPath!();
         ColumnFamilyTtl!();
-        CompareTsFn!();
-        CompactionFilter!();
+        CompactionFilterFn!();
         MemtableFactory!();
-        ComparatorCallback!();
-        OptionsMustOutliveDB!();
-        CompareWithoutTsFn!();
-        TransactionDB!();
-        CStrLike!();
-        MergeFn!();
-        CompareFn!();
+        Env!();
+        ComparatorWithTsCallback!();
         SliceTransform!();
+        DBCompressionType!();
+        Cache!();
+        ComparatorCallback!();
+        ColumnFamilyDescriptor!();
+        DB!();
         CompactionPri!();
+        CompactionFilterFactory!();
+        PlainTableFactoryOptions!();
+        MergeFn!();
+        StatsLevel!();
+        CompareFn!();
         Options!();
+        LogLevel!();
+        UniversalCompactOptions!();
+        MergeOperatorCallback!();
+        TransactionDB!();
+        Error!();
+        OptimisticTransactionDB!();
+        CuckooTableOptions!();
+        FifoCompactOptions!();
+        OptionsMustOutliveDB!();
+        BackupEngine!();
+        CompactionFilter!();
+        CStrLike!();
+        DBRecoveryMode!();
+        CompareTsFn!();
+        WriteBufferManager!();
+        CompareWithoutTsFn!();
+        BlockBasedOptions!();
+        CompactionFilterCallback!();
+        HistogramData!();
     };
 }
 
@@ -49,4 +49,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

@@ -4,4 +4,4 @@ macro_rules! RawPtrToIntCast {
     };
 }
 
-RawPtrToIntCast!()
+RawPtrToIntCast!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Context!();
         Tera!();
+        Context!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! render_variable_block_autoescaping_disabled {
     };
 }
 
-render_variable_block_autoescaping_disabled!()
+render_variable_block_autoescaping_disabled!();

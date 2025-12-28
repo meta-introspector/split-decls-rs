@@ -4,4 +4,4 @@ macro_rules! construct_capture_info_string {
     };
 }
 
-construct_capture_info_string!()
+construct_capture_info_string!();

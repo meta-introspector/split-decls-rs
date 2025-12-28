@@ -12,4 +12,4 @@ macro_rules! repr_c_struct_has_padding {
     };
 }
 
-repr_c_struct_has_padding!()
+repr_c_struct_has_padding!();

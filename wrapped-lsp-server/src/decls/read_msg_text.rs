@@ -4,4 +4,4 @@ macro_rules! read_msg_text {
     };
 }
 
-read_msg_text!()
+read_msg_text!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        U32!();
+        Bytes!();
+        GnuProperty!();
         Endian!();
         Result!();
-        Bytes!();
-        U32!();
-        GnuProperty!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_417 {
     };
 }
 
-impl_417!()
+impl_417!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OpaqueTypeKey!();
         Interner!();
+        OpaqueTypeKey!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_334 {
     };
 }
 
-impl_334!()
+impl_334!();

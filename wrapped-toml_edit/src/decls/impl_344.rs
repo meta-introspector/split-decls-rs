@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Key!();
-        InlineTable!();
-        SerializeTupleVariant!();
-        KeyValuePairs!();
         Value!();
+        SerializeTupleVariant!();
         Error!();
         Item!();
+        InlineTable!();
+        KeyValuePairs!();
+        Key!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_344 {
     };
 }
 
-impl_344!()
+impl_344!();

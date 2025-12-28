@@ -4,4 +4,4 @@ macro_rules! suffixed_ident {
     };
 }
 
-suffixed_ident!()
+suffixed_ident!();

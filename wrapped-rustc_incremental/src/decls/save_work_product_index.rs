@@ -4,4 +4,4 @@ macro_rules! save_work_product_index {
     };
 }
 
-save_work_product_index!()
+save_work_product_index!();

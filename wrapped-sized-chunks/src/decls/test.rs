@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RingBuffer!();
         DropTest!();
+        RingBuffer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

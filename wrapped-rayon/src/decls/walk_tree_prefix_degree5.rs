@@ -4,4 +4,4 @@ macro_rules! walk_tree_prefix_degree5 {
     };
 }
 
-walk_tree_prefix_degree5!()
+walk_tree_prefix_degree5!();

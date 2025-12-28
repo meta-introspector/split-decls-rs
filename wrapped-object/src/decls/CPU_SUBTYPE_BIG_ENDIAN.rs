@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_BIG_ENDIAN {
     };
 }
 
-CPU_SUBTYPE_BIG_ENDIAN!()
+CPU_SUBTYPE_BIG_ENDIAN!();

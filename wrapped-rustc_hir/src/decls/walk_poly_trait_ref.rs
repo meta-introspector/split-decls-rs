@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PolyTraitRef!();
         Visitor!();
+        PolyTraitRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_poly_trait_ref {
     };
 }
 
-walk_poly_trait_ref!()
+walk_poly_trait_ref!();

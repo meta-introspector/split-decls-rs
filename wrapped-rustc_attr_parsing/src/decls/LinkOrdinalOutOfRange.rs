@@ -4,4 +4,4 @@ macro_rules! LinkOrdinalOutOfRange {
     };
 }
 
-LinkOrdinalOutOfRange!()
+LinkOrdinalOutOfRange!();

@@ -4,4 +4,4 @@ macro_rules! CanonicalInstantiator {
     };
 }
 
-CanonicalInstantiator!()
+CanonicalInstantiator!();

@@ -4,4 +4,4 @@ macro_rules! osswu {
     };
 }
 
-osswu!()
+osswu!();

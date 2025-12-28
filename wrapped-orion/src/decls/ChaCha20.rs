@@ -11,4 +11,4 @@ macro_rules! ChaCha20 {
     };
 }
 
-ChaCha20!()
+ChaCha20!();

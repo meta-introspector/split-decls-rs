@@ -11,4 +11,4 @@ macro_rules! hyper_clientconn_options {
     };
 }
 
-hyper_clientconn_options!()
+hyper_clientconn_options!();

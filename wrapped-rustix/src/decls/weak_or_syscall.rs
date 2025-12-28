@@ -4,4 +4,4 @@ macro_rules! weak_or_syscall {
     };
 }
 
-weak_or_syscall!()
+weak_or_syscall!();

@@ -4,4 +4,4 @@ macro_rules! MissingAbiSugg {
     };
 }
 
-MissingAbiSugg!()
+MissingAbiSugg!();

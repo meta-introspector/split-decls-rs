@@ -11,4 +11,4 @@ macro_rules! INLINE_CAP {
     };
 }
 
-INLINE_CAP!()
+INLINE_CAP!();

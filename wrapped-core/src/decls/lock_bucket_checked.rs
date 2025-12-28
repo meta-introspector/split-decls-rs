@@ -11,4 +11,4 @@ macro_rules! lock_bucket_checked {
     };
 }
 
-lock_bucket_checked!()
+lock_bucket_checked!();

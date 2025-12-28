@@ -4,4 +4,4 @@ macro_rules! sequence_section {
     };
 }
 
-sequence_section!()
+sequence_section!();

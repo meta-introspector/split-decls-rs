@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FrontmatterAllowed!();
         Token!();
+        FrontmatterAllowed!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! smoke_test {
     };
 }
 
-smoke_test!()
+smoke_test!();

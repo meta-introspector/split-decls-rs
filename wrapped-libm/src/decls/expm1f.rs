@@ -4,4 +4,4 @@ macro_rules! expm1f {
     };
 }
 
-expm1f!()
+expm1f!();

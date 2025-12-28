@@ -4,4 +4,4 @@ macro_rules! OPERATORS {
     };
 }
 
-OPERATORS!()
+OPERATORS!();

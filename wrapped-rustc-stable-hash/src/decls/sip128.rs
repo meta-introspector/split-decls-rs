@@ -4,4 +4,4 @@ macro_rules! sip128 {
     };
 }
 
-sip128!()
+sip128!();

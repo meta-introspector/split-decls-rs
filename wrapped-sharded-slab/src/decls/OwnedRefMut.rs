@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Clear!();
-        InitGuard!();
-        RefMut!();
-        OwnedRef!();
-        DefaultConfig!();
         Pool!();
         Config!();
+        RefMut!();
+        DefaultConfig!();
+        Clear!();
+        OwnedRef!();
+        InitGuard!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! OwnedRefMut {
     };
 }
 
-OwnedRefMut!()
+OwnedRefMut!();

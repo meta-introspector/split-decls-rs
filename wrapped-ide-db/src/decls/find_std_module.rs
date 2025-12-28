@@ -11,4 +11,4 @@ macro_rules! find_std_module {
     };
 }
 
-find_std_module!()
+find_std_module!();

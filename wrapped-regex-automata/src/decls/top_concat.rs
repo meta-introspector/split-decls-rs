@@ -11,4 +11,4 @@ macro_rules! top_concat {
     };
 }
 
-top_concat!()
+top_concat!();

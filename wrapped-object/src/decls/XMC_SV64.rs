@@ -4,4 +4,4 @@ macro_rules! XMC_SV64 {
     };
 }
 
-XMC_SV64!()
+XMC_SV64!();

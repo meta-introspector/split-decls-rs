@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ItemKind!();
-        LazyAttrTokenStream!();
         AttrVec!();
         Visibility!();
+        LazyAttrTokenStream!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Item {
     };
 }
 
-Item!()
+Item!();

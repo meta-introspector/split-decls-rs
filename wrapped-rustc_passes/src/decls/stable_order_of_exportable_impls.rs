@@ -11,4 +11,4 @@ macro_rules! stable_order_of_exportable_impls {
     };
 }
 
-stable_order_of_exportable_impls!()
+stable_order_of_exportable_impls!();

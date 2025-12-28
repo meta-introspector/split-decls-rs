@@ -4,4 +4,4 @@ macro_rules! is_transparent_zero_width {
     };
 }
 
-is_transparent_zero_width!()
+is_transparent_zero_width!();

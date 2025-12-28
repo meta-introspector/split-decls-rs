@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stream!();
         Result!();
+        Stream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! process_split_io {
     };
 }
 
-process_split_io!()
+process_split_io!();

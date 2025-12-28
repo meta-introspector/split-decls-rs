@@ -11,4 +11,4 @@ macro_rules! highlight_unsafe_points {
     };
 }
 
-highlight_unsafe_points!()
+highlight_unsafe_points!();

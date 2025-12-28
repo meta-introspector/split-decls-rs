@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Err!();
-        ErrorKind!();
         Error!();
+        ErrorKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! eof_on_slices {
     };
 }
 
-eof_on_slices!()
+eof_on_slices!();

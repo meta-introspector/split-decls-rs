@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericExpectations!();
         MockFunction!();
+        GenericExpectations!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StaticGenericExpectations {
     };
 }
 
-StaticGenericExpectations!()
+StaticGenericExpectations!();

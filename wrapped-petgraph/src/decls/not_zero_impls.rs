@@ -4,4 +4,4 @@ macro_rules! not_zero_impls {
     };
 }
 
-not_zero_impls!()
+not_zero_impls!();

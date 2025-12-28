@@ -12,4 +12,4 @@ macro_rules! read_pattern_id {
     };
 }
 
-read_pattern_id!()
+read_pattern_id!();

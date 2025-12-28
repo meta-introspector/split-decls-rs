@@ -4,4 +4,4 @@ macro_rules! unified_codebase {
     };
 }
 
-unified_codebase!()
+unified_codebase!();

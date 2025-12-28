@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Path!();
         TestCtxt!();
         TestHarnessGenerator!();
         EntryPointCleaner!();
+        Path!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! generate_test_harness {
     };
 }
 
-generate_test_harness!()
+generate_test_harness!();

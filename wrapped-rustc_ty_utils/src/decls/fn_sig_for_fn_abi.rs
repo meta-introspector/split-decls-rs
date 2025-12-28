@@ -4,4 +4,4 @@ macro_rules! fn_sig_for_fn_abi {
     };
 }
 
-fn_sig_for_fn_abi!()
+fn_sig_for_fn_abi!();

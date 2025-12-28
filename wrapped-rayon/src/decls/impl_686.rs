@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MapFolder!();
         Folder!();
+        MapFolder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_686 {
     };
 }
 
-impl_686!()
+impl_686!();

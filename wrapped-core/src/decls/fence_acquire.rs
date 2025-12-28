@@ -4,4 +4,4 @@ macro_rules! fence_acquire {
     };
 }
 
-fence_acquire!()
+fence_acquire!();

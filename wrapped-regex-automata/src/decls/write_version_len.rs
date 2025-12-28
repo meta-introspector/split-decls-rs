@@ -4,4 +4,4 @@ macro_rules! write_version_len {
     };
 }
 
-write_version_len!()
+write_version_len!();

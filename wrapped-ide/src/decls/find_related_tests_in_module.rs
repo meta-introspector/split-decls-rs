@@ -11,4 +11,4 @@ macro_rules! find_related_tests_in_module {
     };
 }
 
-find_related_tests_in_module!()
+find_related_tests_in_module!();

@@ -4,4 +4,4 @@ macro_rules! render_universe {
     };
 }
 
-render_universe!()
+render_universe!();

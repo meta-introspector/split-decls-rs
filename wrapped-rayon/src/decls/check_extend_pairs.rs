@@ -11,4 +11,4 @@ macro_rules! check_extend_pairs {
     };
 }
 
-check_extend_pairs!()
+check_extend_pairs!();

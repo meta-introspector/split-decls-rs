@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        Cursor!();
         ParseStream!();
+        Cursor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StepCursor {
     };
 }
 
-StepCursor!()
+StepCursor!();

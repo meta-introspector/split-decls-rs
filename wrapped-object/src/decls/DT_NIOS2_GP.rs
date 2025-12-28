@@ -4,4 +4,4 @@ macro_rules! DT_NIOS2_GP {
     };
 }
 
-DT_NIOS2_GP!()
+DT_NIOS2_GP!();

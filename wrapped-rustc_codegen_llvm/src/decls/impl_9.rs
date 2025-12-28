@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PassMode!();
         Builder!();
+        PassMode!();
         ArgAbiExt!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

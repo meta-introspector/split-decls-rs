@@ -4,4 +4,4 @@ macro_rules! WhereClauseOnMain {
     };
 }
 
-WhereClauseOnMain!()
+WhereClauseOnMain!();

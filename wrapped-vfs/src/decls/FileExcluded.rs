@@ -4,4 +4,4 @@ macro_rules! FileExcluded {
     };
 }
 
-FileExcluded!()
+FileExcluded!();

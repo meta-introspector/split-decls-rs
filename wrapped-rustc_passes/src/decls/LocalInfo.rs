@@ -4,4 +4,4 @@ macro_rules! LocalInfo {
     };
 }
 
-LocalInfo!()
+LocalInfo!();

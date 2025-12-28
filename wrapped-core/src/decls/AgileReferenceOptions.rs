@@ -4,4 +4,4 @@ macro_rules! AgileReferenceOptions {
     };
 }
 
-AgileReferenceOptions!()
+AgileReferenceOptions!();

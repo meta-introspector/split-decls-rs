@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StaticRawConverter!();
         DocCommentDesugarMode!();
+        StaticRawConverter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_to_token_tree_static_span {
     };
 }
 
-parse_to_token_tree_static_span!()
+parse_to_token_tree_static_span!();

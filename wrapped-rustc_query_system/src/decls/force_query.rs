@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DepNode!();
-        QueryConfig!();
         QueryContext!();
+        QueryConfig!();
+        DepNode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! force_query {
     };
 }
 
-force_query!()
+force_query!();

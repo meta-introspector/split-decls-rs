@@ -4,4 +4,4 @@ macro_rules! polonius {
     };
 }
 
-polonius!()
+polonius!();

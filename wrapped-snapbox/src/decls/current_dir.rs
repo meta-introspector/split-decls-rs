@@ -4,4 +4,4 @@ macro_rules! current_dir {
     };
 }
 
-current_dir!()
+current_dir!();

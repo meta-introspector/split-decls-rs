@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ZipFileData!();
         ZipFileReader!();
+        ZipFileData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ZipFile {
     };
 }
 
-ZipFile!()
+ZipFile!();

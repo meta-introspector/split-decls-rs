@@ -4,4 +4,4 @@ macro_rules! MH_NOFIXPREBINDING {
     };
 }
 
-MH_NOFIXPREBINDING!()
+MH_NOFIXPREBINDING!();

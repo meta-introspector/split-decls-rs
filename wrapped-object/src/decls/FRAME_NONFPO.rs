@@ -4,4 +4,4 @@ macro_rules! FRAME_NONFPO {
     };
 }
 
-FRAME_NONFPO!()
+FRAME_NONFPO!();

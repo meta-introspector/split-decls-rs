@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Expr!();
-        LogicExpr!();
-        ExprVal!();
         LogicOperator!();
+        ExprVal!();
+        LogicExpr!();
+        Expr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_logic_expr {
     };
 }
 
-parse_logic_expr!()
+parse_logic_expr!();

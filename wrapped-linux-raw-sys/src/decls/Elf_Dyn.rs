@@ -4,4 +4,4 @@ macro_rules! Elf_Dyn {
     };
 }
 
-Elf_Dyn!()
+Elf_Dyn!();

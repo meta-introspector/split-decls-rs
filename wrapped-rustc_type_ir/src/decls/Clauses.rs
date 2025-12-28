@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TypeSuperVisitable!();
-        Interner!();
-        Clause!();
-        Flags!();
-        SliceLike!();
         TypeSuperFoldable!();
+        SliceLike!();
+        Clause!();
+        Interner!();
+        TypeSuperVisitable!();
+        Flags!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Clauses {
     };
 }
 
-Clauses!()
+Clauses!();

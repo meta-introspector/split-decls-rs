@@ -4,4 +4,4 @@ macro_rules! push_wtf8_codepoint {
     };
 }
 
-push_wtf8_codepoint!()
+push_wtf8_codepoint!();

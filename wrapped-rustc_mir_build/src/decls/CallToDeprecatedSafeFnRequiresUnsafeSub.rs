@@ -4,4 +4,4 @@ macro_rules! CallToDeprecatedSafeFnRequiresUnsafeSub {
     };
 }
 
-CallToDeprecatedSafeFnRequiresUnsafeSub!()
+CallToDeprecatedSafeFnRequiresUnsafeSub!();

@@ -12,4 +12,4 @@ macro_rules! ioctl_tiocnxcl {
     };
 }
 
-ioctl_tiocnxcl!()
+ioctl_tiocnxcl!();

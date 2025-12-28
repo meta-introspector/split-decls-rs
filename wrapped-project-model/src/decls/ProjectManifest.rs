@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProjectJson!();
         ManifestPath!();
+        ProjectJson!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ProjectManifest {
     };
 }
 
-ProjectManifest!()
+ProjectManifest!();

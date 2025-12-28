@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Expected!();
         ErrorSink!();
-        ParseError!();
         Raw!();
+        ParseError!();
+        Expected!();
         Span!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! ensure_dec_uint {
     };
 }
 
-ensure_dec_uint!()
+ensure_dec_uint!();

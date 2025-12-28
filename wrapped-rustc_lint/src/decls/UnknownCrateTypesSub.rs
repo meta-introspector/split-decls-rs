@@ -4,4 +4,4 @@ macro_rules! UnknownCrateTypesSub {
     };
 }
 
-UnknownCrateTypesSub!()
+UnknownCrateTypesSub!();

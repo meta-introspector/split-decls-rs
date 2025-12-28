@@ -4,4 +4,4 @@ macro_rules! node_id {
     };
 }
 
-node_id!()
+node_id!();

@@ -4,4 +4,4 @@ macro_rules! checked_decrement {
     };
 }
 
-checked_decrement!()
+checked_decrement!();

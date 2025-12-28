@@ -4,4 +4,4 @@ macro_rules! MAX_CODE_LENGTH {
     };
 }
 
-MAX_CODE_LENGTH!()
+MAX_CODE_LENGTH!();

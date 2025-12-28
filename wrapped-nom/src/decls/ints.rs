@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        AsChar!();
-        Compare!();
-        Input!();
+        ParseError!();
+        Err!();
         Complete!();
         Error!();
-        IResult!();
-        Err!();
         ErrorKind!();
+        Compare!();
         Needed!();
-        ParseError!();
+        IResult!();
+        AsChar!();
+        Input!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! ints {
     };
 }
 
-ints!()
+ints!();

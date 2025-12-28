@@ -4,4 +4,4 @@ macro_rules! InvalidAbiSuggestion {
     };
 }
 
-InvalidAbiSuggestion!()
+InvalidAbiSuggestion!();

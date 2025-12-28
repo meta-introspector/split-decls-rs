@@ -11,4 +11,4 @@ macro_rules! check_assist_no_snippet_cap {
     };
 }
 
-check_assist_no_snippet_cap!()
+check_assist_no_snippet_cap!();

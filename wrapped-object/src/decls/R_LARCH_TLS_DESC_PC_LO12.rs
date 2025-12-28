@@ -4,4 +4,4 @@ macro_rules! R_LARCH_TLS_DESC_PC_LO12 {
     };
 }
 
-R_LARCH_TLS_DESC_PC_LO12!()
+R_LARCH_TLS_DESC_PC_LO12!();

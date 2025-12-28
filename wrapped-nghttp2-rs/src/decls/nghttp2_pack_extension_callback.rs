@@ -4,4 +4,4 @@ macro_rules! nghttp2_pack_extension_callback {
     };
 }
 
-nghttp2_pack_extension_callback!()
+nghttp2_pack_extension_callback!();

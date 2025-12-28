@@ -4,4 +4,4 @@ macro_rules! SqlFnArg {
     };
 }
 
-SqlFnArg!()
+SqlFnArg!();

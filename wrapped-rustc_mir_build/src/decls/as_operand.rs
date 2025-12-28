@@ -4,4 +4,4 @@ macro_rules! as_operand {
     };
 }
 
-as_operand!()
+as_operand!();

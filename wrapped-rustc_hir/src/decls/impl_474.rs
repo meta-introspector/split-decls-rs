@@ -1,30 +1,30 @@
 macro_rules! deps {
     () => {
-        MethodKind!();
-        GenericParamKind!();
-        PatField!();
-        DefKind!();
-        Arm!();
-        ItemKind!();
-        Crate!();
-        Param!();
-        ForeignItem!();
-        ExprKind!();
-        ExprField!();
-        Variant!();
-        TraitFn!();
-        Target!();
-        Closure!();
-        Expr!();
-        Mod!();
-        ForeignItemKind!();
-        Impl!();
         TraitItem!();
-        Item!();
-        Lifetime!();
+        Variant!();
+        DefKind!();
+        ExprField!();
+        Param!();
         WherePredicate!();
-        TraitItemKind!();
         GenericParam!();
+        Closure!();
+        ItemKind!();
+        TraitItemKind!();
+        TraitFn!();
+        Item!();
+        Expr!();
+        MethodKind!();
+        Arm!();
+        Crate!();
+        Mod!();
+        Target!();
+        Impl!();
+        PatField!();
+        GenericParamKind!();
+        ForeignItemKind!();
+        ForeignItem!();
+        Lifetime!();
+        ExprKind!();
     };
 }
 
@@ -35,4 +35,4 @@ macro_rules! impl_474 {
     };
 }
 
-impl_474!()
+impl_474!();

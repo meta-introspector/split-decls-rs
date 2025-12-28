@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Finder!();
-        Shift!();
-        SuffixKind!();
-        Suffix!();
         TwoWay!();
+        Suffix!();
+        SuffixKind!();
+        Finder!();
         ApproximateByteSet!();
+        Shift!();
         Pre!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

@@ -4,4 +4,4 @@ macro_rules! PR_GET_FPEMU {
     };
 }
 
-PR_GET_FPEMU!()
+PR_GET_FPEMU!();

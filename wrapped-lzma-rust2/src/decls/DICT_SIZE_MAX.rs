@@ -4,4 +4,4 @@ macro_rules! DICT_SIZE_MAX {
     };
 }
 
-DICT_SIZE_MAX!()
+DICT_SIZE_MAX!();

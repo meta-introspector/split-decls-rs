@@ -4,4 +4,4 @@ macro_rules! HASH2_MASK {
     };
 }
 
-HASH2_MASK!()
+HASH2_MASK!();

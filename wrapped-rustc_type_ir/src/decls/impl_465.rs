@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Ty!();
         UnsafeBinderInner!();
         Binder!();
         Interner!();
+        Ty!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_465 {
     };
 }
 
-impl_465!()
+impl_465!();

@@ -4,4 +4,4 @@ macro_rules! replace_string_markers {
     };
 }
 
-replace_string_markers!()
+replace_string_markers!();

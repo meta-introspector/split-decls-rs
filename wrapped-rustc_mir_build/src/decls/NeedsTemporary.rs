@@ -4,4 +4,4 @@ macro_rules! NeedsTemporary {
     };
 }
 
-NeedsTemporary!()
+NeedsTemporary!();

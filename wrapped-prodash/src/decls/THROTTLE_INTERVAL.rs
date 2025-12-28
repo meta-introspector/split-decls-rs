@@ -11,4 +11,4 @@ macro_rules! THROTTLE_INTERVAL {
     };
 }
 
-THROTTLE_INTERVAL!()
+THROTTLE_INTERVAL!();

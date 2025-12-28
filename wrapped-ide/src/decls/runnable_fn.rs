@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Runnable!();
         RunnableKind!();
-        TestAttr!();
-        UpdateTest!();
-        TestId!();
         NavigationTarget!();
+        UpdateTest!();
+        Runnable!();
+        TestAttr!();
+        TestId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! runnable_fn {
     };
 }
 
-runnable_fn!()
+runnable_fn!();

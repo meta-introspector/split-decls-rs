@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MfType!();
-        LzEncoder!();
         MatchFinders!();
+        Bt4!();
         Matches!();
         LzEncoderData!();
+        LzEncoder!();
         Hc4!();
-        Bt4!();
+        MfType!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

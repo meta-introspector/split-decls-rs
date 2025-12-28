@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RuleType!();
         Expr!();
+        RuleType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Rule {
     };
 }
 
-Rule!()
+Rule!();

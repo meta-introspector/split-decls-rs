@@ -4,4 +4,4 @@ macro_rules! write_label_len {
     };
 }
 
-write_label_len!()
+write_label_len!();

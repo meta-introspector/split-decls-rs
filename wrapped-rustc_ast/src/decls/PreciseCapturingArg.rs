@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         GenericArg!();
         Walkable!();
-        Lifetime!();
         LifetimeCtxt!();
         Type!();
         Path!();
+        Lifetime!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! PreciseCapturingArg {
     };
 }
 
-PreciseCapturingArg!()
+PreciseCapturingArg!();

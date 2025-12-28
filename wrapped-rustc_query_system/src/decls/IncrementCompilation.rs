@@ -4,4 +4,4 @@ macro_rules! IncrementCompilation {
     };
 }
 
-IncrementCompilation!()
+IncrementCompilation!();

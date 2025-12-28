@@ -4,4 +4,4 @@ macro_rules! START_FIELD {
     };
 }
 
-START_FIELD!()
+START_FIELD!();

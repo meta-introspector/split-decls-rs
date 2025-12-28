@@ -4,4 +4,4 @@ macro_rules! CanAccessMutGlobal {
     };
 }
 
-CanAccessMutGlobal!()
+CanAccessMutGlobal!();

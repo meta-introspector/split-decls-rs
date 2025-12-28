@@ -11,4 +11,4 @@ macro_rules! get_linkage {
     };
 }
 
-get_linkage!()
+get_linkage!();

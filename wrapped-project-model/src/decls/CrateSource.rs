@@ -4,4 +4,4 @@ macro_rules! CrateSource {
     };
 }
 
-CrateSource!()
+CrateSource!();

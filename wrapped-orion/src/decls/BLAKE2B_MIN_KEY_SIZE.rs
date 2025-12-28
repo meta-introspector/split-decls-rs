@@ -4,4 +4,4 @@ macro_rules! BLAKE2B_MIN_KEY_SIZE {
     };
 }
 
-BLAKE2B_MIN_KEY_SIZE!()
+BLAKE2B_MIN_KEY_SIZE!();

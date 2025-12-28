@@ -4,4 +4,4 @@ macro_rules! EM_METAG {
     };
 }
 
-EM_METAG!()
+EM_METAG!();

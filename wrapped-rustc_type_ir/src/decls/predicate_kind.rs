@@ -4,4 +4,4 @@ macro_rules! predicate_kind {
     };
 }
 
-predicate_kind!()
+predicate_kind!();

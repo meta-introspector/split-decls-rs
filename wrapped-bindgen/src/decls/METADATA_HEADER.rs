@@ -4,4 +4,4 @@ macro_rules! METADATA_HEADER {
     };
 }
 
-METADATA_HEADER!()
+METADATA_HEADER!();

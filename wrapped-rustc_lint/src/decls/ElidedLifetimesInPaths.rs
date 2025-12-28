@@ -4,4 +4,4 @@ macro_rules! ElidedLifetimesInPaths {
     };
 }
 
-ElidedLifetimesInPaths!()
+ElidedLifetimesInPaths!();

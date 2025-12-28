@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EvalCtxt!();
-        TraitProbeCtxt!();
         ProbeCtxt!();
+        TraitProbeCtxt!();
         SolverDelegate!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

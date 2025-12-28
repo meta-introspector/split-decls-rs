@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProjectionPredicate!();
         Stable!();
+        ProjectionPredicate!();
         BridgeTys!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_207 {
     };
 }
 
-impl_207!()
+impl_207!();

@@ -4,4 +4,4 @@ macro_rules! R_METAG_HI16_GOTPC {
     };
 }
 
-R_METAG_HI16_GOTPC!()
+R_METAG_HI16_GOTPC!();

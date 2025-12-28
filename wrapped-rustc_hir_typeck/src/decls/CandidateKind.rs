@@ -4,4 +4,4 @@ macro_rules! CandidateKind {
     };
 }
 
-CandidateKind!()
+CandidateKind!();

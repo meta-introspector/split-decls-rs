@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EarlyContext!();
         RedundantSemicolonsDiag!();
         RedundantSemicolonsSuggestion!();
+        EarlyContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! maybe_lint_redundant_semis {
     };
 }
 
-maybe_lint_redundant_semis!()
+maybe_lint_redundant_semis!();

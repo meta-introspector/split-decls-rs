@@ -4,4 +4,4 @@ macro_rules! PrivateDiv {
     };
 }
 
-PrivateDiv!()
+PrivateDiv!();

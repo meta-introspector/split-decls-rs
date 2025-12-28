@@ -4,4 +4,4 @@ macro_rules! inner_optimized_mir {
     };
 }
 
-inner_optimized_mir!()
+inner_optimized_mir!();

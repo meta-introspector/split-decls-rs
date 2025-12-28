@@ -4,4 +4,4 @@ macro_rules! AssociatedConstElidedLifetime {
     };
 }
 
-AssociatedConstElidedLifetime!()
+AssociatedConstElidedLifetime!();

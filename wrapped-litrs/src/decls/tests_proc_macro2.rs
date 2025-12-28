@@ -4,4 +4,4 @@ macro_rules! tests_proc_macro2 {
     };
 }
 
-tests_proc_macro2!()
+tests_proc_macro2!();

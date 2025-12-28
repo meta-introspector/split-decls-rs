@@ -4,4 +4,4 @@ macro_rules! mcp_impl {
     };
 }
 
-mcp_impl!()
+mcp_impl!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        LlvmSelfProfiler!();
-        SanitizerOptions!();
-        OptStage!();
-        LlvmCodegenBackend!();
-        LlvmError!();
         AutodiffStage!();
+        SanitizerOptions!();
+        LlvmCodegenBackend!();
+        OptStage!();
+        LlvmSelfProfiler!();
+        LlvmError!();
         ModuleLlvm!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! llvm_optimize {
     };
 }
 
-llvm_optimize!()
+llvm_optimize!();

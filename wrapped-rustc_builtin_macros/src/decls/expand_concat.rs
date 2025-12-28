@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ConcatBytestr!();
         ConcatCStrLit!();
         ConcatMissingLiteral!();
-        ConcatBytestr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! expand_concat {
     };
 }
 
-expand_concat!()
+expand_concat!();

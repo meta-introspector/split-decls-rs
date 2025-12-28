@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DBWithThreadMode!();
         SingleThreaded!();
+        DBWithThreadMode!();
         MultiThreaded!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ThreadMode {
     };
 }
 
-ThreadMode!()
+ThreadMode!();

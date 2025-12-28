@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Scope!();
-        Tlv!();
         Registry!();
         JobRefId!();
+        Tlv!();
+        Scope!();
         CountLatch!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! ScopeBase {
     };
 }
 
-ScopeBase!()
+ScopeBase!();

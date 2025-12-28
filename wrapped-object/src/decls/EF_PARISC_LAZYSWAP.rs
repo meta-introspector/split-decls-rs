@@ -4,4 +4,4 @@ macro_rules! EF_PARISC_LAZYSWAP {
     };
 }
 
-EF_PARISC_LAZYSWAP!()
+EF_PARISC_LAZYSWAP!();

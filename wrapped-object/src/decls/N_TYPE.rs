@@ -4,4 +4,4 @@ macro_rules! N_TYPE {
     };
 }
 
-N_TYPE!()
+N_TYPE!();

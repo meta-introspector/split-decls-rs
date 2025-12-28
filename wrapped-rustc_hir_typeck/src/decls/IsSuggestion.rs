@@ -4,4 +4,4 @@ macro_rules! IsSuggestion {
     };
 }
 
-IsSuggestion!()
+IsSuggestion!();

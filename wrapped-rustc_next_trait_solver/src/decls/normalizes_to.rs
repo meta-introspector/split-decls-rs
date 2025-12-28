@@ -4,4 +4,4 @@ macro_rules! normalizes_to {
     };
 }
 
-normalizes_to!()
+normalizes_to!();

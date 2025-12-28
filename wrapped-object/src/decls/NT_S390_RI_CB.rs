@@ -4,4 +4,4 @@ macro_rules! NT_S390_RI_CB {
     };
 }
 
-NT_S390_RI_CB!()
+NT_S390_RI_CB!();

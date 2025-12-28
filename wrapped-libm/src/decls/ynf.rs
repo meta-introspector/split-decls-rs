@@ -4,4 +4,4 @@ macro_rules! ynf {
     };
 }
 
-ynf!()
+ynf!();

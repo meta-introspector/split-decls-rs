@@ -4,4 +4,4 @@ macro_rules! deflate {
     };
 }
 
-deflate!()
+deflate!();

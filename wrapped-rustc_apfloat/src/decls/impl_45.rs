@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ExpInt!();
-        Category!();
-        Float!();
-        Semantics!();
-        Loss!();
-        Round!();
-        IeeeFloat!();
-        IeeeDefaultExceptionHandling!();
-        StatusAnd!();
-        ParseError!();
         NonfiniteBehavior!();
+        ParseError!();
+        Category!();
+        IeeeFloat!();
+        Round!();
+        IeeeDefaultExceptionHandling!();
+        Loss!();
+        ExpInt!();
+        Semantics!();
+        Float!();
+        StatusAnd!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

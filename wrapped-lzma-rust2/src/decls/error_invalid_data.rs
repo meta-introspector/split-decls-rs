@@ -11,4 +11,4 @@ macro_rules! error_invalid_data {
     };
 }
 
-error_invalid_data!()
+error_invalid_data!();

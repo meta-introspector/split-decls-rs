@@ -4,4 +4,4 @@ macro_rules! HYPER_POLL_PENDING {
     };
 }
 
-HYPER_POLL_PENDING!()
+HYPER_POLL_PENDING!();

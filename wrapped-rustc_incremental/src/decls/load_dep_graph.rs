@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Ok!();
+        LoadDepGraph!();
         LoadResult!();
         SerializedWorkProduct!();
         CorruptFile!();
-        LoadDepGraph!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! load_dep_graph {
     };
 }
 
-load_dep_graph!()
+load_dep_graph!();

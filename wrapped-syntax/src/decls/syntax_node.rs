@@ -4,4 +4,4 @@ macro_rules! syntax_node {
     };
 }
 
-syntax_node!()
+syntax_node!();

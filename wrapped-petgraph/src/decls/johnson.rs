@@ -4,4 +4,4 @@ macro_rules! johnson {
     };
 }
 
-johnson!()
+johnson!();

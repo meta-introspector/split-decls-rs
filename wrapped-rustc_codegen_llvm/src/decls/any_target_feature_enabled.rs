@@ -11,4 +11,4 @@ macro_rules! any_target_feature_enabled {
     };
 }
 
-any_target_feature_enabled!()
+any_target_feature_enabled!();

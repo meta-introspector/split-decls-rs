@@ -4,4 +4,4 @@ macro_rules! RHF_PIXIE {
     };
 }
 
-RHF_PIXIE!()
+RHF_PIXIE!();

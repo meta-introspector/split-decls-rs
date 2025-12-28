@@ -4,4 +4,4 @@ macro_rules! StreamXChaCha20Poly1305 {
     };
 }
 
-StreamXChaCha20Poly1305!()
+StreamXChaCha20Poly1305!();

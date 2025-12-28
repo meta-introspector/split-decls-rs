@@ -6,4 +6,4 @@ macro_rules! match_nested_method_calls_with_macro_call {
     };
 }
 
-match_nested_method_calls_with_macro_call!()
+match_nested_method_calls_with_macro_call!();

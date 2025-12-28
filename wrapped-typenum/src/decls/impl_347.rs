@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PowerOfTwo!();
-        B0!();
-        UInt!();
         Unsigned!();
+        PowerOfTwo!();
+        UInt!();
+        B0!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_347 {
     };
 }
 
-impl_347!()
+impl_347!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         QueryJobId!();
-        QueryWaiter!();
-        QueryContext!();
-        QueryLatch!();
         CycleError!();
+        QueryWaiter!();
+        QueryLatch!();
+        QueryContext!();
         QueryLatchInfo!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_178 {
     };
 }
 
-impl_178!()
+impl_178!();

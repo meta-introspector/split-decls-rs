@@ -4,4 +4,4 @@ macro_rules! diagnostic_impls {
     };
 }
 
-diagnostic_impls!()
+diagnostic_impls!();

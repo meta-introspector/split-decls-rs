@@ -11,4 +11,4 @@ macro_rules! is_private {
     };
 }
 
-is_private!()
+is_private!();

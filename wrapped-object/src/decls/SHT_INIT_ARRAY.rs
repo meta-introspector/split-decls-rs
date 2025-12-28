@@ -4,4 +4,4 @@ macro_rules! SHT_INIT_ARRAY {
     };
 }
 
-SHT_INIT_ARRAY!()
+SHT_INIT_ARRAY!();

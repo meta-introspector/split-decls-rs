@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_8_PCREL {
     };
 }
 
-R_TILEPRO_8_PCREL!()
+R_TILEPRO_8_PCREL!();

@@ -4,4 +4,4 @@ macro_rules! OP_TRAIT_LANG_NAMES {
     };
 }
 
-OP_TRAIT_LANG_NAMES!()
+OP_TRAIT_LANG_NAMES!();

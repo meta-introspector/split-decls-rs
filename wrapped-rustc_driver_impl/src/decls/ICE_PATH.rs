@@ -4,4 +4,4 @@ macro_rules! ICE_PATH {
     };
 }
 
-ICE_PATH!()
+ICE_PATH!();

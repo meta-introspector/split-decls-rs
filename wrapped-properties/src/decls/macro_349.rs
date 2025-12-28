@@ -12,4 +12,4 @@ macro_rules! macro_349 {
     };
 }
 
-macro_349!()
+macro_349!();

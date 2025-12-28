@@ -4,4 +4,4 @@ macro_rules! R_68K_GOT32O {
     };
 }
 
-R_68K_GOT32O!()
+R_68K_GOT32O!();

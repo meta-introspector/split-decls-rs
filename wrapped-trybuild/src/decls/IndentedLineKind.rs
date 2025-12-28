@@ -4,4 +4,4 @@ macro_rules! IndentedLineKind {
     };
 }
 
-IndentedLineKind!()
+IndentedLineKind!();

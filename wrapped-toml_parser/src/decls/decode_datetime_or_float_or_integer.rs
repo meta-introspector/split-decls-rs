@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ErrorSink!();
         StringBuilder!();
         ScalarKind!();
         Raw!();
         IntegerRadix!();
+        ErrorSink!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! decode_datetime_or_float_or_integer {
     };
 }
 
-decode_datetime_or_float_or_integer!()
+decode_datetime_or_float_or_integer!();

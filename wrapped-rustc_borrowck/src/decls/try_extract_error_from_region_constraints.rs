@@ -4,4 +4,4 @@ macro_rules! try_extract_error_from_region_constraints {
     };
 }
 
-try_extract_error_from_region_constraints!()
+try_extract_error_from_region_constraints!();

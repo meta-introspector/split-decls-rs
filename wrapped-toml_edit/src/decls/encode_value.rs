@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Array!();
-        Value!();
         InlineTable!();
+        Value!();
+        Array!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! encode_value {
     };
 }
 
-encode_value!()
+encode_value!();

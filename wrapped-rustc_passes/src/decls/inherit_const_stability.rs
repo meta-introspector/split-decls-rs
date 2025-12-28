@@ -4,4 +4,4 @@ macro_rules! inherit_const_stability {
     };
 }
 
-inherit_const_stability!()
+inherit_const_stability!();

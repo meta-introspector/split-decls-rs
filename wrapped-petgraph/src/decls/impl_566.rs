@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         RankDir!();
+        FnFmt!();
         Escaped!();
         Dot!();
-        FnFmt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_566 {
     };
 }
 
-impl_566!()
+impl_566!();

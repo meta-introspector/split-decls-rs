@@ -4,4 +4,4 @@ macro_rules! FlockOffsetType {
     };
 }
 
-FlockOffsetType!()
+FlockOffsetType!();

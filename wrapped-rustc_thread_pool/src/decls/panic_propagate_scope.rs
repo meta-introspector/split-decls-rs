@@ -4,4 +4,4 @@ macro_rules! panic_propagate_scope {
     };
 }
 
-panic_propagate_scope!()
+panic_propagate_scope!();

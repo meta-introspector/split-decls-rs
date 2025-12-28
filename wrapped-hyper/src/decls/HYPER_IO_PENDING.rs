@@ -4,4 +4,4 @@ macro_rules! HYPER_IO_PENDING {
     };
 }
 
-HYPER_IO_PENDING!()
+HYPER_IO_PENDING!();

@@ -4,4 +4,4 @@ macro_rules! json_unexpected {
     };
 }
 
-json_unexpected!()
+json_unexpected!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SubregionOrigin!();
-        DefineOpaqueTypes!();
         TypeRelating!();
         Obligation!();
+        SubregionOrigin!();
+        DefineOpaqueTypes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_173 {
     };
 }
 
-impl_173!()
+impl_173!();

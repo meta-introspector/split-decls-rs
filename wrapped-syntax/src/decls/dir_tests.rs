@@ -4,4 +4,4 @@ macro_rules! dir_tests {
     };
 }
 
-dir_tests!()
+dir_tests!();

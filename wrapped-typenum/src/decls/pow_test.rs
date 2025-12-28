@@ -12,4 +12,4 @@ macro_rules! pow_test {
     };
 }
 
-pow_test!()
+pow_test!();

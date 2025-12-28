@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_IA64_IMM14 {
     };
 }
 
-IMAGE_REL_IA64_IMM14!()
+IMAGE_REL_IA64_IMM14!();

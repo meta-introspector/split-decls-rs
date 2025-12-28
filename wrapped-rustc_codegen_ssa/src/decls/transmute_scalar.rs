@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TypeKind!();
         BuilderMethods!();
+        TypeKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! transmute_scalar {
     };
 }
 
-transmute_scalar!()
+transmute_scalar!();

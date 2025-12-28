@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Ok!();
-        LoadResult!();
         LoadDepGraph!();
+        LoadResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! load_data {
     };
 }
 
-load_data!()
+load_data!();

@@ -4,4 +4,4 @@ macro_rules! START_OF_FILE_PENALTY {
     };
 }
 
-START_OF_FILE_PENALTY!()
+START_OF_FILE_PENALTY!();

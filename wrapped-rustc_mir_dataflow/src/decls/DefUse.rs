@@ -4,4 +4,4 @@ macro_rules! DefUse {
     };
 }
 
-DefUse!()
+DefUse!();

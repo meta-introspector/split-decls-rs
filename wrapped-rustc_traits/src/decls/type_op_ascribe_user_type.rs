@@ -4,4 +4,4 @@ macro_rules! type_op_ascribe_user_type {
     };
 }
 
-type_op_ascribe_user_type!()
+type_op_ascribe_user_type!();

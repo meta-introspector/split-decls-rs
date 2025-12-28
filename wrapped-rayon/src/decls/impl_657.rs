@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
         IntersperseConsumer!();
+        UnindexedConsumer!();
         Reducer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_657 {
     };
 }
 
-impl_657!()
+impl_657!();

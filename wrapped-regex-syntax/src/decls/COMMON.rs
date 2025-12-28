@@ -4,4 +4,4 @@ macro_rules! COMMON {
     };
 }
 
-COMMON!()
+COMMON!();

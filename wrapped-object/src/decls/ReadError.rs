@@ -11,4 +11,4 @@ macro_rules! ReadError {
     };
 }
 
-ReadError!()
+ReadError!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        SpanData!();
+        Span!();
         StableSourceFileId!();
         LocalDefId!();
-        Span!();
-        SpanData!();
-        DefId!();
         DefPathHash!();
+        DefId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! HashStableContext {
     };
 }
 
-HashStableContext!()
+HashStableContext!();

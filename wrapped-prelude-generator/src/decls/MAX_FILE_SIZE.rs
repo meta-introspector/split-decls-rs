@@ -4,4 +4,4 @@ macro_rules! MAX_FILE_SIZE {
     };
 }
 
-MAX_FILE_SIZE!()
+MAX_FILE_SIZE!();

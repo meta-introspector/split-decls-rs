@@ -4,4 +4,4 @@ macro_rules! ty_info {
     };
 }
 
-ty_info!()
+ty_info!();

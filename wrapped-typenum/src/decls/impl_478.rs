@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        PrivateDiv!();
-        SetBitOut!();
-        Internal!();
-        PrivateDivIf!();
-        B1!();
         PrivateDivQuot!();
-        UInt!();
+        PrivateDivRem!();
         SetBit!();
         Greater!();
-        Sub1!();
-        PrivateDivRem!();
+        Internal!();
+        PrivateDivIf!();
         Diff!();
+        B1!();
+        PrivateDiv!();
+        Sub1!();
+        UInt!();
+        SetBitOut!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_478 {
     };
 }
 
-impl_478!()
+impl_478!();

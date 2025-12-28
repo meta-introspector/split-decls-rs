@@ -4,4 +4,4 @@ macro_rules! PPC_OPT_TLS {
     };
 }
 
-PPC_OPT_TLS!()
+PPC_OPT_TLS!();

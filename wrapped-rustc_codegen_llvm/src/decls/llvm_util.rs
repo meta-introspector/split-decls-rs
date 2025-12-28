@@ -4,4 +4,4 @@ macro_rules! llvm_util {
     };
 }
 
-llvm_util!()
+llvm_util!();

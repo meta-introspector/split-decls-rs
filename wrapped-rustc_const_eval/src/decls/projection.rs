@@ -4,4 +4,4 @@ macro_rules! projection {
     };
 }
 
-projection!()
+projection!();

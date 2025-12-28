@@ -4,4 +4,4 @@ macro_rules! RustcMessage {
     };
 }
 
-RustcMessage!()
+RustcMessage!();

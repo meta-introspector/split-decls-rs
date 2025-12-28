@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HRESULT!();
         Result!();
+        HRESULT!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

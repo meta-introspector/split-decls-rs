@@ -4,4 +4,4 @@ macro_rules! NT_GNU_HWCAP {
     };
 }
 
-NT_GNU_HWCAP!()
+NT_GNU_HWCAP!();

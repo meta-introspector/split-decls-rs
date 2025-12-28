@@ -4,4 +4,4 @@ macro_rules! create_helper {
     };
 }
 
-create_helper!()
+create_helper!();

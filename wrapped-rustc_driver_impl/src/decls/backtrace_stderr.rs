@@ -4,4 +4,4 @@ macro_rules! backtrace_stderr {
     };
 }
 
-backtrace_stderr!()
+backtrace_stderr!();

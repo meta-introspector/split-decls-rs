@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Mmap!();
+        Parameters!();
+        CompletionQueue!();
+        Inner!();
+        IoUring!();
+        SubmissionQueue!();
+        MemoryMap!();
+        EntryMarker!();
         Builder!();
         Submitter!();
-        CompletionQueue!();
-        Mmap!();
-        SubmissionQueue!();
-        Inner!();
-        MemoryMap!();
-        Parameters!();
-        IoUring!();
-        EntryMarker!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_210 {
     };
 }
 
-impl_210!()
+impl_210!();

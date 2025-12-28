@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FdSetElement!();
         FD_SET!();
+        FdSetElement!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fd_set_remove {
     };
 }
 
-fd_set_remove!()
+fd_set_remove!();

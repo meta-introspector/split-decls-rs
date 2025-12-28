@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Arg!();
-        Buffer!();
         Result!();
+        Buffer!();
+        Arg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! lgetxattr {
     };
 }
 
-lgetxattr!()
+lgetxattr!();

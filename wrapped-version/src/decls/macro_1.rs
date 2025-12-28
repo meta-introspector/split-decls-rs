@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NTSTATUS!();
         OSVERSIONINFOW!();
+        NTSTATUS!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_1 {
     };
 }
 
-macro_1!()
+macro_1!();

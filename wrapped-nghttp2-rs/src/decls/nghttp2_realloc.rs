@@ -4,4 +4,4 @@ macro_rules! nghttp2_realloc {
     };
 }
 
-nghttp2_realloc!()
+nghttp2_realloc!();

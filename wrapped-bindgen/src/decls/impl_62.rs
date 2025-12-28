@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Filter!();
-        ReferenceStage!();
         Reference!();
-        References!();
-        Reader!();
         TypeName!();
+        Filter!();
+        Reader!();
+        References!();
+        ReferenceStage!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

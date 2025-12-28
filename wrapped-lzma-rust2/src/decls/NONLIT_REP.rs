@@ -4,4 +4,4 @@ macro_rules! NONLIT_REP {
     };
 }
 
-NONLIT_REP!()
+NONLIT_REP!();

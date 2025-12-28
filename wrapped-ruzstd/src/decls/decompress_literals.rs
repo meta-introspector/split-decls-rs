@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        HuffmanDecoder!();
         BitReaderReversed!();
-        DecompressLiteralsError!();
-        HuffmanScratch!();
-        LiteralsSection!();
+        HuffmanDecoder!();
         LiteralsSectionType!();
+        LiteralsSection!();
+        HuffmanScratch!();
+        DecompressLiteralsError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! decompress_literals {
     };
 }
 
-decompress_literals!()
+decompress_literals!();

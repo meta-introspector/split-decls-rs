@@ -4,4 +4,4 @@ macro_rules! AutoImportExclusionType {
     };
 }
 
-AutoImportExclusionType!()
+AutoImportExclusionType!();

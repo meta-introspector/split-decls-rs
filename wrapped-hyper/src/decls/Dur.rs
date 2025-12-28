@@ -4,4 +4,4 @@ macro_rules! Dur {
     };
 }
 
-Dur!()
+Dur!();

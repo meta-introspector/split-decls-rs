@@ -11,4 +11,4 @@ macro_rules! IMAGE_FILE_SYSTEM {
     };
 }
 
-IMAGE_FILE_SYSTEM!()
+IMAGE_FILE_SYSTEM!();

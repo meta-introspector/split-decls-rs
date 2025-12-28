@@ -4,4 +4,4 @@ macro_rules! ScopedHeap {
     };
 }
 
-ScopedHeap!()
+ScopedHeap!();

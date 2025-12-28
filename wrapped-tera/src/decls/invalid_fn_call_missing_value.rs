@@ -4,4 +4,4 @@ macro_rules! invalid_fn_call_missing_value {
     };
 }
 
-invalid_fn_call_missing_value!()
+invalid_fn_call_missing_value!();

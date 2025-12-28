@@ -11,4 +11,4 @@ macro_rules! build_slice_type_di_node {
     };
 }
 
-build_slice_type_di_node!()
+build_slice_type_di_node!();

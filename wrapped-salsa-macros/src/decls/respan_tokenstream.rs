@@ -4,4 +4,4 @@ macro_rules! respan_tokenstream {
     };
 }
 
-respan_tokenstream!()
+respan_tokenstream!();

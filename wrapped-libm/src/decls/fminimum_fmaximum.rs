@@ -4,4 +4,4 @@ macro_rules! fminimum_fmaximum {
     };
 }
 
-fminimum_fmaximum!()
+fminimum_fmaximum!();

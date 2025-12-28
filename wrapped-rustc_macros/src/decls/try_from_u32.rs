@@ -4,4 +4,4 @@ macro_rules! try_from_u32 {
     };
 }
 
-try_from_u32!()
+try_from_u32!();

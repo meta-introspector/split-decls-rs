@@ -4,4 +4,4 @@ macro_rules! expand_bench {
     };
 }
 
-expand_bench!()
+expand_bench!();

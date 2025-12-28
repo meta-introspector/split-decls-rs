@@ -4,4 +4,4 @@ macro_rules! accepted {
     };
 }
 
-accepted!()
+accepted!();

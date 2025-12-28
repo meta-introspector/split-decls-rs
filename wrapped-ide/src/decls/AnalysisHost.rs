@@ -4,4 +4,4 @@ macro_rules! AnalysisHost {
     };
 }
 
-AnalysisHost!()
+AnalysisHost!();

@@ -4,4 +4,4 @@ macro_rules! AUTH_CODE_LENGTH {
     };
 }
 
-AUTH_CODE_LENGTH!()
+AUTH_CODE_LENGTH!();

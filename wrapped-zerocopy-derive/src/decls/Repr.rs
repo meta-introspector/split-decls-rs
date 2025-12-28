@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompoundRepr!();
         AlignRepr!();
+        CompoundRepr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Repr {
     };
 }
 
-Repr!()
+Repr!();

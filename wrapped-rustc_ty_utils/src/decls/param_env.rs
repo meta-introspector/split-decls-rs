@@ -11,4 +11,4 @@ macro_rules! param_env {
     };
 }
 
-param_env!()
+param_env!();

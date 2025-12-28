@@ -4,4 +4,4 @@ macro_rules! A_T {
     };
 }
 
-A_T!()
+A_T!();

@@ -4,4 +4,4 @@ macro_rules! type_implements_negative_copy_modulo_regions {
     };
 }
 
-type_implements_negative_copy_modulo_regions!()
+type_implements_negative_copy_modulo_regions!();

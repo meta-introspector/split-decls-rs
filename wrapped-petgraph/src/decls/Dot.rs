@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Graph!();
         NodeRef!();
         EdgeRef!();
-        Graph!();
         Config!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Dot {
     };
 }
 
-Dot!()
+Dot!();

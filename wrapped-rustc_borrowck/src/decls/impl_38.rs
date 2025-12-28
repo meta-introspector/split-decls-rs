@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OutlivesConstraintSet!();
-        Normal!();
-        Reverse!();
-        NormalConstraintGraph!();
         ReverseConstraintGraph!();
         OutlivesConstraint!();
+        Reverse!();
+        OutlivesConstraintSet!();
+        Normal!();
+        NormalConstraintGraph!();
         ConstraintGraph!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

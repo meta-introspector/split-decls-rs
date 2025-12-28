@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Table!();
-        Array!();
         Value!();
+        Array!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! push_toml {
     };
 }
 
-push_toml!()
+push_toml!();

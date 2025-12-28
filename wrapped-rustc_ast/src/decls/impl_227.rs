@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Delegation!();
-        Impl!();
-        ItemKind!();
-        TyAlias!();
-        MacroDef!();
-        ConstItem!();
-        StaticItem!();
-        Generics!();
-        DelegationMac!();
-        Trait!();
         Fn!();
+        Generics!();
+        ItemKind!();
         MacCall!();
-        Const!();
+        ConstItem!();
+        Delegation!();
+        MacroDef!();
+        Trait!();
         ForeignMod!();
+        DelegationMac!();
+        Const!();
+        Impl!();
+        StaticItem!();
+        TyAlias!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_227 {
     };
 }
 
-impl_227!()
+impl_227!();

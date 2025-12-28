@@ -4,4 +4,4 @@ macro_rules! HunkIter {
     };
 }
 
-HunkIter!()
+HunkIter!();

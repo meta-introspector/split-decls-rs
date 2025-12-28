@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MonoItemCollectionStrategy!();
-        RootCollector!();
         StartNotFound!();
+        RootCollector!();
+        MonoItemCollectionStrategy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

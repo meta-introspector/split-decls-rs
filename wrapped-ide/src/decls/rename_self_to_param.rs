@@ -11,4 +11,4 @@ macro_rules! rename_self_to_param {
     };
 }
 
-rename_self_to_param!()
+rename_self_to_param!();

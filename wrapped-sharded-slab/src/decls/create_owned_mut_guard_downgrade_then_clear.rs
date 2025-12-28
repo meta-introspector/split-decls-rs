@@ -11,4 +11,4 @@ macro_rules! create_owned_mut_guard_downgrade_then_clear {
     };
 }
 
-create_owned_mut_guard_downgrade_then_clear!()
+create_owned_mut_guard_downgrade_then_clear!();

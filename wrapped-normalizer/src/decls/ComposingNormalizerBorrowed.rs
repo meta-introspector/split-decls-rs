@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecomposingNormalizerBorrowed!();
         CanonicalCompositions!();
+        DecomposingNormalizerBorrowed!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ComposingNormalizerBorrowed {
     };
 }
 
-ComposingNormalizerBorrowed!()
+ComposingNormalizerBorrowed!();

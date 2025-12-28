@@ -11,4 +11,4 @@ macro_rules! check_nth_fix_with_config {
     };
 }
 
-check_nth_fix_with_config!()
+check_nth_fix_with_config!();

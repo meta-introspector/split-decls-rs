@@ -4,4 +4,4 @@ macro_rules! BagOfWordsVisitor {
     };
 }
 
-BagOfWordsVisitor!()
+BagOfWordsVisitor!();

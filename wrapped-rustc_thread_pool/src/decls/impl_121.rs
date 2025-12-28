@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ThreadInfo!();
         LockLatch!();
         JobRef!();
+        ThreadInfo!();
         OnceLatch!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_121 {
     };
 }
 
-impl_121!()
+impl_121!();

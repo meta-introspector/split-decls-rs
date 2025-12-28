@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Bigint!();
         Limb!();
+        Bigint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_mantissa {
     };
 }
 
-parse_mantissa!()
+parse_mantissa!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ast!();
         Comment!();
+        Ast!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WithComments {
     };
 }
 
-WithComments!()
+WithComments!();

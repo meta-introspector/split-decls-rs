@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        NetworkEndian!();
-        Order!();
-        LE!();
-        BigEndian!();
-        BE!();
         LittleEndian!();
+        BigEndian!();
+        LE!();
+        BE!();
         NativeEndian!();
+        Order!();
+        NetworkEndian!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! ByteOrder {
     };
 }
 
-ByteOrder!()
+ByteOrder!();

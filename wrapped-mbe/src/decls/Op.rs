@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Separator!();
         ConcatMetaVarExprElem!();
-        MetaTemplate!();
         MetaVarKind!();
         RepeatKind!();
+        MetaTemplate!();
+        Separator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Op {
     };
 }
 
-Op!()
+Op!();

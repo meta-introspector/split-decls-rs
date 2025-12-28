@@ -11,4 +11,4 @@ macro_rules! repeat_n {
     };
 }
 
-repeat_n!()
+repeat_n!();

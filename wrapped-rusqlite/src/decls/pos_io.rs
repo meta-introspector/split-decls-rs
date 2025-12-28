@@ -4,4 +4,4 @@ macro_rules! pos_io {
     };
 }
 
-pos_io!()
+pos_io!();

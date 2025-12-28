@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TypeVisitor!();
         HasErrorVisitor!();
         Interner!();
-        TypeVisitor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_509 {
     };
 }
 
-impl_509!()
+impl_509!();

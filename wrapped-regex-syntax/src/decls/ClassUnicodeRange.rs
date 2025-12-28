@@ -4,4 +4,4 @@ macro_rules! ClassUnicodeRange {
     };
 }
 
-ClassUnicodeRange!()
+ClassUnicodeRange!();

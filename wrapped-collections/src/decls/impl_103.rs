@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IIterator!();
-        IIterable_Impl!();
         StockVectorViewIterator!();
+        IIterable_Impl!();
+        IIterator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_103 {
     };
 }
 
-impl_103!()
+impl_103!();

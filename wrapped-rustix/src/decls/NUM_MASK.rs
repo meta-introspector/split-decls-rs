@@ -11,4 +11,4 @@ macro_rules! NUM_MASK {
     };
 }
 
-NUM_MASK!()
+NUM_MASK!();

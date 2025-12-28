@@ -4,4 +4,4 @@ macro_rules! DeletePartial {
     };
 }
 
-DeletePartial!()
+DeletePartial!();

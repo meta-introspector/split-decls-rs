@@ -4,4 +4,4 @@ macro_rules! SHT_ALPHA_REGINFO {
     };
 }
 
-SHT_ALPHA_REGINFO!()
+SHT_ALPHA_REGINFO!();

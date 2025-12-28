@@ -4,4 +4,4 @@ macro_rules! MH_CORE {
     };
 }
 
-MH_CORE!()
+MH_CORE!();

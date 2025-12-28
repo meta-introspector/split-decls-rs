@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DefaultHasArg!();
-        MultipleDefaultAttrs!();
         MultipleDefaultAttrsSugg!();
+        MultipleDefaultAttrs!();
+        DefaultHasArg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! validate_default_attribute {
     };
 }
 
-validate_default_attribute!()
+validate_default_attribute!();

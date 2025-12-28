@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FloatAsSIMD!();
         FloatSIMDUtils!();
         FloatSIMDScalarUtils!();
-        FloatAsSIMD!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! scalar_float_impl {
     };
 }
 
-scalar_float_impl!()
+scalar_float_impl!();

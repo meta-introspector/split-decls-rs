@@ -11,4 +11,4 @@ macro_rules! entry_fn {
     };
 }
 
-entry_fn!()
+entry_fn!();

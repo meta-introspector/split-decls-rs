@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         FunctionCall!();
         Node!();
-        FilterSection!();
         WS!();
+        FilterSection!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_filter_section {
     };
 }
 
-parse_filter_section!()
+parse_filter_section!();

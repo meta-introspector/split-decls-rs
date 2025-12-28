@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        StateIter!();
-        StartStateIter!();
+        DFA!();
         Special!();
         PatternID!();
-        DFA!();
-        Accels!();
+        StartStateIter!();
+        StateID!();
         ByteSet!();
         Flags!();
-        StateID!();
+        StateIter!();
+        Accels!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

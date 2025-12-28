@@ -4,4 +4,4 @@ macro_rules! next {
     };
 }
 
-next!()
+next!();

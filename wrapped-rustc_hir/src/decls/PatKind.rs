@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DotDotPos!();
-        RangeEnd!();
+        PatField!();
         QPath!();
         Expr!();
-        Pat!();
         PatExpr!();
+        RangeEnd!();
+        Pat!();
+        DotDotPos!();
         Variant!();
-        PatField!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! PatKind {
     };
 }
 
-PatKind!()
+PatKind!();

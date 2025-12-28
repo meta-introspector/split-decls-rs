@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CodeModel!();
         FloatAbi!();
         OwnedTargetMachine!();
-        CodeGenOptLevel!();
         LlvmError!();
+        CodeModel!();
+        CodeGenOptLevel!();
         RelocModel!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

@@ -4,4 +4,4 @@ macro_rules! on_pipe_typed {
     };
 }
 
-on_pipe_typed!()
+on_pipe_typed!();

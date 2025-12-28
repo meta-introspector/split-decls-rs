@@ -11,4 +11,4 @@ macro_rules! mk_ty_param {
     };
 }
 
-mk_ty_param!()
+mk_ty_param!();

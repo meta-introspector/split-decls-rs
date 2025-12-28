@@ -11,4 +11,4 @@ macro_rules! macro_358 {
     };
 }
 
-macro_358!()
+macro_358!();

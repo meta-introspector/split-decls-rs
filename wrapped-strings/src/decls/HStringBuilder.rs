@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HSTRING!();
         HStringHeader!();
+        HSTRING!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HStringBuilder {
     };
 }
 
-HStringBuilder!()
+HStringBuilder!();

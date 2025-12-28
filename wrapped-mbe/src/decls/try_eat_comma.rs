@@ -4,4 +4,4 @@ macro_rules! try_eat_comma {
     };
 }
 
-try_eat_comma!()
+try_eat_comma!();

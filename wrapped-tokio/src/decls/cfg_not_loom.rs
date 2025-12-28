@@ -4,4 +4,4 @@ macro_rules! cfg_not_loom {
     };
 }
 
-cfg_not_loom!()
+cfg_not_loom!();

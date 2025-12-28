@@ -4,4 +4,4 @@ macro_rules! N_TSHIFT {
     };
 }
 
-N_TSHIFT!()
+N_TSHIFT!();

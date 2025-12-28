@@ -4,4 +4,4 @@ macro_rules! SECT_OBJC_REFS {
     };
 }
 
-SECT_OBJC_REFS!()
+SECT_OBJC_REFS!();

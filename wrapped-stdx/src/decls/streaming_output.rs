@@ -4,4 +4,4 @@ macro_rules! streaming_output {
     };
 }
 
-streaming_output!()
+streaming_output!();

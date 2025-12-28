@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BuilderMethods!();
         PlaceValue!();
         PlaceRef!();
+        BuilderMethods!();
         ConstCodegenMethods!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_511 {
     };
 }
 
-impl_511!()
+impl_511!();

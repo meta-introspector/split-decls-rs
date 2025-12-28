@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Testable!();
         QuickCheck!();
+        Testable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! quickcheck {
     };
 }
 
-quickcheck!()
+quickcheck!();

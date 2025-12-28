@@ -4,4 +4,4 @@ macro_rules! E_E2K_MACH_BASE {
     };
 }
 
-E_E2K_MACH_BASE!()
+E_E2K_MACH_BASE!();

@@ -4,4 +4,4 @@ macro_rules! ET_DYN {
     };
 }
 
-ET_DYN!()
+ET_DYN!();

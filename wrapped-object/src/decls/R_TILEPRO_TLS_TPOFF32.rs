@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_TLS_TPOFF32 {
     };
 }
 
-R_TILEPRO_TLS_TPOFF32!()
+R_TILEPRO_TLS_TPOFF32!();

@@ -4,4 +4,4 @@ macro_rules! EM_XCORE {
     };
 }
 
-EM_XCORE!()
+EM_XCORE!();

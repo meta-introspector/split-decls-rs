@@ -4,4 +4,4 @@ macro_rules! adjust_for_use_closure {
     };
 }
 
-adjust_for_use_closure!()
+adjust_for_use_closure!();

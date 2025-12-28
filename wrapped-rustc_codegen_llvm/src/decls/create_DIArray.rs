@@ -4,4 +4,4 @@ macro_rules! create_DIArray {
     };
 }
 
-create_DIArray!()
+create_DIArray!();

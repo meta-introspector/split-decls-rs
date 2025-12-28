@@ -4,4 +4,4 @@ macro_rules! interest_cache {
     };
 }
 
-interest_cache!()
+interest_cache!();

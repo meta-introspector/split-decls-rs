@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         SmallCString!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_663 {
     };
 }
 
-impl_663!()
+impl_663!();

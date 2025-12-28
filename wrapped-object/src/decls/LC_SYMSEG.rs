@@ -4,4 +4,4 @@ macro_rules! LC_SYMSEG {
     };
 }
 
-LC_SYMSEG!()
+LC_SYMSEG!();

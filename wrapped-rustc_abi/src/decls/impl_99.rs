@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Size!();
         FieldsShape!();
         Primitive!();
+        Size!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_99 {
     };
 }
 
-impl_99!()
+impl_99!();

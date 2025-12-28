@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FnCtxt!();
         Coerce!();
         NestedObligationsForSelfTy!();
+        FnCtxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_204 {
     };
 }
 
-impl_204!()
+impl_204!();

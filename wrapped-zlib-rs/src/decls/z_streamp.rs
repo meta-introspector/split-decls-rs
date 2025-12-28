@@ -4,4 +4,4 @@ macro_rules! z_streamp {
     };
 }
 
-z_streamp!()
+z_streamp!();

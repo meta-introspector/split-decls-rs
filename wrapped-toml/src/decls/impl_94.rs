@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MapEnumDeserializer!();
         MapDeserializer!();
         Value!();
         Error!();
+        MapEnumDeserializer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

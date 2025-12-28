@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BuilderMethods!();
         VirtualIndex!();
+        BuilderMethods!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_438 {
     };
 }
 
-impl_438!()
+impl_438!();

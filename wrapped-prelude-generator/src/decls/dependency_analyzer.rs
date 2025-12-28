@@ -4,4 +4,4 @@ macro_rules! dependency_analyzer {
     };
 }
 
-dependency_analyzer!()
+dependency_analyzer!();

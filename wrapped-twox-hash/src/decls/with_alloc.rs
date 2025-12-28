@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Hasher!();
         Finalize128!();
+        Hasher!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! with_alloc {
     };
 }
 
-with_alloc!()
+with_alloc!();

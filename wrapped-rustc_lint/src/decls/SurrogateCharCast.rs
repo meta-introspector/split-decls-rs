@@ -4,4 +4,4 @@ macro_rules! SurrogateCharCast {
     };
 }
 
-SurrogateCharCast!()
+SurrogateCharCast!();

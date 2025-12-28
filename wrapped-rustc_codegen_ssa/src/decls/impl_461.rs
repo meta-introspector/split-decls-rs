@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         FunctionCx!();
         BuilderMethods!();
-        OperandRef!();
         ShuffleIndicesEvaluation!();
+        OperandRef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_461 {
     };
 }
 
-impl_461!()
+impl_461!();

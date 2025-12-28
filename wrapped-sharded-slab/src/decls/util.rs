@@ -11,4 +11,4 @@ macro_rules! util {
     };
 }
 
-util!()
+util!();

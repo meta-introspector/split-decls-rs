@@ -4,4 +4,4 @@ macro_rules! undo_log {
     };
 }
 
-undo_log!()
+undo_log!();

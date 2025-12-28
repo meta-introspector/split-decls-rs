@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Node!();
-        Successors!();
         DirectedGraph!();
+        Successors!();
+        Node!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! post_order_from_to {
     };
 }
 
-post_order_from_to!()
+post_order_from_to!();

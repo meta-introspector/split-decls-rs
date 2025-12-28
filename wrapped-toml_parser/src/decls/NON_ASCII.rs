@@ -4,4 +4,4 @@ macro_rules! NON_ASCII {
     };
 }
 
-NON_ASCII!()
+NON_ASCII!();

@@ -4,4 +4,4 @@ macro_rules! TELL_NO_CHECK {
     };
 }
 
-TELL_NO_CHECK!()
+TELL_NO_CHECK!();

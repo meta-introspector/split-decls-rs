@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
+        PResult!();
         Compare!();
-        ParseError!();
-        Error!();
         Offset!();
+        ParseError!();
+        Parser!();
+        ErrorKind!();
         Input!();
-        Err!();
-        OutputMode!();
+        Error!();
+        OutputM!();
         AsChar!();
+        OutputMode!();
+        Float!();
+        ParseTo!();
+        Err!();
         AsBytes!();
         Emit!();
-        Float!();
-        Parser!();
-        ParseTo!();
-        PResult!();
-        OutputM!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_746 {
     };
 }
 
-impl_746!()
+impl_746!();

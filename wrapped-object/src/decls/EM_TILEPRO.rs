@@ -4,4 +4,4 @@ macro_rules! EM_TILEPRO {
     };
 }
 
-EM_TILEPRO!()
+EM_TILEPRO!();

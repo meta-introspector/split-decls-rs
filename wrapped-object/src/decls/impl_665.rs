@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ImageNtHeaders!();
+        Result!();
         ReadRef!();
         ObjectSegment!();
         SegmentFlags!();
         PeSegment!();
-        ImageNtHeaders!();
-        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_665 {
     };
 }
 
-impl_665!()
+impl_665!();

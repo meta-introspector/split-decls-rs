@@ -12,4 +12,4 @@ macro_rules! parse_sysv_extended_name {
     };
 }
 
-parse_sysv_extended_name!()
+parse_sysv_extended_name!();

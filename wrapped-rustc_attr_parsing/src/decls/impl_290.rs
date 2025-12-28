@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        PathParser!();
-        Late!();
-        AttributeParser!();
-        MetaItemParser!();
-        SharedContext!();
-        ShouldEmit!();
-        FinalizeContext!();
-        AcceptContext!();
-        OmitDoc!();
         Stage!();
+        AttributeParser!();
+        OmitDoc!();
+        Late!();
+        FinalizeContext!();
+        PathParser!();
+        ShouldEmit!();
+        MetaItemParser!();
+        AcceptContext!();
+        SharedContext!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_290 {
     };
 }
 
-impl_290!()
+impl_290!();

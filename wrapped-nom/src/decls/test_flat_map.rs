@@ -4,4 +4,4 @@ macro_rules! test_flat_map {
     };
 }
 
-test_flat_map!()
+test_flat_map!();

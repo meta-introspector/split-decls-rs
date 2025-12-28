@@ -11,4 +11,4 @@ macro_rules! empty_visit_mut {
     };
 }
 
-empty_visit_mut!()
+empty_visit_mut!();

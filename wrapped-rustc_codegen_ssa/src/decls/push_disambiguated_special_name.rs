@@ -4,4 +4,4 @@ macro_rules! push_disambiguated_special_name {
     };
 }
 
-push_disambiguated_special_name!()
+push_disambiguated_special_name!();

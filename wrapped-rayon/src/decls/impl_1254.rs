@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Windows!();
-        IndexedParallelIterator!();
         Consumer!();
-        WindowsProducer!();
+        IndexedParallelIterator!();
         ProducerCallback!();
+        WindowsProducer!();
+        Windows!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1254 {
     };
 }
 
-impl_1254!()
+impl_1254!();

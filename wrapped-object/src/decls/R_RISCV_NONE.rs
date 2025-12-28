@@ -4,4 +4,4 @@ macro_rules! R_RISCV_NONE {
     };
 }
 
-R_RISCV_NONE!()
+R_RISCV_NONE!();

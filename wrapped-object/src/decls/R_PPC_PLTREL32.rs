@@ -4,4 +4,4 @@ macro_rules! R_PPC_PLTREL32 {
     };
 }
 
-R_PPC_PLTREL32!()
+R_PPC_PLTREL32!();

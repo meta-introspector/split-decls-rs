@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        QueryInfo!();
-        QueryJobId!();
+        QueryJobInfo!();
         QueryMap!();
         CycleError!();
-        QueryJobInfo!();
+        QueryJobId!();
+        QueryInfo!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_173 {
     };
 }
 
-impl_173!()
+impl_173!();

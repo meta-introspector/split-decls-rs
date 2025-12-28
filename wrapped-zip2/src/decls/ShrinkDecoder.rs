@@ -4,4 +4,4 @@ macro_rules! ShrinkDecoder {
     };
 }
 
-ShrinkDecoder!()
+ShrinkDecoder!();

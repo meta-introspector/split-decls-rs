@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RwLockWriteGuard!();
-        MutexGuard!();
-        RwLock!();
-        Mutex!();
         RwLockReadGuard!();
+        RwLockWriteGuard!();
+        Mutex!();
+        RwLock!();
+        MutexGuard!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! sync {
     };
 }
 
-sync!()
+sync!();

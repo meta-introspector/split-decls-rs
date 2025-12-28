@@ -4,4 +4,4 @@ macro_rules! fmaximumf128 {
     };
 }
 
-fmaximumf128!()
+fmaximumf128!();

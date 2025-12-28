@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Decor!();
-        RawString!();
-        KeyValuePairs!();
         Value!();
+        KeyValuePairs!();
+        RawString!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! InlineTable {
     };
 }
 
-InlineTable!()
+InlineTable!();

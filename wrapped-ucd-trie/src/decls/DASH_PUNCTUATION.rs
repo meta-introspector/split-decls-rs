@@ -4,4 +4,4 @@ macro_rules! DASH_PUNCTUATION {
     };
 }
 
-DASH_PUNCTUATION!()
+DASH_PUNCTUATION!();

@@ -4,4 +4,4 @@ macro_rules! has_doc {
     };
 }
 
-has_doc!()
+has_doc!();

@@ -4,4 +4,4 @@ macro_rules! FoldAdd {
     };
 }
 
-FoldAdd!()
+FoldAdd!();

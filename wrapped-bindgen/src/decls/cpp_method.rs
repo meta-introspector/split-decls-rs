@@ -4,4 +4,4 @@ macro_rules! cpp_method {
     };
 }
 
-cpp_method!()
+cpp_method!();

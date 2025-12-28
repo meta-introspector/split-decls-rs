@@ -4,4 +4,4 @@ macro_rules! MakeBackendFn {
     };
 }
 
-MakeBackendFn!()
+MakeBackendFn!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Producer!();
         Consumer!();
+        Producer!();
         LengthSplitter!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! bridge_producer_consumer {
     };
 }
 
-bridge_producer_consumer!()
+bridge_producer_consumer!();

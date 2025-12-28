@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         U32!();
-        ImageFileHeader!();
         ImageOptionalHeader64!();
+        ImageFileHeader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ImageNtHeaders64 {
     };
 }
 
-ImageNtHeaders64!()
+ImageNtHeaders64!();

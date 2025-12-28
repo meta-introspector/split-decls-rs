@@ -4,4 +4,4 @@ macro_rules! MAX_UTF8_BYTES {
     };
 }
 
-MAX_UTF8_BYTES!()
+MAX_UTF8_BYTES!();

@@ -4,4 +4,4 @@ macro_rules! check_take {
     };
 }
 
-check_take!()
+check_take!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        StateData!();
         HasBottom!();
-        TrackElem!();
-        Formatter!();
         Map!();
+        StateData!();
+        Formatter!();
+        TrackElem!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! debug_with_context_rec {
     };
 }
 
-debug_with_context_rec!()
+debug_with_context_rec!();

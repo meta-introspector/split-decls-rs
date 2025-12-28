@@ -4,4 +4,4 @@ macro_rules! LC_MAIN {
     };
 }
 
-LC_MAIN!()
+LC_MAIN!();

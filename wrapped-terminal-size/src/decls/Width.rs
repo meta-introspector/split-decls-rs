@@ -4,4 +4,4 @@ macro_rules! Width {
     };
 }
 
-Width!()
+Width!();

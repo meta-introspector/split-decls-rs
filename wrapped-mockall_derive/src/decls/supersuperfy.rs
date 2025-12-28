@@ -4,4 +4,4 @@ macro_rules! supersuperfy {
     };
 }
 
-supersuperfy!()
+supersuperfy!();

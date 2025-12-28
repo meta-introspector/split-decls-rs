@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        KnownLayout!();
         PointerMetadata!();
-        CastType!();
         CastError!();
         FromBytes!();
+        CastType!();
+        KnownLayout!();
         IntoBytes!();
         BecauseExclusive!();
     };
@@ -17,4 +17,4 @@ macro_rules! mut_from_prefix_suffix {
     };
 }
 
-mut_from_prefix_suffix!()
+mut_from_prefix_suffix!();

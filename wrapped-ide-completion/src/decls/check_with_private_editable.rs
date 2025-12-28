@@ -4,4 +4,4 @@ macro_rules! check_with_private_editable {
     };
 }
 
-check_with_private_editable!()
+check_with_private_editable!();

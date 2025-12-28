@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Table!();
         Key!();
         Item!();
+        Table!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! VacantEntry {
     };
 }
 
-VacantEntry!()
+VacantEntry!();

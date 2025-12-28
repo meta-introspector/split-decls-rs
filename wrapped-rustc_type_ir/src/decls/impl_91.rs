@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        OutlivesPredicate!();
         IrPrint!();
         Interner!();
-        OutlivesPredicate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

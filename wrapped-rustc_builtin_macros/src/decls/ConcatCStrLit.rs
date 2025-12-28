@@ -4,4 +4,4 @@ macro_rules! ConcatCStrLit {
     };
 }
 
-ConcatCStrLit!()
+ConcatCStrLit!();

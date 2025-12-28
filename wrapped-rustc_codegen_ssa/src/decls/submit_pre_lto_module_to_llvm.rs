@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Coordinator!();
-        CachedModuleCodegen!();
-        Message!();
-        SerializedModule!();
         ExtraBackendMethods!();
+        CachedModuleCodegen!();
+        Coordinator!();
+        SerializedModule!();
+        Message!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! submit_pre_lto_module_to_llvm {
     };
 }
 
-submit_pre_lto_module_to_llvm!()
+submit_pre_lto_module_to_llvm!();

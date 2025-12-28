@@ -4,4 +4,4 @@ macro_rules! R_AVR_HI8_LDI_NEG {
     };
 }
 
-R_AVR_HI8_LDI_NEG!()
+R_AVR_HI8_LDI_NEG!();

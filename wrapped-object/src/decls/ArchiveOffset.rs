@@ -4,4 +4,4 @@ macro_rules! ArchiveOffset {
     };
 }
 
-ArchiveOffset!()
+ArchiveOffset!();

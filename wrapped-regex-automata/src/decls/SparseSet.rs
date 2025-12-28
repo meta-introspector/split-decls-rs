@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StateID!();
         NFA!();
+        StateID!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SparseSet {
     };
 }
 
-SparseSet!()
+SparseSet!();

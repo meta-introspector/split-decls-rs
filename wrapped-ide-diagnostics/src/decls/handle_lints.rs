@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Diagnostic!();
         DiagnosticCode!();
+        Diagnostic!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_lints {
     };
 }
 
-handle_lints!()
+handle_lints!();

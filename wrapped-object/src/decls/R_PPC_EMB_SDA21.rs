@@ -4,4 +4,4 @@ macro_rules! R_PPC_EMB_SDA21 {
     };
 }
 
-R_PPC_EMB_SDA21!()
+R_PPC_EMB_SDA21!();

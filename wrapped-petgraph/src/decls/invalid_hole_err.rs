@@ -4,4 +4,4 @@ macro_rules! invalid_hole_err {
     };
 }
 
-invalid_hole_err!()
+invalid_hole_err!();

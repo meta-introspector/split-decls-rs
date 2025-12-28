@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        BorrowExplanation!();
-        MirBorrowckCtxt!();
         BlameConstraint!();
-        UseSpans!();
-        BorrowData!();
-        Cause!();
         WriteKind!();
+        BorrowExplanation!();
         OutlivesConstraint!();
-        Normal!();
-        StorageDeadOrDrop!();
         LaterUseKind!();
+        StorageDeadOrDrop!();
+        Normal!();
+        Cause!();
         RegionName!();
+        BorrowData!();
+        UseSpans!();
+        MirBorrowckCtxt!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

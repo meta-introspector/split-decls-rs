@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Slab!();
         CustomConfig!();
+        Slab!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! double_get {
     };
 }
 
-double_get!()
+double_get!();

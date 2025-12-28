@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoChunks!();
         ChunkBy!();
+        IntoChunks!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! KeyFunction {
     };
 }
 
-KeyFunction!()
+KeyFunction!();

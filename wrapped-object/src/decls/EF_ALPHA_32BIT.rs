@@ -4,4 +4,4 @@ macro_rules! EF_ALPHA_32BIT {
     };
 }
 
-EF_ALPHA_32BIT!()
+EF_ALPHA_32BIT!();

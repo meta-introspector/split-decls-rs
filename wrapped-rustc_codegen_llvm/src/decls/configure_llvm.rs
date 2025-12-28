@@ -4,4 +4,4 @@ macro_rules! configure_llvm {
     };
 }
 
-configure_llvm!()
+configure_llvm!();

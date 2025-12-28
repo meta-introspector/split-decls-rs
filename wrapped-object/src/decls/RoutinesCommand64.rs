@@ -13,4 +13,4 @@ macro_rules! RoutinesCommand64 {
     };
 }
 
-RoutinesCommand64!()
+RoutinesCommand64!();

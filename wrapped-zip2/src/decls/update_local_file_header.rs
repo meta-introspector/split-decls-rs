@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ZipFileData!();
-        ZipError!();
         ZipResult!();
+        ZipError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! update_local_file_header {
     };
 }
 
-update_local_file_header!()
+update_local_file_header!();

@@ -11,4 +11,4 @@ macro_rules! filter_filter_works {
     };
 }
 
-filter_filter_works!()
+filter_filter_works!();

@@ -4,4 +4,4 @@ macro_rules! R_PPC_LOCAL24PC {
     };
 }
 
-R_PPC_LOCAL24PC!()
+R_PPC_LOCAL24PC!();

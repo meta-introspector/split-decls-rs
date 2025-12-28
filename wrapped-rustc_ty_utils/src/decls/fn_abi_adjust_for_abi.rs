@@ -4,4 +4,4 @@ macro_rules! fn_abi_adjust_for_abi {
     };
 }
 
-fn_abi_adjust_for_abi!()
+fn_abi_adjust_for_abi!();

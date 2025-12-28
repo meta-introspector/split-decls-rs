@@ -11,4 +11,4 @@ macro_rules! print_tests {
     };
 }
 
-print_tests!()
+print_tests!();

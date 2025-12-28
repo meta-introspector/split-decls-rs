@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IoringOp!();
         IoringRegisterOp!();
+        IoringOp!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! other_415 {
     };
 }
 
-other_415!()
+other_415!();

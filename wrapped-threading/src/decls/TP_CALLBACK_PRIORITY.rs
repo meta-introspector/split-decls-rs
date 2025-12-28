@@ -4,4 +4,4 @@ macro_rules! TP_CALLBACK_PRIORITY {
     };
 }
 
-TP_CALLBACK_PRIORITY!()
+TP_CALLBACK_PRIORITY!();

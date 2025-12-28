@@ -11,4 +11,4 @@ macro_rules! build_dyn_type_di_node {
     };
 }
 
-build_dyn_type_di_node!()
+build_dyn_type_di_node!();

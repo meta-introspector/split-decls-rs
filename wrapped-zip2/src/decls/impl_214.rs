@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Magic!();
+        ZipLocalEntryBlock!();
         ZipError!();
         FixedSizeBlock!();
-        ZipLocalEntryBlock!();
-        Magic!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_214 {
     };
 }
 
-impl_214!()
+impl_214!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Timestamp!();
-        Uuid!();
-        Variant!();
         Builder!();
         Bytes!();
+        Variant!();
+        Timestamp!();
         Version!();
+        Uuid!();
         Error!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

@@ -4,4 +4,4 @@ macro_rules! find_zero_variant {
     };
 }
 
-find_zero_variant!()
+find_zero_variant!();

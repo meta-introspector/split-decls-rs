@@ -4,4 +4,4 @@ macro_rules! R_METAG_GETSET_GOT {
     };
 }
 
-R_METAG_GETSET_GOT!()
+R_METAG_GETSET_GOT!();

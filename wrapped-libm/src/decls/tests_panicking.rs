@@ -4,4 +4,4 @@ macro_rules! tests_panicking {
     };
 }
 
-tests_panicking!()
+tests_panicking!();

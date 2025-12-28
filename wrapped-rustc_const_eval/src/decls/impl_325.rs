@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Frame!();
         Place!();
         FrameInfo!();
+        Frame!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_325 {
     };
 }
 
-impl_325!()
+impl_325!();

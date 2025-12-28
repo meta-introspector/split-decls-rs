@@ -11,4 +11,4 @@ macro_rules! do_nothing_if_unneeded {
     };
 }
 
-do_nothing_if_unneeded!()
+do_nothing_if_unneeded!();

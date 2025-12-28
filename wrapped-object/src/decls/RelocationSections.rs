@@ -4,4 +4,4 @@ macro_rules! RelocationSections {
     };
 }
 
-RelocationSections!()
+RelocationSections!();

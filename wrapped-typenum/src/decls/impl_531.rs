@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TArr!();
         TypeArray!();
+        TArr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_531 {
     };
 }
 
-impl_531!()
+impl_531!();

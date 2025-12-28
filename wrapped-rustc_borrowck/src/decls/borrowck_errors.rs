@@ -4,4 +4,4 @@ macro_rules! borrowck_errors {
     };
 }
 
-borrowck_errors!()
+borrowck_errors!();

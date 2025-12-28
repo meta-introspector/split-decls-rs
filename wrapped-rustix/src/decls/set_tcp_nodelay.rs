@@ -11,4 +11,4 @@ macro_rules! set_tcp_nodelay {
     };
 }
 
-set_tcp_nodelay!()
+set_tcp_nodelay!();

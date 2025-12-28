@@ -4,4 +4,4 @@ macro_rules! R_PPC64_NONE {
     };
 }
 
-R_PPC64_NONE!()
+R_PPC64_NONE!();

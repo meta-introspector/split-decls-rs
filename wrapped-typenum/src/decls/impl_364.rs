@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         B1!();
-        B0!();
-        UInt!();
         Unsigned!();
         Sum!();
+        B0!();
+        UInt!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_364 {
     };
 }
 
-impl_364!()
+impl_364!();

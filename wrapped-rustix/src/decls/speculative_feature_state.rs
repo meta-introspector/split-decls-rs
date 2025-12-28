@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SpeculationFeature!();
         Result!();
+        SpeculationFeature!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! speculative_feature_state {
     };
 }
 
-speculative_feature_state!()
+speculative_feature_state!();

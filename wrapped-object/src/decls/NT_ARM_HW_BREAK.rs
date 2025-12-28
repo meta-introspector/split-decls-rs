@@ -4,4 +4,4 @@ macro_rules! NT_ARM_HW_BREAK {
     };
 }
 
-NT_ARM_HW_BREAK!()
+NT_ARM_HW_BREAK!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        Input!();
-        Anchored!();
         Automaton!();
+        DFA!();
+        Anchored!();
         Teddy!();
         PrefilterI!();
+        Input!();
         Span!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_741 {
     };
 }
 
-impl_741!()
+impl_741!();

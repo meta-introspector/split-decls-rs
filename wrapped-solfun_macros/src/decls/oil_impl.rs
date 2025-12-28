@@ -4,4 +4,4 @@ macro_rules! oil_impl {
     };
 }
 
-oil_impl!()
+oil_impl!();

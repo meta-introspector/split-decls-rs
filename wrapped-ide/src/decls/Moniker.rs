@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MonikerIdentifier!();
         MonikerKind!();
         PackageInformation!();
-        MonikerIdentifier!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Moniker {
     };
 }
 
-Moniker!()
+Moniker!();

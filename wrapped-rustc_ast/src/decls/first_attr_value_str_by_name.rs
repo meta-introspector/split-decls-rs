@@ -11,4 +11,4 @@ macro_rules! first_attr_value_str_by_name {
     };
 }
 
-first_attr_value_str_by_name!()
+first_attr_value_str_by_name!();

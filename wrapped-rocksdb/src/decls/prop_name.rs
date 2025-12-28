@@ -4,4 +4,4 @@ macro_rules! prop_name {
     };
 }
 
-prop_name!()
+prop_name!();

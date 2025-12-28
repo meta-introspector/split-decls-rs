@@ -4,4 +4,4 @@ macro_rules! LN10_F32 {
     };
 }
 
-LN10_F32!()
+LN10_F32!();

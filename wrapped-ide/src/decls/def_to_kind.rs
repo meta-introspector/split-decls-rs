@@ -11,4 +11,4 @@ macro_rules! def_to_kind {
     };
 }
 
-def_to_kind!()
+def_to_kind!();

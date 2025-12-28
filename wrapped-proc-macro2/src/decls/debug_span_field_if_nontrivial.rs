@@ -11,4 +11,4 @@ macro_rules! debug_span_field_if_nontrivial {
     };
 }
 
-debug_span_field_if_nontrivial!()
+debug_span_field_if_nontrivial!();

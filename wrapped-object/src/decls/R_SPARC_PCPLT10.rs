@@ -4,4 +4,4 @@ macro_rules! R_SPARC_PCPLT10 {
     };
 }
 
-R_SPARC_PCPLT10!()
+R_SPARC_PCPLT10!();

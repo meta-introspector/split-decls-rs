@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         SmallVec!();
+        CodegenCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! NO_GENERICS {
     };
 }
 
-NO_GENERICS!()
+NO_GENERICS!();

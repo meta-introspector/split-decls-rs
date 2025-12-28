@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Cfg!();
-        GUID!();
+        Interface!();
+        Method!();
+        MethodOrName!();
+        InterfaceKind!();
         Literal!();
         TypeName!();
-        Config!();
+        Cfg!();
         MethodNames!();
-        Type!();
-        MethodOrName!();
-        Method!();
-        InterfaceKind!();
-        Interface!();
+        Config!();
         TypeMap!();
         TokenStream!();
+        GUID!();
+        Type!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_307 {
     };
 }
 
-impl_307!()
+impl_307!();

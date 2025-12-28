@@ -4,4 +4,4 @@ macro_rules! R_METAG_TLS_IE {
     };
 }
 
-R_METAG_TLS_IE!()
+R_METAG_TLS_IE!();

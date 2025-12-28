@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TomlWrite!();
-        WriteTomlKey!();
         WriteTomlValue!();
+        WriteTomlKey!();
+        TomlWrite!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_69 {
     };
 }
 
-impl_69!()
+impl_69!();

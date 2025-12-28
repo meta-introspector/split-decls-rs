@@ -4,4 +4,4 @@ macro_rules! Level {
     };
 }
 
-Level!()
+Level!();

@@ -4,4 +4,4 @@ macro_rules! LiveLoans {
     };
 }
 
-LiveLoans!()
+LiveLoans!();

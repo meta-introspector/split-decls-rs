@@ -4,4 +4,4 @@ macro_rules! key_iterator {
     };
 }
 
-key_iterator!()
+key_iterator!();

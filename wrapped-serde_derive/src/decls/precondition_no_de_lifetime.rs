@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BorrowedLifetimes!();
         Container!();
         Ctxt!();
+        BorrowedLifetimes!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! precondition_no_de_lifetime {
     };
 }
 
-precondition_no_de_lifetime!()
+precondition_no_de_lifetime!();

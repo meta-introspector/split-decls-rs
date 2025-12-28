@@ -4,4 +4,4 @@ macro_rules! C_ECOMM {
     };
 }
 
-C_ECOMM!()
+C_ECOMM!();

@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_64_PCREL {
     };
 }
 
-R_TILEGX_64_PCREL!()
+R_TILEGX_64_PCREL!();

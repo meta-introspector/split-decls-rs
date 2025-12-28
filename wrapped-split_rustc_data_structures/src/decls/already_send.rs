@@ -11,4 +11,4 @@ macro_rules! already_send {
     };
 }
 
-already_send!()
+already_send!();

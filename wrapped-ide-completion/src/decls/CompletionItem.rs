@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CompletionItemRefMode!();
-        CompletionRelevance!();
         Builder!();
+        CompletionRelevance!();
         CompletionItemKind!();
+        CompletionItemRefMode!();
         CompletionItemLabel!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! CompletionItem {
     };
 }
 
-CompletionItem!()
+CompletionItem!();

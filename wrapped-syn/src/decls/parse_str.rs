@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Result!();
         Parse!();
+        Result!();
+        Parser!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_str {
     };
 }
 
-parse_str!()
+parse_str!();

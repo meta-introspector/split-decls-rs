@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BOOL!();
-        SERVICE_STATUS!();
         SERVICE_STATUS_HANDLE!();
+        SERVICE_STATUS!();
+        BOOL!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_1 {
     };
 }
 
-macro_1!()
+macro_1!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Color!();
+        Suffix!();
+        Style!();
         Prefix!();
         Infix!();
-        Suffix!();
-        Color!();
-        Style!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

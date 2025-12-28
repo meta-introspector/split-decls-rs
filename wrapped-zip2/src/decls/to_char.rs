@@ -4,4 +4,4 @@ macro_rules! to_char {
     };
 }
 
-to_char!()
+to_char!();

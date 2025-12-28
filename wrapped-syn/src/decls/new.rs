@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Lookahead1!();
         Cursor!();
+        Lookahead1!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! new {
     };
 }
 
-new!()
+new!();

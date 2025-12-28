@@ -4,4 +4,4 @@ macro_rules! R_ARM_GOTPC {
     };
 }
 
-R_ARM_GOTPC!()
+R_ARM_GOTPC!();

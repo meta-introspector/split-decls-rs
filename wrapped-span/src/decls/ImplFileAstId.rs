@@ -4,4 +4,4 @@ macro_rules! ImplFileAstId {
     };
 }
 
-ImplFileAstId!()
+ImplFileAstId!();

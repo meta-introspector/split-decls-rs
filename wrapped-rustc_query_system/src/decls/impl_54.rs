@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Deps!();
-        WorkProductMap!();
-        WorkProduct!();
-        DepNodeColor!();
-        DepNode!();
-        WorkProductId!();
         QueryContext!();
+        WorkProductId!();
         DepGraph!();
+        WorkProductMap!();
+        Deps!();
+        WorkProduct!();
+        DepNode!();
+        DepNodeColor!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

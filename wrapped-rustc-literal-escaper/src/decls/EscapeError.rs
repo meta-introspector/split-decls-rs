@@ -4,4 +4,4 @@ macro_rules! EscapeError {
     };
 }
 
-EscapeError!()
+EscapeError!();

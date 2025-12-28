@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Producer!();
         MinLenProducer!();
+        MinLen!();
+        IndexedParallelIterator!();
         ProducerCallback!();
         Consumer!();
-        Producer!();
-        IndexedParallelIterator!();
-        MinLen!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_664 {
     };
 }
 
-impl_664!()
+impl_664!();

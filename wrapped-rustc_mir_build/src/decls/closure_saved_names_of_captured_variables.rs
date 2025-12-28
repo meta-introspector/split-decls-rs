@@ -4,4 +4,4 @@ macro_rules! closure_saved_names_of_captured_variables {
     };
 }
 
-closure_saved_names_of_captured_variables!()
+closure_saved_names_of_captured_variables!();

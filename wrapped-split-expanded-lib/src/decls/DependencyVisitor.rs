@@ -4,4 +4,4 @@ macro_rules! DependencyVisitor {
     };
 }
 
-DependencyVisitor!()
+DependencyVisitor!();

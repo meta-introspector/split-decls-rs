@@ -4,4 +4,4 @@ macro_rules! total_cmp {
     };
 }
 
-total_cmp!()
+total_cmp!();

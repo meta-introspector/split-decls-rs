@@ -4,4 +4,4 @@ macro_rules! stark_proof {
     };
 }
 
-stark_proof!()
+stark_proof!();

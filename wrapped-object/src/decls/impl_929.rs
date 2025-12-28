@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        RelocationMap!();
-        RelocationMapEntry!();
         Error!();
-        Object!();
-        Result!();
-        RelocationKind!();
         Section!();
+        RelocationKind!();
+        Symbol!();
+        Object!();
+        RelocationMap!();
         Relocation!();
         RelocationTarget!();
         SectionKind!();
-        Symbol!();
+        RelocationMapEntry!();
+        Result!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_929 {
     };
 }
 
-impl_929!()
+impl_929!();

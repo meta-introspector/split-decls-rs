@@ -4,4 +4,4 @@ macro_rules! R_E2K_TLS_GDMOD {
     };
 }
 
-R_E2K_TLS_GDMOD!()
+R_E2K_TLS_GDMOD!();

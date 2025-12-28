@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Span!();
         Result!();
+        Span!();
         CaptureName!();
         Error!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

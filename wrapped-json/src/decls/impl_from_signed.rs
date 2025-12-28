@@ -11,4 +11,4 @@ macro_rules! impl_from_signed {
     };
 }
 
-impl_from_signed!()
+impl_from_signed!();

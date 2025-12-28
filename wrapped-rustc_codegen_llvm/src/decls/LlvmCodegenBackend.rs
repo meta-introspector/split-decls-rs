@@ -4,4 +4,4 @@ macro_rules! LlvmCodegenBackend {
     };
 }
 
-LlvmCodegenBackend!()
+LlvmCodegenBackend!();

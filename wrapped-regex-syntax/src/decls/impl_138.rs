@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Formatter!();
         Result!();
         Spans!();
+        Formatter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

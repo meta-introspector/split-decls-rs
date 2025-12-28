@@ -4,4 +4,4 @@ macro_rules! llm_impl {
     };
 }
 
-llm_impl!()
+llm_impl!();

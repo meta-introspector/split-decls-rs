@@ -4,4 +4,4 @@ macro_rules! HYPER_ITER_CONTINUE {
     };
 }
 
-HYPER_ITER_CONTINUE!()
+HYPER_ITER_CONTINUE!();

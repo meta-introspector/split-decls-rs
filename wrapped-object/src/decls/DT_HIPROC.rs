@@ -4,4 +4,4 @@ macro_rules! DT_HIPROC {
     };
 }
 
-DT_HIPROC!()
+DT_HIPROC!();

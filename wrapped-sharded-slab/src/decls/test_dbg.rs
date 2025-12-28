@@ -4,4 +4,4 @@ macro_rules! test_dbg {
     };
 }
 
-test_dbg!()
+test_dbg!();

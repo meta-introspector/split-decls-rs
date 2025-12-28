@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_ERR_NOMEM {
     };
 }
 
-NGHTTP2_ERR_NOMEM!()
+NGHTTP2_ERR_NOMEM!();

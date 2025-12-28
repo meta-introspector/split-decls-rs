@@ -11,4 +11,4 @@ macro_rules! parse_string_spanned {
     };
 }
 
-parse_string_spanned!()
+parse_string_spanned!();

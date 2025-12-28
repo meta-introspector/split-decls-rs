@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Pick!();
-        SupertraitItemShadowing!();
-        ConfirmContext!();
-        ConfirmResult!();
-        SupertraitItemShadowee!();
-        SupertraitItemShadower!();
         MethodCallee!();
-        FnCtxt!();
+        ConfirmResult!();
         AutorefOrPtrAdjustment!();
+        SupertraitItemShadowing!();
+        SupertraitItemShadower!();
+        SupertraitItemShadowee!();
+        ConfirmContext!();
+        FnCtxt!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_247 {
     };
 }
 
-impl_247!()
+impl_247!();

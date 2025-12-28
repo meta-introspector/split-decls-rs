@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxContext!();
         SpanData!();
+        SyntaxContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Span {
     };
 }
 
-Span!()
+Span!();

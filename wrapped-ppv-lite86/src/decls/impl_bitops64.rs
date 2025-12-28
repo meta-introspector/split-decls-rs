@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RotateEachWord64!();
-        RotateEachWord32!();
         BitOps64!();
+        RotateEachWord32!();
+        RotateEachWord64!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_bitops64 {
     };
 }
 
-impl_bitops64!()
+impl_bitops64!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StableHasher!();
         ExtendedHasher!();
         FromStableHash!();
+        StableHasher!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

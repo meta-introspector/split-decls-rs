@@ -4,4 +4,4 @@ macro_rules! R_MN10300_TLS_LE {
     };
 }
 
-R_MN10300_TLS_LE!()
+R_MN10300_TLS_LE!();

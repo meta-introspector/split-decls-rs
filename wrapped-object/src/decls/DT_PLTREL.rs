@@ -4,4 +4,4 @@ macro_rules! DT_PLTREL {
     };
 }
 
-DT_PLTREL!()
+DT_PLTREL!();

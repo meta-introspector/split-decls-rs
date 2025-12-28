@@ -4,4 +4,4 @@ macro_rules! rustc_unescape_error_to_string {
     };
 }
 
-rustc_unescape_error_to_string!()
+rustc_unescape_error_to_string!();

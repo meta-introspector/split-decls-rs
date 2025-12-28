@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        CompilerCtxt!();
         TyHelpers!();
         Bridge!();
-        CompilerCtxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

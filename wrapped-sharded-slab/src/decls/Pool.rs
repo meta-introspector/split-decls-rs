@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        DefaultConfig!();
         Clear!();
         Slab!();
-        DefaultConfig!();
         Config!();
         Array!();
     };
@@ -15,4 +15,4 @@ macro_rules! Pool {
     };
 }
 
-Pool!()
+Pool!();

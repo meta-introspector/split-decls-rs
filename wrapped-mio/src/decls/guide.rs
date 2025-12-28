@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Token!();
         Interest!();
         Events!();
         Poll!();
+        Token!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! guide {
     };
 }
 
-guide!()
+guide!();

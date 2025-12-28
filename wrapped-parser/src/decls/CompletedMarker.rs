@@ -4,4 +4,4 @@ macro_rules! CompletedMarker {
     };
 }
 
-CompletedMarker!()
+CompletedMarker!();

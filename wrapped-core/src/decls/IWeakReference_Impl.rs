@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IUnknownImpl!();
         GUID!();
+        IUnknownImpl!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IWeakReference_Impl {
     };
 }
 
-IWeakReference_Impl!()
+IWeakReference_Impl!();

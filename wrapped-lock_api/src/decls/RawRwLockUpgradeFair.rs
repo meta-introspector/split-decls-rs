@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawRwLockFair!();
         RawRwLockUpgrade!();
+        RawRwLockFair!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RawRwLockUpgradeFair {
     };
 }
 
-RawRwLockUpgradeFair!()
+RawRwLockUpgradeFair!();

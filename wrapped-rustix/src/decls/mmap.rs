@@ -4,4 +4,4 @@ macro_rules! mmap {
     };
 }
 
-mmap!()
+mmap!();

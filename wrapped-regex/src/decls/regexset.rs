@@ -4,4 +4,4 @@ macro_rules! regexset {
     };
 }
 
-regexset!()
+regexset!();

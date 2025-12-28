@@ -4,4 +4,4 @@ macro_rules! check_once {
     };
 }
 
-check_once!()
+check_once!();

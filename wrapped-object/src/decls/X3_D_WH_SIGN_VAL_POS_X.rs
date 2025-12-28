@@ -4,4 +4,4 @@ macro_rules! X3_D_WH_SIGN_VAL_POS_X {
     };
 }
 
-X3_D_WH_SIGN_VAL_POS_X!()
+X3_D_WH_SIGN_VAL_POS_X!();

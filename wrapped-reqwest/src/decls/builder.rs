@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Kind!();
         BoxError!();
+        Kind!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! builder {
     };
 }
 
-builder!()
+builder!();

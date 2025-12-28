@@ -4,4 +4,4 @@ macro_rules! MODIFIER_LETTER {
     };
 }
 
-MODIFIER_LETTER!()
+MODIFIER_LETTER!();

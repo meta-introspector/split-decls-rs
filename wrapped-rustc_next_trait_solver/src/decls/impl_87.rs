@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        CurrentGoalKind!();
-        GoalStalledOn!();
+        SearchGraph!();
         ReplaceAliasWithInfer!();
-        HasChanged!();
-        SolverDelegate!();
-        ProofTreeBuilder!();
-        Ambiguous!();
-        BoundVarReplacer!();
-        GoalEvaluation!();
         EvalCtxt!();
         EvaluationStepBuilder!();
-        SearchGraph!();
+        SolverDelegate!();
+        Ambiguous!();
+        GoalStalledOn!();
+        HasChanged!();
+        CurrentGoalKind!();
+        GoalEvaluation!();
+        BoundVarReplacer!();
+        ProofTreeBuilder!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

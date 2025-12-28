@@ -4,4 +4,4 @@ macro_rules! round3_step {
     };
 }
 
-round3_step!()
+round3_step!();

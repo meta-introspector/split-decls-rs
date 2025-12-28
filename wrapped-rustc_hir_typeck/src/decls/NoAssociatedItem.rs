@@ -4,4 +4,4 @@ macro_rules! NoAssociatedItem {
     };
 }
 
-NoAssociatedItem!()
+NoAssociatedItem!();

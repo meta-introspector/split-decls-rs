@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ClosureObligationProcessor!();
         ProcessResult!();
+        ClosureObligationProcessor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! C {
     };
 }
 
-C!()
+C!();

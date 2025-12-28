@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        FnSig!();
         Ty!();
-        Binder!();
+        Interner!();
         FnHeader!();
+        Binder!();
+        FnSig!();
         Tys!();
         FnSigTys!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_471 {
     };
 }
 
-impl_471!()
+impl_471!();

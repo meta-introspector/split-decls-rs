@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        Blob!();
-        Type!();
         File!();
-        Decode!();
+        Type!();
         Value!();
+        Decode!();
+        Blob!();
+        Reader!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_418 {
     };
 }
 
-impl_418!()
+impl_418!();

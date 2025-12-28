@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Value!();
         IterMut!();
+        Value!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IterMutImpl {
     };
 }
 
-IterMutImpl!()
+IterMutImpl!();

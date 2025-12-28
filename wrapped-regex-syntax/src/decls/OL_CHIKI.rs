@@ -4,4 +4,4 @@ macro_rules! OL_CHIKI {
     };
 }
 
-OL_CHIKI!()
+OL_CHIKI!();

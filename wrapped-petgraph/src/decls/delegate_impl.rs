@@ -4,4 +4,4 @@ macro_rules! delegate_impl {
     };
 }
 
-delegate_impl!()
+delegate_impl!();

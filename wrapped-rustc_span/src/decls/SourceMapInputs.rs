@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SourceFileHashAlgorithm!();
-        FileLoader!();
-        SourceMap!();
         FilePathMapping!();
+        SourceFileHashAlgorithm!();
+        SourceMap!();
+        FileLoader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SourceMapInputs {
     };
 }
 
-SourceMapInputs!()
+SourceMapInputs!();

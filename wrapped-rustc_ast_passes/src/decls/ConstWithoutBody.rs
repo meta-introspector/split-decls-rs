@@ -4,4 +4,4 @@ macro_rules! ConstWithoutBody {
     };
 }
 
-ConstWithoutBody!()
+ConstWithoutBody!();

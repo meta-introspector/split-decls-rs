@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        OperandBundle!();
         AsmDialect!();
-        Linkage!();
+        AtomicOrdering!();
         MetadataKindId!();
-        TailCallKind!();
-        PassManager!();
-        Bool!();
-        RawEnum!();
-        Builder!();
         TypeKind!();
         AtomicRmwBinOp!();
-        UnnamedAddr!();
-        AtomicOrdering!();
-        DLLStorageClass!();
-        Visibility!();
-        ThreadLocalMode!();
+        PassManager!();
+        OperandBundle!();
         Opcode!();
+        UnnamedAddr!();
+        Bool!();
+        Builder!();
+        DLLStorageClass!();
+        Linkage!();
+        ThreadLocalMode!();
+        TailCallKind!();
+        RawEnum!();
+        Visibility!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! other_489 {
     };
 }
 
-other_489!()
+other_489!();

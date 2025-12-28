@@ -4,4 +4,4 @@ macro_rules! backpack_fill_impl {
     };
 }
 
-backpack_fill_impl!()
+backpack_fill_impl!();

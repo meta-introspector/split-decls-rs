@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        OpTy!();
-        Frame!();
-        EnteredTraceSpan!();
-        RangeSet!();
-        InterpCx!();
-        PlaceTy!();
-        MPlaceTy!();
-        ImmTy!();
         MayLeak!();
-        AllocKind!();
-        AllocMap!();
+        OpTy!();
+        RangeSet!();
+        MPlaceTy!();
         ReturnAction!();
-        FnArg!();
+        AllocMap!();
+        ImmTy!();
+        PlaceTy!();
         MemoryKind!();
+        AllocKind!();
+        Frame!();
+        InterpCx!();
+        FnArg!();
+        EnteredTraceSpan!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! Machine {
     };
 }
 
-Machine!()
+Machine!();

@@ -4,4 +4,4 @@ macro_rules! SCOPED_COUNT {
     };
 }
 
-SCOPED_COUNT!()
+SCOPED_COUNT!();

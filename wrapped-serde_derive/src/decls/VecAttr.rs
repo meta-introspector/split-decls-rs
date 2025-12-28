@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Symbol!();
         Ctxt!();
+        Symbol!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VecAttr {
     };
 }
 
-VecAttr!()
+VecAttr!();

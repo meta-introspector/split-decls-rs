@@ -4,4 +4,4 @@ macro_rules! select_implementation {
     };
 }
 
-select_implementation!()
+select_implementation!();

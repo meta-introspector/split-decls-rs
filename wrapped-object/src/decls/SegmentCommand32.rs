@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        U32!();
         Endian!();
         Section32!();
-        U32!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SegmentCommand32 {
     };
 }
 
-SegmentCommand32!()
+SegmentCommand32!();

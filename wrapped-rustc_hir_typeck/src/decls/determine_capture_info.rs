@@ -4,4 +4,4 @@ macro_rules! determine_capture_info {
     };
 }
 
-determine_capture_info!()
+determine_capture_info!();

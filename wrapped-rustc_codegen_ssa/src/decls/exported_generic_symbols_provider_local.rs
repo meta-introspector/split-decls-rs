@@ -4,4 +4,4 @@ macro_rules! exported_generic_symbols_provider_local {
     };
 }
 
-exported_generic_symbols_provider_local!()
+exported_generic_symbols_provider_local!();

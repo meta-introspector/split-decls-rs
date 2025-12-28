@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        ClassUnicode!();
-        ClassBracketed!();
-        Repetition!();
-        Dot!();
-        Group!();
-        ClassSetBinaryOp!();
-        ClassPerl!();
-        Assertion!();
-        Ast!();
-        Literal!();
-        Flags!();
-        NestLimiter!();
-        Parser!();
-        Range!();
-        Concat!();
         Error!();
+        ClassBracketed!();
+        Group!();
+        Repetition!();
+        Assertion!();
+        Range!();
+        ClassPerl!();
+        Parser!();
+        NestLimiter!();
+        ClassUnicode!();
+        Flags!();
+        Alternation!();
+        Dot!();
+        Ast!();
+        Concat!();
         Visitor!();
+        ClassSetBinaryOp!();
         ClassSetItem!();
         Result!();
-        Alternation!();
+        Literal!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

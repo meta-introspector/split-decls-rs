@@ -4,4 +4,4 @@ macro_rules! cargo_hello_world_project_model {
     };
 }
 
-cargo_hello_world_project_model!()
+cargo_hello_world_project_model!();

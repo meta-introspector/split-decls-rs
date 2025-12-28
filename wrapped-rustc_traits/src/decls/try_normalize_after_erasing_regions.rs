@@ -4,4 +4,4 @@ macro_rules! try_normalize_after_erasing_regions {
     };
 }
 
-try_normalize_after_erasing_regions!()
+try_normalize_after_erasing_regions!();

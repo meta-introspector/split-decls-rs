@@ -4,4 +4,4 @@ macro_rules! ConflictAction {
     };
 }
 
-ConflictAction!()
+ConflictAction!();

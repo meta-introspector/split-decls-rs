@@ -4,4 +4,4 @@ macro_rules! walk_between {
     };
 }
 
-walk_between!()
+walk_between!();

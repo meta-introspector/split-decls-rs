@@ -11,4 +11,4 @@ macro_rules! MIN_STATES {
     };
 }
 
-MIN_STATES!()
+MIN_STATES!();

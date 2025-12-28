@@ -4,4 +4,4 @@ macro_rules! SYNC_GUARD_SYMBOLS {
     };
 }
 
-SYNC_GUARD_SYMBOLS!()
+SYNC_GUARD_SYMBOLS!();

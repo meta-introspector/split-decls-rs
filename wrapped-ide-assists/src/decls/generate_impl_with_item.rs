@@ -4,4 +4,4 @@ macro_rules! generate_impl_with_item {
     };
 }
 
-generate_impl_with_item!()
+generate_impl_with_item!();

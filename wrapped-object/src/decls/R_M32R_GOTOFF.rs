@@ -4,4 +4,4 @@ macro_rules! R_M32R_GOTOFF {
     };
 }
 
-R_M32R_GOTOFF!()
+R_M32R_GOTOFF!();

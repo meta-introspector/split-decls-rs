@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         PanicNonStrErr!();
-        ConstCx!();
         NonConstOp!();
         PanicNonStr!();
+        ConstCx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

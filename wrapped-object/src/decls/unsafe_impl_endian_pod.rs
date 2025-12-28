@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endian!();
         Pod!();
+        Endian!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! unsafe_impl_endian_pod {
     };
 }
 
-unsafe_impl_endian_pod!()
+unsafe_impl_endian_pod!();

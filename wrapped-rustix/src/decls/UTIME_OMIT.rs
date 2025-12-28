@@ -11,4 +11,4 @@ macro_rules! UTIME_OMIT {
     };
 }
 
-UTIME_OMIT!()
+UTIME_OMIT!();

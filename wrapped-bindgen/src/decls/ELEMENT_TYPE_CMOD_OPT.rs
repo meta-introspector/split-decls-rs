@@ -11,4 +11,4 @@ macro_rules! ELEMENT_TYPE_CMOD_OPT {
     };
 }
 
-ELEMENT_TYPE_CMOD_OPT!()
+ELEMENT_TYPE_CMOD_OPT!();

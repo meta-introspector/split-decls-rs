@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MovePathResult!();
         MovePath!();
+        MovePathResult!();
         MoveData!();
         MoveDataBuilder!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

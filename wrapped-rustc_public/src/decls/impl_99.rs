@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stable!();
         Endian!();
+        Stable!();
         BridgeTys!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_99 {
     };
 }
 
-impl_99!()
+impl_99!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Size!();
-        AddressSpace!();
-        Align!();
-        Endian!();
         PointerSpec!();
-        AbiAlign!();
-        TargetDataLayoutErrors!();
         TargetDataLayout!();
+        AddressSpace!();
+        AbiAlign!();
+        Size!();
+        Align!();
+        TargetDataLayoutErrors!();
         Integer!();
+        Endian!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

@@ -4,4 +4,4 @@ macro_rules! AsyncKind {
     };
 }
 
-AsyncKind!()
+AsyncKind!();

@@ -4,4 +4,4 @@ macro_rules! R_LARCH_SOP_PUSH_DUP {
     };
 }
 
-R_LARCH_SOP_PUSH_DUP!()
+R_LARCH_SOP_PUSH_DUP!();

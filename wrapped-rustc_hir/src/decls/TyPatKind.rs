@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstArg!();
         TyPat!();
+        ConstArg!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TyPatKind {
     };
 }
 
-TyPatKind!()
+TyPatKind!();

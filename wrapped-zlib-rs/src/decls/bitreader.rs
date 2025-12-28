@@ -4,4 +4,4 @@ macro_rules! bitreader {
     };
 }
 
-bitreader!()
+bitreader!();

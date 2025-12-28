@@ -4,4 +4,4 @@ macro_rules! R_SPARC_TLS_LE_LOX10 {
     };
 }
 
-R_SPARC_TLS_LE_LOX10!()
+R_SPARC_TLS_LE_LOX10!();

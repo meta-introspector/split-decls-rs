@@ -4,4 +4,4 @@ macro_rules! ET_NONE {
     };
 }
 
-ET_NONE!()
+ET_NONE!();

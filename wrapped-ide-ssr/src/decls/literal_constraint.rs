@@ -14,4 +14,4 @@ macro_rules! literal_constraint {
     };
 }
 
-literal_constraint!()
+literal_constraint!();

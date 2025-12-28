@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         HasDataLayout!();
         AbiAlign!();
-        Float!();
         Size!();
+        Float!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_90 {
     };
 }
 
-impl_90!()
+impl_90!();

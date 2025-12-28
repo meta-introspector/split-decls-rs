@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_RWPLT {
     };
 }
 
-DT_MIPS_RWPLT!()
+DT_MIPS_RWPLT!();

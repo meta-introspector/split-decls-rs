@@ -4,4 +4,4 @@ macro_rules! debugger_visualizer {
     };
 }
 
-debugger_visualizer!()
+debugger_visualizer!();

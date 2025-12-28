@@ -4,4 +4,4 @@ macro_rules! expand_compile_error {
     };
 }
 
-expand_compile_error!()
+expand_compile_error!();

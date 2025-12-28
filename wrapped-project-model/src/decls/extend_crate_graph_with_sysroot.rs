@@ -11,4 +11,4 @@ macro_rules! extend_crate_graph_with_sysroot {
     };
 }
 
-extend_crate_graph_with_sysroot!()
+extend_crate_graph_with_sysroot!();

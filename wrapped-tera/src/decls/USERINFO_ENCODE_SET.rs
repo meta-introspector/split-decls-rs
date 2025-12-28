@@ -4,4 +4,4 @@ macro_rules! USERINFO_ENCODE_SET {
     };
 }
 
-USERINFO_ENCODE_SET!()
+USERINFO_ENCODE_SET!();

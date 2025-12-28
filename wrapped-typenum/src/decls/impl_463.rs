@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PrivateSetBit!();
         Trim!();
-        SetBit!();
-        InternalMarker!();
         TrimOut!();
         PrivateSetBitOut!();
+        SetBit!();
+        PrivateSetBit!();
+        InternalMarker!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_463 {
     };
 }
 
-impl_463!()
+impl_463!();

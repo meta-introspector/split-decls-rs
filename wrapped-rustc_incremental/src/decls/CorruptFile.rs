@@ -4,4 +4,4 @@ macro_rules! CorruptFile {
     };
 }
 
-CorruptFile!()
+CorruptFile!();

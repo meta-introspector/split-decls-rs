@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        DivergingFallbackBehavior!();
         InferVarInfo!();
+        SuggestAnnotations!();
         Coerce!();
         DependencyOnUnitNeverTypeFallback!();
-        SuggestAnnotations!();
-        DivergingFallbackBehavior!();
-        FnCtxt!();
-        NeverTypeFallbackFlowingIntoUnsafe!();
         AnnotateUnitFallbackVisitor!();
         UnsafeUseReason!();
+        FnCtxt!();
+        NeverTypeFallbackFlowingIntoUnsafe!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_168 {
     };
 }
 
-impl_168!()
+impl_168!();

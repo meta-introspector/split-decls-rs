@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Entries!();
         Input!();
-        Errors!();
         Value!();
+        Entries!();
         Symbol!();
+        Errors!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! symbols_with_errors {
     };
 }
 
-symbols_with_errors!()
+symbols_with_errors!();

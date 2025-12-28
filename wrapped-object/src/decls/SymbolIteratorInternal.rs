@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         U32Bytes!();
-        Bytes!();
         U64Bytes!();
         U16Bytes!();
+        Bytes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SymbolIteratorInternal {
     };
 }
 
-SymbolIteratorInternal!()
+SymbolIteratorInternal!();

@@ -4,4 +4,4 @@ macro_rules! assign_observables_names {
     };
 }
 
-assign_observables_names!()
+assign_observables_names!();

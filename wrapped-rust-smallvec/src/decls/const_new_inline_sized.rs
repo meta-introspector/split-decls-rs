@@ -11,4 +11,4 @@ macro_rules! const_new_inline_sized {
     };
 }
 
-const_new_inline_sized!()
+const_new_inline_sized!();

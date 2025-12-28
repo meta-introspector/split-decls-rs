@@ -4,4 +4,4 @@ macro_rules! OSVERSIONINFOW {
     };
 }
 
-OSVERSIONINFOW!()
+OSVERSIONINFOW!();

@@ -4,4 +4,4 @@ macro_rules! ConstraintDescription {
     };
 }
 
-ConstraintDescription!()
+ConstraintDescription!();

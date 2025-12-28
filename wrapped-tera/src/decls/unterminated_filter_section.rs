@@ -4,4 +4,4 @@ macro_rules! unterminated_filter_section {
     };
 }
 
-unterminated_filter_section!()
+unterminated_filter_section!();

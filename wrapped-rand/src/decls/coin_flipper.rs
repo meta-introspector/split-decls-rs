@@ -4,4 +4,4 @@ macro_rules! coin_flipper {
     };
 }
 
-coin_flipper!()
+coin_flipper!();

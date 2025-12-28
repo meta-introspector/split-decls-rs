@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        NonLocalDefinitions!();
-        CheckTransmutes!();
+        MissingDebugImplementations!();
         ShadowedIntoIter!();
+        MultipleSupertraitUpcastable!();
+        CheckTransmutes!();
         IfLetRescope!();
         DefaultCouldBeDerived!();
-        MultipleSupertraitUpcastable!();
-        TypeLimits!();
-        DanglingPointers!();
-        MissingDebugImplementations!();
         MissingDoc!();
+        TypeLimits!();
+        NonLocalDefinitions!();
+        DanglingPointers!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! macro_871 {
     };
 }
 
-macro_871!()
+macro_871!();

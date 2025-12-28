@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Span!();
         DefId!();
         Symbol!();
         Attribute!();
         Crate!();
+        Span!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! CrateDef {
     };
 }
 
-CrateDef!()
+CrateDef!();

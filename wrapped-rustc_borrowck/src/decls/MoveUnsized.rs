@@ -4,4 +4,4 @@ macro_rules! MoveUnsized {
     };
 }
 
-MoveUnsized!()
+MoveUnsized!();

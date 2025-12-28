@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BlockedIter!();
         Block!();
+        BlockedIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

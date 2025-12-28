@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LlvmError!();
         Diagnostic!();
         ParseTargetMachineConfig!();
-        LlvmError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_377 {
     };
 }
 
-impl_377!()
+impl_377!();

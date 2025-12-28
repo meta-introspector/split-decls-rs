@@ -4,4 +4,4 @@ macro_rules! assert_type {
     };
 }
 
-assert_type!()
+assert_type!();

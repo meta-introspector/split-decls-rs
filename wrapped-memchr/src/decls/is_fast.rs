@@ -4,4 +4,4 @@ macro_rules! is_fast {
     };
 }
 
-is_fast!()
+is_fast!();

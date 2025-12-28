@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StructureNodeKind!();
         StructureNode!();
+        StructureNodeKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! structure_token {
     };
 }
 
-structure_token!()
+structure_token!();

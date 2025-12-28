@@ -11,4 +11,4 @@ macro_rules! str_normalize_post_diverge_elide {
     };
 }
 
-str_normalize_post_diverge_elide!()
+str_normalize_post_diverge_elide!();

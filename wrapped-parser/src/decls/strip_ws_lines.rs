@@ -4,4 +4,4 @@ macro_rules! strip_ws_lines {
     };
 }
 
-strip_ws_lines!()
+strip_ws_lines!();

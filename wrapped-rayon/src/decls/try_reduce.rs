@@ -4,4 +4,4 @@ macro_rules! try_reduce {
     };
 }
 
-try_reduce!()
+try_reduce!();

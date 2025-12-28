@@ -11,4 +11,4 @@ macro_rules! to_linearized_matrix_position {
     };
 }
 
-to_linearized_matrix_position!()
+to_linearized_matrix_position!();

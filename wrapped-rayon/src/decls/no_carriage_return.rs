@@ -4,4 +4,4 @@ macro_rules! no_carriage_return {
     };
 }
 
-no_carriage_return!()
+no_carriage_return!();

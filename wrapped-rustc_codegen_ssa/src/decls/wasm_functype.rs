@@ -4,4 +4,4 @@ macro_rules! wasm_functype {
     };
 }
 
-wasm_functype!()
+wasm_functype!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Options!();
+        IteratorMode!();
         DB!();
         DBAccess!();
-        IteratorMode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SnapshotWithThreadMode {
     };
 }
 
-SnapshotWithThreadMode!()
+SnapshotWithThreadMode!();

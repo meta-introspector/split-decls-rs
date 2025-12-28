@@ -11,4 +11,4 @@ macro_rules! num_words {
     };
 }
 
-num_words!()
+num_words!();

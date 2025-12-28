@@ -4,4 +4,4 @@ macro_rules! freshen {
     };
 }
 
-freshen!()
+freshen!();

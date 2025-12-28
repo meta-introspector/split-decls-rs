@@ -4,4 +4,4 @@ macro_rules! fd_set_num_elements_for_bitvector {
     };
 }
 
-fd_set_num_elements_for_bitvector!()
+fd_set_num_elements_for_bitvector!();

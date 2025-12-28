@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        GenericParam!();
         Ty!();
         Walkable!();
-        GenericParam!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UnsafeBinderTy {
     };
 }
 
-UnsafeBinderTy!()
+UnsafeBinderTy!();

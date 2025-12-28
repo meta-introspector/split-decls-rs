@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_TPREL64 {
     };
 }
 
-R_ALPHA_TPREL64!()
+R_ALPHA_TPREL64!();

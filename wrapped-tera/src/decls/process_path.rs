@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Error!();
-        Val!();
         Result!();
         CallStack!();
+        Val!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! process_path {
     };
 }
 
-process_path!()
+process_path!();

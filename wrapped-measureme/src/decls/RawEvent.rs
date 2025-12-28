@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EventId!();
         StringId!();
+        EventId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RawEvent {
     };
 }
 
-RawEvent!()
+RawEvent!();

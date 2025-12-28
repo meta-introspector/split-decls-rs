@@ -4,4 +4,4 @@ macro_rules! is_upvar_field_projection {
     };
 }
 
-is_upvar_field_projection!()
+is_upvar_field_projection!();

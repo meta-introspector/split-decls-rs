@@ -1,38 +1,38 @@
 macro_rules! deps {
     () => {
-        PanicFuse!();
-        UnindexedConsumer!();
-        Fold!();
-        ParallelExtend!();
-        FilterMap!();
         MapWith!();
-        WhileSome!();
-        FlatMapIter!();
         SkipAnyWhile!();
-        Filter!();
-        TakeAnyWhile!();
-        FromParallelIterator!();
-        Map!();
-        Update!();
-        IntoParallelIterator!();
-        Chain!();
-        Once!();
-        Iter!();
-        Copied!();
-        Flatten!();
-        TakeAny!();
-        MapInit!();
-        Inspect!();
-        Intersperse!();
-        FoldWith!();
-        FlatMap!();
-        TryFoldWith!();
-        SkipAny!();
-        Consumer!();
-        Cloned!();
         FlattenIter!();
+        FoldWith!();
+        Consumer!();
+        Chain!();
+        Fold!();
+        Map!();
         TryFold!();
+        Iter!();
+        FlatMapIter!();
+        Update!();
+        WhileSome!();
         IndexedParallelIterator!();
+        FilterMap!();
+        Flatten!();
+        Inspect!();
+        UnindexedConsumer!();
+        FlatMap!();
+        Copied!();
+        TakeAnyWhile!();
+        TryFoldWith!();
+        PanicFuse!();
+        Filter!();
+        TakeAny!();
+        ParallelExtend!();
+        MapInit!();
+        FromParallelIterator!();
+        Intersperse!();
+        SkipAny!();
+        Once!();
+        Cloned!();
+        IntoParallelIterator!();
     };
 }
 
@@ -44,4 +44,4 @@ macro_rules! ParallelIterator {
     };
 }
 
-ParallelIterator!()
+ParallelIterator!();

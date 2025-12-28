@@ -4,4 +4,4 @@ macro_rules! read_token {
     };
 }
 
-read_token!()
+read_token!();

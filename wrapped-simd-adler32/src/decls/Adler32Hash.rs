@@ -11,4 +11,4 @@ macro_rules! Adler32Hash {
     };
 }
 
-Adler32Hash!()
+Adler32Hash!();

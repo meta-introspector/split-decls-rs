@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        RelocationTarget!();
         RelocationEncoding!();
+        RelocationKind!();
         RelocationFlags!();
         Relocation!();
-        RelocationTarget!();
-        RelocationKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_927 {
     };
 }
 
-impl_927!()
+impl_927!();

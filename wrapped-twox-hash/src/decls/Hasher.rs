@@ -4,4 +4,4 @@ macro_rules! Hasher {
     };
 }
 
-Hasher!()
+Hasher!();

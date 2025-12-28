@@ -11,4 +11,4 @@ macro_rules! ALL_EDITIONS {
     };
 }
 
-ALL_EDITIONS!()
+ALL_EDITIONS!();

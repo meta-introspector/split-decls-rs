@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Input!();
         Match!();
         Config!();
         DFA!();
         MatchKind!();
-        Input!();
-        Anchored!();
         PatternID!();
+        Anchored!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

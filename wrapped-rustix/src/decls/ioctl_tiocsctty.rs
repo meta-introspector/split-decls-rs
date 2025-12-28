@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Tiocsctty!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ioctl_tiocsctty {
     };
 }
 
-ioctl_tiocsctty!()
+ioctl_tiocsctty!();

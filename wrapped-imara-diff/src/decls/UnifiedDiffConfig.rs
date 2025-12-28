@@ -4,4 +4,4 @@ macro_rules! UnifiedDiffConfig {
     };
 }
 
-UnifiedDiffConfig!()
+UnifiedDiffConfig!();

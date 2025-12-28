@@ -4,4 +4,4 @@ macro_rules! defs {
     };
 }
 
-defs!()
+defs!();

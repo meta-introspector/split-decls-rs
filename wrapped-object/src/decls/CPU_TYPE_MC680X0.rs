@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_MC680X0 {
     };
 }
 
-CPU_TYPE_MC680X0!()
+CPU_TYPE_MC680X0!();

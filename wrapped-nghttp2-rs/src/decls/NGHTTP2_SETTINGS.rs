@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_SETTINGS {
     };
 }
 
-NGHTTP2_SETTINGS!()
+NGHTTP2_SETTINGS!();

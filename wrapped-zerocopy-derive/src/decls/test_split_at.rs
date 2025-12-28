@@ -4,4 +4,4 @@ macro_rules! test_split_at {
     };
 }
 
-test_split_at!()
+test_split_at!();

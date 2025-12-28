@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Cache!();
-        Anchored!();
         DebugByte!();
+        Anchored!();
+        Cache!();
         StartError!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_260 {
     };
 }
 
-impl_260!()
+impl_260!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImplTraitInTraitCollector!();
         RemapHiddenTyRegions!();
+        ImplTraitInTraitCollector!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! collect_return_position_impl_trait_in_trait_tys {
     };
 }
 
-collect_return_position_impl_trait_in_trait_tys!()
+collect_return_position_impl_trait_in_trait_tys!();

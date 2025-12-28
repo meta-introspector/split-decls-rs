@@ -12,4 +12,4 @@ macro_rules! SHF_COMPRESSED {
     };
 }
 
-SHF_COMPRESSED!()
+SHF_COMPRESSED!();

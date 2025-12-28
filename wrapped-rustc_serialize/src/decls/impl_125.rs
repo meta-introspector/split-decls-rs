@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MemDecoder!();
         Decoder!();
+        MemDecoder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

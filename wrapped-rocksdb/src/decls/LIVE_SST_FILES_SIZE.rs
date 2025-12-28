@@ -11,4 +11,4 @@ macro_rules! LIVE_SST_FILES_SIZE {
     };
 }
 
-LIVE_SST_FILES_SIZE!()
+LIVE_SST_FILES_SIZE!();

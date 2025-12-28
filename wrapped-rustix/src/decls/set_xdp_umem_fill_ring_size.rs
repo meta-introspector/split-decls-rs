@@ -11,4 +11,4 @@ macro_rules! set_xdp_umem_fill_ring_size {
     };
 }
 
-set_xdp_umem_fill_ring_size!()
+set_xdp_umem_fill_ring_size!();

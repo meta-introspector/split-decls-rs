@@ -4,4 +4,4 @@ macro_rules! rc_return {
     };
 }
 
-rc_return!()
+rc_return!();

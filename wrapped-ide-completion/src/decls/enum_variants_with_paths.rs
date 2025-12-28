@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Completions!();
-        CompletionContext!();
         PathKind!();
+        CompletionContext!();
+        Completions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! enum_variants_with_paths {
     };
 }
 
-enum_variants_with_paths!()
+enum_variants_with_paths!();

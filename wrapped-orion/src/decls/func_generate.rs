@@ -4,4 +4,4 @@ macro_rules! func_generate {
     };
 }
 
-func_generate!()
+func_generate!();

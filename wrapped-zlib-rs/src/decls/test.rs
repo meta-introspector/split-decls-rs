@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        InflateFlush!();
         Method!();
-        Strategy!();
-        DeflateConfig!();
-        ReturnCode!();
         Value!();
-        InflateConfig!();
+        InflateStream!();
         DeflateFlush!();
         DeflateStream!();
-        InflateStream!();
         State!();
+        InflateFlush!();
+        InflateConfig!();
+        ReturnCode!();
         DataType!();
+        DeflateConfig!();
+        Strategy!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

@@ -11,4 +11,4 @@ macro_rules! new_word_bounds {
     };
 }
 
-new_word_bounds!()
+new_word_bounds!();

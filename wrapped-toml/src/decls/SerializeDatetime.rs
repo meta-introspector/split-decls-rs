@@ -4,4 +4,4 @@ macro_rules! SerializeDatetime {
     };
 }
 
-SerializeDatetime!()
+SerializeDatetime!();

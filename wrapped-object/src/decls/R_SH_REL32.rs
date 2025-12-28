@@ -4,4 +4,4 @@ macro_rules! R_SH_REL32 {
     };
 }
 
-R_SH_REL32!()
+R_SH_REL32!();

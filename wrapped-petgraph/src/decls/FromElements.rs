@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Node!();
+        Element!();
         Edge!();
         Create!();
-        Element!();
+        Node!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FromElements {
     };
 }
 
-FromElements!()
+FromElements!();

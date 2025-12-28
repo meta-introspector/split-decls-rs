@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AttributeParseErrorReason!();
         AttributeParseError!();
+        AttributeParseErrorReason!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_371 {
     };
 }
 
-impl_371!()
+impl_371!();

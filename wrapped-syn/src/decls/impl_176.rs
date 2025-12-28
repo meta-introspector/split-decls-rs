@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ParseStream!();
-        SpanRange!();
-        Spanned!();
-        Result!();
-        ThreadBound!();
         Error!();
         ErrorMessage!();
+        SpanRange!();
+        ParseStream!();
+        Result!();
+        Spanned!();
+        ThreadBound!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

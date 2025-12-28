@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Cmp!();
         IsGreaterOrEqual!();
         IsGreaterOrEqualPrivate!();
-        Internal!();
-        Cmp!();
         Compare!();
+        Internal!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_331 {
     };
 }
 
-impl_331!()
+impl_331!();

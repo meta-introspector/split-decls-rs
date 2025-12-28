@@ -4,4 +4,4 @@ macro_rules! Parenthesized {
     };
 }
 
-Parenthesized!()
+Parenthesized!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ValueRef!();
         ToSqlOutput!();
         Result!();
         Sql!();
-        ValueRef!();
         ToSql!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

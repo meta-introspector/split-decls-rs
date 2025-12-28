@@ -4,4 +4,4 @@ macro_rules! Restriction {
     };
 }
 
-Restriction!()
+Restriction!();

@@ -4,4 +4,4 @@ macro_rules! locate_end {
     };
 }
 
-locate_end!()
+locate_end!();

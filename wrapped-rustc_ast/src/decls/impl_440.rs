@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        AttrsTarget!();
-        TokenStream!();
         TokenTree!();
+        AttrTokenTree!();
         Token!();
         AttrTokenStream!();
-        AttrTokenTree!();
+        TokenStream!();
+        AttrsTarget!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_440 {
     };
 }
 
-impl_440!()
+impl_440!();

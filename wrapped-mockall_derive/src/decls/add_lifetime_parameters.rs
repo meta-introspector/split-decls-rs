@@ -4,4 +4,4 @@ macro_rules! add_lifetime_parameters {
     };
 }
 
-add_lifetime_parameters!()
+add_lifetime_parameters!();

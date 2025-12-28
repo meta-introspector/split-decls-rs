@@ -11,4 +11,4 @@ macro_rules! start_static_table {
     };
 }
 
-start_static_table!()
+start_static_table!();

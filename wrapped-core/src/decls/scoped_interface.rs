@@ -4,4 +4,4 @@ macro_rules! scoped_interface {
     };
 }
 
-scoped_interface!()
+scoped_interface!();

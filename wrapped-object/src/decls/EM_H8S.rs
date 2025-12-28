@@ -4,4 +4,4 @@ macro_rules! EM_H8S {
     };
 }
 
-EM_H8S!()
+EM_H8S!();

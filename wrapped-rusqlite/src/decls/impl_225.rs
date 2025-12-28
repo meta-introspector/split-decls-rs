@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Null!();
-        Row!();
         Result!();
-        Blob!();
+        Row!();
+        Null!();
         ValueRef!();
+        Blob!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_225 {
     };
 }
 
-impl_225!()
+impl_225!();

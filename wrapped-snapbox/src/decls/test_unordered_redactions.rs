@@ -4,4 +4,4 @@ macro_rules! test_unordered_redactions {
     };
 }
 
-test_unordered_redactions!()
+test_unordered_redactions!();

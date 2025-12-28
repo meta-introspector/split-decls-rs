@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FinalConfig!();
         ItemFn!();
         RuntimeFlavor!();
-        FinalConfig!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_knobs {
     };
 }
 
-parse_knobs!()
+parse_knobs!();

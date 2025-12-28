@@ -4,4 +4,4 @@ macro_rules! staging_dep_graph_path {
     };
 }
 
-staging_dep_graph_path!()
+staging_dep_graph_path!();

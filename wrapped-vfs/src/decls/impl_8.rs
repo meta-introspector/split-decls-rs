@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         FileSet!();
         Vfs!();
-        FileSetConfigBuilder!();
+        FileSetConfig!();
         VfsPath!();
         PrefixOf!();
-        FileSetConfig!();
+        FileSetConfigBuilder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

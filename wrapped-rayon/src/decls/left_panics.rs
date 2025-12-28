@@ -4,4 +4,4 @@ macro_rules! left_panics {
     };
 }
 
-left_panics!()
+left_panics!();

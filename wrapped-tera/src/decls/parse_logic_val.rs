@@ -11,4 +11,4 @@ macro_rules! parse_logic_val {
     };
 }
 
-parse_logic_val!()
+parse_logic_val!();

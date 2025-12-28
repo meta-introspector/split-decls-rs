@@ -4,4 +4,4 @@ macro_rules! DenyExplicitImplParser {
     };
 }
 
-DenyExplicitImplParser!()
+DenyExplicitImplParser!();

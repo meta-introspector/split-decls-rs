@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Span!();
         PrefilterI!();
+        Span!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_746 {
     };
 }
 
-impl_746!()
+impl_746!();

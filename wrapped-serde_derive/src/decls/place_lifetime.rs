@@ -4,4 +4,4 @@ macro_rules! place_lifetime {
     };
 }
 
-place_lifetime!()
+place_lifetime!();

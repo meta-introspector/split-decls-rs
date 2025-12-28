@@ -4,4 +4,4 @@ macro_rules! is_ancestor_or_same_capture {
     };
 }
 
-is_ancestor_or_same_capture!()
+is_ancestor_or_same_capture!();

@@ -11,4 +11,4 @@ macro_rules! PF_W {
     };
 }
 
-PF_W!()
+PF_W!();

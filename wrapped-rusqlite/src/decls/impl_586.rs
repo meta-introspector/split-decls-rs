@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        VTab!();
+        InnerConnection!();
         Name!();
+        Result!();
         Error!();
         Module!();
-        Result!();
-        InnerConnection!();
+        VTab!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_586 {
     };
 }
 
-impl_586!()
+impl_586!();

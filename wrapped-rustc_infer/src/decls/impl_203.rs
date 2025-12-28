@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Snapshot!();
         UndoLog!();
         InferCtxtUndoLogs!();
         RegionConstraintCollector!();
+        Snapshot!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

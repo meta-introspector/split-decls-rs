@@ -4,4 +4,4 @@ macro_rules! EM_HUANY {
     };
 }
 
-EM_HUANY!()
+EM_HUANY!();

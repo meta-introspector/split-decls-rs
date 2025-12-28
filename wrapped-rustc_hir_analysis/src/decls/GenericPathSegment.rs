@@ -4,4 +4,4 @@ macro_rules! GenericPathSegment {
     };
 }
 
-GenericPathSegment!()
+GenericPathSegment!();

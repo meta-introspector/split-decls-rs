@@ -4,4 +4,4 @@ macro_rules! DT_VERSYM {
     };
 }
 
-DT_VERSYM!()
+DT_VERSYM!();

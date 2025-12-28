@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         Generation!();
+        Config!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_95 {
     };
 }
 
-impl_95!()
+impl_95!();

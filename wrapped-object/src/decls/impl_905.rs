@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Section!();
         SymbolSection!();
+        Section!();
         SectionIndex!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_905 {
     };
 }
 
-impl_905!()
+impl_905!();

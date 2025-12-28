@@ -4,4 +4,4 @@ macro_rules! constfn {
     };
 }
 
-constfn!()
+constfn!();

@@ -4,4 +4,4 @@ macro_rules! SlotSize {
     };
 }
 
-SlotSize!()
+SlotSize!();

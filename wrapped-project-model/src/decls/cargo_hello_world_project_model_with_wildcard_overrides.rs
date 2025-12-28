@@ -11,4 +11,4 @@ macro_rules! cargo_hello_world_project_model_with_wildcard_overrides {
     };
 }
 
-cargo_hello_world_project_model_with_wildcard_overrides!()
+cargo_hello_world_project_model_with_wildcard_overrides!();

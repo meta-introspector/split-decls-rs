@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Transition!();
-        Usize!();
-        Unit!();
         StateID!();
         DenseTransitions!();
+        Unit!();
+        Usize!();
+        Transition!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_524 {
     };
 }
 
-impl_524!()
+impl_524!();

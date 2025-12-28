@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Path!();
-        Pat!();
-        AmbigArg!();
         Ty!();
         TyKind!();
         Visitor!();
+        AmbigArg!();
+        Pat!();
+        Path!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! walk_ty {
     };
 }
 
-walk_ty!()
+walk_ty!();

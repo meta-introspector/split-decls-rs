@@ -13,4 +13,4 @@ macro_rules! hl_exit_points {
     };
 }
 
-hl_exit_points!()
+hl_exit_points!();

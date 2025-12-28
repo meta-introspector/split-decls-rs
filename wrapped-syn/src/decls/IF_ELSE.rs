@@ -12,4 +12,4 @@ macro_rules! IF_ELSE {
     };
 }
 
-IF_ELSE!()
+IF_ELSE!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Local!();
-        UntrustedToken!();
         Public!();
+        UntrustedToken!();
+        Local!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

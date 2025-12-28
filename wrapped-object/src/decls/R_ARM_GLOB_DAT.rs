@@ -4,4 +4,4 @@ macro_rules! R_ARM_GLOB_DAT {
     };
 }
 
-R_ARM_GLOB_DAT!()
+R_ARM_GLOB_DAT!();

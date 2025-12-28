@@ -11,4 +11,4 @@ macro_rules! exec_linker {
     };
 }
 
-exec_linker!()
+exec_linker!();

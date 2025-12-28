@@ -11,4 +11,4 @@ macro_rules! test_abi {
     };
 }
 
-test_abi!()
+test_abi!();

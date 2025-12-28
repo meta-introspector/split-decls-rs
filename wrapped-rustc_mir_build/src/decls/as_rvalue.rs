@@ -4,4 +4,4 @@ macro_rules! as_rvalue {
     };
 }
 
-as_rvalue!()
+as_rvalue!();

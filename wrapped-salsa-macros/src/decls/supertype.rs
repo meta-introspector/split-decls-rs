@@ -4,4 +4,4 @@ macro_rules! supertype {
     };
 }
 
-supertype!()
+supertype!();

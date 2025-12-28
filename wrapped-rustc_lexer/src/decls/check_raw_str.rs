@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Cursor!();
         FrontmatterAllowed!();
         RawStrError!();
+        Cursor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_raw_str {
     };
 }
 
-check_raw_str!()
+check_raw_str!();

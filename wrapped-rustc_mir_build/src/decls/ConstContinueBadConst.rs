@@ -4,4 +4,4 @@ macro_rules! ConstContinueBadConst {
     };
 }
 
-ConstContinueBadConst!()
+ConstContinueBadConst!();

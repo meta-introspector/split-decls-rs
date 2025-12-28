@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         SymbolSection!();
         Symbol!();
-        SymbolScope!();
         Note!();
+        SymbolScope!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1056 {
     };
 }
 
-impl_1056!()
+impl_1056!();

@@ -4,4 +4,4 @@ macro_rules! region_errors {
     };
 }
 
-region_errors!()
+region_errors!();

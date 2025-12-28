@@ -11,4 +11,4 @@ macro_rules! raw_literals {
     };
 }
 
-raw_literals!()
+raw_literals!();

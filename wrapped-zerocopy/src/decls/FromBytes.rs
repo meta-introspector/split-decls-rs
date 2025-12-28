@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
+        Initialized!();
         Validity!();
-        BecauseImmutable!();
-        CastError!();
+        Alignment!();
+        BecauseExclusive!();
+        Immutable!();
+        Unaligned!();
         Unalign!();
-        PointerMetadata!();
+        Read!();
+        SizeError!();
         KnownLayout!();
+        CastError!();
+        FromZeros!();
+        PointerMetadata!();
         IntoBytes!();
         CastType!();
-        Initialized!();
-        Unaligned!();
-        Alignment!();
-        FromZeros!();
-        BecauseExclusive!();
-        SizeError!();
-        Read!();
-        Immutable!();
+        BecauseImmutable!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! FromBytes {
     };
 }
 
-FromBytes!()
+FromBytes!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PartitionMap!();
         ParallelExtend!();
         ParallelIterator!();
+        PartitionMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! partition_map {
     };
 }
 
-partition_map!()
+partition_map!();

@@ -4,4 +4,4 @@ macro_rules! BecauseRead {
     };
 }
 
-BecauseRead!()
+BecauseRead!();

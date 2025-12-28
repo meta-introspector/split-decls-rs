@@ -4,4 +4,4 @@ macro_rules! TDEFLFlush {
     };
 }
 
-TDEFLFlush!()
+TDEFLFlush!();

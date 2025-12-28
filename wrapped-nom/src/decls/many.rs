@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Input!();
-        NomRange!();
-        Error!();
-        Many!();
-        ParseError!();
-        IResult!();
-        Needed!();
         Parser!();
+        Error!();
+        ParseError!();
+        Needed!();
+        Many!();
+        Input!();
+        IResult!();
+        NomRange!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! many {
     };
 }
 
-many!()
+many!();

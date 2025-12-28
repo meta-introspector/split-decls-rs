@@ -11,4 +11,4 @@ macro_rules! erase_impl_trait {
     };
 }
 
-erase_impl_trait!()
+erase_impl_trait!();

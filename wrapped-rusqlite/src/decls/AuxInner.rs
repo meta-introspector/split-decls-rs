@@ -4,4 +4,4 @@ macro_rules! AuxInner {
     };
 }
 
-AuxInner!()
+AuxInner!();

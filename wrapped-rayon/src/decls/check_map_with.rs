@@ -4,4 +4,4 @@ macro_rules! check_map_with {
     };
 }
 
-check_map_with!()
+check_map_with!();

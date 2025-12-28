@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ParseErrorKind!();
-        SpanLike!();
         ParseError!();
+        SpanLike!();
+        ParseErrorKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! perr {
     };
 }
 
-perr!()
+perr!();

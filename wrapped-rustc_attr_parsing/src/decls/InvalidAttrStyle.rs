@@ -4,4 +4,4 @@ macro_rules! InvalidAttrStyle {
     };
 }
 
-InvalidAttrStyle!()
+InvalidAttrStyle!();

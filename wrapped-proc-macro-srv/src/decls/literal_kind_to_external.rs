@@ -4,4 +4,4 @@ macro_rules! literal_kind_to_external {
     };
 }
 
-literal_kind_to_external!()
+literal_kind_to_external!();

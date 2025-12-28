@@ -4,4 +4,4 @@ macro_rules! get_compiler_version {
     };
 }
 
-get_compiler_version!()
+get_compiler_version!();

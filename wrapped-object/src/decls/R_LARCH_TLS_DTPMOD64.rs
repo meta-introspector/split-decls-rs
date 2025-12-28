@@ -4,4 +4,4 @@ macro_rules! R_LARCH_TLS_DTPMOD64 {
     };
 }
 
-R_LARCH_TLS_DTPMOD64!()
+R_LARCH_TLS_DTPMOD64!();

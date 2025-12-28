@@ -11,4 +11,4 @@ macro_rules! transmute_lt {
     };
 }
 
-transmute_lt!()
+transmute_lt!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        State!();
-        StateBuilderEmpty!();
-        Config!();
-        SparseSets!();
+        NFA!();
         OwnedDFA!();
+        Config!();
+        StateMap!();
         DFA!();
         StateID!();
-        NFA!();
-        StateMap!();
+        State!();
+        StateBuilderEmpty!();
+        SparseSets!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Runner {
     };
 }
 
-Runner!()
+Runner!();

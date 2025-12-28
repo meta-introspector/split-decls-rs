@@ -4,4 +4,4 @@ macro_rules! compute_bounds {
     };
 }
 
-compute_bounds!()
+compute_bounds!();

@@ -4,4 +4,4 @@ macro_rules! PATH_ENCODE_SET {
     };
 }
 
-PATH_ENCODE_SET!()
+PATH_ENCODE_SET!();

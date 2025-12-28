@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TreeDesc!();
-        Heap!();
         State!();
+        Heap!();
+        TreeDesc!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! gen_bitlen {
     };
 }
 
-gen_bitlen!()
+gen_bitlen!();

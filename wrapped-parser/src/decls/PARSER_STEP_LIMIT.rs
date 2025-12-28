@@ -4,4 +4,4 @@ macro_rules! PARSER_STEP_LIMIT {
     };
 }
 
-PARSER_STEP_LIMIT!()
+PARSER_STEP_LIMIT!();

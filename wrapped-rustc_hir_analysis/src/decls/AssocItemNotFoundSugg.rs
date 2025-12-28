@@ -4,4 +4,4 @@ macro_rules! AssocItemNotFoundSugg {
     };
 }
 
-AssocItemNotFoundSugg!()
+AssocItemNotFoundSugg!();

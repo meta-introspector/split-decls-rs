@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        FrontmatterAllowed!();
-        Base!();
-        Cursor!();
-        RawStrError!();
-        Token!();
         DocStyle!();
-        TokenKind!();
-        GuardedStr!();
         LiteralKind!();
+        FrontmatterAllowed!();
+        Token!();
+        GuardedStr!();
+        Base!();
+        RawStrError!();
+        Cursor!();
+        TokenKind!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

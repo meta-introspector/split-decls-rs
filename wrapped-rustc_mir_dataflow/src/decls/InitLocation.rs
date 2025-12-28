@@ -4,4 +4,4 @@ macro_rules! InitLocation {
     };
 }
 
-InitLocation!()
+InitLocation!();

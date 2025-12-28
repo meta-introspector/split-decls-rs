@@ -4,4 +4,4 @@ macro_rules! mem_encoder {
     };
 }
 
-mem_encoder!()
+mem_encoder!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StringLayer3!();
         Layer!();
+        StringLayer3!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

@@ -11,4 +11,4 @@ macro_rules! invalid_data {
     };
 }
 
-invalid_data!()
+invalid_data!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SomeIter!();
         EdgeReference!();
         IndexType!();
-        SomeIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_313 {
     };
 }
 
-macro_313!()
+macro_313!();

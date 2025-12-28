@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeRef!();
         TypeSpec!();
         TypeDef!();
+        TypeRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_35 {
     };
 }
 
-macro_35!()
+macro_35!();

@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_WHIRL {
     };
 }
 
-SHT_MIPS_WHIRL!()
+SHT_MIPS_WHIRL!();

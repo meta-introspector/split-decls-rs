@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FunctionCall!();
         Node!();
-        ExprVal!();
-        MacroCall!();
         Expr!();
+        FunctionCall!();
+        ExprVal!();
         WS!();
+        MacroCall!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_variable_tag_macro_call_with_filter {
     };
 }
 
-parse_variable_tag_macro_call_with_filter!()
+parse_variable_tag_macro_call_with_filter!();

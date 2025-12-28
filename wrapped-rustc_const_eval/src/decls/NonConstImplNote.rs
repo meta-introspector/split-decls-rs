@@ -4,4 +4,4 @@ macro_rules! NonConstImplNote {
     };
 }
 
-NonConstImplNote!()
+NonConstImplNote!();

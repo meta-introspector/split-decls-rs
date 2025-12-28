@@ -11,4 +11,4 @@ macro_rules! generate_per_field_offsets {
     };
 }
 
-generate_per_field_offsets!()
+generate_per_field_offsets!();

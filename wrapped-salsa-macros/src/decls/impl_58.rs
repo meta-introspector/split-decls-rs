@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Comma!();
-        Equals!();
-        Options!();
-        PersistOptions!();
         AllowedOptions!();
+        Options!();
+        Equals!();
+        PersistOptions!();
+        Comma!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

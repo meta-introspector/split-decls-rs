@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_PACKAGE {
     };
 }
 
-SHT_MIPS_PACKAGE!()
+SHT_MIPS_PACKAGE!();

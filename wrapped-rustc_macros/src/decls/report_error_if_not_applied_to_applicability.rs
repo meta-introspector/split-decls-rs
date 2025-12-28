@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DiagnosticDeriveError!();
-        FieldInfo!();
         Applicability!();
+        FieldInfo!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! report_error_if_not_applied_to_applicability {
     };
 }
 
-report_error_if_not_applied_to_applicability!()
+report_error_if_not_applied_to_applicability!();

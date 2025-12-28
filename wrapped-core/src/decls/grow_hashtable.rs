@@ -11,4 +11,4 @@ macro_rules! grow_hashtable {
     };
 }
 
-grow_hashtable!()
+grow_hashtable!();

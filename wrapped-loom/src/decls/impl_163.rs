@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        LocalValue!();
-        Id!();
-        VersionVec!();
-        LocalKey!();
-        LocalKeyId!();
-        AccessError!();
-        Set!();
         Thread!();
+        Set!();
+        LocalKeyId!();
+        Id!();
+        LocalKey!();
+        VersionVec!();
+        LocalValue!();
+        AccessError!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_163 {
     };
 }
 
-impl_163!()
+impl_163!();

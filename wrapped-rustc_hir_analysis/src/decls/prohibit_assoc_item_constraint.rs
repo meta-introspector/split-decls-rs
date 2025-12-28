@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AssocItemConstraintsNotAllowedHere!();
-        ParenthesizedFnTraitExpansion!();
         HirTyLowerer!();
+        ParenthesizedFnTraitExpansion!();
+        AssocItemConstraintsNotAllowedHere!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! prohibit_assoc_item_constraint {
     };
 }
 
-prohibit_assoc_item_constraint!()
+prohibit_assoc_item_constraint!();

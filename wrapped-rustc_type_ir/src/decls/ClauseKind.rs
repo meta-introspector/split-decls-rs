@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        TraitPredicate!();
-        Region!();
-        Ty!();
         OutlivesPredicate!();
+        Term!();
+        Region!();
+        TraitPredicate!();
+        Ty!();
         HostEffectPredicate!();
+        Const!();
         ProjectionPredicate!();
         Interner!();
-        Const!();
-        Term!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! ClauseKind {
     };
 }
 
-ClauseKind!()
+ClauseKind!();

@@ -4,4 +4,4 @@ macro_rules! ThorinErrorWrapper {
     };
 }
 
-ThorinErrorWrapper!()
+ThorinErrorWrapper!();

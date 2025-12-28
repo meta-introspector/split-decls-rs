@@ -4,4 +4,4 @@ macro_rules! check_impl {
     };
 }
 
-check_impl!()
+check_impl!();

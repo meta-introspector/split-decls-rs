@@ -4,4 +4,4 @@ macro_rules! is_lower_hex_digit {
     };
 }
 
-is_lower_hex_digit!()
+is_lower_hex_digit!();

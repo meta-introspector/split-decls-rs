@@ -4,4 +4,4 @@ macro_rules! CustomSpawn {
     };
 }
 
-CustomSpawn!()
+CustomSpawn!();

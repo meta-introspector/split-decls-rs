@@ -4,4 +4,4 @@ macro_rules! FluentId {
     };
 }
 
-FluentId!()
+FluentId!();

@@ -4,4 +4,4 @@ macro_rules! decompose_cjk_compat_variants {
     };
 }
 
-decompose_cjk_compat_variants!()
+decompose_cjk_compat_variants!();

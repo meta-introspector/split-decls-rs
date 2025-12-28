@@ -12,4 +12,4 @@ macro_rules! pidfd_send_signal {
     };
 }
 
-pidfd_send_signal!()
+pidfd_send_signal!();

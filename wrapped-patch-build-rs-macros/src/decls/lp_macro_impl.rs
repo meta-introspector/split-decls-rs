@@ -35,4 +35,4 @@ pub struct InitializePool<'info> {{
     };
 }
 
-lp_macro_impl!()
+lp_macro_impl!();

@@ -11,4 +11,4 @@ macro_rules! test_bad_extended_timestamp {
     };
 }
 
-test_bad_extended_timestamp!()
+test_bad_extended_timestamp!();

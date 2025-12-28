@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Matching!();
         MatchedEdges!();
         MatchedNodes!();
-        Matching!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_399 {
     };
 }
 
-impl_399!()
+impl_399!();

@@ -4,4 +4,4 @@ macro_rules! C_REG {
     };
 }
 
-C_REG!()
+C_REG!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DropKind!();
         Scope!();
+        DropKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_151 {
     };
 }
 
-impl_151!()
+impl_151!();

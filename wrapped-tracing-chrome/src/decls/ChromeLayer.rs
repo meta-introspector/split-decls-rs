@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NameFn!();
-        TraceStyle!();
         Message!();
+        TraceStyle!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ChromeLayer {
     };
 }
 
-ChromeLayer!()
+ChromeLayer!();

@@ -4,4 +4,4 @@ macro_rules! handle_cycle_error {
     };
 }
 
-handle_cycle_error!()
+handle_cycle_error!();

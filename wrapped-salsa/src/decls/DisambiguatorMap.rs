@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Disambiguator!();
         IdentityHash!();
+        Disambiguator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DisambiguatorMap {
     };
 }
 
-DisambiguatorMap!()
+DisambiguatorMap!();

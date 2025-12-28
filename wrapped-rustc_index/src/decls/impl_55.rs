@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DenseBitSet!();
-        Idx!();
         IndexVec!();
+        Idx!();
+        DenseBitSet!();
+        SparseBitMatrix!();
         BitRelations!();
         ChunkedBitSet!();
-        SparseBitMatrix!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

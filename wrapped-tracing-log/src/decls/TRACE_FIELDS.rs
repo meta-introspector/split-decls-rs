@@ -11,4 +11,4 @@ macro_rules! TRACE_FIELDS {
     };
 }
 
-TRACE_FIELDS!()
+TRACE_FIELDS!();

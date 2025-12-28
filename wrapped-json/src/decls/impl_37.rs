@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Read!();
-        VariantAccess!();
         Result!();
-        Error!();
         Value!();
+        Error!();
+        VariantAccess!();
         Deserializer!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

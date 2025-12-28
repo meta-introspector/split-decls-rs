@@ -4,4 +4,4 @@ macro_rules! SYMINFO_NONE {
     };
 }
 
-SYMINFO_NONE!()
+SYMINFO_NONE!();

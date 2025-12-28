@@ -4,4 +4,4 @@ macro_rules! GENERIC_RELOC_PB_LA_PTR {
     };
 }
 
-GENERIC_RELOC_PB_LA_PTR!()
+GENERIC_RELOC_PB_LA_PTR!();

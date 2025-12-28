@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BigInt!();
         LitFloatRepr!();
+        BigInt!();
         LitRepr!();
         LitIntRepr!();
     };
@@ -14,4 +14,4 @@ macro_rules! value {
     };
 }
 
-value!()
+value!();

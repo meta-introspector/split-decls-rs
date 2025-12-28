@@ -4,4 +4,4 @@ macro_rules! LoadingProgress {
     };
 }
 
-LoadingProgress!()
+LoadingProgress!();

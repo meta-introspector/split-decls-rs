@@ -4,4 +4,4 @@ macro_rules! DEP_GRAPH_FILENAME {
     };
 }
 
-DEP_GRAPH_FILENAME!()
+DEP_GRAPH_FILENAME!();

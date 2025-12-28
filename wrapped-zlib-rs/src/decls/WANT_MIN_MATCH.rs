@@ -4,4 +4,4 @@ macro_rules! WANT_MIN_MATCH {
     };
 }
 
-WANT_MIN_MATCH!()
+WANT_MIN_MATCH!();

@@ -12,4 +12,4 @@ macro_rules! entry_to_key {
     };
 }
 
-entry_to_key!()
+entry_to_key!();

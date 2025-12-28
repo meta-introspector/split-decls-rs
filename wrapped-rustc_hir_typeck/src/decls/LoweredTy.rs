@@ -4,4 +4,4 @@ macro_rules! LoweredTy {
     };
 }
 
-LoweredTy!()
+LoweredTy!();

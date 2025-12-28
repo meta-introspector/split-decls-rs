@@ -4,4 +4,4 @@ macro_rules! SOURCE_ROOT_PREFIX {
     };
 }
 
-SOURCE_ROOT_PREFIX!()
+SOURCE_ROOT_PREFIX!();

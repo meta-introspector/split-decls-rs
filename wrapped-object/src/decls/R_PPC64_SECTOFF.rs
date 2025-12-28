@@ -4,4 +4,4 @@ macro_rules! R_PPC64_SECTOFF {
     };
 }
 
-R_PPC64_SECTOFF!()
+R_PPC64_SECTOFF!();

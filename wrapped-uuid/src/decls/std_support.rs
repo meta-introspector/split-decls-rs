@@ -11,4 +11,4 @@ macro_rules! std_support {
     };
 }
 
-std_support!()
+std_support!();

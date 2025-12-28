@@ -11,4 +11,4 @@ macro_rules! lookup_width_cjk {
     };
 }
 
-lookup_width_cjk!()
+lookup_width_cjk!();

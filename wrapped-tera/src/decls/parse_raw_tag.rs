@@ -12,4 +12,4 @@ macro_rules! parse_raw_tag {
     };
 }
 
-parse_raw_tag!()
+parse_raw_tag!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SeekableTake!();
-        ZipResult!();
         ZipFileData!();
+        ZipResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! find_content_seek {
     };
 }
 
-find_content_seek!()
+find_content_seek!();

@@ -4,4 +4,4 @@ macro_rules! stmt_ends_with_semi {
     };
 }
 
-stmt_ends_with_semi!()
+stmt_ends_with_semi!();

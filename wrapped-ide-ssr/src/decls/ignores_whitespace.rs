@@ -4,4 +4,4 @@ macro_rules! ignores_whitespace {
     };
 }
 
-ignores_whitespace!()
+ignores_whitespace!();

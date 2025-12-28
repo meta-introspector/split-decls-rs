@@ -11,4 +11,4 @@ macro_rules! wsl_open {
     };
 }
 
-wsl_open!()
+wsl_open!();

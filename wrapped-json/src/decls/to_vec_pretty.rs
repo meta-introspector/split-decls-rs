@@ -11,4 +11,4 @@ macro_rules! to_vec_pretty {
     };
 }
 
-to_vec_pretty!()
+to_vec_pretty!();

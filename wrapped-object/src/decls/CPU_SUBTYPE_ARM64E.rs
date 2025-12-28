@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_ARM64E {
     };
 }
 
-CPU_SUBTYPE_ARM64E!()
+CPU_SUBTYPE_ARM64E!();

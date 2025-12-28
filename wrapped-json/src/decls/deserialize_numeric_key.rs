@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ErrorCode!();
-        Value!();
         Deserializer!();
+        Value!();
         Error!();
+        ErrorCode!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! deserialize_numeric_key {
     };
 }
 
-deserialize_numeric_key!()
+deserialize_numeric_key!();

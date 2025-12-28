@@ -4,4 +4,4 @@ macro_rules! cmdline_attrs {
     };
 }
 
-cmdline_attrs!()
+cmdline_attrs!();

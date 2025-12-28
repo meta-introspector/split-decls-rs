@@ -4,4 +4,4 @@ macro_rules! invalid_test_argument {
     };
 }
 
-invalid_test_argument!()
+invalid_test_argument!();

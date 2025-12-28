@@ -11,4 +11,4 @@ macro_rules! build_tuple_type_di_node {
     };
 }
 
-build_tuple_type_di_node!()
+build_tuple_type_di_node!();

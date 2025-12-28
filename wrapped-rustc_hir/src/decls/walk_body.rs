@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Body!();
         Visitor!();
+        Body!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_body {
     };
 }
 
-walk_body!()
+walk_body!();

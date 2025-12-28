@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tera!();
         Context!();
+        Tera!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! render_filter_section_inheritance_no_override {
     };
 }
 
-render_filter_section_inheritance_no_override!()
+render_filter_section_inheritance_no_override!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Result!();
         Blob!();
-        Connection!();
         Name!();
+        Connection!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

@@ -4,4 +4,4 @@ macro_rules! FORMAT {
     };
 }
 
-FORMAT!()
+FORMAT!();

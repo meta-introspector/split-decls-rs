@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Revision!();
         Durability!();
+        Revision!();
         Stamp!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! stamp {
     };
 }
 
-stamp!()
+stamp!();

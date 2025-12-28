@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ModeBase!();
-        ModeAuthPsk!();
+        TestableHpke!();
+        PrivateKey!();
         HpkeTester!();
+        ModeAuthPsk!();
+        ModeBase!();
+        DHKEM_X25519_SHA256_CHACHA20!();
         ModePsk!();
         ModeAuth!();
-        UnknownCryptoError!();
-        DHKEM_X25519_SHA256_CHACHA20!();
-        PrivateKey!();
-        TestableHpke!();
-        PublicKey!();
         DhKem!();
+        PublicKey!();
+        UnknownCryptoError!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

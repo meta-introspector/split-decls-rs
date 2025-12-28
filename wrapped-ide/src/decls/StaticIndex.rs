@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StaticIndexedFile!();
-        TokenId!();
-        TokenStore!();
         Analysis!();
+        TokenId!();
+        StaticIndexedFile!();
+        TokenStore!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! StaticIndex {
     };
 }
 
-StaticIndex!()
+StaticIndex!();

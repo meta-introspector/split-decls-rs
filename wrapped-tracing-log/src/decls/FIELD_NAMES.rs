@@ -4,4 +4,4 @@ macro_rules! FIELD_NAMES {
     };
 }
 
-FIELD_NAMES!()
+FIELD_NAMES!();

@@ -171,4 +171,4 @@ macro_rules! rust_bin_path {{
     };
 }
 
-rust_cache_impl!()
+rust_cache_impl!();

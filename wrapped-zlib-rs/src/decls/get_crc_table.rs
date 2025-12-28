@@ -4,4 +4,4 @@ macro_rules! get_crc_table {
     };
 }
 
-get_crc_table!()
+get_crc_table!();

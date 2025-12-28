@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StabilityLevel!();
         PrintAttribute!();
+        StabilityLevel!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DefaultBodyStability {
     };
 }
 
-DefaultBodyStability!()
+DefaultBodyStability!();

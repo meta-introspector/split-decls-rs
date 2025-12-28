@@ -4,4 +4,4 @@ macro_rules! places_conflict {
     };
 }
 
-places_conflict!()
+places_conflict!();

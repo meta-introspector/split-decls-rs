@@ -4,4 +4,4 @@ macro_rules! is_old_enough_to_be_collected {
     };
 }
 
-is_old_enough_to_be_collected!()
+is_old_enough_to_be_collected!();

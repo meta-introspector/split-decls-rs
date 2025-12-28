@@ -4,4 +4,4 @@ macro_rules! LC_UUID {
     };
 }
 
-LC_UUID!()
+LC_UUID!();

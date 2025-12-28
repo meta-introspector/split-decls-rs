@@ -4,4 +4,4 @@ macro_rules! DivergingBlockBehavior {
     };
 }
 
-DivergingBlockBehavior!()
+DivergingBlockBehavior!();

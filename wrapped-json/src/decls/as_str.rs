@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ErrorCode!();
         Read!();
         Result!();
-        ErrorCode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! as_str {
     };
 }
 
-as_str!()
+as_str!();

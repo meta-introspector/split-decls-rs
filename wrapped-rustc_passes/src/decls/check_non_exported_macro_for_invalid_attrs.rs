@@ -11,4 +11,4 @@ macro_rules! check_non_exported_macro_for_invalid_attrs {
     };
 }
 
-check_non_exported_macro_for_invalid_attrs!()
+check_non_exported_macro_for_invalid_attrs!();

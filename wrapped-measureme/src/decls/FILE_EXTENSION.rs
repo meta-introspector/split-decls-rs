@@ -4,4 +4,4 @@ macro_rules! FILE_EXTENSION {
     };
 }
 
-FILE_EXTENSION!()
+FILE_EXTENSION!();

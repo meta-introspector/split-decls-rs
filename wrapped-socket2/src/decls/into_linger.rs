@@ -4,4 +4,4 @@ macro_rules! into_linger {
     };
 }
 
-into_linger!()
+into_linger!();

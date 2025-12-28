@@ -1,42 +1,42 @@
 macro_rules! deps {
     () => {
-        Result!();
-        SectionId!();
-        SectionFlags!();
         RelocationEncoding!();
+        FileHeader!();
         SectionHeader!();
-        SymbolKind!();
+        SymbolId!();
+        SymbolScope!();
+        Note!();
+        FileFlags!();
+        File!();
+        SymbolSection!();
         Architecture!();
         AddressSize!();
-        Note!();
-        U16!();
-        Rel!();
-        SymbolScope!();
-        Relocation!();
-        FileFlags!();
-        SymbolSection!();
-        U32!();
-        SymbolId!();
-        ComdatOffsets!();
-        Section!();
-        SectionKind!();
-        File!();
-        SymbolOffsets!();
-        RelocationKind!();
         Error!();
-        GnuProperty!();
-        ComdatKind!();
-        WritableBuffer!();
-        Sym!();
+        SectionId!();
+        RelocationKind!();
         U64!();
+        SymbolKind!();
+        SectionOffsets!();
+        SectionKind!();
+        Symbol!();
+        Sym!();
+        Rel!();
         SymbolFlags!();
         StandardSection!();
         Writer!();
-        FileHeader!();
+        Relocation!();
+        ComdatOffsets!();
         RelocationFlags!();
+        GnuProperty!();
+        ComdatKind!();
+        Section!();
+        U16!();
+        WritableBuffer!();
         Object!();
-        SectionOffsets!();
-        Symbol!();
+        Result!();
+        SectionFlags!();
+        SymbolOffsets!();
+        U32!();
     };
 }
 
@@ -47,4 +47,4 @@ macro_rules! impl_960 {
     };
 }
 
-impl_960!()
+impl_960!();

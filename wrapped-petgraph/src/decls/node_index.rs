@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NodeIndex!();
         DefaultIx!();
+        NodeIndex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! node_index {
     };
 }
 
-node_index!()
+node_index!();

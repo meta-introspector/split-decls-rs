@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Shard!();
         Config!();
+        Shard!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Ptr {
     };
 }
 
-Ptr!()
+Ptr!();

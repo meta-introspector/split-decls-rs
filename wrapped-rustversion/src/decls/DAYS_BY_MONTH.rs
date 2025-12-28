@@ -4,4 +4,4 @@ macro_rules! DAYS_BY_MONTH {
     };
 }
 
-DAYS_BY_MONTH!()
+DAYS_BY_MONTH!();

@@ -4,4 +4,4 @@ macro_rules! counter_increase_times {
     };
 }
 
-counter_increase_times!()
+counter_increase_times!();

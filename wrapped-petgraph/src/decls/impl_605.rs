@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexType!();
         Graph!();
+        IndexType!();
         Undirected!();
         FromGraph6!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_605 {
     };
 }
 
-impl_605!()
+impl_605!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        OperandValue!();
         PlaceValue!();
         LayoutTypeCodegenMethods!();
-        OperandValue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_498 {
     };
 }
 
-impl_498!()
+impl_498!();

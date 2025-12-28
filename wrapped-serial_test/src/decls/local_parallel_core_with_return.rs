@@ -4,4 +4,4 @@ macro_rules! local_parallel_core_with_return {
     };
 }
 
-local_parallel_core_with_return!()
+local_parallel_core_with_return!();

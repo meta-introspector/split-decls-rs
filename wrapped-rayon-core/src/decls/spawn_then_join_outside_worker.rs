@@ -4,4 +4,4 @@ macro_rules! spawn_then_join_outside_worker {
     };
 }
 
-spawn_then_join_outside_worker!()
+spawn_then_join_outside_worker!();

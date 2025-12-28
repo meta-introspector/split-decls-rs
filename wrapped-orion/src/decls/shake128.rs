@@ -4,4 +4,4 @@ macro_rules! shake128 {
     };
 }
 
-shake128!()
+shake128!();

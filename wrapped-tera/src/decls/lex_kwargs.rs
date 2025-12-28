@@ -4,4 +4,4 @@ macro_rules! lex_kwargs {
     };
 }
 
-lex_kwargs!()
+lex_kwargs!();

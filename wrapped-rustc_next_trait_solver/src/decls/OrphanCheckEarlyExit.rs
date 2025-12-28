@@ -4,4 +4,4 @@ macro_rules! OrphanCheckEarlyExit {
     };
 }
 
-OrphanCheckEarlyExit!()
+OrphanCheckEarlyExit!();

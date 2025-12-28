@@ -4,4 +4,4 @@ macro_rules! BellerophonPowers {
     };
 }
 
-BellerophonPowers!()
+BellerophonPowers!();

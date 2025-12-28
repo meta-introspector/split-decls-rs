@@ -4,4 +4,4 @@ macro_rules! INITIAL_N {
     };
 }
 
-INITIAL_N!()
+INITIAL_N!();

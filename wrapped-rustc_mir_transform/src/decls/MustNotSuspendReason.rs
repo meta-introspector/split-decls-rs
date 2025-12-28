@@ -4,4 +4,4 @@ macro_rules! MustNotSuspendReason {
     };
 }
 
-MustNotSuspendReason!()
+MustNotSuspendReason!();

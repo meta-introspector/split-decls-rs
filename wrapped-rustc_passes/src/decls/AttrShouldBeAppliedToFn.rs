@@ -4,4 +4,4 @@ macro_rules! AttrShouldBeAppliedToFn {
     };
 }
 
-AttrShouldBeAppliedToFn!()
+AttrShouldBeAppliedToFn!();

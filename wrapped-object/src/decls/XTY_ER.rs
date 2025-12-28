@@ -4,4 +4,4 @@ macro_rules! XTY_ER {
     };
 }
 
-XTY_ER!()
+XTY_ER!();

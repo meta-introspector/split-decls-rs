@@ -11,4 +11,4 @@ macro_rules! invalid_archive_const {
     };
 }
 
-invalid_archive_const!()
+invalid_archive_const!();

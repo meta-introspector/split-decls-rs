@@ -4,4 +4,4 @@ macro_rules! HRESULT {
     };
 }
 
-HRESULT!()
+HRESULT!();

@@ -4,4 +4,4 @@ macro_rules! RustAnalyzerPackageMetaData {
     };
 }
 
-RustAnalyzerPackageMetaData!()
+RustAnalyzerPackageMetaData!();

@@ -4,4 +4,4 @@ macro_rules! T_BASE {
     };
 }
 
-T_BASE!()
+T_BASE!();

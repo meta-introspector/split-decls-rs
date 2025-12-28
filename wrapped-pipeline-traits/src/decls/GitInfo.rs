@@ -4,4 +4,4 @@ macro_rules! GitInfo {
     };
 }
 
-GitInfo!()
+GitInfo!();

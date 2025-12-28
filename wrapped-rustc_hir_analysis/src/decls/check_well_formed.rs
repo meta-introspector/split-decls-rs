@@ -4,4 +4,4 @@ macro_rules! check_well_formed {
     };
 }
 
-check_well_formed!()
+check_well_formed!();

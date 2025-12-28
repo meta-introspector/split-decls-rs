@@ -4,4 +4,4 @@ macro_rules! ELBASAN {
     };
 }
 
-ELBASAN!()
+ELBASAN!();

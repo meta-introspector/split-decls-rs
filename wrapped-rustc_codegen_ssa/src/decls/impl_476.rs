@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        PlaceValue!();
-        VariableKind!();
         LocalRef!();
+        DebugInfoOffset!();
+        LocalKind!();
+        OperandValue!();
+        BuilderMethods!();
+        VariableKind!();
+        PlaceRef!();
+        PerLocalVarDebugInfo!();
         PerLocalVarDebugInfoIndexVec!();
+        PlaceValue!();
+        OperandRef!();
         FunctionCx!();
         ConstDebugInfo!();
-        OperandValue!();
-        PlaceRef!();
-        OperandRef!();
-        BuilderMethods!();
-        LocalKind!();
-        PerLocalVarDebugInfo!();
-        DebugInfoOffset!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_476 {
     };
 }
 
-impl_476!()
+impl_476!();

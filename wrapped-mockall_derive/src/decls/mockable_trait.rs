@@ -4,4 +4,4 @@ macro_rules! mockable_trait {
     };
 }
 
-mockable_trait!()
+mockable_trait!();

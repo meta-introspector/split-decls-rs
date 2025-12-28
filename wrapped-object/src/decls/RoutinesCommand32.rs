@@ -12,4 +12,4 @@ macro_rules! RoutinesCommand32 {
     };
 }
 
-RoutinesCommand32!()
+RoutinesCommand32!();

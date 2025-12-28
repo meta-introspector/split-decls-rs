@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TyConst!();
         GenericArgKind!();
         Ty!();
-        TyConst!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_381 {
     };
 }
 
-impl_381!()
+impl_381!();

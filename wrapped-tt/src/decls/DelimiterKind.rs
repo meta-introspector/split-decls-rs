@@ -4,4 +4,4 @@ macro_rules! DelimiterKind {
     };
 }
 
-DelimiterKind!()
+DelimiterKind!();

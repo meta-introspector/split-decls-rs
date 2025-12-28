@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         IntoParallelIterator!();
         ParallelExtend!();
-        Collector!();
         FromParallelIterator!();
+        Collector!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_966 {
     };
 }
 
-impl_966!()
+impl_966!();

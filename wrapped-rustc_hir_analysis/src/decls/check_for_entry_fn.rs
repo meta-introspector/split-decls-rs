@@ -4,4 +4,4 @@ macro_rules! check_for_entry_fn {
     };
 }
 
-check_for_entry_fn!()
+check_for_entry_fn!();

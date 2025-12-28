@@ -11,4 +11,4 @@ macro_rules! thir_abstract_const {
     };
 }
 
-thir_abstract_const!()
+thir_abstract_const!();

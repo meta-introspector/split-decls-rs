@@ -4,4 +4,4 @@ macro_rules! changelog {
     };
 }
 
-changelog!()
+changelog!();

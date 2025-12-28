@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_ADDRPLT {
     };
 }
 
-R_CKCORE_ADDRPLT!()
+R_CKCORE_ADDRPLT!();

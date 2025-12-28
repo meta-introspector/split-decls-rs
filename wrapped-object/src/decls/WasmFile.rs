@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WasmSymbolInternal!();
         SectionHeader!();
+        WasmSymbolInternal!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WasmFile {
     };
 }
 
-WasmFile!()
+WasmFile!();

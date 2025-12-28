@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiagnosticLevel!();
         LlvmCodegenBackend!();
+        DiagnosticLevel!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! report_inline_asm {
     };
 }
 
-report_inline_asm!()
+report_inline_asm!();

@@ -4,4 +4,4 @@ macro_rules! opaque {
     };
 }
 
-opaque!()
+opaque!();

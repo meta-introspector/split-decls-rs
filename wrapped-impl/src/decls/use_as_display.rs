@@ -4,4 +4,4 @@ macro_rules! use_as_display {
     };
 }
 
-use_as_display!()
+use_as_display!();

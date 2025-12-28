@@ -4,4 +4,4 @@ macro_rules! R_SH_DIR8L {
     };
 }
 
-R_SH_DIR8L!()
+R_SH_DIR8L!();

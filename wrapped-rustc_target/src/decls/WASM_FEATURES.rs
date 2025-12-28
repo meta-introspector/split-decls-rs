@@ -12,4 +12,4 @@ macro_rules! WASM_FEATURES {
     };
 }
 
-WASM_FEATURES!()
+WASM_FEATURES!();

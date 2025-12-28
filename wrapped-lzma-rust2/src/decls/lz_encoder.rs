@@ -4,4 +4,4 @@ macro_rules! lz_encoder {
     };
 }
 
-lz_encoder!()
+lz_encoder!();

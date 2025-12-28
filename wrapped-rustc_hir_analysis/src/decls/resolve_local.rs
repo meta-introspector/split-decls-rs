@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExtendedTemporaryScope!();
-        LetKind!();
         ScopeResolutionVisitor!();
+        LetKind!();
+        ExtendedTemporaryScope!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! resolve_local {
     };
 }
 
-resolve_local!()
+resolve_local!();

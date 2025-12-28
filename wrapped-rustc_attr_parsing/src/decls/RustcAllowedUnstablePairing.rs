@@ -4,4 +4,4 @@ macro_rules! RustcAllowedUnstablePairing {
     };
 }
 
-RustcAllowedUnstablePairing!()
+RustcAllowedUnstablePairing!();

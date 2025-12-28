@@ -4,4 +4,4 @@ macro_rules! pclmulqdq {
     };
 }
 
-pclmulqdq!()
+pclmulqdq!();

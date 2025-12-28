@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DemangleStyle!();
         ParseError!();
+        DemangleStyle!();
         Demangle!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! demangle {
     };
 }
 
-demangle!()
+demangle!();

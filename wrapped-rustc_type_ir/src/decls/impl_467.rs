@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TypeVisitable!();
         UnsafeBinderInner!();
+        TypeVisitable!();
         Ty!();
         Interner!();
         Binder!();
@@ -15,4 +15,4 @@ macro_rules! impl_467 {
     };
 }
 
-impl_467!()
+impl_467!();

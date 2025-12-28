@@ -4,4 +4,4 @@ macro_rules! ioc {
     };
 }
 
-ioc!()
+ioc!();

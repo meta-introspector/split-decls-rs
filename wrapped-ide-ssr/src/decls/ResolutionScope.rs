@@ -4,4 +4,4 @@ macro_rules! ResolutionScope {
     };
 }
 
-ResolutionScope!()
+ResolutionScope!();

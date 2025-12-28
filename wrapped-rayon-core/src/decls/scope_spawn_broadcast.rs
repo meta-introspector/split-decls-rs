@@ -4,4 +4,4 @@ macro_rules! scope_spawn_broadcast {
     };
 }
 
-scope_spawn_broadcast!()
+scope_spawn_broadcast!();

@@ -11,4 +11,4 @@ macro_rules! parse_ok {
     };
 }
 
-parse_ok!()
+parse_ok!();

@@ -4,4 +4,4 @@ macro_rules! is_float {
     };
 }
 
-is_float!()
+is_float!();

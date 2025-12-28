@@ -4,4 +4,4 @@ macro_rules! CHORASMIAN {
     };
 }
 
-CHORASMIAN!()
+CHORASMIAN!();

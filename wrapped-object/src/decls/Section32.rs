@@ -12,4 +12,4 @@ macro_rules! Section32 {
     };
 }
 
-Section32!()
+Section32!();

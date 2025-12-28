@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Write!();
+        Result!();
         Matches!();
         LzEncoderData!();
-        Result!();
         MatchFind!();
-        Write!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

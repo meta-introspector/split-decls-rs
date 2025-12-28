@@ -4,4 +4,4 @@ macro_rules! path_ends_with {
     };
 }
 
-path_ends_with!()
+path_ends_with!();

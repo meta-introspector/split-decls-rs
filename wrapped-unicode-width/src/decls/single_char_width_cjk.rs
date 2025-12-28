@@ -4,4 +4,4 @@ macro_rules! single_char_width_cjk {
     };
 }
 
-single_char_width_cjk!()
+single_char_width_cjk!();

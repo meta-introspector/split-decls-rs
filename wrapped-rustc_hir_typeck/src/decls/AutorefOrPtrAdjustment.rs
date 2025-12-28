@@ -4,4 +4,4 @@ macro_rules! AutorefOrPtrAdjustment {
     };
 }
 
-AutorefOrPtrAdjustment!()
+AutorefOrPtrAdjustment!();

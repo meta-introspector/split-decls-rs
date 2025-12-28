@@ -4,4 +4,4 @@ macro_rules! SelfResolver {
     };
 }
 
-SelfResolver!()
+SelfResolver!();

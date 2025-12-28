@@ -4,4 +4,4 @@ macro_rules! TupleExt {
     };
 }
 
-TupleExt!()
+TupleExt!();

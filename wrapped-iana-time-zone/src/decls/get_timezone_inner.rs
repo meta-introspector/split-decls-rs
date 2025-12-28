@@ -11,4 +11,4 @@ macro_rules! get_timezone_inner {
     };
 }
 
-get_timezone_inner!()
+get_timezone_inner!();

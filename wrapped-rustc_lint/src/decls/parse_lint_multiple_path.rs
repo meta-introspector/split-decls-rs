@@ -4,4 +4,4 @@ macro_rules! parse_lint_multiple_path {
     };
 }
 
-parse_lint_multiple_path!()
+parse_lint_multiple_path!();

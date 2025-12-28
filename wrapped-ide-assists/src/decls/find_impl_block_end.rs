@@ -4,4 +4,4 @@ macro_rules! find_impl_block_end {
     };
 }
 
-find_impl_block_end!()
+find_impl_block_end!();

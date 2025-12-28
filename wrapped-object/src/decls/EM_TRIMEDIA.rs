@@ -4,4 +4,4 @@ macro_rules! EM_TRIMEDIA {
     };
 }
 
-EM_TRIMEDIA!()
+EM_TRIMEDIA!();

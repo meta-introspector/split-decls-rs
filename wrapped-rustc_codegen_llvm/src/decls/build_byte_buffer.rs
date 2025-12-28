@@ -4,4 +4,4 @@ macro_rules! build_byte_buffer {
     };
 }
 
-build_byte_buffer!()
+build_byte_buffer!();

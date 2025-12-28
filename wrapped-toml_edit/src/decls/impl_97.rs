@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        InlineTable!();
-        IntoIter!();
         InlineTableIter!();
-        Value!();
+        InlineTable!();
         Item!();
+        Value!();
+        IntoIter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

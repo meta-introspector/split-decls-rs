@@ -23,4 +23,4 @@ theorem embedding_preserves_structure (a b : RustcElement) :
     };
 }
 
-rustc_to_lean_impl!()
+rustc_to_lean_impl!();

@@ -4,4 +4,4 @@ macro_rules! N_UNDF {
     };
 }
 
-N_UNDF!()
+N_UNDF!();

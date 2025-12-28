@@ -4,4 +4,4 @@ macro_rules! EdgesVec {
     };
 }
 
-EdgesVec!()
+EdgesVec!();

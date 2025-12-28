@@ -13,4 +13,4 @@ macro_rules! find_module_id_and_test_parents {
     };
 }
 
-find_module_id_and_test_parents!()
+find_module_id_and_test_parents!();

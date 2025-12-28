@@ -4,4 +4,4 @@ macro_rules! AbiX86Interrupt {
     };
 }
 
-AbiX86Interrupt!()
+AbiX86Interrupt!();

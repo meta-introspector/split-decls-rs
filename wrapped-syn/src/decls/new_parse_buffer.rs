@@ -13,4 +13,4 @@ macro_rules! new_parse_buffer {
     };
 }
 
-new_parse_buffer!()
+new_parse_buffer!();

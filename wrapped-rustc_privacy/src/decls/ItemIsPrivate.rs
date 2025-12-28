@@ -4,4 +4,4 @@ macro_rules! ItemIsPrivate {
     };
 }
 
-ItemIsPrivate!()
+ItemIsPrivate!();

@@ -4,4 +4,4 @@ macro_rules! NonConstIntrinsic {
     };
 }
 
-NonConstIntrinsic!()
+NonConstIntrinsic!();

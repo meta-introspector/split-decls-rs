@@ -4,4 +4,4 @@ macro_rules! RT_GROUP_ICON {
     };
 }
 
-RT_GROUP_ICON!()
+RT_GROUP_ICON!();

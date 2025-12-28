@@ -4,4 +4,4 @@ macro_rules! ssr_let_stmt_replace {
     };
 }
 
-ssr_let_stmt_replace!()
+ssr_let_stmt_replace!();

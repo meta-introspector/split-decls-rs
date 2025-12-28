@@ -4,4 +4,4 @@ macro_rules! unterminated_macro_call {
     };
 }
 
-unterminated_macro_call!()
+unterminated_macro_call!();

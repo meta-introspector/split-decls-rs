@@ -4,4 +4,4 @@ macro_rules! DBInner {
     };
 }
 
-DBInner!()
+DBInner!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HasMutInterior!();
+        NeedsNonConstDrop!();
         NeedsDrop!();
         ConstCx!();
-        NeedsNonConstDrop!();
+        HasMutInterior!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! in_any_value_of_ty {
     };
 }
 
-in_any_value_of_ty!()
+in_any_value_of_ty!();

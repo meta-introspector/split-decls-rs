@@ -4,4 +4,4 @@ macro_rules! get_single_str_from_tts {
     };
 }
 
-get_single_str_from_tts!()
+get_single_str_from_tts!();

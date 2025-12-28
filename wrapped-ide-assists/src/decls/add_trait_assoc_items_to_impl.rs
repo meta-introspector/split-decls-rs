@@ -11,4 +11,4 @@ macro_rules! add_trait_assoc_items_to_impl {
     };
 }
 
-add_trait_assoc_items_to_impl!()
+add_trait_assoc_items_to_impl!();

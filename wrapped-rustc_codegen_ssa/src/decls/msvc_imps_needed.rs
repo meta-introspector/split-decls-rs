@@ -4,4 +4,4 @@ macro_rules! msvc_imps_needed {
     };
 }
 
-msvc_imps_needed!()
+msvc_imps_needed!();

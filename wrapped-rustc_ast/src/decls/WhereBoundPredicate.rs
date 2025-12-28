@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Ty!();
         GenericParam!();
-        BoundKind!();
         Walkable!();
+        BoundKind!();
         GenericBounds!();
         Trait!();
     };
@@ -16,4 +16,4 @@ macro_rules! WhereBoundPredicate {
     };
 }
 
-WhereBoundPredicate!()
+WhereBoundPredicate!();

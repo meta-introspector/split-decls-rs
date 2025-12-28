@@ -11,4 +11,4 @@ macro_rules! test_args_default_values {
     };
 }
 
-test_args_default_values!()
+test_args_default_values!();

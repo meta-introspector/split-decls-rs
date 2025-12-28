@@ -4,4 +4,4 @@ macro_rules! acyclic {
     };
 }
 
-acyclic!()
+acyclic!();

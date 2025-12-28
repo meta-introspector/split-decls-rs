@@ -4,4 +4,4 @@ macro_rules! type_parameter_of_option {
     };
 }
 
-type_parameter_of_option!()
+type_parameter_of_option!();

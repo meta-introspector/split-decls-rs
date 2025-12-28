@@ -4,4 +4,4 @@ macro_rules! UnconditionalRecursion {
     };
 }
 
-UnconditionalRecursion!()
+UnconditionalRecursion!();

@@ -4,4 +4,4 @@ macro_rules! RHF_QUICKSTART {
     };
 }
 
-RHF_QUICKSTART!()
+RHF_QUICKSTART!();

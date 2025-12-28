@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Captures!();
         Regex!();
-        Match!();
         CaptureLocations!();
+        Match!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ABI!();
-        Uniform!();
         ArgAttributes!();
+        Uniform!();
+        ABI!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CastTarget {
     };
 }
 
-CastTarget!()
+CastTarget!();

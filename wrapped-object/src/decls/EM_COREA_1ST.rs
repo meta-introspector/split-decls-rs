@@ -4,4 +4,4 @@ macro_rules! EM_COREA_1ST {
     };
 }
 
-EM_COREA_1ST!()
+EM_COREA_1ST!();

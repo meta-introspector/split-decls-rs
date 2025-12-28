@@ -4,4 +4,4 @@ macro_rules! scope_empty {
     };
 }
 
-scope_empty!()
+scope_empty!();

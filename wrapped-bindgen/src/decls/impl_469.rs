@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Row!();
-        AsRow!();
         RowIterator!();
+        AsRow!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_469 {
     };
 }
 
-impl_469!()
+impl_469!();

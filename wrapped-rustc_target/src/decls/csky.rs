@@ -4,4 +4,4 @@ macro_rules! csky {
     };
 }
 
-csky!()
+csky!();

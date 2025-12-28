@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Height!();
         Width!();
+        Height!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! compare_with_stty {
     };
 }
 
-compare_with_stty!()
+compare_with_stty!();

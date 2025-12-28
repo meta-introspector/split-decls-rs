@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
+        ProcSelector!();
         Pid!();
         TracingStatus!();
         RawPid!();
-        ProcSelector!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! trace_status {
     };
 }
 
-trace_status!()
+trace_status!();

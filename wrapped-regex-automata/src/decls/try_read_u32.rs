@@ -11,4 +11,4 @@ macro_rules! try_read_u32 {
     };
 }
 
-try_read_u32!()
+try_read_u32!();

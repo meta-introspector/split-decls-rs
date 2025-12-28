@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AttributeParser!();
         Late!();
+        AttributeParser!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_attr {
     };
 }
 
-check_attr!()
+check_attr!();

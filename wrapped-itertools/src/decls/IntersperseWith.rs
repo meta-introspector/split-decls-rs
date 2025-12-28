@@ -4,4 +4,4 @@ macro_rules! IntersperseWith {
     };
 }
 
-IntersperseWith!()
+IntersperseWith!();

@@ -4,4 +4,4 @@ macro_rules! DeprecatedWhereClauseLocationSugg {
     };
 }
 
-DeprecatedWhereClauseLocationSugg!()
+DeprecatedWhereClauseLocationSugg!();

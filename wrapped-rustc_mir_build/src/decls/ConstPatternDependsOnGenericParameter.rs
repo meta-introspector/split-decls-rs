@@ -4,4 +4,4 @@ macro_rules! ConstPatternDependsOnGenericParameter {
     };
 }
 
-ConstPatternDependsOnGenericParameter!()
+ConstPatternDependsOnGenericParameter!();

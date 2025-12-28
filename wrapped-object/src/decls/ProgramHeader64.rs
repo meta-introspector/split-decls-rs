@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U64!();
         Segment!();
+        U64!();
         Endian!();
         U32!();
     };
@@ -14,4 +14,4 @@ macro_rules! ProgramHeader64 {
     };
 }
 
-ProgramHeader64!()
+ProgramHeader64!();

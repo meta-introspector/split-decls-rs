@@ -4,4 +4,4 @@ macro_rules! proc_macro_test_dylib_path {
     };
 }
 
-proc_macro_test_dylib_path!()
+proc_macro_test_dylib_path!();

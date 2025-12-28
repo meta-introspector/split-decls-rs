@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_COPY {
     };
 }
 
-R_TILEGX_COPY!()
+R_TILEGX_COPY!();

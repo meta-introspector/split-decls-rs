@@ -11,4 +11,4 @@ macro_rules! max_swap_remove {
     };
 }
 
-max_swap_remove!()
+max_swap_remove!();

@@ -4,4 +4,4 @@ macro_rules! TakesNoArguments {
     };
 }
 
-TakesNoArguments!()
+TakesNoArguments!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         InterpCx!();
         FrameNote!();
-        RawBytesNote!();
         CompileTimeMachine!();
+        RawBytesNote!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! report {
     };
 }
 
-report!()
+report!();

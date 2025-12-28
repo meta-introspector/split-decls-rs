@@ -4,4 +4,4 @@ macro_rules! zalsa_local {
     };
 }
 
-zalsa_local!()
+zalsa_local!();

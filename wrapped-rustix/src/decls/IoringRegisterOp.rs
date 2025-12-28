@@ -4,4 +4,4 @@ macro_rules! IoringRegisterOp {
     };
 }
 
-IoringRegisterOp!()
+IoringRegisterOp!();

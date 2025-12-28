@@ -4,4 +4,4 @@ macro_rules! return_if_di_node_created_in_meantime {
     };
 }
 
-return_if_di_node_created_in_meantime!()
+return_if_di_node_created_in_meantime!();

@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         IntoSpans!();
         ParseStream!();
-        Cursor!();
-        Result!();
         Parse!();
+        Result!();
+        Cursor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! define_keywords {
     };
 }
 
-define_keywords!()
+define_keywords!();

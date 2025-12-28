@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        TokenKind!();
-        InvalidToken!();
-        ByteStringLit!();
-        CharLit!();
-        ByteLit!();
-        CStringLit!();
-        IntegerLit!();
         BoolLit!();
+        TokenKind!();
+        ByteStringLit!();
         StringLit!();
-        Literal!();
+        InvalidToken!();
         FloatLit!();
+        IntegerLit!();
+        CStringLit!();
+        Literal!();
+        ByteLit!();
+        CharLit!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

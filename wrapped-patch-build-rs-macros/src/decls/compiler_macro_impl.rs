@@ -20,4 +20,4 @@ macro_rules! {}_compile {{
     };
 }
 
-compiler_macro_impl!()
+compiler_macro_impl!();

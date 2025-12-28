@@ -4,4 +4,4 @@ macro_rules! OwnedData {
     };
 }
 
-OwnedData!()
+OwnedData!();

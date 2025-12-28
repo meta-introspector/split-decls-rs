@@ -12,4 +12,4 @@ macro_rules! for_location_inits {
     };
 }
 
-for_location_inits!()
+for_location_inits!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FastPathRadix!();
         Limb!();
+        FastPathRadix!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! add_temporary {
     };
 }
 
-add_temporary!()
+add_temporary!();

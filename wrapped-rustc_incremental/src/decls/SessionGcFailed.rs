@@ -4,4 +4,4 @@ macro_rules! SessionGcFailed {
     };
 }
 
-SessionGcFailed!()
+SessionGcFailed!();

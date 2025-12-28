@@ -11,4 +11,4 @@ macro_rules! SHF_ARM_COMDEF {
     };
 }
 
-SHF_ARM_COMDEF!()
+SHF_ARM_COMDEF!();

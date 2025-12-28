@@ -11,4 +11,4 @@ macro_rules! read_endianness_check {
     };
 }
 
-read_endianness_check!()
+read_endianness_check!();

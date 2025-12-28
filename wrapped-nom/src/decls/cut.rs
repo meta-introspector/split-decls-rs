@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        Cut!();
-        Error!();
-        Parser!();
         IResult!();
+        ParseError!();
+        Parser!();
+        Error!();
+        Cut!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! cut {
     };
 }
 
-cut!()
+cut!();

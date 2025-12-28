@@ -4,4 +4,4 @@ macro_rules! child_modules {
     };
 }
 
-child_modules!()
+child_modules!();

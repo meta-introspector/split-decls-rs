@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LazyProperty!();
         InlayHintLabel!();
+        LazyProperty!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InlayHintLabelBuilder {
     };
 }
 
-InlayHintLabelBuilder!()
+InlayHintLabelBuilder!();

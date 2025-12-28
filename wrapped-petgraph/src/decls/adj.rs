@@ -4,4 +4,4 @@ macro_rules! adj {
     };
 }
 
-adj!()
+adj!();

@@ -12,4 +12,4 @@ macro_rules! matches_to_edit_at_offset {
     };
 }
 
-matches_to_edit_at_offset!()
+matches_to_edit_at_offset!();

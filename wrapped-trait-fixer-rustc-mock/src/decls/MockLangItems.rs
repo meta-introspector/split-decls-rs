@@ -4,4 +4,4 @@ macro_rules! MockLangItems {
     };
 }
 
-MockLangItems!()
+MockLangItems!();

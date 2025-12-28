@@ -11,4 +11,4 @@ macro_rules! CRATE_OWNER_ID {
     };
 }
 
-CRATE_OWNER_ID!()
+CRATE_OWNER_ID!();

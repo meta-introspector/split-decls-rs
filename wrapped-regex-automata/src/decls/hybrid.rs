@@ -4,4 +4,4 @@ macro_rules! hybrid {
     };
 }
 
-hybrid!()
+hybrid!();

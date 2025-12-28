@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Table!();
+        TomlSink!();
         DeInteger!();
         DeFloat!();
         DeTable!();
         Error!();
-        TomlSink!();
         Array!();
-        DeValue!();
-        Table!();
         Index!();
         DeArray!();
+        DeValue!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

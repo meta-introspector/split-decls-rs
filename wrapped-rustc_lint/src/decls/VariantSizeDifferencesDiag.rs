@@ -4,4 +4,4 @@ macro_rules! VariantSizeDifferencesDiag {
     };
 }
 
-VariantSizeDifferencesDiag!()
+VariantSizeDifferencesDiag!();

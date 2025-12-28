@@ -4,4 +4,4 @@ macro_rules! Libm {
     };
 }
 
-Libm!()
+Libm!();

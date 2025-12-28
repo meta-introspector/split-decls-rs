@@ -4,4 +4,4 @@ macro_rules! ast_id {
     };
 }
 
-ast_id!()
+ast_id!();

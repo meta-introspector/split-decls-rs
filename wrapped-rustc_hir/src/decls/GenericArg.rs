@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Lifetime!();
         TyKind!();
-        Ty!();
-        ConstArgKind!();
         InferArg!();
         ConstArg!();
+        ConstArgKind!();
+        Ty!();
         AmbigArg!();
-        Lifetime!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! GenericArg {
     };
 }
 
-GenericArg!()
+GenericArg!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IResult!();
-        ParseError!();
-        Fill!();
-        Needed!();
         Error!();
-        Parser!();
+        ParseError!();
         ErrorKind!();
+        Needed!();
+        Parser!();
+        IResult!();
+        Fill!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! fill {
     };
 }
 
-fill!()
+fill!();

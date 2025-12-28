@@ -11,4 +11,4 @@ macro_rules! finalize_medium {
     };
 }
 
-finalize_medium!()
+finalize_medium!();

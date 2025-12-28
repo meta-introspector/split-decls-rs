@@ -4,4 +4,4 @@ macro_rules! lzip {
     };
 }
 
-lzip!()
+lzip!();

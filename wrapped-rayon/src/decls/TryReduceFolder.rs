@@ -4,4 +4,4 @@ macro_rules! TryReduceFolder {
     };
 }
 
-TryReduceFolder!()
+TryReduceFolder!();

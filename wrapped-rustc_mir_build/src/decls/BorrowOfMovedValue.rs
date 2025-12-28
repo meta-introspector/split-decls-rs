@@ -4,4 +4,4 @@ macro_rules! BorrowOfMovedValue {
     };
 }
 
-BorrowOfMovedValue!()
+BorrowOfMovedValue!();

@@ -4,4 +4,4 @@ macro_rules! MachOBuildVersion {
     };
 }
 
-MachOBuildVersion!()
+MachOBuildVersion!();

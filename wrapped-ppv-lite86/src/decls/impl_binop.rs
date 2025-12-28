@@ -4,4 +4,4 @@ macro_rules! impl_binop {
     };
 }
 
-impl_binop!()
+impl_binop!();

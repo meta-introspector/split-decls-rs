@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Deps!();
-        EncoderState!();
         DepGraphQuery!();
+        EncoderState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! GraphEncoder {
     };
 }
 
-GraphEncoder!()
+GraphEncoder!();

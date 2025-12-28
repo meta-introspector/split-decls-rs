@@ -4,4 +4,4 @@ macro_rules! INDENT_UNIT {
     };
 }
 
-INDENT_UNIT!()
+INDENT_UNIT!();

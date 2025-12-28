@@ -4,4 +4,4 @@ macro_rules! collect_debugger_visualizers_transitive {
     };
 }
 
-collect_debugger_visualizers_transitive!()
+collect_debugger_visualizers_transitive!();

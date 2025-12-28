@@ -4,4 +4,4 @@ macro_rules! REGIONAL_INDICATOR {
     };
 }
 
-REGIONAL_INDICATOR!()
+REGIONAL_INDICATOR!();

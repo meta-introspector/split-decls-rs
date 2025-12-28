@@ -4,4 +4,4 @@ macro_rules! is_string_continue_skipable_whitespace {
     };
 }
 
-is_string_continue_skipable_whitespace!()
+is_string_continue_skipable_whitespace!();

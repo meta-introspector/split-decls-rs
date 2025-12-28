@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Bigint!();
         Number!();
+        Bigint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BIGINT_BITS {
     };
 }
 
-BIGINT_BITS!()
+BIGINT_BITS!();

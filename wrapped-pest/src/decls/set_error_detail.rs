@@ -4,4 +4,4 @@ macro_rules! set_error_detail {
     };
 }
 
-set_error_detail!()
+set_error_detail!();

@@ -12,4 +12,4 @@ macro_rules! eponymous_only_module {
     };
 }
 
-eponymous_only_module!()
+eponymous_only_module!();

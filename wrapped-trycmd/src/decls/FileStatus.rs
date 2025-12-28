@@ -4,4 +4,4 @@ macro_rules! FileStatus {
     };
 }
 
-FileStatus!()
+FileStatus!();

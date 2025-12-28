@@ -11,4 +11,4 @@ macro_rules! dissociate_fd {
     };
 }
 
-dissociate_fd!()
+dissociate_fd!();

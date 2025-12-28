@@ -4,4 +4,4 @@ macro_rules! const_debug_assert {
     };
 }
 
-const_debug_assert!()
+const_debug_assert!();

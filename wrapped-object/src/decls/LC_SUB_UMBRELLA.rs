@@ -4,4 +4,4 @@ macro_rules! LC_SUB_UMBRELLA {
     };
 }
 
-LC_SUB_UMBRELLA!()
+LC_SUB_UMBRELLA!();

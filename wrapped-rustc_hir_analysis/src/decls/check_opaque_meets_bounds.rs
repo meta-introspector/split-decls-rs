@@ -4,4 +4,4 @@ macro_rules! check_opaque_meets_bounds {
     };
 }
 
-check_opaque_meets_bounds!()
+check_opaque_meets_bounds!();

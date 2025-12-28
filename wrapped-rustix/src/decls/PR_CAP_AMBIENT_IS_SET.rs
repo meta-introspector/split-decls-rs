@@ -4,4 +4,4 @@ macro_rules! PR_CAP_AMBIENT_IS_SET {
     };
 }
 
-PR_CAP_AMBIENT_IS_SET!()
+PR_CAP_AMBIENT_IS_SET!();

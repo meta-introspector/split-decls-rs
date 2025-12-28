@@ -11,4 +11,4 @@ macro_rules! inline_as_str {
     };
 }
 
-inline_as_str!()
+inline_as_str!();

@@ -4,4 +4,4 @@ macro_rules! SCx {
     };
 }
 
-SCx!()
+SCx!();

@@ -4,4 +4,4 @@ macro_rules! open_how {
     };
 }
 
-open_how!()
+open_how!();

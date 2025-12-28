@@ -11,4 +11,4 @@ macro_rules! undo_bytes {
     };
 }
 
-undo_bytes!()
+undo_bytes!();

@@ -4,4 +4,4 @@ macro_rules! find_min_size {
     };
 }
 
-find_min_size!()
+find_min_size!();

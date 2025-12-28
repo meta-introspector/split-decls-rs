@@ -4,4 +4,4 @@ macro_rules! DOUBLE_MANTISSA_BITS {
     };
 }
 
-DOUBLE_MANTISSA_BITS!()
+DOUBLE_MANTISSA_BITS!();

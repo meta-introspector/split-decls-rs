@@ -4,4 +4,4 @@ macro_rules! test_u32_opt_len {
     };
 }
 
-test_u32_opt_len!()
+test_u32_opt_len!();

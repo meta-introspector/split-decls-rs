@@ -4,4 +4,4 @@ macro_rules! PIO2_1 {
     };
 }
 
-PIO2_1!()
+PIO2_1!();

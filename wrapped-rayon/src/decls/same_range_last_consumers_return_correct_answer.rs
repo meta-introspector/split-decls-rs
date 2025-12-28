@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FindConsumer!();
         MatchPosition!();
+        FindConsumer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! same_range_last_consumers_return_correct_answer {
     };
 }
 
-same_range_last_consumers_return_correct_answer!()
+same_range_last_consumers_return_correct_answer!();

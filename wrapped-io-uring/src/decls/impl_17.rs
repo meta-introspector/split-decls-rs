@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Mmap!();
-        CompletionQueue!();
         EntryMarker!();
+        CompletionQueue!();
         Inner!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

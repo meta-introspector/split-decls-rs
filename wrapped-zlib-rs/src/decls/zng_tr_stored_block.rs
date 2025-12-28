@@ -12,4 +12,4 @@ macro_rules! zng_tr_stored_block {
     };
 }
 
-zng_tr_stored_block!()
+zng_tr_stored_block!();

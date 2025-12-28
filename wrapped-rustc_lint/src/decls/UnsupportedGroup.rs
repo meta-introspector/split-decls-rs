@@ -4,4 +4,4 @@ macro_rules! UnsupportedGroup {
     };
 }
 
-UnsupportedGroup!()
+UnsupportedGroup!();

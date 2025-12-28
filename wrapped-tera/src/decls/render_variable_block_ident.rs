@@ -12,4 +12,4 @@ macro_rules! render_variable_block_ident {
     };
 }
 
-render_variable_block_ident!()
+render_variable_block_ident!();

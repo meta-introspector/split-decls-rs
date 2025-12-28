@@ -12,4 +12,4 @@ macro_rules! impl_early_lint_pass {
     };
 }
 
-impl_early_lint_pass!()
+impl_early_lint_pass!();

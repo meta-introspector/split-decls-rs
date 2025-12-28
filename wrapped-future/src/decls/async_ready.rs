@@ -4,4 +4,4 @@ macro_rules! async_ready {
     };
 }
 
-async_ready!()
+async_ready!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DebugWithContext!();
-        ResultsVisitor!();
         Analysis!();
+        DebugWithContext!();
         Direction!();
+        ResultsVisitor!();
         StateDiffCollector!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

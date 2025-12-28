@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GenericArg!();
-        Lifetime!();
-        InferArg!();
-        Visitor!();
         InferKind!();
+        Visitor!();
+        InferArg!();
+        Lifetime!();
+        GenericArg!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! walk_generic_arg {
     };
 }
 
-walk_generic_arg!()
+walk_generic_arg!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ZipFileData!();
-        ZipCentralEntryBlock!();
         CentralDirectoryInfo!();
         ZipResult!();
+        ZipCentralEntryBlock!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! central_header_to_zip_file {
     };
 }
 
-central_header_to_zip_file!()
+central_header_to_zip_file!();

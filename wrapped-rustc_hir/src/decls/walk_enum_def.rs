@@ -12,4 +12,4 @@ macro_rules! walk_enum_def {
     };
 }
 
-walk_enum_def!()
+walk_enum_def!();

@@ -11,4 +11,4 @@ macro_rules! macro_768 {
     };
 }
 
-macro_768!()
+macro_768!();

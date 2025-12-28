@@ -4,4 +4,4 @@ macro_rules! ExprToSpannedString {
     };
 }
 
-ExprToSpannedString!()
+ExprToSpannedString!();

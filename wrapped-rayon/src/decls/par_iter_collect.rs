@@ -4,4 +4,4 @@ macro_rules! par_iter_collect {
     };
 }
 
-par_iter_collect!()
+par_iter_collect!();

@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
-        UndoLog!();
         RegionVariableOrigin!();
-        NllRegionVariableOrigin!();
-        BoundRegionConversionTime!();
-        VarInfos!();
-        SubregionOrigin!();
-        VerifyBound!();
+        InferenceLiteralEraser!();
         PredicateObligation!();
         ConstVariableOrigin!();
-        InferCtxt!();
-        InferenceLiteralEraser!();
-        FixupResult!();
-        ObligationInspector!();
-        DefineOpaqueTypes!();
-        TyOrConstInferVar!();
         OpportunisticVarResolver!();
-        InferResult!();
-        TypeVariableValue!();
-        TypeVariableOrigin!();
-        ConstVariableValue!();
+        FixupResult!();
         TypeFreshener!();
+        InferCtxt!();
+        ObligationInspector!();
+        BoundRegionConversionTime!();
+        ConstVariableValue!();
+        DefineOpaqueTypes!();
+        UndoLog!();
+        InferResult!();
+        NllRegionVariableOrigin!();
+        SubregionOrigin!();
+        VerifyBound!();
+        TypeVariableValue!();
+        TyOrConstInferVar!();
+        VarInfos!();
         GenericKind!();
+        TypeVariableOrigin!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

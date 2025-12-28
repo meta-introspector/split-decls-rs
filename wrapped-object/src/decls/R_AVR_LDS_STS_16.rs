@@ -4,4 +4,4 @@ macro_rules! R_AVR_LDS_STS_16 {
     };
 }
 
-R_AVR_LDS_STS_16!()
+R_AVR_LDS_STS_16!();

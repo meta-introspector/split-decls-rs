@@ -4,4 +4,4 @@ macro_rules! R_386_GOT32 {
     };
 }
 
-R_386_GOT32!()
+R_386_GOT32!();

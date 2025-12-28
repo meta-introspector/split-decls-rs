@@ -12,4 +12,4 @@ macro_rules! template_cant_access_macros_context {
     };
 }
 
-template_cant_access_macros_context!()
+template_cant_access_macros_context!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MatrixError!();
         MatrixGraph!();
+        MatrixError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_985 {
     };
 }
 
-impl_985!()
+impl_985!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SleepData!();
         WorkerSleepState!();
+        SleepData!();
         AtomicCounters!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Sleep {
     };
 }
 
-Sleep!()
+Sleep!();

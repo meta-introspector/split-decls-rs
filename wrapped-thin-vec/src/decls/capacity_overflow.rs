@@ -4,4 +4,4 @@ macro_rules! capacity_overflow {
     };
 }
 
-capacity_overflow!()
+capacity_overflow!();

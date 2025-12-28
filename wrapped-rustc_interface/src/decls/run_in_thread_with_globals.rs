@@ -4,4 +4,4 @@ macro_rules! run_in_thread_with_globals {
     };
 }
 
-run_in_thread_with_globals!()
+run_in_thread_with_globals!();

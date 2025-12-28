@@ -4,4 +4,4 @@ macro_rules! AssociatedValueExpectedFor {
     };
 }
 
-AssociatedValueExpectedFor!()
+AssociatedValueExpectedFor!();

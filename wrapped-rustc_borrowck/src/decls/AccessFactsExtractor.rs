@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PoloniusFacts!();
         PoloniusLocationTable!();
+        PoloniusFacts!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AccessFactsExtractor {
     };
 }
 
-AccessFactsExtractor!()
+AccessFactsExtractor!();

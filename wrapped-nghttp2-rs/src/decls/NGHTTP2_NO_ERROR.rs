@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_NO_ERROR {
     };
 }
 
-NGHTTP2_NO_ERROR!()
+NGHTTP2_NO_ERROR!();

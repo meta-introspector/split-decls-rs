@@ -11,4 +11,4 @@ macro_rules! adler32 {
     };
 }
 
-adler32!()
+adler32!();

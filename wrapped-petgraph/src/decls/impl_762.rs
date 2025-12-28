@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Frozen!();
-        Graph!();
         EdgeType!();
         GraphIndex!();
+        Graph!();
         IndexType!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_762 {
     };
 }
 
-impl_762!()
+impl_762!();

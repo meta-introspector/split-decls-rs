@@ -4,4 +4,4 @@ macro_rules! NFS_SUPER_MAGIC {
     };
 }
 
-NFS_SUPER_MAGIC!()
+NFS_SUPER_MAGIC!();

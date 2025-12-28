@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MirBorrowckCtxt!();
         Prefixes!();
         PrefixSet!();
-        MirBorrowckCtxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_310 {
     };
 }
 
-impl_310!()
+impl_310!();

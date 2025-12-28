@@ -4,4 +4,4 @@ macro_rules! mev_exclude {
     };
 }
 
-mev_exclude!()
+mev_exclude!();

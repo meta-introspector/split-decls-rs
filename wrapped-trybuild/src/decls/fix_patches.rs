@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegistryPatch!();
         Directory!();
+        RegistryPatch!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fix_patches {
     };
 }
 
-fix_patches!()
+fix_patches!();

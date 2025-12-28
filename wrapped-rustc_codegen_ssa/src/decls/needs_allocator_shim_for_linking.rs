@@ -4,4 +4,4 @@ macro_rules! needs_allocator_shim_for_linking {
     };
 }
 
-needs_allocator_shim_for_linking!()
+needs_allocator_shim_for_linking!();

@@ -4,4 +4,4 @@ macro_rules! nghttp2_error {
     };
 }
 
-nghttp2_error!()
+nghttp2_error!();

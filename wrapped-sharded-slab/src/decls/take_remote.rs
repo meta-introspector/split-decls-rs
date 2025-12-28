@@ -11,4 +11,4 @@ macro_rules! take_remote {
     };
 }
 
-take_remote!()
+take_remote!();

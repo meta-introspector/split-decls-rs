@@ -11,4 +11,4 @@ macro_rules! FIELD_IDENTIFIER {
     };
 }
 
-FIELD_IDENTIFIER!()
+FIELD_IDENTIFIER!();

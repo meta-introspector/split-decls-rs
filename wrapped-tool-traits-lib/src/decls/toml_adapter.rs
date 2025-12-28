@@ -4,4 +4,4 @@ macro_rules! toml_adapter {
     };
 }
 
-toml_adapter!()
+toml_adapter!();

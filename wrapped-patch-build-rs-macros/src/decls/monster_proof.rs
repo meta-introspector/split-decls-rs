@@ -4,4 +4,4 @@ macro_rules! monster_proof {
     };
 }
 
-monster_proof!()
+monster_proof!();

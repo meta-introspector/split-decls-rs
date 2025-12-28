@@ -12,4 +12,4 @@ macro_rules! instantiate_canonical_state {
     };
 }
 
-instantiate_canonical_state!()
+instantiate_canonical_state!();

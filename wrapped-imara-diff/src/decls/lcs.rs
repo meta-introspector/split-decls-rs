@@ -4,4 +4,4 @@ macro_rules! lcs {
     };
 }
 
-lcs!()
+lcs!();

@@ -11,4 +11,4 @@ macro_rules! width_in_str {
     };
 }
 
-width_in_str!()
+width_in_str!();

@@ -4,4 +4,4 @@ macro_rules! load_command {
     };
 }
 
-load_command!()
+load_command!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WithDispatch!();
-        Instrumented!();
         Instrument!();
+        Instrumented!();
+        WithDispatch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! tokio {
     };
 }
 
-tokio!()
+tokio!();

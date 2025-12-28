@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Identifier!();
+        Error!();
         Position!();
         BuildMetadata!();
-        Error!();
+        Identifier!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! build_identifier {
     };
 }
 
-build_identifier!()
+build_identifier!();

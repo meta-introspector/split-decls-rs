@@ -11,4 +11,4 @@ macro_rules! bit_relations_inherent_impls {
     };
 }
 
-bit_relations_inherent_impls!()
+bit_relations_inherent_impls!();

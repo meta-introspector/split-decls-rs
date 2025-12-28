@@ -11,4 +11,4 @@ macro_rules! NUM_LIVE_VERSIONS {
     };
 }
 
-NUM_LIVE_VERSIONS!()
+NUM_LIVE_VERSIONS!();

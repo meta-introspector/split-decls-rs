@@ -4,4 +4,4 @@ macro_rules! PS2 {
     };
 }
 
-PS2!()
+PS2!();

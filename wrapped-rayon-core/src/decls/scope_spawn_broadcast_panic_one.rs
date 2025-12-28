@@ -11,4 +11,4 @@ macro_rules! scope_spawn_broadcast_panic_one {
     };
 }
 
-scope_spawn_broadcast_panic_one!()
+scope_spawn_broadcast_panic_one!();

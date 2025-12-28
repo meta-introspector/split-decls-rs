@@ -4,4 +4,4 @@ macro_rules! cfg_codec {
     };
 }
 
-cfg_codec!()
+cfg_codec!();

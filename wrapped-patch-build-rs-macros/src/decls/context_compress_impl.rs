@@ -4,4 +4,4 @@ macro_rules! context_compress_impl {
     };
 }
 
-context_compress_impl!()
+context_compress_impl!();

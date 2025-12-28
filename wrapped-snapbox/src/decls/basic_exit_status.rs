@@ -4,4 +4,4 @@ macro_rules! basic_exit_status {
     };
 }
 
-basic_exit_status!()
+basic_exit_status!();

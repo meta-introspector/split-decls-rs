@@ -13,4 +13,4 @@ macro_rules! setup_constraining_predicates {
     };
 }
 
-setup_constraining_predicates!()
+setup_constraining_predicates!();

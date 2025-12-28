@@ -4,4 +4,4 @@ macro_rules! cfg_io_driver_impl {
     };
 }
 
-cfg_io_driver_impl!()
+cfg_io_driver_impl!();

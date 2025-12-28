@@ -4,4 +4,4 @@ macro_rules! dispatch_wrap_logic {
     };
 }
 
-dispatch_wrap_logic!()
+dispatch_wrap_logic!();

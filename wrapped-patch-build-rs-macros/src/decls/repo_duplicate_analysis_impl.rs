@@ -46,4 +46,4 @@ macro_rules! repo_duplicate_analysis_impl {
     };
 }
 
-repo_duplicate_analysis_impl!()
+repo_duplicate_analysis_impl!();

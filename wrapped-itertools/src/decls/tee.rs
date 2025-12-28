@@ -4,4 +4,4 @@ macro_rules! tee {
     };
 }
 
-tee!()
+tee!();

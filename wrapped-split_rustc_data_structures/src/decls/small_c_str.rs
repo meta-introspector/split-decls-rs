@@ -4,4 +4,4 @@ macro_rules! small_c_str {
     };
 }
 
-small_c_str!()
+small_c_str!();

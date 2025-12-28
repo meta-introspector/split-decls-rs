@@ -4,4 +4,4 @@ macro_rules! R_CRIS_COPY {
     };
 }
 
-R_CRIS_COPY!()
+R_CRIS_COPY!();

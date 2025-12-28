@@ -4,4 +4,4 @@ macro_rules! FILE_HEADER_SIZE {
     };
 }
 
-FILE_HEADER_SIZE!()
+FILE_HEADER_SIZE!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Variant!();
         Field!();
+        Variant!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! needs_deserialize_bound {
     };
 }
 
-needs_deserialize_bound!()
+needs_deserialize_bound!();

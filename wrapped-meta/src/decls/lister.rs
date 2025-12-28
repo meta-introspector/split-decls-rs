@@ -4,4 +4,4 @@ macro_rules! lister {
     };
 }
 
-lister!()
+lister!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        StableGraph!();
-        DeserStableGraph!();
+        FromDeserialized!();
         Node!();
         Graph!();
-        EdgeIndex!();
-        NodeIndex!();
-        FromDeserialized!();
-        IndexType!();
         EdgeType!();
+        DeserStableGraph!();
+        StableGraph!();
+        NodeIndex!();
+        EdgeIndex!();
+        IndexType!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_795 {
     };
 }
 
-impl_795!()
+impl_795!();

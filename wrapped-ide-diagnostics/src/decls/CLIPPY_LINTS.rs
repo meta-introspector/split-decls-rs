@@ -11,4 +11,4 @@ macro_rules! CLIPPY_LINTS {
     };
 }
 
-CLIPPY_LINTS!()
+CLIPPY_LINTS!();

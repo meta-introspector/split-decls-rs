@@ -4,4 +4,4 @@ macro_rules! EM_MOXIE {
     };
 }
 
-EM_MOXIE!()
+EM_MOXIE!();

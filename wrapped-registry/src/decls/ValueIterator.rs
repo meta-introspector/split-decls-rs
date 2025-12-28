@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Data!();
         Key!();
+        Data!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ValueIterator {
     };
 }
 
-ValueIterator!()
+ValueIterator!();

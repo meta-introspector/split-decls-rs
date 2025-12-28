@@ -4,4 +4,4 @@ macro_rules! mono {
     };
 }
 
-mono!()
+mono!();

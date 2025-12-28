@@ -4,4 +4,4 @@ macro_rules! read_varu32 {
     };
 }
 
-read_varu32!()
+read_varu32!();

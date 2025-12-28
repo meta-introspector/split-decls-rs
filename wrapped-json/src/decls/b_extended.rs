@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExtendedFloat!();
         Float!();
+        ExtendedFloat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! b_extended {
     };
 }
 
-b_extended!()
+b_extended!();

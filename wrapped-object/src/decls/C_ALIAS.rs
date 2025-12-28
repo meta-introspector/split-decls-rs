@@ -4,4 +4,4 @@ macro_rules! C_ALIAS {
     };
 }
 
-C_ALIAS!()
+C_ALIAS!();

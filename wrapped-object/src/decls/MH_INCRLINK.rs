@@ -4,4 +4,4 @@ macro_rules! MH_INCRLINK {
     };
 }
 
-MH_INCRLINK!()
+MH_INCRLINK!();

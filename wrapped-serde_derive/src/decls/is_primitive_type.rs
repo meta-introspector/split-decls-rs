@@ -4,4 +4,4 @@ macro_rules! is_primitive_type {
     };
 }
 
-is_primitive_type!()
+is_primitive_type!();

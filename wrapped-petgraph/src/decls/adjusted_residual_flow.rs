@@ -12,4 +12,4 @@ macro_rules! adjusted_residual_flow {
     };
 }
 
-adjusted_residual_flow!()
+adjusted_residual_flow!();

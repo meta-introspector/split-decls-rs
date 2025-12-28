@@ -4,4 +4,4 @@ macro_rules! ChunksExactMutProducer {
     };
 }
 
-ChunksExactMutProducer!()
+ChunksExactMutProducer!();

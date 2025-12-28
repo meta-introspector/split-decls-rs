@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ParamEnv!();
+        Upcast!();
         Goal!();
         Interner!();
-        Upcast!();
+        ParamEnv!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_180 {
     };
 }
 
-impl_180!()
+impl_180!();

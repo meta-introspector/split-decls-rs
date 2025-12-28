@@ -4,4 +4,4 @@ macro_rules! path_utils {
     };
 }
 
-path_utils!()
+path_utils!();

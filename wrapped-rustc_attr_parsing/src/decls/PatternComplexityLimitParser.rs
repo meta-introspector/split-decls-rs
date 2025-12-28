@@ -4,4 +4,4 @@ macro_rules! PatternComplexityLimitParser {
     };
 }
 
-PatternComplexityLimitParser!()
+PatternComplexityLimitParser!();

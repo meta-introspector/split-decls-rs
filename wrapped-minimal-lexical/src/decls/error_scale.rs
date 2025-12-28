@@ -4,4 +4,4 @@ macro_rules! error_scale {
     };
 }
 
-error_scale!()
+error_scale!();

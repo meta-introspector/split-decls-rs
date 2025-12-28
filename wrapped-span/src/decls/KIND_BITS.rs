@@ -4,4 +4,4 @@ macro_rules! KIND_BITS {
     };
 }
 
-KIND_BITS!()
+KIND_BITS!();

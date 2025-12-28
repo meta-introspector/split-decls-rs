@@ -4,4 +4,4 @@ macro_rules! EF_ALPHA_CANRELAX {
     };
 }
 
-EF_ALPHA_CANRELAX!()
+EF_ALPHA_CANRELAX!();

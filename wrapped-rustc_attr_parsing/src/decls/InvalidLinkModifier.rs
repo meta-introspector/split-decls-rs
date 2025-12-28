@@ -4,4 +4,4 @@ macro_rules! InvalidLinkModifier {
     };
 }
 
-InvalidLinkModifier!()
+InvalidLinkModifier!();

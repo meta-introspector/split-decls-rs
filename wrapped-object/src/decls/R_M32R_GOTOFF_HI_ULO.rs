@@ -4,4 +4,4 @@ macro_rules! R_M32R_GOTOFF_HI_ULO {
     };
 }
 
-R_M32R_GOTOFF_HI_ULO!()
+R_M32R_GOTOFF_HI_ULO!();

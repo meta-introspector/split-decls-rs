@@ -11,4 +11,4 @@ macro_rules! get_missing_assoc_items {
     };
 }
 
-get_missing_assoc_items!()
+get_missing_assoc_items!();

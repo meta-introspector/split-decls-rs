@@ -12,4 +12,4 @@ macro_rules! BPF_FEATURES {
     };
 }
 
-BPF_FEATURES!()
+BPF_FEATURES!();

@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_VAX750 {
     };
 }
 
-CPU_SUBTYPE_VAX750!()
+CPU_SUBTYPE_VAX750!();

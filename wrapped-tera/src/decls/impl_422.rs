@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SharedNext!();
         Result!();
         Function!();
-        SharedNext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_422 {
     };
 }
 
-impl_422!()
+impl_422!();

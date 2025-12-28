@@ -4,4 +4,4 @@ macro_rules! R_PARISC_DIR17R {
     };
 }
 
-R_PARISC_DIR17R!()
+R_PARISC_DIR17R!();

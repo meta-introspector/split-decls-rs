@@ -4,4 +4,4 @@ macro_rules! ODK_TAGS {
     };
 }
 
-ODK_TAGS!()
+ODK_TAGS!();

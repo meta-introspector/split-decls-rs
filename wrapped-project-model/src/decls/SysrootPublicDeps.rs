@@ -4,4 +4,4 @@ macro_rules! SysrootPublicDeps {
     };
 }
 
-SysrootPublicDeps!()
+SysrootPublicDeps!();

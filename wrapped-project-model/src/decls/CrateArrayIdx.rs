@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Crate!();
         ProjectJson!();
+        Crate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CrateArrayIdx {
     };
 }
 
-CrateArrayIdx!()
+CrateArrayIdx!();

@@ -4,4 +4,4 @@ macro_rules! to_seq_id {
     };
 }
 
-to_seq_id!()
+to_seq_id!();

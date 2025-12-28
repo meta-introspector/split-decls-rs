@@ -4,4 +4,4 @@ macro_rules! check_method_is_structurally_compatible {
     };
 }
 
-check_method_is_structurally_compatible!()
+check_method_is_structurally_compatible!();

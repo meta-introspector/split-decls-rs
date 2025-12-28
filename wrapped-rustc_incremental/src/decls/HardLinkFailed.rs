@@ -4,4 +4,4 @@ macro_rules! HardLinkFailed {
     };
 }
 
-HardLinkFailed!()
+HardLinkFailed!();

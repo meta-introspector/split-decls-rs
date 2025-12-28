@@ -4,4 +4,4 @@ macro_rules! DeclarationInstance {
     };
 }
 
-DeclarationInstance!()
+DeclarationInstance!();

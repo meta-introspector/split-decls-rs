@@ -4,4 +4,4 @@ macro_rules! read_variable_length_byte_field {
     };
 }
 
-read_variable_length_byte_field!()
+read_variable_length_byte_field!();

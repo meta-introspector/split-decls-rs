@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         UsageMap!();
-        PartitioningCx!();
         PlacedMonoItems!();
+        PartitioningCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! partition {
     };
 }
 
-partition!()
+partition!();

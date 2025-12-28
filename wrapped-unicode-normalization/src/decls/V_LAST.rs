@@ -4,4 +4,4 @@ macro_rules! V_LAST {
     };
 }
 
-V_LAST!()
+V_LAST!();

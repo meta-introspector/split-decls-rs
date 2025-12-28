@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TryEnum!();
         Result!();
         RootDatabase!();
+        TryEnum!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

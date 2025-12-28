@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Finder!();
         PrefilterState!();
+        Finder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FindIter {
     };
 }
 
-FindIter!()
+FindIter!();

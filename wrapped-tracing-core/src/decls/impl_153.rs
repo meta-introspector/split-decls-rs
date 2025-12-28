@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Field!();
         DisplayValue!();
         Value!();
+        Field!();
         Visit!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

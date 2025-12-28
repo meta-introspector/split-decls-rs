@@ -4,4 +4,4 @@ macro_rules! SEG_PAGEZERO {
     };
 }
 
-SEG_PAGEZERO!()
+SEG_PAGEZERO!();

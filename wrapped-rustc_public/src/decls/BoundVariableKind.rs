@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Ty!();
-        BoundTyKind!();
         Region!();
         BoundRegionKind!();
+        BoundTyKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! BoundVariableKind {
     };
 }
 
-BoundVariableKind!()
+BoundVariableKind!();

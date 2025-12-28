@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Endian!();
         U64!();
         U32!();
-        Endian!();
         Section64!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! SegmentCommand64 {
     };
 }
 
-SegmentCommand64!()
+SegmentCommand64!();

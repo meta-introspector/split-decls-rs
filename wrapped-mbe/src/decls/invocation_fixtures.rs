@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Op!();
+        Separator!();
         DeclarativeMacro!();
         MetaVarKind!();
+        Op!();
         RepeatKind!();
-        Separator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! invocation_fixtures {
     };
 }
 
-invocation_fixtures!()
+invocation_fixtures!();

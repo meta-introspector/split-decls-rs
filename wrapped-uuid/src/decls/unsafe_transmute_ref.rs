@@ -4,4 +4,4 @@ macro_rules! unsafe_transmute_ref {
     };
 }
 
-unsafe_transmute_ref!()
+unsafe_transmute_ref!();

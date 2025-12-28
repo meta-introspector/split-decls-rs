@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        U16Bytes!();
-        Import!();
-        DelayLoadImportTable!();
-        Result!();
-        Bytes!();
-        ImageNtHeaders!();
-        DelayLoadDescriptorIterator!();
         ImportThunkList!();
+        DelayLoadImportTable!();
         ImageThunkData!();
+        Import!();
+        U16Bytes!();
+        ImageNtHeaders!();
         Name!();
+        Bytes!();
+        DelayLoadDescriptorIterator!();
+        Result!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_706 {
     };
 }
 
-impl_706!()
+impl_706!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LzipMember!();
         Result!();
         Read!();
+        LzipMember!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! scan_members {
     };
 }
 
-scan_members!()
+scan_members!();

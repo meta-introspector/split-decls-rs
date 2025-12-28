@@ -4,4 +4,4 @@ macro_rules! assert_ready {
     };
 }
 
-assert_ready!()
+assert_ready!();

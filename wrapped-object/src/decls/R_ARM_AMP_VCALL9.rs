@@ -4,4 +4,4 @@ macro_rules! R_ARM_AMP_VCALL9 {
     };
 }
 
-R_ARM_AMP_VCALL9!()
+R_ARM_AMP_VCALL9!();

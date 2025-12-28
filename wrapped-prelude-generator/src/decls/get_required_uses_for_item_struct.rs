@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BagOfWordsVisitor!();
         Args!();
+        BagOfWordsVisitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_required_uses_for_item_struct {
     };
 }
 
-get_required_uses_for_item_struct!()
+get_required_uses_for_item_struct!();

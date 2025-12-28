@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Inner!();
         Node!();
+        Inner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Kind {
     };
 }
 
-Kind!()
+Kind!();

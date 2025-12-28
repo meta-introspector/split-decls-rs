@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Token!();
-        IndentHeuristic!();
-        Histogram!();
         Myers!();
-        Algorithm!();
-        NoSliderHeuristic!();
+        IndentHeuristic!();
+        Diff!();
         IndentLevel!();
         HunkIter!();
-        Diff!();
+        NoSliderHeuristic!();
         InternedInput!();
+        Histogram!();
+        Token!();
+        Algorithm!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_111 {
     };
 }
 
-impl_111!()
+impl_111!();

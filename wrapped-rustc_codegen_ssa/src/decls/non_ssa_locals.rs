@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LocalAnalyzer!();
-        BuilderMethods!();
         LocalKind!();
+        BuilderMethods!();
         FunctionCx!();
+        LocalAnalyzer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! non_ssa_locals {
     };
 }
 
-non_ssa_locals!()
+non_ssa_locals!();

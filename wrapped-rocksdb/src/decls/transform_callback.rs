@@ -11,4 +11,4 @@ macro_rules! transform_callback {
     };
 }
 
-transform_callback!()
+transform_callback!();

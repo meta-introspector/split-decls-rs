@@ -4,4 +4,4 @@ macro_rules! type_op_normalize_fn_sig {
     };
 }
 
-type_op_normalize_fn_sig!()
+type_op_normalize_fn_sig!();

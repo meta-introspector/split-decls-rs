@@ -4,4 +4,4 @@ macro_rules! TO_INT {
     };
 }
 
-TO_INT!()
+TO_INT!();

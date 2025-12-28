@@ -1,35 +1,35 @@
 macro_rules! deps {
     () => {
-        FileType!();
-        DiagnosticHandlerTy!();
-        CodeModel!();
-        CodeRegion!();
-        OptStage!();
-        AttributeKind!();
-        BranchRegion!();
-        Builder!();
-        CodeGenOptLevel!();
-        SelfProfileBeforePassCallback!();
-        ChecksumKind!();
         FloatAbi!();
-        PassBuilderOptLevel!();
-        ModuleBuffer!();
         RelocModel!();
-        DiagnosticKind!();
-        GetSymbolsCallback!();
-        PassManager!();
-        CounterExpression!();
+        DiagnosticHandlerTy!();
         Linker!();
         GetSymbolsErrorCallback!();
-        SanitizerOptions!();
-        LLVMRustResult!();
-        AtomicOrdering!();
-        MemoryEffects!();
-        SelfProfileAfterPassCallback!();
-        DiagnosticLevel!();
+        AttributeKind!();
         ThinLTOModule!();
-        ModuleFlagMergeBehavior!();
+        DiagnosticKind!();
+        CodeRegion!();
         ExpansionRegion!();
+        SelfProfileAfterPassCallback!();
+        Builder!();
+        FileType!();
+        SanitizerOptions!();
+        GetSymbolsCallback!();
+        ModuleFlagMergeBehavior!();
+        BranchRegion!();
+        ChecksumKind!();
+        OptStage!();
+        PassBuilderOptLevel!();
+        ModuleBuffer!();
+        CodeGenOptLevel!();
+        CodeModel!();
+        MemoryEffects!();
+        AtomicOrdering!();
+        DiagnosticLevel!();
+        SelfProfileBeforePassCallback!();
+        PassManager!();
+        LLVMRustResult!();
+        CounterExpression!();
     };
 }
 
@@ -40,4 +40,4 @@ macro_rules! other_491 {
     };
 }
 
-other_491!()
+other_491!();

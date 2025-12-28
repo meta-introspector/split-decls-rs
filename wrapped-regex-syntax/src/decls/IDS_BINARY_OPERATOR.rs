@@ -4,4 +4,4 @@ macro_rules! IDS_BINARY_OPERATOR {
     };
 }
 
-IDS_BINARY_OPERATOR!()
+IDS_BINARY_OPERATOR!();

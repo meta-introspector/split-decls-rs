@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ImportTable!();
-        Bytes!();
-        ImportDescriptorIterator!();
-        U16Bytes!();
-        ImportThunkList!();
-        Name!();
-        Result!();
-        ImageNtHeaders!();
         ImageThunkData!();
+        ImportDescriptorIterator!();
+        ImportThunkList!();
         Import!();
+        Name!();
+        ImportTable!();
+        U16Bytes!();
+        ImageNtHeaders!();
+        Bytes!();
+        Result!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_695 {
     };
 }
 
-impl_695!()
+impl_695!();

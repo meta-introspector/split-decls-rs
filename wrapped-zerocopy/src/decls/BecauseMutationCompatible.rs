@@ -4,4 +4,4 @@ macro_rules! BecauseMutationCompatible {
     };
 }
 
-BecauseMutationCompatible!()
+BecauseMutationCompatible!();

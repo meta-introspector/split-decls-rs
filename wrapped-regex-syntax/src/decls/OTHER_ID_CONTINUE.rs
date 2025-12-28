@@ -4,4 +4,4 @@ macro_rules! OTHER_ID_CONTINUE {
     };
 }
 
-OTHER_ID_CONTINUE!()
+OTHER_ID_CONTINUE!();

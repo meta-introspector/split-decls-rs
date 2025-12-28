@@ -4,4 +4,4 @@ macro_rules! __rust_begin_short_backtrace {
     };
 }
 
-__rust_begin_short_backtrace!()
+__rust_begin_short_backtrace!();

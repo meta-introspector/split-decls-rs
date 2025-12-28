@@ -4,4 +4,4 @@ macro_rules! BANNED_FIELD_NAMES {
     };
 }
 
-BANNED_FIELD_NAMES!()
+BANNED_FIELD_NAMES!();

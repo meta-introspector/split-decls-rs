@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Serializer!();
-        Value!();
         SerializeMap!();
-        Result!();
         Error!();
         Map!();
+        Result!();
+        Serializer!();
+        Value!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

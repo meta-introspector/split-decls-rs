@@ -35,4 +35,4 @@ pub mod partition_3 {{
     };
 }
 
-code_split_impl!()
+code_split_impl!();

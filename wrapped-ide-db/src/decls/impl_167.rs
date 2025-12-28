@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        FileRange!();
+        FindUsages!();
         RootDatabase!();
         SearchScope!();
         Definition!();
-        FileRange!();
-        FindUsages!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

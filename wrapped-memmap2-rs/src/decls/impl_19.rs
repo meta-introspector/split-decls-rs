@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        MmapMut!();
+        MmapAsRawDesc!();
+        Advice!();
+        Mmap!();
+        MmapOptions!();
         UncheckedAdvice!();
         RemapOptions!();
-        MmapOptions!();
-        MmapAsRawDesc!();
-        Mmap!();
-        MmapMut!();
-        Advice!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

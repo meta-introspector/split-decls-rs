@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Sym32!();
         Sym!();
         Endian!();
-        Sym32!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_342 {
     };
 }
 
-impl_342!()
+impl_342!();

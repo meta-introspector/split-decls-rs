@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Mangling!();
         MachO!();
+        Mangling!();
         Architecture!();
         BinaryFormat!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_1061 {
     };
 }
 
-impl_1061!()
+impl_1061!();

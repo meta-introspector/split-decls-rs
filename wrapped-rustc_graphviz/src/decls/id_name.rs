@@ -12,4 +12,4 @@ macro_rules! id_name {
     };
 }
 
-id_name!()
+id_name!();

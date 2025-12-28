@@ -4,4 +4,4 @@ macro_rules! InvocationStrategy {
     };
 }
 
-InvocationStrategy!()
+InvocationStrategy!();

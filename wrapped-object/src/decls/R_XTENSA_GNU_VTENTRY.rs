@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_GNU_VTENTRY {
     };
 }
 
-R_XTENSA_GNU_VTENTRY!()
+R_XTENSA_GNU_VTENTRY!();

@@ -4,4 +4,4 @@ macro_rules! N_STAB {
     };
 }
 
-N_STAB!()
+N_STAB!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AssistConfig!();
         Assists!();
+        AssistConfig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AssistContext {
     };
 }
 
-AssistContext!()
+AssistContext!();

@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         RChunksMut!();
         IndexedParallelIterator!();
-        ProducerCallback!();
         RChunksMutProducer!();
         Consumer!();
+        ProducerCallback!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1187 {
     };
 }
 
-impl_1187!()
+impl_1187!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DecompressorOxide!();
-        TINFLStatus!();
         Result!();
+        TINFLStatus!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! decompress_slice_iter_to_slice {
     };
 }
 
-decompress_slice_iter_to_slice!()
+decompress_slice_iter_to_slice!();

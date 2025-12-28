@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IdType!();
-        ProcSelector!();
         RawPid!();
+        IdType!();
         Pid!();
+        ProcSelector!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! proc_selector_to_raw {
     };
 }
 
-proc_selector_to_raw!()
+proc_selector_to_raw!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EnumLatticeInfo!();
+        ExpressionInfo!();
         StructLatticeInfo!();
         ImplLatticeInfo!();
-        ExpressionInfo!();
+        EnumLatticeInfo!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FileAnalysisCache {
     };
 }
 
-FileAnalysisCache!()
+FileAnalysisCache!();

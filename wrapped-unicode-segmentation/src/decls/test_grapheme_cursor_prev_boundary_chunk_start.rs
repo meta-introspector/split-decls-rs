@@ -12,4 +12,4 @@ macro_rules! test_grapheme_cursor_prev_boundary_chunk_start {
     };
 }
 
-test_grapheme_cursor_prev_boundary_chunk_start!()
+test_grapheme_cursor_prev_boundary_chunk_start!();

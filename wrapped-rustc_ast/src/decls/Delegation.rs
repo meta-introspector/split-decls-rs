@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Path!();
+        QSelf!();
         Block!();
         Walkable!();
-        QSelf!();
+        Path!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Delegation {
     };
 }
 
-Delegation!()
+Delegation!();

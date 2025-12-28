@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stage!();
         AcceptContext!();
         ArgParser!();
+        Stage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! extract_value {
     };
 }
 
-extract_value!()
+extract_value!();

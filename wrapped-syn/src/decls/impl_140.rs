@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Members!();
-        IterMut!();
         Iter!();
+        IterMut!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

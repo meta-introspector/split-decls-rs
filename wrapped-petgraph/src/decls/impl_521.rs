@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Directed!();
         CsrError!();
-        Create!();
-        Edges!();
-        Edge!();
-        EdgeType!();
-        EdgesNotSorted!();
+        Directed!();
         Undirected!();
         NodeIndex!();
+        Create!();
+        Edges!();
+        Csr!();
+        EdgeType!();
+        Edge!();
+        EdgesNotSorted!();
         IntoWeightedEdge!();
         IndexType!();
-        Csr!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_521 {
     };
 }
 
-impl_521!()
+impl_521!();

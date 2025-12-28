@@ -4,4 +4,4 @@ macro_rules! R_390_GOTOFF32 {
     };
 }
 
-R_390_GOTOFF32!()
+R_390_GOTOFF32!();

@@ -11,4 +11,4 @@ macro_rules! test_borrow_mut {
     };
 }
 
-test_borrow_mut!()
+test_borrow_mut!();

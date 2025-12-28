@@ -4,4 +4,4 @@ macro_rules! EM_UNICORE {
     };
 }
 
-EM_UNICORE!()
+EM_UNICORE!();

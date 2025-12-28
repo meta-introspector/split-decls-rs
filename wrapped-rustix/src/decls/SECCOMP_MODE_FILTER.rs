@@ -4,4 +4,4 @@ macro_rules! SECCOMP_MODE_FILTER {
     };
 }
 
-SECCOMP_MODE_FILTER!()
+SECCOMP_MODE_FILTER!();

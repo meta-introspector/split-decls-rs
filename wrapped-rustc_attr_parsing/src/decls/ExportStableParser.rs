@@ -4,4 +4,4 @@ macro_rules! ExportStableParser {
     };
 }
 
-ExportStableParser!()
+ExportStableParser!();

@@ -4,4 +4,4 @@ macro_rules! EnvNotUnicode {
     };
 }
 
-EnvNotUnicode!()
+EnvNotUnicode!();

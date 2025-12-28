@@ -4,4 +4,4 @@ macro_rules! __item {
     };
 }
 
-__item!()
+__item!();

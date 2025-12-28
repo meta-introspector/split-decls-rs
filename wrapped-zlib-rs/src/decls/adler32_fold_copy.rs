@@ -4,4 +4,4 @@ macro_rules! adler32_fold_copy {
     };
 }
 
-adler32_fold_copy!()
+adler32_fold_copy!();

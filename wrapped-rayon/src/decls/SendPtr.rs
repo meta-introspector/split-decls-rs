@@ -4,4 +4,4 @@ macro_rules! SendPtr {
     };
 }
 
-SendPtr!()
+SendPtr!();

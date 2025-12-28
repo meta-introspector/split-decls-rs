@@ -4,4 +4,4 @@ macro_rules! ELF_NOTE_OS_FREEBSD {
     };
 }
 
-ELF_NOTE_OS_FREEBSD!()
+ELF_NOTE_OS_FREEBSD!();

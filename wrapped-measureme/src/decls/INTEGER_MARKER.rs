@@ -4,4 +4,4 @@ macro_rules! INTEGER_MARKER {
     };
 }
 
-INTEGER_MARKER!()
+INTEGER_MARKER!();

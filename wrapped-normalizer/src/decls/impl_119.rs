@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Baked!();
         DecomposingNormalizer!();
+        Baked!();
         DecomposingNormalizerBorrowed!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

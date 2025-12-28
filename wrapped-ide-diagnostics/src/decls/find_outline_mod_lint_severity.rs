@@ -11,4 +11,4 @@ macro_rules! find_outline_mod_lint_severity {
     };
 }
 
-find_outline_mod_lint_severity!()
+find_outline_mod_lint_severity!();

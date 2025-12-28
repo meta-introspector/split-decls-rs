@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         AsCoercionSite!();
         Coerce!();
-        CoerceMany!();
         FnCtxt!();
+        CoerceMany!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

@@ -4,4 +4,4 @@ macro_rules! EM_ECOG16 {
     };
 }
 
-EM_ECOG16!()
+EM_ECOG16!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PlaceRef!();
-        OperandRef!();
         OperandValue!();
+        OperandRef!();
+        PlaceRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LocalRef {
     };
 }
 
-LocalRef!()
+LocalRef!();

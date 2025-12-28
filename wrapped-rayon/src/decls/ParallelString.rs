@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Chars!();
-        MatchIndices!();
-        Bytes!();
-        CharIndices!();
-        Split!();
-        Matches!();
         SplitAsciiWhitespace!();
+        CharIndices!();
         SplitWhitespace!();
-        SplitTerminator!();
-        Lines!();
         SplitInclusive!();
+        SplitTerminator!();
+        Chars!();
+        Split!();
+        Lines!();
+        Bytes!();
+        Matches!();
         EncodeUtf16!();
+        MatchIndices!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! ParallelString {
     };
 }
 
-ParallelString!()
+ParallelString!();

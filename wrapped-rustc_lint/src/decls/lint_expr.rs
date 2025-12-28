@@ -12,4 +12,4 @@ macro_rules! lint_expr {
     };
 }
 
-lint_expr!()
+lint_expr!();

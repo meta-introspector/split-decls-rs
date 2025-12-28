@@ -4,4 +4,4 @@ macro_rules! gen_trivial_is_bit_valid_unchecked {
     };
 }
 
-gen_trivial_is_bit_valid_unchecked!()
+gen_trivial_is_bit_valid_unchecked!();

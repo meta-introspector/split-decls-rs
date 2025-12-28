@@ -4,4 +4,4 @@ macro_rules! LC_LINKER_OPTION {
     };
 }
 
-LC_LINKER_OPTION!()
+LC_LINKER_OPTION!();

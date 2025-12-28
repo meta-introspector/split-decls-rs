@@ -4,4 +4,4 @@ macro_rules! UnindexedFieldsAttr {
     };
 }
 
-UnindexedFieldsAttr!()
+UnindexedFieldsAttr!();

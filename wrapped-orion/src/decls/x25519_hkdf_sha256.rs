@@ -4,4 +4,4 @@ macro_rules! x25519_hkdf_sha256 {
     };
 }
 
-x25519_hkdf_sha256!()
+x25519_hkdf_sha256!();

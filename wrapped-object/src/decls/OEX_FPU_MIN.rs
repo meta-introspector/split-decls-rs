@@ -4,4 +4,4 @@ macro_rules! OEX_FPU_MIN {
     };
 }
 
-OEX_FPU_MIN!()
+OEX_FPU_MIN!();

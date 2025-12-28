@@ -4,4 +4,4 @@ macro_rules! Utf8LastTransition {
     };
 }
 
-Utf8LastTransition!()
+Utf8LastTransition!();

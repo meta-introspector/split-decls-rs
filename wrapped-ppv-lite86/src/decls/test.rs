@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericMachine!();
         Machine!();
+        GenericMachine!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

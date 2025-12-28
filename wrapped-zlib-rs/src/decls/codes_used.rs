@@ -11,4 +11,4 @@ macro_rules! codes_used {
     };
 }
 
-codes_used!()
+codes_used!();

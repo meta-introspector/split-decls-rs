@@ -4,4 +4,4 @@ macro_rules! delete_callback {
     };
 }
 
-delete_callback!()
+delete_callback!();

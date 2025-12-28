@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stable!();
         Span!();
+        Stable!();
         BridgeTys!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_228 {
     };
 }
 
-impl_228!()
+impl_228!();

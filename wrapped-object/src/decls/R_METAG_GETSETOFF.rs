@@ -4,4 +4,4 @@ macro_rules! R_METAG_GETSETOFF {
     };
 }
 
-R_METAG_GETSETOFF!()
+R_METAG_GETSETOFF!();

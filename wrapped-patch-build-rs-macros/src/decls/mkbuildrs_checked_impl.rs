@@ -35,4 +35,4 @@ fn main() {
     };
 }
 
-mkbuildrs_checked_impl!()
+mkbuildrs_checked_impl!();

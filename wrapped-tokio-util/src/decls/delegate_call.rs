@@ -4,4 +4,4 @@ macro_rules! delegate_call {
     };
 }
 
-delegate_call!()
+delegate_call!();

@@ -4,4 +4,4 @@ macro_rules! PPC_RELOC_BR14 {
     };
 }
 
-PPC_RELOC_BR14!()
+PPC_RELOC_BR14!();

@@ -1,45 +1,45 @@
 macro_rules! deps {
     () => {
+        RigidTy!();
         Discr!();
-        Attribute!();
+        ImplTraitDecls!();
+        Ty!();
+        GenericPredicates!();
         Filename!();
-        TyConstId!();
         ReprOptions!();
-        Allocation!();
-        LayoutShape!();
-        Generics!();
-        Crate!();
+        VariantDef!();
+        ImplTrait!();
         CrateItems!();
-        LineInfo!();
-        ItemKind!();
-        GenericArgs!();
+        TyKind!();
+        Allocation!();
+        Layout!();
+        VariantIdx!();
+        CrateNum!();
+        TyConst!();
         TraitDecl!();
+        Error!();
+        ForeignModule!();
+        Symbol!();
+        Crate!();
+        PolyFnSig!();
+        Span!();
+        AdtKind!();
+        FieldDef!();
+        TraitDecls!();
+        MirConst!();
+        ClosureKind!();
+        LineInfo!();
         FnAbi!();
         AssocItems!();
-        Span!();
-        ImplTrait!();
-        Layout!();
-        Ty!();
-        ForeignItemKind!();
+        ItemKind!();
+        LayoutShape!();
+        Generics!();
+        Attribute!();
+        GenericArgs!();
         MachineInfo!();
-        RigidTy!();
-        AdtKind!();
-        Symbol!();
-        FieldDef!();
-        MirConst!();
-        CrateNum!();
-        ImplTraitDecls!();
-        Error!();
+        ForeignItemKind!();
         UintTy!();
-        TyConst!();
-        GenericPredicates!();
-        PolyFnSig!();
-        ClosureKind!();
-        ForeignModule!();
-        VariantIdx!();
-        TyKind!();
-        TraitDecls!();
-        VariantDef!();
+        TyConstId!();
         DefId!();
     };
 }
@@ -51,4 +51,4 @@ macro_rules! CompilerInterface {
     };
 }
 
-CompilerInterface!()
+CompilerInterface!();

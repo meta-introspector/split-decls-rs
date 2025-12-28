@@ -4,4 +4,4 @@ macro_rules! R_RISCV_TLS_TPREL32 {
     };
 }
 
-R_RISCV_TLS_TPREL32!()
+R_RISCV_TLS_TPREL32!();

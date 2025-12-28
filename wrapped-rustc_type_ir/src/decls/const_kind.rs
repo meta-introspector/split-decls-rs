@@ -4,4 +4,4 @@ macro_rules! const_kind {
     };
 }
 
-const_kind!()
+const_kind!();

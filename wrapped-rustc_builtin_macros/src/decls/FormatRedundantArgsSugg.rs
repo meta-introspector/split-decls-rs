@@ -4,4 +4,4 @@ macro_rules! FormatRedundantArgsSugg {
     };
 }
 
-FormatRedundantArgsSugg!()
+FormatRedundantArgsSugg!();

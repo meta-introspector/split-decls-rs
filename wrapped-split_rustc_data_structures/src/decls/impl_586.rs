@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Aligned!();
         TaggedRef!();
+        Aligned!();
         Tag!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_586 {
     };
 }
 
-impl_586!()
+impl_586!();

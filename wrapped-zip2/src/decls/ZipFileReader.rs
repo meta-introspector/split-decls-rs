@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Crc32Reader!();
-        CryptoReader!();
         Decompressor!();
+        CryptoReader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ZipFileReader {
     };
 }
 
-ZipFileReader!()
+ZipFileReader!();

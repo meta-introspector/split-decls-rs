@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LlvmError!();
-        ModuleLlvm!();
         LlvmCodegenBackend!();
+        ModuleLlvm!();
+        LlvmError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! optimize_thin_module {
     };
 }
 
-optimize_thin_module!()
+optimize_thin_module!();

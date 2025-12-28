@@ -12,4 +12,4 @@ macro_rules! highlight_branch_exit_points {
     };
 }
 
-highlight_branch_exit_points!()
+highlight_branch_exit_points!();

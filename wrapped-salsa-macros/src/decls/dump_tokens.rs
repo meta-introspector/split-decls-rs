@@ -4,4 +4,4 @@ macro_rules! dump_tokens {
     };
 }
 
-dump_tokens!()
+dump_tokens!();

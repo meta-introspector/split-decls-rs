@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         Completions!();
         TypeLocation!();
-        NameRefContext!();
-        DotAccess!();
         CompletionContext!();
         ItemListKind!();
+        NameRefContext!();
+        DotAccess!();
         PathKind!();
         NameRefKind!();
     };
@@ -18,4 +18,4 @@ macro_rules! complete_name_ref {
     };
 }
 
-complete_name_ref!()
+complete_name_ref!();

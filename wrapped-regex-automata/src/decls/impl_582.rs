@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         DebugByte!();
-        U8!();
         Unit!();
         UnitKind!();
+        U8!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_582 {
     };
 }
 
-impl_582!()
+impl_582!();

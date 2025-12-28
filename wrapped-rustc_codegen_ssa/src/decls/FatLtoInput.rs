@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ModuleCodegen!();
         WriteBackendMethods!();
+        ModuleCodegen!();
         SerializedModule!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! FatLtoInput {
     };
 }
 
-FatLtoInput!()
+FatLtoInput!();

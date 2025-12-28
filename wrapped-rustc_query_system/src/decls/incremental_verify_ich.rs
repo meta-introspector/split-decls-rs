@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StableHashingContext!();
         DepContext!();
+        StableHashingContext!();
         Deps!();
         DepGraphData!();
     };
@@ -14,4 +14,4 @@ macro_rules! incremental_verify_ich {
     };
 }
 
-incremental_verify_ich!()
+incremental_verify_ich!();

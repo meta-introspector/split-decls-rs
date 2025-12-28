@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Prefixes!();
         Suffixes!();
+        Prefixes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Substrings {
     };
 }
 
-Substrings!()
+Substrings!();

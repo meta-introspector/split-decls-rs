@@ -4,4 +4,4 @@ macro_rules! check_raw_pointer {
     };
 }
 
-check_raw_pointer!()
+check_raw_pointer!();

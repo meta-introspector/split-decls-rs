@@ -4,4 +4,4 @@ macro_rules! custom_punctuation_unexpected {
     };
 }
 
-custom_punctuation_unexpected!()
+custom_punctuation_unexpected!();

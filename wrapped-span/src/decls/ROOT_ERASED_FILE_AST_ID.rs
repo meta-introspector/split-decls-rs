@@ -12,4 +12,4 @@ macro_rules! ROOT_ERASED_FILE_AST_ID {
     };
 }
 
-ROOT_ERASED_FILE_AST_ID!()
+ROOT_ERASED_FILE_AST_ID!();

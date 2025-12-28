@@ -4,4 +4,4 @@ macro_rules! bool_lookup_fk {
     };
 }
 
-bool_lookup_fk!()
+bool_lookup_fk!();

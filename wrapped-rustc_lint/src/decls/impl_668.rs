@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EarlyContext!();
         IdentifierUncommonCodepoints!();
+        EarlyContext!();
         IdentifierNonAsciiChar!();
-        MixedScriptConfusables!();
         ConfusableIdentifierPair!();
+        MixedScriptConfusables!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_668 {
     };
 }
 
-impl_668!()
+impl_668!();

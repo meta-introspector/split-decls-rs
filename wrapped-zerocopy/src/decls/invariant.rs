@@ -4,4 +4,4 @@ macro_rules! invariant {
     };
 }
 
-invariant!()
+invariant!();

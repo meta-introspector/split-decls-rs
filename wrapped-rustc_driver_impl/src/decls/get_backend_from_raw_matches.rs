@@ -4,4 +4,4 @@ macro_rules! get_backend_from_raw_matches {
     };
 }
 
-get_backend_from_raw_matches!()
+get_backend_from_raw_matches!();

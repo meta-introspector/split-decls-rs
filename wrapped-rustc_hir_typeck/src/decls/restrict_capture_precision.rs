@@ -4,4 +4,4 @@ macro_rules! restrict_capture_precision {
     };
 }
 
-restrict_capture_precision!()
+restrict_capture_precision!();

@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_NONE {
     };
 }
 
-R_NIOS2_NONE!()
+R_NIOS2_NONE!();

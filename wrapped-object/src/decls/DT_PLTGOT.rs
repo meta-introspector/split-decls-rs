@@ -4,4 +4,4 @@ macro_rules! DT_PLTGOT {
     };
 }
 
-DT_PLTGOT!()
+DT_PLTGOT!();

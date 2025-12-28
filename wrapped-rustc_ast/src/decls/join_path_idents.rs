@@ -11,4 +11,4 @@ macro_rules! join_path_idents {
     };
 }
 
-join_path_idents!()
+join_path_idents!();

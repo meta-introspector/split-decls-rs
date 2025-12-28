@@ -4,4 +4,4 @@ macro_rules! compare_impl_ty {
     };
 }
 
-compare_impl_ty!()
+compare_impl_ty!();

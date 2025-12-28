@@ -4,4 +4,4 @@ macro_rules! write_smir_pretty {
     };
 }
 
-write_smir_pretty!()
+write_smir_pretty!();

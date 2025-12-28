@@ -4,4 +4,4 @@ macro_rules! IsNormalizedSinkUtf16 {
     };
 }
 
-IsNormalizedSinkUtf16!()
+IsNormalizedSinkUtf16!();

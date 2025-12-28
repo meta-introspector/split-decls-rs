@@ -11,4 +11,4 @@ macro_rules! into_iter_rev {
     };
 }
 
-into_iter_rev!()
+into_iter_rev!();

@@ -4,4 +4,4 @@ macro_rules! pretend {
     };
 }
 
-pretend!()
+pretend!();

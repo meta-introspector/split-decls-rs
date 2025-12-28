@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        WorkStealingQueue!();
-        WorkPoolConfig!();
         WorkerFunction!();
-        WorkPool!();
         Error!();
+        WorkPoolConfig!();
+        WorkStealingQueue!();
         WorkPoolState!();
+        WorkPool!();
+        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

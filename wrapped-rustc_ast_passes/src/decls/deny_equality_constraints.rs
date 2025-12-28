@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AssociatedSuggestion2!();
         AstValidator!();
         EqualityInWhere!();
         AssociatedSuggestion!();
+        AssociatedSuggestion2!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! deny_equality_constraints {
     };
 }
 
-deny_equality_constraints!()
+deny_equality_constraints!();

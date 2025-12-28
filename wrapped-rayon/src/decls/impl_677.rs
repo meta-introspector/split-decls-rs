@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MapConsumer!();
-        ParallelIterator!();
         Map!();
+        MapConsumer!();
         UnindexedConsumer!();
+        ParallelIterator!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_677 {
     };
 }
 
-impl_677!()
+impl_677!();

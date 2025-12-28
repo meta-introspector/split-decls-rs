@@ -4,4 +4,4 @@ macro_rules! Compat {
     };
 }
 
-Compat!()
+Compat!();

@@ -11,4 +11,4 @@ macro_rules! zip_archive {
     };
 }
 
-zip_archive!()
+zip_archive!();

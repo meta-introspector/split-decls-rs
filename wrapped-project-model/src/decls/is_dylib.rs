@@ -4,4 +4,4 @@ macro_rules! is_dylib {
     };
 }
 
-is_dylib!()
+is_dylib!();

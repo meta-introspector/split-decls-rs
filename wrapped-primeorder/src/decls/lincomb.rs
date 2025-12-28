@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PrimeCurveParams!();
         LookupTable!();
+        PrimeCurveParams!();
         ProjectivePoint!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! lincomb {
     };
 }
 
-lincomb!()
+lincomb!();

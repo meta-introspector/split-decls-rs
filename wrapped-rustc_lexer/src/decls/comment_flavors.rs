@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Token!();
         FrontmatterAllowed!();
+        Token!();
     };
 }
 
@@ -42,4 +42,4 @@ macro_rules! comment_flavors {
     };
 }
 
-comment_flavors!()
+comment_flavors!();

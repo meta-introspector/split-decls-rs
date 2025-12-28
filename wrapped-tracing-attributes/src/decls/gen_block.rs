@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Level!();
         FormatMode!();
+        InstrumentArgs!();
+        Fields!();
+        RecordType!();
         Field!();
         IdentAndTypesRenamer!();
-        InstrumentArgs!();
-        RecordType!();
-        Level!();
-        Fields!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! gen_block {
     };
 }
 
-gen_block!()
+gen_block!();

@@ -4,4 +4,4 @@ macro_rules! derive_serialize {
     };
 }
 
-derive_serialize!()
+derive_serialize!();

@@ -4,4 +4,4 @@ macro_rules! LOG_SIZE_FOR_FLUSH {
     };
 }
 
-LOG_SIZE_FOR_FLUSH!()
+LOG_SIZE_FOR_FLUSH!();

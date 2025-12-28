@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Handle!();
         Inner!();
+        Handle!();
         Action!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

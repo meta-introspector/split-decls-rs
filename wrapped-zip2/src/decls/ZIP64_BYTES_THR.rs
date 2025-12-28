@@ -4,4 +4,4 @@ macro_rules! ZIP64_BYTES_THR {
     };
 }
 
-ZIP64_BYTES_THR!()
+ZIP64_BYTES_THR!();

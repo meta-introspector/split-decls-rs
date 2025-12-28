@@ -1,36 +1,36 @@
 macro_rules! deps {
     () => {
-        ColumnFamily!();
-        SnapshotWithThreadMode!();
-        WriteOptions!();
-        DBWithThreadMode!();
-        Error!();
-        WriteBatch!();
-        ReadOptions!();
-        DBPinnableSlice!();
-        DBRawIteratorWithThreadMode!();
         DBWALIterator!();
-        IngestExternalFileOptions!();
-        Range!();
-        FlushOptions!();
-        AsColumnFamilyRef!();
-        CStrLike!();
-        DBInner!();
-        IteratorMode!();
+        LiveFile!();
         OptimisticTransactionDB!();
         Direction!();
         OptionsMustOutliveDB!();
-        Options!();
-        ThreadMode!();
+        SnapshotWithThreadMode!();
         ColumnFamilyMetaData!();
-        LiveFile!();
-        DBCommon!();
-        SstFileWriter!();
-        CompactOptions!();
+        ThreadMode!();
+        IteratorMode!();
+        WriteBatch!();
+        IngestExternalFileOptions!();
+        DBRawIteratorWithThreadMode!();
+        AsColumnFamilyRef!();
         DB!();
-        DBIteratorWithThreadMode!();
+        Range!();
+        DBWithThreadMode!();
+        WriteOptions!();
+        ReadOptions!();
+        DBInner!();
+        CStrLike!();
+        CompactOptions!();
+        SstFileWriter!();
+        Options!();
         WaitForCompactOptions!();
         CSlice!();
+        DBPinnableSlice!();
+        Error!();
+        DBIteratorWithThreadMode!();
+        DBCommon!();
+        ColumnFamily!();
+        FlushOptions!();
     };
 }
 
@@ -43,4 +43,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

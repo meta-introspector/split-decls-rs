@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Filter!();
         Error!();
         If!();
         Result!();
+        Filter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! filter {
     };
 }
 
-filter!()
+filter!();

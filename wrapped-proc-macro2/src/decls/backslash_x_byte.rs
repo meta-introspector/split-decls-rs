@@ -11,4 +11,4 @@ macro_rules! backslash_x_byte {
     };
 }
 
-backslash_x_byte!()
+backslash_x_byte!();

@@ -11,4 +11,4 @@ macro_rules! toolcall_impl {
     };
 }
 
-toolcall_impl!()
+toolcall_impl!();

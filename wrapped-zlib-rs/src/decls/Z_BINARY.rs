@@ -4,4 +4,4 @@ macro_rules! Z_BINARY {
     };
 }
 
-Z_BINARY!()
+Z_BINARY!();

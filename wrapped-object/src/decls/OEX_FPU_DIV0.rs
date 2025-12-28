@@ -4,4 +4,4 @@ macro_rules! OEX_FPU_DIV0 {
     };
 }
 
-OEX_FPU_DIV0!()
+OEX_FPU_DIV0!();

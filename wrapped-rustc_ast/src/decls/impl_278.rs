@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Safety!();
-        LitKind!();
-        AttrItem!();
         MetaItemInner!();
+        AttrItem!();
+        LitKind!();
         AttrArgs!();
-        ExprKind!();
-        MetaItem!();
         Delimiter!();
-        Lit!();
         MetaItemKind!();
+        ExprKind!();
+        Lit!();
+        MetaItem!();
+        Safety!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_278 {
     };
 }
 
-impl_278!()
+impl_278!();

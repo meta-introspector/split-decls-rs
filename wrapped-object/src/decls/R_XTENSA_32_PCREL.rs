@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_32_PCREL {
     };
 }
 
-R_XTENSA_32_PCREL!()
+R_XTENSA_32_PCREL!();

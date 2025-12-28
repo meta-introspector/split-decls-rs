@@ -11,4 +11,4 @@ macro_rules! is_riscv_aggregate {
     };
 }
 
-is_riscv_aggregate!()
+is_riscv_aggregate!();

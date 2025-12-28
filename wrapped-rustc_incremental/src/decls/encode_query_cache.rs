@@ -4,4 +4,4 @@ macro_rules! encode_query_cache {
     };
 }
 
-encode_query_cache!()
+encode_query_cache!();

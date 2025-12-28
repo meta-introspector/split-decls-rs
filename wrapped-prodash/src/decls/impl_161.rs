@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Either!();
         Progress!();
+        MessageLevel!();
+        Step!();
+        Either!();
         Unit!();
         Id!();
-        Step!();
-        MessageLevel!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_161 {
     };
 }
 
-impl_161!()
+impl_161!();

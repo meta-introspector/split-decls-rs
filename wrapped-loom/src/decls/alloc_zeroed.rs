@@ -4,4 +4,4 @@ macro_rules! alloc_zeroed {
     };
 }
 
-alloc_zeroed!()
+alloc_zeroed!();

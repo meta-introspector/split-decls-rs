@@ -4,4 +4,4 @@ macro_rules! manifest_path {
     };
 }
 
-manifest_path!()
+manifest_path!();

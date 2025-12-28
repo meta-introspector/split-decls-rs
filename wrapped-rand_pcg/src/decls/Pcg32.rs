@@ -11,4 +11,4 @@ macro_rules! Pcg32 {
     };
 }
 
-Pcg32!()
+Pcg32!();

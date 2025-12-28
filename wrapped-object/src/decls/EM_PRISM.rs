@@ -4,4 +4,4 @@ macro_rules! EM_PRISM {
     };
 }
 
-EM_PRISM!()
+EM_PRISM!();

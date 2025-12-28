@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Holes!();
-        Edge!();
         EdgeProperty!();
+        Edge!();
         Graph!();
         IndexType!();
         Somes!();
+        Holes!();
         Node!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! SerStableGraph {
     };
 }
 
-SerStableGraph!()
+SerStableGraph!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        AllowedTargets!();
-        Stage!();
-        AcceptContext!();
-        ConvertFn!();
-        ArgParser!();
-        CombineAttributeParser!();
         ReprIdent!();
         ReprParser!();
+        ArgParser!();
+        AcceptContext!();
+        AllowedTargets!();
+        CombineAttributeParser!();
+        ConvertFn!();
+        Stage!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

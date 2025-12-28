@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
         ChaCha20!();
+        UnknownCryptoError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! encrypt_in_place {
     };
 }
 
-encrypt_in_place!()
+encrypt_in_place!();

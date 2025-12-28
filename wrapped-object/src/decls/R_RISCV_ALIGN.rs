@@ -4,4 +4,4 @@ macro_rules! R_RISCV_ALIGN {
     };
 }
 
-R_RISCV_ALIGN!()
+R_RISCV_ALIGN!();

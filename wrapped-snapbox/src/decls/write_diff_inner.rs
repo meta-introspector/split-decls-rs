@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Result!();
         Palette!();
+        Result!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_diff_inner {
     };
 }
 
-write_diff_inner!()
+write_diff_inner!();

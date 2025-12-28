@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Guard!();
         Config!();
         Slot!();
+        Guard!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

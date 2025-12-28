@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Streaming!();
         ErrorKind!();
-        Needed!();
+        Streaming!();
         Error!();
         ParseError!();
-        Input!();
         Parser!();
+        Input!();
+        Needed!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! be_i8 {
     };
 }
 
-be_i8!()
+be_i8!();

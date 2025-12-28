@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         IResult!();
-        Needed!();
         Not!();
         ErrorKind!();
         Err!();
+        Needed!();
         Error!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! not_test {
     };
 }
 
-not_test!()
+not_test!();

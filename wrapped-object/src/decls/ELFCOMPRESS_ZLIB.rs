@@ -4,4 +4,4 @@ macro_rules! ELFCOMPRESS_ZLIB {
     };
 }
 
-ELFCOMPRESS_ZLIB!()
+ELFCOMPRESS_ZLIB!();

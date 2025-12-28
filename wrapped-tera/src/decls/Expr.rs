@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FunctionCall!();
         ExprVal!();
+        FunctionCall!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Expr {
     };
 }
 
-Expr!()
+Expr!();

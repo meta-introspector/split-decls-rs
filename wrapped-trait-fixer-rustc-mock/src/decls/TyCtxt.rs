@@ -4,4 +4,4 @@ macro_rules! TyCtxt {
     };
 }
 
-TyCtxt!()
+TyCtxt!();

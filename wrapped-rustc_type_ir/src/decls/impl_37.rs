@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NoSolution!();
         Interner!();
+        NoSolution!();
         TypeError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

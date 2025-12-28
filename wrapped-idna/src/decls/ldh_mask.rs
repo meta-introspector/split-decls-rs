@@ -4,4 +4,4 @@ macro_rules! ldh_mask {
     };
 }
 
-ldh_mask!()
+ldh_mask!();

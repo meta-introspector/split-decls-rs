@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileOptions!();
         DateTime!();
+        FileOptions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_248 {
     };
 }
 
-impl_248!()
+impl_248!();

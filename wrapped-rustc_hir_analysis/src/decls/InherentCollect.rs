@@ -4,4 +4,4 @@ macro_rules! InherentCollect {
     };
 }
 
-InherentCollect!()
+InherentCollect!();

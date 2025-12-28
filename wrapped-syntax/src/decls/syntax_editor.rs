@@ -4,4 +4,4 @@ macro_rules! syntax_editor {
     };
 }
 
-syntax_editor!()
+syntax_editor!();

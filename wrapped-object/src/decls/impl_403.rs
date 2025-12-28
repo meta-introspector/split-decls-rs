@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        CompressionHeader!();
         Endian!();
         CompressionHeader64!();
-        CompressionHeader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_403 {
     };
 }
 
-impl_403!()
+impl_403!();

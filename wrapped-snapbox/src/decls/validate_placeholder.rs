@@ -11,4 +11,4 @@ macro_rules! validate_placeholder {
     };
 }
 
-validate_placeholder!()
+validate_placeholder!();

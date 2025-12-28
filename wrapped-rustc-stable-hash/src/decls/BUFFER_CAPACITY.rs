@@ -4,4 +4,4 @@ macro_rules! BUFFER_CAPACITY {
     };
 }
 
-BUFFER_CAPACITY!()
+BUFFER_CAPACITY!();

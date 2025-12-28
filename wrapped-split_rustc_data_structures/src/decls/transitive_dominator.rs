@@ -11,4 +11,4 @@ macro_rules! transitive_dominator {
     };
 }
 
-transitive_dominator!()
+transitive_dominator!();

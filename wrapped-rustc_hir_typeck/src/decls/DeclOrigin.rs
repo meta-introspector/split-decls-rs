@@ -4,4 +4,4 @@ macro_rules! DeclOrigin {
     };
 }
 
-DeclOrigin!()
+DeclOrigin!();

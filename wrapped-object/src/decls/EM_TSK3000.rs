@@ -4,4 +4,4 @@ macro_rules! EM_TSK3000 {
     };
 }
 
-EM_TSK3000!()
+EM_TSK3000!();

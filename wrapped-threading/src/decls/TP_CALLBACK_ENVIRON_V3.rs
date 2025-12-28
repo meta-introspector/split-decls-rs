@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        PTP_SIMPLE_CALLBACK!();
+        Pool!();
         PTP_CLEANUP_GROUP_CANCEL_CALLBACK!();
         TP_CALLBACK_PRIORITY!();
-        Pool!();
-        PTP_SIMPLE_CALLBACK!();
         PTP_POOL!();
         PTP_CLEANUP_GROUP!();
     };
@@ -16,4 +16,4 @@ macro_rules! TP_CALLBACK_ENVIRON_V3 {
     };
 }
 
-TP_CALLBACK_ENVIRON_V3!()
+TP_CALLBACK_ENVIRON_V3!();

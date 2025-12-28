@@ -4,4 +4,4 @@ macro_rules! cfg_net_or_process {
     };
 }
 
-cfg_net_or_process!()
+cfg_net_or_process!();

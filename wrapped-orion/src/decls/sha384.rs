@@ -12,4 +12,4 @@ macro_rules! sha384 {
     };
 }
 
-sha384!()
+sha384!();

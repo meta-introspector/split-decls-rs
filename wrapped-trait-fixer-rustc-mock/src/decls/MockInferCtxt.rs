@@ -4,4 +4,4 @@ macro_rules! MockInferCtxt {
     };
 }
 
-MockInferCtxt!()
+MockInferCtxt!();

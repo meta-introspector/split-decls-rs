@@ -4,4 +4,4 @@ macro_rules! dep_graph_processor {
     };
 }
 
-dep_graph_processor!()
+dep_graph_processor!();

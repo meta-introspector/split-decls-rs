@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CoffRelocationIterator!();
         AnonObjectHeaderBigobj!();
+        CoffRelocationIterator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CoffBigRelocationIterator {
     };
 }
 
-CoffBigRelocationIterator!()
+CoffBigRelocationIterator!();

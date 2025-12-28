@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TypingMode!();
         Canonical!();
+        TypingMode!();
         Interner!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! CanonicalQueryInput {
     };
 }
 
-CanonicalQueryInput!()
+CanonicalQueryInput!();

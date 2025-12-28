@@ -4,4 +4,4 @@ macro_rules! ty_to_nonzero {
     };
 }
 
-ty_to_nonzero!()
+ty_to_nonzero!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExpnId!();
-        HygieneData!();
         ExpnData!();
+        HygieneData!();
         ExpnHash!();
+        ExpnId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! register_expn_id {
     };
 }
 
-register_expn_id!()
+register_expn_id!();

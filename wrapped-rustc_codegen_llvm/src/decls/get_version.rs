@@ -4,4 +4,4 @@ macro_rules! get_version {
     };
 }
 
-get_version!()
+get_version!();

@@ -4,4 +4,4 @@ macro_rules! GNU_PROPERTY_X86_ISA_1_V4 {
     };
 }
 
-GNU_PROPERTY_X86_ISA_1_V4!()
+GNU_PROPERTY_X86_ISA_1_V4!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SolverDelegate!();
-        CanonicalizeMode!();
         Canonicalizer!();
+        SolverDelegate!();
         CanonicalizeInputKind!();
+        CanonicalizeMode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

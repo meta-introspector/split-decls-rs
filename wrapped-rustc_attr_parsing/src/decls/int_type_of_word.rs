@@ -4,4 +4,4 @@ macro_rules! int_type_of_word {
     };
 }
 
-int_type_of_word!()
+int_type_of_word!();

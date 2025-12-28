@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         Error!();
+        ErrorKind!();
         Take!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Read {
     };
 }
 
-Read!()
+Read!();

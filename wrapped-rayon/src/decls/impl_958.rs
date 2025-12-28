@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ParallelExtend!();
         IntoParallelIterator!();
         Unzip!();
+        ParallelExtend!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_958 {
     };
 }
 
-impl_958!()
+impl_958!();

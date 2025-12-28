@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HuffmanEncoder!();
-        BitWriter!();
-        HuffmanTable!();
         FSEEncoder!();
+        BitWriter!();
+        HuffmanEncoder!();
+        HuffmanTable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_345 {
     };
 }
 
-impl_345!()
+impl_345!();

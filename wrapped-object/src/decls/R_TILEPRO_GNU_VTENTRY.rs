@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_GNU_VTENTRY {
     };
 }
 
-R_TILEPRO_GNU_VTENTRY!()
+R_TILEPRO_GNU_VTENTRY!();

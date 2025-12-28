@@ -4,4 +4,4 @@ macro_rules! MissingIssue {
     };
 }
 
-MissingIssue!()
+MissingIssue!();

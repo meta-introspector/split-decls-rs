@@ -4,4 +4,4 @@ macro_rules! id_private {
     };
 }
 
-id_private!()
+id_private!();

@@ -11,4 +11,4 @@ macro_rules! set_thread_area {
     };
 }
 
-set_thread_area!()
+set_thread_area!();

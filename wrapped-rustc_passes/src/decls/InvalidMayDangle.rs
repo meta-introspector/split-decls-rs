@@ -4,4 +4,4 @@ macro_rules! InvalidMayDangle {
     };
 }
 
-InvalidMayDangle!()
+InvalidMayDangle!();

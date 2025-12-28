@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MPlaceTy!();
-        InterpCx!();
-        RefTracking!();
-        CtfeValidationMode!();
         CompileTimeMachine!();
+        InterpCx!();
+        CtfeValidationMode!();
+        MPlaceTy!();
+        RefTracking!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! const_validate_mplace {
     };
 }
 
-const_validate_mplace!()
+const_validate_mplace!();

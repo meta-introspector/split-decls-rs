@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EvalCtxt!();
         SolverDelegate!();
+        EvalCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! instantiate_constituent_tys_for_copy_clone_trait {
     };
 }
 
-instantiate_constituent_tys_for_copy_clone_trait!()
+instantiate_constituent_tys_for_copy_clone_trait!();

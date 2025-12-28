@@ -4,4 +4,4 @@ macro_rules! PartialEqImplStatus {
     };
 }
 
-PartialEqImplStatus!()
+PartialEqImplStatus!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Context!();
         Tera!();
+        Context!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! error_loading_macro_from_unloaded_namespace {
     };
 }
 
-error_loading_macro_from_unloaded_namespace!()
+error_loading_macro_from_unloaded_namespace!();

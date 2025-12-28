@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PrivateKey!();
-        PublicKey!();
         EphemeralServerSession!();
-        SessionKeys!();
         UnknownCryptoError!();
+        PublicKey!();
+        SessionKeys!();
+        PrivateKey!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_626 {
     };
 }
 
-impl_626!()
+impl_626!();

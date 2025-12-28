@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StreamResult!();
         MZResult!();
+        StreamResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MZStatus {
     };
 }
 
-MZStatus!()
+MZStatus!();

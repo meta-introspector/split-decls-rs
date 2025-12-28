@@ -4,4 +4,4 @@ macro_rules! fair_mutex {
     };
 }
 
-fair_mutex!()
+fair_mutex!();

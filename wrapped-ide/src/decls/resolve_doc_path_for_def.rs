@@ -4,4 +4,4 @@ macro_rules! resolve_doc_path_for_def {
     };
 }
 
-resolve_doc_path_for_def!()
+resolve_doc_path_for_def!();

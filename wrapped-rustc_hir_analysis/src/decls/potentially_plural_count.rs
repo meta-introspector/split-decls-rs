@@ -4,4 +4,4 @@ macro_rules! potentially_plural_count {
     };
 }
 
-potentially_plural_count!()
+potentially_plural_count!();

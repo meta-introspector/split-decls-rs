@@ -4,4 +4,4 @@ macro_rules! iterator_wrap {
     };
 }
 
-iterator_wrap!()
+iterator_wrap!();

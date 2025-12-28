@@ -11,4 +11,4 @@ macro_rules! VERSYM_HIDDEN {
     };
 }
 
-VERSYM_HIDDEN!()
+VERSYM_HIDDEN!();

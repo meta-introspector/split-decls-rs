@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Deps!();
-        QuerySideEffect!();
         TaskDepsRef!();
-        DepGraphData!();
-        EdgesVec!();
+        QuerySideEffect!();
         DepNode!();
+        EdgesVec!();
         DepNodeColor!();
+        Deps!();
+        DepGraphData!();
         QueryContext!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

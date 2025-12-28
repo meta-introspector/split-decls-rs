@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Candidate!();
         SolverDelegate!();
         MergeCandidateInfo!();
-        Candidate!();
         EvalCtxt!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

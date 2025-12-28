@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Funclet!();
         SCx!();
-        TypeKind!();
         GenericBuilder!();
+        TypeKind!();
+        Funclet!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_177 {
     };
 }
 
-impl_177!()
+impl_177!();

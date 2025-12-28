@@ -4,4 +4,4 @@ macro_rules! impl_item_implementor_ids {
     };
 }
 
-impl_item_implementor_ids!()
+impl_item_implementor_ids!();

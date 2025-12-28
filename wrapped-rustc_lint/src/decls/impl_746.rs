@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AmbiguousNegativeLiteralsCurrentBehaviorSuggestion!();
-        AmbiguousNegativeLiteralsNegativeLiteralSuggestion!();
         EarlyContext!();
+        AmbiguousNegativeLiteralsCurrentBehaviorSuggestion!();
         AmbiguousNegativeLiteralsDiag!();
+        AmbiguousNegativeLiteralsNegativeLiteralSuggestion!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_746 {
     };
 }
 
-impl_746!()
+impl_746!();

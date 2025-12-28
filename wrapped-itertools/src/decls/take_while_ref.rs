@@ -11,4 +11,4 @@ macro_rules! take_while_ref {
     };
 }
 
-take_while_ref!()
+take_while_ref!();

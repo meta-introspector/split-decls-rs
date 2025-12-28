@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Block!();
         LocalSource!();
+        Ty!();
         Expr!();
         Pat!();
-        Ty!();
-        Block!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! LetStmt {
     };
 }
 
-LetStmt!()
+LetStmt!();

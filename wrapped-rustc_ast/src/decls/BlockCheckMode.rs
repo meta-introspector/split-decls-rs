@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Walkable!();
         UnsafeSource!();
+        Walkable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BlockCheckMode {
     };
 }
 
-BlockCheckMode!()
+BlockCheckMode!();

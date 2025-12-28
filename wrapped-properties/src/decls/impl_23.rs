@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        EmojiSetDataBorrowed!();
         EmojiSet!();
         EmojiSetData!();
-        EmojiSetDataBorrowed!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

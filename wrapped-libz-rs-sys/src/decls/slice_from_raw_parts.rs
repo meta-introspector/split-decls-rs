@@ -4,4 +4,4 @@ macro_rules! slice_from_raw_parts {
     };
 }
 
-slice_from_raw_parts!()
+slice_from_raw_parts!();

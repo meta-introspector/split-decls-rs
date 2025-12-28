@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Gcd!();
-        Max!();
         Diff!();
+        Max!();
         Odd!();
         Min!();
-        Minimum!();
         Maximum!();
+        Minimum!();
         Gcf!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_453 {
     };
 }
 
-impl_453!()
+impl_453!();

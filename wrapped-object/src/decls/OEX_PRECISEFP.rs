@@ -4,4 +4,4 @@ macro_rules! OEX_PRECISEFP {
     };
 }
 
-OEX_PRECISEFP!()
+OEX_PRECISEFP!();

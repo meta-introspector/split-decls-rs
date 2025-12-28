@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Frame!();
         CheckAlignment!();
-        Machine!();
         CanAccessMutGlobal!();
+        Machine!();
+        Frame!();
         RangeSet!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! CompileTimeMachine {
     };
 }
 
-CompileTimeMachine!()
+CompileTimeMachine!();

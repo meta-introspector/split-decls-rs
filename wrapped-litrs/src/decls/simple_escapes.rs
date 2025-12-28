@@ -4,4 +4,4 @@ macro_rules! simple_escapes {
     };
 }
 
-simple_escapes!()
+simple_escapes!();

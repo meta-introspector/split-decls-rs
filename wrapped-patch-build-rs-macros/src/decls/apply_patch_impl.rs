@@ -4,4 +4,4 @@ macro_rules! apply_patch_impl {
     };
 }
 
-apply_patch_impl!()
+apply_patch_impl!();

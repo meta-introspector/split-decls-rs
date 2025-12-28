@@ -4,4 +4,4 @@ macro_rules! IndexRecord {
     };
 }
 
-IndexRecord!()
+IndexRecord!();

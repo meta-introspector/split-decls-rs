@@ -4,4 +4,4 @@ macro_rules! LintPassByHand {
     };
 }
 
-LintPassByHand!()
+LintPassByHand!();

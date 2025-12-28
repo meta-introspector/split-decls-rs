@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Needed!();
+        ErrorKind!();
+        Input!();
+        AsChar!();
         Streaming!();
         ParseError!();
-        AsChar!();
-        Input!();
-        Needed!();
         IResult!();
-        ErrorKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! space0 {
     };
 }
 
-space0!()
+space0!();

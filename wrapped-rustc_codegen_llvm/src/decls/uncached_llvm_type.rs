@@ -11,4 +11,4 @@ macro_rules! uncached_llvm_type {
     };
 }
 
-uncached_llvm_type!()
+uncached_llvm_type!();

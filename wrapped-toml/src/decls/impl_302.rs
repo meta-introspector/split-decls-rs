@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ArrayWalkValue!();
-        SerializationStrategy!();
         Error!();
+        SerializationStrategy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_302 {
     };
 }
 
-impl_302!()
+impl_302!();

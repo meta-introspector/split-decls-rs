@@ -11,4 +11,4 @@ macro_rules! STATIC_MAX_LEVEL {
     };
 }
 
-STATIC_MAX_LEVEL!()
+STATIC_MAX_LEVEL!();

@@ -13,4 +13,4 @@ macro_rules! ImageNtHeaders32 {
     };
 }
 
-ImageNtHeaders32!()
+ImageNtHeaders32!();

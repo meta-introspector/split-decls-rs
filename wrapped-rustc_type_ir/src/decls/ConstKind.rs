@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        UnevaluatedConst!();
-        PlaceholderConst!();
-        Interner!();
-        ExprConst!();
-        InferConst!();
         ValueConst!();
+        PlaceholderConst!();
+        ExprConst!();
+        Interner!();
+        UnevaluatedConst!();
+        InferConst!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ConstKind {
     };
 }
 
-ConstKind!()
+ConstKind!();

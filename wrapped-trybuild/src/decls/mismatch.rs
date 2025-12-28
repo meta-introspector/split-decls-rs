@@ -4,4 +4,4 @@ macro_rules! mismatch {
     };
 }
 
-mismatch!()
+mismatch!();

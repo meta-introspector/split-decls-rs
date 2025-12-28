@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EncryptWith!();
-        AesMode!();
         CompressionMethod!();
         DateTime!();
+        AesMode!();
+        EncryptWith!();
         AesVendorVersion!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! FileOptions {
     };
 }
 
-FileOptions!()
+FileOptions!();

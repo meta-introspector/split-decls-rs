@@ -4,4 +4,4 @@ macro_rules! assert_ends_with {
     };
 }
 
-assert_ends_with!()
+assert_ends_with!();

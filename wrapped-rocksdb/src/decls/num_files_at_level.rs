@@ -11,4 +11,4 @@ macro_rules! num_files_at_level {
     };
 }
 
-num_files_at_level!()
+num_files_at_level!();

@@ -11,4 +11,4 @@ macro_rules! INVALID_EDGE_INDEX {
     };
 }
 
-INVALID_EDGE_INDEX!()
+INVALID_EDGE_INDEX!();

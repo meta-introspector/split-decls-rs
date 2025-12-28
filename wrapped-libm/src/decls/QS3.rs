@@ -4,4 +4,4 @@ macro_rules! QS3 {
     };
 }
 
-QS3!()
+QS3!();

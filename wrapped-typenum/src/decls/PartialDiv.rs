@@ -4,4 +4,4 @@ macro_rules! PartialDiv {
     };
 }
 
-PartialDiv!()
+PartialDiv!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TransparentNonZeroSizedEnum!();
         TransparentNonZeroSized!();
+        TransparentNonZeroSizedEnum!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! bad_non_zero_sized_fields {
     };
 }
 
-bad_non_zero_sized_fields!()
+bad_non_zero_sized_fields!();

@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
+        Queries!();
+        SetterKind!();
         Transparent!();
+        InputStructField!();
+        Parenthesized!();
+        InputSetterWithDurability!();
+        GeneratedInputStruct!();
+        QueryKind!();
+        Cycle!();
+        Intern!();
+        InputSetter!();
         SalsaAttr!();
         SelfToDbRewriter!();
-        Cycle!();
+        InputQuery!();
         TrackedQuery!();
-        Parenthesized!();
-        InputSetter!();
-        SetterKind!();
         Lookup!();
         RemoveAttrsFromTraitMethods!();
-        GeneratedInputStruct!();
-        InputStructField!();
-        InputSetterWithDurability!();
-        Queries!();
-        QueryKind!();
-        InputQuery!();
-        Intern!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! query_group_impl {
     };
 }
 
-query_group_impl!()
+query_group_impl!();

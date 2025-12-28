@@ -11,4 +11,4 @@ macro_rules! new_bundle {
     };
 }
 
-new_bundle!()
+new_bundle!();

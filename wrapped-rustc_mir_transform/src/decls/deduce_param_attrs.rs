@@ -4,4 +4,4 @@ macro_rules! deduce_param_attrs {
     };
 }
 
-deduce_param_attrs!()
+deduce_param_attrs!();

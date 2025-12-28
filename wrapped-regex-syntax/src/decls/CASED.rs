@@ -4,4 +4,4 @@ macro_rules! CASED {
     };
 }
 
-CASED!()
+CASED!();

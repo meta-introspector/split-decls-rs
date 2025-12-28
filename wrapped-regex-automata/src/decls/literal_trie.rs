@@ -4,4 +4,4 @@ macro_rules! literal_trie {
     };
 }
 
-literal_trie!()
+literal_trie!();

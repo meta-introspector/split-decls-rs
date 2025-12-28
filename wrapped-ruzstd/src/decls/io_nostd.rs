@@ -4,4 +4,4 @@ macro_rules! io_nostd {
     };
 }
 
-io_nostd!()
+io_nostd!();

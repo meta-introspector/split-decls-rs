@@ -4,4 +4,4 @@ macro_rules! EM_COGE {
     };
 }
 
-EM_COGE!()
+EM_COGE!();

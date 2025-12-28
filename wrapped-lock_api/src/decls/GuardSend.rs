@@ -4,4 +4,4 @@ macro_rules! GuardSend {
     };
 }
 
-GuardSend!()
+GuardSend!();

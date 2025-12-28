@@ -4,4 +4,4 @@ macro_rules! asyncness {
     };
 }
 
-asyncness!()
+asyncness!();

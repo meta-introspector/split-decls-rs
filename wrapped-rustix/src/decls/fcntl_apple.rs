@@ -4,4 +4,4 @@ macro_rules! fcntl_apple {
     };
 }
 
-fcntl_apple!()
+fcntl_apple!();

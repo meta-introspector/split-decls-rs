@@ -4,4 +4,4 @@ macro_rules! xxhash3 {
     };
 }
 
-xxhash3!()
+xxhash3!();

@@ -4,4 +4,4 @@ macro_rules! general_category {
     };
 }
 
-general_category!()
+general_category!();

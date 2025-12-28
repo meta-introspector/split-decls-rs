@@ -4,4 +4,4 @@ macro_rules! DBCompactionStyle {
     };
 }
 
-DBCompactionStyle!()
+DBCompactionStyle!();

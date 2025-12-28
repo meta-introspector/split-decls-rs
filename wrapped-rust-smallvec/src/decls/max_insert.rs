@@ -11,4 +11,4 @@ macro_rules! max_insert {
     };
 }
 
-max_insert!()
+max_insert!();

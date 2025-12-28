@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Config!();
-        RegexInfo!();
-        Prefilter!();
         BoundedBacktrackerCache!();
-        MatchKind!();
-        Input!();
-        BoundedBacktrackerEngine!();
         PatternID!();
-        NonMaxUsize!();
-        BoundedBacktracker!();
-        Builder!();
-        NFA!();
         BuildError!();
+        Prefilter!();
+        BoundedBacktracker!();
+        Config!();
+        Builder!();
+        MatchKind!();
+        NonMaxUsize!();
+        BoundedBacktrackerEngine!();
+        Input!();
+        RegexInfo!();
+        NFA!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_406 {
     };
 }
 
-impl_406!()
+impl_406!();

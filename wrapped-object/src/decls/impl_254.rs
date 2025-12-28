@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        CoffHeader!();
         CoffRelocationIterator!();
+        Result!();
         ReadRef!();
+        CoffHeader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

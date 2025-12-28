@@ -4,4 +4,4 @@ macro_rules! OpaqueHiddenTypeDiag {
     };
 }
 
-OpaqueHiddenTypeDiag!()
+OpaqueHiddenTypeDiag!();

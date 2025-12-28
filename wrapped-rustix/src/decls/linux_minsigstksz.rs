@@ -4,4 +4,4 @@ macro_rules! linux_minsigstksz {
     };
 }
 
-linux_minsigstksz!()
+linux_minsigstksz!();

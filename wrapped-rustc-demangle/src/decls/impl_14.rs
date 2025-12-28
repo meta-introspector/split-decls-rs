@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Parser!();
         Demangle!();
+        Parser!();
         Printer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

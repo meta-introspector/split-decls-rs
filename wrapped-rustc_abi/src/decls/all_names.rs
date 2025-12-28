@@ -11,4 +11,4 @@ macro_rules! all_names {
     };
 }
 
-all_names!()
+all_names!();

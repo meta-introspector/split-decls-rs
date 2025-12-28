@@ -4,4 +4,4 @@ macro_rules! DIRSHIFT {
     };
 }
 
-DIRSHIFT!()
+DIRSHIFT!();

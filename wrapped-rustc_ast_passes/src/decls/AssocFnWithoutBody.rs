@@ -4,4 +4,4 @@ macro_rules! AssocFnWithoutBody {
     };
 }
 
-AssocFnWithoutBody!()
+AssocFnWithoutBody!();

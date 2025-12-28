@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        OnDuplicate!();
-        MarkerParser!();
-        AllowedTargets!();
-        Stage!();
         NoArgsAttributeParser!();
+        Stage!();
+        OnDuplicate!();
+        AllowedTargets!();
+        MarkerParser!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_210 {
     };
 }
 
-impl_210!()
+impl_210!();

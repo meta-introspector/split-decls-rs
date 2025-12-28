@@ -11,4 +11,4 @@ macro_rules! spawn_thread {
     };
 }
 
-spawn_thread!()
+spawn_thread!();

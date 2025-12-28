@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Def!();
-        MaybeTransmutableQuery!();
-        Tree!();
         Answer!();
+        Tree!();
+        Def!();
         Assume!();
+        MaybeTransmutableQuery!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! alt {
     };
 }
 
-alt!()
+alt!();

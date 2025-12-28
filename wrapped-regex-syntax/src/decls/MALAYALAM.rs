@@ -4,4 +4,4 @@ macro_rules! MALAYALAM {
     };
 }
 
-MALAYALAM!()
+MALAYALAM!();

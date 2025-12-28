@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Value!();
         Array!();
         ToSql!();
-        Value!();
         ZeroBlob!();
         ValueRef!();
     };
@@ -15,4 +15,4 @@ macro_rules! ToSqlOutput {
     };
 }
 
-ToSqlOutput!()
+ToSqlOutput!();

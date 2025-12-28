@@ -4,4 +4,4 @@ macro_rules! KHAROSHTHI {
     };
 }
 
-KHAROSHTHI!()
+KHAROSHTHI!();

@@ -11,4 +11,4 @@ macro_rules! get_powers {
     };
 }
 
-get_powers!()
+get_powers!();

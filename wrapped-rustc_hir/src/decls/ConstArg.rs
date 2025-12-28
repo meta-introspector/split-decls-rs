@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AnonConst!();
         ConstArgKind!();
+        AnonConst!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ConstArg {
     };
 }
 
-ConstArg!()
+ConstArg!();

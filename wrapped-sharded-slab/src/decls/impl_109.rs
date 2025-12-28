@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RefCount!();
         Config!();
+        RefCount!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_109 {
     };
 }
 
-impl_109!()
+impl_109!();

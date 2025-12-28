@@ -4,4 +4,4 @@ macro_rules! SplitAsciiWhitespace {
     };
 }
 
-SplitAsciiWhitespace!()
+SplitAsciiWhitespace!();

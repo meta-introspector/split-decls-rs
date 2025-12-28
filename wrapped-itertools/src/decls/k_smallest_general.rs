@@ -4,4 +4,4 @@ macro_rules! k_smallest_general {
     };
 }
 
-k_smallest_general!()
+k_smallest_general!();

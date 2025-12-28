@@ -4,4 +4,4 @@ macro_rules! mac {
     };
 }
 
-mac!()
+mac!();

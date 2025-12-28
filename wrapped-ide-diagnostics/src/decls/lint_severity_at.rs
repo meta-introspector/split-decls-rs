@@ -11,4 +11,4 @@ macro_rules! lint_severity_at {
     };
 }
 
-lint_severity_at!()
+lint_severity_at!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TermsContext!();
         ConstraintContext!();
+        TermsContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! add_constraints_from_crate {
     };
 }
 
-add_constraints_from_crate!()
+add_constraints_from_crate!();

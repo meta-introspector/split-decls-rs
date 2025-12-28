@@ -4,4 +4,4 @@ macro_rules! R_LARCH_TLS_IE64_PC_LO20 {
     };
 }
 
-R_LARCH_TLS_IE64_PC_LO20!()
+R_LARCH_TLS_IE64_PC_LO20!();

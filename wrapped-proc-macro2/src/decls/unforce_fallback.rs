@@ -4,4 +4,4 @@ macro_rules! unforce_fallback {
     };
 }
 
-unforce_fallback!()
+unforce_fallback!();

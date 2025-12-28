@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MPlaceTy!();
         CompileTimeInterpCx!();
+        MPlaceTy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! branches {
     };
 }
 
-branches!()
+branches!();

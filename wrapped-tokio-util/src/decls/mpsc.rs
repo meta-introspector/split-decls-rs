@@ -4,4 +4,4 @@ macro_rules! mpsc {
     };
 }
 
-mpsc!()
+mpsc!();

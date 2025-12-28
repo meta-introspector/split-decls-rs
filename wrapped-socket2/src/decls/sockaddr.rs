@@ -4,4 +4,4 @@ macro_rules! sockaddr {
     };
 }
 
-sockaddr!()
+sockaddr!();

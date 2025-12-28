@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LabelledGraph!();
-        Trivial!();
         Style!();
+        Trivial!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! test_some_labelled {
     };
 }
 
-test_some_labelled!()
+test_some_labelled!();

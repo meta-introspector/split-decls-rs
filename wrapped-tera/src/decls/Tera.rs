@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Function!();
-        Template!();
-        Test!();
         EscapeFn!();
         Filter!();
+        Template!();
+        Function!();
+        Test!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Tera {
     };
 }
 
-Tera!()
+Tera!();

@@ -11,4 +11,4 @@ macro_rules! simd_wmul {
     };
 }
 
-simd_wmul!()
+simd_wmul!();

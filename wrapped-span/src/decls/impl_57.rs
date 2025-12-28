@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MacroCallId!();
         SyntaxContext!();
         Transparency!();
+        MacroCallId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

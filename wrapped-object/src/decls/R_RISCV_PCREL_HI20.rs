@@ -4,4 +4,4 @@ macro_rules! R_RISCV_PCREL_HI20 {
     };
 }
 
-R_RISCV_PCREL_HI20!()
+R_RISCV_PCREL_HI20!();

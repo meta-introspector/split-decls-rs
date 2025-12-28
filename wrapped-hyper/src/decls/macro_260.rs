@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Incoming!();
         Tx!();
+        Incoming!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_260 {
     };
 }
 
-macro_260!()
+macro_260!();

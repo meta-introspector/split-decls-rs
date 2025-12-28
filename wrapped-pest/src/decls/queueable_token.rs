@@ -4,4 +4,4 @@ macro_rules! queueable_token {
     };
 }
 
-queueable_token!()
+queueable_token!();

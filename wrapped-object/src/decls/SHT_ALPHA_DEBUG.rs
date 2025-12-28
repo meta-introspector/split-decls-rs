@@ -4,4 +4,4 @@ macro_rules! SHT_ALPHA_DEBUG {
     };
 }
 
-SHT_ALPHA_DEBUG!()
+SHT_ALPHA_DEBUG!();

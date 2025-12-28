@@ -4,4 +4,4 @@ macro_rules! raw_field_union {
     };
 }
 
-raw_field_union!()
+raw_field_union!();

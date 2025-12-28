@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AtomicBool!();
         Atomic!();
         Load!();
+        AtomicBool!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

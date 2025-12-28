@@ -4,4 +4,4 @@ macro_rules! compare_types {
     };
 }
 
-compare_types!()
+compare_types!();

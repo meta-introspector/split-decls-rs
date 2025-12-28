@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EvalCtxt!();
-        SolverDelegate!();
         GoalKind!();
-        AsyncCallableRelevantTypes!();
         Candidate!();
+        EvalCtxt!();
+        AsyncCallableRelevantTypes!();
+        SolverDelegate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

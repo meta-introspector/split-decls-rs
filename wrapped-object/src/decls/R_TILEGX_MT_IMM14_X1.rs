@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_MT_IMM14_X1 {
     };
 }
 
-R_TILEGX_MT_IMM14_X1!()
+R_TILEGX_MT_IMM14_X1!();

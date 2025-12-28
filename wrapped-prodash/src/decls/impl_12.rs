@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Root!();
-        Options!();
-        Id!();
         Key!();
-        Task!();
-        MessageCopyState!();
+        Id!();
         Item!();
+        Task!();
+        Options!();
+        Root!();
         Message!();
+        MessageCopyState!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

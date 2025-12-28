@@ -49,4 +49,4 @@ fn main() {}
     };
 }
 
-frontmatter_disallowed!()
+frontmatter_disallowed!();

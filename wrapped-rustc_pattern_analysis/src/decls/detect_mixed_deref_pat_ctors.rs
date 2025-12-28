@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MatchArm!();
-        PatternColumn!();
         PatCx!();
+        PatternColumn!();
+        MatchArm!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! detect_mixed_deref_pat_ctors {
     };
 }
 
-detect_mixed_deref_pat_ctors!()
+detect_mixed_deref_pat_ctors!();

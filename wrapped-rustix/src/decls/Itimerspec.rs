@@ -11,4 +11,4 @@ macro_rules! Itimerspec {
     };
 }
 
-Itimerspec!()
+Itimerspec!();

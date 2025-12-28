@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Language!();
-        SyntaxToken!();
-        DisplayDebug!();
         SerDisplay!();
+        DisplayDebug!();
+        SyntaxToken!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

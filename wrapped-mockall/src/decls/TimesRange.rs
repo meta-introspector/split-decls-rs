@@ -4,4 +4,4 @@ macro_rules! TimesRange {
     };
 }
 
-TimesRange!()
+TimesRange!();

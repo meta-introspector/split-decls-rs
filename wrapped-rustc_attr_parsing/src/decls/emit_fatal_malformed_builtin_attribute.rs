@@ -4,4 +4,4 @@ macro_rules! emit_fatal_malformed_builtin_attribute {
     };
 }
 
-emit_fatal_malformed_builtin_attribute!()
+emit_fatal_malformed_builtin_attribute!();

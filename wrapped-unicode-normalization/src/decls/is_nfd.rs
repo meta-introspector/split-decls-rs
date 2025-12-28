@@ -11,4 +11,4 @@ macro_rules! is_nfd {
     };
 }
 
-is_nfd!()
+is_nfd!();

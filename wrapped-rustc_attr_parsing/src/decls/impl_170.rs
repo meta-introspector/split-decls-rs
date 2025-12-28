@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        AllowedTargets!();
+        AlignStaticParser!();
         FinalizeContext!();
         AttributeParser!();
-        AllowedTargets!();
-        Stage!();
         AcceptMapping!();
-        AlignStaticParser!();
+        Stage!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

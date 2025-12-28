@@ -12,4 +12,4 @@ macro_rules! register_auto_extension {
     };
 }
 
-register_auto_extension!()
+register_auto_extension!();

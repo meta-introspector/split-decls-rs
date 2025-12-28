@@ -11,4 +11,4 @@ macro_rules! partialeq_numeric {
     };
 }
 
-partialeq_numeric!()
+partialeq_numeric!();

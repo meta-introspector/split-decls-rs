@@ -11,4 +11,4 @@ macro_rules! extract_range_or_offset {
     };
 }
 
-extract_range_or_offset!()
+extract_range_or_offset!();

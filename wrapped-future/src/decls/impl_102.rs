@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IAsyncOperationWithProgress_Impl!();
-        IAsyncOperationWithProgress!();
         IAsyncOperationWithProgress_Vtbl!();
+        IAsyncOperationWithProgress!();
+        IAsyncOperationWithProgress_Impl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

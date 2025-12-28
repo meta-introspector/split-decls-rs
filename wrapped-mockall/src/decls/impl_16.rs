@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ViaDebug!();
-        DebugPrint!();
         ArgPrinter!();
+        DebugPrint!();
+        ViaDebug!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

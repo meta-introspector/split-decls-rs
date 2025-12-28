@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Mutex!();
         RawMutex!();
+        Mutex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! const_mutex {
     };
 }
 
-const_mutex!()
+const_mutex!();

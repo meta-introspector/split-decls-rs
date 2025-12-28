@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_LO16 {
     };
 }
 
-R_NIOS2_LO16!()
+R_NIOS2_LO16!();

@@ -4,4 +4,4 @@ macro_rules! parse_target_arch {
     };
 }
 
-parse_target_arch!()
+parse_target_arch!();

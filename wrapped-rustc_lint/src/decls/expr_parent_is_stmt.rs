@@ -4,4 +4,4 @@ macro_rules! expr_parent_is_stmt {
     };
 }
 
-expr_parent_is_stmt!()
+expr_parent_is_stmt!();

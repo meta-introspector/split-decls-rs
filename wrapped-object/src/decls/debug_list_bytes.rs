@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DebugByte!();
         DebugLen!();
         Result!();
+        DebugByte!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! debug_list_bytes {
     };
 }
 
-debug_list_bytes!()
+debug_list_bytes!();

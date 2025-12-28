@@ -4,4 +4,4 @@ macro_rules! linux_wasm {
     };
 }
 
-linux_wasm!()
+linux_wasm!();

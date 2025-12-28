@@ -4,4 +4,4 @@ macro_rules! parse_bool {
     };
 }
 
-parse_bool!()
+parse_bool!();

@@ -4,4 +4,4 @@ macro_rules! MmapRawDescriptor {
     };
 }
 
-MmapRawDescriptor!()
+MmapRawDescriptor!();

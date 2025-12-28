@@ -11,4 +11,4 @@ macro_rules! DF_1_NODIRECT {
     };
 }
 
-DF_1_NODIRECT!()
+DF_1_NODIRECT!();

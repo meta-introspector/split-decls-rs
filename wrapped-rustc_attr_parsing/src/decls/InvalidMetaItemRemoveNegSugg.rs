@@ -4,4 +4,4 @@ macro_rules! InvalidMetaItemRemoveNegSugg {
     };
 }
 
-InvalidMetaItemRemoveNegSugg!()
+InvalidMetaItemRemoveNegSugg!();

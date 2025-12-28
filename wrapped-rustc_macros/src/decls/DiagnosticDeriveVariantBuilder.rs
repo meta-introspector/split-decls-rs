@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SpannedOption!();
         FieldMap!();
+        SpannedOption!();
         DiagnosticDeriveKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! DiagnosticDeriveVariantBuilder {
     };
 }
 
-DiagnosticDeriveVariantBuilder!()
+DiagnosticDeriveVariantBuilder!();

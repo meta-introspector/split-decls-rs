@@ -4,4 +4,4 @@ macro_rules! MaxScored {
     };
 }
 
-MaxScored!()
+MaxScored!();

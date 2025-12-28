@@ -11,4 +11,4 @@ macro_rules! push_punct {
     };
 }
 
-push_punct!()
+push_punct!();

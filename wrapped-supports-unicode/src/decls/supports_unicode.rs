@@ -4,4 +4,4 @@ macro_rules! supports_unicode {
     };
 }
 
-supports_unicode!()
+supports_unicode!();

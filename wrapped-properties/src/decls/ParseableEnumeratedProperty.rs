@@ -4,4 +4,4 @@ macro_rules! ParseableEnumeratedProperty {
     };
 }
 
-ParseableEnumeratedProperty!()
+ParseableEnumeratedProperty!();

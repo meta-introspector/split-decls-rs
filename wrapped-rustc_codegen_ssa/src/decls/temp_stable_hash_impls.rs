@@ -11,4 +11,4 @@ macro_rules! temp_stable_hash_impls {
     };
 }
 
-temp_stable_hash_impls!()
+temp_stable_hash_impls!();

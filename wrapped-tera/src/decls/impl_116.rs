@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Filter!();
         Test!();
-        Error!();
-        ErrorKind!();
-        Template!();
-        Function!();
         Result!();
+        Error!();
+        Template!();
+        ErrorKind!();
+        Filter!();
+        Function!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

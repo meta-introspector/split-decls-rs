@@ -4,4 +4,4 @@ macro_rules! check_type_bounds {
     };
 }
 
-check_type_bounds!()
+check_type_bounds!();

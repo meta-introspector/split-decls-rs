@@ -4,4 +4,4 @@ macro_rules! EM_ALTERA_NIOS2 {
     };
 }
 
-EM_ALTERA_NIOS2!()
+EM_ALTERA_NIOS2!();

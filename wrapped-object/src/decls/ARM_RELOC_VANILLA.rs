@@ -4,4 +4,4 @@ macro_rules! ARM_RELOC_VANILLA {
     };
 }
 
-ARM_RELOC_VANILLA!()
+ARM_RELOC_VANILLA!();

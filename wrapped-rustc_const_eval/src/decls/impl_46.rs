@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ThreadLocalAccess!();
         ThreadLocalAccessErr!();
-        NonConstOp!();
         ConstCx!();
+        NonConstOp!();
+        ThreadLocalAccess!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

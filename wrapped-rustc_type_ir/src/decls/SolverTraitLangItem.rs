@@ -4,4 +4,4 @@ macro_rules! SolverTraitLangItem {
     };
 }
 
-SolverTraitLangItem!()
+SolverTraitLangItem!();

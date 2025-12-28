@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Default!();
-        BoolAttr!();
         RenameRule!();
-        RenameAllRules!();
-        Data!();
-        Name!();
-        Attr!();
-        Ctxt!();
-        Container!();
-        Identifier!();
-        TagType!();
         MultiName!();
+        TagType!();
+        Attr!();
+        Identifier!();
+        Container!();
+        BoolAttr!();
+        Data!();
+        Ctxt!();
+        RenameAllRules!();
+        Default!();
+        Name!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

@@ -4,4 +4,4 @@ macro_rules! map_f {
     };
 }
 
-map_f!()
+map_f!();

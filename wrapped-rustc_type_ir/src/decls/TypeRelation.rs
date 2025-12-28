@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Interner!();
-        Region!();
-        Relate!();
-        VarianceDiagInfo!();
-        RelateResult!();
-        DefId!();
         Variance!();
+        RelateResult!();
+        Relate!();
         Ty!();
         Binder!();
+        DefId!();
+        Region!();
+        VarianceDiagInfo!();
         Const!();
         GenericArgs!();
     };
@@ -21,4 +21,4 @@ macro_rules! TypeRelation {
     };
 }
 
-TypeRelation!()
+TypeRelation!();

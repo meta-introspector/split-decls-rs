@@ -4,4 +4,4 @@ macro_rules! CreateIncrCompDir {
     };
 }
 
-CreateIncrCompDir!()
+CreateIncrCompDir!();

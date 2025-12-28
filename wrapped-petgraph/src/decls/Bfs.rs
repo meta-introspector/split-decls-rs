@@ -4,4 +4,4 @@ macro_rules! Bfs {
     };
 }
 
-Bfs!()
+Bfs!();

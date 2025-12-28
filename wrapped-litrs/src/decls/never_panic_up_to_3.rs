@@ -4,4 +4,4 @@ macro_rules! never_panic_up_to_3 {
     };
 }
 
-never_panic_up_to_3!()
+never_panic_up_to_3!();

@@ -4,4 +4,4 @@ macro_rules! unterminated_raw_tag {
     };
 }
 
-unterminated_raw_tag!()
+unterminated_raw_tag!();

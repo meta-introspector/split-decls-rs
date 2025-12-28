@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Value!();
         QueryConfig!();
         QueryContext!();
+        Value!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_query_non_incr {
     };
 }
 
-get_query_non_incr!()
+get_query_non_incr!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        FindSubstring!();
-        TakeUntil!();
-        Error!();
-        ParseError!();
-        Input!();
-        Streaming!();
         Needed!();
+        Streaming!();
         IResult!();
+        Input!();
+        FindSubstring!();
+        ParseError!();
+        Error!();
+        TakeUntil!();
+        Parser!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! take_until {
     };
 }
 
-take_until!()
+take_until!();

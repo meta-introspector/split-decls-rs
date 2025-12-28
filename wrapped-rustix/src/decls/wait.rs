@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        Timespec!();
         Wait!();
+        Timespec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! wait {
     };
 }
 
-wait!()
+wait!();

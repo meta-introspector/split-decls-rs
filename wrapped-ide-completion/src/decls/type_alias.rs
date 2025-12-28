@@ -4,4 +4,4 @@ macro_rules! type_alias {
     };
 }
 
-type_alias!()
+type_alias!();

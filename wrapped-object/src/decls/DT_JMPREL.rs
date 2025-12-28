@@ -4,4 +4,4 @@ macro_rules! DT_JMPREL {
     };
 }
 
-DT_JMPREL!()
+DT_JMPREL!();

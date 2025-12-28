@@ -4,4 +4,4 @@ macro_rules! get_buf_size {
     };
 }
 
-get_buf_size!()
+get_buf_size!();

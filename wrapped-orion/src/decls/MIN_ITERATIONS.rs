@@ -4,4 +4,4 @@ macro_rules! MIN_ITERATIONS {
     };
 }
 
-MIN_ITERATIONS!()
+MIN_ITERATIONS!();

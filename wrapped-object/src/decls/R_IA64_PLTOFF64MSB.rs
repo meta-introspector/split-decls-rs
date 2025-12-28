@@ -4,4 +4,4 @@ macro_rules! R_IA64_PLTOFF64MSB {
     };
 }
 
-R_IA64_PLTOFF64MSB!()
+R_IA64_PLTOFF64MSB!();

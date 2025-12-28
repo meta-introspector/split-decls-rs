@@ -4,4 +4,4 @@ macro_rules! TraitGoalProvenVia {
     };
 }
 
-TraitGoalProvenVia!()
+TraitGoalProvenVia!();

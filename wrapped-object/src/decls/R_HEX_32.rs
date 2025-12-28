@@ -4,4 +4,4 @@ macro_rules! R_HEX_32 {
     };
 }
 
-R_HEX_32!()
+R_HEX_32!();

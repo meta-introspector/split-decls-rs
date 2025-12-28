@@ -11,4 +11,4 @@ macro_rules! flush_block_only {
     };
 }
 
-flush_block_only!()
+flush_block_only!();

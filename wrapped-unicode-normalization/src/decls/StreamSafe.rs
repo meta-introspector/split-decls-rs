@@ -4,4 +4,4 @@ macro_rules! StreamSafe {
     };
 }
 
-StreamSafe!()
+StreamSafe!();

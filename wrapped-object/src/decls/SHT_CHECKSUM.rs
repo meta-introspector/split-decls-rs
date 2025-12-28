@@ -4,4 +4,4 @@ macro_rules! SHT_CHECKSUM {
     };
 }
 
-SHT_CHECKSUM!()
+SHT_CHECKSUM!();

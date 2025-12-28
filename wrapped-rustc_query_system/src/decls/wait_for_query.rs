@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        QueryContext!();
-        QueryJobId!();
-        QueryInfo!();
         QueryResult!();
         QueryLatch!();
-        Value!();
+        QueryContext!();
+        QueryJobId!();
         QueryConfig!();
+        Value!();
+        QueryInfo!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! wait_for_query {
     };
 }
 
-wait_for_query!()
+wait_for_query!();

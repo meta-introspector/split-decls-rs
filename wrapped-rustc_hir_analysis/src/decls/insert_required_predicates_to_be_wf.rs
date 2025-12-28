@@ -12,4 +12,4 @@ macro_rules! insert_required_predicates_to_be_wf {
     };
 }
 
-insert_required_predicates_to_be_wf!()
+insert_required_predicates_to_be_wf!();

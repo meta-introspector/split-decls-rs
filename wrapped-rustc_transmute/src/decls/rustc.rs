@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Region!();
-        Answer!();
         Assume!();
         MaybeTransmutableQuery!();
+        Answer!();
+        Region!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! rustc {
     };
 }
 
-rustc!()
+rustc!();

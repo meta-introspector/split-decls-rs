@@ -4,4 +4,4 @@ macro_rules! raw_cargo {
     };
 }
 
-raw_cargo!()
+raw_cargo!();

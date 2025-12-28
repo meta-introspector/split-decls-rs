@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InvertedUnsigned!();
         InvertedUTerm!();
+        InvertedUnsigned!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

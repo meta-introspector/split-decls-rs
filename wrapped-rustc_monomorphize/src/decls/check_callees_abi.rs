@@ -4,4 +4,4 @@ macro_rules! check_callees_abi {
     };
 }
 
-check_callees_abi!()
+check_callees_abi!();

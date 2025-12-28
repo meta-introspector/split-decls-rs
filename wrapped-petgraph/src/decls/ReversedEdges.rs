@@ -4,4 +4,4 @@ macro_rules! ReversedEdges {
     };
 }
 
-ReversedEdges!()
+ReversedEdges!();

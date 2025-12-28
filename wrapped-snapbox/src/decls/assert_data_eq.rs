@@ -12,4 +12,4 @@ macro_rules! assert_data_eq {
     };
 }
 
-assert_data_eq!()
+assert_data_eq!();

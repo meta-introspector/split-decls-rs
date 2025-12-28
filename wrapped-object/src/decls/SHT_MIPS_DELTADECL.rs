@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_DELTADECL {
     };
 }
 
-SHT_MIPS_DELTADECL!()
+SHT_MIPS_DELTADECL!();

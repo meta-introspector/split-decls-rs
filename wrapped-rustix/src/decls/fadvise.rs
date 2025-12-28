@@ -4,4 +4,4 @@ macro_rules! fadvise {
     };
 }
 
-fadvise!()
+fadvise!();

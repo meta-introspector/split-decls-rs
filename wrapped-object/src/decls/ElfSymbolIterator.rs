@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ReadRef!();
-        SymbolTable!();
         Endian!();
+        SymbolTable!();
         SymbolIndex!();
         FileHeader!();
     };
@@ -15,4 +15,4 @@ macro_rules! ElfSymbolIterator {
     };
 }
 
-ElfSymbolIterator!()
+ElfSymbolIterator!();

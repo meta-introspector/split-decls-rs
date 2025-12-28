@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tera!();
         Context!();
+        Tera!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! can_remove_whitespace_inheritance {
     };
 }
 
-can_remove_whitespace_inheritance!()
+can_remove_whitespace_inheritance!();

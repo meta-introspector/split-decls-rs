@@ -4,4 +4,4 @@ macro_rules! pointer {
     };
 }
 
-pointer!()
+pointer!();

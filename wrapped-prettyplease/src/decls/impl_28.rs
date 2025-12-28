@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FixupContext!();
-        Precedence!();
-        PathKind!();
-        Token!();
-        Printer!();
         BreakToken!();
+        PathKind!();
+        Printer!();
+        Precedence!();
+        Token!();
+        FixupContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

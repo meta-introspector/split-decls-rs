@@ -4,4 +4,4 @@ macro_rules! NoDynamicRelocationIterator {
     };
 }
 
-NoDynamicRelocationIterator!()
+NoDynamicRelocationIterator!();

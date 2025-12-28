@@ -4,4 +4,4 @@ macro_rules! try_fn_sig {
     };
 }
 
-try_fn_sig!()
+try_fn_sig!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Data!();
         Redactions!();
         NormalizeToExpected!();
+        Data!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! json_normalize_obj_key {
     };
 }
 
-json_normalize_obj_key!()
+json_normalize_obj_key!();

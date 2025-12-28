@@ -4,4 +4,4 @@ macro_rules! OLETTER {
     };
 }
 
-OLETTER!()
+OLETTER!();

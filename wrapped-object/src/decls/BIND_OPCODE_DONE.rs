@@ -4,4 +4,4 @@ macro_rules! BIND_OPCODE_DONE {
     };
 }
 
-BIND_OPCODE_DONE!()
+BIND_OPCODE_DONE!();

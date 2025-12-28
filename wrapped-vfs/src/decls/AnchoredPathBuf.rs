@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AnchoredPath!();
         FileId!();
+        AnchoredPath!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AnchoredPathBuf {
     };
 }
 
-AnchoredPathBuf!()
+AnchoredPathBuf!();

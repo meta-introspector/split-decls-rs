@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Options!();
         Hygiene!();
+        Options!();
         Accumulator!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! StructMacro {
     };
 }
 
-StructMacro!()
+StructMacro!();

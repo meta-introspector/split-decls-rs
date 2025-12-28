@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_REFQUAD {
     };
 }
 
-R_ALPHA_REFQUAD!()
+R_ALPHA_REFQUAD!();

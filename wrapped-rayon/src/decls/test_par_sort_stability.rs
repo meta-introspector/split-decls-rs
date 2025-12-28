@@ -4,4 +4,4 @@ macro_rules! test_par_sort_stability {
     };
 }
 
-test_par_sort_stability!()
+test_par_sort_stability!();

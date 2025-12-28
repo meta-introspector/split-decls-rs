@@ -4,4 +4,4 @@ macro_rules! DT_ALPHA_PLTRO {
     };
 }
 
-DT_ALPHA_PLTRO!()
+DT_ALPHA_PLTRO!();

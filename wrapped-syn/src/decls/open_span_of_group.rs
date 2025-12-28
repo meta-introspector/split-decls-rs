@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        Cursor!();
         Group!();
+        Cursor!();
+        Entry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! open_span_of_group {
     };
 }
 
-open_span_of_group!()
+open_span_of_group!();

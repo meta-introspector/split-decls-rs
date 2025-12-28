@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VariantDeserializer!();
         Value!();
+        VariantDeserializer!();
         ValueDeserializer!();
         Unexpected!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IIterator!();
         StockIterable!();
+        IIterator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StockIterator {
     };
 }
 
-StockIterator!()
+StockIterator!();

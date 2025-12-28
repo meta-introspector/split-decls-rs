@@ -4,4 +4,4 @@ macro_rules! loan_liveness {
     };
 }
 
-loan_liveness!()
+loan_liveness!();

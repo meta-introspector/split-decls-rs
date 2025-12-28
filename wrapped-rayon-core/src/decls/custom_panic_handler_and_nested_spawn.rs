@@ -11,4 +11,4 @@ macro_rules! custom_panic_handler_and_nested_spawn {
     };
 }
 
-custom_panic_handler_and_nested_spawn!()
+custom_panic_handler_and_nested_spawn!();

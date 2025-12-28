@@ -4,4 +4,4 @@ macro_rules! R_PARISC_PCREL17R {
     };
 }
 
-R_PARISC_PCREL17R!()
+R_PARISC_PCREL17R!();

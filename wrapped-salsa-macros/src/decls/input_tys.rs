@@ -4,4 +4,4 @@ macro_rules! input_tys {
     };
 }
 
-input_tys!()
+input_tys!();

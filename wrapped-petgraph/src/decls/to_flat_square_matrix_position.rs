@@ -4,4 +4,4 @@ macro_rules! to_flat_square_matrix_position {
     };
 }
 
-to_flat_square_matrix_position!()
+to_flat_square_matrix_position!();

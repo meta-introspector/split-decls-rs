@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        Tag!();
-        Error!();
         IResult!();
         Err!();
+        Tag!();
+        Error!();
+        ErrorKind!();
         ManyTill!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! many_till_test {
     };
 }
 
-many_till_test!()
+many_till_test!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
-        Item!();
+        Stmt!();
         Expr!();
+        Item!();
+        Pat!();
+        Block!();
         NtPatKind!();
         NtExprKind!();
-        Stmt!();
-        Block!();
         Ty!();
+        Lifetime!();
         Path!();
-        Pat!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! NonterminalKind {
     };
 }
 
-NonterminalKind!()
+NonterminalKind!();

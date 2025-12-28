@@ -4,4 +4,4 @@ macro_rules! R_CRIS_16_GOTPLT {
     };
 }
 
-R_CRIS_16_GOTPLT!()
+R_CRIS_16_GOTPLT!();

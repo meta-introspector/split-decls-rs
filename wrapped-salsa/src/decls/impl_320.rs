@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        SlotMemosMutFnRaw!();
+        SlotMemosFnRaw!();
         Slot!();
         SlotMemosFn!();
-        SlotMemosFnRaw!();
-        SlotVTable!();
-        SlotMemosMutFnRaw!();
-        PageData!();
         SlotMemosMutFn!();
+        PageData!();
+        SlotVTable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_320 {
     };
 }
 
-impl_320!()
+impl_320!();

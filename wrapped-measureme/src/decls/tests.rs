@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SerializationSink!();
-        SerializationSinkBuilder!();
         PageTag!();
+        SerializationSinkBuilder!();
         Addr!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

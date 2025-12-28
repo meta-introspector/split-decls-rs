@@ -4,4 +4,4 @@ macro_rules! common_traits {
     };
 }
 
-common_traits!()
+common_traits!();

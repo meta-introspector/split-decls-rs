@@ -11,4 +11,4 @@ macro_rules! expr_leading_label {
     };
 }
 
-expr_leading_label!()
+expr_leading_label!();

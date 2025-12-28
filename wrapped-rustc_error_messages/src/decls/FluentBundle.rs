@@ -4,4 +4,4 @@ macro_rules! FluentBundle {
     };
 }
 
-FluentBundle!()
+FluentBundle!();

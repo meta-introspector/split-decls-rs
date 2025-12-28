@@ -14,4 +14,4 @@ macro_rules! ElfSymbol32 {
     };
 }
 
-ElfSymbol32!()
+ElfSymbol32!();

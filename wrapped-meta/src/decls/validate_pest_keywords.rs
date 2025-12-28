@@ -11,4 +11,4 @@ macro_rules! validate_pest_keywords {
     };
 }
 
-validate_pest_keywords!()
+validate_pest_keywords!();

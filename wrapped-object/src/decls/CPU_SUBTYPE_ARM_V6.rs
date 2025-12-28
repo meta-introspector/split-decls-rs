@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_ARM_V6 {
     };
 }
 
-CPU_SUBTYPE_ARM_V6!()
+CPU_SUBTYPE_ARM_V6!();

@@ -4,4 +4,4 @@ macro_rules! ErasedHasNameFileAstId {
     };
 }
 
-ErasedHasNameFileAstId!()
+ErasedHasNameFileAstId!();

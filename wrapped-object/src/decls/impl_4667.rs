@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Relocation!();
+        U32!();
         RelocationInfo!();
         Endian!();
-        U32!();
+        Relocation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_4667 {
     };
 }
 
-impl_4667!()
+impl_4667!();

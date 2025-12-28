@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Log!();
         StepShared!();
+        Log!();
         Step!();
         Count!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

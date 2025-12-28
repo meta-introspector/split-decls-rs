@@ -4,4 +4,4 @@ macro_rules! ODK_HWPATCH {
     };
 }
 
-ODK_HWPATCH!()
+ODK_HWPATCH!();

@@ -4,4 +4,4 @@ macro_rules! N_EXCL {
     };
 }
 
-N_EXCL!()
+N_EXCL!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InferKind!();
-        Visitor!();
         Ty!();
+        Visitor!();
+        InferKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! walk_unambig_ty {
     };
 }
 
-walk_unambig_ty!()
+walk_unambig_ty!();

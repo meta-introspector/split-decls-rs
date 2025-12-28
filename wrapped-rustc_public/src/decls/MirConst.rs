@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ConstantKind!();
-        MirConstId!();
         Ty!();
+        MirConstId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MirConst {
     };
 }
 
-MirConst!()
+MirConst!();

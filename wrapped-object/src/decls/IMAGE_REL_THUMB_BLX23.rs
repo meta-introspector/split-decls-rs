@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_THUMB_BLX23 {
     };
 }
 
-IMAGE_REL_THUMB_BLX23!()
+IMAGE_REL_THUMB_BLX23!();

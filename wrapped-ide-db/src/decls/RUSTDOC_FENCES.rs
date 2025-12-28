@@ -4,4 +4,4 @@ macro_rules! RUSTDOC_FENCES {
     };
 }
 
-RUSTDOC_FENCES!()
+RUSTDOC_FENCES!();

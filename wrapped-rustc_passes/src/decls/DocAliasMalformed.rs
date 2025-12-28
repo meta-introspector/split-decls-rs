@@ -4,4 +4,4 @@ macro_rules! DocAliasMalformed {
     };
 }
 
-DocAliasMalformed!()
+DocAliasMalformed!();

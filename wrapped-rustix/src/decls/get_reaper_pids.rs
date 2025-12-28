@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        PidInfo!();
         Result!();
         Pid!();
         ProcSelector!();
-        PidInfo!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! get_reaper_pids {
     };
 }
 
-get_reaper_pids!()
+get_reaper_pids!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FSETableError!();
         GetBitsError!();
+        FSETableError!();
         FSEDecoderError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! HuffmanTableError {
     };
 }
 
-HuffmanTableError!()
+HuffmanTableError!();

@@ -4,4 +4,4 @@ macro_rules! RedundantImportVisibility {
     };
 }
 
-RedundantImportVisibility!()
+RedundantImportVisibility!();

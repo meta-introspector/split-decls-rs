@@ -4,4 +4,4 @@ macro_rules! R_386_TLS_TPOFF {
     };
 }
 
-R_386_TLS_TPOFF!()
+R_386_TLS_TPOFF!();

@@ -4,4 +4,4 @@ macro_rules! let_underscore {
     };
 }
 
-let_underscore!()
+let_underscore!();

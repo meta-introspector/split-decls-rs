@@ -4,4 +4,4 @@ macro_rules! UseInclusiveRange {
     };
 }
 
-UseInclusiveRange!()
+UseInclusiveRange!();

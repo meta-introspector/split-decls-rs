@@ -4,4 +4,4 @@ macro_rules! InvalidGenericReceiverTy {
     };
 }
 
-InvalidGenericReceiverTy!()
+InvalidGenericReceiverTy!();

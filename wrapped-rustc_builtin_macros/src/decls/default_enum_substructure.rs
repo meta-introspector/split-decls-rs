@@ -11,4 +11,4 @@ macro_rules! default_enum_substructure {
     };
 }
 
-default_enum_substructure!()
+default_enum_substructure!();

@@ -11,4 +11,4 @@ macro_rules! clear_ambient_capability_set {
     };
 }
 
-clear_ambient_capability_set!()
+clear_ambient_capability_set!();

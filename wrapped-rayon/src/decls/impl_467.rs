@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FilterFolder!();
         Folder!();
+        FilterFolder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_467 {
     };
 }
 
-impl_467!()
+impl_467!();

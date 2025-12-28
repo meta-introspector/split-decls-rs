@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PrintAttribute!();
-        Deprecation!();
         RustcVersion!();
+        Deprecation!();
+        PrintAttribute!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DeprecatedSince {
     };
 }
 
-DeprecatedSince!()
+DeprecatedSince!();

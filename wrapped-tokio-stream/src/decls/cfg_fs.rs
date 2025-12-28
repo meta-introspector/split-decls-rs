@@ -4,4 +4,4 @@ macro_rules! cfg_fs {
     };
 }
 
-cfg_fs!()
+cfg_fs!();

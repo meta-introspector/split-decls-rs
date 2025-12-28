@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BlockContext!();
         BlockFrame!();
+        BlockContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Path!();
-        NormalAttr!();
-        AttrItem!();
         Safety!();
+        Path!();
+        AttrItem!();
+        NormalAttr!();
         AttrArgs!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_193 {
     };
 }
 
-impl_193!()
+impl_193!();

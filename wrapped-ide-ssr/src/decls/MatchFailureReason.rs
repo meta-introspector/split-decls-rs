@@ -4,4 +4,4 @@ macro_rules! MatchFailureReason {
     };
 }
 
-MatchFailureReason!()
+MatchFailureReason!();

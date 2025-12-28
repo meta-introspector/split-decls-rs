@@ -4,4 +4,4 @@ macro_rules! UpdateTest {
     };
 }
 
-UpdateTest!()
+UpdateTest!();

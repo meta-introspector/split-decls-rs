@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Layer!();
         SpanData!();
-        SpanRef!();
         Context!();
+        Layer!();
+        SpanRef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! LookupSpan {
     };
 }
 
-LookupSpan!()
+LookupSpan!();

@@ -4,4 +4,4 @@ macro_rules! EnvNotDefined {
     };
 }
 
-EnvNotDefined!()
+EnvNotDefined!();

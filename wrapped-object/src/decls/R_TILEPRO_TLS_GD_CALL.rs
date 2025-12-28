@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_TLS_GD_CALL {
     };
 }
 
-R_TILEPRO_TLS_GD_CALL!()
+R_TILEPRO_TLS_GD_CALL!();

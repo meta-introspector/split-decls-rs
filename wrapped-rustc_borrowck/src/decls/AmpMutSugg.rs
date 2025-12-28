@@ -4,4 +4,4 @@ macro_rules! AmpMutSugg {
     };
 }
 
-AmpMutSugg!()
+AmpMutSugg!();

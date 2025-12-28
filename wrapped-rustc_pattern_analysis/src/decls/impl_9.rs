@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         MaybeInfiniteInt!();
-        Presence!();
         IntRange!();
         RangeEnd!();
+        Presence!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OperandRef!();
-        OperandValue!();
         PlaceRef!();
-        FunctionCx!();
-        BuilderMethods!();
         LocalRef!();
+        OperandRef!();
+        BuilderMethods!();
+        FunctionCx!();
+        OperandValue!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! arg_local_refs {
     };
 }
 
-arg_local_refs!()
+arg_local_refs!();

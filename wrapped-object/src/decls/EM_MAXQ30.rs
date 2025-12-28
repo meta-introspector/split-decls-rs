@@ -4,4 +4,4 @@ macro_rules! EM_MAXQ30 {
     };
 }
 
-EM_MAXQ30!()
+EM_MAXQ30!();

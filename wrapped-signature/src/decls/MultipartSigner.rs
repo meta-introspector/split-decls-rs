@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Error!();
         Signer!();
+        Error!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MultipartSigner {
     };
 }
 
-MultipartSigner!()
+MultipartSigner!();

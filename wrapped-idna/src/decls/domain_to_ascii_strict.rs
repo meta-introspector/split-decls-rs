@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Uts46!();
         Hyphens!();
-        AsciiDenyList!();
         DnsLength!();
         Errors!();
-        Uts46!();
+        AsciiDenyList!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! domain_to_ascii_strict {
     };
 }
 
-domain_to_ascii_strict!()
+domain_to_ascii_strict!();

@@ -4,4 +4,4 @@ macro_rules! RequiredPredicates {
     };
 }
 
-RequiredPredicates!()
+RequiredPredicates!();

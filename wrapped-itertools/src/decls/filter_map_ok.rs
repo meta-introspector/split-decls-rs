@@ -11,4 +11,4 @@ macro_rules! filter_map_ok {
     };
 }
 
-filter_map_ok!()
+filter_map_ok!();

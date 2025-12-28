@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         RevealedTy!();
-        Uncovered!();
-        MatchArm!();
-        NonExhaustiveOmittedPatternLintOnArm!();
-        NonExhaustiveOmittedPattern!();
         PatternColumn!();
+        MatchArm!();
+        Uncovered!();
+        NonExhaustiveOmittedPattern!();
         RustcPatCtxt!();
+        NonExhaustiveOmittedPatternLintOnArm!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! lint_nonexhaustive_missing_variants {
     };
 }
 
-lint_nonexhaustive_missing_variants!()
+lint_nonexhaustive_missing_variants!();

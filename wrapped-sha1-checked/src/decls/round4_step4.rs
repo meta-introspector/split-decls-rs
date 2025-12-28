@@ -4,4 +4,4 @@ macro_rules! round4_step4 {
     };
 }
 
-round4_step4!()
+round4_step4!();

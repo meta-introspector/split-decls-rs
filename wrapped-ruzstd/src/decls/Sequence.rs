@@ -4,4 +4,4 @@ macro_rules! Sequence {
     };
 }
 
-Sequence!()
+Sequence!();

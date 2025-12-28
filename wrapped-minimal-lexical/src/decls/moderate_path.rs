@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExtendedFloat!();
         Number!();
         Float!();
+        ExtendedFloat!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! moderate_path {
     };
 }
 
-moderate_path!()
+moderate_path!();

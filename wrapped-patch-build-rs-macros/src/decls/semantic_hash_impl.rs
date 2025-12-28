@@ -23,4 +23,4 @@ Semantic Hash: f2b8c4d6e1a9f7b3 [FAKEDATA - hardcoded]
     };
 }
 
-semantic_hash_impl!()
+semantic_hash_impl!();

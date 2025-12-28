@@ -4,4 +4,4 @@ macro_rules! replace_version {
     };
 }
 
-replace_version!()
+replace_version!();

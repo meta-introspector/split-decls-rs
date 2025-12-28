@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         NodeFiltered!();
         EdgeRef!();
-        NodeFilteredEdgeReferences!();
-        FilterNode!();
         EdgeReferences!();
+        FilterNode!();
+        NodeFilteredEdgeReferences!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

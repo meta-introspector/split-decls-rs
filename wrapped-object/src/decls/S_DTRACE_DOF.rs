@@ -11,4 +11,4 @@ macro_rules! S_DTRACE_DOF {
     };
 }
 
-S_DTRACE_DOF!()
+S_DTRACE_DOF!();

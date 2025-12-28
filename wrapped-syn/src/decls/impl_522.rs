@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Parse!();
-        Result!();
         Group!();
+        Result!();
         ParseStream!();
+        Parse!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_522 {
     };
 }
 
-impl_522!()
+impl_522!();

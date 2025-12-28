@@ -4,4 +4,4 @@ macro_rules! write_exponent3 {
     };
 }
 
-write_exponent3!()
+write_exponent3!();

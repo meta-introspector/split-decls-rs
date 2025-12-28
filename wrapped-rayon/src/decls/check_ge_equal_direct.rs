@@ -4,4 +4,4 @@ macro_rules! check_ge_equal_direct {
     };
 }
 
-check_ge_equal_direct!()
+check_ge_equal_direct!();

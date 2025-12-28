@@ -4,4 +4,4 @@ macro_rules! JAVANESE {
     };
 }
 
-JAVANESE!()
+JAVANESE!();

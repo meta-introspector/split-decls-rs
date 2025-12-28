@@ -4,4 +4,4 @@ macro_rules! pause {
     };
 }
 
-pause!()
+pause!();

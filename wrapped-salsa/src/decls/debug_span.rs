@@ -4,4 +4,4 @@ macro_rules! debug_span {
     };
 }
 
-debug_span!()
+debug_span!();

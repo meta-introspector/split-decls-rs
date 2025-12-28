@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Ctxt!();
-        Default!();
         Variant!();
+        Default!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! enum_from_ast {
     };
 }
 
-enum_from_ast!()
+enum_from_ast!();

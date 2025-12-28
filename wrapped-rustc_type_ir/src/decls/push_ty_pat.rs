@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeWalkerStack!();
-        PatternKind!();
         Interner!();
+        PatternKind!();
+        TypeWalkerStack!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! push_ty_pat {
     };
 }
 
-push_ty_pat!()
+push_ty_pat!();

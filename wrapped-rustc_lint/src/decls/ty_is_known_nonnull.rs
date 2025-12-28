@@ -4,4 +4,4 @@ macro_rules! ty_is_known_nonnull {
     };
 }
 
-ty_is_known_nonnull!()
+ty_is_known_nonnull!();

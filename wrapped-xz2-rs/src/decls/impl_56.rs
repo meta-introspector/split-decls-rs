@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         XzDecoder!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_56 {
     };
 }
 
-impl_56!()
+impl_56!();

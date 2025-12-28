@@ -4,4 +4,4 @@ macro_rules! MH_CANONICAL {
     };
 }
 
-MH_CANONICAL!()
+MH_CANONICAL!();

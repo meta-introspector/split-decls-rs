@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Document!();
         Deserializer!();
         Error!();
+        Document!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_335 {
     };
 }
 
-impl_335!()
+impl_335!();

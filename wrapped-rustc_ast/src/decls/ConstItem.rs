@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Walkable!();
-        Defaultness!();
-        Expr!();
-        Ty!();
-        Path!();
         Generics!();
+        Path!();
+        Defaultness!();
+        Ty!();
+        Expr!();
+        Walkable!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ConstItem {
     };
 }
 
-ConstItem!()
+ConstItem!();

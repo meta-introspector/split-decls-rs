@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Path!();
         Visitor!();
+        Path!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_path {
     };
 }
 
-walk_path!()
+walk_path!();

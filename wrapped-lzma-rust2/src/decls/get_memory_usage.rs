@@ -11,4 +11,4 @@ macro_rules! get_memory_usage {
     };
 }
 
-get_memory_usage!()
+get_memory_usage!();

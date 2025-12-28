@@ -4,4 +4,4 @@ macro_rules! DefaultMetadataLoader {
     };
 }
 
-DefaultMetadataLoader!()
+DefaultMetadataLoader!();

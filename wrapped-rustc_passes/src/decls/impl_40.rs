@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MarkSymbolVisitor!();
-        ComesFromAllowExpect!();
         UselessAssignment!();
+        MarkSymbolVisitor!();
         Node!();
+        ComesFromAllowExpect!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

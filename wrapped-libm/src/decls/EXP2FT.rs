@@ -4,4 +4,4 @@ macro_rules! EXP2FT {
     };
 }
 
-EXP2FT!()
+EXP2FT!();

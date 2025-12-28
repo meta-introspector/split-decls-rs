@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SmallIndex!();
         SmallIndexError!();
+        SmallIndex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_756 {
     };
 }
 
-impl_756!()
+impl_756!();

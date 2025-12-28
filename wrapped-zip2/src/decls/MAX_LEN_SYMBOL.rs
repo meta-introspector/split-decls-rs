@@ -4,4 +4,4 @@ macro_rules! MAX_LEN_SYMBOL {
     };
 }
 
-MAX_LEN_SYMBOL!()
+MAX_LEN_SYMBOL!();

@@ -4,4 +4,4 @@ macro_rules! set_fs {
     };
 }
 
-set_fs!()
+set_fs!();

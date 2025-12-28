@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Generation!();
-        Pack!();
         Tid!();
+        Generation!();
         Addr!();
         DefaultConfig!();
+        Pack!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! idx {
     };
 }
 
-idx!()
+idx!();

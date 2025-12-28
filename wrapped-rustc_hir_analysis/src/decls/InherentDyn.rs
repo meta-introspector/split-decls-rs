@@ -4,4 +4,4 @@ macro_rules! InherentDyn {
     };
 }
 
-InherentDyn!()
+InherentDyn!();

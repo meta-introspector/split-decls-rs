@@ -4,4 +4,4 @@ macro_rules! R_ARM_MOVT_ABS {
     };
 }
 
-R_ARM_MOVT_ABS!()
+R_ARM_MOVT_ABS!();

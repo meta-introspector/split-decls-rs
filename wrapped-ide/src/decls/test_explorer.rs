@@ -4,4 +4,4 @@ macro_rules! test_explorer {
     };
 }
 
-test_explorer!()
+test_explorer!();

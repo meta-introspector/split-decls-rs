@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         VTabLog!();
+        Result!();
         VTabConnection!();
         Error!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_645 {
     };
 }
 
-impl_645!()
+impl_645!();

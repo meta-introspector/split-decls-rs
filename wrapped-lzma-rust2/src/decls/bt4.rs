@@ -4,4 +4,4 @@ macro_rules! bt4 {
     };
 }
 
-bt4!()
+bt4!();

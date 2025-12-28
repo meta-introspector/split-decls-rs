@@ -4,4 +4,4 @@ macro_rules! sorted_map {
     };
 }
 
-sorted_map!()
+sorted_map!();

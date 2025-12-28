@@ -11,4 +11,4 @@ macro_rules! is_loongarch_aggregate {
     };
 }
 
-is_loongarch_aggregate!()
+is_loongarch_aggregate!();

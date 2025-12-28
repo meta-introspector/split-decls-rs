@@ -4,4 +4,4 @@ macro_rules! zfree_fail {
     };
 }
 
-zfree_fail!()
+zfree_fail!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VisitMut!();
         ArrayOfTables!();
+        VisitMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! visit_array_of_tables_mut {
     };
 }
 
-visit_array_of_tables_mut!()
+visit_array_of_tables_mut!();

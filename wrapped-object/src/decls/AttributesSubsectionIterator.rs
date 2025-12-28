@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endian!();
+        Bytes!();
         FileHeader!();
         AttributesSection!();
-        Bytes!();
+        Endian!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! AttributesSubsectionIterator {
     };
 }
 
-AttributesSubsectionIterator!()
+AttributesSubsectionIterator!();

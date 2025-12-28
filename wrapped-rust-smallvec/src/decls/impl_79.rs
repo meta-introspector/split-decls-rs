@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TaggedLen!();
         CollectionAllocErr!();
+        TaggedLen!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

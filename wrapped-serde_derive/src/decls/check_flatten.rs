@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Ctxt!();
-        Data!();
         Container!();
+        Data!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_flatten {
     };
 }
 
-check_flatten!()
+check_flatten!();

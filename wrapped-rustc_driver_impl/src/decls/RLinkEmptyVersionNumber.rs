@@ -4,4 +4,4 @@ macro_rules! RLinkEmptyVersionNumber {
     };
 }
 
-RLinkEmptyVersionNumber!()
+RLinkEmptyVersionNumber!();

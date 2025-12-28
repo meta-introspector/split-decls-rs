@@ -4,4 +4,4 @@ macro_rules! command_handlers {
     };
 }
 
-command_handlers!()
+command_handlers!();

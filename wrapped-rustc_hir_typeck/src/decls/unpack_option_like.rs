@@ -4,4 +4,4 @@ macro_rules! unpack_option_like {
     };
 }
 
-unpack_option_like!()
+unpack_option_like!();

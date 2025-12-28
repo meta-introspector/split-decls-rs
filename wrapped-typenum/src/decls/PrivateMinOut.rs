@@ -11,4 +11,4 @@ macro_rules! PrivateMinOut {
     };
 }
 
-PrivateMinOut!()
+PrivateMinOut!();

@@ -4,4 +4,4 @@ macro_rules! is_test_attribute {
     };
 }
 
-is_test_attribute!()
+is_test_attribute!();

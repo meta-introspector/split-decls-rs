@@ -4,4 +4,4 @@ macro_rules! MockCompilerHost {
     };
 }
 
-MockCompilerHost!()
+MockCompilerHost!();

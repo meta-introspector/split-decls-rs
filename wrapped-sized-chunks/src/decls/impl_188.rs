@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Iter!();
-        IterMut!();
         SliceMut!();
-        RingBuffer!();
+        IterMut!();
         Slice!();
+        RingBuffer!();
+        Iter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

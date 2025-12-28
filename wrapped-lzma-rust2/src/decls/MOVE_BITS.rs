@@ -4,4 +4,4 @@ macro_rules! MOVE_BITS {
     };
 }
 
-MOVE_BITS!()
+MOVE_BITS!();

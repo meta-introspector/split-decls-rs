@@ -13,4 +13,4 @@ macro_rules! region_definitions {
     };
 }
 
-region_definitions!()
+region_definitions!();

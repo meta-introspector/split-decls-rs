@@ -4,4 +4,4 @@ macro_rules! uefi_msvc {
     };
 }
 
-uefi_msvc!()
+uefi_msvc!();

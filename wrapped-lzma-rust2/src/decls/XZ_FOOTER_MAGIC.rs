@@ -4,4 +4,4 @@ macro_rules! XZ_FOOTER_MAGIC {
     };
 }
 
-XZ_FOOTER_MAGIC!()
+XZ_FOOTER_MAGIC!();

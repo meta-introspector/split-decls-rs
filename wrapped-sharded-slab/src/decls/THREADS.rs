@@ -4,4 +4,4 @@ macro_rules! THREADS {
     };
 }
 
-THREADS!()
+THREADS!();

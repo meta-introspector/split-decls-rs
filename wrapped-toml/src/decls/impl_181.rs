@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DeArray!();
         DeValue!();
+        DeArray!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

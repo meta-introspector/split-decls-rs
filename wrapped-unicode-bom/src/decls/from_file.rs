@@ -11,4 +11,4 @@ macro_rules! from_file {
     };
 }
 
-from_file!()
+from_file!();

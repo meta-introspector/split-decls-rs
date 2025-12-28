@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_ERR_FLOODED {
     };
 }
 
-NGHTTP2_ERR_FLOODED!()
+NGHTTP2_ERR_FLOODED!();

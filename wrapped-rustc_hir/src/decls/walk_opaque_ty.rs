@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         OpaqueTy!();
+        Visitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_opaque_ty {
     };
 }
 
-walk_opaque_ty!()
+walk_opaque_ty!();

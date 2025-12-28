@@ -4,4 +4,4 @@ macro_rules! IndexAllocator {
     };
 }
 
-IndexAllocator!()
+IndexAllocator!();

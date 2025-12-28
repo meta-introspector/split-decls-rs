@@ -12,4 +12,4 @@ macro_rules! turn_into_const_value {
     };
 }
 
-turn_into_const_value!()
+turn_into_const_value!();

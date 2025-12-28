@@ -11,4 +11,4 @@ macro_rules! extend_list_item {
     };
 }
 
-extend_list_item!()
+extend_list_item!();

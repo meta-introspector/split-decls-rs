@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        MacroUseParser!();
-        Stage!();
         IllFormedAttributeInputLint!();
-        AcceptContext!();
         AllowedTargets!();
         FinalizeContext!();
         AttributeParser!();
+        MacroUseParser!();
         AcceptMapping!();
+        AcceptContext!();
+        Stage!();
         ArgParser!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

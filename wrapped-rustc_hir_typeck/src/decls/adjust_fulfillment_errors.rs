@@ -4,4 +4,4 @@ macro_rules! adjust_fulfillment_errors {
     };
 }
 
-adjust_fulfillment_errors!()
+adjust_fulfillment_errors!();

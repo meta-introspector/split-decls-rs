@@ -4,4 +4,4 @@ macro_rules! test_rt {
     };
 }
 
-test_rt!()
+test_rt!();

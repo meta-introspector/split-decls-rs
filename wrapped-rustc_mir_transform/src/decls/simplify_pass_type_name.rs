@@ -4,4 +4,4 @@ macro_rules! simplify_pass_type_name {
     };
 }
 
-simplify_pass_type_name!()
+simplify_pass_type_name!();

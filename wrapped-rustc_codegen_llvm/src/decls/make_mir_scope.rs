@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         DIB!();
+        CodegenCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! make_mir_scope {
     };
 }
 
-make_mir_scope!()
+make_mir_scope!();

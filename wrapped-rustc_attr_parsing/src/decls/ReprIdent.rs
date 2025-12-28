@@ -4,4 +4,4 @@ macro_rules! ReprIdent {
     };
 }
 
-ReprIdent!()
+ReprIdent!();

@@ -4,4 +4,4 @@ macro_rules! get_owner_return_paths {
     };
 }
 
-get_owner_return_paths!()
+get_owner_return_paths!();

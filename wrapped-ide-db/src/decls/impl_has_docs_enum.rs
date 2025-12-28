@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Documentation!();
         DocsRangeMap!();
         HasDocs!();
-        Documentation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_has_docs_enum {
     };
 }
 
-impl_has_docs_enum!()
+impl_has_docs_enum!();

@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_NONE {
     };
 }
 
-R_AARCH64_NONE!()
+R_AARCH64_NONE!();

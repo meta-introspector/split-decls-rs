@@ -4,4 +4,4 @@ macro_rules! Hash64 {
     };
 }
 
-Hash64!()
+Hash64!();

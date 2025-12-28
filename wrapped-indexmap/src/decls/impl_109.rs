@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexMap!();
         ParIterMut!();
+        IndexMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_109 {
     };
 }
 
-impl_109!()
+impl_109!();

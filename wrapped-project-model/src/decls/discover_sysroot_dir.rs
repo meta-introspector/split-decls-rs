@@ -4,4 +4,4 @@ macro_rules! discover_sysroot_dir {
     };
 }
 
-discover_sysroot_dir!()
+discover_sysroot_dir!();

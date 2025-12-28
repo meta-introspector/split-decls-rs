@@ -4,4 +4,4 @@ macro_rules! FRAGMENT_ENCODE_SET {
     };
 }
 
-FRAGMENT_ENCODE_SET!()
+FRAGMENT_ENCODE_SET!();

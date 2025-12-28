@@ -12,4 +12,4 @@ macro_rules! inherit_generics_for_delegation_item {
     };
 }
 
-inherit_generics_for_delegation_item!()
+inherit_generics_for_delegation_item!();

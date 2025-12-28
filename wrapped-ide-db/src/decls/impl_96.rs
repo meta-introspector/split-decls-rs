@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PathTransform!();
-        AstSubsts!();
-        Ctx!();
-        DefaultedParam!();
         TypeOrConst!();
+        Ctx!();
+        AstSubsts!();
+        DefaultedParam!();
+        PathTransform!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_96 {
     };
 }
 
-impl_96!()
+impl_96!();

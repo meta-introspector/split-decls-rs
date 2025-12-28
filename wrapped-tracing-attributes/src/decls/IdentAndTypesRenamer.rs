@@ -4,4 +4,4 @@ macro_rules! IdentAndTypesRenamer {
     };
 }
 
-IdentAndTypesRenamer!()
+IdentAndTypesRenamer!();

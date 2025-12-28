@@ -4,4 +4,4 @@ macro_rules! R_ARM_GOTOFF {
     };
 }
 
-R_ARM_GOTOFF!()
+R_ARM_GOTOFF!();

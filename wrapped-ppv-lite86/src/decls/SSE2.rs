@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NoNI!();
-        SseMachine!();
         NoS4!();
+        NoNI!();
         NoS3!();
+        SseMachine!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SSE2 {
     };
 }
 
-SSE2!()
+SSE2!();

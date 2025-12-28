@@ -4,4 +4,4 @@ macro_rules! dao_governance {
     };
 }
 
-dao_governance!()
+dao_governance!();

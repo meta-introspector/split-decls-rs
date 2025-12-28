@@ -4,4 +4,4 @@ macro_rules! SerializeFieldSet {
     };
 }
 
-SerializeFieldSet!()
+SerializeFieldSet!();

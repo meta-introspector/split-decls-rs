@@ -4,4 +4,4 @@ macro_rules! parse_check_cfg {
     };
 }
 
-parse_check_cfg!()
+parse_check_cfg!();

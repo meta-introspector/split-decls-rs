@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Rng!();
-        Error!();
-        Uniform!();
         SampleBorrow!();
+        Uniform!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! UniformSampler {
     };
 }
 
-UniformSampler!()
+UniformSampler!();

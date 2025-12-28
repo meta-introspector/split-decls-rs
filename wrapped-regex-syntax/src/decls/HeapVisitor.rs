@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Hir!();
         Frame!();
+        Hir!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HeapVisitor {
     };
 }
 
-HeapVisitor!()
+HeapVisitor!();

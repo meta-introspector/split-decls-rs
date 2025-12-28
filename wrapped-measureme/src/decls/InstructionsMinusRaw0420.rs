@@ -11,4 +11,4 @@ macro_rules! InstructionsMinusRaw0420 {
     };
 }
 
-InstructionsMinusRaw0420!()
+InstructionsMinusRaw0420!();

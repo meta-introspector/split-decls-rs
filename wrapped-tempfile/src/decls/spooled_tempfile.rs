@@ -11,4 +11,4 @@ macro_rules! spooled_tempfile {
     };
 }
 
-spooled_tempfile!()
+spooled_tempfile!();

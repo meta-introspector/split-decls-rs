@@ -4,4 +4,4 @@ macro_rules! is_text {
     };
 }
 
-is_text!()
+is_text!();

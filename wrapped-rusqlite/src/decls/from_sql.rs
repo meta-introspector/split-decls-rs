@@ -4,4 +4,4 @@ macro_rules! from_sql {
     };
 }
 
-from_sql!()
+from_sql!();

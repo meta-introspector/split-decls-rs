@@ -4,4 +4,4 @@ macro_rules! tera {
     };
 }
 
-tera!()
+tera!();

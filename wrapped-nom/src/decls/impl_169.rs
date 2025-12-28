@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IsStreaming!();
         Complete!();
-        Needed!();
         Err!();
+        IsStreaming!();
         Error!();
+        Needed!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_169 {
     };
 }
 
-impl_169!()
+impl_169!();

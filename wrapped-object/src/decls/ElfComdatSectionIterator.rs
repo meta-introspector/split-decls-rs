@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ElfFile!();
+        ReadRef!();
         FileHeader!();
         U32Bytes!();
         Endian!();
-        ReadRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ElfComdatSectionIterator {
     };
 }
 
-ElfComdatSectionIterator!()
+ElfComdatSectionIterator!();

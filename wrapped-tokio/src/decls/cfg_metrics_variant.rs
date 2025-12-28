@@ -4,4 +4,4 @@ macro_rules! cfg_metrics_variant {
     };
 }
 
-cfg_metrics_variant!()
+cfg_metrics_variant!();

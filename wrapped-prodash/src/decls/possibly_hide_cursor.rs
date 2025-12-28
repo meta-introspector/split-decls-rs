@@ -4,4 +4,4 @@ macro_rules! possibly_hide_cursor {
     };
 }
 
-possibly_hide_cursor!()
+possibly_hide_cursor!();

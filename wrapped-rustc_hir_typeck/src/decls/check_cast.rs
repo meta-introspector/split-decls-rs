@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CastCheck!();
-        FnCtxt!();
         TypeckRootCtxt!();
+        FnCtxt!();
+        CastCheck!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_cast {
     };
 }
 
-check_cast!()
+check_cast!();

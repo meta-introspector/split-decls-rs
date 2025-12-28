@@ -4,4 +4,4 @@ macro_rules! BuiltinMissingDebugImpl {
     };
 }
 
-BuiltinMissingDebugImpl!()
+BuiltinMissingDebugImpl!();

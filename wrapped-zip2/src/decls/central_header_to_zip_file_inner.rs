@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ZipError!();
-        ZipResult!();
-        CompressionMethod!();
         ZipFileData!();
+        ZipError!();
+        CompressionMethod!();
+        ZipResult!();
         System!();
         DateTime!();
         ZipCentralEntryBlock!();
@@ -17,4 +17,4 @@ macro_rules! central_header_to_zip_file_inner {
     };
 }
 
-central_header_to_zip_file_inner!()
+central_header_to_zip_file_inner!();

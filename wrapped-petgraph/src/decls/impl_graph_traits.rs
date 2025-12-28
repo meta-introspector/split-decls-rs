@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        NodeIndex!();
-        Neighbors!();
-        Edges!();
+        Direction!();
         NodeReferences!();
-        NodeRef!();
         Cycle!();
-        NodeIdentifiers!();
-        IndexType!();
+        NodeIndex!();
+        NeighborsDirected!();
         EdgesDirected!();
         Acyclic!();
+        Neighbors!();
+        NodeIdentifiers!();
+        IndexType!();
         EdgeRef!();
-        NeighborsDirected!();
-        Direction!();
+        NodeRef!();
+        Edges!();
         EdgeReferences!();
     };
 }
@@ -24,4 +24,4 @@ macro_rules! impl_graph_traits {
     };
 }
 
-impl_graph_traits!()
+impl_graph_traits!();

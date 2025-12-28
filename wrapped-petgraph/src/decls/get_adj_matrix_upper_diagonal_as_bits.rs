@@ -4,4 +4,4 @@ macro_rules! get_adj_matrix_upper_diagonal_as_bits {
     };
 }
 
-get_adj_matrix_upper_diagonal_as_bits!()
+get_adj_matrix_upper_diagonal_as_bits!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Options!();
         InternedStruct!();
+        Options!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InternedArgs {
     };
 }
 
-InternedArgs!()
+InternedArgs!();

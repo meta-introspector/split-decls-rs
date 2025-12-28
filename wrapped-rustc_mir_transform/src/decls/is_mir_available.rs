@@ -4,4 +4,4 @@ macro_rules! is_mir_available {
     };
 }
 
-is_mir_available!()
+is_mir_available!();

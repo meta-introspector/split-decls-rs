@@ -11,4 +11,4 @@ macro_rules! determine_parameters_to_be_inferred {
     };
 }
 
-determine_parameters_to_be_inferred!()
+determine_parameters_to_be_inferred!();

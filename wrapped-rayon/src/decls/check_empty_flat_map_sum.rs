@@ -4,4 +4,4 @@ macro_rules! check_empty_flat_map_sum {
     };
 }
 
-check_empty_flat_map_sum!()
+check_empty_flat_map_sum!();

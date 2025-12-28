@@ -4,4 +4,4 @@ macro_rules! should_reborrow_from_env_of_parent_coroutine_closure {
     };
 }
 
-should_reborrow_from_env_of_parent_coroutine_closure!()
+should_reborrow_from_env_of_parent_coroutine_closure!();

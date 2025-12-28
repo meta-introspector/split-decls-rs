@@ -4,4 +4,4 @@ macro_rules! R_MIPS_REL16 {
     };
 }
 
-R_MIPS_REL16!()
+R_MIPS_REL16!();

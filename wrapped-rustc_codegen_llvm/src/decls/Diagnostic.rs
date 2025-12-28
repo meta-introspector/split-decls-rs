@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        OptimizationDiagnostic!();
         Linker!();
         InlineAsmDiagnostic!();
-        OptimizationDiagnostic!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Diagnostic {
     };
 }
 
-Diagnostic!()
+Diagnostic!();

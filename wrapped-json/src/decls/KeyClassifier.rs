@@ -4,4 +4,4 @@ macro_rules! KeyClassifier {
     };
 }
 
-KeyClassifier!()
+KeyClassifier!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ByteClasses!();
         StartKind!();
+        ByteClasses!();
         DFA!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_120 {
     };
 }
 
-impl_120!()
+impl_120!();

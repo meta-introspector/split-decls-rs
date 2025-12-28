@@ -4,4 +4,4 @@ macro_rules! main_fail {
     };
 }
 
-main_fail!()
+main_fail!();

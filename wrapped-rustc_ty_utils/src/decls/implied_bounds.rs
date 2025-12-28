@@ -4,4 +4,4 @@ macro_rules! implied_bounds {
     };
 }
 
-implied_bounds!()
+implied_bounds!();

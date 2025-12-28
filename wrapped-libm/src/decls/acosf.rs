@@ -4,4 +4,4 @@ macro_rules! acosf {
     };
 }
 
-acosf!()
+acosf!();

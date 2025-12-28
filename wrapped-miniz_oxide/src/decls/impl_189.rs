@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DecompressorOxide!();
+        ResetPolicy!();
         TINFLStatus!();
+        FullReset!();
         InflateState!();
         DataFormat!();
-        FullReset!();
-        ResetPolicy!();
+        DecompressorOxide!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

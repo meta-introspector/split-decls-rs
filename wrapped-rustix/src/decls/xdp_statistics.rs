@@ -11,4 +11,4 @@ macro_rules! xdp_statistics {
     };
 }
 
-xdp_statistics!()
+xdp_statistics!();

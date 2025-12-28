@@ -4,4 +4,4 @@ macro_rules! zalloc_rust_calloc {
     };
 }
 
-zalloc_rust_calloc!()
+zalloc_rust_calloc!();

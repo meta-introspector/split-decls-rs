@@ -4,4 +4,4 @@ macro_rules! EM_PCP {
     };
 }
 
-EM_PCP!()
+EM_PCP!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Gen!();
         Arbitrary!();
         QuickCheck!();
-        Gen!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

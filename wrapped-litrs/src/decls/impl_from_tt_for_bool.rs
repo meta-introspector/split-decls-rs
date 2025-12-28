@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         TokenKind!();
-        Literal!();
-        InvalidToken!();
         BoolLit!();
+        InvalidToken!();
+        Literal!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_from_tt_for_bool {
     };
 }
 
-impl_from_tt_for_bool!()
+impl_from_tt_for_bool!();

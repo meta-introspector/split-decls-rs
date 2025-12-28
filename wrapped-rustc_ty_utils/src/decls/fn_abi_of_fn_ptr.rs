@@ -4,4 +4,4 @@ macro_rules! fn_abi_of_fn_ptr {
     };
 }
 
-fn_abi_of_fn_ptr!()
+fn_abi_of_fn_ptr!();

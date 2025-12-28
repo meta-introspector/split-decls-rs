@@ -4,4 +4,4 @@ macro_rules! SourceRootConfig {
     };
 }
 
-SourceRootConfig!()
+SourceRootConfig!();

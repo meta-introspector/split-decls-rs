@@ -4,4 +4,4 @@ macro_rules! hex_digit {
     };
 }
 
-hex_digit!()
+hex_digit!();

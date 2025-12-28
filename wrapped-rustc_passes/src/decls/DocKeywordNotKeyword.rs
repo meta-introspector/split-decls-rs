@@ -4,4 +4,4 @@ macro_rules! DocKeywordNotKeyword {
     };
 }
 
-DocKeywordNotKeyword!()
+DocKeywordNotKeyword!();

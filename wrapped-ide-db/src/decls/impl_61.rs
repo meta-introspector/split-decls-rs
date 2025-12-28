@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DocsRangeMap!();
         HasDocs!();
+        DocsRangeMap!();
         Documentation!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        B1!();
-        Sub1!();
-        UInt!();
         Shright!();
+        UInt!();
         Unsigned!();
+        Sub1!();
         Bit!();
+        B1!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_414 {
     };
 }
 
-impl_414!()
+impl_414!();

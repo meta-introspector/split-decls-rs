@@ -4,4 +4,4 @@ macro_rules! MH_EXECUTE {
     };
 }
 
-MH_EXECUTE!()
+MH_EXECUTE!();

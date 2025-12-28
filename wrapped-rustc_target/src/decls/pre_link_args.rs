@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        LinkArgs!();
-        TargetOptions!();
-        LinkerFlavor!();
-        Lld!();
         Cc!();
         Arch!();
+        TargetOptions!();
+        LinkArgs!();
         ApiVariant!();
+        Lld!();
+        LinkerFlavor!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! pre_link_args {
     };
 }
 
-pre_link_args!()
+pre_link_args!();

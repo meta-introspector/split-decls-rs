@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Config!();
-        NFA!();
         DFA!();
         Match!();
+        NFA!();
+        Config!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! BoundedBacktracker {
     };
 }
 
-BoundedBacktracker!()
+BoundedBacktracker!();

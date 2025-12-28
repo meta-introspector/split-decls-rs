@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Arg!();
+        Gid!();
         Uid!();
         Result!();
-        Gid!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! chownat {
     };
 }
 
-chownat!()
+chownat!();

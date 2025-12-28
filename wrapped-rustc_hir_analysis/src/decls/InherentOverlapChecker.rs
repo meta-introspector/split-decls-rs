@@ -4,4 +4,4 @@ macro_rules! InherentOverlapChecker {
     };
 }
 
-InherentOverlapChecker!()
+InherentOverlapChecker!();

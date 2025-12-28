@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FinalizeFn!();
         GroupTypeInnerAccept!();
         Stage!();
-        FinalizeFn!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! GroupTypeInner {
     };
 }
 
-GroupTypeInner!()
+GroupTypeInner!();

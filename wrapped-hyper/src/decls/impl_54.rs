@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Write!();
-        CachedDate!();
         Result!();
+        CachedDate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

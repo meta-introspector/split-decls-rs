@@ -4,4 +4,4 @@ macro_rules! par_bridge {
     };
 }
 
-par_bridge!()
+par_bridge!();

@@ -4,4 +4,4 @@ macro_rules! FieldConfig {
     };
 }
 
-FieldConfig!()
+FieldConfig!();

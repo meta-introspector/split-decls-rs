@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DataError!();
         Error!();
+        DataError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DataInner {
     };
 }
 
-DataInner!()
+DataInner!();

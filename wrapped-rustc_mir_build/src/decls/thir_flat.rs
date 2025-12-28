@@ -4,4 +4,4 @@ macro_rules! thir_flat {
     };
 }
 
-thir_flat!()
+thir_flat!();

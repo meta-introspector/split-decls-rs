@@ -4,4 +4,4 @@ macro_rules! JobId {
     };
 }
 
-JobId!()
+JobId!();

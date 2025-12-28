@@ -4,4 +4,4 @@ macro_rules! IGNORED_ATTRIBUTES {
     };
 }
 
-IGNORED_ATTRIBUTES!()
+IGNORED_ATTRIBUTES!();

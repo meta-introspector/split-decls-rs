@@ -4,4 +4,4 @@ macro_rules! lgamma {
     };
 }
 
-lgamma!()
+lgamma!();

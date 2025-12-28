@@ -4,4 +4,4 @@ macro_rules! EM_IA_64 {
     };
 }
 
-EM_IA_64!()
+EM_IA_64!();

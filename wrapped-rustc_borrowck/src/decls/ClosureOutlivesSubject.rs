@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ClosureOutlivesSubjectTy!();
         ClosureOutlivesRequirement!();
+        ClosureOutlivesSubjectTy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ClosureOutlivesSubject {
     };
 }
 
-ClosureOutlivesSubject!()
+ClosureOutlivesSubject!();

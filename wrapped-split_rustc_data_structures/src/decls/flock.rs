@@ -4,4 +4,4 @@ macro_rules! flock {
     };
 }
 
-flock!()
+flock!();

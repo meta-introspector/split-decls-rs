@@ -4,4 +4,4 @@ macro_rules! round4_step_bw {
     };
 }
 
-round4_step_bw!()
+round4_step_bw!();

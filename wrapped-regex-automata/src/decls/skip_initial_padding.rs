@@ -4,4 +4,4 @@ macro_rules! skip_initial_padding {
     };
 }
 
-skip_initial_padding!()
+skip_initial_padding!();

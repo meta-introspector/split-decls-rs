@@ -4,4 +4,4 @@ macro_rules! AbiErrorDisabledVectorType {
     };
 }
 
-AbiErrorDisabledVectorType!()
+AbiErrorDisabledVectorType!();

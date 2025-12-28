@@ -4,4 +4,4 @@ macro_rules! EncounteredErrorWhileInstantiatingGlobalAsm {
     };
 }
 
-EncounteredErrorWhileInstantiatingGlobalAsm!()
+EncounteredErrorWhileInstantiatingGlobalAsm!();

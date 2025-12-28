@@ -4,4 +4,4 @@ macro_rules! AttributeInputReplaceProcMacroExpander {
     };
 }
 
-AttributeInputReplaceProcMacroExpander!()
+AttributeInputReplaceProcMacroExpander!();

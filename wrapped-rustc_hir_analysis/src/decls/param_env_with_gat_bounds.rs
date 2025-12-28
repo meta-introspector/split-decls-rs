@@ -4,4 +4,4 @@ macro_rules! param_env_with_gat_bounds {
     };
 }
 
-param_env_with_gat_bounds!()
+param_env_with_gat_bounds!();

@@ -13,4 +13,4 @@ macro_rules! ensure_must_run {
     };
 }
 
-ensure_must_run!()
+ensure_must_run!();

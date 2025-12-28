@@ -4,4 +4,4 @@ macro_rules! optimized_mir {
     };
 }
 
-optimized_mir!()
+optimized_mir!();

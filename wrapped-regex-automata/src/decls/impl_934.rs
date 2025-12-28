@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MatchError!();
-        MatchErrorKind!();
         Anchored!();
+        MatchErrorKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_934 {
     };
 }
 
-impl_934!()
+impl_934!();

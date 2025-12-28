@@ -4,4 +4,4 @@ macro_rules! sin {
     };
 }
 
-sin!()
+sin!();

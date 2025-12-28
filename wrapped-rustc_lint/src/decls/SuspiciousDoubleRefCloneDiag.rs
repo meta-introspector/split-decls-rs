@@ -4,4 +4,4 @@ macro_rules! SuspiciousDoubleRefCloneDiag {
     };
 }
 
-SuspiciousDoubleRefCloneDiag!()
+SuspiciousDoubleRefCloneDiag!();

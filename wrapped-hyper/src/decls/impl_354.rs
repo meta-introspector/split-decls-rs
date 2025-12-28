@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TaskFuture!();
         Pending!();
+        TaskFuture!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_354 {
     };
 }
 
-impl_354!()
+impl_354!();

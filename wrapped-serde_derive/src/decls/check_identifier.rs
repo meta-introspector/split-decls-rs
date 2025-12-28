@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Container!();
         Variant!();
-        Data!();
-        Field!();
-        TagType!();
-        Ctxt!();
-        Identifier!();
         Style!();
+        Ctxt!();
+        TagType!();
+        Field!();
+        Container!();
+        Identifier!();
+        Data!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! check_identifier {
     };
 }
 
-check_identifier!()
+check_identifier!();

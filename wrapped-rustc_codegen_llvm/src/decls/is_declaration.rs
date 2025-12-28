@@ -4,4 +4,4 @@ macro_rules! is_declaration {
     };
 }
 
-is_declaration!()
+is_declaration!();

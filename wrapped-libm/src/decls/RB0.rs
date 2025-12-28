@@ -4,4 +4,4 @@ macro_rules! RB0 {
     };
 }
 
-RB0!()
+RB0!();

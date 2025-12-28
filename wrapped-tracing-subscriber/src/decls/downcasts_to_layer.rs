@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StringLayer3!();
         StringLayer2!();
         StringLayer!();
+        StringLayer3!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! downcasts_to_layer {
     };
 }
 
-downcasts_to_layer!()
+downcasts_to_layer!();

@@ -11,4 +11,4 @@ macro_rules! thir_body {
     };
 }
 
-thir_body!()
+thir_body!();

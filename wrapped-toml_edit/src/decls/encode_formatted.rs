@@ -12,4 +12,4 @@ macro_rules! encode_formatted {
     };
 }
 
-encode_formatted!()
+encode_formatted!();

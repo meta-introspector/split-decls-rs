@@ -4,4 +4,4 @@ macro_rules! MH_DYLIB_STUB {
     };
 }
 
-MH_DYLIB_STUB!()
+MH_DYLIB_STUB!();

@@ -4,4 +4,4 @@ macro_rules! HasRecursiveOpaque {
     };
 }
 
-HasRecursiveOpaque!()
+HasRecursiveOpaque!();

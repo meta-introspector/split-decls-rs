@@ -4,4 +4,4 @@ macro_rules! impl_map {
     };
 }
 
-impl_map!()
+impl_map!();

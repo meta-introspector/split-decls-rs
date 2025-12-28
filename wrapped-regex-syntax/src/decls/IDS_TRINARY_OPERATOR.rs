@@ -4,4 +4,4 @@ macro_rules! IDS_TRINARY_OPERATOR {
     };
 }
 
-IDS_TRINARY_OPERATOR!()
+IDS_TRINARY_OPERATOR!();

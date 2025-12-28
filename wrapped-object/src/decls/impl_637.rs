@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PeComdat!();
-        ImageNtHeaders!();
         ReadRef!();
-        Item!();
+        PeComdat!();
         PeComdatIterator!();
+        Item!();
+        ImageNtHeaders!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_637 {
     };
 }
 
-impl_637!()
+impl_637!();

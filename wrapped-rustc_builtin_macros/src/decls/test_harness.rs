@@ -4,4 +4,4 @@ macro_rules! test_harness {
     };
 }
 
-test_harness!()
+test_harness!();

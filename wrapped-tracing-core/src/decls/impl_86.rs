@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Registrar!();
-        LevelFilter!();
-        Kind!();
-        Interest!();
         WeakDispatch!();
-        Subscriber!();
-        Attributes!();
-        Id!();
-        Event!();
-        Current!();
-        Record!();
         Dispatch!();
         Metadata!();
+        Event!();
+        Attributes!();
+        Kind!();
+        Id!();
+        Record!();
+        Registrar!();
+        Interest!();
+        Current!();
+        LevelFilter!();
+        Subscriber!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

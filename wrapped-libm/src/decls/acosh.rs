@@ -4,4 +4,4 @@ macro_rules! acosh {
     };
 }
 
-acosh!()
+acosh!();

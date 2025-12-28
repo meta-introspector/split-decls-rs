@@ -4,4 +4,4 @@ macro_rules! compare_number_of_method_arguments {
     };
 }
 
-compare_number_of_method_arguments!()
+compare_number_of_method_arguments!();

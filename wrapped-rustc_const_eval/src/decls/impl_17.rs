@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConditionallyConstCall!();
         ConstCx!();
-        NonConstOp!();
         Status!();
+        NonConstOp!();
+        ConditionallyConstCall!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

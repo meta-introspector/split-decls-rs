@@ -4,4 +4,4 @@ macro_rules! SECT_FVMLIB_INIT1 {
     };
 }
 
-SECT_FVMLIB_INIT1!()
+SECT_FVMLIB_INIT1!();

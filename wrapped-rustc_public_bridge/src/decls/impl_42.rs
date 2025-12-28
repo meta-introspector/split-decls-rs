@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Tables!();
-        CompilerCtxt!();
-        Error!();
         TypingEnvHelpers!();
+        CompilerCtxt!();
         BodyBuilder!();
         Bridge!();
+        Tables!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

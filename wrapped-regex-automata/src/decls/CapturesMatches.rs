@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Captures!();
-        Searcher!();
-        Cache!();
         PikeVM!();
+        Cache!();
+        Searcher!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CapturesMatches {
     };
 }
 
-CapturesMatches!()
+CapturesMatches!();

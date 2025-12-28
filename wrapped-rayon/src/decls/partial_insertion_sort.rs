@@ -4,4 +4,4 @@ macro_rules! partial_insertion_sort {
     };
 }
 
-partial_insertion_sort!()
+partial_insertion_sort!();

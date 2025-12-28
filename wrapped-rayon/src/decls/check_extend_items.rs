@@ -11,4 +11,4 @@ macro_rules! check_extend_items {
     };
 }
 
-check_extend_items!()
+check_extend_items!();

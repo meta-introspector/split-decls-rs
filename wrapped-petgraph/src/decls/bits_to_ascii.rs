@@ -4,4 +4,4 @@ macro_rules! bits_to_ascii {
     };
 }
 
-bits_to_ascii!()
+bits_to_ascii!();

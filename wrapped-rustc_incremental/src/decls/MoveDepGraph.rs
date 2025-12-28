@@ -4,4 +4,4 @@ macro_rules! MoveDepGraph {
     };
 }
 
-MoveDepGraph!()
+MoveDepGraph!();

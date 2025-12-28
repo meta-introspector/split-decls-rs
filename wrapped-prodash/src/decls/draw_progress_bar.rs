@@ -11,4 +11,4 @@ macro_rules! draw_progress_bar {
     };
 }
 
-draw_progress_bar!()
+draw_progress_bar!();

@@ -4,4 +4,4 @@ macro_rules! IncorrectReprFormatPackedOneOrZeroArg {
     };
 }
 
-IncorrectReprFormatPackedOneOrZeroArg!()
+IncorrectReprFormatPackedOneOrZeroArg!();

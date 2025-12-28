@@ -4,4 +4,4 @@ macro_rules! run_with_tcx {
     };
 }
 
-run_with_tcx!()
+run_with_tcx!();

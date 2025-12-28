@@ -4,4 +4,4 @@ macro_rules! real_rustc_analysis {
     };
 }
 
-real_rustc_analysis!()
+real_rustc_analysis!();

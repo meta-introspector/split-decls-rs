@@ -11,4 +11,4 @@ macro_rules! callable_for_arg_list {
     };
 }
 
-callable_for_arg_list!()
+callable_for_arg_list!();

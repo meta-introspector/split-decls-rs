@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ByteStringLit!();
         CharLit!();
-        BoolLit!();
-        FloatLit!();
-        ByteLit!();
-        IntegerLit!();
-        StringLit!();
         CStringLit!();
         Literal!();
+        ByteLit!();
+        FloatLit!();
+        StringLit!();
+        IntegerLit!();
+        ByteStringLit!();
+        BoolLit!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! TokenKind {
     };
 }
 
-TokenKind!()
+TokenKind!();

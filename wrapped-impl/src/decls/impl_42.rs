@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IdentUnraw!();
         FmtArguments!();
-        Trait!();
+        IdentUnraw!();
         MemberUnraw!();
-        Field!();
         ContainerKind!();
         Display!();
+        Trait!();
+        Field!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

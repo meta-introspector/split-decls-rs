@@ -4,4 +4,4 @@ macro_rules! NegativeBoundWithParentheticalNotation {
     };
 }
 
-NegativeBoundWithParentheticalNotation!()
+NegativeBoundWithParentheticalNotation!();

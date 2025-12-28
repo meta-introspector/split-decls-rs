@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        PrivateIter!();
-        IntoPairs!();
         IterMut!();
+        Pairs!();
+        End!();
+        NoDrop!();
         Iter!();
-        ParseStream!();
+        Result!();
+        IntoPairs!();
+        PrivateIter!();
+        Pair!();
+        Parse!();
         Punctuated!();
         PairsMut!();
-        End!();
-        Parse!();
-        Result!();
-        Pairs!();
-        NoDrop!();
-        Pair!();
         PrivateIterMut!();
+        ParseStream!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_601 {
     };
 }
 
-impl_601!()
+impl_601!();

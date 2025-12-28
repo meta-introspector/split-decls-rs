@@ -11,4 +11,4 @@ macro_rules! source_edit_from_name {
     };
 }
 
-source_edit_from_name!()
+source_edit_from_name!();

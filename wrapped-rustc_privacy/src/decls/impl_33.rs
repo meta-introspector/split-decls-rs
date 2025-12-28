@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FieldIsPrivate!();
         NamePrivacyVisitor!();
+        FieldIsPrivate!();
         FieldIsPrivateLabel!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

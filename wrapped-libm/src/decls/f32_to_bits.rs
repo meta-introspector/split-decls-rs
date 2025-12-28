@@ -4,4 +4,4 @@ macro_rules! f32_to_bits {
     };
 }
 
-f32_to_bits!()
+f32_to_bits!();

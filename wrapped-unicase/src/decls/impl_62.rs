@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Unicode!();
         UniCase!();
-        Ascii!();
         Encoding!();
+        Ascii!();
+        Unicode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

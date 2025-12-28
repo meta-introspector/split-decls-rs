@@ -13,4 +13,4 @@ macro_rules! on_all_inactive_variants {
     };
 }
 
-on_all_inactive_variants!()
+on_all_inactive_variants!();

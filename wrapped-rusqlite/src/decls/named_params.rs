@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         Connection!();
         ToSql!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! named_params {
     };
 }
 
-named_params!()
+named_params!();

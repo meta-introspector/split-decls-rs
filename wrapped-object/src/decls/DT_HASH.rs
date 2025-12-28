@@ -4,4 +4,4 @@ macro_rules! DT_HASH {
     };
 }
 
-DT_HASH!()
+DT_HASH!();

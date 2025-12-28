@@ -4,4 +4,4 @@ macro_rules! ascii_escapes {
     };
 }
 
-ascii_escapes!()
+ascii_escapes!();

@@ -11,4 +11,4 @@ macro_rules! needs_gdb_debug_scripts_section {
     };
 }
 
-needs_gdb_debug_scripts_section!()
+needs_gdb_debug_scripts_section!();

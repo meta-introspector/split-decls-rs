@@ -4,4 +4,4 @@ macro_rules! LC_FVMFILE {
     };
 }
 
-LC_FVMFILE!()
+LC_FVMFILE!();

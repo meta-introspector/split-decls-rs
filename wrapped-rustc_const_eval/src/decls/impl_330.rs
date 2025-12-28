@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        ImmTy!();
+        Machine!();
+        InlineAsm!();
+        InterpCx!();
         PlaceTy!();
         Place!();
         FnArg!();
-        InlineAsm!();
-        Immediate!();
-        ImmTy!();
-        Operand!();
-        InterpCx!();
-        Machine!();
-        FnVal!();
         EvaluatedCalleeAndArgs!();
+        Immediate!();
+        Operand!();
+        FnVal!();
         MemPlaceMeta!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! impl_330 {
     };
 }
 
-impl_330!()
+impl_330!();

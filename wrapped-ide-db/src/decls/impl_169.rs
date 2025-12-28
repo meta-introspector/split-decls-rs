@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        FileReferenceNode!();
-        FindUsages!();
         UsageSearchResult!();
-        RootDatabase!();
-        FileRange!();
-        NameClass!();
         Definition!();
-        FileReference!();
+        RootDatabase!();
+        FileReferenceNode!();
+        FileRange!();
         SearchScope!();
+        FindUsages!();
+        FileReference!();
+        NameClass!();
         NameRefClass!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! impl_169 {
     };
 }
 
-impl_169!()
+impl_169!();

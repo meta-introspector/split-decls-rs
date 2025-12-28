@@ -4,4 +4,4 @@ macro_rules! zfree_c {
     };
 }
 
-zfree_c!()
+zfree_c!();

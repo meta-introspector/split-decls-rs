@@ -11,4 +11,4 @@ macro_rules! is_any_digit {
     };
 }
 
-is_any_digit!()
+is_any_digit!();

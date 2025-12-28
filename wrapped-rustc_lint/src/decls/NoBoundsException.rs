@@ -4,4 +4,4 @@ macro_rules! NoBoundsException {
     };
 }
 
-NoBoundsException!()
+NoBoundsException!();

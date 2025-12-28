@@ -4,4 +4,4 @@ macro_rules! compare_impl_method {
     };
 }
 
-compare_impl_method!()
+compare_impl_method!();

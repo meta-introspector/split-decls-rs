@@ -4,4 +4,4 @@ macro_rules! MaxReached {
     };
 }
 
-MaxReached!()
+MaxReached!();

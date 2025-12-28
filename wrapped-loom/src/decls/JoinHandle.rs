@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Notify!();
-        Arc!();
         Mutex!();
+        Notify!();
         Thread!();
+        Arc!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! JoinHandle {
     };
 }
 
-JoinHandle!()
+JoinHandle!();

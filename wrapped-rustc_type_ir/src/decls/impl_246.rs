@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IterInstantiatedCopied!();
-        Interner!();
         TypeFoldable!();
         EarlyBinder!();
+        IterInstantiatedCopied!();
+        Interner!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

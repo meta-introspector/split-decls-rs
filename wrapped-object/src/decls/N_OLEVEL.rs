@@ -4,4 +4,4 @@ macro_rules! N_OLEVEL {
     };
 }
 
-N_OLEVEL!()
+N_OLEVEL!();

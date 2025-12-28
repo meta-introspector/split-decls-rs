@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DebugEventReceiver!();
-        DebugErrorSink!();
         ErrorSink!();
         EventReceiver!();
+        DebugEventReceiver!();
         Token!();
+        DebugErrorSink!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_value {
     };
 }
 
-parse_value!()
+parse_value!();

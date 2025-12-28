@@ -4,4 +4,4 @@ macro_rules! DT_GNU_PRELINKED {
     };
 }
 
-DT_GNU_PRELINKED!()
+DT_GNU_PRELINKED!();

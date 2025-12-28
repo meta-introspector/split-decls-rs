@@ -11,4 +11,4 @@ macro_rules! verbatim_args {
     };
 }
 
-verbatim_args!()
+verbatim_args!();

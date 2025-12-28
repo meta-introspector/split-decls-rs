@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SERVICE_STATUS_HANDLE!();
         PCWSTR!();
+        SERVICE_STATUS_HANDLE!();
         LPHANDLER_FUNCTION_EX!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_0 {
     };
 }
 
-macro_0!()
+macro_0!();

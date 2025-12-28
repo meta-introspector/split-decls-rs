@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SourceMapInputs!();
-        SourceMap!();
+        HygieneData!();
         Interner!();
         SessionGlobals!();
         Edition!();
         SpanInterner!();
-        HygieneData!();
+        SourceMap!();
+        SourceMapInputs!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_238 {
     };
 }
 
-impl_238!()
+impl_238!();

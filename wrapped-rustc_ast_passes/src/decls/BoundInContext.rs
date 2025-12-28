@@ -4,4 +4,4 @@ macro_rules! BoundInContext {
     };
 }
 
-BoundInContext!()
+BoundInContext!();

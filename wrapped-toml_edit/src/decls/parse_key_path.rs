@@ -12,4 +12,4 @@ macro_rules! parse_key_path {
     };
 }
 
-parse_key_path!()
+parse_key_path!();

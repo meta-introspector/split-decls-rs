@@ -4,4 +4,4 @@ macro_rules! track_diagnostic {
     };
 }
 
-track_diagnostic!()
+track_diagnostic!();

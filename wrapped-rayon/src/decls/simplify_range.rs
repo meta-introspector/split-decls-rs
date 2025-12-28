@@ -4,4 +4,4 @@ macro_rules! simplify_range {
     };
 }
 
-simplify_range!()
+simplify_range!();

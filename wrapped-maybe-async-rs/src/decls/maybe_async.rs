@@ -11,4 +11,4 @@ macro_rules! maybe_async {
     };
 }
 
-maybe_async!()
+maybe_async!();

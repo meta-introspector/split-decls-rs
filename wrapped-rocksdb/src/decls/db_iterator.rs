@@ -4,4 +4,4 @@ macro_rules! db_iterator {
     };
 }
 
-db_iterator!()
+db_iterator!();

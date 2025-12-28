@@ -4,4 +4,4 @@ macro_rules! hyper_body {
     };
 }
 
-hyper_body!()
+hyper_body!();

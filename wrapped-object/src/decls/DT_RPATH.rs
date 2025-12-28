@@ -4,4 +4,4 @@ macro_rules! DT_RPATH {
     };
 }
 
-DT_RPATH!()
+DT_RPATH!();

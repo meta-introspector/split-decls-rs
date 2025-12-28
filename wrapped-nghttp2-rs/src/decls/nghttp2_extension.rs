@@ -4,4 +4,4 @@ macro_rules! nghttp2_extension {
     };
 }
 
-nghttp2_extension!()
+nghttp2_extension!();

@@ -4,4 +4,4 @@ macro_rules! TAG_SIZE {
     };
 }
 
-TAG_SIZE!()
+TAG_SIZE!();

@@ -4,4 +4,4 @@ macro_rules! StartNotFound {
     };
 }
 
-StartNotFound!()
+StartNotFound!();

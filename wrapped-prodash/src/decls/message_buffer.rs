@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         MessageCopyState!();
-        MessageLevel!();
-        Message!();
         MessageRingBuffer!();
+        Message!();
+        MessageLevel!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! message_buffer {
     };
 }
 
-message_buffer!()
+message_buffer!();

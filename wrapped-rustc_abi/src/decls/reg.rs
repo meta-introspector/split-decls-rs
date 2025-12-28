@@ -4,4 +4,4 @@ macro_rules! reg {
     };
 }
 
-reg!()
+reg!();

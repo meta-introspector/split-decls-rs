@@ -11,4 +11,4 @@ macro_rules! input_ids {
     };
 }
 
-input_ids!()
+input_ids!();

@@ -4,4 +4,4 @@ macro_rules! value_to_digit {
     };
 }
 
-value_to_digit!()
+value_to_digit!();

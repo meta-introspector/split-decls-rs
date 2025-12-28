@@ -4,4 +4,4 @@ macro_rules! unord {
     };
 }
 
-unord!()
+unord!();

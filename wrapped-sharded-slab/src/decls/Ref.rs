@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Guard!();
-        Config!();
         DefaultConfig!();
         Clear!();
+        Config!();
         Shard!();
+        Guard!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Ref {
     };
 }
 
-Ref!()
+Ref!();

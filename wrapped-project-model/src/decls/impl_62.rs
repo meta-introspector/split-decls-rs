@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        TargetData!();
-        PackageData!();
-        Target!();
-        ManifestPath!();
-        TargetKind!();
         PackageDependency!();
         CargoWorkspace!();
         DepKind!();
+        TargetKind!();
+        ManifestPath!();
         Package!();
+        TargetData!();
+        PackageData!();
+        Target!();
         PackageMetadata!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

@@ -4,4 +4,4 @@ macro_rules! UnlockNotification {
     };
 }
 
-UnlockNotification!()
+UnlockNotification!();

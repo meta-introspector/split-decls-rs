@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        SanitizerKcfiArityRequiresLLVM2100!();
         MismatchedDataLayout!();
         RelocModel!();
         ModuleFlagMergeBehavior!();
-        SanitizerKcfiArityRequiresLLVM2100!();
         SimpleCx!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! create_module {
     };
 }
 
-create_module!()
+create_module!();

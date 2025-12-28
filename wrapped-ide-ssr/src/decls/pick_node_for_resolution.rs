@@ -4,4 +4,4 @@ macro_rules! pick_node_for_resolution {
     };
 }
 
-pick_node_for_resolution!()
+pick_node_for_resolution!();

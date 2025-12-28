@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EnabledLibFeature!();
         EnabledLangFeature!();
+        EnabledLibFeature!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Features {
     };
 }
 
-Features!()
+Features!();

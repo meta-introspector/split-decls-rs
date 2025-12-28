@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Three!();
         Iter!();
+        Three!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ThreeIter {
     };
 }
 
-ThreeIter!()
+ThreeIter!();

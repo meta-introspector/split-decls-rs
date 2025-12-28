@@ -4,4 +4,4 @@ macro_rules! arg_attrs_for_rust_scalar {
     };
 }
 
-arg_attrs_for_rust_scalar!()
+arg_attrs_for_rust_scalar!();

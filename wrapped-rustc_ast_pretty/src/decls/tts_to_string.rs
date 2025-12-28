@@ -11,4 +11,4 @@ macro_rules! tts_to_string {
     };
 }
 
-tts_to_string!()
+tts_to_string!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Input!();
         Prefilter!();
+        NFA!();
         HybridEngine!();
         HybridCache!();
         Hybrid!();
         RegexInfo!();
-        NFA!();
-        Input!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_416 {
     };
 }
 
-impl_416!()
+impl_416!();

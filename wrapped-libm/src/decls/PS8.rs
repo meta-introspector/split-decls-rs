@@ -4,4 +4,4 @@ macro_rules! PS8 {
     };
 }
 
-PS8!()
+PS8!();

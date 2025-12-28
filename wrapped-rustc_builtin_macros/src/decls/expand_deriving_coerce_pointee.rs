@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RequireOnePointee!();
-        RequireOneGeneric!();
         TooManyPointees!();
-        DetectNonGenericPointeeAttr!();
+        RequireOneGeneric!();
         TypeSubstitution!();
         RequireOneField!();
+        RequireOnePointee!();
         RequiresMaybeSized!();
+        DetectNonGenericPointeeAttr!();
         RequireTransparent!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! expand_deriving_coerce_pointee {
     };
 }
 
-expand_deriving_coerce_pointee!()
+expand_deriving_coerce_pointee!();

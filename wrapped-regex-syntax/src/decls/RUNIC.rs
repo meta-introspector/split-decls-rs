@@ -4,4 +4,4 @@ macro_rules! RUNIC {
     };
 }
 
-RUNIC!()
+RUNIC!();

@@ -11,4 +11,4 @@ macro_rules! integer_impl {
     };
 }
 
-integer_impl!()
+integer_impl!();

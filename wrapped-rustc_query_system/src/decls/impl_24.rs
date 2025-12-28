@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         FingerprintStyle!();
+        DepContext!();
+        StableHashingContext!();
         DepNode!();
         DepNodeParams!();
-        StableHashingContext!();
-        DepContext!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

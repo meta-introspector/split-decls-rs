@@ -4,4 +4,4 @@ macro_rules! expand_include_bytes {
     };
 }
 
-expand_include_bytes!()
+expand_include_bytes!();

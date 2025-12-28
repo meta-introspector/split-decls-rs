@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IResult!();
-        Needed!();
         ErrorKind!();
-        Parser!();
         Permutation!();
+        Parser!();
+        Needed!();
+        IResult!();
         ParseError!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! permutation {
     };
 }
 
-permutation!()
+permutation!();

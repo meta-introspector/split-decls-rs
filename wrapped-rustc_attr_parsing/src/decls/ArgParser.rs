@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NameValueParser!();
         MetaItemListParser!();
+        NameValueParser!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ArgParser {
     };
 }
 
-ArgParser!()
+ArgParser!();

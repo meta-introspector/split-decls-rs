@@ -4,4 +4,4 @@ macro_rules! is_version_compatible {
     };
 }
 
-is_version_compatible!()
+is_version_compatible!();

@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        AuxSymbolWeak!();
-        Result!();
-        ImageAuxSymbolWeak!();
-        StringTable!();
-        WritableBuffer!();
-        ImageRelocation!();
         ImageSymbol!();
-        Symbol!();
-        StringId!();
-        Relocation!();
-        Writer!();
-        FileHeader!();
-        U32!();
+        AuxSymbolWeak!();
+        StringTable!();
+        ImageRelocation!();
         ImageSectionHeader!();
-        U16!();
-        Name!();
-        Error!();
-        U32Bytes!();
-        U16Bytes!();
+        WritableBuffer!();
+        Result!();
+        Symbol!();
+        Writer!();
         ImageFileHeader!();
         AuxSymbolSection!();
         SectionHeader!();
+        U16!();
+        Relocation!();
+        Error!();
+        U32!();
+        U32Bytes!();
+        U16Bytes!();
+        FileHeader!();
+        ImageAuxSymbolWeak!();
         ImageAuxSymbolSection!();
+        Name!();
+        StringId!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_944 {
     };
 }
 
-impl_944!()
+impl_944!();

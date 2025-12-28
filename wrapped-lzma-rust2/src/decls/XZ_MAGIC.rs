@@ -4,4 +4,4 @@ macro_rules! XZ_MAGIC {
     };
 }
 
-XZ_MAGIC!()
+XZ_MAGIC!();

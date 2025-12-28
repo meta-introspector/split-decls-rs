@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PreUpdateCase!();
         PreUpdateNewValueAccessor!();
-        Result!();
-        InnerConnection!();
+        PreUpdateCase!();
         Action!();
         PreUpdateOldValueAccessor!();
+        Result!();
+        InnerConnection!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_122 {
     };
 }
 
-impl_122!()
+impl_122!();

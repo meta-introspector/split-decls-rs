@@ -4,4 +4,4 @@ macro_rules! not_outlives_predicate {
     };
 }
 
-not_outlives_predicate!()
+not_outlives_predicate!();

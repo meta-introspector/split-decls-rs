@@ -4,4 +4,4 @@ macro_rules! byte_order {
     };
 }
 
-byte_order!()
+byte_order!();

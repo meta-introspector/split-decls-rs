@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Symbol!();
         XcoffSymbol!();
+        FileHeader!();
         ReadRef!();
         XcoffFile!();
-        Symbol!();
-        FileHeader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_823 {
     };
 }
 
-impl_823!()
+impl_823!();

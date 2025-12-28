@@ -4,4 +4,4 @@ macro_rules! SERVICE_ACCEPT_STOP {
     };
 }
 
-SERVICE_ACCEPT_STOP!()
+SERVICE_ACCEPT_STOP!();

@@ -11,4 +11,4 @@ macro_rules! post_mingw_self_contained {
     };
 }
 
-post_mingw_self_contained!()
+post_mingw_self_contained!();

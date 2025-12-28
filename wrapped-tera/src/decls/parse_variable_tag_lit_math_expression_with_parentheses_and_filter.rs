@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ExprVal!();
-        FunctionCall!();
         MathExpr!();
-        WS!();
         Node!();
+        FunctionCall!();
+        WS!();
         MathOperator!();
         Expr!();
     };
@@ -17,4 +17,4 @@ macro_rules! parse_variable_tag_lit_math_expression_with_parentheses_and_filter 
     };
 }
 
-parse_variable_tag_lit_math_expression_with_parentheses_and_filter!()
+parse_variable_tag_lit_math_expression_with_parentheses_and_filter!();

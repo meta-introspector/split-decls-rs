@@ -4,4 +4,4 @@ macro_rules! symbolic_name_normalize {
     };
 }
 
-symbolic_name_normalize!()
+symbolic_name_normalize!();

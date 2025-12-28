@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Statement!();
         Params!();
         BindIndex!();
-        ToSql!();
         Result!();
+        ToSql!();
+        Statement!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_168 {
     };
 }
 
-impl_168!()
+impl_168!();

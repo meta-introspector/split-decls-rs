@@ -55,4 +55,4 @@ macro_rules! replace_autoref_autoderef_capture {
     };
 }
 
-replace_autoref_autoderef_capture!()
+replace_autoref_autoderef_capture!();

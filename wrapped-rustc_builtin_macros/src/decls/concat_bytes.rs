@@ -4,4 +4,4 @@ macro_rules! concat_bytes {
     };
 }
 
-concat_bytes!()
+concat_bytes!();

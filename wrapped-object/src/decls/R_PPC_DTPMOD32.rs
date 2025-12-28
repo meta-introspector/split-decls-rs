@@ -4,4 +4,4 @@ macro_rules! R_PPC_DTPMOD32 {
     };
 }
 
-R_PPC_DTPMOD32!()
+R_PPC_DTPMOD32!();

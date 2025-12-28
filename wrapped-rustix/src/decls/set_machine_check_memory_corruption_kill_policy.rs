@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MachineCheckMemoryCorruptionKillPolicy!();
         Result!();
+        MachineCheckMemoryCorruptionKillPolicy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_machine_check_memory_corruption_kill_policy {
     };
 }
 
-set_machine_check_memory_corruption_kill_policy!()
+set_machine_check_memory_corruption_kill_policy!();

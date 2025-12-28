@@ -4,4 +4,4 @@ macro_rules! define_named_walk {
     };
 }
 
-define_named_walk!()
+define_named_walk!();

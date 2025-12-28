@@ -4,4 +4,4 @@ macro_rules! RHF_NO_UNRES_UNDEF {
     };
 }
 
-RHF_NO_UNRES_UNDEF!()
+RHF_NO_UNRES_UNDEF!();

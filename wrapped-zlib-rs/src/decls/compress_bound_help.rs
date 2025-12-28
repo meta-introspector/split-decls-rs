@@ -4,4 +4,4 @@ macro_rules! compress_bound_help {
     };
 }
 
-compress_bound_help!()
+compress_bound_help!();

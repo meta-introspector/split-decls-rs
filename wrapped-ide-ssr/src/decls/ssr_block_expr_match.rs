@@ -4,4 +4,4 @@ macro_rules! ssr_block_expr_match {
     };
 }
 
-ssr_block_expr_match!()
+ssr_block_expr_match!();

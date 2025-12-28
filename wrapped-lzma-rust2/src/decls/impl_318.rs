@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Write!();
         ByteWriter!();
         Result!();
-        Write!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_318 {
     };
 }
 
-impl_318!()
+impl_318!();

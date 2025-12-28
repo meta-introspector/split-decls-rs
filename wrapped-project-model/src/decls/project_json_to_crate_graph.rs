@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         ProjectJson!();
         Sysroot!();
-        CrateArrayIdx!();
         FileLoader!();
-        Crate!();
         CfgOverrides!();
+        Crate!();
+        CrateArrayIdx!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! project_json_to_crate_graph {
     };
 }
 
-project_json_to_crate_graph!()
+project_json_to_crate_graph!();

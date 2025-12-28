@@ -4,4 +4,4 @@ macro_rules! ArchiveEntry {
     };
 }
 
-ArchiveEntry!()
+ArchiveEntry!();

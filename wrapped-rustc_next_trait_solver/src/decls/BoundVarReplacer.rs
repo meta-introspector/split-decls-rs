@@ -4,4 +4,4 @@ macro_rules! BoundVarReplacer {
     };
 }
 
-BoundVarReplacer!()
+BoundVarReplacer!();

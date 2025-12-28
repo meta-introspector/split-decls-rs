@@ -11,4 +11,4 @@ macro_rules! nearest_error_is_accurate {
     };
 }
 
-nearest_error_is_accurate!()
+nearest_error_is_accurate!();

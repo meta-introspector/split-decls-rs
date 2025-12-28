@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         AcceptContext!();
-        Stage!();
         AttributeOrder!();
+        Stage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! OnDuplicate {
     };
 }
 
-OnDuplicate!()
+OnDuplicate!();

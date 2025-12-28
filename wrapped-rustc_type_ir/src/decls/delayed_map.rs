@@ -4,4 +4,4 @@ macro_rules! delayed_map {
     };
 }
 
-delayed_map!()
+delayed_map!();

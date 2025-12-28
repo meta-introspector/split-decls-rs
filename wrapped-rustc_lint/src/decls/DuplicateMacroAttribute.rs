@@ -4,4 +4,4 @@ macro_rules! DuplicateMacroAttribute {
     };
 }
 
-DuplicateMacroAttribute!()
+DuplicateMacroAttribute!();

@@ -4,4 +4,4 @@ macro_rules! MultipleDefaultAttrsSugg {
     };
 }
 
-MultipleDefaultAttrsSugg!()
+MultipleDefaultAttrsSugg!();

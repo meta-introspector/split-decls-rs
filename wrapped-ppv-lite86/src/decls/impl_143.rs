@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Machine!();
-        BSwap!();
-        Swap64!();
-        RotateEachWord64!();
         RotateEachWord32!();
+        RotateEachWord64!();
+        BSwap!();
+        Machine!();
+        Swap64!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_143 {
     };
 }
 
-impl_143!()
+impl_143!();

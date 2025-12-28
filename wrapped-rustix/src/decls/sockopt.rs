@@ -4,4 +4,4 @@ macro_rules! sockopt {
     };
 }
 
-sockopt!()
+sockopt!();

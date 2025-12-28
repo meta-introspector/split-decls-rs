@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_TLS_LDM {
     };
 }
 
-R_ALPHA_TLS_LDM!()
+R_ALPHA_TLS_LDM!();

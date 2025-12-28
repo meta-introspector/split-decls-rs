@@ -4,4 +4,4 @@ macro_rules! rustc_tools {
     };
 }
 
-rustc_tools!()
+rustc_tools!();

@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        GenericBounds!();
-        Impl!();
-        Pat!();
-        FnPtrTy!();
         Lifetime!();
-        Walkable!();
-        BoundKind!();
-        Ty!();
-        TyPat!();
         QSelf!();
-        TraitObjectSyntax!();
-        Path!();
-        UnsafeBinderTy!();
-        MutTy!();
-        MacCall!();
-        LifetimeCtxt!();
-        AnonConst!();
         Type!();
+        LifetimeCtxt!();
+        GenericBounds!();
+        AnonConst!();
+        Path!();
+        Pat!();
         Trait!();
+        TyPat!();
+        BoundKind!();
+        MacCall!();
+        Ty!();
+        TraitObjectSyntax!();
+        Walkable!();
+        MutTy!();
+        FnPtrTy!();
+        Impl!();
+        UnsafeBinderTy!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! TyKind {
     };
 }
 
-TyKind!()
+TyKind!();

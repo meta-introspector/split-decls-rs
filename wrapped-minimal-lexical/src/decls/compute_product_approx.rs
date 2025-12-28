@@ -4,4 +4,4 @@ macro_rules! compute_product_approx {
     };
 }
 
-compute_product_approx!()
+compute_product_approx!();

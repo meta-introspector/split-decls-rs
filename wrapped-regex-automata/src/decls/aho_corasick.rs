@@ -4,4 +4,4 @@ macro_rules! aho_corasick {
     };
 }
 
-aho_corasick!()
+aho_corasick!();

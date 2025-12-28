@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SetGlobalDefaultError!();
-        Event!();
-        Kind!();
-        Dispatch!();
         Subscriber!();
+        Dispatch!();
+        Kind!();
+        Event!();
+        SetGlobalDefaultError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! set_global_default {
     };
 }
 
-set_global_default!()
+set_global_default!();

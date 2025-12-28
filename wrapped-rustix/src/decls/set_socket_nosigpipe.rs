@@ -11,4 +11,4 @@ macro_rules! set_socket_nosigpipe {
     };
 }
 
-set_socket_nosigpipe!()
+set_socket_nosigpipe!();

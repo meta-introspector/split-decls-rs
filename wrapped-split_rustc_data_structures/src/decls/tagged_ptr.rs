@@ -4,4 +4,4 @@ macro_rules! tagged_ptr {
     };
 }
 
-tagged_ptr!()
+tagged_ptr!();

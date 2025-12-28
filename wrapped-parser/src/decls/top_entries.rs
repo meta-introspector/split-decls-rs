@@ -4,4 +4,4 @@ macro_rules! top_entries {
     };
 }
 
-top_entries!()
+top_entries!();

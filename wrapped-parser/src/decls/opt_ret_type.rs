@@ -11,4 +11,4 @@ macro_rules! opt_ret_type {
     };
 }
 
-opt_ret_type!()
+opt_ret_type!();

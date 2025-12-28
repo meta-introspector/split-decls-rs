@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericArg!();
         Lifetime!();
+        GenericArg!();
         Const!();
         Type!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        FloatConvert!();
-        Category!();
-        Round!();
-        IeeeDefaultExceptionHandling!();
         X87DoubleExtendedS!();
         IeeeFloat!();
+        FloatConvert!();
+        Loss!();
+        Category!();
+        Round!();
+        StatusAnd!();
         Semantics!();
         ExpInt!();
-        StatusAnd!();
-        Loss!();
+        IeeeDefaultExceptionHandling!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

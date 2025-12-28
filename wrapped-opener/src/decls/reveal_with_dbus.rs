@@ -11,4 +11,4 @@ macro_rules! reveal_with_dbus {
     };
 }
 
-reveal_with_dbus!()
+reveal_with_dbus!();

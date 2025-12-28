@@ -11,4 +11,4 @@ macro_rules! lint_body {
     };
 }
 
-lint_body!()
+lint_body!();

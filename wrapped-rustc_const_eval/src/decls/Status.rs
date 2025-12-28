@@ -4,4 +4,4 @@ macro_rules! Status {
     };
 }
 
-Status!()
+Status!();

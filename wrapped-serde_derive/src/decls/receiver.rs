@@ -4,4 +4,4 @@ macro_rules! receiver {
     };
 }
 
-receiver!()
+receiver!();

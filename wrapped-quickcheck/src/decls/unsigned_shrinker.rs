@@ -4,4 +4,4 @@ macro_rules! unsigned_shrinker {
     };
 }
 
-unsigned_shrinker!()
+unsigned_shrinker!();

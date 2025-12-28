@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Edition!();
+        SyntaxContext!();
         ExpnKind!();
-        Span!();
-        DefId!();
+        Edition!();
         ExpnId!();
         Symbol!();
-        SyntaxContext!();
+        Span!();
+        DefId!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! ExpnData {
     };
 }
 
-ExpnData!()
+ExpnData!();

@@ -4,4 +4,4 @@ macro_rules! NonLocalDefinitions {
     };
 }
 
-NonLocalDefinitions!()
+NonLocalDefinitions!();

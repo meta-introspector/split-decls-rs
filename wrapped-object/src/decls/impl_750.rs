@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WasmSegment!();
-        Result!();
-        SegmentFlags!();
         ObjectSegment!();
+        WasmSegment!();
+        SegmentFlags!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_750 {
     };
 }
 
-impl_750!()
+impl_750!();

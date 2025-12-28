@@ -4,4 +4,4 @@ macro_rules! context_optimize {
     };
 }
 
-context_optimize!()
+context_optimize!();

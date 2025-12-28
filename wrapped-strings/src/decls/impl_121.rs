@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HSTRING!();
         PCWSTR!();
-        Decode!();
         PWSTR!();
+        HSTRING!();
+        Decode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_121 {
     };
 }
 
-impl_121!()
+impl_121!();

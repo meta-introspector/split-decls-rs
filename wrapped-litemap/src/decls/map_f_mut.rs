@@ -4,4 +4,4 @@ macro_rules! map_f_mut {
     };
 }
 
-map_f_mut!()
+map_f_mut!();

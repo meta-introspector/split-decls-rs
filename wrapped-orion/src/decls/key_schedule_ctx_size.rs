@@ -4,4 +4,4 @@ macro_rules! key_schedule_ctx_size {
     };
 }
 
-key_schedule_ctx_size!()
+key_schedule_ctx_size!();

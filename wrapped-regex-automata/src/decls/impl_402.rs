@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PikeVM!();
         PikeVMCache!();
         Cache!();
+        PikeVM!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_402 {
     };
 }
 
-impl_402!()
+impl_402!();

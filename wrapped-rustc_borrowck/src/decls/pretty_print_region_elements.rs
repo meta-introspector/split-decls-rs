@@ -11,4 +11,4 @@ macro_rules! pretty_print_region_elements {
     };
 }
 
-pretty_print_region_elements!()
+pretty_print_region_elements!();

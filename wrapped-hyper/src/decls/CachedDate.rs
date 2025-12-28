@@ -4,4 +4,4 @@ macro_rules! CachedDate {
     };
 }
 
-CachedDate!()
+CachedDate!();

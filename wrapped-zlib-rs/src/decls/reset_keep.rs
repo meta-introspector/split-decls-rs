@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Mode!();
-        Table!();
-        ReturnCode!();
         Flags!();
         InflateStream!();
+        Table!();
+        ReturnCode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! reset_keep {
     };
 }
 
-reset_keep!()
+reset_keep!();

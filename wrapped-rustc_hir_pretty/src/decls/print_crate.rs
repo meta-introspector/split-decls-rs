@@ -12,4 +12,4 @@ macro_rules! print_crate {
     };
 }
 
-print_crate!()
+print_crate!();

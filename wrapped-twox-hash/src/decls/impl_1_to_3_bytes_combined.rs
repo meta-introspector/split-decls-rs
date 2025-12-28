@@ -4,4 +4,4 @@ macro_rules! impl_1_to_3_bytes_combined {
     };
 }
 
-impl_1_to_3_bytes_combined!()
+impl_1_to_3_bytes_combined!();

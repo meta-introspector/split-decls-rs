@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UncompressedPublicKey!();
         AsymmetricPublicKey!();
+        UncompressedPublicKey!();
         V3!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! test_regression {
     };
 }
 
-test_regression!()
+test_regression!();

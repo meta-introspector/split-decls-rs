@@ -4,4 +4,4 @@ macro_rules! ET_REL {
     };
 }
 
-ET_REL!()
+ET_REL!();

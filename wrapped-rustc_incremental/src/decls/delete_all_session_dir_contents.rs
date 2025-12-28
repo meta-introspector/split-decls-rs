@@ -11,4 +11,4 @@ macro_rules! delete_all_session_dir_contents {
     };
 }
 
-delete_all_session_dir_contents!()
+delete_all_session_dir_contents!();

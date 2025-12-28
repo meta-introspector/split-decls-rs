@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DyldCacheRelocationIteratorVersion!();
-        ReadRef!();
         Endian!();
+        ReadRef!();
         Endianness!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! DyldCacheRelocationIterator {
     };
 }
 
-DyldCacheRelocationIterator!()
+DyldCacheRelocationIterator!();

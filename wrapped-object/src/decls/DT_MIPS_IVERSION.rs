@@ -11,4 +11,4 @@ macro_rules! DT_MIPS_IVERSION {
     };
 }
 
-DT_MIPS_IVERSION!()
+DT_MIPS_IVERSION!();

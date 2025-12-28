@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Node!();
         Successors!();
-        DirectedGraph!();
-        Predecessors!();
         DepthFirstSearch!();
+        Node!();
+        Predecessors!();
+        DirectedGraph!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! depth_first_search_as_undirected {
     };
 }
 
-depth_first_search_as_undirected!()
+depth_first_search_as_undirected!();

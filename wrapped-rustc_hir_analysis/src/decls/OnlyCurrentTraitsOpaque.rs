@@ -4,4 +4,4 @@ macro_rules! OnlyCurrentTraitsOpaque {
     };
 }
 
-OnlyCurrentTraitsOpaque!()
+OnlyCurrentTraitsOpaque!();

@@ -4,4 +4,4 @@ macro_rules! SeekTarget {
     };
 }
 
-SeekTarget!()
+SeekTarget!();

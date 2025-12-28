@@ -4,4 +4,4 @@ macro_rules! EM_CR {
     };
 }
 
-EM_CR!()
+EM_CR!();

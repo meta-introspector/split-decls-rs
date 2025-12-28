@@ -4,4 +4,4 @@ macro_rules! CollectionMode {
     };
 }
 
-CollectionMode!()
+CollectionMode!();

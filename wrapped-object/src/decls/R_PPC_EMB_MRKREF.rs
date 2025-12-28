@@ -4,4 +4,4 @@ macro_rules! R_PPC_EMB_MRKREF {
     };
 }
 
-R_PPC_EMB_MRKREF!()
+R_PPC_EMB_MRKREF!();

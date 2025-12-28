@@ -4,4 +4,4 @@ macro_rules! is_closure_like {
     };
 }
 
-is_closure_like!()
+is_closure_like!();

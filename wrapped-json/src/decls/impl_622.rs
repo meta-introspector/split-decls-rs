@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Result!();
-        Error!();
-        Deserializer!();
-        ReferenceFromString!();
         Value!();
+        ReferenceFromString!();
+        Error!();
         RawValue!();
+        Deserializer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_622 {
     };
 }
 
-impl_622!()
+impl_622!();

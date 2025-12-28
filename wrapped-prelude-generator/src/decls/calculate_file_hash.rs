@@ -4,4 +4,4 @@ macro_rules! calculate_file_hash {
     };
 }
 
-calculate_file_hash!()
+calculate_file_hash!();

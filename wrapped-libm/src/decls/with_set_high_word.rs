@@ -4,4 +4,4 @@ macro_rules! with_set_high_word {
     };
 }
 
-with_set_high_word!()
+with_set_high_word!();

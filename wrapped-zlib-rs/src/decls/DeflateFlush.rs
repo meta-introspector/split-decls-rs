@@ -4,4 +4,4 @@ macro_rules! DeflateFlush {
     };
 }
 
-DeflateFlush!()
+DeflateFlush!();

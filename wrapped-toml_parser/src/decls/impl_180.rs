@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Event!();
-        EventReceiver!();
-        Span!();
-        Encoding!();
         EventKind!();
+        Event!();
+        Span!();
+        EventReceiver!();
         ErrorSink!();
+        Encoding!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_180 {
     };
 }
 
-impl_180!()
+impl_180!();

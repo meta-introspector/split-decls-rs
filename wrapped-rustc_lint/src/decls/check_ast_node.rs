@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EarlyCheckNode!();
-        EarlyContext!();
-        LintStore!();
         RuntimeCombinedEarlyLintPass!();
+        EarlyCheckNode!();
+        LintStore!();
+        EarlyContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! check_ast_node {
     };
 }
 
-check_ast_node!()
+check_ast_node!();

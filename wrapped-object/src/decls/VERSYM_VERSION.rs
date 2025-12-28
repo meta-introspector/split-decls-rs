@@ -11,4 +11,4 @@ macro_rules! VERSYM_VERSION {
     };
 }
 
-VERSYM_VERSION!()
+VERSYM_VERSION!();

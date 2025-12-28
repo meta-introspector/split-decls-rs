@@ -4,4 +4,4 @@ macro_rules! HEXDIG {
     };
 }
 
-HEXDIG!()
+HEXDIG!();

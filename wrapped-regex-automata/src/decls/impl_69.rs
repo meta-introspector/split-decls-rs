@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        PatternEpsilons!();
-        Remapper!();
-        DFA!();
-        Epsilons!();
-        SparseSet!();
-        PatternID!();
-        ByteClasses!();
-        State!();
-        Slots!();
-        InternalBuilder!();
-        Transition!();
         NFA!();
+        Look!();
+        Epsilons!();
+        BuildError!();
+        PatternEpsilons!();
+        DFA!();
+        SparseSet!();
         Match!();
+        Transition!();
+        State!();
+        ByteClasses!();
+        InternalBuilder!();
+        PatternID!();
+        Slots!();
+        Remapper!();
         StateID!();
         Config!();
-        Look!();
-        BuildError!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_69 {
     };
 }
 
-impl_69!()
+impl_69!();

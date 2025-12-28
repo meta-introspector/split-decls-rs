@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MaxReached!();
-        Maxes!();
         Annotations!();
+        Maxes!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_156 {
     };
 }
 
-impl_156!()
+impl_156!();

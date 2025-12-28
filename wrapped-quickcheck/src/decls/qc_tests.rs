@@ -4,4 +4,4 @@ macro_rules! qc_tests {
     };
 }
 
-qc_tests!()
+qc_tests!();

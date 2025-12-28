@@ -11,4 +11,4 @@ macro_rules! decode_gregorian_timestamp {
     };
 }
 
-decode_gregorian_timestamp!()
+decode_gregorian_timestamp!();

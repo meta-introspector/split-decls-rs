@@ -4,4 +4,4 @@ macro_rules! quick_check {
     };
 }
 
-quick_check!()
+quick_check!();

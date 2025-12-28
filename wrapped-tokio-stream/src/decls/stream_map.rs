@@ -4,4 +4,4 @@ macro_rules! stream_map {
     };
 }
 
-stream_map!()
+stream_map!();

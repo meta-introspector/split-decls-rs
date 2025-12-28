@@ -4,4 +4,4 @@ macro_rules! DiagImportance {
     };
 }
 
-DiagImportance!()
+DiagImportance!();

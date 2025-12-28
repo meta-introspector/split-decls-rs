@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Producer!();
+        Windows!();
         IntoIter!();
         WindowsProducer!();
-        Windows!();
-        Producer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1256 {
     };
 }
 
-impl_1256!()
+impl_1256!();

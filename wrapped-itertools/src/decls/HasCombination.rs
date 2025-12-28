@@ -4,4 +4,4 @@ macro_rules! HasCombination {
     };
 }
 
-HasCombination!()
+HasCombination!();

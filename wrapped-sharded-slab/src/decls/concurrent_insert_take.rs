@@ -11,4 +11,4 @@ macro_rules! concurrent_insert_take {
     };
 }
 
-concurrent_insert_take!()
+concurrent_insert_take!();

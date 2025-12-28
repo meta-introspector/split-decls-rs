@@ -4,4 +4,4 @@ macro_rules! R_MIPS_COPY {
     };
 }
 
-R_MIPS_COPY!()
+R_MIPS_COPY!();

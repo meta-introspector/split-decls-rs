@@ -4,4 +4,4 @@ macro_rules! SynInfoTrait {
     };
 }
 
-SynInfoTrait!()
+SynInfoTrait!();

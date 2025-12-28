@@ -4,4 +4,4 @@ macro_rules! canonicalize_exclude_paths {
     };
 }
 
-canonicalize_exclude_paths!()
+canonicalize_exclude_paths!();

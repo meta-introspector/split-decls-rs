@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PackageData!();
-        CargoWorkspace!();
         Package!();
+        CargoWorkspace!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

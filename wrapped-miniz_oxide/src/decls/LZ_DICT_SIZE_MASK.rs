@@ -4,4 +4,4 @@ macro_rules! LZ_DICT_SIZE_MASK {
     };
 }
 
-LZ_DICT_SIZE_MASK!()
+LZ_DICT_SIZE_MASK!();

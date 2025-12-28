@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        ValueVisitor!();
+        Machine!();
+        PlaceTy!();
         Memory!();
         InterpCx!();
-        ValueVisitor!();
-        PathElem!();
-        ValidityVisitor!();
-        PlaceTy!();
-        Machine!();
-        Immediate!();
         Coroutine!();
+        PathElem!();
+        Immediate!();
+        ValidityVisitor!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_355 {
     };
 }
 
-impl_355!()
+impl_355!();

@@ -4,4 +4,4 @@ macro_rules! free_alias {
     };
 }
 
-free_alias!()
+free_alias!();

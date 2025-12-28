@@ -4,4 +4,4 @@ macro_rules! inheritance {
     };
 }
 
-inheritance!()
+inheritance!();

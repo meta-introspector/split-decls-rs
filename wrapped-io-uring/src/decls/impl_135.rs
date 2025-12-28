@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        EntryMarker!();
         SubmissionQueue!();
         Inner!();
         Mmap!();
-        EntryMarker!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_135 {
     };
 }
 
-impl_135!()
+impl_135!();

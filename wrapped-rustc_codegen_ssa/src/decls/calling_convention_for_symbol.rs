@@ -4,4 +4,4 @@ macro_rules! calling_convention_for_symbol {
     };
 }
 
-calling_convention_for_symbol!()
+calling_convention_for_symbol!();

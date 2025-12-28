@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        Footer!();
         TrustedToken!();
         Error!();
         UntrustedToken!();
-        PublicToken!();
-        Claims!();
-        AsymmetricSecretKey!();
-        Footer!();
-        AsymmetricPublicKey!();
-        ClaimsValidationRules!();
         V4!();
+        PublicToken!();
+        AsymmetricPublicKey!();
         Public!();
+        AsymmetricSecretKey!();
+        Claims!();
+        ClaimsValidationRules!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! public {
     };
 }
 
-public!()
+public!();

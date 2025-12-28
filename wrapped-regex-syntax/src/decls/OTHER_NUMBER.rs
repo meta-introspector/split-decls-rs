@@ -4,4 +4,4 @@ macro_rules! OTHER_NUMBER {
     };
 }
 
-OTHER_NUMBER!()
+OTHER_NUMBER!();

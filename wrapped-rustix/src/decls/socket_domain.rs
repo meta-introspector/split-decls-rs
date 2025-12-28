@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AddressFamily!();
         Result!();
+        AddressFamily!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! socket_domain {
     };
 }
 
-socket_domain!()
+socket_domain!();

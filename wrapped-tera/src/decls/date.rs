@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Result!();
+        Error!();
         Filter!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! date {
     };
 }
 
-date!()
+date!();

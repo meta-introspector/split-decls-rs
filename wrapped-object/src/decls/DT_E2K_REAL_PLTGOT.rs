@@ -4,4 +4,4 @@ macro_rules! DT_E2K_REAL_PLTGOT {
     };
 }
 
-DT_E2K_REAL_PLTGOT!()
+DT_E2K_REAL_PLTGOT!();

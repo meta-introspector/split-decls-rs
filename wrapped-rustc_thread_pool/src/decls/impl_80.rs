@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Latch!();
+        SpinLatch!();
         Registry!();
         CoreLatch!();
-        SpinLatch!();
-        Latch!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_80 {
     };
 }
 
-impl_80!()
+impl_80!();

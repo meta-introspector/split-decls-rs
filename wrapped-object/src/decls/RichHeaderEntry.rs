@@ -4,4 +4,4 @@ macro_rules! RichHeaderEntry {
     };
 }
 
-RichHeaderEntry!()
+RichHeaderEntry!();

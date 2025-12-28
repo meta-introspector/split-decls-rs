@@ -4,4 +4,4 @@ macro_rules! archive_event_impl {
     };
 }
 
-archive_event_impl!()
+archive_event_impl!();

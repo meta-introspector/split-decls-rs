@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HardLinkFailed!();
         DeletePartial!();
         Ok!();
         CanonicalizePath!();
+        HardLinkFailed!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! prepare_session_directory {
     };
 }
 
-prepare_session_directory!()
+prepare_session_directory!();

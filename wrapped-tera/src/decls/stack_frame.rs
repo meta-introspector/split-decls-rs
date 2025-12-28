@@ -4,4 +4,4 @@ macro_rules! stack_frame {
     };
 }
 
-stack_frame!()
+stack_frame!();

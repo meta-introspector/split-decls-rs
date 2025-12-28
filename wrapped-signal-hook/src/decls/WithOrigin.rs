@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Origin!();
         WithRawSiginfo!();
+        Origin!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WithOrigin {
     };
 }
 
-WithOrigin!()
+WithOrigin!();

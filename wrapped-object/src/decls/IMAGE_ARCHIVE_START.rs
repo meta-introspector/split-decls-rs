@@ -4,4 +4,4 @@ macro_rules! IMAGE_ARCHIVE_START {
     };
 }
 
-IMAGE_ARCHIVE_START!()
+IMAGE_ARCHIVE_START!();

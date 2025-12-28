@@ -4,4 +4,4 @@ macro_rules! collect_item {
     };
 }
 
-collect_item!()
+collect_item!();

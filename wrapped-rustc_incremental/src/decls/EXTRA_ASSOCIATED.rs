@@ -4,4 +4,4 @@ macro_rules! EXTRA_ASSOCIATED {
     };
 }
 
-EXTRA_ASSOCIATED!()
+EXTRA_ASSOCIATED!();

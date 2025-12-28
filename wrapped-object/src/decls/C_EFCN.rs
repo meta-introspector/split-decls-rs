@@ -4,4 +4,4 @@ macro_rules! C_EFCN {
     };
 }
 
-C_EFCN!()
+C_EFCN!();

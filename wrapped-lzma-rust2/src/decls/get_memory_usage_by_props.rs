@@ -11,4 +11,4 @@ macro_rules! get_memory_usage_by_props {
     };
 }
 
-get_memory_usage_by_props!()
+get_memory_usage_by_props!();

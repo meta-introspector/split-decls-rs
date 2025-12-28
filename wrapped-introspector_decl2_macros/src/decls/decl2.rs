@@ -4,4 +4,4 @@ macro_rules! decl2 {
     };
 }
 
-decl2!()
+decl2!();

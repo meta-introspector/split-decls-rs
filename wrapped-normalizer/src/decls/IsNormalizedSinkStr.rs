@@ -4,4 +4,4 @@ macro_rules! IsNormalizedSinkStr {
     };
 }
 
-IsNormalizedSinkStr!()
+IsNormalizedSinkStr!();

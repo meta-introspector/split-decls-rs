@@ -4,4 +4,4 @@ macro_rules! WalkExpandedExprCtx {
     };
 }
 
-WalkExpandedExprCtx!()
+WalkExpandedExprCtx!();

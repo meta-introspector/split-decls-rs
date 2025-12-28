@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DatabaseKeyIndex!();
-        IterationCount!();
-        Revision!();
-        Value!();
         Accumulator!();
+        IterationCount!();
+        Value!();
+        Revision!();
+        DatabaseKeyIndex!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! EventKind {
     };
 }
 
-EventKind!()
+EventKind!();

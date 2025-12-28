@@ -11,4 +11,4 @@ macro_rules! accept_with {
     };
 }
 
-accept_with!()
+accept_with!();

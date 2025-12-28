@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ReadRef!();
+        FileHeader!();
+        ElfFile!();
         ProgramHeader!();
         ObjectSegment!();
-        ReadRef!();
-        ElfFile!();
-        FileHeader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ElfSegment {
     };
 }
 
-ElfSegment!()
+ElfSegment!();

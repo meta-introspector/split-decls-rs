@@ -4,4 +4,4 @@ macro_rules! compare_generic_param_kinds {
     };
 }
 
-compare_generic_param_kinds!()
+compare_generic_param_kinds!();

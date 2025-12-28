@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Type!();
         Version!();
         Info!();
-        Type!();
         Bitness!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

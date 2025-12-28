@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GenericArgCountResult!();
-        HirTyLowerer!();
         ExplicitLateBound!();
         GenericArgsLowerer!();
+        GenericArgCountResult!();
+        HirTyLowerer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! lower_generic_args {
     };
 }
 
-lower_generic_args!()
+lower_generic_args!();

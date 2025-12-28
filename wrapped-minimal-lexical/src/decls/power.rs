@@ -4,4 +4,4 @@ macro_rules! power {
     };
 }
 
-power!()
+power!();

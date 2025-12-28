@@ -4,4 +4,4 @@ macro_rules! INTEREST_CACHE_EPOCH {
     };
 }
 
-INTEREST_CACHE_EPOCH!()
+INTEREST_CACHE_EPOCH!();

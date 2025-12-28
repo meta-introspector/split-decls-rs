@@ -4,4 +4,4 @@ macro_rules! use_statements {
     };
 }
 
-use_statements!()
+use_statements!();

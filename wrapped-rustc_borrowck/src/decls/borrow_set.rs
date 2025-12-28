@@ -4,4 +4,4 @@ macro_rules! borrow_set {
     };
 }
 
-borrow_set!()
+borrow_set!();

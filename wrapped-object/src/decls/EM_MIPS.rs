@@ -4,4 +4,4 @@ macro_rules! EM_MIPS {
     };
 }
 
-EM_MIPS!()
+EM_MIPS!();

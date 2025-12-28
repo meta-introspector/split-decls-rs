@@ -4,4 +4,4 @@ macro_rules! debug_assert_unreachable {
     };
 }
 
-debug_assert_unreachable!()
+debug_assert_unreachable!();

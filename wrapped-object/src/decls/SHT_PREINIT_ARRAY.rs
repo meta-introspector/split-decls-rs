@@ -4,4 +4,4 @@ macro_rules! SHT_PREINIT_ARRAY {
     };
 }
 
-SHT_PREINIT_ARRAY!()
+SHT_PREINIT_ARRAY!();

@@ -11,4 +11,4 @@ macro_rules! resolve_block {
     };
 }
 
-resolve_block!()
+resolve_block!();

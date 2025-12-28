@@ -4,4 +4,4 @@ macro_rules! DF_BIND_NOW {
     };
 }
 
-DF_BIND_NOW!()
+DF_BIND_NOW!();

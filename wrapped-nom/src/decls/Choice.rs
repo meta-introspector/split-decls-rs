@@ -4,4 +4,4 @@ macro_rules! Choice {
     };
 }
 
-Choice!()
+Choice!();

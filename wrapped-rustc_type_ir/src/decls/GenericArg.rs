@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Relate!();
-        Interner!();
-        Term!();
         TypeVisitable!();
-        IntoKind!();
-        Ty!();
         Region!();
         GenericArgKind!();
+        Relate!();
+        Term!();
+        IntoKind!();
+        Interner!();
+        Ty!();
         Const!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! GenericArg {
     };
 }
 
-GenericArg!()
+GenericArg!();

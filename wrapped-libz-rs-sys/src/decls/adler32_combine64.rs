@@ -4,4 +4,4 @@ macro_rules! adler32_combine64 {
     };
 }
 
-adler32_combine64!()
+adler32_combine64!();

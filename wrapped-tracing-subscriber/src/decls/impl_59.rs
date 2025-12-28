@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SubscriberExt!();
-        FilterFn!();
         DynFilterFn!();
+        FilterFn!();
+        SubscriberExt!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

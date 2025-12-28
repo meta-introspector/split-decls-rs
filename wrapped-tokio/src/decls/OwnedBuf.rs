@@ -4,4 +4,4 @@ macro_rules! OwnedBuf {
     };
 }
 
-OwnedBuf!()
+OwnedBuf!();

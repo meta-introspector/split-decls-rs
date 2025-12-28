@@ -4,4 +4,4 @@ macro_rules! macro_generator {
     };
 }
 
-macro_generator!()
+macro_generator!();

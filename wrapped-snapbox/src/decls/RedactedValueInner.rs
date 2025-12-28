@@ -4,4 +4,4 @@ macro_rules! RedactedValueInner {
     };
 }
 
-RedactedValueInner!()
+RedactedValueInner!();

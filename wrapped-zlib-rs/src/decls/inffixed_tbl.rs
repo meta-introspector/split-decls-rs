@@ -4,4 +4,4 @@ macro_rules! inffixed_tbl {
     };
 }
 
-inffixed_tbl!()
+inffixed_tbl!();

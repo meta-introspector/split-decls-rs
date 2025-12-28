@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        QueryJobId!();
         QueryContext!();
-        QueryConfig!();
         Value!();
+        QueryConfig!();
+        QueryJobId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! cycle_error {
     };
 }
 
-cycle_error!()
+cycle_error!();

@@ -11,4 +11,4 @@ macro_rules! move_in_direction {
     };
 }
 
-move_in_direction!()
+move_in_direction!();

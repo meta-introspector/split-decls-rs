@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CoercePointeeNotTransparent!();
-        CoercePointeeNotConcreteType!();
-        CoercePointeeNoUserValidityAssertion!();
-        CoercePointeeNoField!();
-        CoercePointeeNotStruct!();
         Checker!();
+        CoercePointeeNoUserValidityAssertion!();
+        CoercePointeeNotTransparent!();
+        CoercePointeeNoField!();
+        CoercePointeeNotConcreteType!();
+        CoercePointeeNotStruct!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! visit_implementation_of_coerce_pointee_validity {
     };
 }
 
-visit_implementation_of_coerce_pointee_validity!()
+visit_implementation_of_coerce_pointee_validity!();

@@ -4,4 +4,4 @@ macro_rules! C_RPSYM {
     };
 }
 
-C_RPSYM!()
+C_RPSYM!();

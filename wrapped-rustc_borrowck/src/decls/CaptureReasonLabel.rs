@@ -4,4 +4,4 @@ macro_rules! CaptureReasonLabel {
     };
 }
 
-CaptureReasonLabel!()
+CaptureReasonLabel!();

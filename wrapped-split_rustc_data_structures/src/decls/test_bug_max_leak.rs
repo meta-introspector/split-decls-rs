@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TestGraph!();
         Maxes!();
         Sccs!();
-        TestGraph!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_bug_max_leak {
     };
 }
 
-test_bug_max_leak!()
+test_bug_max_leak!();

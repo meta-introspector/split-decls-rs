@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RandomizedSignerMut!();
         Result!();
+        RandomizedSignerMut!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! RandomizedMultipartSignerMut {
     };
 }
 
-RandomizedMultipartSignerMut!()
+RandomizedMultipartSignerMut!();

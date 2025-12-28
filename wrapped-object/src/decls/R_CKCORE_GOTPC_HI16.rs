@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_GOTPC_HI16 {
     };
 }
 
-R_CKCORE_GOTPC_HI16!()
+R_CKCORE_GOTPC_HI16!();

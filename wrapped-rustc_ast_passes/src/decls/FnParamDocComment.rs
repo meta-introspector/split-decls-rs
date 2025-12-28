@@ -4,4 +4,4 @@ macro_rules! FnParamDocComment {
     };
 }
 
-FnParamDocComment!()
+FnParamDocComment!();

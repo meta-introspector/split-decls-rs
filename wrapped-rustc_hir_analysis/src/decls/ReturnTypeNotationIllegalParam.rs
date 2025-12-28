@@ -4,4 +4,4 @@ macro_rules! ReturnTypeNotationIllegalParam {
     };
 }
 
-ReturnTypeNotationIllegalParam!()
+ReturnTypeNotationIllegalParam!();

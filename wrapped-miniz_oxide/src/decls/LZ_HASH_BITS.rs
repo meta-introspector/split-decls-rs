@@ -4,4 +4,4 @@ macro_rules! LZ_HASH_BITS {
     };
 }
 
-LZ_HASH_BITS!()
+LZ_HASH_BITS!();

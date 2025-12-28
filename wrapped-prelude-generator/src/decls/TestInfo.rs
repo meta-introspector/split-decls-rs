@@ -4,4 +4,4 @@ macro_rules! TestInfo {
     };
 }
 
-TestInfo!()
+TestInfo!();

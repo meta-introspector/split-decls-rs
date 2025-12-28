@@ -4,4 +4,4 @@ macro_rules! no_std {
     };
 }
 
-no_std!()
+no_std!();

@@ -12,4 +12,4 @@ macro_rules! walk_generics {
     };
 }
 
-walk_generics!()
+walk_generics!();

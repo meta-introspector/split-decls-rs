@@ -11,4 +11,4 @@ macro_rules! adt_destructor {
     };
 }
 
-adt_destructor!()
+adt_destructor!();

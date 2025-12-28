@@ -4,4 +4,4 @@ macro_rules! CpuSpan {
     };
 }
 
-CpuSpan!()
+CpuSpan!();

@@ -4,4 +4,4 @@ macro_rules! assert_input_range {
     };
 }
 
-assert_input_range!()
+assert_input_range!();

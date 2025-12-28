@@ -11,4 +11,4 @@ macro_rules! xdp_mmap_offsets {
     };
 }
 
-xdp_mmap_offsets!()
+xdp_mmap_offsets!();

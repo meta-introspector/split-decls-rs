@@ -4,4 +4,4 @@ macro_rules! ParamLike {
     };
 }
 
-ParamLike!()
+ParamLike!();

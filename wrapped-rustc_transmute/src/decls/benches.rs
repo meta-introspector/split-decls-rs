@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Dfa!();
+        Answer!();
         Assume!();
         Tree!();
-        Answer!();
         MaybeTransmutableQuery!();
+        Dfa!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! benches {
     };
 }
 
-benches!()
+benches!();

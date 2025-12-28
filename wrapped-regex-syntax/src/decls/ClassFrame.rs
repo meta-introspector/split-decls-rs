@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ClassSetItem!();
         ClassSet!();
+        ClassSetItem!();
         ClassSetBinaryOp!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ClassFrame {
     };
 }
 
-ClassFrame!()
+ClassFrame!();

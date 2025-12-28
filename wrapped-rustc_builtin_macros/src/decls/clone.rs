@@ -4,4 +4,4 @@ macro_rules! clone {
     };
 }
 
-clone!()
+clone!();

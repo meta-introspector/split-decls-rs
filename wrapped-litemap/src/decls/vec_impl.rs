@@ -4,4 +4,4 @@ macro_rules! vec_impl {
     };
 }
 
-vec_impl!()
+vec_impl!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PollTimeout!();
         PollTimeoutTryFromError!();
-        Error!();
         Result!();
+        PollTimeout!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

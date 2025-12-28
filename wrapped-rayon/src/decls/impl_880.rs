@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Consumer!();
+        Folder!();
+        TakeAnyConsumer!();
         TakeAnyFolder!();
         Reducer!();
-        Folder!();
-        Consumer!();
-        TakeAnyConsumer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_880 {
     };
 }
 
-impl_880!()
+impl_880!();

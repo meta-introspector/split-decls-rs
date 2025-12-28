@@ -4,4 +4,4 @@ macro_rules! conformal_map {
     };
 }
 
-conformal_map!()
+conformal_map!();

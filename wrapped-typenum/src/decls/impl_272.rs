@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        B1!();
         IsLessPrivate!();
         Less!();
+        B1!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_272 {
     };
 }
 
-impl_272!()
+impl_272!();

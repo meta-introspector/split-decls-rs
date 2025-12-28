@@ -4,4 +4,4 @@ macro_rules! adt_async_destructor {
     };
 }
 
-adt_async_destructor!()
+adt_async_destructor!();

@@ -4,4 +4,4 @@ macro_rules! int_type_width_signed {
     };
 }
 
-int_type_width_signed!()
+int_type_width_signed!();

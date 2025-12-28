@@ -4,4 +4,4 @@ macro_rules! ROUNDS_UNTIL_SLEEPY {
     };
 }
 
-ROUNDS_UNTIL_SLEEPY!()
+ROUNDS_UNTIL_SLEEPY!();

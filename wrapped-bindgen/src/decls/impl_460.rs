@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Interface!();
         Class!();
         Category!();
-        Interface!();
         Delegate!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_460 {
     };
 }
 
-impl_460!()
+impl_460!();

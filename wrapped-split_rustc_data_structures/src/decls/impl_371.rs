@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        RwLock!();
         Error!();
+        Entry!();
         QueryInvocationId!();
         SelfProfiler!();
+        RwLock!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_371 {
     };
 }
 
-impl_371!()
+impl_371!();

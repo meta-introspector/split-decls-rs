@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Formatter!();
         Number!();
         Value!();
-        Formatter!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_242 {
     };
 }
 
-impl_242!()
+impl_242!();

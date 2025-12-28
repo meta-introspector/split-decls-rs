@@ -11,4 +11,4 @@ macro_rules! procctl_reaper_pidinfo {
     };
 }
 
-procctl_reaper_pidinfo!()
+procctl_reaper_pidinfo!();

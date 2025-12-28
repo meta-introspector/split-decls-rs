@@ -4,4 +4,4 @@ macro_rules! hyper_headers_foreach_callback {
     };
 }
 
-hyper_headers_foreach_callback!()
+hyper_headers_foreach_callback!();

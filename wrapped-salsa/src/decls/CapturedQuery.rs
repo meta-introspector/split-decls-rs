@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Durability!();
-        Revision!();
         IterationCount!();
         DatabaseKeyIndex!();
+        Revision!();
         CycleHeads!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! CapturedQuery {
     };
 }
 
-CapturedQuery!()
+CapturedQuery!();

@@ -4,4 +4,4 @@ macro_rules! expand_combined_early_lint_pass_method {
     };
 }
 
-expand_combined_early_lint_pass_method!()
+expand_combined_early_lint_pass_method!();

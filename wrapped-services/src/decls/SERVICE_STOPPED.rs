@@ -11,4 +11,4 @@ macro_rules! SERVICE_STOPPED {
     };
 }
 
-SERVICE_STOPPED!()
+SERVICE_STOPPED!();

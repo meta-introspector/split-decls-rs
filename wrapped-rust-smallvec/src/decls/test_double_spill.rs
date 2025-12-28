@@ -11,4 +11,4 @@ macro_rules! test_double_spill {
     };
 }
 
-test_double_spill!()
+test_double_spill!();

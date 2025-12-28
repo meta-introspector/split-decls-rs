@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FormatUnknownTraitSugg!();
         FormatUnknownTrait!();
+        FormatUnknownTraitSugg!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! invalid_placeholder_type_error {
     };
 }
 
-invalid_placeholder_type_error!()
+invalid_placeholder_type_error!();

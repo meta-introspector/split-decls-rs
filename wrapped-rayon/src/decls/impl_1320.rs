@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SplitTerminatorProducer!();
-        Folder!();
         UnindexedProducer!();
+        Folder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1320 {
     };
 }
 
-impl_1320!()
+impl_1320!();

@@ -4,4 +4,4 @@ macro_rules! inner_connection {
     };
 }
 
-inner_connection!()
+inner_connection!();

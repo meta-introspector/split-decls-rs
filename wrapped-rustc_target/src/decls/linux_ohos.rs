@@ -4,4 +4,4 @@ macro_rules! linux_ohos {
     };
 }
 
-linux_ohos!()
+linux_ohos!();

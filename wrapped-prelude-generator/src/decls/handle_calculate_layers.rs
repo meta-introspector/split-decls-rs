@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Args!();
         TypeInfo!();
+        Args!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_calculate_layers {
     };
 }
 
-handle_calculate_layers!()
+handle_calculate_layers!();

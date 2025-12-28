@@ -4,4 +4,4 @@ macro_rules! CppDelegate {
     };
 }
 
-CppDelegate!()
+CppDelegate!();

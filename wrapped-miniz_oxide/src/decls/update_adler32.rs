@@ -4,4 +4,4 @@ macro_rules! update_adler32 {
     };
 }
 
-update_adler32!()
+update_adler32!();

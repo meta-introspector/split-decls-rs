@@ -4,4 +4,4 @@ macro_rules! flatten_iter {
     };
 }
 
-flatten_iter!()
+flatten_iter!();

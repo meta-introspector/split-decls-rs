@@ -4,4 +4,4 @@ macro_rules! UnconstrainedOpaqueType {
     };
 }
 
-UnconstrainedOpaqueType!()
+UnconstrainedOpaqueType!();

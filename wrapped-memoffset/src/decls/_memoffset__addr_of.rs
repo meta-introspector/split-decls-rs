@@ -4,4 +4,4 @@ macro_rules! _memoffset__addr_of {
     };
 }
 
-_memoffset__addr_of!()
+_memoffset__addr_of!();

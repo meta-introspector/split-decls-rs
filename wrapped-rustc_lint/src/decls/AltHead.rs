@@ -4,4 +4,4 @@ macro_rules! AltHead {
     };
 }
 
-AltHead!()
+AltHead!();

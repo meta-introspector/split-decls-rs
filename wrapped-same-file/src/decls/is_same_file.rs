@@ -11,4 +11,4 @@ macro_rules! is_same_file {
     };
 }
 
-is_same_file!()
+is_same_file!();

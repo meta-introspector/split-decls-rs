@@ -4,4 +4,4 @@ macro_rules! typing {
     };
 }
 
-typing!()
+typing!();

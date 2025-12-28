@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
+        Formatter!();
         Value!();
         Map!();
-        Formatter!();
         Error!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

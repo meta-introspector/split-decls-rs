@@ -11,4 +11,4 @@ macro_rules! extern_abi_enabled {
     };
 }
 
-extern_abi_enabled!()
+extern_abi_enabled!();

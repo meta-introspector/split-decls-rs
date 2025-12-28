@@ -11,4 +11,4 @@ macro_rules! ESTIMATE_NUM_KEYS {
     };
 }
 
-ESTIMATE_NUM_KEYS!()
+ESTIMATE_NUM_KEYS!();

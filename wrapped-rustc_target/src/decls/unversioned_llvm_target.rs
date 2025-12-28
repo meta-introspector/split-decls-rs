@@ -13,4 +13,4 @@ macro_rules! unversioned_llvm_target {
     };
 }
 
-unversioned_llvm_target!()
+unversioned_llvm_target!();

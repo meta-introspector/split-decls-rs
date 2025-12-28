@@ -4,4 +4,4 @@ macro_rules! EF_MIPS_64BIT_WHIRL {
     };
 }
 
-EF_MIPS_64BIT_WHIRL!()
+EF_MIPS_64BIT_WHIRL!();

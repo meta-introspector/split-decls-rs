@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        IResult!();
-        Input!();
-        Error!();
-        ParseError!();
-        Tag!();
-        CompareResult!();
         ErrorKind!();
-        Needed!();
+        ParseError!();
         AsChar!();
+        Input!();
+        CompareResult!();
+        IResult!();
         Streaming!();
-        Err!();
         Compare!();
+        Err!();
+        Error!();
+        Tag!();
+        Needed!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! not_line_ending {
     };
 }
 
-not_line_ending!()
+not_line_ending!();

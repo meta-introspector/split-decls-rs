@@ -4,4 +4,4 @@ macro_rules! CAUCASIAN_ALBANIAN {
     };
 }
 
-CAUCASIAN_ALBANIAN!()
+CAUCASIAN_ALBANIAN!();

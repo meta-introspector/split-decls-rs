@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Expected!();
-        Span!();
-        StringBuilder!();
-        Encoding!();
-        ErrorSink!();
-        Raw!();
         ScalarKind!();
+        ErrorSink!();
+        Encoding!();
         ParseError!();
+        StringBuilder!();
+        Span!();
+        Raw!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

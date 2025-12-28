@@ -4,4 +4,4 @@ macro_rules! EM_CLOUDSHIELD {
     };
 }
 
-EM_CLOUDSHIELD!()
+EM_CLOUDSHIELD!();

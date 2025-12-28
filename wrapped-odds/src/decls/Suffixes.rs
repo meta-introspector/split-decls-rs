@@ -4,4 +4,4 @@ macro_rules! Suffixes {
     };
 }
 
-Suffixes!()
+Suffixes!();

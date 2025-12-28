@@ -4,4 +4,4 @@ macro_rules! ET_EXEC {
     };
 }
 
-ET_EXEC!()
+ET_EXEC!();

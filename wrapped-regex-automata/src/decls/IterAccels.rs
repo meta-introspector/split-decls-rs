@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Accels!();
         AccelTy!();
+        Accels!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IterAccels {
     };
 }
 
-IterAccels!()
+IterAccels!();

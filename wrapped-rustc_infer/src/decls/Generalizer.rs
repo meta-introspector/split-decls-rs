@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Generalization!();
         TermVid!();
+        Generalization!();
         InferCtxt!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Generalizer {
     };
 }
 
-Generalizer!()
+Generalizer!();

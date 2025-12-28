@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Id!();
-        NestedProgress!();
         Log!();
+        NestedProgress!();
+        Id!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_183 {
     };
 }
 
-impl_183!()
+impl_183!();

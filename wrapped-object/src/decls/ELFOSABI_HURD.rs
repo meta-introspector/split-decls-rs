@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_HURD {
     };
 }
 
-ELFOSABI_HURD!()
+ELFOSABI_HURD!();

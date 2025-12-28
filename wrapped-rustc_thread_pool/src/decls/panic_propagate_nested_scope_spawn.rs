@@ -4,4 +4,4 @@ macro_rules! panic_propagate_nested_scope_spawn {
     };
 }
 
-panic_propagate_nested_scope_spawn!()
+panic_propagate_nested_scope_spawn!();

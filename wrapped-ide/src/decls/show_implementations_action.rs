@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NavigationTarget!();
         UpmappingResult!();
+        NavigationTarget!();
         HoverAction!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! show_implementations_action {
     };
 }
 
-show_implementations_action!()
+show_implementations_action!();

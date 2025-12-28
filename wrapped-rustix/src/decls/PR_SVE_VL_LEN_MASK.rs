@@ -4,4 +4,4 @@ macro_rules! PR_SVE_VL_LEN_MASK {
     };
 }
 
-PR_SVE_VL_LEN_MASK!()
+PR_SVE_VL_LEN_MASK!();

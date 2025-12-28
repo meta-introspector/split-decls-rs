@@ -4,4 +4,4 @@ macro_rules! MarkFrame {
     };
 }
 
-MarkFrame!()
+MarkFrame!();

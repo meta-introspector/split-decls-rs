@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Match!();
         TryMatchesIter!();
+        Match!();
         Input!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! MatchesIter {
     };
 }
 
-MatchesIter!()
+MatchesIter!();

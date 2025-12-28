@@ -12,4 +12,4 @@ macro_rules! create_msvc_imps {
     };
 }
 
-create_msvc_imps!()
+create_msvc_imps!();

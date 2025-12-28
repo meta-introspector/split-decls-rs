@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Node!();
-        Block!();
         MacroDefinition!();
+        Block!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Template {
     };
 }
 
-Template!()
+Template!();

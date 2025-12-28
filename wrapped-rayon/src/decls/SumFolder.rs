@@ -4,4 +4,4 @@ macro_rules! SumFolder {
     };
 }
 
-SumFolder!()
+SumFolder!();

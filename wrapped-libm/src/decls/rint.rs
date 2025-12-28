@@ -4,4 +4,4 @@ macro_rules! rint {
     };
 }
 
-rint!()
+rint!();

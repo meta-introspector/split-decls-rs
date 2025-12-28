@@ -12,4 +12,4 @@ macro_rules! endian_mode {
     };
 }
 
-endian_mode!()
+endian_mode!();

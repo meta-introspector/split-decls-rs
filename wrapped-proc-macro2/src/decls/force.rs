@@ -4,4 +4,4 @@ macro_rules! force {
     };
 }
 
-force!()
+force!();

@@ -11,4 +11,4 @@ macro_rules! PrivateDivIfQuot {
     };
 }
 
-PrivateDivIfQuot!()
+PrivateDivIfQuot!();

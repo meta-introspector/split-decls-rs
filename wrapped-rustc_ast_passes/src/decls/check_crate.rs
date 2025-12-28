@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NegativeBoundUnsupported!();
-        PostExpansionVisitor!();
         MatchArmWithNoBody!();
+        PostExpansionVisitor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_crate {
     };
 }
 
-check_crate!()
+check_crate!();

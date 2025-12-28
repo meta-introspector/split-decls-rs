@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Walkable!();
         Const!();
         Ty!();
+        Walkable!();
         AnonConst!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Term {
     };
 }
 
-Term!()
+Term!();

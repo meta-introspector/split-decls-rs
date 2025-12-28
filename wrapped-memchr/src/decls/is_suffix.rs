@@ -4,4 +4,4 @@ macro_rules! is_suffix {
     };
 }
 
-is_suffix!()
+is_suffix!();

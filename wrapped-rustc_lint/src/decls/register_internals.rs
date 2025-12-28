@@ -11,4 +11,4 @@ macro_rules! register_internals {
     };
 }
 
-register_internals!()
+register_internals!();

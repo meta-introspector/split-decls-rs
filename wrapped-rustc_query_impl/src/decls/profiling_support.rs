@@ -4,4 +4,4 @@ macro_rules! profiling_support {
     };
 }
 
-profiling_support!()
+profiling_support!();

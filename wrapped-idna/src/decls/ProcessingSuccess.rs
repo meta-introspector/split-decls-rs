@@ -4,4 +4,4 @@ macro_rules! ProcessingSuccess {
     };
 }
 
-ProcessingSuccess!()
+ProcessingSuccess!();

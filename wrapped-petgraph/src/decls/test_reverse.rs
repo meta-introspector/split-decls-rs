@@ -11,4 +11,4 @@ macro_rules! test_reverse {
     };
 }
 
-test_reverse!()
+test_reverse!();

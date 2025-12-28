@@ -4,4 +4,4 @@ macro_rules! AutoDerefReachedRecursionLimit {
     };
 }
 
-AutoDerefReachedRecursionLimit!()
+AutoDerefReachedRecursionLimit!();

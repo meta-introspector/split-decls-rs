@@ -4,4 +4,4 @@ macro_rules! SHN_HIPROC {
     };
 }
 
-SHN_HIPROC!()
+SHN_HIPROC!();

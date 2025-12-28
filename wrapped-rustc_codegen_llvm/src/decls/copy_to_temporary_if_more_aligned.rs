@@ -11,4 +11,4 @@ macro_rules! copy_to_temporary_if_more_aligned {
     };
 }
 
-copy_to_temporary_if_more_aligned!()
+copy_to_temporary_if_more_aligned!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Identifier!();
-        MultiName!();
-        Default!();
-        RenameAllRules!();
         TagType!();
+        RenameAllRules!();
+        Default!();
+        MultiName!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Container {
     };
 }
 
-Container!()
+Container!();

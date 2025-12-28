@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnknownLintSuggestion!();
         RequestedLevel!();
+        UnknownLintSuggestion!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UnknownLintFromCommandLine {
     };
 }
 
-UnknownLintFromCommandLine!()
+UnknownLintFromCommandLine!();

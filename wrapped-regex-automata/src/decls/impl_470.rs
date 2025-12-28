@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        RangeTrie!();
-        BuildError!();
-        NFA!();
-        Config!();
-        Compiler!();
-        Utf8SuffixMap!();
-        Match!();
-        Builder!();
         Utf8State!();
+        Compiler!();
+        BuildError!();
+        Match!();
+        RangeTrie!();
+        NFA!();
+        Utf8SuffixMap!();
+        Builder!();
+        Config!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_470 {
     };
 }
 
-impl_470!()
+impl_470!();

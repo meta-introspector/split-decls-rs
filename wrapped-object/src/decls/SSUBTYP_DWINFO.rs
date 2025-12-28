@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWINFO {
     };
 }
 
-SSUBTYP_DWINFO!()
+SSUBTYP_DWINFO!();

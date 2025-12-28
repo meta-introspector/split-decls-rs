@@ -11,4 +11,4 @@ macro_rules! ELEMENT_TYPE_U {
     };
 }
 
-ELEMENT_TYPE_U!()
+ELEMENT_TYPE_U!();

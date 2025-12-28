@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         TargetLint!();
+        LateLintPassFactory!();
         EarlyLintPassFactory!();
         LintGroup!();
-        LateLintPassFactory!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! LintStore {
     };
 }
 
-LintStore!()
+LintStore!();

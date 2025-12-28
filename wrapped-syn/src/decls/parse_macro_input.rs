@@ -4,4 +4,4 @@ macro_rules! parse_macro_input {
     };
 }
 
-parse_macro_input!()
+parse_macro_input!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Hygiene!();
         TrackedArgs!();
+        Hygiene!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Macro {
     };
 }
 
-Macro!()
+Macro!();

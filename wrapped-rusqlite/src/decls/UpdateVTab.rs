@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Updates!();
         Inserts!();
-        Result!();
         ValueRef!();
+        Updates!();
         CreateVTab!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! UpdateVTab {
     };
 }
 
-UpdateVTab!()
+UpdateVTab!();

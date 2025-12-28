@@ -13,4 +13,4 @@ macro_rules! cleared_current_thread {
     };
 }
 
-cleared_current_thread!()
+cleared_current_thread!();

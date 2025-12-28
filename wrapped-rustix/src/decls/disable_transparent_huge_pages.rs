@@ -11,4 +11,4 @@ macro_rules! disable_transparent_huge_pages {
     };
 }
 
-disable_transparent_huge_pages!()
+disable_transparent_huge_pages!();

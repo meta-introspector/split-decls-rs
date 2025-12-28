@@ -11,4 +11,4 @@ macro_rules! escape_xml {
     };
 }
 
-escape_xml!()
+escape_xml!();

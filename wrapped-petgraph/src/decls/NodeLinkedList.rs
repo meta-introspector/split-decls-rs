@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FasNode!();
         FasNodeIndex!();
+        FasNode!();
         FasNodeContainer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! NodeLinkedList {
     };
 }
 
-NodeLinkedList!()
+NodeLinkedList!();

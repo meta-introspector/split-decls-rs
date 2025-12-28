@@ -11,4 +11,4 @@ macro_rules! set_common_type {
     };
 }
 
-set_common_type!()
+set_common_type!();

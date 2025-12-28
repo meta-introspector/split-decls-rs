@@ -4,4 +4,4 @@ macro_rules! R_M32R_RELA_GNU_VTENTRY {
     };
 }
 
-R_M32R_RELA_GNU_VTENTRY!()
+R_M32R_RELA_GNU_VTENTRY!();

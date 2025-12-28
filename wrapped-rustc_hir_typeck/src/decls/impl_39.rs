@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Expressions!();
+        SuggestBoxingForReturnImplTrait!();
         AsCoercionSite!();
         FnCtxt!();
-        SuggestBoxingForReturnImplTrait!();
         CoerceMany!();
-        Expressions!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

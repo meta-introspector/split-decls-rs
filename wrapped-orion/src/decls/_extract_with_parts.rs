@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HmacFunction!();
         UnknownCryptoError!();
         Hmac!();
+        HmacFunction!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! _extract_with_parts {
     };
 }
 
-_extract_with_parts!()
+_extract_with_parts!();

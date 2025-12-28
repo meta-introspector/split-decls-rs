@@ -4,4 +4,4 @@ macro_rules! R_68K_COPY {
     };
 }
 
-R_68K_COPY!()
+R_68K_COPY!();

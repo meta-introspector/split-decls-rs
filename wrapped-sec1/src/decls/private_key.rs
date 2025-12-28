@@ -4,4 +4,4 @@ macro_rules! private_key {
     };
 }
 
-private_key!()
+private_key!();

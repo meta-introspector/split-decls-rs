@@ -4,4 +4,4 @@ macro_rules! select_jec {
     };
 }
 
-select_jec!()
+select_jec!();

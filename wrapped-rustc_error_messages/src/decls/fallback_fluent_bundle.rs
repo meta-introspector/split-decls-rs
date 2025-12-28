@@ -12,4 +12,4 @@ macro_rules! fallback_fluent_bundle {
     };
 }
 
-fallback_fluent_bundle!()
+fallback_fluent_bundle!();

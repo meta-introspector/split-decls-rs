@@ -4,4 +4,4 @@ macro_rules! ceilf128 {
     };
 }
 
-ceilf128!()
+ceilf128!();

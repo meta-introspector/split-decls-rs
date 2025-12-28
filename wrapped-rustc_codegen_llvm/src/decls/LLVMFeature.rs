@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TargetFeatureFoldStrength!();
         SmallVec!();
+        TargetFeatureFoldStrength!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LLVMFeature {
     };
 }
 
-LLVMFeature!()
+LLVMFeature!();

@@ -4,4 +4,4 @@ macro_rules! rpath {
     };
 }
 
-rpath!()
+rpath!();

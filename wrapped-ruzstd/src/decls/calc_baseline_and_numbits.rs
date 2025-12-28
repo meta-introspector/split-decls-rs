@@ -4,4 +4,4 @@ macro_rules! calc_baseline_and_numbits {
     };
 }
 
-calc_baseline_and_numbits!()
+calc_baseline_and_numbits!();

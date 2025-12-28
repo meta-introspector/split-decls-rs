@@ -12,4 +12,4 @@ macro_rules! lock_pi2 {
     };
 }
 
-lock_pi2!()
+lock_pi2!();

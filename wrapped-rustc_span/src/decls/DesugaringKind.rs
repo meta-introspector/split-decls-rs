@@ -4,4 +4,4 @@ macro_rules! DesugaringKind {
     };
 }
 
-DesugaringKind!()
+DesugaringKind!();

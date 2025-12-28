@@ -11,4 +11,4 @@ macro_rules! always_update {
     };
 }
 
-always_update!()
+always_update!();

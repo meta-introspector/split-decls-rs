@@ -11,4 +11,4 @@ macro_rules! with_attached_database {
     };
 }
 
-with_attached_database!()
+with_attached_database!();

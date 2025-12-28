@@ -4,4 +4,4 @@ macro_rules! debug_assert_eq_in_drop {
     };
 }
 
-debug_assert_eq_in_drop!()
+debug_assert_eq_in_drop!();

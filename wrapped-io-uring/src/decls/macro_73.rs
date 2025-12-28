@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Entry!();
         OpenHow!();
         DestinationSlot!();
+        Entry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_73 {
     };
 }
 
-macro_73!()
+macro_73!();

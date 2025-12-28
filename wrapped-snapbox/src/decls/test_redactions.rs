@@ -4,4 +4,4 @@ macro_rules! test_redactions {
     };
 }
 
-test_redactions!()
+test_redactions!();

@@ -4,4 +4,4 @@ macro_rules! impl_264 {
     };
 }
 
-impl_264!()
+impl_264!();

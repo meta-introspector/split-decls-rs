@@ -4,4 +4,4 @@ macro_rules! quick_sort {
     };
 }
 
-quick_sort!()
+quick_sort!();

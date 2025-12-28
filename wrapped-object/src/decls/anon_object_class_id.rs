@@ -13,4 +13,4 @@ macro_rules! anon_object_class_id {
     };
 }
 
-anon_object_class_id!()
+anon_object_class_id!();

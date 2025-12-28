@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Lld!();
         LinkerFlavor!();
         LinkerFlavorCli!();
+        Lld!();
         Cc!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_457 {
     };
 }
 
-impl_457!()
+impl_457!();

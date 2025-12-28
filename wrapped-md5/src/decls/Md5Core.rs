@@ -4,4 +4,4 @@ macro_rules! Md5Core {
     };
 }
 
-Md5Core!()
+Md5Core!();

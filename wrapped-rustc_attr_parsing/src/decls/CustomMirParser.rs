@@ -4,4 +4,4 @@ macro_rules! CustomMirParser {
     };
 }
 
-CustomMirParser!()
+CustomMirParser!();

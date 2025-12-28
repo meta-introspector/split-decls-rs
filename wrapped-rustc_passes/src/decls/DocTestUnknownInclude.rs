@@ -4,4 +4,4 @@ macro_rules! DocTestUnknownInclude {
     };
 }
 
-DocTestUnknownInclude!()
+DocTestUnknownInclude!();

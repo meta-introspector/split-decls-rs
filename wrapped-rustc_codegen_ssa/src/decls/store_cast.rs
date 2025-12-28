@@ -11,4 +11,4 @@ macro_rules! store_cast {
     };
 }
 
-store_cast!()
+store_cast!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GUID!();
         HSTRING!();
+        GUID!();
         HRESULT!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_11 {
     };
 }
 
-macro_11!()
+macro_11!();

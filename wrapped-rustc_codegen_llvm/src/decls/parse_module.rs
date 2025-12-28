@@ -11,4 +11,4 @@ macro_rules! parse_module {
     };
 }
 
-parse_module!()
+parse_module!();

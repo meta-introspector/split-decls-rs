@@ -4,4 +4,4 @@ macro_rules! backup {
     };
 }
 
-backup!()
+backup!();

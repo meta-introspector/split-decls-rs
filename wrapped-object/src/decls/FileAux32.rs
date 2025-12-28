@@ -12,4 +12,4 @@ macro_rules! FileAux32 {
     };
 }
 
-FileAux32!()
+FileAux32!();

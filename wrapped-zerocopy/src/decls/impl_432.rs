@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PointerMetadata!();
-        SizeInfo!();
         SliceDst!();
         DstLayout!();
+        SizeInfo!();
+        PointerMetadata!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_432 {
     };
 }
 
-impl_432!()
+impl_432!();

@@ -4,4 +4,4 @@ macro_rules! mod_path_of_def {
     };
 }
 
-mod_path_of_def!()
+mod_path_of_def!();

@@ -4,4 +4,4 @@ macro_rules! smart_display {
     };
 }
 
-smart_display!()
+smart_display!();

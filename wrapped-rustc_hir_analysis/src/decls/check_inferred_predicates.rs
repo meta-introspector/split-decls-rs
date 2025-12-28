@@ -11,4 +11,4 @@ macro_rules! check_inferred_predicates {
     };
 }
 
-check_inferred_predicates!()
+check_inferred_predicates!();

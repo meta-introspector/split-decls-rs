@@ -4,4 +4,4 @@ macro_rules! overlapping_possible_matches {
     };
 }
 
-overlapping_possible_matches!()
+overlapping_possible_matches!();

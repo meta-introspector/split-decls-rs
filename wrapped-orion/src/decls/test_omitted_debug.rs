@@ -4,4 +4,4 @@ macro_rules! test_omitted_debug {
     };
 }
 
-test_omitted_debug!()
+test_omitted_debug!();

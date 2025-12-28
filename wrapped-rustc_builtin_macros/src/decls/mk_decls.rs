@@ -11,4 +11,4 @@ macro_rules! mk_decls {
     };
 }
 
-mk_decls!()
+mk_decls!();

@@ -4,4 +4,4 @@ macro_rules! MAIN_DB {
     };
 }
 
-MAIN_DB!()
+MAIN_DB!();

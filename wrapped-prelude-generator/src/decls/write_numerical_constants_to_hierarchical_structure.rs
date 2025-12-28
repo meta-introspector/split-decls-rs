@@ -4,4 +4,4 @@ macro_rules! write_numerical_constants_to_hierarchical_structure {
     };
 }
 
-write_numerical_constants_to_hierarchical_structure!()
+write_numerical_constants_to_hierarchical_structure!();

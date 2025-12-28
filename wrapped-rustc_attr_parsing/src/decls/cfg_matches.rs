@@ -11,4 +11,4 @@ macro_rules! cfg_matches {
     };
 }
 
-cfg_matches!()
+cfg_matches!();

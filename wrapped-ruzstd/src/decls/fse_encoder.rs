@@ -4,4 +4,4 @@ macro_rules! fse_encoder {
     };
 }
 
-fse_encoder!()
+fse_encoder!();

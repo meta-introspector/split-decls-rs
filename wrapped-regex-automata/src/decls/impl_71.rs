@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Cache!();
-        Captures!();
         MatchKind!();
-        BuildError!();
-        NFA!();
         Match!();
+        BuildError!();
         DFA!();
         Transition!();
-        Builder!();
         Config!();
+        Builder!();
+        Captures!();
+        NFA!();
         StateID!();
+        Cache!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

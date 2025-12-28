@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InlineTable!();
         Array!();
         Formatted!();
+        InlineTable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Value {
     };
 }
 
-Value!()
+Value!();

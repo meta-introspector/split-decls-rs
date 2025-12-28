@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExtraFieldMagic!();
         Zip64ExtraFieldBlock!();
+        ExtraFieldMagic!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_216 {
     };
 }
 
-impl_216!()
+impl_216!();

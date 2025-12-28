@@ -4,4 +4,4 @@ macro_rules! AsyncCallableRelevantTypes {
     };
 }
 
-AsyncCallableRelevantTypes!()
+AsyncCallableRelevantTypes!();

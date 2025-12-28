@@ -4,4 +4,4 @@ macro_rules! LayoutAbi {
     };
 }
 
-LayoutAbi!()
+LayoutAbi!();

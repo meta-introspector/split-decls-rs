@@ -12,4 +12,4 @@ macro_rules! fields_pat {
     };
 }
 
-fields_pat!()
+fields_pat!();

@@ -4,4 +4,4 @@ macro_rules! is_enabled_avx512 {
     };
 }
 
-is_enabled_avx512!()
+is_enabled_avx512!();

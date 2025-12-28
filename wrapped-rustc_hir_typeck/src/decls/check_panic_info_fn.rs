@@ -4,4 +4,4 @@ macro_rules! check_panic_info_fn {
     };
 }
 
-check_panic_info_fn!()
+check_panic_info_fn!();

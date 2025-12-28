@@ -4,4 +4,4 @@ macro_rules! Lcg128Xsl64 {
     };
 }
 
-Lcg128Xsl64!()
+Lcg128Xsl64!();

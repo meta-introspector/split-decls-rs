@@ -5,4 +5,4 @@ While prec_climber is going to be kept in 2.x minor and patch releases, it may b
     };
 }
 
-prec_climber!()
+prec_climber!();

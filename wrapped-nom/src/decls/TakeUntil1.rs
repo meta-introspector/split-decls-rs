@@ -11,4 +11,4 @@ macro_rules! TakeUntil1 {
     };
 }
 
-TakeUntil1!()
+TakeUntil1!();

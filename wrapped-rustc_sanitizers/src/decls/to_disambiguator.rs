@@ -4,4 +4,4 @@ macro_rules! to_disambiguator {
     };
 }
 
-to_disambiguator!()
+to_disambiguator!();

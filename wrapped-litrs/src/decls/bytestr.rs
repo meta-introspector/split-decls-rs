@@ -4,4 +4,4 @@ macro_rules! bytestr {
     };
 }
 
-bytestr!()
+bytestr!();

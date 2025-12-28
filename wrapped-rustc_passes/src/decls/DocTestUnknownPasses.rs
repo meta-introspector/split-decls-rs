@@ -4,4 +4,4 @@ macro_rules! DocTestUnknownPasses {
     };
 }
 
-DocTestUnknownPasses!()
+DocTestUnknownPasses!();

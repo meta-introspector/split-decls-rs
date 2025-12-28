@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Workspace!();
+        Bin!();
+        Package!();
+        RegistryPatch!();
         Dependency!();
         Patch!();
-        RegistryPatch!();
-        Bin!();
-        Workspace!();
-        Package!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Manifest {
     };
 }
 
-Manifest!()
+Manifest!();

@@ -4,4 +4,4 @@ macro_rules! serde_seq {
     };
 }
 
-serde_seq!()
+serde_seq!();

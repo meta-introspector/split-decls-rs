@@ -4,4 +4,4 @@ macro_rules! R_SH_SWITCH8 {
     };
 }
 
-R_SH_SWITCH8!()
+R_SH_SWITCH8!();

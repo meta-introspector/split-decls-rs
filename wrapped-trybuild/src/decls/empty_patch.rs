@@ -11,4 +11,4 @@ macro_rules! empty_patch {
     };
 }
 
-empty_patch!()
+empty_patch!();

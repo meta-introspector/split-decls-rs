@@ -4,4 +4,4 @@ macro_rules! F_LOADONLY {
     };
 }
 
-F_LOADONLY!()
+F_LOADONLY!();

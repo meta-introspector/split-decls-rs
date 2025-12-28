@@ -11,4 +11,4 @@ macro_rules! loglevel_to_cs {
     };
 }
 
-loglevel_to_cs!()
+loglevel_to_cs!();

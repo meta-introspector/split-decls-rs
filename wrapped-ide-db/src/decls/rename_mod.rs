@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IdentifierKind!();
-        Result!();
-        RootDatabase!();
         TextEdit!();
+        Result!();
         SourceChange!();
-        FileSystemEdit!();
+        RootDatabase!();
         Definition!();
+        FileSystemEdit!();
+        IdentifierKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! rename_mod {
     };
 }
 
-rename_mod!()
+rename_mod!();

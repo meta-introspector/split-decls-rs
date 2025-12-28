@@ -4,4 +4,4 @@ macro_rules! foaf {
     };
 }
 
-foaf!()
+foaf!();

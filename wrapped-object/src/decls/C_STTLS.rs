@@ -4,4 +4,4 @@ macro_rules! C_STTLS {
     };
 }
 
-C_STTLS!()
+C_STTLS!();

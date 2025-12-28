@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Binder!();
         Predicate!();
-        Elaboratable!();
-        HostEffectPredicate!();
-        TypeFoldable!();
-        UpcastFrom!();
-        Interner!();
-        TraitRef!();
-        TraitPredicate!();
         IntoKind!();
-        ProjectionPredicate!();
+        TraitPredicate!();
+        TypeFoldable!();
+        Interner!();
+        UpcastFrom!();
+        HostEffectPredicate!();
         ClauseKind!();
+        Elaboratable!();
+        TraitRef!();
+        Binder!();
+        ProjectionPredicate!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! Clause {
     };
 }
 
-Clause!()
+Clause!();

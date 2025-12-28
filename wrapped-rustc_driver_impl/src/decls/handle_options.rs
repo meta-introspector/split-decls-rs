@@ -4,4 +4,4 @@ macro_rules! handle_options {
     };
 }
 
-handle_options!()
+handle_options!();

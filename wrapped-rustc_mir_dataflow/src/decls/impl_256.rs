@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TrackElem!();
         Children!();
         Map!();
-        TrackElem!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_256 {
     };
 }
 
-impl_256!()
+impl_256!();

@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
         Cache!();
-        Match!();
+        RetryQuadraticError!();
+        WhichCaptures!();
+        Compiler!();
+        ReverseInner!();
         Anchored!();
-        Core!();
-        LookMatcher!();
         ReverseHybrid!();
         MatchKind!();
-        RetryError!();
-        Compiler!();
+        Core!();
         Config!();
-        ReverseInner!();
-        WhichCaptures!();
         ReverseDFA!();
-        RetryQuadraticError!();
+        Match!();
         HalfMatch!();
-        Input!();
-        RetryFailError!();
-        DFA!();
         NFA!();
+        Input!();
+        DFA!();
+        RetryFailError!();
+        LookMatcher!();
+        RetryError!();
     };
 }
 
@@ -42,4 +42,4 @@ macro_rules! impl_393 {
     };
 }
 
-impl_393!()
+impl_393!();

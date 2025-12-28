@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Rows!();
         Error!();
+        Rows!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AndThenRows {
     };
 }
 
-AndThenRows!()
+AndThenRows!();

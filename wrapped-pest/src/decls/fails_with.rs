@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         InputLocation!();
-        ErrorVariant!();
         Parser!();
+        ErrorVariant!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! fails_with {
     };
 }
 
-fails_with!()
+fails_with!();

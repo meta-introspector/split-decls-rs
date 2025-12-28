@@ -4,4 +4,4 @@ macro_rules! search_graph {
     };
 }
 
-search_graph!()
+search_graph!();

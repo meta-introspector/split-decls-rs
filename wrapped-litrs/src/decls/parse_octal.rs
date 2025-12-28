@@ -4,4 +4,4 @@ macro_rules! parse_octal {
     };
 }
 
-parse_octal!()
+parse_octal!();

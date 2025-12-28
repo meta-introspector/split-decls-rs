@@ -4,4 +4,4 @@ macro_rules! lex_string_expr_with_filter {
     };
 }
 
-lex_string_expr_with_filter!()
+lex_string_expr_with_filter!();

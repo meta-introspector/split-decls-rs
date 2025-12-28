@@ -4,4 +4,4 @@ macro_rules! wait_for_counter {
     };
 }
 
-wait_for_counter!()
+wait_for_counter!();

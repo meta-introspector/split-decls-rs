@@ -11,4 +11,4 @@ macro_rules! concat_strm {
     };
 }
 
-concat_strm!()
+concat_strm!();

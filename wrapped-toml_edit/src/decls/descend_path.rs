@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Value!();
         InlineTable!();
         TraceScope!();
-        InlineEntry!();
         Key!();
+        InlineEntry!();
+        Value!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! descend_path {
     };
 }
 
-descend_path!()
+descend_path!();

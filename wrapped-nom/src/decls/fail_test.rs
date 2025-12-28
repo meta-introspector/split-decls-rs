@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Err!();
         ErrorKind!();
-        Fail!();
         Error!();
+        Fail!();
+        Err!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! fail_test {
     };
 }
 
-fail_test!()
+fail_test!();

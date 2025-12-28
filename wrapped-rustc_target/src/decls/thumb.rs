@@ -4,4 +4,4 @@ macro_rules! thumb {
     };
 }
 
-thumb!()
+thumb!();

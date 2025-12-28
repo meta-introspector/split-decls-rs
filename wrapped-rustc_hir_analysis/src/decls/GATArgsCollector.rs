@@ -4,4 +4,4 @@ macro_rules! GATArgsCollector {
     };
 }
 
-GATArgsCollector!()
+GATArgsCollector!();

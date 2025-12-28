@@ -4,4 +4,4 @@ macro_rules! never_panic_len_4 {
     };
 }
 
-never_panic_len_4!()
+never_panic_len_4!();

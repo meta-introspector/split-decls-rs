@@ -11,4 +11,4 @@ macro_rules! default_ml_table {
     };
 }
 
-default_ml_table!()
+default_ml_table!();

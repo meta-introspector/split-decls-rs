@@ -11,4 +11,4 @@ macro_rules! convert_to_def_in_trait {
     };
 }
 
-convert_to_def_in_trait!()
+convert_to_def_in_trait!();

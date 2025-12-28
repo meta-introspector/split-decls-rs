@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Backward!();
         MockAnalysis!();
+        Backward!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! backward_cursor {
     };
 }
 
-backward_cursor!()
+backward_cursor!();

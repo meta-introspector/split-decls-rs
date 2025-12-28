@@ -4,4 +4,4 @@ macro_rules! NT_S390_HIGH_GPRS {
     };
 }
 
-NT_S390_HIGH_GPRS!()
+NT_S390_HIGH_GPRS!();

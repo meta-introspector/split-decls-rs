@@ -18,4 +18,4 @@ macro_rules! test_fn_like_macro_clone_raw_ident {
     };
 }
 
-test_fn_like_macro_clone_raw_ident!()
+test_fn_like_macro_clone_raw_ident!();

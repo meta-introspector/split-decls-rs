@@ -12,4 +12,4 @@ macro_rules! divisible_by {
     };
 }
 
-divisible_by!()
+divisible_by!();

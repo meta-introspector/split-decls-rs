@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         CompatCapability!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! remove_capability_from_bounding_set {
     };
 }
 
-remove_capability_from_bounding_set!()
+remove_capability_from_bounding_set!();

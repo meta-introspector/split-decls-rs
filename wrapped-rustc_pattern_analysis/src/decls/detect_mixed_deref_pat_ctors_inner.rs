@@ -12,4 +12,4 @@ macro_rules! detect_mixed_deref_pat_ctors_inner {
     };
 }
 
-detect_mixed_deref_pat_ctors_inner!()
+detect_mixed_deref_pat_ctors_inner!();

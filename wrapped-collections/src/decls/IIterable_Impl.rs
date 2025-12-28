@@ -11,4 +11,4 @@ macro_rules! IIterable_Impl {
     };
 }
 
-IIterable_Impl!()
+IIterable_Impl!();

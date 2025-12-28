@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MatchPairTree!();
-        Builder!();
-        Candidate!();
-        HasMatchGuard!();
         PlaceBuilder!();
-        TestCase!();
+        HasMatchGuard!();
+        Builder!();
         FlatPat!();
+        TestCase!();
+        MatchPairTree!();
+        Candidate!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

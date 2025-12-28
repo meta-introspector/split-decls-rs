@@ -11,4 +11,4 @@ macro_rules! get_visibility {
     };
 }
 
-get_visibility!()
+get_visibility!();

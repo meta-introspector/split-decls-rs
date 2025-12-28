@@ -4,4 +4,4 @@ macro_rules! SORTED_DATA {
     };
 }
 
-SORTED_DATA!()
+SORTED_DATA!();

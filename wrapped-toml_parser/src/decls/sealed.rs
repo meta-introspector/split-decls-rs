@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Token!();
         Event!();
         Span!();
+        Token!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! sealed {
     };
 }
 
-sealed!()
+sealed!();

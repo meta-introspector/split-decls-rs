@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Key!();
         Task!();
+        Key!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! draw_tree {
     };
 }
 
-draw_tree!()
+draw_tree!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        SectionIndex!();
         PeComdatSectionIterator!();
-        ImageNtHeaders!();
         Item!();
+        SectionIndex!();
+        ImageNtHeaders!();
+        ReadRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_646 {
     };
 }
 
-impl_646!()
+impl_646!();

@@ -4,4 +4,4 @@ macro_rules! tuple_impl {
     };
 }
 
-tuple_impl!()
+tuple_impl!();

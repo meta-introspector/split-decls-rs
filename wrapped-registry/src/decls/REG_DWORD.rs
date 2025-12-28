@@ -11,4 +11,4 @@ macro_rules! REG_DWORD {
     };
 }
 
-REG_DWORD!()
+REG_DWORD!();

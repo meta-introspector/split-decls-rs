@@ -4,4 +4,4 @@ macro_rules! EXECUTABLE_ORDINAL {
     };
 }
 
-EXECUTABLE_ORDINAL!()
+EXECUTABLE_ORDINAL!();

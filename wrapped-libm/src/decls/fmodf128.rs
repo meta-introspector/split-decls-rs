@@ -4,4 +4,4 @@ macro_rules! fmodf128 {
     };
 }
 
-fmodf128!()
+fmodf128!();

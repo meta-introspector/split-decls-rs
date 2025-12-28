@@ -11,4 +11,4 @@ macro_rules! phantom_lifetime {
     };
 }
 
-phantom_lifetime!()
+phantom_lifetime!();

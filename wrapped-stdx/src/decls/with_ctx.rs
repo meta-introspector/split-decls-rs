@@ -4,4 +4,4 @@ macro_rules! with_ctx {
     };
 }
 
-with_ctx!()
+with_ctx!();

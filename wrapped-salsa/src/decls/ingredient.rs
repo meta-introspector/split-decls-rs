@@ -4,4 +4,4 @@ macro_rules! ingredient {
     };
 }
 
-ingredient!()
+ingredient!();

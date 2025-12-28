@@ -11,4 +11,4 @@ macro_rules! check_ {
     };
 }
 
-check_!()
+check_!();

@@ -4,4 +4,4 @@ macro_rules! spawn_broadcast_global {
     };
 }
 
-spawn_broadcast_global!()
+spawn_broadcast_global!();

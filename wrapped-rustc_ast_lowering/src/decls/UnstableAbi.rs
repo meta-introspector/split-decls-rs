@@ -11,4 +11,4 @@ macro_rules! UnstableAbi {
     };
 }
 
-UnstableAbi!()
+UnstableAbi!();

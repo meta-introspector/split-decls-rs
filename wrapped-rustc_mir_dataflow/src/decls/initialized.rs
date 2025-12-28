@@ -4,4 +4,4 @@ macro_rules! initialized {
     };
 }
 
-initialized!()
+initialized!();

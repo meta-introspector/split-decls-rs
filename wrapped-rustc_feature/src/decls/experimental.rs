@@ -4,4 +4,4 @@ macro_rules! experimental {
     };
 }
 
-experimental!()
+experimental!();

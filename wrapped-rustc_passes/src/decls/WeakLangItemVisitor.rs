@@ -4,4 +4,4 @@ macro_rules! WeakLangItemVisitor {
     };
 }
 
-WeakLangItemVisitor!()
+WeakLangItemVisitor!();

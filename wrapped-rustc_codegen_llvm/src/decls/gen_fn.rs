@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Linkage!();
         Builder!();
         CodegenCx!();
+        Linkage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! gen_fn {
     };
 }
 
-gen_fn!()
+gen_fn!();

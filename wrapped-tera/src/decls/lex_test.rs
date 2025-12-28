@@ -11,4 +11,4 @@ macro_rules! lex_test {
     };
 }
 
-lex_test!()
+lex_test!();

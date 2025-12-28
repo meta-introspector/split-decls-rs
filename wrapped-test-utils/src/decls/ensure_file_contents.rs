@@ -4,4 +4,4 @@ macro_rules! ensure_file_contents {
     };
 }
 
-ensure_file_contents!()
+ensure_file_contents!();

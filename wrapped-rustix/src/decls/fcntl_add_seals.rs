@@ -11,4 +11,4 @@ macro_rules! fcntl_add_seals {
     };
 }
 
-fcntl_add_seals!()
+fcntl_add_seals!();

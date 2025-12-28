@@ -4,4 +4,4 @@ macro_rules! UU {
     };
 }
 
-UU!()
+UU!();

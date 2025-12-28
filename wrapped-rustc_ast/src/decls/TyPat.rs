@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TyPatKind!();
-        Walkable!();
         LazyAttrTokenStream!();
+        Walkable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TyPat {
     };
 }
 
-TyPat!()
+TyPat!();

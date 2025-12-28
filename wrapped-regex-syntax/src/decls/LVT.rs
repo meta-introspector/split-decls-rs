@@ -4,4 +4,4 @@ macro_rules! LVT {
     };
 }
 
-LVT!()
+LVT!();

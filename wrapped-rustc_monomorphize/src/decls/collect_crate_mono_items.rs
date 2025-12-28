@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MonoItemCollectionStrategy!();
         UsageMap!();
         SharedState!();
-        MonoItemCollectionStrategy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! collect_crate_mono_items {
     };
 }
 
-collect_crate_mono_items!()
+collect_crate_mono_items!();

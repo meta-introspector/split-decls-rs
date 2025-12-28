@@ -4,4 +4,4 @@ macro_rules! persist {
     };
 }
 
-persist!()
+persist!();

@@ -12,4 +12,4 @@ macro_rules! write_central_directory_header {
     };
 }
 
-write_central_directory_header!()
+write_central_directory_header!();

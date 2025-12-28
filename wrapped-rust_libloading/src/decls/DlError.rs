@@ -4,4 +4,4 @@ macro_rules! DlError {
     };
 }
 
-DlError!()
+DlError!();

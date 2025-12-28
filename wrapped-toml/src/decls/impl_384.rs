@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SerializeMap!();
-        Table!();
         Error!();
+        Table!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_384 {
     };
 }
 
-impl_384!()
+impl_384!();

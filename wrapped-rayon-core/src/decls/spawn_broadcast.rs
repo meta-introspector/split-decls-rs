@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BroadcastContext!();
         Registry!();
+        BroadcastContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! spawn_broadcast {
     };
 }
 
-spawn_broadcast!()
+spawn_broadcast!();

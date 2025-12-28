@@ -4,4 +4,4 @@ macro_rules! select_priv_declare_output_enum {
     };
 }
 
-select_priv_declare_output_enum!()
+select_priv_declare_output_enum!();

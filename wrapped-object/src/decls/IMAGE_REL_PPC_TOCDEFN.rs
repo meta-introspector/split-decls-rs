@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_PPC_TOCDEFN {
     };
 }
 
-IMAGE_REL_PPC_TOCDEFN!()
+IMAGE_REL_PPC_TOCDEFN!();

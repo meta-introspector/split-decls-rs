@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StableSourceFileId!();
         SourceFile!();
+        StableSourceFileId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SourceMapFiles {
     };
 }
 
-SourceMapFiles!()
+SourceMapFiles!();

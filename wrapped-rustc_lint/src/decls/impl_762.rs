@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PatternKind!();
-        LateContext!();
         InvalidReferenceCastingDiag!();
+        LateContext!();
+        PatternKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_762 {
     };
 }
 
-impl_762!()
+impl_762!();

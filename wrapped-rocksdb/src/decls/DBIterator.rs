@@ -12,4 +12,4 @@ macro_rules! DBIterator {
     };
 }
 
-DBIterator!()
+DBIterator!();

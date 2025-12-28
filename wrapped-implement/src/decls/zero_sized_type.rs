@@ -4,4 +4,4 @@ macro_rules! zero_sized_type {
     };
 }
 
-zero_sized_type!()
+zero_sized_type!();

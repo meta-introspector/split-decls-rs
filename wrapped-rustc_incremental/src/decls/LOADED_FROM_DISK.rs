@@ -4,4 +4,4 @@ macro_rules! LOADED_FROM_DISK {
     };
 }
 
-LOADED_FROM_DISK!()
+LOADED_FROM_DISK!();

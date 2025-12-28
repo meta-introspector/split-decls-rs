@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProcessingError!();
         InternalCaller!();
+        ProcessingError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! write_punycode_label {
     };
 }
 
-write_punycode_label!()
+write_punycode_label!();

@@ -12,4 +12,4 @@ macro_rules! render_set_tag_macro {
     };
 }
 
-render_set_tag_macro!()
+render_set_tag_macro!();

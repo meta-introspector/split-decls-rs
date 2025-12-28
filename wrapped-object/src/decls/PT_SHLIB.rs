@@ -4,4 +4,4 @@ macro_rules! PT_SHLIB {
     };
 }
 
-PT_SHLIB!()
+PT_SHLIB!();

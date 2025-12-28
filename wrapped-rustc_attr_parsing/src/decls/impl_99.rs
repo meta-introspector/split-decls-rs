@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         NoArgsAttributeParser!();
-        AllowedTargets!();
-        StdInternalSymbolParser!();
         Stage!();
         OnDuplicate!();
+        AllowedTargets!();
+        StdInternalSymbolParser!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_99 {
     };
 }
 
-impl_99!()
+impl_99!();

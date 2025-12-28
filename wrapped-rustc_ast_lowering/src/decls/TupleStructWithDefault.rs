@@ -4,4 +4,4 @@ macro_rules! TupleStructWithDefault {
     };
 }
 
-TupleStructWithDefault!()
+TupleStructWithDefault!();

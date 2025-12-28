@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ReadTier!();
+        SnapshotWithThreadMode!();
+        IterateBounds!();
         DBAccess!();
         ReadOptions!();
-        SnapshotWithThreadMode!();
         DB!();
-        IterateBounds!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

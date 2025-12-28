@@ -4,4 +4,4 @@ macro_rules! PT_PARISC_ARCHEXT {
     };
 }
 
-PT_PARISC_ARCHEXT!()
+PT_PARISC_ARCHEXT!();

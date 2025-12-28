@@ -4,4 +4,4 @@ macro_rules! fwd_byte_by_byte {
     };
 }
 
-fwd_byte_by_byte!()
+fwd_byte_by_byte!();

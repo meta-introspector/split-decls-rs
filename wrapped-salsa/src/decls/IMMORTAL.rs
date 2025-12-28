@@ -4,4 +4,4 @@ macro_rules! IMMORTAL {
     };
 }
 
-IMMORTAL!()
+IMMORTAL!();

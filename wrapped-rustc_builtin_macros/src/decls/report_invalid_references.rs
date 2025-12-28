@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PositionUsedAs!();
         FormatPositionalMismatch!();
+        PositionUsedAs!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! report_invalid_references {
     };
 }
 
-report_invalid_references!()
+report_invalid_references!();

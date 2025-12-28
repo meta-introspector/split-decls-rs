@@ -11,4 +11,4 @@ macro_rules! encode_region {
     };
 }
 
-encode_region!()
+encode_region!();

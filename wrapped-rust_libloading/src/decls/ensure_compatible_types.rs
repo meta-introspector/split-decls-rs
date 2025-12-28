@@ -11,4 +11,4 @@ macro_rules! ensure_compatible_types {
     };
 }
 
-ensure_compatible_types!()
+ensure_compatible_types!();

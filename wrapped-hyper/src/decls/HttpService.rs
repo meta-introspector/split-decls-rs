@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Error!();
-        Response!();
         Service!();
         Result!();
+        Response!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! HttpService {
     };
 }
 
-HttpService!()
+HttpService!();

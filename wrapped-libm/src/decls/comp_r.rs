@@ -4,4 +4,4 @@ macro_rules! comp_r {
     };
 }
 
-comp_r!()
+comp_r!();

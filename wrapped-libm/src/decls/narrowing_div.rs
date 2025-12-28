@@ -4,4 +4,4 @@ macro_rules! narrowing_div {
     };
 }
 
-narrowing_div!()
+narrowing_div!();

@@ -4,4 +4,4 @@ macro_rules! WholeArchiveNeedsStatic {
     };
 }
 
-WholeArchiveNeedsStatic!()
+WholeArchiveNeedsStatic!();

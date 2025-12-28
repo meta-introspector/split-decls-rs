@@ -4,4 +4,4 @@ macro_rules! TyParamFirstLocal {
     };
 }
 
-TyParamFirstLocal!()
+TyParamFirstLocal!();

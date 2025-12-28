@@ -4,4 +4,4 @@ macro_rules! CanonicalizeFreeRegionsOtherThanStatic {
     };
 }
 
-CanonicalizeFreeRegionsOtherThanStatic!()
+CanonicalizeFreeRegionsOtherThanStatic!();

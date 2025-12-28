@@ -4,4 +4,4 @@ macro_rules! STT_LOOS {
     };
 }
 
-STT_LOOS!()
+STT_LOOS!();

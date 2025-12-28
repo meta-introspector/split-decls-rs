@@ -4,4 +4,4 @@ macro_rules! ResponseT {
     };
 }
 
-ResponseT!()
+ResponseT!();

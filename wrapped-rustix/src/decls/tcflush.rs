@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueueSelector!();
         Result!();
+        QueueSelector!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tcflush {
     };
 }
 
-tcflush!()
+tcflush!();

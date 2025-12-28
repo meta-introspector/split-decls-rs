@@ -4,4 +4,4 @@ macro_rules! AIO {
     };
 }
 
-AIO!()
+AIO!();

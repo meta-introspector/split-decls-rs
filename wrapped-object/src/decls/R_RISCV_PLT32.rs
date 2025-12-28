@@ -4,4 +4,4 @@ macro_rules! R_RISCV_PLT32 {
     };
 }
 
-R_RISCV_PLT32!()
+R_RISCV_PLT32!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Fixture!();
         MiniCore!();
         FixtureWithProjectMeta!();
+        Fixture!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

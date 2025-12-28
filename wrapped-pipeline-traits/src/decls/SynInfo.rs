@@ -4,4 +4,4 @@ macro_rules! SynInfo {
     };
 }
 
-SynInfo!()
+SynInfo!();

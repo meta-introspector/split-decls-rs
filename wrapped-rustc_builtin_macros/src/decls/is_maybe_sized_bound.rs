@@ -4,4 +4,4 @@ macro_rules! is_maybe_sized_bound {
     };
 }
 
-is_maybe_sized_bound!()
+is_maybe_sized_bound!();

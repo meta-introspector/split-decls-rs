@@ -4,4 +4,4 @@ macro_rules! ForLoopState {
     };
 }
 
-ForLoopState!()
+ForLoopState!();

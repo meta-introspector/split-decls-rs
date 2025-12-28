@@ -4,4 +4,4 @@ macro_rules! FilterOk {
     };
 }
 
-FilterOk!()
+FilterOk!();

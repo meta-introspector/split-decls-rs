@@ -4,4 +4,4 @@ macro_rules! test_top_level_options_tracked_no_crate {
     };
 }
 
-test_top_level_options_tracked_no_crate!()
+test_top_level_options_tracked_no_crate!();

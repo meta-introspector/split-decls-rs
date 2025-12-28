@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IsCopy!();
         TypedArena!();
-        IsNotCopy!();
         DroplessArena!();
+        IsCopy!();
+        IsNotCopy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! other_18 {
     };
 }
 
-other_18!()
+other_18!();

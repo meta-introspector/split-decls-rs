@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Number!();
         Value!();
+        Number!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! from_integer {
     };
 }
 
-from_integer!()
+from_integer!();

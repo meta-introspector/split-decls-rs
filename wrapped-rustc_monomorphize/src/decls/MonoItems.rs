@@ -4,4 +4,4 @@ macro_rules! MonoItems {
     };
 }
 
-MonoItems!()
+MonoItems!();

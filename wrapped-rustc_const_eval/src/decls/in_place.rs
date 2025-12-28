@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Place!();
-        Qualif!();
         ConstCx!();
+        Qualif!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! in_place {
     };
 }
 
-in_place!()
+in_place!();

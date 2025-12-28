@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BridgeTys!();
-        Region!();
         Stable!();
         OutlivesPredicate!();
+        Region!();
+        BridgeTys!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

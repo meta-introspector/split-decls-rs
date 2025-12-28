@@ -4,4 +4,4 @@ macro_rules! _memoffset__compile_error {
     };
 }
 
-_memoffset__compile_error!()
+_memoffset__compile_error!();

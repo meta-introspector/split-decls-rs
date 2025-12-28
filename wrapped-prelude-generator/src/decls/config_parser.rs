@@ -4,4 +4,4 @@ macro_rules! config_parser {
     };
 }
 
-config_parser!()
+config_parser!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LookupSpan!();
-        SpanRef!();
         Scope!();
+        SpanRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_88 {
     };
 }
 
-macro_88!()
+macro_88!();

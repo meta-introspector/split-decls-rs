@@ -11,4 +11,4 @@ macro_rules! parse_impl {
     };
 }
 
-parse_impl!()
+parse_impl!();

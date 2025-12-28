@@ -4,4 +4,4 @@ macro_rules! biosemiotic {
     };
 }
 
-biosemiotic!()
+biosemiotic!();

@@ -4,4 +4,4 @@ macro_rules! CallConvention {
     };
 }
 
-CallConvention!()
+CallConvention!();

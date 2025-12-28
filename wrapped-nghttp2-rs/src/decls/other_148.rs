@@ -4,4 +4,4 @@ macro_rules! other_148 {
     };
 }
 
-other_148!()
+other_148!();

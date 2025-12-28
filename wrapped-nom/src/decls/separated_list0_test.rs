@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Err!();
-        Error!();
-        Needed!();
-        ErrorKind!();
         IResult!();
+        Error!();
+        Err!();
+        ErrorKind!();
+        Needed!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! separated_list0_test {
     };
 }
 
-separated_list0_test!()
+separated_list0_test!();

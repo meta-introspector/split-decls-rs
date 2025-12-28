@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PlaceCtxt!();
         PatCx!();
+        PlaceCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

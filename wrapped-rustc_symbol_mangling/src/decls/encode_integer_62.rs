@@ -4,4 +4,4 @@ macro_rules! encode_integer_62 {
     };
 }
 
-encode_integer_62!()
+encode_integer_62!();

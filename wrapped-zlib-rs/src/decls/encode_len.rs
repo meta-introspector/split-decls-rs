@@ -12,4 +12,4 @@ macro_rules! encode_len {
     };
 }
 
-encode_len!()
+encode_len!();

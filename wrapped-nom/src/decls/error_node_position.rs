@@ -4,4 +4,4 @@ macro_rules! error_node_position {
     };
 }
 
-error_node_position!()
+error_node_position!();

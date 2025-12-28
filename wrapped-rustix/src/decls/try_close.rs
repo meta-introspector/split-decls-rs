@@ -11,4 +11,4 @@ macro_rules! try_close {
     };
 }
 
-try_close!()
+try_close!();

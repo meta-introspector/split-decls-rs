@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Timestamps!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! futimens {
     };
 }
 
-futimens!()
+futimens!();

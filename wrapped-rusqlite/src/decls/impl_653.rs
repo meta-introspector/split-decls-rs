@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Context!();
-        VTabLogCursor!();
+        Type!();
         ValueRef!();
+        VTabCursor!();
+        VTabLogCursor!();
         Filters!();
         Result!();
-        Type!();
-        VTabCursor!();
         Null!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_653 {
     };
 }
 
-impl_653!()
+impl_653!();

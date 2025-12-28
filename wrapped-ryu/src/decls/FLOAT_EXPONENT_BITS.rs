@@ -4,4 +4,4 @@ macro_rules! FLOAT_EXPONENT_BITS {
     };
 }
 
-FLOAT_EXPONENT_BITS!()
+FLOAT_EXPONENT_BITS!();

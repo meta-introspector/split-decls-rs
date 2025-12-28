@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Event!();
         Input!();
+        Event!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Parser {
     };
 }
 
-Parser!()
+Parser!();

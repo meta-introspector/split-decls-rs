@@ -4,4 +4,4 @@ macro_rules! assert_size_eq_val {
     };
 }
 
-assert_size_eq_val!()
+assert_size_eq_val!();

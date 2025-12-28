@@ -11,4 +11,4 @@ macro_rules! CURRENT_USER {
     };
 }
 
-CURRENT_USER!()
+CURRENT_USER!();

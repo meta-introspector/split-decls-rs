@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        PCWSTR!();
         REG_OPEN_CREATE_OPTIONS!();
-        HANDLE!();
-        REG_CREATE_KEY_DISPOSITION!();
-        WIN32_ERROR!();
-        SECURITY_ATTRIBUTES!();
-        HKEY!();
         REG_SAM_FLAGS!();
+        PCWSTR!();
+        SECURITY_ATTRIBUTES!();
+        REG_CREATE_KEY_DISPOSITION!();
+        HKEY!();
+        HANDLE!();
+        WIN32_ERROR!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! macro_9 {
     };
 }
 
-macro_9!()
+macro_9!();

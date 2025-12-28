@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        UnusedResult!();
-        UnusedOpSuggestion!();
-        UnusedClosure!();
-        UnusedDef!();
-        UnusedCoroutine!();
         UnusedDefSuggestion!();
+        UnusedDef!();
         LateContext!();
+        UnusedClosure!();
+        UnusedOpSuggestion!();
         UnusedOp!();
+        UnusedResult!();
+        UnusedCoroutine!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_838 {
     };
 }
 
-impl_838!()
+impl_838!();

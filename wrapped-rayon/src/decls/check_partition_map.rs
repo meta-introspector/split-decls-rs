@@ -4,4 +4,4 @@ macro_rules! check_partition_map {
     };
 }
 
-check_partition_map!()
+check_partition_map!();

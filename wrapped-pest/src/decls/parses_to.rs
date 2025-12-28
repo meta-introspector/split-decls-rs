@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Token!();
         Parser!();
+        Token!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parses_to {
     };
 }
 
-parses_to!()
+parses_to!();

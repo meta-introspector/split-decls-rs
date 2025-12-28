@@ -4,4 +4,4 @@ macro_rules! MultipleRustcMain {
     };
 }
 
-MultipleRustcMain!()
+MultipleRustcMain!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ImplBlockBuilder!();
         Trait!();
+        ImplBlockBuilder!();
         FieldBounds!();
         EnumRepr!();
-        Repr!();
         CompoundRepr!();
+        Repr!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! derive_from_zeros_enum {
     };
 }
 
-derive_from_zeros_enum!()
+derive_from_zeros_enum!();

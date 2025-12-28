@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Candidate!();
         SolverDelegate!();
-        GoalKind!();
         EvalCtxt!();
+        GoalKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

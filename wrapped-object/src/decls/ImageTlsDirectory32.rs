@@ -11,4 +11,4 @@ macro_rules! ImageTlsDirectory32 {
     };
 }
 
-ImageTlsDirectory32!()
+ImageTlsDirectory32!();

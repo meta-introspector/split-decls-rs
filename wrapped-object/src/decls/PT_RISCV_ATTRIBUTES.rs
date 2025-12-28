@@ -4,4 +4,4 @@ macro_rules! PT_RISCV_ATTRIBUTES {
     };
 }
 
-PT_RISCV_ATTRIBUTES!()
+PT_RISCV_ATTRIBUTES!();

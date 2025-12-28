@@ -4,4 +4,4 @@ macro_rules! CreateByValAttr {
     };
 }
 
-CreateByValAttr!()
+CreateByValAttr!();

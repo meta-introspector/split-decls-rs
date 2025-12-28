@@ -4,4 +4,4 @@ macro_rules! check_impl_wf {
     };
 }
 
-check_impl_wf!()
+check_impl_wf!();

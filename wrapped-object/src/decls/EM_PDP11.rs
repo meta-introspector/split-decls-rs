@@ -4,4 +4,4 @@ macro_rules! EM_PDP11 {
     };
 }
 
-EM_PDP11!()
+EM_PDP11!();

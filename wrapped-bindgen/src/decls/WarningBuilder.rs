@@ -4,4 +4,4 @@ macro_rules! WarningBuilder {
     };
 }
 
-WarningBuilder!()
+WarningBuilder!();

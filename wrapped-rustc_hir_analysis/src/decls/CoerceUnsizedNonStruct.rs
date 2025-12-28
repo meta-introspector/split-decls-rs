@@ -4,4 +4,4 @@ macro_rules! CoerceUnsizedNonStruct {
     };
 }
 
-CoerceUnsizedNonStruct!()
+CoerceUnsizedNonStruct!();

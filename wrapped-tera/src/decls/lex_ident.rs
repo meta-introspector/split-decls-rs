@@ -11,4 +11,4 @@ macro_rules! lex_ident {
     };
 }
 
-lex_ident!()
+lex_ident!();

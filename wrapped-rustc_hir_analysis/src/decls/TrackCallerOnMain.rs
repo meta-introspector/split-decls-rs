@@ -4,4 +4,4 @@ macro_rules! TrackCallerOnMain {
     };
 }
 
-TrackCallerOnMain!()
+TrackCallerOnMain!();

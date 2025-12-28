@@ -4,4 +4,4 @@ macro_rules! CP_L {
     };
 }
 
-CP_L!()
+CP_L!();

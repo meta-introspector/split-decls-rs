@@ -4,4 +4,4 @@ macro_rules! TupleArgumentsFlag {
     };
 }
 
-TupleArgumentsFlag!()
+TupleArgumentsFlag!();

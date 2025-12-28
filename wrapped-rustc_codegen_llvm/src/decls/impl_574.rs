@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Visibility!();
+        Linkage!();
         CodegenCx!();
         RelocModel!();
-        Linkage!();
-        Visibility!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_574 {
     };
 }
 
-impl_574!()
+impl_574!();

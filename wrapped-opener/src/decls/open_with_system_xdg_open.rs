@@ -4,4 +4,4 @@ macro_rules! open_with_system_xdg_open {
     };
 }
 
-open_with_system_xdg_open!()
+open_with_system_xdg_open!();

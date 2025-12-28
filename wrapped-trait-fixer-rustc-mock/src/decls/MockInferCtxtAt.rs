@@ -4,4 +4,4 @@ macro_rules! MockInferCtxtAt {
     };
 }
 
-MockInferCtxtAt!()
+MockInferCtxtAt!();

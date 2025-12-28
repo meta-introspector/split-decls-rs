@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         UnnamedAddr!();
+        CallConv!();
         Visibility!();
         CodegenCx!();
-        CallConv!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_371 {
     };
 }
 
-impl_371!()
+impl_371!();

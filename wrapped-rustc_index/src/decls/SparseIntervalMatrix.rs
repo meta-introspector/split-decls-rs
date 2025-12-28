@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SparseBitMatrix!();
-        IndexVec!();
         BitMatrix!();
-        IntervalSet!();
+        SparseBitMatrix!();
         Idx!();
+        IndexVec!();
+        IntervalSet!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! SparseIntervalMatrix {
     };
 }
 
-SparseIntervalMatrix!()
+SparseIntervalMatrix!();

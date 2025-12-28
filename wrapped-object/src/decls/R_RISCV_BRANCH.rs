@@ -4,4 +4,4 @@ macro_rules! R_RISCV_BRANCH {
     };
 }
 
-R_RISCV_BRANCH!()
+R_RISCV_BRANCH!();

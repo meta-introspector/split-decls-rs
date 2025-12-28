@@ -4,4 +4,4 @@ macro_rules! serial_file_lock {
     };
 }
 
-serial_file_lock!()
+serial_file_lock!();

@@ -4,4 +4,4 @@ macro_rules! NodeFilteredEdgeReferences {
     };
 }
 
-NodeFilteredEdgeReferences!()
+NodeFilteredEdgeReferences!();

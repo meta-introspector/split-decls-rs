@@ -4,4 +4,4 @@ macro_rules! impl_include_dir {
     };
 }
 
-impl_include_dir!()
+impl_include_dir!();

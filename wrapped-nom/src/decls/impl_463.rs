@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        PResult!();
         Parser!();
-        ParseError!();
         Error!();
+        PResult!();
+        Input!();
+        ParseError!();
         SplitPosition1!();
         OutputMode!();
-        Input!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_463 {
     };
 }
 
-impl_463!()
+impl_463!();

@@ -4,4 +4,4 @@ macro_rules! wants_c_like_enum_debuginfo {
     };
 }
 
-wants_c_like_enum_debuginfo!()
+wants_c_like_enum_debuginfo!();

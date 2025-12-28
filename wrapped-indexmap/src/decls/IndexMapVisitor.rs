@@ -4,4 +4,4 @@ macro_rules! IndexMapVisitor {
     };
 }
 
-IndexMapVisitor!()
+IndexMapVisitor!();

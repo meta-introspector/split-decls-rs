@@ -4,4 +4,4 @@ macro_rules! TransformTyOptions {
     };
 }
 
-TransformTyOptions!()
+TransformTyOptions!();

@@ -4,4 +4,4 @@ macro_rules! sparse_set {
     };
 }
 
-sparse_set!()
+sparse_set!();

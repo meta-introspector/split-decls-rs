@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EarlyContext!();
         UnusedParens!();
+        EarlyContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_850 {
     };
 }
 
-impl_850!()
+impl_850!();

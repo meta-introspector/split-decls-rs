@@ -4,4 +4,4 @@ macro_rules! ssr_struct_def {
     };
 }
 
-ssr_struct_def!()
+ssr_struct_def!();

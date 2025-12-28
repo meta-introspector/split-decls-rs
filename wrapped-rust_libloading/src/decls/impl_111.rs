@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Error!();
         LOAD_LIBRARY_FLAGS!();
+        FARPROC!();
+        Error!();
+        AsSymbolName!();
+        HMODULE!();
+        ErrorModeGuard!();
         AsFilename!();
         Library!();
-        AsSymbolName!();
-        FARPROC!();
-        HMODULE!();
         Symbol!();
-        ErrorModeGuard!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_111 {
     };
 }
 
-impl_111!()
+impl_111!();

@@ -11,4 +11,4 @@ macro_rules! has_flatten {
     };
 }
 
-has_flatten!()
+has_flatten!();

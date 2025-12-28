@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ImageNtHeaders32!();
-        ReadRef!();
-        Result!();
         ImageDosHeader!();
+        ImageNtHeaders32!();
+        Result!();
+        Error!();
+        ReadRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! optional_header_magic {
     };
 }
 
-optional_header_magic!()
+optional_header_magic!();

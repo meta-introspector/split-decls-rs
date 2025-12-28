@@ -4,4 +4,4 @@ macro_rules! PI_2 {
     };
 }
 
-PI_2!()
+PI_2!();

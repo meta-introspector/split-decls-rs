@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        BitBuffer!();
-        OutputBuffer!();
-        State!();
-        TINFLStatus!();
-        Action!();
         InputWrapper!();
-        LocalVars!();
         DecompressorOxide!();
+        LocalVars!();
+        TINFLStatus!();
+        State!();
+        OutputBuffer!();
+        BitBuffer!();
+        Action!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! decompress_with_limit {
     };
 }
 
-decompress_with_limit!()
+decompress_with_limit!();

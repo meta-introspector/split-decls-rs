@@ -4,4 +4,4 @@ macro_rules! padding_needed_for {
     };
 }
 
-padding_needed_for!()
+padding_needed_for!();

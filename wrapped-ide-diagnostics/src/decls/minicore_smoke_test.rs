@@ -11,4 +11,4 @@ macro_rules! minicore_smoke_test {
     };
 }
 
-minicore_smoke_test!()
+minicore_smoke_test!();

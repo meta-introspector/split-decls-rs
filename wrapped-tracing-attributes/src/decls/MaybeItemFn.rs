@@ -4,4 +4,4 @@ macro_rules! MaybeItemFn {
     };
 }
 
-MaybeItemFn!()
+MaybeItemFn!();

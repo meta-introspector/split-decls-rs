@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Sysroot!();
         WorkspaceBuildScripts!();
-        SysrootPublicDeps!();
-        CfgOverrides!();
         FileLoader!();
         RustLibSrcWorkspace!();
+        CfgOverrides!();
+        SysrootPublicDeps!();
+        Sysroot!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! sysroot_to_crate_graph {
     };
 }
 
-sysroot_to_crate_graph!()
+sysroot_to_crate_graph!();

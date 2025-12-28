@@ -11,4 +11,4 @@ macro_rules! compute_info_bound {
     };
 }
 
-compute_info_bound!()
+compute_info_bound!();

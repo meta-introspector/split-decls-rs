@@ -4,4 +4,4 @@ macro_rules! workspace {
     };
 }
 
-workspace!()
+workspace!();

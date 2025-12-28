@@ -12,4 +12,4 @@ macro_rules! str_normalize_user_regex_named {
     };
 }
 
-str_normalize_user_regex_named!()
+str_normalize_user_regex_named!();

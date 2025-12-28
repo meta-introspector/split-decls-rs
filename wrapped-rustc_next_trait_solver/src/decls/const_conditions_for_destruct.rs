@@ -4,4 +4,4 @@ macro_rules! const_conditions_for_destruct {
     };
 }
 
-const_conditions_for_destruct!()
+const_conditions_for_destruct!();

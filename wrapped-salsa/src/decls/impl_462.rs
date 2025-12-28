@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         CycleHeads!();
-        IterationCount!();
         Id!();
         Identity!();
-        QueryRevisionsExtraInner!();
         QueryRevisionsExtra!();
+        QueryRevisionsExtraInner!();
+        IterationCount!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_462 {
     };
 }
 
-impl_462!()
+impl_462!();

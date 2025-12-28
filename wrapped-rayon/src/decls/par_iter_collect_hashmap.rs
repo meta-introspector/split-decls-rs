@@ -4,4 +4,4 @@ macro_rules! par_iter_collect_hashmap {
     };
 }
 
-par_iter_collect_hashmap!()
+par_iter_collect_hashmap!();

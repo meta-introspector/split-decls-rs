@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DebugMap!();
-        Undirected!();
         Directed!();
-        IndexType!();
-        NoPretty!();
+        Undirected!();
         StableGraph!();
+        NoPretty!();
+        DebugMap!();
+        IndexType!();
         EdgeType!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_802 {
     };
 }
 
-impl_802!()
+impl_802!();

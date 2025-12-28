@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_GOAWAY {
     };
 }
 
-NGHTTP2_GOAWAY!()
+NGHTTP2_GOAWAY!();

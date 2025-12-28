@@ -11,4 +11,4 @@ macro_rules! PATH_NAME_REF_KINDS {
     };
 }
 
-PATH_NAME_REF_KINDS!()
+PATH_NAME_REF_KINDS!();

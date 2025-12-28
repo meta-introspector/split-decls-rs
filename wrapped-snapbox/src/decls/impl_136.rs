@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DataInner!();
         Result!();
+        DataInner!();
         Data!();
         Error!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_136 {
     };
 }
 
-impl_136!()
+impl_136!();

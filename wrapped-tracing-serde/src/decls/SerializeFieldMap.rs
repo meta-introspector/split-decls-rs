@@ -4,4 +4,4 @@ macro_rules! SerializeFieldMap {
     };
 }
 
-SerializeFieldMap!()
+SerializeFieldMap!();

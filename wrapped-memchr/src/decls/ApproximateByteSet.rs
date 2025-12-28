@@ -4,4 +4,4 @@ macro_rules! ApproximateByteSet {
     };
 }
 
-ApproximateByteSet!()
+ApproximateByteSet!();

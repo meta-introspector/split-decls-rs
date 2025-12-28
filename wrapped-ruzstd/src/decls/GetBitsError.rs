@@ -4,4 +4,4 @@ macro_rules! GetBitsError {
     };
 }
 
-GetBitsError!()
+GetBitsError!();

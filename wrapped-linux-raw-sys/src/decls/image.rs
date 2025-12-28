@@ -4,4 +4,4 @@ macro_rules! image {
     };
 }
 
-image!()
+image!();

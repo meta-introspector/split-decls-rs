@@ -4,4 +4,4 @@ macro_rules! scope_def_docs {
     };
 }
 
-scope_def_docs!()
+scope_def_docs!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SegmentId!();
         Id!();
         Item!();
+        SegmentId!();
         Segment!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_1114 {
     };
 }
 
-impl_1114!()
+impl_1114!();

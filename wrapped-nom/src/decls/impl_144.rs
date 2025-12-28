@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Err!();
-        Finish!();
         Error!();
+        Finish!();
+        Err!();
         IResult!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

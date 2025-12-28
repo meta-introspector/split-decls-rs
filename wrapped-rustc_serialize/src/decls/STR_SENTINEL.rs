@@ -4,4 +4,4 @@ macro_rules! STR_SENTINEL {
     };
 }
 
-STR_SENTINEL!()
+STR_SENTINEL!();

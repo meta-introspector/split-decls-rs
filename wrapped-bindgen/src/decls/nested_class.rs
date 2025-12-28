@@ -4,4 +4,4 @@ macro_rules! nested_class {
     };
 }
 
-nested_class!()
+nested_class!();

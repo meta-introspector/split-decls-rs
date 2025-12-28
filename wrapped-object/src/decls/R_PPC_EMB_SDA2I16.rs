@@ -4,4 +4,4 @@ macro_rules! R_PPC_EMB_SDA2I16 {
     };
 }
 
-R_PPC_EMB_SDA2I16!()
+R_PPC_EMB_SDA2I16!();

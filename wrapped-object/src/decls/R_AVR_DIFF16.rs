@@ -4,4 +4,4 @@ macro_rules! R_AVR_DIFF16 {
     };
 }
 
-R_AVR_DIFF16!()
+R_AVR_DIFF16!();

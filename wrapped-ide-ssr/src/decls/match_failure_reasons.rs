@@ -15,4 +15,4 @@ macro_rules! match_failure_reasons {
     };
 }
 
-match_failure_reasons!()
+match_failure_reasons!();

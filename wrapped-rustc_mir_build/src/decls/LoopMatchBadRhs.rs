@@ -4,4 +4,4 @@ macro_rules! LoopMatchBadRhs {
     };
 }
 
-LoopMatchBadRhs!()
+LoopMatchBadRhs!();

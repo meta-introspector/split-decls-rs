@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReplacementRenderer!();
         Match!();
+        ReplacementRenderer!();
         ResolvedRule!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! render_replace {
     };
 }
 
-render_replace!()
+render_replace!();

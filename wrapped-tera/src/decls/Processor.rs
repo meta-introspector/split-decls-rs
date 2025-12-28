@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MacroCollection!();
-        If!();
+        Template!();
         CallStack!();
         Tera!();
-        Template!();
+        If!();
+        MacroCollection!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Processor {
     };
 }
 
-Processor!()
+Processor!();

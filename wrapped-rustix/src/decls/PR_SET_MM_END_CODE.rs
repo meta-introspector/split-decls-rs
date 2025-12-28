@@ -4,4 +4,4 @@ macro_rules! PR_SET_MM_END_CODE {
     };
 }
 
-PR_SET_MM_END_CODE!()
+PR_SET_MM_END_CODE!();

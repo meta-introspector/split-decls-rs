@@ -4,4 +4,4 @@ macro_rules! io_uring_params {
     };
 }
 
-io_uring_params!()
+io_uring_params!();

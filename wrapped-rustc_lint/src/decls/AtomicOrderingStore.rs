@@ -4,4 +4,4 @@ macro_rules! AtomicOrderingStore {
     };
 }
 
-AtomicOrderingStore!()
+AtomicOrderingStore!();

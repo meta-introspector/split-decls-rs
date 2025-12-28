@@ -4,4 +4,4 @@ macro_rules! is_num_or_string {
     };
 }
 
-is_num_or_string!()
+is_num_or_string!();

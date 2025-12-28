@@ -4,4 +4,4 @@ macro_rules! ReprConflicting {
     };
 }
 
-ReprConflicting!()
+ReprConflicting!();

@@ -4,4 +4,4 @@ macro_rules! AddressOfTemporaryTaken {
     };
 }
 
-AddressOfTemporaryTaken!()
+AddressOfTemporaryTaken!();

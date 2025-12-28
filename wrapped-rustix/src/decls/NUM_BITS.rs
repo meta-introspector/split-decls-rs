@@ -11,4 +11,4 @@ macro_rules! NUM_BITS {
     };
 }
 
-NUM_BITS!()
+NUM_BITS!();

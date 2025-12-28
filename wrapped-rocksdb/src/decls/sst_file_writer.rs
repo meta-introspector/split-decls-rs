@@ -4,4 +4,4 @@ macro_rules! sst_file_writer {
     };
 }
 
-sst_file_writer!()
+sst_file_writer!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Members!();
         ReadRef!();
         ArchiveKind!();
-        Members!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ArchiveFile {
     };
 }
 
-ArchiveFile!()
+ArchiveFile!();

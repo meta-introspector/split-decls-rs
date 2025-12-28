@@ -4,4 +4,4 @@ macro_rules! deflateSetDictionary {
     };
 }
 
-deflateSetDictionary!()
+deflateSetDictionary!();

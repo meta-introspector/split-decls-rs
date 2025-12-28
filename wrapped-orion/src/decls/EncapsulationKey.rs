@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EncapKey!();
         MlKem1024Internal!();
+        EncapKey!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EncapsulationKey {
     };
 }
 
-EncapsulationKey!()
+EncapsulationKey!();

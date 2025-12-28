@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Spurious!();
+        Schedule!();
         Store!();
         Load!();
-        Schedule!();
-        Spurious!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Path {
     };
 }
 
-Path!()
+Path!();

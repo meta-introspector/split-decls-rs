@@ -11,4 +11,4 @@ macro_rules! RUSTC_LINTS {
     };
 }
 
-RUSTC_LINTS!()
+RUSTC_LINTS!();

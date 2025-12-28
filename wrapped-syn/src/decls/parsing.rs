@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
         Group!();
+        Result!();
         Parse!();
         ParseStream!();
         IdentExt!();
         Punctuated!();
-        Result!();
+        Lifetime!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! parsing {
     };
 }
 
-parsing!()
+parsing!();

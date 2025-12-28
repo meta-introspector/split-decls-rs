@@ -4,4 +4,4 @@ macro_rules! ALIGN_BITS {
     };
 }
 
-ALIGN_BITS!()
+ALIGN_BITS!();

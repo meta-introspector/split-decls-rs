@@ -11,4 +11,4 @@ macro_rules! EMPTY_HEADER {
     };
 }
 
-EMPTY_HEADER!()
+EMPTY_HEADER!();

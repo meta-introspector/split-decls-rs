@@ -4,4 +4,4 @@ macro_rules! ImplicitUnsafeAutorefsOrigin {
     };
 }
 
-ImplicitUnsafeAutorefsOrigin!()
+ImplicitUnsafeAutorefsOrigin!();

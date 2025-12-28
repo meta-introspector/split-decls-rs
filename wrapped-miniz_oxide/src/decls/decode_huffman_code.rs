@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        InputWrapper!();
-        LocalVars!();
-        DecompressorOxide!();
         Action!();
+        DecompressorOxide!();
         BitBuffer!();
+        LocalVars!();
+        InputWrapper!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! decode_huffman_code {
     };
 }
 
-decode_huffman_code!()
+decode_huffman_code!();

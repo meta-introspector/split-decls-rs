@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ForestObligation!();
-        Entry!();
-        Node!();
-        NodeState!();
-        Error!();
-        ProcessResult!();
         ObligationForest!();
+        ProcessResult!();
         ObligationProcessor!();
+        NodeState!();
+        Node!();
+        Entry!();
+        Error!();
+        ForestObligation!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_338 {
     };
 }
 
-impl_338!()
+impl_338!();

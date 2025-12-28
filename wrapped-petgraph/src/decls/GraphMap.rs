@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CompactDirection!();
-        DiGraphMap!();
-        Edge!();
         UnGraphMap!();
+        DiGraphMap!();
+        CompactDirection!();
+        Edge!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! GraphMap {
     };
 }
 
-GraphMap!()
+GraphMap!();

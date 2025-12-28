@@ -11,4 +11,4 @@ macro_rules! span_of_unexpected_ignoring_nones {
     };
 }
 
-span_of_unexpected_ignoring_nones!()
+span_of_unexpected_ignoring_nones!();

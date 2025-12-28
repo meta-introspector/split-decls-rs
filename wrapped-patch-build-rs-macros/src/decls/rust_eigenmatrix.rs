@@ -4,4 +4,4 @@ macro_rules! rust_eigenmatrix {
     };
 }
 
-rust_eigenmatrix!()
+rust_eigenmatrix!();

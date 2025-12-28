@@ -4,4 +4,4 @@ macro_rules! fatal_error {
     };
 }
 
-fatal_error!()
+fatal_error!();

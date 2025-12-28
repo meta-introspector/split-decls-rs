@@ -4,4 +4,4 @@ macro_rules! RLINK_MAGIC {
     };
 }
 
-RLINK_MAGIC!()
+RLINK_MAGIC!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Aliasing!();
-        Alignment!();
         Shared!();
+        Alignment!();
         Invariants!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! _external {
     };
 }
 
-_external!()
+_external!();

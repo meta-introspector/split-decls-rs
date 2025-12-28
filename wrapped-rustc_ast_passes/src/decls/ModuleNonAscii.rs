@@ -4,4 +4,4 @@ macro_rules! ModuleNonAscii {
     };
 }
 
-ModuleNonAscii!()
+ModuleNonAscii!();

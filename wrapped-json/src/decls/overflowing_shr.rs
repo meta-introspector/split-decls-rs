@@ -11,4 +11,4 @@ macro_rules! overflowing_shr {
     };
 }
 
-overflowing_shr!()
+overflowing_shr!();

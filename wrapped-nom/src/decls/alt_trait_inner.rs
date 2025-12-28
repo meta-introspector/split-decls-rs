@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Err!();
         Error!();
         ErrorKind!();
-        Err!();
         Mode!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! alt_trait_inner {
     };
 }
 
-alt_trait_inner!()
+alt_trait_inner!();

@@ -4,4 +4,4 @@ macro_rules! UnsafeItem {
     };
 }
 
-UnsafeItem!()
+UnsafeItem!();

@@ -4,4 +4,4 @@ macro_rules! CallHierarchyConfig {
     };
 }
 
-CallHierarchyConfig!()
+CallHierarchyConfig!();

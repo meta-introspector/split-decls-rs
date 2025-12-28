@@ -4,4 +4,4 @@ macro_rules! fsopen {
     };
 }
 
-fsopen!()
+fsopen!();

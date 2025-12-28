@@ -4,4 +4,4 @@ macro_rules! CoalescePredicate {
     };
 }
 
-CoalescePredicate!()
+CoalescePredicate!();

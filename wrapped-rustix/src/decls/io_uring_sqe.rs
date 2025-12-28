@@ -11,4 +11,4 @@ macro_rules! io_uring_sqe {
     };
 }
 
-io_uring_sqe!()
+io_uring_sqe!();

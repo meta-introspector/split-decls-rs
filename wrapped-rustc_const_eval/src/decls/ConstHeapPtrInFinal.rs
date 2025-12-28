@@ -4,4 +4,4 @@ macro_rules! ConstHeapPtrInFinal {
     };
 }
 
-ConstHeapPtrInFinal!()
+ConstHeapPtrInFinal!();

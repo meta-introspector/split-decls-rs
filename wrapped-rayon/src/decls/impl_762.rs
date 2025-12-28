@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnindexedProducer!();
         Iter!();
-        Folder!();
+        UnindexedProducer!();
         IterParallelProducer!();
+        Folder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_762 {
     };
 }
 
-impl_762!()
+impl_762!();

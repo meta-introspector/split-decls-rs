@@ -4,4 +4,4 @@ macro_rules! UnallowedHeapAllocations {
     };
 }
 
-UnallowedHeapAllocations!()
+UnallowedHeapAllocations!();

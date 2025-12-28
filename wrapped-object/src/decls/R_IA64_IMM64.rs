@@ -4,4 +4,4 @@ macro_rules! R_IA64_IMM64 {
     };
 }
 
-R_IA64_IMM64!()
+R_IA64_IMM64!();

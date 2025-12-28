@@ -4,4 +4,4 @@ macro_rules! weakcall {
     };
 }
 
-weakcall!()
+weakcall!();

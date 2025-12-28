@@ -4,4 +4,4 @@ macro_rules! R_LARCH_COPY {
     };
 }
 
-R_LARCH_COPY!()
+R_LARCH_COPY!();

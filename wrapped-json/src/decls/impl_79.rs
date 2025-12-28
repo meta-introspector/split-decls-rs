@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        IterMut!();
-        Keys!();
-        OccupiedEntry!();
+        Entry!();
+        IntoValues!();
+        Values!();
         VacantEntry!();
         ValuesMut!();
         Value!();
-        IntoValues!();
-        Values!();
-        Iter!();
-        Entry!();
+        Keys!();
+        OccupiedEntry!();
         MapImpl!();
+        Iter!();
         Map!();
+        IterMut!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

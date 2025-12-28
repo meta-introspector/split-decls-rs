@@ -4,4 +4,4 @@ macro_rules! EntryPointCleaner {
     };
 }
 
-EntryPointCleaner!()
+EntryPointCleaner!();

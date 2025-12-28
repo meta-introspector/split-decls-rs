@@ -4,4 +4,4 @@ macro_rules! has_test_function_or_multiple_test_submodules {
     };
 }
 
-has_test_function_or_multiple_test_submodules!()
+has_test_function_or_multiple_test_submodules!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ProgressFormat!();
+        Throughput!();
         Task!();
         Key!();
-        Throughput!();
-        ProgressFormat!();
         State!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! draw_progress {
     };
 }
 
-draw_progress!()
+draw_progress!();

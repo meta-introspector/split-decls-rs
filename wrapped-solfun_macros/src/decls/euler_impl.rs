@@ -4,4 +4,4 @@ macro_rules! euler_impl {
     };
 }
 
-euler_impl!()
+euler_impl!();

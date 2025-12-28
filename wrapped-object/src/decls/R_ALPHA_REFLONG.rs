@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_REFLONG {
     };
 }
 
-R_ALPHA_REFLONG!()
+R_ALPHA_REFLONG!();

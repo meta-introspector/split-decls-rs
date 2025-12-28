@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
         Result!();
         Value!();
-        UnitVariantAccess!();
         Read!();
         VariantAccess!();
+        UnitVariantAccess!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

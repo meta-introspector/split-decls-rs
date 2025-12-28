@@ -4,4 +4,4 @@ macro_rules! EM_COOL {
     };
 }
 
-EM_COOL!()
+EM_COOL!();

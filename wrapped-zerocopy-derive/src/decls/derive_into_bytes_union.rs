@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FieldBounds!();
-        PaddingCheck!();
-        ImplBlockBuilder!();
         StructUnionRepr!();
         Trait!();
+        PaddingCheck!();
+        FieldBounds!();
+        ImplBlockBuilder!();
     };
 }
 
@@ -16,4 +16,4 @@ please let us know you use this feature: https://github.com/google/zerocopy/disc
     };
 }
 
-derive_into_bytes_union!()
+derive_into_bytes_union!();

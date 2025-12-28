@@ -4,4 +4,4 @@ macro_rules! arms_contain_ref_bindings {
     };
 }
 
-arms_contain_ref_bindings!()
+arms_contain_ref_bindings!();

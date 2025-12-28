@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PassMode!();
         FieldConfig!();
+        PassMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! extra_details_visit_fields {
     };
 }
 
-extra_details_visit_fields!()
+extra_details_visit_fields!();

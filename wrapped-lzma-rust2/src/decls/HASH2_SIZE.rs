@@ -4,4 +4,4 @@ macro_rules! HASH2_SIZE {
     };
 }
 
-HASH2_SIZE!()
+HASH2_SIZE!();

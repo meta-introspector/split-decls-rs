@@ -4,4 +4,4 @@ macro_rules! improper_ctypes {
     };
 }
 
-improper_ctypes!()
+improper_ctypes!();

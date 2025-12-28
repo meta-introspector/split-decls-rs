@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        IngredientImpl!();
-        Lookup!();
-        StructEntry!();
-        Zalsa!();
-        RevisionQueue!();
-        FromId!();
-        ZalsaLocal!();
-        HashEqLike!();
-        EventKind!();
-        AsId!();
-        Value!();
-        Event!();
         ValueShared!();
-        Durability!();
-        IngredientShard!();
         IngredientIndex!();
-        Configuration!();
-        Id!();
-        DatabaseKeyIndex!();
         Revision!();
+        RevisionQueue!();
+        Zalsa!();
+        FromId!();
+        Lookup!();
+        Id!();
+        HashEqLike!();
+        Durability!();
+        AsId!();
+        DatabaseKeyIndex!();
+        IngredientImpl!();
+        ZalsaLocal!();
+        Configuration!();
+        StructEntry!();
+        Event!();
+        Value!();
+        EventKind!();
+        IngredientShard!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

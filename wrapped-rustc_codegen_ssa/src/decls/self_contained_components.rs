@@ -11,4 +11,4 @@ macro_rules! self_contained_components {
     };
 }
 
-self_contained_components!()
+self_contained_components!();

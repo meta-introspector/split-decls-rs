@@ -4,4 +4,4 @@ macro_rules! NT_TASKSTRUCT {
     };
 }
 
-NT_TASKSTRUCT!()
+NT_TASKSTRUCT!();

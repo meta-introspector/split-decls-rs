@@ -4,4 +4,4 @@ macro_rules! lit_to_const {
     };
 }
 
-lit_to_const!()
+lit_to_const!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Binding!();
         ParseError!();
-        ParseCtxt!();
         Scope!();
+        ParseCtxt!();
         PResult!();
+        Binding!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

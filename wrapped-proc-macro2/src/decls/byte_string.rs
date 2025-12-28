@@ -12,4 +12,4 @@ macro_rules! byte_string {
     };
 }
 
-byte_string!()
+byte_string!();

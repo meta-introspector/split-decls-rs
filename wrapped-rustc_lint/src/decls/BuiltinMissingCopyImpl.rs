@@ -4,4 +4,4 @@ macro_rules! BuiltinMissingCopyImpl {
     };
 }
 
-BuiltinMissingCopyImpl!()
+BuiltinMissingCopyImpl!();

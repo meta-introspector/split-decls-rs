@@ -12,4 +12,4 @@ macro_rules! check_impl_items_against_trait {
     };
 }
 
-check_impl_items_against_trait!()
+check_impl_items_against_trait!();

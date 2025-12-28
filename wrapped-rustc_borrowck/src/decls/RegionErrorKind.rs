@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegionElement!();
         TypeTest!();
+        RegionElement!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RegionErrorKind {
     };
 }
 
-RegionErrorKind!()
+RegionErrorKind!();

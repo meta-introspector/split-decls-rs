@@ -4,4 +4,4 @@ macro_rules! reachable_non_generics_provider {
     };
 }
 
-reachable_non_generics_provider!()
+reachable_non_generics_provider!();

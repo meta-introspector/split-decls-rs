@@ -4,4 +4,4 @@ macro_rules! cfg_net {
     };
 }
 
-cfg_net!()
+cfg_net!();

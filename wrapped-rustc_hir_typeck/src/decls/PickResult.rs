@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MethodError!();
         Pick!();
+        MethodError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PickResult {
     };
 }
 
-PickResult!()
+PickResult!();

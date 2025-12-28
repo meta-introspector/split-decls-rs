@@ -4,4 +4,4 @@ macro_rules! R_MN10300_TLS_TPOFF {
     };
 }
 
-R_MN10300_TLS_TPOFF!()
+R_MN10300_TLS_TPOFF!();

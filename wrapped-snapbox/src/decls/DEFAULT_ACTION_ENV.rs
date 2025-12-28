@@ -4,4 +4,4 @@ macro_rules! DEFAULT_ACTION_ENV {
     };
 }
 
-DEFAULT_ACTION_ENV!()
+DEFAULT_ACTION_ENV!();

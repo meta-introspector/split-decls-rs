@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Value!();
+        Result!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! deserialize_number {
     };
 }
 
-deserialize_number!()
+deserialize_number!();

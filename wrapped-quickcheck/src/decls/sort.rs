@@ -4,4 +4,4 @@ macro_rules! sort {
     };
 }
 
-sort!()
+sort!();

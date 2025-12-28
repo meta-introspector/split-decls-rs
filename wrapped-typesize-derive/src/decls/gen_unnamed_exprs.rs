@@ -11,4 +11,4 @@ macro_rules! gen_unnamed_exprs {
     };
 }
 
-gen_unnamed_exprs!()
+gen_unnamed_exprs!();

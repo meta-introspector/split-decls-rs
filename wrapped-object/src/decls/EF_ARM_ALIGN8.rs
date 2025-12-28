@@ -4,4 +4,4 @@ macro_rules! EF_ARM_ALIGN8 {
     };
 }
 
-EF_ARM_ALIGN8!()
+EF_ARM_ALIGN8!();

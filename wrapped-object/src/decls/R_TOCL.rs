@@ -4,4 +4,4 @@ macro_rules! R_TOCL {
     };
 }
 
-R_TOCL!()
+R_TOCL!();

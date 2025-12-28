@@ -4,4 +4,4 @@ macro_rules! FilterPaths {
     };
 }
 
-FilterPaths!()
+FilterPaths!();

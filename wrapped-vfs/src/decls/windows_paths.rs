@@ -11,4 +11,4 @@ macro_rules! windows_paths {
     };
 }
 
-windows_paths!()
+windows_paths!();

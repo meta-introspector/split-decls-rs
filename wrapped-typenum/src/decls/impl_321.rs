@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Cmp!();
         IsLessPrivate!();
         IsLess!();
-        Cmp!();
         Compare!();
         Internal!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_321 {
     };
 }
 
-impl_321!()
+impl_321!();

@@ -18,4 +18,4 @@ macro_rules! parse_fixture_checks_further_indented_metadata {
     };
 }
 
-parse_fixture_checks_further_indented_metadata!()
+parse_fixture_checks_further_indented_metadata!();

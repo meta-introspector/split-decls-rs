@@ -4,4 +4,4 @@ macro_rules! write_msg_text {
     };
 }
 
-write_msg_text!()
+write_msg_text!();

@@ -11,4 +11,4 @@ macro_rules! associate_fd {
     };
 }
 
-associate_fd!()
+associate_fd!();

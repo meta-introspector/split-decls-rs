@@ -4,4 +4,4 @@ macro_rules! BuiltinNonShorthandFieldPatterns {
     };
 }
 
-BuiltinNonShorthandFieldPatterns!()
+BuiltinNonShorthandFieldPatterns!();

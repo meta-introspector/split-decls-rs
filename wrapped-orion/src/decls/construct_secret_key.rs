@@ -4,4 +4,4 @@ macro_rules! construct_secret_key {
     };
 }
 
-construct_secret_key!()
+construct_secret_key!();

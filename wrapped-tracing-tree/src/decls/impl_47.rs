@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SpanMode!();
         Data!();
-        FormatTime!();
         ColorLevel!();
         FmtEvent!();
         HierarchicalLayer!();
+        FormatTime!();
+        SpanMode!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

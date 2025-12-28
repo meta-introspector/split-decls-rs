@@ -4,4 +4,4 @@ macro_rules! probe_for_binary {
     };
 }
 
-probe_for_binary!()
+probe_for_binary!();

@@ -4,4 +4,4 @@ macro_rules! clamp_opt {
     };
 }
 
-clamp_opt!()
+clamp_opt!();

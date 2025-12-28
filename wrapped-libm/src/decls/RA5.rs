@@ -4,4 +4,4 @@ macro_rules! RA5 {
     };
 }
 
-RA5!()
+RA5!();

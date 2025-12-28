@@ -4,4 +4,4 @@ macro_rules! mount {
     };
 }
 
-mount!()
+mount!();

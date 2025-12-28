@@ -4,4 +4,4 @@ macro_rules! PRIME32_5 {
     };
 }
 
-PRIME32_5!()
+PRIME32_5!();

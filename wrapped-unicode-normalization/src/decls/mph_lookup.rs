@@ -4,4 +4,4 @@ macro_rules! mph_lookup {
     };
 }
 
-mph_lookup!()
+mph_lookup!();

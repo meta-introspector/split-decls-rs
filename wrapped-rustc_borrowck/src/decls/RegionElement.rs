@@ -4,4 +4,4 @@ macro_rules! RegionElement {
     };
 }
 
-RegionElement!()
+RegionElement!();

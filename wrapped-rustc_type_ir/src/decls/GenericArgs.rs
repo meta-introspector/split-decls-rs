@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DefId!();
-        Interner!();
-        Region!();
         Const!();
+        Region!();
+        Interner!();
+        DefId!();
         GenericArg!();
         Relate!();
-        SliceLike!();
         Ty!();
+        SliceLike!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! GenericArgs {
     };
 }
 
-GenericArgs!()
+GenericArgs!();

@@ -4,4 +4,4 @@ macro_rules! column_family {
     };
 }
 
-column_family!()
+column_family!();

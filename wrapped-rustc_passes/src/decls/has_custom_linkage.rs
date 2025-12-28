@@ -4,4 +4,4 @@ macro_rules! has_custom_linkage {
     };
 }
 
-has_custom_linkage!()
+has_custom_linkage!();

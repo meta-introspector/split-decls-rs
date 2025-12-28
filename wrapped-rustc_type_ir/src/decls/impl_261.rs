@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         CanonicalQueryInput!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_261 {
     };
 }
 
-impl_261!()
+impl_261!();

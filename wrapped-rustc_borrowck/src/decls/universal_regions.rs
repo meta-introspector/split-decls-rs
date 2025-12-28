@@ -4,4 +4,4 @@ macro_rules! universal_regions {
     };
 }
 
-universal_regions!()
+universal_regions!();

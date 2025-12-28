@@ -13,4 +13,4 @@ macro_rules! _ioctl {
     };
 }
 
-_ioctl!()
+_ioctl!();

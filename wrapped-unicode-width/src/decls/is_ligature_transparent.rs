@@ -4,4 +4,4 @@ macro_rules! is_ligature_transparent {
     };
 }
 
-is_ligature_transparent!()
+is_ligature_transparent!();

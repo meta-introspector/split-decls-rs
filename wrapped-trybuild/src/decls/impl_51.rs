@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
-        InheritEdition!();
         Error!();
-        Edition!();
+        InheritEdition!();
+        Result!();
         EditionOrInherit!();
+        Edition!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_51 {
     };
 }
 
-impl_51!()
+impl_51!();

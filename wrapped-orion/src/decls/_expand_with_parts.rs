@@ -13,4 +13,4 @@ macro_rules! _expand_with_parts {
     };
 }
 
-_expand_with_parts!()
+_expand_with_parts!();

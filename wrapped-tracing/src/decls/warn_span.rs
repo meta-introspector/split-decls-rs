@@ -4,4 +4,4 @@ macro_rules! warn_span {
     };
 }
 
-warn_span!()
+warn_span!();

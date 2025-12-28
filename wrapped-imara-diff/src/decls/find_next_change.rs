@@ -4,4 +4,4 @@ macro_rules! find_next_change {
     };
 }
 
-find_next_change!()
+find_next_change!();

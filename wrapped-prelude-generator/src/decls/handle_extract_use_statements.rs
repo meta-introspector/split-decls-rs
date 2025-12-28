@@ -11,4 +11,4 @@ macro_rules! handle_extract_use_statements {
     };
 }
 
-handle_extract_use_statements!()
+handle_extract_use_statements!();

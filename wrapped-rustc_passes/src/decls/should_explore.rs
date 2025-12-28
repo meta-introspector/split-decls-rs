@@ -4,4 +4,4 @@ macro_rules! should_explore {
     };
 }
 
-should_explore!()
+should_explore!();

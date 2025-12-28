@@ -11,4 +11,4 @@ macro_rules! X87DoubleExtendedS {
     };
 }
 
-X87DoubleExtendedS!()
+X87DoubleExtendedS!();

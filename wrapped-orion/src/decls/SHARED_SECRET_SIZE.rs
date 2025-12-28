@@ -4,4 +4,4 @@ macro_rules! SHARED_SECRET_SIZE {
     };
 }
 
-SHARED_SECRET_SIZE!()
+SHARED_SECRET_SIZE!();

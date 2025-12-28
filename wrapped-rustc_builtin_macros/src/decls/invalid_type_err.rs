@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConcatBytesOob!();
-        ConcatBytesNonU8!();
-        ConcatBytesInvalid!();
         ConcatBytesInvalidSuggestion!();
+        ConcatBytesOob!();
+        ConcatBytesInvalid!();
+        ConcatBytesNonU8!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! invalid_type_err {
     };
 }
 
-invalid_type_err!()
+invalid_type_err!();

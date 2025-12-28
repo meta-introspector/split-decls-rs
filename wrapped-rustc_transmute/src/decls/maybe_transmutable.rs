@@ -4,4 +4,4 @@ macro_rules! maybe_transmutable {
     };
 }
 
-maybe_transmutable!()
+maybe_transmutable!();

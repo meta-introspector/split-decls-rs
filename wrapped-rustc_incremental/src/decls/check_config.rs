@@ -12,4 +12,4 @@ macro_rules! check_config {
     };
 }
 
-check_config!()
+check_config!();

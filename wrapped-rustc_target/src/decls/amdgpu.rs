@@ -4,4 +4,4 @@ macro_rules! amdgpu {
     };
 }
 
-amdgpu!()
+amdgpu!();

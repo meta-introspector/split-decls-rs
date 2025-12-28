@@ -4,4 +4,4 @@ macro_rules! move_errors {
     };
 }
 
-move_errors!()
+move_errors!();

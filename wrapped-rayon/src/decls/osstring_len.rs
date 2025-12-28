@@ -4,4 +4,4 @@ macro_rules! osstring_len {
     };
 }
 
-osstring_len!()
+osstring_len!();

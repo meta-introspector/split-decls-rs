@@ -11,4 +11,4 @@ macro_rules! inflate_fast_help {
     };
 }
 
-inflate_fast_help!()
+inflate_fast_help!();

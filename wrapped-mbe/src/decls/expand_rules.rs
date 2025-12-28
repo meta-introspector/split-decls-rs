@@ -3,8 +3,8 @@ macro_rules! deps {
         MatchedArmIndex!();
         ExpandResult!();
         Rule!();
-        ExpandError!();
         ExpandErrorKind!();
+        ExpandError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! expand_rules {
     };
 }
 
-expand_rules!()
+expand_rules!();

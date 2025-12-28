@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ty!();
         MutVisitable!();
+        Ty!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! generate_flat_map_visitor_fns {
     };
 }
 
-generate_flat_map_visitor_fns!()
+generate_flat_map_visitor_fns!();

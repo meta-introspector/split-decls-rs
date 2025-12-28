@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArrayLen!();
         SortPairs!();
+        ArrayLen!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SortArrays {
     };
 }
 
-SortArrays!()
+SortArrays!();

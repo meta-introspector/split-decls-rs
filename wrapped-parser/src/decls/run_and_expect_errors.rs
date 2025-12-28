@@ -4,4 +4,4 @@ macro_rules! run_and_expect_errors {
     };
 }
 
-run_and_expect_errors!()
+run_and_expect_errors!();

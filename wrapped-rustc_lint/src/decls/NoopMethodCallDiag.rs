@@ -4,4 +4,4 @@ macro_rules! NoopMethodCallDiag {
     };
 }
 
-NoopMethodCallDiag!()
+NoopMethodCallDiag!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         CompatCapability!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! capability_is_in_ambient_set {
     };
 }
 
-capability_is_in_ambient_set!()
+capability_is_in_ambient_set!();

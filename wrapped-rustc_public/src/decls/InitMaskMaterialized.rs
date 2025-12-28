@@ -4,4 +4,4 @@ macro_rules! InitMaskMaterialized {
     };
 }
 
-InitMaskMaterialized!()
+InitMaskMaterialized!();

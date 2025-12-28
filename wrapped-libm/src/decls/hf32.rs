@@ -11,4 +11,4 @@ macro_rules! hf32 {
     };
 }
 
-hf32!()
+hf32!();

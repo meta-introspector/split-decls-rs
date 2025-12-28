@@ -4,4 +4,4 @@ macro_rules! R_PPC64_GOT_DTPREL16_HA {
     };
 }
 
-R_PPC64_GOT_DTPREL16_HA!()
+R_PPC64_GOT_DTPREL16_HA!();

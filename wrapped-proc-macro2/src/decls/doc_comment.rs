@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        PResult!();
-        TokenStreamBuilder!();
-        Spacing!();
-        Span!();
-        Cursor!();
-        Literal!();
-        TokenTree!();
         Ident!();
         Reject!();
-        Punct!();
+        Cursor!();
+        TokenTree!();
+        Span!();
+        TokenStreamBuilder!();
         Group!();
         Delimiter!();
+        Punct!();
+        Spacing!();
+        PResult!();
+        Literal!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! doc_comment {
     };
 }
 
-doc_comment!()
+doc_comment!();

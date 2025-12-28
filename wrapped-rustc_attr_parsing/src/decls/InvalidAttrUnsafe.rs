@@ -4,4 +4,4 @@ macro_rules! InvalidAttrUnsafe {
     };
 }
 
-InvalidAttrUnsafe!()
+InvalidAttrUnsafe!();

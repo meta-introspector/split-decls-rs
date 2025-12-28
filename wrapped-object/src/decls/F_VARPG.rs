@@ -4,4 +4,4 @@ macro_rules! F_VARPG {
     };
 }
 
-F_VARPG!()
+F_VARPG!();

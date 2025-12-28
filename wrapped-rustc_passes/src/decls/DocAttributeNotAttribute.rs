@@ -4,4 +4,4 @@ macro_rules! DocAttributeNotAttribute {
     };
 }
 
-DocAttributeNotAttribute!()
+DocAttributeNotAttribute!();

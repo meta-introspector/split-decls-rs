@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MoveOut!();
-        LocationMap!();
-        Init!();
         MovePathLookup!();
         MovePath!();
+        LocationMap!();
+        MoveOut!();
+        Init!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MoveData {
     };
 }
 
-MoveData!()
+MoveData!();

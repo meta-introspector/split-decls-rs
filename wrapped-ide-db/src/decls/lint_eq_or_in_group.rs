@@ -4,4 +4,4 @@ macro_rules! lint_eq_or_in_group {
     };
 }
 
-lint_eq_or_in_group!()
+lint_eq_or_in_group!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Key!();
         PCWSTR!();
-        Data!();
-        Value!();
-        OpenOptions!();
+        Key!();
         KeyIterator!();
+        Data!();
         ValueIterator!();
+        OpenOptions!();
+        Value!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

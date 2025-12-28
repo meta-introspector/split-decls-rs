@@ -4,4 +4,4 @@ macro_rules! if_tun {
     };
 }
 
-if_tun!()
+if_tun!();

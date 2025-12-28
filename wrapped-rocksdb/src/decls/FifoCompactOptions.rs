@@ -4,4 +4,4 @@ macro_rules! FifoCompactOptions {
     };
 }
 
-FifoCompactOptions!()
+FifoCompactOptions!();

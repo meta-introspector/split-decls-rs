@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CycleHeadIdsIterator!();
         Id!();
+        CycleHeadIdsIterator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Cycle {
     };
 }
 
-Cycle!()
+Cycle!();

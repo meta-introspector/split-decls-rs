@@ -4,4 +4,4 @@ macro_rules! FunctionDecl {
     };
 }
 
-FunctionDecl!()
+FunctionDecl!();

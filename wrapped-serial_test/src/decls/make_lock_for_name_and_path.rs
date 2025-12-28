@@ -11,4 +11,4 @@ macro_rules! make_lock_for_name_and_path {
     };
 }
 
-make_lock_for_name_and_path!()
+make_lock_for_name_and_path!();

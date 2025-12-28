@@ -4,4 +4,4 @@ macro_rules! R_METAG_ADDR32 {
     };
 }
 
-R_METAG_ADDR32!()
+R_METAG_ADDR32!();

@@ -4,4 +4,4 @@ macro_rules! CompareTsFn {
     };
 }
 
-CompareTsFn!()
+CompareTsFn!();

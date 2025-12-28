@@ -11,4 +11,4 @@ macro_rules! res_to_kind {
     };
 }
 
-res_to_kind!()
+res_to_kind!();

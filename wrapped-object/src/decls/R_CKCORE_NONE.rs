@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_NONE {
     };
 }
 
-R_CKCORE_NONE!()
+R_CKCORE_NONE!();

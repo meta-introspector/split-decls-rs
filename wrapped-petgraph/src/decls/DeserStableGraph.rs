@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NodeIndex!();
-        Edge!();
         EdgeProperty!();
+        Graph!();
+        NodeIndex!();
         IndexType!();
         Node!();
-        Graph!();
+        Edge!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! DeserStableGraph {
     };
 }
 
-DeserStableGraph!()
+DeserStableGraph!();

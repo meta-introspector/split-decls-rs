@@ -4,4 +4,4 @@ macro_rules! R_PPC64_RELATIVE {
     };
 }
 
-R_PPC64_RELATIVE!()
+R_PPC64_RELATIVE!();

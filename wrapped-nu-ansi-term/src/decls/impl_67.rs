@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Gradient!();
-        Color!();
         TargetGround!();
+        Color!();
+        Gradient!();
         Rgb!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

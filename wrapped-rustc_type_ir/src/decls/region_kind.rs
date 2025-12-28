@@ -4,4 +4,4 @@ macro_rules! region_kind {
     };
 }
 
-region_kind!()
+region_kind!();

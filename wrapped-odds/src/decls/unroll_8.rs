@@ -4,4 +4,4 @@ macro_rules! unroll_8 {
     };
 }
 
-unroll_8!()
+unroll_8!();

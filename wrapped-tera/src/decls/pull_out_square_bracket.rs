@@ -4,4 +4,4 @@ macro_rules! pull_out_square_bracket {
     };
 }
 
-pull_out_square_bracket!()
+pull_out_square_bracket!();

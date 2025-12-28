@@ -4,4 +4,4 @@ macro_rules! MockPredicateObligation {
     };
 }
 
-MockPredicateObligation!()
+MockPredicateObligation!();

@@ -4,4 +4,4 @@ macro_rules! FLOAT_BIAS {
     };
 }
 
-FLOAT_BIAS!()
+FLOAT_BIAS!();

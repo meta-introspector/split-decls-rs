@@ -4,4 +4,4 @@ macro_rules! structural_match {
     };
 }
 
-structural_match!()
+structural_match!();

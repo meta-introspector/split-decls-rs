@@ -4,4 +4,4 @@ macro_rules! LibFeatureCollector {
     };
 }
 
-LibFeatureCollector!()
+LibFeatureCollector!();

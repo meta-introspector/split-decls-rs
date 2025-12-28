@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         PrivateMinOut!();
-        Min!();
-        PrivateMin!();
-        Bit!();
         UInt!();
         Cmp!();
         Compare!();
+        Min!();
+        Bit!();
         Unsigned!();
+        PrivateMin!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_488 {
     };
 }
 
-impl_488!()
+impl_488!();

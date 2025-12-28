@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        CompletionConfig!();
+        AutoImportExclusionType!();
         CompleteSemicolon!();
         CompletionContext!();
-        AutoImportExclusionType!();
         CompletionAnalysis!();
-        CompletionConfig!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

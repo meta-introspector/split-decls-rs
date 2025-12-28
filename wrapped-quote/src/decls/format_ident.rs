@@ -11,4 +11,4 @@ macro_rules! format_ident {
     };
 }
 
-format_ident!()
+format_ident!();

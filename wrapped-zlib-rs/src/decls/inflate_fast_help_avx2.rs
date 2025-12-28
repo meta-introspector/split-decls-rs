@@ -12,4 +12,4 @@ macro_rules! inflate_fast_help_avx2 {
     };
 }
 
-inflate_fast_help_avx2!()
+inflate_fast_help_avx2!();

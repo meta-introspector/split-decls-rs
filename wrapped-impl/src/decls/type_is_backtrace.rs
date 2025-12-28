@@ -4,4 +4,4 @@ macro_rules! type_is_backtrace {
     };
 }
 
-type_is_backtrace!()
+type_is_backtrace!();

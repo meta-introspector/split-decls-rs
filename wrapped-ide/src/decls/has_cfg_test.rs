@@ -4,4 +4,4 @@ macro_rules! has_cfg_test {
     };
 }
 
-has_cfg_test!()
+has_cfg_test!();

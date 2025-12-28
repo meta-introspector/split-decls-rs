@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Reducer!();
         TryReduceWithFolder!();
-        Consumer!();
-        TryReduceWithConsumer!();
         Folder!();
+        TryReduceWithConsumer!();
+        Reducer!();
+        Consumer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_928 {
     };
 }
 
-impl_928!()
+impl_928!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         AddBounds!();
-        VariantInfo!();
-        VariantAst!();
-        BindingInfo!();
-        Structure!();
         BindStyle!();
+        VariantAst!();
+        Structure!();
+        VariantInfo!();
+        BindingInfo!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

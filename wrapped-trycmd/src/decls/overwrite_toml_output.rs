@@ -4,4 +4,4 @@ macro_rules! overwrite_toml_output {
     };
 }
 
-overwrite_toml_output!()
+overwrite_toml_output!();

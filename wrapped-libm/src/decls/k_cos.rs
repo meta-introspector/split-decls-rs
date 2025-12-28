@@ -4,4 +4,4 @@ macro_rules! k_cos {
     };
 }
 
-k_cos!()
+k_cos!();

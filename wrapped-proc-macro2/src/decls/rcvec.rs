@@ -4,4 +4,4 @@ macro_rules! rcvec {
     };
 }
 
-rcvec!()
+rcvec!();

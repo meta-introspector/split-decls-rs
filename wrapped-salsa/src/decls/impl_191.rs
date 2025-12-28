@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Value!();
         Configuration!();
         DatabaseKeyIndex!();
         StructEntry!();
         FromId!();
+        Value!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_191 {
     };
 }
 
-impl_191!()
+impl_191!();

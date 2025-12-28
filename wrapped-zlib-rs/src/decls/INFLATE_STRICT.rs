@@ -4,4 +4,4 @@ macro_rules! INFLATE_STRICT {
     };
 }
 
-INFLATE_STRICT!()
+INFLATE_STRICT!();

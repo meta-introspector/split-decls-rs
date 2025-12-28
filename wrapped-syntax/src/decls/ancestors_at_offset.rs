@@ -11,4 +11,4 @@ macro_rules! ancestors_at_offset {
     };
 }
 
-ancestors_at_offset!()
+ancestors_at_offset!();

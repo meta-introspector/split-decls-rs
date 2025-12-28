@@ -15,4 +15,4 @@ macro_rules! single_node {
     };
 }
 
-single_node!()
+single_node!();

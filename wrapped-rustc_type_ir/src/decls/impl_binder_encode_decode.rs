@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Interner!();
         Binder!();
         TypeVisitable!();
+        Interner!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_binder_encode_decode {
     };
 }
 
-impl_binder_encode_decode!()
+impl_binder_encode_decode!();

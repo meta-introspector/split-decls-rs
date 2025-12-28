@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TransmuteFrom!();
         SizeEq!();
         Valid!();
-        TransmuteFrom!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! unsafe_impl_for_transparent_wrapper {
     };
 }
 
-unsafe_impl_for_transparent_wrapper!()
+unsafe_impl_for_transparent_wrapper!();

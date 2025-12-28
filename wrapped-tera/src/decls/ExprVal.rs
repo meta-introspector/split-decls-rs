@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        FunctionCall!();
         StringConcat!();
-        Expr!();
-        MathExpr!();
+        In!();
         LogicExpr!();
+        MathExpr!();
         Test!();
         MacroCall!();
-        FunctionCall!();
-        In!();
+        Expr!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! ExprVal {
     };
 }
 
-ExprVal!()
+ExprVal!();

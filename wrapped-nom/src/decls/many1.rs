@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IResult!();
-        Parser!();
-        Input!();
-        Error!();
         Many1!();
+        Parser!();
+        IResult!();
+        Error!();
+        Input!();
         ErrorKind!();
         Needed!();
     };
@@ -17,4 +17,4 @@ macro_rules! many1 {
     };
 }
 
-many1!()
+many1!();

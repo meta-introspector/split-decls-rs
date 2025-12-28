@@ -4,4 +4,4 @@ macro_rules! TypeArray {
     };
 }
 
-TypeArray!()
+TypeArray!();

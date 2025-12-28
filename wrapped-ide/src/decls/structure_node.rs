@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FileStructureConfig!();
         StructureNode!();
         StructureNodeKind!();
-        FileStructureConfig!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! structure_node {
     };
 }
 
-structure_node!()
+structure_node!();

@@ -4,4 +4,4 @@ macro_rules! Arena {
     };
 }
 
-Arena!()
+Arena!();

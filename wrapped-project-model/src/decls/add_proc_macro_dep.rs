@@ -4,4 +4,4 @@ macro_rules! add_proc_macro_dep {
     };
 }
 
-add_proc_macro_dep!()
+add_proc_macro_dep!();

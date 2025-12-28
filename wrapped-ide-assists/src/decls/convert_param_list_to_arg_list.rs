@@ -4,4 +4,4 @@ macro_rules! convert_param_list_to_arg_list {
     };
 }
 
-convert_param_list_to_arg_list!()
+convert_param_list_to_arg_list!();

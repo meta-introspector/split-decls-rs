@@ -11,4 +11,4 @@ macro_rules! hex_escape {
     };
 }
 
-hex_escape!()
+hex_escape!();

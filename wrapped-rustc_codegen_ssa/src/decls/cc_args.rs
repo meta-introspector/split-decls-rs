@@ -11,4 +11,4 @@ macro_rules! cc_args {
     };
 }
 
-cc_args!()
+cc_args!();

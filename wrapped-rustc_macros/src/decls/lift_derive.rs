@@ -4,4 +4,4 @@ macro_rules! lift_derive {
     };
 }
 
-lift_derive!()
+lift_derive!();

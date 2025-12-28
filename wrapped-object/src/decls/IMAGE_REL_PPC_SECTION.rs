@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_PPC_SECTION {
     };
 }
 
-IMAGE_REL_PPC_SECTION!()
+IMAGE_REL_PPC_SECTION!();

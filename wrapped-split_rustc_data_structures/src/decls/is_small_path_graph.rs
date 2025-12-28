@@ -11,4 +11,4 @@ macro_rules! is_small_path_graph {
     };
 }
 
-is_small_path_graph!()
+is_small_path_graph!();

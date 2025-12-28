@@ -4,4 +4,4 @@ macro_rules! VecDequeIntoIter {
     };
 }
 
-VecDequeIntoIter!()
+VecDequeIntoIter!();

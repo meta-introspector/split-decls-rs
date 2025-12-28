@@ -4,4 +4,4 @@ macro_rules! DefaultedParam {
     };
 }
 
-DefaultedParam!()
+DefaultedParam!();

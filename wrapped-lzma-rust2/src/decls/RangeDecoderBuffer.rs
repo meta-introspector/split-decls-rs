@@ -4,4 +4,4 @@ macro_rules! RangeDecoderBuffer {
     };
 }
 
-RangeDecoderBuffer!()
+RangeDecoderBuffer!();

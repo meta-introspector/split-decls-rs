@@ -4,4 +4,4 @@ macro_rules! IMAGE_SCN_ALIGN_1BYTES {
     };
 }
 
-IMAGE_SCN_ALIGN_1BYTES!()
+IMAGE_SCN_ALIGN_1BYTES!();

@@ -4,4 +4,4 @@ macro_rules! reverse_sccs {
     };
 }
 
-reverse_sccs!()
+reverse_sccs!();

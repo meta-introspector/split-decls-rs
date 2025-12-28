@@ -4,4 +4,4 @@ macro_rules! map_view {
     };
 }
 
-map_view!()
+map_view!();

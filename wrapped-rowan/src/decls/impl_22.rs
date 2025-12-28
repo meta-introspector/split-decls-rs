@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SyntaxKind!();
-        Green!();
-        SyntaxNode!();
-        SyntaxElement!();
-        SyntaxToken!();
-        NodeData!();
         Direction!();
+        SyntaxElement!();
+        Green!();
+        SyntaxToken!();
+        SyntaxNode!();
+        NodeData!();
+        SyntaxKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

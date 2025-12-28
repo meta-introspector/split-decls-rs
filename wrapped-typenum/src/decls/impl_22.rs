@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Equal!();
-        InternalMarker!();
         B0!();
         Cmp!();
+        InternalMarker!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

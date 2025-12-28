@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        TryFromBytes!();
+        SliceDst!();
+        Immutable!();
+        KnownLayout!();
+        Alignment!();
+        SizeInfo!();
+        FromBytes!();
+        AllocError!();
         TrailingSliceLayout!();
         DstLayout!();
-        IntoBytes!();
         Read!();
-        Immutable!();
+        IntoBytes!();
         FromZeros!();
-        AllocError!();
-        Validity!();
-        SliceDst!();
-        KnownLayout!();
+        TryFromBytes!();
         TryReadError!();
-        Alignment!();
         Unaligned!();
-        FromBytes!();
-        SizeInfo!();
+        Validity!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

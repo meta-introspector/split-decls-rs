@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TargetOptions!();
         Target!();
+        TargetOptions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! aarch64 {
     };
 }
 
-aarch64!()
+aarch64!();

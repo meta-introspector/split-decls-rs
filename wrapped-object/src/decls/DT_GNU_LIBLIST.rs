@@ -4,4 +4,4 @@ macro_rules! DT_GNU_LIBLIST {
     };
 }
 
-DT_GNU_LIBLIST!()
+DT_GNU_LIBLIST!();

@@ -4,4 +4,4 @@ macro_rules! R_BPF_64_32 {
     };
 }
 
-R_BPF_64_32!()
+R_BPF_64_32!();

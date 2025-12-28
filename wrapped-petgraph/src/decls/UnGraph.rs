@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DefaultIx!();
-        Graph!();
         Undirected!();
+        Graph!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UnGraph {
     };
 }
 
-UnGraph!()
+UnGraph!();

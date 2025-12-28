@@ -4,4 +4,4 @@ macro_rules! AssistKind {
     };
 }
 
-AssistKind!()
+AssistKind!();

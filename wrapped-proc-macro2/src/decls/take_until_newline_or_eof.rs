@@ -11,4 +11,4 @@ macro_rules! take_until_newline_or_eof {
     };
 }
 
-take_until_newline_or_eof!()
+take_until_newline_or_eof!();

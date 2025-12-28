@@ -4,4 +4,4 @@ macro_rules! DebugArgPath {
     };
 }
 
-DebugArgPath!()
+DebugArgPath!();

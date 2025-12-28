@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        SliceLike!();
         ArgFolder!();
+        Interner!();
         TypeFoldable!();
         GenericArg!();
-        Interner!();
         EarlyBinder!();
-        SliceLike!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

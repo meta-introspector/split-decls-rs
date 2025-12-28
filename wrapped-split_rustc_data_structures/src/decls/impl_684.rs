@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SlotIndex!();
         VecCache!();
+        SlotIndex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_684 {
     };
 }
 
-impl_684!()
+impl_684!();

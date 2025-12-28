@@ -11,4 +11,4 @@ macro_rules! vacant_entry_remove {
     };
 }
 
-vacant_entry_remove!()
+vacant_entry_remove!();

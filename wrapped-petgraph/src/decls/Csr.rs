@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Directed!();
-        Row!();
-        Edge!();
         DefaultIx!();
         NodeIndex!();
+        Row!();
+        Directed!();
+        Edge!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Csr {
     };
 }
 
-Csr!()
+Csr!();

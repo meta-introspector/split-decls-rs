@@ -4,4 +4,4 @@ macro_rules! visitor {
     };
 }
 
-visitor!()
+visitor!();

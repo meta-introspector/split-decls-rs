@@ -4,4 +4,4 @@ macro_rules! ast_enum {
     };
 }
 
-ast_enum!()
+ast_enum!();

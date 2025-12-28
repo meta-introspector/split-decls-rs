@@ -4,4 +4,4 @@ macro_rules! nghttp2_free {
     };
 }
 
-nghttp2_free!()
+nghttp2_free!();

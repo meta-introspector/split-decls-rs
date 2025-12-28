@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ImplBlockBuilder!();
+        PaddingCheck!();
         StructUnionRepr!();
         FieldBounds!();
-        PaddingCheck!();
-        TraitBound!();
         Trait!();
+        TraitBound!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! derive_into_bytes_struct {
     };
 }
 
-derive_into_bytes_struct!()
+derive_into_bytes_struct!();

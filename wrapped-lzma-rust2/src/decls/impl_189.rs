@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        LiteralCoder!();
         Write!();
-        LzmaEncData!();
-        LzmaEncoder!();
-        State!();
-        LiteralSubEncoder!();
-        LzEncoder!();
         Result!();
         LiteralEncoder!();
-        RangeEncoder!();
+        LzmaEncoder!();
+        State!();
         LzmaCoder!();
+        LzEncoder!();
+        LiteralSubEncoder!();
+        LzmaEncData!();
+        RangeEncoder!();
+        LiteralCoder!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

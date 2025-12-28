@@ -4,4 +4,4 @@ macro_rules! real_eigenmatrix {
     };
 }
 
-real_eigenmatrix!()
+real_eigenmatrix!();

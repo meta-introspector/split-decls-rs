@@ -4,4 +4,4 @@ macro_rules! SCALE {
     };
 }
 
-SCALE!()
+SCALE!();

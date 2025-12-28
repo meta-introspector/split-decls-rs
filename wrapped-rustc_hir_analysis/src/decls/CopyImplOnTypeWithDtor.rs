@@ -4,4 +4,4 @@ macro_rules! CopyImplOnTypeWithDtor {
     };
 }
 
-CopyImplOnTypeWithDtor!()
+CopyImplOnTypeWithDtor!();

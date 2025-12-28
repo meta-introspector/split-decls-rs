@@ -4,4 +4,4 @@ macro_rules! nghttp2_headers {
     };
 }
 
-nghttp2_headers!()
+nghttp2_headers!();

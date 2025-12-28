@@ -4,4 +4,4 @@ macro_rules! AtomicStep {
     };
 }
 
-AtomicStep!()
+AtomicStep!();

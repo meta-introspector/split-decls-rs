@@ -12,4 +12,4 @@ macro_rules! items_with_name {
     };
 }
 
-items_with_name!()
+items_with_name!();

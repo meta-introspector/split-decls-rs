@@ -4,4 +4,4 @@ macro_rules! shift {
     };
 }
 
-shift!()
+shift!();

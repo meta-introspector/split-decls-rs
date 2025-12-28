@@ -4,4 +4,4 @@ macro_rules! mir_keys {
     };
 }
 
-mir_keys!()
+mir_keys!();

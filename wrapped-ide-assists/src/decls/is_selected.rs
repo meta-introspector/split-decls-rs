@@ -4,4 +4,4 @@ macro_rules! is_selected {
     };
 }
 
-is_selected!()
+is_selected!();

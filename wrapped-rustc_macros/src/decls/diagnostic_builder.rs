@@ -4,4 +4,4 @@ macro_rules! diagnostic_builder {
     };
 }
 
-diagnostic_builder!()
+diagnostic_builder!();

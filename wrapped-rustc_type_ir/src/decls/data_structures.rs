@@ -4,4 +4,4 @@ macro_rules! data_structures {
     };
 }
 
-data_structures!()
+data_structures!();

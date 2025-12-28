@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Ord!();
+        Unsigned!();
         NonZero!();
         Eq!();
-        Unsigned!();
-        Ord!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! PInt {
     };
 }
 
-PInt!()
+PInt!();

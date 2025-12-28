@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstPtr!();
         UnsafeCell!();
+        ConstPtr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_218 {
     };
 }
 
-impl_218!()
+impl_218!();

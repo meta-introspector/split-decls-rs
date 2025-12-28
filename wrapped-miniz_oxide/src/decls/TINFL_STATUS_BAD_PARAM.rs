@@ -4,4 +4,4 @@ macro_rules! TINFL_STATUS_BAD_PARAM {
     };
 }
 
-TINFL_STATUS_BAD_PARAM!()
+TINFL_STATUS_BAD_PARAM!();

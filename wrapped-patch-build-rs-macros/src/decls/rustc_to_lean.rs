@@ -4,4 +4,4 @@ macro_rules! rustc_to_lean {
     };
 }
 
-rustc_to_lean!()
+rustc_to_lean!();

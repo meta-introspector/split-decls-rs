@@ -4,4 +4,4 @@ macro_rules! raw_stdin {
     };
 }
 
-raw_stdin!()
+raw_stdin!();

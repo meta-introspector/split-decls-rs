@@ -4,4 +4,4 @@ macro_rules! stream_safe_trailing_nonstarters {
     };
 }
 
-stream_safe_trailing_nonstarters!()
+stream_safe_trailing_nonstarters!();

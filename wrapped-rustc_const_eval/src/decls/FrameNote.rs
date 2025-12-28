@@ -4,4 +4,4 @@ macro_rules! FrameNote {
     };
 }
 
-FrameNote!()
+FrameNote!();

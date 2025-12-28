@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Getter!();
-        Result!();
         IoctlOutput!();
+        Result!();
         Ioctl!();
+        Getter!();
         Opcode!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_457 {
     };
 }
 
-impl_457!()
+impl_457!();

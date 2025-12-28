@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Block!();
-        Path!();
         Generics!();
-        Defaultness!();
         FnContract!();
+        Path!();
         FnSig!();
+        Defaultness!();
+        Block!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Fn {
     };
 }
 
-Fn!()
+Fn!();

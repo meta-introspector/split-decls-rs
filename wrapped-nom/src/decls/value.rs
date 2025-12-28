@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Parser!();
         Error!();
         IResult!();
-        Parser!();
         ParseError!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! value {
     };
 }
 
-value!()
+value!();

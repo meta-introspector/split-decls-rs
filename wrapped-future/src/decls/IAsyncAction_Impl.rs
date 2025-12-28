@@ -11,4 +11,4 @@ macro_rules! IAsyncAction_Impl {
     };
 }
 
-IAsyncAction_Impl!()
+IAsyncAction_Impl!();

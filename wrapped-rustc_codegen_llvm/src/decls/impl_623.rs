@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ThinBuffer!();
-        OwnedTargetMachine!();
-        ModuleLlvm!();
-        ThinData!();
         ModuleBuffer!();
         LlvmCodegenBackend!();
+        OwnedTargetMachine!();
         LlvmError!();
+        ThinBuffer!();
+        ModuleLlvm!();
+        ThinData!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_623 {
     };
 }
 
-impl_623!()
+impl_623!();

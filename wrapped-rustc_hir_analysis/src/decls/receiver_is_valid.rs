@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ArbitrarySelfTypesLevel!();
-        WfCheckingCtxt!();
-        ReceiverValidityError!();
         Autoderef!();
+        ReceiverValidityError!();
+        WfCheckingCtxt!();
+        ArbitrarySelfTypesLevel!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! receiver_is_valid {
     };
 }
 
-receiver_is_valid!()
+receiver_is_valid!();

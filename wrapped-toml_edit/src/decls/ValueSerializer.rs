@@ -4,4 +4,4 @@ macro_rules! ValueSerializer {
     };
 }
 
-ValueSerializer!()
+ValueSerializer!();

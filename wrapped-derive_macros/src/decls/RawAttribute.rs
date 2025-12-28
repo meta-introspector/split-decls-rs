@@ -4,4 +4,4 @@ macro_rules! RawAttribute {
     };
 }
 
-RawAttribute!()
+RawAttribute!();

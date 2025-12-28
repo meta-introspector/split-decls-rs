@@ -11,4 +11,4 @@ macro_rules! visit_mentioned_item {
     };
 }
 
-visit_mentioned_item!()
+visit_mentioned_item!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         UnionField!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_329 {
     };
 }
 
-impl_329!()
+impl_329!();

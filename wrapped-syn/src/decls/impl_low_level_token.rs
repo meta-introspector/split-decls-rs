@@ -11,4 +11,4 @@ macro_rules! impl_low_level_token {
     };
 }
 
-impl_low_level_token!()
+impl_low_level_token!();

@@ -11,4 +11,4 @@ macro_rules! handle_as_ref_str {
     };
 }
 
-handle_as_ref_str!()
+handle_as_ref_str!();

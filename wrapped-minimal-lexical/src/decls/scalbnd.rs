@@ -4,4 +4,4 @@ macro_rules! scalbnd {
     };
 }
 
-scalbnd!()
+scalbnd!();

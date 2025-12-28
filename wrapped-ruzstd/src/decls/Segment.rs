@@ -4,4 +4,4 @@ macro_rules! Segment {
     };
 }
 
-Segment!()
+Segment!();

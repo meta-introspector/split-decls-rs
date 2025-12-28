@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SkipAnyWhileFolder!();
         SkipAnyWhileConsumer!();
-        Consumer!();
         Reducer!();
+        Consumer!();
+        SkipAnyWhileFolder!();
         Folder!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_840 {
     };
 }
 
-impl_840!()
+impl_840!();

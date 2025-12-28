@@ -11,4 +11,4 @@ macro_rules! mark_blocked {
     };
 }
 
-mark_blocked!()
+mark_blocked!();

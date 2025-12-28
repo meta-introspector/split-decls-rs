@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_AROS {
     };
 }
 
-ELFOSABI_AROS!()
+ELFOSABI_AROS!();

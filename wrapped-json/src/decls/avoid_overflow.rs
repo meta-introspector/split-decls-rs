@@ -12,4 +12,4 @@ macro_rules! avoid_overflow {
     };
 }
 
-avoid_overflow!()
+avoid_overflow!();

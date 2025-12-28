@@ -4,4 +4,4 @@ macro_rules! FlattenAttr {
     };
 }
 
-FlattenAttr!()
+FlattenAttr!();

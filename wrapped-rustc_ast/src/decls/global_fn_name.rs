@@ -4,4 +4,4 @@ macro_rules! global_fn_name {
     };
 }
 
-global_fn_name!()
+global_fn_name!();

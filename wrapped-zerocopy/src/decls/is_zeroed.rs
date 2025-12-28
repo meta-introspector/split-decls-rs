@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Validity!();
-        Initialized!();
         KnownLayout!();
-        Invariants!();
-        Aliasing!();
-        Immutable!();
+        Initialized!();
         Reference!();
         BecauseImmutable!();
+        Aliasing!();
+        Invariants!();
+        Validity!();
+        Immutable!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! is_zeroed {
     };
 }
 
-is_zeroed!()
+is_zeroed!();

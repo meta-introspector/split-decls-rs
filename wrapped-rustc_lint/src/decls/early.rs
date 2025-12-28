@@ -4,4 +4,4 @@ macro_rules! early {
     };
 }
 
-early!()
+early!();

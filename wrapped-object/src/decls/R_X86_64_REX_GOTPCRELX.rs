@@ -4,4 +4,4 @@ macro_rules! R_X86_64_REX_GOTPCRELX {
     };
 }
 
-R_X86_64_REX_GOTPCRELX!()
+R_X86_64_REX_GOTPCRELX!();

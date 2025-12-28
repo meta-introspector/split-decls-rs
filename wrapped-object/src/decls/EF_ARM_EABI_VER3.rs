@@ -4,4 +4,4 @@ macro_rules! EF_ARM_EABI_VER3 {
     };
 }
 
-EF_ARM_EABI_VER3!()
+EF_ARM_EABI_VER3!();

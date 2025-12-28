@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Issue18089ProcMacroExpander!();
-        IdentityProcMacroExpander!();
-        Issue17479ProcMacroExpander!();
-        DisallowCfgProcMacroExpander!();
-        GenerateSuffixedTypeProcMacroExpander!();
         Issue18898ProcMacroExpander!();
+        DisallowCfgProcMacroExpander!();
+        IdentityProcMacroExpander!();
         AttributeInputReplaceProcMacroExpander!();
         MirrorProcMacroExpander!();
         Issue18840ProcMacroExpander!();
+        Issue17479ProcMacroExpander!();
         ShortenProcMacroExpander!();
+        Issue18089ProcMacroExpander!();
+        GenerateSuffixedTypeProcMacroExpander!();
     };
 }
 
@@ -75,4 +75,4 @@ pub fn generate_suffixed_type(_attr: TokenStream, input: TokenStream) -> TokenSt
     };
 }
 
-default_test_proc_macros!()
+default_test_proc_macros!();

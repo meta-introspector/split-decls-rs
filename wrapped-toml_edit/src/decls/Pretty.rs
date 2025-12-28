@@ -4,4 +4,4 @@ macro_rules! Pretty {
     };
 }
 
-Pretty!()
+Pretty!();

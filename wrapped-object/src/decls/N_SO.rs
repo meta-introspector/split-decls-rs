@@ -4,4 +4,4 @@ macro_rules! N_SO {
     };
 }
 
-N_SO!()
+N_SO!();

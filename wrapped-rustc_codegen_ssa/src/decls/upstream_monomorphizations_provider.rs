@@ -4,4 +4,4 @@ macro_rules! upstream_monomorphizations_provider {
     };
 }
 
-upstream_monomorphizations_provider!()
+upstream_monomorphizations_provider!();

@@ -12,4 +12,4 @@ macro_rules! range_or_position {
     };
 }
 
-range_or_position!()
+range_or_position!();

@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_AIX {
     };
 }
 
-ELFOSABI_AIX!()
+ELFOSABI_AIX!();

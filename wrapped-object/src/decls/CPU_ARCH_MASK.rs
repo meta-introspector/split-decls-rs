@@ -4,4 +4,4 @@ macro_rules! CPU_ARCH_MASK {
     };
 }
 
-CPU_ARCH_MASK!()
+CPU_ARCH_MASK!();

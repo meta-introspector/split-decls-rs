@@ -4,4 +4,4 @@ macro_rules! is_digit {
     };
 }
 
-is_digit!()
+is_digit!();

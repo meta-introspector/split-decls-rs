@@ -11,4 +11,4 @@ macro_rules! extract_test_functions_from_items {
     };
 }
 
-extract_test_functions_from_items!()
+extract_test_functions_from_items!();

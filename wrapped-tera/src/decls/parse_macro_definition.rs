@@ -13,4 +13,4 @@ macro_rules! parse_macro_definition {
     };
 }
 
-parse_macro_definition!()
+parse_macro_definition!();

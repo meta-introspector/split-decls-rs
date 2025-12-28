@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ReadRef!();
-        CoffHeader!();
         ImageRelocation!();
-        CoffFile!();
-        CoffSection!();
+        Result!();
+        CoffHeader!();
         ImageSectionHeader!();
+        ReadRef!();
+        CoffSection!();
+        CoffFile!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

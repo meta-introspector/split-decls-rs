@@ -11,4 +11,4 @@ macro_rules! linear_stack_growth {
     };
 }
 
-linear_stack_growth!()
+linear_stack_growth!();

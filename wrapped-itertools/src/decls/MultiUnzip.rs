@@ -4,4 +4,4 @@ macro_rules! MultiUnzip {
     };
 }
 
-MultiUnzip!()
+MultiUnzip!();

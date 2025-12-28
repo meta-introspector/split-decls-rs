@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MachOSection!();
-        MachOFile!();
-        CompressedFileRange!();
-        MachHeader!();
-        Result!();
         Section!();
         Relocation!();
+        CompressedFileRange!();
+        MachOFile!();
+        MachHeader!();
+        MachOSection!();
+        Result!();
         Endian!();
         ReadRef!();
     };
@@ -19,4 +19,4 @@ macro_rules! impl_588 {
     };
 }
 
-impl_588!()
+impl_588!();

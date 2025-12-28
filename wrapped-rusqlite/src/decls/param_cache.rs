@@ -4,4 +4,4 @@ macro_rules! param_cache {
     };
 }
 
-param_cache!()
+param_cache!();

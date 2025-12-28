@@ -4,4 +4,4 @@ macro_rules! pick_best {
     };
 }
 
-pick_best!()
+pick_best!();

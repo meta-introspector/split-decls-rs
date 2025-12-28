@@ -4,4 +4,4 @@ macro_rules! all_modules {
     };
 }
 
-all_modules!()
+all_modules!();

@@ -4,4 +4,4 @@ macro_rules! Prod {
     };
 }
 
-Prod!()
+Prod!();

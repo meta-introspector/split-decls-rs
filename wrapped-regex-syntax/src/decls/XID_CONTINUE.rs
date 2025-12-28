@@ -4,4 +4,4 @@ macro_rules! XID_CONTINUE {
     };
 }
 
-XID_CONTINUE!()
+XID_CONTINUE!();

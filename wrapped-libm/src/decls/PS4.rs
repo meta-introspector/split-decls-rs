@@ -4,4 +4,4 @@ macro_rules! PS4 {
     };
 }
 
-PS4!()
+PS4!();

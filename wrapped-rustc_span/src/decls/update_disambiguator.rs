@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ExpnId!();
+        ExpnHash!();
         ExpnData!();
         HygieneData!();
         HashStableContext!();
-        ExpnHash!();
+        ExpnId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! update_disambiguator {
     };
 }
 
-update_disambiguator!()
+update_disambiguator!();

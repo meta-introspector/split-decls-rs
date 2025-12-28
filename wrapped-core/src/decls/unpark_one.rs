@@ -12,4 +12,4 @@ macro_rules! unpark_one {
     };
 }
 
-unpark_one!()
+unpark_one!();

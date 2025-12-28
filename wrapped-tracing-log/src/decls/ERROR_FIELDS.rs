@@ -11,4 +11,4 @@ macro_rules! ERROR_FIELDS {
     };
 }
 
-ERROR_FIELDS!()
+ERROR_FIELDS!();

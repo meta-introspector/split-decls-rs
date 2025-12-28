@@ -4,4 +4,4 @@ macro_rules! LineIndex {
     };
 }
 
-LineIndex!()
+LineIndex!();

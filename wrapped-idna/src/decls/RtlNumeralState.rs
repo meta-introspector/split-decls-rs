@@ -4,4 +4,4 @@ macro_rules! RtlNumeralState {
     };
 }
 
-RtlNumeralState!()
+RtlNumeralState!();

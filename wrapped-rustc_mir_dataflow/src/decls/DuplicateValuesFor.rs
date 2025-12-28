@@ -4,4 +4,4 @@ macro_rules! DuplicateValuesFor {
     };
 }
 
-DuplicateValuesFor!()
+DuplicateValuesFor!();

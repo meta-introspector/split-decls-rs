@@ -4,4 +4,4 @@ macro_rules! NoAnnotations {
     };
 }
 
-NoAnnotations!()
+NoAnnotations!();

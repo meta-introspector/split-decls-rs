@@ -4,4 +4,4 @@ macro_rules! RT_ANIICON {
     };
 }
 
-RT_ANIICON!()
+RT_ANIICON!();

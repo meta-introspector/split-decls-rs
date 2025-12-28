@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        OrderedF64!();
         GetValue!();
+        OrderedF64!();
         Result!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

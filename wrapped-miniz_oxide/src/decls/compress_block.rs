@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OutputBufferOxide!();
         LZOxide!();
+        OutputBufferOxide!();
         Result!();
         HuffmanOxide!();
     };
@@ -14,4 +14,4 @@ macro_rules! compress_block {
     };
 }
 
-compress_block!()
+compress_block!();

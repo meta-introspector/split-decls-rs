@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FileHeader!();
         Versym!();
         Version!();
+        FileHeader!();
         Endian!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! VersionTable {
     };
 }
 
-VersionTable!()
+VersionTable!();

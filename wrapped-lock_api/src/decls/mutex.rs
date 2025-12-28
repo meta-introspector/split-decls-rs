@@ -4,4 +4,4 @@ macro_rules! mutex {
     };
 }
 
-mutex!()
+mutex!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SymbolFileWriteFailure!();
         Command!();
         BpfLinker!();
         Linker!();
+        SymbolFileWriteFailure!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_141 {
     };
 }
 
-impl_141!()
+impl_141!();

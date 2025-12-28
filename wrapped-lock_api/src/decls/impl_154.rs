@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RawRwLockFair!();
-        RwLockWriteGuard!();
         ArcRwLockWriteGuard!();
         RwLock!();
+        RawRwLockFair!();
+        RwLockWriteGuard!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_154 {
     };
 }
 
-impl_154!()
+impl_154!();

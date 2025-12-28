@@ -4,4 +4,4 @@ macro_rules! sqrt {
     };
 }
 
-sqrt!()
+sqrt!();

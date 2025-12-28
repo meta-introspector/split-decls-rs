@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DiagnosticSpan!();
         Snippet!();
-        LinePosition!();
+        DiagnosticSpan!();
         LineRange!();
+        LinePosition!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! span_to_snippet {
     };
 }
 
-span_to_snippet!()
+span_to_snippet!();

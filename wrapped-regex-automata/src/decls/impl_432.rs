@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ReverseDFAEngine!();
         RegexInfo!();
-        Input!();
+        ReverseDFAEngine!();
         ReverseDFA!();
+        Input!();
         NFA!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_432 {
     };
 }
 
-impl_432!()
+impl_432!();

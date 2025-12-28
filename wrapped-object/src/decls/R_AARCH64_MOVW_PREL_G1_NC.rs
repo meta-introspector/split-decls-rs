@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_MOVW_PREL_G1_NC {
     };
 }
 
-R_AARCH64_MOVW_PREL_G1_NC!()
+R_AARCH64_MOVW_PREL_G1_NC!();

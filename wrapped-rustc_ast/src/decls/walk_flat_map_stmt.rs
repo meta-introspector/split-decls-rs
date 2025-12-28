@@ -12,4 +12,4 @@ macro_rules! walk_flat_map_stmt {
     };
 }
 
-walk_flat_map_stmt!()
+walk_flat_map_stmt!();

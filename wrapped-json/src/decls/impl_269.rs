@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MapRefDeserializer!();
-        Map!();
-        Result!();
-        Value!();
-        Error!();
         Deserializer!();
+        MapRefDeserializer!();
+        Value!();
+        Result!();
         EnumRefDeserializer!();
+        Error!();
+        Map!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_269 {
     };
 }
 
-impl_269!()
+impl_269!();

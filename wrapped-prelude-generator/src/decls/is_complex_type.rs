@@ -4,4 +4,4 @@ macro_rules! is_complex_type {
     };
 }
 
-is_complex_type!()
+is_complex_type!();

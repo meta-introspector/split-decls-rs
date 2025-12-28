@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IrMaps!();
-        LiveNodeKind!();
         VarKind!();
         LocalInfo!();
+        LiveNodeKind!();
+        IrMaps!();
         CaptureInfo!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_295 {
     };
 }
 
-impl_295!()
+impl_295!();

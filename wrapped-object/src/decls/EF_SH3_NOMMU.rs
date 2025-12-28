@@ -4,4 +4,4 @@ macro_rules! EF_SH3_NOMMU {
     };
 }
 
-EF_SH3_NOMMU!()
+EF_SH3_NOMMU!();

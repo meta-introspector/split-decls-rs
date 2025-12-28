@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AmbiguousWidePointerComparisonsAddrSuggestion!();
         AmbiguousWidePointerComparisonsExpectSuggestion!();
         AmbiguousWidePointerComparisons!();
         AmbiguousWidePointerComparisonsAddrMetadataSuggestion!();
-        AmbiguousWidePointerComparisonsCastSuggestion!();
+        AmbiguousWidePointerComparisonsAddrSuggestion!();
         LateContext!();
         ComparisonOp!();
+        AmbiguousWidePointerComparisonsCastSuggestion!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! lint_wide_pointer {
     };
 }
 
-lint_wide_pointer!()
+lint_wide_pointer!();

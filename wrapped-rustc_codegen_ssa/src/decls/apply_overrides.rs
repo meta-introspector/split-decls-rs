@@ -4,4 +4,4 @@ macro_rules! apply_overrides {
     };
 }
 
-apply_overrides!()
+apply_overrides!();

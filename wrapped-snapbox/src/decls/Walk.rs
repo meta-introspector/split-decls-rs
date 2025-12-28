@@ -4,4 +4,4 @@ macro_rules! Walk {
     };
 }
 
-Walk!()
+Walk!();

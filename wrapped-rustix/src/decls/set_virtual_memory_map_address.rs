@@ -12,4 +12,4 @@ macro_rules! set_virtual_memory_map_address {
     };
 }
 
-set_virtual_memory_map_address!()
+set_virtual_memory_map_address!();

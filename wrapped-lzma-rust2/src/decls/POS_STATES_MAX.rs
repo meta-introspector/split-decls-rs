@@ -4,4 +4,4 @@ macro_rules! POS_STATES_MAX {
     };
 }
 
-POS_STATES_MAX!()
+POS_STATES_MAX!();

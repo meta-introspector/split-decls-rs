@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         IndexRecord!();
         Index!();
-        Read!();
         Result!();
+        Read!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

@@ -11,4 +11,4 @@ macro_rules! SKIP_SERIALIZING_IF {
     };
 }
 
-SKIP_SERIALIZING_IF!()
+SKIP_SERIALIZING_IF!();

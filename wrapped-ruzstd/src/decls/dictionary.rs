@@ -4,4 +4,4 @@ macro_rules! dictionary {
     };
 }
 
-dictionary!()
+dictionary!();

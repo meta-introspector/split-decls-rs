@@ -4,4 +4,4 @@ macro_rules! benchmark_parser {
     };
 }
 
-benchmark_parser!()
+benchmark_parser!();

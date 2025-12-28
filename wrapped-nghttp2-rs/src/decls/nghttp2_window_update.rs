@@ -4,4 +4,4 @@ macro_rules! nghttp2_window_update {
     };
 }
 
-nghttp2_window_update!()
+nghttp2_window_update!();

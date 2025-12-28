@@ -11,4 +11,4 @@ macro_rules! impl_unzip_iter {
     };
 }
 
-impl_unzip_iter!()
+impl_unzip_iter!();

@@ -4,4 +4,4 @@ macro_rules! inspect_obligations {
     };
 }
 
-inspect_obligations!()
+inspect_obligations!();

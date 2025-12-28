@@ -11,4 +11,4 @@ macro_rules! U16Bytes {
     };
 }
 
-U16Bytes!()
+U16Bytes!();

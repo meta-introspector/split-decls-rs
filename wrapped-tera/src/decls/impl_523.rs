@@ -1,36 +1,36 @@
 macro_rules! deps {
     () => {
-        MathOperator!();
-        Template!();
-        If!();
-        Node!();
-        Set!();
-        Result!();
-        Block!();
-        FrameType!();
-        Context!();
-        LogicOperator!();
-        ExprVal!();
-        MacroDefinition!();
-        LogicExpr!();
-        Test!();
-        FunctionCall!();
-        Forloop!();
-        Val!();
-        MathExpr!();
-        ForLoop!();
-        Expr!();
-        CallStack!();
-        MacroCollection!();
-        FilterSection!();
-        MacroCall!();
-        Tera!();
-        Processor!();
-        In!();
-        FrameContext!();
-        Error!();
         StringConcat!();
+        Test!();
+        ForLoop!();
+        MathOperator!();
+        Expr!();
+        FrameContext!();
+        FrameType!();
+        Forloop!();
+        MacroCollection!();
+        Processor!();
         Function!();
+        FilterSection!();
+        In!();
+        MacroDefinition!();
+        Result!();
+        Error!();
+        Tera!();
+        FunctionCall!();
+        ExprVal!();
+        Val!();
+        Template!();
+        CallStack!();
+        Set!();
+        If!();
+        MathExpr!();
+        LogicOperator!();
+        Context!();
+        Node!();
+        Block!();
+        MacroCall!();
+        LogicExpr!();
     };
 }
 
@@ -41,4 +41,4 @@ macro_rules! impl_523 {
     };
 }
 
-impl_523!()
+impl_523!();

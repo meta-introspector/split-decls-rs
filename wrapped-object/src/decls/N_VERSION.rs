@@ -4,4 +4,4 @@ macro_rules! N_VERSION {
     };
 }
 
-N_VERSION!()
+N_VERSION!();

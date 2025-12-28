@@ -4,4 +4,4 @@ macro_rules! split_producer {
     };
 }
 
-split_producer!()
+split_producer!();

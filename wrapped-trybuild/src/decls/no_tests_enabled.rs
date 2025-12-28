@@ -4,4 +4,4 @@ macro_rules! no_tests_enabled {
     };
 }
 
-no_tests_enabled!()
+no_tests_enabled!();

@@ -4,4 +4,4 @@ macro_rules! IMAGE_SCN_ALIGN_MASK {
     };
 }
 
-IMAGE_SCN_ALIGN_MASK!()
+IMAGE_SCN_ALIGN_MASK!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexSlice!();
         Idx!();
+        IndexSlice!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

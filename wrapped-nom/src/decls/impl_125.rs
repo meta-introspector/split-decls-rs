@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Offset!();
-        Input!();
         Error!();
+        OutputMode!();
+        Offset!();
         PResult!();
         Err!();
         Parser!();
         Consumed!();
-        OutputMode!();
+        Input!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

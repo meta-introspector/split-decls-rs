@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_ARM_V5TEJ {
     };
 }
 
-CPU_SUBTYPE_ARM_V5TEJ!()
+CPU_SUBTYPE_ARM_V5TEJ!();

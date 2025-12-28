@@ -11,4 +11,4 @@ macro_rules! io_uring_reg_wait {
     };
 }
 
-io_uring_reg_wait!()
+io_uring_reg_wait!();

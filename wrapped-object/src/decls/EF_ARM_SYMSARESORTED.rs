@@ -4,4 +4,4 @@ macro_rules! EF_ARM_SYMSARESORTED {
     };
 }
 
-EF_ARM_SYMSARESORTED!()
+EF_ARM_SYMSARESORTED!();

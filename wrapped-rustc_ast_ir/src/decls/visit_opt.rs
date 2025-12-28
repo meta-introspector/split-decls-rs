@@ -4,4 +4,4 @@ macro_rules! visit_opt {
     };
 }
 
-visit_opt!()
+visit_opt!();

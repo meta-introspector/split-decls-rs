@@ -4,4 +4,4 @@ macro_rules! SortPairs {
     };
 }
 
-SortPairs!()
+SortPairs!();

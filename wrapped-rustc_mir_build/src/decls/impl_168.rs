@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TailCallCkVisitor!();
         Scope!();
+        TailCallCkVisitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_168 {
     };
 }
 
-impl_168!()
+impl_168!();

@@ -4,4 +4,4 @@ macro_rules! io_uring_clone_buffers {
     };
 }
 
-io_uring_clone_buffers!()
+io_uring_clone_buffers!();

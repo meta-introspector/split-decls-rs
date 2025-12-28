@@ -4,4 +4,4 @@ macro_rules! could_deref_to_target {
     };
 }
 
-could_deref_to_target!()
+could_deref_to_target!();

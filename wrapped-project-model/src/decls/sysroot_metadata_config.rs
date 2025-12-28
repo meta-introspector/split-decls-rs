@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CargoConfig!();
         CargoMetadataConfig!();
+        CargoConfig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! sysroot_metadata_config {
     };
 }
 
-sysroot_metadata_config!()
+sysroot_metadata_config!();

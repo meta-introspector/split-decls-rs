@@ -4,4 +4,4 @@ macro_rules! fetch_crates {
     };
 }
 
-fetch_crates!()
+fetch_crates!();

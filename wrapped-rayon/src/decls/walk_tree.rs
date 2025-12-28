@@ -4,4 +4,4 @@ macro_rules! walk_tree {
     };
 }
 
-walk_tree!()
+walk_tree!();

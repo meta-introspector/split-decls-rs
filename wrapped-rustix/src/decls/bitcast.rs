@@ -4,4 +4,4 @@ macro_rules! bitcast {
     };
 }
 
-bitcast!()
+bitcast!();

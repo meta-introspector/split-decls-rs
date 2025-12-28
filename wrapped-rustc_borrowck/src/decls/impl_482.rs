@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        OutlivesConstraint!();
-        DefiningTy!();
-        Locations!();
-        MoveUnsized!();
-        FieldAccessError!();
-        SimdIntrinsicArgConst!();
-        TypeChecker!();
         Normal!();
+        OutlivesConstraint!();
+        TypeChecker!();
+        MoveUnsized!();
+        DefiningTy!();
+        SimdIntrinsicArgConst!();
+        Locations!();
+        FieldAccessError!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_482 {
     };
 }
 
-impl_482!()
+impl_482!();

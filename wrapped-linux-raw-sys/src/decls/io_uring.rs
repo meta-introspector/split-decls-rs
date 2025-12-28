@@ -4,4 +4,4 @@ macro_rules! io_uring {
     };
 }
 
-io_uring!()
+io_uring!();

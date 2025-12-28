@@ -4,4 +4,4 @@ macro_rules! opt_fn {
     };
 }
 
-opt_fn!()
+opt_fn!();

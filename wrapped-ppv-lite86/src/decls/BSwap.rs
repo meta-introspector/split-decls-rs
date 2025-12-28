@@ -4,4 +4,4 @@ macro_rules! BSwap {
     };
 }
 
-BSwap!()
+BSwap!();

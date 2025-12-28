@@ -4,4 +4,4 @@ macro_rules! extract_fn_def_from_const_callable {
     };
 }
 
-extract_fn_def_from_const_callable!()
+extract_fn_def_from_const_callable!();

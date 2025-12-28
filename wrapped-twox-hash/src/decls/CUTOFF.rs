@@ -4,4 +4,4 @@ macro_rules! CUTOFF {
     };
 }
 
-CUTOFF!()
+CUTOFF!();

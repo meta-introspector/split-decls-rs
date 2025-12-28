@@ -12,4 +12,4 @@ macro_rules! set_socket_timeout {
     };
 }
 
-set_socket_timeout!()
+set_socket_timeout!();

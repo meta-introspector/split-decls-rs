@@ -4,4 +4,4 @@ macro_rules! hash_result {
     };
 }
 
-hash_result!()
+hash_result!();

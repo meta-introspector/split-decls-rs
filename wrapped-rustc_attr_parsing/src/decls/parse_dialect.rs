@@ -12,4 +12,4 @@ macro_rules! parse_dialect {
     };
 }
 
-parse_dialect!()
+parse_dialect!();

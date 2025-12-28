@@ -4,4 +4,4 @@ macro_rules! sh_left {
     };
 }
 
-sh_left!()
+sh_left!();

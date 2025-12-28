@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TyParamSomeLint!();
         TyParamFirstLocalLint!();
+        TyParamSomeLint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! lint_uncovered_ty_params {
     };
 }
 
-lint_uncovered_ty_params!()
+lint_uncovered_ty_params!();

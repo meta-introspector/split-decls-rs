@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         MachOComdatIterator!();
-        Item!();
-        MachOComdat!();
         ReadRef!();
+        MachOComdat!();
+        Item!();
         MachHeader!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_536 {
     };
 }
 
-impl_536!()
+impl_536!();

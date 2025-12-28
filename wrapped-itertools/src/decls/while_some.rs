@@ -11,4 +11,4 @@ macro_rules! while_some {
     };
 }
 
-while_some!()
+while_some!();

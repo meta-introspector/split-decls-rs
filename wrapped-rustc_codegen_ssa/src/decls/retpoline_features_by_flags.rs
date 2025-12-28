@@ -4,4 +4,4 @@ macro_rules! retpoline_features_by_flags {
     };
 }
 
-retpoline_features_by_flags!()
+retpoline_features_by_flags!();

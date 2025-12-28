@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EntryMarker!();
         Entry!();
+        EntryMarker!();
         Inner!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! SubmissionQueue {
     };
 }
 
-SubmissionQueue!()
+SubmissionQueue!();

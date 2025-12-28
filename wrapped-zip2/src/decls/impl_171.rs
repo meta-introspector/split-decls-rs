@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Zip64CDEBlock!();
         Magic!();
         FixedSizeBlock!();
+        Zip64CDEBlock!();
         ZipError!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_171 {
     };
 }
 
-impl_171!()
+impl_171!();

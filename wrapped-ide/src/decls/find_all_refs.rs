@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Declaration!();
-        Analysis!();
         FindAllRefsConfig!();
-        NavigationTarget!();
         ReferenceSearchResult!();
+        NavigationTarget!();
+        Analysis!();
+        Declaration!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! find_all_refs {
     };
 }
 
-find_all_refs!()
+find_all_refs!();

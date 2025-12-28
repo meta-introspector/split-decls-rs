@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Unsigned!();
-        ShiftDiff!();
+        BitDiffOut!();
         BitDiff!();
         Shleft!();
-        BitDiffOut!();
+        ShiftDiff!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_439 {
     };
 }
 
-impl_439!()
+impl_439!();

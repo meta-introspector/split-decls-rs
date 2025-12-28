@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Immediate!();
         MemPlace!();
+        Immediate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Operand {
     };
 }
 
-Operand!()
+Operand!();

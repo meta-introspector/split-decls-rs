@@ -4,4 +4,4 @@ macro_rules! quote_escapes {
     };
 }
 
-quote_escapes!()
+quote_escapes!();

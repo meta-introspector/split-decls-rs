@@ -4,4 +4,4 @@ macro_rules! sizedness_constraint_for_ty {
     };
 }
 
-sizedness_constraint_for_ty!()
+sizedness_constraint_for_ty!();

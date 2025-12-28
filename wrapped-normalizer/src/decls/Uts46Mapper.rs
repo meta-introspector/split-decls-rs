@@ -11,4 +11,4 @@ macro_rules! Uts46Mapper {
     };
 }
 
-Uts46Mapper!()
+Uts46Mapper!();

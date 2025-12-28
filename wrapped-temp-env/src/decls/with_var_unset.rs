@@ -4,4 +4,4 @@ macro_rules! with_var_unset {
     };
 }
 
-with_var_unset!()
+with_var_unset!();

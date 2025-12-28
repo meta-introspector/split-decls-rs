@@ -4,4 +4,4 @@ macro_rules! generate_session_dir_path {
     };
 }
 
-generate_session_dir_path!()
+generate_session_dir_path!();

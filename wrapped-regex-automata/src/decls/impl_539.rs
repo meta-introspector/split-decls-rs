@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Match!();
-        NFA!();
         Cache!();
-        Captures!();
-        Builder!();
-        PikeVM!();
         BuildError!();
+        Builder!();
+        Match!();
+        Captures!();
         Config!();
+        PikeVM!();
+        NFA!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_539 {
     };
 }
 
-impl_539!()
+impl_539!();

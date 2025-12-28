@@ -4,4 +4,4 @@ macro_rules! ELF_ST_BIND {
     };
 }
 
-ELF_ST_BIND!()
+ELF_ST_BIND!();

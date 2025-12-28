@@ -4,4 +4,4 @@ macro_rules! nghttp2_hd_inflater {
     };
 }
 
-nghttp2_hd_inflater!()
+nghttp2_hd_inflater!();

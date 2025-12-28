@@ -4,4 +4,4 @@ macro_rules! cfg_time {
     };
 }
 
-cfg_time!()
+cfg_time!();

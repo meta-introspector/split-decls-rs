@@ -11,4 +11,4 @@ macro_rules! orig_range_with_focus_r {
     };
 }
 
-orig_range_with_focus_r!()
+orig_range_with_focus_r!();

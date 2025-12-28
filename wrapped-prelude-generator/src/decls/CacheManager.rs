@@ -4,4 +4,4 @@ macro_rules! CacheManager {
     };
 }
 
-CacheManager!()
+CacheManager!();

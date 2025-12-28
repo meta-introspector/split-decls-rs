@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        Mod!();
-        ItemKind!();
-        Impl!();
-        TraitItemKind!();
+        ForeignItem!();
+        TraitFn!();
+        ModSpans!();
         Crate!();
         ForeignItemKind!();
-        ImplItem!();
-        TraitItem!();
-        FnDecl!();
-        ImplItemKind!();
-        Item!();
-        FnSig!();
+        ItemKind!();
         OwnerNode!();
-        BodyId!();
+        Item!();
+        ImplItemKind!();
+        FnDecl!();
+        FnSig!();
+        Impl!();
+        ImplItem!();
         Node!();
-        TraitFn!();
-        ForeignItem!();
-        ModSpans!();
         Generics!();
+        BodyId!();
+        TraitItem!();
+        TraitItemKind!();
+        Mod!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! impl_334 {
     };
 }
 
-impl_334!()
+impl_334!();

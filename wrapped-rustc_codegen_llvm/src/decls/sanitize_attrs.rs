@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AttributeKind!();
         SanitizerMemtagRequiresMte!();
         SmallVec!();
+        AttributeKind!();
         CodegenCx!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! sanitize_attrs {
     };
 }
 
-sanitize_attrs!()
+sanitize_attrs!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Bool!();
-        DIB!();
         CodegenCx!();
+        DIB!();
+        Bool!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! build_basic_type_di_node {
     };
 }
 
-build_basic_type_di_node!()
+build_basic_type_di_node!();

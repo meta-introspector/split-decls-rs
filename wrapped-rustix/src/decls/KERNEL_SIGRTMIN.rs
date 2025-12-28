@@ -4,4 +4,4 @@ macro_rules! KERNEL_SIGRTMIN {
     };
 }
 
-KERNEL_SIGRTMIN!()
+KERNEL_SIGRTMIN!();

@@ -4,4 +4,4 @@ macro_rules! VARIATION_SELECTOR {
     };
 }
 
-VARIATION_SELECTOR!()
+VARIATION_SELECTOR!();

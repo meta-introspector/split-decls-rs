@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Flags!();
-        Ast!();
-        ClassBytes!();
+        Repetition!();
         Alternation!();
-        Group!();
-        Hir!();
-        Translator!();
-        Byte!();
         Literal!();
+        ClassBytes!();
+        Byte!();
+        Translator!();
+        Hir!();
         ClassUnicode!();
         Concat!();
-        Repetition!();
+        Flags!();
+        Ast!();
+        Group!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! HirFrame {
     };
 }
 
-HirFrame!()
+HirFrame!();

@@ -11,4 +11,4 @@ macro_rules! SanitizerKcfiArityRequiresLLVM2100 {
     };
 }
 
-SanitizerKcfiArityRequiresLLVM2100!()
+SanitizerKcfiArityRequiresLLVM2100!();

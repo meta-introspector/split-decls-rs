@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ImageFileHeader!();
-        ImageSymbolBytes!();
         Result!();
+        ImageFileHeader!();
         ImageSymbol!();
         CoffHeader!();
+        ImageSymbolBytes!();
         ReadRef!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_202 {
     };
 }
 
-impl_202!()
+impl_202!();

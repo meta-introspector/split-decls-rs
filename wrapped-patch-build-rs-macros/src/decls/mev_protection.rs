@@ -4,4 +4,4 @@ macro_rules! mev_protection {
     };
 }
 
-mev_protection!()
+mev_protection!();

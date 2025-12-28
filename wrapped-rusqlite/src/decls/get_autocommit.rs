@@ -4,4 +4,4 @@ macro_rules! get_autocommit {
     };
 }
 
-get_autocommit!()
+get_autocommit!();

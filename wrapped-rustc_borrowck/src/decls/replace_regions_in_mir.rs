@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BorrowckInferCtxt!();
         UniversalRegions!();
+        BorrowckInferCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! replace_regions_in_mir {
     };
 }
 
-replace_regions_in_mir!()
+replace_regions_in_mir!();

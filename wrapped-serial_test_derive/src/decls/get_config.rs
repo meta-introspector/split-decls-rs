@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QuoteOption!();
         Config!();
+        QuoteOption!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_config {
     };
 }
 
-get_config!()
+get_config!();

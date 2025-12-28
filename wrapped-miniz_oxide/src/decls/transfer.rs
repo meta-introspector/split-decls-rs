@@ -4,4 +4,4 @@ macro_rules! transfer {
     };
 }
 
-transfer!()
+transfer!();

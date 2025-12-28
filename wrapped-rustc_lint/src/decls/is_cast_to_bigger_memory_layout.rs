@@ -11,4 +11,4 @@ macro_rules! is_cast_to_bigger_memory_layout {
     };
 }
 
-is_cast_to_bigger_memory_layout!()
+is_cast_to_bigger_memory_layout!();

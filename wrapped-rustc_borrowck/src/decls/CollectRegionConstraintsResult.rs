@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        RustcFacts!();
-        PoloniusContext!();
-        DeferredClosureRequirements!();
-        MirTypeckRegionConstraints!();
-        DeferredOpaqueTypeError!();
-        BorrowckInferCtxt!();
-        BorrowSet!();
         UniversalRegionRelations!();
+        PoloniusContext!();
+        MirTypeckRegionConstraints!();
+        RustcFacts!();
+        BorrowckInferCtxt!();
+        DeferredClosureRequirements!();
         PoloniusLocationTable!();
+        DeferredOpaqueTypeError!();
+        BorrowSet!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! CollectRegionConstraintsResult {
     };
 }
 
-CollectRegionConstraintsResult!()
+CollectRegionConstraintsResult!();

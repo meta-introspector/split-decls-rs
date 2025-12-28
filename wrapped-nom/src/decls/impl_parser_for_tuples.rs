@@ -4,4 +4,4 @@ macro_rules! impl_parser_for_tuples {
     };
 }
 
-impl_parser_for_tuples!()
+impl_parser_for_tuples!();

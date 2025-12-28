@@ -4,4 +4,4 @@ macro_rules! build_thread_local_shim {
     };
 }
 
-build_thread_local_shim!()
+build_thread_local_shim!();

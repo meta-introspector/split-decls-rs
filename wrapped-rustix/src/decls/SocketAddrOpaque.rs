@@ -4,4 +4,4 @@ macro_rules! SocketAddrOpaque {
     };
 }
 
-SocketAddrOpaque!()
+SocketAddrOpaque!();

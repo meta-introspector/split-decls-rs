@@ -4,4 +4,4 @@ macro_rules! AbiOf {
     };
 }
 
-AbiOf!()
+AbiOf!();

@@ -4,4 +4,4 @@ macro_rules! UnionIter {
     };
 }
 
-UnionIter!()
+UnionIter!();

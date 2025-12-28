@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         IoThreads!();
-        Request!();
-        Connection!();
-        Response!();
-        ProtocolError!();
-        ErrorCode!();
         Notification!();
         RequestId!();
+        ErrorCode!();
+        Connection!();
         Message!();
+        ProtocolError!();
+        Response!();
+        Request!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_51 {
     };
 }
 
-impl_51!()
+impl_51!();

@@ -4,4 +4,4 @@ macro_rules! unwrap_or_report {
     };
 }
 
-unwrap_or_report!()
+unwrap_or_report!();

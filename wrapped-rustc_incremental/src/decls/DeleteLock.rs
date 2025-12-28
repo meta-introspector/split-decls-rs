@@ -4,4 +4,4 @@ macro_rules! DeleteLock {
     };
 }
 
-DeleteLock!()
+DeleteLock!();

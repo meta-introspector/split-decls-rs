@@ -4,4 +4,4 @@ macro_rules! pop_close_angle_bracket {
     };
 }
 
-pop_close_angle_bracket!()
+pop_close_angle_bracket!();

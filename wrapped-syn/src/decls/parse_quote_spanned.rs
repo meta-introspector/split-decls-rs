@@ -4,4 +4,4 @@ macro_rules! parse_quote_spanned {
     };
 }
 
-parse_quote_spanned!()
+parse_quote_spanned!();

@@ -4,4 +4,4 @@ macro_rules! R_SH_DIR8WPN {
     };
 }
 
-R_SH_DIR8WPN!()
+R_SH_DIR8WPN!();

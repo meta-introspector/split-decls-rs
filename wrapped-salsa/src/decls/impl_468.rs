@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        QueryRevisions!();
-        IterationCount!();
-        QueryRevisionsExtra!();
-        Identity!();
         Id!();
         IdentityMap!();
+        QueryRevisions!();
         QueryOrigin!();
-        Durability!();
-        DatabaseKeyIndex!();
         Revision!();
+        IterationCount!();
+        DatabaseKeyIndex!();
+        QueryRevisionsExtra!();
+        Durability!();
         CycleHeads!();
+        Identity!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_468 {
     };
 }
 
-impl_468!()
+impl_468!();

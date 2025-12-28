@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BorrowSet!();
-        PoloniusOutput!();
-        PoloniusLocationTable!();
         RegionInferenceContext!();
+        PoloniusOutput!();
+        BorrowSet!();
+        PoloniusLocationTable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! BodyWithBorrowckFacts {
     };
 }
 
-BodyWithBorrowckFacts!()
+BodyWithBorrowckFacts!();

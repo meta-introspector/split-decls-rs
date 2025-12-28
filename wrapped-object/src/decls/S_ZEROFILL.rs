@@ -4,4 +4,4 @@ macro_rules! S_ZEROFILL {
     };
 }
 
-S_ZEROFILL!()
+S_ZEROFILL!();

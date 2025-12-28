@@ -4,4 +4,4 @@ macro_rules! Foundation {
     };
 }
 
-Foundation!()
+Foundation!();

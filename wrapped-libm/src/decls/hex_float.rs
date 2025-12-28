@@ -4,4 +4,4 @@ macro_rules! hex_float {
     };
 }
 
-hex_float!()
+hex_float!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        TtElement!();
         SubtreeView!();
+        TtElement!();
+        Cursor!();
+        TtIter!();
         TokenTree!();
         Subtree!();
-        TtIter!();
         TokenTreesView!();
-        Cursor!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

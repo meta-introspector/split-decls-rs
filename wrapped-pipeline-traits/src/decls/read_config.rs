@@ -11,4 +11,4 @@ macro_rules! read_config {
     };
 }
 
-read_config!()
+read_config!();

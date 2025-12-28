@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        StatusAnd!();
-        Semantics!();
-        Category!();
-        IeeeDefaultExceptionHandling!();
         X87DoubleExtendedS!();
         IeeeFloat!();
+        IeeeDefaultExceptionHandling!();
+        Semantics!();
+        Category!();
+        StatusAnd!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

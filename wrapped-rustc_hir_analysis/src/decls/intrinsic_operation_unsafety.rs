@@ -4,4 +4,4 @@ macro_rules! intrinsic_operation_unsafety {
     };
 }
 
-intrinsic_operation_unsafety!()
+intrinsic_operation_unsafety!();

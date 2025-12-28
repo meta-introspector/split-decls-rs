@@ -4,4 +4,4 @@ macro_rules! IMAGE_FILE_MACHINE_CEF {
     };
 }
 
-IMAGE_FILE_MACHINE_CEF!()
+IMAGE_FILE_MACHINE_CEF!();

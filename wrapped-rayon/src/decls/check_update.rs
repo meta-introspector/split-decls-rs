@@ -4,4 +4,4 @@ macro_rules! check_update {
     };
 }
 
-check_update!()
+check_update!();

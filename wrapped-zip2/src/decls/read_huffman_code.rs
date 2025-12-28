@@ -11,4 +11,4 @@ macro_rules! read_huffman_code {
     };
 }
 
-read_huffman_code!()
+read_huffman_code!();

@@ -4,4 +4,4 @@ macro_rules! LC_SOURCE_VERSION {
     };
 }
 
-LC_SOURCE_VERSION!()
+LC_SOURCE_VERSION!();

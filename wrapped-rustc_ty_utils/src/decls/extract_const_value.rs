@@ -4,4 +4,4 @@ macro_rules! extract_const_value {
     };
 }
 
-extract_const_value!()
+extract_const_value!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StreamTag!();
         UnknownCryptoError!();
+        StreamTag!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

@@ -4,4 +4,4 @@ macro_rules! lex_filter_tag {
     };
 }
 
-lex_filter_tag!()
+lex_filter_tag!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        HashStableContext!();
-        ExpnHash!();
-        HygieneData!();
         ExpnId!();
         Span!();
+        HashStableContext!();
         ExpnData!();
+        HygieneData!();
+        ExpnHash!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

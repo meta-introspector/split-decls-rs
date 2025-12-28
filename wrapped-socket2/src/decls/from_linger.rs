@@ -4,4 +4,4 @@ macro_rules! from_linger {
     };
 }
 
-from_linger!()
+from_linger!();

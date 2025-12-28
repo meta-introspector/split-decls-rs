@@ -4,4 +4,4 @@ macro_rules! lex_set_global_tag {
     };
 }
 
-lex_set_global_tag!()
+lex_set_global_tag!();

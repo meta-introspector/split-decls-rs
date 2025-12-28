@@ -11,4 +11,4 @@ macro_rules! hi64 {
     };
 }
 
-hi64!()
+hi64!();

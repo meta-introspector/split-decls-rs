@@ -4,4 +4,4 @@ macro_rules! CacheAligned {
     };
 }
 
-CacheAligned!()
+CacheAligned!();

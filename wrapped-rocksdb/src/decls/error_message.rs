@@ -4,4 +4,4 @@ macro_rules! error_message {
     };
 }
 
-error_message!()
+error_message!();

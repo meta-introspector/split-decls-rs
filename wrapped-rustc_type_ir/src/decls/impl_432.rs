@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Safety!();
-        Interner!();
-        Abi!();
-        TyKind!();
         Binder!();
+        TyKind!();
+        Interner!();
         FnSig!();
+        Safety!();
+        Abi!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_432 {
     };
 }
 
-impl_432!()
+impl_432!();

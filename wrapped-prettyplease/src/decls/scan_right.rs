@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Scan!();
-        FixupContext!();
         Precedence!();
+        FixupContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! scan_right {
     };
 }
 
-scan_right!()
+scan_right!();

@@ -11,4 +11,4 @@ macro_rules! BLOCK_CACHE_USAGE {
     };
 }
 
-BLOCK_CACHE_USAGE!()
+BLOCK_CACHE_USAGE!();

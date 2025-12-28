@@ -4,4 +4,4 @@ macro_rules! graph6 {
     };
 }
 
-graph6!()
+graph6!();

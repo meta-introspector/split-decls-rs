@@ -4,4 +4,4 @@ macro_rules! LocalKeyId {
     };
 }
 
-LocalKeyId!()
+LocalKeyId!();

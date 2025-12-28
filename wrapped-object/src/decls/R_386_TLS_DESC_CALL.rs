@@ -4,4 +4,4 @@ macro_rules! R_386_TLS_DESC_CALL {
     };
 }
 
-R_386_TLS_DESC_CALL!()
+R_386_TLS_DESC_CALL!();

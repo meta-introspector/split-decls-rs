@@ -4,4 +4,4 @@ macro_rules! literal_from_str {
     };
 }
 
-literal_from_str!()
+literal_from_str!();

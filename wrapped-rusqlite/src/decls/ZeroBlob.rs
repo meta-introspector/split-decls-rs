@@ -4,4 +4,4 @@ macro_rules! ZeroBlob {
     };
 }
 
-ZeroBlob!()
+ZeroBlob!();

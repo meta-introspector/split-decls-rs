@@ -4,4 +4,4 @@ macro_rules! SHN_COMMON {
     };
 }
 
-SHN_COMMON!()
+SHN_COMMON!();

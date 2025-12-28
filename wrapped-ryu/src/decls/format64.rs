@@ -4,4 +4,4 @@ macro_rules! format64 {
     };
 }
 
-format64!()
+format64!();

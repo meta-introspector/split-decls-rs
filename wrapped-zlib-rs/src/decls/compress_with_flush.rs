@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DeflateFlush!();
-        ReturnCode!();
-        DeflateStream!();
         DeflateConfig!();
+        DeflateFlush!();
+        DeflateStream!();
+        ReturnCode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! compress_with_flush {
     };
 }
 
-compress_with_flush!()
+compress_with_flush!();

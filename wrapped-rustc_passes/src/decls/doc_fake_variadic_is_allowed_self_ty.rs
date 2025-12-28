@@ -4,4 +4,4 @@ macro_rules! doc_fake_variadic_is_allowed_self_ty {
     };
 }
 
-doc_fake_variadic_is_allowed_self_ty!()
+doc_fake_variadic_is_allowed_self_ty!();

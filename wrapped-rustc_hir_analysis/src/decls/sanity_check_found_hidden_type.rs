@@ -4,4 +4,4 @@ macro_rules! sanity_check_found_hidden_type {
     };
 }
 
-sanity_check_found_hidden_type!()
+sanity_check_found_hidden_type!();

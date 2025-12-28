@@ -11,4 +11,4 @@ macro_rules! dup2_stdin {
     };
 }
 
-dup2_stdin!()
+dup2_stdin!();

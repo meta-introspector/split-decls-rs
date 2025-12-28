@@ -4,4 +4,4 @@ macro_rules! ODK_EXCEPTIONS {
     };
 }
 
-ODK_EXCEPTIONS!()
+ODK_EXCEPTIONS!();

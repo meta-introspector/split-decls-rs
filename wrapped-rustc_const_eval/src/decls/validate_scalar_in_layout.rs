@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CheckAlignment!();
+        CompileTimeMachine!();
         MemoryKind!();
         InterpCx!();
-        CompileTimeMachine!();
+        CheckAlignment!();
         CanAccessMutGlobal!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! validate_scalar_in_layout {
     };
 }
 
-validate_scalar_in_layout!()
+validate_scalar_in_layout!();

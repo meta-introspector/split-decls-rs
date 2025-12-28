@@ -4,4 +4,4 @@ macro_rules! is_implicitly_borrowed_reference {
     };
 }
 
-is_implicitly_borrowed_reference!()
+is_implicitly_borrowed_reference!();

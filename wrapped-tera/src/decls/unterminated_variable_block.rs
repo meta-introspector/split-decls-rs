@@ -4,4 +4,4 @@ macro_rules! unterminated_variable_block {
     };
 }
 
-unterminated_variable_block!()
+unterminated_variable_block!();

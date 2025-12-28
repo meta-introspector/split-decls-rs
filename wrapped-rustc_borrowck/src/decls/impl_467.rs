@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NllTypeRelating!();
-        UniverseInfo!();
         OutlivesConstraint!();
-        TypeChecker!();
-        RegionCtxt!();
         Locations!();
+        TypeChecker!();
+        UniverseInfo!();
+        RegionCtxt!();
+        NllTypeRelating!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_467 {
     };
 }
 
-impl_467!()
+impl_467!();

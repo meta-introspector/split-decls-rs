@@ -4,4 +4,4 @@ macro_rules! take {
     };
 }
 
-take!()
+take!();

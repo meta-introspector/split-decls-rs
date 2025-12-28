@@ -4,4 +4,4 @@ macro_rules! enum_untagged {
     };
 }
 
-enum_untagged!()
+enum_untagged!();

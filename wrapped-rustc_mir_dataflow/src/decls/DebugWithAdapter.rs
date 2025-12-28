@@ -4,4 +4,4 @@ macro_rules! DebugWithAdapter {
     };
 }
 
-DebugWithAdapter!()
+DebugWithAdapter!();

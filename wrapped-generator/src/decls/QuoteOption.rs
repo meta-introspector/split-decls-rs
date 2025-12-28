@@ -4,4 +4,4 @@ macro_rules! QuoteOption {
     };
 }
 
-QuoteOption!()
+QuoteOption!();

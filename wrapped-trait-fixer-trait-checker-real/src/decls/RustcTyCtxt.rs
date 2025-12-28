@@ -4,4 +4,4 @@ macro_rules! RustcTyCtxt {
     };
 }
 
-RustcTyCtxt!()
+RustcTyCtxt!();

@@ -4,4 +4,4 @@ macro_rules! mini_moka {
     };
 }
 
-mini_moka!()
+mini_moka!();

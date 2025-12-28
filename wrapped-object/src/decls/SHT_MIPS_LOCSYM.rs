@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_LOCSYM {
     };
 }
 
-SHT_MIPS_LOCSYM!()
+SHT_MIPS_LOCSYM!();

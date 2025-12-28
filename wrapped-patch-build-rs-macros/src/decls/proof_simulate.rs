@@ -4,4 +4,4 @@ macro_rules! proof_simulate {
     };
 }
 
-proof_simulate!()
+proof_simulate!();

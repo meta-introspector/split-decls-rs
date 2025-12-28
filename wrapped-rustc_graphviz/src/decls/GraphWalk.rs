@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Edges!();
-        Nodes!();
-        Node!();
         Edge!();
+        Nodes!();
+        Edges!();
+        Node!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! GraphWalk {
     };
 }
 
-GraphWalk!()
+GraphWalk!();

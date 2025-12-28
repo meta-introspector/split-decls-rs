@@ -12,4 +12,4 @@ macro_rules! to_llvm_features {
     };
 }
 
-to_llvm_features!()
+to_llvm_features!();

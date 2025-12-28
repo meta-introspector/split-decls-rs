@@ -9,4 +9,4 @@ macro_rules! paxos_consensus_impl {
     };
 }
 
-paxos_consensus_impl!()
+paxos_consensus_impl!();

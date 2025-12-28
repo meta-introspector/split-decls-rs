@@ -4,4 +4,4 @@ macro_rules! walk_visitable_list {
     };
 }
 
-walk_visitable_list!()
+walk_visitable_list!();

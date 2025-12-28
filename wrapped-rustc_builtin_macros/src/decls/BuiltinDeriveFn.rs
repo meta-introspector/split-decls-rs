@@ -4,4 +4,4 @@ macro_rules! BuiltinDeriveFn {
     };
 }
 
-BuiltinDeriveFn!()
+BuiltinDeriveFn!();

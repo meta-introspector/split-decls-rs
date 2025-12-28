@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        And!();
         Trim!();
+        And!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PrivateAnd {
     };
 }
 
-PrivateAnd!()
+PrivateAnd!();

@@ -4,4 +4,4 @@ macro_rules! HeapString {
     };
 }
 
-HeapString!()
+HeapString!();

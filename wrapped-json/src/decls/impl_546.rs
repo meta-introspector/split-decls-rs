@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Deserializer!();
+        Error!();
         Result!();
         Value!();
         NumberKey!();
+        Deserializer!();
         Formatter!();
-        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_546 {
     };
 }
 
-impl_546!()
+impl_546!();

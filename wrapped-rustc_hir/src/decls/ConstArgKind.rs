@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ConstArg!();
-        Path!();
-        QPath!();
         AnonConst!();
+        QPath!();
+        Path!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ConstArgKind {
     };
 }
 
-ConstArgKind!()
+ConstArgKind!();

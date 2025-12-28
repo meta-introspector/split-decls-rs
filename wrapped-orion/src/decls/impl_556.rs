@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        KeyPair!();
         UnknownCryptoError!();
+        KeyPair!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_556 {
     };
 }
 
-impl_556!()
+impl_556!();

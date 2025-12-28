@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SlotMemosMutFnRaw!();
         Slot!();
         SlotMemosFnRaw!();
+        SlotMemosMutFnRaw!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SlotVTable {
     };
 }
 
-SlotVTable!()
+SlotVTable!();

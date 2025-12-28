@@ -4,4 +4,4 @@ macro_rules! PR_SET_MM_MAP {
     };
 }
 
-PR_SET_MM_MAP!()
+PR_SET_MM_MAP!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Regex!();
-        Match!();
-        IteratorIndexExt!();
-        RegexI!();
         Config!();
-        Look!();
-        RegexInfo!();
         PatternID!();
+        Match!();
+        CachePoolFn!();
+        Regex!();
+        IteratorIndexExt!();
+        Pool!();
+        RegexI!();
+        Look!();
         Builder!();
         BuildError!();
-        CachePoolFn!();
-        Pool!();
+        RegexInfo!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_364 {
     };
 }
 
-impl_364!()
+impl_364!();

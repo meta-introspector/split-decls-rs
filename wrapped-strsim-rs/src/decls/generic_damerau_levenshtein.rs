@@ -4,4 +4,4 @@ macro_rules! generic_damerau_levenshtein {
     };
 }
 
-generic_damerau_levenshtein!()
+generic_damerau_levenshtein!();

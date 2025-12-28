@@ -4,4 +4,4 @@ macro_rules! get_channel {
     };
 }
 
-get_channel!()
+get_channel!();

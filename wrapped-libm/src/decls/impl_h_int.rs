@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HInt!();
         MinInt!();
+        HInt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_h_int {
     };
 }
 
-impl_h_int!()
+impl_h_int!();

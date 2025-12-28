@@ -4,4 +4,4 @@ macro_rules! build {
     };
 }
 
-build!()
+build!();

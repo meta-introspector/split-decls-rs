@@ -4,4 +4,4 @@ macro_rules! req_queue {
     };
 }
 
-req_queue!()
+req_queue!();

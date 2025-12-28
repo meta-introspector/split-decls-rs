@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BoundConstness!();
         Interner!();
-        HostEffectPredicate!();
-        Ty!();
         Binder!();
+        Ty!();
+        BoundConstness!();
+        HostEffectPredicate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_393 {
     };
 }
 
-impl_393!()
+impl_393!();

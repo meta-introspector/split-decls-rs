@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         NonConstOp!();
-        ConstCx!();
         LiveDrop!();
         Status!();
+        ConstCx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

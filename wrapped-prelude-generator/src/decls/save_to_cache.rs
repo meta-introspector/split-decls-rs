@@ -11,4 +11,4 @@ macro_rules! save_to_cache {
     };
 }
 
-save_to_cache!()
+save_to_cache!();

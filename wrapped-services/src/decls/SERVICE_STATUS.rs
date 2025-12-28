@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ENUM_SERVICE_TYPE!();
         SERVICE_STATUS_CURRENT_STATE!();
+        ENUM_SERVICE_TYPE!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SERVICE_STATUS {
     };
 }
 
-SERVICE_STATUS!()
+SERVICE_STATUS!();

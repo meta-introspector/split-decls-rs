@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MachHeader!();
-        MachOFile!();
         ReadRef!();
+        MachOFile!();
+        MachHeader!();
         SymbolIndex!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! MachOSymbolIterator {
     };
 }
 
-MachOSymbolIterator!()
+MachOSymbolIterator!();

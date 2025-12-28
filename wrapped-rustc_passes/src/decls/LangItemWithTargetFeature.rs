@@ -4,4 +4,4 @@ macro_rules! LangItemWithTargetFeature {
     };
 }
 
-LangItemWithTargetFeature!()
+LangItemWithTargetFeature!();

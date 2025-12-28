@@ -4,4 +4,4 @@ macro_rules! test_known_layout {
     };
 }
 
-test_known_layout!()
+test_known_layout!();

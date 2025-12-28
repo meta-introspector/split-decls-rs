@@ -111,4 +111,4 @@ Level 14: BUILD SYSTEMS (Infrastructure)
     };
 }
 
-macro_lattice_impl!()
+macro_lattice_impl!();

@@ -11,4 +11,4 @@ macro_rules! same_buffer {
     };
 }
 
-same_buffer!()
+same_buffer!();

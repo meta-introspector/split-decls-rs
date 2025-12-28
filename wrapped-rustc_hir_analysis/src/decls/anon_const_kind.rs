@@ -4,4 +4,4 @@ macro_rules! anon_const_kind {
     };
 }
 
-anon_const_kind!()
+anon_const_kind!();

@@ -4,4 +4,4 @@ macro_rules! BUG_REPORT_MSG {
     };
 }
 
-BUG_REPORT_MSG!()
+BUG_REPORT_MSG!();

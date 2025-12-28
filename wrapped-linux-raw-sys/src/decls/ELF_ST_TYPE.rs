@@ -4,4 +4,4 @@ macro_rules! ELF_ST_TYPE {
     };
 }
 
-ELF_ST_TYPE!()
+ELF_ST_TYPE!();

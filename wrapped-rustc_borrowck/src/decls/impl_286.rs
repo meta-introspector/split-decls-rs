@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VarianceExtractor!();
         ConstraintDirection!();
+        VarianceExtractor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_286 {
     };
 }
 
-impl_286!()
+impl_286!();

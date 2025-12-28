@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RuleType!();
-        ParserNode!();
         ParserRule!();
+        ParserNode!();
         ParserExpr!();
+        RuleType!();
         Rule!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! validate_tag_silent_rules {
     };
 }
 
-validate_tag_silent_rules!()
+validate_tag_silent_rules!();

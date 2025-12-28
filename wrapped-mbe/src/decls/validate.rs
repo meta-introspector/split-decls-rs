@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParseError!();
         Op!();
+        ParseError!();
         MetaTemplate!();
         MetaVarKind!();
         RepeatKind!();
@@ -15,4 +15,4 @@ macro_rules! validate {
     };
 }
 
-validate!()
+validate!();

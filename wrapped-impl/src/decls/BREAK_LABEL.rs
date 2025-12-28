@@ -12,4 +12,4 @@ macro_rules! BREAK_LABEL {
     };
 }
 
-BREAK_LABEL!()
+BREAK_LABEL!();

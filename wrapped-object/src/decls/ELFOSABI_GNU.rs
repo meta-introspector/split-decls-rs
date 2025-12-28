@@ -11,4 +11,4 @@ macro_rules! ELFOSABI_GNU {
     };
 }
 
-ELFOSABI_GNU!()
+ELFOSABI_GNU!();

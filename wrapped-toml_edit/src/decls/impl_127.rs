@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TomlError!();
-        KeyMut!();
-        TomlSink!();
-        Repr!();
         Decor!();
+        TomlError!();
+        TomlSink!();
+        KeyMut!();
         Key!();
+        Repr!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Span!();
         Event!();
         EventKind!();
         Encoding!();
-        Span!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_190 {
     };
 }
 
-impl_190!()
+impl_190!();

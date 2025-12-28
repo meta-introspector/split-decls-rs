@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Stage!();
-        AttributeOrder!();
         AllowedTargets!();
-        SkipDuringMethodDispatchParser!();
-        OnDuplicate!();
-        SingleAttributeParser!();
         AcceptContext!();
+        OnDuplicate!();
         ArgParser!();
+        SkipDuringMethodDispatchParser!();
+        AttributeOrder!();
+        Stage!();
+        SingleAttributeParser!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_204 {
     };
 }
 
-impl_204!()
+impl_204!();

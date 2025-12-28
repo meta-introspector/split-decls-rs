@@ -4,4 +4,4 @@ macro_rules! get_iosock_param {
     };
 }
 
-get_iosock_param!()
+get_iosock_param!();

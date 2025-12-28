@@ -4,4 +4,4 @@ macro_rules! Diverges {
     };
 }
 
-Diverges!()
+Diverges!();

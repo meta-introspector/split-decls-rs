@@ -4,4 +4,4 @@ macro_rules! has_ascii_alphanumeric {
     };
 }
 
-has_ascii_alphanumeric!()
+has_ascii_alphanumeric!();

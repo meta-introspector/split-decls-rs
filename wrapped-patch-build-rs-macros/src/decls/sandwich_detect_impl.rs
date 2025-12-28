@@ -13,4 +13,4 @@ macro_rules! exclude_sandwich {{
     };
 }
 
-sandwich_detect_impl!()
+sandwich_detect_impl!();

@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         AttributeParser!();
         FinalizeContext!();
-        NakedFunctionIncompatibleAttribute!();
-        AcceptMapping!();
         AllowedTargets!();
-        Stage!();
+        AcceptMapping!();
+        NakedFunctionIncompatibleAttribute!();
         NakedParser!();
+        Stage!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

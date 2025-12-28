@@ -4,4 +4,4 @@ macro_rules! atanh {
     };
 }
 
-atanh!()
+atanh!();

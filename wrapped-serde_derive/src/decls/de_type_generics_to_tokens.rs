@@ -11,4 +11,4 @@ macro_rules! de_type_generics_to_tokens {
     };
 }
 
-de_type_generics_to_tokens!()
+de_type_generics_to_tokens!();

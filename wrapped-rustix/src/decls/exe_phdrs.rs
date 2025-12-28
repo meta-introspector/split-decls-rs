@@ -4,4 +4,4 @@ macro_rules! exe_phdrs {
     };
 }
 
-exe_phdrs!()
+exe_phdrs!();

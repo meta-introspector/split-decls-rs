@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         PpAnn!();
+        State!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! to_string {
     };
 }
 
-to_string!()
+to_string!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InternalMarker!();
         GetBit!();
         UInt!();
-        InternalMarker!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_457 {
     };
 }
 
-impl_457!()
+impl_457!();

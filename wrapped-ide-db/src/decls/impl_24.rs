@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FamousDefs!();
+        RootDatabase!();
         DocsRangeMap!();
         Label!();
-        RootDatabase!();
+        FamousDefs!();
         Definition!();
         Documentation!();
     };
@@ -16,4 +16,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

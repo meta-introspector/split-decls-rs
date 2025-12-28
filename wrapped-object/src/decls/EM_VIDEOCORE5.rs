@@ -4,4 +4,4 @@ macro_rules! EM_VIDEOCORE5 {
     };
 }
 
-EM_VIDEOCORE5!()
+EM_VIDEOCORE5!();

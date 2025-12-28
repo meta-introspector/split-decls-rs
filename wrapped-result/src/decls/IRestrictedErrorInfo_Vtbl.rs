@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BSTR!();
         HRESULT!();
+        BSTR!();
         IUnknown_Vtbl!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! IRestrictedErrorInfo_Vtbl {
     };
 }
 
-IRestrictedErrorInfo_Vtbl!()
+IRestrictedErrorInfo_Vtbl!();

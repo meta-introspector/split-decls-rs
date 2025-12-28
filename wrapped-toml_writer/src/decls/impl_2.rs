@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HexCase!();
         WriteTomlValue!();
-        TomlInteger!();
         Radix!();
         TomlIntegerFormat!();
+        TomlInteger!();
+        HexCase!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

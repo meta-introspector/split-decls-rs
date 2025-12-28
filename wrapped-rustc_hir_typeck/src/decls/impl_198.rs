@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        BreakableCtxt!();
-        Compatibility!();
-        TypeMismatchSource!();
-        DivergingBlockBehavior!();
-        LoweredTy!();
-        ArgMismatchIndeterminate!();
-        InlineAsmCtxt!();
-        Declaration!();
-        FindClosureArg!();
-        Needs!();
-        ItemKind!();
-        Error!();
-        Diverges!();
-        CoerceMany!();
-        Expectation!();
-        FnParam!();
-        GatherLocalsVisitor!();
-        SuggestPtrNullMut!();
-        PassFnItemToVariadicFunction!();
-        TupleArgumentsFlag!();
-        IsSuggestion!();
-        PassToVariadicFunction!();
-        FnCtxt!();
         ArgMatrix!();
+        PassToVariadicFunction!();
+        SuggestPtrNullMut!();
+        InlineAsmCtxt!();
+        FnParam!();
+        Error!();
+        DivergingBlockBehavior!();
+        FnCtxt!();
+        GatherLocalsVisitor!();
+        FindClosureArg!();
+        LoweredTy!();
+        TypeMismatchSource!();
+        ArgMismatchIndeterminate!();
+        CoerceMany!();
+        ItemKind!();
+        TupleArgumentsFlag!();
+        Expectation!();
+        Needs!();
+        PassFnItemToVariadicFunction!();
+        IsSuggestion!();
+        Diverges!();
+        Declaration!();
+        Compatibility!();
+        BreakableCtxt!();
     };
 }
 
@@ -41,4 +41,4 @@ macro_rules! impl_198 {
     };
 }
 
-impl_198!()
+impl_198!();

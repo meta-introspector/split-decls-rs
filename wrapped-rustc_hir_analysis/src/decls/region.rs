@@ -4,4 +4,4 @@ macro_rules! region {
     };
 }
 
-region!()
+region!();

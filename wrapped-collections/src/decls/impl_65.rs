@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IVectorView!();
         IIterator!();
         IIterable!();
+        IVectorView!();
         IVector!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

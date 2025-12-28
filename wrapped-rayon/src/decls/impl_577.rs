@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Consumer!();
         ParallelIterator!();
+        Consumer!();
         IndexedParallelIterator!();
         FoldChunksWith!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_577 {
     };
 }
 
-impl_577!()
+impl_577!();

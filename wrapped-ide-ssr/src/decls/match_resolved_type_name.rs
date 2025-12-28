@@ -18,4 +18,4 @@ macro_rules! match_resolved_type_name {
     };
 }
 
-match_resolved_type_name!()
+match_resolved_type_name!();

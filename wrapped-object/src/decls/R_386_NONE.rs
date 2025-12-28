@@ -4,4 +4,4 @@ macro_rules! R_386_NONE {
     };
 }
 
-R_386_NONE!()
+R_386_NONE!();

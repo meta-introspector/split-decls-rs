@@ -4,4 +4,4 @@ macro_rules! bindgen_types {
     };
 }
 
-bindgen_types!()
+bindgen_types!();

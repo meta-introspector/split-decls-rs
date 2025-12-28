@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_TPRELHI {
     };
 }
 
-R_ALPHA_TPRELHI!()
+R_ALPHA_TPRELHI!();

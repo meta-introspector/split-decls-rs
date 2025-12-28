@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Project!();
-        WorkspacePackage!();
-        Package!();
-        ExpandedTest!();
-        Name!();
         Bin!();
+        WorkspacePackage!();
+        Name!();
+        Project!();
+        ExpandedTest!();
+        Package!();
         Manifest!();
-        Workspace!();
         Result!();
         Dependency!();
+        Workspace!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! make_manifest {
     };
 }
 
-make_manifest!()
+make_manifest!();

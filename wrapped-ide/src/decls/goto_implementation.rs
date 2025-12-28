@@ -4,4 +4,4 @@ macro_rules! goto_implementation {
     };
 }
 
-goto_implementation!()
+goto_implementation!();

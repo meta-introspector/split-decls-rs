@@ -4,4 +4,4 @@ macro_rules! kem_interface {
     };
 }
 
-kem_interface!()
+kem_interface!();

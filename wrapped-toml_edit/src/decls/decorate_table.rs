@@ -11,4 +11,4 @@ macro_rules! decorate_table {
     };
 }
 
-decorate_table!()
+decorate_table!();

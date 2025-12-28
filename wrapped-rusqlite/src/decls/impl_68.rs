@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Connection!();
-        CachedStatement!();
-        Statement!();
-        StatementCache!();
-        RawStatement!();
         Result!();
+        Statement!();
+        Connection!();
+        StatementCache!();
+        CachedStatement!();
+        RawStatement!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

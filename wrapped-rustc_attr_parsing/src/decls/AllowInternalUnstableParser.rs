@@ -4,4 +4,4 @@ macro_rules! AllowInternalUnstableParser {
     };
 }
 
-AllowInternalUnstableParser!()
+AllowInternalUnstableParser!();

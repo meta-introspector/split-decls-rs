@@ -4,4 +4,4 @@ macro_rules! PROC_REAP_RELEASE {
     };
 }
 
-PROC_REAP_RELEASE!()
+PROC_REAP_RELEASE!();

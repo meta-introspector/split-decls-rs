@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        DfsEvent!();
         ControlFlow!();
         Time!();
-        Control!();
-        DfsEvent!();
         Graph!();
+        Control!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! depth_first_search {
     };
 }
 
-depth_first_search!()
+depth_first_search!();

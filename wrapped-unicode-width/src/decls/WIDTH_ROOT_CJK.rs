@@ -11,4 +11,4 @@ macro_rules! WIDTH_ROOT_CJK {
     };
 }
 
-WIDTH_ROOT_CJK!()
+WIDTH_ROOT_CJK!();

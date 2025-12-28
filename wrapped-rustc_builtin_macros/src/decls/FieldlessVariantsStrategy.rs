@@ -4,4 +4,4 @@ macro_rules! FieldlessVariantsStrategy {
     };
 }
 
-FieldlessVariantsStrategy!()
+FieldlessVariantsStrategy!();

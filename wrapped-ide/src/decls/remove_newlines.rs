@@ -11,4 +11,4 @@ macro_rules! remove_newlines {
     };
 }
 
-remove_newlines!()
+remove_newlines!();

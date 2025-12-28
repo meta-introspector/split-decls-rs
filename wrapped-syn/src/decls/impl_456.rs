@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Lookahead1!();
         Peek!();
         CommaSeparated!();
+        Lookahead1!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_456 {
     };
 }
 
-impl_456!()
+impl_456!();

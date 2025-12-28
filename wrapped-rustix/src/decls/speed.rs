@@ -4,4 +4,4 @@ macro_rules! speed {
     };
 }
 
-speed!()
+speed!();

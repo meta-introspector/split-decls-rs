@@ -4,4 +4,4 @@ macro_rules! R_PPC64_GLOB_DAT {
     };
 }
 
-R_PPC64_GLOB_DAT!()
+R_PPC64_GLOB_DAT!();

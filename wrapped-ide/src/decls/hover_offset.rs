@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        HoverConfig!();
         HoverResult!();
         Analysis!();
-        HoverConfig!();
-        Markup!();
         RangeInfo!();
+        Markup!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! hover_offset {
     };
 }
 
-hover_offset!()
+hover_offset!();

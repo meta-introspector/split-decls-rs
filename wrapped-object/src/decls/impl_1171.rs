@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ByteString!();
         AttributesSubsection!();
+        ByteString!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1171 {
     };
 }
 
-impl_1171!()
+impl_1171!();

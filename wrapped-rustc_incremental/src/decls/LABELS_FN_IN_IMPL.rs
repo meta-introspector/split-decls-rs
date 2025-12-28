@@ -4,4 +4,4 @@ macro_rules! LABELS_FN_IN_IMPL {
     };
 }
 
-LABELS_FN_IN_IMPL!()
+LABELS_FN_IN_IMPL!();

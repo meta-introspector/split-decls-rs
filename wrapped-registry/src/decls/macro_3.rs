@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SECURITY_ATTRIBUTES!();
-        PCWSTR!();
-        GUID!();
         HANDLE!();
+        SECURITY_ATTRIBUTES!();
+        GUID!();
+        PCWSTR!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_3 {
     };
 }
 
-macro_3!()
+macro_3!();

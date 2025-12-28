@@ -4,4 +4,4 @@ macro_rules! serialized {
     };
 }
 
-serialized!()
+serialized!();

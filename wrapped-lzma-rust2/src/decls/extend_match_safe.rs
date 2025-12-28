@@ -4,4 +4,4 @@ macro_rules! extend_match_safe {
     };
 }
 
-extend_match_safe!()
+extend_match_safe!();

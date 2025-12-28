@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ArgParser!();
-        MetaBadDelim!();
-        MetaItemListParser!();
-        ShouldEmit!();
-        MetaBadDelimSugg!();
         NameValueParser!();
+        MetaBadDelimSugg!();
+        ArgParser!();
+        ShouldEmit!();
+        MetaItemListParser!();
+        MetaBadDelim!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_296 {
     };
 }
 
-impl_296!()
+impl_296!();

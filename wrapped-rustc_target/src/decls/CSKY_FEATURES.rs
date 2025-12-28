@@ -12,4 +12,4 @@ macro_rules! CSKY_FEATURES {
     };
 }
 
-CSKY_FEATURES!()
+CSKY_FEATURES!();

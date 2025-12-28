@@ -12,4 +12,4 @@ macro_rules! parse_never_type_options_attr {
     };
 }
 
-parse_never_type_options_attr!()
+parse_never_type_options_attr!();

@@ -4,4 +4,4 @@ macro_rules! split_block_comment_into_lines {
     };
 }
 
-split_block_comment_into_lines!()
+split_block_comment_into_lines!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IngredientIndex!();
-        RawDatabase!();
-        Revision!();
         Zalsa!();
+        Revision!();
+        RawDatabase!();
         Id!();
         DatabaseKeyIndex!();
+        IngredientIndex!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_223 {
     };
 }
 
-impl_223!()
+impl_223!();

@@ -4,4 +4,4 @@ macro_rules! try_u32 {
     };
 }
 
-try_u32!()
+try_u32!();

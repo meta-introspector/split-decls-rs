@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Formatter!();
         DebugDiffWithAdapter!();
         DebugWithContext!();
+        Formatter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

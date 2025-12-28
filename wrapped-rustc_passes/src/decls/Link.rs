@@ -4,4 +4,4 @@ macro_rules! Link {
     };
 }
 
-Link!()
+Link!();

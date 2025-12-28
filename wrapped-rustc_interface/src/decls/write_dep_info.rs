@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GeneratedFileConflictsWithDirectory!();
-        OutDirError!();
         InputFileWouldBeOverWritten!();
         TempsDirError!();
+        OutDirError!();
+        GeneratedFileConflictsWithDirectory!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! write_dep_info {
     };
 }
 
-write_dep_info!()
+write_dep_info!();

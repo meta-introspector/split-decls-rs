@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        XcoffSection!();
-        SectionHeader!();
-        Result!();
-        ReadRef!();
         Rel!();
         FileHeader!();
+        SectionHeader!();
+        ReadRef!();
+        XcoffSection!();
         XcoffFile!();
+        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_795 {
     };
 }
 
-impl_795!()
+impl_795!();

@@ -11,4 +11,4 @@ macro_rules! sub_poly {
     };
 }
 
-sub_poly!()
+sub_poly!();

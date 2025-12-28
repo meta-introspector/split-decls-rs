@@ -4,4 +4,4 @@ macro_rules! completion_list_no_kw_with_private_editable {
     };
 }
 
-completion_list_no_kw_with_private_editable!()
+completion_list_no_kw_with_private_editable!();

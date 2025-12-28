@@ -4,4 +4,4 @@ macro_rules! FilePosition {
     };
 }
 
-FilePosition!()
+FilePosition!();

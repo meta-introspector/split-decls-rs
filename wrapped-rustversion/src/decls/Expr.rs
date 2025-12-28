@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Bound!();
         Release!();
+        Bound!();
         Date!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Expr {
     };
 }
 
-Expr!()
+Expr!();

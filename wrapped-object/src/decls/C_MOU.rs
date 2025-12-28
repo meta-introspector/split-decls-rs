@@ -4,4 +4,4 @@ macro_rules! C_MOU {
     };
 }
 
-C_MOU!()
+C_MOU!();

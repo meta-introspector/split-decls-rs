@@ -10,4 +10,4 @@ macro_rules! unbalanced_brace {
     };
 }
 
-unbalanced_brace!()
+unbalanced_brace!();

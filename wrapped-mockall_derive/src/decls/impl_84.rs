@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MockableItem!();
-        MockableStruct!();
         MockableModule!();
         Attrs!();
+        MockableItem!();
+        MockableStruct!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_84 {
     };
 }
 
-impl_84!()
+impl_84!();

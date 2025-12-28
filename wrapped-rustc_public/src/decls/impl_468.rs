@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Region!();
         Visitable!();
+        Region!();
         Visitor!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_468 {
     };
 }
 
-impl_468!()
+impl_468!();

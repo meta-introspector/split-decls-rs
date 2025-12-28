@@ -4,4 +4,4 @@ macro_rules! cacheline {
     };
 }
 
-cacheline!()
+cacheline!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         QueueableToken!();
+        Pair!();
+        Token!();
+        ParserState!();
+        FlatPairs!();
+        Pairs!();
         ParseResult!();
         Tokens!();
-        Pairs!();
-        Pair!();
-        ParserState!();
         RuleType!();
-        FlatPairs!();
-        Token!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

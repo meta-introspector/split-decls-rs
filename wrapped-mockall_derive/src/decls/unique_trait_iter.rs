@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MockTrait!();
-        HashSet!();
         AttrFormatter!();
+        HashSet!();
+        MockTrait!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! unique_trait_iter {
     };
 }
 
-unique_trait_iter!()
+unique_trait_iter!();

@@ -4,4 +4,4 @@ macro_rules! ET_CORE {
     };
 }
 
-ET_CORE!()
+ET_CORE!();

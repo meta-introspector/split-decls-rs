@@ -4,4 +4,4 @@ macro_rules! parse_path {
     };
 }
 
-parse_path!()
+parse_path!();

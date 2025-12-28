@@ -4,4 +4,4 @@ macro_rules! prefixes {
     };
 }
 
-prefixes!()
+prefixes!();

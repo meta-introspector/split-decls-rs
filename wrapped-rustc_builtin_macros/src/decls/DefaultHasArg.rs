@@ -4,4 +4,4 @@ macro_rules! DefaultHasArg {
     };
 }
 
-DefaultHasArg!()
+DefaultHasArg!();

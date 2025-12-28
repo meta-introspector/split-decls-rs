@@ -11,4 +11,4 @@ macro_rules! z_stream {
     };
 }
 
-z_stream!()
+z_stream!();

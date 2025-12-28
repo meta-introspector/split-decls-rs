@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         MathExpr!();
-        FunctionCall!();
-        Error!();
-        Test!();
-        ExprVal!();
-        Expr!();
-        MacroCall!();
         MathOperator!();
+        FunctionCall!();
+        ExprVal!();
+        Error!();
+        Expr!();
+        Test!();
+        MacroCall!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! parse_basic_expression {
     };
 }
 
-parse_basic_expression!()
+parse_basic_expression!();

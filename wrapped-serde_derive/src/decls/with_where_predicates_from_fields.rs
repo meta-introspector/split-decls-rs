@@ -12,4 +12,4 @@ macro_rules! with_where_predicates_from_fields {
     };
 }
 
-with_where_predicates_from_fields!()
+with_where_predicates_from_fields!();

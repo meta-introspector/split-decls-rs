@@ -4,4 +4,4 @@ macro_rules! _GRAMMAR {
     };
 }
 
-_GRAMMAR!()
+_GRAMMAR!();

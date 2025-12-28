@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Item!();
-        StmtKind!();
         Expr!();
-        MacCallStmt!();
         MacCall!();
+        MacCallStmt!();
+        StmtKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! walk_flat_map_stmt_kind {
     };
 }
 
-walk_flat_map_stmt_kind!()
+walk_flat_map_stmt_kind!();

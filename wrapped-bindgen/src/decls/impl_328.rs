@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        WarningBuilder!();
+        Config!();
         TypeMap!();
         Warnings!();
-        Config!();
-        WarningBuilder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_328 {
     };
 }
 
-impl_328!()
+impl_328!();

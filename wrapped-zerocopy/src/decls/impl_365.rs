@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        InvariantsEq!();
+        Aliasing!();
+        Validity!();
+        MutationCompatible!();
         TransmuteFrom!();
         BecauseInvariantsEq!();
-        Validity!();
-        Aliasing!();
-        MutationCompatible!();
+        InvariantsEq!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_365 {
     };
 }
 
-impl_365!()
+impl_365!();

@@ -4,4 +4,4 @@ macro_rules! merge_operator {
     };
 }
 
-merge_operator!()
+merge_operator!();

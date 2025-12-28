@@ -4,4 +4,4 @@ macro_rules! PoolGuard {
     };
 }
 
-PoolGuard!()
+PoolGuard!();

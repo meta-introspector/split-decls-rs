@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_IMM8_X1 {
     };
 }
 
-R_TILEPRO_IMM8_X1!()
+R_TILEPRO_IMM8_X1!();

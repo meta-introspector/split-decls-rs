@@ -4,4 +4,4 @@ macro_rules! make_lockfile_copy {
     };
 }
 
-make_lockfile_copy!()
+make_lockfile_copy!();

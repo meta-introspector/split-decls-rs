@@ -4,4 +4,4 @@ macro_rules! hazardous {
     };
 }
 
-hazardous!()
+hazardous!();

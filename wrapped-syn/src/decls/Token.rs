@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Parse!();
         Result!();
         ParseStream!();
+        Parse!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Token {
     };
 }
 
-Token!()
+Token!();

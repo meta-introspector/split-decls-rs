@@ -4,4 +4,4 @@ macro_rules! UnmarkedIntrinsicExposed {
     };
 }
 
-UnmarkedIntrinsicExposed!()
+UnmarkedIntrinsicExposed!();

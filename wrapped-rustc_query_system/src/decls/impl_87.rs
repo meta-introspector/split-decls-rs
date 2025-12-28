@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Deps!();
         SerializedNodeHeader!();
-        DepNode!();
         Unpacked!();
         EdgeHeader!();
+        Deps!();
         DepKind!();
+        DepNode!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

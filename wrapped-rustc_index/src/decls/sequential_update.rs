@@ -11,4 +11,4 @@ macro_rules! sequential_update {
     };
 }
 
-sequential_update!()
+sequential_update!();

@@ -4,4 +4,4 @@ macro_rules! missing_variable_name_in_set {
     };
 }
 
-missing_variable_name_in_set!()
+missing_variable_name_in_set!();

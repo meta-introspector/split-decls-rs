@@ -4,4 +4,4 @@ macro_rules! UnordSet {
     };
 }
 
-UnordSet!()
+UnordSet!();

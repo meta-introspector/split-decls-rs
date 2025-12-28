@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        DeclarationItem!();
-        ErrorSample!();
-        ProcessExpandedManifestInputs!();
-        Declaration!();
-        ExpandedManifest!();
-        ExpandedFileEntry!();
         RustcInfo!();
+        ExpandedFileEntry!();
+        ExpandedManifest!();
+        ProcessExpandedManifestInputs!();
+        DeclarationItem!();
+        Declaration!();
+        ErrorSample!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! process_expanded_manifest {
     };
 }
 
-process_expanded_manifest!()
+process_expanded_manifest!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BoundRegionConversionTime!();
-        InferCtxt!();
-        SubregionOrigin!();
         RegionVariableOrigin!();
+        BoundRegionConversionTime!();
+        SubregionOrigin!();
+        InferCtxt!();
         OpaqueTypeStorageEntries!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

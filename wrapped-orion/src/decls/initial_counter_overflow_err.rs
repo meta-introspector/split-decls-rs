@@ -11,4 +11,4 @@ macro_rules! initial_counter_overflow_err {
     };
 }
 
-initial_counter_overflow_err!()
+initial_counter_overflow_err!();

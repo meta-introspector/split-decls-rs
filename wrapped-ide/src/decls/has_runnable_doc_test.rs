@@ -4,4 +4,4 @@ macro_rules! has_runnable_doc_test {
     };
 }
 
-has_runnable_doc_test!()
+has_runnable_doc_test!();

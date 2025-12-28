@@ -12,4 +12,4 @@ macro_rules! typed_def_id {
     };
 }
 
-typed_def_id!()
+typed_def_id!();

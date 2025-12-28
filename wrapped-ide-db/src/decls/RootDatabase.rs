@@ -4,4 +4,4 @@ macro_rules! RootDatabase {
     };
 }
 
-RootDatabase!()
+RootDatabase!();

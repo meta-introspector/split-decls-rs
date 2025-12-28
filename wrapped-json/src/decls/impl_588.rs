@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Fused!();
         SliceRead!();
+        Fused!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_588 {
     };
 }
 
-impl_588!()
+impl_588!();

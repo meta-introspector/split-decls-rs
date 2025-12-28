@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Dep!();
         Build!();
+        Dep!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Crate {
     };
 }
 
-Crate!()
+Crate!();

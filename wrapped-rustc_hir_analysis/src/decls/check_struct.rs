@@ -4,4 +4,4 @@ macro_rules! check_struct {
     };
 }
 
-check_struct!()
+check_struct!();

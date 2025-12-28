@@ -4,4 +4,4 @@ macro_rules! N_BTSHFT {
     };
 }
 
-N_BTSHFT!()
+N_BTSHFT!();

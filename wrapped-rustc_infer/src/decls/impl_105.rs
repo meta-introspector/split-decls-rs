@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        VerifyBound!();
         GenericKind!();
-        VerifyBoundCx!();
         RegionBoundPairs!();
+        VerifyBound!();
         VerifyIfEq!();
+        VerifyBoundCx!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

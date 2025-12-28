@@ -4,4 +4,4 @@ macro_rules! macro_429 {
     };
 }
 
-macro_429!()
+macro_429!();

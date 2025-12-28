@@ -4,4 +4,4 @@ macro_rules! rust_nix {
     };
 }
 
-rust_nix!()
+rust_nix!();

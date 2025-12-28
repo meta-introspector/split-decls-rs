@@ -4,4 +4,4 @@ macro_rules! PushError {
     };
 }
 
-PushError!()
+PushError!();

@@ -4,4 +4,4 @@ macro_rules! WhereClauseBeforeTypeAliasSugg {
     };
 }
 
-WhereClauseBeforeTypeAliasSugg!()
+WhereClauseBeforeTypeAliasSugg!();

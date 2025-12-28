@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Context!();
         Tera!();
+        Context!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! import_macros_into_other_macro_files {
     };
 }
 
-import_macros_into_other_macro_files!()
+import_macros_into_other_macro_files!();

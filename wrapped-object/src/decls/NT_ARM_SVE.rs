@@ -4,4 +4,4 @@ macro_rules! NT_ARM_SVE {
     };
 }
 
-NT_ARM_SVE!()
+NT_ARM_SVE!();

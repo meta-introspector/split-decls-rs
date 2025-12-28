@@ -13,4 +13,4 @@ macro_rules! parse_unicode_escape {
     };
 }
 
-parse_unicode_escape!()
+parse_unicode_escape!();

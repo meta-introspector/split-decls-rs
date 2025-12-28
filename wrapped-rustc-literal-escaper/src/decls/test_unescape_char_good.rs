@@ -4,4 +4,4 @@ macro_rules! test_unescape_char_good {
     };
 }
 
-test_unescape_char_good!()
+test_unescape_char_good!();

@@ -4,4 +4,4 @@ macro_rules! edition_panic {
     };
 }
 
-edition_panic!()
+edition_panic!();

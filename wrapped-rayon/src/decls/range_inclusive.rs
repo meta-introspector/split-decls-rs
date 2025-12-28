@@ -4,4 +4,4 @@ macro_rules! range_inclusive {
     };
 }
 
-range_inclusive!()
+range_inclusive!();

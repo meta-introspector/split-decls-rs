@@ -11,4 +11,4 @@ macro_rules! make_bridge_trait {
     };
 }
 
-make_bridge_trait!()
+make_bridge_trait!();

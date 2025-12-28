@@ -4,4 +4,4 @@ macro_rules! grouping_map {
     };
 }
 
-grouping_map!()
+grouping_map!();

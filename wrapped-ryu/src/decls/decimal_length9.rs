@@ -4,4 +4,4 @@ macro_rules! decimal_length9 {
     };
 }
 
-decimal_length9!()
+decimal_length9!();

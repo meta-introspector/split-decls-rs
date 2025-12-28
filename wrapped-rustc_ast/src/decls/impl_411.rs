@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        Trait!();
-        Ty!();
-        Expr!();
-        Pat!();
-        InvisibleOrigin!();
-        Path!();
-        LitKind!();
-        Lifetime!();
-        Const!();
-        Lit!();
-        NtPatKind!();
-        Fn!();
         Block!();
-        Type!();
-        Impl!();
-        Token!();
+        NtPatKind!();
         MetaVarKind!();
-        Extern!();
+        Const!();
+        Type!();
+        LitKind!();
+        Path!();
+        Trait!();
+        Fn!();
+        InvisibleOrigin!();
+        Expr!();
+        Token!();
         TokenKind!();
+        Pat!();
+        Lifetime!();
+        Lit!();
+        Impl!();
+        Ty!();
         IdentIsRaw!();
+        Extern!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_411 {
     };
 }
 
-impl_411!()
+impl_411!();

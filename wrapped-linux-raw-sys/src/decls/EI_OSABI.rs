@@ -4,4 +4,4 @@ macro_rules! EI_OSABI {
     };
 }
 
-EI_OSABI!()
+EI_OSABI!();

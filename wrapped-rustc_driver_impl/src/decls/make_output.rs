@@ -4,4 +4,4 @@ macro_rules! make_output {
     };
 }
 
-make_output!()
+make_output!();

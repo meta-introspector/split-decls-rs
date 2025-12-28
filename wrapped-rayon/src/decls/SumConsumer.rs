@@ -4,4 +4,4 @@ macro_rules! SumConsumer {
     };
 }
 
-SumConsumer!()
+SumConsumer!();

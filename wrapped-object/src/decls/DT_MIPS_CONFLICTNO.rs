@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_CONFLICTNO {
     };
 }
 
-DT_MIPS_CONFLICTNO!()
+DT_MIPS_CONFLICTNO!();

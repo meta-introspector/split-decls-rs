@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_UNREFEXTNO {
     };
 }
 
-DT_MIPS_UNREFEXTNO!()
+DT_MIPS_UNREFEXTNO!();

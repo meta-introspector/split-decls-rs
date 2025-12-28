@@ -4,4 +4,4 @@ macro_rules! swap {
     };
 }
 
-swap!()
+swap!();

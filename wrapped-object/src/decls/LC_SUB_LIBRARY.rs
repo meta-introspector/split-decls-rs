@@ -4,4 +4,4 @@ macro_rules! LC_SUB_LIBRARY {
     };
 }
 
-LC_SUB_LIBRARY!()
+LC_SUB_LIBRARY!();

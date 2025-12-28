@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EquationAIsGeneric!();
         PrimeCurveParams!();
-        ProjectivePoint!();
+        EquationAIsGeneric!();
         AffinePoint!();
+        ProjectivePoint!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

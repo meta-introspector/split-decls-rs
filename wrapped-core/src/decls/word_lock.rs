@@ -4,4 +4,4 @@ macro_rules! word_lock {
     };
 }
 
-word_lock!()
+word_lock!();

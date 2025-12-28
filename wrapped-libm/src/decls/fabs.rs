@@ -4,4 +4,4 @@ macro_rules! fabs {
     };
 }
 
-fabs!()
+fabs!();

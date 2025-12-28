@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        SolverDelegate!();
         EvalCtxt!();
         Canonicalizer!();
         CurrentGoalKind!();
         ResponseT!();
-        SolverDelegate!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

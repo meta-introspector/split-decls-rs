@@ -11,4 +11,4 @@ macro_rules! property_set {
     };
 }
 
-property_set!()
+property_set!();

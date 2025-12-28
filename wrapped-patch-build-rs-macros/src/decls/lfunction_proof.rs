@@ -4,4 +4,4 @@ macro_rules! lfunction_proof {
     };
 }
 
-lfunction_proof!()
+lfunction_proof!();

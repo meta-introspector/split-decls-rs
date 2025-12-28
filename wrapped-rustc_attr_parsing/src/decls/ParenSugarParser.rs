@@ -4,4 +4,4 @@ macro_rules! ParenSugarParser {
     };
 }
 
-ParenSugarParser!()
+ParenSugarParser!();

@@ -4,4 +4,4 @@ macro_rules! ConditionVisitor {
     };
 }
 
-ConditionVisitor!()
+ConditionVisitor!();

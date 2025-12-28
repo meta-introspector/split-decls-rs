@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        StateID!();
-        Transition!();
-        SparseTransitionIter!();
-        MatchError!();
-        DFA!();
         PatternID!();
         Anchored!();
+        MatchError!();
+        Transition!();
         PatternEpsilons!();
+        DFA!();
+        StateID!();
+        SparseTransitionIter!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_74 {
     };
 }
 
-impl_74!()
+impl_74!();

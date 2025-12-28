@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Start!();
-        StateBuilderNFA!();
-        State!();
-        Lazy!();
-        StartError!();
-        LazyRef!();
-        DFA!();
-        Cache!();
         Anchored!();
+        DFA!();
+        Start!();
+        State!();
+        StartError!();
         LazyStateID!();
+        Cache!();
+        Lazy!();
+        LazyRef!();
+        StateBuilderNFA!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_238 {
     };
 }
 
-impl_238!()
+impl_238!();

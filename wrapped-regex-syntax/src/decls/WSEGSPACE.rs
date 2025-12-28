@@ -4,4 +4,4 @@ macro_rules! WSEGSPACE {
     };
 }
 
-WSEGSPACE!()
+WSEGSPACE!();

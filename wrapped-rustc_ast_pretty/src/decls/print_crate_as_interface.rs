@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Printer!();
-        NoAnn!();
         State!();
+        NoAnn!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! print_crate_as_interface {
     };
 }
 
-print_crate_as_interface!()
+print_crate_as_interface!();

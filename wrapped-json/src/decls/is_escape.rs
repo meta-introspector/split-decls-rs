@@ -4,4 +4,4 @@ macro_rules! is_escape {
     };
 }
 
-is_escape!()
+is_escape!();

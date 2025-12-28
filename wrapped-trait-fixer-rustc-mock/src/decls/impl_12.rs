@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        MockEarlyBinder!();
-        OwnerId!();
-        MockTy!();
-        MockHir!();
-        TyCtxt!();
         MockPredicate!();
-        DefId!();
-        MockInferCtxtBuilder!();
-        MockLangItems!();
-        MockGenericArgs!();
-        MockSubsts!();
-        MockParamEnv!();
         Symbol!();
+        MockHir!();
+        MockParamEnv!();
+        MockLangItems!();
         MockTypeckResults!();
+        OwnerId!();
         MockAttribute!();
+        MockGenericArgs!();
+        MockInferCtxtBuilder!();
+        TyCtxt!();
+        MockTy!();
+        MockEarlyBinder!();
+        MockSubsts!();
+        DefId!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

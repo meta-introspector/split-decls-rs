@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Config!();
-        Shard!();
         IterMut!();
+        Shard!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_159 {
     };
 }
 
-impl_159!()
+impl_159!();

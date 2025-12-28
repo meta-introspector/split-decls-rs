@@ -4,4 +4,4 @@ macro_rules! UnicodeCharNoteSub {
     };
 }
 
-UnicodeCharNoteSub!()
+UnicodeCharNoteSub!();

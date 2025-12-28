@@ -11,4 +11,4 @@ macro_rules! check_non_field_attrs {
     };
 }
 
-check_non_field_attrs!()
+check_non_field_attrs!();

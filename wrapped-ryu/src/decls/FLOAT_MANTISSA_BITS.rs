@@ -4,4 +4,4 @@ macro_rules! FLOAT_MANTISSA_BITS {
     };
 }
 
-FLOAT_MANTISSA_BITS!()
+FLOAT_MANTISSA_BITS!();

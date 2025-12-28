@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        TypeFoldable!();
-        AliasTerm!();
-        Relate!();
-        Ty!();
-        TermKind!();
-        Interner!();
-        Const!();
-        ConstKind!();
         IntoKind!();
+        TermKind!();
+        Ty!();
+        Relate!();
+        AliasTerm!();
+        ConstKind!();
+        TypeFoldable!();
+        Const!();
+        Interner!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Term {
     };
 }
 
-Term!()
+Term!();

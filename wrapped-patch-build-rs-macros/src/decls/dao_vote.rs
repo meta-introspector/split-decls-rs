@@ -4,4 +4,4 @@ macro_rules! dao_vote {
     };
 }
 
-dao_vote!()
+dao_vote!();

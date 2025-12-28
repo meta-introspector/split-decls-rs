@@ -4,4 +4,4 @@ macro_rules! staticize {
     };
 }
 
-staticize!()
+staticize!();

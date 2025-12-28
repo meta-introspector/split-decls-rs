@@ -4,4 +4,4 @@ macro_rules! BASE_HIR {
     };
 }
 
-BASE_HIR!()
+BASE_HIR!();

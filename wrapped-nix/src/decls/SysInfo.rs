@@ -4,4 +4,4 @@ macro_rules! SysInfo {
     };
 }
 
-SysInfo!()
+SysInfo!();

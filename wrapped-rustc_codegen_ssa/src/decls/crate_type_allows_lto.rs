@@ -4,4 +4,4 @@ macro_rules! crate_type_allows_lto {
     };
 }
 
-crate_type_allows_lto!()
+crate_type_allows_lto!();

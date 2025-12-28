@@ -12,4 +12,4 @@ macro_rules! is_cyclic_directed {
     };
 }
 
-is_cyclic_directed!()
+is_cyclic_directed!();

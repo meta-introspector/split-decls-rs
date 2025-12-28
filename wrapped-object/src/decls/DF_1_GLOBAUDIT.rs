@@ -4,4 +4,4 @@ macro_rules! DF_1_GLOBAUDIT {
     };
 }
 
-DF_1_GLOBAUDIT!()
+DF_1_GLOBAUDIT!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Decompositions!();
-        UnicodeNormalization!();
         Replacements!();
-        StreamSafe!();
+        UnicodeNormalization!();
+        Decompositions!();
         Recompositions!();
+        StreamSafe!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

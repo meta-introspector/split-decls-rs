@@ -4,4 +4,4 @@ macro_rules! AttributeKind {
     };
 }
 
-AttributeKind!()
+AttributeKind!();

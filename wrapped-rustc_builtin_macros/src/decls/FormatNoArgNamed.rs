@@ -4,4 +4,4 @@ macro_rules! FormatNoArgNamed {
     };
 }
 
-FormatNoArgNamed!()
+FormatNoArgNamed!();

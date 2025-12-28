@@ -4,4 +4,4 @@ macro_rules! as_bytes {
     };
 }
 
-as_bytes!()
+as_bytes!();

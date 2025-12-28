@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Limb!();
-        Category!();
-        ExpInt!();
-        Semantics!();
         IeeeFloat!();
+        ExpInt!();
+        Limb!();
+        Semantics!();
         X87DoubleExtendedS!();
+        Category!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_JUMP19 {
     };
 }
 
-R_ARM_THM_JUMP19!()
+R_ARM_THM_JUMP19!();

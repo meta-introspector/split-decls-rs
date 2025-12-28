@@ -11,4 +11,4 @@ macro_rules! align_of {
     };
 }
 
-align_of!()
+align_of!();

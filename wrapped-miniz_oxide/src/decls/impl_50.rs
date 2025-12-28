@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        LZOxide!();
-        CompressorOxide!();
-        DictOxide!();
-        ParamsOxide!();
-        CompressionLevel!();
-        TDEFLStatus!();
         CompressionStrategy!();
+        CompressionLevel!();
+        ParamsOxide!();
+        LZOxide!();
         DataFormat!();
+        CompressorOxide!();
         HuffmanOxide!();
+        DictOxide!();
+        TDEFLStatus!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

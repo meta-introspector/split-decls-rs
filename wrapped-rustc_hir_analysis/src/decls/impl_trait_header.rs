@@ -11,4 +11,4 @@ macro_rules! impl_trait_header {
     };
 }
 
-impl_trait_header!()
+impl_trait_header!();

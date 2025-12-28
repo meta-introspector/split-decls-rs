@@ -4,4 +4,4 @@ macro_rules! CfgMatchesLintEmitter {
     };
 }
 
-CfgMatchesLintEmitter!()
+CfgMatchesLintEmitter!();

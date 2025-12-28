@@ -4,4 +4,4 @@ macro_rules! AsyncFnInConstTraitOrTraitImpl {
     };
 }
 
-AsyncFnInConstTraitOrTraitImpl!()
+AsyncFnInConstTraitOrTraitImpl!();

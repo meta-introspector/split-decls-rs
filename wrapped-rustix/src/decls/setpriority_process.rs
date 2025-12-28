@@ -12,4 +12,4 @@ macro_rules! setpriority_process {
     };
 }
 
-setpriority_process!()
+setpriority_process!();

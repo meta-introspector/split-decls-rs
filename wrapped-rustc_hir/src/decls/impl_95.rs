@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DefKey!();
-        DefPath!();
-        DefPathData!();
-        DefPathTable!();
         DisambiguatedDefPathData!();
         DisambiguatorState!();
-        Definitions!();
         DefPathHashMap!();
+        Definitions!();
+        DefPathData!();
+        DefPathTable!();
+        DefPath!();
+        DefKey!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_95 {
     };
 }
 
-impl_95!()
+impl_95!();

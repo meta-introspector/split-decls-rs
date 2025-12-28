@@ -4,4 +4,4 @@ macro_rules! win {
     };
 }
 
-win!()
+win!();

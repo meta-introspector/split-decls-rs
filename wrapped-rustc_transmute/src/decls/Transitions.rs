@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         State!();
-        Reference!();
         Type!();
         Region!();
+        Reference!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Transitions {
     };
 }
 
-Transitions!()
+Transitions!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Id!();
         FromId!();
         Zalsa!();
-        Id!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FromIdWithDb {
     };
 }
 
-FromIdWithDb!()
+FromIdWithDb!();

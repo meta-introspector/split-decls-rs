@@ -11,4 +11,4 @@ macro_rules! crate_inherent_impls {
     };
 }
 
-crate_inherent_impls!()
+crate_inherent_impls!();

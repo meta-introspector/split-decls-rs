@@ -4,4 +4,4 @@ macro_rules! EF_PARISC_TRAPNIL {
     };
 }
 
-EF_PARISC_TRAPNIL!()
+EF_PARISC_TRAPNIL!();

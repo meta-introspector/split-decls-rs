@@ -11,4 +11,4 @@ macro_rules! UTIME_NOW {
     };
 }
 
-UTIME_NOW!()
+UTIME_NOW!();

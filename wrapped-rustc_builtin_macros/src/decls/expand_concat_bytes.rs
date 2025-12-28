@@ -12,4 +12,4 @@ macro_rules! expand_concat_bytes {
     };
 }
 
-expand_concat_bytes!()
+expand_concat_bytes!();

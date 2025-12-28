@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnicodeWordError!();
         Result!();
+        UnicodeWordError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_is_word_character {
     };
 }
 
-try_is_word_character!()
+try_is_word_character!();

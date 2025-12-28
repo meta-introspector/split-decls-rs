@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IterMutProducer!();
         Producer!();
-        IntoIter!();
         IterMut!();
+        IntoIter!();
+        IterMutProducer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1261 {
     };
 }
 
-impl_1261!()
+impl_1261!();

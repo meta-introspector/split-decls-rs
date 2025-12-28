@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        State!();
-        Look!();
         Match!();
+        Look!();
         SparseTransitions!();
+        State!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_520 {
     };
 }
 
-impl_520!()
+impl_520!();

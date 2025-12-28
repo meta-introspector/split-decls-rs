@@ -11,4 +11,4 @@ macro_rules! collect_items_root {
     };
 }
 
-collect_items_root!()
+collect_items_root!();

@@ -4,4 +4,4 @@ macro_rules! copy_with_checks {
     };
 }
 
-copy_with_checks!()
+copy_with_checks!();

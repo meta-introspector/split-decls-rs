@@ -4,4 +4,4 @@ macro_rules! Blake2b {
     };
 }
 
-Blake2b!()
+Blake2b!();

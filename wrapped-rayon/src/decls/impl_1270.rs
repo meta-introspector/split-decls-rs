@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SplitProducer!();
-        Fissile!();
         Folder!();
+        Fissile!();
+        SplitProducer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1270 {
     };
 }
 
-impl_1270!()
+impl_1270!();

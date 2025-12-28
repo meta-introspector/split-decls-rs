@@ -11,4 +11,4 @@ macro_rules! file_type_detect_file {
     };
 }
 
-file_type_detect_file!()
+file_type_detect_file!();

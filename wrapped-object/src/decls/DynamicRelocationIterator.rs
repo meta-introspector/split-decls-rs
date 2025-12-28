@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        DynamicRelocationIteratorInternal!();
         ReadRef!();
         File!();
-        DynamicRelocationIteratorInternal!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DynamicRelocationIterator {
     };
 }
 
-DynamicRelocationIterator!()
+DynamicRelocationIterator!();

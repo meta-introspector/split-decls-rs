@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Atomic!();
         Numeric!();
+        Atomic!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_250 {
     };
 }
 
-impl_250!()
+impl_250!();

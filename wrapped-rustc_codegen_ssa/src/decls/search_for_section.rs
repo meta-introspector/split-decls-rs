@@ -4,4 +4,4 @@ macro_rules! search_for_section {
     };
 }
 
-search_for_section!()
+search_for_section!();

@@ -4,4 +4,4 @@ macro_rules! FormatUnusedArg {
     };
 }
 
-FormatUnusedArg!()
+FormatUnusedArg!();

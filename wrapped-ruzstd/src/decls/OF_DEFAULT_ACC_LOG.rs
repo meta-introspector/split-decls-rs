@@ -4,4 +4,4 @@ macro_rules! OF_DEFAULT_ACC_LOG {
     };
 }
 
-OF_DEFAULT_ACC_LOG!()
+OF_DEFAULT_ACC_LOG!();

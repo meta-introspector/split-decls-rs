@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        MustImplementNotFunction!();
-        FunctionNamesDuplicated!();
-        ParenSugarAttribute!();
-        MustBeNameOfAssociatedFunction!();
-        SpecializationTrait!();
-        MustImplementNotFunctionSpanNote!();
-        MustImplementNotFunctionNote!();
-        FunctionNotHaveDefaultImplementation!();
-        FunctionNotFoundInTrait!();
         MustImplementOneOfAttribute!();
+        ParenSugarAttribute!();
+        FunctionNotFoundInTrait!();
+        MustImplementNotFunctionSpanNote!();
+        SpecializationTrait!();
+        FunctionNotHaveDefaultImplementation!();
+        MustImplementNotFunctionNote!();
+        FunctionNamesDuplicated!();
+        MustImplementNotFunction!();
+        MustBeNameOfAssociatedFunction!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! trait_def {
     };
 }
 
-trait_def!()
+trait_def!();

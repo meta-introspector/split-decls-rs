@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Endian!();
+        FileHeader!();
         ElfSymbolIterator!();
         ReadRef!();
         SymbolTable!();
         SymbolIndex!();
-        FileHeader!();
-        Endian!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_332 {
     };
 }
 
-impl_332!()
+impl_332!();

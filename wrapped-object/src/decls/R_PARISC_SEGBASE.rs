@@ -4,4 +4,4 @@ macro_rules! R_PARISC_SEGBASE {
     };
 }
 
-R_PARISC_SEGBASE!()
+R_PARISC_SEGBASE!();

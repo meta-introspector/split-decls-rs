@@ -4,4 +4,4 @@ macro_rules! R_390_GOTPLT64 {
     };
 }
 
-R_390_GOTPLT64!()
+R_390_GOTPLT64!();

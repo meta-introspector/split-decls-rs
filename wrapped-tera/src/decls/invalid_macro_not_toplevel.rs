@@ -9,4 +9,4 @@ macro_rules! invalid_macro_not_toplevel {
     };
 }
 
-invalid_macro_not_toplevel!()
+invalid_macro_not_toplevel!();

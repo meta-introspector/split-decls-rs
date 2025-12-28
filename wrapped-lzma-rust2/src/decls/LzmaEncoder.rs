@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        LzEncoder!();
+        LiteralEncoder!();
+        LzmaCoder!();
         LengthEncoder!();
         LzmaEncData!();
-        LzmaCoder!();
-        LiteralEncoder!();
-        LzEncoder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! LzmaEncoder {
     };
 }
 
-LzmaEncoder!()
+LzmaEncoder!();

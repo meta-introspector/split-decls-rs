@@ -4,4 +4,4 @@ macro_rules! out_param {
     };
 }
 
-out_param!()
+out_param!();

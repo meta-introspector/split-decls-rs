@@ -11,4 +11,4 @@ macro_rules! test_unterminated_no_pound {
     };
 }
 
-test_unterminated_no_pound!()
+test_unterminated_no_pound!();

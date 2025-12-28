@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         DataSource!();
-        DataSourceInner!();
         Inline!();
+        Result!();
+        DataSourceInner!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

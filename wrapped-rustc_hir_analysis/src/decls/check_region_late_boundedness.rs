@@ -11,4 +11,4 @@ macro_rules! check_region_late_boundedness {
     };
 }
 
-check_region_late_boundedness!()
+check_region_late_boundedness!();

@@ -4,4 +4,4 @@ macro_rules! HomogeneousAggregate {
     };
 }
 
-HomogeneousAggregate!()
+HomogeneousAggregate!();

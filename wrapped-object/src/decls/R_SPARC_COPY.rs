@@ -4,4 +4,4 @@ macro_rules! R_SPARC_COPY {
     };
 }
 
-R_SPARC_COPY!()
+R_SPARC_COPY!();

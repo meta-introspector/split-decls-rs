@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AcceptContext!();
         Stage!();
         NameValueParser!();
-        AcceptContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_name_value {
     };
 }
 
-parse_name_value!()
+parse_name_value!();

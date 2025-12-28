@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Rule!();
         ParserRule!();
+        Rule!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! validate_left_recursion {
     };
 }
 
-validate_left_recursion!()
+validate_left_recursion!();

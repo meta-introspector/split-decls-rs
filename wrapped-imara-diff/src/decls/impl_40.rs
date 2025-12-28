@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IndentLevel!();
         SliderHeuristic!();
-        IndentHeuristic!();
         Score!();
+        IndentLevel!();
         Token!();
+        IndentHeuristic!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ArgAbi!();
         CastTarget!();
         Uniform!();
+        ArgAbi!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! classify_aggregate {
     };
 }
 
-classify_aggregate!()
+classify_aggregate!();

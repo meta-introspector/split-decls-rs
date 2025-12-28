@@ -11,4 +11,4 @@ macro_rules! handle_is_dyn_compatible {
     };
 }
 
-handle_is_dyn_compatible!()
+handle_is_dyn_compatible!();

@@ -4,4 +4,4 @@ macro_rules! HANGUL_L_COUNT {
     };
 }
 
-HANGUL_L_COUNT!()
+HANGUL_L_COUNT!();

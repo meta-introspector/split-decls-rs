@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OutlivesSuggestionBuilder!();
         ErrorConstraintInfo!();
         RegionNameSource!();
+        OutlivesSuggestionBuilder!();
         RegionName!();
-        SuggestedConstraint!();
         MirBorrowckCtxt!();
+        SuggestedConstraint!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

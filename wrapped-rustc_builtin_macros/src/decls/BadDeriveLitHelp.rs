@@ -4,4 +4,4 @@ macro_rules! BadDeriveLitHelp {
     };
 }
 
-BadDeriveLitHelp!()
+BadDeriveLitHelp!();

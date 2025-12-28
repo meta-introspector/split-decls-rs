@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Data!();
-        FilterPaths!();
-        DataInner!();
         Filter!();
+        FilterPaths!();
+        Error!();
+        DataInner!();
+        Data!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_322 {
     };
 }
 
-impl_322!()
+impl_322!();

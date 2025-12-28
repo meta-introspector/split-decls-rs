@@ -4,4 +4,4 @@ macro_rules! pattern_type {
     };
 }
 
-pattern_type!()
+pattern_type!();

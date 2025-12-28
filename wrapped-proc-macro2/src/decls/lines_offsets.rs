@@ -4,4 +4,4 @@ macro_rules! lines_offsets {
     };
 }
 
-lines_offsets!()
+lines_offsets!();

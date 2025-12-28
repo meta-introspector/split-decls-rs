@@ -4,4 +4,4 @@ macro_rules! try_transmute {
     };
 }
 
-try_transmute!()
+try_transmute!();

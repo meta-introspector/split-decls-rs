@@ -4,4 +4,4 @@ macro_rules! is_keyword {
     };
 }
 
-is_keyword!()
+is_keyword!();

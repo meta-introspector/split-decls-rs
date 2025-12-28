@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Data!();
         BoolAttr!();
-        Ctxt!();
-        Variant!();
-        Field!();
         Identifier!();
+        Variant!();
+        Ctxt!();
+        Data!();
+        Field!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! decide_identifier {
     };
 }
 
-decide_identifier!()
+decide_identifier!();

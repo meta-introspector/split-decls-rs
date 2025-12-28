@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AsFilename!();
-        Error!();
         Symbol!();
+        Error!();
+        AsFilename!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! r0_9_0 {
     };
 }
 
-r0_9_0!()
+r0_9_0!();

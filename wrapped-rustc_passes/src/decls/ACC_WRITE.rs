@@ -4,4 +4,4 @@ macro_rules! ACC_WRITE {
     };
 }
 
-ACC_WRITE!()
+ACC_WRITE!();

@@ -11,4 +11,4 @@ macro_rules! handle_commit_task {
     };
 }
 
-handle_commit_task!()
+handle_commit_task!();

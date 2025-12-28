@@ -4,4 +4,4 @@ macro_rules! BarrierState {
     };
 }
 
-BarrierState!()
+BarrierState!();

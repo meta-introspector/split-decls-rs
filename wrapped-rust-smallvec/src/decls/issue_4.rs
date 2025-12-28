@@ -11,4 +11,4 @@ macro_rules! issue_4 {
     };
 }
 
-issue_4!()
+issue_4!();

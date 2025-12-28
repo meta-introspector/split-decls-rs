@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Library!();
-        AsSymbolName!();
-        AsFilename!();
         Symbol!();
+        AsFilename!();
+        AsSymbolName!();
+        Library!();
         Error!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_92 {
     };
 }
 
-impl_92!()
+impl_92!();

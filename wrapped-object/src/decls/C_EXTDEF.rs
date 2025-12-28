@@ -4,4 +4,4 @@ macro_rules! C_EXTDEF {
     };
 }
 
-C_EXTDEF!()
+C_EXTDEF!();

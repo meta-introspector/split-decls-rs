@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Layer!();
         NoneLayerMarker!();
+        Layer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! layer_is_none {
     };
 }
 
-layer_is_none!()
+layer_is_none!();

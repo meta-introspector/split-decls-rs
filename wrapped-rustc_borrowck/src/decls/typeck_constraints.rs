@@ -4,4 +4,4 @@ macro_rules! typeck_constraints {
     };
 }
 
-typeck_constraints!()
+typeck_constraints!();

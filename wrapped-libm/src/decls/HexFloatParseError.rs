@@ -4,4 +4,4 @@ macro_rules! HexFloatParseError {
     };
 }
 
-HexFloatParseError!()
+HexFloatParseError!();

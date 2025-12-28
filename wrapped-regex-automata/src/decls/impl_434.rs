@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
+        ReverseDFAEngine!();
+        MatchKind!();
+        DFA!();
         NFA!();
         StartKind!();
         Input!();
-        Builder!();
-        DFA!();
-        HalfMatch!();
-        RegexInfo!();
-        Anchored!();
-        MatchKind!();
-        ReverseDFAEngine!();
         Config!();
+        Builder!();
+        RegexInfo!();
+        HalfMatch!();
         RetryError!();
+        Anchored!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_434 {
     };
 }
 
-impl_434!()
+impl_434!();

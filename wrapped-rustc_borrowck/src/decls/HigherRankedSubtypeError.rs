@@ -4,4 +4,4 @@ macro_rules! HigherRankedSubtypeError {
     };
 }
 
-HigherRankedSubtypeError!()
+HigherRankedSubtypeError!();

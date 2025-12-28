@@ -4,4 +4,4 @@ macro_rules! KYBER_POLY_DEG {
     };
 }
 
-KYBER_POLY_DEG!()
+KYBER_POLY_DEG!();

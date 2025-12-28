@@ -4,4 +4,4 @@ macro_rules! LC_CODE_SIGNATURE {
     };
 }
 
-LC_CODE_SIGNATURE!()
+LC_CODE_SIGNATURE!();

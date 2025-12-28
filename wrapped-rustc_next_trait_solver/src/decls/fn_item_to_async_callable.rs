@@ -11,4 +11,4 @@ macro_rules! fn_item_to_async_callable {
     };
 }
 
-fn_item_to_async_callable!()
+fn_item_to_async_callable!();

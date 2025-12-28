@@ -12,4 +12,4 @@ macro_rules! WeightedIndexIter {
     };
 }
 
-WeightedIndexIter!()
+WeightedIndexIter!();

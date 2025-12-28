@@ -4,4 +4,4 @@ macro_rules! NT_386_TLS {
     };
 }
 
-NT_386_TLS!()
+NT_386_TLS!();

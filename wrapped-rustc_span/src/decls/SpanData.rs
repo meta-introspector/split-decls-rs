@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SourceMap!();
         Span!();
         SyntaxContext!();
+        SourceMap!();
         LocalDefId!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! SpanData {
     };
 }
 
-SpanData!()
+SpanData!();

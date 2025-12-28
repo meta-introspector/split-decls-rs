@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Result!();
         Deserializer!();
-        RawKeyDeserializer!();
+        Result!();
         Value!();
+        RawKeyDeserializer!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_628 {
     };
 }
 
-impl_628!()
+impl_628!();

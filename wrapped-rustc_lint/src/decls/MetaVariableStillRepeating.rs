@@ -4,4 +4,4 @@ macro_rules! MetaVariableStillRepeating {
     };
 }
 
-MetaVariableStillRepeating!()
+MetaVariableStillRepeating!();

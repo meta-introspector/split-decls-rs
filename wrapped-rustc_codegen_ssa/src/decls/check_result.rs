@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InterestingAttributeDiagnosticSpans!();
         TargetFeatureDisableOrEnable!();
         MissingFeatures!();
-        InterestingAttributeDiagnosticSpans!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_result {
     };
 }
 
-check_result!()
+check_result!();

@@ -4,4 +4,4 @@ macro_rules! CheckExplicitRegionMentionAndCollectGenerics {
     };
 }
 
-CheckExplicitRegionMentionAndCollectGenerics!()
+CheckExplicitRegionMentionAndCollectGenerics!();

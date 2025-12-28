@@ -4,4 +4,4 @@ macro_rules! R_IA64_DTPREL14 {
     };
 }
 
-R_IA64_DTPREL14!()
+R_IA64_DTPREL14!();

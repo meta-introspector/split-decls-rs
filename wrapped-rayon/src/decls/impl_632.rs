@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        InterleaveSeq!();
         IntoIter!();
         InterleaveProducer!();
         Producer!();
-        InterleaveSeq!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_632 {
     };
 }
 
-impl_632!()
+impl_632!();

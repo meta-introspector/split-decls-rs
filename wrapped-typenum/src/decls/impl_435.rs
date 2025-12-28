@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Ord!();
+        Greater!();
+        Unsigned!();
         Bit!();
+        Ord!();
+        PrivateCmp!();
         UTerm!();
         UInt!();
-        Unsigned!();
-        PrivateCmp!();
-        Greater!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_435 {
     };
 }
 
-impl_435!()
+impl_435!();

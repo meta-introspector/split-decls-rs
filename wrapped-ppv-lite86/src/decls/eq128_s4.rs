@@ -4,4 +4,4 @@ macro_rules! eq128_s4 {
     };
 }
 
-eq128_s4!()
+eq128_s4!();

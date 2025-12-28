@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GnuProperty!();
         SectionKind!();
+        GnuProperty!();
         StandardSection!();
         Note!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_1048 {
     };
 }
 
-impl_1048!()
+impl_1048!();

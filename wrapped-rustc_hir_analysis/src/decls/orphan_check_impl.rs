@@ -13,4 +13,4 @@ macro_rules! orphan_check_impl {
     };
 }
 
-orphan_check_impl!()
+orphan_check_impl!();

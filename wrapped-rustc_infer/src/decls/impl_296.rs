@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         InferCtxtUndoLogs!();
-        ProjectionCacheStorage!();
         ProjectionCache!();
+        ProjectionCacheStorage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_296 {
     };
 }
 
-impl_296!()
+impl_296!();

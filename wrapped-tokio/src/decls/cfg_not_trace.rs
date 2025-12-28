@@ -4,4 +4,4 @@ macro_rules! cfg_not_trace {
     };
 }
 
-cfg_not_trace!()
+cfg_not_trace!();

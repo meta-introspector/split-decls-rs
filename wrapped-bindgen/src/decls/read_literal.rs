@@ -4,4 +4,4 @@ macro_rules! read_literal {
     };
 }
 
-read_literal!()
+read_literal!();

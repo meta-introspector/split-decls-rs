@@ -4,4 +4,4 @@ macro_rules! DependencyAnalysisVisitor {
     };
 }
 
-DependencyAnalysisVisitor!()
+DependencyAnalysisVisitor!();

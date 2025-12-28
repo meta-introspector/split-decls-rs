@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DictOxide!();
         HashBuffers!();
+        DictOxide!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

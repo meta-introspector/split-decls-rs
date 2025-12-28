@@ -4,4 +4,4 @@ macro_rules! EC_PARAMETERS_TAG {
     };
 }
 
-EC_PARAMETERS_TAG!()
+EC_PARAMETERS_TAG!();

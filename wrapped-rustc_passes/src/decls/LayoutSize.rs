@@ -4,4 +4,4 @@ macro_rules! LayoutSize {
     };
 }
 
-LayoutSize!()
+LayoutSize!();

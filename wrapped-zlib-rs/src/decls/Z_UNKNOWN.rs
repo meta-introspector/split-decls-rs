@@ -4,4 +4,4 @@ macro_rules! Z_UNKNOWN {
     };
 }
 
-Z_UNKNOWN!()
+Z_UNKNOWN!();

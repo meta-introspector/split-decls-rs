@@ -4,4 +4,4 @@ macro_rules! tempfile_in {
     };
 }
 
-tempfile_in!()
+tempfile_in!();

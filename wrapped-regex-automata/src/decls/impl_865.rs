@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        StateID!();
-        LookSet!();
-        Repr!();
-        PatternID!();
         NFA!();
+        PatternID!();
+        StateID!();
+        Repr!();
+        LookSet!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_865 {
     };
 }
 
-impl_865!()
+impl_865!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Alignment!();
         TryFromBytes!();
-        FromBytes!();
+        Alignment!();
         IntoBytes!();
+        FromBytes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! try_transmute_mut {
     };
 }
 
-try_transmute_mut!()
+try_transmute_mut!();

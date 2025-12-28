@@ -4,4 +4,4 @@ macro_rules! timeit {
     };
 }
 
-timeit!()
+timeit!();

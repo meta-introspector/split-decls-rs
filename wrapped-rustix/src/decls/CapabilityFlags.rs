@@ -4,4 +4,4 @@ macro_rules! CapabilityFlags {
     };
 }
 
-CapabilityFlags!()
+CapabilityFlags!();

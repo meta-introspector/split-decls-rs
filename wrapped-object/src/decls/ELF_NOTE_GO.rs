@@ -4,4 +4,4 @@ macro_rules! ELF_NOTE_GO {
     };
 }
 
-ELF_NOTE_GO!()
+ELF_NOTE_GO!();

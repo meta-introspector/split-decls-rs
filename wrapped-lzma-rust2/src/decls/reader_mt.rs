@@ -4,4 +4,4 @@ macro_rules! reader_mt {
     };
 }
 
-reader_mt!()
+reader_mt!();

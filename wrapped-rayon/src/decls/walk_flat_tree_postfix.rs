@@ -4,4 +4,4 @@ macro_rules! walk_flat_tree_postfix {
     };
 }
 
-walk_flat_tree_postfix!()
+walk_flat_tree_postfix!();

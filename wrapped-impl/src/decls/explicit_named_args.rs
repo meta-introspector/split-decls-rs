@@ -11,4 +11,4 @@ macro_rules! explicit_named_args {
     };
 }
 
-explicit_named_args!()
+explicit_named_args!();

@@ -4,4 +4,4 @@ macro_rules! STB_GLOBAL {
     };
 }
 
-STB_GLOBAL!()
+STB_GLOBAL!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImplItem!();
         OwnerNode!();
+        ImplItem!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_337 {
     };
 }
 
-impl_337!()
+impl_337!();

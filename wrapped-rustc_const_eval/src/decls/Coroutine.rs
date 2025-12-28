@@ -4,4 +4,4 @@ macro_rules! Coroutine {
     };
 }
 
-Coroutine!()
+Coroutine!();

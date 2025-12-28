@@ -12,4 +12,4 @@ macro_rules! CLOSURE_ARGS {
     };
 }
 
-CLOSURE_ARGS!()
+CLOSURE_ARGS!();

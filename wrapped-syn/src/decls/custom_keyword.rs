@@ -4,4 +4,4 @@ macro_rules! custom_keyword {
     };
 }
 
-custom_keyword!()
+custom_keyword!();

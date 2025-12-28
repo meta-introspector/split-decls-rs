@@ -4,4 +4,4 @@ macro_rules! sleep {
     };
 }
 
-sleep!()
+sleep!();

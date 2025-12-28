@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reducer!();
         TryReduceConsumer!();
+        Reducer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_920 {
     };
 }
 
-impl_920!()
+impl_920!();

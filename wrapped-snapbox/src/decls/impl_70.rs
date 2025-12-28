@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Patchwork!();
+        Result!();
         OrdRange!();
         Error!();
-        Result!();
+        Patchwork!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

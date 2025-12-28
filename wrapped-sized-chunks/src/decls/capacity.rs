@@ -4,4 +4,4 @@ macro_rules! capacity {
     };
 }
 
-capacity!()
+capacity!();

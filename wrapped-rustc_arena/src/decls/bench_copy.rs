@@ -12,4 +12,4 @@ macro_rules! bench_copy {
     };
 }
 
-bench_copy!()
+bench_copy!();

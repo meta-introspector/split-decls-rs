@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Container!();
         Ctxt!();
         Data!();
-        Container!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_variant_skip_attrs {
     };
 }
 
-check_variant_skip_attrs!()
+check_variant_skip_attrs!();

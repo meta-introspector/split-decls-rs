@@ -11,4 +11,4 @@ macro_rules! LOAD_LIBRARY_FLAGS {
     };
 }
 
-LOAD_LIBRARY_FLAGS!()
+LOAD_LIBRARY_FLAGS!();

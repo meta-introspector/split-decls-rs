@@ -4,4 +4,4 @@ macro_rules! STT_NOTYPE {
     };
 }
 
-STT_NOTYPE!()
+STT_NOTYPE!();

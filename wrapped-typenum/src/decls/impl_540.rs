@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Sum!();
         TArr!();
+        Sum!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_540 {
     };
 }
 
-impl_540!()
+impl_540!();

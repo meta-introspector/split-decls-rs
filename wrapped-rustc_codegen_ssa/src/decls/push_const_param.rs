@@ -4,4 +4,4 @@ macro_rules! push_const_param {
     };
 }
 
-push_const_param!()
+push_const_param!();

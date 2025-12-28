@@ -4,4 +4,4 @@ macro_rules! dependency_graph {
     };
 }
 
-dependency_graph!()
+dependency_graph!();

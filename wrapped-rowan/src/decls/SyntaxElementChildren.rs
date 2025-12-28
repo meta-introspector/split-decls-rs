@@ -11,4 +11,4 @@ macro_rules! SyntaxElementChildren {
     };
 }
 
-SyntaxElementChildren!()
+SyntaxElementChildren!();

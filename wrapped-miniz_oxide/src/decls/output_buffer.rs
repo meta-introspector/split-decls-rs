@@ -4,4 +4,4 @@ macro_rules! output_buffer {
     };
 }
 
-output_buffer!()
+output_buffer!();

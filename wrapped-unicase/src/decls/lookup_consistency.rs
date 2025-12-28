@@ -4,4 +4,4 @@ macro_rules! lookup_consistency {
     };
 }
 
-lookup_consistency!()
+lookup_consistency!();

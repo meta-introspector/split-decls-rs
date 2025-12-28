@@ -4,4 +4,4 @@ macro_rules! char_property_functions {
     };
 }
 
-char_property_functions!()
+char_property_functions!();

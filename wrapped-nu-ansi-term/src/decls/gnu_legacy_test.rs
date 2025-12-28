@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Color!();
         Rgb!();
+        Color!();
         Style!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! gnu_legacy_test {
     };
 }
 
-gnu_legacy_test!()
+gnu_legacy_test!();

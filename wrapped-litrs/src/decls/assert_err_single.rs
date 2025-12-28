@@ -11,4 +11,4 @@ macro_rules! assert_err_single {
     };
 }
 
-assert_err_single!()
+assert_err_single!();

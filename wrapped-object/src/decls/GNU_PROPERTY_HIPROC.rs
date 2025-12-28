@@ -4,4 +4,4 @@ macro_rules! GNU_PROPERTY_HIPROC {
     };
 }
 
-GNU_PROPERTY_HIPROC!()
+GNU_PROPERTY_HIPROC!();

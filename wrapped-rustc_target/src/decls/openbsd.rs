@@ -4,4 +4,4 @@ macro_rules! openbsd {
     };
 }
 
-openbsd!()
+openbsd!();

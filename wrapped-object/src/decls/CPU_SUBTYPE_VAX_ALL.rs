@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_VAX_ALL {
     };
 }
 
-CPU_SUBTYPE_VAX_ALL!()
+CPU_SUBTYPE_VAX_ALL!();

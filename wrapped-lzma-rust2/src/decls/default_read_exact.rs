@@ -13,4 +13,4 @@ macro_rules! default_read_exact {
     };
 }
 
-default_read_exact!()
+default_read_exact!();

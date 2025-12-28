@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        OnDuplicate!();
-        Stage!();
         NullOnLinkSection!();
-        AllowedTargets!();
+        OnDuplicate!();
+        ArgParser!();
         SingleAttributeParser!();
         AttributeOrder!();
-        LinkSectionParser!();
         AcceptContext!();
-        ArgParser!();
+        Stage!();
+        AllowedTargets!();
+        LinkSectionParser!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

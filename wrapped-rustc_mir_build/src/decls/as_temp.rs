@@ -4,4 +4,4 @@ macro_rules! as_temp {
     };
 }
 
-as_temp!()
+as_temp!();

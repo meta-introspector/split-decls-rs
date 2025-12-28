@@ -4,4 +4,4 @@ macro_rules! Stack {
     };
 }
 
-Stack!()
+Stack!();

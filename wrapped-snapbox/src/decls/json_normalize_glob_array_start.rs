@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DataInner!();
         Data!();
+        DataInner!();
         NormalizeToExpected!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! json_normalize_glob_array_start {
     };
 }
 
-json_normalize_glob_array_start!()
+json_normalize_glob_array_start!();

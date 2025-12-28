@@ -4,4 +4,4 @@ macro_rules! EOF_CHAR {
     };
 }
 
-EOF_CHAR!()
+EOF_CHAR!();

@@ -11,4 +11,4 @@ macro_rules! add_pre_link_objects {
     };
 }
 
-add_pre_link_objects!()
+add_pre_link_objects!();

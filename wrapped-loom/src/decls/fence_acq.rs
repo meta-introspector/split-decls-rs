@@ -12,4 +12,4 @@ macro_rules! fence_acq {
     };
 }
 
-fence_acq!()
+fence_acq!();

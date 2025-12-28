@@ -4,4 +4,4 @@ macro_rules! scope_lifo_order {
     };
 }
 
-scope_lifo_order!()
+scope_lifo_order!();

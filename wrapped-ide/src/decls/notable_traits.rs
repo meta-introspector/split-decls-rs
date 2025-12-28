@@ -4,4 +4,4 @@ macro_rules! notable_traits {
     };
 }
 
-notable_traits!()
+notable_traits!();

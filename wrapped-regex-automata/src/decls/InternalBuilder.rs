@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        SparseSet!();
+        StateID!();
+        DFA!();
+        Epsilons!();
+        Config!();
         ByteClasses!();
         NFA!();
-        StateID!();
-        SparseSet!();
-        Epsilons!();
-        DFA!();
-        Config!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! InternalBuilder {
     };
 }
 
-InternalBuilder!()
+InternalBuilder!();

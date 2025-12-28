@@ -4,4 +4,4 @@ macro_rules! N_DEBUG {
     };
 }
 
-N_DEBUG!()
+N_DEBUG!();

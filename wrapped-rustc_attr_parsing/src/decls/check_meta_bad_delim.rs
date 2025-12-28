@@ -12,4 +12,4 @@ macro_rules! check_meta_bad_delim {
     };
 }
 
-check_meta_bad_delim!()
+check_meta_bad_delim!();

@@ -4,4 +4,4 @@ macro_rules! JodChild {
     };
 }
 
-JodChild!()
+JodChild!();

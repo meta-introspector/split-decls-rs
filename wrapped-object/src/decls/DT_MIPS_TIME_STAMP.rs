@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_TIME_STAMP {
     };
 }
 
-DT_MIPS_TIME_STAMP!()
+DT_MIPS_TIME_STAMP!();

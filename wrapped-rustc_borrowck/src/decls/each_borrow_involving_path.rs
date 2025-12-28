@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Overlap!();
         BorrowData!();
-        AccessDepth!();
         BorrowSet!();
+        AccessDepth!();
+        Overlap!();
         PlaceConflictBias!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! each_borrow_involving_path {
     };
 }
 
-each_borrow_involving_path!()
+each_borrow_involving_path!();

@@ -4,4 +4,4 @@ macro_rules! add_group_separators {
     };
 }
 
-add_group_separators!()
+add_group_separators!();

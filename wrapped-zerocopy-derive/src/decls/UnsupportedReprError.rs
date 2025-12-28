@@ -4,4 +4,4 @@ macro_rules! UnsupportedReprError {
     };
 }
 
-UnsupportedReprError!()
+UnsupportedReprError!();

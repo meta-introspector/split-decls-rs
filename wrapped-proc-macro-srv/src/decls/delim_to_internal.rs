@@ -4,4 +4,4 @@ macro_rules! delim_to_internal {
     };
 }
 
-delim_to_internal!()
+delim_to_internal!();

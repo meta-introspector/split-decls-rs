@@ -4,4 +4,4 @@ macro_rules! longest_match {
     };
 }
 
-longest_match!()
+longest_match!();

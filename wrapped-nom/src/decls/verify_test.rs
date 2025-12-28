@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Verify!();
-        IResult!();
         Needed!();
-        Error!();
+        IResult!();
+        Verify!();
         Err!();
         ErrorKind!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! verify_test {
     };
 }
 
-verify_test!()
+verify_test!();

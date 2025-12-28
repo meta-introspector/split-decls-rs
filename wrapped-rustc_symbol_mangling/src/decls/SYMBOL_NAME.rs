@@ -4,4 +4,4 @@ macro_rules! SYMBOL_NAME {
     };
 }
 
-SYMBOL_NAME!()
+SYMBOL_NAME!();

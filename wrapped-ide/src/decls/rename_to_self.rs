@@ -11,4 +11,4 @@ macro_rules! rename_to_self {
     };
 }
 
-rename_to_self!()
+rename_to_self!();

@@ -4,4 +4,4 @@ macro_rules! cfg_accessible {
     };
 }
 
-cfg_accessible!()
+cfg_accessible!();

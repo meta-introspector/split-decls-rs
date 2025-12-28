@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        StateTransitionIter!();
         Unit!();
         StateID!();
-        StateTransitionIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Alignment!();
         Unaligned!();
+        Alignment!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_327 {
     };
 }
 
-impl_327!()
+impl_327!();

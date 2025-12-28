@@ -4,4 +4,4 @@ macro_rules! VER_NEED_CURRENT {
     };
 }
 
-VER_NEED_CURRENT!()
+VER_NEED_CURRENT!();

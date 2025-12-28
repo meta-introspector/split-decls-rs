@@ -4,4 +4,4 @@ macro_rules! UniversalCompactionStopStyle {
     };
 }
 
-UniversalCompactionStopStyle!()
+UniversalCompactionStopStyle!();

@@ -12,4 +12,4 @@ macro_rules! new_at {
     };
 }
 
-new_at!()
+new_at!();

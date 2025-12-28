@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Row!();
         ConnRef!();
+        Row!();
         StmtRef!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TraceEvent {
     };
 }
 
-TraceEvent!()
+TraceEvent!();

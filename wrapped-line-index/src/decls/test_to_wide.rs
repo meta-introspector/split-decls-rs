@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WideEncoding!();
-        WideLineCol!();
         LineCol!();
+        WideEncoding!();
         LineIndex!();
+        WideLineCol!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_to_wide {
     };
 }
 
-test_to_wide!()
+test_to_wide!();

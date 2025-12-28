@@ -11,4 +11,4 @@ macro_rules! LC_FILESET_ENTRY {
     };
 }
 
-LC_FILESET_ENTRY!()
+LC_FILESET_ENTRY!();

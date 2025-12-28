@@ -4,4 +4,4 @@ macro_rules! RTLD_LOCAL {
     };
 }
 
-RTLD_LOCAL!()
+RTLD_LOCAL!();

@@ -4,4 +4,4 @@ macro_rules! format_time_column {
     };
 }
 
-format_time_column!()
+format_time_column!();

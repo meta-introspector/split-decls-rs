@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NeighborsDirected!();
         Time!();
+        NeighborsDirected!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! all_simple_paths_multi {
     };
 }
 
-all_simple_paths_multi!()
+all_simple_paths_multi!();

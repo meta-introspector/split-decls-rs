@@ -4,4 +4,4 @@ macro_rules! ObligationTreeId {
     };
 }
 
-ObligationTreeId!()
+ObligationTreeId!();

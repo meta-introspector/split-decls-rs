@@ -4,4 +4,4 @@ macro_rules! SHT_NOTE {
     };
 }
 
-SHT_NOTE!()
+SHT_NOTE!();

@@ -4,4 +4,4 @@ macro_rules! utility_types {
     };
 }
 
-utility_types!()
+utility_types!();

@@ -11,4 +11,4 @@ macro_rules! BuildScriptOutput {
     };
 }
 
-BuildScriptOutput!()
+BuildScriptOutput!();

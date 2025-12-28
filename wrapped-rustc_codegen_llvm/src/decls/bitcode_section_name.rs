@@ -11,4 +11,4 @@ macro_rules! bitcode_section_name {
     };
 }
 
-bitcode_section_name!()
+bitcode_section_name!();

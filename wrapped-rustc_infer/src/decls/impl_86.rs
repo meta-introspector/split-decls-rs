@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OutlivesEnvironment!();
         FreeRegionMap!();
+        OutlivesEnvironment!();
         GenericKind!();
         RegionBoundPairs!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

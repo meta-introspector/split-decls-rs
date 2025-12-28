@@ -4,4 +4,4 @@ macro_rules! ConstContinueParser {
     };
 }
 
-ConstContinueParser!()
+ConstContinueParser!();

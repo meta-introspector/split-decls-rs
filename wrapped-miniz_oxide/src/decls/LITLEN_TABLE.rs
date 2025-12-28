@@ -4,4 +4,4 @@ macro_rules! LITLEN_TABLE {
     };
 }
 
-LITLEN_TABLE!()
+LITLEN_TABLE!();

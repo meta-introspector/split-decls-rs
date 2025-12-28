@@ -4,4 +4,4 @@ macro_rules! ring {
     };
 }
 
-ring!()
+ring!();

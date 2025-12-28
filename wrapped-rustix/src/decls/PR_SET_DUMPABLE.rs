@@ -4,4 +4,4 @@ macro_rules! PR_SET_DUMPABLE {
     };
 }
 
-PR_SET_DUMPABLE!()
+PR_SET_DUMPABLE!();

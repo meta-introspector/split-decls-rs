@@ -4,4 +4,4 @@ macro_rules! _memoffset_offset_from_unsafe {
     };
 }
 
-_memoffset_offset_from_unsafe!()
+_memoffset_offset_from_unsafe!();

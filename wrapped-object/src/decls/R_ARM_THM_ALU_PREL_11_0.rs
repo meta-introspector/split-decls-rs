@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_ALU_PREL_11_0 {
     };
 }
 
-R_ARM_THM_ALU_PREL_11_0!()
+R_ARM_THM_ALU_PREL_11_0!();

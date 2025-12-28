@@ -4,4 +4,4 @@ macro_rules! Z_FIXED {
     };
 }
 
-Z_FIXED!()
+Z_FIXED!();

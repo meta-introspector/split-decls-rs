@@ -4,4 +4,4 @@ macro_rules! R_AVR_CALL {
     };
 }
 
-R_AVR_CALL!()
+R_AVR_CALL!();

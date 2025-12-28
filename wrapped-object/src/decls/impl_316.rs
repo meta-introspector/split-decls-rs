@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Note!();
-        ElfSectionRelocationIterator!();
-        ElfSection!();
-        CompressedData!();
-        SectionFlags!();
-        SectionKind!();
-        FileHeader!();
-        RelocationMap!();
-        ReadRef!();
-        SectionIndex!();
         RelocationIterator!();
         CompressedFileRange!();
+        FileHeader!();
+        RelocationMap!();
+        ElfSectionRelocationIterator!();
+        Result!();
+        SectionFlags!();
+        CompressedData!();
+        ElfSection!();
         ObjectSection!();
+        ReadRef!();
+        SectionKind!();
+        SectionIndex!();
+        Note!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_316 {
     };
 }
 
-impl_316!()
+impl_316!();

@@ -4,4 +4,4 @@ macro_rules! hint_iterator {
     };
 }
 
-hint_iterator!()
+hint_iterator!();

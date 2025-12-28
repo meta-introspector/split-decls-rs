@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Decompressor!();
         Ppmd!();
+        Decompressor!();
         Lzma!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

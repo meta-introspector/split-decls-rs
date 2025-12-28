@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Default!();
         Field!();
         Data!();
-        Container!();
+        Default!();
         Variant!();
+        Container!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! with_bound {
     };
 }
 
-with_bound!()
+with_bound!();

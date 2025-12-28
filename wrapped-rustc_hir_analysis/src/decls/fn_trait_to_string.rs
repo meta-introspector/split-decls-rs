@@ -4,4 +4,4 @@ macro_rules! fn_trait_to_string {
     };
 }
 
-fn_trait_to_string!()
+fn_trait_to_string!();

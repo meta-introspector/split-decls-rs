@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Metadata!();
         Result!();
         Error!();
-        Metadata!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! metadata {
     };
 }
 
-metadata!()
+metadata!();

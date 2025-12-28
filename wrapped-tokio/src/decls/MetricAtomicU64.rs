@@ -4,4 +4,4 @@ macro_rules! MetricAtomicU64 {
     };
 }
 
-MetricAtomicU64!()
+MetricAtomicU64!();

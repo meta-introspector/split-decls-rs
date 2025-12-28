@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InterpretationResult!();
-        CompileTimeMachine!();
         InterpCx!();
+        InterpretationResult!();
         MPlaceTy!();
+        CompileTimeMachine!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

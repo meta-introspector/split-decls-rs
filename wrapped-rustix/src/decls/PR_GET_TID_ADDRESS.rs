@@ -4,4 +4,4 @@ macro_rules! PR_GET_TID_ADDRESS {
     };
 }
 
-PR_GET_TID_ADDRESS!()
+PR_GET_TID_ADDRESS!();

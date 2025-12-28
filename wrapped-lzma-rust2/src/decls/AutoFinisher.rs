@@ -11,4 +11,4 @@ macro_rules! AutoFinisher {
     };
 }
 
-AutoFinisher!()
+AutoFinisher!();

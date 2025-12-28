@@ -4,4 +4,4 @@ macro_rules! slog_support {
     };
 }
 
-slog_support!()
+slog_support!();

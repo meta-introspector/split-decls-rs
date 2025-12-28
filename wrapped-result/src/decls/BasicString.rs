@@ -4,4 +4,4 @@ macro_rules! BasicString {
     };
 }
 
-BasicString!()
+BasicString!();

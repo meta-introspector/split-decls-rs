@@ -11,4 +11,4 @@ macro_rules! impl_read_signed_leb128 {
     };
 }
 
-impl_read_signed_leb128!()
+impl_read_signed_leb128!();

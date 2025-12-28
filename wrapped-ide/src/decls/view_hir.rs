@@ -4,4 +4,4 @@ macro_rules! view_hir {
     };
 }
 
-view_hir!()
+view_hir!();

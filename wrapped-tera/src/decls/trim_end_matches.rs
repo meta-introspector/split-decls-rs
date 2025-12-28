@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Filter!();
         Result!();
+        Filter!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! trim_end_matches {
     };
 }
 
-trim_end_matches!()
+trim_end_matches!();

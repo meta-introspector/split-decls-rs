@@ -4,4 +4,4 @@ macro_rules! use_vendored_submodules_impl {
     };
 }
 
-use_vendored_submodules_impl!()
+use_vendored_submodules_impl!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DirFixture!();
         Error!();
+        DirFixture!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

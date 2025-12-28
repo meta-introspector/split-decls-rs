@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericArgs!();
         Walkable!();
+        GenericArgs!();
         Path!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! PathSegment {
     };
 }
 
-PathSegment!()
+PathSegment!();

@@ -4,4 +4,4 @@ macro_rules! strip_trailing_slash {
     };
 }
 
-strip_trailing_slash!()
+strip_trailing_slash!();

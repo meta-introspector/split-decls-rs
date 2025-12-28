@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Read!();
         ErrorCode!();
+        Read!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! peek_or_eof {
     };
 }
 
-peek_or_eof!()
+peek_or_eof!();

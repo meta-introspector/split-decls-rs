@@ -4,4 +4,4 @@ macro_rules! owns_allocation {
     };
 }
 
-owns_allocation!()
+owns_allocation!();

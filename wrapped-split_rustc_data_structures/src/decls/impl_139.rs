@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Direction!();
-        Edge!();
         NodeIndex!();
+        Edge!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

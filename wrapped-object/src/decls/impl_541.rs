@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        MachOComdat!();
-        SymbolIndex!();
-        Result!();
-        SectionIterator!();
         ComdatKind!();
-        ObjectComdat!();
+        SymbolIndex!();
         ReadRef!();
         MachOComdatSectionIterator!();
         MachHeader!();
+        ObjectComdat!();
+        MachOComdat!();
+        SectionIterator!();
+        Result!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_541 {
     };
 }
 
-impl_541!()
+impl_541!();

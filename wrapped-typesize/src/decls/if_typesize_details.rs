@@ -11,4 +11,4 @@ macro_rules! if_typesize_details {
     };
 }
 
-if_typesize_details!()
+if_typesize_details!();

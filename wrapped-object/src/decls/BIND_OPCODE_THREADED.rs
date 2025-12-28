@@ -4,4 +4,4 @@ macro_rules! BIND_OPCODE_THREADED {
     };
 }
 
-BIND_OPCODE_THREADED!()
+BIND_OPCODE_THREADED!();

@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_DATA {
     };
 }
 
-NGHTTP2_DATA!()
+NGHTTP2_DATA!();

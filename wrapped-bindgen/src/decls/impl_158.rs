@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RepInterp!();
         TokenStream!();
+        RepInterp!();
         ToTokens!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

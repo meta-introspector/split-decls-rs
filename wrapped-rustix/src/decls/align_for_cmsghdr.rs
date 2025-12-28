@@ -4,4 +4,4 @@ macro_rules! align_for_cmsghdr {
     };
 }
 
-align_for_cmsghdr!()
+align_for_cmsghdr!();

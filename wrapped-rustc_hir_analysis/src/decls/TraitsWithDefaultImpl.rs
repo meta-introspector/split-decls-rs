@@ -4,4 +4,4 @@ macro_rules! TraitsWithDefaultImpl {
     };
 }
 
-TraitsWithDefaultImpl!()
+TraitsWithDefaultImpl!();

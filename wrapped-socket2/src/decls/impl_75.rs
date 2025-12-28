@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RecvFlags!();
         MsgHdrMut!();
-        SockAddr!();
         MaybeUninitSlice!();
+        RecvFlags!();
+        SockAddr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

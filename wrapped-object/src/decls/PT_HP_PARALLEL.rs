@@ -4,4 +4,4 @@ macro_rules! PT_HP_PARALLEL {
     };
 }
 
-PT_HP_PARALLEL!()
+PT_HP_PARALLEL!();

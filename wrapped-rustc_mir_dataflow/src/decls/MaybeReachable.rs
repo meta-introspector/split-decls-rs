@@ -4,4 +4,4 @@ macro_rules! MaybeReachable {
     };
 }
 
-MaybeReachable!()
+MaybeReachable!();

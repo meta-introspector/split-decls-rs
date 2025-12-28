@@ -4,4 +4,4 @@ macro_rules! MaybeStorageLive {
     };
 }
 
-MaybeStorageLive!()
+MaybeStorageLive!();

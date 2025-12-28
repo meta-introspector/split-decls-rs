@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MemDecoder!();
-        IntEncodedWithFixedSize!();
         Decodable!();
+        IntEncodedWithFixedSize!();
+        MemDecoder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

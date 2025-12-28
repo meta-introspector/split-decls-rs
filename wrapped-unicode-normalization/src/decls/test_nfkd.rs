@@ -4,4 +4,4 @@ macro_rules! test_nfkd {
     };
 }
 
-test_nfkd!()
+test_nfkd!();

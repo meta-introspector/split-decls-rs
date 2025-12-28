@@ -4,4 +4,4 @@ macro_rules! check_partial_cmp_lt_direct {
     };
 }
 
-check_partial_cmp_lt_direct!()
+check_partial_cmp_lt_direct!();

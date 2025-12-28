@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FileNameDisplay!();
-        FileName!();
         FileNameDisplayPreference!();
+        FileName!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_258 {
     };
 }
 
-impl_258!()
+impl_258!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        StateID!();
+        State!();
+        RangeTrie!();
         NextDupe!();
         NextInsert!();
-        NextIter!();
-        RangeTrie!();
         Transition!();
-        State!();
         Split!();
+        NextIter!();
+        StateID!();
         SplitRange!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_562 {
     };
 }
 
-impl_562!()
+impl_562!();

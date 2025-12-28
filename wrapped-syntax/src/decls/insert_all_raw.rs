@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PositionRepr!();
-        SyntaxElement!();
         Position!();
+        SyntaxElement!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! insert_all_raw {
     };
 }
 
-insert_all_raw!()
+insert_all_raw!();

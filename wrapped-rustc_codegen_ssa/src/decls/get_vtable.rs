@@ -4,4 +4,4 @@ macro_rules! get_vtable {
     };
 }
 
-get_vtable!()
+get_vtable!();

@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_GLOB_DAT {
     };
 }
 
-R_MICROBLAZE_GLOB_DAT!()
+R_MICROBLAZE_GLOB_DAT!();

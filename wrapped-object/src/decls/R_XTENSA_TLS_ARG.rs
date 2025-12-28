@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_TLS_ARG {
     };
 }
 
-R_XTENSA_TLS_ARG!()
+R_XTENSA_TLS_ARG!();

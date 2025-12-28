@@ -4,4 +4,4 @@ macro_rules! is_camel_case {
     };
 }
 
-is_camel_case!()
+is_camel_case!();

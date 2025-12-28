@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProducerCallback!();
         Consumer!();
+        ProducerCallback!();
         Iter!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! indexed_range_impl {
     };
 }
 
-indexed_range_impl!()
+indexed_range_impl!();

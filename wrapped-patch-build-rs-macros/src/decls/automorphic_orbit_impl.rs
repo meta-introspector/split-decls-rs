@@ -28,4 +28,4 @@ impl AutomorphicOrbit {
     };
 }
 
-automorphic_orbit_impl!()
+automorphic_orbit_impl!();

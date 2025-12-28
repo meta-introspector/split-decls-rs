@@ -4,4 +4,4 @@ macro_rules! ForbiddenDefault {
     };
 }
 
-ForbiddenDefault!()
+ForbiddenDefault!();

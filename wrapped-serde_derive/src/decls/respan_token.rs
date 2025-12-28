@@ -4,4 +4,4 @@ macro_rules! respan_token {
     };
 }
 
-respan_token!()
+respan_token!();

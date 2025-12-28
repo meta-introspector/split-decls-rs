@@ -11,4 +11,4 @@ macro_rules! delete_old {
     };
 }
 
-delete_old!()
+delete_old!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         XcoffSymbolTable!();
-        FileHeader!();
         ReadRef!();
+        FileHeader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_813 {
     };
 }
 
-impl_813!()
+impl_813!();

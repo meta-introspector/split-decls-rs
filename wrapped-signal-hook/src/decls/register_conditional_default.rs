@@ -4,4 +4,4 @@ macro_rules! register_conditional_default {
     };
 }
 
-register_conditional_default!()
+register_conditional_default!();

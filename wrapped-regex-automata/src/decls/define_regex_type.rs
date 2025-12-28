@@ -12,4 +12,4 @@ macro_rules! define_regex_type {
     };
 }
 
-define_regex_type!()
+define_regex_type!();

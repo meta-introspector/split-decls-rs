@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NodeFilteredEdges!();
+        NodeFiltered!();
         FilterNode!();
         Edges!();
-        NodeFiltered!();
         Direction!();
+        NodeFilteredEdges!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

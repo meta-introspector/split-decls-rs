@@ -4,4 +4,4 @@ macro_rules! swap_pair {
     };
 }
 
-swap_pair!()
+swap_pair!();

@@ -4,4 +4,4 @@ macro_rules! PT_HIOS {
     };
 }
 
-PT_HIOS!()
+PT_HIOS!();

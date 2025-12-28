@@ -4,4 +4,4 @@ macro_rules! lzma_writer {
     };
 }
 
-lzma_writer!()
+lzma_writer!();

@@ -4,4 +4,4 @@ macro_rules! diagnostic_items {
     };
 }
 
-diagnostic_items!()
+diagnostic_items!();

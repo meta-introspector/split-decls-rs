@@ -11,4 +11,4 @@ macro_rules! build_field_mapping {
     };
 }
 
-build_field_mapping!()
+build_field_mapping!();

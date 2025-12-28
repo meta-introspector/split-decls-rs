@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TriColorVisitor!();
-        DirectedGraph!();
         NodeStatus!();
         CycleDetector!();
         Node!();
+        DirectedGraph!();
+        TriColorVisitor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_109 {
     };
 }
 
-impl_109!()
+impl_109!();

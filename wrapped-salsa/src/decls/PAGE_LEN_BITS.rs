@@ -4,4 +4,4 @@ macro_rules! PAGE_LEN_BITS {
     };
 }
 
-PAGE_LEN_BITS!()
+PAGE_LEN_BITS!();

@@ -4,4 +4,4 @@ macro_rules! PR_SET_NAME {
     };
 }
 
-PR_SET_NAME!()
+PR_SET_NAME!();

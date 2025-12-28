@@ -4,4 +4,4 @@ macro_rules! UnknownCryptoError {
     };
 }
 
-UnknownCryptoError!()
+UnknownCryptoError!();

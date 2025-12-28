@@ -12,4 +12,4 @@ macro_rules! parse_in_condition_container {
     };
 }
 
-parse_in_condition_container!()
+parse_in_condition_container!();

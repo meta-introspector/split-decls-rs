@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         InvalidLiteralValue!();
+        ExpectedNameValuePair!();
         OutOfRangeInteger!();
         UnexpectedParameterName!();
-        ExpectedNameValuePair!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_patchable_function_entry {
     };
 }
 
-parse_patchable_function_entry!()
+parse_patchable_function_entry!();

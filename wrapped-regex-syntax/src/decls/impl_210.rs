@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Frame!();
-        Capture!();
         Alternation!();
+        Concat!();
         Hir!();
         Repetition!();
-        Concat!();
+        Capture!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_210 {
     };
 }
 
-impl_210!()
+impl_210!();

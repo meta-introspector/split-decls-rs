@@ -4,4 +4,4 @@ macro_rules! simd128 {
     };
 }
 
-simd128!()
+simd128!();

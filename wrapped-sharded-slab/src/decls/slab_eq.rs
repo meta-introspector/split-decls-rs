@@ -12,4 +12,4 @@ macro_rules! slab_eq {
     };
 }
 
-slab_eq!()
+slab_eq!();

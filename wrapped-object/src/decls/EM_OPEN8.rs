@@ -4,4 +4,4 @@ macro_rules! EM_OPEN8 {
     };
 }
 
-EM_OPEN8!()
+EM_OPEN8!();

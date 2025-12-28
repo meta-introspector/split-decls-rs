@@ -11,4 +11,4 @@ macro_rules! assert_subset_eq {
     };
 }
 
-assert_subset_eq!()
+assert_subset_eq!();

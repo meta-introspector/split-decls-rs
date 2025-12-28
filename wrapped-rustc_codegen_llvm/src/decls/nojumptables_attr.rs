@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CreateAttrStringValue!();
         CodegenCx!();
+        CreateAttrStringValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! nojumptables_attr {
     };
 }
 
-nojumptables_attr!()
+nojumptables_attr!();

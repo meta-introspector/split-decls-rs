@@ -4,4 +4,4 @@ macro_rules! SingleCache {
     };
 }
 
-SingleCache!()
+SingleCache!();

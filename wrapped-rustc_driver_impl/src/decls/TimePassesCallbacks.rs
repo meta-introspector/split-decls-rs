@@ -4,4 +4,4 @@ macro_rules! TimePassesCallbacks {
     };
 }
 
-TimePassesCallbacks!()
+TimePassesCallbacks!();

@@ -4,4 +4,4 @@ macro_rules! EM_MCST_ELBRUS {
     };
 }
 
-EM_MCST_ELBRUS!()
+EM_MCST_ELBRUS!();

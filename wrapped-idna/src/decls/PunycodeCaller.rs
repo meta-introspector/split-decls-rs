@@ -4,4 +4,4 @@ macro_rules! PunycodeCaller {
     };
 }
 
-PunycodeCaller!()
+PunycodeCaller!();

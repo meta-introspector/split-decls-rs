@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArrayOfTables!();
         Array!();
+        ArrayOfTables!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

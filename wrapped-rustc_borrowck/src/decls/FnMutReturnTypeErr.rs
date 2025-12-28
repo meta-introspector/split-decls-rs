@@ -4,4 +4,4 @@ macro_rules! FnMutReturnTypeErr {
     };
 }
 
-FnMutReturnTypeErr!()
+FnMutReturnTypeErr!();

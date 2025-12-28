@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Item!();
+        MacCallStmt!();
+        Walkable!();
+        Local!();
         Expr!();
         MacCall!();
-        MacCallStmt!();
-        Local!();
-        Walkable!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! StmtKind {
     };
 }
 
-StmtKind!()
+StmtKind!();

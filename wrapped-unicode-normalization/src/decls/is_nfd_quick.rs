@@ -11,4 +11,4 @@ macro_rules! is_nfd_quick {
     };
 }
 
-is_nfd_quick!()
+is_nfd_quick!();

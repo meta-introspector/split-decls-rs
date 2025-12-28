@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pid!();
         CoreSchedulingScope!();
+        Pid!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! pull_core_scheduling_cookie {
     };
 }
 
-pull_core_scheduling_cookie!()
+pull_core_scheduling_cookie!();

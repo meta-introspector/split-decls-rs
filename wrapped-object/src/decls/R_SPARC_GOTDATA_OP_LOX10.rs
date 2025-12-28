@@ -4,4 +4,4 @@ macro_rules! R_SPARC_GOTDATA_OP_LOX10 {
     };
 }
 
-R_SPARC_GOTDATA_OP_LOX10!()
+R_SPARC_GOTDATA_OP_LOX10!();

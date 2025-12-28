@@ -10,4 +10,4 @@ macro_rules! debug_dump {
     };
 }
 
-debug_dump!()
+debug_dump!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProcMacro!();
         ServerError!();
+        ProcMacro!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! expand {
     };
 }
 
-expand!()
+expand!();

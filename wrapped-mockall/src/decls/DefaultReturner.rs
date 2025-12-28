@@ -4,4 +4,4 @@ macro_rules! DefaultReturner {
     };
 }
 
-DefaultReturner!()
+DefaultReturner!();

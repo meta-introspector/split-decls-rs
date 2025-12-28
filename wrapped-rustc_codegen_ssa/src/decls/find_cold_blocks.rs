@@ -4,4 +4,4 @@ macro_rules! find_cold_blocks {
     };
 }
 
-find_cold_blocks!()
+find_cold_blocks!();

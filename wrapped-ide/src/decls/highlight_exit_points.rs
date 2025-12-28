@@ -11,4 +11,4 @@ macro_rules! highlight_exit_points {
     };
 }
 
-highlight_exit_points!()
+highlight_exit_points!();

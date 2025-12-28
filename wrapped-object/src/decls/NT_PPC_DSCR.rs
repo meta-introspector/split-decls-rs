@@ -4,4 +4,4 @@ macro_rules! NT_PPC_DSCR {
     };
 }
 
-NT_PPC_DSCR!()
+NT_PPC_DSCR!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ErrorStr!();
-        ParseError!();
-        Span!();
         Expected!();
+        ErrorStr!();
+        Span!();
+        ParseError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

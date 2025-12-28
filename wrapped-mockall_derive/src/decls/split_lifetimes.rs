@@ -11,4 +11,4 @@ macro_rules! split_lifetimes {
     };
 }
 
-split_lifetimes!()
+split_lifetimes!();

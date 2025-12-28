@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
         ElfSymbol!();
+        ReadRef!();
         FileHeader!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_339 {
     };
 }
 
-impl_339!()
+impl_339!();

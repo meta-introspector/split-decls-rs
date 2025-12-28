@@ -4,4 +4,4 @@ macro_rules! InterfaceMethodArg {
     };
 }
 
-InterfaceMethodArg!()
+InterfaceMethodArg!();

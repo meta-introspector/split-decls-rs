@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Undirected!();
+        EdgesDirected!();
         EdgeRef!();
         Direction!();
         Directed!();
-        EdgesDirected!();
+        Undirected!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! macro_74 {
     };
 }
 
-macro_74!()
+macro_74!();

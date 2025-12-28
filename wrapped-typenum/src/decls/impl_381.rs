@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Unsigned!();
-        PrivateAnd!();
         UTerm!();
+        PrivateAnd!();
+        Unsigned!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_381 {
     };
 }
 
-impl_381!()
+impl_381!();

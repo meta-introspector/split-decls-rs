@@ -4,4 +4,4 @@ macro_rules! adapt_array_mut_it {
     };
 }
 
-adapt_array_mut_it!()
+adapt_array_mut_it!();

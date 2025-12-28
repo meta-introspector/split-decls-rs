@@ -4,4 +4,4 @@ macro_rules! IVectorView {
     };
 }
 
-IVectorView!()
+IVectorView!();

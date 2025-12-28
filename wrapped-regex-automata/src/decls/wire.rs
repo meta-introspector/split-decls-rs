@@ -4,4 +4,4 @@ macro_rules! wire {
     };
 }
 
-wire!()
+wire!();

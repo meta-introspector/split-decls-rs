@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_AM_ABSOLUTE {
     };
 }
 
-IMAGE_REL_AM_ABSOLUTE!()
+IMAGE_REL_AM_ABSOLUTE!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Direction!();
-        AnalysisAndResults!();
-        SeekTarget!();
         MockAnalysis!();
+        AnalysisAndResults!();
+        Direction!();
+        SeekTarget!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_cursor {
     };
 }
 
-test_cursor!()
+test_cursor!();

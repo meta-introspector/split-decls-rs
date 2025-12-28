@@ -12,4 +12,4 @@ macro_rules! declare_lint_pass {
     };
 }
 
-declare_lint_pass!()
+declare_lint_pass!();

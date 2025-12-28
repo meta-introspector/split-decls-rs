@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NormalizeQuery!();
         HigherRankedErrorCause!();
-        HigherRankedLifetimeError!();
         TypeOpInfo!();
+        HigherRankedLifetimeError!();
         MirBorrowckCtxt!();
+        NormalizeQuery!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_103 {
     };
 }
 
-impl_103!()
+impl_103!();

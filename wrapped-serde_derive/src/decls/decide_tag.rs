@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Data!();
-        TagType!();
         Ctxt!();
         Attr!();
+        TagType!();
         BoolAttr!();
+        Data!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! decide_tag {
     };
 }
 
-decide_tag!()
+decide_tag!();

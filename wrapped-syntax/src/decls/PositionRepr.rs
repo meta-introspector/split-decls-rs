@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxNode!();
         SyntaxElement!();
+        SyntaxNode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PositionRepr {
     };
 }
 
-PositionRepr!()
+PositionRepr!();

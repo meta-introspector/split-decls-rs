@@ -4,4 +4,4 @@ macro_rules! AHOM {
     };
 }
 
-AHOM!()
+AHOM!();

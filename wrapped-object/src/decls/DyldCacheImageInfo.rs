@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Endian!();
         U32!();
         U64!();
-        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DyldCacheImageInfo {
     };
 }
 
-DyldCacheImageInfo!()
+DyldCacheImageInfo!();

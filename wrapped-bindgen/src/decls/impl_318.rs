@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        TypeName!();
-        Delegate!();
         Type!();
-        CppInterface!();
-        Class!();
         CppFn!();
-        GUID!();
-        Literal!();
-        Config!();
-        CppEnum!();
-        CppDelegate!();
-        Interface!();
-        Remap!();
-        CppStruct!();
-        Blob!();
-        CppConst!();
         TokenStream!();
+        Config!();
+        GUID!();
+        Blob!();
+        CppInterface!();
+        CppStruct!();
+        Class!();
+        Literal!();
+        CppConst!();
+        TypeName!();
+        CppEnum!();
+        Interface!();
+        Delegate!();
+        CppDelegate!();
+        Remap!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_318 {
     };
 }
 
-impl_318!()
+impl_318!();

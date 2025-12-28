@@ -11,4 +11,4 @@ macro_rules! analyze_source_file_generic {
     };
 }
 
-analyze_source_file_generic!()
+analyze_source_file_generic!();

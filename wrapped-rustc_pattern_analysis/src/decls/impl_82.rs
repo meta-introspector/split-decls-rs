@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
+        MixedDerefPatternConstructors!();
+        ExclusiveRangeMissingMax!();
+        OverlappingRangeEndpoints!();
+        IntRange!();
         RevealedTy!();
         Overlap!();
-        OverlappingRangeEndpoints!();
-        MixedDerefPatternConstructors!();
-        PatCx!();
-        IntRange!();
-        Constructor!();
-        RustcPatCtxt!();
-        GappedRange!();
-        ExclusiveRangeMissingGap!();
         RangeEnd!();
-        ExclusiveRangeMissingMax!();
-        ConstructorSet!();
+        GappedRange!();
         PrivateUninhabitedField!();
+        RustcPatCtxt!();
+        PatCx!();
+        Constructor!();
         DeconstructedPat!();
+        ExclusiveRangeMissingGap!();
+        ConstructorSet!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

@@ -12,4 +12,4 @@ macro_rules! PeSegmentIterator32 {
     };
 }
 
-PeSegmentIterator32!()
+PeSegmentIterator32!();

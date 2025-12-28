@@ -4,4 +4,4 @@ macro_rules! NakedParser {
     };
 }
 
-NakedParser!()
+NakedParser!();

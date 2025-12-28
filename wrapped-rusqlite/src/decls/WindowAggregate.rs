@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Aggregate!();
         SqlFnOutput!();
         Context!();
+        Result!();
+        Aggregate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! WindowAggregate {
     };
 }
 
-WindowAggregate!()
+WindowAggregate!();

@@ -4,4 +4,4 @@ macro_rules! MAGIC_NUM {
     };
 }
 
-MAGIC_NUM!()
+MAGIC_NUM!();

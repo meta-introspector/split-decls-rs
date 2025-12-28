@@ -4,4 +4,4 @@ macro_rules! type_visitable_derive {
     };
 }
 
-type_visitable_derive!()
+type_visitable_derive!();

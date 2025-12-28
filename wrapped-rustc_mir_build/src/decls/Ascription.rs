@@ -4,4 +4,4 @@ macro_rules! Ascription {
     };
 }
 
-Ascription!()
+Ascription!();

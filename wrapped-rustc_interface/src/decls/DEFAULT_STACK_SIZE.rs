@@ -4,4 +4,4 @@ macro_rules! DEFAULT_STACK_SIZE {
     };
 }
 
-DEFAULT_STACK_SIZE!()
+DEFAULT_STACK_SIZE!();

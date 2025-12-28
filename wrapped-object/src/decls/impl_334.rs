@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Item!();
-        ElfSymbol!();
-        ElfSymbolIterator!();
-        ReadRef!();
         FileHeader!();
+        Item!();
+        ReadRef!();
+        ElfSymbolIterator!();
+        ElfSymbol!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_334 {
     };
 }
 
-impl_334!()
+impl_334!();

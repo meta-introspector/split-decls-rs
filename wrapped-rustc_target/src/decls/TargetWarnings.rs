@@ -4,4 +4,4 @@ macro_rules! TargetWarnings {
     };
 }
 
-TargetWarnings!()
+TargetWarnings!();

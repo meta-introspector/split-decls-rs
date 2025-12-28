@@ -4,4 +4,4 @@ macro_rules! test_par_rchunks_exact_remainder {
     };
 }
 
-test_par_rchunks_exact_remainder!()
+test_par_rchunks_exact_remainder!();

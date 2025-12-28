@@ -4,4 +4,4 @@ macro_rules! RT_HTML {
     };
 }
 
-RT_HTML!()
+RT_HTML!();

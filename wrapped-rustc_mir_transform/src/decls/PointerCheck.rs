@@ -4,4 +4,4 @@ macro_rules! PointerCheck {
     };
 }
 
-PointerCheck!()
+PointerCheck!();

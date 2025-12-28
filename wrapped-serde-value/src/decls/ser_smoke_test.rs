@@ -11,4 +11,4 @@ macro_rules! ser_smoke_test {
     };
 }
 
-ser_smoke_test!()
+ser_smoke_test!();

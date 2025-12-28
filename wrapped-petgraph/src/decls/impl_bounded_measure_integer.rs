@@ -11,4 +11,4 @@ macro_rules! impl_bounded_measure_integer {
     };
 }
 
-impl_bounded_measure_integer!()
+impl_bounded_measure_integer!();

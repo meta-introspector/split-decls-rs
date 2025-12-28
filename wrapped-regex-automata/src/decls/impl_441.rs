@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        BuildError!();
-        NFA!();
-        BoundedBacktracker!();
         Builder!();
         Compiler!();
         Config!();
+        NFA!();
+        BoundedBacktracker!();
+        BuildError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_441 {
     };
 }
 
-impl_441!()
+impl_441!();

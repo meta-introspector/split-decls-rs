@@ -4,4 +4,4 @@ macro_rules! rev_byte_by_byte {
     };
 }
 
-rev_byte_by_byte!()
+rev_byte_by_byte!();

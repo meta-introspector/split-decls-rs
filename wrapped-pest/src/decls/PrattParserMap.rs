@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        InfixFn!();
         RuleType!();
         PostfixFn!();
         PrefixFn!();
         PrattParser!();
         Pair!();
+        InfixFn!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! PrattParserMap {
     };
 }
 
-PrattParserMap!()
+PrattParserMap!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RegionCtxt!();
         BorrowckInferCtxt!();
         UniversalRegionIndices!();
-        RegionCtxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_499 {
     };
 }
 
-impl_499!()
+impl_499!();

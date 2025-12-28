@@ -11,4 +11,4 @@ macro_rules! insert_tail {
     };
 }
 
-insert_tail!()
+insert_tail!();

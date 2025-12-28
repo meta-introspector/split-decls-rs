@@ -11,4 +11,4 @@ macro_rules! legacy_receiver_is_implemented {
     };
 }
 
-legacy_receiver_is_implemented!()
+legacy_receiver_is_implemented!();

@@ -4,4 +4,4 @@ macro_rules! IdentityProcMacroExpander {
     };
 }
 
-IdentityProcMacroExpander!()
+IdentityProcMacroExpander!();

@@ -12,4 +12,4 @@ macro_rules! status_code {
     };
 }
 
-status_code!()
+status_code!();

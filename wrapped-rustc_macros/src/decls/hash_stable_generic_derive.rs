@@ -11,4 +11,4 @@ macro_rules! hash_stable_generic_derive {
     };
 }
 
-hash_stable_generic_derive!()
+hash_stable_generic_derive!();

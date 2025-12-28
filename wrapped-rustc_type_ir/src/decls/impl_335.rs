@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Region!();
         Interner!();
-        GenericArg!();
-        GenericArgKind!();
         OpaqueTypeKey!();
+        GenericArg!();
+        Region!();
+        GenericArgKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_335 {
     };
 }
 
-impl_335!()
+impl_335!();

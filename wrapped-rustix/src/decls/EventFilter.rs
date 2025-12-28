@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Pid!();
         UserDefinedFlags!();
         Signal!();
+        Pid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EventFilter {
     };
 }
 
-EventFilter!()
+EventFilter!();

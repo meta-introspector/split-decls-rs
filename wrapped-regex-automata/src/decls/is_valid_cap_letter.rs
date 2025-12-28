@@ -4,4 +4,4 @@ macro_rules! is_valid_cap_letter {
     };
 }
 
-is_valid_cap_letter!()
+is_valid_cap_letter!();

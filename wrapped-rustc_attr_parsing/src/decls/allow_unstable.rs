@@ -4,4 +4,4 @@ macro_rules! allow_unstable {
     };
 }
 
-allow_unstable!()
+allow_unstable!();

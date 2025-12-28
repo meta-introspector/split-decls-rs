@@ -4,4 +4,4 @@ macro_rules! NonBindingLetSub {
     };
 }
 
-NonBindingLetSub!()
+NonBindingLetSub!();

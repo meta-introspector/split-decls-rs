@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImageNtHeaders64!();
         PeSection!();
+        ImageNtHeaders64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PeSection64 {
     };
 }
 
-PeSection64!()
+PeSection64!();

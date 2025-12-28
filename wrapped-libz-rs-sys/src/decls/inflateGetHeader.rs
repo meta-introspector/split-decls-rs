@@ -4,4 +4,4 @@ macro_rules! inflateGetHeader {
     };
 }
 
-inflateGetHeader!()
+inflateGetHeader!();

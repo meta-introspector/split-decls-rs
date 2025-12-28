@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Uniform!();
-        Open01!();
         StandardUniform!();
+        Open01!();
+        Uniform!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! OpenClosed01 {
     };
 }
 
-OpenClosed01!()
+OpenClosed01!();

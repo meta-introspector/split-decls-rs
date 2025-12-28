@@ -4,4 +4,4 @@ macro_rules! execute_cloned {
     };
 }
 
-execute_cloned!()
+execute_cloned!();

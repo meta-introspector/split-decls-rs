@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SliceRead!();
         Result!();
+        SliceRead!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! from_slice {
     };
 }
 
-from_slice!()
+from_slice!();

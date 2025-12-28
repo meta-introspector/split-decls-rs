@@ -4,4 +4,4 @@ macro_rules! GRANTHA {
     };
 }
 
-GRANTHA!()
+GRANTHA!();

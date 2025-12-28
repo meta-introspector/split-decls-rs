@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GroupType!();
         ShouldEmit!();
+        GroupType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Stage {
     };
 }
 
-Stage!()
+Stage!();

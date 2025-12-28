@@ -4,4 +4,4 @@ macro_rules! PR_SET_SECCOMP {
     };
 }
 
-PR_SET_SECCOMP!()
+PR_SET_SECCOMP!();

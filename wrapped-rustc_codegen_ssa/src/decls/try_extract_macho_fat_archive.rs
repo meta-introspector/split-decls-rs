@@ -4,4 +4,4 @@ macro_rules! try_extract_macho_fat_archive {
     };
 }
 
-try_extract_macho_fat_archive!()
+try_extract_macho_fat_archive!();

@@ -4,4 +4,4 @@ macro_rules! PR_SET_VMA {
     };
 }
 
-PR_SET_VMA!()
+PR_SET_VMA!();

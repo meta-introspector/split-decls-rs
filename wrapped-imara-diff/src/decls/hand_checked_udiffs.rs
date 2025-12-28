@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BasicLineDiffPrinter!();
-        Diff!();
         UnifiedDiffConfig!();
-        Algorithm!();
         InternedInput!();
+        Algorithm!();
+        Diff!();
+        BasicLineDiffPrinter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! hand_checked_udiffs {
     };
 }
 
-hand_checked_udiffs!()
+hand_checked_udiffs!();

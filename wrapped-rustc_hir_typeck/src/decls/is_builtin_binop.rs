@@ -11,4 +11,4 @@ macro_rules! is_builtin_binop {
     };
 }
 
-is_builtin_binop!()
+is_builtin_binop!();

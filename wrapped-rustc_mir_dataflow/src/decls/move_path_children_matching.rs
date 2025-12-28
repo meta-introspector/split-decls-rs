@@ -11,4 +11,4 @@ macro_rules! move_path_children_matching {
     };
 }
 
-move_path_children_matching!()
+move_path_children_matching!();

@@ -4,4 +4,4 @@ macro_rules! add_dep {
     };
 }
 
-add_dep!()
+add_dep!();

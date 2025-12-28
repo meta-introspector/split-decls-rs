@@ -4,4 +4,4 @@ macro_rules! is_rust_hash {
     };
 }
 
-is_rust_hash!()
+is_rust_hash!();

@@ -12,4 +12,4 @@ macro_rules! thin_to_thick {
     };
 }
 
-thin_to_thick!()
+thin_to_thick!();

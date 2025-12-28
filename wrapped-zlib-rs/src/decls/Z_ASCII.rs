@@ -4,4 +4,4 @@ macro_rules! Z_ASCII {
     };
 }
 
-Z_ASCII!()
+Z_ASCII!();

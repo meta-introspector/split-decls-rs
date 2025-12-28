@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         ReadRef!();
         Pod!();
-        Result!();
         StringTable!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FileAux {
     };
 }
 
-FileAux!()
+FileAux!();

@@ -4,4 +4,4 @@ macro_rules! SimdIntrinsicArgConst {
     };
 }
 
-SimdIntrinsicArgConst!()
+SimdIntrinsicArgConst!();

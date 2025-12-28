@@ -11,4 +11,4 @@ macro_rules! test_os_rng {
     };
 }
 
-test_os_rng!()
+test_os_rng!();

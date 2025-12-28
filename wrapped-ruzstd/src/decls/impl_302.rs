@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        BitReaderReversed!();
+        FSEDecoder!();
+        Entry!();
+        FSEDecoderError!();
         FSETable!();
         State!();
-        FSEDecoder!();
-        FSEDecoderError!();
-        Entry!();
+        BitReaderReversed!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_302 {
     };
 }
 
-impl_302!()
+impl_302!();

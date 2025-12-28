@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U32!();
         U16!();
+        U32!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ImageOptionalHeader32 {
     };
 }
 
-ImageOptionalHeader32!()
+ImageOptionalHeader32!();

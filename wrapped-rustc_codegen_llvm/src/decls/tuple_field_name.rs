@@ -4,4 +4,4 @@ macro_rules! tuple_field_name {
     };
 }
 
-tuple_field_name!()
+tuple_field_name!();

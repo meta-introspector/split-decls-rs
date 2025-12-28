@@ -4,4 +4,4 @@ macro_rules! impl_self_is_guaranteed_unsized {
     };
 }
 
-impl_self_is_guaranteed_unsized!()
+impl_self_is_guaranteed_unsized!();

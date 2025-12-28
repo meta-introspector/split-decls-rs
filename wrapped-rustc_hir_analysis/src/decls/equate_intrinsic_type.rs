@@ -11,4 +11,4 @@ macro_rules! equate_intrinsic_type {
     };
 }
 
-equate_intrinsic_type!()
+equate_intrinsic_type!();

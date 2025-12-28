@@ -5,4 +5,4 @@ macro_rules! parse_test_cfg {
     };
 }
 
-parse_test_cfg!()
+parse_test_cfg!();

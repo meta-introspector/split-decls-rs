@@ -4,4 +4,4 @@ macro_rules! R_IA64_SEGREL64LSB {
     };
 }
 
-R_IA64_SEGREL64LSB!()
+R_IA64_SEGREL64LSB!();

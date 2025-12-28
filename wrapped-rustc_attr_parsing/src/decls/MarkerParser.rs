@@ -4,4 +4,4 @@ macro_rules! MarkerParser {
     };
 }
 
-MarkerParser!()
+MarkerParser!();

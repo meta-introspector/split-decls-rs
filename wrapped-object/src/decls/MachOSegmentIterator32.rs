@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endianness!();
         Endian!();
-        MachHeader32!();
+        Endianness!();
         MachOSegmentIterator!();
+        MachHeader32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MachOSegmentIterator32 {
     };
 }
 
-MachOSegmentIterator32!()
+MachOSegmentIterator32!();

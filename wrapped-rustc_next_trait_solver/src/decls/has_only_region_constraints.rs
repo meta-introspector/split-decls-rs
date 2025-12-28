@@ -4,4 +4,4 @@ macro_rules! has_only_region_constraints {
     };
 }
 
-has_only_region_constraints!()
+has_only_region_constraints!();

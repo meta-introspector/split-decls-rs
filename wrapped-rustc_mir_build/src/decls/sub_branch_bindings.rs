@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PatternExtraData!();
         MatchTreeSubBranch!();
-        SubpatternBindings!();
+        PatternExtraData!();
         Binding!();
+        SubpatternBindings!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! sub_branch_bindings {
     };
 }
 
-sub_branch_bindings!()
+sub_branch_bindings!();

@@ -4,4 +4,4 @@ macro_rules! TYPESHIFT {
     };
 }
 
-TYPESHIFT!()
+TYPESHIFT!();

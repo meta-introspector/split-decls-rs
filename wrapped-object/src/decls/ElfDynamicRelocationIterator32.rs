@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Endian!();
         Endianness!();
         ElfDynamicRelocationIterator!();
-        Endian!();
         FileHeader32!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ElfDynamicRelocationIterator32 {
     };
 }
 
-ElfDynamicRelocationIterator32!()
+ElfDynamicRelocationIterator32!();

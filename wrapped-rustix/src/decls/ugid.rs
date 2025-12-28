@@ -4,4 +4,4 @@ macro_rules! ugid {
     };
 }
 
-ugid!()
+ugid!();

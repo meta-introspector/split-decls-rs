@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AttrVec!();
         ModSpans!();
         Walkable!();
-        AttrVec!();
         Item!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Crate {
     };
 }
 
-Crate!()
+Crate!();

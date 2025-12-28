@@ -4,4 +4,4 @@ macro_rules! LC_LOADFVMLIB {
     };
 }
 
-LC_LOADFVMLIB!()
+LC_LOADFVMLIB!();

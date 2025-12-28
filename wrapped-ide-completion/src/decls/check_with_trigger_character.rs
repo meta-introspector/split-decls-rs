@@ -4,4 +4,4 @@ macro_rules! check_with_trigger_character {
     };
 }
 
-check_with_trigger_character!()
+check_with_trigger_character!();

@@ -4,4 +4,4 @@ macro_rules! UnusedVarRemoveFieldSugg {
     };
 }
 
-UnusedVarRemoveFieldSugg!()
+UnusedVarRemoveFieldSugg!();

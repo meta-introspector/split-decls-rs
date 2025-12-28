@@ -4,4 +4,4 @@ macro_rules! XMC_TD {
     };
 }
 
-XMC_TD!()
+XMC_TD!();

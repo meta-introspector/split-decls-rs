@@ -4,4 +4,4 @@ macro_rules! is_call_like {
     };
 }
 
-is_call_like!()
+is_call_like!();

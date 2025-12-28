@@ -4,4 +4,4 @@ macro_rules! StreamingContextConsistencyTester {
     };
 }
 
-StreamingContextConsistencyTester!()
+StreamingContextConsistencyTester!();

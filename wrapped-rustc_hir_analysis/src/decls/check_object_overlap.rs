@@ -4,4 +4,4 @@ macro_rules! check_object_overlap {
     };
 }
 
-check_object_overlap!()
+check_object_overlap!();

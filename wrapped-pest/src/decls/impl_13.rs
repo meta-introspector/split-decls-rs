@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ParseAttempts!();
         IsWhitespaceFn!();
         RuleType!();
-        ParseAttempts!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

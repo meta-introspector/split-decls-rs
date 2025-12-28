@@ -4,4 +4,4 @@ macro_rules! assist_order_field_struct {
     };
 }
 
-assist_order_field_struct!()
+assist_order_field_struct!();

@@ -4,4 +4,4 @@ macro_rules! CachedLlbb {
     };
 }
 
-CachedLlbb!()
+CachedLlbb!();

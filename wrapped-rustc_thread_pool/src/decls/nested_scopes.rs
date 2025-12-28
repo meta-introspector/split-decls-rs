@@ -13,4 +13,4 @@ macro_rules! nested_scopes {
     };
 }
 
-nested_scopes!()
+nested_scopes!();

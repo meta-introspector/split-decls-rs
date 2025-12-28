@@ -11,4 +11,4 @@ macro_rules! handle_extract_string_constants {
     };
 }
 
-handle_extract_string_constants!()
+handle_extract_string_constants!();

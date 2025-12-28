@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        EncodeMode!();
         MfType!();
+        FastEncoderMode!();
         LzmaEncoder!();
         NormalEncoderMode!();
-        EncodeMode!();
-        FastEncoderMode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_184 {
     };
 }
 
-impl_184!()
+impl_184!();

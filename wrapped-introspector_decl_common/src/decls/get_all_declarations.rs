@@ -11,4 +11,4 @@ macro_rules! get_all_declarations {
     };
 }
 
-get_all_declarations!()
+get_all_declarations!();

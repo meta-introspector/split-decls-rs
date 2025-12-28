@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        UsefulnessCtxt!();
+        MatchArm!();
         UsefulnessReport!();
         Matrix!();
-        PlaceValidity!();
-        MatchArm!();
-        UsefulnessCtxt!();
         Usefulness!();
         PatCx!();
+        PlaceValidity!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! compute_match_usefulness {
     };
 }
 
-compute_match_usefulness!()
+compute_match_usefulness!();

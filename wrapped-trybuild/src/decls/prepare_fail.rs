@@ -11,4 +11,4 @@ macro_rules! prepare_fail {
     };
 }
 
-prepare_fail!()
+prepare_fail!();

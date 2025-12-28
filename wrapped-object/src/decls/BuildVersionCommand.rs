@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BuildToolVersion!();
         U32!();
         Endian!();
+        BuildToolVersion!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! BuildVersionCommand {
     };
 }
 
-BuildVersionCommand!()
+BuildVersionCommand!();

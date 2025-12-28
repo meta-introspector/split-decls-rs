@@ -4,4 +4,4 @@ macro_rules! is_horizontal_whitespace {
     };
 }
 
-is_horizontal_whitespace!()
+is_horizontal_whitespace!();

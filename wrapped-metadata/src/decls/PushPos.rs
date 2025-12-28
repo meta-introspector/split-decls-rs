@@ -4,4 +4,4 @@ macro_rules! PushPos {
     };
 }
 
-PushPos!()
+PushPos!();

@@ -4,4 +4,4 @@ macro_rules! LzipMember {
     };
 }
 
-LzipMember!()
+LzipMember!();

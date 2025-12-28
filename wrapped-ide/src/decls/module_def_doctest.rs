@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UpdateTest!();
         Runnable!();
-        NavigationTarget!();
-        RunnableKind!();
         TestId!();
+        RunnableKind!();
+        NavigationTarget!();
+        UpdateTest!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! module_def_doctest {
     };
 }
 
-module_def_doctest!()
+module_def_doctest!();

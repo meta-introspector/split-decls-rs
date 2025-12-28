@@ -4,4 +4,4 @@ macro_rules! dataflow {
     };
 }
 
-dataflow!()
+dataflow!();

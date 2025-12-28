@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DepNode!();
         DepKind!();
+        DepNode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! size_asserts {
     };
 }
 
-size_asserts!()
+size_asserts!();

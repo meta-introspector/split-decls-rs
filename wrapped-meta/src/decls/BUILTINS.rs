@@ -4,4 +4,4 @@ macro_rules! BUILTINS {
     };
 }
 
-BUILTINS!()
+BUILTINS!();

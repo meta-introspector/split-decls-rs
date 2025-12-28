@@ -4,4 +4,4 @@ macro_rules! UnusedAssignPassed {
     };
 }
 
-UnusedAssignPassed!()
+UnusedAssignPassed!();

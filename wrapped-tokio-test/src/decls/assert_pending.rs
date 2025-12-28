@@ -4,4 +4,4 @@ macro_rules! assert_pending {
     };
 }
 
-assert_pending!()
+assert_pending!();

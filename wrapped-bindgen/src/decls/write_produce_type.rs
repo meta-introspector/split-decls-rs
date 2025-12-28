@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Config!();
         Param!();
         ParamHint!();
+        Config!();
         TokenStream!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! write_produce_type {
     };
 }
 
-write_produce_type!()
+write_produce_type!();

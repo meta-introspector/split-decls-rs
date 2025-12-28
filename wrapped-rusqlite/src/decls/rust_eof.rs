@@ -11,4 +11,4 @@ macro_rules! rust_eof {
     };
 }
 
-rust_eof!()
+rust_eof!();

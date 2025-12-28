@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_ARM_V7EM {
     };
 }
 
-CPU_SUBTYPE_ARM_V7EM!()
+CPU_SUBTYPE_ARM_V7EM!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ImageNtHeaders64!();
-        PeFile64!();
         PeComdatSectionIterator!();
+        PeFile64!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PeComdatSectionIterator64 {
     };
 }
 
-PeComdatSectionIterator64!()
+PeComdatSectionIterator64!();

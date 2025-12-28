@@ -4,4 +4,4 @@ macro_rules! zalsa {
     };
 }
 
-zalsa!()
+zalsa!();

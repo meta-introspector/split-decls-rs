@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CanonicalComposition!();
         CanonicalCompositionBorrowed!();
+        CanonicalComposition!();
         Baked!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

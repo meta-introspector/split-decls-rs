@@ -4,4 +4,4 @@ macro_rules! macro_rules_fixtures_tt {
     };
 }
 
-macro_rules_fixtures_tt!()
+macro_rules_fixtures_tt!();

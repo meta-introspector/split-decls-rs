@@ -4,4 +4,4 @@ macro_rules! D_CODES {
     };
 }
 
-D_CODES!()
+D_CODES!();

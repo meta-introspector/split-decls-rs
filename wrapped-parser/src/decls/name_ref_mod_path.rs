@@ -11,4 +11,4 @@ macro_rules! name_ref_mod_path {
     };
 }
 
-name_ref_mod_path!()
+name_ref_mod_path!();

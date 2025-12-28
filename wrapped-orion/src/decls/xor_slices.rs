@@ -4,4 +4,4 @@ macro_rules! xor_slices {
     };
 }
 
-xor_slices!()
+xor_slices!();

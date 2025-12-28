@@ -4,4 +4,4 @@ macro_rules! find_assignments {
     };
 }
 
-find_assignments!()
+find_assignments!();

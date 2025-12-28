@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PikeVM!();
         ActiveStates!();
+        PikeVM!();
         FollowEpsilon!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Cache {
     };
 }
 
-Cache!()
+Cache!();

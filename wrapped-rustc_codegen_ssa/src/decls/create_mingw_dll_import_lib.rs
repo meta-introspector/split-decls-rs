@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ErrorWritingDEFFile!();
-        ErrorCallingDllTool!();
         ImportLibraryItem!();
         Command!();
+        ErrorCallingDllTool!();
+        ErrorWritingDEFFile!();
         DlltoolFailImportLibrary!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! create_mingw_dll_import_lib {
     };
 }
 
-create_mingw_dll_import_lib!()
+create_mingw_dll_import_lib!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Choice!();
-        Parser!();
         Needed!();
         IResult!();
+        Parser!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! alt {
     };
 }
 
-alt!()
+alt!();

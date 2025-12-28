@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DFA!();
         Match!();
         Input!();
-        Anchored!();
-        Regex!();
         Cache!();
-        NFA!();
+        Anchored!();
         MatchError!();
+        DFA!();
+        Regex!();
+        NFA!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_276 {
     };
 }
 
-impl_276!()
+impl_276!();

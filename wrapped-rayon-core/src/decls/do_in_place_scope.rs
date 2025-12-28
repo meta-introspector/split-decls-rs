@@ -12,4 +12,4 @@ macro_rules! do_in_place_scope {
     };
 }
 
-do_in_place_scope!()
+do_in_place_scope!();

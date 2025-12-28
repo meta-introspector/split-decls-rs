@@ -11,4 +11,4 @@ macro_rules! I64Bytes {
     };
 }
 
-I64Bytes!()
+I64Bytes!();

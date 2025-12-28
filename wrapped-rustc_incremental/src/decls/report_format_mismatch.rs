@@ -4,4 +4,4 @@ macro_rules! report_format_mismatch {
     };
 }
 
-report_format_mismatch!()
+report_format_mismatch!();

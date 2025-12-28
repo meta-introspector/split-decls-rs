@@ -12,4 +12,4 @@ macro_rules! invalid_raw_value {
     };
 }
 
-invalid_raw_value!()
+invalid_raw_value!();

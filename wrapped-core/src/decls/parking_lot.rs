@@ -4,4 +4,4 @@ macro_rules! parking_lot {
     };
 }
 
-parking_lot!()
+parking_lot!();

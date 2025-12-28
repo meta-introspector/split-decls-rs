@@ -4,4 +4,4 @@ macro_rules! extract_def_id_from_arg {
     };
 }
 
-extract_def_id_from_arg!()
+extract_def_id_from_arg!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        TypingMode!();
+        Interner!();
         InferCtxtLike!();
         ClauseKind!();
-        TypingMode!();
         ParamEnv!();
-        Interner!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! may_use_unstable_feature {
     };
 }
 
-may_use_unstable_feature!()
+may_use_unstable_feature!();

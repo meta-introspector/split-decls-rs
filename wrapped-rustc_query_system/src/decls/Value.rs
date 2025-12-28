@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DepContext!();
         CycleError!();
+        DepContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Value {
     };
 }
 
-Value!()
+Value!();

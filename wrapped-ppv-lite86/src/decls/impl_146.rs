@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        BSwap!();
+        Machine!();
         Avx2Machine!();
         YesS3!();
-        YesS4!();
-        Swap64!();
         RotateEachWord32!();
-        Machine!();
+        YesS4!();
         RotateEachWord64!();
+        Swap64!();
+        BSwap!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_146 {
     };
 }
 
-impl_146!()
+impl_146!();

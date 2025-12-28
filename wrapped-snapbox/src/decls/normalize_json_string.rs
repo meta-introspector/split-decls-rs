@@ -4,4 +4,4 @@ macro_rules! normalize_json_string {
     };
 }
 
-normalize_json_string!()
+normalize_json_string!();

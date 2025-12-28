@@ -4,4 +4,4 @@ macro_rules! Transparency {
     };
 }
 
-Transparency!()
+Transparency!();

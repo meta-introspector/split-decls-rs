@@ -4,4 +4,4 @@ macro_rules! scrub_attrs {
     };
 }
 
-scrub_attrs!()
+scrub_attrs!();

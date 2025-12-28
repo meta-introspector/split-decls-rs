@@ -4,4 +4,4 @@ macro_rules! load_proc_macro {
     };
 }
 
-load_proc_macro!()
+load_proc_macro!();

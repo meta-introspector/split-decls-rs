@@ -11,4 +11,4 @@ macro_rules! reparse_fuzz_tests {
     };
 }
 
-reparse_fuzz_tests!()
+reparse_fuzz_tests!();

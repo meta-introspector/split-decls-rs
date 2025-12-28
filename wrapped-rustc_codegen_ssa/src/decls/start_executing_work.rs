@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        CrateInfo!();
-        WorkerFatalError!();
+        ModuleConfig!();
         CguMessage!();
-        CompiledModules!();
         WorkItemResult!();
-        CodegenContext!();
-        SharedEmitter!();
-        ErrorCreatingRemarkDir!();
-        ModuleCodegen!();
-        MainThreadState!();
-        Message!();
+        WorkerFatalError!();
+        CompiledModules!();
+        CrateInfo!();
         WorkItem!();
         ExtraBackendMethods!();
-        ModuleConfig!();
+        ModuleCodegen!();
+        SharedEmitter!();
+        MainThreadState!();
+        ErrorCreatingRemarkDir!();
+        Message!();
+        CodegenContext!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! start_executing_work {
     };
 }
 
-start_executing_work!()
+start_executing_work!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ClassSet!();
         Span!();
+        ClassSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ClassBracketed {
     };
 }
 
-ClassBracketed!()
+ClassBracketed!();

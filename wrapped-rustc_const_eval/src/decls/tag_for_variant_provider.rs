@@ -12,4 +12,4 @@ macro_rules! tag_for_variant_provider {
     };
 }
 
-tag_for_variant_provider!()
+tag_for_variant_provider!();

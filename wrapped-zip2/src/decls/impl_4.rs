@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Aes192!();
-        Cipher!();
-        AesCtrZipKeyStream!();
+        Aes128!();
         Aes256!();
         AesMode!();
-        Aes128!();
+        Aes192!();
+        AesCtrZipKeyStream!();
+        Cipher!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

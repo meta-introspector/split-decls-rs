@@ -4,4 +4,4 @@ macro_rules! inftrees {
     };
 }
 
-inftrees!()
+inftrees!();

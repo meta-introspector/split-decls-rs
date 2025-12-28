@@ -4,4 +4,4 @@ macro_rules! module {
     };
 }
 
-module!()
+module!();

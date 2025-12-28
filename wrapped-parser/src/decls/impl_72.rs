@@ -1,13 +1,16 @@
 macro_rules! deps {
     () => {
-        Rule!();
+        Parser!();
+        Marker!();
+        Event!();
+        CompletedMarker!();
     };
 }
 
 macro_rules! impl_72 {
     () => {
         deps!();
-        impl Rule { pub fn all_rules () -> & 'static [Rule] { & [Rule :: r#WHITESPACE , Rule :: r#COMMENT , Rule :: r#line_terminator , Rule :: r#executable_document , Rule :: r#executable_definition , Rule :: r#operation_definition , Rule :: r#named_operation_definition , Rule :: r#variable_definitions , Rule :: r#variable_definition , Rule :: r#selection_set , Rule :: r#selection , Rule :: r#field , Rule :: r#alias , Rule :: r#fragment_spread , Rule :: r#inline_fragment , Rule :: r#fragment_definition , Rule :: r#type_condition , Rule :: r#service_document , Rule :: r#type_system_definition , Rule :: r#schema_definition , Rule :: r#operation_type_definition , Rule :: r#type_definition , Rule :: r#scalar_type , Rule :: r#object_type , Rule :: r#implements_interfaces , Rule :: r#interface_type , Rule :: r#fields_definition , Rule :: r#field_definition , Rule :: r#union_type , Rule :: r#union_member_types , Rule :: r#enum_type , Rule :: r#enum_values , Rule :: r#enum_value_definition , Rule :: r#input_object_type , Rule :: r#input_fields_definition , Rule :: r#extend , Rule :: r#directive_definition , Rule :: r#repeatable , Rule :: r#directive_locations , Rule :: r#directive_location , Rule :: r#arguments_definition , Rule :: r#input_value_definition , Rule :: r#operation_type , Rule :: r#default_value , Rule :: r#type_ , Rule :: r#const_value , Rule :: r#value , Rule :: r#variable , Rule :: r#number , Rule :: r#float , Rule :: r#fractional , Rule :: r#exponent , Rule :: r#int , Rule :: r#string , Rule :: r#block_string_content , Rule :: r#block_string_character , Rule :: r#string_content , Rule :: r#string_character , Rule :: r#unicode_scalar_value_hex , Rule :: r#boolean , Rule :: r#null , Rule :: r#enum_value , Rule :: r#const_list , Rule :: r#list , Rule :: r#const_object , Rule :: r#object , Rule :: r#const_object_field , Rule :: r#object_field , Rule :: r#const_directives , Rule :: r#directives , Rule :: r#const_directive , Rule :: r#directive , Rule :: r#const_arguments , Rule :: r#arguments , Rule :: r#const_argument , Rule :: r#argument , Rule :: r#name_start , Rule :: r#name] } }
+        impl Marker { fn new (pos : u32) -> Marker { Marker { pos , bomb : DropBomb :: new ("Marker must be either completed or abandoned") } } # [doc = " Finishes the syntax tree node and assigns `kind` to it,"] # [doc = " and mark the create a `CompletedMarker` for possible future"] # [doc = " operation like `.precede()` to deal with forward_parent."] pub (crate) fn complete (mut self , p : & mut Parser < '_ > , kind : SyntaxKind) -> CompletedMarker { self . bomb . defuse () ; let idx = self . pos as usize ; match & mut p . events [idx] { Event :: Start { kind : slot , .. } => { * slot = kind ; } _ => unreachable ! () , } p . push_event (Event :: Finish) ; let end_pos = p . events . len () as u32 ; CompletedMarker :: new (self . pos , end_pos , kind) } # [doc = " Abandons the syntax tree node. All its children"] # [doc = " are attached to its parent instead."] pub (crate) fn abandon (mut self , p : & mut Parser < '_ >) { self . bomb . defuse () ; let idx = self . pos as usize ; if idx == p . events . len () - 1 { assert ! (matches ! (p . events . pop () , Some (Event :: Start { kind : TOMBSTONE , forward_parent : None }))) ; } } }
     };
 }
 

@@ -11,4 +11,4 @@ macro_rules! other_10 {
     };
 }
 
-other_10!()
+other_10!();

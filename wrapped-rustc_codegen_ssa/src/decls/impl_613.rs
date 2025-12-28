@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenErrors!();
         CodegenResults!();
+        CodegenErrors!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_613 {
     };
 }
 
-impl_613!()
+impl_613!();

@@ -11,4 +11,4 @@ macro_rules! ACCEL_TY_SIZE {
     };
 }
 
-ACCEL_TY_SIZE!()
+ACCEL_TY_SIZE!();

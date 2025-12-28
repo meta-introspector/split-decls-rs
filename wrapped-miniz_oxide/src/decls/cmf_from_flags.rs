@@ -4,4 +4,4 @@ macro_rules! cmf_from_flags {
     };
 }
 
-cmf_from_flags!()
+cmf_from_flags!();

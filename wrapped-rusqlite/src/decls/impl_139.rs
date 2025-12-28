@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         AuthContext!();
-        AuthAction!();
         Action!();
+        Result!();
+        AuthAction!();
         Authorization!();
         InnerConnection!();
-        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

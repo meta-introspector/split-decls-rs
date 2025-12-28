@@ -4,4 +4,4 @@ macro_rules! ConcatBytesInvalidSuggestion {
     };
 }
 
-ConcatBytesInvalidSuggestion!()
+ConcatBytesInvalidSuggestion!();

@@ -11,4 +11,4 @@ macro_rules! current_tagged_address_mode {
     };
 }
 
-current_tagged_address_mode!()
+current_tagged_address_mode!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Result!();
         Project!();
         Name!();
-        Result!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! build_test {
     };
 }
 
-build_test!()
+build_test!();

@@ -11,4 +11,4 @@ macro_rules! compression_ratio_at_level {
     };
 }
 
-compression_ratio_at_level!()
+compression_ratio_at_level!();

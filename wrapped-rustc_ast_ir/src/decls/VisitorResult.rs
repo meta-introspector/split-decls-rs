@@ -4,4 +4,4 @@ macro_rules! VisitorResult {
     };
 }
 
-VisitorResult!()
+VisitorResult!();

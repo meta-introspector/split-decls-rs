@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        File!();
         Symbol!();
-        Section!();
         AttributeTag!();
+        Section!();
+        File!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1174 {
     };
 }
 
-impl_1174!()
+impl_1174!();

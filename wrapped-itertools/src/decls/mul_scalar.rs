@@ -11,4 +11,4 @@ macro_rules! mul_scalar {
     };
 }
 
-mul_scalar!()
+mul_scalar!();

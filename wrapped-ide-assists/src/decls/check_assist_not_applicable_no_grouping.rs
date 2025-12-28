@@ -11,4 +11,4 @@ macro_rules! check_assist_not_applicable_no_grouping {
     };
 }
 
-check_assist_not_applicable_no_grouping!()
+check_assist_not_applicable_no_grouping!();

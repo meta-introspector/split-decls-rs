@@ -4,4 +4,4 @@ macro_rules! checkpoint {
     };
 }
 
-checkpoint!()
+checkpoint!();

@@ -4,4 +4,4 @@ macro_rules! ImportType {
     };
 }
 
-ImportType!()
+ImportType!();

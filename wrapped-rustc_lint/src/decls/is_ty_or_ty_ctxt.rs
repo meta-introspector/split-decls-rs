@@ -11,4 +11,4 @@ macro_rules! is_ty_or_ty_ctxt {
     };
 }
 
-is_ty_or_ty_ctxt!()
+is_ty_or_ty_ctxt!();

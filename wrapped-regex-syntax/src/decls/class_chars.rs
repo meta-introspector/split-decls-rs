@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Bytes!();
-        HirKind!();
-        Hir!();
         Class!();
+        Bytes!();
+        Hir!();
         ClassUnicode!();
+        HirKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! class_chars {
     };
 }
 
-class_chars!()
+class_chars!();

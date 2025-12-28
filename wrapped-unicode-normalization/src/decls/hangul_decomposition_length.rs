@@ -4,4 +4,4 @@ macro_rules! hangul_decomposition_length {
     };
 }
 
-hangul_decomposition_length!()
+hangul_decomposition_length!();

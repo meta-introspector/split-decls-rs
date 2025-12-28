@@ -46,4 +46,4 @@ macro_rules! llm_redundancy_impl {
     };
 }
 
-llm_redundancy_impl!()
+llm_redundancy_impl!();

@@ -11,4 +11,4 @@ macro_rules! DEFAULT_EDITION {
     };
 }
 
-DEFAULT_EDITION!()
+DEFAULT_EDITION!();

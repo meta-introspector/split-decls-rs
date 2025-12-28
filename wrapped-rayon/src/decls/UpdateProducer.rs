@@ -4,4 +4,4 @@ macro_rules! UpdateProducer {
     };
 }
 
-UpdateProducer!()
+UpdateProducer!();

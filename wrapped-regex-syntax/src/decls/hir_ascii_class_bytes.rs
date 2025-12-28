@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ClassBytesRange!();
         ClassAsciiKind!();
         ClassBytes!();
-        ClassBytesRange!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! hir_ascii_class_bytes {
     };
 }
 
-hir_ascii_class_bytes!()
+hir_ascii_class_bytes!();

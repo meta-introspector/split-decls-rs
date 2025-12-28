@@ -4,4 +4,4 @@ macro_rules! NeedsNonConstDrop {
     };
 }
 
-NeedsNonConstDrop!()
+NeedsNonConstDrop!();

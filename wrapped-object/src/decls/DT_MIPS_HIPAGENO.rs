@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_HIPAGENO {
     };
 }
 
-DT_MIPS_HIPAGENO!()
+DT_MIPS_HIPAGENO!();

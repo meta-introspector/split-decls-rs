@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        AliasTerm!();
-        UnevaluatedConst!();
-        AliasTermKind!();
-        AliasTyKind!();
-        Ty!();
-        GenericArg!();
         Interner!();
-        DefId!();
+        AliasTerm!();
+        GenericArg!();
+        AliasTermKind!();
         Term!();
-        GenericArgs!();
-        Const!();
         AliasTy!();
+        GenericArgs!();
+        DefId!();
+        AliasTyKind!();
+        Const!();
+        UnevaluatedConst!();
+        Ty!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_376 {
     };
 }
 
-impl_376!()
+impl_376!();

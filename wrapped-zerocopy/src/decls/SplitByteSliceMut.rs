@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SplitByteSlice!();
         ByteSliceMut!();
+        SplitByteSlice!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SplitByteSliceMut {
     };
 }
 
-SplitByteSliceMut!()
+SplitByteSliceMut!();

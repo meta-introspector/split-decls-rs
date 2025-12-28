@@ -4,4 +4,4 @@ macro_rules! Sha1Core {
     };
 }
 
-Sha1Core!()
+Sha1Core!();

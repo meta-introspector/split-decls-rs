@@ -12,4 +12,4 @@ macro_rules! concurrent_remove_remote_and_reuse {
     };
 }
 
-concurrent_remove_remote_and_reuse!()
+concurrent_remove_remote_and_reuse!();

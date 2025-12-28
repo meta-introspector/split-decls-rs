@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        StringTable!();
         Verdaux!();
         ReadRef!();
-        Result!();
+        StringTable!();
         Endian!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_443 {
     };
 }
 
-impl_443!()
+impl_443!();

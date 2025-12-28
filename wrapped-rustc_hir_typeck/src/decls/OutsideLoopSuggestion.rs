@@ -4,4 +4,4 @@ macro_rules! OutsideLoopSuggestion {
     };
 }
 
-OutsideLoopSuggestion!()
+OutsideLoopSuggestion!();

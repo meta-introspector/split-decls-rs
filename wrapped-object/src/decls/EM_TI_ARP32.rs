@@ -4,4 +4,4 @@ macro_rules! EM_TI_ARP32 {
     };
 }
 
-EM_TI_ARP32!()
+EM_TI_ARP32!();

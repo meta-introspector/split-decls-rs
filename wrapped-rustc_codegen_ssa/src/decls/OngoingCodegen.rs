@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Coordinator!();
-        ExtraBackendMethods!();
+        CguMessage!();
         SharedEmitterMain!();
         CrateInfo!();
-        CguMessage!();
+        ExtraBackendMethods!();
+        Coordinator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! OngoingCodegen {
     };
 }
 
-OngoingCodegen!()
+OngoingCodegen!();

@@ -11,4 +11,4 @@ macro_rules! socket_incoming_cpu {
     };
 }
 
-socket_incoming_cpu!()
+socket_incoming_cpu!();

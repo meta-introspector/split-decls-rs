@@ -4,4 +4,4 @@ macro_rules! rust_project_cfg_groups {
     };
 }
 
-rust_project_cfg_groups!()
+rust_project_cfg_groups!();

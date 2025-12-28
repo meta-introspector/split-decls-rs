@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        NodeIndex!();
-        StableGraph!();
-        GraphIndex!();
-        EdgeType!();
-        Directed!();
-        Time!();
         EdgeRef!();
+        Directed!();
+        NodeIndex!();
+        Time!();
+        EdgeType!();
+        GraphIndex!();
+        StableGraph!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! greedy_feedback_arc_set {
     };
 }
 
-greedy_feedback_arc_set!()
+greedy_feedback_arc_set!();

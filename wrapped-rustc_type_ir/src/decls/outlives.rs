@@ -4,4 +4,4 @@ macro_rules! outlives {
     };
 }
 
-outlives!()
+outlives!();

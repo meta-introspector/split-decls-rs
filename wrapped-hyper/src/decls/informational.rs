@@ -4,4 +4,4 @@ macro_rules! informational {
     };
 }
 
-informational!()
+informational!();

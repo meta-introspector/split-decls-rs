@@ -11,4 +11,4 @@ macro_rules! thir_tree {
     };
 }
 
-thir_tree!()
+thir_tree!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Runtime!();
         Data!();
-        Inline!();
         Result!();
         PathRuntime!();
         SourceFileRuntime!();
-        Runtime!();
+        Inline!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

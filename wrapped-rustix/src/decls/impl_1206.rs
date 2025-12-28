@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SpecialCodeIndex!();
-        SpecialCodes!();
         SpecialCode!();
+        SpecialCodes!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_1206 {
     };
 }
 
-impl_1206!()
+impl_1206!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BoundedBacktracker!();
         Input!();
         NFA!();
+        BoundedBacktracker!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! min_visited_capacity {
     };
 }
 
-min_visited_capacity!()
+min_visited_capacity!();

@@ -11,4 +11,4 @@ macro_rules! MAX_LEVEL {
     };
 }
 
-MAX_LEVEL!()
+MAX_LEVEL!();

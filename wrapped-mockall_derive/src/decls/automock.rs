@@ -4,4 +4,4 @@ macro_rules! automock {
     };
 }
 
-automock!()
+automock!();

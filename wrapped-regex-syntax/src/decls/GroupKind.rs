@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Flags!();
         CaptureName!();
+        Flags!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! GroupKind {
     };
 }
 
-GroupKind!()
+GroupKind!();

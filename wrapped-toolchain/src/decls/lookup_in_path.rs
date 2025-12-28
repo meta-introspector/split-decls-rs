@@ -4,4 +4,4 @@ macro_rules! lookup_in_path {
     };
 }
 
-lookup_in_path!()
+lookup_in_path!();

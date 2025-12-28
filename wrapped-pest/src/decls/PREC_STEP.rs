@@ -11,4 +11,4 @@ macro_rules! PREC_STEP {
     };
 }
 
-PREC_STEP!()
+PREC_STEP!();

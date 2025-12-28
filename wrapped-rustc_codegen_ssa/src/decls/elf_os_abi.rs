@@ -4,4 +4,4 @@ macro_rules! elf_os_abi {
     };
 }
 
-elf_os_abi!()
+elf_os_abi!();

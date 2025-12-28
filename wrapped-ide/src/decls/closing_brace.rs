@@ -4,4 +4,4 @@ macro_rules! closing_brace {
     };
 }
 
-closing_brace!()
+closing_brace!();

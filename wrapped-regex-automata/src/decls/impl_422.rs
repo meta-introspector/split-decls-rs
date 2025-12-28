@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NFA!();
-        RegexInfo!();
         Input!();
-        Prefilter!();
-        DFAEngine!();
         DFA!();
+        RegexInfo!();
+        DFAEngine!();
+        NFA!();
+        Prefilter!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_422 {
     };
 }
 
-impl_422!()
+impl_422!();

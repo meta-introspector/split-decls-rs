@@ -11,4 +11,4 @@ macro_rules! FoldMany1 {
     };
 }
 
-FoldMany1!()
+FoldMany1!();

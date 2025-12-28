@@ -4,4 +4,4 @@ macro_rules! map_while {
     };
 }
 
-map_while!()
+map_while!();

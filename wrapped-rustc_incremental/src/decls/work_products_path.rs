@@ -4,4 +4,4 @@ macro_rules! work_products_path {
     };
 }
 
-work_products_path!()
+work_products_path!();

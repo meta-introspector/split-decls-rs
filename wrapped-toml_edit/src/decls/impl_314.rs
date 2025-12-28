@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Table!();
-        TableEnumDeserializer!();
-        ArrayOfTables!();
         Value!();
-        Array!();
-        ValueDeserializer!();
-        InlineTable!();
-        ArrayDeserializer!();
-        Item!();
+        TableEnumDeserializer!();
         Deserializer!();
+        ArrayDeserializer!();
+        Table!();
+        Error!();
+        InlineTable!();
+        Item!();
+        Array!();
+        ArrayOfTables!();
+        ValueDeserializer!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_314 {
     };
 }
 
-impl_314!()
+impl_314!();

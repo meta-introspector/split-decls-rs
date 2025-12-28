@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pod!();
         ZipDataDescriptorBlock!();
+        Pod!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_219 {
     };
 }
 
-impl_219!()
+impl_219!();

@@ -4,4 +4,4 @@ macro_rules! clock {
     };
 }
 
-clock!()
+clock!();

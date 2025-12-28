@@ -4,4 +4,4 @@ macro_rules! expo2 {
     };
 }
 
-expo2!()
+expo2!();

@@ -4,4 +4,4 @@ macro_rules! IMAGE_SCN_SCALE_INDEX {
     };
 }
 
-IMAGE_SCN_SCALE_INDEX!()
+IMAGE_SCN_SCALE_INDEX!();

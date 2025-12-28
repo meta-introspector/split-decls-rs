@@ -4,4 +4,4 @@ macro_rules! S_COUNT {
     };
 }
 
-S_COUNT!()
+S_COUNT!();

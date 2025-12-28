@@ -11,4 +11,4 @@ macro_rules! validate_trait_object_ref_ty {
     };
 }
 
-validate_trait_object_ref_ty!()
+validate_trait_object_ref_ty!();

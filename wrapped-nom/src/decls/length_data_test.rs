@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Err!();
+        Error!();
         Needed!();
         ErrorKind!();
-        Err!();
         IResult!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! length_data_test {
     };
 }
 
-length_data_test!()
+length_data_test!();

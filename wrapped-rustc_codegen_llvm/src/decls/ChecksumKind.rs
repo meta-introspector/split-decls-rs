@@ -4,4 +4,4 @@ macro_rules! ChecksumKind {
     };
 }
 
-ChecksumKind!()
+ChecksumKind!();

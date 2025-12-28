@@ -4,4 +4,4 @@ macro_rules! AsLog {
     };
 }
 
-AsLog!()
+AsLog!();

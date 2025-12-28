@@ -4,4 +4,4 @@ macro_rules! FP_ILOGB0 {
     };
 }
 
-FP_ILOGB0!()
+FP_ILOGB0!();

@@ -4,4 +4,4 @@ macro_rules! invalid_include_no_string {
     };
 }
 
-invalid_include_no_string!()
+invalid_include_no_string!();

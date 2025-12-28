@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BSwap!();
-        MultiLane!();
+        Vec4!();
         Swap64!();
         Machine!();
-        Vec4!();
+        MultiLane!();
+        BSwap!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

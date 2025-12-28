@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueryContext!();
         QueryJobId!();
+        QueryContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! print_query_stack {
     };
 }
 
-print_query_stack!()
+print_query_stack!();

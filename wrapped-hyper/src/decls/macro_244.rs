@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UserDataPointer!();
         Error!();
+        UserDataPointer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_244 {
     };
 }
 
-macro_244!()
+macro_244!();

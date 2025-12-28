@@ -4,4 +4,4 @@ macro_rules! get_test_path {
     };
 }
 
-get_test_path!()
+get_test_path!();

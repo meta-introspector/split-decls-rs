@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Round!();
         FpResult!();
+        Round!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! cbrt_round {
     };
 }
 
-cbrt_round!()
+cbrt_round!();

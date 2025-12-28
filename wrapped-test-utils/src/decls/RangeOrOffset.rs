@@ -4,4 +4,4 @@ macro_rules! RangeOrOffset {
     };
 }
 
-RangeOrOffset!()
+RangeOrOffset!();

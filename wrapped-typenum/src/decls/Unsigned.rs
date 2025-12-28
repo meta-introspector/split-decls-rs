@@ -4,4 +4,4 @@ macro_rules! Unsigned {
     };
 }
 
-Unsigned!()
+Unsigned!();

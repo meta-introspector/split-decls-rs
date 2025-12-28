@@ -11,4 +11,4 @@ macro_rules! construct_hmac_key {
     };
 }
 
-construct_hmac_key!()
+construct_hmac_key!();

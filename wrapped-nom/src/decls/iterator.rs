@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Parser!();
-        IResult!();
         ParserIterator!();
+        ParseError!();
+        State!();
         Error!();
         Input!();
-        State!();
-        ParseError!();
+        IResult!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! iterator {
     };
 }
 
-iterator!()
+iterator!();

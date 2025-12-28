@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_SRO32 {
     };
 }
 
-R_MICROBLAZE_SRO32!()
+R_MICROBLAZE_SRO32!();

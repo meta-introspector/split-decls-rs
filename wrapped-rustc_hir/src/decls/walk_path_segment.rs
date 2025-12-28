@@ -12,4 +12,4 @@ macro_rules! walk_path_segment {
     };
 }
 
-walk_path_segment!()
+walk_path_segment!();

@@ -4,4 +4,4 @@ macro_rules! value_analysis {
     };
 }
 
-value_analysis!()
+value_analysis!();

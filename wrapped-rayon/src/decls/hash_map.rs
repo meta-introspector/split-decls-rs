@@ -4,4 +4,4 @@ macro_rules! hash_map {
     };
 }
 
-hash_map!()
+hash_map!();

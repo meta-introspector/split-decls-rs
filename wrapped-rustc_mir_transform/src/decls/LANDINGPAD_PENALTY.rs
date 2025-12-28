@@ -4,4 +4,4 @@ macro_rules! LANDINGPAD_PENALTY {
     };
 }
 
-LANDINGPAD_PENALTY!()
+LANDINGPAD_PENALTY!();

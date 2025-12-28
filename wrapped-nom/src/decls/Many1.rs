@@ -11,4 +11,4 @@ macro_rules! Many1 {
     };
 }
 
-Many1!()
+Many1!();

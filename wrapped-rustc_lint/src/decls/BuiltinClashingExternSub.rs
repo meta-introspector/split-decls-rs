@@ -4,4 +4,4 @@ macro_rules! BuiltinClashingExternSub {
     };
 }
 
-BuiltinClashingExternSub!()
+BuiltinClashingExternSub!();

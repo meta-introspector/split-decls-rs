@@ -10,4 +10,4 @@ macro_rules! ssr_blockexpr_match_trailing_expr {
     };
 }
 
-ssr_blockexpr_match_trailing_expr!()
+ssr_blockexpr_match_trailing_expr!();

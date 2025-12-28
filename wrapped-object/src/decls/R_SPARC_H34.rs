@@ -4,4 +4,4 @@ macro_rules! R_SPARC_H34 {
     };
 }
 
-R_SPARC_H34!()
+R_SPARC_H34!();

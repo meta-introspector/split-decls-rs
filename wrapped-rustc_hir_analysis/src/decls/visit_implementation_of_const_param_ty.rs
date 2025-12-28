@@ -13,4 +13,4 @@ macro_rules! visit_implementation_of_const_param_ty {
     };
 }
 
-visit_implementation_of_const_param_ty!()
+visit_implementation_of_const_param_ty!();

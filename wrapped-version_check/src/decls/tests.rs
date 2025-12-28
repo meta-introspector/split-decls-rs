@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Channel!();
         Version!();
+        Channel!();
     };
 }
 
@@ -50,4 +50,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

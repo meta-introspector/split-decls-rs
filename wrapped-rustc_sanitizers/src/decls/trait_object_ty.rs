@@ -4,4 +4,4 @@ macro_rules! trait_object_ty {
     };
 }
 
-trait_object_ty!()
+trait_object_ty!();

@@ -11,4 +11,4 @@ macro_rules! array_vec {
     };
 }
 
-array_vec!()
+array_vec!();

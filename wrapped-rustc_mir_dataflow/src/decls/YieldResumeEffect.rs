@@ -4,4 +4,4 @@ macro_rules! YieldResumeEffect {
     };
 }
 
-YieldResumeEffect!()
+YieldResumeEffect!();

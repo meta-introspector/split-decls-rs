@@ -4,4 +4,4 @@ macro_rules! R_PARISC_NONE {
     };
 }
 
-R_PARISC_NONE!()
+R_PARISC_NONE!();

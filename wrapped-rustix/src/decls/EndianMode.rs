@@ -4,4 +4,4 @@ macro_rules! EndianMode {
     };
 }
 
-EndianMode!()
+EndianMode!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        DiagnosticHandlers!();
+        CodegenDiagnosticsStage!();
+        FileType!();
         ModuleLlvm!();
+        DiagnosticHandlers!();
+        LlvmError!();
+        LlvmCodegenBackend!();
+        ThinBuffer!();
         WriteBytecode!();
         CopyBitcode!();
-        LlvmError!();
-        ThinBuffer!();
-        FileType!();
-        LlvmCodegenBackend!();
         LLVMRustResult!();
-        CodegenDiagnosticsStage!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! codegen {
     };
 }
 
-codegen!()
+codegen!();

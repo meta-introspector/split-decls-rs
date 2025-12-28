@@ -4,4 +4,4 @@ macro_rules! stop_watch {
     };
 }
 
-stop_watch!()
+stop_watch!();

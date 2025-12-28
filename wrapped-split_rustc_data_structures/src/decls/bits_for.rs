@@ -11,4 +11,4 @@ macro_rules! bits_for {
     };
 }
 
-bits_for!()
+bits_for!();

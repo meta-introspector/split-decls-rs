@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ResultsVisitor!();
         ResultsCursor!();
+        ResultsVisitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Results {
     };
 }
 
-Results!()
+Results!();

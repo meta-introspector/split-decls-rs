@@ -11,4 +11,4 @@ macro_rules! get_field_config {
     };
 }
 
-get_field_config!()
+get_field_config!();

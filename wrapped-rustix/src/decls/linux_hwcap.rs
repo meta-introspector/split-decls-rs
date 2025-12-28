@@ -4,4 +4,4 @@ macro_rules! linux_hwcap {
     };
 }
 
-linux_hwcap!()
+linux_hwcap!();

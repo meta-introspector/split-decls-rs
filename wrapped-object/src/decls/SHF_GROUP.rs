@@ -11,4 +11,4 @@ macro_rules! SHF_GROUP {
     };
 }
 
-SHF_GROUP!()
+SHF_GROUP!();

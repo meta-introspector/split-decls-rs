@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_DEBUG {
     };
 }
 
-SHT_MIPS_DEBUG!()
+SHT_MIPS_DEBUG!();

@@ -4,4 +4,4 @@ macro_rules! StableOrd {
     };
 }
 
-StableOrd!()
+StableOrd!();

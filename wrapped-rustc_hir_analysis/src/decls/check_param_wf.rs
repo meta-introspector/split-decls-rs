@@ -4,4 +4,4 @@ macro_rules! check_param_wf {
     };
 }
 
-check_param_wf!()
+check_param_wf!();

@@ -4,4 +4,4 @@ macro_rules! TP_CALLBACK_ENVIRON_V3_0_0 {
     };
 }
 
-TP_CALLBACK_ENVIRON_V3_0_0!()
+TP_CALLBACK_ENVIRON_V3_0_0!();

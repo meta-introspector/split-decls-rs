@@ -4,4 +4,4 @@ macro_rules! ConstContinueUnknownJumpTarget {
     };
 }
 
-ConstContinueUnknownJumpTarget!()
+ConstContinueUnknownJumpTarget!();

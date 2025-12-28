@@ -11,4 +11,4 @@ macro_rules! set_ipv6_freebind {
     };
 }
 
-set_ipv6_freebind!()
+set_ipv6_freebind!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Id!();
+        LabelText!();
         Node!();
         Edge!();
         Labeller!();
         LabelledGraphWithEscStrs!();
-        LabelText!();
+        Id!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

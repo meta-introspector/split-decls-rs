@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PoloniusFacts!();
         PoloniusLocationTable!();
+        PoloniusFacts!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! emit_move_facts {
     };
 }
 
-emit_move_facts!()
+emit_move_facts!();

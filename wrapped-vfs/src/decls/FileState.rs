@@ -4,4 +4,4 @@ macro_rules! FileState {
     };
 }
 
-FileState!()
+FileState!();

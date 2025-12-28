@@ -4,4 +4,4 @@ macro_rules! keyword {
     };
 }
 
-keyword!()
+keyword!();

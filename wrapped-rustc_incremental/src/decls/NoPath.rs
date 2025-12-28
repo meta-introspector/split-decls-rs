@@ -4,4 +4,4 @@ macro_rules! NoPath {
     };
 }
 
-NoPath!()
+NoPath!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         ScopeBase!();
-        HeapJob!();
-        WorkerThread!();
-        JobFifo!();
         BroadcastContext!();
+        ArcJob!();
+        HeapJob!();
         ScopePtr!();
         ScopeFifo!();
+        JobFifo!();
         Registry!();
-        ArcJob!();
+        WorkerThread!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

@@ -4,4 +4,4 @@ macro_rules! EM_COLDFIRE {
     };
 }
 
-EM_COLDFIRE!()
+EM_COLDFIRE!();

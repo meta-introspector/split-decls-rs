@@ -4,4 +4,4 @@ macro_rules! MMsgHdr {
     };
 }
 
-MMsgHdr!()
+MMsgHdr!();

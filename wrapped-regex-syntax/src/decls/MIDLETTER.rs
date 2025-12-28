@@ -4,4 +4,4 @@ macro_rules! MIDLETTER {
     };
 }
 
-MIDLETTER!()
+MIDLETTER!();

@@ -4,4 +4,4 @@ macro_rules! UncheckedAdvice {
     };
 }
 
-UncheckedAdvice!()
+UncheckedAdvice!();

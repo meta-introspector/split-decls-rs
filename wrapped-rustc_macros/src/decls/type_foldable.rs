@@ -4,4 +4,4 @@ macro_rules! type_foldable {
     };
 }
 
-type_foldable!()
+type_foldable!();

@@ -4,4 +4,4 @@ macro_rules! value_of_attribute {
     };
 }
 
-value_of_attribute!()
+value_of_attribute!();

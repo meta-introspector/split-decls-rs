@@ -11,4 +11,4 @@ macro_rules! pipe_with {
     };
 }
 
-pipe_with!()
+pipe_with!();

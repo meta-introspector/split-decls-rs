@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        InitLocation!();
+        MovePathResult!();
+        InitKind!();
+        Init!();
+        MoveDataBuilder!();
         MoveOut!();
         LookupResult!();
-        InitLocation!();
-        Init!();
-        MovePathResult!();
-        MoveDataBuilder!();
-        InitKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_211 {
     };
 }
 
-impl_211!()
+impl_211!();

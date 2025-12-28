@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        NonfiniteBehavior!();
+        IeeeFloat!();
         Category!();
         Semantics!();
-        IeeeFloat!();
-        NonfiniteBehavior!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

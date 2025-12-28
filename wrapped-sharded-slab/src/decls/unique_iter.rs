@@ -11,4 +11,4 @@ macro_rules! unique_iter {
     };
 }
 
-unique_iter!()
+unique_iter!();

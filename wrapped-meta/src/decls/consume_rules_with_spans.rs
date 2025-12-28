@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RuleType!();
-        ParserRule!();
         Rule!();
+        ParserRule!();
+        RuleType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! consume_rules_with_spans {
     };
 }
 
-consume_rules_with_spans!()
+consume_rules_with_spans!();

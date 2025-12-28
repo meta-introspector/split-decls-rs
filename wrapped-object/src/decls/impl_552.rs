@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Bytes!();
         FunctionStartsIterator!();
+        Bytes!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_552 {
     };
 }
 
-impl_552!()
+impl_552!();

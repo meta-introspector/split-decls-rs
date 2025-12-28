@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        StrLit!();
         Lit!();
         StrStyle!();
-        StrLit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

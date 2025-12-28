@@ -11,4 +11,4 @@ macro_rules! target_spec_enum {
     };
 }
 
-target_spec_enum!()
+target_spec_enum!();

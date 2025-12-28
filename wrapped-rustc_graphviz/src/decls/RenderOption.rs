@@ -4,4 +4,4 @@ macro_rules! RenderOption {
     };
 }
 
-RenderOption!()
+RenderOption!();

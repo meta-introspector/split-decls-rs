@@ -11,4 +11,4 @@ macro_rules! quote_label {
     };
 }
 
-quote_label!()
+quote_label!();

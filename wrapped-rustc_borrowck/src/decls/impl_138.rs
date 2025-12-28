@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BindingFinder!();
-        MirBorrowckCtxt!();
         AccessKind!();
         BorrowedContentSource!();
+        BindingFinder!();
         AmpMutSugg!();
+        MirBorrowckCtxt!();
         CaptureVarCause!();
     };
 }
@@ -25,4 +25,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

@@ -14,4 +14,4 @@ macro_rules! blake2b_core {
     };
 }
 
-blake2b_core!()
+blake2b_core!();

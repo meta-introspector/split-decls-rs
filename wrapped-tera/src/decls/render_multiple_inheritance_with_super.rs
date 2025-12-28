@@ -12,4 +12,4 @@ macro_rules! render_multiple_inheritance_with_super {
     };
 }
 
-render_multiple_inheritance_with_super!()
+render_multiple_inheritance_with_super!();

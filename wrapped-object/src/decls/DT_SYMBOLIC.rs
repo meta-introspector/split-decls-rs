@@ -4,4 +4,4 @@ macro_rules! DT_SYMBOLIC {
     };
 }
 
-DT_SYMBOLIC!()
+DT_SYMBOLIC!();

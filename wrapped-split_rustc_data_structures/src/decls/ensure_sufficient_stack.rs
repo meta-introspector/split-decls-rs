@@ -4,4 +4,4 @@ macro_rules! ensure_sufficient_stack {
     };
 }
 
-ensure_sufficient_stack!()
+ensure_sufficient_stack!();

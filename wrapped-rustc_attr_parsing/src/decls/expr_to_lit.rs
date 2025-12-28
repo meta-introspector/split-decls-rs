@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SuffixedLiteralInAttribute!();
         ShouldEmit!();
+        SuffixedLiteralInAttribute!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! expr_to_lit {
     };
 }
 
-expr_to_lit!()
+expr_to_lit!();

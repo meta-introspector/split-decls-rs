@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Deserializer!();
         Error!();
         Array!();
-        ArrayOfTables!();
-        ValueDeserializer!();
-        Value!();
-        Item!();
         InlineTable!();
-        ArrayDeserializer!();
-        TableDeserializer!();
+        ArrayOfTables!();
+        Value!();
         Table!();
+        ArrayDeserializer!();
+        ValueDeserializer!();
+        Item!();
+        TableDeserializer!();
+        Deserializer!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_318 {
     };
 }
 
-impl_318!()
+impl_318!();

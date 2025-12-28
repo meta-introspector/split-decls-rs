@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Size!();
         Niche!();
         WrappingRange!();
+        Size!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

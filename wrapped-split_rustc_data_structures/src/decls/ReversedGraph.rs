@@ -4,4 +4,4 @@ macro_rules! ReversedGraph {
     };
 }
 
-ReversedGraph!()
+ReversedGraph!();

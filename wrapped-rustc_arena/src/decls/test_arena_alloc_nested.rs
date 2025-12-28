@@ -11,4 +11,4 @@ macro_rules! test_arena_alloc_nested {
     };
 }
 
-test_arena_alloc_nested!()
+test_arena_alloc_nested!();

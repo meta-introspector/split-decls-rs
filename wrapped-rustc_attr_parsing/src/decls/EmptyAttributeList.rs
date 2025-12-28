@@ -4,4 +4,4 @@ macro_rules! EmptyAttributeList {
     };
 }
 
-EmptyAttributeList!()
+EmptyAttributeList!();

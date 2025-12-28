@@ -4,4 +4,4 @@ macro_rules! pat_column {
     };
 }
 
-pat_column!()
+pat_column!();

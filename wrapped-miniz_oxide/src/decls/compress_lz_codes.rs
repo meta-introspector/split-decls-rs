@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        HuffmanOxide!();
         OutputBufferOxide!();
+        HuffmanOxide!();
+        Result!();
         BitBuffer!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! compress_lz_codes {
     };
 }
 
-compress_lz_codes!()
+compress_lz_codes!();

@@ -4,4 +4,4 @@ macro_rules! handle_is_console {
     };
 }
 
-handle_is_console!()
+handle_is_console!();

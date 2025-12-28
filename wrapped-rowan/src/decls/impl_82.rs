@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxElement!();
         Language!();
+        SyntaxElement!();
         NodeOrToken!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

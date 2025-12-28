@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DropTreeBuilder!();
-        Unwind!();
         CFG!();
+        DropTreeBuilder!();
         CoroutineDrop!();
+        Unwind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_163 {
     };
 }
 
-impl_163!()
+impl_163!();

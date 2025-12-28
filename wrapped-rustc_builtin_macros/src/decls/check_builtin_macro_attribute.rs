@@ -4,4 +4,4 @@ macro_rules! check_builtin_macro_attribute {
     };
 }
 
-check_builtin_macro_attribute!()
+check_builtin_macro_attribute!();

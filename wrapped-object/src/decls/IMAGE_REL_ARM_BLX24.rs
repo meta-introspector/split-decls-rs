@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ARM_BLX24 {
     };
 }
 
-IMAGE_REL_ARM_BLX24!()
+IMAGE_REL_ARM_BLX24!();

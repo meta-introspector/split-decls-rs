@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Dynamic!();
         Endian!();
         U64!();
+        Dynamic!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Dyn64 {
     };
 }
 
-Dyn64!()
+Dyn64!();

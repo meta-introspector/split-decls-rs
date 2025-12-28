@@ -4,4 +4,4 @@ macro_rules! R_METAG_RELATIVE {
     };
 }
 
-R_METAG_RELATIVE!()
+R_METAG_RELATIVE!();

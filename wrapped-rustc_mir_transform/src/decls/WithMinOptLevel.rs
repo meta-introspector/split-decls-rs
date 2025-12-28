@@ -4,4 +4,4 @@ macro_rules! WithMinOptLevel {
     };
 }
 
-WithMinOptLevel!()
+WithMinOptLevel!();

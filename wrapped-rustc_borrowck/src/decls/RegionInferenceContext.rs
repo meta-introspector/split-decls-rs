@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        RegionDefinition!();
-        UniversalRegionRelations!();
-        ConstraintSccs!();
-        UniverseInfo!();
-        LivenessValues!();
-        NormalConstraintGraph!();
         RegionValues!();
-        OutlivesConstraintSet!();
+        NormalConstraintGraph!();
         RegionTracker!();
         TypeTest!();
+        LivenessValues!();
+        OutlivesConstraintSet!();
+        UniversalRegionRelations!();
+        UniverseInfo!();
+        ConstraintSccs!();
+        RegionDefinition!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! RegionInferenceContext {
     };
 }
 
-RegionInferenceContext!()
+RegionInferenceContext!();

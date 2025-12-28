@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IAsyncOperationWithProgress!();
-        ReadyState!();
         ReadyOperationWithProgress!();
+        ReadyState!();
+        IAsyncOperationWithProgress!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_150 {
     };
 }
 
-impl_150!()
+impl_150!();

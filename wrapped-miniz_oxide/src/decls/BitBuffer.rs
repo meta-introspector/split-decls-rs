@@ -4,4 +4,4 @@ macro_rules! BitBuffer {
     };
 }
 
-BitBuffer!()
+BitBuffer!();

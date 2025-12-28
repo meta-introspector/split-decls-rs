@@ -4,4 +4,4 @@ macro_rules! TopInfo {
     };
 }
 
-TopInfo!()
+TopInfo!();

@@ -4,4 +4,4 @@ macro_rules! Tag {
     };
 }
 
-Tag!()
+Tag!();

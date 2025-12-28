@@ -4,4 +4,4 @@ macro_rules! get_mut_span_in_struct_field {
     };
 }
 
-get_mut_span_in_struct_field!()
+get_mut_span_in_struct_field!();

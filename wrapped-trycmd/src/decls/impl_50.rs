@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Mode!();
         Case!();
-        Runner!();
+        Mode!();
         BinRegistry!();
+        Runner!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

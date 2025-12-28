@@ -11,4 +11,4 @@ macro_rules! test_dict_parsing {
     };
 }
 
-test_dict_parsing!()
+test_dict_parsing!();

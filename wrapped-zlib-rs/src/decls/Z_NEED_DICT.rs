@@ -4,4 +4,4 @@ macro_rules! Z_NEED_DICT {
     };
 }
 
-Z_NEED_DICT!()
+Z_NEED_DICT!();

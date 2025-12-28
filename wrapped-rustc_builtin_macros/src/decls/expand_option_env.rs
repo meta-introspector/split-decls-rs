@@ -11,4 +11,4 @@ macro_rules! expand_option_env {
     };
 }
 
-expand_option_env!()
+expand_option_env!();

@@ -4,4 +4,4 @@ macro_rules! ssr {
     };
 }
 
-ssr!()
+ssr!();

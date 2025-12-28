@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FileHeader32!();
-        ProgramHeader!();
-        ProgramHeader32!();
         Endian!();
+        ProgramHeader!();
+        FileHeader32!();
+        ProgramHeader32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_300 {
     };
 }
 
-impl_300!()
+impl_300!();

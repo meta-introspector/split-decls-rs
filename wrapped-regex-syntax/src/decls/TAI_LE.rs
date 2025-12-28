@@ -4,4 +4,4 @@ macro_rules! TAI_LE {
     };
 }
 
-TAI_LE!()
+TAI_LE!();

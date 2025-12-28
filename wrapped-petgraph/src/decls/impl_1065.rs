@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Time!();
+        IndexType!();
         Create!();
         UnionFind!();
-        IndexType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1065 {
     };
 }
 
-impl_1065!()
+impl_1065!();

@@ -4,4 +4,4 @@ macro_rules! GLOBAL_INIT {
     };
 }
 
-GLOBAL_INIT!()
+GLOBAL_INIT!();

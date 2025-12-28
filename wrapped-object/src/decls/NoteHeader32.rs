@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
         Note!();
         U32!();
+        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! NoteHeader32 {
     };
 }
 
-NoteHeader32!()
+NoteHeader32!();

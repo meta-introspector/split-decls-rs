@@ -11,4 +11,4 @@ macro_rules! is_within_packed {
     };
 }
 
-is_within_packed!()
+is_within_packed!();

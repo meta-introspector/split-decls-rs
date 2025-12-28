@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        TypeVariableTable!();
+        InferCtxtInner!();
         TypeOutlivesConstraint!();
-        OpaqueTypeTable!();
-        UnificationTable!();
-        InferCtxtUndoLogs!();
+        TypeVariableValue!();
         ConstVidKey!();
         ProjectionCache!();
-        TypeVariableValue!();
-        InferCtxtInner!();
-        TypeVariableTable!();
+        OpaqueTypeTable!();
         RegionConstraintCollector!();
+        UnificationTable!();
+        InferCtxtUndoLogs!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_252 {
     };
 }
 
-impl_252!()
+impl_252!();

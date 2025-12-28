@@ -4,4 +4,4 @@ macro_rules! partitioning {
     };
 }
 
-partitioning!()
+partitioning!();

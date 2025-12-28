@@ -4,4 +4,4 @@ macro_rules! R_NDS32_GLOB_DAT {
     };
 }
 
-R_NDS32_GLOB_DAT!()
+R_NDS32_GLOB_DAT!();

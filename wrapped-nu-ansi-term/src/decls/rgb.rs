@@ -4,4 +4,4 @@ macro_rules! rgb {
     };
 }
 
-rgb!()
+rgb!();

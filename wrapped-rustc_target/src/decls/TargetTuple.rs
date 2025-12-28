@@ -4,4 +4,4 @@ macro_rules! TargetTuple {
     };
 }
 
-TargetTuple!()
+TargetTuple!();

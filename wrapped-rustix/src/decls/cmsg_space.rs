@@ -11,4 +11,4 @@ macro_rules! cmsg_space {
     };
 }
 
-cmsg_space!()
+cmsg_space!();

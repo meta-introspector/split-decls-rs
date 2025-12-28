@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         TypeFoldable!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DefId {
     };
 }
 
-DefId!()
+DefId!();

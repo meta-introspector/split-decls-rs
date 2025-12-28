@@ -4,4 +4,4 @@ macro_rules! check_mono_item {
     };
 }
 
-check_mono_item!()
+check_mono_item!();

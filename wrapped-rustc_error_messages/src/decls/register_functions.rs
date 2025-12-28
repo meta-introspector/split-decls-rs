@@ -11,4 +11,4 @@ macro_rules! register_functions {
     };
 }
 
-register_functions!()
+register_functions!();

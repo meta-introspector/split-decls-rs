@@ -4,4 +4,4 @@ macro_rules! TEMP_DB {
     };
 }
 
-TEMP_DB!()
+TEMP_DB!();

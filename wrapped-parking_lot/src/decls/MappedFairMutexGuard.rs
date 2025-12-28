@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FairMutexGuard!();
-        RawFairMutex!();
         MappedMutexGuard!();
+        RawFairMutex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MappedFairMutexGuard {
     };
 }
 
-MappedFairMutexGuard!()
+MappedFairMutexGuard!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnusedDelimsCtx!();
-        UnusedDelimLint!();
-        NoBoundsException!();
         EarlyContext!();
+        NoBoundsException!();
+        UnusedDelimLint!();
+        UnusedDelimsCtx!();
         UnusedParens!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_851 {
     };
 }
 
-impl_851!()
+impl_851!();

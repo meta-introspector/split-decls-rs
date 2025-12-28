@@ -4,4 +4,4 @@ macro_rules! ARM_THUMB_RELOC_BR22 {
     };
 }
 
-ARM_THUMB_RELOC_BR22!()
+ARM_THUMB_RELOC_BR22!();

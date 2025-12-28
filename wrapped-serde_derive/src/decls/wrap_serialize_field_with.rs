@@ -11,4 +11,4 @@ macro_rules! wrap_serialize_field_with {
     };
 }
 
-wrap_serialize_field_with!()
+wrap_serialize_field_with!();

@@ -4,4 +4,4 @@ macro_rules! R_PARISC_GNU_VTENTRY {
     };
 }
 
-R_PARISC_GNU_VTENTRY!()
+R_PARISC_GNU_VTENTRY!();

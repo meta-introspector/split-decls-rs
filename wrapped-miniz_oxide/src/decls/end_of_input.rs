@@ -12,4 +12,4 @@ macro_rules! end_of_input {
     };
 }
 
-end_of_input!()
+end_of_input!();

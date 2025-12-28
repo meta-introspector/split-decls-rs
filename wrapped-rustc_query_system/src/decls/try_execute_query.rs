@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        QueryConfig!();
         QueryJob!();
         QueryResult!();
+        QueryConfig!();
+        QueryContext!();
         Value!();
         DepNode!();
-        QueryContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! try_execute_query {
     };
 }
 
-try_execute_query!()
+try_execute_query!();

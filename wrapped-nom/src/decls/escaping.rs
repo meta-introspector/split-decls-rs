@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Err!();
-        Error!();
         Escaped!();
+        Err!();
         IResult!();
+        Error!();
         ErrorKind!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! escaping {
     };
 }
 
-escaping!()
+escaping!();

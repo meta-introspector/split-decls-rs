@@ -4,4 +4,4 @@ macro_rules! BuiltinDoubleNegationsAddParens {
     };
 }
 
-BuiltinDoubleNegationsAddParens!()
+BuiltinDoubleNegationsAddParens!();

@@ -4,4 +4,4 @@ macro_rules! ReplaceCommaWithSemicolon {
     };
 }
 
-ReplaceCommaWithSemicolon!()
+ReplaceCommaWithSemicolon!();

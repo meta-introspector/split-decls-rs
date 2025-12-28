@@ -4,4 +4,4 @@ macro_rules! LEN_SYM {
     };
 }
 
-LEN_SYM!()
+LEN_SYM!();

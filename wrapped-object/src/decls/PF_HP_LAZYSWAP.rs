@@ -4,4 +4,4 @@ macro_rules! PF_HP_LAZYSWAP {
     };
 }
 
-PF_HP_LAZYSWAP!()
+PF_HP_LAZYSWAP!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         V2!();
-        SymmetricKey!();
-        Generate!();
         Error!();
+        Generate!();
+        SymmetricKey!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

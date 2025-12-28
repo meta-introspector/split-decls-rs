@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Trait!();
         FieldBounds!();
         TraitBound!();
         ImplBlockBuilder!();
+        Trait!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! derive_from_bytes_union {
     };
 }
 
-derive_from_bytes_union!()
+derive_from_bytes_union!();

@@ -4,4 +4,4 @@ macro_rules! symbol_export_level {
     };
 }
 
-symbol_export_level!()
+symbol_export_level!();

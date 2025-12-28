@@ -4,4 +4,4 @@ macro_rules! intrinsics {
     };
 }
 
-intrinsics!()
+intrinsics!();

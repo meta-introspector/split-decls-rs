@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Pending!();
-        Error!();
         UserBody!();
+        Error!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_247 {
     };
 }
 
-impl_247!()
+impl_247!();

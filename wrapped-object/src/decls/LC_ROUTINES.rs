@@ -4,4 +4,4 @@ macro_rules! LC_ROUTINES {
     };
 }
 
-LC_ROUTINES!()
+LC_ROUTINES!();

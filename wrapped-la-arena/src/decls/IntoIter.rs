@@ -4,4 +4,4 @@ macro_rules! IntoIter {
     };
 }
 
-IntoIter!()
+IntoIter!();

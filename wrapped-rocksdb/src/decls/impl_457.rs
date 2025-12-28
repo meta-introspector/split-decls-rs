@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        DBPinnableSlice!();
+        DBAccess!();
+        TransactionDB!();
         ReadOptions!();
         Error!();
         AsColumnFamilyRef!();
-        TransactionDB!();
+        DBPinnableSlice!();
         ThreadMode!();
-        DBAccess!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_457 {
     };
 }
 
-impl_457!()
+impl_457!();

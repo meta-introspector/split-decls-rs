@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        SectionTable!();
+        Result!();
         SymbolTable!();
         Pod!();
-        ImageThunkData!();
         ImageFileHeader!();
         ReadRef!();
-        ImageOptionalHeader!();
-        Result!();
         DataDirectories!();
+        ImageThunkData!();
         Error!();
+        ImageOptionalHeader!();
+        SectionTable!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! ImageNtHeaders {
     };
 }
 
-ImageNtHeaders!()
+ImageNtHeaders!();

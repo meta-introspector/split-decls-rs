@@ -4,4 +4,4 @@ macro_rules! num_extra_bits_for_distance_code {
     };
 }
 
-num_extra_bits_for_distance_code!()
+num_extra_bits_for_distance_code!();

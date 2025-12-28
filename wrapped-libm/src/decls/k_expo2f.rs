@@ -4,4 +4,4 @@ macro_rules! k_expo2f {
     };
 }
 
-k_expo2f!()
+k_expo2f!();

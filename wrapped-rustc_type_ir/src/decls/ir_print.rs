@@ -4,4 +4,4 @@ macro_rules! ir_print {
     };
 }
 
-ir_print!()
+ir_print!();

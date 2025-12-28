@@ -11,4 +11,4 @@ macro_rules! force_from_dep_node {
     };
 }
 
-force_from_dep_node!()
+force_from_dep_node!();

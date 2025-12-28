@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         Safety!();
         AttrIdGenerator!();
+        Path!();
+        AttrStyle!();
         Attribute!();
         AttrArgs!();
-        AttrStyle!();
-        Path!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! mk_attr_word {
     };
 }
 
-mk_attr_word!()
+mk_attr_word!();

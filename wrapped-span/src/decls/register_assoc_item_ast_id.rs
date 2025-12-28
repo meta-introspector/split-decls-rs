@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ErasedAssocItemFileAstId!();
         AstIdNode!();
         ErasedFileAstId!();
-        ErasedHasNameFileAstId!();
         ErasedFileAstIdKind!();
+        ErasedHasNameFileAstId!();
+        ErasedAssocItemFileAstId!();
         ErasedAstIdNextIndexMap!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! register_assoc_item_ast_id {
     };
 }
 
-register_assoc_item_ast_id!()
+register_assoc_item_ast_id!();

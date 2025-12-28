@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Unit!();
         Location!();
+        Unit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Mode {
     };
 }
 
-Mode!()
+Mode!();

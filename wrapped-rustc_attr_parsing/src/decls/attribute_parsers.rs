@@ -3,13 +3,13 @@ macro_rules! deps {
         GroupType!();
         FinalizeFn!();
         AttributeParser!();
-        Early!();
-        Single!();
-        GroupTypeInnerAccept!();
-        WithoutArgs!();
-        Late!();
-        GroupTypeInner!();
         Combine!();
+        GroupTypeInner!();
+        Early!();
+        GroupTypeInnerAccept!();
+        Single!();
+        Late!();
+        WithoutArgs!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! attribute_parsers {
     };
 }
 
-attribute_parsers!()
+attribute_parsers!();

@@ -11,4 +11,4 @@ macro_rules! wmul_impl_usize {
     };
 }
 
-wmul_impl_usize!()
+wmul_impl_usize!();

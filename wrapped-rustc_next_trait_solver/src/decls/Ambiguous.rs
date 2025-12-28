@@ -4,4 +4,4 @@ macro_rules! Ambiguous {
     };
 }
 
-Ambiguous!()
+Ambiguous!();

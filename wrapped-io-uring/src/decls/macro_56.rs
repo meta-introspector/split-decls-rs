@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Entry!();
         DestinationSlot!();
+        Entry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_56 {
     };
 }
 
-macro_56!()
+macro_56!();

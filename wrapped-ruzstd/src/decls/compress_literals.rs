@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        BitWriter!();
         HuffmanTable!();
         HuffmanEncoder!();
-        BitWriter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! compress_literals {
     };
 }
 
-compress_literals!()
+compress_literals!();

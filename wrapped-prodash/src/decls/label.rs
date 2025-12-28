@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Unit!();
         Kind!();
+        Unit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! label {
     };
 }
 
-label!()
+label!();

@@ -4,4 +4,4 @@ macro_rules! print_version {
     };
 }
 
-print_version!()
+print_version!();

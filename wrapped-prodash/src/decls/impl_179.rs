@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Log!();
         Duration!();
+        Log!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_179 {
     };
 }
 
-impl_179!()
+impl_179!();

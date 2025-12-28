@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Edge!();
-        EdgesWalkerMut!();
-        IndexType!();
         EdgeIndex!();
+        EdgesWalkerMut!();
+        Edge!();
+        IndexType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_695 {
     };
 }
 
-impl_695!()
+impl_695!();

@@ -4,4 +4,4 @@ macro_rules! R_SPARC_SIZE64 {
     };
 }
 
-R_SPARC_SIZE64!()
+R_SPARC_SIZE64!();

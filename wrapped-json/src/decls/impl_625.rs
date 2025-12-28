@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        BoxedFromString!();
         Error!();
         Value!();
-        RawValue!();
-        BoxedFromString!();
-        Deserializer!();
         Result!();
+        RawValue!();
+        Deserializer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_625 {
     };
 }
 
-impl_625!()
+impl_625!();

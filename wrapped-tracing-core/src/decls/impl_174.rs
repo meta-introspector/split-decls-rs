@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Field!();
-        ValueSet!();
         Iter!();
-        Callsite!();
+        ValueSet!();
         Identifier!();
         FieldSet!();
+        Callsite!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_174 {
     };
 }
 
-impl_174!()
+impl_174!();

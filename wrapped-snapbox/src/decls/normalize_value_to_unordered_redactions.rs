@@ -11,4 +11,4 @@ macro_rules! normalize_value_to_unordered_redactions {
     };
 }
 
-normalize_value_to_unordered_redactions!()
+normalize_value_to_unordered_redactions!();

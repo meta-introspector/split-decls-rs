@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_RELATIVE {
     };
 }
 
-R_NIOS2_RELATIVE!()
+R_NIOS2_RELATIVE!();

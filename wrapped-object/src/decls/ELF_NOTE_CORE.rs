@@ -11,4 +11,4 @@ macro_rules! ELF_NOTE_CORE {
     };
 }
 
-ELF_NOTE_CORE!()
+ELF_NOTE_CORE!();

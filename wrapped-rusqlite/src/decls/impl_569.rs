@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         InValues!();
         Filters!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_569 {
     };
 }
 
-impl_569!()
+impl_569!();

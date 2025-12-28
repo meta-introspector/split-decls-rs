@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ParseError!();
+        Span!();
         ScalarKind!();
         StringBuilder!();
-        Span!();
         Raw!();
-        ParseError!();
         ErrorSink!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! decode_as {
     };
 }
 
-decode_as!()
+decode_as!();

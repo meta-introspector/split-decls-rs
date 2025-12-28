@@ -4,4 +4,4 @@ macro_rules! IntAsSIMD {
     };
 }
 
-IntAsSIMD!()
+IntAsSIMD!();

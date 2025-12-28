@@ -11,4 +11,4 @@ macro_rules! make_io_threads {
     };
 }
 
-make_io_threads!()
+make_io_threads!();

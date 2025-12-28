@@ -4,4 +4,4 @@ macro_rules! find_certs_dirs {
     };
 }
 
-find_certs_dirs!()
+find_certs_dirs!();

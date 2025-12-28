@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Path!();
         DelimArgs!();
         Walkable!();
+        Path!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MacCall {
     };
 }
 
-MacCall!()
+MacCall!();

@@ -4,4 +4,4 @@ macro_rules! DEFAULT_CMF {
     };
 }
 
-DEFAULT_CMF!()
+DEFAULT_CMF!();

@@ -4,4 +4,4 @@ macro_rules! RawKey {
     };
 }
 
-RawKey!()
+RawKey!();

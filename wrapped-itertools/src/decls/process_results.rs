@@ -11,4 +11,4 @@ macro_rules! process_results {
     };
 }
 
-process_results!()
+process_results!();

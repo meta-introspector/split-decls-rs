@@ -11,4 +11,4 @@ macro_rules! CCC_NOT_REORDERED {
     };
 }
 
-CCC_NOT_REORDERED!()
+CCC_NOT_REORDERED!();

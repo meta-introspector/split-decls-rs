@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         DatabaseKeyIndex!();
-        CycleHeadIdsIterator!();
         CycleHead!();
         CycleHeads!();
-        CycleHeadsIterator!();
         IterationCount!();
+        CycleHeadIdsIterator!();
+        CycleHeadsIterator!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

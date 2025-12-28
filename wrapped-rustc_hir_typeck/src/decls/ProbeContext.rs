@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Candidate!();
-        IsSuggestion!();
         CandidateSource!();
-        Mode!();
+        IsSuggestion!();
+        Candidate!();
         FnCtxt!();
+        Mode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ProbeContext {
     };
 }
 
-ProbeContext!()
+ProbeContext!();

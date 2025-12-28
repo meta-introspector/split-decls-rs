@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         HRESULT!();
         RPC_STATUS!();
-        Result!();
         WIN32_ERROR!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

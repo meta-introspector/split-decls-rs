@@ -4,4 +4,4 @@ macro_rules! AsCCharPtr {
     };
 }
 
-AsCCharPtr!()
+AsCCharPtr!();

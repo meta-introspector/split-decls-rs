@@ -4,4 +4,4 @@ macro_rules! METADATA_STRING_ID {
     };
 }
 
-METADATA_STRING_ID!()
+METADATA_STRING_ID!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         OwnedEntry!();
+        Config!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_195 {
     };
 }
 
-impl_195!()
+impl_195!();

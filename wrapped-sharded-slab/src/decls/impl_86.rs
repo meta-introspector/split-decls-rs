@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Clear!();
         Slot!();
         Lifecycle!();
-        Generation!();
         FreeList!();
+        Generation!();
         Config!();
-        Clear!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

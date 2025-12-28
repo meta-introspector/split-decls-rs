@@ -4,4 +4,4 @@ macro_rules! CargoConfigFileReader {
     };
 }
 
-CargoConfigFileReader!()
+CargoConfigFileReader!();

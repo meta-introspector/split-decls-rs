@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         ExportTarget!();
         ByteString!();
-        Result!();
         Error!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_689 {
     };
 }
 
-impl_689!()
+impl_689!();

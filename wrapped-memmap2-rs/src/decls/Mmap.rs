@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MmapOptions!();
         MmapMut!();
+        MmapOptions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Mmap {
     };
 }
 
-Mmap!()
+Mmap!();

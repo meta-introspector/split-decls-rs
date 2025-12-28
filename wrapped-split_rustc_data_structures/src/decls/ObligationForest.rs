@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ForestObligation!();
         ObligationTreeId!();
+        ForestObligation!();
         Node!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ObligationForest {
     };
 }
 
-ObligationForest!()
+ObligationForest!();

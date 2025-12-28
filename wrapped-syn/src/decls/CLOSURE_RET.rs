@@ -12,4 +12,4 @@ macro_rules! CLOSURE_RET {
     };
 }
 
-CLOSURE_RET!()
+CLOSURE_RET!();

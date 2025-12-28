@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        SubArchitecture!();
-        ReadRef!();
-        ImportName!();
         Error!();
-        Name!();
-        ImportObjectHeader!();
-        ByteString!();
         Result!();
+        ReadRef!();
         ImportType!();
+        ByteString!();
         Architecture!();
+        SubArchitecture!();
         ImportFile!();
+        ImportObjectHeader!();
+        Name!();
+        ImportName!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

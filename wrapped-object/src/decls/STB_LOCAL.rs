@@ -4,4 +4,4 @@ macro_rules! STB_LOCAL {
     };
 }
 
-STB_LOCAL!()
+STB_LOCAL!();

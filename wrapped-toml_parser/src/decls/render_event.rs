@@ -11,4 +11,4 @@ macro_rules! render_event {
     };
 }
 
-render_event!()
+render_event!();

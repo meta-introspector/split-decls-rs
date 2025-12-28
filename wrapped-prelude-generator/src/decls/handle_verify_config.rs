@@ -4,4 +4,4 @@ macro_rules! handle_verify_config {
     };
 }
 
-handle_verify_config!()
+handle_verify_config!();

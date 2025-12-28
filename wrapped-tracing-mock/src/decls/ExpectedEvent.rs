@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExpectedAncestry!();
+        ExpectedSpan!();
         ExpectedFields!();
         ExpectedMetadata!();
-        ExpectedSpan!();
+        ExpectedAncestry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ExpectedEvent {
     };
 }
 
-ExpectedEvent!()
+ExpectedEvent!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        DyldSubCacheEntryV2!();
-        DyldCacheMappingInfo!();
-        DyldCacheMappingSlice!();
-        DyldCacheMappingAndSlideInfo!();
-        Error!();
-        DyldCacheHeader!();
-        DyldCacheImageInfo!();
-        Endian!();
         Result!();
+        Error!();
+        DyldCacheMappingSlice!();
+        DyldCacheImageInfo!();
         DyldSubCacheEntryV1!();
-        DyldSubCacheSlice!();
+        DyldSubCacheEntryV2!();
         Architecture!();
+        DyldCacheMappingInfo!();
+        DyldSubCacheSlice!();
+        DyldCacheHeader!();
+        ReadRef!();
+        DyldCacheMappingAndSlideInfo!();
+        Endian!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_503 {
     };
 }
 
-impl_503!()
+impl_503!();

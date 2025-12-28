@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
-        SmallVec!();
         AttributeKind!();
+        SmallVec!();
+        CodegenCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! default_optimisation_attrs {
     };
 }
 
-default_optimisation_attrs!()
+default_optimisation_attrs!();

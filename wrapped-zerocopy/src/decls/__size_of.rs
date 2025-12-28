@@ -11,4 +11,4 @@ macro_rules! __size_of {
     };
 }
 
-__size_of!()
+__size_of!();

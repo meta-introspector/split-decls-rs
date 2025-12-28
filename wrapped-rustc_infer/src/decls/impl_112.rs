@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         RegionConstraintCollector!();
-        MiniGraph!();
-        CombinedSnapshot!();
         LeakCheck!();
+        CombinedSnapshot!();
+        MiniGraph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

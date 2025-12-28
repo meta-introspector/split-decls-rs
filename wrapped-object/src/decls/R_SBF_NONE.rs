@@ -4,4 +4,4 @@ macro_rules! R_SBF_NONE {
     };
 }
 
-R_SBF_NONE!()
+R_SBF_NONE!();

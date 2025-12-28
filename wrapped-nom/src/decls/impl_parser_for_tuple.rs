@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         OutputMode!();
-        Emit!();
-        Error!();
-        PResult!();
-        OutputM!();
         Parser!();
+        Error!();
+        OutputM!();
+        Emit!();
+        PResult!();
         ParseError!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_parser_for_tuple {
     };
 }
 
-impl_parser_for_tuple!()
+impl_parser_for_tuple!();

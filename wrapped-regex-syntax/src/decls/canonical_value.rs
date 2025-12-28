@@ -11,4 +11,4 @@ macro_rules! canonical_value {
     };
 }
 
-canonical_value!()
+canonical_value!();

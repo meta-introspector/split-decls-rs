@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WIN32_ERROR!();
-        Error!();
         HRESULT!();
+        Error!();
+        WIN32_ERROR!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

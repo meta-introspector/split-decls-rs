@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         CompressedData!();
-        CompressionFormat!();
-        Result!();
         Error!();
+        Result!();
+        CompressionFormat!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_935 {
     };
 }
 
-impl_935!()
+impl_935!();

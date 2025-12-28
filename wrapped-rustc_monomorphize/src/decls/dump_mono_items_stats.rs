@@ -4,4 +4,4 @@ macro_rules! dump_mono_items_stats {
     };
 }
 
-dump_mono_items_stats!()
+dump_mono_items_stats!();

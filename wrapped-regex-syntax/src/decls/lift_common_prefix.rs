@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Literal!();
+        HirKind!();
+        Hir!();
         Concat!();
         Result!();
-        Literal!();
-        Hir!();
-        HirKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! lift_common_prefix {
     };
 }
 
-lift_common_prefix!()
+lift_common_prefix!();

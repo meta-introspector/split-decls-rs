@@ -4,4 +4,4 @@ macro_rules! STYP_LOADER {
     };
 }
 
-STYP_LOADER!()
+STYP_LOADER!();

@@ -4,4 +4,4 @@ macro_rules! compose_hangul {
     };
 }
 
-compose_hangul!()
+compose_hangul!();

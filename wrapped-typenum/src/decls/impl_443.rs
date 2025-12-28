@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Bit!();
         PrivatePow!();
         UInt!();
-        Square!();
         Unsigned!();
         PrivatePowOut!();
+        Bit!();
+        Square!();
         B0!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_443 {
     };
 }
 
-impl_443!()
+impl_443!();

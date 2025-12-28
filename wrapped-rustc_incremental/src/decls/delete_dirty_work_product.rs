@@ -11,4 +11,4 @@ macro_rules! delete_dirty_work_product {
     };
 }
 
-delete_dirty_work_product!()
+delete_dirty_work_product!();

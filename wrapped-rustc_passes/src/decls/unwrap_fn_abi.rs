@@ -4,4 +4,4 @@ macro_rules! unwrap_fn_abi {
     };
 }
 
-unwrap_fn_abi!()
+unwrap_fn_abi!();

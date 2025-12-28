@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        KeyMut!();
         Item!();
         Value!();
-        KeyMut!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InlineTableIterMut {
     };
 }
 
-InlineTableIterMut!()
+InlineTableIterMut!();

@@ -4,4 +4,4 @@ macro_rules! FormatMode {
     };
 }
 
-FormatMode!()
+FormatMode!();

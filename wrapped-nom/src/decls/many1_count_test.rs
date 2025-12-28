@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        Err!();
         Many1Count!();
-        IResult!();
         Error!();
+        Err!();
+        ErrorKind!();
+        IResult!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! many1_count_test {
     };
 }
 
-many1_count_test!()
+many1_count_test!();

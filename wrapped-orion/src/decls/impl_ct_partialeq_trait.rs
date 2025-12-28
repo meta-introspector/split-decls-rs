@@ -4,4 +4,4 @@ macro_rules! impl_ct_partialeq_trait {
     };
 }
 
-impl_ct_partialeq_trait!()
+impl_ct_partialeq_trait!();

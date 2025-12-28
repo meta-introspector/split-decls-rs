@@ -11,4 +11,4 @@ macro_rules! from_graph6_representation {
     };
 }
 
-from_graph6_representation!()
+from_graph6_representation!();

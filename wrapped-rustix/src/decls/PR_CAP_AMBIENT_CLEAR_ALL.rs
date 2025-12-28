@@ -4,4 +4,4 @@ macro_rules! PR_CAP_AMBIENT_CLEAR_ALL {
     };
 }
 
-PR_CAP_AMBIENT_CLEAR_ALL!()
+PR_CAP_AMBIENT_CLEAR_ALL!();

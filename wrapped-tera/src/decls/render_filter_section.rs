@@ -11,4 +11,4 @@ macro_rules! render_filter_section {
     };
 }
 
-render_filter_section!()
+render_filter_section!();

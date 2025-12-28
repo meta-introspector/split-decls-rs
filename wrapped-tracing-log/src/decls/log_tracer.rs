@@ -4,4 +4,4 @@ macro_rules! log_tracer {
     };
 }
 
-log_tracer!()
+log_tracer!();

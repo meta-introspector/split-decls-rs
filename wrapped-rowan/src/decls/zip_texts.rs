@@ -11,4 +11,4 @@ macro_rules! zip_texts {
     };
 }
 
-zip_texts!()
+zip_texts!();

@@ -12,4 +12,4 @@ macro_rules! visit_array_of_tables {
     };
 }
 
-visit_array_of_tables!()
+visit_array_of_tables!();

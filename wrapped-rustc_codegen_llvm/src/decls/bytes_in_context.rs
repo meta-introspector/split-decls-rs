@@ -4,4 +4,4 @@ macro_rules! bytes_in_context {
     };
 }
 
-bytes_in_context!()
+bytes_in_context!();

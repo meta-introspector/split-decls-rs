@@ -4,4 +4,4 @@ macro_rules! unknown {
     };
 }
 
-unknown!()
+unknown!();

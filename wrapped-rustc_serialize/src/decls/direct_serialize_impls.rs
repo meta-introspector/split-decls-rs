@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Encoder!();
-        Decoder!();
-        Encodable!();
         Decodable!();
+        Encodable!();
+        Decoder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! direct_serialize_impls {
     };
 }
 
-direct_serialize_impls!()
+direct_serialize_impls!();

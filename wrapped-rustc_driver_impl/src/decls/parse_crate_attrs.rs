@@ -4,4 +4,4 @@ macro_rules! parse_crate_attrs {
     };
 }
 
-parse_crate_attrs!()
+parse_crate_attrs!();

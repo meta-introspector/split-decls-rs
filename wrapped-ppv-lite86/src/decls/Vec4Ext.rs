@@ -11,4 +11,4 @@ macro_rules! Vec4Ext {
     };
 }
 
-Vec4Ext!()
+Vec4Ext!();

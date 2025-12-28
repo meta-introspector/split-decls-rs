@@ -4,4 +4,4 @@ macro_rules! EF_ARM_ABI_FLOAT_HARD {
     };
 }
 
-EF_ARM_ABI_FLOAT_HARD!()
+EF_ARM_ABI_FLOAT_HARD!();

@@ -4,4 +4,4 @@ macro_rules! AsId {
     };
 }
 
-AsId!()
+AsId!();

@@ -4,4 +4,4 @@ macro_rules! AUX_SYM {
     };
 }
 
-AUX_SYM!()
+AUX_SYM!();

@@ -11,4 +11,4 @@ macro_rules! remove_watch {
     };
 }
 
-remove_watch!()
+remove_watch!();

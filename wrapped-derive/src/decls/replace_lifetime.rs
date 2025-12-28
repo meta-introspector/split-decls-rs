@@ -4,4 +4,4 @@ macro_rules! replace_lifetime {
     };
 }
 
-replace_lifetime!()
+replace_lifetime!();

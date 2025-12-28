@@ -11,4 +11,4 @@ macro_rules! extend_linearized_matrix {
     };
 }
 
-extend_linearized_matrix!()
+extend_linearized_matrix!();

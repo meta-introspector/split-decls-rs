@@ -4,4 +4,4 @@ macro_rules! R_MN10300_GOTPC32 {
     };
 }
 
-R_MN10300_GOTPC32!()
+R_MN10300_GOTPC32!();

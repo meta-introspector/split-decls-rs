@@ -4,4 +4,4 @@ macro_rules! RefCount {
     };
 }
 
-RefCount!()
+RefCount!();

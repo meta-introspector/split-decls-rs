@@ -11,4 +11,4 @@ macro_rules! rust_next {
     };
 }
 
-rust_next!()
+rust_next!();

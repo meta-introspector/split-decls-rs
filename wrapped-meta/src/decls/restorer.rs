@@ -4,4 +4,4 @@ macro_rules! restorer {
     };
 }
 
-restorer!()
+restorer!();

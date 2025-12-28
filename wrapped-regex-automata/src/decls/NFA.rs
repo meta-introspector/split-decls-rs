@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Inner!();
-        Match!();
-        Span!();
         DFA!();
+        Inner!();
+        Span!();
+        Match!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! NFA {
     };
 }
 
-NFA!()
+NFA!();

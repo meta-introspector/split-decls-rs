@@ -4,4 +4,4 @@ macro_rules! InvalidNullArgumentsDiag {
     };
 }
 
-InvalidNullArgumentsDiag!()
+InvalidNullArgumentsDiag!();

@@ -11,4 +11,4 @@ macro_rules! compile_examples {
     };
 }
 
-compile_examples!()
+compile_examples!();

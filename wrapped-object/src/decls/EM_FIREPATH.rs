@@ -4,4 +4,4 @@ macro_rules! EM_FIREPATH {
     };
 }
 
-EM_FIREPATH!()
+EM_FIREPATH!();

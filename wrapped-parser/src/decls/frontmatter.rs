@@ -4,4 +4,4 @@ macro_rules! frontmatter {
     };
 }
 
-frontmatter!()
+frontmatter!();

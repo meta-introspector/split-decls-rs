@@ -4,4 +4,4 @@ macro_rules! UnusedBuiltinAttribute {
     };
 }
 
-UnusedBuiltinAttribute!()
+UnusedBuiltinAttribute!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IAsyncOperation!();
         SyncState!();
+        IAsyncOperation!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Operation {
     };
 }
 
-Operation!()
+Operation!();

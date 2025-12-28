@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BoolLit!();
-        Literal!();
         TokenKind!();
+        BoolLit!();
         InvalidToken!();
+        Literal!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_tt_to_lit {
     };
 }
 
-impl_tt_to_lit!()
+impl_tt_to_lit!();

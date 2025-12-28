@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        PatCx!();
+        Constructor!();
         IntRange!();
         Matrix!();
         PatOrWild!();
-        Constructor!();
-        PatCx!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! collect_overlapping_range_endpoints {
     };
 }
 
-collect_overlapping_range_endpoints!()
+collect_overlapping_range_endpoints!();

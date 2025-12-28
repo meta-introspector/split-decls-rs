@@ -4,4 +4,4 @@ macro_rules! CmseOutputStackSpill {
     };
 }
 
-CmseOutputStackSpill!()
+CmseOutputStackSpill!();

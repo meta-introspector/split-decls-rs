@@ -4,4 +4,4 @@ macro_rules! get_pgo_sample_use_path {
     };
 }
 
-get_pgo_sample_use_path!()
+get_pgo_sample_use_path!();

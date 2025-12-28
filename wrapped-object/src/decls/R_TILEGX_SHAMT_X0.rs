@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_SHAMT_X0 {
     };
 }
 
-R_TILEGX_SHAMT_X0!()
+R_TILEGX_SHAMT_X0!();

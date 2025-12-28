@@ -4,4 +4,4 @@ macro_rules! LITUSE_ALPHA_ADDR {
     };
 }
 
-LITUSE_ALPHA_ADDR!()
+LITUSE_ALPHA_ADDR!();

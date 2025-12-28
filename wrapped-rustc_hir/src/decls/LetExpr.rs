@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ty!();
-        Pat!();
         LetStmt!();
+        Pat!();
+        Ty!();
         Expr!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! LetExpr {
     };
 }
 
-LetExpr!()
+LetExpr!();

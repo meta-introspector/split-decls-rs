@@ -4,4 +4,4 @@ macro_rules! DedupPredWithCount2CoalescePred {
     };
 }
 
-DedupPredWithCount2CoalescePred!()
+DedupPredWithCount2CoalescePred!();

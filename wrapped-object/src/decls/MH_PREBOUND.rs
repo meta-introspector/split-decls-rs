@@ -4,4 +4,4 @@ macro_rules! MH_PREBOUND {
     };
 }
 
-MH_PREBOUND!()
+MH_PREBOUND!();

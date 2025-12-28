@@ -4,4 +4,4 @@ macro_rules! MapWithFolder {
     };
 }
 
-MapWithFolder!()
+MapWithFolder!();

@@ -11,4 +11,4 @@ macro_rules! generate_expr {
     };
 }
 
-generate_expr!()
+generate_expr!();

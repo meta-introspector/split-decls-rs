@@ -4,4 +4,4 @@ macro_rules! is_never_block {
     };
 }
 
-is_never_block!()
+is_never_block!();

@@ -4,4 +4,4 @@ macro_rules! ARM_RELOC_PAIR {
     };
 }
 
-ARM_RELOC_PAIR!()
+ARM_RELOC_PAIR!();

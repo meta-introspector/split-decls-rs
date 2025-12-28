@@ -4,4 +4,4 @@ macro_rules! cancellation_token {
     };
 }
 
-cancellation_token!()
+cancellation_token!();

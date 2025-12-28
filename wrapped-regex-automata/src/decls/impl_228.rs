@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        PatternID!();
-        State!();
-        Config!();
-        LazyRef!();
-        DFA!();
         MatchKind!();
         Unit!();
+        State!();
+        MatchError!();
+        Cache!();
+        Anchored!();
+        Lazy!();
+        Config!();
         Input!();
         StartError!();
-        MatchError!();
-        Anchored!();
-        Start!();
-        Cache!();
-        CacheError!();
-        Lazy!();
         Transitions!();
+        PatternID!();
+        DFA!();
+        LazyRef!();
+        Start!();
+        CacheError!();
         LazyStateID!();
     };
 }
@@ -27,4 +27,4 @@ macro_rules! impl_228 {
     };
 }
 
-impl_228!()
+impl_228!();

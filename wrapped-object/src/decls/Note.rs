@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NoteHeader!();
         FileHeader!();
+        NoteHeader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Note {
     };
 }
 
-Note!()
+Note!();

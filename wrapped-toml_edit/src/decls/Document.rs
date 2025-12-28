@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RawString!();
-        Table!();
         Item!();
+        Table!();
+        RawString!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Document {
     };
 }
 
-Document!()
+Document!();

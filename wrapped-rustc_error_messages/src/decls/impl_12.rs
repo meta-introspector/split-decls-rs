@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiagArgValue!();
         IntoDiagArg!();
+        DiagArgValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

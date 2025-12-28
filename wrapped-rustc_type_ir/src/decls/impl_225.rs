@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Binder!();
+        TypeVisitable!();
         Interner!();
         TypeSuperVisitable!();
         TypeVisitor!();
-        Binder!();
-        TypeVisitable!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_225 {
     };
 }
 
-impl_225!()
+impl_225!();

@@ -14,4 +14,4 @@ macro_rules! assert_parse_ok_eq {
     };
 }
 
-assert_parse_ok_eq!()
+assert_parse_ok_eq!();

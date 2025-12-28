@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        Result!();
         If!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! join {
     };
 }
 
-join!()
+join!();

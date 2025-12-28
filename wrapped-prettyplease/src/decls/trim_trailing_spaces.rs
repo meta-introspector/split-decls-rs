@@ -4,4 +4,4 @@ macro_rules! trim_trailing_spaces {
     };
 }
 
-trim_trailing_spaces!()
+trim_trailing_spaces!();

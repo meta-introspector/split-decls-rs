@@ -4,4 +4,4 @@ macro_rules! DEP_NODE_WIDTH_BITS {
     };
 }
 
-DEP_NODE_WIDTH_BITS!()
+DEP_NODE_WIDTH_BITS!();

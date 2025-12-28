@@ -4,4 +4,4 @@ macro_rules! RequireOneField {
     };
 }
 
-RequireOneField!()
+RequireOneField!();

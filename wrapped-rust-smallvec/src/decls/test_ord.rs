@@ -11,4 +11,4 @@ macro_rules! test_ord {
     };
 }
 
-test_ord!()
+test_ord!();

@@ -4,4 +4,4 @@ macro_rules! gen_trait_fn_body {
     };
 }
 
-gen_trait_fn_body!()
+gen_trait_fn_body!();

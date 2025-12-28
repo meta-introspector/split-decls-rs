@@ -11,4 +11,4 @@ macro_rules! codegen_tag_value {
     };
 }
 
-codegen_tag_value!()
+codegen_tag_value!();

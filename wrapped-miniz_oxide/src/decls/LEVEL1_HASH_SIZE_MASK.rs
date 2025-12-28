@@ -4,4 +4,4 @@ macro_rules! LEVEL1_HASH_SIZE_MASK {
     };
 }
 
-LEVEL1_HASH_SIZE_MASK!()
+LEVEL1_HASH_SIZE_MASK!();

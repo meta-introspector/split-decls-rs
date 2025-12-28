@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegionKind!();
         Interner!();
+        RegionKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_415 {
     };
 }
 
-impl_415!()
+impl_415!();

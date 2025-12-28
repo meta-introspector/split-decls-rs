@@ -4,4 +4,4 @@ macro_rules! pat_is_self {
     };
 }
 
-pat_is_self!()
+pat_is_self!();

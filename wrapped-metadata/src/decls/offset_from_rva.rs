@@ -11,4 +11,4 @@ macro_rules! offset_from_rva {
     };
 }
 
-offset_from_rva!()
+offset_from_rva!();

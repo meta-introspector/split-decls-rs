@@ -4,4 +4,4 @@ macro_rules! add_global {
     };
 }
 
-add_global!()
+add_global!();

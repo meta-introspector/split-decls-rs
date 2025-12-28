@@ -4,4 +4,4 @@ macro_rules! MirPass {
     };
 }
 
-MirPass!()
+MirPass!();

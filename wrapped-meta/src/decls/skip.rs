@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Expr!();
         Rule!();
+        Expr!();
         RuleType!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! skip {
     };
 }
 
-skip!()
+skip!();

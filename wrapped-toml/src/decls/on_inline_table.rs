@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Table!();
-        DeValue!();
         Error!();
+        Table!();
+        DeTable!();
+        DeValue!();
         TraceScope!();
         State!();
-        DeTable!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! on_inline_table {
     };
 }
 
-on_inline_table!()
+on_inline_table!();

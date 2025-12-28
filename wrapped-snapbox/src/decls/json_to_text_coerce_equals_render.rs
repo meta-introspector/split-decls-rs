@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Data!();
         DataFormat!();
+        Data!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! json_to_text_coerce_equals_render {
     };
 }
 
-json_to_text_coerce_equals_render!()
+json_to_text_coerce_equals_render!();

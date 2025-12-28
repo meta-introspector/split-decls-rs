@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        MemoryKind!();
-        InternError!();
-        PartialPtrInFinal!();
-        InterpretationResult!();
-        ReturnContinuation!();
-        InternKind!();
-        DanglingPtrInFinal!();
-        MutablePtrInFinal!();
         ConstHeapPtrInFinal!();
+        InternError!();
+        MutablePtrInFinal!();
+        ReturnContinuation!();
         CompileTimeInterpCx!();
+        DanglingPtrInFinal!();
+        InterpretationResult!();
+        MemoryKind!();
+        PartialPtrInFinal!();
+        InternKind!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! eval_body_using_ecx {
     };
 }
 
-eval_body_using_ecx!()
+eval_body_using_ecx!();

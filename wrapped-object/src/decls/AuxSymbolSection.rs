@@ -4,4 +4,4 @@ macro_rules! AuxSymbolSection {
     };
 }
 
-AuxSymbolSection!()
+AuxSymbolSection!();

@@ -4,4 +4,4 @@ macro_rules! MockPredicate {
     };
 }
 
-MockPredicate!()
+MockPredicate!();

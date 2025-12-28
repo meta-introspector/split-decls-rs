@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Hir!();
-        Repetition!();
-        Flags!();
-        ClassBytes!();
-        Group!();
-        Literal!();
         ClassUnicode!();
+        Flags!();
+        Hir!();
+        Literal!();
         HirFrame!();
+        ClassBytes!();
+        Repetition!();
+        Group!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

@@ -11,4 +11,4 @@ macro_rules! set_unnamed_address {
     };
 }
 
-set_unnamed_address!()
+set_unnamed_address!();

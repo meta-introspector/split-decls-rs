@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StateMut!();
         Transitions!();
+        StateMut!();
         StateID!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_129 {
     };
 }
 
-impl_129!()
+impl_129!();

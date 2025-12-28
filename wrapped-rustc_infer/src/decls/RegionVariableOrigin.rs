@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NllRegionVariableOrigin!();
-        TypeVariableOrigin!();
         BoundRegionConversionTime!();
+        TypeVariableOrigin!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RegionVariableOrigin {
     };
 }
 
-RegionVariableOrigin!()
+RegionVariableOrigin!();

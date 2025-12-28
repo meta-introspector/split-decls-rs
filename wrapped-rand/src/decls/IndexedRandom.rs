@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        WeightedIndex!();
-        Rng!();
         Weight!();
+        Rng!();
         IndexedSamples!();
         SampleBorrow!();
-        Uniform!();
+        WeightedIndex!();
         SampleUniform!();
+        Uniform!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! IndexedRandom {
     };
 }
 
-IndexedRandom!()
+IndexedRandom!();

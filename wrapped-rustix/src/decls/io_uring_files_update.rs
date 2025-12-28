@@ -4,4 +4,4 @@ macro_rules! io_uring_files_update {
     };
 }
 
-io_uring_files_update!()
+io_uring_files_update!();

@@ -4,4 +4,4 @@ macro_rules! Negate {
     };
 }
 
-Negate!()
+Negate!();

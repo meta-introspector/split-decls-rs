@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_UJMP {
     };
 }
 
-R_NIOS2_UJMP!()
+R_NIOS2_UJMP!();

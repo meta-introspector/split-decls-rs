@@ -4,4 +4,4 @@ macro_rules! GRAPHEME_LINK {
     };
 }
 
-GRAPHEME_LINK!()
+GRAPHEME_LINK!();

@@ -11,4 +11,4 @@ macro_rules! assert_lex_rule {
     };
 }
 
-assert_lex_rule!()
+assert_lex_rule!();

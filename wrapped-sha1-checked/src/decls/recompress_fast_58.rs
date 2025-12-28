@@ -4,4 +4,4 @@ macro_rules! recompress_fast_58 {
     };
 }
 
-recompress_fast_58!()
+recompress_fast_58!();

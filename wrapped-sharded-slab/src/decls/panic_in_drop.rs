@@ -5,4 +5,4 @@ macro_rules! panic_in_drop {
     };
 }
 
-panic_in_drop!()
+panic_in_drop!();

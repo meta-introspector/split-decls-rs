@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Task!();
         Key!();
         Throughput!();
+        Task!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! format_progress {
     };
 }
 
-format_progress!()
+format_progress!();

@@ -4,4 +4,4 @@ macro_rules! parse_empty_template {
     };
 }
 
-parse_empty_template!()
+parse_empty_template!();

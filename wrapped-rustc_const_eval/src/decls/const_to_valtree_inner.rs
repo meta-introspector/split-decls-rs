@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompileTimeInterpCx!();
         MPlaceTy!();
+        CompileTimeInterpCx!();
         Coroutine!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! const_to_valtree_inner {
     };
 }
 
-const_to_valtree_inner!()
+const_to_valtree_inner!();

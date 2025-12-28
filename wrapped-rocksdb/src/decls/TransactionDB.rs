@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        OptionsMustOutliveDB!();
-        SingleThreaded!();
+        ThreadMode!();
         DefaultThreadMode!();
         Options!();
-        ThreadMode!();
+        SingleThreaded!();
+        OptionsMustOutliveDB!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! TransactionDB {
     };
 }
 
-TransactionDB!()
+TransactionDB!();

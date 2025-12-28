@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_GOTOFF {
     };
 }
 
-R_CKCORE_GOTOFF!()
+R_CKCORE_GOTOFF!();

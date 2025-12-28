@@ -12,4 +12,4 @@ macro_rules! pick_path_for_usages {
     };
 }
 
-pick_path_for_usages!()
+pick_path_for_usages!();

@@ -11,4 +11,4 @@ macro_rules! DF_1_INTERPOSE {
     };
 }
 
-DF_1_INTERPOSE!()
+DF_1_INTERPOSE!();

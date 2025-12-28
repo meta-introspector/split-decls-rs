@@ -4,4 +4,4 @@ macro_rules! contains_complex_fields {
     };
 }
 
-contains_complex_fields!()
+contains_complex_fields!();

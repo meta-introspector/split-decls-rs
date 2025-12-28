@@ -4,4 +4,4 @@ macro_rules! IntoSerializable {
     };
 }
 
-IntoSerializable!()
+IntoSerializable!();

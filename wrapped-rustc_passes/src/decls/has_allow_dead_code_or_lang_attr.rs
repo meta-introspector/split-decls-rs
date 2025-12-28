@@ -11,4 +11,4 @@ macro_rules! has_allow_dead_code_or_lang_attr {
     };
 }
 
-has_allow_dead_code_or_lang_attr!()
+has_allow_dead_code_or_lang_attr!();

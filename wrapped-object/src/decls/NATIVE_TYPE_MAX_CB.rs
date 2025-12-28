@@ -4,4 +4,4 @@ macro_rules! NATIVE_TYPE_MAX_CB {
     };
 }
 
-NATIVE_TYPE_MAX_CB!()
+NATIVE_TYPE_MAX_CB!();

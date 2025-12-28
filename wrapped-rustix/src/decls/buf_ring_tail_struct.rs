@@ -4,4 +4,4 @@ macro_rules! buf_ring_tail_struct {
     };
 }
 
-buf_ring_tail_struct!()
+buf_ring_tail_struct!();

@@ -4,4 +4,4 @@ macro_rules! stdout_to_path {
     };
 }
 
-stdout_to_path!()
+stdout_to_path!();

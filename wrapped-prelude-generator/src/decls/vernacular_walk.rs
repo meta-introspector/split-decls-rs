@@ -4,4 +4,4 @@ macro_rules! vernacular_walk {
     };
 }
 
-vernacular_walk!()
+vernacular_walk!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Nonce!();
         NonceGenerator!();
+        Nonce!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_494 {
     };
 }
 
-impl_494!()
+impl_494!();

@@ -4,4 +4,4 @@ macro_rules! loop_match {
     };
 }
 
-loop_match!()
+loop_match!();

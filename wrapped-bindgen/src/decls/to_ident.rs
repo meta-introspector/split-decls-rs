@@ -11,4 +11,4 @@ macro_rules! to_ident {
     };
 }
 
-to_ident!()
+to_ident!();

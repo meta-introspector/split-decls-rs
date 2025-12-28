@@ -11,4 +11,4 @@ macro_rules! PT_GNU_PROPERTY {
     };
 }
 
-PT_GNU_PROPERTY!()
+PT_GNU_PROPERTY!();

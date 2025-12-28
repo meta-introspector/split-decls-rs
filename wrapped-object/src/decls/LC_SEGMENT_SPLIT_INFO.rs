@@ -4,4 +4,4 @@ macro_rules! LC_SEGMENT_SPLIT_INFO {
     };
 }
 
-LC_SEGMENT_SPLIT_INFO!()
+LC_SEGMENT_SPLIT_INFO!();

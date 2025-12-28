@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Machine!();
-        MPlaceTy!();
         Projectable!();
-        PlaceTy!();
         InterpCx!();
+        MPlaceTy!();
+        PlaceTy!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Writeable {
     };
 }
 
-Writeable!()
+Writeable!();

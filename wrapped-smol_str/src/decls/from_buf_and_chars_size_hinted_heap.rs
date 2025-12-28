@@ -4,4 +4,4 @@ macro_rules! from_buf_and_chars_size_hinted_heap {
     };
 }
 
-from_buf_and_chars_size_hinted_heap!()
+from_buf_and_chars_size_hinted_heap!();

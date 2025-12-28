@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CompletionItemKind!();
-        CompletionItem!();
         CompletionConfig!();
+        CompletionItem!();
         Snippet!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! completion_list_with_config_raw {
     };
 }
 
-completion_list_with_config_raw!()
+completion_list_with_config_raw!();

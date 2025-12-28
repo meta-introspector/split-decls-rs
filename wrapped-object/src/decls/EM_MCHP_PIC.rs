@@ -4,4 +4,4 @@ macro_rules! EM_MCHP_PIC {
     };
 }
 
-EM_MCHP_PIC!()
+EM_MCHP_PIC!();

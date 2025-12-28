@@ -4,4 +4,4 @@ macro_rules! impl_into {
     };
 }
 
-impl_into!()
+impl_into!();

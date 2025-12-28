@@ -4,4 +4,4 @@ macro_rules! rust_cache {
     };
 }
 
-rust_cache!()
+rust_cache!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AttrTokenStream!();
-        Spacing!();
-        TokenCursor!();
-        NodeReplacement!();
-        LazyAttrTokenStream!();
-        LazyAttrTokenStreamInner!();
         Token!();
+        LazyAttrTokenStream!();
+        Spacing!();
+        AttrTokenStream!();
+        LazyAttrTokenStreamInner!();
+        NodeReplacement!();
+        TokenCursor!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_424 {
     };
 }
 
-impl_424!()
+impl_424!();

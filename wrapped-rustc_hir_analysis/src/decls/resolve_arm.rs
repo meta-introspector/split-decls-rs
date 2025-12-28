@@ -11,4 +11,4 @@ macro_rules! resolve_arm {
     };
 }
 
-resolve_arm!()
+resolve_arm!();

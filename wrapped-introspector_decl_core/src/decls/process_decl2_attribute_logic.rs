@@ -4,4 +4,4 @@ macro_rules! process_decl2_attribute_logic {
     };
 }
 
-process_decl2_attribute_logic!()
+process_decl2_attribute_logic!();

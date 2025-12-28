@@ -11,4 +11,4 @@ macro_rules! mutual_install {
     };
 }
 
-mutual_install!()
+mutual_install!();

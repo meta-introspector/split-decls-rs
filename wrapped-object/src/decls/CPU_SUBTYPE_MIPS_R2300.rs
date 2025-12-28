@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_MIPS_R2300 {
     };
 }
 
-CPU_SUBTYPE_MIPS_R2300!()
+CPU_SUBTYPE_MIPS_R2300!();

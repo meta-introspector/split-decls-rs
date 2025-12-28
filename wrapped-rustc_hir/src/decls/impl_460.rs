@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TraitItemId!();
         HashStableContext!();
+        TraitItemId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_460 {
     };
 }
 
-impl_460!()
+impl_460!();

@@ -4,4 +4,4 @@ macro_rules! make_everything_a_macro {
     };
 }
 
-make_everything_a_macro!()
+make_everything_a_macro!();

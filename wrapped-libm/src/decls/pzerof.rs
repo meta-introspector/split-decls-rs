@@ -4,4 +4,4 @@ macro_rules! pzerof {
     };
 }
 
-pzerof!()
+pzerof!();

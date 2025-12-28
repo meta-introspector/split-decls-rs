@@ -4,4 +4,4 @@ macro_rules! __pin_project_make_proj_replace_ty_body {
     };
 }
 
-__pin_project_make_proj_replace_ty_body!()
+__pin_project_make_proj_replace_ty_body!();

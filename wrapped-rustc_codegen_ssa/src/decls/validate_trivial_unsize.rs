@@ -4,4 +4,4 @@ macro_rules! validate_trivial_unsize {
     };
 }
 
-validate_trivial_unsize!()
+validate_trivial_unsize!();

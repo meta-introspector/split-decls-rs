@@ -4,4 +4,4 @@ macro_rules! ALIGN_HASH {
     };
 }
 
-ALIGN_HASH!()
+ALIGN_HASH!();

@@ -4,4 +4,4 @@ macro_rules! glorious_old_parser {
     };
 }
 
-glorious_old_parser!()
+glorious_old_parser!();

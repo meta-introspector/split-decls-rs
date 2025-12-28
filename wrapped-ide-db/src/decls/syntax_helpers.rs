@@ -4,4 +4,4 @@ macro_rules! syntax_helpers {
     };
 }
 
-syntax_helpers!()
+syntax_helpers!();

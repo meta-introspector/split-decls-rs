@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PropertyCodePointMap!();
-        CodePointMapData!();
         EnumeratedProperty!();
+        PropertyCodePointMap!();
         CodePointMapDataBorrowed!();
+        CodePointMapData!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

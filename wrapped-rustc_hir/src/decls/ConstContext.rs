@@ -4,4 +4,4 @@ macro_rules! ConstContext {
     };
 }
 
-ConstContext!()
+ConstContext!();

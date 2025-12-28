@@ -4,4 +4,4 @@ macro_rules! emoji_poetry {
     };
 }
 
-emoji_poetry!()
+emoji_poetry!();

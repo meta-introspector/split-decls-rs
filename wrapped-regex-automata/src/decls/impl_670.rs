@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TryCapturesIter!();
         CapturesIter!();
+        TryCapturesIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_670 {
     };
 }
 
-impl_670!()
+impl_670!();

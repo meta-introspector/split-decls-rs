@@ -4,4 +4,4 @@ macro_rules! QUEUE_LOCKED_BIT {
     };
 }
 
-QUEUE_LOCKED_BIT!()
+QUEUE_LOCKED_BIT!();

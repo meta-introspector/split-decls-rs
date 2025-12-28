@@ -11,4 +11,4 @@ macro_rules! empty_cycle_heads {
     };
 }
 
-empty_cycle_heads!()
+empty_cycle_heads!();

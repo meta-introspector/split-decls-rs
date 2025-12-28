@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Relate!();
-        TypeRelation!();
-        ExpectedFound!();
-        TraitRef!();
-        TypeError!();
         Interner!();
         RelateResult!();
+        ExpectedFound!();
+        TypeRelation!();
+        TraitRef!();
+        TypeError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_121 {
     };
 }
 
-impl_121!()
+impl_121!();

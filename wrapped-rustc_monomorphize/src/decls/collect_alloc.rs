@@ -11,4 +11,4 @@ macro_rules! collect_alloc {
     };
 }
 
-collect_alloc!()
+collect_alloc!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DropElaborator!();
         Unwind!();
+        DropElaborator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DropCtxt {
     };
 }
 
-DropCtxt!()
+DropCtxt!();

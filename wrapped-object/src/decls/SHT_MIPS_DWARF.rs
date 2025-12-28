@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_DWARF {
     };
 }
 
-SHT_MIPS_DWARF!()
+SHT_MIPS_DWARF!();

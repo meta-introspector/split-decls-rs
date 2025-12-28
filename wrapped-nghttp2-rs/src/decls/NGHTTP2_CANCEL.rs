@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_CANCEL {
     };
 }
 
-NGHTTP2_CANCEL!()
+NGHTTP2_CANCEL!();

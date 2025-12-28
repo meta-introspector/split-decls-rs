@@ -4,4 +4,4 @@ macro_rules! ItemFollowingInnerAttr {
     };
 }
 
-ItemFollowingInnerAttr!()
+ItemFollowingInnerAttr!();

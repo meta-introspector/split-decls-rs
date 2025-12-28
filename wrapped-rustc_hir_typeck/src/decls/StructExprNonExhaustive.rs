@@ -4,4 +4,4 @@ macro_rules! StructExprNonExhaustive {
     };
 }
 
-StructExprNonExhaustive!()
+StructExprNonExhaustive!();

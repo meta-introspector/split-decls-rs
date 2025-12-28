@@ -4,4 +4,4 @@ macro_rules! LC_ID_DYLIB {
     };
 }
 
-LC_ID_DYLIB!()
+LC_ID_DYLIB!();

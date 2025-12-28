@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MZStatus!();
         MZError!();
         Result!();
-        MZStatus!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MZResult {
     };
 }
 
-MZResult!()
+MZResult!();

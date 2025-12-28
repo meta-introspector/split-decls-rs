@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Name!();
+        Result!();
+        Variations!();
         Project!();
         Update!();
-        Error!();
-        CanonicalPath!();
+        Name!();
         Stderr!();
-        Result!();
-        Test!();
-        Variations!();
+        CanonicalPath!();
         Expected!();
         Outcome!();
+        Test!();
+        Error!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_162 {
     };
 }
 
-impl_162!()
+impl_162!();

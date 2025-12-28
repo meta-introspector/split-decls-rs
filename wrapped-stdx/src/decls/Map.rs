@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         RawMap!();
-        AnyMap!();
         Downcast!();
+        AnyMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Map {
     };
 }
 
-Map!()
+Map!();

@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
+        Endian!();
+        Nlist64!();
+        MachO64!();
+        SegmentCommand!();
+        MachO!();
+        U16!();
+        U64Bytes!();
+        WritableBuffer!();
+        Section64!();
+        U32!();
+        U64!();
+        SegmentCommand64!();
+        MachHeader!();
+        Nlist!();
         BigEndian!();
         SectionHeader!();
         MachHeader64!();
-        SegmentCommand!();
-        U32!();
-        U16!();
-        SegmentCommand64!();
-        U64Bytes!();
-        Section64!();
-        MachHeader!();
-        Nlist!();
-        MachO64!();
-        Nlist64!();
-        WritableBuffer!();
-        U64!();
-        MachO!();
-        Endian!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_999 {
     };
 }
 
-impl_999!()
+impl_999!();

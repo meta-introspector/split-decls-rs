@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ParSymmetricDifference!();
         IndexSet!();
-        ParUnion!();
+        ParSymmetricDifference!();
         ParIntersection!();
+        ParUnion!();
         ParDifference!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_162 {
     };
 }
 
-impl_162!()
+impl_162!();

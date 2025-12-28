@@ -11,4 +11,4 @@ macro_rules! check_lexing {
     };
 }
 
-check_lexing!()
+check_lexing!();

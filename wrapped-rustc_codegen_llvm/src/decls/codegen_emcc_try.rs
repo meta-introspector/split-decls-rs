@@ -12,4 +12,4 @@ macro_rules! codegen_emcc_try {
     };
 }
 
-codegen_emcc_try!()
+codegen_emcc_try!();

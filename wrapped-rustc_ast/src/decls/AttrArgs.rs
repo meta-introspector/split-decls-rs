@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Expr!();
         DelimArgs!();
         Walkable!();
-        Expr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AttrArgs {
     };
 }
 
-AttrArgs!()
+AttrArgs!();

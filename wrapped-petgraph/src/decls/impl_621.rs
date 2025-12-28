@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NodeTrait!();
-        ToGraph6!();
-        Nullable!();
-        IndexType!();
-        Undirected!();
         MatrixGraph!();
+        Nullable!();
+        ToGraph6!();
+        Undirected!();
+        NodeTrait!();
+        IndexType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_621 {
     };
 }
 
-impl_621!()
+impl_621!();

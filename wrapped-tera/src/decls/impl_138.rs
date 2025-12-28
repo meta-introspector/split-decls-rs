@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ArrayLen!();
-        Result!();
         Error!();
+        Result!();
         GetValue!();
+        ArrayLen!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

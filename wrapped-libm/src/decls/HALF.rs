@@ -4,4 +4,4 @@ macro_rules! HALF {
     };
 }
 
-HALF!()
+HALF!();

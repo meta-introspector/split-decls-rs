@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NormalizeQuery!();
         UniverseInfo!();
+        NormalizeQuery!();
         ToUniverseInfo!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_95 {
     };
 }
 
-impl_95!()
+impl_95!();

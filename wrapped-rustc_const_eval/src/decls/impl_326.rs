@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
+        Immediate!();
+        SpanGuard!();
         LocalValue!();
         ReturnAction!();
-        LocalState!();
-        Coroutine!();
-        SpanGuard!();
-        ReturnContinuation!();
         InterpCx!();
-        Immediate!();
-        StackPopInfo!();
         MemPlaceMeta!();
-        MemoryKind!();
-        PlaceTy!();
         Frame!();
+        StackPopInfo!();
+        Coroutine!();
+        ReturnContinuation!();
+        MemoryKind!();
         Machine!();
-        MemPlace!();
         Operand!();
+        MemPlace!();
+        PlaceTy!();
+        LocalState!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_326 {
     };
 }
 
-impl_326!()
+impl_326!();

@@ -4,4 +4,4 @@ macro_rules! SHF_IA_64_NORECOV {
     };
 }
 
-SHF_IA_64_NORECOV!()
+SHF_IA_64_NORECOV!();

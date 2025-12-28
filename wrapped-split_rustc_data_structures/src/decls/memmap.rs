@@ -4,4 +4,4 @@ macro_rules! memmap {
     };
 }
 
-memmap!()
+memmap!();

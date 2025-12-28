@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        MPlaceTy!();
         Immediate!();
         MemoryKind!();
         CompileTimeInterpCx!();
-        MPlaceTy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! alloc_caller_location {
     };
 }
 
-alloc_caller_location!()
+alloc_caller_location!();

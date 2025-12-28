@@ -4,4 +4,4 @@ macro_rules! XorShiftRng {
     };
 }
 
-XorShiftRng!()
+XorShiftRng!();

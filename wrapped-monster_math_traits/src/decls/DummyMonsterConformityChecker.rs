@@ -11,4 +11,4 @@ macro_rules! DummyMonsterConformityChecker {
     };
 }
 
-DummyMonsterConformityChecker!()
+DummyMonsterConformityChecker!();

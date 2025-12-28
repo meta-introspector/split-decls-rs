@@ -4,4 +4,4 @@ macro_rules! ASCII_START {
     };
 }
 
-ASCII_START!()
+ASCII_START!();

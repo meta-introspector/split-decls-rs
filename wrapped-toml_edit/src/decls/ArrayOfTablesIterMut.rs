@@ -12,4 +12,4 @@ macro_rules! ArrayOfTablesIterMut {
     };
 }
 
-ArrayOfTablesIterMut!()
+ArrayOfTablesIterMut!();

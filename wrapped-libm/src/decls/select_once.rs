@@ -4,4 +4,4 @@ macro_rules! select_once {
     };
 }
 
-select_once!()
+select_once!();

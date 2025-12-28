@@ -4,4 +4,4 @@ macro_rules! mock_ident {
     };
 }
 
-mock_ident!()
+mock_ident!();

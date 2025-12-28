@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        MatrixError!();
-        IdStorage!();
         MatrixGraph!();
-        EdgeType!();
-        IndexType!();
-        NodeIndex!();
         Directed!();
-        Create!();
-        IntoWeightedEdge!();
-        Node!();
-        Undirected!();
+        IndexType!();
         Neighbors!();
         Nullable!();
-        Edges!();
         Edge!();
+        Undirected!();
+        Node!();
+        IntoWeightedEdge!();
+        EdgeType!();
+        Create!();
+        NodeIndex!();
+        MatrixError!();
+        Edges!();
+        IdStorage!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_989 {
     };
 }
 
-impl_989!()
+impl_989!();

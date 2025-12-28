@@ -12,4 +12,4 @@ macro_rules! io_uring_enter_sigmask {
     };
 }
 
-io_uring_enter_sigmask!()
+io_uring_enter_sigmask!();

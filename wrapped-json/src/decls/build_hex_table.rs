@@ -4,4 +4,4 @@ macro_rules! build_hex_table {
     };
 }
 
-build_hex_table!()
+build_hex_table!();

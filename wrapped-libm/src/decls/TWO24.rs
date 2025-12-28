@@ -4,4 +4,4 @@ macro_rules! TWO24 {
     };
 }
 
-TWO24!()
+TWO24!();

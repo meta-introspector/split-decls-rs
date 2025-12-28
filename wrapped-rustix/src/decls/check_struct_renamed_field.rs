@@ -4,4 +4,4 @@ macro_rules! check_struct_renamed_field {
     };
 }
 
-check_struct_renamed_field!()
+check_struct_renamed_field!();

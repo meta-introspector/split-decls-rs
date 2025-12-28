@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AliasTy!();
         AliasKind!();
-        RigidTy!();
+        AliasTy!();
         ParamTy!();
         BoundTy!();
+        RigidTy!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! TyKind {
     };
 }
 
-TyKind!()
+TyKind!();

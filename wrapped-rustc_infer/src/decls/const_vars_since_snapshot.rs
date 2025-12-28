@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConstVariableOrigin!();
-        ConstVidKey!();
-        ConstVariableValue!();
         UnificationTable!();
+        ConstVariableOrigin!();
+        ConstVariableValue!();
+        ConstVidKey!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! const_vars_since_snapshot {
     };
 }
 
-const_vars_since_snapshot!()
+const_vars_since_snapshot!();

@@ -4,4 +4,4 @@ macro_rules! TestCaseNonItem {
     };
 }
 
-TestCaseNonItem!()
+TestCaseNonItem!();

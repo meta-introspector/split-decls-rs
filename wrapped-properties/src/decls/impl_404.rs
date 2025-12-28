@@ -4,4 +4,4 @@ macro_rules! impl_404 {
     };
 }
 
-impl_404!()
+impl_404!();

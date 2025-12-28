@@ -4,4 +4,4 @@ macro_rules! hpke {
     };
 }
 
-hpke!()
+hpke!();

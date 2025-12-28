@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StrSimError!();
         HammingResult!();
+        StrSimError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! generic_hamming {
     };
 }
 
-generic_hamming!()
+generic_hamming!();

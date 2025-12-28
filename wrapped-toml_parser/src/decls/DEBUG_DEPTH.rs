@@ -11,4 +11,4 @@ macro_rules! DEBUG_DEPTH {
     };
 }
 
-DEBUG_DEPTH!()
+DEBUG_DEPTH!();

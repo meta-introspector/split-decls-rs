@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         SerializeTupleVariant!();
-        Error!();
-        ValueSerializer!();
         SerializeDocumentTupleVariant!();
         Buffer!();
+        Error!();
+        ValueSerializer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_267 {
     };
 }
 
-impl_267!()
+impl_267!();

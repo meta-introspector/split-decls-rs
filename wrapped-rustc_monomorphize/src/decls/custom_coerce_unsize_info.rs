@@ -4,4 +4,4 @@ macro_rules! custom_coerce_unsize_info {
     };
 }
 
-custom_coerce_unsize_info!()
+custom_coerce_unsize_info!();

@@ -55,4 +55,4 @@ macro_rules! write_file {
     };
 }
 
-generate_common_macros_impl!()
+generate_common_macros_impl!();

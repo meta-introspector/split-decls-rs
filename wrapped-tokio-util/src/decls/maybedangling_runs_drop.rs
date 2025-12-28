@@ -11,4 +11,4 @@ macro_rules! maybedangling_runs_drop {
     };
 }
 
-maybedangling_runs_drop!()
+maybedangling_runs_drop!();

@@ -4,4 +4,4 @@ macro_rules! RHF_DEFAULT_DELAY_LOAD {
     };
 }
 
-RHF_DEFAULT_DELAY_LOAD!()
+RHF_DEFAULT_DELAY_LOAD!();

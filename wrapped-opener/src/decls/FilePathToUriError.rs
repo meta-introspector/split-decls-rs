@@ -4,4 +4,4 @@ macro_rules! FilePathToUriError {
     };
 }
 
-FilePathToUriError!()
+FilePathToUriError!();

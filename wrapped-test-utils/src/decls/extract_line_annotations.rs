@@ -11,4 +11,4 @@ macro_rules! extract_line_annotations {
     };
 }
 
-extract_line_annotations!()
+extract_line_annotations!();

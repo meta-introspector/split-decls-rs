@@ -4,4 +4,4 @@ macro_rules! AsymmetricPublicKey {
     };
 }
 
-AsymmetricPublicKey!()
+AsymmetricPublicKey!();

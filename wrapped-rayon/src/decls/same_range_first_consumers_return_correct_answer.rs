@@ -12,4 +12,4 @@ macro_rules! same_range_first_consumers_return_correct_answer {
     };
 }
 
-same_range_first_consumers_return_correct_answer!()
+same_range_first_consumers_return_correct_answer!();

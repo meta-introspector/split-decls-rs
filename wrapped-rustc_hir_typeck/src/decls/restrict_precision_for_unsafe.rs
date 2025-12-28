@@ -4,4 +4,4 @@ macro_rules! restrict_precision_for_unsafe {
     };
 }
 
-restrict_precision_for_unsafe!()
+restrict_precision_for_unsafe!();

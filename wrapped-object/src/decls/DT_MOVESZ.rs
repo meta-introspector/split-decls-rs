@@ -4,4 +4,4 @@ macro_rules! DT_MOVESZ {
     };
 }
 
-DT_MOVESZ!()
+DT_MOVESZ!();

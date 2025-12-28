@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U32Bytes!();
         U16Bytes!();
+        U32Bytes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ImageRelocation {
     };
 }
 
-ImageRelocation!()
+ImageRelocation!();

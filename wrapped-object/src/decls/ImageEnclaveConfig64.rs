@@ -12,4 +12,4 @@ macro_rules! ImageEnclaveConfig64 {
     };
 }
 
-ImageEnclaveConfig64!()
+ImageEnclaveConfig64!();

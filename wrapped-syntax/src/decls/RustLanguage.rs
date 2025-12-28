@@ -4,4 +4,4 @@ macro_rules! RustLanguage {
     };
 }
 
-RustLanguage!()
+RustLanguage!();

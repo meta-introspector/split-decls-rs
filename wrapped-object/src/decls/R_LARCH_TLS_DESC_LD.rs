@@ -4,4 +4,4 @@ macro_rules! R_LARCH_TLS_DESC_LD {
     };
 }
 
-R_LARCH_TLS_DESC_LD!()
+R_LARCH_TLS_DESC_LD!();

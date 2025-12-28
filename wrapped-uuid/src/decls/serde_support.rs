@@ -4,4 +4,4 @@ macro_rules! serde_support {
     };
 }
 
-serde_support!()
+serde_support!();

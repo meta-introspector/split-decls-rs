@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Connection!();
         Statement!();
+        Connection!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! prepare_and_bind {
     };
 }
 
-prepare_and_bind!()
+prepare_and_bind!();

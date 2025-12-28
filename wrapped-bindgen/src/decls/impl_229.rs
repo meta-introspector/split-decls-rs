@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Config!();
         Type!();
         TypeName!();
+        Config!();
         TokenStream!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_229 {
     };
 }
 
-impl_229!()
+impl_229!();

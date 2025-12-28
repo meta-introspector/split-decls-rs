@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CoerceMulti!();
-        CoerceUnsizedNonStruct!();
         CoerceSameStruct!();
         CoerceNoField!();
+        CoerceMulti!();
         CoerceFieldValidity!();
+        CoerceUnsizedNonStruct!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! coerce_unsized_info {
     };
 }
 
-coerce_unsized_info!()
+coerce_unsized_info!();

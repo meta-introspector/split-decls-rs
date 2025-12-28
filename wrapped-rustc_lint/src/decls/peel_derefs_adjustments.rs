@@ -4,4 +4,4 @@ macro_rules! peel_derefs_adjustments {
     };
 }
 
-peel_derefs_adjustments!()
+peel_derefs_adjustments!();

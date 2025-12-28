@@ -11,4 +11,4 @@ macro_rules! concretize_args {
     };
 }
 
-concretize_args!()
+concretize_args!();

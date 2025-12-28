@@ -4,4 +4,4 @@ macro_rules! EMOJI_COMPONENT {
     };
 }
 
-EMOJI_COMPONENT!()
+EMOJI_COMPONENT!();

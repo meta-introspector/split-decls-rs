@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        DefaultFrequencyRank!();
-        FinderRev!();
-        HeuristicFrequencyRank!();
-        Prefilter!();
-        Searcher!();
         CowBytes!();
         Finder!();
-        SearcherRev!();
+        Searcher!();
+        HeuristicFrequencyRank!();
+        FinderRev!();
+        Prefilter!();
         FinderBuilder!();
+        SearcherRev!();
+        DefaultFrequencyRank!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_377 {
     };
 }
 
-impl_377!()
+impl_377!();

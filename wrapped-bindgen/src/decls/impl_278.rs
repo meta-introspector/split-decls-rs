@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Param!();
-        Value!();
         ParamHint!();
+        Value!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_278 {
     };
 }
 
-impl_278!()
+impl_278!();

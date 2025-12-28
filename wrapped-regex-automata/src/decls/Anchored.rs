@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Input!();
-        PatternID!();
-        MatchError!();
-        DFA!();
         Match!();
+        DFA!();
+        Input!();
+        MatchError!();
+        PatternID!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Anchored {
     };
 }
 
-Anchored!()
+Anchored!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Deserializer!();
         TableDeserializer!();
         Error!();
+        Deserializer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_306 {
     };
 }
 
-impl_306!()
+impl_306!();

@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        YieldSource!();
-        Ty!();
-        Lit!();
+        StructTailExpr!();
+        ConstBlock!();
         LetStmt!();
         Block!();
-        MatchSource!();
-        ExprField!();
-        QPath!();
-        Closure!();
         LetExpr!();
-        Expr!();
-        LoopSource!();
-        ConstBlock!();
-        Arm!();
-        StructTailExpr!();
-        Destination!();
-        Path!();
+        QPath!();
+        Ty!();
+        ExprField!();
         InlineAsm!();
+        Arm!();
+        Lit!();
+        Destination!();
         ConstArg!();
+        Closure!();
+        Expr!();
+        MatchSource!();
+        LoopSource!();
+        YieldSource!();
         PathSegment!();
+        Path!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! ExprKind {
     };
 }
 
-ExprKind!()
+ExprKind!();

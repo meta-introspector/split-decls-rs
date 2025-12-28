@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TraitItemKind!();
         Generics!();
+        TraitItemKind!();
         Defaultness!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TraitItem {
     };
 }
 
-TraitItem!()
+TraitItem!();

@@ -4,4 +4,4 @@ macro_rules! R_CRIS_32_PLT_GOTREL {
     };
 }
 
-R_CRIS_32_PLT_GOTREL!()
+R_CRIS_32_PLT_GOTREL!();

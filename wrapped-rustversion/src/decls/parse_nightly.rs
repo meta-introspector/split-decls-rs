@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Iter!();
-        Date!();
         Expr!();
+        Date!();
+        Iter!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_nightly {
     };
 }
 
-parse_nightly!()
+parse_nightly!();

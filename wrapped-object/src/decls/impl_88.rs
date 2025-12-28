@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         ReadCacheInternal!();
+        Result!();
         ReadCacheOps!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

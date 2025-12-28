@@ -4,4 +4,4 @@ macro_rules! MultipleStabilityLevels {
     };
 }
 
-MultipleStabilityLevels!()
+MultipleStabilityLevels!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LazyStateID!();
         HalfMatch!();
+        LazyStateID!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! OverlappingState {
     };
 }
 
-OverlappingState!()
+OverlappingState!();

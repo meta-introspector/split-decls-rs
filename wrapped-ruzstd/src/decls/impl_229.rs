@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FseTableMode!();
         FSETable!();
+        FseTableMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_229 {
     };
 }
 
-impl_229!()
+impl_229!();

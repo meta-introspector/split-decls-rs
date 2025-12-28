@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SyntaxContext!();
         PartiallyInterned!();
+        InlineParent!();
+        SyntaxContext!();
+        InlineCtxt!();
         Span!();
         SpanData!();
-        InlineParent!();
-        InlineCtxt!();
-        LocalDefId!();
         Interned!();
+        LocalDefId!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_165 {
     };
 }
 
-impl_165!()
+impl_165!();

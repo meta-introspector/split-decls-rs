@@ -13,4 +13,4 @@ macro_rules! test_lookup_line {
     };
 }
 
-test_lookup_line!()
+test_lookup_line!();

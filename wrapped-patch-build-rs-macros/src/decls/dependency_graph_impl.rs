@@ -30,4 +30,4 @@ digraph RustcRing {
     };
 }
 
-dependency_graph_impl!()
+dependency_graph_impl!();

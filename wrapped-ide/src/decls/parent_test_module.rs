@@ -4,4 +4,4 @@ macro_rules! parent_test_module {
     };
 }
 
-parent_test_module!()
+parent_test_module!();

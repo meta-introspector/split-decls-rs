@@ -4,4 +4,4 @@ macro_rules! XTY_SD {
     };
 }
 
-XTY_SD!()
+XTY_SD!();

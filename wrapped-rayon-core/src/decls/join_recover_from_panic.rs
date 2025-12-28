@@ -12,4 +12,4 @@ macro_rules! join_recover_from_panic {
     };
 }
 
-join_recover_from_panic!()
+join_recover_from_panic!();

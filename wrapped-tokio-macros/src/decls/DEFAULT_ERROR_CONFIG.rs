@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RuntimeFlavor!();
         FinalConfig!();
+        RuntimeFlavor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DEFAULT_ERROR_CONFIG {
     };
 }
 
-DEFAULT_ERROR_CONFIG!()
+DEFAULT_ERROR_CONFIG!();

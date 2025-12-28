@@ -12,4 +12,4 @@ macro_rules! errors_with_inheritance_in_included_template {
     };
 }
 
-errors_with_inheritance_in_included_template!()
+errors_with_inheritance_in_included_template!();

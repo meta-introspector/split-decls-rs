@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_SH3_SECREL {
     };
 }
 
-IMAGE_REL_SH3_SECREL!()
+IMAGE_REL_SH3_SECREL!();

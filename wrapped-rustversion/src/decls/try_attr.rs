@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Then!();
         Result!();
+        Then!();
         Args!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! try_attr {
     };
 }
 
-try_attr!()
+try_attr!();

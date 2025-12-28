@@ -4,4 +4,4 @@ macro_rules! ExpectedOneCfgPattern {
     };
 }
 
-ExpectedOneCfgPattern!()
+ExpectedOneCfgPattern!();

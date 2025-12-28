@@ -4,4 +4,4 @@ macro_rules! CopyWorkProductToCache {
     };
 }
 
-CopyWorkProductToCache!()
+CopyWorkProductToCache!();

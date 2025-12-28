@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Interner!();
         Term!();
-        AliasTerm!();
         TraitRef!();
+        AliasTerm!();
+        Interner!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ProjectionPredicate {
     };
 }
 
-ProjectionPredicate!()
+ProjectionPredicate!();

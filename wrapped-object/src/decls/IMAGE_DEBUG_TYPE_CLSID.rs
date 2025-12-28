@@ -4,4 +4,4 @@ macro_rules! IMAGE_DEBUG_TYPE_CLSID {
     };
 }
 
-IMAGE_DEBUG_TYPE_CLSID!()
+IMAGE_DEBUG_TYPE_CLSID!();

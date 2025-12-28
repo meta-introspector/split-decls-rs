@@ -4,4 +4,4 @@ macro_rules! method_param {
     };
 }
 
-method_param!()
+method_param!();

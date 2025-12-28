@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Table!();
         RawString!();
         Item!();
-        Table!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DocumentMut {
     };
 }
 
-DocumentMut!()
+DocumentMut!();

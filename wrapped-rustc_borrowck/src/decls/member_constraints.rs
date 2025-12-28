@@ -4,4 +4,4 @@ macro_rules! member_constraints {
     };
 }
 
-member_constraints!()
+member_constraints!();

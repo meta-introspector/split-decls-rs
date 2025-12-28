@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_JMP_SLOT {
     };
 }
 
-R_ALPHA_JMP_SLOT!()
+R_ALPHA_JMP_SLOT!();

@@ -4,4 +4,4 @@ macro_rules! ActiveParameter {
     };
 }
 
-ActiveParameter!()
+ActiveParameter!();

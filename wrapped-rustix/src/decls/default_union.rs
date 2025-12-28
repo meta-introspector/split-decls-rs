@@ -4,4 +4,4 @@ macro_rules! default_union {
     };
 }
 
-default_union!()
+default_union!();

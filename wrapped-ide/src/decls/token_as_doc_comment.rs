@@ -11,4 +11,4 @@ macro_rules! token_as_doc_comment {
     };
 }
 
-token_as_doc_comment!()
+token_as_doc_comment!();

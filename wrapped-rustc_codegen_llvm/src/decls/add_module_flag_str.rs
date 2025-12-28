@@ -11,4 +11,4 @@ macro_rules! add_module_flag_str {
     };
 }
 
-add_module_flag_str!()
+add_module_flag_str!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Uts46Mapper!();
         ComposingNormalizer!();
+        Uts46Mapper!();
         Uts46MapperBorrowed!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

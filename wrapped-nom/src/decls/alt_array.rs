@@ -11,4 +11,4 @@ macro_rules! alt_array {
     };
 }
 
-alt_array!()
+alt_array!();

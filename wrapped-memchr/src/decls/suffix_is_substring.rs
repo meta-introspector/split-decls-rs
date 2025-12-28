@@ -4,4 +4,4 @@ macro_rules! suffix_is_substring {
     };
 }
 
-suffix_is_substring!()
+suffix_is_substring!();

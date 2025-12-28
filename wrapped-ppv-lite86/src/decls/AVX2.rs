@@ -12,4 +12,4 @@ macro_rules! AVX2 {
     };
 }
 
-AVX2!()
+AVX2!();

@@ -4,4 +4,4 @@ macro_rules! unicode_tables {
     };
 }
 
-unicode_tables!()
+unicode_tables!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Result!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ensure_safe_sqlite_threading_mode {
     };
 }
 
-ensure_safe_sqlite_threading_mode!()
+ensure_safe_sqlite_threading_mode!();

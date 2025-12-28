@@ -4,4 +4,4 @@ macro_rules! borrowed_data_escapes_closure {
     };
 }
 
-borrowed_data_escapes_closure!()
+borrowed_data_escapes_closure!();

@@ -11,4 +11,4 @@ macro_rules! open_helper {
     };
 }
 
-open_helper!()
+open_helper!();

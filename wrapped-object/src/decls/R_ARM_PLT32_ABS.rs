@@ -4,4 +4,4 @@ macro_rules! R_ARM_PLT32_ABS {
     };
 }
 
-R_ARM_PLT32_ABS!()
+R_ARM_PLT32_ABS!();

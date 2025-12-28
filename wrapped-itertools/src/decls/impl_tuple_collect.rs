@@ -11,4 +11,4 @@ macro_rules! impl_tuple_collect {
     };
 }
 
-impl_tuple_collect!()
+impl_tuple_collect!();

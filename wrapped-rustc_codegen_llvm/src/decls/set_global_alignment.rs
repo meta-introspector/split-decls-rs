@@ -11,4 +11,4 @@ macro_rules! set_global_alignment {
     };
 }
 
-set_global_alignment!()
+set_global_alignment!();

@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_RFDESC {
     };
 }
 
-SHT_MIPS_RFDESC!()
+SHT_MIPS_RFDESC!();

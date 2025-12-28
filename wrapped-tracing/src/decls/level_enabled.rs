@@ -4,4 +4,4 @@ macro_rules! level_enabled {
     };
 }
 
-level_enabled!()
+level_enabled!();

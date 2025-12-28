@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         DelayedLints!();
+        TraitCandidate!();
         OwnerNodes!();
         AttributeMap!();
-        TraitCandidate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! OwnerInfo {
     };
 }
 
-OwnerInfo!()
+OwnerInfo!();

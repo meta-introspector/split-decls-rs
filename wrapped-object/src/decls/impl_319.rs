@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SectionHeader64!();
         SectionHeader!();
-        FileHeader64!();
         Endian!();
+        SectionHeader64!();
+        FileHeader64!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_319 {
     };
 }
 
-impl_319!()
+impl_319!();

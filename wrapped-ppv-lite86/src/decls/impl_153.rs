@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NoS3!();
         Words4!();
+        NoS3!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

@@ -4,4 +4,4 @@ macro_rules! EF_ARM_EABIMASK {
     };
 }
 
-EF_ARM_EABIMASK!()
+EF_ARM_EABIMASK!();

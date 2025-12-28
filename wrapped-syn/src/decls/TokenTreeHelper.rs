@@ -4,4 +4,4 @@ macro_rules! TokenTreeHelper {
     };
 }
 
-TokenTreeHelper!()
+TokenTreeHelper!();

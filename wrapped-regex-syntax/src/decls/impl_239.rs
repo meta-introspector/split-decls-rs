@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ClassUnicodeRange!();
         ClassBytes!();
         IntervalSet!();
-        ClassBytesRange!();
         ClassBytesIter!();
+        ClassUnicodeRange!();
+        ClassBytesRange!();
         ClassUnicode!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_239 {
     };
 }
 
-impl_239!()
+impl_239!();

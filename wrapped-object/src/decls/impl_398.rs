@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        Dyn!();
         Dyn32!();
+        Dyn!();
+        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_398 {
     };
 }
 
-impl_398!()
+impl_398!();

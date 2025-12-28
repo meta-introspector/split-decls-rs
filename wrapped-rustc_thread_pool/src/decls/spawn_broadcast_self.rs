@@ -11,4 +11,4 @@ macro_rules! spawn_broadcast_self {
     };
 }
 
-spawn_broadcast_self!()
+spawn_broadcast_self!();

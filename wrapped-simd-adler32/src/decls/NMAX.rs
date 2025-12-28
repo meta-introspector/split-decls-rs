@@ -4,4 +4,4 @@ macro_rules! NMAX {
     };
 }
 
-NMAX!()
+NMAX!();

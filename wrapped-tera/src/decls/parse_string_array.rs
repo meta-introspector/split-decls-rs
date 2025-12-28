@@ -4,4 +4,4 @@ macro_rules! parse_string_array {
     };
 }
 
-parse_string_array!()
+parse_string_array!();

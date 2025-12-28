@@ -11,4 +11,4 @@ macro_rules! mangle_internal_symbol {
     };
 }
 
-mangle_internal_symbol!()
+mangle_internal_symbol!();

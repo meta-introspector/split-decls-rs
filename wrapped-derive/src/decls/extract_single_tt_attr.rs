@@ -4,4 +4,4 @@ macro_rules! extract_single_tt_attr {
     };
 }
 
-extract_single_tt_attr!()
+extract_single_tt_attr!();

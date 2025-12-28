@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Signature!();
-        Config!();
         Type!();
+        Config!();
         TokenStream!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_265 {
     };
 }
 
-impl_265!()
+impl_265!();

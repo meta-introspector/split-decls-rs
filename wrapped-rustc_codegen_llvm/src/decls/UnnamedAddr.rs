@@ -4,4 +4,4 @@ macro_rules! UnnamedAddr {
     };
 }
 
-UnnamedAddr!()
+UnnamedAddr!();

@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ARM_BRANCH24 {
     };
 }
 
-IMAGE_REL_ARM_BRANCH24!()
+IMAGE_REL_ARM_BRANCH24!();

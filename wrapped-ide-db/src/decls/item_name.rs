@@ -11,4 +11,4 @@ macro_rules! item_name {
     };
 }
 
-item_name!()
+item_name!();

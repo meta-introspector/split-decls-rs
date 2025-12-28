@@ -12,4 +12,4 @@ macro_rules! assert_biteq {
     };
 }
 
-assert_biteq!()
+assert_biteq!();

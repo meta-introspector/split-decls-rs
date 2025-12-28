@@ -4,4 +4,4 @@ macro_rules! R_SPARC_PC_HM10 {
     };
 }
 
-R_SPARC_PC_HM10!()
+R_SPARC_PC_HM10!();

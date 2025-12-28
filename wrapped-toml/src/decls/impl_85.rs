@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Table!();
-        Value!();
-        Error!();
-        Serializer!();
         Array!();
+        Table!();
+        Error!();
+        Value!();
+        Serializer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

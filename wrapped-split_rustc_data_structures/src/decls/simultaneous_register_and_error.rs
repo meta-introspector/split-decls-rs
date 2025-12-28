@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ObligationForest!();
         TestOutcome!();
         ProcessResult!();
+        ObligationForest!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! simultaneous_register_and_error {
     };
 }
 
-simultaneous_register_and_error!()
+simultaneous_register_and_error!();

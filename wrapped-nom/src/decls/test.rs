@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ErrorKind!();
-        IResult!();
-        Needed!();
         Error!();
-        Parser!();
+        Needed!();
+        IResult!();
         Err!();
+        Parser!();
     };
 }
 
@@ -37,4 +37,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

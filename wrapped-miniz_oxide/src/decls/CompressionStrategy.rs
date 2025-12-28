@@ -4,4 +4,4 @@ macro_rules! CompressionStrategy {
     };
 }
 
-CompressionStrategy!()
+CompressionStrategy!();

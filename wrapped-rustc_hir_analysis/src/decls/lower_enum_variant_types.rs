@@ -11,4 +11,4 @@ macro_rules! lower_enum_variant_types {
     };
 }
 
-lower_enum_variant_types!()
+lower_enum_variant_types!();

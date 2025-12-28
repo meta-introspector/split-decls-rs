@@ -11,4 +11,4 @@ macro_rules! find_crates {
     };
 }
 
-find_crates!()
+find_crates!();

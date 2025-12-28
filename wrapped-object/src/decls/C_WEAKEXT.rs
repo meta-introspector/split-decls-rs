@@ -4,4 +4,4 @@ macro_rules! C_WEAKEXT {
     };
 }
 
-C_WEAKEXT!()
+C_WEAKEXT!();

@@ -4,4 +4,4 @@ macro_rules! type_operators {
     };
 }
 
-type_operators!()
+type_operators!();

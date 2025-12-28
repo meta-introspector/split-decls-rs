@@ -4,4 +4,4 @@ macro_rules! R_ARM_REL32_NOI {
     };
 }
 
-R_ARM_REL32_NOI!()
+R_ARM_REL32_NOI!();

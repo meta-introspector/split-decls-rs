@@ -4,4 +4,4 @@ macro_rules! LINE_BRANCH {
     };
 }
 
-LINE_BRANCH!()
+LINE_BRANCH!();

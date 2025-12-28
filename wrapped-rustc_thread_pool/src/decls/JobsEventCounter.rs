@@ -4,4 +4,4 @@ macro_rules! JobsEventCounter {
     };
 }
 
-JobsEventCounter!()
+JobsEventCounter!();

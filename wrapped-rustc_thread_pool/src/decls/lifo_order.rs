@@ -4,4 +4,4 @@ macro_rules! lifo_order {
     };
 }
 
-lifo_order!()
+lifo_order!();

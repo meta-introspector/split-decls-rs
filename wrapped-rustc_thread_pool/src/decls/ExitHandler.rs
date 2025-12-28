@@ -4,4 +4,4 @@ macro_rules! ExitHandler {
     };
 }
 
-ExitHandler!()
+ExitHandler!();

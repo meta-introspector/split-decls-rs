@@ -11,4 +11,4 @@ macro_rules! collect_into_vec {
     };
 }
 
-collect_into_vec!()
+collect_into_vec!();

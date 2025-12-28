@@ -4,4 +4,4 @@ macro_rules! ReturnTypeNotationEqualityBound {
     };
 }
 
-ReturnTypeNotationEqualityBound!()
+ReturnTypeNotationEqualityBound!();

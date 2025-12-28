@@ -4,4 +4,4 @@ macro_rules! apple {
     };
 }
 
-apple!()
+apple!();

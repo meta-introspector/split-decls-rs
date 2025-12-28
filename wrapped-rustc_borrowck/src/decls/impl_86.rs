@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RegionNameSource!();
         RegionNameHighlight!();
+        DefiningTy!();
+        RegionNameSource!();
         MirBorrowckCtxt!();
         RegionName!();
-        DefiningTy!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

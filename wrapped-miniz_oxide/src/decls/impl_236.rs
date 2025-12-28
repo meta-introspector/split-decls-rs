@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MZError!();
         StreamResult!();
+        MZError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_236 {
     };
 }
 
-impl_236!()
+impl_236!();

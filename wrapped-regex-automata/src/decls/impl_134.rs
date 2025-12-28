@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Anchored!();
-        StartTable!();
         NE!();
-        StateID!();
+        StartTable!();
+        Anchored!();
         Start!();
+        StateID!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

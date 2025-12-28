@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ReadBufCursor!();
+        Read!();
         Result!();
         Upgraded!();
-        Read!();
+        ReadBufCursor!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_215 {
     };
 }
 
-impl_215!()
+impl_215!();

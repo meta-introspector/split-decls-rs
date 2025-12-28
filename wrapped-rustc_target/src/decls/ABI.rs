@@ -4,4 +4,4 @@ macro_rules! ABI {
     };
 }
 
-ABI!()
+ABI!();

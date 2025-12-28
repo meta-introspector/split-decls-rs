@@ -4,4 +4,4 @@ macro_rules! LoopSource {
     };
 }
 
-LoopSource!()
+LoopSource!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MemoryKind!();
         CheckAlignment!();
-        CanAccessMutGlobal!();
         CompileTimeMachine!();
+        CanAccessMutGlobal!();
+        MemoryKind!();
         InterpCx!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! check_validity_requirement_strict {
     };
 }
 
-check_validity_requirement_strict!()
+check_validity_requirement_strict!();

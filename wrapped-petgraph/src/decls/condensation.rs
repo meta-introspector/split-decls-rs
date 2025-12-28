@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Time!();
         NodeIndex!();
-        EdgeType!();
-        Graph!();
         IndexType!();
+        Time!();
+        Graph!();
+        EdgeType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! condensation {
     };
 }
 
-condensation!()
+condensation!();

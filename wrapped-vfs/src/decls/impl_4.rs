@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AnchoredPath!();
         FileSet!();
-        VfsPath!();
+        AnchoredPath!();
         FileId!();
+        VfsPath!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

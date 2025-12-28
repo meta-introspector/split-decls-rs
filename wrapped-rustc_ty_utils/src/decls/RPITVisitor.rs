@@ -4,4 +4,4 @@ macro_rules! RPITVisitor {
     };
 }
 
-RPITVisitor!()
+RPITVisitor!();

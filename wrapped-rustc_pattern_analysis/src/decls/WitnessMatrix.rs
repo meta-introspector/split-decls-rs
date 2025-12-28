@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         WitnessStack!();
-        Matrix!();
         PatCx!();
+        Matrix!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! WitnessMatrix {
     };
 }
 
-WitnessMatrix!()
+WitnessMatrix!();

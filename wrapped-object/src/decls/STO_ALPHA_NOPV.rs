@@ -4,4 +4,4 @@ macro_rules! STO_ALPHA_NOPV {
     };
 }
 
-STO_ALPHA_NOPV!()
+STO_ALPHA_NOPV!();

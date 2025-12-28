@@ -4,4 +4,4 @@ macro_rules! zlib_level_from_flags {
     };
 }
 
-zlib_level_from_flags!()
+zlib_level_from_flags!();

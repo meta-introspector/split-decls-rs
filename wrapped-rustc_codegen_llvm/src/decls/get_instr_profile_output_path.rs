@@ -4,4 +4,4 @@ macro_rules! get_instr_profile_output_path {
     };
 }
 
-get_instr_profile_output_path!()
+get_instr_profile_output_path!();

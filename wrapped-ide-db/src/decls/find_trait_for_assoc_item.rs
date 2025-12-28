@@ -4,4 +4,4 @@ macro_rules! find_trait_for_assoc_item {
     };
 }
 
-find_trait_for_assoc_item!()
+find_trait_for_assoc_item!();

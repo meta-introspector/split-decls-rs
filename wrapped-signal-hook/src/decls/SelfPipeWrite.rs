@@ -4,4 +4,4 @@ macro_rules! SelfPipeWrite {
     };
 }
 
-SelfPipeWrite!()
+SelfPipeWrite!();

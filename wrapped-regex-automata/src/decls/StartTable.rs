@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StartKind!();
-        DFA!();
         StartByteMap!();
+        DFA!();
+        StartKind!();
         StateID!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! StartTable {
     };
 }
 
-StartTable!()
+StartTable!();

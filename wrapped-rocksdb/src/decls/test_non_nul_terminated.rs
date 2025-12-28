@@ -11,4 +11,4 @@ macro_rules! test_non_nul_terminated {
     };
 }
 
-test_non_nul_terminated!()
+test_non_nul_terminated!();

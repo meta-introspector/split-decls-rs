@@ -4,4 +4,4 @@ macro_rules! TermVid {
     };
 }
 
-TermVid!()
+TermVid!();

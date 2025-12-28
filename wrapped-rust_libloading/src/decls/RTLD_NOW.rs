@@ -4,4 +4,4 @@ macro_rules! RTLD_NOW {
     };
 }
 
-RTLD_NOW!()
+RTLD_NOW!();

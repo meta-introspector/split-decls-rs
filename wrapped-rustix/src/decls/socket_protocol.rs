@@ -12,4 +12,4 @@ macro_rules! socket_protocol {
     };
 }
 
-socket_protocol!()
+socket_protocol!();

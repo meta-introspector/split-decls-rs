@@ -12,4 +12,4 @@ macro_rules! clock_gettime {
     };
 }
 
-clock_gettime!()
+clock_gettime!();

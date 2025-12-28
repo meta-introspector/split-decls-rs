@@ -4,4 +4,4 @@ macro_rules! is_symbol_like {
     };
 }
 
-is_symbol_like!()
+is_symbol_like!();

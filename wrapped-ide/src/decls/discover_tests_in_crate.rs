@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TestItemKind!();
         TestItem!();
+        TestItemKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! discover_tests_in_crate {
     };
 }
 
-discover_tests_in_crate!()
+discover_tests_in_crate!();

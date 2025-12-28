@@ -4,4 +4,4 @@ macro_rules! sentence_break {
     };
 }
 
-sentence_break!()
+sentence_break!();

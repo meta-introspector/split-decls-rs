@@ -4,4 +4,4 @@ macro_rules! TITLECASE_LETTER {
     };
 }
 
-TITLECASE_LETTER!()
+TITLECASE_LETTER!();

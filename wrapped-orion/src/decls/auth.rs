@@ -4,4 +4,4 @@ macro_rules! auth {
     };
 }
 
-auth!()
+auth!();

@@ -4,4 +4,4 @@ macro_rules! RepeatedDepNodeLabel {
     };
 }
 
-RepeatedDepNodeLabel!()
+RepeatedDepNodeLabel!();

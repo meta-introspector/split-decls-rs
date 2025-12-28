@@ -4,4 +4,4 @@ macro_rules! UnicodeWidthChar {
     };
 }
 
-UnicodeWidthChar!()
+UnicodeWidthChar!();

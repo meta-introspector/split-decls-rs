@@ -4,4 +4,4 @@ macro_rules! LocalizedOutlivesConstraint {
     };
 }
 
-LocalizedOutlivesConstraint!()
+LocalizedOutlivesConstraint!();

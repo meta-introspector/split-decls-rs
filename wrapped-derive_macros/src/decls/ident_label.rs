@@ -11,4 +11,4 @@ macro_rules! ident_label {
     };
 }
 
-ident_label!()
+ident_label!();

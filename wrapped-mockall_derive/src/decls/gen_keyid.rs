@@ -4,4 +4,4 @@ macro_rules! gen_keyid {
     };
 }
 
-gen_keyid!()
+gen_keyid!();

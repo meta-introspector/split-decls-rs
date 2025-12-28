@@ -4,4 +4,4 @@ macro_rules! u32_to_hi64_2 {
     };
 }
 
-u32_to_hi64_2!()
+u32_to_hi64_2!();

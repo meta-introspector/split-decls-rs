@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Crate!();
-        OpaqueTy!();
-        Impl!();
-        AnonConst!();
         DefPathDataName!();
+        Crate!();
+        Impl!();
+        OpaqueTy!();
         DefPathData!();
         Closure!();
+        AnonConst!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

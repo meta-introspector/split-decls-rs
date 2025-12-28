@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PkeParameters!();
         RingElementNTT!();
+        PkeParameters!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EncapKey {
     };
 }
 
-EncapKey!()
+EncapKey!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericZipWriter!();
         Ppmd!();
+        GenericZipWriter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_233 {
     };
 }
 
-impl_233!()
+impl_233!();

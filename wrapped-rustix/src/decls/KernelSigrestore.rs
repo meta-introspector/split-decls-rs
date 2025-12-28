@@ -4,4 +4,4 @@ macro_rules! KernelSigrestore {
     };
 }
 
-KernelSigrestore!()
+KernelSigrestore!();

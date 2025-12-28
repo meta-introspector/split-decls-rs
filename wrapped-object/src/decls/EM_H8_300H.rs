@@ -4,4 +4,4 @@ macro_rules! EM_H8_300H {
     };
 }
 
-EM_H8_300H!()
+EM_H8_300H!();

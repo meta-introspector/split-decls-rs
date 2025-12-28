@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AngleBrackets!();
         Path!();
+        AngleBrackets!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LifetimeSource {
     };
 }
 
-LifetimeSource!()
+LifetimeSource!();

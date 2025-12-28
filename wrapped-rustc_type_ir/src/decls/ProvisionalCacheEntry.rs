@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CycleHeads!();
-        PathKind!();
         Cx!();
+        PathKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ProvisionalCacheEntry {
     };
 }
 
-ProvisionalCacheEntry!()
+ProvisionalCacheEntry!();

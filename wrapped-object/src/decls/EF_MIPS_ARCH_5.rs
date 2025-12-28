@@ -4,4 +4,4 @@ macro_rules! EF_MIPS_ARCH_5 {
     };
 }
 
-EF_MIPS_ARCH_5!()
+EF_MIPS_ARCH_5!();

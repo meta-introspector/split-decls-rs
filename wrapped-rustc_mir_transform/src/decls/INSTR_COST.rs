@@ -4,4 +4,4 @@ macro_rules! INSTR_COST {
     };
 }
 
-INSTR_COST!()
+INSTR_COST!();

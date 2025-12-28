@@ -4,4 +4,4 @@ macro_rules! test_extract_tags {
     };
 }
 
-test_extract_tags!()
+test_extract_tags!();

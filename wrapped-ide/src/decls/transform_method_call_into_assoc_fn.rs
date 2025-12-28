@@ -11,4 +11,4 @@ macro_rules! transform_method_call_into_assoc_fn {
     };
 }
 
-transform_method_call_into_assoc_fn!()
+transform_method_call_into_assoc_fn!();

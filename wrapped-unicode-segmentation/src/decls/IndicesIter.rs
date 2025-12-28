@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnicodeIndicesIter!();
         AsciiIndicesIter!();
+        UnicodeIndicesIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IndicesIter {
     };
 }
 
-IndicesIter!()
+IndicesIter!();

@@ -4,4 +4,4 @@ macro_rules! CfgEdge {
     };
 }
 
-CfgEdge!()
+CfgEdge!();

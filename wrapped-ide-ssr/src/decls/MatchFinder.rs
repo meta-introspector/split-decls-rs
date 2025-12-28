@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ResolvedRule!();
         ResolutionScope!();
+        ResolvedRule!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MatchFinder {
     };
 }
 
-MatchFinder!()
+MatchFinder!();

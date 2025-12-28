@@ -4,4 +4,4 @@ macro_rules! Digest {
     };
 }
 
-Digest!()
+Digest!();

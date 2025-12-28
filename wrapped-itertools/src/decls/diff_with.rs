@@ -11,4 +11,4 @@ macro_rules! diff_with {
     };
 }
 
-diff_with!()
+diff_with!();

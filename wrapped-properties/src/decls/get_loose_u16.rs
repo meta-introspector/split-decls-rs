@@ -4,4 +4,4 @@ macro_rules! get_loose_u16 {
     };
 }
 
-get_loose_u16!()
+get_loose_u16!();

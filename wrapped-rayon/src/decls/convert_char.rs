@@ -4,4 +4,4 @@ macro_rules! convert_char {
     };
 }
 
-convert_char!()
+convert_char!();

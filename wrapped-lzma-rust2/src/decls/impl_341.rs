@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AutoFinisher!();
         AutoFinish!();
+        AutoFinisher!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_341 {
     };
 }
 
-impl_341!()
+impl_341!();

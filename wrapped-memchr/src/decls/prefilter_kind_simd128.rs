@@ -11,4 +11,4 @@ macro_rules! prefilter_kind_simd128 {
     };
 }
 
-prefilter_kind_simd128!()
+prefilter_kind_simd128!();

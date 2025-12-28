@@ -4,4 +4,4 @@ macro_rules! sso {
     };
 }
 
-sso!()
+sso!();

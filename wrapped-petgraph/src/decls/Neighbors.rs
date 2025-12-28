@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EdgeType!();
         Nullable!();
         Edges!();
+        EdgeType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Neighbors {
     };
 }
 
-Neighbors!()
+Neighbors!();

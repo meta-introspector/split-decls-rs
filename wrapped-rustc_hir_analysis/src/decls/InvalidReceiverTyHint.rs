@@ -4,4 +4,4 @@ macro_rules! InvalidReceiverTyHint {
     };
 }
 
-InvalidReceiverTyHint!()
+InvalidReceiverTyHint!();

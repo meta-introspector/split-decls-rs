@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DropCounter!();
         Element!();
+        DropCounter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_370 {
     };
 }
 
-impl_370!()
+impl_370!();

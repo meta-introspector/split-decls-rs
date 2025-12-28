@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        SyntaxContext!();
         DefId!();
         Symbol!();
-        SyntaxContext!();
-        ExpnId!();
         Span!();
         ByteSymbol!();
+        ExpnId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! SpanEncoder {
     };
 }
 
-SpanEncoder!()
+SpanEncoder!();

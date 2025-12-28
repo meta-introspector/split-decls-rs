@@ -11,4 +11,4 @@ macro_rules! test_as_ref {
     };
 }
 
-test_as_ref!()
+test_as_ref!();

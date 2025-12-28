@@ -4,4 +4,4 @@ macro_rules! ForeignItemId {
     };
 }
 
-ForeignItemId!()
+ForeignItemId!();

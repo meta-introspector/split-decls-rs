@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DstLayout!();
-        KnownLayout!();
         PointerMetadata!();
+        DstLayout!();
         MaybeUninit!();
+        KnownLayout!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_known_layout {
     };
 }
 
-impl_known_layout!()
+impl_known_layout!();

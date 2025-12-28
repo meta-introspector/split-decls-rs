@@ -4,4 +4,4 @@ macro_rules! processor_tests {
     };
 }
 
-processor_tests!()
+processor_tests!();

@@ -4,4 +4,4 @@ macro_rules! skip_slow_tests {
     };
 }
 
-skip_slow_tests!()
+skip_slow_tests!();

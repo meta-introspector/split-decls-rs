@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         GUID!();
         HRESULT!();
+        IAgileReference_Vtbl!();
         IAgileReference_Impl!();
         IUnknown_Vtbl!();
         Interface!();
-        IAgileReference_Vtbl!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

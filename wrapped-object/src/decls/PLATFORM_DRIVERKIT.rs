@@ -4,4 +4,4 @@ macro_rules! PLATFORM_DRIVERKIT {
     };
 }
 
-PLATFORM_DRIVERKIT!()
+PLATFORM_DRIVERKIT!();

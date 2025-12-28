@@ -4,4 +4,4 @@ macro_rules! Clear {
     };
 }
 
-Clear!()
+Clear!();

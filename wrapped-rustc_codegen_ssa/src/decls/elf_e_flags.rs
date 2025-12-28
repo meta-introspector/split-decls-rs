@@ -4,4 +4,4 @@ macro_rules! elf_e_flags {
     };
 }
 
-elf_e_flags!()
+elf_e_flags!();

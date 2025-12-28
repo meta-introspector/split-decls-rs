@@ -4,4 +4,4 @@ macro_rules! EF_ARM_SOFT_FLOAT {
     };
 }
 
-EF_ARM_SOFT_FLOAT!()
+EF_ARM_SOFT_FLOAT!();

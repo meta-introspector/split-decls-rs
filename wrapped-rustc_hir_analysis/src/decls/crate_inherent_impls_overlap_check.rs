@@ -11,4 +11,4 @@ macro_rules! crate_inherent_impls_overlap_check {
     };
 }
 
-crate_inherent_impls_overlap_check!()
+crate_inherent_impls_overlap_check!();

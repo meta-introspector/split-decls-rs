@@ -4,4 +4,4 @@ macro_rules! STB_WEAK {
     };
 }
 
-STB_WEAK!()
+STB_WEAK!();

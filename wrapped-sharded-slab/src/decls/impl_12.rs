@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Config!();
-        Pool!();
-        OwnedRefMut!();
-        RefMut!();
-        OwnedRef!();
-        Ref!();
         Clear!();
         Tid!();
+        Pool!();
+        Config!();
+        RefMut!();
+        Ref!();
+        OwnedRefMut!();
+        OwnedRef!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

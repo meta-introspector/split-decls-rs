@@ -4,4 +4,4 @@ macro_rules! OnlyCurrentTraitsPointerSugg {
     };
 }
 
-OnlyCurrentTraitsPointerSugg!()
+OnlyCurrentTraitsPointerSugg!();

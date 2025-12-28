@@ -4,4 +4,4 @@ macro_rules! PLATFORM_IOS {
     };
 }
 
-PLATFORM_IOS!()
+PLATFORM_IOS!();

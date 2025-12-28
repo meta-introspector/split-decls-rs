@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        DeconstructedPat!();
+        PatOrWild!();
+        PatStack!();
         Constructor!();
         PatCx!();
-        PatStack!();
-        PatOrWild!();
-        DeconstructedPat!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

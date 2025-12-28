@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TriColorVisitor!();
-        DirectedGraph!();
         StartNode!();
         Successors!();
+        TriColorVisitor!();
+        DirectedGraph!();
         TriColorDepthFirstSearch!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_106 {
     };
 }
 
-impl_106!()
+impl_106!();

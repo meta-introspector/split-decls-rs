@@ -4,4 +4,4 @@ macro_rules! EM_ME16 {
     };
 }
 
-EM_ME16!()
+EM_ME16!();

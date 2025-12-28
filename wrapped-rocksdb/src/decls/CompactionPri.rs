@@ -4,4 +4,4 @@ macro_rules! CompactionPri {
     };
 }
 
-CompactionPri!()
+CompactionPri!();

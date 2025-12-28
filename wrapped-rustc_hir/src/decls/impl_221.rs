@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        StructTailExpr!();
-        LetExpr!();
-        Path!();
-        Expr!();
-        CtorKind!();
-        Block!();
-        QPath!();
-        ExprKind!();
-        Res!();
+        DefKind!();
         Lit!();
         ConstBlock!();
-        DefKind!();
+        StructTailExpr!();
+        CtorKind!();
+        Block!();
+        Expr!();
+        Path!();
+        LetExpr!();
+        Res!();
         FnRetTy!();
+        ExprKind!();
         InlineAsm!();
+        QPath!();
         Closure!();
     };
 }
@@ -25,4 +25,4 @@ macro_rules! impl_221 {
     };
 }
 
-impl_221!()
+impl_221!();

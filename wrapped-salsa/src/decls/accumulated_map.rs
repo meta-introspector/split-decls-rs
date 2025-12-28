@@ -4,4 +4,4 @@ macro_rules! accumulated_map {
     };
 }
 
-accumulated_map!()
+accumulated_map!();

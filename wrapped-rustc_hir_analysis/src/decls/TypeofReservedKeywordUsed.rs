@@ -4,4 +4,4 @@ macro_rules! TypeofReservedKeywordUsed {
     };
 }
 
-TypeofReservedKeywordUsed!()
+TypeofReservedKeywordUsed!();

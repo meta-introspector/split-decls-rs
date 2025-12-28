@@ -4,4 +4,4 @@ macro_rules! SymFreq {
     };
 }
 
-SymFreq!()
+SymFreq!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ActionWithProgress!();
         IAsyncActionWithProgress!();
         SyncState!();
+        ActionWithProgress!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_171 {
     };
 }
 
-impl_171!()
+impl_171!();

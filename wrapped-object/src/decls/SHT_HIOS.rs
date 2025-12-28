@@ -4,4 +4,4 @@ macro_rules! SHT_HIOS {
     };
 }
 
-SHT_HIOS!()
+SHT_HIOS!();

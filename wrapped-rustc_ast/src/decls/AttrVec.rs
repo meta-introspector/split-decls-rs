@@ -11,4 +11,4 @@ macro_rules! AttrVec {
     };
 }
 
-AttrVec!()
+AttrVec!();

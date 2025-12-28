@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Node!();
-        WS!();
         Expr!();
         ExprVal!();
         Test!();
+        WS!();
+        Node!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_variable_tag_simple_test {
     };
 }
 
-parse_variable_tag_simple_test!()
+parse_variable_tag_simple_test!();

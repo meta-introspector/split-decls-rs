@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         RefutableFlag!();
-        MatchVisitor!();
-        Binding!();
         BindingsWithVariantName!();
+        Binding!();
+        MatchVisitor!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! check_for_bindings_named_same_as_variants {
     };
 }
 
-check_for_bindings_named_same_as_variants!()
+check_for_bindings_named_same_as_variants!();

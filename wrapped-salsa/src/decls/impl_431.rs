@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Views!();
-        ViewCaster!();
         Database!();
-        DatabaseDownCasterSig!();
         DatabaseDownCaster!();
+        ViewCaster!();
+        DatabaseDownCasterSig!();
+        Views!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_431 {
     };
 }
 
-impl_431!()
+impl_431!();

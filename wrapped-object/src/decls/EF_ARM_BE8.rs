@@ -4,4 +4,4 @@ macro_rules! EF_ARM_BE8 {
     };
 }
 
-EF_ARM_BE8!()
+EF_ARM_BE8!();

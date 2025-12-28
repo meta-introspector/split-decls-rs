@@ -11,4 +11,4 @@ macro_rules! get_cursor {
     };
 }
 
-get_cursor!()
+get_cursor!();

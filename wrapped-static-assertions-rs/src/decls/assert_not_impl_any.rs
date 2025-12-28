@@ -4,4 +4,4 @@ macro_rules! assert_not_impl_any {
     };
 }
 
-assert_not_impl_any!()
+assert_not_impl_any!();

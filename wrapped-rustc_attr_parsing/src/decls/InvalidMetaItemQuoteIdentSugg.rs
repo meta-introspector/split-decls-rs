@@ -4,4 +4,4 @@ macro_rules! InvalidMetaItemQuoteIdentSugg {
     };
 }
 
-InvalidMetaItemQuoteIdentSugg!()
+InvalidMetaItemQuoteIdentSugg!();

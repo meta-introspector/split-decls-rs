@@ -11,4 +11,4 @@ macro_rules! nested_bodies_within {
     };
 }
 
-nested_bodies_within!()
+nested_bodies_within!();

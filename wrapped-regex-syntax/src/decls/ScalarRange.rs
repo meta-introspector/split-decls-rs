@@ -4,4 +4,4 @@ macro_rules! ScalarRange {
     };
 }
 
-ScalarRange!()
+ScalarRange!();

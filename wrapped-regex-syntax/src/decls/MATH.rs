@@ -4,4 +4,4 @@ macro_rules! MATH {
     };
 }
 
-MATH!()
+MATH!();

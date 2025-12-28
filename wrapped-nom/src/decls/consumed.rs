@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Offset!();
-        Consumed!();
         ParseError!();
-        IResult!();
+        Consumed!();
+        Offset!();
         Input!();
         Error!();
+        IResult!();
+        Parser!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! consumed {
     };
 }
 
-consumed!()
+consumed!();

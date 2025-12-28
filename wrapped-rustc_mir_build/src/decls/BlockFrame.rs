@@ -4,4 +4,4 @@ macro_rules! BlockFrame {
     };
 }
 
-BlockFrame!()
+BlockFrame!();

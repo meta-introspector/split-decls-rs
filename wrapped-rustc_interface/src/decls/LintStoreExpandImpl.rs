@@ -4,4 +4,4 @@ macro_rules! LintStoreExpandImpl {
     };
 }
 
-LintStoreExpandImpl!()
+LintStoreExpandImpl!();

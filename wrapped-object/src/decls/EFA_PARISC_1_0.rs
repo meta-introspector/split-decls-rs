@@ -4,4 +4,4 @@ macro_rules! EFA_PARISC_1_0 {
     };
 }
 
-EFA_PARISC_1_0!()
+EFA_PARISC_1_0!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Labeller!();
+        LabelledGraph!();
         Node!();
+        Id!();
+        Labeller!();
+        LabelText!();
         Edge!();
         Style!();
-        LabelledGraph!();
-        Id!();
-        LabelText!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

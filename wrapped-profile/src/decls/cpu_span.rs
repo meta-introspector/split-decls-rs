@@ -11,4 +11,4 @@ macro_rules! cpu_span {
     };
 }
 
-cpu_span!()
+cpu_span!();

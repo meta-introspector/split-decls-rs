@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_CEF_SECREL {
     };
 }
 
-IMAGE_REL_CEF_SECREL!()
+IMAGE_REL_CEF_SECREL!();

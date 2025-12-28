@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Successors!();
-        DirectedGraph!();
         DepthFirstSearch!();
         Node!();
+        Successors!();
+        DirectedGraph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_99 {
     };
 }
 
-impl_99!()
+impl_99!();

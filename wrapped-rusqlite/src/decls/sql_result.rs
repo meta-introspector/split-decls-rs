@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SqlFnOutput!();
         Result!();
+        SqlFnOutput!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! sql_result {
     };
 }
 
-sql_result!()
+sql_result!();

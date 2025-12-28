@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Style!();
         TagType!();
+        Container!();
         Data!();
         Ctxt!();
-        Container!();
-        Style!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! check_internal_tag_field_name_conflict {
     };
 }
 
-check_internal_tag_field_name_conflict!()
+check_internal_tag_field_name_conflict!();

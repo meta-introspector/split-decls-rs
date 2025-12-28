@@ -4,4 +4,4 @@ macro_rules! LifetimeOutliveErr {
     };
 }
 
-LifetimeOutliveErr!()
+LifetimeOutliveErr!();

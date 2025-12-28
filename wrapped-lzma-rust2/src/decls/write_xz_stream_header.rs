@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Write!();
         CheckType!();
         Result!();
-        Write!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_xz_stream_header {
     };
 }
 
-write_xz_stream_header!()
+write_xz_stream_header!();

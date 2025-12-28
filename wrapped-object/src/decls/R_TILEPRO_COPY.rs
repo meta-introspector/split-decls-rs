@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_COPY {
     };
 }
 
-R_TILEPRO_COPY!()
+R_TILEPRO_COPY!();

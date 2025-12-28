@@ -4,4 +4,4 @@ macro_rules! cfg_select {
     };
 }
 
-cfg_select!()
+cfg_select!();

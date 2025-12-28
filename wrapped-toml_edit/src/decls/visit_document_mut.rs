@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DocumentMut!();
         VisitMut!();
+        DocumentMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! visit_document_mut {
     };
 }
 
-visit_document_mut!()
+visit_document_mut!();

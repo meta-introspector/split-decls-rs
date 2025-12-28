@@ -13,4 +13,4 @@ macro_rules! impl_nzint {
     };
 }
 
-impl_nzint!()
+impl_nzint!();

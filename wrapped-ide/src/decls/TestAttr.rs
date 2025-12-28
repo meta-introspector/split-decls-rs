@@ -4,4 +4,4 @@ macro_rules! TestAttr {
     };
 }
 
-TestAttr!()
+TestAttr!();

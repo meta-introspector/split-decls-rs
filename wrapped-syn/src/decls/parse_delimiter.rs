@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Group!();
+        Result!();
         ParseStream!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! parse_delimiter {
     };
 }
 
-parse_delimiter!()
+parse_delimiter!();

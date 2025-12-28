@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Piece!();
         Parser!();
         ParseMode!();
-        Piece!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! asm_linespans {
     };
 }
 
-asm_linespans!()
+asm_linespans!();

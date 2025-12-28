@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExprVal!();
-        WS!();
-        Expr!();
         Node!();
+        ExprVal!();
+        Expr!();
+        WS!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_variable_tag_ident {
     };
 }
 
-parse_variable_tag_ident!()
+parse_variable_tag_ident!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Expectation!();
         ExpectationNote!();
+        Expectation!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_expectations {
     };
 }
 
-check_expectations!()
+check_expectations!();

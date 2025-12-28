@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Iter!();
+        Error!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! parse_paren {
     };
 }
 
-parse_paren!()
+parse_paren!();

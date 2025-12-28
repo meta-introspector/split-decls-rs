@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        EdgeFilter!();
+        GraphEncoder!();
+        Deps!();
         EdgesVec!();
+        DepNode!();
         CurrentDepGraph!();
         SerializedDepGraph!();
-        Deps!();
-        DepNode!();
-        GraphEncoder!();
+        EdgeFilter!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

@@ -4,4 +4,4 @@ macro_rules! STYP_PAD {
     };
 }
 
-STYP_PAD!()
+STYP_PAD!();

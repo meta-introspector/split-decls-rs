@@ -11,4 +11,4 @@ macro_rules! mir_promoted {
     };
 }
 
-mir_promoted!()
+mir_promoted!();

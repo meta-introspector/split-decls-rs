@@ -4,4 +4,4 @@ macro_rules! cli {
     };
 }
 
-cli!()
+cli!();

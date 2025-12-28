@@ -4,4 +4,4 @@ macro_rules! GENERIC_RELOC_TLV {
     };
 }
 
-GENERIC_RELOC_TLV!()
+GENERIC_RELOC_TLV!();

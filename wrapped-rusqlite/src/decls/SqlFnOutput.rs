@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SubType!();
         ToSqlOutput!();
         Result!();
-        SubType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SqlFnOutput {
     };
 }
 
-SqlFnOutput!()
+SqlFnOutput!();

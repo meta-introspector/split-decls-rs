@@ -4,4 +4,4 @@ macro_rules! SuffixKind {
     };
 }
 
-SuffixKind!()
+SuffixKind!();

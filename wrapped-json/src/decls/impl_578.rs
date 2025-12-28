@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Position!();
-        OwnedRawDeserializer!();
-        IoRead!();
-        Value!();
-        ErrorCode!();
-        Result!();
         Read!();
+        Position!();
+        ErrorCode!();
+        IoRead!();
         Reference!();
+        OwnedRawDeserializer!();
+        Result!();
+        Error!();
+        Value!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_578 {
     };
 }
 
-impl_578!()
+impl_578!();

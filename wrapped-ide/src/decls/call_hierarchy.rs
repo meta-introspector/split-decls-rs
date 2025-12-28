@@ -4,4 +4,4 @@ macro_rules! call_hierarchy {
     };
 }
 
-call_hierarchy!()
+call_hierarchy!();

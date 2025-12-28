@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interned!();
         InlineParent!();
+        Interned!();
         PartiallyInterned!();
         InlineCtxt!();
     };
@@ -14,4 +14,4 @@ macro_rules! match_span_kind {
     };
 }
 
-match_span_kind!()
+match_span_kind!();

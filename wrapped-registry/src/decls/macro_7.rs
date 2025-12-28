@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WIN32_ERROR!();
         HKEY!();
+        WIN32_ERROR!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_7 {
     };
 }
 
-macro_7!()
+macro_7!();

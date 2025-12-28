@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Revision!();
-        QueryOrigin!();
-        DatabaseKeyIndex!();
-        Durability!();
-        ActiveQuery!();
         FxIndexSet!();
-        QueryRevisions!();
         QueryRevisionsExtra!();
-        IterationCount!();
+        DatabaseKeyIndex!();
         CompletedQuery!();
+        Durability!();
+        QueryOrigin!();
+        Revision!();
+        ActiveQuery!();
+        QueryRevisions!();
+        IterationCount!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

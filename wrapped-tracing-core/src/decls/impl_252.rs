@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         NoSubscriber!();
+        Event!();
         Subscriber!();
         Metadata!();
         Interest!();
-        Event!();
+        Id!();
         Record!();
         Attributes!();
-        Id!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_252 {
     };
 }
 
-impl_252!()
+impl_252!();

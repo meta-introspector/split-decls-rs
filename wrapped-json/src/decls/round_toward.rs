@@ -11,4 +11,4 @@ macro_rules! round_toward {
     };
 }
 
-round_toward!()
+round_toward!();

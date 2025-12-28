@@ -4,4 +4,4 @@ macro_rules! MetadataType {
     };
 }
 
-MetadataType!()
+MetadataType!();

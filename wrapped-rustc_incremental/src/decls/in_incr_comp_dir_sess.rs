@@ -4,4 +4,4 @@ macro_rules! in_incr_comp_dir_sess {
     };
 }
 
-in_incr_comp_dir_sess!()
+in_incr_comp_dir_sess!();

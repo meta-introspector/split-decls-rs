@@ -13,4 +13,4 @@ macro_rules! add_upstream_native_libraries {
     };
 }
 
-add_upstream_native_libraries!()
+add_upstream_native_libraries!();

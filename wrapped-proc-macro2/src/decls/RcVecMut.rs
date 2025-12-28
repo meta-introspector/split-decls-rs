@@ -4,4 +4,4 @@ macro_rules! RcVecMut {
     };
 }
 
-RcVecMut!()
+RcVecMut!();

@@ -4,4 +4,4 @@ macro_rules! upstream_async_drop_glue_for_provider {
     };
 }
 
-upstream_async_drop_glue_for_provider!()
+upstream_async_drop_glue_for_provider!();

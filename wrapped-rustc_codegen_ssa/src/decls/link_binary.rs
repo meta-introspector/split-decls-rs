@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         BinaryOutputToTty!();
         CopyPath!();
-        CodegenResults!();
-        CreateTempDir!();
-        RlibFlavor!();
         ArchiveBuilderBuilder!();
         CompiledModule!();
+        CreateTempDir!();
+        RlibFlavor!();
+        CodegenResults!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! link_binary {
     };
 }
 
-link_binary!()
+link_binary!();

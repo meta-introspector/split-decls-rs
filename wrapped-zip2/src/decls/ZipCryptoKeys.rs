@@ -4,4 +4,4 @@ macro_rules! ZipCryptoKeys {
     };
 }
 
-ZipCryptoKeys!()
+ZipCryptoKeys!();

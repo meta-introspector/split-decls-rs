@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AssertNotLoaded!();
-        LoadResult!();
         NotLoaded!();
-        LoadDepGraph!();
-        AssertLoaded!();
+        AssertNotLoaded!();
         Ok!();
         DeleteIncompatible!();
+        LoadDepGraph!();
+        LoadResult!();
+        AssertLoaded!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

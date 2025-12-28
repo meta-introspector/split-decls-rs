@@ -4,4 +4,4 @@ macro_rules! check_flatten_vec_empty {
     };
 }
 
-check_flatten_vec_empty!()
+check_flatten_vec_empty!();

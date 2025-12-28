@@ -4,4 +4,4 @@ macro_rules! RustStringInner {
     };
 }
 
-RustStringInner!()
+RustStringInner!();

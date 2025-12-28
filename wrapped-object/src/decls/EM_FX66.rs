@@ -4,4 +4,4 @@ macro_rules! EM_FX66 {
     };
 }
 
-EM_FX66!()
+EM_FX66!();

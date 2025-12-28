@@ -6,4 +6,4 @@ macro_rules! assert_path_len {
     };
 }
 
-assert_path_len!()
+assert_path_len!();

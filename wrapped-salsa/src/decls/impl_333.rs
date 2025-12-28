@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Page!();
-        PageData!();
-        PageDataEntry!();
         Slot!();
         SlotIndex!();
-        IngredientIndex!();
         PageView!();
+        PageData!();
+        Page!();
+        PageDataEntry!();
+        IngredientIndex!();
         SlotVTable!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_333 {
     };
 }
 
-impl_333!()
+impl_333!();

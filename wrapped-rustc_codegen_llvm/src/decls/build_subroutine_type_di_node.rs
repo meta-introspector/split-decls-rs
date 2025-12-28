@@ -13,4 +13,4 @@ macro_rules! build_subroutine_type_di_node {
     };
 }
 
-build_subroutine_type_di_node!()
+build_subroutine_type_di_node!();

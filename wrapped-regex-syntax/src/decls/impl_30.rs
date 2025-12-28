@@ -1,33 +1,33 @@
 macro_rules! deps {
     () => {
-        Repetition!();
-        LiteralKind!();
-        Writer!();
-        GroupKind!();
-        HexLiteralKind!();
         RepetitionRange!();
-        ClassBracketed!();
-        Literal!();
-        Flag!();
-        RepetitionKind!();
-        Range!();
-        ClassUnicodeKind!();
-        ClassUnicodeOpKind!();
-        ClassAscii!();
-        ClassPerlKind!();
-        ClassAsciiKind!();
-        CaptureName!();
+        LiteralKind!();
         Assertion!();
-        Group!();
-        Flags!();
-        FlagsItemKind!();
-        ClassSetBinaryOpKind!();
-        Result!();
-        ClassPerl!();
         SpecialLiteralKind!();
-        SetFlags!();
         AssertionKind!();
+        Result!();
+        GroupKind!();
+        Flags!();
+        ClassPerl!();
+        Repetition!();
+        ClassUnicodeOpKind!();
+        Writer!();
+        ClassUnicodeKind!();
+        FlagsItemKind!();
+        RepetitionKind!();
+        ClassPerlKind!();
+        HexLiteralKind!();
+        Range!();
+        SetFlags!();
+        Group!();
         ClassUnicode!();
+        Literal!();
+        ClassAscii!();
+        ClassSetBinaryOpKind!();
+        CaptureName!();
+        ClassBracketed!();
+        Flag!();
+        ClassAsciiKind!();
     };
 }
 
@@ -38,4 +38,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

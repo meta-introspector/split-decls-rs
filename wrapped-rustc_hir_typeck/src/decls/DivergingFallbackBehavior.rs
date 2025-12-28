@@ -4,4 +4,4 @@ macro_rules! DivergingFallbackBehavior {
     };
 }
 
-DivergingFallbackBehavior!()
+DivergingFallbackBehavior!();

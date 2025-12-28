@@ -4,4 +4,4 @@ macro_rules! EM_IP2K {
     };
 }
 
-EM_IP2K!()
+EM_IP2K!();

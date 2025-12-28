@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_PCREL32 {
     };
 }
 
-R_CKCORE_PCREL32!()
+R_CKCORE_PCREL32!();

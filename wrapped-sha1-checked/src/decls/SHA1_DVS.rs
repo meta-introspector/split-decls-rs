@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Testt!();
         Info!();
+        Testt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SHA1_DVS {
     };
 }
 
-SHA1_DVS!()
+SHA1_DVS!();

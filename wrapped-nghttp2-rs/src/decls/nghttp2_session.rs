@@ -4,4 +4,4 @@ macro_rules! nghttp2_session {
     };
 }
 
-nghttp2_session!()
+nghttp2_session!();

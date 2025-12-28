@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         MPlaceTy!();
-        FnVal!();
-        ReturnContinuation!();
-        PlaceTy!();
-        OpTy!();
-        Place!();
         ReturnAction!();
+        Place!();
+        OpTy!();
+        ImmTy!();
         Machine!();
         InterpCx!();
-        ImmTy!();
+        PlaceTy!();
+        ReturnContinuation!();
+        FnVal!();
         StackPopInfo!();
         FnArg!();
     };
@@ -22,4 +22,4 @@ macro_rules! impl_200 {
     };
 }
 
-impl_200!()
+impl_200!();

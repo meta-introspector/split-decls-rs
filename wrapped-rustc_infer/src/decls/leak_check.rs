@@ -4,4 +4,4 @@ macro_rules! leak_check {
     };
 }
 
-leak_check!()
+leak_check!();

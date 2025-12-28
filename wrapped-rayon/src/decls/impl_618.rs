@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Producer!();
-        InspectProducer!();
         InspectFolder!();
         Inspect!();
-        IntoIter!();
         Folder!();
+        InspectProducer!();
+        Producer!();
+        IntoIter!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_618 {
     };
 }
 
-impl_618!()
+impl_618!();

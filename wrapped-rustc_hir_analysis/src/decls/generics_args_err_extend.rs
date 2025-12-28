@@ -15,4 +15,4 @@ macro_rules! generics_args_err_extend {
     };
 }
 
-generics_args_err_extend!()
+generics_args_err_extend!();

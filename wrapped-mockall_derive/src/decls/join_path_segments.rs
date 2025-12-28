@@ -4,4 +4,4 @@ macro_rules! join_path_segments {
     };
 }
 
-join_path_segments!()
+join_path_segments!();

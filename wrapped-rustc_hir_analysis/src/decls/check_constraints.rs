@@ -11,4 +11,4 @@ macro_rules! check_constraints {
     };
 }
 
-check_constraints!()
+check_constraints!();

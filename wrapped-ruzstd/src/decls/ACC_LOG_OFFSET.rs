@@ -4,4 +4,4 @@ macro_rules! ACC_LOG_OFFSET {
     };
 }
 
-ACC_LOG_OFFSET!()
+ACC_LOG_OFFSET!();

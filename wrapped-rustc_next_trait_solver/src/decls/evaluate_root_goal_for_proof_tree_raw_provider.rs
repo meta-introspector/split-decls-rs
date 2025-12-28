@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ProofTreeBuilder!();
         SearchGraph!();
         SolverDelegate!();
+        ProofTreeBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! evaluate_root_goal_for_proof_tree_raw_provider {
     };
 }
 
-evaluate_root_goal_for_proof_tree_raw_provider!()
+evaluate_root_goal_for_proof_tree_raw_provider!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MachineInfo!();
         IntTy!();
+        MachineInfo!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_332 {
     };
 }
 
-impl_332!()
+impl_332!();

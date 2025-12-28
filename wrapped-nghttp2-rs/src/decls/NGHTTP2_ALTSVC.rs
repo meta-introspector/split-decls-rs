@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_ALTSVC {
     };
 }
 
-NGHTTP2_ALTSVC!()
+NGHTTP2_ALTSVC!();

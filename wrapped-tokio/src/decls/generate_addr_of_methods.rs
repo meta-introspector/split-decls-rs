@@ -4,4 +4,4 @@ macro_rules! generate_addr_of_methods {
     };
 }
 
-generate_addr_of_methods!()
+generate_addr_of_methods!();

@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_HCAT_REQUEST {
     };
 }
 
-NGHTTP2_HCAT_REQUEST!()
+NGHTTP2_HCAT_REQUEST!();

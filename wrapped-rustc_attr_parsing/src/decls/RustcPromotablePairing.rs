@@ -4,4 +4,4 @@ macro_rules! RustcPromotablePairing {
     };
 }
 
-RustcPromotablePairing!()
+RustcPromotablePairing!();

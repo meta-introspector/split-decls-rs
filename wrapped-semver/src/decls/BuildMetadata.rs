@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Version!();
-        Identifier!();
         VersionReq!();
+        Identifier!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! BuildMetadata {
     };
 }
 
-BuildMetadata!()
+BuildMetadata!();

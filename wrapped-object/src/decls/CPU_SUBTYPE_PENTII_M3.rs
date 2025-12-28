@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_PENTII_M3 {
     };
 }
 
-CPU_SUBTYPE_PENTII_M3!()
+CPU_SUBTYPE_PENTII_M3!();

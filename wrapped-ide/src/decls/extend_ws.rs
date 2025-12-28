@@ -4,4 +4,4 @@ macro_rules! extend_ws {
     };
 }
 
-extend_ws!()
+extend_ws!();

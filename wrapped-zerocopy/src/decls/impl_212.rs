@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        KnownLayout!();
         TryFromBytes!();
         ValidityError!();
-        KnownLayout!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_212 {
     };
 }
 
-impl_212!()
+impl_212!();

@@ -11,4 +11,4 @@ macro_rules! two_layers_are_subscriber {
     };
 }
 
-two_layers_are_subscriber!()
+two_layers_are_subscriber!();

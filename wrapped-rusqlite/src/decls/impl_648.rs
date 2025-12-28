@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         VTabLog!();
-        VTabConnection!();
         VTabKind!();
+        VTabConnection!();
         Result!();
         CreateVTab!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_648 {
     };
 }
 
-impl_648!()
+impl_648!();

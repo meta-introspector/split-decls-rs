@@ -4,4 +4,4 @@ macro_rules! sig_types {
     };
 }
 
-sig_types!()
+sig_types!();

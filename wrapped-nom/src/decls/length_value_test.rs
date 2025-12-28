@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ErrorKind!();
-        IResult!();
-        Complete!();
         Err!();
+        Error!();
+        Complete!();
+        IResult!();
+        ErrorKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! length_value_test {
     };
 }
 
-length_value_test!()
+length_value_test!();

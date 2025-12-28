@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        EnumDef!();
-        BodyId!();
-        Safety!();
-        FnSig!();
-        InlineAsm!();
-        Impl!();
-        ForeignItemId!();
-        Mod!();
         Ty!();
-        GenericBounds!();
-        TraitItemId!();
-        UseKind!();
-        Constness!();
-        UsePath!();
-        VariantData!();
-        Generics!();
+        Safety!();
+        Mod!();
+        InlineAsm!();
         MacroKinds!();
+        Impl!();
+        Generics!();
+        TraitItemId!();
+        ForeignItemId!();
+        BodyId!();
+        VariantData!();
+        FnSig!();
+        UseKind!();
+        EnumDef!();
+        GenericBounds!();
+        UsePath!();
+        Constness!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! ItemKind {
     };
 }
 
-ItemKind!()
+ItemKind!();

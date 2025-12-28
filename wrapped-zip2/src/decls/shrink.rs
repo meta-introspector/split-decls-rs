@@ -4,4 +4,4 @@ macro_rules! shrink {
     };
 }
 
-shrink!()
+shrink!();

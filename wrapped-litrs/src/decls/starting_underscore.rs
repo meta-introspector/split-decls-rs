@@ -4,4 +4,4 @@ macro_rules! starting_underscore {
     };
 }
 
-starting_underscore!()
+starting_underscore!();

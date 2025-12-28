@@ -4,4 +4,4 @@ macro_rules! OPAD_PREFIX {
     };
 }
 
-OPAD_PREFIX!()
+OPAD_PREFIX!();

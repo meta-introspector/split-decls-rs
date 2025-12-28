@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PlaceRef!();
         PlaceValue!();
+        PlaceRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! OperandValue {
     };
 }
 
-OperandValue!()
+OperandValue!();

@@ -4,4 +4,4 @@ macro_rules! call_stack {
     };
 }
 
-call_stack!()
+call_stack!();

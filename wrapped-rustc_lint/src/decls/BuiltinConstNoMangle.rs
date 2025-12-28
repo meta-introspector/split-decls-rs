@@ -4,4 +4,4 @@ macro_rules! BuiltinConstNoMangle {
     };
 }
 
-BuiltinConstNoMangle!()
+BuiltinConstNoMangle!();

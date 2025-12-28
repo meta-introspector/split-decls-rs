@@ -11,4 +11,4 @@ macro_rules! phantom_type {
     };
 }
 
-phantom_type!()
+phantom_type!();

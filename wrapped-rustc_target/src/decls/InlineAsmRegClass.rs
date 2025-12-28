@@ -4,4 +4,4 @@ macro_rules! InlineAsmRegClass {
     };
 }
 
-InlineAsmRegClass!()
+InlineAsmRegClass!();

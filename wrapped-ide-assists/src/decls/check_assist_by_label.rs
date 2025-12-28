@@ -11,4 +11,4 @@ macro_rules! check_assist_by_label {
     };
 }
 
-check_assist_by_label!()
+check_assist_by_label!();

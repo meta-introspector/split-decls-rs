@@ -4,4 +4,4 @@ macro_rules! windows_gnu {
     };
 }
 
-windows_gnu!()
+windows_gnu!();

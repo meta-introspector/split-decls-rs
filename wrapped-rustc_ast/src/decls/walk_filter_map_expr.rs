@@ -11,4 +11,4 @@ macro_rules! walk_filter_map_expr {
     };
 }
 
-walk_filter_map_expr!()
+walk_filter_map_expr!();

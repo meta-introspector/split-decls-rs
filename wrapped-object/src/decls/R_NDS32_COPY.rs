@@ -4,4 +4,4 @@ macro_rules! R_NDS32_COPY {
     };
 }
 
-R_NDS32_COPY!()
+R_NDS32_COPY!();

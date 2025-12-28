@@ -11,4 +11,4 @@ macro_rules! extract_iterator_next_call {
     };
 }
 
-extract_iterator_next_call!()
+extract_iterator_next_call!();

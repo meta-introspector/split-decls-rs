@@ -12,4 +12,4 @@ macro_rules! memusage_linux {
     };
 }
 
-memusage_linux!()
+memusage_linux!();

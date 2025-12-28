@@ -4,4 +4,4 @@ macro_rules! QuotedChar {
     };
 }
 
-QuotedChar!()
+QuotedChar!();

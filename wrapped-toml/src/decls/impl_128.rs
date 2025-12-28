@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         Deserializer!();
-        Value!();
         KeyDeserializer!();
+        Value!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

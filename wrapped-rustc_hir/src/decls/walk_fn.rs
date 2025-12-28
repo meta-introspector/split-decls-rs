@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        FnDecl!();
+        FnKind!();
         BodyId!();
         Visitor!();
-        FnKind!();
-        FnDecl!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! walk_fn {
     };
 }
 
-walk_fn!()
+walk_fn!();

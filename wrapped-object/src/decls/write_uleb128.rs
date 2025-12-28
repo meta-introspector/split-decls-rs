@@ -4,4 +4,4 @@ macro_rules! write_uleb128 {
     };
 }
 
-write_uleb128!()
+write_uleb128!();

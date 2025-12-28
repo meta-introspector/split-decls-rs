@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Scope!();
-        BlockAnd!();
-        Builder!();
-        DeclareLetBindings!();
         ScheduleDrops!();
+        BlockAnd!();
         BlockFrame!();
+        Builder!();
+        Scope!();
+        DeclareLetBindings!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

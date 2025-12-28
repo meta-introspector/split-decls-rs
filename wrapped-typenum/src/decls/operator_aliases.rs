@@ -4,4 +4,4 @@ macro_rules! operator_aliases {
     };
 }
 
-operator_aliases!()
+operator_aliases!();

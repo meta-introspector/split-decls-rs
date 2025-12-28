@@ -15,4 +15,4 @@ pub fn test_some_range(a: int) -> bool {
     };
 }
 
-assist_order_if_expr!()
+assist_order_if_expr!();

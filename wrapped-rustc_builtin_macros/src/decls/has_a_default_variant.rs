@@ -4,4 +4,4 @@ macro_rules! has_a_default_variant {
     };
 }
 
-has_a_default_variant!()
+has_a_default_variant!();

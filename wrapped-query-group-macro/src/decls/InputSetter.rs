@@ -4,4 +4,4 @@ macro_rules! InputSetter {
     };
 }
 
-InputSetter!()
+InputSetter!();

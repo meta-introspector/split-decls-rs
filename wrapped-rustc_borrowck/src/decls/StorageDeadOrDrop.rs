@@ -4,4 +4,4 @@ macro_rules! StorageDeadOrDrop {
     };
 }
 
-StorageDeadOrDrop!()
+StorageDeadOrDrop!();

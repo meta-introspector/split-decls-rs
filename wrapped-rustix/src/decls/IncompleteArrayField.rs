@@ -4,4 +4,4 @@ macro_rules! IncompleteArrayField {
     };
 }
 
-IncompleteArrayField!()
+IncompleteArrayField!();

@@ -4,4 +4,4 @@ macro_rules! chrono {
     };
 }
 
-chrono!()
+chrono!();

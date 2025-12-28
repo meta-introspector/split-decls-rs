@@ -4,4 +4,4 @@ macro_rules! MatchIndicesProducer {
     };
 }
 
-MatchIndicesProducer!()
+MatchIndicesProducer!();

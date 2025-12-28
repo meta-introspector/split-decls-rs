@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Idx!();
         BitIter!();
         ChunkedBitIter!();
+        Idx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MixedBitIter {
     };
 }
 
-MixedBitIter!()
+MixedBitIter!();

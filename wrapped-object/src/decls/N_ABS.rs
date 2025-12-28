@@ -4,4 +4,4 @@ macro_rules! N_ABS {
     };
 }
 
-N_ABS!()
+N_ABS!();

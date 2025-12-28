@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExportableItemCollector!();
         ExportableItemsChecker!();
+        ExportableItemCollector!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! exportable_items_provider_local {
     };
 }
 
-exportable_items_provider_local!()
+exportable_items_provider_local!();

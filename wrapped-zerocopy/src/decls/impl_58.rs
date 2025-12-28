@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        TransmuteRefDst!();
-        BecauseMutationCompatible!();
-        Wrap!();
-        Immutable!();
-        Valid!();
-        KnownLayout!();
-        IntoBytes!();
-        FromBytes!();
-        BecauseImmutable!();
         PointerMetadata!();
         Initialized!();
+        IntoBytes!();
+        TransmuteRefDst!();
+        Valid!();
+        BecauseImmutable!();
+        FromBytes!();
+        Wrap!();
+        KnownLayout!();
+        BecauseMutationCompatible!();
+        Immutable!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

@@ -4,4 +4,4 @@ macro_rules! stderr {
     };
 }
 
-stderr!()
+stderr!();

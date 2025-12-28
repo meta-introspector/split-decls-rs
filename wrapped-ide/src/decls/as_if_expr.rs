@@ -4,4 +4,4 @@ macro_rules! as_if_expr {
     };
 }
 
-as_if_expr!()
+as_if_expr!();

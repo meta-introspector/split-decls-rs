@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VersionId!();
         Version!();
+        VersionId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1161 {
     };
 }
 
-impl_1161!()
+impl_1161!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        Match!();
         DFA!();
         Regex!();
+        Builder!();
+        Match!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

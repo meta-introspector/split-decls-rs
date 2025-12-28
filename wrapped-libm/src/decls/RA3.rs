@@ -4,4 +4,4 @@ macro_rules! RA3 {
     };
 }
 
-RA3!()
+RA3!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Values!();
         CsvTab!();
+        Values!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CsvTabCursor {
     };
 }
 
-CsvTabCursor!()
+CsvTabCursor!();

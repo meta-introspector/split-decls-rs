@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Reparser!();
-        Input!();
-        Output!();
         Parser!();
+        Output!();
+        Input!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

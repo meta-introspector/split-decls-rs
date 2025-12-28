@@ -4,4 +4,4 @@ macro_rules! FunctionInfo {
     };
 }
 
-FunctionInfo!()
+FunctionInfo!();

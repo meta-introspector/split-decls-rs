@@ -4,4 +4,4 @@ macro_rules! EM_68K {
     };
 }
 
-EM_68K!()
+EM_68K!();

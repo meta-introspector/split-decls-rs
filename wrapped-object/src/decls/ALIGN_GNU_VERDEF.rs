@@ -4,4 +4,4 @@ macro_rules! ALIGN_GNU_VERDEF {
     };
 }
 
-ALIGN_GNU_VERDEF!()
+ALIGN_GNU_VERDEF!();

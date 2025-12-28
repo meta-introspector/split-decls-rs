@@ -4,4 +4,4 @@ macro_rules! rewrite_url_link {
     };
 }
 
-rewrite_url_link!()
+rewrite_url_link!();

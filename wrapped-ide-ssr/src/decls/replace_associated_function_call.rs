@@ -16,4 +16,4 @@ macro_rules! replace_associated_function_call {
     };
 }
 
-replace_associated_function_call!()
+replace_associated_function_call!();

@@ -11,4 +11,4 @@ macro_rules! inline_to_global_operand {
     };
 }
 
-inline_to_global_operand!()
+inline_to_global_operand!();

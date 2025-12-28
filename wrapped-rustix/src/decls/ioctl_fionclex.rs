@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         NoArg!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ioctl_fionclex {
     };
 }
 
-ioctl_fionclex!()
+ioctl_fionclex!();

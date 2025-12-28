@@ -4,4 +4,4 @@ macro_rules! InferenceLiteralEraser {
     };
 }
 
-InferenceLiteralEraser!()
+InferenceLiteralEraser!();

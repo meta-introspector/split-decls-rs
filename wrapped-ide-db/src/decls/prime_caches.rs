@@ -4,4 +4,4 @@ macro_rules! prime_caches {
     };
 }
 
-prime_caches!()
+prime_caches!();

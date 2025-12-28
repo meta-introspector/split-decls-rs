@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Element!();
+        PositionRepr!();
         Position!();
         SyntaxNode!();
-        PositionRepr!();
-        Element!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

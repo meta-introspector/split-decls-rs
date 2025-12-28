@@ -4,4 +4,4 @@ macro_rules! union_padding {
     };
 }
 
-union_padding!()
+union_padding!();

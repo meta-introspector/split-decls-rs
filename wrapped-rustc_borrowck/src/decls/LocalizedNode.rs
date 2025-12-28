@@ -4,4 +4,4 @@ macro_rules! LocalizedNode {
     };
 }
 
-LocalizedNode!()
+LocalizedNode!();

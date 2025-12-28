@@ -4,4 +4,4 @@ macro_rules! EmptyLabelManySpans {
     };
 }
 
-EmptyLabelManySpans!()
+EmptyLabelManySpans!();

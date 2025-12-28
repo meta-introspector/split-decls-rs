@@ -4,4 +4,4 @@ macro_rules! R_IA64_NONE {
     };
 }
 
-R_IA64_NONE!()
+R_IA64_NONE!();

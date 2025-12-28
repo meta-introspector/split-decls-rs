@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Stack!();
-        Cx!();
-        AvailableDepth!();
         Delegate!();
+        Stack!();
+        AvailableDepth!();
+        Cx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_150 {
     };
 }
 
-impl_150!()
+impl_150!();

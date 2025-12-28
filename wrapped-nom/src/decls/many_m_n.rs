@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IResult!();
-        Needed!();
+        ManyMN!();
         Error!();
         Parser!();
+        Needed!();
         Input!();
         ParseError!();
-        ManyMN!();
+        IResult!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! many_m_n {
     };
 }
 
-many_m_n!()
+many_m_n!();

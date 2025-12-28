@@ -11,4 +11,4 @@ macro_rules! resolve_target_trait {
     };
 }
 
-resolve_target_trait!()
+resolve_target_trait!();

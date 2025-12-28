@@ -4,4 +4,4 @@ macro_rules! env_vars {
     };
 }
 
-env_vars!()
+env_vars!();

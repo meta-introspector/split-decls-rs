@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        AmbigArg!();
-        TyKind!();
-        Res!();
-        DefKind!();
-        ConstArgKind!();
+        Path!();
         GenericArg!();
         Visitor!();
-        QPath!();
         MutTy!();
-        Path!();
+        Res!();
+        QPath!();
         Ty!();
+        ConstArgKind!();
+        DefKind!();
+        TyKind!();
+        AmbigArg!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_267 {
     };
 }
 
-impl_267!()
+impl_267!();

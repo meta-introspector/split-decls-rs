@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         SolverDelegate!();
-        EvalCtxt!();
-        Ambiguous!();
         ReplaceProjectionWith!();
+        Ambiguous!();
+        EvalCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! predicates_for_object_candidate {
     };
 }
 
-predicates_for_object_candidate!()
+predicates_for_object_candidate!();

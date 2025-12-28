@@ -4,4 +4,4 @@ macro_rules! FnParamForbiddenAttr {
     };
 }
 
-FnParamForbiddenAttr!()
+FnParamForbiddenAttr!();

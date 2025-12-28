@@ -4,4 +4,4 @@ macro_rules! MAX_HUFFMAN_BITS {
     };
 }
 
-MAX_HUFFMAN_BITS!()
+MAX_HUFFMAN_BITS!();

@@ -12,4 +12,4 @@ macro_rules! codegen_autodiff {
     };
 }
 
-codegen_autodiff!()
+codegen_autodiff!();

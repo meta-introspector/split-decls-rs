@@ -4,4 +4,4 @@ macro_rules! MODIFIER_SYMBOL {
     };
 }
 
-MODIFIER_SYMBOL!()
+MODIFIER_SYMBOL!();

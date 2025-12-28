@@ -11,4 +11,4 @@ macro_rules! on_char_typed_ {
     };
 }
 
-on_char_typed_!()
+on_char_typed_!();

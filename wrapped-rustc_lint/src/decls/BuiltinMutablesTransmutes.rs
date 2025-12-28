@@ -4,4 +4,4 @@ macro_rules! BuiltinMutablesTransmutes {
     };
 }
 
-BuiltinMutablesTransmutes!()
+BuiltinMutablesTransmutes!();

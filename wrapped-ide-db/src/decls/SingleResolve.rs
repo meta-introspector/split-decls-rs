@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AssistId!();
         AssistKind!();
+        AssistId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SingleResolve {
     };
 }
 
-SingleResolve!()
+SingleResolve!();

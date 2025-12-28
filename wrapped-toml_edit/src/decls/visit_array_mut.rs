@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VisitMut!();
         Array!();
+        VisitMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! visit_array_mut {
     };
 }
 
-visit_array_mut!()
+visit_array_mut!();

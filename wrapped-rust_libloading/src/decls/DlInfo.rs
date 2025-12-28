@@ -4,4 +4,4 @@ macro_rules! DlInfo {
     };
 }
 
-DlInfo!()
+DlInfo!();

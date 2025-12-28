@@ -1,37 +1,37 @@
 macro_rules! deps {
     () => {
-        SegmentCommand32!();
-        NoteCommand!();
-        SubFrameworkCommand!();
+        SourceVersionCommand!();
+        LinkeditDataCommand!();
+        Note!();
+        UuidCommand!();
         ThreadCommand!();
+        PreboundDylibCommand!();
+        DylinkerCommand!();
+        PrebindCksumCommand!();
+        NoteCommand!();
+        SegmentCommand32!();
+        DylibCommand!();
         RoutinesCommand64!();
         DyldInfoCommand!();
-        SymtabCommand!();
-        DylinkerCommand!();
-        UuidCommand!();
-        PreboundDylibCommand!();
-        PrebindCksumCommand!();
-        FilesetEntryCommand!();
-        SourceVersionCommand!();
-        BuildVersionCommand!();
-        EncryptionInfoCommand32!();
-        TwolevelHintsCommand!();
-        RoutinesCommand32!();
-        Endian!();
-        EncryptionInfoCommand64!();
-        EntryPointCommand!();
-        Dylib!();
-        DysymtabCommand!();
-        SubLibraryCommand!();
-        SegmentCommand64!();
-        LinkerOptionCommand!();
-        Note!();
-        DylibCommand!();
-        VersionMinCommand!();
-        SubUmbrellaCommand!();
         SubClientCommand!();
-        LinkeditDataCommand!();
+        FilesetEntryCommand!();
+        EncryptionInfoCommand32!();
+        EncryptionInfoCommand64!();
+        SubLibraryCommand!();
+        SubUmbrellaCommand!();
         RpathCommand!();
+        LinkerOptionCommand!();
+        RoutinesCommand32!();
+        SegmentCommand64!();
+        Dylib!();
+        TwolevelHintsCommand!();
+        EntryPointCommand!();
+        SubFrameworkCommand!();
+        BuildVersionCommand!();
+        DysymtabCommand!();
+        SymtabCommand!();
+        Endian!();
+        VersionMinCommand!();
     };
 }
 
@@ -42,4 +42,4 @@ macro_rules! LoadCommandVariant {
     };
 }
 
-LoadCommandVariant!()
+LoadCommandVariant!();

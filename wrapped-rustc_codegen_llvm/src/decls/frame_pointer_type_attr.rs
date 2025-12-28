@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         CreateAttrStringValue!();
+        CodegenCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! frame_pointer_type_attr {
     };
 }
 
-frame_pointer_type_attr!()
+frame_pointer_type_attr!();

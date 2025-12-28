@@ -4,4 +4,4 @@ macro_rules! IterIdentityCopied {
     };
 }
 
-IterIdentityCopied!()
+IterIdentityCopied!();

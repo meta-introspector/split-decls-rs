@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SpanGuard!();
-        LocalState!();
-        MPlaceTy!();
         PlaceTy!();
+        MPlaceTy!();
+        LocalState!();
+        SpanGuard!();
         ReturnContinuation!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! Frame {
     };
 }
 
-Frame!()
+Frame!();

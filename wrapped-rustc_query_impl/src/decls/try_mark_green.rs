@@ -11,4 +11,4 @@ macro_rules! try_mark_green {
     };
 }
 
-try_mark_green!()
+try_mark_green!();

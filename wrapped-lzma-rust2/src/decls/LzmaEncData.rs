@@ -4,4 +4,4 @@ macro_rules! LzmaEncData {
     };
 }
 
-LzmaEncData!()
+LzmaEncData!();

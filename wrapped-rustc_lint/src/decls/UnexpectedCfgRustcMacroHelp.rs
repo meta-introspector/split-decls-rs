@@ -4,4 +4,4 @@ macro_rules! UnexpectedCfgRustcMacroHelp {
     };
 }
 
-UnexpectedCfgRustcMacroHelp!()
+UnexpectedCfgRustcMacroHelp!();

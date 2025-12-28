@@ -4,4 +4,4 @@ macro_rules! aggregate_context {
     };
 }
 
-aggregate_context!()
+aggregate_context!();

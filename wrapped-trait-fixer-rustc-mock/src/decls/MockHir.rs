@@ -4,4 +4,4 @@ macro_rules! MockHir {
     };
 }
 
-MockHir!()
+MockHir!();

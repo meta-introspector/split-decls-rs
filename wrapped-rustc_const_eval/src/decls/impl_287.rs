@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         Immediate!();
         OffsetMode!();
-        InterpCx!();
-        MemPlace!();
         MemPlaceMeta!();
+        InterpCx!();
         Machine!();
+        MemPlace!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_287 {
     };
 }
 
-impl_287!()
+impl_287!();

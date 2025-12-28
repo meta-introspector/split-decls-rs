@@ -12,4 +12,4 @@ macro_rules! read_state_id {
     };
 }
 
-read_state_id!()
+read_state_id!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EscapedTransform!();
-        Parser!();
         ErrorKind!();
         Error!();
-        IResult!();
+        EscapedTransform!();
+        Parser!();
         Tag!();
+        IResult!();
         Err!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! escape_transform {
     };
 }
 
-escape_transform!()
+escape_transform!();

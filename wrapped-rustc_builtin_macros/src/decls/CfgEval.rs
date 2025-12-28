@@ -4,4 +4,4 @@ macro_rules! CfgEval {
     };
 }
 
-CfgEval!()
+CfgEval!();

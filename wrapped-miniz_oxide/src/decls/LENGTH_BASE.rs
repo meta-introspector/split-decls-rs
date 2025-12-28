@@ -4,4 +4,4 @@ macro_rules! LENGTH_BASE {
     };
 }
 
-LENGTH_BASE!()
+LENGTH_BASE!();

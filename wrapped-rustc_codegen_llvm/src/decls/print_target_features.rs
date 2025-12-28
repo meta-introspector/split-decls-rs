@@ -4,4 +4,4 @@ macro_rules! print_target_features {
     };
 }
 
-print_target_features!()
+print_target_features!();

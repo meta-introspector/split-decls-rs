@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         Shifter!();
+        Interner!();
         TypeFoldable!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! shift_vars {
     };
 }
 
-shift_vars!()
+shift_vars!();

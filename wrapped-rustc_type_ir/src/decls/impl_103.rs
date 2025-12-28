@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TypeVisitor!();
-        Component!();
-        OutlivesCollector!();
-        Region!();
-        Interner!();
         GenericArgKind!();
         Ty!();
+        Region!();
+        TypeVisitor!();
+        Interner!();
+        Component!();
         Const!();
+        OutlivesCollector!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_103 {
     };
 }
 
-impl_103!()
+impl_103!();

@@ -4,4 +4,4 @@ macro_rules! PT_MIPS_OPTIONS {
     };
 }
 
-PT_MIPS_OPTIONS!()
+PT_MIPS_OPTIONS!();

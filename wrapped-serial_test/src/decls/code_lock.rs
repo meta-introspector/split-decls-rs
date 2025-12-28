@@ -4,4 +4,4 @@ macro_rules! code_lock {
     };
 }
 
-code_lock!()
+code_lock!();

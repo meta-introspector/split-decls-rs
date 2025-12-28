@@ -4,4 +4,4 @@ macro_rules! R_LARCH_CALL36 {
     };
 }
 
-R_LARCH_CALL36!()
+R_LARCH_CALL36!();

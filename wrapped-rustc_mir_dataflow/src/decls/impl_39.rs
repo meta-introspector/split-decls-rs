@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Analysis!();
-        ResultsVisitor!();
-        Direction!();
-        Forward!();
-        EffectIndex!();
         Effect!();
+        Analysis!();
+        Direction!();
+        EffectIndex!();
+        Forward!();
+        ResultsVisitor!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

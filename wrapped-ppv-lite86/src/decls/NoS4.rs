@@ -4,4 +4,4 @@ macro_rules! NoS4 {
     };
 }
 
-NoS4!()
+NoS4!();

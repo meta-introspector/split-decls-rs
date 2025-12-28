@@ -4,4 +4,4 @@ macro_rules! SYMINFO_CURRENT {
     };
 }
 
-SYMINFO_CURRENT!()
+SYMINFO_CURRENT!();

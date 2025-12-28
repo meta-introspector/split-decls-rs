@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stability!();
         ABI!();
         ImpliedFeatures!();
+        Stability!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ARM_FEATURES {
     };
 }
 
-ARM_FEATURES!()
+ARM_FEATURES!();

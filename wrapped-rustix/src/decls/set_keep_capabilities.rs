@@ -11,4 +11,4 @@ macro_rules! set_keep_capabilities {
     };
 }
 
-set_keep_capabilities!()
+set_keep_capabilities!();

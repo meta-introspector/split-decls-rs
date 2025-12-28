@@ -11,4 +11,4 @@ macro_rules! is_null_ptr {
     };
 }
 
-is_null_ptr!()
+is_null_ptr!();

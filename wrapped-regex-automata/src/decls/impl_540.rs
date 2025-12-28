@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Captures!();
-        Cache!();
         CapturesMatches!();
-        NFA!();
-        PikeVM!();
-        Input!();
-        Match!();
         Searcher!();
         FindMatches!();
+        Input!();
         Span!();
+        Cache!();
+        NFA!();
+        Captures!();
+        PikeVM!();
+        Match!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_540 {
     };
 }
 
-impl_540!()
+impl_540!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SparseTransitionIter!();
         Transition!();
+        SparseTransitionIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

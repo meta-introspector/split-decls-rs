@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SampleUniform!();
+        Distribution!();
         Rng!();
         WeightedIndex!();
-        Distribution!();
+        SampleUniform!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_191 {
     };
 }
 
-impl_191!()
+impl_191!();

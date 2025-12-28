@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Walkable!();
-        ModSpans!();
         Item!();
         Inline!();
+        ModSpans!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ModKind {
     };
 }
 
-ModKind!()
+ModKind!();

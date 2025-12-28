@@ -4,4 +4,4 @@ macro_rules! LIT_STATES {
     };
 }
 
-LIT_STATES!()
+LIT_STATES!();

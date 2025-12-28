@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Shared!();
         Config!();
+        Shared!();
         Local!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Shard {
     };
 }
 
-Shard!()
+Shard!();

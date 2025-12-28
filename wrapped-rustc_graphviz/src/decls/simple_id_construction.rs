@@ -11,4 +11,4 @@ macro_rules! simple_id_construction {
     };
 }
 
-simple_id_construction!()
+simple_id_construction!();

@@ -1,38 +1,38 @@
 macro_rules! deps {
     () => {
-        CoffSymbol!();
-        CoffHeader!();
-        Section!();
-        Architecture!();
-        CoffSegmentIterator!();
-        ReadRef!();
-        SectionIterator!();
-        CoffSymbolIterator!();
-        Comdat!();
-        CoffSymbolTable!();
-        CoffFile!();
-        SymbolTable!();
-        SymbolIterator!();
         ObjectKind!();
-        Segment!();
-        Symbol!();
-        SymbolIndex!();
         Export!();
-        FileFlags!();
         DynamicRelocationIterator!();
-        CoffSection!();
-        CoffSectionIterator!();
-        ComdatIterator!();
-        SegmentIterator!();
-        CoffComdatIterator!();
+        Architecture!();
         SectionIndex!();
+        CoffComdatIterator!();
+        CoffSymbolIterator!();
+        SectionIterator!();
         CoffComdat!();
-        Result!();
+        CoffSymbol!();
+        SymbolTable!();
+        SegmentIterator!();
+        CoffFile!();
         CoffSegment!();
-        SubArchitecture!();
-        Import!();
+        CoffSectionIterator!();
         Object!();
+        SymbolIterator!();
         NoDynamicRelocationIterator!();
+        CoffSection!();
+        Symbol!();
+        Segment!();
+        FileFlags!();
+        CoffSegmentIterator!();
+        Section!();
+        CoffHeader!();
+        SymbolIndex!();
+        Import!();
+        SubArchitecture!();
+        ReadRef!();
+        Result!();
+        CoffSymbolTable!();
+        ComdatIterator!();
+        Comdat!();
     };
 }
 
@@ -43,4 +43,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

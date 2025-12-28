@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PanicFuseFolder!();
-        Fuse!();
         Folder!();
+        Fuse!();
+        PanicFuseFolder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_753 {
     };
 }
 
-impl_753!()
+impl_753!();

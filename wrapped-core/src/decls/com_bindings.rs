@@ -4,4 +4,4 @@ macro_rules! com_bindings {
     };
 }
 
-com_bindings!()
+com_bindings!();

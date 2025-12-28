@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Cloned!();
+        ParallelIterator!();
         UnindexedConsumer!();
         ClonedConsumer!();
-        ParallelIterator!();
-        Cloned!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_329 {
     };
 }
 
-impl_329!()
+impl_329!();

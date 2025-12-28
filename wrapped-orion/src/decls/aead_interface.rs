@@ -4,4 +4,4 @@ macro_rules! aead_interface {
     };
 }
 
-aead_interface!()
+aead_interface!();

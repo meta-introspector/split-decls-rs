@@ -4,4 +4,4 @@ macro_rules! UPGRADABLE_BIT {
     };
 }
 
-UPGRADABLE_BIT!()
+UPGRADABLE_BIT!();

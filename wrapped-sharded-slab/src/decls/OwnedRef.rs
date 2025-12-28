@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Guard!();
         Ref!();
         DefaultConfig!();
-        Pool!();
         Clear!();
+        Guard!();
         Config!();
+        Pool!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! OwnedRef {
     };
 }
 
-OwnedRef!()
+OwnedRef!();

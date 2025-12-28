@@ -11,4 +11,4 @@ macro_rules! instantiate_value {
     };
 }
 
-instantiate_value!()
+instantiate_value!();

@@ -4,4 +4,4 @@ macro_rules! is_enabled_simd128 {
     };
 }
 
-is_enabled_simd128!()
+is_enabled_simd128!();

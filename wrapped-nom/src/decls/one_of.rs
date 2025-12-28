@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        FindToken!();
-        AsChar!();
-        Input!();
-        Satisfy!();
         ParseError!();
+        AsChar!();
+        Satisfy!();
+        Input!();
+        FindToken!();
         Parser!();
         Error!();
+        ErrorKind!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! one_of {
     };
 }
 
-one_of!()
+one_of!();

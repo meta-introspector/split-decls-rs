@@ -13,4 +13,4 @@ macro_rules! delegate_indexed_iterator {
     };
 }
 
-delegate_indexed_iterator!()
+delegate_indexed_iterator!();

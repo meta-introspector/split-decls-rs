@@ -4,4 +4,4 @@ macro_rules! HirTypedAnn {
     };
 }
 
-HirTypedAnn!()
+HirTypedAnn!();

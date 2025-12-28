@@ -4,4 +4,4 @@ macro_rules! IPIO2 {
     };
 }
 
-IPIO2!()
+IPIO2!();

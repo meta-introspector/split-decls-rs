@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_PENTIUM_4 {
     };
 }
 
-CPU_SUBTYPE_PENTIUM_4!()
+CPU_SUBTYPE_PENTIUM_4!();

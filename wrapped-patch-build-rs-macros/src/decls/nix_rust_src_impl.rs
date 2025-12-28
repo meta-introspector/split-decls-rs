@@ -4,4 +4,4 @@ macro_rules! nix_rust_src_impl {
     };
 }
 
-nix_rust_src_impl!()
+nix_rust_src_impl!();

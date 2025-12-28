@@ -4,4 +4,4 @@ macro_rules! freedesktop {
     };
 }
 
-freedesktop!()
+freedesktop!();

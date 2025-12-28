@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BuildErrorKind!();
         BuildError!();
+        BuildErrorKind!();
         NFA!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

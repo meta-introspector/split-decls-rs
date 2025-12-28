@@ -4,4 +4,4 @@ macro_rules! parse_rust_feature_flag {
     };
 }
 
-parse_rust_feature_flag!()
+parse_rust_feature_flag!();

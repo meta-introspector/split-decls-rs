@@ -11,4 +11,4 @@ macro_rules! optimize_use_clone {
     };
 }
 
-optimize_use_clone!()
+optimize_use_clone!();

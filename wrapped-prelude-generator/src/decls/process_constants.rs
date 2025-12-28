@@ -4,4 +4,4 @@ macro_rules! process_constants {
     };
 }
 
-process_constants!()
+process_constants!();

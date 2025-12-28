@@ -4,4 +4,4 @@ macro_rules! AnnotatedBorrowFnSignature {
     };
 }
 
-AnnotatedBorrowFnSignature!()
+AnnotatedBorrowFnSignature!();

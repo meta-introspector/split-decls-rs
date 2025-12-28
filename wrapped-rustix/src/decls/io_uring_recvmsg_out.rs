@@ -11,4 +11,4 @@ macro_rules! io_uring_recvmsg_out {
     };
 }
 
-io_uring_recvmsg_out!()
+io_uring_recvmsg_out!();

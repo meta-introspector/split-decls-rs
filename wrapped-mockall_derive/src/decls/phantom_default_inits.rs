@@ -4,4 +4,4 @@ macro_rules! phantom_default_inits {
     };
 }
 
-phantom_default_inits!()
+phantom_default_inits!();

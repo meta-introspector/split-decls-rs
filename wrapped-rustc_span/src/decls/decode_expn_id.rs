@@ -14,4 +14,4 @@ macro_rules! decode_expn_id {
     };
 }
 
-decode_expn_id!()
+decode_expn_id!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SocketAddrAny!();
         AddressFamily!();
         Result!();
-        SocketAddrAny!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_632 {
     };
 }
 
-impl_632!()
+impl_632!();

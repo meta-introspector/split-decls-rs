@@ -4,4 +4,4 @@ macro_rules! hpke_interface {
     };
 }
 
-hpke_interface!()
+hpke_interface!();

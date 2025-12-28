@@ -6,4 +6,4 @@ macro_rules! detect_discriminant_duplicate {
     };
 }
 
-detect_discriminant_duplicate!()
+detect_discriminant_duplicate!();

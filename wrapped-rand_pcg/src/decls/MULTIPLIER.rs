@@ -4,4 +4,4 @@ macro_rules! MULTIPLIER {
     };
 }
 
-MULTIPLIER!()
+MULTIPLIER!();

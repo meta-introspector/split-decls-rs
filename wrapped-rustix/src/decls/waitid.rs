@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WaitIdStatus!();
-        Result!();
         WaitId!();
+        Result!();
+        WaitIdStatus!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! waitid {
     };
 }
 
-waitid!()
+waitid!();

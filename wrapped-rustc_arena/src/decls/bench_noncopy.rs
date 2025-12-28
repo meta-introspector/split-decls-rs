@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TypedArena!();
         Noncopy!();
+        TypedArena!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! bench_noncopy {
     };
 }
 
-bench_noncopy!()
+bench_noncopy!();

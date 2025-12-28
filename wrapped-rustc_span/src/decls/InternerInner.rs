@@ -4,4 +4,4 @@ macro_rules! InternerInner {
     };
 }
 
-InternerInner!()
+InternerInner!();

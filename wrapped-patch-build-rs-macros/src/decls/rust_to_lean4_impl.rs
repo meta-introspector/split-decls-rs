@@ -4,4 +4,4 @@ macro_rules! rust_to_lean4_impl {
     };
 }
 
-rust_to_lean4_impl!()
+rust_to_lean4_impl!();

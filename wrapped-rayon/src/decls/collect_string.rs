@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FromParallelIterator!();
         IntoParallelIterator!();
+        FromParallelIterator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! collect_string {
     };
 }
 
-collect_string!()
+collect_string!();

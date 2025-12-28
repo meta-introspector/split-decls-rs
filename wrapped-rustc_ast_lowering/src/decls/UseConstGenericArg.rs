@@ -4,4 +4,4 @@ macro_rules! UseConstGenericArg {
     };
 }
 
-UseConstGenericArg!()
+UseConstGenericArg!();

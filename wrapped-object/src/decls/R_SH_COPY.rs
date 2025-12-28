@@ -4,4 +4,4 @@ macro_rules! R_SH_COPY {
     };
 }
 
-R_SH_COPY!()
+R_SH_COPY!();

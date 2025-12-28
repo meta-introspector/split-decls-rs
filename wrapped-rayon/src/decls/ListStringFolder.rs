@@ -4,4 +4,4 @@ macro_rules! ListStringFolder {
     };
 }
 
-ListStringFolder!()
+ListStringFolder!();

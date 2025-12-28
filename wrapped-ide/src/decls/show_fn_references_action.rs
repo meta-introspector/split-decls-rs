@@ -12,4 +12,4 @@ macro_rules! show_fn_references_action {
     };
 }
 
-show_fn_references_action!()
+show_fn_references_action!();

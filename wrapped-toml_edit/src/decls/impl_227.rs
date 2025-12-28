@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Decor!();
-        Value!();
-        Item!();
         Table!();
-        KeyMut!();
         Key!();
+        Item!();
+        Value!();
+        Decor!();
+        KeyMut!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_227 {
     };
 }
 
-impl_227!()
+impl_227!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ExpnHash!();
-        SyntaxContext!();
-        ExpnId!();
         ExpnData!();
-        SyntaxContextData!();
         SyntaxContextKey!();
+        SyntaxContextData!();
+        ExpnHash!();
+        ExpnId!();
+        SyntaxContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! HygieneData {
     };
 }
 
-HygieneData!()
+HygieneData!();

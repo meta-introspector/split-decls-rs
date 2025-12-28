@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Xor!();
         B0!();
+        Xor!();
         B1!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

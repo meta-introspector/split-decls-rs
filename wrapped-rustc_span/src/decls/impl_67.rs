@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        ExpnData!();
+        Span!();
+        ExpnId!();
+        ExpnKind!();
         Symbol!();
         DefId!();
-        ExpnData!();
-        HashStableContext!();
-        ExpnKind!();
-        ExpnId!();
         Edition!();
-        Span!();
+        HashStableContext!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

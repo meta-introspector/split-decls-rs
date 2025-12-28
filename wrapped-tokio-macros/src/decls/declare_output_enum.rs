@@ -4,4 +4,4 @@ macro_rules! declare_output_enum {
     };
 }
 
-declare_output_enum!()
+declare_output_enum!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf8BoundedMap!();
         Utf8Node!();
+        Utf8BoundedMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Utf8State {
     };
 }
 
-Utf8State!()
+Utf8State!();

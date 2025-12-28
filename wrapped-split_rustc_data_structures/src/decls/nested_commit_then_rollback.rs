@@ -11,4 +11,4 @@ macro_rules! nested_commit_then_rollback {
     };
 }
 
-nested_commit_then_rollback!()
+nested_commit_then_rollback!();

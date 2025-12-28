@@ -4,4 +4,4 @@ macro_rules! ChangeLt {
     };
 }
 
-ChangeLt!()
+ChangeLt!();

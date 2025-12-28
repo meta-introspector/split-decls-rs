@@ -4,4 +4,4 @@ macro_rules! NestedStaticInThreadLocal {
     };
 }
 
-NestedStaticInThreadLocal!()
+NestedStaticInThreadLocal!();

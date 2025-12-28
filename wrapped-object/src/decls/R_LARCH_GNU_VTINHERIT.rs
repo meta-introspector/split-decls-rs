@@ -4,4 +4,4 @@ macro_rules! R_LARCH_GNU_VTINHERIT {
     };
 }
 
-R_LARCH_GNU_VTINHERIT!()
+R_LARCH_GNU_VTINHERIT!();

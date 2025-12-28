@@ -4,4 +4,4 @@ macro_rules! AllowHigherAlign {
     };
 }
 
-AllowHigherAlign!()
+AllowHigherAlign!();

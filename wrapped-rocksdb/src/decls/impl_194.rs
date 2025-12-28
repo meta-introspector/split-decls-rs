@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        BlockBasedIndexType!();
-        ChecksumType!();
-        BlockBasedTablePinningTier!();
         Options!();
-        Cache!();
         BlockBasedOptions!();
+        BlockBasedTablePinningTier!();
+        BlockBasedIndexType!();
         DataBlockIndexType!();
+        Cache!();
+        ChecksumType!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

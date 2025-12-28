@@ -4,4 +4,4 @@ macro_rules! is_single_token_op {
     };
 }
 
-is_single_token_op!()
+is_single_token_op!();

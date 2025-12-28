@@ -4,4 +4,4 @@ macro_rules! DIVES_AKURU {
     };
 }
 
-DIVES_AKURU!()
+DIVES_AKURU!();

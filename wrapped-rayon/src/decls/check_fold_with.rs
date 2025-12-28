@@ -4,4 +4,4 @@ macro_rules! check_fold_with {
     };
 }
 
-check_fold_with!()
+check_fold_with!();

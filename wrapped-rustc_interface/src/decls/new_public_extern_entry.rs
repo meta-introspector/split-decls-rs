@@ -4,4 +4,4 @@ macro_rules! new_public_extern_entry {
     };
 }
 
-new_public_extern_entry!()
+new_public_extern_entry!();

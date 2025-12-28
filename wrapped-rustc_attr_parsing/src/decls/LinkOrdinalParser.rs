@@ -4,4 +4,4 @@ macro_rules! LinkOrdinalParser {
     };
 }
 
-LinkOrdinalParser!()
+LinkOrdinalParser!();

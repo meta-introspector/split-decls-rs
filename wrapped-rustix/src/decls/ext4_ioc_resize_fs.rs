@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Setter!();
         Result!();
+        Setter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ext4_ioc_resize_fs {
     };
 }
 
-ext4_ioc_resize_fs!()
+ext4_ioc_resize_fs!();

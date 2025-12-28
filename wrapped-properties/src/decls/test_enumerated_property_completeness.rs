@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
+        IndicSyllabicCategory!();
+        Baked!();
+        JoiningType!();
+        CanonicalCombiningClass!();
+        HangulSyllableType!();
+        VerticalOrientation!();
+        PropertyNamesLong!();
         NamedEnumeratedProperty!();
         WordBreak!();
-        PropertyNamesLong!();
-        VerticalOrientation!();
-        IndicSyllabicCategory!();
-        JoiningType!();
-        HangulSyllableType!();
-        SentenceBreak!();
-        Baked!();
         EastAsianWidth!();
-        CanonicalCombiningClass!();
         BidiClass!();
+        SentenceBreak!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! test_enumerated_property_completeness {
     };
 }
 
-test_enumerated_property_completeness!()
+test_enumerated_property_completeness!();

@@ -4,4 +4,4 @@ macro_rules! static_assert_size {
     };
 }
 
-static_assert_size!()
+static_assert_size!();

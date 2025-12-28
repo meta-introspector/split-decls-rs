@@ -4,4 +4,4 @@ macro_rules! monster_check {
     };
 }
 
-monster_check!()
+monster_check!();

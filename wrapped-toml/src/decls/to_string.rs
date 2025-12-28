@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Buffer!();
         Error!();
         Serializer!();
         ValueSerializer!();
+        Buffer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! to_string {
     };
 }
 
-to_string!()
+to_string!();

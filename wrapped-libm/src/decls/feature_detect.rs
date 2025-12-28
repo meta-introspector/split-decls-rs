@@ -4,4 +4,4 @@ macro_rules! feature_detect {
     };
 }
 
-feature_detect!()
+feature_detect!();

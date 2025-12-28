@@ -4,4 +4,4 @@ macro_rules! modify_crate_root {
     };
 }
 
-modify_crate_root!()
+modify_crate_root!();

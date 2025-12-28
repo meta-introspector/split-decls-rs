@@ -4,4 +4,4 @@ macro_rules! PeekCallKind {
     };
 }
 
-PeekCallKind!()
+PeekCallKind!();

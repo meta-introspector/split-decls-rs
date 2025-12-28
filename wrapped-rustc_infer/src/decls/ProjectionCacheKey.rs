@@ -4,4 +4,4 @@ macro_rules! ProjectionCacheKey {
     };
 }
 
-ProjectionCacheKey!()
+ProjectionCacheKey!();

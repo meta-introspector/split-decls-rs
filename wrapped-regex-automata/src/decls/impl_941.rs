@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SparseSet!();
         SparseSets!();
+        SparseSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_941 {
     };
 }
 
-impl_941!()
+impl_941!();

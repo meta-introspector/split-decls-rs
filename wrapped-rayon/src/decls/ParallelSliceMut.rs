@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ChunkByMut!();
-        SplitMut!();
-        ChunksMut!();
-        ChunksExactMut!();
         RChunksMut!();
+        ChunksExactMut!();
         SplitInclusiveMut!();
+        ChunkByMut!();
         RChunksExactMut!();
+        ChunksMut!();
+        SplitMut!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! ParallelSliceMut {
     };
 }
 
-ParallelSliceMut!()
+ParallelSliceMut!();

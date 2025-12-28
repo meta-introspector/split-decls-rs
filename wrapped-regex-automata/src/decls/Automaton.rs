@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        MatchError!();
         PatternID!();
-        HalfMatch!();
-        OverlappingState!();
         StartError!();
-        NFA!();
-        Prefilter!();
-        Transitions!();
+        OverlappingState!();
         Input!();
+        StateID!();
+        MatchError!();
+        HalfMatch!();
+        PatternSet!();
+        Prefilter!();
         Anchored!();
         DFA!();
-        StateID!();
+        NFA!();
+        Transitions!();
         Config!();
-        PatternSet!();
         MatchKind!();
     };
 }
@@ -25,4 +25,4 @@ macro_rules! Automaton {
     };
 }
 
-Automaton!()
+Automaton!();

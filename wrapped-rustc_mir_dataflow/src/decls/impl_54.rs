@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugWithContext!();
         HasMoveData!();
+        DebugWithContext!();
         Formatter!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

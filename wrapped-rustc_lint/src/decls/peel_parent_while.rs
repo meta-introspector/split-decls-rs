@@ -4,4 +4,4 @@ macro_rules! peel_parent_while {
     };
 }
 
-peel_parent_while!()
+peel_parent_while!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Gid!();
         Result!();
+        Gid!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_thread_groups {
     };
 }
 
-set_thread_groups!()
+set_thread_groups!();

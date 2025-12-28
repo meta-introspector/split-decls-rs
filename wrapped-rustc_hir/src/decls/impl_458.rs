@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashStableContext!();
         BodyId!();
+        HashStableContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_458 {
     };
 }
 
-impl_458!()
+impl_458!();

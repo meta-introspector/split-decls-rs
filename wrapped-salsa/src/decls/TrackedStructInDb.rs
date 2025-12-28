@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Zalsa!();
-        Id!();
-        SalsaStructInDb!();
         DatabaseKeyIndex!();
+        SalsaStructInDb!();
+        Id!();
+        Zalsa!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TrackedStructInDb {
     };
 }
 
-TrackedStructInDb!()
+TrackedStructInDb!();

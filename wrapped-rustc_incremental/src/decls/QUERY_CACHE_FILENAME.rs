@@ -4,4 +4,4 @@ macro_rules! QUERY_CACHE_FILENAME {
     };
 }
 
-QUERY_CACHE_FILENAME!()
+QUERY_CACHE_FILENAME!();

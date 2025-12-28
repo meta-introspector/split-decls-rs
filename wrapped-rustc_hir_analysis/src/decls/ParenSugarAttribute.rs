@@ -4,4 +4,4 @@ macro_rules! ParenSugarAttribute {
     };
 }
 
-ParenSugarAttribute!()
+ParenSugarAttribute!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Prefilter!();
         Finder!();
+        Prefilter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TwoWayWithPrefilter {
     };
 }
 
-TwoWayWithPrefilter!()
+TwoWayWithPrefilter!();

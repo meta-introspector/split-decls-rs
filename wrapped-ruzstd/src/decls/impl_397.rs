@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        FSEDecoder!();
         Entry!();
-        FSETable!();
-        HuffmanTable!();
-        HuffmanTableError!();
+        FSEDecoder!();
         Read!();
+        HuffmanTable!();
+        FSETable!();
         BitReaderReversed!();
+        HuffmanTableError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_397 {
     };
 }
 
-impl_397!()
+impl_397!();

@@ -4,4 +4,4 @@ macro_rules! ModuleRef {
     };
 }
 
-ModuleRef!()
+ModuleRef!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InlineAsmArch!();
         ModifierInfo!();
         InlineAsmType!();
+        InlineAsmArch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

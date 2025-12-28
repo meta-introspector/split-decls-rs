@@ -4,4 +4,4 @@ macro_rules! R_CRIS_32_GOT {
     };
 }
 
-R_CRIS_32_GOT!()
+R_CRIS_32_GOT!();

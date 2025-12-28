@@ -11,4 +11,4 @@ macro_rules! compute_exact_name_match {
     };
 }
 
-compute_exact_name_match!()
+compute_exact_name_match!();

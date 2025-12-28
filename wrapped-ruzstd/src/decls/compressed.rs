@@ -4,4 +4,4 @@ macro_rules! compressed {
     };
 }
 
-compressed!()
+compressed!();

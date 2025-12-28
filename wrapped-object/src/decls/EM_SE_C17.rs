@@ -4,4 +4,4 @@ macro_rules! EM_SE_C17 {
     };
 }
 
-EM_SE_C17!()
+EM_SE_C17!();

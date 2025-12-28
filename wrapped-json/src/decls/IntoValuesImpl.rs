@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoValues!();
         Value!();
+        IntoValues!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IntoValuesImpl {
     };
 }
 
-IntoValuesImpl!()
+IntoValuesImpl!();

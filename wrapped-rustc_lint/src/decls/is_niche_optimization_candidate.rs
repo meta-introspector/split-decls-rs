@@ -4,4 +4,4 @@ macro_rules! is_niche_optimization_candidate {
     };
 }
 
-is_niche_optimization_candidate!()
+is_niche_optimization_candidate!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Symbol!();
-        U16!();
         I16!();
-        Section!();
         U32!();
+        Section!();
+        U16!();
         U64!();
+        Symbol!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Symbol64 {
     };
 }
 
-Symbol64!()
+Symbol64!();

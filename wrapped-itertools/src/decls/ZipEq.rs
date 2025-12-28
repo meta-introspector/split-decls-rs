@@ -4,4 +4,4 @@ macro_rules! ZipEq {
     };
 }
 
-ZipEq!()
+ZipEq!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RegionVidKey!();
-        ProjectionCache!();
-        TyVidEqKey!();
-        ConstVidKey!();
-        UndoLog!();
         RegionConstraintCollector!();
+        ConstVidKey!();
         TyVidSubKey!();
+        ProjectionCache!();
+        RegionVidKey!();
+        UndoLog!();
+        TyVidEqKey!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! macro_198 {
     };
 }
 
-macro_198!()
+macro_198!();

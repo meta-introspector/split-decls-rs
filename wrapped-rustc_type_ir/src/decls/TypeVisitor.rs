@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Clauses!();
-        TypeVisitable!();
+        Interner!();
         Const!();
+        Predicate!();
         Binder!();
         Ty!();
-        Interner!();
+        TypeVisitable!();
         Region!();
-        Predicate!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! TypeVisitor {
     };
 }
 
-TypeVisitor!()
+TypeVisitor!();

@@ -12,4 +12,4 @@ macro_rules! IUnknown_Vtbl {
     };
 }
 
-IUnknown_Vtbl!()
+IUnknown_Vtbl!();

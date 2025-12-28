@@ -12,4 +12,4 @@ macro_rules! can_coerce {
     };
 }
 
-can_coerce!()
+can_coerce!();

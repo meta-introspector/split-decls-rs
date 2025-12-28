@@ -11,4 +11,4 @@ macro_rules! can_do_string_concat {
     };
 }
 
-can_do_string_concat!()
+can_do_string_concat!();

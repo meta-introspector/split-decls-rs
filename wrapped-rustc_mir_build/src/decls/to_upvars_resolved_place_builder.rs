@@ -13,4 +13,4 @@ macro_rules! to_upvars_resolved_place_builder {
     };
 }
 
-to_upvars_resolved_place_builder!()
+to_upvars_resolved_place_builder!();

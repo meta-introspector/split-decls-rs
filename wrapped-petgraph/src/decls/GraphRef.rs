@@ -4,4 +4,4 @@ macro_rules! GraphRef {
     };
 }
 
-GraphRef!()
+GraphRef!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompletionContext!();
         CompletionRelevanceTypeMatch!();
+        CompletionContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! match_types {
     };
 }
 
-match_types!()
+match_types!();

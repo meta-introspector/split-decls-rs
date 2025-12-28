@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_ABS5 {
     };
 }
 
-R_ARM_THM_ABS5!()
+R_ARM_THM_ABS5!();

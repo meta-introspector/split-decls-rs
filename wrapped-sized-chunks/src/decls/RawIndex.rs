@@ -4,4 +4,4 @@ macro_rules! RawIndex {
     };
 }
 
-RawIndex!()
+RawIndex!();

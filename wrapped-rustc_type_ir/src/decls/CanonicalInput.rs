@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CanonicalQueryInput!();
-        QueryInput!();
         Predicate!();
+        QueryInput!();
         Interner!();
+        CanonicalQueryInput!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CanonicalInput {
     };
 }
 
-CanonicalInput!()
+CanonicalInput!();

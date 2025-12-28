@@ -4,4 +4,4 @@ macro_rules! remove_deref {
     };
 }
 
-remove_deref!()
+remove_deref!();

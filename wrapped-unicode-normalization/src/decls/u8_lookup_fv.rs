@@ -4,4 +4,4 @@ macro_rules! u8_lookup_fv {
     };
 }
 
-u8_lookup_fv!()
+u8_lookup_fv!();

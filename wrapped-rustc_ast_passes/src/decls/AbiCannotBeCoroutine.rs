@@ -4,4 +4,4 @@ macro_rules! AbiCannotBeCoroutine {
     };
 }
 
-AbiCannotBeCoroutine!()
+AbiCannotBeCoroutine!();

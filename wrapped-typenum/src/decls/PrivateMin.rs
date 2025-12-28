@@ -4,4 +4,4 @@ macro_rules! PrivateMin {
     };
 }
 
-PrivateMin!()
+PrivateMin!();

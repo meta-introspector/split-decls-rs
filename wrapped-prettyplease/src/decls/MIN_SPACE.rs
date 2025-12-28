@@ -4,4 +4,4 @@ macro_rules! MIN_SPACE {
     };
 }
 
-MIN_SPACE!()
+MIN_SPACE!();

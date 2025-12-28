@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ppmd!();
         MaybeEncrypted!();
+        Ppmd!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! GenericZipWriter {
     };
 }
 
-GenericZipWriter!()
+GenericZipWriter!();

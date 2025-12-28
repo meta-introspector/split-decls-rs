@@ -12,4 +12,4 @@ macro_rules! impl_serializable_string_for_fixed_size {
     };
 }
 
-impl_serializable_string_for_fixed_size!()
+impl_serializable_string_for_fixed_size!();

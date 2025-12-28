@@ -4,4 +4,4 @@ macro_rules! CUNEIFORM {
     };
 }
 
-CUNEIFORM!()
+CUNEIFORM!();

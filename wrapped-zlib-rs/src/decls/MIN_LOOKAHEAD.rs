@@ -4,4 +4,4 @@ macro_rules! MIN_LOOKAHEAD {
     };
 }
 
-MIN_LOOKAHEAD!()
+MIN_LOOKAHEAD!();

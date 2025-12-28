@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Result!();
         Ast!();
-        Printer!();
-        PrinterBuilder!();
         Writer!();
+        PrinterBuilder!();
+        Printer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

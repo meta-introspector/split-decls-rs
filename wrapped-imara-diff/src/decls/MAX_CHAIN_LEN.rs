@@ -4,4 +4,4 @@ macro_rules! MAX_CHAIN_LEN {
     };
 }
 
-MAX_CHAIN_LEN!()
+MAX_CHAIN_LEN!();

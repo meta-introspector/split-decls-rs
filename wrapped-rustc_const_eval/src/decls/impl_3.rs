@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Qualifs!();
         ConstCx!();
-        FlowSensitiveAnalysis!();
-        NeedsNonConstDrop!();
         HasMutInterior!();
+        NeedsNonConstDrop!();
+        Qualifs!();
         NeedsDrop!();
+        FlowSensitiveAnalysis!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

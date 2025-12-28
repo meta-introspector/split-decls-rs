@@ -4,4 +4,4 @@ macro_rules! XTY_CM {
     };
 }
 
-XTY_CM!()
+XTY_CM!();

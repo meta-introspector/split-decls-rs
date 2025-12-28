@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Pid!();
         CpuSet!();
         Result!();
-        Pid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! sched_setaffinity {
     };
 }
 
-sched_setaffinity!()
+sched_setaffinity!();

@@ -4,4 +4,4 @@ macro_rules! fast_reject {
     };
 }
 
-fast_reject!()
+fast_reject!();

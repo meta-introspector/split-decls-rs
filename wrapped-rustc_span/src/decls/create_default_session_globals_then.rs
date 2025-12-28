@@ -4,4 +4,4 @@ macro_rules! create_default_session_globals_then {
     };
 }
 
-create_default_session_globals_then!()
+create_default_session_globals_then!();

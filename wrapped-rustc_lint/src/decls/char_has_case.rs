@@ -4,4 +4,4 @@ macro_rules! char_has_case {
     };
 }
 
-char_has_case!()
+char_has_case!();

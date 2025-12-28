@@ -4,4 +4,4 @@ macro_rules! elaborate {
     };
 }
 
-elaborate!()
+elaborate!();

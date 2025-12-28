@@ -4,4 +4,4 @@ macro_rules! MoveCheckVisitor {
     };
 }
 
-MoveCheckVisitor!()
+MoveCheckVisitor!();

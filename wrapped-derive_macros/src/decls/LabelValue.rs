@@ -4,4 +4,4 @@ macro_rules! LabelValue {
     };
 }
 
-LabelValue!()
+LabelValue!();

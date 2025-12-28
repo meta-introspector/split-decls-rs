@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Shared!();
-        Slot!();
         Config!();
+        Tid!();
         Local!();
         Shard!();
-        Tid!();
+        Slot!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_151 {
     };
 }
 
-impl_151!()
+impl_151!();

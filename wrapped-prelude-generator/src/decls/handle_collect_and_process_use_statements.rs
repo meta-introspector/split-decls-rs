@@ -4,4 +4,4 @@ macro_rules! handle_collect_and_process_use_statements {
     };
 }
 
-handle_collect_and_process_use_statements!()
+handle_collect_and_process_use_statements!();

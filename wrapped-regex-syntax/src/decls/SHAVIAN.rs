@@ -4,4 +4,4 @@ macro_rules! SHAVIAN {
     };
 }
 
-SHAVIAN!()
+SHAVIAN!();

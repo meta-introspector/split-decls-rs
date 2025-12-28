@@ -4,4 +4,4 @@ macro_rules! adt_sizedness_constraint {
     };
 }
 
-adt_sizedness_constraint!()
+adt_sizedness_constraint!();

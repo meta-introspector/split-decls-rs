@@ -4,4 +4,4 @@ macro_rules! check_hash_map {
     };
 }
 
-check_hash_map!()
+check_hash_map!();

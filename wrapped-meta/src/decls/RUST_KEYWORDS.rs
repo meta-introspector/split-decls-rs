@@ -4,4 +4,4 @@ macro_rules! RUST_KEYWORDS {
     };
 }
 
-RUST_KEYWORDS!()
+RUST_KEYWORDS!();

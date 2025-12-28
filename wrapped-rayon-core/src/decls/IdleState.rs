@@ -11,4 +11,4 @@ macro_rules! IdleState {
     };
 }
 
-IdleState!()
+IdleState!();

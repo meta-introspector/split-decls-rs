@@ -4,4 +4,4 @@ macro_rules! load_u64 {
     };
 }
 
-load_u64!()
+load_u64!();

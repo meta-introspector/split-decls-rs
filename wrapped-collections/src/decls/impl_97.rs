@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IKeyValuePair!();
-        StockKeyValuePair!();
         IIterator_Impl!();
+        StockKeyValuePair!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

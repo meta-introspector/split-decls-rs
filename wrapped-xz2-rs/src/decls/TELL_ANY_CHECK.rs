@@ -4,4 +4,4 @@ macro_rules! TELL_ANY_CHECK {
     };
 }
 
-TELL_ANY_CHECK!()
+TELL_ANY_CHECK!();

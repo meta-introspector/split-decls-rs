@@ -4,4 +4,4 @@ macro_rules! PR_GET_TIMING {
     };
 }
 
-PR_GET_TIMING!()
+PR_GET_TIMING!();

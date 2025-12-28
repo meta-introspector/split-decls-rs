@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NormalizeToExpected!();
         Data!();
+        NormalizeToExpected!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! json_normalize_same_order {
     };
 }
 
-json_normalize_same_order!()
+json_normalize_same_order!();

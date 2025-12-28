@@ -4,4 +4,4 @@ macro_rules! DT_RELACOUNT {
     };
 }
 
-DT_RELACOUNT!()
+DT_RELACOUNT!();

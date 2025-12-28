@@ -4,4 +4,4 @@ macro_rules! V_BASE {
     };
 }
 
-V_BASE!()
+V_BASE!();

@@ -4,4 +4,4 @@ macro_rules! invalid_position {
     };
 }
 
-invalid_position!()
+invalid_position!();

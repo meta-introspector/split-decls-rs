@@ -4,4 +4,4 @@ macro_rules! R_M32R_32_RELA {
     };
 }
 
-R_M32R_32_RELA!()
+R_M32R_32_RELA!();

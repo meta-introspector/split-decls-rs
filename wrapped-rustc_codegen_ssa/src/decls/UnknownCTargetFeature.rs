@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PossibleFeature!();
         Diagnostic!();
+        PossibleFeature!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UnknownCTargetFeature {
     };
 }
 
-UnknownCTargetFeature!()
+UnknownCTargetFeature!();

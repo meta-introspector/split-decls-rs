@@ -14,4 +14,4 @@ macro_rules! check_generic_arg_count_for_call {
     };
 }
 
-check_generic_arg_count_for_call!()
+check_generic_arg_count_for_call!();

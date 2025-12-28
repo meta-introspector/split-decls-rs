@@ -4,4 +4,4 @@ macro_rules! nghttp2_on_frame_recv_callback {
     };
 }
 
-nghttp2_on_frame_recv_callback!()
+nghttp2_on_frame_recv_callback!();

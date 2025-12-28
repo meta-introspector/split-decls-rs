@@ -4,4 +4,4 @@ macro_rules! PrivateInterfacesOrBoundsLint {
     };
 }
 
-PrivateInterfacesOrBoundsLint!()
+PrivateInterfacesOrBoundsLint!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Algorithm!();
-        Histogram!();
-        InternedInput!();
-        Myers!();
         Diff!();
         BasicLineDiffPrinter!();
+        InternedInput!();
+        Histogram!();
+        Myers!();
         UnifiedDiffConfig!();
     };
 }
@@ -55,4 +55,4 @@ macro_rules! postprocess {
     };
 }
 
-postprocess!()
+postprocess!();

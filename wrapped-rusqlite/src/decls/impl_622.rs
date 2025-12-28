@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        Error!();
         CsvTab!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_622 {
     };
 }
 
-impl_622!()
+impl_622!();

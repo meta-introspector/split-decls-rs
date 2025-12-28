@@ -4,4 +4,4 @@ macro_rules! DebugVisualizerUnreadable {
     };
 }
 
-DebugVisualizerUnreadable!()
+DebugVisualizerUnreadable!();

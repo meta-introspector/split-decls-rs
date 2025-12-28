@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxElement!();
         Position!();
+        SyntaxElement!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Change {
     };
 }
 
-Change!()
+Change!();

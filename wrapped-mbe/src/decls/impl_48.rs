@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpandErrorKind!();
         ExpandError!();
+        ExpandErrorKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

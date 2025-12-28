@@ -11,4 +11,4 @@ macro_rules! BYTES_IN_LANE {
     };
 }
 
-BYTES_IN_LANE!()
+BYTES_IN_LANE!();

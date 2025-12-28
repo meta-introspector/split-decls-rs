@@ -12,4 +12,4 @@ macro_rules! try_cache {
     };
 }
 
-try_cache!()
+try_cache!();

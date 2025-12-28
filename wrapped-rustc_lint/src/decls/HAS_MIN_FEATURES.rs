@@ -4,4 +4,4 @@ macro_rules! HAS_MIN_FEATURES {
     };
 }
 
-HAS_MIN_FEATURES!()
+HAS_MIN_FEATURES!();

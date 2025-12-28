@@ -4,4 +4,4 @@ macro_rules! SHT_RISCV_ATTRIBUTES {
     };
 }
 
-SHT_RISCV_ATTRIBUTES!()
+SHT_RISCV_ATTRIBUTES!();

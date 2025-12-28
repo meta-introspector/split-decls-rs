@@ -11,4 +11,4 @@ macro_rules! decomposing_normalize_to {
     };
 }
 
-decomposing_normalize_to!()
+decomposing_normalize_to!();

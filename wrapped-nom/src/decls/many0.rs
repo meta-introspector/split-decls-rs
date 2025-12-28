@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IResult!();
-        Error!();
         Parser!();
+        Error!();
         Input!();
+        IResult!();
         Needed!();
         Many0!();
     };
@@ -16,4 +16,4 @@ macro_rules! many0 {
     };
 }
 
-many0!()
+many0!();

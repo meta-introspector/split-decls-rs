@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        IoctlOutput!();
+        Ioctl!();
         Opcode!();
         Ficlone!();
         Result!();
-        Ioctl!();
-        IoctlOutput!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1538 {
     };
 }
 
-impl_1538!()
+impl_1538!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         Anchored!();
+        Config!();
         Input!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_782 {
     };
 }
 
-impl_782!()
+impl_782!();

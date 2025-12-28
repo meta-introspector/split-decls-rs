@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        InterpCx!();
         RangeSet!();
-        MPlaceTy!();
         MemPlaceMeta!();
-        ValidityVisitor!();
-        PlaceTy!();
-        Coroutine!();
         CtfeValidationMode!();
-        Machine!();
-        ImmTy!();
+        InterpCx!();
+        ValidityVisitor!();
+        MPlaceTy!();
         PathElem!();
+        PlaceTy!();
+        ImmTy!();
+        Coroutine!();
+        Machine!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_354 {
     };
 }
 
-impl_354!()
+impl_354!();

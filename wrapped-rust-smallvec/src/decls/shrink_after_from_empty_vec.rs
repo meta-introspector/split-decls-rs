@@ -11,4 +11,4 @@ macro_rules! shrink_after_from_empty_vec {
     };
 }
 
-shrink_after_from_empty_vec!()
+shrink_after_from_empty_vec!();

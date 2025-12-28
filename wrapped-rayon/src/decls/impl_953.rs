@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Reducer!();
         UnzipConsumer!();
-        UnindexedConsumer!();
         UnzipOp!();
+        UnindexedConsumer!();
         UnzipReducer!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_953 {
     };
 }
 
-impl_953!()
+impl_953!();

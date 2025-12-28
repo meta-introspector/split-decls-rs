@@ -4,4 +4,4 @@ macro_rules! add_dep_with_prelude {
     };
 }
 
-add_dep_with_prelude!()
+add_dep_with_prelude!();

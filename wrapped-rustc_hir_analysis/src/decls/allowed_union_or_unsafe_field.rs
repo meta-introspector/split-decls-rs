@@ -4,4 +4,4 @@ macro_rules! allowed_union_or_unsafe_field {
     };
 }
 
-allowed_union_or_unsafe_field!()
+allowed_union_or_unsafe_field!();

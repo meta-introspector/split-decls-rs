@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AcceptContext!();
-        PatternComplexityLimitParser!();
+        AllowedTargets!();
         SingleAttributeParser!();
         ArgParser!();
-        AllowedTargets!();
-        AttributeOrder!();
         Stage!();
+        AcceptContext!();
+        PatternComplexityLimitParser!();
+        AttributeOrder!();
         OnDuplicate!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

@@ -4,4 +4,4 @@ macro_rules! line_should_be_ignored {
     };
 }
 
-line_should_be_ignored!()
+line_should_be_ignored!();

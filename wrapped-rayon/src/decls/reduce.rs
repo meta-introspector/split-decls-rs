@@ -4,4 +4,4 @@ macro_rules! reduce {
     };
 }
 
-reduce!()
+reduce!();

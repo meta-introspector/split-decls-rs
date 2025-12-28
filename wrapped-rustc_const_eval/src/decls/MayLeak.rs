@@ -4,4 +4,4 @@ macro_rules! MayLeak {
     };
 }
 
-MayLeak!()
+MayLeak!();

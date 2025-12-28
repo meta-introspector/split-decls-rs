@@ -4,4 +4,4 @@ macro_rules! LitIntRepr {
     };
 }
 
-LitIntRepr!()
+LitIntRepr!();

@@ -4,4 +4,4 @@ macro_rules! check_trait_item {
     };
 }
 
-check_trait_item!()
+check_trait_item!();

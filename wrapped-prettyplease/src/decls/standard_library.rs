@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Printer!();
-        FixupContext!();
-        PathKind!();
         Token!();
+        FixupContext!();
+        Printer!();
+        PathKind!();
         IterDelimited!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! standard_library {
     };
 }
 
-standard_library!()
+standard_library!();

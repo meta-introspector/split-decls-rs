@@ -4,4 +4,4 @@ macro_rules! NO_SCOPE_METADATA {
     };
 }
 
-NO_SCOPE_METADATA!()
+NO_SCOPE_METADATA!();

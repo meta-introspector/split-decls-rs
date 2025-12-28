@@ -4,4 +4,4 @@ macro_rules! is_search_permitted_ancestors {
     };
 }
 
-is_search_permitted_ancestors!()
+is_search_permitted_ancestors!();

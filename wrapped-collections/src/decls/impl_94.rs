@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StockMapViewIterator!();
-        IIterable_Impl!();
         IKeyValuePair!();
         IIterator!();
+        StockMapViewIterator!();
+        IIterable_Impl!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

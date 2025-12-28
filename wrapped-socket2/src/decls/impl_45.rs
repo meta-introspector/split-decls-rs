@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SockRef!();
         Socket!();
+        SockRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

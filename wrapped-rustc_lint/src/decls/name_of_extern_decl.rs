@@ -11,4 +11,4 @@ macro_rules! name_of_extern_decl {
     };
 }
 
-name_of_extern_decl!()
+name_of_extern_decl!();

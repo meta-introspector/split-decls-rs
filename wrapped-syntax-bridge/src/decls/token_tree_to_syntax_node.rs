@@ -11,4 +11,4 @@ macro_rules! token_tree_to_syntax_node {
     };
 }
 
-token_tree_to_syntax_node!()
+token_tree_to_syntax_node!();

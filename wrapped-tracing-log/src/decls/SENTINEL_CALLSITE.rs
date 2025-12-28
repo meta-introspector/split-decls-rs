@@ -11,4 +11,4 @@ macro_rules! SENTINEL_CALLSITE {
     };
 }
 
-SENTINEL_CALLSITE!()
+SENTINEL_CALLSITE!();

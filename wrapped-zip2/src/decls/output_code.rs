@@ -12,4 +12,4 @@ macro_rules! output_code {
     };
 }
 
-output_code!()
+output_code!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Parse!();
         Result!();
         ParseQuote!();
         Punctuated!();
         ParseStream!();
+        Parse!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_552 {
     };
 }
 
-impl_552!()
+impl_552!();

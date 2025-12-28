@@ -4,4 +4,4 @@ macro_rules! mantissa_exponent {
     };
 }
 
-mantissa_exponent!()
+mantissa_exponent!();

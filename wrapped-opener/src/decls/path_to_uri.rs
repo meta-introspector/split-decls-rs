@@ -11,4 +11,4 @@ macro_rules! path_to_uri {
     };
 }
 
-path_to_uri!()
+path_to_uri!();

@@ -4,4 +4,4 @@ macro_rules! FileManager1 {
     };
 }
 
-FileManager1!()
+FileManager1!();

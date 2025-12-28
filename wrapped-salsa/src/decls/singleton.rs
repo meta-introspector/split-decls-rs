@@ -4,4 +4,4 @@ macro_rules! singleton {
     };
 }
 
-singleton!()
+singleton!();

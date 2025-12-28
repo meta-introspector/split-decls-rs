@@ -4,4 +4,4 @@ macro_rules! SendSyncPhantomData {
     };
 }
 
-SendSyncPhantomData!()
+SendSyncPhantomData!();

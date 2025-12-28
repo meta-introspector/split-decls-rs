@@ -4,4 +4,4 @@ macro_rules! HANGUL_JAMO_LIMIT {
     };
 }
 
-HANGUL_JAMO_LIMIT!()
+HANGUL_JAMO_LIMIT!();

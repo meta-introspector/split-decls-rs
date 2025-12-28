@@ -12,4 +12,4 @@ macro_rules! set_thread_gid {
     };
 }
 
-set_thread_gid!()
+set_thread_gid!();

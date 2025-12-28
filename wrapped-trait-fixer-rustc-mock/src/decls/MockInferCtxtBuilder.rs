@@ -4,4 +4,4 @@ macro_rules! MockInferCtxtBuilder {
     };
 }
 
-MockInferCtxtBuilder!()
+MockInferCtxtBuilder!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        InvertedUInt!();
+        B0!();
         TrimTrailingZeros!();
         InvertedUnsigned!();
-        B0!();
-        InvertedUInt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

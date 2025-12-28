@@ -12,4 +12,4 @@ macro_rules! read_follower_sets {
     };
 }
 
-read_follower_sets!()
+read_follower_sets!();

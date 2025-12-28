@@ -4,4 +4,4 @@ macro_rules! replace_root {
     };
 }
 
-replace_root!()
+replace_root!();

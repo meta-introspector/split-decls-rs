@@ -12,4 +12,4 @@ macro_rules! searcher_kind_neon {
     };
 }
 
-searcher_kind_neon!()
+searcher_kind_neon!();

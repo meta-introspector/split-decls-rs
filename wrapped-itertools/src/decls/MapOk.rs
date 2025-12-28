@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MapSpecialCaseFnOk!();
         MapSpecialCase!();
+        MapSpecialCaseFnOk!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MapOk {
     };
 }
 
-MapOk!()
+MapOk!();

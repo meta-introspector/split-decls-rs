@@ -12,4 +12,4 @@ macro_rules! all_tests_discarded_min_tests_passed_missing {
     };
 }
 
-all_tests_discarded_min_tests_passed_missing!()
+all_tests_discarded_min_tests_passed_missing!();

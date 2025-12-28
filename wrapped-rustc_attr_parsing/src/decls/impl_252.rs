@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Stage!();
         NoArgsAttributeParser!();
         WithoutArgs!();
-        Stage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_252 {
     };
 }
 
-impl_252!()
+impl_252!();

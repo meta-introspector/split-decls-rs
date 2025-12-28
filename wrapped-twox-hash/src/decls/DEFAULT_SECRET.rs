@@ -4,4 +4,4 @@ macro_rules! DEFAULT_SECRET {
     };
 }
 
-DEFAULT_SECRET!()
+DEFAULT_SECRET!();

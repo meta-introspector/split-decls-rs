@@ -4,4 +4,4 @@ macro_rules! HYPER_IO_ERROR {
     };
 }
 
-HYPER_IO_ERROR!()
+HYPER_IO_ERROR!();

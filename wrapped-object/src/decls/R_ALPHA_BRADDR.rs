@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_BRADDR {
     };
 }
 
-R_ALPHA_BRADDR!()
+R_ALPHA_BRADDR!();

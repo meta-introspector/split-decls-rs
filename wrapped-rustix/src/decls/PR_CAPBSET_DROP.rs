@@ -4,4 +4,4 @@ macro_rules! PR_CAPBSET_DROP {
     };
 }
 
-PR_CAPBSET_DROP!()
+PR_CAPBSET_DROP!();

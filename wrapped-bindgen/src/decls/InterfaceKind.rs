@@ -4,4 +4,4 @@ macro_rules! InterfaceKind {
     };
 }
 
-InterfaceKind!()
+InterfaceKind!();

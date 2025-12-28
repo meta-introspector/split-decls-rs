@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Zip64CentralDirectoryEndLocator!();
-        CentralDirectoryEndInfo!();
-        Magic!();
-        Zip64CentralDirectoryEnd!();
+        ZipCentralEntryBlock!();
         Zip32CentralDirectoryEnd!();
         ZipResult!();
+        Magic!();
         Zip64CDELocatorBlock!();
-        ZipCentralEntryBlock!();
+        Zip64CentralDirectoryEndLocator!();
+        CentralDirectoryEndInfo!();
+        Zip64CentralDirectoryEnd!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! find_central_directory {
     };
 }
 
-find_central_directory!()
+find_central_directory!();

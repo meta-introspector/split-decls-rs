@@ -4,4 +4,4 @@ macro_rules! is_not_salsa_attr_path {
     };
 }
 
-is_not_salsa_attr_path!()
+is_not_salsa_attr_path!();

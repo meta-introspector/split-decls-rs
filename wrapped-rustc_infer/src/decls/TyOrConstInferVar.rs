@@ -4,4 +4,4 @@ macro_rules! TyOrConstInferVar {
     };
 }
 
-TyOrConstInferVar!()
+TyOrConstInferVar!();

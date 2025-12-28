@@ -4,4 +4,4 @@ macro_rules! dewhereselfify {
     };
 }
 
-dewhereselfify!()
+dewhereselfify!();

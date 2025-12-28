@@ -4,4 +4,4 @@ macro_rules! UnstableFeatureBoundIncompatibleStability {
     };
 }
 
-UnstableFeatureBoundIncompatibleStability!()
+UnstableFeatureBoundIncompatibleStability!();

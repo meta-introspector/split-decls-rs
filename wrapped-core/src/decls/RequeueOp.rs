@@ -4,4 +4,4 @@ macro_rules! RequeueOp {
     };
 }
 
-RequeueOp!()
+RequeueOp!();

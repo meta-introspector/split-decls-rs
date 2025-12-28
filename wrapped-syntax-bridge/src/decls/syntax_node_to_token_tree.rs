@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SpanMapper!();
         DocCommentDesugarMode!();
         Converter!();
+        SpanMapper!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! syntax_node_to_token_tree {
     };
 }
 
-syntax_node_to_token_tree!()
+syntax_node_to_token_tree!();

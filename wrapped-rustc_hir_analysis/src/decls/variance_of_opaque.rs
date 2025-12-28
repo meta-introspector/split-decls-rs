@@ -11,4 +11,4 @@ macro_rules! variance_of_opaque {
     };
 }
 
-variance_of_opaque!()
+variance_of_opaque!();

@@ -4,4 +4,4 @@ macro_rules! InvalidRegister {
     };
 }
 
-InvalidRegister!()
+InvalidRegister!();

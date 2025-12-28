@@ -4,4 +4,4 @@ macro_rules! ensure_wf {
     };
 }
 
-ensure_wf!()
+ensure_wf!();

@@ -4,4 +4,4 @@ macro_rules! check_crate_graph {
     };
 }
 
-check_crate_graph!()
+check_crate_graph!();

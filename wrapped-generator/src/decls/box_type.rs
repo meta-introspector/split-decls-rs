@@ -4,4 +4,4 @@ macro_rules! box_type {
     };
 }
 
-box_type!()
+box_type!();

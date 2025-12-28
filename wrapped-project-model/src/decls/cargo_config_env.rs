@@ -11,4 +11,4 @@ macro_rules! cargo_config_env {
     };
 }
 
-cargo_config_env!()
+cargo_config_env!();

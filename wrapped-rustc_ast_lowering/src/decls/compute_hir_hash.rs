@@ -4,4 +4,4 @@ macro_rules! compute_hir_hash {
     };
 }
 
-compute_hir_hash!()
+compute_hir_hash!();

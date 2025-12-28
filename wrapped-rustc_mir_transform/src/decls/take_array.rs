@@ -4,4 +4,4 @@ macro_rules! take_array {
     };
 }
 
-take_array!()
+take_array!();

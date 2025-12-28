@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TDEFLStatus!();
+        CompressorOxide!();
         CallbackFunc!();
         CallbackOxide!();
-        CompressorOxide!();
+        TDEFLStatus!();
         TDEFLFlush!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! compress_to_output {
     };
 }
 
-compress_to_output!()
+compress_to_output!();

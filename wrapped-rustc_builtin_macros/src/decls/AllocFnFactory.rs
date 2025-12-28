@@ -4,4 +4,4 @@ macro_rules! AllocFnFactory {
     };
 }
 
-AllocFnFactory!()
+AllocFnFactory!();

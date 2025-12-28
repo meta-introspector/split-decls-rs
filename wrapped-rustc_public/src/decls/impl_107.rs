@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Stable!();
         FieldsShape!();
-        Primitive!();
+        Stable!();
         BridgeTys!();
+        Primitive!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

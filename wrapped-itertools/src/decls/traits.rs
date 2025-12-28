@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IteratorIndex!();
-        HomogeneousTuple!();
         Itertools!();
+        HomogeneousTuple!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! traits {
     };
 }
 
-traits!()
+traits!();

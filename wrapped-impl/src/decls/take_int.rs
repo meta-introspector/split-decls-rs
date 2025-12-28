@@ -4,4 +4,4 @@ macro_rules! take_int {
     };
 }
 
-take_int!()
+take_int!();

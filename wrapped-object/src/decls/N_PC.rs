@@ -4,4 +4,4 @@ macro_rules! N_PC {
     };
 }
 
-N_PC!()
+N_PC!();

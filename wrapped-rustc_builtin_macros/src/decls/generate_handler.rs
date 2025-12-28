@@ -11,4 +11,4 @@ macro_rules! generate_handler {
     };
 }
 
-generate_handler!()
+generate_handler!();

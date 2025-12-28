@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HygieneEncodeContext!();
         SyntaxContext!();
+        HygieneEncodeContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! raw_encode_syntax_context {
     };
 }
 
-raw_encode_syntax_context!()
+raw_encode_syntax_context!();

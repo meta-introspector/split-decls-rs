@@ -4,4 +4,4 @@ macro_rules! DebugDepthGuard {
     };
 }
 
-DebugDepthGuard!()
+DebugDepthGuard!();

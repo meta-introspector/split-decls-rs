@@ -4,4 +4,4 @@ macro_rules! _memoffset__offset_of_union_impl {
     };
 }
 
-_memoffset__offset_of_union_impl!()
+_memoffset__offset_of_union_impl!();

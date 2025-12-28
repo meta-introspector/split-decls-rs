@@ -4,4 +4,4 @@ macro_rules! par_iter_collect_linked_list {
     };
 }
 
-par_iter_collect_linked_list!()
+par_iter_collect_linked_list!();

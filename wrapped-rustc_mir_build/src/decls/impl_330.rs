@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        NaNPattern!();
+        TypeNotStructural!();
         TypeNotPartialEq!();
         InvalidPattern!();
-        CouldNotEvalConstPattern!();
-        Variant!();
-        PartialEqImplStatus!();
-        ConstToPat!();
-        UnsizedPattern!();
-        TypeNotStructural!();
-        NaNPattern!();
-        ConstPatternDependsOnGenericParameter!();
-        PointerPattern!();
-        PatCtxt!();
         UnionPattern!();
+        UnsizedPattern!();
+        Variant!();
+        PointerPattern!();
+        PartialEqImplStatus!();
+        CouldNotEvalConstPattern!();
+        ConstPatternDependsOnGenericParameter!();
+        PatCtxt!();
+        ConstToPat!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_330 {
     };
 }
 
-impl_330!()
+impl_330!();

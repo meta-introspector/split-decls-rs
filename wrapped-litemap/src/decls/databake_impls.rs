@@ -4,4 +4,4 @@ macro_rules! databake_impls {
     };
 }
 
-databake_impls!()
+databake_impls!();

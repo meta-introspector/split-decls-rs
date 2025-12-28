@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ClosureRegionRequirements!();
+        RegionInferenceContext!();
         BorrowckInferCtxt!();
         UniversalRegionRelations!();
         MirTypeckRegionConstraints!();
-        RegionInferenceContext!();
-        ClosureRegionRequirements!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! compute_closure_requirements_modulo_opaques {
     };
 }
 
-compute_closure_requirements_modulo_opaques!()
+compute_closure_requirements_modulo_opaques!();

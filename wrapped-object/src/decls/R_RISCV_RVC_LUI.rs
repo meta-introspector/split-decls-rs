@@ -4,4 +4,4 @@ macro_rules! R_RISCV_RVC_LUI {
     };
 }
 
-R_RISCV_RVC_LUI!()
+R_RISCV_RVC_LUI!();

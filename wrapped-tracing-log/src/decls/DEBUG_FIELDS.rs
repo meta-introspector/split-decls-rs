@@ -11,4 +11,4 @@ macro_rules! DEBUG_FIELDS {
     };
 }
 
-DEBUG_FIELDS!()
+DEBUG_FIELDS!();

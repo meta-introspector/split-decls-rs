@@ -4,4 +4,4 @@ macro_rules! should_ignore {
     };
 }
 
-should_ignore!()
+should_ignore!();

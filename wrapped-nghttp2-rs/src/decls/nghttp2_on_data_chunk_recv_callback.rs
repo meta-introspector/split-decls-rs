@@ -4,4 +4,4 @@ macro_rules! nghttp2_on_data_chunk_recv_callback {
     };
 }
 
-nghttp2_on_data_chunk_recv_callback!()
+nghttp2_on_data_chunk_recv_callback!();

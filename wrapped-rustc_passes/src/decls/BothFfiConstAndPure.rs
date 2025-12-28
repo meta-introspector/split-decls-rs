@@ -4,4 +4,4 @@ macro_rules! BothFfiConstAndPure {
     };
 }
 
-BothFfiConstAndPure!()
+BothFfiConstAndPure!();

@@ -4,4 +4,4 @@ macro_rules! StaticWithoutBody {
     };
 }
 
-StaticWithoutBody!()
+StaticWithoutBody!();

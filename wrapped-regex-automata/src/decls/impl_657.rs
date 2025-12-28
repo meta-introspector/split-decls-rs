@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MatchError!();
         HalfMatch!();
-        TryHalfMatchesIter!();
         Input!();
+        MatchError!();
+        TryHalfMatchesIter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_657 {
     };
 }
 
-impl_657!()
+impl_657!();

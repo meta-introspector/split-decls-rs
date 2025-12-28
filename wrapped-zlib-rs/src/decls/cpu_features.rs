@@ -4,4 +4,4 @@ macro_rules! cpu_features {
     };
 }
 
-cpu_features!()
+cpu_features!();

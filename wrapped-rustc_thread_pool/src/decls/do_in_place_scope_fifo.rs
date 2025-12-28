@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ScopeFifo!();
         Registry!();
         WorkerThread!();
-        ScopeFifo!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! do_in_place_scope_fifo {
     };
 }
 
-do_in_place_scope_fifo!()
+do_in_place_scope_fifo!();

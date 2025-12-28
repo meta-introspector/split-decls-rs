@@ -11,4 +11,4 @@ macro_rules! STV_PROTECTED {
     };
 }
 
-STV_PROTECTED!()
+STV_PROTECTED!();

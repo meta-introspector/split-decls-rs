@@ -4,4 +4,4 @@ macro_rules! extract_spans_for_error_reporting {
     };
 }
 
-extract_spans_for_error_reporting!()
+extract_spans_for_error_reporting!();

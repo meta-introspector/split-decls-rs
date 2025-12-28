@@ -4,4 +4,4 @@ macro_rules! source_to_emoji {
     };
 }
 
-source_to_emoji!()
+source_to_emoji!();

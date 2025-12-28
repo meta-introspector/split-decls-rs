@@ -12,4 +12,4 @@ macro_rules! invalid_number {
     };
 }
 
-invalid_number!()
+invalid_number!();

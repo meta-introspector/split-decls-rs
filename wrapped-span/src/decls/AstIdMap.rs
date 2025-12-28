@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErasedFileAstId!();
         ArenaId!();
+        ErasedFileAstId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AstIdMap {
     };
 }
 
-AstIdMap!()
+AstIdMap!();

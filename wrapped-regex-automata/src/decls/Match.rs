@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PatternID!();
         Span!();
+        PatternID!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Match {
     };
 }
 
-Match!()
+Match!();

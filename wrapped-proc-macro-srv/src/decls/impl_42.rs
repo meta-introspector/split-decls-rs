@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Expander!();
+        PanicMessage!();
         ProcMacroKind!();
+        Expander!();
         ProcMacroSrvSpan!();
         TopSubtree!();
-        PanicMessage!();
         EnvChange!();
         ProcMacroSrv!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

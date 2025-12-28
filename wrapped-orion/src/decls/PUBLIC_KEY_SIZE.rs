@@ -11,4 +11,4 @@ macro_rules! PUBLIC_KEY_SIZE {
     };
 }
 
-PUBLIC_KEY_SIZE!()
+PUBLIC_KEY_SIZE!();

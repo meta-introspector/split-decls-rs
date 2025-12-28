@@ -4,4 +4,4 @@ macro_rules! RT_CURSOR {
     };
 }
 
-RT_CURSOR!()
+RT_CURSOR!();

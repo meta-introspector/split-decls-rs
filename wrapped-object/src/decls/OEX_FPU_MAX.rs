@@ -4,4 +4,4 @@ macro_rules! OEX_FPU_MAX {
     };
 }
 
-OEX_FPU_MAX!()
+OEX_FPU_MAX!();

@@ -11,4 +11,4 @@ macro_rules! rgb_mul_f32 {
     };
 }
 
-rgb_mul_f32!()
+rgb_mul_f32!();

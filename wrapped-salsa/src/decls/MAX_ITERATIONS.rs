@@ -11,4 +11,4 @@ macro_rules! MAX_ITERATIONS {
     };
 }
 
-MAX_ITERATIONS!()
+MAX_ITERATIONS!();

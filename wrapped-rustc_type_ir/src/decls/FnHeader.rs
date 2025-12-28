@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         Abi!();
+        Interner!();
         Safety!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! FnHeader {
     };
 }
 
-FnHeader!()
+FnHeader!();

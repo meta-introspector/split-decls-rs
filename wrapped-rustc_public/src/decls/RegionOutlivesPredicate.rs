@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OutlivesPredicate!();
         Region!();
+        OutlivesPredicate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RegionOutlivesPredicate {
     };
 }
 
-RegionOutlivesPredicate!()
+RegionOutlivesPredicate!();

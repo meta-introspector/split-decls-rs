@@ -4,4 +4,4 @@ macro_rules! set_link_section {
     };
 }
 
-set_link_section!()
+set_link_section!();

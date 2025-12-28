@@ -4,4 +4,4 @@ macro_rules! prepare_cached_and_bind {
     };
 }
 
-prepare_cached_and_bind!()
+prepare_cached_and_bind!();

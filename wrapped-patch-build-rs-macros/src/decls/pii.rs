@@ -4,4 +4,4 @@ macro_rules! pii {
     };
 }
 
-pii!()
+pii!();

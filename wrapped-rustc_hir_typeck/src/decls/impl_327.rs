@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
+        InheritedRefMatchRule!();
+        DeclOrigin!();
         Expectation!();
-        SlicingSuggestion!();
-        MutblCap!();
-        AsDerefSuggestion!();
-        ResolvedPatKind!();
-        ExpectedArrayOrSlice!();
+        TopInfo!();
+        UnionPatDotDot!();
+        ItemKind!();
+        PatInfo!();
         FnCtxt!();
         UnionPatMultipleFields!();
-        PatInfo!();
-        ItemKind!();
         AdjustMode!();
-        DeclOrigin!();
-        UnionPatDotDot!();
-        ResolvedPat!();
-        InheritedRefMatchRule!();
-        TopInfo!();
+        AsDerefSuggestion!();
         PeelKind!();
+        SlicingSuggestion!();
+        ExpectedArrayOrSlice!();
+        ResolvedPat!();
+        ResolvedPatKind!();
+        MutblCap!();
     };
 }
 
@@ -40,4 +40,4 @@ macro_rules! impl_327 {
     };
 }
 
-impl_327!()
+impl_327!();

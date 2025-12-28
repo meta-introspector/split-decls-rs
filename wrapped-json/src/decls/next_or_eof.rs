@@ -13,4 +13,4 @@ macro_rules! next_or_eof {
     };
 }
 
-next_or_eof!()
+next_or_eof!();

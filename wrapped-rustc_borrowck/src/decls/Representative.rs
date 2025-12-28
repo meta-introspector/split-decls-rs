@@ -4,4 +4,4 @@ macro_rules! Representative {
     };
 }
 
-Representative!()
+Representative!();

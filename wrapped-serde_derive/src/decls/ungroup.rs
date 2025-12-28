@@ -4,4 +4,4 @@ macro_rules! ungroup {
     };
 }
 
-ungroup!()
+ungroup!();

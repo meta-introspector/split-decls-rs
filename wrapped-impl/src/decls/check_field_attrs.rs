@@ -12,4 +12,4 @@ macro_rules! check_field_attrs {
     };
 }
 
-check_field_attrs!()
+check_field_attrs!();

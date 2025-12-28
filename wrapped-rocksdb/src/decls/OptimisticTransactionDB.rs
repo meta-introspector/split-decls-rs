@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MultiThreaded!();
         OptimisticTransactionDBInner!();
+        MultiThreaded!();
         DBCommon!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! OptimisticTransactionDB {
     };
 }
 
-OptimisticTransactionDB!()
+OptimisticTransactionDB!();

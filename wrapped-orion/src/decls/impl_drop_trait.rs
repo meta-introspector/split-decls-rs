@@ -4,4 +4,4 @@ macro_rules! impl_drop_trait {
     };
 }
 
-impl_drop_trait!()
+impl_drop_trait!();

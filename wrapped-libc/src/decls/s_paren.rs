@@ -4,4 +4,4 @@ macro_rules! s_paren {
     };
 }
 
-s_paren!()
+s_paren!();

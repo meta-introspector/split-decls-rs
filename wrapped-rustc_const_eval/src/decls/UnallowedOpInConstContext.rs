@@ -4,4 +4,4 @@ macro_rules! UnallowedOpInConstContext {
     };
 }
 
-UnallowedOpInConstContext!()
+UnallowedOpInConstContext!();

@@ -4,4 +4,4 @@ macro_rules! check_chunks_even_size {
     };
 }
 
-check_chunks_even_size!()
+check_chunks_even_size!();

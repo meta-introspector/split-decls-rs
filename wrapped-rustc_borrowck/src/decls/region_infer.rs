@@ -4,4 +4,4 @@ macro_rules! region_infer {
     };
 }
 
-region_infer!()
+region_infer!();

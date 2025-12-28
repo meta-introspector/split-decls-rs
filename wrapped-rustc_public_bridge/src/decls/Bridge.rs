@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Prov!();
-        Error!();
         IndexedVal!();
+        Prov!();
         Allocation!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Bridge {
     };
 }
 
-Bridge!()
+Bridge!();

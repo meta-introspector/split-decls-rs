@@ -4,4 +4,4 @@ macro_rules! IKeyValuePair_Vtbl {
     };
 }
 
-IKeyValuePair_Vtbl!()
+IKeyValuePair_Vtbl!();

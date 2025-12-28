@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LlvmCodegenBackend!();
         ModuleLlvm!();
+        LlvmCodegenBackend!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! run_fat {
     };
 }
 
-run_fat!()
+run_fat!();

@@ -4,4 +4,4 @@ macro_rules! R_AVR_PORT5 {
     };
 }
 
-R_AVR_PORT5!()
+R_AVR_PORT5!();

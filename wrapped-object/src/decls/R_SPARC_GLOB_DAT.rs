@@ -4,4 +4,4 @@ macro_rules! R_SPARC_GLOB_DAT {
     };
 }
 
-R_SPARC_GLOB_DAT!()
+R_SPARC_GLOB_DAT!();

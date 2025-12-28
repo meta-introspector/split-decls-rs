@@ -4,4 +4,4 @@ macro_rules! generate_k {
     };
 }
 
-generate_k!()
+generate_k!();

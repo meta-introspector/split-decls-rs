@@ -4,4 +4,4 @@ macro_rules! BitRelations {
     };
 }
 
-BitRelations!()
+BitRelations!();

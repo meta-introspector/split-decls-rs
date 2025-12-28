@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        XcoffSegment!();
-        XcoffSegmentIterator!();
-        ReadRef!();
         Item!();
         FileHeader!();
+        XcoffSegment!();
+        ReadRef!();
+        XcoffSegmentIterator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_862 {
     };
 }
 
-impl_862!()
+impl_862!();

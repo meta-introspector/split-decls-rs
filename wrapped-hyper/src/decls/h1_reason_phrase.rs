@@ -4,4 +4,4 @@ macro_rules! h1_reason_phrase {
     };
 }
 
-h1_reason_phrase!()
+h1_reason_phrase!();

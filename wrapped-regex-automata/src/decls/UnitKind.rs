@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Unit!();
         U8!();
+        Unit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UnitKind {
     };
 }
 
-UnitKind!()
+UnitKind!();

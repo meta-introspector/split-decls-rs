@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_32_PCREL {
     };
 }
 
-R_MICROBLAZE_32_PCREL!()
+R_MICROBLAZE_32_PCREL!();

@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        LzmaEncoder!();
-        EncodeMode!();
-        LzEncoder!();
-        LzmaCoder!();
-        Hc4!();
-        State!();
+        LengthEncoder!();
         LzmaEncData!();
-        Write!();
+        LiteralEncoder!();
+        LzmaEncoderModes!();
+        MfType!();
         RangeEncoder!();
+        LzmaEncoder!();
+        Result!();
         FastEncoderMode!();
         Bt4!();
-        MfType!();
-        LzmaEncoderTrait!();
-        LengthEncoder!();
-        Result!();
-        LzmaEncoderModes!();
-        LiteralEncoder!();
+        EncodeMode!();
+        Hc4!();
         NormalEncoderMode!();
+        LzEncoder!();
+        LzmaCoder!();
+        LzmaEncoderTrait!();
+        Write!();
+        State!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

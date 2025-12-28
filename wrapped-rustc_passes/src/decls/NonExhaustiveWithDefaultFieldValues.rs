@@ -4,4 +4,4 @@ macro_rules! NonExhaustiveWithDefaultFieldValues {
     };
 }
 
-NonExhaustiveWithDefaultFieldValues!()
+NonExhaustiveWithDefaultFieldValues!();

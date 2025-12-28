@@ -4,4 +4,4 @@ macro_rules! Z_BUF_ERROR {
     };
 }
 
-Z_BUF_ERROR!()
+Z_BUF_ERROR!();

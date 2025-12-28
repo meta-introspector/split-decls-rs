@@ -4,4 +4,4 @@ macro_rules! cpp_fn {
     };
 }
 
-cpp_fn!()
+cpp_fn!();

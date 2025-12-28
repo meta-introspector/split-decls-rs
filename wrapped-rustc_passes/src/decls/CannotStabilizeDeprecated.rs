@@ -4,4 +4,4 @@ macro_rules! CannotStabilizeDeprecated {
     };
 }
 
-CannotStabilizeDeprecated!()
+CannotStabilizeDeprecated!();

@@ -11,4 +11,4 @@ macro_rules! gather_gat_bounds {
     };
 }
 
-gather_gat_bounds!()
+gather_gat_bounds!();

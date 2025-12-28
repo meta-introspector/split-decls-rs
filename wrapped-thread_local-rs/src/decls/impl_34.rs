@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThreadLocal!();
         IterMut!();
+        ThreadLocal!();
         IntoIter!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

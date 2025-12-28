@@ -11,4 +11,4 @@ macro_rules! threaded_read {
     };
 }
 
-threaded_read!()
+threaded_read!();

@@ -13,4 +13,4 @@ macro_rules! cs_clone {
     };
 }
 
-cs_clone!()
+cs_clone!();

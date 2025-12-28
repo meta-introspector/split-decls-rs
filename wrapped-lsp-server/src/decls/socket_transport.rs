@@ -12,4 +12,4 @@ macro_rules! socket_transport {
     };
 }
 
-socket_transport!()
+socket_transport!();

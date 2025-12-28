@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SimpleFileOptions!();
-        ZipFile!();
-        CompressionMethod!();
-        DateTime!();
-        ZipResult!();
         ZipFileReader!();
+        CompressionMethod!();
+        ZipFile!();
+        SimpleFileOptions!();
         RootDirFilter!();
+        ZipResult!();
+        DateTime!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

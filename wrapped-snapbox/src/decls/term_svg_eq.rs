@@ -32,4 +32,4 @@ irrelevant 2" . to_owned () ,)) ; assert_eq ! (left , right) ; }
     };
 }
 
-term_svg_eq!()
+term_svg_eq!();

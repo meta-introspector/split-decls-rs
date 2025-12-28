@@ -11,4 +11,4 @@ macro_rules! option_as_libc_timespec_ptr {
     };
 }
 
-option_as_libc_timespec_ptr!()
+option_as_libc_timespec_ptr!();

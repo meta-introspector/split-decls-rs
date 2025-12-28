@@ -4,4 +4,4 @@ macro_rules! non_backtracking_dfs {
     };
 }
 
-non_backtracking_dfs!()
+non_backtracking_dfs!();

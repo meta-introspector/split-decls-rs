@@ -4,4 +4,4 @@ macro_rules! atomic_swap {
     };
 }
 
-atomic_swap!()
+atomic_swap!();

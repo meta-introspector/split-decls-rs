@@ -11,4 +11,4 @@ macro_rules! backslash_x_nonzero {
     };
 }
 
-backslash_x_nonzero!()
+backslash_x_nonzero!();

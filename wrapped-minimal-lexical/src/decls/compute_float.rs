@@ -13,4 +13,4 @@ macro_rules! compute_float {
     };
 }
 
-compute_float!()
+compute_float!();

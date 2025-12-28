@@ -4,4 +4,4 @@ macro_rules! normalize_path {
     };
 }
 
-normalize_path!()
+normalize_path!();

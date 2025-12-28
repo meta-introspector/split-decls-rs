@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Metadata!();
         Callsite!();
+        Metadata!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DefaultCallsite {
     };
 }
 
-DefaultCallsite!()
+DefaultCallsite!();

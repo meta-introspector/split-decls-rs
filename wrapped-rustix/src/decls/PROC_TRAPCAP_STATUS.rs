@@ -4,4 +4,4 @@ macro_rules! PROC_TRAPCAP_STATUS {
     };
 }
 
-PROC_TRAPCAP_STATUS!()
+PROC_TRAPCAP_STATUS!();

@@ -4,4 +4,4 @@ macro_rules! mapping_version {
     };
 }
 
-mapping_version!()
+mapping_version!();

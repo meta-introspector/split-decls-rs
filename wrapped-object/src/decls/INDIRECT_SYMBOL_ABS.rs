@@ -4,4 +4,4 @@ macro_rules! INDIRECT_SYMBOL_ABS {
     };
 }
 
-INDIRECT_SYMBOL_ABS!()
+INDIRECT_SYMBOL_ABS!();

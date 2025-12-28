@@ -4,4 +4,4 @@ macro_rules! LIT_SHORTREP {
     };
 }
 
-LIT_SHORTREP!()
+LIT_SHORTREP!();

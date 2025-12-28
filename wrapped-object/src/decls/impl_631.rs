@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        SectionTable!();
-        ImageNtHeaders!();
-        RichHeaderInfo!();
-        DataDirectories!();
-        ImageDosHeader!();
-        ImageDataDirectory!();
-        ImportTable!();
-        CoffCommon!();
-        ExportTable!();
         PeFile!();
+        CoffCommon!();
+        ImageNtHeaders!();
         ReadRef!();
+        RichHeaderInfo!();
+        ImportTable!();
+        ImageDataDirectory!();
+        DataDirectories!();
+        ExportTable!();
+        ImageDosHeader!();
+        SectionTable!();
         Result!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! impl_631 {
     };
 }
 
-impl_631!()
+impl_631!();

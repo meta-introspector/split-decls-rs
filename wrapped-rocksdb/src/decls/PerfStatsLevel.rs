@@ -4,4 +4,4 @@ macro_rules! PerfStatsLevel {
     };
 }
 
-PerfStatsLevel!()
+PerfStatsLevel!();

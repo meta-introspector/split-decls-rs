@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        RowIterator!();
         Type!();
         Param!();
-        Value!();
-        RowIterator!();
         Signature!();
+        Value!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

@@ -4,4 +4,4 @@ macro_rules! try_validation {
     };
 }
 
-try_validation!()
+try_validation!();

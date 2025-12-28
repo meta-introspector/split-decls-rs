@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_CLOUDABI {
     };
 }
 
-ELFOSABI_CLOUDABI!()
+ELFOSABI_CLOUDABI!();

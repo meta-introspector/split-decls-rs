@@ -4,4 +4,4 @@ macro_rules! stdlib {
     };
 }
 
-stdlib!()
+stdlib!();

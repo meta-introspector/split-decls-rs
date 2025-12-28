@@ -11,4 +11,4 @@ macro_rules! check_c_variadic_abi {
     };
 }
 
-check_c_variadic_abi!()
+check_c_variadic_abi!();

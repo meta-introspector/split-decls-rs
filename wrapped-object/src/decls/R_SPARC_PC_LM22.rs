@@ -4,4 +4,4 @@ macro_rules! R_SPARC_PC_LM22 {
     };
 }
 
-R_SPARC_PC_LM22!()
+R_SPARC_PC_LM22!();

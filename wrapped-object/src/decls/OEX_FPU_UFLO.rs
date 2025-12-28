@@ -4,4 +4,4 @@ macro_rules! OEX_FPU_UFLO {
     };
 }
 
-OEX_FPU_UFLO!()
+OEX_FPU_UFLO!();

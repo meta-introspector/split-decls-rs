@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_SH_NOMODE {
     };
 }
 
-IMAGE_REL_SH_NOMODE!()
+IMAGE_REL_SH_NOMODE!();

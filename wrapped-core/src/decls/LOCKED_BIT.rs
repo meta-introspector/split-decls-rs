@@ -4,4 +4,4 @@ macro_rules! LOCKED_BIT {
     };
 }
 
-LOCKED_BIT!()
+LOCKED_BIT!();

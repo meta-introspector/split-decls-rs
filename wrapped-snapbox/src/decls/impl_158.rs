@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         PathDiff!();
+        NormalizeToExpected!();
+        Redactions!();
+        Data!();
+        FileType!();
         Result!();
         FilterNewlines!();
-        Redactions!();
-        Walk!();
-        FileType!();
-        Data!();
-        NormalizeToExpected!();
         FilterPaths!();
+        Walk!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

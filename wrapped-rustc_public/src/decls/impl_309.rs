@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ConstantKind!();
-        Error!();
-        Ty!();
-        MirConst!();
-        UintTy!();
         MirConstId!();
+        UintTy!();
+        Error!();
+        MirConst!();
+        Ty!();
+        ConstantKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_309 {
     };
 }
 
-impl_309!()
+impl_309!();

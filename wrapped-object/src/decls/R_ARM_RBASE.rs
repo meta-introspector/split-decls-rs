@@ -4,4 +4,4 @@ macro_rules! R_ARM_RBASE {
     };
 }
 
-R_ARM_RBASE!()
+R_ARM_RBASE!();

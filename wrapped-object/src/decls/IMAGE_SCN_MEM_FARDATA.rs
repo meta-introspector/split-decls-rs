@@ -4,4 +4,4 @@ macro_rules! IMAGE_SCN_MEM_FARDATA {
     };
 }
 
-IMAGE_SCN_MEM_FARDATA!()
+IMAGE_SCN_MEM_FARDATA!();

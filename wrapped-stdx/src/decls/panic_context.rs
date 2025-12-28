@@ -4,4 +4,4 @@ macro_rules! panic_context {
     };
 }
 
-panic_context!()
+panic_context!();

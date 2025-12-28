@@ -4,4 +4,4 @@ macro_rules! _MM_SHUFFLE {
     };
 }
 
-_MM_SHUFFLE!()
+_MM_SHUFFLE!();

@@ -4,4 +4,4 @@ macro_rules! wrong_number_of_generic_args {
     };
 }
 
-wrong_number_of_generic_args!()
+wrong_number_of_generic_args!();

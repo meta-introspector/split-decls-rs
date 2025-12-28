@@ -4,4 +4,4 @@ macro_rules! PTP_CLEANUP_GROUP {
     };
 }
 
-PTP_CLEANUP_GROUP!()
+PTP_CLEANUP_GROUP!();

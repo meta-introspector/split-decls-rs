@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ErrorSink!();
-        ParseError!();
-        Span!();
         Raw!();
+        Span!();
+        ParseError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ensure_no_leading_zero {
     };
 }
 
-ensure_no_leading_zero!()
+ensure_no_leading_zero!();

@@ -4,4 +4,4 @@ macro_rules! coerce_mutbls {
     };
 }
 
-coerce_mutbls!()
+coerce_mutbls!();

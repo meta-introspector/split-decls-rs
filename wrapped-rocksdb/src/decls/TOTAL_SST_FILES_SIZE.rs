@@ -11,4 +11,4 @@ macro_rules! TOTAL_SST_FILES_SIZE {
     };
 }
 
-TOTAL_SST_FILES_SIZE!()
+TOTAL_SST_FILES_SIZE!();

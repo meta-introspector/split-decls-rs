@@ -11,4 +11,4 @@ macro_rules! Uts46MapperBorrowed {
     };
 }
 
-Uts46MapperBorrowed!()
+Uts46MapperBorrowed!();

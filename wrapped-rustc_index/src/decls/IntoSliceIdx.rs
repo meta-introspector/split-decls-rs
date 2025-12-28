@@ -4,4 +4,4 @@ macro_rules! IntoSliceIdx {
     };
 }
 
-IntoSliceIdx!()
+IntoSliceIdx!();

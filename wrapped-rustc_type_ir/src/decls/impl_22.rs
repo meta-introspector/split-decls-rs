@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Span!();
         SolverTraitLangItem!();
-        Filter!();
-        Elaboratable!();
-        ClauseKind!();
-        Elaborator!();
-        Clause!();
-        OutlivesPredicate!();
-        Interner!();
         PredicatePolarity!();
+        Filter!();
+        Elaborator!();
         ElaborateSized!();
+        OutlivesPredicate!();
+        Span!();
+        Clause!();
+        ClauseKind!();
+        Elaboratable!();
+        Interner!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

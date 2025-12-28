@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Algorithm!();
-        InternedInput!();
         Diff!();
-        BasicLineDiffPrinter!();
+        Algorithm!();
         UnifiedDiffConfig!();
+        InternedInput!();
+        BasicLineDiffPrinter!();
     };
 }
 
@@ -36,4 +36,4 @@ macro_rules! simple_insert {
     };
 }
 
-simple_insert!()
+simple_insert!();

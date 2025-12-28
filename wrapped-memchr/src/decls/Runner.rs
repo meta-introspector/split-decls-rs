@@ -4,4 +4,4 @@ macro_rules! Runner {
     };
 }
 
-Runner!()
+Runner!();

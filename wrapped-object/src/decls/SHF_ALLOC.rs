@@ -11,4 +11,4 @@ macro_rules! SHF_ALLOC {
     };
 }
 
-SHF_ALLOC!()
+SHF_ALLOC!();

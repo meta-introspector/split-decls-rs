@@ -4,4 +4,4 @@ macro_rules! root_cx {
     };
 }
 
-root_cx!()
+root_cx!();

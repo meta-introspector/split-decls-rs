@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_XLATE {
     };
 }
 
-SHT_MIPS_XLATE!()
+SHT_MIPS_XLATE!();

@@ -4,4 +4,4 @@ macro_rules! call_site_ident {
     };
 }
 
-call_site_ident!()
+call_site_ident!();

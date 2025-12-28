@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RegPassKind!();
         Memory!();
         CannotUseFpConv!();
-        RegPassKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! should_use_fp_conv_helper {
     };
 }
 
-should_use_fp_conv_helper!()
+should_use_fp_conv_helper!();

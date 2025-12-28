@@ -4,4 +4,4 @@ macro_rules! DT_PLTRELSZ {
     };
 }
 
-DT_PLTRELSZ!()
+DT_PLTRELSZ!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NegativeCycle!();
-        NodeIndex!();
-        BoundedMeasure!();
-        Directed!();
-        EdgeRef!();
         Graph!();
+        BoundedMeasure!();
+        NegativeCycle!();
+        EdgeRef!();
+        Directed!();
+        NodeIndex!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parallel_johnson {
     };
 }
 
-parallel_johnson!()
+parallel_johnson!();

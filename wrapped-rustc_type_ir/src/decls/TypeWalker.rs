@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         GenericArg!();
-        TypeWalkerStack!();
         Interner!();
+        TypeWalkerStack!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TypeWalker {
     };
 }
 
-TypeWalker!()
+TypeWalker!();

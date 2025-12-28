@@ -4,4 +4,4 @@ macro_rules! crate_def {
     };
 }
 
-crate_def!()
+crate_def!();

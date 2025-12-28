@@ -4,4 +4,4 @@ macro_rules! table_bellerophon {
     };
 }
 
-table_bellerophon!()
+table_bellerophon!();

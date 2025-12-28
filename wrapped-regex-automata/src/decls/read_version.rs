@@ -11,4 +11,4 @@ macro_rules! read_version {
     };
 }
 
-read_version!()
+read_version!();

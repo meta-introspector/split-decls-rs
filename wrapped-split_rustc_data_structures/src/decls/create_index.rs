@@ -11,4 +11,4 @@ macro_rules! create_index {
     };
 }
 
-create_index!()
+create_index!();

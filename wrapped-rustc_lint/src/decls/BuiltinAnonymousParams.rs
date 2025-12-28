@@ -4,4 +4,4 @@ macro_rules! BuiltinAnonymousParams {
     };
 }
 
-BuiltinAnonymousParams!()
+BuiltinAnonymousParams!();

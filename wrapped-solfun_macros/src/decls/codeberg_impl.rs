@@ -4,4 +4,4 @@ macro_rules! codeberg_impl {
     };
 }
 
-codeberg_impl!()
+codeberg_impl!();

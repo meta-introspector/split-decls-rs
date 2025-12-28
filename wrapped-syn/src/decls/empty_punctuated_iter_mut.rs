@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IterMut!();
         NoDrop!();
+        IterMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! empty_punctuated_iter_mut {
     };
 }
 
-empty_punctuated_iter_mut!()
+empty_punctuated_iter_mut!();

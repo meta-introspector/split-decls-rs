@@ -4,4 +4,4 @@ macro_rules! lifetimes_to_generic_params {
     };
 }
 
-lifetimes_to_generic_params!()
+lifetimes_to_generic_params!();

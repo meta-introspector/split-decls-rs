@@ -4,4 +4,4 @@ macro_rules! eval_queries {
     };
 }
 
-eval_queries!()
+eval_queries!();

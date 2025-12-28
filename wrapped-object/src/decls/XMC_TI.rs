@@ -4,4 +4,4 @@ macro_rules! XMC_TI {
     };
 }
 
-XMC_TI!()
+XMC_TI!();

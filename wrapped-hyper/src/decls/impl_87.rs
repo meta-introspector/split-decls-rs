@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Timer!();
         Sleep!();
-        Dur!();
         Time!();
+        Timer!();
+        Dur!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

@@ -11,4 +11,4 @@ macro_rules! is_word_byte {
     };
 }
 
-is_word_byte!()
+is_word_byte!();

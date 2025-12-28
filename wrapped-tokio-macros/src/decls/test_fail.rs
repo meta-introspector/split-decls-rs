@@ -4,4 +4,4 @@ macro_rules! test_fail {
     };
 }
 
-test_fail!()
+test_fail!();

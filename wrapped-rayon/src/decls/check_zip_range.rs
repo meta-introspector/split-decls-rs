@@ -4,4 +4,4 @@ macro_rules! check_zip_range {
     };
 }
 
-check_zip_range!()
+check_zip_range!();

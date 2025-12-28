@@ -4,4 +4,4 @@ macro_rules! QueueSelector {
     };
 }
 
-QueueSelector!()
+QueueSelector!();

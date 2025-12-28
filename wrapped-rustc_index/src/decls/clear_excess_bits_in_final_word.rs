@@ -11,4 +11,4 @@ macro_rules! clear_excess_bits_in_final_word {
     };
 }
 
-clear_excess_bits_in_final_word!()
+clear_excess_bits_in_final_word!();

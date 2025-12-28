@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Blob!();
         Result!();
         Connection!();
-        Statement!();
         RawStatement!();
-        ValueRef!();
         Null!();
+        ValueRef!();
+        Blob!();
+        Statement!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_278 {
     };
 }
 
-impl_278!()
+impl_278!();

@@ -12,4 +12,4 @@ macro_rules! extern_abi_stability {
     };
 }
 
-extern_abi_stability!()
+extern_abi_stability!();

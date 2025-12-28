@@ -4,4 +4,4 @@ macro_rules! sampling {
     };
 }
 
-sampling!()
+sampling!();

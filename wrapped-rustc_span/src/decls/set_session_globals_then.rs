@@ -12,4 +12,4 @@ macro_rules! set_session_globals_then {
     };
 }
 
-set_session_globals_then!()
+set_session_globals_then!();

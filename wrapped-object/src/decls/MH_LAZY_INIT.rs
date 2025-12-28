@@ -4,4 +4,4 @@ macro_rules! MH_LAZY_INIT {
     };
 }
 
-MH_LAZY_INIT!()
+MH_LAZY_INIT!();

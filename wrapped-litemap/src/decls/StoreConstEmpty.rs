@@ -4,4 +4,4 @@ macro_rules! StoreConstEmpty {
     };
 }
 
-StoreConstEmpty!()
+StoreConstEmpty!();

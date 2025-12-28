@@ -4,4 +4,4 @@ macro_rules! extract_declarations {
     };
 }
 
-extract_declarations!()
+extract_declarations!();

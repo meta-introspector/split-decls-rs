@@ -4,4 +4,4 @@ macro_rules! NKO {
     };
 }
 
-NKO!()
+NKO!();

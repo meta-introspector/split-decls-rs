@@ -12,4 +12,4 @@ macro_rules! try_explicit_named_args {
     };
 }
 
-try_explicit_named_args!()
+try_explicit_named_args!();

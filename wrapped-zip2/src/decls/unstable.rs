@@ -13,4 +13,4 @@ zip = \"="] # [doc = env ! ("CARGO_PKG_VERSION")] # [doc = "\"\n\
     };
 }
 
-unstable!()
+unstable!();

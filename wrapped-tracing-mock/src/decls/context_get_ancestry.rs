@@ -12,4 +12,4 @@ macro_rules! context_get_ancestry {
     };
 }
 
-context_get_ancestry!()
+context_get_ancestry!();

@@ -4,4 +4,4 @@ macro_rules! query_key_hash_verify_all {
     };
 }
 
-query_key_hash_verify_all!()
+query_key_hash_verify_all!();

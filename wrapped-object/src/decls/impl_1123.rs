@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Section!();
-        Id!();
         Item!();
+        Id!();
+        Section!();
         SectionId!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_1123 {
     };
 }
 
-impl_1123!()
+impl_1123!();

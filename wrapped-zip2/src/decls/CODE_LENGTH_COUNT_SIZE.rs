@@ -4,4 +4,4 @@ macro_rules! CODE_LENGTH_COUNT_SIZE {
     };
 }
 
-CODE_LENGTH_COUNT_SIZE!()
+CODE_LENGTH_COUNT_SIZE!();

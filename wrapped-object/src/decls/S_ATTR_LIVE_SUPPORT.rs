@@ -4,4 +4,4 @@ macro_rules! S_ATTR_LIVE_SUPPORT {
     };
 }
 
-S_ATTR_LIVE_SUPPORT!()
+S_ATTR_LIVE_SUPPORT!();

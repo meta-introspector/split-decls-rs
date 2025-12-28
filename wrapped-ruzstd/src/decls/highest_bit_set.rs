@@ -4,4 +4,4 @@ macro_rules! highest_bit_set {
     };
 }
 
-highest_bit_set!()
+highest_bit_set!();

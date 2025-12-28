@@ -14,4 +14,4 @@ macro_rules! try_transmute_ref {
     };
 }
 
-try_transmute_ref!()
+try_transmute_ref!();

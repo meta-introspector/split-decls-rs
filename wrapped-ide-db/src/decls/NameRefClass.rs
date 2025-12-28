@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NameClass!();
         Definition!();
+        NameClass!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! NameRefClass {
     };
 }
 
-NameRefClass!()
+NameRefClass!();

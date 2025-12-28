@@ -4,4 +4,4 @@ macro_rules! bpf {
     };
 }
 
-bpf!()
+bpf!();

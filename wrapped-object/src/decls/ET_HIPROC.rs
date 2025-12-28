@@ -4,4 +4,4 @@ macro_rules! ET_HIPROC {
     };
 }
 
-ET_HIPROC!()
+ET_HIPROC!();

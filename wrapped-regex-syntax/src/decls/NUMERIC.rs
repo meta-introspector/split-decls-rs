@@ -4,4 +4,4 @@ macro_rules! NUMERIC {
     };
 }
 
-NUMERIC!()
+NUMERIC!();

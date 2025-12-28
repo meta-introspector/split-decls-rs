@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         VisitMut!();
+        Array!();
         Value!();
         InlineTable!();
-        Array!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! visit_value_mut {
     };
 }
 
-visit_value_mut!()
+visit_value_mut!();

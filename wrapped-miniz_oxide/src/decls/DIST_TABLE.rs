@@ -4,4 +4,4 @@ macro_rules! DIST_TABLE {
     };
 }
 
-DIST_TABLE!()
+DIST_TABLE!();

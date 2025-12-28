@@ -4,4 +4,4 @@ macro_rules! LL_EXPORTS {
     };
 }
 
-LL_EXPORTS!()
+LL_EXPORTS!();

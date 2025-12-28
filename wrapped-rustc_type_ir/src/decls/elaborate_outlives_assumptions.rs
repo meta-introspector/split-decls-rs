@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         GenericArg!();
         Component!();
-        Ty!();
-        Interner!();
-        Const!();
-        OutlivesPredicate!();
         GenericArgKind!();
+        Const!();
+        Interner!();
+        Ty!();
+        OutlivesPredicate!();
         Region!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! elaborate_outlives_assumptions {
     };
 }
 
-elaborate_outlives_assumptions!()
+elaborate_outlives_assumptions!();

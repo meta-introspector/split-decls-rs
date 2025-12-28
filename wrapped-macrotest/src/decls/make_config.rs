@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         Build!();
+        Config!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! make_config {
     };
 }
 
-make_config!()
+make_config!();

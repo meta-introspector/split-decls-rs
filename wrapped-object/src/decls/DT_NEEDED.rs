@@ -11,4 +11,4 @@ macro_rules! DT_NEEDED {
     };
 }
 
-DT_NEEDED!()
+DT_NEEDED!();

@@ -4,4 +4,4 @@ macro_rules! RelocationMapEntry {
     };
 }
 
-RelocationMapEntry!()
+RelocationMapEntry!();

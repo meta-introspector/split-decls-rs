@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U64Bytes!();
         Endian!();
+        U64Bytes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

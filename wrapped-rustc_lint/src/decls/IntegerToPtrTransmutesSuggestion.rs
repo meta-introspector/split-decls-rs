@@ -4,4 +4,4 @@ macro_rules! IntegerToPtrTransmutesSuggestion {
     };
 }
 
-IntegerToPtrTransmutesSuggestion!()
+IntegerToPtrTransmutesSuggestion!();

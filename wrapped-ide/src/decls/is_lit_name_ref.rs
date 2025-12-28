@@ -4,4 +4,4 @@ macro_rules! is_lit_name_ref {
     };
 }
 
-is_lit_name_ref!()
+is_lit_name_ref!();

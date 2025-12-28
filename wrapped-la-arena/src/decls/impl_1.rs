@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Idx!();
+        OccupiedEntry!();
+        Entry!();
         ArenaMap!();
         VacantEntry!();
-        Idx!();
-        Entry!();
-        OccupiedEntry!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1 {
     };
 }
 
-impl_1!()
+impl_1!();

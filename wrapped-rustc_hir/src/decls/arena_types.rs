@@ -12,4 +12,4 @@ macro_rules! arena_types {
     };
 }
 
-arena_types!()
+arena_types!();

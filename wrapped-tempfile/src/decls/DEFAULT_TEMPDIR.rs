@@ -4,4 +4,4 @@ macro_rules! DEFAULT_TEMPDIR {
     };
 }
 
-DEFAULT_TEMPDIR!()
+DEFAULT_TEMPDIR!();

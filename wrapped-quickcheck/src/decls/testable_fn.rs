@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Testable!();
-        TestResult!();
         Arbitrary!();
+        TestResult!();
         Gen!();
+        Testable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! testable_fn {
     };
 }
 
-testable_fn!()
+testable_fn!();

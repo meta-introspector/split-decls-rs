@@ -4,4 +4,4 @@ macro_rules! merge_join {
     };
 }
 
-merge_join!()
+merge_join!();

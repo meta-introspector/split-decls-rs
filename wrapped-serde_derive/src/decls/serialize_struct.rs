@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Field!();
-        Fragment!();
-        Container!();
         Parameters!();
+        Fragment!();
+        Field!();
+        Container!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! serialize_struct {
     };
 }
 
-serialize_struct!()
+serialize_struct!();

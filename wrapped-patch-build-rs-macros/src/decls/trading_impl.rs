@@ -39,4 +39,4 @@ impl TradingEngine {{
     };
 }
 
-trading_impl!()
+trading_impl!();

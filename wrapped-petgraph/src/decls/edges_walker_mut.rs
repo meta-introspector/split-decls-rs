@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Edge!();
+        IndexType!();
         Direction!();
         EdgeIndex!();
+        Edge!();
         EdgesWalkerMut!();
-        IndexType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! edges_walker_mut {
     };
 }
 
-edges_walker_mut!()
+edges_walker_mut!();

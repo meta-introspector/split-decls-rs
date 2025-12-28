@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnSig!();
         Interner!();
+        FnSig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_456 {
     };
 }
 
-impl_456!()
+impl_456!();

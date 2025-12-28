@@ -4,4 +4,4 @@ macro_rules! dropee_emit_retag {
     };
 }
 
-dropee_emit_retag!()
+dropee_emit_retag!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Context!();
         Tera!();
+        Context!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! can_load_macro_in_child {
     };
 }
 
-can_load_macro_in_child!()
+can_load_macro_in_child!();

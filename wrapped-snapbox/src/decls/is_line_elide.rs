@@ -4,4 +4,4 @@ macro_rules! is_line_elide {
     };
 }
 
-is_line_elide!()
+is_line_elide!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThreadSpawn!();
         CustomSpawn!();
+        ThreadSpawn!();
         ThreadBuilder!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

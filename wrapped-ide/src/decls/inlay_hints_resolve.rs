@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InlayHintCtx!();
         InlayHint!();
         InlayHintsConfig!();
+        InlayHintCtx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! inlay_hints_resolve {
     };
 }
 
-inlay_hints_resolve!()
+inlay_hints_resolve!();

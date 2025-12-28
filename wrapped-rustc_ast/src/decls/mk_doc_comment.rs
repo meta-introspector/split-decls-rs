@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CommentKind!();
-        AttrStyle!();
-        Attribute!();
-        AttrIdGenerator!();
         AttrKind!();
+        AttrIdGenerator!();
+        CommentKind!();
+        Attribute!();
+        AttrStyle!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! mk_doc_comment {
     };
 }
 
-mk_doc_comment!()
+mk_doc_comment!();

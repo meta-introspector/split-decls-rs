@@ -4,4 +4,4 @@ macro_rules! type_is_bool {
     };
 }
 
-type_is_bool!()
+type_is_bool!();

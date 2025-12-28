@@ -4,4 +4,4 @@ macro_rules! slice_chunk_by {
     };
 }
 
-slice_chunk_by!()
+slice_chunk_by!();

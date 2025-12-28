@@ -4,4 +4,4 @@ macro_rules! sval {
     };
 }
 
-sval!()
+sval!();

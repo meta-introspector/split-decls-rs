@@ -4,4 +4,4 @@ macro_rules! nvptx {
     };
 }
 
-nvptx!()
+nvptx!();

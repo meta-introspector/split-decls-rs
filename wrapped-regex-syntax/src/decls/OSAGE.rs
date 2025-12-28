@@ -4,4 +4,4 @@ macro_rules! OSAGE {
     };
 }
 
-OSAGE!()
+OSAGE!();

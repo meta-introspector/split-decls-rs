@@ -11,4 +11,4 @@ macro_rules! rustc_bootstrap_parsing {
     };
 }
 
-rustc_bootstrap_parsing!()
+rustc_bootstrap_parsing!();

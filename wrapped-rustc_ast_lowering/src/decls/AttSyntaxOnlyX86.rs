@@ -4,4 +4,4 @@ macro_rules! AttSyntaxOnlyX86 {
     };
 }
 
-AttSyntaxOnlyX86!()
+AttSyntaxOnlyX86!();

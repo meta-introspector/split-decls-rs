@@ -4,4 +4,4 @@ macro_rules! hyper_task_return_type {
     };
 }
 
-hyper_task_return_type!()
+hyper_task_return_type!();

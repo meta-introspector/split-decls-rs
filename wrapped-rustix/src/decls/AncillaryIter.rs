@@ -4,4 +4,4 @@ macro_rules! AncillaryIter {
     };
 }
 
-AncillaryIter!()
+AncillaryIter!();

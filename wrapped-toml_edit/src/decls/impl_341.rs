@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Value!();
-        Error!();
         SerializeValueArray!();
+        Error!();
+        Value!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_341 {
     };
 }
 
-impl_341!()
+impl_341!();

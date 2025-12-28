@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         LinkArgs!();
-        Lld!();
-        LinkerFlavor!();
         StaticCow!();
+        LinkerFlavor!();
+        Lld!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! add_link_args_iter {
     };
 }
 
-add_link_args_iter!()
+add_link_args_iter!();

@@ -4,4 +4,4 @@ macro_rules! DEFLATE_EOBS_BITS {
     };
 }
 
-DEFLATE_EOBS_BITS!()
+DEFLATE_EOBS_BITS!();

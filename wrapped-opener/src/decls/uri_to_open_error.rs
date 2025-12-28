@@ -12,4 +12,4 @@ macro_rules! uri_to_open_error {
     };
 }
 
-uri_to_open_error!()
+uri_to_open_error!();

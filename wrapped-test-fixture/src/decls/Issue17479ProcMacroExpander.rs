@@ -4,4 +4,4 @@ macro_rules! Issue17479ProcMacroExpander {
     };
 }
 
-Issue17479ProcMacroExpander!()
+Issue17479ProcMacroExpander!();

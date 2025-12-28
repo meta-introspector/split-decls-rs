@@ -4,4 +4,4 @@ macro_rules! shm {
     };
 }
 
-shm!()
+shm!();

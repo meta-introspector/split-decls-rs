@@ -4,4 +4,4 @@ macro_rules! ValidatedAsmArgs {
     };
 }
 
-ValidatedAsmArgs!()
+ValidatedAsmArgs!();

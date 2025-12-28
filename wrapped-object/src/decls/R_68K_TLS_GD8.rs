@@ -4,4 +4,4 @@ macro_rules! R_68K_TLS_GD8 {
     };
 }
 
-R_68K_TLS_GD8!()
+R_68K_TLS_GD8!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Export!();
-        Error!();
         ByteString!();
+        Error!();
         Result!();
+        Export!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_688 {
     };
 }
 
-impl_688!()
+impl_688!();

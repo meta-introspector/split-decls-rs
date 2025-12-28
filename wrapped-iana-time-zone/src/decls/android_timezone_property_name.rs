@@ -4,4 +4,4 @@ macro_rules! android_timezone_property_name {
     };
 }
 
-android_timezone_property_name!()
+android_timezone_property_name!();

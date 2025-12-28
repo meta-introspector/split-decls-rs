@@ -11,4 +11,4 @@ https://doc.rust-lang.org/reference/types.html#trait-objects" ;
     };
 }
 
-CANNOT_IMPLICITLY_DEREF_POINTER_TRAIT_OBJ!()
+CANNOT_IMPLICITLY_DEREF_POINTER_TRAIT_OBJ!();

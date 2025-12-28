@@ -4,4 +4,4 @@ macro_rules! DT_CHECKSUM {
     };
 }
 
-DT_CHECKSUM!()
+DT_CHECKSUM!();

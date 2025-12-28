@@ -4,4 +4,4 @@ macro_rules! add_cursor {
     };
 }
 
-add_cursor!()
+add_cursor!();

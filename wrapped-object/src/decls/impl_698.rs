@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Item!();
+        ImportDescriptorIterator!();
         Result!();
         ImageImportDescriptor!();
-        ImportDescriptorIterator!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_698 {
     };
 }
 
-impl_698!()
+impl_698!();

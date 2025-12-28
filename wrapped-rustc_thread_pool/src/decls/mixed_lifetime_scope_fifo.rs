@@ -11,4 +11,4 @@ macro_rules! mixed_lifetime_scope_fifo {
     };
 }
 
-mixed_lifetime_scope_fifo!()
+mixed_lifetime_scope_fifo!();

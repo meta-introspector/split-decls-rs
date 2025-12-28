@@ -4,4 +4,4 @@ macro_rules! to_profiler_name {
     };
 }
 
-to_profiler_name!()
+to_profiler_name!();

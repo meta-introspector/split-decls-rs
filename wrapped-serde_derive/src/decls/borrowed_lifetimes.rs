@@ -12,4 +12,4 @@ macro_rules! borrowed_lifetimes {
     };
 }
 
-borrowed_lifetimes!()
+borrowed_lifetimes!();

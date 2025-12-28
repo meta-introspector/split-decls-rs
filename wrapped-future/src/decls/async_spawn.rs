@@ -4,4 +4,4 @@ macro_rules! async_spawn {
     };
 }
 
-async_spawn!()
+async_spawn!();

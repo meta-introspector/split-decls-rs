@@ -4,4 +4,4 @@ macro_rules! coerce_pointee {
     };
 }
 
-coerce_pointee!()
+coerce_pointee!();

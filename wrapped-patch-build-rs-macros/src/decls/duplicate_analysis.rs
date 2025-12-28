@@ -4,4 +4,4 @@ macro_rules! duplicate_analysis {
     };
 }
 
-duplicate_analysis!()
+duplicate_analysis!();

@@ -4,4 +4,4 @@ macro_rules! SHF_MIPS_LOCAL {
     };
 }
 
-SHF_MIPS_LOCAL!()
+SHF_MIPS_LOCAL!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ExistentialTraitRef!();
-        Binder!();
-        TraitRef!();
-        Interner!();
         UnevaluatedConst!();
-        FnSig!();
+        Interner!();
+        TraitRef!();
         ClosureKind!();
+        Binder!();
+        ExistentialTraitRef!();
+        FnSig!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! into_diag_arg_impls {
     };
 }
 
-into_diag_arg_impls!()
+into_diag_arg_impls!();

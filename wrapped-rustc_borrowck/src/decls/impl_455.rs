@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeChecker!();
         LivenessContext!();
         DropData!();
+        TypeChecker!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_455 {
     };
 }
 
-impl_455!()
+impl_455!();

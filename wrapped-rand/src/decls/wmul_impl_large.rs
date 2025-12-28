@@ -11,4 +11,4 @@ macro_rules! wmul_impl_large {
     };
 }
 
-wmul_impl_large!()
+wmul_impl_large!();

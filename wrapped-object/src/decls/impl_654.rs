@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImageOptionalHeader64!();
         ImageOptionalHeader!();
+        ImageOptionalHeader64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_654 {
     };
 }
 
-impl_654!()
+impl_654!();

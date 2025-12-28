@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexRange!();
         RevSlice!();
+        IndexRange!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

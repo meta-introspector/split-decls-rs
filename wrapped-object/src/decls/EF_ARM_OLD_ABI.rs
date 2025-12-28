@@ -4,4 +4,4 @@ macro_rules! EF_ARM_OLD_ABI {
     };
 }
 
-EF_ARM_OLD_ABI!()
+EF_ARM_OLD_ABI!();

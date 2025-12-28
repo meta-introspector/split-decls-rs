@@ -4,4 +4,4 @@ macro_rules! HANGUL_T_COUNT {
     };
 }
 
-HANGUL_T_COUNT!()
+HANGUL_T_COUNT!();

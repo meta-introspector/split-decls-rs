@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PlaceTy!();
-        Place!();
         MPlaceTy!();
+        Place!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_296 {
     };
 }
 
-impl_296!()
+impl_296!();

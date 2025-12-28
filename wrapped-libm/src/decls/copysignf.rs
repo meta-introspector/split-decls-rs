@@ -4,4 +4,4 @@ macro_rules! copysignf {
     };
 }
 
-copysignf!()
+copysignf!();

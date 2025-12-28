@@ -11,4 +11,4 @@ macro_rules! to_string {
     };
 }
 
-to_string!()
+to_string!();

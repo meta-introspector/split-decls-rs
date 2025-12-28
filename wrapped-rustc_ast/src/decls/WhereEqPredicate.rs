@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ty!();
         Walkable!();
+        Ty!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WhereEqPredicate {
     };
 }
 
-WhereEqPredicate!()
+WhereEqPredicate!();

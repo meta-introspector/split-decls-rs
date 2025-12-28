@@ -11,4 +11,4 @@ macro_rules! resolve_pat {
     };
 }
 
-resolve_pat!()
+resolve_pat!();

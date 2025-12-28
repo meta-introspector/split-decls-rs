@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        NFA!();
         Captures!();
-        MatchError!();
-        BoundedBacktracker!();
         BuildError!();
+        MatchError!();
         Cache!();
-        Visited!();
-        Config!();
+        BoundedBacktracker!();
         Match!();
+        Visited!();
+        NFA!();
+        Builder!();
+        Config!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_443 {
     };
 }
 
-impl_443!()
+impl_443!();

@@ -4,4 +4,4 @@ macro_rules! Targets {
     };
 }
 
-Targets!()
+Targets!();

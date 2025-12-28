@@ -4,4 +4,4 @@ macro_rules! bug_impl {
     };
 }
 
-bug_impl!()
+bug_impl!();

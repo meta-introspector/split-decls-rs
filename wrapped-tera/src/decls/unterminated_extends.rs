@@ -4,4 +4,4 @@ macro_rules! unterminated_extends {
     };
 }
 
-unterminated_extends!()
+unterminated_extends!();

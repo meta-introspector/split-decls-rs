@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PasswordHash!();
         UnknownCryptoError!();
+        PasswordHash!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! hash_password_verify {
     };
 }
 
-hash_password_verify!()
+hash_password_verify!();

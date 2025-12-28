@@ -4,4 +4,4 @@ macro_rules! type_op_normalize_ty {
     };
 }
 
-type_op_normalize_ty!()
+type_op_normalize_ty!();

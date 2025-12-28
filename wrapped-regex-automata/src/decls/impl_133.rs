@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Start!();
-        Special!();
-        SerializeError!();
         Seen!();
-        StartStateIter!();
-        StateID!();
+        Special!();
+        Start!();
         StartTable!();
+        SerializeError!();
+        Endian!();
+        StateID!();
         DFA!();
         StartError!();
-        Endian!();
+        StartStateIter!();
         DeserializeError!();
         Anchored!();
     };
@@ -22,4 +22,4 @@ macro_rules! impl_133 {
     };
 }
 
-impl_133!()
+impl_133!();

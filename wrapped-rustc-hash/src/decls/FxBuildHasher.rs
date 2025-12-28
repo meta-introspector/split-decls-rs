@@ -4,4 +4,4 @@ macro_rules! FxBuildHasher {
     };
 }
 
-FxBuildHasher!()
+FxBuildHasher!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BitMatrix!();
         Word!();
-        Idx!();
         DenseBitSet!();
+        Idx!();
+        BitMatrix!();
         BitIter!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

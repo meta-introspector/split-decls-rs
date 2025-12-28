@@ -4,4 +4,4 @@ macro_rules! SEG_IMPORT {
     };
 }
 
-SEG_IMPORT!()
+SEG_IMPORT!();

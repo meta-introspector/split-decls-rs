@@ -4,4 +4,4 @@ macro_rules! NestedSpan {
     };
 }
 
-NestedSpan!()
+NestedSpan!();

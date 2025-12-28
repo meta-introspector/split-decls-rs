@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Target!();
         ArgAbi!();
+        Target!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! softfloat_float_abi {
     };
 }
 
-softfloat_float_abi!()
+softfloat_float_abi!();

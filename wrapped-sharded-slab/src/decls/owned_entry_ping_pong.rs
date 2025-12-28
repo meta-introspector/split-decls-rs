@@ -11,4 +11,4 @@ macro_rules! owned_entry_ping_pong {
     };
 }
 
-owned_entry_ping_pong!()
+owned_entry_ping_pong!();

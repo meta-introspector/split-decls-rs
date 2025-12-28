@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ConstArg!();
+        Visitor!();
         AmbigArg!();
         ConstArgKind!();
         Path!();
-        Visitor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! walk_const_arg {
     };
 }
 
-walk_const_arg!()
+walk_const_arg!();

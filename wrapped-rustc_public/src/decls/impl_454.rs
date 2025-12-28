@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AssocKind!();
-        AssocItem!();
         AssocTypeData!();
+        AssocItem!();
+        AssocKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_454 {
     };
 }
 
-impl_454!()
+impl_454!();

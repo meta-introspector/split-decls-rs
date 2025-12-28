@@ -4,4 +4,4 @@ macro_rules! load_library {
     };
 }
 
-load_library!()
+load_library!();

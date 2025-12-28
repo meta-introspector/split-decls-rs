@@ -4,4 +4,4 @@ macro_rules! quote_token_spanned {
     };
 }
 
-quote_token_spanned!()
+quote_token_spanned!();

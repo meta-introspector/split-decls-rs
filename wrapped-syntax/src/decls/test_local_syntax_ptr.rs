@@ -12,4 +12,4 @@ macro_rules! test_local_syntax_ptr {
     };
 }
 
-test_local_syntax_ptr!()
+test_local_syntax_ptr!();

@@ -4,4 +4,4 @@ macro_rules! EM_SCORE7 {
     };
 }
 
-EM_SCORE7!()
+EM_SCORE7!();

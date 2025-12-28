@@ -11,4 +11,4 @@ macro_rules! cast_into_float {
     };
 }
 
-cast_into_float!()
+cast_into_float!();

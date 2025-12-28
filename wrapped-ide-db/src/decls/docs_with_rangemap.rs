@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DocsRangeMap!();
         Documentation!();
+        DocsRangeMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! docs_with_rangemap {
     };
 }
 
-docs_with_rangemap!()
+docs_with_rangemap!();

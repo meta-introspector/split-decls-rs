@@ -4,4 +4,4 @@ macro_rules! WithDispatch {
     };
 }
 
-WithDispatch!()
+WithDispatch!();

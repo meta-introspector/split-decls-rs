@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Edges!();
+        LabelledGraphWithEscStrs!();
+        Node!();
+        GraphWalk!();
         Edge!();
         Nodes!();
-        GraphWalk!();
-        Edges!();
-        Node!();
-        LabelledGraphWithEscStrs!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

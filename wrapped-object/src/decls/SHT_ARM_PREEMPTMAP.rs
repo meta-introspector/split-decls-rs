@@ -4,4 +4,4 @@ macro_rules! SHT_ARM_PREEMPTMAP {
     };
 }
 
-SHT_ARM_PREEMPTMAP!()
+SHT_ARM_PREEMPTMAP!();

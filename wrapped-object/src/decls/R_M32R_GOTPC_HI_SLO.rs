@@ -4,4 +4,4 @@ macro_rules! R_M32R_GOTPC_HI_SLO {
     };
 }
 
-R_M32R_GOTPC_HI_SLO!()
+R_M32R_GOTPC_HI_SLO!();

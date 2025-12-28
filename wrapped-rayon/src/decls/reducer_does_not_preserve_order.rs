@@ -4,4 +4,4 @@ macro_rules! reducer_does_not_preserve_order {
     };
 }
 
-reducer_does_not_preserve_order!()
+reducer_does_not_preserve_order!();

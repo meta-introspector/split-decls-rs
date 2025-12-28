@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_GOT12 {
     };
 }
 
-R_CKCORE_GOT12!()
+R_CKCORE_GOT12!();

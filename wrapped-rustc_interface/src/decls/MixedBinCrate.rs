@@ -4,4 +4,4 @@ macro_rules! MixedBinCrate {
     };
 }
 
-MixedBinCrate!()
+MixedBinCrate!();

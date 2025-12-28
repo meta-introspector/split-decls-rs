@@ -4,4 +4,4 @@ macro_rules! SG_NORELOC {
     };
 }
 
-SG_NORELOC!()
+SG_NORELOC!();

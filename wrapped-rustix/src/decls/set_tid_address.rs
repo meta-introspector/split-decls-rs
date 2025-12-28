@@ -11,4 +11,4 @@ macro_rules! set_tid_address {
     };
 }
 
-set_tid_address!()
+set_tid_address!();

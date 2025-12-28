@@ -4,4 +4,4 @@ macro_rules! SerAndDe {
     };
 }
 
-SerAndDe!()
+SerAndDe!();

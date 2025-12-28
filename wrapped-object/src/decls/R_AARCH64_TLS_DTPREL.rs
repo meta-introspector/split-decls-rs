@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_TLS_DTPREL {
     };
 }
 
-R_AARCH64_TLS_DTPREL!()
+R_AARCH64_TLS_DTPREL!();

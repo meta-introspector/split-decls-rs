@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CodegenContext!();
         FatLtoInput!();
         SerializedModule!();
         ExtraBackendMethods!();
+        CodegenContext!();
         WorkItemResult!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! execute_fat_lto_work_item {
     };
 }
 
-execute_fat_lto_work_item!()
+execute_fat_lto_work_item!();

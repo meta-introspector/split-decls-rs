@@ -4,4 +4,4 @@ macro_rules! iota {
     };
 }
 
-iota!()
+iota!();

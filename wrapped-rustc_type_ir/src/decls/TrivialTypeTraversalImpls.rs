@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TypeFolder!();
         TypeVisitor!();
         Interner!();
-        FallibleTypeFolder!();
         TypeFoldable!();
+        TypeFolder!();
         TypeVisitable!();
+        FallibleTypeFolder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! TrivialTypeTraversalImpls {
     };
 }
 
-TrivialTypeTraversalImpls!()
+TrivialTypeTraversalImpls!();

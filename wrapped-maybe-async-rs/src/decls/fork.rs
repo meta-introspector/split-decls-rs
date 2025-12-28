@@ -4,4 +4,4 @@ macro_rules! fork {
     };
 }
 
-fork!()
+fork!();

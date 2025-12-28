@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TestOutcome!();
-        ProcessResult!();
         ObligationForest!();
+        ProcessResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! done_dependency {
     };
 }
 
-done_dependency!()
+done_dependency!();

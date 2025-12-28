@@ -4,4 +4,4 @@ macro_rules! IMAGE_DEBUG_TYPE_MPX {
     };
 }
 
-IMAGE_DEBUG_TYPE_MPX!()
+IMAGE_DEBUG_TYPE_MPX!();

@@ -11,4 +11,4 @@ macro_rules! SPAN_TRACK {
     };
 }
 
-SPAN_TRACK!()
+SPAN_TRACK!();

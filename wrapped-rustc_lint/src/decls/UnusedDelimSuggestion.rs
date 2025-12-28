@@ -4,4 +4,4 @@ macro_rules! UnusedDelimSuggestion {
     };
 }
 
-UnusedDelimSuggestion!()
+UnusedDelimSuggestion!();

@@ -4,4 +4,4 @@ macro_rules! ConfusablesParser {
     };
 }
 
-ConfusablesParser!()
+ConfusablesParser!();

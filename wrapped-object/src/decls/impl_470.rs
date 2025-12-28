@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        DyldCacheMapping!();
-        DyldCacheImageIterator!();
-        DyldSubCacheSlice!();
-        DyldCache!();
-        Architecture!();
-        ReadRef!();
-        DyldCacheHeader!();
-        Error!();
         Endianness!();
-        DyldFile!();
-        Result!();
-        Item!();
+        DyldCacheImageIterator!();
         Endian!();
+        ReadRef!();
+        Result!();
+        Error!();
+        DyldCache!();
+        DyldCacheHeader!();
+        Architecture!();
+        DyldCacheMapping!();
+        DyldSubCacheSlice!();
+        Item!();
+        DyldFile!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_470 {
     };
 }
 
-impl_470!()
+impl_470!();

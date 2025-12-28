@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Parser!();
+        Error!();
         ParseError!();
         Opt!();
         IResult!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! opt {
     };
 }
 
-opt!()
+opt!();

@@ -4,4 +4,4 @@ macro_rules! Z_HUFFMAN_ONLY {
     };
 }
 
-Z_HUFFMAN_ONLY!()
+Z_HUFFMAN_ONLY!();

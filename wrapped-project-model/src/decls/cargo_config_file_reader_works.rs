@@ -25,4 +25,4 @@ env.CARGO_WORKSPACE_DIR.value = "" # {root}/home/.cargo/config.toml
     };
 }
 
-cargo_config_file_reader_works!()
+cargo_config_file_reader_works!();

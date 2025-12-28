@@ -4,4 +4,4 @@ macro_rules! vtab {
     };
 }
 
-vtab!()
+vtab!();

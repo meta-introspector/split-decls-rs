@@ -4,4 +4,4 @@ macro_rules! look {
     };
 }
 
-look!()
+look!();

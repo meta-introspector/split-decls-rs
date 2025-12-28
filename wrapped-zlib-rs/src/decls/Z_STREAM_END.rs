@@ -4,4 +4,4 @@ macro_rules! Z_STREAM_END {
     };
 }
 
-Z_STREAM_END!()
+Z_STREAM_END!();

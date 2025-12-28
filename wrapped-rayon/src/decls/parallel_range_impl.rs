@@ -12,4 +12,4 @@ macro_rules! parallel_range_impl {
     };
 }
 
-parallel_range_impl!()
+parallel_range_impl!();

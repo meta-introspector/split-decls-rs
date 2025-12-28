@@ -4,4 +4,4 @@ macro_rules! has_significant_drop_raw {
     };
 }
 
-has_significant_drop_raw!()
+has_significant_drop_raw!();

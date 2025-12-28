@@ -4,4 +4,4 @@ macro_rules! GetSymbolsErrorCallback {
     };
 }
 
-GetSymbolsErrorCallback!()
+GetSymbolsErrorCallback!();

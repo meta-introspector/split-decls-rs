@@ -11,4 +11,4 @@ macro_rules! has_plf_stubs {
     };
 }
 
-has_plf_stubs!()
+has_plf_stubs!();

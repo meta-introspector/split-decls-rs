@@ -4,4 +4,4 @@ macro_rules! SYSCALL_REGISTER {
     };
 }
 
-SYSCALL_REGISTER!()
+SYSCALL_REGISTER!();

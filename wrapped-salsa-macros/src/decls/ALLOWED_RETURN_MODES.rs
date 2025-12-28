@@ -4,4 +4,4 @@ macro_rules! ALLOWED_RETURN_MODES {
     };
 }
 
-ALLOWED_RETURN_MODES!()
+ALLOWED_RETURN_MODES!();

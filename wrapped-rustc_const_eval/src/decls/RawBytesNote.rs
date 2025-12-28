@@ -4,4 +4,4 @@ macro_rules! RawBytesNote {
     };
 }
 
-RawBytesNote!()
+RawBytesNote!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AnalysisHost!();
         Analysis!();
+        AnalysisHost!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! annotations_without_marker {
     };
 }
 
-annotations_without_marker!()
+annotations_without_marker!();

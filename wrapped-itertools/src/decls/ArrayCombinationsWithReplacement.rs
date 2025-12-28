@@ -11,4 +11,4 @@ macro_rules! ArrayCombinationsWithReplacement {
     };
 }
 
-ArrayCombinationsWithReplacement!()
+ArrayCombinationsWithReplacement!();

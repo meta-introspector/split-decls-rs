@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        UnusedAssign!();
-        UnusedVarRemoveField!();
-        UnusedVariableStringInterp!();
-        Node!();
-        UnusedAssignPassed!();
-        UnusedVarTryIgnoreSugg!();
-        Liveness!();
-        UnusedVarRemoveFieldSugg!();
-        UnusedVariableSugg!();
-        UnusedVarMaybeCaptureRef!();
-        UnusedVariableTryPrefix!();
         CollectLitsVisitor!();
-        UnusedCaptureMaybeCaptureRef!();
+        UnusedVariableSugg!();
+        UnusedVarRemoveField!();
+        UnusedVarMaybeCaptureRef!();
+        UnusedAssignPassed!();
+        Liveness!();
+        UnusedVarTryIgnoreSugg!();
+        UnusedVarTryIgnore!();
+        Node!();
+        UnusedAssign!();
         UnusedAssignSuggestion!();
+        UnusedVariableTryPrefix!();
         PatternTypo!();
         UnusedVarAssignedOnly!();
-        UnusedVarTryIgnore!();
+        UnusedCaptureMaybeCaptureRef!();
+        UnusedVarRemoveFieldSugg!();
+        UnusedVariableStringInterp!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_304 {
     };
 }
 
-impl_304!()
+impl_304!();

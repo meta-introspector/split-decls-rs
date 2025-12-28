@@ -4,4 +4,4 @@ macro_rules! MovePath {
     };
 }
 
-MovePath!()
+MovePath!();

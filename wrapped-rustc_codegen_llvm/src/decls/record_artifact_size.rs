@@ -4,4 +4,4 @@ macro_rules! record_artifact_size {
     };
 }
 
-record_artifact_size!()
+record_artifact_size!();

@@ -4,4 +4,4 @@ macro_rules! if_hyper {
     };
 }
 
-if_hyper!()
+if_hyper!();

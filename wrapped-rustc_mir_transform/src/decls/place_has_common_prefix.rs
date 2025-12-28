@@ -4,4 +4,4 @@ macro_rules! place_has_common_prefix {
     };
 }
 
-place_has_common_prefix!()
+place_has_common_prefix!();

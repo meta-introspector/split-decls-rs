@@ -11,4 +11,4 @@ macro_rules! resolve_cond {
     };
 }
 
-resolve_cond!()
+resolve_cond!();

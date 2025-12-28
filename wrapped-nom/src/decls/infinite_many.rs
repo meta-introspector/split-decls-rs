@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Err!();
-        ErrorKind!();
-        Tag!();
         IResult!();
         Error!();
+        ErrorKind!();
+        Tag!();
+        Err!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! infinite_many {
     };
 }
 
-infinite_many!()
+infinite_many!();

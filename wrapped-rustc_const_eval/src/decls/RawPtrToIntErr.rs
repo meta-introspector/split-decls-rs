@@ -4,4 +4,4 @@ macro_rules! RawPtrToIntErr {
     };
 }
 
-RawPtrToIntErr!()
+RawPtrToIntErr!();

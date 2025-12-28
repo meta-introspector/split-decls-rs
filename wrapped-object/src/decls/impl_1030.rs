@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Pod!();
-        Result!();
         BytesMut!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1030 {
     };
 }
 
-impl_1030!()
+impl_1030!();

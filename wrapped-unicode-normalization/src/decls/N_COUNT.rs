@@ -4,4 +4,4 @@ macro_rules! N_COUNT {
     };
 }
 
-N_COUNT!()
+N_COUNT!();

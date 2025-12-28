@@ -11,4 +11,4 @@ macro_rules! parallel_setup {
     };
 }
 
-parallel_setup!()
+parallel_setup!();

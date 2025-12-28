@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ExtraBackendMethods!();
         CopyPathBuf!();
-        CompiledModule!();
-        ModuleKind!();
-        CachedModuleCodegen!();
-        NoSavedObjectFile!();
         EmitObj!();
-        WorkItemResult!();
+        NoSavedObjectFile!();
+        ExtraBackendMethods!();
+        CompiledModule!();
         CodegenContext!();
+        WorkItemResult!();
+        CachedModuleCodegen!();
+        ModuleKind!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! execute_copy_from_cache_work_item {
     };
 }
 
-execute_copy_from_cache_work_item!()
+execute_copy_from_cache_work_item!();

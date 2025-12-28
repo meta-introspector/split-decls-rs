@@ -4,4 +4,4 @@ macro_rules! freebsd {
     };
 }
 
-freebsd!()
+freebsd!();

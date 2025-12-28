@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Version!();
         U32!();
         Endian!();
         U64!();
+        Version!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DyldCacheHeader {
     };
 }
 
-DyldCacheHeader!()
+DyldCacheHeader!();

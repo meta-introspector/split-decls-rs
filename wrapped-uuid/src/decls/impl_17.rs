@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        Error!();
         InvalidUuid!();
+        Error!();
+        ErrorKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

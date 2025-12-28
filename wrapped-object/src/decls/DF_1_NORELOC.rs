@@ -4,4 +4,4 @@ macro_rules! DF_1_NORELOC {
     };
 }
 
-DF_1_NORELOC!()
+DF_1_NORELOC!();

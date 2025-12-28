@@ -4,4 +4,4 @@ macro_rules! impl_visitable_noop {
     };
 }
 
-impl_visitable_noop!()
+impl_visitable_noop!();

@@ -11,4 +11,4 @@ macro_rules! type_di_node {
     };
 }
 
-type_di_node!()
+type_di_node!();

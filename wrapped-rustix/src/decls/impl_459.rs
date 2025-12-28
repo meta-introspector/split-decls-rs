@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Setter!();
-        Opcode!();
         Result!();
+        Opcode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_459 {
     };
 }
 
-impl_459!()
+impl_459!();

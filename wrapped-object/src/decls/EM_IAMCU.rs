@@ -4,4 +4,4 @@ macro_rules! EM_IAMCU {
     };
 }
 
-EM_IAMCU!()
+EM_IAMCU!();

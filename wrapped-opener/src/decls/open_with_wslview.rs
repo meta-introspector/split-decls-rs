@@ -4,4 +4,4 @@ macro_rules! open_with_wslview {
     };
 }
 
-open_with_wslview!()
+open_with_wslview!();

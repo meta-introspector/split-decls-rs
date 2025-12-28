@@ -4,4 +4,4 @@ macro_rules! addr_len_struct {
     };
 }
 
-addr_len_struct!()
+addr_len_struct!();

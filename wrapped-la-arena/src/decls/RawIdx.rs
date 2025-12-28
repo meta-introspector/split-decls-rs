@@ -4,4 +4,4 @@ macro_rules! RawIdx {
     };
 }
 
-RawIdx!()
+RawIdx!();

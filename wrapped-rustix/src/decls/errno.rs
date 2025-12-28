@@ -4,4 +4,4 @@ macro_rules! errno {
     };
 }
 
-errno!()
+errno!();

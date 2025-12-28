@@ -11,4 +11,4 @@ macro_rules! IMAGE_SYM_DEBUG {
     };
 }
 
-IMAGE_SYM_DEBUG!()
+IMAGE_SYM_DEBUG!();

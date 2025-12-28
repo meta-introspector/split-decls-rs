@@ -4,4 +4,4 @@ macro_rules! DotCrateGraph {
     };
 }
 
-DotCrateGraph!()
+DotCrateGraph!();

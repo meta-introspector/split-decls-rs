@@ -4,4 +4,4 @@ macro_rules! unterminated_if_tag {
     };
 }
 
-unterminated_if_tag!()
+unterminated_if_tag!();

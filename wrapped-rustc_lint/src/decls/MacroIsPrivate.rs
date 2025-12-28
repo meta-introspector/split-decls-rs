@@ -4,4 +4,4 @@ macro_rules! MacroIsPrivate {
     };
 }
 
-MacroIsPrivate!()
+MacroIsPrivate!();

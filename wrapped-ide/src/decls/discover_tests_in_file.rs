@@ -11,4 +11,4 @@ macro_rules! discover_tests_in_file {
     };
 }
 
-discover_tests_in_file!()
+discover_tests_in_file!();

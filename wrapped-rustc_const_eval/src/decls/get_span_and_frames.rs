@@ -12,4 +12,4 @@ macro_rules! get_span_and_frames {
     };
 }
 
-get_span_and_frames!()
+get_span_and_frames!();

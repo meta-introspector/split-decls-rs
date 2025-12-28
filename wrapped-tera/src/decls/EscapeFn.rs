@@ -4,4 +4,4 @@ macro_rules! EscapeFn {
     };
 }
 
-EscapeFn!()
+EscapeFn!();

@@ -11,4 +11,4 @@ macro_rules! required_hierarchy {
     };
 }
 
-required_hierarchy!()
+required_hierarchy!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TyPat!();
-        TyPatKind!();
         Visitor!();
+        TyPatKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! walk_ty_pat {
     };
 }
 
-walk_ty_pat!()
+walk_ty_pat!();

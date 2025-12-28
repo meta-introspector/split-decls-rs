@@ -4,4 +4,4 @@ macro_rules! Decomposed {
     };
 }
 
-Decomposed!()
+Decomposed!();

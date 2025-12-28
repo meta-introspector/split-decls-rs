@@ -4,4 +4,4 @@ macro_rules! assert_align_eq {
     };
 }
 
-assert_align_eq!()
+assert_align_eq!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
         LcStr!();
         U32!();
+        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Dylib {
     };
 }
 
-Dylib!()
+Dylib!();

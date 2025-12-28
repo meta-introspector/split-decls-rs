@@ -12,4 +12,4 @@ macro_rules! io_uring_register_with {
     };
 }
 
-io_uring_register_with!()
+io_uring_register_with!();

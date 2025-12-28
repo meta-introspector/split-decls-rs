@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueryMap!();
         QueryJobId!();
+        QueryMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! pick_query {
     };
 }
 
-pick_query!()
+pick_query!();

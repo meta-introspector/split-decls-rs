@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IResult!();
         AsChar!();
-        ErrorKind!();
-        Needed!();
         ParseError!();
+        Needed!();
         Streaming!();
+        ErrorKind!();
         Input!();
+        IResult!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! oct_digit1 {
     };
 }
 
-oct_digit1!()
+oct_digit1!();

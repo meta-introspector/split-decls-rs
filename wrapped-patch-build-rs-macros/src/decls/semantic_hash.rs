@@ -4,4 +4,4 @@ macro_rules! semantic_hash {
     };
 }
 
-semantic_hash!()
+semantic_hash!();

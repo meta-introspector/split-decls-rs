@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ctxt!();
         Symbol!();
+        Ctxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Attr {
     };
 }
 
-Attr!()
+Attr!();

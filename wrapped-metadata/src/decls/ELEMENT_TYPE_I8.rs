@@ -11,4 +11,4 @@ macro_rules! ELEMENT_TYPE_I8 {
     };
 }
 
-ELEMENT_TYPE_I8!()
+ELEMENT_TYPE_I8!();

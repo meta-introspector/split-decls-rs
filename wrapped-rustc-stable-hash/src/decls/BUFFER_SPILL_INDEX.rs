@@ -4,4 +4,4 @@ macro_rules! BUFFER_SPILL_INDEX {
     };
 }
 
-BUFFER_SPILL_INDEX!()
+BUFFER_SPILL_INDEX!();

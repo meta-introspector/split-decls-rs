@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SerializationSinkInner!();
-        SerializationSink!();
         StdWriteAdapter!();
         Addr!();
+        SerializationSinkInner!();
+        SerializationSink!();
         BackingStorage!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

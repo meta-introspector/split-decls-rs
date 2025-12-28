@@ -4,4 +4,4 @@ macro_rules! EM_ETPU {
     };
 }
 
-EM_ETPU!()
+EM_ETPU!();

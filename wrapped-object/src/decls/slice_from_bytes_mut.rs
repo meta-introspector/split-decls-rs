@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pod!();
         Result!();
+        Pod!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! slice_from_bytes_mut {
     };
 }
 
-slice_from_bytes_mut!()
+slice_from_bytes_mut!();

@@ -4,4 +4,4 @@ macro_rules! unterminated_fn_call {
     };
 }
 
-unterminated_fn_call!()
+unterminated_fn_call!();

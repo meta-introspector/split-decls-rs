@@ -11,4 +11,4 @@ macro_rules! format_whitespace {
     };
 }
 
-format_whitespace!()
+format_whitespace!();

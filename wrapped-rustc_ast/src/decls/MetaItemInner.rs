@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Lit!();
         MetaItem!();
+        Lit!();
         MetaItemLit!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! MetaItemInner {
     };
 }
 
-MetaItemInner!()
+MetaItemInner!();

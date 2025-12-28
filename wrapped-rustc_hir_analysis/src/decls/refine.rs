@@ -4,4 +4,4 @@ macro_rules! refine {
     };
 }
 
-refine!()
+refine!();

@@ -4,4 +4,4 @@ macro_rules! SingleArmMatchBegin {
     };
 }
 
-SingleArmMatchBegin!()
+SingleArmMatchBegin!();

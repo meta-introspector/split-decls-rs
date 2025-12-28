@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TypeMembershipCodegenMethods!();
         LayoutTypeCodegenMethods!();
         DerivedTypeCodegenMethods!();
-        TypeMembershipCodegenMethods!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! other_586 {
     };
 }
 
-other_586!()
+other_586!();

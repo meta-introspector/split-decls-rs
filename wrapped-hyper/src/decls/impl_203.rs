@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ServiceFn!();
-        Service!();
         Result!();
+        Service!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

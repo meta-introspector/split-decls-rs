@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Deserializer!();
-        Error!();
         Map!();
+        Error!();
         Value!();
+        Deserializer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

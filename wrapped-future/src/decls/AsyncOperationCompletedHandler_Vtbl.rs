@@ -11,4 +11,4 @@ macro_rules! AsyncOperationCompletedHandler_Vtbl {
     };
 }
 
-AsyncOperationCompletedHandler_Vtbl!()
+AsyncOperationCompletedHandler_Vtbl!();

@@ -4,4 +4,4 @@ macro_rules! type_index {
     };
 }
 
-type_index!()
+type_index!();

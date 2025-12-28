@@ -4,4 +4,4 @@ macro_rules! DebugLoc {
     };
 }
 
-DebugLoc!()
+DebugLoc!();

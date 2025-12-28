@@ -11,4 +11,4 @@ macro_rules! non_wsl_open {
     };
 }
 
-non_wsl_open!()
+non_wsl_open!();

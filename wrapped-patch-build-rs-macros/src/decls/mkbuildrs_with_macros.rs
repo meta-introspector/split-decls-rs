@@ -4,4 +4,4 @@ macro_rules! mkbuildrs_with_macros {
     };
 }
 
-mkbuildrs_with_macros!()
+mkbuildrs_with_macros!();

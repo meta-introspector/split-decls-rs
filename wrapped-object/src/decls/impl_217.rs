@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SectionIndex!();
-        CoffHeader!();
         CoffSectionIterator!();
-        CoffSection!();
         Item!();
+        CoffHeader!();
+        CoffSection!();
         ReadRef!();
+        SectionIndex!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_217 {
     };
 }
 
-impl_217!()
+impl_217!();

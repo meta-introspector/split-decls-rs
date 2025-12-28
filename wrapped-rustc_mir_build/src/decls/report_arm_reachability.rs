@@ -11,4 +11,4 @@ macro_rules! report_arm_reachability {
     };
 }
 
-report_arm_reachability!()
+report_arm_reachability!();
