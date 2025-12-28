@@ -4,4 +4,4 @@ macro_rules! Justification {
     };
 }
 
-Justification!()
+Justification!();

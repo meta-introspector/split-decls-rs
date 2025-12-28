@@ -13,4 +13,4 @@ macro_rules! discard_nonessential_events {
     };
 }
 
-discard_nonessential_events!()
+discard_nonessential_events!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Parse!();
         MemberName!();
-        ParseContext!();
-        UnqualifiedName!();
         Result!();
-        UnscopedName!();
-        UnscopedTemplateName!();
-        Name!();
-        SubstitutionTable!();
         TemplateArgs!();
-        IndexStr!();
-        Substitutable!();
         NonSubstitution!();
+        Name!();
+        ParseContext!();
+        Parse!();
+        SubstitutionTable!();
+        Substitutable!();
+        UnscopedTemplateName!();
+        UnscopedName!();
+        UnqualifiedName!();
+        IndexStr!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_240 {
     };
 }
 
-impl_240!()
+impl_240!();

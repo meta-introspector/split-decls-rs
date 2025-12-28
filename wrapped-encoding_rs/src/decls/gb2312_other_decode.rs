@@ -4,4 +4,4 @@ macro_rules! gb2312_other_decode {
     };
 }
 
-gb2312_other_decode!()
+gb2312_other_decode!();

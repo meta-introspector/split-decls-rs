@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Error!();
+        Kind!();
         Item!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! matching_remote {
     };
 }
 
-matching_remote!()
+matching_remote!();

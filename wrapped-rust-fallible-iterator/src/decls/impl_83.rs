@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FlatMap!();
         IntoFallibleIterator!();
+        FlatMap!();
         FallibleIterator!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

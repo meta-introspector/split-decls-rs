@@ -4,4 +4,4 @@ macro_rules! utf8_char_width {
     };
 }
 
-utf8_char_width!()
+utf8_char_width!();

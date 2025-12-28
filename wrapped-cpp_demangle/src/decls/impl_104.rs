@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        TemplateParam!();
-        Parse!();
-        Result!();
-        SubstitutionTable!();
-        Substitution!();
-        TemplateArgs!();
-        IndexStr!();
         ParseContext!();
-        DataMemberPrefix!();
-        Prefix!();
-        Substitutable!();
-        NonSubstitution!();
+        Parse!();
+        Substitution!();
+        Result!();
         Error!();
+        TemplateParam!();
+        NonSubstitution!();
+        SubstitutionTable!();
+        Substitutable!();
         Decltype!();
+        IndexStr!();
+        Prefix!();
         UnqualifiedName!();
+        TemplateArgs!();
+        DataMemberPrefix!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

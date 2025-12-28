@@ -4,4 +4,4 @@ macro_rules! InactiveEnumVariantCode {
     };
 }
 
-InactiveEnumVariantCode!()
+InactiveEnumVariantCode!();

@@ -4,4 +4,4 @@ macro_rules! OperationType {
     };
 }
 
-OperationType!()
+OperationType!();

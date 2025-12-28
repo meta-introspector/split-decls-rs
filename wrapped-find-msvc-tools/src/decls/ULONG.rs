@@ -4,4 +4,4 @@ macro_rules! ULONG {
     };
 }
 
-ULONG!()
+ULONG!();

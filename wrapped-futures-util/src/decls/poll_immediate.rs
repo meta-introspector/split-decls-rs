@@ -4,4 +4,4 @@ macro_rules! poll_immediate {
     };
 }
 
-poll_immediate!()
+poll_immediate!();

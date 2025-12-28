@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        ChecksumKind!();
+        CodegenCx!();
+        DIB!();
+    };
+}
+
+macro_rules! file_metadata {
+    () => {
+        deps!();
+        pub (crate) fn file_metadata < 'll > (cx : & CodegenCx < 'll , '_ > , source_file : & SourceFile) -> & 'll DIFile { let cache_key = Some ((source_file . stable_id , source_file . src_hash)) ; return debug_context (cx) . created_files . borrow_mut () . entry (cache_key) . or_insert_with (| | alloc_new_file_metadata (cx , source_file)) ; # [instrument (skip (cx , source_file) , level = "debug")] fn alloc_new_file_metadata < 'll > (cx : & CodegenCx < 'll , '_ > , source_file : & SourceFile ,) -> & 'll DIFile { debug ! (? source_file . name) ; let filename_display_preference = cx . sess () . filename_display_preference (RemapPathScopeComponents :: DEBUGINFO) ; use rustc_session :: config :: RemapPathScopeComponents ; let (directory , file_name) = match & source_file . name { FileName :: Real (filename) => { let working_directory = & cx . sess () . opts . working_dir ; debug ! (? working_directory) ; if filename_display_preference == FileNameDisplayPreference :: Remapped { let filename = cx . sess () . source_map () . path_mapping () . to_embeddable_absolute_path (filename . clone () , working_directory) ; let abs_path = filename . remapped_path_if_available () ; debug ! (? abs_path) ; if let Ok (rel_path) = abs_path . strip_prefix (working_directory . remapped_path_if_available ()) { (working_directory . to_string_lossy (FileNameDisplayPreference :: Remapped) , rel_path . to_string_lossy () . into_owned () ,) } else { ("" . into () , abs_path . to_string_lossy () . into_owned ()) } } else { let working_directory = working_directory . local_path_if_available () ; let filename = filename . local_path_if_available () ; debug ! (? working_directory , ? filename) ; let abs_path : Cow < '_ , Path > = if filename . is_absolute () { filename . into () } else { let mut p = PathBuf :: new () ; p . push (working_directory) ; p . push (filename) ; p . into () } ; if let Ok (rel_path) = abs_path . strip_prefix (working_directory) { (working_directory . to_string_lossy () , rel_path . to_string_lossy () . into_owned () ,) } else { ("" . into () , abs_path . to_string_lossy () . into_owned ()) } } } other => { debug ! (? other) ; ("" . into () , other . display (filename_display_preference) . to_string ()) } } ; let hash_kind = match source_file . src_hash . kind { rustc_span :: SourceFileHashAlgorithm :: Md5 => llvm :: ChecksumKind :: MD5 , rustc_span :: SourceFileHashAlgorithm :: Sha1 => llvm :: ChecksumKind :: SHA1 , rustc_span :: SourceFileHashAlgorithm :: Sha256 => llvm :: ChecksumKind :: SHA256 , rustc_span :: SourceFileHashAlgorithm :: Blake3 => llvm :: ChecksumKind :: None , } ; let hash_value = hex_encode (source_file . src_hash . hash_bytes ()) ; let source = cx . sess () . opts . unstable_opts . embed_source . then_some (()) . and (source_file . src . as_ref ()) ; create_file (DIB (cx) , & file_name , & directory , & hash_value , hash_kind , source) } }
+    };
+}
+
+file_metadata!()

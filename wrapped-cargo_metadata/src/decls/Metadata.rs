@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Package!();
         Target!();
-        WorkspaceDefaultMembers!();
-        PackageId!();
+        Package!();
         Resolve!();
+        PackageId!();
+        WorkspaceDefaultMembers!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Metadata {
     };
 }
 
-Metadata!()
+Metadata!();

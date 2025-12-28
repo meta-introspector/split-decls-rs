@@ -4,4 +4,4 @@ macro_rules! ConsumerState {
     };
 }
 
-ConsumerState!()
+ConsumerState!();

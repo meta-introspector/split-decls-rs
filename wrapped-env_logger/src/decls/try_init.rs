@@ -11,4 +11,4 @@ macro_rules! try_init {
     };
 }
 
-try_init!()
+try_init!();

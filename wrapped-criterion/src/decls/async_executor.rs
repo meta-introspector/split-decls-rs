@@ -4,4 +4,4 @@ macro_rules! async_executor {
     };
 }
 
-async_executor!()
+async_executor!();

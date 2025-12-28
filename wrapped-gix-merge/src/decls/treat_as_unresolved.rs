@@ -12,4 +12,4 @@ macro_rules! treat_as_unresolved {
     };
 }
 
-treat_as_unresolved!()
+treat_as_unresolved!();

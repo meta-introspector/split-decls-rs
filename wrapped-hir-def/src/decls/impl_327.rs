@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ModuleId!();
         ModuleItemMap!();
-        HasResolver!();
         Resolver!();
+        ModuleId!();
         DefDatabase!();
+        HasResolver!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_327 {
     };
 }
 
-impl_327!()
+impl_327!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        OpaqueCursor!();
         Error!();
+        OpaqueCursor!();
+        Result!();
         CursorType!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_721 {
     };
 }
 
-impl_721!()
+impl_721!();

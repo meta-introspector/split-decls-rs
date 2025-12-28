@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Stage!();
-        DirEntry!();
-        PathStorageRef!();
-        Entry!();
-        AccelerateLookup!();
         StageRaw!();
+        AccelerateLookup!();
+        DirEntry!();
         Version!();
+        Entry!();
+        Stage!();
         State!();
+        PathStorageRef!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

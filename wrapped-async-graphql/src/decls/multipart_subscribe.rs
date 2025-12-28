@@ -4,4 +4,4 @@ macro_rules! multipart_subscribe {
     };
 }
 
-multipart_subscribe!()
+multipart_subscribe!();

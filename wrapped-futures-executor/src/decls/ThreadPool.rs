@@ -11,4 +11,4 @@ macro_rules! ThreadPool {
     };
 }
 
-ThreadPool!()
+ThreadPool!();

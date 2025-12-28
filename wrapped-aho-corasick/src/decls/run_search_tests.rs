@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SearchTest!();
-        TestCollection!();
         Match!();
+        TestCollection!();
+        SearchTest!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! run_search_tests {
     };
 }
 
-run_search_tests!()
+run_search_tests!();

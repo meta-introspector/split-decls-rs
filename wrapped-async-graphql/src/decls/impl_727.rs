@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         OutputType!();
         EdgeNameType!();
-        CursorType!();
         Edge!();
+        CursorType!();
         EmptyFields!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_727 {
     };
 }
 
-impl_727!()
+impl_727!();

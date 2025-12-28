@@ -4,4 +4,4 @@ macro_rules! EucKrDecoder {
     };
 }
 
-EucKrDecoder!()
+EucKrDecoder!();

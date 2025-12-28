@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Loader!();
-        LoaderReader!();
-        Result!();
-        LoaderInternal!();
-        LocationRangeIter!();
-        Symbol!();
         Location!();
+        Result!();
         FrameIter!();
+        Symbol!();
+        Loader!();
+        LoaderInternal!();
+        LoaderReader!();
+        LocationRangeIter!();
         Context!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

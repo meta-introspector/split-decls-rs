@@ -4,4 +4,4 @@ macro_rules! flat_set {
     };
 }
 
-flat_set!()
+flat_set!();

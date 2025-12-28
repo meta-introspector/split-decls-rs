@@ -11,4 +11,4 @@ macro_rules! size_of_error {
     };
 }
 
-size_of_error!()
+size_of_error!();

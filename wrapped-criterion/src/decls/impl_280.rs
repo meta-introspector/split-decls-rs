@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Report!();
-        CliReport!();
         ValueFormatter!();
-        ComparisonResult!();
-        ReportContext!();
-        MeasurementData!();
-        Slope!();
-        BenchmarkId!();
+        CliReport!();
         CliVerbosity!();
+        BenchmarkId!();
+        Report!();
+        ComparisonResult!();
+        Slope!();
+        ReportContext!();
         Estimate!();
+        MeasurementData!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_280 {
     };
 }
 
-impl_280!()
+impl_280!();

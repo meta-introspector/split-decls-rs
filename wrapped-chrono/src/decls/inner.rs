@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Datelike!();
         MappedLocalTime!();
-        Timelike!();
         Date!();
         FixedOffset!();
         NaiveDateTime!();
-        Datelike!();
+        Timelike!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! inner {
     };
 }
 
-inner!()
+inner!();

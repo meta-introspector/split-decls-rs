@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashMap!();
         Equivalent!();
+        HashMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

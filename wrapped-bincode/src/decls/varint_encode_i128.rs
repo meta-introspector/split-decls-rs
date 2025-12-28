@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endianness!();
         EncodeError!();
         Writer!();
+        Endianness!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! varint_encode_i128 {
     };
 }
 
-varint_encode_i128!()
+varint_encode_i128!();

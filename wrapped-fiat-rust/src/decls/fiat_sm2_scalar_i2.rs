@@ -4,4 +4,4 @@ macro_rules! fiat_sm2_scalar_i2 {
     };
 }
 
-fiat_sm2_scalar_i2!()
+fiat_sm2_scalar_i2!();

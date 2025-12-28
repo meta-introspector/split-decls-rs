@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Version!();
-        EntryDataMode!();
-        Mode!();
         Kind!();
+        Mode!();
+        EntryDataMode!();
+        Version!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! BytesToEntriesIter {
     };
 }
 
-BytesToEntriesIter!()
+BytesToEntriesIter!();

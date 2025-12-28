@@ -12,4 +12,4 @@ macro_rules! decode_detect_invalid_last_symbol_every_possible_three_symbols {
     };
 }
 
-decode_detect_invalid_last_symbol_every_possible_three_symbols!()
+decode_detect_invalid_last_symbol_every_possible_three_symbols!();

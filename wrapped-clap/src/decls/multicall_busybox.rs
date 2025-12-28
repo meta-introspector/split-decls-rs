@@ -4,4 +4,4 @@ macro_rules! multicall_busybox {
     };
 }
 
-multicall_busybox!()
+multicall_busybox!();

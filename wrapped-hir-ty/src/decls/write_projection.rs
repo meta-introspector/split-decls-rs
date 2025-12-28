@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HirDisplayError!();
-        AliasTy!();
         SizedByDefault!();
-        HirFormatter!();
+        AliasTy!();
+        HirDisplayError!();
         GenericPredicates!();
+        HirFormatter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! write_projection {
     };
 }
 
-write_projection!()
+write_projection!();

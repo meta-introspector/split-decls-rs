@@ -12,4 +12,4 @@ macro_rules! check_safe_directories {
     };
 }
 
-check_safe_directories!()
+check_safe_directories!();

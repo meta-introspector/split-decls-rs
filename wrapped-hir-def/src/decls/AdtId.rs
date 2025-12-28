@@ -4,4 +4,4 @@ macro_rules! AdtId {
     };
 }
 
-AdtId!()
+AdtId!();

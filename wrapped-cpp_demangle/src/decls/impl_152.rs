@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         Parse!();
         ParseContext!();
-        SubstitutionTable!();
-        IndexStr!();
-        CtorDtorName!();
-        Error!();
         Result!();
+        IndexStr!();
+        Error!();
+        SubstitutionTable!();
+        CtorDtorName!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_152 {
     };
 }
 
-impl_152!()
+impl_152!();

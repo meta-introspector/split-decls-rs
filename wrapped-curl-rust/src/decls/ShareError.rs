@@ -4,4 +4,4 @@ macro_rules! ShareError {
     };
 }
 
-ShareError!()
+ShareError!();

@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
+        TypeMismatch!();
+        Expectation!();
         TargetFeatureIsSafeInTarget!();
         Diagnostics!();
         AliasTy!();
         Adjustment!();
-        TargetFeatures!();
-        Diverges!();
-        Expectation!();
-        HirDatabase!();
-        TypeMismatch!();
-        InferenceContext!();
-        InferenceTyDiagnosticSource!();
-        AllowTwoPhase!();
-        MethodResolutionUnstableFeatures!();
         LifetimeElisionKind!();
-        InternedStandardTypes!();
-        Adjust!();
-        InferenceDiagnostic!();
-        ImplTraitLoweringMode!();
-        InferenceResult!();
-        TyLoweringContext!();
         CandidateId!();
+        MethodResolutionUnstableFeatures!();
+        AllowTwoPhase!();
+        Diverges!();
+        TargetFeatures!();
+        InferenceDiagnostic!();
+        HirDatabase!();
+        TyLoweringContext!();
+        InternedStandardTypes!();
+        InferenceResult!();
+        InferenceTyDiagnosticSource!();
+        InferenceContext!();
+        ImplTraitLoweringMode!();
+        Adjust!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! impl_268 {
     };
 }
 
-impl_268!()
+impl_268!();

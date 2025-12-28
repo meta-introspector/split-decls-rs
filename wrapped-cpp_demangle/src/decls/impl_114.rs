@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnqualifiedName!();
-        GetLeafName!();
-        SourceName!();
         LeafName!();
+        SourceName!();
+        GetLeafName!();
+        UnqualifiedName!();
         SubstitutionTable!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

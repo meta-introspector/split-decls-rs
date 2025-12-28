@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompassPt!();
         ID!();
+        CompassPt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Port {
     };
 }
 
-Port!()
+Port!();

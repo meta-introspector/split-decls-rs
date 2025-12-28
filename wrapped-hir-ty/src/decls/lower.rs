@@ -4,4 +4,4 @@ macro_rules! lower {
     };
 }
 
-lower!()
+lower!();

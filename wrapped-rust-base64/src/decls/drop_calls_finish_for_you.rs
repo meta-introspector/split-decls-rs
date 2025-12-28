@@ -11,4 +11,4 @@ macro_rules! drop_calls_finish_for_you {
     };
 }
 
-drop_calls_finish_for_you!()
+drop_calls_finish_for_you!();

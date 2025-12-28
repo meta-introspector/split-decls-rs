@@ -11,4 +11,4 @@ macro_rules! wake_arc_raw {
     };
 }
 
-wake_arc_raw!()
+wake_arc_raw!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Ok!();
         Result!();
+        Ok!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! __ensure {
     };
 }
 
-__ensure!()
+__ensure!();

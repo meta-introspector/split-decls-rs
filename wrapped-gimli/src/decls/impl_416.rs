@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LineInstructions!();
-        LineProgramHeader!();
-        LineInstruction!();
         Reader!();
         Result!();
+        LineInstruction!();
+        LineProgramHeader!();
+        LineInstructions!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_416 {
     };
 }
 
-impl_416!()
+impl_416!();

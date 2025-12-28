@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        Stream!();
+        Expected!();
+        EventReceiver!();
+        Token!();
+        ErrorSink!();
+        ParseError!();
+        TokenKind!();
+    };
+}
+
+macro_rules! on_table {
+    () => {
+        deps!();
+        # [doc = " Start a table from the open token"] # [doc = ""] # [doc = " This eats to EOL"] # [doc = ""] # [doc = " ```bnf"] # [doc = " ;; Table"] # [doc = ""] # [doc = " table = std-table / array-table"] # [doc = ""] # [doc = " ;; Standard Table"] # [doc = ""] # [doc = " std-table = std-table-open key std-table-close"] # [doc = ""] # [doc = " ;; Array Table"] # [doc = ""] # [doc = " array-table = array-table-open key array-table-close"] # [doc = " ```"] fn on_table (tokens : & mut Stream < '_ > , open_token : & Token , receiver : & mut dyn EventReceiver , error : & mut dyn ErrorSink ,) { let is_array_table = if let Some (second_open_token) = next_token_if (tokens , | k | matches ! (k , TokenKind :: LeftSquareBracket)) { let span = open_token . span () . append (second_open_token . span ()) ; receiver . array_table_open (span , error) ; true } else { let span = open_token . span () ; receiver . std_table_open (span , error) ; false } ; opt_whitespace (tokens , receiver , error) ; let valid_key = key (tokens , "invalid table" , receiver , error) ; opt_whitespace (tokens , receiver , error) ; let mut success = false ; if let Some (close_token) = next_token_if (tokens , | k | matches ! (k , TokenKind :: RightSquareBracket)) { if is_array_table { if let Some (second_close_token) = next_token_if (tokens , | k | matches ! (k , TokenKind :: RightSquareBracket)) { let span = close_token . span () . append (second_close_token . span ()) ; receiver . array_table_close (span , error) ; success = true ; } else { let context = open_token . span () . append (close_token . span ()) ; error . report_error (ParseError :: new ("unclosed array table") . with_context (context) . with_expected (& [Expected :: Literal ("]")]) . with_unexpected (close_token . span () . after ()) ,) ; } } else { receiver . std_table_close (close_token . span () , error) ; success = true ; } } else if valid_key { let last_key_token = tokens . previous_tokens () . find (| t | t . kind () != TokenKind :: Whitespace) . unwrap_or (open_token) ; let context = open_token . span () . append (last_key_token . span ()) ; if is_array_table { error . report_error (ParseError :: new ("unclosed array table") . with_context (context) . with_expected (& [Expected :: Literal ("]]")]) . with_unexpected (last_key_token . span () . after ()) ,) ; } else { error . report_error (ParseError :: new ("unclosed table") . with_context (context) . with_expected (& [Expected :: Literal ("]")]) . with_unexpected (last_key_token . span () . after ()) ,) ; } } if success { ws_comment_newline (tokens , receiver , error) ; } else { ignore_to_newline (tokens , receiver , error) ; } }
+    };
+}
+
+on_table!()

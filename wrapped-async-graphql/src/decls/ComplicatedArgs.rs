@@ -4,4 +4,4 @@ macro_rules! ComplicatedArgs {
     };
 }
 
-ComplicatedArgs!()
+ComplicatedArgs!();

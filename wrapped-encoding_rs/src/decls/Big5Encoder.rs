@@ -4,4 +4,4 @@ macro_rules! Big5Encoder {
     };
 }
 
-Big5Encoder!()
+Big5Encoder!();

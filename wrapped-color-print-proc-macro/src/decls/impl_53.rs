@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Error!();
-        Color!();
+        Intensity!();
         Change!();
+        Color!();
         BaseColor!();
         Color16!();
-        Intensity!();
+        Result!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

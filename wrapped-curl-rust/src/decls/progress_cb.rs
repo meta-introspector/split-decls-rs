@@ -12,4 +12,4 @@ macro_rules! progress_cb {
     };
 }
 
-progress_cb!()
+progress_cb!();

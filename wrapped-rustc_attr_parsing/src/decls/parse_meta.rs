@@ -1,0 +1,8 @@
+macro_rules! parse_meta {
+    () => {
+        pub fn parse_meta < 'a > (psess : & 'a ParseSess , attr : & Attribute) -> PResult < 'a , MetaItem > { let item = attr . get_normal_item () ; Ok (MetaItem { unsafety : item . unsafety , span : attr . span , path : item . path . clone () , kind : match & item . args { AttrArgs :: Empty => MetaItemKind :: Word , AttrArgs :: Delimited (DelimArgs { dspan , delim , tokens }) => { check_meta_bad_delim (psess , * dspan , * delim) ; let nmis = parse_in (psess , tokens . clone () , "meta list" , | p | p . parse_meta_seq_top ()) ? ; MetaItemKind :: List (nmis) } AttrArgs :: Eq { expr , .. } => { if let ast :: ExprKind :: Lit (token_lit) = expr . kind { let res = ast :: MetaItemLit :: from_token_lit (token_lit , expr . span) ; let res = match res { Ok (lit) => { if token_lit . suffix . is_some () { let mut err = psess . dcx () . struct_span_err (expr . span , "suffixed literals are not allowed in attributes" ,) ; err . help ("instead of using a suffixed literal (`1u8`, `1.0f32`, etc.), \
+                                    use an unsuffixed version (`1`, `1.0`, etc.)" ,) ; return Err (err) ; } else { MetaItemKind :: NameValue (lit) } } Err (err) => { let guar = report_lit_error (psess , err , token_lit , expr . span) ; let lit = ast :: MetaItemLit { symbol : token_lit . symbol , suffix : token_lit . suffix , kind : ast :: LitKind :: Err (guar) , span : expr . span , } ; MetaItemKind :: NameValue (lit) } } ; res } else { let msg = "attribute value must be a literal" ; let mut err = psess . dcx () . struct_span_err (expr . span , msg) ; if let ast :: ExprKind :: Err (_) = expr . kind { err . downgrade_to_delayed_bug () ; } return Err (err) ; } } } , }) }
+    };
+}
+
+parse_meta!()

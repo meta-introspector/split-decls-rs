@@ -4,4 +4,4 @@ macro_rules! cautious {
     };
 }
 
-cautious!()
+cautious!();

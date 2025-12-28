@@ -1,9 +1,12 @@
 macro_rules! deps {
     () => {
-        InterruptHandle!();
         Batch!();
+        ToSql!();
+        Error!();
         Connection!();
+        InterruptHandle!();
         Result!();
+        Null!();
     };
 }
 

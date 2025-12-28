@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TomlTrimPaths!();
-        TomlOptLevel!();
         ProfilePackageSpec!();
-        TomlDebugInfo!();
+        TomlOptLevel!();
+        TomlTrimPaths!();
         StringOrBool!();
+        TomlDebugInfo!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! TomlProfile {
     };
 }
 
-TomlProfile!()
+TomlProfile!();

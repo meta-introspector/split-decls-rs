@@ -11,4 +11,4 @@ macro_rules! parse_write_style {
     };
 }
 
-parse_write_style!()
+parse_write_style!();

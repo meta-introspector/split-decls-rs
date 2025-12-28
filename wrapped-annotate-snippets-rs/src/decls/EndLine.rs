@@ -4,4 +4,4 @@ macro_rules! EndLine {
     };
 }
 
-EndLine!()
+EndLine!();

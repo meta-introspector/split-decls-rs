@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        EntryRef!();
-        Find!();
-        Error!();
-        TreeRef!();
-        Tree!();
-        EntryKind!();
         Blob!();
+        Kind!();
+        EntryKind!();
+        Tree!();
+        Error!();
+        EntryRef!();
+        TreeRef!();
+        Find!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

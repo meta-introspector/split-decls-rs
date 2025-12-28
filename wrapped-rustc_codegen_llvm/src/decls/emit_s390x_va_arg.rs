@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Builder!();
+        IntPredicate!();
+    };
+}
+
+macro_rules! emit_s390x_va_arg {
+    () => {
+        deps!();
+        fn emit_s390x_va_arg < 'll , 'tcx > (bx : & mut Builder < '_ , 'll , 'tcx > , list : OperandRef < 'tcx , & 'll Value > , target_ty : Ty < 'tcx > ,) -> & 'll Value { let dl = bx . cx . data_layout () ; let va_list_addr = list . immediate () ; let i64_offset = 8 ; let ptr_offset = 8 ; let gpr = va_list_addr ; let fpr = bx . inbounds_ptradd (va_list_addr , bx . cx . const_usize (i64_offset)) ; let overflow_arg_area = bx . inbounds_ptradd (va_list_addr , bx . cx . const_usize (2 * i64_offset)) ; let reg_save_area = bx . inbounds_ptradd (va_list_addr , bx . cx . const_usize (2 * i64_offset + ptr_offset)) ; let layout = bx . cx . layout_of (target_ty) ; let in_reg = bx . append_sibling_block ("va_arg.in_reg") ; let in_mem = bx . append_sibling_block ("va_arg.in_mem") ; let end = bx . append_sibling_block ("va_arg.end") ; let ptr_align_abi = dl . pointer_align () . abi ; let target_ty_size = bx . cx . size_of (target_ty) . bytes () ; let indirect : bool = target_ty_size > 8 || ! target_ty_size . is_power_of_two () ; let unpadded_size = if indirect { 8 } else { target_ty_size } ; let padded_size = 8 ; let padding = padded_size - unpadded_size ; let gpr_type = indirect || ! layout . is_single_fp_element (bx . cx) ; let (max_regs , reg_count , reg_save_index , reg_padding) = if gpr_type { (5 , gpr , 2 , padding) } else { (4 , fpr , 16 , 0) } ; let reg_count_v = bx . load (bx . type_i64 () , reg_count , Align :: from_bytes (8) . unwrap ()) ; let use_regs = bx . icmp (IntPredicate :: IntULT , reg_count_v , bx . const_u64 (max_regs)) ; bx . cond_br (use_regs , in_reg , in_mem) ; bx . switch_to_block (in_reg) ; let reg_ptr_v = bx . load (bx . type_ptr () , reg_save_area , ptr_align_abi) ; let scaled_reg_count = bx . mul (reg_count_v , bx . const_u64 (8)) ; let reg_off = bx . add (scaled_reg_count , bx . const_u64 (reg_save_index * 8 + reg_padding)) ; let reg_addr = bx . ptradd (reg_ptr_v , reg_off) ; let new_reg_count_v = bx . add (reg_count_v , bx . const_u64 (1)) ; bx . store (new_reg_count_v , reg_count , Align :: from_bytes (8) . unwrap ()) ; bx . br (end) ; bx . switch_to_block (in_mem) ; let arg_ptr_v = bx . load (bx . type_ptr () , overflow_arg_area , ptr_align_abi) ; let arg_off = bx . const_u64 (padding) ; let mem_addr = bx . ptradd (arg_ptr_v , arg_off) ; let arg_size = bx . cx () . const_u64 (padded_size) ; let new_arg_ptr_v = bx . inbounds_ptradd (arg_ptr_v , arg_size) ; bx . store (new_arg_ptr_v , overflow_arg_area , ptr_align_abi) ; bx . br (end) ; bx . switch_to_block (end) ; let val_addr = bx . phi (bx . type_ptr () , & [reg_addr , mem_addr] , & [in_reg , in_mem]) ; let val_type = layout . llvm_type (bx) ; let val_addr = if indirect { bx . load (bx . cx . type_ptr () , val_addr , ptr_align_abi) } else { val_addr } ; bx . load (val_type , val_addr , layout . align . abi) }
+    };
+}
+
+emit_s390x_va_arg!()

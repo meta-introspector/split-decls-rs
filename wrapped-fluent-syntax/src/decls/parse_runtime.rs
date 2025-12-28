@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Comment!();
-        Result!();
-        Slice!();
-        Parser!();
         Resource!();
+        Parser!();
+        Result!();
         Level!();
+        Slice!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_runtime {
     };
 }
 
-parse_runtime!()
+parse_runtime!();

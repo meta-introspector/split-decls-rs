@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         HashMap!();
-        RawEntryMut!();
-        RawEntryBuilder!();
         RawEntryBuilderMut!();
+        RawEntryBuilder!();
+        RawEntryMut!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_343 {
     };
 }
 
-impl_343!()
+impl_343!();

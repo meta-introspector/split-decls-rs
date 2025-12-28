@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Month!();
-        Parsed!();
-        ParseError!();
-        Numeric!();
         Item!();
-        Fixed!();
-        IsoWeek!();
         InternalFixed!();
         ParseResult!();
         InternalInternal!();
+        ParseError!();
+        Fixed!();
+        Parsed!();
+        Numeric!();
+        Month!();
+        IsoWeek!();
+        Error!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! parse_internal {
     };
 }
 
-parse_internal!()
+parse_internal!();

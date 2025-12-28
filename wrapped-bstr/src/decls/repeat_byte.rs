@@ -4,4 +4,4 @@ macro_rules! repeat_byte {
     };
 }
 
-repeat_byte!()
+repeat_byte!();

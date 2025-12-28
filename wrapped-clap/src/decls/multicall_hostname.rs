@@ -4,4 +4,4 @@ macro_rules! multicall_hostname {
     };
 }
 
-multicall_hostname!()
+multicall_hostname!();

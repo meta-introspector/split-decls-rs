@@ -4,4 +4,4 @@ macro_rules! mark_defined {
     };
 }
 
-mark_defined!()
+mark_defined!();

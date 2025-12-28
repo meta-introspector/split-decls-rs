@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Human!();
         Union!();
+        Human!();
         Alien!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! HumanOrAlien {
     };
 }
 
-HumanOrAlien!()
+HumanOrAlien!();

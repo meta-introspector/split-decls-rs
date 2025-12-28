@@ -11,4 +11,4 @@ macro_rules! default_value_parser {
     };
 }
 
-default_value_parser!()
+default_value_parser!();

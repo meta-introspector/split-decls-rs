@@ -4,4 +4,4 @@ macro_rules! next_optional_number {
     };
 }
 
-next_optional_number!()
+next_optional_number!();

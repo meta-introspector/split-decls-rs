@@ -4,4 +4,4 @@ macro_rules! MkFile {
     };
 }
 
-MkFile!()
+MkFile!();

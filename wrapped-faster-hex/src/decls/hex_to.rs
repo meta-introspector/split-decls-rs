@@ -11,4 +11,4 @@ macro_rules! hex_to {
     };
 }
 
-hex_to!()
+hex_to!();

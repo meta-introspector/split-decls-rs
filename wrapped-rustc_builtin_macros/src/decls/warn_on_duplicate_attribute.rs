@@ -1,0 +1,7 @@
+macro_rules! warn_on_duplicate_attribute {
+    () => {
+        # [doc = " Emit a warning if the item is annotated with the given attribute. This is used to diagnose when"] # [doc = " an attribute may have been mistakenly duplicated."] pub (crate) fn warn_on_duplicate_attribute (ecx : & ExtCtxt < '_ > , item : & Annotatable , name : Symbol) { let attrs : Option < & [Attribute] > = match item { Annotatable :: Item (item) => Some (& item . attrs) , Annotatable :: AssocItem (item , _) => Some (& item . attrs) , Annotatable :: ForeignItem (item) => Some (& item . attrs) , Annotatable :: Expr (expr) => Some (& expr . attrs) , Annotatable :: Arm (arm) => Some (& arm . attrs) , Annotatable :: ExprField (field) => Some (& field . attrs) , Annotatable :: PatField (field) => Some (& field . attrs) , Annotatable :: GenericParam (param) => Some (& param . attrs) , Annotatable :: Param (param) => Some (& param . attrs) , Annotatable :: FieldDef (def) => Some (& def . attrs) , Annotatable :: Variant (variant) => Some (& variant . attrs) , _ => None , } ; if let Some (attrs) = attrs { if let Some (attr) = attr :: find_by_name (attrs , name) { ecx . psess () . buffer_lint (DUPLICATE_MACRO_ATTRIBUTES , attr . span , ecx . current_expansion . lint_node_id , BuiltinLintDiag :: DuplicateMacroAttribute ,) ; } } }
+    };
+}
+
+warn_on_duplicate_attribute!()

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NaiveConfig!();
+        DecodePaddingMode!();
         Engine!();
         EngineWrapper!();
-        DecodePaddingMode!();
-        Alphabet!();
         NaiveWrapper!();
+        NaiveConfig!();
+        Alphabet!();
         Naive!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

@@ -4,4 +4,4 @@ macro_rules! all_super_traits {
     };
 }
 
-all_super_traits!()
+all_super_traits!();

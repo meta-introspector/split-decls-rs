@@ -11,4 +11,4 @@ macro_rules! LIST_HEAD {
     };
 }
 
-LIST_HEAD!()
+LIST_HEAD!();

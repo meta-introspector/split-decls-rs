@@ -10,4 +10,4 @@ mod c {}
     };
 }
 
-test_single_item!()
+test_single_item!();

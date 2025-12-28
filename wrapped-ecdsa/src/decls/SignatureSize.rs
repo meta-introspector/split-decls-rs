@@ -4,4 +4,4 @@ macro_rules! SignatureSize {
     };
 }
 
-SignatureSize!()
+SignatureSize!();

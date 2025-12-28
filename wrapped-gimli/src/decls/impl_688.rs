@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
         EndianVec!();
+        Writer!();
+        Result!();
         Endianity!();
         Error!();
-        Writer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_688 {
     };
 }
 
-impl_688!()
+impl_688!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Intersection!();
-        Entry!();
         SymmetricDifference!();
-        Union!();
-        Difference!();
-        TryReserveError!();
         VacantEntry!();
-        Equivalent!();
-        OccupiedEntry!();
+        TryReserveError!();
+        Union!();
+        Intersection!();
+        Difference!();
         HashSet!();
+        Entry!();
+        OccupiedEntry!();
+        Equivalent!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_395 {
     };
 }
 
-impl_395!()
+impl_395!();

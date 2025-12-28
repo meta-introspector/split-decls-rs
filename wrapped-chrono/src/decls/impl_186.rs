@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         DateTime!();
-        FixedOffset!();
-        Utc!();
         ParseError!();
+        FixedOffset!();
         ParseResult!();
+        Utc!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

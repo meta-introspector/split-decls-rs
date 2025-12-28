@@ -4,4 +4,4 @@ macro_rules! tests_aarch64_neon {
     };
 }
 
-tests_aarch64_neon!()
+tests_aarch64_neon!();

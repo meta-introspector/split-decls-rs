@@ -4,4 +4,4 @@ macro_rules! DisplaySourceCodeError {
     };
 }
 
-DisplaySourceCodeError!()
+DisplaySourceCodeError!();

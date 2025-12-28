@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Path!();
         Error!();
+        Path!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! write_file {
     };
 }
 
-write_file!()
+write_file!();

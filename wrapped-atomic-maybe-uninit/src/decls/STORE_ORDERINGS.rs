@@ -4,4 +4,4 @@ macro_rules! STORE_ORDERINGS {
     };
 }
 
-STORE_ORDERINGS!()
+STORE_ORDERINGS!();

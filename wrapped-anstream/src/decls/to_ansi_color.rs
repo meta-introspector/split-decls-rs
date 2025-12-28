@@ -4,4 +4,4 @@ macro_rules! to_ansi_color {
     };
 }
 
-to_ansi_color!()
+to_ansi_color!();

@@ -76,4 +76,4 @@ impl <> $crate::hash::Hash for Command< > where {
     };
 }
 
-test_hash_expand!()
+test_hash_expand!();

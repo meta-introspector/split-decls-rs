@@ -4,4 +4,4 @@ macro_rules! static_to_vec {
     };
 }
 
-static_to_vec!()
+static_to_vec!();

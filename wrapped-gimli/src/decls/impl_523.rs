@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Evaluation!();
         Encoding!();
         Piece!();
-        Evaluation!();
-        EvaluationState!();
         Reader!();
+        EvaluationState!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_523 {
     };
 }
 
-impl_523!()
+impl_523!();

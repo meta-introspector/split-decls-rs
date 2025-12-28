@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Location!();
-        ReaderOffset!();
         Reader!();
+        ReaderOffset!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Piece {
     };
 }
 
-Piece!()
+Piece!();

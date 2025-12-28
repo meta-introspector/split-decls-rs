@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SourceKind!();
+        GitReference!();
         Result!();
         PartialVersion!();
-        PackageIdSpec!();
         ErrorKind!();
-        GitReference!();
+        PackageIdSpec!();
+        SourceKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Node!();
         ValueLinks!();
+        Node!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! allocate_node {
     };
 }
 
-allocate_node!()
+allocate_node!();

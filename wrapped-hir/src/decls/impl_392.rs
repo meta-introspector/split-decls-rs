@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        Callee!();
-        Layout!();
-        Field!();
-        SemanticsScope!();
-        Param!();
-        Type!();
         Function!();
-        TypeParam!();
-        Const!();
         Callable!();
-        AnyClosureId!();
-        PathCandidateCallback!();
-        Adt!();
-        AssocItem!();
         Struct!();
-        GenericParam!();
-        TypeAlias!();
-        BuiltinType!();
-        Crate!();
         Trait!();
+        Param!();
+        Field!();
+        GenericParam!();
+        Layout!();
+        Type!();
+        BuiltinType!();
+        Callee!();
         MethodCandidateCallback!();
+        Crate!();
+        SemanticsScope!();
+        PathCandidateCallback!();
+        TypeAlias!();
+        TypeParam!();
+        Adt!();
+        Const!();
+        AssocItem!();
         Closure!();
         TypeOrConstParam!();
+        AnyClosureId!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_392 {
     };
 }
 
-impl_392!()
+impl_392!();

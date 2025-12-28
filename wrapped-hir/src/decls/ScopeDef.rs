@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Label!();
-        ModuleDef!();
         Impl!();
-        Adt!();
         Local!();
+        Adt!();
+        ModuleDef!();
         GenericParam!();
+        Label!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ScopeDef {
     };
 }
 
-ScopeDef!()
+ScopeDef!();

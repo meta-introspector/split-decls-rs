@@ -4,4 +4,4 @@ macro_rules! MAX_VEC_POS {
     };
 }
 
-MAX_VEC_POS!()
+MAX_VEC_POS!();

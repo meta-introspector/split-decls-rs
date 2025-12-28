@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        IntSize!();
         AtomicTargetSize!();
         UintSize!();
         Cell!();
-        IntSize!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! enqueue {
     };
 }
 
-enqueue!()
+enqueue!();

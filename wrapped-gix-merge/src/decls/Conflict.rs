@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConflictMapping!();
-        ResolutionFailure!();
         Resolution!();
         ConflictIndexEntry!();
+        ResolutionFailure!();
+        ConflictMapping!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Conflict {
     };
 }
 
-Conflict!()
+Conflict!();

@@ -4,4 +4,4 @@ macro_rules! poll_state {
     };
 }
 
-poll_state!()
+poll_state!();

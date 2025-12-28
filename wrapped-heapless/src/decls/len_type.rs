@@ -4,4 +4,4 @@ macro_rules! len_type {
     };
 }
 
-len_type!()
+len_type!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PubTypesEntry!();
         UnitOffset!();
+        PubTypesEntry!();
         Reader!();
         DebugInfoOffset!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_540 {
     };
 }
 
-impl_540!()
+impl_540!();

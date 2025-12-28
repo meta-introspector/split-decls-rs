@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         Parser!();
-        Slice!();
         Result!();
+        Slice!();
+        ErrorKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

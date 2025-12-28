@@ -12,4 +12,4 @@ macro_rules! test_base64_mising_padding {
     };
 }
 
-test_base64_mising_padding!()
+test_base64_mising_padding!();

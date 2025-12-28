@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        EditionedFileId!();
+    };
+}
+
+macro_rules! impl_87 {
+    () => {
+        deps!();
+        impl EditionedFileId { pub const RESERVED_MASK : u32 = 0x8000_0000 ; pub const EDITION_MASK : u32 = 0x7F80_0000 ; pub const FILE_ID_MASK : u32 = 0x007F_FFFF ; pub const MAX_FILE_ID : u32 = Self :: FILE_ID_MASK ; pub const RESERVED_HIGH_BITS : u32 = Self :: RESERVED_MASK . count_ones () ; pub const FILE_ID_BITS : u32 = Self :: FILE_ID_MASK . count_ones () ; pub const EDITION_BITS : u32 = Self :: EDITION_MASK . count_ones () ; pub const fn current_edition (file_id : FileId) -> Self { Self :: new (file_id , Edition :: CURRENT) } pub const fn new (file_id : FileId , edition : Edition) -> Self { let file_id = file_id . index () ; let edition = edition as u32 ; assert ! (file_id <= Self :: MAX_FILE_ID) ; Self (file_id | (edition << Self :: FILE_ID_BITS)) } pub fn from_raw (u32 : u32) -> Self { assert ! (u32 & Self :: RESERVED_MASK == 0) ; assert ! ((u32 & Self :: EDITION_MASK) >> Self :: FILE_ID_BITS <= Edition :: LATEST as u32) ; Self (u32) } pub const fn as_u32 (self) -> u32 { self . 0 } pub const fn file_id (self) -> FileId { FileId :: from_raw (self . 0 & Self :: FILE_ID_MASK) } pub const fn unpack (self) -> (FileId , Edition) { (self . file_id () , self . edition ()) } pub const fn edition (self) -> Edition { let edition = (self . 0 & Self :: EDITION_MASK) >> Self :: FILE_ID_BITS ; debug_assert ! (edition <= Edition :: LATEST as u32) ; unsafe { std :: mem :: transmute (edition as u8) } } }
+    };
+}
+
+impl_87!()

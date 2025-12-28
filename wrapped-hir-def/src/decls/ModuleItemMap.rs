@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LocalModuleId!();
         DefMap!();
         LocalDefMap!();
-        LocalModuleId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ModuleItemMap {
     };
 }
 
-ModuleItemMap!()
+ModuleItemMap!();

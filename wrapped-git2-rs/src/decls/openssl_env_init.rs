@@ -4,4 +4,4 @@ macro_rules! openssl_env_init {
     };
 }
 
-openssl_env_init!()
+openssl_env_init!();

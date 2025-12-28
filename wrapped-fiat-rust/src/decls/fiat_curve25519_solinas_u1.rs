@@ -4,4 +4,4 @@ macro_rules! fiat_curve25519_solinas_u1 {
     };
 }
 
-fiat_curve25519_solinas_u1!()
+fiat_curve25519_solinas_u1!();

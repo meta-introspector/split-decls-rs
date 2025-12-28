@@ -11,4 +11,4 @@ macro_rules! assert_diffs {
     };
 }
 
-assert_diffs!()
+assert_diffs!();

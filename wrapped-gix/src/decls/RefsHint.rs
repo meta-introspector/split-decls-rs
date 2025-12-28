@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Note!();
         Clone!();
+        Note!();
         Default!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! RefsHint {
     };
 }
 
-RefsHint!()
+RefsHint!();

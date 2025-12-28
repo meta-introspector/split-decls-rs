@@ -12,4 +12,4 @@ macro_rules! mergehead_foreach_cb {
     };
 }
 
-mergehead_foreach_cb!()
+mergehead_foreach_cb!();

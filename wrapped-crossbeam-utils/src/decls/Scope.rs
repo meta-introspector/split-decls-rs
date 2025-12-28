@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SharedVec!();
-        SharedOption!();
         WaitGroup!();
+        SharedOption!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Scope {
     };
 }
 
-Scope!()
+Scope!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HasVisibility!();
         Function!();
+        HasVisibility!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_292 {
     };
 }
 
-impl_292!()
+impl_292!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        RegisterRule!();
+        Register!();
+        RegisterRuleIter!();
+        Pointer!();
+        ReaderOffset!();
         LittleEndian!();
         Address!();
-        RegisterRuleIter!();
-        RegisterRule!();
-        ReaderOffset!();
-        CfaRule!();
-        Pointer!();
         UnwindTableRow!();
         UnwindContextStorage!();
-        Register!();
+        CfaRule!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

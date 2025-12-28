@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Allocator!();
-        Vec!();
         Splice!();
+        Vec!();
+        Allocator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

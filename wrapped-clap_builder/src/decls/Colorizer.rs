@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stream!();
         StyledStr!();
         ColorChoice!();
+        Stream!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Colorizer {
     };
 }
 
-Colorizer!()
+Colorizer!();

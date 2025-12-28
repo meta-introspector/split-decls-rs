@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Options!();
         Mode!();
         Error!();
+        Options!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! securely {
     };
 }
 
-securely!()
+securely!();

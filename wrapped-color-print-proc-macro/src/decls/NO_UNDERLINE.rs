@@ -4,4 +4,4 @@ macro_rules! NO_UNDERLINE {
     };
 }
 
-NO_UNDERLINE!()
+NO_UNDERLINE!();

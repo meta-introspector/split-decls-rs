@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        PartialVersionError!();
         PartialVersion!();
         ErrorKind!();
         Result!();
-        PartialVersionError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

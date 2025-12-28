@@ -4,4 +4,4 @@ macro_rules! checked_min {
     };
 }
 
-checked_min!()
+checked_min!();

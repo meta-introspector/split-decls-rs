@@ -11,4 +11,4 @@ macro_rules! chain_fn {
     };
 }
 
-chain_fn!()
+chain_fn!();

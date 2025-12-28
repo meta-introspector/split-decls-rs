@@ -4,4 +4,4 @@ macro_rules! exact_vec {
     };
 }
 
-exact_vec!()
+exact_vec!();

@@ -13,4 +13,4 @@ macro_rules! generic_defaults_with_diagnostics_cycle_result {
     };
 }
 
-generic_defaults_with_diagnostics_cycle_result!()
+generic_defaults_with_diagnostics_cycle_result!();

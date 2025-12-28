@@ -4,4 +4,4 @@ macro_rules! DEFAULT_TERM_WIDTH {
     };
 }
 
-DEFAULT_TERM_WIDTH!()
+DEFAULT_TERM_WIDTH!();

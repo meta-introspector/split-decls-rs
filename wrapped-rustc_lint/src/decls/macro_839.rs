@@ -1,0 +1,7 @@
+macro_rules! macro_839 {
+    () => {
+        declare_lint ! { # [doc = " The `path_statements` lint detects path statements with no effect."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " let x = 42;"] # [doc = ""] # [doc = " x;"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " It is usually a mistake to have a statement that has no effect."] pub PATH_STATEMENTS , Warn , "path statements with no effect" }
+    };
+}
+
+macro_839!()

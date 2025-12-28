@@ -11,4 +11,4 @@ macro_rules! pass_blame_from_to {
     };
 }
 
-pass_blame_from_to!()
+pass_blame_from_to!();

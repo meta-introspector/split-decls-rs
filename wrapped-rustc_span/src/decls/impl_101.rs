@@ -1,6 +1,13 @@
+macro_rules! deps {
+    () => {
+        StableCrateId!();
+    };
+}
+
 macro_rules! impl_101 {
     () => {
-        impl < S : Encoder > Encodable < S > for RelativeBytePos { fn encode (& self , s : & mut S) { s . emit_u32 (self . 0) ; } }
+        deps!();
+        impl fmt :: LowerHex for StableCrateId { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt :: LowerHex :: fmt (& self . 0 , f) } }
     };
 }
 

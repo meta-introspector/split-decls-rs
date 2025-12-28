@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Merge!();
         Delegate!();
-        Default!();
-        Repository!();
         Error!();
-        Options!();
-        Kind!();
         Spec!();
+        Kind!();
+        Merge!();
+        Repository!();
+        Default!();
+        Options!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_882 {
     };
 }
 
-impl_882!()
+impl_882!();

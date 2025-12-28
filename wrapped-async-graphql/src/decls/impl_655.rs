@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Protocols!();
-        DefaultOnPingType!();
-        Executor!();
         Result!();
         DefaultOnConnInitType!();
+        Executor!();
+        DefaultOnPingType!();
         ClientMessage!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_655 {
     };
 }
 
-impl_655!()
+impl_655!();

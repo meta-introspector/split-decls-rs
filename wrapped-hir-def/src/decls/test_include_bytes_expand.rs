@@ -20,4 +20,4 @@ fn main() { include_bytes("foo");include_bytes(r"foo"); }
     };
 }
 
-test_include_bytes_expand!()
+test_include_bytes_expand!();

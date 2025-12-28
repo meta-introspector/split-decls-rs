@@ -11,4 +11,4 @@ macro_rules! MIN_YEAR {
     };
 }
 
-MIN_YEAR!()
+MIN_YEAR!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
+        Iter!();
     };
 }
 
 macro_rules! impl_33 {
     () => {
         deps!();
-        impl < T > ExactSizeIterator for IntoIter < T > { fn len (& self) -> usize { self . len } }
+        impl < T > fmt :: Debug for Iter < '_ , T > where T : fmt :: Debug , { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt . debug_struct ("Iter") . field ("remaining" , & self . len) . finish () } }
     };
 }
 

@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Ssh!();
-        Gitoxide!();
         Tree!();
-        User!();
-        Key!();
         Author!();
-        Committer!();
-        Http!();
+        Gitoxide!();
+        Pathspec!();
         Commit!();
         Boolean!();
+        User!();
+        Key!();
+        Committer!();
+        Http!();
         Allow!();
-        Any!();
         Core!();
-        Pathspec!();
+        Ssh!();
+        Any!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_656 {
     };
 }
 
-impl_656!()
+impl_656!();

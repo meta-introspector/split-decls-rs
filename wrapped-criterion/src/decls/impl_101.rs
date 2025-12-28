@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Estimate!();
+        Estimates!();
         Statistic!();
         Slope!();
-        Estimates!();
+        Estimate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

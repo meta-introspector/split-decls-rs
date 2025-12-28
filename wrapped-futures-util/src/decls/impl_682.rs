@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Pending!();
         TryReadyChunksStreamError!();
-        TryReadyChunksError!();
         Ready!();
+        TryReadyChunksError!();
+        Pending!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_682 {
     };
 }
 
-impl_682!()
+impl_682!();

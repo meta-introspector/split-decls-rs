@@ -4,4 +4,4 @@ macro_rules! is_hex_digit_lc {
     };
 }
 
-is_hex_digit_lc!()
+is_hex_digit_lc!();

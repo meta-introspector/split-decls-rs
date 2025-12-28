@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
         Days!();
+        FixedOffset!();
         DstTester!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! test_datetime_add_days {
     };
 }
 
-test_datetime_add_days!()
+test_datetime_add_days!();

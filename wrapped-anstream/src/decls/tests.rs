@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawStream!();
         AutoStream!();
+        RawStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

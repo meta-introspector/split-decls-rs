@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Title!();
         Id!();
-        Element!();
-        Report!();
+        Title!();
         Group!();
+        Report!();
+        Element!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

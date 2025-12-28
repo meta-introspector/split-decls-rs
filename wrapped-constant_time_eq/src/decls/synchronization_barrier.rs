@@ -4,4 +4,4 @@ macro_rules! synchronization_barrier {
     };
 }
 
-synchronization_barrier!()
+synchronization_barrier!();

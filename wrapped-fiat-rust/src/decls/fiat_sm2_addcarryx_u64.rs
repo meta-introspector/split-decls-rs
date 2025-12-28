@@ -4,4 +4,4 @@ macro_rules! fiat_sm2_addcarryx_u64 {
     };
 }
 
-fiat_sm2_addcarryx_u64!()
+fiat_sm2_addcarryx_u64!();

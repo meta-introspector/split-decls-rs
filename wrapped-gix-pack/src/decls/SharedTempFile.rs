@@ -4,4 +4,4 @@ macro_rules! SharedTempFile {
     };
 }
 
-SharedTempFile!()
+SharedTempFile!();

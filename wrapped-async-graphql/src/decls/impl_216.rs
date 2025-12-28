@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RuleError!();
         CycleDetector!();
+        RuleError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_216 {
     };
 }
 
-impl_216!()
+impl_216!();

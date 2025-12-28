@@ -4,4 +4,4 @@ macro_rules! LoggerExtension {
     };
 }
 
-LoggerExtension!()
+LoggerExtension!();

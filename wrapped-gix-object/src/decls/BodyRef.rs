@@ -4,4 +4,4 @@ macro_rules! BodyRef {
     };
 }
 
-BodyRef!()
+BodyRef!();

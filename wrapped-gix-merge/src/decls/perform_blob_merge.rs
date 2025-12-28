@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ConflictMapping!();
+        Error!();
+        Platform!();
         Labels!();
         Options!();
-        Error!();
-        Pick!();
-        ResourceKind!();
         Resolution!();
-        Platform!();
+        Pick!();
+        ConflictMapping!();
+        ResourceKind!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! perform_blob_merge {
     };
 }
 
-perform_blob_merge!()
+perform_blob_merge!();

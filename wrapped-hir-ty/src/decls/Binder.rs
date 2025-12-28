@@ -4,4 +4,4 @@ macro_rules! Binder {
     };
 }
 
-Binder!()
+Binder!();

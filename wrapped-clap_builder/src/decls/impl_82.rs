@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        ArgSettings!();
-        Id!();
-        ArgGroup!();
         ArgMatcher!();
-        Command!();
         Arg!();
-        Usage!();
-        MaxTermWidth!();
-        ArgMatches!();
-        KeyType!();
-        TermWidth!();
-        MKeyMap!();
-        AppSettings!();
-        ArgAction!();
         Parser!();
+        KeyType!();
+        MaxTermWidth!();
+        Id!();
+        Usage!();
+        AppSettings!();
+        MKeyMap!();
+        ArgGroup!();
+        ArgSettings!();
+        TermWidth!();
+        Command!();
+        ArgMatches!();
         StyledStr!();
+        ArgAction!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

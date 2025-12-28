@@ -4,4 +4,4 @@ macro_rules! Stacked {
     };
 }
 
-Stacked!()
+Stacked!();

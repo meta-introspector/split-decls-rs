@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        HkdfExtract!();
         HmacImpl!();
         SimpleHkdfExtract!();
-        HkdfExtract!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! GenericHkdfExtract {
     };
 }
 
-GenericHkdfExtract!()
+GenericHkdfExtract!();

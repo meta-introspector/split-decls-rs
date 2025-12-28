@@ -4,4 +4,4 @@ macro_rules! Creation {
     };
 }
 
-Creation!()
+Creation!();

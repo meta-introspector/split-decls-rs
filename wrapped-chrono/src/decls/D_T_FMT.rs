@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Item!();
-        Fixed!();
         Numeric!();
+        Fixed!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! D_T_FMT {
     };
 }
 
-D_T_FMT!()
+D_T_FMT!();

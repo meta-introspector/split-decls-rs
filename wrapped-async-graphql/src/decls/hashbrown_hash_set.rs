@@ -4,4 +4,4 @@ macro_rules! hashbrown_hash_set {
     };
 }
 
-hashbrown_hash_set!()
+hashbrown_hash_set!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Base64Variant!();
         Error!();
         Base64Impl!();
-        Base64Variant!();
         VariantMask!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

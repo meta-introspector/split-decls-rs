@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        MultiValueMut!();
-        File!();
-        Event!();
-        ValueMut!();
-        EntryData!();
-        Index!();
-        Error!();
-        Whitespace!();
         AsKey!();
-        Key!();
-        Metadata!();
+        Index!();
         Size!();
+        Key!();
+        ValueMut!();
+        File!();
+        Error!();
+        Event!();
+        MultiValueMut!();
+        Whitespace!();
+        EntryData!();
+        Metadata!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

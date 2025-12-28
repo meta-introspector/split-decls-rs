@@ -4,4 +4,4 @@ macro_rules! spec {
     };
 }
 
-spec!()
+spec!();

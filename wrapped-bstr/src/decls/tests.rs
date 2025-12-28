@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ByteSlice!();
         Utf8Chunks!();
-        Utf8Error!();
         Utf8Chunk!();
+        Utf8Error!();
+        ByteSlice!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

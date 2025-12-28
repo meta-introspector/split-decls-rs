@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Dwarf!();
-        Unit!();
         Reader!();
+        Unit!();
+        Dwarf!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UnitRef {
     };
 }
 
-UnitRef!()
+UnitRef!();

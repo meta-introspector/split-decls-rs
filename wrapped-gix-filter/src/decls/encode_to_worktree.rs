@@ -4,4 +4,4 @@ macro_rules! encode_to_worktree {
     };
 }
 
-encode_to_worktree!()
+encode_to_worktree!();

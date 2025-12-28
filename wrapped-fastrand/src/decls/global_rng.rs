@@ -4,4 +4,4 @@ macro_rules! global_rng {
     };
 }
 
-global_rng!()
+global_rng!();

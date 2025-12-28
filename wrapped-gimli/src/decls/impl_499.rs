@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         DebugStrOffset!();
-        MacroIter!();
         Error!();
-        MacroString!();
-        DebugMacroOffset!();
-        MacroEntry!();
         Reader!();
-        Result!();
+        MacroString!();
+        MacroEntry!();
         DebugStrOffsetsIndex!();
+        DebugMacroOffset!();
+        MacroIter!();
+        Result!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_499 {
     };
 }
 
-impl_499!()
+impl_499!();

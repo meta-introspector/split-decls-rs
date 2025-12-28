@@ -4,4 +4,4 @@ macro_rules! PostBodyDataKind {
     };
 }
 
-PostBodyDataKind!()
+PostBodyDataKind!();

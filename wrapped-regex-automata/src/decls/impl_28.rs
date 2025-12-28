@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Start!();
+        PatternID!();
+        StartError!();
+        StateID!();
+        DFA!();
+        Prefilter!();
+        Automaton!();
+        Config!();
+        Anchored!();
+    };
+}
+
+macro_rules! impl_28 {
+    () => {
+        deps!();
+        unsafe impl < T : AsRef < [u32] > > Automaton for DFA < T > { # [cfg_attr (feature = "perf-inline" , inline (always))] fn is_special_state (& self , id : StateID) -> bool { self . special . is_special_state (id) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn is_dead_state (& self , id : StateID) -> bool { self . special . is_dead_state (id) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn is_quit_state (& self , id : StateID) -> bool { self . special . is_quit_state (id) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn is_match_state (& self , id : StateID) -> bool { self . special . is_match_state (id) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn is_start_state (& self , id : StateID) -> bool { self . special . is_start_state (id) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn is_accel_state (& self , id : StateID) -> bool { self . special . is_accel_state (id) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn next_state (& self , current : StateID , input : u8) -> StateID { let input = self . byte_classes () . get (input) ; let o = current . as_usize () + usize :: from (input) ; self . trans () [o] } # [cfg_attr (feature = "perf-inline" , inline (always))] unsafe fn next_state_unchecked (& self , current : StateID , byte : u8 ,) -> StateID { let class = self . byte_classes () . get (byte) ; let o = current . as_usize () + usize :: from (class) ; let next = * self . trans () . get_unchecked (o) ; next } # [cfg_attr (feature = "perf-inline" , inline (always))] fn next_eoi_state (& self , current : StateID) -> StateID { let eoi = self . byte_classes () . eoi () . as_usize () ; let o = current . as_usize () + eoi ; self . trans () [o] } # [cfg_attr (feature = "perf-inline" , inline (always))] fn pattern_len (& self) -> usize { self . ms . pattern_len } # [cfg_attr (feature = "perf-inline" , inline (always))] fn match_len (& self , id : StateID) -> usize { self . match_pattern_len (id) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn match_pattern (& self , id : StateID , match_index : usize) -> PatternID { if self . ms . pattern_len == 1 { return PatternID :: ZERO ; } let state_index = self . match_state_index (id) ; self . ms . pattern_id (state_index , match_index) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn has_empty (& self) -> bool { self . flags . has_empty } # [cfg_attr (feature = "perf-inline" , inline (always))] fn is_utf8 (& self) -> bool { self . flags . is_utf8 } # [cfg_attr (feature = "perf-inline" , inline (always))] fn is_always_start_anchored (& self) -> bool { self . flags . is_always_start_anchored } # [cfg_attr (feature = "perf-inline" , inline (always))] fn start_state (& self , config : & start :: Config ,) -> Result < StateID , StartError > { let anchored = config . get_anchored () ; let start = match config . get_look_behind () { None => Start :: Text , Some (byte) => { if ! self . quitset . is_empty () && self . quitset . contains (byte) { return Err (StartError :: quit (byte)) ; } self . st . start_map . get (byte) } } ; self . st . start (anchored , start) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn universal_start_state (& self , mode : Anchored) -> Option < StateID > { match mode { Anchored :: No => self . st . universal_start_unanchored , Anchored :: Yes => self . st . universal_start_anchored , Anchored :: Pattern (_) => None , } } # [cfg_attr (feature = "perf-inline" , inline (always))] fn accelerator (& self , id : StateID) -> & [u8] { if ! self . is_accel_state (id) { return & [] ; } self . accels . needles (self . accelerator_index (id)) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn get_prefilter (& self) -> Option < & Prefilter > { self . pre . as_ref () } }
+    };
+}
+
+impl_28!()

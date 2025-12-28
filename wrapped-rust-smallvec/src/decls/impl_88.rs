@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_88 {
     () => {
         deps!();
-        impl < T : Debug , const N : usize > Debug for Drain < '_ , T , N > { fn fmt (& self , f : & mut core :: fmt :: Formatter < '_ >) -> core :: fmt :: Result { f . debug_tuple ("Drain") . field (& self . iter . as_slice ()) . finish () } }
+        impl < 'a , T : 'a , const N : usize > DoubleEndedIterator for Drain < 'a , T , N > { # [inline] fn next_back (& mut self) -> Option < T > { self . iter . next_back () . map (| reference | unsafe { core :: ptr :: read (reference) }) } }
     };
 }
 

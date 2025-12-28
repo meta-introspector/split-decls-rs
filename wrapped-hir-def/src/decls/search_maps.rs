@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ItemInNs!();
         ImportMap!();
-        DefDatabase!();
-        Complete!();
-        Query!();
         Union!();
+        Query!();
+        Complete!();
+        ItemInNs!();
+        DefDatabase!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! search_maps {
     };
 }
 
-search_maps!()
+search_maps!();

@@ -4,4 +4,4 @@ macro_rules! adjust_ip {
     };
 }
 
-adjust_ip!()
+adjust_ip!();

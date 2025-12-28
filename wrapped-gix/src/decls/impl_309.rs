@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        IndexPersistedOrInMemory!();
+        Item!();
+        Error!();
+        State!();
+        Iter!();
         Outcome!();
+        OwnedOrStaticAtomicBool!();
+        IndexPersistedOrInMemory!();
         Note!();
         Options!();
-        Item!();
-        OwnedOrStaticAtomicBool!();
-        Iter!();
-        State!();
-        Error!();
         Repository!();
         Delegate!();
     };
@@ -21,4 +21,4 @@ macro_rules! impl_309 {
     };
 }
 
-impl_309!()
+impl_309!();

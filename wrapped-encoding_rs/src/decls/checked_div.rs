@@ -4,4 +4,4 @@ macro_rules! checked_div {
     };
 }
 
-checked_div!()
+checked_div!();

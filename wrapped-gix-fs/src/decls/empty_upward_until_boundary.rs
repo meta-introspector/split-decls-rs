@@ -11,4 +11,4 @@ macro_rules! empty_upward_until_boundary {
     };
 }
 
-empty_upward_until_boundary!()
+empty_upward_until_boundary!();

@@ -1,33 +1,33 @@
 macro_rules! deps {
     () => {
-        Pack!();
-        Index!();
+        Diff!();
         Committer!();
-        Http!();
+        Tree!();
         Protocol!();
-        Core!();
+        Pack!();
+        Init!();
+        Merge!();
+        Branch!();
+        Index!();
+        Credential!();
+        Clone!();
+        Gitoxide!();
         Ssh!();
         Default!();
-        Safe!();
-        Credential!();
-        Checkout!();
-        Init!();
-        Section!();
-        Mailmap!();
-        Author!();
-        Push!();
-        Url!();
-        Diff!();
-        Merge!();
-        User!();
-        Tree!();
-        Branch!();
         Extensions!();
-        Clone!();
-        Fetch!();
-        Gitoxide!();
-        Status!();
+        Url!();
+        User!();
         Remote!();
+        Status!();
+        Fetch!();
+        Safe!();
+        Push!();
+        Http!();
+        Author!();
+        Mailmap!();
+        Section!();
+        Checkout!();
+        Core!();
     };
 }
 
@@ -38,4 +38,4 @@ macro_rules! root {
     };
 }
 
-root!()
+root!();

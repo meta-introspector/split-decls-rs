@@ -4,4 +4,4 @@ macro_rules! rsr64_dit {
     };
 }
 
-rsr64_dit!()
+rsr64_dit!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        LineProgramHeader!();
-        ReaderOffset!();
-        FileEntry!();
         AttributeValue!();
-        Reader!();
+        FileEntry!();
+        ReaderOffset!();
         Result!();
+        Reader!();
+        LineProgramHeader!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_428 {
     };
 }
 
-impl_428!()
+impl_428!();

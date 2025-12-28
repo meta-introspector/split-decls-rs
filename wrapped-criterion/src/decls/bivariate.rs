@@ -4,4 +4,4 @@ macro_rules! bivariate {
     };
 }
 
-bivariate!()
+bivariate!();

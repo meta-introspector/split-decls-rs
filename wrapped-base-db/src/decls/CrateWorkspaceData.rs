@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Crate!();
         TargetData!();
+        Crate!();
         TargetLoadError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! CrateWorkspaceData {
     };
 }
 
-CrateWorkspaceData!()
+CrateWorkspaceData!();

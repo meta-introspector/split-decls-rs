@@ -12,4 +12,4 @@ macro_rules! print_cb {
     };
 }
 
-print_cb!()
+print_cb!();

@@ -1,8 +1,10 @@
 macro_rules! deps {
     () => {
-        Filter!();
+        Diagnostic!();
         Suggestion!();
         Solution!();
+        Filter!();
+        Applicability!();
     };
 }
 

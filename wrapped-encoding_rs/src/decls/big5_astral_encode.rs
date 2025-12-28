@@ -4,4 +4,4 @@ macro_rules! big5_astral_encode {
     };
 }
 
-big5_astral_encode!()
+big5_astral_encode!();

@@ -4,4 +4,4 @@ macro_rules! log_if_err {
     };
 }
 
-log_if_err!()
+log_if_err!();

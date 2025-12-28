@@ -11,4 +11,4 @@ macro_rules! vectorization_support {
     };
 }
 
-vectorization_support!()
+vectorization_support!();

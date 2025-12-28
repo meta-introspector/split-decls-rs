@@ -4,4 +4,4 @@ macro_rules! Gcd {
     };
 }
 
-Gcd!()
+Gcd!();

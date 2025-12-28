@@ -4,4 +4,4 @@ macro_rules! OkFn {
     };
 }
 
-OkFn!()
+OkFn!();

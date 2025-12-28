@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Protocols!();
-        Response!();
-        Timer!();
         Data!();
         Result!();
+        Protocols!();
+        Timer!();
+        Response!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! macro_649 {
     };
 }
 
-macro_649!()
+macro_649!();

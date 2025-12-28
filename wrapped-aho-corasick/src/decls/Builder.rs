@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StartBytesBuilder!();
-        RareBytesBuilder!();
         MemmemBuilder!();
+        RareBytesBuilder!();
+        StartBytesBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Builder {
     };
 }
 
-Builder!()
+Builder!();

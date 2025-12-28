@@ -4,4 +4,4 @@ macro_rules! SpawnError {
     };
 }
 
-SpawnError!()
+SpawnError!();

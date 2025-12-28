@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ready!();
         FuturesOrdered!();
+        Ready!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_826 {
     };
 }
 
-impl_826!()
+impl_826!();

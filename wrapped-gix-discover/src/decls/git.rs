@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        Path!();
         Kind!();
+        Path!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! git {
     };
 }
 
-git!()
+git!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
-        Scope!();
         DefWithBodyId!();
         Resolver!();
+        DefDatabase!();
+        Scope!();
         DefMap!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! resolver_for_scope_ {
     };
 }
 
-resolver_for_scope_!()
+resolver_for_scope_!();

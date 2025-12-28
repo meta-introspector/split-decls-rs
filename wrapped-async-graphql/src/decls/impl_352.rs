@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Context!();
-        ContextBase!();
-        Lookahead!();
-        OneofObjectType!();
-        Object!();
-        Query!();
         EmptyMutation!();
-        ServerResult!();
+        ContextBase!();
+        OneofObjectType!();
         EmptySubscription!();
         SelectionField!();
+        Object!();
+        Query!();
         Field!();
+        Context!();
+        ServerResult!();
         InputType!();
+        Lookahead!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_352 {
     };
 }
 
-impl_352!()
+impl_352!();

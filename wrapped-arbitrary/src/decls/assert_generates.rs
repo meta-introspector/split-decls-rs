@@ -14,4 +14,4 @@ macro_rules! assert_generates {
     };
 }
 
-assert_generates!()
+assert_generates!();

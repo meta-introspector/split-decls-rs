@@ -4,4 +4,4 @@ macro_rules! MakeSerializer {
     };
 }
 
-MakeSerializer!()
+MakeSerializer!();

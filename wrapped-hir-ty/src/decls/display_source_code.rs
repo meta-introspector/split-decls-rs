@@ -4,4 +4,4 @@ macro_rules! display_source_code {
     };
 }
 
-display_source_code!()
+display_source_code!();

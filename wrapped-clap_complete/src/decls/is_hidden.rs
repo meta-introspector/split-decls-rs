@@ -4,4 +4,4 @@ macro_rules! is_hidden {
     };
 }
 
-is_hidden!()
+is_hidden!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NonZero!();
         Zero!();
+        NonZero!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RandomMod {
     };
 }
 
-RandomMod!()
+RandomMod!();

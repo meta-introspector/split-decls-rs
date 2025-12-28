@@ -4,4 +4,4 @@ macro_rules! CanonicalVarValues {
     };
 }
 
-CanonicalVarValues!()
+CanonicalVarValues!();

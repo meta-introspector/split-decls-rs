@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ChainState!();
         Error!();
+        ChainState!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Chain {
     };
 }
 
-Chain!()
+Chain!();

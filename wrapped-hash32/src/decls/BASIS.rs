@@ -4,4 +4,4 @@ macro_rules! BASIS {
     };
 }
 
-BASIS!()
+BASIS!();

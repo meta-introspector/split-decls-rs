@@ -4,4 +4,4 @@ macro_rules! if_exists {
     };
 }
 
-if_exists!()
+if_exists!();

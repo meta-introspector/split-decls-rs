@@ -4,4 +4,4 @@ macro_rules! word_separators {
     };
 }
 
-word_separators!()
+word_separators!();

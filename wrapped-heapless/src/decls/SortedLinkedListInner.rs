@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LenType!();
         SortedLinkedList!();
         SortedLinkedListView!();
-        LenType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SortedLinkedListInner {
     };
 }
 
-SortedLinkedListInner!()
+SortedLinkedListInner!();

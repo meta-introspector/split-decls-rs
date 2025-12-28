@@ -4,4 +4,4 @@ macro_rules! gbk_other_decode {
     };
 }
 
-gbk_other_decode!()
+gbk_other_decode!();

@@ -1,0 +1,7 @@
+macro_rules! raw_stdin {
+    () => {
+        # [doc = " `STDIN_FILENO`—Standard input, raw."] # [doc = ""] # [doc = " This is similar to [`stdin`], however it returns a `RawFd`."] # [doc = ""] # [doc = " # Other hazards"] # [doc = ""] # [doc = " This has the same hazards as [`stdin`]."] # [doc = ""] # [doc = " # References"] # [doc = "  - [POSIX]"] # [doc = "  - [Linux]"] # [doc = "  - [FreeBSD]"] # [doc = "  - [NetBSD]"] # [doc = "  - [OpenBSD]"] # [doc = "  - [DragonFly BSD]"] # [doc = "  - [illumos]"] # [doc = "  - [glibc]"] # [doc = ""] # [doc = " [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/stdin.html"] # [doc = " [Linux]: https://man7.org/linux/man-pages/man3/stdin.3.html"] # [doc = " [FreeBSD]: https://man.freebsd.org/cgi/man.cgi?query=stdin&sektion=4"] # [doc = " [NetBSD]: https://man.netbsd.org/stdin.4"] # [doc = " [OpenBSD]: https://man.openbsd.org/stdin.4"] # [doc = " [DragonFly BSD]: https://man.dragonflybsd.org/?command=stdin&section=4"] # [doc = " [illumos]: https://illumos.org/man/4FS/stdin"] # [doc = " [glibc]: https://sourceware.org/glibc/manual/latest/html_node/Standard-Streams.html#index-stdin"] # [doc (alias = "STDIN_FILENO")] # [inline] pub const fn raw_stdin () -> RawFd { c :: STDIN_FILENO as RawFd }
+    };
+}
+
+raw_stdin!()

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PackageFile!();
         PackageIdSpec!();
+        PackageFile!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PackageList {
     };
 }
 
-PackageList!()
+PackageList!();

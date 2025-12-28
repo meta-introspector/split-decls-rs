@@ -2,15 +2,15 @@ macro_rules! deps {
     () => {
         InlinedFunction!();
         Frame!();
+        Result!();
+        FrameIterFrames!();
+        FunctionName!();
+        Location!();
         FrameIter!();
         Function!();
-        FrameIterFrames!();
-        Result!();
-        FrameIterState!();
-        FunctionName!();
         Error!();
-        Location!();
         ResUnit!();
+        FrameIterState!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

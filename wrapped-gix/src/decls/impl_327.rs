@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Time!();
-        User!();
-        Commit!();
-        Any!();
-        Entity!();
-        Personas!();
-        String!();
-        Committer!();
         Author!();
+        Any!();
+        User!();
+        String!();
+        Commit!();
+        Time!();
+        Personas!();
+        Entity!();
+        Committer!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_327 {
     };
 }
 
-impl_327!()
+impl_327!();

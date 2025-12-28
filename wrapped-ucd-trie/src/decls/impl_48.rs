@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Result!();
+        TrieSetOwned!();
+        Error!();
+        TrieSetSlice!();
+    };
+}
+
+macro_rules! impl_48 {
+    () => {
+        deps!();
+        impl TrieSetOwned { fn new (all : & [bool]) -> Result < TrieSetOwned > { let mut bitvectors = Vec :: with_capacity (CHUNKS) ; for i in 0 .. CHUNKS { let mut bitvector = 0u64 ; for j in 0 .. CHUNK_SIZE { if all [i * CHUNK_SIZE + j] { bitvector |= 1 << j ; } } bitvectors . push (bitvector) ; } let tree1_level1 = bitvectors . iter () . cloned () . take (0x800 / CHUNK_SIZE) . collect () ; let (mut tree2_level1 , mut tree2_level2) = compress_postfix_leaves (& bitvectors [0x800 / CHUNK_SIZE .. 0x10000 / CHUNK_SIZE] ,) ? ; if tree2_level2 . len () == 1 && tree2_level2 [0] == 0 { tree2_level1 . clear () ; tree2_level2 . clear () ; } let (mid , mut tree3_level3) = compress_postfix_leaves (& bitvectors [0x10000 / CHUNK_SIZE .. 0x110000 / CHUNK_SIZE] ,) ? ; let (mut tree3_level1 , mut tree3_level2) = compress_postfix_mid (& mid , 64) ? ; if tree3_level3 . len () == 1 && tree3_level3 [0] == 0 { tree3_level1 . clear () ; tree3_level2 . clear () ; tree3_level3 . clear () ; } Ok (TrieSetOwned { tree1_level1 , tree2_level1 , tree2_level2 , tree3_level1 , tree3_level2 , tree3_level3 , }) } # [doc = " Create a new trie set from a set of Unicode scalar values."] # [doc = ""] # [doc = " This returns an error if a set could not be sufficiently compressed to"] # [doc = " fit into a trie."] pub fn from_scalars < I , C > (scalars : I) -> Result < TrieSetOwned > where I : IntoIterator < Item = C > , C : Borrow < char > , { let mut all = vec ! [false ; 0x110000] ; for s in scalars { all [* s . borrow () as usize] = true ; } TrieSetOwned :: new (& all) } # [doc = " Create a new trie set from a set of Unicode scalar values."] # [doc = ""] # [doc = " This returns an error if a set could not be sufficiently compressed to"] # [doc = " fit into a trie. This also returns an error if any of the given"] # [doc = " codepoints are greater than `0x10FFFF`."] pub fn from_codepoints < I , C > (codepoints : I) -> Result < TrieSetOwned > where I : IntoIterator < Item = C > , C : Borrow < u32 > , { let mut all = vec ! [false ; 0x110000] ; for cp in codepoints { let cp = * cp . borrow () ; if cp > 0x10FFFF { return Err (Error :: InvalidCodepoint (cp)) ; } all [cp as usize] = true ; } TrieSetOwned :: new (& all) } # [doc = " Return this set as a slice."] # [inline (always)] pub fn as_slice (& self) -> TrieSetSlice < '_ > { TrieSetSlice { tree1_level1 : & self . tree1_level1 , tree2_level1 : & self . tree2_level1 , tree2_level2 : & self . tree2_level2 , tree3_level1 : & self . tree3_level1 , tree3_level2 : & self . tree3_level2 , tree3_level3 : & self . tree3_level3 , } } # [doc = " Returns true if and only if the given Unicode scalar value is in this"] # [doc = " set."] pub fn contains_char (& self , c : char) -> bool { self . as_slice () . contains_char (c) } # [doc = " Returns true if and only if the given codepoint is in this set."] # [doc = ""] # [doc = " If the given value exceeds the codepoint range (i.e., it's greater"] # [doc = " than `0x10FFFF`), then this returns false."] pub fn contains_u32 (& self , cp : u32) -> bool { self . as_slice () . contains_u32 (cp) } }
+    };
+}
+
+impl_48!()

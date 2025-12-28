@@ -11,4 +11,4 @@ macro_rules! ERROR_NO_MORE_ITEMS {
     };
 }
 
-ERROR_NO_MORE_ITEMS!()
+ERROR_NO_MORE_ITEMS!();

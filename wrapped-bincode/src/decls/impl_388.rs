@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         BorrowDecode!();
-        DecodeError!();
         AllowedEnumVariants!();
         BorrowDecoder!();
+        DecodeError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_388 {
     };
 }
 
-impl_388!()
+impl_388!();

@@ -11,4 +11,4 @@ macro_rules! hash_serialization_test {
     };
 }
 
-hash_serialization_test!()
+hash_serialization_test!();

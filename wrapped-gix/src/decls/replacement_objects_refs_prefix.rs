@@ -11,4 +11,4 @@ macro_rules! replacement_objects_refs_prefix {
     };
 }
 
-replacement_objects_refs_prefix!()
+replacement_objects_refs_prefix!();

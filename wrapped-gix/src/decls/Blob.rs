@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Clone!();
         Repository!();
+        Clone!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Blob {
     };
 }
 
-Blob!()
+Blob!();

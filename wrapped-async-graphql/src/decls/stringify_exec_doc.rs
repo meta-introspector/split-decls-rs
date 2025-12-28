@@ -4,4 +4,4 @@ macro_rules! stringify_exec_doc {
     };
 }
 
-stringify_exec_doc!()
+stringify_exec_doc!();

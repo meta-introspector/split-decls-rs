@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CheckCase!();
         Error!();
+        CheckCase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_simd {
     };
 }
 
-test_simd!()
+test_simd!();

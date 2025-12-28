@@ -4,4 +4,4 @@ macro_rules! as_name_opt {
     };
 }
 
-as_name_opt!()
+as_name_opt!();

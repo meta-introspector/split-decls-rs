@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         CopyOptions!();
+        Result!();
         TransitProcess!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! dir {
     };
 }
 
-dir!()
+dir!();

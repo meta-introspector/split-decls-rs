@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         IterMut!();
-        FnvIndexMap!();
-        Values!();
-        IndexMap!();
         ValuesMut!();
-        Keys!();
+        Values!();
+        FnvIndexMap!();
         Iter!();
+        IndexMap!();
+        Keys!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

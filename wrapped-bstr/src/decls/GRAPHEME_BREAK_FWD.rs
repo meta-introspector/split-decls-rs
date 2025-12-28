@@ -4,4 +4,4 @@ macro_rules! GRAPHEME_BREAK_FWD {
     };
 }
 
-GRAPHEME_BREAK_FWD!()
+GRAPHEME_BREAK_FWD!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CastTo!();
         Mut!();
+        CastTo!();
         Ref!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

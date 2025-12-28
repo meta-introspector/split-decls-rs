@@ -4,4 +4,4 @@ macro_rules! AttributeMatchGroup {
     };
 }
 
-AttributeMatchGroup!()
+AttributeMatchGroup!();

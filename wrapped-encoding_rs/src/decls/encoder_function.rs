@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EncoderResult!();
-        ByteDestination!();
         Space!();
+        ByteDestination!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! encoder_function {
     };
 }
 
-encoder_function!()
+encoder_function!();

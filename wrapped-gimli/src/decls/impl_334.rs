@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Abbreviations!();
-        DebugAbbrevOffset!();
-        Reader!();
-        Result!();
         DebugAbbrev!();
+        Abbreviations!();
+        Result!();
+        Reader!();
+        DebugAbbrevOffset!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_334 {
     };
 }
 
-impl_334!()
+impl_334!();

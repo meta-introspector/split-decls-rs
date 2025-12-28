@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DemangleWrite!();
-        Demangle!();
-        UnresolvedQualifierLevel!();
-        ArgScopeStack!();
         Result!();
+        Demangle!();
         DemangleContext!();
+        DemangleWrite!();
+        ArgScopeStack!();
+        UnresolvedQualifierLevel!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

@@ -4,4 +4,4 @@ macro_rules! read_bytes {
     };
 }
 
-read_bytes!()
+read_bytes!();

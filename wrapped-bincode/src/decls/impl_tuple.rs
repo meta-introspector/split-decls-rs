@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         BorrowDecoder!();
-        DecodeError!();
         Decoder!();
-        BorrowDecode!();
+        DecodeError!();
         Decode!();
+        BorrowDecode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_tuple {
     };
 }
 
-impl_tuple!()
+impl_tuple!();

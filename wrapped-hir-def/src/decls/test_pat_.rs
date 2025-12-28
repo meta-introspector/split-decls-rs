@@ -16,4 +16,4 @@ fn foo() {
     };
 }
 
-test_pat_!()
+test_pat_!();

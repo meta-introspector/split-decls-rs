@@ -4,4 +4,4 @@ macro_rules! simd_byte_swap {
     };
 }
 
-simd_byte_swap!()
+simd_byte_swap!();

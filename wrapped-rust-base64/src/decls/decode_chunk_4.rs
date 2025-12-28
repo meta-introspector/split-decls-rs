@@ -11,4 +11,4 @@ macro_rules! decode_chunk_4 {
     };
 }
 
-decode_chunk_4!()
+decode_chunk_4!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AhoCorasickBuilder!();
-        AhoCorasickKind!();
         DFA!();
+        AhoCorasickKind!();
+        AhoCorasickBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_255 {
     };
 }
 
-macro_255!()
+macro_255!();

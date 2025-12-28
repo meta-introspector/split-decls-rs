@@ -4,4 +4,4 @@ macro_rules! def_id {
     };
 }
 
-def_id!()
+def_id!();

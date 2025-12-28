@@ -12,4 +12,4 @@ macro_rules! call_hasher_impl_u64 {
     };
 }
 
-call_hasher_impl_u64!()
+call_hasher_impl_u64!();

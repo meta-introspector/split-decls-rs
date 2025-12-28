@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ReleaseChannel!();
         Crate!();
         RootQueryDb!();
-        ReleaseChannel!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! toolchain_channel {
     };
 }
 
-toolchain_channel!()
+toolchain_channel!();

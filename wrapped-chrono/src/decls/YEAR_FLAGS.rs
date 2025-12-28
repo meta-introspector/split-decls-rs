@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Weekday!();
         YearFlags!();
+        Weekday!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! YEAR_FLAGS {
     };
 }
 
-YEAR_FLAGS!()
+YEAR_FLAGS!();

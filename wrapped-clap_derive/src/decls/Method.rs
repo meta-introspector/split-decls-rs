@@ -4,4 +4,4 @@ macro_rules! Method {
     };
 }
 
-Method!()
+Method!();

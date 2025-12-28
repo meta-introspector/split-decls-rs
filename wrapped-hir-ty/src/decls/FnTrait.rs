@@ -4,4 +4,4 @@ macro_rules! FnTrait {
     };
 }
 
-FnTrait!()
+FnTrait!();

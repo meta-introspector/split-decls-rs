@@ -4,4 +4,4 @@ macro_rules! PowerShell {
     };
 }
 
-PowerShell!()
+PowerShell!();

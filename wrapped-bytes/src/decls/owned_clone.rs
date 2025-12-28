@@ -12,4 +12,4 @@ macro_rules! owned_clone {
     };
 }
 
-owned_clone!()
+owned_clone!();

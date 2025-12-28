@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Vec!();
         LenType!();
         VecView!();
-        Vec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! VecInner {
     };
 }
 
-VecInner!()
+VecInner!();

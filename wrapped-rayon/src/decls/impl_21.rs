@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        SendPtr!();
+        ParallelIterator!();
+        UnindexedConsumer!();
+        IntoIter!();
     };
 }
 
 macro_rules! impl_21 {
     () => {
         deps!();
-        impl < T > SendPtr < T > { fn get (self) -> * mut T { self . 0 } }
+        impl < T : Send , const N : usize > ParallelIterator for IntoIter < T , N > { type Item = T ; fn drive_unindexed < C > (self , consumer : C) -> C :: Result where C : UnindexedConsumer < Self :: Item > , { bridge (self , consumer) } fn opt_len (& self) -> Option < usize > { Some (N) } }
     };
 }
 

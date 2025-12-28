@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Display!();
         VersionError!();
+        Display!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_168 {
     };
 }
 
-impl_168!()
+impl_168!();

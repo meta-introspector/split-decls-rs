@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Predicate!();
+        Const!();
+        PathKind!();
+        NormalizesTo!();
+    };
+}
+
+macro_rules! GoalSource {
+    () => {
+        deps!();
+        # [doc = " Why a specific goal has to be proven."] # [doc = ""] # [doc = " This is necessary as we treat nested goals different depending on"] # [doc = " their source. This is used to decide whether a cycle is coinductive."] # [doc = " See the documentation of `EvalCtxt::step_kind_for_source` for more details"] # [doc = " about this."] # [doc = ""] # [doc = " It is also used by proof tree visitors, e.g. for diagnostics purposes."] # [derive (Copy , Clone , Debug , PartialEq , Eq , Hash)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext))] pub enum GoalSource { Misc , # [doc = " A nested goal required to prove that types are equal/subtypes."] # [doc = " This is always an unproductive step."] # [doc = ""] # [doc = " This is also used for all `NormalizesTo` goals as we they are used"] # [doc = " to relate types in `AliasRelate`."] TypeRelating , # [doc = " We're proving a where-bound of an impl."] ImplWhereBound , # [doc = " Const conditions that need to hold for `[const]` alias bounds to hold."] AliasBoundConstCondition , # [doc = " Instantiating a higher-ranked goal and re-proving it."] InstantiateHigherRanked , # [doc = " Predicate required for an alias projection to be well-formed."] # [doc = " This is used in three places:"] # [doc = " 1. projecting to an opaque whose hidden type is already registered in"] # [doc = "    the opaque type storage,"] # [doc = " 2. for rigid projections's trait goal,"] # [doc = " 3. for GAT where clauses."] AliasWellFormed , # [doc = " In case normalizing aliases in nested goals cycles, eagerly normalizing these"] # [doc = " aliases in the context of the parent may incorrectly change the cycle kind."] # [doc = " Normalizing aliases in goals therefore tracks the original path kind for this"] # [doc = " nested goal. See the comment of the `ReplaceAliasWithInfer` visitor for more"] # [doc = " details."] NormalizeGoal (PathKind) , }
+    };
+}
+
+GoalSource!()

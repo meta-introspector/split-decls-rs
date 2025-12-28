@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Pending!();
-        Ready!();
         Compat01As03!();
+        Ready!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1016 {
     };
 }
 
-impl_1016!()
+impl_1016!();

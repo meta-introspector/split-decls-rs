@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CfgExpr!();
         DnfExpr!();
+        CfgExpr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_dnf {
     };
 }
 
-check_dnf!()
+check_dnf!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UniqueVariableNames!();
         Visitor!();
         VisitorContext!();
+        UniqueVariableNames!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_259 {
     };
 }
 
-impl_259!()
+impl_259!();

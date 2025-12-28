@@ -4,4 +4,4 @@ macro_rules! history_buf {
     };
 }
 
-history_buf!()
+history_buf!();

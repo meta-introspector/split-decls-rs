@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        Shared!();
+        Atomic!();
         Pointer!();
+        Shared!();
+        Entry!();
         IsElement!();
         Guard!();
-        Atomic!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Iter {
     };
 }
 
-Iter!()
+Iter!();

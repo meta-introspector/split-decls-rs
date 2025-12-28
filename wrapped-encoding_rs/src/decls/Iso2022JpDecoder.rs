@@ -11,4 +11,4 @@ macro_rules! Iso2022JpDecoder {
     };
 }
 
-Iso2022JpDecoder!()
+Iso2022JpDecoder!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        PacketLineRef!();
         PacketLineOrWantedSize!();
+        PacketLineRef!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! hex_prefix {
     };
 }
 
-hex_prefix!()
+hex_prefix!();

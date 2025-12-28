@@ -4,4 +4,4 @@ macro_rules! panic_does_not_fit {
     };
 }
 
-panic_does_not_fit!()
+panic_does_not_fit!();

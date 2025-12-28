@@ -11,4 +11,4 @@ macro_rules! Callee {
     };
 }
 
-Callee!()
+Callee!();

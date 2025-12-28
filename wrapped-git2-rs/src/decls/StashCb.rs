@@ -11,4 +11,4 @@ macro_rules! StashCb {
     };
 }
 
-StashCb!()
+StashCb!();

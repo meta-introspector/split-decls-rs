@@ -4,4 +4,4 @@ macro_rules! CallableDefId {
     };
 }
 
-CallableDefId!()
+CallableDefId!();

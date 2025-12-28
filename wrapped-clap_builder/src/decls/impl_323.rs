@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        StringValueParser!();
-        OsStr!();
-        Error!();
-        ContextKind!();
-        ContextValue!();
         ValueSource!();
-        TypedValueParser!();
-        UnknownArgumentValueParser!();
-        Usage!();
-        Arg!();
         Command!();
+        UnknownArgumentValueParser!();
+        ContextKind!();
+        Usage!();
+        OsStr!();
+        Arg!();
         Result!();
+        StringValueParser!();
+        ContextValue!();
+        TypedValueParser!();
+        Error!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_323 {
     };
 }
 
-impl_323!()
+impl_323!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         ErrorRecord!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_error {
     };
 }
 
-handle_error!()
+handle_error!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CONTEXT_0_0!();
         XSAVE_FORMAT!();
+        CONTEXT_0_0!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! other_106 {
     };
 }
 
-other_106!()
+other_106!();

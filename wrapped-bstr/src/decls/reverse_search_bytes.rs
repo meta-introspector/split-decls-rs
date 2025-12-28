@@ -4,4 +4,4 @@ macro_rules! reverse_search_bytes {
     };
 }
 
-reverse_search_bytes!()
+reverse_search_bytes!();

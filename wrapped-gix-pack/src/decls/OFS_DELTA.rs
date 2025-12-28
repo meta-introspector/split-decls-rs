@@ -4,4 +4,4 @@ macro_rules! OFS_DELTA {
     };
 }
 
-OFS_DELTA!()
+OFS_DELTA!();

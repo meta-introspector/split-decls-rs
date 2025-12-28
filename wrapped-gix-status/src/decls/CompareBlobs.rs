@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         Entry!();
         ReadData!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CompareBlobs {
     };
 }
 
-CompareBlobs!()
+CompareBlobs!();

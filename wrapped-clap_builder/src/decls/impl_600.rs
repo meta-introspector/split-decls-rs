@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         AnyValueId!();
-        Result!();
         AnyValue!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_600 {
     };
 }
 
-impl_600!()
+impl_600!();

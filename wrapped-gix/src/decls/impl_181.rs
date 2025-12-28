@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Id!();
         Tag!();
         Note!();
-        Id!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

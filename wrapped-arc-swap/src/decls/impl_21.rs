@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Access!();
-        Map!();
         ArcSwap!();
+        Map!();
+        Access!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

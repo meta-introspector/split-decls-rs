@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Default!();
         Clone!();
+        Default!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! User {
     };
 }
 
-User!()
+User!();

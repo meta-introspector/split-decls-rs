@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
         HirDatabase!();
-        ImplTraitLoweringMode!();
         LifetimeElisionKind!();
-        Diagnostics!();
         TyLoweringContext!();
+        Diagnostics!();
+        EarlyBinder!();
+        ImplTraitLoweringMode!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! type_for_type_alias_with_diagnostics_query {
     };
 }
 
-type_for_type_alias_with_diagnostics_query!()
+type_for_type_alias_with_diagnostics_query!();

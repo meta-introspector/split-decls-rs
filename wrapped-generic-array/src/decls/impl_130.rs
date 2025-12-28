@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Concat!();
         GenericArray!();
+        Concat!();
         ArrayLength!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

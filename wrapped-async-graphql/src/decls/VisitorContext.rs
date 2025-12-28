@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Registry!();
+        RuleError!();
         MetaType!();
         MetaTypeName!();
-        RuleError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! VisitorContext {
     };
 }
 
-VisitorContext!()
+VisitorContext!();

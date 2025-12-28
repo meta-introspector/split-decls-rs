@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        NewObjectCacheFn!();
         NewPackCacheFn!();
         PackCache!();
         ObjectCache!();
-        NewObjectCacheFn!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Cache {
     };
 }
 
-Cache!()
+Cache!();

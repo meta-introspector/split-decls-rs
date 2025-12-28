@@ -4,4 +4,4 @@ macro_rules! ConflictStyle {
     };
 }
 
-ConflictStyle!()
+ConflictStyle!();

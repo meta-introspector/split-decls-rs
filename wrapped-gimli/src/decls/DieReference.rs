@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DebugInfoRef!();
         UnitRef!();
         UnitOffset!();
+        DebugInfoRef!();
         DebugInfoOffset!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! DieReference {
     };
 }
 
-DieReference!()
+DieReference!();

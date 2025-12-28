@@ -4,4 +4,4 @@ macro_rules! default_permissions {
     };
 }
 
-default_permissions!()
+default_permissions!();

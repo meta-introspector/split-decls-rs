@@ -4,4 +4,4 @@ macro_rules! read_vectored {
     };
 }
 
-read_vectored!()
+read_vectored!();

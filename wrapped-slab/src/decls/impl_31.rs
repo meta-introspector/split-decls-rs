@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        IntoIter!();
+        Slab!();
     };
 }
 
 macro_rules! impl_31 {
     () => {
         deps!();
-        impl < T > Iterator for IntoIter < T > { type Item = (usize , T) ; fn next (& mut self) -> Option < Self :: Item > { for (key , entry) in & mut self . entries { if let Entry :: Occupied (v) = entry { self . len -= 1 ; return Some ((key , v)) ; } } debug_assert_eq ! (self . len , 0) ; None } fn size_hint (& self) -> (usize , Option < usize >) { (self . len , Some (self . len)) } }
+        impl < T > fmt :: Debug for Slab < T > where T : fmt :: Debug , { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if fmt . alternate () { fmt . debug_map () . entries (self . iter ()) . finish () } else { fmt . debug_struct ("Slab") . field ("len" , & self . len) . field ("cap" , & self . capacity ()) . finish () } } }
     };
 }
 

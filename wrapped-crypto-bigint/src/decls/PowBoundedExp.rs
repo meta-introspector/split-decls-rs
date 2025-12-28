@@ -4,4 +4,4 @@ macro_rules! PowBoundedExp {
     };
 }
 
-PowBoundedExp!()
+PowBoundedExp!();

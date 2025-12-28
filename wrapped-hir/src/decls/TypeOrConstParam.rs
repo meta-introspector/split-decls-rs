@@ -4,4 +4,4 @@ macro_rules! TypeOrConstParam {
     };
 }
 
-TypeOrConstParam!()
+TypeOrConstParam!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Range!();
-        Chunk!();
         Diff!();
+        Chunk!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! diff {
     };
 }
 
-diff!()
+diff!();

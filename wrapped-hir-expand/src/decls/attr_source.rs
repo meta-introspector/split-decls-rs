@@ -12,4 +12,4 @@ macro_rules! attr_source {
     };
 }
 
-attr_source!()
+attr_source!();

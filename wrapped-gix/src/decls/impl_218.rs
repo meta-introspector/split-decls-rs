@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Platform!();
+        Stats!();
         Error!();
         Action!();
+        Platform!();
         Tree!();
-        Stats!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_218 {
     };
 }
 
-impl_218!()
+impl_218!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         TimeDelta!();
+        NaiveDate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_date_subassignment {
     };
 }
 
-test_date_subassignment!()
+test_date_subassignment!();

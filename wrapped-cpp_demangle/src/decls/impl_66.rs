@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ParseContext!();
-        MangledName!();
+        Parse!();
+        GlobalCtorDtor!();
+        Encoding!();
+        Type!();
         Result!();
         SubstitutionTable!();
-        Encoding!();
-        Parse!();
+        ParseContext!();
+        MangledName!();
         IndexStr!();
-        Type!();
-        GlobalCtorDtor!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

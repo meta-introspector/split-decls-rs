@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Rewrite!();
         Change!();
+        Rewrite!();
         Id!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_211 {
     };
 }
 
-impl_211!()
+impl_211!();

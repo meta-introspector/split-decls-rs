@@ -4,4 +4,4 @@ macro_rules! forward_search_bytes {
     };
 }
 
-forward_search_bytes!()
+forward_search_bytes!();

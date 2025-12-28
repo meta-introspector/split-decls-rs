@@ -4,4 +4,4 @@ macro_rules! string_array {
     };
 }
 
-string_array!()
+string_array!();

@@ -4,4 +4,4 @@ macro_rules! PathCompleter {
     };
 }
 
-PathCompleter!()
+PathCompleter!();

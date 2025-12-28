@@ -4,4 +4,4 @@ macro_rules! test_msg_schedule_permutation {
     };
 }
 
-test_msg_schedule_permutation!()
+test_msg_schedule_permutation!();

@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
+        Entry!();
+        Slab!();
     };
 }
 
 macro_rules! impl_26 {
     () => {
         deps!();
-        impl < T > fmt :: Debug for IntoIter < T > where T : fmt :: Debug , { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt . debug_struct ("IntoIter") . field ("remaining" , & self . len) . finish () } }
+        impl < T > ops :: IndexMut < usize > for Slab < T > { # [track_caller] fn index_mut (& mut self , key : usize) -> & mut T { match self . entries . get_mut (key) { Some (& mut Entry :: Occupied (ref mut v)) => v , _ => panic ! ("invalid key") , } } }
     };
 }
 

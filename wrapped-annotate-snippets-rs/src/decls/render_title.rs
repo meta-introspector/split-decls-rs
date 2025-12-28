@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Renderer!();
-        Id!();
-        MessageOrTitle!();
         TitleStyle!();
-        Level!();
+        Renderer!();
         DecorStyle!();
-        StyledBuffer!();
+        Level!();
         ElementStyle!();
+        StyledBuffer!();
+        MessageOrTitle!();
+        Id!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! render_title {
     };
 }
 
-render_title!()
+render_title!();

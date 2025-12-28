@@ -4,4 +4,4 @@ macro_rules! EntryDataMode {
     };
 }
 
-EntryDataMode!()
+EntryDataMode!();

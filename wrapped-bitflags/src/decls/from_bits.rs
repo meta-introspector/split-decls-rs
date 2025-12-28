@@ -4,4 +4,4 @@ macro_rules! from_bits {
     };
 }
 
-from_bits!()
+from_bits!();

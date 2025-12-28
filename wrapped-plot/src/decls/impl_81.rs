@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Default!();
         Properties!();
+        Default!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

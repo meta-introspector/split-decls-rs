@@ -12,4 +12,4 @@ macro_rules! impl_try_from_num {
     };
 }
 
-impl_try_from_num!()
+impl_try_from_num!();

@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Immutable!();
+        Unaligned!();
+        KnownLayout!();
+        Alignment!();
+        Validity!();
+        CastError!();
+        IntoBytes!();
+        SizeError!();
+    };
+}
+
+macro_rules! impl_216 {
+    () => {
+        deps!();
+        impl < Src , Dst : ? Sized + Unaligned > From < CastError < Src , Dst > > for SizeError < Src , Dst > { # [doc = " Infallibly extracts the [`SizeError`] from this `CastError` since `Dst`"] # [doc = " is unaligned."] # [doc = ""] # [doc = " Since [`Dst: Unaligned`], it is impossible to encounter an alignment"] # [doc = " error, and so the only error that can be encountered at runtime is a"] # [doc = " [`SizeError`]. This method permits extracting that `SizeError`"] # [doc = " infallibly."] # [doc = ""] # [doc = " [`Dst: Unaligned`]: crate::Unaligned"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use zerocopy::*;"] # [doc = " # use zerocopy_derive::*;"] # [doc = ""] # [doc = " #[derive(FromBytes, IntoBytes, KnownLayout, Immutable, Unaligned)]"] # [doc = " #[repr(C)]"] # [doc = " struct UdpHeader {"] # [doc = "     src_port: [u8; 2],"] # [doc = "     dst_port: [u8; 2],"] # [doc = "     length: [u8; 2],"] # [doc = "     checksum: [u8; 2],"] # [doc = " }"] # [doc = ""] # [doc = " #[derive(FromBytes, IntoBytes, KnownLayout, Immutable, Unaligned)]"] # [doc = " #[repr(C, packed)]"] # [doc = " struct UdpPacket {"] # [doc = "     header: UdpHeader,"] # [doc = "     body: [u8],"] # [doc = " }"] # [doc = ""] # [doc = " impl UdpPacket {"] # [doc = "     pub fn parse(bytes: &[u8]) -> Result<&UdpPacket, SizeError<&[u8], UdpPacket>> {"] # [doc = "         // Since `UdpPacket: Unaligned`, we can map the `CastError` to a `SizeError`."] # [doc = "         UdpPacket::ref_from_bytes(bytes).map_err(Into::into)"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [inline (always)] fn from (err : CastError < Src , Dst >) -> SizeError < Src , Dst > { match err { # [allow (unreachable_code)] CastError :: Alignment (e) => match Infallible :: from (e) { } , CastError :: Size (e) => e , CastError :: Validity (i) => match i { } , } } }
+    };
+}
+
+impl_216!()

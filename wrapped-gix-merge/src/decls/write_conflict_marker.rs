@@ -4,4 +4,4 @@ macro_rules! write_conflict_marker {
     };
 }
 
-write_conflict_marker!()
+write_conflict_marker!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Weekday!();
-        NaiveDateTime!();
         IsoWeek!();
-        NaiveDate!();
         Datelike!();
+        NaiveDate!();
+        NaiveDateTime!();
+        Weekday!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_417 {
     };
 }
 
-impl_417!()
+impl_417!();

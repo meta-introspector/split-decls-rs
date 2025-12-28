@@ -4,4 +4,4 @@ macro_rules! LifetimeElisionKind {
     };
 }
 
-LifetimeElisionKind!()
+LifetimeElisionKind!();

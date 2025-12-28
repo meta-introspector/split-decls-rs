@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        LocalFieldId!();
         HasChildSource!();
         VariantId!();
-        DefDatabase!();
         Attrs!();
-        LocalFieldId!();
+        DefDatabase!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_394 {
     };
 }
 
-impl_394!()
+impl_394!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Pointer!();
-        Section!();
-        BaseAddresses!();
-        FrameDescriptionEntry!();
-        CommonInformationEntry!();
-        UnwindSection!();
         CallFrameInstructionIter!();
-        PointerEncodingParameters!();
+        CommonInformationEntry!();
+        BaseAddresses!();
+        Pointer!();
         Reader!();
+        Section!();
+        FrameDescriptionEntry!();
+        PointerEncodingParameters!();
+        UnwindSection!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

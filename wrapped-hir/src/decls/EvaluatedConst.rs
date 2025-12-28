@@ -11,4 +11,4 @@ macro_rules! EvaluatedConst {
     };
 }
 
-EvaluatedConst!()
+EvaluatedConst!();

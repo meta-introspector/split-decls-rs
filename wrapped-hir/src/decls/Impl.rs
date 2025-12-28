@@ -4,4 +4,4 @@ macro_rules! Impl {
     };
 }
 
-Impl!()
+Impl!();

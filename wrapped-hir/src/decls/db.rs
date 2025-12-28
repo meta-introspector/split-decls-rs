@@ -4,4 +4,4 @@ macro_rules! db {
     };
 }
 
-db!()
+db!();

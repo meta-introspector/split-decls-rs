@@ -12,4 +12,4 @@ macro_rules! rename_section {
     };
 }
 
-rename_section!()
+rename_section!();

@@ -4,4 +4,4 @@ macro_rules! fan {
     };
 }
 
-fan!()
+fan!();

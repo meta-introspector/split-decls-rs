@@ -4,4 +4,4 @@ macro_rules! ConflictIndexEntryPathHint {
     };
 }
 
-ConflictIndexEntryPathHint!()
+ConflictIndexEntryPathHint!();

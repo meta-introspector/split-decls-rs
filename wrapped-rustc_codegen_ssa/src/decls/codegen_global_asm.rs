@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        GlobalAsmOperandRef!();
+        AsmCodegenMethods!();
+    };
+}
+
+macro_rules! codegen_global_asm {
+    () => {
+        deps!();
+        pub fn codegen_global_asm < 'tcx , Cx > (cx : & mut Cx , item_id : ItemId) where Cx : LayoutOf < 'tcx , LayoutOfResult = TyAndLayout < 'tcx > > + AsmCodegenMethods < 'tcx > , { let item = cx . tcx () . hir_item (item_id) ; if let rustc_hir :: ItemKind :: GlobalAsm { asm , .. } = item . kind { let operands : Vec < _ > = asm . operands . iter () . map (| (op , op_sp) | match * op { rustc_hir :: InlineAsmOperand :: Const { ref anon_const } => { match cx . tcx () . const_eval_poly (anon_const . def_id . to_def_id ()) { Ok (const_value) => { let ty = cx . tcx () . typeck_body (anon_const . body) . node_type (anon_const . hir_id) ; let string = common :: asm_const_to_str (cx . tcx () , * op_sp , const_value , cx . layout_of (ty) ,) ; GlobalAsmOperandRef :: Const { string } } Err (ErrorHandled :: Reported { .. }) => { GlobalAsmOperandRef :: Const { string : String :: new () } } Err (ErrorHandled :: TooGeneric (_)) => { span_bug ! (* op_sp , "asm const cannot be resolved; too generic") } } } rustc_hir :: InlineAsmOperand :: SymFn { expr } => { let ty = cx . tcx () . typeck (item_id . owner_id) . expr_ty (expr) ; let instance = match ty . kind () { & ty :: FnDef (def_id , args) => Instance :: expect_resolve (cx . tcx () , ty :: TypingEnv :: fully_monomorphized () , def_id , args , expr . span ,) , _ => span_bug ! (* op_sp , "asm sym is not a function") , } ; GlobalAsmOperandRef :: SymFn { instance } } rustc_hir :: InlineAsmOperand :: SymStatic { path : _ , def_id } => { GlobalAsmOperandRef :: SymStatic { def_id } } rustc_hir :: InlineAsmOperand :: In { .. } | rustc_hir :: InlineAsmOperand :: Out { .. } | rustc_hir :: InlineAsmOperand :: InOut { .. } | rustc_hir :: InlineAsmOperand :: SplitInOut { .. } | rustc_hir :: InlineAsmOperand :: Label { .. } => { span_bug ! (* op_sp , "invalid operand type for global_asm!") } }) . collect () ; cx . codegen_global_asm (asm . template , & operands , asm . options , asm . line_spans) ; } else { span_bug ! (item . span , "Mismatch between hir::Item type and MonoItem type") } }
+    };
+}
+
+codegen_global_asm!()

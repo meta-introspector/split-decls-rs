@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tag!();
         Binding!();
+        Tag!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_775 {
     };
 }
 
-impl_775!()
+impl_775!();

@@ -4,4 +4,4 @@ macro_rules! GB2312_SYMBOLS {
     };
 }
 
-GB2312_SYMBOLS!()
+GB2312_SYMBOLS!();

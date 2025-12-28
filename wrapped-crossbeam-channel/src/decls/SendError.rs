@@ -4,4 +4,4 @@ macro_rules! SendError {
     };
 }
 
-SendError!()
+SendError!();

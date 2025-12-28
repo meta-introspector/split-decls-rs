@@ -11,4 +11,4 @@ macro_rules! error_extensions_is_empty {
     };
 }
 
-error_extensions_is_empty!()
+error_extensions_is_empty!();

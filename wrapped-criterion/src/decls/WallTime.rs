@@ -4,4 +4,4 @@ macro_rules! WallTime {
     };
 }
 
-WallTime!()
+WallTime!();

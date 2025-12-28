@@ -4,4 +4,4 @@ macro_rules! Shallow {
     };
 }
 
-Shallow!()
+Shallow!();

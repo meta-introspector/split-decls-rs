@@ -1,6 +1,6 @@
 macro_rules! alloc {
     () => {
-        mod alloc ;
+        pub mod alloc ;
     };
 }
 

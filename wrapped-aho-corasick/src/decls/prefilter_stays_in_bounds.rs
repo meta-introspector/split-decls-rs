@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MatchKind!();
-        Input!();
         AhoCorasick!();
+        Input!();
+        MatchKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! prefilter_stays_in_bounds {
     };
 }
 
-prefilter_stays_in_bounds!()
+prefilter_stays_in_bounds!();

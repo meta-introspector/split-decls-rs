@@ -4,4 +4,4 @@ macro_rules! GetResponse {
     };
 }
 
-GetResponse!()
+GetResponse!();

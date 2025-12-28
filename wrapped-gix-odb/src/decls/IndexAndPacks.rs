@@ -12,4 +12,4 @@ macro_rules! IndexAndPacks {
     };
 }
 
-IndexAndPacks!()
+IndexAndPacks!();

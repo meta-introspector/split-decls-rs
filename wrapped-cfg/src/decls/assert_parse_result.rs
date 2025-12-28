@@ -11,4 +11,4 @@ macro_rules! assert_parse_result {
     };
 }
 
-assert_parse_result!()
+assert_parse_result!();

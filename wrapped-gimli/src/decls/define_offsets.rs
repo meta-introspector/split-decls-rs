@@ -11,4 +11,4 @@ macro_rules! define_offsets {
     };
 }
 
-define_offsets!()
+define_offsets!();

@@ -4,4 +4,4 @@ macro_rules! cfg_aliases {
     };
 }
 
-cfg_aliases!()
+cfg_aliases!();

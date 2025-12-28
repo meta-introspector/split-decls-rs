@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Branch!();
         Error!();
+        Branch!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! to_object {
     };
 }
 
-to_object!()
+to_object!();

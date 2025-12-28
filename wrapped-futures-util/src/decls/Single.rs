@@ -4,4 +4,4 @@ macro_rules! Single {
     };
 }
 
-Single!()
+Single!();

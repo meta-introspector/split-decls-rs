@@ -4,4 +4,4 @@ macro_rules! ksx1001_other_encode {
     };
 }
 
-ksx1001_other_encode!()
+ksx1001_other_encode!();

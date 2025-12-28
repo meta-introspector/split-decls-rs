@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Variants!();
-        Layout!();
         TagEncoding!();
+        Variants!();
         HirDatabase!();
+        Layout!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! detect_variant_from_bytes {
     };
 }
 
-detect_variant_from_bytes!()
+detect_variant_from_bytes!();

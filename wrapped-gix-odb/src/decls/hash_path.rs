@@ -4,4 +4,4 @@ macro_rules! hash_path {
     };
 }
 
-hash_path!()
+hash_path!();

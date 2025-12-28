@@ -4,4 +4,4 @@ macro_rules! restricted_names {
     };
 }
 
-restricted_names!()
+restricted_names!();

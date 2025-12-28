@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GenericArrayIter!();
         GenericArray!();
         ArrayLength!();
+        GenericArrayIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_49 {
     };
 }
 
-impl_49!()
+impl_49!();

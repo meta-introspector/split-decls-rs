@@ -4,4 +4,4 @@ macro_rules! parse_cfg_attr_input {
     };
 }
 
-parse_cfg_attr_input!()
+parse_cfg_attr_input!();

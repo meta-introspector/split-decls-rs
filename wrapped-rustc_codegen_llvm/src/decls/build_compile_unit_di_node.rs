@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        CodegenUnitDebugContext!();
+        ChecksumKind!();
+    };
+}
+
+macro_rules! build_compile_unit_di_node {
+    () => {
+        deps!();
+        pub (crate) fn build_compile_unit_di_node < 'll , 'tcx > (tcx : TyCtxt < 'tcx > , codegen_unit_name : & str , debug_context : & CodegenUnitDebugContext < 'll , 'tcx > ,) -> & 'll DIDescriptor { use rustc_session :: RemapFileNameExt ; use rustc_session :: config :: RemapPathScopeComponents ; let mut name_in_debuginfo = tcx . sess . local_crate_source_file () . map (| src | src . for_scope (& tcx . sess , RemapPathScopeComponents :: DEBUGINFO) . to_path_buf ()) . unwrap_or_else (| | PathBuf :: from (tcx . crate_name (LOCAL_CRATE) . as_str ())) ; name_in_debuginfo . push ("@") ; name_in_debuginfo . push (codegen_unit_name) ; debug ! ("build_compile_unit_di_node: {:?}" , name_in_debuginfo) ; let rustc_producer = format ! ("rustc version {}" , tcx . sess . cfg_version) ; let producer = format ! ("clang LLVM ({rustc_producer})") ; let name_in_debuginfo = name_in_debuginfo . to_string_lossy () ; let work_dir = tcx . sess . opts . working_dir . for_scope (tcx . sess , RemapPathScopeComponents :: DEBUGINFO) . to_string_lossy () ; let output_filenames = tcx . output_filenames (()) ; let split_name = if tcx . sess . target_can_use_split_dwarf () && let Some (f) = output_filenames . split_dwarf_path (tcx . sess . split_debuginfo () , tcx . sess . opts . unstable_opts . split_dwarf_kind , codegen_unit_name , tcx . sess . invocation_temp . as_deref () ,) { Some (tcx . sess . source_map () . path_mapping () . to_real_filename (f)) } else { None } ; let split_name = split_name . as_ref () . map (| f | f . for_scope (tcx . sess , RemapPathScopeComponents :: DEBUGINFO) . to_string_lossy ()) . unwrap_or_default () ; let kind = DebugEmissionKind :: from_generic (tcx . sess . opts . debuginfo) ; let dwarf_version = tcx . sess . dwarf_version () ; let is_dwarf_kind = matches ! (tcx . sess . target . debuginfo_kind , DebuginfoKind :: Dwarf | DebuginfoKind :: DwarfDsym) ; let debug_name_table_kind = if is_dwarf_kind && dwarf_version <= 4 { DebugNameTableKind :: None } else { DebugNameTableKind :: Default } ; unsafe { let compile_unit_file = create_file (debug_context . builder . as_ref () , & name_in_debuginfo , & work_dir , "" , llvm :: ChecksumKind :: None , None ,) ; let unit_metadata = llvm :: LLVMRustDIBuilderCreateCompileUnit (debug_context . builder . as_ref () , dwarf_const :: DW_LANG_Rust , compile_unit_file , producer . as_c_char_ptr () , producer . len () , tcx . sess . opts . optimize != config :: OptLevel :: No , c"" . as_ptr () , 0 , split_name . as_c_char_ptr () , split_name . len () , kind , 0 , tcx . sess . opts . unstable_opts . split_dwarf_inlining , debug_name_table_kind ,) ; return unit_metadata ; } ; }
+    };
+}
+
+build_compile_unit_di_node!()

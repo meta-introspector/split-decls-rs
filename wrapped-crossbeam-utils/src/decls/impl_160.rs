@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SharedOption!();
-        ScopedThreadBuilder!();
         Scope!();
         ScopedJoinHandle!();
+        ScopedThreadBuilder!();
+        SharedOption!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

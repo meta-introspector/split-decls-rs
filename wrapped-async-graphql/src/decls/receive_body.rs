@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        MultipartOptions!();
+        Result!();
         Request!();
         ParseRequestError!();
-        Result!();
-        MultipartOptions!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! receive_body {
     };
 }
 
-receive_body!()
+receive_body!();

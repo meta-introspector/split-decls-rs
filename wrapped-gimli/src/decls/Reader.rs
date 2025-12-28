@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        EndianRcSlice!();
-        Format!();
-        Result!();
-        Reference!();
         EndianSlice!();
+        Format!();
+        EndianRcSlice!();
+        Endianity!();
         ReaderOffsetId!();
         ReaderOffset!();
+        Result!();
+        Reference!();
         Error!();
-        Endianity!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Reader {
     };
 }
 
-Reader!()
+Reader!();

@@ -4,4 +4,4 @@ macro_rules! is_win_device {
     };
 }
 
-is_win_device!()
+is_win_device!();

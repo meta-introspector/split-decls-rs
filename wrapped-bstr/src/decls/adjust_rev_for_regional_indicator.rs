@@ -4,4 +4,4 @@ macro_rules! adjust_rev_for_regional_indicator {
     };
 }
 
-adjust_rev_for_regional_indicator!()
+adjust_rev_for_regional_indicator!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ImplTraitLoweringMode!();
-        TyLoweringContext!();
-        Binder!();
+        FnSig!();
         FnAbi!();
         HirDatabase!();
         PolyFnSig!();
-        EarlyBinder!();
+        Binder!();
         LifetimeElisionKind!();
-        FnSig!();
+        ImplTraitLoweringMode!();
+        TyLoweringContext!();
+        EarlyBinder!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! fn_sig_for_fn {
     };
 }
 
-fn_sig_for_fn!()
+fn_sig_for_fn!();

@@ -4,4 +4,4 @@ macro_rules! __known_path {
     };
 }
 
-__known_path!()
+__known_path!();

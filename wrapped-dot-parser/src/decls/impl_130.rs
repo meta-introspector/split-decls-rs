@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        EdgeStmt!();
         Graph!();
         EdgeRHS!();
-        EdgeStmt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

@@ -4,4 +4,4 @@ macro_rules! add_lock_suffix {
     };
 }
 
-add_lock_suffix!()
+add_lock_suffix!();

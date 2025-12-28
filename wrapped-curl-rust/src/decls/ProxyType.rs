@@ -4,4 +4,4 @@ macro_rules! ProxyType {
     };
 }
 
-ProxyType!()
+ProxyType!();

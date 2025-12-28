@@ -4,4 +4,4 @@ macro_rules! IteratorType {
     };
 }
 
-IteratorType!()
+IteratorType!();

@@ -4,4 +4,4 @@ macro_rules! ColorChoice {
     };
 }
 
-ColorChoice!()
+ColorChoice!();

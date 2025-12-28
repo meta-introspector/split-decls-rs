@@ -11,4 +11,4 @@ macro_rules! MAX_CANDIDATES {
     };
 }
 
-MAX_CANDIDATES!()
+MAX_CANDIDATES!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Link!();
-        Entry!();
+        Mode!();
         Tree!();
         State!();
-        Mode!();
+        Link!();
+        Entry!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! _impls {
     };
 }
 
-_impls!()
+_impls!();

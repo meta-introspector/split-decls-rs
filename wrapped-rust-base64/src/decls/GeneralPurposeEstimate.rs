@@ -4,4 +4,4 @@ macro_rules! GeneralPurposeEstimate {
     };
 }
 
-GeneralPurposeEstimate!()
+GeneralPurposeEstimate!();

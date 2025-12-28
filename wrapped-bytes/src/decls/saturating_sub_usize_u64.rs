@@ -4,4 +4,4 @@ macro_rules! saturating_sub_usize_u64 {
     };
 }
 
-saturating_sub_usize_u64!()
+saturating_sub_usize_u64!();

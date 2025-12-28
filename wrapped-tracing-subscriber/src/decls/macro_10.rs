@@ -1,6 +1,13 @@
+macro_rules! deps {
+    () => {
+        Alt!();
+    };
+}
+
 macro_rules! macro_10 {
     () => {
-        feature ! { #! [all (feature = "fmt" , feature = "std")] pub mod fmt ; pub use fmt :: fmt ; pub use fmt :: Subscriber as FmtSubscriber ; }
+        deps!();
+        feature ! { #! [feature = "std"] use super :: VisitWrite ; use std :: io ; impl < V > VisitWrite for Alt < V > where V : VisitWrite , { # [inline] fn writer (& mut self) -> & mut dyn io :: Write { self . 0 . writer () } } }
     };
 }
 

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnalignedU16Slice!();
         CopyAsciiResult!();
+        UnalignedU16Slice!();
         Endian!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! copy_unaligned_basic_latin_to_ascii {
     };
 }
 
-copy_unaligned_basic_latin_to_ascii!()
+copy_unaligned_basic_latin_to_ascii!();

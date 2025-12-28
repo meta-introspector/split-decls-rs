@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Float!();
-        Kernel!();
         Sample!();
+        Kernel!();
+        Float!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Kde {
     };
 }
 
-Kde!()
+Kde!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BareFunctionType!();
         CvQualifiers!();
         ExceptionSpec!();
+        BareFunctionType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FunctionType {
     };
 }
 
-FunctionType!()
+FunctionType!();

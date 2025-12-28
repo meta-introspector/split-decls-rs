@@ -4,4 +4,4 @@ macro_rules! mul_high_u64 {
     };
 }
 
-mul_high_u64!()
+mul_high_u64!();

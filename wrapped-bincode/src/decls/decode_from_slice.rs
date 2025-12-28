@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Decode!();
         Config!();
+        Decode!();
         DecodeError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! decode_from_slice {
     };
 }
 
-decode_from_slice!()
+decode_from_slice!();

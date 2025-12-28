@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Utf8PrefixComponent!();
-        Utf8Components!();
         Utf8Path!();
+        Utf8Components!();
+        Utf8PrefixComponent!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Utf8Component {
     };
 }
 
-Utf8Component!()
+Utf8Component!();

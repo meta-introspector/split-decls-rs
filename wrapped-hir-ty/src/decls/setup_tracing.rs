@@ -4,4 +4,4 @@ macro_rules! setup_tracing {
     };
 }
 
-setup_tracing!()
+setup_tracing!();

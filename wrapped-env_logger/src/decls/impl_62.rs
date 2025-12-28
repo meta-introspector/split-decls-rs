@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Writer!();
         Formatter!();
         WriteStyle!();
-        Writer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

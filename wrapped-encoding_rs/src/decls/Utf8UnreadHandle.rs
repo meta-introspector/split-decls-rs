@@ -11,4 +11,4 @@ macro_rules! Utf8UnreadHandle {
     };
 }
 
-Utf8UnreadHandle!()
+Utf8UnreadHandle!();

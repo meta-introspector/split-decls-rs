@@ -4,4 +4,4 @@ macro_rules! storeu {
     };
 }
 
-storeu!()
+storeu!();

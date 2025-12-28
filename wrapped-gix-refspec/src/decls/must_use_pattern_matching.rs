@@ -4,4 +4,4 @@ macro_rules! must_use_pattern_matching {
     };
 }
 
-must_use_pattern_matching!()
+must_use_pattern_matching!();

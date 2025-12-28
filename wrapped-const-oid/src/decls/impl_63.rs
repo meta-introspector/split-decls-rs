@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ObjectIdentifier!();
+        Error!();
         Result!();
         Arc!();
-        Error!();
-        ObjectIdentifier!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_63 {
     };
 }
 
-impl_63!()
+impl_63!();

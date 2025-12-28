@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
-        EarlyBinder!();
         ImplTraitIdx!();
+        EarlyBinder!();
+        HirDatabase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! rpit_hidden_types {
     };
 }
 
-rpit_hidden_types!()
+rpit_hidden_types!();

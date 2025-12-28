@@ -4,4 +4,4 @@ macro_rules! DebugAddr {
     };
 }
 
-DebugAddr!()
+DebugAddr!();

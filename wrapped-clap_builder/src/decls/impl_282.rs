@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ValueEnum!();
         EnumValueParser!();
+        ValueEnum!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_282 {
     };
 }
 
-impl_282!()
+impl_282!();

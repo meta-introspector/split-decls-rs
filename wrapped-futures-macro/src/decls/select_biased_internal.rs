@@ -4,4 +4,4 @@ macro_rules! select_biased_internal {
     };
 }
 
-select_biased_internal!()
+select_biased_internal!();

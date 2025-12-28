@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Lit!();
+    };
+}
+
+macro_rules! impl_401 {
+    () => {
+        deps!();
+        impl fmt :: Display for Lit { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let Lit { kind , symbol , suffix } = * self ; match kind { Byte => write ! (f , "b'{symbol}'") ? , Char => write ! (f , "'{symbol}'") ? , Str => write ! (f , "\"{symbol}\"") ? , StrRaw (n) => write ! (f , "r{delim}\"{string}\"{delim}" , delim = "#" . repeat (n as usize) , string = symbol) ? , ByteStr => write ! (f , "b\"{symbol}\"") ? , ByteStrRaw (n) => write ! (f , "br{delim}\"{string}\"{delim}" , delim = "#" . repeat (n as usize) , string = symbol) ? , CStr => write ! (f , "c\"{symbol}\"") ? , CStrRaw (n) => { write ! (f , "cr{delim}\"{symbol}\"{delim}" , delim = "#" . repeat (n as usize)) ? } Integer | Float | Bool | Err (_) => write ! (f , "{symbol}") ? , } if let Some (suffix) = suffix { write ! (f , "{suffix}") ? ; } Ok (()) } }
+    };
+}
+
+impl_401!()

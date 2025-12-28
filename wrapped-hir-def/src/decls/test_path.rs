@@ -24,4 +24,4 @@ fn foo() {
     };
 }
 
-test_path!()
+test_path!();

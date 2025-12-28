@@ -4,4 +4,4 @@ macro_rules! option_details_for_path {
     };
 }
 
-option_details_for_path!()
+option_details_for_path!();

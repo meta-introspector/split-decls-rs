@@ -11,4 +11,4 @@ macro_rules! branch_remote_tracking_ref_name {
     };
 }
 
-branch_remote_tracking_ref_name!()
+branch_remote_tracking_ref_name!();

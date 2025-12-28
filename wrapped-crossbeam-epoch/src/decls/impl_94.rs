@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Shared!();
-        Guard!();
         Local!();
-        Deferred!();
-        Collector!();
         Owned!();
+        Deferred!();
+        Shared!();
+        Collector!();
+        Guard!();
         Atomic!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

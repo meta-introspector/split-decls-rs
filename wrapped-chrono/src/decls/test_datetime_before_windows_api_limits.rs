@@ -12,4 +12,4 @@ macro_rules! test_datetime_before_windows_api_limits {
     };
 }
 
-test_datetime_before_windows_api_limits!()
+test_datetime_before_windows_api_limits!();

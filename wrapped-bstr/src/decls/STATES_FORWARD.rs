@@ -4,4 +4,4 @@ macro_rules! STATES_FORWARD {
     };
 }
 
-STATES_FORWARD!()
+STATES_FORWARD!();

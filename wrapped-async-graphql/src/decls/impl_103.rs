@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         BatchRequest!();
-        Result!();
+        Any!();
         Request!();
         ParseRequestError!();
-        Any!();
+        Result!();
         IntrospectionMode!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_103 {
     };
 }
 
-impl_103!()
+impl_103!();

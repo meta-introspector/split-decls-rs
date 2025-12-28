@@ -4,4 +4,4 @@ macro_rules! owned_is_unique {
     };
 }
 
-owned_is_unique!()
+owned_is_unique!();

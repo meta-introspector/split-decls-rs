@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParDrain!();
         HashTable!();
+        ParDrain!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_217 {
     };
 }
 
-impl_217!()
+impl_217!();

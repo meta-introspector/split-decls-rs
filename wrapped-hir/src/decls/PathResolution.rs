@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TypeParam!();
-        DeriveHelper!();
-        Impl!();
-        ConstParam!();
         ModuleDef!();
-        ToolModule!();
-        Local!();
         BuiltinAttr!();
+        Impl!();
+        DeriveHelper!();
+        TypeParam!();
+        ConstParam!();
+        Local!();
+        ToolModule!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! PathResolution {
     };
 }
 
-PathResolution!()
+PathResolution!();

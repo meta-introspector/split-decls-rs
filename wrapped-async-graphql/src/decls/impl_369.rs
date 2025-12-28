@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        HashMapCache!();
         CacheFactory!();
         HashMapCacheImpl!();
-        HashMapCache!();
         CacheStorage!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_369 {
     };
 }
 
-impl_369!()
+impl_369!();

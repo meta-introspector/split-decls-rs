@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        OsStr!();
-        IntoResettable!();
         Resettable!();
+        IntoResettable!();
+        OsStr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_177 {
     };
 }
 
-impl_177!()
+impl_177!();

@@ -12,4 +12,4 @@ macro_rules! map_node_range_up_aggregated {
     };
 }
 
-map_node_range_up_aggregated!()
+map_node_range_up_aggregated!();

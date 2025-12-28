@@ -11,4 +11,4 @@ macro_rules! decode_invalid_trailing_padding_as_invalid_byte_at_first_byte_all_m
     };
 }
 
-decode_invalid_trailing_padding_as_invalid_byte_at_first_byte_all_modes!()
+decode_invalid_trailing_padding_as_invalid_byte_at_first_byte_all_modes!();

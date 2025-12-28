@@ -4,4 +4,4 @@ macro_rules! Order {
     };
 }
 
-Order!()
+Order!();

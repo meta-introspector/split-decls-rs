@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnboundedSenderInner!();
         UnboundedInner!();
-        SendErrorKind!();
+        UnboundedSenderInner!();
         SendError!();
+        SendErrorKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

@@ -4,4 +4,4 @@ macro_rules! custom_directive {
     };
 }
 
-custom_directive!()
+custom_directive!();

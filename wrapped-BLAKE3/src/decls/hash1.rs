@@ -12,4 +12,4 @@ macro_rules! hash1 {
     };
 }
 
-hash1!()
+hash1!();

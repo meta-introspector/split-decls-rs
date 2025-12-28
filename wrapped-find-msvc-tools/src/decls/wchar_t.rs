@@ -4,4 +4,4 @@ macro_rules! wchar_t {
     };
 }
 
-wchar_t!()
+wchar_t!();

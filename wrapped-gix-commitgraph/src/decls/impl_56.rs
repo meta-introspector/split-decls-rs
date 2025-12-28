@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Graph!();
+        Error!();
         File!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_56 {
     };
 }
 
-impl_56!()
+impl_56!();

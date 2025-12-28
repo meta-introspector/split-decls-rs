@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Result!();
         Positioned!();
-        PositionCalculator!();
         Rule!();
+        PositionCalculator!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_default_value {
     };
 }
 
-parse_default_value!()
+parse_default_value!();

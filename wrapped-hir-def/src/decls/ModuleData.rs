@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FxIndexMap!();
         ItemScope!();
-        DefMap!();
+        FxIndexMap!();
         LocalModuleId!();
         ModuleOrigin!();
         Visibility!();
+        DefMap!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ModuleData {
     };
 }
 
-ModuleData!()
+ModuleData!();

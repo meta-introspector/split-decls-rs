@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         Boolean!();
         Key!();
-        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! config_bool {
     };
 }
 
-config_bool!()
+config_bool!();

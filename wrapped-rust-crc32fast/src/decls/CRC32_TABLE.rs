@@ -4,4 +4,4 @@ macro_rules! CRC32_TABLE {
     };
 }
 
-CRC32_TABLE!()
+CRC32_TABLE!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ThreadSafeRepository!();
-        BuiltinSubmoduleStatus!();
-        ApplyLeniency!();
         Status!();
         Diff!();
-        Error!();
+        ApplyLeniency!();
         Entry!();
         Submodule!();
+        ThreadSafeRepository!();
+        BuiltinSubmoduleStatus!();
+        Error!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! submodule_status {
     };
 }
 
-submodule_status!()
+submodule_status!();

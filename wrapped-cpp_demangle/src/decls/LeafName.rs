@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CtorDtorName!();
-        ClosureTypeName!();
         SourceName!();
+        ClosureTypeName!();
         UnnamedTypeName!();
+        CtorDtorName!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! LeafName {
     };
 }
 
-LeafName!()
+LeafName!();

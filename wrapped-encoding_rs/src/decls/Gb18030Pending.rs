@@ -4,4 +4,4 @@ macro_rules! Gb18030Pending {
     };
 }
 
-Gb18030Pending!()
+Gb18030Pending!();

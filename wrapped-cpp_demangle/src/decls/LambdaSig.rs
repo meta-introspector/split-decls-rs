@@ -4,4 +4,4 @@ macro_rules! LambdaSig {
     };
 }
 
-LambdaSig!()
+LambdaSig!();

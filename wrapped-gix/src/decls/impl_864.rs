@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Platform!();
         Sorting!();
         Note!();
-        Item!();
         Allow!();
+        Platform!();
+        Item!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_864 {
     };
 }
 
-impl_864!()
+impl_864!();

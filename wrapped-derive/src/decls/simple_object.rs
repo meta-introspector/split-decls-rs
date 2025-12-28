@@ -4,4 +4,4 @@ macro_rules! simple_object {
     };
 }
 
-simple_object!()
+simple_object!();

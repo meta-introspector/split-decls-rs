@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        SafetyCheck!();
         Entry!();
         Error!();
+        SafetyCheck!();
+        Kind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! process_entry {
     };
 }
 
-process_entry!()
+process_entry!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Expression!();
-        Reader!();
         OperationIter!();
-        Evaluation!();
+        Expression!();
         Encoding!();
+        Reader!();
+        Evaluation!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_516 {
     };
 }
 
-impl_516!()
+impl_516!();

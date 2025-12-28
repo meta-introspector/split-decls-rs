@@ -4,4 +4,4 @@ macro_rules! TAG_CONT {
     };
 }
 
-TAG_CONT!()
+TAG_CONT!();

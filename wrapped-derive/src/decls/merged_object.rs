@@ -4,4 +4,4 @@ macro_rules! merged_object {
     };
 }
 
-merged_object!()
+merged_object!();

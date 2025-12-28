@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PubTypesEntry!();
         PubStuffParser!();
-        DebugLookup!();
         Reader!();
+        DebugLookup!();
+        PubTypesEntry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DebugPubTypes {
     };
 }
 
-DebugPubTypes!()
+DebugPubTypes!();

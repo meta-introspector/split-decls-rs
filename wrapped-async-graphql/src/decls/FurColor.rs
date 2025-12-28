@@ -4,4 +4,4 @@ macro_rules! FurColor {
     };
 }
 
-FurColor!()
+FurColor!();

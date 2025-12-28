@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ReaderOffset!();
+        LineInstructions!();
         Reader!();
+        ReaderOffset!();
+        LineProgram!();
         Section!();
         LineRow!();
-        LineProgram!();
-        LineInstructions!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! LineRows {
     };
 }
 
-LineRows!()
+LineRows!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ContextError!();
         ErrorImpl!();
         Own!();
+        ContextError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! context_drop_rest {
     };
 }
 
-context_drop_rest!()
+context_drop_rest!();

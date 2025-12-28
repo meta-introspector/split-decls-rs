@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        LineProgramHeader!();
-        EndianSlice!();
-        LineRows!();
-        CompleteLineProgram!();
-        LineSequence!();
-        Result!();
-        IncompleteLineProgram!();
-        OneShotLineRows!();
         Reader!();
+        LineProgramHeader!();
+        LineSequence!();
+        IncompleteLineProgram!();
+        EndianSlice!();
+        OneShotLineRows!();
+        LineRows!();
+        Result!();
         ReaderOffset!();
+        CompleteLineProgram!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_424 {
     };
 }
 
-impl_424!()
+impl_424!();

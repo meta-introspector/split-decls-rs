@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         MatchKind!();
+        Config!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_200 {
     };
 }
 
-macro_200!()
+macro_200!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Error!();
         Url!();
         Connection!();
-        Error!();
         AuthenticateFn!();
-        Remote!();
         Note!();
+        Remote!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_937 {
     };
 }
 
-impl_937!()
+impl_937!();

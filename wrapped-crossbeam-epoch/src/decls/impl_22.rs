@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Pointer!();
-        Owned!();
         CompareExchangeError!();
         Pointable!();
-        Atomic!();
         Guard!();
+        Atomic!();
         Shared!();
+        Pointer!();
+        Owned!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

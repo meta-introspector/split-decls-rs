@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         RandomState!();
-        FixedState!();
         SeedableRandomState!();
+        FixedState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FoldHasher {
     };
 }
 
-FoldHasher!()
+FoldHasher!();

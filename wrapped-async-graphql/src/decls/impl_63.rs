@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GuardExt!();
         Guard!();
+        GuardExt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_63 {
     };
 }
 
-impl_63!()
+impl_63!();

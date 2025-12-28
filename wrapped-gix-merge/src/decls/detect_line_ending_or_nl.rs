@@ -11,4 +11,4 @@ macro_rules! detect_line_ending_or_nl {
     };
 }
 
-detect_line_ending_or_nl!()
+detect_line_ending_or_nl!();

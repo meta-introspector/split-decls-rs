@@ -4,4 +4,4 @@ macro_rules! NUM_BUCKETS {
     };
 }
 
-NUM_BUCKETS!()
+NUM_BUCKETS!();

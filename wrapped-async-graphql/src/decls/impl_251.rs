@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        VisitorContext!();
+        Visitor!();
         ScalarLeafs!();
         Field!();
-        Visitor!();
+        VisitorContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

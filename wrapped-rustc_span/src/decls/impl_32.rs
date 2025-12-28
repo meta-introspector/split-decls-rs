@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        FileNameDisplay!();
-        FileName!();
+        Edition!();
     };
 }
 
 macro_rules! impl_32 {
     () => {
         deps!();
-        impl fmt :: Display for FileNameDisplay < '_ > { fn fmt (& self , fmt : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { use FileName :: * ; match * self . inner { Real (ref name) => { write ! (fmt , "{}" , name . to_string_lossy (self . display_pref)) } CfgSpec (_) => write ! (fmt , "<cfgspec>") , MacroExpansion (_) => write ! (fmt , "<macro expansion>") , Anon (_) => write ! (fmt , "<anon>") , ProcMacroSourceCode (_) => write ! (fmt , "<proc-macro source code>") , CliCrateAttr (_) => write ! (fmt , "<crate attribute>") , Custom (ref s) => write ! (fmt , "<{s}>") , DocTest (ref path , _) => write ! (fmt , "{}" , path . display ()) , InlineAsm (_) => write ! (fmt , "<inline asm>") , } } }
+        impl fmt :: Display for Edition { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let s = match * self { Edition :: Edition2015 => "2015" , Edition :: Edition2018 => "2018" , Edition :: Edition2021 => "2021" , Edition :: Edition2024 => "2024" , Edition :: EditionFuture => "future" , } ; write ! (f , "{s}") } }
     };
 }
 

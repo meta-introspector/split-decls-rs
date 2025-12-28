@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        BaseAddresses!();
+        Result!();
         UnwindSection!();
+        Section!();
         Format!();
+        Augmentation!();
+        Error!();
         CommonInformationEntry!();
         Reader!();
         Register!();
-        Error!();
-        BaseAddresses!();
-        Section!();
-        Augmentation!();
         CieOrFde!();
-        Result!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         UnresolvedMacroCall!();
+        InactiveCode!();
         AwaitOutsideOfAsync!();
         UnreachableLabel!();
         UndeclaredLabel!();
-        InactiveCode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! expr_store_diagnostics {
     };
 }
 
-expr_store_diagnostics!()
+expr_store_diagnostics!();

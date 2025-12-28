@@ -11,4 +11,4 @@ macro_rules! hex_check_neon {
     };
 }
 
-hex_check_neon!()
+hex_check_neon!();

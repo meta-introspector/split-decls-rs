@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Reader!();
-        RangeIter!();
-        Error!();
-        Result!();
         Range!();
+        RangeIter!();
+        Result!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_281 {
     };
 }
 
-impl_281!()
+impl_281!();

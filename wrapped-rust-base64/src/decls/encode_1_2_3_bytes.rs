@@ -11,4 +11,4 @@ macro_rules! encode_1_2_3_bytes {
     };
 }
 
-encode_1_2_3_bytes!()
+encode_1_2_3_bytes!();

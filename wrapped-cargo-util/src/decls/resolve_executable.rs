@@ -4,4 +4,4 @@ macro_rules! resolve_executable {
     };
 }
 
-resolve_executable!()
+resolve_executable!();

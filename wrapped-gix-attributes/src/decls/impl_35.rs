@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        NameRef!();
+        Match!();
+        MatchLocation!();
+        AssignmentRef!();
         MatchKind!();
         AttributeId!();
         Outcome!();
-        Match!();
-        AssignmentRef!();
         StateRef!();
-        MatchLocation!();
+        NameRef!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

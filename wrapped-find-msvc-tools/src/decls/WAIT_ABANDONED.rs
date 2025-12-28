@@ -11,4 +11,4 @@ macro_rules! WAIT_ABANDONED {
     };
 }
 
-WAIT_ABANDONED!()
+WAIT_ABANDONED!();

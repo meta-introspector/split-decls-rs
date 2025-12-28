@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        File!();
         Whitespace!();
-        Comment!();
+        File!();
         Header!();
+        Comment!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Event {
     };
 }
 
-Event!()
+Event!();

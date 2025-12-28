@@ -4,4 +4,4 @@ macro_rules! EntryKind {
     };
 }
 
-EntryKind!()
+EntryKind!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Writer!();
-        Section!();
         SectionId!();
+        Section!();
+        Writer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! define_section {
     };
 }
 
-define_section!()
+define_section!();

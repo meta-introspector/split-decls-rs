@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Properties!();
         CurveDefault!();
         Style!();
+        Properties!();
         LineType!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

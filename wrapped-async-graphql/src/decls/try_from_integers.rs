@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ID!();
         Error!();
+        ID!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! try_from_integers {
     };
 }
 
-try_from_integers!()
+try_from_integers!();

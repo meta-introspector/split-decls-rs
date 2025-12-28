@@ -1,0 +1,7 @@
+macro_rules! build_mir {
+    () => {
+        # [doc = " Create the MIR for a given `DefId`, including unreachable code. Do not call"] # [doc = " this directly; instead use the cached version via `mir_built`."] pub fn build_mir < 'tcx > (tcx : TyCtxt < 'tcx > , def : LocalDefId) -> Body < 'tcx > { tcx . ensure_done () . thir_abstract_const (def) ; if let Err (e) = tcx . ensure_ok () . check_match (def) { return construct_error (tcx , def , e) ; } if let Err (err) = tcx . ensure_ok () . check_tail_calls (def) { return construct_error (tcx , def , err) ; } let body = match tcx . thir_body (def) { Err (error_reported) => construct_error (tcx , def , error_reported) , Ok ((thir , expr)) => { let build_mir = | thir : & Thir < 'tcx > | match thir . body_type { thir :: BodyTy :: Fn (fn_sig) => construct_fn (tcx , def , thir , expr , fn_sig) , thir :: BodyTy :: Const (ty) | thir :: BodyTy :: GlobalAsm (ty) => { construct_const (tcx , def , thir , expr , ty) } } ; tcx . ensure_ok () . check_liveness (def) ; build_mir (& thir . borrow ()) } } ; debug_assert ! (! (body . local_decls . has_free_regions () || body . basic_blocks . has_free_regions () || body . var_debug_info . has_free_regions () || body . yield_ty () . has_free_regions ()) , "Unexpected free regions in MIR: {body:?}" ,) ; body }
+    };
+}
+
+build_mir!()

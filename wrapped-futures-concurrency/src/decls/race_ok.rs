@@ -4,4 +4,4 @@ macro_rules! race_ok {
     };
 }
 
-race_ok!()
+race_ok!();

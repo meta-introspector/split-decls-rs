@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        DisplayLifetime!();
+        BoundsFormattingCtx!();
+        DisplayTarget!();
+        DisplayKind!();
+        ClosureStyle!();
         HirWrite!();
         HirDatabase!();
-        DisplayLifetime!();
-        ClosureStyle!();
-        DisplayKind!();
-        DisplayTarget!();
-        BoundsFormattingCtx!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! HirFormatter {
     };
 }
 
-HirFormatter!()
+HirFormatter!();

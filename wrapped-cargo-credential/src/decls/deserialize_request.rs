@@ -12,4 +12,4 @@ macro_rules! deserialize_request {
     };
 }
 
-deserialize_request!()
+deserialize_request!();

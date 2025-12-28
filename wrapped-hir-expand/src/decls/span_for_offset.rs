@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ExpansionSpanMap!();
         ExpandDatabase!();
         FileRange!();
-        ExpansionSpanMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! span_for_offset {
     };
 }
 
-span_for_offset!()
+span_for_offset!();

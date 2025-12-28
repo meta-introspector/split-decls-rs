@@ -4,4 +4,4 @@ macro_rules! copy_buf {
     };
 }
 
-copy_buf!()
+copy_buf!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EncodeError!();
-        Encoder!();
         Encode!();
+        Encoder!();
+        EncodeError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

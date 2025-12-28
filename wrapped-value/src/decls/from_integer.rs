@@ -11,4 +11,4 @@ macro_rules! from_integer {
     };
 }
 
-from_integer!()
+from_integer!();

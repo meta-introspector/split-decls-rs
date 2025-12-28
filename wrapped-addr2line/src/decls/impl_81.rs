@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        LazyResult!();
-        LazyFunctions!();
-        UnitRange!();
-        RangeAttributes!();
-        ResUnits!();
         Error!();
+        ResUnit!();
+        LazyResult!();
+        Result!();
+        LazyFunctions!();
+        LazyLines!();
+        UnitRange!();
         LocationRangeIter!();
         UnitRef!();
-        Result!();
-        LazyLines!();
-        ResUnit!();
+        ResUnits!();
+        RangeAttributes!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

@@ -4,4 +4,4 @@ macro_rules! BIG5_ASTRALNESS {
     };
 }
 
-BIG5_ASTRALNESS!()
+BIG5_ASTRALNESS!();

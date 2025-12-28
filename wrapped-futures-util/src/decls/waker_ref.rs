@@ -4,4 +4,4 @@ macro_rules! waker_ref {
     };
 }
 
-waker_ref!()
+waker_ref!();

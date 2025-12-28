@@ -15,4 +15,4 @@ macro_rules! classify {
     };
 }
 
-classify!()
+classify!();

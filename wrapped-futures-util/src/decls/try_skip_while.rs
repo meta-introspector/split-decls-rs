@@ -4,4 +4,4 @@ macro_rules! try_skip_while {
     };
 }
 
-try_skip_while!()
+try_skip_while!();

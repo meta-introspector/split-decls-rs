@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Field!();
         BaseField!();
         InputValue!();
         TypeRef!();
+        Field!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_405 {
     };
 }
 
-impl_405!()
+impl_405!();

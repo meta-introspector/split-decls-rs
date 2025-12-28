@@ -4,4 +4,4 @@ macro_rules! FoldStop {
     };
 }
 
-FoldStop!()
+FoldStop!();

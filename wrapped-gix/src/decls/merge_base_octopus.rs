@@ -11,4 +11,4 @@ macro_rules! merge_base_octopus {
     };
 }
 
-merge_base_octopus!()
+merge_base_octopus!();

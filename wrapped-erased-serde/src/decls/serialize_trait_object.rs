@@ -4,4 +4,4 @@ macro_rules! serialize_trait_object {
     };
 }
 
-serialize_trait_object!()
+serialize_trait_object!();

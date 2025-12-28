@@ -4,4 +4,4 @@ macro_rules! as_array {
     };
 }
 
-as_array!()
+as_array!();

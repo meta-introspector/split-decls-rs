@@ -11,4 +11,4 @@ macro_rules! trusted_header_field {
     };
 }
 
-trusted_header_field!()
+trusted_header_field!();

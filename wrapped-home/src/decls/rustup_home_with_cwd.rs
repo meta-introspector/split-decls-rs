@@ -4,4 +4,4 @@ macro_rules! rustup_home_with_cwd {
     };
 }
 
-rustup_home_with_cwd!()
+rustup_home_with_cwd!();

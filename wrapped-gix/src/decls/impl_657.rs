@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Key!();
         Section!();
         Gitoxide!();
+        Key!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_657 {
     };
 }
 
-impl_657!()
+impl_657!();

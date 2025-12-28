@@ -4,4 +4,4 @@ macro_rules! timer_after {
     };
 }
 
-timer_after!()
+timer_after!();

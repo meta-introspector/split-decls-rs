@@ -4,4 +4,4 @@ macro_rules! to_owned {
     };
 }
 
-to_owned!()
+to_owned!();

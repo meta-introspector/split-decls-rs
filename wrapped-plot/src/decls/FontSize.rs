@@ -4,4 +4,4 @@ macro_rules! FontSize {
     };
 }
 
-FontSize!()
+FontSize!();

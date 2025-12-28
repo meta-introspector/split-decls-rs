@@ -4,4 +4,4 @@ macro_rules! usize_range {
     };
 }
 
-usize_range!()
+usize_range!();

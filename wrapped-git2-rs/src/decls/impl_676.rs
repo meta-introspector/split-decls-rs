@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
         Credentials!();
-        Oid!();
         Progress!();
-        CertificateCheck!();
-        PushTransferProgress!();
-        Cred!();
-        Error!();
-        PackProgress!();
-        PushUpdate!();
-        PushNegotiation!();
-        RemoteCallbacks!();
-        PackBuilderStage!();
-        PushUpdateReference!();
         CertificateCheckStatus!();
-        TransportMessage!();
+        Cred!();
+        CertificateCheck!();
         Cert!();
-        UpdateTips!();
         IndexerProgress!();
+        RemoteCallbacks!();
+        TransportMessage!();
+        PushUpdateReference!();
+        PackBuilderStage!();
+        PackProgress!();
+        Error!();
+        UpdateTips!();
+        PushNegotiation!();
+        PushUpdate!();
+        PushTransferProgress!();
+        Oid!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_676 {
     };
 }
 
-impl_676!()
+impl_676!();

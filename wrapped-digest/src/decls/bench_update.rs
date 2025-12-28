@@ -11,4 +11,4 @@ macro_rules! bench_update {
     };
 }
 
-bench_update!()
+bench_update!();

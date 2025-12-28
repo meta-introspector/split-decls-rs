@@ -4,4 +4,4 @@ macro_rules! TZDATA_VERSION_LEN {
     };
 }
 
-TZDATA_VERSION_LEN!()
+TZDATA_VERSION_LEN!();

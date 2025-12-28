@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Remote!();
-        Name!();
-        Note!();
         Item!();
-        PrepareFetch!();
+        Name!();
         Error!();
+        Note!();
+        PrepareFetch!();
+        Remote!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_90 {
     };
 }
 
-impl_90!()
+impl_90!();

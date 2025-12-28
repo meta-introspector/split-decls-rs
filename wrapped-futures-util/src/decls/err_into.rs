@@ -4,4 +4,4 @@ macro_rules! err_into {
     };
 }
 
-err_into!()
+err_into!();

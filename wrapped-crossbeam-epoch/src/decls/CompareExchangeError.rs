@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Pointer!();
-        Pointable!();
         Shared!();
+        Pointable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CompareExchangeError {
     };
 }
 
-CompareExchangeError!()
+CompareExchangeError!();

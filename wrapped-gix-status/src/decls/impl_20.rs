@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Conflict!();
-        CompareBlobs!();
-        Entry!();
-        SubmoduleStatus!();
-        StatusResult!();
-        EntryStatus!();
-        Change!();
-        ConflictIndexEntry!();
-        ReadDataImpl!();
         State!();
+        Conflict!();
+        Entry!();
+        ConflictIndexEntry!();
+        Change!();
+        StatusResult!();
+        SubmoduleStatus!();
         Error!();
+        EntryStatus!();
+        ReadDataImpl!();
+        CompareBlobs!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

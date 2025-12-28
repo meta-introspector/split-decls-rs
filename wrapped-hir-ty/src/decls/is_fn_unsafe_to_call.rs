@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TargetFeatures!();
-        TargetFeatureIsSafeInTarget!();
         Unsafety!();
+        TargetFeatures!();
         HirDatabase!();
+        TargetFeatureIsSafeInTarget!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! is_fn_unsafe_to_call {
     };
 }
 
-is_fn_unsafe_to_call!()
+is_fn_unsafe_to_call!();

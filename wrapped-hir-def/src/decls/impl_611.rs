@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ItemLoc!();
-        AstIdLoc!();
         ModuleId!();
+        AstIdLoc!();
+        ItemLoc!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_611 {
     };
 }
 
-impl_611!()
+impl_611!();

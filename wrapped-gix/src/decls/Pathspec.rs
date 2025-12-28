@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Repository!();
-        Clone!();
         Note!();
+        Clone!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Pathspec {
     };
 }
 
-Pathspec!()
+Pathspec!();

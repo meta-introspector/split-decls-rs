@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ReceiverFlavor!();
-        Receiver!();
         Token!();
+        Receiver!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! read {
     };
 }
 
-read!()
+read!();

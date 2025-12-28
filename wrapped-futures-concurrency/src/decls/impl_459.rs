@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PollVec!();
-        WakerVec!();
         Merge!();
+        WakerVec!();
         Indexer!();
+        PollVec!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_459 {
     };
 }
 
-impl_459!()
+impl_459!();

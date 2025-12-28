@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Punct!();
         Literal!();
         Ident!();
+        Punct!();
     };
 }
 

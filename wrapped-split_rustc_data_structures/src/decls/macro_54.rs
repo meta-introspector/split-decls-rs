@@ -1,0 +1,7 @@
+macro_rules! macro_54 {
+    () => {
+        cfg_select ! { target_os = "linux" => { mod linux ; use linux as imp ; } target_os = "redox" => { mod linux ; use linux as imp ; } unix => { mod unix ; use unix as imp ; } windows => { mod windows ; use self :: windows as imp ; } _ => { mod unsupported ; use unsupported as imp ; } }
+    };
+}
+
+macro_54!()

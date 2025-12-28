@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        TomlError!();
+    };
+}
+
+macro_rules! impl_64 {
+    () => {
+        deps!();
+        impl TomlError { # [cfg (feature = "parse")] pub (crate) fn new (input : std :: sync :: Arc < str > , error : toml_parser :: ParseError) -> Self { let mut message = String :: new () ; message . push_str (error . description ()) ; if let Some (expected) = error . expected () { message . push_str (", expected ") ; if expected . is_empty () { message . push_str ("nothing") ; } else { for (i , expected) in expected . iter () . enumerate () { if i != 0 { message . push_str (", ") ; } match expected { toml_parser :: Expected :: Literal (desc) => { message . push_str (& render_literal (desc)) ; } toml_parser :: Expected :: Description (desc) => message . push_str (desc) , _ => message . push_str ("etc") , } } } } let span = error . unexpected () . map (| span | span . start () .. span . end ()) ; Self { message , input : Some (input) , keys : Vec :: new () , span , } } # [cfg (feature = "serde")] pub (crate) fn custom (message : String , span : Option < std :: ops :: Range < usize > >) -> Self { Self { message , input : None , keys : Vec :: new () , span , } } # [cfg (feature = "serde")] pub (crate) fn add_key (& mut self , key : String) { self . keys . insert (0 , key) ; } # [doc = " What went wrong"] pub fn message (& self) -> & str { & self . message } # [doc = " The start/end index into the original document where the error occurred"] pub fn span (& self) -> Option < std :: ops :: Range < usize > > { self . span . clone () } # [cfg (feature = "serde")] pub (crate) fn set_span (& mut self , span : Option < std :: ops :: Range < usize > >) { self . span = span ; } # [cfg (feature = "serde")] pub (crate) fn set_input (& mut self , input : Option < & str >) { self . input = input . map (| s | s . into ()) ; } }
+    };
+}
+
+impl_64!()

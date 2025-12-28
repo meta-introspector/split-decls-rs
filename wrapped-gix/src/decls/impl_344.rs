@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        IndexStorage!();
         Cache!();
+        Options!();
         ThreadSafeRepository!();
-        RefStore!();
+        CommitsStorage!();
         OdbHandle!();
         Repository!();
-        CommitsStorage!();
-        Options!();
+        IndexStorage!();
         ModulesFileStorage!();
+        RefStore!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_344 {
     };
 }
 
-impl_344!()
+impl_344!();

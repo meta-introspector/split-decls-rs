@@ -4,4 +4,4 @@ macro_rules! recursion_guard {
     };
 }
 
-recursion_guard!()
+recursion_guard!();

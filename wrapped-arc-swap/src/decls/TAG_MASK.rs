@@ -4,4 +4,4 @@ macro_rules! TAG_MASK {
     };
 }
 
-TAG_MASK!()
+TAG_MASK!();

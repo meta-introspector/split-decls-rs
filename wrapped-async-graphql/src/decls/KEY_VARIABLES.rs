@@ -4,4 +4,4 @@ macro_rules! KEY_VARIABLES {
     };
 }
 
-KEY_VARIABLES!()
+KEY_VARIABLES!();

@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        Measurement!();
-        Gnuplot!();
-        Html!();
-        ReportContext!();
-        CliReport!();
-        CliVerbosity!();
-        Mode!();
-        OutgoingMessage!();
-        BenchmarkGroup!();
         BenchmarkFilter!();
         PlotConfiguration!();
         Duration!();
-        Error!();
-        Profiler!();
-        Criterion!();
-        PlottingBackend!();
-        ListFormat!();
         Baseline!();
+        Profiler!();
+        Gnuplot!();
         Sample!();
+        Criterion!();
+        Html!();
+        BenchmarkGroup!();
+        CliVerbosity!();
+        OutgoingMessage!();
+        Mode!();
+        Error!();
+        PlottingBackend!();
+        Measurement!();
+        CliReport!();
+        ListFormat!();
+        ReportContext!();
     };
 }
 
@@ -43,4 +43,4 @@ https://bheisler.github.io/criterion.rs/book/faq.html
     };
 }
 
-impl_403!()
+impl_403!();

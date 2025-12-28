@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NaiveDateTime!();
         TimeDelta!();
+        NaiveDateTime!();
         NaiveDate!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! test_datetime_sub {
     };
 }
 
-test_datetime_sub!()
+test_datetime_sub!();

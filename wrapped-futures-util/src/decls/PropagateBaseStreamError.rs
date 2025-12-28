@@ -4,4 +4,4 @@ macro_rules! PropagateBaseStreamError {
     };
 }
 
-PropagateBaseStreamError!()
+PropagateBaseStreamError!();

@@ -11,4 +11,4 @@ macro_rules! common_suffix {
     };
 }
 
-common_suffix!()
+common_suffix!();

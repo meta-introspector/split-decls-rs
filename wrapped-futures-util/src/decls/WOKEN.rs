@@ -4,4 +4,4 @@ macro_rules! WOKEN {
     };
 }
 
-WOKEN!()
+WOKEN!();

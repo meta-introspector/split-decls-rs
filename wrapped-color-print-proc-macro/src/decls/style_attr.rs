@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         Change!();
-        Result!();
         Input!();
+        Error!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! style_attr {
     };
 }
 
-style_attr!()
+style_attr!();

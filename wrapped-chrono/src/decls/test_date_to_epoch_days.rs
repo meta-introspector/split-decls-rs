@@ -11,4 +11,4 @@ macro_rules! test_date_to_epoch_days {
     };
 }
 
-test_date_to_epoch_days!()
+test_date_to_epoch_days!();

@@ -4,4 +4,4 @@ macro_rules! PatFieldPtr {
     };
 }
 
-PatFieldPtr!()
+PatFieldPtr!();

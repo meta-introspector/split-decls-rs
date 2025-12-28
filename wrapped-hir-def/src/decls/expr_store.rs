@@ -4,4 +4,4 @@ macro_rules! expr_store {
     };
 }
 
-expr_store!()
+expr_store!();

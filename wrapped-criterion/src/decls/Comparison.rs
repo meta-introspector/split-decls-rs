@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConfidenceInterval!();
         Plot!();
+        ConfidenceInterval!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Comparison {
     };
 }
 
-Comparison!()
+Comparison!();

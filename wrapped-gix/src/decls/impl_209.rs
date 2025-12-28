@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Change!();
         Rewrite!();
+        Change!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

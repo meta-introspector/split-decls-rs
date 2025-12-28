@@ -1,0 +1,7 @@
+macro_rules! PR_SCHED_CORE_SCOPE_PROCESS_GROUP {
+    () => {
+        const PR_SCHED_CORE_SCOPE_PROCESS_GROUP : u32 = 2 ;
+    };
+}
+
+PR_SCHED_CORE_SCOPE_PROCESS_GROUP!()

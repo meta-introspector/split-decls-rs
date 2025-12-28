@@ -4,4 +4,4 @@ macro_rules! rustflags {
     };
 }
 
-rustflags!()
+rustflags!();

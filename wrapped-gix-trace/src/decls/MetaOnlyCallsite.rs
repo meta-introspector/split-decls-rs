@@ -4,4 +4,4 @@ macro_rules! MetaOnlyCallsite {
     };
 }
 
-MetaOnlyCallsite!()
+MetaOnlyCallsite!();

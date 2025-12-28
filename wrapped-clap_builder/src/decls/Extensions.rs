@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FlatMap!();
         AnyValueId!();
         AnyValue!();
+        FlatMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Extensions {
     };
 }
 
-Extensions!()
+Extensions!();

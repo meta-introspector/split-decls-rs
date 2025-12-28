@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Context!();
+        Review!();
+    };
+}
+
+macro_rules! render_variable_block_ident {
+    () => {
+        deps!();
+        # [test] fn render_variable_block_ident () { let mut context = Context :: new () ; context . insert ("name" , & "john") ; context . insert ("malicious" , & "<html>") ; context . insert ("a" , & 2) ; context . insert ("b" , & 3) ; context . insert ("numbers" , & vec ! [1 , 2 , 3]) ; context . insert ("tuple_list" , & vec ! [(1 , 2 , 3) , (1 , 2 , 3)]) ; context . insert ("review" , & Review :: new ()) ; context . insert ("with_newline" , & "Animal Alphabets\nB is for Bee-Eater") ; let inputs = vec ! [("{{ name }}" , "john") , ("{{ malicious }}" , "&lt;html&gt;") , ("{{ \"<html>\" }}" , "&lt;html&gt;") , ("{{ \" html \" | upper | trim }}" , "HTML") , ("{{ 'html' }}" , "html") , ("{{ `html` }}" , "html") , (r#"{{ 'hangar new "Will Smoth <will_s@example.com>"' | safe }}"# , r#"hangar new "Will Smoth <will_s@example.com>""# ,) , ("{{ malicious | safe }}" , "<html>") , ("{{ malicious | upper }}" , "&lt;HTML&gt;") , ("{{ malicious | upper | safe }}" , "<HTML>") , ("{{ malicious | safe | upper }}" , "&lt;HTML&gt;") , ("{{ review | length }}" , "2") , ("{{ review.paragraphs.1 }}" , "B") , ("{{ numbers }}" , "[1, 2, 3]") , ("{{ numbers.0 }}" , "1") , ("{{ tuple_list.1.1 }}" , "2") , ("{{ name and true }}" , "true") , ("{{ name | length }}" , "4") , ("{{ name is defined }}" , "true") , ("{{ not name is defined }}" , "false") , ("{{ name is not defined }}" , "false") , ("{{ not name is not defined }}" , "true") , ("{{ a is odd }}" , "false") , ("{{ a is odd or b is odd  }}" , "true") , ("{{ range(start=1, end=4) }}" , "[1, 2, 3]") , ("{{ a + b }}" , "5") , ("{{ a + 1.5 }}" , "3.5") , ("{{ 1 + 1 + 1 }}" , "3") , ("{{ 2 - 2 - 1 }}" , "-1") , ("{{ 1 - 1 + 1 }}" , "1") , ("{{ 1 + get_number() }}" , "11") , ("{{ get_number() + 1 }}" , "11") , ("{{ (1.9 + a) | round }}" , "4") , ("{{ 1.9 + a | round }}" , "4") , ("{{ numbers | length - 1 }}" , "2") , ("{{ 1.9 + a | round - 1 }}" , "3") , ("{{ 1.9 + a | round - 1.8 + a | round }}" , "0") , ("{{ 1.9 + a | round - 1.8 + a | round - 1 }}" , "-1") , ("{{ 4 + 40 / (2 + 8) / 4 }}" , "5") , ("{{ ( ( 2 ) + ( 2 ) ) }}" , "4") , ("{{ ( ( 4 / 1 ) + ( 2 / 1 ) ) }}" , "6") , ("{{ ( ( 4 + 2 ) / ( 2 + 1 ) ) }}" , "2") , ("{{ with_newline | replace(from='\n', to='<br>') | safe }}" , "Animal Alphabets<br>B is for Bee-Eater" ,) ,] ; for (input , expected) in inputs { println ! ("{:?} -> {:?}" , input , expected) ; assert_eq ! (render_template (input , & context) . unwrap () , expected) ; } }
+    };
+}
+
+render_variable_block_ident!()

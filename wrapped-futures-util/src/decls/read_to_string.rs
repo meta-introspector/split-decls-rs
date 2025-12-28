@@ -4,4 +4,4 @@ macro_rules! read_to_string {
     };
 }
 
-read_to_string!()
+read_to_string!();

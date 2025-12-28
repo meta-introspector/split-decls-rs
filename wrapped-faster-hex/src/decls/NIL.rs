@@ -4,4 +4,4 @@ macro_rules! NIL {
     };
 }
 
-NIL!()
+NIL!();

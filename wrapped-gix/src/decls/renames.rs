@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Section!();
         Renames!();
-        Error!();
         Any!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! renames {
     };
 }
 
-renames!()
+renames!();

@@ -4,4 +4,4 @@ macro_rules! drop_initialized_values {
     };
 }
 
-drop_initialized_values!()
+drop_initialized_values!();

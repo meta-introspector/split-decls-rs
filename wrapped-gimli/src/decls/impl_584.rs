@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LittleEndian!();
+        DebugStrOffset!();
         Result!();
         DebugStr!();
-        DebugStrOffset!();
         Reader!();
+        LittleEndian!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_584 {
     };
 }
 
-impl_584!()
+impl_584!();

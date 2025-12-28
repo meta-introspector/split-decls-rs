@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        EntryStatus!();
-        Delegate!();
-        State!();
-        Context!();
-        RewriteSource!();
-        Outcome!();
-        SubmoduleStatus!();
-        Entry!();
         Record!();
-        Options!();
-        Conflict!();
+        State!();
         Change!();
-        CompareBlobs!();
+        Delegate!();
+        SubmoduleStatus!();
+        EntryStatus!();
+        Outcome!();
         Error!();
+        Conflict!();
+        RewriteSource!();
+        CompareBlobs!();
+        Entry!();
+        Options!();
+        Context!();
         VisitEntry!();
     };
 }
@@ -25,4 +25,4 @@ macro_rules! function {
     };
 }
 
-function!()
+function!();

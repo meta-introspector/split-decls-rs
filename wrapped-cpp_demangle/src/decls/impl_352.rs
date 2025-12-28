@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Result!();
-        SubstitutionTable!();
-        MangledName!();
-        IndexStr!();
-        Parse!();
-        ParseContext!();
         Symbol!();
         ParseOptions!();
+        Result!();
+        ParseContext!();
+        MangledName!();
         BorrowedSymbol!();
+        IndexStr!();
+        Parse!();
+        SubstitutionTable!();
     };
 }
 
@@ -23,4 +23,4 @@ substitutions = {:#?}" , String :: from_utf8_lossy (symbol . raw) , symbol . par
     };
 }
 
-impl_352!()
+impl_352!();

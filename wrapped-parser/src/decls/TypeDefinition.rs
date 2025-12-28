@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Positioned!();
-        TypeKind!();
         ConstDirective!();
+        TypeKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TypeDefinition {
     };
 }
 
-TypeDefinition!()
+TypeDefinition!();

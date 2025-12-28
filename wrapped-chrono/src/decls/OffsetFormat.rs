@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        OffsetPrecision!();
         Pad!();
         Colons!();
-        OffsetPrecision!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! OffsetFormat {
     };
 }
 
-OffsetFormat!()
+OffsetFormat!();

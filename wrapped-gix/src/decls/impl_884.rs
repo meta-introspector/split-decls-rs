@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ObjectKindHint!();
         Kind!();
         Delegate!();
-        ObjectKindHint!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_884 {
     };
 }
 
-impl_884!()
+impl_884!();

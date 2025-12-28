@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         ReadlineBufRead!();
         HeadersThenBody!();
-        Error!();
         Http!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

@@ -11,4 +11,4 @@ macro_rules! write_to {
     };
 }
 
-write_to!()
+write_to!();

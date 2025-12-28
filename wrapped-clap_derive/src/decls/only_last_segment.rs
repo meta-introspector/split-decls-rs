@@ -4,4 +4,4 @@ macro_rules! only_last_segment {
     };
 }
 
-only_last_segment!()
+only_last_segment!();

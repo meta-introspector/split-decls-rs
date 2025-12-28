@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Aliasing!();
+        Alignment!();
+        Shared!();
+        Invariants!();
+    };
+}
+
+macro_rules! _external {
+    () => {
+        deps!();
+        # [doc = " External trait implementations on [`Ptr`]."] mod _external { use super :: * ; # [doc = " SAFETY: Shared pointers are safely `Copy`. `Ptr`'s other invariants"] # [doc = " (besides aliasing) are unaffected by the number of references that exist"] # [doc = " to `Ptr`'s referent. The notable cases are:"] # [doc = " - Alignment is a property of the referent type (`T`) and the address,"] # [doc = "   both of which are unchanged"] # [doc = " - Let `S(T, V)` be the set of bit values permitted to appear in the"] # [doc = "   referent of a `Ptr<T, I: Invariants<Validity = V>>`. Since this copy"] # [doc = "   does not change `I::Validity` or `T`, `S(T, I::Validity)` is also"] # [doc = "   unchanged."] # [doc = ""] # [doc = "   We are required to guarantee that the referents of the original `Ptr`"] # [doc = "   and of the copy (which, of course, are actually the same since they"] # [doc = "   live in the same byte address range) both remain in the set `S(T,"] # [doc = "   I::Validity)`. Since this invariant holds on the original `Ptr`, it"] # [doc = "   cannot be violated by the original `Ptr`, and thus the original `Ptr`"] # [doc = "   cannot be used to violate this invariant on the copy. The inverse"] # [doc = "   holds as well."] impl < 'a , T , I > Copy for Ptr < 'a , T , I > where T : 'a + ? Sized , I : Invariants < Aliasing = Shared > , { } # [doc = " SAFETY: See the safety comment on `Copy`."] impl < 'a , T , I > Clone for Ptr < 'a , T , I > where T : 'a + ? Sized , I : Invariants < Aliasing = Shared > , { # [inline] fn clone (& self) -> Self { * self } } impl < 'a , T , I > Debug for Ptr < 'a , T , I > where T : 'a + ? Sized , I : Invariants , { # [inline] fn fmt (& self , f : & mut Formatter < '_ >) -> core :: fmt :: Result { self . as_inner () . as_non_null () . fmt (f) } } }
+    };
+}
+
+_external!()

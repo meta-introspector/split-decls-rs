@@ -12,4 +12,4 @@ macro_rules! parse_or_expand {
     };
 }
 
-parse_or_expand!()
+parse_or_expand!();

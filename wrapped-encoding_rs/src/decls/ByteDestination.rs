@@ -4,4 +4,4 @@ macro_rules! ByteDestination {
     };
 }
 
-ByteDestination!()
+ByteDestination!();

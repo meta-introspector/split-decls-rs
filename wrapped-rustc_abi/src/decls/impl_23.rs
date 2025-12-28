@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Endian!();
+        ExternAbi!();
     };
 }
 
 macro_rules! impl_23 {
     () => {
         deps!();
-        impl Endian { pub fn as_str (& self) -> & 'static str { match self { Self :: Little => "little" , Self :: Big => "big" , } } }
+        # [cfg (feature = "nightly")] impl < C > HashStable < C > for ExternAbi { # [inline] fn hash_stable (& self , _ : & mut C , hasher : & mut StableHasher) { Hash :: hash (self , hasher) ; } }
     };
 }
 

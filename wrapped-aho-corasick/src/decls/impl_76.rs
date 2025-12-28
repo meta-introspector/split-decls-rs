@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        BuildError!();
         NFA!();
-        Builder!();
-        State!();
-        MatchKind!();
         Special!();
+        BuildError!();
+        MatchKind!();
+        Builder!();
         ByteClasses!();
+        State!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

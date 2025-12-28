@@ -11,4 +11,4 @@ macro_rules! decode_to_string {
     };
 }
 
-decode_to_string!()
+decode_to_string!();

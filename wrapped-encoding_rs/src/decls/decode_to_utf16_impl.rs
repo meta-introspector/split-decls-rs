@@ -11,4 +11,4 @@ macro_rules! decode_to_utf16_impl {
     };
 }
 
-decode_to_utf16_impl!()
+decode_to_utf16_impl!();

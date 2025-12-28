@@ -4,4 +4,4 @@ macro_rules! Rebase {
     };
 }
 
-Rebase!()
+Rebase!();

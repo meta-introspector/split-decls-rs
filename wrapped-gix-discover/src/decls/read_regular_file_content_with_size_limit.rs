@@ -12,4 +12,4 @@ macro_rules! read_regular_file_content_with_size_limit {
     };
 }
 
-read_regular_file_content_with_size_limit!()
+read_regular_file_content_with_size_limit!();

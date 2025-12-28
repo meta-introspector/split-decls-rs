@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Context!();
-        SubscriptionType!();
         EmptySubscription!();
+        SubscriptionType!();
+        Context!();
+        Registry!();
+        MetaType!();
+        Schema!();
+        Object!();
         Response!();
         ServerError!();
-        MetaType!();
-        Object!();
-        Registry!();
-        Schema!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_758 {
     };
 }
 
-impl_758!()
+impl_758!();

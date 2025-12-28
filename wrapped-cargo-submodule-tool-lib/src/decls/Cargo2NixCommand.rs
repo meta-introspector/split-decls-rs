@@ -4,4 +4,4 @@ macro_rules! Cargo2NixCommand {
     };
 }
 
-Cargo2NixCommand!()
+Cargo2NixCommand!();

@@ -4,4 +4,4 @@ macro_rules! async_io {
     };
 }
 
-async_io!()
+async_io!();

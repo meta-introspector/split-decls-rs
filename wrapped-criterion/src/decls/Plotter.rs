@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ValueType!();
-        BenchmarkId!();
-        ValueFormatter!();
         PlotContext!();
         PlotData!();
+        ValueFormatter!();
+        BenchmarkId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Plotter {
     };
 }
 
-Plotter!()
+Plotter!();

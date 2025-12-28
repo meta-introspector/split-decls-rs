@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        QueryPathNode!();
-        Result!();
-        QueryPathSegment!();
         Parents!();
+        Result!();
+        QueryPathNode!();
+        QueryPathSegment!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_340 {
     };
 }
 
-impl_340!()
+impl_340!();

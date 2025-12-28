@@ -4,4 +4,4 @@ macro_rules! ComplexMemoryMap {
     };
 }
 
-ComplexMemoryMap!()
+ComplexMemoryMap!();

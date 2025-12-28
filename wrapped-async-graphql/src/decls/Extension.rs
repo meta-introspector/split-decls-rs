@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        ServerError!();
-        NextPrepareRequest!();
-        NextSubscribe!();
-        Request!();
-        Result!();
-        Response!();
         NextValidation!();
-        NextExecute!();
-        NextParseQuery!();
-        NextRequest!();
         ResolveInfo!();
-        ServerResult!();
-        ValidationResult!();
+        ServerError!();
+        Request!();
+        NextExecute!();
+        Response!();
+        NextSubscribe!();
         ExtensionContext!();
+        NextRequest!();
+        ValidationResult!();
+        ServerResult!();
         NextResolve!();
+        NextParseQuery!();
+        NextPrepareRequest!();
+        Result!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! Extension {
     };
 }
 
-Extension!()
+Extension!();

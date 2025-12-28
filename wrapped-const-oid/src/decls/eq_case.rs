@@ -4,4 +4,4 @@ macro_rules! eq_case {
     };
 }
 
-eq_case!()
+eq_case!();

@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        ImplTraitId!();
-        InternedClosure!();
-        TyDefId!();
-        InternedCoroutine!();
+        MirBody!();
         Diagnostics!();
-        EarlyBinder!();
-        LayoutError!();
-        DynCompatibilityViolation!();
-        Layout!();
+        InferenceResult!();
         ConstEvalError!();
-        TraitEnvironment!();
-        InternedClosureId!();
+        LayoutError!();
         PolyFnSig!();
         GenericDefaults!();
-        InternedOpaqueTyId!();
-        MirBody!();
+        InternedCoroutine!();
         InternedCoroutineId!();
+        EarlyBinder!();
+        TyDefId!();
+        DynCompatibilityViolation!();
         ValueTyDefId!();
-        InferenceResult!();
+        Layout!();
+        ImplTraitId!();
+        InternedOpaqueTyId!();
+        InternedClosureId!();
+        TraitEnvironment!();
+        InternedClosure!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! HirDatabase {
     };
 }
 
-HirDatabase!()
+HirDatabase!();

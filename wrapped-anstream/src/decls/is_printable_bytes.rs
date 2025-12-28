@@ -4,4 +4,4 @@ macro_rules! is_printable_bytes {
     };
 }
 
-is_printable_bytes!()
+is_printable_bytes!();

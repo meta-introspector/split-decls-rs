@@ -69,4 +69,4 @@ impl <> $crate::fmt::Debug for HideAndShowEnum< > where {
     };
 }
 
-test_debug_expand_with_cfg!()
+test_debug_expand_with_cfg!();

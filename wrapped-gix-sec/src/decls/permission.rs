@@ -4,4 +4,4 @@ macro_rules! permission {
     };
 }
 
-permission!()
+permission!();

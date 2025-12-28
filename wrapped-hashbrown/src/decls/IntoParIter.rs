@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashTable!();
         RawIntoParIter!();
+        HashTable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IntoParIter {
     };
 }
 
-IntoParIter!()
+IntoParIter!();

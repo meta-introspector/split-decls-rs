@@ -4,4 +4,4 @@ macro_rules! redirect {
     };
 }
 
-redirect!()
+redirect!();

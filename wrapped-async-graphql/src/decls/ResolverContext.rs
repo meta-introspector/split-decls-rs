@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FieldValue!();
         Field!();
-        Context!();
         ObjectAccessor!();
+        FieldValue!();
+        Context!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ResolverContext {
     };
 }
 
-ResolverContext!()
+ResolverContext!();

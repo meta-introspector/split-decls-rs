@@ -4,4 +4,4 @@ macro_rules! lang_items {
     };
 }
 
-lang_items!()
+lang_items!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SchemaError!();
         ScalarValidatorFn!();
+        SchemaError!();
         Directive!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Scalar {
     };
 }
 
-Scalar!()
+Scalar!();

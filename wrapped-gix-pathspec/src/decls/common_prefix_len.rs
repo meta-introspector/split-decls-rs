@@ -11,4 +11,4 @@ macro_rules! common_prefix_len {
     };
 }
 
-common_prefix_len!()
+common_prefix_len!();

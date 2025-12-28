@@ -4,4 +4,4 @@ macro_rules! SizedTypeProperties {
     };
 }
 
-SizedTypeProperties!()
+SizedTypeProperties!();

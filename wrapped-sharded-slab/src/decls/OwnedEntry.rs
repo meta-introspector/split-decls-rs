@@ -1,7 +1,10 @@
 macro_rules! deps {
     () => {
-        Slab!();
         Entry!();
+        Config!();
+        DefaultConfig!();
+        Guard!();
+        Slab!();
     };
 }
 

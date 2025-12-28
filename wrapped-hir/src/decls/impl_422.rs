@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeAlias!();
-        Crate!();
         HasCrate!();
+        Crate!();
+        TypeAlias!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_422 {
     };
 }
 
-impl_422!()
+impl_422!();

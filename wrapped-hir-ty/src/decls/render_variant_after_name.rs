@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TraitEnvironment!();
-        EarlyBinder!();
-        MemoryMap!();
         HirDisplayError!();
+        EarlyBinder!();
         HirFormatter!();
+        MemoryMap!();
         Layout!();
+        TraitEnvironment!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! render_variant_after_name {
     };
 }
 
-render_variant_after_name!()
+render_variant_after_name!();

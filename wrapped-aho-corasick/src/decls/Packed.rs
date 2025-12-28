@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Prefilter!();
         Searcher!();
+        Prefilter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Packed {
     };
 }
 
-Packed!()
+Packed!();

@@ -4,4 +4,4 @@ macro_rules! mode_to_byte {
     };
 }
 
-mode_to_byte!()
+mode_to_byte!();

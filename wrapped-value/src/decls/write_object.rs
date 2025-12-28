@@ -4,4 +4,4 @@ macro_rules! write_object {
     };
 }
 
-write_object!()
+write_object!();

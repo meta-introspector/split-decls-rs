@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Size!();
-        Set!();
         Figure!();
+        Set!();
+        Size!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

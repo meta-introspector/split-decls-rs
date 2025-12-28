@@ -4,4 +4,4 @@ macro_rules! set_invocation_time {
     };
 }
 
-set_invocation_time!()
+set_invocation_time!();

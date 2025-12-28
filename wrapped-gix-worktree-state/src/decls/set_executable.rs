@@ -11,4 +11,4 @@ macro_rules! set_executable {
     };
 }
 
-set_executable!()
+set_executable!();

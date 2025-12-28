@@ -4,4 +4,4 @@ macro_rules! is_lfs_pointer_file {
     };
 }
 
-is_lfs_pointer_file!()
+is_lfs_pointer_file!();

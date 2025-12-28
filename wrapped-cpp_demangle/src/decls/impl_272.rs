@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Name!();
-        IndexStr!();
-        ParseContext!();
         Discriminator!();
-        Encoding!();
+        Name!();
         Parse!();
+        Encoding!();
+        IndexStr!();
         Number!();
         Result!();
-        LocalName!();
+        ParseContext!();
         SubstitutionTable!();
+        LocalName!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_272 {
     };
 }
 
-impl_272!()
+impl_272!();

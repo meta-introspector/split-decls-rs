@@ -11,4 +11,4 @@ macro_rules! fiat_p256_set_one {
     };
 }
 
-fiat_p256_set_one!()
+fiat_p256_set_one!();

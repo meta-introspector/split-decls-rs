@@ -4,4 +4,4 @@ macro_rules! Oid {
     };
 }
 
-Oid!()
+Oid!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Context!();
         Node!();
+        Context!();
         SpanError!();
-        Error!();
         Result!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! get_untagged {
     };
 }
 
-get_untagged!()
+get_untagged!();

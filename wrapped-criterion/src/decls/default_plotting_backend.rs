@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PlottingBackend!();
         Gnuplot!();
+        PlottingBackend!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! default_plotting_backend {
     };
 }
 
-default_plotting_backend!()
+default_plotting_backend!();

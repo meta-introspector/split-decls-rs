@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Sample!();
         ValueFormatter!();
         BenchmarkId!();
+        Sample!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! line_comparison_series_data {
     };
 }
 
-line_comparison_series_data!()
+line_comparison_series_data!();

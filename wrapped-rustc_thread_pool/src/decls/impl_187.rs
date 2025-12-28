@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        HeapJob!();
+        Registry!();
+        Scope!();
+        ScopePtr!();
+        BroadcastContext!();
+        WorkerThread!();
+        ScopeBase!();
+        ArcJob!();
+    };
+}
+
+macro_rules! impl_187 {
+    () => {
+        deps!();
+        impl < 'scope > Scope < 'scope > { fn new (owner : Option < & WorkerThread > , registry : Option < & Arc < Registry > >) -> Self { let base = ScopeBase :: new (owner , registry) ; Scope { base } } # [doc = " Spawns a job into the fork-join scope `self`. This job will"] # [doc = " execute sometime before the fork-join scope completes. The"] # [doc = " job is specified as a closure, and this closure receives its"] # [doc = " own reference to the scope `self` as argument. This can be"] # [doc = " used to inject new jobs into `self`."] # [doc = ""] # [doc = " # Returns"] # [doc = ""] # [doc = " Nothing. The spawned closures cannot pass back values to the"] # [doc = " caller directly, though they can write to local variables on"] # [doc = " the stack (if those variables outlive the scope) or"] # [doc = " communicate through shared channels."] # [doc = ""] # [doc = " (The intention is to eventually integrate with Rust futures to"] # [doc = " support spawns of functions that compute a value.)"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use rustc_thread_pool as rayon;"] # [doc = " let mut value_a = None;"] # [doc = " let mut value_b = None;"] # [doc = " let mut value_c = None;"] # [doc = " rayon::scope(|s| {"] # [doc = "     s.spawn(|s1| {"] # [doc = "         //   ^ this is the same scope as `s`; this handle `s1`"] # [doc = "         //     is intended for use by the spawned task,"] # [doc = "         //     since scope handles cannot cross thread boundaries."] # [doc = ""] # [doc = "         value_a = Some(22);"] # [doc = ""] # [doc = "         // the scope `s` will not end until all these tasks are done"] # [doc = "         s1.spawn(|_| {"] # [doc = "             value_b = Some(44);"] # [doc = "         });"] # [doc = "     });"] # [doc = ""] # [doc = "     s.spawn(|_| {"] # [doc = "         value_c = Some(66);"] # [doc = "     });"] # [doc = " });"] # [doc = " assert_eq!(value_a, Some(22));"] # [doc = " assert_eq!(value_b, Some(44));"] # [doc = " assert_eq!(value_c, Some(66));"] # [doc = " ```"] # [doc = ""] # [doc = " # See also"] # [doc = ""] # [doc = " The [`scope` function] has more extensive documentation about"] # [doc = " task spawning."] # [doc = ""] # [doc = " [`scope` function]: fn.scope.html"] pub fn spawn < BODY > (& self , body : BODY) where BODY : FnOnce (& Scope < 'scope >) + Send + 'scope , { let scope_ptr = ScopePtr (self) ; let job = HeapJob :: new (self . base . tlv , move | id | unsafe { let scope = scope_ptr . as_ref () ; scope . base . pending_jobs . lock () . unwrap () . remove (& id) ; ScopeBase :: execute_job (& scope . base , move | | body (scope)) }) ; let job_ref = self . base . heap_job_ref (job) ; self . base . pending_jobs . lock () . unwrap () . insert (job_ref . id ()) ; self . base . registry . inject_or_push (job_ref) ; } # [doc = " Spawns a job into every thread of the fork-join scope `self`. This job will"] # [doc = " execute on each thread sometime before the fork-join scope completes. The"] # [doc = " job is specified as a closure, and this closure receives its own reference"] # [doc = " to the scope `self` as argument, as well as a `BroadcastContext`."] pub fn spawn_broadcast < BODY > (& self , body : BODY) where BODY : Fn (& Scope < 'scope > , BroadcastContext < '_ >) + Send + Sync + 'scope , { let scope_ptr = ScopePtr (self) ; let job = ArcJob :: new (move | id | unsafe { let scope = scope_ptr . as_ref () ; let body = & body ; let current_index = WorkerThread :: current () . as_ref () . map (| worker | worker . index ()) ; if current_index == scope . base . worker { scope . base . pending_jobs . lock () . unwrap () . remove (& id) ; } let func = move | | BroadcastContext :: with (move | ctx | body (scope , ctx)) ; ScopeBase :: execute_job (& scope . base , func) }) ; self . base . inject_broadcast (job) } }
+    };
+}
+
+impl_187!()

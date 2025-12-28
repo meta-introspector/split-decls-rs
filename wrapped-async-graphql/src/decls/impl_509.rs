@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Registry!();
-        Union!();
-        MetaType!();
         Result!();
         SchemaError!();
+        MetaType!();
+        Registry!();
+        Union!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_509 {
     };
 }
 
-impl_509!()
+impl_509!();

@@ -4,4 +4,4 @@ macro_rules! arguments {
     };
 }
 
-arguments!()
+arguments!();

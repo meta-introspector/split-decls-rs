@@ -4,4 +4,4 @@ macro_rules! get_der_key {
     };
 }
 
-get_der_key!()
+get_der_key!();

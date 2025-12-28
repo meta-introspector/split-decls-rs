@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Expr!();
+        Visitor!();
+        PatKind!();
+        Pat!();
+    };
+}
+
+macro_rules! walk_pat {
+    () => {
+        deps!();
+        pub fn walk_pat < 'v , V : Visitor < 'v > > (visitor : & mut V , pattern : & 'v Pat < 'v >) -> V :: Result { let Pat { hir_id , kind , span , default_binding_modes : _ } = pattern ; try_visit ! (visitor . visit_id (* hir_id)) ; match * kind { PatKind :: TupleStruct (ref qpath , children , _) => { try_visit ! (visitor . visit_qpath (qpath , * hir_id , * span)) ; walk_list ! (visitor , visit_pat , children) ; } PatKind :: Struct (ref qpath , fields , _) => { try_visit ! (visitor . visit_qpath (qpath , * hir_id , * span)) ; walk_list ! (visitor , visit_pat_field , fields) ; } PatKind :: Or (pats) => walk_list ! (visitor , visit_pat , pats) , PatKind :: Tuple (tuple_elements , _) => { walk_list ! (visitor , visit_pat , tuple_elements) ; } PatKind :: Box (ref subpattern) | PatKind :: Deref (ref subpattern) | PatKind :: Ref (ref subpattern , _) => { try_visit ! (visitor . visit_pat (subpattern)) ; } PatKind :: Binding (_ , _hir_id , ident , ref optional_subpattern) => { try_visit ! (visitor . visit_ident (ident)) ; visit_opt ! (visitor , visit_pat , optional_subpattern) ; } PatKind :: Expr (ref expression) => try_visit ! (visitor . visit_pat_expr (expression)) , PatKind :: Range (ref lower_bound , ref upper_bound , _) => { visit_opt ! (visitor , visit_pat_expr , lower_bound) ; visit_opt ! (visitor , visit_pat_expr , upper_bound) ; } PatKind :: Missing | PatKind :: Never | PatKind :: Wild | PatKind :: Err (_) => () , PatKind :: Slice (prepatterns , ref slice_pattern , postpatterns) => { walk_list ! (visitor , visit_pat , prepatterns) ; visit_opt ! (visitor , visit_pat , slice_pattern) ; walk_list ! (visitor , visit_pat , postpatterns) ; } PatKind :: Guard (subpat , condition) => { try_visit ! (visitor . visit_pat (subpat)) ; try_visit ! (visitor . visit_expr (condition)) ; } } V :: Result :: output () }
+    };
+}
+
+walk_pat!()

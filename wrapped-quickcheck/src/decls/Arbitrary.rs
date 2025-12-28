@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Gen!();
+    };
+}
+
+macro_rules! Arbitrary {
+    () => {
+        deps!();
+        # [doc = " `Arbitrary` describes types whose values can be randomly generated and"] # [doc = " shrunk."] # [doc = ""] # [doc = " Aside from shrinking, `Arbitrary` is different from typical RNGs in that it"] # [doc = " respects `Gen::size()` for controlling how much memory a particular value"] # [doc = " uses, for practical purposes. For example, `Vec::arbitrary()` respects"] # [doc = " `Gen::size()` to decide the maximum `len()` of the vector. This behavior is"] # [doc = " necessary due to practical speed and size limitations. Conversely,"] # [doc = " `i32::arbitrary()` ignores `size()` since all `i32` values require `O(1)`"] # [doc = " memory and operations between `i32`s require `O(1)` time (with the"] # [doc = " exception of exponentiation)."] # [doc = ""] # [doc = " Additionally, all types that implement `Arbitrary` must also implement"] # [doc = " `Clone`."] pub trait Arbitrary : Clone + 'static { # [doc = " Return an arbitrary value."] # [doc = ""] # [doc = " Implementations should respect `Gen::size()` when decisions about how"] # [doc = " big a particular value should be. Implementations should generally"] # [doc = " defer to other `Arbitrary` implementations to generate other random"] # [doc = " values when necessary. The `Gen` type also offers a few RNG helper"] # [doc = " routines."] fn arbitrary (g : & mut Gen) -> Self ; # [doc = " Return an iterator of values that are smaller than itself."] # [doc = ""] # [doc = " The way in which a value is \"smaller\" is implementation defined. In"] # [doc = " some cases, the interpretation is obvious: shrinking an integer should"] # [doc = " produce integers smaller than itself. Others are more complex, for"] # [doc = " example, shrinking a `Vec` should both shrink its size and shrink its"] # [doc = " component values."] # [doc = ""] # [doc = " The iterator returned should be bounded to some reasonable size."] # [doc = ""] # [doc = " It is always correct to return an empty iterator, and indeed, this"] # [doc = " is the default implementation. The downside of this approach is that"] # [doc = " witnesses to failures in properties will be more inscrutable."] fn shrink (& self) -> Box < dyn Iterator < Item = Self > > { empty_shrinker () } }
+    };
+}
+
+Arbitrary!()

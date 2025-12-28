@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TestRegistry!();
         RegistryBuilder!();
+        TestRegistry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! alt_init {
     };
 }
 
-alt_init!()
+alt_init!();

@@ -4,4 +4,4 @@ macro_rules! data_by_kind {
     };
 }
 
-data_by_kind!()
+data_by_kind!();

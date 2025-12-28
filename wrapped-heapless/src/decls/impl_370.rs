@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        PeekMutInner!();
-        PeekMut!();
-        IterMut!();
-        BinaryHeap!();
-        BinaryHeapInner!();
-        Hole!();
-        Iter!();
         Kind!();
         Max!();
+        Iter!();
+        Hole!();
+        IterMut!();
+        BinaryHeapInner!();
+        PeekMutInner!();
+        PeekMut!();
+        BinaryHeap!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_370 {
     };
 }
 
-impl_370!()
+impl_370!();

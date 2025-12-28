@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Error!();
+        Convert!();
         Signature!();
         Binding!();
-        Convert!();
         Time!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_721 {
     };
 }
 
-impl_721!()
+impl_721!();

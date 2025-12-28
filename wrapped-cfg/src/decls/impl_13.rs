@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         InactiveReason!();
-        DnfExpr!();
-        CfgOptions!();
         CfgDiff!();
-        Builder!();
+        DnfExpr!();
         CfgExpr!();
+        CfgOptions!();
+        Builder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

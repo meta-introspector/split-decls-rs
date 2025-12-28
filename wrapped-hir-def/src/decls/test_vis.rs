@@ -16,4 +16,4 @@ fn foo() {}
     };
 }
 
-test_vis!()
+test_vis!();

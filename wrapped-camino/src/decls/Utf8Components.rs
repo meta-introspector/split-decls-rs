@@ -11,4 +11,4 @@ macro_rules! Utf8Components {
     };
 }
 
-Utf8Components!()
+Utf8Components!();

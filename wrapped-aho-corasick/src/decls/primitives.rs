@@ -4,4 +4,4 @@ macro_rules! primitives {
     };
 }
 
-primitives!()
+primitives!();

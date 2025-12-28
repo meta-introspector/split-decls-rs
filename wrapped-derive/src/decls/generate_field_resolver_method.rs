@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OutputType!();
-        GeneratorResult!();
-        FieldResolver!();
         FieldResolverParameter!();
         Object!();
+        OutputType!();
         ObjectField!();
+        GeneratorResult!();
+        FieldResolver!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! generate_field_resolver_method {
     };
 }
 
-generate_field_resolver_method!()
+generate_field_resolver_method!();

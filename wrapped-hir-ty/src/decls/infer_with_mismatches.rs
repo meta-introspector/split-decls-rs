@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeMismatch!();
         InferenceResult!();
         TestDB!();
+        TypeMismatch!();
         DisplayTarget!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! infer_with_mismatches {
     };
 }
 
-infer_with_mismatches!()
+infer_with_mismatches!();

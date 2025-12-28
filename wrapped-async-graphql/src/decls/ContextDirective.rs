@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Context!();
         Directive!();
+        Context!();
         ContextBase!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ContextDirective {
     };
 }
 
-ContextDirective!()
+ContextDirective!();

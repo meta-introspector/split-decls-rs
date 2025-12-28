@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MatchKind!();
         Spec!();
+        MatchKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! match_verbatim {
     };
 }
 
-match_verbatim!()
+match_verbatim!();

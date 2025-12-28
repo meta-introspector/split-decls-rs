@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Error!();
-        ArbitraryTakeRestIter!();
-        ArbitraryIter!();
-        Arbitrary!();
-        Int!();
-        Unstructured!();
         Result!();
+        Unstructured!();
+        Arbitrary!();
+        ArbitraryIter!();
+        Int!();
+        ArbitraryTakeRestIter!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

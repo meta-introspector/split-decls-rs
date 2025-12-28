@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ConcreteType!();
         UnionItem!();
         Visible!();
-        ConcreteType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Union {
     };
 }
 
-Union!()
+Union!();

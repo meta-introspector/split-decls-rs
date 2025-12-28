@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         MacroString!();
-        Reader!();
         DebugMacroOffset!();
         ReaderOffset!();
+        Reader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MacroEntry {
     };
 }
 
-MacroEntry!()
+MacroEntry!();

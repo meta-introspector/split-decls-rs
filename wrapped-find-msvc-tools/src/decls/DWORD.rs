@@ -4,4 +4,4 @@ macro_rules! DWORD {
     };
 }
 
-DWORD!()
+DWORD!();

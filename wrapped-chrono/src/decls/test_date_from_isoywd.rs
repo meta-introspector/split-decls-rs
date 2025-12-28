@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Weekday!();
         NaiveDate!();
+        Weekday!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_date_from_isoywd {
     };
 }
 
-test_date_from_isoywd!()
+test_date_from_isoywd!();

@@ -4,4 +4,4 @@ macro_rules! assert_write {
     };
 }
 
-assert_write!()
+assert_write!();

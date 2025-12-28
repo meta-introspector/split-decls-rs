@@ -12,4 +12,4 @@ macro_rules! to_unsigned {
     };
 }
 
-to_unsigned!()
+to_unsigned!();

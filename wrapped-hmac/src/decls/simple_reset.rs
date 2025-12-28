@@ -4,4 +4,4 @@ macro_rules! simple_reset {
     };
 }
 
-simple_reset!()
+simple_reset!();

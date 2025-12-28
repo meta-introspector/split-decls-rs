@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Type!();
+        SockAddr!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl From < Type > for c_int { fn from (t : Type) -> c_int { t . 0 } }
+        impl Eq for SockAddr { }
     };
 }
 

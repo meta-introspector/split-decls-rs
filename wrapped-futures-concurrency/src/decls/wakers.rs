@@ -4,4 +4,4 @@ macro_rules! wakers {
     };
 }
 
-wakers!()
+wakers!();

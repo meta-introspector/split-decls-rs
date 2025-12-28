@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UploadValue!();
         Result!();
+        UploadValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_814 {
     };
 }
 
-impl_814!()
+impl_814!();

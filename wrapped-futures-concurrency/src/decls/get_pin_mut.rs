@@ -4,4 +4,4 @@ macro_rules! get_pin_mut {
     };
 }
 
-get_pin_mut!()
+get_pin_mut!();

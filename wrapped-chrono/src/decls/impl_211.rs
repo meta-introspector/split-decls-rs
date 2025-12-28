@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        ParseResult!();
-        ParseErrorKind!();
         OutOfRange!();
-        TimeDelta!();
-        NaiveDateTime!();
         MappedLocalTime!();
-        NaiveTime!();
-        FixedOffset!();
+        NaiveDateTime!();
+        ParseResult!();
+        TimeDelta!();
         NaiveDate!();
-        Weekday!();
-        DateTime!();
-        TimeZone!();
         ParseError!();
+        TimeZone!();
+        DateTime!();
+        FixedOffset!();
         Parsed!();
+        Weekday!();
+        ParseErrorKind!();
+        NaiveTime!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_211 {
     };
 }
 
-impl_211!()
+impl_211!();

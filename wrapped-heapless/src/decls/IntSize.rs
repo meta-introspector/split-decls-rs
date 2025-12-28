@@ -4,4 +4,4 @@ macro_rules! IntSize {
     };
 }
 
-IntSize!()
+IntSize!();

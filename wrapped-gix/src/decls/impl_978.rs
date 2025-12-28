@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Note!();
-        Rewrite!();
         Fetch!();
-        Push!();
-        Url!();
         Replace!();
         Direction!();
+        Rewrite!();
+        Push!();
+        Url!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_978 {
     };
 }
 
-impl_978!()
+impl_978!();

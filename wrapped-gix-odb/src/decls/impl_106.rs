@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Store!();
         Error!();
+        Store!();
         Iter!();
         Ordering!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_106 {
     };
 }
 
-impl_106!()
+impl_106!();

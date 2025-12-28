@@ -1,0 +1,7 @@
+macro_rules! LIGATURE_TRANSPARENT_MASK {
+    () => {
+        const LIGATURE_TRANSPARENT_MASK : u16 = 0b0010_0000_0000_0000 ;
+    };
+}
+
+LIGATURE_TRANSPARENT_MASK!()

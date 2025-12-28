@@ -4,4 +4,4 @@ macro_rules! UninitSlice {
     };
 }
 
-UninitSlice!()
+UninitSlice!();

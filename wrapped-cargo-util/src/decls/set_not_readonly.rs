@@ -4,4 +4,4 @@ macro_rules! set_not_readonly {
     };
 }
 
-set_not_readonly!()
+set_not_readonly!();

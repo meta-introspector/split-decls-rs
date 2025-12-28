@@ -4,4 +4,4 @@ macro_rules! doc_comments {
     };
 }
 
-doc_comments!()
+doc_comments!();

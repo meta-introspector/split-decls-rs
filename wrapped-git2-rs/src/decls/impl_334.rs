@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiffFile!();
         Binding!();
+        DiffFile!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_334 {
     };
 }
 
-impl_334!()
+impl_334!();

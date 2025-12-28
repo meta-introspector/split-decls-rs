@@ -11,4 +11,4 @@ macro_rules! as_assoc_item {
     };
 }
 
-as_assoc_item!()
+as_assoc_item!();

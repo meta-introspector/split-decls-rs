@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         NaiveDateTime!();
         MilliSecondsTimestampVisitor!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ts_milliseconds_option {
     };
 }
 
-ts_milliseconds_option!()
+ts_milliseconds_option!();

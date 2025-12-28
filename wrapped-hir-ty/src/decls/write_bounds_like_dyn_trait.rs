@@ -13,4 +13,4 @@ macro_rules! write_bounds_like_dyn_trait {
     };
 }
 
-write_bounds_like_dyn_trait!()
+write_bounds_like_dyn_trait!();

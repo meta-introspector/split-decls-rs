@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Automaton!();
-        Span!();
-        Prefilter!();
         Input!();
+        Span!();
+        Automaton!();
         OverlappingState!();
+        Prefilter!();
         MatchError!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! try_find_overlapping_fwd_imp {
     };
 }
 
-try_find_overlapping_fwd_imp!()
+try_find_overlapping_fwd_imp!();

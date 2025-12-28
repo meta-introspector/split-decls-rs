@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         TraitKind!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

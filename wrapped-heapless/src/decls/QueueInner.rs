@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Storage!();
         QueueView!();
         Queue!();
+        Storage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! QueueInner {
     };
 }
 
-QueueInner!()
+QueueInner!();

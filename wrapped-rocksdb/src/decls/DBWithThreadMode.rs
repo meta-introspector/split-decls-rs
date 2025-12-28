@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        DBCommon!();
+        DBWithThreadModeInner!();
+    };
+}
+
+macro_rules! DBWithThreadMode {
+    () => {
+        deps!();
+        # [doc = " A type alias to RocksDB database."] # [doc = ""] # [doc = " See crate level documentation for a simple usage example."] # [doc = " See [`DBCommon`] for full list of methods."] pub type DBWithThreadMode < T > = DBCommon < T , DBWithThreadModeInner > ;
+    };
+}
+
+DBWithThreadMode!()

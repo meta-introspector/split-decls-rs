@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DateTime!();
-        FixedOffset!();
         NaiveDate!();
         Local!();
+        DateTime!();
+        FixedOffset!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_datetime_local_from_preserves_offset {
     };
 }
 
-test_datetime_local_from_preserves_offset!()
+test_datetime_local_from_preserves_offset!();

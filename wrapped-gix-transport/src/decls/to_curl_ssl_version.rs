@@ -4,4 +4,4 @@ macro_rules! to_curl_ssl_version {
     };
 }
 
-to_curl_ssl_version!()
+to_curl_ssl_version!();

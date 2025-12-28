@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         ErrorKind!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! validate_profile_name {
     };
 }
 
-validate_profile_name!()
+validate_profile_name!();

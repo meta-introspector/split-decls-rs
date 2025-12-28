@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Anchored!();
-        Match!();
-        Automaton!();
-        MatchError!();
-        StreamChunk!();
-        Buffer!();
         StreamChunkIter!();
+        Automaton!();
+        Match!();
+        Anchored!();
+        StreamChunk!();
+        MatchError!();
+        Buffer!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

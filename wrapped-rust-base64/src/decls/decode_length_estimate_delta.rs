@@ -11,4 +11,4 @@ macro_rules! decode_length_estimate_delta {
     };
 }
 
-decode_length_estimate_delta!()
+decode_length_estimate_delta!();

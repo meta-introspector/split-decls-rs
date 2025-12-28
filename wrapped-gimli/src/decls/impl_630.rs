@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        LocationListsOffset!();
-        Endianity!();
-        Attribute!();
-        DebugMacinfoOffset!();
-        DebugStr!();
-        DebugStrOffsetsBase!();
-        AttributeValue!();
-        Expression!();
-        DebugRngListsBase!();
-        DebugLocListsBase!();
         DwoId!();
+        DebugRngListsBase!();
+        DebugStr!();
+        DebugMacinfoOffset!();
         DebugMacroOffset!();
-        RawRangeListsOffset!();
-        DebugLineOffset!();
         DebugAddrBase!();
+        RawRangeListsOffset!();
         Encoding!();
+        DebugLocListsBase!();
+        LocationListsOffset!();
         Reader!();
+        Endianity!();
+        AttributeValue!();
+        Attribute!();
+        Expression!();
+        DebugLineOffset!();
+        DebugStrOffsetsBase!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_630 {
     };
 }
 
-impl_630!()
+impl_630!();

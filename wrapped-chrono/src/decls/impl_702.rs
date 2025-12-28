@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParseWeekdayError!();
         Error!();
+        ParseWeekdayError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_702 {
     };
 }
 
-impl_702!()
+impl_702!();

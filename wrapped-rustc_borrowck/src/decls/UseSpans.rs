@@ -1,0 +1,7 @@
+macro_rules! UseSpans {
+    () => {
+        # [doc = " The span(s) associated to a use of a place."] # [derive (Copy , Clone , PartialEq , Eq , Debug)] pub (super) enum UseSpans < 'tcx > { # [doc = " The access is caused by capturing a variable for a closure."] ClosureUse { # [doc = " This is true if the captured variable was from a coroutine."] closure_kind : hir :: ClosureKind , # [doc = " The span of the args of the closure, including the `move` keyword if"] # [doc = " it's present."] args_span : Span , # [doc = " The span of the use resulting in capture kind"] # [doc = " Check `ty::CaptureInfo` for more details"] capture_kind_span : Span , # [doc = " The span of the use resulting in the captured path"] # [doc = " Check `ty::CaptureInfo` for more details"] path_span : Span , } , # [doc = " The access is caused by using a variable as the receiver of a method"] # [doc = " that takes 'self'"] FnSelfUse { # [doc = " The span of the variable being moved"] var_span : Span , # [doc = " The span of the method call on the variable"] fn_call_span : Span , # [doc = " The definition span of the method being called"] fn_span : Span , kind : CallKind < 'tcx > , } , # [doc = " This access is caused by a `match` or `if let` pattern."] PatUse (Span) , # [doc = " This access has a single span associated to it: common case."] OtherUse (Span) , }
+    };
+}
+
+UseSpans!()

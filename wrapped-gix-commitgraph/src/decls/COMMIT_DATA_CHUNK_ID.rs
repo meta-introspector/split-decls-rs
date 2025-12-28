@@ -11,4 +11,4 @@ macro_rules! COMMIT_DATA_CHUNK_ID {
     };
 }
 
-COMMIT_DATA_CHUNK_ID!()
+COMMIT_DATA_CHUNK_ID!();

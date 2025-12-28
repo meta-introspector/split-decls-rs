@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Expression!();
-        Identifier!();
         CallArguments!();
+        Identifier!();
+        Expression!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InlineExpression {
     };
 }
 
-InlineExpression!()
+InlineExpression!();

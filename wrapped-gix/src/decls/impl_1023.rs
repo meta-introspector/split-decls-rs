@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Options!();
-        ApplyChange!();
-        Default!();
-        Outcome!();
         Error!();
+        Options!();
+        Outcome!();
+        Default!();
         IndexPersistedOrInMemory!();
+        ApplyChange!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_1023 {
     };
 }
 
-impl_1023!()
+impl_1023!();

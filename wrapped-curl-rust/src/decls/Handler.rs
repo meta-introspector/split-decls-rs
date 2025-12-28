@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Error!();
+        WriteError!();
+        Socket!();
         SeekResult!();
         ReadError!();
         InfoType!();
-        WriteError!();
-        Error!();
-        Socket!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Handler {
     };
 }
 
-Handler!()
+Handler!();

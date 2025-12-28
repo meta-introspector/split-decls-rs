@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endianness!();
         IntEncoding!();
+        Endianness!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Config {
     };
 }
 
-Config!()
+Config!();

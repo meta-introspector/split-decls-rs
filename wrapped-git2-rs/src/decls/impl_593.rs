@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RebaseOperationType!();
         Convert!();
+        RebaseOperationType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_593 {
     };
 }
 
-impl_593!()
+impl_593!();

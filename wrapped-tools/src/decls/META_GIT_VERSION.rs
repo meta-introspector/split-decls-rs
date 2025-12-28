@@ -4,4 +4,4 @@ macro_rules! META_GIT_VERSION {
     };
 }
 
-META_GIT_VERSION!()
+META_GIT_VERSION!();

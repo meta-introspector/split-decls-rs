@@ -4,4 +4,4 @@ macro_rules! GraphQLParser {
     };
 }
 
-GraphQLParser!()
+GraphQLParser!();

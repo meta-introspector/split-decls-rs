@@ -12,4 +12,4 @@ macro_rules! CoreProxy {
     };
 }
 
-CoreProxy!()
+CoreProxy!();

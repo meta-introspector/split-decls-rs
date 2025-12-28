@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
         AllowSelfProjection!();
+        HirDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! bounds_reference_self {
     };
 }
 
-bounds_reference_self!()
+bounds_reference_self!();

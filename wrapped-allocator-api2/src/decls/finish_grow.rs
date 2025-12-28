@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Allocator!();
         AllocError!();
         TryReserveError!();
-        Allocator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! finish_grow {
     };
 }
 
-finish_grow!()
+finish_grow!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Repository!();
-        Info!();
-        Item!();
         Error!();
+        Repository!();
+        Item!();
+        Info!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! iter_impl {
     };
 }
 
-iter_impl!()
+iter_impl!();

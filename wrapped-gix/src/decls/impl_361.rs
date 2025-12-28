@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        State!();
+        Pathspec!();
+        Error!();
+        AttributeStack!();
         Item!();
         Repository!();
-        Pathspec!();
-        State!();
-        AttributeStack!();
-        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_361 {
     };
 }
 
-impl_361!()
+impl_361!();

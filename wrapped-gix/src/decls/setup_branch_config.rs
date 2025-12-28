@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Item!();
-        Repository!();
         Error!();
+        Repository!();
+        Item!();
         WriteMode!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! setup_branch_config {
     };
 }
 
-setup_branch_config!()
+setup_branch_config!();

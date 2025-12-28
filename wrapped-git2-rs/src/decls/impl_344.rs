@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Binding!();
-        DiffLineType!();
         DiffLine!();
+        DiffLineType!();
+        Binding!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_344 {
     };
 }
 
-impl_344!()
+impl_344!();

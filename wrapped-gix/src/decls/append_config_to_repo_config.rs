@@ -11,4 +11,4 @@ macro_rules! append_config_to_repo_config {
     };
 }
 
-append_config_to_repo_config!()
+append_config_to_repo_config!();

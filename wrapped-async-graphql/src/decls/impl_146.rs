@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FurColor!();
         Cat!();
         Object!();
-        FurColor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_146 {
     };
 }
 
-impl_146!()
+impl_146!();

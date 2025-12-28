@@ -4,4 +4,4 @@ macro_rules! SymlinkBuilder {
     };
 }
 
-SymlinkBuilder!()
+SymlinkBuilder!();

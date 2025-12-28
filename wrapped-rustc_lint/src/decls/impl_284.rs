@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        TypeIrTraitUsage!();
+        LateContext!();
+        NonGlobImportTypeIrInherent!();
+        TypeIrInherentUsage!();
+        TypeIrDirectUse!();
+    };
+}
+
+macro_rules! impl_284 {
+    () => {
+        deps!();
+        impl < 'tcx > LateLintPass < 'tcx > for TypeIr { fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx hir :: Expr < 'tcx >) { let res_def_id = match expr . kind { hir :: ExprKind :: Path (hir :: QPath :: Resolved (_ , path)) => path . res . opt_def_id () , hir :: ExprKind :: Path (hir :: QPath :: TypeRelative (..)) | hir :: ExprKind :: MethodCall (..) => { cx . typeck_results () . type_dependent_def_id (expr . hir_id) } _ => return , } ; let Some (res_def_id) = res_def_id else { return ; } ; if let Some (assoc_item) = cx . tcx . opt_associated_item (res_def_id) && let Some (trait_def_id) = assoc_item . trait_container (cx . tcx) && (cx . tcx . is_diagnostic_item (sym :: type_ir_interner , trait_def_id) | cx . tcx . is_diagnostic_item (sym :: type_ir_infer_ctxt_like , trait_def_id)) { cx . emit_span_lint (USAGE_OF_TYPE_IR_TRAITS , expr . span , TypeIrTraitUsage) ; } } fn check_item (& mut self , cx : & LateContext < 'tcx > , item : & 'tcx hir :: Item < 'tcx >) { let rustc_hir :: ItemKind :: Use (path , kind) = item . kind else { return } ; let is_mod_inherent = | res : Res | { res . opt_def_id () . is_some_and (| def_id | cx . tcx . is_diagnostic_item (sym :: type_ir_inherent , def_id)) } ; if let Some (seg) = path . segments . iter () . find (| seg | is_mod_inherent (seg . res)) { cx . emit_span_lint (USAGE_OF_TYPE_IR_INHERENT , seg . ident . span , TypeIrInherentUsage) ; } else if let Some (type_ns) = path . res . type_ns && is_mod_inherent (type_ns) { cx . emit_span_lint (USAGE_OF_TYPE_IR_INHERENT , path . segments . last () . unwrap () . ident . span , TypeIrInherentUsage ,) ; } let (lo , hi , snippet) = match path . segments { [.. , penultimate , segment] if is_mod_inherent (penultimate . res) => { (segment . ident . span , item . kind . ident () . unwrap () . span , "*") } [.. , segment] if let Some (type_ns) = path . res . type_ns && is_mod_inherent (type_ns) && let rustc_hir :: UseKind :: Single (ident) = kind => { let (lo , snippet) = match cx . tcx . sess . source_map () . span_to_snippet (path . span) . as_deref () { Ok ("self") => (path . span , "*") , _ => (segment . ident . span . shrink_to_hi () , "::*") , } ; (lo , if segment . ident == ident { lo } else { ident . span } , snippet) } _ => return , } ; cx . emit_span_lint (NON_GLOB_IMPORT_OF_TYPE_IR_INHERENT , path . span , NonGlobImportTypeIrInherent { suggestion : lo . eq_ctxt (hi) . then (| | lo . to (hi)) , snippet } ,) ; } fn check_path (& mut self , cx : & LateContext < 'tcx > , path : & rustc_hir :: Path < 'tcx > , _ : rustc_hir :: HirId ,) { if let Some (seg) = path . segments . iter () . find (| seg | { seg . res . opt_def_id () . is_some_and (| def_id | cx . tcx . is_diagnostic_item (sym :: type_ir , def_id)) }) { cx . emit_span_lint (DIRECT_USE_OF_RUSTC_TYPE_IR , seg . ident . span , TypeIrDirectUse) ; } } }
+    };
+}
+
+impl_284!()

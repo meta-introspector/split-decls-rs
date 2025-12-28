@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Send!();
         RemoteHandle!();
         Compat!();
-        Send!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SpawnExt {
     };
 }
 
-SpawnExt!()
+SpawnExt!();

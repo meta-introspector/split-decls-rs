@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        InlinedFunctionAddress!();
         Result!();
         Function!();
-        InlinedState!();
-        RangeAttributes!();
         InlinedFunction!();
         Error!();
+        InlinedFunctionAddress!();
+        InlinedState!();
+        RangeAttributes!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

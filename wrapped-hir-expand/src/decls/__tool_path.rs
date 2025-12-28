@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Name!();
         PathKind!();
         ModPath!();
+        Name!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! __tool_path {
     };
 }
 
-__tool_path!()
+__tool_path!();

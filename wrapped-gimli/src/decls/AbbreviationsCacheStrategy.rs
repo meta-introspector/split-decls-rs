@@ -4,4 +4,4 @@ macro_rules! AbbreviationsCacheStrategy {
     };
 }
 
-AbbreviationsCacheStrategy!()
+AbbreviationsCacheStrategy!();

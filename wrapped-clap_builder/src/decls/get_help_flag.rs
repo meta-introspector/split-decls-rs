@@ -11,4 +11,4 @@ macro_rules! get_help_flag {
     };
 }
 
-get_help_flag!()
+get_help_flag!();

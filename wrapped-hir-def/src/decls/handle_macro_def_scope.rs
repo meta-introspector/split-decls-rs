@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
         HygieneId!();
+        DefDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_macro_def_scope {
     };
 }
 
-handle_macro_def_scope!()
+handle_macro_def_scope!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        DisplayKind!();
-        HirFormatter!();
+        HirDisplay!();
         HirDisplayError!();
-        ClosureStyle!();
+        HirFormatter!();
+        HirWrite!();
+        DisplayKind!();
+        Diagnostics!();
         DisplayLifetime!();
         HirDisplayWrapper!();
-        HirWrite!();
-        HirDisplay!();
-        Diagnostics!();
+        ClosureStyle!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_493 {
     };
 }
 
-impl_493!()
+impl_493!();

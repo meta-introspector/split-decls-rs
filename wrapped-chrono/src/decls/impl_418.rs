@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Timelike!();
         NaiveDateTime!();
+        Timelike!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_418 {
     };
 }
 
-impl_418!()
+impl_418!();

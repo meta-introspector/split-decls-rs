@@ -11,4 +11,4 @@ macro_rules! PAGE_READONLY {
     };
 }
 
-PAGE_READONLY!()
+PAGE_READONLY!();

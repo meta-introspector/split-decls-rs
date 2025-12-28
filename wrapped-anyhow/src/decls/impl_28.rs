@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ErrorImpl!();
-        ContextError!();
         StdError!();
+        ErrorImpl!();
+        Error!();
+        ContextError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

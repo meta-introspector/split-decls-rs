@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TomlPackage!();
-        TomlLints!();
-        Result!();
-        InheritableDependency!();
-        TomlManifest!();
         UnresolvedError!();
+        Result!();
+        TomlManifest!();
+        InheritableDependency!();
+        TomlLints!();
+        TomlPackage!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

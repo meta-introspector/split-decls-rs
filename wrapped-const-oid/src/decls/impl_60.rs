@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Error!();
-        ObjectIdentifier!();
+        Buffer!();
         Result!();
         ObjectIdentifierRef!();
-        Buffer!();
+        ObjectIdentifier!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_60 {
     };
 }
 
-impl_60!()
+impl_60!();

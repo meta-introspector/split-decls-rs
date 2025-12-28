@@ -11,4 +11,4 @@ macro_rules! resolve_entry {
     };
 }
 
-resolve_entry!()
+resolve_entry!();

@@ -12,4 +12,4 @@ macro_rules! faster_hex_serde_option_macros {
     };
 }
 
-faster_hex_serde_option_macros!()
+faster_hex_serde_option_macros!();

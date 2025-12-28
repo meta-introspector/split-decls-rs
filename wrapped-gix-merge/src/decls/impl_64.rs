@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Data!();
-        ResourceRef!();
         Resource!();
+        ResourceRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_64 {
     };
 }
 
-impl_64!()
+impl_64!();

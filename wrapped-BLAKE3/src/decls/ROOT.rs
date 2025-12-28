@@ -4,4 +4,4 @@ macro_rules! ROOT {
     };
 }
 
-ROOT!()
+ROOT!();

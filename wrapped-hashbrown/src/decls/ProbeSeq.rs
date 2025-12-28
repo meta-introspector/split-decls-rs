@@ -4,4 +4,4 @@ macro_rules! ProbeSeq {
     };
 }
 
-ProbeSeq!()
+ProbeSeq!();

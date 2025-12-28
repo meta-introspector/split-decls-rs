@@ -4,4 +4,4 @@ macro_rules! AsmOptions {
     };
 }
 
-AsmOptions!()
+AsmOptions!();

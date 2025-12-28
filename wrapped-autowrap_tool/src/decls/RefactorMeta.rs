@@ -4,4 +4,4 @@ macro_rules! RefactorMeta {
     };
 }
 
-RefactorMeta!()
+RefactorMeta!();

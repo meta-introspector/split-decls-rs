@@ -4,4 +4,4 @@ macro_rules! invoke {
     };
 }
 
-invoke!()
+invoke!();

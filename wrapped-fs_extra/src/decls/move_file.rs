@@ -12,4 +12,4 @@ macro_rules! move_file {
     };
 }
 
-move_file!()
+move_file!();

@@ -12,4 +12,4 @@ macro_rules! random_wnaf_tests {
     };
 }
 
-random_wnaf_tests!()
+random_wnaf_tests!();

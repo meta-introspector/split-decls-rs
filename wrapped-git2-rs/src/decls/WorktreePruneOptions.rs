@@ -4,4 +4,4 @@ macro_rules! WorktreePruneOptions {
     };
 }
 
-WorktreePruneOptions!()
+WorktreePruneOptions!();

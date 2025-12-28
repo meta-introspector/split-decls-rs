@@ -4,4 +4,4 @@ macro_rules! MockCargoMetadataProvider {
     };
 }
 
-MockCargoMetadataProvider!()
+MockCargoMetadataProvider!();

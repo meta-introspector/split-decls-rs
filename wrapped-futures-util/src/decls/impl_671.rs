@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TryChunksError!();
         TryChunksStreamError!();
         Ready!();
-        TryChunksError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_671 {
     };
 }
 
-impl_671!()
+impl_671!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExpectFile!();
         Runtime!();
-        FileRuntime!();
         Expect!();
+        ExpectFile!();
+        FileRuntime!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

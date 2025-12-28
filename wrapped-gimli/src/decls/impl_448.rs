@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugLocLists!();
         Reader!();
+        DebugLocLists!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_448 {
     };
 }
 
-impl_448!()
+impl_448!();

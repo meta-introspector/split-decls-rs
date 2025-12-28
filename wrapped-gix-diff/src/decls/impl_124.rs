@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         CacheValue!();
-        Platform!();
-        ResourceKind!();
         Error!();
+        ResourceKind!();
+        Platform!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

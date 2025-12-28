@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Iter!();
-        FuturesUnordered!();
         IntoIter!();
+        FuturesUnordered!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_881 {
     };
 }
 
-impl_881!()
+impl_881!();

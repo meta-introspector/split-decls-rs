@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        LocalDefMap!();
-        DefWithBodyId!();
-        Resolver!();
-        DefDatabase!();
         ExprScope!();
-        LocalModuleId!();
+        GenericDefId!();
         Scope!();
         DefMap!();
-        GenericDefId!();
+        DefDatabase!();
+        LocalModuleId!();
+        DefWithBodyId!();
+        LocalDefMap!();
+        Resolver!();
         ModuleItemMap!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! impl_320 {
     };
 }
 
-impl_320!()
+impl_320!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Result!();
+        Error!();
         ErrorPositions!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_146 {
     };
 }
 
-impl_146!()
+impl_146!();

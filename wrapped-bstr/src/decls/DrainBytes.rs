@@ -4,4 +4,4 @@ macro_rules! DrainBytes {
     };
 }
 
-DrainBytes!()
+DrainBytes!();

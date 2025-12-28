@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
         DefDatabase!();
-        ValueNs!();
-        ResolveValueResult!();
-        BuiltinType!();
-        TypeNs!();
-        ModuleDefId!();
-        AdtId!();
-        ModuleItemMap!();
-        ModuleId!();
-        ImportOrExternCrate!();
         BuiltinShadowMode!();
+        ValueNs!();
         MacroId!();
+        ImportOrExternCrate!();
+        TypeNs!();
+        AdtId!();
+        BuiltinType!();
+        ResolveValueResult!();
+        ModuleItemMap!();
+        ModuleDefId!();
+        ModuleId!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_321 {
     };
 }
 
-impl_321!()
+impl_321!();

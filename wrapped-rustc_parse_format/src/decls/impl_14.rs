@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Parser!();
-        Piece!();
         ParseError!();
         Suggestion!();
+        Piece!();
     };
 }
 

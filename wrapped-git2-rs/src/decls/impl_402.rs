@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         ProgressState!();
+        Binding!();
         Progress!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_402 {
     };
 }
 
-impl_402!()
+impl_402!();

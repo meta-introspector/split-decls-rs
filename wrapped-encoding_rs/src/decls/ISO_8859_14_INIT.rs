@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         VariantEncoding!();
+        Encoding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ISO_8859_14_INIT {
     };
 }
 
-ISO_8859_14_INIT!()
+ISO_8859_14_INIT!();

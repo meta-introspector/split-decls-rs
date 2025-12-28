@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         HashMap!();
-        ParIterMut!();
         Iter!();
+        ParIterMut!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

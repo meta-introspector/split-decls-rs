@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CacheControl!();
         Secret!();
+        CacheControl!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CredentialResponse {
     };
 }
 
-CredentialResponse!()
+CredentialResponse!();

@@ -11,4 +11,4 @@ macro_rules! write_2_partials_to_exactly_complete_chunk_encodes_complete_chunk {
     };
 }
 
-write_2_partials_to_exactly_complete_chunk_encodes_complete_chunk!()
+write_2_partials_to_exactly_complete_chunk_encodes_complete_chunk!();

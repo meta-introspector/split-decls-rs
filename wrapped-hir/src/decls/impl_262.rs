@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Enum!();
-        Variant!();
+        StructKind!();
+        Adt!();
         Type!();
         Layout!();
-        Adt!();
-        StructKind!();
+        Enum!();
         Module!();
+        Variant!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_262 {
     };
 }
 
-impl_262!()
+impl_262!();

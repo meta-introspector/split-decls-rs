@@ -4,4 +4,4 @@ macro_rules! tick {
     };
 }
 
-tick!()
+tick!();

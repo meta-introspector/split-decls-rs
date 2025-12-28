@@ -4,4 +4,4 @@ macro_rules! ProgressAction {
     };
 }
 
-ProgressAction!()
+ProgressAction!();

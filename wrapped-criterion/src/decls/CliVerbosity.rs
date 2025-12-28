@@ -4,4 +4,4 @@ macro_rules! CliVerbosity {
     };
 }
 
-CliVerbosity!()
+CliVerbosity!();

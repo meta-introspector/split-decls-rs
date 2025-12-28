@@ -4,4 +4,4 @@ macro_rules! ptr_add {
     };
 }
 
-ptr_add!()
+ptr_add!();

@@ -5,4 +5,4 @@ macro_rules! reference_newtype {
     };
 }
 
-reference_newtype!()
+reference_newtype!();

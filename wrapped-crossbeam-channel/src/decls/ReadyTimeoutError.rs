@@ -4,4 +4,4 @@ macro_rules! ReadyTimeoutError {
     };
 }
 
-ReadyTimeoutError!()
+ReadyTimeoutError!();

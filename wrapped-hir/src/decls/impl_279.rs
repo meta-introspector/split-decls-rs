@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Module!();
-        Union!();
-        Field!();
         Variant!();
         VariantDef!();
+        Field!();
+        Union!();
         Struct!();
+        Module!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_279 {
     };
 }
 
-impl_279!()
+impl_279!();

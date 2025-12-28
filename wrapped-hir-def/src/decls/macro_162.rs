@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Macro2!();
+        Const!();
         ExternCrate!();
         Trait!();
-        Const!();
         TypeAlias!();
-        Union!();
         Function!();
-        MacroCall!();
-        Enum!();
-        MacroRules!();
-        Struct!();
         Impl!();
-        ExternBlock!();
-        Static!();
-        Use!();
+        Union!();
+        Enum!();
         Mod!();
+        MacroCall!();
+        Static!();
+        Struct!();
+        ExternBlock!();
+        MacroRules!();
+        Use!();
+        Macro2!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! macro_162 {
     };
 }
 
-macro_162!()
+macro_162!();

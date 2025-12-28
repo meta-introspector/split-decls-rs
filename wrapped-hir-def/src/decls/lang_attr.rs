@@ -12,4 +12,4 @@ macro_rules! lang_attr {
     };
 }
 
-lang_attr!()
+lang_attr!();

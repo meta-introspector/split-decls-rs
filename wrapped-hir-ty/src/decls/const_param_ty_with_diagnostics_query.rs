@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LifetimeElisionKind!();
         Diagnostics!();
-        HirDatabase!();
         TyLoweringContext!();
+        LifetimeElisionKind!();
+        HirDatabase!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! const_param_ty_with_diagnostics_query {
     };
 }
 
-const_param_ty_with_diagnostics_query!()
+const_param_ty_with_diagnostics_query!();

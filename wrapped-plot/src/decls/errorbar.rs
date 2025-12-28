@@ -4,4 +4,4 @@ macro_rules! errorbar {
     };
 }
 
-errorbar!()
+errorbar!();

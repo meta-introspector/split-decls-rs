@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PointerEncodingParameters!();
-        Pointer!();
         Error!();
+        PointerEncodingParameters!();
         Result!();
-        Reader!();
+        Pointer!();
         EhHdrTableIter!();
+        Reader!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_171 {
     };
 }
 
-impl_171!()
+impl_171!();

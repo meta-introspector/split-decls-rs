@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Change!();
         Find!();
         Entry!();
+        Change!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LookupRefDeltaObjectsIter {
     };
 }
 
-LookupRefDeltaObjectsIter!()
+LookupRefDeltaObjectsIter!();

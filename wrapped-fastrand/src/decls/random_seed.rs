@@ -4,4 +4,4 @@ macro_rules! random_seed {
     };
 }
 
-random_seed!()
+random_seed!();

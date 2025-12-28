@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IsElement!();
         Atomic!();
+        IsElement!();
         Entry!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! List {
     };
 }
 
-List!()
+List!();

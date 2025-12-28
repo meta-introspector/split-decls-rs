@@ -4,4 +4,4 @@ macro_rules! remove_file_with_permission_check {
     };
 }
 
-remove_file_with_permission_check!()
+remove_file_with_permission_check!();

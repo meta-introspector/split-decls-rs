@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Directive!();
         TypeDirectiveLocation!();
         TypeDirective!();
-        Directive!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! gen_directive_calls {
     };
 }
 
-gen_directive_calls!()
+gen_directive_calls!();

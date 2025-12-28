@@ -11,4 +11,4 @@ macro_rules! unsigned_integer {
     };
 }
 
-unsigned_integer!()
+unsigned_integer!();

@@ -12,4 +12,4 @@ macro_rules! request_ref_backtrace {
     };
 }
 
-request_ref_backtrace!()
+request_ref_backtrace!();

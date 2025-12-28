@@ -4,4 +4,4 @@ macro_rules! CargoConfigGeneratorImpl {
     };
 }
 
-CargoConfigGeneratorImpl!()
+CargoConfigGeneratorImpl!();

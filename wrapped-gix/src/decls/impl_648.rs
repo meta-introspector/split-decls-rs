@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RecurseSubmodules!();
         NegotiationAlgorithm!();
         Fetch!();
         Tree!();
+        RecurseSubmodules!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_648 {
     };
 }
 
-impl_648!()
+impl_648!();

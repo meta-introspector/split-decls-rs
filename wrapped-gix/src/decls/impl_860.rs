@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Error!();
         Commit!();
-        Id!();
-        Read!();
         Item!();
+        Id!();
         Info!();
         Note!();
-        Error!();
+        Read!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_860 {
     };
 }
 
-impl_860!()
+impl_860!();

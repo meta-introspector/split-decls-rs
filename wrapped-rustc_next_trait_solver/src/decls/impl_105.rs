@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        EvaluationStepBuilder!();
+        WipProbeStep!();
+        SolverDelegate!();
+        WipProbe!();
+        WipEvaluationStep!();
+    };
+}
+
+macro_rules! impl_105 {
+    () => {
+        deps!();
+        impl < D : SolverDelegate < Interner = I > , I : Interner > EvaluationStepBuilder < D > { pub (crate) fn new_noop () -> EvaluationStepBuilder < D > { EvaluationStepBuilder { state : None , _infcx : PhantomData } } pub (crate) fn is_noop (& self) -> bool { self . state . is_none () } fn as_mut (& mut self) -> Option < & mut WipEvaluationStep < I > > { self . state . as_deref_mut () } pub (crate) fn take_and_enter_probe (& mut self) -> EvaluationStepBuilder < D > { let mut nested = EvaluationStepBuilder { state : self . state . take () , _infcx : PhantomData } ; nested . enter_probe () ; nested } pub (crate) fn add_var_value < T : Into < I :: GenericArg > > (& mut self , arg : T) { if let Some (this) = self . as_mut () { this . var_values . push (arg . into ()) ; } } fn enter_probe (& mut self) { if let Some (this) = self . as_mut () { let initial_num_var_values = this . var_values . len () ; this . current_evaluation_scope () . steps . push (WipProbeStep :: NestedProbe (WipProbe { initial_num_var_values , steps : vec ! [] , kind : None , final_state : None , })) ; this . probe_depth += 1 ; } } pub (crate) fn probe_kind (& mut self , probe_kind : inspect :: ProbeKind < I >) { if let Some (this) = self . as_mut () { let prev = this . current_evaluation_scope () . kind . replace (probe_kind) ; assert_eq ! (prev , None) ; } } pub (crate) fn probe_final_state (& mut self , delegate : & D , max_input_universe : ty :: UniverseIndex ,) { if let Some (this) = self . as_mut () { let final_state = canonical :: make_canonical_state (delegate , & this . var_values , max_input_universe , ()) ; let prev = this . current_evaluation_scope () . final_state . replace (final_state) ; assert_eq ! (prev , None) ; } } pub (crate) fn add_goal (& mut self , delegate : & D , max_input_universe : ty :: UniverseIndex , source : GoalSource , goal : Goal < I , I :: Predicate > ,) { if let Some (this) = self . as_mut () { let goal = canonical :: make_canonical_state (delegate , & this . var_values , max_input_universe , goal ,) ; this . current_evaluation_scope () . steps . push (WipProbeStep :: AddGoal (source , goal)) } } pub (crate) fn record_impl_args (& mut self , delegate : & D , max_input_universe : ty :: UniverseIndex , impl_args : I :: GenericArgs ,) { if let Some (this) = self . as_mut () { let impl_args = canonical :: make_canonical_state (delegate , & this . var_values , max_input_universe , impl_args ,) ; this . current_evaluation_scope () . steps . push (WipProbeStep :: RecordImplArgs { impl_args }) ; } } pub (crate) fn make_canonical_response (& mut self , shallow_certainty : Certainty) { if let Some (this) = self . as_mut () { this . current_evaluation_scope () . steps . push (WipProbeStep :: MakeCanonicalResponse { shallow_certainty }) ; } } pub (crate) fn finish_probe (mut self) -> EvaluationStepBuilder < D > { if let Some (this) = self . as_mut () { assert_ne ! (this . probe_depth , 0) ; let num_var_values = this . current_evaluation_scope () . initial_num_var_values ; this . var_values . truncate (num_var_values) ; this . probe_depth -= 1 ; } self } pub (crate) fn query_result (& mut self , result : QueryResult < I >) { if let Some (this) = self . as_mut () { assert_eq ! (this . evaluation . kind . replace (inspect :: ProbeKind :: Root { result }) , None) ; } } }
+    };
+}
+
+impl_105!()

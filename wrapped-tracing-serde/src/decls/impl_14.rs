@@ -1,16 +1,13 @@
 macro_rules! deps {
     () => {
-        SerializeMetadata!();
-        SerializeId!();
-        SerializeAttributes!();
-        SerdeStructVisitor!();
+        SerializeLevel!();
     };
 }
 
 macro_rules! impl_14 {
     () => {
         deps!();
-        impl Serialize for SerializeAttributes < '_ > { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : Serializer , { let mut serializer = serializer . serialize_struct ("Attributes" , 3) ? ; serializer . serialize_field ("metadata" , & SerializeMetadata (self . 0 . metadata ())) ? ; serializer . serialize_field ("parent" , & self . 0 . parent () . map (SerializeId)) ? ; serializer . serialize_field ("is_root" , & self . 0 . is_root ()) ? ; let mut visitor = SerdeStructVisitor { serializer , state : Ok (()) , } ; self . 0 . record (& mut visitor) ; visitor . finish () } }
+        impl Serialize for SerializeLevel < '_ > { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : Serializer , { if self . 0 == & Level :: ERROR { serializer . serialize_str ("ERROR") } else if self . 0 == & Level :: WARN { serializer . serialize_str ("WARN") } else if self . 0 == & Level :: INFO { serializer . serialize_str ("INFO") } else if self . 0 == & Level :: DEBUG { serializer . serialize_str ("DEBUG") } else if self . 0 == & Level :: TRACE { serializer . serialize_str ("TRACE") } else { unreachable ! () } } }
     };
 }
 

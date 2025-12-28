@@ -12,4 +12,4 @@ macro_rules! find_tz_data {
     };
 }
 
-find_tz_data!()
+find_tz_data!();

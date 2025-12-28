@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ServerError!();
         ValidationResult!();
         Result!();
-        ServerError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ValidationFut {
     };
 }
 
-ValidationFut!()
+ValidationFut!();

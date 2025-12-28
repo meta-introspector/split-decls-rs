@@ -4,4 +4,4 @@ macro_rules! RemoteHead {
     };
 }
 
-RemoteHead!()
+RemoteHead!();

@@ -11,4 +11,4 @@ macro_rules! generate_fields_enum {
     };
 }
 
-generate_fields_enum!()
+generate_fields_enum!();

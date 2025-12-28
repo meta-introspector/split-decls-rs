@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SetupConfiguration!();
-        EnumSetupInstances!();
         SetupInstance!();
         ComPtr!();
+        SetupConfiguration!();
+        EnumSetupInstances!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_148 {
     };
 }
 
-impl_148!()
+impl_148!();

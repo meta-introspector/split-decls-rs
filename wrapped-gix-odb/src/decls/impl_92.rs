@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Ordering!();
-        Store!();
-        Metrics!();
         IndexAndPacks!();
+        Ordering!();
+        Metrics!();
+        Store!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_92 {
     };
 }
 
-impl_92!()
+impl_92!();

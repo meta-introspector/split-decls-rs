@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Demangle!();
+        VOffset!();
+        CallOffset!();
+        ArgScopeStack!();
+        Result!();
+        DemangleContext!();
         DemangleWrite!();
         NvOffset!();
-        DemangleContext!();
-        CallOffset!();
-        Result!();
-        VOffset!();
-        ArgScopeStack!();
+        Demangle!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_145 {
     };
 }
 
-impl_145!()
+impl_145!();

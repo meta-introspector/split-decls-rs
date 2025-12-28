@@ -4,4 +4,4 @@ macro_rules! MAX_BUFFER {
     };
 }
 
-MAX_BUFFER!()
+MAX_BUFFER!();

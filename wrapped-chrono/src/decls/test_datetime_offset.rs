@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Utc!();
         TimeDelta!();
         FixedOffset!();
-        Utc!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_datetime_offset {
     };
 }
 
-test_datetime_offset!()
+test_datetime_offset!();

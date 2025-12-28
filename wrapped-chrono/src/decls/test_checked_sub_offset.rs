@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         FixedOffset!();
         NaiveDateTime!();
+        NaiveDate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_checked_sub_offset {
     };
 }
 
-test_checked_sub_offset!()
+test_checked_sub_offset!();

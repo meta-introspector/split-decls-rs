@@ -11,4 +11,4 @@ macro_rules! hash_node {
     };
 }
 
-hash_node!()
+hash_node!();

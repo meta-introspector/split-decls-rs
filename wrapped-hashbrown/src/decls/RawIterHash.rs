@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawTable!();
         RawIterHashInner!();
+        RawTable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RawIterHash {
     };
 }
 
-RawIterHash!()
+RawIterHash!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Decltype!();
-        DataMemberPrefix!();
-        TemplateParam!();
-        NestedName!();
-        TemplateArgs!();
         Prefix!();
         UnqualifiedName!();
+        NestedName!();
+        TemplateParam!();
+        TemplateArgs!();
+        DataMemberPrefix!();
+        Decltype!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! DemangleNodeType {
     };
 }
 
-DemangleNodeType!()
+DemangleNodeType!();

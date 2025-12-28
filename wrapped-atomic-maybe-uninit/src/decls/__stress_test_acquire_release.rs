@@ -11,4 +11,4 @@ macro_rules! __stress_test_acquire_release {
     };
 }
 
-__stress_test_acquire_release!()
+__stress_test_acquire_release!();

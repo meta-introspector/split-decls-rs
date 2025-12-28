@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Union!();
         Visitor!();
-        VisitorContext!();
         Field!();
-        MetaType!();
+        Union!();
         Interface!();
+        VisitorContext!();
         FieldsOnCorrectType!();
+        MetaType!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

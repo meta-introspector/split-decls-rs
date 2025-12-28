@@ -12,4 +12,4 @@ macro_rules! Color16 {
     };
 }
 
-Color16!()
+Color16!();

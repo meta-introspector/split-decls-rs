@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Repository!();
-        Error!();
-        Id!();
         Pipeline!();
         Note!();
+        Id!();
         IndexPersistedOrInMemory!();
+        Error!();
+        Repository!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_312 {
     };
 }
 
-impl_312!()
+impl_312!();

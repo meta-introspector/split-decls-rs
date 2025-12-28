@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ArrayConsumer!();
         ArrayLength!();
         GenericArray!();
+        ArrayConsumer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_151 {
     };
 }
 
-impl_151!()
+impl_151!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         Reflog!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_622 {
     };
 }
 
-impl_622!()
+impl_622!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Throughput!();
         WallTime!();
         Measurement!();
+        Throughput!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ValueFormatter {
     };
 }
 
-ValueFormatter!()
+ValueFormatter!();

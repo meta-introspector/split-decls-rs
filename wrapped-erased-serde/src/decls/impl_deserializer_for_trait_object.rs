@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Visitor!();
-        Out!();
-        Result!();
         Deserializer!();
+        Out!();
         Error!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_deserializer_for_trait_object {
     };
 }
 
-impl_deserializer_for_trait_object!()
+impl_deserializer_for_trait_object!();

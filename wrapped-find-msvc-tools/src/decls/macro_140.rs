@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LPSAFEARRAY!();
         BSTR!();
         HRESULT!();
         InstanceState!();
+        LPSAFEARRAY!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_140 {
     };
 }
 
-macro_140!()
+macro_140!();

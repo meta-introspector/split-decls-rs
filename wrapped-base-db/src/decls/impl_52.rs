@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        ProcMacroPaths!();
-        CratesMap!();
-        CrateDisplayName!();
-        CratesIdMap!();
-        CrateBuilderId!();
-        BuiltDependency!();
+        DependencyBuilder!();
         FxIndexSet!();
         CrateGraphBuilder!();
-        CrateData!();
-        CyclicDependenciesError!();
-        RootQueryDb!();
-        CrateBuilder!();
-        ExtraCrateData!();
-        CrateWorkspaceData!();
         CrateOrigin!();
-        Env!();
-        Crate!();
-        BuiltCrateData!();
-        DependencyBuilder!();
+        CrateData!();
         UniqueCrateData!();
+        ProcMacroPaths!();
+        RootQueryDb!();
+        CrateBuilderId!();
+        CrateWorkspaceData!();
+        Env!();
+        CratesMap!();
+        BuiltCrateData!();
+        CrateDisplayName!();
+        Crate!();
+        BuiltDependency!();
+        CrateBuilder!();
+        CyclicDependenciesError!();
+        CratesIdMap!();
+        ExtraCrateData!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

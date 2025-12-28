@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        DefaultHashBuilder!();
-        Drain!();
-        Iter!();
+        Difference!();
+        SymmetricDifference!();
         IntoIter!();
         HashSet!();
-        Difference!();
         Intersection!();
+        DefaultHashBuilder!();
+        Iter!();
+        Drain!();
         Union!();
-        SymmetricDifference!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! assert_covariance {
     };
 }
 
-assert_covariance!()
+assert_covariance!();

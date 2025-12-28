@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        B1!();
+    };
+}
+
+macro_rules! Add1 {
+    () => {
+        deps!();
+        # [doc = " Alias to make it easy to add 1: `Add1<A> = <A as Add<B1>>::Output`"] pub type Add1 < A > = < A as Add < crate :: bit :: B1 > > :: Output ;
+    };
+}
+
+Add1!()

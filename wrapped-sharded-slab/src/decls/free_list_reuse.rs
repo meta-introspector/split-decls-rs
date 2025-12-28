@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Config!();
+        Slab!();
+    };
+}
+
+macro_rules! free_list_reuse {
+    () => {
+        deps!();
+        mod free_list_reuse { use super :: * ; struct TinyConfig ; impl crate :: cfg :: Config for TinyConfig { const INITIAL_PAGE_SIZE : usize = 2 ; } # [test] fn local_remove () { run_model ("free_list_reuse::local_remove" , | | { let slab = Slab :: new_with_config :: < TinyConfig > () ; let t1 = slab . insert ("hello") . expect ("insert") ; let t2 = slab . insert ("world") . expect ("insert") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t1) . 1 , 0 , "1st slot should be on 0th page") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t2) . 1 , 0 , "2nd slot should be on 0th page") ; let t3 = slab . insert ("earth") . expect ("insert") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t3) . 1 , 1 , "3rd slot should be on 1st page") ; slab . remove (t2) ; let t4 = slab . insert ("universe") . expect ("insert") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t4) . 1 , 0 , "2nd slot should be reused (0th page)") ; slab . remove (t1) ; let _ = slab . insert ("goodbye") . expect ("insert") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t4) . 1 , 0 , "1st slot should be reused (0th page)") ; }) ; } # [test] fn local_take () { run_model ("free_list_reuse::local_take" , | | { let slab = Slab :: new_with_config :: < TinyConfig > () ; let t1 = slab . insert ("hello") . expect ("insert") ; let t2 = slab . insert ("world") . expect ("insert") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t1) . 1 , 0 , "1st slot should be on 0th page") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t2) . 1 , 0 , "2nd slot should be on 0th page") ; let t3 = slab . insert ("earth") . expect ("insert") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t3) . 1 , 1 , "3rd slot should be on 1st page") ; assert_eq ! (slab . take (t2) , Some ("world")) ; let t4 = slab . insert ("universe") . expect ("insert") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t4) . 1 , 0 , "2nd slot should be reused (0th page)") ; assert_eq ! (slab . take (t1) , Some ("hello")) ; let _ = slab . insert ("goodbye") . expect ("insert") ; assert_eq ! (crate :: page :: indices ::< TinyConfig > (t4) . 1 , 0 , "1st slot should be reused (0th page)") ; }) ; } }
+    };
+}
+
+free_list_reuse!()

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Sender!();
-        Token!();
         Receiver!();
+        Token!();
+        Sender!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SelectedOperation {
     };
 }
 
-SelectedOperation!()
+SelectedOperation!();

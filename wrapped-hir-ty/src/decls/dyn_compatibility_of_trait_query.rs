@@ -12,4 +12,4 @@ macro_rules! dyn_compatibility_of_trait_query {
     };
 }
 
-dyn_compatibility_of_trait_query!()
+dyn_compatibility_of_trait_query!();

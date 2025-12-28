@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BenchmarkId!();
         ReportContext!();
+        BenchmarkId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PlotContext {
     };
 }
 
-PlotContext!()
+PlotContext!();

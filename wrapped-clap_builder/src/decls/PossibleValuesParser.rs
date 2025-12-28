@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        EnumValueParser!();
         Usage!();
         PossibleValue!();
-        EnumValueParser!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PossibleValuesParser {
     };
 }
 
-PossibleValuesParser!()
+PossibleValuesParser!();

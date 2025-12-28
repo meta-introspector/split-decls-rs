@@ -4,4 +4,4 @@ macro_rules! exe_info {
     };
 }
 
-exe_info!()
+exe_info!();

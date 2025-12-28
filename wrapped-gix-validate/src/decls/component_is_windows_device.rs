@@ -4,4 +4,4 @@ macro_rules! component_is_windows_device {
     };
 }
 
-component_is_windows_device!()
+component_is_windows_device!();

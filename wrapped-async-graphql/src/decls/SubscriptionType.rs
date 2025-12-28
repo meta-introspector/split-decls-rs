@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Response!();
-        Context!();
         EmptySubscription!();
+        Response!();
         Registry!();
+        Context!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SubscriptionType {
     };
 }
 
-SubscriptionType!()
+SubscriptionType!();

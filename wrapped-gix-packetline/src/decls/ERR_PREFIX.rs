@@ -4,4 +4,4 @@ macro_rules! ERR_PREFIX {
     };
 }
 
-ERR_PREFIX!()
+ERR_PREFIX!();

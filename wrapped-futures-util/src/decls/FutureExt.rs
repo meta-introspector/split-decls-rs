@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Ready!();
+        Either!();
         Send!();
+        StreamExt!();
         Shared!();
         RemoteHandle!();
-        Either!();
-        Ready!();
-        StreamExt!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! FutureExt {
     };
 }
 
-FutureExt!()
+FutureExt!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Engine!();
         DecodeError!();
         DecodePaddingMode!();
-        Engine!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! do_invalid_trailing_padding_as_invalid_byte_at_first_padding {
     };
 }
 
-do_invalid_trailing_padding_as_invalid_byte_at_first_padding!()
+do_invalid_trailing_padding_as_invalid_byte_at_first_padding!();

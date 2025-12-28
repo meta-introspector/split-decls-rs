@@ -4,4 +4,4 @@ macro_rules! JIS0212_ACCENTED {
     };
 }
 
-JIS0212_ACCENTED!()
+JIS0212_ACCENTED!();

@@ -11,4 +11,4 @@ macro_rules! SeqLockWriteGuard {
     };
 }
 
-SeqLockWriteGuard!()
+SeqLockWriteGuard!();

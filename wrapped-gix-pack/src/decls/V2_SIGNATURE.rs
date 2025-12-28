@@ -4,4 +4,4 @@ macro_rules! V2_SIGNATURE {
     };
 }
 
-V2_SIGNATURE!()
+V2_SIGNATURE!();

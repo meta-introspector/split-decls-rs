@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LenType!();
         Kind!();
         SortedLinkedListView!();
-        LenType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FindMutView {
     };
 }
 
-FindMutView!()
+FindMutView!();

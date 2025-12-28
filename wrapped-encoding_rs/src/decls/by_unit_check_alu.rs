@@ -4,4 +4,4 @@ macro_rules! by_unit_check_alu {
     };
 }
 
-by_unit_check_alu!()
+by_unit_check_alu!();

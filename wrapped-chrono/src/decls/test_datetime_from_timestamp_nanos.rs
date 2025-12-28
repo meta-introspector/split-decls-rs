@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DateTime!();
         Utc!();
+        DateTime!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_datetime_from_timestamp_nanos {
     };
 }
 
-test_datetime_from_timestamp_nanos!()
+test_datetime_from_timestamp_nanos!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
         AbiTags!();
         ArgScopeStack!();
         Demangle!();
-        DemangleWrite!();
         DemangleContext!();
+        Result!();
+        DemangleWrite!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

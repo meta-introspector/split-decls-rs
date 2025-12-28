@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        NaiveDate!();
         TimeZone!();
-        NaiveTime!();
+        Offset!();
+        NaiveDateTime!();
         Local!();
         MappedLocalTime!();
-        NaiveDate!();
         FixedOffset!();
-        NaiveDateTime!();
-        Offset!();
+        NaiveTime!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_656 {
     };
 }
 
-impl_656!()
+impl_656!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Replacements!();
         Error!();
+        Replacements!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_errors_and_replacements {
     };
 }
 
-handle_errors_and_replacements!()
+handle_errors_and_replacements!();

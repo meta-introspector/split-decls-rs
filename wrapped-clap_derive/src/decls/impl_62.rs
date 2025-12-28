@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AttrKind!();
         Sp!();
-        Ty!();
+        AttrKind!();
         Kind!();
+        Ty!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

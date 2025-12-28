@@ -4,4 +4,4 @@ macro_rules! DebugRngLists {
     };
 }
 
-DebugRngLists!()
+DebugRngLists!();

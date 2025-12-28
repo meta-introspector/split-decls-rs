@@ -4,4 +4,4 @@ macro_rules! untracked_cache {
     };
 }
 
-untracked_cache!()
+untracked_cache!();

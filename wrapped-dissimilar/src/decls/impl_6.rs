@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Range!();
         RangeBounds!();
+        Range!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

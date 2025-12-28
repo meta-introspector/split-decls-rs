@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LittleEndian!();
         Varint!();
         NoLimit!();
+        LittleEndian!();
         Config!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Configuration {
     };
 }
 
-Configuration!()
+Configuration!();

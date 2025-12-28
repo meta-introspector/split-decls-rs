@@ -11,4 +11,4 @@ macro_rules! bits2field {
     };
 }
 
-bits2field!()
+bits2field!();

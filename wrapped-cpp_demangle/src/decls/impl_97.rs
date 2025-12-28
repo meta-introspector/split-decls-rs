@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        NestedName!();
-        DemangleNodeType!();
-        ArgScopeStack!();
-        Result!();
         DemangleContext!();
-        Demangle!();
-        DemangleWrite!();
         CvQualifiers!();
+        DemangleWrite!();
+        Result!();
+        ArgScopeStack!();
+        DemangleNodeType!();
+        Demangle!();
+        NestedName!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

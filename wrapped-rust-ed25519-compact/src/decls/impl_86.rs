@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Noise!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

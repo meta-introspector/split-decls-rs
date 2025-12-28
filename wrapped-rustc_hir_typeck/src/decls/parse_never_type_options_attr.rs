@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        DivergingFallbackBehavior!();
+        DivergingBlockBehavior!();
+    };
+}
+
+macro_rules! parse_never_type_options_attr {
+    () => {
+        deps!();
+        fn parse_never_type_options_attr (tcx : TyCtxt < '_ > ,) -> (Option < DivergingFallbackBehavior > , Option < DivergingBlockBehavior >) { let mut fallback = None ; let mut block = None ; let items = if tcx . features () . rustc_attrs () { tcx . get_attr (CRATE_DEF_ID , sym :: rustc_never_type_options) . map (| attr | attr . meta_item_list () . unwrap ()) } else { None } ; let items = items . unwrap_or_default () ; for item in items { if item . has_name (sym :: fallback) && fallback . is_none () { let mode = item . value_str () . unwrap () ; match mode { sym :: unit => fallback = Some (DivergingFallbackBehavior :: ToUnit) , sym :: niko => fallback = Some (DivergingFallbackBehavior :: ContextDependent) , sym :: never => fallback = Some (DivergingFallbackBehavior :: ToNever) , sym :: no => fallback = Some (DivergingFallbackBehavior :: NoFallback) , _ => { tcx . dcx () . span_err (item . span () , format ! ("unknown never type fallback mode: `{mode}` (supported: `unit`, `niko`, `never` and `no`)")) ; } } ; continue ; } if item . has_name (sym :: diverging_block_default) && block . is_none () { let default = item . value_str () . unwrap () ; match default { sym :: unit => block = Some (DivergingBlockBehavior :: Unit) , sym :: never => block = Some (DivergingBlockBehavior :: Never) , _ => { tcx . dcx () . span_err (item . span () , format ! ("unknown diverging block default: `{default}` (supported: `unit` and `never`)")) ; } } ; continue ; } tcx . dcx () . span_err (item . span () , format ! ("unknown or duplicate never type option: `{}` (supported: `fallback`, `diverging_block_default`)" , item . name () . unwrap ()) ,) ; } (fallback , block) }
+    };
+}
+
+parse_never_type_options_attr!()

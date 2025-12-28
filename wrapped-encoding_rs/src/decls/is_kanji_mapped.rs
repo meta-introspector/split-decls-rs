@@ -4,4 +4,4 @@ macro_rules! is_kanji_mapped {
     };
 }
 
-is_kanji_mapped!()
+is_kanji_mapped!();

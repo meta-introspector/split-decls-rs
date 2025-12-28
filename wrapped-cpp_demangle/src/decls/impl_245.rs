@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ExprPrimary!();
-        ArgScopeStack!();
+        FunctionParam!();
         Expression!();
         DemangleWrite!();
         DemangleContext!();
-        FunctionParam!();
+        ArgScopeStack!();
+        ExprPrimary!();
+        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

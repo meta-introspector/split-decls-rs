@@ -4,4 +4,4 @@ macro_rules! AnyMetadata {
     };
 }
 
-AnyMetadata!()
+AnyMetadata!();

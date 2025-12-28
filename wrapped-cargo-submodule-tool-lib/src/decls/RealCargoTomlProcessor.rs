@@ -4,4 +4,4 @@ macro_rules! RealCargoTomlProcessor {
     };
 }
 
-RealCargoTomlProcessor!()
+RealCargoTomlProcessor!();

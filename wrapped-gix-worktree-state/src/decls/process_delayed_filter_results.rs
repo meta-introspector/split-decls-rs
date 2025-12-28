@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Options!();
+        Context!();
+        WriteWithProgress!();
         Error!();
         DelayedFilteredStream!();
-        WriteWithProgress!();
-        Context!();
         Outcome!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! process_delayed_filter_results {
     };
 }
 
-process_delayed_filter_results!()
+process_delayed_filter_results!();

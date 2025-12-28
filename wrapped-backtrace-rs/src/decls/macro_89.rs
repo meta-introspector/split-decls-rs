@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UNWIND_HISTORY_TABLE!();
         IMAGE_RUNTIME_FUNCTION_ENTRY!();
+        UNWIND_HISTORY_TABLE!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_89 {
     };
 }
 
-macro_89!()
+macro_89!();

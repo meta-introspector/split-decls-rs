@@ -4,4 +4,4 @@ macro_rules! M128A {
     };
 }
 
-M128A!()
+M128A!();

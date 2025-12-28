@@ -4,4 +4,4 @@ macro_rules! NOTE_TXT {
     };
 }
 
-NOTE_TXT!()
+NOTE_TXT!();

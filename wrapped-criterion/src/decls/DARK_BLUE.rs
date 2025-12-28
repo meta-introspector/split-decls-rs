@@ -4,4 +4,4 @@ macro_rules! DARK_BLUE {
     };
 }
 
-DARK_BLUE!()
+DARK_BLUE!();

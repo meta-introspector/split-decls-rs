@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Status!();
-        Key!();
         Error!();
+        Key!();
+        Status!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! fetch {
     };
 }
 
-fetch!()
+fetch!();

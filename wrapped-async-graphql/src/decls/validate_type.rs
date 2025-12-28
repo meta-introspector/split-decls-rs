@@ -11,4 +11,4 @@ macro_rules! validate_type {
     };
 }
 
-validate_type!()
+validate_type!();

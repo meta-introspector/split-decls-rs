@@ -4,4 +4,4 @@ macro_rules! get_ucrt_dir {
     };
 }
 
-get_ucrt_dir!()
+get_ucrt_dir!();

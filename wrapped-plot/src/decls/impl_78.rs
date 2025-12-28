@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        Plot!();
+        Properties!();
         Matrix!();
-        Axes!();
         Figure!();
         ErrorBarDefault!();
-        Plot!();
         ErrorBar!();
+        Axes!();
         Data!();
-        Properties!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

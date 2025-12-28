@@ -11,4 +11,4 @@ macro_rules! DEFINE_GUID {
     };
 }
 
-DEFINE_GUID!()
+DEFINE_GUID!();

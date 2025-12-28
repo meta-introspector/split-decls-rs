@@ -4,4 +4,4 @@ macro_rules! DebugLineStr {
     };
 }
 
-DebugLineStr!()
+DebugLineStr!();

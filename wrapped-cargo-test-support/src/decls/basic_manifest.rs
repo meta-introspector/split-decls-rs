@@ -10,4 +10,4 @@ macro_rules! basic_manifest {
     };
 }
 
-basic_manifest!()
+basic_manifest!();

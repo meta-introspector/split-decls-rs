@@ -4,4 +4,4 @@ macro_rules! write_where_clause {
     };
 }
 
-write_where_clause!()
+write_where_clause!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InspectErrFn!();
         Sink!();
+        InspectErrFn!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_595 {
     };
 }
 
-macro_595!()
+macro_595!();

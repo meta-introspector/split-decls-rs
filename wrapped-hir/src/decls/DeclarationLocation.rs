@@ -4,4 +4,4 @@ macro_rules! DeclarationLocation {
     };
 }
 
-DeclarationLocation!()
+DeclarationLocation!();

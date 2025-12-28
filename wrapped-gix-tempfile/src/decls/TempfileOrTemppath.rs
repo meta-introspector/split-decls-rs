@@ -4,4 +4,4 @@ macro_rules! TempfileOrTemppath {
     };
 }
 
-TempfileOrTemppath!()
+TempfileOrTemppath!();

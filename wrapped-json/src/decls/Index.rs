@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Value!();
+    };
+}
+
+macro_rules! Index {
+    () => {
+        deps!();
+        # [doc = " A type that can be used to index into a `serde_json::Value`."] # [doc = ""] # [doc = " The [`get`] and [`get_mut`] methods of `Value` accept any type that"] # [doc = " implements `Index`, as does the [square-bracket indexing operator]. This"] # [doc = " trait is implemented for strings which are used as the index into a JSON"] # [doc = " map, and for `usize` which is used as the index into a JSON array."] # [doc = ""] # [doc = " [`get`]: Value::get"] # [doc = " [`get_mut`]: Value::get_mut"] # [doc = " [square-bracket indexing operator]: Value#impl-Index%3CI%3E-for-Value"] # [doc = ""] # [doc = " This trait is sealed and cannot be implemented for types outside of"] # [doc = " `serde_json`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use serde_json::json;"] # [doc = " #"] # [doc = " let data = json!({ \"inner\": [1, 2, 3] });"] # [doc = ""] # [doc = " // Data is a JSON map so it can be indexed with a string."] # [doc = " let inner = &data[\"inner\"];"] # [doc = ""] # [doc = " // Inner is a JSON array so it can be indexed with an integer."] # [doc = " let first = &inner[0];"] # [doc = ""] # [doc = " assert_eq!(first, 1);"] # [doc = " ```"] pub trait Index : private :: Sealed { # [doc = " Return None if the key is not already in the array or object."] # [doc (hidden)] fn index_into < 'v > (& self , v : & 'v Value) -> Option < & 'v Value > ; # [doc = " Return None if the key is not already in the array or object."] # [doc (hidden)] fn index_into_mut < 'v > (& self , v : & 'v mut Value) -> Option < & 'v mut Value > ; # [doc = " Panic if array index out of bounds. If key is not already in the object,"] # [doc = " insert it with a value of null. Panic if Value is a type that cannot be"] # [doc = " indexed into, except if Value is null then it can be treated as an empty"] # [doc = " object."] # [doc (hidden)] fn index_or_insert < 'v > (& self , v : & 'v mut Value) -> & 'v mut Value ; }
+    };
+}
+
+Index!()

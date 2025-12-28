@@ -4,4 +4,4 @@ macro_rules! ansi_c {
     };
 }
 
-ansi_c!()
+ansi_c!();

@@ -4,4 +4,4 @@ macro_rules! scalar_unit {
     };
 }
 
-scalar_unit!()
+scalar_unit!();

@@ -11,4 +11,4 @@ macro_rules! include_macro_invoc {
     };
 }
 
-include_macro_invoc!()
+include_macro_invoc!();

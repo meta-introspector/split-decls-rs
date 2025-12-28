@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SubscriptionField!();
         Field!();
         Result!();
-        SubscriptionField!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_497 {
     };
 }
 
-impl_497!()
+impl_497!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ResolverError!();
         Scope!();
         MemoizerKind!();
+        ResolverError!();
         WriteValue!();
         FluentResource!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

@@ -4,4 +4,4 @@ macro_rules! functional {
     };
 }
 
-functional!()
+functional!();

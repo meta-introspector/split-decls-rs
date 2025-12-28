@@ -11,4 +11,4 @@ macro_rules! copy_recursively_into_existing_dir {
     };
 }
 
-copy_recursively_into_existing_dir!()
+copy_recursively_into_existing_dir!();

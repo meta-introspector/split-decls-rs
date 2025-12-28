@@ -11,4 +11,4 @@ macro_rules! target_feature_is_safe_in_target {
     };
 }
 
-target_feature_is_safe_in_target!()
+target_feature_is_safe_in_target!();

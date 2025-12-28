@@ -12,4 +12,4 @@ macro_rules! create_dir {
     };
 }
 
-create_dir!()
+create_dir!();

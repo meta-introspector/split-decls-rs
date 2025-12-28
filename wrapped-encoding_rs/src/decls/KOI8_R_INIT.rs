@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         VariantEncoding!();
+        Encoding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! KOI8_R_INIT {
     };
 }
 
-KOI8_R_INIT!()
+KOI8_R_INIT!();

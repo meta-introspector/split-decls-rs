@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        VecInner!();
-        IterMut!();
         LenType!();
         IntoIter!();
+        VecInner!();
+        IterMut!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_301 {
     };
 }
 
-impl_301!()
+impl_301!();

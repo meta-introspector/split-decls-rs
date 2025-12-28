@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Path!();
+        Error!();
         Kind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! git_with_metadata {
     };
 }
 
-git_with_metadata!()
+git_with_metadata!();

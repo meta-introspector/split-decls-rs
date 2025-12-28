@@ -4,4 +4,4 @@ macro_rules! cargo_vendor_command {
     };
 }
 
-cargo_vendor_command!()
+cargo_vendor_command!();

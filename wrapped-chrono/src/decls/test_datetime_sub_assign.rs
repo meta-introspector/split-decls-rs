@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TimeDelta!();
-        NaiveDate!();
         FixedOffset!();
+        NaiveDate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_datetime_sub_assign {
     };
 }
 
-test_datetime_sub_assign!()
+test_datetime_sub_assign!();

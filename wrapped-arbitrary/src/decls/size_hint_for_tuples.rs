@@ -11,4 +11,4 @@ macro_rules! size_hint_for_tuples {
     };
 }
 
-size_hint_for_tuples!()
+size_hint_for_tuples!();

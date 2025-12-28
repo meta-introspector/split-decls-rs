@@ -4,4 +4,4 @@ macro_rules! tagforeach {
     };
 }
 
-tagforeach!()
+tagforeach!();

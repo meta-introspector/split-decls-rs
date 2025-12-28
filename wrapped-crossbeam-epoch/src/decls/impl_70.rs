@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Local!();
         LocalHandle!();
         Collector!();
+        Local!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

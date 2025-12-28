@@ -4,4 +4,4 @@ macro_rules! NonVendoredModuleFinder {
     };
 }
 
-NonVendoredModuleFinder!()
+NonVendoredModuleFinder!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IterMut!();
         RwLockWriteGuardDetached!();
+        IterMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! GuardIterMut {
     };
 }
 
-GuardIterMut!()
+GuardIterMut!();

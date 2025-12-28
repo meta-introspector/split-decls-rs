@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Symbol!();
         Frame!();
         ResolveWhat!();
-        Symbol!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! resolve_frame_unsynchronized {
     };
 }
 
-resolve_frame_unsynchronized!()
+resolve_frame_unsynchronized!();

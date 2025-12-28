@@ -4,4 +4,4 @@ macro_rules! newline_count {
     };
 }
 
-newline_count!()
+newline_count!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        PlottersBackend!();
-        PlotData!();
-        Data!();
+        BenchmarkId!();
         PlotContext!();
+        Plotter!();
+        Data!();
+        PlottersBackend!();
         ValueFormatter!();
         ValueType!();
-        Plotter!();
-        BenchmarkId!();
+        PlotData!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

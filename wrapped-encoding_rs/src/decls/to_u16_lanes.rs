@@ -4,4 +4,4 @@ macro_rules! to_u16_lanes {
     };
 }
 
-to_u16_lanes!()
+to_u16_lanes!();

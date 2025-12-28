@@ -4,4 +4,4 @@ macro_rules! UniqueArgumentNames {
     };
 }
 
-UniqueArgumentNames!()
+UniqueArgumentNames!();

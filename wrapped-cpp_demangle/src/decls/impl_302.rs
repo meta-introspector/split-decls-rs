@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Parse!();
+        IndexStr!();
+        ParseContext!();
+        ResourceName!();
+        SubstitutionTable!();
         Result!();
         Error!();
-        ParseContext!();
-        Parse!();
-        ResourceName!();
-        IndexStr!();
-        SubstitutionTable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_302 {
     };
 }
 
-impl_302!()
+impl_302!();

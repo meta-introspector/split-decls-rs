@@ -11,4 +11,4 @@ macro_rules! update_config_toml {
     };
 }
 
-update_config_toml!()
+update_config_toml!();

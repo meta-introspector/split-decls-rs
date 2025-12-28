@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Zip!();
-        WakerArray!();
         PollArray!();
+        WakerArray!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_zip_for_tuple {
     };
 }
 
-impl_zip_for_tuple!()
+impl_zip_for_tuple!();

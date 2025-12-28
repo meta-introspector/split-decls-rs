@@ -12,4 +12,4 @@ macro_rules! disambiguate_hint {
     };
 }
 
-disambiguate_hint!()
+disambiguate_hint!();

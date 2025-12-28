@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Empty!();
-        ReadyToRunQueue!();
-        Task!();
         Dequeue!();
+        Empty!();
+        Task!();
+        ReadyToRunQueue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_866 {
     };
 }
 
-impl_866!()
+impl_866!();

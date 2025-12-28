@@ -11,4 +11,4 @@ macro_rules! unerase_de {
     };
 }
 
-unerase_de!()
+unerase_de!();

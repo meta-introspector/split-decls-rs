@@ -4,4 +4,4 @@ macro_rules! RUNNER_HELLO_SIZE {
     };
 }
 
-RUNNER_HELLO_SIZE!()
+RUNNER_HELLO_SIZE!();

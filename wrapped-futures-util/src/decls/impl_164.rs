@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MaybeDone!();
         Ready!();
+        MaybeDone!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_164 {
     };
 }
 
-impl_164!()
+impl_164!();

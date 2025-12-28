@@ -4,4 +4,4 @@ macro_rules! RefMulti {
     };
 }
 
-RefMulti!()
+RefMulti!();

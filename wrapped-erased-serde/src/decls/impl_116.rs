@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        SerializeStructVariant!();
+        Error!();
         MakeSerializer!();
         Result!();
-        ErrorImpl!();
-        Error!();
         Serialize!();
-        SerializeStructVariant!();
+        ErrorImpl!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

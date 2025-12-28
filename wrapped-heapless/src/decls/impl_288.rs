@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Vec!();
         VecView!();
-        LenType!();
-        VecInner!();
         CapacityError!();
+        VecInner!();
         Drain!();
+        Vec!();
+        LenType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_288 {
     };
 }
 
-impl_288!()
+impl_288!();

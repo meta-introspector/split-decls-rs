@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VsVers!();
         StdEnvGetter!();
+        VsVers!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! find_vs_version {
     };
 }
 
-find_vs_version!()
+find_vs_version!();

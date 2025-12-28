@@ -4,4 +4,4 @@ macro_rules! Specified {
     };
 }
 
-Specified!()
+Specified!();

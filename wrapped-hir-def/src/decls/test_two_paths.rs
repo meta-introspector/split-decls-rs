@@ -17,4 +17,4 @@ fn foo() {
     };
 }
 
-test_two_paths!()
+test_two_paths!();

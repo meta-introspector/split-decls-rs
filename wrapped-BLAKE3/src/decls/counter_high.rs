@@ -4,4 +4,4 @@ macro_rules! counter_high {
     };
 }
 
-counter_high!()
+counter_high!();

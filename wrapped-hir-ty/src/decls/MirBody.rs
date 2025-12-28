@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         BasicBlockId!();
+        Local!();
         InternedClosureId!();
         BasicBlock!();
-        LocalId!();
         ProjectionStore!();
-        Local!();
+        LocalId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! MirBody {
     };
 }
 
-MirBody!()
+MirBody!();

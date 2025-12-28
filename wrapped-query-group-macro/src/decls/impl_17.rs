@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        RemoveAttrsFromTraitMethods!();
+        Lookup!();
     };
 }
 
 macro_rules! impl_17 {
     () => {
         deps!();
-        impl VisitMut for RemoveAttrsFromTraitMethods { fn visit_item_trait_mut (& mut self , i : & mut syn :: ItemTrait) { for item in & mut i . items { if let TraitItem :: Fn (trait_item_fn) = item { trait_item_fn . attrs = vec ! [] ; } } } }
+        impl ToTokens for Lookup { fn to_tokens (& self , tokens : & mut proc_macro2 :: TokenStream) { let sig = & self . signature ; let wrapper_struct = self . interned_struct_path . to_token_stream () ; let method = quote ! { # sig { let zalsa = self . zalsa () ; # wrapper_struct :: ingredient (zalsa) . data (zalsa , id . as_id ()) . 0 . clone () } } ; method . to_tokens (tokens) ; } }
     };
 }
 

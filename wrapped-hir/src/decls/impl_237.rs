@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
-        TypeAlias!();
-        Macro!();
-        Function!();
-        Adt!();
-        ModuleDef!();
-        AssocItem!();
-        Const!();
+        Struct!();
+        Union!();
+        TraitImplRedundantAssocItems!();
         Enum!();
         Impl!();
-        InactiveCode!();
         Module!();
-        Struct!();
+        AssocItem!();
+        TypeAlias!();
         Trait!();
+        Macro!();
+        TraitImplOrphan!();
+        TraitImplMissingAssocItems!();
+        TraitImplIncorrectSafety!();
         ItemInNs!();
+        ModuleDef!();
+        ScopeDef!();
+        InactiveCode!();
+        Function!();
+        Const!();
+        Adt!();
         GenericDef!();
         Crate!();
-        TraitImplMissingAssocItems!();
-        TraitImplRedundantAssocItems!();
-        ScopeDef!();
-        Union!();
-        TraitImplOrphan!();
-        TraitImplIncorrectSafety!();
         IncoherentImpl!();
     };
 }
@@ -33,4 +33,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

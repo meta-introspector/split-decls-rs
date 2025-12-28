@@ -1,0 +1,7 @@
+macro_rules! macro_71 {
+    () => {
+        declare_lint_pass ! (# [doc = " Lint for trait and lifetime bounds that don't depend on type parameters"] # [doc = " which either do nothing, or stop the item from being used."] TrivialConstraints => [TRIVIAL_BOUNDS]) ;
+    };
+}
+
+macro_71!()

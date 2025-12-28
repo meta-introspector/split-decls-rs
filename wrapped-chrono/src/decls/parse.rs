@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         State!();
+        TransitionRule!();
         Cursor!();
-        LocalTimeType!();
         Error!();
+        TimeZone!();
+        LocalTimeType!();
+        LeapSecond!();
         Transition!();
         Version!();
-        TransitionRule!();
-        TimeZone!();
-        LeapSecond!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! parse {
     };
 }
 
-parse!()
+parse!();

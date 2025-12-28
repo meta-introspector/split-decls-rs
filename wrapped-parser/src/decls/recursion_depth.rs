@@ -11,4 +11,4 @@ macro_rules! recursion_depth {
     };
 }
 
-recursion_depth!()
+recursion_depth!();

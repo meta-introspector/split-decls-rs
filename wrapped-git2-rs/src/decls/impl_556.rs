@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         IntoCString!();
-        Error!();
-        Repository!();
-        Pathspec!();
-        PathspecMatchList!();
-        Binding!();
-        Diff!();
         Index!();
+        Error!();
+        PathspecMatchList!();
+        Pathspec!();
         Tree!();
+        Binding!();
+        Repository!();
+        Diff!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_556 {
     };
 }
 
-impl_556!()
+impl_556!();

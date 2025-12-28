@@ -4,4 +4,4 @@ macro_rules! store16_unaligned {
     };
 }
 
-store16_unaligned!()
+store16_unaligned!();

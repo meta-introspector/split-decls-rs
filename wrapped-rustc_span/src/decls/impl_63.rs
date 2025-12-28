@@ -1,13 +1,20 @@
 macro_rules! deps {
     () => {
-        SpanDecoder!();
+        ExpnKind!();
+        ExpnData!();
+        Symbol!();
+        DesugaringKind!();
+        Transparency!();
+        Edition!();
+        HashStableContext!();
+        Span!();
     };
 }
 
 macro_rules! impl_63 {
     () => {
         deps!();
-        impl < D : SpanDecoder > Decodable < D > for DefId { fn decode (s : & mut D) -> DefId { s . decode_def_id () } }
+        impl Span { # [doc = " Reuses the span but adds information like the kind of the desugaring and features that are"] # [doc = " allowed inside this span."] pub fn mark_with_reason (self , allow_internal_unstable : Option < Arc < [Symbol] > > , reason : DesugaringKind , edition : Edition , ctx : impl HashStableContext ,) -> Span { let expn_data = ExpnData { allow_internal_unstable , .. ExpnData :: default (ExpnKind :: Desugaring (reason) , self , edition , None , None) } ; let expn_id = LocalExpnId :: fresh (expn_data , ctx) ; self . apply_mark (expn_id . to_expn_id () , Transparency :: Transparent) } }
     };
 }
 

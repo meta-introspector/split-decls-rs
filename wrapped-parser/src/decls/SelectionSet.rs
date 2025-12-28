@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Selection!();
         Positioned!();
+        Selection!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SelectionSet {
     };
 }
 
-SelectionSet!()
+SelectionSet!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Integer!();
         Float!();
+        Integer!();
         AddressSpace!();
     };
 }

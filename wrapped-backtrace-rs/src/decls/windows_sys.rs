@@ -4,4 +4,4 @@ macro_rules! windows_sys {
     };
 }
 
-windows_sys!()
+windows_sys!();

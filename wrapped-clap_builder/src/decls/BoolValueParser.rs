@@ -4,4 +4,4 @@ macro_rules! BoolValueParser {
     };
 }
 
-BoolValueParser!()
+BoolValueParser!();

@@ -4,4 +4,4 @@ macro_rules! UndeclaredLabel {
     };
 }
 
-UndeclaredLabel!()
+UndeclaredLabel!();

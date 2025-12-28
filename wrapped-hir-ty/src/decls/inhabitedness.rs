@@ -4,4 +4,4 @@ macro_rules! inhabitedness {
     };
 }
 
-inhabitedness!()
+inhabitedness!();

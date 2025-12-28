@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        PartialVersion!();
+        PackageIdSpecError!();
         PartialVersionError!();
         ErrorKind!();
-        PackageIdSpecError!();
-        PartialVersion!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

@@ -4,4 +4,4 @@ macro_rules! set_colors {
     };
 }
 
-set_colors!()
+set_colors!();

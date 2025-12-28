@@ -12,4 +12,4 @@ macro_rules! factored_data_offset {
     };
 }
 
-factored_data_offset!()
+factored_data_offset!();

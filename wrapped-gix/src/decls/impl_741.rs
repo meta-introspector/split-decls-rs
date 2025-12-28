@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Renames!();
+        Tree!();
         Status!();
         ShowUntrackedFiles!();
-        Tree!();
         UnsignedInteger!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_741 {
     };
 }
 
-impl_741!()
+impl_741!();

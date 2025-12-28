@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        VariantDef!();
         Struct!();
         Variant!();
         Union!();
+        VariantDef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

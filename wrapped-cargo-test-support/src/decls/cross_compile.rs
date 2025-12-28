@@ -4,4 +4,4 @@ macro_rules! cross_compile {
     };
 }
 
-cross_compile!()
+cross_compile!();

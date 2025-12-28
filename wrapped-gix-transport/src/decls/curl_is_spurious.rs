@@ -11,4 +11,4 @@ macro_rules! curl_is_spurious {
     };
 }
 
-curl_is_spurious!()
+curl_is_spurious!();

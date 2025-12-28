@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        WeightedIndex!();
+        SampleUniform!();
+        WeightedIndexIter!();
+    };
+}
+
+macro_rules! impl_190 {
+    () => {
+        deps!();
+        impl < X : SampleUniform + PartialOrd + Clone > WeightedIndex < X > { # [doc = " Returns the weight at the given index, if it exists."] # [doc = ""] # [doc = " If the index is out of bounds, this will return `None`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use rand::distr::weighted::WeightedIndex;"] # [doc = ""] # [doc = " let weights = [0, 1, 2];"] # [doc = " let dist = WeightedIndex::new(&weights).unwrap();"] # [doc = " assert_eq!(dist.weight(0), Some(0));"] # [doc = " assert_eq!(dist.weight(1), Some(1));"] # [doc = " assert_eq!(dist.weight(2), Some(2));"] # [doc = " assert_eq!(dist.weight(3), None);"] # [doc = " ```"] pub fn weight (& self , index : usize) -> Option < X > where X : for < 'a > core :: ops :: SubAssign < & 'a X > , { use core :: cmp :: Ordering :: * ; let mut weight = match index . cmp (& self . cumulative_weights . len ()) { Less => self . cumulative_weights [index] . clone () , Equal => self . total_weight . clone () , Greater => return None , } ; if index > 0 { weight -= & self . cumulative_weights [index - 1] ; } Some (weight) } # [doc = " Returns a lazy-loading iterator containing the current weights of this distribution."] # [doc = ""] # [doc = " If this distribution has not been updated since its creation, this will return the"] # [doc = " same weights as were passed to `new`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use rand::distr::weighted::WeightedIndex;"] # [doc = ""] # [doc = " let weights = [1, 2, 3];"] # [doc = " let mut dist = WeightedIndex::new(&weights).unwrap();"] # [doc = " assert_eq!(dist.weights().collect::<Vec<_>>(), vec![1, 2, 3]);"] # [doc = " dist.update_weights(&[(0, &2)]).unwrap();"] # [doc = " assert_eq!(dist.weights().collect::<Vec<_>>(), vec![2, 2, 3]);"] # [doc = " ```"] pub fn weights (& self) -> WeightedIndexIter < '_ , X > where X : for < 'a > core :: ops :: SubAssign < & 'a X > , { WeightedIndexIter { weighted_index : self , index : 0 , } } # [doc = " Returns the sum of all weights in this distribution."] pub fn total_weight (& self) -> X { self . total_weight . clone () } }
+    };
+}
+
+impl_190!()

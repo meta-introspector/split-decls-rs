@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DebugLineStr!();
-        Result!();
         DebugLineStrOffset!();
+        Result!();
         Reader!();
+        DebugLineStr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_596 {
     };
 }
 
-impl_596!()
+impl_596!();

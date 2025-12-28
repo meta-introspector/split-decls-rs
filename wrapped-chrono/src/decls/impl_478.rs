@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
-        Weekday!();
-        IsoWeek!();
         YearFlags!();
+        IsoWeek!();
+        NaiveDate!();
         Datelike!();
+        Weekday!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_478 {
     };
 }
 
-impl_478!()
+impl_478!();

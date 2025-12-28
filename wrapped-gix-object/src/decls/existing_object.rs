@@ -13,4 +13,4 @@ macro_rules! existing_object {
     };
 }
 
-existing_object!()
+existing_object!();

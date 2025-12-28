@@ -4,4 +4,4 @@ macro_rules! is_basic_latin {
     };
 }
 
-is_basic_latin!()
+is_basic_latin!();

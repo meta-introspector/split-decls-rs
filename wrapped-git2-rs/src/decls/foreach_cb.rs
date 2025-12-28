@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         ForeachCbData!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! foreach_cb {
     };
 }
 
-foreach_cb!()
+foreach_cb!();

@@ -12,4 +12,4 @@ macro_rules! ge_precompute {
     };
 }
 
-ge_precompute!()
+ge_precompute!();

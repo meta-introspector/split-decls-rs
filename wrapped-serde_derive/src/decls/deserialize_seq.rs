@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Container!();
+        Expr!();
+        Field!();
+        Parameters!();
+        Fragment!();
+        Default!();
+    };
+}
+
+macro_rules! deserialize_seq {
+    () => {
+        deps!();
+        fn deserialize_seq (type_path : & TokenStream , params : & Parameters , fields : & [Field] , is_struct : bool , cattrs : & attr :: Container , expecting : & str ,) -> Fragment { let vars = (0 .. fields . len ()) . map (field_i as fn (_) -> _) ; let deserialized_count = fields . iter () . filter (| field | ! field . attrs . skip_deserializing ()) . count () ; let expecting = if deserialized_count == 1 { format ! ("{} with 1 element" , expecting) } else { format ! ("{} with {} elements" , expecting , deserialized_count) } ; let expecting = cattrs . expecting () . unwrap_or (& expecting) ; let mut index_in_seq = 0_usize ; let let_values = vars . clone () . zip (fields) . map (| (var , field) | { if field . attrs . skip_deserializing () { let default = Expr (expr_is_missing (field , cattrs)) ; quote ! { let # var = # default ; } } else { let visit = match field . attrs . deserialize_with () { None => { let field_ty = field . ty ; let span = field . original . span () ; let func = quote_spanned ! (span => _serde :: de :: SeqAccess :: next_element ::<# field_ty >) ; quote ! (# func (& mut __seq) ?) } Some (path) => { let (wrapper , wrapper_ty) = wrap_deserialize_field_with (params , field . ty , path) ; quote ! ({ # wrapper _serde ::# private :: Option :: map (_serde :: de :: SeqAccess :: next_element ::<# wrapper_ty > (& mut __seq) ?, | __wrap | __wrap . value) }) } } ; let value_if_none = expr_is_missing_seq (None , index_in_seq , field , cattrs , expecting) ; let assign = quote ! { let # var = match # visit { _serde ::# private :: Some (__value) => __value , _serde ::# private :: None => # value_if_none , } ; } ; index_in_seq += 1 ; assign } }) ; let mut result = if is_struct { let names = fields . iter () . map (| f | & f . member) ; quote ! { # type_path { # (# names : # vars) ,* } } } else { quote ! { # type_path (# (# vars) ,*) } } ; if params . has_getter { let this_type = & params . this_type ; let (_ , ty_generics , _) = params . generics . split_for_impl () ; result = quote ! { _serde ::# private :: Into ::<# this_type # ty_generics >:: into (# result) } ; } let let_default = match cattrs . default () { attr :: Default :: Default => Some (quote ! (let __default : Self :: Value = _serde ::# private :: Default :: default () ;)) , attr :: Default :: Path (path) => Some (quote_spanned ! (path . span () => let __default : Self :: Value = # path () ;)) , attr :: Default :: None => { None } } ; quote_block ! { # let_default # (# let_values) * _serde ::# private :: Ok (# result) } }
+    };
+}
+
+deserialize_seq!()

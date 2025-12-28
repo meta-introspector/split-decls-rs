@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        DebugAbbrevOffset!();
-        EntriesRaw!();
-        Format!();
-        Result!();
-        Abbreviations!();
-        Encoding!();
-        SectionId!();
-        UnitOffset!();
         DebuggingInformationEntry!();
-        Range!();
-        EntriesCursor!();
-        UnitType!();
-        Error!();
-        DebugAbbrev!();
-        Reader!();
-        EntriesTree!();
-        UnitHeader!();
         UnitSectionOffset!();
+        Abbreviations!();
+        UnitType!();
+        EntriesRaw!();
+        EntriesCursor!();
+        Reader!();
+        SectionId!();
+        UnitHeader!();
+        Encoding!();
+        DebugAbbrevOffset!();
+        DebugAbbrev!();
+        UnitOffset!();
         ReaderOffset!();
+        Range!();
+        EntriesTree!();
+        Result!();
+        Error!();
+        Format!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! impl_623 {
     };
 }
 
-impl_623!()
+impl_623!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ValueMut!();
         Error!();
         Section!();
         SectionMut!();
-        ValueMut!();
         Size!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

@@ -4,4 +4,4 @@ macro_rules! SIGNATURE_FIELD_NAME {
     };
 }
 
-SIGNATURE_FIELD_NAME!()
+SIGNATURE_FIELD_NAME!();

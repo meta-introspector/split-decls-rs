@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        MetaTypeName!();
-        VisitorContext!();
-        InputObject!();
         Object!();
-        Visitor!();
+        MetaTypeName!();
         MetaType!();
+        InputObject!();
+        Visitor!();
+        VisitorContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! visit_input_value {
     };
 }
 
-visit_input_value!()
+visit_input_value!();

@@ -4,4 +4,4 @@ macro_rules! impl_subtle {
     };
 }
 
-impl_subtle!()
+impl_subtle!();

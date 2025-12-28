@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Outcome!();
         Clone!();
         Default!();
+        Outcome!();
         Options!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! commit {
     };
 }
 
-commit!()
+commit!();

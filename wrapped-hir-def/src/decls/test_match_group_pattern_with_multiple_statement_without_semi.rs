@@ -17,4 +17,4 @@ fn baz() {
     };
 }
 
-test_match_group_pattern_with_multiple_statement_without_semi!()
+test_match_group_pattern_with_multiple_statement_without_semi!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         YearFlags!();
+        NaiveDate!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_338 {
     };
 }
 
-impl_338!()
+impl_338!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Algorithm!();
         File!();
-        Outcome!();
-        Entry!();
-        ResolvedBase!();
-        DecodeEntry!();
+        Options!();
         Kind!();
         SafetyCheck!();
-        Options!();
+        ResolvedBase!();
+        DecodeEntry!();
+        Outcome!();
+        Error!();
+        Entry!();
+        Algorithm!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_263 {
     };
 }
 
-impl_263!()
+impl_263!();

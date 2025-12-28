@@ -4,4 +4,4 @@ macro_rules! mock_git_wrapper_lib {
     };
 }
 
-mock_git_wrapper_lib!()
+mock_git_wrapper_lib!();

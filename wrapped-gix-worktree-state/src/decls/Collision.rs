@@ -4,4 +4,4 @@ macro_rules! Collision {
     };
 }
 
-Collision!()
+Collision!();

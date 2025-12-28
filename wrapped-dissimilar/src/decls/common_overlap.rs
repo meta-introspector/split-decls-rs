@@ -11,4 +11,4 @@ macro_rules! common_overlap {
     };
 }
 
-common_overlap!()
+common_overlap!();

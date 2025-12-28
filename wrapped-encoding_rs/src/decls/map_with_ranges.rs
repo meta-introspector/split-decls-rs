@@ -4,4 +4,4 @@ macro_rules! map_with_ranges {
     };
 }
 
-map_with_ranges!()
+map_with_ranges!();

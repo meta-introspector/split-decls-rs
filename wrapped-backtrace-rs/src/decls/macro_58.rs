@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PENUMLOADED_MODULES_CALLBACKW64!();
         BOOL!();
+        PENUMLOADED_MODULES_CALLBACKW64!();
         HANDLE!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_58 {
     };
 }
 
-macro_58!()
+macro_58!();

@@ -4,4 +4,4 @@ macro_rules! newlines_from {
     };
 }
 
-newlines_from!()
+newlines_from!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Keyed!();
         Key!();
         StreamExt!();
-        Keyed!();
         StreamGroup!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_391 {
     };
 }
 
-impl_391!()
+impl_391!();

@@ -27,4 +27,4 @@ fn test() {
     };
 }
 
-test_type_path_is_transcribed_as_expr_path!()
+test_type_path_is_transcribed_as_expr_path!();

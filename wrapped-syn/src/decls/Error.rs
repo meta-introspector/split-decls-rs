@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        ParseStream!();
+        Result!();
+        Parse!();
+        ErrorMessage!();
+    };
+}
+
+macro_rules! Error {
+    () => {
+        deps!();
+        # [doc = " Error returned when a Syn parser cannot parse the input tokens."] # [doc = ""] # [doc = " # Error reporting in proc macros"] # [doc = ""] # [doc = " The correct way to report errors back to the compiler from a procedural"] # [doc = " macro is by emitting an appropriately spanned invocation of"] # [doc = " [`compile_error!`] in the generated code. This produces a better diagnostic"] # [doc = " message than simply panicking the macro."] # [doc = ""] # [doc = " [`compile_error!`]: std::compile_error!"] # [doc = ""] # [doc = " When parsing macro input, the [`parse_macro_input!`] macro handles the"] # [doc = " conversion to `compile_error!` automatically."] # [doc = ""] # [doc = " [`parse_macro_input!`]: crate::parse_macro_input!"] # [doc = ""] # [doc = " ```"] # [doc = " # extern crate proc_macro;"] # [doc = " #"] # [doc = " use proc_macro::TokenStream;"] # [doc = " use syn::parse::{Parse, ParseStream, Result};"] # [doc = " use syn::{parse_macro_input, ItemFn};"] # [doc = ""] # [doc = " # const IGNORE: &str = stringify! {"] # [doc = " #[proc_macro_attribute]"] # [doc = " # };"] # [doc = " pub fn my_attr(args: TokenStream, input: TokenStream) -> TokenStream {"] # [doc = "     let args = parse_macro_input!(args as MyAttrArgs);"] # [doc = "     let input = parse_macro_input!(input as ItemFn);"] # [doc = ""] # [doc = "     /* ... */"] # [doc = "     # TokenStream::new()"] # [doc = " }"] # [doc = ""] # [doc = " struct MyAttrArgs {"] # [doc = "     # _k: [(); { stringify! {"] # [doc = "     ..."] # [doc = "     # }; 0 }]"] # [doc = " }"] # [doc = ""] # [doc = " impl Parse for MyAttrArgs {"] # [doc = "     fn parse(input: ParseStream) -> Result<Self> {"] # [doc = "         # stringify! {"] # [doc = "         ..."] # [doc = "         # };"] # [doc = "         # unimplemented!()"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " For errors that arise later than the initial parsing stage, the"] # [doc = " [`.to_compile_error()`] or [`.into_compile_error()`] methods can be used to"] # [doc = " perform an explicit conversion to `compile_error!`."] # [doc = ""] # [doc = " [`.to_compile_error()`]: Error::to_compile_error"] # [doc = " [`.into_compile_error()`]: Error::into_compile_error"] # [doc = ""] # [doc = " ```"] # [doc = " # extern crate proc_macro;"] # [doc = " #"] # [doc = " # use proc_macro::TokenStream;"] # [doc = " # use syn::{parse_macro_input, DeriveInput};"] # [doc = " #"] # [doc = " # const IGNORE: &str = stringify! {"] # [doc = " #[proc_macro_derive(MyDerive)]"] # [doc = " # };"] # [doc = " pub fn my_derive(input: TokenStream) -> TokenStream {"] # [doc = "     let input = parse_macro_input!(input as DeriveInput);"] # [doc = ""] # [doc = "     // fn(DeriveInput) -> syn::Result<proc_macro2::TokenStream>"] # [doc = "     expand::my_derive(input)"] # [doc = "         .unwrap_or_else(syn::Error::into_compile_error)"] # [doc = "         .into()"] # [doc = " }"] # [doc = " #"] # [doc = " # mod expand {"] # [doc = " #     use proc_macro2::TokenStream;"] # [doc = " #     use syn::{DeriveInput, Result};"] # [doc = " #"] # [doc = " #     pub fn my_derive(input: DeriveInput) -> Result<TokenStream> {"] # [doc = " #         unimplemented!()"] # [doc = " #     }"] # [doc = " # }"] # [doc = " ```"] pub struct Error { messages : Vec < ErrorMessage > , }
+    };
+}
+
+Error!()

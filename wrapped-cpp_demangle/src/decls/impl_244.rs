@@ -2,14 +2,14 @@ macro_rules! deps {
     () => {
         ArgScopeStack!();
         Expression!();
+        FunctionParam!();
+        Demangle!();
         DemangleContext!();
+        Result!();
         UnresolvedName!();
-        OperatorName!();
         DemangleWrite!();
         TemplateParam!();
-        Result!();
-        Demangle!();
-        FunctionParam!();
+        OperatorName!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_244 {
     };
 }
 
-impl_244!()
+impl_244!();

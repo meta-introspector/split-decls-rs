@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        From!();
+        Field!();
+    };
+}
+
+macro_rules! check_field_attrs {
+    () => {
+        deps!();
+        fn check_field_attrs (fields : & [Field]) -> Result < () > { let mut from_field = None ; let mut source_field = None ; let mut backtrace_field = None ; let mut has_backtrace = false ; for field in fields { if let Some (from) = field . attrs . from { if from_field . is_some () { return Err (Error :: new_spanned (from . original , "duplicate #[from] attribute" ,)) ; } from_field = Some (field) ; } if let Some (source) = field . attrs . source { if source_field . is_some () { return Err (Error :: new_spanned (source . original , "duplicate #[source] attribute" ,)) ; } source_field = Some (field) ; } if let Some (backtrace) = field . attrs . backtrace { if backtrace_field . is_some () { return Err (Error :: new_spanned (backtrace , "duplicate #[backtrace] attribute" ,)) ; } backtrace_field = Some (field) ; has_backtrace = true ; } if let Some (transparent) = field . attrs . transparent { return Err (Error :: new_spanned (transparent . original , "#[error(transparent)] needs to go outside the enum or struct, not on an individual field" ,)) ; } has_backtrace |= field . is_backtrace () ; } if let (Some (from_field) , Some (source_field)) = (from_field , source_field) { if from_field . member != source_field . member { return Err (Error :: new_spanned (from_field . attrs . from . unwrap () . original , "#[from] is only supported on the source field, not any other field" ,)) ; } } if let Some (from_field) = from_field { let max_expected_fields = match backtrace_field { Some (backtrace_field) => 1 + (from_field . member != backtrace_field . member) as usize , None => 1 + has_backtrace as usize , } ; if fields . len () > max_expected_fields { return Err (Error :: new_spanned (from_field . attrs . from . unwrap () . original , "deriving From requires no fields other than source and backtrace" ,)) ; } } if let Some (source_field) = source_field . or (from_field) { if contains_non_static_lifetime (source_field . ty) { return Err (Error :: new_spanned (& source_field . original . ty , "non-static lifetimes are not allowed in the source of an error, because std::error::Error requires the source is dyn Error + 'static" ,)) ; } } Ok (()) }
+    };
+}
+
+check_field_attrs!()

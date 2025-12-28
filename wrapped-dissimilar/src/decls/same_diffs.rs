@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Chunk!();
         Diff!();
+        Chunk!();
         Range!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! same_diffs {
     };
 }
 
-same_diffs!()
+same_diffs!();

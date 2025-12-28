@@ -4,4 +4,4 @@ macro_rules! Space {
     };
 }
 
-Space!()
+Space!();

@@ -4,4 +4,4 @@ macro_rules! install {
     };
 }
 
-install!()
+install!();

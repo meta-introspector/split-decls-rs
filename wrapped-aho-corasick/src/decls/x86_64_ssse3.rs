@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         I32!();
-        Vector!();
         I8!();
+        Vector!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! x86_64_ssse3 {
     };
 }
 
-x86_64_ssse3!()
+x86_64_ssse3!();

@@ -4,4 +4,4 @@ macro_rules! black_box {
     };
 }
 
-black_box!()
+black_box!();

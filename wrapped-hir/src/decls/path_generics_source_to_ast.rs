@@ -4,4 +4,4 @@ macro_rules! path_generics_source_to_ast {
     };
 }
 
-path_generics_source_to_ast!()
+path_generics_source_to_ast!();

@@ -11,4 +11,4 @@ macro_rules! hex_decode_unchecked {
     };
 }
 
-hex_decode_unchecked!()
+hex_decode_unchecked!();

@@ -4,4 +4,4 @@ macro_rules! LibGitAdapter {
     };
 }
 
-LibGitAdapter!()
+LibGitAdapter!();

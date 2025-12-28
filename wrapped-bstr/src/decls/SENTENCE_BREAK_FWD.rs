@@ -4,4 +4,4 @@ macro_rules! SENTENCE_BREAK_FWD {
     };
 }
 
-SENTENCE_BREAK_FWD!()
+SENTENCE_BREAK_FWD!();

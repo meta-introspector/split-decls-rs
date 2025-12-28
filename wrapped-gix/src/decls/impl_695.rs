@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnsignedInteger!();
         IndexVersion!();
-        Tree!();
         Pack!();
+        UnsignedInteger!();
+        Tree!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_695 {
     };
 }
 
-impl_695!()
+impl_695!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        State!();
-        TagRefIter!();
-        Error!();
         Token!();
+        Error!();
+        TagRefIter!();
+        State!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

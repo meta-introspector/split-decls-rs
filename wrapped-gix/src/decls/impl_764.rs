@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Section!();
         Link!();
         Note!();
-        Key!();
-        SubSectionRequirement!();
         Validate!();
+        Key!();
+        Error!();
         Any!();
+        Section!();
+        SubSectionRequirement!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_764 {
     };
 }
 
-impl_764!()
+impl_764!();

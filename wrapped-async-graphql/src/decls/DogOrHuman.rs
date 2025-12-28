@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Human!();
         Union!();
+        Human!();
         Dog!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! DogOrHuman {
     };
 }
 
-DogOrHuman!()
+DogOrHuman!();

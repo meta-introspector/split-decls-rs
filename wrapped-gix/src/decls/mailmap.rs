@@ -4,4 +4,4 @@ macro_rules! mailmap {
     };
 }
 
-mailmap!()
+mailmap!();

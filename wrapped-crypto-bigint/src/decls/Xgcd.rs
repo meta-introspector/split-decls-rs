@@ -4,4 +4,4 @@ macro_rules! Xgcd {
     };
 }
 
-Xgcd!()
+Xgcd!();

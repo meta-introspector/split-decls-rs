@@ -4,4 +4,4 @@ macro_rules! aesdec {
     };
 }
 
-aesdec!()
+aesdec!();

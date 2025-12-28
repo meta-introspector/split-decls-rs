@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DroplessArena!();
         IsCopy!();
-        IsNotCopy!();
         TypedArena!();
+        IsNotCopy!();
+        DroplessArena!();
     };
 }
 

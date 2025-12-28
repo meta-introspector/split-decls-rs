@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParserError!();
         Parser!();
+        ParserError!();
         Resource!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Result {
     };
 }
 
-Result!()
+Result!();

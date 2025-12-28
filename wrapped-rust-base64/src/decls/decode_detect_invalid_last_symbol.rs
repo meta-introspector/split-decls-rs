@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecodeError!();
         EngineWrapper!();
+        DecodeError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode_detect_invalid_last_symbol {
     };
 }
 
-decode_detect_invalid_last_symbol!()
+decode_detect_invalid_last_symbol!();

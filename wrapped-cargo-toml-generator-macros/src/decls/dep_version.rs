@@ -4,4 +4,4 @@ macro_rules! dep_version {
     };
 }
 
-dep_version!()
+dep_version!();

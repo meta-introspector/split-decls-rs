@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Reader!();
         DebugCuIndex!();
         Result!();
+        Reader!();
         UnitIndex!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_382 {
     };
 }
 
-impl_382!()
+impl_382!();

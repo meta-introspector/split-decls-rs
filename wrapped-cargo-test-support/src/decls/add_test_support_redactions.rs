@@ -4,4 +4,4 @@ macro_rules! add_test_support_redactions {
     };
 }
 
-add_test_support_redactions!()
+add_test_support_redactions!();

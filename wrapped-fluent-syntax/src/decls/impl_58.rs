@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        TextWriter!();
-        Message!();
-        InlineExpression!();
-        Pattern!();
-        Identifier!();
-        PatternElement!();
         Entry!();
-        Term!();
-        State!();
-        Resource!();
-        Comment!();
-        CallArguments!();
-        VariantKey!();
-        Serializer!();
         Options!();
-        Variant!();
-        Slice!();
+        State!();
+        TextWriter!();
+        Comment!();
+        Resource!();
         Expression!();
+        InlineExpression!();
+        Identifier!();
+        Message!();
+        Term!();
+        Variant!();
+        Pattern!();
+        Slice!();
+        Serializer!();
+        VariantKey!();
+        PatternElement!();
         Attribute!();
+        CallArguments!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

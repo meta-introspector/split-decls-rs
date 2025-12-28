@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         DefaultHasher!();
         HashSet!();
-        Equivalent!();
         HashMap!();
         DefaultHashBuilder!();
+        Equivalent!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! test_set {
     };
 }
 
-test_set!()
+test_set!();

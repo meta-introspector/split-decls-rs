@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FileEntryFormat!();
-        AttributeValue!();
-        Result!();
-        FileEntry!();
         Reader!();
+        FileEntry!();
+        AttributeValue!();
+        FileEntryFormat!();
         Encoding!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_file_v5 {
     };
 }
 
-parse_file_v5!()
+parse_file_v5!();

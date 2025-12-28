@@ -14,4 +14,4 @@ fn l_paren() {}
     };
 }
 
-test_match_literal!()
+test_match_literal!();

@@ -4,4 +4,4 @@ macro_rules! EarlyBinder {
     };
 }
 
-EarlyBinder!()
+EarlyBinder!();

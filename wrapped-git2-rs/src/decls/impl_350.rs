@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Buf!();
         Error!();
         DiffStats!();
+        Buf!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_350 {
     };
 }
 
-impl_350!()
+impl_350!();

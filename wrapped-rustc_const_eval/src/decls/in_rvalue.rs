@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ConstCx!();
+        Qualif!();
+    };
+}
+
+macro_rules! in_rvalue {
+    () => {
+        deps!();
+        # [doc = " Returns `true` if this `Rvalue` contains qualif `Q`."] pub fn in_rvalue < 'tcx , Q , F > (cx : & ConstCx < '_ , 'tcx > , in_local : & mut F , rvalue : & Rvalue < 'tcx > ,) -> bool where Q : Qualif , F : FnMut (Local) -> bool , { match rvalue { Rvalue :: ThreadLocalRef (_) | Rvalue :: NullaryOp (..) => { Q :: in_any_value_of_ty (cx , rvalue . ty (cx . body , cx . tcx)) } Rvalue :: Discriminant (place) | Rvalue :: Len (place) => { in_place :: < Q , _ > (cx , in_local , place . as_ref ()) } Rvalue :: CopyForDeref (place) => in_place :: < Q , _ > (cx , in_local , place . as_ref ()) , Rvalue :: Use (operand) | Rvalue :: Repeat (operand , _) | Rvalue :: UnaryOp (_ , operand) | Rvalue :: Cast (_ , operand , _) | Rvalue :: ShallowInitBox (operand , _) => in_operand :: < Q , _ > (cx , in_local , operand) , Rvalue :: BinaryOp (_ , box (lhs , rhs)) => { in_operand :: < Q , _ > (cx , in_local , lhs) || in_operand :: < Q , _ > (cx , in_local , rhs) } Rvalue :: Ref (_ , _ , place) | Rvalue :: RawPtr (_ , place) => { if let Some ((place_base , ProjectionElem :: Deref)) = place . as_ref () . last_projection () { let base_ty = place_base . ty (cx . body , cx . tcx) . ty ; if let ty :: Ref (..) = base_ty . kind () { return in_place :: < Q , _ > (cx , in_local , place_base) ; } } in_place :: < Q , _ > (cx , in_local , place . as_ref ()) } Rvalue :: WrapUnsafeBinder (op , _) => in_operand :: < Q , _ > (cx , in_local , op) , Rvalue :: Aggregate (kind , operands) => { if let AggregateKind :: Adt (adt_did , ..) = * * kind { let def = cx . tcx . adt_def (adt_did) ; if def . is_union () || ! Q :: is_structural_in_adt_value (cx , def) { return Q :: in_any_value_of_ty (cx , rvalue . ty (cx . body , cx . tcx)) ; } } operands . iter () . any (| o | in_operand :: < Q , _ > (cx , in_local , o)) } } }
+    };
+}
+
+in_rvalue!()

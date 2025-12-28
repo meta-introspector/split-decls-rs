@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DemangleWrite!();
         DemangleContext!();
+        DemangleWrite!();
         ArgScopeStack!();
         Result!();
     };
@@ -14,4 +14,4 @@ macro_rules! Demangle {
     };
 }
 
-Demangle!()
+Demangle!();

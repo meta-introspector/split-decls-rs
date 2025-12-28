@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Chain!();
-        Buf!();
-        Limit!();
-        UninitSlice!();
-        TryGetError!();
         Writer!();
+        Limit!();
+        TryGetError!();
+        Buf!();
+        Chain!();
+        UninitSlice!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! BufMut {
     };
 }
 
-BufMut!()
+BufMut!();

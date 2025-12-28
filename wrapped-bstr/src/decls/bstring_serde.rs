@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BStr!();
         BString!();
+        BStr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! bstring_serde {
     };
 }
 
-bstring_serde!()
+bstring_serde!();

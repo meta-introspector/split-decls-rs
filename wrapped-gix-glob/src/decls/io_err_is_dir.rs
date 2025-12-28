@@ -4,4 +4,4 @@ macro_rules! io_err_is_dir {
     };
 }
 
-io_err_is_dir!()
+io_err_is_dir!();

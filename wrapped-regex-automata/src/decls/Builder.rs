@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Config!();
+        NFA!();
+        Match!();
+        PikeVM!();
+        Compiler!();
+    };
+}
+
+macro_rules! Builder {
+    () => {
+        deps!();
+        # [doc = " A builder for a `PikeVM`."] # [doc = ""] # [doc = " This builder permits configuring options for the syntax of a pattern,"] # [doc = " the NFA construction and the `PikeVM` construction. This builder is"] # [doc = " different from a general purpose regex builder in that it permits fine"] # [doc = " grain configuration of the construction process. The trade off for this is"] # [doc = " complexity, and the possibility of setting a configuration that might not"] # [doc = " make sense. For example, there are two different UTF-8 modes:"] # [doc = ""] # [doc = " * [`util::syntax::Config::utf8`](crate::util::syntax::Config::utf8)"] # [doc = " controls whether the pattern itself can contain sub-expressions that match"] # [doc = " invalid UTF-8."] # [doc = " * [`thompson::Config::utf8`] controls whether empty matches that split a"] # [doc = " Unicode codepoint are reported or not."] # [doc = ""] # [doc = " Generally speaking, callers will want to either enable all of these or"] # [doc = " disable all of these."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " This example shows how to disable UTF-8 mode in the syntax and the regex"] # [doc = " itself. This is generally what you want for matching on arbitrary bytes."] # [doc = ""] # [doc = " ```"] # [doc = " use regex_automata::{"] # [doc = "     nfa::thompson::{self, pikevm::PikeVM},"] # [doc = "     util::syntax,"] # [doc = "     Match,"] # [doc = " };"] # [doc = ""] # [doc = " let re = PikeVM::builder()"] # [doc = "     .syntax(syntax::Config::new().utf8(false))"] # [doc = "     .thompson(thompson::Config::new().utf8(false))"] # [doc = "     .build(r\"foo(?-u:[^b])ar.*\")?;"] # [doc = " let mut cache = re.create_cache();"] # [doc = ""] # [doc = " let haystack = b\"\\xFEfoo\\xFFarzz\\xE2\\x98\\xFF\\n\";"] # [doc = " let expected = Some(Match::must(0, 1..9));"] # [doc = " let got = re.find_iter(&mut cache, haystack).next();"] # [doc = " assert_eq!(expected, got);"] # [doc = " // Notice that `(?-u:[^b])` matches invalid UTF-8,"] # [doc = " // but the subsequent `.*` does not! Disabling UTF-8"] # [doc = " // on the syntax permits this."] # [doc = " //"] # [doc = " // N.B. This example does not show the impact of"] # [doc = " // disabling UTF-8 mode on a PikeVM Config, since that"] # [doc = " // only impacts regexes that can produce matches of"] # [doc = " // length 0."] # [doc = " assert_eq!(b\"foo\\xFFarzz\", &haystack[got.unwrap().range()]);"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [derive (Clone , Debug)] pub struct Builder { config : Config , # [cfg (feature = "syntax")] thompson : thompson :: Compiler , }
+    };
+}
+
+Builder!()

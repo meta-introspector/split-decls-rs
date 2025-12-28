@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Visibility!();
-        DefMap!();
-        TreeId!();
-        ModuleData!();
-        BlockRelativeModuleId!();
-        DefDatabase!();
-        BlockInfo!();
-        ModuleOrigin!();
-        VisibilityExplicitness!();
         ModuleId!();
+        BlockRelativeModuleId!();
+        ModuleData!();
+        VisibilityExplicitness!();
+        TreeId!();
+        DefDatabase!();
+        DefMap!();
         BlockLoc!();
+        ModuleOrigin!();
+        Visibility!();
+        BlockInfo!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! block_def_map {
     };
 }
 
-block_def_map!()
+block_def_map!();

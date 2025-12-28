@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        Merge!();
+        AggregateError!();
+        RaceOk!();
+        Zip!();
         TryJoin!();
         Join!();
-        Merge!();
-        Zip!();
-        RaceOk!();
         Race!();
         Chain!();
-        AggregateError!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! array {
     };
 }
 
-array!()
+array!();

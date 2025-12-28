@@ -4,4 +4,4 @@ macro_rules! HOURS_PER_DAY {
     };
 }
 
-HOURS_PER_DAY!()
+HOURS_PER_DAY!();

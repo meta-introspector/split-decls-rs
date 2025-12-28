@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Slim!();
         Teddy!();
         Patterns!();
-        Slim!();
-        Searcher!();
-        Builder!();
         Fat!();
+        Builder!();
+        Searcher!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_142 {
     };
 }
 
-impl_142!()
+impl_142!();

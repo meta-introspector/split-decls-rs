@@ -4,4 +4,4 @@ macro_rules! Opacity {
     };
 }
 
-Opacity!()
+Opacity!();

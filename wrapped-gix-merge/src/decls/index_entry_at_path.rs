@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConflictIndexEntry!();
         ConflictIndexEntryPathHint!();
+        ConflictIndexEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! index_entry_at_path {
     };
 }
 
-index_entry_at_path!()
+index_entry_at_path!();

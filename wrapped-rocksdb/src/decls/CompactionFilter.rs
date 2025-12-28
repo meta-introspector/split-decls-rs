@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Decision!();
+        DB!();
+    };
+}
+
+macro_rules! CompactionFilter {
+    () => {
+        deps!();
+        # [doc = " CompactionFilter allows an application to modify/delete a key-value at"] # [doc = " the time of compaction."] pub trait CompactionFilter { # [doc = " The compaction process invokes this"] # [doc = " method for kv that is being compacted. The application can inspect"] # [doc = " the existing value of the key and make decision based on it."] # [doc = ""] # [doc = " Key-Values that are results of merge operation during compaction are not"] # [doc = " passed into this function. Currently, when you have a mix of Put()s and"] # [doc = " Merge()s on a same key, we only guarantee to process the merge operands"] # [doc = " through the compaction filters. Put()s might be processed, or might not."] # [doc = ""] # [doc = " When the value is to be preserved, the application has the option"] # [doc = " to modify the existing_value and pass it back through new_value."] # [doc = " value_changed needs to be set to true in this case."] # [doc = ""] # [doc = " Note that RocksDB snapshots (i.e. call GetSnapshot() API on a"] # [doc = " DB* object) will not guarantee to preserve the state of the DB with"] # [doc = " CompactionFilter. Data seen from a snapshot might disappear after a"] # [doc = " compaction finishes. If you use snapshots, think twice about whether you"] # [doc = " want to use compaction filter and whether you are using it in a safe way."] # [doc = ""] # [doc = " If the CompactionFilter was created by a factory, then it will only ever"] # [doc = " be used by a single thread that is doing the compaction run, and this"] # [doc = " call does not need to be thread-safe.  However, multiple filters may be"] # [doc = " in existence and operating concurrently."] fn filter (& mut self , level : u32 , key : & [u8] , value : & [u8]) -> Decision ; # [doc = " Returns a name that identifies this compaction filter."] # [doc = " The name will be printed to LOG file on start up for diagnosis."] fn name (& self) -> & CStr ; }
+    };
+}
+
+CompactionFilter!()

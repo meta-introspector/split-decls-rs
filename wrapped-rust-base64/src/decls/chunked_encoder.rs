@@ -4,4 +4,4 @@ macro_rules! chunked_encoder {
     };
 }
 
-chunked_encoder!()
+chunked_encoder!();

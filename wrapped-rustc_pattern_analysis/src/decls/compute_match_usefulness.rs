@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        UsefulnessReport!();
+        Matrix!();
+        PlaceValidity!();
+        MatchArm!();
+        UsefulnessCtxt!();
+        Usefulness!();
+        PatCx!();
+    };
+}
+
+macro_rules! compute_match_usefulness {
+    () => {
+        deps!();
+        # [doc = " Computes whether a match is exhaustive and which of its arms are useful."] # [instrument (skip (tycx , arms) , level = "debug")] pub fn compute_match_usefulness < 'p , Cx : PatCx > (tycx : & Cx , arms : & [MatchArm < 'p , Cx >] , scrut_ty : Cx :: Ty , scrut_validity : PlaceValidity , complexity_limit : usize ,) -> Result < UsefulnessReport < 'p , Cx > , Cx :: Error > { if tycx . match_may_contain_deref_pats () { checks :: detect_mixed_deref_pat_ctors (tycx , arms) ? ; } let mut cx = UsefulnessCtxt { tycx , branch_usefulness : FxHashMap :: default () , complexity_limit , complexity_level : 0 , } ; let mut matrix = Matrix :: new (arms , scrut_ty , scrut_validity) ; let non_exhaustiveness_witnesses = compute_exhaustiveness_and_usefulness (& mut cx , & mut matrix) ? ; let non_exhaustiveness_witnesses : Vec < _ > = non_exhaustiveness_witnesses . single_column () ; let arm_usefulness : Vec < _ > = arms . iter () . copied () . map (| arm | { debug ! (? arm) ; let usefulness = cx . branch_usefulness . get (& arm . pat . uid) . unwrap () ; let usefulness = if let Some (explanation) = usefulness . is_redundant () { Usefulness :: Redundant (explanation) } else { let mut redundant_subpats = Vec :: new () ; arm . pat . walk (& mut | subpat | { if let Some (u) = cx . branch_usefulness . get (& subpat . uid) { if let Some (explanation) = u . is_redundant () { redundant_subpats . push ((subpat , explanation)) ; false } else { true } } else { true } }) ; Usefulness :: Useful (redundant_subpats) } ; debug ! (? usefulness) ; (arm , usefulness) }) . collect () ; let arm_intersections : Vec < _ > = matrix . rows () . map (| row | row . intersects_at_least . clone ()) . collect () ; Ok (UsefulnessReport { arm_usefulness , non_exhaustiveness_witnesses , arm_intersections }) }
+    };
+}
+
+compute_match_usefulness!()

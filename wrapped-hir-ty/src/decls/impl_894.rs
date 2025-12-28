@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Operand!();
         Rvalue!();
+        Operand!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_894 {
     };
 }
 
-impl_894!()
+impl_894!();

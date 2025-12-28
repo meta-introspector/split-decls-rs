@@ -4,4 +4,4 @@ macro_rules! empty_path {
     };
 }
 
-empty_path!()
+empty_path!();

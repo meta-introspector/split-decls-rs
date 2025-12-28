@@ -1,0 +1,7 @@
+macro_rules! module {
+    () => {
+        macro_rules ! module { ($ name : ident , $ trait : ident , $ endianness_str : expr) => { # [doc = " Numeric primitives stored in"] # [doc = $ endianness_str] # [doc = " byte order."] pub mod $ name { use super ::$ trait ; module ! (@ ty U16 , $ trait , "16-bit unsigned integer" , $ endianness_str) ; module ! (@ ty U32 , $ trait , "32-bit unsigned integer" , $ endianness_str) ; module ! (@ ty U64 , $ trait , "64-bit unsigned integer" , $ endianness_str) ; module ! (@ ty U128 , $ trait , "128-bit unsigned integer" , $ endianness_str) ; module ! (@ ty I16 , $ trait , "16-bit signed integer" , $ endianness_str) ; module ! (@ ty I32 , $ trait , "32-bit signed integer" , $ endianness_str) ; module ! (@ ty I64 , $ trait , "64-bit signed integer" , $ endianness_str) ; module ! (@ ty I128 , $ trait , "128-bit signed integer" , $ endianness_str) ; module ! (@ ty F32 , $ trait , "32-bit floating point number" , $ endianness_str) ; module ! (@ ty F64 , $ trait , "64-bit floating point number" , $ endianness_str) ; } } ; (@ ty $ ty : ident , $ trait : ident , $ desc_str : expr , $ endianness_str : expr) => { # [doc = " A"] # [doc = $ desc_str] # [doc = " stored in"] # [doc = $ endianness_str] # [doc = " byte order."] pub type $ ty = crate :: byteorder ::$ ty <$ trait >; } ; }
+    };
+}
+
+module!()

@@ -11,4 +11,4 @@ macro_rules! construct_take_rest {
     };
 }
 
-construct_take_rest!()
+construct_take_rest!();

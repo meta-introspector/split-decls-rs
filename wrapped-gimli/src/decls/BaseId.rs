@@ -4,4 +4,4 @@ macro_rules! BaseId {
     };
 }
 
-BaseId!()
+BaseId!();

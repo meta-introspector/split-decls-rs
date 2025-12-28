@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StmtList!();
         Stmt!();
+        StmtList!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

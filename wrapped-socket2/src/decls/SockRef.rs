@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Socket!();
+    };
+}
+
+macro_rules! SockRef {
+    () => {
+        deps!();
+        # [doc = " A reference to a [`Socket`] that can be used to configure socket types other"] # [doc = " than the `Socket` type itself."] # [doc = ""] # [doc = " This allows for example a [`TcpStream`], found in the standard library, to"] # [doc = " be configured using all the additional methods found in the [`Socket`] API."] # [doc = ""] # [doc = " `SockRef` can be created from any socket type that implements [`AsFd`]"] # [doc = " (Unix) or [`AsSocket`] (Windows) using the [`From`] implementation."] # [doc = ""] # [doc = " [`TcpStream`]: std::net::TcpStream"] # [doc = " [`AsFd`]: https://doc.rust-lang.org/stable/std/os/fd/trait.AsFd.html"] # [doc = " [`AsSocket`]: https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsSocket.html"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Below is an example of converting a [`TcpStream`] into a [`SockRef`]."] # [doc = ""] # [doc = " ```"] # [doc = " use std::net::{TcpStream, SocketAddr};"] # [doc = ""] # [doc = " use socket2::SockRef;"] # [doc = ""] # [doc = " # fn main() -> Result<(), Box<dyn std::error::Error>> {"] # [doc = " // Create `TcpStream` from the standard library."] # [doc = " let address: SocketAddr = \"127.0.0.1:1234\".parse()?;"] # [doc = " # let b1 = std::sync::Arc::new(std::sync::Barrier::new(2));"] # [doc = " # let b2 = b1.clone();"] # [doc = " # let handle = std::thread::spawn(move || {"] # [doc = " #    let listener = std::net::TcpListener::bind(address).unwrap();"] # [doc = " #    b2.wait();"] # [doc = " #    let (stream, _) = listener.accept().unwrap();"] # [doc = " #    std::thread::sleep(std::time::Duration::from_millis(10));"] # [doc = " #    drop(stream);"] # [doc = " # });"] # [doc = " # b1.wait();"] # [doc = " let stream = TcpStream::connect(address)?;"] # [doc = ""] # [doc = " // Create a `SockRef`erence to the stream."] # [doc = " let socket_ref = SockRef::from(&stream);"] # [doc = " // Use `Socket::set_tcp_nodelay` on the stream."] # [doc = " socket_ref.set_tcp_nodelay(true)?;"] # [doc = " drop(socket_ref);"] # [doc = ""] # [doc = " assert_eq!(stream.nodelay()?, true);"] # [doc = " # handle.join().unwrap();"] # [doc = " # Ok(())"] # [doc = " # }"] # [doc = " ```"] pub struct SockRef < 's > { # [doc = " Because this is a reference we don't own the `Socket`, however `Socket`"] # [doc = " closes itself when dropped, so we use `ManuallyDrop` to prevent it from"] # [doc = " closing itself."] socket : ManuallyDrop < Socket > , # [doc = " Because we don't own the socket we need to ensure the socket remains"] # [doc = " open while we have a \"reference\" to it, the lifetime `'s` ensures this."] _lifetime : PhantomData < & 's Socket > , }
+    };
+}
+
+SockRef!()

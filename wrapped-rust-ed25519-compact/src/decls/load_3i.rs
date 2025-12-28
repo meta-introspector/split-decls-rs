@@ -4,4 +4,4 @@ macro_rules! load_3i {
     };
 }
 
-load_3i!()
+load_3i!();

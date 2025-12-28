@@ -4,4 +4,4 @@ macro_rules! assert_sufficiently_different {
     };
 }
 
-assert_sufficiently_different!()
+assert_sufficiently_different!();

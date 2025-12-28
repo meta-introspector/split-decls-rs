@@ -4,4 +4,4 @@ macro_rules! winapi {
     };
 }
 
-winapi!()
+winapi!();

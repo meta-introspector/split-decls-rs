@@ -11,4 +11,4 @@ macro_rules! validate_registry_name {
     };
 }
 
-validate_registry_name!()
+validate_registry_name!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
         HirDatabase!();
+        EarlyBinder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! generic_predicates_for_param_cycle_result {
     };
 }
 
-generic_predicates_for_param_cycle_result!()
+generic_predicates_for_param_cycle_result!();

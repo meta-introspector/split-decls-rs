@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         AddrEntryIter!();
+        ReaderOffset!();
+        Reader!();
+        DebugAddrOffset!();
+        Error!();
+        Result!();
         AddrHeader!();
         Encoding!();
-        DebugAddrOffset!();
-        Reader!();
-        Result!();
-        Error!();
-        ReaderOffset!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_152 {
     };
 }
 
-impl_152!()
+impl_152!();

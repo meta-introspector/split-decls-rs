@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        List!();
+        Owned!();
+        Iter!();
         Entry!();
         Shared!();
-        Owned!();
-        List!();
-        Guard!();
-        Iter!();
-        Atomic!();
         IsElement!();
+        Atomic!();
+        Guard!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

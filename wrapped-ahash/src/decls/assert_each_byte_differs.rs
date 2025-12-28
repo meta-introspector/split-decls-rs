@@ -4,4 +4,4 @@ macro_rules! assert_each_byte_differs {
     };
 }
 
-assert_each_byte_differs!()
+assert_each_byte_differs!();

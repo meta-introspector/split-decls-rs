@@ -4,4 +4,4 @@ macro_rules! DW_EH_PE_FORMAT_MASK {
     };
 }
 
-DW_EH_PE_FORMAT_MASK!()
+DW_EH_PE_FORMAT_MASK!();

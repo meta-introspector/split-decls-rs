@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VecStringOrBool!();
         InheritableField!();
+        VecStringOrBool!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InheritableVecStringOrBool {
     };
 }
 
-InheritableVecStringOrBool!()
+InheritableVecStringOrBool!();

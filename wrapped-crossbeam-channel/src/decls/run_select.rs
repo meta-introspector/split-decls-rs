@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Operation!();
-        Token!();
-        SelectHandle!();
         Context!();
+        Operation!();
         Selected!();
+        Token!();
         Timeout!();
+        SelectHandle!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! run_select {
     };
 }
 
-run_select!()
+run_select!();

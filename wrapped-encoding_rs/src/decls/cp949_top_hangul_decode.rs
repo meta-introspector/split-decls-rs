@@ -4,4 +4,4 @@ macro_rules! cp949_top_hangul_decode {
     };
 }
 
-cp949_top_hangul_decode!()
+cp949_top_hangul_decode!();

@@ -4,4 +4,4 @@ macro_rules! make_filename_safe {
     };
 }
 
-make_filename_safe!()
+make_filename_safe!();

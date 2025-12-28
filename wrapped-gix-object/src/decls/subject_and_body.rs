@@ -4,4 +4,4 @@ macro_rules! subject_and_body {
     };
 }
 
-subject_and_body!()
+subject_and_body!();

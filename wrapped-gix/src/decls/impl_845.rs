@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Proxy!();
-        Worktree!();
-        Note!();
         Path!();
         Read!();
+        Note!();
+        Worktree!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_845 {
     };
 }
 
-impl_845!()
+impl_845!();

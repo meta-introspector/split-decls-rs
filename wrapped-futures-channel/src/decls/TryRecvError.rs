@@ -4,4 +4,4 @@ macro_rules! TryRecvError {
     };
 }
 
-TryRecvError!()
+TryRecvError!();

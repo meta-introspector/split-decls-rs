@@ -4,4 +4,4 @@ macro_rules! FromStream {
     };
 }
 
-FromStream!()
+FromStream!();

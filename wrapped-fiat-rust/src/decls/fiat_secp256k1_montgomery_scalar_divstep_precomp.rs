@@ -11,4 +11,4 @@ macro_rules! fiat_secp256k1_montgomery_scalar_divstep_precomp {
     };
 }
 
-fiat_secp256k1_montgomery_scalar_divstep_precomp!()
+fiat_secp256k1_montgomery_scalar_divstep_precomp!();

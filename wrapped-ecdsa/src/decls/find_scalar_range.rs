@@ -4,4 +4,4 @@ macro_rules! find_scalar_range {
     };
 }
 
-find_scalar_range!()
+find_scalar_range!();

@@ -4,4 +4,4 @@ macro_rules! ONE_WRITER {
     };
 }
 
-ONE_WRITER!()
+ONE_WRITER!();

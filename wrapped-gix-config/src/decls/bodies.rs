@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SectionId!();
         Body!();
+        SectionId!();
         Section!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! bodies {
     };
 }
 
-bodies!()
+bodies!();

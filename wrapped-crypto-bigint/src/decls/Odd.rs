@@ -4,4 +4,4 @@ macro_rules! Odd {
     };
 }
 
-Odd!()
+Odd!();

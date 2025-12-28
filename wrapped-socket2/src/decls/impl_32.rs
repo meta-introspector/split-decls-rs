@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Socket!();
+    };
+}
+
+macro_rules! impl_32 {
+    () => {
+        deps!();
+        impl Write for Socket { fn write (& mut self , buf : & [u8]) -> io :: Result < usize > { self . send (buf) } # [cfg (not (target_os = "redox"))] fn write_vectored (& mut self , bufs : & [IoSlice < '_ >]) -> io :: Result < usize > { self . send_vectored (bufs) } fn flush (& mut self) -> io :: Result < () > { Ok (()) } }
+    };
+}
+
+impl_32!()

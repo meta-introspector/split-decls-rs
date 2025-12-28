@@ -11,4 +11,4 @@ macro_rules! from_environment {
     };
 }
 
-from_environment!()
+from_environment!();

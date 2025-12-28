@@ -4,4 +4,4 @@ macro_rules! du {
     };
 }
 
-du!()
+du!();

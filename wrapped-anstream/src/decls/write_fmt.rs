@@ -13,4 +13,4 @@ macro_rules! write_fmt {
     };
 }
 
-write_fmt!()
+write_fmt!();

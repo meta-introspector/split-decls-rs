@@ -4,4 +4,4 @@ macro_rules! installation_config_prefix {
     };
 }
 
-installation_config_prefix!()
+installation_config_prefix!();

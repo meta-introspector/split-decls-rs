@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Client!();
         Error!();
+        Client!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_io_err {
     };
 }
 
-handle_io_err!()
+handle_io_err!();

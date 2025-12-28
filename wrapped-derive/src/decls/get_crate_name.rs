@@ -4,4 +4,4 @@ macro_rules! get_crate_name {
     };
 }
 
-get_crate_name!()
+get_crate_name!();

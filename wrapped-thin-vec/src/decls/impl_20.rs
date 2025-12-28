@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Drain!();
-        Header!();
-        Splice!();
         ThinVec!();
         IntoIter!();
+        Header!();
         ExtractIf!();
+        Splice!();
+        Drain!();
     };
 }
 

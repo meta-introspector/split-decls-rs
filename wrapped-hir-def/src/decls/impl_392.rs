@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Trait!();
+        HasChildSource!();
         DefDatabase!();
         GenericDefId!();
-        HasChildSource!();
-        Trait!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_392 {
     };
 }
 
-impl_392!()
+impl_392!();

@@ -4,4 +4,4 @@ macro_rules! git_traits {
     };
 }
 
-git_traits!()
+git_traits!();

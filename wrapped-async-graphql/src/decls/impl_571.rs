@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Data!();
+        Query!();
+        SDLExportOptions!();
         Any!();
-        Error!();
         Result!();
         ExtensionContext!();
-        Schema!();
-        Query!();
         Context!();
-        SDLExportOptions!();
+        Error!();
+        Schema!();
+        Data!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_571 {
     };
 }
 
-impl_571!()
+impl_571!();

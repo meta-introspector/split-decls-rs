@@ -14,4 +14,4 @@ macro_rules! duration_round {
     };
 }
 
-duration_round!()
+duration_round!();

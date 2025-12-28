@@ -4,4 +4,4 @@ macro_rules! is_valid_subsection {
     };
 }
 
-is_valid_subsection!()
+is_valid_subsection!();

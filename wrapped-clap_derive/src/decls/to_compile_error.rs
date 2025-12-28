@@ -4,4 +4,4 @@ macro_rules! to_compile_error {
     };
 }
 
-to_compile_error!()
+to_compile_error!();

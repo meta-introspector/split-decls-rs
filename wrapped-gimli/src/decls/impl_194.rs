@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         Result!();
         CfiEntriesIter!();
-        Reader!();
         Section!();
-        CieOrFde!();
+        Reader!();
         UnwindSection!();
+        CieOrFde!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

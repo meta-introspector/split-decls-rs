@@ -4,4 +4,4 @@ macro_rules! CP_UTF8 {
     };
 }
 
-CP_UTF8!()
+CP_UTF8!();

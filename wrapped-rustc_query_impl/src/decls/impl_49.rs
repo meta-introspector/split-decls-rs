@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        DynamicConfig!();
+        QueryCtxt!();
+    };
+}
+
+macro_rules! impl_49 {
+    () => {
+        deps!();
+        impl < 'tcx , C : QueryCache , const ANON : bool , const DEPTH_LIMIT : bool , const FEEDABLE : bool > QueryConfig < QueryCtxt < 'tcx > > for DynamicConfig < 'tcx , C , ANON , DEPTH_LIMIT , FEEDABLE > where for < 'a > C :: Key : HashStable < StableHashingContext < 'a > > , { type Key = C :: Key ; type Value = C :: Value ; type Cache = C ; # [inline (always)] fn name (self) -> & 'static str { self . dynamic . name } # [inline (always)] fn cache_on_disk (self , tcx : TyCtxt < 'tcx > , key : & Self :: Key) -> bool { (self . dynamic . cache_on_disk) (tcx , key) } # [inline (always)] fn query_state < 'a > (self , qcx : QueryCtxt < 'tcx > ,) -> & 'a QueryState < Self :: Key , QueryStackDeferred < 'tcx > > where QueryCtxt < 'tcx > : 'a , { unsafe { & * (& qcx . tcx . query_system . states as * const QueryStates < 'tcx >) . byte_add (self . dynamic . query_state) . cast :: < QueryState < Self :: Key , QueryStackDeferred < 'tcx > > > () } } # [inline (always)] fn query_cache < 'a > (self , qcx : QueryCtxt < 'tcx >) -> & 'a Self :: Cache where 'tcx : 'a , { unsafe { & * (& qcx . tcx . query_system . caches as * const QueryCaches < 'tcx >) . byte_add (self . dynamic . query_cache) . cast :: < Self :: Cache > () } } # [inline (always)] fn execute_query (self , tcx : TyCtxt < 'tcx > , key : Self :: Key) -> Self :: Value { (self . dynamic . execute_query) (tcx , key) } # [inline (always)] fn compute (self , qcx : QueryCtxt < 'tcx > , key : Self :: Key) -> Self :: Value { (self . dynamic . compute) (qcx . tcx , key) } # [inline (always)] fn try_load_from_disk (self , qcx : QueryCtxt < 'tcx > , key : & Self :: Key , prev_index : SerializedDepNodeIndex , index : DepNodeIndex ,) -> Option < Self :: Value > { if self . dynamic . can_load_from_disk { (self . dynamic . try_load_from_disk) (qcx . tcx , key , prev_index , index) } else { None } } # [inline] fn loadable_from_disk (self , qcx : QueryCtxt < 'tcx > , key : & Self :: Key , index : SerializedDepNodeIndex ,) -> bool { (self . dynamic . loadable_from_disk) (qcx . tcx , key , index) } fn value_from_cycle_error (self , tcx : TyCtxt < 'tcx > , cycle_error : & CycleError , guar : ErrorGuaranteed ,) -> Self :: Value { (self . dynamic . value_from_cycle_error) (tcx , cycle_error , guar) } # [inline (always)] fn format_value (self) -> fn (& Self :: Value) -> String { self . dynamic . format_value } # [inline (always)] fn anon (self) -> bool { ANON } # [inline (always)] fn eval_always (self) -> bool { self . dynamic . eval_always } # [inline (always)] fn depth_limit (self) -> bool { DEPTH_LIMIT } # [inline (always)] fn feedable (self) -> bool { FEEDABLE } # [inline (always)] fn dep_kind (self) -> DepKind { self . dynamic . dep_kind } # [inline (always)] fn handle_cycle_error (self) -> HandleCycleError { self . dynamic . handle_cycle_error } # [inline (always)] fn hash_result (self) -> HashResult < Self :: Value > { self . dynamic . hash_result } }
+    };
+}
+
+impl_49!()

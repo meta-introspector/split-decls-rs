@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
-        BitMask!();
         BitMaskIter!();
+        BitMask!();
+        IntoIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

@@ -4,4 +4,4 @@ macro_rules! relocate {
     };
 }
 
-relocate!()
+relocate!();

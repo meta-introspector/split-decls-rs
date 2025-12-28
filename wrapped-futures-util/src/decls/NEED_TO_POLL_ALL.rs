@@ -4,4 +4,4 @@ macro_rules! NEED_TO_POLL_ALL {
     };
 }
 
-NEED_TO_POLL_ALL!()
+NEED_TO_POLL_ALL!();

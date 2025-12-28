@@ -4,4 +4,4 @@ macro_rules! wrap_algorithms {
     };
 }
 
-wrap_algorithms!()
+wrap_algorithms!();

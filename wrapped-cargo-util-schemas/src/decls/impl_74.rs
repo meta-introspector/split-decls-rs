@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PartialVersion!();
         RustVersion!();
-        RustVersionErrorKind!();
-        RustVersionError!();
         Result!();
+        RustVersionError!();
+        PartialVersion!();
+        RustVersionErrorKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_74 {
     };
 }
 
-impl_74!()
+impl_74!();

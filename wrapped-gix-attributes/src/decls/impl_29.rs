@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AssignmentRef!();
-        TrackedAssignment!();
-        Error!();
         Assignments!();
-        Attributes!();
-        Kind!();
         Value!();
+        Kind!();
+        Attributes!();
+        TrackedAssignment!();
+        AssignmentRef!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

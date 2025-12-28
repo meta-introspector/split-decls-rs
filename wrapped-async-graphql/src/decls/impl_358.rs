@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Field!();
         SelectionField!();
         SelectionFieldsIter!();
+        Field!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_358 {
     };
 }
 
-impl_358!()
+impl_358!();

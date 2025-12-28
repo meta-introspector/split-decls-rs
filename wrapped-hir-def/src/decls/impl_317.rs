@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        GenericParamId!();
-        LifetimeParamId!();
-        TypeParamId!();
-        Label!();
-        Scope!();
-        DefDatabase!();
-        TypeOrConstParamId!();
-        ConstParamId!();
-        MacroId!();
-        ExprScope!();
-        GenericDefId!();
-        ScopeNames!();
-        ModuleDefId!();
-        ScopeDef!();
         AdtId!();
+        ModuleDefId!();
+        GenericParamId!();
+        DefDatabase!();
+        GenericDefId!();
+        LifetimeParamId!();
+        TypeOrConstParamId!();
+        ExprScope!();
+        Scope!();
+        ScopeDef!();
+        TypeParamId!();
+        ConstParamId!();
+        ScopeNames!();
+        Label!();
+        MacroId!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_317 {
     };
 }
 
-impl_317!()
+impl_317!();

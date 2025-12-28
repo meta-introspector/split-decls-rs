@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Local!();
         DateTime!();
+        Local!();
         FixedOffset!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! test_to_string_round_trip_with_local {
     };
 }
 
-test_to_string_round_trip_with_local!()
+test_to_string_round_trip_with_local!();

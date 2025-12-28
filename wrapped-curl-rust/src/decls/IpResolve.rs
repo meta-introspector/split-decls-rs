@@ -4,4 +4,4 @@ macro_rules! IpResolve {
     };
 }
 
-IpResolve!()
+IpResolve!();

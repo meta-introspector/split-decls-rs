@@ -1,0 +1,7 @@
+macro_rules! PR_SCHED_CORE_SCOPE_THREAD_GROUP {
+    () => {
+        const PR_SCHED_CORE_SCOPE_THREAD_GROUP : u32 = 1 ;
+    };
+}
+
+PR_SCHED_CORE_SCOPE_THREAD_GROUP!()

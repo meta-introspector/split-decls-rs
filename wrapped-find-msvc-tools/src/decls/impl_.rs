@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TargetArch!();
         Tool!();
         EnvGetter!();
-        TargetArch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_ {
     };
 }
 
-impl_!()
+impl_!();

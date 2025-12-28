@@ -12,4 +12,4 @@ macro_rules! apply_mark {
     };
 }
 
-apply_mark!()
+apply_mark!();

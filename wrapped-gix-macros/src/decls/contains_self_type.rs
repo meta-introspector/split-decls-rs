@@ -4,4 +4,4 @@ macro_rules! contains_self_type {
     };
 }
 
-contains_self_type!()
+contains_self_type!();

@@ -11,4 +11,4 @@ macro_rules! parse_progress {
     };
 }
 
-parse_progress!()
+parse_progress!();

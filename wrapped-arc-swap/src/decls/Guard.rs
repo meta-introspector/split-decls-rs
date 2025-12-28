@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DefaultStrategy!();
-        RefCnt!();
         Strategy!();
+        RefCnt!();
+        DefaultStrategy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Guard {
     };
 }
 
-Guard!()
+Guard!();

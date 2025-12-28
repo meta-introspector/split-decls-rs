@@ -4,4 +4,4 @@ macro_rules! demangle_auto {
     };
 }
 
-demangle_auto!()
+demangle_auto!();

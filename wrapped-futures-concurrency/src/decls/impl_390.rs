@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WakerVec!();
-        Key!();
-        StreamGroup!();
         PollVec!();
+        StreamGroup!();
+        Key!();
+        WakerVec!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_390 {
     };
 }
 
-impl_390!()
+impl_390!();

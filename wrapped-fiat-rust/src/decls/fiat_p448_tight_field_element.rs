@@ -4,4 +4,4 @@ macro_rules! fiat_p448_tight_field_element {
     };
 }
 
-fiat_p448_tight_field_element!()
+fiat_p448_tight_field_element!();

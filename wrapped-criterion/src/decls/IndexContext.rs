@@ -11,4 +11,4 @@ macro_rules! IndexContext {
     };
 }
 
-IndexContext!()
+IndexContext!();

@@ -4,4 +4,4 @@ macro_rules! windows_link {
     };
 }
 
-windows_link!()
+windows_link!();

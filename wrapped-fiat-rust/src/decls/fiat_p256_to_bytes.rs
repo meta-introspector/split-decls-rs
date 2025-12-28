@@ -11,4 +11,4 @@ macro_rules! fiat_p256_to_bytes {
     };
 }
 
-fiat_p256_to_bytes!()
+fiat_p256_to_bytes!();

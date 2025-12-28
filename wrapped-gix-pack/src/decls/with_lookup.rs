@@ -4,4 +4,4 @@ macro_rules! with_lookup {
     };
 }
 
-with_lookup!()
+with_lookup!();

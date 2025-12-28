@@ -4,4 +4,4 @@ macro_rules! mark_no_access {
     };
 }
 
-mark_no_access!()
+mark_no_access!();

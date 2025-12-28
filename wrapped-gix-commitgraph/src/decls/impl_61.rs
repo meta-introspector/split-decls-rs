@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Graph!();
-        Outcome!();
         Position!();
-        File!();
-        Commit!();
         Error!();
+        Outcome!();
+        Commit!();
+        Graph!();
+        File!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

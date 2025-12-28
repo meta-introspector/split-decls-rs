@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ApplyChange!();
         IndexPersistedOrInMemory!();
+        ApplyChange!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Outcome {
     };
 }
 
-Outcome!()
+Outcome!();

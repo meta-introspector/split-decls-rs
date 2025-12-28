@@ -11,4 +11,4 @@ macro_rules! should_show_subcommand {
     };
 }
 
-should_show_subcommand!()
+should_show_subcommand!();

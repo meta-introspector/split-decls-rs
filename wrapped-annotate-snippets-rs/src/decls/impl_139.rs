@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Snippet!();
         Patch!();
         TrimmedPatch!();
-        Snippet!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        FnSig!();
-        TyLoweringContext!();
         PredicateFilter!();
-        FnAbi!();
-        AliasTy!();
+        FnSig!();
         ImplTraitLoweringMode!();
+        AliasTy!();
         ImplTrait!();
-        Binder!();
+        FnAbi!();
         PathDiagnosticCallbackData!();
-        ImplTraitId!();
+        TyLoweringContext!();
         Generics!();
+        Binder!();
+        ImplTraitId!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_118 {
     };
 }
 
-impl_118!()
+impl_118!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        LineString!();
+        Writer!();
         Result!();
         Sections!();
         Dwarf!();
-        LineString!();
-        Writer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_738 {
     };
 }
 
-impl_738!()
+impl_738!();

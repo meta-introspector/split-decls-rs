@@ -1,0 +1,25 @@
+macro_rules! deps {
+    () => {
+        Aliasing!();
+        Valid!();
+        Unaligned!();
+        Read!();
+        TryTransmuteFromPtr!();
+        Validity!();
+        ValidityError!();
+        TryFromBytes!();
+        Alignment!();
+        Invariants!();
+        Reference!();
+        Initialized!();
+    };
+}
+
+macro_rules! try_cast_or_pme {
+    () => {
+        deps!();
+        # [doc = " Is a given source a valid instance of `Dst`?"] # [doc = ""] # [doc = " If so, returns `src` casted to a `Ptr<Dst, _>`. Otherwise returns `None`."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " Unsafe code may assume that, if `try_cast_or_pme(src)` returns `Ok`,"] # [doc = " `*src` is a bit-valid instance of `Dst`, and that the size of `Src` is"] # [doc = " greater than or equal to the size of `Dst`."] # [doc = ""] # [doc = " Unsafe code may assume that, if `try_cast_or_pme(src)` returns `Err`, the"] # [doc = " encapsulated `Ptr` value is the original `src`. `try_cast_or_pme` cannot"] # [doc = " guarantee that the referent has not been modified, as it calls user-defined"] # [doc = " code (`TryFromBytes::is_bit_valid`)."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " `try_cast_or_pme` may either produce a post-monomorphization error or a"] # [doc = " panic if `Dst` not the same size as `Src`. Otherwise, `try_cast_or_pme`"] # [doc = " panics under the same circumstances as [`is_bit_valid`]."] # [doc = ""] # [doc = " [`is_bit_valid`]: TryFromBytes::is_bit_valid"] # [doc (hidden)] # [inline] fn try_cast_or_pme < Src , Dst , I , R , S > (src : Ptr < '_ , Src , I > ,) -> Result < Ptr < '_ , Dst , (I :: Aliasing , invariant :: Unaligned , invariant :: Valid) > , ValidityError < Ptr < '_ , Src , I > , Dst > , > where Src : invariant :: Read < I :: Aliasing , R > , Dst : TryFromBytes + invariant :: Read < I :: Aliasing , R > + TryTransmuteFromPtr < Dst , I :: Aliasing , invariant :: Initialized , invariant :: Valid , S > , I : Invariants < Validity = invariant :: Initialized > , I :: Aliasing : invariant :: Reference , { static_assert ! (Src , Dst => mem :: size_of ::< Dst > () == mem :: size_of ::< Src > ()) ; let c_ptr = unsafe { src . cast_unsized (| p | cast ! (p)) } ; match c_ptr . try_into_valid () { Ok (ptr) => Ok (ptr) , Err (err) => { let ptr = err . into_src () ; let ptr = unsafe { ptr . cast_unsized (| p | cast ! (p)) } ; let ptr = unsafe { ptr . assume_alignment :: < I :: Alignment > () } ; let ptr = unsafe { ptr . assume_validity :: < I :: Validity > () } ; Err (ValidityError :: new (ptr . unify_invariants ())) } } }
+    };
+}
+
+try_cast_or_pme!()

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Options!();
-        IndexAndPacks!();
-        Error!();
-        Store!();
         Ordering!();
+        IndexAndPacks!();
+        Store!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

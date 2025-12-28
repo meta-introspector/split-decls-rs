@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Http!();
         Key!();
         Section!();
+        Http!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_663 {
     };
 }
 
-impl_663!()
+impl_663!();

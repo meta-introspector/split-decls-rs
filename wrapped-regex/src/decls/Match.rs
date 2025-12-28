@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Regex!();
+    };
+}
+
+macro_rules! Match {
+    () => {
+        deps!();
+        # [doc = " Represents a single match of a regex in a haystack."] # [doc = ""] # [doc = " A `Match` contains both the start and end byte offsets of the match and the"] # [doc = " actual substring corresponding to the range of those byte offsets. It is"] # [doc = " guaranteed that `start <= end`. When `start == end`, the match is empty."] # [doc = ""] # [doc = " Since this `Match` can only be produced by the top-level `Regex` APIs"] # [doc = " that only support searching UTF-8 encoded strings, the byte offsets for a"] # [doc = " `Match` are guaranteed to fall on valid UTF-8 codepoint boundaries. That"] # [doc = " is, slicing a `&str` with [`Match::range`] is guaranteed to never panic."] # [doc = ""] # [doc = " Values with this type are created by [`Regex::find`] or"] # [doc = " [`Regex::find_iter`]. Other APIs can create `Match` values too. For"] # [doc = " example, [`Captures::get`]."] # [doc = ""] # [doc = " The lifetime parameter `'h` refers to the lifetime of the matched of the"] # [doc = " haystack that this match was produced from."] # [doc = ""] # [doc = " # Numbering"] # [doc = ""] # [doc = " The byte offsets in a `Match` form a half-open interval. That is, the"] # [doc = " start of the range is inclusive and the end of the range is exclusive."] # [doc = " For example, given a haystack `abcFOOxyz` and a match of `FOO`, its byte"] # [doc = " offset range starts at `3` and ends at `6`. `3` corresponds to `F` and"] # [doc = " `6` corresponds to `x`, which is one past the end of the match. This"] # [doc = " corresponds to the same kind of slicing that Rust uses."] # [doc = ""] # [doc = " For more on why this was chosen over other schemes (aside from being"] # [doc = " consistent with how Rust the language works), see [this discussion] and"] # [doc = " [Dijkstra's note on a related topic][note]."] # [doc = ""] # [doc = " [this discussion]: https://github.com/rust-lang/regex/discussions/866"] # [doc = " [note]: https://www.cs.utexas.edu/users/EWD/transcriptions/EWD08xx/EWD831.html"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " This example shows the value of each of the methods on `Match` for a"] # [doc = " particular search."] # [doc = ""] # [doc = " ```"] # [doc = " use regex::Regex;"] # [doc = ""] # [doc = " let re = Regex::new(r\"\\p{Greek}+\").unwrap();"] # [doc = " let hay = \"Greek: αβγδ\";"] # [doc = " let m = re.find(hay).unwrap();"] # [doc = " assert_eq!(7, m.start());"] # [doc = " assert_eq!(15, m.end());"] # [doc = " assert!(!m.is_empty());"] # [doc = " assert_eq!(8, m.len());"] # [doc = " assert_eq!(7..15, m.range());"] # [doc = " assert_eq!(\"αβγδ\", m.as_str());"] # [doc = " ```"] # [derive (Copy , Clone , Eq , PartialEq)] pub struct Match < 'h > { haystack : & 'h str , start : usize , end : usize , }
+    };
+}
+
+Match!()

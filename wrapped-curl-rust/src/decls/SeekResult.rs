@@ -4,4 +4,4 @@ macro_rules! SeekResult {
     };
 }
 
-SeekResult!()
+SeekResult!();

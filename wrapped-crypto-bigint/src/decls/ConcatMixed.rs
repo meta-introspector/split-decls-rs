@@ -11,4 +11,4 @@ macro_rules! ConcatMixed {
     };
 }
 
-ConcatMixed!()
+ConcatMixed!();

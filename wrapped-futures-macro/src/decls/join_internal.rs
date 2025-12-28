@@ -4,4 +4,4 @@ macro_rules! join_internal {
     };
 }
 
-join_internal!()
+join_internal!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Worktree!();
         Error!();
+        Worktree!();
         Index!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! open_index {
     };
 }
 
-open_index!()
+open_index!();

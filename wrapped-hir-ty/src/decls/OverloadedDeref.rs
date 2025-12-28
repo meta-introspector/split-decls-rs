@@ -4,4 +4,4 @@ macro_rules! OverloadedDeref {
     };
 }
 
-OverloadedDeref!()
+OverloadedDeref!();

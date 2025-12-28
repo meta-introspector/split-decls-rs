@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        OutOfRange!();
         ParseError!();
         ParseErrorKind!();
-        OutOfRange!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! OUT_OF_RANGE {
     };
 }
 
-OUT_OF_RANGE!()
+OUT_OF_RANGE!();

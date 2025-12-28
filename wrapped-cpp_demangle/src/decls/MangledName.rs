@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CloneSuffix!();
-        GlobalCtorDtor!();
-        Type!();
         Encoding!();
+        GlobalCtorDtor!();
+        CloneSuffix!();
+        Type!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MangledName {
     };
 }
 
-MangledName!()
+MangledName!();

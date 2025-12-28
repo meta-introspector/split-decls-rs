@@ -4,4 +4,4 @@ macro_rules! impl_set_extends {
     };
 }
 
-impl_set_extends!()
+impl_set_extends!();

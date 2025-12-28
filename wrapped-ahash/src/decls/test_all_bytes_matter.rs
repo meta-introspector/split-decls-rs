@@ -4,4 +4,4 @@ macro_rules! test_all_bytes_matter {
     };
 }
 
-test_all_bytes_matter!()
+test_all_bytes_matter!();

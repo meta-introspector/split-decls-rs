@@ -4,4 +4,4 @@ macro_rules! MethodResolutionUnstableFeatures {
     };
 }
 
-MethodResolutionUnstableFeatures!()
+MethodResolutionUnstableFeatures!();

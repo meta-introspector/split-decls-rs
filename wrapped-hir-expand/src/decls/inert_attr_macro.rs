@@ -4,4 +4,4 @@ macro_rules! inert_attr_macro {
     };
 }
 
-inert_attr_macro!()
+inert_attr_macro!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IdentityRef!();
         Signature!();
+        IdentityRef!();
         Identity!();
         SignatureRef!();
     };
@@ -14,4 +14,4 @@ macro_rules! impls {
     };
 }
 
-impls!()
+impls!();

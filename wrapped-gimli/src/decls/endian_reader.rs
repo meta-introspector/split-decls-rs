@@ -4,4 +4,4 @@ macro_rules! endian_reader {
     };
 }
 
-endian_reader!()
+endian_reader!();

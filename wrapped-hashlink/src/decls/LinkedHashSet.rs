@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefaultHashBuilder!();
         LinkedHashMap!();
+        DefaultHashBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LinkedHashSet {
     };
 }
 
-LinkedHashSet!()
+LinkedHashSet!();

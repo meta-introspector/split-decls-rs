@@ -12,4 +12,4 @@ macro_rules! const_eval_discriminant_cycle_result {
     };
 }
 
-const_eval_discriminant_cycle_result!()
+const_eval_discriminant_cycle_result!();

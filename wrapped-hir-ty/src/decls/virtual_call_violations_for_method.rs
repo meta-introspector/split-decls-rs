@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MethodViolationCode!();
         GenericPredicates!();
+        MethodViolationCode!();
         HirDatabase!();
         AllowSelfProjection!();
     };
@@ -14,4 +14,4 @@ macro_rules! virtual_call_violations_for_method {
     };
 }
 
-virtual_call_violations_for_method!()
+virtual_call_violations_for_method!();

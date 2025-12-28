@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Schema!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_484 {
     };
 }
 
-impl_484!()
+impl_484!();

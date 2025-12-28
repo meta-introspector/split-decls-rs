@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Item!();
         Fixed!();
         Weekday!();
+        Item!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Parsed {
     };
 }
 
-Parsed!()
+Parsed!();

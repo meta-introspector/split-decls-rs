@@ -4,4 +4,4 @@ macro_rules! value_hint {
     };
 }
 
-value_hint!()
+value_hint!();

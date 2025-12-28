@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AutoParseRecursion!();
         AutoLogParse!();
+        AutoParseRecursion!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_begin_parse {
     };
 }
 
-try_begin_parse!()
+try_begin_parse!();

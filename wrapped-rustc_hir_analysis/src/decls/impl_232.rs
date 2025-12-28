@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        FieldAlreadyDeclared!();
+        FieldUniquenessCheckContext!();
+        FieldDeclSpan!();
+        NestedSpan!();
+    };
+}
+
+macro_rules! impl_232 {
+    () => {
+        deps!();
+        impl < 'tcx > FieldUniquenessCheckContext < 'tcx > { fn new (tcx : TyCtxt < 'tcx >) -> Self { Self { tcx , seen_fields : FxIndexMap :: default () } } # [doc = " Check if a given field `ident` declared at `field_decl` has been declared elsewhere before."] fn check_field_decl (& mut self , field_name : Ident , field_decl : FieldDeclSpan) { use FieldDeclSpan :: * ; let field_name = field_name . normalize_to_macros_2_0 () ; match (field_decl , self . seen_fields . get (& field_name) . copied ()) { (NotNested (span) , Some (NotNested (prev_span))) => { self . tcx . dcx () . emit_err (errors :: FieldAlreadyDeclared :: NotNested { field_name , span , prev_span , }) ; } (NotNested (span) , Some (Nested (prev))) => { self . tcx . dcx () . emit_err (errors :: FieldAlreadyDeclared :: PreviousNested { field_name , span , prev_span : prev . span , prev_nested_field_span : prev . nested_field_span , prev_help : prev . to_field_already_declared_nested_help () , }) ; } (Nested (current @ NestedSpan { span , nested_field_span , .. }) , Some (NotNested (prev_span)) ,) => { self . tcx . dcx () . emit_err (errors :: FieldAlreadyDeclared :: CurrentNested { field_name , span , nested_field_span , help : current . to_field_already_declared_nested_help () , prev_span , }) ; } (Nested (current @ NestedSpan { span , nested_field_span }) , Some (Nested (prev))) => { self . tcx . dcx () . emit_err (errors :: FieldAlreadyDeclared :: BothNested { field_name , span , nested_field_span , help : current . to_field_already_declared_nested_help () , prev_span : prev . span , prev_nested_field_span : prev . nested_field_span , prev_help : prev . to_field_already_declared_nested_help () , }) ; } (field_decl , None) => { self . seen_fields . insert (field_name , field_decl) ; } } } }
+    };
+}
+
+impl_232!()

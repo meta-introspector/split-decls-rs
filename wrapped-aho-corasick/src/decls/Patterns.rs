@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MatchKind!();
         PatternID!();
+        MatchKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Patterns {
     };
 }
 
-Patterns!()
+Patterns!();

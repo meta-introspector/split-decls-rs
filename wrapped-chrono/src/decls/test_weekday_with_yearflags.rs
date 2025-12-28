@@ -11,4 +11,4 @@ macro_rules! test_weekday_with_yearflags {
     };
 }
 
-test_weekday_with_yearflags!()
+test_weekday_with_yearflags!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Index!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! index_id {
     };
 }
 
-index_id!()
+index_id!();

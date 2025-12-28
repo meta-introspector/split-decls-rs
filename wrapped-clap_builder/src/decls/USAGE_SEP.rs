@@ -4,4 +4,4 @@ macro_rules! USAGE_SEP {
     };
 }
 
-USAGE_SEP!()
+USAGE_SEP!();

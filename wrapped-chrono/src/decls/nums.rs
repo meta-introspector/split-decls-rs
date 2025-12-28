@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Item!();
         Numeric!();
         Pad!();
-        Item!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! nums {
     };
 }
 
-nums!()
+nums!();

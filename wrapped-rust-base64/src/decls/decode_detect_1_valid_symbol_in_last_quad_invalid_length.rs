@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EngineWrapper!();
         DecodeError!();
+        EngineWrapper!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode_detect_1_valid_symbol_in_last_quad_invalid_length {
     };
 }
 
-decode_detect_1_valid_symbol_in_last_quad_invalid_length!()
+decode_detect_1_valid_symbol_in_last_quad_invalid_length!();

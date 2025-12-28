@@ -4,4 +4,4 @@ macro_rules! fiat_p521_u1 {
     };
 }
 
-fiat_p521_u1!()
+fiat_p521_u1!();

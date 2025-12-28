@@ -11,4 +11,4 @@ macro_rules! get_colors {
     };
 }
 
-get_colors!()
+get_colors!();

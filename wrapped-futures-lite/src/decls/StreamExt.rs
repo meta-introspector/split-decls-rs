@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        FindMapFuture!();
-        NextFuture!();
-        TryNextFuture!();
-        TryFoldFuture!();
-        AnyFuture!();
-        NthFuture!();
-        PositionFuture!();
-        TryForEachFuture!();
-        AllFuture!();
-        Drain!();
         Pending!();
+        PositionFuture!();
+        TryFoldFuture!();
+        AllFuture!();
+        NthFuture!();
+        Drain!();
+        TryNextFuture!();
+        AnyFuture!();
+        TryForEachFuture!();
+        NextFuture!();
         FindFuture!();
+        FindMapFuture!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! StreamExt {
     };
 }
 
-StreamExt!()
+StreamExt!();

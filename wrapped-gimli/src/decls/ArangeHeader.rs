@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Reader!();
-        ReaderOffset!();
+        DebugInfoOffset!();
         DebugArangesOffset!();
         Encoding!();
-        DebugInfoOffset!();
+        ReaderOffset!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ArangeHeader {
     };
 }
 
-ArangeHeader!()
+ArangeHeader!();

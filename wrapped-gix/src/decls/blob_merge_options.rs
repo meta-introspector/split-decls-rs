@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConflictStyle!();
         Error!();
+        ConflictStyle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! blob_merge_options {
     };
 }
 
-blob_merge_options!()
+blob_merge_options!();

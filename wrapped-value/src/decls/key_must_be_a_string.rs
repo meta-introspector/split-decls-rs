@@ -11,4 +11,4 @@ macro_rules! key_must_be_a_string {
     };
 }
 
-key_must_be_a_string!()
+key_must_be_a_string!();

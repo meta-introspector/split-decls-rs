@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Url!();
         Options!();
-        Path!();
-        Kind!();
         Error!();
+        Kind!();
+        Path!();
         PrepareFetch!();
+        Url!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! prepare_clone {
     };
 }
 
-prepare_clone!()
+prepare_clone!();

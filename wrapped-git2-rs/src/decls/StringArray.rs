@@ -4,4 +4,4 @@ macro_rules! StringArray {
     };
 }
 
-StringArray!()
+StringArray!();

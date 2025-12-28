@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Item!();
-        Numeric!();
         Month!();
+        Numeric!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! D_FMT {
     };
 }
 
-D_FMT!()
+D_FMT!();

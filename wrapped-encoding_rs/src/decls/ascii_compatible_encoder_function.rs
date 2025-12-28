@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NonAscii!();
         CopyAsciiResult!();
-        Unicode!();
         ByteDestination!();
-        EncoderResult!();
+        NonAscii!();
         Space!();
+        EncoderResult!();
+        Unicode!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ascii_compatible_encoder_function {
     };
 }
 
-ascii_compatible_encoder_function!()
+ascii_compatible_encoder_function!();

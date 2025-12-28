@@ -4,4 +4,4 @@ macro_rules! generic_arg_from_param {
     };
 }
 
-generic_arg_from_param!()
+generic_arg_from_param!();

@@ -4,4 +4,4 @@ macro_rules! Extensions {
     };
 }
 
-Extensions!()
+Extensions!();

@@ -12,4 +12,4 @@ macro_rules! derive_subcommand {
     };
 }
 
-derive_subcommand!()
+derive_subcommand!();

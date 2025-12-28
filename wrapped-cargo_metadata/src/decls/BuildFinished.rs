@@ -4,4 +4,4 @@ macro_rules! BuildFinished {
     };
 }
 
-BuildFinished!()
+BuildFinished!();

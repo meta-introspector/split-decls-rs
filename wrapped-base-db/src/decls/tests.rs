@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Env!();
-        CrateGraphBuilder!();
-        DependencyBuilder!();
         CrateOrigin!();
         CrateWorkspaceData!();
+        DependencyBuilder!();
+        CrateGraphBuilder!();
         CrateName!();
+        Env!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

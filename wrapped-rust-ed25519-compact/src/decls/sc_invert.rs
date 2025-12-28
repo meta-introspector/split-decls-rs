@@ -4,4 +4,4 @@ macro_rules! sc_invert {
     };
 }
 
-sc_invert!()
+sc_invert!();

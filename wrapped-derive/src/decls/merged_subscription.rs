@@ -4,4 +4,4 @@ macro_rules! merged_subscription {
     };
 }
 
-merged_subscription!()
+merged_subscription!();

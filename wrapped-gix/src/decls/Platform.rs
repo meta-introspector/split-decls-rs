@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Repository!();
+        OwnedOrStaticAtomicBool!();
+        IndexPersistedOrInMemory!();
         Options!();
         TrackRenames!();
-        OwnedOrStaticAtomicBool!();
         Submodule!();
-        Repository!();
-        IndexPersistedOrInMemory!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Platform {
     };
 }
 
-Platform!()
+Platform!();

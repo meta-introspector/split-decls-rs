@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Note!();
-        PathCursor!();
         NewDir!();
-        Options!();
         Kind!();
-        Path!();
+        Note!();
         Error!();
+        Path!();
+        Options!();
+        PathCursor!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! into {
     };
 }
 
-into!()
+into!();

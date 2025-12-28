@@ -13,4 +13,4 @@ macro_rules! set_weekday_with_num_days_from_sunday {
     };
 }
 
-set_weekday_with_num_days_from_sunday!()
+set_weekday_with_num_days_from_sunday!();

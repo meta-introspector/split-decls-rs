@@ -4,4 +4,4 @@ macro_rules! CargoUpdateCommand {
     };
 }
 
-CargoUpdateCommand!()
+CargoUpdateCommand!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         WriteTo!();
         Kind!();
-        Error!();
         Write!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

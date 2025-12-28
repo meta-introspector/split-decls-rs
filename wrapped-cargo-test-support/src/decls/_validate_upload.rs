@@ -11,4 +11,4 @@ macro_rules! _validate_upload {
     };
 }
 
-_validate_upload!()
+_validate_upload!();

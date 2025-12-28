@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         UnitHeader!();
-        EntriesTree!();
         Reader!();
-        Error!();
-        Abbreviations!();
-        DebuggingInformationEntry!();
         Result!();
+        DebuggingInformationEntry!();
+        Error!();
+        EntriesTree!();
+        Abbreviations!();
         EntriesTreeNode!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_647 {
     };
 }
 
-impl_647!()
+impl_647!();

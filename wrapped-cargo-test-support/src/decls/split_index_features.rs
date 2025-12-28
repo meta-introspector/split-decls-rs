@@ -11,4 +11,4 @@ macro_rules! split_index_features {
     };
 }
 
-split_index_features!()
+split_index_features!();

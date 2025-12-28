@@ -4,4 +4,4 @@ macro_rules! MilliSecondsTimestampVisitor {
     };
 }
 
-MilliSecondsTimestampVisitor!()
+MilliSecondsTimestampVisitor!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AttributeStack!();
-        Repository!();
         State!();
-        Error!();
+        Repository!();
         Note!();
+        AttributeStack!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_288 {
     };
 }
 
-impl_288!()
+impl_288!();

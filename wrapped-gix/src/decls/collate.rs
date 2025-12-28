@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Fetch!();
         PrepareFetch!();
+        Fetch!();
         Negotiate!();
         Config!();
         Error!();
@@ -15,4 +15,4 @@ macro_rules! collate {
     };
 }
 
-collate!()
+collate!();

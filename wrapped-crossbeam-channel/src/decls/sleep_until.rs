@@ -4,4 +4,4 @@ macro_rules! sleep_until {
     };
 }
 
-sleep_until!()
+sleep_until!();

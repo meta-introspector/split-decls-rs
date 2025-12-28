@@ -4,4 +4,4 @@ macro_rules! try_future {
     };
 }
 
-try_future!()
+try_future!();

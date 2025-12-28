@@ -4,4 +4,4 @@ macro_rules! UserDefinedDecoder {
     };
 }
 
-UserDefinedDecoder!()
+UserDefinedDecoder!();

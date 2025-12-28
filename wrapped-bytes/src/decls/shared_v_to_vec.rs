@@ -11,4 +11,4 @@ macro_rules! shared_v_to_vec {
     };
 }
 
-shared_v_to_vec!()
+shared_v_to_vec!();

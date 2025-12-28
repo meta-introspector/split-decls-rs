@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Write!();
         AllowStdIo!();
         Ready!();
-        Write!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1051 {
     };
 }
 
-impl_1051!()
+impl_1051!();

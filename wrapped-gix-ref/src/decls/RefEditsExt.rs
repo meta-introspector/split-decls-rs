@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         PartialNameRef!();
-        Target!();
-        RefEdit!();
         Error!();
+        RefEdit!();
+        Target!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! RefEditsExt {
     };
 }
 
-RefEditsExt!()
+RefEditsExt!();

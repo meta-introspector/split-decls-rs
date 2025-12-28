@@ -4,4 +4,4 @@ macro_rules! new_uuid {
     };
 }
 
-new_uuid!()
+new_uuid!();

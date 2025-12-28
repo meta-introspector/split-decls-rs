@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Enumerate!();
-        EnumerateConsumer!();
-        ConcurrentStream!();
         EnumerateFuture!();
+        EnumerateConsumer!();
         Consumer!();
+        Enumerate!();
+        ConcurrentStream!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

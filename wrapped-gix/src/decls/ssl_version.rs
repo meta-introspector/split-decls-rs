@@ -11,4 +11,4 @@ macro_rules! ssl_version {
     };
 }
 
-ssl_version!()
+ssl_version!();

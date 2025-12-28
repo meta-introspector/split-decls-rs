@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AsAssocItem!();
         Function!();
         AssocItem!();
+        AsAssocItem!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_332 {
     };
 }
 
-impl_332!()
+impl_332!();

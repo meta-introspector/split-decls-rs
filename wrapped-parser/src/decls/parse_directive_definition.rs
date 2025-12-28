@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        PositionCalculator!();
-        FieldDefinition!();
+        DirectiveLocation!();
+        FragmentSpread!();
         Positioned!();
-        InlineFragment!();
+        FragmentDefinition!();
+        PositionCalculator!();
+        VariableDefinition!();
+        Result!();
         DirectiveDefinition!();
         Field!();
-        Result!();
-        DirectiveLocation!();
-        VariableDefinition!();
         Rule!();
-        FragmentDefinition!();
-        FragmentSpread!();
+        InlineFragment!();
+        FieldDefinition!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! parse_directive_definition {
     };
 }
 
-parse_directive_definition!()
+parse_directive_definition!();

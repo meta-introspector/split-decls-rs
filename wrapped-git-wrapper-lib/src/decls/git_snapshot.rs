@@ -4,4 +4,4 @@ macro_rules! git_snapshot {
     };
 }
 
-git_snapshot!()
+git_snapshot!();

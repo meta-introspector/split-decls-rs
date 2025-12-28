@@ -1,48 +1,48 @@
 macro_rules! deps {
     () => {
-        Variant!();
-        TypeInfo!();
-        Static!();
-        Adt!();
-        Local!();
-        HasSource!();
-        Impl!();
-        SelfParam!();
-        Module!();
-        Label!();
-        Crate!();
-        TupleField!();
-        Const!();
-        SourceAnalyzer!();
-        InlineAsmOperand!();
-        RenameConflictsVisitor!();
-        TypeNs!();
-        PathResolutionPerNs!();
-        Union!();
-        BindingMode!();
-        Function!();
-        BodyOrSig!();
-        Adjust!();
-        ModuleDef!();
-        TypeParam!();
-        ItemInNs!();
-        ToDef!();
-        AutoBorrow!();
-        SemanticsScope!();
-        OverloadedDeref!();
-        Field!();
-        Macro!();
-        PathResolution!();
-        Trait!();
-        Struct!();
         Type!();
-        Callable!();
-        GenericSubstitution!();
-        SemanticsImpl!();
-        Adjustment!();
-        Enum!();
-        LifetimeParam!();
+        TypeParam!();
+        OverloadedDeref!();
+        Module!();
+        Variant!();
+        SemanticsScope!();
         DefWithBody!();
+        Union!();
+        Static!();
+        Macro!();
+        RenameConflictsVisitor!();
+        Trait!();
+        AutoBorrow!();
+        ModuleDef!();
+        Adt!();
+        TypeNs!();
+        Const!();
+        Field!();
+        Local!();
+        Enum!();
+        Function!();
+        Struct!();
+        InlineAsmOperand!();
+        Adjust!();
+        TupleField!();
+        HasSource!();
+        Crate!();
+        BindingMode!();
+        BodyOrSig!();
+        Callable!();
+        ToDef!();
+        SelfParam!();
+        ItemInNs!();
+        LifetimeParam!();
+        GenericSubstitution!();
+        PathResolution!();
+        Adjustment!();
+        TypeInfo!();
+        Impl!();
+        PathResolutionPerNs!();
+        SourceAnalyzer!();
+        Label!();
+        SemanticsImpl!();
     };
 }
 
@@ -56,4 +56,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

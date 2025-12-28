@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Hash!();
         Hasher!();
+        Hash!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! reference_hash {
     };
 }
 
-reference_hash!()
+reference_hash!();

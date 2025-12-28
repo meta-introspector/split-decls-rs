@@ -4,4 +4,4 @@ macro_rules! is_qdtext {
     };
 }
 
-is_qdtext!()
+is_qdtext!();

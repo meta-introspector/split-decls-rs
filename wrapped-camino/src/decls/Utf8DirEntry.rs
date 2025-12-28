@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf8PathBuf!();
         ReadDirUtf8!();
+        Utf8PathBuf!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Utf8DirEntry {
     };
 }
 
-Utf8DirEntry!()
+Utf8DirEntry!();

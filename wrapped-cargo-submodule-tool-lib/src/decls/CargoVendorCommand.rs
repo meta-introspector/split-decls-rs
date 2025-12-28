@@ -4,4 +4,4 @@ macro_rules! CargoVendorCommand {
     };
 }
 
-CargoVendorCommand!()
+CargoVendorCommand!();

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Builder!();
+    };
+}
+
+macro_rules! codegen_wasm_try {
+    () => {
+        deps!();
+        fn codegen_wasm_try < 'll , 'tcx > (bx : & mut Builder < '_ , 'll , 'tcx > , try_func : & 'll Value , data : & 'll Value , catch_func : & 'll Value , dest : PlaceRef < 'tcx , & 'll Value > ,) { let (llty , llfn) = get_rust_try_fn (bx , & mut | mut bx | { bx . set_personality_fn (bx . eh_personality ()) ; let normal = bx . append_sibling_block ("normal") ; let catchswitch = bx . append_sibling_block ("catchswitch") ; let catchpad = bx . append_sibling_block ("catchpad") ; let caught = bx . append_sibling_block ("caught") ; let try_func = llvm :: get_param (bx . llfn () , 0) ; let data = llvm :: get_param (bx . llfn () , 1) ; let catch_func = llvm :: get_param (bx . llfn () , 2) ; let try_func_ty = bx . type_func (& [bx . type_ptr ()] , bx . type_void ()) ; bx . invoke (try_func_ty , None , None , try_func , & [data] , normal , catchswitch , None , None) ; bx . switch_to_block (normal) ; bx . ret (bx . const_i32 (0)) ; bx . switch_to_block (catchswitch) ; let cs = bx . catch_switch (None , None , & [catchpad]) ; bx . switch_to_block (catchpad) ; let null = bx . const_null (bx . type_ptr ()) ; let funclet = bx . catch_pad (cs , & [null]) ; let ptr = bx . call_intrinsic ("llvm.wasm.get.exception" , & [] , & [funclet . cleanuppad ()]) ; let _sel = bx . call_intrinsic ("llvm.wasm.get.ehselector" , & [] , & [funclet . cleanuppad ()]) ; let catch_ty = bx . type_func (& [bx . type_ptr () , bx . type_ptr ()] , bx . type_void ()) ; bx . call (catch_ty , None , None , catch_func , & [data , ptr] , Some (& funclet) , None) ; bx . catch_ret (& funclet , caught) ; bx . switch_to_block (caught) ; bx . ret (bx . const_i32 (1)) ; }) ; let ret = bx . call (llty , None , None , llfn , & [try_func , data , catch_func] , None , None) ; OperandValue :: Immediate (ret) . store (bx , dest) ; }
+    };
+}
+
+codegen_wasm_try!()

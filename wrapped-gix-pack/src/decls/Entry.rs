@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PackIndex!();
         Offset!();
+        PackIndex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Entry {
     };
 }
 
-Entry!()
+Entry!();

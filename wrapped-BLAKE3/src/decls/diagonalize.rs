@@ -4,4 +4,4 @@ macro_rules! diagonalize {
     };
 }
 
-diagonalize!()
+diagonalize!();

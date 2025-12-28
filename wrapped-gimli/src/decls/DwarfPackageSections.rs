@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
         DwarfPackage!();
-        DebugRngLists!();
-        DebugLoc!();
-        Result!();
-        DebugInfo!();
-        DebugStr!();
-        Reader!();
-        DebugLocLists!();
-        DebugAbbrev!();
-        DebugLine!();
-        DebugCuIndex!();
-        DebugTuIndex!();
-        DebugTypes!();
         DebugStrOffsets!();
+        DebugLine!();
+        Reader!();
+        DebugStr!();
+        DebugTypes!();
+        Result!();
+        DebugLoc!();
+        DebugRngLists!();
+        DebugCuIndex!();
+        DebugLocLists!();
+        DebugInfo!();
+        DebugAbbrev!();
+        DebugTuIndex!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! DwarfPackageSections {
     };
 }
 
-DwarfPackageSections!()
+DwarfPackageSections!();

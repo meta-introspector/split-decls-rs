@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        StreamExt!();
-        RaceOk!();
-        IntoStream!();
-        Race!();
-        Merge!();
-        IntoConcurrentStream!();
-        FutureExt!();
-        FromConcurrentStream!();
-        ConcurrentStream!();
         TryJoin!();
+        Zip!();
         Join!();
         Chain!();
-        Zip!();
+        IntoStream!();
+        Race!();
+        StreamExt!();
+        Merge!();
+        ConcurrentStream!();
+        RaceOk!();
+        IntoConcurrentStream!();
+        FromConcurrentStream!();
+        FutureExt!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! prelude {
     };
 }
 
-prelude!()
+prelude!();

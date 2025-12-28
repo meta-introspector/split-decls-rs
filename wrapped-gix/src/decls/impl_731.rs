@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Section!();
         Key!();
+        Section!();
         Safe!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_731 {
     };
 }
 
-impl_731!()
+impl_731!();

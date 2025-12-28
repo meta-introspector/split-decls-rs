@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        MsgHdrMut!();
+        Socket!();
     };
 }
 
 macro_rules! impl_34 {
     () => {
         deps!();
-        # [cfg (not (target_os = "redox"))] impl < 'name , 'bufs , 'control > fmt :: Debug for MsgHdrMut < 'name , 'bufs , 'control > { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { "MsgHdrMut" . fmt (fmt) } }
+        impl fmt :: Debug for Socket { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("Socket") . field ("raw" , & self . as_raw ()) . field ("local_addr" , & self . local_addr () . ok ()) . field ("peer_addr" , & self . peer_addr () . ok ()) . finish () } }
     };
 }
 

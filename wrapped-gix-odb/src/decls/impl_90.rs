@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        PackId!();
-        Ordering!();
         IndexAndPacks!();
-        SlotIndexMarker!();
-        Error!();
-        SingleOrMultiIndex!();
+        Ordering!();
         Store!();
+        SlotIndexMarker!();
         IndexLookup!();
+        PackId!();
+        SingleOrMultiIndex!();
+        Error!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_90 {
     };
 }
 
-impl_90!()
+impl_90!();

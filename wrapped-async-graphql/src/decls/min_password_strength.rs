@@ -4,4 +4,4 @@ macro_rules! min_password_strength {
     };
 }
 
-min_password_strength!()
+min_password_strength!();

@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        Name!();
+        SqlFnOutput!();
+        Context!();
+        Connection!();
+        Aggregate!();
+        Result!();
+        WindowAggregate!();
+    };
+}
+
+macro_rules! impl_106 {
+    () => {
+        deps!();
+        impl Connection { # [doc = " Attach a user-defined scalar function to"] # [doc = " this database connection."] # [doc = ""] # [doc = " `fn_name` is the name the function will be accessible from SQL."] # [doc = " `n_arg` is the number of arguments to the function. Use `-1` for a"] # [doc = " variable number. If the function always returns the same value"] # [doc = " given the same input, `deterministic` should be `true`."] # [doc = ""] # [doc = " The function will remain available until the connection is closed or"] # [doc = " until it is explicitly removed via"] # [doc = " [`remove_function`](Connection::remove_function)."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use rusqlite::{Connection, Result};"] # [doc = " # use rusqlite::functions::FunctionFlags;"] # [doc = " fn scalar_function_example(db: Connection) -> Result<()> {"] # [doc = "     db.create_scalar_function("] # [doc = "         \"halve\","] # [doc = "         1,"] # [doc = "         FunctionFlags::SQLITE_UTF8 | FunctionFlags::SQLITE_DETERMINISTIC,"] # [doc = "         |ctx| {"] # [doc = "             let value = ctx.get::<f64>(0)?;"] # [doc = "             Ok(value / 2f64)"] # [doc = "         },"] # [doc = "     )?;"] # [doc = ""] # [doc = "     let six_halved: f64 = db.query_row(\"SELECT halve(6)\", [], |r| r.get(0))?;"] # [doc = "     assert_eq!(six_halved, 3f64);"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " # Failure"] # [doc = ""] # [doc = " Will return Err if the function could not be attached to the connection."] # [inline] pub fn create_scalar_function < F , N : Name , T > (& self , fn_name : N , n_arg : c_int , flags : FunctionFlags , x_func : F ,) -> Result < () > where F : Fn (& Context < '_ >) -> Result < T > + Send + 'static , T : SqlFnOutput , { self . db . borrow_mut () . create_scalar_function (fn_name , n_arg , flags , x_func) } # [doc = " Attach a user-defined aggregate function to this"] # [doc = " database connection."] # [doc = ""] # [doc = " # Failure"] # [doc = ""] # [doc = " Will return Err if the function could not be attached to the connection."] # [inline] pub fn create_aggregate_function < A , D , N : Name , T > (& self , fn_name : N , n_arg : c_int , flags : FunctionFlags , aggr : D ,) -> Result < () > where A : RefUnwindSafe + UnwindSafe , D : Aggregate < A , T > + 'static , T : SqlFnOutput , { self . db . borrow_mut () . create_aggregate_function (fn_name , n_arg , flags , aggr) } # [doc = " Attach a user-defined aggregate window function to"] # [doc = " this database connection."] # [doc = ""] # [doc = " See `https://sqlite.org/windowfunctions.html#udfwinfunc` for more"] # [doc = " information."] # [cfg (feature = "window")] # [inline] pub fn create_window_function < A , N : Name , W , T > (& self , fn_name : N , n_arg : c_int , flags : FunctionFlags , aggr : W ,) -> Result < () > where A : RefUnwindSafe + UnwindSafe , W : WindowAggregate < A , T > + 'static , T : SqlFnOutput , { self . db . borrow_mut () . create_window_function (fn_name , n_arg , flags , aggr) } # [doc = " Removes a user-defined function from this"] # [doc = " database connection."] # [doc = ""] # [doc = " `fn_name` and `n_arg` should match the name and number of arguments"] # [doc = " given to [`create_scalar_function`](Connection::create_scalar_function)"] # [doc = " or [`create_aggregate_function`](Connection::create_aggregate_function)."] # [doc = ""] # [doc = " # Failure"] # [doc = ""] # [doc = " Will return Err if the function could not be removed."] # [inline] pub fn remove_function < N : Name > (& self , fn_name : N , n_arg : c_int) -> Result < () > { self . db . borrow_mut () . remove_function (fn_name , n_arg) } }
+    };
+}
+
+impl_106!()

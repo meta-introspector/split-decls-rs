@@ -4,4 +4,4 @@ macro_rules! bson {
     };
 }
 
-bson!()
+bson!();

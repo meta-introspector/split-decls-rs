@@ -11,4 +11,4 @@ macro_rules! UNHEX4 {
     };
 }
 
-UNHEX4!()
+UNHEX4!();

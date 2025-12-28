@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Hash!();
+        KeyPair!();
+        Error!();
         PublicKey!();
         SecretKey!();
-        Error!();
-        KeyPair!();
-        Hash!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! from_ed25519 {
     };
 }
 
-from_ed25519!()
+from_ed25519!();

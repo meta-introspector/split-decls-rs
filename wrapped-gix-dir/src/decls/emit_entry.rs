@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         Outcome!();
         Action!();
-        PathspecMatch!();
+        Delegate!();
         EntryRef!();
         Options!();
         Property!();
         Status!();
-        Delegate!();
+        PathspecMatch!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! emit_entry {
     };
 }
 
-emit_entry!()
+emit_entry!();

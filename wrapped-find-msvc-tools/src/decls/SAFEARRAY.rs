@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SAFEARRAYBOUND!();
         ADVANCED_FEATURE_FLAGS!();
+        SAFEARRAYBOUND!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SAFEARRAY {
     };
 }
 
-SAFEARRAY!()
+SAFEARRAY!();

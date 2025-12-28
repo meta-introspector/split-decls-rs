@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        IVectorView_Vtbl!();
+        IVectorView_Impl!();
+        IVectorView!();
+    };
+}
+
+macro_rules! impl_83 {
+    () => {
+        deps!();
+        impl < T : windows_core :: RuntimeType + 'static > IVectorView_Vtbl < T > { pub const fn new < Identity : IVectorView_Impl < T > , const OFFSET : isize > () -> Self { unsafe extern "system" fn GetAt < T : windows_core :: RuntimeType + 'static , Identity : IVectorView_Impl < T > , const OFFSET : isize , > (this : * mut core :: ffi :: c_void , index : u32 , result__ : * mut windows_core :: AbiType < T > ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IVectorView_Impl :: GetAt (this , index) { Ok (ok__) => { result__ . write (core :: mem :: transmute_copy (& ok__)) ; core :: mem :: forget (ok__) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } unsafe extern "system" fn Size < T : windows_core :: RuntimeType + 'static , Identity : IVectorView_Impl < T > , const OFFSET : isize , > (this : * mut core :: ffi :: c_void , result__ : * mut u32 ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IVectorView_Impl :: Size (this) { Ok (ok__) => { result__ . write (core :: mem :: transmute_copy (& ok__)) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } unsafe extern "system" fn IndexOf < T : windows_core :: RuntimeType + 'static , Identity : IVectorView_Impl < T > , const OFFSET : isize , > (this : * mut core :: ffi :: c_void , value : windows_core :: AbiType < T > , index : * mut u32 , result__ : * mut bool ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IVectorView_Impl :: IndexOf (this , core :: mem :: transmute_copy (& value) , core :: mem :: transmute_copy (& index) ,) { Ok (ok__) => { result__ . write (core :: mem :: transmute_copy (& ok__)) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } unsafe extern "system" fn GetMany < T : windows_core :: RuntimeType + 'static , Identity : IVectorView_Impl < T > , const OFFSET : isize , > (this : * mut core :: ffi :: c_void , startindex : u32 , items_array_size : u32 , items : * mut T , result__ : * mut u32 ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IVectorView_Impl :: GetMany (this , startindex , core :: slice :: from_raw_parts_mut (core :: mem :: transmute_copy (& items) , items_array_size as usize ,) ,) { Ok (ok__) => { result__ . write (core :: mem :: transmute_copy (& ok__)) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } Self { base__ : windows_core :: IInspectable_Vtbl :: new :: < Identity , IVectorView < T > , OFFSET > () , GetAt : GetAt :: < T , Identity , OFFSET > , Size : Size :: < T , Identity , OFFSET > , IndexOf : IndexOf :: < T , Identity , OFFSET > , GetMany : GetMany :: < T , Identity , OFFSET > , T : core :: marker :: PhantomData :: < T > , } } pub fn matches (iid : & windows_core :: GUID) -> bool { iid == & < IVectorView < T > as windows_core :: Interface > :: IID } }
+    };
+}
+
+impl_83!()

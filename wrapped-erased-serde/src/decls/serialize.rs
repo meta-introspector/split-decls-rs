@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ErrorImpl!();
+        Serialize!();
         Result!();
         Serializer!();
-        Serialize!();
         Error!();
-        ErrorImpl!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! serialize {
     };
 }
 
-serialize!()
+serialize!();

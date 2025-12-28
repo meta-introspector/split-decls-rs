@@ -4,4 +4,4 @@ macro_rules! foreign {
     };
 }
 
-foreign!()
+foreign!();

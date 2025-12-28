@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ProcMacroKind!();
+        MacroDefKind!();
         MacroCallLoc!();
         ExpandDatabase!();
-        ProcMacroKind!();
         ProcMacro!();
-        MacroDefKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! process_cfg_attrs {
     };
 }
 
-process_cfg_attrs!()
+process_cfg_attrs!();

@@ -4,4 +4,4 @@ macro_rules! DynMap {
     };
 }
 
-DynMap!()
+DynMap!();

@@ -4,4 +4,4 @@ macro_rules! choose_multiple {
     };
 }
 
-choose_multiple!()
+choose_multiple!();

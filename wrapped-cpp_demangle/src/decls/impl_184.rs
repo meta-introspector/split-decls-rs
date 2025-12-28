@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DemangleContext!();
+        Result!();
         Demangle!();
         DemangleWrite!();
-        ExceptionSpec!();
         ArgScopeStack!();
-        Result!();
+        ExceptionSpec!();
+        DemangleContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_184 {
     };
 }
 
-impl_184!()
+impl_184!();

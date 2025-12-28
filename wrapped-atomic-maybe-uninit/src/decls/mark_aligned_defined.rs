@@ -4,4 +4,4 @@ macro_rules! mark_aligned_defined {
     };
 }
 
-mark_aligned_defined!()
+mark_aligned_defined!();

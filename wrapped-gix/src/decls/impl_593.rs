@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Tree!();
         Checkout!();
         Workers!();
+        Tree!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_593 {
     };
 }
 
-impl_593!()
+impl_593!();

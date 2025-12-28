@@ -4,4 +4,4 @@ macro_rules! ArgumentSafety {
     };
 }
 
-ArgumentSafety!()
+ArgumentSafety!();

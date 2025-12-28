@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        VectorType!();
-        Decltype!();
         TemplateArgs!();
-        FunctionType!();
-        TemplateParam!();
         PointerToMemberType!();
-        ClassEnumType!();
         SourceName!();
-        ArrayType!();
+        TemplateParam!();
         CvQualifiers!();
+        Decltype!();
+        FunctionType!();
+        ArrayType!();
+        VectorType!();
+        ClassEnumType!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! Type {
     };
 }
 
-Type!()
+Type!();

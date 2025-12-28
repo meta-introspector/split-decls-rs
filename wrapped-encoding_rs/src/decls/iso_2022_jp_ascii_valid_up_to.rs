@@ -4,4 +4,4 @@ macro_rules! iso_2022_jp_ascii_valid_up_to {
     };
 }
 
-iso_2022_jp_ascii_valid_up_to!()
+iso_2022_jp_ascii_valid_up_to!();

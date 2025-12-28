@@ -4,4 +4,4 @@ macro_rules! merge_repr {
     };
 }
 
-merge_repr!()
+merge_repr!();

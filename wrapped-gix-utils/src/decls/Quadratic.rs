@@ -4,4 +4,4 @@ macro_rules! Quadratic {
     };
 }
 
-Quadratic!()
+Quadratic!();

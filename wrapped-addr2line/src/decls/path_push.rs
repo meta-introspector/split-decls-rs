@@ -4,4 +4,4 @@ macro_rules! path_push {
     };
 }
 
-path_push!()
+path_push!();

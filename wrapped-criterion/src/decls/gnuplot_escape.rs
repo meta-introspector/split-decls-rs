@@ -4,4 +4,4 @@ macro_rules! gnuplot_escape {
     };
 }
 
-gnuplot_escape!()
+gnuplot_escape!();

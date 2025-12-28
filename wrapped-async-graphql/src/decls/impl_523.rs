@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Response!();
         ExtensionContext!();
+        Extension!();
+        ValidationResult!();
+        ServerError!();
+        Result!();
         AnalyzerExtension!();
         NextRequest!();
         NextValidation!();
-        Result!();
-        Response!();
-        ServerError!();
-        Extension!();
-        ValidationResult!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_523 {
     };
 }
 
-impl_523!()
+impl_523!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WalkError!();
         GlobWalker!();
+        WalkError!();
         DirEntry!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

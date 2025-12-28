@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TraitEnvironment!();
         ConstEvalError!();
         HirDatabase!();
-        TraitEnvironment!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! const_eval_cycle_result {
     };
 }
 
-const_eval_cycle_result!()
+const_eval_cycle_result!();

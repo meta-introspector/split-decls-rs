@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Paths!();
         PatternError!();
         MatchOptions!();
         Pattern!();
         PathWrapper!();
-        Paths!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! glob_with {
     };
 }
 
-glob_with!()
+glob_with!();

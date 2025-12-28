@@ -4,4 +4,4 @@ macro_rules! TomlOptLevel {
     };
 }
 
-TomlOptLevel!()
+TomlOptLevel!();

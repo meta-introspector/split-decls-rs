@@ -4,4 +4,4 @@ macro_rules! AggregateKind {
     };
 }
 
-AggregateKind!()
+AggregateKind!();

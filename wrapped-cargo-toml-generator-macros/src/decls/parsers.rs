@@ -4,4 +4,4 @@ macro_rules! parsers {
     };
 }
 
-parsers!()
+parsers!();

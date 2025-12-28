@@ -4,4 +4,4 @@ macro_rules! memoizer {
     };
 }
 
-memoizer!()
+memoizer!();

@@ -4,4 +4,4 @@ macro_rules! StringOrVec {
     };
 }
 
-StringOrVec!()
+StringOrVec!();

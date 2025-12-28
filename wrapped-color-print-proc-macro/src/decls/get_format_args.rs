@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
+        Context!();
         Node!();
         SpanError!();
-        Context!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! get_format_args {
     };
 }
 
-get_format_args!()
+get_format_args!();

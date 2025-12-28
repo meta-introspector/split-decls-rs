@@ -4,4 +4,4 @@ macro_rules! ORDINAL_MASK {
     };
 }
 
-ORDINAL_MASK!()
+ORDINAL_MASK!();

@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Repository!();
-        Kind!();
-        Note!();
-        Platform!();
-        Read!();
-        Editor!();
         Blob!();
         Merge!();
-        Item!();
-        Options!();
-        Outcome!();
-        Error!();
-        Commit!();
         Pipeline!();
+        Editor!();
+        Platform!();
+        Read!();
         Default!();
+        Note!();
+        Item!();
+        Error!();
+        Kind!();
+        Commit!();
+        Options!();
+        Repository!();
+        Outcome!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_354 {
     };
 }
 
-impl_354!()
+impl_354!();

@@ -4,4 +4,4 @@ macro_rules! strict_hash_verification {
     };
 }
 
-strict_hash_verification!()
+strict_hash_verification!();

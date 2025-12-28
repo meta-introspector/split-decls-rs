@@ -1,0 +1,26 @@
+macro_rules! deps {
+    () => {
+        RetryError!();
+        HalfMatch!();
+        Cache!();
+        Match!();
+        Anchored!();
+        GroupInfo!();
+        Input!();
+        NonMaxUsize!();
+        PatternSet!();
+        ReverseInner!();
+        PatternID!();
+        Strategy!();
+    };
+}
+
+macro_rules! impl_394 {
+    () => {
+        deps!();
+        impl Strategy for ReverseInner { # [cfg_attr (feature = "perf-inline" , inline (always))] fn group_info (& self) -> & GroupInfo { self . core . group_info () } # [cfg_attr (feature = "perf-inline" , inline (always))] fn create_cache (& self) -> Cache { let mut cache = self . core . create_cache () ; cache . revhybrid = self . hybrid . create_cache () ; cache } # [cfg_attr (feature = "perf-inline" , inline (always))] fn reset_cache (& self , cache : & mut Cache) { self . core . reset_cache (cache) ; cache . revhybrid . reset (& self . hybrid) ; } fn is_accelerated (& self) -> bool { self . preinner . is_fast () } fn memory_usage (& self) -> usize { self . core . memory_usage () + self . preinner . memory_usage () + self . nfarev . memory_usage () + self . dfa . memory_usage () } # [cfg_attr (feature = "perf-inline" , inline (always))] fn search (& self , cache : & mut Cache , input : & Input < '_ >) -> Option < Match > { if input . get_anchored () . is_anchored () { return self . core . search (cache , input) ; } match self . try_search_full (cache , input) { Err (RetryError :: Quadratic (_err)) => { trace ! ("reverse inner optimization failed: {_err}") ; self . core . search (cache , input) } Err (RetryError :: Fail (_err)) => { trace ! ("reverse inner fast search failed: {_err}") ; self . core . search_nofail (cache , input) } Ok (matornot) => matornot , } } # [cfg_attr (feature = "perf-inline" , inline (always))] fn search_half (& self , cache : & mut Cache , input : & Input < '_ > ,) -> Option < HalfMatch > { if input . get_anchored () . is_anchored () { return self . core . search_half (cache , input) ; } match self . try_search_full (cache , input) { Err (RetryError :: Quadratic (_err)) => { trace ! ("reverse inner half optimization failed: {_err}") ; self . core . search_half (cache , input) } Err (RetryError :: Fail (_err)) => { trace ! ("reverse inner fast half search failed: {_err}") ; self . core . search_half_nofail (cache , input) } Ok (None) => None , Ok (Some (m)) => Some (HalfMatch :: new (m . pattern () , m . end ())) , } } # [cfg_attr (feature = "perf-inline" , inline (always))] fn is_match (& self , cache : & mut Cache , input : & Input < '_ >) -> bool { if input . get_anchored () . is_anchored () { return self . core . is_match (cache , input) ; } match self . try_search_full (cache , input) { Err (RetryError :: Quadratic (_err)) => { trace ! ("reverse inner half optimization failed: {_err}") ; self . core . is_match_nofail (cache , input) } Err (RetryError :: Fail (_err)) => { trace ! ("reverse inner fast half search failed: {_err}") ; self . core . is_match_nofail (cache , input) } Ok (None) => false , Ok (Some (_)) => true , } } # [cfg_attr (feature = "perf-inline" , inline (always))] fn search_slots (& self , cache : & mut Cache , input : & Input < '_ > , slots : & mut [Option < NonMaxUsize >] ,) -> Option < PatternID > { if input . get_anchored () . is_anchored () { return self . core . search_slots (cache , input , slots) ; } if ! self . core . is_capture_search_needed (slots . len ()) { trace ! ("asked for slots unnecessarily, trying fast path") ; let m = self . search (cache , input) ? ; copy_match_to_slots (m , slots) ; return Some (m . pattern ()) ; } let m = match self . try_search_full (cache , input) { Err (RetryError :: Quadratic (_err)) => { trace ! ("reverse inner captures optimization failed: {_err}") ; return self . core . search_slots (cache , input , slots) ; } Err (RetryError :: Fail (_err)) => { trace ! ("reverse inner fast captures search failed: {_err}") ; return self . core . search_slots_nofail (cache , input , slots) ; } Ok (None) => return None , Ok (Some (m)) => m , } ; trace ! ("match found at {}..{} in capture search, \
+		  	 using another engine to find captures" , m . start () , m . end () ,) ; let input = input . clone () . span (m . start () .. m . end ()) . anchored (Anchored :: Pattern (m . pattern ())) ; self . core . search_slots_nofail (cache , & input , slots) } # [cfg_attr (feature = "perf-inline" , inline (always))] fn which_overlapping_matches (& self , cache : & mut Cache , input : & Input < '_ > , patset : & mut PatternSet ,) { self . core . which_overlapping_matches (cache , input , patset) } }
+    };
+}
+
+impl_394!()

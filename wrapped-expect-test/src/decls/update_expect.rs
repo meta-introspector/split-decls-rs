@@ -4,4 +4,4 @@ macro_rules! update_expect {
     };
 }
 
-update_expect!()
+update_expect!();

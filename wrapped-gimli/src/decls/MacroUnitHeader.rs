@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reader!();
         DebugLineOffset!();
+        Reader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MacroUnitHeader {
     };
 }
 
-MacroUnitHeader!()
+MacroUnitHeader!();

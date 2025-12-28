@@ -1,6 +1,10 @@
 macro_rules! deps {
     () => {
+        IntRange!();
+        Constructor!();
+        DeconstructedPat!();
         PrivateUninhabitedField!();
+        ConstructorSet!();
     };
 }
 

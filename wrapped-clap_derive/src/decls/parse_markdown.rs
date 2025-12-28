@@ -4,4 +4,4 @@ macro_rules! parse_markdown {
     };
 }
 
-parse_markdown!()
+parse_markdown!();

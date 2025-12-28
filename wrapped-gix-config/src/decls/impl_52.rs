@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Options!();
         File!();
+        Options!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

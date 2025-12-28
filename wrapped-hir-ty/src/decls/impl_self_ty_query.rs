@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
         HirDatabase!();
+        EarlyBinder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_self_ty_query {
     };
 }
 
-impl_self_ty_query!()
+impl_self_ty_query!();

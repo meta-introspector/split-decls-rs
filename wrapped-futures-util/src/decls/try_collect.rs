@@ -4,4 +4,4 @@ macro_rules! try_collect {
     };
 }
 
-try_collect!()
+try_collect!();

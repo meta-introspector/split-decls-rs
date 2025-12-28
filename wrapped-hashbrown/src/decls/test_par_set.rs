@@ -11,4 +11,4 @@ macro_rules! test_par_set {
     };
 }
 
-test_par_set!()
+test_par_set!();

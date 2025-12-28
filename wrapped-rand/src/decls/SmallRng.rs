@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Rng!();
+        Xoshiro256PlusPlus!();
+        StdRng!();
+        Xoshiro128PlusPlus!();
+    };
+}
+
+macro_rules! SmallRng {
+    () => {
+        deps!();
+        # [doc = " A small-state, fast, non-crypto, non-portable PRNG"] # [doc = ""] # [doc = " This is the \"standard small\" RNG, a generator with the following properties:"] # [doc = ""] # [doc = " - Non-[portable]: any future library version may replace the algorithm"] # [doc = "   and results may be platform-dependent."] # [doc = "   (For a small portable generator, use the [rand_pcg] or [rand_xoshiro] crate.)"] # [doc = " - Non-cryptographic: output is easy to predict (insecure)"] # [doc = " - [Quality]: statistically good quality"] # [doc = " - Fast: the RNG is fast for both bulk generation and single values, with"] # [doc = "   consistent cost of method calls"] # [doc = " - Fast initialization"] # [doc = " - Small state: little memory usage (current state size is 16-32 bytes"] # [doc = "   depending on platform)"] # [doc = ""] # [doc = " The current algorithm is"] # [doc = " `Xoshiro256PlusPlus` on 64-bit platforms and `Xoshiro128PlusPlus` on 32-bit"] # [doc = " platforms. Both are also implemented by the [rand_xoshiro] crate."] # [doc = ""] # [doc = " ## Seeding (construction)"] # [doc = ""] # [doc = " This generator implements the [`SeedableRng`] trait. All methods are"] # [doc = " suitable for seeding, but note that, even with a fixed seed, output is not"] # [doc = " [portable]. Some suggestions:"] # [doc = ""] # [doc = " 1.  To automatically seed with a unique seed, use [`SeedableRng::from_rng`]:"] # [doc = "     ```"] # [doc = "     use rand::SeedableRng;"] # [doc = "     use rand::rngs::SmallRng;"] # [doc = "     let rng = SmallRng::from_rng(&mut rand::rng());"] # [doc = "     # let _: SmallRng = rng;"] # [doc = "     ```"] # [doc = " 2.  To use a deterministic integral seed, use `seed_from_u64`. This uses a"] # [doc = "     hash function internally to yield a (typically) good seed from any"] # [doc = "     input."] # [doc = "     ```"] # [doc = "     # use rand::{SeedableRng, rngs::SmallRng};"] # [doc = "     let rng = SmallRng::seed_from_u64(1);"] # [doc = "     # let _: SmallRng = rng;"] # [doc = "     ```"] # [doc = " 3.  To seed deterministically from text or other input, use [`rand_seeder`]."] # [doc = ""] # [doc = " See also [Seeding RNGs] in the book."] # [doc = ""] # [doc = " ## Generation"] # [doc = ""] # [doc = " The generators implements [`RngCore`] and thus also [`Rng`][crate::Rng]."] # [doc = " See also the [Random Values] chapter in the book."] # [doc = ""] # [doc = " [portable]: https://rust-random.github.io/book/crate-reprod.html"] # [doc = " [Seeding RNGs]: https://rust-random.github.io/book/guide-seeding.html"] # [doc = " [Random Values]: https://rust-random.github.io/book/guide-values.html"] # [doc = " [Quality]: https://rust-random.github.io/book/guide-rngs.html#quality"] # [doc = " [`StdRng`]: crate::rngs::StdRng"] # [doc = " [rand_pcg]: https://crates.io/crates/rand_pcg"] # [doc = " [rand_xoshiro]: https://crates.io/crates/rand_xoshiro"] # [doc = " [`rand_chacha::ChaCha8Rng`]: https://docs.rs/rand_chacha/latest/rand_chacha/struct.ChaCha8Rng.html"] # [doc = " [`rand_seeder`]: https://docs.rs/rand_seeder/latest/rand_seeder/"] # [derive (Clone , Debug , PartialEq , Eq)] pub struct SmallRng (Rng) ;
+    };
+}
+
+SmallRng!()

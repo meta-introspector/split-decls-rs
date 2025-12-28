@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MetaTypeName!();
         KnownTypeNames!();
         VisitorContext!();
-        MetaTypeName!();
         Visitor!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_211 {
     };
 }
 
-impl_211!()
+impl_211!();

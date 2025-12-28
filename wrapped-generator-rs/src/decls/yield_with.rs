@@ -11,4 +11,4 @@ macro_rules! yield_with {
     };
 }
 
-yield_with!()
+yield_with!();

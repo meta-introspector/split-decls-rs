@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Guard!();
+        Ref!();
+        DefaultConfig!();
+        Pool!();
+        Clear!();
+        Config!();
+    };
+}
+
+macro_rules! OwnedRef {
+    () => {
+        deps!();
+        # [doc = " An owned guard that allows shared immutable access to an object in a pool."] # [doc = ""] # [doc = " While the guard exists, it indicates to the pool that the item the guard references is"] # [doc = " currently being accessed. If the item is removed from the pool while the guard exists, the"] # [doc = " removal will be deferred until all guards are dropped."] # [doc = ""] # [doc = " Unlike [`Ref`], which borrows the pool, an `OwnedRef` clones the `Arc`"] # [doc = " around the pool. Therefore, it keeps the pool from being dropped until all"] # [doc = " such guards have been dropped. This means that an `OwnedRef` may be held for"] # [doc = " an arbitrary lifetime."] # [doc = ""] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use sharded_slab::Pool;"] # [doc = " use std::sync::Arc;"] # [doc = ""] # [doc = " let pool: Arc<Pool<String>> = Arc::new(Pool::new());"] # [doc = " let key = pool.create_with(|item| item.push_str(\"hello world\")).unwrap();"] # [doc = ""] # [doc = " // Look up the created `Key`, returning an `OwnedRef`."] # [doc = " let value = pool.clone().get_owned(key).unwrap();"] # [doc = ""] # [doc = " // Now, the original `Arc` clone of the pool may be dropped, but the"] # [doc = " // returned `OwnedRef` can still access the value."] # [doc = " assert_eq!(value, String::from(\"hello world\"));"] # [doc = " ```"] # [doc = ""] # [doc = " Unlike [`Ref`], an `OwnedRef` may be stored in a struct which must live"] # [doc = " for the `'static` lifetime:"] # [doc = ""] # [doc = " ```"] # [doc = " # use sharded_slab::Pool;"] # [doc = " use sharded_slab::pool::OwnedRef;"] # [doc = " use std::sync::Arc;"] # [doc = ""] # [doc = " pub struct MyStruct {"] # [doc = "     pool_ref: OwnedRef<String>,"] # [doc = "     // ... other fields ..."] # [doc = " }"] # [doc = ""] # [doc = " // Suppose this is some arbitrary function which requires a value that"] # [doc = " // lives for the 'static lifetime..."] # [doc = " fn function_requiring_static<T: 'static>(t: &T) {"] # [doc = "     // ... do something extremely important and interesting ..."] # [doc = " }"] # [doc = ""] # [doc = " let pool: Arc<Pool<String>> = Arc::new(Pool::new());"] # [doc = " let key = pool.create_with(|item| item.push_str(\"hello world\")).unwrap();"] # [doc = ""] # [doc = " // Look up the created `Key`, returning an `OwnedRef`."] # [doc = " let pool_ref = pool.clone().get_owned(key).unwrap();"] # [doc = " let my_struct = MyStruct {"] # [doc = "     pool_ref,"] # [doc = "     // ..."] # [doc = " };"] # [doc = ""] # [doc = " // We can use `my_struct` anywhere where it is required to have the"] # [doc = " // `'static` lifetime:"] # [doc = " function_requiring_static(&my_struct);"] # [doc = " ```"] # [doc = ""] # [doc = " `OwnedRef`s may be sent between threads:"] # [doc = ""] # [doc = " ```"] # [doc = " # use sharded_slab::Pool;"] # [doc = " use std::{thread, sync::Arc};"] # [doc = ""] # [doc = " let pool: Arc<Pool<String>> = Arc::new(Pool::new());"] # [doc = " let key = pool.create_with(|item| item.push_str(\"hello world\")).unwrap();"] # [doc = ""] # [doc = " // Look up the created `Key`, returning an `OwnedRef`."] # [doc = " let value = pool.clone().get_owned(key).unwrap();"] # [doc = ""] # [doc = " thread::spawn(move || {"] # [doc = "     assert_eq!(value, String::from(\"hello world\"));"] # [doc = "     // ..."] # [doc = " }).join().unwrap();"] # [doc = " ```"] # [doc = ""] # [doc = " [`Ref`]: crate::pool::Ref"] pub struct OwnedRef < T , C = DefaultConfig > where T : Clear + Default , C : cfg :: Config , { inner : page :: slot :: Guard < T , C > , pool : Arc < Pool < T , C > > , key : usize , }
+    };
+}
+
+OwnedRef!()

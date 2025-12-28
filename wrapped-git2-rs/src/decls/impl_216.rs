@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Oid!();
-        Object!();
         Blob!();
+        Object!();
         Binding!();
+        Oid!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_216 {
     };
 }
 
-impl_216!()
+impl_216!();

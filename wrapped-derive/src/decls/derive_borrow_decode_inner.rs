@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ContainerAttributes!();
-        DeriveEnum!();
         DeriveStruct!();
+        DeriveEnum!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! derive_borrow_decode_inner {
     };
 }
 
-derive_borrow_decode_inner!()
+derive_borrow_decode_inner!();

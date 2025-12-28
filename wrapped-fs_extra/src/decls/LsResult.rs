@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DirEntryAttr!();
         Result!();
+        DirEntryAttr!();
         DirEntryValue!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! LsResult {
     };
 }
 
-LsResult!()
+LsResult!();

@@ -11,4 +11,4 @@ macro_rules! dump_index_schema {
     };
 }
 
-dump_index_schema!()
+dump_index_schema!();

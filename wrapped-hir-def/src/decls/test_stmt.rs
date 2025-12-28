@@ -20,4 +20,4 @@ fn bar() {
     };
 }
 
-test_stmt!()
+test_stmt!();

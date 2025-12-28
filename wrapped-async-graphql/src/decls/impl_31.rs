@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        EmptyMutation!();
-        PathSegment!();
-        EmptySubscription!();
-        Any!();
-        Query!();
         Object!();
+        Query!();
+        EmptySubscription!();
         ServerError!();
+        Any!();
+        PathSegment!();
+        EmptyMutation!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

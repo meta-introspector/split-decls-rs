@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        AssocItem!();
         Type!();
         Module!();
-        Crate!();
-        Impl!();
-        Adt!();
-        AssocItem!();
         Trait!();
+        Crate!();
         TraitRef!();
+        Adt!();
+        Impl!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_378 {
     };
 }
 
-impl_378!()
+impl_378!();

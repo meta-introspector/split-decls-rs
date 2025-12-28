@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Reader!();
-        DebuggingInformationEntry!();
         RangeIterInner!();
+        DebuggingInformationEntry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RangeIter {
     };
 }
 
-RangeIter!()
+RangeIter!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BenchmarkId!();
         Result!();
+        BenchmarkId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! list_existing_benchmarks {
     };
 }
 
-list_existing_benchmarks!()
+list_existing_benchmarks!();

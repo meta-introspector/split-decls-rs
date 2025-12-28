@@ -11,4 +11,4 @@ macro_rules! URL_SAFE_NO_PAD {
     };
 }
 
-URL_SAFE_NO_PAD!()
+URL_SAFE_NO_PAD!();

@@ -11,4 +11,4 @@ macro_rules! is_str_bidi {
     };
 }
 
-is_str_bidi!()
+is_str_bidi!();

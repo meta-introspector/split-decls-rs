@@ -4,4 +4,4 @@ macro_rules! SearchMode {
     };
 }
 
-SearchMode!()
+SearchMode!();

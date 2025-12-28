@@ -4,4 +4,4 @@ macro_rules! install_config_path {
     };
 }
 
-install_config_path!()
+install_config_path!();

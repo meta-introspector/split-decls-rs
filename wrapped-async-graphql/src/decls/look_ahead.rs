@@ -4,4 +4,4 @@ macro_rules! look_ahead {
     };
 }
 
-look_ahead!()
+look_ahead!();

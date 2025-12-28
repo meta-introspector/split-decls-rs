@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiffBinary!();
         DiffDelta!();
+        DiffBinary!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BinaryCb {
     };
 }
 
-BinaryCb!()
+BinaryCb!();

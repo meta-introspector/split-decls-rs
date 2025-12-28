@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Walkable!();
+    };
+}
+
+macro_rules! InlineAsmTemplatePiece {
+    () => {
+        deps!();
+        # [derive (Clone , PartialEq , Encodable , Decodable , Debug , Hash , HashStable_Generic , Walkable)] pub enum InlineAsmTemplatePiece { String (Cow < 'static , str >) , Placeholder { operand_idx : usize , modifier : Option < char > , span : Span } , }
+    };
+}
+
+InlineAsmTemplatePiece!()

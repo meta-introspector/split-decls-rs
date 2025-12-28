@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Object!();
-        Field!();
-        Interface!();
-        InputValue!();
-        Context!();
         Fields!();
+        Context!();
+        Interface!();
+        Field!();
+        Object!();
+        InputValue!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

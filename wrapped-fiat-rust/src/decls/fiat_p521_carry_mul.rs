@@ -11,4 +11,4 @@ macro_rules! fiat_p521_carry_mul {
     };
 }
 
-fiat_p521_carry_mul!()
+fiat_p521_carry_mul!();

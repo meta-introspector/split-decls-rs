@@ -4,4 +4,4 @@ macro_rules! bingcd {
     };
 }
 
-bingcd!()
+bingcd!();

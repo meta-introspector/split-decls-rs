@@ -4,4 +4,4 @@ macro_rules! flavors {
     };
 }
 
-flavors!()
+flavors!();

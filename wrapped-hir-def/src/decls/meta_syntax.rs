@@ -4,4 +4,4 @@ macro_rules! meta_syntax {
     };
 }
 
-meta_syntax!()
+meta_syntax!();

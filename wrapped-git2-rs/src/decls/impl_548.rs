@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        DiffOptions!();
+        Blob!();
+        DiffHunk!();
+        Diff!();
         Buf!();
         LineCb!();
-        Patch!();
-        Blob!();
-        Diff!();
-        Binding!();
-        DiffHunk!();
         DiffLine!();
-        DiffDelta!();
         Error!();
+        DiffOptions!();
+        Patch!();
+        DiffDelta!();
+        Binding!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_548 {
     };
 }
 
-impl_548!()
+impl_548!();

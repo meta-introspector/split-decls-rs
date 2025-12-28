@@ -4,4 +4,4 @@ macro_rules! naive_time {
     };
 }
 
-naive_time!()
+naive_time!();

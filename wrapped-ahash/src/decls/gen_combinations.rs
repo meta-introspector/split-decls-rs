@@ -4,4 +4,4 @@ macro_rules! gen_combinations {
     };
 }
 
-gen_combinations!()
+gen_combinations!();

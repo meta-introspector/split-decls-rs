@@ -4,4 +4,4 @@ macro_rules! component_to_os_str {
     };
 }
 
-component_to_os_str!()
+component_to_os_str!();

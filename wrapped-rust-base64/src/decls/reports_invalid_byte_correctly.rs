@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         GeneralPurpose!();
-        DecoderReader!();
         DecodeError!();
+        DecoderReader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! reports_invalid_byte_correctly {
     };
 }
 
-reports_invalid_byte_correctly!()
+reports_invalid_byte_correctly!();

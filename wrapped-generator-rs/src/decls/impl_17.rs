@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Generator!();
-        GeneratorObj!();
         GeneratorImpl!();
+        GeneratorObj!();
+        Generator!();
         StackBox!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

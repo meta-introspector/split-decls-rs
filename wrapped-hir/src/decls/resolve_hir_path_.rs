@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Variant!();
-        TypeAlias!();
-        Module!();
         Macro!();
         BuiltinType!();
-        Trait!();
-        ModuleDef!();
-        TypeParam!();
-        PathResolutionPerNs!();
         TypeNs!();
         Adt!();
-        GenericParam!();
+        ModuleDef!();
+        TypeAlias!();
         PathResolution!();
+        Module!();
+        PathResolutionPerNs!();
+        Variant!();
+        Trait!();
+        GenericParam!();
+        TypeParam!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! resolve_hir_path_ {
     };
 }
 
-resolve_hir_path_!()
+resolve_hir_path_!();

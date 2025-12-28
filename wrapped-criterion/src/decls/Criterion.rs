@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Connection!();
-        Mode!();
-        Reports!();
-        Measurement!();
-        BenchmarkFilter!();
-        Comparison!();
         Baseline!();
+        Connection!();
+        Comparison!();
+        Mode!();
         WallTime!();
-        BenchmarkConfig!();
+        Reports!();
         Profiler!();
+        BenchmarkFilter!();
+        BenchmarkConfig!();
+        Measurement!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! Criterion {
     };
 }
 
-Criterion!()
+Criterion!();

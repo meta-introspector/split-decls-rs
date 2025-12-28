@@ -4,4 +4,4 @@ macro_rules! RealFileSystemWriter {
     };
 }
 
-RealFileSystemWriter!()
+RealFileSystemWriter!();

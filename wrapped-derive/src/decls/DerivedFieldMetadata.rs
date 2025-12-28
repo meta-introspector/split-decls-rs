@@ -4,4 +4,4 @@ macro_rules! DerivedFieldMetadata {
     };
 }
 
-DerivedFieldMetadata!()
+DerivedFieldMetadata!();

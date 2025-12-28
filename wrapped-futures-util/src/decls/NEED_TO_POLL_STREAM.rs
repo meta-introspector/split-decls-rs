@@ -4,4 +4,4 @@ macro_rules! NEED_TO_POLL_STREAM {
     };
 }
 
-NEED_TO_POLL_STREAM!()
+NEED_TO_POLL_STREAM!();

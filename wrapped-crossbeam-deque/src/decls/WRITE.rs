@@ -4,4 +4,4 @@ macro_rules! WRITE {
     };
 }
 
-WRITE!()
+WRITE!();

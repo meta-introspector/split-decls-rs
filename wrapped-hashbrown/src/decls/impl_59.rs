@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Fallibility!();
-        RawTableInner!();
         RawTable!();
+        RawTableInner!();
+        Fallibility!();
         ScopeGuard!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Transport!();
-        Remote!();
         Error!();
+        Remote!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TransportFactory {
     };
 }
 
-TransportFactory!()
+TransportFactory!();

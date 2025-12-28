@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
-        ExprPtr!();
-        PatId!();
+        ExprId!();
+        Item!();
+        ExpressionOnlySourceMap!();
         LabelId!();
         SyntheticSyntax!();
-        PatFieldSource!();
-        Label!();
-        ExpressionStoreSourceMap!();
-        Item!();
-        ExprId!();
-        LabelSource!();
-        BindingId!();
-        ExpressionOnlySourceMap!();
-        HygieneId!();
-        ExprOrPatSource!();
-        Expr!();
+        PatId!();
         TypeSource!();
-        Pat!();
+        HygieneId!();
+        BindingId!();
         MacroCall!();
-        FieldSource!();
+        LabelSource!();
+        ExprPtr!();
+        Label!();
+        Pat!();
         ExpressionStoreDiagnostics!();
-        ExprOrPatId!();
         MacroCallPtr!();
+        ExprOrPatId!();
+        PatFieldSource!();
+        ExpressionStoreSourceMap!();
+        ExprOrPatSource!();
+        FieldSource!();
+        Expr!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_299 {
     };
 }
 
-impl_299!()
+impl_299!();

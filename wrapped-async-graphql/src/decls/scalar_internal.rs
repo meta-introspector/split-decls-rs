@@ -3,11 +3,11 @@ macro_rules! deps {
         ScalarType!();
         Result!();
         MetaTypeId!();
+        Registry!();
         InputValueResult!();
+        InputType!();
         MetaType!();
         Scalar!();
-        Registry!();
-        InputType!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! scalar_internal {
     };
 }
 
-scalar_internal!()
+scalar_internal!();

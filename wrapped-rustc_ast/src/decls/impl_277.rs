@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        AttrStyle!();
+        AttrKind!();
+        MetaItemKind!();
+        TokenTree!();
+        MetaItem!();
+        Attribute!();
+    };
+}
+
+macro_rules! impl_277 {
+    () => {
+        deps!();
+        impl Attribute { pub fn style (& self) -> AttrStyle { self . style } pub fn may_have_doc_links (& self) -> bool { self . doc_str () . is_some_and (| s | comments :: may_have_doc_links (s . as_str ())) } # [doc = " Extracts the MetaItem from inside this Attribute."] pub fn meta (& self) -> Option < MetaItem > { match & self . kind { AttrKind :: Normal (normal) => normal . item . meta (self . span) , AttrKind :: DocComment (..) => None , } } pub fn meta_kind (& self) -> Option < MetaItemKind > { match & self . kind { AttrKind :: Normal (normal) => normal . item . meta_kind () , AttrKind :: DocComment (..) => None , } } pub fn token_trees (& self) -> Vec < TokenTree > { match self . kind { AttrKind :: Normal (ref normal) => normal . tokens . as_ref () . unwrap_or_else (| | panic ! ("attribute is missing tokens: {self:?}")) . to_attr_token_stream () . to_token_trees () , AttrKind :: DocComment (comment_kind , data) => vec ! [TokenTree :: token_alone (token :: DocComment (comment_kind , self . style , data) , self . span ,)] , } } }
+    };
+}
+
+impl_277!()

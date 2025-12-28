@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Offset!();
         File!();
-        Item!();
-        Entry!();
         PrefixLookupResult!();
+        Offset!();
+        Entry!();
         EntryIndex!();
         Version!();
+        Item!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

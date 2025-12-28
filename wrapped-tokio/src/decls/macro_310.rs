@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Link!();
+        LinkedList!();
+    };
+}
+
+macro_rules! macro_310 {
+    () => {
+        deps!();
+        feature ! { #! [any (feature = "process" , feature = "sync" , feature = "rt" , feature = "signal" ,)] # [doc = " An intrusive linked list, but instead of keeping pointers to the head"] # [doc = " and tail nodes, it uses a special guard node linked with those nodes."] # [doc = " It means that the list is circular and every pointer of a node from"] # [doc = " the list is not `None`, including pointers from the guard node."] # [doc = ""] # [doc = " If a list is empty, then both pointers of the guard node are pointing"] # [doc = " at the guard node itself."] pub (crate) struct GuardedLinkedList < L , T > { # [doc = " Pointer to the guard node."] guard : NonNull < T >, # [doc = " Node type marker."] _marker : PhantomData <* const L >, } impl < L : Link > LinkedList < L , L :: Target > { # [doc = " Turns a linked list into the guarded version by linking the guard node"] # [doc = " with the head and tail nodes. Like with other nodes, you should guarantee"] # [doc = " that the guard node is pinned in memory."] pub (crate) fn into_guarded (self , guard_handle : L :: Handle) -> GuardedLinkedList < L , L :: Target > { let guard = L :: as_raw (& guard_handle) ; unsafe { if let Some (head) = self . head { debug_assert ! (L :: pointers (head) . as_ref () . get_prev () . is_none ()) ; L :: pointers (head) . as_mut () . set_prev (Some (guard)) ; L :: pointers (guard) . as_mut () . set_next (Some (head)) ; let tail = self . tail . unwrap () ; debug_assert ! (L :: pointers (tail) . as_ref () . get_next () . is_none ()) ; L :: pointers (tail) . as_mut () . set_next (Some (guard)) ; L :: pointers (guard) . as_mut () . set_prev (Some (tail)) ; } else { L :: pointers (guard) . as_mut () . set_prev (Some (guard)) ; L :: pointers (guard) . as_mut () . set_next (Some (guard)) ; } } GuardedLinkedList { guard , _marker : PhantomData } } } impl < L : Link > GuardedLinkedList < L , L :: Target > { fn tail (& self) -> Option < NonNull < L :: Target >> { let tail_ptr = unsafe { L :: pointers (self . guard) . as_ref () . get_prev () . unwrap () } ; if tail_ptr != self . guard { Some (tail_ptr) } else { None } } # [doc = " Removes the last element from a list and returns it, or None if it is"] # [doc = " empty."] pub (crate) fn pop_back (& mut self) -> Option < L :: Handle > { unsafe { let last = self . tail () ?; let before_last = L :: pointers (last) . as_ref () . get_prev () . unwrap () ; L :: pointers (self . guard) . as_mut () . set_prev (Some (before_last)) ; L :: pointers (before_last) . as_mut () . set_next (Some (self . guard)) ; L :: pointers (last) . as_mut () . set_prev (None) ; L :: pointers (last) . as_mut () . set_next (None) ; Some (L :: from_raw (last)) } } } }
+    };
+}
+
+macro_310!()

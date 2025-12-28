@@ -4,4 +4,4 @@ macro_rules! crate_version {
     };
 }
 
-crate_version!()
+crate_version!();

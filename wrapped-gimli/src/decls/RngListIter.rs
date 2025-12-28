@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        DebugAddr!();
         RawRngListIter!();
+        DebugAddr!();
         DebugAddrBase!();
+        Reader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! RngListIter {
     };
 }
 
-RngListIter!()
+RngListIter!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Naive!();
+        NaiveConfig!();
         Alphabet!();
         DecodeError!();
-        NaiveConfig!();
-        Naive!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         File!();
-        Error!();
         Options!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! resolve {
     };
 }
 
-resolve!()
+resolve!();

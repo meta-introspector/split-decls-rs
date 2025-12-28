@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ParamValue!();
-        ChallengeParser!();
-        PasswordClient!();
         Error!();
         ChallengeRef!();
+        ChallengeParser!();
+        PasswordClient!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_challenges {
     };
 }
 
-parse_challenges!()
+parse_challenges!();

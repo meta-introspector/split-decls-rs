@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Graph!();
-        Ancestors!();
+        Mark!();
+        Algorithm!();
         Error!();
         Negotiator!();
-        Algorithm!();
-        Mark!();
+        Ancestors!();
+        Graph!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

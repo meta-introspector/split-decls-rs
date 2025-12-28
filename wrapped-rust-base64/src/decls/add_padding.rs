@@ -4,4 +4,4 @@ macro_rules! add_padding {
     };
 }
 
-add_padding!()
+add_padding!();

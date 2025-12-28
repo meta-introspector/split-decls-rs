@@ -4,4 +4,4 @@ macro_rules! test_no_full_collisions {
     };
 }
 
-test_no_full_collisions!()
+test_no_full_collisions!();

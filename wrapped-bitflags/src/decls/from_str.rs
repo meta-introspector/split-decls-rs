@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ParseError!();
         ParseHex!();
-        Bits!();
         Flags!();
+        ParseError!();
+        Bits!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! from_str {
     };
 }
 
-from_str!()
+from_str!();

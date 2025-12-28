@@ -11,4 +11,4 @@ macro_rules! EXCEPTION_RECORD {
     };
 }
 
-EXCEPTION_RECORD!()
+EXCEPTION_RECORD!();

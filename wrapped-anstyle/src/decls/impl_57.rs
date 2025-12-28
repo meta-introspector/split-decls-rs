@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Effects!();
         Style!();
+        Effects!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Module!();
         DocLinkDef!();
+        Module!();
         ItemInNs!();
         ModuleDef!();
     };
@@ -14,4 +14,4 @@ macro_rules! resolve_doc_path_on_ {
     };
 }
 
-resolve_doc_path_on_!()
+resolve_doc_path_on_!();

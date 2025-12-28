@@ -4,4 +4,4 @@ macro_rules! BuiltinFloat {
     };
 }
 
-BuiltinFloat!()
+BuiltinFloat!();

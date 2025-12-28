@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Repository!();
-        Config!();
         Replace!();
+        Config!();
         Error!();
+        Repository!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_529 {
     };
 }
 
-impl_529!()
+impl_529!();

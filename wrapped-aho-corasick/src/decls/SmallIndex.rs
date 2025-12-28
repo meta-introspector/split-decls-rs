@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StateID!();
         PatternID!();
-        Hash!();
         NFA!();
+        StateID!();
+        Hash!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SmallIndex {
     };
 }
 
-SmallIndex!()
+SmallIndex!();

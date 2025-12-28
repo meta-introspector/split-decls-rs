@@ -11,4 +11,4 @@ macro_rules! estimate_path_storage_requirements_in_bytes {
     };
 }
 
-estimate_path_storage_requirements_in_bytes!()
+estimate_path_storage_requirements_in_bytes!();

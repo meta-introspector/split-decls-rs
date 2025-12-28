@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Date!();
-        Offset!();
-        NaiveDateTime!();
-        Utc!();
-        Parsed!();
-        ParseResult!();
         NaiveDate!();
-        StrftimeItems!();
-        Weekday!();
         MappedLocalTime!();
+        Offset!();
         FixedOffset!();
+        ParseResult!();
+        Utc!();
+        Date!();
         DateTime!();
+        NaiveDateTime!();
+        Weekday!();
+        Parsed!();
+        StrftimeItems!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! TimeZone {
     };
 }
 
-TimeZone!()
+TimeZone!();

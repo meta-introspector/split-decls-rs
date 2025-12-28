@@ -4,4 +4,4 @@ macro_rules! unknown_const_as_generic {
     };
 }
 
-unknown_const_as_generic!()
+unknown_const_as_generic!();

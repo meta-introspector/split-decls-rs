@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Note!();
         Item!();
+        Note!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! args_os {
     };
 }
 
-args_os!()
+args_os!();

@@ -4,4 +4,4 @@ macro_rules! Utf8Chunks {
     };
 }
 
-Utf8Chunks!()
+Utf8Chunks!();

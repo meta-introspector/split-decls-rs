@@ -4,4 +4,4 @@ macro_rules! bash_program {
     };
 }
 
-bash_program!()
+bash_program!();

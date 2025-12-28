@@ -4,4 +4,4 @@ macro_rules! estimate {
     };
 }
 
-estimate!()
+estimate!();

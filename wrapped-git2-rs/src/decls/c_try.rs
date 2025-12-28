@@ -11,4 +11,4 @@ macro_rules! c_try {
     };
 }
 
-c_try!()
+c_try!();

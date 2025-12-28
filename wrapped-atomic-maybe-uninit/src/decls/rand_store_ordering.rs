@@ -4,4 +4,4 @@ macro_rules! rand_store_ordering {
     };
 }
 
-rand_store_ordering!()
+rand_store_ordering!();

@@ -4,4 +4,4 @@ macro_rules! DemangleState {
     };
 }
 
-DemangleState!()
+DemangleState!();

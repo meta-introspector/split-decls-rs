@@ -11,4 +11,4 @@ macro_rules! validated_attr_value_byte {
     };
 }
 
-validated_attr_value_byte!()
+validated_attr_value_byte!();

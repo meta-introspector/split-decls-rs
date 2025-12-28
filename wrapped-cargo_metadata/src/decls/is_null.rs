@@ -4,4 +4,4 @@ macro_rules! is_null {
     };
 }
 
-is_null!()
+is_null!();

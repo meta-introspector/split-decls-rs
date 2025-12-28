@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Repository!();
-        Reference!();
         Clone!();
-        Note!();
-        Default!();
-        Id!();
-        Error!();
         String!();
-        ObjectIdExt!();
         Outcome!();
-        Platform!();
+        Repository!();
+        Default!();
         Options!();
+        Note!();
+        ObjectIdExt!();
+        Id!();
+        Platform!();
+        Error!();
+        Reference!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! describe {
     };
 }
 
-describe!()
+describe!();

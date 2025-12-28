@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endianity!();
         DebugInfo!();
         EndianSlice!();
         LittleEndian!();
+        Endianity!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_608 {
     };
 }
 
-impl_608!()
+impl_608!();

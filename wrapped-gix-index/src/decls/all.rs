@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Iter!();
-        Outcome!();
         Error!();
+        Outcome!();
+        Iter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! all {
     };
 }
 
-all!()
+all!();

@@ -4,4 +4,4 @@ macro_rules! sc_sqmul {
     };
 }
 
-sc_sqmul!()
+sc_sqmul!();

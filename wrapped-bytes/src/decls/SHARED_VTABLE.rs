@@ -11,4 +11,4 @@ macro_rules! SHARED_VTABLE {
     };
 }
 
-SHARED_VTABLE!()
+SHARED_VTABLE!();

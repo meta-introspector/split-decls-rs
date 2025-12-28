@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Consumer!();
-        Iter!();
         QueueView!();
-        IterMut!();
+        Queue!();
         Producer!();
+        IterMut!();
+        Consumer!();
         Storage!();
         QueueInner!();
-        Queue!();
+        Iter!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_455 {
     };
 }
 
-impl_455!()
+impl_455!();

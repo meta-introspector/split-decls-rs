@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Worktree!();
-        Repository!();
         Error!();
-        WorktreeLockStatus!();
-        Buf!();
         WorktreePruneOptions!();
+        Worktree!();
+        Buf!();
+        WorktreeLockStatus!();
         Binding!();
+        Repository!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_859 {
     };
 }
 
-impl_859!()
+impl_859!();

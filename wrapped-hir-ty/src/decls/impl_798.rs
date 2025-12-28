@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ImplTraitLoweringState!();
-        HirDatabase!();
-        ImplTraitLoweringMode!();
         LifetimeElisionKind!();
         TyLoweringContext!();
+        ImplTraitLoweringMode!();
+        HirDatabase!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_798 {
     };
 }
 
-impl_798!()
+impl_798!();

@@ -4,4 +4,4 @@ macro_rules! DeclRefactoringConfig {
     };
 }
 
-DeclRefactoringConfig!()
+DeclRefactoringConfig!();

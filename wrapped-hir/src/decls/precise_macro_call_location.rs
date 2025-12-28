@@ -4,4 +4,4 @@ macro_rules! precise_macro_call_location {
     };
 }
 
-precise_macro_call_location!()
+precise_macro_call_location!();

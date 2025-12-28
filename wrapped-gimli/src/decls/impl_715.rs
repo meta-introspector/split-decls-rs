@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AttributeSpecification!();
         DebugAbbrev!();
         Result!();
+        AttributeSpecification!();
         Writer!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_715 {
     };
 }
 
-impl_715!()
+impl_715!();

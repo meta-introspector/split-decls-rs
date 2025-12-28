@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Options!();
         Default!();
+        Options!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! base_options {
     };
 }
 
-base_options!()
+base_options!();

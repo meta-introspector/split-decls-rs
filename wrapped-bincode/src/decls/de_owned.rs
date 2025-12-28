@@ -4,4 +4,4 @@ macro_rules! de_owned {
     };
 }
 
-de_owned!()
+de_owned!();

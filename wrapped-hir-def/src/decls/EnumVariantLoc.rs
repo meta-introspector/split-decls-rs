@@ -4,4 +4,4 @@ macro_rules! EnumVariantLoc {
     };
 }
 
-EnumVariantLoc!()
+EnumVariantLoc!();

@@ -1,38 +1,38 @@
 macro_rules! deps {
     () => {
-        DwarfFileType!();
-        DebugMacinfoOffset!();
-        DebugLocListsIndex!();
-        RngListIter!();
-        DebugMacroOffset!();
-        MacroIter!();
-        AbbreviationsCacheStrategy!();
-        DebugAddrIndex!();
-        DebugTypesUnitHeadersIter!();
-        DebugStrOffset!();
-        Abbreviations!();
-        RawLocListIter!();
-        DebugStrOffsetsIndex!();
-        DebugLineStrOffset!();
-        Reader!();
-        LocationListsOffset!();
-        LocListIter!();
-        RangeIterInner!();
-        Result!();
-        Range!();
-        RangeListsOffset!();
-        Error!();
         DebugInfoUnitHeadersIter!();
-        RawRngListIter!();
-        AttributeValue!();
-        RawRangeListsOffset!();
-        DebugRngListsIndex!();
-        UnitHeader!();
-        Dwarf!();
-        RangeIter!();
         DebuggingInformationEntry!();
-        ReaderOffsetId!();
         SectionId!();
+        ReaderOffsetId!();
+        Abbreviations!();
+        RngListIter!();
+        AbbreviationsCacheStrategy!();
+        RangeListsOffset!();
+        Result!();
+        RawRngListIter!();
+        LocationListsOffset!();
+        RangeIterInner!();
+        AttributeValue!();
+        DebugTypesUnitHeadersIter!();
+        DebugMacroOffset!();
+        RawLocListIter!();
+        Range!();
+        DebugLineStrOffset!();
+        DebugStrOffset!();
+        UnitHeader!();
+        DebugMacinfoOffset!();
+        LocListIter!();
+        MacroIter!();
+        RawRangeListsOffset!();
+        RangeIter!();
+        Dwarf!();
+        DebugLocListsIndex!();
+        DebugStrOffsetsIndex!();
+        DwarfFileType!();
+        Reader!();
+        DebugRngListsIndex!();
+        Error!();
+        DebugAddrIndex!();
         Unit!();
     };
 }
@@ -44,4 +44,4 @@ macro_rules! impl_263 {
     };
 }
 
-impl_263!()
+impl_263!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ParseContext!();
-        SourceName!();
-        Error!();
         Identifier!();
+        SourceName!();
+        Result!();
         Parse!();
-        SubstitutionTable!();
         IndexStr!();
+        SubstitutionTable!();
+        ParseContext!();
+        Error!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_118 {
     };
 }
 
-impl_118!()
+impl_118!();

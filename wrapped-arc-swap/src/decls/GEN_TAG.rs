@@ -4,4 +4,4 @@ macro_rules! GEN_TAG {
     };
 }
 
-GEN_TAG!()
+GEN_TAG!();

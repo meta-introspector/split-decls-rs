@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HashMap!();
-        Iter!();
-        DashMap!();
-        RwLock!();
         GuardIterMut!();
+        HashMap!();
+        RwLock!();
+        DashMap!();
+        Iter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! IterMut {
     };
 }
 
-IterMut!()
+IterMut!();

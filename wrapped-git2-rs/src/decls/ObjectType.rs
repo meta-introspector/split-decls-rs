@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Commit!();
-        Tree!();
         Blob!();
+        Tree!();
+        Commit!();
         Tag!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ObjectType {
     };
 }
 
-ObjectType!()
+ObjectType!();

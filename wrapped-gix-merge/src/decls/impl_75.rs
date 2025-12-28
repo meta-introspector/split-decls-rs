@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        PlatformRef!();
-        ResourceRef!();
-        ResourceKind!();
-        ResolveWith!();
-        Error!();
-        Options!();
         Platform!();
-        Conflict!();
+        Error!();
+        ResourceKind!();
+        ResourceRef!();
         DriverChoice!();
+        Options!();
+        PlatformRef!();
+        Conflict!();
+        ResolveWith!();
         BuiltinDriver!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

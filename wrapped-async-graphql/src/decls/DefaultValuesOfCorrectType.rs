@@ -4,4 +4,4 @@ macro_rules! DefaultValuesOfCorrectType {
     };
 }
 
-DefaultValuesOfCorrectType!()
+DefaultValuesOfCorrectType!();

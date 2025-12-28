@@ -4,4 +4,4 @@ macro_rules! slice_as_uninit_mut {
     };
 }
 
-slice_as_uninit_mut!()
+slice_as_uninit_mut!();

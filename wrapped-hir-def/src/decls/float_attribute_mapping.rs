@@ -20,4 +20,4 @@ fn#0:Fn[8A31, 0]@45..47#ROOT2024# foo#0:Fn[8A31, 0]@48..51#ROOT2024#(#0:Fn[8A31,
     };
 }
 
-float_attribute_mapping!()
+float_attribute_mapping!();

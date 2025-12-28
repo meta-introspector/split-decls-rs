@@ -4,4 +4,4 @@ macro_rules! fiat_p521_addcarryx_u58 {
     };
 }
 
-fiat_p521_addcarryx_u58!()
+fiat_p521_addcarryx_u58!();

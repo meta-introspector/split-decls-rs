@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Enum!();
         ItemLoc!();
+        Enum!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EnumLoc {
     };
 }
 
-EnumLoc!()
+EnumLoc!();

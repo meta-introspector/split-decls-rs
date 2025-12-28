@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         SpanMap!();
-        HirFileId!();
         ExpandDatabase!();
         ExpansionSpanMap!();
+        HirFileId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_with_map {
     };
 }
 
-parse_with_map!()
+parse_with_map!();

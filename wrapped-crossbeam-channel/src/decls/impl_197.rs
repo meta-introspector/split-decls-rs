@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Selected!();
-        Context!();
-        Waker!();
-        Operation!();
         Entry!();
+        Waker!();
+        Context!();
+        Operation!();
+        Selected!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

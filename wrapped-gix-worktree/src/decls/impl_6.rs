@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Stack!();
-        Platform!();
         StackDelegate!();
+        Platform!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

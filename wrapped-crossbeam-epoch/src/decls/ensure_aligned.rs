@@ -11,4 +11,4 @@ macro_rules! ensure_aligned {
     };
 }
 
-ensure_aligned!()
+ensure_aligned!();

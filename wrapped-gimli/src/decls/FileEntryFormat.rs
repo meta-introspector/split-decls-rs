@@ -4,4 +4,4 @@ macro_rules! FileEntryFormat {
     };
 }
 
-FileEntryFormat!()
+FileEntryFormat!();

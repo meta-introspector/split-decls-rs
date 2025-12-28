@@ -4,4 +4,4 @@ macro_rules! PartialInterruptingWriter {
     };
 }
 
-PartialInterruptingWriter!()
+PartialInterruptingWriter!();

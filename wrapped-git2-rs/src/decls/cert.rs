@@ -4,4 +4,4 @@ macro_rules! cert {
     };
 }
 
-cert!()
+cert!();

@@ -4,4 +4,4 @@ macro_rules! VisibleTraits {
     };
 }
 
-VisibleTraits!()
+VisibleTraits!();

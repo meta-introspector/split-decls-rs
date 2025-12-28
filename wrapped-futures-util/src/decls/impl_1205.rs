@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WriteHalf!();
         ReadHalf!();
+        WriteHalf!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1205 {
     };
 }
 
-impl_1205!()
+impl_1205!();

@@ -12,4 +12,4 @@ macro_rules! test_blind_ed25519 {
     };
 }
 
-test_blind_ed25519!()
+test_blind_ed25519!();

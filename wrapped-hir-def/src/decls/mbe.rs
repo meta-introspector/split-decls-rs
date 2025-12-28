@@ -4,4 +4,4 @@ macro_rules! mbe {
     };
 }
 
-mbe!()
+mbe!();

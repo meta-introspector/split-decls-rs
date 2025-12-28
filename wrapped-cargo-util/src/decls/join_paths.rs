@@ -6,4 +6,4 @@ macro_rules! join_paths {
     };
 }
 
-join_paths!()
+join_paths!();

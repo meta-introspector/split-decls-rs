@@ -4,4 +4,4 @@ macro_rules! _TYPE_EXT1 {
     };
 }
 
-_TYPE_EXT1!()
+_TYPE_EXT1!();

@@ -11,4 +11,4 @@ macro_rules! try_from_bstr {
     };
 }
 
-try_from_bstr!()
+try_from_bstr!();

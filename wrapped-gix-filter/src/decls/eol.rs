@@ -4,4 +4,4 @@ macro_rules! eol {
     };
 }
 
-eol!()
+eol!();

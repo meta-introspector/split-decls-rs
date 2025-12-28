@@ -4,4 +4,4 @@ macro_rules! DEFAULT_ERROR_STYLE {
     };
 }
 
-DEFAULT_ERROR_STYLE!()
+DEFAULT_ERROR_STYLE!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         IndexTime!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_791 {
     };
 }
 
-impl_791!()
+impl_791!();

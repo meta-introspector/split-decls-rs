@@ -31,4 +31,4 @@ prelude-generator = { path = "../../tools/rust-bootstrap-nix/prelude-generator" 
     };
 }
 
-impl_3!()
+impl_3!();

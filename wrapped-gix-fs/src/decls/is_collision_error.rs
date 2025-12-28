@@ -4,4 +4,4 @@ macro_rules! is_collision_error {
     };
 }
 
-is_collision_error!()
+is_collision_error!();

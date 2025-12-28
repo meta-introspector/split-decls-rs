@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Iterator!();
-        Convert!();
-        IteratorExt!();
-        FallibleIterator!();
         IntoFallible!();
+        IteratorExt!();
+        Convert!();
+        FallibleIterator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

@@ -12,4 +12,4 @@ macro_rules! handles_short_read_from_delegate {
     };
 }
 
-handles_short_read_from_delegate!()
+handles_short_read_from_delegate!();

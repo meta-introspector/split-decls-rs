@@ -4,4 +4,4 @@ macro_rules! SelfParamPtr {
     };
 }
 
-SelfParamPtr!()
+SelfParamPtr!();

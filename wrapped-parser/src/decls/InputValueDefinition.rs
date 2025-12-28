@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ConstDirective!();
-        Positioned!();
         Type!();
+        Positioned!();
+        ConstDirective!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InputValueDefinition {
     };
 }
 
-InputValueDefinition!()
+InputValueDefinition!();

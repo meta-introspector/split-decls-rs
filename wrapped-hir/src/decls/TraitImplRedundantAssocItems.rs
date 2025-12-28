@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Impl!();
-        AssocItem!();
         Trait!();
+        AssocItem!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TraitImplRedundantAssocItems {
     };
 }
 
-TraitImplRedundantAssocItems!()
+TraitImplRedundantAssocItems!();

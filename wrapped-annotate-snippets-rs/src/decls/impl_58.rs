@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Patch!();
-        SplicedLines!();
-        SubstitutionHighlight!();
+        LineAnnotation!();
         MultilineAnnotation!();
-        Annotation!();
-        AnnotatedLineInfo!();
-        Loc!();
-        LineInfo!();
         CursorLines!();
         SourceMap!();
-        AnnotationKind!();
+        Annotation!();
         LineAnnotationType!();
-        LineAnnotation!();
+        SplicedLines!();
+        LineInfo!();
+        SubstitutionHighlight!();
+        Patch!();
+        AnnotatedLineInfo!();
+        Loc!();
+        AnnotationKind!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

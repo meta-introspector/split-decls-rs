@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Error!();
+        Reference!();
         Change!();
         Note!();
-        Reference!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! delete {
     };
 }
 
-delete!()
+delete!();

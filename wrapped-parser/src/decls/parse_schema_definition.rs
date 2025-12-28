@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Positioned!();
+        SchemaDefinition!();
+        Rule!();
+        Result!();
         PositionCalculator!();
         OperationType!();
-        Positioned!();
-        Result!();
-        Rule!();
-        SchemaDefinition!();
-        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! parse_schema_definition {
     };
 }
 
-parse_schema_definition!()
+parse_schema_definition!();

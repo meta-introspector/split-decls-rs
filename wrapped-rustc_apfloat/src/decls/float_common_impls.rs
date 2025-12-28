@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         ParseError!();
         Float!();
-        StatusAnd!();
         Round!();
+        StatusAnd!();
     };
 }
 

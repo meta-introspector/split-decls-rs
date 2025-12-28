@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MapDeserializer!();
-        Name!();
-        ConstValue!();
         DeserializerError!();
+        Name!();
+        MapDeserializer!();
+        ConstValue!();
         Value!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! visit_object {
     };
 }
 
-visit_object!()
+visit_object!();

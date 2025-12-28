@@ -4,4 +4,4 @@ macro_rules! EditionedFileId {
     };
 }
 
-EditionedFileId!()
+EditionedFileId!();

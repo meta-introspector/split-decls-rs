@@ -29,4 +29,4 @@ fn main() {
     };
 }
 
-test_format_args_expand_with_raw_strings!()
+test_format_args_expand_with_raw_strings!();

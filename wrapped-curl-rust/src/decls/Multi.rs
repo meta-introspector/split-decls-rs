@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawMulti!();
         MultiData!();
+        RawMulti!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Multi {
     };
 }
 
-Multi!()
+Multi!();

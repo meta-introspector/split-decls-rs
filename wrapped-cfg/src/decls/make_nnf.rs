@@ -11,4 +11,4 @@ macro_rules! make_nnf {
     };
 }
 
-make_nnf!()
+make_nnf!();

@@ -11,4 +11,4 @@ macro_rules! request_ref {
     };
 }
 
-request_ref!()
+request_ref!();

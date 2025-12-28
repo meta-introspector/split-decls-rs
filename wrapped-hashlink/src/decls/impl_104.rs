@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IterMut!();
         IntoIter!();
+        IterMut!();
         LinkedHashMap!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

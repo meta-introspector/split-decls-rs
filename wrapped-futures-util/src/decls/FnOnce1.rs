@@ -4,4 +4,4 @@ macro_rules! FnOnce1 {
     };
 }
 
-FnOnce1!()
+FnOnce1!();

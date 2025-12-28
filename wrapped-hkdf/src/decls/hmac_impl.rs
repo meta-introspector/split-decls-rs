@@ -4,4 +4,4 @@ macro_rules! hmac_impl {
     };
 }
 
-hmac_impl!()
+hmac_impl!();

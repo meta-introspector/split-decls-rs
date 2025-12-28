@@ -11,4 +11,4 @@ macro_rules! decode_state {
     };
 }
 
-decode_state!()
+decode_state!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        AsRaw!();
+        Strategy!();
         ArcSwap!();
+        Access!();
+        AsRaw!();
+        ArcSwapAny!();
         Cache!();
+        Guard!();
         Map!();
         RefCnt!();
-        Access!();
-        Strategy!();
-        Guard!();
-        ArcSwapAny!();
         CaS!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

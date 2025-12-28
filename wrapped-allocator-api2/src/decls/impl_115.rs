@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Drain!();
         Allocator!();
+        Drain!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

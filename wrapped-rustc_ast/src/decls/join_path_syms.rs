@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Item!();
+    };
+}
+
+macro_rules! join_path_syms {
+    () => {
+        deps!();
+        # [doc = " Joins multiple symbols with \"::\" into a path, e.g. \"a::b::c\". If the first"] # [doc = " segment is `kw::PathRoot` it will be printed as empty, e.g. \"::b::c\"."] # [doc = ""] # [doc = " The generics on the `path` argument mean it can accept many forms, such as:"] # [doc = " - `&[Symbol]`"] # [doc = " - `Vec<Symbol>`"] # [doc = " - `Vec<&Symbol>`"] # [doc = " - `impl Iterator<Item = Symbol>`"] # [doc = " - `impl Iterator<Item = &Symbol>`"] # [doc = ""] # [doc = " Panics if `path` is empty or a segment after the first is `kw::PathRoot`."] pub fn join_path_syms (path : impl IntoIterator < Item = impl Borrow < Symbol > >) -> String { let mut iter = path . into_iter () ; let len_hint = iter . size_hint () . 1 . unwrap_or (1) ; let mut s = String :: with_capacity (len_hint * 8) ; let first_sym = * iter . next () . unwrap () . borrow () ; if first_sym != kw :: PathRoot { s . push_str (first_sym . as_str ()) ; } for sym in iter { let sym = * sym . borrow () ; debug_assert_ne ! (sym , kw :: PathRoot) ; s . push_str ("::") ; s . push_str (sym . as_str ()) ; } s }
+    };
+}
+
+join_path_syms!()

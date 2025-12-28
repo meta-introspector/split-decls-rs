@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        UniCase!();
+        Ascii!();
     };
 }
 
 macro_rules! impl_11 {
     () => {
         deps!();
-        impl < S : AsRef < str > + Default > Default for UniCase < S > { fn default () -> Self { Self :: new (Default :: default ()) } }
+        impl < 'a , S1 : AsRef < str > > PartialEq < Ascii < S1 > > for & 'a str { # [inline] fn eq (& self , other : & Ascii < S1 >) -> bool { other == self } }
     };
 }
 

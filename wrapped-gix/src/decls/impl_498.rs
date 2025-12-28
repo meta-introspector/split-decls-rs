@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Options!();
         Permissions!();
+        Options!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_498 {
     };
 }
 
-impl_498!()
+impl_498!();

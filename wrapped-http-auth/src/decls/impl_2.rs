@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Possibilities!();
-        State!();
         ChallengeParser!();
+        State!();
+        Possibilities!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

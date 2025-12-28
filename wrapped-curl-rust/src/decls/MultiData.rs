@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SocketEvents!();
         Socket!();
+        SocketEvents!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MultiData {
     };
 }
 
-MultiData!()
+MultiData!();

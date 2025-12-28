@@ -4,4 +4,4 @@ macro_rules! reqwest {
     };
 }
 
-reqwest!()
+reqwest!();

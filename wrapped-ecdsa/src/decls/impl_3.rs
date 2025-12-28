@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        RecoveryId!();
-        EcdsaCurve!();
-        Signature!();
-        SignatureSize!();
-        VerifyingKey!();
         DigestAlgorithm!();
+        RecoveryId!();
+        Signature!();
+        EcdsaCurve!();
+        VerifyingKey!();
+        SignatureSize!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

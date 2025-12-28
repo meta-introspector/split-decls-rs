@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Options!();
-        Kind!();
-        Repository!();
-        Reference!();
-        Path!();
         Note!();
+        Path!();
+        Reference!();
+        Repository!();
+        Kind!();
         Error!();
+        Options!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Delegate {
     };
 }
 
-Delegate!()
+Delegate!();

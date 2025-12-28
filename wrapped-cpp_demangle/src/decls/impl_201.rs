@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GetLeafName!();
         LeafName!();
-        SubstitutionTable!();
         ClassEnumType!();
+        SubstitutionTable!();
+        GetLeafName!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_201 {
     };
 }
 
-impl_201!()
+impl_201!();

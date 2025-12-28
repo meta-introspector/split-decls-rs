@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ItemLoc!();
         Impl!();
+        ItemLoc!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ImplLoc {
     };
 }
 
-ImplLoc!()
+ImplLoc!();

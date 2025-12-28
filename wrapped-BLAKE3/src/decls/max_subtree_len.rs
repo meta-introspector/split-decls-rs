@@ -4,4 +4,4 @@ macro_rules! max_subtree_len {
     };
 }
 
-max_subtree_len!()
+max_subtree_len!();

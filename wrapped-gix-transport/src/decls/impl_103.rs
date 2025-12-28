@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        HeadersThenBody!();
-        Protocol!();
         Http!();
+        Protocol!();
         HandleProgress!();
-        ExtendedBufRead!();
-        Error!();
         MessageKind!();
+        Error!();
+        ExtendedBufRead!();
+        HeadersThenBody!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_103 {
     };
 }
 
-impl_103!()
+impl_103!();

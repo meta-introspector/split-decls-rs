@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Revspec!();
         Object!();
+        Revspec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_707 {
     };
 }
 
-impl_707!()
+impl_707!();

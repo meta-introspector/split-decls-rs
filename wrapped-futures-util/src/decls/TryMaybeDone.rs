@@ -4,4 +4,4 @@ macro_rules! TryMaybeDone {
     };
 }
 
-TryMaybeDone!()
+TryMaybeDone!();

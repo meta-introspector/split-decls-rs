@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InputValueError!();
-        Registry!();
         InputType!();
+        Registry!();
         InputValueResult!();
+        InputValueError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

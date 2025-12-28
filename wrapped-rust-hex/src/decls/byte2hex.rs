@@ -4,4 +4,4 @@ macro_rules! byte2hex {
     };
 }
 
-byte2hex!()
+byte2hex!();

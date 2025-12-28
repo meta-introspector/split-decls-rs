@@ -11,4 +11,4 @@ macro_rules! decode_to_slice {
     };
 }
 
-decode_to_slice!()
+decode_to_slice!();

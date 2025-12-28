@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BufMut!();
         Shared!();
+        BufMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BytesMut {
     };
 }
 
-BytesMut!()
+BytesMut!();

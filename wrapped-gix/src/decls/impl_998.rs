@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Default!();
         Submodule!();
+        Default!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_998 {
     };
 }
 
-impl_998!()
+impl_998!();

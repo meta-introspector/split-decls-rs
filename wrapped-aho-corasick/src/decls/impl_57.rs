@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StateID!();
         DFA!();
+        StateID!();
         PatternID!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

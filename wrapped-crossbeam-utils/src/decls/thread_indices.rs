@@ -12,4 +12,4 @@ macro_rules! thread_indices {
     };
 }
 
-thread_indices!()
+thread_indices!();

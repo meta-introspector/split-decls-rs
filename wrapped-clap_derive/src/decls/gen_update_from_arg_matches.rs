@@ -12,4 +12,4 @@ macro_rules! gen_update_from_arg_matches {
     };
 }
 
-gen_update_from_arg_matches!()
+gen_update_from_arg_matches!();

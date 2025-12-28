@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Protocols!();
-        Data!();
-        Response!();
         ServerMessage!();
+        Data!();
+        Protocols!();
+        Response!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_660 {
     };
 }
 
-impl_660!()
+impl_660!();

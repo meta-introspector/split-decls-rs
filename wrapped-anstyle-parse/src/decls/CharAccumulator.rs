@@ -4,4 +4,4 @@ macro_rules! CharAccumulator {
     };
 }
 
-CharAccumulator!()
+CharAccumulator!();

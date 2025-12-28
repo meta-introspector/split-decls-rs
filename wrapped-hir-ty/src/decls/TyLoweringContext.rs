@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         HirDatabase!();
-        Generics!();
-        LifetimeElisionKind!();
         ImplTraitLoweringState!();
+        LifetimeElisionKind!();
+        Generics!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TyLoweringContext {
     };
 }
 
-TyLoweringContext!()
+TyLoweringContext!();

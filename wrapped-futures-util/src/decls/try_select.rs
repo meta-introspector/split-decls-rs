@@ -4,4 +4,4 @@ macro_rules! try_select {
     };
 }
 
-try_select!()
+try_select!();

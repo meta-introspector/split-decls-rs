@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         Encoder!();
-        Base64Impl!();
         Base64Variant!();
+        Base64Impl!();
+        Error!();
         Base64!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

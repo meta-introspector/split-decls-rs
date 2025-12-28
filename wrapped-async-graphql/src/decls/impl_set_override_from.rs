@@ -4,4 +4,4 @@ macro_rules! impl_set_override_from {
     };
 }
 
-impl_set_override_from!()
+impl_set_override_from!();

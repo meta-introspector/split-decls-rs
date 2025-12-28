@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Teddy!();
-        Mask!();
-        SlimMaskBuilder!();
         Vector!();
+        Teddy!();
+        SlimMaskBuilder!();
+        Mask!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

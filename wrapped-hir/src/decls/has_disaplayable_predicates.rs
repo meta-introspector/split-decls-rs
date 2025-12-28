@@ -11,4 +11,4 @@ macro_rules! has_disaplayable_predicates {
     };
 }
 
-has_disaplayable_predicates!()
+has_disaplayable_predicates!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Directive!();
         Positioned!();
+        Directive!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FragmentSpread {
     };
 }
 
-FragmentSpread!()
+FragmentSpread!();

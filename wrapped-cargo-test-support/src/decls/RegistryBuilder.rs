@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Token!();
         TestRegistry!();
         RequestCallback!();
-        Token!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RegistryBuilder {
     };
 }
 
-RegistryBuilder!()
+RegistryBuilder!();

@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Segment!();
+        Context!();
+        Write!();
+        Read!();
+        DictParams!();
+    };
+}
+
+macro_rules! create_raw_dict_from_source {
+    () => {
+        deps!();
+        # [doc = " Read from `source` to create a \"raw content\" dictionary of `dict_size`."] # [doc = " The completed dictionary is written to `output`."] # [doc = ""] # [doc = " - `source` will be used as training data for the entire dictionary."] # [doc = " - `source_size` influences how the data is divided and sampled and is measured"] # [doc = "   in bytes. While this does not need to be exact, estimates should attempt to be"] # [doc = "   larger than the actual collection size."] # [doc = " - `output` is where the completed dictionary will be written."] # [doc = " - `dict_size` determines how large the complete dictionary should be. The completed"] # [doc = "   dictionary will be this size or smaller."] # [doc = ""] # [doc = " This function uses `BufRead` internally, the provided reader need not be buffered."] pub fn create_raw_dict_from_source < R : io :: Read , W : io :: Write > (source : R , source_size : usize , output : & mut W , dict_size : usize ,) { vprintln ! ("create_dict: creating {dict_size} byte dict from {source_size} byte source") ; let mut buffered_source = BufReader :: with_capacity (128_000 , source) ; let params = DictParams { segment_size : 2048 } ; let num_segments = source_size / params . segment_size as usize ; let sample_size = source_size / usize :: min (source_size / (2 * num_segments) , 256) ; vprintln ! ("create_dict: creating {sample_size} byte sample of collection") ; let collection_sample = create_sample (& mut buffered_source , sample_size) ; let mut pool : BinaryHeap < Reverse < Segment > > = BinaryHeap :: new () ; let (_ , epoch_size) = compute_epoch_info (& params , dict_size , source_size / K) ; let num_epochs = source_size / epoch_size ; vprintln ! ("create_dict: computed epoch info, using {num_epochs} epochs of {epoch_size} bytes") ; let mut current_epoch = vec ! [0 ; 100] ; let mut epoch_counter = 0 ; let mut ctx = Context { frequencies : HashMap :: with_capacity (epoch_size / K) , } ; while dbg ! (buffered_source . read (& mut current_epoch) . expect ("can read input")) != 0 { epoch_counter += 1 ; let best_segment = pick_best_segment (& params , & mut ctx , & collection_sample) ; vprintln ! ("\tcreate_dict: epoch {epoch_counter}/{num_epochs} has best segment score {}" , best_segment . score) ; pool . push (Reverse (best_segment)) ; ctx . frequencies . clear () ; } vprintln ! ("create_dict: {epoch_counter} epochs written, writing {} segments" , pool . len ()) ; while let Some (segment) = pool . pop () { output . write_all (& segment . 0 . raw) . expect ("can write to output") ; } }
+    };
+}
+
+create_raw_dict_from_source!()

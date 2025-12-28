@@ -12,4 +12,4 @@ macro_rules! REPORT_STATS {
     };
 }
 
-REPORT_STATS!()
+REPORT_STATS!();

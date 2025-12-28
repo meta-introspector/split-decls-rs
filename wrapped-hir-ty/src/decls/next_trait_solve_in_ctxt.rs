@@ -4,4 +4,4 @@ macro_rules! next_trait_solve_in_ctxt {
     };
 }
 
-next_trait_solve_in_ctxt!()
+next_trait_solve_in_ctxt!();

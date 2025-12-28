@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        TestBadFn!();
+        Ty!();
+    };
+}
+
+macro_rules! check_test_signature {
+    () => {
+        deps!();
+        fn check_test_signature (cx : & ExtCtxt < '_ > , i : & ast :: Item , f : & ast :: Fn ,) -> Result < () , ErrorGuaranteed > { let has_should_panic_attr = attr :: contains_name (& i . attrs , sym :: should_panic) ; let dcx = cx . dcx () ; if let ast :: Safety :: Unsafe (span) = f . sig . header . safety { return Err (dcx . emit_err (errors :: TestBadFn { span : i . span , cause : span , kind : "unsafe" })) ; } if let Some (coroutine_kind) = f . sig . header . coroutine_kind { match coroutine_kind { ast :: CoroutineKind :: Async { span , .. } => { return Err (dcx . emit_err (errors :: TestBadFn { span : i . span , cause : span , kind : "async" , })) ; } ast :: CoroutineKind :: Gen { span , .. } => { return Err (dcx . emit_err (errors :: TestBadFn { span : i . span , cause : span , kind : "gen" , })) ; } ast :: CoroutineKind :: AsyncGen { span , .. } => { return Err (dcx . emit_err (errors :: TestBadFn { span : i . span , cause : span , kind : "async gen" , })) ; } } } let has_output = match & f . sig . decl . output { ast :: FnRetTy :: Default (..) => false , ast :: FnRetTy :: Ty (t) if t . kind . is_unit () => false , _ => true , } ; if ! f . sig . decl . inputs . is_empty () { return Err (dcx . span_err (i . span , "functions used as tests can not have any arguments")) ; } if has_should_panic_attr && has_output { return Err (dcx . span_err (i . span , "functions using `#[should_panic]` must return `()`")) ; } if f . generics . params . iter () . any (| param | ! matches ! (param . kind , GenericParamKind :: Lifetime)) { return Err (dcx . span_err (i . span , "functions used as tests can not have any non-lifetime generic parameters" ,)) ; } Ok (()) }
+    };
+}
+
+check_test_signature!()

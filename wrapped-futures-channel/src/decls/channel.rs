@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Receiver!();
-        Sender!();
         Inner!();
+        Sender!();
+        Receiver!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! channel {
     };
 }
 
-channel!()
+channel!();

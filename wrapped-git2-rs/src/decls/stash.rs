@@ -4,4 +4,4 @@ macro_rules! stash {
     };
 }
 
-stash!()
+stash!();

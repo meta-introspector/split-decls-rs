@@ -4,4 +4,4 @@ macro_rules! DEFAULT_MODE {
     };
 }
 
-DEFAULT_MODE!()
+DEFAULT_MODE!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Options!();
+        Change!();
         TreeDiffChange!();
         Statistics!();
-        Error!();
-        Change!();
-        Options!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! tree_diff_with_rewrites_at_file_path {
     };
 }
 
-tree_diff_with_rewrites_at_file_path!()
+tree_diff_with_rewrites_at_file_path!();

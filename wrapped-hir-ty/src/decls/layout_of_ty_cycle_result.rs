@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LayoutError!();
-        Layout!();
         HirDatabase!();
         TraitEnvironment!();
+        LayoutError!();
+        Layout!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! layout_of_ty_cycle_result {
     };
 }
 
-layout_of_ty_cycle_result!()
+layout_of_ty_cycle_result!();

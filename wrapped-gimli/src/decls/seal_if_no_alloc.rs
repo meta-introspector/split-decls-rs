@@ -4,4 +4,4 @@ macro_rules! seal_if_no_alloc {
     };
 }
 
-seal_if_no_alloc!()
+seal_if_no_alloc!();

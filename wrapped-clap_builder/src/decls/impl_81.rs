@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ValueParser!();
-        Extension!();
-        ArgGroup!();
-        StyledStr!();
-        Styles!();
-        Str!();
-        Arg!();
-        ColorChoice!();
-        Command!();
         AppSettings!();
+        ValueParser!();
+        ArgGroup!();
+        Command!();
+        Str!();
+        StyledStr!();
+        Arg!();
+        Styles!();
         OsStr!();
+        Extension!();
+        ColorChoice!();
         CommandExt!();
     };
 }
@@ -23,4 +23,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

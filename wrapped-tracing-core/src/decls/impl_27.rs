@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Finish!();
+        Once!();
+    };
+}
+
+macro_rules! impl_27 {
+    () => {
+        deps!();
+        impl < T > Once < T > { # [doc = " Initialization constant of `Once`."] pub const INIT : Self = Once { state : AtomicUsize :: new (INCOMPLETE) , data : UnsafeCell :: new (None) , } ; # [doc = " Creates a new `Once` value."] pub const fn new () -> Once < T > { Self :: INIT } fn force_get < 'a > (& 'a self) -> & 'a T { match unsafe { & * self . data . get () } . as_ref () { None => unsafe { unreachable () } , Some (p) => p , } } # [doc = " Performs an initialization routine once and only once. The given closure"] # [doc = " will be executed if this is the first time `call_once` has been called,"] # [doc = " and otherwise the routine will *not* be invoked."] # [doc = ""] # [doc = " This method will block the calling thread if another initialization"] # [doc = " routine is currently running."] # [doc = ""] # [doc = " When this function returns, it is guaranteed that some initialization"] # [doc = " has run and completed (it may not be the closure specified). The"] # [doc = " returned pointer will point to the result from the closure that was"] # [doc = " run."] pub fn call_once < 'a , F > (& 'a self , builder : F) -> & 'a T where F : FnOnce () -> T , { let mut status = self . state . load (Ordering :: SeqCst) ; if status == INCOMPLETE { status = match self . state . compare_exchange (INCOMPLETE , RUNNING , Ordering :: SeqCst , Ordering :: SeqCst ,) { Ok (status) => { debug_assert_eq ! (status , INCOMPLETE , "if compare_exchange succeeded, previous status must be incomplete" ,) ; let mut finish = Finish { state : & self . state , panicked : true , } ; unsafe { * self . data . get () = Some (builder ()) } ; finish . panicked = false ; self . state . store (COMPLETE , Ordering :: SeqCst) ; return self . force_get () ; } Err (status) => status , } } loop { match status { INCOMPLETE => unreachable ! () , RUNNING => { spin_loop () ; status = self . state . load (Ordering :: SeqCst) } PANICKED => panic ! ("Once has panicked") , COMPLETE => return self . force_get () , _ => unsafe { unreachable () } , } } } # [doc = " Returns a pointer iff the `Once` was previously initialized"] pub fn r#try < 'a > (& 'a self) -> Option < & 'a T > { match self . state . load (Ordering :: SeqCst) { COMPLETE => Some (self . force_get ()) , _ => None , } } # [doc = " Like try, but will spin if the `Once` is in the process of being"] # [doc = " initialized"] pub fn wait < 'a > (& 'a self) -> Option < & 'a T > { loop { match self . state . load (Ordering :: SeqCst) { INCOMPLETE => return None , RUNNING => { spin_loop () } COMPLETE => return Some (self . force_get ()) , PANICKED => panic ! ("Once has panicked") , _ => unsafe { unreachable () } , } } } }
+    };
+}
+
+impl_27!()

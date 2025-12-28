@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Node!();
         SortedLinkedList!();
+        Node!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_const_new {
     };
 }
 
-impl_const_new!()
+impl_const_new!();

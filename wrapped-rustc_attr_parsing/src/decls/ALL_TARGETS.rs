@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Policy!();
+    };
+}
+
+macro_rules! ALL_TARGETS {
+    () => {
+        deps!();
+        # [doc = " This is the list of all targets to which a attribute can be applied"] # [doc = " This is used for:"] # [doc = " - `rustc_dummy`, which can be applied to all targets"] # [doc = " - Attributes that are not parted to the new target system yet can use this list as a placeholder"] pub (crate) const ALL_TARGETS : & 'static [Policy] = { use Policy :: Allow ; & [Allow (Target :: ExternCrate) , Allow (Target :: Use) , Allow (Target :: Static) , Allow (Target :: Const) , Allow (Target :: Fn) , Allow (Target :: Closure) , Allow (Target :: Mod) , Allow (Target :: ForeignMod) , Allow (Target :: GlobalAsm) , Allow (Target :: TyAlias) , Allow (Target :: Enum) , Allow (Target :: Variant) , Allow (Target :: Struct) , Allow (Target :: Field) , Allow (Target :: Union) , Allow (Target :: Trait) , Allow (Target :: TraitAlias) , Allow (Target :: Impl { of_trait : false }) , Allow (Target :: Impl { of_trait : true }) , Allow (Target :: Expression) , Allow (Target :: Statement) , Allow (Target :: Arm) , Allow (Target :: AssocConst) , Allow (Target :: Method (MethodKind :: Inherent)) , Allow (Target :: Method (MethodKind :: Trait { body : false })) , Allow (Target :: Method (MethodKind :: Trait { body : true })) , Allow (Target :: Method (MethodKind :: TraitImpl)) , Allow (Target :: AssocTy) , Allow (Target :: ForeignFn) , Allow (Target :: ForeignStatic) , Allow (Target :: ForeignTy) , Allow (Target :: MacroDef) , Allow (Target :: Param) , Allow (Target :: PatField) , Allow (Target :: ExprField) , Allow (Target :: WherePredicate) , Allow (Target :: MacroCall) , Allow (Target :: Crate) , Allow (Target :: Delegation { mac : false }) , Allow (Target :: Delegation { mac : true }) ,] } ;
+    };
+}
+
+ALL_TARGETS!()

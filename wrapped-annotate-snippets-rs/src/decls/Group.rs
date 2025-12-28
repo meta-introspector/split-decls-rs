@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Element!();
-        Title!();
         Level!();
         Report!();
+        Title!();
+        Element!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Group {
     };
 }
 
-Group!()
+Group!();

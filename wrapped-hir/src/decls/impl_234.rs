@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Static!();
-        Struct!();
-        Function!();
-        Module!();
-        Variant!();
-        Enum!();
-        Union!();
-        BuiltinType!();
-        Trait!();
-        Adt!();
-        DefWithBody!();
-        Macro!();
-        Const!();
         GenericDef!();
-        TypeAlias!();
+        DefWithBody!();
         ModuleDef!();
+        BuiltinType!();
+        Macro!();
+        Trait!();
+        Enum!();
+        Adt!();
+        Union!();
+        Const!();
+        TypeAlias!();
+        Function!();
+        Struct!();
+        Variant!();
+        Module!();
+        Static!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_234 {
     };
 }
 
-impl_234!()
+impl_234!();

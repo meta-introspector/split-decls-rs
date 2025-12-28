@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        AArch64!();
-        UnwindExpression!();
-        ReaderOffset!();
-        Error!();
-        Reader!();
         PointerEncodingParameters!();
-        Result!();
-        CallFrameInstruction!();
-        Expression!();
-        Register!();
+        UnwindExpression!();
         Vendor!();
+        Result!();
+        Error!();
+        Expression!();
+        ReaderOffset!();
+        AArch64!();
+        Register!();
+        Reader!();
+        CallFrameInstruction!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_244 {
     };
 }
 
-impl_244!()
+impl_244!();

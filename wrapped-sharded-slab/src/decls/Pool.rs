@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Clear!();
+        Slab!();
+        DefaultConfig!();
+        Config!();
+        Array!();
+    };
+}
+
+macro_rules! Pool {
+    () => {
+        deps!();
+        # [doc = " A lock-free concurrent object pool."] # [doc = ""] # [doc = " Slabs provide pre-allocated storage for many instances of a single type. But, when working with"] # [doc = " heap allocated objects, the advantages of a slab are lost, as the memory allocated for the"] # [doc = " object is freed when the object is removed from the slab. With a pool, we can instead reuse"] # [doc = " this memory for objects being added to the pool in the future, therefore reducing memory"] # [doc = " fragmentation and avoiding additional allocations."] # [doc = ""] # [doc = " This type implements a lock-free concurrent pool, indexed by `usize`s. The items stored in this"] # [doc = " type need to implement [`Clear`] and `Default`."] # [doc = ""] # [doc = " The `Pool` type shares similar semantics to [`Slab`] when it comes to sharing across threads"] # [doc = " and storing mutable shared data. The biggest difference is there are no [`Slab::insert`] and"] # [doc = " [`Slab::take`] analouges for the `Pool` type. Instead new items are added to the pool by using"] # [doc = " the [`Pool::create`] method, and marked for clearing by the [`Pool::clear`] method."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Add an entry to the pool, returning an index:"] # [doc = " ```"] # [doc = " # use sharded_slab::Pool;"] # [doc = " let pool: Pool<String> = Pool::new();"] # [doc = ""] # [doc = " let key = pool.create_with(|item| item.push_str(\"hello world\")).unwrap();"] # [doc = " assert_eq!(pool.get(key).unwrap(), String::from(\"hello world\"));"] # [doc = " ```"] # [doc = ""] # [doc = " Create a new pooled item, returning a guard that allows mutable access:"] # [doc = " ```"] # [doc = " # use sharded_slab::Pool;"] # [doc = " let pool: Pool<String> = Pool::new();"] # [doc = ""] # [doc = " let mut guard = pool.create().unwrap();"] # [doc = " let key = guard.key();"] # [doc = " guard.push_str(\"hello world\");"] # [doc = ""] # [doc = " drop(guard); // release the guard, allowing immutable access."] # [doc = " assert_eq!(pool.get(key).unwrap(), String::from(\"hello world\"));"] # [doc = " ```"] # [doc = ""] # [doc = " Pool entries can be cleared by calling [`Pool::clear`]. This marks the entry to"] # [doc = " be cleared when the guards referencing to it are dropped."] # [doc = " ```"] # [doc = " # use sharded_slab::Pool;"] # [doc = " let pool: Pool<String> = Pool::new();"] # [doc = ""] # [doc = " let key = pool.create_with(|item| item.push_str(\"hello world\")).unwrap();"] # [doc = ""] # [doc = " // Mark this entry to be cleared."] # [doc = " pool.clear(key);"] # [doc = ""] # [doc = " // The cleared entry is no longer available in the pool"] # [doc = " assert!(pool.get(key).is_none());"] # [doc = " ```"] # [doc = " # Configuration"] # [doc = ""] # [doc = " Both `Pool` and [`Slab`] share the same configuration mechanism. See [crate level documentation][config-doc]"] # [doc = " for more details."] # [doc = ""] # [doc = " [`Slab::take`]: crate::Slab::take"] # [doc = " [`Slab::insert`]: crate::Slab::insert"] # [doc = " [`Pool::create`]: Pool::create"] # [doc = " [`Pool::clear`]: Pool::clear"] # [doc = " [config-doc]: crate#configuration"] # [doc = " [`Clear`]: crate::Clear"] # [doc = " [`Slab`]: crate::Slab"] pub struct Pool < T , C = DefaultConfig > where T : Clear + Default , C : cfg :: Config , { shards : shard :: Array < T , C > , _cfg : PhantomData < C > , }
+    };
+}
+
+Pool!()

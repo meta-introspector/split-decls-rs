@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utc!();
         DateTime!();
+        Utc!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ymdhms_milli_utc {
     };
 }
 
-ymdhms_milli_utc!()
+ymdhms_milli_utc!();

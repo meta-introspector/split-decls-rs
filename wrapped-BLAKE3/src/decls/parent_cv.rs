@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Platform!();
         Hash!();
+        Platform!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parent_cv {
     };
 }
 
-parent_cv!()
+parent_cv!();

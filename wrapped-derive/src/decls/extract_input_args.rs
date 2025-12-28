@@ -11,4 +11,4 @@ macro_rules! extract_input_args {
     };
 }
 
-extract_input_args!()
+extract_input_args!();

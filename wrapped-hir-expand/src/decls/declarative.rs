@@ -4,4 +4,4 @@ macro_rules! declarative {
     };
 }
 
-declarative!()
+declarative!();

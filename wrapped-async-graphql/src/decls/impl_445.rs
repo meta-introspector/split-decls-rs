@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Deprecation!();
         MetaInputValue!();
         InputValue!();
+        Deprecation!();
         TypeRef!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_445 {
     };
 }
 
-impl_445!()
+impl_445!();

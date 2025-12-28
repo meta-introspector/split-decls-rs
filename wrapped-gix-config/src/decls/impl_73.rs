@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        File!();
-        SectionBodyIdsLut!();
-        Section!();
         Error!();
         SectionId!();
+        SectionBodyIdsLut!();
+        Section!();
+        File!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

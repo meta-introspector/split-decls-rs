@@ -4,4 +4,4 @@ macro_rules! extra_sizes {
     };
 }
 
-extra_sizes!()
+extra_sizes!();

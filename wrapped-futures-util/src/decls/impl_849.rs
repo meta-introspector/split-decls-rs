@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Send!();
         IterPinRef!();
+        Send!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_849 {
     };
 }
 
-impl_849!()
+impl_849!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Options!();
-        Mark!();
-        Outcome!();
-        Delegate!();
         EntryRef!();
+        Outcome!();
+        Mark!();
+        Delegate!();
         State!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

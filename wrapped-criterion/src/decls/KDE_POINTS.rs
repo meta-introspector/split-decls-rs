@@ -4,4 +4,4 @@ macro_rules! KDE_POINTS {
     };
 }
 
-KDE_POINTS!()
+KDE_POINTS!();

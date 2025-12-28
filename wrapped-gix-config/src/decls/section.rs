@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Comment!();
         Header!();
         Event!();
-        Key!();
-        Comment!();
         Section!();
+        Key!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! section {
     };
 }
 
-section!()
+section!();

@@ -11,4 +11,4 @@ macro_rules! TraitImpls {
     };
 }
 
-TraitImpls!()
+TraitImpls!();

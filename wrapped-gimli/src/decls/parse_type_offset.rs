@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Format!();
-        UnitOffset!();
         Result!();
+        UnitOffset!();
+        Format!();
         Reader!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! parse_type_offset {
     };
 }
 
-parse_type_offset!()
+parse_type_offset!();

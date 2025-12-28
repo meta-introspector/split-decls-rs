@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OneTraitImplsBuilder!();
         OneTraitImpls!();
+        OneTraitImplsBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_975 {
     };
 }
 
-impl_975!()
+impl_975!();

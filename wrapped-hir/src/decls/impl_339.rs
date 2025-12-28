@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Static!();
+        ExternAssocItem!();
         Module!();
         Function!();
-        ExternAssocItem!();
+        Static!();
         TypeAlias!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_339 {
     };
 }
 
-impl_339!()
+impl_339!();

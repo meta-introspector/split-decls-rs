@@ -4,4 +4,4 @@ macro_rules! Latin1Bidi {
     };
 }
 
-Latin1Bidi!()
+Latin1Bidi!();

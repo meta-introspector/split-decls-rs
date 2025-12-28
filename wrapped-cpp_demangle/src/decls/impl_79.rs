@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        TemplateArgs!();
-        SubstitutionTable!();
-        NestedName!();
-        UnscopedName!();
         Result!();
         ParseContext!();
-        Parse!();
-        IndexStr!();
-        UnscopedTemplateName!();
-        Substitutable!();
         LocalName!();
+        SubstitutionTable!();
+        Parse!();
+        NestedName!();
         Name!();
+        TemplateArgs!();
+        IndexStr!();
+        Substitutable!();
+        UnscopedTemplateName!();
+        UnscopedName!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

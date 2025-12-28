@@ -4,4 +4,4 @@ macro_rules! DEFAULT_HELP_STYLE {
     };
 }
 
-DEFAULT_HELP_STYLE!()
+DEFAULT_HELP_STYLE!();

@@ -15,4 +15,4 @@ macro_rules! InterfaceField {
     };
 }
 
-InterfaceField!()
+InterfaceField!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reference!();
         Platform!();
+        Reference!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_274 {
     };
 }
 
-impl_274!()
+impl_274!();

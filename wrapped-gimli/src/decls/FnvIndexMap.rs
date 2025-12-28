@@ -4,4 +4,4 @@ macro_rules! FnvIndexMap {
     };
 }
 
-FnvIndexMap!()
+FnvIndexMap!();

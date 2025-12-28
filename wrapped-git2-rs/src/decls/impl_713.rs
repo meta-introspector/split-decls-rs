@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Oid!();
-        Revwalk!();
         RevwalkWithHideCb!();
+        Error!();
+        Revwalk!();
+        Oid!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_713 {
     };
 }
 
-impl_713!()
+impl_713!();

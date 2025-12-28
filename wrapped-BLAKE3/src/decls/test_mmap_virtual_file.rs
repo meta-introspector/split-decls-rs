@@ -11,4 +11,4 @@ macro_rules! test_mmap_virtual_file {
     };
 }
 
-test_mmap_virtual_file!()
+test_mmap_virtual_file!();

@@ -4,4 +4,4 @@ macro_rules! SemanticsScope {
     };
 }
 
-SemanticsScope!()
+SemanticsScope!();

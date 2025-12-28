@@ -4,4 +4,4 @@ macro_rules! TakeWhile {
     };
 }
 
-TakeWhile!()
+TakeWhile!();

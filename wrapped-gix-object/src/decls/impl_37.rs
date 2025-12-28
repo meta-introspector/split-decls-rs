@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RawToken!();
-        Error!();
         CommitRefIterRaw!();
+        RawToken!();
         CommitRefIter!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

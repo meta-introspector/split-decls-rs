@@ -4,4 +4,4 @@ macro_rules! BRIGHT_BLUE {
     };
 }
 
-BRIGHT_BLUE!()
+BRIGHT_BLUE!();

@@ -4,4 +4,4 @@ macro_rules! is_small {
     };
 }
 
-is_small!()
+is_small!();

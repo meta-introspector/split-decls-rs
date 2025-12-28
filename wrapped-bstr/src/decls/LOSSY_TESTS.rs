@@ -4,4 +4,4 @@ macro_rules! LOSSY_TESTS {
     };
 }
 
-LOSSY_TESTS!()
+LOSSY_TESTS!();

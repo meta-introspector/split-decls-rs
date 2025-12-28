@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        PackageData!();
+    };
+}
+
+macro_rules! inject_cargo_package_env {
+    () => {
+        deps!();
+        # [doc = " Recreates the compile-time environment variables that Cargo sets."] # [doc = ""] # [doc = " Should be synced with"] # [doc = " <https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-crates>"] # [doc = ""] # [doc = " FIXME: ask Cargo to provide this data instead of re-deriving."] pub (crate) fn inject_cargo_package_env (env : & mut Env , package : & PackageData) { let manifest_dir = package . manifest . parent () ; env . set ("CARGO_MANIFEST_DIR" , manifest_dir . as_str ()) ; env . set ("CARGO_MANIFEST_PATH" , package . manifest . as_str ()) ; env . set ("CARGO_PKG_VERSION" , package . version . to_string ()) ; env . set ("CARGO_PKG_VERSION_MAJOR" , package . version . major . to_string ()) ; env . set ("CARGO_PKG_VERSION_MINOR" , package . version . minor . to_string ()) ; env . set ("CARGO_PKG_VERSION_PATCH" , package . version . patch . to_string ()) ; env . set ("CARGO_PKG_VERSION_PRE" , package . version . pre . to_string ()) ; env . set ("CARGO_PKG_AUTHORS" , package . authors . join (":")) ; env . set ("CARGO_PKG_NAME" , package . name . clone ()) ; env . set ("CARGO_PKG_DESCRIPTION" , package . description . as_deref () . unwrap_or_default ()) ; env . set ("CARGO_PKG_HOMEPAGE" , package . homepage . as_deref () . unwrap_or_default ()) ; env . set ("CARGO_PKG_REPOSITORY" , package . repository . as_deref () . unwrap_or_default ()) ; env . set ("CARGO_PKG_LICENSE" , package . license . as_deref () . unwrap_or_default ()) ; env . set ("CARGO_PKG_LICENSE_FILE" , package . license_file . as_ref () . map (ToString :: to_string) . unwrap_or_default () ,) ; env . set ("CARGO_PKG_README" , package . readme . as_ref () . map (ToString :: to_string) . unwrap_or_default () ,) ; env . set ("CARGO_PKG_RUST_VERSION" , package . rust_version . as_ref () . map (ToString :: to_string) . unwrap_or_default () ,) ; }
+    };
+}
+
+inject_cargo_package_env!()

@@ -4,4 +4,4 @@ macro_rules! aranges {
     };
 }
 
-aranges!()
+aranges!();

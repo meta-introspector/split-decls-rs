@@ -4,4 +4,4 @@ macro_rules! MakeMaybeUninit {
     };
 }
 
-MakeMaybeUninit!()
+MakeMaybeUninit!();

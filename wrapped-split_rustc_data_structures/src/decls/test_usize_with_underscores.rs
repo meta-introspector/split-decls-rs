@@ -1,0 +1,7 @@
+macro_rules! test_usize_with_underscores {
+    () => {
+        # [test] fn test_usize_with_underscores () { assert_eq ! ("0" , usize_with_underscores (0)) ; assert_eq ! ("1" , usize_with_underscores (1)) ; assert_eq ! ("99" , usize_with_underscores (99)) ; assert_eq ! ("345" , usize_with_underscores (345)) ; assert_eq ! ("1_000" , usize_with_underscores (1_000)) ; assert_eq ! ("12_001" , usize_with_underscores (12_001)) ; assert_eq ! ("999_999" , usize_with_underscores (999_999)) ; assert_eq ! ("1_000_000" , usize_with_underscores (1_000_000)) ; assert_eq ! ("12_345_678" , usize_with_underscores (12_345_678)) ; }
+    };
+}
+
+test_usize_with_underscores!()

@@ -11,4 +11,4 @@ macro_rules! test_date_fields {
     };
 }
 
-test_date_fields!()
+test_date_fields!();

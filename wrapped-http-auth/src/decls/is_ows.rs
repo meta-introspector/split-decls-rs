@@ -4,4 +4,4 @@ macro_rules! is_ows {
     };
 }
 
-is_ows!()
+is_ows!();

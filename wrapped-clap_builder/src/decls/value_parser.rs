@@ -4,4 +4,4 @@ macro_rules! value_parser {
     };
 }
 
-value_parser!()
+value_parser!();

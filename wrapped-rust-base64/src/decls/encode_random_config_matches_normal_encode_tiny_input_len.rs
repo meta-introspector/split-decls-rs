@@ -4,4 +4,4 @@ macro_rules! encode_random_config_matches_normal_encode_tiny_input_len {
     };
 }
 
-encode_random_config_matches_normal_encode_tiny_input_len!()
+encode_random_config_matches_normal_encode_tiny_input_len!();

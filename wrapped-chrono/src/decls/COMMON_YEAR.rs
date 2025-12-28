@@ -4,4 +4,4 @@ macro_rules! COMMON_YEAR {
     };
 }
 
-COMMON_YEAR!()
+COMMON_YEAR!();

@@ -4,4 +4,4 @@ macro_rules! submodule_status {
     };
 }
 
-submodule_status!()
+submodule_status!();

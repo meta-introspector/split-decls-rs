@@ -64,4 +64,4 @@ struct Struct9<#[pointee] T, U>(T) where T: ?Sized;
     };
 }
 
-coerce_pointee_errors!()
+coerce_pointee_errors!();

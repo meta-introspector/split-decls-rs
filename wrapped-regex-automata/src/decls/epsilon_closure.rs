@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        State!();
+        StateID!();
+        Match!();
+        NFA!();
+        Look!();
+        LookSet!();
+        SparseSet!();
+    };
+}
+
+macro_rules! epsilon_closure {
+    () => {
+        deps!();
+        # [doc = " Compute the epsilon closure for the given NFA state. The epsilon closure"] # [doc = " consists of all NFA state IDs, including `start_nfa_id`, that can be"] # [doc = " reached from `start_nfa_id` without consuming any input. These state IDs"] # [doc = " are written to `set` in the order they are visited, but only if they are"] # [doc = " not already in `set`. `start_nfa_id` must be a valid state ID for the NFA"] # [doc = " given."] # [doc = ""] # [doc = " `look_have` consists of the satisfied assertions at the current"] # [doc = " position. For conditional look-around epsilon transitions, these are"] # [doc = " only followed if they are satisfied by `look_have`."] # [doc = ""] # [doc = " `stack` must have length 0. It is used as scratch space for depth first"] # [doc = " traversal. After returning, it is guaranteed that `stack` will have length"] # [doc = " 0."] pub (crate) fn epsilon_closure (nfa : & thompson :: NFA , start_nfa_id : StateID , look_have : LookSet , stack : & mut Vec < StateID > , set : & mut SparseSet ,) { assert ! (stack . is_empty ()) ; if ! nfa . state (start_nfa_id) . is_epsilon () { set . insert (start_nfa_id) ; return ; } stack . push (start_nfa_id) ; while let Some (mut id) = stack . pop () { loop { if ! set . insert (id) { break ; } match * nfa . state (id) { thompson :: State :: ByteRange { .. } | thompson :: State :: Sparse { .. } | thompson :: State :: Dense { .. } | thompson :: State :: Fail | thompson :: State :: Match { .. } => break , thompson :: State :: Look { look , next } => { if ! look_have . contains (look) { break ; } id = next ; } thompson :: State :: Union { ref alternates } => { id = match alternates . get (0) { None => break , Some (& id) => id , } ; stack . extend (alternates [1 ..] . iter () . rev ()) ; } thompson :: State :: BinaryUnion { alt1 , alt2 } => { id = alt1 ; stack . push (alt2) ; } thompson :: State :: Capture { next , .. } => { id = next ; } } } } }
+    };
+}
+
+epsilon_closure!()

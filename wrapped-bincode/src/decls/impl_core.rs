@@ -4,4 +4,4 @@ macro_rules! impl_core {
     };
 }
 
-impl_core!()
+impl_core!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Title!();
-        Level!();
-        Stylesheet!();
         LevelInner!();
         Message!();
+        Level!();
+        Stylesheet!();
+        Title!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Object!();
         MetaType!();
+        Object!();
         Interface!();
         Registry!();
     };
@@ -14,4 +14,4 @@ macro_rules! update_interface_possible_types {
     };
 }
 
-update_interface_possible_types!()
+update_interface_possible_types!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         ParseRequestError!();
         BatchRequest!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! receive_batch_body_no_multipart {
     };
 }
 
-receive_batch_body_no_multipart!()
+receive_batch_body_no_multipart!();

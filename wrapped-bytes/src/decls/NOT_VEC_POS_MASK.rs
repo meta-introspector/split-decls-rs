@@ -4,4 +4,4 @@ macro_rules! NOT_VEC_POS_MASK {
     };
 }
 
-NOT_VEC_POS_MASK!()
+NOT_VEC_POS_MASK!();

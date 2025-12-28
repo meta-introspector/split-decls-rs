@@ -4,4 +4,4 @@ macro_rules! git_process {
     };
 }
 
-git_process!()
+git_process!();

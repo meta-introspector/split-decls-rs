@@ -4,4 +4,4 @@ macro_rules! FullNameRef {
     };
 }
 
-FullNameRef!()
+FullNameRef!();

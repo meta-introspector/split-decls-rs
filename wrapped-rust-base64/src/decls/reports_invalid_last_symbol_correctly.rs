@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        DecodeError!();
         DecoderReader!();
         GeneralPurpose!();
-        DecodeError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! reports_invalid_last_symbol_correctly {
     };
 }
 
-reports_invalid_last_symbol_correctly!()
+reports_invalid_last_symbol_correctly!();

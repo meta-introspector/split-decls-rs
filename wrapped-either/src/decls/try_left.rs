@@ -11,4 +11,4 @@ macro_rules! try_left {
     };
 }
 
-try_left!()
+try_left!();

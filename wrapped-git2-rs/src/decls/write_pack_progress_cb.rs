@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Binding!();
-        OdbPackwriterCb!();
         Progress!();
+        OdbPackwriterCb!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_pack_progress_cb {
     };
 }
 
-write_pack_progress_cb!()
+write_pack_progress_cb!();

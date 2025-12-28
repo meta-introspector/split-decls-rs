@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Extensions!();
         Spec!();
         Repository!();
-        Extensions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RevSpecExt {
     };
 }
 
-RevSpecExt!()
+RevSpecExt!();

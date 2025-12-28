@@ -4,4 +4,4 @@ macro_rules! precompose_os_string {
     };
 }
 
-precompose_os_string!()
+precompose_os_string!();

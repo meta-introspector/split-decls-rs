@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Version!();
         Header!();
-        Cursor!();
+        Version!();
         Error!();
+        Cursor!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_601 {
     };
 }
 
-impl_601!()
+impl_601!();

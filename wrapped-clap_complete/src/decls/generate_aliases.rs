@@ -4,4 +4,4 @@ macro_rules! generate_aliases {
     };
 }
 
-generate_aliases!()
+generate_aliases!();

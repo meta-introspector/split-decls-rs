@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        OwnedEntry!();
+        RefMut!();
+        Config!();
+        Clear!();
     };
 }
 
 macro_rules! impl_27 {
     () => {
         deps!();
-        impl < T , C > OwnedEntry < T , C > where C : cfg :: Config , { # [doc = " Returns the key used to access this guard"] pub fn key (& self) -> usize { self . key } # [inline (always)] fn value (& self) -> & T { unsafe { self . value . as_ref () } } }
+        impl < T , C > PartialEq < T > for RefMut < '_ , T , C > where T : PartialEq < T > + Clear + Default , C : cfg :: Config , { fn eq (& self , other : & T) -> bool { self . value () . eq (other) } }
     };
 }
 

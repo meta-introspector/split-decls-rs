@@ -4,4 +4,4 @@ macro_rules! FetchPrune {
     };
 }
 
-FetchPrune!()
+FetchPrune!();

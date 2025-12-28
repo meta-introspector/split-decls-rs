@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         KeysAndSender!();
-        Requests!();
         DataLoaderInner!();
         Loader!();
+        Requests!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_384 {
     };
 }
 
-impl_384!()
+impl_384!();

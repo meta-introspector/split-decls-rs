@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AllObjects!();
         Store!();
-        Error!();
         State!();
+        Error!();
+        AllObjects!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

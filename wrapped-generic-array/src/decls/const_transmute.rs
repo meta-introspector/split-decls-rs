@@ -4,4 +4,4 @@ macro_rules! const_transmute {
     };
 }
 
-const_transmute!()
+const_transmute!();

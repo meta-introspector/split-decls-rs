@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Commit!();
-        Write!();
         Kind!();
+        Commit!();
         CommitRef!();
+        Write!();
         WriteTo!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

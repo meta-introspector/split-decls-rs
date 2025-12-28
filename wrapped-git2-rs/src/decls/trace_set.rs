@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         TraceLevel!();
         TracingCb!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! trace_set {
     };
 }
 
-trace_set!()
+trace_set!();

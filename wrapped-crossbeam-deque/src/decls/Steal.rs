@@ -4,4 +4,4 @@ macro_rules! Steal {
     };
 }
 
-Steal!()
+Steal!();

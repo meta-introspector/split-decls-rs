@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CallableDefId!();
         DefDatabase!();
+        CallableDefId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_716 {
     };
 }
 
-impl_716!()
+impl_716!();

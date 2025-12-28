@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ParseErrorKind!();
-        OutOfRange!();
         ParseError!();
+        OutOfRange!();
+        ParseErrorKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_281 {
     };
 }
 
-impl_281!()
+impl_281!();

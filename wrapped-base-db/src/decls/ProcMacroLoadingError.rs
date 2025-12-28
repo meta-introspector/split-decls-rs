@@ -4,4 +4,4 @@ macro_rules! ProcMacroLoadingError {
     };
 }
 
-ProcMacroLoadingError!()
+ProcMacroLoadingError!();

@@ -4,4 +4,4 @@ macro_rules! OneTraitImpls {
     };
 }
 
-OneTraitImpls!()
+OneTraitImpls!();

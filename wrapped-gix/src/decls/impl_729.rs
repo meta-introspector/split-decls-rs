@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Safe!();
-        Tree!();
         Any!();
+        Tree!();
+        Safe!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_729 {
     };
 }
 
-impl_729!()
+impl_729!();

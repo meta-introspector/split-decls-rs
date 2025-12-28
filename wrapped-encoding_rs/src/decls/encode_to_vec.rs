@@ -11,4 +11,4 @@ macro_rules! encode_to_vec {
     };
 }
 
-encode_to_vec!()
+encode_to_vec!();

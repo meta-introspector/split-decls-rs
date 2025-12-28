@@ -4,4 +4,4 @@ macro_rules! IndexStr {
     };
 }
 
-IndexStr!()
+IndexStr!();

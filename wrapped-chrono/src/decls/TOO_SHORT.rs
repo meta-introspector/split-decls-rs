@@ -12,4 +12,4 @@ macro_rules! TOO_SHORT {
     };
 }
 
-TOO_SHORT!()
+TOO_SHORT!();

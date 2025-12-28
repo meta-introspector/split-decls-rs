@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Operation!();
+        ReaderOffset!();
+        UnitOffset!();
         Result!();
-        UnitRef!();
+        Operation!();
         Register!();
+        DieReference!();
+        Encoding!();
         DebugInfoRef!();
+        Error!();
+        Reader!();
+        UnitRef!();
         Piece!();
         Address!();
         DebugAddrIndex!();
-        Reader!();
-        UnitOffset!();
-        ReaderOffset!();
         DebugInfoOffset!();
-        Encoding!();
-        DieReference!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_511 {
     };
 }
 
-impl_511!()
+impl_511!();

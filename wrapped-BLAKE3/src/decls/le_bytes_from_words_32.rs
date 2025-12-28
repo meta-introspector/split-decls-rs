@@ -4,4 +4,4 @@ macro_rules! le_bytes_from_words_32 {
     };
 }
 
-le_bytes_from_words_32!()
+le_bytes_from_words_32!();

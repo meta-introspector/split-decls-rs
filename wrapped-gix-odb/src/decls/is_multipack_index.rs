@@ -4,4 +4,4 @@ macro_rules! is_multipack_index {
     };
 }
 
-is_multipack_index!()
+is_multipack_index!();

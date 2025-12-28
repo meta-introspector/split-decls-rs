@@ -4,4 +4,4 @@ macro_rules! push_path_component {
     };
 }
 
-push_path_component!()
+push_path_component!();

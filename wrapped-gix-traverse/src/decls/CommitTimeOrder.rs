@@ -4,4 +4,4 @@ macro_rules! CommitTimeOrder {
     };
 }
 
-CommitTimeOrder!()
+CommitTimeOrder!();

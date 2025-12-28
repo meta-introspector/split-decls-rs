@@ -10,4 +10,4 @@ macro_rules! m { ( $($i:ident)* ) => (); }
     };
 }
 
-test_match_group_zero_match!()
+test_match_group_zero_match!();

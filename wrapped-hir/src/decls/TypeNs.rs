@@ -4,4 +4,4 @@ macro_rules! TypeNs {
     };
 }
 
-TypeNs!()
+TypeNs!();

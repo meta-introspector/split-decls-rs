@@ -11,4 +11,4 @@ macro_rules! lines_with_ends {
     };
 }
 
-lines_with_ends!()
+lines_with_ends!();

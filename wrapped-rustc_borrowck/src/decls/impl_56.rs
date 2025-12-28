@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        RegionInferenceContext!();
+        PoloniusOutOfScopePrecomputer!();
+        BorrowSet!();
+    };
+}
+
+macro_rules! impl_56 {
+    () => {
+        deps!();
+        impl < 'tcx > PoloniusOutOfScopePrecomputer < '_ , 'tcx > { fn compute (body : & Body < 'tcx > , regioncx : & RegionInferenceContext < 'tcx > , borrow_set : & BorrowSet < 'tcx > ,) -> FxIndexMap < Location , Vec < BorrowIndex > > { let mut prec = PoloniusOutOfScopePrecomputer { visited : DenseBitSet :: new_empty (body . basic_blocks . len ()) , visit_stack : vec ! [] , body , regioncx , loans_out_of_scope_at_location : FxIndexMap :: default () , } ; for (loan_idx , loan_data) in borrow_set . iter_enumerated () { let loan_issued_at = loan_data . reserve_location ; prec . precompute_loans_out_of_scope (loan_idx , loan_issued_at) ; } prec . loans_out_of_scope_at_location } # [doc = " Loans are in scope while they are live: whether they are contained within any live region."] # [doc = " In the location-insensitive analysis, a loan will be contained in a region if the issuing"] # [doc = " region can reach it in the subset graph. So this is a reachability problem."] fn precompute_loans_out_of_scope (& mut self , loan_idx : BorrowIndex , loan_issued_at : Location) { let first_block = loan_issued_at . block ; let first_bb_data = & self . body . basic_blocks [first_block] ; let first_lo = loan_issued_at . statement_index ; let first_hi = first_bb_data . statements . len () ; if let Some (kill_location) = self . loan_kill_location (loan_idx , loan_issued_at , first_block , first_lo , first_hi) { debug ! ("loan {:?} gets killed at {:?}" , loan_idx , kill_location) ; self . loans_out_of_scope_at_location . entry (kill_location) . or_default () . push (loan_idx) ; return ; } for succ_bb in first_bb_data . terminator () . successors () { if self . visited . insert (succ_bb) { self . visit_stack . push (succ_bb) ; } } while let Some (block) = self . visit_stack . pop () { let bb_data = & self . body [block] ; let num_stmts = bb_data . statements . len () ; if let Some (kill_location) = self . loan_kill_location (loan_idx , loan_issued_at , block , 0 , num_stmts) { debug ! ("loan {:?} gets killed at {:?}" , loan_idx , kill_location) ; self . loans_out_of_scope_at_location . entry (kill_location) . or_default () . push (loan_idx) ; continue ; } for succ_bb in bb_data . terminator () . successors () { if self . visited . insert (succ_bb) { self . visit_stack . push (succ_bb) ; } } } self . visited . clear () ; assert ! (self . visit_stack . is_empty () , "visit stack should be empty") ; } # [doc = " Returns the lowest statement in `start..=end`, where the loan goes out of scope, if any."] # [doc = " This is the statement where the issuing region can't reach any of the regions that are live"] # [doc = " at this point."] fn loan_kill_location (& self , loan_idx : BorrowIndex , loan_issued_at : Location , block : BasicBlock , start : usize , end : usize ,) -> Option < Location > { for statement_index in start ..= end { let location = Location { block , statement_index } ; if location == loan_issued_at { continue ; } if self . regioncx . is_loan_live_at (loan_idx , location) { continue ; } return Some (location) ; } None } }
+    };
+}
+
+impl_56!()

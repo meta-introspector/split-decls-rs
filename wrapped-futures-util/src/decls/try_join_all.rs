@@ -4,4 +4,4 @@ macro_rules! try_join_all {
     };
 }
 
-try_join_all!()
+try_join_all!();

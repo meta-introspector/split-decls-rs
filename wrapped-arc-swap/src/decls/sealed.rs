@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RefCnt!();
-        CaS!();
         AsRaw!();
+        CaS!();
+        RefCnt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! sealed {
     };
 }
 
-sealed!()
+sealed!();

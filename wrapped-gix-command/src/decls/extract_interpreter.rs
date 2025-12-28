@@ -4,4 +4,4 @@ macro_rules! extract_interpreter {
     };
 }
 
-extract_interpreter!()
+extract_interpreter!();

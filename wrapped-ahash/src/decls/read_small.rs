@@ -4,4 +4,4 @@ macro_rules! read_small {
     };
 }
 
-read_small!()
+read_small!();

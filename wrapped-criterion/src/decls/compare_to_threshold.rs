@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ComparisonResult!();
         Estimate!();
+        ComparisonResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! compare_to_threshold {
     };
 }
 
-compare_to_threshold!()
+compare_to_threshold!();

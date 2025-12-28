@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Owned!();
         Pointable!();
+        Owned!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

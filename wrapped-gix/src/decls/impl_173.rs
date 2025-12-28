@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Object!();
-        Kind!();
-        Error!();
         Blob!();
+        Kind!();
+        Object!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_173 {
     };
 }
 
-impl_173!()
+impl_173!();

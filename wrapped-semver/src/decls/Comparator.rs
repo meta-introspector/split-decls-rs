@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Prerelease!();
         VersionReq!();
         Op!();
+        Prerelease!();
     };
 }
 

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Target!();
         Builder!();
         Writer!();
-        BufferWriter!();
+        Target!();
         WriteStyle!();
+        BufferWriter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

@@ -4,4 +4,4 @@ macro_rules! has_error_to_handle {
     };
 }
 
-has_error_to_handle!()
+has_error_to_handle!();

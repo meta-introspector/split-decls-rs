@@ -11,4 +11,4 @@ macro_rules! is_active {
     };
 }
 
-is_active!()
+is_active!();

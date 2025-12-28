@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Note!();
         Error!();
         AsError!();
-        Note!();
         Remote!();
         Default!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_970 {
     };
 }
 
-impl_970!()
+impl_970!();

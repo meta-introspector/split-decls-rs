@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ForceAlgorithm!();
-        Builder!();
-        Config!();
-        RabinKarp!();
         MatchKind!();
+        Fat!();
+        Config!();
+        Builder!();
+        ForceAlgorithm!();
+        RabinKarp!();
         Teddy!();
         Searcher!();
-        Fat!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_108 {
     };
 }
 
-impl_108!()
+impl_108!();

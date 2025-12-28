@@ -4,4 +4,4 @@ macro_rules! RunTimeEndian {
     };
 }
 
-RunTimeEndian!()
+RunTimeEndian!();

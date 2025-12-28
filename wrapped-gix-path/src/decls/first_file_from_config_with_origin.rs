@@ -4,4 +4,4 @@ macro_rules! first_file_from_config_with_origin {
     };
 }
 
-first_file_from_config_with_origin!()
+first_file_from_config_with_origin!();

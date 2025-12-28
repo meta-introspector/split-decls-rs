@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         Entry!();
-        EntryRange!();
         Context!();
+        EntryRange!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! deltas_mt {
     };
 }
 
-deltas_mt!()
+deltas_mt!();

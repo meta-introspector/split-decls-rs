@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Plotter!();
         Criterion!();
         Gnuplot!();
-        Plotter!();
         PlottingBackend!();
         PlottersBackend!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_395 {
     };
 }
 
-impl_395!()
+impl_395!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        GitAdapter!();
-        GitRepositoryOperations!();
-        Execv!();
-        GitWrapperLibTrait!();
-        MockGitWrapperLib!();
-        GitExecutor!();
         GhExecutor!();
+        MockGitWrapperLib!();
+        GitRepositoryOperations!();
+        GitExecutor!();
+        GitAdapter!();
+        GitWrapperLibTrait!();
+        Execv!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

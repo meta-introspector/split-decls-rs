@@ -11,4 +11,4 @@ macro_rules! expect_passes_rule_ {
     };
 }
 
-expect_passes_rule_!()
+expect_passes_rule_!();

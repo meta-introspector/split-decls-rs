@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        Property!();
         State!();
+        Property!();
+        Entry!();
         Kind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! resolve_file_type_with_index {
     };
 }
 
-resolve_file_type_with_index!()
+resolve_file_type_with_index!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpandDatabase!();
         AstId!();
+        ExpandDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! proc_macro_span {
     };
 }
 
-proc_macro_span!()
+proc_macro_span!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BenchmarkId!();
         IntoBenchmarkId!();
+        BenchmarkId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

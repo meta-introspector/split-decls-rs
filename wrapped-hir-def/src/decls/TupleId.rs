@@ -4,4 +4,4 @@ macro_rules! TupleId {
     };
 }
 
-TupleId!()
+TupleId!();

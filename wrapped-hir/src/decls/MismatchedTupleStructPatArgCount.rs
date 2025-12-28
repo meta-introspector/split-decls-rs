@@ -4,4 +4,4 @@ macro_rules! MismatchedTupleStructPatArgCount {
     };
 }
 
-MismatchedTupleStructPatArgCount!()
+MismatchedTupleStructPatArgCount!();

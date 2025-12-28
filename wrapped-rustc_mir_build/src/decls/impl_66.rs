@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Builder!();
+        PlaceBase!();
+        PlaceBuilder!();
+    };
+}
+
+macro_rules! impl_66 {
+    () => {
+        deps!();
+        impl < 'tcx > PlaceBuilder < 'tcx > { pub (in crate :: builder) fn to_place (& self , cx : & Builder < '_ , 'tcx >) -> Place < 'tcx > { self . try_to_place (cx) . unwrap_or_else (| | match self . base { PlaceBase :: Local (local) => span_bug ! (cx . local_decls [local] . source_info . span , "could not resolve local: {local:#?} + {:?}" , self . projection) , PlaceBase :: Upvar { var_hir_id , closure_def_id : _ } => span_bug ! (cx . tcx . hir_span (var_hir_id . 0) , "could not resolve upvar: {var_hir_id:?} + {:?}" , self . projection) , }) } # [doc = " Creates a `Place` or returns `None` if an upvar cannot be resolved"] pub (in crate :: builder) fn try_to_place (& self , cx : & Builder < '_ , 'tcx >) -> Option < Place < 'tcx > > { let resolved = self . resolve_upvar (cx) ; let builder = resolved . as_ref () . unwrap_or (self) ; let PlaceBase :: Local (local) = builder . base else { return None } ; let projection = cx . tcx . mk_place_elems (& builder . projection) ; Some (Place { local , projection }) } # [doc = " Attempts to resolve the `PlaceBuilder`."] # [doc = " Returns `None` if this is not an upvar."] # [doc = ""] # [doc = " Upvars resolve may fail for a `PlaceBuilder` when attempting to"] # [doc = " resolve a disjoint field whose root variable is not captured"] # [doc = " (destructured assignments) or when attempting to resolve a root"] # [doc = " variable (discriminant matching with only wildcard arm) that is"] # [doc = " not captured. This can happen because the final mir that will be"] # [doc = " generated doesn't require a read for this place. Failures will only"] # [doc = " happen inside closures."] pub (in crate :: builder) fn resolve_upvar (& self , cx : & Builder < '_ , 'tcx > ,) -> Option < PlaceBuilder < 'tcx > > { let PlaceBase :: Upvar { var_hir_id , closure_def_id } = self . base else { return None ; } ; to_upvars_resolved_place_builder (cx , var_hir_id , closure_def_id , & self . projection) } pub (crate) fn base (& self) -> PlaceBase { self . base } pub (crate) fn projection (& self) -> & [PlaceElem < 'tcx >] { & self . projection } pub (crate) fn field (self , f : FieldIdx , ty : Ty < 'tcx >) -> Self { self . project (PlaceElem :: Field (f , ty)) } pub (crate) fn deref (self) -> Self { self . project (PlaceElem :: Deref) } pub (crate) fn downcast (self , adt_def : AdtDef < 'tcx > , variant_index : VariantIdx) -> Self { self . project (PlaceElem :: Downcast (Some (adt_def . variant (variant_index) . name) , variant_index)) } fn index (self , index : Local) -> Self { self . project (PlaceElem :: Index (index)) } pub (crate) fn project (mut self , elem : PlaceElem < 'tcx >) -> Self { self . projection . push (elem) ; self } # [doc = " Same as `.clone().project(..)` but more efficient"] pub (crate) fn clone_project (& self , elem : PlaceElem < 'tcx >) -> Self { Self { base : self . base , projection : Vec :: from_iter (self . projection . iter () . copied () . chain ([elem])) , } } }
+    };
+}
+
+impl_66!()

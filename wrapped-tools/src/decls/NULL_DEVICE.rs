@@ -4,4 +4,4 @@ macro_rules! NULL_DEVICE {
     };
 }
 
-NULL_DEVICE!()
+NULL_DEVICE!();

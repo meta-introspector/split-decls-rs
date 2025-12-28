@@ -4,4 +4,4 @@ macro_rules! events_type {
     };
 }
 
-events_type!()
+events_type!();

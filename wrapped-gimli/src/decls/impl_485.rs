@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugMacinfo!();
         SectionId!();
+        DebugMacinfo!();
         Section!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_485 {
     };
 }
 
-impl_485!()
+impl_485!();

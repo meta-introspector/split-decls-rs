@@ -4,4 +4,4 @@ macro_rules! is_not_closing_paren {
     };
 }
 
-is_not_closing_paren!()
+is_not_closing_paren!();

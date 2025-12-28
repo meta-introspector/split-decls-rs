@@ -4,4 +4,4 @@ macro_rules! time {
     };
 }
 
-time!()
+time!();

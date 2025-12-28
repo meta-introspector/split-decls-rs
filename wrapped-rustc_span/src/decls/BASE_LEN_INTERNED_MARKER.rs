@@ -1,0 +1,7 @@
+macro_rules! BASE_LEN_INTERNED_MARKER {
+    () => {
+        const BASE_LEN_INTERNED_MARKER : u16 = 0b1111_1111_1111_1111 ;
+    };
+}
+
+BASE_LEN_INTERNED_MARKER!()

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
+        Numeric!();
         Fixed!();
         Pad!();
-        Numeric!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Item {
     };
 }
 
-Item!()
+Item!();

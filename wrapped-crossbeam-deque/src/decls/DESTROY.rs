@@ -4,4 +4,4 @@ macro_rules! DESTROY {
     };
 }
 
-DESTROY!()
+DESTROY!();

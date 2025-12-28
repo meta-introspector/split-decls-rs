@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Positioned!();
+        Result!();
         Rule!();
         PositionCalculator!();
-        Positioned!();
-        Error!();
-        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_number {
     };
 }
 
-parse_number!()
+parse_number!();

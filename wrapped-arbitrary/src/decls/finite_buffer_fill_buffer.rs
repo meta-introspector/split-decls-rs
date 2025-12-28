@@ -11,4 +11,4 @@ macro_rules! finite_buffer_fill_buffer {
     };
 }
 
-finite_buffer_fill_buffer!()
+finite_buffer_fill_buffer!();

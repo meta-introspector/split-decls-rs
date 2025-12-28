@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Symbol!();
-        MockSubsts!();
-        MockAttribute!();
-        MockTy!();
+        MockEarlyBinder!();
         OwnerId!();
-        DefId!();
+        MockTy!();
         MockHir!();
-        MockInferCtxtBuilder!();
         TyCtxt!();
+        MockPredicate!();
+        DefId!();
+        MockInferCtxtBuilder!();
         MockLangItems!();
         MockGenericArgs!();
+        MockSubsts!();
         MockParamEnv!();
-        MockPredicate!();
+        Symbol!();
         MockTypeckResults!();
-        MockEarlyBinder!();
+        MockAttribute!();
     };
 }
 

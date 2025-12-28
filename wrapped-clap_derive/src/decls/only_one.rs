@@ -11,4 +11,4 @@ macro_rules! only_one {
     };
 }
 
-only_one!()
+only_one!();

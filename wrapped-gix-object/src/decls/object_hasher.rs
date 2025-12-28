@@ -11,4 +11,4 @@ macro_rules! object_hasher {
     };
 }
 
-object_hasher!()
+object_hasher!();

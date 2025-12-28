@@ -11,4 +11,4 @@ macro_rules! derive_newtype {
     };
 }
 
-derive_newtype!()
+derive_newtype!();

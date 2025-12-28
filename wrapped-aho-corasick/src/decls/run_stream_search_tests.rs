@@ -13,4 +13,4 @@ macro_rules! run_stream_search_tests {
     };
 }
 
-run_stream_search_tests!()
+run_stream_search_tests!();

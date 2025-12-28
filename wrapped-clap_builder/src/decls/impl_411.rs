@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ErrorFormatter!();
-        Error!();
         ErrorKind!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_411 {
     };
 }
 
-impl_411!()
+impl_411!();

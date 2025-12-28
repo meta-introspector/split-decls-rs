@@ -4,4 +4,4 @@ macro_rules! enumerate {
     };
 }
 
-enumerate!()
+enumerate!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AutoderefSnapshot!();
-        TraitEnvironment!();
-        TrackAutoderefSteps!();
         HirDatabase!();
-        AutoderefTraits!();
-        GeneralAutoderef!();
+        TrackAutoderefSteps!();
+        AutoderefSnapshot!();
         AutoderefCtx!();
+        TraitEnvironment!();
+        GeneralAutoderef!();
+        AutoderefTraits!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_359 {
     };
 }
 
-impl_359!()
+impl_359!();

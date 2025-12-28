@@ -11,4 +11,4 @@ macro_rules! foreach_c {
     };
 }
 
-foreach_c!()
+foreach_c!();

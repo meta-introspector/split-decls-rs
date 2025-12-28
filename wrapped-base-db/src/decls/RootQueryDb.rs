@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         ReleaseChannel!();
         EditionedFileId!();
-        SourceRootId!();
-        SourceDatabase!();
         Crate!();
+        SourceDatabase!();
+        SourceRootId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! RootQueryDb {
     };
 }
 
-RootQueryDb!()
+RootQueryDb!();

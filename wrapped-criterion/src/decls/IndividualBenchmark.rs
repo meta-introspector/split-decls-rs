@@ -4,4 +4,4 @@ macro_rules! IndividualBenchmark {
     };
 }
 
-IndividualBenchmark!()
+IndividualBenchmark!();

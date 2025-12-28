@@ -4,4 +4,4 @@ macro_rules! repo_state_collector {
     };
 }
 
-repo_state_collector!()
+repo_state_collector!();

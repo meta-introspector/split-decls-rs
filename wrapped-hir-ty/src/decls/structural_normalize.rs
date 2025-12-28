@@ -4,4 +4,4 @@ macro_rules! structural_normalize {
     };
 }
 
-structural_normalize!()
+structural_normalize!();

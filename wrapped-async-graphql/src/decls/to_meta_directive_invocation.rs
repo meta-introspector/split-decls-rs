@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Directive!();
         MetaDirectiveInvocation!();
+        Directive!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! to_meta_directive_invocation {
     };
 }
 
-to_meta_directive_invocation!()
+to_meta_directive_invocation!();

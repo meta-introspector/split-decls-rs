@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Properties!();
         Axis!();
         Figure!();
-        Default!();
         Configure!();
+        Default!();
+        Properties!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_126 {
     };
 }
 
-impl_126!()
+impl_126!();

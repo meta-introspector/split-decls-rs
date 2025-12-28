@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ReaderOffset!();
-        ArrayVec!();
-        StoreOnHeap!();
         UnwindContextStorage!();
+        StoreOnHeap!();
+        ArrayVec!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! RegisterRuleMap {
     };
 }
 
-RegisterRuleMap!()
+RegisterRuleMap!();

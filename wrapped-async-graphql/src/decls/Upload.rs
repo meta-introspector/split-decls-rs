@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Request!();
-        Object!();
         Mutation!();
+        Object!();
         Context!();
+        Request!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Upload {
     };
 }
 
-Upload!()
+Upload!();

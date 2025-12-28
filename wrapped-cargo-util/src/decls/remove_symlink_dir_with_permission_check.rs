@@ -4,4 +4,4 @@ macro_rules! remove_symlink_dir_with_permission_check {
     };
 }
 
-remove_symlink_dir_with_permission_check!()
+remove_symlink_dir_with_permission_check!();

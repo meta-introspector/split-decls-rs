@@ -4,4 +4,4 @@ macro_rules! subsection_escaped_char {
     };
 }
 
-subsection_escaped_char!()
+subsection_escaped_char!();

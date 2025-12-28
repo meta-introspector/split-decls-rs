@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SubcommandCandidates!();
         CompletionCandidate!();
+        SubcommandCandidates!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! complete_subcommand {
     };
 }
 
-complete_subcommand!()
+complete_subcommand!();

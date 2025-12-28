@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         AutoCfg!();
+        Error!();
         ErrorKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

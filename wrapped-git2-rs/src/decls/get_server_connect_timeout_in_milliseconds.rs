@@ -11,4 +11,4 @@ macro_rules! get_server_connect_timeout_in_milliseconds {
     };
 }
 
-get_server_connect_timeout_in_milliseconds!()
+get_server_connect_timeout_in_milliseconds!();

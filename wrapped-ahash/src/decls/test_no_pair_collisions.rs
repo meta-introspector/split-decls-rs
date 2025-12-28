@@ -4,4 +4,4 @@ macro_rules! test_no_pair_collisions {
     };
 }
 
-test_no_pair_collisions!()
+test_no_pair_collisions!();

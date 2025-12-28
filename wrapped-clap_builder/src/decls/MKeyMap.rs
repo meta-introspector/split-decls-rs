@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Arg!();
         Key!();
+        Arg!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MKeyMap {
     };
 }
 
-MKeyMap!()
+MKeyMap!();

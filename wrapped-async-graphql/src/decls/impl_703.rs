@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        EdgeNameType!();
-        Object!();
-        DisableNodesField!();
         ConnectionNameType!();
-        Edge!();
         PageInfo!();
+        EdgeNameType!();
+        DisableNodesField!();
         ObjectType!();
         Connection!();
-        OutputType!();
         CursorType!();
+        Edge!();
+        Object!();
+        OutputType!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_703 {
     };
 }
 
-impl_703!()
+impl_703!();

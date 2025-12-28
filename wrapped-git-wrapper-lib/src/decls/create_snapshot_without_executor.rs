@@ -12,4 +12,4 @@ macro_rules! create_snapshot_without_executor {
     };
 }
 
-create_snapshot_without_executor!()
+create_snapshot_without_executor!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExpandDatabase!();
         MacroCallId!();
         ExpandResult!();
+        ExpandDatabase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_macro_expansion_error {
     };
 }
 
-parse_macro_expansion_error!()
+parse_macro_expansion_error!();

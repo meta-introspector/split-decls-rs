@@ -4,4 +4,4 @@ macro_rules! is_dir {
     };
 }
 
-is_dir!()
+is_dir!();

@@ -4,4 +4,4 @@ macro_rules! fast {
     };
 }
 
-fast!()
+fast!();

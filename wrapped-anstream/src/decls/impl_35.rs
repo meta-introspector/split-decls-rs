@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CsiState!();
         ColorTarget!();
         WinconCapture!();
+        CsiState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

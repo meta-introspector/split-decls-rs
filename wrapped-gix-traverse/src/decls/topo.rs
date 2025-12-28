@@ -4,4 +4,4 @@ macro_rules! topo {
     };
 }
 
-topo!()
+topo!();

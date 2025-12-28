@@ -33,4 +33,4 @@ impl <> $crate::cmp::Eq for Command< > where {}"#]] ,) ; }
     };
 }
 
-test_partial_eq_expand!()
+test_partial_eq_expand!();

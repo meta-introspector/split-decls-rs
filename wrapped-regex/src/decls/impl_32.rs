@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Match!();
+    };
+}
+
+macro_rules! impl_32 {
+    () => {
+        deps!();
+        impl < 'h > Match < 'h > { # [doc = " Returns the byte offset of the start of the match in the haystack. The"] # [doc = " start of the match corresponds to the position where the match begins"] # [doc = " and includes the first byte in the match."] # [doc = ""] # [doc = " It is guaranteed that `Match::start() <= Match::end()`."] # [doc = ""] # [doc = " Unlike the top-level `Match` type, the start offset may appear anywhere"] # [doc = " in the haystack. This includes between the code units of a UTF-8"] # [doc = " encoded Unicode scalar value."] # [inline] pub fn start (& self) -> usize { self . start } # [doc = " Returns the byte offset of the end of the match in the haystack. The"] # [doc = " end of the match corresponds to the byte immediately following the last"] # [doc = " byte in the match. This means that `&slice[start..end]` works as one"] # [doc = " would expect."] # [doc = ""] # [doc = " It is guaranteed that `Match::start() <= Match::end()`."] # [doc = ""] # [doc = " Unlike the top-level `Match` type, the start offset may appear anywhere"] # [doc = " in the haystack. This includes between the code units of a UTF-8"] # [doc = " encoded Unicode scalar value."] # [inline] pub fn end (& self) -> usize { self . end } # [doc = " Returns true if and only if this match has a length of zero."] # [doc = ""] # [doc = " Note that an empty match can only occur when the regex itself can"] # [doc = " match the empty string. Here are some examples of regexes that can"] # [doc = " all match the empty string: `^`, `^$`, `\\b`, `a?`, `a*`, `a{0}`,"] # [doc = " `(foo|\\d+|quux)?`."] # [inline] pub fn is_empty (& self) -> bool { self . start == self . end } # [doc = " Returns the length, in bytes, of this match."] # [inline] pub fn len (& self) -> usize { self . end - self . start } # [doc = " Returns the range over the starting and ending byte offsets of the"] # [doc = " match in the haystack."] # [inline] pub fn range (& self) -> core :: ops :: Range < usize > { self . start .. self . end } # [doc = " Returns the substring of the haystack that matched."] # [inline] pub fn as_bytes (& self) -> & 'h [u8] { & self . haystack [self . range ()] } # [doc = " Creates a new match from the given haystack and byte offsets."] # [inline] fn new (haystack : & 'h [u8] , start : usize , end : usize) -> Match < 'h > { Match { haystack , start , end } } }
+    };
+}
+
+impl_32!()

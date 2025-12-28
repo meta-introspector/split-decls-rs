@@ -11,4 +11,4 @@ macro_rules! u32_min {
     };
 }
 
-u32_min!()
+u32_min!();

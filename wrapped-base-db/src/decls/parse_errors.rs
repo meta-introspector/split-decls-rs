@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EditionedFileId!();
         RootQueryDb!();
+        EditionedFileId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_errors {
     };
 }
 
-parse_errors!()
+parse_errors!();

@@ -1,0 +1,7 @@
+macro_rules! allocate_loop {
+    () => {
+        # [doc = " Calls `get_value` to with a buffer and `get_size` to estimate the size of the buffer if/when"] # [doc = " `get_value` returns ERANGE."] # [allow (dead_code)] pub fn allocate_loop < F , S > (mut get_value : F , mut get_size : S) -> io :: Result < Vec < u8 > > where F : for < 'a > FnMut (& 'a mut [MaybeUninit < u8 >]) -> io :: Result < & 'a mut [u8] > , S : FnMut () -> io :: Result < usize > , { const INITIAL_BUFFER_SIZE : usize = 4096 ; match get_value (& mut [MaybeUninit :: < u8 > :: uninit () ; INITIAL_BUFFER_SIZE]) { Ok (val) => return Ok (val . to_vec ()) , Err (e) if e . raw_os_error () != Some (crate :: sys :: ERANGE) => return Err (e) , _ => { } } let mut vec : Vec < u8 > = Vec :: new () ; loop { vec . reserve_exact (get_size () ?) ; match get_value (vec . spare_capacity_mut ()) { Ok (initialized) => { unsafe { let len = initialized . len () ; assert_eq ! (initialized . as_ptr () , vec . as_ptr () , "expected the same buffer") ; vec . set_len (len) ; } if vec . capacity () > vec . len () + 1 { vec . shrink_to_fit () ; } return Ok (vec) ; } Err (e) if e . raw_os_error () != Some (crate :: sys :: ERANGE) => return Err (e) , _ => { } } } }
+    };
+}
+
+allocate_loop!()

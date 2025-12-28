@@ -4,4 +4,4 @@ macro_rules! leb64_encode {
     };
 }
 
-leb64_encode!()
+leb64_encode!();

@@ -53,4 +53,4 @@ line1
     };
 }
 
-tests!()
+tests!();

@@ -4,4 +4,4 @@ macro_rules! distributions {
     };
 }
 
-distributions!()
+distributions!();

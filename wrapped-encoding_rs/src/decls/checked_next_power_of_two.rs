@@ -4,4 +4,4 @@ macro_rules! checked_next_power_of_two {
     };
 }
 
-checked_next_power_of_two!()
+checked_next_power_of_two!();

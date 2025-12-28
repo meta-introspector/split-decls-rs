@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Reader!();
-        UnitHeader!();
-        Abbreviations!();
         DebuggingInformationEntry!();
+        Abbreviations!();
+        UnitHeader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! EntriesCursor {
     };
 }
 
-EntriesCursor!()
+EntriesCursor!();

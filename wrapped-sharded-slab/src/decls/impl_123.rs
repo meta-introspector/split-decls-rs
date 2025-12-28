@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Config!();
+        Addr!();
+    };
+}
+
+macro_rules! impl_123 {
+    () => {
+        deps!();
+        impl < C : cfg :: Config > Addr < C > { const NULL : usize = Self :: BITS + 1 ; pub (crate) fn index (self) -> usize { let shifted = (self . addr + C :: INITIAL_SZ) >> C :: ADDR_INDEX_SHIFT ; cfg :: WIDTH - shifted . leading_zeros () as usize } pub (crate) fn offset (self) -> usize { self . addr } }
+    };
+}
+
+impl_123!()

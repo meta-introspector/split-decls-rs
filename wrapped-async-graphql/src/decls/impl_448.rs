@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        InputValue!();
+        TypeRef!();
         Deprecation!();
         InterfaceField!();
-        TypeRef!();
-        InputValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_448 {
     };
 }
 
-impl_448!()
+impl_448!();

@@ -4,4 +4,4 @@ macro_rules! PathKind {
     };
 }
 
-PathKind!()
+PathKind!();

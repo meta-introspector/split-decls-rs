@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Decoder!();
-        DecoderImpl!();
-        Config!();
         Reader!();
+        Config!();
+        DecoderImpl!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_273 {
     };
 }
 
-impl_273!()
+impl_273!();

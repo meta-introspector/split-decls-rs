@@ -4,4 +4,4 @@ macro_rules! git {
     };
 }
 
-git!()
+git!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Alien!();
-        Human!();
         Interface!();
+        Human!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Intelligent {
     };
 }
 
-Intelligent!()
+Intelligent!();

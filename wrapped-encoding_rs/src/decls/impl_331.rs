@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Utf8Destination!();
         ByteSource!();
         Space!();
-        DecoderResult!();
-        CopyAsciiResult!();
-        Endian!();
-        UnalignedU16Slice!();
-        Utf8BmpHandle!();
+        Utf8Destination!();
         Utf8AstralHandle!();
+        Utf8BmpHandle!();
+        CopyAsciiResult!();
+        UnalignedU16Slice!();
+        Endian!();
+        DecoderResult!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_331 {
     };
 }
 
-impl_331!()
+impl_331!();

@@ -4,4 +4,4 @@ macro_rules! chrono_tz {
     };
 }
 
-chrono_tz!()
+chrono_tz!();

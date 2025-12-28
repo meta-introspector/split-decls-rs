@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Diagnostics!();
-        DisplayKind!();
         InternedClosure!();
-        ImplTraitId!();
-        HirDisplayError!();
+        Diagnostics!();
+        DisplaySourceCodeError!();
+        ClosureStyle!();
+        FnAbi!();
         GenericPredicates!();
         InternedOpaqueTyId!();
-        HirFormatter!();
-        SizedByDefault!();
-        HirDisplay!();
-        Canonical!();
-        DisplaySourceCodeError!();
-        FnAbi!();
         InternedCoroutine!();
-        ClosureStyle!();
+        ImplTraitId!();
+        HirFormatter!();
+        HirDisplay!();
+        DisplayKind!();
+        SizedByDefault!();
+        Canonical!();
+        HirDisplayError!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_504 {
     };
 }
 
-impl_504!()
+impl_504!();

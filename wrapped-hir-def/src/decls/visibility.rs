@@ -4,4 +4,4 @@ macro_rules! visibility {
     };
 }
 
-visibility!()
+visibility!();

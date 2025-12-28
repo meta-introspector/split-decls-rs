@@ -4,4 +4,4 @@ macro_rules! WakerToHandle {
     };
 }
 
-WakerToHandle!()
+WakerToHandle!();

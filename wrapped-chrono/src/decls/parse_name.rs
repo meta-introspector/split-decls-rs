@@ -12,4 +12,4 @@ macro_rules! parse_name {
     };
 }
 
-parse_name!()
+parse_name!();

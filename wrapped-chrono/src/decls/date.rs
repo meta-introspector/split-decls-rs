@@ -4,4 +4,4 @@ macro_rules! date {
     };
 }
 
-date!()
+date!();

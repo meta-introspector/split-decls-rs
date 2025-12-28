@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HANDLE!();
         SYMBOL_INFOW!();
+        HANDLE!();
         BOOL!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_63 {
     };
 }
 
-macro_63!()
+macro_63!();

@@ -1,0 +1,7 @@
+macro_rules! generate_arg_methods {
+    () => {
+        macro_rules ! generate_arg_methods { ($ ($ ty : ty) *) => { $ (impl $ ty { # [allow (unused)] pub (crate) fn verbatim_args (& mut self , args : impl IntoIterator < Item : AsRef < OsStr >>) -> & mut Self { verbatim_args (self , args) } # [allow (unused)] pub (crate) fn verbatim_arg (& mut self , arg : impl AsRef < OsStr >) -> & mut Self { verbatim_args (self , iter :: once (arg)) } # [allow (unused)] pub (crate) fn link_args (& mut self , args : impl IntoIterator < Item : AsRef < OsStr >>) -> & mut Self { link_args (self , args) } # [allow (unused)] pub (crate) fn link_arg (& mut self , arg : impl AsRef < OsStr >) -> & mut Self { link_args (self , iter :: once (arg)) } # [allow (unused)] pub (crate) fn cc_args (& mut self , args : impl IntoIterator < Item : AsRef < OsStr >>) -> & mut Self { cc_args (self , args) } # [allow (unused)] pub (crate) fn cc_arg (& mut self , arg : impl AsRef < OsStr >) -> & mut Self { cc_args (self , iter :: once (arg)) } # [allow (unused)] pub (crate) fn link_or_cc_args (& mut self , args : impl IntoIterator < Item : AsRef < OsStr >>) -> & mut Self { link_or_cc_args (self , args) } # [allow (unused)] pub (crate) fn link_or_cc_arg (& mut self , arg : impl AsRef < OsStr >) -> & mut Self { link_or_cc_args (self , iter :: once (arg)) } }) * } }
+    };
+}
+
+generate_arg_methods!()

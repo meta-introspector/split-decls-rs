@@ -4,4 +4,4 @@ macro_rules! OneofArg {
     };
 }
 
-OneofArg!()
+OneofArg!();

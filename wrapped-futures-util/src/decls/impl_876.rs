@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ReadyToRunQueue!();
-        IterPinMut!();
-        IterMut!();
-        Iter!();
-        FuturesUnordered!();
-        IterPinRef!();
         Task!();
+        IterPinMut!();
+        Iter!();
+        IterMut!();
+        IterPinRef!();
+        FuturesUnordered!();
+        ReadyToRunQueue!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_876 {
     };
 }
 
-impl_876!()
+impl_876!();

@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Builder!();
+        Action!();
+        Handle!();
+        Inner!();
+        Mock!();
+    };
+}
+
+macro_rules! impl_5 {
+    () => {
+        deps!();
+        impl Builder { # [doc = " Return a new, empty `Builder`."] pub fn new () -> Self { Self :: default () } # [doc = " Sequence a `read` operation."] # [doc = ""] # [doc = " The next operation in the mock's script will be to expect a `read` call"] # [doc = " and return `buf`."] pub fn read (& mut self , buf : & [u8]) -> & mut Self { self . actions . push_back (Action :: Read (buf . into ())) ; self } # [doc = " Sequence a `read` operation that produces an error."] # [doc = ""] # [doc = " The next operation in the mock's script will be to expect a `read` call"] # [doc = " and return `error`."] pub fn read_error (& mut self , error : io :: Error) -> & mut Self { let error = Some (error . into ()) ; self . actions . push_back (Action :: ReadError (error)) ; self } # [doc = " Sequence a `write` operation."] # [doc = ""] # [doc = " The next operation in the mock's script will be to expect a `write`"] # [doc = " call."] pub fn write (& mut self , buf : & [u8]) -> & mut Self { self . actions . push_back (Action :: Write (buf . into ())) ; self } # [doc = " Sequence a `write` operation that produces an error."] # [doc = ""] # [doc = " The next operation in the mock's script will be to expect a `write`"] # [doc = " call that provides `error`."] pub fn write_error (& mut self , error : io :: Error) -> & mut Self { let error = Some (error . into ()) ; self . actions . push_back (Action :: WriteError (error)) ; self } # [doc = " Sequence a wait."] # [doc = ""] # [doc = " The next operation in the mock's script will be to wait without doing so"] # [doc = " for `duration` amount of time."] pub fn wait (& mut self , duration : Duration) -> & mut Self { let duration = cmp :: max (duration , Duration :: from_millis (1)) ; self . actions . push_back (Action :: Wait (duration)) ; self } # [doc = " Set name of the mock IO object to include in panic messages and debug output"] pub fn name (& mut self , name : impl Into < String >) -> & mut Self { self . name = name . into () ; self } # [doc = " Build a `Mock` value according to the defined script."] pub fn build (& mut self) -> Mock { let (mock , _) = self . build_with_handle () ; mock } # [doc = " Build a `Mock` value paired with a handle"] pub fn build_with_handle (& mut self) -> (Mock , Handle) { let (inner , handle) = Inner :: new (self . actions . clone () , self . name . clone ()) ; let mock = Mock { inner } ; (mock , handle) } }
+    };
+}
+
+impl_5!()

@@ -4,4 +4,4 @@ macro_rules! ByteRecords {
     };
 }
 
-ByteRecords!()
+ByteRecords!();

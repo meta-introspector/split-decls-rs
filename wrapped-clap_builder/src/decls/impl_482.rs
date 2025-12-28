@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawOccurrences!();
         RawOccurrenceValues!();
+        RawOccurrences!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_482 {
     };
 }
 
-impl_482!()
+impl_482!();

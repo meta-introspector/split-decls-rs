@@ -1,5 +1,14 @@
+macro_rules! deps {
+    () => {
+        Parser!();
+        Result!();
+        Parse!();
+    };
+}
+
 macro_rules! parse_str {
     () => {
+        deps!();
         # [doc = " Parse a string of Rust code into the chosen syntax tree node."] # [doc = ""] # [doc = " This function enforces that the input is fully parsed. If there are any"] # [doc = " unparsed tokens at the end of the stream, an error is returned."] # [doc = ""] # [doc = " # Hygiene"] # [doc = ""] # [doc = " Every span in the resulting syntax tree will be set to resolve at the macro"] # [doc = " call site."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use syn::{Expr, Result};"] # [doc = ""] # [doc = " fn run() -> Result<()> {"] # [doc = "     let code = \"assert_eq!(u8::max_value(), 255)\";"] # [doc = "     let expr = syn::parse_str::<Expr>(code)?;"] # [doc = "     println!(\"{:#?}\", expr);"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " #"] # [doc = " # run().unwrap();"] # [doc = " ```"] # [cfg (feature = "parsing")] # [cfg_attr (docsrs , doc (cfg (feature = "parsing")))] pub fn parse_str < T : parse :: Parse > (s : & str) -> Result < T > { parse :: Parser :: parse_str (T :: parse , s) }
     };
 }

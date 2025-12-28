@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EnumVariants!();
         FieldsShape!();
         DefDatabase!();
+        EnumVariants!();
         Expr!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

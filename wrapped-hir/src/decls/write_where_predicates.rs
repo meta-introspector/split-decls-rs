@@ -11,4 +11,4 @@ macro_rules! write_where_predicates {
     };
 }
 
-write_where_predicates!()
+write_where_predicates!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ItemSliceSync!();
-        Item!();
         Tree!();
         EntryRange!();
+        ItemSliceSync!();
+        Item!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! root {
     };
 }
 
-root!()
+root!();

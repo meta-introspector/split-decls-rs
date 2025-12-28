@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
-        FieldBounds!();
         PaddingCheck!();
+        FieldBounds!();
         Trait!();
+        DataExt!();
         SelfBounds!();
     };
 }

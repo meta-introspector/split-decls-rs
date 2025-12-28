@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
         Searcher!();
-        MatchKind!();
         PatternID!();
-        SearchKind!();
+        Span!();
         Teddy!();
+        RabinKarp!();
         FindIter!();
-        Builder!();
+        SearchKind!();
+        MatchKind!();
         Config!();
         Match!();
-        RabinKarp!();
-        Span!();
+        Builder!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

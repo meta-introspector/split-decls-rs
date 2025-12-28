@@ -11,4 +11,4 @@ macro_rules! name_partial_or_sanitize {
     };
 }
 
-name_partial_or_sanitize!()
+name_partial_or_sanitize!();

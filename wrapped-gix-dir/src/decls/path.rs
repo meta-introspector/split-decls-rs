@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Kind!();
+        Options!();
         ForDeletionMode!();
         Context!();
-        Status!();
-        Error!();
-        Property!();
-        PathspecMatch!();
-        Options!();
         Outcome!();
+        PathspecMatch!();
+        Error!();
+        Kind!();
+        Status!();
+        Property!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! path {
     };
 }
 
-path!()
+path!();

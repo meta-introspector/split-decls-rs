@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Discriminator!();
-        SourceName!();
         UnnamedTypeName!();
-        CtorDtorName!();
-        ClosureTypeName!();
-        OperatorName!();
         AbiTags!();
+        Discriminator!();
+        CtorDtorName!();
+        SourceName!();
+        OperatorName!();
+        ClosureTypeName!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! UnqualifiedName {
     };
 }
 
-UnqualifiedName!()
+UnqualifiedName!();

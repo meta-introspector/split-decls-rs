@@ -4,4 +4,4 @@ macro_rules! NODE_USED {
     };
 }
 
-NODE_USED!()
+NODE_USED!();

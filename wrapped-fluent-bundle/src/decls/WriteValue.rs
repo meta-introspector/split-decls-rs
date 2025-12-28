@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Scope!();
         FluentResource!();
         MemoizerKind!();
+        Scope!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! WriteValue {
     };
 }
 
-WriteValue!()
+WriteValue!();

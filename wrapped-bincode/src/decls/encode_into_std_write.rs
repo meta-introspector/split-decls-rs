@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IoWriter!();
-        Config!();
         EncoderImpl!();
+        Config!();
         EncodeError!();
+        IoWriter!();
         SerdeEncoder!();
         Encode!();
     };
@@ -16,4 +16,4 @@ macro_rules! encode_into_std_write {
     };
 }
 
-encode_into_std_write!()
+encode_into_std_write!();

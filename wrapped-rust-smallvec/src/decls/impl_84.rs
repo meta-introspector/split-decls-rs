@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_84 {
     () => {
         deps!();
-        impl < T , const N : usize > AsRef < [T] > for SmallVec < T , N > { # [inline] fn as_ref (& self) -> & [T] { self . as_slice () } }
+        unsafe impl < T : Sync , const N : usize > Sync for SmallVec < T , N > { }
     };
 }
 

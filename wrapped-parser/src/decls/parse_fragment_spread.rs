@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Positioned!();
         Result!();
+        Positioned!();
         Rule!();
         PositionCalculator!();
         FragmentSpread!();
@@ -15,4 +15,4 @@ macro_rules! parse_fragment_spread {
     };
 }
 
-parse_fragment_spread!()
+parse_fragment_spread!();

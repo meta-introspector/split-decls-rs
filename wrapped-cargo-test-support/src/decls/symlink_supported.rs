@@ -4,4 +4,4 @@ macro_rules! symlink_supported {
     };
 }
 
-symlink_supported!()
+symlink_supported!();

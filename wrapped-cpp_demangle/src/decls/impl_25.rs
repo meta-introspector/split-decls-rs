@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        LeafName!();
         SourceName!();
         DemangleContext!();
-        DemangleWrite!();
         DemangleAsLeaf!();
-        LeafName!();
         Result!();
+        DemangleWrite!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

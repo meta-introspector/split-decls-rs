@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FluentValue!();
         Scope!();
+        FluentValue!();
         FluentResource!();
         MemoizerKind!();
     };
@@ -14,4 +14,4 @@ macro_rules! ResolveValue {
     };
 }
 
-ResolveValue!()
+ResolveValue!();

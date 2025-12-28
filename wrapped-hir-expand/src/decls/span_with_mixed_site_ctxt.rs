@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MacroCallId!();
         ExpandDatabase!();
+        MacroCallId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! span_with_mixed_site_ctxt {
     };
 }
 
-span_with_mixed_site_ctxt!()
+span_with_mixed_site_ctxt!();

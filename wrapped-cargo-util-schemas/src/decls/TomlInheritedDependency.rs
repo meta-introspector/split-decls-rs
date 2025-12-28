@@ -4,4 +4,4 @@ macro_rules! TomlInheritedDependency {
     };
 }
 
-TomlInheritedDependency!()
+TomlInheritedDependency!();

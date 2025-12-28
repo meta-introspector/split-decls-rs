@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        DeserializeError!();
+        DFA!();
+        TransitionTable!();
+        StateID!();
+        ByteClasses!();
+    };
+}
+
+macro_rules! impl_30 {
+    () => {
+        deps!();
+        impl < 'a > TransitionTable < & 'a [u32] > { # [doc = " Deserialize a transition table starting at the beginning of `slice`."] # [doc = " Upon success, return the total number of bytes read along with the"] # [doc = " transition table."] # [doc = ""] # [doc = " If there was a problem deserializing any part of the transition table,"] # [doc = " then this returns an error. Notably, if the given slice does not have"] # [doc = " the same alignment as `StateID`, then this will return an error (among"] # [doc = " other possible errors)."] # [doc = ""] # [doc = " This is guaranteed to execute in constant time."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This routine is not safe because it does not check the validity of the"] # [doc = " transition table itself. In particular, the transition table can be"] # [doc = " quite large, so checking its validity can be somewhat expensive. An"] # [doc = " invalid transition table is not safe because other code may rely on the"] # [doc = " transition table being correct (such as explicit bounds check elision)."] # [doc = " Therefore, an invalid transition table can lead to undefined behavior."] # [doc = ""] # [doc = " Callers that use this function must either pass on the safety invariant"] # [doc = " or guarantee that the bytes given contain a valid transition table."] # [doc = " This guarantee is upheld by the bytes written by `write_to`."] unsafe fn from_bytes_unchecked (mut slice : & 'a [u8] ,) -> Result < (TransitionTable < & 'a [u32] > , usize) , DeserializeError > { let slice_start = slice . as_ptr () . as_usize () ; let (state_len , nr) = wire :: try_read_u32_as_usize (slice , "state length") ? ; slice = & slice [nr ..] ; let (stride2 , nr) = wire :: try_read_u32_as_usize (slice , "stride2") ? ; slice = & slice [nr ..] ; let (classes , nr) = ByteClasses :: from_bytes (slice) ? ; slice = & slice [nr ..] ; if stride2 > 9 { return Err (DeserializeError :: generic ("dense DFA has invalid stride2 (too big)" ,)) ; } if stride2 < 1 { return Err (DeserializeError :: generic ("dense DFA has invalid stride2 (too small)" ,)) ; } let stride = 1usize . checked_shl (u32 :: try_from (stride2) . unwrap ()) . unwrap () ; if classes . alphabet_len () > stride { return Err (DeserializeError :: generic ("alphabet size cannot be bigger than transition table stride" ,)) ; } let trans_len = wire :: shl (state_len , stride2 , "dense table transition length") ? ; let table_bytes_len = wire :: mul (trans_len , StateID :: SIZE , "dense table state byte length" ,) ? ; wire :: check_slice_len (slice , table_bytes_len , "transition table") ? ; wire :: check_alignment :: < StateID > (slice) ? ; let table_bytes = & slice [.. table_bytes_len] ; slice = & slice [table_bytes_len ..] ; let table = core :: slice :: from_raw_parts (table_bytes . as_ptr () . cast :: < u32 > () , trans_len ,) ; let tt = TransitionTable { table , classes , stride2 } ; Ok ((tt , slice . as_ptr () . as_usize () - slice_start)) } }
+    };
+}
+
+impl_30!()

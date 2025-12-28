@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Size!();
+        FieldsShape!();
+        Primitive!();
+    };
+}
+
+macro_rules! impl_99 {
+    () => {
+        deps!();
+        impl < FieldIdx : Idx > FieldsShape < FieldIdx > { # [inline] pub fn count (& self) -> usize { match * self { FieldsShape :: Primitive => 0 , FieldsShape :: Union (count) => count . get () , FieldsShape :: Array { count , .. } => count . try_into () . unwrap () , FieldsShape :: Arbitrary { ref offsets , .. } => offsets . len () , } } # [inline] pub fn offset (& self , i : usize) -> Size { match * self { FieldsShape :: Primitive => { unreachable ! ("FieldsShape::offset: `Primitive`s have no fields") } FieldsShape :: Union (count) => { assert ! (i < count . get () , "tried to access field {i} of union with {count} fields") ; Size :: ZERO } FieldsShape :: Array { stride , count } => { let i = u64 :: try_from (i) . unwrap () ; assert ! (i < count , "tried to access field {i} of array with {count} fields") ; stride * i } FieldsShape :: Arbitrary { ref offsets , .. } => offsets [FieldIdx :: new (i)] , } } # [inline] pub fn memory_index (& self , i : usize) -> usize { match * self { FieldsShape :: Primitive => { unreachable ! ("FieldsShape::memory_index: `Primitive`s have no fields") } FieldsShape :: Union (_) | FieldsShape :: Array { .. } => i , FieldsShape :: Arbitrary { ref memory_index , .. } => { memory_index [FieldIdx :: new (i)] . try_into () . unwrap () } } } # [doc = " Gets source indices of the fields by increasing offsets."] # [inline] pub fn index_by_increasing_offset (& self) -> impl ExactSizeIterator < Item = usize > { let mut inverse_small = [0u8 ; 64] ; let mut inverse_big = IndexVec :: new () ; let use_small = self . count () <= inverse_small . len () ; if let FieldsShape :: Arbitrary { ref memory_index , .. } = * self { if use_small { for (field_idx , & mem_idx) in memory_index . iter_enumerated () { inverse_small [mem_idx as usize] = field_idx . index () as u8 ; } } else { inverse_big = memory_index . invert_bijective_mapping () ; } } let pseudofield_count = if let FieldsShape :: Primitive = self { 1 } else { self . count () } ; (0 .. pseudofield_count) . map (move | i | match * self { FieldsShape :: Primitive | FieldsShape :: Union (_) | FieldsShape :: Array { .. } => i , FieldsShape :: Arbitrary { .. } => { if use_small { inverse_small [i] as usize } else { inverse_big [i as u32] . index () } } }) } }
+    };
+}
+
+impl_99!()

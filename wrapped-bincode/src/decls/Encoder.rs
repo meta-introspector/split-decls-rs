@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Sealed!();
         Config!();
+        Sealed!();
         Writer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Encoder {
     };
 }
 
-Encoder!()
+Encoder!();

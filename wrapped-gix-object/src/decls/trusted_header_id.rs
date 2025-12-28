@@ -11,4 +11,4 @@ macro_rules! trusted_header_id {
     };
 }
 
-trusted_header_id!()
+trusted_header_id!();

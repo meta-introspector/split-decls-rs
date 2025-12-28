@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Value!();
+        DeserializerError!();
     };
 }
 
 macro_rules! impl_8 {
     () => {
         deps!();
-        impl PartialOrd for Value { fn partial_cmp (& self , rhs : & Self) -> Option < Ordering > { Some (self . cmp (rhs)) } }
+        impl From < de :: value :: Error > for DeserializerError { fn from (e : de :: value :: Error) -> DeserializerError { DeserializerError :: Custom (e . to_string ()) } }
     };
 }
 

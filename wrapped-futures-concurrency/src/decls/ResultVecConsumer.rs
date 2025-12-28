@@ -4,4 +4,4 @@ macro_rules! ResultVecConsumer {
     };
 }
 
-ResultVecConsumer!()
+ResultVecConsumer!();

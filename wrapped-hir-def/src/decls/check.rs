@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ModuleDefId!();
-        TestDB!();
-        AdtId!();
-        DefDatabase!();
-        DefMap!();
         IdentityWhenValidProcMacroExpander!();
-        MacroCall!();
+        ModuleDefId!();
         ModuleSource!();
+        TestDB!();
+        DefDatabase!();
+        MacroCall!();
+        AdtId!();
+        DefMap!();
     };
 }
 
@@ -23,4 +23,4 @@ pub fn identity_when_valid(_attr: TokenStream, item: TokenStream) -> TokenStream
     };
 }
 
-check!()
+check!();

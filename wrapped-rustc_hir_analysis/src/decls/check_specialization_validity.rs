@@ -1,0 +1,7 @@
+macro_rules! check_specialization_validity {
+    () => {
+        pub (super) fn check_specialization_validity < 'tcx > (tcx : TyCtxt < 'tcx > , trait_def : & ty :: TraitDef , trait_item : ty :: AssocItem , impl_id : DefId , impl_item : DefId ,) { let Ok (ancestors) = trait_def . ancestors (tcx , impl_id) else { return } ; let mut ancestor_impls = ancestors . skip (1) . filter_map (| parent | { if parent . is_from_trait () { None } else { Some ((parent , parent . item (tcx , trait_item . def_id))) } }) ; let opt_result = ancestor_impls . find_map (| (parent_impl , parent_item) | { match parent_item { Some (parent_item) if traits :: impl_item_is_final (tcx , & parent_item) => { Some (Err (parent_impl . def_id ())) } Some (_) => Some (Ok (())) , None => { if tcx . defaultness (parent_impl . def_id ()) . is_default () { None } else { Some (Err (parent_impl . def_id ())) } } } }) ; let result = opt_result . unwrap_or (Ok (())) ; if let Err (parent_impl) = result { if ! tcx . is_impl_trait_in_trait (impl_item) { report_forbidden_specialization (tcx , impl_item , parent_impl) ; } else { tcx . dcx () . delayed_bug (format ! ("parent item: {parent_impl:?} not marked as default")) ; } } }
+    };
+}
+
+check_specialization_validity!()

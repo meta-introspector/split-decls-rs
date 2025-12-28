@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DecodeEntry!();
-        Entry!();
         Kind!();
+        Entry!();
+        DecodeEntry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! _static {
     };
 }
 
-_static!()
+_static!();

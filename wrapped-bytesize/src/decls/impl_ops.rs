@@ -11,4 +11,4 @@ macro_rules! impl_ops {
     };
 }
 
-impl_ops!()
+impl_ops!();

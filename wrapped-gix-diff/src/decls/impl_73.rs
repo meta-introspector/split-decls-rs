@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        State!();
-        Platform!();
-        Outcome!();
-        Action!();
-        ChangeRef!();
-        Change!();
-        Delegate!();
         Error!();
+        State!();
+        Change!();
+        Platform!();
+        Action!();
+        Outcome!();
+        Delegate!();
+        ChangeRef!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

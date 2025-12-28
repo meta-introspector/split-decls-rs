@@ -11,4 +11,4 @@ macro_rules! decode_latin1 {
     };
 }
 
-decode_latin1!()
+decode_latin1!();

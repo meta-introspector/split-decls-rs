@@ -4,4 +4,4 @@ macro_rules! WriteMode {
     };
 }
 
-WriteMode!()
+WriteMode!();

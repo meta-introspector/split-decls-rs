@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         RollupLock!();
         DummyRollupLock!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

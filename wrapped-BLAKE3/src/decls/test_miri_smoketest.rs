@@ -11,4 +11,4 @@ macro_rules! test_miri_smoketest {
     };
 }
 
-test_miri_smoketest!()
+test_miri_smoketest!();

@@ -12,4 +12,4 @@ macro_rules! decode_too_little_data_before_padding_error_invalid_byte {
     };
 }
 
-decode_too_little_data_before_padding_error_invalid_byte!()
+decode_too_little_data_before_padding_error_invalid_byte!();

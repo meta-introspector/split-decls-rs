@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Repository!();
         Note!();
+        Repository!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SnapshotMut {
     };
 }
 
-SnapshotMut!()
+SnapshotMut!();

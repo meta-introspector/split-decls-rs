@@ -4,4 +4,4 @@ macro_rules! count_same_bytes_and_nibbles {
     };
 }
 
-count_same_bytes_and_nibbles!()
+count_same_bytes_and_nibbles!();

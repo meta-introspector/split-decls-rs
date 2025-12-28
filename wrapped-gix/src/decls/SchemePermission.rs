@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Clone!();
         Allow!();
+        Clone!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SchemePermission {
     };
 }
 
-SchemePermission!()
+SchemePermission!();

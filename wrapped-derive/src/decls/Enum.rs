@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visible!();
         EnumItem!();
+        Visible!();
         RenameRule!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Enum {
     };
 }
 
-Enum!()
+Enum!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         InputValueError!();
-        Registry!();
         InputType!();
-        OutputType!();
+        Registry!();
         InputValueResult!();
+        OutputType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_input_string_for_smart_ptr {
     };
 }
 
-impl_input_string_for_smart_ptr!()
+impl_input_string_for_smart_ptr!();

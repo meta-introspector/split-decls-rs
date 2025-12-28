@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         Arbitrary!();
         Unstructured!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

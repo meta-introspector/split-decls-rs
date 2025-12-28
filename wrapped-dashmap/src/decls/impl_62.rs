@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RwLockReadGuardDetached!();
         MappedRef!();
+        RwLockReadGuardDetached!();
         Ref!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

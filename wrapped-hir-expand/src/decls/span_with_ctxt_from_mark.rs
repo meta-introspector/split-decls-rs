@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MacroCallId!();
         ExpandDatabase!();
+        MacroCallId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! span_with_ctxt_from_mark {
     };
 }
 
-span_with_ctxt_from_mark!()
+span_with_ctxt_from_mark!();

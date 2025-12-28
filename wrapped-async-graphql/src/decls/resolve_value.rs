@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Object!();
         Scalar!();
-        Context!();
+        Schema!();
+        Error!();
+        Union!();
         Subscription!();
         Upload!();
-        FieldValue!();
-        ServerResult!();
-        FieldValueInner!();
         Interface!();
+        ServerResult!();
+        FieldValue!();
         InputObject!();
-        Schema!();
-        Union!();
-        Error!();
+        FieldValueInner!();
+        Object!();
+        Context!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! resolve_value {
     };
 }
 
-resolve_value!()
+resolve_value!();

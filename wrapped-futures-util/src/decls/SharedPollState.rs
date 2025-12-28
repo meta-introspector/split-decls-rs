@@ -4,4 +4,4 @@ macro_rules! SharedPollState {
     };
 }
 
-SharedPollState!()
+SharedPollState!();

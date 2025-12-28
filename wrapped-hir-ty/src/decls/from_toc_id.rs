@@ -11,4 +11,4 @@ macro_rules! from_toc_id {
     };
 }
 
-from_toc_id!()
+from_toc_id!();

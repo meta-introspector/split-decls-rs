@@ -11,4 +11,4 @@ macro_rules! remote_into_raw {
     };
 }
 
-remote_into_raw!()
+remote_into_raw!();

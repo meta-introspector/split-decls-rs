@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TemplateArgs!();
         TemplateParam!();
+        TemplateArgs!();
         Decltype!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! UnresolvedType {
     };
 }
 
-UnresolvedType!()
+UnresolvedType!();

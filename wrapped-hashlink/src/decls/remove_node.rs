@@ -11,4 +11,4 @@ macro_rules! remove_node {
     };
 }
 
-remove_node!()
+remove_node!();

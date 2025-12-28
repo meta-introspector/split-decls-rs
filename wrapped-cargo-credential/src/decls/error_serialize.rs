@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StringTypedError!();
         Error!();
+        StringTypedError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! error_serialize {
     };
 }
 
-error_serialize!()
+error_serialize!();

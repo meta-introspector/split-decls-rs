@@ -12,4 +12,4 @@ macro_rules! field_types_query {
     };
 }
 
-field_types_query!()
+field_types_query!();

@@ -4,4 +4,4 @@ macro_rules! add_mod {
     };
 }
 
-add_mod!()
+add_mod!();

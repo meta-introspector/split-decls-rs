@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ArgScopeStack!();
         DemangleWrite!();
+        DemangleContext!();
+        DemangleAsInner!();
         Result!();
         PointerToMemberType!();
-        DemangleAsInner!();
-        DemangleContext!();
-        ArgScopeStack!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_219 {
     };
 }
 
-impl_219!()
+impl_219!();

@@ -4,4 +4,4 @@ macro_rules! try_call_iter {
     };
 }
 
-try_call_iter!()
+try_call_iter!();

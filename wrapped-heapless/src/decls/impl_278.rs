@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Drain!();
-        LenType!();
         Vec!();
+        LenType!();
+        Drain!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_278 {
     };
 }
 
-impl_278!()
+impl_278!();

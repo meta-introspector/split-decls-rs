@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirFileId!();
         MacroCallId!();
+        HirFileId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_262 {
     };
 }
 
-impl_262!()
+impl_262!();

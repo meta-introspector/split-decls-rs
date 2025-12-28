@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         DwoId!();
         DebugTypeSignature!();
-        ReaderOffset!();
         UnitOffset!();
+        ReaderOffset!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! UnitType {
     };
 }
 
-UnitType!()
+UnitType!();

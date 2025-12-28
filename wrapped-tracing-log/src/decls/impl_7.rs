@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        AsLog!();
+        Builder!();
     };
 }
 
 macro_rules! impl_7 {
     () => {
         deps!();
-        impl < 'a > AsLog for Metadata < 'a > { type Log = log :: Metadata < 'a > ; fn as_log (& self) -> Self :: Log { log :: Metadata :: builder () . level (self . level () . as_log ()) . target (self . target ()) . build () } }
+        impl Default for Builder { fn default () -> Self { Self { ignore_crates : Vec :: new () , filter : log :: LevelFilter :: max () , # [cfg (all (feature = "interest-cache" , feature = "std"))] interest_cache_config : None , } } }
     };
 }
 

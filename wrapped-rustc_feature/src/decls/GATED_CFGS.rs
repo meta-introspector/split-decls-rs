@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        GatedCfg!();
+        Features!();
+    };
+}
+
+macro_rules! GATED_CFGS {
+    () => {
+        deps!();
+        # [doc = " `cfg(...)`'s that are feature gated."] const GATED_CFGS : & [GatedCfg] = & [(sym :: overflow_checks , sym :: cfg_overflow_checks , Features :: cfg_overflow_checks) , (sym :: ub_checks , sym :: cfg_ub_checks , Features :: cfg_ub_checks) , (sym :: contract_checks , sym :: cfg_contract_checks , Features :: cfg_contract_checks) , (sym :: target_thread_local , sym :: cfg_target_thread_local , Features :: cfg_target_thread_local) , (sym :: target_has_atomic_equal_alignment , sym :: cfg_target_has_atomic_equal_alignment , Features :: cfg_target_has_atomic_equal_alignment ,) , (sym :: target_has_atomic_load_store , sym :: cfg_target_has_atomic , Features :: cfg_target_has_atomic ,) , (sym :: sanitize , sym :: cfg_sanitize , Features :: cfg_sanitize) , (sym :: version , sym :: cfg_version , Features :: cfg_version) , (sym :: relocation_model , sym :: cfg_relocation_model , Features :: cfg_relocation_model) , (sym :: sanitizer_cfi_generalize_pointers , sym :: cfg_sanitizer_cfi , Features :: cfg_sanitizer_cfi) , (sym :: sanitizer_cfi_normalize_integers , sym :: cfg_sanitizer_cfi , Features :: cfg_sanitizer_cfi) , (sym :: fmt_debug , sym :: fmt_debug , Features :: fmt_debug) , (sym :: emscripten_wasm_eh , sym :: cfg_emscripten_wasm_eh , Features :: cfg_emscripten_wasm_eh) , (sym :: target_has_reliable_f16 , sym :: cfg_target_has_reliable_f16_f128 , Features :: cfg_target_has_reliable_f16_f128 ,) , (sym :: target_has_reliable_f16_math , sym :: cfg_target_has_reliable_f16_f128 , Features :: cfg_target_has_reliable_f16_f128 ,) , (sym :: target_has_reliable_f128 , sym :: cfg_target_has_reliable_f16_f128 , Features :: cfg_target_has_reliable_f16_f128 ,) , (sym :: target_has_reliable_f128_math , sym :: cfg_target_has_reliable_f16_f128 , Features :: cfg_target_has_reliable_f16_f128 ,) ,] ;
+    };
+}
+
+GATED_CFGS!()

@@ -11,4 +11,4 @@ macro_rules! determine_field_constructor {
     };
 }
 
-determine_field_constructor!()
+determine_field_constructor!();

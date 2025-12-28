@@ -4,4 +4,4 @@ macro_rules! vshrn_n_u16_4_hide {
     };
 }
 
-vshrn_n_u16_4_hide!()
+vshrn_n_u16_4_hide!();

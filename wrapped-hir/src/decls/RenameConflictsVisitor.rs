@@ -4,4 +4,4 @@ macro_rules! RenameConflictsVisitor {
     };
 }
 
-RenameConflictsVisitor!()
+RenameConflictsVisitor!();

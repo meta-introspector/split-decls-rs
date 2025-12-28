@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ModuleId!();
         AdtId!();
-        TypeParamId!();
         BuiltinType!();
+        ModuleId!();
+        TypeParamId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TypeNs {
     };
 }
 
-TypeNs!()
+TypeNs!();

@@ -4,4 +4,4 @@ macro_rules! system_prefix_from_core_dir {
     };
 }
 
-system_prefix_from_core_dir!()
+system_prefix_from_core_dir!();

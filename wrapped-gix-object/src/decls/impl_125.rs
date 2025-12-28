@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Tree!();
         TreeRef!();
-        EntryRef!();
         Kind!();
-        WriteTo!();
+        EntryRef!();
+        Tree!();
         Error!();
+        WriteTo!();
         Write!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

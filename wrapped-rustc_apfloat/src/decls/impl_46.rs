@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        FloatConvert!();
+        Category!();
+        Round!();
+        IeeeDefaultExceptionHandling!();
+        X87DoubleExtendedS!();
+        IeeeFloat!();
+        Semantics!();
+        ExpInt!();
+        StatusAnd!();
+        Loss!();
+    };
+}
+
+macro_rules! impl_46 {
+    () => {
+        deps!();
+        impl < S : Semantics , T : Semantics > FloatConvert < IeeeFloat < T > > for IeeeFloat < S > { fn convert_r (mut self , round : Round , loses_info : & mut bool) -> StatusAnd < IeeeFloat < T > > { * loses_info = false ; fn is_x87_double_extended < S : Semantics > () -> bool { S :: QNAN_SIGNIFICAND == X87DoubleExtendedS :: QNAN_SIGNIFICAND } let loses_x87_pseudo_nan = is_x87_double_extended :: < S > () && ! is_x87_double_extended :: < T > () && self . category () == Category :: NaN && (self . sig [0] & S :: QNAN_SIGNIFICAND) != S :: QNAN_SIGNIFICAND ; let mut status = Status :: OK ; if self . is_nan () { self = unpack ! (status |=, IeeeDefaultExceptionHandling :: result_from_nan (self)) ; } let Self { mut sig , mut exp , .. } = self ; let mut shift = T :: PRECISION as ExpInt - S :: PRECISION as ExpInt ; if shift < 0 && self . is_finite_non_zero () { let omsb = sig :: omsb (& sig) as ExpInt ; let mut exp_change = omsb - S :: PRECISION as ExpInt ; if exp + exp_change < T :: MIN_EXP { exp_change = T :: MIN_EXP - exp ; } if exp_change < shift { exp_change = shift ; } if exp_change < 0 { shift -= exp_change ; exp += exp_change ; } else if omsb <= - shift { exp_change = omsb + shift - 1 ; shift -= exp_change ; exp += exp_change ; } } let mut loss = Loss :: ExactlyZero ; if shift < 0 && (self . is_finite_non_zero () || self . category () == Category :: NaN && S :: NAN_PAYLOAD_MASK != 0) { loss = sig :: shift_right (& mut sig , & mut 0 , - shift as usize) ; } if shift > 0 && (self . is_finite_non_zero () || self . category () == Category :: NaN) { sig :: shift_left (& mut sig , & mut 0 , shift as usize) ; } let r = match self . category () { Category :: Normal => { let r = IeeeFloat :: < T > { sig , exp , read_only_category_do_not_mutate : self . category () , read_only_sign_do_not_mutate : self . is_negative () , marker : PhantomData , } ; unpack ! (status |=, r . normalize (round , loss)) } Category :: NaN => { * loses_info = loss != Loss :: ExactlyZero || loses_x87_pseudo_nan || S :: NAN_PAYLOAD_MASK != 0 && T :: NAN_PAYLOAD_MASK == 0 ; IeeeFloat :: < T > :: qnan (Some (sig [0])) . with_sign (self . is_negative ()) } Category :: Infinity => IeeeFloat :: < T > :: INFINITY . with_sign (self . is_negative ()) , Category :: Zero => IeeeFloat :: < T > :: ZERO . with_sign (self . is_negative ()) , } ; if matches ! (self . category () , Category :: Infinity | Category :: Zero) && (r . category () != self . category () || r . is_negative () != self . is_negative ()) { status |= Status :: INEXACT ; } * loses_info |= (status - Status :: INVALID_OP) != Status :: OK ; status . and (r) } }
+    };
+}
+
+impl_46!()

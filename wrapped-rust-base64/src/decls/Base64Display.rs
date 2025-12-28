@@ -12,4 +12,4 @@ macro_rules! Base64Display {
     };
 }
 
-Base64Display!()
+Base64Display!();

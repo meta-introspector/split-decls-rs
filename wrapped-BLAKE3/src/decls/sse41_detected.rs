@@ -4,4 +4,4 @@ macro_rules! sse41_detected {
     };
 }
 
-sse41_detected!()
+sse41_detected!();

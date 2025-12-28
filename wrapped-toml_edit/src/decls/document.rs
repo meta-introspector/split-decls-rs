@@ -1,6 +1,6 @@
 macro_rules! document {
     () => {
-        mod document ;
+        pub (crate) mod document ;
     };
 }
 

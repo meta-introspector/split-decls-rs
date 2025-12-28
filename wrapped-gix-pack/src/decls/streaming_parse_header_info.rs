@@ -11,4 +11,4 @@ macro_rules! streaming_parse_header_info {
     };
 }
 
-streaming_parse_header_info!()
+streaming_parse_header_info!();

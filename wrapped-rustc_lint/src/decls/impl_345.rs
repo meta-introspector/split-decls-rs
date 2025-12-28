@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        LintLevelSets!();
+        TopDown!();
+        LintSet!();
+        LintStore!();
+        BuilderPush!();
+        LintLevelsBuilder!();
+    };
+}
+
+macro_rules! impl_345 {
+    () => {
+        deps!();
+        impl < 's > LintLevelsBuilder < 's , TopDown > { pub (crate) fn new (sess : & 's Session , features : & 's Features , lint_added_lints : bool , store : & 's LintStore , registered_tools : & 's RegisteredTools ,) -> Self { let mut builder = LintLevelsBuilder { sess , features , provider : TopDown { sets : LintLevelSets :: new () , cur : COMMAND_LINE } , lint_added_lints , store , registered_tools , } ; builder . process_command_line () ; assert_eq ! (builder . provider . sets . list . len () , 1) ; builder } pub fn crate_root (sess : & 's Session , features : & 's Features , lint_added_lints : bool , store : & 's LintStore , registered_tools : & 's RegisteredTools , crate_attrs : & [ast :: Attribute] ,) -> Self { let mut builder = Self :: new (sess , features , lint_added_lints , store , registered_tools) ; builder . add (crate_attrs , true , None) ; builder } fn process_command_line (& mut self) { self . provider . cur = self . provider . sets . list . push (LintSet { specs : FxIndexMap :: default () , parent : COMMAND_LINE }) ; self . add_command_line () ; } # [doc = " Pushes a list of AST lint attributes onto this context."] # [doc = ""] # [doc = " This function will return a `BuilderPush` object which should be passed"] # [doc = " to `pop` when this scope for the attributes provided is exited."] # [doc = ""] # [doc = " This function will perform a number of tasks:"] # [doc = ""] # [doc = " * It'll validate all lint-related attributes in `attrs`"] # [doc = " * It'll mark all lint-related attributes as used"] # [doc = " * Lint levels will be updated based on the attributes provided"] # [doc = " * Lint attributes are validated, e.g., a `#[forbid]` can't be switched to"] # [doc = "   `#[allow]`"] # [doc = ""] # [doc = " Don't forget to call `pop`!"] pub (crate) fn push (& mut self , attrs : & [ast :: Attribute] , is_crate_node : bool , source_hir_id : Option < HirId > ,) -> BuilderPush { let prev = self . provider . cur ; self . provider . cur = self . provider . sets . list . push (LintSet { specs : FxIndexMap :: default () , parent : prev }) ; self . add (attrs , is_crate_node , source_hir_id) ; if self . provider . current_specs () . is_empty () { self . provider . sets . list . pop () ; self . provider . cur = prev ; } BuilderPush { prev } } # [doc = " Called after `push` when the scope of a set of attributes are exited."] pub (crate) fn pop (& mut self , push : BuilderPush) { self . provider . cur = push . prev ; std :: mem :: forget (push) ; } }
+    };
+}
+
+impl_345!()

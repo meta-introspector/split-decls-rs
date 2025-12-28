@@ -4,4 +4,4 @@ macro_rules! TABLE_UPPER {
     };
 }
 
-TABLE_UPPER!()
+TABLE_UPPER!();

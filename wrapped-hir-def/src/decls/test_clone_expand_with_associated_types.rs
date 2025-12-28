@@ -63,4 +63,4 @@ impl <T: $crate::clone::Clone, > $crate::clone::Clone for Foo<T, > where <T as T
     };
 }
 
-test_clone_expand_with_associated_types!()
+test_clone_expand_with_associated_types!();

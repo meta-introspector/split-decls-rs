@@ -4,4 +4,4 @@ macro_rules! promotable_even_to_vec {
     };
 }
 
-promotable_even_to_vec!()
+promotable_even_to_vec!();

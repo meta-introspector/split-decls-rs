@@ -4,4 +4,4 @@ macro_rules! FieldsOnCorrectType {
     };
 }
 
-FieldsOnCorrectType!()
+FieldsOnCorrectType!();

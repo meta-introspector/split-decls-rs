@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProcMacro!();
         DeclarativeMacroExpander!();
+        ProcMacro!();
         CustomProcMacroExpander!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TokenExpander {
     };
 }
 
-TokenExpander!()
+TokenExpander!();

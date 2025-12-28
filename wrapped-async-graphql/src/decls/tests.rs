@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Query!();
-        Registry!();
-        InputObject!();
+        Object!();
         EmptyMutation!();
         Schema!();
-        Object!();
         EmptySubscription!();
+        InputObject!();
+        Query!();
+        Registry!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

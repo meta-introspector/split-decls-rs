@@ -1,13 +1,6 @@
-macro_rules! deps {
-    () => {
-        Instrumented!();
-    };
-}
-
 macro_rules! impl_15 {
     () => {
-        deps!();
-        # [cfg (all (feature = "futures-03" , feature = "std-future"))] # [cfg_attr (docsrs , doc (cfg (all (feature = "futures-03" , feature = "std-future"))))] impl < T : futures :: Stream > futures :: Stream for Instrumented < T > { type Item = T :: Item ; fn poll_next (self : Pin < & mut Self > , cx : & mut Context < '_ > ,) -> futures :: task :: Poll < Option < Self :: Item > > { let (span , inner) = self . project () . span_and_inner_pin_mut () ; let _enter = span . enter () ; T :: poll_next (inner , cx) } }
+        # [cfg (feature = "std-future")] impl < 'a , T > InstrumentedProj < 'a , T > { # [doc = " Get a mutable reference to the [`Span`] a pinned mutable reference to"] # [doc = " the wrapped type."] fn span_and_inner_pin_mut (self) -> (& 'a mut Span , Pin < & 'a mut T >) { let inner = unsafe { self . inner . map_unchecked_mut (| v | & mut * * v) } ; (self . span , inner) } }
     };
 }
 

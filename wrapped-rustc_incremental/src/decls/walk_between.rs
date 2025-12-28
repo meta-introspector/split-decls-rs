@@ -1,0 +1,7 @@
+macro_rules! walk_between {
+    () => {
+        fn walk_between < 'q > (query : & 'q DepGraphQuery , sources : & FxIndexSet < & 'q DepNode > , targets : & FxIndexSet < & 'q DepNode > ,) -> FxIndexSet < DepKind > { # [derive (Copy , Clone , PartialEq)] enum State { Undecided , Deciding , Included , Excluded , } let mut node_states = vec ! [State :: Undecided ; query . graph . len_nodes ()] ; for & target in targets { node_states [query . indices [target] . 0] = State :: Included ; } for source in sources . iter () . map (| & n | query . indices [n]) { recurse (query , & mut node_states , source) ; } return query . nodes () . into_iter () . filter (| & n | { let index = query . indices [n] ; node_states [index . 0] == State :: Included }) . map (| n | n . kind) . collect () ; fn recurse (query : & DepGraphQuery , node_states : & mut [State] , node : NodeIndex) -> bool { match node_states [node . 0] { State :: Included => return true , State :: Excluded => return false , State :: Deciding => return false , State :: Undecided => { } } node_states [node . 0] = State :: Deciding ; for neighbor_index in query . graph . successor_nodes (node) { if recurse (query , node_states , neighbor_index) { node_states [node . 0] = State :: Included ; } } if node_states [node . 0] == State :: Deciding { node_states [node . 0] = State :: Excluded ; false } else { assert ! (node_states [node . 0] == State :: Included) ; true } } }
+    };
+}
+
+walk_between!()

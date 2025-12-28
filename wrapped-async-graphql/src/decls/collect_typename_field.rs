@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BoxFieldFuture!();
-        Object!();
         Field!();
+        Object!();
+        BoxFieldFuture!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! collect_typename_field {
     };
 }
 
-collect_typename_field!()
+collect_typename_field!();

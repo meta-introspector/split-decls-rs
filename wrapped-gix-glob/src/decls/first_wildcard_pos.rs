@@ -4,4 +4,4 @@ macro_rules! first_wildcard_pos {
     };
 }
 
-first_wildcard_pos!()
+first_wildcard_pos!();

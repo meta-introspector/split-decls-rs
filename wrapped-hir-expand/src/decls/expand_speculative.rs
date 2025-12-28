@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        MacroCallKind!();
-        ProcMacro!();
-        SpanMapRef!();
-        ExpandDatabase!();
-        MacroDefKind!();
-        Attr!();
-        SyntaxFixupUndoInfo!();
-        AttrInput!();
-        RawAttrs!();
         MacroCallId!();
+        Attr!();
+        RawAttrs!();
+        ExpandDatabase!();
+        SpanMapRef!();
+        MacroDefKind!();
+        ProcMacro!();
+        AttrInput!();
+        SyntaxFixupUndoInfo!();
+        MacroCallKind!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! expand_speculative {
     };
 }
 
-expand_speculative!()
+expand_speculative!();

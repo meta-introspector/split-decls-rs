@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
         ModuleSource!();
+        DefDatabase!();
         ModuleOrigin!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_370 {
     };
 }
 
-impl_370!()
+impl_370!();

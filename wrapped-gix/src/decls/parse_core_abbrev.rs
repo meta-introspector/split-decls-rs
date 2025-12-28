@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         Core!();
         Kind!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_core_abbrev {
     };
 }
 
-parse_core_abbrev!()
+parse_core_abbrev!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArgAction!();
         Arg!();
+        ArgAction!();
         AnyValue!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Values {
     };
 }
 
-Values!()
+Values!();

@@ -11,4 +11,4 @@ macro_rules! fiat_p434_to_montgomery {
     };
 }
 
-fiat_p434_to_montgomery!()
+fiat_p434_to_montgomery!();

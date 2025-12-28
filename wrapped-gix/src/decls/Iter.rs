@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Note!();
-        Item!();
-        Outcome!();
-        ApplyChange!();
         Index!();
-        OwnedOrStaticAtomicBool!();
+        Outcome!();
+        Item!();
         Error!();
+        ApplyChange!();
+        OwnedOrStaticAtomicBool!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Iter {
     };
 }
 
-Iter!()
+Iter!();

@@ -12,4 +12,4 @@ macro_rules! PAD_INDIFFERENT {
     };
 }
 
-PAD_INDIFFERENT!()
+PAD_INDIFFERENT!();

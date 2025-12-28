@@ -4,4 +4,4 @@ macro_rules! FutureOrOutput {
     };
 }
 
-FutureOrOutput!()
+FutureOrOutput!();

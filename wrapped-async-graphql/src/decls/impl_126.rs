@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ObjectType!();
-        Subscription!();
-        Query!();
         Mutation!();
-        Schema!();
+        ObjectType!();
         SubscriptionType!();
+        Query!();
+        Subscription!();
+        Schema!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_126 {
     };
 }
 
-impl_126!()
+impl_126!();

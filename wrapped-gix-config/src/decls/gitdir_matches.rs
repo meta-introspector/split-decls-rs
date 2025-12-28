@@ -12,4 +12,4 @@ macro_rules! gitdir_matches {
     };
 }
 
-gitdir_matches!()
+gitdir_matches!();

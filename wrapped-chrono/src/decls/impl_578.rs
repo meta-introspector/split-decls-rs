@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        TimeZone!();
-        MappedLocalTime!();
         Fixed!();
         LocalTimeType!();
-        Error!();
-        TransitionRule!();
-        AlternateTime!();
-        NaiveDateTime!();
-        Transition!();
-        LeapSecond!();
         TimeZoneRef!();
+        AlternateTime!();
+        TransitionRule!();
+        MappedLocalTime!();
+        NaiveDateTime!();
+        TimeZone!();
+        LeapSecond!();
+        Error!();
+        Transition!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_578 {
     };
 }
 
-impl_578!()
+impl_578!();

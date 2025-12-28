@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ErrorGuaranteed!();
+        LocalDefId!();
+        SpanEncoder!();
     };
 }
 
 macro_rules! impl_120 {
     () => {
         deps!();
-        impl < E : rustc_serialize :: Encoder > Encodable < E > for ErrorGuaranteed { # [inline] fn encode (& self , _e : & mut E) { panic ! ("should never serialize an `ErrorGuaranteed`, as we do not write metadata or \
-            incremental caches in case errors occurred") } }
+        impl < E : SpanEncoder > Encodable < E > for LocalDefId { fn encode (& self , s : & mut E) { self . to_def_id () . encode (s) ; } }
     };
 }
 

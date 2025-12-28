@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Ref!();
-        ErrorImpl!();
-        Backtrace!();
         ContextError!();
+        ErrorImpl!();
         Error!();
+        Backtrace!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! context_backtrace {
     };
 }
 
-context_backtrace!()
+context_backtrace!();

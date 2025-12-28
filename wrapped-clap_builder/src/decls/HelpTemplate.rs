@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Command!();
         Usage!();
-        Styles!();
         StyledStr!();
+        Styles!();
+        Command!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! HelpTemplate {
     };
 }
 
-HelpTemplate!()
+HelpTemplate!();

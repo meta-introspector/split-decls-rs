@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        GetBitsError!();
+        HuffmanTableError!();
+        FSEDecoderError!();
+        FSETableError!();
+    };
+}
+
+macro_rules! impl_110 {
+    () => {
+        deps!();
+        impl core :: fmt :: Display for HuffmanTableError { fn fmt (& self , f : & mut core :: fmt :: Formatter < '_ >) -> :: core :: fmt :: Result { match self { HuffmanTableError :: GetBitsError (e) => write ! (f , "{e:?}") , HuffmanTableError :: FSEDecoderError (e) => write ! (f , "{e:?}") , HuffmanTableError :: FSETableError (e) => write ! (f , "{e:?}") , HuffmanTableError :: SourceIsEmpty => write ! (f , "Source needs to have at least one byte") , HuffmanTableError :: NotEnoughBytesForWeights { got_bytes , expected_bytes , } => { write ! (f , "Header says there should be {expected_bytes} bytes for the weights but there are only {got_bytes} bytes in the stream") } HuffmanTableError :: ExtraPadding { skipped_bits } => { write ! (f , "Padding at the end of the sequence_section was more than a byte long: {skipped_bits} bits. Probably caused by data corruption" ,) } HuffmanTableError :: TooManyWeights { got } => { write ! (f , "More than 255 weights decoded (got {got} weights). Stream is probably corrupted" ,) } HuffmanTableError :: MissingWeights => { write ! (f , "Can\'t build huffman table without any weights") } HuffmanTableError :: LeftoverIsNotAPowerOf2 { got } => { write ! (f , "Leftover must be power of two but is: {got}") } HuffmanTableError :: NotEnoughBytesToDecompressWeights { have , need } => { write ! (f , "Not enough bytes in stream to decompress weights. Is: {have}, Should be: {need}" ,) } HuffmanTableError :: FSETableUsedTooManyBytes { used , available_bytes , } => { write ! (f , "FSE table used more bytes: {used} than were meant to be used for the whole stream of huffman weights ({available_bytes})" ,) } HuffmanTableError :: NotEnoughBytesInSource { got , need } => { write ! (f , "Source needs to have at least {need} bytes, got: {got}" ,) } HuffmanTableError :: WeightBiggerThanMaxNumBits { got } => { write ! (f , "Cant have weight: {} bigger than max_num_bits: {}" , got , crate :: huff0 :: MAX_MAX_NUM_BITS ,) } HuffmanTableError :: MaxBitsTooHigh { got } => { write ! (f , "max_bits derived from weights is: {} should be lower than: {}" , got , crate :: huff0 :: MAX_MAX_NUM_BITS ,) } } } }
+    };
+}
+
+impl_110!()

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        Target!();
         Error!();
+        Target!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! str_newtype {
     };
 }
 
-str_newtype!()
+str_newtype!();

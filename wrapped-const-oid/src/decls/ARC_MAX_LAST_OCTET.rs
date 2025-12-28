@@ -4,4 +4,4 @@ macro_rules! ARC_MAX_LAST_OCTET {
     };
 }
 
-ARC_MAX_LAST_OCTET!()
+ARC_MAX_LAST_OCTET!();

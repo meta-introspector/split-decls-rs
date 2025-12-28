@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         TimeZone!();
-        Error!();
-        DateTime!();
         SecondsFormat!();
+        DateTime!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_63 {
     };
 }
 
-impl_63!()
+impl_63!();

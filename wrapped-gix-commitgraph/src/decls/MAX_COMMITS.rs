@@ -4,4 +4,4 @@ macro_rules! MAX_COMMITS {
     };
 }
 
-MAX_COMMITS!()
+MAX_COMMITS!();

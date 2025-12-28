@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        XofFixedWrapper!();
-        CustomizedInit!();
         ExtendableOutput!();
+        CustomizedInit!();
+        XofFixedWrapper!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_90 {
     };
 }
 
-impl_90!()
+impl_90!();

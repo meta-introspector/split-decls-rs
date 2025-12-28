@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         Weekday!();
+        NaiveDate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_date_from_weekday_of_month_opt {
     };
 }
 
-test_date_from_weekday_of_month_opt!()
+test_date_from_weekday_of_month_opt!();

@@ -4,4 +4,4 @@ macro_rules! cache {
     };
 }
 
-cache!()
+cache!();

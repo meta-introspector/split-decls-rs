@@ -11,4 +11,4 @@ macro_rules! fiat_sm2_scalar_divstep_precomp {
     };
 }
 
-fiat_sm2_scalar_divstep_precomp!()
+fiat_sm2_scalar_divstep_precomp!();

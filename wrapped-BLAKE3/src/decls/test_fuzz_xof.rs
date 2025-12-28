@@ -11,4 +11,4 @@ macro_rules! test_fuzz_xof {
     };
 }
 
-test_fuzz_xof!()
+test_fuzz_xof!();

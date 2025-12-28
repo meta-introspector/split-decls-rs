@@ -4,4 +4,4 @@ macro_rules! fiat_p384_mulx_u64 {
     };
 }
 
-fiat_p384_mulx_u64!()
+fiat_p384_mulx_u64!();

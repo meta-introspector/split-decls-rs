@@ -11,4 +11,4 @@ macro_rules! Utf8Parser {
     };
 }
 
-Utf8Parser!()
+Utf8Parser!();

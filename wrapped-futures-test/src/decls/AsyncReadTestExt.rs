@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InterleavePending!();
         AssertUnmoved!();
+        InterleavePending!();
         Limited!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! AsyncReadTestExt {
     };
 }
 
-AsyncReadTestExt!()
+AsyncReadTestExt!();

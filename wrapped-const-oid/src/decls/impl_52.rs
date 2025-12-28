@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ObjectIdentifier!();
-        Encoder!();
-        Parser!();
-        Arc!();
         Result!();
+        ObjectIdentifier!();
+        Arc!();
+        Parser!();
+        Encoder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

@@ -4,4 +4,4 @@ macro_rules! clear_and_set_len {
     };
 }
 
-clear_and_set_len!()
+clear_and_set_len!();

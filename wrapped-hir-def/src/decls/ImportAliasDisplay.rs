@@ -11,4 +11,4 @@ macro_rules! ImportAliasDisplay {
     };
 }
 
-ImportAliasDisplay!()
+ImportAliasDisplay!();

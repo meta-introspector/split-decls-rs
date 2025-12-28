@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Submodule!();
         Kind!();
+        Submodule!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_348 {
     };
 }
 
-impl_348!()
+impl_348!();

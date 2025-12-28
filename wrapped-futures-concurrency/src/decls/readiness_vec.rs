@@ -4,4 +4,4 @@ macro_rules! readiness_vec {
     };
 }
 
-readiness_vec!()
+readiness_vec!();

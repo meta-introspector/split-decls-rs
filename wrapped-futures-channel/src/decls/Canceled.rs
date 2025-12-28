@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Receiver!();
         Sender!();
+        Receiver!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Canceled {
     };
 }
 
-Canceled!()
+Canceled!();

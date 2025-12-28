@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Repository!();
-        ApplyLeniency!();
-        Error!();
-        Boolean!();
-        Algorithm!();
+        Core!();
+        Ssh!();
+        Options!();
         Pathspec!();
         SnapshotMut!();
+        Error!();
+        Algorithm!();
+        Note!();
+        Repository!();
+        ApplyLeniency!();
         Ignore!();
         Snapshot!();
-        Ssh!();
-        Core!();
-        Note!();
-        Options!();
+        Boolean!();
         Kind!();
     };
 }
@@ -24,4 +24,4 @@ macro_rules! impl_297 {
     };
 }
 
-impl_297!()
+impl_297!();

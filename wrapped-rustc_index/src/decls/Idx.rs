@@ -1,0 +1,7 @@
+macro_rules! Idx {
+    () => {
+        # [doc = " Represents some newtyped `usize` wrapper."] # [doc = ""] # [doc = " Purpose: avoid mixing indexes for different bitvector domains."] pub trait Idx : Copy + 'static + Eq + PartialEq + Debug + Hash { fn new (idx : usize) -> Self ; fn index (self) -> usize ; # [inline] fn increment_by (& mut self , amount : usize) { * self = self . plus (amount) ; } # [inline] # [must_use = "Use `increment_by` if you wanted to update the index in-place"] fn plus (self , amount : usize) -> Self { Self :: new (self . index () + amount) } }
+    };
+}
+
+Idx!()

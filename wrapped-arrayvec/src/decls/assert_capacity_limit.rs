@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArrayVec!();
         LenUint!();
+        ArrayVec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! assert_capacity_limit {
     };
 }
 
-assert_capacity_limit!()
+assert_capacity_limit!();

@@ -4,4 +4,4 @@ macro_rules! AHasherU64 {
     };
 }
 
-AHasherU64!()
+AHasherU64!();

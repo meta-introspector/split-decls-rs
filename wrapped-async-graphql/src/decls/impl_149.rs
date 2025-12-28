@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Object!();
         Human!();
         Pet!();
-        Object!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

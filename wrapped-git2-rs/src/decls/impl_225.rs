@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BlobWriter!();
         Error!();
+        BlobWriter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_225 {
     };
 }
 
-impl_225!()
+impl_225!();

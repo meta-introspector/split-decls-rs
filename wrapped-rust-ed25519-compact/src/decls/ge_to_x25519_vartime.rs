@@ -11,4 +11,4 @@ macro_rules! ge_to_x25519_vartime {
     };
 }
 
-ge_to_x25519_vartime!()
+ge_to_x25519_vartime!();

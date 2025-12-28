@@ -4,4 +4,4 @@ macro_rules! WalkError {
     };
 }
 
-WalkError!()
+WalkError!();

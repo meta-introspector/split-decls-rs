@@ -4,4 +4,4 @@ macro_rules! RecvError {
     };
 }
 
-RecvError!()
+RecvError!();

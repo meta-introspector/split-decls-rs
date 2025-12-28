@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_83 {
     () => {
         deps!();
-        impl < T , const N : usize > BorrowMut < [T] > for SmallVec < T , N > { # [inline] fn borrow_mut (& mut self) -> & mut [T] { self . as_mut_slice () } }
+        unsafe impl < T : Send , const N : usize > Send for SmallVec < T , N > { }
     };
 }
 

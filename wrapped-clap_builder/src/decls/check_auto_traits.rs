@@ -11,4 +11,4 @@ macro_rules! check_auto_traits {
     };
 }
 
-check_auto_traits!()
+check_auto_traits!();

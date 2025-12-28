@@ -4,4 +4,4 @@ macro_rules! ELLIPSIS_PASSING {
     };
 }
 
-ELLIPSIS_PASSING!()
+ELLIPSIS_PASSING!();

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        AbiErrorDisabledVectorType!();
+        AbiRequiredTargetFeature!();
+        AbiErrorUnsupportedVectorType!();
+    };
+}
+
+macro_rules! do_check_simd_vector_abi {
+    () => {
+        deps!();
+        # [doc = " Checks whether a certain function ABI is compatible with the target features currently enabled"] # [doc = " for a certain function."] # [doc = " `is_call` indicates whether this is a call-site check or a definition-site check;"] # [doc = " this is only relevant for the wording in the emitted error."] fn do_check_simd_vector_abi < 'tcx > (tcx : TyCtxt < 'tcx > , abi : & FnAbi < 'tcx , Ty < 'tcx > > , def_id : DefId , is_call : bool , loc : impl Fn () -> (Span , HirId) ,) { let feature_def = tcx . sess . target . features_for_correct_vector_abi () ; let codegen_attrs = tcx . codegen_fn_attrs (def_id) ; let have_feature = | feat : Symbol | { tcx . sess . unstable_target_features . contains (& feat) || codegen_attrs . target_features . iter () . any (| x | x . name == feat) } ; for arg_abi in abi . args . iter () . chain (std :: iter :: once (& abi . ret)) { let size = arg_abi . layout . size ; if uses_vector_registers (& arg_abi . mode , & arg_abi . layout . backend_repr) { let feature = match feature_def . iter () . find (| (bits , _) | size . bits () <= * bits) { Some ((_ , feature)) => feature , None => { let (span , _hir_id) = loc () ; tcx . dcx () . emit_err (errors :: AbiErrorUnsupportedVectorType { span , ty : arg_abi . layout . ty , is_call , }) ; continue ; } } ; if ! have_feature (Symbol :: intern (feature)) { let (span , _hir_id) = loc () ; tcx . dcx () . emit_err (errors :: AbiErrorDisabledVectorType { span , required_feature : feature , ty : arg_abi . layout . ty , is_call , }) ; } } } if abi . conv == CanonAbi :: X86 (X86Call :: Vectorcall) && ! have_feature (sym :: sse2) { let (span , _hir_id) = loc () ; tcx . dcx () . emit_err (errors :: AbiRequiredTargetFeature { span , required_feature : "sse2" , abi : "vectorcall" , is_call , }) ; } }
+    };
+}
+
+do_check_simd_vector_abi!()

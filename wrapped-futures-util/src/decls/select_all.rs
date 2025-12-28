@@ -4,4 +4,4 @@ macro_rules! select_all {
     };
 }
 
-select_all!()
+select_all!();

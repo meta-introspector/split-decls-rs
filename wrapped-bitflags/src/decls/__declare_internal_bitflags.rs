@@ -4,4 +4,4 @@ macro_rules! __declare_internal_bitflags {
     };
 }
 
-__declare_internal_bitflags!()
+__declare_internal_bitflags!();

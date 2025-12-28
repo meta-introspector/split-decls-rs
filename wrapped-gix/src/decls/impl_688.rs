@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Boolean!();
-        UnsignedInteger!();
-        ConflictStyle!();
-        Renames!();
-        String!();
-        Tree!();
         Merge!();
+        ConflictStyle!();
+        String!();
         Program!();
         SubSectionRequirement!();
+        UnsignedInteger!();
+        Tree!();
+        Renames!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_688 {
     };
 }
 
-impl_688!()
+impl_688!();

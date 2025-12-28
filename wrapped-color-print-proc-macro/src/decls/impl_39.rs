@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Color!();
         SpanError!();
-        ColorTag!();
-        StateDiff!();
         State!();
-        ExtColor!();
-        Error!();
-        Result!();
+        StateDiff!();
+        ColorTag!();
         Context!();
+        Result!();
+        Color!();
+        Error!();
+        ExtColor!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

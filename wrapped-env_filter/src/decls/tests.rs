@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParseResult!();
         ParseError!();
+        ParseResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

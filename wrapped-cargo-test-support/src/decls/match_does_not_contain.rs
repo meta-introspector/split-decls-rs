@@ -7,4 +7,4 @@ macro_rules! match_does_not_contain {
     };
 }
 
-match_does_not_contain!()
+match_does_not_contain!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TreeEntry!();
         TreeIter!();
+        TreeEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_836 {
     };
 }
 
-impl_836!()
+impl_836!();

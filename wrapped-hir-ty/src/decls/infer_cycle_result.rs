@@ -12,4 +12,4 @@ macro_rules! infer_cycle_result {
     };
 }
 
-infer_cycle_result!()
+infer_cycle_result!();

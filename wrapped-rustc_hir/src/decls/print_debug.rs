@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        PrintAttribute!();
+    };
+}
+
+macro_rules! print_debug {
+    () => {
+        deps!();
+        macro_rules ! print_debug { ($ ($ t : ty) ,* $ (,) ?) => { $ (impl PrintAttribute for $ t { fn should_render (& self) -> bool { true } fn print_attribute (& self , p : & mut Printer) { p . word (format ! ("{:?}" , self)) ; } }) * } ; }
+    };
+}
+
+print_debug!()

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HirDisplayError!();
-        DisplaySourceCodeError!();
         HirDisplay!();
         HirDisplayWrapper!();
+        DisplaySourceCodeError!();
+        HirDisplayError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_494 {
     };
 }
 
-impl_494!()
+impl_494!();

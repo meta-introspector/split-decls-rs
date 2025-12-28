@@ -4,4 +4,4 @@ macro_rules! doctests_only {
     };
 }
 
-doctests_only!()
+doctests_only!();

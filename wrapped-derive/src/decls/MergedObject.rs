@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MergedObjectField!();
         CacheControl!();
         Visible!();
+        MergedObjectField!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MergedObject {
     };
 }
 
-MergedObject!()
+MergedObject!();

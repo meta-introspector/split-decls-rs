@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Distribution!();
-        Estimate!();
-        BenchmarkId!();
-        ReportContext!();
         Sample!();
-        ValueFormatter!();
+        ReportContext!();
         Statistic!();
+        Distribution!();
+        BenchmarkId!();
+        Estimate!();
+        ValueFormatter!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! abs_distribution {
     };
 }
 
-abs_distribution!()
+abs_distribution!();

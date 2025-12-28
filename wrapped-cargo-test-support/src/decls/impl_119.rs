@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Response!();
-        TestRegistry!();
-        RegistryBuilder!();
-        Request!();
-        HttpServer!();
         Token!();
+        TestRegistry!();
+        HttpServer!();
+        Response!();
+        Request!();
+        RegistryBuilder!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

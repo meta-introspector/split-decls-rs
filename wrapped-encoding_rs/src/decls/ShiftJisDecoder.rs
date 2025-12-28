@@ -4,4 +4,4 @@ macro_rules! ShiftJisDecoder {
     };
 }
 
-ShiftJisDecoder!()
+ShiftJisDecoder!();

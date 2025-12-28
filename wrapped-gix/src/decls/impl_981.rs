@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        User!();
         Allow!();
+        User!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_981 {
     };
 }
 
-impl_981!()
+impl_981!();

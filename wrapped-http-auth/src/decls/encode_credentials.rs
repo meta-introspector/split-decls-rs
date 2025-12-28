@@ -4,4 +4,4 @@ macro_rules! encode_credentials {
     };
 }
 
-encode_credentials!()
+encode_credentials!();

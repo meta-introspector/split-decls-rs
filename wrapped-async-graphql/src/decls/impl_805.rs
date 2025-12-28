@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         ContextSelectionSet!();
+        Field!();
         ServerResult!();
         IntrospectionMode!();
+        Registry!();
         QueryRoot!();
         OutputType!();
         ObjectType!();
-        Registry!();
-        Field!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_805 {
     };
 }
 
-impl_805!()
+impl_805!();

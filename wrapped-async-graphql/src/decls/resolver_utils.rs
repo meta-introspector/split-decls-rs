@@ -4,4 +4,4 @@ macro_rules! resolver_utils {
     };
 }
 
-resolver_utils!()
+resolver_utils!();

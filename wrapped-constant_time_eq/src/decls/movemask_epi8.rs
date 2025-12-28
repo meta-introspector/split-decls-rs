@@ -4,4 +4,4 @@ macro_rules! movemask_epi8 {
     };
 }
 
-movemask_epi8!()
+movemask_epi8!();

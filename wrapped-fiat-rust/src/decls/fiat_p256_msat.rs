@@ -11,4 +11,4 @@ macro_rules! fiat_p256_msat {
     };
 }
 
-fiat_p256_msat!()
+fiat_p256_msat!();

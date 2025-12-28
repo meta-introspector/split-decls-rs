@@ -1,6 +1,8 @@
 macro_rules! deps {
     () => {
-        OptionalExtension!();
+        BindIndex!();
+        Error!();
+        Statement!();
         Result!();
     };
 }
@@ -8,7 +10,7 @@ macro_rules! deps {
 macro_rules! impl_38 {
     () => {
         deps!();
-        impl < T > OptionalExtension < T > for Result < T > { fn optional (self) -> Result < Option < T > > { match self { Ok (value) => Ok (Some (value)) , Err (Error :: QueryReturnedNoRows) => Ok (None) , Err (e) => Err (e) , } } }
+        impl BindIndex for & '_ str { fn idx (& self , stmt : & Statement < '_ >) -> Result < usize > { match stmt . parameter_index (self) ? { Some (idx) => Ok (idx) , None => Err (Error :: InvalidParameterName (self . to_string ())) , } } }
     };
 }
 

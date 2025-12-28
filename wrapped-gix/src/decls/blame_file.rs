@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Options!();
+        Algorithm!();
         Default!();
         Clone!();
         Error!();
-        Algorithm!();
         Time!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! blame_file {
     };
 }
 
-blame_file!()
+blame_file!();

@@ -4,4 +4,4 @@ macro_rules! FLUSH_LINE {
     };
 }
 
-FLUSH_LINE!()
+FLUSH_LINE!();

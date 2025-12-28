@@ -12,4 +12,4 @@ macro_rules! with_rng {
     };
 }
 
-with_rng!()
+with_rng!();

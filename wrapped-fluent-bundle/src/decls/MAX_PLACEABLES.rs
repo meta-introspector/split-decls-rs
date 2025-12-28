@@ -4,4 +4,4 @@ macro_rules! MAX_PLACEABLES {
     };
 }
 
-MAX_PLACEABLES!()
+MAX_PLACEABLES!();

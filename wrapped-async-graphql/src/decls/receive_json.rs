@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Request!();
-        Result!();
         ParseRequestError!();
+        Result!();
+        Request!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! receive_json {
     };
 }
 
-receive_json!()
+receive_json!();

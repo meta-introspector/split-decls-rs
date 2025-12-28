@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        FileName!();
-        StableSourceFileId!();
+        HashStableContext!();
+        ExpnId!();
     };
 }
 
 macro_rules! impl_88 {
     () => {
         deps!();
-        impl StableSourceFileId { fn from_filename_in_current_crate (filename : & FileName) -> Self { Self :: from_filename_and_stable_crate_id (filename , None) } pub fn from_filename_for_export (filename : & FileName , local_crate_stable_crate_id : StableCrateId ,) -> Self { Self :: from_filename_and_stable_crate_id (filename , Some (local_crate_stable_crate_id)) } fn from_filename_and_stable_crate_id (filename : & FileName , stable_crate_id : Option < StableCrateId > ,) -> Self { let mut hasher = StableHasher :: new () ; filename . hash (& mut hasher) ; stable_crate_id . hash (& mut hasher) ; StableSourceFileId (hasher . finish ()) } }
+        impl < CTX : HashStableContext > HashStable < CTX > for ExpnId { fn hash_stable (& self , ctx : & mut CTX , hasher : & mut StableHasher) { assert_default_hashing_controls (ctx , "ExpnId") ; let hash = if * self == ExpnId :: root () { Fingerprint :: ZERO } else { self . expn_hash () . 0 } ; hash . hash_stable (ctx , hasher) ; } }
     };
 }
 

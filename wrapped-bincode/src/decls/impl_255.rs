@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntEncoding!();
         Endianness!();
+        IntEncoding!();
         Config!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

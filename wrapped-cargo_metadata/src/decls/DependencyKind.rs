@@ -4,4 +4,4 @@ macro_rules! DependencyKind {
     };
 }
 
-DependencyKind!()
+DependencyKind!();

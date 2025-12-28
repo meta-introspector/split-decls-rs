@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        UnwindContextStorage!();
+        UnwindTable!();
+        BaseAddresses!();
         Error!();
+        Format!();
+        Result!();
         FrameDescriptionEntry!();
         PointerEncodingParameters!();
-        UnwindSection!();
-        Result!();
-        UnwindTableRow!();
-        BaseAddresses!();
-        UnwindTable!();
+        UnwindContext!();
         Section!();
         Reader!();
-        AugmentationData!();
-        UnwindContext!();
-        Format!();
+        UnwindTableRow!();
+        UnwindSection!();
         CommonInformationEntry!();
+        AugmentationData!();
+        UnwindContextStorage!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_208 {
     };
 }
 
-impl_208!()
+impl_208!();

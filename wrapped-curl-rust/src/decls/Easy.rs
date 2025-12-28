@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Easy2!();
         Callbacks!();
+        Easy2!();
         EasyData!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Easy {
     };
 }
 
-Easy!()
+Easy!();

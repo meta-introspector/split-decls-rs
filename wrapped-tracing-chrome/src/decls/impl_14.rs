@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ArgsWrapper!();
-        Object!();
         TraceStyle!();
+        Object!();
         Message!();
-        FlushGuard!();
         ChromeLayerBuilder!();
+        FlushGuard!();
         ChromeLayer!();
         EventOrSpan!();
-        Callsite!();
         JsonVisitor!();
+        Callsite!();
+        ArgsWrapper!();
     };
 }
 

@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        FormatTemplate!();
-        ExprOrPatSource!();
-        FieldSource!();
-        LabelSource!();
-        ExprOrPatId!();
-        ExprSource!();
-        PatSource!();
-        PatId!();
-        MacroCallPtr!();
-        ExprId!();
         PatFieldSource!();
-        ExpressionStoreDiagnostics!();
-        BindingId!();
         LabelId!();
+        FieldSource!();
+        FormatTemplate!();
+        PatSource!();
+        ExprSource!();
+        ExprOrPatId!();
+        BindingId!();
+        ExprId!();
+        ExprOrPatSource!();
+        MacroCallPtr!();
+        PatId!();
+        LabelSource!();
+        ExpressionStoreDiagnostics!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! ExpressionOnlySourceMap {
     };
 }
 
-ExpressionOnlySourceMap!()
+ExpressionOnlySourceMap!();

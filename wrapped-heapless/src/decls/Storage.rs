@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SealedStorage!();
-        ViewStorage!();
         VecView!();
-        OwnedStorage!();
         Vec!();
+        OwnedStorage!();
+        ViewStorage!();
+        SealedStorage!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Storage {
     };
 }
 
-Storage!()
+Storage!();

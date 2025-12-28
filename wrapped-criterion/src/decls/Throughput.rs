@@ -4,4 +4,4 @@ macro_rules! Throughput {
     };
 }
 
-Throughput!()
+Throughput!();

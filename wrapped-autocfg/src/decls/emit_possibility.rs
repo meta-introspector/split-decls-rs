@@ -11,4 +11,4 @@ macro_rules! emit_possibility {
     };
 }
 
-emit_possibility!()
+emit_possibility!();

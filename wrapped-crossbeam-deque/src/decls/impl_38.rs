@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Steal!();
-        Flavor!();
         Worker!();
-        Injector!();
         Block!();
+        Flavor!();
+        Injector!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

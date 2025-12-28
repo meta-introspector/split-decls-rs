@@ -4,4 +4,4 @@ macro_rules! obligation_ctxt {
     };
 }
 
-obligation_ctxt!()
+obligation_ctxt!();

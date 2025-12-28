@@ -12,4 +12,4 @@ macro_rules! span_with_call_site_ctxt {
     };
 }
 
-span_with_call_site_ctxt!()
+span_with_call_site_ctxt!();

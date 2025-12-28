@@ -12,4 +12,4 @@ macro_rules! opensocket_cb {
     };
 }
 
-opensocket_cb!()
+opensocket_cb!();

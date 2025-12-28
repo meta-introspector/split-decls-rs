@@ -4,4 +4,4 @@ macro_rules! Stage {
     };
 }
 
-Stage!()
+Stage!();

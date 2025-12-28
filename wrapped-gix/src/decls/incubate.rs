@@ -4,4 +4,4 @@ macro_rules! incubate {
     };
 }
 
-incubate!()
+incubate!();

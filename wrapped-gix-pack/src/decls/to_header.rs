@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Tree!();
-        Header!();
         Kind!();
+        Header!();
+        Tree!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! to_header {
     };
 }
 
-to_header!()
+to_header!();

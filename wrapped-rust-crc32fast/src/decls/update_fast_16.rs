@@ -4,4 +4,4 @@ macro_rules! update_fast_16 {
     };
 }
 
-update_fast_16!()
+update_fast_16!();

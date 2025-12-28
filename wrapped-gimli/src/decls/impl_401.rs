@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        LineProgramHeader!();
+        EndianSlice!();
+        DebugLine!();
         LittleEndian!();
         Result!();
-        DebugLine!();
+        LineProgramHeader!();
         IncompleteLineProgram!();
         DebugLineOffset!();
-        EndianSlice!();
         Reader!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_401 {
     };
 }
 
-impl_401!()
+impl_401!();

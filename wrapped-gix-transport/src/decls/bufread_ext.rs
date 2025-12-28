@@ -4,4 +4,4 @@ macro_rules! bufread_ext {
     };
 }
 
-bufread_ext!()
+bufread_ext!();

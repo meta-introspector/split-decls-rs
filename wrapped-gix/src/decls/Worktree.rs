@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Clone!();
         Repository!();
+        Clone!();
         Path!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Worktree {
     };
 }
 
-Worktree!()
+Worktree!();

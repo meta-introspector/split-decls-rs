@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LocalName!();
         NestedName!();
         TemplateArgs!();
-        LocalName!();
         UnscopedName!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Name {
     };
 }
 
-Name!()
+Name!();

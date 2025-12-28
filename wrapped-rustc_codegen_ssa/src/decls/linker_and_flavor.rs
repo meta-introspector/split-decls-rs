@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        LinkerFileStem!();
+    };
+}
+
+macro_rules! linker_and_flavor {
+    () => {
+        deps!();
+        # [doc = " This functions tries to determine the appropriate linker (and corresponding LinkerFlavor) to use"] pub fn linker_and_flavor (sess : & Session) -> (PathBuf , LinkerFlavor) { fn infer_from (sess : & Session , linker : Option < PathBuf > , flavor : Option < LinkerFlavor > , features : LinkerFeaturesCli ,) -> Option < (PathBuf , LinkerFlavor) > { let flavor = flavor . map (| flavor | adjust_flavor_to_features (flavor , features)) ; match (linker , flavor) { (Some (linker) , Some (flavor)) => Some ((linker , flavor)) , (None , Some (flavor)) => Some ((PathBuf :: from (match flavor { LinkerFlavor :: Gnu (Cc :: Yes , _) | LinkerFlavor :: Darwin (Cc :: Yes , _) | LinkerFlavor :: WasmLld (Cc :: Yes) | LinkerFlavor :: Unix (Cc :: Yes) => { if cfg ! (any (target_os = "solaris" , target_os = "illumos")) { "gcc" } else { "cc" } } LinkerFlavor :: Gnu (_ , Lld :: Yes) | LinkerFlavor :: Darwin (_ , Lld :: Yes) | LinkerFlavor :: WasmLld (..) | LinkerFlavor :: Msvc (Lld :: Yes) => "lld" , LinkerFlavor :: Gnu (..) | LinkerFlavor :: Darwin (..) | LinkerFlavor :: Unix (..) => { "ld" } LinkerFlavor :: Msvc (..) => "link.exe" , LinkerFlavor :: EmCc => { if cfg ! (windows) { "emcc.bat" } else { "emcc" } } LinkerFlavor :: Bpf => "bpf-linker" , LinkerFlavor :: Llbc => "llvm-bitcode-linker" , LinkerFlavor :: Ptx => "rust-ptx-linker" , }) , flavor ,)) , (Some (linker) , None) => { let stem = linker . file_stem () . and_then (| stem | stem . to_str ()) . unwrap_or_else (| | { sess . dcx () . emit_fatal (errors :: LinkerFileStem) ; }) ; let flavor = sess . target . linker_flavor . with_linker_hints (stem) ; let flavor = adjust_flavor_to_features (flavor , features) ; Some ((linker , flavor)) } (None , None) => None , } } fn adjust_flavor_to_features (flavor : LinkerFlavor , features : LinkerFeaturesCli ,) -> LinkerFlavor { if features . enabled . contains (LinkerFeatures :: LLD) { flavor . with_lld_enabled () } else if features . disabled . contains (LinkerFeatures :: LLD) { flavor . with_lld_disabled () } else { flavor } } let features = sess . opts . cg . linker_features ; let linker_flavor = match sess . opts . cg . linker_flavor { Some (LinkerFlavorCli :: Llbc) => Some (LinkerFlavor :: Llbc) , Some (LinkerFlavorCli :: Ptx) => Some (LinkerFlavor :: Ptx) , _ => sess . opts . cg . linker_flavor . map (| flavor | sess . target . linker_flavor . with_cli_hints (flavor)) , } ; if let Some (ret) = infer_from (sess , sess . opts . cg . linker . clone () , linker_flavor , features) { return ret ; } if let Some (ret) = infer_from (sess , sess . target . linker . as_deref () . map (PathBuf :: from) , Some (sess . target . linker_flavor) , features ,) { return ret ; } bug ! ("Not enough information provided to determine how to invoke the linker") ; }
+    };
+}
+
+linker_and_flavor!()

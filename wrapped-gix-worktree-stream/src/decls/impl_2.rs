@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stream!();
-        Entry!();
         Error!();
+        Entry!();
+        Stream!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

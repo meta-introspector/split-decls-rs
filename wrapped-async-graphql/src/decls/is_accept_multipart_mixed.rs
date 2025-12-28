@@ -4,4 +4,4 @@ macro_rules! is_accept_multipart_mixed {
     };
 }
 
-is_accept_multipart_mixed!()
+is_accept_multipart_mixed!();

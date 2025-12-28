@@ -3,8 +3,8 @@ macro_rules! deps {
         Result!();
         DebugInfoUnitHeadersIter!();
         UnitHeader!();
-        Error!();
         Reader!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_615 {
     };
 }
 
-impl_615!()
+impl_615!();

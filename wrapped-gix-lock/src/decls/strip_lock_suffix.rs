@@ -4,4 +4,4 @@ macro_rules! strip_lock_suffix {
     };
 }
 
-strip_lock_suffix!()
+strip_lock_suffix!();

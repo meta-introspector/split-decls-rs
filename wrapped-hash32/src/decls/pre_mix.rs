@@ -4,4 +4,4 @@ macro_rules! pre_mix {
     };
 }
 
-pre_mix!()
+pre_mix!();

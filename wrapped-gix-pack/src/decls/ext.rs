@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Location!();
-        Find!();
         Kind!();
+        Find!();
         Tree!();
+        Location!();
         Error!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! ext {
     };
 }
 
-ext!()
+ext!();

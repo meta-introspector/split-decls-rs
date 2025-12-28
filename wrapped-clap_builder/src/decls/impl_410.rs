@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        Styles!();
-        ErrorFormatter!();
-        Backtrace!();
-        ContextKind!();
-        Message!();
-        Usage!();
-        FlatMap!();
-        ErrorKind!();
+        ContextValue!();
         StyledStr!();
+        ErrorFormatter!();
+        ColorChoice!();
+        ContextKind!();
+        Result!();
+        Backtrace!();
+        Error!();
         Stream!();
         Colorizer!();
-        Error!();
-        ContextValue!();
-        ColorChoice!();
+        Usage!();
         Command!();
+        Styles!();
+        ErrorKind!();
         ErrorInner!();
-        Result!();
+        Message!();
+        FlatMap!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_410 {
     };
 }
 
-impl_410!()
+impl_410!();

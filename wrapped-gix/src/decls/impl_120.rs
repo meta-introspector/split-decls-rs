@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Status!();
-        Delegate!();
         Collect!();
         EntryRef!();
+        Delegate!();
         Action!();
+        Status!();
         Item!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_120 {
     };
 }
 
-impl_120!()
+impl_120!();

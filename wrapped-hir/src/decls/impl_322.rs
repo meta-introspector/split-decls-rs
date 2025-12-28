@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ItemInNs!();
         Macro!();
+        ItemInNs!();
         Crate!();
         ModuleDef!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_322 {
     };
 }
 
-impl_322!()
+impl_322!();

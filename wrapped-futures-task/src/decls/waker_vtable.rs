@@ -11,4 +11,4 @@ macro_rules! waker_vtable {
     };
 }
 
-waker_vtable!()
+waker_vtable!();

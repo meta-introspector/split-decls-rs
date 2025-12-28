@@ -4,4 +4,4 @@ macro_rules! HEADER_MAX_SIZE {
     };
 }
 
-HEADER_MAX_SIZE!()
+HEADER_MAX_SIZE!();

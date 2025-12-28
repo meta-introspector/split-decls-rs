@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Task!();
+        Key!();
+        Throughput!();
+    };
+}
+
+macro_rules! format_progress {
+    () => {
+        deps!();
+        fn format_progress < 'a > (key : & progress :: Key , value : & 'a progress :: Task , column_count : u16 , colored : bool , midpoint : Option < u16 > , throughput : Option < unit :: display :: Throughput > , buf : & mut Vec < ANSIString < 'a > > ,) -> Option < u16 > { let mut brush = color :: Brush :: new (colored) ; buf . clear () ; buf . push (Style :: new () . paint (format ! ("{:>level$}" , "" , level = key . level () as usize))) ; match value . progress . as_ref () { Some (progress) => { let style = progress_style (progress) ; buf . push (brush . style (Color :: Cyan . bold ()) . paint (& value . name)) ; buf . push (" " . into ()) ; let pre_unit = buf . len () ; let values_brush = brush . style (Style :: new () . bold () . dimmed ()) ; match progress . unit . as_ref () { Some (unit) => { let mut display = unit . display (progress . step . load (Ordering :: SeqCst) , progress . done_at , throughput) ; buf . push (values_brush . paint (display . values () . to_string ())) ; buf . push (" " . into ()) ; buf . push (display . unit () . to_string () . into ()) ; } None => { buf . push (values_brush . paint (match progress . done_at { Some (done_at) => format ! ("{}/{}" , progress . step . load (Ordering :: SeqCst) , done_at) , None => format ! ("{}" , progress . step . load (Ordering :: SeqCst)) , })) ; } } let desired_midpoint = block_count_sans_ansi_codes (buf . as_slice ()) ; let actual_midpoint = if let Some (midpoint) = midpoint { let padding = midpoint . saturating_sub (desired_midpoint) ; if padding > 0 { buf . insert (pre_unit , " " . repeat (padding as usize) . into ()) ; } block_count_sans_ansi_codes (buf . as_slice ()) } else { desired_midpoint } ; let blocks_left = column_count . saturating_sub (actual_midpoint) ; if blocks_left > 0 { draw_progress_bar (progress , style , blocks_left , colored , buf) ; } Some (desired_midpoint) } None => { buf . push (brush . style (Color :: White . bold ()) . paint (& value . name)) ; None } } }
+    };
+}
+
+format_progress!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        DeflateStream!();
+    };
+}
+
+macro_rules! bound {
+    () => {
+        deps!();
+        # [doc = " For the default windowBits of 15 and memLevel of 8, this function returns"] # [doc = " a close to exact, as well as small, upper bound on the compressed size."] # [doc = " They are coded as constants here for a reason--if the #define's are"] # [doc = " changed, then this function needs to be changed as well.  The return"] # [doc = " value for 15 and 8 only works for those exact settings."] # [doc = ""] # [doc = " For any setting other than those defaults for windowBits and memLevel,"] # [doc = " the value returned is a conservative worst case for the maximum expansion"] # [doc = " resulting from using fixed blocks instead of stored blocks, which deflate"] # [doc = " can emit on compressed data for some combinations of the parameters."] # [doc = ""] # [doc = " This function could be more sophisticated to provide closer upper bounds for"] # [doc = " every combination of windowBits and memLevel.  But even the conservative"] # [doc = " upper bound of about 14% expansion does not seem onerous for output buffer"] # [doc = " allocation."] pub fn bound (stream : Option < & mut DeflateStream > , source_len : usize) -> usize { let mask = core :: ffi :: c_ulong :: MAX as usize ; let comp_len = source_len . wrapping_add ((source_len . wrapping_add (7) & mask) >> 3) . wrapping_add ((source_len . wrapping_add (63) & mask) >> 6) . wrapping_add (5) ; let Some (stream) = stream else { return comp_len . wrapping_add (6) ; } ; let wrap_len = match stream . state . wrap { 0 => { 0 } 1 => { if stream . state . strstart != 0 { ZLIB_WRAPLEN + 4 } else { ZLIB_WRAPLEN } } 2 => { let mut gz_wrap_len = GZIP_WRAPLEN ; if let Some (header) = & stream . state . gzhead { if ! header . extra . is_null () { gz_wrap_len += 2 + header . extra_len as usize ; } let mut c_string = header . name ; if ! c_string . is_null () { loop { gz_wrap_len += 1 ; unsafe { if * c_string == 0 { break ; } c_string = c_string . add (1) ; } } } let mut c_string = header . comment ; if ! c_string . is_null () { loop { gz_wrap_len += 1 ; unsafe { if * c_string == 0 { break ; } c_string = c_string . add (1) ; } } } if header . hcrc != 0 { gz_wrap_len += 2 ; } } gz_wrap_len } _ => { ZLIB_WRAPLEN } } ; if stream . state . w_bits () != MAX_WBITS as u32 || HASH_BITS < 15 { if stream . state . level == 0 { source_len . wrapping_add (source_len >> 5) . wrapping_add (source_len >> 7) . wrapping_add (source_len >> 11) . wrapping_add (7) . wrapping_add (wrap_len) } else { comp_len . wrapping_add (wrap_len) } } else { compress_bound_help (source_len , wrap_len) } }
+    };
+}
+
+bound!()

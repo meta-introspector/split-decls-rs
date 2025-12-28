@@ -4,4 +4,4 @@ macro_rules! percent_encode {
     };
 }
 
-percent_encode!()
+percent_encode!();

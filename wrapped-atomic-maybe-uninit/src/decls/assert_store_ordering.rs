@@ -4,4 +4,4 @@ macro_rules! assert_store_ordering {
     };
 }
 
-assert_store_ordering!()
+assert_store_ordering!();

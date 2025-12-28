@@ -4,4 +4,4 @@ macro_rules! parse_name_and_email {
     };
 }
 
-parse_name_and_email!()
+parse_name_and_email!();

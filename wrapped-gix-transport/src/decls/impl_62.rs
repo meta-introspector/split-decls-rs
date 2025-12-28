@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Curl!();
         PostBodyDataKind!();
-        Request!();
+        PostResponse!();
         Response!();
         Error!();
-        PostResponse!();
-        Curl!();
+        Request!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

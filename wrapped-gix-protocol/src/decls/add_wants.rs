@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Arguments!();
         Shallow!();
-        Source!();
         Mapping!();
+        Source!();
+        Arguments!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! add_wants {
     };
 }
 
-add_wants!()
+add_wants!();

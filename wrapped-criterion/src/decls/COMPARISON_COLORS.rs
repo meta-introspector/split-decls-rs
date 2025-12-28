@@ -4,4 +4,4 @@ macro_rules! COMPARISON_COLORS {
     };
 }
 
-COMPARISON_COLORS!()
+COMPARISON_COLORS!();

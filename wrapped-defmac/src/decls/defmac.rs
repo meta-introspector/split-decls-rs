@@ -4,4 +4,4 @@ macro_rules! defmac {
     };
 }
 
-defmac!()
+defmac!();

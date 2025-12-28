@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ready!();
         Seek!();
         Current!();
-        Ready!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1067 {
     };
 }
 
-impl_1067!()
+impl_1067!();

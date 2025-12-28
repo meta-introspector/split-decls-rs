@@ -11,4 +11,4 @@ macro_rules! static_to_mut {
     };
 }
 
-static_to_mut!()
+static_to_mut!();

@@ -11,4 +11,4 @@ macro_rules! race_with_seed {
     };
 }
 
-race_with_seed!()
+race_with_seed!();

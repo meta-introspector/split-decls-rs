@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Statistics!();
         PathIdMapping!();
         State!();
+        Statistics!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StackDelegate {
     };
 }
 
-StackDelegate!()
+StackDelegate!();

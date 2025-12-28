@@ -11,4 +11,4 @@ macro_rules! reports_impl {
     };
 }
 
-reports_impl!()
+reports_impl!();

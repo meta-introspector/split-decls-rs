@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ItemInNs!();
-        FxIndexMap!();
-        ImportInfo!();
         IsTraitAssocItem!();
+        ImportInfo!();
+        FxIndexMap!();
+        ItemInNs!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ImportMapIndex {
     };
 }
 
-ImportMapIndex!()
+ImportMapIndex!();

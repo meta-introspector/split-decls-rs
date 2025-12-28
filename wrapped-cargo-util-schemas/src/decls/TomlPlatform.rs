@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InheritableDependency!();
         TomlTarget!();
+        InheritableDependency!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TomlPlatform {
     };
 }
 
-TomlPlatform!()
+TomlPlatform!();

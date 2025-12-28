@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Proxy!();
         Repository!();
+        Proxy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_848 {
     };
 }
 
-impl_848!()
+impl_848!();

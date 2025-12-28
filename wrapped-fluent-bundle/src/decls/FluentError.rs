@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FluentResource!();
-        EntryKind!();
         ResolverError!();
+        EntryKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FluentError {
     };
 }
 
-FluentError!()
+FluentError!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Measurement!();
         ReportContext!();
         BenchmarkGroup!();
+        Measurement!();
         OutgoingMessage!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

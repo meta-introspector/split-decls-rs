@@ -4,4 +4,4 @@ macro_rules! REF_DELTA {
     };
 }
 
-REF_DELTA!()
+REF_DELTA!();

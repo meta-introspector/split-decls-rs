@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        OSVersion!();
+        Target!();
+    };
+}
+
+macro_rules! impl_346 {
+    () => {
+        deps!();
+        impl OSVersion { pub fn new (major : u16 , minor : u8 , patch : u8) -> Self { Self { major , minor , patch } } pub fn fmt_pretty (self) -> impl Display { let Self { major , minor , patch } = self ; from_fn (move | f | { write ! (f , "{major}.{minor}") ? ; if patch != 0 { write ! (f , ".{patch}") ? ; } Ok (()) }) } pub fn fmt_full (self) -> impl Display { let Self { major , minor , patch } = self ; from_fn (move | f | write ! (f , "{major}.{minor}.{patch}")) } # [doc = " Minimum operating system versions currently supported by `rustc`."] pub fn os_minimum_deployment_target (os : & str) -> Self { let (major , minor , patch) = match os { "macos" => (10 , 12 , 0) , "ios" => (10 , 0 , 0) , "tvos" => (10 , 0 , 0) , "watchos" => (5 , 0 , 0) , "visionos" => (1 , 0 , 0) , _ => unreachable ! ("tried to get deployment target for non-Apple platform") , } ; Self { major , minor , patch } } # [doc = " The deployment target for the given target."] # [doc = ""] # [doc = " This is similar to `os_minimum_deployment_target`, except that on certain targets it makes sense"] # [doc = " to raise the minimum OS version."] # [doc = ""] # [doc = " This matches what LLVM does, see in part:"] # [doc = " <https://github.com/llvm/llvm-project/blob/llvmorg-18.1.8/llvm/lib/TargetParser/Triple.cpp#L1900-L1932>"] pub fn minimum_deployment_target (target : & Target) -> Self { let (major , minor , patch) = match (& * target . os , & * target . arch , & * target . env) { ("macos" , "aarch64" , _) => (11 , 0 , 0) , ("ios" , "aarch64" , "macabi") => (14 , 0 , 0) , ("ios" , "aarch64" , "sim") => (14 , 0 , 0) , ("ios" , _ , _) if target . llvm_target . starts_with ("arm64e") => (14 , 0 , 0) , ("ios" , _ , "macabi") => (13 , 1 , 0) , ("tvos" , "aarch64" , "sim") => (14 , 0 , 0) , ("watchos" , "aarch64" , "sim") => (7 , 0 , 0) , (os , _ , _) => return Self :: os_minimum_deployment_target (os) , } ; Self { major , minor , patch } } }
+    };
+}
+
+impl_346!()

@@ -11,4 +11,4 @@ macro_rules! fiat_p384_scalar_opp {
     };
 }
 
-fiat_p384_scalar_opp!()
+fiat_p384_scalar_opp!();

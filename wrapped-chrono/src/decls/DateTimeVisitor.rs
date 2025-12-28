@@ -4,4 +4,4 @@ macro_rules! DateTimeVisitor {
     };
 }
 
-DateTimeVisitor!()
+DateTimeVisitor!();

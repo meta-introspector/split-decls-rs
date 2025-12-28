@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DemangleWrite!();
+        Result!();
         DemangleContext!();
         Error!();
+        DemangleWrite!();
         AutoParseDemangle!();
-        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

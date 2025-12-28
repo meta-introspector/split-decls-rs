@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        EncodeSliceError!();
-        DecodeSliceError!();
-        ChunkedEncoder!();
-        Config!();
-        DecodeMetadata!();
         GeneralPurpose!();
-        DecodeEstimate!();
-        DecodeError!();
+        DecodeSliceError!();
+        EncodeSliceError!();
+        Config!();
         StringSink!();
+        DecodeEstimate!();
+        ChunkedEncoder!();
+        DecodeMetadata!();
+        DecodeError!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Engine {
     };
 }
 
-Engine!()
+Engine!();

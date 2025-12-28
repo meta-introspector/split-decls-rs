@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Inner!();
         Send!();
+        Inner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1260 {
     };
 }
 
-impl_1260!()
+impl_1260!();

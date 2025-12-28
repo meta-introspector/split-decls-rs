@@ -1,30 +1,30 @@
 macro_rules! deps {
     () => {
         Key!();
-        String!();
-        Tree!();
-        Allow!();
-        Executable!();
-        Ssh!();
-        Boolean!();
-        SslVersion!();
+        Clone!();
         Author!();
+        Pathspec!();
+        Tree!();
+        DurationInMilliseconds!();
+        Gitoxide!();
         Core!();
         Any!();
-        Section!();
-        DurationInMilliseconds!();
+        Boolean!();
         User!();
-        UnsignedInteger!();
+        Executable!();
         ProxyAuthMethod!();
-        Clone!();
-        Pathspec!();
-        Gitoxide!();
-        Committer!();
         Error!();
+        UnsignedInteger!();
         Commit!();
-        Path!();
-        Http!();
         Default!();
+        Path!();
+        String!();
+        SslVersion!();
+        Ssh!();
+        Committer!();
+        Section!();
+        Allow!();
+        Http!();
     };
 }
 
@@ -35,4 +35,4 @@ macro_rules! subsections {
     };
 }
 
-subsections!()
+subsections!();

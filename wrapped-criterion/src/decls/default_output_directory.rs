@@ -4,4 +4,4 @@ macro_rules! default_output_directory {
     };
 }
 
-default_output_directory!()
+default_output_directory!();

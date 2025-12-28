@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Set!();
-        Axes!();
         Properties!();
+        Axes!();
+        Set!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

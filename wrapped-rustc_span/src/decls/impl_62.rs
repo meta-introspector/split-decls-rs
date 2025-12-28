@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SpanDecoder!();
+        SyntaxContext!();
     };
 }
 
 macro_rules! impl_62 {
     () => {
         deps!();
-        impl < D : SpanDecoder > Decodable < D > for DefIndex { fn decode (s : & mut D) -> DefIndex { s . decode_def_index () } }
+        impl fmt :: Debug for SyntaxContext { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , "#{}" , self . 0) } }
     };
 }
 

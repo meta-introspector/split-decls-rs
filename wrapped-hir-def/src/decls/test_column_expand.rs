@@ -14,4 +14,4 @@ fn main() { 0u32; }
     };
 }
 
-test_column_expand!()
+test_column_expand!();

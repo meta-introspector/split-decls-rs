@@ -4,4 +4,4 @@ macro_rules! HexErrorInner {
     };
 }
 
-HexErrorInner!()
+HexErrorInner!();

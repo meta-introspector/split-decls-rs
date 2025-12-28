@@ -11,4 +11,4 @@ macro_rules! unescape_and_check_attr_value {
     };
 }
 
-unescape_and_check_attr_value!()
+unescape_and_check_attr_value!();

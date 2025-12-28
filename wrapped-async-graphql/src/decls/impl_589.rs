@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Data!();
-        Response!();
-        NextExecute!();
         ExtensionContext!();
+        Response!();
+        Data!();
+        NextExecute!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_589 {
     };
 }
 
-impl_589!()
+impl_589!();

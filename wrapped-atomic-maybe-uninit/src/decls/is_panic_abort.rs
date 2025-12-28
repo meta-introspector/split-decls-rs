@@ -4,4 +4,4 @@ macro_rules! is_panic_abort {
     };
 }
 
-is_panic_abort!()
+is_panic_abort!();

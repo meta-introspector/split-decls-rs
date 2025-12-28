@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Visible!();
+        Deprecation!();
         CacheControl!();
         DerivedField!();
-        Deprecation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ComplexObjectField {
     };
 }
 
-ComplexObjectField!()
+ComplexObjectField!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         DirectoryRoot!();
         ArgsInHash!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! scripted_fixture_read_only_with_args {
     };
 }
 
-scripted_fixture_read_only_with_args!()
+scripted_fixture_read_only_with_args!();

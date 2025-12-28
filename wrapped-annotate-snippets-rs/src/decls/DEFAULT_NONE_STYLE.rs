@@ -4,4 +4,4 @@ macro_rules! DEFAULT_NONE_STYLE {
     };
 }
 
-DEFAULT_NONE_STYLE!()
+DEFAULT_NONE_STYLE!();

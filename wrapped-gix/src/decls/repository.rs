@@ -4,4 +4,4 @@ macro_rules! repository {
     };
 }
 
-repository!()
+repository!();

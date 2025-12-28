@@ -4,4 +4,4 @@ macro_rules! KeyRef {
     };
 }
 
-KeyRef!()
+KeyRef!();

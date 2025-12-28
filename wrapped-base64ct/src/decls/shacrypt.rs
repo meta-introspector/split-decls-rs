@@ -4,4 +4,4 @@ macro_rules! shacrypt {
     };
 }
 
-shacrypt!()
+shacrypt!();

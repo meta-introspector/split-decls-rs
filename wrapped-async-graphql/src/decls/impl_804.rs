@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ObjectType!();
         Any!();
-        ServerError!();
-        QueryRoot!();
-        IntrospectionMode!();
-        Context!();
         ContainerType!();
-        Service!();
-        SDLExportOptions!();
         OutputType!();
+        IntrospectionMode!();
+        ObjectType!();
+        Service!();
+        QueryRoot!();
+        SDLExportOptions!();
         Schema!();
+        Context!();
+        ServerError!();
         ServerResult!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! impl_804 {
     };
 }
 
-impl_804!()
+impl_804!();

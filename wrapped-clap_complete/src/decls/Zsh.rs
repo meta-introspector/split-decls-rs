@@ -4,4 +4,4 @@ macro_rules! Zsh {
     };
 }
 
-Zsh!()
+Zsh!();

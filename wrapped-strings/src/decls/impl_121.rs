@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        HSTRING!();
+        PCWSTR!();
+        Decode!();
+        PWSTR!();
+    };
+}
+
+macro_rules! impl_121 {
+    () => {
+        deps!();
+        impl PWSTR { # [doc = " Construct a new `PWSTR` from a raw pointer."] pub const fn from_raw (ptr : * mut u16) -> Self { Self (ptr) } # [doc = " Construct a null `PWSTR`."] pub const fn null () -> Self { Self (core :: ptr :: null_mut ()) } # [doc = " Returns a raw pointer to the `PWSTR`."] pub const fn as_ptr (& self) -> * mut u16 { self . 0 } # [doc = " Checks whether the `PWSTR` is null."] pub fn is_null (& self) -> bool { self . 0 . is_null () } # [doc = " String length without the trailing 0"] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The `PWSTR`'s pointer needs to be valid for reads up until and including the next `\\0`."] pub unsafe fn len (& self) -> usize { unsafe { PCWSTR (self . 0) . len () } } # [doc = " Returns `true` if the string length is zero, and `false` otherwise."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The `PWSTR`'s pointer needs to be valid for reads up until and including the next `\\0`."] pub unsafe fn is_empty (& self) -> bool { unsafe { self . len () == 0 } } # [doc = " String data without the trailing 0."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The `PWSTR`'s pointer needs to be valid for reads up until and including the next `\\0`."] pub unsafe fn as_wide (& self) -> & [u16] { unsafe { core :: slice :: from_raw_parts (self . 0 , self . len ()) } } # [doc = " Copy the `PWSTR` into a Rust `String`."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " See the safety information for `PWSTR::as_wide`."] pub unsafe fn to_string (& self) -> core :: result :: Result < String , alloc :: string :: FromUtf16Error > { unsafe { String :: from_utf16 (self . as_wide ()) } } # [doc = " Copy the `PWSTR` into an `HSTRING`."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " See the safety information for `PWSTR::as_wide`."] pub unsafe fn to_hstring (& self) -> HSTRING { unsafe { HSTRING :: from_wide (self . as_wide ()) } } # [doc = " Allow this string to be displayed."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " See the safety information for `PWSTR::as_wide`."] pub unsafe fn display (& self) -> impl core :: fmt :: Display + '_ { unsafe { Decode (move | | core :: char :: decode_utf16 (self . as_wide () . iter () . cloned ())) } } }
+    };
+}
+
+impl_121!()

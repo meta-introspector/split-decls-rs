@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ValueType!();
-        Reader!();
         Value!();
+        Reader!();
         Error!();
         Result!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_670 {
     };
 }
 
-impl_670!()
+impl_670!();

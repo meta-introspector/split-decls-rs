@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NamedArgument!();
-        Term!();
         InlineExpression!();
+        Term!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CallArguments {
     };
 }
 
-CallArguments!()
+CallArguments!();

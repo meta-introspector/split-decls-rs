@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Slab!();
+        Clear!();
+        Pool!();
+        Config!();
     };
 }
 
 macro_rules! impl_16 {
     () => {
         deps!();
-        impl < T > Default for Slab < T > { fn default () -> Self { Self :: new () } }
+        impl < T , C > fmt :: Debug for Pool < T , C > where T : fmt :: Debug + Clear + Default , C : cfg :: Config , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("Pool") . field ("shards" , & self . shards) . field ("config" , & C :: debug ()) . finish () } }
     };
 }
 

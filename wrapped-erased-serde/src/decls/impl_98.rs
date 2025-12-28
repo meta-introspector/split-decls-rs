@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         SerializeSeq!();
+        Result!();
+        Error!();
+        MakeSerializer!();
         ErrorImpl!();
         Serialize!();
-        Result!();
-        MakeSerializer!();
-        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

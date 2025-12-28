@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Unit!();
-        AttributeValue!();
-        Encoding!();
-        Writer!();
-        UnitOffsets!();
-        DebugLineOffset!();
-        Result!();
-        DebugInfoFixup!();
-        AttributeSpecification!();
-        DebugInfo!();
         DebuggingInformationEntry!();
-        AbbreviationTable!();
+        AttributeValue!();
         Format!();
+        Result!();
         Attribute!();
-        Abbreviation!();
+        Unit!();
+        DebugLineOffset!();
+        AttributeSpecification!();
+        AbbreviationTable!();
+        Encoding!();
         DebugInfoOffset!();
+        Abbreviation!();
+        UnitOffsets!();
+        Writer!();
+        DebugInfoFixup!();
+        DebugInfo!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_805 {
     };
 }
 
-impl_805!()
+impl_805!();

@@ -4,4 +4,4 @@ macro_rules! encode_hanzi {
     };
 }
 
-encode_hanzi!()
+encode_hanzi!();

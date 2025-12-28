@@ -4,4 +4,4 @@ macro_rules! ModulesSnapshot {
     };
 }
 
-ModulesSnapshot!()
+ModulesSnapshot!();

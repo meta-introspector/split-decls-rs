@@ -11,4 +11,4 @@ macro_rules! wake_by_ref_arc_raw {
     };
 }
 
-wake_by_ref_arc_raw!()
+wake_by_ref_arc_raw!();

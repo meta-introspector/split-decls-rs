@@ -4,4 +4,4 @@ macro_rules! BlameEntry {
     };
 }
 
-BlameEntry!()
+BlameEntry!();

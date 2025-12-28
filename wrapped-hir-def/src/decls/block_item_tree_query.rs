@@ -13,4 +13,4 @@ macro_rules! block_item_tree_query {
     };
 }
 
-block_item_tree_query!()
+block_item_tree_query!();

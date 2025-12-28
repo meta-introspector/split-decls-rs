@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DisplayBuffer!();
         RgbColor!();
-        Style!();
         Color!();
+        DisplayBuffer!();
+        Style!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

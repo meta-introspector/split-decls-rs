@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Error!();
-        EntriesRaw!();
-        Abbreviation!();
         Attribute!();
-        UnitOffset!();
+        Abbreviation!();
         Result!();
         Reader!();
+        EntriesRaw!();
+        UnitOffset!();
+        Error!();
         AttributeSpecification!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_643 {
     };
 }
 
-impl_643!()
+impl_643!();

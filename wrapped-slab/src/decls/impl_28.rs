@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        IterMut!();
+        IntoIter!();
+        Iter!();
+        Slab!();
     };
 }
 
 macro_rules! impl_28 {
     () => {
         deps!();
-        impl < T > fmt :: Debug for IterMut < '_ , T > where T : fmt :: Debug , { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt . debug_struct ("IterMut") . field ("remaining" , & self . len) . finish () } }
+        impl < 'a , T > IntoIterator for & 'a Slab < T > { type Item = (usize , & 'a T) ; type IntoIter = Iter < 'a , T > ; fn into_iter (self) -> Iter < 'a , T > { self . iter () } }
     };
 }
 

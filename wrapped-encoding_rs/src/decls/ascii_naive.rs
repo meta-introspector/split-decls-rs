@@ -4,4 +4,4 @@ macro_rules! ascii_naive {
     };
 }
 
-ascii_naive!()
+ascii_naive!();

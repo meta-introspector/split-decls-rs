@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Attrs!();
         DefDatabase!();
+        Attrs!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

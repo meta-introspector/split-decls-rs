@@ -4,4 +4,4 @@ macro_rules! check_variant_attrs {
     };
 }
 
-check_variant_attrs!()
+check_variant_attrs!();

@@ -4,4 +4,4 @@ macro_rules! TargetFeatureIsSafeInTarget {
     };
 }
 
-TargetFeatureIsSafeInTarget!()
+TargetFeatureIsSafeInTarget!();

@@ -12,4 +12,4 @@ macro_rules! r#try_recurse {
     };
 }
 
-r#try_recurse!()
+r#try_recurse!();

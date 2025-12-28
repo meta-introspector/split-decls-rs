@@ -4,4 +4,4 @@ macro_rules! add_workspace_submodules {
     };
 }
 
-add_workspace_submodules!()
+add_workspace_submodules!();

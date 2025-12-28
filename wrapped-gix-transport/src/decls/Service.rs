@@ -4,4 +4,4 @@ macro_rules! Service {
     };
 }
 
-Service!()
+Service!();

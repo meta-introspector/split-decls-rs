@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Recorder!();
+        Entry!();
         Location!();
         Visit!();
-        Entry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

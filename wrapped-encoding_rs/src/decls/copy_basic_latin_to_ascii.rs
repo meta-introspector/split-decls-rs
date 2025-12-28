@@ -4,4 +4,4 @@ macro_rules! copy_basic_latin_to_ascii {
     };
 }
 
-copy_basic_latin_to_ascii!()
+copy_basic_latin_to_ascii!();

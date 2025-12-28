@@ -26,4 +26,4 @@ assert!(matches!(client, PasswordClient::Digest(_)));
     };
 }
 
-PasswordClientBuilder!()
+PasswordClientBuilder!();

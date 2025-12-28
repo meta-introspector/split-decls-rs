@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Spawn!();
         LocalFutureObj!();
+        Spawn!();
         SpawnError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! LocalSpawn {
     };
 }
 
-LocalSpawn!()
+LocalSpawn!();

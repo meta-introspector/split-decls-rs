@@ -20,4 +20,4 @@ fn bar() -> extern "Rust" fn() -> Ret {}
     };
 }
 
-test_ty_with_complex_type!()
+test_ty_with_complex_type!();

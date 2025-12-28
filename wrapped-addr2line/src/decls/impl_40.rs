@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        LineSequence!();
-        Lines!();
-        UnitRef!();
         Result!();
+        Lines!();
         LineRow!();
-        Error!();
+        LineSequence!();
         Location!();
+        UnitRef!();
+        Error!();
         LineLocationRangeIter!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

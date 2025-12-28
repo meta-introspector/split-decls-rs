@@ -4,4 +4,4 @@ macro_rules! InterruptingWriter {
     };
 }
 
-InterruptingWriter!()
+InterruptingWriter!();

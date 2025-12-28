@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Global!();
         AllocError!();
         Box!();
-        Global!();
         RawVec!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

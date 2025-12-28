@@ -11,4 +11,4 @@ macro_rules! define_id {
     };
 }
 
-define_id!()
+define_id!();

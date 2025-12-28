@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Align!();
+        Size!();
+        AlignFromBytesError!();
+    };
+}
+
+macro_rules! impl_83 {
+    () => {
+        deps!();
+        impl Align { pub const ONE : Align = Align { pow2 : 0 } ; pub const EIGHT : Align = Align { pow2 : 3 } ; pub const MAX : Align = Align { pow2 : 29 } ; # [inline] pub fn from_bits (bits : u64) -> Result < Align , AlignFromBytesError > { Align :: from_bytes (Size :: from_bits (bits) . bytes ()) } # [inline] pub const fn from_bytes (align : u64) -> Result < Align , AlignFromBytesError > { if align == 0 { return Ok (Align :: ONE) ; } # [cold] const fn not_power_of_2 (align : u64) -> AlignFromBytesError { AlignFromBytesError :: NotPowerOfTwo (align) } # [cold] const fn too_large (align : u64) -> AlignFromBytesError { AlignFromBytesError :: TooLarge (align) } let tz = align . trailing_zeros () ; if align != (1 << tz) { return Err (not_power_of_2 (align)) ; } let pow2 = tz as u8 ; if pow2 > Self :: MAX . pow2 { return Err (too_large (align)) ; } Ok (Align { pow2 }) } # [inline] pub const fn bytes (self) -> u64 { 1 << self . pow2 } # [inline] pub fn bytes_usize (self) -> usize { self . bytes () . try_into () . unwrap () } # [inline] pub const fn bits (self) -> u64 { self . bytes () * 8 } # [inline] pub fn bits_usize (self) -> usize { self . bits () . try_into () . unwrap () } # [doc = " Obtain the greatest factor of `size` that is an alignment"] # [doc = " (the largest power of two the Size is a multiple of)."] # [doc = ""] # [doc = " Note that all numbers are factors of 0"] # [inline] pub fn max_aligned_factor (size : Size) -> Align { Align { pow2 : size . bytes () . trailing_zeros () as u8 } } # [doc = " Reduces Align to an aligned factor of `size`."] # [inline] pub fn restrict_for_offset (self , size : Size) -> Align { self . min (Align :: max_aligned_factor (size)) } }
+    };
+}
+
+impl_83!()

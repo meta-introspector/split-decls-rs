@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParseRequestError!();
         Result!();
+        ParseRequestError!();
         BatchRequest!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! receive_cbor {
     };
 }
 
-receive_cbor!()
+receive_cbor!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stdout!();
-        Stderr!();
         Buffer!();
+        Stderr!();
+        Stdout!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! private {
     };
 }
 
-private!()
+private!();

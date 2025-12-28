@@ -4,4 +4,4 @@ macro_rules! MacroRules {
     };
 }
 
-MacroRules!()
+MacroRules!();

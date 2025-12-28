@@ -14,4 +14,4 @@ macro_rules! to_git {
     };
 }
 
-to_git!()
+to_git!();

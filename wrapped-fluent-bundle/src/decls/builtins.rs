@@ -4,4 +4,4 @@ macro_rules! builtins {
     };
 }
 
-builtins!()
+builtins!();

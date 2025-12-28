@@ -11,4 +11,4 @@ macro_rules! Sink01CompatExt {
     };
 }
 
-Sink01CompatExt!()
+Sink01CompatExt!();

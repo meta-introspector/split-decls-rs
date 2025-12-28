@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        DebugAddrBase!();
-        SectionId!();
-        Range!();
-        DebugAddr!();
-        Reader!();
-        RngListIter!();
-        RangeListsFormat!();
-        Result!();
-        Encoding!();
-        DebugRngListsIndex!();
         RangeListsOffset!();
-        ReaderOffsetId!();
+        DebugRngListsIndex!();
+        Reader!();
         RawRngListIter!();
         DebugRngListsBase!();
+        RngListIter!();
+        RangeListsFormat!();
         RangeLists!();
+        DebugAddrBase!();
+        Range!();
+        Result!();
+        ReaderOffsetId!();
+        SectionId!();
+        Encoding!();
+        DebugAddr!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_566 {
     };
 }
 
-impl_566!()
+impl_566!();

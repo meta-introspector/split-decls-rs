@@ -11,4 +11,4 @@ macro_rules! arg_impl {
     };
 }
 
-arg_impl!()
+arg_impl!();

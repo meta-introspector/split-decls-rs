@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ValueHint!();
-        ArgAction!();
-        OsStr!();
-        ValueRange!();
-        ArgSettings!();
-        IntoResettable!();
-        Command!();
-        Arg!();
         ValueParser!();
         Usage!();
+        ArgAction!();
+        OsStr!();
+        Arg!();
         Str!();
+        ValueHint!();
+        Command!();
+        ValueRange!();
+        IntoResettable!();
+        ArgSettings!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

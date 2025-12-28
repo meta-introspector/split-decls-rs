@@ -11,4 +11,4 @@ macro_rules! increase_refcount {
     };
 }
 
-increase_refcount!()
+increase_refcount!();

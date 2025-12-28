@@ -4,4 +4,4 @@ macro_rules! delegate_future {
     };
 }
 
-delegate_future!()
+delegate_future!();

@@ -4,4 +4,4 @@ macro_rules! SourceRootId {
     };
 }
 
-SourceRootId!()
+SourceRootId!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        GenericArray!();
+        GenericSequence!();
+        ArrayLength!();
         IntrusiveArrayConsumer!();
         MappedGenericSequence!();
+        GenericArray!();
         IntrusiveArrayBuilder!();
-        GenericSequence!();
         MappedSequence!();
-        ArrayLength!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_187 {
     };
 }
 
-impl_187!()
+impl_187!();

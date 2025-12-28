@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StyledStr!();
         Error!();
+        StyledStr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ErrorFormatter {
     };
 }
 
-ErrorFormatter!()
+ErrorFormatter!();

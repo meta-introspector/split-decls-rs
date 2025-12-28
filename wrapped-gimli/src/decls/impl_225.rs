@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ReaderOffset!();
-        Register!();
-        RegisterRule!();
-        Result!();
-        UnwindContextStorage!();
-        RegisterRuleIter!();
-        RegisterRuleMap!();
         Error!();
+        UnwindContextStorage!();
+        Register!();
+        Result!();
+        RegisterRuleMap!();
+        RegisterRule!();
+        RegisterRuleIter!();
+        ReaderOffset!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_225 {
     };
 }
 
-impl_225!()
+impl_225!();

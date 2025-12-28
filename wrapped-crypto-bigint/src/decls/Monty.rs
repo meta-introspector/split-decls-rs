@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Square!();
-        Retrieve!();
-        Odd!();
-        PowBoundedExp!();
         SquareAssign!();
-        MontyMultiplier!();
+        PowBoundedExp!();
+        Retrieve!();
+        Square!();
         Unsigned!();
+        Odd!();
         Integer!();
+        MontyMultiplier!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! Monty {
     };
 }
 
-Monty!()
+Monty!();

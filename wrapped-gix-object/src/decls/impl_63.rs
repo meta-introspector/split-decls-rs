@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Tag!();
         Object!();
         Error!();
+        Tag!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_63 {
     };
 }
 
-impl_63!()
+impl_63!();

@@ -12,4 +12,4 @@ impl <A: $crate::marker::Copy, B: $crate::marker::Copy, > $crate::marker::Copy f
     };
 }
 
-test_copy_expand_with_type_params!()
+test_copy_expand_with_type_params!();

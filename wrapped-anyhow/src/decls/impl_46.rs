@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Result!();
         Backtrace!();
+        MessageError!();
         BoxedError!();
-        StdError!();
+        ErrorVTable!();
         ContextError!();
         ErrorImpl!();
-        ErrorVTable!();
+        Chain!();
+        DisplayError!();
         Error!();
         Ok!();
-        MessageError!();
-        DisplayError!();
         Own!();
-        Chain!();
         Context!();
+        Result!();
+        StdError!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

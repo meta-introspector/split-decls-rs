@@ -12,4 +12,4 @@ macro_rules! stdout_initial_colors {
     };
 }
 
-stdout_initial_colors!()
+stdout_initial_colors!();

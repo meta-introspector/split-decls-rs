@@ -4,4 +4,4 @@ macro_rules! remote {
     };
 }
 
-remote!()
+remote!();

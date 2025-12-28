@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Row!();
+        Result!();
+        Sql!();
+        ToSql!();
+        Connection!();
+    };
+}
+
+macro_rules! impl_199 {
+    () => {
+        deps!();
+        impl Connection { # [doc = " Query the current value of `pragma_name`."] # [doc = ""] # [doc = " Some pragmas will return multiple rows/values which cannot be retrieved"] # [doc = " with this method."] # [doc = ""] # [doc = " Prefer [PRAGMA function](https://sqlite.org/pragma.html#pragfunc) introduced in SQLite 3.20:"] # [doc = " `SELECT user_version FROM pragma_user_version;`"] pub fn pragma_query_value < T , F > (& self , schema_name : Option < & str > , pragma_name : & str , f : F ,) -> Result < T > where F : FnOnce (& Row < '_ >) -> Result < T > , { let mut query = Sql :: new () ; query . push_pragma (schema_name , pragma_name) ? ; self . query_row (& query , [] , f) } # [doc = " Query the current rows/values of `pragma_name`."] # [doc = ""] # [doc = " Prefer [PRAGMA function](https://sqlite.org/pragma.html#pragfunc) introduced in SQLite 3.20:"] # [doc = " `SELECT * FROM pragma_collation_list;`"] pub fn pragma_query < F > (& self , schema_name : Option < & str > , pragma_name : & str , mut f : F ,) -> Result < () > where F : FnMut (& Row < '_ >) -> Result < () > , { let mut query = Sql :: new () ; query . push_pragma (schema_name , pragma_name) ? ; let mut stmt = self . prepare (& query) ? ; let mut rows = stmt . query ([]) ? ; while let Some (result_row) = rows . next () ? { let row = result_row ; f (row) ? ; } Ok (()) } # [doc = " Query the current value(s) of `pragma_name` associated to"] # [doc = " `pragma_value`."] # [doc = ""] # [doc = " This method can be used with query-only pragmas which need an argument"] # [doc = " (e.g. `table_info('one_tbl')`) or pragmas which returns value(s)"] # [doc = " (e.g. `integrity_check`)."] # [doc = ""] # [doc = " Prefer [PRAGMA function](https://sqlite.org/pragma.html#pragfunc) introduced in SQLite 3.20:"] # [doc = " `SELECT * FROM pragma_table_info(?1);`"] pub fn pragma < F , V > (& self , schema_name : Option < & str > , pragma_name : & str , pragma_value : V , mut f : F ,) -> Result < () > where F : FnMut (& Row < '_ >) -> Result < () > , V : ToSql , { let mut sql = Sql :: new () ; sql . push_pragma (schema_name , pragma_name) ? ; sql . open_brace () ; sql . push_value (& pragma_value) ? ; sql . close_brace () ; let mut stmt = self . prepare (& sql) ? ; let mut rows = stmt . query ([]) ? ; while let Some (result_row) = rows . next () ? { let row = result_row ; f (row) ? ; } Ok (()) } # [doc = " Set a new value to `pragma_name`."] # [doc = ""] # [doc = " Some pragmas will return the updated value which cannot be retrieved"] # [doc = " with this method."] pub fn pragma_update < V > (& self , schema_name : Option < & str > , pragma_name : & str , pragma_value : V ,) -> Result < () > where V : ToSql , { let mut sql = Sql :: new () ; sql . push_pragma (schema_name , pragma_name) ? ; sql . push_equal_sign () ; sql . push_value (& pragma_value) ? ; self . execute_batch (& sql) } # [doc = " Set a new value to `pragma_name` and return the updated value."] # [doc = ""] # [doc = " Only few pragmas automatically return the updated value."] pub fn pragma_update_and_check < F , T , V > (& self , schema_name : Option < & str > , pragma_name : & str , pragma_value : V , f : F ,) -> Result < T > where F : FnOnce (& Row < '_ >) -> Result < T > , V : ToSql , { let mut sql = Sql :: new () ; sql . push_pragma (schema_name , pragma_name) ? ; sql . push_equal_sign () ; sql . push_value (& pragma_value) ? ; self . query_row (& sql , [] , f) } }
+    };
+}
+
+impl_199!()

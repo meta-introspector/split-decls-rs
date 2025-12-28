@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GenericDefId!();
-        GeneralConstId!();
         DefDatabase!();
+        GeneralConstId!();
+        GenericDefId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_701 {
     };
 }
 
-impl_701!()
+impl_701!();

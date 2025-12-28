@@ -4,4 +4,4 @@ macro_rules! write_ancestor {
     };
 }
 
-write_ancestor!()
+write_ancestor!();

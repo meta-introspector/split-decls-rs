@@ -4,4 +4,4 @@ macro_rules! git_types {
     };
 }
 
-git_types!()
+git_types!();

@@ -4,4 +4,4 @@ macro_rules! AutoderefSnapshot {
     };
 }
 
-AutoderefSnapshot!()
+AutoderefSnapshot!();

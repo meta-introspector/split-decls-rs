@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TypeRef!();
-        ResolverContext!();
-        Deprecation!();
         SubscriptionFieldFuture!();
+        TypeRef!();
+        Deprecation!();
         InputValue!();
         SubscriptionField!();
+        ResolverContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_496 {
     };
 }
 
-impl_496!()
+impl_496!();

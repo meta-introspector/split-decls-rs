@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Tree!();
         Clone!();
-        RemoteName!();
         Boolean!();
+        Tree!();
+        RemoteName!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_600 {
     };
 }
 
-impl_600!()
+impl_600!();

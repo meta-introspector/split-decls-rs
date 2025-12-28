@@ -4,4 +4,4 @@ macro_rules! FluentNumberCurrencyDisplayStyle {
     };
 }
 
-FluentNumberCurrencyDisplayStyle!()
+FluentNumberCurrencyDisplayStyle!();

@@ -4,4 +4,4 @@ macro_rules! FixedBitSet {
     };
 }
 
-FixedBitSet!()
+FixedBitSet!();

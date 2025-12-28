@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CargoUpdateCommand!();
-        RemoveRustVersionCommand!();
-        CargoVendorCommand!();
         Cargo2NixCommand!();
+        RemoveRustVersionCommand!();
+        CargoUpdateCommand!();
         CargoCommand!();
+        CargoVendorCommand!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! get_cargo_command {
     };
 }
 
-get_cargo_command!()
+get_cargo_command!();

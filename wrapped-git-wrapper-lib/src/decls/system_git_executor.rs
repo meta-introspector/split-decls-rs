@@ -4,4 +4,4 @@ macro_rules! system_git_executor {
     };
 }
 
-system_git_executor!()
+system_git_executor!();

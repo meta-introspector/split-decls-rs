@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TimeZone!();
-        DateTime!();
         Days!();
+        DateTime!();
+        TimeZone!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

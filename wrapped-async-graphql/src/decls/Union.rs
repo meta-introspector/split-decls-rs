@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Directive!();
         SchemaError!();
+        Directive!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Union {
     };
 }
 
-Union!()
+Union!();

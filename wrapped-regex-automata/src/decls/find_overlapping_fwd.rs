@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Cache!();
+        MatchError!();
+        OverlappingState!();
+        DFA!();
+        Input!();
+    };
+}
+
+macro_rules! find_overlapping_fwd {
+    () => {
+        deps!();
+        # [inline (never)] pub (crate) fn find_overlapping_fwd (dfa : & DFA , cache : & mut Cache , input : & Input < '_ > , state : & mut OverlappingState ,) -> Result < () , MatchError > { state . mat = None ; if input . is_done () { return Ok (()) ; } let pre = if input . get_anchored () . is_anchored () { None } else { dfa . get_config () . get_prefilter () } ; if pre . is_some () { find_overlapping_fwd_imp (dfa , cache , input , pre , state) } else { find_overlapping_fwd_imp (dfa , cache , input , None , state) } }
+    };
+}
+
+find_overlapping_fwd!()

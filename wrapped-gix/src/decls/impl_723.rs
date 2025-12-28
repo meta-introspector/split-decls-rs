@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Key!();
         Remote!();
         Section!();
+        Key!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_723 {
     };
 }
 
-impl_723!()
+impl_723!();

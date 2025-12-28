@@ -4,4 +4,4 @@ macro_rules! select_internal {
     };
 }
 
-select_internal!()
+select_internal!();

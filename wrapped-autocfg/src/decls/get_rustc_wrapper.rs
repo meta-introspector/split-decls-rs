@@ -4,4 +4,4 @@ macro_rules! get_rustc_wrapper {
     };
 }
 
-get_rustc_wrapper!()
+get_rustc_wrapper!();

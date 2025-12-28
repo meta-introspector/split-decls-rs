@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BOOL!();
         HANDLE!();
+        BOOL!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_71 {
     };
 }
 
-macro_71!()
+macro_71!();

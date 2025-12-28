@@ -4,4 +4,4 @@ macro_rules! panic_spawner {
     };
 }
 
-panic_spawner!()
+panic_spawner!();

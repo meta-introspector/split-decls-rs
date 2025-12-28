@@ -4,4 +4,4 @@ macro_rules! panic_waker_ref {
     };
 }
 
-panic_waker_ref!()
+panic_waker_ref!();

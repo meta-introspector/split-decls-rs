@@ -4,4 +4,4 @@ macro_rules! os_str {
     };
 }
 
-os_str!()
+os_str!();

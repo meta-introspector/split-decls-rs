@@ -4,4 +4,4 @@ macro_rules! get_remaining_bytes {
     };
 }
 
-get_remaining_bytes!()
+get_remaining_bytes!();

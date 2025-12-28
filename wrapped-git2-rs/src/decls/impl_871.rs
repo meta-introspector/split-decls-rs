@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Blob!();
+        Convert!();
+        Tag!();
         Commit!();
         ObjectType!();
-        Tag!();
         Tree!();
-        Convert!();
+        Blob!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_871 {
     };
 }
 
-impl_871!()
+impl_871!();

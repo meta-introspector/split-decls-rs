@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WriteStyle!();
         Buffer!();
+        WriteStyle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Formatter {
     };
 }
 
-Formatter!()
+Formatter!();

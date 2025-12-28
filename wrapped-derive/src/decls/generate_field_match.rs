@@ -11,4 +11,4 @@ macro_rules! generate_field_match {
     };
 }
 
-generate_field_match!()
+generate_field_match!();

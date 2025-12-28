@@ -11,4 +11,4 @@ macro_rules! write_input_value {
     };
 }
 
-write_input_value!()
+write_input_value!();

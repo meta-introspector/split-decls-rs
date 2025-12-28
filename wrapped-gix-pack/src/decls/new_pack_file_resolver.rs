@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EntryRange!();
         SharedTempFile!();
+        EntryRange!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! new_pack_file_resolver {
     };
 }
 
-new_pack_file_resolver!()
+new_pack_file_resolver!();

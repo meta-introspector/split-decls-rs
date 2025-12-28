@@ -1,0 +1,7 @@
+macro_rules! macro_755 {
+    () => {
+        declare_lint ! { # [doc = " The `redundant_semicolons` lint detects unnecessary trailing"] # [doc = " semicolons."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " let _ = 123;;"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Extra semicolons are not needed, and may be removed to avoid confusion"] # [doc = " and visual clutter."] pub REDUNDANT_SEMICOLONS , Warn , "detects unnecessary trailing semicolons" }
+    };
+}
+
+macro_755!()

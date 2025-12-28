@@ -4,4 +4,4 @@ macro_rules! ToNormalPathComponents {
     };
 }
 
-ToNormalPathComponents!()
+ToNormalPathComponents!();

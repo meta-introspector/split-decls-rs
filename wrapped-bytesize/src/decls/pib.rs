@@ -4,4 +4,4 @@ macro_rules! pib {
     };
 }
 
-pib!()
+pib!();

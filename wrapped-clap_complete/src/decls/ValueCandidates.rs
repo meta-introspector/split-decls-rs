@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ArgValueCandidates!();
         CompletionCandidate!();
         SubcommandCandidates!();
-        ArgValueCandidates!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ValueCandidates {
     };
 }
 
-ValueCandidates!()
+ValueCandidates!();

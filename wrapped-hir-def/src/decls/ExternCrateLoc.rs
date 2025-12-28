@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ItemLoc!();
         ExternCrate!();
+        ItemLoc!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ExternCrateLoc {
     };
 }
 
-ExternCrateLoc!()
+ExternCrateLoc!();

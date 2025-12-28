@@ -13,4 +13,4 @@ macro_rules! did_you_mean_flag {
     };
 }
 
-did_you_mean_flag!()
+did_you_mean_flag!();

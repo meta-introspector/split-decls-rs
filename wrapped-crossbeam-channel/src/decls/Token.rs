@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         TickToken!();
-        ZeroToken!();
-        NeverToken!();
-        AtToken!();
         ArrayToken!();
+        AtToken!();
         ListToken!();
+        NeverToken!();
+        ZeroToken!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Token {
     };
 }
 
-Token!()
+Token!();

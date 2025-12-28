@@ -1,44 +1,44 @@
 macro_rules! deps {
     () => {
-        AdtId!();
-        Scope!();
-        HygieneId!();
-        BuiltinShadowMode!();
-        TypeNs!();
-        BindingId!();
-        Static!();
-        ValueNs!();
-        Function!();
-        ItemScope!();
-        ExprId!();
-        MacroSubNs!();
-        GenericDefId!();
-        ImportOrExternCrate!();
-        ResolveValueResult!();
         RawVisibility!();
-        Struct!();
-        DefDatabase!();
-        Resolver!();
-        PerNs!();
-        Item!();
-        DefWithBodyId!();
-        BuiltinType!();
-        Union!();
-        TypeAlias!();
-        ScopeNames!();
-        LangItemTarget!();
         ModuleDefId!();
         ScopeDef!();
-        ModuleItemMap!();
-        ExprScope!();
+        DefWithBodyId!();
         UpdateGuard!();
-        Trait!();
-        FxIndexMap!();
+        AdtId!();
+        ResolveValueResult!();
+        MacroId!();
+        ModuleId!();
+        TypeNs!();
+        Item!();
+        BuiltinType!();
+        LangItemTarget!();
+        DefDatabase!();
+        Struct!();
+        BuiltinShadowMode!();
+        Union!();
         Visibility!();
         DefMap!();
-        MacroId!();
         LifetimeNs!();
-        ModuleId!();
+        FxIndexMap!();
+        ValueNs!();
+        BindingId!();
+        HygieneId!();
+        Resolver!();
+        ExprScope!();
+        ScopeNames!();
+        ImportOrExternCrate!();
+        Trait!();
+        Static!();
+        Function!();
+        Scope!();
+        TypeAlias!();
+        MacroSubNs!();
+        GenericDefId!();
+        ItemScope!();
+        ModuleItemMap!();
+        ExprId!();
+        PerNs!();
     };
 }
 
@@ -49,4 +49,4 @@ macro_rules! impl_311 {
     };
 }
 
-impl_311!()
+impl_311!();

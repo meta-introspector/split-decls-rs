@@ -11,4 +11,4 @@ macro_rules! impl_arithmetic {
     };
 }
 
-impl_arithmetic!()
+impl_arithmetic!();

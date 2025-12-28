@@ -4,4 +4,4 @@ macro_rules! precompose_path {
     };
 }
 
-precompose_path!()
+precompose_path!();

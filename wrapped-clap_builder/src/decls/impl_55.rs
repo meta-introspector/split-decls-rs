@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Arg!();
-        Styles!();
         Result!();
+        Styles!();
+        Arg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

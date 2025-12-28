@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        Stage!();
+        AllowedTargets!();
+        AttributeParser!();
+        ArgParser!();
+        FinalizeContext!();
+        UsedParser!();
+        AcceptMapping!();
+    };
+}
+
+macro_rules! impl_45 {
+    () => {
+        deps!();
+        impl < S : Stage > AttributeParser < S > for UsedParser { const ATTRIBUTES : AcceptMapping < Self , S > = & [(& [sym :: used] , template ! (Word , List : & ["compiler" , "linker"]) , | group : & mut Self , cx , args | { let used_by = match args { ArgParser :: NoArgs => UsedBy :: Linker , ArgParser :: List (list) => { let Some (l) = list . single () else { cx . expected_single_argument (list . span) ; return ; } ; match l . meta_item () . and_then (| i | i . path () . word_sym ()) { Some (sym :: compiler) => { if ! cx . features () . used_with_arg () { feature_err (& cx . sess () , sym :: used_with_arg , cx . attr_span , "`#[used(compiler)]` is currently unstable" ,) . emit () ; } UsedBy :: Compiler } Some (sym :: linker) => { if ! cx . features () . used_with_arg () { feature_err (& cx . sess () , sym :: used_with_arg , cx . attr_span , "`#[used(linker)]` is currently unstable" ,) . emit () ; } UsedBy :: Linker } _ => { cx . expected_specific_argument (l . span () , & [sym :: compiler , sym :: linker]) ; return ; } } } ArgParser :: NameValue (_) => return , } ; let target = match used_by { UsedBy :: Compiler => & mut group . first_compiler , UsedBy :: Linker => & mut group . first_linker , } ; let attr_span = cx . attr_span ; if let Some (prev) = * target { cx . warn_unused_duplicate (prev , attr_span) ; } else { * target = Some (attr_span) ; } } ,)] ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Static) , Warn (Target :: MacroCall)]) ; fn finalize (self , _cx : & FinalizeContext < '_ , '_ , S >) -> Option < AttributeKind > { Some (match (self . first_compiler , self . first_linker) { (_ , Some (span)) => AttributeKind :: Used { used_by : UsedBy :: Linker , span } , (Some (span) , _) => AttributeKind :: Used { used_by : UsedBy :: Compiler , span } , (None , None) => return None , }) } }
+    };
+}
+
+impl_45!()

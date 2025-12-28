@@ -4,4 +4,4 @@ macro_rules! gbk_other_encode {
     };
 }
 
-gbk_other_encode!()
+gbk_other_encode!();

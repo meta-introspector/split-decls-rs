@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         UnitOffset!();
-        DieReference!();
         DebugAddrIndex!();
+        Expression!();
+        DieReference!();
         ValueType!();
+        Evaluation!();
         Register!();
         Reader!();
-        Evaluation!();
-        Expression!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! EvaluationResult {
     };
 }
 
-EvaluationResult!()
+EvaluationResult!();

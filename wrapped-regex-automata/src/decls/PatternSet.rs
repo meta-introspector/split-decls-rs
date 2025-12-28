@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        PatternID!();
+        SparseSet!();
+    };
+}
+
+macro_rules! PatternSet {
+    () => {
+        deps!();
+        # [doc = " A set of `PatternID`s."] # [doc = ""] # [doc = " A set of pattern identifiers is useful for recording which patterns have"] # [doc = " matched a particular haystack. A pattern set _only_ includes pattern"] # [doc = " identifiers. It does not include offset information."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " This shows basic usage of a set."] # [doc = ""] # [doc = " ```"] # [doc = " use regex_automata::{PatternID, PatternSet};"] # [doc = ""] # [doc = " let pid1 = PatternID::must(5);"] # [doc = " let pid2 = PatternID::must(8);"] # [doc = " // Create a new empty set."] # [doc = " let mut set = PatternSet::new(10);"] # [doc = " // Insert pattern IDs."] # [doc = " set.insert(pid1);"] # [doc = " set.insert(pid2);"] # [doc = " // Test membership."] # [doc = " assert!(set.contains(pid1));"] # [doc = " assert!(set.contains(pid2));"] # [doc = " // Get all members."] # [doc = " assert_eq!("] # [doc = "     vec![5, 8],"] # [doc = "     set.iter().map(|p| p.as_usize()).collect::<Vec<usize>>(),"] # [doc = " );"] # [doc = " // Clear the set."] # [doc = " set.clear();"] # [doc = " // Test that it is indeed empty."] # [doc = " assert!(set.is_empty());"] # [doc = " ```"] # [cfg (feature = "alloc")] # [derive (Clone , Debug , Eq , PartialEq)] pub struct PatternSet { # [doc = " The number of patterns set to 'true' in this set."] len : usize , # [doc = " A map from PatternID to boolean of whether a pattern matches or not."] # [doc = ""] # [doc = " This should probably be a bitset, but it's probably unlikely to matter"] # [doc = " much in practice."] # [doc = ""] # [doc = " The main downside of this representation (and similarly for a bitset)"] # [doc = " is that iteration scales with the capacity of the set instead of"] # [doc = " the length of the set. This doesn't seem likely to be a problem in"] # [doc = " practice."] # [doc = ""] # [doc = " Another alternative is to just use a 'SparseSet' for this. It does use"] # [doc = " more memory (quite a bit more), but that seems fine I think compared"] # [doc = " to the memory being used by the regex engine. The real hiccup with"] # [doc = " it is that it yields pattern IDs in the order they were inserted."] # [doc = " Which is actually kind of nice, but at the time of writing, pattern"] # [doc = " IDs are yielded in ascending order in the regex crate RegexSet API."] # [doc = " If we did change to 'SparseSet', we could provide an additional"] # [doc = " 'iter_match_order' iterator, but keep the ascending order one for"] # [doc = " compatibility."] which : alloc :: boxed :: Box < [bool] > , }
+    };
+}
+
+PatternSet!()

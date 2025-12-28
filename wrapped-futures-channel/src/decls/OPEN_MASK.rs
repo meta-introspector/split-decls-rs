@@ -4,4 +4,4 @@ macro_rules! OPEN_MASK {
     };
 }
 
-OPEN_MASK!()
+OPEN_MASK!();

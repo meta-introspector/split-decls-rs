@@ -11,4 +11,4 @@ macro_rules! fiat_p521_relax {
     };
 }
 
-fiat_p521_relax!()
+fiat_p521_relax!();

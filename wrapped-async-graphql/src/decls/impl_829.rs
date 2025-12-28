@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InputValueResult!();
-        Scalar!();
         InputValueError!();
+        Scalar!();
         ScalarType!();
+        InputValueResult!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_829 {
     };
 }
 
-impl_829!()
+impl_829!();

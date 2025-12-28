@@ -13,4 +13,4 @@ macro_rules! generate_to {
     };
 }
 
-generate_to!()
+generate_to!();

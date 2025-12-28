@@ -4,4 +4,4 @@ macro_rules! is_done_ntfs {
     };
 }
 
-is_done_ntfs!()
+is_done_ntfs!();

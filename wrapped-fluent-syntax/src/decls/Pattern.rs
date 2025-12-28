@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Attribute!();
         Term!();
-        Message!();
         Expression!();
+        Attribute!();
+        Message!();
         PatternElement!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! Pattern {
     };
 }
 
-Pattern!()
+Pattern!();

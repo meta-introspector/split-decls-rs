@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Url!();
         Branch!();
+        Note!();
+        State!();
+        Repository!();
+        Error!();
         Submodule!();
         Fetch!();
-        Error!();
-        Url!();
         Ignore!();
-        Repository!();
-        State!();
-        Note!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_424 {
     };
 }
 
-impl_424!()
+impl_424!();

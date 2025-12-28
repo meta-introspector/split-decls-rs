@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Sender!();
-        SenderFlavor!();
-        SendError!();
         SendTimeoutError!();
+        SendError!();
         Timeout!();
+        SenderFlavor!();
         TrySendError!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

@@ -11,4 +11,4 @@ macro_rules! run_generate_patches_command {
     };
 }
 
-run_generate_patches_command!()
+run_generate_patches_command!();

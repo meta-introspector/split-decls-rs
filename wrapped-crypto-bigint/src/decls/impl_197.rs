@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Zero!();
         NonZero!();
+        Zero!();
         Random!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

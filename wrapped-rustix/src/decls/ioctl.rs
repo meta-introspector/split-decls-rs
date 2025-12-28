@@ -1,6 +1,6 @@
 macro_rules! ioctl {
     () => {
-        pub mod ioctl ;
+        # [cfg (linux_kernel)] mod ioctl ;
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! DecodeMetadata {
     };
 }
 
-DecodeMetadata!()
+DecodeMetadata!();

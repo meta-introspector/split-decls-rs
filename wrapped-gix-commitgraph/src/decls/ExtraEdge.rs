@@ -11,4 +11,4 @@ macro_rules! ExtraEdge {
     };
 }
 
-ExtraEdge!()
+ExtraEdge!();

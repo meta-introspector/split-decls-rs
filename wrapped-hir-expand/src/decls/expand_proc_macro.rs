@@ -3,10 +3,10 @@ macro_rules! deps {
         ExpandDatabase!();
         ProcMacro!();
         MacroCallKind!();
+        Attr!();
+        MacroCallId!();
         ExpandResult!();
         MacroDefKind!();
-        MacroCallId!();
-        Attr!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! expand_proc_macro {
     };
 }
 
-expand_proc_macro!()
+expand_proc_macro!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Statistics!();
         Error!();
         TreeDiffChange!();
+        Statistics!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! tree_diff_at_file_path {
     };
 }
 
-tree_diff_at_file_path!()
+tree_diff_at_file_path!();

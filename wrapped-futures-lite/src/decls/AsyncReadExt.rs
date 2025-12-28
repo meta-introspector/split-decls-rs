@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ReadExactFuture!();
-        ReadToEndFuture!();
         ReadVectoredFuture!();
-        ReadFuture!();
         Cursor!();
+        ReadFuture!();
         ReadToStringFuture!();
+        ReadToEndFuture!();
+        ReadExactFuture!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! AsyncReadExt {
     };
 }
 
-AsyncReadExt!()
+AsyncReadExt!();

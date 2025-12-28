@@ -11,4 +11,4 @@ macro_rules! push_update_reference_cb {
     };
 }
 
-push_update_reference_cb!()
+push_update_reference_cb!();

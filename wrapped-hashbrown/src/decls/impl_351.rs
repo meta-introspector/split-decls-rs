@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         RawEntryMut!();
-        RawEntryBuilderMut!();
         Equivalent!();
+        RawEntryBuilderMut!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_351 {
     };
 }
 
-impl_351!()
+impl_351!();

@@ -14,4 +14,4 @@ fn main() { "UNRESOLVED_ENV_VAR"; }
     };
 }
 
-test_env_expand!()
+test_env_expand!();

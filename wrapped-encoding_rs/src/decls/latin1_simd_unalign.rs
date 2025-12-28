@@ -4,4 +4,4 @@ macro_rules! latin1_simd_unalign {
     };
 }
 
-latin1_simd_unalign!()
+latin1_simd_unalign!();

@@ -4,4 +4,4 @@ macro_rules! index_as_worktree_with_renames {
     };
 }
 
-index_as_worktree_with_renames!()
+index_as_worktree_with_renames!();

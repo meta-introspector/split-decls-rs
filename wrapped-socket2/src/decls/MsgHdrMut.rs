@@ -1,7 +1,8 @@
 macro_rules! deps {
     () => {
-        MaybeUninitSlice!();
         MsgHdr!();
+        MaybeUninitSlice!();
+        SockAddr!();
     };
 }
 

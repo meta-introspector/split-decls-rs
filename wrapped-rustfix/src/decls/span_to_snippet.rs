@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
-        LineRange!();
+        DiagnosticSpan!();
         Snippet!();
         LinePosition!();
+        LineRange!();
     };
 }
 

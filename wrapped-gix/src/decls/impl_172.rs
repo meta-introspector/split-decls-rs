@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Error!();
-        Object!();
-        Kind!();
         Tree!();
+        Kind!();
+        Object!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

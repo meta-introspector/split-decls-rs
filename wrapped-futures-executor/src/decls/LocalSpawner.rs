@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Incoming!();
         LocalPool!();
+        Incoming!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LocalSpawner {
     };
 }
 
-LocalSpawner!()
+LocalSpawner!();

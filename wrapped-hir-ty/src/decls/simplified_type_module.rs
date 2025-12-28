@@ -11,4 +11,4 @@ macro_rules! simplified_type_module {
     };
 }
 
-simplified_type_module!()
+simplified_type_module!();

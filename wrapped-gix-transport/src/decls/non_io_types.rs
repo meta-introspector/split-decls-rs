@@ -4,4 +4,4 @@ macro_rules! non_io_types {
     };
 }
 
-non_io_types!()
+non_io_types!();

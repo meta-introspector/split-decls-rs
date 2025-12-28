@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Graph!();
+        Error!();
         Algorithm!();
         Negotiator!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

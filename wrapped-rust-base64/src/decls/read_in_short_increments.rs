@@ -11,4 +11,4 @@ macro_rules! read_in_short_increments {
     };
 }
 
-read_in_short_increments!()
+read_in_short_increments!();

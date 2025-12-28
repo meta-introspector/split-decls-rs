@@ -4,4 +4,4 @@ macro_rules! source_kind {
     };
 }
 
-source_kind!()
+source_kind!();

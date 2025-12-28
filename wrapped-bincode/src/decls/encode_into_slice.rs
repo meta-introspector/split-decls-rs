@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EncoderImpl!();
-        Encode!();
+        EncodeError!();
         SliceWriter!();
         Config!();
-        EncodeError!();
+        EncoderImpl!();
+        Encode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! encode_into_slice {
     };
 }
 
-encode_into_slice!()
+encode_into_slice!();

@@ -4,4 +4,4 @@ macro_rules! multi_index {
     };
 }
 
-multi_index!()
+multi_index!();

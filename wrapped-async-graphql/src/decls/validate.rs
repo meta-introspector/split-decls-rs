@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Result!();
+        Subscription!();
+        Visitor!();
         RuleError!();
         VisitorContext!();
+        Result!();
         Query!();
-        Schema!();
         Mutation!();
-        Visitor!();
-        Subscription!();
+        Schema!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! validate {
     };
 }
 
-validate!()
+validate!();

@@ -11,4 +11,4 @@ macro_rules! in_parallel_with_slice {
     };
 }
 
-in_parallel_with_slice!()
+in_parallel_with_slice!();

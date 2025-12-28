@@ -4,4 +4,4 @@ macro_rules! ParseContextState {
     };
 }
 
-ParseContextState!()
+ParseContextState!();

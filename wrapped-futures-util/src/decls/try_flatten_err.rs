@@ -4,4 +4,4 @@ macro_rules! try_flatten_err {
     };
 }
 
-try_flatten_err!()
+try_flatten_err!();

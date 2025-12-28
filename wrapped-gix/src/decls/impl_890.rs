@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         Entry!();
-        Direction!();
-        Push!();
-        RefsHint!();
-        Delegate!();
-        Platform!();
-        Item!();
         Head!();
-        Fetch!();
+        RefsHint!();
         Error!();
+        Direction!();
+        Delegate!();
+        Push!();
+        Item!();
+        Fetch!();
+        Platform!();
         Id!();
     };
 }
@@ -21,4 +21,4 @@ macro_rules! impl_890 {
     };
 }
 
-impl_890!()
+impl_890!();

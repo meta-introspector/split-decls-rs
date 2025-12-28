@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Weekday!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! weekday_serde {
     };
 }
 
-weekday_serde!()
+weekday_serde!();

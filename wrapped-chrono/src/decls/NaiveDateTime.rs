@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Timelike!();
+        Weekday!();
         NaiveDate!();
         NaiveTime!();
-        Weekday!();
-        Timelike!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! NaiveDateTime {
     };
 }
 
-NaiveDateTime!()
+NaiveDateTime!();

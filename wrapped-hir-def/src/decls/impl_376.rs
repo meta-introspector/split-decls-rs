@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ModuleData!();
-        LocalModuleId!();
         DefMap!();
         DefMapCrateData!();
         BlockInfo!();
+        LocalModuleId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_376 {
     };
 }
 
-impl_376!()
+impl_376!();

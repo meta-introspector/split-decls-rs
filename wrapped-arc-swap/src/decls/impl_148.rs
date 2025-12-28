@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Strategy!();
         ArcSwapAny!();
         RefCnt!();
+        Strategy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_148 {
     };
 }
 
-impl_148!()
+impl_148!();

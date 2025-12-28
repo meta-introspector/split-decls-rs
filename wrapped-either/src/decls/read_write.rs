@@ -4,4 +4,4 @@ macro_rules! read_write {
     };
 }
 
-read_write!()
+read_write!();

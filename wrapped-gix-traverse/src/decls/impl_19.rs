@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Topo!();
+        Sorting!();
+        Error!();
         Queue!();
-        Info!();
         Parents!();
         Builder!();
-        Error!();
-        Sorting!();
+        Topo!();
+        Info!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

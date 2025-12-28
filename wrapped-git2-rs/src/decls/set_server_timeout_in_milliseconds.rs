@@ -11,4 +11,4 @@ macro_rules! set_server_timeout_in_milliseconds {
     };
 }
 
-set_server_timeout_in_milliseconds!()
+set_server_timeout_in_milliseconds!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Update!();
         FixedOutputReset!();
-        Digest!();
-        HashMarker!();
         FixedOutput!();
+        Update!();
+        HashMarker!();
+        Digest!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

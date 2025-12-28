@@ -4,4 +4,4 @@ macro_rules! is_exe {
     };
 }
 
-is_exe!()
+is_exe!();

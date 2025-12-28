@@ -4,4 +4,4 @@ macro_rules! StringTypedError {
     };
 }
 
-StringTypedError!()
+StringTypedError!();

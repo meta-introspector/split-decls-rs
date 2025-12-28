@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Conflict!();
-        ResolutionFailure!();
         Resolution!();
-        ConflictIndexEntryPathHint!();
-        ConflictIndexEntry!();
         ConflictMapping!();
+        ResolutionFailure!();
+        Conflict!();
+        ConflictIndexEntry!();
+        ConflictIndexEntryPathHint!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_145 {
     };
 }
 
-impl_145!()
+impl_145!();

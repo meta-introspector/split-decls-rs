@@ -1,0 +1,7 @@
+macro_rules! GraphemeIncomplete {
+    () => {
+        # [doc = " An error return indicating that not enough content was available in the"] # [doc = " provided chunk to satisfy the query, and that more content must be provided."] # [derive (PartialEq , Eq , Debug)] pub enum GraphemeIncomplete { # [doc = " More pre-context is needed. The caller should call `provide_context`"] # [doc = " with a chunk ending at the offset given, then retry the query. This"] # [doc = " will only be returned if the `chunk_start` parameter is nonzero."] PreContext (usize) , # [doc = " When requesting `prev_boundary`, the cursor is moving past the beginning"] # [doc = " of the current chunk, so the chunk before that is requested. This will"] # [doc = " only be returned if the `chunk_start` parameter is nonzero."] PrevChunk , # [doc = " When requesting `next_boundary`, the cursor is moving past the end of the"] # [doc = " current chunk, so the chunk after that is requested. This will only be"] # [doc = " returned if the chunk ends before the `len` parameter provided on"] # [doc = " creation of the cursor."] NextChunk , # [doc = " An error returned when the chunk given does not contain the cursor position."] InvalidOffset , }
+    };
+}
+
+GraphemeIncomplete!()

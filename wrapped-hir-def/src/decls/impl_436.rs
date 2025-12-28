@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        VisibilityExplicitness!();
-        Resolver!();
-        RawVisibility!();
         Visibility!();
-        LocalModuleId!();
         DefDatabase!();
+        Resolver!();
+        VisibilityExplicitness!();
+        RawVisibility!();
+        LocalModuleId!();
         ModuleId!();
         DefMap!();
     };
@@ -18,4 +18,4 @@ macro_rules! impl_436 {
     };
 }
 
-impl_436!()
+impl_436!();

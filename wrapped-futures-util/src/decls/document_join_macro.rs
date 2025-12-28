@@ -4,4 +4,4 @@ macro_rules! document_join_macro {
     };
 }
 
-document_join_macro!()
+document_join_macro!();

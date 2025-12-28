@@ -1,0 +1,30 @@
+macro_rules! deps {
+    () => {
+        QueryEdge!();
+        Configuration!();
+        Id!();
+        Ingredient!();
+        Zalsa!();
+        FxHashSet!();
+        Value!();
+        EventKind!();
+        FxIndexSet!();
+        IngredientIndex!();
+        JarKind!();
+        Database!();
+        RawDatabase!();
+        Event!();
+        Location!();
+        IngredientImpl!();
+        Revision!();
+    };
+}
+
+macro_rules! impl_192 {
+    () => {
+        deps!();
+        impl < C > Ingredient for IngredientImpl < C > where C : Configuration , { fn location (& self) -> & 'static crate :: ingredient :: Location { & C :: LOCATION } fn ingredient_index (& self) -> IngredientIndex { self . ingredient_index } unsafe fn maybe_changed_after (& self , zalsa : & crate :: zalsa :: Zalsa , _db : crate :: database :: RawDatabase < '_ > , input : Id , _revision : Revision , _cycle_heads : & mut VerifyCycleHeads ,) -> VerifyResult { let current_revision = zalsa . current_revision () ; self . revision_queue . record (current_revision) ; let value = zalsa . table () . get :: < Value < C > > (input) ; let _shard = unsafe { self . shards . get_unchecked (value . shard as usize) } . lock () ; let value_shared = unsafe { & mut * value . shared . get () } ; if value_shared . id . generation () > input . generation () { return VerifyResult :: changed () ; } value_shared . last_interned_at = current_revision ; zalsa . event (& | | { let index = self . database_key_index (input) ; Event :: new (EventKind :: DidValidateInternedValue { key : index , revision : current_revision , }) }) ; VerifyResult :: unchanged () } fn collect_minimum_serialized_edges (& self , _zalsa : & Zalsa , edge : QueryEdge , serialized_edges : & mut FxIndexSet < QueryEdge > , _visited_edges : & mut FxHashSet < QueryEdge > ,) { if C :: PERSIST && C :: REVISIONS != IMMORTAL { serialized_edges . insert (edge) ; } } fn debug_name (& self) -> & 'static str { C :: DEBUG_NAME } fn jar_kind (& self) -> JarKind { JarKind :: Struct } fn memo_table_types (& self) -> & Arc < MemoTableTypes > { & self . memo_table_types } fn memo_table_types_mut (& mut self) -> & mut Arc < MemoTableTypes > { & mut self . memo_table_types } # [doc = " Returns memory usage information about any interned values."] # [cfg (all (not (feature = "shuttle") , feature = "salsa_unstable"))] fn memory_usage (& self , db : & dyn crate :: Database) -> Option < Vec < crate :: database :: SlotInfo > > { use parking_lot :: lock_api :: RawMutex ; for shard in self . shards . iter () { unsafe { shard . raw () . lock () } ; } let entries = unsafe { self . entries_inner (false , db . zalsa ()) } ; let memory_usage = entries . map (| entry | unsafe { entry . value . memory_usage (& self . memo_table_types) }) . collect () ; for shard in self . shards . iter () { unsafe { shard . raw () . unlock () } ; } Some (memory_usage) } fn is_persistable (& self) -> bool { C :: PERSIST } fn should_serialize (& self , zalsa : & Zalsa) -> bool { C :: PERSIST && self . entries (zalsa) . next () . is_some () } # [cfg (feature = "persistence")] unsafe fn serialize < 'db > (& 'db self , zalsa : & 'db Zalsa , f : & mut dyn FnMut (& dyn erased_serde :: Serialize) ,) { f (& persistence :: SerializeIngredient { zalsa , ingredient : self , }) } # [cfg (feature = "persistence")] fn deserialize (& mut self , zalsa : & mut Zalsa , deserializer : & mut dyn erased_serde :: Deserializer ,) -> Result < () , erased_serde :: Error > { let deserialize = persistence :: DeserializeIngredient { zalsa , ingredient : self , } ; serde :: de :: DeserializeSeed :: deserialize (deserialize , deserializer) } }
+    };
+}
+
+impl_192!()

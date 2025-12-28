@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RemoteCallbacks!();
         CertificateCheckStatus!();
+        RemoteCallbacks!();
         Binding!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! certificate_check_cb {
     };
 }
 
-certificate_check_cb!()
+certificate_check_cb!();

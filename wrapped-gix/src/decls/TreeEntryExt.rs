@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Entry!();
         Extensions!();
         Repository!();
-        Entry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TreeEntryExt {
     };
 }
 
-TreeEntryExt!()
+TreeEntryExt!();

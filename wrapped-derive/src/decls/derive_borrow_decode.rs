@@ -4,4 +4,4 @@ macro_rules! derive_borrow_decode {
     };
 }
 
-derive_borrow_decode!()
+derive_borrow_decode!();

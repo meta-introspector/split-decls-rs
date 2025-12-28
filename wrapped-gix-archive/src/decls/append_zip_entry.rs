@@ -11,4 +11,4 @@ macro_rules! append_zip_entry {
     };
 }
 
-append_zip_entry!()
+append_zip_entry!();

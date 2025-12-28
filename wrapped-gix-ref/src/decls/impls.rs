@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PartialNameRef!();
         PartialName!();
+        PartialNameRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impls {
     };
 }
 
-impls!()
+impls!();

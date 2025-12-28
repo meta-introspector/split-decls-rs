@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         PasswordClientBuilder!();
         Error!();
-        PasswordClient!();
         HeaderValue!();
+        PasswordClient!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        IndexStr!();
-        CvQualifiers!();
-        ExceptionSpec!();
-        BareFunctionType!();
-        Parse!();
         ParseContext!();
-        FunctionType!();
-        SubstitutionTable!();
         Result!();
+        FunctionType!();
+        Parse!();
+        SubstitutionTable!();
+        ExceptionSpec!();
+        IndexStr!();
+        BareFunctionType!();
+        CvQualifiers!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

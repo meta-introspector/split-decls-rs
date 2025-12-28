@@ -4,4 +4,4 @@ macro_rules! two_elements_of {
     };
 }
 
-two_elements_of!()
+two_elements_of!();

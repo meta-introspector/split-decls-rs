@@ -4,4 +4,4 @@ macro_rules! effect {
     };
 }
 
-effect!()
+effect!();

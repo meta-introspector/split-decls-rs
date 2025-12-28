@@ -4,4 +4,4 @@ macro_rules! ceprintln {
     };
 }
 
-ceprintln!()
+ceprintln!();

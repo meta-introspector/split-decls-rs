@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Source!();
-        Error!();
-        KeyRef!();
         File!();
+        Source!();
         Options!();
+        Error!();
         Metadata!();
+        KeyRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

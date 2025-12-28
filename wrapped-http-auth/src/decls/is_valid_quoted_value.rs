@@ -4,4 +4,4 @@ macro_rules! is_valid_quoted_value {
     };
 }
 
-is_valid_quoted_value!()
+is_valid_quoted_value!();

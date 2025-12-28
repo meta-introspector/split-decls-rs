@@ -4,4 +4,4 @@ macro_rules! TZ_NAME_LEN {
     };
 }
 
-TZ_NAME_LEN!()
+TZ_NAME_LEN!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UintSize!();
         Cell!();
         AtomicTargetSize!();
+        UintSize!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_409 {
     };
 }
 
-impl_409!()
+impl_409!();

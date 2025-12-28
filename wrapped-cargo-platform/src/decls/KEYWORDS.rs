@@ -4,4 +4,4 @@ macro_rules! KEYWORDS {
     };
 }
 
-KEYWORDS!()
+KEYWORDS!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BuiltinInt!();
-        BuiltinFloat!();
         BuiltinUint!();
+        BuiltinFloat!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! BuiltinType {
     };
 }
 
-BuiltinType!()
+BuiltinType!();

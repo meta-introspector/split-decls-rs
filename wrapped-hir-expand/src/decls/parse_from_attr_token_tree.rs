@@ -4,4 +4,4 @@ macro_rules! parse_from_attr_token_tree {
     };
 }
 
-parse_from_attr_token_tree!()
+parse_from_attr_token_tree!();

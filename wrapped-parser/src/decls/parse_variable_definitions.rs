@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         PositionCalculator!();
-        Positioned!();
-        VariableDefinition!();
         Result!();
+        Positioned!();
         Rule!();
+        VariableDefinition!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_variable_definitions {
     };
 }
 
-parse_variable_definitions!()
+parse_variable_definitions!();

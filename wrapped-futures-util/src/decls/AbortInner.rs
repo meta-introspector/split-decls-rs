@@ -4,4 +4,4 @@ macro_rules! AbortInner {
     };
 }
 
-AbortInner!()
+AbortInner!();

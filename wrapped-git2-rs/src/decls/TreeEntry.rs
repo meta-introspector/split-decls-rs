@@ -4,4 +4,4 @@ macro_rules! TreeEntry {
     };
 }
 
-TreeEntry!()
+TreeEntry!();

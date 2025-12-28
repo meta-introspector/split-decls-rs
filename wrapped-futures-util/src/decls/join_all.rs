@@ -4,4 +4,4 @@ macro_rules! join_all {
     };
 }
 
-join_all!()
+join_all!();

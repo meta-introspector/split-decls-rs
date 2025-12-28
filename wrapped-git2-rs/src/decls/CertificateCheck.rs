@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CertificateCheckStatus!();
         Cert!();
         Error!();
+        CertificateCheckStatus!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CertificateCheck {
     };
 }
 
-CertificateCheck!()
+CertificateCheck!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HybridStrategy!();
-        CaS!();
         AsRaw!();
-        RefCnt!();
+        CaS!();
         Config!();
+        RefCnt!();
+        HybridStrategy!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

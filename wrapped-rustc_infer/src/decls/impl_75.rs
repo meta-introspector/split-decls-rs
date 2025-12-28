@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        InferCtxtUndoLogs!();
+        OpaqueTypeTable!();
+        OpaqueTypeStorageEntries!();
+        OpaqueTypeStorage!();
+    };
+}
+
+macro_rules! impl_75 {
+    () => {
+        deps!();
+        impl < 'tcx > OpaqueTypeStorage < 'tcx > { # [instrument (level = "debug")] pub (crate) fn remove (& mut self , key : OpaqueTypeKey < 'tcx > , prev : Option < OpaqueHiddenType < 'tcx > > ,) { if let Some (prev) = prev { * self . opaque_types . get_mut (& key) . unwrap () = prev ; } else { match self . opaque_types . swap_remove (& key) { None => bug ! ("reverted opaque type inference that was never registered: {:?}" , key) , Some (_) => { } } } } pub (crate) fn pop_duplicate_entry (& mut self) { let entry = self . duplicate_entries . pop () ; assert ! (entry . is_some ()) ; } pub fn is_empty (& self) -> bool { let OpaqueTypeStorage { opaque_types , duplicate_entries } = self ; opaque_types . is_empty () && duplicate_entries . is_empty () } pub (crate) fn take_opaque_types (& mut self ,) -> impl Iterator < Item = (OpaqueTypeKey < 'tcx > , OpaqueHiddenType < 'tcx >) > { let OpaqueTypeStorage { opaque_types , duplicate_entries } = self ; std :: mem :: take (opaque_types) . into_iter () . chain (std :: mem :: take (duplicate_entries)) } pub fn num_entries (& self) -> OpaqueTypeStorageEntries { OpaqueTypeStorageEntries { opaque_types : self . opaque_types . len () , duplicate_entries : self . duplicate_entries . len () , } } pub fn opaque_types_added_since (& self , prev_entries : OpaqueTypeStorageEntries ,) -> impl Iterator < Item = (OpaqueTypeKey < 'tcx > , OpaqueHiddenType < 'tcx >) > { self . opaque_types . iter () . skip (prev_entries . opaque_types) . map (| (k , v) | (* k , * v)) . chain (self . duplicate_entries . iter () . skip (prev_entries . duplicate_entries) . copied ()) } # [doc = " Only returns the opaque types from the lookup table. These are used"] # [doc = " when normalizing opaque types and have a unique key."] # [doc = ""] # [doc = " Outside of canonicalization one should generally use `iter_opaque_types`"] # [doc = " to also consider duplicate entries."] pub fn iter_lookup_table (& self ,) -> impl Iterator < Item = (OpaqueTypeKey < 'tcx > , OpaqueHiddenType < 'tcx >) > { self . opaque_types . iter () . map (| (k , v) | (* k , * v)) } # [doc = " Only returns the opaque types which are stored in `duplicate_entries`."] # [doc = ""] # [doc = " These have to considered when checking all opaque type uses but are e.g."] # [doc = " irrelevant for canonical inputs as nested queries never meaningfully"] # [doc = " accesses them."] pub fn iter_duplicate_entries (& self ,) -> impl Iterator < Item = (OpaqueTypeKey < 'tcx > , OpaqueHiddenType < 'tcx >) > { self . duplicate_entries . iter () . copied () } pub fn iter_opaque_types (& self ,) -> impl Iterator < Item = (OpaqueTypeKey < 'tcx > , OpaqueHiddenType < 'tcx >) > { let OpaqueTypeStorage { opaque_types , duplicate_entries } = self ; opaque_types . iter () . map (| (k , v) | (* k , * v)) . chain (duplicate_entries . iter () . copied ()) } # [inline] pub (crate) fn with_log < 'a > (& 'a mut self , undo_log : & 'a mut InferCtxtUndoLogs < 'tcx > ,) -> OpaqueTypeTable < 'a , 'tcx > { OpaqueTypeTable { storage : self , undo_log } } }
+    };
+}
+
+impl_75!()

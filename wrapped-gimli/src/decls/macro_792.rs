@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugStrOffset!();
         DebugStr!();
+        DebugStrOffset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_792 {
     };
 }
 
-macro_792!()
+macro_792!();

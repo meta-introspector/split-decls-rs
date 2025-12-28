@@ -4,4 +4,4 @@ macro_rules! Deprecation {
     };
 }
 
-Deprecation!()
+Deprecation!();

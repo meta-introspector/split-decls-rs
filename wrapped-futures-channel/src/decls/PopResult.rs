@@ -4,4 +4,4 @@ macro_rules! PopResult {
     };
 }
 
-PopResult!()
+PopResult!();

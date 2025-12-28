@@ -11,4 +11,4 @@ macro_rules! Utf16ReadHandle {
     };
 }
 
-Utf16ReadHandle!()
+Utf16ReadHandle!();

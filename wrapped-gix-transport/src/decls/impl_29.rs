@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TransportWithoutIO!();
-        Error!();
         Protocol!();
+        Error!();
+        TransportWithoutIO!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

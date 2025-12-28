@@ -4,4 +4,4 @@ macro_rules! DEFAULT_LINE_NUM_STYLE {
     };
 }
 
-DEFAULT_LINE_NUM_STYLE!()
+DEFAULT_LINE_NUM_STYLE!();

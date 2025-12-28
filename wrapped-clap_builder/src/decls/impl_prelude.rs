@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ValueEnum!();
-        EnumValueParser!();
-        StringValueParser!();
         Error!();
-        ValueParserFactory!();
-        Result!();
-        Parser!();
         ValueParser!();
+        EnumValueParser!();
+        Result!();
         OsStringValueParser!();
         OsStr!();
+        Parser!();
+        ValueParserFactory!();
+        ValueEnum!();
+        StringValueParser!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_prelude {
     };
 }
 
-impl_prelude!()
+impl_prelude!();

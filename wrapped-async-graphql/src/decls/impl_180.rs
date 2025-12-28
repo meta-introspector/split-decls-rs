@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Visitor!();
-        QueryPathSegment!();
         QueryPathNode!();
-        DefaultValuesOfCorrectType!();
+        QueryPathSegment!();
         VisitorContext!();
+        DefaultValuesOfCorrectType!();
+        Visitor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_180 {
     };
 }
 
-impl_180!()
+impl_180!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Teddy!();
         Fat!();
         Slim!();
+        Teddy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Mask {
     };
 }
 
-Mask!()
+Mask!();

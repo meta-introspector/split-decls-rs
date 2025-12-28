@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Parsed!();
-        ParseResult!();
         Weekday!();
+        ParseResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! set_weekday_with_number_from_monday {
     };
 }
 
-set_weekday_with_number_from_monday!()
+set_weekday_with_number_from_monday!();

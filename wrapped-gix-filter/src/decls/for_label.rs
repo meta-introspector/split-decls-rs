@@ -11,4 +11,4 @@ macro_rules! for_label {
     };
 }
 
-for_label!()
+for_label!();

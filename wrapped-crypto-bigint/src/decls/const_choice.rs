@@ -4,4 +4,4 @@ macro_rules! const_choice {
     };
 }
 
-const_choice!()
+const_choice!();

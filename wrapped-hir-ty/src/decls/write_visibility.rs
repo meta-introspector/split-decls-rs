@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirDisplayError!();
         HirFormatter!();
+        HirDisplayError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! write_visibility {
     };
 }
 
-write_visibility!()
+write_visibility!();

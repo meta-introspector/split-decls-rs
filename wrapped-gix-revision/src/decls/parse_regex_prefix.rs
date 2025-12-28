@@ -11,4 +11,4 @@ macro_rules! parse_regex_prefix {
     };
 }
 
-parse_regex_prefix!()
+parse_regex_prefix!();

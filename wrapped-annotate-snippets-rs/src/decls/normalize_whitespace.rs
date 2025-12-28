@@ -4,4 +4,4 @@ macro_rules! normalize_whitespace {
     };
 }
 
-normalize_whitespace!()
+normalize_whitespace!();

@@ -4,4 +4,4 @@ macro_rules! BENCHMARK_HELLO_SIZE {
     };
 }
 
-BENCHMARK_HELLO_SIZE!()
+BENCHMARK_HELLO_SIZE!();

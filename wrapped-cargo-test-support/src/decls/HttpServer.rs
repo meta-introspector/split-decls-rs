@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Token!();
         RequestCallback!();
+        Token!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HttpServer {
     };
 }
 
-HttpServer!()
+HttpServer!();

@@ -4,4 +4,4 @@ macro_rules! VEC_POS_OFFSET {
     };
 }
 
-VEC_POS_OFFSET!()
+VEC_POS_OFFSET!();

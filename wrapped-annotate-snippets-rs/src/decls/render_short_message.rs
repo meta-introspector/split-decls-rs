@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        StyledBuffer!();
-        TitleStyle!();
-        Element!();
-        Title!();
         ElementStyle!();
+        TitleStyle!();
         Renderer!();
-        SourceMap!();
         Group!();
+        Title!();
+        Element!();
+        StyledBuffer!();
+        SourceMap!();
         LineAnnotation!();
         Origin!();
     };
@@ -20,4 +20,4 @@ macro_rules! render_short_message {
     };
 }
 
-render_short_message!()
+render_short_message!();

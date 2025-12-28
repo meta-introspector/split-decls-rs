@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Change!();
+        Action!();
+        Error!();
         Delegate!();
         Visit!();
-        Change!();
         ChangeRef!();
-        Error!();
-        Action!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_74 {
     };
 }
 
-impl_74!()
+impl_74!();

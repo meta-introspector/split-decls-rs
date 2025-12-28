@@ -4,4 +4,4 @@ macro_rules! ArrayGuard {
     };
 }
 
-ArrayGuard!()
+ArrayGuard!();

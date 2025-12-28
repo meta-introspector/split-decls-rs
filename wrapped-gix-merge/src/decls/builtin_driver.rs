@@ -4,4 +4,4 @@ macro_rules! builtin_driver {
     };
 }
 
-builtin_driver!()
+builtin_driver!();

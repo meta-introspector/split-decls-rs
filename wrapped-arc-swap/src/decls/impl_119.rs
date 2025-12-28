@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AsRaw!();
         CaS!();
         RefCnt!();
-        AsRaw!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

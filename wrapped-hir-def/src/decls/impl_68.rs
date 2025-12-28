@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BuiltinType!();
-        ImportOrExternCrate!();
-        MacroId!();
         ModuleId!();
         PerNs!();
+        BuiltinType!();
+        MacroId!();
+        ImportOrExternCrate!();
         AdtId!();
         ModuleDefId!();
         Visibility!();
@@ -18,4 +18,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

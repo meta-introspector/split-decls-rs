@@ -12,4 +12,4 @@ macro_rules! test_time_from_str {
     };
 }
 
-test_time_from_str!()
+test_time_from_str!();

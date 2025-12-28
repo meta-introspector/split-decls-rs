@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WrappedWaker!();
         FuturesUnordered!();
         SharedPollState!();
         FlowController!();
+        WrappedWaker!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_537 {
     };
 }
 
-impl_537!()
+impl_537!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        SectionId!();
-        Result!();
-        Dwarf!();
-        DwarfFileType!();
-        RangeLists!();
-        Reader!();
-        AbbreviationsCache!();
         LocationLists!();
         DwarfSections!();
+        Result!();
+        SectionId!();
+        Reader!();
+        Dwarf!();
+        RangeLists!();
+        DwarfFileType!();
+        AbbreviationsCache!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_262 {
     };
 }
 
-impl_262!()
+impl_262!();

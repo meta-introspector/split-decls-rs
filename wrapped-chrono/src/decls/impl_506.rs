@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ParseResult!();
         StrftimeItems!();
         NaiveTime!();
         Item!();
+        ParseResult!();
         Parsed!();
-        TimeDelta!();
-        Date!();
         DelayedFormat!();
+        Date!();
         FixedOffset!();
+        TimeDelta!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_506 {
     };
 }
 
-impl_506!()
+impl_506!();

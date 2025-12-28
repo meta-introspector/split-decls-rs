@@ -4,4 +4,4 @@ macro_rules! DefaultHasher {
     };
 }
 
-DefaultHasher!()
+DefaultHasher!();

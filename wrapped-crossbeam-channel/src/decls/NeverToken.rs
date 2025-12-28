@@ -4,4 +4,4 @@ macro_rules! NeverToken {
     };
 }
 
-NeverToken!()
+NeverToken!();

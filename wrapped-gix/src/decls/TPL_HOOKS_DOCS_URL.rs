@@ -4,4 +4,4 @@ macro_rules! TPL_HOOKS_DOCS_URL {
     };
 }
 
-TPL_HOOKS_DOCS_URL!()
+TPL_HOOKS_DOCS_URL!();

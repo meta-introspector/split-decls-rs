@@ -11,4 +11,4 @@ macro_rules! EndianRcSlice {
     };
 }
 
-EndianRcSlice!()
+EndianRcSlice!();

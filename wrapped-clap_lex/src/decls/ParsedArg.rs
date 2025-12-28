@@ -4,4 +4,4 @@ macro_rules! ParsedArg {
     };
 }
 
-ParsedArg!()
+ParsedArg!();

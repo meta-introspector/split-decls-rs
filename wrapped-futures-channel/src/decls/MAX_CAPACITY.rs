@@ -4,4 +4,4 @@ macro_rules! MAX_CAPACITY {
     };
 }
 
-MAX_CAPACITY!()
+MAX_CAPACITY!();

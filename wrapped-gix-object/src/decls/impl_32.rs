@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CommitRefIter!();
         Token!();
-        Error!();
+        CommitRefIter!();
         State!();
-        SignedData!();
+        Error!();
         CommitRefIterRaw!();
+        SignedData!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

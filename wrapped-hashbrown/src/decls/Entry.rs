@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DefaultHashBuilder!();
-        Iter!();
         OccupiedEntry!();
         HashTable!();
         VacantEntry!();
+        Iter!();
+        DefaultHashBuilder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Entry {
     };
 }
 
-Entry!()
+Entry!();

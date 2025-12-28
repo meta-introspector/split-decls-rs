@@ -4,4 +4,4 @@ macro_rules! ListFormat {
     };
 }
 
-ListFormat!()
+ListFormat!();

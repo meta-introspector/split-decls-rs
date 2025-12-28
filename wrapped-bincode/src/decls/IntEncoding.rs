@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Configuration!();
         Fixint!();
         Varint!();
-        Configuration!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IntEncoding {
     };
 }
 
-IntEncoding!()
+IntEncoding!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ParseResult!();
-        DateTime!();
         FixedOffset!();
+        ParseResult!();
         MappedLocalTime!();
         NaiveTime!();
+        DateTime!();
         NaiveDate!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! parse_rfc3339 {
     };
 }
 
-parse_rfc3339!()
+parse_rfc3339!();

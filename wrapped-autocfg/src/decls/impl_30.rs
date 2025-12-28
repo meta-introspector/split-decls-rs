@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Version!();
         AutoCfg!();
-        Error!();
         Rustc!();
+        Error!();
+        Version!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

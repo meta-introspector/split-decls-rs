@@ -11,4 +11,4 @@ macro_rules! NAME_PARAMETER {
     };
 }
 
-NAME_PARAMETER!()
+NAME_PARAMETER!();

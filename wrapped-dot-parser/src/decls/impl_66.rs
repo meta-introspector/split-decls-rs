@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NodeStmt!();
+        NodeID!();
         ParseError!();
         AttrList!();
         AList!();
-        NodeID!();
+        NodeStmt!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

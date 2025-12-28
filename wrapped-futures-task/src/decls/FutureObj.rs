@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LocalFutureObj!();
         Spawn!();
+        LocalFutureObj!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FutureObj {
     };
 }
 
-FutureObj!()
+FutureObj!();

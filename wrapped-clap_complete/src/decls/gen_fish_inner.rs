@@ -4,4 +4,4 @@ macro_rules! gen_fish_inner {
     };
 }
 
-gen_fish_inner!()
+gen_fish_inner!();

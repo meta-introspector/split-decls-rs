@@ -4,4 +4,4 @@ macro_rules! AttributeId {
     };
 }
 
-AttributeId!()
+AttributeId!();

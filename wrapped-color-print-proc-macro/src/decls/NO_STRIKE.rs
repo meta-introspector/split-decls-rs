@@ -4,4 +4,4 @@ macro_rules! NO_STRIKE {
     };
 }
 
-NO_STRIKE!()
+NO_STRIKE!();

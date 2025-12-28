@@ -11,4 +11,4 @@ macro_rules! decompress_all_at_once_with {
     };
 }
 
-decompress_all_at_once_with!()
+decompress_all_at_once_with!();

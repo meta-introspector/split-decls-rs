@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        SelfPipeWrite!();
+        AddSignal!();
+        DeliveryState!();
+        Exfiltrator!();
+        SignalOnly!();
+        Handle!();
+    };
+}
+
+macro_rules! impl_18 {
+    () => {
+        deps!();
+        impl Handle { fn new < W > (write : W , pending : Arc < dyn AddSignal >) -> Self where W : 'static + SelfPipeWrite , { Self { pending , write : Arc :: new (write) , delivery_state : Arc :: new (DeliveryState :: new ()) , } } # [doc = " Registers another signal to the set watched by the associated instance."] # [doc = ""] # [doc = " # Notes"] # [doc = ""] # [doc = " * This is safe to call concurrently from whatever thread."] # [doc = " * This is *not* safe to call from within a signal handler."] # [doc = " * If the signal number was already registered previously, this is a no-op."] # [doc = " * If this errors, the original set of signals is left intact."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " * If the given signal is [forbidden][crate::FORBIDDEN]."] # [doc = " * If the signal number is negative or larger than internal limit. The limit should be"] # [doc = "   larger than any supported signal the OS supports."] # [doc = " * If the relevant [`Exfiltrator`] does not support this particular signal. The default"] # [doc = "   [`SignalOnly`] one supports all signals."] pub fn add_signal (& self , signal : c_int) -> Result < () , Error > { let mut lock = self . delivery_state . registered_signal_ids . lock () . unwrap () ; if lock [signal as usize] . is_some () { return Ok (()) ; } let id = Arc :: clone (& self . pending) . add_signal (Arc :: clone (& self . write) , signal) ? ; lock [signal as usize] = Some (id) ; Ok (()) } # [doc = " Closes the associated instance."] # [doc = ""] # [doc = " This is meant to signalize termination of the signal delivery process."] # [doc = " After calling close:"] # [doc = ""] # [doc = " * [`is_closed`][Handle::is_closed] will return true."] # [doc = " * All currently blocking operations of associated instances"] # [doc = "   are interrupted and terminate."] # [doc = " * Any further operations will not block."] # [doc = " * Further signals may or may not be returned from the iterators. However, if any are"] # [doc = "   returned, these are real signals that happened."] # [doc = ""] # [doc = " The goal is to be able to shut down any background thread that handles only the signals."] pub fn close (& self) { self . delivery_state . closed . store (true , Ordering :: SeqCst) ; self . write . wake_readers () ; } # [doc = " Is it closed?"] # [doc = ""] # [doc = " See [`close`][Handle::close]."] pub fn is_closed (& self) -> bool { self . delivery_state . closed . load (Ordering :: SeqCst) } }
+    };
+}
+
+impl_18!()

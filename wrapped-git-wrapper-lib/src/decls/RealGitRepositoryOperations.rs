@@ -11,4 +11,4 @@ macro_rules! RealGitRepositoryOperations {
     };
 }
 
-RealGitRepositoryOperations!()
+RealGitRepositoryOperations!();

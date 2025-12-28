@@ -4,4 +4,4 @@ macro_rules! hide_from_rustfmt {
     };
 }
 
-hide_from_rustfmt!()
+hide_from_rustfmt!();

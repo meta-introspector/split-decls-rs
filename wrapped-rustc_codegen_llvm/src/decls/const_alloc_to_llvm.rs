@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        CodegenCx!();
+    };
+}
+
+macro_rules! const_alloc_to_llvm {
+    () => {
+        deps!();
+        pub (crate) fn const_alloc_to_llvm < 'll > (cx : & CodegenCx < 'll , '_ > , alloc : & Allocation , is_static : bool ,) -> & 'll Value { if ! is_static { assert ! (alloc . len () != 0) ; } let mut llvals = Vec :: with_capacity (alloc . provenance () . ptrs () . len () + 1) ; let dl = cx . data_layout () ; let pointer_size = dl . pointer_size () ; let pointer_size_bytes = pointer_size . bytes () as usize ; fn append_chunks_of_init_and_uninit_bytes < 'll , 'a , 'b > (llvals : & mut Vec < & 'll Value > , cx : & 'a CodegenCx < 'll , 'b > , alloc : & 'a Allocation , range : Range < usize > ,) { let chunks = alloc . init_mask () . range_as_init_chunks (range . clone () . into ()) ; let chunk_to_llval = move | chunk | match chunk { InitChunk :: Init (range) => { let range = (range . start . bytes () as usize) .. (range . end . bytes () as usize) ; let bytes = alloc . inspect_with_uninit_and_ptr_outside_interpreter (range) ; cx . const_bytes (bytes) } InitChunk :: Uninit (range) => { let len = range . end . bytes () - range . start . bytes () ; cx . const_undef (cx . type_array (cx . type_i8 () , len)) } } ; let max = cx . sess () . opts . unstable_opts . uninit_const_chunk_threshold ; let allow_uninit_chunks = chunks . clone () . take (max . saturating_add (1)) . count () <= max ; if allow_uninit_chunks { llvals . extend (chunks . map (chunk_to_llval)) ; } else { let bytes = alloc . inspect_with_uninit_and_ptr_outside_interpreter (range) ; llvals . push (cx . const_bytes (bytes)) ; } } let mut next_offset = 0 ; for & (offset , prov) in alloc . provenance () . ptrs () . iter () { let offset = offset . bytes () ; assert_eq ! (offset as usize as u64 , offset) ; let offset = offset as usize ; if offset > next_offset { append_chunks_of_init_and_uninit_bytes (& mut llvals , cx , alloc , next_offset .. offset) ; } let ptr_offset = read_target_uint (dl . endian , alloc . inspect_with_uninit_and_ptr_outside_interpreter (offset .. (offset + pointer_size_bytes) ,) ,) . expect ("const_alloc_to_llvm: could not read relocation pointer") as u64 ; let address_space = cx . tcx . global_alloc (prov . alloc_id ()) . address_space (cx) ; llvals . push (cx . scalar_to_backend (InterpScalar :: from_pointer (Pointer :: new (prov , Size :: from_bytes (ptr_offset)) , & cx . tcx) , Scalar :: Initialized { value : Primitive :: Pointer (address_space) , valid_range : WrappingRange :: full (pointer_size) , } , cx . type_ptr_ext (address_space) ,)) ; next_offset = offset + pointer_size_bytes ; } if alloc . len () >= next_offset { let range = next_offset .. alloc . len () ; append_chunks_of_init_and_uninit_bytes (& mut llvals , cx , alloc , range) ; } if let & [data] = & * llvals { data } else { cx . const_struct (& llvals , true) } }
+    };
+}
+
+const_alloc_to_llvm!()

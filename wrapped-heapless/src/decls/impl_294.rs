@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CapacityError!();
-        Vec!();
         LenType!();
+        Vec!();
+        CapacityError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_294 {
     };
 }
 
-impl_294!()
+impl_294!();

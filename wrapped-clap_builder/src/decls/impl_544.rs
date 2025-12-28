@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        KeyType!();
         Arg!();
         MKeyMap!();
-        KeyType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_544 {
     };
 }
 
-impl_544!()
+impl_544!();

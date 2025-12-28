@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         NoFragmentCycles!();
-        VisitorContext!();
-        CycleDetector!();
         Visitor!();
+        CycleDetector!();
+        VisitorContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_218 {
     };
 }
 
-impl_218!()
+impl_218!();

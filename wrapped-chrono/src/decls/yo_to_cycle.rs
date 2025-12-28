@@ -4,4 +4,4 @@ macro_rules! yo_to_cycle {
     };
 }
 
-yo_to_cycle!()
+yo_to_cycle!();

@@ -2,13 +2,13 @@ macro_rules! deps {
     () => {
         Result!();
         SectionId!();
+        Address!();
         RelocationTarget!();
         Writer!();
-        Address!();
-        Relocation!();
-        Section!();
-        Error!();
         RelocateWriter!();
+        Error!();
+        Section!();
+        Relocation!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_698 {
     };
 }
 
-impl_698!()
+impl_698!();

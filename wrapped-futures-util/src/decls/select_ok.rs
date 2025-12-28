@@ -4,4 +4,4 @@ macro_rules! select_ok {
     };
 }
 
-select_ok!()
+select_ok!();

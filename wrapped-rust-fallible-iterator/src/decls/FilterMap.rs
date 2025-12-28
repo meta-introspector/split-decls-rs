@@ -4,4 +4,4 @@ macro_rules! FilterMap {
     };
 }
 
-FilterMap!()
+FilterMap!();

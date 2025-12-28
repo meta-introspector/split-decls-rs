@@ -4,4 +4,4 @@ macro_rules! promotable_to_vec {
     };
 }
 
-promotable_to_vec!()
+promotable_to_vec!();

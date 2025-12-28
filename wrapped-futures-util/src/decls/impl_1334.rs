@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StreamExt!();
-        AbortHandle!();
         AbortRegistration!();
+        AbortHandle!();
         Aborted!();
+        StreamExt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1334 {
     };
 }
 
-impl_1334!()
+impl_1334!();

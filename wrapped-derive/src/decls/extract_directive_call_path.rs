@@ -4,4 +4,4 @@ macro_rules! extract_directive_call_path {
     };
 }
 
-extract_directive_call_path!()
+extract_directive_call_path!();

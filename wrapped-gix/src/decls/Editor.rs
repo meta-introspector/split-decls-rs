@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Clone!();
-        Options!();
         Repository!();
+        Options!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Editor {
     };
 }
 
-Editor!()
+Editor!();

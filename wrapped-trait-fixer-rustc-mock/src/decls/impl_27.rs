@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MockInferCtxt!();
-        MockInferCtxtAt!();
-        MockObligationCause!();
         MockParamEnv!();
+        MockInferCtxt!();
+        MockObligationCause!();
+        MockInferCtxtAt!();
     };
 }
 

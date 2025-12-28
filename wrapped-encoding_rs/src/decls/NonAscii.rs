@@ -4,4 +4,4 @@ macro_rules! NonAscii {
     };
 }
 
-NonAscii!()
+NonAscii!();

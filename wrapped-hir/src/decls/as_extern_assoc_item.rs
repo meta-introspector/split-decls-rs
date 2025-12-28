@@ -11,4 +11,4 @@ macro_rules! as_extern_assoc_item {
     };
 }
 
-as_extern_assoc_item!()
+as_extern_assoc_item!();

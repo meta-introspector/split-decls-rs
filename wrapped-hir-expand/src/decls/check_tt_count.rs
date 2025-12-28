@@ -12,4 +12,4 @@ macro_rules! check_tt_count {
     };
 }
 
-check_tt_count!()
+check_tt_count!();

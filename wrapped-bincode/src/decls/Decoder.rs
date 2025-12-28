@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Sealed!();
-        Config!();
+        WithContext!();
         DecodeError!();
         Reader!();
-        WithContext!();
+        Config!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Decoder {
     };
 }
 
-Decoder!()
+Decoder!();

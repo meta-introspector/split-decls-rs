@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Engine!();
         StrConsumer!();
         EncoderWriter!();
+        Engine!();
         Utf8SingleCodeUnitWriter!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! EncoderStringWriter {
     };
 }
 
-EncoderStringWriter!()
+EncoderStringWriter!();

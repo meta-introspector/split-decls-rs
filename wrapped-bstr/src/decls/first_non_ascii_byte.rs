@@ -4,4 +4,4 @@ macro_rules! first_non_ascii_byte {
     };
 }
 
-first_non_ascii_byte!()
+first_non_ascii_byte!();

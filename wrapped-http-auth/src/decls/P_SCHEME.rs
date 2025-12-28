@@ -4,4 +4,4 @@ macro_rules! P_SCHEME {
     };
 }
 
-P_SCHEME!()
+P_SCHEME!();

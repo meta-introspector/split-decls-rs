@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        DefaultConfig!();
+    };
+}
+
+macro_rules! Config {
+    () => {
+        deps!();
+        # [doc = " Configuration parameters which can be overridden to tune the behavior of a slab."] pub trait Config : Sized { # [doc = " The maximum number of threads which can access the slab."] # [doc = ""] # [doc = " This value (rounded to a power of two) determines the number of shards"] # [doc = " in the slab. If a thread is created, accesses the slab, and then terminates,"] # [doc = " its shard may be reused and thus does not count against the maximum"] # [doc = " number of threads once the thread has terminated."] const MAX_THREADS : usize = DefaultConfig :: MAX_THREADS ; # [doc = " The maximum number of pages in each shard in the slab."] # [doc = ""] # [doc = " This value, in combination with `INITIAL_PAGE_SIZE`, determines how many"] # [doc = " bits of each index are used to represent page addresses."] const MAX_PAGES : usize = DefaultConfig :: MAX_PAGES ; # [doc = " The size of the first page in each shard."] # [doc = ""] # [doc = " When a page in a shard has been filled with values, a new page"] # [doc = " will be allocated that is twice as large as the previous page. Thus, the"] # [doc = " second page will be twice this size, and the third will be four times"] # [doc = " this size, and so on."] # [doc = ""] # [doc = " Note that page sizes must be powers of two. If this value is not a power"] # [doc = " of two, it will be rounded to the next power of two."] const INITIAL_PAGE_SIZE : usize = DefaultConfig :: INITIAL_PAGE_SIZE ; # [doc = " Sets a number of high-order bits in each index which are reserved from"] # [doc = " user code."] # [doc = ""] # [doc = " Note that these bits are taken from the generation counter; if the page"] # [doc = " address and thread IDs are configured to use a large number of bits,"] # [doc = " reserving additional bits will decrease the period of the generation"] # [doc = " counter. These should thus be used relatively sparingly, to ensure that"] # [doc = " generation counters are able to effectively prevent the ABA problem."] const RESERVED_BITS : usize = 0 ; }
+    };
+}
+
+Config!()

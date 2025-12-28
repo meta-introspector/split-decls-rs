@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        DropFlagState!();
+        InactiveVariants!();
+        MaybeReachable!();
+        Analysis!();
+        LookupResult!();
+        MaybePlacesSwitchIntData!();
+        MaybeInitializedPlaces!();
+    };
+}
+
+macro_rules! impl_146 {
+    () => {
+        deps!();
+        impl < 'tcx > Analysis < 'tcx > for MaybeInitializedPlaces < '_ , 'tcx > { # [doc = " There can be many more `MovePathIndex` than there are locals in a MIR body."] # [doc = " We use a mixed bitset to avoid paying too high a memory footprint."] type Domain = MaybeReachable < MixedBitSet < MovePathIndex > > ; type SwitchIntData = MaybePlacesSwitchIntData < 'tcx > ; const NAME : & 'static str = "maybe_init" ; fn bottom_value (& self , _ : & mir :: Body < 'tcx >) -> Self :: Domain { MaybeReachable :: Unreachable } fn initialize_start_block (& self , _ : & mir :: Body < 'tcx > , state : & mut Self :: Domain) { * state = MaybeReachable :: Reachable (MixedBitSet :: new_empty (self . move_data () . move_paths . len ())) ; drop_flag_effects_for_function_entry (self . body , self . move_data , | path , s | { assert ! (s == DropFlagState :: Present) ; state . gen_ (path) ; }) ; } fn apply_primary_statement_effect (& mut self , state : & mut Self :: Domain , statement : & mir :: Statement < 'tcx > , location : Location ,) { drop_flag_effects_for_location (self . body , self . move_data , location , | path , s | { Self :: update_bits (state , path , s) }) ; if self . tcx . sess . opts . unstable_opts . precise_enum_drop_elaboration && let Some ((_ , rvalue)) = statement . kind . as_assign () && let mir :: Rvalue :: Ref (_ , mir :: BorrowKind :: Mut { .. } , place) | mir :: Rvalue :: RawPtr (_ , place) = rvalue && let LookupResult :: Exact (mpi) = self . move_data () . rev_lookup . find (place . as_ref ()) { on_all_children_bits (self . move_data () , mpi , | child | { state . gen_ (child) ; }) } } fn apply_primary_terminator_effect < 'mir > (& mut self , state : & mut Self :: Domain , terminator : & 'mir mir :: Terminator < 'tcx > , location : Location ,) -> TerminatorEdges < 'mir , 'tcx > { let mut edges = terminator . edges () ; if self . skip_unreachable_unwind && let mir :: TerminatorKind :: Drop { target , unwind , place , replace : _ , drop : _ , async_fut : _ , } = terminator . kind && matches ! (unwind , mir :: UnwindAction :: Cleanup (_)) && self . is_unwind_dead (place , state) { edges = TerminatorEdges :: Single (target) ; } drop_flag_effects_for_location (self . body , self . move_data , location , | path , s | { Self :: update_bits (state , path , s) }) ; edges } fn apply_call_return_effect (& mut self , state : & mut Self :: Domain , _block : mir :: BasicBlock , return_places : CallReturnPlaces < '_ , 'tcx > ,) { return_places . for_each (| place | { on_lookup_result_bits (self . move_data () , self . move_data () . rev_lookup . find (place . as_ref ()) , | mpi | { state . gen_ (mpi) ; } ,) ; }) ; } fn get_switch_int_data (& mut self , block : mir :: BasicBlock , discr : & mir :: Operand < 'tcx > ,) -> Option < Self :: SwitchIntData > { if ! self . tcx . sess . opts . unstable_opts . precise_enum_drop_elaboration { return None ; } MaybePlacesSwitchIntData :: new (self . tcx , self . body , block , discr) } fn apply_switch_int_edge_effect (& mut self , data : & mut Self :: SwitchIntData , state : & mut Self :: Domain , value : SwitchTargetValue , targets : & mir :: SwitchTargets ,) { let inactive_variants = match value { SwitchTargetValue :: Normal (value) => InactiveVariants :: Active (data . next_discr (value)) , SwitchTargetValue :: Otherwise if self . exclude_inactive_in_otherwise => { InactiveVariants :: Inactives (data . variants (targets)) } _ => return , } ; drop_flag_effects :: on_all_inactive_variants (self . move_data , data . enum_place , & inactive_variants , | mpi | state . kill (mpi) ,) ; } }
+    };
+}
+
+impl_146!()

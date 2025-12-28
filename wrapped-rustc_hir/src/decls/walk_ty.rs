@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Path!();
+        Pat!();
+        AmbigArg!();
+        Ty!();
+        TyKind!();
+        Visitor!();
+    };
+}
+
+macro_rules! walk_ty {
+    () => {
+        deps!();
+        pub fn walk_ty < 'v , V : Visitor < 'v > > (visitor : & mut V , typ : & 'v Ty < 'v , AmbigArg >) -> V :: Result { let Ty { hir_id , span : _ , kind } = typ ; try_visit ! (visitor . visit_id (* hir_id)) ; match * kind { TyKind :: Slice (ref ty) => try_visit ! (visitor . visit_ty_unambig (ty)) , TyKind :: Ptr (ref mutable_type) => try_visit ! (visitor . visit_ty_unambig (mutable_type . ty)) , TyKind :: Ref (ref lifetime , ref mutable_type) => { try_visit ! (visitor . visit_lifetime (lifetime)) ; try_visit ! (visitor . visit_ty_unambig (mutable_type . ty)) ; } TyKind :: Never => { } TyKind :: Tup (tuple_element_types) => { walk_list ! (visitor , visit_ty_unambig , tuple_element_types) ; } TyKind :: FnPtr (ref function_declaration) => { walk_list ! (visitor , visit_generic_param , function_declaration . generic_params) ; try_visit ! (visitor . visit_fn_decl (function_declaration . decl)) ; } TyKind :: UnsafeBinder (ref unsafe_binder) => { walk_list ! (visitor , visit_generic_param , unsafe_binder . generic_params) ; try_visit ! (visitor . visit_ty_unambig (unsafe_binder . inner_ty)) ; } TyKind :: Path (ref qpath) => { try_visit ! (visitor . visit_qpath (qpath , typ . hir_id , typ . span)) ; } TyKind :: OpaqueDef (opaque) => { try_visit ! (visitor . visit_opaque_ty (opaque)) ; } TyKind :: TraitAscription (bounds) => { walk_list ! (visitor , visit_param_bound , bounds) ; } TyKind :: Array (ref ty , ref length) => { try_visit ! (visitor . visit_ty_unambig (ty)) ; try_visit ! (visitor . visit_const_arg_unambig (length)) ; } TyKind :: TraitObject (bounds , ref lifetime) => { for bound in bounds { try_visit ! (visitor . visit_poly_trait_ref (bound)) ; } try_visit ! (visitor . visit_lifetime (lifetime)) ; } TyKind :: Typeof (ref expression) => try_visit ! (visitor . visit_anon_const (expression)) , TyKind :: InferDelegation (..) | TyKind :: Err (_) => { } TyKind :: Pat (ty , pat) => { try_visit ! (visitor . visit_ty_unambig (ty)) ; try_visit ! (visitor . visit_pattern_type_pattern (pat)) ; } } V :: Result :: output () }
+    };
+}
+
+walk_ty!()

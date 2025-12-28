@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LinkedHashSet!();
-        Iter!();
         Drain!();
+        Iter!();
+        LinkedHashSet!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

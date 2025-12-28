@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         DecoderImpl!();
         Config!();
-        SliceReader!();
         BorrowedSerdeDecoder!();
+        SliceReader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

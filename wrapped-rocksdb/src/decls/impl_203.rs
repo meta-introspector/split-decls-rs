@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        WriteOptions!();
+        WriteBatch!();
+    };
+}
+
+macro_rules! impl_203 {
+    () => {
+        deps!();
+        impl WriteOptions { pub fn new () -> WriteOptions { WriteOptions :: default () } # [doc = " Sets the sync mode. If true, the write will be flushed"] # [doc = " from the operating system buffer cache before the write is considered complete."] # [doc = " If this flag is true, writes will be slower."] # [doc = ""] # [doc = " Default: false"] pub fn set_sync (& mut self , sync : bool) { unsafe { ffi :: rocksdb_writeoptions_set_sync (self . inner , c_uchar :: from (sync)) ; } } # [doc = " Sets whether WAL should be active or not."] # [doc = " If true, writes will not first go to the write ahead log,"] # [doc = " and the write may got lost after a crash."] # [doc = ""] # [doc = " Default: false"] pub fn disable_wal (& mut self , disable : bool) { unsafe { ffi :: rocksdb_writeoptions_disable_WAL (self . inner , c_int :: from (disable)) ; } } # [doc = " If true and if user is trying to write to column families that don't exist (they were dropped),"] # [doc = " ignore the write (don't return an error). If there are multiple writes in a WriteBatch,"] # [doc = " other writes will succeed."] # [doc = ""] # [doc = " Default: false"] pub fn set_ignore_missing_column_families (& mut self , ignore : bool) { unsafe { ffi :: rocksdb_writeoptions_set_ignore_missing_column_families (self . inner , c_uchar :: from (ignore) ,) ; } } # [doc = " If true and we need to wait or sleep for the write request, fails"] # [doc = " immediately with Status::Incomplete()."] # [doc = ""] # [doc = " Default: false"] pub fn set_no_slowdown (& mut self , no_slowdown : bool) { unsafe { ffi :: rocksdb_writeoptions_set_no_slowdown (self . inner , c_uchar :: from (no_slowdown)) ; } } # [doc = " If true, this write request is of lower priority if compaction is"] # [doc = " behind. In this case, no_slowdown = true, the request will be cancelled"] # [doc = " immediately with Status::Incomplete() returned. Otherwise, it will be"] # [doc = " slowed down. The slowdown value is determined by RocksDB to guarantee"] # [doc = " it introduces minimum impacts to high priority writes."] # [doc = ""] # [doc = " Default: false"] pub fn set_low_pri (& mut self , v : bool) { unsafe { ffi :: rocksdb_writeoptions_set_low_pri (self . inner , c_uchar :: from (v)) ; } } # [doc = " If true, writebatch will maintain the last insert positions of each"] # [doc = " memtable as hints in concurrent write. It can improve write performance"] # [doc = " in concurrent writes if keys in one writebatch are sequential. In"] # [doc = " non-concurrent writes (when concurrent_memtable_writes is false) this"] # [doc = " option will be ignored."] # [doc = ""] # [doc = " Default: false"] pub fn set_memtable_insert_hint_per_batch (& mut self , v : bool) { unsafe { ffi :: rocksdb_writeoptions_set_memtable_insert_hint_per_batch (self . inner , c_uchar :: from (v) ,) ; } } }
+    };
+}
+
+impl_203!()

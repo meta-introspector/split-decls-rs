@@ -4,4 +4,4 @@ macro_rules! PointType {
     };
 }
 
-PointType!()
+PointType!();

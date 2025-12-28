@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Events!();
-        Socket!();
-        MultiData!();
-        Easy2Handle!();
-        RawMulti!();
-        MultiError!();
-        MultiWaker!();
-        Error!();
-        Easy!();
-        SocketEvents!();
-        DetachGuard!();
-        Multi!();
-        WaitFd!();
         EasyHandle!();
+        MultiData!();
+        MultiWaker!();
+        RawMulti!();
+        DetachGuard!();
         Message!();
+        Easy2Handle!();
+        WaitFd!();
+        MultiError!();
+        Events!();
+        Multi!();
+        Socket!();
+        Error!();
+        SocketEvents!();
         Easy2!();
+        Easy!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

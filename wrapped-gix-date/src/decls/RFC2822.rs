@@ -11,4 +11,4 @@ macro_rules! RFC2822 {
     };
 }
 
-RFC2822!()
+RFC2822!();

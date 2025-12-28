@@ -4,4 +4,4 @@ macro_rules! stream_select_internal {
     };
 }
 
-stream_select_internal!()
+stream_select_internal!();

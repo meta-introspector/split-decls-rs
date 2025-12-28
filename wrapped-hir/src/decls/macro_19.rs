@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
         ConstParam!();
-        Static!();
-        Crate!();
         Function!();
         Trait!();
-        TypeOrConstParam!();
-        Const!();
-        LifetimeParam!();
-        Macro!();
-        ExternCrateDecl!();
-        Struct!();
-        Enum!();
-        Impl!();
-        Module!();
-        TypeParam!();
-        TypeAlias!();
         ExternBlock!();
+        Crate!();
+        Struct!();
+        TypeParam!();
+        TypeOrConstParam!();
+        ExternCrateDecl!();
+        TypeAlias!();
         Union!();
+        Static!();
+        LifetimeParam!();
+        Enum!();
+        Macro!();
+        Module!();
+        Const!();
+        Impl!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! macro_19 {
     };
 }
 
-macro_19!()
+macro_19!();

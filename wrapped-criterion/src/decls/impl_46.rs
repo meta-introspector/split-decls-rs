@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        BatchSize!();
         Criterion!();
         Duration!();
+        AsyncExecutor!();
         AsyncBencher!();
         Measurement!();
-        AsyncExecutor!();
-        BatchSize!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

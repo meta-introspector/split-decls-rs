@@ -3,12 +3,12 @@ macro_rules! deps {
         DebuggingInformationEntry!();
         Address!();
         LittleEndian!();
-        Attribute!();
         Abbreviation!();
-        EntriesCursor!();
-        Result!();
         DebugInfo!();
         Reader!();
+        Attribute!();
+        EntriesCursor!();
+        Result!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_645 {
     };
 }
 
-impl_645!()
+impl_645!();

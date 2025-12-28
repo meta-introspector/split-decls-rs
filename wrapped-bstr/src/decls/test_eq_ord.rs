@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BString!();
         BStr!();
+        BString!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_eq_ord {
     };
 }
 
-test_eq_ord!()
+test_eq_ord!();

@@ -12,4 +12,4 @@ macro_rules! poll_01_to_03 {
     };
 }
 
-poll_01_to_03!()
+poll_01_to_03!();

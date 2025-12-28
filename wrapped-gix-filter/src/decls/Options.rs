@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Configuration!();
-        Driver!();
         CrlfRoundTripCheck!();
+        Driver!();
+        Configuration!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Options {
     };
 }
 
-Options!()
+Options!();

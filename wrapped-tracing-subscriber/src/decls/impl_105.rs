@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Layered!();
+        Layer!();
+    };
+}
+
+macro_rules! impl_105 {
+    () => {
+        deps!();
+        impl < A , B , S > Layered < A , B , S > where A : Layer < S > , S : Subscriber , { pub (super) fn new (layer : A , inner : B , inner_has_layer_filter : bool) -> Self { # [cfg (all (feature = "registry" , feature = "std"))] let inner_is_registry = TypeId :: of :: < S > () == TypeId :: of :: < crate :: registry :: Registry > () ; # [cfg (not (all (feature = "registry" , feature = "std")))] let inner_is_registry = false ; let inner_has_layer_filter = inner_has_layer_filter || inner_is_registry ; let has_layer_filter = filter :: layer_has_plf (& layer) ; Self { layer , inner , has_layer_filter , inner_has_layer_filter , inner_is_registry , _s : PhantomData , } } fn pick_interest (& self , outer : Interest , inner : impl FnOnce () -> Interest) -> Interest { if self . has_layer_filter { return inner () ; } if outer . is_never () { # [cfg (feature = "registry")] filter :: FilterState :: take_interest () ; return outer ; } let inner = inner () ; if outer . is_sometimes () { return outer ; } if inner . is_never () && self . inner_has_layer_filter { return Interest :: sometimes () ; } inner } fn pick_level_hint (& self , outer_hint : Option < LevelFilter > , inner_hint : Option < LevelFilter > , inner_is_none : bool ,) -> Option < LevelFilter > { if self . inner_is_registry { return outer_hint ; } if self . has_layer_filter && self . inner_has_layer_filter { return Some (cmp :: max (outer_hint ? , inner_hint ?)) ; } if self . has_layer_filter && inner_hint . is_none () { return None ; } if self . inner_has_layer_filter && outer_hint . is_none () { return None ; } if super :: layer_is_none (& self . layer) { return cmp :: max (outer_hint , Some (inner_hint ?)) ; } if inner_is_none && inner_hint == Some (LevelFilter :: OFF) { return outer_hint ; } cmp :: max (outer_hint , inner_hint) } }
+    };
+}
+
+impl_105!()

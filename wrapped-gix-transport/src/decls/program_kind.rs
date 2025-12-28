@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Protocol!();
         Error!();
         Connection!();
         ProgramKind!();
+        Protocol!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! program_kind {
     };
 }
 
-program_kind!()
+program_kind!();

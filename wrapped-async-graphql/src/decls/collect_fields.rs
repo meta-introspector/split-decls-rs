@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ServerError!();
-        ServerResult!();
+        BoxFieldFuture!();
+        Object!();
         ContextSelectionSet!();
         Field!();
-        BoxFieldFuture!();
+        ServerResult!();
         FieldValue!();
-        Object!();
-        IntrospectionMode!();
         Schema!();
+        IntrospectionMode!();
+        ServerError!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! collect_fields {
     };
 }
 
-collect_fields!()
+collect_fields!();

@@ -11,4 +11,4 @@ macro_rules! owned_to_mut {
     };
 }
 
-owned_to_mut!()
+owned_to_mut!();

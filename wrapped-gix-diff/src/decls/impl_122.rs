@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Pipeline!();
-        Platform!();
-        Mode!();
         Options!();
+        Platform!();
+        Pipeline!();
+        Mode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_122 {
     };
 }
 
-impl_122!()
+impl_122!();

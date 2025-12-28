@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CloseFuture!();
-        WriteAllFuture!();
         WriteFuture!();
         WriteVectoredFuture!();
+        WriteAllFuture!();
         FlushFuture!();
+        CloseFuture!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! AsyncWriteExt {
     };
 }
 
-AsyncWriteExt!()
+AsyncWriteExt!();

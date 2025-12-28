@@ -4,4 +4,4 @@ macro_rules! bcrypt {
     };
 }
 
-bcrypt!()
+bcrypt!();

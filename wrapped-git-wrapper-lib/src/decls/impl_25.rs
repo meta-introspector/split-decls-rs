@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LibGitAdapter!();
         GitAdapter!();
+        LibGitAdapter!();
         SubmoduleStat!();
         Result!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

@@ -13,4 +13,4 @@ macro_rules! test_decode_u128 {
     };
 }
 
-test_decode_u128!()
+test_decode_u128!();

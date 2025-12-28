@@ -4,4 +4,4 @@ macro_rules! Checked {
     };
 }
 
-Checked!()
+Checked!();

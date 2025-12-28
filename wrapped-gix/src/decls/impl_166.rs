@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Kind!();
-        Tree!();
         ObjectDetached!();
+        Tree!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

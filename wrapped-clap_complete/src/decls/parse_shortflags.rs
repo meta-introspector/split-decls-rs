@@ -4,4 +4,4 @@ macro_rules! parse_shortflags {
     };
 }
 
-parse_shortflags!()
+parse_shortflags!();

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        ToTokens!();
+    };
+}
+
+macro_rules! TokenStreamExt {
+    () => {
+        deps!();
+        # [doc = " TokenStream extension trait with methods for appending tokens."] # [doc = ""] # [doc = " This trait is sealed and cannot be implemented outside of the `quote` crate."] pub trait TokenStreamExt : private :: Sealed { # [doc = " For use by `ToTokens` implementations."] # [doc = ""] # [doc = " Appends the token specified to this list of tokens."] fn append < U > (& mut self , token : U) where U : Into < TokenTree > ; # [doc = " For use by `ToTokens` implementations."] # [doc = ""] # [doc = " ```"] # [doc = " # use quote::{quote, TokenStreamExt, ToTokens};"] # [doc = " # use proc_macro2::TokenStream;"] # [doc = " #"] # [doc = " struct X;"] # [doc = ""] # [doc = " impl ToTokens for X {"] # [doc = "     fn to_tokens(&self, tokens: &mut TokenStream) {"] # [doc = "         tokens.append_all(&[true, false]);"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " let tokens = quote!(#X);"] # [doc = " assert_eq!(tokens.to_string(), \"true false\");"] # [doc = " ```"] fn append_all < I > (& mut self , iter : I) where I : IntoIterator , I :: Item : ToTokens ; # [doc = " For use by `ToTokens` implementations."] # [doc = ""] # [doc = " Appends all of the items in the iterator `I`, separated by the tokens"] # [doc = " `U`."] fn append_separated < I , U > (& mut self , iter : I , op : U) where I : IntoIterator , I :: Item : ToTokens , U : ToTokens ; # [doc = " For use by `ToTokens` implementations."] # [doc = ""] # [doc = " Appends all tokens in the iterator `I`, appending `U` after each"] # [doc = " element, including after the last element of the iterator."] fn append_terminated < I , U > (& mut self , iter : I , term : U) where I : IntoIterator , I :: Item : ToTokens , U : ToTokens ; }
+    };
+}
+
+TokenStreamExt!()

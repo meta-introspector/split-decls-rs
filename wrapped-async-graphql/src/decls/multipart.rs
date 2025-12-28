@@ -4,4 +4,4 @@ macro_rules! multipart {
     };
 }
 
-multipart!()
+multipart!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Reader!();
-        Result!();
         RawRange!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_577 {
     };
 }
 
-impl_577!()
+impl_577!();

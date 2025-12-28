@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CopyOptions!();
-        Result!();
         TransitProcess!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! move_file_with_progress {
     };
 }
 
-move_file_with_progress!()
+move_file_with_progress!();

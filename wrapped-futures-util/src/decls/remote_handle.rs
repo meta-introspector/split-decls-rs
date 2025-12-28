@@ -4,4 +4,4 @@ macro_rules! remote_handle {
     };
 }
 
-remote_handle!()
+remote_handle!();

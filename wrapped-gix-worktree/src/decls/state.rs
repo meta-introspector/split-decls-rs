@@ -4,4 +4,4 @@ macro_rules! state {
     };
 }
 
-state!()
+state!();

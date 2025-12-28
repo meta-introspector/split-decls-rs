@@ -1,0 +1,7 @@
+macro_rules! macro_65 {
+    () => {
+        declare_lint ! { # [doc = " The `bad_asm_style` lint detects the use of the `.intel_syntax` and"] # [doc = " `.att_syntax` directives."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,ignore (fails on non-x86_64)"] # [doc = " #[cfg(target_arch=\"x86_64\")]"] # [doc = " use std::arch::asm;"] # [doc = ""] # [doc = " fn main() {"] # [doc = "     #[cfg(target_arch=\"x86_64\")]"] # [doc = "     unsafe {"] # [doc = "         asm!("] # [doc = "             \".att_syntax\","] # [doc = "             \"movq %{0}, %{0}\", in(reg) 0usize"] # [doc = "         );"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " This will produce:"] # [doc = ""] # [doc = " ```text"] # [doc = " warning: avoid using `.att_syntax`, prefer using `options(att_syntax)` instead"] # [doc = "  --> src/main.rs:8:14"] # [doc = "   |"] # [doc = " 8 |             \".att_syntax\","] # [doc = "   |              ^^^^^^^^^^^"] # [doc = "   |"] # [doc = "   = note: `#[warn(bad_asm_style)]` on by default"] # [doc = " ```"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " On x86, `asm!` uses the intel assembly syntax by default. While this"] # [doc = " can be switched using assembler directives like `.att_syntax`, using the"] # [doc = " `att_syntax` option is recommended instead because it will also properly"] # [doc = " prefix register placeholders with `%` as required by AT&T syntax."] pub BAD_ASM_STYLE , Warn , "incorrect use of inline assembly" , }
+    };
+}
+
+macro_65!()

@@ -10,4 +10,4 @@ ok!();
     };
 }
 
-test_expr_with_attr!()
+test_expr_with_attr!();

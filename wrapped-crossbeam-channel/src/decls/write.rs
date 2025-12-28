@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Token!();
         Sender!();
         SenderFlavor!();
-        Token!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write {
     };
 }
 
-write!()
+write!();

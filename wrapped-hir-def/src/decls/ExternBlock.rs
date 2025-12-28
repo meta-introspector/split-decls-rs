@@ -4,4 +4,4 @@ macro_rules! ExternBlock {
     };
 }
 
-ExternBlock!()
+ExternBlock!();

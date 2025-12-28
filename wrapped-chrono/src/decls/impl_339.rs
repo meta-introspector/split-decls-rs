@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        DelayedFormat!();
-        Mdf!();
-        YearFlags!();
+        Days!();
+        Parsed!();
+        NaiveDateDaysIterator!();
         Timelike!();
         NaiveDateTime!();
-        NaiveDateWeeksIterator!();
-        Parsed!();
-        Weekday!();
-        Days!();
-        TimeDelta!();
-        Item!();
-        NaiveDateDaysIterator!();
-        ParseResult!();
-        Months!();
         NaiveWeek!();
-        NaiveDate!();
         StrftimeItems!();
+        Mdf!();
+        TimeDelta!();
         NaiveTime!();
+        Weekday!();
+        NaiveDate!();
+        DelayedFormat!();
+        Item!();
+        ParseResult!();
+        NaiveDateWeeksIterator!();
+        Months!();
+        YearFlags!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_339 {
     };
 }
 
-impl_339!()
+impl_339!();

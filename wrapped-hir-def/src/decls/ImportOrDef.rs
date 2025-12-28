@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        GlobId!();
         ModuleDefId!();
         ImportId!();
         ExternCrate!();
-        GlobId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ImportOrDef {
     };
 }
 
-ImportOrDef!()
+ImportOrDef!();

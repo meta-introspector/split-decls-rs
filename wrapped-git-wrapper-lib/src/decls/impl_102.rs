@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        GitExecutor!();
         RealGitWrapperLib!();
-        Execv!();
         GitRepositoryOperations!();
+        Execv!();
         GhExecutor!();
         GitAdapter!();
         GitWrapperLibTrait!();
+        GitExecutor!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

@@ -4,4 +4,4 @@ macro_rules! gbk_left_ideograph_decode {
     };
 }
 
-gbk_left_ideograph_decode!()
+gbk_left_ideograph_decode!();

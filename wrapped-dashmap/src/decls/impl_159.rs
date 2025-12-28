@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        OccupiedEntry!();
         IterMut!();
+        RefMut!();
         RwLockReadGuardDetached!();
         DashMap!();
-        EntryRef!();
-        TryResult!();
-        OccupiedEntryRef!();
-        RefMut!();
-        VacantEntry!();
-        RwLockWriteGuardDetached!();
-        Iter!();
-        VacantEntryRef!();
         Entry!();
+        Iter!();
+        EntryRef!();
+        OccupiedEntryRef!();
+        VacantEntryRef!();
+        RwLockWriteGuardDetached!();
         Ref!();
+        TryResult!();
+        VacantEntry!();
+        OccupiedEntry!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_159 {
     };
 }
 
-impl_159!()
+impl_159!();

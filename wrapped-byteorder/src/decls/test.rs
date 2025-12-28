@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        BigEndian!();
         NativeEndian!();
         LittleEndian!();
-        BigEndian!();
         ByteOrder!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

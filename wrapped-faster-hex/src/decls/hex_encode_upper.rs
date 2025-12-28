@@ -11,4 +11,4 @@ macro_rules! hex_encode_upper {
     };
 }
 
-hex_encode_upper!()
+hex_encode_upper!();

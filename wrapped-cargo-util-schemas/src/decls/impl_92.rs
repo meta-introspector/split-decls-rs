@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TomlInheritedField!();
-        InheritableString!();
         Result!();
+        InheritableString!();
+        TomlInheritedField!();
         InheritableField!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_92 {
     };
 }
 
-impl_92!()
+impl_92!();

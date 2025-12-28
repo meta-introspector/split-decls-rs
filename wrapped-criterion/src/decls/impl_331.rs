@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Float!();
+        Percentiles!();
         Error!();
         Result!();
-        Percentiles!();
+        Float!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_331 {
     };
 }
 
-impl_331!()
+impl_331!();

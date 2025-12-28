@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        GetDisjointMutError!();
+        Entry!();
+        Slab!();
+        Builder!();
     };
 }
 
 macro_rules! impl_9 {
     () => {
         deps!();
-        impl fmt :: Display for GetDisjointMutError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let msg = match self { GetDisjointMutError :: IndexVacant => "an index is vacant" , GetDisjointMutError :: IndexOutOfBounds => "an index is out of bounds" , GetDisjointMutError :: OverlappingIndices => "there were overlapping indices" , } ; fmt :: Display :: fmt (msg , f) } }
+        impl < T > Builder < T > { pub (crate) fn with_capacity (capacity : usize) -> Self { Self { slab : Slab :: with_capacity (capacity) , vacant_list_broken : false , first_vacant_index : None , } } pub (crate) fn pair (& mut self , key : usize , value : T) { let slab = & mut self . slab ; if key < slab . entries . len () { if let Entry :: Vacant (_) = slab . entries [key] { self . vacant_list_broken = true ; slab . len += 1 ; } slab . entries [key] = Entry :: Occupied (value) ; } else { if self . first_vacant_index . is_none () && slab . entries . len () < key { self . first_vacant_index = Some (slab . entries . len ()) ; } while slab . entries . len () < key { let next = slab . next ; slab . next = slab . entries . len () ; slab . entries . push (Entry :: Vacant (next)) ; } slab . entries . push (Entry :: Occupied (value)) ; slab . len += 1 ; } } pub (crate) fn build (self) -> Slab < T > { let mut slab = self . slab ; if slab . len == slab . entries . len () { slab . next = slab . entries . len () ; } else if self . vacant_list_broken { slab . recreate_vacant_list () ; } else if let Some (first_vacant_index) = self . first_vacant_index { let next = slab . entries . len () ; match & mut slab . entries [first_vacant_index] { Entry :: Vacant (n) => * n = next , _ => unreachable ! () , } } else { unreachable ! () } slab } }
     };
 }
 

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Message!();
         MessageIter!();
+        Message!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

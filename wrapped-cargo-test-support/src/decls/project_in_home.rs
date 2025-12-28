@@ -11,4 +11,4 @@ macro_rules! project_in_home {
     };
 }
 
-project_in_home!()
+project_in_home!();

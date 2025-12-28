@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Str!();
         UnknownArgumentValueParser!();
         StyledStr!();
-        Str!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_322 {
     };
 }
 
-impl_322!()
+impl_322!();

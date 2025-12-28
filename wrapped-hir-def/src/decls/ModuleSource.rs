@@ -4,4 +4,4 @@ macro_rules! ModuleSource {
     };
 }
 
-ModuleSource!()
+ModuleSource!();

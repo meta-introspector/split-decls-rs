@@ -4,4 +4,4 @@ macro_rules! AutoRevertToPreviousCWD {
     };
 }
 
-AutoRevertToPreviousCWD!()
+AutoRevertToPreviousCWD!();

@@ -4,4 +4,4 @@ macro_rules! unpark_mutex {
     };
 }
 
-unpark_mutex!()
+unpark_mutex!();

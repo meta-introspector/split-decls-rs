@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        BiLockGuard!();
-        Inner!();
-        BiLockAcquire!();
         Ready!();
-        BiLock!();
+        Inner!();
+        BiLockGuard!();
         Pending!();
+        BiLockAcquire!();
         ReuniteError!();
+        BiLock!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_1262 {
     };
 }
 
-impl_1262!()
+impl_1262!();

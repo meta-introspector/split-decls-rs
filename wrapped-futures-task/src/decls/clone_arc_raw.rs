@@ -11,4 +11,4 @@ macro_rules! clone_arc_raw {
     };
 }
 
-clone_arc_raw!()
+clone_arc_raw!();

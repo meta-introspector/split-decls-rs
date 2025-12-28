@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        SubstitutionTable!();
+        UnresolvedName!();
+        UnresolvedQualifierLevel!();
+        Parse!();
         ParseContext!();
         BaseUnresolvedName!();
-        UnresolvedQualifierLevel!();
-        Result!();
-        UnresolvedName!();
         Name!();
+        Result!();
         IndexStr!();
-        Parse!();
+        SubstitutionTable!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_247 {
     };
 }
 
-impl_247!()
+impl_247!();

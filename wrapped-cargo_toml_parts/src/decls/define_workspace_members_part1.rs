@@ -4,4 +4,4 @@ macro_rules! define_workspace_members_part1 {
     };
 }
 
-define_workspace_members_part1!()
+define_workspace_members_part1!();

@@ -1,7 +1,12 @@
 macro_rules! deps {
     () => {
-        BorrowckInferCtxt!();
         CollectRegionConstraintsResult!();
+        MirTypeckResults!();
+        PoloniusFacts!();
+        BorrowCheckRootCtxt!();
+        BorrowSet!();
+        PoloniusLocationTable!();
+        BorrowckInferCtxt!();
     };
 }
 

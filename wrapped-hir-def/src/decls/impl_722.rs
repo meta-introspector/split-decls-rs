@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AttrDefId!();
         VariantId!();
+        AttrDefId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_722 {
     };
 }
 
-impl_722!()
+impl_722!();

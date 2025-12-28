@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Spec!();
         Pattern!();
         Error!();
-        Spec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! mapping_from_pattern {
     };
 }
 
-mapping_from_pattern!()
+mapping_from_pattern!();

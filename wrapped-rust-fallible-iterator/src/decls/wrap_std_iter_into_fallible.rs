@@ -11,4 +11,4 @@ macro_rules! wrap_std_iter_into_fallible {
     };
 }
 
-wrap_std_iter_into_fallible!()
+wrap_std_iter_into_fallible!();

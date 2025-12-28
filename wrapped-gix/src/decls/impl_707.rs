@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NameParameter!();
         Allow!();
         Protocol!();
+        NameParameter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_707 {
     };
 }
 
-impl_707!()
+impl_707!();

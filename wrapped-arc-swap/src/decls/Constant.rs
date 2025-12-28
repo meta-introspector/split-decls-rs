@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ArcSwapAny!();
-        Map!();
         Access!();
+        Map!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Constant {
     };
 }
 
-Constant!()
+Constant!();

@@ -4,4 +4,4 @@ macro_rules! value_no_continuation {
     };
 }
 
-value_no_continuation!()
+value_no_continuation!();

@@ -11,4 +11,4 @@ macro_rules! local_config_meta {
     };
 }
 
-local_config_meta!()
+local_config_meta!();

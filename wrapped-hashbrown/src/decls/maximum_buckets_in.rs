@@ -11,4 +11,4 @@ macro_rules! maximum_buckets_in {
     };
 }
 
-maximum_buckets_in!()
+maximum_buckets_in!();

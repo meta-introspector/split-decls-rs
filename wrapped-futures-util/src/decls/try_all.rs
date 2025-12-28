@@ -4,4 +4,4 @@ macro_rules! try_all {
     };
 }
 
-try_all!()
+try_all!();

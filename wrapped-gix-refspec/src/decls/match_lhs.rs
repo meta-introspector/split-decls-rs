@@ -12,4 +12,4 @@ macro_rules! match_lhs {
     };
 }
 
-match_lhs!()
+match_lhs!();

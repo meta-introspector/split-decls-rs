@@ -4,4 +4,4 @@ macro_rules! DebugInfoFixup {
     };
 }
 
-DebugInfoFixup!()
+DebugInfoFixup!();

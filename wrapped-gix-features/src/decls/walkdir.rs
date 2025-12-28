@@ -4,4 +4,4 @@ macro_rules! walkdir {
     };
 }
 
-walkdir!()
+walkdir!();

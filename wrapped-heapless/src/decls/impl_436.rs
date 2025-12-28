@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SortedLinkedListInner!();
-        SortedLinkedList!();
-        LenType!();
         Vec!();
         Node!();
+        SortedLinkedList!();
+        LenType!();
+        SortedLinkedListInner!();
         SortedLinkedListView!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_436 {
     };
 }
 
-impl_436!()
+impl_436!();

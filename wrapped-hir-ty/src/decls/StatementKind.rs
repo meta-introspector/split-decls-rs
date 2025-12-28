@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LocalId!();
-        Rvalue!();
         Place!();
+        Rvalue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StatementKind {
     };
 }
 
-StatementKind!()
+StatementKind!();

@@ -4,4 +4,4 @@ macro_rules! SignatureRef {
     };
 }
 
-SignatureRef!()
+SignatureRef!();

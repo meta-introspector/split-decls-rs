@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         TransitProcess!();
-        TransitState!();
         Result!();
         ErrorKind!();
+        TransitState!();
         CopyOptions!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! move_items {
     };
 }
 
-move_items!()
+move_items!();

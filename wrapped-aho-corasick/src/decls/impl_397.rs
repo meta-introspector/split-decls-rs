@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        StartBytesBuilder!();
-        StartBytesTwo!();
-        StartBytesOne!();
-        StartBytesThree!();
         Prefilter!();
+        StartBytesOne!();
+        StartBytesBuilder!();
         PrefilterI!();
+        StartBytesThree!();
+        StartBytesTwo!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_397 {
     };
 }
 
-impl_397!()
+impl_397!();

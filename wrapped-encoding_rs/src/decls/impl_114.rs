@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        VariantEncoder!();
-        Encoder!();
-        Iso2022JpEncoder!();
-        Encoding!();
         Space!();
+        Encoder!();
+        Encoding!();
         Iso2022JpEncoderState!();
+        VariantEncoder!();
+        Iso2022JpEncoder!();
         EncoderResult!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

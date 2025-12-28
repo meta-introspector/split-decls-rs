@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Map!();
         Access!();
+        Map!();
         DynAccess!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! AccessConvert {
     };
 }
 
-AccessConvert!()
+AccessConvert!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BOOL!();
         TIME_ZONE_INFORMATION!();
         DYNAMIC_TIME_ZONE_INFORMATION!();
+        BOOL!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_547 {
     };
 }
 
-macro_547!()
+macro_547!();

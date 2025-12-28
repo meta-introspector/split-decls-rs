@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Status!();
-        ReadProcessOutputAndStatus!();
-        Server!();
-        Client!();
         Error!();
+        ReadProcessOutputAndStatus!();
+        Client!();
+        Server!();
+        Status!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

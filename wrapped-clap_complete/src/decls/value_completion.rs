@@ -4,4 +4,4 @@ macro_rules! value_completion {
     };
 }
 
-value_completion!()
+value_completion!();

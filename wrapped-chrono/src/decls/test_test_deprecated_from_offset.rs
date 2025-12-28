@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        DateTime!();
         Local!();
         FixedOffset!();
-        DateTime!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_test_deprecated_from_offset {
     };
 }
 
-test_test_deprecated_from_offset!()
+test_test_deprecated_from_offset!();

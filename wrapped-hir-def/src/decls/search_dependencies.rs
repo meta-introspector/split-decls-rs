@@ -15,4 +15,4 @@ macro_rules! search_dependencies {
     };
 }
 
-search_dependencies!()
+search_dependencies!();

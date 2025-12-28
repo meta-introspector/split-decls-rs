@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VersionError!();
         Version!();
+        VersionError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_version_utf8 {
     };
 }
 
-parse_version_utf8!()
+parse_version_utf8!();

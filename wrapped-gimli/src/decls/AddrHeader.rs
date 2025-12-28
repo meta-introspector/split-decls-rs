@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DebugAddrOffset!();
-        Reader!();
         Encoding!();
+        Reader!();
+        DebugAddrOffset!();
         ReaderOffset!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! AddrHeader {
     };
 }
 
-AddrHeader!()
+AddrHeader!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FromPathError!();
         FromPathBufError!();
         Utf8PathBuf!();
+        FromPathError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

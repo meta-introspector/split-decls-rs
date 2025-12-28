@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interface!();
         InputObject!();
+        Interface!();
         Scalar!();
         Union!();
         Object!();
@@ -15,4 +15,4 @@ macro_rules! __TypeKind {
     };
 }
 
-__TypeKind!()
+__TypeKind!();

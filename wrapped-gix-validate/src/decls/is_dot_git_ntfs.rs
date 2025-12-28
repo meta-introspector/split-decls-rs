@@ -4,4 +4,4 @@ macro_rules! is_dot_git_ntfs {
     };
 }
 
-is_dot_git_ntfs!()
+is_dot_git_ntfs!();

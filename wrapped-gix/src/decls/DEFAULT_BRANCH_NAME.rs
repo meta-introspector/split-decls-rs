@@ -4,4 +4,4 @@ macro_rules! DEFAULT_BRANCH_NAME {
     };
 }
 
-DEFAULT_BRANCH_NAME!()
+DEFAULT_BRANCH_NAME!();

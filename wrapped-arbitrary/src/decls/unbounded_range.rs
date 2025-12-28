@@ -4,4 +4,4 @@ macro_rules! unbounded_range {
     };
 }
 
-unbounded_range!()
+unbounded_range!();

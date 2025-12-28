@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Upload!();
-        ID!();
         TypeRef!();
+        ID!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_505 {
     };
 }
 
-impl_505!()
+impl_505!();

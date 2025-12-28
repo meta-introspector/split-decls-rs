@@ -4,4 +4,4 @@ macro_rules! UnalignedU16Slice {
     };
 }
 
-UnalignedU16Slice!()
+UnalignedU16Slice!();

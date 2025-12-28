@@ -4,4 +4,4 @@ macro_rules! UnresolvedMacro {
     };
 }
 
-UnresolvedMacro!()
+UnresolvedMacro!();

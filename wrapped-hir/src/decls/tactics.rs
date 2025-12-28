@@ -4,4 +4,4 @@ macro_rules! tactics {
     };
 }
 
-tactics!()
+tactics!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        GenerateSuffixedTypeProcMacroExpander!();
         Issue18089ProcMacroExpander!();
-        ShortenProcMacroExpander!();
-        Issue18898ProcMacroExpander!();
-        Issue17479ProcMacroExpander!();
         IdentityProcMacroExpander!();
+        Issue17479ProcMacroExpander!();
+        DisallowCfgProcMacroExpander!();
+        GenerateSuffixedTypeProcMacroExpander!();
+        Issue18898ProcMacroExpander!();
+        AttributeInputReplaceProcMacroExpander!();
         MirrorProcMacroExpander!();
         Issue18840ProcMacroExpander!();
-        AttributeInputReplaceProcMacroExpander!();
-        DisallowCfgProcMacroExpander!();
+        ShortenProcMacroExpander!();
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! SslOpt {
     };
 }
 
-SslOpt!()
+SslOpt!();

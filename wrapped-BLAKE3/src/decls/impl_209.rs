@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OutputReader!();
         Output!();
+        OutputReader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

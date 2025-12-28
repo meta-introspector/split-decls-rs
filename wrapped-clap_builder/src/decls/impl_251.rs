@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ValueParser!();
-        EnumValueParser!();
-        FalseyValueParser!();
         RangedU64ValueParser!();
-        RangedI64ValueParser!();
-        NonEmptyStringValueParser!();
-        BoolishValueParser!();
-        TypedValueParser!();
-        PossibleValuesParser!();
         Arg!();
+        EnumValueParser!();
+        RangedI64ValueParser!();
+        PossibleValuesParser!();
+        FalseyValueParser!();
+        TypedValueParser!();
+        ValueParser!();
+        BoolishValueParser!();
+        NonEmptyStringValueParser!();
         ValueParserInner!();
     };
 }
@@ -21,4 +21,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

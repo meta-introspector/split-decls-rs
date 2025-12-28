@@ -11,4 +11,4 @@ macro_rules! gen_constructor_for_field {
     };
 }
 
-gen_constructor_for_field!()
+gen_constructor_for_field!();

@@ -11,4 +11,4 @@ macro_rules! parse_short_keywords {
     };
 }
 
-parse_short_keywords!()
+parse_short_keywords!();

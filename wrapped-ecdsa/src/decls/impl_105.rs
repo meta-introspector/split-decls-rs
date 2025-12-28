@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DigestAlgorithm!();
         SignatureWithOid!();
-        EcdsaCurve!();
         SignatureSize!();
         VerifyingKey!();
+        EcdsaCurve!();
+        DigestAlgorithm!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

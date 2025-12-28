@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Key!();
         Keyed!();
-        ConcurrentStream!();
         FutureGroup!();
+        ConcurrentStream!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_202 {
     };
 }
 
-impl_202!()
+impl_202!();

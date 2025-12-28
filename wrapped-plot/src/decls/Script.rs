@@ -4,4 +4,4 @@ macro_rules! Script {
     };
 }
 
-Script!()
+Script!();

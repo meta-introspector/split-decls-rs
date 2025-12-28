@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IsTerminal!();
         WinconStream!();
+        IsTerminal!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RawStream {
     };
 }
 
-RawStream!()
+RawStream!();

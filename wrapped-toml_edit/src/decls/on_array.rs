@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Value!();
+        Array!();
+        Error!();
+        TraceScope!();
+        State!();
+    };
+}
+
+macro_rules! on_array {
+    () => {
+        deps!();
+        # [doc = " ```bnf"] # [doc = " ;; Array"] # [doc = ""] # [doc = " array = array-open array-values array-close"] # [doc = " array-values =  ws-comment-newline val ws-comment-newline array-sep array-values"] # [doc = " array-values =/ ws-comment-newline val ws-comment-newline [ array-sep ]"] # [doc = " ```"] pub (crate) fn on_array (open_event : & toml_parser :: parser :: Event , input : & mut Input < '_ > , source : toml_parser :: Source < '_ > , errors : & mut dyn ErrorSink ,) -> Value { # [cfg (feature = "debug")] let _scope = TraceScope :: new ("array::on_array") ; let mut result = Array :: new () ; let mut state = State :: default () ; state . open (open_event) ; while let Some (event) = input . next_token () { match event . kind () { EventKind :: StdTableOpen | EventKind :: ArrayTableOpen | EventKind :: InlineTableClose | EventKind :: SimpleKey | EventKind :: KeySep | EventKind :: KeyValSep | EventKind :: StdTableClose | EventKind :: ArrayTableClose => { # [cfg (feature = "debug")] trace (& format ! ("unexpected {event:?}") , anstyle :: AnsiColor :: Red . on_default () ,) ; break ; } EventKind :: Error => { # [cfg (feature = "debug")] trace (& format ! ("unexpected {event:?}") , anstyle :: AnsiColor :: Red . on_default () ,) ; continue ; } EventKind :: InlineTableOpen => { let value = on_inline_table (event , input , source , errors) ; state . capture_value (event , value) ; } EventKind :: ArrayOpen => { let value = on_array (event , input , source , errors) ; state . capture_value (event , value) ; } EventKind :: Scalar => { let value = on_scalar (event , source , errors) ; state . capture_value (event , value) ; } EventKind :: ValueSep => { state . finish_value (event , & mut result) ; state . sep_value (event) ; } EventKind :: Whitespace | EventKind :: Comment | EventKind :: Newline => { state . whitespace (event) ; } EventKind :: ArrayClose => { state . finish_value (event , & mut result) ; state . close (open_event , event , & mut result) ; break ; } } } Value :: Array (result) }
+    };
+}
+
+on_array!()

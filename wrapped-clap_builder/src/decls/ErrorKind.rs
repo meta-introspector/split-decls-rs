@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Command!();
+        Result!();
+        ArgAction!();
         Subcommand!();
         Arg!();
-        ArgAction!();
-        Result!();
-        Command!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ErrorKind {
     };
 }
 
-ErrorKind!()
+ErrorKind!();

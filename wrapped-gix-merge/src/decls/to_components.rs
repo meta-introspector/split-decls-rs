@@ -4,4 +4,4 @@ macro_rules! to_components {
     };
 }
 
-to_components!()
+to_components!();

@@ -4,4 +4,4 @@ macro_rules! secp256k1_montgomery_64 {
     };
 }
 
-secp256k1_montgomery_64!()
+secp256k1_montgomery_64!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Possibilities!();
         ChallengeRef!();
+        Possibilities!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! State {
     };
 }
 
-State!()
+State!();

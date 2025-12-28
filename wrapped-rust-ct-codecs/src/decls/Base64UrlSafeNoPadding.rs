@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Decoder!();
         Base64!();
         Encoder!();
+        Decoder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Base64UrlSafeNoPadding {
     };
 }
 
-Base64UrlSafeNoPadding!()
+Base64UrlSafeNoPadding!();

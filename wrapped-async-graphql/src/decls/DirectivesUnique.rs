@@ -4,4 +4,4 @@ macro_rules! DirectivesUnique {
     };
 }
 
-DirectivesUnique!()
+DirectivesUnique!();

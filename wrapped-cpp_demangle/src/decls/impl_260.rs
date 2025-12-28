@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        OperatorName!();
         SimpleId!();
-        Parse!();
-        TemplateArgs!();
-        BaseUnresolvedName!();
         DestructorName!();
+        Parse!();
+        OperatorName!();
         Name!();
         Result!();
-        ParseContext!();
-        SubstitutionTable!();
         IndexStr!();
+        ParseContext!();
+        BaseUnresolvedName!();
+        SubstitutionTable!();
+        TemplateArgs!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_260 {
     };
 }
 
-impl_260!()
+impl_260!();

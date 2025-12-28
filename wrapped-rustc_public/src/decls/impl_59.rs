@@ -1,6 +1,16 @@
+macro_rules! deps {
+    () => {
+        TyConst!();
+        RustcInternal!();
+        BridgeTys!();
+        InternalCx!();
+    };
+}
+
 macro_rules! impl_59 {
     () => {
-        impl rustc_public_bridge :: bridge :: Allocation < compiler_interface :: BridgeTys > for crate :: ty :: Allocation { fn new < 'tcx > (bytes : Vec < Option < u8 > > , ptrs : Vec < (usize , rustc_middle :: mir :: interpret :: AllocId) > , align : u64 , mutability : rustc_middle :: mir :: Mutability , tables : & mut Tables < 'tcx , compiler_interface :: BridgeTys > , cx : & CompilerCtxt < 'tcx , compiler_interface :: BridgeTys > ,) -> Self { Self { bytes , provenance : ProvenanceMap { ptrs : ptrs . iter () . map (| (i , aid) | (* i , tables . prov (* aid))) . collect () , } , align , mutability : mutability . stable (tables , cx) , } } }
+        deps!();
+        impl RustcInternal for TyConst { type T < 'tcx > = InternalConst < 'tcx > ; fn internal < 'tcx > (& self , tables : & mut Tables < '_ , BridgeTys > , tcx : impl InternalCx < 'tcx > ,) -> Self :: T < 'tcx > { tcx . lift (tables . ty_consts [self . id]) . unwrap () } }
     };
 }
 

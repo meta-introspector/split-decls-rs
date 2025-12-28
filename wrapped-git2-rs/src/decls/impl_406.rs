@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Indexer!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_406 {
     };
 }
 
-impl_406!()
+impl_406!();

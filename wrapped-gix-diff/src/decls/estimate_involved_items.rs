@@ -12,4 +12,4 @@ macro_rules! estimate_involved_items {
     };
 }
 
-estimate_involved_items!()
+estimate_involved_items!();

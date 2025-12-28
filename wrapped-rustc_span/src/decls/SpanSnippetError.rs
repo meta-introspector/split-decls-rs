@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
+        Span!();
+        DistinctSources!();
         MalformedSourceMapPositions!();
         FileName!();
-        DistinctSources!();
     };
 }
 

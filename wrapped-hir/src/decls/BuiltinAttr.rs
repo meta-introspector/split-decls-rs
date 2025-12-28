@@ -4,4 +4,4 @@ macro_rules! BuiltinAttr {
     };
 }
 
-BuiltinAttr!()
+BuiltinAttr!();

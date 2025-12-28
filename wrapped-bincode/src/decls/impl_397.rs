@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DecodeError!();
-        Reader!();
         SliceReader!();
+        Reader!();
+        DecodeError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_397 {
     };
 }
 
-impl_397!()
+impl_397!();

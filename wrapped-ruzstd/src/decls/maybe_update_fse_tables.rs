@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        ModeType!();
+        SequencesHeader!();
+        FSEScratch!();
+        DecodeSequenceError!();
+    };
+}
+
+macro_rules! maybe_update_fse_tables {
+    () => {
+        deps!();
+        fn maybe_update_fse_tables (section : & SequencesHeader , source : & [u8] , scratch : & mut FSEScratch ,) -> Result < usize , DecodeSequenceError > { let modes = section . modes . ok_or (DecodeSequenceError :: MissingCompressionMode) ? ; let mut bytes_read = 0 ; match modes . ll_mode () { ModeType :: FSECompressed => { let bytes = scratch . literal_lengths . build_decoder (source , LL_MAX_LOG) ? ; bytes_read += bytes ; vprintln ! ("Updating ll table") ; vprintln ! ("Used bytes: {}" , bytes) ; scratch . ll_rle = None ; } ModeType :: RLE => { vprintln ! ("Use RLE ll table") ; if source . is_empty () { return Err (DecodeSequenceError :: MissingByteForRleLlTable) ; } bytes_read += 1 ; if source [0] > MAX_LITERAL_LENGTH_CODE { return Err (DecodeSequenceError :: MissingByteForRleMlTable) ; } scratch . ll_rle = Some (source [0]) ; } ModeType :: Predefined => { vprintln ! ("Use predefined ll table") ; scratch . literal_lengths . build_from_probabilities (LL_DEFAULT_ACC_LOG , & Vec :: from (& LITERALS_LENGTH_DEFAULT_DISTRIBUTION [..]) ,) ? ; scratch . ll_rle = None ; } ModeType :: Repeat => { vprintln ! ("Repeat ll table") ; } } ; let of_source = & source [bytes_read ..] ; match modes . of_mode () { ModeType :: FSECompressed => { let bytes = scratch . offsets . build_decoder (of_source , OF_MAX_LOG) ? ; vprintln ! ("Updating of table") ; vprintln ! ("Used bytes: {}" , bytes) ; bytes_read += bytes ; scratch . of_rle = None ; } ModeType :: RLE => { vprintln ! ("Use RLE of table") ; if of_source . is_empty () { return Err (DecodeSequenceError :: MissingByteForRleOfTable) ; } bytes_read += 1 ; if of_source [0] > MAX_OFFSET_CODE { return Err (DecodeSequenceError :: MissingByteForRleMlTable) ; } scratch . of_rle = Some (of_source [0]) ; } ModeType :: Predefined => { vprintln ! ("Use predefined of table") ; scratch . offsets . build_from_probabilities (OF_DEFAULT_ACC_LOG , & Vec :: from (& OFFSET_DEFAULT_DISTRIBUTION [..]) ,) ? ; scratch . of_rle = None ; } ModeType :: Repeat => { vprintln ! ("Repeat of table") ; } } ; let ml_source = & source [bytes_read ..] ; match modes . ml_mode () { ModeType :: FSECompressed => { let bytes = scratch . match_lengths . build_decoder (ml_source , ML_MAX_LOG) ? ; bytes_read += bytes ; vprintln ! ("Updating ml table") ; vprintln ! ("Used bytes: {}" , bytes) ; scratch . ml_rle = None ; } ModeType :: RLE => { vprintln ! ("Use RLE ml table") ; if ml_source . is_empty () { return Err (DecodeSequenceError :: MissingByteForRleMlTable) ; } bytes_read += 1 ; if ml_source [0] > MAX_MATCH_LENGTH_CODE { return Err (DecodeSequenceError :: MissingByteForRleMlTable) ; } scratch . ml_rle = Some (ml_source [0]) ; } ModeType :: Predefined => { vprintln ! ("Use predefined ml table") ; scratch . match_lengths . build_from_probabilities (ML_DEFAULT_ACC_LOG , & Vec :: from (& MATCH_LENGTH_DEFAULT_DISTRIBUTION [..]) ,) ? ; scratch . ml_rle = None ; } ModeType :: Repeat => { vprintln ! ("Repeat ml table") ; } } ; Ok (bytes_read) }
+    };
+}
+
+maybe_update_fse_tables!()

@@ -4,4 +4,4 @@ macro_rules! CertHostkey {
     };
 }
 
-CertHostkey!()
+CertHostkey!();

@@ -11,4 +11,4 @@ macro_rules! merge_base_with_graph {
     };
 }
 
-merge_base_with_graph!()
+merge_base_with_graph!();

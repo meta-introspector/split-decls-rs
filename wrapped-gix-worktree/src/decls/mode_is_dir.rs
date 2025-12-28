@@ -4,4 +4,4 @@ macro_rules! mode_is_dir {
     };
 }
 
-mode_is_dir!()
+mode_is_dir!();

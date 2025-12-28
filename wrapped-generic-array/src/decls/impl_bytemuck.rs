@@ -4,4 +4,4 @@ macro_rules! impl_bytemuck {
     };
 }
 
-impl_bytemuck!()
+impl_bytemuck!();

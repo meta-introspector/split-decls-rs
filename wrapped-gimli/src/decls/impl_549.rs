@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Reader!();
-        Result!();
         PubTypesEntryIter!();
-        Error!();
+        Result!();
         PubTypesEntry!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_549 {
     };
 }
 
-impl_549!()
+impl_549!();

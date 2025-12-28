@@ -11,4 +11,4 @@ macro_rules! push_deferred {
     };
 }
 
-push_deferred!()
+push_deferred!();

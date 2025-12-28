@@ -4,4 +4,4 @@ macro_rules! is_pseudo_ref {
     };
 }
 
-is_pseudo_ref!()
+is_pseudo_ref!();

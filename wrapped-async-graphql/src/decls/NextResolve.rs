@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ResolveFut!();
         Extension!();
+        ResolveFut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! NextResolve {
     };
 }
 
-NextResolve!()
+NextResolve!();

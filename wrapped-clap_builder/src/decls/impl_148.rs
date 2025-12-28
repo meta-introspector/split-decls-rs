@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StyledStr!();
         PossibleValue!();
+        StyledStr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_148 {
     };
 }
 
-impl_148!()
+impl_148!();

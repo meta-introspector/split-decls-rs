@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SelectHandle!();
-        SelectTimeoutError!();
-        Timeout!();
         SelectedOperation!();
+        SelectHandle!();
+        Timeout!();
+        SelectTimeoutError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! select_deadline {
     };
 }
 
-select_deadline!()
+select_deadline!();

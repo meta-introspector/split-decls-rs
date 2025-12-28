@@ -4,4 +4,4 @@ macro_rules! AtomicUnit {
     };
 }
 
-AtomicUnit!()
+AtomicUnit!();

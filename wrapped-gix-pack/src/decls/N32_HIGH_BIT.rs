@@ -4,4 +4,4 @@ macro_rules! N32_HIGH_BIT {
     };
 }
 
-N32_HIGH_BIT!()
+N32_HIGH_BIT!();

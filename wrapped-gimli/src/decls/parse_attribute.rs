@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        DebugStrOffset!();
-        Error!();
-        UnitOffset!();
-        DebugLineStrOffset!();
-        DebugInfoOffset!();
-        Reader!();
-        DebugStrOffsetsIndex!();
-        DebugInfoRef!();
-        DebugTypeSignature!();
-        DebugRngListsIndex!();
-        DebugAddrIndex!();
-        Result!();
-        Encoding!();
         Expression!();
-        Format!();
-        DebugLocListsIndex!();
-        AttributeSpecification!();
-        Attribute!();
+        UnitOffset!();
         UnitRef!();
         AttributeValue!();
+        Attribute!();
+        DebugRngListsIndex!();
+        Error!();
+        Encoding!();
+        DebugStrOffset!();
+        DebugStrOffsetsIndex!();
+        DebugTypeSignature!();
+        DebugInfoRef!();
+        AttributeSpecification!();
+        Format!();
+        DebugLocListsIndex!();
+        Reader!();
+        DebugLineStrOffset!();
+        Result!();
+        DebugInfoOffset!();
+        DebugAddrIndex!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! parse_attribute {
     };
 }
 
-parse_attribute!()
+parse_attribute!();

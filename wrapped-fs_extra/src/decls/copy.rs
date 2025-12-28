@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CopyOptions!();
         DirOptions!();
+        CopyOptions!();
         Result!();
         ErrorKind!();
     };
@@ -14,4 +14,4 @@ macro_rules! copy {
     };
 }
 
-copy!()
+copy!();

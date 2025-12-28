@@ -13,4 +13,4 @@ macro_rules! generate_patch_entries {
     };
 }
 
-generate_patch_entries!()
+generate_patch_entries!();

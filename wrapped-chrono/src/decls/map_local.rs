@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Utc!();
-        NaiveDateTime!();
         TimeZone!();
+        NaiveDateTime!();
         DateTime!();
+        Utc!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! map_local {
     };
 }
 
-map_local!()
+map_local!();

@@ -1,0 +1,7 @@
+macro_rules! SERVICE_ACCEPT_PAUSE_CONTINUE {
+    () => {
+        pub const SERVICE_ACCEPT_PAUSE_CONTINUE : u32 = 2u32 ;
+    };
+}
+
+SERVICE_ACCEPT_PAUSE_CONTINUE!()

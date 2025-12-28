@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ThinVec!();
-        Header!();
         IntoIter!();
+        Header!();
         Drain!();
+        ThinVec!();
     };
 }
 

@@ -11,4 +11,4 @@ macro_rules! worktree_archive {
     };
 }
 
-worktree_archive!()
+worktree_archive!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Deserialize!();
         Serialize!();
+        Deserialize!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CapturedCommand {
     };
 }
 
-CapturedCommand!()
+CapturedCommand!();

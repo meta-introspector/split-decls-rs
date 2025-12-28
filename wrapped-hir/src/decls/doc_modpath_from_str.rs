@@ -11,4 +11,4 @@ macro_rules! doc_modpath_from_str {
     };
 }
 
-doc_modpath_from_str!()
+doc_modpath_from_str!();

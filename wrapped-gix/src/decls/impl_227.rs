@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Note!();
         State!();
+        Error!();
         Platform!();
+        Note!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_227 {
     };
 }
 
-impl_227!()
+impl_227!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Keys!();
-        ValuesMut!();
-        ValueLinks!();
-        Iter!();
-        DropFilteredValues!();
-        Values!();
-        LinkedHashMap!();
-        IterMut!();
         Drain!();
+        IterMut!();
+        ValuesMut!();
+        DropFilteredValues!();
+        ValueLinks!();
+        Values!();
+        Iter!();
+        LinkedHashMap!();
+        Keys!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

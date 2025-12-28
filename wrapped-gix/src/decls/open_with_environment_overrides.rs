@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Repository!();
-        ThreadSafeRepository!();
         Error!();
         Default!();
+        ThreadSafeRepository!();
+        Repository!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! open_with_environment_overrides {
     };
 }
 
-open_with_environment_overrides!()
+open_with_environment_overrides!();

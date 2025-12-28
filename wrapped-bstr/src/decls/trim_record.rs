@@ -4,4 +4,4 @@ macro_rules! trim_record {
     };
 }
 
-trim_record!()
+trim_record!();

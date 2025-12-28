@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         RareBytesTwo!();
-        RareByteOffsets!();
-        ByteSet!();
-        Prefilter!();
-        RareBytesOne!();
         RareBytesThree!();
         RareByteOffset!();
-        PrefilterI!();
+        ByteSet!();
+        RareByteOffsets!();
         RareBytesBuilder!();
+        RareBytesOne!();
+        Prefilter!();
+        PrefilterI!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_389 {
     };
 }
 
-impl_389!()
+impl_389!();

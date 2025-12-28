@@ -4,4 +4,4 @@ macro_rules! heap {
     };
 }
 
-heap!()
+heap!();

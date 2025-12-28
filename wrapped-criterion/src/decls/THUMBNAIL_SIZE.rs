@@ -4,4 +4,4 @@ macro_rules! THUMBNAIL_SIZE {
     };
 }
 
-THUMBNAIL_SIZE!()
+THUMBNAIL_SIZE!();

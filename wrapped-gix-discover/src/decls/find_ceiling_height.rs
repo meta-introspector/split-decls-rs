@@ -11,4 +11,4 @@ macro_rules! find_ceiling_height {
     };
 }
 
-find_ceiling_height!()
+find_ceiling_height!();

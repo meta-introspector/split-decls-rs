@@ -1,5 +1,8 @@
 macro_rules! deps {
     () => {
+        SerializeId!();
+        SerializeAttributes!();
+        SerializeMetadata!();
         SerdeStructVisitor!();
     };
 }
@@ -7,7 +10,7 @@ macro_rules! deps {
 macro_rules! impl_22 {
     () => {
         deps!();
-        impl < S : SerializeStruct > SerdeStructVisitor < S > { # [doc = " Completes serializing the visited object, returning `Ok(())` if all"] # [doc = " fields were serialized correctly, or `Error(S::Error)` if a field could"] # [doc = " not be serialized."] pub fn finish (self) -> Result < S :: Ok , S :: Error > { self . state ? ; self . serializer . end () } }
+        impl Serialize for SerializeAttributes < '_ > { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : Serializer , { let mut serializer = serializer . serialize_struct ("Attributes" , 3) ? ; serializer . serialize_field ("metadata" , & SerializeMetadata (self . 0 . metadata ())) ? ; serializer . serialize_field ("parent" , & self . 0 . parent () . map (SerializeId)) ? ; serializer . serialize_field ("is_root" , & self . 0 . is_root ()) ? ; let mut visitor = SerdeStructVisitor { serializer , state : Ok (()) , } ; self . 0 . record (& mut visitor) ; visitor . finish () } }
     };
 }
 

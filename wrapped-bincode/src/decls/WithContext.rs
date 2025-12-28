@@ -4,4 +4,4 @@ macro_rules! WithContext {
     };
 }
 
-WithContext!()
+WithContext!();

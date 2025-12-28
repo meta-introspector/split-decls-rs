@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Reference!();
-        Branch!();
-        Merge!();
-        Name!();
         Push!();
         Default!();
-        Repository!();
-        Note!();
-        Error!();
-        Url!();
-        Item!();
-        Remote!();
         Init!();
-        Fetch!();
+        Merge!();
+        Name!();
+        Reference!();
+        Branch!();
+        Repository!();
         Direction!();
+        Fetch!();
+        Error!();
+        Note!();
+        Url!();
+        Remote!();
+        Item!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_298 {
     };
 }
 
-impl_298!()
+impl_298!();

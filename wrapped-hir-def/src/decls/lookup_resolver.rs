@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Resolver!();
         HasResolver!();
-        DefDatabase!();
+        Resolver!();
         AstIdLoc!();
+        DefDatabase!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! lookup_resolver {
     };
 }
 
-lookup_resolver!()
+lookup_resolver!();

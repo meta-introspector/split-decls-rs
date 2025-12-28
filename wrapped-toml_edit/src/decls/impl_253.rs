@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Value!();
+        Array!();
+        InlineTable!();
+    };
+}
+
+macro_rules! impl_253 {
+    () => {
+        deps!();
+        # [doc = " Downcasting"] impl Value { # [doc = " Text description of value type"] pub fn type_name (& self) -> & 'static str { match self { Self :: String (..) => "string" , Self :: Integer (..) => "integer" , Self :: Float (..) => "float" , Self :: Boolean (..) => "boolean" , Self :: Datetime (..) => "datetime" , Self :: Array (..) => "array" , Self :: InlineTable (..) => "inline table" , } } # [doc = " Casts `self` to str."] pub fn as_str (& self) -> Option < & str > { match * self { Self :: String (ref value) => Some (value . value ()) , _ => None , } } # [doc = " Returns true if `self` is a string."] pub fn is_str (& self) -> bool { self . as_str () . is_some () } # [doc = " Casts `self` to integer."] pub fn as_integer (& self) -> Option < i64 > { match * self { Self :: Integer (ref value) => Some (* value . value ()) , _ => None , } } # [doc = " Returns true if `self` is an integer."] pub fn is_integer (& self) -> bool { self . as_integer () . is_some () } # [doc = " Casts `self` to float."] pub fn as_float (& self) -> Option < f64 > { match * self { Self :: Float (ref value) => Some (* value . value ()) , _ => None , } } # [doc = " Returns true if `self` is a float."] pub fn is_float (& self) -> bool { self . as_float () . is_some () } # [doc = " Casts `self` to boolean."] pub fn as_bool (& self) -> Option < bool > { match * self { Self :: Boolean (ref value) => Some (* value . value ()) , _ => None , } } # [doc = " Returns true if `self` is a boolean."] pub fn is_bool (& self) -> bool { self . as_bool () . is_some () } # [doc = " Casts `self` to date-time."] pub fn as_datetime (& self) -> Option < & Datetime > { match * self { Self :: Datetime (ref value) => Some (value . value ()) , _ => None , } } # [doc = " Returns true if `self` is a date-time."] pub fn is_datetime (& self) -> bool { self . as_datetime () . is_some () } # [doc = " Casts `self` to array."] pub fn as_array (& self) -> Option < & Array > { match * self { Self :: Array (ref value) => Some (value) , _ => None , } } # [doc = " Casts `self` to mutable array."] pub fn as_array_mut (& mut self) -> Option < & mut Array > { match * self { Self :: Array (ref mut value) => Some (value) , _ => None , } } # [doc = " Returns true if `self` is an array."] pub fn is_array (& self) -> bool { self . as_array () . is_some () } # [doc = " Casts `self` to inline table."] pub fn as_inline_table (& self) -> Option < & InlineTable > { match * self { Self :: InlineTable (ref value) => Some (value) , _ => None , } } # [doc = " Casts `self` to mutable inline table."] pub fn as_inline_table_mut (& mut self) -> Option < & mut InlineTable > { match * self { Self :: InlineTable (ref mut value) => Some (value) , _ => None , } } # [doc = " Returns true if `self` is an inline table."] pub fn is_inline_table (& self) -> bool { self . as_inline_table () . is_some () } }
+    };
+}
+
+impl_253!()

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PpAnn!();
-        State!();
         Nested!();
+        State!();
+        PpAnn!();
     };
 }
 

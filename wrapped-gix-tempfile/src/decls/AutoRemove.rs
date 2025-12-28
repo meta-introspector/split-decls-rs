@@ -4,4 +4,4 @@ macro_rules! AutoRemove {
     };
 }
 
-AutoRemove!()
+AutoRemove!();

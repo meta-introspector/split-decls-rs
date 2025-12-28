@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TypedValueParser!();
         Error!();
-        Result!();
         TryMapValueParser!();
+        TypedValueParser!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_319 {
     };
 }
 
-impl_319!()
+impl_319!();

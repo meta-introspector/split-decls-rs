@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IncrementCounter!();
-        Platform!();
         CVWords!();
+        Platform!();
+        IncrementCounter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_64 {
     };
 }
 
-impl_64!()
+impl_64!();

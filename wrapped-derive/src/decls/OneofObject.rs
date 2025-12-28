@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RenameRule!();
-        InterfaceField!();
-        ConcreteType!();
         OneofObjectField!();
         Visible!();
+        ConcreteType!();
+        RenameRule!();
+        InterfaceField!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! OneofObject {
     };
 }
 
-OneofObject!()
+OneofObject!();

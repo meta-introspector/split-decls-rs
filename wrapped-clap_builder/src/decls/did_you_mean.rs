@@ -4,4 +4,4 @@ macro_rules! did_you_mean {
     };
 }
 
-did_you_mean!()
+did_you_mean!();

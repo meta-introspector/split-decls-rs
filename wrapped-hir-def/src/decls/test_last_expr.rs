@@ -34,4 +34,4 @@ fn f() {
     };
 }
 
-test_last_expr!()
+test_last_expr!();

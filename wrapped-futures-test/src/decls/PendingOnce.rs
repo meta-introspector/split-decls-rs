@@ -4,4 +4,4 @@ macro_rules! PendingOnce {
     };
 }
 
-PendingOnce!()
+PendingOnce!();

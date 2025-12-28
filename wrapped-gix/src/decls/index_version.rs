@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        IndexVersion!();
         Version!();
+        IndexVersion!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! index_version {
     };
 }
 
-index_version!()
+index_version!();

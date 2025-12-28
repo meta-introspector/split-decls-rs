@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
+        Config!();
         Submodule!();
-        Describe!();
-        Tag!();
-        Tree!();
-        Indexer!();
-        Odb!();
-        Rebase!();
+        Index!();
         Patch!();
         Worktree!();
-        Index!();
-        Reference!();
         Error!();
-        Repository!();
+        Reference!();
+        Tree!();
         Object!();
-        Config!();
+        Repository!();
+        Indexer!();
+        Describe!();
+        Odb!();
+        Rebase!();
+        Tag!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! ErrorClass {
     };
 }
 
-ErrorClass!()
+ErrorClass!();

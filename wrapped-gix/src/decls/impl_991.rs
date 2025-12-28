@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Error!();
         Default!();
-        Options!();
-        ThreadSafeRepository!();
+        Init!();
+        Path!();
         Any!();
+        Error!();
         Kind!();
         Change!();
-        Path!();
-        Init!();
+        Options!();
+        ThreadSafeRepository!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_991 {
     };
 }
 
-impl_991!()
+impl_991!();

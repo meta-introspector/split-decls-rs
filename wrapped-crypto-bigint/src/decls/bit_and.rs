@@ -4,4 +4,4 @@ macro_rules! bit_and {
     };
 }
 
-bit_and!()
+bit_and!();

@@ -12,4 +12,4 @@ macro_rules! gen_has_subcommand {
     };
 }
 
-gen_has_subcommand!()
+gen_has_subcommand!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ServerResult!();
-        ResolveState!();
-        ApolloTracingExtension!();
-        Response!();
-        ResolveInfo!();
-        Extension!();
         ExtensionContext!();
-        NextExecute!();
+        ResolveInfo!();
+        ServerResult!();
+        ApolloTracingExtension!();
+        Extension!();
+        ResolveState!();
         NextResolve!();
+        NextExecute!();
+        Response!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_544 {
     };
 }
 
-impl_544!()
+impl_544!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FnvIndexSet!();
         Encoding!();
+        FnvIndexMap!();
+        FnvIndexSet!();
+        FileInfo!();
+        DirectoryId!();
+        LineRow!();
         LineEncoding!();
         LineString!();
-        FnvIndexMap!();
-        DirectoryId!();
-        FileInfo!();
-        LineRow!();
         LineInstruction!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! LineProgram {
     };
 }
 
-LineProgram!()
+LineProgram!();

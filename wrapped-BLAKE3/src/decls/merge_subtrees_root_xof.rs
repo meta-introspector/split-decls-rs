@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Hash!();
+        OutputReader!();
         ChainingValue!();
         HasherExt!();
-        OutputReader!();
         Mode!();
-        Hash!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! merge_subtrees_root_xof {
     };
 }
 
-merge_subtrees_root_xof!()
+merge_subtrees_root_xof!();

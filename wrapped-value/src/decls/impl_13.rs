@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        MapDeserializer!();
         SeqDeserializer!();
-        ConstValue!();
-        DeserializerError!();
+        MapDeserializer!();
         Value!();
+        ConstValue!();
         VariantDeserializer!();
+        DeserializerError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

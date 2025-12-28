@@ -4,4 +4,4 @@ macro_rules! mod_symbol {
     };
 }
 
-mod_symbol!()
+mod_symbol!();

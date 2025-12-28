@@ -12,4 +12,4 @@ macro_rules! decode_engine {
     };
 }
 
-decode_engine!()
+decode_engine!();

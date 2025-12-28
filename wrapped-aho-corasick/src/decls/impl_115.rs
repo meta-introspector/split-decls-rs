@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RabinKarp!();
         SearchKind!();
         Teddy!();
+        RabinKarp!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

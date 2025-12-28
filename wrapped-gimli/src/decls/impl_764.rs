@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        UnitOffsets!();
+        Encoding!();
+        LocationList!();
         DebugInfoFixup!();
+        Location!();
+        DebugLocLists!();
         Sections!();
         Address!();
         Result!();
+        Writer!();
+        DebugLoc!();
         Error!();
         LocationListTable!();
-        DebugLoc!();
-        DebugLocLists!();
-        Writer!();
-        Encoding!();
-        LocationList!();
-        UnitOffsets!();
-        Location!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_764 {
     };
 }
 
-impl_764!()
+impl_764!();

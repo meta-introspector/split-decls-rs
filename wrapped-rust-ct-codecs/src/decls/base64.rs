@@ -4,4 +4,4 @@ macro_rules! base64 {
     };
 }
 
-base64!()
+base64!();

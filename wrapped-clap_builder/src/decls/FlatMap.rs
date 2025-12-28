@@ -4,4 +4,4 @@ macro_rules! FlatMap {
     };
 }
 
-FlatMap!()
+FlatMap!();

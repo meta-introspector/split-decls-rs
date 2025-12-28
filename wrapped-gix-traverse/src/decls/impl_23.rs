@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Info!();
-        Queue!();
-        Topo!();
         Sorting!();
+        Queue!();
+        Info!();
+        Topo!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

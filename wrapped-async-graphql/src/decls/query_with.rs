@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Error!();
-        CursorType!();
-        Object!();
-        EmptyMutation!();
-        Connection!();
-        Query!();
-        PageInfo!();
         EmptySubscription!();
+        Result!();
+        Query!();
+        Error!();
+        Object!();
+        PageInfo!();
+        EmptyMutation!();
+        CursorType!();
+        Connection!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! query_with {
     };
 }
 
-query_with!()
+query_with!();

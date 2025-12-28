@@ -11,4 +11,4 @@ macro_rules! resolve_absolute_path {
     };
 }
 
-resolve_absolute_path!()
+resolve_absolute_path!();

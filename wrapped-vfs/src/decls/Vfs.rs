@@ -1,7 +1,8 @@
 macro_rules! deps {
     () => {
-        ChangedFile!();
         FileState!();
+        PathInterner!();
+        ChangedFile!();
         FileId!();
     };
 }

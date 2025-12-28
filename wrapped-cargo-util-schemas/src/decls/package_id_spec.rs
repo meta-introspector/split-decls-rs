@@ -4,4 +4,4 @@ macro_rules! package_id_spec {
     };
 }
 
-package_id_spec!()
+package_id_spec!();

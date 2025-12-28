@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ItemInNs!();
-        ModuleDef!();
-        Const!();
         Static!();
         Function!();
         Macro!();
+        Const!();
+        ModuleDef!();
+        ItemInNs!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_321 {
     };
 }
 
-impl_321!()
+impl_321!();

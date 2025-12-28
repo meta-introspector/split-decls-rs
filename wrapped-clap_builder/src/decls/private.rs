@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Error!();
         ValueEnum!();
         ValueParserFactory!();
         OsStr!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! private {
     };
 }
 
-private!()
+private!();

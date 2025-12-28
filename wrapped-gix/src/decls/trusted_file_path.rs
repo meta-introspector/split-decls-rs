@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Environment!();
         Path!();
+        Environment!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! trusted_file_path {
     };
 }
 
-trusted_file_path!()
+trusted_file_path!();

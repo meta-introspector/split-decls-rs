@@ -12,4 +12,4 @@ macro_rules! pattern_matching_relative_path {
     };
 }
 
-pattern_matching_relative_path!()
+pattern_matching_relative_path!();

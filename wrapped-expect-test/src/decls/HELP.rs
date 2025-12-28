@@ -10,4 +10,4 @@ To update a single test, place the cursor on `expect` token and use `run` featur
     };
 }
 
-HELP!()
+HELP!();

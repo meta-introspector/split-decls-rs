@@ -4,4 +4,4 @@ macro_rules! MAX_MAX_THREADS {
     };
 }
 
-MAX_MAX_THREADS!()
+MAX_MAX_THREADS!();

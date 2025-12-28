@@ -11,4 +11,4 @@ macro_rules! expand_derive_arbitrary {
     };
 }
 
-expand_derive_arbitrary!()
+expand_derive_arbitrary!();

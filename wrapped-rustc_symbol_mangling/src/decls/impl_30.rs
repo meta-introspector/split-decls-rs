@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        BinderLevel!();
+        V0SymbolMangler!();
+    };
+}
+
+macro_rules! impl_30 {
+    () => {
+        deps!();
+        impl < 'tcx > V0SymbolMangler < 'tcx > { fn push (& mut self , s : & str) { self . out . push_str (s) ; } # [doc = " Push a `_`-terminated base 62 integer, using the format"] # [doc = " specified in the RFC as `<base-62-number>`, that is:"] # [doc = " * `x = 0` is encoded as just the `\"_\"` terminator"] # [doc = " * `x > 0` is encoded as `x - 1` in base 62, followed by `\"_\"`,"] # [doc = "   e.g. `1` becomes `\"0_\"`, `62` becomes `\"Z_\"`, etc."] fn push_integer_62 (& mut self , x : u64) { push_integer_62 (x , & mut self . out) } # [doc = " Push a `tag`-prefixed base 62 integer, when larger than `0`, that is:"] # [doc = " * `x = 0` is encoded as `\"\"` (nothing)"] # [doc = " * `x > 0` is encoded as the `tag` followed by `push_integer_62(x - 1)`"] # [doc = "   e.g. `1` becomes `tag + \"_\"`, `2` becomes `tag + \"0_\"`, etc."] fn push_opt_integer_62 (& mut self , tag : & str , x : u64) { if let Some (x) = x . checked_sub (1) { self . push (tag) ; self . push_integer_62 (x) ; } } fn push_disambiguator (& mut self , dis : u64) { self . push_opt_integer_62 ("s" , dis) ; } fn push_ident (& mut self , ident : & str) { push_ident (ident , & mut self . out) } fn path_append_ns (& mut self , print_prefix : impl FnOnce (& mut Self) -> Result < () , PrintError > , ns : char , disambiguator : u64 , name : & str ,) -> Result < () , PrintError > { self . push ("N") ; self . out . push (ns) ; print_prefix (self) ? ; self . push_disambiguator (disambiguator) ; self . push_ident (name) ; Ok (()) } fn print_backref (& mut self , i : usize) -> Result < () , PrintError > { self . push ("B") ; self . push_integer_62 ((i - self . start_offset) as u64) ; Ok (()) } fn wrap_binder < T > (& mut self , value : & ty :: Binder < 'tcx , T > , print_value : impl FnOnce (& mut Self , & T) -> Result < () , PrintError > ,) -> Result < () , PrintError > where T : TypeVisitable < TyCtxt < 'tcx > > , { let mut lifetime_depths = self . binders . last () . map (| b | b . lifetime_depths . end) . map_or (0 .. 0 , | i | i .. i) ; let lifetimes = value . bound_vars () . iter () . filter (| var | matches ! (var , ty :: BoundVariableKind :: Region (..))) . count () as u32 ; self . push_opt_integer_62 ("G" , lifetimes as u64) ; lifetime_depths . end += lifetimes ; self . binders . push (BinderLevel { lifetime_depths }) ; print_value (self , value . as_ref () . skip_binder ()) ? ; self . binders . pop () ; Ok (()) } fn print_pat (& mut self , pat : ty :: Pattern < 'tcx >) -> Result < () , std :: fmt :: Error > { Ok (match * pat { ty :: PatternKind :: Range { start , end } => { let consts = [start , end] ; for ct in consts { Ty :: new_array_with_const_len (self . tcx , self . tcx . types . unit , ct) . print (self) ? ; } } ty :: PatternKind :: Or (patterns) => { for pat in patterns { self . print_pat (pat) ? ; } } }) } }
+    };
+}
+
+impl_30!()

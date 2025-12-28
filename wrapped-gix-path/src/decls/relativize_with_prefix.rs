@@ -4,4 +4,4 @@ macro_rules! relativize_with_prefix {
     };
 }
 
-relativize_with_prefix!()
+relativize_with_prefix!();

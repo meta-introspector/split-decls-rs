@@ -4,4 +4,4 @@ macro_rules! test_string_value {
     };
 }
 
-test_string_value!()
+test_string_value!();

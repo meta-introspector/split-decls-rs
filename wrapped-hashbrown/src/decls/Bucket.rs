@@ -4,4 +4,4 @@ macro_rules! Bucket {
     };
 }
 
-Bucket!()
+Bucket!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DebuggingInformationEntry!();
-        Endianity!();
-        Reader!();
-        ValueType!();
-        Result!();
         AttributeValue!();
+        ValueType!();
+        Endianity!();
+        Result!();
+        DebuggingInformationEntry!();
+        Reader!();
         Encoding!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_669 {
     };
 }
 
-impl_669!()
+impl_669!();

@@ -11,4 +11,4 @@ macro_rules! ascii_compatible_bmp_encoder_function {
     };
 }
 
-ascii_compatible_bmp_encoder_function!()
+ascii_compatible_bmp_encoder_function!();

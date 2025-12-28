@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Transition!();
-        FixedOffset!();
         NaiveDateTime!();
+        FixedOffset!();
+        Transition!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_658 {
     };
 }
 
-impl_658!()
+impl_658!();

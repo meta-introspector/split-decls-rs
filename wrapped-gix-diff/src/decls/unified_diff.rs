@@ -4,4 +4,4 @@ macro_rules! unified_diff {
     };
 }
 
-unified_diff!()
+unified_diff!();

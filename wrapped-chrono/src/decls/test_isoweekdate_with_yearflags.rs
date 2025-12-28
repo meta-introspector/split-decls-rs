@@ -11,4 +11,4 @@ macro_rules! test_isoweekdate_with_yearflags {
     };
 }
 
-test_isoweekdate_with_yearflags!()
+test_isoweekdate_with_yearflags!();

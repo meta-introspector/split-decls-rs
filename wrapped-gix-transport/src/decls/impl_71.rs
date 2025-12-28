@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
-        PostBodyDataKind!();
-        Response!();
-        Options!();
         Remote!();
         Request!();
+        Error!();
+        Response!();
+        PostBodyDataKind!();
+        Options!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

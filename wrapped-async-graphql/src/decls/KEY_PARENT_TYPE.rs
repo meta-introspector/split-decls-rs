@@ -4,4 +4,4 @@ macro_rules! KEY_PARENT_TYPE {
     };
 }
 
-KEY_PARENT_TYPE!()
+KEY_PARENT_TYPE!();

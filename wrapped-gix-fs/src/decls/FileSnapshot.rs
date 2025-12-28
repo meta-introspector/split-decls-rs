@@ -4,4 +4,4 @@ macro_rules! FileSnapshot {
     };
 }
 
-FileSnapshot!()
+FileSnapshot!();

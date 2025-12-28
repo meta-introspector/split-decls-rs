@@ -4,4 +4,4 @@ macro_rules! ShlVartime {
     };
 }
 
-ShlVartime!()
+ShlVartime!();

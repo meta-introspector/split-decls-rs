@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Kind!();
+        Entry!();
         Tree!();
         Outcome!();
+        Kind!();
         Statistics!();
-        Entry!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! digest_statistics {
     };
 }
 
-digest_statistics!()
+digest_statistics!();

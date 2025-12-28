@@ -4,4 +4,4 @@ macro_rules! lincomb {
     };
 }
 
-lincomb!()
+lincomb!();

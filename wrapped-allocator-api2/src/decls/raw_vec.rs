@@ -4,4 +4,4 @@ macro_rules! raw_vec {
     };
 }
 
-raw_vec!()
+raw_vec!();

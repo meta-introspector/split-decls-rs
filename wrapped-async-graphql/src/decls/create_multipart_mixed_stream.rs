@@ -11,4 +11,4 @@ macro_rules! create_multipart_mixed_stream {
     };
 }
 
-create_multipart_mixed_stream!()
+create_multipart_mixed_stream!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Directive!();
         InputValue!();
         SchemaError!();
+        Directive!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InputObject {
     };
 }
 
-InputObject!()
+InputObject!();

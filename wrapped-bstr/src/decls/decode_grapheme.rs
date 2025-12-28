@@ -4,4 +4,4 @@ macro_rules! decode_grapheme {
     };
 }
 
-decode_grapheme!()
+decode_grapheme!();

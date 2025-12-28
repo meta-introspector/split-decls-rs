@@ -4,4 +4,4 @@ macro_rules! Secret {
     };
 }
 
-Secret!()
+Secret!();

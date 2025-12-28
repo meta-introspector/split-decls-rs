@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Note!();
-        Name!();
         Error!();
+        Name!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AsError {
     };
 }
 
-AsError!()
+AsError!();

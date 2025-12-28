@@ -4,4 +4,4 @@ macro_rules! CONTINUE_NO_BREAKS {
     };
 }
 
-CONTINUE_NO_BREAKS!()
+CONTINUE_NO_BREAKS!();

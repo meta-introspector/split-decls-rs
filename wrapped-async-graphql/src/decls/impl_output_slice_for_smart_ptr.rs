@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ContextSelectionSet!();
-        ServerResult!();
-        Registry!();
         OutputType!();
+        Registry!();
         Field!();
+        ServerResult!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_output_slice_for_smart_ptr {
     };
 }
 
-impl_output_slice_for_smart_ptr!()
+impl_output_slice_for_smart_ptr!();

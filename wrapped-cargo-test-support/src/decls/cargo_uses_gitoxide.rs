@@ -4,4 +4,4 @@ macro_rules! cargo_uses_gitoxide {
     };
 }
 
-cargo_uses_gitoxide!()
+cargo_uses_gitoxide!();

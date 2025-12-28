@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        ArgParser!();
+        MetaBadDelim!();
+        MetaItemListParser!();
+        ShouldEmit!();
+        MetaBadDelimSugg!();
+        NameValueParser!();
+    };
+}
+
+macro_rules! impl_296 {
+    () => {
+        deps!();
+        impl < 'a > ArgParser < 'a > { pub fn span (& self) -> Option < Span > { match self { Self :: NoArgs => None , Self :: List (l) => Some (l . span) , Self :: NameValue (n) => Some (n . value_span . with_lo (n . eq_span . lo ())) , } } pub fn from_attr_args < 'sess > (value : & 'a AttrArgs , parts : & [Symbol] , psess : & 'sess ParseSess , should_emit : ShouldEmit ,) -> Option < Self > { Some (match value { AttrArgs :: Empty => Self :: NoArgs , AttrArgs :: Delimited (args) => { if parts == & [sym :: rustc_dummy] { return Some (ArgParser :: List (MetaItemListParser { sub_parsers : ThinVec :: new () , span : args . dspan . entire () , })) ; } if args . delim != Delimiter :: Parenthesis { psess . dcx () . emit_err (MetaBadDelim { span : args . dspan . entire () , sugg : MetaBadDelimSugg { open : args . dspan . open , close : args . dspan . close } , }) ; return None ; } Self :: List (MetaItemListParser :: new (args , psess , should_emit) ?) } AttrArgs :: Eq { eq_span , expr } => Self :: NameValue (NameValueParser { eq_span : * eq_span , value : expr_to_lit (psess , & expr , expr . span , should_emit) ? , value_span : expr . span , }) , }) } # [doc = " Asserts that this MetaItem is a list"] # [doc = ""] # [doc = " Some examples:"] # [doc = ""] # [doc = " - `#[allow(clippy::complexity)]`: `(clippy::complexity)` is a list"] # [doc = " - `#[rustfmt::skip::macros(target_macro_name)]`: `(target_macro_name)` is a list"] pub fn list (& self) -> Option < & MetaItemListParser < 'a > > { match self { Self :: List (l) => Some (l) , Self :: NameValue (_) | Self :: NoArgs => None , } } # [doc = " Asserts that this MetaItem is a name-value pair."] # [doc = ""] # [doc = " Some examples:"] # [doc = ""] # [doc = " - `#[clippy::cyclomatic_complexity = \"100\"]`: `clippy::cyclomatic_complexity = \"100\"` is a name value pair,"] # [doc = "   where the name is a path (`clippy::cyclomatic_complexity`). You already checked the path"] # [doc = "   to get an `ArgParser`, so this method will effectively only assert that the `= \"100\"` is"] # [doc = "   there"] # [doc = " - `#[doc = \"hello\"]`: `doc = \"hello`  is also a name value pair"] pub fn name_value (& self) -> Option < & NameValueParser > { match self { Self :: NameValue (n) => Some (n) , Self :: List (_) | Self :: NoArgs => None , } } # [doc = " Assert that there were no args."] # [doc = " If there were, get a span to the arguments"] # [doc = " (to pass to [`AcceptContext::expected_no_args`](crate::context::AcceptContext::expected_no_args))."] pub fn no_args (& self) -> Result < () , Span > { match self { Self :: NoArgs => Ok (()) , Self :: List (args) => Err (args . span) , Self :: NameValue (args) => Err (args . eq_span . to (args . value_span)) , } } }
+    };
+}
+
+impl_296!()

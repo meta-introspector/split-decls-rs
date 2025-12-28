@@ -12,4 +12,4 @@ macro_rules! test_date_from_str {
     };
 }
 
-test_date_from_str!()
+test_date_from_str!();

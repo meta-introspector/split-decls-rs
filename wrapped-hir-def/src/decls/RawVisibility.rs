@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VisibilityExplicitness!();
         Visibility!();
+        VisibilityExplicitness!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RawVisibility {
     };
 }
 
-RawVisibility!()
+RawVisibility!();

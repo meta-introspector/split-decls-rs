@@ -11,4 +11,4 @@ macro_rules! encode_doesnt_write_extra_bytes {
     };
 }
 
-encode_doesnt_write_extra_bytes!()
+encode_doesnt_write_extra_bytes!();

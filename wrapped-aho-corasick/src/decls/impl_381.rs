@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Span!();
-        PrefilterI!();
-        Candidate!();
         PatternID!();
-        Memmem!();
+        Span!();
         Match!();
+        PrefilterI!();
+        Memmem!();
+        Candidate!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_381 {
     };
 }
 
-impl_381!()
+impl_381!();

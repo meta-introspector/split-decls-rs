@@ -4,4 +4,4 @@ macro_rules! BUF_SIZE {
     };
 }
 
-BUF_SIZE!()
+BUF_SIZE!();

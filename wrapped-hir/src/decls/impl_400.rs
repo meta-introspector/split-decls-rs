@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Function!();
         Callable!();
-        Callee!();
         AnyClosureId!();
-        CallableKind!();
-        SelfParam!();
-        Type!();
-        Param!();
         Closure!();
+        SelfParam!();
+        Param!();
+        CallableKind!();
+        Type!();
+        Function!();
+        Callee!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_400 {
     };
 }
 
-impl_400!()
+impl_400!();

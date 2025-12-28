@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashMap!();
         Iter!();
+        HashMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Values {
     };
 }
 
-Values!()
+Values!();

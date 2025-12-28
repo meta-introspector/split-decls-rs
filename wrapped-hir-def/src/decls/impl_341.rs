@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        GenericDefId!();
+        HasResolver!();
+        Resolver!();
         AdtId!();
         DefDatabase!();
-        HasResolver!();
-        GenericDefId!();
-        Resolver!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_341 {
     };
 }
 
-impl_341!()
+impl_341!();

@@ -11,4 +11,4 @@ macro_rules! GIT_RFC2822 {
     };
 }
 
-GIT_RFC2822!()
+GIT_RFC2822!();

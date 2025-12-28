@@ -4,4 +4,4 @@ macro_rules! impl_partial_eq_cow {
     };
 }
 
-impl_partial_eq_cow!()
+impl_partial_eq_cow!();

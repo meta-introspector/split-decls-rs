@@ -12,4 +12,4 @@ macro_rules! load_config {
     };
 }
 
-load_config!()
+load_config!();

@@ -13,4 +13,4 @@ macro_rules! decode_option_variant {
     };
 }
 
-decode_option_variant!()
+decode_option_variant!();

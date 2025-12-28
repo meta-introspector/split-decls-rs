@@ -1,6 +1,8 @@
 macro_rules! deps {
     () => {
+        Node!();
         Labeller!();
+        Edge!();
         GraphWalk!();
     };
 }

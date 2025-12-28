@@ -4,4 +4,4 @@ macro_rules! executors {
     };
 }
 
-executors!()
+executors!();

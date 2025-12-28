@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DemangleWrite!();
-        DemangleAsInner!();
         CvQualifiers!();
+        DemangleAsInner!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_168 {
     };
 }
 
-impl_168!()
+impl_168!();

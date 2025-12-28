@@ -61,4 +61,4 @@ fn f() -> i32 {
     };
 }
 
-test_tt_to_stmts!()
+test_tt_to_stmts!();

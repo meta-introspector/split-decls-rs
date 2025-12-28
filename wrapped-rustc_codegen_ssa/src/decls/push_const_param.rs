@@ -1,0 +1,7 @@
+macro_rules! push_const_param {
+    () => {
+        fn push_const_param < 'tcx > (tcx : TyCtxt < 'tcx > , ct : ty :: Const < 'tcx > , output : & mut String) { match ct . kind () { ty :: ConstKind :: Param (param) => { write ! (output , "{}" , param . name) } ty :: ConstKind :: Value (cv) => { match cv . ty . kind () { ty :: Int (ity) => { let bits = cv . try_to_bits (tcx , ty :: TypingEnv :: fully_monomorphized ()) . expect ("expected monomorphic const in codegen") ; let val = Integer :: from_int_ty (& tcx , * ity) . size () . sign_extend (bits) as i128 ; write ! (output , "{val}") } ty :: Uint (_) => { let val = cv . try_to_bits (tcx , ty :: TypingEnv :: fully_monomorphized ()) . expect ("expected monomorphic const in codegen") ; write ! (output , "{val}") } ty :: Bool => { let val = cv . try_to_bool () . expect ("expected monomorphic const in codegen") ; write ! (output , "{val}") } _ => { let hash_short = tcx . with_stable_hashing_context (| mut hcx | { let mut hasher = StableHasher :: new () ; hcx . while_hashing_spans (false , | hcx | cv . hash_stable (hcx , & mut hasher)) ; hasher . finish :: < Hash64 > () }) ; if cpp_like_debuginfo (tcx) { write ! (output , "CONST${hash_short:x}") } else { write ! (output , "{{CONST#{hash_short:x}}}") } } } } _ => bug ! ("Invalid `Const` during codegen: {:?}" , ct) , } . unwrap () ; }
+    };
+}
+
+push_const_param!()

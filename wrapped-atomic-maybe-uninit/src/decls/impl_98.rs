@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        AtomicCompareExchange!();
         AtomicMaybeUninit!();
         AtomicSwap!();
+        AtomicStore!();
         Primitive!();
         AtomicLoad!();
-        AtomicStore!();
+        AtomicCompareExchange!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

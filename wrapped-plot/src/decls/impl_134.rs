@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Figure!();
         Set!();
+        Figure!();
         Title!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

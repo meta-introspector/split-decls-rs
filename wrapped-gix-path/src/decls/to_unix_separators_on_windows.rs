@@ -4,4 +4,4 @@ macro_rules! to_unix_separators_on_windows {
     };
 }
 
-to_unix_separators_on_windows!()
+to_unix_separators_on_windows!();

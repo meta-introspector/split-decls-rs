@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TypeAlias!();
+        Union!();
         Trait!();
         Function!();
         Static!();
-        Union!();
+        TypeAlias!();
         Struct!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! LangItemTarget {
     };
 }
 
-LangItemTarget!()
+LangItemTarget!();

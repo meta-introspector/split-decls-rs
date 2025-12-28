@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OutputType!();
-        ServerResult!();
-        Field!();
-        Result!();
         Registry!();
+        OutputType!();
+        Result!();
         Error!();
+        Field!();
+        ServerResult!();
         ContextSelectionSet!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

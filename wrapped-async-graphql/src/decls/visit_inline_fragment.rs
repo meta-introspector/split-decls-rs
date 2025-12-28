@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         VisitorContext!();
+        Visitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! visit_inline_fragment {
     };
 }
 
-visit_inline_fragment!()
+visit_inline_fragment!();

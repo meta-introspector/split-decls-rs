@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ExpandDatabase!();
-        InFile!();
         FileRange!();
         HirFileId!();
+        InFile!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_100 {
     };
 }
 
-impl_100!()
+impl_100!();

@@ -7,4 +7,4 @@ macro_rules! generate_inner {
     };
 }
 
-generate_inner!()
+generate_inner!();

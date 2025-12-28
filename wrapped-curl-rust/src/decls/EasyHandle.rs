@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DetachGuard!();
-        Multi!();
         Easy!();
+        Multi!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EasyHandle {
     };
 }
 
-EasyHandle!()
+EasyHandle!();

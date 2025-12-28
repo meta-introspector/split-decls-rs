@@ -4,4 +4,4 @@ macro_rules! rustup_home {
     };
 }
 
-rustup_home!()
+rustup_home!();

@@ -4,4 +4,4 @@ macro_rules! IgnoreMatchGroup {
     };
 }
 
-IgnoreMatchGroup!()
+IgnoreMatchGroup!();

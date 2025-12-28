@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         IndexLookup!();
         SingleOrMultiIndex!();
-        PackId!();
         EntryForOrdering!();
+        PackId!();
         Ordering!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! maybe_sort_entries {
     };
 }
 
-maybe_sort_entries!()
+maybe_sort_entries!();

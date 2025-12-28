@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        State!();
+    };
+}
+
+macro_rules! PreferenceTrie {
+    () => {
+        deps!();
+        # [doc = " A \"preference\" trie that rejects literals that will never match when"] # [doc = " executing a leftmost first or \"preference\" search."] # [doc = ""] # [doc = " For example, if 'sam' is inserted, then trying to insert 'samwise' will be"] # [doc = " rejected because 'samwise' can never match since 'sam' will always take"] # [doc = " priority. However, if 'samwise' is inserted first, then inserting 'sam'"] # [doc = " after it is accepted. In this case, either 'samwise' or 'sam' can match in"] # [doc = " a \"preference\" search."] # [doc = ""] # [doc = " Note that we only use this trie as a \"set.\" That is, given a sequence of"] # [doc = " literals, we insert each one in order. An `insert` will reject a literal"] # [doc = " if a prefix of that literal already exists in the trie. Thus, to rebuild"] # [doc = " the \"minimal\" sequence, we simply only keep literals that were successfully"] # [doc = " inserted. (Since we don't need traversal, one wonders whether we can make"] # [doc = " some simplifications here, but I haven't given it a ton of thought and I've"] # [doc = " never seen this show up on a profile. Because of the heuristic limits"] # [doc = " imposed on literal extractions, the size of the inputs here is usually"] # [doc = " very small.)"] # [derive (Debug)] struct PreferenceTrie { # [doc = " The states in this trie. The index of a state in this vector is its ID."] states : Vec < State > , # [doc = " This vec indicates which states are match states. It always has"] # [doc = " the same length as `states` and is indexed by the same state ID."] # [doc = " A state with identifier `sid` is a match state if and only if"] # [doc = " `matches[sid].is_some()`. The option contains the index of the literal"] # [doc = " corresponding to the match. The index is offset by 1 so that it fits in"] # [doc = " a NonZeroUsize."] matches : Vec < Option < NonZeroUsize > > , # [doc = " The index to allocate to the next literal added to this trie. Starts at"] # [doc = " 1 and increments by 1 for every literal successfully added to the trie."] next_literal_index : usize , }
+    };
+}
+
+PreferenceTrie!()

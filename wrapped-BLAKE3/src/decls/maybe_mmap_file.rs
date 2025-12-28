@@ -4,4 +4,4 @@ macro_rules! maybe_mmap_file {
     };
 }
 
-maybe_mmap_file!()
+maybe_mmap_file!();

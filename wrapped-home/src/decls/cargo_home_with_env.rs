@@ -11,4 +11,4 @@ macro_rules! cargo_home_with_env {
     };
 }
 
-cargo_home_with_env!()
+cargo_home_with_env!();

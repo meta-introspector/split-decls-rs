@@ -4,4 +4,4 @@ macro_rules! read_entry_info {
     };
 }
 
-read_entry_info!()
+read_entry_info!();

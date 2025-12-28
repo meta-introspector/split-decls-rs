@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OccupiedEntry!();
         VacantEntry!();
+        OccupiedEntry!();
         HashSet!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_464 {
     };
 }
 
-impl_464!()
+impl_464!();

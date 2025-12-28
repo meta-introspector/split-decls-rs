@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ChunkState!();
         Hash!();
+        CVBytes!();
         CVWords!();
         OutputReader!();
-        ChunkState!();
-        CVBytes!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Hasher {
     };
 }
 
-Hasher!()
+Hasher!();

@@ -11,4 +11,4 @@ macro_rules! absolute_utf8 {
     };
 }
 
-absolute_utf8!()
+absolute_utf8!();

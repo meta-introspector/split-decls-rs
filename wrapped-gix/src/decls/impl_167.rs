@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Commit!();
-        Object!();
         Kind!();
+        Object!();
+        Commit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

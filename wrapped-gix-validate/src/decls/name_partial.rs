@@ -11,4 +11,4 @@ macro_rules! name_partial {
     };
 }
 
-name_partial!()
+name_partial!();

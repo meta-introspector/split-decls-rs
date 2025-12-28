@@ -54,4 +54,4 @@ fn main(foo: ()) {
     };
 }
 
-concat_spans!()
+concat_spans!();

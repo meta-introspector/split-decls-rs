@@ -12,4 +12,4 @@ macro_rules! seek_cb {
     };
 }
 
-seek_cb!()
+seek_cb!();

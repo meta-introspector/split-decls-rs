@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        XzEncoder!();
+        Stream!();
+    };
+}
+
+macro_rules! impl_47 {
+    () => {
+        deps!();
+        impl < R : Read > XzEncoder < R > { # [doc = " Create a new compression stream which will compress at the given level"] # [doc = " to read compress output to the give output stream."] # [doc = ""] # [doc = " The `level` argument here is typically 0-9 with 6 being a good default."] pub fn new (r : R , level : u32) -> XzEncoder < R > { XzEncoder { inner : bufread :: XzEncoder :: new (BufReader :: new (r) , level) , } } # [doc = " Creates a new encoder with a custom `Stream`."] # [doc = ""] # [doc = " The `Stream` can be pre-configured for multithreaded encoding, different"] # [doc = " compression options/tuning, etc."] pub fn new_stream (r : R , stream : Stream) -> XzEncoder < R > { XzEncoder { inner : bufread :: XzEncoder :: new_stream (BufReader :: new (r) , stream) , } } # [doc = " Acquires a reference to the underlying stream"] pub fn get_ref (& self) -> & R { self . inner . get_ref () . get_ref () } # [doc = " Acquires a mutable reference to the underlying stream"] # [doc = ""] # [doc = " Note that mutation of the stream may result in surprising results if"] # [doc = " this encoder is continued to be used."] pub fn get_mut (& mut self) -> & mut R { self . inner . get_mut () . get_mut () } # [doc = " Unwrap the underlying writer, finishing the compression stream."] pub fn into_inner (self) -> R { self . inner . into_inner () . into_inner () } # [doc = " Returns the number of bytes produced by the compressor"] # [doc = " (e.g. the number of bytes read from this stream)"] # [doc = ""] # [doc = " Note that, due to buffering, this only bears any relation to"] # [doc = " total_in() when the compressor chooses to flush its data"] # [doc = " (unfortunately, this won't happen this won't happen in general"] # [doc = " at the end of the stream, because the compressor doesn't know"] # [doc = " if there's more data to come).  At that point,"] # [doc = " `total_out() / total_in()` would be the compression ratio."] pub fn total_out (& self) -> u64 { self . inner . total_out () } # [doc = " Returns the number of bytes consumed by the compressor"] # [doc = " (e.g. the number of bytes read from the underlying stream)"] pub fn total_in (& self) -> u64 { self . inner . total_in () } }
+    };
+}
+
+impl_47!()

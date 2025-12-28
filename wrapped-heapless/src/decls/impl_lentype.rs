@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LenType!();
         Sealed!();
+        LenType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_lentype {
     };
 }
 
-impl_lentype!()
+impl_lentype!();

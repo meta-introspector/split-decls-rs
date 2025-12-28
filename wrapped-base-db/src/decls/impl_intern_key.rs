@@ -4,4 +4,4 @@ macro_rules! impl_intern_key {
     };
 }
 
-impl_intern_key!()
+impl_intern_key!();

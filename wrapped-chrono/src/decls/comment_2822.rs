@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CommentState!();
         ParseResult!();
+        CommentState!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! comment_2822 {
     };
 }
 
-comment_2822!()
+comment_2822!();

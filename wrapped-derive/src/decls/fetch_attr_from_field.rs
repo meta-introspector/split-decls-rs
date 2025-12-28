@@ -4,4 +4,4 @@ macro_rules! fetch_attr_from_field {
     };
 }
 
-fetch_attr_from_field!()
+fetch_attr_from_field!();

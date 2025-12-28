@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FutureIncompatibleInfo!();
+        FutureIncompatibilityReason!();
+    };
+}
+
+macro_rules! macro_82 {
+    () => {
+        deps!();
+        declare_lint ! { # [doc = " The `unstable_syntax_pre_expansion` lint detects the use of unstable"] # [doc = " syntax that is discarded during attribute expansion."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " #[cfg(FALSE)]"] # [doc = " macro foo() {}"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " The input to active attributes such as `#[cfg]` or procedural macro"] # [doc = " attributes is required to be valid syntax. Previously, the compiler only"] # [doc = " gated the use of unstable syntax features after resolving `#[cfg]` gates"] # [doc = " and expanding procedural macros."] # [doc = ""] # [doc = " To avoid relying on unstable syntax, move the use of unstable syntax"] # [doc = " into a position where the compiler does not parse the syntax, such as a"] # [doc = " functionlike macro."] # [doc = ""] # [doc = " ```rust"] # [doc = " # #![deny(unstable_syntax_pre_expansion)]"] # [doc = ""] # [doc = " macro_rules! identity {"] # [doc = "    ( $($tokens:tt)* ) => { $($tokens)* }"] # [doc = " }"] # [doc = ""] # [doc = " #[cfg(FALSE)]"] # [doc = " identity! {"] # [doc = "    macro foo() {}"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " This is a [future-incompatible] lint to transition this"] # [doc = " to a hard error in the future. See [issue #65860] for more details."] # [doc = ""] # [doc = " [issue #65860]: https://github.com/rust-lang/rust/issues/65860"] # [doc = " [future-incompatible]: ../index.md#future-incompatible-lints"] pub UNSTABLE_SYNTAX_PRE_EXPANSION , Warn , "unstable syntax can change at any point in the future, causing a hard error!" , @ future_incompatible = FutureIncompatibleInfo { reason : FutureIncompatibilityReason :: FutureReleaseError , reference : "issue #65860 <https://github.com/rust-lang/rust/issues/65860>" , } ; }
+    };
+}
+
+macro_82!()

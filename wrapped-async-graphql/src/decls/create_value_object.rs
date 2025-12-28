@@ -11,4 +11,4 @@ macro_rules! create_value_object {
     };
 }
 
-create_value_object!()
+create_value_object!();

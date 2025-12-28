@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Find!();
         Error!();
+        Find!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! existing {
     };
 }
 
-existing!()
+existing!();

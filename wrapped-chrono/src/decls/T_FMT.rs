@@ -12,4 +12,4 @@ macro_rules! T_FMT {
     };
 }
 
-T_FMT!()
+T_FMT!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Origin!();
-        ElementStyle!();
         Renderer!();
         StyledBuffer!();
+        ElementStyle!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! render_origin {
     };
 }
 
-render_origin!()
+render_origin!();

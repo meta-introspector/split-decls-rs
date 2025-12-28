@@ -4,4 +4,4 @@ macro_rules! reindent {
     };
 }
 
-reindent!()
+reindent!();

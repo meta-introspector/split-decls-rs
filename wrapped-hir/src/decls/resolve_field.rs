@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Field!();
         VariantDef!();
         DocLinkDef!();
+        Field!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! resolve_field {
     };
 }
 
-resolve_field!()
+resolve_field!();

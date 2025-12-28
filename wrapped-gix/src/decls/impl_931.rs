@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Connection!();
-        Protocol!();
+        Remote!();
+        Error!();
         Note!();
         Url!();
         Options!();
-        Ssh!();
-        Remote!();
-        Path!();
-        Error!();
         Direction!();
+        Path!();
+        Ssh!();
+        Protocol!();
+        Connection!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_931 {
     };
 }
 
-impl_931!()
+impl_931!();

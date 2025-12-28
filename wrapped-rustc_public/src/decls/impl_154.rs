@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Stable!();
+        BridgeTys!();
+    };
+}
+
+macro_rules! impl_154 {
+    () => {
+        deps!();
+        impl < 'tcx > Stable < 'tcx > for mir :: TerminatorKind < 'tcx > { type T = crate :: mir :: TerminatorKind ; fn stable < 'cx > (& self , tables : & mut Tables < 'cx , BridgeTys > , cx : & CompilerCtxt < 'cx , BridgeTys > ,) -> Self :: T { use crate :: mir :: TerminatorKind ; match self { mir :: TerminatorKind :: Goto { target } => { TerminatorKind :: Goto { target : target . as_usize () } } mir :: TerminatorKind :: SwitchInt { discr , targets } => TerminatorKind :: SwitchInt { discr : discr . stable (tables , cx) , targets : { let branches = targets . iter () . map (| (val , target) | (val , target . as_usize ())) ; crate :: mir :: SwitchTargets :: new (branches . collect () , targets . otherwise () . as_usize () ,) } , } , mir :: TerminatorKind :: UnwindResume => TerminatorKind :: Resume , mir :: TerminatorKind :: UnwindTerminate (_) => TerminatorKind :: Abort , mir :: TerminatorKind :: Return => TerminatorKind :: Return , mir :: TerminatorKind :: Unreachable => TerminatorKind :: Unreachable , mir :: TerminatorKind :: Drop { place , target , unwind , replace : _ , drop : _ , async_fut : _ , } => TerminatorKind :: Drop { place : place . stable (tables , cx) , target : target . as_usize () , unwind : unwind . stable (tables , cx) , } , mir :: TerminatorKind :: Call { func , args , destination , target , unwind , call_source : _ , fn_span : _ , } => TerminatorKind :: Call { func : func . stable (tables , cx) , args : args . iter () . map (| arg | arg . node . stable (tables , cx)) . collect () , destination : destination . stable (tables , cx) , target : target . map (| t | t . as_usize ()) , unwind : unwind . stable (tables , cx) , } , mir :: TerminatorKind :: TailCall { func : _ , args : _ , fn_span : _ } => todo ! () , mir :: TerminatorKind :: Assert { cond , expected , msg , target , unwind } => { TerminatorKind :: Assert { cond : cond . stable (tables , cx) , expected : * expected , msg : msg . stable (tables , cx) , target : target . as_usize () , unwind : unwind . stable (tables , cx) , } } mir :: TerminatorKind :: InlineAsm { asm_macro : _ , template , operands , options , line_spans , targets , unwind , } => TerminatorKind :: InlineAsm { template : format ! ("{template:?}") , operands : operands . iter () . map (| operand | operand . stable (tables , cx)) . collect () , options : format ! ("{options:?}") , line_spans : format ! ("{line_spans:?}") , destination : targets . first () . map (| d | d . as_usize ()) , unwind : unwind . stable (tables , cx) , } , mir :: TerminatorKind :: Yield { .. } | mir :: TerminatorKind :: CoroutineDrop | mir :: TerminatorKind :: FalseEdge { .. } | mir :: TerminatorKind :: FalseUnwind { .. } => unreachable ! () , } } }
+    };
+}
+
+impl_154!()

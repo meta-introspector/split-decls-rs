@@ -4,4 +4,4 @@ macro_rules! CommentState {
     };
 }
 
-CommentState!()
+CommentState!();

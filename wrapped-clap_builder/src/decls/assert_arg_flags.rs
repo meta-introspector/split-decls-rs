@@ -11,4 +11,4 @@ macro_rules! assert_arg_flags {
     };
 }
 
-assert_arg_flags!()
+assert_arg_flags!();

@@ -13,4 +13,4 @@ macro_rules! message_trailers_bytes {
     };
 }
 
-message_trailers_bytes!()
+message_trailers_bytes!();

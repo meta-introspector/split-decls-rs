@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Version!();
         Repository!();
         Pack!();
+        Version!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! pack_index_version {
     };
 }
 
-pack_index_version!()
+pack_index_version!();

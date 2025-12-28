@@ -4,4 +4,4 @@ macro_rules! DAYS_PER_4_YEARS {
     };
 }
 
-DAYS_PER_4_YEARS!()
+DAYS_PER_4_YEARS!();

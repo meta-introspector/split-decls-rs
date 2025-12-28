@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        GitReference!();
-        SourceKind!();
-        TomlLockfileSourceIdErrorKind!();
         TomlLockfileSourceId!();
-        Result!();
+        SourceKind!();
         TomlLockfileSourceIdError!();
+        GitReference!();
+        TomlLockfileSourceIdErrorKind!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_49 {
     };
 }
 
-impl_49!()
+impl_49!();

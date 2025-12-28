@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ContextSelectionSet!();
         OutputType!();
+        ResolveInfo!();
         Field!();
         ServerResult!();
-        ResolveInfo!();
-        ContextSelectionSet!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! resolve_list {
     };
 }
 
-resolve_list!()
+resolve_list!();

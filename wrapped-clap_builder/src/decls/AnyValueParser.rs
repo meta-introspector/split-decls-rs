@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        OsStr!();
-        Command!();
+        Error!();
         AnyValueId!();
+        PossibleValue!();
+        Result!();
         AnyValue!();
+        ValueSource!();
+        OsStr!();
         TypedValueParser!();
         Arg!();
-        Result!();
-        Error!();
-        ValueSource!();
-        PossibleValue!();
+        Command!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! AnyValueParser {
     };
 }
 
-AnyValueParser!()
+AnyValueParser!();

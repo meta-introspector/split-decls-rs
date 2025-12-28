@@ -12,4 +12,4 @@ macro_rules! test_x25519_invalid_keypair {
     };
 }
 
-test_x25519_invalid_keypair!()
+test_x25519_invalid_keypair!();

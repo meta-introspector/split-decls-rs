@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Sealed!();
-        SerializedBuffer!();
-        BufferKind!();
         BlockBuffer!();
         Error!();
+        SerializedBuffer!();
+        BufferKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

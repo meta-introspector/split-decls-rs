@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Default!();
-        PrepareFetch!();
-        PrepareCheckout!();
-        Direction!();
-        Repository!();
-        Clone!();
-        Note!();
-        Prepare!();
         Init!();
-        Error!();
-        RefLogMessage!();
-        Outcome!();
+        Direction!();
         Fetch!();
+        PrepareFetch!();
+        Prepare!();
+        Outcome!();
+        PrepareCheckout!();
+        Clone!();
+        Default!();
+        RefLogMessage!();
+        Error!();
+        Repository!();
+        Note!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

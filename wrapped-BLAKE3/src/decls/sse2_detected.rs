@@ -4,4 +4,4 @@ macro_rules! sse2_detected {
     };
 }
 
-sse2_detected!()
+sse2_detected!();

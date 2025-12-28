@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HashMap!();
-        RawTable!();
         RawEntryMut!();
+        RawTable!();
         Bucket!();
+        HashMap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! RawOccupiedEntryMut {
     };
 }
 
-RawOccupiedEntryMut!()
+RawOccupiedEntryMut!();

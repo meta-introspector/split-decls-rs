@@ -4,4 +4,4 @@ macro_rules! steal_from_freelist {
     };
 }
 
-steal_from_freelist!()
+steal_from_freelist!();

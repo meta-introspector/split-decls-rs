@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TemplateArgs!();
         UnqualifiedName!();
         UnscopedTemplateName!();
-        Name!();
         UnscopedName!();
+        TemplateArgs!();
+        Name!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MemberName {
     };
 }
 
-MemberName!()
+MemberName!();

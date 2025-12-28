@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Mode!();
         Ordering!();
-        Handle!();
+        Mode!();
         Store!();
+        Handle!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_64 {
     };
 }
 
-impl_64!()
+impl_64!();

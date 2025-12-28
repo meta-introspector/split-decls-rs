@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Counter!();
         Receiver!();
+        Counter!();
         Sender!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! new {
     };
 }
 
-new!()
+new!();

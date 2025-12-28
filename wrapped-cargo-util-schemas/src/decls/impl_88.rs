@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         UnresolvedError!();
         InheritableField!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

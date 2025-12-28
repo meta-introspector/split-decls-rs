@@ -11,4 +11,4 @@ macro_rules! pick_idx {
     };
 }
 
-pick_idx!()
+pick_idx!();

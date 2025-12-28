@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DemangleContext!();
-        DemangleWrite!();
-        LeafName!();
-        ArgScopeStack!();
-        Result!();
         GetLeafName!();
-        SubstitutionTable!();
         Demangle!();
+        Result!();
+        LeafName!();
+        SubstitutionTable!();
+        DemangleWrite!();
+        ArgScopeStack!();
+        DemangleContext!();
         Substitutable!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! define_handle {
     };
 }
 
-define_handle!()
+define_handle!();

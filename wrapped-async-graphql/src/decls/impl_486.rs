@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        SchemaBuilder!();
-        Data!();
-        QueryEnv!();
-        Subscription!();
-        Mutation!();
-        DynamicRequest!();
         Response!();
-        ServerResult!();
-        Query!();
-        ValidationMode!();
-        Schema!();
+        FieldValue!();
+        Mutation!();
+        Subscription!();
         Extensions!();
         Registry!();
+        ValidationMode!();
         SDLExportOptions!();
-        IntrospectionMode!();
-        Object!();
         ServerError!();
-        FieldValue!();
+        Data!();
+        QueryEnv!();
+        ServerResult!();
+        Schema!();
+        Object!();
+        SchemaBuilder!();
+        Query!();
+        IntrospectionMode!();
+        DynamicRequest!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_486 {
     };
 }
 
-impl_486!()
+impl_486!();

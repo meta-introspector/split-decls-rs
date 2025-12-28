@@ -4,4 +4,4 @@ macro_rules! serialize_impl {
     };
 }
 
-serialize_impl!()
+serialize_impl!();

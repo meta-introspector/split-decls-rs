@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Reader!();
-        ReaderOffset!();
-        DebugStr!();
-        AttributeValue!();
         Expression!();
+        DebugStr!();
+        ReaderOffset!();
+        AttributeValue!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_631 {
     };
 }
 
-impl_631!()
+impl_631!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpandDatabase!();
         FileIdToSyntax!();
+        ExpandDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

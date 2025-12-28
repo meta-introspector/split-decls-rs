@@ -4,4 +4,4 @@ macro_rules! QueryResult {
     };
 }
 
-QueryResult!()
+QueryResult!();

@@ -12,4 +12,4 @@ macro_rules! to_kind {
     };
 }
 
-to_kind!()
+to_kind!();

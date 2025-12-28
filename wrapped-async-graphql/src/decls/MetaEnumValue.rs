@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Deprecation!();
-        MetaVisibleFn!();
         MetaDirectiveInvocation!();
+        MetaVisibleFn!();
+        Deprecation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MetaEnumValue {
     };
 }
 
-MetaEnumValue!()
+MetaEnumValue!();

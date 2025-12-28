@@ -4,4 +4,4 @@ macro_rules! Buf {
     };
 }
 
-Buf!()
+Buf!();

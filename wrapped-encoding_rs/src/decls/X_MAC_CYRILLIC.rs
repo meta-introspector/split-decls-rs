@@ -11,4 +11,4 @@ macro_rules! X_MAC_CYRILLIC {
     };
 }
 
-X_MAC_CYRILLIC!()
+X_MAC_CYRILLIC!();

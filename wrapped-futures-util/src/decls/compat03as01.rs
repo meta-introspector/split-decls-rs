@@ -4,4 +4,4 @@ macro_rules! compat03as01 {
     };
 }
 
-compat03as01!()
+compat03as01!();

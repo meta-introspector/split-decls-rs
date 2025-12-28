@@ -1,0 +1,7 @@
+macro_rules! SPACE_SEPARATOR {
+    () => {
+        pub const SPACE_SEPARATOR : & 'static [(char , char)] = & [(' ' , ' ') , ('\u{a0}' , '\u{a0}') , ('\u{1680}' , '\u{1680}') , ('\u{2000}' , '\u{200a}') , ('\u{202f}' , '\u{202f}') , ('\u{205f}' , '\u{205f}') , ('\u{3000}' , '\u{3000}') ,] ;
+    };
+}
+
+SPACE_SEPARATOR!()

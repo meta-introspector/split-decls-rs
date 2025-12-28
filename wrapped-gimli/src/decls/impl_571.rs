@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         RangeListsFormat!();
-        Reader!();
         RawRngListEntry!();
-        RawRngListIter!();
         Encoding!();
+        RawRngListIter!();
         Result!();
+        Reader!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_571 {
     };
 }
 
-impl_571!()
+impl_571!();

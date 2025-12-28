@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TargetArch!();
-        Tool!();
         EnvGetter!();
+        Tool!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! find_tool_with_env {
     };
 }
 
-find_tool_with_env!()
+find_tool_with_env!();

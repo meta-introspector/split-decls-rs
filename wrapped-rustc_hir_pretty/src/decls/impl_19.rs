@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Nested!();
-        State!();
         AnnNode!();
+        State!();
     };
 }
 

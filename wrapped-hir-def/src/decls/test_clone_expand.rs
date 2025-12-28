@@ -32,4 +32,4 @@ impl <A: $crate::clone::Clone, B: $crate::clone::Clone, > $crate::clone::Clone f
     };
 }
 
-test_clone_expand!()
+test_clone_expand!();

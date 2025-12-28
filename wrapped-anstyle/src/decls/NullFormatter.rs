@@ -4,4 +4,4 @@ macro_rules! NullFormatter {
     };
 }
 
-NullFormatter!()
+NullFormatter!();

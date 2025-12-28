@@ -11,4 +11,4 @@ macro_rules! ERROR_SUCCESS {
     };
 }
 
-ERROR_SUCCESS!()
+ERROR_SUCCESS!();

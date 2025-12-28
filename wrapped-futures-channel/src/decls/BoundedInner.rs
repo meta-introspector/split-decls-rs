@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SenderTask!();
         Queue!();
+        SenderTask!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BoundedInner {
     };
 }
 
-BoundedInner!()
+BoundedInner!();

@@ -12,4 +12,4 @@ macro_rules! stream_not_allowed_leftmost_longest {
     };
 }
 
-stream_not_allowed_leftmost_longest!()
+stream_not_allowed_leftmost_longest!();

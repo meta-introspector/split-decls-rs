@@ -4,4 +4,4 @@ macro_rules! RefStore {
     };
 }
 
-RefStore!()
+RefStore!();

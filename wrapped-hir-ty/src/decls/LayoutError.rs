@@ -4,4 +4,4 @@ macro_rules! LayoutError {
     };
 }
 
-LayoutError!()
+LayoutError!();

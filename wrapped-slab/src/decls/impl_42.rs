@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        IterMut!();
+        Entry!();
+        Iter!();
     };
 }
 
 macro_rules! impl_42 {
     () => {
         deps!();
-        impl < T > FusedIterator for IterMut < '_ , T > { }
+        impl < T > DoubleEndedIterator for Iter < '_ , T > { fn next_back (& mut self) -> Option < Self :: Item > { while let Some ((key , entry)) = self . entries . next_back () { if let Entry :: Occupied (ref v) = * entry { self . len -= 1 ; return Some ((key , v)) ; } } debug_assert_eq ! (self . len , 0) ; None } }
     };
 }
 

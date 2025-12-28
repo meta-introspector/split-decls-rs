@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SyntaxFixupUndoInfo!();
-        SyntaxFixups!();
         SpanMapRef!();
+        SyntaxFixups!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! fixup_syntax {
     };
 }
 
-fixup_syntax!()
+fixup_syntax!();

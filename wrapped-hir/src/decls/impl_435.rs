@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Union!();
-        HasContainer!();
-        Module!();
         ItemContainer!();
+        Module!();
+        HasContainer!();
+        Union!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_435 {
     };
 }
 
-impl_435!()
+impl_435!();

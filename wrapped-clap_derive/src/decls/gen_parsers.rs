@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Sp!();
         Name!();
         Ty!();
         Item!();
-        Sp!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! gen_parsers {
     };
 }
 
-gen_parsers!()
+gen_parsers!();

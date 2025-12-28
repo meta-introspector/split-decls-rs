@@ -4,4 +4,4 @@ macro_rules! whitespace_len_fwd {
     };
 }
 
-whitespace_len_fwd!()
+whitespace_len_fwd!();

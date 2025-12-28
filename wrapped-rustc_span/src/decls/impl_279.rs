@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        Symbol!();
+        ExpnId!();
+        SpanDecoder!();
+        SyntaxContext!();
+        DefId!();
+        ByteSymbol!();
+        Span!();
+    };
+}
+
+macro_rules! impl_279 {
+    () => {
+        deps!();
+        impl SpanDecoder for MemDecoder < '_ > { fn decode_span (& mut self) -> Span { let lo = Decodable :: decode (self) ; let hi = Decodable :: decode (self) ; Span :: new (lo , hi , SyntaxContext :: root () , None) } fn decode_symbol (& mut self) -> Symbol { Symbol :: intern (self . read_str ()) } fn decode_byte_symbol (& mut self) -> ByteSymbol { ByteSymbol :: intern (self . read_byte_str ()) } fn decode_expn_id (& mut self) -> ExpnId { panic ! ("cannot decode `ExpnId` with `MemDecoder`") ; } fn decode_syntax_context (& mut self) -> SyntaxContext { panic ! ("cannot decode `SyntaxContext` with `MemDecoder`") ; } fn decode_crate_num (& mut self) -> CrateNum { CrateNum :: from_u32 (self . read_u32 ()) } fn decode_def_index (& mut self) -> DefIndex { panic ! ("cannot decode `DefIndex` with `MemDecoder`") ; } fn decode_def_id (& mut self) -> DefId { DefId { krate : Decodable :: decode (self) , index : Decodable :: decode (self) } } fn decode_attr_id (& mut self) -> AttrId { panic ! ("cannot decode `AttrId` with `MemDecoder`") ; } }
+    };
+}
+
+impl_279!()

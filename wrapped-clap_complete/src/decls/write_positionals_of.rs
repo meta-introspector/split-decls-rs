@@ -4,4 +4,4 @@ macro_rules! write_positionals_of {
     };
 }
 
-write_positionals_of!()
+write_positionals_of!();

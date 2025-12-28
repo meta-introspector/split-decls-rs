@@ -4,4 +4,4 @@ macro_rules! ERROR_TXT {
     };
 }
 
-ERROR_TXT!()
+ERROR_TXT!();

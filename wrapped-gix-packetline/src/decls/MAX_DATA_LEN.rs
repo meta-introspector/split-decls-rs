@@ -4,4 +4,4 @@ macro_rules! MAX_DATA_LEN {
     };
 }
 
-MAX_DATA_LEN!()
+MAX_DATA_LEN!();

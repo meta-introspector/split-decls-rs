@@ -11,4 +11,4 @@ macro_rules! WorktreeLockStatus {
     };
 }
 
-WorktreeLockStatus!()
+WorktreeLockStatus!();

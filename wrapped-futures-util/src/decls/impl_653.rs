@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        BaseStreamItem!();
-        Either!();
         PropagateBaseStreamError!();
-        FlowController!();
         FlowStep!();
+        BaseStreamItem!();
+        FlowController!();
         InnerStreamItem!();
+        Either!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_653 {
     };
 }
 
-impl_653!()
+impl_653!();

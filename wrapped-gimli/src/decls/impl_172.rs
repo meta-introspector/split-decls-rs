@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Pointer!();
+        EhHdrTableIter!();
         Reader!();
         Result!();
         Error!();
-        Pointer!();
-        EhHdrTableIter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

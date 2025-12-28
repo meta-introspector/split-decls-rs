@@ -4,4 +4,4 @@ macro_rules! to_normal_path_components {
     };
 }
 
-to_normal_path_components!()
+to_normal_path_components!();

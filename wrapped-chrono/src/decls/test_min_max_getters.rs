@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
         Weekday!();
         NaiveDateTime!();
+        FixedOffset!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_min_max_getters {
     };
 }
 
-test_min_max_getters!()
+test_min_max_getters!();

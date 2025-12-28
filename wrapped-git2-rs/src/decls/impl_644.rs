@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        Binding!();
-        Direction!();
-        StringArray!();
         Error!();
-        Note!();
         FetchOptions!();
-        PushOptions!();
-        RemoteConnection!();
-        Buf!();
-        Remote!();
-        IntoCString!();
-        Refspec!();
-        RemoteCallbacks!();
-        RemoteHead!();
         ProxyOptions!();
-        AutotagOption!();
+        Note!();
         Refspecs!();
+        Direction!();
+        Refspec!();
+        Remote!();
+        Binding!();
+        Buf!();
+        RemoteCallbacks!();
+        PushOptions!();
         Progress!();
+        IntoCString!();
+        AutotagOption!();
+        RemoteConnection!();
+        RemoteHead!();
+        StringArray!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_644 {
     };
 }
 
-impl_644!()
+impl_644!();

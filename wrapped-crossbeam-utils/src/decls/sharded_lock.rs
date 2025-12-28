@@ -4,4 +4,4 @@ macro_rules! sharded_lock {
     };
 }
 
-sharded_lock!()
+sharded_lock!();

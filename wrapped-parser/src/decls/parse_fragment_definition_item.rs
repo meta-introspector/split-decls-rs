@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PositionCalculator!();
         FragmentDefinition!();
-        Positioned!();
-        FragmentDefinitionItem!();
+        PositionCalculator!();
         Result!();
+        Positioned!();
         Rule!();
+        FragmentDefinitionItem!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_fragment_definition_item {
     };
 }
 
-parse_fragment_definition_item!()
+parse_fragment_definition_item!();

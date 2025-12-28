@@ -11,4 +11,4 @@ macro_rules! real_span_map {
     };
 }
 
-real_span_map!()
+real_span_map!();

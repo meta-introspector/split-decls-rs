@@ -4,4 +4,4 @@ macro_rules! thread_pool {
     };
 }
 
-thread_pool!()
+thread_pool!();

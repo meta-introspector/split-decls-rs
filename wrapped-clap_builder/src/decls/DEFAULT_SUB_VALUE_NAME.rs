@@ -4,4 +4,4 @@ macro_rules! DEFAULT_SUB_VALUE_NAME {
     };
 }
 
-DEFAULT_SUB_VALUE_NAME!()
+DEFAULT_SUB_VALUE_NAME!();

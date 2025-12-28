@@ -4,4 +4,4 @@ macro_rules! rerun_env {
     };
 }
 
-rerun_env!()
+rerun_env!();

@@ -4,4 +4,4 @@ macro_rules! read_in_full_ignore_missing {
     };
 }
 
-read_in_full_ignore_missing!()
+read_in_full_ignore_missing!();

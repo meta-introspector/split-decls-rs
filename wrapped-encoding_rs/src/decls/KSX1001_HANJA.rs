@@ -4,4 +4,4 @@ macro_rules! KSX1001_HANJA {
     };
 }
 
-KSX1001_HANJA!()
+KSX1001_HANJA!();

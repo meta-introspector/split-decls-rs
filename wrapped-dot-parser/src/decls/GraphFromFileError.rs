@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PestError!();
         IOError!();
+        PestError!();
         ParseError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! GraphFromFileError {
     };
 }
 
-GraphFromFileError!()
+GraphFromFileError!();

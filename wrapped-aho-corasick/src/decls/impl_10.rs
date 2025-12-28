@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        PatternID!();
-        FindIter!();
+        Anchored!();
+        AhoCorasick!();
         Input!();
-        Match!();
+        FindOverlappingIter!();
+        StreamFindIter!();
+        FindIter!();
         StartKind!();
         MatchError!();
-        FindOverlappingIter!();
-        OverlappingState!();
         MatchKind!();
-        AhoCorasick!();
+        OverlappingState!();
+        Match!();
+        PatternID!();
         ErrorKind!();
-        StreamFindIter!();
-        Anchored!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

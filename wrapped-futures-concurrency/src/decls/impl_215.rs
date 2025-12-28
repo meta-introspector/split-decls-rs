@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Join!();
         FutureExt!();
         Race!();
-        Join!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_215 {
     };
 }
 
-impl_215!()
+impl_215!();

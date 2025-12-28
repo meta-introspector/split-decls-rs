@@ -1,6 +1,9 @@
 macro_rules! deps {
     () => {
+        Config!();
         Slab!();
+        InitGuard!();
+        DefaultConfig!();
     };
 }
 

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Worker!();
-        Buffer!();
-        Inner!();
         Stealer!();
+        Buffer!();
+        Worker!();
         Flavor!();
+        Inner!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

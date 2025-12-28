@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ReaderOffset!();
-        Encoding!();
-        FileEntryFormat!();
-        Reader!();
         DebugLineOffset!();
-        LineEncoding!();
-        AttributeValue!();
+        Reader!();
+        Encoding!();
         FileEntry!();
+        ReaderOffset!();
+        AttributeValue!();
+        FileEntryFormat!();
+        LineEncoding!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! LineProgramHeader {
     };
 }
 
-LineProgramHeader!()
+LineProgramHeader!();

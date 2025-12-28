@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        TextElementTermination!();
-        Pattern!();
-        PatternElement!();
-        TextElementPosition!();
-        ErrorKind!();
-        TextElementType!();
-        Slice!();
-        PatternElementPlaceholders!();
         Parser!();
+        PatternElement!();
+        PatternElementPlaceholders!();
         Result!();
+        TextElementType!();
+        ErrorKind!();
+        TextElementPosition!();
+        TextElementTermination!();
+        Slice!();
+        Pattern!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

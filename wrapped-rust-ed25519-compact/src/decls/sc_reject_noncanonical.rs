@@ -11,4 +11,4 @@ macro_rules! sc_reject_noncanonical {
     };
 }
 
-sc_reject_noncanonical!()
+sc_reject_noncanonical!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Platform!();
+        ResourceRef!();
         DriverChoice!();
         Options!();
-        ResourceRef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! PlatformRef {
     };
 }
 
-PlatformRef!()
+PlatformRef!();

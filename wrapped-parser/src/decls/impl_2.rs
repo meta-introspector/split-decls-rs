@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         OperationsIterInner!();
-        OperationsIter!();
         DocumentOperations!();
+        OperationsIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

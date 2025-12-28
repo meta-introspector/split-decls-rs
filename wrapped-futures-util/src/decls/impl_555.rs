@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SplitStream!();
         SplitSink!();
+        SplitStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_555 {
     };
 }
 
-impl_555!()
+impl_555!();

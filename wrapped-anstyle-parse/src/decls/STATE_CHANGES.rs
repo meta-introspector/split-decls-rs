@@ -4,4 +4,4 @@ macro_rules! STATE_CHANGES {
     };
 }
 
-STATE_CHANGES!()
+STATE_CHANGES!();

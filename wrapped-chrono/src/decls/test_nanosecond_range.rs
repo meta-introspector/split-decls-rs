@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         DateTime!();
+        Days!();
         Utc!();
         TimeDelta!();
-        Days!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_nanosecond_range {
     };
 }
 
-test_nanosecond_range!()
+test_nanosecond_range!();

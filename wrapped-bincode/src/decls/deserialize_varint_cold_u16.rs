@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        IntegerType!();
-        DecodeError!();
         Endianness!();
+        DecodeError!();
+        IntegerType!();
+        Reader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! deserialize_varint_cold_u16 {
     };
 }
 
-deserialize_varint_cold_u16!()
+deserialize_varint_cold_u16!();

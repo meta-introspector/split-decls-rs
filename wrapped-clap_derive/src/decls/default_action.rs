@@ -12,4 +12,4 @@ macro_rules! default_action {
     };
 }
 
-default_action!()
+default_action!();

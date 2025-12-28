@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        CursorType!();
         EdgeNameType!();
-        ObjectType!();
         OutputType!();
         DefaultEdgeName!();
-        CursorType!();
+        ObjectType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Edge {
     };
 }
 
-Edge!()
+Edge!();

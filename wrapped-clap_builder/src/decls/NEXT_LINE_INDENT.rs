@@ -4,4 +4,4 @@ macro_rules! NEXT_LINE_INDENT {
     };
 }
 
-NEXT_LINE_INDENT!()
+NEXT_LINE_INDENT!();

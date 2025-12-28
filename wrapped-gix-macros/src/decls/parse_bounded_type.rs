@@ -4,4 +4,4 @@ macro_rules! parse_bounded_type {
     };
 }
 
-parse_bounded_type!()
+parse_bounded_type!();

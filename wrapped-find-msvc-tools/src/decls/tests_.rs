@@ -58,4 +58,4 @@ productPath: C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Comm
     };
 }
 
-tests_!()
+tests_!();

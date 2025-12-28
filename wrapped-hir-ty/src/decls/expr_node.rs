@@ -11,4 +11,4 @@ macro_rules! expr_node {
     };
 }
 
-expr_node!()
+expr_node!();

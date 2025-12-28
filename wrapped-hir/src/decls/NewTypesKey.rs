@@ -4,4 +4,4 @@ macro_rules! NewTypesKey {
     };
 }
 
-NewTypesKey!()
+NewTypesKey!();

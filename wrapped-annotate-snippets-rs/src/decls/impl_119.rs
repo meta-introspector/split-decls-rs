@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Title!();
-        Group!();
-        Element!();
         Level!();
+        Element!();
+        Group!();
+        Title!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

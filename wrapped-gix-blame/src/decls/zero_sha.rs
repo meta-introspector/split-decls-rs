@@ -4,4 +4,4 @@ macro_rules! zero_sha {
     };
 }
 
-zero_sha!()
+zero_sha!();

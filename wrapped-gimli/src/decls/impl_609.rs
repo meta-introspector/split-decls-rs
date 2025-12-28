@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        SectionId!();
+        UnitHeader!();
+        DebugInfoUnitHeadersIter!();
+        LittleEndian!();
+        DebugInfoOffset!();
+        Reader!();
         DebugInfo!();
         UnitSectionOffset!();
-        DebugInfoUnitHeadersIter!();
         Result!();
-        Reader!();
-        SectionId!();
-        LittleEndian!();
-        UnitHeader!();
-        DebugInfoOffset!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_609 {
     };
 }
 
-impl_609!()
+impl_609!();

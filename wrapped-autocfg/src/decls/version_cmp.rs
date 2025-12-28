@@ -11,4 +11,4 @@ macro_rules! version_cmp {
     };
 }
 
-version_cmp!()
+version_cmp!();

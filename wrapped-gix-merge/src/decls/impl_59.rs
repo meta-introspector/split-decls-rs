@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Options!();
-        Driver!();
         Mode!();
-        Platform!();
         Outcome!();
         Pipeline!();
+        Platform!();
+        Driver!();
+        Options!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

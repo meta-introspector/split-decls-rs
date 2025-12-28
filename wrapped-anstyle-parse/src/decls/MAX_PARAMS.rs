@@ -4,4 +4,4 @@ macro_rules! MAX_PARAMS {
     };
 }
 
-MAX_PARAMS!()
+MAX_PARAMS!();

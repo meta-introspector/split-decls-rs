@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StripBytes!();
         Utf8Parser!();
+        StripBytes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StripBytesIter {
     };
 }
 
-StripBytesIter!()
+StripBytesIter!();

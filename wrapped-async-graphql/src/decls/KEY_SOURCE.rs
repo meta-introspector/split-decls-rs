@@ -4,4 +4,4 @@ macro_rules! KEY_SOURCE {
     };
 }
 
-KEY_SOURCE!()
+KEY_SOURCE!();

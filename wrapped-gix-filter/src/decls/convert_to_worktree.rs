@@ -4,4 +4,4 @@ macro_rules! convert_to_worktree {
     };
 }
 
-convert_to_worktree!()
+convert_to_worktree!();

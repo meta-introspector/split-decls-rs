@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Repository!();
         Delegate!();
-        Error!();
         Spec!();
+        Error!();
         Note!();
         Options!();
-        Repository!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_879 {
     };
 }
 
-impl_879!()
+impl_879!();

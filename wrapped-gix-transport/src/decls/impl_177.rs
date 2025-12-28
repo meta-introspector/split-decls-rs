@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Connection!();
-        ConnectionState!();
-        Protocol!();
         ConnectMode!();
+        Connection!();
+        Protocol!();
+        ConnectionState!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_177 {
     };
 }
 
-impl_177!()
+impl_177!();

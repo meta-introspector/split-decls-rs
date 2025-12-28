@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Input!();
-        AhoCorasickKind!();
-        AhoCorasick!();
-        Anchored!();
         DFA!();
         StartKind!();
+        AhoCorasick!();
+        AhoCorasickKind!();
+        Input!();
+        Anchored!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! unanchored_not_allowed_even_if_technically_available {
     };
 }
 
-unanchored_not_allowed_even_if_technically_available!()
+unanchored_not_allowed_even_if_technically_available!();

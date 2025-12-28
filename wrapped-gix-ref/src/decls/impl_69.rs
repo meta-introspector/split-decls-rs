@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FullNameRef!();
         TargetRef!();
         Kind!();
         Target!();
+        FullNameRef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_69 {
     };
 }
 
-impl_69!()
+impl_69!();

@@ -4,4 +4,4 @@ macro_rules! AVERAGE_NUM_ATTRS {
     };
 }
 
-AVERAGE_NUM_ATTRS!()
+AVERAGE_NUM_ATTRS!();

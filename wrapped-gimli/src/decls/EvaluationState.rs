@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        EvaluationWaiting!();
         Reader!();
+        EvaluationWaiting!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EvaluationState {
     };
 }
 
-EvaluationState!()
+EvaluationState!();

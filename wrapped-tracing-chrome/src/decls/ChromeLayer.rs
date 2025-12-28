@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Message!();
         NameFn!();
         TraceStyle!();
+        Message!();
     };
 }
 

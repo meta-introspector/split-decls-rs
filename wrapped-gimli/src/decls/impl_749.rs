@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         LineInstruction!();
-        DebugLine!();
         Result!();
+        Encoding!();
+        DebugLine!();
         Writer!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_749 {
     };
 }
 
-impl_749!()
+impl_749!();

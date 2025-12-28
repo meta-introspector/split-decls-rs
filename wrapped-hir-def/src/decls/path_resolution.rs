@@ -4,4 +4,4 @@ macro_rules! path_resolution {
     };
 }
 
-path_resolution!()
+path_resolution!();

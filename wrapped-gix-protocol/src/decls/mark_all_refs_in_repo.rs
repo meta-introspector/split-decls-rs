@@ -12,4 +12,4 @@ macro_rules! mark_all_refs_in_repo {
     };
 }
 
-mark_all_refs_in_repo!()
+mark_all_refs_in_repo!();

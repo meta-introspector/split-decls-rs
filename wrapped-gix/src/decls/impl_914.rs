@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Name!();
         String!();
+        Name!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_914 {
     };
 }
 
-impl_914!()
+impl_914!();

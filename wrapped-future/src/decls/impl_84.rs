@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        AsyncOperationCompletedHandler!();
+        IAsyncOperation!();
+        AsyncStatus!();
+    };
+}
+
+macro_rules! impl_84 {
+    () => {
+        deps!();
+        impl < TResult : windows_core :: RuntimeType + 'static > IAsyncOperation < TResult > { pub fn SetCompleted < P0 > (& self , handler : P0) -> windows_core :: Result < () > where P0 : windows_core :: Param < AsyncOperationCompletedHandler < TResult > > , { let this = self ; unsafe { (windows_core :: Interface :: vtable (this) . SetCompleted) (windows_core :: Interface :: as_raw (this) , handler . param () . abi () ,) . ok () } } pub fn Completed (& self) -> windows_core :: Result < AsyncOperationCompletedHandler < TResult > > { let this = self ; unsafe { let mut result__ = core :: mem :: zeroed () ; (windows_core :: Interface :: vtable (this) . Completed) (windows_core :: Interface :: as_raw (this) , & mut result__ ,) . and_then (| | windows_core :: Type :: from_abi (result__)) } } pub fn GetResults (& self) -> windows_core :: Result < TResult > { let this = self ; unsafe { let mut result__ = core :: mem :: zeroed () ; (windows_core :: Interface :: vtable (this) . GetResults) (windows_core :: Interface :: as_raw (this) , & mut result__ ,) . and_then (| | windows_core :: Type :: from_abi (result__)) } } pub fn Id (& self) -> windows_core :: Result < u32 > { let this = & windows_core :: Interface :: cast :: < IAsyncInfo > (self) ? ; unsafe { let mut result__ = core :: mem :: zeroed () ; (windows_core :: Interface :: vtable (this) . Id) (windows_core :: Interface :: as_raw (this) , & mut result__ ,) . map (| | result__) } } pub fn Status (& self) -> windows_core :: Result < AsyncStatus > { let this = & windows_core :: Interface :: cast :: < IAsyncInfo > (self) ? ; unsafe { let mut result__ = core :: mem :: zeroed () ; (windows_core :: Interface :: vtable (this) . Status) (windows_core :: Interface :: as_raw (this) , & mut result__ ,) . map (| | result__) } } pub fn ErrorCode (& self) -> windows_core :: Result < windows_core :: HRESULT > { let this = & windows_core :: Interface :: cast :: < IAsyncInfo > (self) ? ; unsafe { let mut result__ = core :: mem :: zeroed () ; (windows_core :: Interface :: vtable (this) . ErrorCode) (windows_core :: Interface :: as_raw (this) , & mut result__ ,) . map (| | result__) } } pub fn Cancel (& self) -> windows_core :: Result < () > { let this = & windows_core :: Interface :: cast :: < IAsyncInfo > (self) ? ; unsafe { (windows_core :: Interface :: vtable (this) . Cancel) (windows_core :: Interface :: as_raw (this)) . ok () } } pub fn Close (& self) -> windows_core :: Result < () > { let this = & windows_core :: Interface :: cast :: < IAsyncInfo > (self) ? ; unsafe { (windows_core :: Interface :: vtable (this) . Close) (windows_core :: Interface :: as_raw (this)) . ok () } } }
+    };
+}
+
+impl_84!()

@@ -13,4 +13,4 @@ macro_rules! Base64NoPadding {
     };
 }
 
-Base64NoPadding!()
+Base64NoPadding!();

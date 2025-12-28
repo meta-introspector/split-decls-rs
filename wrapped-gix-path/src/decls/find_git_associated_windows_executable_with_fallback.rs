@@ -4,4 +4,4 @@ macro_rules! find_git_associated_windows_executable_with_fallback {
     };
 }
 
-find_git_associated_windows_executable_with_fallback!()
+find_git_associated_windows_executable_with_fallback!();

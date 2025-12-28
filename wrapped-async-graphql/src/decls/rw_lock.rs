@@ -4,4 +4,4 @@ macro_rules! rw_lock {
     };
 }
 
-rw_lock!()
+rw_lock!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SmallVec!();
+        CollectionAllocErr!();
     };
 }
 
 macro_rules! impl_74 {
     () => {
         deps!();
-        impl < T , U , const N : usize , const M : usize > PartialEq < [U ; M] > for SmallVec < T , N > where T : PartialEq < U > , { # [inline] fn eq (& self , other : & [U ; M]) -> bool { self [..] == other [..] } }
+        impl core :: fmt :: Display for CollectionAllocErr { fn fmt (& self , f : & mut core :: fmt :: Formatter < '_ >) -> core :: fmt :: Result { write ! (f , "Allocation error: {:?}" , self) } }
     };
 }
 

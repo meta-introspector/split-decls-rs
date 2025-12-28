@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Outcome!();
-        ProgressId!();
-        Options!();
-        Kind!();
-        File!();
         Entry!();
+        Outcome!();
+        Kind!();
+        ProgressId!();
+        File!();
+        Options!();
+        Error!();
         Version!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_294 {
     };
 }
 
-impl_294!()
+impl_294!();

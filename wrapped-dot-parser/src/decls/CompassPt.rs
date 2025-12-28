@@ -4,4 +4,4 @@ macro_rules! CompassPt {
     };
 }
 
-CompassPt!()
+CompassPt!();

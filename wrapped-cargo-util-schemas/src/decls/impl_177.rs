@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InvalidCargoFeatures!();
         Result!();
+        InvalidCargoFeatures!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_177 {
     };
 }
 
-impl_177!()
+impl_177!();

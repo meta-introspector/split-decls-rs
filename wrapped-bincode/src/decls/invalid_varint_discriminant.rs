@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecodeError!();
         IntegerType!();
+        DecodeError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! invalid_varint_discriminant {
     };
 }
 
-invalid_varint_discriminant!()
+invalid_varint_discriminant!();

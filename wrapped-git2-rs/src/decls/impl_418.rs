@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Buf!();
         Mempack!();
         Repository!();
-        Buf!();
         Error!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_418 {
     };
 }
 
-impl_418!()
+impl_418!();

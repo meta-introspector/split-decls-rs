@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Diagnostics!();
-        HirDatabase!();
         GenericPredicates!();
+        Diagnostics!();
         PredicateFilter!();
+        HirDatabase!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

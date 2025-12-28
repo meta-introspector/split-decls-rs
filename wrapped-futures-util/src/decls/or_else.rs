@@ -4,4 +4,4 @@ macro_rules! or_else {
     };
 }
 
-or_else!()
+or_else!();

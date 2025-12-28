@@ -4,4 +4,4 @@ macro_rules! TemplateParam {
     };
 }
 
-TemplateParam!()
+TemplateParam!();

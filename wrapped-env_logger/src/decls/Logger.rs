@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Writer!();
         FormatFn!();
+        Writer!();
         Builder!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Logger {
     };
 }
 
-Logger!()
+Logger!();

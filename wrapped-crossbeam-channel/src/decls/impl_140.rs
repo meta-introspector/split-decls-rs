@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Context!();
-        Operation!();
         SelectHandle!();
+        Operation!();
         Channel!();
         Token!();
+        Context!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

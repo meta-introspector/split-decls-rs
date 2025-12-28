@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BindingAnnotation!();
-        HygieneId!();
         BindingProblems!();
+        HygieneId!();
+        BindingAnnotation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Binding {
     };
 }
 
-Binding!()
+Binding!();

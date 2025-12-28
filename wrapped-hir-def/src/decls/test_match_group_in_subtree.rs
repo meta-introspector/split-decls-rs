@@ -17,4 +17,4 @@ fn baz() {
     };
 }
 
-test_match_group_in_subtree!()
+test_match_group_in_subtree!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Context!();
         DelayedFilteredStream!();
+        Context!();
+        Error!();
         Outcome!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! process {
     };
 }
 
-process!()
+process!();

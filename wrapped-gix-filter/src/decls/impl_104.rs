@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ToWorktreeOutcome!();
-        Delay!();
-        ToGitOutcome!();
-        Configuration!();
         Options!();
-        Error!();
+        Configuration!();
+        Operation!();
         Pipeline!();
         IndexObjectFn!();
-        RoundTripCheck!();
         Process!();
-        Operation!();
+        Delay!();
+        RoundTripCheck!();
+        ToWorktreeOutcome!();
+        Error!();
+        ToGitOutcome!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

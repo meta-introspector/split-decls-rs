@@ -12,4 +12,4 @@ macro_rules! set_ssl_cert_file {
     };
 }
 
-set_ssl_cert_file!()
+set_ssl_cert_file!();

@@ -11,4 +11,4 @@ macro_rules! IncorrectGenericsOrder {
     };
 }
 
-IncorrectGenericsOrder!()
+IncorrectGenericsOrder!();

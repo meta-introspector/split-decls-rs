@@ -11,4 +11,4 @@ macro_rules! fiat_25519_carry_scmul_121666 {
     };
 }
 
-fiat_25519_carry_scmul_121666!()
+fiat_25519_carry_scmul_121666!();

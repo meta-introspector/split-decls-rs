@@ -4,4 +4,4 @@ macro_rules! INVALID_ENCODING_MSG {
     };
 }
 
-INVALID_ENCODING_MSG!()
+INVALID_ENCODING_MSG!();

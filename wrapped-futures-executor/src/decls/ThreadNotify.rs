@@ -4,4 +4,4 @@ macro_rules! ThreadNotify {
     };
 }
 
-ThreadNotify!()
+ThreadNotify!();

@@ -4,4 +4,4 @@ macro_rules! InspectOkFn {
     };
 }
 
-InspectOkFn!()
+InspectOkFn!();

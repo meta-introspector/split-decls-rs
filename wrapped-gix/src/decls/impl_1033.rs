@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Change!();
-        Iter!();
         ApplyChange!();
+        Iter!();
         Item!();
+        Change!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1033 {
     };
 }
 
-impl_1033!()
+impl_1033!();

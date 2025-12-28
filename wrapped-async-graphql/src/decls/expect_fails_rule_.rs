@@ -11,4 +11,4 @@ macro_rules! expect_fails_rule_ {
     };
 }
 
-expect_fails_rule_!()
+expect_fails_rule_!();

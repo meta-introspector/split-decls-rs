@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SubmoduleStatus!();
         Conflict!();
         Summary!();
-        Change!();
         EntryStatus!();
+        SubmoduleStatus!();
+        Change!();
         Entry!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Writer!();
         EncodeError!();
+        Writer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! encode_utf8 {
     };
 }
 
-encode_utf8!()
+encode_utf8!();

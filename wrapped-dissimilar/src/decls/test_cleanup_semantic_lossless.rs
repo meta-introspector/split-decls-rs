@@ -4,4 +4,4 @@ macro_rules! test_cleanup_semantic_lossless {
     };
 }
 
-test_cleanup_semantic_lossless!()
+test_cleanup_semantic_lossless!();

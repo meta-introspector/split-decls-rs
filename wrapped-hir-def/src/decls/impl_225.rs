@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BuiltinFloat!();
-        Literal!();
         BuiltinUint!();
-        FloatTypeWrapper!();
         BuiltinInt!();
+        Literal!();
+        FloatTypeWrapper!();
+        BuiltinFloat!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_225 {
     };
 }
 
-impl_225!()
+impl_225!();

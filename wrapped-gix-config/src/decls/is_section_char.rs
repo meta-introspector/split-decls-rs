@@ -4,4 +4,4 @@ macro_rules! is_section_char {
     };
 }
 
-is_section_char!()
+is_section_char!();

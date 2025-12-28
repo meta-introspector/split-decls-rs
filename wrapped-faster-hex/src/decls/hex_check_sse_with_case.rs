@@ -11,4 +11,4 @@ macro_rules! hex_check_sse_with_case {
     };
 }
 
-hex_check_sse_with_case!()
+hex_check_sse_with_case!();

@@ -4,4 +4,4 @@ macro_rules! bit_or {
     };
 }
 
-bit_or!()
+bit_or!();

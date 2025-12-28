@@ -4,4 +4,4 @@ macro_rules! is_attr {
     };
 }
 
-is_attr!()
+is_attr!();

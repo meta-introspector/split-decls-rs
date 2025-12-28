@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        SerdeMapVisitor!();
+        SerializeMetadata!();
+        SerializeLevel!();
+        SerializeFieldSet!();
     };
 }
 
 macro_rules! impl_18 {
     () => {
         deps!();
-        impl < S > SerdeMapVisitor < S > where S : SerializeMap , { # [doc = " Create a new map visitor."] pub fn new (serializer : S) -> Self { Self { serializer , state : Ok (()) , } } # [doc = " Completes serializing the visited object, returning `Ok(())` if all"] # [doc = " fields were serialized correctly, or `Error(S::Error)` if a field could"] # [doc = " not be serialized."] pub fn finish (self) -> Result < S :: Ok , S :: Error > { self . state ? ; self . serializer . end () } # [doc = " Completes serializing the visited object, returning ownership of the underlying serializer"] # [doc = " if all fields were serialized correctly, or `Err(S::Error)` if a field could not be"] # [doc = " serialized."] pub fn take_serializer (self) -> Result < S , S :: Error > { self . state ? ; Ok (self . serializer) } }
+        impl Serialize for SerializeMetadata < '_ > { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : Serializer , { let mut state = serializer . serialize_struct ("Metadata" , 9) ? ; state . serialize_field ("name" , self . 0 . name ()) ? ; state . serialize_field ("target" , self . 0 . target ()) ? ; state . serialize_field ("level" , & SerializeLevel (self . 0 . level ())) ? ; state . serialize_field ("module_path" , & self . 0 . module_path ()) ? ; state . serialize_field ("file" , & self . 0 . file ()) ? ; state . serialize_field ("line" , & self . 0 . line ()) ? ; state . serialize_field ("fields" , & SerializeFieldSet (self . 0 . fields ())) ? ; state . serialize_field ("is_span" , & self . 0 . is_span ()) ? ; state . serialize_field ("is_event" , & self . 0 . is_event ()) ? ; state . end () } }
     };
 }
 

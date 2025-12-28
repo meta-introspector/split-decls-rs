@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Outcome!();
-        Error!();
         Resource!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! prepare_diff {
     };
 }
 
-prepare_diff!()
+prepare_diff!();

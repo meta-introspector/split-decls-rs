@@ -11,4 +11,4 @@ macro_rules! write_partial_chunk_encodes_partial_chunk {
     };
 }
 
-write_partial_chunk_encodes_partial_chunk!()
+write_partial_chunk_encodes_partial_chunk!();

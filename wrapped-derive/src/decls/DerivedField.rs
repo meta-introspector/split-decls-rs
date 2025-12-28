@@ -4,4 +4,4 @@ macro_rules! DerivedField {
     };
 }
 
-DerivedField!()
+DerivedField!();

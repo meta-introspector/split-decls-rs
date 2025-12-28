@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SpecIndex!();
         Mapping!();
+        SpecIndex!();
         Ref!();
-        Error!();
-        Source!();
-        Action!();
         Context!();
+        Error!();
+        Action!();
+        Source!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

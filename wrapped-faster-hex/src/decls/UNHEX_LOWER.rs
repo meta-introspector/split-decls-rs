@@ -11,4 +11,4 @@ macro_rules! UNHEX_LOWER {
     };
 }
 
-UNHEX_LOWER!()
+UNHEX_LOWER!();

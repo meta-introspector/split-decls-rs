@@ -4,4 +4,4 @@ macro_rules! impl_cmp_os_str {
     };
 }
 
-impl_cmp_os_str!()
+impl_cmp_os_str!();

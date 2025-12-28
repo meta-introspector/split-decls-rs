@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Timer!();
-        ClientMessage!();
-        Executor!();
-        Result!();
         Data!();
+        Executor!();
+        Timer!();
+        Result!();
+        ClientMessage!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_657 {
     };
 }
 
-impl_657!()
+impl_657!();

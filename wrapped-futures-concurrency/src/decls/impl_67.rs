@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WakerArray!();
         ReadinessArrayRef!();
+        WakerArray!();
         ReadinessArray!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

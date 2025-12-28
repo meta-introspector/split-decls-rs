@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         RawTableInner!();
-        Bucket!();
         RawTable!();
+        Bucket!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

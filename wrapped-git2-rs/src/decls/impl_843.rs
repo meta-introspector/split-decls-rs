@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        TreeBuilder!();
+        Error!();
+        Oid!();
+        IntoCString!();
         Note!();
+        FilterCb!();
         Binding!();
         TreeEntry!();
-        Oid!();
         Tree!();
-        TreeBuilder!();
-        IntoCString!();
-        Error!();
-        FilterCb!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_843 {
     };
 }
 
-impl_843!()
+impl_843!();

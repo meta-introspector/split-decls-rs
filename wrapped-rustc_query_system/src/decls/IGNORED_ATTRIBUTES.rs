@@ -1,0 +1,7 @@
+macro_rules! IGNORED_ATTRIBUTES {
+    () => {
+        pub const IGNORED_ATTRIBUTES : & [Symbol] = & [sym :: cfg_trace , sym :: rustc_if_this_changed , sym :: rustc_then_this_would_need , sym :: rustc_dirty , sym :: rustc_clean , sym :: rustc_partition_reused , sym :: rustc_partition_codegened , sym :: rustc_expected_cgu_reuse ,] ;
+    };
+}
+
+IGNORED_ATTRIBUTES!()

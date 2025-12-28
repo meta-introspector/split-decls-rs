@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Snapshot!();
-        Header!();
-        Error!();
         Store!();
+        Header!();
         IndexForObjectInPack!();
         Handle!();
+        Snapshot!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

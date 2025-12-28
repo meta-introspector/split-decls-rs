@@ -4,4 +4,4 @@ macro_rules! TimeZoneName {
     };
 }
 
-TimeZoneName!()
+TimeZoneName!();

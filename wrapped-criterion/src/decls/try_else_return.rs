@@ -4,4 +4,4 @@ macro_rules! try_else_return {
     };
 }
 
-try_else_return!()
+try_else_return!();

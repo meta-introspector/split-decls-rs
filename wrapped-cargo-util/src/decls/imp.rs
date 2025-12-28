@@ -4,4 +4,4 @@ macro_rules! imp {
     };
 }
 
-imp!()
+imp!();

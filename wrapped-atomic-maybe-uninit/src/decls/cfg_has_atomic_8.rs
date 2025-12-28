@@ -4,4 +4,4 @@ macro_rules! cfg_has_atomic_8 {
     };
 }
 
-cfg_has_atomic_8!()
+cfg_has_atomic_8!();

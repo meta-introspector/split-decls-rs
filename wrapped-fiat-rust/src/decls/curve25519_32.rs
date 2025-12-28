@@ -4,4 +4,4 @@ macro_rules! curve25519_32 {
     };
 }
 
-curve25519_32!()
+curve25519_32!();

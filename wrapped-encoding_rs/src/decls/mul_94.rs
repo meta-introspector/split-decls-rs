@@ -4,4 +4,4 @@ macro_rules! mul_94 {
     };
 }
 
-mul_94!()
+mul_94!();

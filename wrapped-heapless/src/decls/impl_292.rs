@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Vec!();
         LenType!();
+        Vec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_292 {
     };
 }
 
-impl_292!()
+impl_292!();

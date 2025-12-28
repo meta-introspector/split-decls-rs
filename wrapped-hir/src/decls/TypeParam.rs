@@ -4,4 +4,4 @@ macro_rules! TypeParam {
     };
 }
 
-TypeParam!()
+TypeParam!();

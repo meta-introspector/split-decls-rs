@@ -12,4 +12,4 @@ macro_rules! euc_jp_decoder_functions {
     };
 }
 
-euc_jp_decoder_functions!()
+euc_jp_decoder_functions!();

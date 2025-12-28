@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        OwnedEntry!();
+        Config!();
+        OwnedRef!();
+        Clear!();
     };
 }
 
 macro_rules! impl_33 {
     () => {
         deps!();
-        unsafe impl < T , C > Send for OwnedEntry < T , C > where T : Sync , C : cfg :: Config , { }
+        unsafe impl < T , C > Sync for OwnedRef < T , C > where T : Sync + Clear + Default , C : cfg :: Config , { }
     };
 }
 

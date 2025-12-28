@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MatchLocation!();
-        TrackedAssignment!();
         Outcome!();
-        MatchKind!();
         Match!();
+        TrackedAssignment!();
+        MatchLocation!();
+        MatchKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

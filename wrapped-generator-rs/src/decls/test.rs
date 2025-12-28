@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Scope!();
-        Gn!();
         Error!();
+        Gn!();
+        Scope!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

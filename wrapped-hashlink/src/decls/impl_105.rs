@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ValueLinks!();
         IntoIter!();
         LinkedHashMap!();
+        ValueLinks!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

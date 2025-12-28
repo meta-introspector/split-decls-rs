@@ -1,7 +1,11 @@
 macro_rules! deps {
     () => {
-        SpanData!();
         StableSourceFileId!();
+        LocalDefId!();
+        Span!();
+        SpanData!();
+        DefId!();
+        DefPathHash!();
     };
 }
 

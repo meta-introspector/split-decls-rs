@@ -4,4 +4,4 @@ macro_rules! update_slow {
     };
 }
 
-update_slow!()
+update_slow!();

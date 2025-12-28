@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Operand!();
-        Place!();
-        SwitchTargets!();
         BasicBlockId!();
+        SwitchTargets!();
+        Place!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TerminatorKind {
     };
 }
 
-TerminatorKind!()
+TerminatorKind!();

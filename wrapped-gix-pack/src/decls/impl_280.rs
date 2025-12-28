@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        Header!();
-        Options!();
-        EntryRange!();
-        ProgressId!();
+        Context!();
+        Version!();
         TreeEntry!();
         Tree!();
-        Item!();
-        Context!();
+        ProgressId!();
+        EntryRange!();
         File!();
-        Version!();
-        Outcome!();
+        Entry!();
+        Header!();
+        Item!();
+        Options!();
         Kind!();
+        Outcome!();
         Error!();
     };
 }
@@ -24,4 +24,4 @@ macro_rules! impl_280 {
     };
 }
 
-impl_280!()
+impl_280!();

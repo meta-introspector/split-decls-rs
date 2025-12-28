@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LifetimeSource!();
         ExpressionOnlySourceMap!();
         TypeSource!();
+        LifetimeSource!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ExpressionStoreSourceMap {
     };
 }
 
-ExpressionStoreSourceMap!()
+ExpressionStoreSourceMap!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DefaultHashBuilder!();
+        Entry!();
         Bucket!();
         HashTable!();
-        Entry!();
+        DefaultHashBuilder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! OccupiedEntry {
     };
 }
 
-OccupiedEntry!()
+OccupiedEntry!();

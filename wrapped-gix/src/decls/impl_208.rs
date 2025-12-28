@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Rewrite!();
-        Repository!();
-        Note!();
         Change!();
+        Repository!();
+        Rewrite!();
+        Note!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_208 {
     };
 }
 
-impl_208!()
+impl_208!();

@@ -4,4 +4,4 @@ macro_rules! ContextError {
     };
 }
 
-ContextError!()
+ContextError!();

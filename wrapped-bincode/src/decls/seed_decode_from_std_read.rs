@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OwnedSerdeDecoder!();
-        IoReader!();
-        Decode!();
-        DecodeError!();
         Config!();
+        IoReader!();
+        OwnedSerdeDecoder!();
+        DecodeError!();
         DecoderImpl!();
+        Decode!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! seed_decode_from_std_read {
     };
 }
 
-seed_decode_from_std_read!()
+seed_decode_from_std_read!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Slope!();
+        Result!();
         Statistic!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        LazyResult!();
+        LazyFunctions!();
         Functions!();
-        Error!();
         Result!();
         UnitRef!();
-        LazyFunctions!();
+        LazyResult!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

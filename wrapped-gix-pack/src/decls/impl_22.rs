@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        Item!();
-        EntriesToBytesIter!();
-        File!();
-        Kind!();
-        Entry!();
-        EntryDataMode!();
-        Bundle!();
-        Error!();
-        Find!();
-        WriteOutcome!();
-        Outcome!();
-        BytesToEntriesIter!();
-        LookupRefDeltaObjectsIter!();
         ProgressId!();
-        LockWriter!();
-        SharedTempFile!();
-        Options!();
+        File!();
         PassThrough!();
+        EntryDataMode!();
+        BytesToEntriesIter!();
         Version!();
+        LookupRefDeltaObjectsIter!();
+        Options!();
+        Bundle!();
+        EntriesToBytesIter!();
+        LockWriter!();
+        Error!();
+        Item!();
+        Entry!();
+        Outcome!();
+        Find!();
+        SharedTempFile!();
+        WriteOutcome!();
+        Kind!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

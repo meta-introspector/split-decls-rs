@@ -27,4 +27,4 @@ impl <T, U, const N: u32, __S> $crate::ops::CoerceUnsized<Foo<'a, T, __S, N>> fo
     };
 }
 
-coerce_pointee_expansion!()
+coerce_pointee_expansion!();

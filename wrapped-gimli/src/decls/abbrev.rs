@@ -4,4 +4,4 @@ macro_rules! abbrev {
     };
 }
 
-abbrev!()
+abbrev!();

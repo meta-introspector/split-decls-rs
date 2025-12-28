@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        DropFlagMode!();
+        DropStyle!();
+        MirPatch!();
+    };
+}
+
+macro_rules! DropElaborator {
+    () => {
+        deps!();
+        pub (crate) trait DropElaborator < 'a , 'tcx > : fmt :: Debug { # [doc = " The type representing paths that can be moved out of."] # [doc = ""] # [doc = " Users can move out of individual fields of a struct, such as `a.b.c`. This type is used to"] # [doc = " represent such move paths. Sometimes tracking individual move paths is not necessary, in"] # [doc = " which case this may be set to (for example) `()`."] type Path : Copy + fmt :: Debug ; fn patch_ref (& self) -> & MirPatch < 'tcx > ; fn patch (& mut self) -> & mut MirPatch < 'tcx > ; fn body (& self) -> & 'a Body < 'tcx > ; fn tcx (& self) -> TyCtxt < 'tcx > ; fn typing_env (& self) -> ty :: TypingEnv < 'tcx > ; fn allow_async_drops (& self) -> bool ; fn terminator_loc (& self , bb : BasicBlock) -> Location ; # [doc = " Returns how `path` should be dropped, given `mode`."] fn drop_style (& self , path : Self :: Path , mode : DropFlagMode) -> DropStyle ; # [doc = " Returns the drop flag of `path` as a MIR `Operand` (or `None` if `path` has no drop flag)."] fn get_drop_flag (& mut self , path : Self :: Path) -> Option < Operand < 'tcx > > ; # [doc = " Modifies the MIR patch so that the drop flag of `path` (if any) is cleared at `location`."] # [doc = ""] # [doc = " If `mode` is deep, drop flags of all child paths should also be cleared by inserting"] # [doc = " additional statements."] fn clear_drop_flag (& mut self , location : Location , path : Self :: Path , mode : DropFlagMode) ; # [doc = " Returns the subpath of a field of `path` (or `None` if there is no dedicated subpath)."] # [doc = ""] # [doc = " If this returns `None`, `field` will not get a dedicated drop flag."] fn field_subpath (& self , path : Self :: Path , field : FieldIdx) -> Option < Self :: Path > ; # [doc = " Returns the subpath of a dereference of `path` (or `None` if there is no dedicated subpath)."] # [doc = ""] # [doc = " If this returns `None`, `*path` will not get a dedicated drop flag."] # [doc = ""] # [doc = " This is only relevant for `Box<T>`, where the contained `T` can be moved out of the box."] fn deref_subpath (& self , path : Self :: Path) -> Option < Self :: Path > ; # [doc = " Returns the subpath of downcasting `path` to one of its variants."] # [doc = ""] # [doc = " If this returns `None`, the downcast of `path` will not get a dedicated drop flag."] fn downcast_subpath (& self , path : Self :: Path , variant : VariantIdx) -> Option < Self :: Path > ; # [doc = " Returns the subpath of indexing a fixed-size array `path`."] # [doc = ""] # [doc = " If this returns `None`, elements of `path` will not get a dedicated drop flag."] # [doc = ""] # [doc = " This is only relevant for array patterns, which can move out of individual array elements."] fn array_subpath (& self , path : Self :: Path , index : u64 , size : u64) -> Option < Self :: Path > ; }
+    };
+}
+
+DropElaborator!()

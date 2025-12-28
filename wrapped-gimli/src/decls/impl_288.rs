@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        EndianSlice!();
+        Endianity!();
         Result!();
         Error!();
         DebugBytes!();
-        EndianSlice!();
-        Endianity!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_288 {
     };
 }
 
-impl_288!()
+impl_288!();

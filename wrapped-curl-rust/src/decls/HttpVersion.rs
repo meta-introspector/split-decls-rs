@@ -4,4 +4,4 @@ macro_rules! HttpVersion {
     };
 }
 
-HttpVersion!()
+HttpVersion!();

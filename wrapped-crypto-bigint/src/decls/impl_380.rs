@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Limb!();
         Uint!();
         Monty!();
         Unsigned!();
-        Limb!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_380 {
     };
 }
 
-impl_380!()
+impl_380!();

@@ -4,4 +4,4 @@ macro_rules! AltairSource {
     };
 }
 
-AltairSource!()
+AltairSource!();

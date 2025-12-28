@@ -11,4 +11,4 @@ macro_rules! gen_size_hint_method {
     };
 }
 
-gen_size_hint_method!()
+gen_size_hint_method!();

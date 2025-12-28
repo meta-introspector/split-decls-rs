@@ -4,4 +4,4 @@ macro_rules! to_bstr_err {
     };
 }
 
-to_bstr_err!()
+to_bstr_err!();

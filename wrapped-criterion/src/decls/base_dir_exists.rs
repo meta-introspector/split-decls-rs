@@ -11,4 +11,4 @@ macro_rules! base_dir_exists {
     };
 }
 
-base_dir_exists!()
+base_dir_exists!();

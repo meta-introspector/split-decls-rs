@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Binder!();
+    };
+}
+
+macro_rules! impl_512 {
+    () => {
+        deps!();
+        impl DebruijnIndex { # [doc = " Returns the resulting index when this value is moved into"] # [doc = " `amount` number of new binders. So, e.g., if you had"] # [doc = ""] # [doc = "    for<'a> fn(&'a x)"] # [doc = ""] # [doc = " and you wanted to change it to"] # [doc = ""] # [doc = "    for<'a> fn(for<'b> fn(&'a x))"] # [doc = ""] # [doc = " you would need to shift the index for `'a` into a new binder."] # [inline] # [must_use] pub fn shifted_in (self , amount : u32) -> DebruijnIndex { DebruijnIndex :: from_u32 (self . as_u32 () + amount) } # [doc = " Update this index in place by shifting it \"in\" through"] # [doc = " `amount` number of binders."] # [inline] pub fn shift_in (& mut self , amount : u32) { * self = self . shifted_in (amount) ; } # [doc = " Returns the resulting index when this value is moved out from"] # [doc = " `amount` number of new binders."] # [inline] # [must_use] pub fn shifted_out (self , amount : u32) -> DebruijnIndex { DebruijnIndex :: from_u32 (self . as_u32 () - amount) } # [doc = " Update in place by shifting out from `amount` binders."] # [inline] pub fn shift_out (& mut self , amount : u32) { * self = self . shifted_out (amount) ; } # [doc = " Adjusts any De Bruijn indices so as to make `to_binder` the"] # [doc = " innermost binder. That is, if we have something bound at `to_binder`,"] # [doc = " it will now be bound at INNERMOST. This is an appropriate thing to do"] # [doc = " when moving a region out from inside binders:"] # [doc = ""] # [doc = " ```ignore (illustrative)"] # [doc = "             for<'a>   fn(for<'b>   for<'c>   fn(&'a u32), _)"] # [doc = " // Binder:  D3           D2        D1            ^^"] # [doc = " ```"] # [doc = ""] # [doc = " Here, the region `'a` would have the De Bruijn index D3,"] # [doc = " because it is the bound 3 binders out. However, if we wanted"] # [doc = " to refer to that region `'a` in the second argument (the `_`),"] # [doc = " those two binders would not be in scope. In that case, we"] # [doc = " might invoke `shift_out_to_binder(D3)`. This would adjust the"] # [doc = " De Bruijn index of `'a` to D1 (the innermost binder)."] # [doc = ""] # [doc = " If we invoke `shift_out_to_binder` and the region is in fact"] # [doc = " bound by one of the binders we are shifting out of, that is an"] # [doc = " error (and should fail an assertion failure)."] # [inline] pub fn shifted_out_to_binder (self , to_binder : DebruijnIndex) -> Self { self . shifted_out (to_binder . as_u32 () - INNERMOST . as_u32 ()) } }
+    };
+}
+
+impl_512!()

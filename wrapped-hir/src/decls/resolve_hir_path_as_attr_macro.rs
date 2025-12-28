@@ -11,4 +11,4 @@ macro_rules! resolve_hir_path_as_attr_macro {
     };
 }
 
-resolve_hir_path_as_attr_macro!()
+resolve_hir_path_as_attr_macro!();

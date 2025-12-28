@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Fixint!();
         IntEncoding!();
+        Fixint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_261 {
     };
 }
 
-impl_261!()
+impl_261!();

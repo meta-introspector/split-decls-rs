@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TreeId!();
-        DefMapCrateData!();
-        DefMap!();
         ModuleData!();
-        DefDatabase!();
-        DefMapPair!();
-        Visibility!();
         ModuleOrigin!();
+        DefMapPair!();
+        DefDatabase!();
+        TreeId!();
+        DefMap!();
+        Visibility!();
+        DefMapCrateData!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! crate_local_def_map {
     };
 }
 
-crate_local_def_map!()
+crate_local_def_map!();

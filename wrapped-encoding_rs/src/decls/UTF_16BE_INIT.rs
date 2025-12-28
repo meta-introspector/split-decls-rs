@@ -12,4 +12,4 @@ macro_rules! UTF_16BE_INIT {
     };
 }
 
-UTF_16BE_INIT!()
+UTF_16BE_INIT!();

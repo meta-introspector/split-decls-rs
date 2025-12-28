@@ -4,4 +4,4 @@ macro_rules! linear_map {
     };
 }
 
-linear_map!()
+linear_map!();

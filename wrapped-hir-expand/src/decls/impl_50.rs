@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         HirFileId!();
-        DeclarativeMacroExpander!();
-        ExpandErrorKind!();
-        AstId!();
         ExpandResult!();
         ExpandError!();
+        DeclarativeMacroExpander!();
+        AstId!();
         RawAttrs!();
-        MacroCallId!();
         ExpandDatabase!();
+        MacroCallId!();
+        ExpandErrorKind!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

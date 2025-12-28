@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Subcommand!();
-        HelpTemplate!();
         Command!();
-        Parser!();
         StyledStr!();
+        HelpTemplate!();
+        Parser!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_558 {
     };
 }
 
-impl_558!()
+impl_558!();

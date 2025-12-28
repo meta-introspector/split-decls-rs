@@ -4,4 +4,4 @@ macro_rules! sgx_image_base {
     };
 }
 
-sgx_image_base!()
+sgx_image_base!();

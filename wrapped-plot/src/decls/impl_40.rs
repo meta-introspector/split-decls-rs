@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Default!();
         Properties!();
+        Default!();
         LineType!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

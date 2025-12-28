@@ -4,4 +4,4 @@ macro_rules! pin {
     };
 }
 
-pin!()
+pin!();

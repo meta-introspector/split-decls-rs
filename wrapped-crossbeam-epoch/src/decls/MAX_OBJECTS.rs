@@ -4,4 +4,4 @@ macro_rules! MAX_OBJECTS {
     };
 }
 
-MAX_OBJECTS!()
+MAX_OBJECTS!();

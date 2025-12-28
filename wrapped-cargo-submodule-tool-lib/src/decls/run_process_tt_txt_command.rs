@@ -11,4 +11,4 @@ macro_rules! run_process_tt_txt_command {
     };
 }
 
-run_process_tt_txt_command!()
+run_process_tt_txt_command!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FromUtf16Error!();
         String!();
-        CapacityError!();
-        LenType!();
         Vec!();
+        LenType!();
+        CapacityError!();
+        FromUtf16Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_230 {
     };
 }
 
-impl_230!()
+impl_230!();

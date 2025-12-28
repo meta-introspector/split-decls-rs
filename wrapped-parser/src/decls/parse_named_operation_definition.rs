@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Rule!();
-        OperationDefinition!();
+        OperationDefinitionItem!();
         Result!();
         PositionCalculator!();
-        OperationDefinitionItem!();
+        OperationDefinition!();
+        Rule!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_named_operation_definition {
     };
 }
 
-parse_named_operation_definition!()
+parse_named_operation_definition!();

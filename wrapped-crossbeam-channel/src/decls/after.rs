@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Receiver!();
-        ReceiverFlavor!();
         Channel!();
+        ReceiverFlavor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! after {
     };
 }
 
-after!()
+after!();

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Interner!();
+        AliasTy!();
+        AliasTerm!();
+    };
+}
+
+macro_rules! impl_379 {
+    () => {
+        deps!();
+        impl < I : Interner > From < ty :: AliasTy < I > > for AliasTerm < I > { fn from (ty : ty :: AliasTy < I >) -> Self { AliasTerm { args : ty . args , def_id : ty . def_id , _use_alias_term_new_instead : () } } }
+    };
+}
+
+impl_379!()

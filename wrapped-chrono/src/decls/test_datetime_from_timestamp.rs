@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         DateTime!();
+        NaiveDate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_datetime_from_timestamp {
     };
 }
 
-test_datetime_from_timestamp!()
+test_datetime_from_timestamp!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         Parser!();
+        ErrorKind!();
         Slice!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ParserError {
     };
 }
 
-ParserError!()
+ParserError!();

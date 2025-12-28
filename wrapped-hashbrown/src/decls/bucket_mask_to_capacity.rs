@@ -4,4 +4,4 @@ macro_rules! bucket_mask_to_capacity {
     };
 }
 
-bucket_mask_to_capacity!()
+bucket_mask_to_capacity!();

@@ -12,4 +12,4 @@ macro_rules! yield_from {
     };
 }
 
-yield_from!()
+yield_from!();

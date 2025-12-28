@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_85 {
     () => {
         deps!();
-        impl < T , const N : usize > AsMut < [T] > for SmallVec < T , N > { # [inline] fn as_mut (& mut self) -> & mut [T] { self . as_mut_slice () } }
+        impl < T , const N : usize > Default for SmallVec < T , N > { # [inline] fn default () -> Self { Self :: new () } }
     };
 }
 

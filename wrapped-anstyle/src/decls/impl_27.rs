@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Effects!();
+        EffectsDisplay!();
         Style!();
         Reset!();
         EffectIndexIter!();
         EffectIter!();
-        EffectsDisplay!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

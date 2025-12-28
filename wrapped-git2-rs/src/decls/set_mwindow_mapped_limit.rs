@@ -11,4 +11,4 @@ macro_rules! set_mwindow_mapped_limit {
     };
 }
 
-set_mwindow_mapped_limit!()
+set_mwindow_mapped_limit!();

@@ -4,4 +4,4 @@ macro_rules! target_spec_json {
     };
 }
 
-target_spec_json!()
+target_spec_json!();

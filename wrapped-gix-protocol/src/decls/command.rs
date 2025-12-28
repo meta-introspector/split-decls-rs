@@ -4,4 +4,4 @@ macro_rules! command {
     };
 }
 
-command!()
+command!();

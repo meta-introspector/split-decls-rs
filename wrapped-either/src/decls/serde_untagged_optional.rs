@@ -4,4 +4,4 @@ macro_rules! serde_untagged_optional {
     };
 }
 
-serde_untagged_optional!()
+serde_untagged_optional!();

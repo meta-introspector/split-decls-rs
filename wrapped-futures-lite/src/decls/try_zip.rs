@@ -4,4 +4,4 @@ macro_rules! try_zip {
     };
 }
 
-try_zip!()
+try_zip!();

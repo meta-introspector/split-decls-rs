@@ -4,4 +4,4 @@ macro_rules! SYSTEMTIME {
     };
 }
 
-SYSTEMTIME!()
+SYSTEMTIME!();

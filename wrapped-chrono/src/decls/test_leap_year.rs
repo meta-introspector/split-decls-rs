@@ -11,4 +11,4 @@ macro_rules! test_leap_year {
     };
 }
 
-test_leap_year!()
+test_leap_year!();

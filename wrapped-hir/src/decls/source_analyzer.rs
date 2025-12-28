@@ -4,4 +4,4 @@ macro_rules! source_analyzer {
     };
 }
 
-source_analyzer!()
+source_analyzer!();

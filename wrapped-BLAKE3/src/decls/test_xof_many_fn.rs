@@ -11,4 +11,4 @@ macro_rules! test_xof_many_fn {
     };
 }
 
-test_xof_many_fn!()
+test_xof_many_fn!();

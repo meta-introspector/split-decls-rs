@@ -22,4 +22,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

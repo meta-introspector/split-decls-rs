@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Unparker!();
         Inner!();
+        Unparker!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

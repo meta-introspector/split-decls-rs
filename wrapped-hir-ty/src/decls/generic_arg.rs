@@ -4,4 +4,4 @@ macro_rules! generic_arg {
     };
 }
 
-generic_arg!()
+generic_arg!();

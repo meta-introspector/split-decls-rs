@@ -4,4 +4,4 @@ macro_rules! local {
     };
 }
 
-local!()
+local!();

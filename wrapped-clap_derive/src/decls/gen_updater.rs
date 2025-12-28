@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Item!();
+        Kind!();
         Ty!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! gen_updater {
     };
 }
 
-gen_updater!()
+gen_updater!();

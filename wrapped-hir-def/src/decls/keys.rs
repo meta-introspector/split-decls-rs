@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        TypeOrConstParamId!();
-        DynMap!();
-        Impl!();
-        MacroRules!();
-        TypeAlias!();
-        MacroCall!();
-        Struct!();
-        ExternBlock!();
-        Static!();
-        Item!();
-        Key!();
-        FieldId!();
         Union!();
         Use!();
-        ExternCrate!();
-        Policy!();
         Enum!();
-        Const!();
-        LifetimeParamId!();
+        TypeAlias!();
         Trait!();
+        TypeOrConstParamId!();
+        Impl!();
+        LifetimeParamId!();
+        Policy!();
+        Const!();
+        Key!();
+        MacroRules!();
+        ExternBlock!();
+        DynMap!();
+        Item!();
+        FieldId!();
+        ExternCrate!();
+        MacroCall!();
+        Static!();
+        Struct!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! keys {
     };
 }
 
-keys!()
+keys!();

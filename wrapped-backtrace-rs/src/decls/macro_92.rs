@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BOOL!();
         MEMORY_MAPPED_VIEW_ADDRESS!();
+        BOOL!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_92 {
     };
 }
 
-macro_92!()
+macro_92!();

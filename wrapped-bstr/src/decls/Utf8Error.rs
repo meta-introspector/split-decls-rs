@@ -11,4 +11,4 @@ macro_rules! Utf8Error {
     };
 }
 
-Utf8Error!()
+Utf8Error!();

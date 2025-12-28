@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Error!();
         Request!();
         ParseRequestError!();
+        Error!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_query_string {
     };
 }
 
-parse_query_string!()
+parse_query_string!();

@@ -4,4 +4,4 @@ macro_rules! wasm32_simd {
     };
 }
 
-wasm32_simd!()
+wasm32_simd!();

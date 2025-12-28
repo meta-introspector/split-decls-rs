@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnOnce1!();
         UnwrapOrElseFn!();
+        FnOnce1!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1395 {
     };
 }
 
-impl_1395!()
+impl_1395!();

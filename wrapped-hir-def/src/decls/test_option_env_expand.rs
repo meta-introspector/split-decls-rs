@@ -14,4 +14,4 @@ fn main() { $crate::option::Option::None:: < &str>; }
     };
 }
 
-test_option_env_expand!()
+test_option_env_expand!();

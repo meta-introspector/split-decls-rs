@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         NaiveDateWeeksIterator!();
         NaiveDate!();
-        Days!();
         Item!();
+        Days!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_357 {
     };
 }
 
-impl_357!()
+impl_357!();

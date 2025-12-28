@@ -4,4 +4,4 @@ macro_rules! VariablesAreInputTypes {
     };
 }
 
-VariablesAreInputTypes!()
+VariablesAreInputTypes!();

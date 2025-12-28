@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Function!();
         HasSource!();
+        Function!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

@@ -4,4 +4,4 @@ macro_rules! _infer_ValueParser_for {
     };
 }
 
-_infer_ValueParser_for!()
+_infer_ValueParser_for!();

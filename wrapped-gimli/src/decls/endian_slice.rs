@@ -4,4 +4,4 @@ macro_rules! endian_slice {
     };
 }
 
-endian_slice!()
+endian_slice!();

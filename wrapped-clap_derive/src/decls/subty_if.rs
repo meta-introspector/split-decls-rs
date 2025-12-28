@@ -4,4 +4,4 @@ macro_rules! subty_if {
     };
 }
 
-subty_if!()
+subty_if!();

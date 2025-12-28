@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        TomlPackage!();
-        VecStringOrBool!();
         Result!();
-        UnresolvedError!();
         TomlPackageBuild!();
-        StringOrBool!();
+        UnresolvedError!();
+        TomlPackage!();
         RustVersion!();
+        StringOrBool!();
+        VecStringOrBool!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

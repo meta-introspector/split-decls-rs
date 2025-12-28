@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Mode!();
         ForksafeTempfile!();
         TempfileOrTemppath!();
-        Writable!();
         AutoRemove!();
         Closed!();
+        Mode!();
+        Writable!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

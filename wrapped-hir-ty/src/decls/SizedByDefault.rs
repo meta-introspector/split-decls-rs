@@ -4,4 +4,4 @@ macro_rules! SizedByDefault {
     };
 }
 
-SizedByDefault!()
+SizedByDefault!();

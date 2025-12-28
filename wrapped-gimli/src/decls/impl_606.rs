@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        DebugTypesOffset!();
-        ReaderOffset!();
         Reader!();
-        DebugInfoOffset!();
+        DebugTypesOffset!();
         UnitHeader!();
-        UnitOffset!();
         UnitSectionOffset!();
+        UnitOffset!();
+        ReaderOffset!();
+        DebugInfoOffset!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_606 {
     };
 }
 
-impl_606!()
+impl_606!();

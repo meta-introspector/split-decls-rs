@@ -4,4 +4,4 @@ macro_rules! DebugRanges {
     };
 }
 
-DebugRanges!()
+DebugRanges!();

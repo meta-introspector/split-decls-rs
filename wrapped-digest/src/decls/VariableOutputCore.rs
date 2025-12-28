@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UpdateCore!();
         Buffer!();
         InvalidOutputSize!();
-        TruncSide!();
+        UpdateCore!();
         BufferKindUser!();
+        TruncSide!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! VariableOutputCore {
     };
 }
 
-VariableOutputCore!()
+VariableOutputCore!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Uint!();
-        Odd!();
         ConstChoice!();
+        Odd!();
         Int!();
+        Uint!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_227 {
     };
 }
 
-impl_227!()
+impl_227!();

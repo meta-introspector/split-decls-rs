@@ -11,4 +11,4 @@ macro_rules! pat_node {
     };
 }
 
-pat_node!()
+pat_node!();

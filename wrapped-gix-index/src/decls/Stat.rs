@@ -11,4 +11,4 @@ macro_rules! Stat {
     };
 }
 
-Stat!()
+Stat!();

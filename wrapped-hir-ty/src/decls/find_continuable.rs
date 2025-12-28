@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BreakableKind!();
         BreakableContext!();
+        BreakableKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! find_continuable {
     };
 }
 
-find_continuable!()
+find_continuable!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Reader!();
-        EhFrameOffset!();
         UnwindSection!();
         EhFrame!();
+        EhFrameOffset!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

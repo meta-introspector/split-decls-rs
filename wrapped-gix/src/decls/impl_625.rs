@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UrlParameter!();
         Key!();
         Section!();
         Tree!();
+        UrlParameter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_625 {
     };
 }
 
-impl_625!()
+impl_625!();

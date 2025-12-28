@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Mode!();
-        AttributesDigest!();
         Driver!();
-        Error!();
         Configuration!();
+        Error!();
+        AttributesDigest!();
+        Mode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

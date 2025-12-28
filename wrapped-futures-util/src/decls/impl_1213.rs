@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReuniteError!();
         ReadHalf!();
+        ReuniteError!();
         WriteHalf!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_1213 {
     };
 }
 
-impl_1213!()
+impl_1213!();

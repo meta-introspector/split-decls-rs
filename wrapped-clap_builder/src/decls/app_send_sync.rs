@@ -11,4 +11,4 @@ macro_rules! app_send_sync {
     };
 }
 
-app_send_sync!()
+app_send_sync!();

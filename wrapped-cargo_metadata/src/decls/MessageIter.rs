@@ -4,4 +4,4 @@ macro_rules! MessageIter {
     };
 }
 
-MessageIter!()
+MessageIter!();

@@ -4,4 +4,4 @@ macro_rules! IS_INTERRUPTED {
     };
 }
 
-IS_INTERRUPTED!()
+IS_INTERRUPTED!();

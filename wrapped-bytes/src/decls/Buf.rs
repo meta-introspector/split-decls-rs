@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        BufMut!();
-        Take!();
         BytesMut!();
-        TryGetError!();
-        Bytes!();
         Chain!();
+        BufMut!();
+        Reader!();
+        Take!();
+        Bytes!();
+        TryGetError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Buf {
     };
 }
 
-Buf!()
+Buf!();

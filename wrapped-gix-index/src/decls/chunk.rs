@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Version!();
         Entry!();
         Error!();
-        Version!();
         Outcome!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! chunk {
     };
 }
 
-chunk!()
+chunk!();

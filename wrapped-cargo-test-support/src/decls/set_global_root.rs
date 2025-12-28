@@ -4,4 +4,4 @@ macro_rules! set_global_root {
     };
 }
 
-set_global_root!()
+set_global_root!();

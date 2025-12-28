@@ -4,4 +4,4 @@ macro_rules! Base64Impl {
     };
 }
 
-Base64Impl!()
+Base64Impl!();

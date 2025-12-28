@@ -13,4 +13,4 @@ macro_rules! test_min_max_setters {
     };
 }
 
-test_min_max_setters!()
+test_min_max_setters!();

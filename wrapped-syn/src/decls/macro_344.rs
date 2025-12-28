@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Result!();
+    };
+}
+
+macro_rules! macro_344 {
+    () => {
+        deps!();
+        ast_enum_of_structs ! { # [doc = " Things that can appear directly inside of a module or scope."] # [doc = ""] # [doc = " # Syntax tree enum"] # [doc = ""] # [doc = " This type is a [syntax tree enum]."] # [doc = ""] # [doc = " [syntax tree enum]: crate::expr::Expr#syntax-tree-enums"] # [cfg_attr (docsrs , doc (cfg (feature = "full")))] # [non_exhaustive] pub enum Item { # [doc = " A constant item: `const MAX: u16 = 65535`."] Const (ItemConst) , # [doc = " An enum definition: `enum Foo<A, B> { A(A), B(B) }`."] Enum (ItemEnum) , # [doc = " An `extern crate` item: `extern crate serde`."] ExternCrate (ItemExternCrate) , # [doc = " A free-standing function: `fn process(n: usize) -> Result<()> { ..."] # [doc = " }`."] Fn (ItemFn) , # [doc = " A block of foreign items: `extern \"C\" { ... }`."] ForeignMod (ItemForeignMod) , # [doc = " An impl block providing trait or associated items: `impl<A> Trait"] # [doc = " for Data<A> { ... }`."] Impl (ItemImpl) , # [doc = " A macro invocation, which includes `macro_rules!` definitions."] Macro (ItemMacro) , # [doc = " A module or module declaration: `mod m` or `mod m { ... }`."] Mod (ItemMod) , # [doc = " A static item: `static BIKE: Shed = Shed(42)`."] Static (ItemStatic) , # [doc = " A struct definition: `struct Foo<A> { x: A }`."] Struct (ItemStruct) , # [doc = " A trait definition: `pub trait Iterator { ... }`."] Trait (ItemTrait) , # [doc = " A trait alias: `pub trait SharableIterator = Iterator + Sync`."] TraitAlias (ItemTraitAlias) , # [doc = " A type alias: `type Result<T> = std::result::Result<T, MyError>`."] Type (ItemType) , # [doc = " A union definition: `union Foo<A, B> { x: A, y: B }`."] Union (ItemUnion) , # [doc = " A use declaration: `use std::collections::HashMap`."] Use (ItemUse) , # [doc = " Tokens forming an item not interpreted by Syn."] Verbatim (TokenStream) , } }
+    };
+}
+
+macro_344!()

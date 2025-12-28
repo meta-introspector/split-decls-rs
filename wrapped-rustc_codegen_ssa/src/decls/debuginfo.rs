@@ -1,6 +1,6 @@
 macro_rules! debuginfo {
     () => {
-        pub mod debuginfo ;
+        mod debuginfo ;
     };
 }
 

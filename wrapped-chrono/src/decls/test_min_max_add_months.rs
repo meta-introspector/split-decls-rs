@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NaiveDateTime!();
         NaiveDate!();
         FixedOffset!();
-        Months!();
         NaiveTime!();
+        Months!();
+        NaiveDateTime!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! test_min_max_add_months {
     };
 }
 
-test_min_max_add_months!()
+test_min_max_add_months!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Mark!();
-        CollapsedEntriesEmissionMode!();
-        Action!();
-        State!();
-        PathspecMatch!();
-        Delegate!();
-        Options!();
-        Kind!();
-        Status!();
-        EntryRef!();
-        Property!();
-        Outcome!();
         Context!();
+        Delegate!();
+        Action!();
+        Mark!();
+        Property!();
+        Kind!();
+        EntryRef!();
+        PathspecMatch!();
+        State!();
+        Status!();
+        Outcome!();
+        CollapsedEntriesEmissionMode!();
+        Options!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

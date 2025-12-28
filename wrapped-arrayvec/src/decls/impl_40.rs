@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ArrayVec!();
+        ArrayVecImpl!();
         Drain!();
         MakeMaybeUninit!();
         CapacityError!();
         LenUint!();
-        ArrayVecImpl!();
+        ArrayVec!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

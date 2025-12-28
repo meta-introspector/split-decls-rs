@@ -11,4 +11,4 @@ macro_rules! run_collect_repo_state_command {
     };
 }
 
-run_collect_repo_state_command!()
+run_collect_repo_state_command!();

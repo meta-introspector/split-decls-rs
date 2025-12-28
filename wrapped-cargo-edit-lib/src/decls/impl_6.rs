@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AnyMetadata!();
-        CargoMetadataProvider!();
         RealCargoMetadataProvider!();
+        CargoMetadataProvider!();
+        AnyMetadata!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

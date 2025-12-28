@@ -4,4 +4,4 @@ macro_rules! test_keys_affect_every_byte {
     };
 }
 
-test_keys_affect_every_byte!()
+test_keys_affect_every_byte!();

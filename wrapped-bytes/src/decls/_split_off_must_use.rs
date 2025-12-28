@@ -4,4 +4,4 @@ macro_rules! _split_off_must_use {
     };
 }
 
-_split_off_must_use!()
+_split_off_must_use!();

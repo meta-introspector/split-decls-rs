@@ -11,4 +11,4 @@ macro_rules! process_enum {
     };
 }
 
-process_enum!()
+process_enum!();

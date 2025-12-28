@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
+        ImplTraitId!();
         ImplTraits!();
         HirDatabase!();
-        ImplTraitId!();
-        TypingMode!();
         ImplTraitIdx!();
+        TypingMode!();
+        EarlyBinder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! tait_hidden_types {
     };
 }
 
-tait_hidden_types!()
+tait_hidden_types!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WriteHex!();
+        Flags!();
         Bits!();
         AsDisplay!();
-        Flags!();
+        WriteHex!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

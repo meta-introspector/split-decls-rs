@@ -1,0 +1,7 @@
+macro_rules! expand_combined_early_lint_pass_method {
+    () => {
+        # [macro_export] macro_rules ! expand_combined_early_lint_pass_method { ([$ ($ pass : ident) ,*] , $ self : ident , $ name : ident , $ params : tt) => ({ $ ($ self .$ pass .$ name $ params ;) * }) }
+    };
+}
+
+expand_combined_early_lint_pass_method!()

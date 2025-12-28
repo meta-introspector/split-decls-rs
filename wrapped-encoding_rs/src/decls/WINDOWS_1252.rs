@@ -11,4 +11,4 @@ macro_rules! WINDOWS_1252 {
     };
 }
 
-WINDOWS_1252!()
+WINDOWS_1252!();

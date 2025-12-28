@@ -4,4 +4,4 @@ macro_rules! ParentIteratorState {
     };
 }
 
-ParentIteratorState!()
+ParentIteratorState!();

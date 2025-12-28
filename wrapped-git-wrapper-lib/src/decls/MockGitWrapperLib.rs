@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DummyGitExecutor!();
         MockGitAdapter!();
+        DummyGitExecutor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MockGitWrapperLib {
     };
 }
 
-MockGitWrapperLib!()
+MockGitWrapperLib!();

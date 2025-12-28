@@ -4,4 +4,4 @@ macro_rules! CertificateCheckStatus {
     };
 }
 
-CertificateCheckStatus!()
+CertificateCheckStatus!();

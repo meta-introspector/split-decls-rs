@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GlobWalker!();
         GlobError!();
+        GlobWalker!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! glob {
     };
 }
 
-glob!()
+glob!();

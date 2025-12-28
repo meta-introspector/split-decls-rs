@@ -4,4 +4,4 @@ macro_rules! KEY_RETURN_TYPE {
     };
 }
 
-KEY_RETURN_TYPE!()
+KEY_RETURN_TYPE!();

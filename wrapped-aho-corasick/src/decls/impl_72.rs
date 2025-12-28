@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        BuildError!();
-        ByteClasses!();
         StateID!();
+        ByteClasses!();
+        BuildError!();
         State!();
-        StateTrans!();
         NFA!();
+        StateTrans!();
         PatternID!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_72 {
     };
 }
 
-impl_72!()
+impl_72!();

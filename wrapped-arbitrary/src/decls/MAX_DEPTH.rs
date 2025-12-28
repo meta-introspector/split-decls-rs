@@ -4,4 +4,4 @@ macro_rules! MAX_DEPTH {
     };
 }
 
-MAX_DEPTH!()
+MAX_DEPTH!();

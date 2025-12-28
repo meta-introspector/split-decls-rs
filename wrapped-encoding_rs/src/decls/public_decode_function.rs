@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecoderResult!();
         DecoderLifeCycle!();
+        DecoderResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! public_decode_function {
     };
 }
 
-public_decode_function!()
+public_decode_function!();

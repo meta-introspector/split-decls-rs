@@ -12,4 +12,4 @@ macro_rules! length_u32_value {
     };
 }
 
-length_u32_value!()
+length_u32_value!();

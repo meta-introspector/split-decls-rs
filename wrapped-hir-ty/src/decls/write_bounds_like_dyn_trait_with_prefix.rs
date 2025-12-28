@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        HirFormatter!();
         SizedByDefault!();
         HirDisplayError!();
-        HirFormatter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_bounds_like_dyn_trait_with_prefix {
     };
 }
 
-write_bounds_like_dyn_trait_with_prefix!()
+write_bounds_like_dyn_trait_with_prefix!();

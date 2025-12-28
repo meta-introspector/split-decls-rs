@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiffDelta!();
         DiffHunk!();
+        DiffDelta!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HunkCb {
     };
 }
 
-HunkCb!()
+HunkCb!();

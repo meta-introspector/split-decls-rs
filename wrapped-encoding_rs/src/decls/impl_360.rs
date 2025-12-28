@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        ReplacementDecoder!();
-        EucKrDecoder!();
-        ShiftJisEncoder!();
-        VariantDecoder!();
-        Encoding!();
-        EucKrEncoder!();
-        ShiftJisDecoder!();
-        Utf8Encoder!();
-        SingleByteEncoder!();
-        Big5Decoder!();
-        UserDefinedEncoder!();
-        SingleByteDecoder!();
-        Utf8Decoder!();
-        VariantEncoding!();
-        EucJpEncoder!();
-        EucJpDecoder!();
-        Big5Encoder!();
-        Utf16Decoder!();
-        Gb18030Encoder!();
-        Iso2022JpEncoder!();
         Gb18030Decoder!();
-        UserDefinedDecoder!();
-        Iso2022JpDecoder!();
+        EucKrEncoder!();
+        SingleByteDecoder!();
+        SingleByteEncoder!();
+        EucKrDecoder!();
+        Big5Encoder!();
+        Iso2022JpEncoder!();
+        ShiftJisDecoder!();
+        Gb18030Encoder!();
+        ShiftJisEncoder!();
+        Utf16Decoder!();
+        Utf8Encoder!();
+        ReplacementDecoder!();
+        Utf8Decoder!();
         Encoder!();
+        EucJpEncoder!();
+        Encoding!();
+        Iso2022JpDecoder!();
+        VariantDecoder!();
+        UserDefinedEncoder!();
+        EucJpDecoder!();
+        Big5Decoder!();
+        UserDefinedDecoder!();
+        VariantEncoding!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! impl_360 {
     };
 }
 
-impl_360!()
+impl_360!();

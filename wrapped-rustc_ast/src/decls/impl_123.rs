@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        FnSig!();
+        Extern!();
+        Const!();
+        Safety!();
+    };
+}
+
+macro_rules! impl_123 {
+    () => {
+        deps!();
+        impl FnSig { # [doc = " Return a span encompassing the header, or where to insert it if empty."] pub fn header_span (& self) -> Span { match self . header . ext { Extern :: Implicit (span) | Extern :: Explicit (_ , span) => { return self . span . with_hi (span . hi ()) ; } Extern :: None => { } } match self . header . safety { Safety :: Unsafe (span) | Safety :: Safe (span) => return self . span . with_hi (span . hi ()) , Safety :: Default => { } } ; if let Some (coroutine_kind) = self . header . coroutine_kind { return self . span . with_hi (coroutine_kind . span () . hi ()) ; } if let Const :: Yes (span) = self . header . constness { return self . span . with_hi (span . hi ()) ; } self . span . shrink_to_lo () } # [doc = " The span of the header's safety, or where to insert it if empty."] pub fn safety_span (& self) -> Span { match self . header . safety { Safety :: Unsafe (span) | Safety :: Safe (span) => span , Safety :: Default => { if let Some (extern_span) = self . header . ext . span () { return extern_span . shrink_to_lo () ; } self . header_span () . shrink_to_hi () } } } # [doc = " The span of the header's extern, or where to insert it if empty."] pub fn extern_span (& self) -> Span { self . header . ext . span () . unwrap_or (self . safety_span () . shrink_to_hi ()) } }
+    };
+}
+
+impl_123!()

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         CoderResult!();
+        Encoding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode_to_utf8_with_boundary {
     };
 }
 
-decode_to_utf8_with_boundary!()
+decode_to_utf8_with_boundary!();

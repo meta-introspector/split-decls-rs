@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StdError!();
-        Ref!();
         ErrorImpl!();
+        Ref!();
+        StdError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! object_ref {
     };
 }
 
-object_ref!()
+object_ref!();

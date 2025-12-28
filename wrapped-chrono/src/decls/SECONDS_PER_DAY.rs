@@ -4,4 +4,4 @@ macro_rules! SECONDS_PER_DAY {
     };
 }
 
-SECONDS_PER_DAY!()
+SECONDS_PER_DAY!();

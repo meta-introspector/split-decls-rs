@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        TopSubtree!();
+        DelimiterKind!();
+        DelimSpan!();
+        Delimiter!();
     };
 }
 
 macro_rules! impl_44 {
     () => {
         deps!();
-        impl < S : fmt :: Display + Copy > fmt :: Display for TopSubtree < S > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt :: Display :: fmt (& self . view () , f) } }
+        impl < S : Copy > Delimiter < S > { pub const fn invisible_spanned (span : S) -> Self { Delimiter { open : span , close : span , kind : DelimiterKind :: Invisible } } pub const fn invisible_delim_spanned (span : DelimSpan < S >) -> Self { Delimiter { open : span . open , close : span . close , kind : DelimiterKind :: Invisible } } pub fn delim_span (& self) -> DelimSpan < S > { DelimSpan { open : self . open , close : self . close } } }
     };
 }
 

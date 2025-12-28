@@ -4,4 +4,4 @@ macro_rules! REPLACEMENT_TAG {
     };
 }
 
-REPLACEMENT_TAG!()
+REPLACEMENT_TAG!();

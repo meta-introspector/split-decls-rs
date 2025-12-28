@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IoReader!();
-        DecoderImpl!();
-        DecodeError!();
         Decode!();
         Config!();
+        DecodeError!();
+        IoReader!();
+        DecoderImpl!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! decode_from_std_read_with_context {
     };
 }
 
-decode_from_std_read_with_context!()
+decode_from_std_read_with_context!();

@@ -4,4 +4,4 @@ macro_rules! fiat_p521_subborrowx_u57 {
     };
 }
 
-fiat_p521_subborrowx_u57!()
+fiat_p521_subborrowx_u57!();

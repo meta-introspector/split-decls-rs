@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Executable!();
         Section!();
+        Executable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_785 {
     };
 }
 
-impl_785!()
+impl_785!();

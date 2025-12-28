@@ -11,4 +11,4 @@ macro_rules! stream_read {
     };
 }
 
-stream_read!()
+stream_read!();

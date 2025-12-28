@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TryReserveError!();
         AllocError!();
+        TryReserveError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_reserve {
     };
 }
 
-handle_reserve!()
+handle_reserve!();

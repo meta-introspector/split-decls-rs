@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         GenericSequence!();
-        MappedGenericSequence!();
-        FallibleGenericSequence!();
         MappedSequence!();
-        GenericArray!();
+        MappedGenericSequence!();
         Mapped!();
+        GenericArray!();
+        FallibleGenericSequence!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! FunctionalSequence {
     };
 }
 
-FunctionalSequence!()
+FunctionalSequence!();

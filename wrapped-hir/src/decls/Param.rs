@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Callee!();
         Type!();
+        Callee!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Param {
     };
 }
 
-Param!()
+Param!();

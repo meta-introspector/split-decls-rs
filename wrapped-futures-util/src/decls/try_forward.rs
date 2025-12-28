@@ -4,4 +4,4 @@ macro_rules! try_forward {
     };
 }
 
-try_forward!()
+try_forward!();

@@ -4,4 +4,4 @@ macro_rules! DEFAULT_NOTE_STYLE {
     };
 }
 
-DEFAULT_NOTE_STYLE!()
+DEFAULT_NOTE_STYLE!();

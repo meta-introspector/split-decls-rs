@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PatId!();
         ExpressionStore!();
+        PatId!();
         Pat!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_293 {
     };
 }
 
-impl_293!()
+impl_293!();

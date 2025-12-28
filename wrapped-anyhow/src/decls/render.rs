@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Buf!();
         Error!();
+        Buf!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! render {
     };
 }
 
-render!()
+render!();

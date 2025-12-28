@@ -4,4 +4,4 @@ macro_rules! test_largest_power_of_two_leq {
     };
 }
 
-test_largest_power_of_two_leq!()
+test_largest_power_of_two_leq!();

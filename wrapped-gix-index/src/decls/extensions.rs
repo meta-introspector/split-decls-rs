@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tree!();
         Error!();
+        Tree!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! extensions {
     };
 }
 
-extensions!()
+extensions!();

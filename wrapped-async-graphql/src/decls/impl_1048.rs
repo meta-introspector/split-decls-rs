@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
         MetaTypeId!();
-        MetaDirective!();
-        MetaType!();
-        SubscriptionType!();
-        Interface!();
-        MetaInputValue!();
-        InputType!();
+        Schema!();
         Scalar!();
-        Context!();
-        Object!();
-        Request!();
-        Registry!();
-        Deprecation!();
-        OutputType!();
-        ID!();
-        Any!();
+        InputType!();
+        MetaType!();
         Service!();
-        MetaField!();
+        OutputType!();
+        SubscriptionType!();
+        Deprecation!();
+        Any!();
+        Context!();
+        MetaInputValue!();
         Union!();
         MetaTypeName!();
+        Object!();
+        ID!();
+        Interface!();
+        MetaField!();
+        Request!();
+        MetaDirective!();
+        Registry!();
         InputObject!();
-        Schema!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_1048 {
     };
 }
 
-impl_1048!()
+impl_1048!();

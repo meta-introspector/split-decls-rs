@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        ImplicitUnsafeAutorefsMethodNote!();
+        ImplicitUnsafeAutorefsDiag!();
+        LateContext!();
+        ImplicitUnsafeAutorefsOrigin!();
+        ImplicitUnsafeAutorefsSuggestion!();
+    };
+}
+
+macro_rules! impl_12 {
+    () => {
+        deps!();
+        impl < 'tcx > LateLintPass < 'tcx > for ImplicitAutorefs { fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx Expr < '_ >) { let mut is_coming_from_deref = false ; let inner = match expr . kind { ExprKind :: AddrOf (BorrowKind :: Raw , _ , inner) => match inner . kind { ExprKind :: Unary (UnOp :: Deref , inner) => { is_coming_from_deref = true ; inner } _ => return , } , ExprKind :: Index (base , _ , _) => base , ExprKind :: MethodCall (_ , inner , _ , _) => { inner } ExprKind :: Field (inner , _) => inner , _ => return , } ; let typeck = cx . typeck_results () ; let adjustments_table = typeck . adjustments () ; if let Some (adjustments) = adjustments_table . get (inner . hir_id) && let adjustments = peel_derefs_adjustments (& * * adjustments) && let [adjustment] = adjustments && let Some ((borrow_mutbl , through_overloaded_deref)) = has_implicit_borrow (adjustment) && let ExprKind :: Unary (UnOp :: Deref , dereferenced) = peel_place_mappers (inner) . kind && typeck . expr_ty (dereferenced) . is_raw_ptr () && let method_did = match expr . kind { ExprKind :: MethodCall (..) => cx . typeck_results () . type_dependent_def_id (expr . hir_id) , _ => None , } && method_did . map (| did | cx . tcx . has_attr (did , sym :: rustc_no_implicit_autorefs)) . unwrap_or (true) { cx . emit_span_lint (DANGEROUS_IMPLICIT_AUTOREFS , expr . span . source_callsite () , ImplicitUnsafeAutorefsDiag { raw_ptr_span : dereferenced . span , raw_ptr_ty : typeck . expr_ty (dereferenced) , origin : if through_overloaded_deref { ImplicitUnsafeAutorefsOrigin :: OverloadedDeref } else { ImplicitUnsafeAutorefsOrigin :: Autoref { autoref_span : inner . span , autoref_ty : typeck . expr_ty_adjusted (inner) , } } , method : method_did . map (| did | ImplicitUnsafeAutorefsMethodNote { def_span : cx . tcx . def_span (did) , method_name : cx . tcx . item_name (did) , }) , suggestion : ImplicitUnsafeAutorefsSuggestion { mutbl : borrow_mutbl . ref_prefix_str () , deref : if is_coming_from_deref { "*" } else { "" } , start_span : inner . span . shrink_to_lo () , end_span : inner . span . shrink_to_hi () , } , } ,) } } }
+    };
+}
+
+impl_12!()

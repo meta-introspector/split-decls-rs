@@ -4,4 +4,4 @@ macro_rules! truncate {
     };
 }
 
-truncate!()
+truncate!();

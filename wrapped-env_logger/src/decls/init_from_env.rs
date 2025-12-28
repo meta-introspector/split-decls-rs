@@ -11,4 +11,4 @@ macro_rules! init_from_env {
     };
 }
 
-init_from_env!()
+init_from_env!();

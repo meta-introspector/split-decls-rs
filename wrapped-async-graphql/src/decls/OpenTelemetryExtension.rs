@@ -4,4 +4,4 @@ macro_rules! OpenTelemetryExtension {
     };
 }
 
-OpenTelemetryExtension!()
+OpenTelemetryExtension!();

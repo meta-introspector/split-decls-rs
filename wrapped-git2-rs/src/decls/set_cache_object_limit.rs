@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         ObjectType!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_cache_object_limit {
     };
 }
 
-set_cache_object_limit!()
+set_cache_object_limit!();

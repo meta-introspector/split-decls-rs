@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FromRadix10Checked!();
-        FromRadix10Signed!();
         FromRadix10SignedChecked!();
         FromRadix10!();
+        FromRadix10Checked!();
+        FromRadix10Signed!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! atoi {
     };
 }
 
-atoi!()
+atoi!();

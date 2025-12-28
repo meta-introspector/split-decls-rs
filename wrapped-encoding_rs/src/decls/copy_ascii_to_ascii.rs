@@ -4,4 +4,4 @@ macro_rules! copy_ascii_to_ascii {
     };
 }
 
-copy_ascii_to_ascii!()
+copy_ascii_to_ascii!();

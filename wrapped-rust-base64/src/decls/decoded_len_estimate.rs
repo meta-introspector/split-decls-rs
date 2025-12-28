@@ -4,4 +4,4 @@ macro_rules! decoded_len_estimate {
     };
 }
 
-decoded_len_estimate!()
+decoded_len_estimate!();

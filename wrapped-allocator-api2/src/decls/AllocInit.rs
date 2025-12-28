@@ -4,4 +4,4 @@ macro_rules! AllocInit {
     };
 }
 
-AllocInit!()
+AllocInit!();

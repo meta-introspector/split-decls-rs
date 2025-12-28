@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        DebugRngLists!();
-        Reader!();
-        UnitIndex!();
         IndexSectionId!();
         DebugMacro!();
-        DebugAbbrev!();
-        Result!();
-        DebugLine!();
-        DebugLoc!();
-        DebugInfo!();
-        DebugTypes!();
+        DebugRngLists!();
+        Reader!();
+        DebugStrOffsets!();
         UnitIndexSectionIterator!();
         Error!();
+        DebugLine!();
         DebugLocLists!();
+        UnitIndex!();
+        DebugLoc!();
+        Result!();
+        DebugTypes!();
         DebugMacinfo!();
-        DebugStrOffsets!();
+        DebugInfo!();
+        DebugAbbrev!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_391 {
     };
 }
 
-impl_391!()
+impl_391!();

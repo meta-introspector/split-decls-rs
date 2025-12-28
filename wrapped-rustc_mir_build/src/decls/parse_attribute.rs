@@ -1,0 +1,7 @@
+macro_rules! parse_attribute {
+    () => {
+        # [doc = " Turns the arguments passed to `#[custom_mir(..)]` into a proper"] # [doc = " [`MirPhase`]. Panics if this isn't possible for any reason."] fn parse_attribute (dialect : Option < attrs :: MirDialect > , phase : Option < attrs :: MirPhase >) -> MirPhase { let Some (dialect) = dialect else { assert ! (phase . is_none ()) ; return MirPhase :: Built ; } ; match dialect { attrs :: MirDialect :: Built => { assert ! (phase . is_none () , "Cannot specify a phase for `Built` MIR") ; MirPhase :: Built } attrs :: MirDialect :: Analysis => match phase { None | Some (attrs :: MirPhase :: Initial) => MirPhase :: Analysis (AnalysisPhase :: Initial) , Some (attrs :: MirPhase :: PostCleanup) => MirPhase :: Analysis (AnalysisPhase :: PostCleanup) , Some (attrs :: MirPhase :: Optimized) => { bug ! ("`optimized` dialect is not compatible with the `analysis` dialect") } } , attrs :: MirDialect :: Runtime => match phase { None | Some (attrs :: MirPhase :: Initial) => MirPhase :: Runtime (RuntimePhase :: Initial) , Some (attrs :: MirPhase :: PostCleanup) => MirPhase :: Runtime (RuntimePhase :: PostCleanup) , Some (attrs :: MirPhase :: Optimized) => MirPhase :: Runtime (RuntimePhase :: Optimized) , } , } }
+    };
+}
+
+parse_attribute!()

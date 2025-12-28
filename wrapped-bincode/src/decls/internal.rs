@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Endianness!();
         Configuration!();
         IntEncoding!();
-        Endianness!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! internal {
     };
 }
 
-internal!()
+internal!();

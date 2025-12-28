@@ -4,4 +4,4 @@ macro_rules! ResourceKind {
     };
 }
 
-ResourceKind!()
+ResourceKind!();

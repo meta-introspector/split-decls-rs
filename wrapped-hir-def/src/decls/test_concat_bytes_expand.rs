@@ -14,4 +14,4 @@ fn main() { b"ABC\"DEFG\"\x00"; }
     };
 }
 
-test_concat_bytes_expand!()
+test_concat_bytes_expand!();

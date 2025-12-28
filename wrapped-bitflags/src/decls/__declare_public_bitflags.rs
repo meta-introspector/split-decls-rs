@@ -11,4 +11,4 @@ macro_rules! __declare_public_bitflags {
     };
 }
 
-__declare_public_bitflags!()
+__declare_public_bitflags!();

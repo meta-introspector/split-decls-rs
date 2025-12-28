@@ -4,4 +4,4 @@ macro_rules! low_bits_of_byte {
     };
 }
 
-low_bits_of_byte!()
+low_bits_of_byte!();

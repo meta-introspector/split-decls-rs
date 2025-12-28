@@ -4,4 +4,4 @@ macro_rules! field_attributes {
     };
 }
 
-field_attributes!()
+field_attributes!();

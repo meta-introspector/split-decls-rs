@@ -4,4 +4,4 @@ macro_rules! Window {
     };
 }
 
-Window!()
+Window!();

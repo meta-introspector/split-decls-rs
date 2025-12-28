@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StreamExt!();
-        WakerVec!();
         PollVec!();
+        WakerVec!();
+        StreamExt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StreamGroup {
     };
 }
 
-StreamGroup!()
+StreamGroup!();

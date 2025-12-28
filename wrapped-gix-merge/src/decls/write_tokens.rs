@@ -4,4 +4,4 @@ macro_rules! write_tokens {
     };
 }
 
-write_tokens!()
+write_tokens!();

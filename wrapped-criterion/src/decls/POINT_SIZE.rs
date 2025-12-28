@@ -4,4 +4,4 @@ macro_rules! POINT_SIZE {
     };
 }
 
-POINT_SIZE!()
+POINT_SIZE!();

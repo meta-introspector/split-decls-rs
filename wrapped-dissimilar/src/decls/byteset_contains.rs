@@ -4,4 +4,4 @@ macro_rules! byteset_contains {
     };
 }
 
-byteset_contains!()
+byteset_contains!();

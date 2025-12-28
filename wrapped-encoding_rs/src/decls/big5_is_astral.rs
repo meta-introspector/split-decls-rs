@@ -4,4 +4,4 @@ macro_rules! big5_is_astral {
     };
 }
 
-big5_is_astral!()
+big5_is_astral!();

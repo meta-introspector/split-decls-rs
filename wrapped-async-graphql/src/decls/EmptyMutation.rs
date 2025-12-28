@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Query!();
-        Schema!();
         EmptySubscription!();
         Object!();
+        Schema!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! EmptyMutation {
     };
 }
 
-EmptyMutation!()
+EmptyMutation!();

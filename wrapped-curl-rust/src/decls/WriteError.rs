@@ -4,4 +4,4 @@ macro_rules! WriteError {
     };
 }
 
-WriteError!()
+WriteError!();

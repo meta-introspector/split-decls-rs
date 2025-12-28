@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        MetaType!();
         Any!();
+        MetaType!();
+        Interface!();
+        Union!();
+        InputObject!();
         Scalar!();
         Object!();
-        InputObject!();
         Registry!();
-        MetaField!();
-        SDLExportOptions!();
-        Interface!();
         Service!();
-        Union!();
+        SDLExportOptions!();
+        MetaField!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_1014 {
     };
 }
 
-impl_1014!()
+impl_1014!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Decoder!();
         DecodeError!();
+        Decoder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode_slice_len {
     };
 }
 
-decode_slice_len!()
+decode_slice_len!();

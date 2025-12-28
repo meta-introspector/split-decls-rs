@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Resettable!();
         IntoResettable!();
+        Resettable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

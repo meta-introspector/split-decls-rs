@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Source!();
-        PathIdMapping!();
-        Statistics!();
         Ignore!();
+        PathIdMapping!();
         IgnoreMatchGroup!();
+        Statistics!();
+        Source!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

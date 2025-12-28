@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Builder!();
+        Candidate!();
+        FakeBorrowCollector!();
+        PlaceBase!();
+    };
+}
+
+macro_rules! collect_fake_borrows {
+    () => {
+        deps!();
+        # [doc = " Determine the set of places that have to be stable across match guards."] # [doc = ""] # [doc = " Returns a list of places that need a fake borrow along with a local to store it."] # [doc = ""] # [doc = " Match exhaustiveness checking is not able to handle the case where the place being matched on is"] # [doc = " mutated in the guards. We add \"fake borrows\" to the guards that prevent any mutation of the"] # [doc = " place being matched. There are a some subtleties:"] # [doc = ""] # [doc = " 1. Borrowing `*x` doesn't prevent assigning to `x`. If `x` is a shared reference, the borrow"] # [doc = "    isn't even tracked. As such we have to add fake borrows of any prefixes of a place."] # [doc = " 2. We don't want `match x { (Some(_), _) => (), .. }` to conflict with mutable borrows of `x.1`, so we"] # [doc = "    only add fake borrows for places which are bound or tested by the match."] # [doc = " 3. We don't want `match x { Some(_) => (), .. }` to conflict with mutable borrows of `(x as"] # [doc = "    Some).0`, so the borrows are a special shallow borrow that only affects the place and not its"] # [doc = "    projections."] # [doc = "    ```rust"] # [doc = "    let mut x = (Some(0), true);"] # [doc = "    match x {"] # [doc = "        (Some(_), false) => {}"] # [doc = "        _ if { if let Some(ref mut y) = x.0 { *y += 1 }; true } => {}"] # [doc = "        _ => {}"] # [doc = "    }"] # [doc = "    ```"] # [doc = " 4. The fake borrows may be of places in inactive variants, e.g. here we need to fake borrow `x`"] # [doc = "    and `(x as Some).0`, but when we reach the guard `x` may not be `Some`."] # [doc = "    ```rust"] # [doc = "    let mut x = (Some(Some(0)), true);"] # [doc = "    match x {"] # [doc = "        (Some(Some(_)), false) => {}"] # [doc = "        _ if { if let Some(Some(ref mut y)) = x.0 { *y += 1 }; true } => {}"] # [doc = "        _ => {}"] # [doc = "    }"] # [doc = "    ```"] # [doc = "    So it would be UB to generate code for the fake borrows. They therefore have to be removed by"] # [doc = "    a MIR pass run after borrow checking."] pub (super) fn collect_fake_borrows < 'tcx > (cx : & mut Builder < '_ , 'tcx > , candidates : & [Candidate < 'tcx >] , temp_span : Span , scrutinee_base : PlaceBase ,) -> Vec < (Place < 'tcx > , Local , FakeBorrowKind) > { if candidates . iter () . all (| candidate | ! candidate . has_guard) { return Vec :: new () ; } let mut collector = FakeBorrowCollector { cx , scrutinee_base , fake_borrows : FxIndexMap :: default () } ; for candidate in candidates . iter () { collector . visit_candidate (candidate) ; } let fake_borrows = collector . fake_borrows ; debug ! ("add_fake_borrows fake_borrows = {:?}" , fake_borrows) ; let tcx = cx . tcx ; fake_borrows . iter () . map (| (matched_place , borrow_kind) | { let fake_borrow_deref_ty = matched_place . ty (& cx . local_decls , tcx) . ty ; let fake_borrow_ty = Ty :: new_imm_ref (tcx , tcx . lifetimes . re_erased , fake_borrow_deref_ty) ; let mut fake_borrow_temp = LocalDecl :: new (fake_borrow_ty , temp_span) ; fake_borrow_temp . local_info = ClearCrossCrate :: Set (Box :: new (LocalInfo :: FakeBorrow)) ; let fake_borrow_temp = cx . local_decls . push (fake_borrow_temp) ; (* matched_place , fake_borrow_temp , * borrow_kind) }) . collect () }
+    };
+}
+
+collect_fake_borrows!()

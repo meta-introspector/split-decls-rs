@@ -4,4 +4,4 @@ macro_rules! set_file_time_no_err {
     };
 }
 
-set_file_time_no_err!()
+set_file_time_no_err!();

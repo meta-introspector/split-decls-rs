@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Result!();
-        InlineExpression!();
-        ErrorKind!();
-        Expression!();
-        Identifier!();
         Slice!();
+        Expression!();
+        ErrorKind!();
+        InlineExpression!();
+        Identifier!();
         CallArguments!();
-        NamedArgument!();
         Parser!();
+        NamedArgument!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

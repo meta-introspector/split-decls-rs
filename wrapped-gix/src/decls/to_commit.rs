@@ -11,4 +11,4 @@ macro_rules! to_commit {
     };
 }
 
-to_commit!()
+to_commit!();

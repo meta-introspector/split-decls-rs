@@ -4,4 +4,4 @@ macro_rules! DebugAddrOffset {
     };
 }
 
-DebugAddrOffset!()
+DebugAddrOffset!();

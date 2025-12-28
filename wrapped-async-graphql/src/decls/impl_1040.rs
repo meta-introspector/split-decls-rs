@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        InputObject!();
-        Scalar!();
         MetaType!();
-        Object!();
-        Union!();
+        Scalar!();
         MetaTypeId!();
+        Object!();
         Interface!();
+        Union!();
+        InputObject!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_1040 {
     };
 }
 
-impl_1040!()
+impl_1040!();

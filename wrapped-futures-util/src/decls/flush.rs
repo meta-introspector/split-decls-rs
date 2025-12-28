@@ -4,4 +4,4 @@ macro_rules! flush {
     };
 }
 
-flush!()
+flush!();

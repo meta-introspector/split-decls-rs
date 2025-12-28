@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Arc!();
-        Encoder!();
         ObjectIdentifier!();
+        Encoder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Parser {
     };
 }
 
-Parser!()
+Parser!();

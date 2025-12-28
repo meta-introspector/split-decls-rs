@@ -4,4 +4,4 @@ macro_rules! prefilter {
     };
 }
 
-prefilter!()
+prefilter!();

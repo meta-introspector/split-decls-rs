@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnscopedTemplateName!();
-        SubstitutionTable!();
         GetLeafName!();
         LeafName!();
+        UnscopedTemplateName!();
+        SubstitutionTable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

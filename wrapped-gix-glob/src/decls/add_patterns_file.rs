@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pattern!();
         List!();
+        Pattern!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! add_patterns_file {
     };
 }
 
-add_patterns_file!()
+add_patterns_file!();

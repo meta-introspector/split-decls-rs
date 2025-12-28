@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ToNormalPathComponents!();
-        Delegate!();
         Stack!();
+        Delegate!();
+        ToNormalPathComponents!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_60 {
     };
 }
 
-impl_60!()
+impl_60!();

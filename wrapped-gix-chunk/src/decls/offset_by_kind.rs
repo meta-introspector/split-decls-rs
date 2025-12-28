@@ -11,4 +11,4 @@ macro_rules! offset_by_kind {
     };
 }
 
-offset_by_kind!()
+offset_by_kind!();

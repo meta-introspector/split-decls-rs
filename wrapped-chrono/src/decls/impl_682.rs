@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SubsecRound!();
         TimeDelta!();
         Timelike!();
+        SubsecRound!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_682 {
     };
 }
 
-impl_682!()
+impl_682!();

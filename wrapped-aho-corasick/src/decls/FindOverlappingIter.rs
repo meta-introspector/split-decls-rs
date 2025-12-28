@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Input!();
-        OverlappingState!();
         Automaton!();
+        OverlappingState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FindOverlappingIter {
     };
 }
 
-FindOverlappingIter!()
+FindOverlappingIter!();

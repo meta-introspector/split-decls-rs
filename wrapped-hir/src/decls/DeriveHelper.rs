@@ -4,4 +4,4 @@ macro_rules! DeriveHelper {
     };
 }
 
-DeriveHelper!()
+DeriveHelper!();

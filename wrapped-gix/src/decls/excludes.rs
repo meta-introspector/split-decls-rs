@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Worktree!();
         Error!();
         AttributeStack!();
-        Worktree!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! excludes {
     };
 }
 
-excludes!()
+excludes!();

@@ -4,4 +4,4 @@ macro_rules! DEFAULT_PARSE_LRU_CAP {
     };
 }
 
-DEFAULT_PARSE_LRU_CAP!()
+DEFAULT_PARSE_LRU_CAP!();

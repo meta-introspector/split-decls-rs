@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DemangleWrite!();
         QualifiedBuiltin!();
-        Result!();
-        Demangle!();
-        DemangleContext!();
         ArgScopeStack!();
+        Result!();
+        DemangleContext!();
+        DemangleWrite!();
+        Demangle!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_180 {
     };
 }
 
-impl_180!()
+impl_180!();

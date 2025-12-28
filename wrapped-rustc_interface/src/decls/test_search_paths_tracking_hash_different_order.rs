@@ -1,0 +1,7 @@
+macro_rules! test_search_paths_tracking_hash_different_order {
+    () => {
+        # [test] fn test_search_paths_tracking_hash_different_order () { let mut v1 = Options :: default () ; let mut v2 = Options :: default () ; let mut v3 = Options :: default () ; let mut v4 = Options :: default () ; let early_dcx = EarlyDiagCtxt :: new (JSON) ; const JSON : ErrorOutputType = ErrorOutputType :: Json { pretty : false , json_rendered : HumanReadableErrorType :: Default , color_config : ColorConfig :: Never , } ; let push = | opts : & mut Options , search_path | { opts . search_paths . push (SearchPath :: from_cli_opt ("not-a-sysroot" . as_ref () , & opts . target_triple , & early_dcx , search_path , false ,)) ; } ; push (& mut v1 , "native=abc") ; push (& mut v1 , "crate=def") ; push (& mut v1 , "dependency=ghi") ; push (& mut v1 , "framework=jkl") ; push (& mut v1 , "all=mno") ; push (& mut v2 , "native=abc") ; push (& mut v2 , "dependency=ghi") ; push (& mut v2 , "crate=def") ; push (& mut v2 , "framework=jkl") ; push (& mut v2 , "all=mno") ; push (& mut v3 , "crate=def") ; push (& mut v3 , "framework=jkl") ; push (& mut v3 , "native=abc") ; push (& mut v3 , "dependency=ghi") ; push (& mut v3 , "all=mno") ; push (& mut v4 , "all=mno") ; push (& mut v4 , "native=abc") ; push (& mut v4 , "crate=def") ; push (& mut v4 , "dependency=ghi") ; push (& mut v4 , "framework=jkl") ; assert_same_hash (& v1 , & v2) ; assert_same_hash (& v1 , & v3) ; assert_same_hash (& v1 , & v4) ; }
+    };
+}
+
+test_search_paths_tracking_hash_different_order!()

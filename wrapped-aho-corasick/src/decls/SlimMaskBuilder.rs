@@ -4,4 +4,4 @@ macro_rules! SlimMaskBuilder {
     };
 }
 
-SlimMaskBuilder!()
+SlimMaskBuilder!();

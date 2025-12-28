@@ -4,4 +4,4 @@ macro_rules! treebuilder {
     };
 }
 
-treebuilder!()
+treebuilder!();

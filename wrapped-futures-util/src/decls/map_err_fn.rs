@@ -11,4 +11,4 @@ macro_rules! map_err_fn {
     };
 }
 
-map_err_fn!()
+map_err_fn!();

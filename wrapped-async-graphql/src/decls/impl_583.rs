@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        NextPrepareRequest!();
         ServerResult!();
         ExtensionContext!();
-        NextPrepareRequest!();
         Request!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_583 {
     };
 }
 
-impl_583!()
+impl_583!();

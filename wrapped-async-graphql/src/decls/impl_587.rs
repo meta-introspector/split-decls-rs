@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ExtensionContext!();
         Result!();
-        ServerError!();
+        ExtensionContext!();
         ValidationResult!();
         NextValidation!();
+        ServerError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_587 {
     };
 }
 
-impl_587!()
+impl_587!();

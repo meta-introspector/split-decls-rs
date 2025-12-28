@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        PublicKey!();
+        Seed!();
+        SecretKey!();
         KeyPair!();
         Error!();
-        SecretKey!();
-        Seed!();
-        PublicKey!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

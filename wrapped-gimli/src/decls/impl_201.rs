@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Result!();
         Augmentation!();
+        Reader!();
         PointerEncodingParameters!();
         AugmentationData!();
-        Reader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_201 {
     };
 }
 
-impl_201!()
+impl_201!();

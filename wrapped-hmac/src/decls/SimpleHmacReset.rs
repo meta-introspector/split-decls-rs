@@ -4,4 +4,4 @@ macro_rules! SimpleHmacReset {
     };
 }
 
-SimpleHmacReset!()
+SimpleHmacReset!();

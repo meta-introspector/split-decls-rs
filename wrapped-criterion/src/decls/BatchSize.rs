@@ -4,4 +4,4 @@ macro_rules! BatchSize {
     };
 }
 
-BatchSize!()
+BatchSize!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Symbol!();
         Frame!();
+        Symbol!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! resolve_frame {
     };
 }
 
-resolve_frame!()
+resolve_frame!();

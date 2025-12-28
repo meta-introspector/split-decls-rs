@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Float!();
+        ExtendedFloat!();
+    };
+}
+
+macro_rules! impl_421 {
+    () => {
+        deps!();
+        impl ExtendedFloat { # [doc = " Multiply two normalized extended-precision floats, as if by `a*b`."] # [doc = ""] # [doc = " The precision is maximal when the numbers are normalized, however,"] # [doc = " decent precision will occur as long as both values have high bits"] # [doc = " set. The result is not normalized."] # [doc = ""] # [doc = " Algorithm:"] # [doc = "     1. Non-signed multiplication of mantissas (requires 2x as many bits as input)."] # [doc = "     2. Normalization of the result (not done here)."] # [doc = "     3. Addition of exponents."] pub (crate) fn mul (& self , b : & ExtendedFloat) -> ExtendedFloat { debug_assert ! ((self . mant & u64 :: HIMASK != 0) && (b . mant & u64 :: HIMASK != 0)) ; let ah = self . mant >> u64 :: HALF ; let al = self . mant & u64 :: LOMASK ; let bh = b . mant >> u64 :: HALF ; let bl = b . mant & u64 :: LOMASK ; let ah_bl = ah * bl ; let al_bh = al * bh ; let al_bl = al * bl ; let ah_bh = ah * bh ; let mut tmp = (ah_bl & u64 :: LOMASK) + (al_bh & u64 :: LOMASK) + (al_bl >> u64 :: HALF) ; tmp += 1 << (u64 :: HALF - 1) ; ExtendedFloat { mant : ah_bh + (ah_bl >> u64 :: HALF) + (al_bh >> u64 :: HALF) + (tmp >> u64 :: HALF) , exp : self . exp + b . exp + u64 :: FULL , } } # [doc = " Multiply in-place, as if by `a*b`."] # [doc = ""] # [doc = " The result is not normalized."] # [inline] pub (crate) fn imul (& mut self , b : & ExtendedFloat) { * self = self . mul (b) ; } # [doc = " Normalize float-point number."] # [doc = ""] # [doc = " Shift the mantissa so the number of leading zeros is 0, or the value"] # [doc = " itself is 0."] # [doc = ""] # [doc = " Get the number of bytes shifted."] # [inline] pub (crate) fn normalize (& mut self) -> u32 { let shift = if self . mant == 0 { 0 } else { self . mant . leading_zeros () } ; shl (self , shift as i32) ; shift } # [doc = " Lossy round float-point number to native mantissa boundaries."] # [inline] pub (crate) fn round_to_native < F , Algorithm > (& mut self , algorithm : Algorithm) where F : Float , Algorithm : FnOnce (& mut ExtendedFloat , i32) , { round_to_native :: < F , _ > (self , algorithm) ; } # [doc = " Create extended float from native float."] # [inline] pub fn from_float < F : Float > (f : F) -> ExtendedFloat { from_float (f) } # [doc = " Convert into default-rounded, lower-precision native float."] # [inline] pub (crate) fn into_float < F : Float > (mut self) -> F { self . round_to_native :: < F , _ > (round_nearest_tie_even) ; into_float (self) } # [doc = " Convert into downward-rounded, lower-precision native float."] # [inline] pub (crate) fn into_downward_float < F : Float > (mut self) -> F { self . round_to_native :: < F , _ > (round_downward) ; into_float (self) } }
+    };
+}
+
+impl_421!()

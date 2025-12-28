@@ -4,4 +4,4 @@ macro_rules! TryReadyChunksError {
     };
 }
 
-TryReadyChunksError!()
+TryReadyChunksError!();

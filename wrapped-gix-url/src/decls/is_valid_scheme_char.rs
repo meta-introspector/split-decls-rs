@@ -4,4 +4,4 @@ macro_rules! is_valid_scheme_char {
     };
 }
 
-is_valid_scheme_char!()
+is_valid_scheme_char!();

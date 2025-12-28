@@ -12,4 +12,4 @@ macro_rules! test_overflowing_offset {
     };
 }
 
-test_overflowing_offset!()
+test_overflowing_offset!();

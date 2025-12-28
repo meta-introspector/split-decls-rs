@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Field!();
-        MetaType!();
         VisitorContext!();
-        CacheControlCalculate!();
+        MetaType!();
         Visitor!();
-        VisitMode!();
+        CacheControlCalculate!();
         Object!();
+        VisitMode!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_311 {
     };
 }
 
-impl_311!()
+impl_311!();

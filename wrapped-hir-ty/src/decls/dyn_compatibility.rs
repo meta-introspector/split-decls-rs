@@ -4,4 +4,4 @@ macro_rules! dyn_compatibility {
     };
 }
 
-dyn_compatibility!()
+dyn_compatibility!();

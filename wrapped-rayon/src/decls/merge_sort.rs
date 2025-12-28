@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        TimSortRun!();
+        MergeSortResult!();
+    };
+}
+
+macro_rules! merge_sort {
+    () => {
+        deps!();
+        # [doc = " This merge sort borrows some (but not all) ideas from TimSort, which used to be described in"] # [doc = " detail [here](https://github.com/python/cpython/blob/main/Objects/listsort.txt). However Python"] # [doc = " has switched to a Powersort based implementation."] # [doc = ""] # [doc = " The algorithm identifies strictly descending and non-descending subsequences, which are called"] # [doc = " natural runs. There is a stack of pending runs yet to be merged. Each newly found run is pushed"] # [doc = " onto the stack, and then some pairs of adjacent runs are merged until these two invariants are"] # [doc = " satisfied:"] # [doc = ""] # [doc = " 1. for every `i` in `1..runs.len()`: `runs[i - 1].len > runs[i].len`"] # [doc = " 2. for every `i` in `2..runs.len()`: `runs[i - 2].len > runs[i - 1].len + runs[i].len`"] # [doc = ""] # [doc = " The invariants ensure that the total running time is *O*(*n* \\* log(*n*)) worst-case."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The argument `buf` is used as a temporary buffer and must hold at least `v.len() / 2`."] unsafe fn merge_sort < T , CmpF > (v : & mut [T] , buf_ptr : * mut T , is_less : & CmpF) -> MergeSortResult where CmpF : Fn (& T , & T) -> bool , { debug_assert_ne ! (size_of ::< T > () , 0) ; let len = v . len () ; let mut runs = Vec :: new () ; let mut end = 0 ; let mut start = 0 ; while end < len { let (streak_end , was_reversed) = find_streak (& v [start ..] , is_less) ; end += streak_end ; if start == 0 && end == len { return if was_reversed { MergeSortResult :: Descending } else { MergeSortResult :: NonDescending } ; } if was_reversed { v [start .. end] . reverse () ; } end = provide_sorted_batch (v , start , end , is_less) ; runs . push (TimSortRun { start , len : end - start , }) ; start = end ; while let Some (r) = collapse (runs . as_slice () , len) { let left = runs [r] ; let right = runs [r + 1] ; let merge_slice = & mut v [left . start .. right . start + right . len] ; unsafe { merge (merge_slice , left . len , buf_ptr , is_less) ; } runs [r + 1] = TimSortRun { start : left . start , len : left . len + right . len , } ; runs . remove (r) ; } } debug_assert ! (runs . len () == 1 && runs [0] . start == 0 && runs [0] . len == len) ; return MergeSortResult :: Sorted ; # [inline] fn collapse (runs : & [TimSortRun] , stop : usize) -> Option < usize > { let n = runs . len () ; if n >= 2 && (runs [n - 1] . start + runs [n - 1] . len == stop || runs [n - 2] . len <= runs [n - 1] . len || (n >= 3 && runs [n - 3] . len <= runs [n - 2] . len + runs [n - 1] . len) || (n >= 4 && runs [n - 4] . len <= runs [n - 3] . len + runs [n - 2] . len)) { if n >= 3 && runs [n - 3] . len < runs [n - 1] . len { Some (n - 3) } else { Some (n - 2) } } else { None } } }
+    };
+}
+
+merge_sort!()

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Commit!();
-        Blob!();
         Tree!();
+        Blob!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FileMode {
     };
 }
 
-FileMode!()
+FileMode!();

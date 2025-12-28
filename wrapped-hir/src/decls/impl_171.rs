@@ -1,35 +1,35 @@
 macro_rules! deps {
     () => {
-        ExpectedFunction!();
-        IncorrectGenericsLen!();
-        Field!();
-        Type!();
-        UnresolvedField!();
-        CastToUnsized!();
         RemoveUnnecessaryElse!();
-        MismatchedArgCount!();
-        NoSuchField!();
-        IncorrectGenericsOrder!();
-        ElidedLifetimesInPath!();
-        NonExhaustiveLet!();
-        PrivateField!();
-        UnresolvedAssocItem!();
-        ParenthesizedGenericArgsWithoutFnTrait!();
+        CastToUnsized!();
+        Field!();
+        IncorrectGenericsLen!();
         MissingMatchArms!();
-        PrivateAssocItem!();
-        InvalidCast!();
-        GenericArgKind!();
-        BreakOutsideOfLoop!();
+        MismatchedArgCount!();
         GenericArgsProhibited!();
-        MissingLifetime!();
-        UnresolvedMethodCall!();
-        MissingFields!();
-        RemoveTrailingReturn!();
-        ReplaceFilterMapNextWithFindMap!();
+        PrivateField!();
+        UnresolvedField!();
         UnresolvedIdent!();
-        MismatchedTupleStructPatArgCount!();
+        InvalidCast!();
+        ReplaceFilterMapNextWithFindMap!();
+        GenericArgKind!();
         BadRtn!();
+        UnresolvedMethodCall!();
+        ParenthesizedGenericArgsWithoutFnTrait!();
+        ExpectedFunction!();
+        UnresolvedAssocItem!();
+        BreakOutsideOfLoop!();
+        MissingLifetime!();
+        ElidedLifetimesInPath!();
+        PrivateAssocItem!();
         TypedHole!();
+        NonExhaustiveLet!();
+        IncorrectGenericsOrder!();
+        MissingFields!();
+        Type!();
+        RemoveTrailingReturn!();
+        NoSuchField!();
+        MismatchedTupleStructPatArgCount!();
     };
 }
 
@@ -40,4 +40,4 @@ macro_rules! impl_171 {
     };
 }
 
-impl_171!()
+impl_171!();

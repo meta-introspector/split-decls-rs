@@ -4,4 +4,4 @@ macro_rules! MirSpan {
     };
 }
 
-MirSpan!()
+MirSpan!();

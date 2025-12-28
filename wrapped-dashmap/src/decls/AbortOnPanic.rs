@@ -4,4 +4,4 @@ macro_rules! AbortOnPanic {
     };
 }
 
-AbortOnPanic!()
+AbortOnPanic!();

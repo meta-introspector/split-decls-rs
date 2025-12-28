@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FlatMap!();
         Entry!();
-        VacantEntry!();
         IterMut!();
+        FlatMap!();
         OccupiedEntry!();
+        VacantEntry!();
         Iter!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_615 {
     };
 }
 
-impl_615!()
+impl_615!();

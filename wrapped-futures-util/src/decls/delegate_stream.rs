@@ -4,4 +4,4 @@ macro_rules! delegate_stream {
     };
 }
 
-delegate_stream!()
+delegate_stream!();

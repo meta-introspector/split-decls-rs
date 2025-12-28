@@ -4,4 +4,4 @@ macro_rules! select_macro {
     };
 }
 
-select_macro!()
+select_macro!();

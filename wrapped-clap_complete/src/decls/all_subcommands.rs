@@ -6,4 +6,4 @@ macro_rules! all_subcommands {
     };
 }
 
-all_subcommands!()
+all_subcommands!();

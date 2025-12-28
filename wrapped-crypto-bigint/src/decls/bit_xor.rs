@@ -4,4 +4,4 @@ macro_rules! bit_xor {
     };
 }
 
-bit_xor!()
+bit_xor!();

@@ -4,4 +4,4 @@ macro_rules! UNIX_OFFSET_SECS {
     };
 }
 
-UNIX_OFFSET_SECS!()
+UNIX_OFFSET_SECS!();

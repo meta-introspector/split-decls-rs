@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExprScope!();
-        ModuleItemMap!();
         GenericDefId!();
+        ModuleItemMap!();
+        ExprScope!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Scope {
     };
 }
 
-Scope!()
+Scope!();

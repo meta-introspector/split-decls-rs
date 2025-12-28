@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         LabeledSample!();
         Label!();
-        Float!();
         Iter!();
+        Float!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_360 {
     };
 }
 
-impl_360!()
+impl_360!();

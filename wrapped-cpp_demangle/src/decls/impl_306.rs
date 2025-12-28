@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SubobjectExpr!();
-        DemangleWrite!();
-        Result!();
-        ArgScopeStack!();
-        DemangleContext!();
         Demangle!();
+        ArgScopeStack!();
+        SubobjectExpr!();
+        DemangleContext!();
+        Result!();
+        DemangleWrite!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_306 {
     };
 }
 
-impl_306!()
+impl_306!();

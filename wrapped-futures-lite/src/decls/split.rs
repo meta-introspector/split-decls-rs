@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ReadHalf!();
-        WriteHalf!();
         Cursor!();
+        WriteHalf!();
+        ReadHalf!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! split {
     };
 }
 
-split!()
+split!();

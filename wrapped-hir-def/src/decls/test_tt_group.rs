@@ -10,4 +10,4 @@ fn foo() {}"
     };
 }
 
-test_tt_group!()
+test_tt_group!();

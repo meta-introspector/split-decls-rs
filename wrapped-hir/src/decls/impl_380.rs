@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TypeNs!();
         TraitRef!();
         Trait!();
-        TypeNs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_380 {
     };
 }
 
-impl_380!()
+impl_380!();

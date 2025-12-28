@@ -11,4 +11,4 @@ macro_rules! MAX_DATE {
     };
 }
 
-MAX_DATE!()
+MAX_DATE!();

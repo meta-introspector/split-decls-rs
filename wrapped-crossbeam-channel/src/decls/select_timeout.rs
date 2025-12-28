@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SelectTimeoutError!();
-        SelectedOperation!();
         SelectHandle!();
+        SelectedOperation!();
+        SelectTimeoutError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! select_timeout {
     };
 }
 
-select_timeout!()
+select_timeout!();

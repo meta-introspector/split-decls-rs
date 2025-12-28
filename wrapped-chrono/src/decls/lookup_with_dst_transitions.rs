@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MappedLocalTime!();
         FixedOffset!();
         Transition!();
         NaiveDateTime!();
+        MappedLocalTime!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! lookup_with_dst_transitions {
     };
 }
 
-lookup_with_dst_transitions!()
+lookup_with_dst_transitions!();

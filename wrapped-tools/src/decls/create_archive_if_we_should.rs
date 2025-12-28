@@ -11,4 +11,4 @@ macro_rules! create_archive_if_we_should {
     };
 }
 
-create_archive_if_we_should!()
+create_archive_if_we_should!();

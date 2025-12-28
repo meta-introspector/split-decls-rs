@@ -12,4 +12,4 @@ ok!();
     };
 }
 
-test_tt_composite!()
+test_tt_composite!();

@@ -4,4 +4,4 @@ macro_rules! try_flatten_unordered {
     };
 }
 
-try_flatten_unordered!()
+try_flatten_unordered!();

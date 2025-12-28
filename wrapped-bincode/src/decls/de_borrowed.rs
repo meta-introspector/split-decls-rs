@@ -4,4 +4,4 @@ macro_rules! de_borrowed {
     };
 }
 
-de_borrowed!()
+de_borrowed!();

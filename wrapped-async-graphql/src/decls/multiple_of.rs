@@ -4,4 +4,4 @@ macro_rules! multiple_of {
     };
 }
 
-multiple_of!()
+multiple_of!();

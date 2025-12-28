@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
+        MetaType!();
+        ResolverContext!();
         QueryPathSegment!();
+        Registry!();
+        Field!();
+        FieldValue!();
+        ServerResult!();
+        ResolveInfo!();
+        Result!();
         MetaField!();
+        Schema!();
+        Response!();
+        ObjectAccessor!();
+        QueryPathNode!();
         Subscription!();
         BoxFieldStream!();
-        Schema!();
-        Object!();
-        Response!();
-        MetaType!();
         ContextSelectionSet!();
-        ServerResult!();
-        SchemaError!();
-        Result!();
-        ResolveInfo!();
-        ResolverContext!();
         Data!();
-        QueryPathNode!();
+        SchemaError!();
         SubscriptionField!();
-        Field!();
-        Registry!();
-        ObjectAccessor!();
-        FieldValue!();
+        Object!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! impl_499 {
     };
 }
 
-impl_499!()
+impl_499!();

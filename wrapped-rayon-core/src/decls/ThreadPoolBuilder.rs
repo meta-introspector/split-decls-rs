@@ -1,7 +1,9 @@
 macro_rules! deps {
     () => {
-        StartHandler!();
         ExitHandler!();
+        ThreadPool!();
+        DefaultSpawn!();
+        StartHandler!();
         PanicHandler!();
     };
 }

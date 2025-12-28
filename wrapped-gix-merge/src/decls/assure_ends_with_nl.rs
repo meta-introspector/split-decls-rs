@@ -4,4 +4,4 @@ macro_rules! assure_ends_with_nl {
     };
 }
 
-assure_ends_with_nl!()
+assure_ends_with_nl!();

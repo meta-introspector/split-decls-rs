@@ -12,4 +12,4 @@ macro_rules! unique_path_in_tree {
     };
 }
 
-unique_path_in_tree!()
+unique_path_in_tree!();

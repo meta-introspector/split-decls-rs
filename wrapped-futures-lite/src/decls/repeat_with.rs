@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StreamExt!();
         RepeatWith!();
+        StreamExt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! repeat_with {
     };
 }
 
-repeat_with!()
+repeat_with!();

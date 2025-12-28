@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Extension!();
         Arg!();
+        Extension!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ArgExt {
     };
 }
 
-ArgExt!()
+ArgExt!();

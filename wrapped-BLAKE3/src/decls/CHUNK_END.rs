@@ -4,4 +4,4 @@ macro_rules! CHUNK_END {
     };
 }
 
-CHUNK_END!()
+CHUNK_END!();

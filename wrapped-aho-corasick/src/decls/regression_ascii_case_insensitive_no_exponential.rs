@@ -11,4 +11,4 @@ macro_rules! regression_ascii_case_insensitive_no_exponential {
     };
 }
 
-regression_ascii_case_insensitive_no_exponential!()
+regression_ascii_case_insensitive_no_exponential!();

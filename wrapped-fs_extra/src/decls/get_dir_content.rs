@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         DirContent!();
+        Result!();
         DirOptions!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! get_dir_content {
     };
 }
 
-get_dir_content!()
+get_dir_content!();

@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        Allow!();
-        Options!();
-        Ignore!();
-        Rewrite!();
-        Personas!();
-        Attributes!();
-        Merge!();
         Pipeline!();
-        Cache!();
-        Path!();
-        Default!();
-        Error!();
-        Checkout!();
-        Diff!();
         Algorithm!();
-        SchemePermission!();
-        Note!();
-        Repository!();
+        Merge!();
         Pathspec!();
+        Diff!();
+        Repository!();
         Collect!();
+        Cache!();
+        Ignore!();
         ApplyLeniencyDefault!();
-        Core!();
+        Personas!();
+        Allow!();
+        Rewrite!();
+        Attributes!();
+        Default!();
+        Checkout!();
+        Options!();
         Gitoxide!();
+        SchemePermission!();
+        Path!();
+        Error!();
+        Core!();
+        Note!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_533 {
     };
 }
 
-impl_533!()
+impl_533!();

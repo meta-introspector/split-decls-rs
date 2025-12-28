@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Iter!();
         OsStr!();
+        Iter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RawValues {
     };
 }
 
-RawValues!()
+RawValues!();

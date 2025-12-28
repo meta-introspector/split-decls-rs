@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Find!();
         DecodeEntry!();
         Bundle!();
         Location!();
-        Error!();
+        Find!();
         ResolvedBase!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

@@ -4,4 +4,4 @@ macro_rules! CursorLines {
     };
 }
 
-CursorLines!()
+CursorLines!();

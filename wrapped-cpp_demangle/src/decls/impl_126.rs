@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Parse!();
-        SubstitutionTable!();
         ParseContext!();
-        Result!();
-        SourceName!();
-        IndexStr!();
+        Parse!();
         AbiTag!();
+        Result!();
+        IndexStr!();
+        SourceName!();
+        SubstitutionTable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_126 {
     };
 }
 
-impl_126!()
+impl_126!();

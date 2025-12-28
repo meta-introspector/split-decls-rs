@@ -1,0 +1,7 @@
+macro_rules! FrameHeader {
+    () => {
+        # [doc = " A header for a single Zstandard frame."] # [doc = ""] # [doc = " <https://github.com/facebook/zstd/blob/dev/doc/zstd_compression_format.md#frame_header>"] # [derive (Debug)] pub struct FrameHeader { # [doc = " Optionally, the original (uncompressed) size of the data within the frame in bytes."] # [doc = " If not present, `window_size` must be set."] pub frame_content_size : Option < u64 > , # [doc = " If set to true, data must be regenerated within a single"] # [doc = " continuous memory segment."] pub single_segment : bool , # [doc = " If set to true, a 32 bit content checksum will be present"] # [doc = " at the end of the frame."] pub content_checksum : bool , # [doc = " If a dictionary ID is provided, the ID of that dictionary."] pub dictionary_id : Option < u64 > , # [doc = " The minimum memory buffer required to compress a frame. If not present,"] # [doc = " `single_segment` will be set to true. If present, this value must be greater than 1KB"] # [doc = " and less than 3.75TB. Encoders should not generate a frame that requires a window size larger than"] # [doc = " 8mb."] pub window_size : Option < u64 > , }
+    };
+}
+
+FrameHeader!()

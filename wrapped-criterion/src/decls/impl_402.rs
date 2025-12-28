@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
+        Html!();
         WallTime!();
-        CliReport!();
-        BenchmarkFilter!();
-        Duration!();
-        Sample!();
+        Criterion!();
+        Reports!();
         Measurement!();
+        CliReport!();
+        Duration!();
+        BenchmarkFilter!();
+        Baseline!();
+        CliVerbosity!();
         SamplingMode!();
+        BencherReport!();
+        BenchmarkConfig!();
+        Sample!();
         Mode!();
         ExternalProfiler!();
-        Baseline!();
-        Reports!();
-        Criterion!();
-        CliVerbosity!();
-        BenchmarkConfig!();
-        BencherReport!();
-        Html!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_402 {
     };
 }
 
-impl_402!()
+impl_402!();

@@ -11,4 +11,4 @@ macro_rules! FE_SQRTM1 {
     };
 }
 
-FE_SQRTM1!()
+FE_SQRTM1!();

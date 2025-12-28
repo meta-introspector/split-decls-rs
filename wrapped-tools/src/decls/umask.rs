@@ -4,4 +4,4 @@ macro_rules! umask {
     };
 }
 
-umask!()
+umask!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Duration!();
         NaiveDateTime!();
+        Duration!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_428 {
     };
 }
 
-impl_428!()
+impl_428!();

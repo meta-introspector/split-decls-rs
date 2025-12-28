@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UseTreeKind!();
         UseTree!();
         ImportAlias!();
-        UseTreeKind!();
         ImportKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_193 {
     };
 }
 
-impl_193!()
+impl_193!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Trait!();
         Macro!();
+        Module!();
+        Adt!();
         BuiltinType!();
         Static!();
-        Adt!();
-        Trait!();
-        Function!();
-        Variant!();
         Const!();
+        Variant!();
+        Function!();
         TypeAlias!();
-        Module!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! ModuleDef {
     };
 }
 
-ModuleDef!()
+ModuleDef!();

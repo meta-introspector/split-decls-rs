@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
         TraitEnvironment!();
+        HirDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! implements_trait_unique_with_args {
     };
 }
 
-implements_trait_unique_with_args!()
+implements_trait_unique_with_args!();

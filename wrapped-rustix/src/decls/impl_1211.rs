@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        SpecialCodeIndex!();
+        Result!();
+    };
+}
+
+macro_rules! impl_1211 {
+    () => {
+        deps!();
+        impl core :: fmt :: Debug for SpecialCodeIndex { fn fmt (& self , f : & mut core :: fmt :: Formatter < '_ >) -> core :: fmt :: Result { match * self { Self :: VINTR => write ! (f , "VINTR") , Self :: VQUIT => write ! (f , "VQUIT") , Self :: VERASE => write ! (f , "VERASE") , Self :: VKILL => write ! (f , "VKILL") , # [cfg (not (any (solarish , all (linux_kernel , any (target_arch = "sparc" , target_arch = "sparc64")) , target_os = "aix" , target_os = "haiku" ,)))] Self :: VEOF => write ! (f , "VEOF") , # [cfg (not (any (solarish , all (linux_kernel , any (target_arch = "sparc" , target_arch = "sparc64")) , target_os = "aix" , target_os = "haiku" ,)))] Self :: VTIME => write ! (f , "VTIME") , # [cfg (not (any (solarish , all (linux_kernel , any (target_arch = "sparc" , target_arch = "sparc64")) , target_os = "aix" , target_os = "haiku" ,)))] Self :: VMIN => write ! (f , "VMIN") , # [cfg (any (solarish , all (linux_kernel , any (target_arch = "sparc" , target_arch = "sparc64")) , target_os = "aix" , target_os = "haiku" ,))] Self :: VMIN => write ! (f , "VMIN/VEOF") , # [cfg (any (solarish , all (linux_kernel , any (target_arch = "sparc" , target_arch = "sparc64")) , target_os = "aix" , target_os = "haiku" ,))] Self :: VTIME => write ! (f , "VTIME/VEOL") , # [cfg (not (any (bsd , solarish , target_os = "aix" , target_os = "haiku" , target_os = "hurd" , target_os = "nto" ,)))] Self :: VSWTC => write ! (f , "VSWTC") , Self :: VSTART => write ! (f , "VSTART") , Self :: VSTOP => write ! (f , "VSTOP") , Self :: VSUSP => write ! (f , "VSUSP") , # [cfg (not (any (solarish , all (linux_kernel , any (target_arch = "sparc" , target_arch = "sparc64")) , target_os = "aix" , target_os = "haiku" ,)))] Self :: VEOL => write ! (f , "VEOL") , # [cfg (not (target_os = "haiku"))] Self :: VREPRINT => write ! (f , "VREPRINT") , # [cfg (not (any (target_os = "aix" , target_os = "haiku")))] Self :: VDISCARD => write ! (f , "VDISCARD") , # [cfg (not (any (target_os = "aix" , target_os = "haiku")))] Self :: VWERASE => write ! (f , "VWERASE") , # [cfg (not (target_os = "haiku"))] Self :: VLNEXT => write ! (f , "VLNEXT") , Self :: VEOL2 => write ! (f , "VEOL2") , # [cfg (any (solarish , target_os = "haiku" , target_os = "nto"))] Self :: VSWTCH => write ! (f , "VSWTCH") , # [cfg (any (bsd , solarish , target_os = "aix" , target_os = "hurd" , target_os = "nto"))] Self :: VDSUSP => write ! (f , "VDSUSP") , # [cfg (any (bsd , target_os = "hurd" , target_os = "illumos"))] Self :: VSTATUS => write ! (f , "VSTATUS") , # [cfg (any (freebsdlike , target_os = "illumos"))] Self :: VERASE2 => write ! (f , "VERASE2") , _ => write ! (f , "unknown") , } } }
+    };
+}
+
+impl_1211!()

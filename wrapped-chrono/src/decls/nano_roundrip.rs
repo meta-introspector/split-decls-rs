@@ -11,4 +11,4 @@ macro_rules! nano_roundrip {
     };
 }
 
-nano_roundrip!()
+nano_roundrip!();

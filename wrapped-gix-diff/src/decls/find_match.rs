@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Outcome!();
-        Change!();
-        Item!();
-        ResourceKind!();
+        Error!();
+        Platform!();
         SourceTuple!();
         DiffLineStats!();
-        Platform!();
-        Error!();
+        Change!();
+        Outcome!();
+        ResourceKind!();
+        Item!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! find_match {
     };
 }
 
-find_match!()
+find_match!();

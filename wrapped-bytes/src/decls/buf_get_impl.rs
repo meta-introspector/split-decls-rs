@@ -4,4 +4,4 @@ macro_rules! buf_get_impl {
     };
 }
 
-buf_get_impl!()
+buf_get_impl!();

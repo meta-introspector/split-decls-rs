@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UrlKind!();
         ParsedUrl!();
         Error!();
+        UrlKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! url_user {
     };
 }
 
-url_user!()
+url_user!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Iter!();
+        Drain!();
+        LruCache!();
         LinkedHashMap!();
         IterMut!();
-        LruCache!();
-        Drain!();
-        Iter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_184 {
     };
 }
 
-impl_184!()
+impl_184!();

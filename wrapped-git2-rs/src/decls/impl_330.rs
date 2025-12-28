@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Binding!();
-        Delta!();
         DiffDelta!();
+        Delta!();
         DiffFile!();
+        Binding!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_330 {
     };
 }
 
-impl_330!()
+impl_330!();

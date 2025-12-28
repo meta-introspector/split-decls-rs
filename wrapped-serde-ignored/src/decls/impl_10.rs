@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Wrap!();
-        SeqAccess!();
-        Path!();
         Deserializer!();
+        Wrap!();
+        Path!();
+        SeqAccess!();
         MapAccess!();
     };
 }

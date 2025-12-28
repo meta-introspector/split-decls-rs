@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        GenericDefaults!();
-        EarlyBinder!();
         LifetimeElisionKind!();
-        TyLoweringContext!();
         ImplTraitLoweringMode!();
         HirDatabase!();
         Diagnostics!();
+        TyLoweringContext!();
+        EarlyBinder!();
+        GenericDefaults!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! generic_defaults_with_diagnostics_query {
     };
 }
 
-generic_defaults_with_diagnostics_query!()
+generic_defaults_with_diagnostics_query!();

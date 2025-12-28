@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FullNameRef!();
         Category!();
         PartialNameRef!();
-        FullNameRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

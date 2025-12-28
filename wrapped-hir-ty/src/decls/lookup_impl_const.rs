@@ -11,4 +11,4 @@ macro_rules! lookup_impl_const {
     };
 }
 
-lookup_impl_const!()
+lookup_impl_const!();

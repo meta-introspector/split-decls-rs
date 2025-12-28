@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        DFA!();
         NFA!();
-        Match!();
-        OverlappingState!();
-        Prefilter!();
-        StreamChunkIter!();
-        FindIter!();
-        ErrorKind!();
-        StreamFindIter!();
-        Anchored!();
-        StreamChunk!();
-        MatchError!();
+        PatternID!();
         StateID!();
+        MatchKind!();
+        MatchError!();
+        FindIter!();
+        Anchored!();
+        Match!();
+        DFA!();
+        StreamChunkIter!();
+        ErrorKind!();
+        Prefilter!();
+        OverlappingState!();
+        StreamFindIter!();
         Input!();
         Special!();
         FindOverlappingIter!();
-        MatchKind!();
-        PatternID!();
+        StreamChunk!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! Automaton {
     };
 }
 
-Automaton!()
+Automaton!();

@@ -4,4 +4,4 @@ macro_rules! input_object {
     };
 }
 
-input_object!()
+input_object!();

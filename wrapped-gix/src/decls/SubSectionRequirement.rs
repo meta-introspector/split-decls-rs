@@ -11,4 +11,4 @@ macro_rules! SubSectionRequirement {
     };
 }
 
-SubSectionRequirement!()
+SubSectionRequirement!();

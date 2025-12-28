@@ -4,4 +4,4 @@ macro_rules! normalize_untrusted_str {
     };
 }
 
-normalize_untrusted_str!()
+normalize_untrusted_str!();

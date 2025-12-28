@@ -4,4 +4,4 @@ macro_rules! NULL_WAKER_KEY {
     };
 }
 
-NULL_WAKER_KEY!()
+NULL_WAKER_KEY!();

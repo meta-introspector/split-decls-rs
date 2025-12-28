@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FileCsvReport!();
-        MeasurementData!();
-        Report!();
         ReportContext!();
         BenchmarkId!();
+        MeasurementData!();
+        FileCsvReport!();
         ValueFormatter!();
+        Report!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_84 {
     };
 }
 
-impl_84!()
+impl_84!();

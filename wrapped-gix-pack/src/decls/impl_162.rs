@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Entry!();
-        Error!();
-        Kind!();
-        Version!();
         EntriesToBytesIter!();
+        Error!();
         Item!();
+        Version!();
+        Kind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_162 {
     };
 }
 
-impl_162!()
+impl_162!();

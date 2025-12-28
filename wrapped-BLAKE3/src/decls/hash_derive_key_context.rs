@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SerialJoin!();
         ContextKey!();
+        SerialJoin!();
         Hash!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! hash_derive_key_context {
     };
 }
 
-hash_derive_key_context!()
+hash_derive_key_context!();

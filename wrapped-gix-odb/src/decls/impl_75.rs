@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        SingleOrMultiIndex!();
-        IndexLookup!();
-        Store!();
-        SlotMapIndex!();
-        RefreshMode!();
-        SlotIndexMarker!();
-        IncOnNewAndDecOnDrop!();
-        Error!();
-        Either!();
         Snapshot!();
-        MutableIndexAndPack!();
         Generation!();
-        IndexAndPacks!();
+        SingleOrMultiIndex!();
+        SlotMapIndex!();
+        Error!();
         Ordering!();
+        IndexLookup!();
+        IncOnNewAndDecOnDrop!();
+        SlotIndexMarker!();
         PackId!();
+        IndexAndPacks!();
+        Either!();
+        Store!();
+        RefreshMode!();
+        MutableIndexAndPack!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

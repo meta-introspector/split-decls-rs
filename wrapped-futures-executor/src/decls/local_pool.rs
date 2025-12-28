@@ -4,4 +4,4 @@ macro_rules! local_pool {
     };
 }
 
-local_pool!()
+local_pool!();

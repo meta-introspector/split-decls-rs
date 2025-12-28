@@ -4,4 +4,4 @@ macro_rules! next_str {
     };
 }
 
-next_str!()
+next_str!();

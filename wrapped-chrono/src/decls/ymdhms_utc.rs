@@ -12,4 +12,4 @@ macro_rules! ymdhms_utc {
     };
 }
 
-ymdhms_utc!()
+ymdhms_utc!();

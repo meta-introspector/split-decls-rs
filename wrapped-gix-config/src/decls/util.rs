@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Whitespace!();
-        Comment!();
         Header!();
+        Comment!();
         Event!();
+        Whitespace!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! util {
     };
 }
 
-util!()
+util!();

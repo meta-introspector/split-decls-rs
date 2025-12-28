@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        NllTypeRelating!();
+        InstantiateOpaqueType!();
+    };
+}
+
+macro_rules! impl_469 {
+    () => {
+        deps!();
+        impl < 'b , 'tcx > PredicateEmittingRelation < InferCtxt < 'tcx > > for NllTypeRelating < '_ , 'b , 'tcx > { fn span (& self) -> Span { self . locations . span (self . type_checker . body) } fn structurally_relate_aliases (& self) -> StructurallyRelateAliases { StructurallyRelateAliases :: No } fn param_env (& self) -> ty :: ParamEnv < 'tcx > { self . type_checker . infcx . param_env } fn register_predicates (& mut self , obligations : impl IntoIterator < Item : ty :: Upcast < TyCtxt < 'tcx > , ty :: Predicate < 'tcx > > > ,) { let tcx = self . cx () ; let param_env = self . param_env () ; self . register_goals (obligations . into_iter () . map (| to_pred | Goal :: new (tcx , param_env , to_pred)) ,) ; } fn register_goals (& mut self , obligations : impl IntoIterator < Item = Goal < 'tcx , ty :: Predicate < 'tcx > > > ,) { let _ : Result < _ , ErrorGuaranteed > = self . type_checker . fully_perform_op (self . locations , self . category , InstantiateOpaqueType { obligations : obligations . into_iter () . map (| goal | { Obligation :: new (self . cx () , ObligationCause :: dummy_with_span (self . span ()) , goal . param_env , goal . predicate ,) }) . collect () , base_universe : None , region_constraints : None , } ,) ; } fn register_alias_relate_predicate (& mut self , a : Ty < 'tcx > , b : Ty < 'tcx >) { self . register_predicates ([ty :: Binder :: dummy (match self . ambient_variance { ty :: Covariant => ty :: PredicateKind :: AliasRelate (a . into () , b . into () , ty :: AliasRelationDirection :: Subtype ,) , ty :: Contravariant => ty :: PredicateKind :: AliasRelate (b . into () , a . into () , ty :: AliasRelationDirection :: Subtype ,) , ty :: Invariant => ty :: PredicateKind :: AliasRelate (a . into () , b . into () , ty :: AliasRelationDirection :: Equate ,) , ty :: Bivariant => { unreachable ! ("cannot defer an alias-relate goal with Bivariant variance (yet?)") } })]) ; } }
+    };
+}
+
+impl_469!()

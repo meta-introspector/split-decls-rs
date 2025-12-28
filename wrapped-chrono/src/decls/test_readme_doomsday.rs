@@ -11,4 +11,4 @@ macro_rules! test_readme_doomsday {
     };
 }
 
-test_readme_doomsday!()
+test_readme_doomsday!();

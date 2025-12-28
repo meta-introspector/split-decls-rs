@@ -4,4 +4,4 @@ macro_rules! track_closed {
     };
 }
 
-track_closed!()
+track_closed!();

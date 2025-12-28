@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         Source!();
+        State!();
         AttributeMatchGroup!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Attributes {
     };
 }
 
-Attributes!()
+Attributes!();

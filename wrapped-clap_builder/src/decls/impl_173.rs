@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IntoResettable!();
-        Resettable!();
         ArgAction!();
+        Resettable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_173 {
     };
 }
 
-impl_173!()
+impl_173!();

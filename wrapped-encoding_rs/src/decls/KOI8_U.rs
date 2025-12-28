@@ -11,4 +11,4 @@ macro_rules! KOI8_U {
     };
 }
 
-KOI8_U!()
+KOI8_U!();

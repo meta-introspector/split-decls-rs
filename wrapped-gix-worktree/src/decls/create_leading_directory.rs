@@ -11,4 +11,4 @@ macro_rules! create_leading_directory {
     };
 }
 
-create_leading_directory!()
+create_leading_directory!();

@@ -4,4 +4,4 @@ macro_rules! LN_KB {
     };
 }
 
-LN_KB!()
+LN_KB!();

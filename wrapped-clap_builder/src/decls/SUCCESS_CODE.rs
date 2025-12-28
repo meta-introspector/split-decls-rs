@@ -4,4 +4,4 @@ macro_rules! SUCCESS_CODE {
     };
 }
 
-SUCCESS_CODE!()
+SUCCESS_CODE!();

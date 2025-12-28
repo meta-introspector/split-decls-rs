@@ -4,4 +4,4 @@ macro_rules! test_into {
     };
 }
 
-test_into!()
+test_into!();

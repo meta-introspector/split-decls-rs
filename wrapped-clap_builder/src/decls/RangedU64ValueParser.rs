@@ -11,4 +11,4 @@ macro_rules! RangedU64ValueParser {
     };
 }
 
-RangedU64ValueParser!()
+RangedU64ValueParser!();

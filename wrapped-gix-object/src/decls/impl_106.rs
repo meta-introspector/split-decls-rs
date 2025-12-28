@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Tree!();
-        Editor!();
-        UpsertMode!();
         Error!();
         Entry!();
+        Editor!();
+        Tree!();
+        WriteMode!();
+        UpsertMode!();
         Write!();
         EntryKind!();
-        WriteMode!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_106 {
     };
 }
 
-impl_106!()
+impl_106!();

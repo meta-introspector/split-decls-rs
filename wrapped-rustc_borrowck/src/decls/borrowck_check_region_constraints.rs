@@ -1,8 +1,12 @@
 macro_rules! deps {
     () => {
-        PropagatedBorrowCheckResults!();
+        BorrowCheckRootCtxt!();
+        BorrowckDiagnosticsBuffer!();
         MirBorrowckCtxt!();
+        NllOutput!();
         CollectRegionConstraintsResult!();
+        BodyWithBorrowckFacts!();
+        PropagatedBorrowCheckResults!();
     };
 }
 

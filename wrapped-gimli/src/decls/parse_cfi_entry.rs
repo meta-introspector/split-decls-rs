@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        UnwindSection!();
-        Section!();
+        PartialFrameDescriptionEntry!();
+        Result!();
         Error!();
         Reader!();
-        CommonInformationEntry!();
-        CieOrFde!();
-        PartialFrameDescriptionEntry!();
         CieOffsetEncoding!();
-        Result!();
+        CommonInformationEntry!();
+        UnwindSection!();
+        CieOrFde!();
         BaseAddresses!();
+        Section!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! parse_cfi_entry {
     };
 }
 
-parse_cfi_entry!()
+parse_cfi_entry!();

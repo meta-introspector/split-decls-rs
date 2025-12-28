@@ -4,4 +4,4 @@ macro_rules! sanitize_package_name {
     };
 }
 
-sanitize_package_name!()
+sanitize_package_name!();

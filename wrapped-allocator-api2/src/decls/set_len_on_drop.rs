@@ -4,4 +4,4 @@ macro_rules! set_len_on_drop {
     };
 }
 
-set_len_on_drop!()
+set_len_on_drop!();

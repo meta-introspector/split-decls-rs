@@ -4,4 +4,4 @@ macro_rules! PADDED_BIN {
     };
 }
 
-PADDED_BIN!()
+PADDED_BIN!();

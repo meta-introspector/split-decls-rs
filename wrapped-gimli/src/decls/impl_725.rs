@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Format!();
-        Register!();
+        CallFrameInstruction!();
         CommonInformationEntry!();
         Encoding!();
-        CallFrameInstruction!();
+        Result!();
         Writer!();
         Error!();
-        Result!();
+        Format!();
+        Register!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_725 {
     };
 }
 
-impl_725!()
+impl_725!();

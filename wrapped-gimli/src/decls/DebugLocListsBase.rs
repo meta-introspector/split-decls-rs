@@ -4,4 +4,4 @@ macro_rules! DebugLocListsBase {
     };
 }
 
-DebugLocListsBase!()
+DebugLocListsBase!();

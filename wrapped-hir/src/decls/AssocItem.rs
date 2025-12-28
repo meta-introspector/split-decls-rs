@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Const!();
-        TypeAlias!();
         Function!();
+        TypeAlias!();
+        Const!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AssocItem {
     };
 }
 
-AssocItem!()
+AssocItem!();

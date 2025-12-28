@@ -4,4 +4,4 @@ macro_rules! StrippedStr {
     };
 }
 
-StrippedStr!()
+StrippedStr!();

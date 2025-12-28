@@ -12,4 +12,4 @@ macro_rules! perform_decl_refactoring {
     };
 }
 
-perform_decl_refactoring!()
+perform_decl_refactoring!();

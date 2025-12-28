@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ExpandError!();
-        ExpandResult!();
         ExpandErrorKind!();
-        Attr!();
-        ExpandDatabase!();
+        ProcMacroKind!();
         ProcMacroExpansionError!();
         CustomProcMacroExpander!();
-        ProcMacroKind!();
+        ExpandResult!();
+        ExpandError!();
+        ExpandDatabase!();
+        Attr!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_175 {
     };
 }
 
-impl_175!()
+impl_175!();

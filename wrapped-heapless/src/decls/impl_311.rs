@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         LenType!();
+        IntoIter!();
         Vec!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_311 {
     };
 }
 
-impl_311!()
+impl_311!();

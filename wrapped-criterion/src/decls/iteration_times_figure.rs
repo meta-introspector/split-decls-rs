@@ -13,4 +13,4 @@ macro_rules! iteration_times_figure {
     };
 }
 
-iteration_times_figure!()
+iteration_times_figure!();

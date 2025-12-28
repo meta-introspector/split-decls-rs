@@ -4,4 +4,4 @@ macro_rules! TryReadyError {
     };
 }
 
-TryReadyError!()
+TryReadyError!();

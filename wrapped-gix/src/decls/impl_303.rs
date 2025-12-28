@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Key!();
-        Note!();
-        ApplyLeniency!();
-        Remote!();
-        Error!();
-        String!();
-        AuthenticateFn!();
-        Ssh!();
-        ProxyAuthMethod!();
-        Any!();
-        SslVersion!();
-        Repository!();
-        Options!();
         Http!();
+        Repository!();
+        ApplyLeniency!();
+        Key!();
+        SslVersion!();
+        Any!();
+        Options!();
+        ProxyAuthMethod!();
+        Error!();
+        AuthenticateFn!();
+        String!();
+        Ssh!();
+        Note!();
+        Remote!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_303 {
     };
 }
 
-impl_303!()
+impl_303!();

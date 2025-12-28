@@ -12,4 +12,4 @@ macro_rules! upstream_branch_and_remote_name_for_tracking_branch {
     };
 }
 
-upstream_branch_and_remote_name_for_tracking_branch!()
+upstream_branch_and_remote_name_for_tracking_branch!();

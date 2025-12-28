@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Reader!();
         UnitRef!();
+        Reader!();
         MacroString!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_496 {
     };
 }
 
-impl_496!()
+impl_496!();

@@ -11,4 +11,4 @@ macro_rules! HEADER_SIZE {
     };
 }
 
-HEADER_SIZE!()
+HEADER_SIZE!();

@@ -4,4 +4,4 @@ macro_rules! decode_lossy {
     };
 }
 
-decode_lossy!()
+decode_lossy!();

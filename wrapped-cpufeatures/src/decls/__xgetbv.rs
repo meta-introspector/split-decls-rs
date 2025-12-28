@@ -4,4 +4,4 @@ macro_rules! __xgetbv {
     };
 }
 
-__xgetbv!()
+__xgetbv!();

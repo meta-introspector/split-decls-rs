@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Variance!();
-        LifetimeParam!();
         GenericParam!();
+        ConstParam!();
+        LifetimeParam!();
+        GenericDef!();
         Module!();
         TypeParam!();
-        ConstParam!();
-        GenericDef!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_364 {
     };
 }
 
-impl_364!()
+impl_364!();

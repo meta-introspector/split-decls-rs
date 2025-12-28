@@ -11,4 +11,4 @@ macro_rules! GeP3 {
     };
 }
 
-GeP3!()
+GeP3!();

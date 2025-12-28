@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        HashEq!();
+        ReadData!();
         Entry!();
         Error!();
         CompareBlobs!();
-        HashEq!();
-        ReadData!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

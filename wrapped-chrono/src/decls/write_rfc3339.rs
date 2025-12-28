@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SecondsFormat!();
-        NaiveDateTime!();
-        OffsetPrecision!();
-        FixedOffset!();
-        Pad!();
-        OffsetFormat!();
         Colons!();
+        Pad!();
+        FixedOffset!();
+        OffsetPrecision!();
+        NaiveDateTime!();
+        SecondsFormat!();
+        OffsetFormat!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! write_rfc3339 {
     };
 }
 
-write_rfc3339!()
+write_rfc3339!();

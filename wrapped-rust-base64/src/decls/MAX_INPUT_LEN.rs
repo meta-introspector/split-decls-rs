@@ -4,4 +4,4 @@ macro_rules! MAX_INPUT_LEN {
     };
 }
 
-MAX_INPUT_LEN!()
+MAX_INPUT_LEN!();

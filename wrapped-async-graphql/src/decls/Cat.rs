@@ -4,4 +4,4 @@ macro_rules! Cat {
     };
 }
 
-Cat!()
+Cat!();

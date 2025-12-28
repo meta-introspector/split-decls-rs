@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Select!();
-        Receiver!();
-        SendError!();
+        RecvError!();
         Sender!();
         SelectedOperation!();
-        RecvError!();
+        Receiver!();
+        SendError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_184 {
     };
 }
 
-impl_184!()
+impl_184!();

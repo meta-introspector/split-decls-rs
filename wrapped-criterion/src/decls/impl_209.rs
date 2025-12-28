@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        BenchmarkId!();
+        Error!();
         Data!();
-        Gnuplot!();
         PlotData!();
+        ValueFormatter!();
         Plotter!();
         PlotContext!();
-        ValueFormatter!();
-        ValueType!();
-        Error!();
         Comparison!();
-        BenchmarkId!();
+        ValueType!();
+        Gnuplot!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

@@ -4,4 +4,4 @@ macro_rules! YIELD_LIMIT {
     };
 }
 
-YIELD_LIMIT!()
+YIELD_LIMIT!();

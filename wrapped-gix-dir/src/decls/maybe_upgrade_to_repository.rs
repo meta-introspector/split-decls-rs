@@ -11,4 +11,4 @@ macro_rules! maybe_upgrade_to_repository {
     };
 }
 
-maybe_upgrade_to_repository!()
+maybe_upgrade_to_repository!();

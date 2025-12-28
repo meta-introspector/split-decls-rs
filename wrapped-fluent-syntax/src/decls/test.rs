@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Identifier!();
-        TextWriter!();
-        Message!();
-        InlineExpression!();
-        Comment!();
-        Entry!();
         Pattern!();
-        Variant!();
+        TextWriter!();
         VariantKey!();
-        Expression!();
+        Comment!();
+        Identifier!();
+        InlineExpression!();
         PatternElement!();
+        Expression!();
+        Variant!();
+        Message!();
+        Entry!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

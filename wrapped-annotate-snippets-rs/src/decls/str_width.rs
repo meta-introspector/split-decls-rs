@@ -4,4 +4,4 @@ macro_rules! str_width {
     };
 }
 
-str_width!()
+str_width!();

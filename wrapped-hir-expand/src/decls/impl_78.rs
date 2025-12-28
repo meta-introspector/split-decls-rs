@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InFile!();
-        ExpandDatabase!();
         AstId!();
+        ExpandDatabase!();
+        InFile!();
         ErasedAstId!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

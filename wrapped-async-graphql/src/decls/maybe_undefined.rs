@@ -4,4 +4,4 @@ macro_rules! maybe_undefined {
     };
 }
 
-maybe_undefined!()
+maybe_undefined!();

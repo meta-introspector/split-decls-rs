@@ -4,4 +4,4 @@ macro_rules! Horizontal {
     };
 }
 
-Horizontal!()
+Horizontal!();

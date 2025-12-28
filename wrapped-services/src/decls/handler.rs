@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Command!();
-        State!();
-        Service!();
         ExtendedCommand!();
+        State!();
+        Command!();
+        Service!();
     };
 }
 

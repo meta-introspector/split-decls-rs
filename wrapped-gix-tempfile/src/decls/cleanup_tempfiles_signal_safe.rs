@@ -4,4 +4,4 @@ macro_rules! cleanup_tempfiles_signal_safe {
     };
 }
 
-cleanup_tempfiles_signal_safe!()
+cleanup_tempfiles_signal_safe!();

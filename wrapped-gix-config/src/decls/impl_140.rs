@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Comment!();
         Event!();
+        Comment!();
         Whitespace!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

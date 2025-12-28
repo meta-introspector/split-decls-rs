@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashTable!();
         RawIntoIter!();
+        HashTable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IntoIter {
     };
 }
 
-IntoIter!()
+IntoIter!();

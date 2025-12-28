@@ -4,4 +4,4 @@ macro_rules! repo_sync_lib {
     };
 }
 
-repo_sync_lib!()
+repo_sync_lib!();

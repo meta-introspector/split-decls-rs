@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        State!();
+    };
+}
+
+macro_rules! impl_563 {
+    () => {
+        deps!();
+        impl State { # [doc = " Find the position at which the given range should be inserted in this"] # [doc = " state."] # [doc = ""] # [doc = " The position returned is always in the inclusive range"] # [doc = " [0, transitions.len()]. If 'transitions.len()' is returned, then the"] # [doc = " given range overlaps with no other range in this state *and* is greater"] # [doc = " than all of them."] # [doc = ""] # [doc = " For all other possible positions, the given range either overlaps"] # [doc = " with the transition at that position or is otherwise less than it"] # [doc = " with no overlap (and is greater than the previous transition). In the"] # [doc = " former case, careful attention must be paid to inserting this range"] # [doc = " as a new transition. In the latter case, the range can be inserted as"] # [doc = " a new transition at the given position without disrupting any other"] # [doc = " transitions."] fn find (& self , range : Utf8Range) -> usize { # [doc = " Returns the position `i` at which `pred(xs[i])` first returns true"] # [doc = " such that for all `j >= i`, `pred(xs[j]) == true`. If `pred` never"] # [doc = " returns true, then `xs.len()` is returned."] # [doc = ""] # [doc = " We roll our own binary search because it doesn't seem like the"] # [doc = " standard library's binary search can be used here. Namely, if"] # [doc = " there is an overlapping range, then we want to find the first such"] # [doc = " occurrence, but there may be many. Or at least, it's not quite"] # [doc = " clear to me how to do it."] fn binary_search < T , F > (xs : & [T] , mut pred : F) -> usize where F : FnMut (& T) -> bool , { let (mut left , mut right) = (0 , xs . len ()) ; while left < right { let mid = (left + right) / 2 ; if pred (& xs [mid]) { right = mid ; } else { left = mid + 1 ; } } left } binary_search (& self . transitions , | t | range . start <= t . range . end) } # [doc = " Clear this state such that it has zero transitions."] fn clear (& mut self) { self . transitions . clear () ; } }
+    };
+}
+
+impl_563!()

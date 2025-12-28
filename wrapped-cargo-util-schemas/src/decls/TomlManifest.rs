@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        TomlPackage!();
         TomlLibTarget!();
-        InheritableLints!();
-        Hints!();
-        TomlProfiles!();
-        TomlDependency!();
-        TomlBinTarget!();
         TomlExampleTarget!();
-        InheritableDependency!();
         TomlTestTarget!();
-        TomlWorkspace!();
         TomlPlatform!();
+        TomlProfiles!();
+        TomlPackage!();
+        InheritableDependency!();
+        Hints!();
+        TomlDependency!();
+        InheritableLints!();
+        TomlWorkspace!();
+        TomlBinTarget!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! TomlManifest {
     };
 }
 
-TomlManifest!()
+TomlManifest!();

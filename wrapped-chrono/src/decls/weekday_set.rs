@@ -4,4 +4,4 @@ macro_rules! weekday_set {
     };
 }
 
-weekday_set!()
+weekday_set!();

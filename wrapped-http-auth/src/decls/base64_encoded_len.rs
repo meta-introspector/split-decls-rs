@@ -4,4 +4,4 @@ macro_rules! base64_encoded_len {
     };
 }
 
-base64_encoded_len!()
+base64_encoded_len!();

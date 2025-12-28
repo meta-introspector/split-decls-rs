@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        EhFrame!();
+        Reader!();
         EndianSlice!();
+        Section!();
         UnwindSection!();
         BaseAddresses!();
-        Section!();
-        Reader!();
-        EhFrame!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! CfiEntriesIter {
     };
 }
 
-CfiEntriesIter!()
+CfiEntriesIter!();

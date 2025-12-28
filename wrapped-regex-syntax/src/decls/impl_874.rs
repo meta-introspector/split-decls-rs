@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Either!();
+        Utf8Range!();
+        ScalarRange!();
+    };
+}
+
+macro_rules! impl_874 {
+    () => {
+        deps!();
+        impl ScalarRange { # [doc = " split splits this range if it overlaps with a surrogate codepoint."] # [doc = ""] # [doc = " Either or both ranges may be invalid."] fn split (& self) -> Option < (ScalarRange , ScalarRange) > { if self . start < 0xE000 && self . end > 0xD7FF { Some ((ScalarRange { start : self . start , end : 0xD7FF } , ScalarRange { start : 0xE000 , end : self . end } ,)) } else { None } } # [doc = " is_valid returns true if and only if start <= end."] fn is_valid (& self) -> bool { self . start <= self . end } # [doc = " as_ascii returns this range as a Utf8Range if and only if all scalar"] # [doc = " values in this range can be encoded as a single byte."] fn as_ascii (& self) -> Option < Utf8Range > { if self . is_ascii () { let start = u8 :: try_from (self . start) . unwrap () ; let end = u8 :: try_from (self . end) . unwrap () ; Some (Utf8Range :: new (start , end)) } else { None } } # [doc = " is_ascii returns true if the range is ASCII only (i.e., takes a single"] # [doc = " byte to encode any scalar value)."] fn is_ascii (& self) -> bool { self . is_valid () && self . end <= 0x7f } # [doc = " encode writes the UTF-8 encoding of the start and end of this range"] # [doc = " to the corresponding destination slices, and returns the number of"] # [doc = " bytes written."] # [doc = ""] # [doc = " The slices should have room for at least `MAX_UTF8_BYTES`."] fn encode (& self , start : & mut [u8] , end : & mut [u8]) -> usize { let cs = char :: from_u32 (self . start) . unwrap () ; let ce = char :: from_u32 (self . end) . unwrap () ; let ss = cs . encode_utf8 (start) ; let se = ce . encode_utf8 (end) ; assert_eq ! (ss . len () , se . len ()) ; ss . len () } }
+    };
+}
+
+impl_874!()

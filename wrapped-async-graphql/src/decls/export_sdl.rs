@@ -4,4 +4,4 @@ macro_rules! export_sdl {
     };
 }
 
-export_sdl!()
+export_sdl!();

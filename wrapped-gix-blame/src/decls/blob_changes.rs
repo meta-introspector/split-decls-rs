@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Statistics!();
         Error!();
         Change!();
+        Statistics!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! blob_changes {
     };
 }
 
-blob_changes!()
+blob_changes!();

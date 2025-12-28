@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Error!();
-        Base64NoPadding!();
-        Base64Impl!();
         Base64Variant!();
         Encoder!();
+        Base64NoPadding!();
+        Base64Impl!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

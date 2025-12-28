@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        RangedI64ValueParser!();
+        Result!();
+        Error!();
         OsStr!();
         TypedValueParser!();
-        Result!();
         Usage!();
-        RangedI64ValueParser!();
-        Error!();
-        Command!();
         Arg!();
+        Command!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_291 {
     };
 }
 
-impl_291!()
+impl_291!();

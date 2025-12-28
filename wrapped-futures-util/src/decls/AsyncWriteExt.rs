@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        WriteAll!();
+        Compat!();
         StreamExt!();
         WriteVectored!();
-        Close!();
-        Compat!();
-        Write!();
-        Cursor!();
+        WriteAll!();
         WriteAllVectored!();
+        Write!();
+        Close!();
         Flush!();
+        Cursor!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! AsyncWriteExt {
     };
 }
 
-AsyncWriteExt!()
+AsyncWriteExt!();

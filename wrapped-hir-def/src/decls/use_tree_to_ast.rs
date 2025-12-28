@@ -13,4 +13,4 @@ macro_rules! use_tree_to_ast {
     };
 }
 
-use_tree_to_ast!()
+use_tree_to_ast!();

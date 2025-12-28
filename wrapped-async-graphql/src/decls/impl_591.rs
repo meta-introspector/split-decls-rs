@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ResolveInfo!();
-        ServerResult!();
         NextResolve!();
         ExtensionContext!();
+        ServerResult!();
+        ResolveInfo!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_591 {
     };
 }
 
-impl_591!()
+impl_591!();

@@ -4,4 +4,4 @@ macro_rules! dummies {
     };
 }
 
-dummies!()
+dummies!();

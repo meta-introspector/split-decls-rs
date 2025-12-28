@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PeekMutInner!();
         BinaryHeap!();
+        PeekMutInner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PeekMutView {
     };
 }
 
-PeekMutView!()
+PeekMutView!();

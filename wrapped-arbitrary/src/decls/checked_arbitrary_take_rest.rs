@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Arbitrary!();
         Unstructured!();
         Result!();
-        Arbitrary!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! checked_arbitrary_take_rest {
     };
 }
 
-checked_arbitrary_take_rest!()
+checked_arbitrary_take_rest!();

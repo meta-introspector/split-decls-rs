@@ -4,4 +4,4 @@ macro_rules! isoweek {
     };
 }
 
-isoweek!()
+isoweek!();

@@ -4,4 +4,4 @@ macro_rules! impl_std {
     };
 }
 
-impl_std!()
+impl_std!();

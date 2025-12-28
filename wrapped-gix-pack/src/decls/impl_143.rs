@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        BytesToEntriesIter!();
         HashWrite!();
+        BytesToEntriesIter!();
         EntryDataMode!();
-        Error!();
-        Entry!();
-        DecompressRead!();
         Mode!();
-        Kind!();
+        Entry!();
         Version!();
+        Error!();
+        DecompressRead!();
+        Kind!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_143 {
     };
 }
 
-impl_143!()
+impl_143!();

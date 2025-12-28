@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ColorKind!();
-        ColorRgb!();
         Specified!();
         Input!();
-        Result!();
         Parser!();
+        Result!();
+        ColorKind!();
+        ColorRgb!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! color_rgb {
     };
 }
 
-color_rgb!()
+color_rgb!();

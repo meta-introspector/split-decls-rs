@@ -4,4 +4,4 @@ macro_rules! prefixed_data {
     };
 }
 
-prefixed_data!()
+prefixed_data!();

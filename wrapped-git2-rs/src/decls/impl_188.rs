@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Index!();
         Binding!();
+        Index!();
         ApplyLocation!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

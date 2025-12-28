@@ -4,4 +4,4 @@ macro_rules! duration {
     };
 }
 
-duration!()
+duration!();

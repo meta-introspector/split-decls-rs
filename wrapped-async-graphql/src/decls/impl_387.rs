@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Loader!();
-        KeysAndSender!();
-        NoCache!();
-        Requests!();
         DataLoaderInner!();
-        ResSender!();
         Result!();
-        DataLoader!();
+        KeysAndSender!();
+        Requests!();
+        ResSender!();
+        NoCache!();
         Error!();
+        DataLoader!();
         CacheFactory!();
+        Loader!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_387 {
     };
 }
 
-impl_387!()
+impl_387!();

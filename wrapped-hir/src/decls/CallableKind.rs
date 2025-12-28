@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Closure!();
         Struct!();
-        Variant!();
         Function!();
+        Variant!();
+        Closure!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CallableKind {
     };
 }
 
-CallableKind!()
+CallableKind!();

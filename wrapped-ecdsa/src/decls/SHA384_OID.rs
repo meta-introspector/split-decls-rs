@@ -4,4 +4,4 @@ macro_rules! SHA384_OID {
     };
 }
 
-SHA384_OID!()
+SHA384_OID!();

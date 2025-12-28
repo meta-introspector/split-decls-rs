@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ArrayLength!();
         GenericArray!();
         IntoArrayLength!();
+        ArrayLength!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! box_arr {
     };
 }
 
-box_arr!()
+box_arr!();

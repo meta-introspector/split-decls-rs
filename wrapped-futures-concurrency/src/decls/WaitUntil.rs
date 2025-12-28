@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         StreamExt!();
+        State!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WaitUntil {
     };
 }
 
-WaitUntil!()
+WaitUntil!();

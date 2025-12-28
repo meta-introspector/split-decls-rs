@@ -4,4 +4,4 @@ macro_rules! HunkHeader {
     };
 }
 
-HunkHeader!()
+HunkHeader!();

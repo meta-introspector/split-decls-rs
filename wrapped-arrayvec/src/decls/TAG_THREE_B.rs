@@ -4,4 +4,4 @@ macro_rules! TAG_THREE_B {
     };
 }
 
-TAG_THREE_B!()
+TAG_THREE_B!();

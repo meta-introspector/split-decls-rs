@@ -4,4 +4,4 @@ macro_rules! StageRaw {
     };
 }
 
-StageRaw!()
+StageRaw!();

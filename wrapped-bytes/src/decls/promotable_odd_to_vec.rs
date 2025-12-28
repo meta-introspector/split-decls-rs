@@ -4,4 +4,4 @@ macro_rules! promotable_odd_to_vec {
     };
 }
 
-promotable_odd_to_vec!()
+promotable_odd_to_vec!();

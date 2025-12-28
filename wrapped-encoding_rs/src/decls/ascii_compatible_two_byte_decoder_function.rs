@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         DecoderResult!();
+        Space!();
         CopyAsciiResult!();
         ByteSource!();
-        Space!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ascii_compatible_two_byte_decoder_function {
     };
 }
 
-ascii_compatible_two_byte_decoder_function!()
+ascii_compatible_two_byte_decoder_function!();

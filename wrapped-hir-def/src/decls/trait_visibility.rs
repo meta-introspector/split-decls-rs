@@ -12,4 +12,4 @@ macro_rules! trait_visibility {
     };
 }
 
-trait_visibility!()
+trait_visibility!();

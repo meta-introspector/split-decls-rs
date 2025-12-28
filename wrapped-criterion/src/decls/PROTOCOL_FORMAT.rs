@@ -4,4 +4,4 @@ macro_rules! PROTOCOL_FORMAT {
     };
 }
 
-PROTOCOL_FORMAT!()
+PROTOCOL_FORMAT!();

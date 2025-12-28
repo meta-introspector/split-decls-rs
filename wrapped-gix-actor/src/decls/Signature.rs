@@ -4,4 +4,4 @@ macro_rules! Signature {
     };
 }
 
-Signature!()
+Signature!();

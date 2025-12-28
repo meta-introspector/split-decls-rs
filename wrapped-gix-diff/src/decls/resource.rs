@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Data!();
+        CacheKey!();
         CacheValue!();
         Resource!();
-        CacheKey!();
+        Data!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! resource {
     };
 }
 
-resource!()
+resource!();

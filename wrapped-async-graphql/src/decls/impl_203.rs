@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        VisitorContext!();
+        Query!();
         Mutation!();
         KnownDirectives!();
-        Field!();
         Directive!();
         Subscription!();
-        VisitorContext!();
         Visitor!();
-        Query!();
+        Field!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

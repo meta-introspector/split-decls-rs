@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AnyValue!();
         AnyValueId!();
+        AnyValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MatchesError {
     };
 }
 
-MatchesError!()
+MatchesError!();

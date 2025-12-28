@@ -4,4 +4,4 @@ macro_rules! alternate_arch {
     };
 }
 
-alternate_arch!()
+alternate_arch!();

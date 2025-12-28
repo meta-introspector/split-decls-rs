@@ -4,4 +4,4 @@ macro_rules! IsActivePlatform {
     };
 }
 
-IsActivePlatform!()
+IsActivePlatform!();

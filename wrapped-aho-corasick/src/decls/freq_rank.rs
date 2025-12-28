@@ -4,4 +4,4 @@ macro_rules! freq_rank {
     };
 }
 
-freq_rank!()
+freq_rank!();

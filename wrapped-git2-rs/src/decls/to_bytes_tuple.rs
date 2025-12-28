@@ -11,4 +11,4 @@ macro_rules! to_bytes_tuple {
     };
 }
 
-to_bytes_tuple!()
+to_bytes_tuple!();

@@ -11,4 +11,4 @@ macro_rules! get_cargo_tree_data {
     };
 }
 
-get_cargo_tree_data!()
+get_cargo_tree_data!();

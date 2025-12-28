@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Trait!();
-        AssocItem!();
-        Crate!();
         Module!();
+        Trait!();
         Function!();
+        Crate!();
+        AssocItem!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_305 {
     };
 }
 
-impl_305!()
+impl_305!();

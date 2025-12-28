@@ -13,4 +13,4 @@ macro_rules! intern_macro_call {
     };
 }
 
-intern_macro_call!()
+intern_macro_call!();

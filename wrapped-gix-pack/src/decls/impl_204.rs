@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Version!();
+        Kind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_204 {
     };
 }
 
-impl_204!()
+impl_204!();

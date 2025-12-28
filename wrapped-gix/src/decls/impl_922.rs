@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
         Remote!();
+        Error!();
+        Url!();
         Repository!();
         Default!();
-        Url!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_922 {
     };
 }
 
-impl_922!()
+impl_922!();

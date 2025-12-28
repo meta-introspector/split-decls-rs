@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Index!();
+        Error!();
         AttributeStack!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! diff_resource_cache {
     };
 }
 
-diff_resource_cache!()
+diff_resource_cache!();

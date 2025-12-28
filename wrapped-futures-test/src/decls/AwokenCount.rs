@@ -11,4 +11,4 @@ macro_rules! AwokenCount {
     };
 }
 
-AwokenCount!()
+AwokenCount!();

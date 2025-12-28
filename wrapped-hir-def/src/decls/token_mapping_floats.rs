@@ -39,4 +39,4 @@ fn#0:MacroCall[BE8F, 0]@30..32#ROOT2024# main#0:MacroCall[BE8F, 0]@33..37#ROOT20
     };
 }
 
-token_mapping_floats!()
+token_mapping_floats!();

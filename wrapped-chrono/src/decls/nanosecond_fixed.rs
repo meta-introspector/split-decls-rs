@@ -11,4 +11,4 @@ macro_rules! nanosecond_fixed {
     };
 }
 
-nanosecond_fixed!()
+nanosecond_fixed!();

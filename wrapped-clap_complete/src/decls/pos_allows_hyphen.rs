@@ -4,4 +4,4 @@ macro_rules! pos_allows_hyphen {
     };
 }
 
-pos_allows_hyphen!()
+pos_allows_hyphen!();

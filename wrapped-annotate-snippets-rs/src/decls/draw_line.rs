@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Renderer!();
-        Margin!();
         ElementStyle!();
+        Renderer!();
         StyledBuffer!();
+        Margin!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! draw_line {
     };
 }
 
-draw_line!()
+draw_line!();

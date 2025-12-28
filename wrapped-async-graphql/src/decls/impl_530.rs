@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CacheStorage!();
         LruCacheStorage!();
+        CacheStorage!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_530 {
     };
 }
 
-impl_530!()
+impl_530!();

@@ -4,4 +4,4 @@ macro_rules! wrap_either {
     };
 }
 
-wrap_either!()
+wrap_either!();

@@ -4,4 +4,4 @@ macro_rules! TrackedChange {
     };
 }
 
-TrackedChange!()
+TrackedChange!();

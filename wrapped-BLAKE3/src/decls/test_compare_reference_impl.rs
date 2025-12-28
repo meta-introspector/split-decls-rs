@@ -11,4 +11,4 @@ macro_rules! test_compare_reference_impl {
     };
 }
 
-test_compare_reference_impl!()
+test_compare_reference_impl!();

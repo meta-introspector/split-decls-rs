@@ -4,4 +4,4 @@ macro_rules! TrailerRef {
     };
 }
 
-TrailerRef!()
+TrailerRef!();

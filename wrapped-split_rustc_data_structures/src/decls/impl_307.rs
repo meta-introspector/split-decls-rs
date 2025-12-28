@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ForestObligation!();
+        ObligationForest!();
+    };
+}
+
+macro_rules! impl_307 {
+    () => {
+        deps!();
+        impl < O : ForestObligation > ObligationForest < O > { # [doc = " Creates a graphviz representation of the obligation forest. Given a directory this will"] # [doc = " create files with name of the format `<counter>_<description>.gv`. The counter is"] # [doc = " global and is maintained internally."] # [doc = ""] # [doc = " Calling this will do nothing unless the environment variable"] # [doc = " `DUMP_OBLIGATION_FOREST_GRAPHVIZ` is defined."] # [doc = ""] # [doc = " A few post-processing that you might want to do make the forest easier to visualize:"] # [doc = ""] # [doc = "  * `sed 's,std::[a-z]*::,,g'` — Deletes the `std::<package>::` prefix of paths."] # [doc = "  * `sed 's,\"Binder(TraitPredicate(<\\(.*\\)>)) (\\([^)]*\\))\",\"\\1 (\\2)\",'` — Transforms"] # [doc = "    `Binder(TraitPredicate(<predicate>))` into just `<predicate>`."] # [allow (dead_code)] pub fn dump_graphviz < P : AsRef < Path > > (& self , dir : P , description : & str) { static COUNTER : AtomicUsize = AtomicUsize :: new (0) ; if var_os ("DUMP_OBLIGATION_FOREST_GRAPHVIZ") . is_none () { return ; } let counter = COUNTER . fetch_add (1 , Ordering :: AcqRel) ; let file_path = dir . as_ref () . join (format ! ("{counter:010}_{description}.gv")) ; let mut gv_file = File :: create_buffered (file_path) . unwrap () ; dot :: render (& self , & mut gv_file) . unwrap () ; } }
+    };
+}
+
+impl_307!()

@@ -12,4 +12,4 @@ macro_rules! resolve_unsynchronized {
     };
 }
 
-resolve_unsynchronized!()
+resolve_unsynchronized!();

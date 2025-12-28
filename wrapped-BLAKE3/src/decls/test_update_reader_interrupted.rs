@@ -11,4 +11,4 @@ macro_rules! test_update_reader_interrupted {
     };
 }
 
-test_update_reader_interrupted!()
+test_update_reader_interrupted!();

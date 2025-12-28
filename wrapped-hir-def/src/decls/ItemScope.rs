@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        ImportOrExternCrate!();
+        MacroCall!();
+        MacrosItem!();
         TypesItem!();
-        ImportOrDef!();
+        ImportOrGlob!();
+        ImportOrExternCrate!();
+        Trait!();
         ModuleDefId!();
         FxIndexMap!();
         Item!();
-        ImportOrGlob!();
-        MacroCall!();
-        ValuesItem!();
-        Trait!();
+        ImportOrDef!();
         MacroId!();
-        MacrosItem!();
+        ValuesItem!();
         DeriveMacroInvocation!();
     };
 }
@@ -23,4 +23,4 @@ macro_rules! ItemScope {
     };
 }
 
-ItemScope!()
+ItemScope!();

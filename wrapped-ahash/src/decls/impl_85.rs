@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RandomState!();
-        AHasherFixed!();
-        AHasherStr!();
         AHasherU64!();
+        AHasherStr!();
+        AHasherFixed!();
+        RandomState!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

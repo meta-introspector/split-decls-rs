@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BigModItem!();
-        SmallModItem!();
-        Item!();
         ItemVisibilities!();
+        BigModItem!();
+        Item!();
+        SmallModItem!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ItemTree {
     };
 }
 
-ItemTree!()
+ItemTree!();

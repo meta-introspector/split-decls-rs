@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Binder!();
-        EarlyBinder!();
-        GenericPredicates!();
-        Diagnostics!();
         PredicateFilter!();
         HirDatabase!();
-        TyLoweringContext!();
+        GenericPredicates!();
+        EarlyBinder!();
         LifetimeElisionKind!();
+        TyLoweringContext!();
+        Diagnostics!();
+        Binder!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! generic_predicates_filtered_by {
     };
 }
 
-generic_predicates_filtered_by!()
+generic_predicates_filtered_by!();

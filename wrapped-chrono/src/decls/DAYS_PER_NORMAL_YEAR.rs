@@ -4,4 +4,4 @@ macro_rules! DAYS_PER_NORMAL_YEAR {
     };
 }
 
-DAYS_PER_NORMAL_YEAR!()
+DAYS_PER_NORMAL_YEAR!();

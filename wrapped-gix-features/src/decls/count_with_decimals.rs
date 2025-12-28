@@ -4,4 +4,4 @@ macro_rules! count_with_decimals {
     };
 }
 
-count_with_decimals!()
+count_with_decimals!();

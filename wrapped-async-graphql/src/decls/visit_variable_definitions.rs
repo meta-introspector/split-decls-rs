@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VisitorContext!();
         Visitor!();
+        VisitorContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! visit_variable_definitions {
     };
 }
 
-visit_variable_definitions!()
+visit_variable_definitions!();

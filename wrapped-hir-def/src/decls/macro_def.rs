@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Macro2Loc!();
-        MacroExpander!();
+        MacroId!();
         DefDatabase!();
         MacroRulesLoc!();
-        MacroId!();
+        Macro2Loc!();
+        MacroExpander!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! macro_def {
     };
 }
 
-macro_def!()
+macro_def!();

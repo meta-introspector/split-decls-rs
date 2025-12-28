@@ -11,4 +11,4 @@ macro_rules! validate_package_name {
     };
 }
 
-validate_package_name!()
+validate_package_name!();

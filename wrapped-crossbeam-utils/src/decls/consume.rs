@@ -4,4 +4,4 @@ macro_rules! consume {
     };
 }
 
-consume!()
+consume!();

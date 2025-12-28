@@ -4,4 +4,4 @@ macro_rules! subcommands_of {
     };
 }
 
-subcommands_of!()
+subcommands_of!();

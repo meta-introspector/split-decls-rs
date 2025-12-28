@@ -4,4 +4,4 @@ macro_rules! write_stream {
     };
 }
 
-write_stream!()
+write_stream!();

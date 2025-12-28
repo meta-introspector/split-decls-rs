@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Result!();
-        TemplateTemplateParam!();
-        UnresolvedType!();
-        Prefix!();
-        Demangle!();
         Type!();
-        ArgScopeStack!();
-        DemangleContext!();
+        TemplateTemplateParam!();
         Substitutable!();
+        Demangle!();
+        UnresolvedType!();
+        ArgScopeStack!();
+        Prefix!();
         DemangleWrite!();
+        Result!();
         UnscopedTemplateName!();
+        DemangleContext!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_332 {
     };
 }
 
-impl_332!()
+impl_332!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        AssocSearchMode!();
-        ItemInNs!();
-        ImportInfo!();
         TestDB!();
-        ItemContainerId!();
-        ImportMap!();
-        AssocItemId!();
         Query!();
-        ModuleDefId!();
+        AssocItemId!();
+        ImportMap!();
+        ItemInNs!();
+        AssocSearchMode!();
         DefDatabase!();
+        ModuleDefId!();
+        ImportInfo!();
+        ItemContainerId!();
     };
 }
 
@@ -284,4 +284,4 @@ pub mod fmt {
     };
 }
 
-tests!()
+tests!();

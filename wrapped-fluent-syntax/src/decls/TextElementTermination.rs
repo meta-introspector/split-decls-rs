@@ -4,4 +4,4 @@ macro_rules! TextElementTermination {
     };
 }
 
-TextElementTermination!()
+TextElementTermination!();

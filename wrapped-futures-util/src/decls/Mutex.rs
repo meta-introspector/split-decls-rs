@@ -11,4 +11,4 @@ macro_rules! Mutex {
     };
 }
 
-Mutex!()
+Mutex!();

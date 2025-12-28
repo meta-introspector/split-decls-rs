@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        InlineFragment!();
+        Selection!();
         Positioned!();
         FragmentSpread!();
-        Selection!();
-        Directive!();
         Field!();
+        InlineFragment!();
+        Directive!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

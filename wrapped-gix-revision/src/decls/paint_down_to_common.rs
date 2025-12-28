@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Flags!();
+        Error!();
         GenThenTime!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! paint_down_to_common {
     };
 }
 
-paint_down_to_common!()
+paint_down_to_common!();

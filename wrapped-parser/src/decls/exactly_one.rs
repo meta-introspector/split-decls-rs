@@ -4,4 +4,4 @@ macro_rules! exactly_one {
     };
 }
 
-exactly_one!()
+exactly_one!();

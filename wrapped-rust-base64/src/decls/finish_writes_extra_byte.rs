@@ -11,4 +11,4 @@ macro_rules! finish_writes_extra_byte {
     };
 }
 
-finish_writes_extra_byte!()
+finish_writes_extra_byte!();

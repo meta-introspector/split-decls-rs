@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Package!();
-        PackageFile!();
-        Dependency!();
         EntryData!();
+        Dependency!();
+        PackageFile!();
+        Package!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

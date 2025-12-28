@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Repository!();
-        Error!();
         Kind!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! peel {
     };
 }
 
-peel!()
+peel!();

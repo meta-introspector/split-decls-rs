@@ -4,4 +4,4 @@ macro_rules! is_blank {
     };
 }
 
-is_blank!()
+is_blank!();

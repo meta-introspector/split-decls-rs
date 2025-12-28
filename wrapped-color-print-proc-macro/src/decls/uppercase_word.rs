@@ -13,4 +13,4 @@ macro_rules! uppercase_word {
     };
 }
 
-uppercase_word!()
+uppercase_word!();

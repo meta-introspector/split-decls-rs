@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ValueParser!();
-        StyledStr!();
-        ArgFlags!();
-        ArgAction!();
-        OsStr!();
         ValueRange!();
         Extensions!();
         Id!();
-        Str!();
+        ValueParser!();
+        ArgAction!();
+        StyledStr!();
         ArgPredicate!();
+        OsStr!();
+        ArgFlags!();
+        Str!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! Arg {
     };
 }
 
-Arg!()
+Arg!();

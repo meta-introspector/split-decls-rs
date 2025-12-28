@@ -4,4 +4,4 @@ macro_rules! path_segments {
     };
 }
 
-path_segments!()
+path_segments!();

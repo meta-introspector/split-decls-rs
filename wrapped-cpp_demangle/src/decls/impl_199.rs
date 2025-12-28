@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         ParseContext!();
-        SubstitutionTable!();
         Name!();
-        Result!();
         Parse!();
-        ClassEnumType!();
+        Result!();
+        SubstitutionTable!();
         IndexStr!();
+        ClassEnumType!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

@@ -4,4 +4,4 @@ macro_rules! OptionCow {
     };
 }
 
-OptionCow!()
+OptionCow!();

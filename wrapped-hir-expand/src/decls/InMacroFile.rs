@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MacroCallId!();
         InFileWrapper!();
+        MacroCallId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InMacroFile {
     };
 }
 
-InMacroFile!()
+InMacroFile!();

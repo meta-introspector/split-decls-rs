@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Error!();
-        Connection!();
         PrepareFetch!();
         Options!();
+        Connection!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! access_feat {
     };
 }
 
-access_feat!()
+access_feat!();

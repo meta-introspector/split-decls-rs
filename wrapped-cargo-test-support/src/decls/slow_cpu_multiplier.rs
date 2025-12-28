@@ -4,4 +4,4 @@ macro_rules! slow_cpu_multiplier {
     };
 }
 
-slow_cpu_multiplier!()
+slow_cpu_multiplier!();

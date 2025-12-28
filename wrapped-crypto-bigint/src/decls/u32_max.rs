@@ -11,4 +11,4 @@ macro_rules! u32_max {
     };
 }
 
-u32_max!()
+u32_max!();

@@ -4,4 +4,4 @@ macro_rules! run_submodule_status_command {
     };
 }
 
-run_submodule_status_command!()
+run_submodule_status_command!();

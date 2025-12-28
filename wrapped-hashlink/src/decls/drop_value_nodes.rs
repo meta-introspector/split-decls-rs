@@ -11,4 +11,4 @@ macro_rules! drop_value_nodes {
     };
 }
 
-drop_value_nodes!()
+drop_value_nodes!();

@@ -11,4 +11,4 @@ macro_rules! dep_table_impl {
     };
 }
 
-dep_table_impl!()
+dep_table_impl!();

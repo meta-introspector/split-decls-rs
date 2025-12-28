@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        TykindKind!();
+        LateContext!();
+        TykindDiag!();
+        TyQualified!();
+    };
+}
+
+macro_rules! impl_275 {
+    () => {
+        deps!();
+        impl < 'tcx > LateLintPass < 'tcx > for TyTyKind { fn check_path (& mut self , cx : & LateContext < 'tcx > , path : & rustc_hir :: Path < 'tcx > , _ : rustc_hir :: HirId ,) { if let Some (segment) = path . segments . iter () . nth_back (1) && lint_ty_kind_usage (cx , & segment . res) { let span = path . span . with_hi (segment . args . map_or (segment . ident . span , | a | a . span_ext) . hi ()) ; cx . emit_span_lint (USAGE_OF_TY_TYKIND , path . span , TykindKind { suggestion : span }) ; } } fn check_ty (& mut self , cx : & LateContext < '_ > , ty : & 'tcx hir :: Ty < 'tcx , hir :: AmbigArg >) { match & ty . kind { hir :: TyKind :: Path (hir :: QPath :: Resolved (_ , path)) => { if lint_ty_kind_usage (cx , & path . res) { let span = match cx . tcx . parent_hir_node (ty . hir_id) { hir :: Node :: PatExpr (hir :: PatExpr { kind : hir :: PatExprKind :: Path (qpath) , .. }) | hir :: Node :: Pat (hir :: Pat { kind : hir :: PatKind :: TupleStruct (qpath , ..) | hir :: PatKind :: Struct (qpath , ..) , .. }) | hir :: Node :: Expr (hir :: Expr { kind : hir :: ExprKind :: Path (qpath) , .. } | & hir :: Expr { kind : hir :: ExprKind :: Struct (qpath , ..) , .. } ,) => { if let hir :: QPath :: TypeRelative (qpath_ty , ..) = qpath && qpath_ty . hir_id == ty . hir_id { Some (path . span) } else { None } } _ => None , } ; match span { Some (span) => { cx . emit_span_lint (USAGE_OF_TY_TYKIND , path . span , TykindKind { suggestion : span } ,) ; } None => cx . emit_span_lint (USAGE_OF_TY_TYKIND , path . span , TykindDiag) , } } else if ! ty . span . from_expansion () && path . segments . len () > 1 && let Some (ty) = is_ty_or_ty_ctxt (cx , path) { cx . emit_span_lint (USAGE_OF_QUALIFIED_TY , path . span , TyQualified { ty , suggestion : path . span } ,) ; } } _ => { } } } }
+    };
+}
+
+impl_275!()

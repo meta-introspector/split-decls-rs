@@ -55,4 +55,4 @@ fn main() {
     };
 }
 
-test_asm_expand!()
+test_asm_expand!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Deprecation!();
-        DefaultValue!();
         Validators!();
+        DefaultValue!();
         Visible!();
+        Deprecation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! InputObjectField {
     };
 }
 
-InputObjectField!()
+InputObjectField!();

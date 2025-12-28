@@ -4,4 +4,4 @@ macro_rules! unpack_simd_stride {
     };
 }
 
-unpack_simd_stride!()
+unpack_simd_stride!();

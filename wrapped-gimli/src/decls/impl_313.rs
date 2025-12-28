@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         EndianReader!();
-        Reader!();
         Result!();
+        Reader!();
         Error!();
-        Endianity!();
         ReaderOffsetId!();
+        Endianity!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_313 {
     };
 }
 
-impl_313!()
+impl_313!();

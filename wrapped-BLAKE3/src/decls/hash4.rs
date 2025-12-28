@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CVWords!();
         IncrementCounter!();
+        CVWords!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! hash4 {
     };
 }
 
-hash4!()
+hash4!();

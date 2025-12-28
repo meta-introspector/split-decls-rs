@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Compound!();
         SerdeEncoder!();
+        Compound!();
         EncodeError!();
         Encoder!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_168 {
     };
 }
 
-impl_168!()
+impl_168!();

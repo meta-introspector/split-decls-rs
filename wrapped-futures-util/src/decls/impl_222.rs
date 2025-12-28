@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        JoinAllKind!();
-        JoinAll!();
         Ready!();
+        JoinAllKind!();
         Pending!();
+        JoinAll!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

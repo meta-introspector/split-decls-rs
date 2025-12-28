@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TypePrivacyVisitor!();
+        ReachEverythingInTheInterfaceVisitor!();
     };
 }
 
 macro_rules! impl_27 {
     () => {
         deps!();
-        impl < 'tcx > TypePrivacyVisitor < 'tcx > { fn item_is_accessible (& self , did : DefId) -> bool { self . tcx . visibility (did) . is_accessible_from (self . module_def_id , self . tcx) } fn check_expr_pat_type (& mut self , id : hir :: HirId , span : Span) -> bool { self . span = span ; let typeck_results = self . maybe_typeck_results . unwrap_or_else (| | span_bug ! (span , "`hir::Expr` or `hir::Pat` outside of a body")) ; let result : ControlFlow < () > = try { self . visit (typeck_results . node_type (id)) ? ; self . visit (typeck_results . node_args (id)) ? ; if let Some (adjustments) = typeck_results . adjustments () . get (id) { adjustments . iter () . try_for_each (| adjustment | self . visit (adjustment . target)) ? ; } } ; result . is_break () } fn check_def_id (& mut self , def_id : DefId , kind : & str , descr : & dyn fmt :: Display) -> bool { let is_error = ! self . item_is_accessible (def_id) ; if is_error { self . tcx . dcx () . emit_err (ItemIsPrivate { span : self . span , kind , descr : descr . into () }) ; } is_error } }
+        impl ReachEverythingInTheInterfaceVisitor < '_ , '_ > { fn generics (& mut self) -> & mut Self { for param in & self . ev . tcx . generics_of (self . item_def_id) . own_params { if let GenericParamDefKind :: Const { .. } = param . kind { self . visit (self . ev . tcx . type_of (param . def_id) . instantiate_identity ()) ; } if let Some (default) = param . default_value (self . ev . tcx) { self . visit (default . instantiate_identity ()) ; } } self } fn predicates (& mut self) -> & mut Self { self . visit_predicates (self . ev . tcx . predicates_of (self . item_def_id)) ; self } fn ty (& mut self) -> & mut Self { self . visit (self . ev . tcx . type_of (self . item_def_id) . instantiate_identity ()) ; self } fn trait_ref (& mut self) -> & mut Self { if let Some (trait_ref) = self . ev . tcx . impl_trait_ref (self . item_def_id) { self . visit_trait (trait_ref . instantiate_identity ()) ; } self } }
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! objects_impl {
     };
 }
 
-objects_impl!()
+objects_impl!();

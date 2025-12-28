@@ -4,4 +4,4 @@ macro_rules! alt_api_path {
     };
 }
 
-alt_api_path!()
+alt_api_path!();

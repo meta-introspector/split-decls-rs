@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Parser!();
         ErrorInner!();
         Command!();
+        Parser!();
         ErrorFormatter!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Error {
     };
 }
 
-Error!()
+Error!();

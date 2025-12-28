@@ -47,4 +47,4 @@ Register-ArgumentCompleter -Native -CommandName {bin} -ScriptBlock {{
     };
 }
 
-impl_137!()
+impl_137!();

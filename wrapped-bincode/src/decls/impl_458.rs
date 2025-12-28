@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EncodeError!();
-        IntEncoding!();
-        Encoder!();
-        Encode!();
         Endianness!();
+        Encode!();
+        Encoder!();
+        IntEncoding!();
+        EncodeError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_458 {
     };
 }
 
-impl_458!()
+impl_458!();

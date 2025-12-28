@@ -4,4 +4,4 @@ macro_rules! take_until {
     };
 }
 
-take_until!()
+take_until!();

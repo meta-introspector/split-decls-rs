@@ -4,4 +4,4 @@ macro_rules! FileRangeWrapper {
     };
 }
 
-FileRangeWrapper!()
+FileRangeWrapper!();

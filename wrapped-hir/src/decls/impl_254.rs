@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Field!();
-        StructKind!();
-        Module!();
-        InstantiatedStruct!();
-        Struct!();
         Type!();
+        Field!();
+        Module!();
+        StructKind!();
+        Struct!();
+        InstantiatedStruct!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

@@ -4,4 +4,4 @@ macro_rules! PIB {
     };
 }
 
-PIB!()
+PIB!();

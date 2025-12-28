@@ -4,4 +4,4 @@ macro_rules! cursor {
     };
 }
 
-cursor!()
+cursor!();

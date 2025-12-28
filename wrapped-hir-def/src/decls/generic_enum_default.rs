@@ -26,4 +26,4 @@ impl <T, > $crate::default::Default for Foo<T, > where {
     };
 }
 
-generic_enum_default!()
+generic_enum_default!();

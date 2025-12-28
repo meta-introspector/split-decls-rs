@@ -12,4 +12,4 @@ macro_rules! test_date_checked_add_signed {
     };
 }
 
-test_date_checked_add_signed!()
+test_date_checked_add_signed!();

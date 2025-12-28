@@ -4,4 +4,4 @@ macro_rules! AnyFuture {
     };
 }
 
-AnyFuture!()
+AnyFuture!();

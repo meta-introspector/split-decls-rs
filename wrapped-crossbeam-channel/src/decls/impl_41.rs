@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ReceiverFlavor!();
         Context!();
-        SelectHandle!();
         Token!();
+        ReceiverFlavor!();
         Receiver!();
+        SelectHandle!();
         Operation!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

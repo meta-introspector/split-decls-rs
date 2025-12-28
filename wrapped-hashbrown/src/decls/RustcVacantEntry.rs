@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawTable!();
         RustcEntry!();
+        RawTable!();
         HashMap!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! RustcVacantEntry {
     };
 }
 
-RustcVacantEntry!()
+RustcVacantEntry!();

@@ -4,4 +4,4 @@ macro_rules! graphiql_source {
     };
 }
 
-graphiql_source!()
+graphiql_source!();

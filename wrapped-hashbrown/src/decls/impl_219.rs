@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Iter!();
         ParIter!();
+        Iter!();
         HashTable!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_219 {
     };
 }
 
-impl_219!()
+impl_219!();

@@ -1,6 +1,6 @@
 macro_rules! bytes {
     () => {
-        pub mod bytes ;
+        pub (crate) mod bytes ;
     };
 }
 

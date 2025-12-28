@@ -4,4 +4,4 @@ macro_rules! validate_upload {
     };
 }
 
-validate_upload!()
+validate_upload!();

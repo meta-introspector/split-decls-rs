@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Attributes!();
-        Config!();
         Clone!();
         Environment!();
+        Config!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Permissions {
     };
 }
 
-Permissions!()
+Permissions!();

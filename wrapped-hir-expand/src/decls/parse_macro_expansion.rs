@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         ExpandResult!();
         ExpansionSpanMap!();
+        CowArc!();
         MacroCallId!();
         ExpandDatabase!();
-        CowArc!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_macro_expansion {
     };
 }
 
-parse_macro_expansion!()
+parse_macro_expansion!();

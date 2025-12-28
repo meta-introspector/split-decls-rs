@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Diff!();
         Range!();
         Solution!();
+        Diff!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! cleanup_merge {
     };
 }
 
-cleanup_merge!()
+cleanup_merge!();

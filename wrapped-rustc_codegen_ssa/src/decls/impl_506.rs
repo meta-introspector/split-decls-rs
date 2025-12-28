@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        LocalRef!();
+        PlaceRef!();
+        OperandValue!();
+        FunctionCx!();
+        BuilderMethods!();
+        OperandRef!();
+    };
+}
+
+macro_rules! impl_506 {
+    () => {
+        deps!();
+        impl < 'a , 'tcx , Bx : BuilderMethods < 'a , 'tcx > > FunctionCx < 'a , 'tcx , Bx > { fn maybe_codegen_consume_direct (& mut self , bx : & mut Bx , place_ref : mir :: PlaceRef < 'tcx > ,) -> Option < OperandRef < 'tcx , Bx :: Value > > { debug ! ("maybe_codegen_consume_direct(place_ref={:?})" , place_ref) ; match self . locals [place_ref . local] { LocalRef :: Operand (mut o) => { for elem in place_ref . projection { match * elem { mir :: ProjectionElem :: Field (f , _) => { assert ! (! o . layout . ty . is_any_ptr () , "Bad PlaceRef: destructing pointers should use cast/PtrMetadata, \
+                                 but tried to access field {f:?} of pointer {o:?}" ,) ; o = o . extract_field (self , bx , f . index ()) ; } mir :: PlaceElem :: Downcast (_ , vidx) => { debug_assert_eq ! (o . layout . variants , abi :: Variants :: Single { index : vidx } ,) ; let layout = o . layout . for_variant (bx . cx () , vidx) ; o = OperandRef { val : o . val , layout } } mir :: PlaceElem :: Subtype (subtype_ty) => { let subtype_ty = self . monomorphize (subtype_ty) ; let layout = self . cx . layout_of (subtype_ty) ; o = OperandRef { val : o . val , layout } } _ => return None , } } Some (o) } LocalRef :: PendingOperand => { bug ! ("use of {:?} before def" , place_ref) ; } LocalRef :: Place (..) | LocalRef :: UnsizedPlace (..) => { None } } } pub fn codegen_consume (& mut self , bx : & mut Bx , place_ref : mir :: PlaceRef < 'tcx > ,) -> OperandRef < 'tcx , Bx :: Value > { debug ! ("codegen_consume(place_ref={:?})" , place_ref) ; let ty = self . monomorphized_place_ty (place_ref) ; let layout = bx . cx () . layout_of (ty) ; if layout . is_zst () { return OperandRef :: zero_sized (layout) ; } if let Some (o) = self . maybe_codegen_consume_direct (bx , place_ref) { return o ; } let place = self . codegen_place (bx , place_ref) ; bx . load_operand (place) } pub fn codegen_operand (& mut self , bx : & mut Bx , operand : & mir :: Operand < 'tcx > ,) -> OperandRef < 'tcx , Bx :: Value > { debug ! ("codegen_operand(operand={:?})" , operand) ; match * operand { mir :: Operand :: Copy (ref place) | mir :: Operand :: Move (ref place) => { self . codegen_consume (bx , place . as_ref ()) } mir :: Operand :: Constant (ref constant) => { let constant_ty = self . monomorphize (constant . ty ()) ; if constant_ty . is_simd () { let layout = bx . layout_of (constant_ty) ; if let BackendRepr :: SimdVector { .. } = layout . backend_repr { let (llval , ty) = self . immediate_const_vector (bx , constant) ; return OperandRef { val : OperandValue :: Immediate (llval) , layout : bx . layout_of (ty) , } ; } } self . eval_mir_constant_to_operand (bx , constant) } } } }
+    };
+}
+
+impl_506!()

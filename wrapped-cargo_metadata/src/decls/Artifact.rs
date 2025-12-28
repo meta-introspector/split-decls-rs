@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ArtifactProfile!();
-        Target!();
         PackageId!();
+        Target!();
+        ArtifactProfile!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Artifact {
     };
 }
 
-Artifact!()
+Artifact!();

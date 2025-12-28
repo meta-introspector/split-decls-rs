@@ -11,4 +11,4 @@ macro_rules! index_or_load_from_head {
     };
 }
 
-index_or_load_from_head!()
+index_or_load_from_head!();

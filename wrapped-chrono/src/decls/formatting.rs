@@ -4,4 +4,4 @@ macro_rules! formatting {
     };
 }
 
-formatting!()
+formatting!();

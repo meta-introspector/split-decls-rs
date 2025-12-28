@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Word!();
         NonZero!();
-        Odd!();
         ConstCtOption!();
-        Int!();
-        Invert!();
         Limb!();
-        ConstChoice!();
+        Odd!();
+        Invert!();
         Uint!();
+        Int!();
+        Word!();
+        ConstChoice!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_99 {
     };
 }
 
-impl_99!()
+impl_99!();

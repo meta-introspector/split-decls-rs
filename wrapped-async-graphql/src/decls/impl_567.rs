@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Extension!();
-        TracingExtension!();
-        NextValidation!();
+        NextSubscribe!();
         NextRequest!();
+        NextValidation!();
+        ValidationResult!();
+        Extension!();
+        NextParseQuery!();
+        ResolveInfo!();
         NextExecute!();
         ExtensionContext!();
+        NextResolve!();
         ServerResult!();
         Result!();
-        NextParseQuery!();
         Response!();
-        ValidationResult!();
         ServerError!();
-        ResolveInfo!();
-        NextResolve!();
-        NextSubscribe!();
+        TracingExtension!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_567 {
     };
 }
 
-impl_567!()
+impl_567!();

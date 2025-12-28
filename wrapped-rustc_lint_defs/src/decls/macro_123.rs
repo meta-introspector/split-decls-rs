@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FutureIncompatibilityReason!();
+        FutureIncompatibleInfo!();
+    };
+}
+
+macro_rules! macro_123 {
+    () => {
+        deps!();
+        declare_lint ! { # [doc = " The `uncovered_param_in_projection` lint detects a violation of one of Rust's orphan rules for"] # [doc = " foreign trait implementations that concerns the use of type parameters inside trait associated"] # [doc = " type paths (\"projections\") whose output may not be a local type that is mistakenly considered"] # [doc = " to \"cover\" said parameters which is **unsound** and which may be rejected by a future version"] # [doc = " of the compiler."] # [doc = ""] # [doc = " Originally reported in [#99554]."] # [doc = ""] # [doc = " [#99554]: https://github.com/rust-lang/rust/issues/99554"] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,ignore (dependent)"] # [doc = " // dependency.rs"] # [doc = " #![crate_type = \"lib\"]"] # [doc = ""] # [doc = " pub trait Trait<T, U> {}"] # [doc = " ```"] # [doc = ""] # [doc = " ```edition2021,ignore (needs dependency)"] # [doc = " // dependent.rs"] # [doc = " trait Identity {"] # [doc = "     type Output;"] # [doc = " }"] # [doc = ""] # [doc = " impl<T> Identity for T {"] # [doc = "     type Output = T;"] # [doc = " }"] # [doc = ""] # [doc = " struct Local;"] # [doc = ""] # [doc = " impl<T> dependency::Trait<Local, T> for <T as Identity>::Output {}"] # [doc = ""] # [doc = " fn main() {}"] # [doc = " ```"] # [doc = ""] # [doc = " This will produce:"] # [doc = ""] # [doc = " ```text"] # [doc = " warning[E0210]: type parameter `T` must be covered by another type when it appears before the first local type (`Local`)"] # [doc = "   --> dependent.rs:11:6"] # [doc = "    |"] # [doc = " 11 | impl<T> dependency::Trait<Local, T> for <T as Identity>::Output {}"] # [doc = "    |      ^ type parameter `T` must be covered by another type when it appears before the first local type (`Local`)"] # [doc = "    |"] # [doc = "    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!"] # [doc = "    = note: for more information, see issue #124559 <https://github.com/rust-lang/rust/issues/124559>"] # [doc = "    = note: implementing a foreign trait is only possible if at least one of the types for which it is implemented is local, and no uncovered type parameters appear before that first local type"] # [doc = "    = note: in this case, 'before' refers to the following order: `impl<..> ForeignTrait<T1, ..., Tn> for T0`, where `T0` is the first and `Tn` is the last"] # [doc = "    = note: `#[warn(uncovered_param_in_projection)]` on by default"] # [doc = " ```"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " FIXME(fmease): Write explainer."] pub UNCOVERED_PARAM_IN_PROJECTION , Warn , "impl contains type parameters that are not covered" , @ future_incompatible = FutureIncompatibleInfo { reason : FutureIncompatibilityReason :: FutureReleaseError , reference : "issue #124559 <https://github.com/rust-lang/rust/issues/124559>" , } ; }
+    };
+}
+
+macro_123!()

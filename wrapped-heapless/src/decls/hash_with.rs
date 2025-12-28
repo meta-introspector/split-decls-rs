@@ -11,4 +11,4 @@ macro_rules! hash_with {
     };
 }
 
-hash_with!()
+hash_with!();

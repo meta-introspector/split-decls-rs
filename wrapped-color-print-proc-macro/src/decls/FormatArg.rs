@@ -4,4 +4,4 @@ macro_rules! FormatArg {
     };
 }
 
-FormatArg!()
+FormatArg!();

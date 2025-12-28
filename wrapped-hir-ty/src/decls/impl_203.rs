@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefaultAutoderefCtx!();
         TraitEnvironment!();
+        DefaultAutoderefCtx!();
         AutoderefCtx!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

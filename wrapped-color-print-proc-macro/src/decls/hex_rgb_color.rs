@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ColorRgb!();
         Input!();
         Result!();
-        ColorRgb!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! hex_rgb_color {
     };
 }
 
-hex_rgb_color!()
+hex_rgb_color!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InputValueResult!();
         Registry!();
+        InputValueResult!();
         InputObject!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! InputType {
     };
 }
 
-InputType!()
+InputType!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Offset!();
-        Entry!();
         Id!();
+        Entry!();
+        Offset!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! large_offsets {
     };
 }
 
-large_offsets!()
+large_offsets!();

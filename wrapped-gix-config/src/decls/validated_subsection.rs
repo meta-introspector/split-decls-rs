@@ -11,4 +11,4 @@ macro_rules! validated_subsection {
     };
 }
 
-validated_subsection!()
+validated_subsection!();

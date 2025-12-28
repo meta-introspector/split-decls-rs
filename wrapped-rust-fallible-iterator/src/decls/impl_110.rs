@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Scan!();
         FallibleIterator!();
+        Scan!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

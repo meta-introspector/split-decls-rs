@@ -11,4 +11,4 @@ macro_rules! InheritableLints {
     };
 }
 
-InheritableLints!()
+InheritableLints!();

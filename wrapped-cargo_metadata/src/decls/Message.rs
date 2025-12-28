@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CompilerMessage!();
         BuildFinished!();
-        Artifact!();
         BuildScript!();
+        CompilerMessage!();
+        Artifact!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Message {
     };
 }
 
-Message!()
+Message!();

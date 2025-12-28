@@ -4,4 +4,4 @@ macro_rules! build_arbitrary_lifetime {
     };
 }
 
-build_arbitrary_lifetime!()
+build_arbitrary_lifetime!();

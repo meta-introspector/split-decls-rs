@@ -4,4 +4,4 @@ macro_rules! DecodeStep {
     };
 }
 
-DecodeStep!()
+DecodeStep!();

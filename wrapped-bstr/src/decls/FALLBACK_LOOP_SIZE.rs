@@ -4,4 +4,4 @@ macro_rules! FALLBACK_LOOP_SIZE {
     };
 }
 
-FALLBACK_LOOP_SIZE!()
+FALLBACK_LOOP_SIZE!();

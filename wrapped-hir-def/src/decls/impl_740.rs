@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
-        ModuleId!();
-        HasModule!();
         MacroId!();
+        HasModule!();
+        ModuleId!();
+        DefDatabase!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_740 {
     };
 }
 
-impl_740!()
+impl_740!();

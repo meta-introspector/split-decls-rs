@@ -4,4 +4,4 @@ macro_rules! fiat_poly1305_cmovznz_u64 {
     };
 }
 
-fiat_poly1305_cmovznz_u64!()
+fiat_poly1305_cmovznz_u64!();

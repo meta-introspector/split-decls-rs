@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawVacantEntryMut!();
         RawOccupiedEntryMut!();
+        RawVacantEntryMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RawEntryMut {
     };
 }
 
-RawEntryMut!()
+RawEntryMut!();

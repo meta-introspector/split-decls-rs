@@ -4,4 +4,4 @@ macro_rules! DocAtom {
     };
 }
 
-DocAtom!()
+DocAtom!();

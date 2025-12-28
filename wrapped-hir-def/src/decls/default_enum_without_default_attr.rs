@@ -11,4 +11,4 @@ enum Foo {
     };
 }
 
-default_enum_without_default_attr!()
+default_enum_without_default_attr!();

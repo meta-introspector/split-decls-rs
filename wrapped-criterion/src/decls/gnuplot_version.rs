@@ -11,4 +11,4 @@ macro_rules! gnuplot_version {
     };
 }
 
-gnuplot_version!()
+gnuplot_version!();

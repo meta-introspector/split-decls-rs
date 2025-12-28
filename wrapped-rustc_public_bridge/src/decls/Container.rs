@@ -1,7 +1,8 @@
 macro_rules! deps {
     () => {
-        Tables!();
         Bridge!();
+        Tables!();
+        CompilerCtxt!();
     };
 }
 

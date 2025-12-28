@@ -4,4 +4,4 @@ macro_rules! MaxTermWidth {
     };
 }
 
-MaxTermWidth!()
+MaxTermWidth!();

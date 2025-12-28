@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ClosureCapture!();
         Type!();
         Closure!();
+        ClosureCapture!();
         AnyClosureId!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_383 {
     };
 }
 
-impl_383!()
+impl_383!();

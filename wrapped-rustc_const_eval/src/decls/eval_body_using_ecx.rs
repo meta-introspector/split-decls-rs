@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        MemoryKind!();
+        InternError!();
+        PartialPtrInFinal!();
+        InterpretationResult!();
+        ReturnContinuation!();
+        InternKind!();
+        DanglingPtrInFinal!();
+        MutablePtrInFinal!();
+        ConstHeapPtrInFinal!();
+        CompileTimeInterpCx!();
+    };
+}
+
+macro_rules! eval_body_using_ecx {
+    () => {
+        deps!();
+        # [instrument (level = "trace" , skip (ecx , body))] fn eval_body_using_ecx < 'tcx , R : InterpretationResult < 'tcx > > (ecx : & mut CompileTimeInterpCx < 'tcx > , cid : GlobalId < 'tcx > , body : & 'tcx mir :: Body < 'tcx > ,) -> InterpResult < 'tcx , R > { let tcx = * ecx . tcx ; assert ! (cid . promoted . is_some () || matches ! (ecx . tcx . def_kind (cid . instance . def_id ()) , DefKind :: Const | DefKind :: Static { .. } | DefKind :: ConstParam | DefKind :: AnonConst | DefKind :: InlineConst | DefKind :: AssocConst) , "Unexpected DefKind: {:?}" , ecx . tcx . def_kind (cid . instance . def_id ())) ; let layout = ecx . layout_of (body . bound_return_ty () . instantiate (tcx , cid . instance . args)) ? ; assert ! (layout . is_sized ()) ; let intern_kind = if cid . promoted . is_some () { InternKind :: Promoted } else { match tcx . static_mutability (cid . instance . def_id ()) { Some (m) => InternKind :: Static (m) , None => InternKind :: Constant , } } ; let ret = if let InternKind :: Static (_) = intern_kind { create_static_alloc (ecx , cid . instance . def_id () . expect_local () , layout) ? } else { ecx . allocate (layout , MemoryKind :: Stack) ? } ; trace ! ("eval_body_using_ecx: pushing stack frame for global: {}{}" , with_no_trimmed_paths ! (ecx . tcx . def_path_str (cid . instance . def_id ())) , cid . promoted . map_or_else (String :: new , | p | format ! ("::{p:?}"))) ; ecx . push_stack_frame_raw (cid . instance , body , & ret . clone () . into () , ReturnContinuation :: Stop { cleanup : false } ,) ? ; ecx . storage_live_for_always_live_locals () ? ; while ecx . step () ? { if CTRL_C_RECEIVED . load (Relaxed) { throw_exhaust ! (Interrupted) ; } } let intern_result = intern_const_alloc_recursive (ecx , intern_kind , & ret) ; const_validate_mplace (ecx , & ret , cid) ? ; match intern_result { Ok (()) => { } Err (InternError :: DanglingPointer) => { throw_inval ! (AlreadyReported (ReportedErrorInfo :: non_const_eval_error (ecx . tcx . dcx () . emit_err (errors :: DanglingPtrInFinal { span : ecx . tcx . span , kind : intern_kind }) ,))) ; } Err (InternError :: BadMutablePointer) => { throw_inval ! (AlreadyReported (ReportedErrorInfo :: non_const_eval_error (ecx . tcx . dcx () . emit_err (errors :: MutablePtrInFinal { span : ecx . tcx . span , kind : intern_kind }) ,))) ; } Err (InternError :: ConstAllocNotGlobal) => { throw_inval ! (AlreadyReported (ReportedErrorInfo :: non_const_eval_error (ecx . tcx . dcx () . emit_err (errors :: ConstHeapPtrInFinal { span : ecx . tcx . span }) ,))) ; } Err (InternError :: PartialPointer) => { throw_inval ! (AlreadyReported (ReportedErrorInfo :: non_const_eval_error (ecx . tcx . dcx () . emit_err (errors :: PartialPtrInFinal { span : ecx . tcx . span , kind : intern_kind }) ,))) ; } } interp_ok (R :: make_result (ret , ecx)) }
+    };
+}
+
+eval_body_using_ecx!()

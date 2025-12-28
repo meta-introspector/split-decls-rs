@@ -11,4 +11,4 @@ macro_rules! remove_items {
     };
 }
 
-remove_items!()
+remove_items!();

@@ -4,4 +4,4 @@ macro_rules! publish {
     };
 }
 
-publish!()
+publish!();

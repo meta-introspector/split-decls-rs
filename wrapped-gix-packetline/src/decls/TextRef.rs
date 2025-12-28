@@ -4,4 +4,4 @@ macro_rules! TextRef {
     };
 }
 
-TextRef!()
+TextRef!();

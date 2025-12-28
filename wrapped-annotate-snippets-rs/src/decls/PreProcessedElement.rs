@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Snippet!();
-        Message!();
-        Origin!();
-        AnnotatedLineInfo!();
-        Padding!();
-        Annotation!();
         SourceMap!();
-        DisplaySuggestion!();
+        Annotation!();
+        Message!();
         SplicedLines!();
+        DisplaySuggestion!();
         Patch!();
+        Padding!();
+        AnnotatedLineInfo!();
+        Origin!();
+        Snippet!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! PreProcessedElement {
     };
 }
 
-PreProcessedElement!()
+PreProcessedElement!();

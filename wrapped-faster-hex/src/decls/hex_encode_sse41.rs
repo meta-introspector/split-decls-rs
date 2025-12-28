@@ -4,4 +4,4 @@ macro_rules! hex_encode_sse41 {
     };
 }
 
-hex_encode_sse41!()
+hex_encode_sse41!();

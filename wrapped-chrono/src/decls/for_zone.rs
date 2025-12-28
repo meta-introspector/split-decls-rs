@@ -4,4 +4,4 @@ macro_rules! for_zone {
     };
 }
 
-for_zone!()
+for_zone!();

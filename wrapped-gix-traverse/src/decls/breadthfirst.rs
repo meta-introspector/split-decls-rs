@@ -4,4 +4,4 @@ macro_rules! breadthfirst {
     };
 }
 
-breadthfirst!()
+breadthfirst!();

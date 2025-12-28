@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FnAbi!();
         EarlyBinder!();
-        Binder!();
-        HirDatabase!();
         PolyFnSig!();
+        FnAbi!();
+        HirDatabase!();
         FnSig!();
+        Binder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! fn_sig_for_enum_variant_constructor {
     };
 }
 
-fn_sig_for_enum_variant_constructor!()
+fn_sig_for_enum_variant_constructor!();

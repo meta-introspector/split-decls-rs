@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Side!();
         Hunk!();
+        Side!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! iterate_hunks_rev {
     };
 }
 
-iterate_hunks_rev!()
+iterate_hunks_rev!();

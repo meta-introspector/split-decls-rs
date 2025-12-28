@@ -4,4 +4,4 @@ macro_rules! EOF {
     };
 }
 
-EOF!()
+EOF!();

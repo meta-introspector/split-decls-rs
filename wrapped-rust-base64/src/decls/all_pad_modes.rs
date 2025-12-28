@@ -11,4 +11,4 @@ macro_rules! all_pad_modes {
     };
 }
 
-all_pad_modes!()
+all_pad_modes!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DifferenceIter!();
+        ColorLevel!();
     };
 }
 
 macro_rules! impl_16 {
     () => {
         deps!();
-        impl < L : Iterator < Item = T > , R : Iterator < Item = T > , T , U : PartialEq , F : Fn (& T) -> U > Iterator for DifferenceIter < L , R , F > { type Item = T ; fn next (& mut self) -> Option < Self :: Item > { loop { let left = self . left . next () ; let right = self . right . next () ? ; if left . as_ref () . map (& self . compare) != Some ((self . compare) (& right)) { return Some (right) ; } } } }
+        impl < 'a > fmt :: Display for ColorLevel < 'a > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match * self . 0 { Level :: TRACE => Color :: Purple . bold () . paint ("TRACE") , Level :: DEBUG => Color :: Blue . bold () . paint ("DEBUG") , Level :: INFO => Color :: Green . bold () . paint (" INFO") , Level :: WARN => Color :: Rgb (252 , 234 , 160) . bold () . paint (" WARN") , Level :: ERROR => Color :: Red . bold () . paint ("ERROR") , } . fmt (f) } }
     };
 }
 

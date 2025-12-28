@@ -11,4 +11,4 @@ macro_rules! convert_primitive_bytes {
     };
 }
 
-convert_primitive_bytes!()
+convert_primitive_bytes!();

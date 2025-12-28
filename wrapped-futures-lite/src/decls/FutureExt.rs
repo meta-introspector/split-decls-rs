@@ -4,4 +4,4 @@ macro_rules! FutureExt {
     };
 }
 
-FutureExt!()
+FutureExt!();

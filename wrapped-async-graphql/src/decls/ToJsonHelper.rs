@@ -4,4 +4,4 @@ macro_rules! ToJsonHelper {
     };
 }
 
-ToJsonHelper!()
+ToJsonHelper!();

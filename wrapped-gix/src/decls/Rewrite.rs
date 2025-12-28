@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Clone!();
         Default!();
         Replace!();
-        Clone!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Rewrite {
     };
 }
 
-Rewrite!()
+Rewrite!();

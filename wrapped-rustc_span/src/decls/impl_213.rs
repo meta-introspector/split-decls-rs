@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Ident!();
+        IdentPrintMode!();
+    };
+}
+
+macro_rules! impl_213 {
+    () => {
+        deps!();
+        impl Ident { # [doc = " Returns `true` for reserved identifiers used internally for elided lifetimes,"] # [doc = " unnamed method parameters, crate root module, error recovery etc."] pub fn is_special (self) -> bool { self . name . is_special () } # [doc = " Returns `true` if the token is a keyword used in the language."] pub fn is_used_keyword (self) -> bool { self . name . is_used_keyword_always () || self . name . is_used_keyword_conditional (| | self . span . edition ()) } # [doc = " Returns `true` if the token is a keyword reserved for possible future use."] pub fn is_unused_keyword (self) -> bool { self . name . is_unused_keyword_always () || self . name . is_unused_keyword_conditional (| | self . span . edition ()) } # [doc = " Returns `true` if the token is either a special identifier or a keyword."] pub fn is_reserved (self) -> bool { self . name . is_reserved (| | self . span . edition ()) } # [doc = " A keyword or reserved identifier that can be used as a path segment."] pub fn is_path_segment_keyword (self) -> bool { self . name . is_path_segment_keyword () } # [doc = " We see this identifier in a normal identifier position, like variable name or a type."] # [doc = " How was it written originally? Did it use the raw form? Let's try to guess."] pub fn is_raw_guess (self) -> bool { self . name . can_be_raw () && self . is_reserved () } # [doc = " Given the name of a lifetime without the first quote (`'`),"] # [doc = " returns whether the lifetime name is reserved (therefore invalid)"] pub fn is_reserved_lifetime (self) -> bool { self . is_reserved () && ! [kw :: Underscore , kw :: Static] . contains (& self . name) } pub fn is_raw_lifetime_guess (self) -> bool { let name_without_apostrophe = self . without_first_quote () ; name_without_apostrophe . name != self . name && name_without_apostrophe . name . can_be_raw () && name_without_apostrophe . is_reserved_lifetime () } pub fn guess_print_mode (self) -> IdentPrintMode { if self . is_raw_lifetime_guess () { IdentPrintMode :: RawLifetime } else if self . is_raw_guess () { IdentPrintMode :: RawIdent } else { IdentPrintMode :: Normal } } # [doc = " Whether this would be the identifier for a tuple field like `self.0`, as"] # [doc = " opposed to a named field like `self.thing`."] pub fn is_numeric (self) -> bool { self . as_str () . bytes () . all (| b | b . is_ascii_digit ()) } }
+    };
+}
+
+impl_213!()

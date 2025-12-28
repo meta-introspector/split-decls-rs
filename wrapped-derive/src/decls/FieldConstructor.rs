@@ -4,4 +4,4 @@ macro_rules! FieldConstructor {
     };
 }
 
-FieldConstructor!()
+FieldConstructor!();

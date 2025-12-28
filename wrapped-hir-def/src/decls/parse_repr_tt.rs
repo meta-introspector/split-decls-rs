@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Literal!();
         BuiltinInt!();
         BuiltinUint!();
-        Literal!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_repr_tt {
     };
 }
 
-parse_repr_tt!()
+parse_repr_tt!();

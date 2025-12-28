@@ -4,4 +4,4 @@ macro_rules! gb18030_range_encode {
     };
 }
 
-gb18030_range_encode!()
+gb18030_range_encode!();

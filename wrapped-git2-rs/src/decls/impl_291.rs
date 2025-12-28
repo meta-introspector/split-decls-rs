@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Describe!();
         Binding!();
+        Describe!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_291 {
     };
 }
 
-impl_291!()
+impl_291!();

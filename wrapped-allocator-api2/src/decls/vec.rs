@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Box!();
         Vec!();
         Global!();
+        Box!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! vec {
     };
 }
 
-vec!()
+vec!();

@@ -4,4 +4,4 @@ macro_rules! min_items {
     };
 }
 
-min_items!()
+min_items!();

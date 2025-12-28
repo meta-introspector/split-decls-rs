@@ -11,4 +11,4 @@ macro_rules! type_error {
     };
 }
 
-type_error!()
+type_error!();

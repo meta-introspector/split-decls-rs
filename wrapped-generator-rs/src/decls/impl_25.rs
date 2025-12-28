@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        StackBox!();
         ContextStack!();
-        Context!();
-        Stack!();
-        Scope!();
-        RegContext!();
         GeneratorImpl!();
+        Stack!();
+        RegContext!();
+        StackBox!();
+        Scope!();
+        Context!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

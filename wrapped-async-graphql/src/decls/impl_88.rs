@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Object!();
         InputObject!();
         InputValue!();
-        Object!();
         Fields!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

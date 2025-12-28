@@ -4,4 +4,4 @@ macro_rules! ParamCollector {
     };
 }
 
-ParamCollector!()
+ParamCollector!();

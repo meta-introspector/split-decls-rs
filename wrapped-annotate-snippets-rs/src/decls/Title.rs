@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Group!();
-        Level!();
         Id!();
+        Level!();
+        Group!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Title {
     };
 }
 
-Title!()
+Title!();

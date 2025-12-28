@@ -4,4 +4,4 @@ macro_rules! CustomFormat {
     };
 }
 
-CustomFormat!()
+CustomFormat!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Styles!();
         Message!();
-        Command!();
+        Styles!();
         StyledStr!();
+        Command!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_417 {
     };
 }
 
-impl_417!()
+impl_417!();

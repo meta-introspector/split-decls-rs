@@ -14,4 +14,4 @@ Stderr: {}" , stdout_str , stderr_str) } } fn dry_run (& self , current_dir : & 
     };
 }
 
-impl_125!()
+impl_125!();

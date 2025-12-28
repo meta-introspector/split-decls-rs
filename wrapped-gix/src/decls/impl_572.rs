@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Url!();
         Error!();
-        Snapshot!();
-        Action!();
         Options!();
+        Action!();
+        Snapshot!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_572 {
     };
 }
 
-impl_572!()
+impl_572!();

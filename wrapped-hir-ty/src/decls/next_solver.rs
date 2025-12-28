@@ -4,4 +4,4 @@ macro_rules! next_solver {
     };
 }
 
-next_solver!()
+next_solver!();

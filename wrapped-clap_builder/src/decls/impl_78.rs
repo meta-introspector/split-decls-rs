@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        AppSettings!();
+        ColorChoice!();
+        TermWidth!();
         Flag!();
         Styles!();
-        TermWidth!();
-        ArgAction!();
-        Arg!();
-        AppSettings!();
-        Command!();
-        ColorChoice!();
         MaxTermWidth!();
+        ArgAction!();
+        Command!();
+        Arg!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

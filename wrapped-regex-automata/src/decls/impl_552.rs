@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Captures!();
+        StateID!();
+        NonMaxUsize!();
+        PikeVM!();
+        SlotTable!();
+    };
+}
+
+macro_rules! impl_552 {
+    () => {
+        deps!();
+        impl SlotTable { # [doc = " Create a new slot table."] # [doc = ""] # [doc = " One should call 'reset' with the corresponding PikeVM before use."] fn new () -> SlotTable { SlotTable { table : vec ! [] , slots_for_captures : 0 , slots_per_state : 0 } } # [doc = " Reset this slot table such that it can be used with the given PikeVM"] # [doc = " (and only that PikeVM)."] fn reset (& mut self , re : & PikeVM) { let nfa = re . get_nfa () ; self . slots_per_state = nfa . group_info () . slot_len () ; self . slots_for_captures = core :: cmp :: max (self . slots_per_state , nfa . pattern_len () . checked_mul (2) . unwrap () ,) ; let len = nfa . states () . len () . checked_mul (self . slots_per_state) . and_then (| x | x . checked_add (self . slots_for_captures)) . expect ("slot table length doesn't overflow") ; trace ! ("resizing PikeVM active states table to {} entries \
+             (slots_per_state={})" , len , self . slots_per_state ,) ; self . table . resize (len , None) ; } # [doc = " Return the heap memory usage, in bytes, used by this slot table."] # [doc = ""] # [doc = " This does not include the stack size of this value."] fn memory_usage (& self) -> usize { self . table . len () * core :: mem :: size_of :: < Option < NonMaxUsize > > () } # [doc = " Perform any per-search setup for this slot table."] # [doc = ""] # [doc = " In particular, this sets the length of the number of slots used in the"] # [doc = " 'Captures' given by the caller (if any at all). This number may be"] # [doc = " smaller than the total number of slots available, e.g., when the caller"] # [doc = " is only interested in tracking the overall match and not the spans of"] # [doc = " every matching capturing group. Only tracking the overall match can"] # [doc = " save a substantial amount of time copying capturing spans during a"] # [doc = " search."] fn setup_search (& mut self , captures_slot_len : usize) { self . slots_for_captures = captures_slot_len ; } # [doc = " Return a mutable slice of the slots for the given state."] # [doc = ""] # [doc = " Note that the length of the slice returned may be less than the total"] # [doc = " number of slots available for this state. In particular, the length"] # [doc = " always matches the number of slots indicated via 'setup_search'."] fn for_state (& mut self , sid : StateID) -> & mut [Option < NonMaxUsize >] { let i = sid . as_usize () * self . slots_per_state ; & mut self . table [i .. i + self . slots_for_captures] } # [doc = " Return a slice of slots of appropriate length where every slot offset"] # [doc = " is guaranteed to be absent. This is useful in cases where you need to"] # [doc = " compute an epsilon closure outside of the user supplied regex, and thus"] # [doc = " never want it to have any capturing slots set."] fn all_absent (& mut self) -> & mut [Option < NonMaxUsize >] { let i = self . table . len () - self . slots_for_captures ; & mut self . table [i .. i + self . slots_for_captures] } }
+    };
+}
+
+impl_552!()

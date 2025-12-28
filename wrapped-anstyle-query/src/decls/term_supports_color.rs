@@ -4,4 +4,4 @@ macro_rules! term_supports_color {
     };
 }
 
-term_supports_color!()
+term_supports_color!();

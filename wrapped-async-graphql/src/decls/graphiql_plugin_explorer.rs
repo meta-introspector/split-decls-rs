@@ -14,4 +14,4 @@ macro_rules! graphiql_plugin_explorer {
     };
 }
 
-graphiql_plugin_explorer!()
+graphiql_plugin_explorer!();

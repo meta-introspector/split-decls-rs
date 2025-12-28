@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Context!();
+        Result!();
         Error!();
         Ok!();
-        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

@@ -4,4 +4,4 @@ macro_rules! PREDEFINED_TOOLS {
     };
 }
 
-PREDEFINED_TOOLS!()
+PREDEFINED_TOOLS!();

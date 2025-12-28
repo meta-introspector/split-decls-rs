@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         UnwindContextStorage!();
+        Result!();
         ReaderOffset!();
         UnwindTableRow!();
-        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

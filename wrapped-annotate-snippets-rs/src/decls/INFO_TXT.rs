@@ -4,4 +4,4 @@ macro_rules! INFO_TXT {
     };
 }
 
-INFO_TXT!()
+INFO_TXT!();

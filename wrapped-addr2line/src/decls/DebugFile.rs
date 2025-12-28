@@ -4,4 +4,4 @@ macro_rules! DebugFile {
     };
 }
 
-DebugFile!()
+DebugFile!();

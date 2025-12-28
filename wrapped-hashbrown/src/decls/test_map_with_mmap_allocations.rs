@@ -11,4 +11,4 @@ macro_rules! test_map_with_mmap_allocations {
     };
 }
 
-test_map_with_mmap_allocations!()
+test_map_with_mmap_allocations!();

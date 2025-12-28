@@ -4,4 +4,4 @@ macro_rules! BLOCK_LEN {
     };
 }
 
-BLOCK_LEN!()
+BLOCK_LEN!();

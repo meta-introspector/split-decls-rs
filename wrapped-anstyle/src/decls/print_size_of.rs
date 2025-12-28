@@ -12,4 +12,4 @@ macro_rules! print_size_of {
     };
 }
 
-print_size_of!()
+print_size_of!();

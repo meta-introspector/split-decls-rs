@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ObligationForest!();
+        Error!();
+    };
+}
+
+macro_rules! NodeState {
+    () => {
+        deps!();
+        # [doc = " The state of one node in some tree within the forest. This represents the"] # [doc = " current state of processing for the obligation (of type `O`) associated"] # [doc = " with this node."] # [doc = ""] # [doc = " The non-`Error` state transitions are as follows."] # [doc = " ```text"] # [doc = " (Pre-creation)"] # [doc = "  |"] # [doc = "  |     register_obligation_at() (called by process_obligations() and"] # [doc = "  v                               from outside the crate)"] # [doc = " Pending"] # [doc = "  |"] # [doc = "  |     process_obligations()"] # [doc = "  v"] # [doc = " Success"] # [doc = "  |  ^"] # [doc = "  |  |  mark_successes()"] # [doc = "  |  v"] # [doc = "  |  Waiting"] # [doc = "  |"] # [doc = "  |     process_cycles()"] # [doc = "  v"] # [doc = " Done"] # [doc = "  |"] # [doc = "  |     compress()"] # [doc = "  v"] # [doc = " (Removed)"] # [doc = " ```"] # [doc = " The `Error` state can be introduced in several places, via `error_at()`."] # [doc = ""] # [doc = " Outside of `ObligationForest` methods, nodes should be either `Pending` or"] # [doc = " `Waiting`."] # [derive (Debug , Copy , Clone , PartialEq , Eq)] enum NodeState { # [doc = " This obligation has not yet been selected successfully. Cannot have"] # [doc = " subobligations."] Pending , # [doc = " This obligation was selected successfully, but may or may not have"] # [doc = " subobligations."] Success , # [doc = " This obligation was selected successfully, but it has a pending"] # [doc = " subobligation."] Waiting , # [doc = " This obligation, along with its subobligations, are complete, and will"] # [doc = " be removed in the next collection."] Done , # [doc = " This obligation was resolved to an error. It will be removed by the"] # [doc = " next compression step."] Error , }
+    };
+}
+
+NodeState!()

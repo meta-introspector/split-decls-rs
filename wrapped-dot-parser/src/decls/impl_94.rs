@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         AList!();
-        NodeID!();
         Node!();
+        NodeID!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PositionCalculator!();
-        Positioned!();
         Rule!();
+        Positioned!();
+        PositionCalculator!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! parse_name {
     };
 }
 
-parse_name!()
+parse_name!();

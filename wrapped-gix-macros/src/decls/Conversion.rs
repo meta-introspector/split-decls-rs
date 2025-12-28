@@ -4,4 +4,4 @@ macro_rules! Conversion {
     };
 }
 
-Conversion!()
+Conversion!();

@@ -4,4 +4,4 @@ macro_rules! requires_target_installed {
     };
 }
 
-requires_target_installed!()
+requires_target_installed!();

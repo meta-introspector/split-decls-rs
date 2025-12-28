@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PublicKey!();
         KeyPair!();
         SecretKey!();
-        PublicKey!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_der {
     };
 }
 
-test_der!()
+test_der!();

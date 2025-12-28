@@ -4,4 +4,4 @@ macro_rules! impl_partial_ord {
     };
 }
 
-impl_partial_ord!()
+impl_partial_ord!();

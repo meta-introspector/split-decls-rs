@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        DefMap!();
         ItemInNs!();
-        DefDatabase!();
-        Complete!();
-        ImportOrExternCrate!();
-        IsTraitAssocItem!();
-        FxIndexMap!();
-        ImportMapIndex!();
-        Visibility!();
-        ExternCrate!();
-        ModuleDefId!();
-        ImportMap!();
         ImportInfo!();
-        AssocItemId!();
-        AttrDefId!();
+        ExternCrate!();
+        DefMap!();
+        ImportMap!();
+        ImportOrExternCrate!();
+        Visibility!();
+        DefDatabase!();
         ModuleId!();
+        ImportMapIndex!();
+        ModuleDefId!();
+        FxIndexMap!();
+        Complete!();
+        AttrDefId!();
+        IsTraitAssocItem!();
+        AssocItemId!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_422 {
     };
 }
 
-impl_422!()
+impl_422!();

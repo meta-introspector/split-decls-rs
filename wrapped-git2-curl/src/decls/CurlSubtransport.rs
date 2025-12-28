@@ -4,4 +4,4 @@ macro_rules! CurlSubtransport {
     };
 }
 
-CurlSubtransport!()
+CurlSubtransport!();

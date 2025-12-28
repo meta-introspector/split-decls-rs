@@ -12,4 +12,4 @@ macro_rules! hunk_cb_c {
     };
 }
 
-hunk_cb_c!()
+hunk_cb_c!();

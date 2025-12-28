@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProjectionStore!();
         Place!();
+        ProjectionStore!();
         PlaceElem!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_878 {
     };
 }
 
-impl_878!()
+impl_878!();

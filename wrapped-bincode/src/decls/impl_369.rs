@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Decoder!();
         DecodeError!();
         Decode!();
+        Decoder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_369 {
     };
 }
 
-impl_369!()
+impl_369!();

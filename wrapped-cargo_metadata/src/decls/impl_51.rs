@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PackageId!();
         WorkspaceDefaultMembers!();
+        PackageId!();
         Target!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_51 {
     };
 }
 
-impl_51!()
+impl_51!();

@@ -11,4 +11,4 @@ macro_rules! derive_description {
     };
 }
 
-derive_description!()
+derive_description!();

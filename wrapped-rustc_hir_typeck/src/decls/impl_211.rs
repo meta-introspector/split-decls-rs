@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        FnCtxt!();
+        EnclosingBreakables!();
+        Diverges!();
+        TypeckRootCtxt!();
+    };
+}
+
+macro_rules! impl_211 {
+    () => {
+        deps!();
+        impl < 'a , 'tcx > FnCtxt < 'a , 'tcx > { pub (crate) fn new (root_ctxt : & 'a TypeckRootCtxt < 'tcx > , param_env : ty :: ParamEnv < 'tcx > , body_id : LocalDefId ,) -> FnCtxt < 'a , 'tcx > { let (diverging_fallback_behavior , diverging_block_behavior) = never_type_behavior (root_ctxt . tcx) ; FnCtxt { body_id , param_env , ret_coercion : None , ret_coercion_span : Cell :: new (None) , coroutine_types : None , diverges : Cell :: new (Diverges :: Maybe) , function_diverges_because_of_empty_arguments : Cell :: new (Diverges :: Maybe) , is_whole_body : Cell :: new (false) , enclosing_breakables : RefCell :: new (EnclosingBreakables { stack : Vec :: new () , by_id : Default :: default () , }) , root_ctxt , fallback_has_occurred : Cell :: new (false) , diverging_fallback_behavior , diverging_block_behavior , trait_ascriptions : Default :: default () , has_rustc_attrs : root_ctxt . tcx . features () . rustc_attrs () , } } pub (crate) fn dcx (& self) -> DiagCtxtHandle < 'a > { self . root_ctxt . infcx . dcx () } pub (crate) fn cause (& self , span : Span , code : ObligationCauseCode < 'tcx > ,) -> ObligationCause < 'tcx > { ObligationCause :: new (span , self . body_id , code) } pub (crate) fn misc (& self , span : Span) -> ObligationCause < 'tcx > { self . cause (span , ObligationCauseCode :: Misc) } pub (crate) fn sess (& self) -> & Session { self . tcx . sess } # [doc = " Creates an `TypeErrCtxt` with a reference to the in-progress"] # [doc = " `TypeckResults` which is used for diagnostics."] # [doc = " Use [`InferCtxtErrorExt::err_ctxt`] to start one without a `TypeckResults`."] # [doc = ""] # [doc = " [`InferCtxtErrorExt::err_ctxt`]: rustc_trait_selection::error_reporting::InferCtxtErrorExt::err_ctxt"] pub (crate) fn err_ctxt (& 'a self) -> TypeErrCtxt < 'a , 'tcx > { TypeErrCtxt { infcx : & self . infcx , typeck_results : Some (self . typeck_results . borrow ()) , fallback_has_occurred : self . fallback_has_occurred . get () , normalize_fn_sig : Box :: new (| fn_sig | { if fn_sig . has_escaping_bound_vars () { return fn_sig ; } self . probe (| _ | { let ocx = ObligationCtxt :: new (self) ; let normalized_fn_sig = ocx . normalize (& ObligationCause :: dummy () , self . param_env , fn_sig) ; if ocx . select_all_or_error () . is_empty () { let normalized_fn_sig = self . resolve_vars_if_possible (normalized_fn_sig) ; if ! normalized_fn_sig . has_infer () { return normalized_fn_sig ; } } fn_sig }) }) , autoderef_steps : Box :: new (| ty | { let mut autoderef = self . autoderef (DUMMY_SP , ty) . silence_errors () ; let mut steps = vec ! [] ; while let Some ((ty , _)) = autoderef . next () { steps . push ((ty , autoderef . current_obligations ())) ; } steps }) , } } }
+    };
+}
+
+impl_211!()

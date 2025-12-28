@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        LocalTimeType!();
+        AlternateTime!();
         Error!();
+        RuleDay!();
+        OutOfRange!();
+        MappedLocalTime!();
         UtcDateTime!();
         TransitionRule!();
         NaiveDateTime!();
-        MappedLocalTime!();
-        LocalTimeType!();
-        AlternateTime!();
-        OutOfRange!();
-        RuleDay!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_613 {
     };
 }
 
-impl_613!()
+impl_613!();

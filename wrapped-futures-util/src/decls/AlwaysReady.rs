@@ -4,4 +4,4 @@ macro_rules! AlwaysReady {
     };
 }
 
-AlwaysReady!()
+AlwaysReady!();

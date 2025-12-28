@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Options!();
+        Error!();
         File!();
         Source!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

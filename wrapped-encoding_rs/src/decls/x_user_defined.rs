@@ -4,4 +4,4 @@ macro_rules! x_user_defined {
     };
 }
 
-x_user_defined!()
+x_user_defined!();

@@ -4,4 +4,4 @@ macro_rules! _remove_file {
     };
 }
 
-_remove_file!()
+_remove_file!();

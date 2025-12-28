@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
+        Shallow!();
         Context!();
         Ref!();
-        Shallow!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! hero {
     };
 }
 
-hero!()
+hero!();

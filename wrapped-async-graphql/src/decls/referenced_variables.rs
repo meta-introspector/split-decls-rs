@@ -4,4 +4,4 @@ macro_rules! referenced_variables {
     };
 }
 
-referenced_variables!()
+referenced_variables!();

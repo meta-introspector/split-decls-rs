@@ -12,4 +12,4 @@ macro_rules! ReadDirUtf8 {
     };
 }
 
-ReadDirUtf8!()
+ReadDirUtf8!();

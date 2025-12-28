@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Flags!();
         BitFlags!();
+        Flags!();
         Flag!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! bitflags {
     };
 }
 
-bitflags!()
+bitflags!();

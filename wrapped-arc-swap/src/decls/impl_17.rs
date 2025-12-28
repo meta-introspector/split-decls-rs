@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AccessConvert!();
-        DynGuard!();
-        Access!();
-        DynAccess!();
         Guard!();
+        DynGuard!();
+        DynAccess!();
+        Access!();
+        AccessConvert!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

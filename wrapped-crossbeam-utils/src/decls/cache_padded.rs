@@ -4,4 +4,4 @@ macro_rules! cache_padded {
     };
 }
 
-cache_padded!()
+cache_padded!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Deprecation!();
-        Validators!();
-        DefaultValue!();
         Visible!();
+        Validators!();
+        Deprecation!();
+        DefaultValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SubscriptionFieldArgument {
     };
 }
 
-SubscriptionFieldArgument!()
+SubscriptionFieldArgument!();

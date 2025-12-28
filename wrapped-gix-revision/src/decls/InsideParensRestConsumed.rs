@@ -4,4 +4,4 @@ macro_rules! InsideParensRestConsumed {
     };
 }
 
-InsideParensRestConsumed!()
+InsideParensRestConsumed!();

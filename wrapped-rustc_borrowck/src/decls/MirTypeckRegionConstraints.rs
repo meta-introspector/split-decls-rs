@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        LivenessValues!();
+        UniverseInfo!();
+        PlaceholderIndices!();
+        OutlivesConstraintSet!();
+        TypeTest!();
+    };
+}
+
+macro_rules! MirTypeckRegionConstraints {
+    () => {
+        deps!();
+        # [doc = " A collection of region constraints that must be satisfied for the"] # [doc = " program to be considered well-typed."] # [derive (Clone)] pub (crate) struct MirTypeckRegionConstraints < 'tcx > { # [doc = " Maps from a `ty::Placeholder` to the corresponding"] # [doc = " `PlaceholderIndex` bit that we will use for it."] # [doc = ""] # [doc = " To keep everything in sync, do not insert this set"] # [doc = " directly. Instead, use the `placeholder_region` helper."] pub (crate) placeholder_indices : PlaceholderIndices , # [doc = " Each time we add a placeholder to `placeholder_indices`, we"] # [doc = " also create a corresponding \"representative\" region vid for"] # [doc = " that wraps it. This vector tracks those. This way, when we"] # [doc = " convert the same `ty::RePlaceholder(p)` twice, we can map to"] # [doc = " the same underlying `RegionVid`."] pub (crate) placeholder_index_to_region : IndexVec < PlaceholderIndex , ty :: Region < 'tcx > > , # [doc = " In general, the type-checker is not responsible for enforcing"] # [doc = " liveness constraints; this job falls to the region inferencer,"] # [doc = " which performs a liveness analysis. However, in some limited"] # [doc = " cases, the MIR type-checker creates temporary regions that do"] # [doc = " not otherwise appear in the MIR -- in particular, the"] # [doc = " late-bound regions that it instantiates at call-sites -- and"] # [doc = " hence it must report on their liveness constraints."] pub (crate) liveness_constraints : LivenessValues , pub (crate) outlives_constraints : OutlivesConstraintSet < 'tcx > , pub (crate) universe_causes : FxIndexMap < ty :: UniverseIndex , UniverseInfo < 'tcx > > , pub (crate) type_tests : Vec < TypeTest < 'tcx > > , }
+    };
+}
+
+MirTypeckRegionConstraints!()

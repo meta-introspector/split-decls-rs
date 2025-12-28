@@ -11,4 +11,4 @@ macro_rules! get_cached_memory {
     };
 }
 
-get_cached_memory!()
+get_cached_memory!();

@@ -4,4 +4,4 @@ macro_rules! from_paths {
     };
 }
 
-from_paths!()
+from_paths!();

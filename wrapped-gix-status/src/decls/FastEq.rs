@@ -4,4 +4,4 @@ macro_rules! FastEq {
     };
 }
 
-FastEq!()
+FastEq!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         AuthenticateFn!();
-        Remote!();
         Any!();
+        Remote!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Connection {
     };
 }
 
-Connection!()
+Connection!();

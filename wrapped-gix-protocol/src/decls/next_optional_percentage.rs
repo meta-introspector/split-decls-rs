@@ -4,4 +4,4 @@ macro_rules! next_optional_percentage {
     };
 }
 
-next_optional_percentage!()
+next_optional_percentage!();

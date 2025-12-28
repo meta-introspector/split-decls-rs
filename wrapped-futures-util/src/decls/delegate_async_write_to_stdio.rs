@@ -12,4 +12,4 @@ macro_rules! delegate_async_write_to_stdio {
     };
 }
 
-delegate_async_write_to_stdio!()
+delegate_async_write_to_stdio!();

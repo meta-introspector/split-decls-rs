@@ -11,4 +11,4 @@ macro_rules! STATIC_VTABLE {
     };
 }
 
-STATIC_VTABLE!()
+STATIC_VTABLE!();

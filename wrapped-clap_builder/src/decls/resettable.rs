@@ -4,4 +4,4 @@ macro_rules! resettable {
     };
 }
 
-resettable!()
+resettable!();

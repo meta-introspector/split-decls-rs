@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Throughput!();
         ValueType!();
+        Throughput!();
         BenchmarkId!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_268 {
     };
 }
 
-impl_268!()
+impl_268!();

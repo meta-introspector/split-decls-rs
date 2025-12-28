@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        BufferKindUser!();
         Digest!();
-        UpdateCore!();
+        FixedOutputCore!();
+        CoreProxy!();
+        BufferKindUser!();
         HashMarker!();
         EagerHash!();
-        CoreProxy!();
-        FixedOutputCore!();
+        UpdateCore!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

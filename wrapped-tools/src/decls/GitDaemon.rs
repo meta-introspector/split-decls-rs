@@ -4,4 +4,4 @@ macro_rules! GitDaemon {
     };
 }
 
-GitDaemon!()
+GitDaemon!();

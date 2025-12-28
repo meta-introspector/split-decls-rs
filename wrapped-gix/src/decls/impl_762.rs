@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Any!();
         Validate!();
+        Any!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_762 {
     };
 }
 
-impl_762!()
+impl_762!();

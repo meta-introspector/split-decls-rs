@@ -4,4 +4,4 @@ macro_rules! impl_set_requires {
     };
 }
 
-impl_set_requires!()
+impl_set_requires!();

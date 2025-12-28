@@ -4,4 +4,4 @@ macro_rules! piped {
     };
 }
 
-piped!()
+piped!();

@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
+        Trait!();
         Macro!();
+        Adt!();
+        Variant!();
+        Enum!();
+        VariantDef!();
+        Union!();
+        Struct!();
+        Impl!();
         Crate!();
         Function!();
-        Struct!();
-        Adt!();
-        Enum!();
         Const!();
         Static!();
-        TypeAlias!();
-        Semantics!();
-        Union!();
-        VariantDef!();
-        Variant!();
-        Impl!();
-        Trait!();
         Module!();
+        Semantics!();
+        TypeAlias!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

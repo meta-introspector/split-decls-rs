@@ -11,4 +11,4 @@ macro_rules! FnMut1 {
     };
 }
 
-FnMut1!()
+FnMut1!();

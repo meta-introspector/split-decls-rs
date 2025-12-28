@@ -11,4 +11,4 @@ macro_rules! get_rustdoc {
     };
 }
 
-get_rustdoc!()
+get_rustdoc!();

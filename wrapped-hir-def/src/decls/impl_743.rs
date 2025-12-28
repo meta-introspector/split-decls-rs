@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        HasModule!();
-        LifetimeParamId!();
-        FieldId!();
         ModuleId!();
+        TypeParamId!();
         MacroId!();
         DefDatabase!();
-        TypeParamId!();
-        ConstParamId!();
+        FieldId!();
+        LifetimeParamId!();
+        HasModule!();
         AttrDefId!();
-        GenericParamId!();
         AdtId!();
+        ConstParamId!();
+        GenericParamId!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_743 {
     };
 }
 
-impl_743!()
+impl_743!();

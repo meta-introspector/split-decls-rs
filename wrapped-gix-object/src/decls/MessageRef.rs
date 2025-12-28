@@ -4,4 +4,4 @@ macro_rules! MessageRef {
     };
 }
 
-MessageRef!()
+MessageRef!();

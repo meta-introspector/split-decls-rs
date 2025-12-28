@@ -11,4 +11,4 @@ macro_rules! IMAP_MUTF7 {
     };
 }
 
-IMAP_MUTF7!()
+IMAP_MUTF7!();

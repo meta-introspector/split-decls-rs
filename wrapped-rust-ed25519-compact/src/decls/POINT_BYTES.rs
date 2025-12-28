@@ -4,4 +4,4 @@ macro_rules! POINT_BYTES {
     };
 }
 
-POINT_BYTES!()
+POINT_BYTES!();

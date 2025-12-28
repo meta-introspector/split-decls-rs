@@ -4,4 +4,4 @@ macro_rules! FromRadix10 {
     };
 }
 
-FromRadix10!()
+FromRadix10!();

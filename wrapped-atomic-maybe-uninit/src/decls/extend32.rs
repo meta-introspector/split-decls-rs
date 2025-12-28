@@ -11,4 +11,4 @@ macro_rules! extend32 {
     };
 }
 
-extend32!()
+extend32!();

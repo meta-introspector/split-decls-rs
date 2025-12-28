@@ -4,4 +4,4 @@ macro_rules! test_atomic {
     };
 }
 
-test_atomic!()
+test_atomic!();

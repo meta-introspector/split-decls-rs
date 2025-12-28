@@ -11,4 +11,4 @@ macro_rules! hex_hash {
     };
 }
 
-hex_hash!()
+hex_hash!();

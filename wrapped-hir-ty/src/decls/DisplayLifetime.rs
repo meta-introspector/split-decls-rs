@@ -4,4 +4,4 @@ macro_rules! DisplayLifetime {
     };
 }
 
-DisplayLifetime!()
+DisplayLifetime!();

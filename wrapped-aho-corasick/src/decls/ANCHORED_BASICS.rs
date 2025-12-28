@@ -11,4 +11,4 @@ macro_rules! ANCHORED_BASICS {
     };
 }
 
-ANCHORED_BASICS!()
+ANCHORED_BASICS!();

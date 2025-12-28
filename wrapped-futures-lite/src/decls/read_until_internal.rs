@@ -11,4 +11,4 @@ macro_rules! read_until_internal {
     };
 }
 
-read_until_internal!()
+read_until_internal!();

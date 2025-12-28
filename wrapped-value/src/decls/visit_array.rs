@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConstValue!();
-        SeqDeserializer!();
-        DeserializerError!();
         Value!();
+        ConstValue!();
+        DeserializerError!();
+        SeqDeserializer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! visit_array {
     };
 }
 
-visit_array!()
+visit_array!();

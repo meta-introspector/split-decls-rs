@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Builder!();
-        Formatter!();
         ConfigurableFormat!();
+        Formatter!();
         ConfigurableFormatWriter!();
         WriteStyle!();
     };
@@ -15,4 +15,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

@@ -11,4 +11,4 @@ macro_rules! swap_if_opposite_endian {
     };
 }
 
-swap_if_opposite_endian!()
+swap_if_opposite_endian!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ParseContext!();
-        VectorType!();
-        Parse!();
         SubstitutionTable!();
-        IndexStr!();
+        VectorType!();
         Expression!();
+        ParseContext!();
+        Result!();
+        Parse!();
+        IndexStr!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_213 {
     };
 }
 
-impl_213!()
+impl_213!();

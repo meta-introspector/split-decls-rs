@@ -4,4 +4,4 @@ macro_rules! EncodeError {
     };
 }
 
-EncodeError!()
+EncodeError!();

@@ -1,32 +1,32 @@
 macro_rules! deps {
     () => {
-        GenericSubstitution!();
         Module!();
-        BodyOrSig!();
-        DeriveHelper!();
-        SelfParam!();
-        Variant!();
-        Field!();
-        SourceAnalyzer!();
-        BuiltinType!();
-        BuiltinAttr!();
         Adjustment!();
-        PathResolution!();
-        TypeParam!();
-        Local!();
+        Callable!();
+        BindingMode!();
+        Function!();
         TupleField!();
         Trait!();
-        Type!();
-        ToolModule!();
-        TypeAlias!();
-        BindingMode!();
+        SelfParam!();
         AssocItem!();
-        Macro!();
+        PathResolution!();
+        ToolModule!();
         ModuleDef!();
-        Function!();
+        SourceAnalyzer!();
+        Macro!();
+        DeriveHelper!();
+        BodyOrSig!();
+        TypeAlias!();
+        TypeParam!();
+        BuiltinAttr!();
+        Local!();
+        Field!();
         PathResolutionPerNs!();
+        BuiltinType!();
+        Variant!();
+        GenericSubstitution!();
+        Type!();
         Adt!();
-        Callable!();
     };
 }
 
@@ -37,4 +37,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         MultipartOptions!();
-        BatchRequest!();
         Result!();
-        UploadValue!();
+        BatchRequest!();
         ParseRequestError!();
+        UploadValue!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! receive_batch_multipart {
     };
 }
 
-receive_batch_multipart!()
+receive_batch_multipart!();

@@ -4,4 +4,4 @@ macro_rules! SeekFuture {
     };
 }
 
-SeekFuture!()
+SeekFuture!();

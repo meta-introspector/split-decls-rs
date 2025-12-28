@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        RustVersion!();
+        InheritableRustVersion!();
         Result!();
         TomlInheritedField!();
         InheritableField!();
-        InheritableRustVersion!();
-        RustVersion!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Sealed!();
         State!();
         Error!();
+        Sealed!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TreeIterExt {
     };
 }
 
-TreeIterExt!()
+TreeIterExt!();

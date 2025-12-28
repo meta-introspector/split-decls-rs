@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        MacroIter!();
-        DebugMacro!();
         DebugMacroOffset!();
-        Result!();
+        DebugMacro!();
         LittleEndian!();
         MacroUnitHeader!();
+        MacroIter!();
+        Result!();
         Reader!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_489 {
     };
 }
 
-impl_489!()
+impl_489!();

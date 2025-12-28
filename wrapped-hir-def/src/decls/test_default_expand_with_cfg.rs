@@ -51,4 +51,4 @@ impl <> $crate::default::Default for Bar< > where {
     };
 }
 
-test_default_expand_with_cfg!()
+test_default_expand_with_cfg!();

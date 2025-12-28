@@ -12,4 +12,4 @@ macro_rules! in_char_specifiers {
     };
 }
 
-in_char_specifiers!()
+in_char_specifiers!();

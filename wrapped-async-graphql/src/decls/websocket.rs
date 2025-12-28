@@ -4,4 +4,4 @@ macro_rules! websocket {
     };
 }
 
-websocket!()
+websocket!();

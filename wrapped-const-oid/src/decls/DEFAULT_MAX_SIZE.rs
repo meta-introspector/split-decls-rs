@@ -11,4 +11,4 @@ macro_rules! DEFAULT_MAX_SIZE {
     };
 }
 
-DEFAULT_MAX_SIZE!()
+DEFAULT_MAX_SIZE!();

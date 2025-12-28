@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
-        HunkHeader!();
-        ConsumeHunk!();
-        DiffLineKind!();
         ConsumeBinaryHunk!();
+        ConsumeHunk!();
+        Error!();
+        DiffLineKind!();
         ConsumeBinaryHunkDelegate!();
+        HunkHeader!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_136 {
     };
 }
 
-impl_136!()
+impl_136!();

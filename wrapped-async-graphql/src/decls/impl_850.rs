@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Field!();
-        ServerResult!();
+        Registry!();
         Object!();
-        MetaType!();
+        MetaTypeId!();
         Scalar!();
         ContextSelectionSet!();
-        MetaTypeId!();
+        Field!();
         OutputType!();
-        Registry!();
+        MetaType!();
+        ServerResult!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_850 {
     };
 }
 
-impl_850!()
+impl_850!();

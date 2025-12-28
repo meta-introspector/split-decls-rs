@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Handle!();
         RefreshMode!();
         Store!();
+        Handle!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

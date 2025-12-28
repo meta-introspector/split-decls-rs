@@ -4,4 +4,4 @@ macro_rules! check_types_source_code {
     };
 }
 
-check_types_source_code!()
+check_types_source_code!();

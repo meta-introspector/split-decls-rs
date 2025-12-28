@@ -11,4 +11,4 @@ macro_rules! eRegistered {
     };
 }
 
-eRegistered!()
+eRegistered!();

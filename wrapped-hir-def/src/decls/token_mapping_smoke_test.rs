@@ -27,4 +27,4 @@ struct#0:MacroRules[BE8F, 0]@58..64#14336# MyTraitMap2#0:MacroCall[BE8F, 0]@31..
     };
 }
 
-token_mapping_smoke_test!()
+token_mapping_smoke_test!();

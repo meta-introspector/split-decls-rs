@@ -12,4 +12,4 @@ macro_rules! tests_x86_64_ssse3 {
     };
 }
 
-tests_x86_64_ssse3!()
+tests_x86_64_ssse3!();

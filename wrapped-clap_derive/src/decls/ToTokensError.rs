@@ -4,4 +4,4 @@ macro_rules! ToTokensError {
     };
 }
 
-ToTokensError!()
+ToTokensError!();

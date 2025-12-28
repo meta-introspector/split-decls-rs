@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
         ModuleDefId!();
+        DefDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! crate_notable_traits {
     };
 }
 
-crate_notable_traits!()
+crate_notable_traits!();

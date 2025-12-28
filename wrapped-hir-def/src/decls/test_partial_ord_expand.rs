@@ -89,4 +89,4 @@ impl <> $crate::cmp::Ord for Command< > where {
     };
 }
 
-test_partial_ord_expand!()
+test_partial_ord_expand!();

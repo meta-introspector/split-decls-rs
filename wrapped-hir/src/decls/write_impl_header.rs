@@ -11,4 +11,4 @@ macro_rules! write_impl_header {
     };
 }
 
-write_impl_header!()
+write_impl_header!();

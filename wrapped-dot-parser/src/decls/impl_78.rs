@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Graph!();
         Subgraph!();
         NodeID!();
+        Graph!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

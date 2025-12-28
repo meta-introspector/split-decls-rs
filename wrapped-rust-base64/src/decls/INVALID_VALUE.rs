@@ -4,4 +4,4 @@ macro_rules! INVALID_VALUE {
     };
 }
 
-INVALID_VALUE!()
+INVALID_VALUE!();

@@ -4,4 +4,4 @@ macro_rules! is_unit_ty {
     };
 }
 
-is_unit_ty!()
+is_unit_ty!();

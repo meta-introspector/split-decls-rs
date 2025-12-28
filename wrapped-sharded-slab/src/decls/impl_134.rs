@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Shared!();
+        Local!();
+        Config!();
+        Addr!();
+        Clear!();
+        Slot!();
+        FreeList!();
+        Generation!();
+    };
+}
+
+macro_rules! impl_134 {
+    () => {
+        deps!();
+        impl < T , C > Shared < T , C > where T : Clear + Default , C : cfg :: Config , { pub (crate) fn init_with < U > (& self , local : & Local , init : impl FnOnce (usize , & Slot < T , C >) -> Option < U > ,) -> Option < U > { let head = self . pop (local) ? ; if self . is_unallocated () { self . allocate () ; } let index = head + self . prev_sz ; let result = self . slab . with (| slab | { let slab = unsafe { & * (slab) } . as_ref () . expect ("page must have been allocated to insert!") ; let slot = & slab [head] ; let result = init (index , slot) ? ; local . set_head (slot . next ()) ; Some (result) }) ? ; test_println ! ("-> init_with: insert at offset: {}" , index) ; Some (result) } # [doc = " Allocates storage for the page's slots."] # [cold] fn allocate (& self) { test_println ! ("-> alloc new page ({})" , self . size) ; debug_assert ! (self . is_unallocated ()) ; let mut slab = Vec :: with_capacity (self . size) ; slab . extend ((1 .. self . size) . map (Slot :: new)) ; slab . push (Slot :: new (Self :: NULL)) ; self . slab . with_mut (| s | { unsafe { * s = Some (slab . into_boxed_slice ()) ; } }) ; } pub (crate) fn mark_clear < F : FreeList < C > > (& self , addr : Addr < C > , gen : slot :: Generation < C > , free_list : & F ,) -> bool { let offset = addr . offset () - self . prev_sz ; test_println ! ("-> offset {:?}" , offset) ; self . slab . with (| slab | { let slab = unsafe { & * slab } . as_ref () ; if let Some (slot) = slab . and_then (| slab | slab . get (offset)) { slot . try_clear_storage (gen , offset , free_list) } else { false } }) } pub (crate) fn clear < F : FreeList < C > > (& self , addr : Addr < C > , gen : slot :: Generation < C > , free_list : & F ,) -> bool { let offset = addr . offset () - self . prev_sz ; test_println ! ("-> offset {:?}" , offset) ; self . slab . with (| slab | { let slab = unsafe { & * slab } . as_ref () ; if let Some (slot) = slab . and_then (| slab | slab . get (offset)) { slot . clear_storage (gen , offset , free_list) } else { false } }) } }
+    };
+}
+
+impl_134!()

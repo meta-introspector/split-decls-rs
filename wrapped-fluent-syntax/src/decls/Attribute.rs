@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Message!();
         Term!();
-        Pattern!();
         Identifier!();
+        Pattern!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Attribute {
     };
 }
 
-Attribute!()
+Attribute!();

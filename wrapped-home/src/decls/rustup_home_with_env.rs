@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Env!();
         OsEnv!();
+        Env!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! rustup_home_with_env {
     };
 }
 
-rustup_home_with_env!()
+rustup_home_with_env!();

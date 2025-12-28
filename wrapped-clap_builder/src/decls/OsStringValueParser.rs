@@ -4,4 +4,4 @@ macro_rules! OsStringValueParser {
     };
 }
 
-OsStringValueParser!()
+OsStringValueParser!();

@@ -30,4 +30,4 @@ fn main(foo: ()) {
     };
 }
 
-eager_expands_with_unresolved_within!()
+eager_expands_with_unresolved_within!();

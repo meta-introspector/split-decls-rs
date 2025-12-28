@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TimeZone!();
-        LocalTimeType!();
         Error!();
-        DateTime!();
+        TimeZone!();
         TransitionRule!();
         OutOfRange!();
+        LocalTimeType!();
+        DateTime!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_641 {
     };
 }
 
-impl_641!()
+impl_641!();

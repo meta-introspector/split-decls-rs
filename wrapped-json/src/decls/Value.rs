@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Map!();
+        Number!();
+    };
+}
+
+macro_rules! Value {
+    () => {
+        deps!();
+        # [doc = " Represents any valid JSON value."] # [doc = ""] # [doc = " See the [`serde_json::value` module documentation](self) for usage examples."] # [derive (Clone , Eq , PartialEq , Hash)] pub enum Value { # [doc = " Represents a JSON null value."] # [doc = ""] # [doc = " ```"] # [doc = " # use serde_json::json;"] # [doc = " #"] # [doc = " let v = json!(null);"] # [doc = " ```"] Null , # [doc = " Represents a JSON boolean."] # [doc = ""] # [doc = " ```"] # [doc = " # use serde_json::json;"] # [doc = " #"] # [doc = " let v = json!(true);"] # [doc = " ```"] Bool (bool) , # [doc = " Represents a JSON number, whether integer or floating point."] # [doc = ""] # [doc = " ```"] # [doc = " # use serde_json::json;"] # [doc = " #"] # [doc = " let v = json!(12.5);"] # [doc = " ```"] Number (Number) , # [doc = " Represents a JSON string."] # [doc = ""] # [doc = " ```"] # [doc = " # use serde_json::json;"] # [doc = " #"] # [doc = " let v = json!(\"a string\");"] # [doc = " ```"] String (String) , # [doc = " Represents a JSON array."] # [doc = ""] # [doc = " ```"] # [doc = " # use serde_json::json;"] # [doc = " #"] # [doc = " let v = json!([\"an\", \"array\"]);"] # [doc = " ```"] Array (Vec < Value >) , # [doc = " Represents a JSON object."] # [doc = ""] # [doc = " By default the map is backed by a BTreeMap. Enable the `preserve_order`"] # [doc = " feature of serde_json to use IndexMap instead, which preserves"] # [doc = " entries in the order they are inserted into the map. In particular, this"] # [doc = " allows JSON data to be deserialized into a Value and serialized to a"] # [doc = " string while retaining the order of map keys in the input."] # [doc = ""] # [doc = " ```"] # [doc = " # use serde_json::json;"] # [doc = " #"] # [doc = " let v = json!({ \"an\": \"object\" });"] # [doc = " ```"] Object (Map < String , Value >) , }
+    };
+}
+
+Value!()

@@ -12,4 +12,4 @@ macro_rules! deref_forward_buf {
     };
 }
 
-deref_forward_buf!()
+deref_forward_buf!();

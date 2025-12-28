@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Options!();
+        DBIteratorWithThreadMode!();
+        DBAccess!();
+        ReadOptions!();
+    };
+}
+
+macro_rules! DBRawIteratorWithThreadMode {
+    () => {
+        deps!();
+        # [doc = " A low-level iterator over a database or column family, created by [`DB::raw_iterator`]"] # [doc = " and other `raw_iterator_*` methods."] # [doc = ""] # [doc = " This iterator replicates RocksDB's API. It should provide better"] # [doc = " performance and more features than [`DBIteratorWithThreadMode`], which is a standard"] # [doc = " Rust [`std::iter::Iterator`]."] # [doc = ""] # [doc = " ```"] # [doc = " use rocksdb::{DB, Options};"] # [doc = ""] # [doc = " let tempdir = tempfile::Builder::new()"] # [doc = "     .prefix(\"_path_for_rocksdb_storage4\")"] # [doc = "     .tempdir()"] # [doc = "     .expect(\"Failed to create temporary path for the _path_for_rocksdb_storage4.\");"] # [doc = " let path = tempdir.path();"] # [doc = " {"] # [doc = "     let db = DB::open_default(path).unwrap();"] # [doc = "     let mut iter = db.raw_iterator();"] # [doc = ""] # [doc = "     // Forwards iteration"] # [doc = "     iter.seek_to_first();"] # [doc = "     while iter.valid() {"] # [doc = "         println!(\"Saw {:?} {:?}\", iter.key(), iter.value());"] # [doc = "         iter.next();"] # [doc = "     }"] # [doc = ""] # [doc = "     // Reverse iteration"] # [doc = "     iter.seek_to_last();"] # [doc = "     while iter.valid() {"] # [doc = "         println!(\"Saw {:?} {:?}\", iter.key(), iter.value());"] # [doc = "         iter.prev();"] # [doc = "     }"] # [doc = ""] # [doc = "     // Seeking"] # [doc = "     iter.seek(b\"my key\");"] # [doc = "     while iter.valid() {"] # [doc = "         println!(\"Saw {:?} {:?}\", iter.key(), iter.value());"] # [doc = "         iter.next();"] # [doc = "     }"] # [doc = ""] # [doc = "     // Reverse iteration from key"] # [doc = "     // Note, use seek_for_prev when reversing because if this key doesn't exist,"] # [doc = "     // this will make the iterator start from the previous key rather than the next."] # [doc = "     iter.seek_for_prev(b\"my key\");"] # [doc = "     while iter.valid() {"] # [doc = "         println!(\"Saw {:?} {:?}\", iter.key(), iter.value());"] # [doc = "         iter.prev();"] # [doc = "     }"] # [doc = " }"] # [doc = " let _ = DB::destroy(&Options::default(), path);"] # [doc = " ```"] pub struct DBRawIteratorWithThreadMode < 'a , D : DBAccess > { inner : std :: ptr :: NonNull < ffi :: rocksdb_iterator_t > , # [doc = " When iterate_lower_bound or iterate_upper_bound are set, the inner"] # [doc = " C iterator keeps a pointer to the upper bound inside `_readopts`."] # [doc = " Storing this makes sure the upper bound is always alive when the"] # [doc = " iterator is being used."] # [doc = ""] # [doc = " And yes, we need to store the entire ReadOptions structure since C++"] # [doc = " ReadOptions keep reference to C rocksdb_readoptions_t wrapper which"] # [doc = " point to vectors we own.  See issue #660."] _readopts : ReadOptions , db : PhantomData < & 'a D > , }
+    };
+}
+
+DBRawIteratorWithThreadMode!()

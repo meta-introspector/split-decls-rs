@@ -4,4 +4,4 @@ macro_rules! ReplaceFilterMapNextWithFindMap {
     };
 }
 
-ReplaceFilterMapNextWithFindMap!()
+ReplaceFilterMapNextWithFindMap!();

@@ -4,4 +4,4 @@ macro_rules! BIN_DIR_FRAGMENTS {
     };
 }
 
-BIN_DIR_FRAGMENTS!()
+BIN_DIR_FRAGMENTS!();

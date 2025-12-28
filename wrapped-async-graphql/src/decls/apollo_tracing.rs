@@ -4,4 +4,4 @@ macro_rules! apollo_tracing {
     };
 }
 
-apollo_tracing!()
+apollo_tracing!();

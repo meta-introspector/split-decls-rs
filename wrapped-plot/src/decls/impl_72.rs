@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PointSize!();
         Properties!();
+        PointSize!();
         Set!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_72 {
     };
 }
 
-impl_72!()
+impl_72!();

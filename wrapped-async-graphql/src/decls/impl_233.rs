@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NoUnusedVariables!();
-        VisitorContext!();
         Scope!();
         Visitor!();
+        NoUnusedVariables!();
+        VisitorContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_233 {
     };
 }
 
-impl_233!()
+impl_233!();

@@ -4,4 +4,4 @@ macro_rules! is_absolute {
     };
 }
 
-is_absolute!()
+is_absolute!();

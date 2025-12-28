@@ -10,4 +10,4 @@ abs!( = > #);
     };
 }
 
-test_tt_composite2!()
+test_tt_composite2!();

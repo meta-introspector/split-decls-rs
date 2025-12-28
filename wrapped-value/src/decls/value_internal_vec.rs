@@ -4,4 +4,4 @@ macro_rules! value_internal_vec {
     };
 }
 
-value_internal_vec!()
+value_internal_vec!();

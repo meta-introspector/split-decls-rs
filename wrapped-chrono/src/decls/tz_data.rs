@@ -4,4 +4,4 @@ macro_rules! tz_data {
     };
 }
 
-tz_data!()
+tz_data!();

@@ -1,5 +1,39 @@
+macro_rules! deps {
+    () => {
+        SstFileWriter!();
+        TransactionDB!();
+        DBRawIterator!();
+        CacheWrapper!();
+        ColumnFamilyDescriptor!();
+        Options!();
+        Cache!();
+        ReadOptions!();
+        Snapshot!();
+        OptimisticTransactionOptions!();
+        BlockBasedOptions!();
+        UnboundColumnFamily!();
+        OptimisticTransactionDB!();
+        Transaction!();
+        IngestExternalFileOptions!();
+        Env!();
+        WriteBufferManagerWrapper!();
+        PlainTableFactoryOptions!();
+        EnvWrapper!();
+        DBIterator!();
+        DB!();
+        WriteOptions!();
+        WriteBatch!();
+        TransactionOptions!();
+        ColumnFamily!();
+        BoundColumnFamily!();
+        TransactionDBOptions!();
+        WriteBufferManager!();
+    };
+}
+
 macro_rules! test {
     () => {
+        deps!();
         # [cfg (test)] mod test { use crate :: { OptimisticTransactionDB , OptimisticTransactionOptions , Transaction , TransactionDB , TransactionDBOptions , TransactionOptions , } ; use super :: { column_family :: UnboundColumnFamily , db_options :: { CacheWrapper , WriteBufferManagerWrapper } , env :: { Env , EnvWrapper } , BlockBasedOptions , BoundColumnFamily , Cache , ColumnFamily , ColumnFamilyDescriptor , DBIterator , DBRawIterator , IngestExternalFileOptions , Options , PlainTableFactoryOptions , ReadOptions , Snapshot , SstFileWriter , WriteBatch , WriteBufferManager , WriteOptions , DB , } ; # [test] fn is_send () { fn is_send < T : Send > () { } is_send :: < DB > () ; is_send :: < DBIterator < '_ > > () ; is_send :: < DBRawIterator < '_ > > () ; is_send :: < Snapshot > () ; is_send :: < Options > () ; is_send :: < ReadOptions > () ; is_send :: < WriteOptions > () ; is_send :: < IngestExternalFileOptions > () ; is_send :: < BlockBasedOptions > () ; is_send :: < PlainTableFactoryOptions > () ; is_send :: < ColumnFamilyDescriptor > () ; is_send :: < ColumnFamily > () ; is_send :: < BoundColumnFamily < '_ > > () ; is_send :: < UnboundColumnFamily > () ; is_send :: < SstFileWriter > () ; is_send :: < WriteBatch > () ; is_send :: < Cache > () ; is_send :: < CacheWrapper > () ; is_send :: < Env > () ; is_send :: < EnvWrapper > () ; is_send :: < TransactionDB > () ; is_send :: < OptimisticTransactionDB > () ; is_send :: < Transaction < '_ , TransactionDB > > () ; is_send :: < TransactionDBOptions > () ; is_send :: < OptimisticTransactionOptions > () ; is_send :: < TransactionOptions > () ; is_send :: < WriteBufferManager > () ; is_send :: < WriteBufferManagerWrapper > () ; } # [test] fn is_sync () { fn is_sync < T : Sync > () { } is_sync :: < DB > () ; is_sync :: < Snapshot > () ; is_sync :: < Options > () ; is_sync :: < ReadOptions > () ; is_sync :: < WriteOptions > () ; is_sync :: < IngestExternalFileOptions > () ; is_sync :: < BlockBasedOptions > () ; is_sync :: < PlainTableFactoryOptions > () ; is_sync :: < UnboundColumnFamily > () ; is_sync :: < ColumnFamilyDescriptor > () ; is_sync :: < SstFileWriter > () ; is_sync :: < Cache > () ; is_sync :: < CacheWrapper > () ; is_sync :: < Env > () ; is_sync :: < EnvWrapper > () ; is_sync :: < TransactionDB > () ; is_sync :: < OptimisticTransactionDB > () ; is_sync :: < TransactionDBOptions > () ; is_sync :: < OptimisticTransactionOptions > () ; is_sync :: < TransactionOptions > () ; is_sync :: < WriteBufferManager > () ; is_sync :: < WriteBufferManagerWrapper > () ; } }
     };
 }

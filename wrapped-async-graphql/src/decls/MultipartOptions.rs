@@ -4,4 +4,4 @@ macro_rules! MultipartOptions {
     };
 }
 
-MultipartOptions!()
+MultipartOptions!();

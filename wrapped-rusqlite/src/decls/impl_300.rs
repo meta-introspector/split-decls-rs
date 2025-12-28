@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Connection!();
+        Savepoint!();
+        Result!();
+        DropBehavior!();
+    };
+}
+
+macro_rules! impl_300 {
+    () => {
+        deps!();
+        impl Savepoint < '_ > { # [inline] fn with_name_ < T : Into < String > > (conn : & Connection , name : T) -> Result < Savepoint < '_ > > { let name = name . into () ; conn . execute_batch (& format ! ("SAVEPOINT {name}")) . map (| () | Savepoint { conn , name , drop_behavior : DropBehavior :: Rollback , committed : false , }) } # [inline] fn new_ (conn : & Connection) -> Result < Savepoint < '_ > > { Savepoint :: with_name_ (conn , "_rusqlite_sp") } # [doc = " Begin a new savepoint. Can be nested."] # [inline] pub fn new (conn : & mut Connection) -> Result < Savepoint < '_ > > { Savepoint :: new_ (conn) } # [doc = " Begin a new savepoint with a user-provided savepoint name."] # [inline] pub fn with_name < T : Into < String > > (conn : & mut Connection , name : T) -> Result < Savepoint < '_ > > { Savepoint :: with_name_ (conn , name) } # [doc = " Begin a nested savepoint."] # [inline] pub fn savepoint (& mut self) -> Result < Savepoint < '_ > > { Savepoint :: new_ (self . conn) } # [doc = " Begin a nested savepoint with a user-provided savepoint name."] # [inline] pub fn savepoint_with_name < T : Into < String > > (& mut self , name : T) -> Result < Savepoint < '_ > > { Savepoint :: with_name_ (self . conn , name) } # [doc = " Get the current setting for what happens to the savepoint when it is"] # [doc = " dropped."] # [inline] # [must_use] pub fn drop_behavior (& self) -> DropBehavior { self . drop_behavior } # [doc = " Configure the savepoint to perform the specified action when it is"] # [doc = " dropped."] # [inline] pub fn set_drop_behavior (& mut self , drop_behavior : DropBehavior) { self . drop_behavior = drop_behavior ; } # [doc = " A convenience method which consumes and commits a savepoint."] # [inline] pub fn commit (mut self) -> Result < () > { self . commit_ () } # [inline] fn commit_ (& mut self) -> Result < () > { self . conn . execute_batch (& format ! ("RELEASE {}" , self . name)) ? ; self . committed = true ; Ok (()) } # [doc = " A convenience method which rolls back a savepoint."] # [doc = ""] # [doc = " ## Note"] # [doc = ""] # [doc = " Unlike `Transaction`s, savepoints remain active after they have been"] # [doc = " rolled back, and can be rolled back again or committed."] # [inline] pub fn rollback (& mut self) -> Result < () > { self . conn . execute_batch (& format ! ("ROLLBACK TO {}" , self . name)) } # [doc = " Consumes the savepoint, committing or rolling back according to the"] # [doc = " current setting (see `drop_behavior`)."] # [doc = ""] # [doc = " Functionally equivalent to the `Drop` implementation, but allows"] # [doc = " callers to see any errors that occur."] # [inline] pub fn finish (mut self) -> Result < () > { self . finish_ () } # [inline] fn finish_ (& mut self) -> Result < () > { if self . committed { return Ok (()) ; } match self . drop_behavior () { DropBehavior :: Commit => self . commit_ () . or_else (| _ | self . rollback () . and_then (| () | self . commit_ ())) , DropBehavior :: Rollback => self . rollback () . and_then (| () | self . commit_ ()) , DropBehavior :: Ignore => Ok (()) , DropBehavior :: Panic => panic ! ("Savepoint dropped unexpectedly.") , } } }
+    };
+}
+
+impl_300!()

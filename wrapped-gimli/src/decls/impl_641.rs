@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Attribute!();
-        AttrsIter!();
         Reader!();
+        AttrsIter!();
         Result!();
+        Attribute!();
         Error!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_641 {
     };
 }
 
-impl_641!()
+impl_641!();

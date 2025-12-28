@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PossibleValue!();
         PossibleValuesParser!();
         ValueParser!();
-        PossibleValue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_262 {
     };
 }
 
-impl_262!()
+impl_262!();

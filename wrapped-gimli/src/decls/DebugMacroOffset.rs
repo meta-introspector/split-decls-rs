@@ -4,4 +4,4 @@ macro_rules! DebugMacroOffset {
     };
 }
 
-DebugMacroOffset!()
+DebugMacroOffset!();

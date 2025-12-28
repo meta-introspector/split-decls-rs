@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PollNext!();
         InternalState!();
+        PollNext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_804 {
     };
 }
 
-impl_804!()
+impl_804!();

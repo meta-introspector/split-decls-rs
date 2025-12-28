@@ -4,4 +4,4 @@ macro_rules! MAX_RECURSION_DEPTH {
     };
 }
 
-MAX_RECURSION_DEPTH!()
+MAX_RECURSION_DEPTH!();

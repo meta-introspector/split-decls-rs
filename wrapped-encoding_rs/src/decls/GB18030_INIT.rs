@@ -12,4 +12,4 @@ macro_rules! GB18030_INIT {
     };
 }
 
-GB18030_INIT!()
+GB18030_INIT!();

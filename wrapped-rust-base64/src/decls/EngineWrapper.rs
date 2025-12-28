@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        DecodePaddingMode!();
         Engine!();
         Alphabet!();
-        DecodePaddingMode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EngineWrapper {
     };
 }
 
-EngineWrapper!()
+EngineWrapper!();

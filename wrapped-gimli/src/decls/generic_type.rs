@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnitOffset!();
         ReaderOffset!();
+        UnitOffset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! generic_type {
     };
 }
 
-generic_type!()
+generic_type!();

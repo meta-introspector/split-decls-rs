@@ -4,4 +4,4 @@ macro_rules! TUPLE_FIELD_PREFIX {
     };
 }
 
-TUPLE_FIELD_PREFIX!()
+TUPLE_FIELD_PREFIX!();

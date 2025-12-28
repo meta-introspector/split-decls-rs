@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         BenchmarkId!();
-        Estimate!();
-        Statistic!();
-        Sample!();
         Distribution!();
+        Sample!();
+        Estimate!();
         ReportContext!();
+        Statistic!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! rel_distribution {
     };
 }
 
-rel_distribution!()
+rel_distribution!();

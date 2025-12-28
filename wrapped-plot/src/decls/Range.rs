@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Set!();
         Axis!();
+        Set!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Range {
     };
 }
 
-Range!()
+Range!();

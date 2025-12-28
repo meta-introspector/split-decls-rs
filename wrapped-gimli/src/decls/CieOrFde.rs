@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PartialFrameDescriptionEntry!();
         Section!();
         UnwindSection!();
-        Reader!();
-        FrameDescriptionEntry!();
         CommonInformationEntry!();
+        PartialFrameDescriptionEntry!();
+        FrameDescriptionEntry!();
+        Reader!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! CieOrFde {
     };
 }
 
-CieOrFde!()
+CieOrFde!();

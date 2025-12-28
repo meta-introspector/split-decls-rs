@@ -4,4 +4,4 @@ macro_rules! LayoutCx {
     };
 }
 
-LayoutCx!()
+LayoutCx!();

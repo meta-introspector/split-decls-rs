@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
         OneShotLineRows!();
-        LineSequence!();
         ReaderOffset!();
-        LineRow!();
-        CompleteLineProgram!();
-        LineProgram!();
         Result!();
-        LineRows!();
-        IncompleteLineProgram!();
+        LineProgram!();
         LineInstructions!();
+        CompleteLineProgram!();
         Reader!();
+        IncompleteLineProgram!();
+        LineRows!();
+        LineRow!();
         ResumedLineRows!();
         LineProgramHeader!();
+        LineSequence!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_411 {
     };
 }
 
-impl_411!()
+impl_411!();

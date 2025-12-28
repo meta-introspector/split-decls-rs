@@ -4,4 +4,4 @@ macro_rules! DefaultValue {
     };
 }
 
-DefaultValue!()
+DefaultValue!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        NativeLib!();
+        ImportLibraryItem!();
     };
 }
 
 macro_rules! impl_22 {
     () => {
         deps!();
-        impl From < & cstore :: NativeLib > for NativeLib { fn from (lib : & cstore :: NativeLib) -> Self { NativeLib { kind : lib . kind , filename : lib . filename , name : lib . name , cfg : lib . cfg . clone () , verbatim : lib . verbatim . unwrap_or (false) , dll_imports : lib . dll_imports . clone () , } } }
+        impl ImportLibraryItem { fn into_coff_short_export (self , sess : & Session) -> COFFShortExport { let import_name = (sess . target . arch == "arm64ec") . then (| | self . name . clone ()) ; COFFShortExport { name : self . name , ext_name : None , symbol_name : self . symbol_name , import_name , export_as : None , ordinal : self . ordinal . unwrap_or (0) , noname : self . ordinal . is_some () , data : self . is_data , private : false , constant : false , } } }
     };
 }
 

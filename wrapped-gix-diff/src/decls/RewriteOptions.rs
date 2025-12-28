@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Rewrites!();
-        Options!();
         Platform!();
+        Options!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RewriteOptions {
     };
 }
 
-RewriteOptions!()
+RewriteOptions!();

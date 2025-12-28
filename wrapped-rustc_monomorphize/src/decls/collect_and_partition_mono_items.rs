@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        MonoItemCollectionStrategy!();
+        CouldntDumpMonoStats!();
+    };
+}
+
+macro_rules! collect_and_partition_mono_items {
+    () => {
+        deps!();
+        fn collect_and_partition_mono_items (tcx : TyCtxt < '_ > , () : ()) -> MonoItemPartitions < '_ > { let collection_strategy = if tcx . sess . link_dead_code () { MonoItemCollectionStrategy :: Eager } else { MonoItemCollectionStrategy :: Lazy } ; let (items , usage_map) = collector :: collect_crate_mono_items (tcx , collection_strategy) ; tcx . dcx () . abort_if_errors () ; let (codegen_units , _) = tcx . sess . time ("partition_and_assert_distinct_symbols" , | | { sync :: join (| | { let mut codegen_units = partition (tcx , items . iter () . copied () , & usage_map) ; codegen_units [0] . make_primary () ; & * tcx . arena . alloc_from_iter (codegen_units) } , | | assert_symbols_are_distinct (tcx , items . iter ()) ,) }) ; if tcx . prof . enabled () { for cgu in codegen_units { tcx . prof . artifact_size ("codegen_unit_size_estimate" , cgu . name () . as_str () , cgu . size_estimate () as u64 ,) ; } } let mono_items : DefIdSet = items . iter () . filter_map (| mono_item | match * mono_item { MonoItem :: Fn (ref instance) => Some (instance . def_id ()) , MonoItem :: Static (def_id) => Some (def_id) , _ => None , }) . collect () ; if let SwitchWithOptPath :: Enabled (ref path) = tcx . sess . opts . unstable_opts . dump_mono_stats && let Err (err) = dump_mono_items_stats (tcx , codegen_units , path , tcx . crate_name (LOCAL_CRATE)) { tcx . dcx () . emit_fatal (CouldntDumpMonoStats { error : err . to_string () }) ; } if tcx . sess . opts . unstable_opts . print_mono_items { let mut item_to_cgus : UnordMap < _ , Vec < _ > > = Default :: default () ; for cgu in codegen_units { for (& mono_item , & data) in cgu . items () { item_to_cgus . entry (mono_item) . or_default () . push ((cgu . name () , data . linkage)) ; } } let mut item_keys : Vec < _ > = items . iter () . map (| i | { let mut output = with_no_trimmed_paths ! (i . to_string ()) ; output . push_str (" @@") ; let mut empty = Vec :: new () ; let cgus = item_to_cgus . get_mut (i) . unwrap_or (& mut empty) ; cgus . sort_by_key (| (name , _) | * name) ; cgus . dedup () ; for & (ref cgu_name , linkage) in cgus . iter () { output . push (' ') ; output . push_str (cgu_name . as_str ()) ; let linkage_abbrev = match linkage { Linkage :: External => "External" , Linkage :: AvailableExternally => "Available" , Linkage :: LinkOnceAny => "OnceAny" , Linkage :: LinkOnceODR => "OnceODR" , Linkage :: WeakAny => "WeakAny" , Linkage :: WeakODR => "WeakODR" , Linkage :: Internal => "Internal" , Linkage :: ExternalWeak => "ExternalWeak" , Linkage :: Common => "Common" , } ; output . push ('[') ; output . push_str (linkage_abbrev) ; output . push (']') ; } output }) . collect () ; item_keys . sort () ; for item in item_keys { println ! ("MONO_ITEM {item}") ; } } MonoItemPartitions { all_mono_items : tcx . arena . alloc (mono_items) , codegen_units } }
+    };
+}
+
+collect_and_partition_mono_items!()

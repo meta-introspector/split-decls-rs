@@ -4,4 +4,4 @@ macro_rules! INVALID_LENGTH_MSG {
     };
 }
 
-INVALID_LENGTH_MSG!()
+INVALID_LENGTH_MSG!();

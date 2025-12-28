@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Protocol!();
-        Version!();
-        Allow!();
-        NameParameter!();
         Tree!();
+        Version!();
+        NameParameter!();
+        Allow!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_702 {
     };
 }
 
-impl_702!()
+impl_702!();

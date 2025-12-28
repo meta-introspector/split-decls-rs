@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Protocol!();
         Http!();
+        Protocol!();
         Transport!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

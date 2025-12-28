@@ -4,4 +4,4 @@ macro_rules! CloseFuture {
     };
 }
 
-CloseFuture!()
+CloseFuture!();

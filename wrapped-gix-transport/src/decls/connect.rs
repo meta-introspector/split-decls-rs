@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Connection!();
-        Protocol!();
-        ConnectMode!();
         Error!();
+        Protocol!();
+        Connection!();
+        ConnectMode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! connect {
     };
 }
 
-connect!()
+connect!();

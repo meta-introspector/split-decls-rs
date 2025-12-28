@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Crate!();
         Dependency!();
         CrateDisplayName!();
+        Crate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ExtraCrateData {
     };
 }
 
-ExtraCrateData!()
+ExtraCrateData!();

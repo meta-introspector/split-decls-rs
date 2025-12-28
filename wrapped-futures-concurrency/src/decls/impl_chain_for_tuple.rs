@@ -11,4 +11,4 @@ macro_rules! impl_chain_for_tuple {
     };
 }
 
-impl_chain_for_tuple!()
+impl_chain_for_tuple!();

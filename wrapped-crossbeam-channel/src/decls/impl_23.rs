@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RecvTimeoutError!();
+        TryRecvError!();
         Receiver!();
         Iter!();
         TryIter!();
-        RecvError!();
-        TryRecvError!();
         ReceiverFlavor!();
+        RecvTimeoutError!();
+        RecvError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

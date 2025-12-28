@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MacroEntry!();
-        MacroIter!();
-        Error!();
         Reader!();
+        MacroIter!();
+        MacroEntry!();
         Result!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_500 {
     };
 }
 
-impl_500!()
+impl_500!();

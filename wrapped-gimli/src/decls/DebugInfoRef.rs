@@ -4,4 +4,4 @@ macro_rules! DebugInfoRef {
     };
 }
 
-DebugInfoRef!()
+DebugInfoRef!();

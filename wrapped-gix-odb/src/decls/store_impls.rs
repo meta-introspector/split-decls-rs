@@ -4,4 +4,4 @@ macro_rules! store_impls {
     };
 }
 
-store_impls!()
+store_impls!();

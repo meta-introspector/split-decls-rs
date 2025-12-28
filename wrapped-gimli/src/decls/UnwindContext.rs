@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ReaderOffset!();
         Register!();
-        ArrayVec!();
-        RegisterRule!();
+        UnwindTable!();
         UnwindContextStorage!();
         StoreOnHeap!();
-        UnwindTable!();
+        ReaderOffset!();
+        ArrayVec!();
+        RegisterRule!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! UnwindContext {
     };
 }
 
-UnwindContext!()
+UnwindContext!();

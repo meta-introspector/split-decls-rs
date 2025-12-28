@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Data!();
-        DataLoaderInner!();
         NoCache!();
+        DataLoaderInner!();
+        Data!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DataLoader {
     };
 }
 
-DataLoader!()
+DataLoader!();

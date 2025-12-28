@@ -12,4 +12,4 @@ macro_rules! stash_cb {
     };
 }
 
-stash_cb!()
+stash_cb!();

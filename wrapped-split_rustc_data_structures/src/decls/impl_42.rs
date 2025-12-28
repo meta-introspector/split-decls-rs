@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        OnDrop!();
+        PackedFingerprint!();
     };
 }
 
 macro_rules! impl_42 {
     () => {
         deps!();
-        impl < F : FnOnce () > Drop for OnDrop < F > { # [inline] fn drop (& mut self) { if let Some (f) = self . 0 . take () { f () ; } } }
+        impl std :: fmt :: Display for PackedFingerprint { # [inline] fn fmt (& self , formatter : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { let copy = self . 0 ; copy . fmt (formatter) } }
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! PathspecMatch {
     };
 }
 
-PathspecMatch!()
+PathspecMatch!();

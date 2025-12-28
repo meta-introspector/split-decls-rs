@@ -4,4 +4,4 @@ macro_rules! debug_asserts {
     };
 }
 
-debug_asserts!()
+debug_asserts!();

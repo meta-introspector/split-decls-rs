@@ -11,4 +11,4 @@ macro_rules! derive_simple_object {
     };
 }
 
-derive_simple_object!()
+derive_simple_object!();

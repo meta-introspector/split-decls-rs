@@ -4,4 +4,4 @@ macro_rules! jis0208_level2_and_additional_kanji_encode {
     };
 }
 
-jis0208_level2_and_additional_kanji_encode!()
+jis0208_level2_and_additional_kanji_encode!();

@@ -4,4 +4,4 @@ macro_rules! gbk_hanzi_encode {
     };
 }
 
-gbk_hanzi_encode!()
+gbk_hanzi_encode!();

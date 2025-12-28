@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
         Months!();
+        FixedOffset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_datetime_sub_months {
     };
 }
 
-test_datetime_sub_months!()
+test_datetime_sub_months!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        AdtId!();
         GenericDefId!();
+        ItemContainerId!();
+        HasSource!();
         DefDatabase!();
         CallableDefId!();
-        AdtId!();
-        HasSource!();
-        ItemContainerId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_711 {
     };
 }
 
-impl_711!()
+impl_711!();

@@ -4,4 +4,4 @@ macro_rules! from_arg_matches {
     };
 }
 
-from_arg_matches!()
+from_arg_matches!();

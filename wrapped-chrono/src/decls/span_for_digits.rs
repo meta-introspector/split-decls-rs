@@ -4,4 +4,4 @@ macro_rules! span_for_digits {
     };
 }
 
-span_for_digits!()
+span_for_digits!();

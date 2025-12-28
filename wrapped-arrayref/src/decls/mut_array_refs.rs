@@ -4,4 +4,4 @@ macro_rules! mut_array_refs {
     };
 }
 
-mut_array_refs!()
+mut_array_refs!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ArgGroup!();
-        Arg!();
-        StyledStr!();
-        ValueParser!();
-        Str!();
         AppFlags!();
         Extensions!();
+        Str!();
+        Arg!();
         MKeyMap!();
+        StyledStr!();
+        ArgGroup!();
+        ValueParser!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! Command {
     };
 }
 
-Command!()
+Command!();

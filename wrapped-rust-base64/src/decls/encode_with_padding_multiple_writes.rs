@@ -11,4 +11,4 @@ macro_rules! encode_with_padding_multiple_writes {
     };
 }
 
-encode_with_padding_multiple_writes!()
+encode_with_padding_multiple_writes!();

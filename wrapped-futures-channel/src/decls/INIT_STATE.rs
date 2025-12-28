@@ -4,4 +4,4 @@ macro_rules! INIT_STATE {
     };
 }
 
-INIT_STATE!()
+INIT_STATE!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SchemePermission!();
         Ssh!();
+        SchemePermission!();
         Http!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_985 {
     };
 }
 
-impl_985!()
+impl_985!();

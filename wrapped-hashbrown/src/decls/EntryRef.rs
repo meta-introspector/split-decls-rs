@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        HashMap!();
         OccupiedEntry!();
         VacantEntryRef!();
-        HashMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EntryRef {
     };
 }
 
-EntryRef!()
+EntryRef!();

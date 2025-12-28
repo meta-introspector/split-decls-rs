@@ -4,4 +4,4 @@ macro_rules! DOT_LOCK_SUFFIX {
     };
 }
 
-DOT_LOCK_SUFFIX!()
+DOT_LOCK_SUFFIX!();

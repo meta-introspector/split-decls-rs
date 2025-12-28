@@ -4,4 +4,4 @@ macro_rules! MICROS_PER_SEC {
     };
 }
 
-MICROS_PER_SEC!()
+MICROS_PER_SEC!();

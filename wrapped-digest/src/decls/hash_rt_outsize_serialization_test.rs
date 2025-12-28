@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Update!();
         Digest!();
+        Update!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! hash_rt_outsize_serialization_test {
     };
 }
 
-hash_rt_outsize_serialization_test!()
+hash_rt_outsize_serialization_test!();

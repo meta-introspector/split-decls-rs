@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Result!();
-        Visitor!();
-        Deserializer!();
         Out!();
+        Deserializer!();
         Error!();
+        Visitor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! deref_erased_deserializer {
     };
 }
 
-deref_erased_deserializer!()
+deref_erased_deserializer!();

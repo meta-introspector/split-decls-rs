@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Formatter!();
         ConfigurableFormat!();
+        Formatter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ConfigurableFormatWriter {
     };
 }
 
-ConfigurableFormatWriter!()
+ConfigurableFormatWriter!();

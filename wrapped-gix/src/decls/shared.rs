@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Core!();
-        Error!();
         ApplyLeniency!();
+        Error!();
+        Core!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! shared {
     };
 }
 
-shared!()
+shared!();

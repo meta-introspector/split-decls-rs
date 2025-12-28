@@ -4,4 +4,4 @@ macro_rules! FilePositionWrapper {
     };
 }
 
-FilePositionWrapper!()
+FilePositionWrapper!();

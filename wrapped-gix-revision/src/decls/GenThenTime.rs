@@ -4,4 +4,4 @@ macro_rules! GenThenTime {
     };
 }
 
-GenThenTime!()
+GenThenTime!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PathIdMapping!();
-        Attributes!();
         Statistics!();
+        Attributes!();
         Source!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

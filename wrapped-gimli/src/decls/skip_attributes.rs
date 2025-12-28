@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Encoding!();
-        Reader!();
-        Result!();
         AttributeSpecification!();
+        Result!();
+        Reader!();
+        Encoding!();
         Error!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! skip_attributes {
     };
 }
 
-skip_attributes!()
+skip_attributes!();

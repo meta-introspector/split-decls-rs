@@ -11,4 +11,4 @@ macro_rules! locale_decimal_point {
     };
 }
 
-locale_decimal_point!()
+locale_decimal_point!();

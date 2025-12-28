@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Identity!();
+        Id!();
+        AtomicIterationCount!();
+        CycleHeads!();
+    };
+}
+
+macro_rules! QueryRevisionsExtraInner {
+    () => {
+        deps!();
+        # [cfg_attr (feature = "persistence" , derive (serde :: Serialize , serde :: Deserialize))] struct QueryRevisionsExtraInner { # [cfg (feature = "accumulator")] # [cfg_attr (feature = "persistence" , serde (skip))] accumulated : AccumulatedMap , # [doc = " The ids of tracked structs created by this query."] # [doc = ""] # [doc = " This table plays an important role when queries are"] # [doc = " re-executed:"] # [doc = " * A clone of this field is used as the initial set of"] # [doc = "   `TrackedStructId`s for the query on the next execution."] # [doc = " * The query will thus re-use the same ids if it creates"] # [doc = "   tracked structs with the same `KeyStruct` as before."] # [doc = "   It may also create new tracked structs."] # [doc = " * One tricky case involves deleted structs. If"] # [doc = "   the old revision created a struct S but the new"] # [doc = "   revision did not, there will still be a map entry"] # [doc = "   for S. This is because queries only ever grow the map"] # [doc = "   and they start with the same entries as from the"] # [doc = "   previous revision. To handle this, `diff_outputs` compares"] # [doc = "   the structs from the old/new revision and retains"] # [doc = "   only entries that appeared in the new revision."] tracked_struct_ids : ThinVec < (Identity , Id) > , # [doc = " This result was computed based on provisional values from"] # [doc = " these cycle heads. The \"cycle head\" is the query responsible"] # [doc = " for managing a fixpoint iteration. In a cycle like"] # [doc = " `--> A --> B --> C --> A`, the cycle head is query `A`: it is"] # [doc = " the query whose value is requested while it is executing,"] # [doc = " which must provide the initial provisional value and decide,"] # [doc = " after each iteration, whether the cycle has converged or must"] # [doc = " iterate again."] cycle_heads : CycleHeads , iteration : AtomicIterationCount , # [doc = " Stores for nested cycle heads whether they've converged in the last iteration."] # [doc = " This value is always `false` for other queries."] # [cfg_attr (feature = "persistence" , serde (skip))] cycle_converged : bool , }
+    };
+}
+
+QueryRevisionsExtraInner!()

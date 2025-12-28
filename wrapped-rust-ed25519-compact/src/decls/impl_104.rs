@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         GeP1P1!();
-        GeP2!();
         GeP3!();
+        GeP2!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

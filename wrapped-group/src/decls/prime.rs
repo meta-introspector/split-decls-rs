@@ -4,4 +4,4 @@ macro_rules! prime {
     };
 }
 
-prime!()
+prime!();

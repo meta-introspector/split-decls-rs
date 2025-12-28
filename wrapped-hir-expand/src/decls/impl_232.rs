@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Display!();
         RenderedExpandError!();
+        Display!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

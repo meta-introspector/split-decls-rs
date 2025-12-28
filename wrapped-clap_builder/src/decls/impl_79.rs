@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         StyledStr!();
+        Command!();
         Arg!();
-        AppSettings!();
+        IntoResettable!();
         Usage!();
         Str!();
-        IntoResettable!();
         ArgAction!();
-        Command!();
+        AppSettings!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

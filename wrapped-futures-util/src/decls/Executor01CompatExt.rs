@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Executor01As03!();
-        Send!();
         Executor01Future!();
+        Send!();
         TryFutureExt!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Executor01CompatExt {
     };
 }
 
-Executor01CompatExt!()
+Executor01CompatExt!();

@@ -4,4 +4,4 @@ macro_rules! DecodeEstimate {
     };
 }
 
-DecodeEstimate!()
+DecodeEstimate!();

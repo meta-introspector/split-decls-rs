@@ -4,4 +4,4 @@ macro_rules! is_tchar {
     };
 }
 
-is_tchar!()
+is_tchar!();

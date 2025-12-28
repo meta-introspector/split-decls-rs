@@ -11,4 +11,4 @@ macro_rules! opt_allows_hyphen {
     };
 }
 
-opt_allows_hyphen!()
+opt_allows_hyphen!();

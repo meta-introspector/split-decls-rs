@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AList!();
-        NodeID!();
-        EdgeRHS!();
-        AttrList!();
-        ParseError!();
         EdgeStmt!();
         Subgraph!();
+        EdgeRHS!();
+        ParseError!();
+        NodeID!();
+        AList!();
+        AttrList!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

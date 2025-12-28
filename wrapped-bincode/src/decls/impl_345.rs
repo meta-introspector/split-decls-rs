@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        IntegerType!();
+        Decoder!();
         Decode!();
         DecodeError!();
-        Decoder!();
-        IntegerType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_345 {
     };
 }
 
-impl_345!()
+impl_345!();

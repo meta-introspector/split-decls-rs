@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StatusEntry!();
         Binding!();
+        StatusEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_760 {
     };
 }
 
-impl_760!()
+impl_760!();

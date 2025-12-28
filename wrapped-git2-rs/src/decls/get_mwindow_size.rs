@@ -11,4 +11,4 @@ macro_rules! get_mwindow_size {
     };
 }
 
-get_mwindow_size!()
+get_mwindow_size!();

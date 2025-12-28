@@ -4,4 +4,4 @@ macro_rules! type_directive {
     };
 }
 
-type_directive!()
+type_directive!();

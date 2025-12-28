@@ -11,4 +11,4 @@ macro_rules! truncate_hunks_from_from_front {
     };
 }
 
-truncate_hunks_from_from_front!()
+truncate_hunks_from_from_front!();

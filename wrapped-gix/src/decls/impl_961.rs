@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        State!();
-        Negotiate!();
-        Action!();
         Error!();
+        Action!();
+        Negotiate!();
+        State!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_961 {
     };
 }
 
-impl_961!()
+impl_961!();

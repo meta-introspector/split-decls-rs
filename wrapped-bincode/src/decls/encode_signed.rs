@@ -4,4 +4,4 @@ macro_rules! encode_signed {
     };
 }
 
-encode_signed!()
+encode_signed!();

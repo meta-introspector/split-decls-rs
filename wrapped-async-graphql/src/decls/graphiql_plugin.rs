@@ -4,4 +4,4 @@ macro_rules! graphiql_plugin {
     };
 }
 
-graphiql_plugin!()
+graphiql_plugin!();

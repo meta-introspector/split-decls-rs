@@ -11,4 +11,4 @@ macro_rules! increment_shared {
     };
 }
 
-increment_shared!()
+increment_shared!();

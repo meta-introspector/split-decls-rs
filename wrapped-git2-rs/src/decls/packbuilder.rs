@@ -4,4 +4,4 @@ macro_rules! packbuilder {
     };
 }
 
-packbuilder!()
+packbuilder!();

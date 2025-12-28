@@ -4,4 +4,4 @@ macro_rules! clear_and_set_capacity {
     };
 }
 
-clear_and_set_capacity!()
+clear_and_set_capacity!();

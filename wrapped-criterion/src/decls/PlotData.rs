@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ComparisonData!();
         ValueFormatter!();
         MeasurementData!();
-        ComparisonData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PlotData {
     };
 }
 
-PlotData!()
+PlotData!();

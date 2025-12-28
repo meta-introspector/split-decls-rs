@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Hunk!();
         ConflictStyle!();
+        Hunk!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! hunks_differ_in_diff3 {
     };
 }
 
-hunks_differ_in_diff3!()
+hunks_differ_in_diff3!();

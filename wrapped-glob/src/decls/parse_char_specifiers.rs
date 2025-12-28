@@ -11,4 +11,4 @@ macro_rules! parse_char_specifiers {
     };
 }
 
-parse_char_specifiers!()
+parse_char_specifiers!();

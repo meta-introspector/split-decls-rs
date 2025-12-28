@@ -4,4 +4,4 @@ macro_rules! DebugTypeSignature {
     };
 }
 
-DebugTypeSignature!()
+DebugTypeSignature!();

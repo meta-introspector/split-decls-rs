@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ansi256Color!();
         Color!();
+        Ansi256Color!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

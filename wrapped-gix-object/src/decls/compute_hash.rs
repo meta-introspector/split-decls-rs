@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Error!();
+        Kind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! compute_hash {
     };
 }
 
-compute_hash!()
+compute_hash!();

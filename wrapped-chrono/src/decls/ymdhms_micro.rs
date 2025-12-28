@@ -12,4 +12,4 @@ macro_rules! ymdhms_micro {
     };
 }
 
-ymdhms_micro!()
+ymdhms_micro!();

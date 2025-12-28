@@ -11,4 +11,4 @@ macro_rules! decompose_tag {
     };
 }
 
-decompose_tag!()
+decompose_tag!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
         ConstEvalError!();
+        HirDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! const_eval_static_cycle_result {
     };
 }
 
-const_eval_static_cycle_result!()
+const_eval_static_cycle_result!();

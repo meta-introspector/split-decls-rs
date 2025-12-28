@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AltairInitialEnvironments!();
         AltairWindowOptions!();
         AltairSettingsState!();
+        AltairInitialEnvironments!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AltairConfigOptions {
     };
 }
 
-AltairConfigOptions!()
+AltairConfigOptions!();

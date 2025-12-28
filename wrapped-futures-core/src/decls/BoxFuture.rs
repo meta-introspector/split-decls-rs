@@ -4,4 +4,4 @@ macro_rules! BoxFuture {
     };
 }
 
-BoxFuture!()
+BoxFuture!();

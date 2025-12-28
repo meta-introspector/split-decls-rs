@@ -1,6 +1,6 @@
 macro_rules! lookahead {
     () => {
-        # [cfg (feature = "parsing")] mod lookahead ;
+        # [cfg (feature = "parsing")] pub (crate) mod lookahead { pub trait Sealed : Copy { } }
     };
 }
 

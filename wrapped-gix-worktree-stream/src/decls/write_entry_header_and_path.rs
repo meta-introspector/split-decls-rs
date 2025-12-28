@@ -4,4 +4,4 @@ macro_rules! write_entry_header_and_path {
     };
 }
 
-write_entry_header_and_path!()
+write_entry_header_and_path!();

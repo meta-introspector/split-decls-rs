@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
         DateTime!();
         Utc!();
+        FixedOffset!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_datetime_to_utc {
     };
 }
 
-test_datetime_to_utc!()
+test_datetime_to_utc!();

@@ -11,4 +11,4 @@ macro_rules! cleanup_semantic_score {
     };
 }
 
-cleanup_semantic_score!()
+cleanup_semantic_score!();

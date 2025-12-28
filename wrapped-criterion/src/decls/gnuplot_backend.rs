@@ -4,4 +4,4 @@ macro_rules! gnuplot_backend {
     };
 }
 
-gnuplot_backend!()
+gnuplot_backend!();

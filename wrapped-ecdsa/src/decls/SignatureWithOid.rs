@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EcdsaCurve!();
         Signature!();
+        EcdsaCurve!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SignatureWithOid {
     };
 }
 
-SignatureWithOid!()
+SignatureWithOid!();

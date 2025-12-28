@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Task!();
         UnparkMutex!();
+        Task!();
         ThreadPool!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! WakeHandle {
     };
 }
 
-WakeHandle!()
+WakeHandle!();

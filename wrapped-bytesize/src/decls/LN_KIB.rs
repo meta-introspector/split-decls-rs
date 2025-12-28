@@ -4,4 +4,4 @@ macro_rules! LN_KIB {
     };
 }
 
-LN_KIB!()
+LN_KIB!();

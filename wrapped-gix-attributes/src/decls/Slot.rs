@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Match!();
         Assignments!();
+        Match!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Slot {
     };
 }
 
-Slot!()
+Slot!();

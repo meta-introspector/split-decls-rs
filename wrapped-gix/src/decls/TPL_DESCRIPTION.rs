@@ -4,4 +4,4 @@ macro_rules! TPL_DESCRIPTION {
     };
 }
 
-TPL_DESCRIPTION!()
+TPL_DESCRIPTION!();

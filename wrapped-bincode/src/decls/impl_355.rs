@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         DecodeError!();
         Decoder!();
-        Endianness!();
         Decode!();
+        Endianness!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_355 {
     };
 }
 
-impl_355!()
+impl_355!();

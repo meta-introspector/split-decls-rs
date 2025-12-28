@@ -4,4 +4,4 @@ macro_rules! WildStr {
     };
 }
 
-WildStr!()
+WildStr!();

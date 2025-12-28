@@ -4,4 +4,4 @@ macro_rules! CompatSink {
     };
 }
 
-CompatSink!()
+CompatSink!();

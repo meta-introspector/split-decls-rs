@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Entry!();
         UpsertMode!();
-        Tree!();
         WriteMode!();
+        Entry!();
         Cursor!();
+        Error!();
         Editor!();
         EntryKind!();
-        Error!();
+        Tree!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! cursor {
     };
 }
 
-cursor!()
+cursor!();

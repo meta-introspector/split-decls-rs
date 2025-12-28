@@ -4,4 +4,4 @@ macro_rules! Zeroes {
     };
 }
 
-Zeroes!()
+Zeroes!();

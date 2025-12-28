@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Note!();
         Clone!();
+        Note!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Attributes {
     };
 }
 
-Attributes!()
+Attributes!();

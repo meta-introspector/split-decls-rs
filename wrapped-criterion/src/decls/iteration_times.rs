@@ -4,4 +4,4 @@ macro_rules! iteration_times {
     };
 }
 
-iteration_times!()
+iteration_times!();

@@ -4,4 +4,4 @@ macro_rules! hex_encode {
     };
 }
 
-hex_encode!()
+hex_encode!();

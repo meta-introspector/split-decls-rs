@@ -4,4 +4,4 @@ macro_rules! rerun_path {
     };
 }
 
-rerun_path!()
+rerun_path!();

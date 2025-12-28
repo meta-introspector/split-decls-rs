@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EncoderResult!();
+        Encoding!();
         Encoder!();
         Utf8Encoder!();
-        Encoding!();
+        EncoderResult!();
         VariantEncoder!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

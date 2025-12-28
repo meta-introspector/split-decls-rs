@@ -4,4 +4,4 @@ macro_rules! write_requires_scopes {
     };
 }
 
-write_requires_scopes!()
+write_requires_scopes!();

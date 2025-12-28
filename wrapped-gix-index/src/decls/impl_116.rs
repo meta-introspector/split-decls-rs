@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         FsMonitor!();
         Link!();
+        UntrackedCache!();
         State!();
+        Extensions!();
         Tree!();
         Paths!();
-        UntrackedCache!();
-        Extensions!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

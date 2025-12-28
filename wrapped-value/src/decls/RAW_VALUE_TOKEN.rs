@@ -4,4 +4,4 @@ macro_rules! RAW_VALUE_TOKEN {
     };
 }
 
-RAW_VALUE_TOKEN!()
+RAW_VALUE_TOKEN!();

@@ -4,4 +4,4 @@ macro_rules! KIB {
     };
 }
 
-KIB!()
+KIB!();

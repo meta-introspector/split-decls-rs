@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AggregateKind!();
-        BinOp!();
-        Place!();
-        CastKind!();
         BorrowKind!();
         Operand!();
+        BinOp!();
+        CastKind!();
         UnOp!();
+        AggregateKind!();
+        Place!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Rvalue {
     };
 }
 
-Rvalue!()
+Rvalue!();

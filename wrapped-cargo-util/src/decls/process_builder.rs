@@ -4,4 +4,4 @@ macro_rules! process_builder {
     };
 }
 
-process_builder!()
+process_builder!();

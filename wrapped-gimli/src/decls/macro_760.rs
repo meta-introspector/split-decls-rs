@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugLocLists!();
         LocationListsOffset!();
+        DebugLocLists!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_760 {
     };
 }
 
-macro_760!()
+macro_760!();

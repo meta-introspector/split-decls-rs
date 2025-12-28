@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         IntEncoding!();
         Decode!();
+        Decoder!();
         DecodeError!();
         Endianness!();
-        Decoder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_343 {
     };
 }
 
-impl_343!()
+impl_343!();

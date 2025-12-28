@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        AsLog!();
+        AsTrace!();
     };
 }
 
 macro_rules! impl_35 {
     () => {
         deps!();
-        impl AsLog for tracing_core :: LevelFilter { type Log = log :: LevelFilter ; # [inline] fn as_log (& self) -> Self :: Log { match * self { tracing_core :: LevelFilter :: OFF => log :: LevelFilter :: Off , tracing_core :: LevelFilter :: ERROR => log :: LevelFilter :: Error , tracing_core :: LevelFilter :: WARN => log :: LevelFilter :: Warn , tracing_core :: LevelFilter :: INFO => log :: LevelFilter :: Info , tracing_core :: LevelFilter :: DEBUG => log :: LevelFilter :: Debug , tracing_core :: LevelFilter :: TRACE => log :: LevelFilter :: Trace , } } }
+        impl < 'a > AsTrace for log :: Metadata < 'a > { type Trace = Metadata < 'a > ; fn as_trace (& self) -> Self :: Trace { let cs_id = identify_callsite ! (loglevel_to_cs (self . level ()) . 0) ; Metadata :: new ("log record" , self . target () , self . level () . as_trace () , None , None , None , field :: FieldSet :: new (FIELD_NAMES , cs_id) , Kind :: EVENT ,) } }
     };
 }
 

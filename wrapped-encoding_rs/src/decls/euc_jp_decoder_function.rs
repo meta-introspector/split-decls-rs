@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DecoderResult!();
         EucJpPending!();
         CopyAsciiResult!();
         Space!();
+        DecoderResult!();
         ByteSource!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! euc_jp_decoder_function {
     };
 }
 
-euc_jp_decoder_function!()
+euc_jp_decoder_function!();

@@ -4,4 +4,4 @@ macro_rules! Commits {
     };
 }
 
-Commits!()
+Commits!();

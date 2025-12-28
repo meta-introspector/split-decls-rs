@@ -4,4 +4,4 @@ macro_rules! folded_multiply {
     };
 }
 
-folded_multiply!()
+folded_multiply!();

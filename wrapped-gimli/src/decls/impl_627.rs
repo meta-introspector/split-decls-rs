@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Abbreviations!();
         AttributeValue!();
         Reader!();
-        Attribute!();
-        UnitHeader!();
-        DebuggingInformationEntry!();
         UnitOffset!();
         Result!();
-        ReaderOffset!();
-        Abbreviation!();
-        Error!();
         Address!();
-        LittleEndian!();
-        UnitRef!();
-        AttrsIter!();
+        DebuggingInformationEntry!();
+        Error!();
         DebugInfo!();
+        Attribute!();
+        Abbreviation!();
+        UnitRef!();
+        ReaderOffset!();
+        AttrsIter!();
+        Abbreviations!();
+        UnitHeader!();
+        LittleEndian!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_627 {
     };
 }
 
-impl_627!()
+impl_627!();

@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        ArbitrarySelfTypesLevel!();
+        WfCheckingCtxt!();
+        ReceiverValidityError!();
+        Autoderef!();
+    };
+}
+
+macro_rules! receiver_is_valid {
+    () => {
+        deps!();
+        # [doc = " Returns whether `receiver_ty` would be considered a valid receiver type for `self_ty`. If"] # [doc = " `arbitrary_self_types` is enabled, `receiver_ty` must transitively deref to `self_ty`, possibly"] # [doc = " through a `*const/mut T` raw pointer if  `arbitrary_self_types_pointers` is also enabled."] # [doc = " If neither feature is enabled, the requirements are more strict: `receiver_ty` must implement"] # [doc = " `Receiver` and directly implement `Deref<Target = self_ty>`."] # [doc = ""] # [doc = " N.B., there are cases this function returns `true` but causes an error to be emitted,"] # [doc = " particularly when `receiver_ty` derefs to a type that is the same as `self_ty` but has the"] # [doc = " wrong lifetime. Be careful of this if you are calling this function speculatively."] fn receiver_is_valid < 'tcx > (wfcx : & WfCheckingCtxt < '_ , 'tcx > , span : Span , receiver_ty : Ty < 'tcx > , self_ty : Ty < 'tcx > , arbitrary_self_types_enabled : Option < ArbitrarySelfTypesLevel > , method_generics : & ty :: Generics ,) -> Result < () , ReceiverValidityError > { let infcx = wfcx . infcx ; let tcx = wfcx . tcx () ; let cause = ObligationCause :: new (span , wfcx . body_def_id , traits :: ObligationCauseCode :: MethodReceiver) ; if let Ok (()) = wfcx . infcx . commit_if_ok (| _ | { let ocx = ObligationCtxt :: new (wfcx . infcx) ; ocx . eq (& cause , wfcx . param_env , self_ty , receiver_ty) ? ; if ocx . select_all_or_error () . is_empty () { Ok (()) } else { Err (NoSolution) } }) { return Ok (()) ; } confirm_type_is_not_a_method_generic_param (receiver_ty , method_generics) ? ; let mut autoderef = Autoderef :: new (infcx , wfcx . param_env , wfcx . body_def_id , span , receiver_ty) ; if arbitrary_self_types_enabled . is_some () { autoderef = autoderef . use_receiver_trait () ; } if arbitrary_self_types_enabled == Some (ArbitrarySelfTypesLevel :: WithPointers) { autoderef = autoderef . include_raw_pointers () ; } while let Some ((potential_self_ty , _)) = autoderef . next () { debug ! ("receiver_is_valid: potential self type `{:?}` to match `{:?}`" , potential_self_ty , self_ty) ; confirm_type_is_not_a_method_generic_param (potential_self_ty , method_generics) ? ; if let Ok (()) = wfcx . infcx . commit_if_ok (| _ | { let ocx = ObligationCtxt :: new (wfcx . infcx) ; ocx . eq (& cause , wfcx . param_env , self_ty , potential_self_ty) ? ; if ocx . select_all_or_error () . is_empty () { Ok (()) } else { Err (NoSolution) } }) { wfcx . register_obligations (autoderef . into_obligations ()) ; return Ok (()) ; } if arbitrary_self_types_enabled . is_none () { let legacy_receiver_trait_def_id = tcx . require_lang_item (LangItem :: LegacyReceiver , span) ; if ! legacy_receiver_is_implemented (wfcx , legacy_receiver_trait_def_id , cause . clone () , potential_self_ty ,) { break ; } wfcx . register_bound (cause . clone () , wfcx . param_env , potential_self_ty , legacy_receiver_trait_def_id ,) ; } } debug ! ("receiver_is_valid: type `{:?}` does not deref to `{:?}`" , receiver_ty , self_ty) ; Err (ReceiverValidityError :: DoesNotDeref) }
+    };
+}
+
+receiver_is_valid!()

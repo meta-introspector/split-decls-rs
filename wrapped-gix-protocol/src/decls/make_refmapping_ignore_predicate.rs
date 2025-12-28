@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Mapping!();
         Tags!();
+        Mapping!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! make_refmapping_ignore_predicate {
     };
 }
 
-make_refmapping_ignore_predicate!()
+make_refmapping_ignore_predicate!();

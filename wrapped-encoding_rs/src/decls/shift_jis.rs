@@ -4,4 +4,4 @@ macro_rules! shift_jis {
     };
 }
 
-shift_jis!()
+shift_jis!();

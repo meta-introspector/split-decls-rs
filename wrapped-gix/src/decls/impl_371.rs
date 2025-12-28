@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InProgress!();
         Merge!();
         Repository!();
-        InProgress!();
         Note!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_371 {
     };
 }
 
-impl_371!()
+impl_371!();

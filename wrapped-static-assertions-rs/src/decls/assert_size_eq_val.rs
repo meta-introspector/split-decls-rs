@@ -1,0 +1,7 @@
+macro_rules! assert_size_eq_val {
+    () => {
+        # [doc = " Asserts that values are equal in size."] # [doc = ""] # [doc = " This macro doesn't consume its arguments and thus works for"] # [doc = " non-[`Clone`]able values."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # #[macro_use] extern crate static_assertions;"] # [doc = " # fn main() {"] # [doc = " struct Byte(u8);"] # [doc = ""] # [doc = " let x = 10u8;"] # [doc = " let y = Byte(42); // Works for non-cloneable types"] # [doc = ""] # [doc = " assert_size_eq_val!(x, y);"] # [doc = " assert_size_eq_val!(x, y, 0u8);"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " Even though both values are 0, they are of types with different sizes:"] # [doc = ""] # [doc = " ```compile_fail"] # [doc = " # #[macro_use] extern crate static_assertions;"] # [doc = " # fn main() {"] # [doc = " assert_size_eq_val!(0u8, 0u32);"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " [`Clone`]: https://doc.rust-lang.org/std/clone/trait.Clone.html"] # [macro_export (local_inner_macros)] macro_rules ! assert_size_eq_val { ($ x : expr , $ ($ xs : expr) ,+ $ (,) ?) => { assert_size_eq_ptr ! (&$ x , $ (&$ xs) ,+) ; } }
+    };
+}
+
+assert_size_eq_val!()

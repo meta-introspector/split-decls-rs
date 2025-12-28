@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Metadata!();
-        Body!();
-        Header!();
         SectionMut!();
-        Section!();
+        Header!();
         SectionId!();
+        Section!();
+        Body!();
+        Metadata!();
         Event!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

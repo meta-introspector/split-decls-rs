@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IntoCString!();
+        Diff!();
         Note!();
         DiffOptions!();
-        Diff!();
+        IntoCString!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_337 {
     };
 }
 
-impl_337!()
+impl_337!();

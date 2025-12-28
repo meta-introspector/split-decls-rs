@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SimpleObjectField!();
         Resolvability!();
-        RenameRule!();
         ConcreteType!();
+        SimpleObjectField!();
+        RenameRule!();
         Visible!();
         CacheControl!();
     };
@@ -16,4 +16,4 @@ macro_rules! SimpleObject {
     };
 }
 
-SimpleObject!()
+SimpleObject!();

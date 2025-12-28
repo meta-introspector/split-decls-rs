@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProgramKind!();
         Options!();
+        ProgramKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! options {
     };
 }
 
-options!()
+options!();

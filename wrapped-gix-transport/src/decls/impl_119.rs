@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ExtendedBufRead!();
-        Error!();
         MessageKind!();
-        HandleProgress!();
+        ExtendedBufRead!();
         Protocol!();
+        HandleProgress!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

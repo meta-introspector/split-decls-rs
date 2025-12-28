@@ -4,4 +4,4 @@ macro_rules! derive_arbitrary {
     };
 }
 
-derive_arbitrary!()
+derive_arbitrary!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Sender!();
+        SelectHandle!();
         TryRecvError!();
+        SelectedOperation!();
+        RecvTimeoutError!();
+        Receiver!();
         Timeout!();
         RecvError!();
-        RecvTimeoutError!();
-        SelectHandle!();
-        Receiver!();
-        SelectedOperation!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! crossbeam_channel_internal {
     };
 }
 
-crossbeam_channel_internal!()
+crossbeam_channel_internal!();

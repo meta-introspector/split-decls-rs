@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Field!();
-        Directive!();
         InputType!();
+        Directive!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! remove_skipped_selection {
     };
 }
 
-remove_skipped_selection!()
+remove_skipped_selection!();

@@ -22,4 +22,4 @@ fn main() {
     };
 }
 
-test_stringify_expand!()
+test_stringify_expand!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PatternError!();
         MatchOptions!();
-        Paths!();
         GlobResult!();
+        PatternError!();
+        Paths!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! glob {
     };
 }
 
-glob!()
+glob!();

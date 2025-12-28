@@ -4,4 +4,4 @@ macro_rules! inline_expression {
     };
 }
 
-inline_expression!()
+inline_expression!();

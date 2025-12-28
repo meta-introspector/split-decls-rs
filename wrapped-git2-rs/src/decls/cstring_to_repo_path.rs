@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         IntoCString!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! cstring_to_repo_path {
     };
 }
 
-cstring_to_repo_path!()
+cstring_to_repo_path!();

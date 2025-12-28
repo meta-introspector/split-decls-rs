@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Trait!();
         ItemLoc!();
+        Trait!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TraitLoc {
     };
 }
 
-TraitLoc!()
+TraitLoc!();

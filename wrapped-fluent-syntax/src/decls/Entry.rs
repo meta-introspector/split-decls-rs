@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Resource!();
+        Message!();
         Term!();
         Comment!();
-        Message!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Entry {
     };
 }
 
-Entry!()
+Entry!();

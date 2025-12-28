@@ -4,4 +4,4 @@ macro_rules! TrySelectError {
     };
 }
 
-TrySelectError!()
+TrySelectError!();

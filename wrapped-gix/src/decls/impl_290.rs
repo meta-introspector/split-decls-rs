@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Outcome!();
         Options!();
         Error!();
         Repository!();
-        Outcome!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_290 {
     };
 }
 
-impl_290!()
+impl_290!();

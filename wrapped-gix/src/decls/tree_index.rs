@@ -4,4 +4,4 @@ macro_rules! tree_index {
     };
 }
 
-tree_index!()
+tree_index!();

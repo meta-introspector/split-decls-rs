@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Validators!();
-        Deprecation!();
         DefaultValue!();
         Visible!();
+        Deprecation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Argument {
     };
 }
 
-Argument!()
+Argument!();

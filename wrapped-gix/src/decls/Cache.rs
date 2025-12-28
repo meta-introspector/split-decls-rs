@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        String!();
         SchemePermission!();
-        Attributes!();
-        Algorithm!();
-        Config!();
-        Personas!();
-        ObjectKindHint!();
         Kind!();
-        Environment!();
-        Clone!();
         Rewrite!();
+        Algorithm!();
+        Attributes!();
+        Environment!();
+        Config!();
+        ObjectKindHint!();
+        String!();
+        Clone!();
+        Personas!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! Cache {
     };
 }
 
-Cache!()
+Cache!();

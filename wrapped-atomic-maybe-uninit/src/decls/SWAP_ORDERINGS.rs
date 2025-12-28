@@ -4,4 +4,4 @@ macro_rules! SWAP_ORDERINGS {
     };
 }
 
-SWAP_ORDERINGS!()
+SWAP_ORDERINGS!();

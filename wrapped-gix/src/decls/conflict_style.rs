@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConflictStyle!();
         Merge!();
+        ConflictStyle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! conflict_style {
     };
 }
 
-conflict_style!()
+conflict_style!();

@@ -4,4 +4,4 @@ macro_rules! boxed_monty_form {
     };
 }
 
-boxed_monty_form!()
+boxed_monty_form!();

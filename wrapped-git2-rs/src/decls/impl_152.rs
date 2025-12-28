@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IterBytes!();
         StringArray!();
         Iter!();
+        IterBytes!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_152 {
     };
 }
 
-impl_152!()
+impl_152!();

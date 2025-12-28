@@ -4,4 +4,4 @@ macro_rules! RemoteHandle {
     };
 }
 
-RemoteHandle!()
+RemoteHandle!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tool!();
         StdEnvGetter!();
+        Tool!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! find_tool {
     };
 }
 
-find_tool!()
+find_tool!();

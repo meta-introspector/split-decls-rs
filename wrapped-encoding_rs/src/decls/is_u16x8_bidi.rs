@@ -4,4 +4,4 @@ macro_rules! is_u16x8_bidi {
     };
 }
 
-is_u16x8_bidi!()
+is_u16x8_bidi!();

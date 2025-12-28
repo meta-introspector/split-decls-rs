@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Error!();
         Repository!();
         Item!();
-        Submodule!();
-        ModulesSnapshot!();
         SharedState!();
+        ModulesSnapshot!();
         Note!();
-        Error!();
+        Submodule!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_373 {
     };
 }
 
-impl_373!()
+impl_373!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Subgraph!();
         NodeStmt!();
-        IDEq!();
-        AttrStmt!();
+        Subgraph!();
+        Stmt!();
         EdgeStmt!();
+        IDEq!();
         ParseError!();
         AList!();
-        Stmt!();
+        AttrStmt!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

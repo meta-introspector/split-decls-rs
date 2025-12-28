@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PubStuffEntry!();
         Reader!();
+        PubStuffEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PubStuffParser {
     };
 }
 
-PubStuffParser!()
+PubStuffParser!();

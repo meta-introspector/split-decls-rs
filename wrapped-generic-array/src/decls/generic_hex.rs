@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArrayLength!();
         GenericArray!();
+        ArrayLength!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! generic_hex {
     };
 }
 
-generic_hex!()
+generic_hex!();

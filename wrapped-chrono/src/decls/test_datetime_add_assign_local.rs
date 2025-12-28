@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TimeDelta!();
         Local!();
         NaiveDate!();
+        TimeDelta!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_datetime_add_assign_local {
     };
 }
 
-test_datetime_add_assign_local!()
+test_datetime_add_assign_local!();

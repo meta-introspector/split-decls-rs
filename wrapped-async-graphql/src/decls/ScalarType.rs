@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InputValueResult!();
         Scalar!();
+        InputValueResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ScalarType {
     };
 }
 
-ScalarType!()
+ScalarType!();

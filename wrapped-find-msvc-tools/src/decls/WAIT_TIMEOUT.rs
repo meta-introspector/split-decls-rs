@@ -11,4 +11,4 @@ macro_rules! WAIT_TIMEOUT {
     };
 }
 
-WAIT_TIMEOUT!()
+WAIT_TIMEOUT!();

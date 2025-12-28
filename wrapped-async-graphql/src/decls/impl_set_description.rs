@@ -4,4 +4,4 @@ macro_rules! impl_set_description {
     };
 }
 
-impl_set_description!()
+impl_set_description!();

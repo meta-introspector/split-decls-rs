@@ -4,4 +4,4 @@ macro_rules! check_infer_with_mismatches {
     };
 }
 
-check_infer_with_mismatches!()
+check_infer_with_mismatches!();

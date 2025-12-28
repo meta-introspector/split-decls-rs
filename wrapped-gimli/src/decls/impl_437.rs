@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ListsHeader!();
         Encoding!();
+        ListsHeader!();
         Format!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_437 {
     };
 }
 
-impl_437!()
+impl_437!();

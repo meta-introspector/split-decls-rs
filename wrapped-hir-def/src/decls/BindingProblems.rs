@@ -4,4 +4,4 @@ macro_rules! BindingProblems {
     };
 }
 
-BindingProblems!()
+BindingProblems!();

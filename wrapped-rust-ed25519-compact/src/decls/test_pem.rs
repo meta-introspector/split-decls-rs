@@ -16,4 +16,4 @@ MCowBQYDK2VwAyEAyrRjJfTnhMcW5igzYvPirFW5eUgMdKeClGzQhd4qw+Y=
     };
 }
 
-test_pem!()
+test_pem!();

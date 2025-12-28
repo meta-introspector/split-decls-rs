@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Mod!();
         Use!();
+        Mod!();
         ExternCrate!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! BigModItem {
     };
 }
 
-BigModItem!()
+BigModItem!();

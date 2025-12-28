@@ -11,4 +11,4 @@ macro_rules! from_raw_const {
     };
 }
 
-from_raw_const!()
+from_raw_const!();

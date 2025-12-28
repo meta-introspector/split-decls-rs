@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DummyGitExecutor!();
-        GitExecutor!();
-        RollupLock!();
         SubmoduleStat!();
+        GitExecutor!();
+        DummyGitExecutor!();
         Result!();
+        RollupLock!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

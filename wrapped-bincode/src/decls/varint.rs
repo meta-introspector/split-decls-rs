@@ -4,4 +4,4 @@ macro_rules! varint {
     };
 }
 
-varint!()
+varint!();

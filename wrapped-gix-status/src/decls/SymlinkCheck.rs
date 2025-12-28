@@ -4,4 +4,4 @@ macro_rules! SymlinkCheck {
     };
 }
 
-SymlinkCheck!()
+SymlinkCheck!();

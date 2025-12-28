@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Section!();
         Program!();
+        Section!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_784 {
     };
 }
 
-impl_784!()
+impl_784!();

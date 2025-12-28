@@ -4,4 +4,4 @@ macro_rules! paint_test_input {
     };
 }
 
-paint_test_input!()
+paint_test_input!();

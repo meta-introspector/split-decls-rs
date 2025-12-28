@@ -11,4 +11,4 @@ macro_rules! run_cmd {
     };
 }
 
-run_cmd!()
+run_cmd!();

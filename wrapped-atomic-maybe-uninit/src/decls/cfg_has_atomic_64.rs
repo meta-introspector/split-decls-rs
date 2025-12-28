@@ -4,4 +4,4 @@ macro_rules! cfg_has_atomic_64 {
     };
 }
 
-cfg_has_atomic_64!()
+cfg_has_atomic_64!();

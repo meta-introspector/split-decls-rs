@@ -4,4 +4,4 @@ macro_rules! CsvRow {
     };
 }
 
-CsvRow!()
+CsvRow!();

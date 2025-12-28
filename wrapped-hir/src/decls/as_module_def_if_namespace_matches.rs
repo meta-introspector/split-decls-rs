@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ModuleDef!();
         DocLinkDef!();
+        TypeAlias!();
         Function!();
         Const!();
-        TypeAlias!();
         AssocItem!();
+        ModuleDef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! as_module_def_if_namespace_matches {
     };
 }
 
-as_module_def_if_namespace_matches!()
+as_module_def_if_namespace_matches!();

@@ -4,4 +4,4 @@ macro_rules! Tokenizer {
     };
 }
 
-Tokenizer!()
+Tokenizer!();

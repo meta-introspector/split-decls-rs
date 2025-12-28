@@ -4,4 +4,4 @@ macro_rules! SECONDS_PER_WEEK {
     };
 }
 
-SECONDS_PER_WEEK!()
+SECONDS_PER_WEEK!();

@@ -4,4 +4,4 @@ macro_rules! Utf16Source {
     };
 }
 
-Utf16Source!()
+Utf16Source!();

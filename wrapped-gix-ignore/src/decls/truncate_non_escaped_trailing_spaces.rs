@@ -4,4 +4,4 @@ macro_rules! truncate_non_escaped_trailing_spaces {
     };
 }
 
-truncate_non_escaped_trailing_spaces!()
+truncate_non_escaped_trailing_spaces!();

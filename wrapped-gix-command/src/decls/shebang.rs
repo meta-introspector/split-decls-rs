@@ -4,4 +4,4 @@ macro_rules! shebang {
     };
 }
 
-shebang!()
+shebang!();

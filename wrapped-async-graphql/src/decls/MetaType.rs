@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Scalar!();
-        Object!();
-        Interface!();
-        MetaEnumValue!();
-        InputObject!();
-        MetaInputValue!();
-        Union!();
+        CacheControl!();
         MetaVisibleFn!();
         MetaDirectiveInvocation!();
+        Interface!();
+        Union!();
+        MetaEnumValue!();
+        Object!();
         ScalarValidatorFn!();
+        InputObject!();
+        Scalar!();
+        MetaInputValue!();
         MetaField!();
-        CacheControl!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! MetaType {
     };
 }
 
-MetaType!()
+MetaType!();

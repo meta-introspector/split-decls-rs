@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        NFA!();
-        AcAutomaton!();
-        AhoCorasickBuilder!();
+        Input!();
         StartKind!();
         AhoCorasickKind!();
+        DFA!();
+        AcAutomaton!();
+        AhoCorasickBuilder!();
         PatternID!();
-        Input!();
+        NFA!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! AhoCorasick {
     };
 }
 
-AhoCorasick!()
+AhoCorasick!();

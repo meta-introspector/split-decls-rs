@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SmallVec!();
-        IntoIter!();
         DropGuard!();
+        IntoIter!();
     };
 }
 

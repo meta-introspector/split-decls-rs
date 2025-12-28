@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        DebuggingInformationEntry!();
         AttributeSpecification!();
+        DebuggingInformationEntry!();
+        Reader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AttrsIter {
     };
 }
 
-AttrsIter!()
+AttrsIter!();

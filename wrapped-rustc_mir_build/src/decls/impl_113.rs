@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        MatchPairTree!();
+        Builder!();
+        Candidate!();
+        HasMatchGuard!();
+        PlaceBuilder!();
+        TestCase!();
+        FlatPat!();
+    };
+}
+
+macro_rules! impl_113 {
+    () => {
+        deps!();
+        impl < 'tcx > Candidate < 'tcx > { fn new (place : PlaceBuilder < 'tcx > , pattern : & Pat < 'tcx > , has_guard : HasMatchGuard , cx : & mut Builder < '_ , 'tcx > ,) -> Self { Self :: from_flat_pat (FlatPat :: new (place , pattern , cx) , matches ! (has_guard , HasMatchGuard :: Yes) ,) } # [doc = " Incorporates an already-simplified [`FlatPat`] into a new candidate."] fn from_flat_pat (flat_pat : FlatPat < 'tcx > , has_guard : bool) -> Self { let mut this = Candidate { match_pairs : flat_pat . match_pairs , extra_data : flat_pat . extra_data , has_guard , subcandidates : Vec :: new () , or_span : None , otherwise_block : None , pre_binding_block : None , false_edge_start_block : None , } ; this . sort_match_pairs () ; this } # [doc = " Restores the invariant that or-patterns must be sorted to the end."] fn sort_match_pairs (& mut self) { self . match_pairs . sort_by_key (| pair | matches ! (pair . test_case , TestCase :: Or { .. })) ; } # [doc = " Returns whether the first match pair of this candidate is an or-pattern."] fn starts_with_or_pattern (& self) -> bool { matches ! (&* self . match_pairs , [MatchPairTree { test_case : TestCase :: Or { .. } , .. } , ..]) } # [doc = " Visit the leaf candidates (those with no subcandidates) contained in"] # [doc = " this candidate."] fn visit_leaves < 'a > (& 'a mut self , mut visit_leaf : impl FnMut (& 'a mut Self)) { traverse_candidate (self , & mut () , & mut move | c , _ | visit_leaf (c) , move | c , _ | c . subcandidates . iter_mut () , | _ | { } ,) ; } # [doc = " Visit the leaf candidates in reverse order."] fn visit_leaves_rev < 'a > (& 'a mut self , mut visit_leaf : impl FnMut (& 'a mut Self)) { traverse_candidate (self , & mut () , & mut move | c , _ | visit_leaf (c) , move | c , _ | c . subcandidates . iter_mut () . rev () , | _ | { } ,) ; } }
+    };
+}
+
+impl_113!()

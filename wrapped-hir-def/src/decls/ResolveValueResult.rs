@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ValueNs!();
         ImportOrGlob!();
-        TypeNs!();
         ImportOrExternCrate!();
+        ValueNs!();
+        TypeNs!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ResolveValueResult {
     };
 }
 
-ResolveValueResult!()
+ResolveValueResult!();

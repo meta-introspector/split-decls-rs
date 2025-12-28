@@ -4,4 +4,4 @@ macro_rules! with {
     };
 }
 
-with!()
+with!();

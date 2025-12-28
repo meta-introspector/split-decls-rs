@@ -11,4 +11,4 @@ macro_rules! XSAVE_FORMAT {
     };
 }
 
-XSAVE_FORMAT!()
+XSAVE_FORMAT!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Engine!();
         DecodeEstimate!();
-        DecodeSliceError!();
-        DecoderReaderEngine!();
-        Config!();
-        DecoderReader!();
         DecodeError!();
         DecodeMetadata!();
+        DecodeSliceError!();
+        Engine!();
+        Config!();
+        DecoderReader!();
+        DecoderReaderEngine!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

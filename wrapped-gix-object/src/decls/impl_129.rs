@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         EntryMode!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_129 {
     };
 }
 
-impl_129!()
+impl_129!();

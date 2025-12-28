@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Scope!();
         NoUndefinedVariables!();
+        Scope!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

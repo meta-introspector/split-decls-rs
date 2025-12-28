@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StartKind!();
+        Builder!();
         DFA!();
         AhoCorasickKind!();
-        Builder!();
+        StartKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! AhoCorasickBuilder {
     };
 }
 
-AhoCorasickBuilder!()
+AhoCorasickBuilder!();

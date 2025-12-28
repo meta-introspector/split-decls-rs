@@ -11,4 +11,4 @@ macro_rules! impl_767 {
     };
 }
 
-impl_767!()
+impl_767!();

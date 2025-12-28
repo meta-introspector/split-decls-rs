@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ready!();
         Pending!();
+        Ready!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ready_or_break {
     };
 }
 
-ready_or_break!()
+ready_or_break!();

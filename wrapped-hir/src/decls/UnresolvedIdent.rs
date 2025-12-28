@@ -4,4 +4,4 @@ macro_rules! UnresolvedIdent {
     };
 }
 
-UnresolvedIdent!()
+UnresolvedIdent!();

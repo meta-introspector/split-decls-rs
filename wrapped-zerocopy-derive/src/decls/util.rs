@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FromRawReprError!();
+        PrimitiveRepr!();
+    };
+}
+
+macro_rules! util {
+    () => {
+        deps!();
+        mod util { use super :: * ; # [doc = " A value with an associated span."] # [derive (Copy , Clone)] # [cfg_attr (test , derive (Debug))] pub (crate) struct Spanned < T > { pub (crate) t : T , pub (crate) span : Span , } impl < T > Spanned < T > { pub (super) fn new (t : T , span : Span) -> Spanned < T > { Spanned { t , span } } pub (super) fn from < U > (s : Spanned < U >) -> Spanned < T > where T : From < U > , { let Spanned { t : u , span } = s ; Spanned :: new (u . into () , span) } # [doc = " Delegates to `T: TryFrom`, preserving span information in both the"] # [doc = " success and error cases."] pub (super) fn try_from < E , U > (u : Spanned < U > ,) -> Result < Spanned < T > , FromRawReprError < Spanned < E > > > where T : TryFrom < U , Error = FromRawReprError < E > > , { let Spanned { t : u , span } = u ; T :: try_from (u) . map (| t | Spanned { t , span }) . map_err (| err | match err { FromRawReprError :: None => FromRawReprError :: None , FromRawReprError :: Err (e) => FromRawReprError :: Err (Spanned :: new (e , span)) , }) } } pub (crate) trait Inhabited { } impl Inhabited for PrimitiveRepr { } impl Inhabited for NonZeroU32 { } pub (crate) trait With < T > { fn with < O , F : FnOnce (T) -> O > (self , f : F) -> O ; fn try_with_or < E , F : FnOnce () -> Result < T , E > > (f : F , err : E) -> Result < Self , E > where Self : Sized ; } impl < T : Inhabited > With < T > for T { fn with < O , F : FnOnce (T) -> O > (self , f : F) -> O { f (self) } fn try_with_or < E , F : FnOnce () -> Result < T , E > > (f : F , _err : E) -> Result < Self , E > { f () } } impl < T > With < T > for Infallible { fn with < O , F : FnOnce (T) -> O > (self , _f : F) -> O { match self { } } fn try_with_or < E , F : FnOnce () -> Result < T , E > > (_f : F , err : E) -> Result < Self , E > { Err (err) } } }
+    };
+}
+
+util!()

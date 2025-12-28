@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Commit!();
         Tree!();
-        Error!();
-        Kind!();
-        Blob!();
+        Commit!();
         Tag!();
+        Error!();
+        Blob!();
+        Kind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

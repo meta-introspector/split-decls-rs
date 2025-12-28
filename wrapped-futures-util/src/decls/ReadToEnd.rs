@@ -4,4 +4,4 @@ macro_rules! ReadToEnd {
     };
 }
 
-ReadToEnd!()
+ReadToEnd!();

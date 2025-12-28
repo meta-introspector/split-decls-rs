@@ -12,4 +12,4 @@ macro_rules! test_datetime_parse_from_str {
     };
 }
 
-test_datetime_parse_from_str!()
+test_datetime_parse_from_str!();

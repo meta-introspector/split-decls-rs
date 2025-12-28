@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DropGlue!();
         TraitEnvironment!();
+        DropGlue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! has_drop_glue {
     };
 }
 
-has_drop_glue!()
+has_drop_glue!();

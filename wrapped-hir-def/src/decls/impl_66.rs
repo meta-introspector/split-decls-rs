@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        LocalModuleId!();
-        MacroCall!();
-        DefDatabase!();
-        ImportOrExternCrate!();
-        PerNs!();
-        Visibility!();
-        ImportId!();
-        ModuleDefId!();
-        DeriveMacroInvocation!();
-        ItemScope!();
         PerNsGlobImports!();
-        MacroId!();
-        Item!();
-        MacroSubNs!();
         ExternCrate!();
-        ImportOrGlob!();
+        MacroSubNs!();
+        MacroCall!();
+        Visibility!();
         ImportOrDef!();
+        Item!();
+        ItemScope!();
+        DeriveMacroInvocation!();
+        MacroId!();
+        PerNs!();
+        DefDatabase!();
+        ModuleDefId!();
+        ImportOrExternCrate!();
+        ImportOrGlob!();
+        ImportId!();
+        LocalModuleId!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

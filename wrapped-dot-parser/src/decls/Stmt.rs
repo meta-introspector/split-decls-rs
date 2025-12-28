@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AttrStmt!();
-        EdgeStmt!();
         IDEq!();
+        EdgeStmt!();
+        AttrStmt!();
         NodeStmt!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Stmt {
     };
 }
 
-Stmt!()
+Stmt!();

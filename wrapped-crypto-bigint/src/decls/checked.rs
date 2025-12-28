@@ -4,4 +4,4 @@ macro_rules! checked {
     };
 }
 
-checked!()
+checked!();

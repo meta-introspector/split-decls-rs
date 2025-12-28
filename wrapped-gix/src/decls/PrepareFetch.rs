@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Url!();
-        Repository!();
         ConfigureConnectionFn!();
+        Repository!();
         Options!();
         ConfigureRemoteFn!();
     };
@@ -15,4 +15,4 @@ macro_rules! PrepareFetch {
     };
 }
 
-PrepareFetch!()
+PrepareFetch!();

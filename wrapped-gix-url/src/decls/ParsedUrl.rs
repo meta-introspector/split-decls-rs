@@ -4,4 +4,4 @@ macro_rules! ParsedUrl {
     };
 }
 
-ParsedUrl!()
+ParsedUrl!();

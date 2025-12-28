@@ -4,4 +4,4 @@ macro_rules! byteset_create {
     };
 }
 
-byteset_create!()
+byteset_create!();

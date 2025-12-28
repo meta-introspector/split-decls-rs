@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Creation!();
         Result!();
+        Creation!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! scripted_fixture_writable {
     };
 }
 
-scripted_fixture_writable!()
+scripted_fixture_writable!();

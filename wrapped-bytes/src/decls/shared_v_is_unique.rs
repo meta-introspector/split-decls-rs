@@ -11,4 +11,4 @@ macro_rules! shared_v_is_unique {
     };
 }
 
-shared_v_is_unique!()
+shared_v_is_unique!();

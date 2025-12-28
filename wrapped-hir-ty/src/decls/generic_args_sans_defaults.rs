@@ -11,4 +11,4 @@ macro_rules! generic_args_sans_defaults {
     };
 }
 
-generic_args_sans_defaults!()
+generic_args_sans_defaults!();

@@ -14,4 +14,4 @@ fn bar() -> Baz<u8> {}
     };
 }
 
-test_ty!()
+test_ty!();

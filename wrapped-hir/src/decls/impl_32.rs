@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Impl!();
-        GenericDef!();
-        Adt!();
-        Trait!();
-        TypeAlias!();
-        Function!();
         Const!();
+        TypeAlias!();
+        Adt!();
         Static!();
+        Impl!();
+        Function!();
+        GenericDef!();
+        Trait!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

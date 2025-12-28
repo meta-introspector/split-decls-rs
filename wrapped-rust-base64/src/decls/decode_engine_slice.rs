@@ -12,4 +12,4 @@ macro_rules! decode_engine_slice {
     };
 }
 
-decode_engine_slice!()
+decode_engine_slice!();

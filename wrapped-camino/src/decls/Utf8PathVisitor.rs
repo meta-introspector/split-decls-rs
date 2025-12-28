@@ -4,4 +4,4 @@ macro_rules! Utf8PathVisitor {
     };
 }
 
-Utf8PathVisitor!()
+Utf8PathVisitor!();

@@ -4,4 +4,4 @@ macro_rules! read_u32 {
     };
 }
 
-read_u32!()
+read_u32!();

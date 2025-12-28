@@ -4,4 +4,4 @@ macro_rules! load_be {
     };
 }
 
-load_be!()
+load_be!();

@@ -4,4 +4,4 @@ macro_rules! CommitsStorage {
     };
 }
 
-CommitsStorage!()
+CommitsStorage!();

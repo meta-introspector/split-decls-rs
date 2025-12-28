@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SYSTEMTIME!();
         TIME_ZONE_INFORMATION!();
+        SYSTEMTIME!();
         BOOL!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_550 {
     };
 }
 
-macro_550!()
+macro_550!();

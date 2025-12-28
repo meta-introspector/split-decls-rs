@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ValueParserFactory!();
         Parser!();
-        MapValueParser!();
+        ValueParserFactory!();
         TypedValueParser!();
+        MapValueParser!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_341 {
     };
 }
 
-impl_341!()
+impl_341!();

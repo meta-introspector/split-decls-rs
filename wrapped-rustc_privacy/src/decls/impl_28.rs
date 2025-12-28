@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        TypePrivacyVisitor!();
+        ReachEverythingInTheInterfaceVisitor!();
+        DefIdVisitor!();
     };
 }
 
 macro_rules! impl_28 {
     () => {
         deps!();
-        impl < 'tcx > rustc_ty_utils :: sig_types :: SpannedTypeVisitor < 'tcx > for TypePrivacyVisitor < 'tcx > { type Result = ControlFlow < () > ; fn visit (& mut self , span : Span , value : impl TypeVisitable < TyCtxt < 'tcx > >) -> Self :: Result { self . span = span ; value . visit_with (& mut self . skeleton ()) } }
+        impl < 'tcx > DefIdVisitor < 'tcx > for ReachEverythingInTheInterfaceVisitor < '_ , 'tcx > { fn tcx (& self) -> TyCtxt < 'tcx > { self . ev . tcx } fn visit_def_id (& mut self , def_id : DefId , _kind : & str , _descr : & dyn fmt :: Display) { if let Some (def_id) = def_id . as_local () { let max_vis = (self . level != Level :: ReachableThroughImplTrait) . then (| | self . ev . tcx . local_visibility (def_id)) ; self . ev . update_eff_vis (def_id , self . effective_vis , max_vis , self . level) ; } } }
     };
 }
 

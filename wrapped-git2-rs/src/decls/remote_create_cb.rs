@@ -12,4 +12,4 @@ macro_rules! remote_create_cb {
     };
 }
 
-remote_create_cb!()
+remote_create_cb!();

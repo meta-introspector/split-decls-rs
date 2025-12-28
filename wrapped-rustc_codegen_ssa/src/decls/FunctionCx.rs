@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        BuilderMethods!();
+        CachedLlbb!();
+        CleanupKind!();
+        Locals!();
+        FunctionDebugContext!();
+        PerLocalVarDebugInfoIndexVec!();
+        OperandRef!();
+        PlaceRef!();
+    };
+}
+
+macro_rules! FunctionCx {
+    () => {
+        deps!();
+        # [doc = " Master context for codegenning from MIR."] pub struct FunctionCx < 'a , 'tcx , Bx : BuilderMethods < 'a , 'tcx > > { instance : Instance < 'tcx > , mir : & 'tcx mir :: Body < 'tcx > , debug_context : Option < FunctionDebugContext < 'tcx , Bx :: DIScope , Bx :: DILocation > > , llfn : Bx :: Function , cx : & 'a Bx :: CodegenCx , fn_abi : & 'tcx FnAbi < 'tcx , Ty < 'tcx > > , # [doc = " When unwinding is initiated, we have to store this personality"] # [doc = " value somewhere so that we can load it and re-use it in the"] # [doc = " resume instruction. The personality is (afaik) some kind of"] # [doc = " value used for C++ unwinding, which must filter by type: we"] # [doc = " don't really care about it very much. Anyway, this value"] # [doc = " contains an alloca into which the personality is stored and"] # [doc = " then later loaded when generating the DIVERGE_BLOCK."] personality_slot : Option < PlaceRef < 'tcx , Bx :: Value > > , # [doc = " A backend `BasicBlock` for each MIR `BasicBlock`, created lazily"] # [doc = " as-needed (e.g. RPO reaching it or another block branching to it)."] cached_llbbs : IndexVec < mir :: BasicBlock , CachedLlbb < Bx :: BasicBlock > > , # [doc = " The funclet status of each basic block"] cleanup_kinds : Option < IndexVec < mir :: BasicBlock , analyze :: CleanupKind > > , # [doc = " When targeting MSVC, this stores the cleanup info for each funclet BB."] # [doc = " This is initialized at the same time as the `landing_pads` entry for the"] # [doc = " funclets' head block, i.e. when needed by an unwind / `cleanup_ret` edge."] funclets : IndexVec < mir :: BasicBlock , Option < Bx :: Funclet > > , # [doc = " This stores the cached landing/cleanup pad block for a given BB."] landing_pads : IndexVec < mir :: BasicBlock , Option < Bx :: BasicBlock > > , # [doc = " Cached unreachable block"] unreachable_block : Option < Bx :: BasicBlock > , # [doc = " Cached terminate upon unwinding block and its reason"] terminate_block : Option < (Bx :: BasicBlock , UnwindTerminateReason) > , # [doc = " A bool flag for each basic block indicating whether it is a cold block."] # [doc = " A cold block is a block that is unlikely to be executed at runtime."] cold_blocks : IndexVec < mir :: BasicBlock , bool > , # [doc = " The location where each MIR arg/var/tmp/ret is stored. This is"] # [doc = " usually an `PlaceRef` representing an alloca, but not always:"] # [doc = " sometimes we can skip the alloca and just store the value"] # [doc = " directly using an `OperandRef`, which makes for tighter LLVM"] # [doc = " IR. The conditions for using an `OperandRef` are as follows:"] # [doc = ""] # [doc = " - the type of the local must be judged \"immediate\" by `is_llvm_immediate`"] # [doc = " - the operand must never be referenced indirectly"] # [doc = "     - we should not take its address using the `&` operator"] # [doc = "     - nor should it appear in a place path like `tmp.a`"] # [doc = " - the operand must be defined by an rvalue that can generate immediate"] # [doc = "   values"] # [doc = ""] # [doc = " Avoiding allocs can also be important for certain intrinsics,"] # [doc = " notably `expect`."] locals : locals :: Locals < 'tcx , Bx :: Value > , # [doc = " All `VarDebugInfo` from the MIR body, partitioned by `Local`."] # [doc = " This is `None` if no variable debuginfo/names are needed."] per_local_var_debug_info : Option < PerLocalVarDebugInfoIndexVec < 'tcx , Bx :: DIVariable > > , # [doc = " Caller location propagated if this function has `#[track_caller]`."] caller_location : Option < OperandRef < 'tcx , Bx :: Value > > , }
+    };
+}
+
+FunctionCx!()

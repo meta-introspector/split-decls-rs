@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RandomState!();
         SharedSeed!();
+        RandomState!();
         FixedState!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! FIXED_GLOBAL_SEED {
     };
 }
 
-FIXED_GLOBAL_SEED!()
+FIXED_GLOBAL_SEED!();

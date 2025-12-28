@@ -4,4 +4,4 @@ macro_rules! ascii_to_digit {
     };
 }
 
-ascii_to_digit!()
+ascii_to_digit!();

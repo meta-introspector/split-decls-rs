@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ErrorImpl!();
-        ContextError!();
         Error!();
         Ref!();
+        ErrorImpl!();
+        ContextError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! context_chain_downcast {
     };
 }
 
-context_chain_downcast!()
+context_chain_downcast!();

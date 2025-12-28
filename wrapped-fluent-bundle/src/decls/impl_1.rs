@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FluentValue!();
         FluentArgs!();
+        FluentValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1 {
     };
 }
 
-impl_1!()
+impl_1!();

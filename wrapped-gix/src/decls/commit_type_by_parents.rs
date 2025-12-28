@@ -4,4 +4,4 @@ macro_rules! commit_type_by_parents {
     };
 }
 
-commit_type_by_parents!()
+commit_type_by_parents!();

@@ -4,4 +4,4 @@ macro_rules! FIND_PATH_FUEL {
     };
 }
 
-FIND_PATH_FUEL!()
+FIND_PATH_FUEL!();

@@ -4,4 +4,4 @@ macro_rules! AttributesDigest {
     };
 }
 
-AttributesDigest!()
+AttributesDigest!();

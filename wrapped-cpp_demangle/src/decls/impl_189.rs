@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexStr!();
         FunctionType!();
+        IndexStr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

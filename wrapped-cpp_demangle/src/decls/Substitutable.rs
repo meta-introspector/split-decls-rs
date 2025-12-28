@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         UnscopedTemplateName!();
-        TemplateTemplateParam!();
         Type!();
-        UnresolvedType!();
+        TemplateTemplateParam!();
         Prefix!();
+        UnresolvedType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Substitutable {
     };
 }
 
-Substitutable!()
+Substitutable!();

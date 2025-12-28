@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SerializeTupleVariant!();
-        ConstValue!();
         SerializerError!();
         Serializer!();
+        ConstValue!();
+        SerializeTupleVariant!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

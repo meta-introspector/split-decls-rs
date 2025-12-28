@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Error!();
-        Oid!();
-        Index!();
-        RebaseOperation!();
-        Binding!();
         Rebase!();
         Signature!();
+        Index!();
+        Oid!();
+        Binding!();
+        RebaseOperation!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_588 {
     };
 }
 
-impl_588!()
+impl_588!();

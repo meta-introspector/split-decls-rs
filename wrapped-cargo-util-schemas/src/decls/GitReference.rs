@@ -4,4 +4,4 @@ macro_rules! GitReference {
     };
 }
 
-GitReference!()
+GitReference!();

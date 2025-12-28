@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EntriesTree!();
         Reader!();
+        EntriesTree!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EntriesTreeNode {
     };
 }
 
-EntriesTreeNode!()
+EntriesTreeNode!();

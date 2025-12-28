@@ -4,4 +4,4 @@ macro_rules! LenUint {
     };
 }
 
-LenUint!()
+LenUint!();

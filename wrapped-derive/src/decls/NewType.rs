@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visible!();
         NewTypeName!();
+        Visible!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! NewType {
     };
 }
 
-NewType!()
+NewType!();

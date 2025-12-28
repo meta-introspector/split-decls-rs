@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashMap!();
         HashSet!();
+        HashMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_399 {
     };
 }
 
-impl_399!()
+impl_399!();

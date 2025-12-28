@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugInfoOffset!();
         BaseId!();
+        DebugInfoOffset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UnitOffsets {
     };
 }
 
-UnitOffsets!()
+UnitOffsets!();

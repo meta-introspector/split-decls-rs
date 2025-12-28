@@ -4,4 +4,4 @@ macro_rules! RecordSpawner {
     };
 }
 
-RecordSpawner!()
+RecordSpawner!();

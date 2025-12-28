@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ssh!();
-        Tree!();
         Variant!();
+        Tree!();
+        Ssh!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_734 {
     };
 }
 
-impl_734!()
+impl_734!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MetaTypeName!();
-        Visitor!();
-        VisitorContext!();
         Directive!();
+        Visitor!();
+        MetaTypeName!();
+        VisitorContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! visit_directives {
     };
 }
 
-visit_directives!()
+visit_directives!();

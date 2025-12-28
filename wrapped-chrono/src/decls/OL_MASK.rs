@@ -4,4 +4,4 @@ macro_rules! OL_MASK {
     };
 }
 
-OL_MASK!()
+OL_MASK!();

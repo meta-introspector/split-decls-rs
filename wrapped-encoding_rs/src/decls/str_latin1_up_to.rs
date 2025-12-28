@@ -4,4 +4,4 @@ macro_rules! str_latin1_up_to {
     };
 }
 
-str_latin1_up_to!()
+str_latin1_up_to!();

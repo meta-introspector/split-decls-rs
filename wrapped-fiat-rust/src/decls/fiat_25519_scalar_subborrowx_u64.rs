@@ -4,4 +4,4 @@ macro_rules! fiat_25519_scalar_subborrowx_u64 {
     };
 }
 
-fiat_25519_scalar_subborrowx_u64!()
+fiat_25519_scalar_subborrowx_u64!();

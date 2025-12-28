@@ -12,4 +12,4 @@ macro_rules! rustc_attr {
     };
 }
 
-rustc_attr!()
+rustc_attr!();

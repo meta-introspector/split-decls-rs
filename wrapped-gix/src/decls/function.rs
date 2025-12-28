@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Options!();
-        UrlParameter!();
-        Ssh!();
         Core!();
         Path!();
-        ApplyLeniency!();
-        Note!();
-        Error!();
         Environment!();
-        Program!();
+        Note!();
         Boolean!();
-        Url!();
-        Action!();
+        Options!();
+        Program!();
         Credential!();
+        ApplyLeniency!();
         Http!();
+        Action!();
+        Url!();
+        Error!();
+        Ssh!();
+        UrlParameter!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! function {
     };
 }
 
-function!()
+function!();

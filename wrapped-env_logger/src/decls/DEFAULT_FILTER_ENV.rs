@@ -4,4 +4,4 @@ macro_rules! DEFAULT_FILTER_ENV {
     };
 }
 
-DEFAULT_FILTER_ENV!()
+DEFAULT_FILTER_ENV!();

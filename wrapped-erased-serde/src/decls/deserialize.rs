@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Result!();
         Deserializer!();
+        Result!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! deserialize {
     };
 }
 
-deserialize!()
+deserialize!();

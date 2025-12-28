@@ -11,4 +11,4 @@ macro_rules! compress_pre {
     };
 }
 
-compress_pre!()
+compress_pre!();

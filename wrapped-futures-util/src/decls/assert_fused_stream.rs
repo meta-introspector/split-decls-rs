@@ -4,4 +4,4 @@ macro_rules! assert_fused_stream {
     };
 }
 
-assert_fused_stream!()
+assert_fused_stream!();

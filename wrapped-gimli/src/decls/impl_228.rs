@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UnwindContextStorage!();
         RegisterRuleMap!();
         ReaderOffset!();
-        UnwindContextStorage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_228 {
     };
 }
 
-impl_228!()
+impl_228!();

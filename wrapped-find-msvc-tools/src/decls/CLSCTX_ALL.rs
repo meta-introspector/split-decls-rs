@@ -11,4 +11,4 @@ macro_rules! CLSCTX_ALL {
     };
 }
 
-CLSCTX_ALL!()
+CLSCTX_ALL!();

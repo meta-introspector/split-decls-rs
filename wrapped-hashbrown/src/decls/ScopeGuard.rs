@@ -4,4 +4,4 @@ macro_rules! ScopeGuard {
     };
 }
 
-ScopeGuard!()
+ScopeGuard!();

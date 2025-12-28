@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
-        DateTime!();
-        NaiveDateTime!();
-        Offset!();
-        TimeZone!();
-        MappedLocalTime!();
         FixedOffset!();
+        DateTime!();
+        Offset!();
+        NaiveDate!();
+        TimeZone!();
+        NaiveDateTime!();
+        MappedLocalTime!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! test_datetime_is_send_and_copy {
     };
 }
 
-test_datetime_is_send_and_copy!()
+test_datetime_is_send_and_copy!();

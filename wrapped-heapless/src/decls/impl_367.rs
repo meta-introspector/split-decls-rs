@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Max!();
-        Vec!();
         BinaryHeap!();
+        Vec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_367 {
     };
 }
 
-impl_367!()
+impl_367!();

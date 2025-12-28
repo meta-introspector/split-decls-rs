@@ -4,4 +4,4 @@ macro_rules! oneof_object {
     };
 }
 
-oneof_object!()
+oneof_object!();

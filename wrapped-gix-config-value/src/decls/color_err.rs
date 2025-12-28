@@ -11,4 +11,4 @@ macro_rules! color_err {
     };
 }
 
-color_err!()
+color_err!();

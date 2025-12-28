@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Stream!();
         Result!();
         ColorChoice!();
-        Stream!();
         Colorizer!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_578 {
     };
 }
 
-impl_578!()
+impl_578!();

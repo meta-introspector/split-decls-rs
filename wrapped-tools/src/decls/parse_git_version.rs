@@ -11,4 +11,4 @@ macro_rules! parse_git_version {
     };
 }
 
-parse_git_version!()
+parse_git_version!();

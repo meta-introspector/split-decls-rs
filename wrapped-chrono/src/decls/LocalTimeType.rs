@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TimeZoneName!();
         Offset!();
         Local!();
+        TimeZoneName!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LocalTimeType {
     };
 }
 
-LocalTimeType!()
+LocalTimeType!();

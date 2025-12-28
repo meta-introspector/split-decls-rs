@@ -4,4 +4,4 @@ macro_rules! assert_has_installed_exe {
     };
 }
 
-assert_has_installed_exe!()
+assert_has_installed_exe!();

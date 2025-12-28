@@ -11,4 +11,4 @@ macro_rules! Refdb {
     };
 }
 
-Refdb!()
+Refdb!();

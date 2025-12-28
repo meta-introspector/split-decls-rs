@@ -11,4 +11,4 @@ macro_rules! if_std {
     };
 }
 
-if_std!()
+if_std!();

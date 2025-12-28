@@ -4,4 +4,4 @@ macro_rules! SYMBOL_INFO_FLAGS {
     };
 }
 
-SYMBOL_INFO_FLAGS!()
+SYMBOL_INFO_FLAGS!();

@@ -11,4 +11,4 @@ macro_rules! tait_defining_bodies {
     };
 }
 
-tait_defining_bodies!()
+tait_defining_bodies!();

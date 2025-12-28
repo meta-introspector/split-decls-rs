@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TryForEachFut!();
         Try!();
+        TryForEachFut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TryForEachConsumer {
     };
 }
 
-TryForEachConsumer!()
+TryForEachConsumer!();

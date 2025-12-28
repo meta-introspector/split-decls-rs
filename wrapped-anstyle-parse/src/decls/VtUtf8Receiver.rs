@@ -4,4 +4,4 @@ macro_rules! VtUtf8Receiver {
     };
 }
 
-VtUtf8Receiver!()
+VtUtf8Receiver!();

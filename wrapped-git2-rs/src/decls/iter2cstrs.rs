@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoCString!();
         Error!();
+        IntoCString!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! iter2cstrs {
     };
 }
 
-iter2cstrs!()
+iter2cstrs!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        Error!();
-        Options!();
-        Kind!();
-        ProgressId!();
-        DecodeEntry!();
+        Reducer!();
         Outcome!();
         File!();
-        Reducer!();
+        Options!();
+        DecodeEntry!();
+        Entry!();
+        ProgressId!();
+        Kind!();
+        Error!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_249 {
     };
 }
 
-impl_249!()
+impl_249!();

@@ -4,4 +4,4 @@ macro_rules! is_str_latin1 {
     };
 }
 
-is_str_latin1!()
+is_str_latin1!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EvaluationWaiting!();
-        Piece!();
         Location!();
+        EvaluationWaiting!();
         EvaluationResult!();
+        Piece!();
         Reader!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! OperationEvaluationResult {
     };
 }
 
-OperationEvaluationResult!()
+OperationEvaluationResult!();

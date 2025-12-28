@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ChildGraph!();
-        Command!();
-        Id!();
         Styles!();
+        ChildGraph!();
+        Id!();
+        Command!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Usage {
     };
 }
 
-Usage!()
+Usage!();

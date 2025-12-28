@@ -4,4 +4,4 @@ macro_rules! encode_kanji {
     };
 }
 
-encode_kanji!()
+encode_kanji!();

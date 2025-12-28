@@ -11,4 +11,4 @@ macro_rules! new_rng {
     };
 }
 
-new_rng!()
+new_rng!();

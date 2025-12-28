@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        Variant!();
+        Type!();
         StructKind!();
         Module!();
         InstantiatedVariant!();
         Enum!();
-        Variant!();
-        Type!();
-        Field!();
         Layout!();
+        Field!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_268 {
     };
 }
 
-impl_268!()
+impl_268!();

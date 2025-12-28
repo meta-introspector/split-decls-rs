@@ -4,4 +4,4 @@ macro_rules! futures {
     };
 }
 
-futures!()
+futures!();

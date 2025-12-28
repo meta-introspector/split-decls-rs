@@ -4,4 +4,4 @@ macro_rules! exit_status_to_string {
     };
 }
 
-exit_status_to_string!()
+exit_status_to_string!();

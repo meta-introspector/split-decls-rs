@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        SectionId!();
-        Writer!();
-        DebugInfo!();
-        DebugLocLists!();
-        DebugLoc!();
         DebugRanges!();
-        DebugFrame!();
+        Writer!();
         DebugLineStr!();
-        Result!();
+        SectionId!();
+        DebugAbbrev!();
+        DebugLoc!();
+        DebugLocLists!();
+        DebugInfo!();
+        DebugStr!();
         EhFrame!();
+        DebugFrame!();
+        Result!();
         DebugLine!();
         DebugRngLists!();
-        DebugStr!();
-        DebugAbbrev!();
         Sections!();
     };
 }
@@ -25,4 +25,4 @@ macro_rules! impl_705 {
     };
 }
 
-impl_705!()
+impl_705!();

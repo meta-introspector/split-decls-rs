@@ -11,4 +11,4 @@ macro_rules! test_hex_no_std {
     };
 }
 
-test_hex_no_std!()
+test_hex_no_std!();

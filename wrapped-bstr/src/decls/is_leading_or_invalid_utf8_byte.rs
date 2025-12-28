@@ -4,4 +4,4 @@ macro_rules! is_leading_or_invalid_utf8_byte {
     };
 }
 
-is_leading_or_invalid_utf8_byte!()
+is_leading_or_invalid_utf8_byte!();

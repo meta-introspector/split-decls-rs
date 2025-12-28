@@ -4,4 +4,4 @@ macro_rules! constant_time_eq {
     };
 }
 
-constant_time_eq!()
+constant_time_eq!();

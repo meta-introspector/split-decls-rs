@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Entry!();
         Kind!();
         Error!();
-        File!();
-        Header!();
-        Offset!();
-        Item!();
+        Entry!();
         Tree!();
+        Item!();
+        Offset!();
+        Header!();
+        File!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

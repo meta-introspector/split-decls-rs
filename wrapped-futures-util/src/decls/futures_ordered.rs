@@ -4,4 +4,4 @@ macro_rules! futures_ordered {
     };
 }
 
-futures_ordered!()
+futures_ordered!();

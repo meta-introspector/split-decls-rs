@@ -1,0 +1,7 @@
+macro_rules! THREAD_RNG_RESEED_THRESHOLD {
+    () => {
+        const THREAD_RNG_RESEED_THRESHOLD : u64 = 1024 * 64 ;
+    };
+}
+
+THREAD_RNG_RESEED_THRESHOLD!()

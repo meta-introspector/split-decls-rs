@@ -4,4 +4,4 @@ macro_rules! AggregateError {
     };
 }
 
-AggregateError!()
+AggregateError!();

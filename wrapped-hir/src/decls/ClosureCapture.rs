@@ -4,4 +4,4 @@ macro_rules! ClosureCapture {
     };
 }
 
-ClosureCapture!()
+ClosureCapture!();

@@ -4,4 +4,4 @@ macro_rules! get_mask_u64 {
     };
 }
 
-get_mask_u64!()
+get_mask_u64!();

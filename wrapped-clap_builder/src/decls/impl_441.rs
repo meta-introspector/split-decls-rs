@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        RawOccurrences!();
-        Occurrences!();
-        MatchesError!();
-        OccurrenceValues!();
-        RawOccurrenceValues!();
-        ArgMatches!();
         ValuesRef!();
-        RawValues!();
+        RawOccurrenceValues!();
         Values!();
-        Result!();
+        RawValues!();
         OccurrenceValuesRef!();
+        Occurrences!();
+        RawOccurrences!();
         OccurrencesRef!();
+        ArgMatches!();
+        MatchesError!();
+        Result!();
+        OccurrenceValues!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_441 {
     };
 }
 
-impl_441!()
+impl_441!();

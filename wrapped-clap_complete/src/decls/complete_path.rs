@@ -11,4 +11,4 @@ macro_rules! complete_path {
     };
 }
 
-complete_path!()
+complete_path!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DecompressError!();
-        FlushDecompress!();
-        Decompress!();
         Status!();
+        DecompressError!();
+        Decompress!();
+        FlushDecompress!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_90 {
     };
 }
 
-impl_90!()
+impl_90!();

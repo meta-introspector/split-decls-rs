@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MappedSequence!();
-        ArrayLength!();
-        GenericArray!();
         IntrusiveArrayConsumer!();
         MappedGenericSequence!();
+        ArrayLength!();
+        GenericArray!();
+        MappedSequence!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! GenericSequence {
     };
 }
 
-GenericSequence!()
+GenericSequence!();

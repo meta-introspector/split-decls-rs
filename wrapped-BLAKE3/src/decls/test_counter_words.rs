@@ -4,4 +4,4 @@ macro_rules! test_counter_words {
     };
 }
 
-test_counter_words!()
+test_counter_words!();

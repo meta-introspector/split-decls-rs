@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericDefId!();
         AssocItemId!();
+        GenericDefId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_712 {
     };
 }
 
-impl_712!()
+impl_712!();

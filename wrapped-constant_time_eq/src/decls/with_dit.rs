@@ -4,4 +4,4 @@ macro_rules! with_dit {
     };
 }
 
-with_dit!()
+with_dit!();

@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         Parse!();
         ParseContext!();
+        SubstitutionTable!();
+        Encoding!();
         Result!();
+        Name!();
         BareFunctionType!();
         SpecialName!();
-        Encoding!();
-        SubstitutionTable!();
-        Name!();
         IndexStr!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_69 {
     };
 }
 
-impl_69!()
+impl_69!();

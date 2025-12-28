@@ -4,4 +4,4 @@ macro_rules! delegate_signed {
     };
 }
 
-delegate_signed!()
+delegate_signed!();

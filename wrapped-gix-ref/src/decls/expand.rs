@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Namespace!();
         Error!();
         PartialNameRef!();
-        Namespace!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! expand {
     };
 }
 
-expand!()
+expand!();

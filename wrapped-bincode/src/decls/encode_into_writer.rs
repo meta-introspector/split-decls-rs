@@ -15,4 +15,4 @@ macro_rules! encode_into_writer {
     };
 }
 
-encode_into_writer!()
+encode_into_writer!();

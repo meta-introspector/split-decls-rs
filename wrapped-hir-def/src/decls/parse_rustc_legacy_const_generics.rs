@@ -11,4 +11,4 @@ macro_rules! parse_rustc_legacy_const_generics {
     };
 }
 
-parse_rustc_legacy_const_generics!()
+parse_rustc_legacy_const_generics!();

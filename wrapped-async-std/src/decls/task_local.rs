@@ -4,4 +4,4 @@ macro_rules! task_local {
     };
 }
 
-task_local!()
+task_local!();

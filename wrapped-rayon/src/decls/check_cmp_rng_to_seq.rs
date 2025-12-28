@@ -1,0 +1,7 @@
+macro_rules! check_cmp_rng_to_seq {
+    () => {
+        # [test] fn check_cmp_rng_to_seq () { let mut rng = seeded_rng () ; let rng = & mut rng ; let a : Vec < i32 > = rng . sample_iter (& StandardUniform) . take (1024) . collect () ; let b : Vec < i32 > = rng . sample_iter (& StandardUniform) . take (1024) . collect () ; for i in 0 .. a . len () { let par_result = a [i ..] . par_iter () . cmp (b [i ..] . par_iter ()) ; let seq_result = a [i ..] . iter () . cmp (b [i ..] . iter ()) ; assert_eq ! (par_result , seq_result) ; } }
+    };
+}
+
+check_cmp_rng_to_seq!()

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DateTime!();
-        Utc!();
         Date!();
+        Utc!();
+        DateTime!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_665 {
     };
 }
 
-impl_665!()
+impl_665!();

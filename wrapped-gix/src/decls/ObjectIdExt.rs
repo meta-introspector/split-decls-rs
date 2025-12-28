@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Id!();
-        Sealed!();
         AncestorsIter!();
         Repository!();
+        Id!();
+        Sealed!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ObjectIdExt {
     };
 }
 
-ObjectIdExt!()
+ObjectIdExt!();

@@ -4,4 +4,4 @@ macro_rules! decode_signed {
     };
 }
 
-decode_signed!()
+decode_signed!();

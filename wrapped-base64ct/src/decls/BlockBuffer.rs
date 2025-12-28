@@ -4,4 +4,4 @@ macro_rules! BlockBuffer {
     };
 }
 
-BlockBuffer!()
+BlockBuffer!();

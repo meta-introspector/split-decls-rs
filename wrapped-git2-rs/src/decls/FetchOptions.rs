@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ProxyOptions!();
         RemoteRedirect!();
-        FetchPrune!();
+        ProxyOptions!();
         RemoteCallbacks!();
+        FetchPrune!();
         AutotagOption!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! FetchOptions {
     };
 }
 
-FetchOptions!()
+FetchOptions!();

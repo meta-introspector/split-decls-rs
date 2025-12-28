@@ -11,4 +11,4 @@ macro_rules! buf_try_get_impl {
     };
 }
 
-buf_try_get_impl!()
+buf_try_get_impl!();

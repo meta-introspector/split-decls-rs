@@ -4,4 +4,4 @@ macro_rules! BindingAnnotation {
     };
 }
 
-BindingAnnotation!()
+BindingAnnotation!();

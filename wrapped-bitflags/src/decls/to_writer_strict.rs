@@ -11,4 +11,4 @@ macro_rules! to_writer_strict {
     };
 }
 
-to_writer_strict!()
+to_writer_strict!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Visitor!();
         Object!();
         Subscription!();
-        Field!();
-        Visitor!();
-        MetaType!();
         VisitorContext!();
+        MetaType!();
+        Field!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! visit_selection {
     };
 }
 
-visit_selection!()
+visit_selection!();

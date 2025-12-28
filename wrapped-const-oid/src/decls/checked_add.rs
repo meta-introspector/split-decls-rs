@@ -11,4 +11,4 @@ macro_rules! checked_add {
     };
 }
 
-checked_add!()
+checked_add!();

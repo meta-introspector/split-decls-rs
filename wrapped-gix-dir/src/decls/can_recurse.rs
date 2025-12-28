@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Delegate!();
         ForDeletionMode!();
         EntryRef!();
-        Delegate!();
         Outcome!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! can_recurse {
     };
 }
 
-can_recurse!()
+can_recurse!();

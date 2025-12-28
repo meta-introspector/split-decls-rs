@@ -4,4 +4,4 @@ macro_rules! portable {
     };
 }
 
-portable!()
+portable!();

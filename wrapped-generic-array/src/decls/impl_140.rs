@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GenericArray!();
         Unflatten!();
         ArrayLength!();
+        GenericArray!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

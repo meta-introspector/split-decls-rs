@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Anchored!();
-        StartKind!();
         MatchError!();
+        StartKind!();
+        Anchored!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! enforce_anchored_consistency {
     };
 }
 
-enforce_anchored_consistency!()
+enforce_anchored_consistency!();

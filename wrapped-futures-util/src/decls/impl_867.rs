@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ReadyToRunQueue!();
-        Dequeue!();
         Empty!();
+        Dequeue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_867 {
     };
 }
 
-impl_867!()
+impl_867!();

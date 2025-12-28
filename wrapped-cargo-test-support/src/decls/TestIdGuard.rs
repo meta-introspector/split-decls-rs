@@ -4,4 +4,4 @@ macro_rules! TestIdGuard {
     };
 }
 
-TestIdGuard!()
+TestIdGuard!();

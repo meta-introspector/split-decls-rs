@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        FrameDescriptionEntry!();
         UnwindSection!();
         BaseAddresses!();
-        Format!();
         Section!();
+        Format!();
         Reader!();
-        FrameDescriptionEntry!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! PartialFrameDescriptionEntry {
     };
 }
 
-PartialFrameDescriptionEntry!()
+PartialFrameDescriptionEntry!();

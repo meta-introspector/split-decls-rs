@@ -4,4 +4,4 @@ macro_rules! new_signing_test {
     };
 }
 
-new_signing_test!()
+new_signing_test!();

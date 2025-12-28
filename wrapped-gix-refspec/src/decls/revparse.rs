@@ -4,4 +4,4 @@ macro_rules! revparse {
     };
 }
 
-revparse!()
+revparse!();

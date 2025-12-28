@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HANDLE!();
         MODULEENTRY32W!();
+        HANDLE!();
         BOOL!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_85 {
     };
 }
 
-macro_85!()
+macro_85!();

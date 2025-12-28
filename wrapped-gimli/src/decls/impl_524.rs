@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Piece!();
-        EvaluationResult!();
-        Operation!();
-        EvaluationState!();
-        Expression!();
         EvaluationStorage!();
-        Error!();
-        Register!();
-        ValueType!();
-        OperationEvaluationResult!();
-        EvaluationWaiting!();
-        Evaluation!();
+        Piece!();
         Location!();
         Value!();
-        Encoding!();
+        Evaluation!();
+        EvaluationWaiting!();
+        Operation!();
+        Error!();
         Address!();
+        ValueType!();
+        Result!();
+        Expression!();
         Reader!();
+        EvaluationResult!();
+        OperationEvaluationResult!();
+        Register!();
+        Encoding!();
+        EvaluationState!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_524 {
     };
 }
 
-impl_524!()
+impl_524!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        LocalId!();
-        Place!();
         BasicBlock!();
+        MirBody!();
         OperandKind!();
         Operand!();
-        StatementKind!();
-        Rvalue!();
         TerminatorKind!();
         ProjectionStore!();
-        MirBody!();
+        StatementKind!();
+        Place!();
+        Rvalue!();
+        LocalId!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_902 {
     };
 }
 
-impl_902!()
+impl_902!();

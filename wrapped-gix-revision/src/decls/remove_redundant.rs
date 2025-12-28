@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        GenThenTime!();
         Flags!();
         Error!();
-        GenThenTime!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! remove_redundant {
     };
 }
 
-remove_redundant!()
+remove_redundant!();

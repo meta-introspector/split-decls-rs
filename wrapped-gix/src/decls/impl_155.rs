@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Blob!();
-        ObjectDetached!();
-        Kind!();
         Repository!();
+        Blob!();
+        Kind!();
+        ObjectDetached!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

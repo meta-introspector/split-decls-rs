@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        LifetimeElisionKind!();
         EarlyBinder!();
-        HirDatabase!();
         Binder!();
         TyLoweringContext!();
-        LifetimeElisionKind!();
+        HirDatabase!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! associated_ty_item_bounds {
     };
 }
 
-associated_ty_item_bounds!()
+associated_ty_item_bounds!();

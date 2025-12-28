@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
         Offset!();
+        FixedOffset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_538 {
     };
 }
 
-impl_538!()
+impl_538!();

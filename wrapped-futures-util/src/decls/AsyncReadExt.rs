@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        WriteHalf!();
-        ReadToEnd!();
-        Compat!();
-        ReadToString!();
+        ReadHalf!();
         ReadExact!();
         Read!();
-        ReadHalf!();
-        Cursor!();
+        ReadToString!();
+        ReadToEnd!();
         ReadVectored!();
+        WriteHalf!();
+        Cursor!();
+        Compat!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! AsyncReadExt {
     };
 }
 
-AsyncReadExt!()
+AsyncReadExt!();

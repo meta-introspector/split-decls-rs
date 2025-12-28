@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FluentNumber!();
         FluentType!();
+        FluentNumber!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FluentValue {
     };
 }
 
-FluentValue!()
+FluentValue!();

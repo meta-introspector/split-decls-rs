@@ -4,4 +4,4 @@ macro_rules! fiat_25519_scalar_mulx_u32 {
     };
 }
 
-fiat_25519_scalar_mulx_u32!()
+fiat_25519_scalar_mulx_u32!();

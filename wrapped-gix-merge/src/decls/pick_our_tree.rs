@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TreeNodes!();
         ConflictMapping!();
+        TreeNodes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! pick_our_tree {
     };
 }
 
-pick_our_tree!()
+pick_our_tree!();

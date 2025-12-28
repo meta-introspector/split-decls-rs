@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Attributes!();
-        Config!();
         Permissions!();
+        Attributes!();
         Environment!();
+        Config!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_512 {
     };
 }
 
-impl_512!()
+impl_512!();

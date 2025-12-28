@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         Credential!();
         Boolean!();
+        UrlParameter!();
+        Any!();
         Program!();
         Tree!();
-        Any!();
-        UrlParameter!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_622 {
     };
 }
 
-impl_622!()
+impl_622!();

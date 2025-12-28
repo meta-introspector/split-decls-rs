@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Arc!();
         ObjectIdentifier!();
+        Arc!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Arcs {
     };
 }
 
-Arcs!()
+Arcs!();

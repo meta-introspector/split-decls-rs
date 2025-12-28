@@ -13,4 +13,4 @@ macro_rules! collect_parents {
     };
 }
 
-collect_parents!()
+collect_parents!();

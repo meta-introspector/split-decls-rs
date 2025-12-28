@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         EhFrameHdr!();
-        Reader!();
-        Result!();
-        BaseAddresses!();
         Error!();
+        Result!();
+        Reader!();
+        BaseAddresses!();
         PointerEncodingParameters!();
         ParsedEhFrameHdr!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

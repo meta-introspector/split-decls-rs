@@ -4,4 +4,4 @@ macro_rules! hex_decode_fallback {
     };
 }
 
-hex_decode_fallback!()
+hex_decode_fallback!();

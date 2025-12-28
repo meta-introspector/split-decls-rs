@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FromFn!();
         FallibleIterator!();
+        FromFn!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! from_fn {
     };
 }
 
-from_fn!()
+from_fn!();

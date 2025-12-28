@@ -4,4 +4,4 @@ macro_rules! scalar_leafs {
     };
 }
 
-scalar_leafs!()
+scalar_leafs!();

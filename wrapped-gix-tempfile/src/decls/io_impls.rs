@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Handle!();
         Writable!();
+        Handle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! io_impls {
     };
 }
 
-io_impls!()
+io_impls!();

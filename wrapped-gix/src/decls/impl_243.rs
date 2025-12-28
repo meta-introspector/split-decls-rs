@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Commit!();
         ObjectDetached!();
+        Commit!();
         Kind!();
         Tree!();
         Blob!();
@@ -16,4 +16,4 @@ macro_rules! impl_243 {
     };
 }
 
-impl_243!()
+impl_243!();

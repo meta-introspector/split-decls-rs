@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Display!();
-        Format!();
         ByteSize!();
+        Format!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

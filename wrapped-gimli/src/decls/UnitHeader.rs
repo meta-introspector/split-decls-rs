@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DebugAbbrevOffset!();
-        UnitType!();
-        Encoding!();
-        SectionId!();
-        Reader!();
         ReaderOffset!();
+        SectionId!();
+        DebugAbbrevOffset!();
+        Encoding!();
+        UnitType!();
+        Reader!();
         UnitSectionOffset!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! UnitHeader {
     };
 }
 
-UnitHeader!()
+UnitHeader!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Configuration!();
         BigEndian!();
         LittleEndian!();
-        Configuration!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Endianness {
     };
 }
 
-Endianness!()
+Endianness!();

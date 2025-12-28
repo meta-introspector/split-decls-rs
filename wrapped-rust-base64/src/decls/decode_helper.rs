@@ -14,4 +14,4 @@ macro_rules! decode_helper {
     };
 }
 
-decode_helper!()
+decode_helper!();

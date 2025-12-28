@@ -4,4 +4,4 @@ macro_rules! ApplyLeniencyDefaultValue {
     };
 }
 
-ApplyLeniencyDefaultValue!()
+ApplyLeniencyDefaultValue!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Object!();
+        Commit!();
         Error!();
         Kind!();
         Id!();
-        Object!();
-        Commit!();
         Tag!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UrlParameter!();
-        Any!();
-        Program!();
         Boolean!();
+        UrlParameter!();
+        Program!();
+        Any!();
         Credential!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_624 {
     };
 }
 
-impl_624!()
+impl_624!();

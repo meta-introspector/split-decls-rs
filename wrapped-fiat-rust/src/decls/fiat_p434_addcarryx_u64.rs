@@ -4,4 +4,4 @@ macro_rules! fiat_p434_addcarryx_u64 {
     };
 }
 
-fiat_p434_addcarryx_u64!()
+fiat_p434_addcarryx_u64!();

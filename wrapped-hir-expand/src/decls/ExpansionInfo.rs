@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         SpanMap!();
-        InMacroFile!();
         ExpansionSpanMap!();
-        MacroCallLoc!();
         InFile!();
+        MacroCallLoc!();
+        InMacroFile!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ExpansionInfo {
     };
 }
 
-ExpansionInfo!()
+ExpansionInfo!();

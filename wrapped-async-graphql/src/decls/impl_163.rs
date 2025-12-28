@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Alien!();
         Pet!();
         Dog!();
-        Object!();
-        Cat!();
-        CatOrDog!();
-        Being!();
-        Query!();
-        OneofArg!();
-        DogOrHuman!();
-        ComplicatedArgs!();
-        Intelligent!();
-        HumanOrAlien!();
-        ID!();
         Human!();
+        Alien!();
+        Object!();
+        Intelligent!();
+        Query!();
+        CatOrDog!();
+        OneofArg!();
+        Being!();
+        HumanOrAlien!();
+        DogOrHuman!();
+        Cat!();
+        ID!();
+        ComplicatedArgs!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_163 {
     };
 }
 
-impl_163!()
+impl_163!();

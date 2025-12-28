@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Path!();
-        State!();
-        Error!();
-        Commit!();
+        Link!();
         Read!();
+        Error!();
         Pipeline!();
-        Blob!();
-        Kind!();
         Buffer!();
         Note!();
-        Link!();
+        Path!();
+        State!();
+        Blob!();
+        Commit!();
+        Kind!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_903 {
     };
 }
 
-impl_903!()
+impl_903!();

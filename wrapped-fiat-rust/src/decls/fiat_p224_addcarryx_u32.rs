@@ -4,4 +4,4 @@ macro_rules! fiat_p224_addcarryx_u32 {
     };
 }
 
-fiat_p224_addcarryx_u32!()
+fiat_p224_addcarryx_u32!();

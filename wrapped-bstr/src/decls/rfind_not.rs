@@ -4,4 +4,4 @@ macro_rules! rfind_not {
     };
 }
 
-rfind_not!()
+rfind_not!();

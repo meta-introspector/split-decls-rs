@@ -11,4 +11,4 @@ macro_rules! Utf16BmpHandle {
     };
 }
 
-Utf16BmpHandle!()
+Utf16BmpHandle!();

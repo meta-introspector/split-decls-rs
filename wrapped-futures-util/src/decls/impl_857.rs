@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Task!();
         Send!();
+        Task!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_857 {
     };
 }
 
-impl_857!()
+impl_857!();

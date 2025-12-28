@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Zsh!();
         EnvCompleter!();
+        Zsh!();
     };
 }
 
@@ -29,4 +29,4 @@ compdef _clap_dynamic_completer_NAME BIN"# . replace ("NAME" , & escaped_name) .
     };
 }
 
-impl_139!()
+impl_139!();

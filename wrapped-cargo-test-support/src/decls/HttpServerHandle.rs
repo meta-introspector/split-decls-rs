@@ -4,4 +4,4 @@ macro_rules! HttpServerHandle {
     };
 }
 
-HttpServerHandle!()
+HttpServerHandle!();

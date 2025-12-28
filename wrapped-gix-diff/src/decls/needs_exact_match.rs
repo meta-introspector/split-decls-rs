@@ -4,4 +4,4 @@ macro_rules! needs_exact_match {
     };
 }
 
-needs_exact_match!()
+needs_exact_match!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnboundedSender!();
         UnboundedReceiver!();
-        UnboundedInner!();
+        UnboundedSender!();
         UnboundedSenderInner!();
+        UnboundedInner!();
         Queue!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! unbounded {
     };
 }
 
-unbounded!()
+unbounded!();

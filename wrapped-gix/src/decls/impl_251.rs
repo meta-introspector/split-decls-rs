@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PathspecDetached!();
         Note!();
+        PathspecDetached!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

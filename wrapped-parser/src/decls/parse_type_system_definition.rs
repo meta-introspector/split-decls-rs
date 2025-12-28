@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
         Type!();
-        Rule!();
         PositionCalculator!();
-        Directive!();
         TypeSystemDefinition!();
+        Rule!();
+        Result!();
+        Directive!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_type_system_definition {
     };
 }
 
-parse_type_system_definition!()
+parse_type_system_definition!();

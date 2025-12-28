@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Insert!();
         VacantEntry!();
+        Insert!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

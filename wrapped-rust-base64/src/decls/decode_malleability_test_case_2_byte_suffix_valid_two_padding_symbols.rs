@@ -11,4 +11,4 @@ macro_rules! decode_malleability_test_case_2_byte_suffix_valid_two_padding_symbo
     };
 }
 
-decode_malleability_test_case_2_byte_suffix_valid_two_padding_symbols!()
+decode_malleability_test_case_2_byte_suffix_valid_two_padding_symbols!();

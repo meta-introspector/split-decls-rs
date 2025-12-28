@@ -11,4 +11,4 @@ macro_rules! criterion_main {
     };
 }
 
-criterion_main!()
+criterion_main!();

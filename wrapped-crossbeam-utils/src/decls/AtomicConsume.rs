@@ -4,4 +4,4 @@ macro_rules! AtomicConsume {
     };
 }
 
-AtomicConsume!()
+AtomicConsume!();

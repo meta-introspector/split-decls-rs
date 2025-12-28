@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InvertMod!();
         InvMod!();
+        InvertMod!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_290 {
     };
 }
 
-impl_290!()
+impl_290!();

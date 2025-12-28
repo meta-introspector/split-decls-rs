@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Allocator!();
-        Vec!();
         InPlaceSeed!();
+        Vec!();
+        Allocator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

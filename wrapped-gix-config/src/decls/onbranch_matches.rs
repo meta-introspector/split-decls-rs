@@ -4,4 +4,4 @@ macro_rules! onbranch_matches {
     };
 }
 
-onbranch_matches!()
+onbranch_matches!();

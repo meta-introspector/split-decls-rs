@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Symbol!();
+        LintDiagnosticDerive!();
+    };
+}
+
+macro_rules! lint_diagnostic_derive {
+    () => {
+        deps!();
+        # [doc = " Implements `#[derive(LintDiagnostic)]`, which allows for lints to be specified as a struct,"] # [doc = " independent from the actual lint emitting code."] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " #[derive(LintDiagnostic)]"] # [doc = " #[diag(lint_atomic_ordering_invalid_fail_success)]"] # [doc = " pub struct AtomicOrderingInvalidLint {"] # [doc = "     method: Symbol,"] # [doc = "     success_ordering: Symbol,"] # [doc = "     fail_ordering: Symbol,"] # [doc = "     #[label(fail_label)]"] # [doc = "     fail_order_arg_span: Span,"] # [doc = "     #[label(success_label)]"] # [doc = "     #[suggestion("] # [doc = "         code = \"std::sync::atomic::Ordering::{success_suggestion}\","] # [doc = "         applicability = \"maybe-incorrect\""] # [doc = "     )]"] # [doc = "     success_order_arg_span: Span,"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " ```fluent"] # [doc = " lint_atomic_ordering_invalid_fail_success = `{$method}`'s success ordering must be at least as strong as its failure ordering"] # [doc = "     .fail_label = `{$fail_ordering}` failure ordering"] # [doc = "     .success_label = `{$success_ordering}` success ordering"] # [doc = "     .suggestion = consider using `{$success_suggestion}` success ordering instead"] # [doc = " ```"] # [doc = ""] # [doc = " Then, later, to emit the error:"] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " cx.emit_span_lint(INVALID_ATOMIC_ORDERING, fail_order_arg_span, AtomicOrderingInvalidLint {"] # [doc = "     method,"] # [doc = "     success_ordering,"] # [doc = "     fail_ordering,"] # [doc = "     fail_order_arg_span,"] # [doc = "     success_order_arg_span,"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [doc = " See rustc dev guide for more examples on using the `#[derive(LintDiagnostic)]`:"] # [doc = " <https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html#reference>"] pub (super) fn lint_diagnostic_derive (s : Structure < '_ >) -> TokenStream { LintDiagnosticDerive :: new (s) . into_tokens () }
+    };
+}
+
+lint_diagnostic_derive!()

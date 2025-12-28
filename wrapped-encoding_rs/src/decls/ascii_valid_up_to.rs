@@ -4,4 +4,4 @@ macro_rules! ascii_valid_up_to {
     };
 }
 
-ascii_valid_up_to!()
+ascii_valid_up_to!();

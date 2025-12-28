@@ -4,4 +4,4 @@ macro_rules! flatten_unordered {
     };
 }
 
-flatten_unordered!()
+flatten_unordered!();

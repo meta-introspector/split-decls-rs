@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AbortRegistration!();
         AbortHandle!();
+        AbortRegistration!();
         AbortInner!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_1338 {
     };
 }
 
-impl_1338!()
+impl_1338!();

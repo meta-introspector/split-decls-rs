@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Error!();
+        Delegate!();
         State!();
         Action!();
-        Outcome!();
-        Delegate!();
-        Context!();
-        Kind!();
+        Error!();
         Status!();
-        ForDeletionMode!();
+        Context!();
         Options!();
+        Outcome!();
+        ForDeletionMode!();
+        Kind!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! recursive {
     };
 }
 
-recursive!()
+recursive!();

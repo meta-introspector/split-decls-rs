@@ -4,4 +4,4 @@ macro_rules! CaptureKind {
     };
 }
 
-CaptureKind!()
+CaptureKind!();

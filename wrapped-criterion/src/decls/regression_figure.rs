@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ValueFormatter!();
         Slope!();
-        MeasurementData!();
+        ValueFormatter!();
         Sample!();
+        MeasurementData!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! regression_figure {
     };
 }
 
-regression_figure!()
+regression_figure!();

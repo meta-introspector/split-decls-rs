@@ -1,7 +1,7 @@
 macro_rules! generated {
     () => {
-        # [rustfmt :: skip] mod generated ;
+        # [allow (clippy :: redundant_static_lifetimes)] # [rustfmt :: skip] # [allow (dead_code)] mod generated ;
     };
 }
 
-generated!()
+generated!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IsWithinUsizeBound!();
         ArrayLength!();
+        IsWithinUsizeBound!();
         GenericArrayImplEven!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

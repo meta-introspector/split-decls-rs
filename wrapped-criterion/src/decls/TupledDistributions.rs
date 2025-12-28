@@ -12,4 +12,4 @@ macro_rules! TupledDistributions {
     };
 }
 
-TupledDistributions!()
+TupledDistributions!();

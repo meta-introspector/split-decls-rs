@@ -12,4 +12,4 @@ macro_rules! decode_pad_mode_requires_canonical_accepts_canonical {
     };
 }
 
-decode_pad_mode_requires_canonical_accepts_canonical!()
+decode_pad_mode_requires_canonical_accepts_canonical!();

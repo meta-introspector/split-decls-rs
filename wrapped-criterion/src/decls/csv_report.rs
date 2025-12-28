@@ -4,4 +4,4 @@ macro_rules! csv_report {
     };
 }
 
-csv_report!()
+csv_report!();

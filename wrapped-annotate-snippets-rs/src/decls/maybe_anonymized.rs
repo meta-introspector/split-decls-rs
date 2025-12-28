@@ -11,4 +11,4 @@ macro_rules! maybe_anonymized {
     };
 }
 
-maybe_anonymized!()
+maybe_anonymized!();

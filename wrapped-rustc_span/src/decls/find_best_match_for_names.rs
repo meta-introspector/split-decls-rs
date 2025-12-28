@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Symbol!();
+    };
+}
+
+macro_rules! find_best_match_for_names {
+    () => {
+        deps!();
+        # [doc = " Find the best match for multiple words"] # [doc = ""] # [doc = " This function is intended for use when the desired match would never be"] # [doc = " returned due to a substring in `lookup` which is superfluous."] # [doc = ""] # [doc = " For example, when looking for the closest lint name to `clippy:missing_docs`,"] # [doc = " we would find `clippy::erasing_op`, despite `missing_docs` existing and being a better suggestion."] # [doc = " `missing_docs` would have a larger edit distance because it does not contain the `clippy` tool prefix."] # [doc = " In order to find `missing_docs`, this function takes multiple lookup strings, computes the best match"] # [doc = " for each and returns the match which had the lowest edit distance. In our example, `clippy:missing_docs` and"] # [doc = " `missing_docs` would be `lookups`, enabling `missing_docs` to be the best match, as desired."] pub fn find_best_match_for_names (candidates : & [Symbol] , lookups : & [Symbol] , dist : Option < usize > ,) -> Option < Symbol > { lookups . iter () . map (| s | (s , find_best_match_for_name_impl (false , candidates , * s , dist))) . filter_map (| (s , r) | r . map (| r | (s , r))) . min_by (| (s1 , r1) , (s2 , r2) | { let d1 = edit_distance (s1 . as_str () , r1 . as_str () , usize :: MAX) . unwrap () ; let d2 = edit_distance (s2 . as_str () , r2 . as_str () , usize :: MAX) . unwrap () ; d1 . cmp (& d2) }) . map (| (_ , r) | r) }
+    };
+}
+
+find_best_match_for_names!()

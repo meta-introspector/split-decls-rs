@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Oid!();
         IndexTime!();
         Note!();
+        Oid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IndexEntry {
     };
 }
 
-IndexEntry!()
+IndexEntry!();

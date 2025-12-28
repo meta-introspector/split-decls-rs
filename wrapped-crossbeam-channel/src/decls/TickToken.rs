@@ -4,4 +4,4 @@ macro_rules! TickToken {
     };
 }
 
-TickToken!()
+TickToken!();

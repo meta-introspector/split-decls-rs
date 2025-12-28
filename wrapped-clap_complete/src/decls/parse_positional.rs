@@ -12,4 +12,4 @@ macro_rules! parse_positional {
     };
 }
 
-parse_positional!()
+parse_positional!();

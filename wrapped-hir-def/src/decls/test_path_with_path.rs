@@ -16,4 +16,4 @@ fn foo() {
     };
 }
 
-test_path_with_path!()
+test_path_with_path!();

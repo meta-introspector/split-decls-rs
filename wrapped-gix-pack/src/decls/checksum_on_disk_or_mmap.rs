@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Kind!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! checksum_on_disk_or_mmap {
     };
 }
 
-checksum_on_disk_or_mmap!()
+checksum_on_disk_or_mmap!();

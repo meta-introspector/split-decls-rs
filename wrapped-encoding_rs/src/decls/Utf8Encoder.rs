@@ -4,4 +4,4 @@ macro_rules! Utf8Encoder {
     };
 }
 
-Utf8Encoder!()
+Utf8Encoder!();

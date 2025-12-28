@@ -11,4 +11,4 @@ macro_rules! DEFAULT_ENV_CASING {
     };
 }
 
-DEFAULT_ENV_CASING!()
+DEFAULT_ENV_CASING!();

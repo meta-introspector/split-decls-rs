@@ -11,4 +11,4 @@ macro_rules! default_repo_cfg {
     };
 }
 
-default_repo_cfg!()
+default_repo_cfg!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Entry!();
         FluentFunction!();
-        GetEntry!();
         FluentBundle!();
         FluentResource!();
+        Entry!();
+        GetEntry!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

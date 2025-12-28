@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DecodeSliceError!();
         NaiveConfig!();
+        NaiveEstimate!();
         Naive!();
         Engine!();
-        Config!();
         DecodeEstimate!();
-        NaiveEstimate!();
+        Config!();
         DecodeMetadata!();
+        DecodeSliceError!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

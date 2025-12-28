@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Annotation!();
         AnnotationKind!();
         OptionCow!();
+        Annotation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_135 {
     };
 }
 
-impl_135!()
+impl_135!();

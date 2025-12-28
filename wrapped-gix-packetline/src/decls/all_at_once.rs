@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stream!();
         Error!();
         PacketLineRef!();
+        Stream!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! all_at_once {
     };
 }
 
-all_at_once!()
+all_at_once!();

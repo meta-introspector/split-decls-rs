@@ -4,4 +4,4 @@ macro_rules! CountType {
     };
 }
 
-CountType!()
+CountType!();

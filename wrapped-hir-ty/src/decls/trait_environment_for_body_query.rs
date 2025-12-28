@@ -12,4 +12,4 @@ macro_rules! trait_environment_for_body_query {
     };
 }
 
-trait_environment_for_body_query!()
+trait_environment_for_body_query!();

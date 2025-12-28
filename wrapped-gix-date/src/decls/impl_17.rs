@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SecondsSinceUnixEpoch!();
-        Time!();
         OffsetInSeconds!();
+        Time!();
+        SecondsSinceUnixEpoch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

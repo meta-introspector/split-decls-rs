@@ -4,4 +4,4 @@ macro_rules! delegate_sink {
     };
 }
 
-delegate_sink!()
+delegate_sink!();

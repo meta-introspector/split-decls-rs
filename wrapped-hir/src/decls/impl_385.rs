@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ClosureCapture!();
-        Local!();
         CaptureUsages!();
         CaptureKind!();
+        Local!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_385 {
     };
 }
 
-impl_385!()
+impl_385!();

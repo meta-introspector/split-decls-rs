@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Directive!();
-        Positioned!();
-        SelectionSet!();
         TypeCondition!();
+        Directive!();
+        SelectionSet!();
+        Positioned!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FragmentDefinition {
     };
 }
 
-FragmentDefinition!()
+FragmentDefinition!();

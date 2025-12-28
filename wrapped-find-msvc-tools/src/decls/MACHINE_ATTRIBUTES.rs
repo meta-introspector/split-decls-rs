@@ -4,4 +4,4 @@ macro_rules! MACHINE_ATTRIBUTES {
     };
 }
 
-MACHINE_ATTRIBUTES!()
+MACHINE_ATTRIBUTES!();

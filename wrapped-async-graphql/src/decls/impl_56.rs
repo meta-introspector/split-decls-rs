@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ErrorExtensions!();
         ResultExt!();
-        ErrorExtensionValues!();
         Result!();
+        ErrorExtensions!();
+        ErrorExtensionValues!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_56 {
     };
 }
 
-impl_56!()
+impl_56!();

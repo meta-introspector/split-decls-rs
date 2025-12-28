@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Config!();
         ConfigLevel!();
         Cred!();
-        Config!();
         CredentialHelper!();
     };
 }
@@ -55,4 +55,4 @@ echo password=$2
     };
 }
 
-test!()
+test!();

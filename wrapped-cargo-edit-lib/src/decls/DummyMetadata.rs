@@ -4,4 +4,4 @@ macro_rules! DummyMetadata {
     };
 }
 
-DummyMetadata!()
+DummyMetadata!();

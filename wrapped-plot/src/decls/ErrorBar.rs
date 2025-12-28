@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Vertical!();
         Horizontal!();
+        Vertical!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ErrorBar {
     };
 }
 
-ErrorBar!()
+ErrorBar!();

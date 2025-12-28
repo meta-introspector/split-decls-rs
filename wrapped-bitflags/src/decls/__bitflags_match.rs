@@ -4,4 +4,4 @@ macro_rules! __bitflags_match {
     };
 }
 
-__bitflags_match!()
+__bitflags_match!();

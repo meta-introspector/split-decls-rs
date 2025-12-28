@@ -23,4 +23,4 @@ mkdecl! {{
     };
 }
 
-wrap_code_with_rule!()
+wrap_code_with_rule!();

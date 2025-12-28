@@ -4,4 +4,4 @@ macro_rules! ParseErrorKind {
     };
 }
 
-ParseErrorKind!()
+ParseErrorKind!();

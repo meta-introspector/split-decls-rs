@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Task!();
+        Key!();
+        Throughput!();
+        ProgressFormat!();
+        State!();
+    };
+}
+
+macro_rules! draw_progress {
+    () => {
+        deps!();
+        pub fn draw_progress (entries : & [(Key , Task)] , buf : & mut Buffer , bound : Rect , offset : u16 , mut throughput : Option < & mut Throughput > ,) { let title_spacing = 2u16 + 1 ; let max_progress_label_width = entries . iter () . skip (offset as usize) . take (bound . height as usize) . map (| (_ , Task { progress , .. }) | progress) . fold (0 , | state , progress | match progress { progress @ Some (_) => { use std :: io :: Write ; let mut w = GraphemeCountWriter :: default () ; write ! (w , "{}" , ProgressFormat (progress , 0 , None)) . expect ("never fails") ; state . max (w . 0) } None => state , }) ; for (line , (entry_index , (key , Task { progress , name : title , id : _ , } ,) ,) ,) in entries . iter () . enumerate () . skip (offset as usize) . take (bound . height as usize) . enumerate () { let throughput = throughput . as_mut () . and_then (| tp | tp . update_and_get (key , progress . as_ref ())) ; let line_bound = rect :: line_bound (bound , line) ; let progress_text = format ! (" {progress}" , progress = ProgressFormat (progress , if has_child (entries , entry_index) { bound . width . saturating_sub (title_spacing) } else { 0 } , throughput)) ; draw_text_with_ellipsis_nowrap (line_bound , buf , VERTICAL_LINE , None) ; let tree_prefix = level_prefix (entries , entry_index) ; let progress_rect = rect :: offset_x (line_bound , block_width (& tree_prefix)) ; draw_text_with_ellipsis_nowrap (line_bound , buf , tree_prefix , None) ; match progress . as_ref () . map (| p | (p . fraction () , p . state , p . step . load (Ordering :: SeqCst))) { Some ((Some (fraction) , state , _step)) => { let mut progress_text = progress_text ; add_block_eta (state , & mut progress_text) ; let (bound , style) = draw_progress_bar_fn (buf , progress_rect , fraction , | fraction | match state { progress :: State :: Blocked (_ , _) => Color :: Red , progress :: State :: Halted (_ , _) => Color :: LightRed , progress :: State :: Running => { if fraction >= 0.8 { Color :: Green } else { Color :: Yellow } } }) ; let style_fn = move | _t : & str , x : u16 , _y : u16 | { if x < bound . right () { style } else { Style :: default () } } ; draw_text_nowrap_fn (progress_rect , buf , progress_text , style_fn) ; } Some ((None , state , step)) => { let mut progress_text = progress_text ; add_block_eta (state , & mut progress_text) ; draw_text_with_ellipsis_nowrap (progress_rect , buf , progress_text , None) ; let bar_rect = rect :: offset_x (line_bound , max_progress_label_width as u16) ; draw_spinner (buf , bar_rect , step , line , match state { progress :: State :: Blocked (_ , _) => Color :: Red , progress :: State :: Halted (_ , _) => Color :: LightRed , progress :: State :: Running => Color :: White , } ,) ; } None => { let bold = Style :: default () . add_modifier (Modifier :: BOLD) ; draw_text_nowrap_fn (progress_rect , buf , progress_text , | _ , _ , _ | Style :: default ()) ; draw_text_with_ellipsis_nowrap (progress_rect , buf , format ! (" {} " , title) , bold) ; } } } }
+    };
+}
+
+draw_progress!()

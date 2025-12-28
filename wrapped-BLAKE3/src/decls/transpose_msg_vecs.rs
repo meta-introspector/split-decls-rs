@@ -4,4 +4,4 @@ macro_rules! transpose_msg_vecs {
     };
 }
 
-transpose_msg_vecs!()
+transpose_msg_vecs!();

@@ -4,4 +4,4 @@ macro_rules! end_of_index_entry {
     };
 }
 
-end_of_index_entry!()
+end_of_index_entry!();

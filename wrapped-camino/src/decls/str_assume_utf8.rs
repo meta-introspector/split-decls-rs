@@ -4,4 +4,4 @@ macro_rules! str_assume_utf8 {
     };
 }
 
-str_assume_utf8!()
+str_assume_utf8!();

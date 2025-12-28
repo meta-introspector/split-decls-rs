@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        TypeVariableOrigin!();
+        ConstVariableOrigin!();
+        RegionVariableOrigin!();
+    };
+}
+
+macro_rules! SnapshotVarData {
+    () => {
+        deps!();
+        struct SnapshotVarData { region_vars : (Range < RegionVid > , Vec < RegionVariableOrigin >) , type_vars : (Range < TyVid > , Vec < TypeVariableOrigin >) , int_vars : Range < IntVid > , float_vars : Range < FloatVid > , const_vars : (Range < ConstVid > , Vec < ConstVariableOrigin >) , }
+    };
+}
+
+SnapshotVarData!()

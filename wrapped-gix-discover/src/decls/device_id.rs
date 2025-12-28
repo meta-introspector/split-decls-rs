@@ -4,4 +4,4 @@ macro_rules! device_id {
     };
 }
 
-device_id!()
+device_id!();

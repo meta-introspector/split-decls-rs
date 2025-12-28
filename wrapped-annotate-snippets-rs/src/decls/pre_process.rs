@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        PreProcessedElement!();
         Padding!();
-        SourceMap!();
         Origin!();
+        SourceMap!();
+        Group!();
         PreProcessedGroup!();
         DisplaySuggestion!();
         Element!();
         Message!();
-        PreProcessedElement!();
-        Group!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! pre_process {
     };
 }
 
-pre_process!()
+pre_process!();

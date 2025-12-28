@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Item!();
         Note!();
+        Item!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ToComponents {
     };
 }
 
-ToComponents!()
+ToComponents!();

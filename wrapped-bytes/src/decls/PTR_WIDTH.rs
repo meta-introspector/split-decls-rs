@@ -4,4 +4,4 @@ macro_rules! PTR_WIDTH {
     };
 }
 
-PTR_WIDTH!()
+PTR_WIDTH!();

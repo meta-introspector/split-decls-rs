@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        NonZero!();
         MulMod!();
         SquareRoot!();
         Limb!();
-        Monty!();
-        RemLimb!();
-        SquareMod!();
-        NegMod!();
         BitOps!();
-        AddMod!();
-        DivRemLimb!();
+        RemLimb!();
         SubMod!();
+        Monty!();
+        NonZero!();
+        NegMod!();
+        DivRemLimb!();
+        AddMod!();
         Integer!();
+        SquareMod!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! Unsigned {
     };
 }
 
-Unsigned!()
+Unsigned!();

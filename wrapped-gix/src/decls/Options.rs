@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Sorting!();
+        Clone!();
         Note!();
         Default!();
-        Clone!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Options {
     };
 }
 
-Options!()
+Options!();

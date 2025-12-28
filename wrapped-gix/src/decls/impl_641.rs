@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Tree!();
-        Boolean!();
-        Extensions!();
         ObjectFormat!();
+        Extensions!();
+        Boolean!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_641 {
     };
 }
 
-impl_641!()
+impl_641!();

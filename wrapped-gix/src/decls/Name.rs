@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Note!();
         Url!();
         Clone!();
+        Note!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Name {
     };
 }
 
-Name!()
+Name!();

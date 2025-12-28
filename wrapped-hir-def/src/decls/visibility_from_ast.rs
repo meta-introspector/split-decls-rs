@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        HasModule!();
+        HasResolver!();
         RawVisibility!();
         Visibility!();
-        HasResolver!();
         DefDatabase!();
-        HasModule!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! visibility_from_ast {
     };
 }
 
-visibility_from_ast!()
+visibility_from_ast!();

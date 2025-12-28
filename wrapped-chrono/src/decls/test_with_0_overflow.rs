@@ -11,4 +11,4 @@ macro_rules! test_with_0_overflow {
     };
 }
 
-test_with_0_overflow!()
+test_with_0_overflow!();

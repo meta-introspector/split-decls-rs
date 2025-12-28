@@ -4,4 +4,4 @@ macro_rules! contains_self_type_expr {
     };
 }
 
-contains_self_type_expr!()
+contains_self_type_expr!();

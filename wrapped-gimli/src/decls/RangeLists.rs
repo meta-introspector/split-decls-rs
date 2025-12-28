@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugRngLists!();
         DebugRanges!();
+        DebugRngLists!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RangeLists {
     };
 }
 
-RangeLists!()
+RangeLists!();

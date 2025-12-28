@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Context!();
-        Result!();
         Error!();
         Action!();
+        Context!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! function {
     };
 }
 
-function!()
+function!();

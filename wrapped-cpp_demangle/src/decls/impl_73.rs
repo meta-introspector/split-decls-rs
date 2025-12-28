@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IndexStr!();
         Parse!();
-        CloneSuffix!();
-        SubstitutionTable!();
-        ParseContext!();
         Result!();
+        ParseContext!();
+        SubstitutionTable!();
+        IndexStr!();
+        CloneSuffix!();
         CloneTypeIdentifier!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

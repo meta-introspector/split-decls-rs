@@ -11,4 +11,4 @@ macro_rules! derive_union {
     };
 }
 
-derive_union!()
+derive_union!();

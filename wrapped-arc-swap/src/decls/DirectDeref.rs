@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Guard!();
-        Strategy!();
         RefCnt!();
+        Strategy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DirectDeref {
     };
 }
 
-DirectDeref!()
+DirectDeref!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        BindingId!();
         Label!();
-        AdtId!();
         GenericParamId!();
-        ModuleDefId!();
+        AdtId!();
         LabelId!();
+        ModuleDefId!();
+        BindingId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ScopeDef {
     };
 }
 
-ScopeDef!()
+ScopeDef!();

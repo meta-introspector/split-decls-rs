@@ -11,4 +11,4 @@ macro_rules! unsize_box {
     };
 }
 
-unsize_box!()
+unsize_box!();

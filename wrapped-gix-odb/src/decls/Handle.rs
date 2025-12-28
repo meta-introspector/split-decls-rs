@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Store!();
         Cache!();
+        Store!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Handle {
     };
 }
 
-Handle!()
+Handle!();

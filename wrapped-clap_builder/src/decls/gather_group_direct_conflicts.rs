@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArgGroup!();
         Id!();
+        ArgGroup!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! gather_group_direct_conflicts {
     };
 }
 
-gather_group_direct_conflicts!()
+gather_group_direct_conflicts!();

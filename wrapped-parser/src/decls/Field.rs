@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Directive!();
         SelectionSet!();
         Positioned!();
-        Directive!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Field {
     };
 }
 
-Field!()
+Field!();

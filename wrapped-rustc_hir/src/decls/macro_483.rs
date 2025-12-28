@@ -1,0 +1,7 @@
+macro_rules! macro_483 {
+    () => {
+        weak_lang_items ! { PanicImpl , rust_begin_unwind ; EhPersonality , rust_eh_personality ; EhCatchTypeinfo , rust_eh_catch_typeinfo ; }
+    };
+}
+
+macro_483!()

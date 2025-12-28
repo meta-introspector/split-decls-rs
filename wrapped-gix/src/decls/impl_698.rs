@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Section!();
         Key!();
         Pack!();
+        Section!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_698 {
     };
 }
 
-impl_698!()
+impl_698!();

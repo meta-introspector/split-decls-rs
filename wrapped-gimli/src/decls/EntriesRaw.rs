@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         EntriesCursor!();
-        Result!();
-        Abbreviations!();
         Reader!();
         UnitHeader!();
+        Abbreviations!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! EntriesRaw {
     };
 }
 
-EntriesRaw!()
+EntriesRaw!();

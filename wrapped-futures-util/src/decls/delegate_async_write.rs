@@ -4,4 +4,4 @@ macro_rules! delegate_async_write {
     };
 }
 
-delegate_async_write!()
+delegate_async_write!();

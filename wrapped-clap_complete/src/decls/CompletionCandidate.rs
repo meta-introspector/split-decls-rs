@@ -4,4 +4,4 @@ macro_rules! CompletionCandidate {
     };
 }
 
-CompletionCandidate!()
+CompletionCandidate!();

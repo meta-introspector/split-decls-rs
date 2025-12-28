@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Expression!();
         Range!();
         Reader!();
-        Expression!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LocationListEntry {
     };
 }
 
-LocationListEntry!()
+LocationListEntry!();

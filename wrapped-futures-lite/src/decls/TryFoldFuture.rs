@@ -4,4 +4,4 @@ macro_rules! TryFoldFuture {
     };
 }
 
-TryFoldFuture!()
+TryFoldFuture!();

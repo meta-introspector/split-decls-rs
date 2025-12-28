@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Tree!();
+        Kind!();
         Offset!();
         Header!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

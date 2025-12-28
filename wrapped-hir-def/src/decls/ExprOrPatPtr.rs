@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pat!();
         Expr!();
+        Pat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ExprOrPatPtr {
     };
 }
 
-ExprOrPatPtr!()
+ExprOrPatPtr!();

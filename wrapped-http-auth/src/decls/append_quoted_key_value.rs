@@ -4,4 +4,4 @@ macro_rules! append_quoted_key_value {
     };
 }
 
-append_quoted_key_value!()
+append_quoted_key_value!();

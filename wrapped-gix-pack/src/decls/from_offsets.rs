@@ -4,4 +4,4 @@ macro_rules! from_offsets {
     };
 }
 
-from_offsets!()
+from_offsets!();

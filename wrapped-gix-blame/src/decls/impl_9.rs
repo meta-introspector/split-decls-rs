@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Outcome!();
         BlameEntry!();
+        Outcome!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

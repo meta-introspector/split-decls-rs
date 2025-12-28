@@ -4,4 +4,4 @@ macro_rules! to_native_path_on_windows {
     };
 }
 
-to_native_path_on_windows!()
+to_native_path_on_windows!();

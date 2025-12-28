@@ -4,4 +4,4 @@ macro_rules! BenchmarkFilter {
     };
 }
 
-BenchmarkFilter!()
+BenchmarkFilter!();

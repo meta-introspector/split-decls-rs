@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstEvalError!();
         HirDatabase!();
+        ConstEvalError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! const_eval_discriminant_variant {
     };
 }
 
-const_eval_discriminant_variant!()
+const_eval_discriminant_variant!();

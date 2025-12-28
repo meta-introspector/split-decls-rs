@@ -4,4 +4,4 @@ macro_rules! hex_string_custom_case {
     };
 }
 
-hex_string_custom_case!()
+hex_string_custom_case!();

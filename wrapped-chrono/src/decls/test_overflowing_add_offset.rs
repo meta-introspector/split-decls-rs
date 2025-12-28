@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NaiveDateTime!();
         NaiveDate!();
         FixedOffset!();
+        NaiveDateTime!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_overflowing_add_offset {
     };
 }
 
-test_overflowing_add_offset!()
+test_overflowing_add_offset!();

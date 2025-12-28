@@ -11,4 +11,4 @@ macro_rules! WAIT_FAILED {
     };
 }
 
-WAIT_FAILED!()
+WAIT_FAILED!();

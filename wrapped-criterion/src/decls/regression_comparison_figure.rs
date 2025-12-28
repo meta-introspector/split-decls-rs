@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Estimate!();
+        Sample!();
         MeasurementData!();
         ComparisonData!();
-        ConfidenceInterval!();
-        Sample!();
-        ValueFormatter!();
         Data!();
+        ConfidenceInterval!();
+        ValueFormatter!();
+        Estimate!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! regression_comparison_figure {
     };
 }
 
-regression_comparison_figure!()
+regression_comparison_figure!();

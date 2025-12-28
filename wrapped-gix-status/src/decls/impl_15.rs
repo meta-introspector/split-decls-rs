@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EntryStatus!();
-        Recorder!();
-        SubmoduleStatus!();
         Entry!();
+        SubmoduleStatus!();
+        Recorder!();
         Record!();
         VisitEntry!();
+        EntryStatus!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

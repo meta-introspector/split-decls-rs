@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Rewrites!();
         Tracker!();
         Change!();
+        Rewrites!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

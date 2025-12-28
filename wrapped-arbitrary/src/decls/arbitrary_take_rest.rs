@@ -11,4 +11,4 @@ macro_rules! arbitrary_take_rest {
     };
 }
 
-arbitrary_take_rest!()
+arbitrary_take_rest!();

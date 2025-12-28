@@ -4,4 +4,4 @@ macro_rules! config_name {
     };
 }
 
-config_name!()
+config_name!();

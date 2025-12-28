@@ -4,4 +4,4 @@ macro_rules! RealWalkDirIterator {
     };
 }
 
-RealWalkDirIterator!()
+RealWalkDirIterator!();

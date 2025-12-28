@@ -11,4 +11,4 @@ macro_rules! FE_ZERO {
     };
 }
 
-FE_ZERO!()
+FE_ZERO!();

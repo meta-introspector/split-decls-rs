@@ -4,4 +4,4 @@ macro_rules! StatusOptions {
     };
 }
 
-StatusOptions!()
+StatusOptions!();

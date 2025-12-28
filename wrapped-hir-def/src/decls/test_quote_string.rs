@@ -14,4 +14,4 @@ fn main() { "\"hello\""; }
     };
 }
 
-test_quote_string!()
+test_quote_string!();

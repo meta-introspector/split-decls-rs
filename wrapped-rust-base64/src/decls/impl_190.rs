@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        EngineWrapper!();
+        DecoderReaderEngine!();
         GeneralPurposeWrapper!();
         DecoderReaderEngineWrapper!();
-        Alphabet!();
-        GeneralPurpose!();
-        Engine!();
-        DecoderReaderEngine!();
         DecodePaddingMode!();
+        Alphabet!();
+        Engine!();
+        EngineWrapper!();
+        GeneralPurpose!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_190 {
     };
 }
 
-impl_190!()
+impl_190!();

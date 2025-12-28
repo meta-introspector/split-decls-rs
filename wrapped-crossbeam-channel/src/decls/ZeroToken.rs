@@ -4,4 +4,4 @@ macro_rules! ZeroToken {
     };
 }
 
-ZeroToken!()
+ZeroToken!();

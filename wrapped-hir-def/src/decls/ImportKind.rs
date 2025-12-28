@@ -4,4 +4,4 @@ macro_rules! ImportKind {
     };
 }
 
-ImportKind!()
+ImportKind!();

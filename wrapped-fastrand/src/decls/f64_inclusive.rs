@@ -4,4 +4,4 @@ macro_rules! f64_inclusive {
     };
 }
 
-f64_inclusive!()
+f64_inclusive!();

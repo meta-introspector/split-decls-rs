@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MacroCallLoc!();
-        MacroCallId!();
         ExpandDatabase!();
+        MacroCallId!();
+        MacroCallLoc!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_226 {
     };
 }
 
-macro_226!()
+macro_226!();

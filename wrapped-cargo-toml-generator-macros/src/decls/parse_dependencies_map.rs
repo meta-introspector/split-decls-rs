@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        KeyValue!();
         InlineTable!();
         TomlSection!();
-        KeyValue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_dependencies_map {
     };
 }
 
-parse_dependencies_map!()
+parse_dependencies_map!();

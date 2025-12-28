@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        Id!();
         Entry!();
+        Id!();
+        Kind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! lookup {
     };
 }
 
-lookup!()
+lookup!();

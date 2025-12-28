@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Scope!();
+        Generator!();
+        GeneratorImpl!();
         Gn!();
         LocalGenerator!();
-        GeneratorImpl!();
-        Generator!();
         Stack!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

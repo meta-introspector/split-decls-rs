@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Data!();
-        Schema!();
-        Context!();
         Result!();
-        Any!();
-        Error!();
         Query!();
+        Schema!();
+        Error!();
+        Any!();
+        Data!();
+        Context!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! DataContext {
     };
 }
 
-DataContext!()
+DataContext!();

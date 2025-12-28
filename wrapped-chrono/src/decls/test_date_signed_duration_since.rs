@@ -12,4 +12,4 @@ macro_rules! test_date_signed_duration_since {
     };
 }
 
-test_date_signed_duration_since!()
+test_date_signed_duration_since!();

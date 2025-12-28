@@ -4,4 +4,4 @@ macro_rules! truecolor {
     };
 }
 
-truecolor!()
+truecolor!();

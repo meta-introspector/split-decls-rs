@@ -4,4 +4,4 @@ macro_rules! Scope {
     };
 }
 
-Scope!()
+Scope!();

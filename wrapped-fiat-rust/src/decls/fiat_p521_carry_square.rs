@@ -11,4 +11,4 @@ macro_rules! fiat_p521_carry_square {
     };
 }
 
-fiat_p521_carry_square!()
+fiat_p521_carry_square!();

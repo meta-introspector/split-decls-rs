@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        Builder!();
+        Patterns!();
         Config!();
-        SearchKind!();
+        Searcher!();
         RabinKarp!();
+        SearchKind!();
         ForceAlgorithm!();
         Teddy!();
-        Patterns!();
-        Searcher!();
-        Builder!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

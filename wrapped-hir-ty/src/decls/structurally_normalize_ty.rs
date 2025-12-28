@@ -11,4 +11,4 @@ macro_rules! structurally_normalize_ty {
     };
 }
 
-structurally_normalize_ty!()
+structurally_normalize_ty!();

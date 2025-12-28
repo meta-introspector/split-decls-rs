@@ -4,4 +4,4 @@ macro_rules! NANOS_PER_MILLI {
     };
 }
 
-NANOS_PER_MILLI!()
+NANOS_PER_MILLI!();

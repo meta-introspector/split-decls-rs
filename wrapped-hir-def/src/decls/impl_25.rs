@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
         AdtId!();
-        Attrs!();
-        MacroId!();
-        LifetimeParamId!();
-        GenericParamId!();
         AttrDefId!();
-        DefDatabase!();
-        AttrsWithOwner!();
-        ConstParamId!();
-        ModuleId!();
-        TypeParamId!();
-        AttrSourceMap!();
-        ModuleSource!();
-        ModuleOrigin!();
         FieldId!();
+        ConstParamId!();
+        ModuleOrigin!();
+        AttrSourceMap!();
+        LifetimeParamId!();
+        MacroId!();
+        TypeParamId!();
+        ModuleId!();
+        Attrs!();
+        GenericParamId!();
+        ModuleSource!();
+        AttrsWithOwner!();
+        DefDatabase!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

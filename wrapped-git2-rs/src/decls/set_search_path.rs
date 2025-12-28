@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         IntoCString!();
         ConfigLevel!();
-        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! set_search_path {
     };
 }
 
-set_search_path!()
+set_search_path!();

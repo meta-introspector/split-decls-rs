@@ -11,4 +11,4 @@ macro_rules! os_string_into_bstring {
     };
 }
 
-os_string_into_bstring!()
+os_string_into_bstring!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Reader!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! length_uleb128_value {
     };
 }
 
-length_uleb128_value!()
+length_uleb128_value!();

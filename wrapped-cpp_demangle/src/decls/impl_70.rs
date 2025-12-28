@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SourceName!();
-        Encoding!();
-        DemangleContext!();
-        Demangle!();
-        DemangleWrite!();
         LeafName!();
+        Demangle!();
         Result!();
+        DemangleContext!();
+        Encoding!();
         ArgScopeStack!();
+        SourceName!();
+        DemangleWrite!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

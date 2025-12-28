@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MetaTypeId!();
-        Object!();
-        MetaField!();
-        InputObject!();
         Union!();
-        Scalar!();
+        MetaField!();
         Context!();
+        Scalar!();
+        Object!();
+        InputObject!();
+        MetaTypeId!();
         Interface!();
         MetaType!();
     };
@@ -19,4 +19,4 @@ macro_rules! impl_1044 {
     };
 }
 
-impl_1044!()
+impl_1044!();

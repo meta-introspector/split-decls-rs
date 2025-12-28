@@ -4,4 +4,4 @@ macro_rules! EXTENDED_EDGES_MASK {
     };
 }
 
-EXTENDED_EDGES_MASK!()
+EXTENDED_EDGES_MASK!();

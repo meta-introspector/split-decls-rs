@@ -4,4 +4,4 @@ macro_rules! has_command {
     };
 }
 
-has_command!()
+has_command!();

@@ -4,4 +4,4 @@ macro_rules! write_flags_of {
     };
 }
 
-write_flags_of!()
+write_flags_of!();

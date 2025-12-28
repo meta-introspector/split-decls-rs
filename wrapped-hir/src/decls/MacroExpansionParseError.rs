@@ -4,4 +4,4 @@ macro_rules! MacroExpansionParseError {
     };
 }
 
-MacroExpansionParseError!()
+MacroExpansionParseError!();

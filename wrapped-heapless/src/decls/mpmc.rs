@@ -4,4 +4,4 @@ macro_rules! mpmc {
     };
 }
 
-mpmc!()
+mpmc!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Diff!();
-        Binding!();
-        Buf!();
-        Commit!();
-        Email!();
-        EmailCreateOptions!();
-        Oid!();
         Error!();
+        EmailCreateOptions!();
+        Diff!();
         Signature!();
+        Oid!();
+        Email!();
+        Buf!();
         IntoCString!();
+        Commit!();
+        Binding!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_370 {
     };
 }
 
-impl_370!()
+impl_370!();

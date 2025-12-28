@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SourceRootInput!();
-        Nonce!();
         FileText!();
-        SourceRootId!();
-        FileSourceRootInput!();
         CratesMap!();
+        Nonce!();
+        SourceRootInput!();
+        SourceRootId!();
         SourceRoot!();
+        FileSourceRootInput!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! SourceDatabase {
     };
 }
 
-SourceDatabase!()
+SourceDatabase!();

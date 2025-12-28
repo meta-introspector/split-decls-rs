@@ -4,4 +4,4 @@ macro_rules! AtomicChoice {
     };
 }
 
-AtomicChoice!()
+AtomicChoice!();

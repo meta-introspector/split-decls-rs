@@ -11,4 +11,4 @@ macro_rules! validated_name {
     };
 }
 
-validated_name!()
+validated_name!();

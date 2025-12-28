@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Data!();
         Error!();
+        Data!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Find {
     };
 }
 
-Find!()
+Find!();

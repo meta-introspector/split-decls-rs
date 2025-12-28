@@ -4,4 +4,4 @@ macro_rules! checkout {
     };
 }
 
-checkout!()
+checkout!();

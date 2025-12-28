@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Ready!();
-        Seek!();
         Cursor!();
+        Seek!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1110 {
     };
 }
 
-impl_1110!()
+impl_1110!();

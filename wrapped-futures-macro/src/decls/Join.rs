@@ -4,4 +4,4 @@ macro_rules! Join {
     };
 }
 
-Join!()
+Join!();

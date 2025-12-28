@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Greater!();
+        And!();
+        B0!();
+        B1!();
     };
 }
 
 macro_rules! impl_12 {
     () => {
         deps!();
-        # [doc = " Returns `core::cmp::Ordering::Greater`"] impl Ord for Greater { # [inline] fn to_ordering () -> Ordering { Ordering :: Greater } }
+        # [doc = " And with 1 ( 1 & 0 = 0)"] impl BitAnd < B0 > for B1 { type Output = B0 ; # [inline] fn bitand (self , _ : B0) -> Self :: Output { B0 } }
     };
 }
 

@@ -12,4 +12,4 @@ macro_rules! const_param_ty_with_diagnostics_cycle_result {
     };
 }
 
-const_param_ty_with_diagnostics_cycle_result!()
+const_param_ty_with_diagnostics_cycle_result!();

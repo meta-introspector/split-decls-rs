@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ReportLink!();
-        BenchmarkGroup!();
-        BenchmarkId!();
         BenchmarkValueGroup!();
+        BenchmarkId!();
+        BenchmarkGroup!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_142 {
     };
 }
 
-impl_142!()
+impl_142!();

@@ -1,5 +1,6 @@
 macro_rules! deps {
     () => {
+        Entry!();
         Slab!();
     };
 }
@@ -7,7 +8,7 @@ macro_rules! deps {
 macro_rules! impl_25 {
     () => {
         deps!();
-        impl < T > fmt :: Debug for Slab < T > where T : fmt :: Debug , { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if fmt . alternate () { fmt . debug_map () . entries (self . iter ()) . finish () } else { fmt . debug_struct ("Slab") . field ("len" , & self . len) . field ("cap" , & self . capacity ()) . finish () } } }
+        impl < T > ops :: Index < usize > for Slab < T > { type Output = T ; # [track_caller] fn index (& self , key : usize) -> & T { match self . entries . get (key) { Some (Entry :: Occupied (v)) => v , _ => panic ! ("invalid key") , } } }
     };
 }
 

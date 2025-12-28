@@ -4,4 +4,4 @@ macro_rules! impl_zeroize {
     };
 }
 
-impl_zeroize!()
+impl_zeroize!();

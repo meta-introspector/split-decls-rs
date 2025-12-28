@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericDefaults!();
         HirDatabase!();
+        GenericDefaults!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! generic_defaults_query {
     };
 }
 
-generic_defaults_query!()
+generic_defaults_query!();

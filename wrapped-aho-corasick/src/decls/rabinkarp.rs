@@ -4,4 +4,4 @@ macro_rules! rabinkarp {
     };
 }
 
-rabinkarp!()
+rabinkarp!();

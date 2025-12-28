@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ExprId!();
         Expr!();
         BindingId!();
         PatId!();
         RecordFieldPat!();
+        ExprId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Pat {
     };
 }
 
-Pat!()
+Pat!();

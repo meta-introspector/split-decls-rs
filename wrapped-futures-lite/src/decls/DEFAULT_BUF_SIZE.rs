@@ -4,4 +4,4 @@ macro_rules! DEFAULT_BUF_SIZE {
     };
 }
 
-DEFAULT_BUF_SIZE!()
+DEFAULT_BUF_SIZE!();

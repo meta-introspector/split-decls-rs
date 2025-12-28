@@ -4,4 +4,4 @@ macro_rules! SearchPath {
     };
 }
 
-SearchPath!()
+SearchPath!();

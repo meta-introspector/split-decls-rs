@@ -4,4 +4,4 @@ macro_rules! Flag {
     };
 }
 
-Flag!()
+Flag!();

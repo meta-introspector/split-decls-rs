@@ -4,4 +4,4 @@ macro_rules! PositionFuture {
     };
 }
 
-PositionFuture!()
+PositionFuture!();

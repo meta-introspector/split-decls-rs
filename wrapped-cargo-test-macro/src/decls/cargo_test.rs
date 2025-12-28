@@ -8,4 +8,4 @@ macro_rules! cargo_test {
     };
 }
 
-cargo_test!()
+cargo_test!();

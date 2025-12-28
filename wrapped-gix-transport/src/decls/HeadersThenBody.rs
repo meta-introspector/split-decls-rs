@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Http!();
         Service!();
+        Http!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HeadersThenBody {
     };
 }
 
-HeadersThenBody!()
+HeadersThenBody!();

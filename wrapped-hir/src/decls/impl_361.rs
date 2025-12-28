@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DefWithBody!();
-        Label!();
         Module!();
+        Label!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_361 {
     };
 }
 
-impl_361!()
+impl_361!();

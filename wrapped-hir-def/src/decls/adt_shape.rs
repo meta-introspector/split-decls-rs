@@ -11,4 +11,4 @@ macro_rules! adt_shape {
     };
 }
 
-adt_shape!()
+adt_shape!();

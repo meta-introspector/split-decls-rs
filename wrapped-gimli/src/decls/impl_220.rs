@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        Expression!();
-        RegisterRule!();
-        Result!();
-        UnwindTableRow!();
-        Register!();
         UnwindContextStorage!();
+        CommonInformationEntry!();
         FrameDescriptionEntry!();
+        UnwindSection!();
         CallFrameInstruction!();
         UnwindTable!();
-        BaseAddresses!();
-        AArch64!();
-        Error!();
         Reader!();
-        CommonInformationEntry!();
-        UnwindSection!();
         CfaRule!();
+        Result!();
         UnwindContext!();
+        Error!();
         Section!();
+        BaseAddresses!();
+        RegisterRule!();
+        UnwindTableRow!();
+        Expression!();
+        AArch64!();
+        Register!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

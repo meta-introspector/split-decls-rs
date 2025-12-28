@@ -4,4 +4,4 @@ macro_rules! PostRedirections {
     };
 }
 
-PostRedirections!()
+PostRedirections!();

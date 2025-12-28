@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Mapping!();
         Item!();
-        Mode!();
-        Match!();
-        MatchGroup!();
         Matcher!();
-        Needle!();
+        Mapping!();
         SourceRef!();
+        MatchGroup!();
+        Match!();
+        Needle!();
+        Mode!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

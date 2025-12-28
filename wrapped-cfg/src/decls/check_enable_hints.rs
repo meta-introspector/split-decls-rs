@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CfgOptions!();
-        CfgExpr!();
         DnfExpr!();
+        CfgExpr!();
+        CfgOptions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_enable_hints {
     };
 }
 
-check_enable_hints!()
+check_enable_hints!();

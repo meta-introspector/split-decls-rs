@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ParallelIterator!();
+        IterBridge!();
+    };
+}
+
+macro_rules! ParallelBridge {
+    () => {
+        deps!();
+        # [doc = " Conversion trait to convert an `Iterator` to a `ParallelIterator`."] # [doc = ""] # [doc = " This creates a \"bridge\" from a sequential iterator to a parallel one, by distributing its items"] # [doc = " across the Rayon thread pool. This has the advantage of being able to parallelize just about"] # [doc = " anything, but the resulting `ParallelIterator` can be less efficient than if you started with"] # [doc = " `par_iter` instead. However, it can still be useful for iterators that are difficult to"] # [doc = " parallelize by other means, like channels or file or network I/O."] # [doc = ""] # [doc = " Iterator items are pulled by `next()` one at a time, synchronized from each thread that is"] # [doc = " ready for work, so this may become a bottleneck if the serial iterator can't keep up with the"] # [doc = " parallel demand. The items are not buffered by `IterBridge`, so it's fine to use this with"] # [doc = " large or even unbounded iterators."] # [doc = ""] # [doc = " The resulting iterator is not guaranteed to keep the order of the original iterator."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " To use this trait, take an existing `Iterator` and call `par_bridge` on it. After that, you can"] # [doc = " use any of the `ParallelIterator` methods:"] # [doc = ""] # [doc = " ```"] # [doc = " use rayon::iter::ParallelBridge;"] # [doc = " use rayon::prelude::ParallelIterator;"] # [doc = " use std::sync::mpsc::channel;"] # [doc = ""] # [doc = " let rx = {"] # [doc = "     let (tx, rx) = channel();"] # [doc = ""] # [doc = "     tx.send(\"one!\");"] # [doc = "     tx.send(\"two!\");"] # [doc = "     tx.send(\"three!\");"] # [doc = ""] # [doc = "     rx"] # [doc = " };"] # [doc = ""] # [doc = " let mut output: Vec<&'static str> = rx.into_iter().par_bridge().collect();"] # [doc = " output.sort_unstable();"] # [doc = ""] # [doc = " assert_eq!(&*output, &[\"one!\", \"three!\", \"two!\"]);"] # [doc = " ```"] pub trait ParallelBridge : Sized { # [doc = " Creates a bridge from this type to a `ParallelIterator`."] fn par_bridge (self) -> IterBridge < Self > ; }
+    };
+}
+
+ParallelBridge!()

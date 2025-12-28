@@ -17,4 +17,4 @@ macro_rules! value_continuation {
     };
 }
 
-value_continuation!()
+value_continuation!();

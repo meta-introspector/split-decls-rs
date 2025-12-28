@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IterMut!();
         HashMap!();
+        IterMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ValuesMut {
     };
 }
 
-ValuesMut!()
+ValuesMut!();

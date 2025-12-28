@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AsyncWriteExt!();
         Sink!();
+        AsyncWriteExt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! sink {
     };
 }
 
-sink!()
+sink!();

@@ -4,4 +4,4 @@ macro_rules! append_url {
     };
 }
 
-append_url!()
+append_url!();

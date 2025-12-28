@@ -4,4 +4,4 @@ macro_rules! P_COMMA_EOF {
     };
 }
 
-P_COMMA_EOF!()
+P_COMMA_EOF!();

@@ -4,4 +4,4 @@ macro_rules! AssertUnmoved {
     };
 }
 
-AssertUnmoved!()
+AssertUnmoved!();

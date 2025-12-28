@@ -4,4 +4,4 @@ macro_rules! CsvReportWriter {
     };
 }
 
-CsvReportWriter!()
+CsvReportWriter!();

@@ -11,4 +11,4 @@ macro_rules! __bitflags_flag {
     };
 }
 
-__bitflags_flag!()
+__bitflags_flag!();

@@ -4,4 +4,4 @@ macro_rules! MIN_FILE_SIZE {
     };
 }
 
-MIN_FILE_SIZE!()
+MIN_FILE_SIZE!();

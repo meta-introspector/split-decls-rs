@@ -4,4 +4,4 @@ macro_rules! SeqLock {
     };
 }
 
-SeqLock!()
+SeqLock!();

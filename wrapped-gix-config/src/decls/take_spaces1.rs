@@ -4,4 +4,4 @@ macro_rules! take_spaces1 {
     };
 }
 
-take_spaces1!()
+take_spaces1!();

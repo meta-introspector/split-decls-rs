@@ -4,4 +4,4 @@ macro_rules! forward_writes {
     };
 }
 
-forward_writes!()
+forward_writes!();

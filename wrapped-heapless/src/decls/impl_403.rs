@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Cell!();
-        UintSize!();
-        Storage!();
-        AtomicTargetSize!();
         QueueView!();
+        Storage!();
+        Cell!();
+        AtomicTargetSize!();
         Queue!();
+        UintSize!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_403 {
     };
 }
 
-impl_403!()
+impl_403!();

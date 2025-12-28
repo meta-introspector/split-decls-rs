@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Scalar!();
         Field!();
-        TypeRef!();
-        Union!();
-        SchemaInner!();
-        Upload!();
-        Object!();
-        SchemaError!();
-        Interface!();
-        InputObject!();
         Subscription!();
+        Scalar!();
+        Upload!();
+        TypeRef!();
+        Interface!();
+        Object!();
+        Union!();
+        Result!();
+        InputObject!();
+        SchemaInner!();
+        SchemaError!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_410 {
     };
 }
 
-impl_410!()
+impl_410!();

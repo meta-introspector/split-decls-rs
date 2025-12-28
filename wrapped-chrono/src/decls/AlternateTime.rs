@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Transition!();
         Local!();
-        LocalTimeType!();
         RuleDay!();
+        LocalTimeType!();
+        Transition!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! AlternateTime {
     };
 }
 
-AlternateTime!()
+AlternateTime!();

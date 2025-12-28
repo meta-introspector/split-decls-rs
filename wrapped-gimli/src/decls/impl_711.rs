@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Writer!();
-        AbbreviationTable!();
         DebugAbbrev!();
-        Result!();
         Abbreviation!();
+        AbbreviationTable!();
+        Writer!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_711 {
     };
 }
 
-impl_711!()
+impl_711!();

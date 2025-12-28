@@ -4,4 +4,4 @@ macro_rules! hash_bytes_short {
     };
 }
 
-hash_bytes_short!()
+hash_bytes_short!();

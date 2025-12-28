@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Writer!();
         SectionId!();
-        Encoding!();
-        DebugLine!();
         DebugLineStr!();
-        LineString!();
-        DebugStr!();
         Error!();
+        DebugLine!();
+        DebugStr!();
+        Encoding!();
+        Writer!();
+        Result!();
+        LineString!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_751 {
     };
 }
 
-impl_751!()
+impl_751!();

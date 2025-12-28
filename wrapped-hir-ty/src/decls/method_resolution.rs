@@ -4,4 +4,4 @@ macro_rules! method_resolution {
     };
 }
 
-method_resolution!()
+method_resolution!();

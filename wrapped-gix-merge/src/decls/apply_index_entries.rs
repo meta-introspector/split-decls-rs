@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ConflictIndexEntryPathHint!();
-        Resolution!();
         TreatAsUnresolved!();
         ResolutionFailure!();
+        Resolution!();
         Conflict!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! apply_index_entries {
     };
 }
 
-apply_index_entries!()
+apply_index_entries!();

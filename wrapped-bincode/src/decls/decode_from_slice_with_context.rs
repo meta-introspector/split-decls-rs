@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Decode!();
+        SliceReader!();
         Config!();
         DecoderImpl!();
+        Decode!();
         DecodeError!();
-        SliceReader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! decode_from_slice_with_context {
     };
 }
 
-decode_from_slice_with_context!()
+decode_from_slice_with_context!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Serialize!();
         Error!();
-        Result!();
         Serializer!();
+        Serialize!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

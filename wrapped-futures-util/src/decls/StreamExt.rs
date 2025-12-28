@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        SplitSink!();
-        FuturesUnordered!();
-        StreamFuture!();
+        Sink!();
+        Next!();
         Either!();
         Send!();
-        Next!();
-        FlattenUnordered!();
+        FuturesUnordered!();
+        SplitSink!();
         SelectNextSome!();
+        FlattenUnordered!();
+        StreamFuture!();
         SplitStream!();
-        Sink!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! StreamExt {
     };
 }
 
-StreamExt!()
+StreamExt!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Gaussian!();
         Float!();
         Kernel!();
+        Gaussian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_343 {
     };
 }
 
-impl_343!()
+impl_343!();

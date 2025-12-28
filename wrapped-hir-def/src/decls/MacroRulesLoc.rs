@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MacroExpander!();
-        MacroRules!();
         ModuleId!();
+        MacroRules!();
+        MacroExpander!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MacroRulesLoc {
     };
 }
 
-MacroRulesLoc!()
+MacroRulesLoc!();

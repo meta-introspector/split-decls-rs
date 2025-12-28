@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Diff!();
         Range!();
+        Diff!();
         Solution!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! main {
     };
 }
 
-main!()
+main!();

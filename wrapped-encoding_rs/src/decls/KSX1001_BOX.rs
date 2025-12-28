@@ -4,4 +4,4 @@ macro_rules! KSX1001_BOX {
     };
 }
 
-KSX1001_BOX!()
+KSX1001_BOX!();

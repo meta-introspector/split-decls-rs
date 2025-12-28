@@ -4,4 +4,4 @@ macro_rules! RawMulti {
     };
 }
 
-RawMulti!()
+RawMulti!();

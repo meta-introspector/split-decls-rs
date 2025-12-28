@@ -4,4 +4,4 @@ macro_rules! PossibleConflict {
     };
 }
 
-PossibleConflict!()
+PossibleConflict!();

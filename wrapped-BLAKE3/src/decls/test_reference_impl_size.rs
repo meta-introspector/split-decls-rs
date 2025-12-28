@@ -11,4 +11,4 @@ macro_rules! test_reference_impl_size {
     };
 }
 
-test_reference_impl_size!()
+test_reference_impl_size!();

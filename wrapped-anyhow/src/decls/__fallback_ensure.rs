@@ -11,4 +11,4 @@ macro_rules! __fallback_ensure {
     };
 }
 
-__fallback_ensure!()
+__fallback_ensure!();

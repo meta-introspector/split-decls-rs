@@ -4,4 +4,4 @@ macro_rules! OutputVec {
     };
 }
 
-OutputVec!()
+OutputVec!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NameValidationError!();
         PackageIdSpecError!();
+        NameValidationError!();
         ErrorKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

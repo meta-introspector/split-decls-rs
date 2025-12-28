@@ -4,4 +4,4 @@ macro_rules! delegate_async_read {
     };
 }
 
-delegate_async_read!()
+delegate_async_read!();

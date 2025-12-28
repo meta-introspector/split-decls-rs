@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Repository!();
         Read!();
+        Error!();
         Kind!();
+        Repository!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_335 {
     };
 }
 
-impl_335!()
+impl_335!();

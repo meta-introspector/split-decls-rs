@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        SerializeField!();
-        AsSerde!();
+        SerdeStructVisitor!();
     };
 }
 
 macro_rules! impl_30 {
     () => {
         deps!();
-        impl < 'a > AsSerde < 'a > for Field { type Serializable = SerializeField < 'a > ; fn as_serde (& 'a self) -> Self :: Serializable { SerializeField (self) } }
+        impl < S : SerializeStruct > SerdeStructVisitor < S > { # [doc = " Completes serializing the visited object, returning `Ok(())` if all"] # [doc = " fields were serialized correctly, or `Error(S::Error)` if a field could"] # [doc = " not be serialized."] pub fn finish (self) -> Result < S :: Ok , S :: Error > { self . state ? ; self . serializer . end () } }
     };
 }
 

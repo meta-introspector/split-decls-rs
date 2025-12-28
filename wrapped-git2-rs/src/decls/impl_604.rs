@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ReferenceType!();
-        Object!();
-        Reference!();
-        Oid!();
         Binding!();
-        Tag!();
-        ObjectType!();
+        ReferenceType!();
+        Blob!();
         Commit!();
         Tree!();
-        Blob!();
+        Error!();
+        ObjectType!();
+        Tag!();
+        Reference!();
+        Oid!();
+        Object!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_604 {
     };
 }
 
-impl_604!()
+impl_604!();

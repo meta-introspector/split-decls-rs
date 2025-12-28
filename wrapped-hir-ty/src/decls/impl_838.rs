@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
-        EarlyBinder!();
         GenericPredicates!();
+        EarlyBinder!();
+        HirDatabase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_838 {
     };
 }
 
-impl_838!()
+impl_838!();

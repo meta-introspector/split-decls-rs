@@ -4,4 +4,4 @@ macro_rules! filtered_log {
     };
 }
 
-filtered_log!()
+filtered_log!();

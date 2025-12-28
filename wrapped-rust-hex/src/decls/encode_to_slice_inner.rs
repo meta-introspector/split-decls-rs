@@ -11,4 +11,4 @@ macro_rules! encode_to_slice_inner {
     };
 }
 
-encode_to_slice_inner!()
+encode_to_slice_inner!();

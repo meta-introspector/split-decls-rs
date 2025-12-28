@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Url!();
-        InputScheme!();
         Error!();
+        InputScheme!();
+        Url!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse {
     };
 }
 
-parse!()
+parse!();

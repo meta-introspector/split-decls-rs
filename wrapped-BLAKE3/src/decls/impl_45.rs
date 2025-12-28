@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Hasher!();
         HasherExt!();
+        Hasher!();
         ChainingValue!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

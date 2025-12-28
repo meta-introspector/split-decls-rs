@@ -4,4 +4,4 @@ macro_rules! try_call {
     };
 }
 
-try_call!()
+try_call!();

@@ -4,4 +4,4 @@ macro_rules! DeriveMacroInvocation {
     };
 }
 
-DeriveMacroInvocation!()
+DeriveMacroInvocation!();

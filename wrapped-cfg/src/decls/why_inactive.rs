@@ -11,4 +11,4 @@ macro_rules! why_inactive {
     };
 }
 
-why_inactive!()
+why_inactive!();

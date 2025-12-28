@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ProgramKind!();
-        Connection!();
         Protocol!();
+        Connection!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SpawnProcessOnDemand {
     };
 }
 
-SpawnProcessOnDemand!()
+SpawnProcessOnDemand!();

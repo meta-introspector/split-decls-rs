@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Diff!();
         Range!();
+        Diff!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! bisect_split {
     };
 }
 
-bisect_split!()
+bisect_split!();

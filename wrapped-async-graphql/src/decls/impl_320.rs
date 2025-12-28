@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        VisitorContext!();
         Visitor!();
-        VisitMode!();
         Field!();
         DepthCalculate!();
+        VisitMode!();
+        VisitorContext!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_320 {
     };
 }
 
-impl_320!()
+impl_320!();

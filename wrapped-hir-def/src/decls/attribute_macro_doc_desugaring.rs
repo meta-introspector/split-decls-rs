@@ -26,4 +26,4 @@ struct S;
     };
 }
 
-attribute_macro_doc_desugaring!()
+attribute_macro_doc_desugaring!();

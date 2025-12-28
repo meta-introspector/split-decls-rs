@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MatchError!();
-        Input!();
-        Automaton!();
         OverlappingState!();
+        Automaton!();
+        Input!();
+        MatchError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! try_find_overlapping_fwd {
     };
 }
 
-try_find_overlapping_fwd!()
+try_find_overlapping_fwd!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Core!();
         Error!();
+        Core!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_object_caches {
     };
 }
 
-parse_object_caches!()
+parse_object_caches!();

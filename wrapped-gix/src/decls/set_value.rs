@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Validate!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_value {
     };
 }
 
-set_value!()
+set_value!();

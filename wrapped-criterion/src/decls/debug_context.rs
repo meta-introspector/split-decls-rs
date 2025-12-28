@@ -4,4 +4,4 @@ macro_rules! debug_context {
     };
 }
 
-debug_context!()
+debug_context!();

@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Head!();
-        Tree!();
-        Name!();
-        Kind!();
-        Note!();
-        Default!();
-        Commit!();
-        Repository!();
-        Id!();
-        Change!();
         Error!();
         Object!();
+        Note!();
+        Default!();
         Platform!();
+        Kind!();
+        Repository!();
+        Tree!();
         Clone!();
-        Reference!();
+        Name!();
         Item!();
+        Head!();
+        Id!();
+        Reference!();
+        Commit!();
+        Change!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_363 {
     };
 }
 
-impl_363!()
+impl_363!();

@@ -12,4 +12,4 @@ macro_rules! test_datetime_subassignment {
     };
 }
 
-test_datetime_subassignment!()
+test_datetime_subassignment!();

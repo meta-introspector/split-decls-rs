@@ -11,4 +11,4 @@ macro_rules! test_hash_conversions {
     };
 }
 
-test_hash_conversions!()
+test_hash_conversions!();

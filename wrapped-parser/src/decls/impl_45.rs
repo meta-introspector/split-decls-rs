@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ConstDirective!();
         Positioned!();
         Directive!();
+        ConstDirective!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

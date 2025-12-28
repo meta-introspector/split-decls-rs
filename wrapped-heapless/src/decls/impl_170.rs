@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        OccupiedEntry!();
-        VacantEntry!();
-        Iter!();
-        LinearMapInner!();
-        LinearMapView!();
-        LinearMap!();
-        Entry!();
         IterMut!();
+        LinearMapView!();
+        Entry!();
+        Iter!();
+        OccupiedEntry!();
+        LinearMapInner!();
+        VacantEntry!();
+        LinearMap!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

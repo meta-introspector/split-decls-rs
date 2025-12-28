@@ -4,4 +4,4 @@ macro_rules! test_atomic_load_store {
     };
 }
 
-test_atomic_load_store!()
+test_atomic_load_store!();

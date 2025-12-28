@@ -4,4 +4,4 @@ macro_rules! get_lib_filename {
     };
 }
 
-get_lib_filename!()
+get_lib_filename!();

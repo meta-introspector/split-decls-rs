@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MetaType!();
-        Response!();
         Object!();
-        MergedObjectTail!();
-        SubscriptionType!();
-        Context!();
         Registry!();
+        MetaType!();
+        Context!();
+        SubscriptionType!();
+        MergedObjectTail!();
+        Response!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_800 {
     };
 }
 
-impl_800!()
+impl_800!();

@@ -4,4 +4,4 @@ macro_rules! assert_panic {
     };
 }
 
-assert_panic!()
+assert_panic!();

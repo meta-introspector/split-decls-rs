@@ -4,4 +4,4 @@ macro_rules! UNIX_EPOCH_DAY {
     };
 }
 
-UNIX_EPOCH_DAY!()
+UNIX_EPOCH_DAY!();

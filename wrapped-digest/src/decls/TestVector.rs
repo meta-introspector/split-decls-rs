@@ -4,4 +4,4 @@ macro_rules! TestVector {
     };
 }
 
-TestVector!()
+TestVector!();

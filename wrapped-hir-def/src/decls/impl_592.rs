@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ModuleSource!();
-        TestDB!();
-        ModuleId!();
         ModuleDefId!();
         DefMap!();
-        Expr!();
+        TestDB!();
+        ModuleSource!();
         LocalModuleId!();
+        ModuleId!();
+        Expr!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_592 {
     };
 }
 
-impl_592!()
+impl_592!();

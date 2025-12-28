@@ -4,4 +4,4 @@ macro_rules! CowArc {
     };
 }
 
-CowArc!()
+CowArc!();

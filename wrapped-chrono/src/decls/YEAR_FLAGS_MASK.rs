@@ -4,4 +4,4 @@ macro_rules! YEAR_FLAGS_MASK {
     };
 }
 
-YEAR_FLAGS_MASK!()
+YEAR_FLAGS_MASK!();

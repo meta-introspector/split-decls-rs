@@ -4,4 +4,4 @@ macro_rules! arg_predicate {
     };
 }
 
-arg_predicate!()
+arg_predicate!();

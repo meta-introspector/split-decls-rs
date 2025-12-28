@@ -11,4 +11,4 @@ macro_rules! test_xof_seek {
     };
 }
 
-test_xof_seek!()
+test_xof_seek!();

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Parameter!();
+        UnconstrainedGenericParameter!();
+    };
+}
+
+macro_rules! enforce_impl_lifetime_params_are_constrained {
+    () => {
+        deps!();
+        pub (crate) fn enforce_impl_lifetime_params_are_constrained (tcx : TyCtxt < '_ > , impl_def_id : LocalDefId ,) -> Result < () , ErrorGuaranteed > { let impl_self_ty = tcx . type_of (impl_def_id) . instantiate_identity () ; if impl_self_ty . references_error () { tcx . dcx () . span_delayed_bug (tcx . def_span (impl_def_id) , format ! ("potentially unconstrained type parameters weren't evaluated: {impl_self_ty:?}" ,) ,) ; return Ok (()) ; } let impl_generics = tcx . generics_of (impl_def_id) ; let impl_predicates = tcx . predicates_of (impl_def_id) ; let impl_trait_ref = tcx . impl_trait_ref (impl_def_id) . map (ty :: EarlyBinder :: instantiate_identity) ; impl_trait_ref . error_reported () ? ; let mut input_parameters = cgp :: parameters_for_impl (tcx , impl_self_ty , impl_trait_ref) ; cgp :: identify_constrained_generic_params (tcx , impl_predicates , impl_trait_ref , & mut input_parameters ,) ; let lifetimes_in_associated_types : FxHashSet < _ > = tcx . associated_item_def_ids (impl_def_id) . iter () . flat_map (| def_id | { let item = tcx . associated_item (def_id) ; match item . kind { ty :: AssocKind :: Type { .. } => { if item . defaultness (tcx) . has_value () { cgp :: parameters_for (tcx , tcx . type_of (def_id) . instantiate_identity () , true) } else { vec ! [] } } ty :: AssocKind :: Fn { .. } | ty :: AssocKind :: Const { .. } => vec ! [] , } }) . collect () ; let mut res = Ok (()) ; for param in & impl_generics . own_params { match param . kind { ty :: GenericParamDefKind :: Lifetime => { let param_lt = cgp :: Parameter :: from (param . to_early_bound_region_data ()) ; if lifetimes_in_associated_types . contains (& param_lt) && ! input_parameters . contains (& param_lt) { let mut diag = tcx . dcx () . create_err (UnconstrainedGenericParameter { span : tcx . def_span (param . def_id) , param_name : tcx . item_ident (param . def_id) , param_def_kind : tcx . def_descr (param . def_id) , const_param_note : false , const_param_note2 : false , }) ; diag . code (E0207) ; res = Err (diag . emit ()) ; } } ty :: GenericParamDefKind :: Type { .. } | ty :: GenericParamDefKind :: Const { .. } => { } } } res }
+    };
+}
+
+enforce_impl_lifetime_params_are_constrained!()

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BenchmarkId!();
         ValueFormatter!();
         MeasurementData!();
-        ComparisonData!();
         ReportContext!();
+        ComparisonData!();
+        BenchmarkId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! iteration_times_comparison {
     };
 }
 
-iteration_times_comparison!()
+iteration_times_comparison!();

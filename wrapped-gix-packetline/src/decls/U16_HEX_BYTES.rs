@@ -4,4 +4,4 @@ macro_rules! U16_HEX_BYTES {
     };
 }
 
-U16_HEX_BYTES!()
+U16_HEX_BYTES!();

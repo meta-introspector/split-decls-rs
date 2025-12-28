@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SECTION_CHARACTERISTICS {
+    () => {
+        pub type IMAGE_SECTION_CHARACTERISTICS = u32 ;
+    };
+}
+
+IMAGE_SECTION_CHARACTERISTICS!()

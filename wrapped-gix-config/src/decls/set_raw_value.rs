@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Header!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_raw_value {
     };
 }
 
-set_raw_value!()
+set_raw_value!();

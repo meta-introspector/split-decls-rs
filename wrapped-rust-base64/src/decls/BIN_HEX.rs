@@ -11,4 +11,4 @@ macro_rules! BIN_HEX {
     };
 }
 
-BIN_HEX!()
+BIN_HEX!();

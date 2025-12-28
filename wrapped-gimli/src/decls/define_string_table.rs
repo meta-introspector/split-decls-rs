@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FnvIndexSet!();
-        BaseId!();
         Writer!();
+        BaseId!();
+        FnvIndexSet!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! define_string_table {
     };
 }
 
-define_string_table!()
+define_string_table!();

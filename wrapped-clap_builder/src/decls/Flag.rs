@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Command!();
         Arg!();
+        Command!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Flag {
     };
 }
 
-Flag!()
+Flag!();

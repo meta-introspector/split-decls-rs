@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Styles!();
-        ErrorKind!();
-        ContextValue!();
         ContextKind!();
+        Styles!();
         StyledStr!();
+        ErrorKind!();
         Error!();
+        ContextValue!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! write_dynamic_context {
     };
 }
 
-write_dynamic_context!()
+write_dynamic_context!();

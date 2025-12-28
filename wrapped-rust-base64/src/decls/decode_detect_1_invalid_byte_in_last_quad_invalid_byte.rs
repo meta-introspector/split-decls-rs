@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecodeError!();
         EngineWrapper!();
+        DecodeError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode_detect_1_invalid_byte_in_last_quad_invalid_byte {
     };
 }
 
-decode_detect_1_invalid_byte_in_last_quad_invalid_byte!()
+decode_detect_1_invalid_byte_in_last_quad_invalid_byte!();

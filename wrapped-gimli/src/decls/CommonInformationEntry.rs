@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Register!();
-        Encoding!();
-        CallFrameInstruction!();
         Address!();
+        CallFrameInstruction!();
+        Encoding!();
+        Register!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CommonInformationEntry {
     };
 }
 
-CommonInformationEntry!()
+CommonInformationEntry!();

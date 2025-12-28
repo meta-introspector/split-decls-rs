@@ -4,4 +4,4 @@ macro_rules! MergedObjectField {
     };
 }
 
-MergedObjectField!()
+MergedObjectField!();

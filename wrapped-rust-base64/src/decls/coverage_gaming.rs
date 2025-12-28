@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecodeError!();
         DecodeSliceError!();
+        DecodeError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! coverage_gaming {
     };
 }
 
-coverage_gaming!()
+coverage_gaming!();

@@ -4,4 +4,4 @@ macro_rules! boxed {
     };
 }
 
-boxed!()
+boxed!();

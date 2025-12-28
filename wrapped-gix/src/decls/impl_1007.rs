@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Item!();
-        Error!();
+        Note!();
         Clone!();
-        Pathspec!();
+        Options!();
         Repository!();
         Outcome!();
-        Options!();
-        Note!();
+        Error!();
+        Pathspec!();
         State!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_1007 {
     };
 }
 
-impl_1007!()
+impl_1007!();

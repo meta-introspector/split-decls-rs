@@ -4,4 +4,4 @@ macro_rules! error_std_impls {
     };
 }
 
-error_std_impls!()
+error_std_impls!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Id!();
         Arg!();
+        Id!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ParseResult {
     };
 }
 
-ParseResult!()
+ParseResult!();

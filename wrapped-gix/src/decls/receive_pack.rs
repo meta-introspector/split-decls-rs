@@ -4,4 +4,4 @@ macro_rules! receive_pack {
     };
 }
 
-receive_pack!()
+receive_pack!();

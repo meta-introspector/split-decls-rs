@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EvaluationStorage!();
-        Value!();
-        StoreOnHeap!();
-        Result!();
-        Piece!();
         Reader!();
+        Piece!();
+        Value!();
+        EvaluationStorage!();
+        Result!();
+        StoreOnHeap!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_521 {
     };
 }
 
-impl_521!()
+impl_521!();

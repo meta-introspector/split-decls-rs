@@ -4,4 +4,4 @@ macro_rules! cargo_home_with_cwd {
     };
 }
 
-cargo_home_with_cwd!()
+cargo_home_with_cwd!();

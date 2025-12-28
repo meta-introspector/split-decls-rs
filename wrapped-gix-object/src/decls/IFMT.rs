@@ -4,4 +4,4 @@ macro_rules! IFMT {
     };
 }
 
-IFMT!()
+IFMT!();

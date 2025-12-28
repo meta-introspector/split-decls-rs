@@ -4,4 +4,4 @@ macro_rules! system_time_from_secs_nanos {
     };
 }
 
-system_time_from_secs_nanos!()
+system_time_from_secs_nanos!();

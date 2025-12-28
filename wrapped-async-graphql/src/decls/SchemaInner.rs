@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ValidationMode!();
         SchemaEnv!();
-        ExtensionFactory!();
+        ValidationMode!();
         BoxResolverFn!();
+        ExtensionFactory!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SchemaInner {
     };
 }
 
-SchemaInner!()
+SchemaInner!();

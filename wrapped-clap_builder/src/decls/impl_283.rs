@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        OsStr!();
-        EnumValueParser!();
         ValueEnum!();
-        Arg!();
-        PossibleValue!();
-        Result!();
         Error!();
-        Command!();
+        Result!();
+        EnumValueParser!();
+        Arg!();
         TypedValueParser!();
+        PossibleValue!();
+        OsStr!();
+        Command!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_283 {
     };
 }
 
-impl_283!()
+impl_283!();

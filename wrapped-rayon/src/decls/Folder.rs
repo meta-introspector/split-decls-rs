@@ -1,0 +1,7 @@
+macro_rules! Folder {
+    () => {
+        # [doc = " The `Folder` trait encapsulates [the standard fold"] # [doc = " operation][fold].  It can be fed many items using the `consume`"] # [doc = " method. At the end, once all items have been consumed, it can then"] # [doc = " be converted (using `complete`) into a final value."] # [doc = ""] # [doc = " [fold]: Iterator::fold()"] pub trait Folder < Item > : Sized { # [doc = " The type of result that will ultimately be produced by the folder."] type Result ; # [doc = " Consume next item and return new sequential state."] fn consume (self , item : Item) -> Self ; # [doc = " Consume items from the iterator until full, and return new sequential state."] # [doc = ""] # [doc = " This method is **optional**. The default simply iterates over"] # [doc = " `iter`, invoking `consume` and checking after each iteration"] # [doc = " whether `full` returns false."] # [doc = ""] # [doc = " The main reason to override it is if you can provide a more"] # [doc = " specialized, efficient implementation."] fn consume_iter < I > (mut self , iter : I) -> Self where I : IntoIterator < Item = Item > , { for item in iter { self = self . consume (item) ; if self . full () { break ; } } self } # [doc = " Finish consuming items, produce final result."] fn complete (self) -> Self :: Result ; # [doc = " Hint whether this `Folder` would like to stop processing"] # [doc = " further items, e.g. if a search has been completed."] fn full (& self) -> bool ; }
+    };
+}
+
+Folder!()

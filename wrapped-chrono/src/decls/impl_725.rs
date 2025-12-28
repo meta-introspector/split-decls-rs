@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        OutOfRange!();
         Error!();
         Month!();
-        OutOfRange!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_725 {
     };
 }
 
-impl_725!()
+impl_725!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Fixed!();
-        LocalTimeType!();
         AlternateTime!();
         Transition!();
+        LocalTimeType!();
+        Fixed!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TransitionRule {
     };
 }
 
-TransitionRule!()
+TransitionRule!();

@@ -4,4 +4,4 @@ macro_rules! empty_subscription {
     };
 }
 
-empty_subscription!()
+empty_subscription!();

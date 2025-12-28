@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Push!();
-        Default!();
         Tree!();
+        Default!();
+        Push!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_714 {
     };
 }
 
-impl_714!()
+impl_714!();

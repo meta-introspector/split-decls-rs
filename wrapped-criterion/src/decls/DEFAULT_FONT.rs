@@ -4,4 +4,4 @@ macro_rules! DEFAULT_FONT {
     };
 }
 
-DEFAULT_FONT!()
+DEFAULT_FONT!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         RawTableInner!();
+        Bucket!();
+        TableLayout!();
+        RawIntoIter!();
+        Fallibility!();
+        TryReserveError!();
+        RawDrain!();
         RawIter!();
         RawTable!();
-        RawIntoIter!();
-        TableLayout!();
-        Bucket!();
         RawIterHash!();
-        TryReserveError!();
-        Fallibility!();
-        RawDrain!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

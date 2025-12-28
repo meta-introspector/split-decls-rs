@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        Collector!();
         Bag!();
         AtomicEpoch!();
+        Entry!();
+        Collector!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Local {
     };
 }
 
-Local!()
+Local!();

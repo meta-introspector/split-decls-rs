@@ -4,4 +4,4 @@ macro_rules! tokens {
     };
 }
 
-tokens!()
+tokens!();

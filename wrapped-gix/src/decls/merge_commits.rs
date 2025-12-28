@@ -11,4 +11,4 @@ macro_rules! merge_commits {
     };
 }
 
-merge_commits!()
+merge_commits!();

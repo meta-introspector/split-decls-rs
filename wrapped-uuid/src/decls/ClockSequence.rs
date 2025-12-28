@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Version!();
+        Timestamp!();
+    };
+}
+
+macro_rules! ClockSequence {
+    () => {
+        deps!();
+        # [doc = " A counter that can be used by versions 1 and 6 UUIDs to support"] # [doc = " the uniqueness of timestamps."] # [doc = ""] # [doc = " # References"] # [doc = ""] # [doc = " * [UUID Version 1 in RFC 9562](https://www.ietf.org/rfc/rfc9562.html#section-5.1)"] # [doc = " * [UUID Version 6 in RFC 9562](https://www.ietf.org/rfc/rfc9562.html#section-5.6)"] # [doc = " * [UUID Generator States in RFC 9562](https://www.ietf.org/rfc/rfc9562.html#section-6.3)"] pub trait ClockSequence { # [doc = " The type of sequence returned by this counter."] type Output ; # [doc = " Get the next value in the sequence to feed into a timestamp."] # [doc = ""] # [doc = " This method will be called each time a [`Timestamp`] is constructed."] # [doc = ""] # [doc = " Any bits beyond [`ClockSequence::usable_bits`] in the output must be unset."] fn generate_sequence (& self , seconds : u64 , subsec_nanos : u32) -> Self :: Output ; # [doc = " Get the next value in the sequence, potentially also adjusting the timestamp."] # [doc = ""] # [doc = " This method should be preferred over `generate_sequence`."] # [doc = ""] # [doc = " Any bits beyond [`ClockSequence::usable_bits`] in the output must be unset."] fn generate_timestamp_sequence (& self , seconds : u64 , subsec_nanos : u32 ,) -> (Self :: Output , u64 , u32) { (self . generate_sequence (seconds , subsec_nanos) , seconds , subsec_nanos ,) } # [doc = " The number of usable bits from the least significant bit in the result of [`ClockSequence::generate_sequence`]"] # [doc = " or [`ClockSequence::generate_timestamp_sequence`]."] # [doc = ""] # [doc = " The number of usable bits must not exceed 128."] # [doc = ""] # [doc = " The number of usable bits is not expected to change between calls. An implementation of `ClockSequence` should"] # [doc = " always return the same value from this method."] fn usable_bits (& self) -> usize where Self :: Output : Sized , { cmp :: min (128 , core :: mem :: size_of :: < Self :: Output > ()) } }
+    };
+}
+
+ClockSequence!()

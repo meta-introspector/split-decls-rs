@@ -4,4 +4,4 @@ macro_rules! try_right {
     };
 }
 
-try_right!()
+try_right!();

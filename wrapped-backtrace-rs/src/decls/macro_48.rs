@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        PTRANSLATE_ADDRESS_ROUTINE64!();
-        Symbol!();
-        PREAD_PROCESS_MEMORY_ROUTINE64!();
-        STACKFRAME64!();
-        STACKFRAME_EX!();
-        HANDLE!();
-        BOOL!();
         PFUNCTION_TABLE_ACCESS_ROUTINE64!();
-        PGET_MODULE_BASE_ROUTINE64!();
+        BOOL!();
+        SYMBOL_INFOW!();
+        STACKFRAME_EX!();
         PENUMLOADED_MODULES_CALLBACKW64!();
+        PTRANSLATE_ADDRESS_ROUTINE64!();
+        HANDLE!();
+        PCWSTR!();
+        PREAD_PROCESS_MEMORY_ROUTINE64!();
+        PGET_MODULE_BASE_ROUTINE64!();
+        Symbol!();
         IMAGEHLP_LINEW64!();
         PWSTR!();
-        PCWSTR!();
-        SYMBOL_INFOW!();
+        STACKFRAME64!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! macro_48 {
     };
 }
 
-macro_48!()
+macro_48!();

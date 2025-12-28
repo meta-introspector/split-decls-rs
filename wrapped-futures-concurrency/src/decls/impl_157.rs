@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Consumer!();
-        State!();
-        ConcurrentStream!();
         FromStream!();
+        Consumer!();
         ConsumerState!();
+        ConcurrentStream!();
+        State!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_157 {
     };
 }
 
-impl_157!()
+impl_157!();

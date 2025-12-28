@@ -13,4 +13,4 @@ macro_rules! trait_environment_query {
     };
 }
 
-trait_environment_query!()
+trait_environment_query!();

@@ -4,4 +4,4 @@ macro_rules! is_bit_set {
     };
 }
 
-is_bit_set!()
+is_bit_set!();

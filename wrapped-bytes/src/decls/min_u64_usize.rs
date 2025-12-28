@@ -4,4 +4,4 @@ macro_rules! min_u64_usize {
     };
 }
 
-min_u64_usize!()
+min_u64_usize!();

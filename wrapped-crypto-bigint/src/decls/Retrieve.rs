@@ -4,4 +4,4 @@ macro_rules! Retrieve {
     };
 }
 
-Retrieve!()
+Retrieve!();

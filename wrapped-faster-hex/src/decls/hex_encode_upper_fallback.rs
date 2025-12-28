@@ -4,4 +4,4 @@ macro_rules! hex_encode_upper_fallback {
     };
 }
 
-hex_encode_upper_fallback!()
+hex_encode_upper_fallback!();

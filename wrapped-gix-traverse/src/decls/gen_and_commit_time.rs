@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         Either!();
         GenAndCommitTime!();
-        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! gen_and_commit_time {
     };
 }
 
-gen_and_commit_time!()
+gen_and_commit_time!();

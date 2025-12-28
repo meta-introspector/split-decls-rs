@@ -4,4 +4,4 @@ macro_rules! tokens_for_diffing {
     };
 }
 
-tokens_for_diffing!()
+tokens_for_diffing!();

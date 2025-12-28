@@ -4,4 +4,4 @@ macro_rules! future_obj {
     };
 }
 
-future_obj!()
+future_obj!();

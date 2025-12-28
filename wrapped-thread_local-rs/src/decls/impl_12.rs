@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        ThreadLocal!();
-        Iter!();
-        IntoIter!();
+        CachedIntoIter!();
     };
 }
 
 macro_rules! impl_12 {
     () => {
         deps!();
-        impl < 'a , T : Send + Sync > IntoIterator for & 'a ThreadLocal < T > { type Item = & 'a T ; type IntoIter = Iter < 'a , T > ; fn into_iter (self) -> Self :: IntoIter { self . iter () } }
+        impl < T : Send > Iterator for CachedIntoIter < T > { type Item = T ; # [inline] fn next (& mut self) -> Option < T > { self . inner . next () } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { self . inner . size_hint () } }
     };
 }
 

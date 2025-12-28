@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RegistryInfo!();
+        Secret!();
         Error!();
         LoginOptions!();
-        Secret!();
+        RegistryInfo!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! read_token {
     };
 }
 
-read_token!()
+read_token!();

@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        UnexpectedCfgCargoHelp!();
+        UnexpectedCfgCargoMacroHelp!();
+        UnexpectedCfgRustcHelp!();
+        UnexpectedCfgRustcMacroHelp!();
+    };
+}
+
+macro_rules! unexpected_cfg_value {
+    () => {
+        deps!();
+        pub (crate) mod unexpected_cfg_value { use rustc_errors :: DiagSymbolList ; use rustc_macros :: Subdiagnostic ; use rustc_span :: { Span , Symbol } ; # [derive (Subdiagnostic)] pub (crate) enum CodeSuggestion { ChangeValue { # [subdiagnostic] expected_values : ExpectedValues , # [subdiagnostic] suggestion : Option < ChangeValueSuggestion > , } , # [note (lint_unexpected_cfg_value_no_expected_value)] RemoveValue { # [subdiagnostic] suggestion : Option < RemoveValueSuggestion > , name : Symbol , } , # [note (lint_unexpected_cfg_value_no_expected_values)] RemoveCondition { # [subdiagnostic] suggestion : RemoveConditionSuggestion , name : Symbol , } , } # [derive (Subdiagnostic)] pub (crate) enum ChangeValueSuggestion { # [suggestion (lint_unexpected_cfg_value_similar_name , code = r#""{best_match}""# , applicability = "maybe-incorrect")] SimilarName { # [primary_span] span : Span , best_match : Symbol , } , # [suggestion (lint_unexpected_cfg_value_specify_value , code = r#" = "{first_possibility}""# , applicability = "maybe-incorrect")] SpecifyValue { # [primary_span] span : Span , first_possibility : Symbol , } , } # [derive (Subdiagnostic)] # [suggestion (lint_unexpected_cfg_value_remove_value , code = "" , applicability = "maybe-incorrect")] pub (crate) struct RemoveValueSuggestion { # [primary_span] pub span : Span , } # [derive (Subdiagnostic)] # [suggestion (lint_unexpected_cfg_value_remove_condition , code = "" , applicability = "maybe-incorrect")] pub (crate) struct RemoveConditionSuggestion { # [primary_span] pub span : Span , } # [derive (Subdiagnostic)] # [note (lint_unexpected_cfg_value_expected_values)] pub (crate) struct ExpectedValues { pub name : Symbol , pub have_none_possibility : bool , pub possibilities : DiagSymbolList , pub and_more : usize , } # [derive (Subdiagnostic)] pub (crate) enum InvocationHelp { # [note (lint_unexpected_cfg_doc_cargo)] Cargo { # [subdiagnostic] help : Option < CargoHelp > , # [subdiagnostic] macro_help : Option < super :: UnexpectedCfgCargoMacroHelp > , } , # [note (lint_unexpected_cfg_doc_rustc)] Rustc { # [subdiagnostic] help : Option < super :: UnexpectedCfgRustcHelp > , # [subdiagnostic] macro_help : Option < super :: UnexpectedCfgRustcMacroHelp > , } , } # [derive (Subdiagnostic)] pub (crate) enum CargoHelp { # [help (lint_unexpected_cfg_value_add_feature)] AddFeature { value : Symbol , } , # [help (lint_unexpected_cfg_define_features)] DefineFeatures , Other (# [subdiagnostic] super :: UnexpectedCfgCargoHelp) , } }
+    };
+}
+
+unexpected_cfg_value!()

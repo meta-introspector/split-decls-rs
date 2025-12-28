@@ -5,4 +5,4 @@ macro_rules! linux {
     };
 }
 
-linux!()
+linux!();

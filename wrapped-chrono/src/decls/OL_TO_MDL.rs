@@ -4,4 +4,4 @@ macro_rules! OL_TO_MDL {
     };
 }
 
-OL_TO_MDL!()
+OL_TO_MDL!();

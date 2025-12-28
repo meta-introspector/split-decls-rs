@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CoderResult!();
         Encoding!();
+        CoderResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! encode_from_utf16 {
     };
 }
 
-encode_from_utf16!()
+encode_from_utf16!();

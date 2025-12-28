@@ -14,4 +14,4 @@ macro_rules! Http {
     };
 }
 
-Http!()
+Http!();

@@ -4,4 +4,4 @@ macro_rules! MacroSubNs {
     };
 }
 
-MacroSubNs!()
+MacroSubNs!();

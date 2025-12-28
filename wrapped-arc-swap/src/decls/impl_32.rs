@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RefCnt!();
         AsRaw!();
+        RefCnt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

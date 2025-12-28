@@ -4,4 +4,4 @@ macro_rules! RebaseOperationType {
     };
 }
 
-RebaseOperationType!()
+RebaseOperationType!();

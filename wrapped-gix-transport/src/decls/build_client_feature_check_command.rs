@@ -11,4 +11,4 @@ macro_rules! build_client_feature_check_command {
     };
 }
 
-build_client_feature_check_command!()
+build_client_feature_check_command!();

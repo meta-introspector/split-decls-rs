@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Input!();
-        StartKind!();
-        Match!();
-        PatternID!();
-        NFA!();
-        Anchored!();
-        AhoCorasick!();
         DFA!();
-        AhoCorasickKind!();
-        MatchKind!();
-        AcAutomaton!();
         AhoCorasickBuilder!();
+        Match!();
+        AcAutomaton!();
+        NFA!();
+        StartKind!();
+        AhoCorasick!();
+        Anchored!();
+        AhoCorasickKind!();
+        Input!();
+        PatternID!();
         BuildError!();
+        MatchKind!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

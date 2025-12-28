@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Interleave!();
+        IndexedParallelIterator!();
+        Consumer!();
+        Producer!();
+        InterleaveProducer!();
+        ProducerCallback!();
+    };
+}
+
+macro_rules! impl_629 {
+    () => {
+        deps!();
+        impl < I , J > IndexedParallelIterator for Interleave < I , J > where I : IndexedParallelIterator , J : IndexedParallelIterator < Item = I :: Item > , { fn drive < C > (self , consumer : C) -> C :: Result where C : Consumer < Self :: Item > , { bridge (self , consumer) } fn len (& self) -> usize { self . i . len () . checked_add (self . j . len ()) . expect ("overflow") } fn with_producer < CB > (self , callback : CB) -> CB :: Output where CB : ProducerCallback < Self :: Item > , { let (i_len , j_len) = (self . i . len () , self . j . len ()) ; return self . i . with_producer (CallbackI { callback , i_len , j_len , i_next : false , j : self . j , }) ; struct CallbackI < CB , J > { callback : CB , i_len : usize , j_len : usize , i_next : bool , j : J , } impl < CB , J > ProducerCallback < J :: Item > for CallbackI < CB , J > where J : IndexedParallelIterator , CB : ProducerCallback < J :: Item > , { type Output = CB :: Output ; fn callback < I > (self , i_producer : I) -> Self :: Output where I : Producer < Item = J :: Item > , { self . j . with_producer (CallbackJ { i_producer , i_len : self . i_len , j_len : self . j_len , i_next : self . i_next , callback : self . callback , }) } } struct CallbackJ < CB , I > { callback : CB , i_len : usize , j_len : usize , i_next : bool , i_producer : I , } impl < CB , I > ProducerCallback < I :: Item > for CallbackJ < CB , I > where I : Producer , CB : ProducerCallback < I :: Item > , { type Output = CB :: Output ; fn callback < J > (self , j_producer : J) -> Self :: Output where J : Producer < Item = I :: Item > , { let producer = InterleaveProducer :: new (self . i_producer , j_producer , self . i_len , self . j_len , self . i_next ,) ; self . callback . callback (producer) } } } }
+    };
+}
+
+impl_629!()

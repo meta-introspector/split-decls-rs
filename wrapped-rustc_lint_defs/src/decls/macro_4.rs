@@ -1,0 +1,7 @@
+macro_rules! macro_4 {
+    () => {
+        declare_lint ! { # [doc = " The `meta_variable_misuse` lint detects possible meta-variable misuse"] # [doc = " in macro definitions."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![deny(meta_variable_misuse)]"] # [doc = ""] # [doc = " macro_rules! foo {"] # [doc = "     () => {};"] # [doc = "     ($( $i:ident = $($j:ident),+ );*) => { $( $( $i = $k; )+ )* };"] # [doc = " }"] # [doc = ""] # [doc = " fn main() {"] # [doc = "     foo!();"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " There are quite a few different ways a [`macro_rules`] macro can be"] # [doc = " improperly defined. Many of these errors were previously only detected"] # [doc = " when the macro was expanded or not at all. This lint is an attempt to"] # [doc = " catch some of these problems when the macro is *defined*."] # [doc = ""] # [doc = " This lint is \"allow\" by default because it may have false positives"] # [doc = " and other issues. See [issue #61053] for more details."] # [doc = ""] # [doc = " [`macro_rules`]: https://doc.rust-lang.org/reference/macros-by-example.html"] # [doc = " [issue #61053]: https://github.com/rust-lang/rust/issues/61053"] pub META_VARIABLE_MISUSE , Allow , "possible meta-variable misuse at macro definition" }
+    };
+}
+
+macro_4!()

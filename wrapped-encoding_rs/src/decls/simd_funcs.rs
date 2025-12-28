@@ -4,4 +4,4 @@ macro_rules! simd_funcs {
     };
 }
 
-simd_funcs!()
+simd_funcs!();

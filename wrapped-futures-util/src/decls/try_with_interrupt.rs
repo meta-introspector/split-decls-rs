@@ -11,4 +11,4 @@ macro_rules! try_with_interrupt {
     };
 }
 
-try_with_interrupt!()
+try_with_interrupt!();

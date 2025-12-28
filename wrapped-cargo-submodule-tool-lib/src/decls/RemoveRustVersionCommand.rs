@@ -4,4 +4,4 @@ macro_rules! RemoveRustVersionCommand {
     };
 }
 
-RemoveRustVersionCommand!()
+RemoveRustVersionCommand!();

@@ -4,4 +4,4 @@ macro_rules! calculate_auto_hex_len {
     };
 }
 
-calculate_auto_hex_len!()
+calculate_auto_hex_len!();

@@ -4,4 +4,4 @@ macro_rules! UnreachableLabel {
     };
 }
 
-UnreachableLabel!()
+UnreachableLabel!();

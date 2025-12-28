@@ -11,4 +11,4 @@ macro_rules! KEY_WOW64_32KEY {
     };
 }
 
-KEY_WOW64_32KEY!()
+KEY_WOW64_32KEY!();

@@ -4,4 +4,4 @@ macro_rules! TOKEN_LIMIT {
     };
 }
 
-TOKEN_LIMIT!()
+TOKEN_LIMIT!();

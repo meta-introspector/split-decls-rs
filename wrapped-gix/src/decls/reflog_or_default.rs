@@ -4,4 +4,4 @@ macro_rules! reflog_or_default {
     };
 }
 
-reflog_or_default!()
+reflog_or_default!();

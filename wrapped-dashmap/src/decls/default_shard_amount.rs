@@ -4,4 +4,4 @@ macro_rules! default_shard_amount {
     };
 }
 
-default_shard_amount!()
+default_shard_amount!();

@@ -4,4 +4,4 @@ macro_rules! parse_assigned_value {
     };
 }
 
-parse_assigned_value!()
+parse_assigned_value!();

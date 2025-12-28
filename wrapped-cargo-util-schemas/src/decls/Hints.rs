@@ -4,4 +4,4 @@ macro_rules! Hints {
     };
 }
 
-Hints!()
+Hints!();

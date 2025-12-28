@@ -4,4 +4,4 @@ macro_rules! generate_patches {
     };
 }
 
-generate_patches!()
+generate_patches!();

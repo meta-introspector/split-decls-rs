@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Crate!();
-        SourceRootId!();
         RootQueryDb!();
+        SourceRootId!();
+        Crate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! source_root_crates {
     };
 }
 
-source_root_crates!()
+source_root_crates!();

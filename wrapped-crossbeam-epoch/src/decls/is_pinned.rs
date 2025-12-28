@@ -4,4 +4,4 @@ macro_rules! is_pinned {
     };
 }
 
-is_pinned!()
+is_pinned!();

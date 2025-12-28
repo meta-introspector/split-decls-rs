@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IncompleteLineProgram!();
         Reader!();
         LineRows!();
+        IncompleteLineProgram!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! OneShotLineRows {
     };
 }
 
-OneShotLineRows!()
+OneShotLineRows!();

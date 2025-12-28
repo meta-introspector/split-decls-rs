@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Level!();
-        Resource!();
         Parser!();
-        Result!();
         Slice!();
+        Result!();
+        Resource!();
         Comment!();
+        Level!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

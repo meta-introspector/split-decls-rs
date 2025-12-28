@@ -4,4 +4,4 @@ macro_rules! string_number {
     };
 }
 
-string_number!()
+string_number!();

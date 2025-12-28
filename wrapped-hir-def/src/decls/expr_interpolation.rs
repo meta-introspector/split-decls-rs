@@ -14,4 +14,4 @@ fn f() {
     };
 }
 
-expr_interpolation!()
+expr_interpolation!();

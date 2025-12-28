@@ -4,4 +4,4 @@ macro_rules! os_str_to_bstring {
     };
 }
 
-os_str_to_bstring!()
+os_str_to_bstring!();

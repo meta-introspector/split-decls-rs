@@ -4,4 +4,4 @@ macro_rules! backends {
     };
 }
 
-backends!()
+backends!();

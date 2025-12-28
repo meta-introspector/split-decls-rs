@@ -4,4 +4,4 @@ macro_rules! rebuild_vec {
     };
 }
 
-rebuild_vec!()
+rebuild_vec!();

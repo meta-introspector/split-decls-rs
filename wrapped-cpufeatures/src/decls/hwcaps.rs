@@ -4,4 +4,4 @@ macro_rules! hwcaps {
     };
 }
 
-hwcaps!()
+hwcaps!();

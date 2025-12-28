@@ -4,4 +4,4 @@ macro_rules! remove_dir {
     };
 }
 
-remove_dir!()
+remove_dir!();

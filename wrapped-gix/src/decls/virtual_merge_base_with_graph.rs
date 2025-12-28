@@ -11,4 +11,4 @@ macro_rules! virtual_merge_base_with_graph {
     };
 }
 
-virtual_merge_base_with_graph!()
+virtual_merge_base_with_graph!();

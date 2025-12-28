@@ -4,4 +4,4 @@ macro_rules! MessageTrailers {
     };
 }
 
-MessageTrailers!()
+MessageTrailers!();

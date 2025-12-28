@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SourceRoot!();
-        RootQueryDb!();
-        CratesIdMap!();
-        CrateGraphBuilder!();
         FileChange!();
+        SourceRoot!();
+        CrateGraphBuilder!();
+        CratesIdMap!();
         SourceRootId!();
+        RootQueryDb!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

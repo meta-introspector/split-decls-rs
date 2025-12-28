@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IntraPackLookup!();
         IndexLookup!();
-        SingleOrMultiIndex!();
         IndexForObjectInPack!();
         PackId!();
+        IntraPackLookup!();
+        SingleOrMultiIndex!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! index_lookup {
     };
 }
 
-index_lookup!()
+index_lookup!();

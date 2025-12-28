@@ -4,4 +4,4 @@ macro_rules! join_mod {
     };
 }
 
-join_mod!()
+join_mod!();

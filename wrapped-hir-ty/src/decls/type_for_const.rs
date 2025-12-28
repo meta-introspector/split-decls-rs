@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
-        EarlyBinder!();
         TyLoweringContext!();
+        EarlyBinder!();
         LifetimeElisionKind!();
+        HirDatabase!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! type_for_const {
     };
 }
 
-type_for_const!()
+type_for_const!();

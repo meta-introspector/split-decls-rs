@@ -4,4 +4,4 @@ macro_rules! SECS_PER_DAY {
     };
 }
 
-SECS_PER_DAY!()
+SECS_PER_DAY!();

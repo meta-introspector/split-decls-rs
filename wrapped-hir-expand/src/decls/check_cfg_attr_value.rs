@@ -11,4 +11,4 @@ macro_rules! check_cfg_attr_value {
     };
 }
 
-check_cfg_attr_value!()
+check_cfg_attr_value!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ExpandTo!();
         Attr!();
-        InFile!();
         ExpandDatabase!();
         MacroCallKind!();
-        MacroCallLoc!();
+        ExpandTo!();
         MacroCallId!();
+        InFile!();
+        MacroCallLoc!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

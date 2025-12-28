@@ -11,4 +11,4 @@ macro_rules! pad_modes_allowing_padding {
     };
 }
 
-pad_modes_allowing_padding!()
+pad_modes_allowing_padding!();

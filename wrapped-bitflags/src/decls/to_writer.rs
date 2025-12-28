@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WriteHex!();
-        Bits!();
         Flags!();
+        Bits!();
+        WriteHex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! to_writer {
     };
 }
 
-to_writer!()
+to_writer!();

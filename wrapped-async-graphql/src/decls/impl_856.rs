@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InputValueResult!();
-        Result!();
         Registry!();
+        Result!();
         InputValueError!();
+        InputValueResult!();
         InputType!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_856 {
     };
 }
 
-impl_856!()
+impl_856!();

@@ -1,0 +1,7 @@
+macro_rules! ROUNDS_UNTIL_SLEEPING {
+    () => {
+        const ROUNDS_UNTIL_SLEEPING : u32 = ROUNDS_UNTIL_SLEEPY + 1 ;
+    };
+}
+
+ROUNDS_UNTIL_SLEEPING!()

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Distribution!();
+        Rng!();
+        Alphabetic!();
+    };
+}
+
+macro_rules! impl_147 {
+    () => {
+        deps!();
+        impl Distribution < u8 > for Alphabetic { fn sample < R : Rng + ? Sized > (& self , rng : & mut R) -> u8 { const RANGE : u8 = 26 + 26 ; let offset = rng . random_range (0 .. RANGE) + b'A' ; offset + (offset > b'Z') as u8 * (b'a' - b'Z' - 1) } }
+    };
+}
+
+impl_147!()

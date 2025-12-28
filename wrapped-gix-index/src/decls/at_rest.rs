@@ -4,4 +4,4 @@ macro_rules! at_rest {
     };
 }
 
-at_rest!()
+at_rest!();

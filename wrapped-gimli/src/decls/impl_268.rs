@@ -1,30 +1,30 @@
 macro_rules! deps {
     () => {
-        DebugTypes!();
-        DebugInfo!();
-        Error!();
-        DebugTypeSignature!();
-        DebugStrOffsets!();
-        DebugMacinfo!();
-        DebugLine!();
-        DebugLoc!();
-        DebugRngLists!();
-        DwarfFileType!();
-        DebugAbbrev!();
-        AbbreviationsCache!();
-        DwarfPackage!();
-        DwarfPackageSections!();
-        IndexSectionId!();
-        RangeLists!();
-        UnitIndexSectionIterator!();
         DebugMacro!();
-        DebugLocLists!();
-        Reader!();
-        DwoId!();
-        LocationLists!();
         Dwarf!();
-        SectionId!();
+        DebugAbbrev!();
+        DwarfFileType!();
+        DebugStrOffsets!();
+        DebugTypes!();
+        DebugLine!();
+        DebugMacinfo!();
+        RangeLists!();
+        LocationLists!();
+        DebugInfo!();
+        DwoId!();
+        IndexSectionId!();
+        DwarfPackageSections!();
+        AbbreviationsCache!();
+        Error!();
         Result!();
+        Reader!();
+        UnitIndexSectionIterator!();
+        DebugLoc!();
+        DebugTypeSignature!();
+        SectionId!();
+        DwarfPackage!();
+        DebugRngLists!();
+        DebugLocLists!();
     };
 }
 
@@ -35,4 +35,4 @@ macro_rules! impl_268 {
     };
 }
 
-impl_268!()
+impl_268!();

@@ -4,4 +4,4 @@ macro_rules! printlnc {
     };
 }
 
-printlnc!()
+printlnc!();

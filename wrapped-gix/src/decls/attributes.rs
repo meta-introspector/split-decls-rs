@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         AttributeStack!();
         Worktree!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! attributes {
     };
 }
 
-attributes!()
+attributes!();

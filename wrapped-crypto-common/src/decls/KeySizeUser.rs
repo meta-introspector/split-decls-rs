@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        KeyIvInit!();
         KeyInit!();
+        KeyIvInit!();
         Key!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! KeySizeUser {
     };
 }
 
-KeySizeUser!()
+KeySizeUser!();

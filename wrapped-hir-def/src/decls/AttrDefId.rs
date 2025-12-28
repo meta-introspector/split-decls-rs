@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FieldId!();
-        ModuleId!();
         AdtId!();
+        FieldId!();
         GenericParamId!();
         MacroId!();
+        ModuleId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! AttrDefId {
     };
 }
 
-AttrDefId!()
+AttrDefId!();

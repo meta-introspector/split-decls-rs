@@ -4,4 +4,4 @@ macro_rules! spanned {
     };
 }
 
-spanned!()
+spanned!();

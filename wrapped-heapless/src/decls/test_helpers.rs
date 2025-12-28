@@ -4,4 +4,4 @@ macro_rules! test_helpers {
     };
 }
 
-test_helpers!()
+test_helpers!();

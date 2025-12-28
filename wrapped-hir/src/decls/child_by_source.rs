@@ -4,4 +4,4 @@ macro_rules! child_by_source {
     };
 }
 
-child_by_source!()
+child_by_source!();

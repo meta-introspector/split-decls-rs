@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Feature!();
         Command!();
         Error!();
+        Feature!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! with_io {
     };
 }
 
-with_io!()
+with_io!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         DefaultConfig!();
         HybridStrategy!();
-        ArcSwap!();
         Guard!();
+        ArcSwap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DefaultStrategy {
     };
 }
 
-DefaultStrategy!()
+DefaultStrategy!();

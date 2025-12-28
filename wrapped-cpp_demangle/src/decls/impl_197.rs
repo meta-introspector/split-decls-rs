@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Decltype!();
         DemangleContext!();
         Demangle!();
-        Decltype!();
-        DemangleNodeType!();
-        Result!();
-        ArgScopeStack!();
-        TemplateParam!();
-        Expression!();
         DemangleWrite!();
+        ArgScopeStack!();
+        Result!();
+        Expression!();
+        DemangleNodeType!();
+        TemplateParam!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

@@ -11,4 +11,4 @@ macro_rules! is_generator {
     };
 }
 
-is_generator!()
+is_generator!();

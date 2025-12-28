@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        MultiIndexFileBundle!();
-        OnDiskFileState!();
-        Error!();
         OnDiskFile!();
+        Error!();
         IndexAndPacks!();
+        MultiIndexFileBundle!();
         IndexFileBundle!();
+        OnDiskFileState!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

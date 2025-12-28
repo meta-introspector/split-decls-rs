@@ -4,4 +4,4 @@ macro_rules! QueryPathSegment {
     };
 }
 
-QueryPathSegment!()
+QueryPathSegment!();

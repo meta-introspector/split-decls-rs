@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
+        Days!();
         NaiveTime!();
+        TimeDelta!();
+        Date!();
         Offset!();
         TimeZone!();
-        NaiveDate!();
-        LocalResult!();
-        TimeDelta!();
-        NaiveDateTime!();
-        Date!();
-        Months!();
-        Days!();
-        Utc!();
         DateTime!();
-        FixedOffset!();
-        SecondsFormat!();
+        Utc!();
+        Months!();
         Local!();
+        SecondsFormat!();
+        FixedOffset!();
+        NaiveDate!();
+        NaiveDateTime!();
+        LocalResult!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

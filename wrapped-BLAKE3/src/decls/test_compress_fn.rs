@@ -12,4 +12,4 @@ macro_rules! test_compress_fn {
     };
 }
 
-test_compress_fn!()
+test_compress_fn!();

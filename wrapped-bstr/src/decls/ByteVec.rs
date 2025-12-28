@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         UnescapeBytes!();
         BString!();
-        DrainBytes!();
         FromUtf8Error!();
+        DrainBytes!();
         BStr!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! ByteVec {
     };
 }
 
-ByteVec!()
+ByteVec!();

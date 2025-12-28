@@ -11,4 +11,4 @@ macro_rules! check_interpolation_result {
     };
 }
 
-check_interpolation_result!()
+check_interpolation_result!();

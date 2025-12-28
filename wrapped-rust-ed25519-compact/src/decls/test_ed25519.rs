@@ -11,4 +11,4 @@ macro_rules! test_ed25519 {
     };
 }
 
-test_ed25519!()
+test_ed25519!();

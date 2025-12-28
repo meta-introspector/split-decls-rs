@@ -4,4 +4,4 @@ macro_rules! app_settings {
     };
 }
 
-app_settings!()
+app_settings!();

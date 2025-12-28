@@ -4,4 +4,4 @@ macro_rules! set_aarch64_dit_sb_features {
     };
 }
 
-set_aarch64_dit_sb_features!()
+set_aarch64_dit_sb_features!();

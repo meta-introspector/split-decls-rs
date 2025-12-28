@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         OutOfRange!();
-        Error!();
         UtcDateTime!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_623 {
     };
 }
 
-impl_623!()
+impl_623!();

@@ -11,4 +11,4 @@ macro_rules! CHANGE_STATS {
     };
 }
 
-CHANGE_STATS!()
+CHANGE_STATS!();

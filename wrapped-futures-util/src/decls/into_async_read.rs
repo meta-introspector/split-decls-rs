@@ -4,4 +4,4 @@ macro_rules! into_async_read {
     };
 }
 
-into_async_read!()
+into_async_read!();

@@ -4,4 +4,4 @@ macro_rules! test_single_bit_flip {
     };
 }
 
-test_single_bit_flip!()
+test_single_bit_flip!();

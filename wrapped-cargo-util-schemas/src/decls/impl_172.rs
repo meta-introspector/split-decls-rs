@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TomlLintLevel!();
         TomlLint!();
+        TomlLintLevel!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

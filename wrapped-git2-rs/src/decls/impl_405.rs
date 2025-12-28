@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IndexerProgress!();
-        OdbPackwriterCb!();
-        Odb!();
         Error!();
+        IndexerProgress!();
         Indexer!();
-        Binding!();
+        Odb!();
+        OdbPackwriterCb!();
         Progress!();
+        Binding!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_405 {
     };
 }
 
-impl_405!()
+impl_405!();

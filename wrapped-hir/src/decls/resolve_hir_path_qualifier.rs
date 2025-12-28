@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        PathResolution!();
-        Variant!();
-        Adt!();
-        TypeParam!();
-        TypeNs!();
-        GenericParam!();
-        Module!();
-        Trait!();
         BuiltinType!();
+        Variant!();
+        GenericParam!();
         ModuleDef!();
+        PathResolution!();
+        TypeParam!();
+        Module!();
+        TypeNs!();
+        Trait!();
         TypeAlias!();
+        Adt!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! resolve_hir_path_qualifier {
     };
 }
 
-resolve_hir_path_qualifier!()
+resolve_hir_path_qualifier!();

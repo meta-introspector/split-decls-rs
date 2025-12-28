@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        Month!();
-        IsoWeek!();
-        OffsetFormat!();
-        Error!();
-        NaiveDateTime!();
-        OffsetPrecision!();
-        DelayedFormat!();
-        Offset!();
         NaiveTime!();
-        InternalInternal!();
-        NaiveDate!();
-        Pad!();
-        InternalFixed!();
-        SecondsFormat!();
+        Month!();
+        DelayedFormat!();
+        OffsetPrecision!();
+        NaiveDateTime!();
         Numeric!();
-        Weekday!();
-        Colons!();
-        Item!();
+        IsoWeek!();
+        InternalInternal!();
+        Error!();
         Fixed!();
+        Weekday!();
+        NaiveDate!();
+        OffsetFormat!();
+        Item!();
+        Pad!();
+        Offset!();
+        Colons!();
+        SecondsFormat!();
+        InternalFixed!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! impl_198 {
     };
 }
 
-impl_198!()
+impl_198!();

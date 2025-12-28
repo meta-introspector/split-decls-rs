@@ -1,0 +1,7 @@
+macro_rules! build_fn_ptr_addr_shim {
+    () => {
+        # [doc = " ```ignore (pseudo-impl)"] # [doc = " impl FnPtr for fn(u32) {"] # [doc = "     fn addr(self) -> usize {"] # [doc = "         self as usize"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] fn build_fn_ptr_addr_shim < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : DefId , self_ty : Ty < 'tcx >) -> Body < 'tcx > { assert_matches ! (self_ty . kind () , ty :: FnPtr (..) , "expected fn ptr, found {self_ty}") ; let span = tcx . def_span (def_id) ; let Some (sig) = tcx . fn_sig (def_id) . instantiate (tcx , & [self_ty . into ()]) . no_bound_vars () else { span_bug ! (span , "FnPtr::addr with bound vars for `{self_ty}`") ; } ; let locals = local_decls_for_sig (& sig , span) ; let source_info = SourceInfo :: outermost (span) ; let rvalue = Rvalue :: Cast (CastKind :: FnPtrToPtr , Operand :: Move (Place :: from (Local :: new (1))) , Ty :: new_imm_ptr (tcx , tcx . types . unit) ,) ; let stmt = Statement :: new (source_info , StatementKind :: Assign (Box :: new ((Place :: return_place () , rvalue))) ,) ; let statements = vec ! [stmt] ; let start_block = BasicBlockData :: new_stmts (statements , Some (Terminator { source_info , kind : TerminatorKind :: Return }) , false ,) ; let source = MirSource :: from_instance (ty :: InstanceKind :: FnPtrAddrShim (def_id , self_ty)) ; new_body (source , IndexVec :: from_elem_n (start_block , 1) , locals , sig . inputs () . len () , span) }
+    };
+}
+
+build_fn_ptr_addr_shim!()

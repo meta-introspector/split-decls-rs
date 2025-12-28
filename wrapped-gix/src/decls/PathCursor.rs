@@ -4,4 +4,4 @@ macro_rules! PathCursor {
     };
 }
 
-PathCursor!()
+PathCursor!();

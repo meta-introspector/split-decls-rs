@@ -13,4 +13,4 @@ macro_rules! gen_constructor {
     };
 }
 
-gen_constructor!()
+gen_constructor!();

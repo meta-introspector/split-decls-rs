@@ -4,4 +4,4 @@ macro_rules! unit {
     };
 }
 
-unit!()
+unit!();

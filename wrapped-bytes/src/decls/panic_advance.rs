@@ -11,4 +11,4 @@ macro_rules! panic_advance {
     };
 }
 
-panic_advance!()
+panic_advance!();

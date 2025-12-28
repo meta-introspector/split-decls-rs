@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ArangeEntryIter!();
-        Reader!();
         ArangeEntry!();
         Result!();
+        Reader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_371 {
     };
 }
 
-impl_371!()
+impl_371!();

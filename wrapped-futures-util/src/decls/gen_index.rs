@@ -4,4 +4,4 @@ macro_rules! gen_index {
     };
 }
 
-gen_index!()
+gen_index!();

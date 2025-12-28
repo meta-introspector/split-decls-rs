@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        Unwind!();
+        Builder!();
+        CoroutineDrop!();
+        DropKind!();
+        DropNode!();
+        CFG!();
+        BlockAnd!();
+        Scope!();
+        DropTree!();
+        ExitScopes!();
+    };
+}
+
+macro_rules! impl_157 {
+    () => {
+        deps!();
+        impl < 'a , 'tcx : 'a > Builder < 'a , 'tcx > { # [doc = " Build a drop tree for a breakable scope."] # [doc = ""] # [doc = " If `continue_block` is `Some`, then the tree is for `continue` inside a"] # [doc = " loop. Otherwise this is for `break` or `return`."] fn build_exit_tree (& mut self , mut drops : DropTree , else_scope : region :: Scope , span : Span , continue_block : Option < BasicBlock > ,) -> Option < BlockAnd < () > > { let blocks = drops . build_mir :: < ExitScopes > (& mut self . cfg , continue_block) ; let is_coroutine = self . coroutine . is_some () ; if drops . drop_nodes . iter () . any (| drop_node | drop_node . data . kind == DropKind :: Value) { let unwind_target = self . diverge_cleanup_target (else_scope , span) ; let mut unwind_indices = IndexVec :: from_elem_n (unwind_target , 1) ; for (drop_idx , drop_node) in drops . drop_nodes . iter_enumerated () . skip (1) { match drop_node . data . kind { DropKind :: Storage | DropKind :: ForLint (_) => { if is_coroutine { let unwind_drop = self . scopes . unwind_drops . add_drop (drop_node . data , unwind_indices [drop_node . next]) ; unwind_indices . push (unwind_drop) ; } else { unwind_indices . push (unwind_indices [drop_node . next]) ; } } DropKind :: Value => { let unwind_drop = self . scopes . unwind_drops . add_drop (drop_node . data , unwind_indices [drop_node . next]) ; self . scopes . unwind_drops . add_entry_point (blocks [drop_idx] . unwrap () , unwind_indices [drop_node . next] ,) ; unwind_indices . push (unwind_drop) ; } } } } if is_coroutine && drops . drop_nodes . iter () . any (| DropNode { data , next : _ } | { data . kind == DropKind :: Value && self . is_async_drop (data . local) }) { let dropline_target = self . diverge_dropline_target (else_scope , span) ; let mut dropline_indices = IndexVec :: from_elem_n (dropline_target , 1) ; for (drop_idx , drop_data) in drops . drop_nodes . iter_enumerated () . skip (1) { let coroutine_drop = self . scopes . coroutine_drops . add_drop (drop_data . data , dropline_indices [drop_data . next]) ; match drop_data . data . kind { DropKind :: Storage | DropKind :: ForLint (_) => { } DropKind :: Value => { if self . is_async_drop (drop_data . data . local) { self . scopes . coroutine_drops . add_entry_point (blocks [drop_idx] . unwrap () , dropline_indices [drop_data . next] ,) ; } } } dropline_indices . push (coroutine_drop) ; } } blocks [ROOT_NODE] . map (BasicBlock :: unit) } # [doc = " Build the unwind and coroutine drop trees."] pub (crate) fn build_drop_trees (& mut self) { if self . coroutine . is_some () { self . build_coroutine_drop_trees () ; } else { Self :: build_unwind_tree (& mut self . cfg , & mut self . scopes . unwind_drops , self . fn_span , & mut None ,) ; } } fn build_coroutine_drop_trees (& mut self) { let drops = & mut self . scopes . coroutine_drops ; let cfg = & mut self . cfg ; let fn_span = self . fn_span ; let blocks = drops . build_mir :: < CoroutineDrop > (cfg , None) ; if let Some (root_block) = blocks [ROOT_NODE] { cfg . terminate (root_block , SourceInfo :: outermost (fn_span) , TerminatorKind :: CoroutineDrop ,) ; } let resume_block = & mut None ; let unwind_drops = & mut self . scopes . unwind_drops ; Self :: build_unwind_tree (cfg , unwind_drops , fn_span , resume_block) ; for (drop_idx , drop_node) in drops . drop_nodes . iter_enumerated () { if let DropKind :: Value = drop_node . data . kind && let Some (bb) = blocks [drop_idx] { debug_assert ! (drop_node . next < drops . drop_nodes . next_index ()) ; drops . entry_points . push ((drop_node . next , bb)) ; } } Self :: build_unwind_tree (cfg , drops , fn_span , resume_block) ; } fn build_unwind_tree (cfg : & mut CFG < 'tcx > , drops : & mut DropTree , fn_span : Span , resume_block : & mut Option < BasicBlock > ,) { let blocks = drops . build_mir :: < Unwind > (cfg , * resume_block) ; if let (None , Some (resume)) = (* resume_block , blocks [ROOT_NODE]) { cfg . terminate (resume , SourceInfo :: outermost (fn_span) , TerminatorKind :: UnwindResume) ; * resume_block = blocks [ROOT_NODE] ; } } }
+    };
+}
+
+impl_157!()

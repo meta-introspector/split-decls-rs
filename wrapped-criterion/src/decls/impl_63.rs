@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IncomingMessage!();
-        Connection!();
-        ValueFormatter!();
-        OutgoingMessage!();
-        InnerConnection!();
-        Error!();
         MessageError!();
+        OutgoingMessage!();
         Result!();
+        Connection!();
+        IncomingMessage!();
+        ValueFormatter!();
+        Error!();
+        InnerConnection!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_63 {
     };
 }
 
-impl_63!()
+impl_63!();

@@ -4,4 +4,4 @@ macro_rules! RealLayer0Analyzer {
     };
 }
 
-RealLayer0Analyzer!()
+RealLayer0Analyzer!();

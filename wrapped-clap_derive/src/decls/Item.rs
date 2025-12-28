@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Sp!();
-        ValueParser!();
+        Kind!();
+        Name!();
         CasingStyle!();
+        Sp!();
         Method!();
         Deprecation!();
-        Kind!();
+        ValueParser!();
         Action!();
-        Name!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! Item {
     };
 }
 
-Item!()
+Item!();

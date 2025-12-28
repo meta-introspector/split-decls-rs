@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        ProjectionCacheKey!();
+        ProjectionCacheEntry!();
+        Selection!();
+        NormalizedTerm!();
+        ProjectionCache!();
+        PredicateObligations!();
+        InferCtxtUndoLogs!();
+    };
+}
+
+macro_rules! impl_297 {
+    () => {
+        deps!();
+        impl < 'tcx > ProjectionCache < '_ , 'tcx > { # [inline] fn map (& mut self ,) -> SnapshotMapRef < '_ , ProjectionCacheKey < 'tcx > , ProjectionCacheEntry < 'tcx > , InferCtxtUndoLogs < 'tcx > , > { self . map . with_log (self . undo_log) } pub fn clear (& mut self) { self . map () . clear () ; } # [doc = " Try to start normalize `key`; returns an error if"] # [doc = " normalization already occurred (this error corresponds to a"] # [doc = " cache hit, so it's actually a good thing)."] pub fn try_start (& mut self , key : ProjectionCacheKey < 'tcx > ,) -> Result < () , ProjectionCacheEntry < 'tcx > > { let mut map = self . map () ; if let Some (entry) = map . get (& key) { return Err (entry . clone ()) ; } map . insert (key , ProjectionCacheEntry :: InProgress) ; Ok (()) } # [doc = " Indicates that `key` was normalized to `value`."] pub fn insert_term (& mut self , key : ProjectionCacheKey < 'tcx > , value : NormalizedTerm < 'tcx >) { debug ! ("ProjectionCacheEntry::insert_ty: adding cache entry: key={:?}, value={:?}" , key , value) ; let mut map = self . map () ; if let Some (ProjectionCacheEntry :: Recur) = map . get (& key) { debug ! ("Not overwriting Recur") ; return ; } let fresh_key = map . insert (key , ProjectionCacheEntry :: NormalizedTerm { ty : value , complete : None }) ; assert ! (! fresh_key , "never started projecting `{key:?}`") ; } # [doc = " Mark the relevant projection cache key as having its derived obligations"] # [doc = " complete, so they won't have to be re-computed (this is OK to do in a"] # [doc = " snapshot - if the snapshot is rolled back, the obligations will be"] # [doc = " marked as incomplete again)."] pub fn complete (& mut self , key : ProjectionCacheKey < 'tcx > , result : EvaluationResult) { let mut map = self . map () ; match map . get (& key) { Some (ProjectionCacheEntry :: NormalizedTerm { ty , complete : _ }) => { info ! ("ProjectionCacheEntry::complete({:?}) - completing {:?}" , key , ty) ; let mut ty = ty . clone () ; if result . must_apply_considering_regions () { ty . obligations = PredicateObligations :: new () ; } map . insert (key , ProjectionCacheEntry :: NormalizedTerm { ty , complete : Some (result) } ,) ; } ref value => { info ! ("ProjectionCacheEntry::complete({:?}) - ignoring {:?}" , key , value) ; } } ; } pub fn is_complete (& mut self , key : ProjectionCacheKey < 'tcx >) -> Option < EvaluationResult > { self . map () . get (& key) . and_then (| res | match res { ProjectionCacheEntry :: NormalizedTerm { ty : _ , complete } => * complete , _ => None , }) } # [doc = " Indicates that trying to normalize `key` resulted in"] # [doc = " ambiguity. No point in trying it again then until we gain more"] # [doc = " type information (in which case, the \"fully resolved\" key will"] # [doc = " be different)."] pub fn ambiguous (& mut self , key : ProjectionCacheKey < 'tcx >) { let fresh = self . map () . insert (key , ProjectionCacheEntry :: Ambiguous) ; assert ! (! fresh , "never started projecting `{key:?}`") ; } # [doc = " Indicates that while trying to normalize `key`, `key` was required to"] # [doc = " be normalized again. Selection or evaluation should eventually report"] # [doc = " an error here."] pub fn recur (& mut self , key : ProjectionCacheKey < 'tcx >) { let fresh = self . map () . insert (key , ProjectionCacheEntry :: Recur) ; assert ! (! fresh , "never started projecting `{key:?}`") ; } # [doc = " Indicates that trying to normalize `key` resulted in"] # [doc = " error."] pub fn error (& mut self , key : ProjectionCacheKey < 'tcx >) { let fresh = self . map () . insert (key , ProjectionCacheEntry :: Error) ; assert ! (! fresh , "never started projecting `{key:?}`") ; } }
+    };
+}
+
+impl_297!()

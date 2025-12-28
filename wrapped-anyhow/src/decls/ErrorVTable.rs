@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Own!();
+        ErrorImpl!();
         Ref!();
         Mut!();
-        Own!();
         Backtrace!();
-        ErrorImpl!();
         StdError!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! ErrorVTable {
     };
 }
 
-ErrorVTable!()
+ErrorVTable!();

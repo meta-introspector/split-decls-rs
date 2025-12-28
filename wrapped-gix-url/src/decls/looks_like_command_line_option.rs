@@ -4,4 +4,4 @@ macro_rules! looks_like_command_line_option {
     };
 }
 
-looks_like_command_line_option!()
+looks_like_command_line_option!();

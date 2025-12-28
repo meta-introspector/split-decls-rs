@@ -4,4 +4,4 @@ macro_rules! append_extended_key_value {
     };
 }
 
-append_extended_key_value!()
+append_extended_key_value!();

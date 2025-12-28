@@ -4,4 +4,4 @@ macro_rules! test_keys_change_output {
     };
 }
 
-test_keys_change_output!()
+test_keys_change_output!();

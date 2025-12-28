@@ -11,4 +11,4 @@ macro_rules! test_issue_206_windows_sse2 {
     };
 }
 
-test_issue_206_windows_sse2!()
+test_issue_206_windows_sse2!();

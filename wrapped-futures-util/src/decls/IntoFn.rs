@@ -4,4 +4,4 @@ macro_rules! IntoFn {
     };
 }
 
-IntoFn!()
+IntoFn!();

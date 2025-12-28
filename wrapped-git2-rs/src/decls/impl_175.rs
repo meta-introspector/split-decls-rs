@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Transport!();
+        Error!();
         SmartSubtransport!();
         RawSmartSubtransport!();
-        Error!();
-        Transport!();
         Remote!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_175 {
     };
 }
 
-impl_175!()
+impl_175!();

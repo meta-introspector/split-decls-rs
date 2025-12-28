@@ -11,4 +11,4 @@ macro_rules! parallel_iter_drop {
     };
 }
 
-parallel_iter_drop!()
+parallel_iter_drop!();

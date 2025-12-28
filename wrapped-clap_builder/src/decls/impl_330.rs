@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         MapValueParser!();
-        Parser!();
-        ValueParserFactory!();
         PathBufValueParser!();
+        ValueParserFactory!();
+        Parser!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_330 {
     };
 }
 
-impl_330!()
+impl_330!();

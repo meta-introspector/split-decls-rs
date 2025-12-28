@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WnafScalar!();
         Wnaf!();
+        WnafScalar!();
         Group!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! WnafBase {
     };
 }
 
-WnafBase!()
+WnafBase!();

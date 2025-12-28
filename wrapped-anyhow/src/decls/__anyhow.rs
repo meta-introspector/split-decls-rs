@@ -11,4 +11,4 @@ macro_rules! __anyhow {
     };
 }
 
-__anyhow!()
+__anyhow!();

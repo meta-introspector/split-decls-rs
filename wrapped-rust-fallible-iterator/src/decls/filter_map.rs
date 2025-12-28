@@ -4,4 +4,4 @@ macro_rules! filter_map {
     };
 }
 
-filter_map!()
+filter_map!();

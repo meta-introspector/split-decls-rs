@@ -4,4 +4,4 @@ macro_rules! SelectTimeoutError {
     };
 }
 
-SelectTimeoutError!()
+SelectTimeoutError!();

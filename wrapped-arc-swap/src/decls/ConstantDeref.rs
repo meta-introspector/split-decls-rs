@@ -4,4 +4,4 @@ macro_rules! ConstantDeref {
     };
 }
 
-ConstantDeref!()
+ConstantDeref!();

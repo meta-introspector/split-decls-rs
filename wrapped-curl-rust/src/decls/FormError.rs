@@ -4,4 +4,4 @@ macro_rules! FormError {
     };
 }
 
-FormError!()
+FormError!();

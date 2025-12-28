@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        StrftimeItems!();
-        Parsed!();
-        ParseError!();
-        Error!();
-        IsoWeek!();
-        InternalInternal!();
-        NaiveTime!();
-        Numeric!();
-        Month!();
         NaiveDate!();
-        TimeZone!();
-        Pad!();
-        Item!();
-        DateTime!();
-        NaiveDateTime!();
         Fixed!();
+        Pad!();
+        Parsed!();
+        IsoWeek!();
+        DateTime!();
+        InternalInternal!();
+        Month!();
+        StrftimeItems!();
+        Error!();
+        NaiveDateTime!();
+        NaiveTime!();
+        ParseError!();
+        TimeZone!();
+        Item!();
+        Numeric!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

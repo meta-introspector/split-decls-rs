@@ -11,4 +11,4 @@ macro_rules! get_vec_ty {
     };
 }
 
-get_vec_ty!()
+get_vec_ty!();

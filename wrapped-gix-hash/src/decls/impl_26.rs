@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ObjectId!();
+        Error!();
         Prefix!();
         Kind!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

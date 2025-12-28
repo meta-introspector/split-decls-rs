@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        ZalsaLocal!();
+        StorageBuilder!();
+        Zalsa!();
+        Event!();
+        EventKind!();
+        StorageHandle!();
+        Storage!();
+        Database!();
+    };
+}
+
+macro_rules! impl_292 {
+    () => {
+        deps!();
+        impl < Db : Database > Storage < Db > { # [doc = " Create a new database storage."] # [doc = ""] # [doc = " The `event_callback` function is invoked by the salsa runtime at various points during execution."] pub fn new (event_callback : Option < Box < dyn Fn (crate :: Event) + Send + Sync + 'static > >) -> Self { Self { handle : StorageHandle :: new (event_callback) , zalsa_local : ZalsaLocal :: new () , } } # [doc = " Returns a builder for database storage."] pub fn builder () -> StorageBuilder < Db > { StorageBuilder :: default () } # [doc = " Convert this instance of [`Storage`] into a [`StorageHandle`]."] # [doc = ""] # [doc = " This will discard the local state of this [`Storage`], thereby returning a value that"] # [doc = " is both [`Sync`] and [`std::panic::UnwindSafe`]."] pub fn into_zalsa_handle (mut self) -> StorageHandle < Db > { self . zalsa_local . record_unfilled_pages (self . handle . zalsa_impl . table ()) ; let Self { handle , zalsa_local : _ , } = & self ; let handle = unsafe { std :: ptr :: read (handle) } ; std :: mem :: forget :: < Self > (self) ; handle } # [doc = " Sets cancellation flag and blocks until all other workers with access"] # [doc = " to this storage have completed."] # [doc = ""] # [doc = " This could deadlock if there is a single worker with two handles to the"] # [doc = " same database!"] # [doc = ""] # [doc = " Needs to be paired with a call to `reset_cancellation_flag`."] fn cancel_others (& mut self) -> & mut Zalsa { debug_assert ! (self . zalsa_local . try_with_query_stack (| stack | stack . is_empty ()) == Some (true) , "attempted to cancel within query computation, this is a deadlock") ; self . handle . zalsa_impl . runtime () . set_cancellation_flag () ; self . handle . zalsa_impl . event (& | | Event :: new (EventKind :: DidSetCancellationFlag)) ; let mut coordinate_lock = self . handle . coordinate . coordinate_lock . lock () ; let zalsa = loop { if Arc :: strong_count (& self . handle . zalsa_impl) == 1 { break unsafe { & mut * (Arc :: as_ptr (& self . handle . zalsa_impl) . cast_mut ()) } ; } coordinate_lock = self . handle . coordinate . cvar . wait (coordinate_lock) ; } ; zalsa . runtime_mut () . reset_cancellation_flag () ; zalsa } }
+    };
+}
+
+impl_292!()

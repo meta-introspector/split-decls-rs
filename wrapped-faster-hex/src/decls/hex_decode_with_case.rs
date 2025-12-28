@@ -12,4 +12,4 @@ macro_rules! hex_decode_with_case {
     };
 }
 
-hex_decode_with_case!()
+hex_decode_with_case!();

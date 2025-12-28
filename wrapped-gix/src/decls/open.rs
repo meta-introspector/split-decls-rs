@@ -4,4 +4,4 @@ macro_rules! open {
     };
 }
 
-open!()
+open!();

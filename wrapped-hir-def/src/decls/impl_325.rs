@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ModuleDefId!();
+        ScopeNames!();
         ScopeDef!();
+        ModuleDefId!();
+        PerNs!();
         MacroId!();
         BindingId!();
-        PerNs!();
-        ScopeNames!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_325 {
     };
 }
 
-impl_325!()
+impl_325!();

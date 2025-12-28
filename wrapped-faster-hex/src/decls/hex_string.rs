@@ -4,4 +4,4 @@ macro_rules! hex_string {
     };
 }
 
-hex_string!()
+hex_string!();

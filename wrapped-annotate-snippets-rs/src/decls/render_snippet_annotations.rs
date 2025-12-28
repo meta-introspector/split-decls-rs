@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Renderer!();
+        AnnotatedLineInfo!();
+        LineAnnotationType!();
+        Margin!();
         SourceMap!();
+        Snippet!();
         Annotation!();
-        Origin!();
+        StyledBuffer!();
         LineAnnotation!();
+        Renderer!();
+        Origin!();
         ElementStyle!();
         DecorStyle!();
-        Margin!();
-        LineAnnotationType!();
-        AnnotatedLineInfo!();
-        StyledBuffer!();
-        Snippet!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! render_snippet_annotations {
     };
 }
 
-render_snippet_annotations!()
+render_snippet_annotations!();

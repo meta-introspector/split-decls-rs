@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DecoderReader!();
         GeneralPurposeWrapper!();
-        EngineWrapper!();
         NaiveWrapper!();
+        EngineWrapper!();
+        DecoderReader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! all_engines_except_decoder_reader {
     };
 }
 
-all_engines_except_decoder_reader!()
+all_engines_except_decoder_reader!();

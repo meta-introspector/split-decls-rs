@@ -4,4 +4,4 @@ macro_rules! whitespace_anchored_rev {
     };
 }
 
-whitespace_anchored_rev!()
+whitespace_anchored_rev!();

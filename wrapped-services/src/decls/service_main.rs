@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
         State!();
-        Service!();
+        PWSTR!();
         Command!();
+        Service!();
     };
 }
 

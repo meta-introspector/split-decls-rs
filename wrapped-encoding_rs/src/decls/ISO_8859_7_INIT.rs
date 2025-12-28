@@ -12,4 +12,4 @@ macro_rules! ISO_8859_7_INIT {
     };
 }
 
-ISO_8859_7_INIT!()
+ISO_8859_7_INIT!();

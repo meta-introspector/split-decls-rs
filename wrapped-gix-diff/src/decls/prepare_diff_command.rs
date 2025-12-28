@@ -11,4 +11,4 @@ macro_rules! prepare_diff_command {
     };
 }
 
-prepare_diff_command!()
+prepare_diff_command!();

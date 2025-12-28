@@ -4,4 +4,4 @@ macro_rules! _cookbook {
     };
 }
 
-_cookbook!()
+_cookbook!();

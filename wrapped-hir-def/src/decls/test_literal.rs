@@ -24,4 +24,4 @@ const VALUE: i32 = -1;
     };
 }
 
-test_literal!()
+test_literal!();

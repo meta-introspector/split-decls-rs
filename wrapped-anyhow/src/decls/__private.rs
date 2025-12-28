@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Error!();
+        AdhocKind!();
+        TraitKind!();
+        NotBothDebug!();
         BothDebug!();
         Result!();
-        TraitKind!();
         BoxedKind!();
-        NotBothDebug!();
-        AdhocKind!();
-        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! __private {
     };
 }
 
-__private!()
+__private!();

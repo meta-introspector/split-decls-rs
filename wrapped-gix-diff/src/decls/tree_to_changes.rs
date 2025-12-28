@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Action!();
-        Change!();
         Visit!();
-        Location!();
-        Recorder!();
+        Action!();
         Delegate!();
+        Change!();
+        Recorder!();
+        Location!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! tree_to_changes {
     };
 }
 
-tree_to_changes!()
+tree_to_changes!();

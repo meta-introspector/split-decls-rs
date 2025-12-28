@@ -11,4 +11,4 @@ macro_rules! args_os_opt {
     };
 }
 
-args_os_opt!()
+args_os_opt!();

@@ -11,4 +11,4 @@ macro_rules! NO_PAD_ENGINE {
     };
 }
 
-NO_PAD_ENGINE!()
+NO_PAD_ENGINE!();

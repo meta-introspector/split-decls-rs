@@ -4,4 +4,4 @@ macro_rules! speculation_barrier {
     };
 }
 
-speculation_barrier!()
+speculation_barrier!();

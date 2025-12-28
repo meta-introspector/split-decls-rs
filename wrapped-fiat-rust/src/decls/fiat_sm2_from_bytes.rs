@@ -11,4 +11,4 @@ macro_rules! fiat_sm2_from_bytes {
     };
 }
 
-fiat_sm2_from_bytes!()
+fiat_sm2_from_bytes!();

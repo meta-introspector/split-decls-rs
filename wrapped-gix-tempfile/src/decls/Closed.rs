@@ -4,4 +4,4 @@ macro_rules! Closed {
     };
 }
 
-Closed!()
+Closed!();

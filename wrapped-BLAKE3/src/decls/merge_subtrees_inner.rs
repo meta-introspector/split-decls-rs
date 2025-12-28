@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Platform!();
         Output!();
         ChainingValue!();
-        Platform!();
         Mode!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! merge_subtrees_inner {
     };
 }
 
-merge_subtrees_inner!()
+merge_subtrees_inner!();

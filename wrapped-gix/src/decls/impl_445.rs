@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Error!();
         Path!();
         Default!();
-        Options!();
-        Error!();
         Cache!();
+        Options!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_445 {
     };
 }
 
-impl_445!()
+impl_445!();

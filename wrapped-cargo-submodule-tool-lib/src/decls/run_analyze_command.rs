@@ -11,4 +11,4 @@ macro_rules! run_analyze_command {
     };
 }
 
-run_analyze_command!()
+run_analyze_command!();

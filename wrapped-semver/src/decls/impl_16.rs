@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        VersionReq!();
+        Position!();
     };
 }
 
 macro_rules! impl_16 {
     () => {
         deps!();
-        # [doc = " The default VersionReq is the same as [`VersionReq::STAR`]."] impl Default for VersionReq { fn default () -> Self { VersionReq :: STAR } }
+        impl Display for Position { fn fmt (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str (match self { Position :: Major => "major version number" , Position :: Minor => "minor version number" , Position :: Patch => "patch version number" , Position :: Pre => "pre-release identifier" , Position :: Build => "build metadata" , }) } }
     };
 }
 

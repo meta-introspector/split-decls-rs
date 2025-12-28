@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ContextSelectionSet!();
         Schema!();
         BoxFieldFuture!();
-        OutputType!();
         Field!();
+        ContextSelectionSet!();
+        OutputType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! collect_schema_field {
     };
 }
 
-collect_schema_field!()
+collect_schema_field!();

@@ -18,4 +18,4 @@ fn f() {
     };
 }
 
-test_edition_handling_in!()
+test_edition_handling_in!();

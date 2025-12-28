@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugArangesOffset!();
         Reader!();
+        DebugArangesOffset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ArangeHeaderIter {
     };
 }
 
-ArangeHeaderIter!()
+ArangeHeaderIter!();

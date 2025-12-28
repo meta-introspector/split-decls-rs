@@ -35,4 +35,4 @@ impl From<Subtree> for TokenTree {
     };
 }
 
-mbe_smoke_test!()
+mbe_smoke_test!();

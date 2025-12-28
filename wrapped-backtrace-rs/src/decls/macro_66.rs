@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        BOOL!();
         HANDLE!();
         IMAGEHLP_LINEW64!();
-        BOOL!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_66 {
     };
 }
 
-macro_66!()
+macro_66!();

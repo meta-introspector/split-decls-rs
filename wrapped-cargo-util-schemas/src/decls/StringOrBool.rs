@@ -4,4 +4,4 @@ macro_rules! StringOrBool {
     };
 }
 
-StringOrBool!()
+StringOrBool!();

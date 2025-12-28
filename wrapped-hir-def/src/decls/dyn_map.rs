@@ -4,4 +4,4 @@ macro_rules! dyn_map {
     };
 }
 
-dyn_map!()
+dyn_map!();

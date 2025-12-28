@@ -4,4 +4,4 @@ macro_rules! Cycle {
     };
 }
 
-Cycle!()
+Cycle!();

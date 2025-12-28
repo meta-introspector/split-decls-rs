@@ -4,4 +4,4 @@ macro_rules! future_group {
     };
 }
 
-future_group!()
+future_group!();

@@ -4,4 +4,4 @@ macro_rules! WRITERS_PARKED {
     };
 }
 
-WRITERS_PARKED!()
+WRITERS_PARKED!();

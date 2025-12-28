@@ -14,4 +14,4 @@ _{bin_name_underscore}_commands() {{
     };
 }
 
-subcommand_details!()
+subcommand_details!();

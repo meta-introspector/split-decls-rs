@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Policy!();
         KeyMap!();
-        Key!();
         DynMap!();
+        Key!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

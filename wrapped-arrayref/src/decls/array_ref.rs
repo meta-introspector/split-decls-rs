@@ -4,4 +4,4 @@ macro_rules! array_ref {
     };
 }
 
-array_ref!()
+array_ref!();

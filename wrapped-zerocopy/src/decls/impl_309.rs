@@ -1,0 +1,7 @@
+macro_rules! impl_309 {
+    () => {
+        # [allow (clippy :: needless_lifetimes)] impl < 'a , T > PtrInner < 'a , [T] > { # [doc = " Creates a pointer which addresses the given `range` of self."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " `range` is a valid range (`start <= end`) and `end <= self.meta()`."] pub (crate) unsafe fn slice_unchecked (self , range : Range < usize >) -> Self { let base = self . as_non_null () . cast :: < T > () . as_ptr () ; let base = unsafe { base . add (range . start) } ; # [allow (unstable_name_collisions)] let len = unsafe { range . end . unchecked_sub (range . start) } ; let ptr = core :: ptr :: slice_from_raw_parts_mut (base , len) ; let ptr = unsafe { NonNull :: new_unchecked (ptr) } ; unsafe { PtrInner :: new (ptr) } } # [doc = " Iteratively projects the elements `PtrInner<T>` from `PtrInner<[T]>`."] pub (crate) fn iter (& self) -> impl Iterator < Item = PtrInner < 'a , T > > { let base = self . as_non_null () . cast :: < T > () . as_ptr () ; (0 .. self . meta () . get ()) . map (move | i | { let elem = unsafe { base . add (i) } ; let elem = unsafe { NonNull :: new_unchecked (elem) } ; unsafe { PtrInner :: new (elem) } }) } }
+    };
+}
+
+impl_309!()

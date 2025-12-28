@@ -11,4 +11,4 @@ macro_rules! grow_impl {
     };
 }
 
-grow_impl!()
+grow_impl!();

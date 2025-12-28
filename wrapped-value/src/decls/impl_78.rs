@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Variables!();
         ConstValue!();
         Value!();
-        Variables!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

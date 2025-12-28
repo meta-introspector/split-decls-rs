@@ -4,4 +4,4 @@ macro_rules! SkipWhile {
     };
 }
 
-SkipWhile!()
+SkipWhile!();

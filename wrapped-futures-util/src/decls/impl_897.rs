@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SelectAll!();
         IntoIter!();
+        SelectAll!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_897 {
     };
 }
 
-impl_897!()
+impl_897!();

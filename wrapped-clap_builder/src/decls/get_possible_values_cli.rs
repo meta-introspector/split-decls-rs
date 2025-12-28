@@ -12,4 +12,4 @@ macro_rules! get_possible_values_cli {
     };
 }
 
-get_possible_values_cli!()
+get_possible_values_cli!();

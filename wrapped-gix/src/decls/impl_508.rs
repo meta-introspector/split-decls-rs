@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Attributes!();
         Allow!();
+        Attributes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_508 {
     };
 }
 
-impl_508!()
+impl_508!();

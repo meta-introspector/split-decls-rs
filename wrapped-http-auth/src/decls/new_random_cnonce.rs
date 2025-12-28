@@ -4,4 +4,4 @@ macro_rules! new_random_cnonce {
     };
 }
 
-new_random_cnonce!()
+new_random_cnonce!();

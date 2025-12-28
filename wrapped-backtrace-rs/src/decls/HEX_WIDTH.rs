@@ -4,4 +4,4 @@ macro_rules! HEX_WIDTH {
     };
 }
 
-HEX_WIDTH!()
+HEX_WIDTH!();

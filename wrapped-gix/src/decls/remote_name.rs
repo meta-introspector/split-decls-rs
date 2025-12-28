@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Section!();
-        RemoteName!();
         Error!();
+        RemoteName!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! remote_name {
     };
 }
 
-remote_name!()
+remote_name!();

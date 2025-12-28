@@ -4,4 +4,4 @@ macro_rules! filledcurve {
     };
 }
 
-filledcurve!()
+filledcurve!();

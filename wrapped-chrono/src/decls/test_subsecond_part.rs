@@ -12,4 +12,4 @@ macro_rules! test_subsecond_part {
     };
 }
 
-test_subsecond_part!()
+test_subsecond_part!();

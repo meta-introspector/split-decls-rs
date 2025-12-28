@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Reader!();
+        Section!();
         DebugPubTypes!();
         SectionId!();
-        Section!();
-        Reader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_545 {
     };
 }
 
-impl_545!()
+impl_545!();

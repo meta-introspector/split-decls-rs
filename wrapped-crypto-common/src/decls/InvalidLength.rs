@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        KeyIvInit!();
-        KeyInit!();
         InnerIvInit!();
+        KeyInit!();
+        KeyIvInit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InvalidLength {
     };
 }
 
-InvalidLength!()
+InvalidLength!();

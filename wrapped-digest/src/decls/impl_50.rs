@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Update!();
-        DynDigest!();
-        InvalidBufferSize!();
         FixedOutputReset!();
+        DynDigest!();
         FixedOutput!();
+        Update!();
+        InvalidBufferSize!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

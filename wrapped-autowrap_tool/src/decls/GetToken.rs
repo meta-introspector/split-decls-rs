@@ -4,4 +4,4 @@ macro_rules! GetToken {
     };
 }
 
-GetToken!()
+GetToken!();

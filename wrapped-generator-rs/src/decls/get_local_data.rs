@@ -11,4 +11,4 @@ macro_rules! get_local_data {
     };
 }
 
-get_local_data!()
+get_local_data!();

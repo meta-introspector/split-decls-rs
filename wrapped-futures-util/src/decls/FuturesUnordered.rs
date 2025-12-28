@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Task!();
         ReadyToRunQueue!();
+        Task!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FuturesUnordered {
     };
 }
 
-FuturesUnordered!()
+FuturesUnordered!();

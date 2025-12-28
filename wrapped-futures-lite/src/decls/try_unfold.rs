@@ -11,4 +11,4 @@ macro_rules! try_unfold {
     };
 }
 
-try_unfold!()
+try_unfold!();

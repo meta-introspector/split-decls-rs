@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Gb18030Decoder!();
-        EucJpDecoder!();
-        SingleByteDecoder!();
-        Big5Decoder!();
-        UserDefinedDecoder!();
-        EucKrDecoder!();
-        ShiftJisDecoder!();
-        Utf8Decoder!();
         ReplacementDecoder!();
+        UserDefinedDecoder!();
+        SingleByteDecoder!();
         Utf16Decoder!();
+        ShiftJisDecoder!();
+        Gb18030Decoder!();
+        EucKrDecoder!();
+        EucJpDecoder!();
         Iso2022JpDecoder!();
+        Big5Decoder!();
+        Utf8Decoder!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! VariantDecoder {
     };
 }
 
-VariantDecoder!()
+VariantDecoder!();

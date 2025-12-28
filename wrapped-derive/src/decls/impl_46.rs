@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EnumItem!();
-        RenameTarget!();
         RenameRule!();
+        RenameTarget!();
         Argument!();
+        EnumItem!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

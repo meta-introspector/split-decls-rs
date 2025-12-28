@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        References!();
-        Binding!();
         Error!();
         Reference!();
+        Binding!();
+        References!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_613 {
     };
 }
 
-impl_613!()
+impl_613!();

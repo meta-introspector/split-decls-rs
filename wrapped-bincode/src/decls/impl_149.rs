@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SerdeDecoder!();
         Decoder!();
-        DecodeError!();
         OwnedSerdeDecoder!();
+        DecodeError!();
+        SerdeDecoder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

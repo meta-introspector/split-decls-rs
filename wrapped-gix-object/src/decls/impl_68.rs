@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CommitRef!();
         ObjectRef!();
+        CommitRef!();
         Commit!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

@@ -12,4 +12,4 @@ macro_rules! PackageIdSpec {
     };
 }
 
-PackageIdSpec!()
+PackageIdSpec!();

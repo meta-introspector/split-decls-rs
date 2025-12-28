@@ -11,4 +11,4 @@ macro_rules! from_plain_file {
     };
 }
 
-from_plain_file!()
+from_plain_file!();

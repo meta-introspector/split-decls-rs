@@ -12,4 +12,4 @@ macro_rules! percent_decoded_utf8 {
     };
 }
 
-percent_decoded_utf8!()
+percent_decoded_utf8!();

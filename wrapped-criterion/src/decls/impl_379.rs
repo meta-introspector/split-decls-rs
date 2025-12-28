@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Result!();
+        Float!();
         Tails!();
         Distribution!();
-        Result!();
-        Error!();
-        Float!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

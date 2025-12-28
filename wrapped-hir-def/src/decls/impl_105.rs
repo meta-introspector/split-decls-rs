@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ItemContainerId!();
+        DefDatabase!();
         ExpressionStoreSourceMap!();
         FunctionSignature!();
-        DefDatabase!();
+        ItemContainerId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

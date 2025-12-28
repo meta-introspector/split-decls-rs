@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Span!();
         Candidate!();
         Match!();
         PrefilterI!();
+        Span!();
         Packed!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_377 {
     };
 }
 
-impl_377!()
+impl_377!();

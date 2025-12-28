@@ -4,4 +4,4 @@ macro_rules! btree_set {
     };
 }
 
-btree_set!()
+btree_set!();

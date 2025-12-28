@@ -11,4 +11,4 @@ macro_rules! Utf8Path {
     };
 }
 
-Utf8Path!()
+Utf8Path!();

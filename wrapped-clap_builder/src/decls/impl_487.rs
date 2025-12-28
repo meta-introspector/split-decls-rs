@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawOccurrenceValues!();
         OsStr!();
+        RawOccurrenceValues!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_487 {
     };
 }
 
-impl_487!()
+impl_487!();

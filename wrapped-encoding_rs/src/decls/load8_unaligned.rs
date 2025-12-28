@@ -4,4 +4,4 @@ macro_rules! load8_unaligned {
     };
 }
 
-load8_unaligned!()
+load8_unaligned!();

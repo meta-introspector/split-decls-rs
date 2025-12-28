@@ -4,4 +4,4 @@ macro_rules! draw_violin_figure {
     };
 }
 
-draw_violin_figure!()
+draw_violin_figure!();

@@ -4,4 +4,4 @@ macro_rules! IsTraitAssocItem {
     };
 }
 
-IsTraitAssocItem!()
+IsTraitAssocItem!();

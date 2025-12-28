@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ModuleDef!();
         Macro!();
+        ModuleDef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ItemInNs {
     };
 }
 
-ItemInNs!()
+ItemInNs!();

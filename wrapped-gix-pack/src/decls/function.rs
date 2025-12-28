@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TreeEntry!();
-        Error!();
         Item!();
+        Error!();
+        TreeEntry!();
         Version!();
         Count!();
     };
@@ -15,4 +15,4 @@ macro_rules! function {
     };
 }
 
-function!()
+function!();

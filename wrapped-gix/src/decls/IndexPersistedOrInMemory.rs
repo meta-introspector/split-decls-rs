@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Clone!();
-        Note!();
         Repository!();
         Index!();
+        Note!();
+        Clone!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! IndexPersistedOrInMemory {
     };
 }
 
-IndexPersistedOrInMemory!()
+IndexPersistedOrInMemory!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Module!();
         TypeAlias!();
+        Module!();
         Type!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_308 {
     };
 }
 
-impl_308!()
+impl_308!();

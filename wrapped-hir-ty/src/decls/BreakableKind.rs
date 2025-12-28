@@ -4,4 +4,4 @@ macro_rules! BreakableKind {
     };
 }
 
-BreakableKind!()
+BreakableKind!();

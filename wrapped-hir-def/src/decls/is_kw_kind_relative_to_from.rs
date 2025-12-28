@@ -12,4 +12,4 @@ macro_rules! is_kw_kind_relative_to_from {
     };
 }
 
-is_kw_kind_relative_to_from!()
+is_kw_kind_relative_to_from!();

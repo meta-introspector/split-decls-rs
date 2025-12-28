@@ -4,4 +4,4 @@ macro_rules! define_root_cargo_toml {
     };
 }
 
-define_root_cargo_toml!()
+define_root_cargo_toml!();

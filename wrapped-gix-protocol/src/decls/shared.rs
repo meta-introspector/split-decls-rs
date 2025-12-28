@@ -4,4 +4,4 @@ macro_rules! shared {
     };
 }
 
-shared!()
+shared!();

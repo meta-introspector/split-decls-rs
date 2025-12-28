@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        QualifiedBuiltin!();
         BuiltinType!();
         Type!();
+        QualifiedBuiltin!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_156 {
     };
 }
 
-macro_156!()
+macro_156!();

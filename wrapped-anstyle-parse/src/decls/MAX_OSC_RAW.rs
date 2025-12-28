@@ -4,4 +4,4 @@ macro_rules! MAX_OSC_RAW {
     };
 }
 
-MAX_OSC_RAW!()
+MAX_OSC_RAW!();

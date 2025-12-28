@@ -4,4 +4,4 @@ macro_rules! TypeRef {
     };
 }
 
-TypeRef!()
+TypeRef!();

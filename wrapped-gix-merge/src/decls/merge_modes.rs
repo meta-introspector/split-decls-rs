@@ -4,4 +4,4 @@ macro_rules! merge_modes {
     };
 }
 
-merge_modes!()
+merge_modes!();

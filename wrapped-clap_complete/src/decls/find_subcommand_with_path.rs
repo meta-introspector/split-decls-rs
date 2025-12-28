@@ -4,4 +4,4 @@ macro_rules! find_subcommand_with_path {
     };
 }
 
-find_subcommand_with_path!()
+find_subcommand_with_path!();

@@ -4,4 +4,4 @@ macro_rules! fanout {
     };
 }
 
-fanout!()
+fanout!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         ErrorFormatter!();
         Error!();
-        Backtrace!();
         Result!();
+        Backtrace!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_415 {
     };
 }
 
-impl_415!()
+impl_415!();

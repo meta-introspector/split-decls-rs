@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        DemangleContext!();
-        CtorDtorName!();
-        Result!();
-        Error!();
-        SubstitutionTable!();
-        Demangle!();
-        IndexStr!();
-        ParseContext!();
         DemangleWrite!();
-        Parse!();
+        DemangleContext!();
+        IndexStr!();
+        CtorDtorName!();
+        Demangle!();
+        SubstitutionTable!();
+        Result!();
+        ParseContext!();
         OperatorName!();
+        Error!();
         ArgScopeStack!();
+        Parse!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! define_vocabulary {
     };
 }
 
-define_vocabulary!()
+define_vocabulary!();

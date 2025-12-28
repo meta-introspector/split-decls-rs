@@ -1,32 +1,32 @@
 macro_rules! deps {
     () => {
-        FilterMap!();
         TakeWhile!();
-        Skip!();
-        FoldStop!();
+        Zip!();
         Scan!();
-        Chain!();
         StepBy!();
+        FoldStop!();
+        IntoFallibleIterator!();
+        Iterator!();
+        ChainState!();
+        SkipWhile!();
+        Enumerate!();
         Filter!();
+        Flatten!();
+        FilterMap!();
+        Unwrap!();
+        Inspect!();
+        Chain!();
+        Map!();
         Take!();
         Fuse!();
-        Iterator!();
-        Enumerate!();
-        Zip!();
-        ChainState!();
-        Map!();
-        Cloned!();
-        Inspect!();
-        Cycle!();
-        Peekable!();
-        DoubleEndedFallibleIterator!();
-        IntoFallibleIterator!();
-        FlatMap!();
+        Skip!();
         Rev!();
-        Flatten!();
         MapErr!();
-        Unwrap!();
-        SkipWhile!();
+        Peekable!();
+        FlatMap!();
+        DoubleEndedFallibleIterator!();
+        Cycle!();
+        Cloned!();
     };
 }
 
@@ -37,4 +37,4 @@ macro_rules! FallibleIterator {
     };
 }
 
-FallibleIterator!()
+FallibleIterator!();

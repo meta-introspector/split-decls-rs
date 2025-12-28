@@ -11,4 +11,4 @@ macro_rules! test_x25519_map {
     };
 }
 
-test_x25519_map!()
+test_x25519_map!();

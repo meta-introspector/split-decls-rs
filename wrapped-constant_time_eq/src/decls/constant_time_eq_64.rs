@@ -4,4 +4,4 @@ macro_rules! constant_time_eq_64 {
     };
 }
 
-constant_time_eq_64!()
+constant_time_eq_64!();

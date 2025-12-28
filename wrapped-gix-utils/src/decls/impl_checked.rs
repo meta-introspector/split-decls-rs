@@ -4,4 +4,4 @@ macro_rules! impl_checked {
     };
 }
 
-impl_checked!()
+impl_checked!();

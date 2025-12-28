@@ -4,4 +4,4 @@ macro_rules! dead_code_ice_workaround {
     };
 }
 
-dead_code_ice_workaround!()
+dead_code_ice_workaround!();

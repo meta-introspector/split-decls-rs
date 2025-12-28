@@ -4,4 +4,4 @@ macro_rules! enable_dit {
     };
 }
 
-enable_dit!()
+enable_dit!();

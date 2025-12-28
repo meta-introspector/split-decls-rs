@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Trait!();
         HasVisibility!();
+        Trait!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_306 {
     };
 }
 
-impl_306!()
+impl_306!();

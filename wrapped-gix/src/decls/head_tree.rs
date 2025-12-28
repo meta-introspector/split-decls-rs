@@ -11,4 +11,4 @@ macro_rules! head_tree {
     };
 }
 
-head_tree!()
+head_tree!();

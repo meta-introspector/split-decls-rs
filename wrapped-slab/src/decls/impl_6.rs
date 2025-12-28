@@ -1,5 +1,6 @@
 macro_rules! deps {
     () => {
+        SlabVisitor!();
         Slab!();
     };
 }
@@ -7,7 +8,7 @@ macro_rules! deps {
 macro_rules! impl_6 {
     () => {
         deps!();
-        impl < T > Clone for Slab < T > where T : Clone , { fn clone (& self) -> Self { Self { entries : self . entries . clone () , len : self . len , next : self . next , } } fn clone_from (& mut self , source : & Self) { self . entries . clone_from (& source . entries) ; self . len = source . len ; self . next = source . next ; } }
+        impl < 'de , T > Deserialize < 'de > for Slab < T > where T : Deserialize < 'de > , { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer < 'de > , { deserializer . deserialize_map (SlabVisitor (PhantomData)) } }
     };
 }
 

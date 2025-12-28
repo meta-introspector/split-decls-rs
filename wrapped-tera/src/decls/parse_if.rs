@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Node!();
+        WS!();
+        If!();
+    };
+}
+
+macro_rules! parse_if {
+    () => {
+        deps!();
+        fn parse_if (pair : Pair < Rule >) -> TeraResult < Node > { let mut end_ws = WS :: default () ; let mut conditions = vec ! [] ; let mut otherwise = None ; let mut current_ws = WS :: default () ; let mut expr = None ; let mut current_body = vec ! [] ; let mut in_else = false ; for p in pair . into_inner () { match p . as_rule () { Rule :: if_tag | Rule :: elif_tag => { if p . as_rule () == Rule :: elif_tag { conditions . push ((current_ws , expr . unwrap () , current_body)) ; expr = None ; current_ws = WS :: default () ; current_body = vec ! [] ; } for p2 in p . into_inner () { match p2 . as_rule () { Rule :: tag_start => current_ws . left = p2 . as_span () . as_str () == "{%-" , Rule :: tag_end => current_ws . right = p2 . as_span () . as_str () == "-%}" , Rule :: logic_expr => expr = Some (parse_logic_expr (p2) ?) , _ => unreachable ! () , } ; } } Rule :: content | Rule :: macro_content | Rule :: block_content | Rule :: for_content | Rule :: filter_section_content => current_body . extend (parse_content (p) ?) , Rule :: else_tag => { if expr . is_some () { conditions . push ((current_ws , expr . unwrap () , current_body)) ; expr = None ; current_ws = WS :: default () ; current_body = vec ! [] ; } in_else = true ; for p2 in p . into_inner () { match p2 . as_rule () { Rule :: tag_start => current_ws . left = p2 . as_span () . as_str () == "{%-" , Rule :: tag_end => current_ws . right = p2 . as_span () . as_str () == "-%}" , _ => unreachable ! () , } ; } } Rule :: endif_tag => { if in_else { otherwise = Some ((current_ws , current_body)) ; } else { conditions . push ((current_ws , expr . unwrap () , current_body)) ; } for p2 in p . into_inner () { match p2 . as_rule () { Rule :: tag_start => end_ws . left = p2 . as_span () . as_str () == "{%-" , Rule :: tag_end => end_ws . right = p2 . as_span () . as_str () == "-%}" , _ => unreachable ! () , } ; } break ; } _ => unreachable ! ("unreachable rule in parse_if: {:?}" , p . as_rule ()) , } } Ok (Node :: If (If { conditions , otherwise } , end_ws)) }
+    };
+}
+
+parse_if!()

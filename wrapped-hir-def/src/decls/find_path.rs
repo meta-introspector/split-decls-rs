@@ -4,4 +4,4 @@ macro_rules! find_path {
     };
 }
 
-find_path!()
+find_path!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Creation!();
         DirectoryRoot!();
         ArgsInHash!();
         Result!();
+        Creation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! scripted_fixture_writable_with_args {
     };
 }
 
-scripted_fixture_writable_with_args!()
+scripted_fixture_writable_with_args!();

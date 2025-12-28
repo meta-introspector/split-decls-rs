@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Error!();
-        UnwindContext!();
+        Reader!();
+        Result!();
+        EvaluationResult!();
         EndianSlice!();
         FrameDescriptionEntry!();
-        EvaluationResult!();
-        Result!();
-        Reader!();
+        UnwindContext!();
+        Error!();
         ReaderOffset!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! UnwindExpression {
     };
 }
 
-UnwindExpression!()
+UnwindExpression!();

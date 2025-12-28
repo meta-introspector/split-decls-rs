@@ -4,4 +4,4 @@ macro_rules! maybe_small {
     };
 }
 
-maybe_small!()
+maybe_small!();

@@ -10,4 +10,4 @@ ok!();
     };
 }
 
-test_vertical_bar_with_pat_param!()
+test_vertical_bar_with_pat_param!();

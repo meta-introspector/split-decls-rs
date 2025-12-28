@@ -4,4 +4,4 @@ macro_rules! PassThrough {
     };
 }
 
-PassThrough!()
+PassThrough!();

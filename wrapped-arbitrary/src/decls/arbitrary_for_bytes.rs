@@ -11,4 +11,4 @@ macro_rules! arbitrary_for_bytes {
     };
 }
 
-arbitrary_for_bytes!()
+arbitrary_for_bytes!();

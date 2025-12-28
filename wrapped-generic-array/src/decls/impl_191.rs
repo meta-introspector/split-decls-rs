@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GenericArray!();
-        IntoArrayLength!();
         LengthError!();
+        IntoArrayLength!();
         ArrayLength!();
+        GenericArray!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_191 {
     };
 }
 
-impl_191!()
+impl_191!();

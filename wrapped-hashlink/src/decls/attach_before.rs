@@ -12,4 +12,4 @@ macro_rules! attach_before {
     };
 }
 
-attach_before!()
+attach_before!();

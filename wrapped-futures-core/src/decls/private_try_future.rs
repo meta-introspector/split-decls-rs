@@ -4,4 +4,4 @@ macro_rules! private_try_future {
     };
 }
 
-private_try_future!()
+private_try_future!();

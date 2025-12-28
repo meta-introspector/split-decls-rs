@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        LittleEndian!();
-        DebugMacinfo!();
-        MacroIter!();
-        Reader!();
-        DebugMacinfoOffset!();
-        Result!();
         Format!();
+        Reader!();
+        MacroIter!();
+        DebugMacinfo!();
+        Result!();
+        DebugMacinfoOffset!();
+        LittleEndian!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_483 {
     };
 }
 
-impl_483!()
+impl_483!();

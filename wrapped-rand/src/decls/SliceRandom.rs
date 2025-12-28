@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        IndexedMutRandom!();
+        Rng!();
+    };
+}
+
+macro_rules! SliceRandom {
+    () => {
+        deps!();
+        # [doc = " Extension trait on slices, providing shuffling methods."] # [doc = ""] # [doc = " This trait is implemented on all `[T]` slice types, providing several"] # [doc = " methods for choosing and shuffling elements. You must `use` this trait:"] # [doc = ""] # [doc = " ```"] # [doc = " use rand::seq::SliceRandom;"] # [doc = ""] # [doc = " let mut rng = rand::rng();"] # [doc = " let mut bytes = \"Hello, random!\".to_string().into_bytes();"] # [doc = " bytes.shuffle(&mut rng);"] # [doc = " let str = String::from_utf8(bytes).unwrap();"] # [doc = " println!(\"{}\", str);"] # [doc = " ```"] # [doc = " Example output (non-deterministic):"] # [doc = " ```none"] # [doc = " l,nmroHado !le"] # [doc = " ```"] pub trait SliceRandom : IndexedMutRandom { # [doc = " Shuffle a mutable slice in place."] # [doc = ""] # [doc = " For slices of length `n`, complexity is `O(n)`."] # [doc = " The resulting permutation is picked uniformly from the set of all possible permutations."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use rand::seq::SliceRandom;"] # [doc = ""] # [doc = " let mut rng = rand::rng();"] # [doc = " let mut y = [1, 2, 3, 4, 5];"] # [doc = " println!(\"Unshuffled: {:?}\", y);"] # [doc = " y.shuffle(&mut rng);"] # [doc = " println!(\"Shuffled:   {:?}\", y);"] # [doc = " ```"] fn shuffle < R > (& mut self , rng : & mut R) where R : Rng + ? Sized ; # [doc = " Shuffle a slice in place, but exit early."] # [doc = ""] # [doc = " Returns two mutable slices from the source slice. The first contains"] # [doc = " `amount` elements randomly permuted. The second has the remaining"] # [doc = " elements that are not fully shuffled."] # [doc = ""] # [doc = " This is an efficient method to select `amount` elements at random from"] # [doc = " the slice, provided the slice may be mutated."] # [doc = ""] # [doc = " If you only need to choose elements randomly and `amount > self.len()/2`"] # [doc = " then you may improve performance by taking"] # [doc = " `amount = self.len() - amount` and using only the second slice."] # [doc = ""] # [doc = " If `amount` is greater than the number of elements in the slice, this"] # [doc = " will perform a full shuffle."] # [doc = ""] # [doc = " For slices, complexity is `O(m)` where `m = amount`."] fn partial_shuffle < R > (& mut self , rng : & mut R , amount : usize ,) -> (& mut [Self :: Output] , & mut [Self :: Output]) where Self :: Output : Sized , R : Rng + ? Sized ; }
+    };
+}
+
+SliceRandom!()

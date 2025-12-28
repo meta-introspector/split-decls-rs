@@ -4,4 +4,4 @@ macro_rules! OutputArray {
     };
 }
 
-OutputArray!()
+OutputArray!();

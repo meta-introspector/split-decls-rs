@@ -11,4 +11,4 @@ macro_rules! check_str_for_latin1_and_bidi {
     };
 }
 
-check_str_for_latin1_and_bidi!()
+check_str_for_latin1_and_bidi!();

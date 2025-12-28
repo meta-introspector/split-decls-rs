@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EncodeError!();
-        VecWriter!();
         SerdeEncoder!();
-        Config!();
-        EncoderImpl!();
         Encode!();
+        EncodeError!();
+        EncoderImpl!();
+        VecWriter!();
+        Config!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! encode_to_vec {
     };
 }
 
-encode_to_vec!()
+encode_to_vec!();

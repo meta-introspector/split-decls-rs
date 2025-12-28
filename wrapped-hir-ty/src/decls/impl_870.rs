@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DisplayTarget!();
         ProjectionElem!();
         InternedClosureId!();
+        DisplayTarget!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_870 {
     };
 }
 
-impl_870!()
+impl_870!();

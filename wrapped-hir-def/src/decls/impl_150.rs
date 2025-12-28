@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Mod!();
-        DefDatabase!();
-        ItemTree!();
-        Trait!();
-        ItemTreeDataStats!();
-        Impl!();
-        MacroRules!();
-        Item!();
-        BigModItem!();
-        MacroCall!();
         Attrs!();
+        Impl!();
         SmallModItem!();
+        BigModItem!();
+        Mod!();
+        MacroCall!();
+        DefDatabase!();
+        Item!();
+        MacroRules!();
+        ItemTree!();
+        ItemTreeDataStats!();
+        Trait!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_150 {
     };
 }
 
-impl_150!()
+impl_150!();

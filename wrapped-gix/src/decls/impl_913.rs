@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         Url!();
         Name!();
-        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_913 {
     };
 }
 
-impl_913!()
+impl_913!();

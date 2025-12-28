@@ -4,4 +4,4 @@ macro_rules! MSYS_USR_VARIANTS {
     };
 }
 
-MSYS_USR_VARIANTS!()
+MSYS_USR_VARIANTS!();

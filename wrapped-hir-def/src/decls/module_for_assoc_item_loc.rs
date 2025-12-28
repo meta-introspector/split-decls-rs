@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AssocItemLoc!();
         ModuleId!();
         DefDatabase!();
-        AssocItemLoc!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! module_for_assoc_item_loc {
     };
 }
 
-module_for_assoc_item_loc!()
+module_for_assoc_item_loc!();

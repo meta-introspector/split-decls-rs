@@ -44,4 +44,4 @@ fn true_2() {}
     };
 }
 
-cfg_select!()
+cfg_select!();

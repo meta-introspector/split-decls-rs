@@ -4,4 +4,4 @@ macro_rules! Repeat {
     };
 }
 
-Repeat!()
+Repeat!();

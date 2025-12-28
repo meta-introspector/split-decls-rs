@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BitMaskIter!();
         Tag!();
         ProbeSeq!();
+        BitMaskIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RawIterHashInner {
     };
 }
 
-RawIterHashInner!()
+RawIterHashInner!();

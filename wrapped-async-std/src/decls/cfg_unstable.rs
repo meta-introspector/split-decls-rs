@@ -4,4 +4,4 @@ macro_rules! cfg_unstable {
     };
 }
 
-cfg_unstable!()
+cfg_unstable!();

@@ -4,4 +4,4 @@ macro_rules! FluentNumberType {
     };
 }
 
-FluentNumberType!()
+FluentNumberType!();

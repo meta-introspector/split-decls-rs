@@ -4,4 +4,4 @@ macro_rules! gen_arbitrary_method {
     };
 }
 
-gen_arbitrary_method!()
+gen_arbitrary_method!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         HashSet!();
-        Difference!();
         Iter!();
+        Difference!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Union {
     };
 }
 
-Union!()
+Union!();

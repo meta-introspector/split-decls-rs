@@ -4,4 +4,4 @@ macro_rules! without_provenance {
     };
 }
 
-without_provenance!()
+without_provenance!();

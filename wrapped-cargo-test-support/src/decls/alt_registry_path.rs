@@ -4,4 +4,4 @@ macro_rules! alt_registry_path {
     };
 }
 
-alt_registry_path!()
+alt_registry_path!();

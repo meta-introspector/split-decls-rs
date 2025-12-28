@@ -4,4 +4,4 @@ macro_rules! LocalFutureObj {
     };
 }
 
-LocalFutureObj!()
+LocalFutureObj!();

@@ -4,4 +4,4 @@ macro_rules! truncate_to_character_boundary {
     };
 }
 
-truncate_to_character_boundary!()
+truncate_to_character_boundary!();

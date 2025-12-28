@@ -4,4 +4,4 @@ macro_rules! UpsertMode {
     };
 }
 
-UpsertMode!()
+UpsertMode!();

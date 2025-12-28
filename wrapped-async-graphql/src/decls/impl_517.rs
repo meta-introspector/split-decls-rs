@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ListAccessor!();
         Result!();
         Error!();
+        ListAccessor!();
         ValueAccessor!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_517 {
     };
 }
 
-impl_517!()
+impl_517!();

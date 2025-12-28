@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueueInner!();
         Storage!();
+        QueueInner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_470 {
     };
 }
 
-impl_470!()
+impl_470!();

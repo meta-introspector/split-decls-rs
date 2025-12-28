@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
-        FnSig!();
+        ImplTraitId!();
         Binder!();
         InternedOpaqueTyId!();
-        ImplTraitId!();
         HirDatabase!();
+        EarlyBinder!();
         MethodViolationCode!();
+        FnSig!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! contains_illegal_impl_trait_in_trait {
     };
 }
 
-contains_illegal_impl_trait_in_trait!()
+contains_illegal_impl_trait_in_trait!();

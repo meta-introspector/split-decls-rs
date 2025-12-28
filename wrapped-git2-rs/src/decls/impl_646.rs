@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         Remote!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_646 {
     };
 }
 
-impl_646!()
+impl_646!();

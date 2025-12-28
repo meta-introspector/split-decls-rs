@@ -4,4 +4,4 @@ macro_rules! match_group {
     };
 }
 
-match_group!()
+match_group!();

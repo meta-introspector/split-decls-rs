@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Edition!();
-        CrateType!();
         TargetKind!();
+        CrateType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Target {
     };
 }
 
-Target!()
+Target!();

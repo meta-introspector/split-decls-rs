@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        UnqualifiedName!();
+        Result!();
+        DemangleContext!();
+        DemangleWrite!();
         Demangle!();
         DemangleNodeType!();
-        DemangleContext!();
         ArgScopeStack!();
-        DemangleWrite!();
-        Result!();
-        UnqualifiedName!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

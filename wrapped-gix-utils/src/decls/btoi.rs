@@ -4,4 +4,4 @@ macro_rules! btoi {
     };
 }
 
-btoi!()
+btoi!();

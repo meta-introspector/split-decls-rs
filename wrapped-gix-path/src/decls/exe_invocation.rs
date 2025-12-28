@@ -4,4 +4,4 @@ macro_rules! exe_invocation {
     };
 }
 
-exe_invocation!()
+exe_invocation!();

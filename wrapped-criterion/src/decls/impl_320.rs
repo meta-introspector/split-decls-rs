@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tuple!();
         Distributions!();
+        Tuple!();
         Distribution!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_320 {
     };
 }
 
-impl_320!()
+impl_320!();

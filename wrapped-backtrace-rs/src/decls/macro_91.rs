@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IMAGE_RUNTIME_FUNCTION_ENTRY!();
         RTL_VIRTUAL_UNWIND_HANDLER_TYPE!();
-        CONTEXT!();
-        EXCEPTION_ROUTINE!();
         KNONVOLATILE_CONTEXT_POINTERS!();
+        EXCEPTION_ROUTINE!();
+        IMAGE_RUNTIME_FUNCTION_ENTRY!();
+        CONTEXT!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! macro_91 {
     };
 }
 
-macro_91!()
+macro_91!();

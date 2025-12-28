@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Pointer!();
-        Error!();
         Result!();
+        Error!();
+        Pointer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

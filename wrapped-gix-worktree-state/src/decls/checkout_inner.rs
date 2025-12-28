@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Context!();
-        Outcome!();
         Options!();
         Error!();
+        Context!();
+        Outcome!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! checkout_inner {
     };
 }
 
-checkout_inner!()
+checkout_inner!();

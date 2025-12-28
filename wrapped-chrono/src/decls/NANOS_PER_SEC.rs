@@ -4,4 +4,4 @@ macro_rules! NANOS_PER_SEC {
     };
 }
 
-NANOS_PER_SEC!()
+NANOS_PER_SEC!();

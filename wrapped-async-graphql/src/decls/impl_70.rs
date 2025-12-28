@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Lookahead!();
-        SelectionField!();
-        Field!();
         Context!();
+        Field!();
+        SelectionField!();
+        Lookahead!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

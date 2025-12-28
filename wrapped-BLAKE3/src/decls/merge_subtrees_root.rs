@@ -13,4 +13,4 @@ macro_rules! merge_subtrees_root {
     };
 }
 
-merge_subtrees_root!()
+merge_subtrees_root!();

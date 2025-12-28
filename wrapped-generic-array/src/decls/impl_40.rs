@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ConstArrayLength!();
         IntoArrayLength!();
         GenericArray!();
-        ConstArrayLength!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

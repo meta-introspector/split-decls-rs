@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ViewStorage!();
         LinearMapInner!();
+        ViewStorage!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LinearMapView {
     };
 }
 
-LinearMapView!()
+LinearMapView!();

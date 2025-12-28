@@ -4,4 +4,4 @@ macro_rules! OutputType {
     };
 }
 
-OutputType!()
+OutputType!();

@@ -11,4 +11,4 @@ macro_rules! encode_nine_bytes_two_writes {
     };
 }
 
-encode_nine_bytes_two_writes!()
+encode_nine_bytes_two_writes!();

@@ -23,4 +23,4 @@ macro_rules! compile_error {
     };
 }
 
-test_compile_error_expand!()
+test_compile_error_expand!();

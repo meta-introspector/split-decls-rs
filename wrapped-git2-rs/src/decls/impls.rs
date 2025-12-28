@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        ObjectType!();
-        AutotagOption!();
-        Tree!();
-        Patch!();
-        DiffFormat!();
-        SubmoduleUpdate!();
-        Tag!();
-        Blob!();
         ConfigLevel!();
-        FetchPrune!();
-        BranchType!();
+        AutotagOption!();
+        DiffFormat!();
         Worktree!();
-        FileFavor!();
-        Direction!();
+        SubmoduleUpdate!();
+        Tree!();
+        SubmoduleIgnore!();
+        FetchPrune!();
+        Blob!();
         ResetType!();
-        Remote!();
+        BranchType!();
+        Patch!();
         Commit!();
         Rebase!();
+        Tag!();
+        FileFavor!();
+        Direction!();
+        Remote!();
         Convert!();
-        SubmoduleIgnore!();
+        ObjectType!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impls {
     };
 }
 
-impls!()
+impls!();

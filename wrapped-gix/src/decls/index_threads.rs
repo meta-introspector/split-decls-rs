@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pack!();
         Repository!();
+        Pack!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! index_threads {
     };
 }
 
-index_threads!()
+index_threads!();

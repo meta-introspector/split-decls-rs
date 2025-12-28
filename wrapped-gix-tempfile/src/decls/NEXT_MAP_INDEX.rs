@@ -4,4 +4,4 @@ macro_rules! NEXT_MAP_INDEX {
     };
 }
 
-NEXT_MAP_INDEX!()
+NEXT_MAP_INDEX!();

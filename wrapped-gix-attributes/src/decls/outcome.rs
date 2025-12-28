@@ -4,4 +4,4 @@ macro_rules! outcome {
     };
 }
 
-outcome!()
+outcome!();

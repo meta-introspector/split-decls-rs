@@ -4,4 +4,4 @@ macro_rules! BigEndian {
     };
 }
 
-BigEndian!()
+BigEndian!();

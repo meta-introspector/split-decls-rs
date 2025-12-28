@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ignore!();
         State!();
         Attributes!();
-        Ignore!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

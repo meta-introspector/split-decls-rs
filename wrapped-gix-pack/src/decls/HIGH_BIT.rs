@@ -4,4 +4,4 @@ macro_rules! HIGH_BIT {
     };
 }
 
-HIGH_BIT!()
+HIGH_BIT!();

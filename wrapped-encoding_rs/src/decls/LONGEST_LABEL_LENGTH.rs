@@ -4,4 +4,4 @@ macro_rules! LONGEST_LABEL_LENGTH {
     };
 }
 
-LONGEST_LABEL_LENGTH!()
+LONGEST_LABEL_LENGTH!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FixedOffset!();
         NaiveDateTime!();
         MappedLocalTime!();
-        FixedOffset!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_and_timezone_min_max_dates {
     };
 }
 
-test_and_timezone_min_max_dates!()
+test_and_timezone_min_max_dates!();

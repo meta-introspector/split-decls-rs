@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Writable!();
         Closed!();
         Handle!();
-        Writable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! persist {
     };
 }
 
-persist!()
+persist!();

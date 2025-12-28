@@ -4,4 +4,4 @@ macro_rules! gb {
     };
 }
 
-gb!()
+gb!();

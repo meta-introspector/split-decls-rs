@@ -13,4 +13,4 @@ macro_rules! next_doc_expr {
     };
 }
 
-next_doc_expr!()
+next_doc_expr!();

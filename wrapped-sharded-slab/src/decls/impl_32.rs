@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        OwnedEntry!();
+        OwnedRef!();
+        Config!();
+        Clear!();
     };
 }
 
 macro_rules! impl_32 {
     () => {
         deps!();
-        unsafe impl < T , C > Sync for OwnedEntry < T , C > where T : Sync , C : cfg :: Config , { }
+        impl < T , C > PartialEq < T > for OwnedRef < T , C > where T : PartialEq < T > + Clear + Default , C : cfg :: Config , { fn eq (& self , other : & T) -> bool { * self . value () == * other } }
     };
 }
 

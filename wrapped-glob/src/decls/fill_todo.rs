@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        GlobError!();
         Pattern!();
         PathWrapper!();
-        GlobError!();
         MatchOptions!();
         PatternToken!();
     };
@@ -15,4 +15,4 @@ macro_rules! fill_todo {
     };
 }
 
-fill_todo!()
+fill_todo!();

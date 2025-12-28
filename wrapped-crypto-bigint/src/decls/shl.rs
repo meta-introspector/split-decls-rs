@@ -4,4 +4,4 @@ macro_rules! shl {
     };
 }
 
-shl!()
+shl!();

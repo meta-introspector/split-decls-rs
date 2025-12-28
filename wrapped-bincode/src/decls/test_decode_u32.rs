@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SliceReader!();
-        DecodeError!();
-        Endianness!();
         IntegerType!();
+        DecodeError!();
+        SliceReader!();
+        Endianness!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_decode_u32 {
     };
 }
 
-test_decode_u32!()
+test_decode_u32!();

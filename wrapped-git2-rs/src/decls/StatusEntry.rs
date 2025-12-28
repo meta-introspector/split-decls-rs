@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiffDelta!();
         Statuses!();
+        DiffDelta!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StatusEntry {
     };
 }
 
-StatusEntry!()
+StatusEntry!();

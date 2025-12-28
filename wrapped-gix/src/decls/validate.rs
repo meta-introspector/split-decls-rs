@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
+        Default!();
+        Url!();
+        Error!();
+        Name!();
         Executable!();
         Fetch!();
-        Default!();
-        FetchRefSpec!();
-        Error!();
-        Program!();
-        PushRefSpec!();
         Core!();
-        Push!();
-        LockTimeout!();
-        RemoteName!();
-        Url!();
-        DurationInMilliseconds!();
-        String!();
         Validate!();
-        Name!();
         Boolean!();
+        Push!();
+        Program!();
+        DurationInMilliseconds!();
         Any!();
+        LockTimeout!();
+        String!();
+        PushRefSpec!();
+        UnsignedInteger!();
+        RemoteName!();
+        FetchRefSpec!();
         Path!();
         Http!();
         Time!();
-        UnsignedInteger!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! validate {
     };
 }
 
-validate!()
+validate!();

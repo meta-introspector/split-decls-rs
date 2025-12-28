@@ -33,4 +33,4 @@ impl <> $crate::fmt::Debug for Command< > where {
     };
 }
 
-test_debug_expand!()
+test_debug_expand!();

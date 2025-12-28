@@ -12,4 +12,4 @@ macro_rules! decode_malleability_test_case_3_byte_suffix_invalid_trailing_symbol
     };
 }
 
-decode_malleability_test_case_3_byte_suffix_invalid_trailing_symbol!()
+decode_malleability_test_case_3_byte_suffix_invalid_trailing_symbol!();

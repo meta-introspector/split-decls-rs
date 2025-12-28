@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        IntoIter!();
+        Iter!();
+        ThreadLocal!();
+    };
+}
+
+macro_rules! impl_33 {
+    () => {
+        deps!();
+        impl < 'a , T : Send + Sync > IntoIterator for & 'a ThreadLocal < T > { type Item = & 'a T ; type IntoIter = Iter < 'a , T > ; fn into_iter (self) -> Self :: IntoIter { self . iter () } }
+    };
+}
+
+impl_33!()

@@ -4,4 +4,4 @@ macro_rules! reg_context {
     };
 }
 
-reg_context!()
+reg_context!();

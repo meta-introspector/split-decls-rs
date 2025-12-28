@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Platform!();
-        CfgExpr!();
-        ParseErrorKind!();
         ParseError!();
+        CfgExpr!();
         Cfg!();
+        ParseErrorKind!();
+        Platform!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

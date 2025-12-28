@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ReaderOffset!();
-        Reader!();
-        Expression!();
-        Result!();
         UnwindExpression!();
+        Reader!();
         UnwindSection!();
+        Result!();
+        Expression!();
+        ReaderOffset!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_249 {
     };
 }
 
-impl_249!()
+impl_249!();

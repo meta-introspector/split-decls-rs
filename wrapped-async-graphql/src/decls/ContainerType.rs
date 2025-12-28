@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ContextSelectionSet!();
         EmptyMutation!();
         OutputType!();
-        Context!();
         Fields!();
+        Context!();
         ServerResult!();
-        ContextSelectionSet!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ContainerType {
     };
 }
 
-ContainerType!()
+ContainerType!();

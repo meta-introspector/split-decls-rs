@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
+        Result!();
         Ok!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! anyhow {
     };
 }
 
-anyhow!()
+anyhow!();

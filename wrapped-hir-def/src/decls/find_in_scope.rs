@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ModuleId!();
         DefMap!();
         DefDatabase!();
-        ModuleId!();
         ItemInNs!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! find_in_scope {
     };
 }
 
-find_in_scope!()
+find_in_scope!();

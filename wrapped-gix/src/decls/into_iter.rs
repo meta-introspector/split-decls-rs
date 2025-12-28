@@ -13,4 +13,4 @@ macro_rules! into_iter {
     };
 }
 
-into_iter!()
+into_iter!();

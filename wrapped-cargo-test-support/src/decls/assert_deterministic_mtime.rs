@@ -4,4 +4,4 @@ macro_rules! assert_deterministic_mtime {
     };
 }
 
-assert_deterministic_mtime!()
+assert_deterministic_mtime!();

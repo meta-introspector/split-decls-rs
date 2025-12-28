@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        NonMaxUsize!();
+        Slots!();
+        NFA!();
+        Captures!();
+    };
+}
+
+macro_rules! SlotTable {
+    () => {
+        deps!();
+        # [doc = " A table of slots, where each row represent a state in an NFA. Thus, the"] # [doc = " table has room for storing slots for every single state in an NFA."] # [doc = ""] # [doc = " This table is represented with a single contiguous allocation. In general,"] # [doc = " the notion of \"capturing group\" doesn't really exist at this level of"] # [doc = " abstraction, hence the name \"slot\" instead. (Indeed, every capturing group"] # [doc = " maps to a pair of slots, one for the start offset and one for the end"] # [doc = " offset.) Slots are indexed by the 'Captures' NFA state."] # [doc = ""] # [doc = " N.B. Not every state actually needs a row of slots. Namely, states that"] # [doc = " only have epsilon transitions currently never have anything written to"] # [doc = " their rows in this table. Thus, the table is somewhat wasteful in its heap"] # [doc = " usage. However, it is important to maintain fast random access by state"] # [doc = " ID, which means one giant table tends to work well. RE2 takes a different"] # [doc = " approach here and allocates each row as its own reference counted thing."] # [doc = " I explored such a strategy at one point here, but couldn't get it to work"] # [doc = " well using entirely safe code. (To the ambitious reader: I encourage you to"] # [doc = " re-litigate that experiment.) I very much wanted to stick to safe code, but"] # [doc = " could be convinced otherwise if there was a solid argument and the safety"] # [doc = " was encapsulated well."] # [derive (Clone , Debug)] struct SlotTable { # [doc = " The actual table of offsets."] table : Vec < Option < NonMaxUsize > > , # [doc = " The number of slots per state, i.e., the table's stride or the length"] # [doc = " of each row."] slots_per_state : usize , # [doc = " The number of slots in the caller-provided 'Captures' value for the"] # [doc = " current search. Setting this to 'slots_per_state' is always correct,"] # [doc = " but may be wasteful."] slots_for_captures : usize , }
+    };
+}
+
+SlotTable!()

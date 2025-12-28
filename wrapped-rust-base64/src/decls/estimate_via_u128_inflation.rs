@@ -11,4 +11,4 @@ macro_rules! estimate_via_u128_inflation {
     };
 }
 
-estimate_via_u128_inflation!()
+estimate_via_u128_inflation!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Easy2!();
-        Inner!();
         Handler!();
+        Inner!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

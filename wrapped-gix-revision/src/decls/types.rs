@@ -4,4 +4,4 @@ macro_rules! types {
     };
 }
 
-types!()
+types!();

@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        StructSignature!();
-        GenericDefId!();
-        InternDatabase!();
-        AttrDefId!();
-        ExpressionStoreSourceMap!();
-        LocalFieldId!();
-        ExpressionStore!();
-        AttrsWithOwner!();
-        StaticSignature!();
-        VariantId!();
-        Attrs!();
-        ImplSignature!();
-        Visibility!();
-        TraitSignature!();
-        MacroId!();
-        ConstSignature!();
-        DefWithBodyId!();
-        ImportMap!();
-        FunctionSignature!();
         AssocItemId!();
+        TraitSignature!();
+        TypeAliasSignature!();
+        DefWithBodyId!();
+        StaticSignature!();
+        InternDatabase!();
+        GenericDefId!();
+        LocalFieldId!();
+        StructSignature!();
+        Visibility!();
+        AttrsWithOwner!();
+        ImportMap!();
         EnumSignature!();
         ItemTree!();
-        TypeAliasSignature!();
+        Attrs!();
+        VariantId!();
+        ExpressionStore!();
+        ImplSignature!();
+        ConstSignature!();
+        ExpressionStoreSourceMap!();
         UnionSignature!();
+        FunctionSignature!();
+        AttrDefId!();
+        MacroId!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! DefDatabase {
     };
 }
 
-DefDatabase!()
+DefDatabase!();

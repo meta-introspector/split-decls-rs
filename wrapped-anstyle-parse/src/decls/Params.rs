@@ -4,4 +4,4 @@ macro_rules! Params {
     };
 }
 
-Params!()
+Params!();

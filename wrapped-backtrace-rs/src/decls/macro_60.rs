@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        PREAD_PROCESS_MEMORY_ROUTINE64!();
-        PFUNCTION_TABLE_ACCESS_ROUTINE64!();
-        PTRANSLATE_ADDRESS_ROUTINE64!();
-        HANDLE!();
-        BOOL!();
         PGET_MODULE_BASE_ROUTINE64!();
+        PTRANSLATE_ADDRESS_ROUTINE64!();
+        BOOL!();
         STACKFRAME_EX!();
+        HANDLE!();
+        PFUNCTION_TABLE_ACCESS_ROUTINE64!();
+        PREAD_PROCESS_MEMORY_ROUTINE64!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! macro_60 {
     };
 }
 
-macro_60!()
+macro_60!();

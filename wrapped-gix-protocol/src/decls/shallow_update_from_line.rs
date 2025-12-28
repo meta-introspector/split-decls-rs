@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Shallow!();
         Error!();
+        Shallow!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! shallow_update_from_line {
     };
 }
 
-shallow_update_from_line!()
+shallow_update_from_line!();

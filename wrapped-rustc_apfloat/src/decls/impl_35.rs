@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Limb!();
+        Category!();
+        ExpInt!();
+        Semantics!();
+        IeeeFloat!();
+        X87DoubleExtendedS!();
+    };
+}
+
+macro_rules! impl_35 {
+    () => {
+        deps!();
+        impl Semantics for X87DoubleExtendedS { const BITS : usize = 80 ; const EXP_BITS : usize = 15 ; const PRECISION : usize = 64 ; # [doc = " For x87 extended precision, we want to make a NaN, not a"] # [doc = " pseudo-NaN. Maybe we should expose the ability to make"] # [doc = " pseudo-NaNs?"] const QNAN_SIGNIFICAND : Limb = 0b11 << (Self :: PRECISION - 2) ; # [doc = " Integer bit is explicit in this format. Intel hardware (387 and later)"] # [doc = " does not support these bit patterns:"] # [doc = "  exponent = all 1's, integer bit 0, significand 0 (\"pseudoinfinity\")"] # [doc = "  exponent = all 1's, integer bit 0, significand nonzero (\"pseudoNaN\")"] # [doc = "  exponent!=0 nor all 1's, integer bit 0 (\"unnormal\")"] # [doc = "  exponent = 0, integer bit 1 (\"pseudodenormal\")"] # [doc = " At the moment, the first three are treated as NaNs, the last one as Normal."] # [inline] fn from_bits (bits : u128) -> IeeeFloat < Self > { let sign = bits & (1 << (Self :: BITS - 1)) ; let exponent = ((bits & ! sign) >> (Self :: BITS - 1 - Self :: EXP_BITS)) & ((1 << Self :: EXP_BITS) - 1) ; let mut r = IeeeFloat { sig : [bits & ((1 << Self :: PRECISION) - 1)] , exp : (exponent as ExpInt) + (Self :: MIN_EXP - 1) , read_only_category_do_not_mutate : Category :: Zero , read_only_sign_do_not_mutate : sign != 0 , marker : PhantomData , } ; let integer_bit = r . sig [0] >> (Self :: PRECISION - 1) ; let category = if r . exp == Self :: MIN_EXP - 1 && r . sig == [0] { Category :: Zero } else if r . exp == Self :: MAX_EXP + 1 && r . sig == [1 << (Self :: PRECISION - 1)] { Category :: Infinity } else if r . exp == Self :: MAX_EXP + 1 && r . sig != [1 << (Self :: PRECISION - 1)] || r . exp != Self :: MAX_EXP + 1 && r . exp != Self :: MIN_EXP - 1 && integer_bit == 0 { r . exp = Self :: MAX_EXP + 1 ; Category :: NaN } else { if r . exp == Self :: MIN_EXP - 1 { r . exp = Self :: MIN_EXP ; } Category :: Normal } ; r . read_only_category_do_not_mutate = category ; r } # [inline] fn to_bits (x : IeeeFloat < Self >) -> u128 { let integer_bit = sig :: get_bit (& x . sig , Self :: PRECISION - 1) ; let mut significand = x . sig [0] & ((1 << Self :: PRECISION) - 1) ; let exponent = match x . category () { Category :: Normal => { if x . exp == Self :: MIN_EXP && ! integer_bit { Self :: MIN_EXP - 1 } else { x . exp } } Category :: Zero => { significand = 0 ; Self :: MIN_EXP - 1 } Category :: Infinity => { significand = 1 << (Self :: PRECISION - 1) ; Self :: MAX_EXP + 1 } Category :: NaN => Self :: MAX_EXP + 1 , } ; let exponent = (exponent - (Self :: MIN_EXP - 1)) as u128 ; ((x . is_negative () as u128) << (Self :: BITS - 1)) | (exponent << Self :: PRECISION) | significand } }
+    };
+}
+
+impl_35!()

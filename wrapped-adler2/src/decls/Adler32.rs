@@ -4,4 +4,4 @@ macro_rules! Adler32 {
     };
 }
 
-Adler32!()
+Adler32!();

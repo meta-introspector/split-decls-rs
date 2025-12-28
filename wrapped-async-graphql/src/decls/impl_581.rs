@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ExtensionContext!();
-        NextSubscribe!();
         Response!();
+        NextSubscribe!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_581 {
     };
 }
 
-impl_581!()
+impl_581!();

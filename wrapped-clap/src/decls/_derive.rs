@@ -4,4 +4,4 @@ macro_rules! _derive {
     };
 }
 
-_derive!()
+_derive!();

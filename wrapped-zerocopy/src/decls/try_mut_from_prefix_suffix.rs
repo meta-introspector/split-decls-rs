@@ -1,9 +1,12 @@
 macro_rules! deps {
     () => {
-        TryFromBytes!();
         PointerMetadata!();
-        KnownLayout!();
         IntoBytes!();
+        TryFromBytes!();
+        TryCastError!();
+        KnownLayout!();
+        CastType!();
+        BecauseExclusive!();
     };
 }
 

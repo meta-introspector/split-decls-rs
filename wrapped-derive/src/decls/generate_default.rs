@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefaultValue!();
         GeneratorResult!();
+        DefaultValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! generate_default {
     };
 }
 
-generate_default!()
+generate_default!();

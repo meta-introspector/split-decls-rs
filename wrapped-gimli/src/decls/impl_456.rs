@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        RawLocListIter!();
-        Encoding!();
-        Reader!();
-        LocListsFormat!();
-        DebugLocListsIndex!();
-        DebugAddr!();
-        Result!();
-        LocationListsOffset!();
-        LocationLists!();
-        DebugLocListsBase!();
-        ReaderOffsetId!();
-        SectionId!();
-        DebugAddrBase!();
         LocListIter!();
+        DebugLocListsIndex!();
+        SectionId!();
+        LocationLists!();
+        LocationListsOffset!();
+        Encoding!();
+        RawLocListIter!();
+        ReaderOffsetId!();
+        LocListsFormat!();
+        DebugLocListsBase!();
+        DebugAddr!();
+        Reader!();
+        DebugAddrBase!();
+        Result!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_456 {
     };
 }
 
-impl_456!()
+impl_456!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Source!();
         Diagnostic!();
         Applicability!();
         DiagnosticSpanMacroExpansion!();
         DiagnosticSpanLine!();
+        Source!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! DiagnosticSpan {
     };
 }
 
-DiagnosticSpan!()
+DiagnosticSpan!();

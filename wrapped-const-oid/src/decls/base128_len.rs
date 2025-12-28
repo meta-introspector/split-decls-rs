@@ -11,4 +11,4 @@ macro_rules! base128_len {
     };
 }
 
-base128_len!()
+base128_len!();

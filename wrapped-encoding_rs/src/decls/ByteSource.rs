@@ -4,4 +4,4 @@ macro_rules! ByteSource {
     };
 }
 
-ByteSource!()
+ByteSource!();

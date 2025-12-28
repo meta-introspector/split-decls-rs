@@ -4,4 +4,4 @@ macro_rules! MIN_DAYS_FROM_YEAR_0 {
     };
 }
 
-MIN_DAYS_FROM_YEAR_0!()
+MIN_DAYS_FROM_YEAR_0!();

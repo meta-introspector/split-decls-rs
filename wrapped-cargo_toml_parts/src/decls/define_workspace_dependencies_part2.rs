@@ -4,4 +4,4 @@ macro_rules! define_workspace_dependencies_part2 {
     };
 }
 
-define_workspace_dependencies_part2!()
+define_workspace_dependencies_part2!();

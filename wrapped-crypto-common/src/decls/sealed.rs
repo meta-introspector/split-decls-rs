@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BlockSizes!();
         Output!();
+        BlockSizes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! sealed {
     };
 }
 
-sealed!()
+sealed!();

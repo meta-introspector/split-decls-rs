@@ -11,4 +11,4 @@ macro_rules! WritableTarget {
     };
 }
 
-WritableTarget!()
+WritableTarget!();

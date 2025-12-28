@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Default!();
-        Boolean!();
-        Options!();
-        ThreadSafeRepository!();
         Path!();
-        Note!();
+        ThreadSafeRepository!();
         Error!();
+        Options!();
+        Default!();
+        Note!();
+        Boolean!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_1045 {
     };
 }
 
-impl_1045!()
+impl_1045!();

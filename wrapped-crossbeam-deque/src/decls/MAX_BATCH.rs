@@ -4,4 +4,4 @@ macro_rules! MAX_BATCH {
     };
 }
 
-MAX_BATCH!()
+MAX_BATCH!();

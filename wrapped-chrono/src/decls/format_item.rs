@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         DelayedFormat!();
-        Item!();
-        NaiveDate!();
         NaiveTime!();
+        Item!();
         FixedOffset!();
+        NaiveDate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! format_item {
     };
 }
 
-format_item!()
+format_item!();

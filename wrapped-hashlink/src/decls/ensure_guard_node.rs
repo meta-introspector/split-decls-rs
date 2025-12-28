@@ -12,4 +12,4 @@ macro_rules! ensure_guard_node {
     };
 }
 
-ensure_guard_node!()
+ensure_guard_node!();

@@ -11,4 +11,4 @@ macro_rules! one_recursive {
     };
 }
 
-one_recursive!()
+one_recursive!();

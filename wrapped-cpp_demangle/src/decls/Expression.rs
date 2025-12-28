@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        UnresolvedName!();
         SubobjectExpr!();
-        FoldExpr!();
-        ExprPrimary!();
         TemplateParam!();
         OperatorName!();
         TemplateArg!();
+        UnresolvedName!();
+        ExprPrimary!();
+        MemberName!();
+        FoldExpr!();
         FunctionParam!();
         Initializer!();
-        MemberName!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! Expression {
     };
 }
 
-Expression!()
+Expression!();

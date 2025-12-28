@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BaseId!();
-        FnvIndexSet!();
         CommonInformationEntry!();
+        FnvIndexSet!();
+        BaseId!();
         FrameDescriptionEntry!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! FrameTable {
     };
 }
 
-FrameTable!()
+FrameTable!();

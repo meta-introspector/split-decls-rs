@@ -1,7 +1,14 @@
 macro_rules! deps {
     () => {
-        BorrowckInferCtxt!();
+        RustcFacts!();
+        PoloniusContext!();
         DeferredClosureRequirements!();
+        MirTypeckRegionConstraints!();
+        DeferredOpaqueTypeError!();
+        BorrowckInferCtxt!();
+        BorrowSet!();
+        UniversalRegionRelations!();
+        PoloniusLocationTable!();
     };
 }
 

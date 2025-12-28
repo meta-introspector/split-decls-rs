@@ -4,4 +4,4 @@ macro_rules! DEFAULT_COMMENT_CHAR {
     };
 }
 
-DEFAULT_COMMENT_CHAR!()
+DEFAULT_COMMENT_CHAR!();

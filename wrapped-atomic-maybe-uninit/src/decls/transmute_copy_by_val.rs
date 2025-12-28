@@ -4,4 +4,4 @@ macro_rules! transmute_copy_by_val {
     };
 }
 
-transmute_copy_by_val!()
+transmute_copy_by_val!();

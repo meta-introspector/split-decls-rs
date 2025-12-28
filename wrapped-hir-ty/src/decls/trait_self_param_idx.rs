@@ -4,4 +4,4 @@ macro_rules! trait_self_param_idx {
     };
 }
 
-trait_self_param_idx!()
+trait_self_param_idx!();

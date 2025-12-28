@@ -4,4 +4,4 @@ macro_rules! ViewStorage {
     };
 }
 
-ViewStorage!()
+ViewStorage!();

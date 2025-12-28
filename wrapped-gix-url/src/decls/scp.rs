@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Scheme!();
+        ParsedUrl!();
         Url!();
         Error!();
         UrlKind!();
-        ParsedUrl!();
+        Scheme!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! scp {
     };
 }
 
-scp!()
+scp!();

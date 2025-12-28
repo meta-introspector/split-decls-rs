@@ -4,4 +4,4 @@ macro_rules! KEY_LEN {
     };
 }
 
-KEY_LEN!()
+KEY_LEN!();

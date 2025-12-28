@@ -4,4 +4,4 @@ macro_rules! HygieneId {
     };
 }
 
-HygieneId!()
+HygieneId!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Pathspec!();
-        State!();
         Item!();
-        Note!();
+        State!();
         Entry!();
+        Note!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_250 {
     };
 }
 
-impl_250!()
+impl_250!();

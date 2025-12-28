@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SignatureSize!();
         Signature!();
         EcdsaCurve!();
+        SignatureSize!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! verify_prehashed {
     };
 }
 
-verify_prehashed!()
+verify_prehashed!();

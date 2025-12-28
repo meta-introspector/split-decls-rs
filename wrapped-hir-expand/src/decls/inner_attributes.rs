@@ -11,4 +11,4 @@ macro_rules! inner_attributes {
     };
 }
 
-inner_attributes!()
+inner_attributes!();

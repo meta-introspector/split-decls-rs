@@ -11,4 +11,4 @@ macro_rules! contains_lines {
     };
 }
 
-contains_lines!()
+contains_lines!();

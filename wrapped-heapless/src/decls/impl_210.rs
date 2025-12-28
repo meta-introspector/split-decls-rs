@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Drain!();
         LenType!();
+        Drain!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_210 {
     };
 }
 
-impl_210!()
+impl_210!();

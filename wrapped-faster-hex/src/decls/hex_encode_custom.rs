@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Vectorization!();
         Error!();
+        Vectorization!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! hex_encode_custom {
     };
 }
 
-hex_encode_custom!()
+hex_encode_custom!();

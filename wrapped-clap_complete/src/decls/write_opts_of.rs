@@ -4,4 +4,4 @@ macro_rules! write_opts_of {
     };
 }
 
-write_opts_of!()
+write_opts_of!();

@@ -4,4 +4,4 @@ macro_rules! current_index {
     };
 }
 
-current_index!()
+current_index!();

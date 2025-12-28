@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AhoCorasick!();
         MatchKind!();
+        AhoCorasick!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! stream_not_allowed_leftmost_first {
     };
 }
 
-stream_not_allowed_leftmost_first!()
+stream_not_allowed_leftmost_first!();

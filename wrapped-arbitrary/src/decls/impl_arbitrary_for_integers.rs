@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Arbitrary!();
         Unstructured!();
+        Arbitrary!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_arbitrary_for_integers {
     };
 }
 
-impl_arbitrary_for_integers!()
+impl_arbitrary_for_integers!();

@@ -11,4 +11,4 @@ macro_rules! gen_deprecation {
     };
 }
 
-gen_deprecation!()
+gen_deprecation!();

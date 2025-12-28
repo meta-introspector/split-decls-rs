@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SmolStr!();
-        InlineSize!();
         SmolStrBuilderRepr!();
-        Repr!();
         SmolStrBuilder!();
+        SmolStr!();
+        Repr!();
+        InlineSize!();
     };
 }
 

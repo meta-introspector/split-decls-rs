@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         DebugStrOffsets!();
-        DebugStrOffsetsBase!();
         Reader!();
-        DebugStrOffset!();
         DebugStrOffsetsIndex!();
-        Result!();
         Format!();
+        DebugStrOffsetsBase!();
+        Result!();
+        DebugStrOffset!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_589 {
     };
 }
 
-impl_589!()
+impl_589!();

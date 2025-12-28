@@ -4,4 +4,4 @@ macro_rules! trim_record_slice {
     };
 }
 
-trim_record_slice!()
+trim_record_slice!();

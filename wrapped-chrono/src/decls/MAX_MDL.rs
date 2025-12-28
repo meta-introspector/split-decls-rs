@@ -4,4 +4,4 @@ macro_rules! MAX_MDL {
     };
 }
 
-MAX_MDL!()
+MAX_MDL!();

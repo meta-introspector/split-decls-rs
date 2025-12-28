@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Mut!();
         CastTo!();
-        Own!();
         Ref!();
+        Own!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

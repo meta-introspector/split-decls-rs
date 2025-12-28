@@ -4,4 +4,4 @@ macro_rules! Sentences {
     };
 }
 
-Sentences!()
+Sentences!();

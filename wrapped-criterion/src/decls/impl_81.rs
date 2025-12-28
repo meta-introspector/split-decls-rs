@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Throughput!();
         Result!();
-        BenchmarkId!();
-        MeasurementData!();
-        CsvRow!();
         CsvReportWriter!();
+        BenchmarkId!();
+        Throughput!();
+        CsvRow!();
+        MeasurementData!();
         ValueFormatter!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

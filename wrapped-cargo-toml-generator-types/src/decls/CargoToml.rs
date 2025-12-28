@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PatchSection!();
-        Package!();
-        Workspace!();
         Dependency!();
+        Workspace!();
+        Package!();
+        PatchSection!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CargoToml {
     };
 }
 
-CargoToml!()
+CargoToml!();

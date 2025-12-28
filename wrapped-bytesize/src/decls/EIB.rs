@@ -4,4 +4,4 @@ macro_rules! EIB {
     };
 }
 
-EIB!()
+EIB!();

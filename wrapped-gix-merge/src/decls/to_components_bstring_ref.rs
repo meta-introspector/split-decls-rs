@@ -4,4 +4,4 @@ macro_rules! to_components_bstring_ref {
     };
 }
 
-to_components_bstring_ref!()
+to_components_bstring_ref!();

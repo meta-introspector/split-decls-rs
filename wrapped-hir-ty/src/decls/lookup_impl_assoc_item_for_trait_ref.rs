@@ -11,4 +11,4 @@ macro_rules! lookup_impl_assoc_item_for_trait_ref {
     };
 }
 
-lookup_impl_assoc_item_for_trait_ref!()
+lookup_impl_assoc_item_for_trait_ref!();

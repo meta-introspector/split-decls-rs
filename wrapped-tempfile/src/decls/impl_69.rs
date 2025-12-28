@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        SpooledTempFile!();
+        SpooledData!();
+    };
+}
+
+macro_rules! impl_69 {
+    () => {
+        deps!();
+        impl SpooledTempFile { # [doc = " Construct a new [`SpooledTempFile`]."] # [must_use] pub fn new (max_size : usize) -> SpooledTempFile { SpooledTempFile { max_size , dir : None , inner : SpooledData :: InMemory (Cursor :: new (Vec :: new ())) , } } # [doc = " Construct a new [`SpooledTempFile`], backed by a file in the specified directory."] # [must_use] pub fn new_in < P : AsRef < Path > > (max_size : usize , dir : P) -> SpooledTempFile { SpooledTempFile { max_size , dir : Some (dir . as_ref () . to_owned ()) , inner : SpooledData :: InMemory (Cursor :: new (Vec :: new ())) , } } # [doc = " Returns true if the file has been rolled over to disk."] # [must_use] pub fn is_rolled (& self) -> bool { match self . inner { SpooledData :: InMemory (_) => false , SpooledData :: OnDisk (_) => true , } } # [doc = " Rolls over to a file on disk, regardless of current size. Does nothing"] # [doc = " if already rolled over."] pub fn roll (& mut self) -> io :: Result < () > { if let SpooledData :: InMemory (cursor) = & mut self . inner { self . inner = SpooledData :: OnDisk (cursor_to_tempfile (cursor , & self . dir) ?) ; } Ok (()) } # [doc = " Truncate the file to the specified size."] pub fn set_len (& mut self , size : u64) -> Result < () , io :: Error > { if size > self . max_size as u64 { self . roll () ? ; } match & mut self . inner { SpooledData :: InMemory (cursor) => { cursor . get_mut () . resize (size as usize , 0) ; Ok (()) } SpooledData :: OnDisk (file) => file . set_len (size) , } } # [doc = " Consumes and returns the inner `SpooledData` type."] # [must_use] pub fn into_inner (self) -> SpooledData { self . inner } # [doc = " Convert into a regular unnamed temporary file, writing it to disk if necessary."] pub fn into_file (self) -> io :: Result < File > { match self . inner { SpooledData :: InMemory (cursor) => cursor_to_tempfile (& cursor , & self . dir) , SpooledData :: OnDisk (file) => Ok (file) , } } }
+    };
+}
+
+impl_69!()

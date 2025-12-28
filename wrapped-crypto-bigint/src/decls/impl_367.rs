@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Uint!();
-        Odd!();
-        Word!();
-        Int!();
-        NonZero!();
         ConstChoice!();
-        ConstCtOption!();
         Limb!();
+        Uint!();
+        ConstCtOption!();
+        Int!();
+        Word!();
+        Odd!();
+        NonZero!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_367 {
     };
 }
 
-impl_367!()
+impl_367!();

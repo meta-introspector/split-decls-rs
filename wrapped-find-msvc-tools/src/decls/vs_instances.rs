@@ -4,4 +4,4 @@ macro_rules! vs_instances {
     };
 }
 
-vs_instances!()
+vs_instances!();

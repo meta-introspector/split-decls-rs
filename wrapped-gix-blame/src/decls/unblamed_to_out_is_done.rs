@@ -12,4 +12,4 @@ macro_rules! unblamed_to_out_is_done {
     };
 }
 
-unblamed_to_out_is_done!()
+unblamed_to_out_is_done!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Secret!();
         Operation!();
-        RegistryInfo!();
+        Secret!();
         CredentialRequest!();
+        CacheControl!();
         CredentialResponse!();
         Action!();
-        CacheControl!();
+        RegistryInfo!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

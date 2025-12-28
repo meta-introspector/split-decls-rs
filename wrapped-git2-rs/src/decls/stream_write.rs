@@ -11,4 +11,4 @@ macro_rules! stream_write {
     };
 }
 
-stream_write!()
+stream_write!();

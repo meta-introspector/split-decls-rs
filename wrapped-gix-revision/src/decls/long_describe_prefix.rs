@@ -11,4 +11,4 @@ macro_rules! long_describe_prefix {
     };
 }
 
-long_describe_prefix!()
+long_describe_prefix!();

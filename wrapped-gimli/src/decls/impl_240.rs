@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegisterRule!();
         ReaderOffset!();
+        RegisterRule!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_240 {
     };
 }
 
-impl_240!()
+impl_240!();

@@ -4,4 +4,4 @@ macro_rules! DebugTuIndex {
     };
 }
 
-DebugTuIndex!()
+DebugTuIndex!();

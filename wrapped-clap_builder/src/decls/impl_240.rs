@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        StyledStr!();
         Error!();
+        StyledStr!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_240 {
     };
 }
 
-impl_240!()
+impl_240!();

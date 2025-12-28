@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
+        ParseRequestError!();
         Error!();
         MultipartOptions!();
         BatchRequest!();
-        ParseRequestError!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! receive_batch_body {
     };
 }
 
-receive_batch_body!()
+receive_batch_body!();

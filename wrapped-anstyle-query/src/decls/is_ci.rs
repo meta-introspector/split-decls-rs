@@ -4,4 +4,4 @@ macro_rules! is_ci {
     };
 }
 
-is_ci!()
+is_ci!();

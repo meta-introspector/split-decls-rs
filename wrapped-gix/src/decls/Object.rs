@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Kind!();
         Repository!();
         Clone!();
-        Kind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Object {
     };
 }
 
-Object!()
+Object!();

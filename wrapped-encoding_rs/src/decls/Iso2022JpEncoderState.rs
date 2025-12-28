@@ -4,4 +4,4 @@ macro_rules! Iso2022JpEncoderState {
     };
 }
 
-Iso2022JpEncoderState!()
+Iso2022JpEncoderState!();

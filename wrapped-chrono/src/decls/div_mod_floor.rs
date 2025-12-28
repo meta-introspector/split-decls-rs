@@ -4,4 +4,4 @@ macro_rules! div_mod_floor {
     };
 }
 
-div_mod_floor!()
+div_mod_floor!();

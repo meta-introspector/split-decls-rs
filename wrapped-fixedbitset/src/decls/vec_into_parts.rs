@@ -4,4 +4,4 @@ macro_rules! vec_into_parts {
     };
 }
 
-vec_into_parts!()
+vec_into_parts!();

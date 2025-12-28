@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Entry!();
         VisitEntry!();
+        Entry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Recorder {
     };
 }
 
-Recorder!()
+Recorder!();

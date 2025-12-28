@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SelectionField!();
-        ServerResult!();
         SelectionFieldsIter!();
+        ServerResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_355 {
     };
 }
 
-impl_355!()
+impl_355!();

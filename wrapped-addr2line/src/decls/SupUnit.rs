@@ -4,4 +4,4 @@ macro_rules! SupUnit {
     };
 }
 
-SupUnit!()
+SupUnit!();

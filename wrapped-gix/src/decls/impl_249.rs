@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Item!();
-        Repository!();
-        Note!();
+        PathspecDetached!();
         AttributeStack!();
         Pathspec!();
-        PathspecDetached!();
+        Note!();
         Error!();
+        Repository!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_249 {
     };
 }
 
-impl_249!()
+impl_249!();

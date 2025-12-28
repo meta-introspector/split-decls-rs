@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        AbsentEntry!();
-        RawTable!();
-        ExtractIf!();
-        TryReserveError!();
-        HashTable!();
-        Iter!();
-        Entry!();
-        IterHash!();
-        RawExtractIf!();
-        IterMut!();
         IterHashMut!();
-        Drain!();
-        VacantEntry!();
-        DefaultHashBuilder!();
         OccupiedEntry!();
+        Entry!();
+        Drain!();
+        IterHash!();
+        IterMut!();
+        ExtractIf!();
+        AbsentEntry!();
+        TryReserveError!();
+        VacantEntry!();
+        HashTable!();
+        RawExtractIf!();
+        RawTable!();
+        DefaultHashBuilder!();
+        Iter!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_470 {
     };
 }
 
-impl_470!()
+impl_470!();

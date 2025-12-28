@@ -4,4 +4,4 @@ macro_rules! UpdateGuard {
     };
 }
 
-UpdateGuard!()
+UpdateGuard!();

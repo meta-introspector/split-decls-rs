@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CheckoutBuilder!();
         MergeOptions!();
+        CheckoutBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CherrypickOptions {
     };
 }
 
-CherrypickOptions!()
+CherrypickOptions!();

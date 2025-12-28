@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Repository!();
         Note!();
         Clone!();
+        Repository!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Info {
     };
 }
 
-Info!()
+Info!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        Tree!();
         ObjectDetached!();
+        Kind!();
         Repository!();
+        Tree!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_239 {
     };
 }
 
-impl_239!()
+impl_239!();

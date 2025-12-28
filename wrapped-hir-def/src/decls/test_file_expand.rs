@@ -14,4 +14,4 @@ fn main() { "file"; }
     };
 }
 
-test_file_expand!()
+test_file_expand!();

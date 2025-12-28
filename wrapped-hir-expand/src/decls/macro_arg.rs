@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        MacroDefKind!();
-        MacroCallKind!();
-        MacroCallId!();
-        MacroDefId!();
         Attr!();
+        MacroDefKind!();
         MacroArgResult!();
         SyntaxFixupUndoInfo!();
-        MacroCallLoc!();
+        MacroCallKind!();
         ExpandDatabase!();
+        MacroDefId!();
+        MacroCallId!();
+        MacroCallLoc!();
         ProcMacro!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! macro_arg {
     };
 }
 
-macro_arg!()
+macro_arg!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Strategy!();
         Cache!();
-        Access!();
         ArcSwapAny!();
+        Access!();
+        Strategy!();
         RefCnt!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

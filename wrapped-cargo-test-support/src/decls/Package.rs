@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PackageFile!();
         TestRegistry!();
-        Dependency!();
         FeatureMap!();
+        Dependency!();
+        PackageFile!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Package {
     };
 }
 
-Package!()
+Package!();

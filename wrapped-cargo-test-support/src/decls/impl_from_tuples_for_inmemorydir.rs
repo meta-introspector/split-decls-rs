@@ -4,4 +4,4 @@ macro_rules! impl_from_tuples_for_inmemorydir {
     };
 }
 
-impl_from_tuples_for_inmemorydir!()
+impl_from_tuples_for_inmemorydir!();

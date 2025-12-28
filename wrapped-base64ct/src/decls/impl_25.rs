@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BlockBuffer!();
-        LineEnding!();
-        LineWrapper!();
         Encoding!();
         Encoder!();
+        LineWrapper!();
+        BlockBuffer!();
+        LineEnding!();
         Error!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

@@ -4,4 +4,4 @@ macro_rules! is_coarse_mtime {
     };
 }
 
-is_coarse_mtime!()
+is_coarse_mtime!();

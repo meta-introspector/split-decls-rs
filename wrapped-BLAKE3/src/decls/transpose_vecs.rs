@@ -4,4 +4,4 @@ macro_rules! transpose_vecs {
     };
 }
 
-transpose_vecs!()
+transpose_vecs!();

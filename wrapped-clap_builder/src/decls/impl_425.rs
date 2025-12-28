@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Backtrace!();
         Result!();
+        Backtrace!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_425 {
     };
 }
 
-impl_425!()
+impl_425!();

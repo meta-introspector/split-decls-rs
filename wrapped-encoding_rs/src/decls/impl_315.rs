@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ByteSource!();
         Space!();
         ByteReadHandle!();
-        ByteSource!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_315 {
     };
 }
 
-impl_315!()
+impl_315!();

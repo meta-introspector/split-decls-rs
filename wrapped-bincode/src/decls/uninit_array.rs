@@ -4,4 +4,4 @@ macro_rules! uninit_array {
     };
 }
 
-uninit_array!()
+uninit_array!();

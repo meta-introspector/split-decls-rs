@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Note!();
-        Error!();
         Tree!();
-        EntryRef!();
-        Editor!();
-        Names!();
-        Id!();
         ToComponents!();
+        EntryRef!();
+        Id!();
+        Note!();
+        Names!();
+        Error!();
+        Editor!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_201 {
     };
 }
 
-impl_201!()
+impl_201!();

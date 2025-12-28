@@ -4,4 +4,4 @@ macro_rules! time_date {
     };
 }
 
-time_date!()
+time_date!();

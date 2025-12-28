@@ -12,4 +12,4 @@ macro_rules! decode_malleability_test_case_2_byte_suffix_no_padding {
     };
 }
 
-decode_malleability_test_case_2_byte_suffix_no_padding!()
+decode_malleability_test_case_2_byte_suffix_no_padding!();

@@ -4,4 +4,4 @@ macro_rules! IBM_KANJI {
     };
 }
 
-IBM_KANJI!()
+IBM_KANJI!();

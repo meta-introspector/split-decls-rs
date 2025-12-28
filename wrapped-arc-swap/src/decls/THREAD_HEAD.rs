@@ -11,4 +11,4 @@ macro_rules! THREAD_HEAD {
     };
 }
 
-THREAD_HEAD!()
+THREAD_HEAD!();

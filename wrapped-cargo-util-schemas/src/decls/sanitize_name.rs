@@ -4,4 +4,4 @@ macro_rules! sanitize_name {
     };
 }
 
-sanitize_name!()
+sanitize_name!();

@@ -4,4 +4,4 @@ macro_rules! TermSearchConfig {
     };
 }
 
-TermSearchConfig!()
+TermSearchConfig!();

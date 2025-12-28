@@ -4,4 +4,4 @@ macro_rules! BoxIter {
     };
 }
 
-BoxIter!()
+BoxIter!();

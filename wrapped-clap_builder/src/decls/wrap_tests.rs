@@ -17,4 +17,4 @@ macro_rules! wrap_tests {
     };
 }
 
-wrap_tests!()
+wrap_tests!();

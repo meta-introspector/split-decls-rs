@@ -4,4 +4,4 @@ macro_rules! RawTableClone {
     };
 }
 
-RawTableClone!()
+RawTableClone!();

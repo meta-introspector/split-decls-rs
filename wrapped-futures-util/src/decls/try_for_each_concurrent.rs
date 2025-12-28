@@ -4,4 +4,4 @@ macro_rules! try_for_each_concurrent {
     };
 }
 
-try_for_each_concurrent!()
+try_for_each_concurrent!();

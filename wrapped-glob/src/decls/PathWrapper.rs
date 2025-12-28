@@ -4,4 +4,4 @@ macro_rules! PathWrapper {
     };
 }
 
-PathWrapper!()
+PathWrapper!();

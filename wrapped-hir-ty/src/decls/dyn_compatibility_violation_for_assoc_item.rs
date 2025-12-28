@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DynCompatibilityViolation!();
         HirDatabase!();
+        DynCompatibilityViolation!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! dyn_compatibility_violation_for_assoc_item {
     };
 }
 
-dyn_compatibility_violation_for_assoc_item!()
+dyn_compatibility_violation_for_assoc_item!();

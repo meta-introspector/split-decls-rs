@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        SsoHashSet!();
+    };
+}
+
+macro_rules! impl_461 {
+    () => {
+        deps!();
+        impl < T : Eq + Hash > SsoHashSet < T > { # [doc = " Reserves capacity for at least `additional` more elements to be inserted"] # [doc = " in the `SsoHashSet`. The collection may reserve more space to avoid"] # [doc = " frequent reallocations."] # [inline] pub fn reserve (& mut self , additional : usize) { self . map . reserve (additional) } # [doc = " Shrinks the capacity of the set as much as possible. It will drop"] # [doc = " down as much as possible while maintaining the internal rules"] # [doc = " and possibly leaving some space in accordance with the resize policy."] # [inline] pub fn shrink_to_fit (& mut self) { self . map . shrink_to_fit () } # [doc = " Retains only the elements specified by the predicate."] # [inline] pub fn retain < F > (& mut self , mut f : F) where F : FnMut (& T) -> bool , { self . map . retain (| k , _v | f (k)) } # [doc = " Removes and returns the value in the set, if any, that is equal to the given one."] # [inline] pub fn take (& mut self , value : & T) -> Option < T > { self . map . remove_entry (value) . map (entry_to_key) } # [doc = " Returns a reference to the value in the set, if any, that is equal to the given value."] # [inline] pub fn get (& self , value : & T) -> Option < & T > { self . map . get_key_value (value) . map (entry_to_key) } # [doc = " Adds a value to the set."] # [doc = ""] # [doc = " Returns whether the value was newly inserted. That is:"] # [doc = ""] # [doc = " - If the set did not previously contain this value, `true` is returned."] # [doc = " - If the set already contained this value, `false` is returned."] # [inline] pub fn insert (& mut self , elem : T) -> bool { self . map . insert (elem , ()) . is_none () } # [doc = " Removes a value from the set. Returns whether the value was"] # [doc = " present in the set."] # [inline] pub fn remove (& mut self , value : & T) -> bool { self . map . remove (value) . is_some () } # [doc = " Returns `true` if the set contains a value."] # [inline] pub fn contains (& self , value : & T) -> bool { self . map . contains_key (value) } }
+    };
+}
+
+impl_461!()

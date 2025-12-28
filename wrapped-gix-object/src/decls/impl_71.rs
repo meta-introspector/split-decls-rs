@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ObjectRef!();
-        Tag!();
         TagRef!();
+        Error!();
+        Tag!();
+        ObjectRef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

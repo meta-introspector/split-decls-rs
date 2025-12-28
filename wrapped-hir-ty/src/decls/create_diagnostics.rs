@@ -11,4 +11,4 @@ macro_rules! create_diagnostics {
     };
 }
 
-create_diagnostics!()
+create_diagnostics!();

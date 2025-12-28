@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        Union!();
-        SchemaEnv!();
-        SchemaBuilder!();
-        MetaType!();
-        SchemaInner!();
-        Directive!();
         SchemaEnvInner!();
         Object!();
+        Interface!();
+        SchemaInner!();
+        Any!();
+        Query!();
+        Mutation!();
+        OutputType!();
+        EmptySubscription!();
+        IntrospectionMode!();
+        SchemaBuilder!();
+        ExtensionFactory!();
         ValidationMode!();
+        InputType!();
+        EmptyMutation!();
+        CustomDirectiveFactory!();
+        Directive!();
+        MetaType!();
+        InputObject!();
+        Scalar!();
+        Union!();
+        SchemaEnv!();
         Schema!();
         Subscription!();
-        OutputType!();
-        Mutation!();
-        CustomDirectiveFactory!();
-        Any!();
-        InputObject!();
-        Query!();
-        EmptyMutation!();
-        InputType!();
-        Scalar!();
-        EmptySubscription!();
-        ExtensionFactory!();
-        IntrospectionMode!();
-        Interface!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

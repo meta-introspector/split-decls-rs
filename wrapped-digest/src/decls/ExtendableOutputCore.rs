@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Buffer!();
         XofReaderCore!();
+        Buffer!();
         UpdateCore!();
         BufferKindUser!();
     };
@@ -14,4 +14,4 @@ macro_rules! ExtendableOutputCore {
     };
 }
 
-ExtendableOutputCore!()
+ExtendableOutputCore!();

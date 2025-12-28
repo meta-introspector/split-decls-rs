@@ -11,4 +11,4 @@ macro_rules! OID_FAN_CHUNK_ID {
     };
 }
 
-OID_FAN_CHUNK_ID!()
+OID_FAN_CHUNK_ID!();

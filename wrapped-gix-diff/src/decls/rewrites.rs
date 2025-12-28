@@ -4,4 +4,4 @@ macro_rules! rewrites {
     };
 }
 
-rewrites!()
+rewrites!();

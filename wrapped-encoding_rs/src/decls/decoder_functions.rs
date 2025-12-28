@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf16Destination!();
         Utf8Destination!();
+        Utf16Destination!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decoder_functions {
     };
 }
 
-decoder_functions!()
+decoder_functions!();

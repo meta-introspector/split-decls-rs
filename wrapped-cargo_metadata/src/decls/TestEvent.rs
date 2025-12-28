@@ -4,4 +4,4 @@ macro_rules! TestEvent {
     };
 }
 
-TestEvent!()
+TestEvent!();

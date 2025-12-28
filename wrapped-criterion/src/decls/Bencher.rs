@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Measurement!();
+        BatchSize!();
         WallTime!();
         Duration!();
-        BatchSize!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Bencher {
     };
 }
 
-Bencher!()
+Bencher!();

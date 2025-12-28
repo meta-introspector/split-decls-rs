@@ -4,4 +4,4 @@ macro_rules! free_boxed_slice {
     };
 }
 
-free_boxed_slice!()
+free_boxed_slice!();

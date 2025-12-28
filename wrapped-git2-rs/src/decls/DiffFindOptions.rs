@@ -4,4 +4,4 @@ macro_rules! DiffFindOptions {
     };
 }
 
-DiffFindOptions!()
+DiffFindOptions!();

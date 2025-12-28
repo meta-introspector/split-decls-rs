@@ -4,4 +4,4 @@ macro_rules! resolve_undo {
     };
 }
 
-resolve_undo!()
+resolve_undo!();

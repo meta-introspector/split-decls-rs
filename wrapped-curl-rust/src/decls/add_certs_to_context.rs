@@ -4,4 +4,4 @@ macro_rules! add_certs_to_context {
     };
 }
 
-add_certs_to_context!()
+add_certs_to_context!();

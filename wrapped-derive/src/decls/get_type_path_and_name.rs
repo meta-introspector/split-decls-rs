@@ -11,4 +11,4 @@ macro_rules! get_type_path_and_name {
     };
 }
 
-get_type_path_and_name!()
+get_type_path_and_name!();

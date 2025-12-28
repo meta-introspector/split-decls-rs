@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RefMut!();
         RwLockWriteGuardDetached!();
+        RefMut!();
         OccupiedEntry!();
         OccupiedEntryRef!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

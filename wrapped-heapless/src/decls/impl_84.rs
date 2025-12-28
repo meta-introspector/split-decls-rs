@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashValue!();
         Pos!();
+        HashValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_84 {
     };
 }
 
-impl_84!()
+impl_84!();

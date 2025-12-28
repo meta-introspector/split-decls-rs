@@ -4,4 +4,4 @@ macro_rules! fish {
     };
 }
 
-fish!()
+fish!();

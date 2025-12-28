@@ -11,4 +11,4 @@ macro_rules! split_at {
     };
 }
 
-split_at!()
+split_at!();

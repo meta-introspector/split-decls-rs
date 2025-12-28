@@ -4,4 +4,4 @@ macro_rules! CachedFileSystemStat {
     };
 }
 
-CachedFileSystemStat!()
+CachedFileSystemStat!();

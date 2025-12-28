@@ -11,4 +11,4 @@ macro_rules! impl_specific_ref_and_mut {
     };
 }
 
-impl_specific_ref_and_mut!()
+impl_specific_ref_and_mut!();

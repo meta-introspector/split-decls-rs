@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        Automaton!();
+        AcAutomaton!();
+        Match!();
+        MatchKind!();
         PatternID!();
         Anchored!();
-        StateID!();
-        Automaton!();
-        MatchKind!();
-        MatchError!();
-        AcAutomaton!();
-        OverlappingState!();
-        Match!();
         Prefilter!();
         Input!();
+        StateID!();
+        OverlappingState!();
+        MatchError!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

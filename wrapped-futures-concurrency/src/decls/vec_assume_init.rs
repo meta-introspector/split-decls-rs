@@ -4,4 +4,4 @@ macro_rules! vec_assume_init {
     };
 }
 
-vec_assume_init!()
+vec_assume_init!();

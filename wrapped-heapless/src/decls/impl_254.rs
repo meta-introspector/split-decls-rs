@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StringInner!();
         LenType!();
+        StringInner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

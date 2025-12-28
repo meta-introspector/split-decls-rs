@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SubstitutionTable!();
-        ParametricBuiltinType!();
-        ParseContext!();
-        SourceName!();
-        IndexStr!();
-        BuiltinType!();
         Result!();
+        ParametricBuiltinType!();
+        BuiltinType!();
+        ParseContext!();
+        IndexStr!();
+        SourceName!();
+        SubstitutionTable!();
         Parse!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

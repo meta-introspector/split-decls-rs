@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BufferKindUser!();
-        Digest!();
-        FixedOutputCore!();
         HashMarker!();
         UpdateCore!();
+        BufferKindUser!();
+        FixedOutputCore!();
+        Digest!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! EagerHash {
     };
 }
 
-EagerHash!()
+EagerHash!();

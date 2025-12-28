@@ -4,4 +4,4 @@ macro_rules! InfoType {
     };
 }
 
-InfoType!()
+InfoType!();

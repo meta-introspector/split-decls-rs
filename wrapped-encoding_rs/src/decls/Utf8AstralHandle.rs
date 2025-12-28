@@ -11,4 +11,4 @@ macro_rules! Utf8AstralHandle {
     };
 }
 
-Utf8AstralHandle!()
+Utf8AstralHandle!();

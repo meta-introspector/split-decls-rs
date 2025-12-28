@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        StashApplyProgressCb!();
         CheckoutBuilder!();
         StashApplyOptions!();
         StashApplyProgress!();
-        StashApplyProgressCb!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_737 {
     };
 }
 
-impl_737!()
+impl_737!();

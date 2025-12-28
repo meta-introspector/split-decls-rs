@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Expression!();
-        Reader!();
         DebugAddrIndex!();
+        Reader!();
+        Expression!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RawLocListEntry {
     };
 }
 
-RawLocListEntry!()
+RawLocListEntry!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Address!();
-        Reader!();
-        UnwindContext!();
-        CallFrameInstruction!();
         StoreOnHeap!();
         CallFrameInstructionIter!();
+        Reader!();
         UnwindContextStorage!();
+        UnwindContext!();
+        CallFrameInstruction!();
+        Address!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! UnwindTable {
     };
 }
 
-UnwindTable!()
+UnwindTable!();

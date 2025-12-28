@@ -12,4 +12,4 @@ macro_rules! parse_dependency_table {
     };
 }
 
-parse_dependency_table!()
+parse_dependency_table!();

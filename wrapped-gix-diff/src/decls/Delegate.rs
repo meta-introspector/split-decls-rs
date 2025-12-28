@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Tracker!();
+        Recorder!();
         Change!();
         Location!();
-        Recorder!();
-        Tracker!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Delegate {
     };
 }
 
-Delegate!()
+Delegate!();

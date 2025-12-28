@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StmtList!();
         NodeID!();
+        StmtList!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

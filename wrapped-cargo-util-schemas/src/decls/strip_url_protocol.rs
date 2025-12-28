@@ -4,4 +4,4 @@ macro_rules! strip_url_protocol {
     };
 }
 
-strip_url_protocol!()
+strip_url_protocol!();

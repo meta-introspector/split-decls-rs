@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InlinedFunctionAddress!();
         InlinedFunction!();
+        InlinedFunctionAddress!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Function {
     };
 }
 
-Function!()
+Function!();

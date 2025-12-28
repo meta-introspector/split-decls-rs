@@ -4,4 +4,4 @@ macro_rules! ResultExt {
     };
 }
 
-ResultExt!()
+ResultExt!();

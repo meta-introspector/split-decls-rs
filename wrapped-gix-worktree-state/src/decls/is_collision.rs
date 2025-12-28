@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Collision!();
         Error!();
+        Collision!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! is_collision {
     };
 }
 
-is_collision!()
+is_collision!();

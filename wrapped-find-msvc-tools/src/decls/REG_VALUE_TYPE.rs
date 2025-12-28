@@ -4,4 +4,4 @@ macro_rules! REG_VALUE_TYPE {
     };
 }
 
-REG_VALUE_TYPE!()
+REG_VALUE_TYPE!();

@@ -1,39 +1,39 @@
 macro_rules! deps {
     () => {
-        ComplexityCalculate!();
-        NoUnusedFragments!();
-        VisitorContext!();
-        FieldsOnCorrectType!();
-        Query!();
-        VisitorNil!();
-        ValidationResult!();
-        FragmentsOnCompositeTypes!();
-        KnownArgumentNames!();
-        NoUndefinedVariables!();
-        ServerError!();
-        NoUnusedVariables!();
-        ArgumentsOfCorrectType!();
-        UniqueVariableNames!();
-        VariablesAreInputTypes!();
-        PossibleFragmentSpreads!();
-        CacheControl!();
-        CacheControlCalculate!();
-        VariableInAllowedPosition!();
-        NoFragmentCycles!();
-        OverlappingFieldsCanBeMerged!();
-        DepthCalculate!();
         Result!();
         DirectivesUnique!();
-        UploadFile!();
-        ValidationMode!();
-        Registry!();
-        ProvidedNonNullArguments!();
+        VariablesAreInputTypes!();
         KnownTypeNames!();
-        DefaultValuesOfCorrectType!();
-        KnownFragmentNames!();
+        FieldsOnCorrectType!();
         UniqueArgumentNames!();
-        KnownDirectives!();
+        UniqueVariableNames!();
+        ArgumentsOfCorrectType!();
+        ValidationResult!();
+        FragmentsOnCompositeTypes!();
         ScalarLeafs!();
+        KnownFragmentNames!();
+        VariableInAllowedPosition!();
+        ValidationMode!();
+        DepthCalculate!();
+        Registry!();
+        DefaultValuesOfCorrectType!();
+        NoUndefinedVariables!();
+        PossibleFragmentSpreads!();
+        KnownDirectives!();
+        UploadFile!();
+        CacheControlCalculate!();
+        VisitorNil!();
+        VisitorContext!();
+        NoUnusedFragments!();
+        OverlappingFieldsCanBeMerged!();
+        Query!();
+        NoUnusedVariables!();
+        ProvidedNonNullArguments!();
+        NoFragmentCycles!();
+        CacheControl!();
+        ServerError!();
+        KnownArgumentNames!();
+        ComplexityCalculate!();
     };
 }
 
@@ -44,4 +44,4 @@ macro_rules! check_rules {
     };
 }
 
-check_rules!()
+check_rules!();

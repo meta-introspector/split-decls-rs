@@ -4,4 +4,4 @@ macro_rules! PathBufValueParser {
     };
 }
 
-PathBufValueParser!()
+PathBufValueParser!();

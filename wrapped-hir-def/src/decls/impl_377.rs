@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        CrateRootModuleId!();
-        BlockInfo!();
-        MacroId!();
-        ModuleData!();
-        BlockRelativeModuleId!();
-        Item!();
-        LocalModuleId!();
         ModuleId!();
+        ModuleData!();
         DefMap!();
         DefDatabase!();
+        MacroId!();
+        CrateRootModuleId!();
+        Item!();
+        LocalModuleId!();
+        BlockRelativeModuleId!();
+        BlockInfo!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_377 {
     };
 }
 
-impl_377!()
+impl_377!();

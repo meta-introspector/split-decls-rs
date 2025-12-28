@@ -28,4 +28,4 @@ macro_rules! m2 {
     };
 }
 
-test_underscore_not_greedily!()
+test_underscore_not_greedily!();

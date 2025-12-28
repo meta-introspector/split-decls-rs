@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Macro!();
-        Function!();
-        ModuleDef!();
-        Adt!();
-        Variant!();
-        Const!();
-        Union!();
-        Static!();
-        TypeAlias!();
-        BuiltinType!();
-        Trait!();
-        Enum!();
         Module!();
+        Adt!();
+        Enum!();
+        Static!();
+        Const!();
+        Variant!();
+        Union!();
+        Function!();
+        TypeAlias!();
         Struct!();
+        Trait!();
+        BuiltinType!();
+        Macro!();
+        ModuleDef!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! macro_232 {
     };
 }
 
-macro_232!()
+macro_232!();

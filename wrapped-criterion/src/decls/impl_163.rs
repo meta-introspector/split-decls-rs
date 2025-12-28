@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        WallTime!();
-        DurationFormatter!();
-        ValueFormatter!();
         Measurement!();
+        WallTime!();
         Duration!();
+        ValueFormatter!();
+        DurationFormatter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_163 {
     };
 }
 
-impl_163!()
+impl_163!();

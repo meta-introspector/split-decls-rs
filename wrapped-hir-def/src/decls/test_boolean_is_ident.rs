@@ -14,4 +14,4 @@ const VALUE: (bool, bool) = (true , false );
     };
 }
 
-test_boolean_is_ident!()
+test_boolean_is_ident!();

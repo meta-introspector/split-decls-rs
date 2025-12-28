@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        CrateRootModuleId!();
         Item!();
         FxIndexMap!();
         LocalDefMap!();
-        CrateRootModuleId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_361 {
     };
 }
 
-impl_361!()
+impl_361!();

@@ -11,4 +11,4 @@ macro_rules! init_unhex4_array {
     };
 }
 
-init_unhex4_array!()
+init_unhex4_array!();

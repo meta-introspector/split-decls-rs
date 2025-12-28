@@ -4,4 +4,4 @@ macro_rules! DbPanicContext {
     };
 }
 
-DbPanicContext!()
+DbPanicContext!();

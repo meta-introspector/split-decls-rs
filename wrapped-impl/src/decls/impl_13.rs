@@ -1,6 +1,15 @@
+macro_rules! deps {
+    () => {
+        ContainerKind!();
+        Struct!();
+        Display!();
+    };
+}
+
 macro_rules! impl_13 {
     () => {
-        impl ToTokens for private { fn to_tokens (& self , tokens : & mut proc_macro2 :: TokenStream) { tokens . append (Ident :: new (concat ! ("__private" , env ! ("CARGO_PKG_VERSION_PATCH")) , Span :: call_site () ,)) ; } }
+        deps!();
+        impl Display for ContainerKind { fn fmt (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str (match self { ContainerKind :: Struct => "struct" , ContainerKind :: TupleStruct => "tuple struct" , ContainerKind :: UnitStruct => "unit struct" , ContainerKind :: StructVariant => "struct variant" , ContainerKind :: TupleVariant => "tuple variant" , ContainerKind :: UnitVariant => "unit variant" , }) } }
     };
 }
 

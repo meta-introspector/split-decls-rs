@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Item!();
-        Read!();
-        Remote!();
-        Direction!();
-        Push!();
-        Error!();
-        Replace!();
         Spec!();
+        Push!();
+        Item!();
+        Direction!();
+        Replace!();
+        Remote!();
+        Error!();
         Fetch!();
+        Read!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_973 {
     };
 }
 
-impl_973!()
+impl_973!();

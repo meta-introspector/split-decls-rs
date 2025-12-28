@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Error!();
         Repository!();
-        ThreadSafeRepository!();
         Path!();
+        ThreadSafeRepository!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! discover_with_environment_overrides {
     };
 }
 
-discover_with_environment_overrides!()
+discover_with_environment_overrides!();

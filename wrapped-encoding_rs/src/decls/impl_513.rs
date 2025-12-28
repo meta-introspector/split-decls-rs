@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         BomHandling!();
-        DecoderLifeCycle!();
+        Encoding!();
+        VariantDecoder!();
         DecoderResult!();
         Unicode!();
         Decoder!();
         CoderResult!();
-        Encoding!();
-        VariantDecoder!();
+        DecoderLifeCycle!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_513 {
     };
 }
 
-impl_513!()
+impl_513!();

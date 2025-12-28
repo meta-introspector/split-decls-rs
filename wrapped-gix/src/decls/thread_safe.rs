@@ -4,4 +4,4 @@ macro_rules! thread_safe {
     };
 }
 
-thread_safe!()
+thread_safe!();

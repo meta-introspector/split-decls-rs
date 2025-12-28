@@ -11,4 +11,4 @@ macro_rules! repo_sync_config {
     };
 }
 
-repo_sync_config!()
+repo_sync_config!();

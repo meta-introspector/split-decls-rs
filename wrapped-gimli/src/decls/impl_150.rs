@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AddrHeader!();
-        Error!();
-        Reader!();
-        Result!();
         AddrHeaderIter!();
+        Error!();
+        Result!();
+        Reader!();
+        AddrHeader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_150 {
     };
 }
 
-impl_150!()
+impl_150!();

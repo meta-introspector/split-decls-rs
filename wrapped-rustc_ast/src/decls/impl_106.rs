@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        TokenStream!();
+        AttrArgs!();
+    };
+}
+
+macro_rules! impl_106 {
+    () => {
+        deps!();
+        impl AttrArgs { pub fn span (& self) -> Option < Span > { match self { AttrArgs :: Empty => None , AttrArgs :: Delimited (args) => Some (args . dspan . entire ()) , AttrArgs :: Eq { eq_span , expr } => Some (eq_span . to (expr . span)) , } } # [doc = " Tokens inside the delimiters or after `=`."] # [doc = " Proc macros see these tokens, for example."] pub fn inner_tokens (& self) -> TokenStream { match self { AttrArgs :: Empty => TokenStream :: default () , AttrArgs :: Delimited (args) => args . tokens . clone () , AttrArgs :: Eq { expr , .. } => TokenStream :: from_ast (expr) , } } }
+    };
+}
+
+impl_106!()

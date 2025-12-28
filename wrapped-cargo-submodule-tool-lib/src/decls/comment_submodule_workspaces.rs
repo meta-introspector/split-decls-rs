@@ -4,4 +4,4 @@ macro_rules! comment_submodule_workspaces {
     };
 }
 
-comment_submodule_workspaces!()
+comment_submodule_workspaces!();

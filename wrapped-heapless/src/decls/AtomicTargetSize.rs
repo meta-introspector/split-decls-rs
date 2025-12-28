@@ -4,4 +4,4 @@ macro_rules! AtomicTargetSize {
     };
 }
 
-AtomicTargetSize!()
+AtomicTargetSize!();

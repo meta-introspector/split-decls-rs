@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InstantiatedField!();
-        InstantiatedVariant!();
         InstantiatedEnum!();
+        InstantiatedVariant!();
+        InstantiatedField!();
         Field!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_270 {
     };
 }
 
-impl_270!()
+impl_270!();

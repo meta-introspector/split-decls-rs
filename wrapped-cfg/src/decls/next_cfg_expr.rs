@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Literal!();
-        CfgExpr!();
         CfgAtom!();
+        CfgExpr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! next_cfg_expr {
     };
 }
 
-next_cfg_expr!()
+next_cfg_expr!();

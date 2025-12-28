@@ -12,4 +12,4 @@ macro_rules! base128_byte {
     };
 }
 
-base128_byte!()
+base128_byte!();

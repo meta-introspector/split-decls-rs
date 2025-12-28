@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Package!();
-        Token!();
         HttpServerHandle!();
+        Token!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TestRegistry {
     };
 }
 
-TestRegistry!()
+TestRegistry!();

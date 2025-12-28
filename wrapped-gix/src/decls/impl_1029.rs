@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Index!();
-        Iter!();
-        IndexPersistedOrInMemory!();
-        Collect!();
+        Action!();
         Outcome!();
-        Platform!();
         Error!();
         Pathspec!();
+        IndexPersistedOrInMemory!();
+        Collect!();
         BuiltinSubmoduleStatus!();
+        Platform!();
+        Index!();
         Item!();
-        Action!();
+        Iter!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_1029 {
     };
 }
 
-impl_1029!()
+impl_1029!();

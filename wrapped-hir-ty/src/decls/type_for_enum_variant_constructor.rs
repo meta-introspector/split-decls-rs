@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
         HirDatabase!();
+        EarlyBinder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! type_for_enum_variant_constructor {
     };
 }
 
-type_for_enum_variant_constructor!()
+type_for_enum_variant_constructor!();

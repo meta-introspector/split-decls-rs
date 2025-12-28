@@ -4,4 +4,4 @@ macro_rules! jacobi {
     };
 }
 
-jacobi!()
+jacobi!();

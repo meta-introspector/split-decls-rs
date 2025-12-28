@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        InputType!();
-        InputValueError!();
         InputValueResult!();
-        MaybeUndefined!();
+        InputValueError!();
         Registry!();
+        InputType!();
+        MaybeUndefined!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_787 {
     };
 }
 
-impl_787!()
+impl_787!();

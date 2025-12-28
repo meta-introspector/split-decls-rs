@@ -11,4 +11,4 @@ macro_rules! set_cache_max_size {
     };
 }
 
-set_cache_max_size!()
+set_cache_max_size!();

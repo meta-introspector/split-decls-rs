@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Context!();
+        HirTyLowerer!();
+    };
+}
+
+macro_rules! ItemCtxt {
+    () => {
+        deps!();
+        # [doc = " Context specific to some particular item. This is what implements [`HirTyLowerer`]."] # [doc = ""] # [doc = " # `ItemCtxt` vs `FnCtxt`"] # [doc = ""] # [doc = " `ItemCtxt` is primarily used to type-check item signatures and lower them"] # [doc = " from HIR to their [`ty::Ty`] representation, which is exposed using [`HirTyLowerer`]."] # [doc = " It's also used for the bodies of items like structs where the body (the fields)"] # [doc = " are just signatures."] # [doc = ""] # [doc = " This is in contrast to `FnCtxt`, which is used to type-check bodies of"] # [doc = " functions, closures, and `const`s -- anywhere that expressions and statements show up."] # [doc = ""] # [doc = " An important thing to note is that `ItemCtxt` does no inference -- it has no [`InferCtxt`] --"] # [doc = " while `FnCtxt` does do inference."] # [doc = ""] # [doc = " [`InferCtxt`]: rustc_infer::infer::InferCtxt"] # [doc = ""] # [doc = " # Trait predicates"] # [doc = ""] # [doc = " `ItemCtxt` has information about the predicates that are defined"] # [doc = " on the trait. Unfortunately, this predicate information is"] # [doc = " available in various different forms at various points in the"] # [doc = " process. So we can't just store a pointer to e.g., the HIR or the"] # [doc = " parsed ty form, we have to be more flexible. To this end, the"] # [doc = " `ItemCtxt` is parameterized by a `DefId` that it uses to satisfy"] # [doc = " `probe_ty_param_bounds` requests, drawing the information from"] # [doc = " the HIR (`hir::Generics`), recursively."] pub (crate) struct ItemCtxt < 'tcx > { tcx : TyCtxt < 'tcx > , item_def_id : LocalDefId , tainted_by_errors : Cell < Option < ErrorGuaranteed > > , }
+    };
+}
+
+ItemCtxt!()

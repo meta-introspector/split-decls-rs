@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AHasher!();
-        CallHasher!();
-        RandomState!();
         Convert!();
+        AHasher!();
+        RandomState!();
+        CallHasher!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

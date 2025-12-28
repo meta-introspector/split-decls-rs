@@ -4,4 +4,4 @@ macro_rules! KEY_ERROR {
     };
 }
 
-KEY_ERROR!()
+KEY_ERROR!();

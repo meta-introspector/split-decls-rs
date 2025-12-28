@@ -4,4 +4,4 @@ macro_rules! RepositoryInitOptions {
     };
 }
 
-RepositoryInitOptions!()
+RepositoryInitOptions!();

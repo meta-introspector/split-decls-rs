@@ -11,4 +11,4 @@ macro_rules! capacity_to_buckets {
     };
 }
 
-capacity_to_buckets!()
+capacity_to_buckets!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PartialNameRef!();
         Error!();
+        PartialNameRef!();
         FullName!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

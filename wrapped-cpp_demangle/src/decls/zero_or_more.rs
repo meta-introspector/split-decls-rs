@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SubstitutionTable!();
-        ParseContext!();
+        Result!();
         Parse!();
         IndexStr!();
-        Result!();
+        ParseContext!();
+        SubstitutionTable!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! zero_or_more {
     };
 }
 
-zero_or_more!()
+zero_or_more!();

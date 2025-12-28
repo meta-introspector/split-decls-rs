@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
         InherentImpls!();
+        HirDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_772 {
     };
 }
 
-impl_772!()
+impl_772!();

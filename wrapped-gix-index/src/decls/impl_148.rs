@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Extensions!();
-        Version!();
-        Options!();
         Error!();
-        State!();
+        Extensions!();
         Signature!();
+        Options!();
+        State!();
+        Version!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_148 {
     };
 }
 
-impl_148!()
+impl_148!();

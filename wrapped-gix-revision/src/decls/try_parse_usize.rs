@@ -11,4 +11,4 @@ macro_rules! try_parse_usize {
     };
 }
 
-try_parse_usize!()
+try_parse_usize!();

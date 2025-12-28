@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ParseResult!();
         Builder!();
+        Filter!();
         Directive!();
         ParseError!();
-        Filter!();
-        ParseResult!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

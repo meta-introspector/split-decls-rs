@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ForDeletionMode!();
         CollapsedEntriesEmissionMode!();
         EmissionMode!();
+        ForDeletionMode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Options {
     };
 }
 
-Options!()
+Options!();

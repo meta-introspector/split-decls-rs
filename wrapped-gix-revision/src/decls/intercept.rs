@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ReflogLookup!();
-        Kind!();
         Traversal!();
+        Kind!();
         Navigate!();
-        PeelTo!();
-        SiblingBranch!();
-        Delegate!();
-        Revision!();
+        ReflogLookup!();
         PrefixHint!();
+        Delegate!();
+        SiblingBranch!();
+        Revision!();
+        PeelTo!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! intercept {
     };
 }
 
-intercept!()
+intercept!();

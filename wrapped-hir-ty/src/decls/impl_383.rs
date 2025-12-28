@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MethodCallee!();
         MethodError!();
-        InferenceContext!();
         MethodResolutionContext!();
+        InferenceContext!();
+        MethodCallee!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_383 {
     };
 }
 
-impl_383!()
+impl_383!();

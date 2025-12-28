@@ -4,4 +4,4 @@ macro_rules! DisplayBuffer {
     };
 }
 
-DisplayBuffer!()
+DisplayBuffer!();

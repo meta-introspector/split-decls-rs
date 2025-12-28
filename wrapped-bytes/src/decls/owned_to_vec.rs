@@ -4,4 +4,4 @@ macro_rules! owned_to_vec {
     };
 }
 
-owned_to_vec!()
+owned_to_vec!();

@@ -11,4 +11,4 @@ macro_rules! map_in_place_2 {
     };
 }
 
-map_in_place_2!()
+map_in_place_2!();

@@ -4,4 +4,4 @@ macro_rules! RgbColor {
     };
 }
 
-RgbColor!()
+RgbColor!();

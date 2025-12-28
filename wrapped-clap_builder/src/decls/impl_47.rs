@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ArgGroup!();
         ArgAction!();
-        ArgPredicate!();
-        IntoResettable!();
         OsStr!();
         Arg!();
+        IntoResettable!();
+        ArgPredicate!();
         Id!();
+        ArgGroup!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

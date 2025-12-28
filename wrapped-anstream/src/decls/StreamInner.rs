@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawStream!();
         StripStream!();
+        RawStream!();
         WinconStream!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! StreamInner {
     };
 }
 
-StreamInner!()
+StreamInner!();

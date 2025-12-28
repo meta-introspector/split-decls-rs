@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ValueParser!();
-        CountType!();
-        ArgAction!();
         AnyValueId!();
-        OsStr!();
+        CountType!();
         ValueRange!();
+        ArgAction!();
+        ValueParser!();
+        OsStr!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

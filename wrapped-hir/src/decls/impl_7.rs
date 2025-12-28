@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TypeAlias!();
-        AssocItem!();
         Const!();
         Function!();
         HasAttrs!();
+        AssocItem!();
+        TypeAlias!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

@@ -4,4 +4,4 @@ macro_rules! subspan {
     };
 }
 
-subspan!()
+subspan!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Formatter!();
         WritableTarget!();
+        Formatter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Operation!();
+        RefSpecRef!();
         Instruction!();
         Fetch!();
         Push!();
-        Operation!();
-        RefSpecRef!();
         Mode!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

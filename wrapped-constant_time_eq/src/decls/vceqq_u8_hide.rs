@@ -4,4 +4,4 @@ macro_rules! vceqq_u8_hide {
     };
 }
 
-vceqq_u8_hide!()
+vceqq_u8_hide!();

@@ -4,4 +4,4 @@ macro_rules! CrateType {
     };
 }
 
-CrateType!()
+CrateType!();

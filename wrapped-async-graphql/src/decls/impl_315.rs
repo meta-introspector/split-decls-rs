@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Visitor!();
-        MetaType!();
-        MetaTypeName!();
-        VisitorContext!();
         Object!();
-        VisitMode!();
-        ComplexityCalculate!();
         Field!();
+        ComplexityCalculate!();
+        Visitor!();
+        VisitorContext!();
+        MetaType!();
+        VisitMode!();
+        MetaTypeName!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_315 {
     };
 }
 
-impl_315!()
+impl_315!();

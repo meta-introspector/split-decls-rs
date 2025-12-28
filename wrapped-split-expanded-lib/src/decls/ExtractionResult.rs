@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        FileMetadata!();
+        PublicSymbol!();
+        Declaration!();
+        ErrorSample!();
+    };
+}
+
+macro_rules! ExtractionResult {
+    () => {
+        deps!();
+        # [derive (Debug)] pub struct ExtractionResult { pub declarations : HashMap < String , Declaration > , pub errors : Vec < ErrorSample > , pub file_metadata : FileMetadata , pub public_symbols : Vec < PublicSymbol > , }
+    };
+}
+
+ExtractionResult!()

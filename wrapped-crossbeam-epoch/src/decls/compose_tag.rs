@@ -11,4 +11,4 @@ macro_rules! compose_tag {
     };
 }
 
-compose_tag!()
+compose_tag!();

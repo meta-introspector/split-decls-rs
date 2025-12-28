@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Branch!();
-        FetchRecurse!();
-        Ignore!();
-        Update!();
-        File!();
         Error!();
+        Ignore!();
+        Branch!();
+        File!();
+        FetchRecurse!();
+        Update!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

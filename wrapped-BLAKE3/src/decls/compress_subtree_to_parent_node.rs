@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Join!();
         CVWords!();
         Platform!();
-        Join!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! compress_subtree_to_parent_node {
     };
 }
 
-compress_subtree_to_parent_node!()
+compress_subtree_to_parent_node!();

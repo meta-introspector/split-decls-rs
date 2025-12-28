@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GroupOpsOwned!();
-        PrimeGroup!();
-        GroupEncoding!();
         GroupOps!();
+        PrimeGroup!();
         Group!();
+        GroupOpsOwned!();
+        GroupEncoding!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! CofactorGroup {
     };
 }
 
-CofactorGroup!()
+CofactorGroup!();

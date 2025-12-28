@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Semantics!();
         DeclarationLocation!();
+        Semantics!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

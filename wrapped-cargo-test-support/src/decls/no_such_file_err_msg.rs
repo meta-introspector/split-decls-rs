@@ -4,4 +4,4 @@ macro_rules! no_such_file_err_msg {
     };
 }
 
-no_such_file_err_msg!()
+no_such_file_err_msg!();

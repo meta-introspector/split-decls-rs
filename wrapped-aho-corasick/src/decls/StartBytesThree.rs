@@ -4,4 +4,4 @@ macro_rules! StartBytesThree {
     };
 }
 
-StartBytesThree!()
+StartBytesThree!();

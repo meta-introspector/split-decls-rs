@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Head!();
         Error!();
+        Head!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! head_commit {
     };
 }
 
-head_commit!()
+head_commit!();

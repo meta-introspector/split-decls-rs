@@ -4,4 +4,4 @@ macro_rules! Feature {
     };
 }
 
-Feature!()
+Feature!();

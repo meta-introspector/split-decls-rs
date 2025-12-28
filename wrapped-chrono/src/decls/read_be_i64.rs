@@ -11,4 +11,4 @@ macro_rules! read_be_i64 {
     };
 }
 
-read_be_i64!()
+read_be_i64!();

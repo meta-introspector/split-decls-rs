@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Change!();
         Case!();
-        Input!();
-        Color!();
-        Error!();
-        Specified!();
-        Color256!();
+        Color16!();
         ColorRgb!();
         Result!();
+        Specified!();
         ErrorDetail!();
-        Color16!();
+        Color!();
+        Change!();
+        Error!();
+        Color256!();
+        Input!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! attr {
     };
 }
 
-attr!()
+attr!();

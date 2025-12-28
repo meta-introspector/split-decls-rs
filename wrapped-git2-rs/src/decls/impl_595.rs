@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RebaseOperationType!();
-        Binding!();
         RebaseOperation!();
+        Binding!();
+        RebaseOperationType!();
         Oid!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_595 {
     };
 }
 
-impl_595!()
+impl_595!();

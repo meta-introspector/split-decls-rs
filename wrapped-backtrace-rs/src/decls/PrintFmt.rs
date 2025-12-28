@@ -4,4 +4,4 @@ macro_rules! PrintFmt {
     };
 }
 
-PrintFmt!()
+PrintFmt!();

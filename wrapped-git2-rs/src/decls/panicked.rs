@@ -4,4 +4,4 @@ macro_rules! panicked {
     };
 }
 
-panicked!()
+panicked!();

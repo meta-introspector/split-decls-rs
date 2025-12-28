@@ -4,4 +4,4 @@ macro_rules! LONG_WHITESPACE {
     };
 }
 
-LONG_WHITESPACE!()
+LONG_WHITESPACE!();

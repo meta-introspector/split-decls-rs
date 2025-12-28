@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        DebugStrictSub!();
+    };
+}
+
+macro_rules! impl_debug_strict_sub {
+    () => {
+        deps!();
+        macro_rules ! impl_debug_strict_sub { ($ ($ ty : ty) *) => { $ (impl DebugStrictSub for $ ty { # [inline] fn debug_strict_sub (self , other : Self) -> Self { if cfg ! (debug_assertions) { self - other } else { self . wrapping_sub (other) } } }) * } ; }
+    };
+}
+
+impl_debug_strict_sub!()

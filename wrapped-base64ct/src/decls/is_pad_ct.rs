@@ -4,4 +4,4 @@ macro_rules! is_pad_ct {
     };
 }
 
-is_pad_ct!()
+is_pad_ct!();

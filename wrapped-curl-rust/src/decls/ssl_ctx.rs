@@ -11,4 +11,4 @@ macro_rules! ssl_ctx {
     };
 }
 
-ssl_ctx!()
+ssl_ctx!();

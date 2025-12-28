@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         FixedOffset!();
+        NaiveDateTime!();
         Days!();
         NaiveTime!();
-        NaiveDateTime!();
+        NaiveDate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! test_min_max_add_days {
     };
 }
 
-test_min_max_add_days!()
+test_min_max_add_days!();

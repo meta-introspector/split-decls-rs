@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
-        TypingMode!();
         GenericPredicates!();
+        TypingMode!();
+        HirDatabase!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! specializes_query {
     };
 }
 
-specializes_query!()
+specializes_query!();

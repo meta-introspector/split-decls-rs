@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
         Uuid!();
+        Error!();
     };
 }
 
 macro_rules! impl_32 {
     () => {
         deps!();
-        # [cfg (feature = "std")] impl TryFrom < std :: vec :: Vec < u8 > > for Uuid { type Error = Error ; fn try_from (value : std :: vec :: Vec < u8 >) -> Result < Self , Self :: Error > { Uuid :: from_slice (& value) } }
+        impl TryFrom < & '_ str > for Uuid { type Error = Error ; fn try_from (uuid_str : & '_ str) -> Result < Self , Self :: Error > { Uuid :: parse_str (uuid_str) } }
     };
 }
 

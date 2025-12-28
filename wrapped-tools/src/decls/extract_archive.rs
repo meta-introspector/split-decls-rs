@@ -11,4 +11,4 @@ macro_rules! extract_archive {
     };
 }
 
-extract_archive!()
+extract_archive!();

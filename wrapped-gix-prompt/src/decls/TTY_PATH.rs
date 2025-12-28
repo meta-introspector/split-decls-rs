@@ -4,4 +4,4 @@ macro_rules! TTY_PATH {
     };
 }
 
-TTY_PATH!()
+TTY_PATH!();

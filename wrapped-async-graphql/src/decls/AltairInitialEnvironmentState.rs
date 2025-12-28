@@ -4,4 +4,4 @@ macro_rules! AltairInitialEnvironmentState {
     };
 }
 
-AltairInitialEnvironmentState!()
+AltairInitialEnvironmentState!();

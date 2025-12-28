@@ -4,4 +4,4 @@ macro_rules! save_new_crate {
     };
 }
 
-save_new_crate!()
+save_new_crate!();

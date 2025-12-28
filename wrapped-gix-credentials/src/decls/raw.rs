@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Action!();
-        Error!();
         Program!();
+        Error!();
         Result!();
+        Action!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! raw {
     };
 }
 
-raw!()
+raw!();

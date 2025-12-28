@@ -4,4 +4,4 @@ macro_rules! from_value {
     };
 }
 
-from_value!()
+from_value!();

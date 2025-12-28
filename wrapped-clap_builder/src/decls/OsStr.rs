@@ -4,4 +4,4 @@ macro_rules! OsStr {
     };
 }
 
-OsStr!()
+OsStr!();

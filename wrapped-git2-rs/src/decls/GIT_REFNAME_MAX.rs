@@ -4,4 +4,4 @@ macro_rules! GIT_REFNAME_MAX {
     };
 }
 
-GIT_REFNAME_MAX!()
+GIT_REFNAME_MAX!();

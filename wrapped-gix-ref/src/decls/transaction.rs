@@ -4,4 +4,4 @@ macro_rules! transaction {
     };
 }
 
-transaction!()
+transaction!();

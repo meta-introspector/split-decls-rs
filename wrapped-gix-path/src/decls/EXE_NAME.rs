@@ -4,4 +4,4 @@ macro_rules! EXE_NAME {
     };
 }
 
-EXE_NAME!()
+EXE_NAME!();

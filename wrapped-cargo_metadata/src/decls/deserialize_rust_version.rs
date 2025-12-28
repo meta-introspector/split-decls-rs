@@ -12,4 +12,4 @@ macro_rules! deserialize_rust_version {
     };
 }
 
-deserialize_rust_version!()
+deserialize_rust_version!();

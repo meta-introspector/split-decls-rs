@@ -4,4 +4,4 @@ macro_rules! InstanceState {
     };
 }
 
-InstanceState!()
+InstanceState!();

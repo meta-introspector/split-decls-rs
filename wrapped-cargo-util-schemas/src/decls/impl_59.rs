@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         TomlLockfilePackageIdError!();
-        TomlLockfileSourceId!();
         TomlLockfilePackageIdErrorKind!();
+        Result!();
+        TomlLockfileSourceId!();
         TomlLockfilePackageId!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

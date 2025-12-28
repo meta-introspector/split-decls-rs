@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Str!();
-        ArgAction!();
-        MatchedArg!();
         Id!();
-        Arg!();
         FlatMap!();
+        MatchedArg!();
         SubCommand!();
+        Arg!();
+        ArgAction!();
+        Str!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! ArgMatches {
     };
 }
 
-ArgMatches!()
+ArgMatches!();

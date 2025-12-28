@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CrateRootModuleId!();
         DefDatabase!();
-        DefMap!();
+        ModuleItemMap!();
         HasResolver!();
         Resolver!();
-        ModuleItemMap!();
+        DefMap!();
+        CrateRootModuleId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_328 {
     };
 }
 
-impl_328!()
+impl_328!();

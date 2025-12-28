@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ContainingDirectory!();
         Writable!();
+        ContainingDirectory!();
         AutoRemove!();
         Handle!();
     };
@@ -14,4 +14,4 @@ macro_rules! writable_at_with_permissions {
     };
 }
 
-writable_at_with_permissions!()
+writable_at_with_permissions!();

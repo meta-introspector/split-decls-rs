@@ -4,4 +4,4 @@ macro_rules! precompose_bstr {
     };
 }
 
-precompose_bstr!()
+precompose_bstr!();

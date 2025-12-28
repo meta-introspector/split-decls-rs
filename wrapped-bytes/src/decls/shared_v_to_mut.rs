@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BytesMut!();
         Shared!();
+        BytesMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! shared_v_to_mut {
     };
 }
 
-shared_v_to_mut!()
+shared_v_to_mut!();

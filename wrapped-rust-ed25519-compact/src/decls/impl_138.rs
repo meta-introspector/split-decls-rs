@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Fe!();
-        SecretKey!();
         PublicKey!();
+        Fe!();
         Error!();
         DHOutput!();
+        SecretKey!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

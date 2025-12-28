@@ -13,4 +13,4 @@ macro_rules! STACKFRAME_EX {
     };
 }
 
-STACKFRAME_EX!()
+STACKFRAME_EX!();

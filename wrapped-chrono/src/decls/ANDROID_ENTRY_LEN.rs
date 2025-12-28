@@ -4,4 +4,4 @@ macro_rules! ANDROID_ENTRY_LEN {
     };
 }
 
-ANDROID_ENTRY_LEN!()
+ANDROID_ENTRY_LEN!();

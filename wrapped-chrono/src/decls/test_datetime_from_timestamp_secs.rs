@@ -11,4 +11,4 @@ macro_rules! test_datetime_from_timestamp_secs {
     };
 }
 
-test_datetime_from_timestamp_secs!()
+test_datetime_from_timestamp_secs!();

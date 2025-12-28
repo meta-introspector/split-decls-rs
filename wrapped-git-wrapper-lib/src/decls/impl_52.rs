@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SubmoduleStat!();
-        RollupLock!();
-        Result!();
         GitExecutor!();
         PureRustGitExecutor!();
+        RollupLock!();
+        Result!();
+        SubmoduleStat!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

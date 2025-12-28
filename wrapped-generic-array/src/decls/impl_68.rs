@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FunctionalSequence!();
-        ArrayLength!();
-        GenericArray!();
         GenericSequence!();
+        ArrayLength!();
+        FunctionalSequence!();
+        GenericArray!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

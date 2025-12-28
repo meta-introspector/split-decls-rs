@@ -4,4 +4,4 @@ macro_rules! IntraPackLookup {
     };
 }
 
-IntraPackLookup!()
+IntraPackLookup!();

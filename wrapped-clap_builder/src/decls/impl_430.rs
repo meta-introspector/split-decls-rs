@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArgMatches!();
         ArgMatcher!();
+        ArgMatches!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_430 {
     };
 }
 
-impl_430!()
+impl_430!();

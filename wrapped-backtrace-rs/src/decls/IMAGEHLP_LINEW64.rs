@@ -11,4 +11,4 @@ macro_rules! IMAGEHLP_LINEW64 {
     };
 }
 
-IMAGEHLP_LINEW64!()
+IMAGEHLP_LINEW64!();

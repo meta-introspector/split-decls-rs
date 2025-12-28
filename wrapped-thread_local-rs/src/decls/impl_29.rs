@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
+        ThreadLocal!();
     };
 }
 
 macro_rules! impl_29 {
     () => {
         deps!();
-        impl < T : Send > ExactSizeIterator for IntoIter < T > { }
+        impl < T : Send > Default for ThreadLocal < T > { fn default () -> ThreadLocal < T > { ThreadLocal :: new () } }
     };
 }
 

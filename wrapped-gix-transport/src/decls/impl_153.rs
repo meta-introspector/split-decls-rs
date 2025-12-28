@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Capability!();
         Capabilities!();
-        Protocol!();
         Error!();
+        Protocol!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         StyledBuffer!();
+        Renderer!();
         DecorStyle!();
         ElementStyle!();
-        Renderer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! draw_multiline_line {
     };
 }
 
-draw_multiline_line!()
+draw_multiline_line!();

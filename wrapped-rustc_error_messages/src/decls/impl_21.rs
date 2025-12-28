@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        DiagMessage!();
+        IntoDiagArg!();
+        DiagArgValue!();
     };
 }
 
 macro_rules! impl_21 {
     () => {
         deps!();
-        impl From < Cow < 'static , str > > for DiagMessage { fn from (s : Cow < 'static , str >) -> Self { DiagMessage :: Str (s) } }
+        impl IntoDiagArg for ast :: token :: TokenKind { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { DiagArgValue :: Str (pprust :: token_kind_to_string (& self)) } }
     };
 }
 

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ExpressionStoreBuilder!();
-        ExpressionStore!();
-        ExpressionOnlyStore!();
-        FormatTemplate!();
         ExpressionStoreSourceMap!();
         ExpressionOnlySourceMap!();
+        ExpressionOnlyStore!();
+        FormatTemplate!();
+        ExpressionStore!();
+        ExpressionStoreBuilder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_290 {
     };
 }
 
-impl_290!()
+impl_290!();

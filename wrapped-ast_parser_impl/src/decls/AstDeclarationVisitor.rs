@@ -4,4 +4,4 @@ macro_rules! AstDeclarationVisitor {
     };
 }
 
-AstDeclarationVisitor!()
+AstDeclarationVisitor!();

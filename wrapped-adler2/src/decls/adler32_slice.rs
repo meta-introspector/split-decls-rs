@@ -11,4 +11,4 @@ macro_rules! adler32_slice {
     };
 }
 
-adler32_slice!()
+adler32_slice!();

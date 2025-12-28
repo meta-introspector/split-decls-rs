@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnalignedU16Slice!();
-        CopyAsciiResult!();
         Endian!();
+        CopyAsciiResult!();
+        UnalignedU16Slice!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! convert_unaligned_utf16_to_utf8 {
     };
 }
 
-convert_unaligned_utf16_to_utf8!()
+convert_unaligned_utf16_to_utf8!();

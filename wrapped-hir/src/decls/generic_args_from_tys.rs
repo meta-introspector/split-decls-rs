@@ -4,4 +4,4 @@ macro_rules! generic_args_from_tys {
     };
 }
 
-generic_args_from_tys!()
+generic_args_from_tys!();

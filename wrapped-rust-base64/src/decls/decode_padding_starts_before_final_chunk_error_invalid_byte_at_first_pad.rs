@@ -12,4 +12,4 @@ macro_rules! decode_padding_starts_before_final_chunk_error_invalid_byte_at_firs
     };
 }
 
-decode_padding_starts_before_final_chunk_error_invalid_byte_at_first_pad!()
+decode_padding_starts_before_final_chunk_error_invalid_byte_at_first_pad!();

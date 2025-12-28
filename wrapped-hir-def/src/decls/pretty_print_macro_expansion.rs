@@ -4,4 +4,4 @@ macro_rules! pretty_print_macro_expansion {
     };
 }
 
-pretty_print_macro_expansion!()
+pretty_print_macro_expansion!();

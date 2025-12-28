@@ -4,4 +4,4 @@ macro_rules! DwarfFileType {
     };
 }
 
-DwarfFileType!()
+DwarfFileType!();

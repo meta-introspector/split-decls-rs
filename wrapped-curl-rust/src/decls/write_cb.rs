@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Inner!();
-        Handler!();
         WriteError!();
+        Handler!();
+        Inner!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_cb {
     };
 }
 
-write_cb!()
+write_cb!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RwLock!();
         DashMap!();
+        RwLock!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

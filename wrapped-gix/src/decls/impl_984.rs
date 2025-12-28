@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Error!();
-        Protocol!();
-        Init!();
         SchemePermission!();
-        User!();
+        Init!();
         Allow!();
+        Protocol!();
+        User!();
         Default!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_984 {
     };
 }
 
-impl_984!()
+impl_984!();

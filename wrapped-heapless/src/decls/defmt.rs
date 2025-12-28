@@ -4,4 +4,4 @@ macro_rules! defmt {
     };
 }
 
-defmt!()
+defmt!();

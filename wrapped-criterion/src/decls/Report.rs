@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BenchmarkId!();
-        ValueFormatter!();
-        MeasurementData!();
         ReportContext!();
+        ValueFormatter!();
+        BenchmarkId!();
+        MeasurementData!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Report {
     };
 }
 
-Report!()
+Report!();

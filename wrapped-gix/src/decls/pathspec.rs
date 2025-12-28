@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Worktree!();
-        Error!();
         Item!();
-        Note!();
         Pathspec!();
         Init!();
+        Error!();
         ApplyLeniencyDefaultValue!();
+        Note!();
+        Worktree!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! pathspec {
     };
 }
 
-pathspec!()
+pathspec!();

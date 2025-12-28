@@ -4,4 +4,4 @@ macro_rules! rand_swap_ordering {
     };
 }
 
-rand_swap_ordering!()
+rand_swap_ordering!();

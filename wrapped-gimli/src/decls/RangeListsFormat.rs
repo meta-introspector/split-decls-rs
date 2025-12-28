@@ -4,4 +4,4 @@ macro_rules! RangeListsFormat {
     };
 }
 
-RangeListsFormat!()
+RangeListsFormat!();

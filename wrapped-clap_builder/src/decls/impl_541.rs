@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OsStr!();
         KeyType!();
+        OsStr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_541 {
     };
 }
 
-impl_541!()
+impl_541!();

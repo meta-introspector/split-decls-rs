@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DocCommentDesugarMode!();
         StaticRawConverter!();
+        DocCommentDesugarMode!();
     };
 }
 

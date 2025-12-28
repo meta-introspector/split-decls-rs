@@ -4,4 +4,4 @@ macro_rules! RichFormatter {
     };
 }
 
-RichFormatter!()
+RichFormatter!();

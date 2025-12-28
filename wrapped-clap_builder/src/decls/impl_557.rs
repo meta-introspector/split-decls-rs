@@ -3,10 +3,10 @@ macro_rules! deps {
         PossibleValue!();
         FlatSet!();
         ArgSortKey!();
-        Str!();
-        HelpTemplate!();
         Parser!();
         StyledStr!();
+        Str!();
+        HelpTemplate!();
         Arg!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_557 {
     };
 }
 
-impl_557!()
+impl_557!();

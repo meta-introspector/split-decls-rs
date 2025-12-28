@@ -14,4 +14,4 @@ macro_rules! m {
     };
 }
 
-wrong_nesting_level!()
+wrong_nesting_level!();

@@ -4,4 +4,4 @@ macro_rules! map_addr {
     };
 }
 
-map_addr!()
+map_addr!();

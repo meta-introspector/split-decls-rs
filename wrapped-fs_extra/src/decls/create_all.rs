@@ -11,4 +11,4 @@ macro_rules! create_all {
     };
 }
 
-create_all!()
+create_all!();

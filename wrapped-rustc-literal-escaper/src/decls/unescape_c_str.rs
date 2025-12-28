@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EscapeError!();
-        Unescape!();
         MixedUnit!();
+        Unescape!();
     };
 }
 

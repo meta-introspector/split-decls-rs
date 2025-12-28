@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Never!();
         Error!();
         Find!();
-        Never!();
         Data!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_162 {
     };
 }
 
-impl_162!()
+impl_162!();

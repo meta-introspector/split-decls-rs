@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Context!();
         HirDatabase!();
+        Context!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! variances_of {
     };
 }
 
-variances_of!()
+variances_of!();

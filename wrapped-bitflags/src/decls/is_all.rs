@@ -4,4 +4,4 @@ macro_rules! is_all {
     };
 }
 
-is_all!()
+is_all!();

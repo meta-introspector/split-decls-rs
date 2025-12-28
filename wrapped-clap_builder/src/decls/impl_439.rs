@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        OsStr!();
-        RawValues!();
         RawOccurrences!();
-        MatchedArg!();
-        ArgAction!();
-        OccurrencesRef!();
-        Arg!();
-        ValuesRef!();
-        ArgMatches!();
-        MatchesError!();
         Indices!();
         ValueSource!();
-        IdsRef!();
-        Values!();
+        RawValues!();
+        MatchedArg!();
+        ArgAction!();
         Occurrences!();
+        ArgMatches!();
+        Values!();
+        Arg!();
+        IdsRef!();
+        ValuesRef!();
+        OccurrencesRef!();
+        OsStr!();
+        MatchesError!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_439 {
     };
 }
 
-impl_439!()
+impl_439!();

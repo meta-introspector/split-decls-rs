@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Name!();
-        ProcMacro!();
         CrateProcMacros!();
-        ExpandError!();
+        Name!();
         CustomProcMacroExpander!();
+        ProcMacro!();
+        ExpandError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_171 {
     };
 }
 
-impl_171!()
+impl_171!();

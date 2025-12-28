@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ModuleId!();
+        MacroId!();
+        AdtId!();
         BuiltinType!();
         ModuleDefId!();
-        MacroId!();
-        ModuleId!();
-        AdtId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! macro_698 {
     };
 }
 
-macro_698!()
+macro_698!();

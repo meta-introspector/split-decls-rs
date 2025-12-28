@@ -4,4 +4,4 @@ macro_rules! DummyWalkDirIterator {
     };
 }
 
-DummyWalkDirIterator!()
+DummyWalkDirIterator!();

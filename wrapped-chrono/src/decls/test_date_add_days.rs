@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         Days!();
+        NaiveDate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_date_add_days {
     };
 }
 
-test_date_add_days!()
+test_date_add_days!();

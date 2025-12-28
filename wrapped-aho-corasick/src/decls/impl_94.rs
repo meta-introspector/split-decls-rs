@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MatchKind!();
-        BuildError!();
+        Compiler!();
         NFA!();
         Builder!();
-        Compiler!();
+        BuildError!();
+        MatchKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

@@ -4,4 +4,4 @@ macro_rules! can_handle_error {
     };
 }
 
-can_handle_error!()
+can_handle_error!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         Days!();
+        NaiveDate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_345 {
     };
 }
 
-impl_345!()
+impl_345!();

@@ -11,4 +11,4 @@ macro_rules! expect_file {
     };
 }
 
-expect_file!()
+expect_file!();

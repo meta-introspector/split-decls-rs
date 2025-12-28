@@ -4,4 +4,4 @@ macro_rules! RealRustAstParser {
     };
 }
 
-RealRustAstParser!()
+RealRustAstParser!();

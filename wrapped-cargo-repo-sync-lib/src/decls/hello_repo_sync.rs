@@ -4,4 +4,4 @@ macro_rules! hello_repo_sync {
     };
 }
 
-hello_repo_sync!()
+hello_repo_sync!();

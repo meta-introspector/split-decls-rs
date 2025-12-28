@@ -4,4 +4,4 @@ macro_rules! test_cow_round_trip {
     };
 }
 
-test_cow_round_trip!()
+test_cow_round_trip!();

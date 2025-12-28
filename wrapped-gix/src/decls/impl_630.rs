@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Diff!();
-        Key!();
         Section!();
+        Key!();
+        Diff!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_630 {
     };
 }
 
-impl_630!()
+impl_630!();

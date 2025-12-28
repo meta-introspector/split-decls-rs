@@ -1,10 +1,18 @@
 macro_rules! deps {
     () => {
-        KnownLayout!();
-        Immutable!();
         IntoBytes!();
+        Immutable!();
+        BecauseExclusive!();
+        TryReadError!();
+        CastType!();
+        Shared!();
+        Maybe!();
         Unaligned!();
         PointerMetadata!();
+        Reference!();
+        BecauseImmutable!();
+        TryCastError!();
+        KnownLayout!();
     };
 }
 

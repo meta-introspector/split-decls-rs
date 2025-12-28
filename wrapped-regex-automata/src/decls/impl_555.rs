@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Counters!();
+        NFA!();
+        SparseSet!();
+        StateID!();
+        PikeVM!();
+    };
+}
+
+macro_rules! impl_555 {
+    () => {
+        deps!();
+        # [cfg (feature = "internal-instrument-pikevm")] impl Counters { fn empty () -> Counters { Counters { state_sets : alloc :: collections :: BTreeMap :: new () , steps : vec ! [] , closures : vec ! [] , stack_pushes : vec ! [] , set_inserts : vec ! [] , } } fn reset (& mut self , nfa : & NFA) { let len = nfa . states () . len () ; self . state_sets . clear () ; self . steps . clear () ; self . steps . resize (len , 0) ; self . closures . clear () ; self . closures . resize (len , 0) ; self . stack_pushes . clear () ; self . stack_pushes . resize (len , 0) ; self . set_inserts . clear () ; self . set_inserts . resize (len , 0) ; } fn eprint (& self , nfa : & NFA) { trace ! ("===== START PikeVM Instrumentation Output =====") ; const LIMIT : usize = 20 ; let mut set_counts = self . state_sets . iter () . collect :: < Vec < (& Vec < StateID > , & u64) > > () ; set_counts . sort_by_key (| (_ , & count) | core :: cmp :: Reverse (count)) ; trace ! ("## PikeVM frequency of state sets (top {LIMIT})") ; for (set , count) in set_counts . iter () . take (LIMIT) { trace ! ("{set:?}: {count}") ; } if set_counts . len () > LIMIT { trace ! ("... {} sets omitted (out of {} total)" , set_counts . len () - LIMIT , set_counts . len () ,) ; } trace ! ("") ; trace ! ("## PikeVM total frequency of events") ; trace ! ("steps: {}, closures: {}, stack-pushes: {}, set-inserts: {}" , self . steps . iter () . copied () . sum ::< u64 > () , self . closures . iter () . copied () . sum ::< u64 > () , self . stack_pushes . iter () . copied () . sum ::< u64 > () , self . set_inserts . iter () . copied () . sum ::< u64 > () ,) ; trace ! ("") ; trace ! ("## PikeVM frequency of events broken down by state") ; for sid in 0 .. self . steps . len () { trace ! ("{:06}: steps: {}, closures: {}, \
+                 stack-pushes: {}, set-inserts: {}" , sid , self . steps [sid] , self . closures [sid] , self . stack_pushes [sid] , self . set_inserts [sid] ,) ; } trace ! ("") ; trace ! ("## NFA debug display") ; trace ! ("{nfa:?}") ; trace ! ("===== END PikeVM Instrumentation Output =====") ; } fn record_state_set (& mut self , set : & SparseSet) { let set = set . iter () . collect :: < Vec < StateID > > () ; * self . state_sets . entry (set) . or_insert (0) += 1 ; } fn record_step (& mut self , sid : StateID) { self . steps [sid] += 1 ; } fn record_closure (& mut self , sid : StateID) { self . closures [sid] += 1 ; } fn record_stack_push (& mut self , sid : StateID) { self . stack_pushes [sid] += 1 ; } fn record_set_insert (& mut self , sid : StateID) { self . set_inserts [sid] += 1 ; } }
+    };
+}
+
+impl_555!()

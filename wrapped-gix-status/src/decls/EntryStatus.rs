@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Change!();
         ConflictIndexEntry!();
         Conflict!();
+        Change!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EntryStatus {
     };
 }
 
-EntryStatus!()
+EntryStatus!();

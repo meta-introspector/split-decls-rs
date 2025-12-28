@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Configuration!();
-        Driver!();
         Error!();
+        Driver!();
+        Configuration!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! to_worktree {
     };
 }
 
-to_worktree!()
+to_worktree!();

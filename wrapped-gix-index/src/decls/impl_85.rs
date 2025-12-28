@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Change!();
         Mode!();
+        Change!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

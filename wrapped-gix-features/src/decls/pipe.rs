@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Write!();
         Read!();
+        Write!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! pipe {
     };
 }
 
-pipe!()
+pipe!();

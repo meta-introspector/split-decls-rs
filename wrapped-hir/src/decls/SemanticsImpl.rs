@@ -4,4 +4,4 @@ macro_rules! SemanticsImpl {
     };
 }
 
-SemanticsImpl!()
+SemanticsImpl!();

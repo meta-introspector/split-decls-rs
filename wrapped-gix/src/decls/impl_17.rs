@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Repository!();
-        AncestorsIter!();
         ObjectIdExt!();
+        Repository!();
         Id!();
+        AncestorsIter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

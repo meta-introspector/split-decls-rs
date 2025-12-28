@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Permissions!();
         Error!();
         Options!();
         Note!();
-        ThreadSafeRepository!();
+        Permissions!();
         Item!();
+        ThreadSafeRepository!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_500 {
     };
 }
 
-impl_500!()
+impl_500!();

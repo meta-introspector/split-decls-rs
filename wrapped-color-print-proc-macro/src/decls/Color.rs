@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Color256!();
         ColorRgb!();
         Color16!();
+        Color256!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Color {
     };
 }
 
-Color!()
+Color!();

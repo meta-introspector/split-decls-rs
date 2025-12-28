@@ -4,4 +4,4 @@ macro_rules! stress_test_load_store {
     };
 }
 
-stress_test_load_store!()
+stress_test_load_store!();

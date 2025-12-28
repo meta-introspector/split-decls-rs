@@ -4,4 +4,4 @@ macro_rules! trait_aliases {
     };
 }
 
-trait_aliases!()
+trait_aliases!();

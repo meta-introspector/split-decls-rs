@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Fish!();
-        EnvCompleter!();
         Zsh!();
+        EnvCompleter!();
+        Shells!();
+        Fish!();
+        Powershell!();
         Bash!();
         Elvish!();
-        Shells!();
-        Powershell!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_146 {
     };
 }
 
-impl_146!()
+impl_146!();

@@ -4,4 +4,4 @@ macro_rules! DiffHunk {
     };
 }
 
-DiffHunk!()
+DiffHunk!();

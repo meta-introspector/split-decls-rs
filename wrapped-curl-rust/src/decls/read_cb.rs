@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Handler!();
         ReadError!();
         Inner!();
+        Handler!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! read_cb {
     };
 }
 
-read_cb!()
+read_cb!();

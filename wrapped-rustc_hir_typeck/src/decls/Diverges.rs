@@ -1,0 +1,7 @@
+macro_rules! Diverges {
+    () => {
+        # [doc = " Tracks whether executing a node may exit normally (versus"] # [doc = " return/break/panic, which \"diverge\", leaving dead code in their"] # [doc = " wake). Tracked semi-automatically (through type variables marked"] # [doc = " as diverging), with some manual adjustments for control-flow"] # [doc = " primitives (approximating a CFG)."] # [derive (Copy , Clone , Debug , PartialEq , Eq , PartialOrd , Ord)] pub (crate) enum Diverges { # [doc = " Potentially unknown, some cases converge,"] # [doc = " others require a CFG to determine them."] Maybe , # [doc = " Definitely known to diverge and therefore"] # [doc = " not reach the next sibling or its parent."] Always { # [doc = " The `Span` points to the expression"] # [doc = " that caused us to diverge"] # [doc = " (e.g. `return`, `break`, etc)."] span : Span , # [doc = " In some cases (e.g. a `match` expression"] # [doc = " where all arms diverge), we may be"] # [doc = " able to provide a more informative"] # [doc = " message to the user."] # [doc = " If this is `None`, a default message"] # [doc = " will be generated, which is suitable"] # [doc = " for most cases."] custom_note : Option < & 'static str > , } , # [doc = " Same as `Always` but with a reachability"] # [doc = " warning already emitted."] WarnedAlways , }
+    };
+}
+
+Diverges!()

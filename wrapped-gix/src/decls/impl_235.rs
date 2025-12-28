@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Entry!();
         EntryRef!();
+        Object!();
         Id!();
         Error!();
-        Entry!();
-        Object!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

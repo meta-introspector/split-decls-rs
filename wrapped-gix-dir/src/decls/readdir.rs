@@ -4,4 +4,4 @@ macro_rules! readdir {
     };
 }
 
-readdir!()
+readdir!();

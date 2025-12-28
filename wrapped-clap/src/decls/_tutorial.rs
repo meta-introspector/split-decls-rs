@@ -4,4 +4,4 @@ macro_rules! _tutorial {
     };
 }
 
-_tutorial!()
+_tutorial!();

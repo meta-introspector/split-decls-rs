@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RawTable!();
         RawIterHash!();
         RawIterHashInner!();
-        RawTable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

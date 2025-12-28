@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Send!();
         MutexLockFuture!();
+        Send!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1320 {
     };
 }
 
-impl_1320!()
+impl_1320!();

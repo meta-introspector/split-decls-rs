@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Scalar!();
-        Json!();
-        MetaType!();
         MetaTypeId!();
         InputType!();
-        InputValueResult!();
         Registry!();
+        Json!();
+        Scalar!();
+        InputValueResult!();
+        MetaType!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_778 {
     };
 }
 
-impl_778!()
+impl_778!();

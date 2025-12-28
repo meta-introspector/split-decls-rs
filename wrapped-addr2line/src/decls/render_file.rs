@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnitRef!();
         Error!();
         Result!();
+        UnitRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! render_file {
     };
 }
 
-render_file!()
+render_file!();

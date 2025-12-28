@@ -13,4 +13,4 @@ macro_rules! add_shallow_args {
     };
 }
 
-add_shallow_args!()
+add_shallow_args!();

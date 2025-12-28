@@ -11,4 +11,4 @@ macro_rules! stag {
     };
 }
 
-stag!()
+stag!();

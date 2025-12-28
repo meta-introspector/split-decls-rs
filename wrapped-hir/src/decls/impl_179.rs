@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Impl!();
-        Trait!();
-        SymbolCollector!();
+        FileSymbol!();
         BuiltinType!();
         HasSource!();
-        ModuleDef!();
-        DeclarationLocation!();
-        FileSymbol!();
-        SymbolCollectorWork!();
+        SymbolCollector!();
         Module!();
+        SymbolCollectorWork!();
+        Impl!();
+        DeclarationLocation!();
+        ModuleDef!();
+        Trait!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_179 {
     };
 }
 
-impl_179!()
+impl_179!();

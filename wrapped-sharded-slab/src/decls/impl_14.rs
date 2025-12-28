@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Slab!();
+        Pool!();
+        Config!();
+        Clear!();
     };
 }
 
 macro_rules! impl_14 {
     () => {
         deps!();
-        impl < T > Slab < T > { # [doc = " Returns a new slab with the default configuration parameters."] pub fn new () -> Self { Self :: new_with_config () } # [doc = " Returns a new slab with the provided configuration parameters."] pub fn new_with_config < C : cfg :: Config > () -> Slab < T , C > { C :: validate () ; Slab { shards : shard :: Array :: new () , _cfg : PhantomData , } } }
+        unsafe impl < T , C > Sync for Pool < T , C > where T : Sync + Clear + Default , C : cfg :: Config , { }
     };
 }
 

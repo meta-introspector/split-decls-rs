@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Error!();
-        Context!();
-        InlinedState!();
-        InlinedFunction!();
         Function!();
+        InlinedFunction!();
+        Context!();
         DebugFile!();
-        UnitRef!();
+        InlinedState!();
         Result!();
+        UnitRef!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

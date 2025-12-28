@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SecondsFormat!();
         Utc!();
+        SecondsFormat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_rfc3339_opts_nonexhaustive {
     };
 }
 
-test_rfc3339_opts_nonexhaustive!()
+test_rfc3339_opts_nonexhaustive!();

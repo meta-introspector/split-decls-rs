@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DirEntryAttr!();
-        Result!();
         DirEntryValue!();
+        Result!();
+        DirEntryAttr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_details_entry {
     };
 }
 
-get_details_entry!()
+get_details_entry!();

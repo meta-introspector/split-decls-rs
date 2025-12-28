@@ -4,4 +4,4 @@ macro_rules! double_seconds_to_duration {
     };
 }
 
-double_seconds_to_duration!()
+double_seconds_to_duration!();

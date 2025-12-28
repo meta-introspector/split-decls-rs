@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        DebugRngLists!();
-        DebugStr!();
-        DebugFrame!();
-        DebugLoc!();
-        DebugLineStr!();
-        EhFrame!();
-        DebugLine!();
-        DebugLocLists!();
-        DebugInfoFixup!();
-        DebugRanges!();
         DebugAbbrev!();
         DebugInfo!();
+        DebugStr!();
+        DebugLine!();
+        DebugInfoFixup!();
+        DebugLineStr!();
+        DebugLocLists!();
+        EhFrame!();
+        DebugFrame!();
+        DebugLoc!();
+        DebugRanges!();
+        DebugRngLists!();
         Writer!();
     };
 }
@@ -23,4 +23,4 @@ macro_rules! Sections {
     };
 }
 
-Sections!()
+Sections!();

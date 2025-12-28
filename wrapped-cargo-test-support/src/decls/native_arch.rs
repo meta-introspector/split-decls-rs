@@ -4,4 +4,4 @@ macro_rules! native_arch {
     };
 }
 
-native_arch!()
+native_arch!();

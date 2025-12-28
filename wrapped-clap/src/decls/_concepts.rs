@@ -4,4 +4,4 @@ macro_rules! _concepts {
     };
 }
 
-_concepts!()
+_concepts!();

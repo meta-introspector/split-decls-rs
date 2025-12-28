@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        ArcJob!();
+        JobRefId!();
+        JobRef!();
+    };
+}
+
+macro_rules! impl_44 {
+    () => {
+        deps!();
+        impl < BODY > ArcJob < BODY > where BODY : Fn (JobRefId) + Send + Sync , { pub (super) fn new (job : BODY) -> Arc < Self > { Arc :: new (ArcJob { job }) } # [doc = " Creates a `JobRef` from this job -- note that this hides all"] # [doc = " lifetimes, so it is up to you to ensure that this JobRef"] # [doc = " doesn't outlive any data that it closes over."] pub (super) unsafe fn as_job_ref (this : & Arc < Self >) -> JobRef { unsafe { JobRef :: new (Arc :: into_raw (Arc :: clone (this))) } } # [doc = " Creates a static `JobRef` from this job."] pub (super) fn as_static_job_ref (this : & Arc < Self >) -> JobRef where BODY : 'static , { unsafe { Self :: as_job_ref (this) } } }
+    };
+}
+
+impl_44!()

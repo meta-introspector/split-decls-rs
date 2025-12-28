@@ -11,4 +11,4 @@ macro_rules! take_zip_from_parts {
     };
 }
 
-take_zip_from_parts!()
+take_zip_from_parts!();

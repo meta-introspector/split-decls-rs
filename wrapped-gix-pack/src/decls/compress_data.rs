@@ -11,4 +11,4 @@ macro_rules! compress_data {
     };
 }
 
-compress_data!()
+compress_data!();

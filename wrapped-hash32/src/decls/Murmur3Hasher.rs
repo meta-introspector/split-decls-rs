@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Index!();
         Buffer!();
+        Index!();
         State!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Murmur3Hasher {
     };
 }
 
-Murmur3Hasher!()
+Murmur3Hasher!();

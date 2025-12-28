@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Positioned!();
-        FragmentSpread!();
         InlineFragment!();
+        Positioned!();
         Field!();
+        FragmentSpread!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Selection {
     };
 }
 
-Selection!()
+Selection!();

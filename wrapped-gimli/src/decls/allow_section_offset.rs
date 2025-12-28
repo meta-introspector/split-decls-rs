@@ -4,4 +4,4 @@ macro_rules! allow_section_offset {
     };
 }
 
-allow_section_offset!()
+allow_section_offset!();

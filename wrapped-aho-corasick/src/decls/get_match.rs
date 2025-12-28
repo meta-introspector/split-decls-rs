@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        StateID!();
         Match!();
         Automaton!();
-        StateID!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_match {
     };
 }
 
-get_match!()
+get_match!();

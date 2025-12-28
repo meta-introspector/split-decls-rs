@@ -4,4 +4,4 @@ macro_rules! CVWords {
     };
 }
 
-CVWords!()
+CVWords!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Error!();
-        MapAccess!();
         Result!();
-        DeserializeSeed!();
         Out!();
+        MapAccess!();
+        DeserializeSeed!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

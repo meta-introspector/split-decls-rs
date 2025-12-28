@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashTable!();
         RawDrain!();
+        HashTable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Drain {
     };
 }
 
-Drain!()
+Drain!();

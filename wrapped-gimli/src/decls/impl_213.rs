@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Register!();
-        StoreOnHeap!();
-        RegisterRule!();
-        ReaderOffset!();
         UnwindContextStorage!();
+        StoreOnHeap!();
+        Register!();
+        ReaderOffset!();
+        RegisterRule!();
         UnwindTableRow!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_213 {
     };
 }
 
-impl_213!()
+impl_213!();

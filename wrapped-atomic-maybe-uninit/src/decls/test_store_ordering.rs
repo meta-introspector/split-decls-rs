@@ -4,4 +4,4 @@ macro_rules! test_store_ordering {
     };
 }
 
-test_store_ordering!()
+test_store_ordering!();

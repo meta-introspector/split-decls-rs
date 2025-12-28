@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
-        DurationRound!();
+        TimeDelta!();
         NaiveDate!();
+        DurationRound!();
         TimeZone!();
         Utc!();
-        TimeDelta!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! RoundingError {
     };
 }
 
-RoundingError!()
+RoundingError!();

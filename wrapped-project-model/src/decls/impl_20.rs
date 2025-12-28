@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        RustSourceWorkspaceConfig!();
+        Runnable!();
+        RunnableData!();
     };
 }
 
 macro_rules! impl_20 {
     () => {
         deps!();
-        impl Default for RustSourceWorkspaceConfig { fn default () -> Self { RustSourceWorkspaceConfig :: default_cargo () } }
+        impl From < RunnableData > for Runnable { fn from (data : RunnableData) -> Self { Runnable { program : data . program , args : data . args , cwd : data . cwd , kind : data . kind . into () } } }
     };
 }
 

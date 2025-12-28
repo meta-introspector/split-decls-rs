@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DateTime!();
         FixedOffset!();
+        DateTime!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ymdhms_milli {
     };
 }
 
-ymdhms_milli!()
+ymdhms_milli!();

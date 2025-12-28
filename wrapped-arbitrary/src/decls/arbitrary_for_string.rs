@@ -4,4 +4,4 @@ macro_rules! arbitrary_for_string {
     };
 }
 
-arbitrary_for_string!()
+arbitrary_for_string!();

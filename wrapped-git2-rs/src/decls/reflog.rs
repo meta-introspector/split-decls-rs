@@ -4,4 +4,4 @@ macro_rules! reflog {
     };
 }
 
-reflog!()
+reflog!();

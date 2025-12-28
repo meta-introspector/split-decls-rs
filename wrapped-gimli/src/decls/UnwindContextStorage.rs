@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         RegisterRule!();
         ReaderOffset!();
-        UnwindContext!();
-        UnwindTableRow!();
-        ArrayLike!();
         StoreOnHeap!();
         Register!();
+        ArrayLike!();
+        UnwindTableRow!();
+        UnwindContext!();
     };
 }
 
@@ -30,4 +30,4 @@ You may want to supply your own storage type for one of the following reasons:
     };
 }
 
-UnwindContextStorage!()
+UnwindContextStorage!();

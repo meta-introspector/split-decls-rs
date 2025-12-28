@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IntoStream!();
         Merge!();
         Indexer!();
-        IntoStream!();
         WakerArray!();
         PollArray!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_merge_tuple {
     };
 }
 
-impl_merge_tuple!()
+impl_merge_tuple!();

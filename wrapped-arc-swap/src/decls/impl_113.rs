@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Config!();
-        Debt!();
-        RefCnt!();
-        HybridProtection!();
         LocalNode!();
+        Config!();
         HybridStrategy!();
+        Debt!();
+        HybridProtection!();
+        RefCnt!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

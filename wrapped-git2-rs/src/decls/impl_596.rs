@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RebaseOperation!();
         Binding!();
+        RebaseOperation!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_596 {
     };
 }
 
-impl_596!()
+impl_596!();

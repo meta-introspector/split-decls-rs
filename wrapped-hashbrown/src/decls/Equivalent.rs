@@ -4,4 +4,4 @@ macro_rules! Equivalent {
     };
 }
 
-Equivalent!()
+Equivalent!();

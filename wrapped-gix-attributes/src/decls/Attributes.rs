@@ -4,4 +4,4 @@ macro_rules! Attributes {
     };
 }
 
-Attributes!()
+Attributes!();

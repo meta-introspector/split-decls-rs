@@ -11,4 +11,4 @@ macro_rules! ancestors {
     };
 }
 
-ancestors!()
+ancestors!();

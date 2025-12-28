@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefaultHashBuilder!();
         HashTable!();
+        DefaultHashBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_par_table {
     };
 }
 
-test_par_table!()
+test_par_table!();

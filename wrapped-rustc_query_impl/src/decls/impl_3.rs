@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DynamicConfig!();
+        QueryCtxt!();
     };
 }
 
 macro_rules! impl_3 {
     () => {
         deps!();
-        impl < 'tcx , C : QueryCache , const ANON : bool , const DEPTH_LIMIT : bool , const FEEDABLE : bool > Copy for DynamicConfig < 'tcx , C , ANON , DEPTH_LIMIT , FEEDABLE > { }
+        impl < 'tcx > HasDepContext for QueryCtxt < 'tcx > { type Deps = rustc_middle :: dep_graph :: DepsType ; type DepContext = TyCtxt < 'tcx > ; # [inline] fn dep_context (& self) -> & Self :: DepContext { & self . tcx } }
     };
 }
 

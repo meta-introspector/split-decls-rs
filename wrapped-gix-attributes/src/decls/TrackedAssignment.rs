@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Assignment!();
         AttributeId!();
+        Assignment!();
         Search!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TrackedAssignment {
     };
 }
 
-TrackedAssignment!()
+TrackedAssignment!();

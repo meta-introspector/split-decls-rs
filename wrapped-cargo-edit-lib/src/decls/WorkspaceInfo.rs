@@ -4,4 +4,4 @@ macro_rules! WorkspaceInfo {
     };
 }
 
-WorkspaceInfo!()
+WorkspaceInfo!();

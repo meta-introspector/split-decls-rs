@@ -4,4 +4,4 @@ macro_rules! platform_newline {
     };
 }
 
-platform_newline!()
+platform_newline!();

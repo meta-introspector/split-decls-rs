@@ -4,4 +4,4 @@ macro_rules! derive_enum {
     };
 }
 
-derive_enum!()
+derive_enum!();

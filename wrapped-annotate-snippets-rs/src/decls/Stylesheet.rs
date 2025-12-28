@@ -4,4 +4,4 @@ macro_rules! Stylesheet {
     };
 }
 
-Stylesheet!()
+Stylesheet!();

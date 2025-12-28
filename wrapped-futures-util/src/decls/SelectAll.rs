@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FuturesUnordered!();
         StreamFuture!();
+        FuturesUnordered!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SelectAll {
     };
 }
 
-SelectAll!()
+SelectAll!();

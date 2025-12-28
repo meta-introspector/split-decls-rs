@@ -4,4 +4,4 @@ macro_rules! ConstantTimeSelect {
     };
 }
 
-ConstantTimeSelect!()
+ConstantTimeSelect!();

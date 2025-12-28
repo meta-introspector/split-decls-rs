@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BenchmarkConfig!();
-        Estimates!();
-        Distributions!();
         PointEstimates!();
         Sample!();
+        Estimates!();
+        Distributions!();
+        BenchmarkConfig!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! estimates {
     };
 }
 
-estimates!()
+estimates!();

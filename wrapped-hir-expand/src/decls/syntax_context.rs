@@ -12,4 +12,4 @@ macro_rules! syntax_context {
     };
 }
 
-syntax_context!()
+syntax_context!();

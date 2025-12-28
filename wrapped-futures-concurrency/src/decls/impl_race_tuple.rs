@@ -12,4 +12,4 @@ macro_rules! impl_race_tuple {
     };
 }
 
-impl_race_tuple!()
+impl_race_tuple!();

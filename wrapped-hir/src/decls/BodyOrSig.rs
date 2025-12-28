@@ -4,4 +4,4 @@ macro_rules! BodyOrSig {
     };
 }
 
-BodyOrSig!()
+BodyOrSig!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Unstructured!();
-        Result!();
         Error!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! details {
     };
 }
 
-details!()
+details!();

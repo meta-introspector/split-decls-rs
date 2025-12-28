@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        MultiSpan!();
+        IntoDiagArg!();
+        DiagArgValue!();
     };
 }
 
 macro_rules! impl_27 {
     () => {
         deps!();
-        impl From < Vec < Span > > for MultiSpan { fn from (spans : Vec < Span >) -> MultiSpan { MultiSpan :: from_spans (spans) } }
+        impl IntoDiagArg for ast :: FloatTy { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { DiagArgValue :: Str (Cow :: Borrowed (self . name_str ())) } }
     };
 }
 

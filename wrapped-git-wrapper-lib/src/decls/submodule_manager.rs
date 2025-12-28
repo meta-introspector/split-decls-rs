@@ -4,4 +4,4 @@ macro_rules! submodule_manager {
     };
 }
 
-submodule_manager!()
+submodule_manager!();

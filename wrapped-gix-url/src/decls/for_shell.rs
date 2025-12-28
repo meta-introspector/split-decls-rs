@@ -11,4 +11,4 @@ macro_rules! for_shell {
     };
 }
 
-for_shell!()
+for_shell!();

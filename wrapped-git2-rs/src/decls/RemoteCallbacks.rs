@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        IndexerProgress!();
+        PushUpdateReference!();
+        PushTransferProgress!();
+        PushNegotiation!();
         Credentials!();
         TransportMessage!();
         UpdateTips!();
-        PushNegotiation!();
         PackProgress!();
         CertificateCheck!();
-        PushUpdateReference!();
-        PushTransferProgress!();
+        IndexerProgress!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! RemoteCallbacks {
     };
 }
 
-RemoteCallbacks!()
+RemoteCallbacks!();

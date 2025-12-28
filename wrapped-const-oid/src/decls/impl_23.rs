@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         State!();
-        Result!();
-        ObjectIdentifier!();
-        Error!();
         Buffer!();
+        ObjectIdentifier!();
+        Result!();
+        Error!();
         Arc!();
         Encoder!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

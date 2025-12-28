@@ -4,4 +4,4 @@ macro_rules! should_skip_as_git_version_is_smaller_than {
     };
 }
 
-should_skip_as_git_version_is_smaller_than!()
+should_skip_as_git_version_is_smaller_than!();

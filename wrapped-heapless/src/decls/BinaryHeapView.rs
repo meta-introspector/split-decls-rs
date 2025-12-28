@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Max!();
+        Cell!();
         BinaryHeap!();
         BinaryHeapInner!();
-        Cell!();
-        Max!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! BinaryHeapView {
     };
 }
 
-BinaryHeapView!()
+BinaryHeapView!();

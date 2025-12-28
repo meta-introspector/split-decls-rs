@@ -12,4 +12,4 @@ macro_rules! X_USER_DEFINED_INIT {
     };
 }
 
-X_USER_DEFINED_INIT!()
+X_USER_DEFINED_INIT!();

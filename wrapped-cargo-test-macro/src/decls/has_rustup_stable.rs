@@ -4,4 +4,4 @@ macro_rules! has_rustup_stable {
     };
 }
 
-has_rustup_stable!()
+has_rustup_stable!();

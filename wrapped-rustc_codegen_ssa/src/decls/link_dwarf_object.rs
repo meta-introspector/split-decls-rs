@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        CodegenResults!();
+        ThorinErrorWrapper!();
+    };
+}
+
+macro_rules! link_dwarf_object {
+    () => {
+        deps!();
+        # [doc = " Use `thorin` (rust implementation of a dwarf packaging utility) to link DWARF objects into a"] # [doc = " DWARF package."] fn link_dwarf_object (sess : & Session , cg_results : & CodegenResults , executable_out_filename : & Path) { let mut dwp_out_filename = executable_out_filename . to_path_buf () . into_os_string () ; dwp_out_filename . push (".dwp") ; debug ! (? dwp_out_filename , ? executable_out_filename) ; # [derive (Default)] struct ThorinSession < Relocations > { arena_data : TypedArena < Vec < u8 > > , arena_mmap : TypedArena < Mmap > , arena_relocations : TypedArena < Relocations > , } impl < Relocations > ThorinSession < Relocations > { fn alloc_mmap (& self , data : Mmap) -> & Mmap { & * self . arena_mmap . alloc (data) } } impl < Relocations > thorin :: Session < Relocations > for ThorinSession < Relocations > { fn alloc_data (& self , data : Vec < u8 >) -> & [u8] { & * self . arena_data . alloc (data) } fn alloc_relocation (& self , data : Relocations) -> & Relocations { & * self . arena_relocations . alloc (data) } fn read_input (& self , path : & Path) -> std :: io :: Result < & [u8] > { let file = File :: open (& path) ? ; let mmap = (unsafe { Mmap :: map (file) }) ? ; Ok (self . alloc_mmap (mmap)) } } match sess . time ("run_thorin" , | | -> Result < () , thorin :: Error > { let thorin_sess = ThorinSession :: default () ; let mut package = thorin :: DwarfPackage :: new (& thorin_sess) ; match sess . opts . unstable_opts . split_dwarf_kind { SplitDwarfKind :: Single => { for input_obj in cg_results . modules . iter () . filter_map (| m | m . object . as_ref ()) { package . add_input_object (input_obj) ? ; } } SplitDwarfKind :: Split => { for input_obj in cg_results . modules . iter () . filter_map (| m | m . dwarf_object . as_ref ()) { package . add_input_object (input_obj) ? ; } } } let input_rlibs = cg_results . crate_info . used_crate_source . items () . filter_map (| (_ , csource) | csource . rlib . as_ref ()) . map (| (path , _) | path) . into_sorted_stable_ord () ; for input_rlib in input_rlibs { debug ! (? input_rlib) ; package . add_input_object (input_rlib) ? ; } package . add_executable (executable_out_filename , thorin :: MissingReferencedObjectBehaviour :: Skip ,) ? ; let output_stream = BufWriter :: new (OpenOptions :: new () . read (true) . write (true) . create (true) . truncate (true) . open (dwp_out_filename) ? ,) ; let mut output_stream = thorin :: object :: write :: StreamingBuffer :: new (output_stream) ; package . finish () ? . emit (& mut output_stream) ? ; output_stream . result () ? ; output_stream . into_inner () . flush () ? ; Ok (()) }) { Ok (()) => { } Err (e) => sess . dcx () . emit_fatal (errors :: ThorinErrorWrapper (e)) , } }
+    };
+}
+
+link_dwarf_object!()

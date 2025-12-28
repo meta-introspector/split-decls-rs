@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        State!();
-        Item!();
-        EntryRange!();
         Tree!();
-        Context!();
-        Error!();
+        EntryRange!();
         Entry!();
+        Item!();
+        Error!();
+        Context!();
+        State!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! deltas {
     };
 }
 
-deltas!()
+deltas!();

@@ -11,4 +11,4 @@ macro_rules! Semantics {
     };
 }
 
-Semantics!()
+Semantics!();

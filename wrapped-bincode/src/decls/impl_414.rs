@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Config!();
-        Writer!();
-        Sealed!();
         EncoderImpl!();
+        Config!();
+        Sealed!();
+        Writer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_414 {
     };
 }
 
-impl_414!()
+impl_414!();

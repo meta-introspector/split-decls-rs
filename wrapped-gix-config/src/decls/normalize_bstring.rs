@@ -4,4 +4,4 @@ macro_rules! normalize_bstring {
     };
 }
 
-normalize_bstring!()
+normalize_bstring!();

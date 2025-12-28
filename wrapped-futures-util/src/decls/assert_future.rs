@@ -4,4 +4,4 @@ macro_rules! assert_future {
     };
 }
 
-assert_future!()
+assert_future!();

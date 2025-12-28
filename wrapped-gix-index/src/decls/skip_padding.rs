@@ -4,4 +4,4 @@ macro_rules! skip_padding {
     };
 }
 
-skip_padding!()
+skip_padding!();

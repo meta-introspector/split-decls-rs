@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ParseResult!();
-        FilterOp!();
         ParseError!();
+        FilterOp!();
         Directive!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

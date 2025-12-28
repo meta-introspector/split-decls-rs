@@ -4,4 +4,4 @@ macro_rules! AutoBorrow {
     };
 }
 
-AutoBorrow!()
+AutoBorrow!();

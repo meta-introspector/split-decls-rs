@@ -4,4 +4,4 @@ macro_rules! arbitrary_for_vec_vec_vec_u8 {
     };
 }
 
-arbitrary_for_vec_vec_vec_u8!()
+arbitrary_for_vec_vec_vec_u8!();

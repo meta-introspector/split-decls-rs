@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         Identifier!();
         Pattern!();
-        Entry!();
+        Resource!();
         Attribute!();
         Comment!();
-        Resource!();
+        Entry!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Message {
     };
 }
 
-Message!()
+Message!();

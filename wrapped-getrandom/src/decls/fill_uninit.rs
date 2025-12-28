@@ -11,4 +11,4 @@ macro_rules! fill_uninit {
     };
 }
 
-fill_uninit!()
+fill_uninit!();

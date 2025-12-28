@@ -12,4 +12,4 @@ macro_rules! month_serde {
     };
 }
 
-month_serde!()
+month_serde!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PeekMutInner!();
         Kind!();
+        PeekMutInner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

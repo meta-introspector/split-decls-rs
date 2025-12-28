@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Reader!();
+        Error!();
         Result!();
         FileEntryFormat!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_430 {
     };
 }
 
-impl_430!()
+impl_430!();

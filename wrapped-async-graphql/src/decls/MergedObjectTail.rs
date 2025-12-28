@@ -4,4 +4,4 @@ macro_rules! MergedObjectTail {
     };
 }
 
-MergedObjectTail!()
+MergedObjectTail!();

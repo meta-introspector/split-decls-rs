@@ -4,4 +4,4 @@ macro_rules! CHAR_CR {
     };
 }
 
-CHAR_CR!()
+CHAR_CR!();

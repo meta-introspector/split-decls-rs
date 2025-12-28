@@ -11,4 +11,4 @@ macro_rules! wnaf_form {
     };
 }
 
-wnaf_form!()
+wnaf_form!();

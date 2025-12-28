@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WakerVec!();
         PollVec!();
+        WakerVec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FutureGroup {
     };
 }
 
-FutureGroup!()
+FutureGroup!();

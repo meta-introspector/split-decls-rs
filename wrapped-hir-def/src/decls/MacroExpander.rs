@@ -4,4 +4,4 @@ macro_rules! MacroExpander {
     };
 }
 
-MacroExpander!()
+MacroExpander!();

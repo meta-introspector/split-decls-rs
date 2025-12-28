@@ -1,6 +1,11 @@
 macro_rules! deps {
     () => {
         TryFromBytes!();
+        Initialized!();
+        ValidityError!();
+        Valid!();
+        TransmuteFrom!();
+        TryReadError!();
     };
 }
 

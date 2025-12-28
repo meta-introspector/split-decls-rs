@@ -4,4 +4,4 @@ macro_rules! color_context {
     };
 }
 
-color_context!()
+color_context!();

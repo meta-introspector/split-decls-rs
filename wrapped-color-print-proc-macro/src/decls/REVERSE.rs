@@ -4,4 +4,4 @@ macro_rules! REVERSE {
     };
 }
 
-REVERSE!()
+REVERSE!();

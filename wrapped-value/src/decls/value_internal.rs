@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Name!();
         ConstValue!();
+        Name!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! value_internal {
     };
 }
 
-value_internal!()
+value_internal!();

@@ -4,4 +4,4 @@ macro_rules! LimbBuffer {
     };
 }
 
-LimbBuffer!()
+LimbBuffer!();

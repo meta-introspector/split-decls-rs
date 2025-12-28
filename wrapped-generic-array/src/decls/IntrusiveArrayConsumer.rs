@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericArray!();
         ArrayLength!();
+        GenericArray!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IntrusiveArrayConsumer {
     };
 }
 
-IntrusiveArrayConsumer!()
+IntrusiveArrayConsumer!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Context!();
         ContextStack!();
         RegContext!();
+        Context!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! raw_yield_now {
     };
 }
 
-raw_yield_now!()
+raw_yield_now!();

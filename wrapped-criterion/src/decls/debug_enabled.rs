@@ -4,4 +4,4 @@ macro_rules! debug_enabled {
     };
 }
 
-debug_enabled!()
+debug_enabled!();

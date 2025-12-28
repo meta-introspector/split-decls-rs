@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Duration!();
         NaiveDate!();
+        Duration!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_core_duration_max {
     };
 }
 
-test_core_duration_max!()
+test_core_duration_max!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DashMap!();
         DashSet!();
+        DashMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

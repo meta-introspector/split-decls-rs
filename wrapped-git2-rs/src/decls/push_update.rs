@@ -4,4 +4,4 @@ macro_rules! push_update {
     };
 }
 
-push_update!()
+push_update!();

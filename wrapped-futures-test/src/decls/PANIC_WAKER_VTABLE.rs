@@ -4,4 +4,4 @@ macro_rules! PANIC_WAKER_VTABLE {
     };
 }
 
-PANIC_WAKER_VTABLE!()
+PANIC_WAKER_VTABLE!();

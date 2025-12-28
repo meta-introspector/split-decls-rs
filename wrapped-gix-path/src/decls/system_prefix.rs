@@ -4,4 +4,4 @@ macro_rules! system_prefix {
     };
 }
 
-system_prefix!()
+system_prefix!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ArrayVec!();
-        EvaluationStorage!();
         EvaluationResult!();
-        Result!();
         Expression!();
-        EvaluationState!();
-        Value!();
-        Reader!();
-        Encoding!();
         StoreOnHeap!();
+        Reader!();
+        ArrayVec!();
+        Value!();
+        EvaluationStorage!();
+        Result!();
+        EvaluationState!();
+        Encoding!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! Evaluation {
     };
 }
 
-Evaluation!()
+Evaluation!();

@@ -4,4 +4,4 @@ macro_rules! EnumerateConsumer {
     };
 }
 
-EnumerateConsumer!()
+EnumerateConsumer!();

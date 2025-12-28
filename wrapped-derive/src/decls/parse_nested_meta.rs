@@ -4,4 +4,4 @@ macro_rules! parse_nested_meta {
     };
 }
 
-parse_nested_meta!()
+parse_nested_meta!();

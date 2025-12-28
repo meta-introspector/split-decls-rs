@@ -4,4 +4,4 @@ macro_rules! SshHostKeyType {
     };
 }
 
-SshHostKeyType!()
+SshHostKeyType!();

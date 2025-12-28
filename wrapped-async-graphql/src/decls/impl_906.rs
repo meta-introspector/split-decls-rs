@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Field!();
         Registry!();
+        ServerResult!();
         ContextSelectionSet!();
         OutputType!();
-        ServerResult!();
-        Field!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_906 {
     };
 }
 
-impl_906!()
+impl_906!();

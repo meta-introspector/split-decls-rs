@@ -4,4 +4,4 @@ macro_rules! write_binary {
     };
 }
 
-write_binary!()
+write_binary!();

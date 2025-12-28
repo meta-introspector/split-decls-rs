@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UsePath2!();
         UseName2!();
         UseGroup2!();
+        UsePath2!();
     };
 }
 

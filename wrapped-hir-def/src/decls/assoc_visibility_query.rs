@@ -13,4 +13,4 @@ macro_rules! assoc_visibility_query {
     };
 }
 
-assoc_visibility_query!()
+assoc_visibility_query!();

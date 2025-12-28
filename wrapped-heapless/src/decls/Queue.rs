@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OwnedStorage!();
         QueueInner!();
+        OwnedStorage!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Queue {
     };
 }
 
-Queue!()
+Queue!();

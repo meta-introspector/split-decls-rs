@@ -4,4 +4,4 @@ macro_rules! ascii_alu {
     };
 }
 
-ascii_alu!()
+ascii_alu!();

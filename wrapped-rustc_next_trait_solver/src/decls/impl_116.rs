@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        SolverDelegate!();
+        EvalCtxt!();
+    };
+}
+
+macro_rules! impl_116 {
+    () => {
+        deps!();
+        impl < D , I > EvalCtxt < '_ , D > where D : SolverDelegate < Interner = I > , I : Interner , { # [instrument (level = "trace" , skip (self) , ret)] pub (super) fn compute_normalizes_to_goal (& mut self , goal : Goal < I , NormalizesTo < I > > ,) -> QueryResult < I > { debug_assert ! (self . term_is_fully_unconstrained (goal)) ; let cx = self . cx () ; match goal . predicate . alias . kind (cx) { ty :: AliasTermKind :: ProjectionTy | ty :: AliasTermKind :: ProjectionConst => { let trait_ref = goal . predicate . alias . trait_ref (cx) ; let (_ , proven_via) = self . probe (| _ | ProbeKind :: ShadowedEnvProbing) . enter (| ecx | { let trait_goal : Goal < I , ty :: TraitPredicate < I > > = goal . with (cx , trait_ref) ; ecx . compute_trait_goal (trait_goal) }) ? ; self . assemble_and_merge_candidates (proven_via , goal , | ecx | { ecx . probe (| & result | ProbeKind :: RigidAlias { result }) . enter (| this | { this . structurally_instantiate_normalizes_to_term (goal , goal . predicate . alias ,) ; this . evaluate_added_goals_and_make_canonical_response (Certainty :: Yes) }) }) } ty :: AliasTermKind :: InherentTy | ty :: AliasTermKind :: InherentConst => { self . normalize_inherent_associated_term (goal) } ty :: AliasTermKind :: OpaqueTy => self . normalize_opaque_type (goal) , ty :: AliasTermKind :: FreeTy | ty :: AliasTermKind :: FreeConst => { self . normalize_free_alias (goal) } ty :: AliasTermKind :: UnevaluatedConst => self . normalize_anon_const (goal) , } } # [doc = " When normalizing an associated item, constrain the expected term to `term`."] # [doc = ""] # [doc = " We know `term` to always be a fully unconstrained inference variable, so"] # [doc = " `eq` should never fail here. However, in case `term` contains aliases, we"] # [doc = " emit nested `AliasRelate` goals to structurally normalize the alias."] pub fn instantiate_normalizes_to_term (& mut self , goal : Goal < I , NormalizesTo < I > > , term : I :: Term ,) { self . eq (goal . param_env , goal . predicate . term , term) . expect ("expected goal term to be fully unconstrained") ; } # [doc = " Unlike `instantiate_normalizes_to_term` this instantiates the expected term"] # [doc = " with a rigid alias. Using this is pretty much always wrong."] pub fn structurally_instantiate_normalizes_to_term (& mut self , goal : Goal < I , NormalizesTo < I > > , term : ty :: AliasTerm < I > ,) { self . relate_rigid_alias_non_alias (goal . param_env , term , ty :: Invariant , goal . predicate . term) . expect ("expected goal term to be fully unconstrained") ; } }
+    };
+}
+
+impl_116!()

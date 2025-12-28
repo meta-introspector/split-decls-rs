@@ -4,4 +4,4 @@ macro_rules! ArgLineCommandExt {
     };
 }
 
-ArgLineCommandExt!()
+ArgLineCommandExt!();

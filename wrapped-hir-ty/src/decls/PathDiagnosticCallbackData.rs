@@ -4,4 +4,4 @@ macro_rules! PathDiagnosticCallbackData {
     };
 }
 
-PathDiagnosticCallbackData!()
+PathDiagnosticCallbackData!();

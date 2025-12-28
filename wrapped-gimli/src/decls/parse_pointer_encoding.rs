@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
         Reader!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_pointer_encoding {
     };
 }
 
-parse_pointer_encoding!()
+parse_pointer_encoding!();

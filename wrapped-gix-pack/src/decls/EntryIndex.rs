@@ -4,4 +4,4 @@ macro_rules! EntryIndex {
     };
 }
 
-EntryIndex!()
+EntryIndex!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        Easy2!();
         List!();
+        Easy2!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_easy_getters {
     };
 }
 
-impl_easy_getters!()
+impl_easy_getters!();

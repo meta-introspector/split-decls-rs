@@ -11,4 +11,4 @@ macro_rules! ConfigEntry {
     };
 }
 
-ConfigEntry!()
+ConfigEntry!();

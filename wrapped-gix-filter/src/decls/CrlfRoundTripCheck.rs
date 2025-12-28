@@ -4,4 +4,4 @@ macro_rules! CrlfRoundTripCheck {
     };
 }
 
-CrlfRoundTripCheck!()
+CrlfRoundTripCheck!();

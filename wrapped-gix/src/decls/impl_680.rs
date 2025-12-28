@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Any!();
-        Init!();
         Tree!();
+        Init!();
+        Any!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_680 {
     };
 }
 
-impl_680!()
+impl_680!();

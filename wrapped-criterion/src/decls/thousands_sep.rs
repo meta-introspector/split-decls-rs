@@ -4,4 +4,4 @@ macro_rules! thousands_sep {
     };
 }
 
-thousands_sep!()
+thousands_sep!();

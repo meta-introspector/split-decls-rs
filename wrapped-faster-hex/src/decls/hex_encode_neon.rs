@@ -4,4 +4,4 @@ macro_rules! hex_encode_neon {
     };
 }
 
-hex_encode_neon!()
+hex_encode_neon!();

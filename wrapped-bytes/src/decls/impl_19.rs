@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Buf!();
+        TryGetError!();
         BufMut!();
         UninitSlice!();
-        TryGetError!();
-        Buf!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

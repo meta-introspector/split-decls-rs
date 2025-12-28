@@ -11,4 +11,4 @@ macro_rules! random_engine {
     };
 }
 
-random_engine!()
+random_engine!();

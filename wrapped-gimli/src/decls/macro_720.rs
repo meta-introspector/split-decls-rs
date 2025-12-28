@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EhFrame!();
         EhFrameOffset!();
+        EhFrame!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_720 {
     };
 }
 
-macro_720!()
+macro_720!();

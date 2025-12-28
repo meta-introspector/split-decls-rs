@@ -4,4 +4,4 @@ macro_rules! CommitRef {
     };
 }
 
-CommitRef!()
+CommitRef!();

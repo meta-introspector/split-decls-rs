@@ -4,4 +4,4 @@ macro_rules! DiagnosticCode {
     };
 }
 
-DiagnosticCode!()
+DiagnosticCode!();

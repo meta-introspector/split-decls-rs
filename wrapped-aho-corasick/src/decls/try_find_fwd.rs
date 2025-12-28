@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Automaton!();
         Match!();
-        Anchored!();
-        MatchError!();
         Input!();
+        MatchError!();
+        Anchored!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! try_find_fwd {
     };
 }
 
-try_find_fwd!()
+try_find_fwd!();

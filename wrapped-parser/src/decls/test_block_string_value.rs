@@ -9,4 +9,4 @@ macro_rules! test_block_string_value {
     };
 }
 
-test_block_string_value!()
+test_block_string_value!();

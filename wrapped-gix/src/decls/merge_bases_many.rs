@@ -11,4 +11,4 @@ macro_rules! merge_bases_many {
     };
 }
 
-merge_bases_many!()
+merge_bases_many!();

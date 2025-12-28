@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        PatternExtraData!();
+        MatchTreeSubBranch!();
+        Candidate!();
+        MatchTreeBranch!();
+    };
+}
+
+macro_rules! impl_129 {
+    () => {
+        deps!();
+        impl < 'tcx > MatchTreeBranch < 'tcx > { fn from_candidate (candidate : Candidate < 'tcx >) -> Self { let mut sub_branches = Vec :: new () ; traverse_candidate (candidate , & mut Vec :: new () , & mut | candidate : Candidate < '_ > , parent_data : & mut Vec < PatternExtraData < '_ > > | { sub_branches . push (MatchTreeSubBranch :: from_sub_candidate (candidate , parent_data)) ; } , | inner_candidate , parent_data | { parent_data . push (inner_candidate . extra_data) ; inner_candidate . subcandidates . into_iter () } , | parent_data | { parent_data . pop () ; } ,) ; MatchTreeBranch { sub_branches } } }
+    };
+}
+
+impl_129!()

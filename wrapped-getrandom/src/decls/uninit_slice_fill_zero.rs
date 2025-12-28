@@ -4,4 +4,4 @@ macro_rules! uninit_slice_fill_zero {
     };
 }
 
-uninit_slice_fill_zero!()
+uninit_slice_fill_zero!();

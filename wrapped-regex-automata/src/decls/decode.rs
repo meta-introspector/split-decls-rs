@@ -1,0 +1,7 @@
+macro_rules! decode {
+    () => {
+        # [doc = " Decodes the next UTF-8 encoded codepoint from the given byte slice."] # [doc = ""] # [doc = " If no valid encoding of a codepoint exists at the beginning of the given"] # [doc = " byte slice, then the first byte is returned instead."] # [doc = ""] # [doc = " This returns `None` if and only if `bytes` is empty."] # [doc = ""] # [doc = " This never panics."] # [doc = ""] # [doc = " *WARNING*: This is not designed for performance. If you're looking for a"] # [doc = " fast UTF-8 decoder, this is not it. If you feel like you need one in this"] # [doc = " crate, then please file an issue and discuss your use case."] # [cfg_attr (feature = "perf-inline" , inline (always))] pub (crate) fn decode (bytes : & [u8]) -> Option < Result < char , u8 > > { if bytes . is_empty () { return None ; } let len = match len (bytes [0]) { None => return Some (Err (bytes [0])) , Some (len) if len > bytes . len () => return Some (Err (bytes [0])) , Some (1) => return Some (Ok (char :: from (bytes [0]))) , Some (len) => len , } ; match core :: str :: from_utf8 (& bytes [.. len]) { Ok (s) => Some (Ok (s . chars () . next () . unwrap ())) , Err (_) => Some (Err (bytes [0])) , } }
+    };
+}
+
+decode!()

@@ -4,4 +4,4 @@ macro_rules! IncrementCounter {
     };
 }
 
-IncrementCounter!()
+IncrementCounter!();

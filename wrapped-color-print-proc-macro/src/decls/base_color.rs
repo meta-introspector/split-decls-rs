@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         Case!();
         Parser!();
+        Error!();
         BaseColor!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! base_color {
     };
 }
 
-base_color!()
+base_color!();

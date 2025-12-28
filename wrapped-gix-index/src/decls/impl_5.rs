@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Error!();
+        State!();
         Options!();
         File!();
-        State!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

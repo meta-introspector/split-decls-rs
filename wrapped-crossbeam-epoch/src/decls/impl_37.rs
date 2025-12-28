@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Guard!();
+        Pointable!();
         Owned!();
         Shared!();
-        Pointable!();
-        Guard!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

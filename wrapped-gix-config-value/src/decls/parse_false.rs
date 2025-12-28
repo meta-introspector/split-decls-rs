@@ -4,4 +4,4 @@ macro_rules! parse_false {
     };
 }
 
-parse_false!()
+parse_false!();

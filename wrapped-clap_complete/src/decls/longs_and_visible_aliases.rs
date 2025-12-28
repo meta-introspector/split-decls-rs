@@ -11,4 +11,4 @@ macro_rules! longs_and_visible_aliases {
     };
 }
 
-longs_and_visible_aliases!()
+longs_and_visible_aliases!();

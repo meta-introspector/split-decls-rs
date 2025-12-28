@@ -4,4 +4,4 @@ macro_rules! BLOCK_CAP {
     };
 }
 
-BLOCK_CAP!()
+BLOCK_CAP!();

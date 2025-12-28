@@ -4,4 +4,4 @@ macro_rules! GeneralPurposeWrapper {
     };
 }
 
-GeneralPurposeWrapper!()
+GeneralPurposeWrapper!();

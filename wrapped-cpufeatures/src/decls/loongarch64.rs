@@ -4,4 +4,4 @@ macro_rules! loongarch64 {
     };
 }
 
-loongarch64!()
+loongarch64!();

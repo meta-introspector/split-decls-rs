@@ -4,4 +4,4 @@ macro_rules! Find {
     };
 }
 
-Find!()
+Find!();

@@ -11,4 +11,4 @@ macro_rules! wnaf_exp {
     };
 }
 
-wnaf_exp!()
+wnaf_exp!();

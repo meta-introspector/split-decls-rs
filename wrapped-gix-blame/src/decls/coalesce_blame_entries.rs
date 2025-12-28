@@ -11,4 +11,4 @@ macro_rules! coalesce_blame_entries {
     };
 }
 
-coalesce_blame_entries!()
+coalesce_blame_entries!();

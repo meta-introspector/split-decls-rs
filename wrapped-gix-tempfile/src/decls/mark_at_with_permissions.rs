@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Closed!();
+        ContainingDirectory!();
         AutoRemove!();
         Handle!();
-        ContainingDirectory!();
-        Closed!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! mark_at_with_permissions {
     };
 }
 
-mark_at_with_permissions!()
+mark_at_with_permissions!();

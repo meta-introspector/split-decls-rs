@@ -4,4 +4,4 @@ macro_rules! SafetyCheck {
     };
 }
 
-SafetyCheck!()
+SafetyCheck!();

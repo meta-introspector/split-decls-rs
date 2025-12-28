@@ -4,4 +4,4 @@ macro_rules! YEAR_DELTAS {
     };
 }
 
-YEAR_DELTAS!()
+YEAR_DELTAS!();

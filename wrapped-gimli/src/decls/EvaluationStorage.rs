@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        ArrayLike!();
+        Reader!();
+        Piece!();
+        Evaluation!();
+        Result!();
+        Value!();
         StoreOnHeap!();
         LittleEndian!();
-        Evaluation!();
-        Reader!();
-        Result!();
-        ArrayLike!();
-        Value!();
-        Piece!();
     };
 }
 
@@ -21,4 +21,4 @@ on the heap using [`Vec`]. This is the default storage type parameter for [`Eval
     };
 }
 
-EvaluationStorage!()
+EvaluationStorage!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Weekday!();
-        WeekdaySetIter!();
         WeekdaySet!();
+        WeekdaySetIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_711 {
     };
 }
 
-impl_711!()
+impl_711!();

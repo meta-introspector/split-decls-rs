@@ -4,4 +4,4 @@ macro_rules! async_await {
     };
 }
 
-async_await!()
+async_await!();

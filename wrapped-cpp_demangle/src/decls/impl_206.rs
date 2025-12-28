@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DemangleAsLeaf!();
-        UnnamedTypeName!();
-        DemangleContext!();
         Result!();
+        DemangleContext!();
+        UnnamedTypeName!();
+        DemangleAsLeaf!();
         DemangleWrite!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

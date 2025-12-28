@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Start!();
+        LazyStateID!();
+        State!();
+        DFA!();
+        ByteClasses!();
+        NFA!();
+    };
+}
+
+macro_rules! minimum_cache_capacity {
+    () => {
+        deps!();
+        # [doc = " Based on the minimum number of states required for a useful lazy DFA cache,"] # [doc = " this returns a heuristic minimum number of bytes of heap space required."] # [doc = ""] # [doc = " This is a \"heuristic\" because the minimum it returns is likely bigger than"] # [doc = " the true minimum. Namely, it assumes that each powerset NFA/DFA state uses"] # [doc = " the maximum number of NFA states (all of them). This is likely bigger"] # [doc = " than what is required in practice. Computing the true minimum effectively"] # [doc = " requires determinization, which is probably too much work to do for a"] # [doc = " simple check like this."] # [doc = ""] # [doc = " One of the issues with this approach IMO is that it requires that this"] # [doc = " be in sync with the calculation above for computing how much heap memory"] # [doc = " the DFA cache uses. If we get it wrong, it's possible for example for the"] # [doc = " minimum to be smaller than the computed heap memory, and thus, it may be"] # [doc = " the case that we can't add the required minimum number of states. That in"] # [doc = " turn will make lazy DFA panic because we assume that we can add at least a"] # [doc = " minimum number of states."] # [doc = ""] # [doc = " Another approach would be to always allow the minimum number of states to"] # [doc = " be added to the lazy DFA cache, even if it exceeds the configured cache"] # [doc = " limit. This does mean that the limit isn't really a limit in all cases,"] # [doc = " which is unfortunate. But it does at least guarantee that the lazy DFA can"] # [doc = " always make progress, even if it is slow. (This approach is very similar to"] # [doc = " enabling the 'skip_cache_capacity_check' config knob, except it wouldn't"] # [doc = " rely on cache size calculation. Instead, it would just always permit a"] # [doc = " minimum number of states to be added.)"] fn minimum_cache_capacity (nfa : & thompson :: NFA , classes : & ByteClasses , starts_for_each_pattern : bool ,) -> usize { const ID_SIZE : usize = size_of :: < LazyStateID > () ; const STATE_SIZE : usize = size_of :: < State > () ; let stride = 1 << classes . stride2 () ; let states_len = nfa . states () . len () ; let sparses = 2 * states_len * NFAStateID :: SIZE ; let trans = MIN_STATES * stride * ID_SIZE ; let mut starts = Start :: len () * ID_SIZE ; if starts_for_each_pattern { starts += (Start :: len () * nfa . pattern_len ()) * ID_SIZE ; } assert ! (MIN_STATES >= 5 , "minimum number of states has to be at least 5") ; let non_sentinel = MIN_STATES . checked_sub (SENTINEL_STATES) . unwrap () ; let dead_state_size = State :: dead () . memory_usage () ; let max_state_size = 5 + 4 + (nfa . pattern_len () * 4) + (states_len * 5) ; let states = (SENTINEL_STATES * (STATE_SIZE + dead_state_size)) + (non_sentinel * (STATE_SIZE + max_state_size)) ; let states_to_sid = (MIN_STATES * STATE_SIZE) + (MIN_STATES * ID_SIZE) ; let stack = states_len * NFAStateID :: SIZE ; let scratch_state_builder = max_state_size ; trans + starts + states + states_to_sid + sparses + stack + scratch_state_builder }
+    };
+}
+
+minimum_cache_capacity!()

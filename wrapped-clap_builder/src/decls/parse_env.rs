@@ -4,4 +4,4 @@ macro_rules! parse_env {
     };
 }
 
-parse_env!()
+parse_env!();

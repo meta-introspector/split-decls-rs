@@ -12,4 +12,4 @@ macro_rules! set_resource {
     };
 }
 
-set_resource!()
+set_resource!();

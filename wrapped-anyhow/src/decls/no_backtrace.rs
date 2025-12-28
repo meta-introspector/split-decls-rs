@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Backtrace!();
         Ref!();
         ErrorImpl!();
-        Backtrace!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! no_backtrace {
     };
 }
 
-no_backtrace!()
+no_backtrace!();

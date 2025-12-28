@@ -4,4 +4,4 @@ macro_rules! dep_table {
     };
 }
 
-dep_table!()
+dep_table!();

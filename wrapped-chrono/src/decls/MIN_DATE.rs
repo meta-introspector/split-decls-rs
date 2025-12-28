@@ -11,4 +11,4 @@ macro_rules! MIN_DATE {
     };
 }
 
-MIN_DATE!()
+MIN_DATE!();

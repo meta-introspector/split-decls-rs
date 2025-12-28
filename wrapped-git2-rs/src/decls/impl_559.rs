@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PathspecDiffEntries!();
-        PathspecFailedEntries!();
-        DiffDelta!();
-        Binding!();
         PathspecEntries!();
         PathspecMatchList!();
+        PathspecDiffEntries!();
+        DiffDelta!();
+        Binding!();
+        PathspecFailedEntries!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_559 {
     };
 }
 
-impl_559!()
+impl_559!();

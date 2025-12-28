@@ -11,4 +11,4 @@ macro_rules! get_attribute_size {
     };
 }
 
-get_attribute_size!()
+get_attribute_size!();

@@ -11,4 +11,4 @@ macro_rules! collect_params {
     };
 }
 
-collect_params!()
+collect_params!();

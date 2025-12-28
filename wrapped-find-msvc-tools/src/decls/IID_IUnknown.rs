@@ -11,4 +11,4 @@ macro_rules! IID_IUnknown {
     };
 }
 
-IID_IUnknown!()
+IID_IUnknown!();

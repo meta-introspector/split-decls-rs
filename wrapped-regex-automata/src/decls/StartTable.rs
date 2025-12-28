@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        StartKind!();
+        DFA!();
+        StartByteMap!();
+        StateID!();
+    };
+}
+
+macro_rules! StartTable {
+    () => {
+        deps!();
+        # [doc = " The set of all possible starting states in a DFA."] # [doc = ""] # [doc = " See the eponymous type in the `dense` module for more details. This type"] # [doc = " is very similar to `dense::StartTable`, except that its underlying"] # [doc = " representation is `&[u8]` instead of `&[S]`. (The latter would require"] # [doc = " sparse DFAs to be aligned, which is explicitly something we do not require"] # [doc = " because we don't really need it.)"] # [derive (Clone)] struct StartTable < T > { # [doc = " The initial start state IDs as a contiguous table of native endian"] # [doc = " encoded integers, represented by `S`."] # [doc = ""] # [doc = " In practice, T is either Vec<u8> or &[u8] and has no alignment"] # [doc = " requirements."] # [doc = ""] # [doc = " The first `2 * stride` (currently always 8) entries always correspond"] # [doc = " to the starts states for the entire DFA, with the first 4 entries being"] # [doc = " for unanchored searches and the second 4 entries being for anchored"] # [doc = " searches. To keep things simple, we always use 8 entries even if the"] # [doc = " `StartKind` is not both."] # [doc = ""] # [doc = " After that, there are `stride * patterns` state IDs, where `patterns`"] # [doc = " may be zero in the case of a DFA with no patterns or in the case where"] # [doc = " the DFA was built without enabling starting states for each pattern."] table : T , # [doc = " The starting state configuration supported. When 'both', both"] # [doc = " unanchored and anchored searches work. When 'unanchored', anchored"] # [doc = " searches panic. When 'anchored', unanchored searches panic."] kind : StartKind , # [doc = " The start state configuration for every possible byte."] start_map : StartByteMap , # [doc = " The number of starting state IDs per pattern."] stride : usize , # [doc = " The total number of patterns for which starting states are encoded."] # [doc = " This is `None` for DFAs that were built without start states for each"] # [doc = " pattern. Thus, one cannot use this field to say how many patterns"] # [doc = " are in the DFA in all cases. It is specific to how many patterns are"] # [doc = " represented in this start table."] pattern_len : Option < usize > , # [doc = " The universal starting state for unanchored searches. This is only"] # [doc = " present when the DFA supports unanchored searches and when all starting"] # [doc = " state IDs for an unanchored search are equivalent."] universal_start_unanchored : Option < StateID > , # [doc = " The universal starting state for anchored searches. This is only"] # [doc = " present when the DFA supports anchored searches and when all starting"] # [doc = " state IDs for an anchored search are equivalent."] universal_start_anchored : Option < StateID > , }
+    };
+}
+
+StartTable!()

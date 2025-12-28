@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Result!();
+        Registry!();
+        Field!();
+        Object!();
+        InputObject!();
         InputValue!();
+        Result!();
+        SchemaError!();
         MetaInputValue!();
         MetaType!();
-        InputObject!();
-        Object!();
-        Field!();
-        SchemaError!();
-        Registry!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_441 {
     };
 }
 
-impl_441!()
+impl_441!();

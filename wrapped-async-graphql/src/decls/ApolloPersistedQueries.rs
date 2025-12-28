@@ -4,4 +4,4 @@ macro_rules! ApolloPersistedQueries {
     };
 }
 
-ApolloPersistedQueries!()
+ApolloPersistedQueries!();

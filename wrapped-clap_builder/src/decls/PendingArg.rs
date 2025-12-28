@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Identifier!();
         Id!();
+        Identifier!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PendingArg {
     };
 }
 
-PendingArg!()
+PendingArg!();

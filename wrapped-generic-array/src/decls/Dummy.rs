@@ -4,4 +4,4 @@ macro_rules! Dummy {
     };
 }
 
-Dummy!()
+Dummy!();

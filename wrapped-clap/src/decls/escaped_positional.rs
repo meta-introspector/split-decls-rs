@@ -4,4 +4,4 @@ macro_rules! escaped_positional {
     };
 }
 
-escaped_positional!()
+escaped_positional!();

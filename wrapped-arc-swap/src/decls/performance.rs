@@ -4,4 +4,4 @@ macro_rules! performance {
     };
 }
 
-performance!()
+performance!();

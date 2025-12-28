@@ -4,4 +4,4 @@ macro_rules! feed {
     };
 }
 
-feed!()
+feed!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Name!();
+        Connection!();
+        Fetch!();
+        Error!();
         Options!();
         Note!();
-        Error!();
         Direction!();
-        Fetch!();
-        Connection!();
-        Name!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_943 {
     };
 }
 
-impl_943!()
+impl_943!();

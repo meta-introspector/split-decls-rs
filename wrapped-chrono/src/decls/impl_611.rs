@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TransitionRule!();
         AlternateTime!();
+        TransitionRule!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_611 {
     };
 }
 
-impl_611!()
+impl_611!();

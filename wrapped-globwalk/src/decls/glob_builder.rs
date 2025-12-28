@@ -11,4 +11,4 @@ macro_rules! glob_builder {
     };
 }
 
-glob_builder!()
+glob_builder!();

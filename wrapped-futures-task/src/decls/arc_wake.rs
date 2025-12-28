@@ -4,4 +4,4 @@ macro_rules! arc_wake {
     };
 }
 
-arc_wake!()
+arc_wake!();

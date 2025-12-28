@@ -1,9 +1,11 @@
 macro_rules! deps {
     () => {
-        Labeller!();
+        Edge!();
         Style!();
+        Node!();
         RenderOption!();
         GraphWalk!();
+        Labeller!();
     };
 }
 

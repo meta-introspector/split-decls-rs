@@ -4,4 +4,4 @@ macro_rules! test_load_ordering {
     };
 }
 
-test_load_ordering!()
+test_load_ordering!();

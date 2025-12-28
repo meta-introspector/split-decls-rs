@@ -4,4 +4,4 @@ macro_rules! fullname {
     };
 }
 
-fullname!()
+fullname!();

@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Defaultness!();
+        Const!();
+        ImplPolarity!();
+        Safety!();
+        TraitRef!();
+    };
+}
+
+macro_rules! TraitImplHeader {
+    () => {
+        deps!();
+        # [derive (Clone , Encodable , Decodable , Debug)] pub struct TraitImplHeader { pub defaultness : Defaultness , pub safety : Safety , pub constness : Const , pub polarity : ImplPolarity , pub trait_ref : TraitRef , }
+    };
+}
+
+TraitImplHeader!()

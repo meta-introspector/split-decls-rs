@@ -12,4 +12,4 @@ macro_rules! RemLimb {
     };
 }
 
-RemLimb!()
+RemLimb!();

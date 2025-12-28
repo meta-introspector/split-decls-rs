@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ZeroWeightScale!();
         CLruCacheConfig!();
+        ZeroWeightScale!();
         CLruCache!();
         WeightScale!();
     };
@@ -14,4 +14,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

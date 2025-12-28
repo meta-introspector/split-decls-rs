@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        Values!();
         ValuesMut!();
         RawExtractIf!();
-        Values!();
         IntoKeys!();
-        IntoValues!();
-        IterMut!();
-        Keys!();
-        HashMap!();
-        DefaultHashBuilder!();
         Iter!();
-        ExtractIf!();
         Drain!();
+        IterMut!();
+        HashMap!();
+        ExtractIf!();
+        DefaultHashBuilder!();
+        Keys!();
         RawTable!();
+        IntoValues!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_239 {
     };
 }
 
-impl_239!()
+impl_239!();

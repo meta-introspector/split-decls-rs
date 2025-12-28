@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        MatchKind!();
         Match!();
-        PatternID!();
+        AhoCorasickBuilder!();
         BuildError!();
         AhoCorasick!();
-        AhoCorasickBuilder!();
+        MatchKind!();
+        PatternID!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

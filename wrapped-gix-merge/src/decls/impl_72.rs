@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Resolution!();
         Labels!();
         Data!();
-        PlatformRef!();
         Pick!();
         Error!();
+        PlatformRef!();
+        Resolution!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_72 {
     };
 }
 
-impl_72!()
+impl_72!();

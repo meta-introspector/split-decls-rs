@@ -4,4 +4,4 @@ macro_rules! InvalidEncodingError {
     };
 }
 
-InvalidEncodingError!()
+InvalidEncodingError!();

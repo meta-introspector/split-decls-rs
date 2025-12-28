@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        ExternCrateDecl!();
-        Adt!();
-        Module!();
         Impl!();
-        Function!();
-        Macro!();
-        Trait!();
+        ExternCrateDecl!();
         Static!();
+        Adt!();
+        Trait!();
+        Field!();
         Const!();
         TypeAlias!();
+        Macro!();
+        Function!();
+        Module!();
         Variant!();
         GenericParam!();
-        Field!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! macro_3 {
     };
 }
 
-macro_3!()
+macro_3!();

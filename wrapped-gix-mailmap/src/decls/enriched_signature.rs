@@ -12,4 +12,4 @@ macro_rules! enriched_signature {
     };
 }
 
-enriched_signature!()
+enriched_signature!();

@@ -11,4 +11,4 @@ macro_rules! head_id {
     };
 }
 
-head_id!()
+head_id!();

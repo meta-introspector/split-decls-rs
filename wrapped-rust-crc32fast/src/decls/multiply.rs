@@ -4,4 +4,4 @@ macro_rules! multiply {
     };
 }
 
-multiply!()
+multiply!();

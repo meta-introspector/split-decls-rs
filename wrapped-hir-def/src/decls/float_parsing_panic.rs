@@ -30,4 +30,4 @@ macro_rules! id {
     };
 }
 
-float_parsing_panic!()
+float_parsing_panic!();

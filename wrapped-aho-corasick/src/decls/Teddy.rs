@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Patterns!();
         PatternID!();
+        Patterns!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Teddy {
     };
 }
 
-Teddy!()
+Teddy!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DiffDelta!();
-        DiffHunk!();
         DiffLine!();
+        DiffHunk!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PrintCb {
     };
 }
 
-PrintCb!()
+PrintCb!();

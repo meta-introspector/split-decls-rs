@@ -4,4 +4,4 @@ macro_rules! gitoxide {
     };
 }
 
-gitoxide!()
+gitoxide!();

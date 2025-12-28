@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Field!();
         ServerError!();
         ServerResult!();
-        Field!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_max_directives {
     };
 }
 
-check_max_directives!()
+check_max_directives!();

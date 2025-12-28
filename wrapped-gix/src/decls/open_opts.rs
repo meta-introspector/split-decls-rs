@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ThreadSafeRepository!();
         Options!();
         Error!();
+        ThreadSafeRepository!();
         Repository!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! open_opts {
     };
 }
 
-open_opts!()
+open_opts!();

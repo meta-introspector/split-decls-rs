@@ -11,4 +11,4 @@ macro_rules! unwrap_or_else_fn {
     };
 }
 
-unwrap_or_else_fn!()
+unwrap_or_else_fn!();

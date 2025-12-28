@@ -4,4 +4,4 @@ macro_rules! jis0212_accented_decode {
     };
 }
 
-jis0212_accented_decode!()
+jis0212_accented_decode!();

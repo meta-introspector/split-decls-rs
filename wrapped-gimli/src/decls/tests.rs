@@ -1,38 +1,38 @@
 macro_rules! deps {
     () => {
-        DebugMacroOffset!();
-        LittleEndian!();
-        Format!();
-        UnitOffset!();
-        LocationList!();
-        Address!();
-        LineProgram!();
-        EntriesCursor!();
-        Expression!();
-        AttributeValue!();
-        LineEncoding!();
-        RangeList!();
-        Error!();
         DebugTypeSignature!();
-        DebugInfoRef!();
-        Location!();
-        Sections!();
-        DebugMacinfoOffset!();
-        Endianity!();
-        DwarfUnit!();
-        DebugInfoOffset!();
-        UnitHeader!();
-        DebuggingInformationEntry!();
-        LineString!();
-        DebugStrOffset!();
-        Encoding!();
+        RangeList!();
+        EntriesCursor!();
+        LocationList!();
+        DebugMacroOffset!();
         UnitRef!();
+        LittleEndian!();
+        LineString!();
+        Location!();
         EndianSlice!();
+        Address!();
         Unit!();
-        Reader!();
-        EndianVec!();
+        Format!();
+        DebuggingInformationEntry!();
+        LineProgram!();
+        DebugMacinfoOffset!();
+        Encoding!();
         Range!();
+        Sections!();
+        DwarfUnit!();
+        UnitHeader!();
+        Expression!();
+        EndianVec!();
+        DebugInfoRef!();
+        Error!();
+        AttributeValue!();
+        DebugStrOffset!();
         Dwarf!();
+        UnitOffset!();
+        Reader!();
+        Endianity!();
+        LineEncoding!();
+        DebugInfoOffset!();
     };
 }
 
@@ -43,4 +43,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

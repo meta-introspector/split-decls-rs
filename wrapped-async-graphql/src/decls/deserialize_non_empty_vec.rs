@@ -12,4 +12,4 @@ macro_rules! deserialize_non_empty_vec {
     };
 }
 
-deserialize_non_empty_vec!()
+deserialize_non_empty_vec!();

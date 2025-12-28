@@ -4,4 +4,4 @@ macro_rules! has_non_default_type_params {
     };
 }
 
-has_non_default_type_params!()
+has_non_default_type_params!();

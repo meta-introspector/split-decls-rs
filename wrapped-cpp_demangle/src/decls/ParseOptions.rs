@@ -4,4 +4,4 @@ macro_rules! ParseOptions {
     };
 }
 
-ParseOptions!()
+ParseOptions!();

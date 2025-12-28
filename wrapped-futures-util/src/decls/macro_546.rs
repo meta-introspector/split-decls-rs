@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Sink!();
         FlattenUnordered!();
+        Sink!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_546 {
     };
 }
 
-macro_546!()
+macro_546!();

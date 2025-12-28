@@ -4,4 +4,4 @@ macro_rules! DebugMacinfo {
     };
 }
 
-DebugMacinfo!()
+DebugMacinfo!();

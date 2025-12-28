@@ -1,0 +1,7 @@
+macro_rules! lints_that_dont_need_to_run {
+    () => {
+        fn lints_that_dont_need_to_run (tcx : TyCtxt < '_ > , () : ()) -> UnordSet < LintId > { let store = unerased_lint_store (& tcx . sess) ; let root_map = tcx . shallow_lint_levels_on (hir :: CRATE_OWNER_ID) ; let mut dont_need_to_run : FxHashSet < LintId > = store . get_lints () . into_iter () . filter (| lint | { let has_future_breakage = lint . future_incompatible . is_some_and (| fut | fut . report_in_deps) ; ! has_future_breakage && ! lint . eval_always }) . filter (| lint | { let lint_level = root_map . lint_level_id_at_node (tcx , LintId :: of (lint) , hir :: CRATE_HIR_ID) ; matches ! (lint_level . level , Level :: Allow) || (matches ! (lint_level . src , LintLevelSource :: Default) && lint . default_level (tcx . sess . edition ()) == Level :: Allow) }) . map (| lint | LintId :: of (* lint)) . collect () ; for owner in tcx . hir_crate_items (()) . owners () { let map = tcx . shallow_lint_levels_on (owner) ; for (_ , specs) in map . specs . iter () { for (lint , level_and_source) in specs . iter () { if ! matches ! (level_and_source . level , Level :: Allow) { dont_need_to_run . remove (lint) ; } } } } dont_need_to_run . into () }
+    };
+}
+
+lints_that_dont_need_to_run!()

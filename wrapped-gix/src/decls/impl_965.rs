@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WritePackedRefs!();
-        DryRun!();
         RefLogMessage!();
         Prepare!();
+        WritePackedRefs!();
+        DryRun!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_965 {
     };
 }
 
-impl_965!()
+impl_965!();

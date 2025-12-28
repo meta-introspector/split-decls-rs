@@ -11,4 +11,4 @@ macro_rules! value_impl {
     };
 }
 
-value_impl!()
+value_impl!();

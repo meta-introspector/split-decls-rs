@@ -4,4 +4,4 @@ macro_rules! checked_mul {
     };
 }
 
-checked_mul!()
+checked_mul!();

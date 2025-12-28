@@ -4,4 +4,4 @@ macro_rules! TypeAlias {
     };
 }
 
-TypeAlias!()
+TypeAlias!();

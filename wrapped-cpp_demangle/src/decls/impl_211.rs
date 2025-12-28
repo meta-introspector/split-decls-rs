@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        DemangleWrite!();
+        DemangleContext!();
         Type!();
+        ArrayType!();
+        Result!();
         ArgScopeStack!();
         DemangleAsInner!();
-        DemangleWrite!();
-        ArrayType!();
-        DemangleContext!();
-        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_211 {
     };
 }
 
-impl_211!()
+impl_211!();

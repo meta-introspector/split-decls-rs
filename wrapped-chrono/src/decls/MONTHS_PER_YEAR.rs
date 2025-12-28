@@ -4,4 +4,4 @@ macro_rules! MONTHS_PER_YEAR {
     };
 }
 
-MONTHS_PER_YEAR!()
+MONTHS_PER_YEAR!();

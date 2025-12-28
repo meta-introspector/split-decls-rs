@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Error!();
+        BackupEngine!();
     };
 }
 
 macro_rules! impl_29 {
     () => {
         deps!();
-        impl fmt :: Display for Error { fn fmt (& self , formatter : & mut fmt :: Formatter) -> Result < () , fmt :: Error > { self . message . fmt (formatter) } }
+        impl Drop for BackupEngine { fn drop (& mut self) { unsafe { ffi :: rocksdb_backup_engine_close (self . inner) ; } } }
     };
 }
 

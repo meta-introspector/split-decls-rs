@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Zero!();
         Wrapping!();
+        Zero!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_429 {
     };
 }
 
-impl_429!()
+impl_429!();

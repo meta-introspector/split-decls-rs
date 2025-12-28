@@ -4,4 +4,4 @@ macro_rules! murmur3 {
     };
 }
 
-murmur3!()
+murmur3!();

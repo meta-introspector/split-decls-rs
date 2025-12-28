@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ChunkState!();
-        IncrementCounter!();
-        CVWords!();
         Platform!();
+        CVWords!();
+        IncrementCounter!();
+        ChunkState!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! compress_chunks_parallel {
     };
 }
 
-compress_chunks_parallel!()
+compress_chunks_parallel!();

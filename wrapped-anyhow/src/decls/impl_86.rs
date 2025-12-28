@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Ref!();
+        Result!();
+        Ok!();
+        Chain!();
         Indented!();
         ErrorImpl!();
-        Result!();
-        Chain!();
-        Ok!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

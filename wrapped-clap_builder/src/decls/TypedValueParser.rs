@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ValueParserFactory!();
-        ValueSource!();
-        TryMapValueParser!();
-        Command!();
-        PossibleValue!();
-        OsStr!();
+        Error!();
         Result!();
         Arg!();
+        ValueSource!();
         MapValueParser!();
-        Error!();
+        TryMapValueParser!();
+        ValueParserFactory!();
+        OsStr!();
+        Command!();
+        PossibleValue!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! TypedValueParser {
     };
 }
 
-TypedValueParser!()
+TypedValueParser!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Stdio!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! imp {
     };
 }
 
-imp!()
+imp!();

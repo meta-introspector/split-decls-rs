@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Note!();
-        Error!();
         Path!();
+        Error!();
         Repository!();
-        Submodule!();
         Init!();
+        Submodule!();
         Kind!();
+        Note!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_350 {
     };
 }
 
-impl_350!()
+impl_350!();

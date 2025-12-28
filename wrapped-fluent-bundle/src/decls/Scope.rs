@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FluentArgs!();
-        FluentBundle!();
         FluentError!();
+        FluentBundle!();
+        FluentArgs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Scope {
     };
 }
 
-Scope!()
+Scope!();

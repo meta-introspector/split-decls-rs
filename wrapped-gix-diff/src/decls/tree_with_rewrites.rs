@@ -4,4 +4,4 @@ macro_rules! tree_with_rewrites {
     };
 }
 
-tree_with_rewrites!()
+tree_with_rewrites!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Result!();
+        Context!();
+        Node!();
         SpanError!();
         Error!();
-        Context!();
         Color!();
-        Node!();
-        Result!();
         ColorTag!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! parse_format_string {
     };
 }
 
-parse_format_string!()
+parse_format_string!();

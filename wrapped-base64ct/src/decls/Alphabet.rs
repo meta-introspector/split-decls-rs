@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Encoder!();
         DecodeStep!();
         Decoder!();
         EncodeStep!();
+        Encoder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Alphabet {
     };
 }
 
-Alphabet!()
+Alphabet!();

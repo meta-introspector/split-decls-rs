@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Note!();
-        StageOne!();
-        EnvironmentOverrides!();
-        Entry!();
-        Reference!();
-        RefStore!();
-        Safe!();
-        Options!();
-        Error!();
-        Permissions!();
-        ThreadSafeRepository!();
-        Cache!();
         Core!();
+        Note!();
+        Entry!();
         Path!();
+        Cache!();
+        Error!();
+        Options!();
+        ThreadSafeRepository!();
+        Permissions!();
+        Safe!();
+        StageOne!();
+        RefStore!();
+        Reference!();
+        EnvironmentOverrides!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_518 {
     };
 }
 
-impl_518!()
+impl_518!();

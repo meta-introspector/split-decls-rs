@@ -4,4 +4,4 @@ macro_rules! integers {
     };
 }
 
-integers!()
+integers!();

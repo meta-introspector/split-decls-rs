@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Float!();
         Sample!();
+        Float!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LabeledSample {
     };
 }
 
-LabeledSample!()
+LabeledSample!();

@@ -4,4 +4,4 @@ macro_rules! line_writer {
     };
 }
 
-line_writer!()
+line_writer!();

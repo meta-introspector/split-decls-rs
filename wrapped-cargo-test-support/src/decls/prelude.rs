@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ChannelChangerCommandExt!();
-        TestEnvCommandExt!();
         ArgLineCommandExt!();
         CargoPathExt!();
+        ChannelChangerCommandExt!();
+        TestEnvCommandExt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! prelude {
     };
 }
 
-prelude!()
+prelude!();

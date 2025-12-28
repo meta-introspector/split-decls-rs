@@ -4,4 +4,4 @@ macro_rules! ApplyLeniency {
     };
 }
 
-ApplyLeniency!()
+ApplyLeniency!();

@@ -11,4 +11,4 @@ macro_rules! test_base64_no_std {
     };
 }
 
-test_base64_no_std!()
+test_base64_no_std!();

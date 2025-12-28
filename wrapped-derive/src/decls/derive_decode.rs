@@ -4,4 +4,4 @@ macro_rules! derive_decode {
     };
 }
 
-derive_decode!()
+derive_decode!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        TypeAlias!();
-        DefDatabase!();
-        Trait!();
-        LangItemTarget!();
         Struct!();
-        LangItems!();
-        AssocItemId!();
-        ModuleDefId!();
+        Trait!();
         Function!();
-        Union!();
         Static!();
         AdtId!();
+        TypeAlias!();
+        DefDatabase!();
+        Union!();
+        AssocItemId!();
+        LangItemTarget!();
+        LangItems!();
+        ModuleDefId!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! crate_lang_items {
     };
 }
 
-crate_lang_items!()
+crate_lang_items!();

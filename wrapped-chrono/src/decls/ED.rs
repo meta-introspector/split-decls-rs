@@ -11,4 +11,4 @@ macro_rules! ED {
     };
 }
 
-ED!()
+ED!();

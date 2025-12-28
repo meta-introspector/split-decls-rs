@@ -1,9 +1,10 @@
 macro_rules! deps {
     () => {
-        Trait!();
         PaddingCheck!();
+        EnumRepr!();
         FieldBounds!();
         ImplBlockBuilder!();
+        Trait!();
     };
 }
 

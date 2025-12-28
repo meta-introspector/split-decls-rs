@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Sample!();
         MeasurementData!();
         ComparisonData!();
         ValueFormatter!();
+        Sample!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! pdf_comparison_figure {
     };
 }
 
-pdf_comparison_figure!()
+pdf_comparison_figure!();

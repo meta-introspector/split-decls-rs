@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Section!();
-        Key!();
         Mailmap!();
+        Key!();
+        Section!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_685 {
     };
 }
 
-impl_685!()
+impl_685!();

@@ -4,4 +4,4 @@ macro_rules! bit_not {
     };
 }
 
-bit_not!()
+bit_not!();

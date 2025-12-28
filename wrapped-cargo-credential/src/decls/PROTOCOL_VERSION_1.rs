@@ -12,4 +12,4 @@ macro_rules! PROTOCOL_VERSION_1 {
     };
 }
 
-PROTOCOL_VERSION_1!()
+PROTOCOL_VERSION_1!();

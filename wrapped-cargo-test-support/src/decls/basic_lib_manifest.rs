@@ -15,4 +15,4 @@ macro_rules! basic_lib_manifest {
     };
 }
 
-basic_lib_manifest!()
+basic_lib_manifest!();

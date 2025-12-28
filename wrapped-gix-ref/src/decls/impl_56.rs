@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Change!();
         PartialNameRef!();
+        Error!();
         LogChange!();
-        PreviousValue!();
         RefLog!();
         RefEdit!();
         Target!();
         RefEditsExt!();
-        Error!();
-        Change!();
+        PreviousValue!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_56 {
     };
 }
 
-impl_56!()
+impl_56!();

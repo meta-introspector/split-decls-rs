@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        LenType!();
         ExtendError!();
         Vec!();
         CString!();
-        LenType!();
         CapacityError!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

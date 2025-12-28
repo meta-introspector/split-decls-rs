@@ -13,4 +13,4 @@ macro_rules! varint_encode_i32 {
     };
 }
 
-varint_encode_i32!()
+varint_encode_i32!();

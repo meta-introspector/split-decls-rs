@@ -4,4 +4,4 @@ macro_rules! MapKeySerializer {
     };
 }
 
-MapKeySerializer!()
+MapKeySerializer!();

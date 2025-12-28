@@ -4,4 +4,4 @@ macro_rules! MILLIS_PER_SEC {
     };
 }
 
-MILLIS_PER_SEC!()
+MILLIS_PER_SEC!();

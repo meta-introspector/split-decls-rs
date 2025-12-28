@@ -4,4 +4,4 @@ macro_rules! candidate {
     };
 }
 
-candidate!()
+candidate!();

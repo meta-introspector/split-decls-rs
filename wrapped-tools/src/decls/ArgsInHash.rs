@@ -4,4 +4,4 @@ macro_rules! ArgsInHash {
     };
 }
 
-ArgsInHash!()
+ArgsInHash!();

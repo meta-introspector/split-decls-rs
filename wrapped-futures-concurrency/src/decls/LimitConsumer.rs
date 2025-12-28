@@ -4,4 +4,4 @@ macro_rules! LimitConsumer {
     };
 }
 
-LimitConsumer!()
+LimitConsumer!();

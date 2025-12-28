@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OccurrenceValues!();
         AnyValue!();
+        OccurrenceValues!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Occurrences {
     };
 }
 
-Occurrences!()
+Occurrences!();

@@ -11,4 +11,4 @@ macro_rules! encode_engine_string {
     };
 }
 
-encode_engine_string!()
+encode_engine_string!();

@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         Type!();
         Param!();
-        Module!();
-        DefWithBody!();
-        SelfParam!();
-        LocalSource!();
         Local!();
+        SelfParam!();
+        Module!();
+        LocalSource!();
+        DefWithBody!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_351 {
     };
 }
 
-impl_351!()
+impl_351!();

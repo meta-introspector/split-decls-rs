@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LocalFieldId!();
-        VariantId!();
         DefDatabase!();
+        VariantId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! fields_attrs_source_map {
     };
 }
 
-fields_attrs_source_map!()
+fields_attrs_source_map!();

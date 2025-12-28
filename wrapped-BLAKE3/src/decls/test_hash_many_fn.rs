@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashManyFn!();
         IncrementCounter!();
+        HashManyFn!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_hash_many_fn {
     };
 }
 
-test_hash_many_fn!()
+test_hash_many_fn!();

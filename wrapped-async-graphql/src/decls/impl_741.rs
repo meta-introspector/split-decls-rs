@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NodesFieldSwitcherSealed!();
         EnableNodesField!();
+        NodesFieldSwitcherSealed!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_741 {
     };
 }
 
-impl_741!()
+impl_741!();

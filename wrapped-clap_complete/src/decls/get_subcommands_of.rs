@@ -14,4 +14,4 @@ esac" , name = parent . get_name () , name_hyphen = parent_bin_name . replace ('
     };
 }
 
-get_subcommands_of!()
+get_subcommands_of!();

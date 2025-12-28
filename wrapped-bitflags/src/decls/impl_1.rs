@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IterNames!();
         Iter!();
         Flags!();
+        IterNames!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1 {
     };
 }
 
-impl_1!()
+impl_1!();

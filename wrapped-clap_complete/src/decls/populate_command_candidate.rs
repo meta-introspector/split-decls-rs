@@ -11,4 +11,4 @@ macro_rules! populate_command_candidate {
     };
 }
 
-populate_command_candidate!()
+populate_command_candidate!();

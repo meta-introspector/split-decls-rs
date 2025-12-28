@@ -11,4 +11,4 @@ macro_rules! credentials_cb {
     };
 }
 
-credentials_cb!()
+credentials_cb!();

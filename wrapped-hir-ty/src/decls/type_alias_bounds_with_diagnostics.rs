@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TyLoweringContext!();
-        HirDatabase!();
-        EarlyBinder!();
-        LifetimeElisionKind!();
         Diagnostics!();
+        TyLoweringContext!();
+        EarlyBinder!();
+        HirDatabase!();
+        LifetimeElisionKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! type_alias_bounds_with_diagnostics {
     };
 }
 
-type_alias_bounds_with_diagnostics!()
+type_alias_bounds_with_diagnostics!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpandDatabase!();
         ChangeWithProcMacros!();
+        ExpandDatabase!();
         ProcMacrosBuilder!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

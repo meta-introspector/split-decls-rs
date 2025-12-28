@@ -4,4 +4,4 @@ macro_rules! assert_is_unpin_stream {
     };
 }
 
-assert_is_unpin_stream!()
+assert_is_unpin_stream!();

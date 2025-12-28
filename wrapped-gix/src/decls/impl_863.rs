@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Default!();
         Platform!();
-        Item!();
         Repository!();
+        Item!();
+        Default!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_863 {
     };
 }
 
-impl_863!()
+impl_863!();

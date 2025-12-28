@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ByteClassIter!();
-        ByteClasses!();
         ByteClassElements!();
+        ByteClasses!();
         ByteClassElementRanges!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_312 {
     };
 }
 
-impl_312!()
+impl_312!();

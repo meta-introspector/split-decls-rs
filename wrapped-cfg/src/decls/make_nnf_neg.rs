@@ -11,4 +11,4 @@ macro_rules! make_nnf_neg {
     };
 }
 
-make_nnf_neg!()
+make_nnf_neg!();

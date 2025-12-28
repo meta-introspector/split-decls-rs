@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        SpanMap!();
-        ProcMacroKind!();
-        ExpansionSpanMap!();
-        InMacroFile!();
-        MacroDefKind!();
-        FileRange!();
-        ExpansionInfo!();
         InFile!();
-        ExpandDatabase!();
-        ProcMacro!();
         HirFileId!();
-        MacroCallId!();
+        ExpansionInfo!();
+        FileRange!();
+        MacroDefKind!();
+        ProcMacroKind!();
         Attr!();
+        InMacroFile!();
+        ProcMacro!();
+        ExpandDatabase!();
+        MacroCallId!();
+        SpanMap!();
+        ExpansionSpanMap!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_249 {
     };
 }
 
-impl_249!()
+impl_249!();

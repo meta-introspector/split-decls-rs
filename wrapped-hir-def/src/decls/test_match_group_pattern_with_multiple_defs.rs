@@ -18,4 +18,4 @@ impl#\14336# Bar#\14336# {#\14336#
     };
 }
 
-test_match_group_pattern_with_multiple_defs!()
+test_match_group_pattern_with_multiple_defs!();

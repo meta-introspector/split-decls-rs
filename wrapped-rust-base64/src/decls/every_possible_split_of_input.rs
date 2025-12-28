@@ -11,4 +11,4 @@ macro_rules! every_possible_split_of_input {
     };
 }
 
-every_possible_split_of_input!()
+every_possible_split_of_input!();

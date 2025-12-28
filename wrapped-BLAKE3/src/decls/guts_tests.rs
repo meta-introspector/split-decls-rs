@@ -12,4 +12,4 @@ macro_rules! guts_tests {
     };
 }
 
-guts_tests!()
+guts_tests!();

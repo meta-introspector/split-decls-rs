@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IntoCString!();
+        DiffOptions!();
         EmailCreateOptions!();
         DiffFindOptions!();
-        DiffOptions!();
+        IntoCString!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_369 {
     };
 }
 
-impl_369!()
+impl_369!();

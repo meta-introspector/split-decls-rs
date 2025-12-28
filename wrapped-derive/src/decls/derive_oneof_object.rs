@@ -11,4 +11,4 @@ macro_rules! derive_oneof_object {
     };
 }
 
-derive_oneof_object!()
+derive_oneof_object!();

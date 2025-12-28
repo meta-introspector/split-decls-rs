@@ -4,4 +4,4 @@ macro_rules! SINGLE_BYTE_MAX {
     };
 }
 
-SINGLE_BYTE_MAX!()
+SINGLE_BYTE_MAX!();

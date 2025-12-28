@@ -4,4 +4,4 @@ macro_rules! arg_matches {
     };
 }
 
-arg_matches!()
+arg_matches!();

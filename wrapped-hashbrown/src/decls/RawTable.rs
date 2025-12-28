@@ -11,4 +11,4 @@ macro_rules! RawTable {
     };
 }
 
-RawTable!()
+RawTable!();

@@ -4,4 +4,4 @@ macro_rules! assert_ui {
     };
 }
 
-assert_ui!()
+assert_ui!();

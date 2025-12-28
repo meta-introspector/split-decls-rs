@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Oid!();
-        Binding!();
         TagForeachData!();
+        Binding!();
+        Oid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! tag_foreach_cb {
     };
 }
 
-tag_foreach_cb!()
+tag_foreach_cb!();

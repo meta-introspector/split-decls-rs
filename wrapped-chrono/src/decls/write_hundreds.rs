@@ -11,4 +11,4 @@ macro_rules! write_hundreds {
     };
 }
 
-write_hundreds!()
+write_hundreds!();

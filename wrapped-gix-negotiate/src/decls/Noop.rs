@@ -4,4 +4,4 @@ macro_rules! Noop {
     };
 }
 
-Noop!()
+Noop!();

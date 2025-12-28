@@ -4,4 +4,4 @@ macro_rules! arcs {
     };
 }
 
-arcs!()
+arcs!();

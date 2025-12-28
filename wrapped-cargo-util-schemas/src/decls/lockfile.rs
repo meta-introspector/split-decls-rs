@@ -4,4 +4,4 @@ macro_rules! lockfile {
     };
 }
 
-lockfile!()
+lockfile!();

@@ -4,4 +4,4 @@ macro_rules! char_to_hexdigit {
     };
 }
 
-char_to_hexdigit!()
+char_to_hexdigit!();

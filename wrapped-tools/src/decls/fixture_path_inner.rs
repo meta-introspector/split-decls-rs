@@ -11,4 +11,4 @@ macro_rules! fixture_path_inner {
     };
 }
 
-fixture_path_inner!()
+fixture_path_inner!();

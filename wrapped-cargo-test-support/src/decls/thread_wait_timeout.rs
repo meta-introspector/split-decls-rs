@@ -4,4 +4,4 @@ macro_rules! thread_wait_timeout {
     };
 }
 
-thread_wait_timeout!()
+thread_wait_timeout!();

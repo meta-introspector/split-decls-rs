@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         ConflictMapping!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! apply_our_resolution {
     };
 }
 
-apply_our_resolution!()
+apply_our_resolution!();

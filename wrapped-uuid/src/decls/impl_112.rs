@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Version!();
+        Uuid!();
+        Builder!();
+        Timestamp!();
+    };
+}
+
+macro_rules! impl_112 {
+    () => {
+        deps!();
+        impl Uuid { # [doc = " Create a new version 7 UUID using the current time value."] # [doc = ""] # [doc = " This method is a convenient alternative to [`Uuid::new_v7`] that uses the current system time"] # [doc = " as the source timestamp. All UUIDs generated through this method by the same process are"] # [doc = " guaranteed to be ordered by their creation."] # [cfg (feature = "std")] pub fn now_v7 () -> Self { Self :: new_v7 (Timestamp :: now (crate :: timestamp :: context :: shared_context_v7 () ,)) } # [doc = " Create a new version 7 UUID using a time value and random bytes."] # [doc = ""] # [doc = " When the `std` feature is enabled, you can also use [`Uuid::now_v7`]."] # [doc = ""] # [doc = " Note that usage of this method requires the `v7` feature of this crate"] # [doc = " to be enabled."] # [doc = ""] # [doc = " Also see [`Uuid::now_v7`] for a convenient way to generate version 7"] # [doc = " UUIDs using the current system time."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " A v7 UUID can be created from a unix [`Timestamp`] plus a 128 bit"] # [doc = " random number. When supplied as such, the data will be combined"] # [doc = " to ensure uniqueness and sortability at millisecond granularity."] # [doc = ""] # [doc = " ```rust"] # [doc = " # use uuid::{Uuid, Timestamp, NoContext};"] # [doc = " let ts = Timestamp::from_unix(NoContext, 1497624119, 1234);"] # [doc = ""] # [doc = " let uuid = Uuid::new_v7(ts);"] # [doc = ""] # [doc = " assert!("] # [doc = "     uuid.hyphenated().to_string().starts_with(\"015cb15a-86d8-7\")"] # [doc = " );"] # [doc = " ```"] # [doc = ""] # [doc = " A v7 UUID can also be created with a counter to ensure batches of"] # [doc = " UUIDs created together remain sortable:"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use uuid::{Uuid, Timestamp, ContextV7};"] # [doc = " let context = ContextV7::new();"] # [doc = " let uuid1 = Uuid::new_v7(Timestamp::from_unix(&context, 1497624119, 1234));"] # [doc = " let uuid2 = Uuid::new_v7(Timestamp::from_unix(&context, 1497624119, 1234));"] # [doc = ""] # [doc = " assert!(uuid1 < uuid2);"] # [doc = " ```"] # [doc = ""] # [doc = " # References"] # [doc = ""] # [doc = " * [UUID Version 7 in RFC 9562](https://www.ietf.org/rfc/rfc9562.html#section-5.7)"] pub fn new_v7 (ts : Timestamp) -> Self { let (secs , nanos) = ts . to_unix () ; let millis = (secs * 1000) . saturating_add (nanos as u64 / 1_000_000) ; let mut counter_and_random = rng :: u128 () ; let (mut counter , counter_bits) = ts . counter () ; debug_assert ! (counter_bits <= 128) ; let mut counter_bits = counter_bits as u32 ; if counter_bits > 12 { let mask = u128 :: MAX << (counter_bits - 12) ; counter = (counter & ! mask) | ((counter & mask) << 2) ; counter_bits += 2 ; } counter_and_random &= u128 :: MAX . overflowing_shr (counter_bits) . 0 ; counter_and_random |= counter . overflowing_shl (128u32 . saturating_sub (counter_bits)) . 0 ; Builder :: from_unix_timestamp_millis (millis , & counter_and_random . to_be_bytes () [.. 10] . try_into () . unwrap () ,) . into_uuid () } }
+    };
+}
+
+impl_112!()

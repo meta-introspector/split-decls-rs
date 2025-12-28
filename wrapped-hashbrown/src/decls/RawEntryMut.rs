@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        RawOccupiedEntryMut!();
-        HashMap!();
         RawVacantEntryMut!();
-        Entry!();
         RawEntryBuilderMut!();
         Iter!();
+        HashMap!();
+        RawOccupiedEntryMut!();
+        Entry!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! RawEntryMut {
     };
 }
 
-RawEntryMut!()
+RawEntryMut!();

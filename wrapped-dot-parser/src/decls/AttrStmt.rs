@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Node!();
         Edge!();
         Graph!();
+        Node!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AttrStmt {
     };
 }
 
-AttrStmt!()
+AttrStmt!();

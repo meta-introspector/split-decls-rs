@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Executor!();
-        Schema!();
-        Request!();
-        Response!();
         Data!();
+        Schema!();
+        Response!();
+        Request!();
+        Executor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_487 {
     };
 }
 
-impl_487!()
+impl_487!();

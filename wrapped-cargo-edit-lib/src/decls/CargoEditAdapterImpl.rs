@@ -4,4 +4,4 @@ macro_rules! CargoEditAdapterImpl {
     };
 }
 
-CargoEditAdapterImpl!()
+CargoEditAdapterImpl!();

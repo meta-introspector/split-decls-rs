@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        DocumentOperations!();
         Error!();
         Positioned!();
-        FragmentDefinition!();
         ExecutableDocument!();
-        DocumentOperations!();
-        DefinitionItem!();
-        Rule!();
-        GraphQLParser!();
-        PositionCalculator!();
         Result!();
+        DefinitionItem!();
+        GraphQLParser!();
+        Rule!();
+        FragmentDefinition!();
+        PositionCalculator!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! parse_query {
     };
 }
 
-parse_query!()
+parse_query!();

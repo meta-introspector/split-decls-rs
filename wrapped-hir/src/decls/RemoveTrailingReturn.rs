@@ -4,4 +4,4 @@ macro_rules! RemoveTrailingReturn {
     };
 }
 
-RemoveTrailingReturn!()
+RemoveTrailingReturn!();

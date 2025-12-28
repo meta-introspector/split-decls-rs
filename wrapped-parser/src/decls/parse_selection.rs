@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         Selection!();
         FragmentSpread!();
-        InlineFragment!();
-        Field!();
         Rule!();
-        PositionCalculator!();
-        Result!();
         Positioned!();
+        Result!();
+        PositionCalculator!();
+        Field!();
+        InlineFragment!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! parse_selection {
     };
 }
 
-parse_selection!()
+parse_selection!();

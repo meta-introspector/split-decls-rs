@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ready!();
         SplitSink!();
         Sink!();
-        Ready!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_564 {
     };
 }
 
-impl_564!()
+impl_564!();

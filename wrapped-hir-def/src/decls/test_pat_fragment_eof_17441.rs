@@ -34,4 +34,4 @@ fn f() {
     };
 }
 
-test_pat_fragment_eof_17441!()
+test_pat_fragment_eof_17441!();

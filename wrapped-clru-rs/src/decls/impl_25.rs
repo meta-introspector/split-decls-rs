@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ZeroWeightScale!();
         CLruCache!();
+        ZeroWeightScale!();
         FixedSizeList!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

@@ -11,4 +11,4 @@ macro_rules! io_impls {
     };
 }
 
-io_impls!()
+io_impls!();

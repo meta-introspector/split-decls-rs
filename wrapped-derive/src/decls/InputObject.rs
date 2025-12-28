@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Visible!();
         ConcreteType!();
-        RenameRule!();
         InputObjectField!();
+        RenameRule!();
+        Visible!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! InputObject {
     };
 }
 
-InputObject!()
+InputObject!();

@@ -4,4 +4,4 @@ macro_rules! rewrite_location_with_renamed_directory {
     };
 }
 
-rewrite_location_with_renamed_directory!()
+rewrite_location_with_renamed_directory!();

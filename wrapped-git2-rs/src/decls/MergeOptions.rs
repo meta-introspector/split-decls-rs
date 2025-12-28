@@ -4,4 +4,4 @@ macro_rules! MergeOptions {
     };
 }
 
-MergeOptions!()
+MergeOptions!();

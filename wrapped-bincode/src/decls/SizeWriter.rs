@@ -4,4 +4,4 @@ macro_rules! SizeWriter {
     };
 }
 
-SizeWriter!()
+SizeWriter!();

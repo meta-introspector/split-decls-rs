@@ -4,4 +4,4 @@ macro_rules! TracingExtension {
     };
 }
 
-TracingExtension!()
+TracingExtension!();

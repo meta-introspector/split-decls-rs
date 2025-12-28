@@ -4,4 +4,4 @@ macro_rules! read_to_end {
     };
 }
 
-read_to_end!()
+read_to_end!();

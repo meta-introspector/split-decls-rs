@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
+        Mutation!();
         Field!();
-        InputObject!();
-        Error!();
-        MetaInputValue!();
-        Registry!();
-        Subscription!();
-        Object!();
         MetaTypeName!();
         MetaType!();
         Result!();
+        Error!();
         Query!();
-        Mutation!();
+        Subscription!();
+        Object!();
+        Registry!();
+        InputObject!();
+        MetaInputValue!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_1023 {
     };
 }
 
-impl_1023!()
+impl_1023!();

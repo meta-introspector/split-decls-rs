@@ -4,4 +4,4 @@ macro_rules! UnwrapOrElseFn {
     };
 }
 
-UnwrapOrElseFn!()
+UnwrapOrElseFn!();

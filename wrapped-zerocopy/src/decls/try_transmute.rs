@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        TryFromBytes!();
+        IntoBytes!();
+    };
+}
+
+macro_rules! try_transmute {
+    () => {
+        deps!();
+        # [doc = " Conditionally transmutes a value of one type to a value of another type of"] # [doc = " the same size."] # [doc = ""] # [doc = " This macro behaves like an invocation of this function:"] # [doc = ""] # [doc = " ```ignore"] # [doc = " fn try_transmute<Src, Dst>(src: Src) -> Result<Dst, ValidityError<Src, Dst>>"] # [doc = " where"] # [doc = "     Src: IntoBytes,"] # [doc = "     Dst: TryFromBytes,"] # [doc = "     size_of::<Src>() == size_of::<Dst>(),"] # [doc = " {"] # [doc = " # /*"] # [doc = "     ..."] # [doc = " # */"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " However, unlike a function, this macro can only be invoked when the types of"] # [doc = " `Src` and `Dst` are completely concrete. The types `Src` and `Dst` are"] # [doc = " inferred from the calling context; they cannot be explicitly specified in"] # [doc = " the macro invocation."] # [doc = ""] # [doc = " Note that the `Src` produced by the expression `$e` will *not* be dropped."] # [doc = " Semantically, its bits will be copied into a new value of type `Dst`, the"] # [doc = " original `Src` will be forgotten, and the value of type `Dst` will be"] # [doc = " returned."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use zerocopy::*;"] # [doc = " // 0u8 → bool = false"] # [doc = " assert_eq!(try_transmute!(0u8), Ok(false));"] # [doc = ""] # [doc = " // 1u8 → bool = true"] # [doc = "  assert_eq!(try_transmute!(1u8), Ok(true));"] # [doc = ""] # [doc = " // 2u8 → bool = error"] # [doc = " assert!(matches!("] # [doc = "     try_transmute!(2u8),"] # [doc = "     Result::<bool, _>::Err(ValidityError { .. })"] # [doc = " ));"] # [doc = " ```"] # [macro_export] macro_rules ! try_transmute { ($ e : expr) => { { let e = $ e ; if false { Ok (unsafe { # [allow (clippy :: missing_transmute_annotations)] $ crate :: util :: macro_util :: core_reexport :: mem :: transmute (e) }) } else { $ crate :: util :: macro_util :: try_transmute ::< _ , _ > (e) } } } }
+    };
+}
+
+try_transmute!()

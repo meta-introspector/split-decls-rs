@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CoreMap!();
-        Pos!();
+        HashValue!();
         Inserted!();
         Insert!();
         Bucket!();
-        HashValue!();
+        CoreMap!();
+        Pos!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_90 {
     };
 }
 
-impl_90!()
+impl_90!();

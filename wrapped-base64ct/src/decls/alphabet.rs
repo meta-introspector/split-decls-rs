@@ -4,4 +4,4 @@ macro_rules! alphabet {
     };
 }
 
-alphabet!()
+alphabet!();

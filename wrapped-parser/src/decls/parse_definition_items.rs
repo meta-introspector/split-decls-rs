@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DefinitionItem!();
         Result!();
         Rule!();
         PositionCalculator!();
+        DefinitionItem!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_definition_items {
     };
 }
 
-parse_definition_items!()
+parse_definition_items!();

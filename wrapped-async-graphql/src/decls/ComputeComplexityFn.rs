@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        VisitorContext!();
         Field!();
         ServerResult!();
-        VisitorContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ComputeComplexityFn {
     };
 }
 
-ComputeComplexityFn!()
+ComputeComplexityFn!();

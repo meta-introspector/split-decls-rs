@@ -11,4 +11,4 @@ macro_rules! regression_rare_byte_prefilter {
     };
 }
 
-regression_rare_byte_prefilter!()
+regression_rare_byte_prefilter!();

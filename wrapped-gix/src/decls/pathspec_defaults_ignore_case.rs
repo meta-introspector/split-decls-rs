@@ -11,4 +11,4 @@ macro_rules! pathspec_defaults_ignore_case {
     };
 }
 
-pathspec_defaults_ignore_case!()
+pathspec_defaults_ignore_case!();

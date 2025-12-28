@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InvalidEncodingError!();
-        InvalidLengthError!();
         Error!();
+        InvalidLengthError!();
+        InvalidEncodingError!();
         Alphabet!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Encoding {
     };
 }
 
-Encoding!()
+Encoding!();

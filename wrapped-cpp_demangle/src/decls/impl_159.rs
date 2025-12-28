@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GetTemplateArgs!();
         SubstitutionTable!();
         TemplateArgs!();
+        GetTemplateArgs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_159 {
     };
 }
 
-impl_159!()
+impl_159!();

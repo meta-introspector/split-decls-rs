@@ -30,4 +30,4 @@ fn f() {
     };
 }
 
-test_edition_handling_out!()
+test_edition_handling_out!();

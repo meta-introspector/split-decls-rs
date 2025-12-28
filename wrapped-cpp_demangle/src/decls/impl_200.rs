@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         DemangleContext!();
-        DemangleWrite!();
-        Demangle!();
-        ArgScopeStack!();
-        Result!();
         ClassEnumType!();
+        Demangle!();
+        Result!();
+        ArgScopeStack!();
+        DemangleWrite!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_200 {
     };
 }
 
-impl_200!()
+impl_200!();

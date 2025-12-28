@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        PossibleValue!();
+        Arg!();
+        ArgPredicate!();
         OsStr!();
+        PossibleValue!();
+        ArgGroup!();
         ColorChoice!();
         AppSettings!();
-        Arg!();
         ChildGraph!();
-        Id!();
-        Captures!();
-        ArgPredicate!();
-        Command!();
-        Usage!();
         StyledStr!();
-        ArgGroup!();
+        Command!();
+        Captures!();
+        Id!();
+        Usage!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

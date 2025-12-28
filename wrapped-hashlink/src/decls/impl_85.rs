@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Node!();
         CursorMut!();
+        Node!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

@@ -4,4 +4,4 @@ macro_rules! convert_size {
     };
 }
 
-convert_size!()
+convert_size!();

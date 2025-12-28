@@ -4,4 +4,4 @@ macro_rules! DiffBinary {
     };
 }
 
-DiffBinary!()
+DiffBinary!();

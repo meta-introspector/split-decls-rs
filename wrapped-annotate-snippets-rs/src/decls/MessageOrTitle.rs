@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Level!();
         Id!();
+        Level!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MessageOrTitle {
     };
 }
 
-MessageOrTitle!()
+MessageOrTitle!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         HirDatabase!();
-        EarlyBinder!();
         PolyFnSig!();
+        EarlyBinder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! callable_item_signature_query {
     };
 }
 
-callable_item_signature_query!()
+callable_item_signature_query!();

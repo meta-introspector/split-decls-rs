@@ -4,4 +4,4 @@ macro_rules! ellipsize {
     };
 }
 
-ellipsize!()
+ellipsize!();

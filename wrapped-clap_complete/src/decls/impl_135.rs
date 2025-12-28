@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EnvCompleter!();
         Fish!();
+        EnvCompleter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_135 {
     };
 }
 
-impl_135!()
+impl_135!();

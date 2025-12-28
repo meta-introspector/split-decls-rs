@@ -11,4 +11,4 @@ macro_rules! FromRadix10SignedChecked {
     };
 }
 
-FromRadix10SignedChecked!()
+FromRadix10SignedChecked!();

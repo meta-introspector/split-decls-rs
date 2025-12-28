@@ -4,4 +4,4 @@ macro_rules! X2N_TABLE {
     };
 }
 
-X2N_TABLE!()
+X2N_TABLE!();

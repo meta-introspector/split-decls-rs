@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileRangeWrapper!();
         MacroCallId!();
+        FileRangeWrapper!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MacroFileRange {
     };
 }
 
-MacroFileRange!()
+MacroFileRange!();

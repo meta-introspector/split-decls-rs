@@ -4,4 +4,4 @@ macro_rules! BASIC_LATIN_MASK {
     };
 }
 
-BASIC_LATIN_MASK!()
+BASIC_LATIN_MASK!();

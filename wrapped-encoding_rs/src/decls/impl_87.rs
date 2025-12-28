@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        EncoderResult!();
+        EucKrEncoder!();
+        Encoder!();
         Encoding!();
         VariantEncoder!();
-        Encoder!();
-        EucKrEncoder!();
-        EncoderResult!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

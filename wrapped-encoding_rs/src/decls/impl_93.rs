@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         VariantDecoder!();
-        Gb18030Pending!();
         Gb18030Decoder!();
+        Gb18030Pending!();
         DecoderResult!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

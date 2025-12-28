@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Report!();
-        Stylesheet!();
         DecorStyle!();
+        Stylesheet!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Renderer {
     };
 }
 
-Renderer!()
+Renderer!();

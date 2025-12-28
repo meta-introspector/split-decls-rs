@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SpanEncoder!();
+        Transparency!();
     };
 }
 
 macro_rules! impl_52 {
     () => {
         deps!();
-        impl < E : SpanEncoder > Encodable < E > for DefId { fn encode (& self , s : & mut E) { s . encode_def_id (* self) } }
+        impl Transparency { pub fn fallback (macro_rules : bool) -> Self { if macro_rules { Transparency :: SemiOpaque } else { Transparency :: Opaque } } }
     };
 }
 

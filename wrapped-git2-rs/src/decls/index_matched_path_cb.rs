@@ -11,4 +11,4 @@ macro_rules! index_matched_path_cb {
     };
 }
 
-index_matched_path_cb!()
+index_matched_path_cb!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DirectiveLocation!();
-        Positioned!();
         InputValueDefinition!();
+        Positioned!();
+        DirectiveLocation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DirectiveDefinition {
     };
 }
 
-DirectiveDefinition!()
+DirectiveDefinition!();

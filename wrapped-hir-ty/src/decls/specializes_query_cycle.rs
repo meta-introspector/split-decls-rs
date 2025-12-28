@@ -11,4 +11,4 @@ macro_rules! specializes_query_cycle {
     };
 }
 
-specializes_query_cycle!()
+specializes_query_cycle!();

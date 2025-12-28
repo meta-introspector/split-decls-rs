@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ChallengeRef!();
-        DigestClient!();
         Algorithm!();
+        DigestClient!();
+        ChallengeRef!();
         Qop!();
+        Error!();
         QopSet!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

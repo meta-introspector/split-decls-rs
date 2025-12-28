@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        SubdiagMessage!();
+        IntoDiagArg!();
+        DiagArgValue!();
     };
 }
 
 macro_rules! impl_16 {
     () => {
         deps!();
-        impl From < Cow < 'static , str > > for SubdiagMessage { fn from (s : Cow < 'static , str >) -> Self { SubdiagMessage :: Str (s) } }
+        impl < 'a > IntoDiagArg for & 'a Path { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { DiagArgValue :: Str (Cow :: Owned (self . display () . to_string ())) } }
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! open_options {
     };
 }
 
-open_options!()
+open_options!();

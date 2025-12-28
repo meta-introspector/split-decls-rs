@@ -4,4 +4,4 @@ macro_rules! editor {
     };
 }
 
-editor!()
+editor!();

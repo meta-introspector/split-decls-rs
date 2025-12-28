@@ -4,4 +4,4 @@ macro_rules! matches_fluent_ws {
     };
 }
 
-matches_fluent_ws!()
+matches_fluent_ws!();

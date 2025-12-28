@@ -11,4 +11,4 @@ macro_rules! edit_tree {
     };
 }
 
-edit_tree!()
+edit_tree!();

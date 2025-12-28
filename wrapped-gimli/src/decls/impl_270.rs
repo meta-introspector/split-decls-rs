@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reader!();
         Unit!();
+        Reader!();
         UnitHeader!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_270 {
     };
 }
 
-impl_270!()
+impl_270!();

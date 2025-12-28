@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        VectorType!();
-        Decltype!();
-        Substitution!();
-        FunctionType!();
-        IndexStr!();
-        SubstitutionTable!();
-        Substitutable!();
-        TemplateArgs!();
-        SourceName!();
-        ParseContext!();
-        ArrayType!();
-        PointerToMemberType!();
-        Parse!();
-        BuiltinType!();
-        ClassEnumType!();
-        TemplateParam!();
-        Result!();
-        CvQualifiers!();
         Type!();
+        FunctionType!();
+        PointerToMemberType!();
+        VectorType!();
+        Substitution!();
+        Decltype!();
+        TemplateParam!();
+        BuiltinType!();
+        SourceName!();
+        Substitutable!();
+        ParseContext!();
+        IndexStr!();
+        CvQualifiers!();
+        Parse!();
+        TemplateArgs!();
+        SubstitutionTable!();
+        ClassEnumType!();
+        ArrayType!();
+        Result!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

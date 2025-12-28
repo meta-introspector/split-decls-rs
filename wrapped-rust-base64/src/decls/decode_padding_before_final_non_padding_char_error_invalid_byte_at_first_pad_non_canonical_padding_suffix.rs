@@ -12,4 +12,4 @@ macro_rules! decode_padding_before_final_non_padding_char_error_invalid_byte_at_
     };
 }
 
-decode_padding_before_final_non_padding_char_error_invalid_byte_at_first_pad_non_canonical_padding_suffix!()
+decode_padding_before_final_non_padding_char_error_invalid_byte_at_first_pad_non_canonical_padding_suffix!();

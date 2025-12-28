@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InheritableStringOrBool!();
         TomlInheritedField!();
+        InheritableStringOrBool!();
         Result!();
         StringOrBool!();
         InheritableField!();
@@ -15,4 +15,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

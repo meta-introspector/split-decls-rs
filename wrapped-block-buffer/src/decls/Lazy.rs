@@ -4,4 +4,4 @@ macro_rules! Lazy {
     };
 }
 
-Lazy!()
+Lazy!();

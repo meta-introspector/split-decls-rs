@@ -4,4 +4,4 @@ macro_rules! cfg_not_docs {
     };
 }
 
-cfg_not_docs!()
+cfg_not_docs!();

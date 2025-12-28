@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         NodeID!();
-        NodeStmt!();
-        Subgraph!();
         Stmt!();
-        AttrStmt!();
         EdgeStmt!();
+        AttrStmt!();
+        Subgraph!();
+        NodeStmt!();
         IDEq!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

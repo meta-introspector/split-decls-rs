@@ -4,4 +4,4 @@ macro_rules! AstVisitor {
     };
 }
 
-AstVisitor!()
+AstVisitor!();

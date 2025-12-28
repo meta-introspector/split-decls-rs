@@ -4,4 +4,4 @@ macro_rules! p448_solinas_64 {
     };
 }
 
-p448_solinas_64!()
+p448_solinas_64!();

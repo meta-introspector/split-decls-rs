@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ServerResult!();
         ContainerType!();
         ContextSelectionSet!();
+        ServerResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! resolve_container {
     };
 }
 
-resolve_container!()
+resolve_container!();

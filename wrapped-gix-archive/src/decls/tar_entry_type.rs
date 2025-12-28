@@ -4,4 +4,4 @@ macro_rules! tar_entry_type {
     };
 }
 
-tar_entry_type!()
+tar_entry_type!();

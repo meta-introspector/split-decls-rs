@@ -16,4 +16,4 @@ macro_rules! CandidateInfo {
     };
 }
 
-CandidateInfo!()
+CandidateInfo!();

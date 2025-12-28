@@ -4,4 +4,4 @@ macro_rules! indexer {
     };
 }
 
-indexer!()
+indexer!();

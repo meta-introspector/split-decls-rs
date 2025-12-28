@@ -4,4 +4,4 @@ macro_rules! FluentNumberStyle {
     };
 }
 
-FluentNumberStyle!()
+FluentNumberStyle!();

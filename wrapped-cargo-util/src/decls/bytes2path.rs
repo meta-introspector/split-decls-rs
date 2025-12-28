@@ -4,4 +4,4 @@ macro_rules! bytes2path {
     };
 }
 
-bytes2path!()
+bytes2path!();

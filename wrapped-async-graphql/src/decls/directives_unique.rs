@@ -4,4 +4,4 @@ macro_rules! directives_unique {
     };
 }
 
-directives_unique!()
+directives_unique!();

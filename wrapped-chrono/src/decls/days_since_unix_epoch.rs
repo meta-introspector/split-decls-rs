@@ -11,4 +11,4 @@ macro_rules! days_since_unix_epoch {
     };
 }
 
-days_since_unix_epoch!()
+days_since_unix_epoch!();

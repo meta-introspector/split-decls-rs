@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CursorType!();
-        Error!();
         Result!();
+        Error!();
+        CursorType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_717 {
     };
 }
 
-impl_717!()
+impl_717!();

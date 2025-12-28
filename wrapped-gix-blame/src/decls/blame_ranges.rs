@@ -12,4 +12,4 @@ macro_rules! blame_ranges {
     };
 }
 
-blame_ranges!()
+blame_ranges!();

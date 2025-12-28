@@ -12,4 +12,4 @@ macro_rules! LOCAL_MACHINE {
     };
 }
 
-LOCAL_MACHINE!()
+LOCAL_MACHINE!();

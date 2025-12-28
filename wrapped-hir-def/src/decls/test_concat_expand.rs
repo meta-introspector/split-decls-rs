@@ -14,4 +14,4 @@ fn main() { "foo0\"bar\"\nfalse\"-4-4\u{0}"; }
     };
 }
 
-test_concat_expand!()
+test_concat_expand!();

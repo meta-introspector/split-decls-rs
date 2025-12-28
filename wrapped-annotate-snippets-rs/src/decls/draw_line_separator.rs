@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ElementStyle!();
         DecorStyle!();
         Renderer!();
         StyledBuffer!();
-        ElementStyle!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! draw_line_separator {
     };
 }
 
-draw_line_separator!()
+draw_line_separator!();

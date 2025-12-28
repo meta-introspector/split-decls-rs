@@ -1,5 +1,7 @@
 macro_rules! deps {
     () => {
+        SERVICE_STATUS_HANDLE!();
+        SERVICE_STATUS!();
         Command!();
     };
 }

@@ -4,4 +4,4 @@ macro_rules! typed_derive {
     };
 }
 
-typed_derive!()
+typed_derive!();

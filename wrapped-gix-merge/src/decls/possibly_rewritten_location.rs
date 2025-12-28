@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TreeNodes!();
         ChangeListRef!();
+        TreeNodes!();
         PossibleConflict!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! possibly_rewritten_location {
     };
 }
 
-possibly_rewritten_location!()
+possibly_rewritten_location!();

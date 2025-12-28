@@ -4,4 +4,4 @@ macro_rules! into_bstr {
     };
 }
 
-into_bstr!()
+into_bstr!();

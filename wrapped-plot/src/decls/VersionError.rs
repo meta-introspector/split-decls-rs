@@ -4,4 +4,4 @@ macro_rules! VersionError {
     };
 }
 
-VersionError!()
+VersionError!();

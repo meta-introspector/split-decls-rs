@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        MixedUnit!();
+        CheckRaw!();
+        EscapeError!();
     };
 }
 
 macro_rules! impl_17 {
     () => {
         deps!();
-        impl From < NonZero < char > > for MixedUnit { # [inline] fn from (c : NonZero < char >) -> Self { MixedUnit :: Char (c) } }
+        impl CheckRaw for [u8] { type RawUnit = u8 ; # [inline] fn char2raw_unit (c : char) -> Result < Self :: RawUnit , EscapeError > { char2byte (c) } }
     };
 }
 

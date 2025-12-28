@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConcatenatingMul!();
         Integer!();
+        ConcatenatingMul!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WideningMul {
     };
 }
 
-WideningMul!()
+WideningMul!();

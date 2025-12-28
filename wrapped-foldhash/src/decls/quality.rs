@@ -4,4 +4,4 @@ macro_rules! quality {
     };
 }
 
-quality!()
+quality!();

@@ -4,4 +4,4 @@ macro_rules! consume_with_short_reads_and_validate {
     };
 }
 
-consume_with_short_reads_and_validate!()
+consume_with_short_reads_and_validate!();

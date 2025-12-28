@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Client!();
-        Key!();
-        Process!();
-        Error!();
         Operation!();
+        Process!();
         Driver!();
         State!();
+        Client!();
+        Key!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

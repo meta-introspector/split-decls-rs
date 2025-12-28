@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DecodeError!();
         Decode!();
         Decoder!();
-        Compat!();
+        DecodeError!();
         SerdeDecoder!();
+        Compat!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

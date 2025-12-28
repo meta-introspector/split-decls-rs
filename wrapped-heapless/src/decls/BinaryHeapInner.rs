@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BinaryHeap!();
-        VecInner!();
         BinaryHeapView!();
+        VecInner!();
+        BinaryHeap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! BinaryHeapInner {
     };
 }
 
-BinaryHeapInner!()
+BinaryHeapInner!();

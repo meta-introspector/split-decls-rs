@@ -4,4 +4,4 @@ macro_rules! FileSystemWriter {
     };
 }
 
-FileSystemWriter!()
+FileSystemWriter!();

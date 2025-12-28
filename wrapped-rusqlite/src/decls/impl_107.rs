@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Context!();
+        Error!();
+        Aggregate!();
+        Name!();
+        WindowAggregate!();
+        SqlFnOutput!();
+        Result!();
+        InnerConnection!();
+        Connection!();
+    };
+}
+
+macro_rules! impl_107 {
+    () => {
+        deps!();
+        impl InnerConnection { # [doc = " ```compile_fail"] # [doc = " use rusqlite::{functions::FunctionFlags, Connection, Result};"] # [doc = " fn main() -> Result<()> {"] # [doc = "     let db = Connection::open_in_memory()?;"] # [doc = "     {"] # [doc = "         let mut called = std::sync::atomic::AtomicBool::new(false);"] # [doc = "         db.create_scalar_function("] # [doc = "             \"test\","] # [doc = "             0,"] # [doc = "             FunctionFlags::SQLITE_UTF8 | FunctionFlags::SQLITE_DETERMINISTIC,"] # [doc = "             |_| {"] # [doc = "                 called.store(true, std::sync::atomic::Ordering::Relaxed);"] # [doc = "                 Ok(true)"] # [doc = "             },"] # [doc = "         );"] # [doc = "     }"] # [doc = "     let result: Result<bool> = db.query_row(\"SELECT test()\", [], |r| r.get(0));"] # [doc = "     assert!(result?);"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] fn create_scalar_function < F , N : Name , T > (& mut self , fn_name : N , n_arg : c_int , flags : FunctionFlags , x_func : F ,) -> Result < () > where F : Fn (& Context < '_ >) -> Result < T > + Send + 'static , T : SqlFnOutput , { unsafe extern "C" fn call_boxed_closure < F , T > (ctx : * mut sqlite3_context , argc : c_int , argv : * mut * mut sqlite3_value ,) where F : Fn (& Context < '_ >) -> Result < T > , T : SqlFnOutput , { let args = slice :: from_raw_parts (argv , argc as usize) ; let r = catch_unwind (| | { let boxed_f : * const F = ffi :: sqlite3_user_data (ctx) . cast :: < F > () ; assert ! (! boxed_f . is_null () , "Internal error - null function pointer") ; let ctx = Context { ctx , args } ; (* boxed_f) (& ctx) }) ; let t = match r { Err (_) => { report_error (ctx , & Error :: UnwindingPanic) ; return ; } Ok (r) => r , } ; sql_result (ctx , args , t) ; } let boxed_f : * mut F = Box :: into_raw (Box :: new (x_func)) ; let c_name = fn_name . as_cstr () ? ; let r = unsafe { ffi :: sqlite3_create_function_v2 (self . db () , c_name . as_ptr () , n_arg , flags . bits () , boxed_f . cast :: < c_void > () , Some (call_boxed_closure :: < F , T >) , None , None , Some (free_boxed_value :: < F >) ,) } ; self . decode_result (r) } fn create_aggregate_function < A , D , N : Name , T > (& mut self , fn_name : N , n_arg : c_int , flags : FunctionFlags , aggr : D ,) -> Result < () > where A : RefUnwindSafe + UnwindSafe , D : Aggregate < A , T > + 'static , T : SqlFnOutput , { let boxed_aggr : * mut D = Box :: into_raw (Box :: new (aggr)) ; let c_name = fn_name . as_cstr () ? ; let r = unsafe { ffi :: sqlite3_create_function_v2 (self . db () , c_name . as_ptr () , n_arg , flags . bits () , boxed_aggr . cast :: < c_void > () , None , Some (call_boxed_step :: < A , D , T >) , Some (call_boxed_final :: < A , D , T >) , Some (free_boxed_value :: < D >) ,) } ; self . decode_result (r) } # [cfg (feature = "window")] fn create_window_function < A , N : Name , W , T > (& mut self , fn_name : N , n_arg : c_int , flags : FunctionFlags , aggr : W ,) -> Result < () > where A : RefUnwindSafe + UnwindSafe , W : WindowAggregate < A , T > + 'static , T : SqlFnOutput , { let boxed_aggr : * mut W = Box :: into_raw (Box :: new (aggr)) ; let c_name = fn_name . as_cstr () ? ; let r = unsafe { ffi :: sqlite3_create_window_function (self . db () , c_name . as_ptr () , n_arg , flags . bits () , boxed_aggr . cast :: < c_void > () , Some (call_boxed_step :: < A , W , T >) , Some (call_boxed_final :: < A , W , T >) , Some (call_boxed_value :: < A , W , T >) , Some (call_boxed_inverse :: < A , W , T >) , Some (free_boxed_value :: < W >) ,) } ; self . decode_result (r) } fn remove_function < N : Name > (& mut self , fn_name : N , n_arg : c_int) -> Result < () > { let c_name = fn_name . as_cstr () ? ; let r = unsafe { ffi :: sqlite3_create_function_v2 (self . db () , c_name . as_ptr () , n_arg , ffi :: SQLITE_UTF8 , ptr :: null_mut () , None , None , None , None ,) } ; self . decode_result (r) } }
+    };
+}
+
+impl_107!()

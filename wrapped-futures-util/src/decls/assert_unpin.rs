@@ -4,4 +4,4 @@ macro_rules! assert_unpin {
     };
 }
 
-assert_unpin!()
+assert_unpin!();

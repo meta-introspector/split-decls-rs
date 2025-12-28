@@ -11,4 +11,4 @@ macro_rules! derive_interface {
     };
 }
 
-derive_interface!()
+derive_interface!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DeclRefactoringConfig!();
         ExportConfig!();
         RefactorMeta!();
         SplitRule!();
+        DeclRefactoringConfig!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! RefactorConfig {
     };
 }
 
-RefactorConfig!()
+RefactorConfig!();

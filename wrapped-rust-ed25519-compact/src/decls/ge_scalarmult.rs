@@ -11,4 +11,4 @@ macro_rules! ge_scalarmult {
     };
 }
 
-ge_scalarmult!()
+ge_scalarmult!();

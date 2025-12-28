@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         GAVisitor!();
+        ArrayLength!();
         GenericArray!();
         IntrusiveArrayBuilder!();
-        ArrayLength!();
         Dummy!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

@@ -11,4 +11,4 @@ macro_rules! path_to_repo_path {
     };
 }
 
-path_to_repo_path!()
+path_to_repo_path!();

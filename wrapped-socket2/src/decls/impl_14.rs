@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Type!();
+        SockAddr!();
     };
 }
 
 macro_rules! impl_14 {
     () => {
         deps!();
-        impl From < c_int > for Type { fn from (t : c_int) -> Type { Type (t) } }
+        impl PartialEq for SockAddr { fn eq (& self , other : & Self) -> bool { self . as_bytes () == other . as_bytes () } }
     };
 }
 

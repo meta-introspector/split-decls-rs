@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SchemaError!();
-        Field!();
         Directive!();
+        Field!();
+        SchemaError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Object {
     };
 }
 
-Object!()
+Object!();

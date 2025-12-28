@@ -11,4 +11,4 @@ macro_rules! generate_random_encoded_data {
     };
 }
 
-generate_random_encoded_data!()
+generate_random_encoded_data!();

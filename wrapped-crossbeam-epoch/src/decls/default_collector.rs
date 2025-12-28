@@ -11,4 +11,4 @@ macro_rules! default_collector {
     };
 }
 
-default_collector!()
+default_collector!();

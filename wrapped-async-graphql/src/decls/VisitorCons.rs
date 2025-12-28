@@ -4,4 +4,4 @@ macro_rules! VisitorCons {
     };
 }
 
-VisitorCons!()
+VisitorCons!();

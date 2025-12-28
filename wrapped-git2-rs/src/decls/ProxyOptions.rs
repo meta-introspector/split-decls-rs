@@ -4,4 +4,4 @@ macro_rules! ProxyOptions {
     };
 }
 
-ProxyOptions!()
+ProxyOptions!();

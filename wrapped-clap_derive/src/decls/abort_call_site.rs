@@ -4,4 +4,4 @@ macro_rules! abort_call_site {
     };
 }
 
-abort_call_site!()
+abort_call_site!();

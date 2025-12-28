@@ -11,4 +11,4 @@ macro_rules! to_object {
     };
 }
 
-to_object!()
+to_object!();

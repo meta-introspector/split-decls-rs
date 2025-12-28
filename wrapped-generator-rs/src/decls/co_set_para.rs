@@ -11,4 +11,4 @@ macro_rules! co_set_para {
     };
 }
 
-co_set_para!()
+co_set_para!();

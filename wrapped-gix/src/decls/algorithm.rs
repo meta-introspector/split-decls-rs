@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         Algorithm!();
-        NegotiationAlgorithm!();
         RecurseSubmodules!();
+        Error!();
+        NegotiationAlgorithm!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! algorithm {
     };
 }
 
-algorithm!()
+algorithm!();

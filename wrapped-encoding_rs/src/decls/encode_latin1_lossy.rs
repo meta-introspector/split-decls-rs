@@ -11,4 +11,4 @@ macro_rules! encode_latin1_lossy {
     };
 }
 
-encode_latin1_lossy!()
+encode_latin1_lossy!();

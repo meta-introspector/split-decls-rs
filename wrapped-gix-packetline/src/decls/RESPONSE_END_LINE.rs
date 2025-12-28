@@ -4,4 +4,4 @@ macro_rules! RESPONSE_END_LINE {
     };
 }
 
-RESPONSE_END_LINE!()
+RESPONSE_END_LINE!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArgScope!();
         TemplateArgs!();
+        ArgScope!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ArgScopeStack {
     };
 }
 
-ArgScopeStack!()
+ArgScopeStack!();

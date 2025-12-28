@@ -12,4 +12,4 @@ macro_rules! call_hasher_impl_fixed_length {
     };
 }
 
-call_hasher_impl_fixed_length!()
+call_hasher_impl_fixed_length!();

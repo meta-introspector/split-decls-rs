@@ -11,4 +11,4 @@ macro_rules! ISO_2022_JP {
     };
 }
 
-ISO_2022_JP!()
+ISO_2022_JP!();

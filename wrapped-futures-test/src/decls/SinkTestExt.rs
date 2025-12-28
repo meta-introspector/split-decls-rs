@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TrackClosed!();
         InterleavePending!();
+        TrackClosed!();
         AssertUnmoved!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! SinkTestExt {
     };
 }
 
-SinkTestExt!()
+SinkTestExt!();

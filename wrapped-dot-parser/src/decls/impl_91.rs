@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         Graph!();
         EdgeStmt!();
-        IDEq!();
-        EdgeSet!();
-        AttrStmt!();
-        NodeStmt!();
-        Stmt!();
         NodeSet!();
+        EdgeSet!();
+        NodeStmt!();
+        IDEq!();
+        Stmt!();
+        AttrStmt!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

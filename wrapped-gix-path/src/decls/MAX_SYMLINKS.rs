@@ -4,4 +4,4 @@ macro_rules! MAX_SYMLINKS {
     };
 }
 
-MAX_SYMLINKS!()
+MAX_SYMLINKS!();

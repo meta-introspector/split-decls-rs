@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        File!();
         Event!();
+        File!();
         Body!();
         SectionBodyIdsLut!();
         SectionId!();
@@ -15,4 +15,4 @@ macro_rules! try_from {
     };
 }
 
-try_from!()
+try_from!();

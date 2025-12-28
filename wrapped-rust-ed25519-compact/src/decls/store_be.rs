@@ -4,4 +4,4 @@ macro_rules! store_be {
     };
 }
 
-store_be!()
+store_be!();

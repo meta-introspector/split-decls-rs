@@ -4,4 +4,4 @@ macro_rules! stress_test_config {
     };
 }
 
-stress_test_config!()
+stress_test_config!();

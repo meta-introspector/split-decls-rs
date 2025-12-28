@@ -4,4 +4,4 @@ macro_rules! MissingMatchArms {
     };
 }
 
-MissingMatchArms!()
+MissingMatchArms!();

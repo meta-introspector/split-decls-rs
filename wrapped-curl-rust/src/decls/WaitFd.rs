@@ -4,4 +4,4 @@ macro_rules! WaitFd {
     };
 }
 
-WaitFd!()
+WaitFd!();

@@ -1,0 +1,7 @@
+macro_rules! for_each_late_bound_region_in_item {
+    () => {
+        # [doc = " Iterates over the late-bound regions defined on `mir_def_id` and all of its"] # [doc = " parents, up to the typeck root, and invokes `f` with the liberated form"] # [doc = " of each one."] fn for_each_late_bound_region_in_item < 'tcx > (tcx : TyCtxt < 'tcx > , mir_def_id : LocalDefId , mut f : impl FnMut (ty :: Region < 'tcx >) ,) { let bound_vars = match tcx . def_kind (mir_def_id) { DefKind :: Fn | DefKind :: AssocFn => { tcx . late_bound_vars (tcx . local_def_id_to_hir_id (mir_def_id)) } DefKind :: Closure => { let ty = tcx . type_of (mir_def_id) . instantiate_identity () ; match * ty . kind () { ty :: Closure (_ , args) => args . as_closure () . sig () . bound_vars () , ty :: CoroutineClosure (_ , args) => { args . as_coroutine_closure () . coroutine_closure_sig () . bound_vars () } ty :: Coroutine (_ , _) | ty :: Error (_) => return , _ => unreachable ! ("unexpected type for closure: {ty}") , } } _ => return , } ; for (idx , bound_var) in bound_vars . iter () . enumerate () { if let ty :: BoundVariableKind :: Region (kind) = bound_var { let kind = ty :: LateParamRegionKind :: from_bound (ty :: BoundVar :: from_usize (idx) , kind) ; let liberated_region = ty :: Region :: new_late_param (tcx , mir_def_id . to_def_id () , kind) ; f (liberated_region) ; } } }
+    };
+}
+
+for_each_late_bound_region_in_item!()

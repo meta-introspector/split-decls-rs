@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArrayVec!();
         ArrayLike!();
+        ArrayVec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

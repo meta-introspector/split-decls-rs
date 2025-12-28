@@ -4,4 +4,4 @@ macro_rules! rustc_host_env {
     };
 }
 
-rustc_host_env!()
+rustc_host_env!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FalseyValueParser!();
         Usage!();
+        FalseyValueParser!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BoolishValueParser {
     };
 }
 
-BoolishValueParser!()
+BoolishValueParser!();

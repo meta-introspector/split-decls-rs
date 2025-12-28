@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        RawRangeListsOffset!();
-        DebuggingInformationEntry!();
-        Reader!();
-        AttributeValue!();
-        LocListIter!();
-        Dwarf!();
-        LocationListsOffset!();
         DebugStrOffsetsIndex!();
-        DebugLineStrOffset!();
-        RawRngListIter!();
+        Dwarf!();
+        AttributeValue!();
         DebugMacinfoOffset!();
-        RangeListsOffset!();
-        RawLocListIter!();
-        MacroIter!();
         DebugMacroOffset!();
-        RngListIter!();
         UnitRef!();
-        DebugLocListsIndex!();
-        Unit!();
-        DebugStrOffset!();
-        DebugRngListsIndex!();
-        RangeIter!();
+        RawRangeListsOffset!();
         DebugAddrIndex!();
+        RawRngListIter!();
+        DebuggingInformationEntry!();
+        RangeListsOffset!();
+        DebugLineStrOffset!();
+        RangeIter!();
+        DebugStrOffset!();
+        DebugLocListsIndex!();
+        RngListIter!();
+        Reader!();
+        LocListIter!();
+        MacroIter!();
+        RawLocListIter!();
+        Unit!();
         Result!();
+        DebugRngListsIndex!();
+        LocationListsOffset!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! impl_276 {
     };
 }
 
-impl_276!()
+impl_276!();

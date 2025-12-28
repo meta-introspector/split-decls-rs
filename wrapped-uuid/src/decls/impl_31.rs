@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
         Uuid!();
+        Error!();
     };
 }
 
 macro_rules! impl_31 {
     () => {
         deps!();
-        # [cfg (feature = "std")] impl From < Uuid > for std :: vec :: Vec < u8 > { fn from (value : Uuid) -> Self { value . 0 . to_vec () } }
+        impl str :: FromStr for Uuid { type Err = Error ; fn from_str (uuid_str : & str) -> Result < Self , Self :: Err > { Uuid :: parse_str (uuid_str) } }
     };
 }
 

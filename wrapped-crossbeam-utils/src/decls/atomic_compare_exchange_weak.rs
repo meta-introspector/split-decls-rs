@@ -4,4 +4,4 @@ macro_rules! atomic_compare_exchange_weak {
     };
 }
 
-atomic_compare_exchange_weak!()
+atomic_compare_exchange_weak!();

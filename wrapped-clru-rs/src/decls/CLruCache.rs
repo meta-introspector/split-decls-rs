@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FixedSizeList!();
-        CLruNode!();
         WeightScale!();
         ZeroWeightScale!();
+        CLruNode!();
+        FixedSizeList!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CLruCache {
     };
 }
 
-CLruCache!()
+CLruCache!();

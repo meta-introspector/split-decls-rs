@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        HygieneId!();
-        ExpressionStore!();
-        Pat!();
+        AsmOperand!();
+        ExpressionOnlyStore!();
         Const!();
-        Statement!();
+        DefMap!();
+        Item!();
+        ExpressionStoreBuilder!();
+        DefDatabase!();
+        InlineAsm!();
+        ExpressionStoreSourceMap!();
+        HygieneId!();
+        Label!();
+        Pat!();
+        ExpressionStore!();
         ExprOrPatId!();
         Expr!();
-        AsmOperand!();
         PatId!();
-        OffsetOf!();
-        DefMap!();
-        DefDatabase!();
-        Binding!();
-        Item!();
-        Literal!();
-        Array!();
-        Label!();
-        BindingId!();
         RecordFieldPat!();
-        ExpressionOnlyStore!();
-        ExpressionStoreBuilder!();
-        ExpressionStoreSourceMap!();
+        Binding!();
+        OffsetOf!();
+        BindingId!();
+        Statement!();
+        Array!();
+        Literal!();
         ExprId!();
-        InlineAsm!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! impl_291 {
     };
 }
 
-impl_291!()
+impl_291!();

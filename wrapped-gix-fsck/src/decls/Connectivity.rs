@@ -4,4 +4,4 @@ macro_rules! Connectivity {
     };
 }
 
-Connectivity!()
+Connectivity!();

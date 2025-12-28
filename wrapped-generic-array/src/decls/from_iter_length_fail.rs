@@ -4,4 +4,4 @@ macro_rules! from_iter_length_fail {
     };
 }
 
-from_iter_length_fail!()
+from_iter_length_fail!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NFA!();
         DebugByte!();
+        NFA!();
         State!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

@@ -4,4 +4,4 @@ macro_rules! CheckCase {
     };
 }
 
-CheckCase!()
+CheckCase!();

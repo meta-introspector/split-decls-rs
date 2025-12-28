@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         Send!();
+        IntoIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_853 {
     };
 }
 
-impl_853!()
+impl_853!();

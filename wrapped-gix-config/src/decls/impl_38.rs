@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        SectionId!();
-        Event!();
-        SectionBodyIdsLut!();
-        Key!();
         File!();
         Header!();
-        Metadata!();
+        Key!();
         Error!();
         SectionMut!();
         Section!();
+        Metadata!();
+        SectionBodyIdsLut!();
+        SectionId!();
+        Event!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

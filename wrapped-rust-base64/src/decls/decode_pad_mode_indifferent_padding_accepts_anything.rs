@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecodePaddingMode!();
         EngineWrapper!();
+        DecodePaddingMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode_pad_mode_indifferent_padding_accepts_anything {
     };
 }
 
-decode_pad_mode_indifferent_padding_accepts_anything!()
+decode_pad_mode_indifferent_padding_accepts_anything!();

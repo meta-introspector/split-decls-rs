@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Address!();
-        Result!();
         SectionId!();
-        Format!();
-        Endianity!();
+        Result!();
+        Address!();
         InitialLengthOffset!();
+        Endianity!();
+        Format!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Writer {
     };
 }
 
-Writer!()
+Writer!();

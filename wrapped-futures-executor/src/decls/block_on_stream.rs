@@ -11,4 +11,4 @@ macro_rules! block_on_stream {
     };
 }
 
-block_on_stream!()
+block_on_stream!();

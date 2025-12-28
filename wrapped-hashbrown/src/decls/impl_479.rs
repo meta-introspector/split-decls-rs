@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DefaultHashBuilder!();
-        Entry!();
         OccupiedEntry!();
+        Entry!();
+        DefaultHashBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_479 {
     };
 }
 
-impl_479!()
+impl_479!();

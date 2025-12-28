@@ -4,4 +4,4 @@ macro_rules! MIN_SIZE_WITH_HEADER {
     };
 }
 
-MIN_SIZE_WITH_HEADER!()
+MIN_SIZE_WITH_HEADER!();

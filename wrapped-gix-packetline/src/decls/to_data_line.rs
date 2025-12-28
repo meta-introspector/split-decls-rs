@@ -12,4 +12,4 @@ macro_rules! to_data_line {
     };
 }
 
-to_data_line!()
+to_data_line!();

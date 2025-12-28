@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        WriteMode!();
         Remote!();
+        WriteMode!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_remote_to_local_config_file {
     };
 }
 
-write_remote_to_local_config_file!()
+write_remote_to_local_config_file!();

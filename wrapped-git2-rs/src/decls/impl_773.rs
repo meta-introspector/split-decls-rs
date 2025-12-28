@@ -3,9 +3,9 @@ macro_rules! deps {
         Oid!();
         Tag!();
         Binding!();
-        Error!();
         Signature!();
         Object!();
+        Error!();
         ObjectType!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_773 {
     };
 }
 
-impl_773!()
+impl_773!();

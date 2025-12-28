@@ -11,4 +11,4 @@ macro_rules! lock_timeout {
     };
 }
 
-lock_timeout!()
+lock_timeout!();

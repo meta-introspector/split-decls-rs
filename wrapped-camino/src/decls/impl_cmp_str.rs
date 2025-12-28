@@ -11,4 +11,4 @@ macro_rules! impl_cmp_str {
     };
 }
 
-impl_cmp_str!()
+impl_cmp_str!();

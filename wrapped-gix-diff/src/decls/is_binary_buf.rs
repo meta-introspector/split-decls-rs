@@ -4,4 +4,4 @@ macro_rules! is_binary_buf {
     };
 }
 
-is_binary_buf!()
+is_binary_buf!();

@@ -11,4 +11,4 @@ macro_rules! interpolate_context {
     };
 }
 
-interpolate_context!()
+interpolate_context!();

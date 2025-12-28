@@ -4,4 +4,4 @@ macro_rules! upload {
     };
 }
 
-upload!()
+upload!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AllowStdIo!();
         Write!();
+        AllowStdIo!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1050 {
     };
 }
 
-impl_1050!()
+impl_1050!();

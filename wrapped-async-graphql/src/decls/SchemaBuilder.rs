@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BoxResolverFn!();
-        IntrospectionMode!();
         Data!();
         ExtensionFactory!();
         ValidationMode!();
+        IntrospectionMode!();
+        BoxResolverFn!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! SchemaBuilder {
     };
 }
 
-SchemaBuilder!()
+SchemaBuilder!();

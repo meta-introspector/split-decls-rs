@@ -11,4 +11,4 @@ macro_rules! ErrorPositionsInner {
     };
 }
 
-ErrorPositionsInner!()
+ErrorPositionsInner!();

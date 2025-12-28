@@ -4,4 +4,4 @@ macro_rules! SPACE_OR_NL {
     };
 }
 
-SPACE_OR_NL!()
+SPACE_OR_NL!();

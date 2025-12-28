@@ -10,4 +10,4 @@ ok!();
     };
 }
 
-test_tt_with_composite_without_space!()
+test_tt_with_composite_without_space!();

@@ -4,4 +4,4 @@ macro_rules! from_tree {
     };
 }
 
-from_tree!()
+from_tree!();

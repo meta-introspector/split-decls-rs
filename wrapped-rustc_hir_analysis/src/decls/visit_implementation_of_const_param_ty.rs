@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Checker!();
+        ConstParamTyImplOnNonAdt!();
+        ConstParamTyImplOnUnsized!();
+    };
+}
+
+macro_rules! visit_implementation_of_const_param_ty {
+    () => {
+        deps!();
+        fn visit_implementation_of_const_param_ty (checker : & Checker < '_ > , kind : LangItem ,) -> Result < () , ErrorGuaranteed > { assert_matches ! (kind , LangItem :: ConstParamTy | LangItem :: UnsizedConstParamTy) ; let tcx = checker . tcx ; let header = checker . impl_header ; let impl_did = checker . impl_def_id ; let self_type = header . trait_ref . instantiate_identity () . self_ty () ; assert ! (! self_type . has_escaping_bound_vars ()) ; let param_env = tcx . param_env (impl_did) ; if let ty :: ImplPolarity :: Negative | ty :: ImplPolarity :: Reservation = header . polarity { return Ok (()) ; } let cause = traits :: ObligationCause :: misc (DUMMY_SP , impl_did) ; match type_allowed_to_implement_const_param_ty (tcx , param_env , self_type , kind , cause) { Ok (()) => Ok (()) , Err (ConstParamTyImplementationError :: InfrigingFields (fields)) => { let span = tcx . hir_expect_item (impl_did) . expect_impl () . self_ty . span ; Err (infringing_fields_error (tcx , fields . into_iter () . map (| (field , ty , reason) | (tcx . def_span (field . did) , ty , reason)) , LangItem :: ConstParamTy , impl_did , span ,)) } Err (ConstParamTyImplementationError :: NotAnAdtOrBuiltinAllowed) => { let span = tcx . hir_expect_item (impl_did) . expect_impl () . self_ty . span ; Err (tcx . dcx () . emit_err (errors :: ConstParamTyImplOnNonAdt { span })) } Err (ConstParamTyImplementationError :: InvalidInnerTyOfBuiltinTy (infringing_tys)) => { let span = tcx . hir_expect_item (impl_did) . expect_impl () . self_ty . span ; Err (infringing_fields_error (tcx , infringing_tys . into_iter () . map (| (ty , reason) | (span , ty , reason)) , LangItem :: ConstParamTy , impl_did , span ,)) } Err (ConstParamTyImplementationError :: UnsizedConstParamsFeatureRequired) => { let span = tcx . hir_expect_item (impl_did) . expect_impl () . self_ty . span ; Err (tcx . dcx () . emit_err (errors :: ConstParamTyImplOnUnsized { span })) } } }
+    };
+}
+
+visit_implementation_of_const_param_ty!()

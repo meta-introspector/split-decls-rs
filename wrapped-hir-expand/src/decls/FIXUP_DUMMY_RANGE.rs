@@ -4,4 +4,4 @@ macro_rules! FIXUP_DUMMY_RANGE {
     };
 }
 
-FIXUP_DUMMY_RANGE!()
+FIXUP_DUMMY_RANGE!();

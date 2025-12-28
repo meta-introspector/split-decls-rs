@@ -4,4 +4,4 @@ macro_rules! test_key_bytes_equal_key_words {
     };
 }
 
-test_key_bytes_equal_key_words!()
+test_key_bytes_equal_key_words!();

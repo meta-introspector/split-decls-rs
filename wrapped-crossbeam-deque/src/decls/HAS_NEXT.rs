@@ -4,4 +4,4 @@ macro_rules! HAS_NEXT {
     };
 }
 
-HAS_NEXT!()
+HAS_NEXT!();

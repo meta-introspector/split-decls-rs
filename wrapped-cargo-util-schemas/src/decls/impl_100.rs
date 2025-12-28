@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
-        TomlInheritedField!();
-        VecStringOrBool!();
-        InheritableField!();
         InheritableVecStringOrBool!();
+        VecStringOrBool!();
+        TomlInheritedField!();
+        InheritableField!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_100 {
     };
 }
 
-impl_100!()
+impl_100!();

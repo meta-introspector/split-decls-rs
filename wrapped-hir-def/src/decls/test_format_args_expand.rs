@@ -24,4 +24,4 @@ fn main() {
     };
 }
 
-test_format_args_expand!()
+test_format_args_expand!();

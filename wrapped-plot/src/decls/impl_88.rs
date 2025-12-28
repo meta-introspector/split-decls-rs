@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Figure!();
-        Matrix!();
-        Axes!();
         Data!();
+        Axes!();
+        Plot!();
         FilledCurve!();
+        Matrix!();
+        Figure!();
         Properties!();
         Default!();
-        Plot!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

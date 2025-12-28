@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        File!();
         Body!();
+        Metadata!();
         Section!();
         Error!();
         Options!();
-        Metadata!();
-        File!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

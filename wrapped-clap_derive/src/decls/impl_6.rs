@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AttrKind!();
         Action!();
-        Sp!();
-        ValueParser!();
         ClapAttr!();
-        MagicAttrName!();
         AttrValue!();
+        AttrKind!();
+        MagicAttrName!();
+        ValueParser!();
+        Sp!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

@@ -4,4 +4,4 @@ macro_rules! hex_encode_custom_case_fallback {
     };
 }
 
-hex_encode_custom_case_fallback!()
+hex_encode_custom_case_fallback!();

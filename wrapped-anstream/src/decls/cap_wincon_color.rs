@@ -4,4 +4,4 @@ macro_rules! cap_wincon_color {
     };
 }
 
-cap_wincon_color!()
+cap_wincon_color!();

@@ -1,0 +1,8 @@
+macro_rules! macro_101 {
+    () => {
+        declare_lint ! { # [doc = " The `text_direction_codepoint_in_literal` lint detects Unicode codepoints that change the"] # [doc = " visual representation of text on screen in a way that does not correspond to their on"] # [doc = " memory representation."] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " The unicode characters `\\u{202A}`, `\\u{202B}`, `\\u{202D}`, `\\u{202E}`, `\\u{2066}`,"] # [doc = " `\\u{2067}`, `\\u{2068}`, `\\u{202C}` and `\\u{2069}` make the flow of text on screen change"] # [doc = " its direction on software that supports these codepoints. This makes the text \"abc\" display"] # [doc = " as \"cba\" on screen. By leveraging software that supports these, people can write specially"] # [doc = " crafted literals that make the surrounding code seem like it's performing one action, when"] # [doc = " in reality it is performing another. Because of this, we proactively lint against their"] # [doc = " presence to avoid surprises."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![deny(text_direction_codepoint_in_literal)]"] # [doc = " fn main() {"] # [doc = "    println!(\"{:?}\", '\u{202E}');"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] pub TEXT_DIRECTION_CODEPOINT_IN_LITERAL , Deny , "detect special Unicode codepoints that affect the visual representation of text on screen, \
+     changing the direction in which text flows" , crate_level_only }
+    };
+}
+
+macro_101!()

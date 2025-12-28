@@ -4,4 +4,4 @@ macro_rules! RealCargoMetadataProvider {
     };
 }
 
-RealCargoMetadataProvider!()
+RealCargoMetadataProvider!();

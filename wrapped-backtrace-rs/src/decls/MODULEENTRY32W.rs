@@ -11,4 +11,4 @@ macro_rules! MODULEENTRY32W {
     };
 }
 
-MODULEENTRY32W!()
+MODULEENTRY32W!();

@@ -39,4 +39,4 @@ builtin #format_args ( = , "{}", x = );
     };
 }
 
-regression_15002!()
+regression_15002!();

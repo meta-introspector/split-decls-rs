@@ -11,4 +11,4 @@ macro_rules! commit_graph_if_enabled {
     };
 }
 
-commit_graph_if_enabled!()
+commit_graph_if_enabled!();

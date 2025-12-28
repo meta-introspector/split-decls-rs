@@ -4,4 +4,4 @@ macro_rules! untagged {
     };
 }
 
-untagged!()
+untagged!();

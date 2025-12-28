@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ModuleOrigin!();
-        DefDatabase!();
-        Visibility!();
-        ModuleData!();
         ModuleSource!();
         ItemScope!();
+        ModuleData!();
+        DefDatabase!();
+        Visibility!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

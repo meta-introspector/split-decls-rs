@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         VariableDefinition!();
-        Field!();
+        FieldDefinition!();
         FragmentDefinition!();
         FragmentSpread!();
+        Field!();
         InlineFragment!();
-        FieldDefinition!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! DirectiveLocation {
     };
 }
 
-DirectiveLocation!()
+DirectiveLocation!();

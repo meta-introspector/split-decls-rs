@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        KindFormatter!();
         StyledStr!();
         Error!();
         ErrorFormatter!();
-        KindFormatter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_387 {
     };
 }
 
-impl_387!()
+impl_387!();

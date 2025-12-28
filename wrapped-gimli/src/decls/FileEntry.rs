@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        AttributeValue!();
         ReaderOffset!();
+        AttributeValue!();
+        Reader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FileEntry {
     };
 }
 
-FileEntry!()
+FileEntry!();

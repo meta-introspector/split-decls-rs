@@ -4,4 +4,4 @@ macro_rules! AutoLogParse {
     };
 }
 
-AutoLogParse!()
+AutoLogParse!();

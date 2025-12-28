@@ -4,4 +4,4 @@ macro_rules! ProvidedNonNullArguments {
     };
 }
 
-ProvidedNonNullArguments!()
+ProvidedNonNullArguments!();

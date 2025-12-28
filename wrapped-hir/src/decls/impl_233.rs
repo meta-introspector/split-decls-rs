@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Union!();
-        Struct!();
-        VariantDef!();
         Adt!();
         ModuleDef!();
+        VariantDef!();
+        Struct!();
+        Union!();
         Variant!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_233 {
     };
 }
 
-impl_233!()
+impl_233!();

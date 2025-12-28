@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InheritableField!();
         RustVersion!();
+        InheritableField!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InheritableRustVersion {
     };
 }
 
-InheritableRustVersion!()
+InheritableRustVersion!();

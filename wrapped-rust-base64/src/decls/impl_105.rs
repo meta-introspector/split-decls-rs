@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        DecodeMetadata!();
-        GeneralPurposeConfig!();
-        DecodeEstimate!();
-        GeneralPurposeEstimate!();
-        GeneralPurpose!();
-        DecodeSliceError!();
         Engine!();
+        GeneralPurpose!();
+        DecodeEstimate!();
+        GeneralPurposeConfig!();
+        DecodeMetadata!();
+        DecodeSliceError!();
+        GeneralPurposeEstimate!();
         Config!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

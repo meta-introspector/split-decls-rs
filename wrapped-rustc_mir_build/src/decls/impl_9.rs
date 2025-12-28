@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        BlockContext!();
+        BlockFrame!();
+    };
+}
+
+macro_rules! impl_9 {
+    () => {
+        deps!();
+        impl BlockContext { fn new () -> Self { BlockContext (vec ! []) } fn push (& mut self , bf : BlockFrame) { self . 0 . push (bf) ; } fn pop (& mut self) -> Option < BlockFrame > { self . 0 . pop () } # [doc = " Traverses the frames on the `BlockContext`, searching for either"] # [doc = " the first block-tail expression frame with no intervening"] # [doc = " statement frame."] # [doc = ""] # [doc = " Notably, this skips over `SubExpr` frames; this method is"] # [doc = " meant to be used in the context of understanding the"] # [doc = " relationship of a temp (created within some complicated"] # [doc = " expression) with its containing expression, and whether the"] # [doc = " value of that *containing expression* (not the temp!) is"] # [doc = " ignored."] fn currently_in_block_tail (& self) -> Option < BlockTailInfo > { for bf in self . 0 . iter () . rev () { match bf { BlockFrame :: SubExpr => continue , BlockFrame :: Statement { .. } => break , & BlockFrame :: TailExpr { info } => return Some (info) , } } None } # [doc = " Looks at the topmost frame on the BlockContext and reports"] # [doc = " whether its one that would discard a block tail result."] # [doc = ""] # [doc = " Unlike `currently_within_ignored_tail_expression`, this does"] # [doc = " *not* skip over `SubExpr` frames: here, we want to know"] # [doc = " whether the block result itself is discarded."] fn currently_ignores_tail_results (& self) -> bool { match self . 0 . last () { None => false , Some (BlockFrame :: SubExpr) => false , Some (BlockFrame :: TailExpr { info : BlockTailInfo { tail_result_is_ignored : ign , .. } } | BlockFrame :: Statement { ignores_expr_result : ign } ,) => * ign , } } }
+    };
+}
+
+impl_9!()

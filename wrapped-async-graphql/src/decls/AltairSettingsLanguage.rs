@@ -4,4 +4,4 @@ macro_rules! AltairSettingsLanguage {
     };
 }
 
-AltairSettingsLanguage!()
+AltairSettingsLanguage!();

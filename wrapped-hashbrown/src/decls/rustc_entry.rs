@@ -4,4 +4,4 @@ macro_rules! rustc_entry {
     };
 }
 
-rustc_entry!()
+rustc_entry!();

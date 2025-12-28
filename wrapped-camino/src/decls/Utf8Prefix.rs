@@ -11,4 +11,4 @@ macro_rules! Utf8Prefix {
     };
 }
 
-Utf8Prefix!()
+Utf8Prefix!();

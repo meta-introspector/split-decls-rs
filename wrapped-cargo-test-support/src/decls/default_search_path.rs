@@ -4,4 +4,4 @@ macro_rules! default_search_path {
     };
 }
 
-default_search_path!()
+default_search_path!();

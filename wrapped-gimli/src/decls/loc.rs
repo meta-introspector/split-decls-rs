@@ -4,4 +4,4 @@ macro_rules! loc {
     };
 }
 
-loc!()
+loc!();

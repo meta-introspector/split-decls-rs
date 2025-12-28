@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UrlParseError!();
-        ParsedUrl!();
         Error!();
         Url!();
+        ParsedUrl!();
+        UrlParseError!();
         UrlKind!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! input_to_utf8_and_url {
     };
 }
 
-input_to_utf8_and_url!()
+input_to_utf8_and_url!();

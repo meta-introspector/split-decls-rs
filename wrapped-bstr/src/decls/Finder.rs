@@ -4,4 +4,4 @@ macro_rules! Finder {
     };
 }
 
-Finder!()
+Finder!();

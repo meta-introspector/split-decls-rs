@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Decode!();
         BorrowDecoder!();
         DecodeError!();
         BorrowDecode!();
-        Decode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_borrow_decode {
     };
 }
 
-impl_borrow_decode!()
+impl_borrow_decode!();

@@ -4,8 +4,8 @@ macro_rules! deps {
         ChangeId!();
         IteratorType!();
         Relation!();
-        Visit!();
         Error!();
+        Visit!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! catchup_rhs_with_lhs {
     };
 }
 
-catchup_rhs_with_lhs!()
+catchup_rhs_with_lhs!();

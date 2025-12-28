@@ -4,4 +4,4 @@ macro_rules! tib {
     };
 }
 
-tib!()
+tib!();

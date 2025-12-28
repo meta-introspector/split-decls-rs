@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FileId!();
+        FileSetConfig!();
     };
 }
 
 macro_rules! impl_7 {
     () => {
         deps!();
-        # [doc = " safe because `FileId` is a newtype of `u32`"] impl nohash_hasher :: IsEnabled for FileId { }
+        impl Default for FileSetConfig { fn default () -> Self { FileSetConfig :: builder () . build () } }
     };
 }
 

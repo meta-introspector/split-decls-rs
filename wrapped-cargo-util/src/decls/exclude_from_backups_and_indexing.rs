@@ -4,4 +4,4 @@ macro_rules! exclude_from_backups_and_indexing {
     };
 }
 
-exclude_from_backups_and_indexing!()
+exclude_from_backups_and_indexing!();

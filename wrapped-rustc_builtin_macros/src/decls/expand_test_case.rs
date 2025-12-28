@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        TestCaseNonItem!();
+    };
+}
+
+macro_rules! expand_test_case {
+    () => {
+        deps!();
+        # [doc = " #[test_case] is used by custom test authors to mark tests"] # [doc = " When building for test, it needs to make the item public and gensym the name"] # [doc = " Otherwise, we'll omit the item. This behavior means that any item annotated"] # [doc = " with #[test_case] is never addressable."] # [doc = ""] # [doc = " We mark item with an inert attribute \"rustc_test_marker\" which the test generation"] # [doc = " logic will pick up on."] pub (crate) fn expand_test_case (ecx : & mut ExtCtxt < '_ > , attr_sp : Span , meta_item : & ast :: MetaItem , anno_item : Annotatable ,) -> Vec < Annotatable > { check_builtin_macro_attribute (ecx , meta_item , sym :: test_case) ; warn_on_duplicate_attribute (ecx , & anno_item , sym :: test_case) ; if ! ecx . ecfg . should_test { return vec ! [] ; } let sp = ecx . with_def_site_ctxt (attr_sp) ; let (mut item , is_stmt) = match anno_item { Annotatable :: Item (item) => (item , false) , Annotatable :: Stmt (stmt) if let ast :: StmtKind :: Item (_) = stmt . kind => { if let ast :: StmtKind :: Item (i) = stmt . kind { (i , true) } else { unreachable ! () } } _ => { ecx . dcx () . emit_err (errors :: TestCaseNonItem { span : anno_item . span () }) ; return vec ! [] ; } } ; match & mut item . kind { ast :: ItemKind :: Fn (box ast :: Fn { ident , .. }) | ast :: ItemKind :: Const (box ast :: ConstItem { ident , .. }) | ast :: ItemKind :: Static (box ast :: StaticItem { ident , .. }) => { ident . span = ident . span . with_ctxt (sp . ctxt ()) ; let test_path_symbol = Symbol :: intern (& item_path (& ecx . current_expansion . module . mod_path [1 ..] , ident ,)) ; item . vis = ast :: Visibility { span : item . vis . span , kind : ast :: VisibilityKind :: Public , tokens : None , } ; item . attrs . push (ecx . attr_name_value_str (sym :: rustc_test_marker , test_path_symbol , sp)) ; } _ => { } } let ret = if is_stmt { Annotatable :: Stmt (Box :: new (ecx . stmt_item (item . span , item))) } else { Annotatable :: Item (item) } ; vec ! [ret] }
+    };
+}
+
+expand_test_case!()

@@ -4,4 +4,4 @@ macro_rules! mask_bit_size {
     };
 }
 
-mask_bit_size!()
+mask_bit_size!();

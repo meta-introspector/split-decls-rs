@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IterMut!();
         Deque!();
         Iter!();
+        IterMut!();
         DequeView!();
         DequeInner!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

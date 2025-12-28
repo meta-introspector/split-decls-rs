@@ -4,4 +4,4 @@ macro_rules! is_simple_exit_code {
     };
 }
 
-is_simple_exit_code!()
+is_simple_exit_code!();

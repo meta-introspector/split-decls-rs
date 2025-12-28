@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        VerifyingKey!();
         Signature!();
         TestVector!();
-        VerifyingKey!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! new_wycheproof_test {
     };
 }
 
-new_wycheproof_test!()
+new_wycheproof_test!();

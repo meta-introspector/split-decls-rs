@@ -4,4 +4,4 @@ macro_rules! getauxval_hwcap {
     };
 }
 
-getauxval_hwcap!()
+getauxval_hwcap!();

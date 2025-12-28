@@ -4,4 +4,4 @@ macro_rules! contains_surrogates {
     };
 }
 
-contains_surrogates!()
+contains_surrogates!();

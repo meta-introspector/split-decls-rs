@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InputValueError!();
         Result!();
         InputType!();
-        InputValueError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CustomValidator {
     };
 }
 
-CustomValidator!()
+CustomValidator!();

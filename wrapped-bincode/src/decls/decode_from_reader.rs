@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        DecoderImpl!();
         DecodeError!();
+        Reader!();
         Decode!();
         Config!();
-        Reader!();
-        DecoderImpl!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! decode_from_reader {
     };
 }
 
-decode_from_reader!()
+decode_from_reader!();

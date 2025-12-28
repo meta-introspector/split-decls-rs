@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Input!();
-        Result!();
         Error!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! lowercase_word {
     };
 }
 
-lowercase_word!()
+lowercase_word!();

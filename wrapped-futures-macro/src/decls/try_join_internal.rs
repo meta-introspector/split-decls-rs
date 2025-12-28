@@ -4,4 +4,4 @@ macro_rules! try_join_internal {
     };
 }
 
-try_join_internal!()
+try_join_internal!();

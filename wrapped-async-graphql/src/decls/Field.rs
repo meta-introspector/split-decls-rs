@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         TypeRef!();
         BoxResolverFn!();
+        Directive!();
         InputValue!();
         Deprecation!();
-        Directive!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Field {
     };
 }
 
-Field!()
+Field!();

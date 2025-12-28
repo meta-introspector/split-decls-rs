@@ -30,4 +30,4 @@ fn main() {
     };
 }
 
-test_format_args_expand_eager!()
+test_format_args_expand_eager!();

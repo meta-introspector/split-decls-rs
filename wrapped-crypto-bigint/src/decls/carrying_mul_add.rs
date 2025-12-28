@@ -12,4 +12,4 @@ macro_rules! carrying_mul_add {
     };
 }
 
-carrying_mul_add!()
+carrying_mul_add!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ContainingDirectory!();
-        Handle!();
         Closed!();
         AutoRemove!();
+        Handle!();
+        ContainingDirectory!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! mark_at {
     };
 }
 
-mark_at!()
+mark_at!();

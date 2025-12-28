@@ -4,4 +4,4 @@ macro_rules! PacketlineReader {
     };
 }
 
-PacketlineReader!()
+PacketlineReader!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Pending!();
         Ready!();
         Sink!();
-        Pending!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_960 {
     };
 }
 
-impl_960!()
+impl_960!();

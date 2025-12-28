@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Visitor!();
+        VisitorContext!();
         Field!();
         DirectivesUnique!();
-        VisitorContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_184 {
     };
 }
 
-impl_184!()
+impl_184!();

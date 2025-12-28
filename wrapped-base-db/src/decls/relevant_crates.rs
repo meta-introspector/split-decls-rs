@@ -12,4 +12,4 @@ macro_rules! relevant_crates {
     };
 }
 
-relevant_crates!()
+relevant_crates!();

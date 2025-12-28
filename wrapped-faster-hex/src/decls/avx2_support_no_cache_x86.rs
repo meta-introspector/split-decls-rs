@@ -4,4 +4,4 @@ macro_rules! avx2_support_no_cache_x86 {
     };
 }
 
-avx2_support_no_cache_x86!()
+avx2_support_no_cache_x86!();

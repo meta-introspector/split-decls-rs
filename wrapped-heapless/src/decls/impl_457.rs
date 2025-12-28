@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Producer!();
-        Queue!();
-        Consumer!();
         QueueView!();
+        Consumer!();
+        Queue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_457 {
     };
 }
 
-impl_457!()
+impl_457!();

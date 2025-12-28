@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        BorrowckInferCtxt!();
+        OutlivesConstraintSet!();
+        UniversalRegionRelations!();
+        LoweredConstraints!();
+        SccAnnotations!();
+        ConstraintSccs!();
+        MirTypeckRegionConstraints!();
+        RegionTracker!();
+    };
+}
+
+macro_rules! compute_sccs_applying_placeholder_outlives_constraints {
+    () => {
+        deps!();
+        # [doc = " This method handles placeholders by rewriting the constraint"] # [doc = " graph. For each strongly connected component in the constraint"] # [doc = " graph such that there is a series of constraints"] # [doc = "    A: B: C: ... : X  where"] # [doc = " A contains a placeholder whose universe cannot be named by X,"] # [doc = " add a constraint that A: 'static. This is a safe upper bound"] # [doc = " in the face of borrow checker/trait solver limitations that will"] # [doc = " eventually go away."] # [doc = ""] # [doc = " For a more precise definition, see the documentation for"] # [doc = " [`RegionTracker`] and its methods!"] # [doc = ""] # [doc = " This edge case used to be handled during constraint propagation."] # [doc = " It was rewritten as part of the Polonius project with the goal of moving"] # [doc = " higher-kindedness concerns out of the path of the borrow checker,"] # [doc = " for two reasons:"] # [doc = ""] # [doc = " 1. Implementing Polonius is difficult enough without also"] # [doc = "     handling them."] # [doc = " 2. The long-term goal is to handle higher-kinded concerns"] # [doc = "     in the trait solver, where they belong. This avoids"] # [doc = "     logic duplication and allows future trait solvers"] # [doc = "     to compute better bounds than for example our"] # [doc = "     \"must outlive 'static\" here."] # [doc = ""] # [doc = " This code is a stop-gap measure in preparation for the future trait solver."] # [doc = ""] # [doc = " Every constraint added by this method is an internal `IllegalUniverse` constraint."] pub (crate) fn compute_sccs_applying_placeholder_outlives_constraints < 'tcx > (constraints : MirTypeckRegionConstraints < 'tcx > , universal_region_relations : & Frozen < UniversalRegionRelations < 'tcx > > , infcx : & BorrowckInferCtxt < 'tcx > ,) -> LoweredConstraints < 'tcx > { let universal_regions = & universal_region_relations . universal_regions ; let (definitions , has_placeholders) = region_definitions (infcx , universal_regions) ; let MirTypeckRegionConstraints { placeholder_indices , placeholder_index_to_region : _ , liveness_constraints , mut outlives_constraints , universe_causes , type_tests , } = constraints ; let fr_static = universal_regions . fr_static ; let compute_sccs = | constraints : & OutlivesConstraintSet < 'tcx > , annotations : & mut SccAnnotations < '_ , 'tcx , RegionTracker > | { ConstraintSccs :: new_with_annotation (& constraints . graph (definitions . len ()) . region_graph (constraints , fr_static) , annotations ,) } ; let mut scc_annotations = SccAnnotations :: init (& definitions) ; let constraint_sccs = compute_sccs (& outlives_constraints , & mut scc_annotations) ; if ! has_placeholders { debug ! ("No placeholder regions found; skipping rewriting logic!") ; return LoweredConstraints { type_tests , constraint_sccs , scc_annotations : scc_annotations . scc_to_annotation , definitions , outlives_constraints : Frozen :: freeze (outlives_constraints) , liveness_constraints , universe_causes , placeholder_indices , } ; } debug ! ("Placeholders present; activating placeholder handling logic!") ; let added_constraints = rewrite_placeholder_outlives (& constraint_sccs , & scc_annotations , fr_static , & mut outlives_constraints ,) ; let (constraint_sccs , scc_annotations) = if added_constraints { let mut annotations = SccAnnotations :: init (& definitions) ; (compute_sccs (& outlives_constraints , & mut annotations) , annotations . scc_to_annotation) } else { debug ! ("No constraints rewritten!") ; (constraint_sccs , scc_annotations . scc_to_annotation) } ; LoweredConstraints { constraint_sccs , definitions , scc_annotations , outlives_constraints : Frozen :: freeze (outlives_constraints) , type_tests , liveness_constraints , universe_causes , placeholder_indices , } }
+    };
+}
+
+compute_sccs_applying_placeholder_outlives_constraints!()

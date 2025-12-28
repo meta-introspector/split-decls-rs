@@ -4,4 +4,4 @@ macro_rules! InFileWrapper {
     };
 }
 
-InFileWrapper!()
+InFileWrapper!();

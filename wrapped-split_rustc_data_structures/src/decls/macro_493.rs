@@ -1,0 +1,7 @@
+macro_rules! macro_493 {
+    () => {
+        impl_stable_traits_for_trivial_type ! (Hash64) ;
+    };
+}
+
+macro_493!()

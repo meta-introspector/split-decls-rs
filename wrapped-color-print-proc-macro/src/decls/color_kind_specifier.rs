@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ColorKind!();
-        Result!();
         Input!();
+        Result!();
+        ColorKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! color_kind_specifier {
     };
 }
 
-color_kind_specifier!()
+color_kind_specifier!();

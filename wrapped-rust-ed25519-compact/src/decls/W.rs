@@ -4,4 +4,4 @@ macro_rules! W {
     };
 }
 
-W!()
+W!();

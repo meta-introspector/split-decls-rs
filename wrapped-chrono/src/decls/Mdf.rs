@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         Month!();
+        NaiveDate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Mdf {
     };
 }
 
-Mdf!()
+Mdf!();

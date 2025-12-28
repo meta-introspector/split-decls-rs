@@ -4,4 +4,4 @@ macro_rules! crate_authors {
     };
 }
 
-crate_authors!()
+crate_authors!();

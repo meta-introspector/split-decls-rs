@@ -11,4 +11,4 @@ macro_rules! test_reset {
     };
 }
 
-test_reset!()
+test_reset!();

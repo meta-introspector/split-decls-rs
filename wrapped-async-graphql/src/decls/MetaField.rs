@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         MetaInputValue!();
         CacheControl!();
-        MetaDirectiveInvocation!();
-        ComputeComplexityFn!();
         MetaVisibleFn!();
         Field!();
         Deprecation!();
+        ComputeComplexityFn!();
+        MetaDirectiveInvocation!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! MetaField {
     };
 }
 
-MetaField!()
+MetaField!();

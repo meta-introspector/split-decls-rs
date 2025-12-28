@@ -4,4 +4,4 @@ macro_rules! complete {
     };
 }
 
-complete!()
+complete!();

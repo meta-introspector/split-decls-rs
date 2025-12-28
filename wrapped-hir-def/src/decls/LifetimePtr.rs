@@ -4,4 +4,4 @@ macro_rules! LifetimePtr {
     };
 }
 
-LifetimePtr!()
+LifetimePtr!();

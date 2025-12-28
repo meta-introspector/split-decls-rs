@@ -11,4 +11,4 @@ macro_rules! QueuedSet {
     };
 }
 
-QueuedSet!()
+QueuedSet!();

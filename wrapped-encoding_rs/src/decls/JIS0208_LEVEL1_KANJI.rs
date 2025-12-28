@@ -4,4 +4,4 @@ macro_rules! JIS0208_LEVEL1_KANJI {
     };
 }
 
-JIS0208_LEVEL1_KANJI!()
+JIS0208_LEVEL1_KANJI!();

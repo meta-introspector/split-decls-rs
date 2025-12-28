@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Tag!();
-        Error!();
         Reference!();
-        Note!();
-        Kind!();
         Object!();
-        Tree!();
-        Commit!();
-        Blob!();
         Id!();
+        Error!();
+        Blob!();
+        Note!();
+        Commit!();
+        Tag!();
         Buffer!();
+        Tree!();
+        Kind!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_281 {
     };
 }
 
-impl_281!()
+impl_281!();

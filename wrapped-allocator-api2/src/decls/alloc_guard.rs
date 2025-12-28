@@ -11,4 +11,4 @@ macro_rules! alloc_guard {
     };
 }
 
-alloc_guard!()
+alloc_guard!();

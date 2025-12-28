@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        RawPid!();
+        Pid!();
+    };
+}
+
+macro_rules! impl_1653 {
+    () => {
+        deps!();
+        impl Pid { # [doc = " A `Pid` corresponding to the init process (pid 1)."] pub const INIT : Self = Self (match NonZeroI32 :: new (1) { Some (n) => n , None => panic ! ("unreachable") , }) ; # [doc = " Converts a `RawPid` into a `Pid`."] # [doc = ""] # [doc = " Returns `Some` for positive values, and `None` for zero values."] # [doc = ""] # [doc = " This is safe because a `Pid` is a number without any guarantees for the"] # [doc = " kernel. Non-child `Pid`s are always racy for any syscalls, but can only"] # [doc = " cause logic errors. If you want race-free access to or control of"] # [doc = " non-child processes, please consider other mechanisms like [pidfd] on"] # [doc = " Linux."] # [doc = ""] # [doc = " Passing a negative number doesn't invoke undefined behavior, but it"] # [doc = " may cause unexpected behavior."] # [doc = ""] # [doc = " [pidfd]: https://man7.org/linux/man-pages/man2/pidfd_open.2.html"] # [inline] pub const fn from_raw (raw : RawPid) -> Option < Self > { debug_assert ! (raw >= 0) ; match NonZeroI32 :: new (raw) { Some (non_zero) => Some (Self (non_zero)) , None => None , } } # [doc = " Converts a known positive `RawPid` into a `Pid`."] # [doc = ""] # [doc = " Passing a negative number doesn't invoke undefined behavior, but it"] # [doc = " may cause unexpected behavior."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must guarantee `raw` is non-zero."] # [inline] pub const unsafe fn from_raw_unchecked (raw : RawPid) -> Self { debug_assert ! (raw > 0) ; Self (NonZeroI32 :: new_unchecked (raw)) } # [doc = " Creates a `Pid` holding the ID of the given child process."] # [cfg (feature = "std")] # [inline] pub fn from_child (child : & std :: process :: Child) -> Self { let id = child . id () ; unsafe { Self :: from_raw_unchecked (id as i32) } } # [doc = " Converts a `Pid` into a `NonZeroI32`."] # [inline] pub const fn as_raw_nonzero (self) -> NonZeroI32 { self . 0 } # [doc = " Converts a `Pid` into a `RawPid`."] # [doc = ""] # [doc = " This is the same as `self.as_raw_nonzero().get()`."] # [inline] pub const fn as_raw_pid (self) -> RawPid { self . 0 . get () } # [doc = " Converts an `Option<Pid>` into a `RawPid`."] # [inline] pub const fn as_raw (pid : Option < Self >) -> RawPid { match pid { Some (pid) => pid . 0 . get () , None => 0 , } } # [doc = " Test whether this pid represents the init process ([`Pid::INIT`])."] # [inline] pub const fn is_init (self) -> bool { self . 0 . get () == Self :: INIT . 0 . get () } }
+    };
+}
+
+impl_1653!()

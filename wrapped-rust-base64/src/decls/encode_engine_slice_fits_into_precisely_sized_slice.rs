@@ -11,4 +11,4 @@ macro_rules! encode_engine_slice_fits_into_precisely_sized_slice {
     };
 }
 
-encode_engine_slice_fits_into_precisely_sized_slice!()
+encode_engine_slice_fits_into_precisely_sized_slice!();

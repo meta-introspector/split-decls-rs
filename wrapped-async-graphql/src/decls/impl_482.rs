@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
-        ExtensionFactory!();
-        ID!();
-        Object!();
-        Union!();
-        IntrospectionMode!();
-        Upload!();
-        Interface!();
-        SchemaInner!();
-        Any!();
-        SchemaBuilder!();
-        Scalar!();
-        Result!();
-        Query!();
-        SchemaError!();
-        ResolverContext!();
         FieldFuture!();
+        Result!();
+        Scalar!();
+        Interface!();
+        ValidationMode!();
+        SchemaInner!();
+        Object!();
+        ExtensionFactory!();
+        IntrospectionMode!();
+        ResolverContext!();
+        Union!();
+        ID!();
         SchemaEnv!();
+        SchemaEnvInner!();
         TypeRef!();
         Schema!();
-        ValidationMode!();
-        SchemaEnvInner!();
+        Query!();
         Registry!();
+        Any!();
+        SchemaError!();
+        SchemaBuilder!();
+        Upload!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_482 {
     };
 }
 
-impl_482!()
+impl_482!();

@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        LocalRef!();
+        PlaceRef!();
+        FunctionCx!();
+        BuilderMethods!();
+    };
+}
+
+macro_rules! impl_513 {
+    () => {
+        deps!();
+        impl < 'a , 'tcx , Bx : BuilderMethods < 'a , 'tcx > > FunctionCx < 'a , 'tcx , Bx > { # [instrument (level = "trace" , skip (self , bx))] pub fn codegen_place (& mut self , bx : & mut Bx , place_ref : mir :: PlaceRef < 'tcx > ,) -> PlaceRef < 'tcx , Bx :: Value > { let cx = self . cx ; let tcx = self . cx . tcx () ; let mut base = 0 ; let mut cg_base = match self . locals [place_ref . local] { LocalRef :: Place (place) => place , LocalRef :: UnsizedPlace (place) => bx . load_operand (place) . deref (cx) , LocalRef :: Operand (..) => { if place_ref . is_indirect_first_projection () { base = 1 ; let cg_base = self . codegen_consume (bx , mir :: PlaceRef { projection : & place_ref . projection [.. 0] , .. place_ref } ,) ; cg_base . deref (bx . cx ()) } else { bug ! ("using operand local {:?} as place" , place_ref) ; } } LocalRef :: PendingOperand => { bug ! ("using still-pending operand local {:?} as place" , place_ref) ; } } ; for elem in place_ref . projection [base ..] . iter () { cg_base = match * elem { mir :: ProjectionElem :: Deref => bx . load_operand (cg_base) . deref (bx . cx ()) , mir :: ProjectionElem :: Field (ref field , _) => { assert ! (! cg_base . layout . ty . is_any_ptr () , "Bad PlaceRef: destructing pointers should use cast/PtrMetadata, \
+                         but tried to access field {field:?} of pointer {cg_base:?}" ,) ; cg_base . project_field (bx , field . index ()) } mir :: ProjectionElem :: OpaqueCast (ty) => { bug ! ("encountered OpaqueCast({ty}) in codegen") } mir :: ProjectionElem :: Subtype (ty) => cg_base . project_type (bx , self . monomorphize (ty)) , mir :: ProjectionElem :: UnwrapUnsafeBinder (ty) => { cg_base . project_type (bx , self . monomorphize (ty)) } mir :: ProjectionElem :: Index (index) => { let index = & mir :: Operand :: Copy (mir :: Place :: from (index)) ; let index = self . codegen_operand (bx , index) ; let llindex = index . immediate () ; cg_base . project_index (bx , llindex) } mir :: ProjectionElem :: ConstantIndex { offset , from_end : false , min_length : _ } => { let lloffset = bx . cx () . const_usize (offset) ; cg_base . project_index (bx , lloffset) } mir :: ProjectionElem :: ConstantIndex { offset , from_end : true , min_length : _ } => { let lloffset = bx . cx () . const_usize (offset) ; let lllen = cg_base . len (bx . cx ()) ; let llindex = bx . sub (lllen , lloffset) ; cg_base . project_index (bx , llindex) } mir :: ProjectionElem :: Subslice { from , to , from_end } => { let mut subslice = cg_base . project_index (bx , bx . cx () . const_usize (from)) ; let projected_ty = PlaceTy :: from_ty (cg_base . layout . ty) . projection_ty (tcx , * elem) . ty ; subslice . layout = bx . cx () . layout_of (self . monomorphize (projected_ty)) ; if subslice . layout . is_unsized () { assert ! (from_end , "slice subslices should be `from_end`") ; subslice . val . llextra = Some (bx . sub (cg_base . val . llextra . unwrap () , bx . cx () . const_usize (from + to)) ,) ; } subslice } mir :: ProjectionElem :: Downcast (_ , v) => cg_base . project_downcast (bx , v) , } ; } debug ! ("codegen_place(place={:?}) => {:?}" , place_ref , cg_base) ; cg_base } pub fn monomorphized_place_ty (& self , place_ref : mir :: PlaceRef < 'tcx >) -> Ty < 'tcx > { let tcx = self . cx . tcx () ; let place_ty = place_ref . ty (self . mir , tcx) ; self . monomorphize (place_ty . ty) } }
+    };
+}
+
+impl_513!()

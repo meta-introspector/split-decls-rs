@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CrateData!();
         Crate!();
+        CrateData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BuiltCrateData {
     };
 }
 
-BuiltCrateData!()
+BuiltCrateData!();

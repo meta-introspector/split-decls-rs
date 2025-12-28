@@ -11,4 +11,4 @@ macro_rules! Iso2022JpEncoder {
     };
 }
 
-Iso2022JpEncoder!()
+Iso2022JpEncoder!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LinkedHashSet!();
         Iter!();
+        LinkedHashSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Difference {
     };
 }
 
-Difference!()
+Difference!();

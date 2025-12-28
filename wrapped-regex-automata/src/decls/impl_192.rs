@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        StateSet!();
+        StateID!();
+    };
+}
+
+macro_rules! impl_192 {
+    () => {
+        deps!();
+        impl StateSet { fn empty () -> StateSet { StateSet { ids : Rc :: new (RefCell :: new (vec ! [])) } } fn add (& mut self , id : StateID) { self . ids . borrow_mut () . push (id) ; } fn min (& self) -> StateID { self . ids . borrow () [0] } fn canonicalize (& mut self) { self . ids . borrow_mut () . sort () ; self . ids . borrow_mut () . dedup () ; } fn clear (& mut self) { self . ids . borrow_mut () . clear () ; } fn len (& self) -> usize { self . ids . borrow () . len () } fn is_empty (& self) -> bool { self . len () == 0 } fn deep_clone (& self) -> StateSet { let ids = self . ids . borrow () . iter () . cloned () . collect () ; StateSet { ids : Rc :: new (RefCell :: new (ids)) } } fn iter < F : FnMut (StateID) > (& self , mut f : F) { for & id in self . ids . borrow () . iter () { f (id) ; } } fn intersection (& self , other : & StateSet , dest : & mut StateSet) { dest . clear () ; if self . is_empty () || other . is_empty () { return ; } let (seta , setb) = (self . ids . borrow () , other . ids . borrow ()) ; let (mut ita , mut itb) = (seta . iter () . cloned () , setb . iter () . cloned ()) ; let (mut a , mut b) = (ita . next () . unwrap () , itb . next () . unwrap ()) ; loop { if a == b { dest . add (a) ; a = match ita . next () { None => break , Some (a) => a , } ; b = match itb . next () { None => break , Some (b) => b , } ; } else if a < b { a = match ita . next () { None => break , Some (a) => a , } ; } else { b = match itb . next () { None => break , Some (b) => b , } ; } } } fn subtract (& self , other : & StateSet , dest : & mut StateSet) { dest . clear () ; if self . is_empty () || other . is_empty () { self . iter (| s | dest . add (s)) ; return ; } let (seta , setb) = (self . ids . borrow () , other . ids . borrow ()) ; let (mut ita , mut itb) = (seta . iter () . cloned () , setb . iter () . cloned ()) ; let (mut a , mut b) = (ita . next () . unwrap () , itb . next () . unwrap ()) ; loop { if a == b { a = match ita . next () { None => break , Some (a) => a , } ; b = match itb . next () { None => { dest . add (a) ; break ; } Some (b) => b , } ; } else if a < b { dest . add (a) ; a = match ita . next () { None => break , Some (a) => a , } ; } else { b = match itb . next () { None => { dest . add (a) ; break ; } Some (b) => b , } ; } } for a in ita { dest . add (a) ; } } }
+    };
+}
+
+impl_192!()

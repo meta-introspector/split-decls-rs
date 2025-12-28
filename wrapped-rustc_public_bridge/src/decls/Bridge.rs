@@ -1,6 +1,9 @@
 macro_rules! deps {
     () => {
+        Prov!();
+        Error!();
         IndexedVal!();
+        Allocation!();
     };
 }
 

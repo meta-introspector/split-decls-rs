@@ -4,4 +4,4 @@ macro_rules! sys {
     };
 }
 
-sys!()
+sys!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         FromEntriesIter!();
-        Entry!();
         Item!();
         Error!();
+        Entry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

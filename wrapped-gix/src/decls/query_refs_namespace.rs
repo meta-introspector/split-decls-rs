@@ -12,4 +12,4 @@ macro_rules! query_refs_namespace {
     };
 }
 
-query_refs_namespace!()
+query_refs_namespace!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Anchored!();
-        PatternID!();
         Prefilter!();
         StateID!();
         MatchError!();
         MatchKind!();
         Automaton!();
+        PatternID!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

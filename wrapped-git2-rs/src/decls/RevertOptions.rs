@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MergeOptions!();
         CheckoutBuilder!();
+        MergeOptions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RevertOptions {
     };
 }
 
-RevertOptions!()
+RevertOptions!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ErrorImpl!();
-        ContextError!();
-        Error!();
         Own!();
+        Error!();
+        ContextError!();
+        ErrorImpl!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! context_chain_drop_rest {
     };
 }
 
-context_chain_drop_rest!()
+context_chain_drop_rest!();

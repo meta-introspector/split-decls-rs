@@ -12,4 +12,4 @@ macro_rules! complete_quads_len {
     };
 }
 
-complete_quads_len!()
+complete_quads_len!();

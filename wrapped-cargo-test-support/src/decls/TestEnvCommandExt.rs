@@ -4,4 +4,4 @@ macro_rules! TestEnvCommandExt {
     };
 }
 
-TestEnvCommandExt!()
+TestEnvCommandExt!();

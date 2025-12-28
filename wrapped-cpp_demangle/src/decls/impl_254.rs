@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         SubstitutionTable!();
-        Parse!();
-        Result!();
-        IndexStr!();
-        ParseContext!();
         UnresolvedQualifierLevel!();
+        Result!();
         SimpleId!();
+        ParseContext!();
+        Parse!();
+        IndexStr!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

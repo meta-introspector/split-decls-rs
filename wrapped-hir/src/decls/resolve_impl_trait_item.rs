@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Type!();
+        DocLinkDef!();
         Function!();
         AssocItem!();
         Const!();
-        DocLinkDef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! resolve_impl_trait_item {
     };
 }
 
-resolve_impl_trait_item!()
+resolve_impl_trait_item!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         GitExecutor!();
-        Result!();
         RollupLock!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! create_snapshot {
     };
 }
 
-create_snapshot!()
+create_snapshot!();

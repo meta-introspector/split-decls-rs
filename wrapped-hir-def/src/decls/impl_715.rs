@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CallableDefId!();
         ModuleDefId!();
         AdtId!();
+        CallableDefId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_715 {
     };
 }
 
-impl_715!()
+impl_715!();

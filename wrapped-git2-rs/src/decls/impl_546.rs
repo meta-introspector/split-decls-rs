@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Patch!();
         Binding!();
+        Patch!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_546 {
     };
 }
 
-impl_546!()
+impl_546!();

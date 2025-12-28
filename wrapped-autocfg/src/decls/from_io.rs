@@ -12,4 +12,4 @@ macro_rules! from_io {
     };
 }
 
-from_io!()
+from_io!();

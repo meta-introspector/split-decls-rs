@@ -12,4 +12,4 @@ macro_rules! lookup_prefix {
     };
 }
 
-lookup_prefix!()
+lookup_prefix!();

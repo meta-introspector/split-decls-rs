@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Repository!();
         Info!();
+        Repository!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_861 {
     };
 }
 
-impl_861!()
+impl_861!();

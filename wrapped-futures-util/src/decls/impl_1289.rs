@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Mutex!();
-        OwnedMutexGuard!();
-        MutexGuard!();
-        OwnedMutexLockFuture!();
-        Waiter!();
         MutexLockFuture!();
+        Mutex!();
+        MutexGuard!();
+        Waiter!();
+        OwnedMutexGuard!();
+        OwnedMutexLockFuture!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_1289 {
     };
 }
 
-impl_1289!()
+impl_1289!();

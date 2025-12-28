@@ -4,4 +4,4 @@ macro_rules! INIT_CTOR {
     };
 }
 
-INIT_CTOR!()
+INIT_CTOR!();

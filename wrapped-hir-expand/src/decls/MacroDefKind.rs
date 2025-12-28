@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ProcMacro!();
+        AstId!();
         CustomProcMacroExpander!();
         ProcMacroKind!();
-        AstId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MacroDefKind {
     };
 }
 
-MacroDefKind!()
+MacroDefKind!();

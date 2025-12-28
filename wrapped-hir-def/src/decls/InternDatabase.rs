@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        ProcMacroLoc!();
-        StaticLoc!();
-        BlockLoc!();
         ExternBlockLoc!();
+        TypeAliasLoc!();
+        ProcMacroLoc!();
+        EnumVariantLoc!();
+        EnumLoc!();
+        ExternCrateLoc!();
         UnionLoc!();
+        TraitLoc!();
+        UseLoc!();
+        ConstLoc!();
         FunctionLoc!();
         StructLoc!();
-        UseLoc!();
-        ExternCrateLoc!();
-        ImplLoc!();
-        EnumLoc!();
-        TraitLoc!();
         Macro2Loc!();
-        EnumVariantLoc!();
         MacroRulesLoc!();
-        TypeAliasLoc!();
-        ConstLoc!();
+        BlockLoc!();
+        ImplLoc!();
+        StaticLoc!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! InternDatabase {
     };
 }
 
-InternDatabase!()
+InternDatabase!();

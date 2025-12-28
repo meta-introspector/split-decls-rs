@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Deserialize!();
-        FileMetadata!();
         SubmoduleStat!();
         Serialize!();
+        FileMetadata!();
+        Deserialize!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! RollupLock {
     };
 }
 
-RollupLock!()
+RollupLock!();

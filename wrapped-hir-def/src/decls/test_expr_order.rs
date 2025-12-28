@@ -45,4 +45,4 @@ fn bar() {
     };
 }
 
-test_expr_order!()
+test_expr_order!();

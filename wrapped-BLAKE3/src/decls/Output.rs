@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CVWords!();
         Platform!();
+        CVWords!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Output {
     };
 }
 
-Output!()
+Output!();

@@ -4,4 +4,4 @@ macro_rules! NO_REVERSE {
     };
 }
 
-NO_REVERSE!()
+NO_REVERSE!();

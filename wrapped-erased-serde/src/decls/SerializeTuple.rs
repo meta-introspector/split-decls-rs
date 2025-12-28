@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorImpl!();
         Result!();
+        ErrorImpl!();
         Serialize!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! SerializeTuple {
     };
 }
 
-SerializeTuple!()
+SerializeTuple!();

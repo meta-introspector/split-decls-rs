@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         Serialize!();
         ErrorImpl!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SerializeStructVariant {
     };
 }
 
-SerializeStructVariant!()
+SerializeStructVariant!();

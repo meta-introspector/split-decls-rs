@@ -4,4 +4,4 @@ macro_rules! in_order {
     };
 }
 
-in_order!()
+in_order!();

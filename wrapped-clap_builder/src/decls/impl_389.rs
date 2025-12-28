@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Usage!();
-        ContextValue!();
-        Error!();
-        ContextKind!();
-        ErrorFormatter!();
         StyledStr!();
+        ContextValue!();
+        ErrorFormatter!();
+        ContextKind!();
         RichFormatter!();
+        Usage!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_389 {
     };
 }
 
-impl_389!()
+impl_389!();

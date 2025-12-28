@@ -4,4 +4,4 @@ macro_rules! GIT_PROGRAM {
     };
 }
 
-GIT_PROGRAM!()
+GIT_PROGRAM!();

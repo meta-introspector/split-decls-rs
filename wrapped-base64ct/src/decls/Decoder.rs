@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LineReader!();
-        Encoding!();
         Line!();
         BlockBuffer!();
+        LineReader!();
+        Encoding!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Decoder {
     };
 }
 
-Decoder!()
+Decoder!();

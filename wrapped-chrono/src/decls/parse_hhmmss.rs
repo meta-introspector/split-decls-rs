@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Cursor!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_hhmmss {
     };
 }
 
-parse_hhmmss!()
+parse_hhmmss!();

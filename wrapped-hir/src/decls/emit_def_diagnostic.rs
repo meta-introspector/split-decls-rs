@@ -4,4 +4,4 @@ macro_rules! emit_def_diagnostic {
     };
 }
 
-emit_def_diagnostic!()
+emit_def_diagnostic!();

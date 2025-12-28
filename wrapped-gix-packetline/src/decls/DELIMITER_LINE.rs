@@ -4,4 +4,4 @@ macro_rules! DELIMITER_LINE {
     };
 }
 
-DELIMITER_LINE!()
+DELIMITER_LINE!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MetaTypeName!();
         Visitor!();
-        Scope!();
         VariableInAllowedPosition!();
         VisitorContext!();
+        Scope!();
+        MetaTypeName!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

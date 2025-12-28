@@ -4,4 +4,4 @@ macro_rules! Inspect {
     };
 }
 
-Inspect!()
+Inspect!();

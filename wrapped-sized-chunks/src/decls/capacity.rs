@@ -1,0 +1,7 @@
+macro_rules! capacity {
+    () => {
+        const fn capacity (host_size : usize , header_size : usize , element_size : usize , element_align : usize , container_align : usize ,) -> usize { if element_size == 0 { usize :: MAX } else if element_align <= container_align && host_size > header_size { (host_size - header_size) / element_size } else { 0 } }
+    };
+}
+
+capacity!()

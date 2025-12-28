@@ -4,4 +4,4 @@ macro_rules! jis0208_level1_kanji_euc_jp_encode {
     };
 }
 
-jis0208_level1_kanji_euc_jp_encode!()
+jis0208_level1_kanji_euc_jp_encode!();

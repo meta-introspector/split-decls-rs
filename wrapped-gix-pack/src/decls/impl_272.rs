@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        SafetyCheck!();
-        Outcome!();
-        Mode!();
-        Kind!();
-        File!();
-        ProgressId!();
-        PackContext!();
         Error!();
         Entry!();
+        SafetyCheck!();
+        Outcome!();
+        DecodeEntry!();
+        ProgressId!();
+        File!();
         Tree!();
         Options!();
-        DecodeEntry!();
+        Kind!();
+        PackContext!();
+        Mode!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_272 {
     };
 }
 
-impl_272!()
+impl_272!();

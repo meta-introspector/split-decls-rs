@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Decltype!();
-        TemplateParam!();
-        DataMemberPrefix!();
         UnqualifiedName!();
         TemplateArgs!();
+        TemplateParam!();
+        DataMemberPrefix!();
+        Decltype!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Prefix {
     };
 }
 
-Prefix!()
+Prefix!();

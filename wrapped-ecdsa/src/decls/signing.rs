@@ -4,4 +4,4 @@ macro_rules! signing {
     };
 }
 
-signing!()
+signing!();

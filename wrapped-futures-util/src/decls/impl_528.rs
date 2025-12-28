@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WrappedWaker!();
         Send!();
+        WrappedWaker!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_528 {
     };
 }
 
-impl_528!()
+impl_528!();

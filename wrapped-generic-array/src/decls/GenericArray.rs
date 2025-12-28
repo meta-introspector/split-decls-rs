@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Shorten!();
-        FunctionalSequence!();
         Lengthen!();
-        ArrayLength!();
-        GenericSequence!();
+        FunctionalSequence!();
+        Shorten!();
         Split!();
+        ArrayLength!();
         Concat!();
+        GenericSequence!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! GenericArray {
     };
 }
 
-GenericArray!()
+GenericArray!();

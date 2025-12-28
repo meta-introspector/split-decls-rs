@@ -4,4 +4,4 @@ macro_rules! fiat_poly1305_i1 {
     };
 }
 
-fiat_poly1305_i1!()
+fiat_poly1305_i1!();

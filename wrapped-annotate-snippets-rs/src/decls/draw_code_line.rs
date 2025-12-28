@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        StyledBuffer!();
-        SubstitutionHighlight!();
         Renderer!();
-        ElementStyle!();
-        LineInfo!();
+        SubstitutionHighlight!();
         DisplaySuggestion!();
+        LineInfo!();
+        StyledBuffer!();
+        ElementStyle!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! draw_code_line {
     };
 }
 
-draw_code_line!()
+draw_code_line!();

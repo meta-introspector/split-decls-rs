@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Duration!();
-        Criterion!();
-        BenchmarkConfig!();
         ReportContext!();
-        ActualSamplingMode!();
         BenchmarkId!();
-        Measurement!();
+        ActualSamplingMode!();
         OutgoingMessage!();
+        Duration!();
+        Measurement!();
+        BenchmarkConfig!();
+        Criterion!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! Routine {
     };
 }
 
-Routine!()
+Routine!();

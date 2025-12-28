@@ -4,4 +4,4 @@ macro_rules! KSX1001_LOWERCASE {
     };
 }
 
-KSX1001_LOWERCASE!()
+KSX1001_LOWERCASE!();

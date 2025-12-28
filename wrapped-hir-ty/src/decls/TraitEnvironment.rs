@@ -4,4 +4,4 @@ macro_rules! TraitEnvironment {
     };
 }
 
-TraitEnvironment!()
+TraitEnvironment!();

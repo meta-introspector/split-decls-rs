@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ExpressionStoreAdapter!();
         HirDisplayWithExpressionStore!();
         HirDisplay!();
-        ExpressionStoreAdapter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! hir_display_with_store {
     };
 }
 
-hir_display_with_store!()
+hir_display_with_store!();

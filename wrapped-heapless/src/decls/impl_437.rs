@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Max!();
+        LenType!();
+        Min!();
         SortedLinkedList!();
         SortedLinkedListInner!();
         Kind!();
-        Max!();
-        Min!();
-        LenType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_437 {
     };
 }
 
-impl_437!()
+impl_437!();

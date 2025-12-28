@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reduce!();
         Read!();
+        Reduce!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! in_parallel_with_finalize {
     };
 }
 
-in_parallel_with_finalize!()
+in_parallel_with_finalize!();

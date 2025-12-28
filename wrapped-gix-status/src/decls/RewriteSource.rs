@@ -13,4 +13,4 @@ macro_rules! RewriteSource {
     };
 }
 
-RewriteSource!()
+RewriteSource!();

@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        PCWSTR!();
+        REG_OPEN_CREATE_OPTIONS!();
+        HANDLE!();
+        REG_CREATE_KEY_DISPOSITION!();
+        WIN32_ERROR!();
+        SECURITY_ATTRIBUTES!();
+        HKEY!();
+        REG_SAM_FLAGS!();
+    };
+}
+
+macro_rules! macro_9 {
+    () => {
+        deps!();
+        windows_link :: link ! ("advapi32.dll" "system" fn RegCreateKeyTransactedW (hkey : HKEY , lpsubkey : PCWSTR , reserved : u32 , lpclass : PCWSTR , dwoptions : REG_OPEN_CREATE_OPTIONS , samdesired : REG_SAM_FLAGS , lpsecurityattributes : * const SECURITY_ATTRIBUTES , phkresult : * mut HKEY , lpdwdisposition : * mut REG_CREATE_KEY_DISPOSITION , htransaction : HANDLE , pextendedparemeter : * const core :: ffi :: c_void) -> WIN32_ERROR) ;
+    };
+}
+
+macro_9!()

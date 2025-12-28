@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BlockRelativeModuleId!();
         DefMap!();
+        BlockRelativeModuleId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BlockInfo {
     };
 }
 
-BlockInfo!()
+BlockInfo!();

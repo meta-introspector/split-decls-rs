@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        OdbObject!();
         ObjectType!();
         Oid!();
+        OdbObject!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_495 {
     };
 }
 
-impl_495!()
+impl_495!();

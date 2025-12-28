@@ -4,4 +4,4 @@ macro_rules! handler {
     };
 }
 
-handler!()
+handler!();

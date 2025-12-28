@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Object!();
-        Query!();
         EmptyMutation!();
+        Object!();
         EmptySubscription!();
+        Query!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MaybeUndefined {
     };
 }
 
-MaybeUndefined!()
+MaybeUndefined!();

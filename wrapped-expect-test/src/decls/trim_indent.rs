@@ -4,4 +4,4 @@ macro_rules! trim_indent {
     };
 }
 
-trim_indent!()
+trim_indent!();

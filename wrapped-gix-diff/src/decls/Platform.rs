@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CacheValue!();
         CacheKey!();
-        Options!();
         Pipeline!();
         Mode!();
+        CacheValue!();
+        Options!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Platform {
     };
 }
 
-Platform!()
+Platform!();

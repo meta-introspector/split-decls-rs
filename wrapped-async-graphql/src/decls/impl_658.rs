@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Data!();
         ServerMessage!();
-        Error!();
+        Result!();
         Context!();
-        Executor!();
         Protocols!();
-        ClientMessage!();
         WsMessage!();
+        ClientMessage!();
+        Executor!();
+        Error!();
+        Data!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_658 {
     };
 }
 
-impl_658!()
+impl_658!();

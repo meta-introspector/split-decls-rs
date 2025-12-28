@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Primitive!();
-        PublicFlags!();
-        Flag!();
-        Bits!();
         ParseError!();
+        PublicFlags!();
+        Bits!();
+        Flag!();
+        Primitive!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! __impl_internal_bitflags {
     };
 }
 
-__impl_internal_bitflags!()
+__impl_internal_bitflags!();

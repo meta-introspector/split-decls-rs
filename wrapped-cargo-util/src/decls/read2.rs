@@ -4,4 +4,4 @@ macro_rules! read2 {
     };
 }
 
-read2!()
+read2!();

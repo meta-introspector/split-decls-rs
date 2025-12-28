@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        IKeyValuePair_Vtbl!();
+        IKeyValuePair!();
+        IKeyValuePair_Impl!();
+    };
+}
+
+macro_rules! impl_31 {
+    () => {
+        deps!();
+        impl < K : windows_core :: RuntimeType + 'static , V : windows_core :: RuntimeType + 'static > IKeyValuePair_Vtbl < K , V > { pub const fn new < Identity : IKeyValuePair_Impl < K , V > , const OFFSET : isize > () -> Self { unsafe extern "system" fn Key < K : windows_core :: RuntimeType + 'static , V : windows_core :: RuntimeType + 'static , Identity : IKeyValuePair_Impl < K , V > , const OFFSET : isize , > (this : * mut core :: ffi :: c_void , result__ : * mut windows_core :: AbiType < K > ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IKeyValuePair_Impl :: Key (this) { Ok (ok__) => { result__ . write (core :: mem :: transmute_copy (& ok__)) ; core :: mem :: forget (ok__) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } unsafe extern "system" fn Value < K : windows_core :: RuntimeType + 'static , V : windows_core :: RuntimeType + 'static , Identity : IKeyValuePair_Impl < K , V > , const OFFSET : isize , > (this : * mut core :: ffi :: c_void , result__ : * mut windows_core :: AbiType < V > ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IKeyValuePair_Impl :: Value (this) { Ok (ok__) => { result__ . write (core :: mem :: transmute_copy (& ok__)) ; core :: mem :: forget (ok__) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } Self { base__ : windows_core :: IInspectable_Vtbl :: new :: < Identity , IKeyValuePair < K , V > , OFFSET > () , Key : Key :: < K , V , Identity , OFFSET > , Value : Value :: < K , V , Identity , OFFSET > , K : core :: marker :: PhantomData :: < K > , V : core :: marker :: PhantomData :: < V > , } } pub fn matches (iid : & windows_core :: GUID) -> bool { iid == & < IKeyValuePair < K , V > as windows_core :: Interface > :: IID } }
+    };
+}
+
+impl_31!()

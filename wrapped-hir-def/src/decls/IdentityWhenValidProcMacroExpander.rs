@@ -4,4 +4,4 @@ macro_rules! IdentityWhenValidProcMacroExpander {
     };
 }
 
-IdentityWhenValidProcMacroExpander!()
+IdentityWhenValidProcMacroExpander!();

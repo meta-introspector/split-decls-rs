@@ -11,4 +11,4 @@ macro_rules! once_err {
     };
 }
 
-once_err!()
+once_err!();

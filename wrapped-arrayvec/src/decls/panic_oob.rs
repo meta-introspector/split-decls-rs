@@ -11,4 +11,4 @@ macro_rules! panic_oob {
     };
 }
 
-panic_oob!()
+panic_oob!();

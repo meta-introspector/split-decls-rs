@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Empty!();
         Task!();
+        Empty!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Dequeue {
     };
 }
 
-Dequeue!()
+Dequeue!();

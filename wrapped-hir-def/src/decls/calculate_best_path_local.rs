@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Choice!();
+        ModuleId!();
         FindPathCtx!();
         ItemInNs!();
-        ModuleId!();
+        Choice!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! calculate_best_path_local {
     };
 }
 
-calculate_best_path_local!()
+calculate_best_path_local!();

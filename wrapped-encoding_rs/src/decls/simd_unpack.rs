@@ -4,4 +4,4 @@ macro_rules! simd_unpack {
     };
 }
 
-simd_unpack!()
+simd_unpack!();

@@ -4,4 +4,4 @@ macro_rules! MAX_UNWIND_STACK_DEPTH {
     };
 }
 
-MAX_UNWIND_STACK_DEPTH!()
+MAX_UNWIND_STACK_DEPTH!();

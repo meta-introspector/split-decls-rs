@@ -4,4 +4,4 @@ macro_rules! HashWrite {
     };
 }
 
-HashWrite!()
+HashWrite!();

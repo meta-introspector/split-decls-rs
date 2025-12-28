@@ -11,4 +11,4 @@ macro_rules! utf16_from_utf8 {
     };
 }
 
-utf16_from_utf8!()
+utf16_from_utf8!();

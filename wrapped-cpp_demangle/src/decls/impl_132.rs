@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         CloneTypeIdentifier!();
-        Parse!();
-        Result!();
         ParseContext!();
         SubstitutionTable!();
+        Parse!();
+        Result!();
         IndexStr!();
         Error!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

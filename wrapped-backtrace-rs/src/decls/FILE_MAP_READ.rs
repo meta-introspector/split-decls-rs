@@ -11,4 +11,4 @@ macro_rules! FILE_MAP_READ {
     };
 }
 
-FILE_MAP_READ!()
+FILE_MAP_READ!();

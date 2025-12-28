@@ -4,4 +4,4 @@ macro_rules! Constants {
     };
 }
 
-Constants!()
+Constants!();

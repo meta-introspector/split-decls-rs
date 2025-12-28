@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Reader!();
         Expression!();
         Encoding!();
+        Reader!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_data {
     };
 }
 
-parse_data!()
+parse_data!();

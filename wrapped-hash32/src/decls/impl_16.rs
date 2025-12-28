@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Index!();
-        Murmur3Hasher!();
         Hasher!();
+        Murmur3Hasher!();
+        Index!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

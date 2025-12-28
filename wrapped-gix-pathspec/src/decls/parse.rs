@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         Pattern!();
         Defaults!();
-        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse {
     };
 }
 
-parse!()
+parse!();

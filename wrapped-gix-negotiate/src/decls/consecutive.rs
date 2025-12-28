@@ -4,4 +4,4 @@ macro_rules! consecutive {
     };
 }
 
-consecutive!()
+consecutive!();

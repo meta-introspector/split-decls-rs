@@ -4,4 +4,4 @@ macro_rules! write_all {
     };
 }
 
-write_all!()
+write_all!();

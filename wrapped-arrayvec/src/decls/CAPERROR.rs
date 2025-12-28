@@ -4,4 +4,4 @@ macro_rules! CAPERROR {
     };
 }
 
-CAPERROR!()
+CAPERROR!();

@@ -11,4 +11,4 @@ macro_rules! try_const_isize {
     };
 }
 
-try_const_isize!()
+try_const_isize!();

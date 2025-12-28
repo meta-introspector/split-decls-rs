@@ -4,4 +4,4 @@ macro_rules! fiat_secp256k1_montgomery_mulx_u32 {
     };
 }
 
-fiat_secp256k1_montgomery_mulx_u32!()
+fiat_secp256k1_montgomery_mulx_u32!();

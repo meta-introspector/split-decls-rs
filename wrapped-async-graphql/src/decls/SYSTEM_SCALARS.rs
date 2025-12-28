@@ -11,4 +11,4 @@ macro_rules! SYSTEM_SCALARS {
     };
 }
 
-SYSTEM_SCALARS!()
+SYSTEM_SCALARS!();

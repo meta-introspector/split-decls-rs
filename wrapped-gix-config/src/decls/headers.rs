@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SectionId!();
         Section!();
+        SectionId!();
         Header!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! headers {
     };
 }
 
-headers!()
+headers!();

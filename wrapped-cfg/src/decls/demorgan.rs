@@ -4,4 +4,4 @@ macro_rules! demorgan {
     };
 }
 
-demorgan!()
+demorgan!();

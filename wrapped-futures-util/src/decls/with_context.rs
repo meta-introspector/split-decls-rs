@@ -12,4 +12,4 @@ macro_rules! with_context {
     };
 }
 
-with_context!()
+with_context!();

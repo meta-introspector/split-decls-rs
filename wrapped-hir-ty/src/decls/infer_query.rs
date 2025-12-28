@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InferenceResult!();
         HirDatabase!();
         InferenceContext!();
+        InferenceResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! infer_query {
     };
 }
 
-infer_query!()
+infer_query!();

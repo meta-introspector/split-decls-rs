@@ -4,4 +4,4 @@ macro_rules! __bitflags_expr_safe_attrs {
     };
 }
 
-__bitflags_expr_safe_attrs!()
+__bitflags_expr_safe_attrs!();

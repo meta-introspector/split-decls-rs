@@ -4,4 +4,4 @@ macro_rules! unfold_state {
     };
 }
 
-unfold_state!()
+unfold_state!();

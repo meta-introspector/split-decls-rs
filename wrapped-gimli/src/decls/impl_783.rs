@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        DebugRngLists!();
-        Result!();
-        RangeList!();
-        Address!();
-        Writer!();
-        Error!();
         RangeListTable!();
-        DebugRanges!();
-        Encoding!();
+        Writer!();
         Range!();
+        Result!();
+        Encoding!();
+        RangeList!();
+        DebugRanges!();
         Sections!();
+        Error!();
+        DebugRngLists!();
+        Address!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_783 {
     };
 }
 
-impl_783!()
+impl_783!();

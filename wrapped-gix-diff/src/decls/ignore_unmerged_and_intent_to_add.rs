@@ -4,4 +4,4 @@ macro_rules! ignore_unmerged_and_intent_to_add {
     };
 }
 
-ignore_unmerged_and_intent_to_add!()
+ignore_unmerged_and_intent_to_add!();

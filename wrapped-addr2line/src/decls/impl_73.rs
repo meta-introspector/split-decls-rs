@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LookupContinuation!();
         LookupResult!();
         LoopingLookup!();
-        LookupContinuation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

@@ -11,4 +11,4 @@ macro_rules! inner_u32 {
     };
 }
 
-inner_u32!()
+inner_u32!();

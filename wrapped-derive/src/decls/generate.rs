@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GeneratorResult!();
+        RemoveLifetime!();
         Enum!();
         RenameTarget!();
-        RemoveLifetime!();
+        GeneratorResult!();
         Union!();
         OutputType!();
     };
@@ -16,4 +16,4 @@ macro_rules! generate {
     };
 }
 
-generate!()
+generate!();

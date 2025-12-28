@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PointerEncodingParameters!();
         Reader!();
+        PointerEncodingParameters!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! parse_encoded_value {
     };
 }
 
-parse_encoded_value!()
+parse_encoded_value!();

@@ -4,4 +4,4 @@ macro_rules! write_failure_marker {
     };
 }
 
-write_failure_marker!()
+write_failure_marker!();

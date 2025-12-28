@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Options!();
-        Driver!();
         WorktreeRoots!();
-        Pipeline!();
+        Driver!();
         Outcome!();
+        Pipeline!();
+        Options!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

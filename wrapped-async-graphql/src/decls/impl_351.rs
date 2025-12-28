@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        Query!();
-        ServerResult!();
-        Any!();
         Schema!();
-        InputType!();
-        Context!();
-        Data!();
-        Field!();
-        Object!();
-        PathSegment!();
-        Error!();
-        QueryPathNode!();
-        Result!();
         QueryPathSegment!();
-        OutputType!();
+        Any!();
         InputValue!();
-        ServerError!();
+        Result!();
+        QueryPathNode!();
+        ServerResult!();
         ContextBase!();
+        Field!();
+        Context!();
+        ServerError!();
+        Object!();
+        Query!();
+        Error!();
+        OutputType!();
+        PathSegment!();
+        Data!();
+        InputType!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_351 {
     };
 }
 
-impl_351!()
+impl_351!();

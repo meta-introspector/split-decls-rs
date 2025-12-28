@@ -11,4 +11,4 @@ macro_rules! loose_header {
     };
 }
 
-loose_header!()
+loose_header!();

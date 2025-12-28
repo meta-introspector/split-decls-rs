@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Finalize!();
+        DeleteFull!();
+        Ok!();
+    };
+}
+
+macro_rules! finalize_session_directory {
+    () => {
+        deps!();
+        # [doc = " This function finalizes and thus 'publishes' the session directory by"] # [doc = " renaming it to `s-{timestamp}-{svh}` and releasing the file lock."] # [doc = " If there have been compilation errors, however, this function will just"] # [doc = " delete the presumably invalid session directory."] pub fn finalize_session_directory (sess : & Session , svh : Option < Svh >) { if sess . opts . incremental . is_none () { return ; } let svh = svh . unwrap () ; let _timer = sess . timer ("incr_comp_finalize_session_directory") ; let incr_comp_session_dir : PathBuf = sess . incr_comp_session_dir () . clone () ; if sess . dcx () . has_errors_or_delayed_bugs () . is_some () { debug ! ("finalize_session_directory() - invalidating session directory: {}" , incr_comp_session_dir . display ()) ; if let Err (err) = std_fs :: remove_dir_all (& * incr_comp_session_dir) { sess . dcx () . emit_warn (errors :: DeleteFull { path : & incr_comp_session_dir , err }) ; } let lock_file_path = lock_file_path (& * incr_comp_session_dir) ; delete_session_dir_lock_file (sess , & lock_file_path) ; sess . mark_incr_comp_session_as_invalid () ; } debug ! ("finalize_session_directory() - session directory: {}" , incr_comp_session_dir . display ()) ; let mut sub_dir_name = incr_comp_session_dir . file_name () . unwrap () . to_str () . expect ("malformed session dir name: contains non-Unicode characters") . to_string () ; sub_dir_name . truncate (sub_dir_name . len () - "working" . len ()) ; assert ! (sub_dir_name . ends_with ('-') , "{:?}" , sub_dir_name) ; assert ! (sub_dir_name . as_bytes () . iter () . filter (| b | ** b == b'-') . count () == 3) ; sub_dir_name . push_str (& svh . as_u128 () . to_base_fixed_len (CASE_INSENSITIVE)) ; let new_path = incr_comp_session_dir . parent () . unwrap () . join (& * sub_dir_name) ; debug ! ("finalize_session_directory() - new path: {}" , new_path . display ()) ; match rename_path_with_retry (& * incr_comp_session_dir , & new_path , 3) { Ok (_) => { debug ! ("finalize_session_directory() - directory renamed successfully") ; sess . finalize_incr_comp_session (new_path) ; } Err (e) => { sess . dcx () . emit_warn (errors :: Finalize { path : & incr_comp_session_dir , err : e }) ; debug ! ("finalize_session_directory() - error, marking as invalid") ; sess . mark_incr_comp_session_as_invalid () ; } } let _ = garbage_collect_session_directories (sess) ; }
+    };
+}
+
+finalize_session_directory!()

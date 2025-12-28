@@ -4,4 +4,4 @@ macro_rules! JIS0208_KANJI_BYTES {
     };
 }
 
-JIS0208_KANJI_BYTES!()
+JIS0208_KANJI_BYTES!();

@@ -11,4 +11,4 @@ macro_rules! lit_kind_for_patch {
     };
 }
 
-lit_kind_for_patch!()
+lit_kind_for_patch!();

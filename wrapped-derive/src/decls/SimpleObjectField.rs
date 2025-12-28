@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        DerivedField!();
         CacheControl!();
         Validators!();
-        Deprecation!();
-        DefaultValue!();
         Visible!();
-        DerivedField!();
+        DefaultValue!();
+        Deprecation!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! SimpleObjectField {
     };
 }
 
-SimpleObjectField!()
+SimpleObjectField!();

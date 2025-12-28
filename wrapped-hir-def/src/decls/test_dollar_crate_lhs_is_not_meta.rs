@@ -16,4 +16,4 @@ ok!();
     };
 }
 
-test_dollar_crate_lhs_is_not_meta!()
+test_dollar_crate_lhs_is_not_meta!();

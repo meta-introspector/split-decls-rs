@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Writer!();
-        Operation!();
+        DebugInfoRef!();
+        Encoding!();
         Result!();
         Address!();
-        Error!();
-        Register!();
-        DebugInfoRef!();
-        DebugInfoFixup!();
-        Encoding!();
-        UnitOffsets!();
         Piece!();
+        Register!();
+        Operation!();
+        Error!();
+        DebugInfoFixup!();
+        Writer!();
+        UnitOffsets!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_774 {
     };
 }
 
-impl_774!()
+impl_774!();

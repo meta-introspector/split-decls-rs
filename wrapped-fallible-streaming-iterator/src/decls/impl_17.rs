@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FallibleStreamingIterator!();
         Fuse!();
         FuseState!();
+        FallibleStreamingIterator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

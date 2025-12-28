@@ -4,4 +4,4 @@ macro_rules! DirectoryRoot {
     };
 }
 
-DirectoryRoot!()
+DirectoryRoot!();

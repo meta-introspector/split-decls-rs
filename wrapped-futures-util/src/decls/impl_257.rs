@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Select!();
-        Pending!();
         EitherErr!();
-        EitherOk!();
+        TrySelect!();
         Either!();
         Ready!();
-        TrySelect!();
+        Select!();
+        Pending!();
+        EitherOk!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_257 {
     };
 }
 
-impl_257!()
+impl_257!();

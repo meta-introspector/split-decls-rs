@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Statuses!();
         StatusIter!();
-        Binding!();
         StatusEntry!();
+        Statuses!();
+        Binding!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_751 {
     };
 }
 
-impl_751!()
+impl_751!();

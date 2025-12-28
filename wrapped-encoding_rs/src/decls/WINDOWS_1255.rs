@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         Unicode!();
+        Encoding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WINDOWS_1255 {
     };
 }
 
-WINDOWS_1255!()
+WINDOWS_1255!();

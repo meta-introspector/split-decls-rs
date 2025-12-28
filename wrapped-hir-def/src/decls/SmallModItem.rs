@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Macro2!();
-        Union!();
-        TypeAlias!();
-        Const!();
-        Struct!();
-        Enum!();
-        Trait!();
-        ExternBlock!();
-        Function!();
-        MacroRules!();
         Static!();
-        Impl!();
         MacroCall!();
+        ExternBlock!();
+        Impl!();
+        Trait!();
+        Macro2!();
+        MacroRules!();
+        Enum!();
+        Function!();
+        Union!();
+        Const!();
+        TypeAlias!();
+        Struct!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! SmallModItem {
     };
 }
 
-SmallModItem!()
+SmallModItem!();

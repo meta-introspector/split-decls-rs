@@ -4,4 +4,4 @@ macro_rules! MSG_SCHEDULE {
     };
 }
 
-MSG_SCHEDULE!()
+MSG_SCHEDULE!();

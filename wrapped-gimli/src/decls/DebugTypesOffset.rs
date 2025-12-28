@@ -4,4 +4,4 @@ macro_rules! DebugTypesOffset {
     };
 }
 
-DebugTypesOffset!()
+DebugTypesOffset!();

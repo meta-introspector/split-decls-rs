@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Fat!();
-        Vector!();
         Slim!();
+        Vector!();
         Teddy!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! FatVector {
     };
 }
 
-FatVector!()
+FatVector!();

@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        OwnedEntry!();
+        Clear!();
+        OwnedRef!();
+        Config!();
     };
 }
 
 macro_rules! impl_28 {
     () => {
         deps!();
-        impl < T , C > std :: ops :: Deref for OwnedEntry < T , C > where C : cfg :: Config , { type Target = T ; fn deref (& self) -> & Self :: Target { self . value () } }
+        impl < T , C > OwnedRef < T , C > where T : Clear + Default , C : cfg :: Config , { # [doc = " Returns the key used to access this guard"] pub fn key (& self) -> usize { self . key } # [inline] fn value (& self) -> & T { unsafe { self . inner . value () } } }
     };
 }
 

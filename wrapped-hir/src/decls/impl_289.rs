@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Type!();
-        Param!();
         Function!();
-        Local!();
-        Closure!();
+        Type!();
         Callee!();
+        Closure!();
+        Local!();
+        Param!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_289 {
     };
 }
 
-impl_289!()
+impl_289!();

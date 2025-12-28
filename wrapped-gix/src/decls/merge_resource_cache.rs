@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AttributeStack!();
         Index!();
         Error!();
+        AttributeStack!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! merge_resource_cache {
     };
 }
 
-merge_resource_cache!()
+merge_resource_cache!();

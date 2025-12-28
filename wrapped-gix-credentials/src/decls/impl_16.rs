@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Error!();
-        Context!();
+        Outcome!();
         Cascade!();
         Result!();
         Action!();
-        Outcome!();
+        Context!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

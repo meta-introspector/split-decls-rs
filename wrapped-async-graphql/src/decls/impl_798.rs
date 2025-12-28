@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         MetaType!();
-        Object!();
-        Context!();
-        Response!();
-        Registry!();
-        SubscriptionType!();
-        CacheControl!();
         MergedObject!();
+        CacheControl!();
+        Response!();
+        Object!();
+        SubscriptionType!();
+        Context!();
+        Registry!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_798 {
     };
 }
 
-impl_798!()
+impl_798!();

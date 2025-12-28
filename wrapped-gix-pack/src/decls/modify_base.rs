@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TreeEntry!();
-        Kind!();
         Error!();
+        Kind!();
+        TreeEntry!();
         Entry!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! modify_base {
     };
 }
 
-modify_base!()
+modify_base!();

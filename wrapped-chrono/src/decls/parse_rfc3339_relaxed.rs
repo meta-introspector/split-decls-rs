@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Pad!();
-        Month!();
-        ParseResult!();
-        Numeric!();
-        Fixed!();
         Item!();
+        Fixed!();
+        Numeric!();
+        Month!();
         Parsed!();
+        ParseResult!();
+        Pad!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! parse_rfc3339_relaxed {
     };
 }
 
-parse_rfc3339_relaxed!()
+parse_rfc3339_relaxed!();

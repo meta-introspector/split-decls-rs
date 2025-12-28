@@ -11,4 +11,4 @@ macro_rules! test_all_labels {
     };
 }
 
-test_all_labels!()
+test_all_labels!();

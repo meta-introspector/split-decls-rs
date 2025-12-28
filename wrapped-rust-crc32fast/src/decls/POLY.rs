@@ -4,4 +4,4 @@ macro_rules! POLY {
     };
 }
 
-POLY!()
+POLY!();

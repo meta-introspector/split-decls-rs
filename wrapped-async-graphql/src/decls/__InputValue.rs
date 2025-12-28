@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InputValue!();
         MetaInputValue!();
         Registry!();
+        InputValue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! __InputValue {
     };
 }
 
-__InputValue!()
+__InputValue!();

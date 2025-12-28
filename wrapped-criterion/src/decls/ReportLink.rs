@@ -4,4 +4,4 @@ macro_rules! ReportLink {
     };
 }
 
-ReportLink!()
+ReportLink!();

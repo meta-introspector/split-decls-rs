@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Position!();
         LookupByIdResult!();
         Graph!();
         LookupByPositionResult!();
-        Position!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

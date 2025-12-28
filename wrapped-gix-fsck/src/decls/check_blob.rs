@@ -4,4 +4,4 @@ macro_rules! check_blob {
     };
 }
 
-check_blob!()
+check_blob!();

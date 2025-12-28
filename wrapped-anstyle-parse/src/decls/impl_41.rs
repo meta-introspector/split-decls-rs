@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf8Parser!();
         CharAccumulator!();
+        Utf8Parser!();
         VtUtf8Receiver!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

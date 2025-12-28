@@ -11,4 +11,4 @@ macro_rules! map_ok_fn {
     };
 }
 
-map_ok_fn!()
+map_ok_fn!();

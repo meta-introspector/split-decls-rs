@@ -11,4 +11,4 @@ macro_rules! from_iter {
     };
 }
 
-from_iter!()
+from_iter!();

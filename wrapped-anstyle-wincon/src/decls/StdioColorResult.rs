@@ -4,4 +4,4 @@ macro_rules! StdioColorResult {
     };
 }
 
-StdioColorResult!()
+StdioColorResult!();

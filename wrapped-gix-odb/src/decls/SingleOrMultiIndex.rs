@@ -4,4 +4,4 @@ macro_rules! SingleOrMultiIndex {
     };
 }
 
-SingleOrMultiIndex!()
+SingleOrMultiIndex!();

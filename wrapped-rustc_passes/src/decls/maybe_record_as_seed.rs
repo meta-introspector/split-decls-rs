@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        ComesFromAllowExpect!();
+    };
+}
+
+macro_rules! maybe_record_as_seed {
+    () => {
+        deps!();
+        # [doc = " Examine the given definition and record it in the worklist if it should be considered live."] # [doc = ""] # [doc = " We want to explicitly consider as live:"] # [doc = " * Item annotated with #[allow(dead_code)]"] # [doc = "       This is done so that if we want to suppress warnings for a"] # [doc = "       group of dead functions, we only have to annotate the \"root\"."] # [doc = "       For example, if both `f` and `g` are dead and `f` calls `g`,"] # [doc = "       then annotating `f` with `#[allow(dead_code)]` will suppress"] # [doc = "       warning for both `f` and `g`."] # [doc = ""] # [doc = " * Item annotated with #[lang=\"..\"]"] # [doc = "       Lang items are always callable from elsewhere."] # [doc = ""] # [doc = " For trait methods and implementations of traits, we are not certain that the definitions are"] # [doc = " live at this stage. We record them in `unsolved_items` for later examination."] fn maybe_record_as_seed < 'tcx > (tcx : TyCtxt < 'tcx > , owner_id : hir :: OwnerId , worklist : & mut Vec < (LocalDefId , ComesFromAllowExpect) > , unsolved_items : & mut Vec < LocalDefId > ,) { let allow_dead_code = has_allow_dead_code_or_lang_attr (tcx , owner_id . def_id) ; if let Some (comes_from_allow) = allow_dead_code { worklist . push ((owner_id . def_id , comes_from_allow)) ; } match tcx . def_kind (owner_id) { DefKind :: Enum => { if let Some (comes_from_allow) = allow_dead_code { let adt = tcx . adt_def (owner_id) ; worklist . extend (adt . variants () . iter () . map (| variant | (variant . def_id . expect_local () , comes_from_allow)) ,) ; } } DefKind :: AssocFn | DefKind :: AssocConst | DefKind :: AssocTy => { if allow_dead_code . is_none () { let parent = tcx . local_parent (owner_id . def_id) ; match tcx . def_kind (parent) { DefKind :: Impl { of_trait : false } | DefKind :: Trait => { } DefKind :: Impl { of_trait : true } => { unsolved_items . push (owner_id . def_id) ; } _ => bug ! () , } } } DefKind :: Impl { of_trait : true } => { if allow_dead_code . is_none () { unsolved_items . push (owner_id . def_id) ; } } DefKind :: GlobalAsm => { worklist . push ((owner_id . def_id , ComesFromAllowExpect :: No)) ; } DefKind :: Const => { if tcx . item_name (owner_id . def_id) == kw :: Underscore { worklist . push ((owner_id . def_id , ComesFromAllowExpect :: No)) ; } } _ => { } } }
+    };
+}
+
+maybe_record_as_seed!()

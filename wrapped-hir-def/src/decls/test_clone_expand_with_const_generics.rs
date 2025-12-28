@@ -18,4 +18,4 @@ impl <const X: usize, T: $crate::clone::Clone, > $crate::clone::Clone for Foo<X,
     };
 }
 
-test_clone_expand_with_const_generics!()
+test_clone_expand_with_const_generics!();

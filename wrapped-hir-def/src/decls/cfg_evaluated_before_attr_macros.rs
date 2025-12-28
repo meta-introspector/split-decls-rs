@@ -14,4 +14,4 @@ use proc_macros::disallow_cfg;
     };
 }
 
-cfg_evaluated_before_attr_macros!()
+cfg_evaluated_before_attr_macros!();

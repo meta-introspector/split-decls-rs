@@ -4,4 +4,4 @@ macro_rules! one_sha {
     };
 }
 
-one_sha!()
+one_sha!();

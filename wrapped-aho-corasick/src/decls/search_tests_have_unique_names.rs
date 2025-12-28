@@ -11,4 +11,4 @@ macro_rules! search_tests_have_unique_names {
     };
 }
 
-search_tests_have_unique_names!()
+search_tests_have_unique_names!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ValueFormatter!();
-        MeasurementData!();
         ReportContext!();
         BenchmarkId!();
+        MeasurementData!();
+        ValueFormatter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! abs_distributions {
     };
 }
 
-abs_distributions!()
+abs_distributions!();

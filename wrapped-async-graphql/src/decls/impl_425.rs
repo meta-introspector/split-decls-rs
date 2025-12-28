@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FieldValueInner!();
         Result!();
         FieldValue!();
-        FieldValueInner!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_425 {
     };
 }
 
-impl_425!()
+impl_425!();

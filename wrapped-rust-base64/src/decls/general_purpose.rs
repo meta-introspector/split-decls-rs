@@ -4,4 +4,4 @@ macro_rules! general_purpose {
     };
 }
 
-general_purpose!()
+general_purpose!();

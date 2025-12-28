@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VariantEncoding!();
         Encoding!();
+        VariantEncoding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UTF_8_INIT {
     };
 }
 
-UTF_8_INIT!()
+UTF_8_INIT!();

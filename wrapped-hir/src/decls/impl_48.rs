@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HasSource!();
         Field!();
+        HasSource!();
         FieldSource!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

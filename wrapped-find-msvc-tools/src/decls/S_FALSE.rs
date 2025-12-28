@@ -11,4 +11,4 @@ macro_rules! S_FALSE {
     };
 }
 
-S_FALSE!()
+S_FALSE!();

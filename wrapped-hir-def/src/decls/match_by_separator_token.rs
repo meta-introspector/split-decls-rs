@@ -31,4 +31,4 @@ struct Bar;
     };
 }
 
-match_by_separator_token!()
+match_by_separator_token!();

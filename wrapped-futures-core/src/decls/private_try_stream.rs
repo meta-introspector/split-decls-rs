@@ -11,4 +11,4 @@ macro_rules! private_try_stream {
     };
 }
 
-private_try_stream!()
+private_try_stream!();

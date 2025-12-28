@@ -12,4 +12,4 @@ macro_rules! contains_illegal_self_type_reference {
     };
 }
 
-contains_illegal_self_type_reference!()
+contains_illegal_self_type_reference!();

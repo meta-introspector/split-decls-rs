@@ -11,4 +11,4 @@ macro_rules! commutative_op {
     };
 }
 
-commutative_op!()
+commutative_op!();

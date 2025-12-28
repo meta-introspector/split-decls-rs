@@ -4,4 +4,4 @@ macro_rules! WrappedCargoToml {
     };
 }
 
-WrappedCargoToml!()
+WrappedCargoToml!();

@@ -12,4 +12,4 @@ macro_rules! hir_fmt_generic_arguments {
     };
 }
 
-hir_fmt_generic_arguments!()
+hir_fmt_generic_arguments!();

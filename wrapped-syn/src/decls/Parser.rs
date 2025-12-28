@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Parse!();
+        Result!();
+    };
+}
+
+macro_rules! Parser {
+    () => {
+        deps!();
+        # [doc = " Parser that can parse Rust tokens into a particular syntax tree node."] # [doc = ""] # [doc = " Refer to the [module documentation] for details about parsing in Syn."] # [doc = ""] # [doc = " [module documentation]: self"] pub trait Parser : Sized { type Output ; # [doc = " Parse a proc-macro2 token stream into the chosen syntax tree node."] # [doc = ""] # [doc = " This function enforces that the input is fully parsed. If there are any"] # [doc = " unparsed tokens at the end of the stream, an error is returned."] fn parse2 (self , tokens : TokenStream) -> Result < Self :: Output > ; # [doc = " Parse tokens of source code into the chosen syntax tree node."] # [doc = ""] # [doc = " This function enforces that the input is fully parsed. If there are any"] # [doc = " unparsed tokens at the end of the stream, an error is returned."] # [cfg (feature = "proc-macro")] # [cfg_attr (docsrs , doc (cfg (feature = "proc-macro")))] fn parse (self , tokens : proc_macro :: TokenStream) -> Result < Self :: Output > { self . parse2 (proc_macro2 :: TokenStream :: from (tokens)) } # [doc = " Parse a string of Rust code into the chosen syntax tree node."] # [doc = ""] # [doc = " This function enforces that the input is fully parsed. If there are any"] # [doc = " unparsed tokens at the end of the string, an error is returned."] # [doc = ""] # [doc = " # Hygiene"] # [doc = ""] # [doc = " Every span in the resulting syntax tree will be set to resolve at the"] # [doc = " macro call site."] fn parse_str (self , s : & str) -> Result < Self :: Output > { self . parse2 (proc_macro2 :: TokenStream :: from_str (s) ?) } # [doc (hidden)] fn __parse_scoped (self , scope : Span , tokens : TokenStream) -> Result < Self :: Output > { let _ = scope ; self . parse2 (tokens) } }
+    };
+}
+
+Parser!()

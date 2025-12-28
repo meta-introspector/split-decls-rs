@@ -11,4 +11,4 @@ macro_rules! set_mwindow_file_limit {
     };
 }
 
-set_mwindow_file_limit!()
+set_mwindow_file_limit!();

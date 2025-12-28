@@ -11,4 +11,4 @@ macro_rules! private_decl {
     };
 }
 
-private_decl!()
+private_decl!();

@@ -4,4 +4,4 @@ macro_rules! from_byte_slice {
     };
 }
 
-from_byte_slice!()
+from_byte_slice!();

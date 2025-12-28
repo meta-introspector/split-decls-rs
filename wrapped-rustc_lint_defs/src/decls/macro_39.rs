@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FutureIncompatibleInfo!();
+        FutureIncompatibilityReason!();
+    };
+}
+
+macro_rules! macro_39 {
+    () => {
+        deps!();
+        declare_lint ! { # [doc = " The `late_bound_lifetime_arguments` lint detects generic lifetime"] # [doc = " arguments in path segments with late bound lifetime parameters."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " struct S;"] # [doc = ""] # [doc = " impl S {"] # [doc = "     fn late(self, _: &u8, _: &u8) {}"] # [doc = " }"] # [doc = ""] # [doc = " fn main() {"] # [doc = "     S.late::<'static>(&0, &0);"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " It is not clear how to provide arguments for early-bound lifetime"] # [doc = " parameters if they are intermixed with late-bound parameters in the"] # [doc = " same list. For now, providing any explicit arguments will trigger this"] # [doc = " lint if late-bound parameters are present, so in the future a solution"] # [doc = " can be adopted without hitting backward compatibility issues. This is"] # [doc = " a [future-incompatible] lint to transition this to a hard error in the"] # [doc = " future. See [issue #42868] for more details, along with a description"] # [doc = " of the difference between early and late-bound parameters."] # [doc = ""] # [doc = " [issue #42868]: https://github.com/rust-lang/rust/issues/42868"] # [doc = " [future-incompatible]: ../index.md#future-incompatible-lints"] pub LATE_BOUND_LIFETIME_ARGUMENTS , Warn , "detects generic lifetime arguments in path segments with late bound lifetime parameters" , @ future_incompatible = FutureIncompatibleInfo { reason : FutureIncompatibilityReason :: FutureReleaseError , reference : "issue #42868 <https://github.com/rust-lang/rust/issues/42868>" , } ; }
+    };
+}
+
+macro_39!()

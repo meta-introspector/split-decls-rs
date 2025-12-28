@@ -16,4 +16,4 @@ macro panic_2015 {
     };
 }
 
-test_macro_2_0_panic_2015!()
+test_macro_2_0_panic_2015!();

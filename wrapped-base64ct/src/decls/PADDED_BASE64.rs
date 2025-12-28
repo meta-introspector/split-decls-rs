@@ -4,4 +4,4 @@ macro_rules! PADDED_BASE64 {
     };
 }
 
-PADDED_BASE64!()
+PADDED_BASE64!();

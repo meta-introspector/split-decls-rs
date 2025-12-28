@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Alphabet!();
         DecodePaddingMode!();
+        Alphabet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! GeneralPurposeConfig {
     };
 }
 
-GeneralPurposeConfig!()
+GeneralPurposeConfig!();

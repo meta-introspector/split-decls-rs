@@ -4,4 +4,4 @@ macro_rules! NameRef {
     };
 }
 
-NameRef!()
+NameRef!();

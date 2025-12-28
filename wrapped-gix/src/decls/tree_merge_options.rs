@@ -11,4 +11,4 @@ macro_rules! tree_merge_options {
     };
 }
 
-tree_merge_options!()
+tree_merge_options!();

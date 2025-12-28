@@ -4,4 +4,4 @@ macro_rules! KIND_VEC {
     };
 }
 
-KIND_VEC!()
+KIND_VEC!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AhoCorasick!();
-        MatchKind!();
         DFA!();
-        Input!();
-        Span!();
         StartKind!();
         Anchored!();
+        AhoCorasick!();
+        MatchKind!();
+        Span!();
+        Input!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_442 {
     };
 }
 
-impl_442!()
+impl_442!();

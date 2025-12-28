@@ -4,4 +4,4 @@ macro_rules! FIXUP_DUMMY_AST_ID {
     };
 }
 
-FIXUP_DUMMY_AST_ID!()
+FIXUP_DUMMY_AST_ID!();

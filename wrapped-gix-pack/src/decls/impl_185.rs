@@ -3,9 +3,9 @@ macro_rules! deps {
         FromEntriesIter!();
         Entry!();
         Error!();
-        Item!();
         Version!();
         Kind!();
+        Item!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

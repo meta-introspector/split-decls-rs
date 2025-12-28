@@ -11,4 +11,4 @@ macro_rules! test_date_parse_from_str {
     };
 }
 
-test_date_parse_from_str!()
+test_date_parse_from_str!();

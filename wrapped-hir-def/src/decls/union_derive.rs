@@ -31,4 +31,4 @@ union Foo9 { _v: () }
     };
 }
 
-union_derive!()
+union_derive!();

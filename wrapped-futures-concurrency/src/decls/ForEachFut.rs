@@ -4,4 +4,4 @@ macro_rules! ForEachFut {
     };
 }
 
-ForEachFut!()
+ForEachFut!();

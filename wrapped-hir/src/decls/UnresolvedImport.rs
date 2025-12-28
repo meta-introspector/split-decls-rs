@@ -4,4 +4,4 @@ macro_rules! UnresolvedImport {
     };
 }
 
-UnresolvedImport!()
+UnresolvedImport!();

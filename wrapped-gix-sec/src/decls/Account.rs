@@ -4,4 +4,4 @@ macro_rules! Account {
     };
 }
 
-Account!()
+Account!();

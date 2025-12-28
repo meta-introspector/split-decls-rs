@@ -11,4 +11,4 @@ macro_rules! curve_tests {
     };
 }
 
-curve_tests!()
+curve_tests!();

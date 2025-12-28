@@ -4,4 +4,4 @@ macro_rules! Resolvability {
     };
 }
 
-Resolvability!()
+Resolvability!();

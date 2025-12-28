@@ -12,4 +12,4 @@ macro_rules! update_tips_cb {
     };
 }
 
-update_tips_cb!()
+update_tips_cb!();

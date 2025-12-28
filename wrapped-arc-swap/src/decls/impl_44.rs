@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ArcSwapAny!();
-        ArcSwap!();
-        Strategy!();
-        MapCache!();
-        ArcSwapOption!();
-        Cache!();
         RefCnt!();
+        Cache!();
+        ArcSwap!();
+        ArcSwapAny!();
+        Strategy!();
+        ArcSwapOption!();
+        MapCache!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

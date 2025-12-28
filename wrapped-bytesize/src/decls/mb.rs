@@ -4,4 +4,4 @@ macro_rules! mb {
     };
 }
 
-mb!()
+mb!();

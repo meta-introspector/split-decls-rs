@@ -17,4 +17,4 @@ fn main() {
     };
 }
 
-test_assert_expand!()
+test_assert_expand!();

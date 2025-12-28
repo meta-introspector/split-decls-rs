@@ -4,4 +4,4 @@ macro_rules! Plot {
     };
 }
 
-Plot!()
+Plot!();

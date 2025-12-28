@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FileSystemWriter!();
-        Cli!();
         CachedFileSystemWriter!();
+        Cli!();
+        FileSystemWriter!();
         RealFileSystemWriter!();
         RealFileSystemStat!();
     };
@@ -15,4 +15,4 @@ macro_rules! run_add_submodules_command {
     };
 }
 
-run_add_submodules_command!()
+run_add_submodules_command!();

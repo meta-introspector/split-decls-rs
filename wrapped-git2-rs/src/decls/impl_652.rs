@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Oid!();
         RemoteHead!();
         Binding!();
+        Oid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_652 {
     };
 }
 
-impl_652!()
+impl_652!();

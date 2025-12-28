@@ -4,4 +4,4 @@ macro_rules! Layer0Analyzer {
     };
 }
 
-Layer0Analyzer!()
+Layer0Analyzer!();

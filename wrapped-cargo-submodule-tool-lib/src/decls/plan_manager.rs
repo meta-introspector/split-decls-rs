@@ -4,4 +4,4 @@ macro_rules! plan_manager {
     };
 }
 
-plan_manager!()
+plan_manager!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pending!();
         PollNext!();
+        Pending!();
         Ready!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! poll_inner {
     };
 }
 
-poll_inner!()
+poll_inner!();

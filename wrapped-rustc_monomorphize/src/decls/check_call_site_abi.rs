@@ -1,0 +1,7 @@
+macro_rules! check_call_site_abi {
+    () => {
+        # [doc = " Checks that a call expression does not try to pass a vector-passed argument which requires a"] # [doc = " target feature that the caller does not have, as doing so causes UB because of ABI mismatch."] fn check_call_site_abi < 'tcx > (tcx : TyCtxt < 'tcx > , callee : Ty < 'tcx > , caller : InstanceKind < 'tcx > , loc : impl Fn () -> (Span , HirId) + Copy ,) { if callee . fn_sig (tcx) . abi () . is_rustic_abi () { return ; } let typing_env = ty :: TypingEnv :: fully_monomorphized () ; let callee_abi = match * callee . kind () { ty :: FnPtr (..) => { tcx . fn_abi_of_fn_ptr (typing_env . as_query_input ((callee . fn_sig (tcx) , ty :: List :: empty ()))) } ty :: FnDef (def_id , args) => { if tcx . intrinsic (def_id) . is_some () { return ; } let instance = ty :: Instance :: expect_resolve (tcx , typing_env , def_id , args , DUMMY_SP) ; tcx . fn_abi_of_instance (typing_env . as_query_input ((instance , ty :: List :: empty ()))) } _ => { panic ! ("Invalid function call") ; } } ; let Ok (callee_abi) = callee_abi else { return ; } ; do_check_simd_vector_abi (tcx , callee_abi , caller . def_id () , true , loc) ; }
+    };
+}
+
+check_call_site_abi!()

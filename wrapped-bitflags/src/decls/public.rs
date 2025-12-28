@@ -4,4 +4,4 @@ macro_rules! public {
     };
 }
 
-public!()
+public!();

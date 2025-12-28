@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HasVisibility!();
-        Struct!();
         Enum!();
         Adt!();
         Union!();
+        HasVisibility!();
+        Struct!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_276 {
     };
 }
 
-impl_276!()
+impl_276!();

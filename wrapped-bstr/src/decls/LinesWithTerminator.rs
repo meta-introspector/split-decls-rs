@@ -4,4 +4,4 @@ macro_rules! LinesWithTerminator {
     };
 }
 
-LinesWithTerminator!()
+LinesWithTerminator!();

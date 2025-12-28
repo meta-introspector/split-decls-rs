@@ -4,4 +4,4 @@ macro_rules! try_op_or_unlink {
     };
 }
 
-try_op_or_unlink!()
+try_op_or_unlink!();

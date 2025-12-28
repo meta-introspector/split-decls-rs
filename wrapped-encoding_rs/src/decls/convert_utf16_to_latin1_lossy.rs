@@ -11,4 +11,4 @@ macro_rules! convert_utf16_to_latin1_lossy {
     };
 }
 
-convert_utf16_to_latin1_lossy!()
+convert_utf16_to_latin1_lossy!();

@@ -4,4 +4,4 @@ macro_rules! as_substr {
     };
 }
 
-as_substr!()
+as_substr!();

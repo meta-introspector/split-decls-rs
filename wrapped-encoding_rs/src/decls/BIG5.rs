@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Unicode!();
         Encoding!();
+        Unicode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BIG5 {
     };
 }
 
-BIG5!()
+BIG5!();

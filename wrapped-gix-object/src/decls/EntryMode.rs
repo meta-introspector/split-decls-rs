@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EntryRef!();
         EntryKind!();
+        EntryRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EntryMode {
     };
 }
 
-EntryMode!()
+EntryMode!();

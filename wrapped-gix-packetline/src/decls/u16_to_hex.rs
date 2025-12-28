@@ -4,4 +4,4 @@ macro_rules! u16_to_hex {
     };
 }
 
-u16_to_hex!()
+u16_to_hex!();

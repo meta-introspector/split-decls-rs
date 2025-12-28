@@ -11,4 +11,4 @@ macro_rules! panic_spawner_mut {
     };
 }
 
-panic_spawner_mut!()
+panic_spawner_mut!();

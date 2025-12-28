@@ -4,4 +4,4 @@ macro_rules! SecondsSinceUnixEpoch {
     };
 }
 
-SecondsSinceUnixEpoch!()
+SecondsSinceUnixEpoch!();

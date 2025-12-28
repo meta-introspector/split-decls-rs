@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DecodePaddingMode!();
-        DecodeError!();
         EngineWrapper!();
+        DecodeError!();
+        DecodePaddingMode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! decode_pad_mode_requires_no_padding_rejects_any_padding {
     };
 }
 
-decode_pad_mode_requires_no_padding_rejects_any_padding!()
+decode_pad_mode_requires_no_padding_rejects_any_padding!();

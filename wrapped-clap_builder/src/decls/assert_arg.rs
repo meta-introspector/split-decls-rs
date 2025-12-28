@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ValueHint!();
+        ValueRange!();
         Arg!();
         Id!();
-        ValueRange!();
+        ValueHint!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! assert_arg {
     };
 }
 
-assert_arg!()
+assert_arg!();

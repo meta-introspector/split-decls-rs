@@ -4,4 +4,4 @@ macro_rules! declare_result_enum {
     };
 }
 
-declare_result_enum!()
+declare_result_enum!();

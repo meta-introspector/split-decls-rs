@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        FileSourceRootInput!();
         SourceRootInput!();
         SourceRootId!();
         Files!();
         SourceRoot!();
-        FileSourceRootInput!();
         SourceDatabase!();
         FileText!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

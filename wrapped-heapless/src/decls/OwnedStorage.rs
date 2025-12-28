@@ -4,4 +4,4 @@ macro_rules! OwnedStorage {
     };
 }
 
-OwnedStorage!()
+OwnedStorage!();

@@ -11,4 +11,4 @@ macro_rules! CHAR_LF {
     };
 }
 
-CHAR_LF!()
+CHAR_LF!();

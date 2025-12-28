@@ -12,4 +12,4 @@ macro_rules! parse_version_utf16 {
     };
 }
 
-parse_version_utf16!()
+parse_version_utf16!();

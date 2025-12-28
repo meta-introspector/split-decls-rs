@@ -40,4 +40,4 @@ fn test() {
     };
 }
 
-test_punct_without_space!()
+test_punct_without_space!();

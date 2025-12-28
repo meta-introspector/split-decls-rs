@@ -11,4 +11,4 @@ macro_rules! Estimates {
     };
 }
 
-Estimates!()
+Estimates!();

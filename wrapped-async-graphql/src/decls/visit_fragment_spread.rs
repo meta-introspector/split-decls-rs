@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Visitor!();
         VisitorContext!();
         VisitMode!();
-        Visitor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! visit_fragment_spread {
     };
 }
 
-visit_fragment_spread!()
+visit_fragment_spread!();

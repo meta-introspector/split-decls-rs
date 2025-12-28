@@ -4,4 +4,4 @@ macro_rules! disabled {
     };
 }
 
-disabled!()
+disabled!();

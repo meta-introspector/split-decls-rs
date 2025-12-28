@@ -4,4 +4,4 @@ macro_rules! DefaultEdgeName {
     };
 }
 
-DefaultEdgeName!()
+DefaultEdgeName!();

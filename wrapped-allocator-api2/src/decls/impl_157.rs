@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExtendWith!();
-        Allocator!();
         Vec!();
         SetLenOnDrop!();
+        Allocator!();
+        ExtendWith!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_157 {
     };
 }
 
-impl_157!()
+impl_157!();

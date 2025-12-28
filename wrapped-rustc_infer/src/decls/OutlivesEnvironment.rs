@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        RegionBoundPairs!();
+        RegionRelations!();
+        FreeRegionMap!();
+    };
+}
+
+macro_rules! OutlivesEnvironment {
+    () => {
+        deps!();
+        # [doc = " The `OutlivesEnvironment` collects information about what outlives"] # [doc = " what in a given type-checking setting. For example, if we have a"] # [doc = " where-clause like `where T: 'a` in scope, then the"] # [doc = " `OutlivesEnvironment` would record that (in its"] # [doc = " `region_bound_pairs` field). Similarly, it contains methods for"] # [doc = " processing and adding implied bounds into the outlives"] # [doc = " environment."] # [doc = ""] # [doc = " Other code at present does not typically take a"] # [doc = " `&OutlivesEnvironment`, but rather takes some of its fields (e.g.,"] # [doc = " `process_registered_region_obligations` wants the"] # [doc = " region-bound-pairs). There is no mistaking it: the current setup"] # [doc = " of tracking region information is quite scattered! The"] # [doc = " `OutlivesEnvironment`, for example, needs to sometimes be combined"] # [doc = " with the `middle::RegionRelations`, to yield a full picture of how"] # [doc = " (lexical) lifetimes interact. However, I'm reluctant to do more"] # [doc = " refactoring here, since the setup with NLL is quite different."] # [doc = " For example, NLL has no need of `RegionRelations`, and is solely"] # [doc = " interested in the `OutlivesEnvironment`. -nmatsakis"] # [derive (Clone)] pub struct OutlivesEnvironment < 'tcx > { pub param_env : ty :: ParamEnv < 'tcx > , free_region_map : FreeRegionMap < 'tcx > , # [doc = " FIXME: Your first reaction may be that this is a bit strange. `RegionBoundPairs`"] # [doc = " does not contain lifetimes, which are instead in the `FreeRegionMap`, and other"] # [doc = " known type outlives are stored in the `known_type_outlives` set. So why do we"] # [doc = " have these at all? It turns out that removing these and using `known_type_outlives`"] # [doc = " everywhere is just enough of a perf regression to matter. This can/should be"] # [doc = " optimized in the future, though."] region_bound_pairs : RegionBoundPairs < 'tcx > , known_type_outlives : Vec < ty :: PolyTypeOutlivesPredicate < 'tcx > > , # [doc = " Assumptions that come from the well-formedness of coroutines that we prove"] # [doc = " auto trait bounds for during the type checking of this body."] higher_ranked_assumptions : FxHashSet < ty :: ArgOutlivesPredicate < 'tcx > > , }
+    };
+}
+
+OutlivesEnvironment!()

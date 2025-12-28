@@ -4,4 +4,4 @@ macro_rules! impl_cmp_std_path {
     };
 }
 
-impl_cmp_std_path!()
+impl_cmp_std_path!();

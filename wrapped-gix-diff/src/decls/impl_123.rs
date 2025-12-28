@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Platform!();
-        Data!();
-        ResourceKind!();
         Error!();
-        Resource!();
+        Data!();
+        Platform!();
         Outcome!();
+        Resource!();
+        ResourceKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

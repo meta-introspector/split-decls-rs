@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        ValidationResult!();
-        NextRequest!();
-        Response!();
+        Result!();
         NextValidation!();
-        NextResolve!();
+        Extension!();
         NextParseQuery!();
+        ServerError!();
+        NextRequest!();
         ServerResult!();
-        ResolveInfo!();
+        ValidationResult!();
         OpenTelemetryExtension!();
         NextSubscribe!();
-        Extension!();
-        Result!();
+        ResolveInfo!();
+        NextResolve!();
         NextExecute!();
-        ServerError!();
+        Response!();
         ExtensionContext!();
     };
 }
@@ -25,4 +25,4 @@ macro_rules! impl_562 {
     };
 }
 
-impl_562!()
+impl_562!();

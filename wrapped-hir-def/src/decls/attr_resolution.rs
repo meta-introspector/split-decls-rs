@@ -4,4 +4,4 @@ macro_rules! attr_resolution {
     };
 }
 
-attr_resolution!()
+attr_resolution!();

@@ -11,4 +11,4 @@ macro_rules! ExpressionStoreDiagnostics {
     };
 }
 
-ExpressionStoreDiagnostics!()
+ExpressionStoreDiagnostics!();

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        TypeLimits!();
+    };
+}
+
+macro_rules! macro_805 {
+    () => {
+        deps!();
+        impl_lint_pass ! (TypeLimits => [UNUSED_COMPARISONS , OVERFLOWING_LITERALS , INVALID_NAN_COMPARISONS , AMBIGUOUS_WIDE_POINTER_COMPARISONS , UNPREDICTABLE_FUNCTION_POINTER_COMPARISONS]) ;
+    };
+}
+
+macro_805!()

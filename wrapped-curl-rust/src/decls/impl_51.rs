@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Error!();
-        WriteError!();
-        EasyData!();
-        ReadError!();
-        Handler!();
         SeekResult!();
+        Error!();
         InfoType!();
+        EasyData!();
+        Handler!();
+        ReadError!();
+        WriteError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_51 {
     };
 }
 
-impl_51!()
+impl_51!();

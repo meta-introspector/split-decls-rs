@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Arbitrary!();
         Result!();
         Unstructured!();
+        Arbitrary!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! implement_nonzero_int {
     };
 }
 
-implement_nonzero_int!()
+implement_nonzero_int!();

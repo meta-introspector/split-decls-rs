@@ -4,4 +4,4 @@ macro_rules! du_inner {
     };
 }
 
-du_inner!()
+du_inner!();

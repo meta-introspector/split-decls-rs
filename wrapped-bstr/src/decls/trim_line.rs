@@ -4,4 +4,4 @@ macro_rules! trim_line {
     };
 }
 
-trim_line!()
+trim_line!();

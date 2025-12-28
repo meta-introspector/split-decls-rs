@@ -11,4 +11,4 @@ macro_rules! parse_signature {
     };
 }
 
-parse_signature!()
+parse_signature!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         CredentialHelper!();
+        Config!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_284 {
     };
 }
 
-impl_284!()
+impl_284!();

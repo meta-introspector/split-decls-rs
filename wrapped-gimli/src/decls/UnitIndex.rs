@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Reader!();
         DebugCuIndex!();
         DebugTuIndex!();
         IndexSectionId!();
+        Reader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! UnitIndex {
     };
 }
 
-UnitIndex!()
+UnitIndex!();

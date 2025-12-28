@@ -4,4 +4,4 @@ macro_rules! HEX_CHARS_LOWER {
     };
 }
 
-HEX_CHARS_LOWER!()
+HEX_CHARS_LOWER!();

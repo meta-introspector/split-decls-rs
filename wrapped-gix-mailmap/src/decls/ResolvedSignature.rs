@@ -4,4 +4,4 @@ macro_rules! ResolvedSignature {
     };
 }
 
-ResolvedSignature!()
+ResolvedSignature!();

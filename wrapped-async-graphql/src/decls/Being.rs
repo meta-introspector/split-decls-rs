@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Interface!();
-        Human!();
         Alien!();
-        Cat!();
         Dog!();
+        Cat!();
+        Human!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Being {
     };
 }
 
-Being!()
+Being!();

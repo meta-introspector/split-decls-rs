@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        SetGlobalDefaultError!();
+        Event!();
+        Kind!();
+        Dispatch!();
+        Subscriber!();
+    };
+}
+
+macro_rules! set_global_default {
+    () => {
+        deps!();
+        # [doc = " Sets this dispatch as the global default for the duration of the entire program."] # [doc = " Will be used as a fallback if no thread-local dispatch has been set in a thread"] # [doc = " (using `with_default`.)"] # [doc = ""] # [doc = " Can only be set once; subsequent attempts to set the global default will fail."] # [doc = " Returns `Err` if the global default has already been set."] # [doc = ""] # [doc = " <div class=\"example-wrap\" style=\"display:inline-block\"><pre class=\"compile_fail\" style=\"white-space:normal;font:inherit;\">"] # [doc = "     <strong>Warning</strong>: In general, libraries should <em>not</em> call"] # [doc = "     <code>set_global_default()</code>! Doing so will cause conflicts when"] # [doc = "     executables that depend on the library try to set the default later."] # [doc = " </pre></div>"] # [doc = ""] # [doc = " [span]: super::span"] # [doc = " [`Subscriber`]: super::subscriber::Subscriber"] # [doc = " [`Event`]: super::event::Event"] pub fn set_global_default (dispatcher : Dispatch) -> Result < () , SetGlobalDefaultError > { if GLOBAL_INIT . compare_exchange (UNINITIALIZED , INITIALIZING , Ordering :: SeqCst , Ordering :: SeqCst ,) . is_ok () { let subscriber = { let subscriber = match dispatcher . subscriber { Kind :: Global (s) => s , Kind :: Scoped (s) => unsafe { & * Arc :: into_raw (s) } , } ; Kind :: Global (subscriber) } ; unsafe { GLOBAL_DISPATCH = Dispatch { subscriber } ; } GLOBAL_INIT . store (INITIALIZED , Ordering :: SeqCst) ; EXISTS . store (true , Ordering :: Release) ; Ok (()) } else { Err (SetGlobalDefaultError { _no_construct : () }) } }
+    };
+}
+
+set_global_default!()

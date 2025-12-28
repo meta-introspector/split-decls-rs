@@ -4,4 +4,4 @@ macro_rules! ideal_unit_std {
     };
 }
 
-ideal_unit_std!()
+ideal_unit_std!();

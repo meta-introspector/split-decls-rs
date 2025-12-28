@@ -4,4 +4,4 @@ macro_rules! cp949_left_hangul_encode {
     };
 }
 
-cp949_left_hangul_encode!()
+cp949_left_hangul_encode!();

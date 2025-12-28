@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Kde!();
         Bandwidth!();
-        Sample!();
         Gaussian!();
+        Sample!();
+        Kde!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! sweep_and_estimate {
     };
 }
 
-sweep_and_estimate!()
+sweep_and_estimate!();

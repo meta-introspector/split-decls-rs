@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Context!();
         ContainerType!();
         ServerResult!();
+        Context!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_679 {
     };
 }
 
-impl_679!()
+impl_679!();

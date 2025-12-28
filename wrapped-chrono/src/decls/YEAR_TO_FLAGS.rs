@@ -11,4 +11,4 @@ macro_rules! YEAR_TO_FLAGS {
     };
 }
 
-YEAR_TO_FLAGS!()
+YEAR_TO_FLAGS!();

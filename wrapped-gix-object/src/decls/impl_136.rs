@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Blob!();
         EntryKind!();
         Tree!();
         Commit!();
+        Blob!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_136 {
     };
 }
 
-impl_136!()
+impl_136!();

@@ -4,4 +4,4 @@ macro_rules! name_hygiene {
     };
 }
 
-name_hygiene!()
+name_hygiene!();

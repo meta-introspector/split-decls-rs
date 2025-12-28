@@ -4,4 +4,4 @@ macro_rules! is_utf8_continuation {
     };
 }
 
-is_utf8_continuation!()
+is_utf8_continuation!();

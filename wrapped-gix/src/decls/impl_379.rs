@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Proxy!();
-        Error!();
-        Repository!();
-        ThreadSafeRepository!();
         Note!();
         Options!();
+        Error!();
+        Proxy!();
         Worktree!();
         Pipeline!();
+        Repository!();
+        ThreadSafeRepository!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

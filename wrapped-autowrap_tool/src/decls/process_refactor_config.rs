@@ -11,4 +11,4 @@ macro_rules! process_refactor_config {
     };
 }
 
-process_refactor_config!()
+process_refactor_config!();

@@ -11,4 +11,4 @@ macro_rules! leb64_from_read {
     };
 }
 
-leb64_from_read!()
+leb64_from_read!();

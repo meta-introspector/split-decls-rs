@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Rustc!();
         Error!();
+        Rustc!();
         Version!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

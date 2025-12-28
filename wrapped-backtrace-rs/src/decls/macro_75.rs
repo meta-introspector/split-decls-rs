@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         HANDLE!();
-        PCSTR!();
         PAGE_PROTECTION_FLAGS!();
         SECURITY_ATTRIBUTES!();
+        PCSTR!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_75 {
     };
 }
 
-macro_75!()
+macro_75!();

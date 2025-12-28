@@ -4,4 +4,4 @@ macro_rules! TimeDelta {
     };
 }
 
-TimeDelta!()
+TimeDelta!();

@@ -4,4 +4,4 @@ macro_rules! FAN_LEN {
     };
 }
 
-FAN_LEN!()
+FAN_LEN!();

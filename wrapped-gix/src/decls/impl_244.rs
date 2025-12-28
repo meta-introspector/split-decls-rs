@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Commit!();
-        Error!();
-        Repository!();
-        Kind!();
-        Tree!();
         Object!();
+        Kind!();
         Tag!();
+        Error!();
         Blob!();
+        Repository!();
+        Tree!();
+        Commit!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_244 {
     };
 }
 
-impl_244!()
+impl_244!();

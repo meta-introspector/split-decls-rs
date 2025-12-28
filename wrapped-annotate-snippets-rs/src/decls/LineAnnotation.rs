@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AnnotationKind!();
         LineAnnotationType!();
         Loc!();
+        AnnotationKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LineAnnotation {
     };
 }
 
-LineAnnotation!()
+LineAnnotation!();

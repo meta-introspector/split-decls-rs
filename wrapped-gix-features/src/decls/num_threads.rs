@@ -4,4 +4,4 @@ macro_rules! num_threads {
     };
 }
 
-num_threads!()
+num_threads!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Extensions!();
-        Kind!();
-        Path!();
         StageOne!();
-        Core!();
+        Path!();
+        Extensions!();
         Worktree!();
         Error!();
+        Core!();
+        Kind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_525 {
     };
 }
 
-impl_525!()
+impl_525!();

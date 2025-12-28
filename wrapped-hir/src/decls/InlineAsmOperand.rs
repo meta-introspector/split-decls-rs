@@ -4,4 +4,4 @@ macro_rules! InlineAsmOperand {
     };
 }
 
-InlineAsmOperand!()
+InlineAsmOperand!();

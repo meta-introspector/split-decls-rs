@@ -4,4 +4,4 @@ macro_rules! PathAncestors {
     };
 }
 
-PathAncestors!()
+PathAncestors!();

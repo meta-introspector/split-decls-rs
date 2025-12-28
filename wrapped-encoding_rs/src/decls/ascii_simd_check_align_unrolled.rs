@@ -4,4 +4,4 @@ macro_rules! ascii_simd_check_align_unrolled {
     };
 }
 
-ascii_simd_check_align_unrolled!()
+ascii_simd_check_align_unrolled!();

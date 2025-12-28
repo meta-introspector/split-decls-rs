@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        BenchmarkId!();
-        ReportContext!();
         ValueFormatter!();
+        BenchmarkId!();
         MeasurementData!();
-        Data!();
         ComparisonData!();
+        Data!();
+        ReportContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! regression_comparison_small {
     };
 }
 
-regression_comparison_small!()
+regression_comparison_small!();

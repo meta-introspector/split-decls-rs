@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Consumer!();
         Try!();
-        ConsumerState!();
-        TryForEachFut!();
         TryForEachConsumer!();
+        TryForEachFut!();
+        ConsumerState!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_187 {
     };
 }
 
-impl_187!()
+impl_187!();

@@ -4,4 +4,4 @@ macro_rules! FillBuf {
     };
 }
 
-FillBuf!()
+FillBuf!();

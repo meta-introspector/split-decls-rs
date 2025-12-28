@@ -4,4 +4,4 @@ macro_rules! GLOB_CHARACTERS {
     };
 }
 
-GLOB_CHARACTERS!()
+GLOB_CHARACTERS!();

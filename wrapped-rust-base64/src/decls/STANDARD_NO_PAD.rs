@@ -11,4 +11,4 @@ macro_rules! STANDARD_NO_PAD {
     };
 }
 
-STANDARD_NO_PAD!()
+STANDARD_NO_PAD!();

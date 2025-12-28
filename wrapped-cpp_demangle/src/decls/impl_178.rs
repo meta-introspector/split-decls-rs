@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         LeafName!();
         GetLeafName!();
-        SubstitutionTable!();
         BuiltinType!();
+        SubstitutionTable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_178 {
     };
 }
 
-impl_178!()
+impl_178!();

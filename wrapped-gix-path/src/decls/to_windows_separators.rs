@@ -4,4 +4,4 @@ macro_rules! to_windows_separators {
     };
 }
 
-to_windows_separators!()
+to_windows_separators!();

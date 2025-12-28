@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         BinaryHeap!();
+        Kind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_381 {
     };
 }
 
-impl_381!()
+impl_381!();

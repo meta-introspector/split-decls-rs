@@ -4,4 +4,4 @@ macro_rules! short_describe_prefix {
     };
 }
 
-short_describe_prefix!()
+short_describe_prefix!();

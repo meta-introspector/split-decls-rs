@@ -11,4 +11,4 @@ macro_rules! populate_meta_dir {
     };
 }
 
-populate_meta_dir!()
+populate_meta_dir!();

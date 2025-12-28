@@ -4,4 +4,4 @@ macro_rules! ref_map {
     };
 }
 
-ref_map!()
+ref_map!();

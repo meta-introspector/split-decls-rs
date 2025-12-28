@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        OperatorName!();
-        SimpleId!();
         TemplateArgs!();
         Name!();
         DestructorName!();
+        OperatorName!();
+        SimpleId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! BaseUnresolvedName {
     };
 }
 
-BaseUnresolvedName!()
+BaseUnresolvedName!();

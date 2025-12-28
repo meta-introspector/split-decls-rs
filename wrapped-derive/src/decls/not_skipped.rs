@@ -4,4 +4,4 @@ macro_rules! not_skipped {
     };
 }
 
-not_skipped!()
+not_skipped!();

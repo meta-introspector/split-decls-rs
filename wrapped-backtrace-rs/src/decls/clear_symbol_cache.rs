@@ -4,4 +4,4 @@ macro_rules! clear_symbol_cache {
     };
 }
 
-clear_symbol_cache!()
+clear_symbol_cache!();

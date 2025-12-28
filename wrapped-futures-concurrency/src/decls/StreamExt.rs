@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WaitUntil!();
         IntoStream!();
+        WaitUntil!();
         FromStream!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! StreamExt {
     };
 }
 
-StreamExt!()
+StreamExt!();

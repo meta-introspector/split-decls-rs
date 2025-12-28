@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DisplayTarget!();
         HirDatabase!();
+        DisplayTarget!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! known_const_to_ast {
     };
 }
 
-known_const_to_ast!()
+known_const_to_ast!();

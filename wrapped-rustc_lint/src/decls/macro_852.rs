@@ -1,0 +1,7 @@
+macro_rules! macro_852 {
+    () => {
+        declare_lint ! { # [doc = " The `unused_braces` lint detects unnecessary braces around an"] # [doc = " expression."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " if { true } {"] # [doc = "     // ..."] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " The braces are not needed, and should be removed. This is the"] # [doc = " preferred style for writing these expressions."] pub (super) UNUSED_BRACES , Warn , "unnecessary braces around an expression" }
+    };
+}
+
+macro_852!()

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExtColor!();
         Action!();
+        ExtColor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StateDiff {
     };
 }
 
-StateDiff!()
+StateDiff!();

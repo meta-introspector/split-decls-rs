@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Execs!();
         RawOutput!();
+        Execs!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

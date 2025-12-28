@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Env!();
         Builder!();
+        Env!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_init_from_env {
     };
 }
 
-try_init_from_env!()
+try_init_from_env!();

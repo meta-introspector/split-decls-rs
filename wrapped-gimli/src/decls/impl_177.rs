@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endianity!();
         EndianSlice!();
+        Endianity!();
         EhFrame!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_177 {
     };
 }
 
-impl_177!()
+impl_177!();

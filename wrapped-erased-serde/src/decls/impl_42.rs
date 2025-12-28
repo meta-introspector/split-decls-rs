@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Result!();
         SeqAccess!();
-        Deserializer!();
-        EnumAccess!();
+        Result!();
         MapAccess!();
-        Out!();
-        Visitor!();
         Error!();
+        Out!();
+        EnumAccess!();
+        Visitor!();
+        Deserializer!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reader!();
         BorrowReader!();
+        Reader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SliceReader {
     };
 }
 
-SliceReader!()
+SliceReader!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf8Decoder!();
         DecoderResult!();
+        Utf8Decoder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! convert_utf8_to_utf16 {
     };
 }
 
-convert_utf8_to_utf16!()
+convert_utf8_to_utf16!();

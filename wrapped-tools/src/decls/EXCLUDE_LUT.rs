@@ -4,4 +4,4 @@ macro_rules! EXCLUDE_LUT {
     };
 }
 
-EXCLUDE_LUT!()
+EXCLUDE_LUT!();

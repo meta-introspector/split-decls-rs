@@ -4,4 +4,4 @@ macro_rules! vals_for {
     };
 }
 
-vals_for!()
+vals_for!();

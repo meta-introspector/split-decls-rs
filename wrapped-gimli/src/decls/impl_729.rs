@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Encoding!();
-        CommonInformationEntry!();
         Expression!();
         Writer!();
-        Register!();
+        CommonInformationEntry!();
         CallFrameInstruction!();
+        Encoding!();
+        Result!();
+        Register!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_729 {
     };
 }
 
-impl_729!()
+impl_729!();

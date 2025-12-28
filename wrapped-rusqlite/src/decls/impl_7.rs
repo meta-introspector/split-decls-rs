@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        Blob!();
+        Result!();
+    };
+}
+
+macro_rules! impl_7 {
+    () => {
+        deps!();
+        impl fmt :: Display for Error { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match * self { Self :: SqliteFailure (ref err , None) => err . fmt (f) , Self :: SqliteFailure (_ , Some (ref s)) => write ! (f , "{s}") , Self :: SqliteSingleThreadedMode => write ! (f , "SQLite was compiled or configured for single-threaded use only") , Self :: FromSqlConversionFailure (i , ref t , ref err) => { if i != UNKNOWN_COLUMN { write ! (f , "Conversion error from type {t} at index: {i}, {err}") } else { err . fmt (f) } } Self :: IntegralValueOutOfRange (col , val) => { if col != UNKNOWN_COLUMN { write ! (f , "Integer {val} out of range at index {col}") } else { write ! (f , "Integer {val} out of range") } } Self :: Utf8Error (ref err) => err . fmt (f) , Self :: NulError (ref err) => err . fmt (f) , Self :: InvalidParameterName (ref name) => write ! (f , "Invalid parameter name: {name}") , Self :: InvalidPath (ref p) => write ! (f , "Invalid path: {}" , p . to_string_lossy ()) , Self :: ExecuteReturnedResults => { write ! (f , "Execute returned results - did you mean to call query?") } Self :: QueryReturnedNoRows => write ! (f , "Query returned no rows") , Self :: QueryReturnedMoreThanOneRow => write ! (f , "Query returned more than one row") , Self :: InvalidColumnIndex (i) => write ! (f , "Invalid column index: {i}") , Self :: InvalidColumnName (ref name) => write ! (f , "Invalid column name: {name}") , Self :: InvalidColumnType (i , ref name , ref t) => { write ! (f , "Invalid column type {t} at index: {i}, name: {name}") } Self :: InvalidParameterCount (i1 , n1) => write ! (f , "Wrong number of parameters passed to query. Got {i1}, needed {n1}") , Self :: StatementChangedRows (i) => write ! (f , "Query changed {i} rows") , # [cfg (feature = "functions")] Self :: InvalidFunctionParameterType (i , ref t) => { write ! (f , "Invalid function parameter type {t} at index {i}") } # [cfg (feature = "vtab")] Self :: InvalidFilterParameterType (i , ref t) => { write ! (f , "Invalid filter parameter type {t} at index {i}") } # [cfg (feature = "functions")] Self :: UserFunctionError (ref err) => err . fmt (f) , Self :: ToSqlConversionFailure (ref err) => err . fmt (f) , Self :: InvalidQuery => write ! (f , "Query is not read-only") , # [cfg (feature = "vtab")] Self :: ModuleError (ref desc) => write ! (f , "{desc}") , Self :: UnwindingPanic => write ! (f , "unwinding panic") , # [cfg (feature = "functions")] Self :: GetAuxWrongType => write ! (f , "get_aux called with wrong type") , Self :: MultipleStatement => write ! (f , "Multiple statements provided") , # [cfg (feature = "blob")] Self :: BlobSizeError => "Blob size is insufficient" . fmt (f) , # [cfg (feature = "modern_sqlite")] Self :: SqlInputError { ref msg , offset , ref sql , .. } => write ! (f , "{msg} in {sql} at offset {offset}") , # [cfg (feature = "loadable_extension")] Self :: InitError (ref err) => err . fmt (f) , # [cfg (feature = "modern_sqlite")] Self :: InvalidDatabaseIndex (i) => write ! (f , "Invalid database index: {i}") , } } }
+    };
+}
+
+impl_7!()

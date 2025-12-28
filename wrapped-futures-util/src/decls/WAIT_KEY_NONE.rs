@@ -4,4 +4,4 @@ macro_rules! WAIT_KEY_NONE {
     };
 }
 
-WAIT_KEY_NONE!()
+WAIT_KEY_NONE!();

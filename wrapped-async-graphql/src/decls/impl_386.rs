@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         NoCache!();
         DataLoaderInner!();
-        DataLoader!();
         Loader!();
+        DataLoader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_386 {
     };
 }
 
-impl_386!()
+impl_386!();

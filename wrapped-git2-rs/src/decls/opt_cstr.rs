@@ -12,4 +12,4 @@ macro_rules! opt_cstr {
     };
 }
 
-opt_cstr!()
+opt_cstr!();

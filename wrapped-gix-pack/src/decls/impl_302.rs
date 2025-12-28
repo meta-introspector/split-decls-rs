@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         ProgressId!();
-        File!();
         Error!();
         DecodeEntry!();
-        Bundle!();
-        Options!();
-        Id!();
-        Tree!();
         Outcome!();
+        Id!();
+        File!();
+        Options!();
+        Tree!();
+        Bundle!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_302 {
     };
 }
 
-impl_302!()
+impl_302!();

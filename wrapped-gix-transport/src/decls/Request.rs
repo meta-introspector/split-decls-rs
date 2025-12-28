@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PostBodyDataKind!();
         Options!();
+        PostBodyDataKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Request {
     };
 }
 
-Request!()
+Request!();

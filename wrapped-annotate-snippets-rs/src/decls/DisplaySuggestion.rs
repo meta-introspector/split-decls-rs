@@ -4,4 +4,4 @@ macro_rules! DisplaySuggestion {
     };
 }
 
-DisplaySuggestion!()
+DisplaySuggestion!();

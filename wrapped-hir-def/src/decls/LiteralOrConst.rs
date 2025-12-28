@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PatId!();
         Const!();
         Literal!();
+        PatId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LiteralOrConst {
     };
 }
 
-LiteralOrConst!()
+LiteralOrConst!();

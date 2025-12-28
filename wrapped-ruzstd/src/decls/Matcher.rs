@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Sequence!();
+        CompressionLevel!();
+    };
+}
+
+macro_rules! Matcher {
+    () => {
+        deps!();
+        # [doc = " Trait used by the encoder that users can use to extend the matching facilities with their own algorithm"] # [doc = " making their own tradeoffs between runtime, memory usage and compression ratio"] # [doc = ""] # [doc = " This trait operates on buffers that represent the chunks of data the matching algorithm wants to work on."] # [doc = " Each one of these buffers is referred to as a *space*. One or more of these buffers represent the window"] # [doc = " the decoder will need to decode the data again."] # [doc = ""] # [doc = " This library asks the Matcher for a new buffer using `get_next_space` to allow reusing of allocated buffers when they are no longer part of the"] # [doc = " window of data that is being used for matching."] # [doc = ""] # [doc = " The library fills the buffer with data that is to be compressed and commits them back to the matcher using `commit_space`."] # [doc = ""] # [doc = " Then it will either call `start_matching` or, if the space is deemed not worth compressing, `skip_matching` is called."] # [doc = ""] # [doc = " This is repeated until no more data is left to be compressed."] pub trait Matcher { # [doc = " Get a space where we can put data to be matched on. Will be encoded as one block. The maximum allowed size is 128 kB."] fn get_next_space (& mut self) -> alloc :: vec :: Vec < u8 > ; # [doc = " Get a reference to the last commited space"] fn get_last_space (& mut self) -> & [u8] ; # [doc = " Commit a space to the matcher so it can be matched against"] fn commit_space (& mut self , space : alloc :: vec :: Vec < u8 >) ; # [doc = " Just process the data in the last commited space for future matching"] fn skip_matching (& mut self) ; # [doc = " Process the data in the last commited space for future matching AND generate matches for the data"] fn start_matching (& mut self , handle_sequence : impl for < 'a > FnMut (Sequence < 'a >)) ; # [doc = " Reset this matcher so it can be used for the next new frame"] fn reset (& mut self , level : CompressionLevel) ; # [doc = " The size of the window the decoder will need to execute all sequences produced by this matcher"] # [doc = ""] # [doc = " May change after a call to reset with a different compression level"] fn window_size (& self) -> u64 ; }
+    };
+}
+
+Matcher!()

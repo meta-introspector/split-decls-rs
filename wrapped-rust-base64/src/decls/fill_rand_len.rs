@@ -4,4 +4,4 @@ macro_rules! fill_rand_len {
     };
 }
 
-fill_rand_len!()
+fill_rand_len!();

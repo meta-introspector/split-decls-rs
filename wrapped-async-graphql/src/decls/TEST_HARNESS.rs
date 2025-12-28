@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Schema!();
+        Subscription!();
         Query!();
         Mutation!();
-        Subscription!();
+        Schema!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TEST_HARNESS {
     };
 }
 
-TEST_HARNESS!()
+TEST_HARNESS!();

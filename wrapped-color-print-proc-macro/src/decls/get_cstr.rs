@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         SpanError!();
         Error!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_cstr {
     };
 }
 
-get_cstr!()
+get_cstr!();

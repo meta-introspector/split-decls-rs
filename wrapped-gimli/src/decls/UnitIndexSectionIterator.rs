@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Reader!();
         IndexSectionId!();
         UnitIndex!();
+        Reader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UnitIndexSectionIterator {
     };
 }
 
-UnitIndexSectionIterator!()
+UnitIndexSectionIterator!();

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ParallelIterator!();
+        IntoParallelIterator!();
+    };
+}
+
+macro_rules! FromParallelIterator {
+    () => {
+        deps!();
+        # [doc = " `FromParallelIterator` implements the creation of a collection"] # [doc = " from a [`ParallelIterator`]. By implementing"] # [doc = " `FromParallelIterator` for a given type, you define how it will be"] # [doc = " created from an iterator."] # [doc = ""] # [doc = " `FromParallelIterator` is used through [`ParallelIterator`]'s [`collect()`] method."] # [doc = ""] # [doc = " [`collect()`]: ParallelIterator::collect()"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Implementing `FromParallelIterator` for your type:"] # [doc = ""] # [doc = " ```"] # [doc = " use rayon::prelude::*;"] # [doc = ""] # [doc = " struct BlackHole {"] # [doc = "     mass: usize,"] # [doc = " }"] # [doc = ""] # [doc = " impl<T: Send> FromParallelIterator<T> for BlackHole {"] # [doc = "     fn from_par_iter<I>(par_iter: I) -> Self"] # [doc = "         where I: IntoParallelIterator<Item = T>"] # [doc = "     {"] # [doc = "         let par_iter = par_iter.into_par_iter();"] # [doc = "         BlackHole {"] # [doc = "             mass: par_iter.count() * size_of::<T>(),"] # [doc = "         }"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " let bh: BlackHole = (0i32..1000).into_par_iter().collect();"] # [doc = " assert_eq!(bh.mass, 4000);"] # [doc = " ```"] pub trait FromParallelIterator < T > where T : Send , { # [doc = " Creates an instance of the collection from the parallel iterator `par_iter`."] # [doc = ""] # [doc = " If your collection is not naturally parallel, the easiest (and"] # [doc = " fastest) way to do this is often to collect `par_iter` into a"] # [doc = " [`LinkedList`] (via [`collect_vec_list`]) or another intermediate"] # [doc = " data structure and then sequentially extend your collection. However,"] # [doc = " a more 'native' technique is to use the [`par_iter.fold`] or"] # [doc = " [`par_iter.fold_with`] methods to create the collection."] # [doc = " Alternatively, if your collection is 'natively' parallel, you"] # [doc = " can use [`par_iter.for_each`] to process each element in turn."] # [doc = ""] # [doc = " [`LinkedList`]: std::collections::LinkedList"] # [doc = " [`collect_vec_list`]: ParallelIterator::collect_vec_list"] # [doc = " [`par_iter.fold`]: ParallelIterator::fold()"] # [doc = " [`par_iter.fold_with`]: ParallelIterator::fold_with()"] # [doc = " [`par_iter.for_each`]: ParallelIterator::for_each()"] fn from_par_iter < I > (par_iter : I) -> Self where I : IntoParallelIterator < Item = T > ; }
+    };
+}
+
+FromParallelIterator!()

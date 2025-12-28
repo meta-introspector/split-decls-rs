@@ -4,4 +4,4 @@ macro_rules! EncodedStringRef {
     };
 }
 
-EncodedStringRef!()
+EncodedStringRef!();

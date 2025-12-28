@@ -4,4 +4,4 @@ macro_rules! Ready {
     };
 }
 
-Ready!()
+Ready!();

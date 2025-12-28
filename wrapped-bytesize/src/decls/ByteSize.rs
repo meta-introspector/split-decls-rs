@@ -4,4 +4,4 @@ macro_rules! ByteSize {
     };
 }
 
-ByteSize!()
+ByteSize!();

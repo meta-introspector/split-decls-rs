@@ -56,4 +56,4 @@ struct Bar {
     };
 }
 
-test_expand_to_item_list!()
+test_expand_to_item_list!();

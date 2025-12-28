@@ -4,4 +4,4 @@ macro_rules! catch_unwind_on_weak_memory_arch {
     };
 }
 
-catch_unwind_on_weak_memory_arch!()
+catch_unwind_on_weak_memory_arch!();

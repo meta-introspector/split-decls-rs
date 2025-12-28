@@ -4,4 +4,4 @@ macro_rules! DEBT_SLOT_CNT {
     };
 }
 
-DEBT_SLOT_CNT!()
+DEBT_SLOT_CNT!();

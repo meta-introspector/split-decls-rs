@@ -4,4 +4,4 @@ macro_rules! heap_timer {
     };
 }
 
-heap_timer!()
+heap_timer!();

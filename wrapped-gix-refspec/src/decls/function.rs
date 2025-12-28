@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        RefSpecRef!();
-        Error!();
-        Push!();
-        Mode!();
-        Fetch!();
         Operation!();
+        Fetch!();
+        Error!();
+        RefSpecRef!();
+        Mode!();
+        Push!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! function {
     };
 }
 
-function!()
+function!();

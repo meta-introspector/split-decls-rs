@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Crate!();
-        Module!();
         Impl!();
+        Crate!();
         ExternBlock!();
+        Module!();
         Trait!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! ItemContainer {
     };
 }
 
-ItemContainer!()
+ItemContainer!();

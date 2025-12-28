@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Own!();
         StdError!();
         ErrorImpl!();
+        Own!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! object_reallocate_boxed {
     };
 }
 
-object_reallocate_boxed!()
+object_reallocate_boxed!();

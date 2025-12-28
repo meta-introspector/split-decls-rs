@@ -4,4 +4,4 @@ macro_rules! routine {
     };
 }
 
-routine!()
+routine!();

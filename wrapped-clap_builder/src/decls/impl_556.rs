@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Parser!();
         HelpTemplate!();
+        Parser!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_556 {
     };
 }
 
-impl_556!()
+impl_556!();

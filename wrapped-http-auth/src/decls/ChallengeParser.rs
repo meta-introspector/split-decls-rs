@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ChallengeRef!();
-        State!();
         ParamValue!();
+        State!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ChallengeParser {
     };
 }
 
-ChallengeParser!()
+ChallengeParser!();

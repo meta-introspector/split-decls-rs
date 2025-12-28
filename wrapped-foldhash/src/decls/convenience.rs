@@ -4,4 +4,4 @@ macro_rules! convenience {
     };
 }
 
-convenience!()
+convenience!();

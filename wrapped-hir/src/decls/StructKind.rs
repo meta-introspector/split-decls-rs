@@ -4,4 +4,4 @@ macro_rules! StructKind {
     };
 }
 
-StructKind!()
+StructKind!();

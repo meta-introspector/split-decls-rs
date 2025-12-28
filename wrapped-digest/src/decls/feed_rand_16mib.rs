@@ -11,4 +11,4 @@ macro_rules! feed_rand_16mib {
     };
 }
 
-feed_rand_16mib!()
+feed_rand_16mib!();

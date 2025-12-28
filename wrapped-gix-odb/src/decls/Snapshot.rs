@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexLookup!();
         Store!();
+        IndexLookup!();
         SlotIndexMarker!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Snapshot {
     };
 }
 
-Snapshot!()
+Snapshot!();

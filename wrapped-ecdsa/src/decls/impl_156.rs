@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DigestAlgorithm!();
         Signature!();
+        DigestAlgorithm!();
         SignatureWithOid!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_156 {
     };
 }
 
-impl_156!()
+impl_156!();

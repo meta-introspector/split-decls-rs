@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        PathDiagnosticCallbackData!();
-        Binder!();
-        ImplTrait!();
-        Generics!();
-        ImplTraitLoweringMode!();
-        AliasTy!();
-        PredicateFilter!();
-        TyLoweringContext!();
-        FnSig!();
         FnAbi!();
+        Binder!();
+        ImplTraitLoweringMode!();
+        Generics!();
+        AliasTy!();
+        FnSig!();
+        ImplTrait!();
+        TyLoweringContext!();
         ImplTraitId!();
+        PathDiagnosticCallbackData!();
+        PredicateFilter!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_800 {
     };
 }
 
-impl_800!()
+impl_800!();

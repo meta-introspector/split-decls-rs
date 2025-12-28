@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        MultiSpan!();
+        IntoDiagArg!();
+        DiagArgValue!();
     };
 }
 
 macro_rules! impl_26 {
     () => {
         deps!();
-        impl From < Span > for MultiSpan { fn from (span : Span) -> MultiSpan { MultiSpan :: from_span (span) } }
+        impl IntoDiagArg for ast :: util :: parser :: ExprPrecedence { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { DiagArgValue :: Number (self as i32) } }
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! WAITING {
     };
 }
 
-WAITING!()
+WAITING!();

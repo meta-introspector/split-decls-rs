@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        AsSerde!();
-        SerializeMetadata!();
+        SerializeRecord!();
+        SerdeMapVisitor!();
     };
 }
 
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl < 'a > AsSerde < 'a > for tracing_core :: Metadata < 'a > { type Serializable = SerializeMetadata < 'a > ; fn as_serde (& 'a self) -> Self :: Serializable { SerializeMetadata (self) } }
+        impl Serialize for SerializeRecord < '_ > { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : Serializer , { let serializer = serializer . serialize_map (None) ? ; let mut visitor = SerdeMapVisitor :: new (serializer) ; self . 0 . record (& mut visitor) ; visitor . finish () } }
     };
 }
 

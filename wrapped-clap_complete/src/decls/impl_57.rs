@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Generator!();
         Zsh!();
+        Generator!();
     };
 }
 
@@ -38,4 +38,4 @@ fi
     };
 }
 
-impl_57!()
+impl_57!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Context!();
         DebugFile!();
-        Result!();
         UnitRef!();
+        Error!();
+        Result!();
+        Context!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! name_entry {
     };
 }
 
-name_entry!()
+name_entry!();

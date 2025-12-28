@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Writer!();
         Relocation!();
+        Writer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RelocateWriter {
     };
 }
 
-RelocateWriter!()
+RelocateWriter!();

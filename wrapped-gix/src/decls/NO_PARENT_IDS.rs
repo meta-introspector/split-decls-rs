@@ -4,4 +4,4 @@ macro_rules! NO_PARENT_IDS {
     };
 }
 
-NO_PARENT_IDS!()
+NO_PARENT_IDS!();

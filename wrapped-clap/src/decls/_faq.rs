@@ -4,4 +4,4 @@ macro_rules! _faq {
     };
 }
 
-_faq!()
+_faq!();

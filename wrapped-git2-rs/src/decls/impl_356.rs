@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Binding!();
-        DiffBinaryFile!();
         DiffBinaryKind!();
+        DiffBinaryFile!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_356 {
     };
 }
 
-impl_356!()
+impl_356!();

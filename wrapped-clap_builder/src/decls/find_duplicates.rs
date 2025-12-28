@@ -4,4 +4,4 @@ macro_rules! find_duplicates {
     };
 }
 
-find_duplicates!()
+find_duplicates!();

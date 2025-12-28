@@ -24,4 +24,4 @@ fn main() {
     };
 }
 
-test_format_args_expand_with_comma_exprs!()
+test_format_args_expand_with_comma_exprs!();

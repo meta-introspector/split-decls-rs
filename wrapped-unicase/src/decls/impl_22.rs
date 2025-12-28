@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        UniCase!();
-        Ascii!();
-        Encoding!();
+        Unicode!();
     };
 }
 
 macro_rules! impl_22 {
     () => {
         deps!();
-        impl < S > From < Ascii < S > > for UniCase < S > { fn from (ascii : Ascii < S >) -> Self { UniCase (Encoding :: Ascii (ascii)) } }
+        impl < S : AsRef < str > > Unicode < S > { pub fn to_folded_case (& self) -> String { self . 0 . as_ref () . chars () . flat_map (lookup) . collect () } }
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! AttributeSpecification {
     };
 }
 
-AttributeSpecification!()
+AttributeSpecification!();

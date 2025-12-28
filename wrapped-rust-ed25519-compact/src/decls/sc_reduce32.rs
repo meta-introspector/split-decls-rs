@@ -4,4 +4,4 @@ macro_rules! sc_reduce32 {
     };
 }
 
-sc_reduce32!()
+sc_reduce32!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Mode!();
-        RefSpec!();
         RefSpecRef!();
+        RefSpec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

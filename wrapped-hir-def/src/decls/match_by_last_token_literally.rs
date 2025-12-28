@@ -22,4 +22,4 @@ struct Baz;
     };
 }
 
-match_by_last_token_literally!()
+match_by_last_token_literally!();

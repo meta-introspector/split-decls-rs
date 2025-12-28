@@ -11,4 +11,4 @@ macro_rules! set_err_io {
     };
 }
 
-set_err_io!()
+set_err_io!();

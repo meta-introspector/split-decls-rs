@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Any!();
         Extensions!();
+        Any!();
         ErrorExtensionValues!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Error {
     };
 }
 
-Error!()
+Error!();

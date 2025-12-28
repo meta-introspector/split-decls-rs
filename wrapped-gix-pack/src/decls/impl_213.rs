@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        File!();
         Version!();
         Error!();
         Kind!();
-        File!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_213 {
     };
 }
 
-impl_213!()
+impl_213!();

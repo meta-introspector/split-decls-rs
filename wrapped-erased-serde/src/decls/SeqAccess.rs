@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Error!();
         Out!();
         Result!();
         DeserializeSeed!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SeqAccess {
     };
 }
 
-SeqAccess!()
+SeqAccess!();

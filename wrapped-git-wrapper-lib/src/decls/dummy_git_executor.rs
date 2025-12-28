@@ -4,4 +4,4 @@ macro_rules! dummy_git_executor {
     };
 }
 
-dummy_git_executor!()
+dummy_git_executor!();

@@ -4,4 +4,4 @@ macro_rules! SenderTask {
     };
 }
 
-SenderTask!()
+SenderTask!();

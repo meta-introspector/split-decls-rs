@@ -4,4 +4,4 @@ macro_rules! seq_lock {
     };
 }
 
-seq_lock!()
+seq_lock!();

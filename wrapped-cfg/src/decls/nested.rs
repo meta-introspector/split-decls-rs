@@ -4,4 +4,4 @@ macro_rules! nested {
     };
 }
 
-nested!()
+nested!();

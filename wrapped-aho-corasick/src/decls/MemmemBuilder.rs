@@ -4,4 +4,4 @@ macro_rules! MemmemBuilder {
     };
 }
 
-MemmemBuilder!()
+MemmemBuilder!();

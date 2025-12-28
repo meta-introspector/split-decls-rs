@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         FindConflicts!();
-        OverlappingFieldsCanBeMerged!();
         VisitorContext!();
+        Visitor!();
+        OverlappingFieldsCanBeMerged!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

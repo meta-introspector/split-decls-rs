@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        Repository!();
-        Blob!();
-        CandidateInfo!();
-        Commit!();
-        Error!();
-        Object!();
         Tag!();
-        Clone!();
+        Repository!();
+        CandidateInfo!();
+        Error!();
         Tree!();
+        Blob!();
+        Clone!();
+        Commit!();
+        Object!();
+        Kind!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_877 {
     };
 }
 
-impl_877!()
+impl_877!();

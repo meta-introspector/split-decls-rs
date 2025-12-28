@@ -4,4 +4,4 @@ macro_rules! static_drop {
     };
 }
 
-static_drop!()
+static_drop!();

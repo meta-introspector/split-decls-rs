@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ObjectIdentifier!();
         Result!();
         Names!();
+        Error!();
+        ObjectIdentifier!();
         Database!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

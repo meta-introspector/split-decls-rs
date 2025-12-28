@@ -4,4 +4,4 @@ macro_rules! MAX_ONE_B {
     };
 }
 
-MAX_ONE_B!()
+MAX_ONE_B!();

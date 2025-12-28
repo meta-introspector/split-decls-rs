@@ -11,4 +11,4 @@ macro_rules! copy_wide {
     };
 }
 
-copy_wide!()
+copy_wide!();

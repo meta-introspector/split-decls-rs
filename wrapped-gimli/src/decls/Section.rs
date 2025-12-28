@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Writer!();
         SectionId!();
+        Writer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Section {
     };
 }
 
-Section!()
+Section!();

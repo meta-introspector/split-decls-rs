@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpandDatabase!();
         Attr!();
+        ExpandDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_cfg {
     };
 }
 
-check_cfg!()
+check_cfg!();

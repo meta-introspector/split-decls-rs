@@ -4,4 +4,4 @@ macro_rules! blocking_io {
     };
 }
 
-blocking_io!()
+blocking_io!();

@@ -4,4 +4,4 @@ macro_rules! Gnuplot {
     };
 }
 
-Gnuplot!()
+Gnuplot!();

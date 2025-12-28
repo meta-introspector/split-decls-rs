@@ -4,4 +4,4 @@ macro_rules! NoCache {
     };
 }
 
-NoCache!()
+NoCache!();

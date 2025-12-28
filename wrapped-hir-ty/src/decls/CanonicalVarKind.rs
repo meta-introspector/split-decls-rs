@@ -4,4 +4,4 @@ macro_rules! CanonicalVarKind {
     };
 }
 
-CanonicalVarKind!()
+CanonicalVarKind!();

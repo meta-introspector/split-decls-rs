@@ -4,4 +4,4 @@ macro_rules! MatchKind {
     };
 }
 
-MatchKind!()
+MatchKind!();

@@ -11,4 +11,4 @@ macro_rules! bstring_arbitrary {
     };
 }
 
-bstring_arbitrary!()
+bstring_arbitrary!();

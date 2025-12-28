@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Outcome!();
-        EntriesOutcome!();
-        Options!();
-        State!();
         Error!();
+        State!();
+        EntriesOutcome!();
+        Outcome!();
+        Options!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_136 {
     };
 }
 
-impl_136!()
+impl_136!();

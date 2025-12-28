@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DateTime!();
-        Utc!();
         FixedOffset!();
+        Utc!();
+        DateTime!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_to_string_round_trip {
     };
 }
 
-test_to_string_round_trip!()
+test_to_string_round_trip!();

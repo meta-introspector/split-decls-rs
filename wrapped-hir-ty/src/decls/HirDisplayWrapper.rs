@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DisplayTarget!();
         DisplayLifetime!();
+        DisplayTarget!();
+        DisplayKind!();
         HirDatabase!();
         ClosureStyle!();
-        DisplayKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! HirDisplayWrapper {
     };
 }
 
-HirDisplayWrapper!()
+HirDisplayWrapper!();

@@ -1,0 +1,7 @@
+macro_rules! BUFFER_WITH_SPILL_CAPACITY {
+    () => {
+        const BUFFER_WITH_SPILL_CAPACITY : usize = BUFFER_CAPACITY + 1 ;
+    };
+}
+
+BUFFER_WITH_SPILL_CAPACITY!()

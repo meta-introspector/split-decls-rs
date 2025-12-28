@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Union!();
         Adt!();
+        Union!();
         Enum!();
         Struct!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

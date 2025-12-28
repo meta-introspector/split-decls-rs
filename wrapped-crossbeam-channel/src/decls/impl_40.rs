@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         SenderFlavor!();
-        Token!();
-        Operation!();
-        Sender!();
-        Context!();
         SelectHandle!();
+        Operation!();
+        Token!();
+        Context!();
+        Sender!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

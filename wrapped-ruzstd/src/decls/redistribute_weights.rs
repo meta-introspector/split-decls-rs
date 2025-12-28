@@ -1,0 +1,7 @@
+macro_rules! redistribute_weights {
+    () => {
+        # [doc = " Sometimes distribute_weights generates weights that require too many bits to encode"] # [doc = " This redistributes the weights to have less variance by raising the lower weights while still maintaining the"] # [doc = " required attributes of the weight distribution"] fn redistribute_weights (weights : & mut [usize] , max_num_bits : usize) { let weight_sum_log = weights . iter () . copied () . map (| x | 1 << x) . sum :: < usize > () . ilog2 () as usize ; if weight_sum_log < max_num_bits { return ; } let decrease_weights_by = weight_sum_log - max_num_bits + 1 ; let mut added_weights = 0 ; for weight in weights . iter_mut () { if * weight < decrease_weights_by { for add in * weight .. decrease_weights_by { added_weights += 1 << add ; } * weight = decrease_weights_by ; } } while added_weights > 0 { let mut current_idx = 0 ; let mut current_weight = 0 ; for (idx , weight) in weights . iter () . copied () . enumerate () { if 1 << (weight - 1) > added_weights { break ; } if weight > current_weight { current_weight = weight ; current_idx = idx ; } } added_weights -= 1 << (current_weight - 1) ; weights [current_idx] -= 1 ; } if weights [0] > 1 { let offset = weights [0] - 1 ; for weight in weights . iter_mut () { * weight -= offset ; } } }
+    };
+}
+
+redistribute_weights!()

@@ -11,4 +11,4 @@ macro_rules! serialize_upper {
     };
 }
 
-serialize_upper!()
+serialize_upper!();

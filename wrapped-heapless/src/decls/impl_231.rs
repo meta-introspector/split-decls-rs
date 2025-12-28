@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Drain!();
-        StringView!();
-        VecInner!();
-        StringInner!();
-        String!();
         LenType!();
+        VecInner!();
+        StringView!();
+        Drain!();
+        StringInner!();
         CapacityError!();
+        String!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_231 {
     };
 }
 
-impl_231!()
+impl_231!();

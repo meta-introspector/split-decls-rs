@@ -4,4 +4,4 @@ macro_rules! GlobWalkerBuilder {
     };
 }
 
-GlobWalkerBuilder!()
+GlobWalkerBuilder!();

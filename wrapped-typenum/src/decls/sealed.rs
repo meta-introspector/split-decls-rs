@@ -1,8 +1,20 @@
 macro_rules! deps {
     () => {
-        Less!();
+        PInt!();
+        B1!();
+        UInt!();
         Greater!();
+        Z0!();
+        ATerm!();
+        Bit!();
+        NonZero!();
+        NInt!();
+        TArr!();
+        Less!();
+        Unsigned!();
         Equal!();
+        UTerm!();
+        B0!();
     };
 }
 

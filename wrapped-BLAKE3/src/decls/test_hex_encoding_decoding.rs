@@ -12,4 +12,4 @@ macro_rules! test_hex_encoding_decoding {
     };
 }
 
-test_hex_encoding_decoding!()
+test_hex_encoding_decoding!();

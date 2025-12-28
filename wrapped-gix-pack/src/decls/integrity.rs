@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        EntryIndex!();
         Error!();
         Outcome!();
-        ProgressId!();
-        Statistics!();
         Id!();
         Object!();
+        EntryIndex!();
+        Statistics!();
+        ProgressId!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! integrity {
     };
 }
 
-integrity!()
+integrity!();

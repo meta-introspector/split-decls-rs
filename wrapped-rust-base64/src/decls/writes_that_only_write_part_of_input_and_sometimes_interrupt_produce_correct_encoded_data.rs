@@ -12,4 +12,4 @@ macro_rules! writes_that_only_write_part_of_input_and_sometimes_interrupt_produc
     };
 }
 
-writes_that_only_write_part_of_input_and_sometimes_interrupt_produce_correct_encoded_data!()
+writes_that_only_write_part_of_input_and_sometimes_interrupt_produce_correct_encoded_data!();

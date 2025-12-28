@@ -4,4 +4,4 @@ macro_rules! utils {
     };
 }
 
-utils!()
+utils!();

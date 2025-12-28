@@ -4,4 +4,4 @@ macro_rules! current_thread_id {
     };
 }
 
-current_thread_id!()
+current_thread_id!();

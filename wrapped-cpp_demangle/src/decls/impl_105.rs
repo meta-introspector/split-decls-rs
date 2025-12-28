@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SubstitutionTable!();
         Prefix!();
-        GetLeafName!();
+        SubstitutionTable!();
+        TemplateParam!();
         LeafName!();
         Decltype!();
-        TemplateParam!();
+        GetLeafName!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

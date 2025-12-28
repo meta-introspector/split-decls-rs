@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         Result!();
+        ErrorKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_405 {
     };
 }
 
-impl_405!()
+impl_405!();

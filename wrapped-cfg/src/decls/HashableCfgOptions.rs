@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CfgAtom!();
         CfgOptions!();
+        CfgAtom!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HashableCfgOptions {
     };
 }
 
-HashableCfgOptions!()
+HashableCfgOptions!();

@@ -4,4 +4,4 @@ macro_rules! dependency {
     };
 }
 
-dependency!()
+dependency!();

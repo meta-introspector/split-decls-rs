@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArrayLength!();
         GenericSequence!();
+        ArrayLength!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Concat {
     };
 }
 
-Concat!()
+Concat!();

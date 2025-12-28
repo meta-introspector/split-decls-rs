@@ -4,4 +4,4 @@ macro_rules! FILE_MAP {
     };
 }
 
-FILE_MAP!()
+FILE_MAP!();

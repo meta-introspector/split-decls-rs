@@ -4,4 +4,4 @@ macro_rules! OidArray {
     };
 }
 
-OidArray!()
+OidArray!();

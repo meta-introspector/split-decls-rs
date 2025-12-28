@@ -4,4 +4,4 @@ macro_rules! expect_passes_rule {
     };
 }
 
-expect_passes_rule!()
+expect_passes_rule!();

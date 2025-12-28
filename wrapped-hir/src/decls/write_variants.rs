@@ -12,4 +12,4 @@ macro_rules! write_variants {
     };
 }
 
-write_variants!()
+write_variants!();

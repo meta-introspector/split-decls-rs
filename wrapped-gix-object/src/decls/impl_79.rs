@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        BlobRef!();
-        TreeRef!();
-        LooseDecodeError!();
-        Commit!();
-        Blob!();
         TagRef!();
+        LooseDecodeError!();
         Tree!();
-        Tag!();
+        BlobRef!();
+        CommitRef!();
+        Commit!();
         Object!();
         ObjectRef!();
-        Error!();
-        CommitRef!();
+        Blob!();
+        Tag!();
         Kind!();
+        TreeRef!();
+        Error!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

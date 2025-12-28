@@ -4,4 +4,4 @@ macro_rules! run_commands {
     };
 }
 
-run_commands!()
+run_commands!();

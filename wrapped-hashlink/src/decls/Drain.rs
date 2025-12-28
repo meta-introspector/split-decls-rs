@@ -4,4 +4,4 @@ macro_rules! Drain {
     };
 }
 
-Drain!()
+Drain!();

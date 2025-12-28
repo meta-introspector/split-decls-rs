@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         MacroId!();
-        BlockInfo!();
-        ModuleId!();
-        ModuleData!();
-        Item!();
         DefMapCrateData!();
+        ModuleId!();
+        BlockInfo!();
+        Item!();
+        ModuleData!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! DefMap {
     };
 }
 
-DefMap!()
+DefMap!();

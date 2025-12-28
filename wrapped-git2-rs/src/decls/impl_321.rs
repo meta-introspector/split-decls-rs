@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
-        DiffCallbacks!();
-        DiffDelta!();
-        Diff!();
-        Binding!();
-        DiffFormat!();
-        FileCb!();
-        HunkCb!();
         DiffLine!();
-        BinaryCb!();
         DiffFindOptions!();
-        DiffFormatEmailOptions!();
-        DiffPatchidOptions!();
-        DiffHunk!();
-        Deltas!();
         Commit!();
+        DiffFormatEmailOptions!();
+        DiffHunk!();
+        BinaryCb!();
         Buf!();
         Oid!();
+        DiffDelta!();
+        DiffFormat!();
         LineCb!();
-        DiffStats!();
-        Error!();
+        HunkCb!();
+        Diff!();
+        DiffPatchidOptions!();
         PrintCb!();
+        Binding!();
+        DiffCallbacks!();
+        Deltas!();
+        FileCb!();
+        Error!();
+        DiffStats!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! impl_321 {
     };
 }
 
-impl_321!()
+impl_321!();

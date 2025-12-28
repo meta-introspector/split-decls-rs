@@ -11,4 +11,4 @@ macro_rules! __EnumValue {
     };
 }
 
-__EnumValue!()
+__EnumValue!();

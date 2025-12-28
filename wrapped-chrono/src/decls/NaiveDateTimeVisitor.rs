@@ -4,4 +4,4 @@ macro_rules! NaiveDateTimeVisitor {
     };
 }
 
-NaiveDateTimeVisitor!()
+NaiveDateTimeVisitor!();

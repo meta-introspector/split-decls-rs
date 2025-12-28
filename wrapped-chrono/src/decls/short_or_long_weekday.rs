@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Weekday!();
         ParseResult!();
+        Weekday!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! short_or_long_weekday {
     };
 }
 
-short_or_long_weekday!()
+short_or_long_weekday!();

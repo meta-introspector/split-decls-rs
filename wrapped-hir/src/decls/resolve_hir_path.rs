@@ -11,4 +11,4 @@ macro_rules! resolve_hir_path {
     };
 }
 
-resolve_hir_path!()
+resolve_hir_path!();

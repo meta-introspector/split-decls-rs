@@ -4,4 +4,4 @@ macro_rules! without_dot_git_dir {
     };
 }
 
-without_dot_git_dir!()
+without_dot_git_dir!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        EmailCreateOptions!();
         DiffOptions!();
         DiffFindOptions!();
-        EmailCreateOptions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_368 {
     };
 }
 
-impl_368!()
+impl_368!();

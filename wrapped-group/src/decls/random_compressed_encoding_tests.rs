@@ -11,4 +11,4 @@ macro_rules! random_compressed_encoding_tests {
     };
 }
 
-random_compressed_encoding_tests!()
+random_compressed_encoding_tests!();

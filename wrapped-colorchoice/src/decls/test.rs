@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AtomicChoice!();
         ColorChoice!();
+        AtomicChoice!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

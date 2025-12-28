@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Match!();
-        Searcher!();
-        Patterns!();
         SearcherT!();
+        Searcher!();
         Teddy!();
+        Match!();
         Slim!();
+        Patterns!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! aarch64 {
     };
 }
 
-aarch64!()
+aarch64!();

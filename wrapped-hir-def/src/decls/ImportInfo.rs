@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Item!();
-        Complete!();
-        ModuleId!();
         ImportMap!();
+        Item!();
+        ModuleId!();
+        Complete!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ImportInfo {
     };
 }
 
-ImportInfo!()
+ImportInfo!();

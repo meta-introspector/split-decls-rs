@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        QueryEdge!();
+        IterationCount!();
+        DatabaseKeyIndex!();
+        CycleHeads!();
+        Revision!();
+        DisambiguatorMap!();
+        IdentityMap!();
+        FxIndexSet!();
+        Durability!();
+    };
+}
+
+macro_rules! ActiveQuery {
+    () => {
+        deps!();
+        # [derive (Debug)] pub (crate) struct ActiveQuery { # [doc = " What query is executing"] pub (crate) database_key_index : DatabaseKeyIndex , # [doc = " Minimum durability of inputs observed so far."] durability : Durability , # [doc = " Maximum revision of all inputs observed. If we observe an"] # [doc = " untracked read, this will be set to the most recent revision."] changed_at : Revision , # [doc = " Inputs: Set of subqueries that were accessed thus far."] # [doc = " Outputs: Tracks values written by this query. Could be..."] # [doc = ""] # [doc = " * invocations of `specify`"] # [doc = " * accumulators pushed to"] input_outputs : FxIndexSet < QueryEdge > , # [doc = " True if there was an untracked read."] untracked_read : bool , # [doc = " When new tracked structs are created, their data is hashed, and the resulting"] # [doc = " hash is added to this map. If it is not present, then the disambiguator is 0."] # [doc = " Otherwise it is 1 more than the current value (which is incremented)."] # [doc = ""] # [doc = " This table starts empty as the query begins and is gradually populated."] # [doc = " Note that if a query executes in 2 different revisions but creates the same"] # [doc = " set of tracked structs, they will get the same disambiguator values."] disambiguator_map : DisambiguatorMap , # [doc = " Map from tracked struct keys (which include the hash + disambiguator) to their"] # [doc = " final id."] tracked_struct_ids : IdentityMap , # [doc = " Stores the values accumulated to the given ingredient."] # [doc = " The type of accumulated value is erased but known to the ingredient."] # [cfg (feature = "accumulator")] accumulated : AccumulatedMap , # [doc = " [`InputAccumulatedValues::Empty`] if any input read during the query's execution"] # [doc = " has any accumulated values."] # [cfg (feature = "accumulator")] accumulated_inputs : InputAccumulatedValues , # [doc = " Provisional cycle results that this query depends on."] cycle_heads : CycleHeads , # [doc = " If this query is a cycle head, iteration count of that cycle."] iteration_count : IterationCount , }
+    };
+}
+
+ActiveQuery!()

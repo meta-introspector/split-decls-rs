@@ -4,4 +4,4 @@ macro_rules! META_IDENTITY {
     };
 }
 
-META_IDENTITY!()
+META_IDENTITY!();

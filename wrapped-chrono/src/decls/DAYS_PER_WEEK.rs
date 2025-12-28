@@ -4,4 +4,4 @@ macro_rules! DAYS_PER_WEEK {
     };
 }
 
-DAYS_PER_WEEK!()
+DAYS_PER_WEEK!();

@@ -11,4 +11,4 @@ macro_rules! get_yield {
     };
 }
 
-get_yield!()
+get_yield!();

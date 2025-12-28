@@ -4,4 +4,4 @@ macro_rules! SimpleLookup {
     };
 }
 
-SimpleLookup!()
+SimpleLookup!();

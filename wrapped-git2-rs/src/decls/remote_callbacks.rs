@@ -4,4 +4,4 @@ macro_rules! remote_callbacks {
     };
 }
 
-remote_callbacks!()
+remote_callbacks!();

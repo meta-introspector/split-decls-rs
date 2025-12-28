@@ -11,4 +11,4 @@ macro_rules! convert_to_diffable {
     };
 }
 
-convert_to_diffable!()
+convert_to_diffable!();

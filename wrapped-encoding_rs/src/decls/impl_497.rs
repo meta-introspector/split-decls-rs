@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        VariantDecoder!();
-        DecoderResult!();
-        Decoder!();
-        BomHandling!();
-        Encoder!();
         CoderResult!();
+        DecoderResult!();
+        VariantDecoder!();
+        BomHandling!();
         Encoding!();
+        Decoder!();
+        Encoder!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_497 {
     };
 }
 
-impl_497!()
+impl_497!();

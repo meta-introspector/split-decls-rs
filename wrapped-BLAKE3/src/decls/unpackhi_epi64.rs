@@ -4,4 +4,4 @@ macro_rules! unpackhi_epi64 {
     };
 }
 
-unpackhi_epi64!()
+unpackhi_epi64!();

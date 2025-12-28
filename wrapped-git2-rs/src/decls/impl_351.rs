@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         DiffStats!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_351 {
     };
 }
 
-impl_351!()
+impl_351!();

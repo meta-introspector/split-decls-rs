@@ -11,4 +11,4 @@ macro_rules! unwrap_downcast_into {
     };
 }
 
-unwrap_downcast_into!()
+unwrap_downcast_into!();

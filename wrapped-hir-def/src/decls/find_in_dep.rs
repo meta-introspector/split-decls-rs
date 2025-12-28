@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FindPathCtx!();
-        ModuleId!();
         ItemInNs!();
+        ModuleId!();
         Choice!();
+        FindPathCtx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! find_in_dep {
     };
 }
 
-find_in_dep!()
+find_in_dep!();

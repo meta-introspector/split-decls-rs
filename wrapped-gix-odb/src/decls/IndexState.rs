@@ -4,4 +4,4 @@ macro_rules! IndexState {
     };
 }
 
-IndexState!()
+IndexState!();

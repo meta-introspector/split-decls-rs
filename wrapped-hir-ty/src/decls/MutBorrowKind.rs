@@ -4,4 +4,4 @@ macro_rules! MutBorrowKind {
     };
 }
 
-MutBorrowKind!()
+MutBorrowKind!();

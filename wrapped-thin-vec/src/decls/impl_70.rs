@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         ThinVec!();
+        IntoIter!();
     };
 }
 

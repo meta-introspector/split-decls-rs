@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Extension!();
         ExecuteFutFactory!();
         Data!();
-        Extension!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! NextExecute {
     };
 }
 
-NextExecute!()
+NextExecute!();

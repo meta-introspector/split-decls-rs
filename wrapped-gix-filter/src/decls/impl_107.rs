@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MaybeDelayed!();
-        Process!();
         ToWorktreeOutcome!();
+        Process!();
+        MaybeDelayed!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

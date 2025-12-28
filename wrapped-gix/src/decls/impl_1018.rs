@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Default!();
         Outcome!();
+        Default!();
         Error!();
+        State!();
         Pathspec!();
         Action!();
-        Status!();
         Repository!();
+        Status!();
         TrackRenames!();
-        State!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_1018 {
     };
 }
 
-impl_1018!()
+impl_1018!();

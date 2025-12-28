@@ -4,4 +4,4 @@ macro_rules! never_type {
     };
 }
 
-never_type!()
+never_type!();

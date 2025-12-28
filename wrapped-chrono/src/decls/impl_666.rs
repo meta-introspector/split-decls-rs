@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TimeZone!();
         Utc!();
+        NaiveDateTime!();
+        TimeZone!();
+        MappedLocalTime!();
         Offset!();
         NaiveDate!();
-        NaiveDateTime!();
-        MappedLocalTime!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_666 {
     };
 }
 
-impl_666!()
+impl_666!();

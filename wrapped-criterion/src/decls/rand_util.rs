@@ -4,4 +4,4 @@ macro_rules! rand_util {
     };
 }
 
-rand_util!()
+rand_util!();

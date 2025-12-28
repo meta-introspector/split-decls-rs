@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IteratorType!();
-        Relation!();
-        ChangeId!();
-        Error!();
         TreeInfoTuple!();
         Visit!();
+        Error!();
+        Relation!();
+        IteratorType!();
+        ChangeId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! catchup_lhs_with_rhs {
     };
 }
 
-catchup_lhs_with_rhs!()
+catchup_lhs_with_rhs!();

@@ -4,4 +4,4 @@ macro_rules! set_vec_to_slice {
     };
 }
 
-set_vec_to_slice!()
+set_vec_to_slice!();

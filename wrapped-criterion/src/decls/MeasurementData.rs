@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Distributions!();
+        LabeledSample!();
         Throughput!();
         Estimates!();
-        ComparisonData!();
-        LabeledSample!();
         Data!();
+        ComparisonData!();
+        Distributions!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! MeasurementData {
     };
 }
 
-MeasurementData!()
+MeasurementData!();

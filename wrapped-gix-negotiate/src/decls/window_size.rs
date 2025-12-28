@@ -4,4 +4,4 @@ macro_rules! window_size {
     };
 }
 
-window_size!()
+window_size!();

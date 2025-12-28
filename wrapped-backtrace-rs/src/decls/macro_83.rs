@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FILE_MAP!();
         HANDLE!();
+        FILE_MAP!();
         MEMORY_MAPPED_VIEW_ADDRESS!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_83 {
     };
 }
 
-macro_83!()
+macro_83!();

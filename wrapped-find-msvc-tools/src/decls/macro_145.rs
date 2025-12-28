@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LPCOLESTR!();
         HRESULT!();
         PULONGLONG!();
+        LPCOLESTR!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_145 {
     };
 }
 
-macro_145!()
+macro_145!();

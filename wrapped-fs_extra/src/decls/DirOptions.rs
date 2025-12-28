@@ -4,4 +4,4 @@ macro_rules! DirOptions {
     };
 }
 
-DirOptions!()
+DirOptions!();

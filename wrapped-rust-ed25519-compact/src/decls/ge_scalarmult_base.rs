@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GeP3!();
         Fe!();
+        GeP3!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ge_scalarmult_base {
     };
 }
 
-ge_scalarmult_base!()
+ge_scalarmult_base!();

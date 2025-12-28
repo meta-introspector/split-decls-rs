@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pending!();
         StreamExt!();
+        Pending!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! pending {
     };
 }
 
-pending!()
+pending!();

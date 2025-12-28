@@ -4,4 +4,4 @@ macro_rules! ksx1001_compatibility_hangul_encode {
     };
 }
 
-ksx1001_compatibility_hangul_encode!()
+ksx1001_compatibility_hangul_encode!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Expr!();
-        Array!();
-        InlineAsm!();
         OffsetOf!();
         Const!();
+        Expr!();
+        InlineAsm!();
+        Array!();
         Literal!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_227 {
     };
 }
 
-impl_227!()
+impl_227!();

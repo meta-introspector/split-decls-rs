@@ -4,4 +4,4 @@ macro_rules! styled_str {
     };
 }
 
-styled_str!()
+styled_str!();

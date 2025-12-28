@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ID!();
-        ParseError!();
-        CompassPt!();
         Port!();
+        CompassPt!();
+        ParseError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

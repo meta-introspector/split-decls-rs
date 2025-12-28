@@ -1,0 +1,7 @@
+macro_rules! macro_10 {
+    () => {
+        declare_lint ! { # [doc = " The `must_not_suspend` lint guards against values that shouldn't be held across suspend points"] # [doc = " (`.await`)"] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " #![feature(must_not_suspend)]"] # [doc = " #![warn(must_not_suspend)]"] # [doc = ""] # [doc = " #[must_not_suspend]"] # [doc = " struct SyncThing {}"] # [doc = ""] # [doc = " async fn yield_now() {}"] # [doc = ""] # [doc = " pub async fn uhoh() {"] # [doc = "     let guard = SyncThing {};"] # [doc = "     yield_now().await;"] # [doc = "     let _guard = guard;"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " The `must_not_suspend` lint detects values that are marked with the `#[must_not_suspend]`"] # [doc = " attribute being held across suspend points. A \"suspend\" point is usually a `.await` in an async"] # [doc = " function."] # [doc = ""] # [doc = " This attribute can be used to mark values that are semantically incorrect across suspends"] # [doc = " (like certain types of timers), values that have async alternatives, and values that"] # [doc = " regularly cause problems with the `Send`-ness of async fn's returned futures (like"] # [doc = " `MutexGuard`'s)"] # [doc = ""] pub MUST_NOT_SUSPEND , Allow , "use of a `#[must_not_suspend]` value across a yield point" , @ feature_gate = must_not_suspend ; }
+    };
+}
+
+macro_10!()

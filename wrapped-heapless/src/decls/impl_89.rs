@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pos!();
         Vec!();
+        Pos!();
         CoreMap!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

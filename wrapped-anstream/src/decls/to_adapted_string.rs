@@ -12,4 +12,4 @@ macro_rules! to_adapted_string {
     };
 }
 
-to_adapted_string!()
+to_adapted_string!();

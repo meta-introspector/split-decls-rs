@@ -4,4 +4,4 @@ macro_rules! playground_source {
     };
 }
 
-playground_source!()
+playground_source!();

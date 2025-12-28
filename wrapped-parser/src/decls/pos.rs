@@ -4,4 +4,4 @@ macro_rules! pos {
     };
 }
 
-pos!()
+pos!();

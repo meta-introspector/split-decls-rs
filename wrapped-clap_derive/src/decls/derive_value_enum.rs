@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Item!();
         Name!();
+        Item!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! derive_value_enum {
     };
 }
 
-derive_value_enum!()
+derive_value_enum!();

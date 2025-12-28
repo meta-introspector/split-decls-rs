@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        TransitProcess!();
-        ErrorKind!();
-        Result!();
         TransitState!();
-        DirOptions!();
-        CopyOptions!();
         TransitProcessResult!();
+        DirOptions!();
+        Result!();
+        ErrorKind!();
+        CopyOptions!();
+        TransitProcess!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! copy_with_progress {
     };
 }
 
-copy_with_progress!()
+copy_with_progress!();

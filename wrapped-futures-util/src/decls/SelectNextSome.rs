@@ -4,4 +4,4 @@ macro_rules! SelectNextSome {
     };
 }
 
-SelectNextSome!()
+SelectNextSome!();

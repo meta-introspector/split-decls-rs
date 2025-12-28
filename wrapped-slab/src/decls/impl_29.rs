@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Drain!();
+        IterMut!();
+        IntoIter!();
+        Slab!();
     };
 }
 
 macro_rules! impl_29 {
     () => {
         deps!();
-        impl < T > fmt :: Debug for Drain < '_ , T > { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt . debug_struct ("Drain") . finish () } }
+        impl < 'a , T > IntoIterator for & 'a mut Slab < T > { type Item = (usize , & 'a mut T) ; type IntoIter = IterMut < 'a , T > ; fn into_iter (self) -> IterMut < 'a , T > { self . iter_mut () } }
     };
 }
 

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiffCallbacks!();
         Binding!();
+        DiffCallbacks!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! line_cb_c {
     };
 }
 
-line_cb_c!()
+line_cb_c!();

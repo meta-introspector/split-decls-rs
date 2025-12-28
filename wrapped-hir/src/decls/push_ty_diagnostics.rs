@@ -4,4 +4,4 @@ macro_rules! push_ty_diagnostics {
     };
 }
 
-push_ty_diagnostics!()
+push_ty_diagnostics!();

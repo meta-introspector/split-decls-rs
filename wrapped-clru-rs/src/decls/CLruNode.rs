@@ -4,4 +4,4 @@ macro_rules! CLruNode {
     };
 }
 
-CLruNode!()
+CLruNode!();

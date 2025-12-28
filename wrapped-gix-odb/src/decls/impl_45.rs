@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         SlotIndexMarker!();
+        SlotMapIndex!();
         StateId!();
         Ordering!();
-        SlotMapIndex!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

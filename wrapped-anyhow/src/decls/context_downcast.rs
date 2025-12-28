@@ -13,4 +13,4 @@ macro_rules! context_downcast {
     };
 }
 
-context_downcast!()
+context_downcast!();

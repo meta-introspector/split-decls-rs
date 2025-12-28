@@ -4,4 +4,4 @@ macro_rules! MAX_INTERMEDIATES {
     };
 }
 
-MAX_INTERMEDIATES!()
+MAX_INTERMEDIATES!();

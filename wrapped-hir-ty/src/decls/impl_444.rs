@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstEvalError!();
         HirDatabase!();
+        ConstEvalError!();
         DisplayTarget!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_444 {
     };
 }
 
-impl_444!()
+impl_444!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RandomState!();
+        SeedableRandomState!();
         SharedSeed!();
         FixedState!();
-        SeedableRandomState!();
+        RandomState!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

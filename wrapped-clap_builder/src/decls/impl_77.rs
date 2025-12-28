@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
         StyledStr!();
+        ErrorKind!();
+        ArgGroup!();
+        Str!();
+        Colorizer!();
+        ArgAction!();
+        Result!();
+        AppSettings!();
+        Command!();
+        ArgMatches!();
+        Stream!();
+        Usage!();
+        Arg!();
         Args!();
         Error!();
-        ErrorKind!();
-        Str!();
-        ArgMatches!();
-        Result!();
-        Usage!();
-        ArgGroup!();
-        AppSettings!();
-        Arg!();
-        Stream!();
         CommandExt!();
-        Colorizer!();
         Extension!();
-        ArgAction!();
-        Command!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

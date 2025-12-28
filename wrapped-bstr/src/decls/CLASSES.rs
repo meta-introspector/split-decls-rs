@@ -4,4 +4,4 @@ macro_rules! CLASSES {
     };
 }
 
-CLASSES!()
+CLASSES!();

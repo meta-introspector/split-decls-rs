@@ -4,4 +4,4 @@ macro_rules! HandleProgress {
     };
 }
 
-HandleProgress!()
+HandleProgress!();

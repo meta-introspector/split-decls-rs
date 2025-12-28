@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        LintLevelQueryMap!();
+        LintLevelsBuilder!();
+    };
+}
+
+macro_rules! impl_342 {
+    () => {
+        deps!();
+        impl < 'tcx > Visitor < 'tcx > for LintLevelsBuilder < '_ , LintLevelQueryMap < 'tcx > > { type NestedFilter = nested_filter :: OnlyBodies ; fn maybe_tcx (& mut self) -> Self :: MaybeTyCtxt { self . provider . tcx } fn visit_param (& mut self , param : & 'tcx hir :: Param < 'tcx >) { self . add_id (param . hir_id) ; intravisit :: walk_param (self , param) ; } fn visit_item (& mut self , it : & 'tcx hir :: Item < 'tcx >) { self . add_id (it . hir_id ()) ; intravisit :: walk_item (self , it) ; } fn visit_foreign_item (& mut self , it : & 'tcx hir :: ForeignItem < 'tcx >) { self . add_id (it . hir_id ()) ; intravisit :: walk_foreign_item (self , it) ; } fn visit_stmt (& mut self , s : & 'tcx hir :: Stmt < 'tcx >) { self . add_id (s . hir_id) ; intravisit :: walk_stmt (self , s) ; } fn visit_expr (& mut self , e : & 'tcx hir :: Expr < 'tcx >) { self . add_id (e . hir_id) ; intravisit :: walk_expr (self , e) ; } fn visit_pat_field (& mut self , f : & 'tcx hir :: PatField < 'tcx >) -> Self :: Result { self . add_id (f . hir_id) ; intravisit :: walk_pat_field (self , f) ; } fn visit_expr_field (& mut self , f : & 'tcx hir :: ExprField < 'tcx >) { self . add_id (f . hir_id) ; intravisit :: walk_expr_field (self , f) ; } fn visit_field_def (& mut self , s : & 'tcx hir :: FieldDef < 'tcx >) { self . add_id (s . hir_id) ; intravisit :: walk_field_def (self , s) ; } fn visit_variant (& mut self , v : & 'tcx hir :: Variant < 'tcx >) { self . add_id (v . hir_id) ; intravisit :: walk_variant (self , v) ; } fn visit_local (& mut self , l : & 'tcx hir :: LetStmt < 'tcx >) { self . add_id (l . hir_id) ; intravisit :: walk_local (self , l) ; } fn visit_arm (& mut self , a : & 'tcx hir :: Arm < 'tcx >) { self . add_id (a . hir_id) ; intravisit :: walk_arm (self , a) ; } fn visit_trait_item (& mut self , trait_item : & 'tcx hir :: TraitItem < 'tcx >) { self . add_id (trait_item . hir_id ()) ; intravisit :: walk_trait_item (self , trait_item) ; } fn visit_impl_item (& mut self , impl_item : & 'tcx hir :: ImplItem < 'tcx >) { self . add_id (impl_item . hir_id ()) ; intravisit :: walk_impl_item (self , impl_item) ; } }
+    };
+}
+
+impl_342!()

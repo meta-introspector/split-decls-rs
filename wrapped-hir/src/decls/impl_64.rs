@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SelfParam!();
         HasSource!();
+        SelfParam!();
         LocalSource!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_64 {
     };
 }
 
-impl_64!()
+impl_64!();

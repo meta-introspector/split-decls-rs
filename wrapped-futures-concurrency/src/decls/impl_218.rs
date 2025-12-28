@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FutureArray!();
-        WakerArray!();
-        OutputArray!();
         Join!();
+        FutureArray!();
         PollArray!();
+        OutputArray!();
+        WakerArray!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_218 {
     };
 }
 
-impl_218!()
+impl_218!();

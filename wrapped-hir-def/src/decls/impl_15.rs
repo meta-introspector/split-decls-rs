@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Attrs!();
         DocExpr!();
-        Item!();
         AttrQuery!();
+        Item!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

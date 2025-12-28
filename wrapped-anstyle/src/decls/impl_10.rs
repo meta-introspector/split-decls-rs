@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Style!();
-        Ansi256Color!();
-        Color!();
         DisplayBuffer!();
+        Style!();
+        Color!();
         AnsiColor!();
         NullFormatter!();
+        Ansi256Color!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Blob!();
+        Object!();
+        Commit!();
         Tree!();
         Tag!();
-        Commit!();
-        Object!();
         Kind!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_174 {
     };
 }
 
-impl_174!()
+impl_174!();

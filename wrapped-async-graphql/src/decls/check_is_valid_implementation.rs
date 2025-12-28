@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Interface!();
-        Result!();
         SchemaError!();
+        Result!();
         Field!();
         BaseContainer!();
+        Interface!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! check_is_valid_implementation {
     };
 }
 
-check_is_valid_implementation!()
+check_is_valid_implementation!();

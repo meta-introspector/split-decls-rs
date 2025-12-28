@@ -4,4 +4,4 @@ macro_rules! debug_assert_atomic_unsafe_precondition {
     };
 }
 
-debug_assert_atomic_unsafe_precondition!()
+debug_assert_atomic_unsafe_precondition!();

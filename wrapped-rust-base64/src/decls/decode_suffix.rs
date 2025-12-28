@@ -4,4 +4,4 @@ macro_rules! decode_suffix {
     };
 }
 
-decode_suffix!()
+decode_suffix!();

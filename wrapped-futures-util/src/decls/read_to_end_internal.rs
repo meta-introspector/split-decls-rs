@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Guard!();
         Ready!();
+        Guard!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! read_to_end_internal {
     };
 }
 
-read_to_end_internal!()
+read_to_end_internal!();

@@ -4,4 +4,4 @@ macro_rules! CfgExprStage {
     };
 }
 
-CfgExprStage!()
+CfgExprStage!();

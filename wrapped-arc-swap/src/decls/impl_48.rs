@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Access!();
-        MapCache!();
-        RefCnt!();
         Strategy!();
+        RefCnt!();
+        MapCache!();
+        Access!();
         ArcSwapAny!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

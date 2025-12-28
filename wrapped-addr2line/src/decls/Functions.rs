@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LazyFunction!();
         FunctionAddress!();
+        LazyFunction!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Functions {
     };
 }
 
-Functions!()
+Functions!();

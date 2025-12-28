@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NaiveDate!();
-        NaiveTime!();
         FixedOffset!();
+        NaiveTime!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DelayedFormat {
     };
 }
 
-DelayedFormat!()
+DelayedFormat!();

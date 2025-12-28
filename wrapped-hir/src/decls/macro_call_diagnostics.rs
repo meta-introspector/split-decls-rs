@@ -12,4 +12,4 @@ macro_rules! macro_call_diagnostics {
     };
 }
 
-macro_call_diagnostics!()
+macro_call_diagnostics!();

@@ -4,4 +4,4 @@ macro_rules! prev_pow2 {
     };
 }
 
-prev_pow2!()
+prev_pow2!();

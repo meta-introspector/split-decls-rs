@@ -4,4 +4,4 @@ macro_rules! CommaSep {
     };
 }
 
-CommaSep!()
+CommaSep!();

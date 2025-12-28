@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SeekResult!();
+        InfoType!();
         Error!();
         ReadError!();
         WriteError!();
-        InfoType!();
+        SeekResult!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Callbacks {
     };
 }
 
-Callbacks!()
+Callbacks!();

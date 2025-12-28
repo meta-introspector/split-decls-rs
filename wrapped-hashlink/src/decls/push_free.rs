@@ -11,4 +11,4 @@ macro_rules! push_free {
     };
 }
 
-push_free!()
+push_free!();

@@ -4,4 +4,4 @@ macro_rules! xof_fixed {
     };
 }
 
-xof_fixed!()
+xof_fixed!();

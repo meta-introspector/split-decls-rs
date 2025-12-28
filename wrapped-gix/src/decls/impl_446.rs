@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Options!();
         Path!();
         Note!();
+        Options!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_446 {
     };
 }
 
-impl_446!()
+impl_446!();

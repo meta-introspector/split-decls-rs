@@ -4,4 +4,4 @@ macro_rules! promotable_even_drop {
     };
 }
 
-promotable_even_drop!()
+promotable_even_drop!();

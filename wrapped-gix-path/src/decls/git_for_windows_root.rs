@@ -4,4 +4,4 @@ macro_rules! git_for_windows_root {
     };
 }
 
-git_for_windows_root!()
+git_for_windows_root!();

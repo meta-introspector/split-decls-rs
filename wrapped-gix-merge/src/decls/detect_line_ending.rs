@@ -12,4 +12,4 @@ macro_rules! detect_line_ending {
     };
 }
 
-detect_line_ending!()
+detect_line_ending!();

@@ -11,4 +11,4 @@ macro_rules! check_t {
     };
 }
 
-check_t!()
+check_t!();

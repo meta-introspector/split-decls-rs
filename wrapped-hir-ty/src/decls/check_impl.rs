@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DisplayTarget!();
         Adjustment!();
         TestDB!();
+        DisplayTarget!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_impl {
     };
 }
 
-check_impl!()
+check_impl!();

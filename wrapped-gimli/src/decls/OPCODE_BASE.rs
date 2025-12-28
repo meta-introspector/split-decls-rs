@@ -4,4 +4,4 @@ macro_rules! OPCODE_BASE {
     };
 }
 
-OPCODE_BASE!()
+OPCODE_BASE!();

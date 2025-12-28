@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CacheStorage!();
         NoCacheImpl!();
+        CacheStorage!();
         NoCache!();
         CacheFactory!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_363 {
     };
 }
 
-impl_363!()
+impl_363!();

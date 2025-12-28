@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Comparator!();
-        VersionReq!();
-        Version!();
+        QuotedChar!();
+        ErrorKind!();
+        Error!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl VersionReq { # [doc = " A `VersionReq` with no constraint on the version numbers it matches."] # [doc = " Equivalent to `VersionReq::parse(\"*\").unwrap()`."] # [doc = ""] # [doc = " In terms of comparators this is equivalent to `>=0.0.0`."] # [doc = ""] # [doc = " Counterintuitively a `*` VersionReq does not match every possible"] # [doc = " version number. In particular, in order for *any* `VersionReq` to match"] # [doc = " a pre-release version, the `VersionReq` must contain at least one"] # [doc = " `Comparator` that has an explicit major, minor, and patch version"] # [doc = " identical to the pre-release being matched, and that has a nonempty"] # [doc = " pre-release component. Since `*` is not written with an explicit major,"] # [doc = " minor, and patch version, and does not contain a nonempty pre-release"] # [doc = " component, it does not match any pre-release versions."] pub const STAR : Self = VersionReq { comparators : Vec :: new () , } ; # [doc = " Create `VersionReq` by parsing from string representation."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Possible reasons for the parse to fail include:"] # [doc = ""] # [doc = " - `>a.b` &mdash; unexpected characters in the partial version."] # [doc = ""] # [doc = " - `@1.0.0` &mdash; unrecognized comparison operator."] # [doc = ""] # [doc = " - `^1.0.0, ` &mdash; unexpected end of input."] # [doc = ""] # [doc = " - `>=1.0 <2.0` &mdash; missing comma between comparators."] # [doc = ""] # [doc = " - `*.*` &mdash; unsupported wildcard syntax."] pub fn parse (text : & str) -> Result < Self , Error > { VersionReq :: from_str (text) } # [doc = " Evaluate whether the given `Version` satisfies the version requirement"] # [doc = " described by `self`."] pub fn matches (& self , version : & Version) -> bool { eval :: matches_req (self , version) } }
+        impl Display for Error { fn fmt (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { match & self . kind { ErrorKind :: Empty => formatter . write_str ("empty string, expected a semver version") , ErrorKind :: UnexpectedEnd (pos) => { write ! (formatter , "unexpected end of input while parsing {}" , pos) } ErrorKind :: UnexpectedChar (pos , ch) => { write ! (formatter , "unexpected character {} while parsing {}" , QuotedChar (* ch) , pos ,) } ErrorKind :: UnexpectedCharAfter (pos , ch) => { write ! (formatter , "unexpected character {} after {}" , QuotedChar (* ch) , pos ,) } ErrorKind :: ExpectedCommaFound (pos , ch) => { write ! (formatter , "expected comma after {}, found {}" , pos , QuotedChar (* ch) ,) } ErrorKind :: LeadingZero (pos) => { write ! (formatter , "invalid leading zero in {}" , pos) } ErrorKind :: Overflow (pos) => { write ! (formatter , "value of {} exceeds u64::MAX" , pos) } ErrorKind :: EmptySegment (pos) => { write ! (formatter , "empty identifier segment in {}" , pos) } ErrorKind :: IllegalCharacter (pos) => { write ! (formatter , "unexpected character in {}" , pos) } ErrorKind :: WildcardNotTheOnlyComparator (ch) => { write ! (formatter , "wildcard req ({}) must be the only comparator in the version req" , ch ,) } ErrorKind :: UnexpectedAfterWildcard => { formatter . write_str ("unexpected character after wildcard in version req") } ErrorKind :: ExcessiveComparators => { formatter . write_str ("excessive number of version comparators") } } } }
     };
 }
 

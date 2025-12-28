@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Request!();
         Data!();
-        Result!();
-        Any!();
         UploadValue!();
+        Request!();
         ServerError!();
-        IntrospectionMode!();
+        Result!();
         Object!();
+        IntrospectionMode!();
+        Any!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_99 {
     };
 }
 
-impl_99!()
+impl_99!();

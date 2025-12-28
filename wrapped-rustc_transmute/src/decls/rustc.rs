@@ -1,7 +1,9 @@
 macro_rules! deps {
     () => {
+        Region!();
         Answer!();
         Assume!();
+        MaybeTransmutableQuery!();
     };
 }
 

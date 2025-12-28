@@ -4,4 +4,4 @@ macro_rules! object_id {
     };
 }
 
-object_id!()
+object_id!();

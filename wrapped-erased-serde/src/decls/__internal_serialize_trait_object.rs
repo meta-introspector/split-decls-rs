@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Serializer!();
         Result!();
+        Serializer!();
         Error!();
         Serialize!();
     };
@@ -14,4 +14,4 @@ macro_rules! __internal_serialize_trait_object {
     };
 }
 
-__internal_serialize_trait_object!()
+__internal_serialize_trait_object!();

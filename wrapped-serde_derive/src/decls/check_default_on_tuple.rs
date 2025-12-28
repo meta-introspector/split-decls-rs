@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Ctxt!();
+        Data!();
+        Container!();
+        Default!();
+        Style!();
+    };
+}
+
+macro_rules! check_default_on_tuple {
+    () => {
+        deps!();
+        fn check_default_on_tuple (cx : & Ctxt , cont : & Container) { if let Default :: None = cont . attrs . default () { if let Data :: Struct (Style :: Tuple , fields) = & cont . data { let mut first_default_index = None ; for (i , field) in fields . iter () . enumerate () { if field . attrs . skip_deserializing () { continue ; } if let Default :: None = field . attrs . default () { if let Some (first) = first_default_index { cx . error_spanned_by (field . ty , format ! ("field must have #[serde(default)] because previous field {} has #[serde(default)]" , first) ,) ; } continue ; } if first_default_index . is_none () { first_default_index = Some (i) ; } } } } }
+    };
+}
+
+check_default_on_tuple!()

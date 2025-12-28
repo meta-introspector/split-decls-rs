@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EdgeStmt!();
-        AList!();
         EdgeSet!();
+        AList!();
+        EdgeStmt!();
         Edge!();
         NodeSet!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_108 {
     };
 }
 
-impl_108!()
+impl_108!();

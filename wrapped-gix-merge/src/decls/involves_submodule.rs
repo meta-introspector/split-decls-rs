@@ -4,4 +4,4 @@ macro_rules! involves_submodule {
     };
 }
 
-involves_submodule!()
+involves_submodule!();

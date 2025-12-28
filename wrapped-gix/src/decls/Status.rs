@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Negotiate!();
         Outcome!();
         Change!();
         Clone!();
-        Negotiate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Status {
     };
 }
 
-Status!()
+Status!();

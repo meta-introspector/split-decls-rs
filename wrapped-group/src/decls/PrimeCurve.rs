@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PrimeCurveAffine!();
-        Curve!();
         PrimeGroup!();
+        Curve!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PrimeCurve {
     };
 }
 
-PrimeCurve!()
+PrimeCurve!();

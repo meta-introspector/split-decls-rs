@@ -11,4 +11,4 @@ macro_rules! refs_namespace {
     };
 }
 
-refs_namespace!()
+refs_namespace!();

@@ -4,4 +4,4 @@ macro_rules! example_generated {
     };
 }
 
-example_generated!()
+example_generated!();

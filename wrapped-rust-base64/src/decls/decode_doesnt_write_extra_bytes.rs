@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Config!();
         EngineWrapper!();
         Engine!();
+        Config!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! decode_doesnt_write_extra_bytes {
     };
 }
 
-decode_doesnt_write_extra_bytes!()
+decode_doesnt_write_extra_bytes!();

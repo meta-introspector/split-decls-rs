@@ -4,4 +4,4 @@ macro_rules! walkdir_precompose {
     };
 }
 
-walkdir_precompose!()
+walkdir_precompose!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        VisitorContext!();
-        Field!();
-        Directive!();
-        MetaTypeName!();
         VisitMode!();
+        MetaTypeName!();
+        Field!();
+        VisitorContext!();
+        Directive!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Visitor {
     };
 }
 
-Visitor!()
+Visitor!();

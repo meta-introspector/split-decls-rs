@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Cache!();
         Error!();
+        Cache!();
         Header!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impls {
     };
 }
 
-impls!()
+impls!();

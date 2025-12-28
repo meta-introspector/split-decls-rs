@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FieldValue!();
-        Union!();
-        Any!();
-        Result!();
-        Interface!();
-        Error!();
         Fields!();
+        FieldValue!();
+        Result!();
         FieldValueInner!();
+        Union!();
+        Error!();
+        Interface!();
+        Any!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_429 {
     };
 }
 
-impl_429!()
+impl_429!();

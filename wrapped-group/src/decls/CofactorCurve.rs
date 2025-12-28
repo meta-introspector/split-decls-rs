@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CofactorGroup!();
-        CofactorCurveAffine!();
         Curve!();
+        CofactorCurveAffine!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CofactorCurve {
     };
 }
 
-CofactorCurve!()
+CofactorCurve!();

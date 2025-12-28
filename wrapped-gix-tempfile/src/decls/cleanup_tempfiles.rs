@@ -4,4 +4,4 @@ macro_rules! cleanup_tempfiles {
     };
 }
 
-cleanup_tempfiles!()
+cleanup_tempfiles!();

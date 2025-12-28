@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CLruCacheIntoIter!();
         WeightScale!();
+        CLruCacheIntoIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

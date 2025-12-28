@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EagerCallInfo!();
-        AttrId!();
         Attr!();
-        ExpandTo!();
-        MacroCallId!();
         AstId!();
+        EagerCallInfo!();
+        MacroCallId!();
+        ExpandTo!();
+        AttrId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! MacroCallKind {
     };
 }
 
-MacroCallKind!()
+MacroCallKind!();

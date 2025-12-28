@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StyledChar!();
         StyledBuffer!();
-        Level!();
+        StyledChar!();
         Stylesheet!();
+        Level!();
         ElementStyle!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

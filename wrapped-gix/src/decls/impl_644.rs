@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Extensions!();
         Section!();
         Key!();
+        Extensions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_644 {
     };
 }
 
-impl_644!()
+impl_644!();

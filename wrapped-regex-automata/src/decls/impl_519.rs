@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        DenseTransitions!();
+        SmallIndex!();
+        Transition!();
+        Look!();
+        StateID!();
+        SparseTransitions!();
+        State!();
+        NFA!();
+        Match!();
+    };
+}
+
+macro_rules! impl_519 {
+    () => {
+        deps!();
+        impl State { # [doc = " Returns true if and only if this state contains one or more epsilon"] # [doc = " transitions."] # [doc = ""] # [doc = " In practice, a state has no outgoing transitions (like `Match`), has"] # [doc = " only non-epsilon transitions (like `ByteRange`) or has only epsilon"] # [doc = " transitions (like `Union`)."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use regex_automata::{"] # [doc = "     nfa::thompson::{State, Transition},"] # [doc = "     util::primitives::{PatternID, StateID, SmallIndex},"] # [doc = " };"] # [doc = ""] # [doc = " // Capture states are epsilon transitions."] # [doc = " let state = State::Capture {"] # [doc = "     next: StateID::ZERO,"] # [doc = "     pattern_id: PatternID::ZERO,"] # [doc = "     group_index: SmallIndex::ZERO,"] # [doc = "     slot: SmallIndex::ZERO,"] # [doc = " };"] # [doc = " assert!(state.is_epsilon());"] # [doc = ""] # [doc = " // ByteRange states are not."] # [doc = " let state = State::ByteRange {"] # [doc = "     trans: Transition { start: b'a', end: b'z', next: StateID::ZERO },"] # [doc = " };"] # [doc = " assert!(!state.is_epsilon());"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [inline] pub fn is_epsilon (& self) -> bool { match * self { State :: ByteRange { .. } | State :: Sparse { .. } | State :: Dense { .. } | State :: Fail | State :: Match { .. } => false , State :: Look { .. } | State :: Union { .. } | State :: BinaryUnion { .. } | State :: Capture { .. } => true , } } # [doc = " Returns the heap memory usage of this NFA state in bytes."] fn memory_usage (& self) -> usize { match * self { State :: ByteRange { .. } | State :: Look { .. } | State :: BinaryUnion { .. } | State :: Capture { .. } | State :: Match { .. } | State :: Fail => 0 , State :: Sparse (SparseTransitions { ref transitions }) => { transitions . len () * mem :: size_of :: < Transition > () } State :: Dense { .. } => 256 * mem :: size_of :: < StateID > () , State :: Union { ref alternates } => { alternates . len () * mem :: size_of :: < StateID > () } } } # [doc = " Remap the transitions in this state using the given map. Namely, the"] # [doc = " given map should be indexed according to the transitions currently"] # [doc = " in this state."] # [doc = ""] # [doc = " This is used during the final phase of the NFA compiler, which turns"] # [doc = " its intermediate NFA into the final NFA."] fn remap (& mut self , remap : & [StateID]) { match * self { State :: ByteRange { ref mut trans } => { trans . next = remap [trans . next] } State :: Sparse (SparseTransitions { ref mut transitions }) => { for t in transitions . iter_mut () { t . next = remap [t . next] ; } } State :: Dense (DenseTransitions { ref mut transitions }) => { for sid in transitions . iter_mut () { * sid = remap [* sid] ; } } State :: Look { ref mut next , .. } => * next = remap [* next] , State :: Union { ref mut alternates } => { for alt in alternates . iter_mut () { * alt = remap [* alt] ; } } State :: BinaryUnion { ref mut alt1 , ref mut alt2 } => { * alt1 = remap [* alt1] ; * alt2 = remap [* alt2] ; } State :: Capture { ref mut next , .. } => * next = remap [* next] , State :: Fail => { } State :: Match { .. } => { } } } }
+    };
+}
+
+impl_519!()

@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        ComObjectInner!();
+        InterfaceRef!();
+        ComObjectInterface!();
+        ComObject!();
+        GUID!();
+        Interface!();
+        HRESULT!();
+    };
+}
+
+macro_rules! IUnknownImpl {
+    () => {
+        deps!();
+        # [doc = " The `#[implement]` macro generates implementations of this trait for the types"] # [doc = " that it generates, e.g. `MyApp_Impl`,"] # [doc = ""] # [doc = " `ComObject` uses this trait to interact with boxed COM objects."] # [doc (hidden)] pub trait IUnknownImpl { # [doc = " The contained user type, e.g. `MyApp`. Also known as the \"inner\" type."] type Impl ; # [doc = " Get a reference to the backing implementation."] fn get_impl (& self) -> & Self :: Impl ; # [doc = " Get a mutable reference to the contained (inner) object."] fn get_impl_mut (& mut self) -> & mut Self :: Impl ; # [doc = " Consumes the box and returns the contained (inner) object. This is the opposite of `new_box`."] fn into_inner (self) -> Self :: Impl ; # [doc = " The classic `QueryInterface` method from COM."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This function is safe to call as long as the interface pointer is non-null and valid for writes"] # [doc = " of an interface pointer."] unsafe fn QueryInterface (& self , iid : * const GUID , interface : * mut * mut c_void) -> HRESULT ; # [doc = " Increments the reference count of the interface"] fn AddRef (& self) -> u32 ; # [doc = " Decrements the reference count causing the interface's memory to be freed when the count is 0"] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This function should only be called when the interface pointer is no longer used as calling `Release`"] # [doc = " on a non-aliased interface pointer and then using that interface pointer may result in use after free."] # [doc = ""] # [doc = " This function takes `*mut Self` because the object may be freed by the time this method returns."] # [doc = " Taking `&self` would violate Rust's rules on reference lifetime."] unsafe fn Release (self_ : * mut Self) -> u32 ; # [doc = " Returns `true` if the reference count of the box is equal to 1."] fn is_reference_count_one (& self) -> bool ; # [doc = " Gets the trust level of the current object."] unsafe fn GetTrustLevel (& self , value : * mut i32) -> HRESULT ; # [doc = " Gets a borrowed reference to an interface that is implemented by this ComObject."] # [doc = ""] # [doc = " The returned reference does not have an additional reference count."] # [doc = " You can AddRef it by calling to_owned()."] # [inline (always)] fn as_interface < I : Interface > (& self) -> InterfaceRef < '_ , I > where Self : ComObjectInterface < I > , { < Self as ComObjectInterface < I > > :: as_interface_ref (self) } # [doc = " Gets an owned (counted) reference to an interface that is implemented by this ComObject."] # [inline (always)] fn to_interface < I : Interface > (& self) -> I where Self : ComObjectInterface < I > , { < Self as ComObjectInterface < I > > :: as_interface_ref (self) . to_owned () } # [doc = " Creates a new owned reference to this object."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This function can only be safely called by `<Foo>_Impl` objects that are embedded in a"] # [doc = " `ComObject`. Since we only allow safe Rust code to access these objects using a `ComObject`"] # [doc = " or a `&<Foo>_Impl` that points within a `ComObject`, this is safe."] fn to_object (& self) -> ComObject < Self :: Impl > where Self :: Impl : ComObjectInner < Outer = Self > ; }
+    };
+}
+
+IUnknownImpl!()

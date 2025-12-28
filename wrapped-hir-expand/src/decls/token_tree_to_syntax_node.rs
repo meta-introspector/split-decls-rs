@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExpandTo!();
-        ExpandDatabase!();
         ExpansionSpanMap!();
+        ExpandDatabase!();
+        ExpandTo!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! token_tree_to_syntax_node {
     };
 }
 
-token_tree_to_syntax_node!()
+token_tree_to_syntax_node!();

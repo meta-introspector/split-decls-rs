@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Current!();
         Seek!();
+        Current!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AsyncSeekExt {
     };
 }
 
-AsyncSeekExt!()
+AsyncSeekExt!();

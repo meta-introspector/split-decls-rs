@@ -11,4 +11,4 @@ macro_rules! UnresolvedQualifierLevel {
     };
 }
 
-UnresolvedQualifierLevel!()
+UnresolvedQualifierLevel!();

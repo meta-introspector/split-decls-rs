@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Item!();
-        ItemTree!();
         ItemTreeNode!();
+        ItemTree!();
         BigModItem!();
         SmallModItem!();
     };
@@ -15,4 +15,4 @@ macro_rules! mod_items {
     };
 }
 
-mod_items!()
+mod_items!();

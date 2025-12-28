@@ -38,4 +38,4 @@ type T = u8;
     };
 }
 
-test_all_items!()
+test_all_items!();

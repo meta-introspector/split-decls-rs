@@ -4,4 +4,4 @@ macro_rules! encoded_len_inner {
     };
 }
 
-encoded_len_inner!()
+encoded_len_inner!();

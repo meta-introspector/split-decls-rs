@@ -4,4 +4,4 @@ macro_rules! BlameRanges {
     };
 }
 
-BlameRanges!()
+BlameRanges!();

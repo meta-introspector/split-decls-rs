@@ -4,4 +4,4 @@ macro_rules! META_DIR_NAME {
     };
 }
 
-META_DIR_NAME!()
+META_DIR_NAME!();

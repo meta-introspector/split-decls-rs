@@ -1,9 +1,10 @@
 macro_rules! deps {
     () => {
-        Variant!();
         Version!();
-        Bytes!();
+        Variant!();
         Uuid!();
+        Builder!();
+        Bytes!();
     };
 }
 

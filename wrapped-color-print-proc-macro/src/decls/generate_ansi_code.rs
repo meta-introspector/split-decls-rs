@@ -4,4 +4,4 @@ macro_rules! generate_ansi_code {
     };
 }
 
-generate_ansi_code!()
+generate_ansi_code!();

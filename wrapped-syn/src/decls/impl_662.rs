@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Pair!();
+        End!();
+        Punctuated!();
+    };
+}
+
+macro_rules! impl_662 {
+    () => {
+        deps!();
+        impl < T , P > Pair < T , P > { # [doc = " Extracts the syntax tree node from this punctuated pair, discarding the"] # [doc = " following punctuation."] pub fn into_value (self) -> T { match self { Pair :: Punctuated (t , _) | Pair :: End (t) => t , } } # [doc = " Borrows the syntax tree node from this punctuated pair."] pub fn value (& self) -> & T { match self { Pair :: Punctuated (t , _) | Pair :: End (t) => t , } } # [doc = " Mutably borrows the syntax tree node from this punctuated pair."] pub fn value_mut (& mut self) -> & mut T { match self { Pair :: Punctuated (t , _) | Pair :: End (t) => t , } } # [doc = " Borrows the punctuation from this punctuated pair, unless this pair is"] # [doc = " the final one and there is no trailing punctuation."] pub fn punct (& self) -> Option < & P > { match self { Pair :: Punctuated (_ , p) => Some (p) , Pair :: End (_) => None , } } # [doc = " Mutably borrows the punctuation from this punctuated pair, unless the"] # [doc = " pair is the final one and there is no trailing punctuation."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # use proc_macro2::Span;"] # [doc = " # use syn::punctuated::Punctuated;"] # [doc = " # use syn::{parse_quote, Token, TypeParamBound};"] # [doc = " #"] # [doc = " # let mut punctuated = Punctuated::<TypeParamBound, Token![+]>::new();"] # [doc = " # let span = Span::call_site();"] # [doc = " #"] # [doc = " punctuated.insert(0, parse_quote!('lifetime));"] # [doc = " if let Some(punct) = punctuated.pairs_mut().next().unwrap().punct_mut() {"] # [doc = "     punct.span = span;"] # [doc = " }"] # [doc = " ```"] pub fn punct_mut (& mut self) -> Option < & mut P > { match self { Pair :: Punctuated (_ , p) => Some (p) , Pair :: End (_) => None , } } # [doc = " Creates a punctuated pair out of a syntax tree node and an optional"] # [doc = " following punctuation."] pub fn new (t : T , p : Option < P >) -> Self { match p { Some (p) => Pair :: Punctuated (t , p) , None => Pair :: End (t) , } } # [doc = " Produces this punctuated pair as a tuple of syntax tree node and"] # [doc = " optional following punctuation."] pub fn into_tuple (self) -> (T , Option < P >) { match self { Pair :: Punctuated (t , p) => (t , Some (p)) , Pair :: End (t) => (t , None) , } } }
+    };
+}
+
+impl_662!()

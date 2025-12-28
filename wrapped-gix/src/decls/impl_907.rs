@@ -13,4 +13,4 @@ macro_rules! impl_907 {
     };
 }
 
-impl_907!()
+impl_907!();

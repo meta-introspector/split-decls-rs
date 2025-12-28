@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TryReserveError!();
-        Box!();
-        AllocInit!();
         Allocator!();
         RawVec!();
+        Box!();
+        TryReserveError!();
+        AllocInit!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

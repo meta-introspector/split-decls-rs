@@ -13,4 +13,4 @@ macro_rules! key_impls {
     };
 }
 
-key_impls!()
+key_impls!();

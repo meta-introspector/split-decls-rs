@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FragmentDefinitionItem!();
         OperationDefinitionItem!();
+        FragmentDefinitionItem!();
         Positioned!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! DefinitionItem {
     };
 }
 
-DefinitionItem!()
+DefinitionItem!();

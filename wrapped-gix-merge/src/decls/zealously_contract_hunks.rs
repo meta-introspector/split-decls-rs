@@ -12,4 +12,4 @@ macro_rules! zealously_contract_hunks {
     };
 }
 
-zealously_contract_hunks!()
+zealously_contract_hunks!();

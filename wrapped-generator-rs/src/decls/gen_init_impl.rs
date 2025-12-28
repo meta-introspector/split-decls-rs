@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Func!();
         Error!();
         ContextStack!();
+        Func!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! gen_init_impl {
     };
 }
 
-gen_init_impl!()
+gen_init_impl!();

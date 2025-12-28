@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Offset!();
         Item!();
+        Offset!();
         NodeKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Tree {
     };
 }
 
-Tree!()
+Tree!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        OutputVec!();
-        TryJoin!();
-        PollVec!();
         FutureVec!();
+        TryJoin!();
         WakerVec!();
+        PollVec!();
+        OutputVec!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_373 {
     };
 }
 
-impl_373!()
+impl_373!();

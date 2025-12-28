@@ -4,4 +4,4 @@ macro_rules! FileSystemStat {
     };
 }
 
-FileSystemStat!()
+FileSystemStat!();

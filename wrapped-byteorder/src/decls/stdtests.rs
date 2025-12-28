@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        WriteBytesExt!();
+        ReadBytesExt!();
+        ByteOrder!();
         LittleEndian!();
         NativeEndian!();
-        ByteOrder!();
         BigEndian!();
-        ReadBytesExt!();
-        WriteBytesExt!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! stdtests {
     };
 }
 
-stdtests!()
+stdtests!();

@@ -4,4 +4,4 @@ macro_rules! big5_box_encode {
     };
 }
 
-big5_box_encode!()
+big5_box_encode!();

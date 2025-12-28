@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Blob!();
         Object!();
+        Blob!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

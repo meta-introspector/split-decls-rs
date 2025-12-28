@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Graph!();
-        AttrStmt!();
-        AList!();
         Edge!();
         Node!();
+        Graph!();
+        AList!();
+        AttrStmt!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

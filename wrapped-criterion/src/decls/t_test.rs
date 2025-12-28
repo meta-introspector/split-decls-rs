@@ -4,4 +4,4 @@ macro_rules! t_test {
     };
 }
 
-t_test!()
+t_test!();

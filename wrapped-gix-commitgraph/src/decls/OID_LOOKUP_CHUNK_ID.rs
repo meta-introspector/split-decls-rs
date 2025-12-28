@@ -11,4 +11,4 @@ macro_rules! OID_LOOKUP_CHUNK_ID {
     };
 }
 
-OID_LOOKUP_CHUNK_ID!()
+OID_LOOKUP_CHUNK_ID!();

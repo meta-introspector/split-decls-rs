@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        RngReader!();
+        Distribution!();
+        Rng!();
+        Bernoulli!();
     };
 }
 
 macro_rules! impl_14 {
     () => {
         deps!();
-        # [cfg (feature = "std")] impl < R : TryRngCore > std :: io :: Read for RngReader < R > { # [inline] fn read (& mut self , buf : & mut [u8]) -> Result < usize , std :: io :: Error > { self . 0 . try_fill_bytes (buf) . map_err (| err | std :: io :: Error :: other (std :: format ! ("RNG error: {err}"))) ? ; Ok (buf . len ()) } }
+        impl Distribution < bool > for Bernoulli { # [inline] fn sample < R : Rng + ? Sized > (& self , rng : & mut R) -> bool { if self . p_int == ALWAYS_TRUE { return true ; } let v : u64 = rng . random () ; v < self . p_int } }
     };
 }
 

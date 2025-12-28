@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        DebugAddrBase!();
-        Reader!();
-        DebugAddrOffset!();
-        AddrHeaderIter!();
         Result!();
+        AddrHeaderIter!();
+        DebugAddrOffset!();
         DebugAddr!();
+        Reader!();
         DebugAddrIndex!();
+        DebugAddrBase!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

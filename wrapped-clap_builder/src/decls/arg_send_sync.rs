@@ -11,4 +11,4 @@ macro_rules! arg_send_sync {
     };
 }
 
-arg_send_sync!()
+arg_send_sync!();

@@ -1,31 +1,31 @@
 macro_rules! deps {
     () => {
-        Encoding!();
-        DebugLine!();
-        AttributeValue!();
-        DebugMacinfo!();
-        Unit!();
-        Format!();
-        DebugInfoOffset!();
-        Writer!();
-        DebugRngLists!();
-        DebugLineOffset!();
-        DebugLocLists!();
-        DebugInfoRef!();
-        DebugLineStr!();
-        DebugInfo!();
-        UnitRef!();
         DebugStr!();
+        Encoding!();
         Address!();
-        SectionId!();
-        Error!();
-        DebugLoc!();
-        DebugRanges!();
-        DebugInfoFixup!();
-        Endianity!();
-        UnitOffsets!();
         Result!();
+        DebugInfoOffset!();
+        AttributeValue!();
+        DebugInfoFixup!();
+        DebugRanges!();
+        DebugLocLists!();
+        DebugLineOffset!();
+        Endianity!();
+        DebugInfo!();
+        SectionId!();
+        DebugLineStr!();
+        Format!();
+        UnitRef!();
+        Error!();
+        DebugInfoRef!();
+        DebugMacinfo!();
         DebugMacro!();
+        DebugLoc!();
+        UnitOffsets!();
+        DebugRngLists!();
+        DebugLine!();
+        Unit!();
+        Writer!();
     };
 }
 
@@ -36,4 +36,4 @@ macro_rules! impl_809 {
     };
 }
 
-impl_809!()
+impl_809!();

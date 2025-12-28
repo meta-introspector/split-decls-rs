@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Commit!();
-        Head!();
-        Kind!();
         Id!();
-        Object!();
-        Reference!();
-        Error!();
+        Kind!();
         Note!();
+        Object!();
+        Head!();
+        Commit!();
+        Error!();
+        Reference!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_137 {
     };
 }
 
-impl_137!()
+impl_137!();

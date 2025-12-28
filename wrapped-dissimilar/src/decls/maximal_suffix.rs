@@ -4,4 +4,4 @@ macro_rules! maximal_suffix {
     };
 }
 
-maximal_suffix!()
+maximal_suffix!();

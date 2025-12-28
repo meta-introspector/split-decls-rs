@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        NextExecute!();
         Query!();
-        LoggerExtension!();
-        Response!();
-        Error!();
-        PathSegment!();
         Field!();
         Extension!();
+        LoggerExtension!();
+        PathSegment!();
         ExtensionContext!();
         NextParseQuery!();
+        Error!();
+        NextExecute!();
+        Response!();
         ServerResult!();
     };
 }
@@ -21,4 +21,4 @@ macro_rules! impl_549 {
     };
 }
 
-impl_549!()
+impl_549!();

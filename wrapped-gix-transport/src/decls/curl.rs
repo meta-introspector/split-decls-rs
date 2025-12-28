@@ -4,4 +4,4 @@ macro_rules! curl {
     };
 }
 
-curl!()
+curl!();

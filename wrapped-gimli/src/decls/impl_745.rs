@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        FnvIndexSet!();
+        LineRow!();
         LineString!();
-        Error!();
-        DebugLine!();
+        Address!();
+        FileInfo!();
+        LineEncoding!();
+        Format!();
+        Encoding!();
+        DirectoryId!();
+        FnvIndexSet!();
+        Writer!();
         Result!();
+        DebugLineOffset!();
+        DebugLine!();
+        Error!();
+        FnvIndexMap!();
         LineProgram!();
         LineInstruction!();
-        FileInfo!();
-        DirectoryId!();
-        LineRow!();
-        Format!();
-        DebugLineOffset!();
-        FnvIndexMap!();
-        Address!();
-        Encoding!();
-        Writer!();
-        LineEncoding!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_745 {
     };
 }
 
-impl_745!()
+impl_745!();

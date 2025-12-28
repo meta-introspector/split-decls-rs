@@ -14,4 +14,4 @@ macro_rules! m {
     };
 }
 
-test_meta_extended_key_value_attributes!()
+test_meta_extended_key_value_attributes!();

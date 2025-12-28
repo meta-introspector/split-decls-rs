@@ -1,0 +1,7 @@
+macro_rules! MutblCap {
+    () => {
+        # [doc = " `ref mut` bindings (explicit or match-ergonomics) are not allowed behind an `&` reference."] # [doc = " Normally, the borrow checker enforces this, but for (currently experimental) match ergonomics,"] # [doc = " we track this when typing patterns for two purposes:"] # [doc = ""] # [doc = " - For RFC 3627's Rule 3, when this would prevent us from binding with `ref mut`, we limit the"] # [doc = "   default binding mode to be by shared `ref` when it would otherwise be `ref mut`."] # [doc = ""] # [doc = " - For RFC 3627's Rule 5, we allow `&` patterns to match against `&mut` references, treating them"] # [doc = "   as if they were shared references. Since the scrutinee is mutable in this case, the borrow"] # [doc = "   checker won't catch if we bind with `ref mut`, so we need to throw an error ourselves."] # [derive (Clone , Copy , Debug , PartialEq , Eq)] enum MutblCap { # [doc = " Mutability restricted to immutable."] Not , # [doc = " Mutability restricted to immutable, but only because of the pattern"] # [doc = " (not the scrutinee type)."] # [doc = ""] # [doc = " The contained span, if present, points to an `&` pattern"] # [doc = " that is the reason for the restriction,"] # [doc = " and which will be reported in a diagnostic."] WeaklyNot (Option < Span >) , # [doc = " No restriction on mutability"] Mut , }
+    };
+}
+
+MutblCap!()

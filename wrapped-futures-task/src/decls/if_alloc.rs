@@ -13,4 +13,4 @@ macro_rules! if_alloc {
     };
 }
 
-if_alloc!()
+if_alloc!();

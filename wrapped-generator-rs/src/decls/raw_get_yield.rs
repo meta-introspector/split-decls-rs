@@ -12,4 +12,4 @@ macro_rules! raw_get_yield {
     };
 }
 
-raw_get_yield!()
+raw_get_yield!();

@@ -4,4 +4,4 @@ macro_rules! process_error {
     };
 }
 
-process_error!()
+process_error!();

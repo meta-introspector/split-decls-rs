@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        FromArgMatches!();
         Error!();
+        FromArgMatches!();
         ArgMatches!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

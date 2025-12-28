@@ -4,4 +4,4 @@ macro_rules! V2_HEADER_SIZE {
     };
 }
 
-V2_HEADER_SIZE!()
+V2_HEADER_SIZE!();

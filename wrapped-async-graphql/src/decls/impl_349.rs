@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        QueryEnvInner!();
+        SchemaEnv!();
         ContextBase!();
-        QueryPathNode!();
         QueryEnv!();
         Data!();
-        SchemaEnv!();
+        QueryEnvInner!();
+        QueryPathNode!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_349 {
     };
 }
 
-impl_349!()
+impl_349!();

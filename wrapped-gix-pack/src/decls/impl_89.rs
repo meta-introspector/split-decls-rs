@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Outcome!();
-        Error!();
-        Offset!();
-        ResolvedBase!();
-        Header!();
-        Delta!();
-        File!();
         DecodeEntry!();
+        Outcome!();
+        Header!();
         Tree!();
-        Entry!();
+        Error!();
+        ResolvedBase!();
         Kind!();
+        Delta!();
+        Entry!();
+        File!();
+        Offset!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

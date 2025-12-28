@@ -4,4 +4,4 @@ macro_rules! FromRadix10Signed {
     };
 }
 
-FromRadix10Signed!()
+FromRadix10Signed!();

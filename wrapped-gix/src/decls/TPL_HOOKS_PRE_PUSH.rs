@@ -4,4 +4,4 @@ macro_rules! TPL_HOOKS_PRE_PUSH {
     };
 }
 
-TPL_HOOKS_PRE_PUSH!()
+TPL_HOOKS_PRE_PUSH!();

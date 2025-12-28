@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Graph!();
-        Algorithm!();
-        Metadata!();
         Error!();
+        Metadata!();
+        Algorithm!();
+        Graph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

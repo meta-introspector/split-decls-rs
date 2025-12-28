@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Section!();
         Key!();
         Checkout!();
+        Section!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_595 {
     };
 }
 
-impl_595!()
+impl_595!();

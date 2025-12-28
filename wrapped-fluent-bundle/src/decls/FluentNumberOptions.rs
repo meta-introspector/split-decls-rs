@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FluentNumberStyle!();
         FluentNumberCurrencyDisplayStyle!();
         FluentNumberType!();
-        FluentNumberStyle!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FluentNumberOptions {
     };
 }
 
-FluentNumberOptions!()
+FluentNumberOptions!();

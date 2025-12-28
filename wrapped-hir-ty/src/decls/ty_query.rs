@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TyDefId!();
         EarlyBinder!();
+        TyDefId!();
         HirDatabase!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ty_query {
     };
 }
 
-ty_query!()
+ty_query!();

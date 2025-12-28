@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         ApplyOptions!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! delta_cb_c {
     };
 }
 
-delta_cb_c!()
+delta_cb_c!();

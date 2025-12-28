@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PatId!();
+        Expr!();
         ExprId!();
         Item!();
-        Expr!();
+        PatId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Statement {
     };
 }
 
-Statement!()
+Statement!();

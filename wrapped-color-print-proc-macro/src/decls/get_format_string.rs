@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FormatArg!();
-        SpanError!();
         Error!();
+        FormatArg!();
         Result!();
+        SpanError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! get_format_string {
     };
 }
 
-get_format_string!()
+get_format_string!();

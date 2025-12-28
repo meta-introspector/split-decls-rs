@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Rule!();
-        Result!();
         PositionCalculator!();
-        TypeCondition!();
         Positioned!();
+        Result!();
+        Rule!();
+        TypeCondition!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_type_condition {
     };
 }
 
-parse_type_condition!()
+parse_type_condition!();

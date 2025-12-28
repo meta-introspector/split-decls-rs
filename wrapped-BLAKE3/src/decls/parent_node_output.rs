@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Output!();
-        CVBytes!();
-        Platform!();
         CVWords!();
+        Platform!();
+        CVBytes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parent_node_output {
     };
 }
 
-parent_node_output!()
+parent_node_output!();

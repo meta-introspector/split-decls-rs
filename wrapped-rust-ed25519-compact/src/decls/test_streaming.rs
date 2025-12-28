@@ -12,4 +12,4 @@ macro_rules! test_streaming {
     };
 }
 
-test_streaming!()
+test_streaming!();

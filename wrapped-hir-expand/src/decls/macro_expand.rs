@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ExpandResult!();
         CowArc!();
-        ExpandDatabase!();
+        ExpandResult!();
         ProcMacro!();
-        MacroCallId!();
         MacroCallKind!();
-        MacroCallLoc!();
         EagerCallInfo!();
+        ExpandDatabase!();
+        MacroCallLoc!();
+        MacroCallId!();
         MacroDefKind!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! macro_expand {
     };
 }
 
-macro_expand!()
+macro_expand!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Outcome!();
-        Statistics!();
         Kind!();
+        Outcome!();
         Tree!();
         Reducer!();
         Error!();
+        Statistics!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

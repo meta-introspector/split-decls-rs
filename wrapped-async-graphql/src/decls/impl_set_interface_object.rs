@@ -4,4 +4,4 @@ macro_rules! impl_set_interface_object {
     };
 }
 
-impl_set_interface_object!()
+impl_set_interface_object!();

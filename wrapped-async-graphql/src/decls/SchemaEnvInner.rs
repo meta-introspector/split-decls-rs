@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Data!();
         Registry!();
         CustomDirectiveFactory!();
+        Data!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SchemaEnvInner {
     };
 }
 
-SchemaEnvInner!()
+SchemaEnvInner!();

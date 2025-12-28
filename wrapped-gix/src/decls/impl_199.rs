@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Editor!();
         Error!();
+        Editor!();
         ToComponents!();
         Cursor!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

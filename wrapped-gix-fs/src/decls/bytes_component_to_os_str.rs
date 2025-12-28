@@ -4,4 +4,4 @@ macro_rules! bytes_component_to_os_str {
     };
 }
 
-bytes_component_to_os_str!()
+bytes_component_to_os_str!();

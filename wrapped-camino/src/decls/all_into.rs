@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf8Path!();
         Utf8PathBuf!();
+        Utf8Path!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! all_into {
     };
 }
 
-all_into!()
+all_into!();

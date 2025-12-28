@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Response!();
-        Options!();
         Error!();
         Request!();
+        Response!();
+        Options!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Remote {
     };
 }
 
-Remote!()
+Remote!();

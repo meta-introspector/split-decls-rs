@@ -4,4 +4,4 @@ macro_rules! InvalidCargoFeatures {
     };
 }
 
-InvalidCargoFeatures!()
+InvalidCargoFeatures!();

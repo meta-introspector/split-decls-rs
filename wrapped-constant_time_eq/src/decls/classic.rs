@@ -4,4 +4,4 @@ macro_rules! classic {
     };
 }
 
-classic!()
+classic!();

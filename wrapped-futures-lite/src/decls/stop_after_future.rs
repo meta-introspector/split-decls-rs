@@ -11,4 +11,4 @@ macro_rules! stop_after_future {
     };
 }
 
-stop_after_future!()
+stop_after_future!();

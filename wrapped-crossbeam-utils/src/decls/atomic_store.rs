@@ -4,4 +4,4 @@ macro_rules! atomic_store {
     };
 }
 
-atomic_store!()
+atomic_store!();

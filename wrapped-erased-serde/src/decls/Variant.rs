@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Any!();
         DeserializeSeed!();
-        Error!();
+        Any!();
         Result!();
         Visitor!();
         Out!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Variant {
     };
 }
 
-Variant!()
+Variant!();

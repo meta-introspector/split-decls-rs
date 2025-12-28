@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        LogVisitor!();
-        NormalizeEvent!();
+        Fields!();
     };
 }
 
 macro_rules! impl_38 {
     () => {
         deps!();
-        impl < 'a > NormalizeEvent < 'a > for Event < 'a > { fn normalized_metadata (& 'a self) -> Option < Metadata < 'a > > { let original = self . metadata () ; if self . is_log () { let mut fields = LogVisitor :: new_for (self , level_to_cs (* original . level ()) . 1) ; self . record (& mut fields) ; Some (Metadata :: new ("log event" , fields . target . unwrap_or ("log") , * original . level () , fields . file , fields . line . map (| l | l as u32) , fields . module_path , field :: FieldSet :: new (& ["message"] , original . callsite ()) , Kind :: EVENT ,)) } else { None } } fn is_log (& self) -> bool { self . metadata () . callsite () == identify_callsite ! (level_to_cs (* self . metadata () . level ()) . 0) } }
+        impl Fields { fn new (cs : & 'static dyn Callsite) -> Self { let fieldset = cs . metadata () . fields () ; let message = fieldset . field ("message") . unwrap () ; let target = fieldset . field ("log.target") . unwrap () ; let module = fieldset . field ("log.module_path") . unwrap () ; let file = fieldset . field ("log.file") . unwrap () ; let line = fieldset . field ("log.line") . unwrap () ; Fields { message , target , module , file , line , } } }
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! glb {
     };
 }
 
-glb!()
+glb!();

@@ -4,4 +4,4 @@ macro_rules! probe_loop {
     };
 }
 
-probe_loop!()
+probe_loop!();

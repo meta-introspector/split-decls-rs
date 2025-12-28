@@ -4,4 +4,4 @@ macro_rules! RecoveryId {
     };
 }
 
-RecoveryId!()
+RecoveryId!();

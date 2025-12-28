@@ -4,4 +4,4 @@ macro_rules! __expand_check_macro {
     };
 }
 
-__expand_check_macro!()
+__expand_check_macro!();

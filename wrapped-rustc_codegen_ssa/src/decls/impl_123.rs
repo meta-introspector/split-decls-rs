@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Linker!();
+        WasmLd!();
+        Command!();
+    };
+}
+
+macro_rules! impl_123 {
+    () => {
+        deps!();
+        impl < 'a > Linker for WasmLd < 'a > { fn cmd (& mut self) -> & mut Command { & mut self . cmd } fn set_output_kind (& mut self , output_kind : LinkOutputKind , _crate_type : CrateType , _out_filename : & Path ,) { match output_kind { LinkOutputKind :: DynamicNoPicExe | LinkOutputKind :: DynamicPicExe | LinkOutputKind :: StaticNoPicExe | LinkOutputKind :: StaticPicExe => { } LinkOutputKind :: DynamicDylib | LinkOutputKind :: StaticDylib => { self . link_arg ("--no-entry") ; } LinkOutputKind :: WasiReactorExe => { self . link_args (& ["--entry" , "_initialize"]) ; } } } fn link_dylib_by_name (& mut self , name : & str , _verbatim : bool , _as_needed : bool) { self . link_or_cc_args (& ["-l" , name]) ; } fn link_dylib_by_path (& mut self , path : & Path , _as_needed : bool) { self . link_or_cc_arg (path) ; } fn link_staticlib_by_name (& mut self , name : & str , _verbatim : bool , whole_archive : bool) { if ! whole_archive { self . link_or_cc_args (& ["-l" , name]) ; } else { self . link_arg ("--whole-archive") . link_or_cc_args (& ["-l" , name]) . link_arg ("--no-whole-archive") ; } } fn link_staticlib_by_path (& mut self , path : & Path , whole_archive : bool) { if ! whole_archive { self . link_or_cc_arg (path) ; } else { self . link_arg ("--whole-archive") . link_or_cc_arg (path) . link_arg ("--no-whole-archive") ; } } fn full_relro (& mut self) { } fn partial_relro (& mut self) { } fn no_relro (& mut self) { } fn gc_sections (& mut self , _keep_metadata : bool) { self . link_arg ("--gc-sections") ; } fn optimize (& mut self) { self . link_arg (match self . sess . opts . optimize { OptLevel :: No => "-O0" , OptLevel :: Less => "-O1" , OptLevel :: More => "-O2" , OptLevel :: Aggressive => "-O3" , OptLevel :: Size => "-O2" , OptLevel :: SizeMin => "-O2" , }) ; } fn pgo_gen (& mut self) { } fn debuginfo (& mut self , strip : Strip , _ : & [PathBuf]) { match strip { Strip :: None => { } Strip :: Debuginfo => { self . link_arg ("--strip-debug") ; } Strip :: Symbols => { self . link_arg ("--strip-all") ; } } } fn control_flow_guard (& mut self) { } fn ehcont_guard (& mut self) { } fn no_crt_objects (& mut self) { } fn no_default_libraries (& mut self) { } fn export_symbols (& mut self , _tmpdir : & Path , _crate_type : CrateType , symbols : & [(String , SymbolExportKind)] ,) { for (sym , _) in symbols { self . link_args (& ["--export" , sym]) ; } if self . sess . target . os == "unknown" || self . sess . target . os == "none" { self . link_args (& ["--export=__heap_base" , "--export=__data_end"]) ; } } fn subsystem (& mut self , _subsystem : & str) { } fn linker_plugin_lto (& mut self) { match self . sess . opts . cg . linker_plugin_lto { LinkerPluginLto :: Disabled => { } LinkerPluginLto :: LinkerPluginAuto => { self . push_linker_plugin_lto_args () ; } LinkerPluginLto :: LinkerPlugin (_) => { self . push_linker_plugin_lto_args () ; } } } }
+    };
+}
+
+impl_123!()

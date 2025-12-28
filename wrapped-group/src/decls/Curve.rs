@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Group!();
-        GroupOps!();
         GroupOpsOwned!();
+        GroupOps!();
+        Group!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Curve {
     };
 }
 
-Curve!()
+Curve!();

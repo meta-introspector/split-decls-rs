@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Expression!();
         ExprPrimary!();
         Type!();
+        Expression!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TemplateArg {
     };
 }
 
-TemplateArg!()
+TemplateArg!();

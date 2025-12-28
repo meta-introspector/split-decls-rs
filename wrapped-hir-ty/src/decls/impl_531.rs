@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HirDisplayError!();
         HirFormatter!();
         HirDisplayWithExpressionStore!();
+        HirDisplayError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_531 {
     };
 }
 
-impl_531!()
+impl_531!();

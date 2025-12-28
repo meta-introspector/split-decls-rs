@@ -4,4 +4,4 @@ macro_rules! signature_and_consumed {
     };
 }
 
-signature_and_consumed!()
+signature_and_consumed!();

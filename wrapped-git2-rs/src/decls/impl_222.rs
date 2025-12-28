@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Oid!();
-        Binding!();
         Error!();
+        Binding!();
+        Oid!();
         BlobWriter!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

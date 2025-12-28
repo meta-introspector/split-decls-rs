@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        KeyType!();
         Arg!();
         Key!();
-        KeyType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! append_keys {
     };
 }
 
-append_keys!()
+append_keys!();

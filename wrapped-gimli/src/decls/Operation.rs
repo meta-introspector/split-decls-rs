@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Piece!();
-        Address!();
-        Register!();
         Expression!();
+        Register!();
+        Piece!();
         DebugInfoRef!();
         Relocate!();
+        Address!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Operation {
     };
 }
 
-Operation!()
+Operation!();

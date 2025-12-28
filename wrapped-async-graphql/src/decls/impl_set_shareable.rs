@@ -4,4 +4,4 @@ macro_rules! impl_set_shareable {
     };
 }
 
-impl_set_shareable!()
+impl_set_shareable!();

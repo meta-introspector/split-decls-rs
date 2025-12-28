@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         GitDaemon!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! spawn_git_daemon {
     };
 }
 
-spawn_git_daemon!()
+spawn_git_daemon!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Positioned!();
-        Result!();
-        PositionCalculator!();
         InputValueDefinition!();
+        Result!();
         Rule!();
+        PositionCalculator!();
+        Positioned!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_arguments_definition {
     };
 }
 
-parse_arguments_definition!()
+parse_arguments_definition!();

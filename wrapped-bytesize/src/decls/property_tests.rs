@@ -11,4 +11,4 @@ macro_rules! property_tests {
     };
 }
 
-property_tests!()
+property_tests!();

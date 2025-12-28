@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Struct!();
-        Trait!();
-        AdtId!();
-        Union!();
-        Function!();
-        LangItemTarget!();
         Static!();
+        AdtId!();
+        Function!();
+        Union!();
+        Trait!();
+        LangItemTarget!();
+        Struct!();
         TypeAlias!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_196 {
     };
 }
 
-impl_196!()
+impl_196!();

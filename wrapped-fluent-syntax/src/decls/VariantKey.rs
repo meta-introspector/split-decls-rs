@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Variant!();
         Identifier!();
+        Variant!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VariantKey {
     };
 }
 
-VariantKey!()
+VariantKey!();

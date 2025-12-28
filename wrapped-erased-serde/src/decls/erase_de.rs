@@ -11,4 +11,4 @@ macro_rules! erase_de {
     };
 }
 
-erase_de!()
+erase_de!();

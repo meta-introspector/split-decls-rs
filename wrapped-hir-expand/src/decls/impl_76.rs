@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExpandDatabase!();
-        FileRangeWrapper!();
         FileRange!();
+        FileRangeWrapper!();
+        ExpandDatabase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

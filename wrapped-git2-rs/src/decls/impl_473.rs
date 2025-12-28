@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Notes!();
+        Binding!();
         Error!();
         Oid!();
-        Binding!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_473 {
     };
 }
 
-impl_473!()
+impl_473!();

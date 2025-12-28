@@ -11,4 +11,4 @@ macro_rules! is_symlink {
     };
 }
 
-is_symlink!()
+is_symlink!();

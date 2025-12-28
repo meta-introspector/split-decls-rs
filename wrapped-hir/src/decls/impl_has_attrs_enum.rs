@@ -11,4 +11,4 @@ macro_rules! impl_has_attrs_enum {
     };
 }
 
-impl_has_attrs_enum!()
+impl_has_attrs_enum!();

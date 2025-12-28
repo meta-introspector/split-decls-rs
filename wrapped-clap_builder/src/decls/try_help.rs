@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StyledStr!();
         Styles!();
+        StyledStr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_help {
     };
 }
 
-try_help!()
+try_help!();

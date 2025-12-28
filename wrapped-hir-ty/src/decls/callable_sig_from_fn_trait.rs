@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        AliasTy!();
+        Binder!();
+        FnSig!();
         PolyFnSig!();
+        HirDatabase!();
+        FnAbi!();
         FnTrait!();
         TraitEnvironment!();
-        FnSig!();
-        AliasTy!();
-        HirDatabase!();
-        Binder!();
-        FnAbi!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! callable_sig_from_fn_trait {
     };
 }
 
-callable_sig_from_fn_trait!()
+callable_sig_from_fn_trait!();

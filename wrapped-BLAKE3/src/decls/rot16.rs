@@ -4,4 +4,4 @@ macro_rules! rot16 {
     };
 }
 
-rot16!()
+rot16!();

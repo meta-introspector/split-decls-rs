@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Token!();
-        ParseError!();
         Ident!();
+        ParseError!();
         Tokenizer!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

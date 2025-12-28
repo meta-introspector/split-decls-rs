@@ -4,4 +4,4 @@ macro_rules! ThreadIndices {
     };
 }
 
-ThreadIndices!()
+ThreadIndices!();

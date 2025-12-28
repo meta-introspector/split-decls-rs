@@ -20,4 +20,4 @@ impl <> $crate::marker::Copy for Foo< > where {}"#]] ,) ; }
     };
 }
 
-test_copy_expand_in_core!()
+test_copy_expand_in_core!();

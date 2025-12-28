@@ -4,4 +4,4 @@ macro_rules! VswhereInstance {
     };
 }
 
-VswhereInstance!()
+VswhereInstance!();

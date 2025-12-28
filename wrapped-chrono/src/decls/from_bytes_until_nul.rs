@@ -4,4 +4,4 @@ macro_rules! from_bytes_until_nul {
     };
 }
 
-from_bytes_until_nul!()
+from_bytes_until_nul!();

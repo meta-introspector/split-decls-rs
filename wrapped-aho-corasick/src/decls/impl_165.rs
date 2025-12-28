@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Vector!();
-        Match!();
         Teddy!();
+        Match!();
+        Vector!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_165 {
     };
 }
 
-impl_165!()
+impl_165!();

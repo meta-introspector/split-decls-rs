@@ -4,4 +4,4 @@ macro_rules! handshake {
     };
 }
 
-handshake!()
+handshake!();

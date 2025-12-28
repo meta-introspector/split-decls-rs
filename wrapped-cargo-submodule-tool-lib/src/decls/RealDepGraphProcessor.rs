@@ -4,4 +4,4 @@ macro_rules! RealDepGraphProcessor {
     };
 }
 
-RealDepGraphProcessor!()
+RealDepGraphProcessor!();

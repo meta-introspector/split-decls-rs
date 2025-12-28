@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Bits!();
         Flag!();
+        Bits!();
         Flags!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! __impl_public_bitflags_consts {
     };
 }
 
-__impl_public_bitflags_consts!()
+__impl_public_bitflags_consts!();

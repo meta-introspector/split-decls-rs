@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StringInner!();
         LenType!();
         CapacityError!();
+        StringInner!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_483 {
     };
 }
 
-impl_483!()
+impl_483!();

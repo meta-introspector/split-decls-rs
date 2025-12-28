@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SubstitutionTable!();
-        Name!();
         Parse!();
+        Result!();
+        ParseContext!();
+        Name!();
+        SubstitutionTable!();
+        SimpleId!();
         DestructorName!();
         IndexStr!();
-        Result!();
-        SimpleId!();
-        ParseContext!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_263 {
     };
 }
 
-impl_263!()
+impl_263!();

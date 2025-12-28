@@ -4,4 +4,4 @@ macro_rules! remote_progress {
     };
 }
 
-remote_progress!()
+remote_progress!();

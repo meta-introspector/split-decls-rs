@@ -4,4 +4,4 @@ macro_rules! Metrics {
     };
 }
 
-Metrics!()
+Metrics!();

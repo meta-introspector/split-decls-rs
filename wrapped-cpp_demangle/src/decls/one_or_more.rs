@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Parse!();
-        Result!();
-        IndexStr!();
         SubstitutionTable!();
+        Result!();
+        Parse!();
+        IndexStr!();
         ParseContext!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! one_or_more {
     };
 }
 
-one_or_more!()
+one_or_more!();

@@ -12,4 +12,4 @@ macro_rules! lock_with_mode {
     };
 }
 
-lock_with_mode!()
+lock_with_mode!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
-        VariantId!();
-        ExpressionStoreSourceMap!();
-        ExpressionStore!();
         VariantFields!();
         FieldsShape!();
+        DefDatabase!();
+        ExpressionStore!();
+        ExpressionStoreSourceMap!();
+        VariantId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_118 {
     };
 }
 
-impl_118!()
+impl_118!();

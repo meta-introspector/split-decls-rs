@@ -1,0 +1,7 @@
+macro_rules! check_chunks_uneven {
+    () => {
+        # [test] fn check_chunks_uneven () { let cases : Vec < (Vec < u32 > , usize , Vec < Vec < u32 > >) > = vec ! [((0 .. 5) . collect () , 3 , vec ! [vec ! [0 , 1 , 2] , vec ! [3 , 4]]) , (vec ! [1] , 5 , vec ! [vec ! [1]]) , ((0 .. 4) . collect () , 3 , vec ! [vec ! [0 , 1 , 2] , vec ! [3]]) ,] ; for (i , (v , n , expected)) in cases . into_iter () . enumerate () { let mut res : Vec < Vec < u32 > > = vec ! [] ; v . par_iter () . chunks (n) . map (| v | v . into_iter () . cloned () . collect ()) . collect_into_vec (& mut res) ; assert_eq ! (expected , res , "Case {i} failed") ; res . truncate (0) ; v . into_par_iter () . chunks (n) . rev () . collect_into_vec (& mut res) ; assert_eq ! (expected . into_iter () . rev () . collect ::< Vec < Vec < u32 >>> () , res , "Case {i} reversed failed") ; } }
+    };
+}
+
+check_chunks_uneven!()

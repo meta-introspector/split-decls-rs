@@ -4,4 +4,4 @@ macro_rules! C_QDTEXT {
     };
 }
 
-C_QDTEXT!()
+C_QDTEXT!();

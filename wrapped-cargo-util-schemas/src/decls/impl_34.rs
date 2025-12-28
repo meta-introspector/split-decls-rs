@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GitReference!();
         PrettyRef!();
         Result!();
+        GitReference!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

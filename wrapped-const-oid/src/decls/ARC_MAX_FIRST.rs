@@ -11,4 +11,4 @@ macro_rules! ARC_MAX_FIRST {
     };
 }
 
-ARC_MAX_FIRST!()
+ARC_MAX_FIRST!();

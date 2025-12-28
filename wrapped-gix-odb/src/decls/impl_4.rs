@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IndexForObjectInPack!();
-        Store!();
+        Handle!();
         Snapshot!();
         Error!();
-        Handle!();
+        Store!();
+        IndexForObjectInPack!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

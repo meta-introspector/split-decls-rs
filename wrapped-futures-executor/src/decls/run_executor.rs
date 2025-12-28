@@ -12,4 +12,4 @@ macro_rules! run_executor {
     };
 }
 
-run_executor!()
+run_executor!();

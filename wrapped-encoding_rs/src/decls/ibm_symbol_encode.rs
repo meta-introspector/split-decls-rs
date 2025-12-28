@@ -4,4 +4,4 @@ macro_rules! ibm_symbol_encode {
     };
 }
 
-ibm_symbol_encode!()
+ibm_symbol_encode!();

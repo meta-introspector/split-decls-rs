@@ -4,4 +4,4 @@ macro_rules! PatternError {
     };
 }
 
-PatternError!()
+PatternError!();

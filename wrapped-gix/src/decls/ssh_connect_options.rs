@@ -11,4 +11,4 @@ macro_rules! ssh_connect_options {
     };
 }
 
-ssh_connect_options!()
+ssh_connect_options!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DwoUnit!();
         LazyFunctions!();
-        LazyResult!();
         LazyLines!();
+        DwoUnit!();
+        LazyResult!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ResUnit {
     };
 }
 
-ResUnit!()
+ResUnit!();

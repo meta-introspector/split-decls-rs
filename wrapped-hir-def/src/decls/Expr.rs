@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        ClosureKind!();
         InlineAsm!();
-        CaptureBy!();
+        Statement!();
+        Const!();
         ExprId!();
+        ClosureKind!();
+        Array!();
+        RecordLitField!();
+        CaptureBy!();
         PatId!();
         LabelId!();
-        Const!();
         Literal!();
-        Statement!();
-        OffsetOf!();
-        RecordLitField!();
-        Array!();
         MatchArm!();
+        OffsetOf!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! Expr {
     };
 }
 
-Expr!()
+Expr!();

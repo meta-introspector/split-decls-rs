@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Base64Variant!();
-        Error!();
         Base64Impl!();
-        Decoder!();
+        Base64Variant!();
         Base64UrlSafe!();
+        Decoder!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

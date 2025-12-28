@@ -4,4 +4,4 @@ macro_rules! UnnamedTypeName {
     };
 }
 
-UnnamedTypeName!()
+UnnamedTypeName!();

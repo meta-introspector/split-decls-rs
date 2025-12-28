@@ -4,4 +4,4 @@ macro_rules! WriteWithProgress {
     };
 }
 
-WriteWithProgress!()
+WriteWithProgress!();

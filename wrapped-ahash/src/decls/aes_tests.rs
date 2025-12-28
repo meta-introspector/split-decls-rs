@@ -11,4 +11,4 @@ macro_rules! aes_tests {
     };
 }
 
-aes_tests!()
+aes_tests!();

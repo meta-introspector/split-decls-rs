@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         BorrowDecoder!();
+        DecoderImpl!();
         Config!();
         BorrowReader!();
-        DecoderImpl!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_275 {
     };
 }
 
-impl_275!()
+impl_275!();

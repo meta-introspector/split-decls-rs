@@ -4,4 +4,4 @@ macro_rules! remove_if_exists {
     };
 }
 
-remove_if_exists!()
+remove_if_exists!();

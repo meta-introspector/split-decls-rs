@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        DefUseResult!();
+        DefUseVisitor!();
+        DefUse!();
+    };
+}
+
+macro_rules! impl_74 {
+    () => {
+        deps!();
+        impl < 'a , 'tcx > Visitor < 'tcx > for DefUseVisitor < 'a , 'tcx > { fn visit_local (& mut self , local : Local , context : PlaceContext , _ : Location) { let local_ty = self . body . local_decls [local] . ty ; let mut found_it = false ; self . tcx . for_each_free_region (& local_ty , | r | { if r . as_var () == self . region_vid { found_it = true ; } }) ; if found_it { self . def_use_result = match def_use :: categorize (context) { Some (DefUse :: Def) => Some (DefUseResult :: Def) , Some (DefUse :: Use) => Some (DefUseResult :: UseLive { local }) , Some (DefUse :: Drop) => Some (DefUseResult :: UseDrop { local }) , None => None , } ; } } }
+    };
+}
+
+impl_74!()

@@ -4,4 +4,4 @@ macro_rules! concurrent_stream {
     };
 }
 
-concurrent_stream!()
+concurrent_stream!();

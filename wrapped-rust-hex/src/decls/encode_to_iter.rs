@@ -11,4 +11,4 @@ macro_rules! encode_to_iter {
     };
 }
 
-encode_to_iter!()
+encode_to_iter!();

@@ -11,4 +11,4 @@ macro_rules! shared_is_unique {
     };
 }
 
-shared_is_unique!()
+shared_is_unique!();

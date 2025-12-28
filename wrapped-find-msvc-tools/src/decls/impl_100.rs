@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HKEY!();
-        Repr!();
         OwnedKey!();
-        RegistryKey!();
         Iter!();
+        Repr!();
+        HKEY!();
+        RegistryKey!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_100 {
     };
 }
 
-impl_100!()
+impl_100!();

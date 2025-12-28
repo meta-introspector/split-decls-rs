@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Logger!();
         Builder!();
+        Logger!();
         Formatter!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

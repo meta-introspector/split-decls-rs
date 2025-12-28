@@ -4,4 +4,4 @@ macro_rules! DiffDelta {
     };
 }
 
-DiffDelta!()
+DiffDelta!();

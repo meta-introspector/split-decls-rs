@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Action!();
-        Outcome!();
+        Relation!();
         ChangeKind!();
         Item!();
-        CopySource!();
-        Change!();
-        Relation!();
-        Platform!();
-        Tracker!();
+        Outcome!();
         Error!();
+        Tracker!();
+        Action!();
+        Platform!();
+        Change!();
+        CopySource!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

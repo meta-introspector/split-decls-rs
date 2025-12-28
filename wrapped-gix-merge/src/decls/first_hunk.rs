@@ -11,4 +11,4 @@ macro_rules! first_hunk {
     };
 }
 
-first_hunk!()
+first_hunk!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MatchGroup!();
         Mapping!();
+        MatchGroup!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! match_rhs {
     };
 }
 
-match_rhs!()
+match_rhs!();

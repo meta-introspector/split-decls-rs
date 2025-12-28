@@ -1,7 +1,10 @@
 macro_rules! deps {
     () => {
-        PointerMetadata!();
+        TrailingSliceLayout!();
         KnownLayout!();
+        PointerMetadata!();
+        SliceDst!();
+        SizeInfo!();
     };
 }
 

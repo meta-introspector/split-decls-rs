@@ -4,4 +4,4 @@ macro_rules! fiat_p384_scalar_montgomery_domain_field_element {
     };
 }
 
-fiat_p384_scalar_montgomery_domain_field_element!()
+fiat_p384_scalar_montgomery_domain_field_element!();

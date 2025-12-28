@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UploadValue!();
+        Extensions!();
         IntrospectionMode!();
         Data!();
-        Extensions!();
+        UploadValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Request {
     };
 }
 
-Request!()
+Request!();

@@ -4,4 +4,4 @@ macro_rules! CompressedTempfile {
     };
 }
 
-CompressedTempfile!()
+CompressedTempfile!();

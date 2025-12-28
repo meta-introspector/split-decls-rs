@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StringView!();
+        LenType!();
         VecInner!();
         String!();
-        LenType!();
+        StringView!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! StringInner {
     };
 }
 
-StringInner!()
+StringInner!();

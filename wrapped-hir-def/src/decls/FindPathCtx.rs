@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         FindPathConfig!();
-        DefMap!();
-        DefDatabase!();
         PrefixKind!();
         ModuleId!();
+        DefDatabase!();
+        DefMap!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! FindPathCtx {
     };
 }
 
-FindPathCtx!()
+FindPathCtx!();

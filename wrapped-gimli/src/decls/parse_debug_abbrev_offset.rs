@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Format!();
-        Result!();
         DebugAbbrevOffset!();
+        Result!();
+        Format!();
         Reader!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! parse_debug_abbrev_offset {
     };
 }
 
-parse_debug_abbrev_offset!()
+parse_debug_abbrev_offset!();

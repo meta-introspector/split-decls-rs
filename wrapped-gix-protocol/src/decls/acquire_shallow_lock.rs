@@ -11,4 +11,4 @@ macro_rules! acquire_shallow_lock {
     };
 }
 
-acquire_shallow_lock!()
+acquire_shallow_lock!();

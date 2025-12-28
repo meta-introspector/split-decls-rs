@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GraphQLParser!();
         Error!();
-        Result!();
+        GraphQLParser!();
         Rule!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

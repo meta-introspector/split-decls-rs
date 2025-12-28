@@ -1,0 +1,7 @@
+macro_rules! print_target_cpus {
+    () => {
+        fn print_target_cpus (sess : & Session , tm : & llvm :: TargetMachine , out : & mut String) { let cpu_names = llvm :: build_string (| s | unsafe { llvm :: LLVMRustPrintTargetCPUs (& tm , s) ; }) . unwrap () ; struct Cpu < 'a > { cpu_name : & 'a str , remark : String , } let target_cpu = handle_native (& sess . target . cpu) ; let make_remark = | cpu_name | { if cpu_name == target_cpu { let target = & sess . target . llvm_target ; format ! (" - This is the default target CPU for the current build target (currently {target}).") } else { "" . to_owned () } } ; let mut cpus = cpu_names . lines () . map (| cpu_name | Cpu { cpu_name , remark : make_remark (cpu_name) }) . collect :: < VecDeque < _ > > () ; if sess . host . arch == sess . target . arch { let host = get_host_cpu_name () ; cpus . push_front (Cpu { cpu_name : "native" , remark : format ! (" - Select the CPU of the current host (currently {host}).") , }) ; } let max_name_width = cpus . iter () . map (| cpu | cpu . cpu_name . len ()) . max () . unwrap_or (0) ; writeln ! (out , "Available CPUs for this target:") . unwrap () ; for Cpu { cpu_name , remark } in cpus { let width = if remark . is_empty () { 0 } else { max_name_width } ; writeln ! (out , "    {cpu_name:<width$}{remark}") . unwrap () ; } }
+    };
+}
+
+print_target_cpus!()

@@ -4,4 +4,4 @@ macro_rules! IntoFallible {
     };
 }
 
-IntoFallible!()
+IntoFallible!();

@@ -12,4 +12,4 @@ macro_rules! pick_our_changes_mut {
     };
 }
 
-pick_our_changes_mut!()
+pick_our_changes_mut!();

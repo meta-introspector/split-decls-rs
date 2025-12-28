@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Repository!();
         IsActiveState!();
         ModulesSnapshot!();
         IndexPersistedOrInMemory!();
-        Repository!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SharedState {
     };
 }
 
-SharedState!()
+SharedState!();

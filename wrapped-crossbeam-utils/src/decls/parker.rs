@@ -4,4 +4,4 @@ macro_rules! parker {
     };
 }
 
-parker!()
+parker!();

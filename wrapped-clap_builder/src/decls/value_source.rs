@@ -4,4 +4,4 @@ macro_rules! value_source {
     };
 }
 
-value_source!()
+value_source!();

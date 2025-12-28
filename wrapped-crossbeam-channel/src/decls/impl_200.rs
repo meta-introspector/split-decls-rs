@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SyncWaker!();
+        Entry!();
         Operation!();
         Waker!();
-        Entry!();
         Context!();
+        SyncWaker!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_200 {
     };
 }
 
-impl_200!()
+impl_200!();

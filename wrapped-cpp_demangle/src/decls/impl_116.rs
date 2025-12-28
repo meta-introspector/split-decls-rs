@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IndexStr!();
         SourceName!();
+        CtorDtorName!();
         UnnamedTypeName!();
+        OperatorName!();
         ClosureTypeName!();
         UnqualifiedName!();
-        CtorDtorName!();
-        OperatorName!();
+        IndexStr!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

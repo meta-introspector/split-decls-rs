@@ -4,4 +4,4 @@ macro_rules! dir_cleanup {
     };
 }
 
-dir_cleanup!()
+dir_cleanup!();

@@ -4,4 +4,4 @@ macro_rules! atomic_load {
     };
 }
 
-atomic_load!()
+atomic_load!();

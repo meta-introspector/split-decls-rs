@@ -11,4 +11,4 @@ macro_rules! open_android_tz_data_file {
     };
 }
 
-open_android_tz_data_file!()
+open_android_tz_data_file!();

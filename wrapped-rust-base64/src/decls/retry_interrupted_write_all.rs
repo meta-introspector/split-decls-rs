@@ -4,4 +4,4 @@ macro_rules! retry_interrupted_write_all {
     };
 }
 
-retry_interrupted_write_all!()
+retry_interrupted_write_all!();

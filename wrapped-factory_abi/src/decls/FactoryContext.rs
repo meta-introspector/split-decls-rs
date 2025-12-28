@@ -4,4 +4,4 @@ macro_rules! FactoryContext {
     };
 }
 
-FactoryContext!()
+FactoryContext!();

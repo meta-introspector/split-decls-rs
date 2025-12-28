@@ -4,4 +4,4 @@ macro_rules! escape_subsection {
     };
 }
 
-escape_subsection!()
+escape_subsection!();

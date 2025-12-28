@@ -4,4 +4,4 @@ macro_rules! Ty {
     };
 }
 
-Ty!()
+Ty!();

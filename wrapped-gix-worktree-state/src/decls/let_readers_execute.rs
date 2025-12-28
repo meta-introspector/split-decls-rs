@@ -4,4 +4,4 @@ macro_rules! let_readers_execute {
     };
 }
 
-let_readers_execute!()
+let_readers_execute!();

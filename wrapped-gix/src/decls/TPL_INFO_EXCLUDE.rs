@@ -4,4 +4,4 @@ macro_rules! TPL_INFO_EXCLUDE {
     };
 }
 
-TPL_INFO_EXCLUDE!()
+TPL_INFO_EXCLUDE!();

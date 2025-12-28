@@ -4,4 +4,4 @@ macro_rules! SamplingMethod {
     };
 }
 
-SamplingMethod!()
+SamplingMethod!();

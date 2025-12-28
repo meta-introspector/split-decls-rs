@@ -4,4 +4,4 @@ macro_rules! IPAD {
     };
 }
 
-IPAD!()
+IPAD!();

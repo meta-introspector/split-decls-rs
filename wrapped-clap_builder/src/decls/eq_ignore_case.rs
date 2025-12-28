@@ -4,4 +4,4 @@ macro_rules! eq_ignore_case {
     };
 }
 
-eq_ignore_case!()
+eq_ignore_case!();

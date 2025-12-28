@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TyLoweringContext!();
-        LifetimeElisionKind!();
-        HirDatabase!();
         EarlyBinder!();
+        TyLoweringContext!();
+        HirDatabase!();
+        LifetimeElisionKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! type_for_static {
     };
 }
 
-type_for_static!()
+type_for_static!();

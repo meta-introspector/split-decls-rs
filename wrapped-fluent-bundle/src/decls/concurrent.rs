@@ -4,4 +4,4 @@ macro_rules! concurrent {
     };
 }
 
-concurrent!()
+concurrent!();

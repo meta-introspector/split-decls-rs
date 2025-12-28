@@ -11,4 +11,4 @@ macro_rules! NON_OVERLAPPING {
     };
 }
 
-NON_OVERLAPPING!()
+NON_OVERLAPPING!();

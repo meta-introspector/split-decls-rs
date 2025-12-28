@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DwoId!();
-        Result!();
         Reader!();
+        Result!();
+        DwoId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_dwo_id {
     };
 }
 
-parse_dwo_id!()
+parse_dwo_id!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Change!();
-        Rewrite!();
-        Repository!();
         TreeDiffChangeExt!();
+        Repository!();
+        Rewrite!();
+        Change!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_210 {
     };
 }
 
-impl_210!()
+impl_210!();

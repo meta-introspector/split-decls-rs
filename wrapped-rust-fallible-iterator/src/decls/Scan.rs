@@ -4,4 +4,4 @@ macro_rules! Scan {
     };
 }
 
-Scan!()
+Scan!();

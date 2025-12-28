@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        ZeroVecAttrs!();
+    };
+}
+
+macro_rules! extract_attributes_common {
+    () => {
+        deps!();
+        # [doc = " Removes all known zerovec:: attributes from struct attrs and validates them"] pub fn extract_attributes_common (attrs : & mut Vec < Attribute > , span : Span , is_var : bool ,) -> Result < ZeroVecAttrs > { let mut zerovec_attrs = extract_zerovec_attributes (attrs) ; let derive = extract_parenthetical_zerovec_attrs (& mut zerovec_attrs , "derive") ? ; let skip = extract_parenthetical_zerovec_attrs (& mut zerovec_attrs , "skip_derive") ? ; let format = extract_single_tt_attr (& mut zerovec_attrs , "format") ? ; let name = if is_var { "make_varule" } else { "make_ule" } ; if let Some (attr) = zerovec_attrs . first () { return Err (Error :: new (attr . span () , format ! ("Found unknown or duplicate attribute for #[{name}]") ,)) ; } let mut attrs = ZeroVecAttrs :: default () ; for ident in derive { if ident == "Serialize" { attrs . serialize = true ; } else if ident == "Deserialize" { attrs . deserialize = true ; } else if ident == "Debug" { attrs . debug = true ; } else if ident == "Hash" { attrs . hash = true ; } else { return Err (Error :: new (ident . span () , format ! ("Found unknown derive attribute for #[{name}]: #[zerovec::derive({ident})]") ,)) ; } } for ident in skip { if ident == "ZeroMapKV" { attrs . skip_kv = true ; } else if ident == "Ord" { attrs . skip_ord = true ; } else if ident == "ToOwned" && is_var { attrs . skip_toowned = true ; } else if ident == "From" && is_var { attrs . skip_from = true ; } else { return Err (Error :: new (ident . span () , format ! ("Found unknown derive attribute for #[{name}]: #[zerovec::skip_derive({ident})]") ,)) ; } } if let Some (ref format) = format { if ! is_var { return Err (Error :: new (format . span () , format ! ("Found unknown derive attribute for #[{name}]: #[zerovec::format({format})]") ,)) ; } } attrs . vzv_format = format ; if (attrs . serialize || attrs . deserialize) && ! is_var { return Err (Error :: new (span , "#[make_ule] does not support #[zerovec::derive(Serialize, Deserialize)]" ,)) ; } Ok (attrs) }
+    };
+}
+
+extract_attributes_common!()

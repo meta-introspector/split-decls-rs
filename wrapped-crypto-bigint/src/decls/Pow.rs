@@ -4,4 +4,4 @@ macro_rules! Pow {
     };
 }
 
-Pow!()
+Pow!();

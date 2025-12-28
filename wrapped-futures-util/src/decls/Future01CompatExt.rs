@@ -11,4 +11,4 @@ macro_rules! Future01CompatExt {
     };
 }
 
-Future01CompatExt!()
+Future01CompatExt!();

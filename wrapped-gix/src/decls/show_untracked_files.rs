@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ShowUntrackedFiles!();
         UntrackedFiles!();
+        ShowUntrackedFiles!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! show_untracked_files {
     };
 }
 
-show_untracked_files!()
+show_untracked_files!();

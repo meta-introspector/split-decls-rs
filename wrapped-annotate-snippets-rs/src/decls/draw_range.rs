@@ -12,4 +12,4 @@ macro_rules! draw_range {
     };
 }
 
-draw_range!()
+draw_range!();

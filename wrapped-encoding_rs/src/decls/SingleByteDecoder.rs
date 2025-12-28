@@ -4,4 +4,4 @@ macro_rules! SingleByteDecoder {
     };
 }
 
-SingleByteDecoder!()
+SingleByteDecoder!();

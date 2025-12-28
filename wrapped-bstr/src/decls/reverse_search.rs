@@ -4,4 +4,4 @@ macro_rules! reverse_search {
     };
 }
 
-reverse_search!()
+reverse_search!();

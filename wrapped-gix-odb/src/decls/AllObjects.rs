@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Store!();
         Ordering!();
+        Store!();
         State!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! AllObjects {
     };
 }
 
-AllObjects!()
+AllObjects!();

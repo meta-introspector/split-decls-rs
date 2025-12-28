@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Field!();
-        Deprecation!();
         MetaDirectiveInvocation!();
+        Field!();
         MetaVisibleFn!();
+        Deprecation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MetaInputValue {
     };
 }
 
-MetaInputValue!()
+MetaInputValue!();

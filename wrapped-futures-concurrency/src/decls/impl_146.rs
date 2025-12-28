@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IntoConcurrentStream!();
-        FromConcurrentStream!();
         ResultVecConsumer!();
+        FromConcurrentStream!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_146 {
     };
 }
 
-impl_146!()
+impl_146!();

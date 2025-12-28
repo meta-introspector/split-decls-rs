@@ -11,4 +11,4 @@ macro_rules! bstr_serde {
     };
 }
 
-bstr_serde!()
+bstr_serde!();

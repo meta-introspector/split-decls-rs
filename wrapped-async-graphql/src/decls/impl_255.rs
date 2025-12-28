@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UniqueArgumentNames!();
         Field!();
-        VisitorContext!();
         Visitor!();
+        VisitorContext!();
+        UniqueArgumentNames!();
         Directive!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

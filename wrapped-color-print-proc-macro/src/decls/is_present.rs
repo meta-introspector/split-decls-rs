@@ -11,4 +11,4 @@ macro_rules! is_present {
     };
 }
 
-is_present!()
+is_present!();

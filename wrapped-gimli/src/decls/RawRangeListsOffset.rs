@@ -4,4 +4,4 @@ macro_rules! RawRangeListsOffset {
     };
 }
 
-RawRangeListsOffset!()
+RawRangeListsOffset!();

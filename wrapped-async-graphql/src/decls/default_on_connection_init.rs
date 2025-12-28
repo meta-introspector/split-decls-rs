@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Data!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! default_on_connection_init {
     };
 }
 
-default_on_connection_init!()
+default_on_connection_init!();

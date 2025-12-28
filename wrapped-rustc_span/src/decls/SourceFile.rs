@@ -1,12 +1,13 @@
 macro_rules! deps {
     () => {
         FileName!();
+        MultiByteChar!();
+        SourceFileHash!();
+        SourceMap!();
+        StableSourceFileId!();
         ExternalSource!();
         SourceFileLines!();
         NormalizedPos!();
-        StableSourceFileId!();
-        MultiByteChar!();
-        SourceFileHash!();
     };
 }
 

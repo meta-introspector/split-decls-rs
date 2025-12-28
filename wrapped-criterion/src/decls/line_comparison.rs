@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AxisScale!();
-        ValueType!();
         Comparison!();
-        BenchmarkId!();
+        AxisScale!();
         ValueFormatter!();
+        ValueType!();
+        BenchmarkId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! line_comparison {
     };
 }
 
-line_comparison!()
+line_comparison!();

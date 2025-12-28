@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EntryStatus!();
         Error!();
         Entry!();
+        EntryStatus!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StatusResult {
     };
 }
 
-StatusResult!()
+StatusResult!();

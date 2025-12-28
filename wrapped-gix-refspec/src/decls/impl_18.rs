@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Fetch!();
         Instruction!();
         Push!();
-        Fetch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

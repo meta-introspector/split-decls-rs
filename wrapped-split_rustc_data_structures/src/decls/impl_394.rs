@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ShardedHashMap!();
+        Entry!();
+    };
+}
+
+macro_rules! impl_394 {
+    () => {
+        deps!();
+        impl < K : Eq + Hash , V > ShardedHashMap < K , V > { # [inline] pub fn get < Q > (& self , key : & Q) -> Option < V > where K : Borrow < Q > , Q : Hash + Eq , V : Clone , { let hash = make_hash (key) ; let shard = self . lock_shard_by_hash (hash) ; let (_ , value) = shard . find (hash , | (k , _) | k . borrow () == key) ? ; Some (value . clone ()) } # [inline] pub fn get_or_insert_with (& self , key : K , default : impl FnOnce () -> V) -> V where V : Copy , { let hash = make_hash (& key) ; let mut shard = self . lock_shard_by_hash (hash) ; match table_entry (& mut shard , hash , & key) { Entry :: Occupied (e) => e . get () . 1 , Entry :: Vacant (e) => { let value = default () ; e . insert ((key , value)) ; value } } } # [inline] pub fn insert (& self , key : K , value : V) -> Option < V > { let hash = make_hash (& key) ; let mut shard = self . lock_shard_by_hash (hash) ; match table_entry (& mut shard , hash , & key) { Entry :: Occupied (e) => { let previous = mem :: replace (& mut e . into_mut () . 1 , value) ; Some (previous) } Entry :: Vacant (e) => { e . insert ((key , value)) ; None } } } }
+    };
+}
+
+impl_394!()

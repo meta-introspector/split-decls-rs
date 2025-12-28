@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SpecialName!();
         Name!();
         BareFunctionType!();
-        SpecialName!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Encoding {
     };
 }
 
-Encoding!()
+Encoding!();

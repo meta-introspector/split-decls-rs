@@ -11,4 +11,4 @@ macro_rules! OS_ENV {
     };
 }
 
-OS_ENV!()
+OS_ENV!();

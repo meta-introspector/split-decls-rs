@@ -11,4 +11,4 @@ macro_rules! assert_all_suffixes_ok {
     };
 }
 
-assert_all_suffixes_ok!()
+assert_all_suffixes_ok!();

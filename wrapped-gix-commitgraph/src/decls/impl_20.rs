@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Position!();
-        Error!();
         ParentIteratorState!();
         ParentEdge!();
+        Position!();
         Parents!();
+        Error!();
         ExtraEdge!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

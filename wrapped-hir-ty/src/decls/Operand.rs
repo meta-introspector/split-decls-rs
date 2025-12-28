@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MirSpan!();
         OperandKind!();
+        MirSpan!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Operand {
     };
 }
 
-Operand!()
+Operand!();

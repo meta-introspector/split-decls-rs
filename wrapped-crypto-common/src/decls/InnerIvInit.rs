@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         IvSizeUser!();
         InnerUser!();
-        InvalidLength!();
         Iv!();
+        InvalidLength!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! InnerIvInit {
     };
 }
 
-InnerIvInit!()
+InnerIvInit!();

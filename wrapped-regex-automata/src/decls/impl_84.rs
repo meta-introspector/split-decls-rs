@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Epsilons!();
+        PatternID!();
+        PatternEpsilons!();
+    };
+}
+
+macro_rules! impl_84 {
+    () => {
+        deps!();
+        impl PatternEpsilons { const PATTERN_ID_BITS : u64 = 22 ; const PATTERN_ID_SHIFT : u64 = 64 - PatternEpsilons :: PATTERN_ID_BITS ; const PATTERN_ID_NONE : u64 = 0x00000000_003FFFFF ; const PATTERN_ID_LIMIT : u64 = PatternEpsilons :: PATTERN_ID_NONE ; const PATTERN_ID_MASK : u64 = 0xFFFFFC00_00000000 ; const EPSILONS_MASK : u64 = 0x000003FF_FFFFFFFF ; # [doc = " Return a new empty pattern epsilons that has no pattern ID and has no"] # [doc = " epsilons. This is suitable for non-match states."] fn empty () -> PatternEpsilons { PatternEpsilons (PatternEpsilons :: PATTERN_ID_NONE << PatternEpsilons :: PATTERN_ID_SHIFT ,) } # [doc = " Whether this pattern epsilons is empty or not. It's empty when it has"] # [doc = " no pattern ID and an empty epsilons."] fn is_empty (self) -> bool { self . pattern_id () . is_none () && self . epsilons () . is_empty () } # [doc = " Return the pattern ID in this pattern epsilons if one exists."] fn pattern_id (self) -> Option < PatternID > { let pid = self . 0 >> PatternEpsilons :: PATTERN_ID_SHIFT ; if pid == PatternEpsilons :: PATTERN_ID_LIMIT { None } else { Some (PatternID :: new_unchecked (pid . as_usize ())) } } # [doc = " Returns the pattern ID without checking whether it's valid. If this is"] # [doc = " called and there is no pattern ID in this `PatternEpsilons`, then this"] # [doc = " will likely produce an incorrect result or possibly even a panic or"] # [doc = " an overflow. But safety will not be violated."] # [doc = ""] # [doc = " This is useful when you know a particular state is a match state. If"] # [doc = " it's a match state, then it must have a pattern ID."] fn pattern_id_unchecked (self) -> PatternID { let pid = self . 0 >> PatternEpsilons :: PATTERN_ID_SHIFT ; PatternID :: new_unchecked (pid . as_usize ()) } # [doc = " Return a new pattern epsilons with the given pattern ID, but the same"] # [doc = " epsilons."] fn set_pattern_id (self , pid : PatternID) -> PatternEpsilons { PatternEpsilons ((pid . as_u64 () << PatternEpsilons :: PATTERN_ID_SHIFT) | (self . 0 & PatternEpsilons :: EPSILONS_MASK) ,) } # [doc = " Return the epsilons part of this pattern epsilons."] fn epsilons (self) -> Epsilons { Epsilons (self . 0 & PatternEpsilons :: EPSILONS_MASK) } # [doc = " Return a new pattern epsilons with the given epsilons, but the same"] # [doc = " pattern ID."] fn set_epsilons (self , epsilons : Epsilons) -> PatternEpsilons { PatternEpsilons ((self . 0 & PatternEpsilons :: PATTERN_ID_MASK) | (u64 :: from (epsilons . 0) & PatternEpsilons :: EPSILONS_MASK) ,) } }
+    };
+}
+
+impl_84!()

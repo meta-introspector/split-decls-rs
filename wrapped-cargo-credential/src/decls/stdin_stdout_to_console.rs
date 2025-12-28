@@ -12,4 +12,4 @@ macro_rules! stdin_stdout_to_console {
     };
 }
 
-stdin_stdout_to_console!()
+stdin_stdout_to_console!();

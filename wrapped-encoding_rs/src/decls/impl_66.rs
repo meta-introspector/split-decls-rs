@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        EncoderResult!();
+        VariantEncoder!();
         Encoder!();
         Big5Encoder!();
-        EncoderResult!();
         Encoding!();
-        VariantEncoder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

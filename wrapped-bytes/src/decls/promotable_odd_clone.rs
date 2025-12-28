@@ -11,4 +11,4 @@ macro_rules! promotable_odd_clone {
     };
 }
 
-promotable_odd_clone!()
+promotable_odd_clone!();

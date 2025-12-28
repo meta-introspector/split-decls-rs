@@ -12,4 +12,4 @@ macro_rules! resolve_doc_path_on {
     };
 }
 
-resolve_doc_path_on!()
+resolve_doc_path_on!();

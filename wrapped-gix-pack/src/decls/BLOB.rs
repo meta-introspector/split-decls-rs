@@ -4,4 +4,4 @@ macro_rules! BLOB {
     };
 }
 
-BLOB!()
+BLOB!();

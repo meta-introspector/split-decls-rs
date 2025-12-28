@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VisitorContext!();
         Visitor!();
+        VisitorContext!();
         NoUndefinedVariables!();
         Scope!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_223 {
     };
 }
 
-impl_223!()
+impl_223!();

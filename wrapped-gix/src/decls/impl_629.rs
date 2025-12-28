@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        UnsignedInteger!();
-        SubSectionRequirement!();
-        Algorithm!();
-        Renames!();
         Binary!();
-        Ignore!();
-        Program!();
         Diff!();
+        Program!();
+        Algorithm!();
+        UnsignedInteger!();
+        Ignore!();
         Tree!();
+        Renames!();
+        SubSectionRequirement!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_629 {
     };
 }
 
-impl_629!()
+impl_629!();

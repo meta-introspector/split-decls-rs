@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Stealer!();
-        Flavor!();
         Worker!();
         Steal!();
+        Stealer!();
+        Flavor!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

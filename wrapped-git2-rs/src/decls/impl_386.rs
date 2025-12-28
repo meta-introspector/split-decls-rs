@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
+        IndexMatchedPath!();
+        Tree!();
+        Oid!();
+        IndexConflict!();
+        IndexEntry!();
+        IndexEntries!();
         IntoCString!();
         Repository!();
         Binding!();
-        Tree!();
-        Index!();
         Error!();
+        Index!();
         IndexConflicts!();
-        Oid!();
-        IndexEntries!();
-        IndexConflict!();
-        IndexMatchedPath!();
-        IndexEntry!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_386 {
     };
 }
 
-impl_386!()
+impl_386!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        FieldFuture!();
+        FieldValue!();
+        BoxFieldFuture!();
         Error!();
-        TypeRef!();
+        ContextSelectionSet!();
+        ServerResult!();
+        Field!();
         Schema!();
         ResolverContext!();
-        FieldFuture!();
-        ContextSelectionSet!();
-        BoxFieldFuture!();
-        Field!();
         ObjectAccessor!();
-        FieldValue!();
-        ServerResult!();
+        TypeRef!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! collect_entities_field {
     };
 }
 
-collect_entities_field!()
+collect_entities_field!();

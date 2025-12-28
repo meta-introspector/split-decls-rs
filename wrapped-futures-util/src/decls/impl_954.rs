@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Sink!();
         Send!();
         Feed!();
+        Sink!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_954 {
     };
 }
 
-impl_954!()
+impl_954!();

@@ -28,4 +28,4 @@ macro_rules! gen_subcommand_helpers {
     };
 }
 
-gen_subcommand_helpers!()
+gen_subcommand_helpers!();

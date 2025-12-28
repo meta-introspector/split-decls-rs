@@ -11,4 +11,4 @@ macro_rules! drop_arc_raw {
     };
 }
 
-drop_arc_raw!()
+drop_arc_raw!();

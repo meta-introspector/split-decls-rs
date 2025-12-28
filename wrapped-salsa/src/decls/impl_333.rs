@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Page!();
+        PageData!();
+        PageDataEntry!();
+        Slot!();
+        SlotIndex!();
+        IngredientIndex!();
+        PageView!();
+        SlotVTable!();
+    };
+}
+
+macro_rules! impl_333 {
+    () => {
+        deps!();
+        impl Page { # [inline] fn new < T : Slot > (ingredient : IngredientIndex , memo_types : Arc < MemoTableTypes >) -> Self { # [cfg (not (feature = "shuttle"))] let data : Box < PageData < T > > = Box :: new ([const { UnsafeCell :: new (MaybeUninit :: uninit ()) } ; PAGE_LEN]) ; # [cfg (feature = "shuttle")] let data = { let data = (0 .. PAGE_LEN) . map (| _ | UnsafeCell :: new (MaybeUninit :: uninit ())) . collect :: < Box < [PageDataEntry < T >] > > () ; let data : * mut [PageDataEntry < T >] = Box :: into_raw (data) ; unsafe { Box :: from_raw (data . cast :: < PageDataEntry < T > > () . cast :: < PageData < T > > ()) } } ; Self { ingredient , memo_types , slot_vtable : SlotVTable :: of :: < T > () , slot_type_id : TypeId :: of :: < T > () , allocated : AtomicUsize :: new (0) , data : NonNull :: from (Box :: leak (data)) . cast :: < () > () , } } # [doc = " Retrieves the pointer for the given slot."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " If slot is out of bounds"] fn get (& self , slot : SlotIndex) -> * mut () { let len = self . allocated . load (Ordering :: Acquire) ; assert ! (slot . 0 < len , "out of bounds access `{slot:?}` (maximum slot `{len}`)") ; unsafe { self . data . as_ptr () . byte_add (slot . 0 * self . slot_vtable . layout . size ()) } } # [inline] fn assert_type < T : Slot > (& self) -> PageView < '_ , T > { if self . slot_type_id != TypeId :: of :: < T > () { type_assert_failed :: < T > (self) ; } PageView (self , PhantomData) } fn cast_type < T : Slot > (& self) -> Option < PageView < '_ , T > > { if self . slot_type_id == TypeId :: of :: < T > () { Some (PageView (self , PhantomData)) } else { None } } }
+    };
+}
+
+impl_333!()

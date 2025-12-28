@@ -1,0 +1,24 @@
+macro_rules! deps {
+    () => {
+        ExprField!();
+        ForeignItem!();
+        WherePredicate!();
+        AssocItem!();
+        Arm!();
+        Variant!();
+        Item!();
+        GenericParam!();
+        Param!();
+        FieldDef!();
+        AssocCtxt!();
+    };
+}
+
+macro_rules! macro_380 {
+    () => {
+        deps!();
+        generate_walk_flat_map_fns ! { walk_flat_map_arm (Arm) => visit_arm ; walk_flat_map_variant (Variant) => visit_variant ; walk_flat_map_param (Param) => visit_param ; walk_flat_map_generic_param (GenericParam) => visit_generic_param ; walk_flat_map_where_predicate (WherePredicate) => visit_where_predicate ; walk_flat_map_field_def (FieldDef) => visit_field_def ; walk_flat_map_expr_field (ExprField) => visit_expr_field ; walk_flat_map_item (Box < Item >) => visit_item ; walk_flat_map_foreign_item (Box < ForeignItem >) => visit_foreign_item ; walk_flat_map_assoc_item (Box < AssocItem >, ctxt : AssocCtxt) => visit_assoc_item ; }
+    };
+}
+
+macro_380!()

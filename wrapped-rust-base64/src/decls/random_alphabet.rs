@@ -11,4 +11,4 @@ macro_rules! random_alphabet {
     };
 }
 
-random_alphabet!()
+random_alphabet!();

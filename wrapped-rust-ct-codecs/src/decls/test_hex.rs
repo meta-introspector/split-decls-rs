@@ -11,4 +11,4 @@ macro_rules! test_hex {
     };
 }
 
-test_hex!()
+test_hex!();

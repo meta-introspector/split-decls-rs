@@ -12,4 +12,4 @@ macro_rules! any_has_attrs {
     };
 }
 
-any_has_attrs!()
+any_has_attrs!();

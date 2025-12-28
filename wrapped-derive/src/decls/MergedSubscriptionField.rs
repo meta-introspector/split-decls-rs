@@ -4,4 +4,4 @@ macro_rules! MergedSubscriptionField {
     };
 }
 
-MergedSubscriptionField!()
+MergedSubscriptionField!();

@@ -4,4 +4,4 @@ macro_rules! IsActiveState {
     };
 }
 
-IsActiveState!()
+IsActiveState!();

@@ -3,11 +3,11 @@ macro_rules! deps {
         ModuleId!();
         BuiltinType!();
         MacroId!();
-        ImportOrExternCrate!();
+        ModuleDefId!();
         PerNs!();
         TypeNs!();
-        ModuleDefId!();
         AdtId!();
+        ImportOrExternCrate!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! to_type_ns {
     };
 }
 
-to_type_ns!()
+to_type_ns!();

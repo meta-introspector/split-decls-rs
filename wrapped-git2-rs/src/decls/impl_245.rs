@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MergeOptions!();
         CheckoutBuilder!();
         CherrypickOptions!();
-        MergeOptions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

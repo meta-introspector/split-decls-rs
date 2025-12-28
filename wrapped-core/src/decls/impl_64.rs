@@ -1,14 +1,18 @@
 macro_rules! deps {
     () => {
-        ThreadData!();
-        LockState!();
+        HRESULT!();
+        IWeakReferenceSource_Impl!();
+        IUnknown_Vtbl!();
+        GUID!();
+        Interface!();
+        IWeakReferenceSource_Vtbl!();
     };
 }
 
 macro_rules! impl_64 {
     () => {
         deps!();
-        impl LockState for usize { # [inline] fn is_locked (self) -> bool { self & LOCKED_BIT != 0 } # [inline] fn is_queue_locked (self) -> bool { self & QUEUE_LOCKED_BIT != 0 } # [inline] fn queue_head (self) -> * const ThreadData { (self & QUEUE_MASK) as * const ThreadData } # [inline] fn with_queue_head (self , thread_data : * const ThreadData) -> Self { (self & ! QUEUE_MASK) | thread_data as * const _ as usize } }
+        impl IWeakReferenceSource_Vtbl { pub const fn new < Identity : IWeakReferenceSource_Impl , const OFFSET : isize > () -> Self { unsafe extern "system" fn GetWeakReference < Identity : IWeakReferenceSource_Impl , const OFFSET : isize , > (this : * mut core :: ffi :: c_void , weakreference : * mut * mut core :: ffi :: c_void ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IWeakReferenceSource_Impl :: GetWeakReference (this) { Ok (ok__) => { weakreference . write (core :: mem :: transmute (ok__)) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } Self { base__ : windows_core :: IUnknown_Vtbl :: new :: < Identity , OFFSET > () , GetWeakReference : GetWeakReference :: < Identity , OFFSET > , } } pub fn matches (iid : & windows_core :: GUID) -> bool { iid == & < IWeakReferenceSource as windows_core :: Interface > :: IID } }
     };
 }
 

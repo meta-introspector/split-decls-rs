@@ -4,4 +4,4 @@ macro_rules! ValidationMode {
     };
 }
 
-ValidationMode!()
+ValidationMode!();

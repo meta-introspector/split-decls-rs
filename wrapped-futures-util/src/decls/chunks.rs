@@ -4,4 +4,4 @@ macro_rules! chunks {
     };
 }
 
-chunks!()
+chunks!();

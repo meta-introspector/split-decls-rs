@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Successors!();
+        Node!();
+        DirectedGraph!();
+        Event!();
+        NodeStatus!();
+    };
+}
+
+macro_rules! TriColorDepthFirstSearch {
+    () => {
+        deps!();
+        # [doc = " A depth-first search that also tracks when all successors of a node have been examined."] # [doc = ""] # [doc = " This is based on the DFS described in [Introduction to Algorithms (1st ed.)][CLR], hereby"] # [doc = " referred to as **CLR**. However, we use the terminology in [`NodeStatus`] above instead of"] # [doc = " \"discovered\"/\"finished\" or \"white\"/\"grey\"/\"black\". Each node begins the search with no status,"] # [doc = " becomes `Visited` when it is first examined by the DFS and is `Settled` when all nodes"] # [doc = " reachable from it have been examined. This allows us to differentiate between \"tree\", \"back\""] # [doc = " and \"forward\" edges (see [`TriColorVisitor::node_examined`])."] # [doc = ""] # [doc = " Unlike the pseudocode in [CLR], this implementation is iterative and does not use timestamps."] # [doc = " We accomplish this by storing `Event`s on the stack that result in a (possible) state change"] # [doc = " for each node. A `Visited` event signifies that we should examine this node if it has not yet"] # [doc = " been `Visited` or `Settled`. When a node is examined for the first time, we mark it as"] # [doc = " `Visited` and push a `Settled` event for it on stack followed by `Visited` events for all of"] # [doc = " its predecessors, scheduling them for examination. Multiple `Visited` events for a single node"] # [doc = " may exist on the stack simultaneously if a node has multiple predecessors, but only one"] # [doc = " `Settled` event will ever be created for each node. After all `Visited` events for a node's"] # [doc = " successors have been popped off the stack (as well as any new events triggered by visiting"] # [doc = " those successors), we will pop off that node's `Settled` event."] # [doc = ""] # [doc = " [CLR]: https://en.wikipedia.org/wiki/Introduction_to_Algorithms"] pub struct TriColorDepthFirstSearch < 'graph , G > where G : ? Sized + DirectedGraph + Successors , { graph : & 'graph G , stack : Vec < Event < G :: Node > > , visited : DenseBitSet < G :: Node > , settled : DenseBitSet < G :: Node > , }
+    };
+}
+
+TriColorDepthFirstSearch!()

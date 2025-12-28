@@ -11,4 +11,4 @@ macro_rules! EUC_JP {
     };
 }
 
-EUC_JP!()
+EUC_JP!();

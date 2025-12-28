@@ -4,4 +4,4 @@ macro_rules! avx512 {
     };
 }
 
-avx512!()
+avx512!();

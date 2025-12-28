@@ -11,4 +11,4 @@ macro_rules! revwalk_hide_cb {
     };
 }
 
-revwalk_hide_cb!()
+revwalk_hide_cb!();

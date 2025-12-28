@@ -4,4 +4,4 @@ macro_rules! NotifyWaker {
     };
 }
 
-NotifyWaker!()
+NotifyWaker!();

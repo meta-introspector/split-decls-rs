@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        HasDataLayout!();
-        TargetDataLayout!();
+        ExternAbi!();
     };
 }
 
 macro_rules! impl_20 {
     () => {
         deps!();
-        impl HasDataLayout for TargetDataLayout { # [inline] fn data_layout (& self) -> & TargetDataLayout { self } }
+        impl PartialEq for ExternAbi { fn eq (& self , rhs : & Self) -> bool { self . cmp (rhs) == Ordering :: Equal } }
     };
 }
 

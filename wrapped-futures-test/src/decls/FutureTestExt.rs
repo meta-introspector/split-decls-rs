@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AssertUnmoved!();
         InterleavePending!();
         PendingOnce!();
-        AssertUnmoved!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FutureTestExt {
     };
 }
 
-FutureTestExt!()
+FutureTestExt!();

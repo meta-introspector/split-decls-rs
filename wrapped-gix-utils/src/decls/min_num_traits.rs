@@ -11,4 +11,4 @@ macro_rules! min_num_traits {
     };
 }
 
-min_num_traits!()
+min_num_traits!();

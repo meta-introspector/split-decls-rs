@@ -4,4 +4,4 @@ macro_rules! connection_type {
     };
 }
 
-connection_type!()
+connection_type!();

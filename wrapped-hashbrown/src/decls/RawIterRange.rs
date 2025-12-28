@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RawIter!();
         BitMaskIter!();
         Bucket!();
+        RawIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RawIterRange {
     };
 }
 
-RawIterRange!()
+RawIterRange!();

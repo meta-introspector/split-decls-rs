@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PollStateBomb!();
         SharedPollState!();
+        PollStateBomb!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_526 {
     };
 }
 
-impl_526!()
+impl_526!();

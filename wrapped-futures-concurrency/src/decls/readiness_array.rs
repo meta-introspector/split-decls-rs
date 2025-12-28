@@ -4,4 +4,4 @@ macro_rules! readiness_array {
     };
 }
 
-readiness_array!()
+readiness_array!();

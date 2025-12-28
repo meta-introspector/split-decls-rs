@@ -12,4 +12,4 @@ macro_rules! to_def_impls {
     };
 }
 
-to_def_impls!()
+to_def_impls!();

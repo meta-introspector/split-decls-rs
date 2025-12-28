@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Context!();
-        ToJsonHelper!();
         Result!();
+        ToJsonHelper!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_608 {
     };
 }
 
-impl_608!()
+impl_608!();

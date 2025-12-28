@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Name!();
         SubstitutionTable!();
         IsCtorDtorConversion!();
+        Name!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

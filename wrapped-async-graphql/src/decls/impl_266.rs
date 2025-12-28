@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        VisitorContext!();
-        VariablesAreInputTypes!();
         Visitor!();
+        VariablesAreInputTypes!();
+        VisitorContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_266 {
     };
 }
 
-impl_266!()
+impl_266!();

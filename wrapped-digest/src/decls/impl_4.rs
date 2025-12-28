@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Mac!();
-        FixedOutputReset!();
         CtOutput!();
         Update!();
-        FixedOutput!();
         MacError!();
+        Mac!();
+        FixedOutput!();
         MacMarker!();
+        FixedOutputReset!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

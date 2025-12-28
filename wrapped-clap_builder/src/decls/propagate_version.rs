@@ -11,4 +11,4 @@ macro_rules! propagate_version {
     };
 }
 
-propagate_version!()
+propagate_version!();

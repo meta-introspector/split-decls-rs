@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ExpandDatabase!();
-        MacroDefId!();
-        InFile!();
-        ExpandTo!();
-        ExpandResult!();
-        EagerCallBackFn!();
         ExpansionSpanMap!();
-        MacroCallKind!();
+        ExpandResult!();
+        InFile!();
         AstId!();
+        ExpandDatabase!();
+        EagerCallBackFn!();
+        ExpandTo!();
+        MacroDefId!();
+        MacroCallKind!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! lazy_expand {
     };
 }
 
-lazy_expand!()
+lazy_expand!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Kind!();
         Revision!();
         Navigate!();
-        Kind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Delegate {
     };
 }
 
-Delegate!()
+Delegate!();

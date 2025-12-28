@@ -4,4 +4,4 @@ macro_rules! WorktreeRoots {
     };
 }
 
-WorktreeRoots!()
+WorktreeRoots!();

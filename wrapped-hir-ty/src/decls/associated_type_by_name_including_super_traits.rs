@@ -12,4 +12,4 @@ macro_rules! associated_type_by_name_including_super_traits {
     };
 }
 
-associated_type_by_name_including_super_traits!()
+associated_type_by_name_including_super_traits!();

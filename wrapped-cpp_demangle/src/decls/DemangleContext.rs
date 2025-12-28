@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        SubstitutionTable!();
         DemangleAsInner!();
         DemangleWrite!();
         DemangleState!();
-        SubstitutionTable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DemangleContext {
     };
 }
 
-DemangleContext!()
+DemangleContext!();

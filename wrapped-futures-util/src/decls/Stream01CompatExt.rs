@@ -11,4 +11,4 @@ macro_rules! Stream01CompatExt {
     };
 }
 
-Stream01CompatExt!()
+Stream01CompatExt!();

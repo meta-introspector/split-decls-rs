@@ -4,4 +4,4 @@ macro_rules! parse_ceiling_dirs {
     };
 }
 
-parse_ceiling_dirs!()
+parse_ceiling_dirs!();

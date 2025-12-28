@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MacroCallId!();
         FilePositionWrapper!();
+        MacroCallId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MacroFilePosition {
     };
 }
 
-MacroFilePosition!()
+MacroFilePosition!();

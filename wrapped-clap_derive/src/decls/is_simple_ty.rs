@@ -4,4 +4,4 @@ macro_rules! is_simple_ty {
     };
 }
 
-is_simple_ty!()
+is_simple_ty!();

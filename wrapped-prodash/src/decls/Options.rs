@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Level!();
+        Throughput!();
+        Duration!();
+        Log!();
+    };
+}
+
+macro_rules! Options {
+    () => {
+        deps!();
+        # [doc = " Options used for configuring a [line renderer][render()]."] # [derive (Clone)] pub struct Options { # [doc = " If true, _(default true)_, we assume the output stream belongs to a terminal."] # [doc = ""] # [doc = " If false, we won't print any live progress, only log messages."] pub output_is_terminal : bool , # [doc = " If true, _(default: true)_ we will display color. You should use `output_is_terminal && crosstermion::should_colorize()`"] # [doc = " to determine this value."] # [doc = ""] # [doc = " Please note that you can enforce color even if the output stream is not connected to a terminal by setting"] # [doc = " this field to true."] pub colored : bool , # [doc = " If true, _(default: false)_, a timestamp will be shown before each message."] pub timestamp : bool , # [doc = " The amount of columns and rows to use for drawing. Defaults to (80, 20)."] pub terminal_dimensions : (u16 , u16) , # [doc = " If true, _(default: false)_, the cursor will be hidden for a more visually appealing display."] # [doc = ""] # [doc = " Please note that you must make sure the line renderer is properly shut down to restore the previous cursor"] # [doc = " settings. See the `signal-hook` documentation in the README for more information."] pub hide_cursor : bool , # [doc = " If true, (default false), we will keep track of the previous progress state to derive"] # [doc = " continuous throughput information from. Throughput will only show for units which have"] # [doc = " explicitly enabled it, it is opt-in."] # [doc = ""] # [doc = " This comes at the cost of additional memory and CPU time."] pub throughput : bool , # [doc = " If set, specify all levels that should be shown. Otherwise all available levels are shown."] # [doc = ""] # [doc = " This is useful to filter out high-noise lower level progress items in the tree."] pub level_filter : Option < RangeInclusive < progress :: key :: Level > > , # [doc = " If set, progress will only actually be shown after the given duration. Log messages will always be shown without delay."] # [doc = ""] # [doc = " This option can be useful to not enforce progress for short actions, causing it to flicker."] # [doc = " Please note that this won't affect display of messages, which are simply logged."] pub initial_delay : Option < Duration > , # [doc = " The amount of frames to draw per second. If below 1.0, it determines the amount of seconds between the frame."] # [doc = ""] # [doc = " *e.g.* 1.0/4.0 is one frame every 4 seconds."] pub frames_per_second : f32 , # [doc = " If true (default: true), we will keep waiting for progress even after we encountered an empty list of drawable progress items."] # [doc = ""] # [doc = " Please note that you should add at least one item to the `prodash::Tree` before launching the application or else"] # [doc = " risk a race causing nothing to be rendered at all."] pub keep_running_if_progress_is_empty : bool , }
+    };
+}
+
+Options!()

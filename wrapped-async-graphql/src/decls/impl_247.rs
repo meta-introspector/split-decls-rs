@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ProvidedNonNullArguments!();
-        VisitorContext!();
-        Field!();
         Visitor!();
+        VisitorContext!();
         Directive!();
+        Field!();
         MetaTypeName!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_247 {
     };
 }
 
-impl_247!()
+impl_247!();

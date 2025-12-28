@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         SigningState!();
+        Hash!();
         PublicKey!();
         SecretKey!();
-        Signature!();
         Noise!();
-        Hash!();
+        Signature!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

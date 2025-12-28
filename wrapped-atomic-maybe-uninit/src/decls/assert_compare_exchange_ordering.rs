@@ -4,4 +4,4 @@ macro_rules! assert_compare_exchange_ordering {
     };
 }
 
-assert_compare_exchange_ordering!()
+assert_compare_exchange_ordering!();

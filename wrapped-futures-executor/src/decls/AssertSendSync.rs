@@ -4,4 +4,4 @@ macro_rules! AssertSendSync {
     };
 }
 
-AssertSendSync!()
+AssertSendSync!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        TraceStyle!();
         FlushGuard!();
         ChromeLayerBuilder!();
         EventOrSpan!();
-        ChromeLayer!();
-        TraceStyle!();
         NameFn!();
+        ChromeLayer!();
     };
 }
 

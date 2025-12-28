@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        SignalOnly!();
+        Signals!();
+        Exfiltrator!();
+        SignalDelivery!();
+        Handle!();
+    };
+}
+
+macro_rules! SignalsInfo {
+    () => {
+        deps!();
+        # [doc = " The main structure of the module, representing interest in some signals."] # [doc = ""] # [doc = " Unlike the helpers in other modules, this registers the signals when created and unregisters"] # [doc = " them on drop. It provides the pending signals during its lifetime, either in batches or as an"] # [doc = " infinite iterator."] # [doc = ""] # [doc = " Most users will want to use it through the [`Signals`] type alias for simplicity."] # [doc = ""] # [doc = " # Multiple threads"] # [doc = ""] # [doc = " Instances of this struct can be [sent][std::marker::Send] to other threads. In a multithreaded"] # [doc = " application this can be used to dedicate a separate thread for signal handling. In this case"] # [doc = " you should get a [`Handle`] using the [`handle`][Signals::handle] method before sending the"] # [doc = " `Signals` instance to a background thread. With the handle you will be able to shut down the"] # [doc = " background thread later, or to operatively add more signals."] # [doc = ""] # [doc = " The controller handle can be shared between as many threads as you like using its"] # [doc = " [`clone`][Handle::clone] method."] # [doc = ""] # [doc = " # Exfiltrators"] # [doc = ""] # [doc = " The [`SignalOnly`] provides only the signal number. There are further exfiltrators available in"] # [doc = " the [`exfiltrator`] module. Note that some of them are behind feature flags that need to be"] # [doc = " enabled."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # extern crate signal_hook;"] # [doc = " #"] # [doc = " # use std::io::Error;"] # [doc = " # use std::thread;"] # [doc = " use signal_hook::consts::signal::*;"] # [doc = " use signal_hook::iterator::Signals;"] # [doc = ""] # [doc = " #"] # [doc = " # fn main() -> Result<(), Error> {"] # [doc = " let mut signals = Signals::new(&[SIGUSR1, SIGUSR2])?;"] # [doc = " let handle = signals.handle();"] # [doc = " let thread = thread::spawn(move || {"] # [doc = "     for signal in &mut signals {"] # [doc = "         match signal {"] # [doc = "             SIGUSR1 => {},"] # [doc = "             SIGUSR2 => {},"] # [doc = "             _ => unreachable!(),"] # [doc = "         }"] # [doc = "     }"] # [doc = " });"] # [doc = ""] # [doc = " // Some time later..."] # [doc = " handle.close();"] # [doc = " thread.join().unwrap();"] # [doc = " # Ok(())"] # [doc = " # }"] # [doc = " ```"] pub struct SignalsInfo < E : Exfiltrator = SignalOnly > (SignalDelivery < UnixStream , E >) ;
+    };
+}
+
+SignalsInfo!()

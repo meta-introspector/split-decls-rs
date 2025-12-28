@@ -4,4 +4,4 @@ macro_rules! ApplyChange {
     };
 }
 
-ApplyChange!()
+ApplyChange!();

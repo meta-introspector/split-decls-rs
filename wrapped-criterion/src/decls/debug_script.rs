@@ -4,4 +4,4 @@ macro_rules! debug_script {
     };
 }
 
-debug_script!()
+debug_script!();

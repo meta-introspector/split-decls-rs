@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Result!();
+        ParseContext!();
+        SubstitutionTable!();
         IndexStr!();
         Parse!();
-        ParseContext!();
-        Result!();
-        SubstitutionTable!();
         UnnamedTypeName!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

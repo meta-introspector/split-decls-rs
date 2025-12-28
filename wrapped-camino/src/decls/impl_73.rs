@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Utf8Path!();
-        Utf8DirEntry!();
         Utf8PathBuf!();
+        Utf8DirEntry!();
+        Utf8Path!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

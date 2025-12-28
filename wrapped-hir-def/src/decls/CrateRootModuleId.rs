@@ -11,4 +11,4 @@ macro_rules! CrateRootModuleId {
     };
 }
 
-CrateRootModuleId!()
+CrateRootModuleId!();

@@ -4,4 +4,4 @@ macro_rules! PI_U128X2 {
     };
 }
 
-PI_U128X2!()
+PI_U128X2!();

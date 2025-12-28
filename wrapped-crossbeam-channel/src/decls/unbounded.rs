@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Receiver!();
         SenderFlavor!();
-        Sender!();
-        Channel!();
         ReceiverFlavor!();
+        Channel!();
+        Receiver!();
+        Sender!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! unbounded {
     };
 }
 
-unbounded!()
+unbounded!();

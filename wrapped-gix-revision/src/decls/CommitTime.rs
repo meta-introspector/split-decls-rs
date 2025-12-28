@@ -4,4 +4,4 @@ macro_rules! CommitTime {
     };
 }
 
-CommitTime!()
+CommitTime!();

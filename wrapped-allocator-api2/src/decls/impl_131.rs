@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         Allocator!();
+        IntoIter!();
         RawVec!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

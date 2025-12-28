@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Vectorization!();
         CheckCase!();
+        Vectorization!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! hex_check_with_case {
     };
 }
 
-hex_check_with_case!()
+hex_check_with_case!();

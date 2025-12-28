@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ActualSamplingMode!();
         Duration!();
+        ActualSamplingMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_412 {
     };
 }
 
-impl_412!()
+impl_412!();

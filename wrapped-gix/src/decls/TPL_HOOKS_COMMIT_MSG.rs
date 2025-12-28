@@ -4,4 +4,4 @@ macro_rules! TPL_HOOKS_COMMIT_MSG {
     };
 }
 
-TPL_HOOKS_COMMIT_MSG!()
+TPL_HOOKS_COMMIT_MSG!();

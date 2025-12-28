@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Http!();
-        Response!();
-        PostBodyDataKind!();
-        StreamOrBuffer!();
         Handler!();
-        Request!();
         Options!();
+        PostBodyDataKind!();
+        Response!();
+        StreamOrBuffer!();
         Error!();
+        Http!();
+        Request!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! new {
     };
 }
 
-new!()
+new!();

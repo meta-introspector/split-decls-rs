@@ -18,4 +18,4 @@ fn main() {
     };
 }
 
-test_assert_expand_2015!()
+test_assert_expand_2015!();

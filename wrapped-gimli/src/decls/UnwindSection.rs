@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        EndianSlice!();
-        Reader!();
-        CommonInformationEntry!();
-        DebugFrameOffset!();
-        FrameDescriptionEntry!();
-        PartialFrameDescriptionEntry!();
-        UnwindOffset!();
-        BaseAddresses!();
-        EhFrameOffset!();
         Error!();
-        Result!();
-        UnwindTableRow!();
-        UnwindContextStorage!();
+        CommonInformationEntry!();
+        Reader!();
         CieOrFde!();
-        EhFrame!();
         UnwindContext!();
+        EhFrameOffset!();
+        BaseAddresses!();
+        DebugFrameOffset!();
+        UnwindOffset!();
+        UnwindContextStorage!();
         CfiEntriesIter!();
+        PartialFrameDescriptionEntry!();
+        FrameDescriptionEntry!();
+        EhFrame!();
+        EndianSlice!();
+        UnwindTableRow!();
+        Result!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! UnwindSection {
     };
 }
 
-UnwindSection!()
+UnwindSection!();

@@ -4,4 +4,4 @@ macro_rules! path2url {
     };
 }
 
-path2url!()
+path2url!();

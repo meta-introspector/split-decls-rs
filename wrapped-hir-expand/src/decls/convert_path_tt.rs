@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PathKind!();
-        Name!();
         ExpandDatabase!();
+        Name!();
         ModPath!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! convert_path_tt {
     };
 }
 
-convert_path_tt!()
+convert_path_tt!();

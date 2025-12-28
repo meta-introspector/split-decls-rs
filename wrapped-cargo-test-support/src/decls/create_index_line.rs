@@ -11,4 +11,4 @@ macro_rules! create_index_line {
     };
 }
 
-create_index_line!()
+create_index_line!();

@@ -4,4 +4,4 @@ macro_rules! SignatureKind {
     };
 }
 
-SignatureKind!()
+SignatureKind!();

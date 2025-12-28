@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Type!();
-        Positioned!();
         Directive!();
+        Positioned!();
+        Type!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! VariableDefinition {
     };
 }
 
-VariableDefinition!()
+VariableDefinition!();

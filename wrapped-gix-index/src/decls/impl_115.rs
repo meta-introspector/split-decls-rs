@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Stat!();
-        State!();
-        Mode!();
+        PathStorage!();
         Stage!();
+        Stat!();
+        Mode!();
+        State!();
         Entry!();
         PathStorageRef!();
-        PathStorage!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

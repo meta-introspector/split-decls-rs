@@ -4,4 +4,4 @@ macro_rules! DER_HEADER_SK {
     };
 }
 
-DER_HEADER_SK!()
+DER_HEADER_SK!();

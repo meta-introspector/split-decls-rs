@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Options!();
         Error!();
         File!();
+        Options!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! include_condition_match {
     };
 }
 
-include_condition_match!()
+include_condition_match!();

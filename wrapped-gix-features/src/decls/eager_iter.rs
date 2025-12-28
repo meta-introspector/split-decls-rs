@@ -4,4 +4,4 @@ macro_rules! eager_iter {
     };
 }
 
-eager_iter!()
+eager_iter!();

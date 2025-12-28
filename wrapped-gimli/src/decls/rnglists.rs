@@ -4,4 +4,4 @@ macro_rules! rnglists {
     };
 }
 
-rnglists!()
+rnglists!();

@@ -11,4 +11,4 @@ macro_rules! visit_module {
     };
 }
 
-visit_module!()
+visit_module!();

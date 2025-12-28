@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Unstructured!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! arbitrary_str {
     };
 }
 
-arbitrary_str!()
+arbitrary_str!();

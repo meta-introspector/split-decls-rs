@@ -4,4 +4,4 @@ macro_rules! registry_path {
     };
 }
 
-registry_path!()
+registry_path!();

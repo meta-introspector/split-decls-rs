@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Adjust!();
-        InferenceDiagnostic!();
-        ImplTraitId!();
         BindingMode!();
-        TypeMismatch!();
-        FnTrait!();
-        InternedClosureId!();
-        InferenceResult!();
+        Adjust!();
         Adjustment!();
-        CandidateId!();
         HirDatabase!();
         ImplTraitIdx!();
+        FnTrait!();
+        InferenceResult!();
+        InferenceDiagnostic!();
+        TypeMismatch!();
+        ImplTraitId!();
+        CandidateId!();
+        InternedClosureId!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_256 {
     };
 }
 
-impl_256!()
+impl_256!();

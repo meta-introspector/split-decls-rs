@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        VariantEncoder!();
-        SingleByteEncoder!();
-        Encoder!();
-        EncoderResult!();
-        Encoding!();
         Utf8Source!();
+        VariantEncoder!();
+        EncoderResult!();
+        Encoder!();
+        Encoding!();
+        SingleByteEncoder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

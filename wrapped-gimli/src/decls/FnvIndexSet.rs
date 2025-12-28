@@ -4,4 +4,4 @@ macro_rules! FnvIndexSet {
     };
 }
 
-FnvIndexSet!()
+FnvIndexSet!();

@@ -4,4 +4,4 @@ macro_rules! mutate {
     };
 }
 
-mutate!()
+mutate!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UninhabitedFrom!();
         TraitEnvironment!();
+        UninhabitedFrom!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! is_enum_variant_uninhabited_from {
     };
 }
 
-is_enum_variant_uninhabited_from!()
+is_enum_variant_uninhabited_from!();

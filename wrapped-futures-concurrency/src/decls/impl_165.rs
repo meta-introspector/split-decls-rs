@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Consumer!();
         ConcurrentStream!();
         Limit!();
         LimitConsumer!();
-        Consumer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_165 {
     };
 }
 
-impl_165!()
+impl_165!();

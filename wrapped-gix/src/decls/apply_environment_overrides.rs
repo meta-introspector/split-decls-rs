@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
         Author!();
-        User!();
-        Key!();
         Pathspec!();
-        Committer!();
-        Gitoxide!();
-        Core!();
-        Error!();
+        Key!();
+        User!();
         Commit!();
-        Http!();
         Ssh!();
+        Http!();
+        Gitoxide!();
+        Committer!();
+        Core!();
         Diff!();
+        Error!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! apply_environment_overrides {
     };
 }
 
-apply_environment_overrides!()
+apply_environment_overrides!();

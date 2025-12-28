@@ -11,4 +11,4 @@ macro_rules! STANDARD_ANCHORED {
     };
 }
 
-STANDARD_ANCHORED!()
+STANDARD_ANCHORED!();

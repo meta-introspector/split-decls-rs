@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Item!();
         Parsed!();
         ParseResult!();
-        Item!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_and_remainder {
     };
 }
 
-parse_and_remainder!()
+parse_and_remainder!();

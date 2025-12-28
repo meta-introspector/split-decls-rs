@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Offset!();
         Change!();
+        Offset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! process_change {
     };
 }
 
-process_change!()
+process_change!();

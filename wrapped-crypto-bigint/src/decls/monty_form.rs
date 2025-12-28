@@ -4,4 +4,4 @@ macro_rules! monty_form {
     };
 }
 
-monty_form!()
+monty_form!();

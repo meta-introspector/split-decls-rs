@@ -4,4 +4,4 @@ macro_rules! MODULES_FILE {
     };
 }
 
-MODULES_FILE!()
+MODULES_FILE!();

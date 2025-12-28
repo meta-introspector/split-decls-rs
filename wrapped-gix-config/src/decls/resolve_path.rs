@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Options!();
         Error!();
+        Options!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! resolve_path {
     };
 }
 
-resolve_path!()
+resolve_path!();

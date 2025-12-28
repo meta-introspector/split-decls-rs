@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Expression!();
-        Result!();
-        IndexStr!();
         OperatorName!();
-        Error!();
-        SourceName!();
-        SubstitutionTable!();
+        Result!();
         ParseContext!();
+        SubstitutionTable!();
+        SourceName!();
+        IndexStr!();
+        Expression!();
+        Error!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

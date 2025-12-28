@@ -11,4 +11,4 @@ macro_rules! noop_spawner_mut {
     };
 }
 
-noop_spawner_mut!()
+noop_spawner_mut!();

@@ -4,4 +4,4 @@ macro_rules! patterns {
     };
 }
 
-patterns!()
+patterns!();

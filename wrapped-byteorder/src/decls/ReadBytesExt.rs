@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LittleEndian!();
-        BigEndian!();
         ByteOrder!();
+        BigEndian!();
+        LittleEndian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ReadBytesExt {
     };
 }
 
-ReadBytesExt!()
+ReadBytesExt!();

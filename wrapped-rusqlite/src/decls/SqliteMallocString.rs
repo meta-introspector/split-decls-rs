@@ -1,0 +1,7 @@
+macro_rules! SqliteMallocString {
+    () => {
+        # [doc = " A string we own that's allocated on the SQLite heap. Automatically calls"] # [doc = " `sqlite3_free` when dropped, unless `into_raw` (or `into_inner`) is called"] # [doc = " on it. If constructed from a rust string, `sqlite3_malloc64` is used."] # [doc = ""] # [doc = " It has identical representation to a nonnull `*mut c_char`, so you can use"] # [doc = " it transparently as one. It's nonnull, so Option<SqliteMallocString> can be"] # [doc = " used for nullable ones (it's still just one pointer)."] # [doc = ""] # [doc = " Most strings shouldn't use this! Only places where the string needs to be"] # [doc = " freed with `sqlite3_free`. This includes `sqlite3_extended_sql` results,"] # [doc = " some error message pointers... Note that misuse is extremely dangerous!"] # [doc = ""] # [doc = " Note that this is *not* a lossless interface. Incoming strings with internal"] # [doc = " NULs are modified, and outgoing strings which are non-UTF8 are modified."] # [doc = " This seems unavoidable -- it tries very hard to not panic."] # [repr (transparent)] pub (crate) struct SqliteMallocString { ptr : NonNull < c_char > , _boo : PhantomData < Box < [c_char] > > , }
+    };
+}
+
+SqliteMallocString!()

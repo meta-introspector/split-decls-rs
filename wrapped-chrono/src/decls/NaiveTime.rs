@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         NaiveDate!();
         Date!();
-        TimeDelta!();
         TimeZone!();
+        TimeDelta!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! NaiveTime {
     };
 }
 
-NaiveTime!()
+NaiveTime!();

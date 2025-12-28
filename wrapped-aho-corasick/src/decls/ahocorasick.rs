@@ -4,4 +4,4 @@ macro_rules! ahocorasick {
     };
 }
 
-ahocorasick!()
+ahocorasick!();

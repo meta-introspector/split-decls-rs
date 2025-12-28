@@ -12,4 +12,4 @@ macro_rules! new_count_waker {
     };
 }
 
-new_count_waker!()
+new_count_waker!();

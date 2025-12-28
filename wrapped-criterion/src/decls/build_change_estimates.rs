@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ChangeEstimates!();
+        ConfidenceInterval!();
+        Distribution!();
         Estimate!();
         ChangePointEstimates!();
-        Distribution!();
-        ChangeEstimates!();
         ChangeDistributions!();
-        ConfidenceInterval!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! build_change_estimates {
     };
 }
 
-build_change_estimates!()
+build_change_estimates!();

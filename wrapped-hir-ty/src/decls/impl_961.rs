@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Binder!();
-        TreatNotYetDefinedOpaques!();
         GenericPredicates!();
         MethodCallee!();
+        TreatNotYetDefinedOpaques!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_961 {
     };
 }
 
-impl_961!()
+impl_961!();

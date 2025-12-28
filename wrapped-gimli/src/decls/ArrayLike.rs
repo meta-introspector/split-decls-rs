@@ -4,4 +4,4 @@ macro_rules! ArrayLike {
     };
 }
 
-ArrayLike!()
+ArrayLike!();

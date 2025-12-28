@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ServerResult!();
         Registry!();
-        Context!();
+        ServerResult!();
         MetaField!();
+        Context!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ComplexObject {
     };
 }
 
-ComplexObject!()
+ComplexObject!();

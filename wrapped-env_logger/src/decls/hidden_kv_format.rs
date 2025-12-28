@@ -11,4 +11,4 @@ macro_rules! hidden_kv_format {
     };
 }
 
-hidden_kv_format!()
+hidden_kv_format!();

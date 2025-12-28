@@ -12,4 +12,4 @@ macro_rules! write_hunks {
     };
 }
 
-write_hunks!()
+write_hunks!();

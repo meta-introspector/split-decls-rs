@@ -4,4 +4,4 @@ macro_rules! encode_to_git {
     };
 }
 
-encode_to_git!()
+encode_to_git!();

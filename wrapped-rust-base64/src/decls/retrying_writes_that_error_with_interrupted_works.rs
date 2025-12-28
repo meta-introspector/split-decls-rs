@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EncoderWriter!();
         InterruptingWriter!();
+        EncoderWriter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! retrying_writes_that_error_with_interrupted_works {
     };
 }
 
-retrying_writes_that_error_with_interrupted_works!()
+retrying_writes_that_error_with_interrupted_works!();

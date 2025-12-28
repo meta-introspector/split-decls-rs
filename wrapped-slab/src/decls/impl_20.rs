@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Slab!();
-        Entry!();
+        Iter!();
     };
 }
 
 macro_rules! impl_20 {
     () => {
         deps!();
-        impl < T > ops :: IndexMut < usize > for Slab < T > { # [track_caller] fn index_mut (& mut self , key : usize) -> & mut T { match self . entries . get_mut (key) { Some (& mut Entry :: Occupied (ref mut v)) => v , _ => panic ! ("invalid key") , } } }
+        impl < T > Clone for Iter < '_ , T > { fn clone (& self) -> Self { Self { entries : self . entries . clone () , len : self . len , } } }
     };
 }
 

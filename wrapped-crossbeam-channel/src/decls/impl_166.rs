@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Operation!();
         Selected!();
+        Operation!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

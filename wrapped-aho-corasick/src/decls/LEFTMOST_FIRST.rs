@@ -11,4 +11,4 @@ macro_rules! LEFTMOST_FIRST {
     };
 }
 
-LEFTMOST_FIRST!()
+LEFTMOST_FIRST!();

@@ -4,4 +4,4 @@ macro_rules! find_words_ascii_space {
     };
 }
 
-find_words_ascii_space!()
+find_words_ascii_space!();

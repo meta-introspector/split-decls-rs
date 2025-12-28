@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Branch!();
-        Remote!();
         Binding!();
+        Remote!();
+        Error!();
         Branches!();
         BranchType!();
-        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

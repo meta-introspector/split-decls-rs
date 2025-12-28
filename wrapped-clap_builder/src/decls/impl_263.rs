@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ValueParser!();
         ValueParserInner!();
         Error!();
         Result!();
-        ValueParser!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_263 {
     };
 }
 
-impl_263!()
+impl_263!();

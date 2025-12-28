@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InferenceContext!();
         LifetimeElisionKind!();
+        InferenceContext!();
         TyLoweringContext!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! eval_to_const {
     };
 }
 
-eval_to_const!()
+eval_to_const!();

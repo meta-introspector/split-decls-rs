@@ -27,4 +27,4 @@ builtin #format_args ("{} {:?}", a.);
     };
 }
 
-test_format_args_expand_with_broken_member_access!()
+test_format_args_expand_with_broken_member_access!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WeekdaySet!();
         Weekday!();
+        WeekdaySet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_719 {
     };
 }
 
-impl_719!()
+impl_719!();

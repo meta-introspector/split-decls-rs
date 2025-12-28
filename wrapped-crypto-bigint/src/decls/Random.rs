@@ -4,4 +4,4 @@ macro_rules! Random {
     };
 }
 
-Random!()
+Random!();

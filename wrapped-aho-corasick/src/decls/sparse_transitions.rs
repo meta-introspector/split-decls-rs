@@ -11,4 +11,4 @@ macro_rules! sparse_transitions {
     };
 }
 
-sparse_transitions!()
+sparse_transitions!();

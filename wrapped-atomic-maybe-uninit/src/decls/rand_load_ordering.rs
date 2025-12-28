@@ -4,4 +4,4 @@ macro_rules! rand_load_ordering {
     };
 }
 
-rand_load_ordering!()
+rand_load_ordering!();

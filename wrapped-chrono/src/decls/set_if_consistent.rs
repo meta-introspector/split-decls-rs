@@ -11,4 +11,4 @@ macro_rules! set_if_consistent {
     };
 }
 
-set_if_consistent!()
+set_if_consistent!();

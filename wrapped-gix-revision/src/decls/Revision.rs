@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SiblingBranch!();
         PrefixHint!();
         ReflogLookup!();
+        SiblingBranch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Revision {
     };
 }
 
-Revision!()
+Revision!();

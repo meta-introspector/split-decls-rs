@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Context!();
         ServerResult!();
         ResolveFut!();
-        Context!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CustomDirective {
     };
 }
 
-CustomDirective!()
+CustomDirective!();

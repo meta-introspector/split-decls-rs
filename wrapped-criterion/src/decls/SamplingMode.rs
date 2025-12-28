@@ -4,4 +4,4 @@ macro_rules! SamplingMode {
     };
 }
 
-SamplingMode!()
+SamplingMode!();

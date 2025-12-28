@@ -1,0 +1,7 @@
+macro_rules! macro_128 {
+    () => {
+        declare_lint ! { # [doc = " The `supertrait_item_shadowing_usage` lint detects when the"] # [doc = " usage of an item that is provided by both a subtrait and supertrait"] # [doc = " is shadowed, preferring the subtrait."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![feature(supertrait_item_shadowing)]"] # [doc = " #![deny(supertrait_item_shadowing_usage)]"] # [doc = ""] # [doc = " trait Upstream {"] # [doc = "     fn hello(&self) {}"] # [doc = " }"] # [doc = " impl<T> Upstream for T {}"] # [doc = ""] # [doc = " trait Downstream: Upstream {"] # [doc = "     fn hello(&self) {}"] # [doc = " }"] # [doc = " impl<T> Downstream for T {}"] # [doc = ""] # [doc = " struct MyType;"] # [doc = " MyType.hello();"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " RFC 3624 specified a heuristic in which a supertrait item would be"] # [doc = " shadowed by a subtrait item when ambiguity occurs during item"] # [doc = " selection. In order to mitigate side-effects of this happening"] # [doc = " silently, this lint detects these cases when users want to deny them"] # [doc = " or fix the call sites."] pub SUPERTRAIT_ITEM_SHADOWING_USAGE , Allow , "detects when a supertrait item is shadowed by a subtrait item" , @ feature_gate = supertrait_item_shadowing ; }
+    };
+}
+
+macro_128!()

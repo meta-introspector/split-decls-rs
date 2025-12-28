@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GitRepositoryOperations!();
-        Result!();
         RealGitRepositoryOperations!();
+        GitRepositoryOperations!();
         SubmoduleInfo!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

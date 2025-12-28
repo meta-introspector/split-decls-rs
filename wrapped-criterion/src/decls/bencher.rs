@@ -4,4 +4,4 @@ macro_rules! bencher {
     };
 }
 
-bencher!()
+bencher!();

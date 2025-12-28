@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawEntryBuilderMut!();
         LinkedHashMap!();
+        RawEntryBuilderMut!();
         RawEntryBuilder!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

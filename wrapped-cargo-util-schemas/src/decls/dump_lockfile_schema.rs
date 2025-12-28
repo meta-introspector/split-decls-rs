@@ -11,4 +11,4 @@ macro_rules! dump_lockfile_schema {
     };
 }
 
-dump_lockfile_schema!()
+dump_lockfile_schema!();

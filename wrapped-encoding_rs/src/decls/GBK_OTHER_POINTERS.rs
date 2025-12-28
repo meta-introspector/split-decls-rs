@@ -4,4 +4,4 @@ macro_rules! GBK_OTHER_POINTERS {
     };
 }
 
-GBK_OTHER_POINTERS!()
+GBK_OTHER_POINTERS!();

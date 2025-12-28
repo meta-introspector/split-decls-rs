@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Size!();
         SectionMut!();
         Index!();
+        Size!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ValueMut {
     };
 }
 
-ValueMut!()
+ValueMut!();

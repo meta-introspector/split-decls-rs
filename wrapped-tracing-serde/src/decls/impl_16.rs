@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        SerializeRecord!();
-        SerdeMapVisitor!();
+        SerializeId!();
     };
 }
 
 macro_rules! impl_16 {
     () => {
         deps!();
-        impl Serialize for SerializeRecord < '_ > { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : Serializer , { let serializer = serializer . serialize_map (None) ? ; let mut visitor = SerdeMapVisitor :: new (serializer) ; self . 0 . record (& mut visitor) ; visitor . finish () } }
+        impl Serialize for SerializeId < '_ > { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : Serializer , { let mut state = serializer . serialize_tuple_struct ("Id" , 1) ? ; state . serialize_field (& self . 0 . into_u64 ()) ? ; state . end () } }
     };
 }
 

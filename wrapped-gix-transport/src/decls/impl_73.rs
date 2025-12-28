@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        PostBodyDataKind!();
+        Http!();
+        PostResponse!();
+        Remote!();
+        GetResponse!();
         Options!();
         Error!();
-        PostBodyDataKind!();
-        Remote!();
-        Http!();
-        GetResponse!();
-        PostResponse!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

@@ -1,34 +1,34 @@
 macro_rules! deps {
     () => {
-        FinderReverse!();
-        SplitN!();
-        CharIndices!();
-        Bytes!();
-        FieldsWith!();
-        BStr!();
         WordsWithBreakIndices!();
-        Utf8Chunk!();
-        SentenceIndices!();
-        Words!();
-        Finder!();
-        Chars!();
-        Find!();
-        Split!();
-        SplitReverse!();
-        Lines!();
+        ByteVec!();
+        GraphemeIndices!();
         FindReverse!();
+        Chars!();
+        SentenceIndices!();
+        WordIndices!();
+        WordsWithBreaks!();
         Utf8Chunks!();
+        FinderReverse!();
+        Split!();
+        Sentences!();
+        BStr!();
+        SplitReverse!();
+        LinesWithTerminator!();
+        Lines!();
+        SplitN!();
+        Finder!();
+        Bytes!();
+        Utf8Chunk!();
+        Graphemes!();
+        CharIndices!();
+        FieldsWith!();
+        EscapeBytes!();
+        SplitNReverse!();
+        Find!();
         Fields!();
         Utf8Error!();
-        EscapeBytes!();
-        WordIndices!();
-        LinesWithTerminator!();
-        Graphemes!();
-        ByteVec!();
-        SplitNReverse!();
-        GraphemeIndices!();
-        WordsWithBreaks!();
-        Sentences!();
+        Words!();
     };
 }
 
@@ -39,4 +39,4 @@ macro_rules! ByteSlice {
     };
 }
 
-ByteSlice!()
+ByteSlice!();

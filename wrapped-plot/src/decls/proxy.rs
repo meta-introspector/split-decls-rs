@@ -4,4 +4,4 @@ macro_rules! proxy {
     };
 }
 
-proxy!()
+proxy!();

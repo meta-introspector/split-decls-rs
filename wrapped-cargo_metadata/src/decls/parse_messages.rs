@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Message!();
         MessageIterator!();
+        Message!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_messages {
     };
 }
 
-parse_messages!()
+parse_messages!();

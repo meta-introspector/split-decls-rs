@@ -4,4 +4,4 @@ macro_rules! impl_serializable_state_u128_array {
     };
 }
 
-impl_serializable_state_u128_array!()
+impl_serializable_state_u128_array!();

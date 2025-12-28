@@ -11,4 +11,4 @@ macro_rules! relative_path_from_value_and_path {
     };
 }
 
-relative_path_from_value_and_path!()
+relative_path_from_value_and_path!();

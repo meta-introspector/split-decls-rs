@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Allocator!();
+        Box!();
         RawVec!();
         Vec!();
-        Box!();
+        Allocator!();
         AllocError!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

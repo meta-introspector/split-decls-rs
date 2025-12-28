@@ -13,4 +13,4 @@ macro_rules! compute_pc {
     };
 }
 
-compute_pc!()
+compute_pc!();

@@ -4,4 +4,4 @@ macro_rules! LEAP_YEAR {
     };
 }
 
-LEAP_YEAR!()
+LEAP_YEAR!();

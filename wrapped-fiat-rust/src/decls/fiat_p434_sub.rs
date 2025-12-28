@@ -11,4 +11,4 @@ macro_rules! fiat_p434_sub {
     };
 }
 
-fiat_p434_sub!()
+fiat_p434_sub!();

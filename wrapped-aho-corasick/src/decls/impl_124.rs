@@ -3,8 +3,8 @@ macro_rules! deps {
         Patterns!();
         PatternIter!();
         MatchKind!();
-        Pattern!();
         PatternID!();
+        Pattern!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

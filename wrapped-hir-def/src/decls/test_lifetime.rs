@@ -16,4 +16,4 @@ struct Ref<'a> {
     };
 }
 
-test_lifetime!()
+test_lifetime!();

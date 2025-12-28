@@ -4,4 +4,4 @@ macro_rules! TraitRef {
     };
 }
 
-TraitRef!()
+TraitRef!();

@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Equal!();
+        Or!();
+        B0!();
     };
 }
 
 macro_rules! impl_14 {
     () => {
         deps!();
-        # [doc = " Returns `core::cmp::Ordering::Equal`"] impl Ord for Equal { # [inline] fn to_ordering () -> Ordering { Ordering :: Equal } }
+        # [doc = " Or with 0 ( 0 | 0 = 0)"] impl BitOr < B0 > for B0 { type Output = B0 ; # [inline] fn bitor (self , _ : B0) -> Self :: Output { B0 } }
     };
 }
 

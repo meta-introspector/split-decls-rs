@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Vec!();
         Allocator!();
-        Drain!();
         Global!();
+        Drain!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Splice {
     };
 }
 
-Splice!()
+Splice!();

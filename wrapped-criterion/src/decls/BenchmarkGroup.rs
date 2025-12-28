@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReportLink!();
         BenchmarkValueGroup!();
+        ReportLink!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BenchmarkGroup {
     };
 }
 
-BenchmarkGroup!()
+BenchmarkGroup!();

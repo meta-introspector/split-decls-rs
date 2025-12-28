@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Branch!();
         Repository!();
+        Branch!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! worktrees_env_init {
     };
 }
 
-worktrees_env_init!()
+worktrees_env_init!();

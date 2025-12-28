@@ -4,4 +4,4 @@ macro_rules! TPL_HEAD {
     };
 }
 
-TPL_HEAD!()
+TPL_HEAD!();

@@ -4,4 +4,4 @@ macro_rules! InternedLifetimeParamId {
     };
 }
 
-InternedLifetimeParamId!()
+InternedLifetimeParamId!();

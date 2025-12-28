@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Node!();
         PackageId!();
+        Node!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Resolve {
     };
 }
 
-Resolve!()
+Resolve!();

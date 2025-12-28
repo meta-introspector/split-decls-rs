@@ -4,4 +4,4 @@ macro_rules! convert_utf8_to_utf16_up_to_invalid {
     };
 }
 
-convert_utf8_to_utf16_up_to_invalid!()
+convert_utf8_to_utf16_up_to_invalid!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ChangeSet!();
         Change!();
+        ChangeSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_51 {
     };
 }
 
-impl_51!()
+impl_51!();

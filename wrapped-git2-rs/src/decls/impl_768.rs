@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FetchOptions!();
         SubmoduleUpdateOptions!();
+        FetchOptions!();
         CheckoutBuilder!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_768 {
     };
 }
 
-impl_768!()
+impl_768!();

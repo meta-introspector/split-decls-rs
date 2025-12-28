@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Parse!();
-        Result!();
-        ParseContext!();
-        UnqualifiedName!();
         UnscopedName!();
-        SubstitutionTable!();
+        Result!();
+        UnqualifiedName!();
+        ParseContext!();
         IndexStr!();
+        SubstitutionTable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

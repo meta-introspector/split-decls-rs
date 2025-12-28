@@ -4,4 +4,4 @@ macro_rules! ascii_simd_unalign {
     };
 }
 
-ascii_simd_unalign!()
+ascii_simd_unalign!();

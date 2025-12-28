@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Result!();
-        Positioned!();
-        Rule!();
         InlineFragment!();
+        Positioned!();
         PositionCalculator!();
+        Rule!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_inline_fragment {
     };
 }
 
-parse_inline_fragment!()
+parse_inline_fragment!();

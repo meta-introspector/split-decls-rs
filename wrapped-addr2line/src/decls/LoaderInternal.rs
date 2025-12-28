@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ObjectContext!();
-        LoaderReader!();
         Context!();
+        LoaderReader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LoaderInternal {
     };
 }
 
-LoaderInternal!()
+LoaderInternal!();

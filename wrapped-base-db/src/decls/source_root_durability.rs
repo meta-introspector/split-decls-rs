@@ -11,4 +11,4 @@ macro_rules! source_root_durability {
     };
 }
 
-source_root_durability!()
+source_root_durability!();

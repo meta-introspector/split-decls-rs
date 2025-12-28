@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        SplitAt!();
+        PointerMetadata!();
+        KnownLayout!();
+    };
+}
+
+macro_rules! impl_308 {
+    () => {
+        deps!();
+        # [allow (clippy :: needless_lifetimes)] impl < 'a , T > PtrInner < 'a , T > where T : ? Sized + KnownLayout < PointerMetadata = usize > , { # [doc = " Splits `T` in two."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller promises that:"] # [doc = "  - `l_len.get() <= self.meta()`."] # [doc = ""] # [doc = " ## (Non-)Overlap"] # [doc = ""] # [doc = " Given `let (left, right) = ptr.split_at(l_len)`, it is guaranteed that"] # [doc = " `left` and `right` are contiguous and non-overlapping if"] # [doc = " `l_len.padding_needed_for() == 0`. This is true for all `[T]`."] # [doc = ""] # [doc = " If `l_len.padding_needed_for() != 0`, then the left pointer will overlap"] # [doc = " the right pointer to satisfy `T`'s padding requirements."] pub (crate) unsafe fn split_at_unchecked (self , l_len : crate :: util :: MetadataOf < T > ,) -> (Self , PtrInner < 'a , [T :: Elem] >) where T : SplitAt , { let l_len = l_len . get () ; let left = unsafe { self . with_meta (l_len) } ; let right = self . trailing_slice () ; let right = unsafe { right . slice_unchecked (l_len .. self . meta () . get ()) } ; (left , right) } # [doc = " Produces the trailing slice of `self`."] pub (crate) fn trailing_slice (self) -> PtrInner < 'a , [T :: Elem] > where T : SplitAt , { let offset = crate :: trailing_slice_layout :: < T > () . offset ; let bytes = self . as_non_null () . cast :: < u8 > () . as_ptr () ; let bytes = unsafe { bytes . add (offset) } ; let bytes = unsafe { NonNull :: new_unchecked (bytes) } ; let ptr = KnownLayout :: raw_from_ptr_len (bytes , self . meta () . get ()) ; unsafe { PtrInner :: new (ptr) } } }
+    };
+}
+
+impl_308!()

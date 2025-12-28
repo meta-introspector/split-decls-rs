@@ -4,4 +4,4 @@ macro_rules! decode_word {
     };
 }
 
-decode_word!()
+decode_word!();

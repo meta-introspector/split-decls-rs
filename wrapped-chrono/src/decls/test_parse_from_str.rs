@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FixedOffset!();
-        Utc!();
         DateTime!();
+        Utc!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_parse_from_str {
     };
 }
 
-test_parse_from_str!()
+test_parse_from_str!();

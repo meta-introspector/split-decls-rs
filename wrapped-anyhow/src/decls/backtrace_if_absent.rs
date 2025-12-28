@@ -4,4 +4,4 @@ macro_rules! backtrace_if_absent {
     };
 }
 
-backtrace_if_absent!()
+backtrace_if_absent!();

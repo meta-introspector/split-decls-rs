@@ -4,4 +4,4 @@ macro_rules! has_forward_slash_root {
     };
 }
 
-has_forward_slash_root!()
+has_forward_slash_root!();

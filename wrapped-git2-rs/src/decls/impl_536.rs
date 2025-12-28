@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Buf!();
-        Oid!();
-        Revwalk!();
-        OdbPackwriterCb!();
-        Binding!();
-        PackBuilderStage!();
-        ForEachCb!();
-        PackBuilder!();
         ProgressCb!();
+        Binding!();
+        Revwalk!();
+        Buf!();
+        PackBuilderStage!();
+        PackBuilder!();
+        Oid!();
+        ForEachCb!();
+        OdbPackwriterCb!();
         Error!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! impl_536 {
     };
 }
 
-impl_536!()
+impl_536!();

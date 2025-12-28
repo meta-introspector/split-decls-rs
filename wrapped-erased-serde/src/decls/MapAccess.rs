@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DeserializeSeed!();
-        Error!();
         Out!();
+        Error!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! MapAccess {
     };
 }
 
-MapAccess!()
+MapAccess!();

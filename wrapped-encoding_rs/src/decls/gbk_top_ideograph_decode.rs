@@ -4,4 +4,4 @@ macro_rules! gbk_top_ideograph_decode {
     };
 }
 
-gbk_top_ideograph_decode!()
+gbk_top_ideograph_decode!();

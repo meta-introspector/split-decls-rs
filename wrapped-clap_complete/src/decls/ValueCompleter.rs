@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArgValueCompleter!();
         CompletionCandidate!();
+        ArgValueCompleter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ValueCompleter {
     };
 }
 
-ValueCompleter!()
+ValueCompleter!();

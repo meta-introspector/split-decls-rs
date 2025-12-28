@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ChangeId!();
-        TreeInfoTuple!();
-        Relation!();
         Change!();
-        Visit!();
+        TreeInfoTuple!();
         Error!();
+        Visit!();
+        Relation!();
+        ChangeId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! handle_lhs_and_rhs_with_equal_filenames {
     };
 }
 
-handle_lhs_and_rhs_with_equal_filenames!()
+handle_lhs_and_rhs_with_equal_filenames!();

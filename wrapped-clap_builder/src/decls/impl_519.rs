@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        FlatSet!();
-        Arg!();
         Usage!();
-        Command!();
         Validator!();
-        Id!();
         Error!();
-        ArgMatcher!();
-        ArgPredicate!();
-        Conflicts!();
         StyledStr!();
+        Id!();
+        Command!();
+        Conflicts!();
+        Arg!();
+        FlatSet!();
+        ArgPredicate!();
+        ArgMatcher!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_519 {
     };
 }
 
-impl_519!()
+impl_519!();

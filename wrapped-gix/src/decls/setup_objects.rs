@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OdbHandle!();
         Cache!();
+        OdbHandle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! setup_objects {
     };
 }
 
-setup_objects!()
+setup_objects!();

@@ -4,4 +4,4 @@ macro_rules! negotiate {
     };
 }
 
-negotiate!()
+negotiate!();

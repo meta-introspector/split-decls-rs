@@ -11,4 +11,4 @@ macro_rules! _unsized_ref_propagation {
     };
 }
 
-_unsized_ref_propagation!()
+_unsized_ref_propagation!();

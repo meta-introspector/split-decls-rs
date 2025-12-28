@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ServerError!();
         ExtensionContext!();
-        Extension!();
-        PersistedQuery!();
-        CacheStorage!();
-        NextPrepareRequest!();
-        ServerResult!();
-        ApolloPersistedQueriesExtension!();
         Request!();
+        NextPrepareRequest!();
+        CacheStorage!();
+        PersistedQuery!();
+        ServerError!();
+        ApolloPersistedQueriesExtension!();
+        ServerResult!();
+        Extension!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_535 {
     };
 }
 
-impl_535!()
+impl_535!();

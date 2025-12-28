@@ -4,4 +4,4 @@ macro_rules! MAX_OSC_PARAMS {
     };
 }
 
-MAX_OSC_PARAMS!()
+MAX_OSC_PARAMS!();

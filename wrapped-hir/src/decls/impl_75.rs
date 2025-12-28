@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        BuiltinType!();
-        ConstParam!();
-        TypeParam!();
-        GenericParam!();
-        PathResolution!();
-        Function!();
-        Adt!();
-        Trait!();
-        ToolModule!();
-        Const!();
-        Macro!();
-        TypeAlias!();
         BuiltinAttr!();
-        Module!();
-        Local!();
         TypeNs!();
+        Local!();
+        Function!();
+        Macro!();
+        ConstParam!();
+        BuiltinType!();
+        Variant!();
+        Const!();
+        Static!();
+        TypeAlias!();
         DeriveHelper!();
         ModuleDef!();
-        Variant!();
-        Static!();
+        Module!();
+        Adt!();
+        PathResolution!();
+        ToolModule!();
+        TypeParam!();
+        GenericParam!();
+        Trait!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Shared!();
         Bytes!();
+        Shared!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! shared_v_clone {
     };
 }
 
-shared_v_clone!()
+shared_v_clone!();

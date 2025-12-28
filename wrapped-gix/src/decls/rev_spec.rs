@@ -4,4 +4,4 @@ macro_rules! rev_spec {
     };
 }
 
-rev_spec!()
+rev_spec!();

@@ -11,4 +11,4 @@ macro_rules! Gb18030Decoder {
     };
 }
 
-Gb18030Decoder!()
+Gb18030Decoder!();

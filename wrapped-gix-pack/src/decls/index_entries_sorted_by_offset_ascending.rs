@@ -12,4 +12,4 @@ macro_rules! index_entries_sorted_by_offset_ascending {
     };
 }
 
-index_entries_sorted_by_offset_ascending!()
+index_entries_sorted_by_offset_ascending!();

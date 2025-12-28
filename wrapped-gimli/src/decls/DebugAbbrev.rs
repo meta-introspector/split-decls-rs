@@ -4,4 +4,4 @@ macro_rules! DebugAbbrev {
     };
 }
 
-DebugAbbrev!()
+DebugAbbrev!();

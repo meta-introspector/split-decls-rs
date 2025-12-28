@@ -11,4 +11,4 @@ macro_rules! test_date_from_ymd {
     };
 }
 
-test_date_from_ymd!()
+test_date_from_ymd!();

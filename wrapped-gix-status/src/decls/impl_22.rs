@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SubmoduleStatus!();
-        VisitEntry!();
-        Error!();
-        ReduceChange!();
         StatusResult!();
+        VisitEntry!();
+        SubmoduleStatus!();
+        ReduceChange!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

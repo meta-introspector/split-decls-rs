@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Slim!();
-        Teddy!();
-        Searcher!();
         Match!();
+        Teddy!();
         SearcherT!();
+        Searcher!();
+        Slim!();
         Pointer!();
-        Patterns!();
         Fat!();
+        Patterns!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! x86_64 {
     };
 }
 
-x86_64!()
+x86_64!();

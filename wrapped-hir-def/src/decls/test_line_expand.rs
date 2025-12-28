@@ -14,4 +14,4 @@ fn main() { 0u32 }
     };
 }
 
-test_line_expand!()
+test_line_expand!();

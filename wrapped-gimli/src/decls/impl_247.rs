@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         CallFrameInstructionIter!();
-        CallFrameInstruction!();
         Error!();
-        Result!();
         Reader!();
+        CallFrameInstruction!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_247 {
     };
 }
 
-impl_247!()
+impl_247!();

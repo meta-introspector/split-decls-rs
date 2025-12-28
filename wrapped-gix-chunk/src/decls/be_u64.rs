@@ -4,4 +4,4 @@ macro_rules! be_u64 {
     };
 }
 
-be_u64!()
+be_u64!();

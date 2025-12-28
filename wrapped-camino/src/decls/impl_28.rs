@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Iter!();
-        Utf8Ancestors!();
-        Utf8Components!();
         ReadDirUtf8!();
-        Utf8PathBuf!();
-        Utf8Path!();
+        Iter!();
         FromPathBufError!();
+        Utf8Ancestors!();
+        Utf8Path!();
+        Utf8Components!();
+        Utf8PathBuf!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         DebugAddrIndex!();
-        Error!();
-        RangeListsFormat!();
-        Result!();
-        RawRange!();
         Reader!();
-        RawRngListEntry!();
+        RangeListsFormat!();
+        RawRange!();
         Encoding!();
         ReaderOffset!();
+        RawRngListEntry!();
+        Error!();
+        Result!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_570 {
     };
 }
 
-impl_570!()
+impl_570!();

@@ -4,4 +4,4 @@ macro_rules! WriteVectored {
     };
 }
 
-WriteVectored!()
+WriteVectored!();

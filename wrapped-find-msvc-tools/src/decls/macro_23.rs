@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HRESULT!();
-        GUID!();
         CLSCTX!();
+        GUID!();
+        HRESULT!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_23 {
     };
 }
 
-macro_23!()
+macro_23!();

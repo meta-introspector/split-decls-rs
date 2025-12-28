@@ -4,4 +4,4 @@ macro_rules! Utf8Destination {
     };
 }
 
-Utf8Destination!()
+Utf8Destination!();

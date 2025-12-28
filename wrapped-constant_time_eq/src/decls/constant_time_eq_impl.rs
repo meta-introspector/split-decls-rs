@@ -11,4 +11,4 @@ macro_rules! constant_time_eq_impl {
     };
 }
 
-constant_time_eq_impl!()
+constant_time_eq_impl!();

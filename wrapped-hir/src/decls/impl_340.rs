@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Type!();
-        GenericDef!();
-        Module!();
-        Trait!();
         AssocItemContainer!();
-        DefWithBody!();
-        TypeAlias!();
+        Impl!();
         Const!();
         AssocItem!();
-        Impl!();
+        TypeAlias!();
+        Type!();
+        GenericDef!();
         Function!();
+        DefWithBody!();
+        Module!();
+        Trait!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_340 {
     };
 }
 
-impl_340!()
+impl_340!();

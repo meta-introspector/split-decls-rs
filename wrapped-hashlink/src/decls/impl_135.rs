@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Difference!();
-        RawEntryMut!();
-        Union!();
-        LinkedHashSet!();
-        SymmetricDifference!();
-        TryReserveError!();
         Intersection!();
+        RawEntryMut!();
+        LinkedHashSet!();
+        Difference!();
         LinkedHashMap!();
         Entry!();
+        TryReserveError!();
+        SymmetricDifference!();
+        Union!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_135 {
     };
 }
 
-impl_135!()
+impl_135!();

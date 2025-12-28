@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Semantics!();
-        Type!();
-        SemanticsScope!();
         TermSearchConfig!();
+        SemanticsScope!();
+        Type!();
+        Semantics!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TermSearchCtx {
     };
 }
 
-TermSearchCtx!()
+TermSearchCtx!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SectionBaseAddresses!();
         Reader!();
+        SectionBaseAddresses!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PointerEncodingParameters {
     };
 }
 
-PointerEncodingParameters!()
+PointerEncodingParameters!();

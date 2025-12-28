@@ -19,4 +19,4 @@ struct#1:MacroRules[DB0C, 0]@59..65#14336# Foo#0:MacroCall[DB0C, 0]@32..35#ROOT2
     };
 }
 
-token_mapping_across_files!()
+token_mapping_across_files!();

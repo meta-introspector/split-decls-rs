@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CheckoutBuilder!();
         FetchOptions!();
+        CheckoutBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SubmoduleUpdateOptions {
     };
 }
 
-SubmoduleUpdateOptions!()
+SubmoduleUpdateOptions!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         FileMode!();
-        IntoCString!();
-        Repository!();
-        Oid!();
-        Note!();
-        TreeUpdateBuilder!();
         Tree!();
         Error!();
         Binding!();
+        Oid!();
+        TreeUpdateBuilder!();
+        Note!();
+        IntoCString!();
+        Repository!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

@@ -4,4 +4,4 @@ macro_rules! UNITS_IEC {
     };
 }
 
-UNITS_IEC!()
+UNITS_IEC!();

@@ -4,4 +4,4 @@ macro_rules! impl_const_default {
     };
 }
 
-impl_const_default!()
+impl_const_default!();

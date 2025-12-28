@@ -4,4 +4,4 @@ macro_rules! load_index {
     };
 }
 
-load_index!()
+load_index!();

@@ -4,4 +4,4 @@ macro_rules! copy_new_dir_to_base {
     };
 }
 
-copy_new_dir_to_base!()
+copy_new_dir_to_base!();

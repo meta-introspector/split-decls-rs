@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        DefineOpaqueTypes!();
+        LatticeOp!();
+        InferOk!();
+        Obligation!();
+        LatticeOpKind!();
+        InferResult!();
+        TypeRelating!();
+        ToTrace!();
+        At!();
+        TypeTrace!();
+    };
+}
+
+macro_rules! impl_6 {
+    () => {
+        deps!();
+        impl < 'a , 'tcx > At < 'a , 'tcx > { # [doc = " Makes `actual <: expected`. For example, if type-checking a"] # [doc = " call like `foo(x)`, where `foo: fn(i32)`, you might have"] # [doc = " `sup(i32, x)`, since the \"expected\" type is the type that"] # [doc = " appears in the signature."] pub fn sup < T > (self , define_opaque_types : DefineOpaqueTypes , expected : T , actual : T ,) -> InferResult < 'tcx , () > where T : ToTrace < 'tcx > , { if self . infcx . next_trait_solver { NextSolverRelate :: relate (self . infcx , self . param_env , expected , ty :: Contravariant , actual , self . cause . span ,) . map (| goals | self . goals_to_obligations (goals)) } else { let mut op = TypeRelating :: new (self . infcx , ToTrace :: to_trace (self . cause , expected , actual) , self . param_env , define_opaque_types , ty :: Contravariant ,) ; op . relate (expected , actual) ? ; Ok (InferOk { value : () , obligations : op . into_obligations () }) } } # [doc = " Makes `expected <: actual`."] pub fn sub < T > (self , define_opaque_types : DefineOpaqueTypes , expected : T , actual : T ,) -> InferResult < 'tcx , () > where T : ToTrace < 'tcx > , { if self . infcx . next_trait_solver { NextSolverRelate :: relate (self . infcx , self . param_env , expected , ty :: Covariant , actual , self . cause . span ,) . map (| goals | self . goals_to_obligations (goals)) } else { let mut op = TypeRelating :: new (self . infcx , ToTrace :: to_trace (self . cause , expected , actual) , self . param_env , define_opaque_types , ty :: Covariant ,) ; op . relate (expected , actual) ? ; Ok (InferOk { value : () , obligations : op . into_obligations () }) } } # [doc = " Makes `expected == actual`."] pub fn eq < T > (self , define_opaque_types : DefineOpaqueTypes , expected : T , actual : T ,) -> InferResult < 'tcx , () > where T : ToTrace < 'tcx > , { self . eq_trace (define_opaque_types , ToTrace :: to_trace (self . cause , expected , actual) , expected , actual ,) } # [doc = " Makes `expected == actual`."] pub fn eq_trace < T > (self , define_opaque_types : DefineOpaqueTypes , trace : TypeTrace < 'tcx > , expected : T , actual : T ,) -> InferResult < 'tcx , () > where T : Relate < TyCtxt < 'tcx > > , { if self . infcx . next_trait_solver { NextSolverRelate :: relate (self . infcx , self . param_env , expected , ty :: Invariant , actual , self . cause . span ,) . map (| goals | self . goals_to_obligations (goals)) } else { let mut op = TypeRelating :: new (self . infcx , trace , self . param_env , define_opaque_types , ty :: Invariant ,) ; op . relate (expected , actual) ? ; Ok (InferOk { value : () , obligations : op . into_obligations () }) } } pub fn relate < T > (self , define_opaque_types : DefineOpaqueTypes , expected : T , variance : ty :: Variance , actual : T ,) -> InferResult < 'tcx , () > where T : ToTrace < 'tcx > , { match variance { ty :: Covariant => self . sub (define_opaque_types , expected , actual) , ty :: Invariant => self . eq (define_opaque_types , expected , actual) , ty :: Contravariant => self . sup (define_opaque_types , expected , actual) , ty :: Bivariant => panic ! ("Bivariant given to `relate()`") , } } # [doc = " Computes the least-upper-bound, or mutual supertype, of two"] # [doc = " values. The order of the arguments doesn't matter, but since"] # [doc = " this can result in an error (e.g., if asked to compute LUB of"] # [doc = " u32 and i32), it is meaningful to call one of them the"] # [doc = " \"expected type\"."] pub fn lub < T > (self , expected : T , actual : T) -> InferResult < 'tcx , T > where T : ToTrace < 'tcx > , { let mut op = LatticeOp :: new (self . infcx , ToTrace :: to_trace (self . cause , expected , actual) , self . param_env , LatticeOpKind :: Lub ,) ; let value = op . relate (expected , actual) ? ; Ok (InferOk { value , obligations : op . into_obligations () }) } fn goals_to_obligations (& self , goals : Vec < Goal < 'tcx , ty :: Predicate < 'tcx > > > ,) -> InferOk < 'tcx , () > { InferOk { value : () , obligations : goals . into_iter () . map (| goal | { Obligation :: new (self . infcx . tcx , self . cause . clone () , goal . param_env , goal . predicate ,) }) . collect () , } } }
+    };
+}
+
+impl_6!()

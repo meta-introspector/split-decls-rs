@@ -4,4 +4,4 @@ macro_rules! CommitState {
     };
 }
 
-CommitState!()
+CommitState!();

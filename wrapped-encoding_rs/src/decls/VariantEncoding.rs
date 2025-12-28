@@ -4,4 +4,4 @@ macro_rules! VariantEncoding {
     };
 }
 
-VariantEncoding!()
+VariantEncoding!();

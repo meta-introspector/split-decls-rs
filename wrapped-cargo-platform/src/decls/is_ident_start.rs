@@ -4,4 +4,4 @@ macro_rules! is_ident_start {
     };
 }
 
-is_ident_start!()
+is_ident_start!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnMut1!();
         UnwrapOrElseFn!();
+        FnMut1!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1396 {
     };
 }
 
-impl_1396!()
+impl_1396!();

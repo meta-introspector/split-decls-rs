@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         MetaTypeName!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1028 {
     };
 }
 
-impl_1028!()
+impl_1028!();

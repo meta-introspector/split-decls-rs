@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LinearMap!();
         Entry!();
-        String!();
         LinearMapView!();
+        LinearMap!();
+        String!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

@@ -4,4 +4,4 @@ macro_rules! and_si128 {
     };
 }
 
-and_si128!()
+and_si128!();

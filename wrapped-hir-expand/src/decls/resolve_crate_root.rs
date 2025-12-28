@@ -11,4 +11,4 @@ macro_rules! resolve_crate_root {
     };
 }
 
-resolve_crate_root!()
+resolve_crate_root!();

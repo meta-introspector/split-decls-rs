@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RefMulti!();
         DashMap!();
         Iter!();
-        RefMulti!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_169 {
     };
 }
 
-impl_169!()
+impl_169!();

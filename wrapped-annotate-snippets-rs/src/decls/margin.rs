@@ -4,4 +4,4 @@ macro_rules! margin {
     };
 }
 
-margin!()
+margin!();

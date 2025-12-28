@@ -4,4 +4,4 @@ macro_rules! open_options_no_follow {
     };
 }
 
-open_options_no_follow!()
+open_options_no_follow!();

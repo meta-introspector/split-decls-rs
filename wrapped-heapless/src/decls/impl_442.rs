@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Max!();
-        SortedLinkedList!();
-        FindMutView!();
         LenType!();
+        Max!();
+        FindMutView!();
         Kind!();
+        SortedLinkedList!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_442 {
     };
 }
 
-impl_442!()
+impl_442!();

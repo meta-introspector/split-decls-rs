@@ -15,4 +15,4 @@ fn foo() {
     };
 }
 
-attribute_macro_syntax_completion_2!()
+attribute_macro_syntax_completion_2!();

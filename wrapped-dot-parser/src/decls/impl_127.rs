@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NodeStmt!();
-        IDEq!();
-        Stmt!();
         AttrStmt!();
-        EdgeStmt!();
+        Stmt!();
         NodeID!();
+        IDEq!();
+        EdgeStmt!();
+        NodeStmt!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

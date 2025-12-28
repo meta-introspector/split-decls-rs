@@ -11,4 +11,4 @@ macro_rules! test_date_num_days_from_ce {
     };
 }
 
-test_date_num_days_from_ce!()
+test_date_num_days_from_ce!();

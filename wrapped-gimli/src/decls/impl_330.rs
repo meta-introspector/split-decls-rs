@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        ReaderOffsetId!();
-        Relocate!();
-        Format!();
-        RelocateReader!();
         Result!();
+        RelocateReader!();
+        ReaderOffsetId!();
+        Reader!();
+        Format!();
+        Relocate!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_330 {
     };
 }
 
-impl_330!()
+impl_330!();

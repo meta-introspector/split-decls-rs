@@ -4,4 +4,4 @@ macro_rules! READERS_PARKED {
     };
 }
 
-READERS_PARKED!()
+READERS_PARKED!();

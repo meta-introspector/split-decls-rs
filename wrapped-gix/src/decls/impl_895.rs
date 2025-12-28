@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Id!();
         Spec!();
+        Id!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_895 {
     };
 }
 
-impl_895!()
+impl_895!();

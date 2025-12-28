@@ -11,4 +11,4 @@ macro_rules! gen_for_struct {
     };
 }
 
-gen_for_struct!()
+gen_for_struct!();

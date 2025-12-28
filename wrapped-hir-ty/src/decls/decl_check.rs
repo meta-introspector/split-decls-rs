@@ -4,4 +4,4 @@ macro_rules! decl_check {
     };
 }
 
-decl_check!()
+decl_check!();

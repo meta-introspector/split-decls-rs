@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Timelike!();
-        TimeZone!();
         DateTime!();
         NaiveDateTime!();
+        TimeZone!();
+        Timelike!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_159 {
     };
 }
 
-impl_159!()
+impl_159!();

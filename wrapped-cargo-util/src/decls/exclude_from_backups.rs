@@ -7,4 +7,4 @@ macro_rules! exclude_from_backups {
     };
 }
 
-exclude_from_backups!()
+exclude_from_backups!();

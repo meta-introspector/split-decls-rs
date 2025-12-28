@@ -4,4 +4,4 @@ macro_rules! StreamFuture {
     };
 }
 
-StreamFuture!()
+StreamFuture!();

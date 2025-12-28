@@ -4,4 +4,4 @@ macro_rules! InternedCoroutine {
     };
 }
 
-InternedCoroutine!()
+InternedCoroutine!();

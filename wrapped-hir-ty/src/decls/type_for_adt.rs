@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
         EarlyBinder!();
+        HirDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! type_for_adt {
     };
 }
 
-type_for_adt!()
+type_for_adt!();

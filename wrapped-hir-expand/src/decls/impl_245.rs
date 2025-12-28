@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        MacroCallLoc!();
-        ExpandDatabase!();
-        MacroCallKind!();
-        MacroCallId!();
-        AstId!();
-        ProcMacroKind!();
-        ProcMacro!();
-        Attr!();
-        InFile!();
-        MacroDefKind!();
         MacroDefId!();
+        MacroDefKind!();
+        ExpandDatabase!();
+        MacroCallId!();
+        InFile!();
+        ProcMacroKind!();
+        AstId!();
+        Attr!();
+        MacroCallLoc!();
+        MacroCallKind!();
+        ProcMacro!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

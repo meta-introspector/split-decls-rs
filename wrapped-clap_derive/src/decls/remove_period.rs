@@ -4,4 +4,4 @@ macro_rules! remove_period {
     };
 }
 
-remove_period!()
+remove_period!();

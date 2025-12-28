@@ -12,4 +12,4 @@ pub(crate) const STATE_CHANGES: [[u8; 256]; 16] = ["#) ? ; for (state , entries)
     };
 }
 
-generate_table!()
+generate_table!();

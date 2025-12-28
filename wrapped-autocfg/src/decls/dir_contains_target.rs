@@ -4,4 +4,4 @@ macro_rules! dir_contains_target {
     };
 }
 
-dir_contains_target!()
+dir_contains_target!();

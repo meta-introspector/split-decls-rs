@@ -11,4 +11,4 @@ macro_rules! arbitrary_collection {
     };
 }
 
-arbitrary_collection!()
+arbitrary_collection!();

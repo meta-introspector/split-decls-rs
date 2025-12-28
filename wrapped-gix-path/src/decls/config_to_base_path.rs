@@ -4,4 +4,4 @@ macro_rules! config_to_base_path {
     };
 }
 
-config_to_base_path!()
+config_to_base_path!();

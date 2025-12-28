@@ -4,4 +4,4 @@ macro_rules! unlikely {
     };
 }
 
-unlikely!()
+unlikely!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BorrowDecode!();
-        Encode!();
         Compat!();
+        Encode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! BorrowCompat {
     };
 }
 
-BorrowCompat!()
+BorrowCompat!();

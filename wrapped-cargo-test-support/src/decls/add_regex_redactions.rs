@@ -4,4 +4,4 @@ macro_rules! add_regex_redactions {
     };
 }
 
-add_regex_redactions!()
+add_regex_redactions!();

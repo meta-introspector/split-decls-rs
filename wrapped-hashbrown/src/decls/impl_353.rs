@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawEntryBuilder!();
         Equivalent!();
+        RawEntryBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_353 {
     };
 }
 
-impl_353!()
+impl_353!();

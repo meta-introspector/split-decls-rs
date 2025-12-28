@@ -4,4 +4,4 @@ macro_rules! impl_backtrace {
     };
 }
 
-impl_backtrace!()
+impl_backtrace!();

@@ -11,4 +11,4 @@ macro_rules! LEFTMOST_LONGEST {
     };
 }
 
-LEFTMOST_LONGEST!()
+LEFTMOST_LONGEST!();

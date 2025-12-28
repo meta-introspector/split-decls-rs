@@ -4,4 +4,4 @@ macro_rules! BOLD {
     };
 }
 
-BOLD!()
+BOLD!();

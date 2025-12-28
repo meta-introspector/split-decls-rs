@@ -4,4 +4,4 @@ macro_rules! DepGraphDataMerger {
     };
 }
 
-DepGraphDataMerger!()
+DepGraphDataMerger!();

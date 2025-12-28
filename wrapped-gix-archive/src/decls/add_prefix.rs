@@ -4,4 +4,4 @@ macro_rules! add_prefix {
     };
 }
 
-add_prefix!()
+add_prefix!();

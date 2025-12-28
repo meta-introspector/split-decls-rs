@@ -4,4 +4,4 @@ macro_rules! fiat_secp256k1_montgomery_montgomery_domain_field_element {
     };
 }
 
-fiat_secp256k1_montgomery_montgomery_domain_field_element!()
+fiat_secp256k1_montgomery_montgomery_domain_field_element!();

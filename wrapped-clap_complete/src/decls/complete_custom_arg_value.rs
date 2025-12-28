@@ -12,4 +12,4 @@ macro_rules! complete_custom_arg_value {
     };
 }
 
-complete_custom_arg_value!()
+complete_custom_arg_value!();

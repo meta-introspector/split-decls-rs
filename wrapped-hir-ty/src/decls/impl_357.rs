@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         InferenceContextAutoderef!();
-        InferenceContext!();
         InferenceContextAutoderefCtx!();
+        InferenceContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_357 {
     };
 }
 
-impl_357!()
+impl_357!();

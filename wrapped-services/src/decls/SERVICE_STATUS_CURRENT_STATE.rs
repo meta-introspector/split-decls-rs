@@ -1,0 +1,7 @@
+macro_rules! SERVICE_STATUS_CURRENT_STATE {
+    () => {
+        pub type SERVICE_STATUS_CURRENT_STATE = u32 ;
+    };
+}
+
+SERVICE_STATUS_CURRENT_STATE!()

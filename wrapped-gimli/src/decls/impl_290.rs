@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DebugBytes!();
-        Result!();
-        Error!();
         DebugByte!();
         DebugLen!();
+        Error!();
+        Result!();
+        DebugBytes!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_290 {
     };
 }
 
-impl_290!()
+impl_290!();

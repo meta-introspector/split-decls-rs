@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        Find!();
         Error!();
+        Find!();
+        Kind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! existing_iter {
     };
 }
 
-existing_iter!()
+existing_iter!();

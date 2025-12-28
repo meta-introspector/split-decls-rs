@@ -12,4 +12,4 @@ macro_rules! generate_default_with {
     };
 }
 
-generate_default_with!()
+generate_default_with!();

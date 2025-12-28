@@ -12,4 +12,4 @@ macro_rules! implements_trait_unique {
     };
 }
 
-implements_trait_unique!()
+implements_trait_unique!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Type!();
-        EvaluatedConst!();
-        Const!();
         Module!();
+        Const!();
+        EvaluatedConst!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_297 {
     };
 }
 
-impl_297!()
+impl_297!();

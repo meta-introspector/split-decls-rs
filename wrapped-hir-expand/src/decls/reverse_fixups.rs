@@ -11,4 +11,4 @@ macro_rules! reverse_fixups {
     };
 }
 
-reverse_fixups!()
+reverse_fixups!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GenericDefId!();
-        DefDatabase!();
         DefWithBodyId!();
+        DefDatabase!();
+        GenericDefId!();
         VariantId!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_705 {
     };
 }
 
-impl_705!()
+impl_705!();

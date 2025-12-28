@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         RealGitWrapperLib!();
         RollupLock!();
-        SystemGhExecutor!();
-        Execv!();
-        GitExecutor!();
-        SystemGitExecutor!();
         RealExecv!();
         RealGitRepositoryOperations!();
+        Execv!();
+        SystemGitExecutor!();
+        GitExecutor!();
+        SystemGhExecutor!();
         ShellGitAdapter!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

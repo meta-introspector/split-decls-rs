@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ErrorImpl!();
-        Backtrace!();
-        StdError!();
         Chain!();
-        Mut!();
         Ref!();
+        ErrorImpl!();
+        StdError!();
+        Mut!();
+        Backtrace!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_74 {
     };
 }
 
-impl_74!()
+impl_74!();

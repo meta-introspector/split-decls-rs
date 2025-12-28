@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        CallOffset!();
-        SpecialName!();
-        ParseContext!();
-        Name!();
-        Encoding!();
         Result!();
-        ResourceName!();
-        IndexStr!();
-        SubstitutionTable!();
-        Parse!();
         SeqId!();
+        ParseContext!();
+        ResourceName!();
+        CallOffset!();
+        Encoding!();
         Error!();
+        SubstitutionTable!();
+        Name!();
+        SpecialName!();
+        Parse!();
+        IndexStr!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_299 {
     };
 }
 
-impl_299!()
+impl_299!();

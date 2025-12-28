@@ -11,4 +11,4 @@ macro_rules! censor_derive_input {
     };
 }
 
-censor_derive_input!()
+censor_derive_input!();

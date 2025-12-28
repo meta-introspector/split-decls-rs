@@ -4,4 +4,4 @@ macro_rules! parse_single_line_trailer {
     };
 }
 
-parse_single_line_trailer!()
+parse_single_line_trailer!();

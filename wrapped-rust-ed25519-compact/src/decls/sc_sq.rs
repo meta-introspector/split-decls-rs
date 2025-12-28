@@ -4,4 +4,4 @@ macro_rules! sc_sq {
     };
 }
 
-sc_sq!()
+sc_sq!();

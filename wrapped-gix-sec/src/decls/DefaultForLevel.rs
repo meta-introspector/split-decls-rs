@@ -11,4 +11,4 @@ macro_rules! DefaultForLevel {
     };
 }
 
-DefaultForLevel!()
+DefaultForLevel!();

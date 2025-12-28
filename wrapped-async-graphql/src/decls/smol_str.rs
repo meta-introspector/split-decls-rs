@@ -4,4 +4,4 @@ macro_rules! smol_str {
     };
 }
 
-smol_str!()
+smol_str!();

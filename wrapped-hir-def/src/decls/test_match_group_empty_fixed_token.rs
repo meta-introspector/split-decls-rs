@@ -14,4 +14,4 @@ fn baz() {}
     };
 }
 
-test_match_group_empty_fixed_token!()
+test_match_group_empty_fixed_token!();

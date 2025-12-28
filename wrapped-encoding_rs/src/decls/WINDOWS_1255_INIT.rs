@@ -12,4 +12,4 @@ macro_rules! WINDOWS_1255_INIT {
     };
 }
 
-WINDOWS_1255_INIT!()
+WINDOWS_1255_INIT!();

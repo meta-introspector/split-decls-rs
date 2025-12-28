@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TimeZoneName!();
-        Error!();
         LocalTimeType!();
+        Error!();
+        TimeZoneName!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_590 {
     };
 }
 
-impl_590!()
+impl_590!();

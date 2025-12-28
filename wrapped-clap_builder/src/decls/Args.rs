@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Id!();
-        FromArgMatches!();
         Command!();
+        FromArgMatches!();
+        Id!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Args {
     };
 }
 
-Args!()
+Args!();

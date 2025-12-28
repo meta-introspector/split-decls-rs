@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Error!();
-        LookupResult!();
-        LookupContinuation!();
-        Context!();
-        Location!();
         LocationRangeIter!();
-        SplitDwarfLoad!();
+        Error!();
+        Context!();
         UnitRef!();
-        LoopingLookup!();
-        Result!();
         FrameIter!();
+        SplitDwarfLoad!();
+        LookupContinuation!();
+        Result!();
+        Location!();
+        LookupResult!();
+        LoopingLookup!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

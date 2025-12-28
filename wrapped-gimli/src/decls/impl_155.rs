@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Result!();
+        Error!();
         AddrEntryIter!();
         Reader!();
-        Error!();
-        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

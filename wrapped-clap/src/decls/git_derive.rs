@@ -4,4 +4,4 @@ macro_rules! git_derive {
     };
 }
 
-git_derive!()
+git_derive!();

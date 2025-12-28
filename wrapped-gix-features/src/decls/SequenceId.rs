@@ -4,4 +4,4 @@ macro_rules! SequenceId {
     };
 }
 
-SequenceId!()
+SequenceId!();

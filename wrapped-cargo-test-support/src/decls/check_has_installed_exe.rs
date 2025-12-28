@@ -4,4 +4,4 @@ macro_rules! check_has_installed_exe {
     };
 }
 
-check_has_installed_exe!()
+check_has_installed_exe!();

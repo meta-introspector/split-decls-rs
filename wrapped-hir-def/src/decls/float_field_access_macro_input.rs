@@ -32,4 +32,4 @@ fn foo() {
     };
 }
 
-float_field_access_macro_input!()
+float_field_access_macro_input!();

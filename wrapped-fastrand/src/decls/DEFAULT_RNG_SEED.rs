@@ -4,4 +4,4 @@ macro_rules! DEFAULT_RNG_SEED {
     };
 }
 
-DEFAULT_RNG_SEED!()
+DEFAULT_RNG_SEED!();

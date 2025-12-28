@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Endianness!();
+        Reader!();
         IntegerType!();
         DecodeError!();
-        Reader!();
-        Endianness!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! varint_decode_u32 {
     };
 }
 
-varint_decode_u32!()
+varint_decode_u32!();

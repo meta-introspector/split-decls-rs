@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Comment!();
-        Attribute!();
         Entry!();
-        Identifier!();
         InlineExpression!();
-        Term!();
-        ParserError!();
-        Resource!();
-        Level!();
-        Variant!();
-        Result!();
-        Expression!();
-        Slice!();
-        VariantKey!();
         Message!();
+        Slice!();
+        Result!();
+        VariantKey!();
+        Term!();
+        Resource!();
+        Variant!();
+        Identifier!();
+        Attribute!();
+        Level!();
+        Expression!();
+        ParserError!();
+        Comment!();
+        Parser!();
         ErrorKind!();
     };
 }
@@ -27,4 +27,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

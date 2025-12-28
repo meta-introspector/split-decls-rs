@@ -4,4 +4,4 @@ macro_rules! non_fuzz_debug_assert {
     };
 }
 
-non_fuzz_debug_assert!()
+non_fuzz_debug_assert!();

@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        EnvNotDefinedWithUserMessage!();
+        EnvTakesArgs!();
+        EnvNotUnicode!();
+        EnvNotDefined!();
+    };
+}
+
+macro_rules! expand_env {
+    () => {
+        deps!();
+        pub (crate) fn expand_env < 'cx > (cx : & 'cx mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'cx > { let ExpandResult :: Ready (mac) = get_exprs_from_tts (cx , tts) else { return ExpandResult :: Retry (()) ; } ; let mut exprs = match mac { Ok (exprs) if exprs . is_empty () || exprs . len () > 2 => { let guar = cx . dcx () . emit_err (errors :: EnvTakesArgs { span : sp }) ; return ExpandResult :: Ready (DummyResult :: any (sp , guar)) ; } Err (guar) => return ExpandResult :: Ready (DummyResult :: any (sp , guar)) , Ok (exprs) => exprs . into_iter () , } ; let var_expr = exprs . next () . unwrap () ; let ExpandResult :: Ready (mac) = expr_to_string (cx , var_expr . clone () , "expected string literal") else { return ExpandResult :: Retry (()) ; } ; let var = match mac { Ok ((var , _)) => var , Err (guar) => return ExpandResult :: Ready (DummyResult :: any (sp , guar)) , } ; let custom_msg = match exprs . next () { None => None , Some (second) => { let ExpandResult :: Ready (mac) = expr_to_string (cx , second , "expected string literal") else { return ExpandResult :: Retry (()) ; } ; match mac { Ok ((s , _)) => Some (s) , Err (guar) => return ExpandResult :: Ready (DummyResult :: any (sp , guar)) , } } } ; let span = cx . with_def_site_ctxt (sp) ; let value = lookup_env (cx , var) ; cx . sess . psess . env_depinfo . borrow_mut () . insert ((var , value . as_ref () . ok () . copied ())) ; let e = match value { Err (err) => { let ExprKind :: Lit (token :: Lit { kind : LitKind :: Str | LitKind :: StrRaw (..) , symbol , .. }) = & var_expr . kind else { unreachable ! ("`expr_to_string` ensures this is a string lit") } ; let guar = match err { VarError :: NotPresent => { if let Some (msg_from_user) = custom_msg { cx . dcx () . emit_err (errors :: EnvNotDefinedWithUserMessage { span , msg_from_user }) } else if is_cargo_env_var (var . as_str ()) { cx . dcx () . emit_err (errors :: EnvNotDefined :: CargoEnvVar { span , var : * symbol , var_expr : & var_expr , }) } else { cx . dcx () . emit_err (errors :: EnvNotDefined :: CustomEnvVar { span , var : * symbol , var_expr : & var_expr , }) } } VarError :: NotUnicode (_) => { cx . dcx () . emit_err (errors :: EnvNotUnicode { span , var : * symbol }) } } ; return ExpandResult :: Ready (DummyResult :: any (sp , guar)) ; } Ok (value) => cx . expr_str (span , value) , } ; ExpandResult :: Ready (MacEager :: expr (e)) }
+    };
+}
+
+expand_env!()

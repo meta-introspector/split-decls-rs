@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProgramKind!();
         ReadStdoutFailOnError!();
+        ProgramKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! supervise_stderr {
     };
 }
 
-supervise_stderr!()
+supervise_stderr!();

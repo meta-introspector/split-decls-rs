@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        WinconStream!();
         StripStream!();
-        AutoStream!();
-        StreamInner!();
         RawStream!();
+        StreamInner!();
+        AutoStream!();
+        WinconStream!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_96 {
     };
 }
 
-impl_96!()
+impl_96!();

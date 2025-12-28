@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MatchesError!();
-        MatchedArg!();
-        ArgMatches!();
         Id!();
-        AnyValueId!();
         Result!();
+        AnyValueId!();
+        MatchedArg!();
         SubCommand!();
+        ArgMatches!();
+        MatchesError!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_442 {
     };
 }
 
-impl_442!()
+impl_442!();

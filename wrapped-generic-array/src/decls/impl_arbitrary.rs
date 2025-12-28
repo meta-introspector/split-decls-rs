@@ -4,4 +4,4 @@ macro_rules! impl_arbitrary {
     };
 }
 
-impl_arbitrary!()
+impl_arbitrary!();

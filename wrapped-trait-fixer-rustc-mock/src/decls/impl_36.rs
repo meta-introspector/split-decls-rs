@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MockSubsts!();
-        MockEarlyBinder!();
-        MockTy!();
         TyCtxt!();
+        MockSubsts!();
+        MockTy!();
+        MockEarlyBinder!();
     };
 }
 

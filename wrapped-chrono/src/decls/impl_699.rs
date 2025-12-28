@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Weekday!();
         OutOfRange!();
         Error!();
-        Weekday!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_699 {
     };
 }
 
-impl_699!()
+impl_699!();

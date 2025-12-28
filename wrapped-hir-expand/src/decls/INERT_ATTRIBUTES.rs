@@ -27,4 +27,4 @@ macro_rules! INERT_ATTRIBUTES {
     };
 }
 
-INERT_ATTRIBUTES!()
+INERT_ATTRIBUTES!();

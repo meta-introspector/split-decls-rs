@@ -4,4 +4,4 @@ macro_rules! deferred {
     };
 }
 
-deferred!()
+deferred!();

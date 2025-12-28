@@ -4,4 +4,4 @@ macro_rules! validate_alt_upload {
     };
 }
 
-validate_alt_upload!()
+validate_alt_upload!();

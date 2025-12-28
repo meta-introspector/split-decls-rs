@@ -4,4 +4,4 @@ macro_rules! unix {
     };
 }
 
-unix!()
+unix!();

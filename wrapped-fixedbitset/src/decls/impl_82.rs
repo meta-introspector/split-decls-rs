@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        IntoOnes!();
-        SymmetricDifference!();
+        Union!();
         Masks!();
-        Block!();
-        IndexRange!();
         Ones!();
         Difference!();
-        Zeroes!();
         Intersection!();
+        Block!();
+        SymmetricDifference!();
+        IntoOnes!();
+        Zeroes!();
+        IndexRange!();
         FixedBitSet!();
-        Union!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

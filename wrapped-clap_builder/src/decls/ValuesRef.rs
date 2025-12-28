@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Arg!();
-        AnyValue!();
-        Iter!();
         ArgAction!();
+        Iter!();
+        AnyValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ValuesRef {
     };
 }
 
-ValuesRef!()
+ValuesRef!();

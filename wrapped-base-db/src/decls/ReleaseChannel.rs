@@ -4,4 +4,4 @@ macro_rules! ReleaseChannel {
     };
 }
 
-ReleaseChannel!()
+ReleaseChannel!();

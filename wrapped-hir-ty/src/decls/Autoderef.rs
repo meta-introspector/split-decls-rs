@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GeneralAutoderef!();
-        AutoderefKind!();
         DefaultAutoderefCtx!();
+        AutoderefKind!();
+        GeneralAutoderef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Autoderef {
     };
 }
 
-Autoderef!()
+Autoderef!();

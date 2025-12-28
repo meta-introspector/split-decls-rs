@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ID!();
-        Object!();
-        FurColor!();
         ComplicatedArgs!();
         ComplexInput!();
+        Object!();
+        FurColor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        MonoItems!();
+    };
+}
+
+macro_rules! visit_instance_use {
+    () => {
+        deps!();
+        fn visit_instance_use < 'tcx > (tcx : TyCtxt < 'tcx > , instance : ty :: Instance < 'tcx > , is_direct_call : bool , source : Span , output : & mut MonoItems < 'tcx > ,) { debug ! ("visit_item_use({:?}, is_direct_call={:?})" , instance , is_direct_call) ; if ! tcx . should_codegen_locally (instance) { return ; } if let Some (intrinsic) = tcx . intrinsic (instance . def_id ()) { collect_autodiff_fn (tcx , instance , intrinsic , output) ; if let Some (_requirement) = ValidityRequirement :: from_intrinsic (intrinsic . name) { let def_id = tcx . require_lang_item (LangItem :: PanicNounwind , source) ; let panic_instance = Instance :: mono (tcx , def_id) ; if tcx . should_codegen_locally (panic_instance) { output . push (create_fn_mono_item (tcx , panic_instance , source)) ; } } else if ! intrinsic . must_be_overridden { let instance = ty :: Instance :: new_raw (instance . def_id () , instance . args) ; if tcx . should_codegen_locally (instance) { output . push (create_fn_mono_item (tcx , instance , source)) ; } } } match instance . def { ty :: InstanceKind :: Virtual (..) | ty :: InstanceKind :: Intrinsic (_) => { if ! is_direct_call { bug ! ("{:?} being reified" , instance) ; } } ty :: InstanceKind :: ThreadLocalShim (..) => { bug ! ("{:?} being reified" , instance) ; } ty :: InstanceKind :: DropGlue (_ , None) => { if ! is_direct_call { output . push (create_fn_mono_item (tcx , instance , source)) ; } } ty :: InstanceKind :: DropGlue (_ , Some (_)) | ty :: InstanceKind :: FutureDropPollShim (..) | ty :: InstanceKind :: AsyncDropGlue (_ , _) | ty :: InstanceKind :: AsyncDropGlueCtorShim (_ , _) | ty :: InstanceKind :: VTableShim (..) | ty :: InstanceKind :: ReifyShim (..) | ty :: InstanceKind :: ClosureOnceShim { .. } | ty :: InstanceKind :: ConstructCoroutineInClosureShim { .. } | ty :: InstanceKind :: Item (..) | ty :: InstanceKind :: FnPtrShim (..) | ty :: InstanceKind :: CloneShim (..) | ty :: InstanceKind :: FnPtrAddrShim (..) => { output . push (create_fn_mono_item (tcx , instance , source)) ; } } }
+    };
+}
+
+visit_instance_use!()

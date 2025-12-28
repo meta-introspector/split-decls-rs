@@ -4,4 +4,4 @@ macro_rules! author {
     };
 }
 
-author!()
+author!();

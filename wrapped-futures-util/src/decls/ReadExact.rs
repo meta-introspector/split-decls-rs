@@ -4,4 +4,4 @@ macro_rules! ReadExact {
     };
 }
 
-ReadExact!()
+ReadExact!();

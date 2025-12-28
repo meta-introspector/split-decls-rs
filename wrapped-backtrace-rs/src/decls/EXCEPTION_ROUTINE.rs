@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CONTEXT!();
         EXCEPTION_RECORD!();
         EXCEPTION_DISPOSITION!();
+        CONTEXT!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EXCEPTION_ROUTINE {
     };
 }
 
-EXCEPTION_ROUTINE!()
+EXCEPTION_ROUTINE!();

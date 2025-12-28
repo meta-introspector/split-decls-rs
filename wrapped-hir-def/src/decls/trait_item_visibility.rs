@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
         Visibility!();
+        DefDatabase!();
         ItemContainerId!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! trait_item_visibility {
     };
 }
 
-trait_item_visibility!()
+trait_item_visibility!();

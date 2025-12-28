@@ -4,4 +4,4 @@ macro_rules! json_object {
     };
 }
 
-json_object!()
+json_object!();

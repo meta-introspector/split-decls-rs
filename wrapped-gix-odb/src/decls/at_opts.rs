@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Options!();
-        Store!();
         Cache!();
+        Options!();
         Handle!();
+        Store!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! at_opts {
     };
 }
 
-at_opts!()
+at_opts!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         Buf!();
         ConfigLevel!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_search_path {
     };
 }
 
-get_search_path!()
+get_search_path!();

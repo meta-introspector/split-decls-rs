@@ -1,0 +1,7 @@
+macro_rules! macro_296 {
+    () => {
+        declare_tool_lint ! { pub rustc :: SPAN_USE_EQ_CTXT , Allow , "forbid uses of `==` with `Span::ctxt`, suggest `Span::eq_ctxt` instead" , report_in_external_macro : true }
+    };
+}
+
+macro_296!()

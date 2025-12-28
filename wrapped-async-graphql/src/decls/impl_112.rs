@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BatchResponse!();
         CacheControl!();
         Response!();
+        BatchResponse!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

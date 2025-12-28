@@ -11,4 +11,4 @@ macro_rules! load_section {
     };
 }
 
-load_section!()
+load_section!();

@@ -1,12 +1,21 @@
 macro_rules! deps {
     () => {
-        KnownLayout!();
-        IntoBytes!();
-        Unaligned!();
-        Immutable!();
-        FromBytes!();
-        FromZeros!();
         TryFromBytes!();
+        TrailingSliceLayout!();
+        DstLayout!();
+        IntoBytes!();
+        Read!();
+        Immutable!();
+        FromZeros!();
+        AllocError!();
+        Validity!();
+        SliceDst!();
+        KnownLayout!();
+        TryReadError!();
+        Alignment!();
+        Unaligned!();
+        FromBytes!();
+        SizeInfo!();
     };
 }
 

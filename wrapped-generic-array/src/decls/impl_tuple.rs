@@ -11,4 +11,4 @@ macro_rules! impl_tuple {
     };
 }
 
-impl_tuple!()
+impl_tuple!();

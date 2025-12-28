@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         NotifyEvent!();
-        Message!();
-        NotifyActor!();
         Event!();
+        NotifyActor!();
+        Message!();
     };
 }
 

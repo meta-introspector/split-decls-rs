@@ -4,4 +4,4 @@ macro_rules! ecdsa_oid_for_digest {
     };
 }
 
-ecdsa_oid_for_digest!()
+ecdsa_oid_for_digest!();

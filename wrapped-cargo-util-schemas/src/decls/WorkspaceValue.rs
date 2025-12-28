@@ -4,4 +4,4 @@ macro_rules! WorkspaceValue {
     };
 }
 
-WorkspaceValue!()
+WorkspaceValue!();

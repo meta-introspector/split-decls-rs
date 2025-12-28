@@ -4,4 +4,4 @@ macro_rules! repl_derive {
     };
 }
 
-repl_derive!()
+repl_derive!();

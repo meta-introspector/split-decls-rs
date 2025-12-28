@@ -4,4 +4,4 @@ macro_rules! known_argument_names {
     };
 }
 
-known_argument_names!()
+known_argument_names!();

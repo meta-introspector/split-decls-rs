@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Parker!();
-        Unparker!();
         UnparkReason!();
+        Unparker!();
+        Parker!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

@@ -4,4 +4,4 @@ macro_rules! specialized {
     };
 }
 
-specialized!()
+specialized!();

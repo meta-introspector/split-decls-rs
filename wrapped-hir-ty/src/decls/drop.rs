@@ -4,4 +4,4 @@ macro_rules! drop {
     };
 }
 
-drop!()
+drop!();

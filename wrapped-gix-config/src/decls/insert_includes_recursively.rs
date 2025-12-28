@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         SectionId!();
-        Metadata!();
-        Options!();
         File!();
         Error!();
+        Options!();
+        Metadata!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! insert_includes_recursively {
     };
 }
 
-insert_includes_recursively!()
+insert_includes_recursively!();

@@ -11,4 +11,4 @@ macro_rules! _is_object_safe {
     };
 }
 
-_is_object_safe!()
+_is_object_safe!();

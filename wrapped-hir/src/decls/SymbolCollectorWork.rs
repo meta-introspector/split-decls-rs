@@ -4,4 +4,4 @@ macro_rules! SymbolCollectorWork {
     };
 }
 
-SymbolCollectorWork!()
+SymbolCollectorWork!();

@@ -19,4 +19,4 @@ macro_rules! match_with_without {
     };
 }
 
-match_with_without!()
+match_with_without!();

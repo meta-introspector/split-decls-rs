@@ -12,4 +12,4 @@ macro_rules! ascii_compatible_encoder_functions {
     };
 }
 
-ascii_compatible_encoder_functions!()
+ascii_compatible_encoder_functions!();

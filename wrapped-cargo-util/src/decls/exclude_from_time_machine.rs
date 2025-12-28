@@ -4,4 +4,4 @@ macro_rules! exclude_from_time_machine {
     };
 }
 
-exclude_from_time_machine!()
+exclude_from_time_machine!();

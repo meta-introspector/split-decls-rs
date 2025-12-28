@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         GenericHkdfExtract!();
+        InvalidLength!();
+        GenericHkdf!();
         Hkdf!();
         InvalidPrkLength!();
-        InvalidLength!();
         HmacImpl!();
-        GenericHkdf!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

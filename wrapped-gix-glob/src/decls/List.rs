@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pattern!();
         Mapping!();
+        Pattern!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! List {
     };
 }
 
-List!()
+List!();

@@ -4,4 +4,4 @@ macro_rules! assert_load_ordering {
     };
 }
 
-assert_load_ordering!()
+assert_load_ordering!();

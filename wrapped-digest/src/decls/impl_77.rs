@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExtendableOutput!();
-        XofFixedWrapper!();
         MacMarker!();
+        XofFixedWrapper!();
+        ExtendableOutput!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

@@ -4,4 +4,4 @@ macro_rules! DiffFormatEmailOptions {
     };
 }
 
-DiffFormatEmailOptions!()
+DiffFormatEmailOptions!();

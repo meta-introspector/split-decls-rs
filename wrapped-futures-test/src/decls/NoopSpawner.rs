@@ -4,4 +4,4 @@ macro_rules! NoopSpawner {
     };
 }
 
-NoopSpawner!()
+NoopSpawner!();

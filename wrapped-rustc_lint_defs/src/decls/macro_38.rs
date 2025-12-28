@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FutureIncompatibleInfo!();
+        FutureIncompatibilityReason!();
+    };
+}
+
+macro_rules! macro_38 {
+    () => {
+        deps!();
+        declare_lint ! { # [doc = " The `patterns_in_fns_without_body` lint detects `mut` identifier"] # [doc = " patterns as a parameter in functions without a body."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " trait Trait {"] # [doc = "     fn foo(mut arg: u8);"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " To fix this, remove `mut` from the parameter in the trait definition;"] # [doc = " it can be used in the implementation. That is, the following is OK:"] # [doc = ""] # [doc = " ```rust"] # [doc = " trait Trait {"] # [doc = "     fn foo(arg: u8); // Removed `mut` here"] # [doc = " }"] # [doc = ""] # [doc = " impl Trait for i32 {"] # [doc = "     fn foo(mut arg: u8) { // `mut` here is OK"] # [doc = ""] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " Trait definitions can define functions without a body to specify a"] # [doc = " function that implementors must define. The parameter names in the"] # [doc = " body-less functions are only allowed to be `_` or an [identifier] for"] # [doc = " documentation purposes (only the type is relevant). Previous versions"] # [doc = " of the compiler erroneously allowed [identifier patterns] with the"] # [doc = " `mut` keyword, but this was not intended to be allowed. This is a"] # [doc = " [future-incompatible] lint to transition this to a hard error in the"] # [doc = " future. See [issue #35203] for more details."] # [doc = ""] # [doc = " [identifier]: https://doc.rust-lang.org/reference/identifiers.html"] # [doc = " [identifier patterns]: https://doc.rust-lang.org/reference/patterns.html#identifier-patterns"] # [doc = " [issue #35203]: https://github.com/rust-lang/rust/issues/35203"] # [doc = " [future-incompatible]: ../index.md#future-incompatible-lints"] pub PATTERNS_IN_FNS_WITHOUT_BODY , Deny , "patterns in functions without body were erroneously allowed" , @ future_incompatible = FutureIncompatibleInfo { reason : FutureIncompatibilityReason :: FutureReleaseError , reference : "issue #35203 <https://github.com/rust-lang/rust/issues/35203>" , } ; }
+    };
+}
+
+macro_38!()

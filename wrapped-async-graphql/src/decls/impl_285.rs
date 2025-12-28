@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        RuleError!();
-        ServerResult!();
         Registry!();
-        Field!();
-        InputType!();
+        RuleError!();
         VisitorContext!();
+        InputType!();
         ServerError!();
         MetaType!();
+        ServerResult!();
         MetaTypeName!();
+        Field!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_285 {
     };
 }
 
-impl_285!()
+impl_285!();

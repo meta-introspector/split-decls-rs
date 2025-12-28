@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Block!();
+        TryRecvError!();
         TrySendError!();
+        Selected!();
+        Context!();
+        SendTimeoutError!();
+        RecvTimeoutError!();
+        Receiver!();
+        Position!();
+        Operation!();
+        Channel!();
+        Sender!();
         Token!();
         SyncWaker!();
-        RecvTimeoutError!();
-        Sender!();
-        SendTimeoutError!();
-        Channel!();
-        Selected!();
         Timeout!();
-        Operation!();
-        Position!();
-        Context!();
-        Receiver!();
-        TryRecvError!();
+        Block!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

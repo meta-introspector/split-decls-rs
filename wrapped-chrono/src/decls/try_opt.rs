@@ -4,4 +4,4 @@ macro_rules! try_opt {
     };
 }
 
-try_opt!()
+try_opt!();

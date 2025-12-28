@@ -4,4 +4,4 @@ macro_rules! extract_doc_comment {
     };
 }
 
-extract_doc_comment!()
+extract_doc_comment!();

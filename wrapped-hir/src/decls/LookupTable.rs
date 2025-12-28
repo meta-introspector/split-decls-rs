@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Type!();
-        NewTypesKey!();
-        AlternativeExprs!();
         ScopeDef!();
+        Type!();
+        AlternativeExprs!();
+        NewTypesKey!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! LookupTable {
     };
 }
 
-LookupTable!()
+LookupTable!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         RawLocListEntry!();
-        LocListsFormat!();
         RawLocListIter!();
         Reader!();
         Result!();
+        Encoding!();
+        LocListsFormat!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_462 {
     };
 }
 
-impl_462!()
+impl_462!();

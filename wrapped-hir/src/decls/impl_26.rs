@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Variant!();
-        Module!();
-        Trait!();
-        Macro!();
-        Function!();
-        ModuleDef!();
-        Adt!();
         Static!();
+        Module!();
+        Adt!();
+        ModuleDef!();
+        Variant!();
+        Macro!();
         Const!();
         TypeAlias!();
         BuiltinType!();
+        Trait!();
+        Function!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

@@ -11,4 +11,4 @@ macro_rules! fiat_25519_scalar_from_bytes {
     };
 }
 
-fiat_25519_scalar_from_bytes!()
+fiat_25519_scalar_from_bytes!();

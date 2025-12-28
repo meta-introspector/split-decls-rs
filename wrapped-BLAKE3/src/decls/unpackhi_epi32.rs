@@ -4,4 +4,4 @@ macro_rules! unpackhi_epi32 {
     };
 }
 
-unpackhi_epi32!()
+unpackhi_epi32!();

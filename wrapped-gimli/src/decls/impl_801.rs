@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         Error!();
-        DebugInfoFixup!();
-        Unit!();
-        Sections!();
-        UnitTable!();
-        DebugInfo!();
-        Writer!();
-        Result!();
-        AbbreviationTable!();
         SectionId!();
+        Sections!();
+        Writer!();
+        DebugInfoFixup!();
+        AbbreviationTable!();
+        Result!();
+        DebugInfo!();
+        UnitTable!();
+        Unit!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_801 {
     };
 }
 
-impl_801!()
+impl_801!();

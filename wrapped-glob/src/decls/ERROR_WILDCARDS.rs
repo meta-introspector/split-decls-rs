@@ -4,4 +4,4 @@ macro_rules! ERROR_WILDCARDS {
     };
 }
 
-ERROR_WILDCARDS!()
+ERROR_WILDCARDS!();

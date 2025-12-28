@@ -4,4 +4,4 @@ macro_rules! is_escapable {
     };
 }
 
-is_escapable!()
+is_escapable!();

@@ -1,5 +1,13 @@
+macro_rules! deps {
+    () => {
+        Channel!();
+        Version!();
+    };
+}
+
 macro_rules! tests {
     () => {
+        deps!();
         # [cfg (test)] mod tests { use std :: { env , fs } ; use super :: version_and_date_from_rustc_verbose_version ; use super :: version_and_date_from_rustc_version ; macro_rules ! check_parse { (@ $ f : expr , $ s : expr => $ v : expr , $ d : expr) => ({ if let (Some (v) , d) = $ f (&$ s) { let e_d : Option <& str > = $ d . into () ; assert_eq ! ((v , d) , ($ v . to_string () , e_d . map (| s | s . into ()))) ; } else { panic ! ("{:?} didn't parse for version testing." , $ s) ; } }) ; ($ f : expr , $ s : expr => $ v : expr , $ d : expr) => ({ let warn = "warning: invalid logging spec 'warning', ignoring it" ; let warn2 = "warning: sorry, something went wrong :(sad)" ; check_parse ! (@ $ f , $ s => $ v , $ d) ; check_parse ! (@ $ f , & format ! ("{}\n{}" , warn , $ s) => $ v , $ d) ; check_parse ! (@ $ f , & format ! ("{}\n{}" , warn2 , $ s) => $ v , $ d) ; check_parse ! (@ $ f , & format ! ("{}\n{}\n{}" , warn , warn2 , $ s) => $ v , $ d) ; check_parse ! (@ $ f , & format ! ("{}\n{}\n{}" , warn2 , warn , $ s) => $ v , $ d) ; }) } macro_rules ! check_terse_parse { ($ ($ s : expr => $ v : expr , $ d : expr ,) +) => { $ (check_parse ! (version_and_date_from_rustc_version , $ s => $ v , $ d) ;) + } } macro_rules ! check_verbose_parse { ($ ($ s : expr => $ v : expr , $ d : expr ,) +) => { $ (check_parse ! (version_and_date_from_rustc_verbose_version , $ s => $ v , $ d) ;) + } } # [test] fn test_version_parse () { check_terse_parse ! { "rustc 1.18.0" => "1.18.0" , None , "rustc 1.8.0" => "1.8.0" , None , "rustc 1.20.0-nightly" => "1.20.0-nightly" , None , "rustc 1.20" => "1.20" , None , "rustc 1.3" => "1.3" , None , "rustc 1" => "1" , None , "rustc 1.5.1-beta" => "1.5.1-beta" , None , "rustc 1.20.0 (2017-07-09)" => "1.20.0" , Some ("2017-07-09") , "rustc 1.20.0-dev (2017-07-09)" => "1.20.0-dev" , Some ("2017-07-09") , "rustc 1.20.0-nightly (d84693b93 2017-07-09)" => "1.20.0-nightly" , Some ("2017-07-09") , "rustc 1.20.0 (d84693b93 2017-07-09)" => "1.20.0" , Some ("2017-07-09") , "rustc 1.30.0-nightly (3bc2ca7e4 2018-09-20)" => "1.30.0-nightly" , Some ("2018-09-20") , } ; } # [test] fn test_verbose_version_parse () { check_verbose_parse ! { "rustc 1.0.0 (a59de37e9 2015-05-13) (built 2015-05-14)\n\
                 binary: rustc\n\
                 commit-hash: a59de37e99060162a2674e3ff45409ac73595c0e\n\

@@ -4,4 +4,4 @@ macro_rules! EnterError {
     };
 }
 
-EnterError!()
+EnterError!();

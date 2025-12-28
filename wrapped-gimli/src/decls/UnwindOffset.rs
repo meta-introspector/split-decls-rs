@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReaderOffset!();
         UnwindSection!();
+        ReaderOffset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UnwindOffset {
     };
 }
 
-UnwindOffset!()
+UnwindOffset!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Token!();
-        TryRecvError!();
-        RecvTimeoutError!();
         Timeout!();
         Channel!();
+        TryRecvError!();
+        Token!();
+        RecvTimeoutError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

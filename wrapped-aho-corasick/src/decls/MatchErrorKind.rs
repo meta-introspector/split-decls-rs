@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MatchError!();
         MatchKind!();
+        MatchError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MatchErrorKind {
     };
 }
 
-MatchErrorKind!()
+MatchErrorKind!();

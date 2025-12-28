@@ -3,8 +3,8 @@ macro_rules! deps {
         Encode!();
         SerdeEncoder!();
         EncodeError!();
-        BorrowCompat!();
         Encoder!();
+        BorrowCompat!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_192 {
     };
 }
 
-impl_192!()
+impl_192!();

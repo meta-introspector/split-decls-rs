@@ -4,4 +4,4 @@ macro_rules! CHUNK_START {
     };
 }
 
-CHUNK_START!()
+CHUNK_START!();

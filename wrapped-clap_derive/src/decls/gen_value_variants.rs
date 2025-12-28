@@ -4,4 +4,4 @@ macro_rules! gen_value_variants {
     };
 }
 
-gen_value_variants!()
+gen_value_variants!();

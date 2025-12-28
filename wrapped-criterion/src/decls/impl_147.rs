@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        SummaryContext!();
-        Plot!();
-        SavedSample!();
-        PlotData!();
-        Comparison!();
-        IndividualBenchmark!();
-        Html!();
-        ComparisonResult!();
-        ValueFormatter!();
-        MeasurementData!();
-        ReportContext!();
-        ConfidenceInterval!();
-        BenchmarkId!();
         PlotContext!();
+        SummaryContext!();
+        ComparisonResult!();
+        MeasurementData!();
+        Plot!();
+        ConfidenceInterval!();
+        IndividualBenchmark!();
+        ReportContext!();
+        ValueFormatter!();
+        Comparison!();
+        PlotData!();
+        Html!();
+        BenchmarkId!();
+        SavedSample!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_147 {
     };
 }
 
-impl_147!()
+impl_147!();

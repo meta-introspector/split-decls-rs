@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Action!();
-        Tracker!();
-        Error!();
+        State!();
         ChangeRef!();
         RewriteOptions!();
-        State!();
+        Tracker!();
+        Action!();
+        Error!();
         Outcome!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! diff {
     };
 }
 
-diff!()
+diff!();

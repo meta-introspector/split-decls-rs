@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Note!();
-        Oid!();
         Binding!();
+        Note!();
         Signature!();
+        Oid!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_468 {
     };
 }
 
-impl_468!()
+impl_468!();

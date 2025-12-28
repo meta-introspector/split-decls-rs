@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        TranslationBundleError!();
+        IntoDiagArg!();
+        DiagArgValue!();
     };
 }
 
 macro_rules! impl_4 {
     () => {
         deps!();
-        impl fmt :: Display for TranslationBundleError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { TranslationBundleError :: ReadFtl (e) => write ! (f , "could not read ftl file: {e}") , TranslationBundleError :: ParseFtl (e) => { write ! (f , "could not parse ftl file: {e}") } TranslationBundleError :: AddResource (e) => write ! (f , "failed to add resource: {e}") , TranslationBundleError :: MissingLocale => write ! (f , "missing locale directory") , TranslationBundleError :: ReadLocalesDir (e) => { write ! (f , "could not read locales dir: {e}") } TranslationBundleError :: ReadLocalesDirEntry (e) => { write ! (f , "could not read locales dir entry: {e}") } TranslationBundleError :: LocaleIsNotDir => { write ! (f , "`$sysroot/share/locales/$locale` is not a directory") } } } }
+        impl < 'a , T : Clone + IntoDiagArg > IntoDiagArg for & 'a T { fn into_diag_arg (self , path : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { self . clone () . into_diag_arg (path) } }
     };
 }
 

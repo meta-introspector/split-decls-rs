@@ -11,4 +11,4 @@ macro_rules! write_colored {
     };
 }
 
-write_colored!()
+write_colored!();

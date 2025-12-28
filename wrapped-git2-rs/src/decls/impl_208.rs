@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         BlameOptions!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_208 {
     };
 }
 
-impl_208!()
+impl_208!();

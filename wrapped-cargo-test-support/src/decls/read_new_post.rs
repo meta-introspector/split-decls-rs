@@ -4,4 +4,4 @@ macro_rules! read_new_post {
     };
 }
 
-read_new_post!()
+read_new_post!();

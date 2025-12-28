@@ -1,5 +1,12 @@
+macro_rules! deps {
+    () => {
+        SyntaxNode!();
+    };
+}
+
 macro_rules! api_walkthrough {
     () => {
+        deps!();
         # [doc = " This test does not assert anything and instead just shows off the crate's"] # [doc = " API."] # [test] fn api_walkthrough () { use ast :: { HasModuleItem , HasName } ; let source_code = "
         fn foo() {
             1 + 1

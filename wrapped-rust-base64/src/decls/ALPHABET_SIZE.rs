@@ -4,4 +4,4 @@ macro_rules! ALPHABET_SIZE {
     };
 }
 
-ALPHABET_SIZE!()
+ALPHABET_SIZE!();

@@ -12,4 +12,4 @@ macro_rules! predicate_references_self {
     };
 }
 
-predicate_references_self!()
+predicate_references_self!();

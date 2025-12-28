@@ -4,4 +4,4 @@ macro_rules! atomic_waker {
     };
 }
 
-atomic_waker!()
+atomic_waker!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Protocol!();
-        Transport!();
         Http!();
+        Transport!();
+        Protocol!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! connect_http {
     };
 }
 
-connect_http!()
+connect_http!();

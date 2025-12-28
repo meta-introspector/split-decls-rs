@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BenchmarkGroup!();
         Criterion!();
-        Bencher!();
         BenchmarkId!();
+        Bencher!();
         Measurement!();
+        BenchmarkGroup!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_404 {
     };
 }
 
-impl_404!()
+impl_404!();

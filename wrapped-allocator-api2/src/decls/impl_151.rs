@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Vec!();
         RawVec!();
         Drain!();
-        Vec!();
         Box!();
         TryReserveError!();
         Allocator!();
@@ -16,4 +16,4 @@ macro_rules! impl_151 {
     };
 }
 
-impl_151!()
+impl_151!();

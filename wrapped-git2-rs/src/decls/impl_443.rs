@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MessageTrailersStrs!();
         Convert!();
-        MessageTrailersStrsIterator!();
+        MessageTrailersStrs!();
         MessageTrailersBytes!();
+        MessageTrailersStrsIterator!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_443 {
     };
 }
 
-impl_443!()
+impl_443!();

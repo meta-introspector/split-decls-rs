@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        AbbreviationTable!();
-        LineProgram!();
-        Unit!();
-        DwarfUnit!();
         LineString!();
-        Encoding!();
-        Result!();
         Sections!();
+        AbbreviationTable!();
+        Result!();
+        DwarfUnit!();
+        LineProgram!();
+        Encoding!();
+        Unit!();
         Writer!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_740 {
     };
 }
 
-impl_740!()
+impl_740!();

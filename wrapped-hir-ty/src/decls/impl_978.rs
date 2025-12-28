@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
         OneTraitImplsBuilder!();
         TraitImpls!();
+        HirDatabase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_978 {
     };
 }
 
-impl_978!()
+impl_978!();

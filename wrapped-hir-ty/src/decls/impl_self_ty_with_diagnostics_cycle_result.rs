@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
         HirDatabase!();
+        EarlyBinder!();
         Diagnostics!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_self_ty_with_diagnostics_cycle_result {
     };
 }
 
-impl_self_ty_with_diagnostics_cycle_result!()
+impl_self_ty_with_diagnostics_cycle_result!();

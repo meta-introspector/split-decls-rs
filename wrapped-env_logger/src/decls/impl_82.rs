@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         SubtleStyle!();
-        WriteStyle!();
-        StyledValue!();
-        TimestampPrecision!();
         ConfigurableFormatWriter!();
+        StyledValue!();
+        WriteStyle!();
+        TimestampPrecision!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

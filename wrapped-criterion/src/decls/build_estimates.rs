@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Estimate!();
+        ConfidenceInterval!();
         Distributions!();
-        PointEstimates!();
         Distribution!();
         Estimates!();
-        ConfidenceInterval!();
+        PointEstimates!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! build_estimates {
     };
 }
 
-build_estimates!()
+build_estimates!();

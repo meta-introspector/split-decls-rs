@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GeP3!();
         Signature!();
         Hash!();
+        GeP3!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! VerifyingState {
     };
 }
 
-VerifyingState!()
+VerifyingState!();

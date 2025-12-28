@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        WriterThread!();
-        Process!();
-        Context!();
         Operation!();
+        WriterThread!();
         Driver!();
-        ReadFilterOutput!();
-        State!();
-        MaybeDelayed!();
+        Context!();
         Error!();
+        State!();
         Delay!();
+        MaybeDelayed!();
+        Process!();
+        ReadFilterOutput!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

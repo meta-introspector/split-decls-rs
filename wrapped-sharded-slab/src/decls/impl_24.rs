@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Entry!();
+        Config!();
+        RefMut!();
+        Clear!();
     };
 }
 
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl < T , C > PartialEq < T > for Entry < '_ , T , C > where T : PartialEq < T > , C : cfg :: Config , { fn eq (& self , other : & T) -> bool { self . value () . eq (other) } }
+        impl < T , C > std :: ops :: DerefMut for RefMut < '_ , T , C > where T : Clear + Default , C : cfg :: Config , { fn deref_mut (& mut self) -> & mut Self :: Target { unsafe { self . inner . value_mut () } } }
     };
 }
 

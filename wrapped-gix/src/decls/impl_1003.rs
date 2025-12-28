@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Platform!();
         Note!();
+        TrackRenames!();
+        Platform!();
         Submodule!();
-        UntrackedFiles!();
         Ignore!();
-        IndexPersistedOrInMemory!();
         OwnedOrStaticAtomicBool!();
         Sorting!();
-        TrackRenames!();
         Options!();
+        UntrackedFiles!();
+        IndexPersistedOrInMemory!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_1003 {
     };
 }
 
-impl_1003!()
+impl_1003!();

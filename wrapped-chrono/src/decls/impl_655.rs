@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
-        Local!();
         Date!();
+        Local!();
         Utc!();
+        FixedOffset!();
         DateTime!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_655 {
     };
 }
 
-impl_655!()
+impl_655!();

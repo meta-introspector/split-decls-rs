@@ -4,4 +4,4 @@ macro_rules! flag_test {
     };
 }
 
-flag_test!()
+flag_test!();

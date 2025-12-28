@@ -12,4 +12,4 @@ macro_rules! push_negotiation_cb {
     };
 }
 
-push_negotiation_cb!()
+push_negotiation_cb!();

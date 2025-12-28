@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Reader!();
-        Encoding!();
-        RawLocListEntry!();
+        LocListsFormat!();
         Result!();
         DebugAddrIndex!();
-        RawRange!();
         Error!();
-        LocListsFormat!();
+        RawLocListEntry!();
+        RawRange!();
         Expression!();
+        Encoding!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_461 {
     };
 }
 
-impl_461!()
+impl_461!();

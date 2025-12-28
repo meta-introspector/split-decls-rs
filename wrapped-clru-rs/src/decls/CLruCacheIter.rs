@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CLruCache!();
         CLruNode!();
         FixedSizeListIter!();
+        CLruCache!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CLruCacheIter {
     };
 }
 
-CLruCacheIter!()
+CLruCacheIter!();

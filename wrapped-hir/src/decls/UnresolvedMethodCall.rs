@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Function!();
         Type!();
+        Function!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UnresolvedMethodCall {
     };
 }
 
-UnresolvedMethodCall!()
+UnresolvedMethodCall!();

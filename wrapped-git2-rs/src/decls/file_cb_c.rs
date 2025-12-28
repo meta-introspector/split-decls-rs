@@ -12,4 +12,4 @@ macro_rules! file_cb_c {
     };
 }
 
-file_cb_c!()
+file_cb_c!();

@@ -4,4 +4,4 @@ macro_rules! to_unix_separators {
     };
 }
 
-to_unix_separators!()
+to_unix_separators!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HRESULT!();
         MACHINE_ATTRIBUTES!();
+        HRESULT!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_26 {
     };
 }
 
-macro_26!()
+macro_26!();

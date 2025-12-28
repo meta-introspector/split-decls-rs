@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RawSmartSubtransport!();
         RawSmartSubtransportStream!();
         Service!();
+        RawSmartSubtransport!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! subtransport_action {
     };
 }
 
-subtransport_action!()
+subtransport_action!();

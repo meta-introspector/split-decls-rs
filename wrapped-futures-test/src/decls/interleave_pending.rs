@@ -4,4 +4,4 @@ macro_rules! interleave_pending {
     };
 }
 
-interleave_pending!()
+interleave_pending!();

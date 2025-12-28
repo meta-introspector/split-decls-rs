@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        BorrowedSerdeDecoder!();
         Decode!();
-        DecoderImpl!();
         DecodeError!();
-        SliceReader!();
         Config!();
+        SliceReader!();
+        DecoderImpl!();
+        BorrowedSerdeDecoder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! seed_decode_from_slice {
     };
 }
 
-seed_decode_from_slice!()
+seed_decode_from_slice!();

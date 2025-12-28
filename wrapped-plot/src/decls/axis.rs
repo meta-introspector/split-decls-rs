@@ -4,4 +4,4 @@ macro_rules! axis {
     };
 }
 
-axis!()
+axis!();

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        AsCoercionSite!();
+        Expressions!();
+    };
+}
+
+macro_rules! CoerceMany {
+    () => {
+        deps!();
+        # [doc = " CoerceMany encapsulates the pattern you should use when you have"] # [doc = " many expressions that are all getting coerced to a common"] # [doc = " type. This arises, for example, when you have a match (the result"] # [doc = " of each arm is coerced to a common type). It also arises in less"] # [doc = " obvious places, such as when you have many `break foo` expressions"] # [doc = " that target the same loop, or the various `return` expressions in"] # [doc = " a function."] # [doc = ""] # [doc = " The basic protocol is as follows:"] # [doc = ""] # [doc = " - Instantiate the `CoerceMany` with an initial `expected_ty`."] # [doc = "   This will also serve as the \"starting LUB\". The expectation is"] # [doc = "   that this type is something which all of the expressions *must*"] # [doc = "   be coercible to. Use a fresh type variable if needed."] # [doc = " - For each expression whose result is to be coerced, invoke `coerce()` with."] # [doc = "   - In some cases we wish to coerce \"non-expressions\" whose types are implicitly"] # [doc = "     unit. This happens for example if you have a `break` with no expression,"] # [doc = "     or an `if` with no `else`. In that case, invoke `coerce_forced_unit()`."] # [doc = "   - `coerce()` and `coerce_forced_unit()` may report errors. They hide this"] # [doc = "     from you so that you don't have to worry your pretty head about it."] # [doc = "     But if an error is reported, the final type will be `err`."] # [doc = "   - Invoking `coerce()` may cause us to go and adjust the \"adjustments\" on"] # [doc = "     previously coerced expressions."] # [doc = " - When all done, invoke `complete()`. This will return the LUB of"] # [doc = "   all your expressions."] # [doc = "   - WARNING: I don't believe this final type is guaranteed to be"] # [doc = "     related to your initial `expected_ty` in any particular way,"] # [doc = "     although it will typically be a subtype, so you should check it."] # [doc = "   - Invoking `complete()` may cause us to go and adjust the \"adjustments\" on"] # [doc = "     previously coerced expressions."] # [doc = ""] # [doc = " Example:"] # [doc = ""] # [doc = " ```ignore (illustrative)"] # [doc = " let mut coerce = CoerceMany::new(expected_ty);"] # [doc = " for expr in exprs {"] # [doc = "     let expr_ty = fcx.check_expr_with_expectation(expr, expected);"] # [doc = "     coerce.coerce(fcx, &cause, expr, expr_ty);"] # [doc = " }"] # [doc = " let final_ty = coerce.complete(fcx);"] # [doc = " ```"] pub (crate) struct CoerceMany < 'tcx , 'exprs , E : AsCoercionSite > { expected_ty : Ty < 'tcx > , final_ty : Option < Ty < 'tcx > > , expressions : Expressions < 'tcx , 'exprs , E > , pushed : usize , }
+    };
+}
+
+CoerceMany!()

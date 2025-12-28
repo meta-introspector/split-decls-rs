@@ -11,4 +11,4 @@ macro_rules! subtransport_close {
     };
 }
 
-subtransport_close!()
+subtransport_close!();

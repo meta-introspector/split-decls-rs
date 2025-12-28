@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TraceLevel!();
-        TracingCb!();
         Binding!();
+        TracingCb!();
+        TraceLevel!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! tracing_cb_c {
     };
 }
 
-tracing_cb_c!()
+tracing_cb_c!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         ConfigEntry!();
+        Config!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ConfigEntries {
     };
 }
 
-ConfigEntries!()
+ConfigEntries!();

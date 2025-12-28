@@ -4,4 +4,4 @@ macro_rules! TextWriter {
     };
 }
 
-TextWriter!()
+TextWriter!();

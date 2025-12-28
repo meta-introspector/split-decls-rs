@@ -1,0 +1,7 @@
+macro_rules! macro_7 {
+    () => {
+        declare_lint_pass ! (# [doc = " Lint for use of `async fn` in the definition of a publicly-reachable"] # [doc = " trait."] AsyncFnInTrait => [ASYNC_FN_IN_TRAIT]) ;
+    };
+}
+
+macro_7!()

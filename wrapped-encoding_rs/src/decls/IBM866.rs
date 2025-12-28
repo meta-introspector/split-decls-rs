@@ -11,4 +11,4 @@ macro_rules! IBM866 {
     };
 }
 
-IBM866!()
+IBM866!();

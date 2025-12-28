@@ -4,4 +4,4 @@ macro_rules! DirectiveLocation {
     };
 }
 
-DirectiveLocation!()
+DirectiveLocation!();

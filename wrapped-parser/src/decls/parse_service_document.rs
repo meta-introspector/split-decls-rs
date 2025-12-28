@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Rule!();
         Result!();
-        ServiceDocument!();
         PositionCalculator!();
+        ServiceDocument!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_service_document {
     };
 }
 
-parse_service_document!()
+parse_service_document!();

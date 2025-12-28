@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Reflog!();
-        Error!();
         ReflogEntry!();
-        Signature!();
-        ReflogIter!();
-        Binding!();
         Oid!();
+        Error!();
+        ReflogIter!();
+        Signature!();
+        Reflog!();
+        Binding!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_621 {
     };
 }
 
-impl_621!()
+impl_621!();

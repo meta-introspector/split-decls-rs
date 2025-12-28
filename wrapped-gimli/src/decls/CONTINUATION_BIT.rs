@@ -4,4 +4,4 @@ macro_rules! CONTINUATION_BIT {
     };
 }
 
-CONTINUATION_BIT!()
+CONTINUATION_BIT!();

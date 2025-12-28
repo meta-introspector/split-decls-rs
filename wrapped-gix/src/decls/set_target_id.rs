@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Reference!();
-        Object!();
         Error!();
         Note!();
+        Object!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! set_target_id {
     };
 }
 
-set_target_id!()
+set_target_id!();

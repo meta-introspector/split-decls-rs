@@ -4,4 +4,4 @@ macro_rules! rkyv {
     };
 }
 
-rkyv!()
+rkyv!();

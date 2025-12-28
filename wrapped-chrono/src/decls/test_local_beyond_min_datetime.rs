@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
         NaiveDateTime!();
+        FixedOffset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_local_beyond_min_datetime {
     };
 }
 
-test_local_beyond_min_datetime!()
+test_local_beyond_min_datetime!();

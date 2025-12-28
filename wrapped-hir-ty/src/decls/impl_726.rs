@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnTrait!();
         HirDatabase!();
+        FnTrait!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_726 {
     };
 }
 
-impl_726!()
+impl_726!();

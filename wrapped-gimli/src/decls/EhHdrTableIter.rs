@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BaseAddresses!();
-        Reader!();
         ParsedEhFrameHdr!();
+        Reader!();
+        BaseAddresses!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EhHdrTableIter {
     };
 }
 
-EhHdrTableIter!()
+EhHdrTableIter!();

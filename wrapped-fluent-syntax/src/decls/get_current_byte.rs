@@ -4,4 +4,4 @@ macro_rules! get_current_byte {
     };
 }
 
-get_current_byte!()
+get_current_byte!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Level!();
         Snippet!();
+        Level!();
         OptionCow!();
         AnnotationKind!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

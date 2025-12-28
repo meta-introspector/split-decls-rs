@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FluentNumberOptions!();
-        FluentValue!();
         FluentNumber!();
+        FluentValue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! from_num {
     };
 }
 
-from_num!()
+from_num!();

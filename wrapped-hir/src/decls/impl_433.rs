@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         HasContainer!();
-        Function!();
         ItemContainer!();
+        Function!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_433 {
     };
 }
 
-impl_433!()
+impl_433!();

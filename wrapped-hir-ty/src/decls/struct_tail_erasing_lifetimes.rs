@@ -11,4 +11,4 @@ macro_rules! struct_tail_erasing_lifetimes {
     };
 }
 
-struct_tail_erasing_lifetimes!()
+struct_tail_erasing_lifetimes!();

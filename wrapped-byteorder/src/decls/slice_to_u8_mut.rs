@@ -4,4 +4,4 @@ macro_rules! slice_to_u8_mut {
     };
 }
 
-slice_to_u8_mut!()
+slice_to_u8_mut!();

@@ -11,4 +11,4 @@ macro_rules! SHIFT_JIS {
     };
 }
 
-SHIFT_JIS!()
+SHIFT_JIS!();

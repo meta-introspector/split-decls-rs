@@ -4,4 +4,4 @@ macro_rules! test_swap_ordering {
     };
 }
 
-test_swap_ordering!()
+test_swap_ordering!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         WrappedWaker!();
-        SharedPollState!();
         PollStateBomb!();
+        SharedPollState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_530 {
     };
 }
 
-impl_530!()
+impl_530!();

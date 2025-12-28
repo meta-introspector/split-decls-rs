@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        WfCheckingCtxt!();
+    };
+}
+
+macro_rules! enter_wf_checking_ctxt {
+    () => {
+        deps!();
+        pub (super) fn enter_wf_checking_ctxt < 'tcx , F > (tcx : TyCtxt < 'tcx > , body_def_id : LocalDefId , f : F ,) -> Result < () , ErrorGuaranteed > where F : for < 'a > FnOnce (& WfCheckingCtxt < 'a , 'tcx >) -> Result < () , ErrorGuaranteed > , { let param_env = tcx . param_env (body_def_id) ; let infcx = & tcx . infer_ctxt () . build (TypingMode :: non_body_analysis ()) ; let ocx = ObligationCtxt :: new_with_diagnostics (infcx) ; let mut wfcx = WfCheckingCtxt { ocx , body_def_id , param_env } ; if ! tcx . features () . trivial_bounds () { wfcx . check_false_global_bounds () } f (& mut wfcx) ? ; let errors = wfcx . select_all_or_error () ; if ! errors . is_empty () { return Err (infcx . err_ctxt () . report_fulfillment_errors (errors)) ; } let assumed_wf_types = wfcx . ocx . assumed_wf_types_and_report_errors (param_env , body_def_id) ? ; debug ! (? assumed_wf_types) ; let infcx_compat = infcx . fork () ; let outlives_env = OutlivesEnvironment :: new_with_implied_bounds_compat (& infcx , body_def_id , param_env , assumed_wf_types . iter () . copied () , true ,) ; lint_redundant_lifetimes (tcx , body_def_id , & outlives_env) ; let errors = infcx . resolve_regions_with_outlives_env (& outlives_env) ; if errors . is_empty () { return Ok (()) ; } let outlives_env = OutlivesEnvironment :: new_with_implied_bounds_compat (& infcx_compat , body_def_id , param_env , assumed_wf_types , false ,) ; let errors_compat = infcx_compat . resolve_regions_with_outlives_env (& outlives_env) ; if errors_compat . is_empty () { Ok (()) } else { Err (infcx_compat . err_ctxt () . report_region_errors (body_def_id , & errors_compat)) } }
+    };
+}
+
+enter_wf_checking_ctxt!()

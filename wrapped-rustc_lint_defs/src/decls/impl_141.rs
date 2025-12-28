@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        LintExpectationId!();
+    };
+}
+
+macro_rules! impl_141 {
+    () => {
+        deps!();
+        impl LintExpectationId { pub fn is_stable (& self) -> bool { match self { LintExpectationId :: Unstable { .. } => false , LintExpectationId :: Stable { .. } => true , } } pub fn get_lint_index (& self) -> Option < u16 > { let (LintExpectationId :: Unstable { lint_index , .. } | LintExpectationId :: Stable { lint_index , .. }) = self ; * lint_index } pub fn set_lint_index (& mut self , new_lint_index : Option < u16 >) { let (LintExpectationId :: Unstable { lint_index , .. } | LintExpectationId :: Stable { lint_index , .. }) = self ; * lint_index = new_lint_index } }
+    };
+}
+
+impl_141!()

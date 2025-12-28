@@ -4,4 +4,4 @@ macro_rules! lang_items_for_bin_op {
     };
 }
 
-lang_items_for_bin_op!()
+lang_items_for_bin_op!();

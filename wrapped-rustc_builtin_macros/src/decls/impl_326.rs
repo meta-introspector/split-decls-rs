@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        ProcMacroDef!();
+        ProcMacro!();
+        ProcMacroDerive!();
+        CollectProcMacros!();
+    };
+}
+
+macro_rules! impl_326 {
+    () => {
+        deps!();
+        impl < 'a > CollectProcMacros < 'a > { fn check_not_pub_in_root (& self , vis : & ast :: Visibility , sp : Span) { if self . is_proc_macro_crate && self . in_root && vis . kind . is_pub () { self . dcx . emit_err (errors :: ProcMacro { span : sp }) ; } } fn collect_custom_derive (& mut self , item : & 'a ast :: Item , function_ident : Ident , attr : & 'a ast :: Attribute ,) { let Some (rustc_hir :: Attribute :: Parsed (AttributeKind :: ProcMacroDerive { trait_name , helper_attrs , .. })) = AttributeParser :: parse_limited (self . session , slice :: from_ref (attr) , sym :: proc_macro_derive , item . span , item . node_id () , None ,) else { return ; } ; if self . in_root && item . vis . kind . is_pub () { self . macros . push (ProcMacro :: Derive (ProcMacroDerive { id : item . id , span : item . span , trait_name , function_ident , attrs : helper_attrs , })) ; } else { let msg = if ! self . in_root { "functions tagged with `#[proc_macro_derive]` must \
+                 currently reside in the root of the crate" } else { "functions tagged with `#[proc_macro_derive]` must be `pub`" } ; self . dcx . span_err (self . source_map . guess_head_span (item . span) , msg) ; } } fn collect_attr_proc_macro (& mut self , item : & 'a ast :: Item , function_ident : Ident) { if self . in_root && item . vis . kind . is_pub () { self . macros . push (ProcMacro :: Attr (ProcMacroDef { id : item . id , span : item . span , function_ident , })) ; } else { let msg = if ! self . in_root { "functions tagged with `#[proc_macro_attribute]` must \
+                 currently reside in the root of the crate" } else { "functions tagged with `#[proc_macro_attribute]` must be `pub`" } ; self . dcx . span_err (self . source_map . guess_head_span (item . span) , msg) ; } } fn collect_bang_proc_macro (& mut self , item : & 'a ast :: Item , function_ident : Ident) { if self . in_root && item . vis . kind . is_pub () { self . macros . push (ProcMacro :: Bang (ProcMacroDef { id : item . id , span : item . span , function_ident , })) ; } else { let msg = if ! self . in_root { "functions tagged with `#[proc_macro]` must \
+                 currently reside in the root of the crate" } else { "functions tagged with `#[proc_macro]` must be `pub`" } ; self . dcx . span_err (self . source_map . guess_head_span (item . span) , msg) ; } } }
+    };
+}
+
+impl_326!()

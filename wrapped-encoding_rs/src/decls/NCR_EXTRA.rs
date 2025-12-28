@@ -4,4 +4,4 @@ macro_rules! NCR_EXTRA {
     };
 }
 
-NCR_EXTRA!()
+NCR_EXTRA!();

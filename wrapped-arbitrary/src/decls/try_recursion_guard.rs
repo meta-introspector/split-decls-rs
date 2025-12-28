@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         MaxRecursionReached!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_recursion_guard {
     };
 }
 
-try_recursion_guard!()
+try_recursion_guard!();

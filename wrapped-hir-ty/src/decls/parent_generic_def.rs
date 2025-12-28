@@ -4,4 +4,4 @@ macro_rules! parent_generic_def {
     };
 }
 
-parent_generic_def!()
+parent_generic_def!();

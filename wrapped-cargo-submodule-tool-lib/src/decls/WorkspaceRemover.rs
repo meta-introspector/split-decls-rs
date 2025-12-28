@@ -4,4 +4,4 @@ macro_rules! WorkspaceRemover {
     };
 }
 
-WorkspaceRemover!()
+WorkspaceRemover!();

@@ -11,4 +11,4 @@ macro_rules! WordIndices {
     };
 }
 
-WordIndices!()
+WordIndices!();

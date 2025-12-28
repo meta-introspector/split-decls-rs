@@ -4,4 +4,4 @@ macro_rules! hashbrown_hashmap {
     };
 }
 
-hashbrown_hashmap!()
+hashbrown_hashmap!();

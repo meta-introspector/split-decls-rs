@@ -11,4 +11,4 @@ macro_rules! Merge {
     };
 }
 
-Merge!()
+Merge!();

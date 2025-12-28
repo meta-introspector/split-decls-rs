@@ -11,4 +11,4 @@ macro_rules! poll_side {
     };
 }
 
-poll_side!()
+poll_side!();

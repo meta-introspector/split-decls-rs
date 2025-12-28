@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        BuiltinType!();
-        Demangle!();
         DemangleContext!();
-        ArgScopeStack!();
         Result!();
         DemangleWrite!();
+        Demangle!();
+        BuiltinType!();
+        ArgScopeStack!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_177 {
     };
 }
 
-impl_177!()
+impl_177!();

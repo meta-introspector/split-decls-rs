@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
-        NaiveDate!();
         Utc!();
+        NaiveDate!();
+        FixedOffset!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_and_local_timezone {
     };
 }
 
-test_and_local_timezone!()
+test_and_local_timezone!();

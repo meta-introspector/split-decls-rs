@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SendError!();
         SendTimeoutError!();
+        SendError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

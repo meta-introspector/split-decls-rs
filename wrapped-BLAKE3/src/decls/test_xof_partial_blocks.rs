@@ -11,4 +11,4 @@ macro_rules! test_xof_partial_blocks {
     };
 }
 
-test_xof_partial_blocks!()
+test_xof_partial_blocks!();

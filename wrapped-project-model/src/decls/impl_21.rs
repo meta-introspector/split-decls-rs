@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        RustSourceWorkspaceConfig!();
+        RunnableKind!();
+        RunnableKindData!();
     };
 }
 
 macro_rules! impl_21 {
     () => {
         deps!();
-        impl RustSourceWorkspaceConfig { pub fn default_cargo () -> Self { RustSourceWorkspaceConfig :: CargoMetadata (Default :: default ()) } }
+        impl From < RunnableKindData > for RunnableKind { fn from (data : RunnableKindData) -> Self { match data { RunnableKindData :: Check => RunnableKind :: Check , RunnableKindData :: Run => RunnableKind :: Run , RunnableKindData :: TestOne => RunnableKind :: TestOne , } } }
     };
 }
 

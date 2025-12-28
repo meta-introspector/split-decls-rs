@@ -4,4 +4,4 @@ macro_rules! PossibleFragmentSpreads {
     };
 }
 
-PossibleFragmentSpreads!()
+PossibleFragmentSpreads!();

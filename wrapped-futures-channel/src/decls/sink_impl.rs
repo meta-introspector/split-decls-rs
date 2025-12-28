@@ -4,4 +4,4 @@ macro_rules! sink_impl {
     };
 }
 
-sink_impl!()
+sink_impl!();

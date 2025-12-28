@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BandRef!();
         Channel!();
-        TextRef!();
         Error!();
+        BandRef!();
         ErrorRef!();
+        TextRef!();
         PacketLineRef!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

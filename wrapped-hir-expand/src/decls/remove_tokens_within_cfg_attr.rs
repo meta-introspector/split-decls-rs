@@ -11,4 +11,4 @@ macro_rules! remove_tokens_within_cfg_attr {
     };
 }
 
-remove_tokens_within_cfg_attr!()
+remove_tokens_within_cfg_attr!();

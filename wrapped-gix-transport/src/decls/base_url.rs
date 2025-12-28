@@ -11,4 +11,4 @@ macro_rules! base_url {
     };
 }
 
-base_url!()
+base_url!();

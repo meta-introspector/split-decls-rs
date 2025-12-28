@@ -4,4 +4,4 @@ macro_rules! ct_variable {
     };
 }
 
-ct_variable!()
+ct_variable!();

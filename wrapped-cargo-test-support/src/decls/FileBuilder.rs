@@ -4,4 +4,4 @@ macro_rules! FileBuilder {
     };
 }
 
-FileBuilder!()
+FileBuilder!();

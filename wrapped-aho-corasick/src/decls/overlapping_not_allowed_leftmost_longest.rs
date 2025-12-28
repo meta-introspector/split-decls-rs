@@ -12,4 +12,4 @@ macro_rules! overlapping_not_allowed_leftmost_longest {
     };
 }
 
-overlapping_not_allowed_leftmost_longest!()
+overlapping_not_allowed_leftmost_longest!();

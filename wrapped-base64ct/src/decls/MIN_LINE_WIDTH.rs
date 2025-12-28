@@ -4,4 +4,4 @@ macro_rules! MIN_LINE_WIDTH {
     };
 }
 
-MIN_LINE_WIDTH!()
+MIN_LINE_WIDTH!();

@@ -4,4 +4,4 @@ macro_rules! build_dir_ignored_path_patterns {
     };
 }
 
-build_dir_ignored_path_patterns!()
+build_dir_ignored_path_patterns!();

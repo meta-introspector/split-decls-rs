@@ -11,4 +11,4 @@ macro_rules! delegate_all {
     };
 }
 
-delegate_all!()
+delegate_all!();

@@ -4,4 +4,4 @@ macro_rules! arg_group {
     };
 }
 
-arg_group!()
+arg_group!();

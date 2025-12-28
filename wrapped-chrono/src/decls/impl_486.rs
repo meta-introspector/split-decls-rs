@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         NaiveTime!();
         NaiveTimeVisitor!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_486 {
     };
 }
 
-impl_486!()
+impl_486!();

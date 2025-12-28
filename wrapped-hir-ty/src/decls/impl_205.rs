@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         AutoderefCtx!();
-        TraitEnvironment!();
         InferenceContextAutoderefCtx!();
+        TraitEnvironment!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_205 {
     };
 }
 
-impl_205!()
+impl_205!();

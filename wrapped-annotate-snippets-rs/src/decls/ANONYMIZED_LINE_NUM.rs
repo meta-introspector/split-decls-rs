@@ -4,4 +4,4 @@ macro_rules! ANONYMIZED_LINE_NUM {
     };
 }
 
-ANONYMIZED_LINE_NUM!()
+ANONYMIZED_LINE_NUM!();

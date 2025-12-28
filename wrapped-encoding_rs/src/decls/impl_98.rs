@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Gb18030Encoder!();
-        Encoding!();
-        Encoder!();
         VariantEncoder!();
+        Encoder!();
+        Encoding!();
+        Gb18030Encoder!();
         EncoderResult!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

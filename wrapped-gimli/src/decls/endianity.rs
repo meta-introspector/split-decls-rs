@@ -4,4 +4,4 @@ macro_rules! endianity {
     };
 }
 
-endianity!()
+endianity!();

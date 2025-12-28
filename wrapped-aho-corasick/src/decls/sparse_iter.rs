@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        NFA!();
         StateID!();
         ByteClasses!();
-        NFA!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! sparse_iter {
     };
 }
 
-sparse_iter!()
+sparse_iter!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Id!();
         Level!();
         MessageOrTitle!();
         Title!();
-        Id!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

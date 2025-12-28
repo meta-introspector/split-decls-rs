@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ParseError!();
-        Cfg!();
         Platform!();
+        Cfg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Protocols!();
-        Error!();
         Result!();
+        Error!();
+        Protocols!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_661 {
     };
 }
 
-impl_661!()
+impl_661!();

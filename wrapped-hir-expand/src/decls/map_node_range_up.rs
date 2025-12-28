@@ -13,4 +13,4 @@ macro_rules! map_node_range_up {
     };
 }
 
-map_node_range_up!()
+map_node_range_up!();

@@ -4,4 +4,4 @@ macro_rules! Trust {
     };
 }
 
-Trust!()
+Trust!();

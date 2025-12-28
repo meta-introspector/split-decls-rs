@@ -4,4 +4,4 @@ macro_rules! ValueRef {
     };
 }
 
-ValueRef!()
+ValueRef!();

@@ -4,4 +4,4 @@ macro_rules! ChunkId {
     };
 }
 
-ChunkId!()
+ChunkId!();

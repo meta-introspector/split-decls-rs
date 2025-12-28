@@ -11,4 +11,4 @@ macro_rules! write_fields {
     };
 }
 
-write_fields!()
+write_fields!();

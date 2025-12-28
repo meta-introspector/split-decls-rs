@@ -4,4 +4,4 @@ macro_rules! ResourceIdx {
     };
 }
 
-ResourceIdx!()
+ResourceIdx!();

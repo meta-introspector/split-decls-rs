@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ErrorImpl!();
         Mut!();
         ContextError!();
         Error!();
-        ErrorImpl!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! context_chain_downcast_mut {
     };
 }
 
-context_chain_downcast_mut!()
+context_chain_downcast_mut!();

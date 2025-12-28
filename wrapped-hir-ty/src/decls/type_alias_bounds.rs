@@ -12,4 +12,4 @@ macro_rules! type_alias_bounds {
     };
 }
 
-type_alias_bounds!()
+type_alias_bounds!();

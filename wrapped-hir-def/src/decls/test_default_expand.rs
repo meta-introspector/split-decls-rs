@@ -41,4 +41,4 @@ impl <> $crate::default::Default for Bar< > where {
     };
 }
 
-test_default_expand!()
+test_default_expand!();

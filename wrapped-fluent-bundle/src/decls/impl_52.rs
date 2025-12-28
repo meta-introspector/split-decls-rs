@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ResolveValue!();
-        FluentResource!();
-        MemoizerKind!();
-        FluentValue!();
         Scope!();
+        MemoizerKind!();
+        FluentResource!();
+        FluentValue!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

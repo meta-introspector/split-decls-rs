@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         NameRef!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_attr {
     };
 }
 
-check_attr!()
+check_attr!();

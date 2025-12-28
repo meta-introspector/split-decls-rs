@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Result!();
         AnyValueId!();
+        Result!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_610 {
     };
 }
 
-impl_610!()
+impl_610!();

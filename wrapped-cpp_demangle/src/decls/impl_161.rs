@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        DemangleWrite!();
+        Type!();
         DemangleAsInner!();
-        PointerToMemberType!();
+        Result!();
+        FunctionType!();
         ArgScopeStack!();
         DemangleContext!();
-        Type!();
-        Result!();
+        DemangleWrite!();
+        PointerToMemberType!();
         ArrayType!();
-        FunctionType!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_161 {
     };
 }
 
-impl_161!()
+impl_161!();

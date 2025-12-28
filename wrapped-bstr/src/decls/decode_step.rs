@@ -4,4 +4,4 @@ macro_rules! decode_step {
     };
 }
 
-decode_step!()
+decode_step!();

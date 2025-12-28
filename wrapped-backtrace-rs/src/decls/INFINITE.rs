@@ -4,4 +4,4 @@ macro_rules! INFINITE {
     };
 }
 
-INFINITE!()
+INFINITE!();

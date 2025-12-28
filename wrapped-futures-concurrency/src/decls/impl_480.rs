@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoStream!();
         Zip!();
+        IntoStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_480 {
     };
 }
 
-impl_480!()
+impl_480!();

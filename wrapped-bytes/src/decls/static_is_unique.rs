@@ -4,4 +4,4 @@ macro_rules! static_is_unique {
     };
 }
 
-static_is_unique!()
+static_is_unique!();

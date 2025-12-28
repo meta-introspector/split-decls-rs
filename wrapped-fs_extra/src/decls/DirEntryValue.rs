@@ -4,4 +4,4 @@ macro_rules! DirEntryValue {
     };
 }
 
-DirEntryValue!()
+DirEntryValue!();

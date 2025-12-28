@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeParamId!();
-        ConstParamId!();
         LifetimeParamId!();
+        ConstParamId!();
+        TypeParamId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! GenericParamId {
     };
 }
 
-GenericParamId!()
+GenericParamId!();

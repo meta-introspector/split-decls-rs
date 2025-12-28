@@ -4,4 +4,4 @@ macro_rules! test_input_affect_every_byte {
     };
 }
 
-test_input_affect_every_byte!()
+test_input_affect_every_byte!();

@@ -4,4 +4,4 @@ macro_rules! yield_ {
     };
 }
 
-yield_!()
+yield_!();

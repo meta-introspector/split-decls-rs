@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Credential!();
         Key!();
         Section!();
-        Credential!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_626 {
     };
 }
 
-impl_626!()
+impl_626!();

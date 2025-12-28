@@ -11,4 +11,4 @@ macro_rules! optimizer_hide {
     };
 }
 
-optimizer_hide!()
+optimizer_hide!();

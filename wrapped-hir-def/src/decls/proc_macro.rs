@@ -4,4 +4,4 @@ macro_rules! proc_macro {
     };
 }
 
-proc_macro!()
+proc_macro!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DeriveHelper!();
         Macro!();
+        DeriveHelper!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_355 {
     };
 }
 
-impl_355!()
+impl_355!();

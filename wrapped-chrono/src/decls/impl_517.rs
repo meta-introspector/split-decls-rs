@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
         NaiveTime!();
+        FixedOffset!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_517 {
     };
 }
 
-impl_517!()
+impl_517!();

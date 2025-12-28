@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Engine!();
         DecoderReader!();
+        Engine!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DecoderReaderEngine {
     };
 }
 
-DecoderReaderEngine!()
+DecoderReaderEngine!();

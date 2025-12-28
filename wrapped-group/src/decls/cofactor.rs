@@ -4,4 +4,4 @@ macro_rules! cofactor {
     };
 }
 
-cofactor!()
+cofactor!();

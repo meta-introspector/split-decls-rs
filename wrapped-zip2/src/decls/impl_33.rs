@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        CompressionMethod!();
+        Lzma!();
+        Ppmd!();
+    };
+}
+
+macro_rules! impl_33 {
+    () => {
+        deps!();
+        impl CompressionMethod { pub (crate) const fn parse_from_u16 (val : u16) -> Self { match val { 0 => CompressionMethod :: Stored , # [cfg (feature = "legacy-zip")] 1 => CompressionMethod :: Shrink , # [cfg (feature = "legacy-zip")] 2 => CompressionMethod :: Reduce (1) , # [cfg (feature = "legacy-zip")] 3 => CompressionMethod :: Reduce (2) , # [cfg (feature = "legacy-zip")] 4 => CompressionMethod :: Reduce (3) , # [cfg (feature = "legacy-zip")] 5 => CompressionMethod :: Reduce (4) , # [cfg (feature = "legacy-zip")] 6 => CompressionMethod :: Implode , # [cfg (feature = "_deflate-any")] 8 => CompressionMethod :: Deflated , # [cfg (feature = "deflate64")] 9 => CompressionMethod :: Deflate64 , # [cfg (feature = "bzip2")] 12 => CompressionMethod :: Bzip2 , # [cfg (feature = "lzma")] 14 => CompressionMethod :: Lzma , # [cfg (feature = "xz")] 95 => CompressionMethod :: Xz , # [cfg (feature = "zstd")] 93 => CompressionMethod :: Zstd , # [cfg (feature = "ppmd")] 98 => CompressionMethod :: Ppmd , # [cfg (feature = "aes-crypto")] 99 => CompressionMethod :: Aes , # [allow (deprecated)] v => CompressionMethod :: Unsupported (v) , } } # [doc = " Converts a u16 to its corresponding CompressionMethod"] # [deprecated (since = "0.5.7" , note = "use a constant to construct a compression method")] pub const fn from_u16 (val : u16) -> CompressionMethod { Self :: parse_from_u16 (val) } pub (crate) const fn serialize_to_u16 (self) -> u16 { match self { CompressionMethod :: Stored => 0 , # [cfg (feature = "legacy-zip")] CompressionMethod :: Shrink => 1 , # [cfg (feature = "legacy-zip")] CompressionMethod :: Reduce (n) => 1 + n as u16 , # [cfg (feature = "legacy-zip")] CompressionMethod :: Implode => 6 , # [cfg (feature = "_deflate-any")] CompressionMethod :: Deflated => 8 , # [cfg (feature = "deflate64")] CompressionMethod :: Deflate64 => 9 , # [cfg (feature = "bzip2")] CompressionMethod :: Bzip2 => 12 , # [cfg (feature = "aes-crypto")] CompressionMethod :: Aes => 99 , # [cfg (feature = "zstd")] CompressionMethod :: Zstd => 93 , # [cfg (feature = "lzma")] CompressionMethod :: Lzma => 14 , # [cfg (feature = "xz")] CompressionMethod :: Xz => 95 , # [cfg (feature = "ppmd")] CompressionMethod :: Ppmd => 98 , # [allow (deprecated)] CompressionMethod :: Unsupported (v) => v , } } # [doc = " Converts a CompressionMethod to a u16"] # [deprecated (since = "0.5.7" , note = "to match on other compression methods, use a constant")] pub const fn to_u16 (self) -> u16 { self . serialize_to_u16 () } }
+    };
+}
+
+impl_33!()

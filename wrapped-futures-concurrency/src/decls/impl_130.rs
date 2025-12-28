@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EnumerateFuture!();
-        Consumer!();
         ConsumerState!();
+        Consumer!();
         EnumerateConsumer!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

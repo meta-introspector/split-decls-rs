@@ -4,4 +4,4 @@ macro_rules! coercion {
     };
 }
 
-coercion!()
+coercion!();

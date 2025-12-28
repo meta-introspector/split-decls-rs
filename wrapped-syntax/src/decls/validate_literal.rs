@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        SyntaxError!();
+    };
+}
+
+macro_rules! validate_literal {
+    () => {
+        deps!();
+        fn validate_literal (literal : ast :: Literal , acc : & mut Vec < SyntaxError >) { fn unquote (text : & str , prefix_len : usize , end_delimiter : char) -> Option < & str > { text . rfind (end_delimiter) . and_then (| end | text . get (prefix_len .. end)) } let token = literal . token () ; let text = token . text () ; let mut push_err = | prefix_len , off , err : EscapeError | { let off = token . text_range () . start () + TextSize :: try_from (off + prefix_len) . unwrap () ; let (message , is_err) = rustc_unescape_error_to_string (err) ; if is_err { acc . push (SyntaxError :: new_at_offset (message , off)) ; } } ; match literal . kind () { ast :: LiteralKind :: String (s) => { if ! s . is_raw () && let Some (without_quotes) = unquote (text , 1 , '"') { unescape_str (without_quotes , | range , char | { if let Err (err) = char { push_err (1 , range . start , err) ; } }) ; } } ast :: LiteralKind :: ByteString (s) => { if ! s . is_raw () && let Some (without_quotes) = unquote (text , 2 , '"') { unescape_byte_str (without_quotes , | range , char | { if let Err (err) = char { push_err (1 , range . start , err) ; } }) ; } } ast :: LiteralKind :: CString (s) => { if ! s . is_raw () && let Some (without_quotes) = unquote (text , 2 , '"') { unescape_c_str (without_quotes , | range , char | { if let Err (err) = char { push_err (1 , range . start , err) ; } }) ; } } ast :: LiteralKind :: Char (_) => { if let Some (without_quotes) = unquote (text , 1 , '\'') && let Err (err) = unescape_char (without_quotes) { push_err (1 , 0 , err) ; } } ast :: LiteralKind :: Byte (_) => { if let Some (without_quotes) = unquote (text , 2 , '\'') && let Err (err) = unescape_byte (without_quotes) { push_err (2 , 0 , err) ; } } ast :: LiteralKind :: IntNumber (_) | ast :: LiteralKind :: FloatNumber (_) | ast :: LiteralKind :: Bool (_) => { } } }
+    };
+}
+
+validate_literal!()

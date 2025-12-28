@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        IntoU64!();
+        Lane!();
+        BufferData!();
+        Bytes!();
     };
 }
 
 macro_rules! impl_12 {
     () => {
         deps!();
-        # [cfg (any (target_pointer_width = "32" , target_pointer_width = "64"))] impl IntoU64 for usize { fn into_u64 (self) -> u64 { self as u64 } }
+        impl BufferData { const fn new () -> Self { Self ([0 ; 4]) } const fn bytes (& self) -> & Bytes { const _ : () = assert ! (mem :: align_of ::< u8 > () <= mem :: align_of ::< Lane > ()) ; unsafe { & * self . 0 . as_ptr () . cast () } } fn bytes_mut (& mut self) -> & mut Bytes { unsafe { & mut * self . 0 . as_mut_ptr () . cast () } } }
     };
 }
 

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BOOL!();
-        SECURITY_ATTRIBUTES!();
-        PCSTR!();
         HANDLE!();
+        SECURITY_ATTRIBUTES!();
+        BOOL!();
+        PCSTR!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_76 {
     };
 }
 
-macro_76!()
+macro_76!();

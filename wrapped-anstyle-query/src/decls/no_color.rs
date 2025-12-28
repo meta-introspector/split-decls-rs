@@ -4,4 +4,4 @@ macro_rules! no_color {
     };
 }
 
-no_color!()
+no_color!();

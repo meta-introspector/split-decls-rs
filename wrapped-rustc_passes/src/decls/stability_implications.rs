@@ -1,0 +1,7 @@
+macro_rules! stability_implications {
+    () => {
+        fn stability_implications (tcx : TyCtxt < '_ > , LocalCrate : LocalCrate) -> UnordMap < Symbol , Symbol > { let mut implications = UnordMap :: default () ; let mut register_implication = | def_id | { if let Some (stability) = tcx . lookup_stability (def_id) && let StabilityLevel :: Unstable { implied_by : Some (implied_by) , .. } = stability . level { implications . insert (implied_by , stability . feature) ; } if let Some (stability) = tcx . lookup_const_stability (def_id) && let StabilityLevel :: Unstable { implied_by : Some (implied_by) , .. } = stability . level { implications . insert (implied_by , stability . feature) ; } } ; if tcx . features () . staged_api () { register_implication (CRATE_DEF_ID) ; for def_id in tcx . hir_crate_items (()) . definitions () { register_implication (def_id) ; let def_kind = tcx . def_kind (def_id) ; if def_kind . is_adt () { let adt = tcx . adt_def (def_id) ; for variant in adt . variants () { if variant . def_id != def_id . to_def_id () { register_implication (variant . def_id . expect_local ()) ; } for field in & variant . fields { register_implication (field . did . expect_local ()) ; } if let Some (ctor_def_id) = variant . ctor_def_id () { register_implication (ctor_def_id . expect_local ()) } } } if def_kind . has_generics () { for param in tcx . generics_of (def_id) . own_params . iter () { register_implication (param . def_id . expect_local ()) } } } } implications }
+    };
+}
+
+stability_implications!()

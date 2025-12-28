@@ -4,4 +4,4 @@ macro_rules! TPL_HOOKS_POST_UPDATE {
     };
 }
 
-TPL_HOOKS_POST_UPDATE!()
+TPL_HOOKS_POST_UPDATE!();

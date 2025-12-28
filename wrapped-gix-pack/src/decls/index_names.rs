@@ -13,4 +13,4 @@ macro_rules! index_names {
     };
 }
 
-index_names!()
+index_names!();

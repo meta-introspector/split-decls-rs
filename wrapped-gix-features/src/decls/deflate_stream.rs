@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Decompress!();
         Read!();
+        Decompress!();
         Write!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! deflate_stream {
     };
 }
 
-deflate_stream!()
+deflate_stream!();

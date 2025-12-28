@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Section!();
         SectionId!();
         DebugRngLists!();
+        Section!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_559 {
     };
 }
 
-impl_559!()
+impl_559!();

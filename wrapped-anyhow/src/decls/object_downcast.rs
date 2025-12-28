@@ -12,4 +12,4 @@ macro_rules! object_downcast {
     };
 }
 
-object_downcast!()
+object_downcast!();

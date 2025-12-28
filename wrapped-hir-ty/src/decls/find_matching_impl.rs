@@ -11,4 +11,4 @@ macro_rules! find_matching_impl {
     };
 }
 
-find_matching_impl!()
+find_matching_impl!();

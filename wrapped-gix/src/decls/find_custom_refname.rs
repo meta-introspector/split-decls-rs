@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Item!();
-        Error!();
         Fetch!();
+        Error!();
+        Item!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! find_custom_refname {
     };
 }
 
-find_custom_refname!()
+find_custom_refname!();

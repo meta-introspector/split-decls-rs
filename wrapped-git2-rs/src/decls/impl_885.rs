@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Blob!();
-        Commit!();
-        FileMode!();
         Tree!();
+        Commit!();
+        Blob!();
+        FileMode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_885 {
     };
 }
 
-impl_885!()
+impl_885!();

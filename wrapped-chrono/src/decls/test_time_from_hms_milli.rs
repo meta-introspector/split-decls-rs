@@ -11,4 +11,4 @@ macro_rules! test_time_from_hms_milli {
     };
 }
 
-test_time_from_hms_milli!()
+test_time_from_hms_milli!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Fixed!();
         InternalInternal!();
-        InternalFixed!();
         Item!();
+        InternalFixed!();
+        Fixed!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! internal_fixed {
     };
 }
 
-internal_fixed!()
+internal_fixed!();

@@ -4,4 +4,4 @@ macro_rules! IndexStorage {
     };
 }
 
-IndexStorage!()
+IndexStorage!();

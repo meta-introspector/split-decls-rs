@@ -1,6 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
+        Stream!();
+        Value!();
     };
 }
 

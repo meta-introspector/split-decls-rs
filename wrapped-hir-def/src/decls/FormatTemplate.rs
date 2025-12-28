@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HygieneId!();
         ExprId!();
+        HygieneId!();
         ExprPtr!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! FormatTemplate {
     };
 }
 
-FormatTemplate!()
+FormatTemplate!();

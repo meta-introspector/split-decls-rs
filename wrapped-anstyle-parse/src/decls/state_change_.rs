@@ -11,4 +11,4 @@ macro_rules! state_change_ {
     };
 }
 
-state_change_!()
+state_change_!();

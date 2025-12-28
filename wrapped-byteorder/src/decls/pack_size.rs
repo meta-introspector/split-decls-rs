@@ -4,4 +4,4 @@ macro_rules! pack_size {
     };
 }
 
-pack_size!()
+pack_size!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Platform!();
-        Action!();
-        Item!();
         Change!();
         Outcome!();
-        ChangeKind!();
-        ChangeId!();
-        Relation!();
-        Tracker!();
+        Platform!();
         Error!();
+        Tracker!();
+        Item!();
+        Action!();
+        ChangeId!();
+        ChangeKind!();
+        Relation!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

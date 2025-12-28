@@ -4,4 +4,4 @@ macro_rules! shift_jis_to_iso_2022_jp {
     };
 }
 
-shift_jis_to_iso_2022_jp!()
+shift_jis_to_iso_2022_jp!();

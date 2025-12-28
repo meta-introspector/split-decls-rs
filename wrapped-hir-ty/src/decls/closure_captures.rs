@@ -4,4 +4,4 @@ macro_rules! closure_captures {
     };
 }
 
-closure_captures!()
+closure_captures!();

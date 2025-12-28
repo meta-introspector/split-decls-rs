@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Mutex!();
         FutureOrOutput!();
+        Mutex!();
         Shared!();
-        Notifier!();
         Inner!();
+        Notifier!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

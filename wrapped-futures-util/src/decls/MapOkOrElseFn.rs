@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MapOkFn!();
-        MergeResultFn!();
         MapErrFn!();
+        MergeResultFn!();
         ChainFn!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! MapOkOrElseFn {
     };
 }
 
-MapOkOrElseFn!()
+MapOkOrElseFn!();

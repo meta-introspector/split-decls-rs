@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         WakerArray!();
-        Join!();
         PollArray!();
+        Join!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_join_tuple {
     };
 }
 
-impl_join_tuple!()
+impl_join_tuple!();

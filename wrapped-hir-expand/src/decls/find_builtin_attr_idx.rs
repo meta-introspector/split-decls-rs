@@ -4,4 +4,4 @@ macro_rules! find_builtin_attr_idx {
     };
 }
 
-find_builtin_attr_idx!()
+find_builtin_attr_idx!();

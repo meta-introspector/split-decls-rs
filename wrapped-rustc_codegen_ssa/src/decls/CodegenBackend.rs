@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        ArArchiveBuilderBuilder!();
+        DefaultMetadataLoader!();
+        CodegenResults!();
+        TargetConfig!();
+    };
+}
+
+macro_rules! CodegenBackend {
+    () => {
+        deps!();
+        pub trait CodegenBackend { # [doc = " Locale resources for diagnostic messages - a string the content of the Fluent resource."] # [doc = " Called before `init` so that all other functions are able to emit translatable diagnostics."] fn locale_resource (& self) -> & 'static str ; fn init (& self , _sess : & Session) { } fn print (& self , _req : & PrintRequest , _out : & mut String , _sess : & Session) { } # [doc = " Collect target-specific options that should be set in `cfg(...)`, including"] # [doc = " `target_feature` and support for unstable float types."] fn target_config (& self , _sess : & Session) -> TargetConfig { TargetConfig { target_features : vec ! [] , unstable_target_features : vec ! [] , has_reliable_f16 : true , has_reliable_f16_math : true , has_reliable_f128 : true , has_reliable_f128_math : true , } } fn print_passes (& self) { } fn print_version (& self) { } # [doc = " The metadata loader used to load rlib and dylib metadata."] # [doc = ""] # [doc = " Alternative codegen backends may want to use different rlib or dylib formats than the"] # [doc = " default native static archives and dynamic libraries."] fn metadata_loader (& self) -> Box < MetadataLoaderDyn > { Box :: new (crate :: back :: metadata :: DefaultMetadataLoader) } fn provide (& self , _providers : & mut Providers) { } fn codegen_crate < 'tcx > (& self , tcx : TyCtxt < 'tcx >) -> Box < dyn Any > ; # [doc = " This is called on the returned `Box<dyn Any>` from [`codegen_crate`](Self::codegen_crate)"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics when the passed `Box<dyn Any>` was not returned by [`codegen_crate`](Self::codegen_crate)."] fn join_codegen (& self , ongoing_codegen : Box < dyn Any > , sess : & Session , outputs : & OutputFilenames ,) -> (CodegenResults , FxIndexMap < WorkProductId , WorkProduct >) ; # [doc = " This is called on the returned [`CodegenResults`] from [`join_codegen`](Self::join_codegen)."] fn link (& self , sess : & Session , codegen_results : CodegenResults , metadata : EncodedMetadata , outputs : & OutputFilenames ,) { link_binary (sess , & ArArchiveBuilderBuilder , codegen_results , metadata , outputs) ; } }
+    };
+}
+
+CodegenBackend!()

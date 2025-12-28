@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Status!();
-        Note!();
         Clone!();
+        Note!();
         Entry!();
+        Status!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! RewriteSource {
     };
 }
 
-RewriteSource!()
+RewriteSource!();

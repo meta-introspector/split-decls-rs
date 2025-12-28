@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Vendor!();
         Reader!();
+        Vendor!();
         EhFrame!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_179 {
     };
 }
 
-impl_179!()
+impl_179!();

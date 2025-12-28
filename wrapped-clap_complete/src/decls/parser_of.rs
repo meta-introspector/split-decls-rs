@@ -4,4 +4,4 @@ macro_rules! parser_of {
     };
 }
 
-parser_of!()
+parser_of!();

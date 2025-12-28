@@ -4,4 +4,4 @@ macro_rules! select_mod {
     };
 }
 
-select_mod!()
+select_mod!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Arg!();
         Command!();
         Id!();
-        Arg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! duplicate_tip {
     };
 }
 
-duplicate_tip!()
+duplicate_tip!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Distributions!();
         Resamples!();
-        Float!();
         Sample!();
         TupledDistributionsBuilder!();
-        Distributions!();
+        Float!();
         Tuple!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! bootstrap {
     };
 }
 
-bootstrap!()
+bootstrap!();

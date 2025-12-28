@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Memory!();
+        Class!();
+        ArgAbi!();
+    };
+}
+
+macro_rules! classify_arg {
+    () => {
+        deps!();
+        fn classify_arg < 'a , Ty , C > (cx : & C , arg : & ArgAbi < 'a , Ty > ,) -> Result < [Option < Class > ; MAX_EIGHTBYTES] , Memory > where Ty : TyAbiInterface < 'a , C > + Copy , C : HasDataLayout , { fn classify < 'a , Ty , C > (cx : & C , layout : TyAndLayout < 'a , Ty > , cls : & mut [Option < Class >] , off : Size ,) -> Result < () , Memory > where Ty : TyAbiInterface < 'a , C > + Copy , C : HasDataLayout , { if ! off . is_aligned (layout . align . abi) { if ! layout . is_zst () { return Err (Memory) ; } return Ok (()) ; } let mut c = match layout . backend_repr { BackendRepr :: Scalar (scalar) => match scalar . primitive () { Primitive :: Int (..) | Primitive :: Pointer (_) => Class :: Int , Primitive :: Float (_) => Class :: Sse , } , BackendRepr :: SimdVector { .. } => Class :: Sse , BackendRepr :: ScalarPair (..) | BackendRepr :: Memory { .. } => { for i in 0 .. layout . fields . count () { let field_off = off + layout . fields . offset (i) ; classify (cx , layout . field (cx , i) , cls , field_off) ? ; } match & layout . variants { Variants :: Single { .. } | Variants :: Empty => { } Variants :: Multiple { variants , .. } => { for variant_idx in variants . indices () { classify (cx , layout . for_variant (cx , variant_idx) , cls , off) ? ; } } } return Ok (()) ; } } ; let first = (off . bytes () / 8) as usize ; let last = ((off . bytes () + layout . size . bytes () - 1) / 8) as usize ; for cls in & mut cls [first ..= last] { * cls = Some (cls . map_or (c , | old | old . min (c))) ; if c == Class :: Sse { c = Class :: SseUp ; } } Ok (()) } let n = arg . layout . size . bytes () . div_ceil (8) as usize ; if n > MAX_EIGHTBYTES { return Err (Memory) ; } let mut cls = [None ; MAX_EIGHTBYTES] ; classify (cx , arg . layout , & mut cls , Size :: ZERO) ? ; if n > 2 { if cls [0] != Some (Class :: Sse) { return Err (Memory) ; } if cls [1 .. n] . iter () . any (| & c | c != Some (Class :: SseUp)) { return Err (Memory) ; } } else { let mut i = 0 ; while i < n { if cls [i] == Some (Class :: SseUp) { cls [i] = Some (Class :: Sse) ; } else if cls [i] == Some (Class :: Sse) { i += 1 ; while i != n && cls [i] == Some (Class :: SseUp) { i += 1 ; } } else { i += 1 ; } } } Ok (cls) }
+    };
+}
+
+classify_arg!()

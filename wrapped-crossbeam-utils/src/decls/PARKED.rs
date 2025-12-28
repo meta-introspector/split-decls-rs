@@ -4,4 +4,4 @@ macro_rules! PARKED {
     };
 }
 
-PARKED!()
+PARKED!();

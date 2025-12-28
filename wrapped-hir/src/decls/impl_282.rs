@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        SelfParam!();
-        Local!();
-        Type!();
-        Module!();
-        Const!();
-        UnsafeLint!();
+        Static!();
         MovedOutOfRef!();
-        MissingUnsafe!();
-        TypeMismatch!();
+        UnsafeLint!();
+        Module!();
+        UnusedVariable!();
+        SelfParam!();
+        Function!();
+        Const!();
         ModuleDef!();
-        Variant!();
+        Local!();
+        MissingUnsafe!();
         DefWithBody!();
         UnusedMut!();
+        TypeMismatch!();
         NeedMut!();
-        Static!();
-        UnusedVariable!();
-        Function!();
+        Variant!();
+        Type!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_282 {
     };
 }
 
-impl_282!()
+impl_282!();

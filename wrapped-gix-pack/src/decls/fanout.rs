@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Id!();
         Entry!();
+        Id!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fanout {
     };
 }
 
-fanout!()
+fanout!();

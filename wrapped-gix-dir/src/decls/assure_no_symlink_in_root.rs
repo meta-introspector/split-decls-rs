@@ -11,4 +11,4 @@ macro_rules! assure_no_symlink_in_root {
     };
 }
 
-assure_no_symlink_in_root!()
+assure_no_symlink_in_root!();

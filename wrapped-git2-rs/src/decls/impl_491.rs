@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Mempack!();
-        OdbPackwriter!();
-        Oid!();
-        OdbWriter!();
-        ForeachCbData!();
-        OdbObject!();
-        Error!();
-        Odb!();
-        OdbReader!();
-        ObjectType!();
-        OdbPackwriterCb!();
         Note!();
+        OdbWriter!();
+        OdbPackwriter!();
+        ForeachCbData!();
+        Error!();
+        Oid!();
+        ObjectType!();
+        OdbObject!();
+        OdbReader!();
+        Mempack!();
+        OdbPackwriterCb!();
+        Odb!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_491 {
     };
 }
 
-impl_491!()
+impl_491!();

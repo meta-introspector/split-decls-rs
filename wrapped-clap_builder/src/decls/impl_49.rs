@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Arg!();
+        ValueParser!();
         ArgAction!();
+        ValueRange!();
         Styles!();
         StyledStr!();
-        ValueParser!();
-        Arg!();
-        ValueRange!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_49 {
     };
 }
 
-impl_49!()
+impl_49!();

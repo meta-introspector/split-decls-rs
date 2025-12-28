@@ -4,4 +4,4 @@ macro_rules! add_and_shuffle {
     };
 }
 
-add_and_shuffle!()
+add_and_shuffle!();

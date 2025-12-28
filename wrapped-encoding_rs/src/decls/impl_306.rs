@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endian!();
         LittleEndian!();
+        Endian!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_306 {
     };
 }
 
-impl_306!()
+impl_306!();

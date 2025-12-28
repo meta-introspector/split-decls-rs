@@ -4,4 +4,4 @@ macro_rules! GroupOps {
     };
 }
 
-GroupOps!()
+GroupOps!();

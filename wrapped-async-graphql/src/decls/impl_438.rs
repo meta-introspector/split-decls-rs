@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        FieldFuture!();
         Deprecation!();
+        Field!();
         InputValue!();
         ResolverContext!();
-        Field!();
-        FieldFuture!();
         TypeRef!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_438 {
     };
 }
 
-impl_438!()
+impl_438!();

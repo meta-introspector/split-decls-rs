@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        OutputType!();
-        ObjectType!();
         EdgeNameType!();
-        CursorType!();
         Edge!();
+        OutputType!();
+        CursorType!();
+        ObjectType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_726 {
     };
 }
 
-impl_726!()
+impl_726!();

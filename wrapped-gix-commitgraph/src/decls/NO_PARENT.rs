@@ -4,4 +4,4 @@ macro_rules! NO_PARENT {
     };
 }
 
-NO_PARENT!()
+NO_PARENT!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InternalRef!();
         Shallow!();
         Error!();
-        InternalRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_v1 {
     };
 }
 
-parse_v1!()
+parse_v1!();

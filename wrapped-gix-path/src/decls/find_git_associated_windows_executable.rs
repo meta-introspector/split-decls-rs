@@ -4,4 +4,4 @@ macro_rules! find_git_associated_windows_executable {
     };
 }
 
-find_git_associated_windows_executable!()
+find_git_associated_windows_executable!();

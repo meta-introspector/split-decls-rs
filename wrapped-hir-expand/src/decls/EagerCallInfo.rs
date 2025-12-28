@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpandError!();
         MacroCallId!();
+        ExpandError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EagerCallInfo {
     };
 }
 
-EagerCallInfo!()
+EagerCallInfo!();

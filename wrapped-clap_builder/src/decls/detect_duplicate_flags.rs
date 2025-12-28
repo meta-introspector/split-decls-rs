@@ -14,4 +14,4 @@ macro_rules! detect_duplicate_flags {
     };
 }
 
-detect_duplicate_flags!()
+detect_duplicate_flags!();

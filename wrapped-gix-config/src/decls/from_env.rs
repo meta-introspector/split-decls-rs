@@ -4,4 +4,4 @@ macro_rules! from_env {
     };
 }
 
-from_env!()
+from_env!();

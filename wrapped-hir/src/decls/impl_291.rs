@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Function!();
-        Access!();
         SelfParam!();
         Type!();
+        Access!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_291 {
     };
 }
 
-impl_291!()
+impl_291!();

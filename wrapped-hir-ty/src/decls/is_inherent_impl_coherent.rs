@@ -11,4 +11,4 @@ macro_rules! is_inherent_impl_coherent {
     };
 }
 
-is_inherent_impl_coherent!()
+is_inherent_impl_coherent!();

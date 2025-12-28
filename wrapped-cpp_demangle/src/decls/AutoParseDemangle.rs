@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DemangleContext!();
         DemangleWrite!();
+        DemangleContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AutoParseDemangle {
     };
 }
 
-AutoParseDemangle!()
+AutoParseDemangle!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Compat!();
-        BorrowDecoder!();
         DecodeError!();
-        BorrowDecode!();
         SerdeDecoder!();
+        BorrowDecode!();
+        BorrowDecoder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Assignments!();
         AttributeId!();
+        Assignments!();
         MetadataCollection!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Metadata {
     };
 }
 
-Metadata!()
+Metadata!();

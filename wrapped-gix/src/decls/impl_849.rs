@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Read!();
-        Repository!();
-        ThreadSafeRepository!();
         Proxy!();
+        ThreadSafeRepository!();
+        Path!();
         Error!();
         Note!();
-        Path!();
+        Repository!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_849 {
     };
 }
 
-impl_849!()
+impl_849!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        OperationType!();
-        Positioned!();
+        Directive!();
         VariableDefinition!();
         SelectionSet!();
-        Directive!();
+        OperationType!();
+        Positioned!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! OperationDefinition {
     };
 }
 
-OperationDefinition!()
+OperationDefinition!();

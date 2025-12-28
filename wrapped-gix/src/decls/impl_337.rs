@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Kind!();
         Tree!();
-        Error!();
         Repository!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_337 {
     };
 }
 
-impl_337!()
+impl_337!();

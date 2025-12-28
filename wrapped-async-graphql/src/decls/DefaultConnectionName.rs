@@ -4,4 +4,4 @@ macro_rules! DefaultConnectionName {
     };
 }
 
-DefaultConnectionName!()
+DefaultConnectionName!();

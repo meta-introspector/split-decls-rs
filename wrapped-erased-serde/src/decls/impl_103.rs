@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        SerializeTupleStruct!();
         Serializer!();
         Result!();
-        ErrorImpl!();
-        SerializeTupleStruct!();
         Error!();
+        ErrorImpl!();
         Serialize!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_103 {
     };
 }
 
-impl_103!()
+impl_103!();

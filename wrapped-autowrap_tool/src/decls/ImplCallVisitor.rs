@@ -4,4 +4,4 @@ macro_rules! ImplCallVisitor {
     };
 }
 
-ImplCallVisitor!()
+ImplCallVisitor!();

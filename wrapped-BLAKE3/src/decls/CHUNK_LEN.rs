@@ -4,4 +4,4 @@ macro_rules! CHUNK_LEN {
     };
 }
 
-CHUNK_LEN!()
+CHUNK_LEN!();

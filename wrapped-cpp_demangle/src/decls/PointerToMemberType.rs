@@ -4,4 +4,4 @@ macro_rules! PointerToMemberType {
     };
 }
 
-PointerToMemberType!()
+PointerToMemberType!();

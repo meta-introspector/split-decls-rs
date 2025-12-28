@@ -4,4 +4,4 @@ macro_rules! KIND_MASK {
     };
 }
 
-KIND_MASK!()
+KIND_MASK!();

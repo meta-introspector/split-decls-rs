@@ -17,4 +17,4 @@ fn foo() {
     };
 }
 
-test_two_idents!()
+test_two_idents!();

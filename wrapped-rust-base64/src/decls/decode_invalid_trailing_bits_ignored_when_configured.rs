@@ -12,4 +12,4 @@ macro_rules! decode_invalid_trailing_bits_ignored_when_configured {
     };
 }
 
-decode_invalid_trailing_bits_ignored_when_configured!()
+decode_invalid_trailing_bits_ignored_when_configured!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GraphQLParser!();
-        Rule!();
-        PositionCalculator!();
-        Result!();
         ServiceDocument!();
+        GraphQLParser!();
+        Result!();
+        PositionCalculator!();
+        Rule!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_schema {
     };
 }
 
-parse_schema!()
+parse_schema!();

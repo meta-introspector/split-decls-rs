@@ -4,4 +4,4 @@ macro_rules! color_tag {
     };
 }
 
-color_tag!()
+color_tag!();

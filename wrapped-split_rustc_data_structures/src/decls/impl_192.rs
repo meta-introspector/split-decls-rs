@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Sccs!();
+        NumEdges!();
+    };
+}
+
+macro_rules! impl_192 {
+    () => {
+        deps!();
+        impl < N : Idx , S : Idx + Ord > NumEdges for Sccs < N , S > { fn num_edges (& self) -> usize { self . scc_data . all_successors . len () } }
+    };
+}
+
+impl_192!()

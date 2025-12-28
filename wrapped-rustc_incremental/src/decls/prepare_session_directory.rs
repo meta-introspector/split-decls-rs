@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        HardLinkFailed!();
+        DeletePartial!();
+        Ok!();
+        CanonicalizePath!();
+    };
+}
+
+macro_rules! prepare_session_directory {
+    () => {
+        deps!();
+        # [doc = " Allocates the private session directory."] # [doc = ""] # [doc = " If the result of this function is `Ok`, we have a valid incremental"] # [doc = " compilation session directory. A valid session"] # [doc = " directory is one that contains a locked lock file. It may or may not contain"] # [doc = " a dep-graph and work products from a previous session."] # [doc = ""] # [doc = " This always attempts to load a dep-graph from the directory."] # [doc = " If loading fails for some reason, we fallback to a disabled `DepGraph`."] # [doc = " See [`rustc_interface::queries::dep_graph`]."] # [doc = ""] # [doc = " If this function returns an error, it may leave behind an invalid session directory."] # [doc = " The garbage collection will take care of it."] # [doc = ""] # [doc = " [`rustc_interface::queries::dep_graph`]: ../../rustc_interface/struct.Queries.html#structfield.dep_graph"] pub (crate) fn prepare_session_directory (sess : & Session , crate_name : Symbol) { if sess . opts . incremental . is_none () { return ; } let _timer = sess . timer ("incr_comp_prepare_session_directory") ; debug ! ("prepare_session_directory") ; let crate_dir = crate_path (sess , crate_name) ; debug ! ("crate-dir: {}" , crate_dir . display ()) ; create_dir (sess , & crate_dir , "crate") ; let crate_dir = match try_canonicalize (& crate_dir) { Ok (v) => v , Err (err) => { sess . dcx () . emit_fatal (errors :: CanonicalizePath { path : crate_dir , err }) ; } } ; let mut source_directories_already_tried = FxHashSet :: default () ; loop { let session_dir = generate_session_dir_path (& crate_dir) ; debug ! ("session-dir: {}" , session_dir . display ()) ; let (directory_lock , lock_file_path) = lock_directory (sess , & session_dir) ; create_dir (sess , & session_dir , "session") ; let source_directory = find_source_directory (& crate_dir , & source_directories_already_tried) ; let Some (source_directory) = source_directory else { debug ! ("no source directory found. Continuing with empty session \
+                    directory.") ; sess . init_incr_comp_session (session_dir , directory_lock) ; return ; } ; debug ! ("attempting to copy data from source: {}" , source_directory . display ()) ; if let Ok (allows_links) = copy_files (sess , & session_dir , & source_directory) { debug ! ("successfully copied data from: {}" , source_directory . display ()) ; if ! allows_links { sess . dcx () . emit_warn (errors :: HardLinkFailed { path : & session_dir }) ; } sess . init_incr_comp_session (session_dir , directory_lock) ; return ; } else { debug ! ("copying failed - trying next directory") ; source_directories_already_tried . insert (source_directory) ; if let Err (err) = std_fs :: remove_dir_all (& session_dir) { sess . dcx () . emit_warn (errors :: DeletePartial { path : & session_dir , err }) ; } delete_session_dir_lock_file (sess , & lock_file_path) ; drop (directory_lock) ; } } }
+    };
+}
+
+prepare_session_directory!()

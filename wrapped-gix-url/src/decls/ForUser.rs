@@ -4,4 +4,4 @@ macro_rules! ForUser {
     };
 }
 
-ForUser!()
+ForUser!();

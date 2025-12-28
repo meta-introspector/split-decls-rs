@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PasswordClientBuilder!();
-        ChallengeRef!();
-        DigestClient!();
-        Error!();
         PasswordClient!();
         BasicClient!();
+        PasswordClientBuilder!();
+        Error!();
+        DigestClient!();
+        ChallengeRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_74 {
     };
 }
 
-impl_74!()
+impl_74!();

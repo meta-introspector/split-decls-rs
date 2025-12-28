@@ -11,4 +11,4 @@ macro_rules! aarch64_neon {
     };
 }
 
-aarch64_neon!()
+aarch64_neon!();

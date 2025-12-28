@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         QueueInner!();
-        IterMut!();
         IntoIter!();
+        IterMut!();
         Storage!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_473 {
     };
 }
 
-impl_473!()
+impl_473!();

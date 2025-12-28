@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        NFA!();
-        State!();
+        StateID!();
+        Transition!();
+        DFA!();
+        SmallIndex!();
         Special!();
-        Automaton!();
         BuildError!();
         ByteClasses!();
         Match!();
-        StateID!();
-        Transition!();
         PatternID!();
-        DFA!();
-        SmallIndex!();
+        Automaton!();
+        State!();
+        NFA!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

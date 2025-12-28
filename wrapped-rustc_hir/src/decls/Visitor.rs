@@ -1,0 +1,70 @@
+macro_rules! deps {
+    () => {
+        PatExpr!();
+        Generics!();
+        GenericParam!();
+        ExprField!();
+        FnRetTy!();
+        EnumDef!();
+        UsePath!();
+        Body!();
+        Lifetime!();
+        AmbigArg!();
+        GenericArg!();
+        Pat!();
+        FnKind!();
+        ImplItem!();
+        InferKind!();
+        Stmt!();
+        GenericBound!();
+        PreciseCapturingArg!();
+        WherePredicate!();
+        Item!();
+        FnDecl!();
+        VariantData!();
+        Lit!();
+        TyPat!();
+        ConstBlock!();
+        TraitItemId!();
+        TraitRef!();
+        HirTyCtxt!();
+        Attribute!();
+        AssocItemConstraint!();
+        InlineAsm!();
+        Expr!();
+        ItemId!();
+        ImplItemId!();
+        TraitItem!();
+        PathSegment!();
+        Param!();
+        Ty!();
+        FieldDef!();
+        QPath!();
+        BodyId!();
+        Mod!();
+        ForeignItemId!();
+        ForeignItem!();
+        Variant!();
+        ConstArg!();
+        OpaqueTy!();
+        AnonConst!();
+        LetStmt!();
+        Block!();
+        Path!();
+        Defaultness!();
+        GenericArgs!();
+        Arm!();
+        PolyTraitRef!();
+        PatField!();
+    };
+}
+
+macro_rules! Visitor {
+    () => {
+        deps!();
+        # [doc = " Each method of the Visitor trait is a hook to be potentially"] # [doc = " overridden. Each method's default implementation recursively visits"] # [doc = " the substructure of the input via the corresponding `walk` method;"] # [doc = " e.g., the `visit_mod` method by default calls `intravisit::walk_mod`."] # [doc = ""] # [doc = " Note that this visitor does NOT visit nested items by default"] # [doc = " (this is why the module is called `intravisit`, to distinguish it"] # [doc = " from the AST's `visit` module, which acts differently). If you"] # [doc = " simply want to visit all items in the crate in some order, you"] # [doc = " should call `tcx.hir_visit_all_item_likes_in_crate`. Otherwise, see the comment"] # [doc = " on `visit_nested_item` for details on how to visit nested items."] # [doc = ""] # [doc = " If you want to ensure that your code handles every variant"] # [doc = " explicitly, you need to override each method. (And you also need"] # [doc = " to monitor future changes to `Visitor` in case a new method with a"] # [doc = " new default implementation gets introduced.)"] # [doc = ""] # [doc = " Every `walk_*` method uses deconstruction to access fields of structs and"] # [doc = " enums. This will result in a compile error if a field is added, which makes"] # [doc = " it more likely the appropriate visit call will be added for it."] pub trait Visitor < 'v > : Sized { type MaybeTyCtxt : HirTyCtxt < 'v > = < Self :: NestedFilter as NestedFilter < 'v > > :: MaybeTyCtxt ; # [doc = " Override this type to control which nested HIR are visited; see"] # [doc = " [`NestedFilter`] for details. If you override this type, you"] # [doc = " must also override [`maybe_tcx`](Self::maybe_tcx)."] # [doc = ""] # [doc = " **If for some reason you want the nested behavior, but don't"] # [doc = " have a `tcx` at your disposal:** then override the"] # [doc = " `visit_nested_XXX` methods. If a new `visit_nested_XXX` variant is"] # [doc = " added in the future, it will cause a panic which can be detected"] # [doc = " and fixed appropriately."] type NestedFilter : NestedFilter < 'v > = nested_filter :: None ; # [doc = " The result type of the `visit_*` methods. Can be either `()`,"] # [doc = " or `ControlFlow<T>`."] type Result : VisitorResult = () ; # [doc = " If `type NestedFilter` is set to visit nested items, this method"] # [doc = " must also be overridden to provide a map to retrieve nested items."] fn maybe_tcx (& mut self) -> Self :: MaybeTyCtxt { panic ! ("maybe_tcx must be implemented or consider using \
+            `type NestedFilter = nested_filter::None` (the default)") ; } # [doc = " Invoked when a nested item is encountered. By default, when"] # [doc = " `Self::NestedFilter` is `nested_filter::None`, this method does"] # [doc = " nothing. **You probably don't want to override this method** --"] # [doc = " instead, override [`Self::NestedFilter`] or use the \"shallow\" or"] # [doc = " \"deep\" visit patterns described at"] # [doc = " [`rustc_hir::intravisit`]. The only reason to override"] # [doc = " this method is if you want a nested pattern but cannot supply a"] # [doc = " `TyCtxt`; see `maybe_tcx` for advice."] fn visit_nested_item (& mut self , id : ItemId) -> Self :: Result { if Self :: NestedFilter :: INTER { let item = self . maybe_tcx () . hir_item (id) ; try_visit ! (self . visit_item (item)) ; } Self :: Result :: output () } # [doc = " Like `visit_nested_item()`, but for trait items. See"] # [doc = " `visit_nested_item()` for advice on when to override this"] # [doc = " method."] fn visit_nested_trait_item (& mut self , id : TraitItemId) -> Self :: Result { if Self :: NestedFilter :: INTER { let item = self . maybe_tcx () . hir_trait_item (id) ; try_visit ! (self . visit_trait_item (item)) ; } Self :: Result :: output () } # [doc = " Like `visit_nested_item()`, but for impl items. See"] # [doc = " `visit_nested_item()` for advice on when to override this"] # [doc = " method."] fn visit_nested_impl_item (& mut self , id : ImplItemId) -> Self :: Result { if Self :: NestedFilter :: INTER { let item = self . maybe_tcx () . hir_impl_item (id) ; try_visit ! (self . visit_impl_item (item)) ; } Self :: Result :: output () } # [doc = " Like `visit_nested_item()`, but for foreign items. See"] # [doc = " `visit_nested_item()` for advice on when to override this"] # [doc = " method."] fn visit_nested_foreign_item (& mut self , id : ForeignItemId) -> Self :: Result { if Self :: NestedFilter :: INTER { let item = self . maybe_tcx () . hir_foreign_item (id) ; try_visit ! (self . visit_foreign_item (item)) ; } Self :: Result :: output () } # [doc = " Invoked to visit the body of a function, method or closure. Like"] # [doc = " `visit_nested_item`, does nothing by default unless you override"] # [doc = " `Self::NestedFilter`."] fn visit_nested_body (& mut self , id : BodyId) -> Self :: Result { if Self :: NestedFilter :: INTRA { let body = self . maybe_tcx () . hir_body (id) ; try_visit ! (self . visit_body (body)) ; } Self :: Result :: output () } fn visit_param (& mut self , param : & 'v Param < 'v >) -> Self :: Result { walk_param (self , param) } # [doc = " Visits the top-level item and (optionally) nested items / impl items. See"] # [doc = " `visit_nested_item` for details."] fn visit_item (& mut self , i : & 'v Item < 'v >) -> Self :: Result { walk_item (self , i) } fn visit_body (& mut self , b : & Body < 'v >) -> Self :: Result { walk_body (self , b) } fn visit_id (& mut self , _hir_id : HirId) -> Self :: Result { Self :: Result :: output () } fn visit_name (& mut self , _name : Symbol) -> Self :: Result { Self :: Result :: output () } fn visit_ident (& mut self , ident : Ident) -> Self :: Result { walk_ident (self , ident) } fn visit_mod (& mut self , m : & 'v Mod < 'v > , _s : Span , _n : HirId) -> Self :: Result { walk_mod (self , m) } fn visit_foreign_item (& mut self , i : & 'v ForeignItem < 'v >) -> Self :: Result { walk_foreign_item (self , i) } fn visit_local (& mut self , l : & 'v LetStmt < 'v >) -> Self :: Result { walk_local (self , l) } fn visit_block (& mut self , b : & 'v Block < 'v >) -> Self :: Result { walk_block (self , b) } fn visit_stmt (& mut self , s : & 'v Stmt < 'v >) -> Self :: Result { walk_stmt (self , s) } fn visit_arm (& mut self , a : & 'v Arm < 'v >) -> Self :: Result { walk_arm (self , a) } fn visit_pat (& mut self , p : & 'v Pat < 'v >) -> Self :: Result { walk_pat (self , p) } fn visit_pat_field (& mut self , f : & 'v PatField < 'v >) -> Self :: Result { walk_pat_field (self , f) } fn visit_pat_expr (& mut self , expr : & 'v PatExpr < 'v >) -> Self :: Result { walk_pat_expr (self , expr) } fn visit_lit (& mut self , _hir_id : HirId , _lit : Lit , _negated : bool) -> Self :: Result { Self :: Result :: output () } fn visit_anon_const (& mut self , c : & 'v AnonConst) -> Self :: Result { walk_anon_const (self , c) } fn visit_inline_const (& mut self , c : & 'v ConstBlock) -> Self :: Result { walk_inline_const (self , c) } fn visit_generic_arg (& mut self , generic_arg : & 'v GenericArg < 'v >) -> Self :: Result { walk_generic_arg (self , generic_arg) } # [doc = " All types are treated as ambiguous types for the purposes of hir visiting in"] # [doc = " order to ensure that visitors can handle infer vars without it being too error-prone."] # [doc = ""] # [doc = " The [`Visitor::visit_infer`] method should be overridden in order to handle infer vars."] fn visit_ty (& mut self , t : & 'v Ty < 'v , AmbigArg >) -> Self :: Result { walk_ty (self , t) } # [doc = " All consts are treated as ambiguous consts for the purposes of hir visiting in"] # [doc = " order to ensure that visitors can handle infer vars without it being too error-prone."] # [doc = ""] # [doc = " The [`Visitor::visit_infer`] method should be overridden in order to handle infer vars."] fn visit_const_arg (& mut self , c : & 'v ConstArg < 'v , AmbigArg >) -> Self :: Result { walk_const_arg (self , c) } # [allow (unused_variables)] fn visit_infer (& mut self , inf_id : HirId , inf_span : Span , kind : InferKind < 'v >) -> Self :: Result { self . visit_id (inf_id) } fn visit_lifetime (& mut self , lifetime : & 'v Lifetime) -> Self :: Result { walk_lifetime (self , lifetime) } fn visit_expr (& mut self , ex : & 'v Expr < 'v >) -> Self :: Result { walk_expr (self , ex) } fn visit_expr_field (& mut self , field : & 'v ExprField < 'v >) -> Self :: Result { walk_expr_field (self , field) } fn visit_pattern_type_pattern (& mut self , p : & 'v TyPat < 'v >) -> Self :: Result { walk_ty_pat (self , p) } fn visit_generic_param (& mut self , p : & 'v GenericParam < 'v >) -> Self :: Result { walk_generic_param (self , p) } fn visit_const_param_default (& mut self , _param : HirId , ct : & 'v ConstArg < 'v >) -> Self :: Result { walk_const_param_default (self , ct) } fn visit_generics (& mut self , g : & 'v Generics < 'v >) -> Self :: Result { walk_generics (self , g) } fn visit_where_predicate (& mut self , predicate : & 'v WherePredicate < 'v >) -> Self :: Result { walk_where_predicate (self , predicate) } fn visit_fn_ret_ty (& mut self , ret_ty : & 'v FnRetTy < 'v >) -> Self :: Result { walk_fn_ret_ty (self , ret_ty) } fn visit_fn_decl (& mut self , fd : & 'v FnDecl < 'v >) -> Self :: Result { walk_fn_decl (self , fd) } fn visit_fn (& mut self , fk : FnKind < 'v > , fd : & 'v FnDecl < 'v > , b : BodyId , _ : Span , id : LocalDefId ,) -> Self :: Result { walk_fn (self , fk , fd , b , id) } fn visit_use (& mut self , path : & 'v UsePath < 'v > , hir_id : HirId) -> Self :: Result { walk_use (self , path , hir_id) } fn visit_trait_item (& mut self , ti : & 'v TraitItem < 'v >) -> Self :: Result { walk_trait_item (self , ti) } fn visit_trait_item_ref (& mut self , ii : & 'v TraitItemId) -> Self :: Result { walk_trait_item_ref (self , * ii) } fn visit_impl_item (& mut self , ii : & 'v ImplItem < 'v >) -> Self :: Result { walk_impl_item (self , ii) } fn visit_foreign_item_ref (& mut self , ii : & 'v ForeignItemId) -> Self :: Result { walk_foreign_item_ref (self , * ii) } fn visit_impl_item_ref (& mut self , ii : & 'v ImplItemId) -> Self :: Result { walk_impl_item_ref (self , * ii) } fn visit_trait_ref (& mut self , t : & 'v TraitRef < 'v >) -> Self :: Result { walk_trait_ref (self , t) } fn visit_param_bound (& mut self , bounds : & 'v GenericBound < 'v >) -> Self :: Result { walk_param_bound (self , bounds) } fn visit_precise_capturing_arg (& mut self , arg : & 'v PreciseCapturingArg < 'v >) -> Self :: Result { walk_precise_capturing_arg (self , arg) } fn visit_poly_trait_ref (& mut self , t : & 'v PolyTraitRef < 'v >) -> Self :: Result { walk_poly_trait_ref (self , t) } fn visit_opaque_ty (& mut self , opaque : & 'v OpaqueTy < 'v >) -> Self :: Result { walk_opaque_ty (self , opaque) } fn visit_variant_data (& mut self , s : & 'v VariantData < 'v >) -> Self :: Result { walk_struct_def (self , s) } fn visit_field_def (& mut self , s : & 'v FieldDef < 'v >) -> Self :: Result { walk_field_def (self , s) } fn visit_enum_def (& mut self , enum_definition : & 'v EnumDef < 'v >) -> Self :: Result { walk_enum_def (self , enum_definition) } fn visit_variant (& mut self , v : & 'v Variant < 'v >) -> Self :: Result { walk_variant (self , v) } fn visit_label (& mut self , label : & 'v Label) -> Self :: Result { walk_label (self , label) } fn visit_qpath (& mut self , qpath : & 'v QPath < 'v > , id : HirId , _span : Span) -> Self :: Result { walk_qpath (self , qpath , id) } fn visit_path (& mut self , path : & Path < 'v > , _id : HirId) -> Self :: Result { walk_path (self , path) } fn visit_path_segment (& mut self , path_segment : & 'v PathSegment < 'v >) -> Self :: Result { walk_path_segment (self , path_segment) } fn visit_generic_args (& mut self , generic_args : & 'v GenericArgs < 'v >) -> Self :: Result { walk_generic_args (self , generic_args) } fn visit_assoc_item_constraint (& mut self , constraint : & 'v AssocItemConstraint < 'v > ,) -> Self :: Result { walk_assoc_item_constraint (self , constraint) } fn visit_attribute (& mut self , _attr : & 'v Attribute) -> Self :: Result { Self :: Result :: output () } fn visit_defaultness (& mut self , defaultness : & 'v Defaultness) -> Self :: Result { walk_defaultness (self , defaultness) } fn visit_inline_asm (& mut self , asm : & 'v InlineAsm < 'v > , id : HirId) -> Self :: Result { walk_inline_asm (self , asm , id) } }
+    };
+}
+
+Visitor!()

@@ -4,4 +4,4 @@ macro_rules! unescape_unicode_to_string {
     };
 }
 
-unescape_unicode_to_string!()
+unescape_unicode_to_string!();

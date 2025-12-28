@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ArgumentType!();
+        LoweringContext!();
+    };
+}
+
+macro_rules! make_format_spec {
+    () => {
+        deps!();
+        # [doc = " Generate a hir expression for a format_args placeholder specification."] # [doc = ""] # [doc = " Generates"] # [doc = ""] # [doc = " ```text"] # [doc = "     <core::fmt::rt::Placeholder {"] # [doc = "         position: …usize,"] # [doc = "         flags: …u32,"] # [doc = "         precision: <core::fmt::rt::Count::…>,"] # [doc = "         width: <core::fmt::rt::Count::…>,"] # [doc = "     }"] # [doc = " ```"] fn make_format_spec < 'hir > (ctx : & mut LoweringContext < '_ , 'hir > , sp : Span , placeholder : & FormatPlaceholder , argmap : & mut FxIndexMap < (usize , ArgumentType) , Option < Span > > ,) -> hir :: Expr < 'hir > { let position = match placeholder . argument . index { Ok (arg_index) => { let (i , _) = argmap . insert_full ((arg_index , ArgumentType :: Format (placeholder . format_trait)) , placeholder . span ,) ; ctx . expr_usize (sp , i) } Err (_) => ctx . expr (sp , hir :: ExprKind :: Err (ctx . dcx () . span_delayed_bug (sp , "lowered bad format_args count")) ,) , } ; let & FormatOptions { ref width , ref precision , alignment , fill , sign , alternate , zero_pad , debug_hex , } = & placeholder . format_options ; let fill = fill . unwrap_or (' ') ; let align = match alignment { Some (FormatAlignment :: Left) => 0 , Some (FormatAlignment :: Right) => 1 , Some (FormatAlignment :: Center) => 2 , None => 3 , } ; let flags : u32 = fill as u32 | ((sign == Some (FormatSign :: Plus)) as u32) << 21 | ((sign == Some (FormatSign :: Minus)) as u32) << 22 | (alternate as u32) << 23 | (zero_pad as u32) << 24 | ((debug_hex == Some (FormatDebugHex :: Lower)) as u32) << 25 | ((debug_hex == Some (FormatDebugHex :: Upper)) as u32) << 26 | (width . is_some () as u32) << 27 | (precision . is_some () as u32) << 28 | align << 29 | 1 << 31 ; let flags = ctx . expr_u32 (sp , flags) ; let precision = make_count (ctx , sp , precision , argmap) ; let width = make_count (ctx , sp , width , argmap) ; let position = ctx . expr_field (Ident :: new (sym :: position , sp) , ctx . arena . alloc (position) , sp) ; let flags = ctx . expr_field (Ident :: new (sym :: flags , sp) , ctx . arena . alloc (flags) , sp) ; let precision = ctx . expr_field (Ident :: new (sym :: precision , sp) , ctx . arena . alloc (precision) , sp) ; let width = ctx . expr_field (Ident :: new (sym :: width , sp) , ctx . arena . alloc (width) , sp) ; let placeholder = ctx . arena . alloc (hir :: QPath :: LangItem (hir :: LangItem :: FormatPlaceholder , sp)) ; let fields = ctx . arena . alloc_from_iter ([position , flags , precision , width]) ; ctx . expr (sp , hir :: ExprKind :: Struct (placeholder , fields , hir :: StructTailExpr :: None)) }
+    };
+}
+
+make_format_spec!()

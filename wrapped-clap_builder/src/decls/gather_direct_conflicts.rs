@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Command!();
         Id!();
+        Command!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! gather_direct_conflicts {
     };
 }
 
-gather_direct_conflicts!()
+gather_direct_conflicts!();

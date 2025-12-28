@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RawEntryBuilderMut!();
         RawEntryMut!();
+        Entry!();
         LruCache!();
         RawEntryBuilder!();
-        Entry!();
+        RawEntryBuilderMut!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

@@ -4,4 +4,4 @@ macro_rules! elapsed {
     };
 }
 
-elapsed!()
+elapsed!();

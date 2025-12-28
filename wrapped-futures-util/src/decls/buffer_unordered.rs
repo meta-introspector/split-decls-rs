@@ -4,4 +4,4 @@ macro_rules! buffer_unordered {
     };
 }
 
-buffer_unordered!()
+buffer_unordered!();

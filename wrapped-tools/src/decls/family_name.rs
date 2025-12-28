@@ -4,4 +4,4 @@ macro_rules! family_name {
     };
 }
 
-family_name!()
+family_name!();

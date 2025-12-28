@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        QueryKeyStringCache!();
+        QueryKeyStringBuilder!();
+    };
+}
+
+macro_rules! alloc_self_profile_query_strings_for_query_cache {
+    () => {
+        deps!();
+        # [doc = " Allocate the self-profiling query strings for a single query cache. This"] # [doc = " method is called from `alloc_self_profile_query_strings` which knows all"] # [doc = " the queries via macro magic."] pub (crate) fn alloc_self_profile_query_strings_for_query_cache < 'tcx , C > (tcx : TyCtxt < 'tcx > , query_name : & 'static str , query_cache : & C , string_cache : & mut QueryKeyStringCache ,) where C : QueryCache , C :: Key : Debug + Clone , { tcx . prof . with_profiler (| profiler | { let event_id_builder = profiler . event_id_builder () ; if profiler . query_key_recording_enabled () { let mut query_string_builder = QueryKeyStringBuilder :: new (profiler , tcx , string_cache) ; let query_name = profiler . get_or_alloc_cached_string (query_name) ; let mut query_keys_and_indices = Vec :: new () ; query_cache . iter (& mut | k , _ , i | query_keys_and_indices . push ((* k , i))) ; for (query_key , dep_node_index) in query_keys_and_indices { let query_invocation_id = dep_node_index . into () ; let query_key = query_key . to_self_profile_string (& mut query_string_builder) ; let event_id = event_id_builder . from_label_and_arg (query_name , query_key) ; profiler . map_query_invocation_id_to_string (query_invocation_id , event_id . to_string_id () ,) ; } } else { let query_name = profiler . get_or_alloc_cached_string (query_name) ; let event_id = event_id_builder . from_label (query_name) . to_string_id () ; let mut query_invocation_ids = Vec :: new () ; query_cache . iter (& mut | _ , _ , i | { query_invocation_ids . push (i . into ()) ; }) ; profiler . bulk_map_query_invocation_id_to_single_string (query_invocation_ids . into_iter () , event_id ,) ; } }) ; }
+    };
+}
+
+alloc_self_profile_query_strings_for_query_cache!()

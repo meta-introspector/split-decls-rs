@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EdgeNameType!();
         DefaultEdgeName!();
         Edge!();
         OutputType!();
+        EdgeNameType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_734 {
     };
 }
 
-impl_734!()
+impl_734!();

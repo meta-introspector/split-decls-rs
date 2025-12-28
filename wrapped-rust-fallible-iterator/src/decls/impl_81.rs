@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FilterMap!();
-        FoldStop!();
         DoubleEndedFallibleIterator!();
+        FoldStop!();
+        FilterMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

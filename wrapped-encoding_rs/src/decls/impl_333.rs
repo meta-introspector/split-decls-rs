@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ByteFourHandle!();
-        Unicode!();
-        EncoderResult!();
-        Utf16Source!();
-        ByteDestination!();
-        Utf16ReadHandle!();
-        Space!();
-        CopyAsciiResult!();
-        ByteTwoHandle!();
         NonAscii!();
+        EncoderResult!();
+        ByteTwoHandle!();
+        ByteFourHandle!();
+        Utf16ReadHandle!();
+        ByteDestination!();
+        CopyAsciiResult!();
+        Unicode!();
+        Utf16Source!();
+        Space!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_333 {
     };
 }
 
-impl_333!()
+impl_333!();

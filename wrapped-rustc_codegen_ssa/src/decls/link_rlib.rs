@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        ArchiveBuilder!();
+        ReadFileError!();
+        AddNativeLibrary!();
+        CodegenResults!();
+        ArchiveBuilderBuilder!();
+        RlibFlavor!();
+        MetadataPosition!();
+    };
+}
+
+macro_rules! link_rlib {
+    () => {
+        deps!();
+        # [doc = " Create an 'rlib'."] # [doc = ""] # [doc = " An rlib in its current incarnation is essentially a renamed .a file (with \"dummy\" object files)."] # [doc = " The rlib primarily contains the object file of the crate, but it also some of the object files"] # [doc = " from native libraries."] fn link_rlib < 'a > (sess : & 'a Session , archive_builder_builder : & dyn ArchiveBuilderBuilder , codegen_results : & CodegenResults , metadata : & EncodedMetadata , flavor : RlibFlavor , tmpdir : & MaybeTempDir ,) -> Box < dyn ArchiveBuilder + 'a > { let mut ab = archive_builder_builder . new_archive_builder (sess) ; let trailing_metadata = match flavor { RlibFlavor :: Normal => { let (metadata , metadata_position) = create_wrapper_file (sess , ".rmeta" . to_string () , metadata . stub_or_full ()) ; let metadata = emit_wrapper_file (sess , & metadata , tmpdir . as_ref () , METADATA_FILENAME) ; match metadata_position { MetadataPosition :: First => { ab . add_file (& metadata) ; None } MetadataPosition :: Last => Some (metadata) , } } RlibFlavor :: StaticlibBase => None , } ; for m in & codegen_results . modules { if let Some (obj) = m . object . as_ref () { ab . add_file (obj) ; } if let Some (dwarf_obj) = m . dwarf_object . as_ref () { ab . add_file (dwarf_obj) ; } } match flavor { RlibFlavor :: Normal => { } RlibFlavor :: StaticlibBase => { let obj = codegen_results . allocator_module . as_ref () . and_then (| m | m . object . as_ref ()) ; if let Some (obj) = obj { ab . add_file (obj) ; } } } let mut packed_bundled_libs = Vec :: new () ; for lib in codegen_results . crate_info . used_libraries . iter () { let NativeLibKind :: Static { bundle : None | Some (true) , .. } = lib . kind else { continue ; } ; if flavor == RlibFlavor :: Normal && let Some (filename) = lib . filename { let path = find_native_static_library (filename . as_str () , true , sess) ; let src = read (path) . unwrap_or_else (| e | sess . dcx () . emit_fatal (errors :: ReadFileError { message : e })) ; let (data , _) = create_wrapper_file (sess , ".bundled_lib" . to_string () , & src) ; let wrapper_file = emit_wrapper_file (sess , & data , tmpdir . as_ref () , filename . as_str ()) ; packed_bundled_libs . push (wrapper_file) ; } else { let path = find_native_static_library (lib . name . as_str () , lib . verbatim , sess) ; ab . add_archive (& path , Box :: new (| _ | false)) . unwrap_or_else (| error | { sess . dcx () . emit_fatal (errors :: AddNativeLibrary { library_path : path , error }) }) ; } } if sess . target . is_like_windows { for output_path in raw_dylib :: create_raw_dylib_dll_import_libs (sess , archive_builder_builder , codegen_results . crate_info . used_libraries . iter () , tmpdir . as_ref () , true ,) { ab . add_archive (& output_path , Box :: new (| _ | false)) . unwrap_or_else (| error | { sess . dcx () . emit_fatal (errors :: AddNativeLibrary { library_path : output_path , error }) ; }) ; } } if let Some (trailing_metadata) = trailing_metadata { ab . add_file (& trailing_metadata) ; } for lib in packed_bundled_libs { ab . add_file (& lib) } ab }
+    };
+}
+
+link_rlib!()

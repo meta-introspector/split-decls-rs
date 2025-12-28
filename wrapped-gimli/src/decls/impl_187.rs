@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        UnwindSection!();
         DebugFrame!();
         DebugFrameOffset!();
+        Reader!();
+        UnwindSection!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_187 {
     };
 }
 
-impl_187!()
+impl_187!();

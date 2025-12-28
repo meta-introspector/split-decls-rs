@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CallFrameInstruction!();
         Address!();
+        CallFrameInstruction!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FrameDescriptionEntry {
     };
 }
 
-FrameDescriptionEntry!()
+FrameDescriptionEntry!();

@@ -11,4 +11,4 @@ macro_rules! return_slot {
     };
 }
 
-return_slot!()
+return_slot!();

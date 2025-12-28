@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugLine!();
         Reader!();
+        DebugLine!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_402 {
     };
 }
 
-impl_402!()
+impl_402!();

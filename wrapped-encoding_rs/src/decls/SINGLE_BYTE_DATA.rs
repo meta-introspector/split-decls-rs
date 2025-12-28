@@ -11,4 +11,4 @@ macro_rules! SINGLE_BYTE_DATA {
     };
 }
 
-SINGLE_BYTE_DATA!()
+SINGLE_BYTE_DATA!();

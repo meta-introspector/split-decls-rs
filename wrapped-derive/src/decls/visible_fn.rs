@@ -11,4 +11,4 @@ macro_rules! visible_fn {
     };
 }
 
-visible_fn!()
+visible_fn!();

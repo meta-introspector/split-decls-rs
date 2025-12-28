@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RefCnt!();
-        Access!();
         Strategy!();
+        RefCnt!();
         ArcSwapAny!();
         Guard!();
+        Access!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

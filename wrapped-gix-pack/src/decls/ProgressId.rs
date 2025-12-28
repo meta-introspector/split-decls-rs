@@ -4,4 +4,4 @@ macro_rules! ProgressId {
     };
 }
 
-ProgressId!()
+ProgressId!();

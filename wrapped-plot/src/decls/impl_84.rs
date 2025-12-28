@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Set!();
         Properties!();
+        Set!();
         Color!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_84 {
     };
 }
 
-impl_84!()
+impl_84!();

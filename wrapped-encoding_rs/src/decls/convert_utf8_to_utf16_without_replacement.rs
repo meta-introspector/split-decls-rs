@@ -4,4 +4,4 @@ macro_rules! convert_utf8_to_utf16_without_replacement {
     };
 }
 
-convert_utf8_to_utf16_without_replacement!()
+convert_utf8_to_utf16_without_replacement!();

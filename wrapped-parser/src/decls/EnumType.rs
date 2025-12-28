@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Positioned!();
         EnumValueDefinition!();
+        Positioned!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EnumType {
     };
 }
 
-EnumType!()
+EnumType!();

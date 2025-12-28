@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        LookupEntryIter!();
         Reader!();
         PubStuffParser!();
         PubNamesEntry!();
-        LookupEntryIter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! PubNamesEntryIter {
     };
 }
 
-PubNamesEntryIter!()
+PubNamesEntryIter!();

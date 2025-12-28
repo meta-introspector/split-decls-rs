@@ -11,4 +11,4 @@ macro_rules! test_day_iterator_limit {
     };
 }
 
-test_day_iterator_limit!()
+test_day_iterator_limit!();

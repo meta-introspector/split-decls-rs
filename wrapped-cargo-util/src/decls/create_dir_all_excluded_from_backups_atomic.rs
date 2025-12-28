@@ -4,4 +4,4 @@ macro_rules! create_dir_all_excluded_from_backups_atomic {
     };
 }
 
-create_dir_all_excluded_from_backups_atomic!()
+create_dir_all_excluded_from_backups_atomic!();

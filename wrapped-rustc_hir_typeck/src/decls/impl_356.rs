@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        InferBorrowKind!();
+        Delegate!();
+    };
+}
+
+macro_rules! impl_356 {
+    () => {
+        deps!();
+        impl < 'tcx > euv :: Delegate < 'tcx > for InferBorrowKind < 'tcx > { fn fake_read (& mut self , place_with_id : & PlaceWithHirId < 'tcx > , cause : FakeReadCause , diag_expr_id : HirId ,) { let PlaceBase :: Upvar (_) = place_with_id . place . base else { return } ; let dummy_capture_kind = ty :: UpvarCapture :: ByRef (ty :: BorrowKind :: Immutable) ; let (place , _) = restrict_capture_precision (place_with_id . place . clone () , dummy_capture_kind) ; let (place , _) = restrict_repr_packed_field_ref_capture (place , dummy_capture_kind) ; self . fake_reads . push ((place , cause , diag_expr_id)) ; } # [instrument (skip (self) , level = "debug")] fn consume (& mut self , place_with_id : & PlaceWithHirId < 'tcx > , diag_expr_id : HirId) { let PlaceBase :: Upvar (upvar_id) = place_with_id . place . base else { return } ; assert_eq ! (self . closure_def_id , upvar_id . closure_expr_id) ; self . capture_information . push ((place_with_id . place . clone () , ty :: CaptureInfo { capture_kind_expr_id : Some (diag_expr_id) , path_expr_id : Some (diag_expr_id) , capture_kind : ty :: UpvarCapture :: ByValue , } ,)) ; } # [instrument (skip (self) , level = "debug")] fn use_cloned (& mut self , place_with_id : & PlaceWithHirId < 'tcx > , diag_expr_id : HirId) { let PlaceBase :: Upvar (upvar_id) = place_with_id . place . base else { return } ; assert_eq ! (self . closure_def_id , upvar_id . closure_expr_id) ; self . capture_information . push ((place_with_id . place . clone () , ty :: CaptureInfo { capture_kind_expr_id : Some (diag_expr_id) , path_expr_id : Some (diag_expr_id) , capture_kind : ty :: UpvarCapture :: ByUse , } ,)) ; } # [instrument (skip (self) , level = "debug")] fn borrow (& mut self , place_with_id : & PlaceWithHirId < 'tcx > , diag_expr_id : HirId , bk : ty :: BorrowKind ,) { let PlaceBase :: Upvar (upvar_id) = place_with_id . place . base else { return } ; assert_eq ! (self . closure_def_id , upvar_id . closure_expr_id) ; let capture_kind = ty :: UpvarCapture :: ByRef (bk) ; let (place , mut capture_kind) = restrict_repr_packed_field_ref_capture (place_with_id . place . clone () , capture_kind) ; if place_with_id . place . deref_tys () . any (Ty :: is_raw_ptr) { capture_kind = ty :: UpvarCapture :: ByRef (ty :: BorrowKind :: Immutable) ; } self . capture_information . push ((place , ty :: CaptureInfo { capture_kind_expr_id : Some (diag_expr_id) , path_expr_id : Some (diag_expr_id) , capture_kind , } ,)) ; } # [instrument (skip (self) , level = "debug")] fn mutate (& mut self , assignee_place : & PlaceWithHirId < 'tcx > , diag_expr_id : HirId) { self . borrow (assignee_place , diag_expr_id , ty :: BorrowKind :: Mutable) ; } }
+    };
+}
+
+impl_356!()

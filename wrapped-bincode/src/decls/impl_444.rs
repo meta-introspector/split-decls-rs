@@ -3,8 +3,8 @@ macro_rules! deps {
         Encode!();
         EncodeError!();
         Encoder!();
-        Endianness!();
         IntEncoding!();
+        Endianness!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_444 {
     };
 }
 
-impl_444!()
+impl_444!();

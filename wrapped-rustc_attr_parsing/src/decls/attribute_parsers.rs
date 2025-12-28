@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        GroupType!();
+        FinalizeFn!();
+        AttributeParser!();
+        Early!();
+        Single!();
+        GroupTypeInnerAccept!();
+        WithoutArgs!();
+        Late!();
+        GroupTypeInner!();
+        Combine!();
+    };
+}
+
+macro_rules! attribute_parsers {
+    () => {
+        deps!();
+        macro_rules ! attribute_parsers { (pub (crate) static $ name : ident = [$ ($ names : ty) ,* $ (,) ?] ;) => { mod early { use super ::*; type Combine < T > = super :: Combine < T , Early >; type Single < T > = super :: Single < T , Early >; type WithoutArgs < T > = super :: WithoutArgs < T , Early >; attribute_parsers ! (@ [Early] pub (crate) static $ name = [$ ($ names) ,*] ;) ; } mod late { use super ::*; type Combine < T > = super :: Combine < T , Late >; type Single < T > = super :: Single < T , Late >; type WithoutArgs < T > = super :: WithoutArgs < T , Late >; attribute_parsers ! (@ [Late] pub (crate) static $ name = [$ ($ names) ,*] ;) ; } } ; (@ [$ stage : ty] pub (crate) static $ name : ident = [$ ($ names : ty) ,* $ (,) ?] ;) => { pub (crate) static $ name : GroupType <$ stage > = LazyLock :: new (|| { let mut accepts = BTreeMap ::< _ , Vec < GroupTypeInnerAccept <$ stage >>>:: new () ; let mut finalizes = Vec ::< FinalizeFn <$ stage >>:: new () ; $ ({ thread_local ! { static STATE_OBJECT : RefCell <$ names > = RefCell :: new (<$ names >:: default ()) ; } ; for (path , template , accept_fn) in <$ names >:: ATTRIBUTES { accepts . entry (* path) . or_default () . push (GroupTypeInnerAccept { template : * template , accept_fn : Box :: new (| cx , args | { STATE_OBJECT . with_borrow_mut (| s | { accept_fn (s , cx , args) }) }) , allowed_targets : <$ names as crate :: attributes :: AttributeParser <$ stage >>:: ALLOWED_TARGETS , attribute_type : <$ names as crate :: attributes :: AttributeParser <$ stage >>:: TYPE , }) ; } finalizes . push (Box :: new (| cx | { let state = STATE_OBJECT . take () ; state . finalize (cx) })) ; }) * GroupTypeInner { accepters : accepts , finalizers : finalizes } }) ; } ; }
+    };
+}
+
+attribute_parsers!()

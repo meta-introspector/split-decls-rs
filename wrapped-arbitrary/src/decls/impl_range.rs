@@ -14,4 +14,4 @@ macro_rules! impl_range {
     };
 }
 
-impl_range!()
+impl_range!();

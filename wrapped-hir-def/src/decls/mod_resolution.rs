@@ -4,4 +4,4 @@ macro_rules! mod_resolution {
     };
 }
 
-mod_resolution!()
+mod_resolution!();

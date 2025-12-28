@@ -4,4 +4,4 @@ macro_rules! per_ns {
     };
 }
 
-per_ns!()
+per_ns!();

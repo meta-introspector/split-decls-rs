@@ -4,4 +4,4 @@ macro_rules! split_nonutf8_once {
     };
 }
 
-split_nonutf8_once!()
+split_nonutf8_once!();

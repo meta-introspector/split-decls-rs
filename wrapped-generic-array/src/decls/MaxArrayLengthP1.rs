@@ -4,4 +4,4 @@ macro_rules! MaxArrayLengthP1 {
     };
 }
 
-MaxArrayLengthP1!()
+MaxArrayLengthP1!();

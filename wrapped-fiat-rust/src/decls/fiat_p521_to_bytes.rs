@@ -11,4 +11,4 @@ macro_rules! fiat_p521_to_bytes {
     };
 }
 
-fiat_p521_to_bytes!()
+fiat_p521_to_bytes!();

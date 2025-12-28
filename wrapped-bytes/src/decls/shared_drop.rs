@@ -4,4 +4,4 @@ macro_rules! shared_drop {
     };
 }
 
-shared_drop!()
+shared_drop!();

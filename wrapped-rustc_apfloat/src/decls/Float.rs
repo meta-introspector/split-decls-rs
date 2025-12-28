@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        StatusAnd!();
+        Category!();
         ParseError!();
         Round!();
-        Category!();
         ExpInt!();
+        StatusAnd!();
     };
 }
 

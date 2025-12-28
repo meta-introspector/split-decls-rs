@@ -11,4 +11,4 @@ macro_rules! test_main {
     };
 }
 
-test_main!()
+test_main!();

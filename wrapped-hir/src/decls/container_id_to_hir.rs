@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ItemContainer!();
-        Trait!();
-        Module!();
-        ExternBlock!();
         Impl!();
+        Trait!();
+        ItemContainer!();
+        ExternBlock!();
+        Module!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! container_id_to_hir {
     };
 }
 
-container_id_to_hir!()
+container_id_to_hir!();

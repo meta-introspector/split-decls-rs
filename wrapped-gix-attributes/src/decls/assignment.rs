@@ -4,4 +4,4 @@ macro_rules! assignment {
     };
 }
 
-assignment!()
+assignment!();

@@ -4,4 +4,4 @@ macro_rules! cksum {
     };
 }
 
-cksum!()
+cksum!();

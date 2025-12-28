@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MemoryMap!();
-        TraitEnvironment!();
         HirDisplayError!();
         HirFormatter!();
+        MemoryMap!();
+        TraitEnvironment!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! render_const_scalar_inner {
     };
 }
 
-render_const_scalar_inner!()
+render_const_scalar_inner!();

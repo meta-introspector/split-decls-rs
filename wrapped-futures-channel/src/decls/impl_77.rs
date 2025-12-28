@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Recv!();
         Receiver!();
-        TryRecvError!();
+        Recv!();
         RecvError!();
+        TryRecvError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

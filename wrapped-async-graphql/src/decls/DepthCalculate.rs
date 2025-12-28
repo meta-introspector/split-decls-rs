@@ -4,4 +4,4 @@ macro_rules! DepthCalculate {
     };
 }
 
-DepthCalculate!()
+DepthCalculate!();

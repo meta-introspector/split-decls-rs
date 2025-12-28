@@ -4,4 +4,4 @@ macro_rules! resource {
     };
 }
 
-resource!()
+resource!();

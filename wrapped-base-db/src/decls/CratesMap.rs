@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Crate!();
         UniqueCrateData!();
+        Crate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CratesMap {
     };
 }
 
-CratesMap!()
+CratesMap!();

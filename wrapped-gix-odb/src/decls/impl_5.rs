@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Mode!();
+        Store!();
         Handle!();
-        PackId!();
         Error!();
         IndexForObjectInPack!();
-        Store!();
+        Mode!();
+        PackId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

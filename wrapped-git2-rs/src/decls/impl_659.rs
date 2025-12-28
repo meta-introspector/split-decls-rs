@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Remote!();
         RemoteConnection!();
-        Buf!();
         RemoteHead!();
+        Buf!();
+        Remote!();
         Error!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_659 {
     };
 }
 
-impl_659!()
+impl_659!();

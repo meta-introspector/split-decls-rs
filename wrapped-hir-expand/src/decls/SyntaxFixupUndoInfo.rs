@@ -4,4 +4,4 @@ macro_rules! SyntaxFixupUndoInfo {
     };
 }
 
-SyntaxFixupUndoInfo!()
+SyntaxFixupUndoInfo!();

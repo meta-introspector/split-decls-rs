@@ -11,4 +11,4 @@ macro_rules! vectorization_support_no_cache_arm {
     };
 }
 
-vectorization_support_no_cache_arm!()
+vectorization_support_no_cache_arm!();

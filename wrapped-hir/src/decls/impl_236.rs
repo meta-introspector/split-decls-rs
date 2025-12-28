@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        BuiltinType!();
         Function!();
-        HasVisibility!();
-        TypeAlias!();
-        Trait!();
-        ModuleDef!();
-        Module!();
-        Const!();
-        Static!();
-        Macro!();
         Adt!();
+        TypeAlias!();
+        Macro!();
+        HasVisibility!();
+        BuiltinType!();
+        Module!();
+        Trait!();
+        Static!();
         Variant!();
+        Const!();
+        ModuleDef!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_236 {
     };
 }
 
-impl_236!()
+impl_236!();

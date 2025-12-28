@@ -11,4 +11,4 @@ macro_rules! test_borrowed_into {
     };
 }
 
-test_borrowed_into!()
+test_borrowed_into!();

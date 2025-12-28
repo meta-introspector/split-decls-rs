@@ -11,4 +11,4 @@ macro_rules! fiat_p448_carry_mul {
     };
 }
 
-fiat_p448_carry_mul!()
+fiat_p448_carry_mul!();

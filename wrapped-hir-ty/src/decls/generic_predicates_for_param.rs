@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TyLoweringContext!();
-        LifetimeElisionKind!();
-        HirDatabase!();
         PredicateFilter!();
+        HirDatabase!();
+        LifetimeElisionKind!();
         EarlyBinder!();
+        TyLoweringContext!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! generic_predicates_for_param {
     };
 }
 
-generic_predicates_for_param!()
+generic_predicates_for_param!();

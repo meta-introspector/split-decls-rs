@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RangeList!();
         BaseId!();
         FnvIndexSet!();
-        RangeList!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RangeListTable {
     };
 }
 
-RangeListTable!()
+RangeListTable!();

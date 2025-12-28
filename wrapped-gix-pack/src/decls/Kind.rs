@@ -4,4 +4,4 @@ macro_rules! Kind {
     };
 }
 
-Kind!()
+Kind!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FusedStream!();
         Stream!();
+        FusedStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! if_alloc {
     };
 }
 
-if_alloc!()
+if_alloc!();

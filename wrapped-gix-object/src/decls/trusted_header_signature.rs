@@ -11,4 +11,4 @@ macro_rules! trusted_header_signature {
     };
 }
 
-trusted_header_signature!()
+trusted_header_signature!();

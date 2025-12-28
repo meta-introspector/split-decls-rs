@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Data!();
         Float!();
+        Data!();
         Resamples!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_301 {
     };
 }
 
-impl_301!()
+impl_301!();

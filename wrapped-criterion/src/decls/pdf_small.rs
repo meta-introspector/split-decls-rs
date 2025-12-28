@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Sample!();
-        MeasurementData!();
         BenchmarkId!();
-        ValueFormatter!();
+        MeasurementData!();
         ReportContext!();
+        ValueFormatter!();
+        Sample!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! pdf_small {
     };
 }
 
-pdf_small!()
+pdf_small!();

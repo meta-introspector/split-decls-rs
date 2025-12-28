@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FluentMessage!();
         FluentBundle!();
+        FluentMessage!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FluentAttribute {
     };
 }
 
-FluentAttribute!()
+FluentAttribute!();

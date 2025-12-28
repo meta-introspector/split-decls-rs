@@ -12,4 +12,4 @@ macro_rules! ascii_compatible_two_byte_decoder_functions {
     };
 }
 
-ascii_compatible_two_byte_decoder_functions!()
+ascii_compatible_two_byte_decoder_functions!();

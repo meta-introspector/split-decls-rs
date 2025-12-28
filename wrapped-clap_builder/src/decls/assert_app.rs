@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Arg!();
-        Flag!();
-        Command!();
-        ArgAction!();
-        ValueHint!();
         FlatSet!();
+        ValueHint!();
+        Flag!();
+        ArgAction!();
+        Command!();
+        Arg!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! assert_app {
     };
 }
 
-assert_app!()
+assert_app!();

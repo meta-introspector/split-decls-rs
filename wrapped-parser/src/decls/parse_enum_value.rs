@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         Positioned!();
-        Rule!();
         PositionCalculator!();
+        Rule!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_enum_value {
     };
 }
 
-parse_enum_value!()
+parse_enum_value!();

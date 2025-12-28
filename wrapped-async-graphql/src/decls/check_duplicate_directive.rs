@@ -12,4 +12,4 @@ macro_rules! check_duplicate_directive {
     };
 }
 
-check_duplicate_directive!()
+check_duplicate_directive!();

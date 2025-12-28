@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SharedPollState!();
-        WrappedWaker!();
         FuturesUnordered!();
+        WrappedWaker!();
+        SharedPollState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_535 {
     };
 }
 
-macro_535!()
+macro_535!();

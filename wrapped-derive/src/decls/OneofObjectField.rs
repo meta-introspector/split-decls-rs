@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Visible!();
-        Validators!();
         Deprecation!();
+        Validators!();
+        Visible!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! OneofObjectField {
     };
 }
 
-OneofObjectField!()
+OneofObjectField!();

@@ -14,4 +14,4 @@ fn bar() {}
     };
 }
 
-test_parse_macro_def_rules!()
+test_parse_macro_def_rules!();

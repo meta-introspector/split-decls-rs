@@ -4,4 +4,4 @@ macro_rules! close_tempfile_and_log_error {
     };
 }
 
-close_tempfile_and_log_error!()
+close_tempfile_and_log_error!();

@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
+        VisibleTraits!();
+        Type!();
         ScopeDef!();
+        Label!();
+        Trait!();
+        ModuleDef!();
+        GenericParam!();
+        SemanticsScope!();
+        Function!();
+        PathResolution!();
+        ItemInNs!();
         TypeAlias!();
         Module!();
         GenericDef!();
-        SemanticsScope!();
-        VisibleTraits!();
-        GenericParam!();
-        PathResolution!();
-        Trait!();
-        ItemInNs!();
-        Local!();
-        Label!();
         Crate!();
-        Type!();
-        Function!();
-        ModuleDef!();
+        Local!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

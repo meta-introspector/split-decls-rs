@@ -4,4 +4,4 @@ macro_rules! Action {
     };
 }
 
-Action!()
+Action!();

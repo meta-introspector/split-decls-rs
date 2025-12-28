@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Storage!();
         QueueView!();
         QueueInner!();
-        Storage!();
         Queue!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! SealedStorage {
     };
 }
 
-SealedStorage!()
+SealedStorage!();

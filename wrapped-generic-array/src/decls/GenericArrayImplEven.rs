@@ -4,4 +4,4 @@ macro_rules! GenericArrayImplEven {
     };
 }
 
-GenericArrayImplEven!()
+GenericArrayImplEven!();

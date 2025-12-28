@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FieldsShape!();
         FieldData!();
+        FieldsShape!();
         ExpressionStore!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! VariantFields {
     };
 }
 
-VariantFields!()
+VariantFields!();

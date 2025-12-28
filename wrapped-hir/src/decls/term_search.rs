@@ -4,4 +4,4 @@ macro_rules! term_search {
     };
 }
 
-term_search!()
+term_search!();

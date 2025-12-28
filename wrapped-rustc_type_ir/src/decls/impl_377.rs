@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Interner!();
+        AliasTerm!();
+        TraitRef!();
+        AliasTermKind!();
+        Ty!();
+    };
+}
+
+macro_rules! impl_377 {
+    () => {
+        deps!();
+        # [doc = " The following methods work only with (trait) associated term projections."] impl < I : Interner > AliasTerm < I > { pub fn self_ty (self) -> I :: Ty { self . args . type_at (0) } pub fn with_replaced_self_ty (self , interner : I , self_ty : I :: Ty) -> Self { AliasTerm :: new (interner , self . def_id , [self_ty . into ()] . into_iter () . chain (self . args . iter () . skip (1)) ,) } pub fn trait_def_id (self , interner : I) -> I :: TraitId { assert ! (matches ! (self . kind (interner) , AliasTermKind :: ProjectionTy | AliasTermKind :: ProjectionConst) , "expected a projection") ; interner . parent (self . def_id) . try_into () . unwrap () } # [doc = " Extracts the underlying trait reference and own args from this projection."] # [doc = " For example, if this is a projection of `<T as StreamingIterator>::Item<'a>`,"] # [doc = " then this function would return a `T: StreamingIterator` trait reference and"] # [doc = " `['a]` as the own args."] pub fn trait_ref_and_own_args (self , interner : I) -> (TraitRef < I > , I :: GenericArgsSlice) { interner . trait_ref_and_own_args_for_alias (self . def_id , self . args) } # [doc = " Extracts the underlying trait reference from this projection."] # [doc = " For example, if this is a projection of `<T as Iterator>::Item`,"] # [doc = " then this function would return a `T: Iterator` trait reference."] # [doc = ""] # [doc = " WARNING: This will drop the args for generic associated types"] # [doc = " consider calling [Self::trait_ref_and_own_args] to get those"] # [doc = " as well."] pub fn trait_ref (self , interner : I) -> TraitRef < I > { self . trait_ref_and_own_args (interner) . 0 } # [doc = " Extract the own args from this projection."] # [doc = " For example, if this is a projection of `<T as StreamingIterator>::Item<'a>`,"] # [doc = " then this function would return the slice `['a]` as the own args."] pub fn own_args (self , interner : I) -> I :: GenericArgsSlice { self . trait_ref_and_own_args (interner) . 1 } }
+    };
+}
+
+impl_377!()

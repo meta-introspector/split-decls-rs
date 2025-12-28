@@ -4,4 +4,4 @@ macro_rules! format_symbol_name {
     };
 }
 
-format_symbol_name!()
+format_symbol_name!();

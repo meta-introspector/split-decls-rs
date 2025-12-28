@@ -11,4 +11,4 @@ macro_rules! TH32CS_SNAPMODULE {
     };
 }
 
-TH32CS_SNAPMODULE!()
+TH32CS_SNAPMODULE!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Commit!();
         ParentIteratorState!();
+        Commit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Parents {
     };
 }
 
-Parents!()
+Parents!();

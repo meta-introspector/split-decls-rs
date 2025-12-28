@@ -12,4 +12,4 @@ macro_rules! widening_mul {
     };
 }
 
-widening_mul!()
+widening_mul!();

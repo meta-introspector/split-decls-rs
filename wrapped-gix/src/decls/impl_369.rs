@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Commits!();
-        Repository!();
-        Error!();
-        Note!();
         Core!();
+        Repository!();
+        Commits!();
+        Note!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_369 {
     };
 }
 
-impl_369!()
+impl_369!();

@@ -4,4 +4,4 @@ macro_rules! binary_heap {
     };
 }
 
-binary_heap!()
+binary_heap!();

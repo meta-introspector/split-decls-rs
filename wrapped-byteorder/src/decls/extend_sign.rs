@@ -4,4 +4,4 @@ macro_rules! extend_sign {
     };
 }
 
-extend_sign!()
+extend_sign!();

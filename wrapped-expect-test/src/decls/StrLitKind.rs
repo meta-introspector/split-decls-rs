@@ -4,4 +4,4 @@ macro_rules! StrLitKind {
     };
 }
 
-StrLitKind!()
+StrLitKind!();

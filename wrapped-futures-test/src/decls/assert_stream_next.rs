@@ -4,4 +4,4 @@ macro_rules! assert_stream_next {
     };
 }
 
-assert_stream_next!()
+assert_stream_next!();

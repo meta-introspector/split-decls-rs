@@ -4,4 +4,4 @@ macro_rules! plural {
     };
 }
 
-plural!()
+plural!();

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Ty!();
+        Walkable!();
+    };
+}
+
+macro_rules! WhereEqPredicate {
+    () => {
+        deps!();
+        # [doc = " An equality predicate (unsupported)."] # [doc = ""] # [doc = " E.g., `T = int`."] # [derive (Clone , Encodable , Decodable , Debug , Walkable)] pub struct WhereEqPredicate { pub lhs_ty : Box < Ty > , pub rhs_ty : Box < Ty > , }
+    };
+}
+
+WhereEqPredicate!()

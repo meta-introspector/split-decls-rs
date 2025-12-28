@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Any!();
         Tree!();
         Url!();
-        Any!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_753 {
     };
 }
 
-impl_753!()
+impl_753!();

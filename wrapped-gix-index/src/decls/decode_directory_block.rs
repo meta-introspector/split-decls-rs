@@ -11,4 +11,4 @@ macro_rules! decode_directory_block {
     };
 }
 
-decode_directory_block!()
+decode_directory_block!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Callbacks!();
         Easy!();
+        Callbacks!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Transfer {
     };
 }
 
-Transfer!()
+Transfer!();

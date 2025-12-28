@@ -4,4 +4,4 @@ macro_rules! delegate_access_inner {
     };
 }
 
-delegate_access_inner!()
+delegate_access_inner!();

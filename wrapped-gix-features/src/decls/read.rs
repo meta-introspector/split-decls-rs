@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Status!();
+        Decompress!();
         FlushDecompress!();
         Read!();
-        Decompress!();
-        Status!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! read {
     };
 }
 
-read!()
+read!();

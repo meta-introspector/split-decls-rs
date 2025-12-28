@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        GlobId!();
         ImportOrExternCrate!();
         ImportOrGlob!();
-        GlobId!();
         ImportId!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

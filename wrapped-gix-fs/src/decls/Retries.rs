@@ -4,4 +4,4 @@ macro_rules! Retries {
     };
 }
 
-Retries!()
+Retries!();

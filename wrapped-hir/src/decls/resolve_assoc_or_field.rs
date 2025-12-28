@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Impl!();
-        TypeAlias!();
-        TypeNs!();
-        Variant!();
-        Function!();
-        GenericParam!();
-        Union!();
-        DocLinkDef!();
-        Enum!();
-        BuiltinType!();
-        Struct!();
         Adt!();
+        Struct!();
+        Variant!();
         ModuleDef!();
+        Union!();
+        TypeAlias!();
         Const!();
+        GenericParam!();
+        BuiltinType!();
+        Function!();
+        Impl!();
+        Enum!();
+        DocLinkDef!();
+        TypeNs!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! resolve_assoc_or_field {
     };
 }
 
-resolve_assoc_or_field!()
+resolve_assoc_or_field!();

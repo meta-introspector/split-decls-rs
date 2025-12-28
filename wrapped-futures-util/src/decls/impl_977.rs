@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ready!();
         Pending!();
+        Ready!();
         Sink!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_977 {
     };
 }
 
-impl_977!()
+impl_977!();

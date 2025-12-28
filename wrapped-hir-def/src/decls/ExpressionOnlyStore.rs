@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ExprOrPatId!();
-        BindingId!();
+        HygieneId!();
+        Binding!();
         Expr!();
+        BindingId!();
+        ExprOrPatId!();
         ExprId!();
         Label!();
-        Binding!();
         Pat!();
-        HygieneId!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! ExpressionOnlyStore {
     };
 }
 
-ExpressionOnlyStore!()
+ExpressionOnlyStore!();

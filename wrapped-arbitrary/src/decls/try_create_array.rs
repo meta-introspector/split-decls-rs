@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         ArrayGuard!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_create_array {
     };
 }
 
-try_create_array!()
+try_create_array!();

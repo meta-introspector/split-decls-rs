@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        TraceStyle!();
         ChromeLayer!();
-        EventOrSpan!();
+        TraceStyle!();
         Object!();
-        ArgsWrapper!();
         JsonVisitor!();
+        EventOrSpan!();
         Message!();
+        ArgsWrapper!();
     };
 }
 

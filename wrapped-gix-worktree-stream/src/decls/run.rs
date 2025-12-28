@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SharedErrorSlot!();
+        Delegate!();
         Source!();
         AdditionalEntry!();
-        Delegate!();
+        SharedErrorSlot!();
         Error!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! run {
     };
 }
 
-run!()
+run!();

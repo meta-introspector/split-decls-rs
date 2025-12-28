@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Adjustment!();
         Adjust!();
+        Adjustment!();
+        AutoBorrowMutability!();
         AllowTwoPhase!();
         AutoBorrow!();
-        AutoBorrowMutability!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

@@ -3,8 +3,8 @@ macro_rules! deps {
         MemoryMap!();
         TraitEnvironment!();
         HirDisplayError!();
-        TypingMode!();
         HirFormatter!();
+        TypingMode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! render_const_scalar {
     };
 }
 
-render_const_scalar!()
+render_const_scalar!();

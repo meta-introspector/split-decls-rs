@@ -12,4 +12,4 @@ macro_rules! __fancy_ensure {
     };
 }
 
-__fancy_ensure!()
+__fancy_ensure!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Item!();
-        Rewrites!();
         ChangeId!();
+        Rewrites!();
+        Item!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Tracker {
     };
 }
 
-Tracker!()
+Tracker!();

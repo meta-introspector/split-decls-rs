@@ -11,4 +11,4 @@ macro_rules! to_str_tuple {
     };
 }
 
-to_str_tuple!()
+to_str_tuple!();

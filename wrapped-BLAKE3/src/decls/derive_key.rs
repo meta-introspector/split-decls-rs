@@ -12,4 +12,4 @@ macro_rules! derive_key {
     };
 }
 
-derive_key!()
+derive_key!();

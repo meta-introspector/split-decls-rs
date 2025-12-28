@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Args!();
-        StyledStr!();
         ArgAction!();
         Str!();
+        StyledStr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! PossibleValue {
     };
 }
 
-PossibleValue!()
+PossibleValue!();

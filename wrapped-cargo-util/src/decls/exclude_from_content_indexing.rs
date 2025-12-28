@@ -4,4 +4,4 @@ macro_rules! exclude_from_content_indexing {
     };
 }
 
-exclude_from_content_indexing!()
+exclude_from_content_indexing!();

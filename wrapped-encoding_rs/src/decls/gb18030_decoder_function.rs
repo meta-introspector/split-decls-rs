@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         CopyAsciiResult!();
-        ByteSource!();
-        Gb18030Pending!();
         DecoderResult!();
+        Gb18030Pending!();
+        ByteSource!();
         Space!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! gb18030_decoder_function {
     };
 }
 
-gb18030_decoder_function!()
+gb18030_decoder_function!();

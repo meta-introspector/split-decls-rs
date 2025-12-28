@@ -4,4 +4,4 @@ macro_rules! FunctionAddress {
     };
 }
 
-FunctionAddress!()
+FunctionAddress!();

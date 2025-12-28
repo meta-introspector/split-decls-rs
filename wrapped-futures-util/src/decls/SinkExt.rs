@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        CompatSink!();
-        Either!();
-        StreamExt!();
-        Send!();
         Close!();
+        Either!();
+        CompatSink!();
         Feed!();
+        StreamExt!();
         Sink!();
         Flush!();
+        Send!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! SinkExt {
     };
 }
 
-SinkExt!()
+SinkExt!();

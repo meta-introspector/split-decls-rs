@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Uint!();
         Odd!();
+        Uint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! OddUint {
     };
 }
 
-OddUint!()
+OddUint!();

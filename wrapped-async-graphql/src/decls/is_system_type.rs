@@ -11,4 +11,4 @@ macro_rules! is_system_type {
     };
 }
 
-is_system_type!()
+is_system_type!();

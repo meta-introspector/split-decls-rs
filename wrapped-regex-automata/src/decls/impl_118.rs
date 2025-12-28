@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        HalfMatch!();
+        Builder!();
+        DFA!();
+        Input!();
+        BuildError!();
+    };
+}
+
+macro_rules! impl_118 {
+    () => {
+        deps!();
+        # [cfg (feature = "dfa-build")] impl DFA < Vec < u8 > > { # [doc = " Parse the given regular expression using a default configuration and"] # [doc = " return the corresponding sparse DFA."] # [doc = ""] # [doc = " If you want a non-default configuration, then use the"] # [doc = " [`dense::Builder`] to set your own configuration, and then call"] # [doc = " [`dense::DFA::to_sparse`] to create a sparse DFA."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use regex_automata::{dfa::{Automaton, sparse}, HalfMatch, Input};"] # [doc = ""] # [doc = " let dfa = sparse::DFA::new(\"foo[0-9]+bar\")?;"] # [doc = ""] # [doc = " let expected = Some(HalfMatch::must(0, 11));"] # [doc = " assert_eq!(expected, dfa.try_search_fwd(&Input::new(\"foo12345bar\"))?);"] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [cfg (feature = "syntax")] pub fn new (pattern : & str) -> Result < DFA < Vec < u8 > > , BuildError > { dense :: Builder :: new () . build (pattern) . and_then (| dense | dense . to_sparse ()) } # [doc = " Parse the given regular expressions using a default configuration and"] # [doc = " return the corresponding multi-DFA."] # [doc = ""] # [doc = " If you want a non-default configuration, then use the"] # [doc = " [`dense::Builder`] to set your own configuration, and then call"] # [doc = " [`dense::DFA::to_sparse`] to create a sparse DFA."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use regex_automata::{dfa::{Automaton, sparse}, HalfMatch, Input};"] # [doc = ""] # [doc = " let dfa = sparse::DFA::new_many(&[\"[0-9]+\", \"[a-z]+\"])?;"] # [doc = " let expected = Some(HalfMatch::must(1, 3));"] # [doc = " assert_eq!(expected, dfa.try_search_fwd(&Input::new(\"foo12345bar\"))?);"] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [cfg (feature = "syntax")] pub fn new_many < P : AsRef < str > > (patterns : & [P] ,) -> Result < DFA < Vec < u8 > > , BuildError > { dense :: Builder :: new () . build_many (patterns) . and_then (| dense | dense . to_sparse ()) } }
+    };
+}
+
+impl_118!()

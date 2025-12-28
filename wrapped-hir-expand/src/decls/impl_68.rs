@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FilePositionWrapper!();
         FilePosition!();
+        FilePositionWrapper!();
         ExpandDatabase!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

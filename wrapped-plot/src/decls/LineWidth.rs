@@ -4,4 +4,4 @@ macro_rules! LineWidth {
     };
 }
 
-LineWidth!()
+LineWidth!();

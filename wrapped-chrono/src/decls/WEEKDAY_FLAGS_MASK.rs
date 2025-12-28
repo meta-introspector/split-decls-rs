@@ -4,4 +4,4 @@ macro_rules! WEEKDAY_FLAGS_MASK {
     };
 }
 
-WEEKDAY_FLAGS_MASK!()
+WEEKDAY_FLAGS_MASK!();

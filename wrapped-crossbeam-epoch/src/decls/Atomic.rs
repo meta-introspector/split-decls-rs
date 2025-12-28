@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pointable!();
         Guard!();
+        Pointable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Atomic {
     };
 }
 
-Atomic!()
+Atomic!();

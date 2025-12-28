@@ -11,4 +11,4 @@ macro_rules! fiat_sm2_scalar_opp {
     };
 }
 
-fiat_sm2_scalar_opp!()
+fiat_sm2_scalar_opp!();

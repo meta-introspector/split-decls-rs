@@ -4,4 +4,4 @@ macro_rules! path_kind_len {
     };
 }
 
-path_kind_len!()
+path_kind_len!();

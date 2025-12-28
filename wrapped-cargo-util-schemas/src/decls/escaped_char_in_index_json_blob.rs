@@ -26,4 +26,4 @@ macro_rules! escaped_char_in_index_json_blob {
     };
 }
 
-escaped_char_in_index_json_blob!()
+escaped_char_in_index_json_blob!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CfgAtom!();
-        CfgDiff!();
         CfgOptions!();
-        CfgExpr!();
+        CfgAtom!();
         HashableCfgOptions!();
+        CfgDiff!();
+        CfgExpr!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

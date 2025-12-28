@@ -15,4 +15,4 @@ macro_rules! basic_bin_manifest {
     };
 }
 
-basic_bin_manifest!()
+basic_bin_manifest!();

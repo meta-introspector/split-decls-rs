@@ -4,4 +4,4 @@ macro_rules! sc_mul {
     };
 }
 
-sc_mul!()
+sc_mul!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        NonSubstitution!();
         IsCtorDtorConversion!();
         SubstitutionTable!();
-        NonSubstitution!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_109 {
     };
 }
 
-impl_109!()
+impl_109!();

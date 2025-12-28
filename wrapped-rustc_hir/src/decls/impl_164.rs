@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Attribute!();
+        Deprecation!();
+        Linkage!();
+        AttributeKind!();
+        AttrItem!();
+        AttrArgs!();
+    };
+}
+
+macro_rules! impl_164 {
+    () => {
+        deps!();
+        impl AttributeExt for Attribute { # [inline] fn id (& self) -> AttrId { match & self { Attribute :: Unparsed (u) => u . id . attr_id , _ => panic ! () , } } # [inline] fn meta_item_list (& self) -> Option < ThinVec < ast :: MetaItemInner > > { match & self { Attribute :: Unparsed (n) => match n . as_ref () { AttrItem { args : AttrArgs :: Delimited (d) , .. } => { ast :: MetaItemKind :: list_from_tokens (d . tokens . clone ()) } _ => None , } , _ => None , } } # [inline] fn value_str (& self) -> Option < Symbol > { self . value_lit () . and_then (| x | x . value_str ()) } # [inline] fn value_span (& self) -> Option < Span > { self . value_lit () . map (| i | i . span) } # [doc = " For a single-segment attribute, returns its name; otherwise, returns `None`."] # [inline] fn ident (& self) -> Option < Ident > { match & self { Attribute :: Unparsed (n) => { if let [ident] = n . path . segments . as_ref () { Some (* ident) } else { None } } _ => None , } } # [inline] fn path_matches (& self , name : & [Symbol]) -> bool { match & self { Attribute :: Unparsed (n) => { n . path . segments . len () == name . len () && n . path . segments . iter () . zip (name) . all (| (s , n) | s . name == * n) } _ => false , } } # [inline] fn is_doc_comment (& self) -> bool { matches ! (self , Attribute :: Parsed (AttributeKind :: DocComment { .. })) } # [inline] fn span (& self) -> Span { match & self { Attribute :: Unparsed (u) => u . span , Attribute :: Parsed (AttributeKind :: DocComment { span , .. }) => * span , Attribute :: Parsed (AttributeKind :: Deprecation { span , .. }) => * span , Attribute :: Parsed (AttributeKind :: AllowInternalUnsafe (span)) => * span , Attribute :: Parsed (AttributeKind :: Linkage (_ , span)) => * span , a => panic ! ("can't get the span of an arbitrary parsed attribute: {a:?}") , } } # [inline] fn is_word (& self) -> bool { match & self { Attribute :: Unparsed (n) => { matches ! (n . args , AttrArgs :: Empty) } _ => false , } } # [inline] fn ident_path (& self) -> Option < SmallVec < [Ident ; 1] > > { match & self { Attribute :: Unparsed (n) => Some (n . path . segments . iter () . copied () . collect ()) , _ => None , } } # [inline] fn doc_str (& self) -> Option < Symbol > { match & self { Attribute :: Parsed (AttributeKind :: DocComment { comment , .. }) => Some (* comment) , Attribute :: Unparsed (_) if self . has_name (sym :: doc) => self . value_str () , _ => None , } } fn is_automatically_derived_attr (& self) -> bool { matches ! (self , Attribute :: Parsed (AttributeKind :: AutomaticallyDerived (..))) } # [inline] fn doc_str_and_comment_kind (& self) -> Option < (Symbol , CommentKind) > { match & self { Attribute :: Parsed (AttributeKind :: DocComment { kind , comment , .. }) => { Some ((* comment , * kind)) } Attribute :: Unparsed (_) if self . has_name (sym :: doc) => { self . value_str () . map (| s | (s , CommentKind :: Line)) } _ => None , } } fn doc_resolution_scope (& self) -> Option < AttrStyle > { match self { Attribute :: Parsed (AttributeKind :: DocComment { style , .. }) => Some (* style) , Attribute :: Unparsed (attr) if self . has_name (sym :: doc) && self . value_str () . is_some () => { Some (attr . style) } _ => None , } } fn is_proc_macro_attr (& self) -> bool { matches ! (self , Attribute :: Parsed (AttributeKind :: ProcMacro (..) | AttributeKind :: ProcMacroAttribute (..) | AttributeKind :: ProcMacroDerive { .. })) } }
+    };
+}
+
+impl_164!()

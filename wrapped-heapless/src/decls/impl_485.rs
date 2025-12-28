@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LenType!();
         CString!();
+        LenType!();
         ExtendError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_485 {
     };
 }
 
-impl_485!()
+impl_485!();

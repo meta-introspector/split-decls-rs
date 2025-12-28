@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Elvish!();
         Generator!();
+        Elvish!();
     };
 }
 
@@ -34,4 +34,4 @@ set edit:completion:arg-completer[{bin_name}] = {{|@words|
     };
 }
 
-impl_27!()
+impl_27!();

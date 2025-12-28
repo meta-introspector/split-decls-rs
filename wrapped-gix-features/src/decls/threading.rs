@@ -4,4 +4,4 @@ macro_rules! threading {
     };
 }
 
-threading!()
+threading!();

@@ -11,4 +11,4 @@ macro_rules! DisplayKind {
     };
 }
 
-DisplayKind!()
+DisplayKind!();

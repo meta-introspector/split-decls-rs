@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Parser!();
         KeyType!();
         Id!();
-        ArgPredicate!();
-        ArgMatcher!();
-        OsStr!();
-        ValueSource!();
         Usage!();
+        ValueSource!();
+        Parser!();
+        OsStr!();
+        ArgMatcher!();
+        ArgPredicate!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_512 {
     };
 }
 
-impl_512!()
+impl_512!();

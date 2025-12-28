@@ -11,4 +11,4 @@ macro_rules! fiat_p224_set_one {
     };
 }
 
-fiat_p224_set_one!()
+fiat_p224_set_one!();

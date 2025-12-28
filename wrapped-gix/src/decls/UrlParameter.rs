@@ -4,4 +4,4 @@ macro_rules! UrlParameter {
     };
 }
 
-UrlParameter!()
+UrlParameter!();

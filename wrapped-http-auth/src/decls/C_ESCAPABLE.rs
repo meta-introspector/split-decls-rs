@@ -4,4 +4,4 @@ macro_rules! C_ESCAPABLE {
     };
 }
 
-C_ESCAPABLE!()
+C_ESCAPABLE!();

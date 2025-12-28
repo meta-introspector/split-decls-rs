@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ValueParserFactory!();
-        RangedI64ValueParser!();
         Parser!();
+        RangedI64ValueParser!();
+        ValueParserFactory!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_335 {
     };
 }
 
-impl_335!()
+impl_335!();

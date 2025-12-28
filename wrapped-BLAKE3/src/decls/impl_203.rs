@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        Platform!();
+        Join!();
+        CVWords!();
+        SerialJoin!();
+        CVBytes!();
+        Hash!();
+        Hasher!();
         OutputReader!();
         ChunkState!();
         Output!();
-        Hash!();
-        SerialJoin!();
         RayonJoin!();
-        Hasher!();
-        CVWords!();
-        Join!();
-        CVBytes!();
-        Platform!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         Error!();
+        ErrorKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! from_utf8 {
     };
 }
 
-from_utf8!()
+from_utf8!();

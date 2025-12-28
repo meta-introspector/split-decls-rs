@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        HashSet!();
+        RawExtractIf!();
         Drain!();
         Iter!();
-        HashSet!();
         ExtractIf!();
-        RawExtractIf!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_392 {
     };
 }
 
-impl_392!()
+impl_392!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        Result!();
-        Format!();
         MacroUnitHeader!();
         Error!();
+        Format!();
+        Result!();
+        Reader!();
         DebugLineOffset!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_494 {
     };
 }
 
-impl_494!()
+impl_494!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf8Destination!();
         Utf8AstralHandle!();
+        Utf8Destination!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_329 {
     };
 }
 
-impl_329!()
+impl_329!();

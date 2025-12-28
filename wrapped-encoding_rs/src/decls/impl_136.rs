@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         DecoderResult!();
-        Utf16Decoder!();
-        BigEndian!();
-        VariantDecoder!();
         Space!();
+        BigEndian!();
         LittleEndian!();
+        Utf16Decoder!();
+        VariantDecoder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_136 {
     };
 }
 
-impl_136!()
+impl_136!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        FinalState!();
+        TryJoinAll!();
         Pending!();
         Ready!();
-        TryJoinAll!();
         TryJoinAllKind!();
-        FinalState!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_249 {
     };
 }
 
-impl_249!()
+impl_249!();

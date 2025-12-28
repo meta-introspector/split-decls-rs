@@ -1,0 +1,7 @@
+macro_rules! tempfile {
+    () => {
+        # [doc = " Create a new temporary file. Also see [`tempfile_in`]."] # [doc = ""] # [doc = " The file will be created in the location returned by [`env::temp_dir()`]."] # [doc = ""] # [doc = " # Security"] # [doc = ""] # [doc = " This variant is secure/reliable in the presence of a pathological temporary file cleaner."] # [doc = ""] # [doc = " # Resource Leaking"] # [doc = ""] # [doc = " The temporary file will be automatically removed by the OS when the last handle to it is closed."] # [doc = " This doesn't rely on Rust destructors being run, so will (almost) never fail to clean up the temporary file."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " If the file can not be created, `Err` is returned."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use tempfile::tempfile;"] # [doc = " use std::io::Write;"] # [doc = ""] # [doc = " // Create a file inside of `env::temp_dir()`."] # [doc = " let mut file = tempfile()?;"] # [doc = ""] # [doc = " writeln!(file, \"Brian was here. Briefly.\")?;"] # [doc = " # Ok::<(), std::io::Error>(())"] # [doc = " ```"] pub fn tempfile () -> io :: Result < File > { tempfile_in (env :: temp_dir ()) }
+    };
+}
+
+tempfile!()

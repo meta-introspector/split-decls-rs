@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileSymbol!();
         SymbolCollectorWork!();
+        FileSymbol!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SymbolCollector {
     };
 }
 
-SymbolCollector!()
+SymbolCollector!();

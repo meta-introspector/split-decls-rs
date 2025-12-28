@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Metadata!();
-        SectionId!();
         Event!();
         AsKey!();
         Error!();
-        Section!();
         File!();
         Key!();
+        Section!();
+        Metadata!();
+        SectionId!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

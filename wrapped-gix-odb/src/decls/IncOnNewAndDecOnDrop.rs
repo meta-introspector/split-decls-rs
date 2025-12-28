@@ -4,4 +4,4 @@ macro_rules! IncOnNewAndDecOnDrop {
     };
 }
 
-IncOnNewAndDecOnDrop!()
+IncOnNewAndDecOnDrop!();

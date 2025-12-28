@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ProcMacro!();
         ExpandDatabase!();
-        MacroDefId!();
-        TokenExpander!();
         MacroDefKind!();
+        ProcMacro!();
+        TokenExpander!();
+        MacroDefId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

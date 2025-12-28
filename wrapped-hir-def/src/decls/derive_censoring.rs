@@ -23,4 +23,4 @@ struct S;
     };
 }
 
-derive_censoring!()
+derive_censoring!();

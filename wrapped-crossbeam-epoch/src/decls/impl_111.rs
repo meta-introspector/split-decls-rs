@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Bag!();
-        List!();
-        IterError!();
-        Epoch!();
-        Guard!();
-        AtomicEpoch!();
         SealedBag!();
+        Guard!();
         Queue!();
         Global!();
+        List!();
+        Bag!();
+        Epoch!();
+        IterError!();
+        AtomicEpoch!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_111 {
     };
 }
 
-impl_111!()
+impl_111!();

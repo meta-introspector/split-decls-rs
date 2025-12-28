@@ -11,4 +11,4 @@ macro_rules! next_bytes {
     };
 }
 
-next_bytes!()
+next_bytes!();

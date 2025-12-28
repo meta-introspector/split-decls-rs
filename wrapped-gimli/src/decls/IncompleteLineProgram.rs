@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ReaderOffset!();
-        LineProgramHeader!();
         Reader!();
+        LineProgramHeader!();
+        ReaderOffset!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IncompleteLineProgram {
     };
 }
 
-IncompleteLineProgram!()
+IncompleteLineProgram!();

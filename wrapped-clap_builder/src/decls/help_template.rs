@@ -4,4 +4,4 @@ macro_rules! help_template {
     };
 }
 
-help_template!()
+help_template!();

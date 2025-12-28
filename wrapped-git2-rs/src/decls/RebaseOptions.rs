@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MergeOptions!();
-        CheckoutBuilder!();
         Rebase!();
+        CheckoutBuilder!();
+        MergeOptions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RebaseOptions {
     };
 }
 
-RebaseOptions!()
+RebaseOptions!();

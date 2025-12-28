@@ -4,4 +4,4 @@ macro_rules! WordsWithBreaks {
     };
 }
 
-WordsWithBreaks!()
+WordsWithBreaks!();

@@ -11,4 +11,4 @@ macro_rules! Utf8SingleCodeUnitWriter {
     };
 }
 
-Utf8SingleCodeUnitWriter!()
+Utf8SingleCodeUnitWriter!();

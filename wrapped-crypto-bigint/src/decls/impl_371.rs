@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Limb!();
         Uint!();
+        Limb!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_371 {
     };
 }
 
-impl_371!()
+impl_371!();

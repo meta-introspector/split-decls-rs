@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PasswordClientBuilder!();
         BasicClient!();
+        PasswordClientBuilder!();
         DigestClient!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! PasswordClient {
     };
 }
 
-PasswordClient!()
+PasswordClient!();

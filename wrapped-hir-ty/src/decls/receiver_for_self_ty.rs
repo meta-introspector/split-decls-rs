@@ -11,4 +11,4 @@ macro_rules! receiver_for_self_ty {
     };
 }
 
-receiver_for_self_ty!()
+receiver_for_self_ty!();

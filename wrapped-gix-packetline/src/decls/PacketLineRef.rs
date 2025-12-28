@@ -4,4 +4,4 @@ macro_rules! PacketLineRef {
     };
 }
 
-PacketLineRef!()
+PacketLineRef!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IndexPersistedOrInMemory!();
+        Index!();
         Options!();
         Repository!();
-        Index!();
         Error!();
         State!();
+        IndexPersistedOrInMemory!();
         Note!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_340 {
     };
 }
 
-impl_340!()
+impl_340!();

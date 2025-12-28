@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         TryFutureExt!();
-        TryChunksError!();
         StreamExt!();
-        Compat!();
-        Sink!();
         TryReadyChunksError!();
+        Sink!();
+        TryChunksError!();
         TryNext!();
+        Compat!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! TryStreamExt {
     };
 }
 
-TryStreamExt!()
+TryStreamExt!();

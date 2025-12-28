@@ -4,4 +4,4 @@ macro_rules! bilock {
     };
 }
 
-bilock!()
+bilock!();

@@ -4,4 +4,4 @@ macro_rules! MULTILINE_PADDED_BIN {
     };
 }
 
-MULTILINE_PADDED_BIN!()
+MULTILINE_PADDED_BIN!();

@@ -4,4 +4,4 @@ macro_rules! check_no_mismatches {
     };
 }
 
-check_no_mismatches!()
+check_no_mismatches!();

@@ -11,4 +11,4 @@ macro_rules! strip_base_handle_recompute_basename_pos {
     };
 }
 
-strip_base_handle_recompute_basename_pos!()
+strip_base_handle_recompute_basename_pos!();

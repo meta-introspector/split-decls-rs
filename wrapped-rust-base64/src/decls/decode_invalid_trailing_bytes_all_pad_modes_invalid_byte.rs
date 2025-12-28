@@ -11,4 +11,4 @@ macro_rules! decode_invalid_trailing_bytes_all_pad_modes_invalid_byte {
     };
 }
 
-decode_invalid_trailing_bytes_all_pad_modes_invalid_byte!()
+decode_invalid_trailing_bytes_all_pad_modes_invalid_byte!();

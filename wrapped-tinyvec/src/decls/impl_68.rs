@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ArrayVec!();
+        Array!();
+    };
+}
+
+macro_rules! impl_68 {
+    () => {
+        deps!();
+        # [cfg (feature = "alloc")] impl < A : Array > ArrayVec < A > { # [doc = " Drains all elements to a Vec, but reserves additional space"] # [doc = " ```"] # [doc = " # use tinyvec::*;"] # [doc = " let mut av = array_vec!([i32; 7] => 1, 2, 3);"] # [doc = " let v = av.drain_to_vec_and_reserve(10);"] # [doc = " assert_eq!(v, &[1, 2, 3]);"] # [doc = " assert_eq!(v.capacity(), 13);"] # [doc = " ```"] # [inline] pub fn drain_to_vec_and_reserve (& mut self , n : usize) -> Vec < A :: Item > { let cap = n + self . len () ; let mut v = Vec :: with_capacity (cap) ; let iter = self . iter_mut () . map (core :: mem :: take) ; v . extend (iter) ; self . set_len (0) ; return v ; } # [doc = " Tries to drain all elements to a Vec, but reserves additional space."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " If the allocator reports a failure, then an error is returned."] # [doc = ""] # [doc = " ```"] # [doc = " # use tinyvec::*;"] # [doc = " let mut av = array_vec!([i32; 7] => 1, 2, 3);"] # [doc = " let v = av.try_drain_to_vec_and_reserve(10);"] # [doc = " assert!(matches!(v, Ok(_)));"] # [doc = " let v = v.unwrap();"] # [doc = " assert_eq!(v, &[1, 2, 3]);"] # [doc = " assert_eq!(v.capacity(), 13);"] # [doc = " ```"] # [inline] # [cfg (feature = "rustc_1_57")] pub fn try_drain_to_vec_and_reserve (& mut self , n : usize ,) -> Result < Vec < A :: Item > , TryReserveError > { let cap = n + self . len () ; let mut v = Vec :: new () ; v . try_reserve (cap) ? ; let iter = self . iter_mut () . map (core :: mem :: take) ; v . extend (iter) ; self . set_len (0) ; return Ok (v) ; } # [doc = " Drains all elements to a Vec"] # [doc = " ```"] # [doc = " # use tinyvec::*;"] # [doc = " let mut av = array_vec!([i32; 7] => 1, 2, 3);"] # [doc = " let v = av.drain_to_vec();"] # [doc = " assert_eq!(v, &[1, 2, 3]);"] # [doc = " assert_eq!(v.capacity(), 3);"] # [doc = " ```"] # [inline] pub fn drain_to_vec (& mut self) -> Vec < A :: Item > { self . drain_to_vec_and_reserve (0) } # [doc = " Tries to drain all elements to a Vec."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " If the allocator reports a failure, then an error is returned."] # [doc = ""] # [doc = " ```"] # [doc = " # use tinyvec::*;"] # [doc = " let mut av = array_vec!([i32; 7] => 1, 2, 3);"] # [doc = " let v = av.try_drain_to_vec();"] # [doc = " assert!(matches!(v, Ok(_)));"] # [doc = " let v = v.unwrap();"] # [doc = " assert_eq!(v, &[1, 2, 3]);"] # [doc = " // Vec may reserve more than necessary in order to prevent more future allocations."] # [doc = " assert!(v.capacity() >= 3);"] # [doc = " ```"] # [inline] # [cfg (feature = "rustc_1_57")] pub fn try_drain_to_vec (& mut self) -> Result < Vec < A :: Item > , TryReserveError > { self . try_drain_to_vec_and_reserve (0) } }
+    };
+}
+
+impl_68!()

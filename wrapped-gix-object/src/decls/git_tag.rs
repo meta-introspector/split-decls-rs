@@ -12,4 +12,4 @@ macro_rules! git_tag {
     };
 }
 
-git_tag!()
+git_tag!();

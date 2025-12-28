@@ -4,4 +4,4 @@ macro_rules! empty_mutation {
     };
 }
 
-empty_mutation!()
+empty_mutation!();

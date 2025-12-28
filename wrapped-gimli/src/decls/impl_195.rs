@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Reader!();
         CfiEntriesIter!();
+        Error!();
         UnwindSection!();
         Section!();
         CieOrFde!();
-        Error!();
+        Result!();
+        Reader!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_195 {
     };
 }
 
-impl_195!()
+impl_195!();

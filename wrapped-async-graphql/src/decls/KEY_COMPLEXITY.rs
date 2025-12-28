@@ -4,4 +4,4 @@ macro_rules! KEY_COMPLEXITY {
     };
 }
 
-KEY_COMPLEXITY!()
+KEY_COMPLEXITY!();

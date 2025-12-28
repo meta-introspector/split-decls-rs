@@ -4,4 +4,4 @@ macro_rules! encoder_string_writer {
     };
 }
 
-encoder_string_writer!()
+encoder_string_writer!();

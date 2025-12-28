@@ -12,4 +12,4 @@ macro_rules! factored_code_delta {
     };
 }
 
-factored_code_delta!()
+factored_code_delta!();

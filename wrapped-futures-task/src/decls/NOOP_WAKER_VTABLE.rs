@@ -4,4 +4,4 @@ macro_rules! NOOP_WAKER_VTABLE {
     };
 }
 
-NOOP_WAKER_VTABLE!()
+NOOP_WAKER_VTABLE!();

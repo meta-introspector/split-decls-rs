@@ -4,4 +4,4 @@ macro_rules! ECDSA_SHA256_OID {
     };
 }
 
-ECDSA_SHA256_OID!()
+ECDSA_SHA256_OID!();

@@ -4,4 +4,4 @@ macro_rules! enable_virtual_terminal_processing {
     };
 }
 
-enable_virtual_terminal_processing!()
+enable_virtual_terminal_processing!();

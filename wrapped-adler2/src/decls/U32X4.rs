@@ -4,4 +4,4 @@ macro_rules! U32X4 {
     };
 }
 
-U32X4!()
+U32X4!();

@@ -12,4 +12,4 @@ macro_rules! read_in_short_increments_with_short_delegate_reads {
     };
 }
 
-read_in_short_increments_with_short_delegate_reads!()
+read_in_short_increments_with_short_delegate_reads!();

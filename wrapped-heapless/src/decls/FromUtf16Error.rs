@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        String!();
         CapacityError!();
+        String!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FromUtf16Error {
     };
 }
 
-FromUtf16Error!()
+FromUtf16Error!();

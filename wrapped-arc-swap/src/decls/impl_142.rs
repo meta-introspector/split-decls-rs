@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Guard!();
-        RefCnt!();
         Strategy!();
+        RefCnt!();
+        Guard!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_142 {
     };
 }
 
-impl_142!()
+impl_142!();

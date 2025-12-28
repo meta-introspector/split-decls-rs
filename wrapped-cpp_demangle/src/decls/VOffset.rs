@@ -4,4 +4,4 @@ macro_rules! VOffset {
     };
 }
 
-VOffset!()
+VOffset!();

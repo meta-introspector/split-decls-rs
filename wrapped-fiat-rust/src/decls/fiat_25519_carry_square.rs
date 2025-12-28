@@ -11,4 +11,4 @@ macro_rules! fiat_25519_carry_square {
     };
 }
 
-fiat_25519_carry_square!()
+fiat_25519_carry_square!();

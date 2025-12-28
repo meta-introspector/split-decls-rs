@@ -11,4 +11,4 @@ macro_rules! parse_version {
     };
 }
 
-parse_version!()
+parse_version!();

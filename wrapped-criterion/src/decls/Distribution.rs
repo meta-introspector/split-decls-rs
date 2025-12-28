@@ -4,4 +4,4 @@ macro_rules! Distribution {
     };
 }
 
-Distribution!()
+Distribution!();

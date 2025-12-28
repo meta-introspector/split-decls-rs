@@ -11,4 +11,4 @@ macro_rules! insert_value {
     };
 }
 
-insert_value!()
+insert_value!();

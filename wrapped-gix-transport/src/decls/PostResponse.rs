@@ -4,4 +4,4 @@ macro_rules! PostResponse {
     };
 }
 
-PostResponse!()
+PostResponse!();

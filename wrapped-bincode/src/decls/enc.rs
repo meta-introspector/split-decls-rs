@@ -4,4 +4,4 @@ macro_rules! enc {
     };
 }
 
-enc!()
+enc!();

@@ -4,4 +4,4 @@ macro_rules! home_dir {
     };
 }
 
-home_dir!()
+home_dir!();

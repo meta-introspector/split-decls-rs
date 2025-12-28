@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Parse!();
-        Result!();
-        SubstitutionTable!();
-        LambdaSig!();
         ParseContext!();
+        SubstitutionTable!();
+        Result!();
+        LambdaSig!();
         IndexStr!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_286 {
     };
 }
 
-impl_286!()
+impl_286!();

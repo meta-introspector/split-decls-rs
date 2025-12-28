@@ -4,4 +4,4 @@ macro_rules! WakerInner {
     };
 }
 
-WakerInner!()
+WakerInner!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        DebugTypes!();
-        UnitHeader!();
         Encoding!();
-        UnitType!();
-        UnitSectionOffset!();
-        Reader!();
-        Result!();
-        Error!();
         SectionId!();
+        Reader!();
+        UnitHeader!();
         ReaderOffset!();
+        Error!();
+        UnitType!();
+        Result!();
+        DebugTypes!();
+        UnitSectionOffset!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! parse_unit_header {
     };
 }
 
-parse_unit_header!()
+parse_unit_header!();

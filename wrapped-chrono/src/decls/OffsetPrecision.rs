@@ -4,4 +4,4 @@ macro_rules! OffsetPrecision {
     };
 }
 
-OffsetPrecision!()
+OffsetPrecision!();

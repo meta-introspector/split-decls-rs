@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TypeDefinition!();
-        Directive!();
         Type!();
-        Positioned!();
-        DirectiveDefinition!();
         SchemaDefinition!();
+        TypeDefinition!();
+        DirectiveDefinition!();
+        Positioned!();
+        Directive!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! TypeSystemDefinition {
     };
 }
 
-TypeSystemDefinition!()
+TypeSystemDefinition!();

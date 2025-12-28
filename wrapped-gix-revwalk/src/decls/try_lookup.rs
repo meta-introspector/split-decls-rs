@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Either!();
         Graph!();
+        Either!();
         LazyCommit!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! try_lookup {
     };
 }
 
-try_lookup!()
+try_lookup!();

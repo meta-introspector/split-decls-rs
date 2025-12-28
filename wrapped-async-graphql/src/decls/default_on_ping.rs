@@ -12,4 +12,4 @@ macro_rules! default_on_ping {
     };
 }
 
-default_on_ping!()
+default_on_ping!();

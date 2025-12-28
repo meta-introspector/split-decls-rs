@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        GenAndCommitTime!();
         Parents!();
-        Topo!();
+        GenAndCommitTime!();
+        Error!();
         Info!();
+        Topo!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

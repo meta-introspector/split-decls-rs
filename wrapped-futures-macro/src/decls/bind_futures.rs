@@ -4,4 +4,4 @@ macro_rules! bind_futures {
     };
 }
 
-bind_futures!()
+bind_futures!();

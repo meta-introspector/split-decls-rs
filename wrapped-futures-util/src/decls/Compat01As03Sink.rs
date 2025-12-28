@@ -11,4 +11,4 @@ macro_rules! Compat01As03Sink {
     };
 }
 
-Compat01As03Sink!()
+Compat01As03Sink!();

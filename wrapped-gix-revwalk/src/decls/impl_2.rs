@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Generation!();
-        Parents!();
         LazyCommit!();
         Commit!();
         Either!();
+        Parents!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

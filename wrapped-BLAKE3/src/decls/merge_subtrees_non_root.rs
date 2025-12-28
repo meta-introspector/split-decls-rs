@@ -12,4 +12,4 @@ macro_rules! merge_subtrees_non_root {
     };
 }
 
-merge_subtrees_non_root!()
+merge_subtrees_non_root!();

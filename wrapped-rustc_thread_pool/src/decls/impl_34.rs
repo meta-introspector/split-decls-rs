@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        ThreadPoolBuildError!();
+        JobRef!();
     };
 }
 
 macro_rules! impl_34 {
     () => {
         deps!();
-        impl Error for ThreadPoolBuildError { fn source (& self) -> Option < & (dyn Error + 'static) > { match & self . kind { ErrorKind :: GlobalPoolAlreadyInitialized => None , ErrorKind :: IOError (e) => Some (e) , } } }
+        unsafe impl Send for JobRef { }
     };
 }
 

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ModuleId!();
-        DefDatabase!();
-        DefMap!();
         ItemInNs!();
         Choice!();
+        DefDatabase!();
+        DefMap!();
+        ModuleId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! find_in_prelude {
     };
 }
 
-find_in_prelude!()
+find_in_prelude!();

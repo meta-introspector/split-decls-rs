@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        CallFrameInstruction!();
-        DebugFrame!();
-        CommonInformationEntry!();
         Address!();
-        SectionId!();
-        Writer!();
         FrameDescriptionEntry!();
+        CommonInformationEntry!();
         Result!();
+        SectionId!();
+        DebugFrame!();
+        Writer!();
+        CallFrameInstruction!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_727 {
     };
 }
 
-impl_727!()
+impl_727!();

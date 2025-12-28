@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GeneratorResult!();
         FieldResolverParameter!();
+        GeneratorResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! generate_parameter_extraction {
     };
 }
 
-generate_parameter_extraction!()
+generate_parameter_extraction!();

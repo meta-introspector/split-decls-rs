@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        LineAnnotationType!();
         AnnotatedLineInfo!();
-        Renderer!();
-        Margin!();
         ElementStyle!();
+        Margin!();
+        Renderer!();
         StyledBuffer!();
+        LineAnnotationType!();
         LineAnnotation!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! render_source_line {
     };
 }
 
-render_source_line!()
+render_source_line!();

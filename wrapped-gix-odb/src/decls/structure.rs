@@ -4,4 +4,4 @@ macro_rules! structure {
     };
 }
 
-structure!()
+structure!();

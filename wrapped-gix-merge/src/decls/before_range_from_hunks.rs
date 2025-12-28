@@ -11,4 +11,4 @@ macro_rules! before_range_from_hunks {
     };
 }
 
-before_range_from_hunks!()
+before_range_from_hunks!();

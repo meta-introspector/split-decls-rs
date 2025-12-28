@@ -4,4 +4,4 @@ macro_rules! wsr64_dit {
     };
 }
 
-wsr64_dit!()
+wsr64_dit!();

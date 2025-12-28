@@ -4,4 +4,4 @@ macro_rules! InMemoryDir {
     };
 }
 
-InMemoryDir!()
+InMemoryDir!();

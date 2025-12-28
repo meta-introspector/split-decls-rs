@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FileMetadata!();
         RollupLock!();
         Result!();
-        FileMetadata!();
         SubmoduleStat!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

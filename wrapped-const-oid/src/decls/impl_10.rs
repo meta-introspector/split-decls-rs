@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Arcs!();
         Arc!();
-        Result!();
         RootArcs!();
+        Result!();
+        Arcs!();
         Error!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

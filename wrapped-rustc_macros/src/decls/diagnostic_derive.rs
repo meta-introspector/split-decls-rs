@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        DiagnosticDerive!();
+        Applicability!();
+    };
+}
+
+macro_rules! diagnostic_derive {
+    () => {
+        deps!();
+        # [doc = " Implements `#[derive(Diagnostic)]`, which allows for errors to be specified as a struct,"] # [doc = " independent from the actual diagnostics emitting code."] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " # extern crate rustc_errors;"] # [doc = " # use rustc_errors::Applicability;"] # [doc = " # extern crate rustc_span;"] # [doc = " # use rustc_span::{Ident, Span};"] # [doc = " # extern crate rust_middle;"] # [doc = " # use rustc_middle::ty::Ty;"] # [doc = " #[derive(Diagnostic)]"] # [doc = " #[diag(borrowck_move_out_of_borrow, code = E0505)]"] # [doc = " pub struct MoveOutOfBorrowError<'tcx> {"] # [doc = "     pub name: Ident,"] # [doc = "     pub ty: Ty<'tcx>,"] # [doc = "     #[primary_span]"] # [doc = "     #[label]"] # [doc = "     pub span: Span,"] # [doc = "     #[label(first_borrow_label)]"] # [doc = "     pub first_borrow_span: Span,"] # [doc = "     #[suggestion(code = \"{name}.clone()\")]"] # [doc = "     pub clone_sugg: Option<(Span, Applicability)>"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " ```fluent"] # [doc = " move_out_of_borrow = cannot move out of {$name} because it is borrowed"] # [doc = "     .label = cannot move out of borrow"] # [doc = "     .first_borrow_label = `{$ty}` first borrowed here"] # [doc = "     .suggestion = consider cloning here"] # [doc = " ```"] # [doc = ""] # [doc = " Then, later, to emit the error:"] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " sess.emit_err(MoveOutOfBorrowError {"] # [doc = "     expected,"] # [doc = "     actual,"] # [doc = "     span,"] # [doc = "     first_borrow_span,"] # [doc = "     clone_sugg: Some(suggestion, Applicability::MachineApplicable),"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [doc = " See rustc dev guide for more examples on using the `#[derive(Diagnostic)]`:"] # [doc = " <https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html>"] pub (super) fn diagnostic_derive (s : Structure < '_ >) -> TokenStream { DiagnosticDerive :: new (s) . into_tokens () }
+    };
+}
+
+diagnostic_derive!()

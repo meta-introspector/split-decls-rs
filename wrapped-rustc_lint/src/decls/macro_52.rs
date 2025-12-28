@@ -1,6 +1,6 @@
 macro_rules! macro_52 {
     () => {
-        early_lint_methods ! (declare_combined_early_lint_pass , [pub BuiltinCombinedEarlyLintPass , [UnusedParens : UnusedParens :: default () , UnusedBraces : UnusedBraces , UnusedImportBraces : UnusedImportBraces , UnsafeCode : UnsafeCode , SpecialModuleName : SpecialModuleName , AnonymousParameters : AnonymousParameters , EllipsisInclusiveRangePatterns : EllipsisInclusiveRangePatterns :: default () , NonCamelCaseTypes : NonCamelCaseTypes , WhileTrue : WhileTrue , NonAsciiIdents : NonAsciiIdents , IncompleteInternalFeatures : IncompleteInternalFeatures , RedundantSemicolons : RedundantSemicolons , UnusedDocComment : UnusedDocComment , Expr2024 : Expr2024 , Precedence : Precedence , DoubleNegations : DoubleNegations ,]]) ;
+        declare_lint_pass ! (MutableTransmutes => [MUTABLE_TRANSMUTES]) ;
     };
 }
 

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TomlTrimPathsValue!();
         Result!();
+        TomlTrimPathsValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_143 {
     };
 }
 
-impl_143!()
+impl_143!();

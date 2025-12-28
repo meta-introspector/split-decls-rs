@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Rebase!();
         Submodule!();
+        Rebase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SubmoduleUpdate {
     };
 }
 
-SubmoduleUpdate!()
+SubmoduleUpdate!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        ConflictMapping!();
+        ContentMerge!();
+        Resolution!();
         Conflict!();
         ResolutionFailure!();
         TreatAsUnresolved!();
         ConflictIndexEntry!();
-        ConflictMapping!();
-        Resolution!();
-        ContentMerge!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_106 {
     };
 }
 
-impl_106!()
+impl_106!();

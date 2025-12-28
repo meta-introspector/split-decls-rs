@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Oid!();
         Revwalk!();
+        Oid!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RevwalkWithHideCb {
     };
 }
 
-RevwalkWithHideCb!()
+RevwalkWithHideCb!();

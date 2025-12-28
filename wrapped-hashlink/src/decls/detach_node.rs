@@ -11,4 +11,4 @@ macro_rules! detach_node {
     };
 }
 
-detach_node!()
+detach_node!();

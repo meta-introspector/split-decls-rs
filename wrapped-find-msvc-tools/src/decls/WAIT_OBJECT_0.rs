@@ -11,4 +11,4 @@ macro_rules! WAIT_OBJECT_0 {
     };
 }
 
-WAIT_OBJECT_0!()
+WAIT_OBJECT_0!();

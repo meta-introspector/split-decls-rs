@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         UrlKind!();
-        Url!();
         Scheme!();
+        Url!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! url {
     };
 }
 
-url!()
+url!();

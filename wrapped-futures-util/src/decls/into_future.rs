@@ -4,4 +4,4 @@ macro_rules! into_future {
     };
 }
 
-into_future!()
+into_future!();

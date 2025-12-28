@@ -4,4 +4,4 @@ macro_rules! KEYED_HASH {
     };
 }
 
-KEYED_HASH!()
+KEYED_HASH!();

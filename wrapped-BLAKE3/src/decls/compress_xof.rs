@@ -11,4 +11,4 @@ macro_rules! compress_xof {
     };
 }
 
-compress_xof!()
+compress_xof!();

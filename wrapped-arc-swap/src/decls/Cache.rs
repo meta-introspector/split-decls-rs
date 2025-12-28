@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArcSwapAny!();
         Config!();
+        ArcSwapAny!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Cache {
     };
 }
 
-Cache!()
+Cache!();

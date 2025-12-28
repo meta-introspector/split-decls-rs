@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MacroCallId!();
-        MacroArgResult!();
         ExpandDatabase!();
+        MacroArgResult!();
+        MacroCallId!();
         MacroCallKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! macro_arg_considering_derives {
     };
 }
 
-macro_arg_considering_derives!()
+macro_arg_considering_derives!();

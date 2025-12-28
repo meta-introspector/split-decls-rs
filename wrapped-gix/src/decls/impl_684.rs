@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        String!();
         Tree!();
-        Mailmap!();
         Path!();
+        String!();
+        Mailmap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_684 {
     };
 }
 
-impl_684!()
+impl_684!();

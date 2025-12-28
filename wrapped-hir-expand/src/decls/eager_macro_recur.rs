@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ModPath!();
-        ExpandDatabase!();
-        EagerCallBackFn!();
-        ExpandError!();
-        MacroDefKind!();
-        ExpandResult!();
         ExpansionSpanMap!();
-        MacroDefId!();
         ProcMacro!();
+        MacroDefKind!();
         InFile!();
+        ExpandResult!();
+        ExpandError!();
+        EagerCallBackFn!();
+        ExpandDatabase!();
+        ModPath!();
+        MacroDefId!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! eager_macro_recur {
     };
 }
 
-eager_macro_recur!()
+eager_macro_recur!();

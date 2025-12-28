@@ -4,4 +4,4 @@ macro_rules! PointEstimates {
     };
 }
 
-PointEstimates!()
+PointEstimates!();

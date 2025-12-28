@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Automaton!();
         Match!();
         StreamFindIter!();
-        Automaton!();
         StreamChunk!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

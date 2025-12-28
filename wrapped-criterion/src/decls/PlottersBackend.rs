@@ -4,4 +4,4 @@ macro_rules! PlottersBackend {
     };
 }
 
-PlottersBackend!()
+PlottersBackend!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Strategy!();
         RefCnt!();
+        Strategy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CaS {
     };
 }
 
-CaS!()
+CaS!();

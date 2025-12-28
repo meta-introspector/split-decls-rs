@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
-        LazyResult!();
-        LazyLines!();
-        Error!();
         Lines!();
+        Error!();
+        LazyResult!();
+        Result!();
+        LazyLines!();
         UnitRef!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

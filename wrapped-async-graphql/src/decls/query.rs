@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        NodesFieldSwitcherSealed!();
+        ConnectionNameType!();
+        OutputType!();
+        EmptyMutation!();
+        Error!();
         Result!();
         ObjectType!();
-        CursorType!();
-        Error!();
-        ConnectionNameType!();
-        EmptyMutation!();
-        EmptyFields!();
-        Connection!();
-        Query!();
-        Object!();
         EmptySubscription!();
-        OutputType!();
+        Connection!();
+        CursorType!();
+        Object!();
+        EmptyFields!();
+        Query!();
+        NodesFieldSwitcherSealed!();
         EdgeNameType!();
     };
 }
@@ -24,4 +24,4 @@ macro_rules! query {
     };
 }
 
-query!()
+query!();

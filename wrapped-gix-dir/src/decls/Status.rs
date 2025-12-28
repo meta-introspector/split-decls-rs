@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Property!();
         Kind!();
         PathspecMatch!();
+        Property!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Status {
     };
 }
 
-Status!()
+Status!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Bash!();
-        Shell!();
-        Elvish!();
         Zsh!();
-        Fish!();
+        Bash!();
+        Elvish!();
+        Shell!();
         PowerShell!();
+        Fish!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! shells {
     };
 }
 
-shells!()
+shells!();

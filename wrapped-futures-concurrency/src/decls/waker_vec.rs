@@ -4,4 +4,4 @@ macro_rules! waker_vec {
     };
 }
 
-waker_vec!()
+waker_vec!();

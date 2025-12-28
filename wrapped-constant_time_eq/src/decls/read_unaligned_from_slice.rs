@@ -4,4 +4,4 @@ macro_rules! read_unaligned_from_slice {
     };
 }
 
-read_unaligned_from_slice!()
+read_unaligned_from_slice!();

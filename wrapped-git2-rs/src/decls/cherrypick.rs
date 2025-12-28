@@ -4,4 +4,4 @@ macro_rules! cherrypick {
     };
 }
 
-cherrypick!()
+cherrypick!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Parser!();
         Error!();
+        Parser!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! word {
     };
 }
 
-word!()
+word!();

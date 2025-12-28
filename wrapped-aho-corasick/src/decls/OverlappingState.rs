@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StateID!();
-        Input!();
-        AhoCorasick!();
         Match!();
+        StateID!();
+        AhoCorasick!();
+        Input!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! OverlappingState {
     };
 }
 
-OverlappingState!()
+OverlappingState!();

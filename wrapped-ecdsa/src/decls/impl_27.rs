@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Signature!();
         EcdsaCurve!();
-        MaxSize!();
         MaxOverhead!();
+        Signature!();
+        MaxSize!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        TemplateParam!();
         Result!();
-        ArgScopeStack!();
+        TemplateParam!();
         TemplateArg!();
+        ArgScopeStack!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_223 {
     };
 }
 
-impl_223!()
+impl_223!();

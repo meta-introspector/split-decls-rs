@@ -4,4 +4,4 @@ macro_rules! TAB_WIDTH {
     };
 }
 
-TAB_WIDTH!()
+TAB_WIDTH!();

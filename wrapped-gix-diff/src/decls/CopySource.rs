@@ -4,4 +4,4 @@ macro_rules! CopySource {
     };
 }
 
-CopySource!()
+CopySource!();

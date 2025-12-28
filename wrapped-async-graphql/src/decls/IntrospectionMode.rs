@@ -4,4 +4,4 @@ macro_rules! IntrospectionMode {
     };
 }
 
-IntrospectionMode!()
+IntrospectionMode!();

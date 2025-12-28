@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        File!();
-        EntryIndex!();
-        Offset!();
-        PackIndex!();
         Item!();
-        Find!();
+        PackIndex!();
         PrefixLookupResult!();
+        Offset!();
+        Entry!();
+        Find!();
+        EntryIndex!();
+        File!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_298 {
     };
 }
 
-impl_298!()
+impl_298!();

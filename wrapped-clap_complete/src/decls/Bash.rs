@@ -4,4 +4,4 @@ macro_rules! Bash {
     };
 }
 
-Bash!()
+Bash!();

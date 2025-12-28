@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NaiveDate!();
-        FixedOffset!();
         Utc!();
+        FixedOffset!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_datetime_fixed_offset {
     };
 }
 
-test_datetime_fixed_offset!()
+test_datetime_fixed_offset!();

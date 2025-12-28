@@ -14,4 +14,4 @@ macro_rules! async_recv {
     };
 }
 
-async_recv!()
+async_recv!();

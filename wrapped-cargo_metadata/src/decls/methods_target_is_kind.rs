@@ -4,4 +4,4 @@ macro_rules! methods_target_is_kind {
     };
 }
 
-methods_target_is_kind!()
+methods_target_is_kind!();

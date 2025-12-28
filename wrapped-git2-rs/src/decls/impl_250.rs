@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Parents!();
-        Tree!();
-        Commit!();
         Object!();
-        ParentIds!();
-        Mailmap!();
         Time!();
         Signature!();
-        Oid!();
-        Binding!();
-        IntoCString!();
+        Parents!();
+        Commit!();
         Buf!();
+        Binding!();
+        Mailmap!();
+        IntoCString!();
+        Tree!();
+        ParentIds!();
+        Oid!();
         Error!();
     };
 }
@@ -23,4 +23,4 @@ macro_rules! impl_250 {
     };
 }
 
-impl_250!()
+impl_250!();

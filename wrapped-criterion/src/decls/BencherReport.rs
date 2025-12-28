@@ -4,4 +4,4 @@ macro_rules! BencherReport {
     };
 }
 
-BencherReport!()
+BencherReport!();

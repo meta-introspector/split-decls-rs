@@ -4,4 +4,4 @@ macro_rules! write_quoted {
     };
 }
 
-write_quoted!()
+write_quoted!();

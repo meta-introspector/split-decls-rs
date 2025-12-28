@@ -4,4 +4,4 @@ macro_rules! xdg_config {
     };
 }
 
-xdg_config!()
+xdg_config!();

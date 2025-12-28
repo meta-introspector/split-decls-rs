@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LocalReceiver!();
         LocalChannel!();
         LocalSender!();
+        LocalReceiver!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! local_channel {
     };
 }
 
-local_channel!()
+local_channel!();

@@ -4,4 +4,4 @@ macro_rules! NetRc {
     };
 }
 
-NetRc!()
+NetRc!();

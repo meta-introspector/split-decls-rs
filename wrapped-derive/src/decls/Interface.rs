@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RenameRule!();
-        InterfaceMember!();
-        InterfaceField!();
         Visible!();
+        InterfaceMember!();
+        RenameRule!();
+        InterfaceField!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Interface {
     };
 }
 
-Interface!()
+Interface!();

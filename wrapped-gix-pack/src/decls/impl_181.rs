@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Header!();
-        Count!();
-        Error!();
         Entry!();
         Version!();
         Tree!();
+        Count!();
+        Error!();
+        Kind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

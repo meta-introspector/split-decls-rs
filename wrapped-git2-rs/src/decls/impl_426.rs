@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MergeOptions!();
         FileFavor!();
+        MergeOptions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_426 {
     };
 }
 
-impl_426!()
+impl_426!();

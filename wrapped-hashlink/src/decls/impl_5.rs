@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        RawEntryMut!();
-        DropFilteredValues!();
-        CursorMut!();
-        OccupiedEntry!();
-        VacantEntry!();
         TryReserveError!();
         LinkedHashMap!();
+        RawEntryMut!();
+        DropFilteredValues!();
+        OccupiedEntry!();
+        VacantEntry!();
         Entry!();
+        CursorMut!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

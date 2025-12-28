@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Token!();
+        Delimiter!();
+        MetaItemLit!();
+        Lit!();
+        LitKind!();
+        MetaItem!();
+        TokenTree!();
+        MetaItemInner!();
+        TokenStreamIter!();
+    };
+}
+
+macro_rules! impl_281 {
+    () => {
+        deps!();
+        impl MetaItemInner { pub fn span (& self) -> Span { match self { MetaItemInner :: MetaItem (item) => item . span , MetaItemInner :: Lit (lit) => lit . span , } } # [doc = " For a single-segment meta item, returns its identifier; otherwise, returns `None`."] pub fn ident (& self) -> Option < Ident > { self . meta_item () . and_then (| meta_item | meta_item . ident ()) } # [doc = " For a single-segment meta item, returns its name; otherwise, returns `None`."] pub fn name (& self) -> Option < Symbol > { self . ident () . map (| ident | ident . name) } # [doc = " Returns `true` if this list item is a MetaItem with a name of `name`."] pub fn has_name (& self , name : Symbol) -> bool { self . meta_item () . is_some_and (| meta_item | meta_item . has_name (name)) } # [doc = " Returns `true` if `self` is a `MetaItem` and the meta item is a word."] pub fn is_word (& self) -> bool { self . meta_item () . is_some_and (| meta_item | meta_item . is_word ()) } # [doc = " Gets a list of inner meta items from a list `MetaItem` type."] pub fn meta_item_list (& self) -> Option < & [MetaItemInner] > { self . meta_item () . and_then (| meta_item | meta_item . meta_item_list ()) } # [doc = " If it's a singleton list of the form `foo(lit)`, returns the `foo` and"] # [doc = " the `lit`."] pub fn singleton_lit_list (& self) -> Option < (Symbol , & MetaItemLit) > { self . meta_item () . and_then (| meta_item | { meta_item . meta_item_list () . and_then (| meta_item_list | { if meta_item_list . len () == 1 && let Some (ident) = meta_item . ident () && let Some (lit) = meta_item_list [0] . lit () { return Some ((ident . name , lit)) ; } None }) }) } # [doc = " See [`MetaItem::name_value_literal_span`]."] pub fn name_value_literal_span (& self) -> Option < Span > { self . meta_item () ? . name_value_literal_span () } # [doc = " Gets the string value if `self` is a `MetaItem` and the `MetaItem` is a"] # [doc = " `MetaItemKind::NameValue` variant containing a string, otherwise `None`."] pub fn value_str (& self) -> Option < Symbol > { self . meta_item () . and_then (| meta_item | meta_item . value_str ()) } # [doc = " Returns the `MetaItemLit` if `self` is a `MetaItemInner::Literal`s."] pub fn lit (& self) -> Option < & MetaItemLit > { match self { MetaItemInner :: Lit (lit) => Some (lit) , _ => None , } } # [doc = " Returns the bool if `self` is a boolean `MetaItemInner::Literal`."] pub fn boolean_literal (& self) -> Option < bool > { match self { MetaItemInner :: Lit (MetaItemLit { kind : LitKind :: Bool (b) , .. }) => Some (* b) , _ => None , } } # [doc = " Returns the `MetaItem` if `self` is a `MetaItemInner::MetaItem` or if it's"] # [doc = " `MetaItemInner::Lit(MetaItemLit { kind: LitKind::Bool(_), .. })`."] pub fn meta_item_or_bool (& self) -> Option < & MetaItemInner > { match self { MetaItemInner :: MetaItem (_item) => Some (self) , MetaItemInner :: Lit (MetaItemLit { kind : LitKind :: Bool (_) , .. }) => Some (self) , _ => None , } } # [doc = " Returns the `MetaItem` if `self` is a `MetaItemInner::MetaItem`."] pub fn meta_item (& self) -> Option < & MetaItem > { match self { MetaItemInner :: MetaItem (item) => Some (item) , _ => None , } } # [doc = " Returns `true` if the variant is `MetaItem`."] pub fn is_meta_item (& self) -> bool { self . meta_item () . is_some () } fn from_tokens (iter : & mut TokenStreamIter < '_ >) -> Option < MetaItemInner > { match iter . peek () { Some (TokenTree :: Token (token , _)) if let Some (lit) = MetaItemLit :: from_token (token) => { iter . next () ; return Some (MetaItemInner :: Lit (lit)) ; } Some (TokenTree :: Delimited (.. , Delimiter :: Invisible (_) , inner_tokens)) => { iter . next () ; return MetaItemInner :: from_tokens (& mut inner_tokens . iter ()) ; } _ => { } } MetaItem :: from_tokens (iter) . map (MetaItemInner :: MetaItem) } }
+    };
+}
+
+impl_281!()

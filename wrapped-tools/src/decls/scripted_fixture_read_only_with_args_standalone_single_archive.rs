@@ -13,4 +13,4 @@ macro_rules! scripted_fixture_read_only_with_args_standalone_single_archive {
     };
 }
 
-scripted_fixture_read_only_with_args_standalone_single_archive!()
+scripted_fixture_read_only_with_args_standalone_single_archive!();

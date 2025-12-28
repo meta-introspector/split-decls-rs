@@ -4,4 +4,4 @@ macro_rules! PATTERN_LIMIT {
     };
 }
 
-PATTERN_LIMIT!()
+PATTERN_LIMIT!();

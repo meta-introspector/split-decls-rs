@@ -4,4 +4,4 @@ macro_rules! IdMap {
     };
 }
 
-IdMap!()
+IdMap!();

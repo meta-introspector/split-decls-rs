@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpandDatabase!();
         MacroCallId!();
+        ExpandDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! apply_mark_internal {
     };
 }
 
-apply_mark_internal!()
+apply_mark_internal!();

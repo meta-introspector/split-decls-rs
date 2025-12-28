@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Command!();
-        ArgPredicate!();
-        Conflicts!();
-        Id!();
-        FlatMap!();
         ArgMatcher!();
+        ArgPredicate!();
+        Id!();
+        Conflicts!();
+        FlatMap!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_521 {
     };
 }
 
-impl_521!()
+impl_521!();

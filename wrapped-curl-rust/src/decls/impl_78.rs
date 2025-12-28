@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Easy!();
         Easy2!();
+        Easy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

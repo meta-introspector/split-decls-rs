@@ -4,4 +4,4 @@ macro_rules! alt_dl_path {
     };
 }
 
-alt_dl_path!()
+alt_dl_path!();

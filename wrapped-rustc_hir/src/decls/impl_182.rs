@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Expr!();
+        Pat!();
+        PatKind!();
+    };
+}
+
+macro_rules! impl_182 {
+    () => {
+        deps!();
+        impl < 'hir > Pat < 'hir > { fn walk_short_ (& self , it : & mut impl FnMut (& Pat < 'hir >) -> bool) -> bool { if ! it (self) { return false ; } use PatKind :: * ; match self . kind { Missing => unreachable ! () , Wild | Never | Expr (_) | Range (..) | Binding (.. , None) | Err (_) => true , Box (s) | Deref (s) | Ref (s , _) | Binding (.. , Some (s)) | Guard (s , _) => s . walk_short_ (it) , Struct (_ , fields , _) => fields . iter () . all (| field | field . pat . walk_short_ (it)) , TupleStruct (_ , s , _) | Tuple (s , _) | Or (s) => s . iter () . all (| p | p . walk_short_ (it)) , Slice (before , slice , after) => { before . iter () . chain (slice) . chain (after . iter ()) . all (| p | p . walk_short_ (it)) } } } # [doc = " Walk the pattern in left-to-right order,"] # [doc = " short circuiting (with `.all(..)`) if `false` is returned."] # [doc = ""] # [doc = " Note that when visiting e.g. `Tuple(ps)`,"] # [doc = " if visiting `ps[0]` returns `false`,"] # [doc = " then `ps[1]` will not be visited."] pub fn walk_short (& self , mut it : impl FnMut (& Pat < 'hir >) -> bool) -> bool { self . walk_short_ (& mut it) } fn walk_ (& self , it : & mut impl FnMut (& Pat < 'hir >) -> bool) { if ! it (self) { return ; } use PatKind :: * ; match self . kind { Missing | Wild | Never | Expr (_) | Range (..) | Binding (.. , None) | Err (_) => { } Box (s) | Deref (s) | Ref (s , _) | Binding (.. , Some (s)) | Guard (s , _) => s . walk_ (it) , Struct (_ , fields , _) => fields . iter () . for_each (| field | field . pat . walk_ (it)) , TupleStruct (_ , s , _) | Tuple (s , _) | Or (s) => s . iter () . for_each (| p | p . walk_ (it)) , Slice (before , slice , after) => { before . iter () . chain (slice) . chain (after . iter ()) . for_each (| p | p . walk_ (it)) } } } # [doc = " Walk the pattern in left-to-right order."] # [doc = ""] # [doc = " If `it(pat)` returns `false`, the children are not visited."] pub fn walk (& self , mut it : impl FnMut (& Pat < 'hir >) -> bool) { self . walk_ (& mut it) } # [doc = " Walk the pattern in left-to-right order."] # [doc = ""] # [doc = " If you always want to recurse, prefer this method over `walk`."] pub fn walk_always (& self , mut it : impl FnMut (& Pat < '_ >)) { self . walk (| p | { it (p) ; true }) } # [doc = " Whether this a never pattern."] pub fn is_never_pattern (& self) -> bool { let mut is_never_pattern = false ; self . walk (| pat | match & pat . kind { PatKind :: Never => { is_never_pattern = true ; false } PatKind :: Or (s) => { is_never_pattern = s . iter () . all (| p | p . is_never_pattern ()) ; false } _ => true , }) ; is_never_pattern } }
+    };
+}
+
+impl_182!()

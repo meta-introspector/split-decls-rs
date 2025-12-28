@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Error!();
-        NaiveDateTime!();
-        TransitionRule!();
-        AlternateTime!();
-        Cursor!();
         RuleDay!();
+        AlternateTime!();
         Fixed!();
+        TransitionRule!();
+        NaiveDateTime!();
+        Cursor!();
         LocalTimeType!();
         MappedLocalTime!();
+        Error!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_609 {
     };
 }
 
-impl_609!()
+impl_609!();

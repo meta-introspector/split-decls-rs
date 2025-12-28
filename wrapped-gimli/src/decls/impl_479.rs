@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        UnitOffset!();
-        PubStuffParser!();
-        PubStuffHeader!();
         PubStuffEntry!();
+        PubStuffParser!();
         Error!();
-        Result!();
+        Reader!();
         LookupParser!();
+        UnitOffset!();
+        Result!();
+        PubStuffHeader!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_479 {
     };
 }
 
-impl_479!()
+impl_479!();

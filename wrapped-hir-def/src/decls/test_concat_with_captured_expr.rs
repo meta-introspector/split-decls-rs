@@ -22,4 +22,4 @@ fn main() { "s"; }
     };
 }
 
-test_concat_with_captured_expr!()
+test_concat_with_captured_expr!();

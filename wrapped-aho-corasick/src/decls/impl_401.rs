@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         StartBytesTwo!();
+        PrefilterI!();
         Span!();
         Candidate!();
-        PrefilterI!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_401 {
     };
 }
 
-impl_401!()
+impl_401!();

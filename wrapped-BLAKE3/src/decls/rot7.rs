@@ -4,4 +4,4 @@ macro_rules! rot7 {
     };
 }
 
-rot7!()
+rot7!();

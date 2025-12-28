@@ -4,4 +4,4 @@ macro_rules! process_author_str {
     };
 }
 
-process_author_str!()
+process_author_str!();

@@ -4,4 +4,4 @@ macro_rules! fiat_25519_to_bytes {
     };
 }
 
-fiat_25519_to_bytes!()
+fiat_25519_to_bytes!();

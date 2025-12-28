@@ -4,4 +4,4 @@ macro_rules! KSX1001_SYMBOLS {
     };
 }
 
-KSX1001_SYMBOLS!()
+KSX1001_SYMBOLS!();

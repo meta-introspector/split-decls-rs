@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        BlockAnd!();
+        Builder!();
+        Scope!();
+    };
+}
+
+macro_rules! construct_fn {
+    () => {
+        deps!();
+        # [doc = " the main entry point for building MIR for a function"] fn construct_fn < 'tcx > (tcx : TyCtxt < 'tcx > , fn_def : LocalDefId , thir : & Thir < 'tcx > , expr : ExprId , fn_sig : ty :: FnSig < 'tcx > ,) -> Body < 'tcx > { let span = tcx . def_span (fn_def) ; let fn_id = tcx . local_def_id_to_hir_id (fn_def) ; let body = tcx . hir_body_owned_by (fn_def) ; let span_with_body = tcx . hir_span_with_body (fn_id) ; let return_ty_span = tcx . hir_fn_decl_by_hir_id (fn_id) . unwrap_or_else (| | span_bug ! (span , "can't build MIR for {:?}" , fn_def)) . output . span () ; let mut abi = fn_sig . abi ; if let DefKind :: Closure = tcx . def_kind (fn_def) { abi = ExternAbi :: Rust ; } let arguments = & thir . params ; let return_ty = fn_sig . output () ; let coroutine = match tcx . type_of (fn_def) . instantiate_identity () . kind () { ty :: Coroutine (_ , args) => Some (Box :: new (CoroutineInfo :: initial (tcx . coroutine_kind (fn_def) . unwrap () , args . as_coroutine () . yield_ty () , args . as_coroutine () . resume_ty () ,))) , ty :: Closure (..) | ty :: CoroutineClosure (..) | ty :: FnDef (..) => None , ty => span_bug ! (span_with_body , "unexpected type of body: {ty:?}") , } ; if let Some ((dialect , phase)) = find_attr ! (tcx . hir_attrs (fn_id) , AttributeKind :: CustomMir (dialect , phase , _) => (dialect , phase)) { return custom :: build_custom_mir (tcx , fn_def . to_def_id () , fn_id , thir , expr , arguments , return_ty , return_ty_span , span_with_body , dialect . as_ref () . map (| (d , _) | * d) , phase . as_ref () . map (| (p , _) | * p) ,) ; } let infcx = tcx . infer_ctxt () . build (TypingMode :: non_body_analysis ()) ; let mut builder = Builder :: new (thir , infcx , fn_def , fn_id , span_with_body , arguments . len () , return_ty , return_ty_span , coroutine ,) ; let call_site_scope = region :: Scope { local_id : body . id () . hir_id . local_id , data : region :: ScopeData :: CallSite } ; let arg_scope = region :: Scope { local_id : body . id () . hir_id . local_id , data : region :: ScopeData :: Arguments } ; let source_info = builder . source_info (span) ; let call_site_s = (call_site_scope , source_info) ; let _ : BlockAnd < () > = builder . in_scope (call_site_s , LintLevel :: Inherited , | builder | { let arg_scope_s = (arg_scope , source_info) ; let fn_end = span_with_body . shrink_to_hi () ; let return_block = builder . in_breakable_scope (None , Place :: return_place () , fn_end , | builder | { Some (builder . in_scope (arg_scope_s , LintLevel :: Inherited , | builder | { builder . args_and_body (START_BLOCK , arguments , arg_scope , expr) })) }) . into_block () ; let source_info = builder . source_info (fn_end) ; builder . cfg . terminate (return_block , source_info , TerminatorKind :: Return) ; builder . build_drop_trees () ; return_block . unit () }) ; let mut body = builder . finish () ; body . spread_arg = if abi == ExternAbi :: RustCall { Some (Local :: new (arguments . len ())) } else { None } ; body }
+    };
+}
+
+construct_fn!()

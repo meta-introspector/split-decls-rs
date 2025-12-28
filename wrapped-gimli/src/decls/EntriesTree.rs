@@ -15,4 +15,4 @@ macro_rules! EntriesTree {
     };
 }
 
-EntriesTree!()
+EntriesTree!();

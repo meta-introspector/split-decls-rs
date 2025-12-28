@@ -4,4 +4,4 @@ macro_rules! MergedObject {
     };
 }
 
-MergedObject!()
+MergedObject!();

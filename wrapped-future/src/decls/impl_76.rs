@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        IAsyncInfo_Impl!();
+        IAsyncInfo_Vtbl!();
+        AsyncStatus!();
+    };
+}
+
+macro_rules! impl_76 {
+    () => {
+        deps!();
+        impl IAsyncInfo_Vtbl { pub const fn new < Identity : IAsyncInfo_Impl , const OFFSET : isize > () -> Self { unsafe extern "system" fn Id < Identity : IAsyncInfo_Impl , const OFFSET : isize > (this : * mut core :: ffi :: c_void , result__ : * mut u32 ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IAsyncInfo_Impl :: Id (this) { Ok (ok__) => { result__ . write (core :: mem :: transmute_copy (& ok__)) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } unsafe extern "system" fn Status < Identity : IAsyncInfo_Impl , const OFFSET : isize > (this : * mut core :: ffi :: c_void , result__ : * mut AsyncStatus ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IAsyncInfo_Impl :: Status (this) { Ok (ok__) => { result__ . write (core :: mem :: transmute_copy (& ok__)) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } unsafe extern "system" fn ErrorCode < Identity : IAsyncInfo_Impl , const OFFSET : isize > (this : * mut core :: ffi :: c_void , result__ : * mut windows_core :: HRESULT ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IAsyncInfo_Impl :: ErrorCode (this) { Ok (ok__) => { result__ . write (core :: mem :: transmute_copy (& ok__)) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } unsafe extern "system" fn Cancel < Identity : IAsyncInfo_Impl , const OFFSET : isize > (this : * mut core :: ffi :: c_void ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; IAsyncInfo_Impl :: Cancel (this) . into () } } unsafe extern "system" fn Close < Identity : IAsyncInfo_Impl , const OFFSET : isize > (this : * mut core :: ffi :: c_void ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; IAsyncInfo_Impl :: Close (this) . into () } } Self { base__ : windows_core :: IInspectable_Vtbl :: new :: < Identity , IAsyncInfo , OFFSET > () , Id : Id :: < Identity , OFFSET > , Status : Status :: < Identity , OFFSET > , ErrorCode : ErrorCode :: < Identity , OFFSET > , Cancel : Cancel :: < Identity , OFFSET > , Close : Close :: < Identity , OFFSET > , } } pub fn matches (iid : & windows_core :: GUID) -> bool { iid == & < IAsyncInfo as windows_core :: Interface > :: IID } }
+    };
+}
+
+impl_76!()

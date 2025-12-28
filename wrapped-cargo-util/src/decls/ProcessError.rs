@@ -4,4 +4,4 @@ macro_rules! ProcessError {
     };
 }
 
-ProcessError!()
+ProcessError!();

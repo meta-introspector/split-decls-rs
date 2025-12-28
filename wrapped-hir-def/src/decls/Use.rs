@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawVisibilityId!();
         UseTree!();
+        RawVisibilityId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Use {
     };
 }
 
-Use!()
+Use!();

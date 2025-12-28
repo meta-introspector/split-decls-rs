@@ -4,4 +4,4 @@ macro_rules! GB2312_HANZI {
     };
 }
 
-GB2312_HANZI!()
+GB2312_HANZI!();

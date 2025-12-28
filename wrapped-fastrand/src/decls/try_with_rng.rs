@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RestoreOnDrop!();
         Rng!();
+        RestoreOnDrop!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_with_rng {
     };
 }
 
-try_with_rng!()
+try_with_rng!();

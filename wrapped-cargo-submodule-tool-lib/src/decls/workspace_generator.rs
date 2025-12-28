@@ -4,4 +4,4 @@ macro_rules! workspace_generator {
     };
 }
 
-workspace_generator!()
+workspace_generator!();

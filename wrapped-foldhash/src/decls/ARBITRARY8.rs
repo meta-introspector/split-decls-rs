@@ -4,4 +4,4 @@ macro_rules! ARBITRARY8 {
     };
 }
 
-ARBITRARY8!()
+ARBITRARY8!();

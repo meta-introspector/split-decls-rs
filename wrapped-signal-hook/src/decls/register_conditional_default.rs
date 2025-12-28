@@ -1,0 +1,7 @@
+macro_rules! register_conditional_default {
+    () => {
+        # [doc = " Conditionally runs an emulation of the default action on the given signal."] # [doc = ""] # [doc = " If the provided condition is true at the time of invoking the signal handler, the equivalent of"] # [doc = " the default action of the given signal is run. It is a bit similar to"] # [doc = " [`register_conditional_shutdown`], except that it doesn't terminate for non-termination"] # [doc = " signals, it runs their default handler."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " If the signal is one of the forbidden"] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Similarly to the [`emulate_default_handler`][low_level::emulate_default_handler] function, this"] # [doc = " one looks the signal up in a table. If it is unknown, an error is returned."] # [doc = ""] # [doc = " Additionally to that, any errors that can be caused by a registration of a handler can happen"] # [doc = " too."] pub fn register_conditional_default (signal : c_int , condition : Arc < AtomicBool > ,) -> Result < SigId , Error > { low_level :: signal_name (signal) . ok_or_else (| | Error :: from_raw_os_error (EINVAL)) ? ; let action = move | | { if condition . load (Ordering :: SeqCst) { let _ = low_level :: emulate_default_handler (signal) ; } } ; unsafe { low_level :: register (signal , action) } }
+    };
+}
+
+register_conditional_default!()

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Delegate!();
-        Tree!();
-        ObjectKindHint!();
         Blob!();
         Repository!();
+        Tree!();
+        ObjectKindHint!();
+        Kind!();
+        Delegate!();
         Error!();
         Commit!();
-        Kind!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_885 {
     };
 }
 
-impl_885!()
+impl_885!();

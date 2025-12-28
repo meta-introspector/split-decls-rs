@@ -11,4 +11,4 @@ macro_rules! test_mmap_rayon {
     };
 }
 
-test_mmap_rayon!()
+test_mmap_rayon!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Submodule!();
-        Note!();
         Platform!();
+        Options!();
+        Repository!();
+        Submodule!();
+        Error!();
         Default!();
         Status!();
-        Repository!();
-        Options!();
+        Note!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_1000 {
     };
 }
 
-impl_1000!()
+impl_1000!();

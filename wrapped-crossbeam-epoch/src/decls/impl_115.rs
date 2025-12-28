@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Local!();
+        Guard!();
         Shared!();
         IsElement!();
         Entry!();
-        Guard!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

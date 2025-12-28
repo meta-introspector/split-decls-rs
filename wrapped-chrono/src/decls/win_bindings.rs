@@ -4,4 +4,4 @@ macro_rules! win_bindings {
     };
 }
 
-win_bindings!()
+win_bindings!();

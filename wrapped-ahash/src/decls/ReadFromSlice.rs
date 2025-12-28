@@ -4,4 +4,4 @@ macro_rules! ReadFromSlice {
     };
 }
 
-ReadFromSlice!()
+ReadFromSlice!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        File!();
         ParentEdge!();
+        File!();
         ParentIteratorState!();
-        Commit!();
         Position!();
         Parents!();
         Error!();
+        Commit!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
+        EnumRepr!();
         ImplBlockBuilder!();
-        FieldBounds!();
         Trait!();
+        FieldBounds!();
     };
 }
 

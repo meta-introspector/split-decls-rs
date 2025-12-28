@@ -4,4 +4,4 @@ macro_rules! WriteStyle {
     };
 }
 
-WriteStyle!()
+WriteStyle!();

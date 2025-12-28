@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Entry!();
+        Clear!();
+        RefMut!();
+        Config!();
     };
 }
 
 macro_rules! impl_23 {
     () => {
         deps!();
-        impl < T , C > fmt :: Debug for Entry < '_ , T , C > where T : fmt :: Debug , C : cfg :: Config , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt :: Debug :: fmt (self . value () , f) } }
+        impl < T , C : cfg :: Config > std :: ops :: Deref for RefMut < '_ , T , C > where T : Clear + Default , C : cfg :: Config , { type Target = T ; fn deref (& self) -> & Self :: Target { self . value () } }
     };
 }
 

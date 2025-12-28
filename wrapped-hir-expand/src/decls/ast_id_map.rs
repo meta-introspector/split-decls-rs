@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirFileId!();
         ExpandDatabase!();
+        HirFileId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ast_id_map {
     };
 }
 
-ast_id_map!()
+ast_id_map!();

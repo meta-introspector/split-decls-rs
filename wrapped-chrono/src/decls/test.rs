@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Weekday!();
-        NaiveWeek!();
         NaiveDate!();
+        NaiveWeek!();
+        Weekday!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

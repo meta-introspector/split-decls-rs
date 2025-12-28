@@ -4,4 +4,4 @@ macro_rules! encoder_tests {
     };
 }
 
-encoder_tests!()
+encoder_tests!();

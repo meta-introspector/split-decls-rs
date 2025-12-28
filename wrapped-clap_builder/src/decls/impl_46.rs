@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ArgSettings!();
-        IntoResettable!();
-        Str!();
-        ArgAction!();
-        StyledStr!();
-        Arg!();
         Usage!();
+        ArgAction!();
+        Str!();
+        StyledStr!();
+        IntoResettable!();
+        Arg!();
+        ArgSettings!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

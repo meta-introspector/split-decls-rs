@@ -11,4 +11,4 @@ macro_rules! open_opts_with_git_binary_config {
     };
 }
 
-open_opts_with_git_binary_config!()
+open_opts_with_git_binary_config!();

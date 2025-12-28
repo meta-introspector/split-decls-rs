@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Item!();
-        Match!();
-        Mode!();
         Needle!();
+        Mode!();
+        Match!();
+        Item!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

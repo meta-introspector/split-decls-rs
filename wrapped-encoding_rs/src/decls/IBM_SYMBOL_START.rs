@@ -4,4 +4,4 @@ macro_rules! IBM_SYMBOL_START {
     };
 }
 
-IBM_SYMBOL_START!()
+IBM_SYMBOL_START!();

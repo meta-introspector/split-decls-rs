@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Field!();
         Context!();
+        Field!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Lookahead {
     };
 }
 
-Lookahead!()
+Lookahead!();

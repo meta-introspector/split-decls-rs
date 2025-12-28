@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Engine!();
-        GeneralPurposeConfig!();
-        GeneralPurpose!();
-        Alphabet!();
         EngineWrapper!();
-        DecodePaddingMode!();
+        GeneralPurposeConfig!();
+        Engine!();
+        GeneralPurpose!();
         GeneralPurposeWrapper!();
+        Alphabet!();
+        DecodePaddingMode!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_183 {
     };
 }
 
-impl_183!()
+impl_183!();

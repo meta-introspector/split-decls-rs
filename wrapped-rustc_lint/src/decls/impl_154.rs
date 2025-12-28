@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        LateContext!();
+        DefaultCouldBeDerived!();
+    };
+}
+
+macro_rules! impl_154 {
+    () => {
+        deps!();
+        impl < 'tcx > LateLintPass < 'tcx > for DefaultCouldBeDerived { fn check_impl_item (& mut self , cx : & LateContext < '_ > , impl_item : & hir :: ImplItem < '_ >) { let Some (default_def_id) = cx . tcx . get_diagnostic_item (sym :: Default) else { return } ; let hir :: ImplItemKind :: Fn (_sig , body_id) = impl_item . kind else { return } ; let parent = cx . tcx . parent (impl_item . owner_id . to_def_id ()) ; if find_attr ! (cx . tcx . get_all_attrs (parent) , AttributeKind :: AutomaticallyDerived (..)) { return ; } let Some (trait_ref) = cx . tcx . impl_trait_ref (parent) else { return } ; let trait_ref = trait_ref . instantiate_identity () ; if trait_ref . def_id != default_def_id { return ; } let ty = trait_ref . self_ty () ; let ty :: Adt (def , _) = ty . kind () else { return } ; let type_def_id = def . did () ; let body = cx . tcx . hir_body (body_id) ; let hir :: ExprKind :: Block (hir :: Block { stmts : _ , expr : Some (expr) , .. } , None) = body . value . kind else { return ; } ; let orig_fields = match cx . tcx . hir_get_if_local (type_def_id) { Some (hir :: Node :: Item (hir :: Item { kind : hir :: ItemKind :: Struct (_ , _generics , hir :: VariantData :: Struct { fields , recovered : _ } ,) , .. })) => fields . iter () . map (| f | (f . ident . name , f)) . collect :: < FxHashMap < _ , _ > > () , _ => return , } ; let hir :: ExprKind :: Struct (_qpath , fields , tail) = expr . kind else { return } ; if let hir :: StructTailExpr :: Base (_) = tail { return ; } let any_default_field_given = fields . iter () . any (| f | orig_fields . get (& f . ident . name) . and_then (| f | f . default) . is_some ()) ; if ! any_default_field_given { return ; } let Some (local) = parent . as_local () else { return } ; let hir_id = cx . tcx . local_def_id_to_hir_id (local) ; let hir :: Node :: Item (item) = cx . tcx . hir_node (hir_id) else { return } ; cx . tcx . node_span_lint (DEFAULT_OVERRIDES_DEFAULT_FIELDS , hir_id , item . span , | diag | { mk_lint (cx . tcx , diag , type_def_id , parent , orig_fields , fields) ; }) ; } }
+    };
+}
+
+impl_154!()

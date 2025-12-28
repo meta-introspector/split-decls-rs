@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EncoderWriter!();
         Engine!();
         Utf8SingleCodeUnitWriter!();
         StrConsumer!();
         EncoderStringWriter!();
+        EncoderWriter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

@@ -4,4 +4,4 @@ macro_rules! GAVisitor {
     };
 }
 
-GAVisitor!()
+GAVisitor!();

@@ -4,4 +4,4 @@ macro_rules! LocListsFormat {
     };
 }
 
-LocListsFormat!()
+LocListsFormat!();

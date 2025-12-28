@@ -4,4 +4,4 @@ macro_rules! AtToken {
     };
 }
 
-AtToken!()
+AtToken!();

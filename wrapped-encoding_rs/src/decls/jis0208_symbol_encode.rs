@@ -4,4 +4,4 @@ macro_rules! jis0208_symbol_encode {
     };
 }
 
-jis0208_symbol_encode!()
+jis0208_symbol_encode!();

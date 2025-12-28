@@ -4,4 +4,4 @@ macro_rules! DiffLineStats {
     };
 }
 
-DiffLineStats!()
+DiffLineStats!();

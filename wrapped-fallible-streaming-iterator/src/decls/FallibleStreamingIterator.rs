@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        MapErr!();
         Filter!();
         Map!();
-        SkipWhile!();
-        Fuse!();
-        MapErr!();
-        Skip!();
-        Take!();
-        TakeWhile!();
-        FuseState!();
         MapRef!();
+        FuseState!();
+        Take!();
+        Fuse!();
+        Skip!();
+        SkipWhile!();
+        TakeWhile!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! FallibleStreamingIterator {
     };
 }
 
-FallibleStreamingIterator!()
+FallibleStreamingIterator!();

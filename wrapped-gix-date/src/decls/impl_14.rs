@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CustomFormat!();
         Format!();
-        Time!();
         Error!();
+        CustomFormat!();
+        Time!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

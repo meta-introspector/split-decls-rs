@@ -11,4 +11,4 @@ macro_rules! stash_apply_progress_cb {
     };
 }
 
-stash_apply_progress_cb!()
+stash_apply_progress_cb!();

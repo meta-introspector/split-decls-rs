@@ -11,4 +11,4 @@ macro_rules! colon_or_space {
     };
 }
 
-colon_or_space!()
+colon_or_space!();

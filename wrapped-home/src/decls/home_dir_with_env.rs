@@ -11,4 +11,4 @@ macro_rules! home_dir_with_env {
     };
 }
 
-home_dir_with_env!()
+home_dir_with_env!();

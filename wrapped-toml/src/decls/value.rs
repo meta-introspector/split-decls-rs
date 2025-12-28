@@ -1,6 +1,6 @@
 macro_rules! value {
     () => {
-        # [cfg (feature = "serde")] pub mod value ;
+        # [cfg (feature = "display")] mod value ;
     };
 }
 

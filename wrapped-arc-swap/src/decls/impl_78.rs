@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Node!();
-        RefCnt!();
-        LocalNode!();
         Debt!();
+        Node!();
+        LocalNode!();
+        RefCnt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

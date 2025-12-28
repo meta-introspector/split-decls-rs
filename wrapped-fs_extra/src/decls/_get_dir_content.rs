@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DirContent!();
         Result!();
         ErrorKind!();
+        DirContent!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! _get_dir_content {
     };
 }
 
-_get_dir_content!()
+_get_dir_content!();

@@ -4,4 +4,4 @@ macro_rules! big5_other_encode {
     };
 }
 
-big5_other_encode!()
+big5_other_encode!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Section!();
         Error!();
+        CieOrFde!();
+        BaseAddresses!();
         FrameDescriptionEntry!();
+        PartialFrameDescriptionEntry!();
         CommonInformationEntry!();
         UnwindSection!();
-        PartialFrameDescriptionEntry!();
-        Reader!();
         Result!();
-        BaseAddresses!();
-        Section!();
-        CieOrFde!();
+        Reader!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
+        IndexStr!();
+        SubstitutionTable!();
+        DemangleWrite!();
         Error!();
-        ParseContext!();
-        Demangle!();
+        MangledName!();
         Symbol!();
         DemangleOptions!();
-        DemangleWrite!();
-        SubstitutionTable!();
-        MangledName!();
-        DemangleContext!();
         ParseOptions!();
-        IndexStr!();
         Result!();
+        Demangle!();
+        ParseContext!();
+        DemangleContext!();
     };
 }
 
@@ -26,4 +26,4 @@ substitutions = {:#?}" , String :: from_utf8_lossy (symbol . raw . as_ref ()) , 
     };
 }
 
-impl_348!()
+impl_348!();

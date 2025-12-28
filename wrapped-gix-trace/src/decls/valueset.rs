@@ -4,4 +4,4 @@ macro_rules! valueset {
     };
 }
 
-valueset!()
+valueset!();

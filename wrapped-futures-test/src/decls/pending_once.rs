@@ -4,4 +4,4 @@ macro_rules! pending_once {
     };
 }
 
-pending_once!()
+pending_once!();

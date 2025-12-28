@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Table!();
+        Entry!();
+        DeString!();
+        TraceScope!();
+        State!();
+        TableHeader!();
+        Array!();
+        DeArray!();
+        DeValue!();
+    };
+}
+
+macro_rules! impl_239 {
+    () => {
+        deps!();
+        impl < 'i > State < 'i > { fn capture_trailing (& mut self , _event : & toml_parser :: parser :: Event) { } fn capture_key_value (& mut self , path : Vec < Spanned < DeString < 'i > > > , key : Spanned < DeString < 'i > > , value : Spanned < DeValue < 'i > > , errors : & mut dyn ErrorSink ,) { # [cfg (feature = "debug")] let _scope = TraceScope :: new ("document::capture_key_value") ; # [cfg (feature = "debug")] trace (& format ! ("path={:?}" , path . iter () . map (| k | k . get_ref ()) . collect ::< Vec < _ >> ()) , anstyle :: AnsiColor :: Blue . on_default () ,) ; # [cfg (feature = "debug")] trace (& format ! ("key={key}" ,) , anstyle :: AnsiColor :: Blue . on_default () ,) ; # [cfg (feature = "debug")] trace (& format ! ("value={value:?}" ,) , anstyle :: AnsiColor :: Blue . on_default () ,) ; let dotted = true ; let Some (parent_table) = descend_path (& mut self . current_table , & path , dotted , errors) else { return ; } ; let mixed_table_types = parent_table . is_dotted () == path . is_empty () ; if mixed_table_types { let key_span = get_key_span (& key) ; errors . report_error (ParseError :: new ("duplicate key") . with_unexpected (key_span)) ; return ; } let key_span = get_key_span (& key) ; match parent_table . entry (key) { Entry :: Vacant (o) => { o . insert (value) ; } Entry :: Occupied (existing) => { let old_span = get_key_span (existing . key ()) ; errors . report_error (ParseError :: new ("duplicate key") . with_unexpected (key_span) . with_context (old_span) ,) ; } } } fn finish_table (& mut self , errors : & mut dyn ErrorSink) { # [cfg (feature = "debug")] let _scope = TraceScope :: new ("document::finish_table") ; let prev_table = core :: mem :: take (& mut self . current_table) ; if let Some (header) = self . current_header . take () { let Some (key) = & header . key else { return ; } ; let header_span = header . span . start () .. header . span . end () ; let prev_table = Spanned :: new (header_span . clone () , DeValue :: Table (prev_table)) ; let parent_key = & header . path ; let dotted = false ; let Some (parent_table) = descend_path (& mut self . root , parent_key , dotted , errors) else { return ; } ; # [cfg (feature = "debug")] trace (& format ! ("key={key}" ,) , anstyle :: AnsiColor :: Blue . on_default () ,) ; if header . is_array { let entry = parent_table . entry (key . clone ()) . or_insert_with (| | { let mut array = DeArray :: new () ; array . set_array_of_tables (true) ; Spanned :: new (header_span , DeValue :: Array (array)) }) ; let Some (array) = entry . as_mut () . as_array_mut () . filter (| a | a . is_array_of_tables ()) else { let key_span = get_key_span (key) ; let old_span = entry . span () ; let old_span = toml_parser :: Span :: new_unchecked (old_span . start , old_span . end) ; errors . report_error (ParseError :: new ("duplicate key") . with_unexpected (key_span) . with_context (old_span) ,) ; return ; } ; array . push (prev_table) ; } else { let existing = parent_table . insert (key . clone () , prev_table) ; debug_assert ! (existing . is_none ()) ; } } else { self . root = prev_table ; } } fn start_table (& mut self , header : TableHeader < 'i > , errors : & mut dyn ErrorSink) { if ! header . is_array { let root = & mut self . root ; if let (Some (parent_table) , Some (key)) = (descend_path (root , & header . path , false , errors) , & header . key) { if let Some ((old_key , old_value)) = parent_table . remove_entry (key) { match old_value . into_inner () { DeValue :: Table (t) if t . is_implicit () && ! t . is_dotted () => { self . current_table = t ; } old_value => { let old_span = get_key_span (& old_key) ; let key_span = get_key_span (key) ; errors . report_error (ParseError :: new ("duplicate key") . with_unexpected (key_span) . with_context (old_span) ,) ; if let DeValue :: Table (t) = old_value { self . current_table = t ; } } } } } } self . current_position += 1 ; self . current_table . set_implicit (false) ; self . current_table . set_dotted (false) ; self . current_header = Some (header) ; } }
+    };
+}
+
+impl_239!()

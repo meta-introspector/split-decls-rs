@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RawArgs!();
         ArgCursor!();
         ParsedArg!();
-        RawArgs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

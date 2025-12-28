@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Field!();
         Directive!();
-        Visitor!();
-        KnownArgumentNames!();
         VisitorContext!();
+        KnownArgumentNames!();
         ArgsType!();
+        Visitor!();
+        Field!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

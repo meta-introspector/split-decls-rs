@@ -4,4 +4,4 @@ macro_rules! email {
     };
 }
 
-email!()
+email!();

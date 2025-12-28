@@ -11,4 +11,4 @@ macro_rules! write_to_local_config {
     };
 }
 
-write_to_local_config!()
+write_to_local_config!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DashMap!();
-        RwLock!();
         HashMap!();
+        RwLock!();
+        DashMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

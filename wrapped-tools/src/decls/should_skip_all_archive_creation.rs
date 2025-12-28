@@ -4,4 +4,4 @@ macro_rules! should_skip_all_archive_creation {
     };
 }
 
-should_skip_all_archive_creation!()
+should_skip_all_archive_creation!();

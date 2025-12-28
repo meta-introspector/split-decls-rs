@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Section!();
+        Augmentation!();
+        UnwindSection!();
+        PointerEncodingParameters!();
+        BaseAddresses!();
+        Error!();
         Result!();
         Reader!();
-        BaseAddresses!();
-        UnwindSection!();
-        Error!();
-        Augmentation!();
-        PointerEncodingParameters!();
+        Section!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

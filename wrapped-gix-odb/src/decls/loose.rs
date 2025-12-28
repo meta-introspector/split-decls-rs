@@ -4,4 +4,4 @@ macro_rules! loose {
     };
 }
 
-loose!()
+loose!();

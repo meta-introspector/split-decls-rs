@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Inner!();
-        WriteError!();
         Handler!();
+        WriteError!();
         Easy!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Easy2 {
     };
 }
 
-Easy2!()
+Easy2!();

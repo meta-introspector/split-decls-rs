@@ -4,4 +4,4 @@ macro_rules! __impl_public_bitflags_ops {
     };
 }
 
-__impl_public_bitflags_ops!()
+__impl_public_bitflags_ops!();

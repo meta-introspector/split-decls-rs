@@ -4,4 +4,4 @@ macro_rules! TomlPackageBuild {
     };
 }
 
-TomlPackageBuild!()
+TomlPackageBuild!();

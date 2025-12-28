@@ -12,4 +12,4 @@ macro_rules! str_newtype {
     };
 }
 
-str_newtype!()
+str_newtype!();

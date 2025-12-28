@@ -4,4 +4,4 @@ macro_rules! next_cfg_expr_from_syntax {
     };
 }
 
-next_cfg_expr_from_syntax!()
+next_cfg_expr_from_syntax!();

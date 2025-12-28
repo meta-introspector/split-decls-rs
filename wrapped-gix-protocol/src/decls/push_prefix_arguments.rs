@@ -4,4 +4,4 @@ macro_rules! push_prefix_arguments {
     };
 }
 
-push_prefix_arguments!()
+push_prefix_arguments!();

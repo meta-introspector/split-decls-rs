@@ -60,4 +60,4 @@ fn f() {
     };
 }
 
-test_expr_after_path_colons!()
+test_expr_after_path_colons!();

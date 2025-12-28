@@ -4,4 +4,4 @@ macro_rules! set1 {
     };
 }
 
-set1!()
+set1!();

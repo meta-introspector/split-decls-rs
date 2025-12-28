@@ -4,4 +4,4 @@ macro_rules! c_cmp_to_ordering {
     };
 }
 
-c_cmp_to_ordering!()
+c_cmp_to_ordering!();

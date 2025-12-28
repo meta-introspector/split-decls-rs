@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        VerifyingKey!();
-        Signature!();
         SignatureSize!();
         EcdsaCurve!();
+        Signature!();
+        VerifyingKey!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

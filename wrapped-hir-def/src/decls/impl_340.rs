@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ModuleId!();
         ItemContainerId!();
         HasResolver!();
         DefDatabase!();
+        ModuleId!();
         Resolver!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_340 {
     };
 }
 
-impl_340!()
+impl_340!();

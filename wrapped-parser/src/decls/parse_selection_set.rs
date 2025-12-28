@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Result!();
-        SelectionSet!();
-        PositionCalculator!();
         Rule!();
         Positioned!();
+        SelectionSet!();
+        PositionCalculator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_selection_set {
     };
 }
 
-parse_selection_set!()
+parse_selection_set!();

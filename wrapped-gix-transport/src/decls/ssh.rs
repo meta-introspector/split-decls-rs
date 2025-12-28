@@ -4,4 +4,4 @@ macro_rules! ssh {
     };
 }
 
-ssh!()
+ssh!();

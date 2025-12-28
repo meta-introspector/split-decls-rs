@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        RoundingError!();
         DurationRound!();
+        RoundingError!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_692 {
     };
 }
 
-impl_692!()
+impl_692!();

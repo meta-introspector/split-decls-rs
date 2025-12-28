@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CacheStorage!();
-        Extension!();
+        ExtensionFactory!();
         ApolloPersistedQueries!();
         ApolloPersistedQueriesExtension!();
-        ExtensionFactory!();
+        Extension!();
+        CacheStorage!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_533 {
     };
 }
 
-impl_533!()
+impl_533!();

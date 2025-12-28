@@ -4,4 +4,4 @@ macro_rules! CopyAsciiResult {
     };
 }
 
-CopyAsciiResult!()
+CopyAsciiResult!();

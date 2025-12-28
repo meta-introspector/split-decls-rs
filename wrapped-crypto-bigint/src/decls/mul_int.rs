@@ -4,4 +4,4 @@ macro_rules! mul_int {
     };
 }
 
-mul_int!()
+mul_int!();

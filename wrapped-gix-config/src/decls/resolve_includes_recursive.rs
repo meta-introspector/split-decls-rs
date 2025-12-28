@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        File!();
         Error!();
+        File!();
         Options!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! resolve_includes_recursive {
     };
 }
 
-resolve_includes_recursive!()
+resolve_includes_recursive!();

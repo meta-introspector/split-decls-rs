@@ -12,4 +12,4 @@ macro_rules! notify_cb {
     };
 }
 
-notify_cb!()
+notify_cb!();

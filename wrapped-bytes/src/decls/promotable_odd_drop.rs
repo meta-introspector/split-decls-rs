@@ -4,4 +4,4 @@ macro_rules! promotable_odd_drop {
     };
 }
 
-promotable_odd_drop!()
+promotable_odd_drop!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Repository!();
         Clone!();
+        Repository!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Tree {
     };
 }
 
-Tree!()
+Tree!();

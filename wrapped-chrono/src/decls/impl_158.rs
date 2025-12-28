@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TimeZone!();
+        Datelike!();
         Weekday!();
         IsoWeek!();
+        TimeZone!();
         DateTime!();
-        Datelike!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

@@ -11,4 +11,4 @@ macro_rules! map_ok_or_else_fn {
     };
 }
 
-map_ok_or_else_fn!()
+map_ok_or_else_fn!();

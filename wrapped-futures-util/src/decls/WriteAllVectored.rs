@@ -4,4 +4,4 @@ macro_rules! WriteAllVectored {
     };
 }
 
-WriteAllVectored!()
+WriteAllVectored!();

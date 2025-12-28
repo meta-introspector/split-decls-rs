@@ -4,4 +4,4 @@ macro_rules! generic {
     };
 }
 
-generic!()
+generic!();

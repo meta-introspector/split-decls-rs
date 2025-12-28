@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         Color!();
+        ColorRgb!();
         State!();
         Color256!();
-        Change!();
-        Intensity!();
-        Color16!();
-        StateDiff!();
-        ColorRgb!();
         Action!();
+        Color16!();
         ExtColor!();
+        Intensity!();
+        Change!();
+        StateDiff!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

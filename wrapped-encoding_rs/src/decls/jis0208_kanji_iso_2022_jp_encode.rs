@@ -4,4 +4,4 @@ macro_rules! jis0208_kanji_iso_2022_jp_encode {
     };
 }
 
-jis0208_kanji_iso_2022_jp_encode!()
+jis0208_kanji_iso_2022_jp_encode!();

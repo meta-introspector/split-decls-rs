@@ -4,4 +4,4 @@ macro_rules! ptr_size_bits {
     };
 }
 
-ptr_size_bits!()
+ptr_size_bits!();

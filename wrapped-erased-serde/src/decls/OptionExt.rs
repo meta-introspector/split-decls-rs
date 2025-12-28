@@ -4,4 +4,4 @@ macro_rules! OptionExt {
     };
 }
 
-OptionExt!()
+OptionExt!();

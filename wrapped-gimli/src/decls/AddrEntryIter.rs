@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         Reader!();
+        Encoding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AddrEntryIter {
     };
 }
 
-AddrEntryIter!()
+AddrEntryIter!();

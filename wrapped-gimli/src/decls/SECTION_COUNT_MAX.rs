@@ -4,4 +4,4 @@ macro_rules! SECTION_COUNT_MAX {
     };
 }
 
-SECTION_COUNT_MAX!()
+SECTION_COUNT_MAX!();

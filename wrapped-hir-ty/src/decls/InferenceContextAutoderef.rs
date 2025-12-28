@@ -13,4 +13,4 @@ macro_rules! InferenceContextAutoderef {
     };
 }
 
-InferenceContextAutoderef!()
+InferenceContextAutoderef!();

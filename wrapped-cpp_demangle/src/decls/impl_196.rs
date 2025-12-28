@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         ParseContext!();
-        IndexStr!();
-        Decltype!();
-        SubstitutionTable!();
         Result!();
-        Expression!();
+        IndexStr!();
+        SubstitutionTable!();
+        Decltype!();
         Parse!();
+        Expression!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_196 {
     };
 }
 
-impl_196!()
+impl_196!();

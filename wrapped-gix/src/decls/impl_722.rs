@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        TagOpt!();
-        SubSectionRequirement!();
-        Remote!();
         ProxyAuthMethod!();
-        Url!();
-        PushRefSpec!();
-        String!();
+        SubSectionRequirement!();
         FetchRefSpec!();
+        PushRefSpec!();
+        Remote!();
         Tree!();
+        TagOpt!();
+        Url!();
         RemoteName!();
+        String!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_722 {
     };
 }
 
-impl_722!()
+impl_722!();

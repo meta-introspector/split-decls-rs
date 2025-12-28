@@ -4,4 +4,4 @@ macro_rules! opposite_ascii_case {
     };
 }
 
-opposite_ascii_case!()
+opposite_ascii_case!();

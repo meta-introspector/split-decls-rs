@@ -4,4 +4,4 @@ macro_rules! AstIdWithPath {
     };
 }
 
-AstIdWithPath!()
+AstIdWithPath!();

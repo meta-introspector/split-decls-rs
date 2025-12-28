@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Bytes!();
         Buf!();
         Take!();
+        Bytes!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

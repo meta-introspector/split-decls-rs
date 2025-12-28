@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        StringBuilder!();
+        Raw!();
+        Expected!();
+        ParseError!();
+        Span!();
+        ErrorSink!();
+    };
+}
+
+macro_rules! decode_basic_string {
+    () => {
+        deps!();
+        # [doc = " Parse basic string"] # [doc = ""] # [doc = " ```bnf"] # [doc = " ;; Basic String"] # [doc = ""] # [doc = " basic-string = quotation-mark *basic-char quotation-mark"] # [doc = ""] # [doc = " basic-char = basic-unescaped / escaped"] # [doc = ""] # [doc = " escaped = escape escape-seq-char"] # [doc = " ```"] pub (crate) fn decode_basic_string < 'i > (raw : Raw < 'i > , output : & mut dyn StringBuilder < 'i > , error : & mut dyn ErrorSink ,) { const INVALID_STRING : & str = "invalid basic string" ; output . clear () ; let s = raw . as_str () ; let s = if let Some (stripped) = s . strip_prefix (QUOTATION_MARK as char) { stripped } else { error . report_error (ParseError :: new (INVALID_STRING) . with_context (Span :: new_unchecked (0 , raw . len ())) . with_expected (& [Expected :: Literal ("\"")]) . with_unexpected (Span :: new_unchecked (0 , 0)) ,) ; s } ; let mut s = if let Some (stripped) = s . strip_suffix (QUOTATION_MARK as char) { stripped } else { error . report_error (ParseError :: new (INVALID_STRING) . with_context (Span :: new_unchecked (0 , raw . len ())) . with_expected (& [Expected :: Literal ("\"")]) . with_unexpected (Span :: new_unchecked (raw . len () , raw . len ())) ,) ; s } ; let segment = basic_unescaped (& mut s) ; if ! output . push_str (segment) { error . report_error (ParseError :: new (ALLOCATION_ERROR) . with_unexpected (Span :: new_unchecked (0 , raw . len ())) ,) ; } while ! s . is_empty () { if s . starts_with ("\\") { let _ = s . next_token () ; let c = escape_seq_char (& mut s , raw , error) ; if ! output . push_char (c) { error . report_error (ParseError :: new (ALLOCATION_ERROR) . with_unexpected (Span :: new_unchecked (0 , raw . len ())) ,) ; } } else { let invalid = basic_invalid (& mut s) ; let start = invalid . offset_from (& raw . as_str ()) ; let end = start + invalid . len () ; error . report_error (ParseError :: new (INVALID_STRING) . with_context (Span :: new_unchecked (0 , raw . len ())) . with_expected (& [Expected :: Description ("non-double-quote visible characters") , Expected :: Literal ("\\") ,]) . with_unexpected (Span :: new_unchecked (start , end)) ,) ; let _ = output . push_str (invalid) ; } let segment = basic_unescaped (& mut s) ; if ! output . push_str (segment) { let start = segment . offset_from (& raw . as_str ()) ; let end = start + segment . len () ; error . report_error (ParseError :: new (ALLOCATION_ERROR) . with_unexpected (Span :: new_unchecked (start , end)) ,) ; } } }
+    };
+}
+
+decode_basic_string!()

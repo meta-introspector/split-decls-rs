@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Formatter!();
         DefaultVisitSource!();
+        Formatter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! default_kv_format {
     };
 }
 
-default_kv_format!()
+default_kv_format!();

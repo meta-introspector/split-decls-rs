@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SubmoduleStat!();
         GitAdapter!();
+        SubmoduleStat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MockGitAdapter {
     };
 }
 
-MockGitAdapter!()
+MockGitAdapter!();

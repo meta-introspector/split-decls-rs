@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Status!();
+        Stream!();
+        Action!();
+        XzEncoder!();
+        Check!();
+    };
+}
+
+macro_rules! impl_61 {
+    () => {
+        deps!();
+        impl < W : Write > XzEncoder < W > { # [doc = " Create a new compression stream which will compress at the given level"] # [doc = " to write compress output to the give output stream."] pub fn new (obj : W , level : u32) -> XzEncoder < W > { let stream = Stream :: new_easy_encoder (level , Check :: Crc64) . unwrap () ; XzEncoder :: new_stream (obj , stream) } # [doc = " Create a new encoder which will use the specified `Stream` to encode"] # [doc = " (compress) data into the provided `obj`."] pub fn new_stream (obj : W , stream : Stream) -> XzEncoder < W > { XzEncoder { data : stream , obj : Some (obj) , buf : Vec :: with_capacity (32 * 1024) , } } # [doc = " Acquires a reference to the underlying writer."] pub fn get_ref (& self) -> & W { self . obj . as_ref () . unwrap () } # [doc = " Acquires a mutable reference to the underlying writer."] # [doc = ""] # [doc = " Note that mutating the output/input state of the stream may corrupt this"] # [doc = " object, so care must be taken when using this method."] pub fn get_mut (& mut self) -> & mut W { self . obj . as_mut () . unwrap () } fn dump (& mut self) -> io :: Result < () > { while self . buf . len () > 0 { let n = self . obj . as_mut () . unwrap () . write (& self . buf) ? ; self . buf . drain (.. n) ; } Ok (()) } # [doc = " Attempt to finish this output stream, writing out final chunks of data."] # [doc = ""] # [doc = " Note that this function can only be used once data has finished being"] # [doc = " written to the output stream. After this function is called then further"] # [doc = " calls to `write` may result in a panic."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Attempts to write data to this stream may result in a panic after this"] # [doc = " function is called."] pub fn try_finish (& mut self) -> io :: Result < () > { loop { self . dump () ? ; let res = self . data . process_vec (& [] , & mut self . buf , Action :: Finish) ? ; if res == Status :: StreamEnd { break ; } } self . dump () } # [doc = " Consumes this encoder, flushing the output stream."] # [doc = ""] # [doc = " This will flush the underlying data stream and then return the contained"] # [doc = " writer if the flush succeeded."] # [doc = ""] # [doc = " Note that this function may not be suitable to call in a situation where"] # [doc = " the underlying stream is an asynchronous I/O stream. To finish a stream"] # [doc = " the `try_finish` (or `shutdown`) method should be used instead. To"] # [doc = " re-acquire ownership of a stream it is safe to call this method after"] # [doc = " `try_finish` or `shutdown` has returned `Ok`."] pub fn finish (mut self) -> io :: Result < W > { self . try_finish () ? ; Ok (self . obj . take () . unwrap ()) } # [doc = " Returns the number of bytes produced by the compressor"] # [doc = ""] # [doc = " Note that, due to buffering, this only bears any relation to"] # [doc = " `total_in()` after a call to `flush()`.  At that point,"] # [doc = " `total_out() / total_in()` is the compression ratio."] pub fn total_out (& self) -> u64 { self . data . total_out () } # [doc = " Returns the number of bytes consumed by the compressor"] # [doc = " (e.g. the number of bytes written to this stream.)"] pub fn total_in (& self) -> u64 { self . data . total_in () } }
+    };
+}
+
+impl_61!()

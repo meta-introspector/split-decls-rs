@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParseIntegerError!();
         MinNumTraits!();
+        ParseIntegerError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! to_signed {
     };
 }
 
-to_signed!()
+to_signed!();

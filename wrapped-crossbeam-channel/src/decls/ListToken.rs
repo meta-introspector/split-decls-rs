@@ -4,4 +4,4 @@ macro_rules! ListToken {
     };
 }
 
-ListToken!()
+ListToken!();

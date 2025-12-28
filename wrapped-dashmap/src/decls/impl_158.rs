@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
         TryResult!();
-        EntryRef!();
-        Entry!();
-        Iter!();
+        RwLock!();
+        TryReserveError!();
         DashMap!();
         ReadOnlyView!();
-        TryReserveError!();
         Ref!();
-        RefMut!();
+        EntryRef!();
         IterMut!();
         HashMap!();
-        RwLock!();
+        Iter!();
+        RefMut!();
+        Entry!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

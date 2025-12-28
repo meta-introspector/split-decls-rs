@@ -4,4 +4,4 @@ macro_rules! u32_len {
     };
 }
 
-u32_len!()
+u32_len!();

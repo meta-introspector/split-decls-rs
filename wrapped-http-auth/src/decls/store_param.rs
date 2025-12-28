@@ -11,4 +11,4 @@ macro_rules! store_param {
     };
 }
 
-store_param!()
+store_param!();

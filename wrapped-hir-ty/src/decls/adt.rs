@@ -4,4 +4,4 @@ macro_rules! adt {
     };
 }
 
-adt!()
+adt!();

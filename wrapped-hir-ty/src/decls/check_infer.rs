@@ -4,4 +4,4 @@ macro_rules! check_infer {
     };
 }
 
-check_infer!()
+check_infer!();

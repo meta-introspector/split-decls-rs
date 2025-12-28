@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ArgScopeStack!();
-        GlobalCtorDtor!();
-        Demangle!();
         Result!();
-        DemangleContext!();
         DemangleWrite!();
+        ArgScopeStack!();
+        DemangleContext!();
+        Demangle!();
+        GlobalCtorDtor!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

@@ -11,4 +11,4 @@ macro_rules! shared_v_drop {
     };
 }
 
-shared_v_drop!()
+shared_v_drop!();

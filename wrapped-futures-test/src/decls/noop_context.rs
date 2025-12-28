@@ -4,4 +4,4 @@ macro_rules! noop_context {
     };
 }
 
-noop_context!()
+noop_context!();

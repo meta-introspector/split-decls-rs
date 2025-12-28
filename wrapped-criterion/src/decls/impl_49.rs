@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MessageError!();
         Error!();
+        MessageError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_49 {
     };
 }
 
-impl_49!()
+impl_49!();

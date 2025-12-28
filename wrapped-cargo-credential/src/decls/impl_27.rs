@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Action!();
-        CredentialResponse!();
-        RegistryInfo!();
-        UnsupportedCredential!();
         Credential!();
         Error!();
+        UnsupportedCredential!();
+        CredentialResponse!();
+        RegistryInfo!();
+        Action!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

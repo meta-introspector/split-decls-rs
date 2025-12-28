@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DemangleWrite!();
         DemangleContext!();
         DemangleAsInner!();
+        DemangleWrite!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AutoDemangleContextInnerBarrier {
     };
 }
 
-AutoDemangleContextInnerBarrier!()
+AutoDemangleContextInnerBarrier!();

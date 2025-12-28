@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Error!();
-        State!();
-        Repository!();
-        Default!();
         Outcome!();
-        Clone!();
-        Id!();
-        Checkout!();
         PrepareCheckout!();
+        Id!();
+        Error!();
+        Repository!();
         Note!();
+        State!();
+        Clone!();
+        Checkout!();
+        Default!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! main_worktree {
     };
 }
 
-main_worktree!()
+main_worktree!();

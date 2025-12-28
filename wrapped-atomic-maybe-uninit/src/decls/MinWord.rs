@@ -4,4 +4,4 @@ macro_rules! MinWord {
     };
 }
 
-MinWord!()
+MinWord!();

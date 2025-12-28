@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         DecoderResult!();
         UserDefinedDecoder!();
-        Utf8Destination!();
         VariantDecoder!();
+        Utf8Destination!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_154 {
     };
 }
 
-impl_154!()
+impl_154!();

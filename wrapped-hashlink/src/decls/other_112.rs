@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ValueLinks!();
         FreeLink!();
+        ValueLinks!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! other_112 {
     };
 }
 
-other_112!()
+other_112!();

@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Slab!();
+        Ref!();
+        Clear!();
+        Config!();
     };
 }
 
 macro_rules! impl_17 {
     () => {
         deps!();
-        impl < T : fmt :: Debug , C : cfg :: Config > fmt :: Debug for Slab < T , C > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("Slab") . field ("shards" , & self . shards) . field ("config" , & C :: debug ()) . finish () } }
+        impl < T , C > Ref < '_ , T , C > where T : Clear + Default , C : cfg :: Config , { # [doc = " Returns the key used to access this guard"] pub fn key (& self) -> usize { self . key } # [inline] fn value (& self) -> & T { unsafe { self . inner . value () } } }
     };
 }
 

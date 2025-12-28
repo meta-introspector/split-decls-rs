@@ -12,4 +12,4 @@ macro_rules! NO_PAD {
     };
 }
 
-NO_PAD!()
+NO_PAD!();

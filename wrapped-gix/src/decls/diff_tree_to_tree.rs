@@ -11,4 +11,4 @@ macro_rules! diff_tree_to_tree {
     };
 }
 
-diff_tree_to_tree!()
+diff_tree_to_tree!();

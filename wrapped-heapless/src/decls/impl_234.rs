@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LenType!();
         String!();
         CapacityError!();
+        LenType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_234 {
     };
 }
 
-impl_234!()
+impl_234!();

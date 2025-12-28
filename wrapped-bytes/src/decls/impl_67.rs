@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Owned!();
         Bytes!();
-        BytesMut!();
+        Owned!();
         Vtable!();
+        BytesMut!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

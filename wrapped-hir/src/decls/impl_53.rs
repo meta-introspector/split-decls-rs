@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HasSource!();
         Enum!();
+        HasSource!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

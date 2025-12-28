@@ -12,4 +12,4 @@ macro_rules! test_time_add {
     };
 }
 
-test_time_add!()
+test_time_add!();

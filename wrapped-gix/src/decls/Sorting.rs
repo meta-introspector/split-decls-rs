@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Note!();
         Clone!();
-        Default!();
         Commits!();
+        Default!();
+        Note!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Sorting {
     };
 }
 
-Sorting!()
+Sorting!();

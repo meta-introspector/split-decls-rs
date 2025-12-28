@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConstChoice!();
-        JacobiSymbol!();
         One!();
         Zero!();
+        JacobiSymbol!();
+        ConstChoice!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

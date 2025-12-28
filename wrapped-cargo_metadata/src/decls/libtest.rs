@@ -4,4 +4,4 @@ macro_rules! libtest {
     };
 }
 
-libtest!()
+libtest!();

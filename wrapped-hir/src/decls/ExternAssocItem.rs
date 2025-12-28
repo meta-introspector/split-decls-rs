@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeAlias!();
         Function!();
         Static!();
+        TypeAlias!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ExternAssocItem {
     };
 }
 
-ExternAssocItem!()
+ExternAssocItem!();

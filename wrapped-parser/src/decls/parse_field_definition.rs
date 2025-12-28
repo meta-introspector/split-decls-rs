@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         PositionCalculator!();
-        Result!();
         FieldDefinition!();
         Rule!();
+        Result!();
         Positioned!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! parse_field_definition {
     };
 }
 
-parse_field_definition!()
+parse_field_definition!();

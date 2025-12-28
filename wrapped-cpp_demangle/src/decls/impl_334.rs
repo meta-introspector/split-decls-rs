@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Substitutable!();
-        SubstitutionTable!();
         IsCtorDtorConversion!();
         Prefix!();
+        SubstitutionTable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_334 {
     };
 }
 
-impl_334!()
+impl_334!();

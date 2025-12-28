@@ -11,4 +11,4 @@ macro_rules! fetch_recurse {
     };
 }
 
-fetch_recurse!()
+fetch_recurse!();

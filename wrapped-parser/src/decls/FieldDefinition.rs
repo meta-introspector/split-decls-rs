@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Type!();
         Positioned!();
         InputValueDefinition!();
+        Type!();
         ConstDirective!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! FieldDefinition {
     };
 }
 
-FieldDefinition!()
+FieldDefinition!();

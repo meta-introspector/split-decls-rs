@@ -4,4 +4,4 @@ macro_rules! read_to_end_internal {
     };
 }
 
-read_to_end_internal!()
+read_to_end_internal!();

@@ -4,4 +4,4 @@ macro_rules! CONCEAL {
     };
 }
 
-CONCEAL!()
+CONCEAL!();

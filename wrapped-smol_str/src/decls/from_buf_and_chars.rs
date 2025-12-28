@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InlineSize!();
         Repr!();
         SmolStr!();
+        InlineSize!();
     };
 }
 

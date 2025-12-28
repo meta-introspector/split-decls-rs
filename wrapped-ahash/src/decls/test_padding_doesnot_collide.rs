@@ -4,4 +4,4 @@ macro_rules! test_padding_doesnot_collide {
     };
 }
 
-test_padding_doesnot_collide!()
+test_padding_doesnot_collide!();

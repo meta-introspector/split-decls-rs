@@ -4,4 +4,4 @@ macro_rules! FragmentsOnCompositeTypes {
     };
 }
 
-FragmentsOnCompositeTypes!()
+FragmentsOnCompositeTypes!();

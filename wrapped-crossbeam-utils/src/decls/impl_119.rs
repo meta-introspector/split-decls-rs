@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ShardedLock!();
         CachePadded!();
+        ShardedLock!();
         Shard!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

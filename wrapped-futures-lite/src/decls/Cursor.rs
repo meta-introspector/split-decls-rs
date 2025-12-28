@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AsyncWriteExt!();
         AsyncSeekExt!();
+        AsyncWriteExt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Cursor {
     };
 }
 
-Cursor!()
+Cursor!();

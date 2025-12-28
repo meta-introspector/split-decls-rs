@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        RawLocListIter!();
+        DebugAddrBase!();
+        LocationListEntry!();
+        RawLocListEntry!();
         DebugAddr!();
         LocListIter!();
-        Reader!();
-        LocationListEntry!();
-        RawLocListIter!();
         DebugAddrIndex!();
         Range!();
-        DebugAddrBase!();
-        RawLocListEntry!();
         Result!();
+        Reader!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_465 {
     };
 }
 
-impl_465!()
+impl_465!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AsKey!();
         KeyRef!();
+        AsKey!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impls {
     };
 }
 
-impls!()
+impls!();

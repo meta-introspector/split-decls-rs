@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        CopyAsciiResult!();
         Space!();
-        ByteSource!();
         DecoderResult!();
-        VariantDecoder!();
-        Utf8Destination!();
         SingleByteDecoder!();
+        ByteSource!();
+        VariantDecoder!();
+        CopyAsciiResult!();
+        Utf8Destination!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PathKind!();
-        ExpandDatabase!();
         ModPath!();
         Display!();
+        PathKind!();
+        ExpandDatabase!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! display_fmt_path {
     };
 }
 
-display_fmt_path!()
+display_fmt_path!();

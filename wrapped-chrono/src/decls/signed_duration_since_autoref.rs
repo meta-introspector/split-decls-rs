@@ -11,4 +11,4 @@ macro_rules! signed_duration_since_autoref {
     };
 }
 
-signed_duration_since_autoref!()
+signed_duration_since_autoref!();

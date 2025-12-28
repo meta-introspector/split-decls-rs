@@ -12,4 +12,4 @@ macro_rules! UTF_8 {
     };
 }
 
-UTF_8!()
+UTF_8!();

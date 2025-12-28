@@ -4,4 +4,4 @@ macro_rules! NEXT_NONCE {
     };
 }
 
-NEXT_NONCE!()
+NEXT_NONCE!();

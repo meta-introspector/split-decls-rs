@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ArangeHeader!();
-        ArangeHeaderIter!();
-        Reader!();
         Result!();
+        Reader!();
+        ArangeHeaderIter!();
+        ArangeHeader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_366 {
     };
 }
 
-impl_366!()
+impl_366!();

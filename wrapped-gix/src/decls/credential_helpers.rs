@@ -4,4 +4,4 @@ macro_rules! credential_helpers {
     };
 }
 
-credential_helpers!()
+credential_helpers!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Attrs!();
         EnumVariants!();
         EnumVariantLoc!();
-        InactiveEnumVariantCode!();
-        Attrs!();
         DefDatabase!();
+        InactiveEnumVariantCode!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Constants!();
         Integer!();
+        Constants!();
         Bounded!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! FixedInteger {
     };
 }
 
-FixedInteger!()
+FixedInteger!();

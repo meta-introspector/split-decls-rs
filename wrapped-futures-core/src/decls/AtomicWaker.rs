@@ -4,4 +4,4 @@ macro_rules! AtomicWaker {
     };
 }
 
-AtomicWaker!()
+AtomicWaker!();

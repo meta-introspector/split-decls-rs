@@ -1,0 +1,32 @@
+macro_rules! deps {
+    () => {
+        Mod!();
+        ItemKind!();
+        Impl!();
+        TraitItemKind!();
+        Crate!();
+        ForeignItemKind!();
+        ImplItem!();
+        TraitItem!();
+        FnDecl!();
+        ImplItemKind!();
+        Item!();
+        FnSig!();
+        OwnerNode!();
+        BodyId!();
+        Node!();
+        TraitFn!();
+        ForeignItem!();
+        ModSpans!();
+        Generics!();
+    };
+}
+
+macro_rules! impl_334 {
+    () => {
+        deps!();
+        impl < 'hir > OwnerNode < 'hir > { pub fn span (& self) -> Span { match self { OwnerNode :: Item (Item { span , .. }) | OwnerNode :: ForeignItem (ForeignItem { span , .. }) | OwnerNode :: ImplItem (ImplItem { span , .. }) | OwnerNode :: TraitItem (TraitItem { span , .. }) => * span , OwnerNode :: Crate (Mod { spans : ModSpans { inner_span , .. } , .. }) => * inner_span , OwnerNode :: Synthetic => unreachable ! () , } } pub fn fn_sig (self) -> Option < & 'hir FnSig < 'hir > > { match self { OwnerNode :: TraitItem (TraitItem { kind : TraitItemKind :: Fn (fn_sig , _) , .. }) | OwnerNode :: ImplItem (ImplItem { kind : ImplItemKind :: Fn (fn_sig , _) , .. }) | OwnerNode :: Item (Item { kind : ItemKind :: Fn { sig : fn_sig , .. } , .. }) | OwnerNode :: ForeignItem (ForeignItem { kind : ForeignItemKind :: Fn (fn_sig , _ , _) , .. }) => Some (fn_sig) , _ => None , } } pub fn fn_decl (self) -> Option < & 'hir FnDecl < 'hir > > { match self { OwnerNode :: TraitItem (TraitItem { kind : TraitItemKind :: Fn (fn_sig , _) , .. }) | OwnerNode :: ImplItem (ImplItem { kind : ImplItemKind :: Fn (fn_sig , _) , .. }) | OwnerNode :: Item (Item { kind : ItemKind :: Fn { sig : fn_sig , .. } , .. }) | OwnerNode :: ForeignItem (ForeignItem { kind : ForeignItemKind :: Fn (fn_sig , _ , _) , .. }) => Some (fn_sig . decl) , _ => None , } } pub fn body_id (& self) -> Option < BodyId > { match self { OwnerNode :: Item (Item { kind : ItemKind :: Static (_ , _ , _ , body) | ItemKind :: Const (_ , _ , _ , body) | ItemKind :: Fn { body , .. } , .. }) | OwnerNode :: TraitItem (TraitItem { kind : TraitItemKind :: Fn (_ , TraitFn :: Provided (body)) | TraitItemKind :: Const (_ , Some (body)) , .. }) | OwnerNode :: ImplItem (ImplItem { kind : ImplItemKind :: Fn (_ , body) | ImplItemKind :: Const (_ , body) , .. }) => Some (* body) , _ => None , } } pub fn generics (self) -> Option < & 'hir Generics < 'hir > > { Node :: generics (self . into ()) } pub fn def_id (self) -> OwnerId { match self { OwnerNode :: Item (Item { owner_id , .. }) | OwnerNode :: TraitItem (TraitItem { owner_id , .. }) | OwnerNode :: ImplItem (ImplItem { owner_id , .. }) | OwnerNode :: ForeignItem (ForeignItem { owner_id , .. }) => * owner_id , OwnerNode :: Crate (..) => crate :: CRATE_HIR_ID . owner , OwnerNode :: Synthetic => unreachable ! () , } } # [doc = " Check if node is an impl block."] pub fn is_impl_block (& self) -> bool { matches ! (self , OwnerNode :: Item (Item { kind : ItemKind :: Impl (_) , .. })) } expect_methods_self ! { expect_item , &'hir Item <'hir >, OwnerNode :: Item (n) , n ; expect_foreign_item , &'hir ForeignItem <'hir >, OwnerNode :: ForeignItem (n) , n ; expect_impl_item , &'hir ImplItem <'hir >, OwnerNode :: ImplItem (n) , n ; expect_trait_item , &'hir TraitItem <'hir >, OwnerNode :: TraitItem (n) , n ; } }
+    };
+}
+
+impl_334!()

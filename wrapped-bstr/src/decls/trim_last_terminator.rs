@@ -4,4 +4,4 @@ macro_rules! trim_last_terminator {
     };
 }
 
-trim_last_terminator!()
+trim_last_terminator!();

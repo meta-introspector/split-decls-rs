@@ -4,4 +4,4 @@ macro_rules! PACK_HEADER_LEN {
     };
 }
 
-PACK_HEADER_LEN!()
+PACK_HEADER_LEN!();

@@ -11,4 +11,4 @@ macro_rules! MAX_YEAR {
     };
 }
 
-MAX_YEAR!()
+MAX_YEAR!();

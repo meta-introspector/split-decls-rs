@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Connection!();
-        CursorType!();
         OutputType!();
         NodesFieldSwitcherSealed!();
+        EdgeNameType!();
+        CursorType!();
+        Connection!();
         ConnectionNameType!();
         ObjectType!();
-        EdgeNameType!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_702 {
     };
 }
 
-impl_702!()
+impl_702!();

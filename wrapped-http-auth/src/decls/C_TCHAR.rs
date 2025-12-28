@@ -4,4 +4,4 @@ macro_rules! C_TCHAR {
     };
 }
 
-C_TCHAR!()
+C_TCHAR!();

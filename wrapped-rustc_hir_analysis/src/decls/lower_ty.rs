@@ -1,5 +1,12 @@
+macro_rules! deps {
+    () => {
+        ItemCtxt!();
+    };
+}
+
 macro_rules! lower_ty {
     () => {
+        deps!();
         # [doc = " Lower a [`hir::Ty`] to a [`Ty`]."] # [doc = ""] # [doc = " <div class=\"warning\">"] # [doc = ""] # [doc = " This function is **quasi-deprecated**. It can cause ICEs if called inside of a body"] # [doc = " (of a function or constant) and especially if it contains inferred types (`_`)."] # [doc = ""] # [doc = " It's used in rustdoc and Clippy."] # [doc = ""] # [doc = " </div>"] pub fn lower_ty < 'tcx > (tcx : TyCtxt < 'tcx > , hir_ty : & hir :: Ty < 'tcx >) -> Ty < 'tcx > { let env_def_id = tcx . hir_get_parent_item (hir_ty . hir_id) ; collect :: ItemCtxt :: new (tcx , env_def_id . def_id) . lowerer () . lower_ty_maybe_return_type_notation (hir_ty) }
     };
 }

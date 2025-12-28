@@ -4,4 +4,4 @@ macro_rules! THREAD_ACCESS_RIGHTS {
     };
 }
 
-THREAD_ACCESS_RIGHTS!()
+THREAD_ACCESS_RIGHTS!();

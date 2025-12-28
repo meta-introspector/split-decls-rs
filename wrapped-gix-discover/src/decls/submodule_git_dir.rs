@@ -11,4 +11,4 @@ macro_rules! submodule_git_dir {
     };
 }
 
-submodule_git_dir!()
+submodule_git_dir!();

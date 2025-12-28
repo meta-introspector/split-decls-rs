@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ProxyOptions!();
+        Binding!();
         FetchOptions!();
         RemoteCallbacks!();
-        Binding!();
+        ProxyOptions!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_655 {
     };
 }
 
-impl_655!()
+impl_655!();

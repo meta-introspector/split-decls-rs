@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Request!();
         Status!();
         PacketlineReader!();
-        Request!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! request {
     };
 }
 
-request!()
+request!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Unstructured!();
-        Arbitrary!();
         Result!();
+        Arbitrary!();
         MaxRecursionReached!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

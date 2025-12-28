@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Memmem!();
         Prefilter!();
+        Memmem!();
         MemmemBuilder!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

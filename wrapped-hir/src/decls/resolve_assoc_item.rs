@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Type!();
         DocLinkDef!();
+        Type!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! resolve_assoc_item {
     };
 }
 
-resolve_assoc_item!()
+resolve_assoc_item!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Clone!();
         ThreadSafeRepository!();
+        Clone!();
         Submodule!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! BuiltinSubmoduleStatus {
     };
 }
 
-BuiltinSubmoduleStatus!()
+BuiltinSubmoduleStatus!();

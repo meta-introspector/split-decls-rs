@@ -4,4 +4,4 @@ macro_rules! make_dep_path {
     };
 }
 
-make_dep_path!()
+make_dep_path!();

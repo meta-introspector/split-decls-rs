@@ -4,4 +4,4 @@ macro_rules! validators {
     };
 }
 
-validators!()
+validators!();

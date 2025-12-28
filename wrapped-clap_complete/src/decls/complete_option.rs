@@ -11,4 +11,4 @@ macro_rules! complete_option {
     };
 }
 
-complete_option!()
+complete_option!();

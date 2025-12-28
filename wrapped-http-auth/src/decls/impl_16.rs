@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ChallengeRef!();
-        Error!();
         State!();
-        ChallengeParser!();
         ParamValue!();
         Possibilities!();
+        ChallengeParser!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

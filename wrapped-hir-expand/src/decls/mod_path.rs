@@ -4,4 +4,4 @@ macro_rules! mod_path {
     };
 }
 
-mod_path!()
+mod_path!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefMap!();
         LocalDefMap!();
+        DefMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DefMapPair {
     };
 }
 
-DefMapPair!()
+DefMapPair!();

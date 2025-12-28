@@ -12,4 +12,4 @@ macro_rules! append_tar_entry {
     };
 }
 
-append_tar_entry!()
+append_tar_entry!();

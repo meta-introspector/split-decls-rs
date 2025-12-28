@@ -11,4 +11,4 @@ macro_rules! set_optional_options {
     };
 }
 
-set_optional_options!()
+set_optional_options!();

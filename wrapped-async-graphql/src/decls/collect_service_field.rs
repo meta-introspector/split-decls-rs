@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Service!();
-        SDLExportOptions!();
-        BoxFieldFuture!();
-        ContextSelectionSet!();
         Field!();
+        Service!();
+        BoxFieldFuture!();
         OutputType!();
+        ContextSelectionSet!();
+        SDLExportOptions!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! collect_service_field {
     };
 }
 
-collect_service_field!()
+collect_service_field!();

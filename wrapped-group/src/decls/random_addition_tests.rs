@@ -11,4 +11,4 @@ macro_rules! random_addition_tests {
     };
 }
 
-random_addition_tests!()
+random_addition_tests!();

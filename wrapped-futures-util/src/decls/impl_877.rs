@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Pending!();
-        Dequeue!();
-        Task!();
-        Empty!();
         FuturesUnordered!();
+        Task!();
+        Pending!();
+        Empty!();
         Ready!();
+        Dequeue!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_877 {
     };
 }
 
-impl_877!()
+impl_877!();

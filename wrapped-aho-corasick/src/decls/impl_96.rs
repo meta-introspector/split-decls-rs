@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
+        Remapper!();
+        StateID!();
+        Compiler!();
         PatternID!();
         ByteClasses!();
-        Special!();
-        Compiler!();
-        Remapper!();
-        Match!();
-        NFA!();
         Builder!();
-        SmallIndex!();
-        BuildError!();
-        StateID!();
-        Transition!();
         ByteClassSet!();
+        Match!();
+        BuildError!();
+        Special!();
+        Transition!();
+        SmallIndex!();
         QueuedSet!();
+        NFA!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_96 {
     };
 }
 
-impl_96!()
+impl_96!();

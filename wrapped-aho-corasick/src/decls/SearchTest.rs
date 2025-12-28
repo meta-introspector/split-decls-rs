@@ -4,4 +4,4 @@ macro_rules! SearchTest {
     };
 }
 
-SearchTest!()
+SearchTest!();

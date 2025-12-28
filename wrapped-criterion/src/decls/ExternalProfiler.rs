@@ -4,4 +4,4 @@ macro_rules! ExternalProfiler {
     };
 }
 
-ExternalProfiler!()
+ExternalProfiler!();

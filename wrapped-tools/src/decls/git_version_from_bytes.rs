@@ -11,4 +11,4 @@ macro_rules! git_version_from_bytes {
     };
 }
 
-git_version_from_bytes!()
+git_version_from_bytes!();

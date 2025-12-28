@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DateTime!();
-        DateTimeVisitor!();
-        Error!();
         Local!();
+        DateTime!();
+        Error!();
+        DateTimeVisitor!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

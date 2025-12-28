@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Decltype!();
-        ArgScopeStack!();
-        UnresolvedType!();
-        DemangleWrite!();
         DemangleContext!();
+        Decltype!();
+        DemangleWrite!();
         Demangle!();
+        Result!();
+        UnresolvedType!();
+        ArgScopeStack!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_252 {
     };
 }
 
-impl_252!()
+impl_252!();

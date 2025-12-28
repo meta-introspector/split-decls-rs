@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BufMut!();
         Chain!();
+        BufMut!();
         UninitSlice!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

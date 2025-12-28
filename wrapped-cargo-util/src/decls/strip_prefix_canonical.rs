@@ -4,4 +4,4 @@ macro_rules! strip_prefix_canonical {
     };
 }
 
-strip_prefix_canonical!()
+strip_prefix_canonical!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        HashTable!();
         DefaultHashBuilder!();
         Entry!();
-        HashTable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! VacantEntry {
     };
 }
 
-VacantEntry!()
+VacantEntry!();

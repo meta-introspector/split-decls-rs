@@ -4,4 +4,4 @@ macro_rules! is_utf8_latin1_impl {
     };
 }
 
-is_utf8_latin1_impl!()
+is_utf8_latin1_impl!();

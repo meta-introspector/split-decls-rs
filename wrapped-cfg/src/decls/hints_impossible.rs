@@ -11,4 +11,4 @@ macro_rules! hints_impossible {
     };
 }
 
-hints_impossible!()
+hints_impossible!();

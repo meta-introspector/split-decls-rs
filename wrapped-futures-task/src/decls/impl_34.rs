@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FutureObj!();
         UnsafeFutureObj!();
+        FutureObj!();
         LocalFutureObj!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

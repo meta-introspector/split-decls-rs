@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        ReceiverValidityError!();
+        InvalidReceiverTyHint!();
+        InvalidReceiverTy!();
+        WfCheckingCtxt!();
+        InvalidGenericReceiverTy!();
+        ArbitrarySelfTypesLevel!();
+        InvalidReceiverTyNoArbitrarySelfTypes!();
+    };
+}
+
+macro_rules! check_method_receiver {
+    () => {
+        deps!();
+        # [instrument (level = "debug" , skip (wfcx))] fn check_method_receiver < 'tcx > (wfcx : & WfCheckingCtxt < '_ , 'tcx > , fn_sig : & hir :: FnSig < '_ > , method : ty :: AssocItem , self_ty : Ty < 'tcx > ,) -> Result < () , ErrorGuaranteed > { let tcx = wfcx . tcx () ; if ! method . is_method () { return Ok (()) ; } let span = fn_sig . decl . inputs [0] . span ; let loc = Some (WellFormedLoc :: Param { function : method . def_id . expect_local () , param_idx : 0 }) ; let sig = tcx . fn_sig (method . def_id) . instantiate_identity () ; let sig = tcx . liberate_late_bound_regions (method . def_id , sig) ; let sig = wfcx . normalize (DUMMY_SP , loc , sig) ; debug ! ("check_method_receiver: sig={:?}" , sig) ; let self_ty = wfcx . normalize (DUMMY_SP , loc , self_ty) ; let receiver_ty = sig . inputs () [0] ; let receiver_ty = wfcx . normalize (DUMMY_SP , loc , receiver_ty) ; if receiver_ty . references_error () { return Ok (()) ; } let arbitrary_self_types_level = if tcx . features () . arbitrary_self_types_pointers () { Some (ArbitrarySelfTypesLevel :: WithPointers) } else if tcx . features () . arbitrary_self_types () { Some (ArbitrarySelfTypesLevel :: Basic) } else { None } ; let generics = tcx . generics_of (method . def_id) ; let receiver_validity = receiver_is_valid (wfcx , span , receiver_ty , self_ty , arbitrary_self_types_level , generics) ; if let Err (receiver_validity_err) = receiver_validity { return Err (match arbitrary_self_types_level { None if receiver_is_valid (wfcx , span , receiver_ty , self_ty , Some (ArbitrarySelfTypesLevel :: Basic) , generics ,) . is_ok () => { feature_err (& tcx . sess , sym :: arbitrary_self_types , span , format ! ("`{receiver_ty}` cannot be used as the type of `self` without \
+                            the `arbitrary_self_types` feature" ,) ,) . with_help (fluent :: hir_analysis_invalid_receiver_ty_help) . emit () } None | Some (ArbitrarySelfTypesLevel :: Basic) if receiver_is_valid (wfcx , span , receiver_ty , self_ty , Some (ArbitrarySelfTypesLevel :: WithPointers) , generics ,) . is_ok () => { feature_err (& tcx . sess , sym :: arbitrary_self_types_pointers , span , format ! ("`{receiver_ty}` cannot be used as the type of `self` without \
+                            the `arbitrary_self_types_pointers` feature" ,) ,) . with_help (fluent :: hir_analysis_invalid_receiver_ty_help) . emit () } _ => { match receiver_validity_err { ReceiverValidityError :: DoesNotDeref if arbitrary_self_types_level . is_some () => { let hint = match receiver_ty . builtin_deref (false) . unwrap_or (receiver_ty) . ty_adt_def () . and_then (| adt_def | tcx . get_diagnostic_name (adt_def . did ())) { Some (sym :: RcWeak | sym :: ArcWeak) => Some (InvalidReceiverTyHint :: Weak) , Some (sym :: NonNull) => Some (InvalidReceiverTyHint :: NonNull) , _ => None , } ; tcx . dcx () . emit_err (errors :: InvalidReceiverTy { span , receiver_ty , hint }) } ReceiverValidityError :: DoesNotDeref => { tcx . dcx () . emit_err (errors :: InvalidReceiverTyNoArbitrarySelfTypes { span , receiver_ty , }) } ReceiverValidityError :: MethodGenericParamUsed => { tcx . dcx () . emit_err (errors :: InvalidGenericReceiverTy { span , receiver_ty }) } } } }) ; } Ok (()) }
+    };
+}
+
+check_method_receiver!()

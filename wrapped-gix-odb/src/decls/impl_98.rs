@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IndexState!();
-        IndexAndPacks!();
         Store!();
         Error!();
+        IndexState!();
+        IndexAndPacks!();
         Record!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

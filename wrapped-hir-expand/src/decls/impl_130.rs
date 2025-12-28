@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Name!();
         ModPath!();
+        Name!();
         PathKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

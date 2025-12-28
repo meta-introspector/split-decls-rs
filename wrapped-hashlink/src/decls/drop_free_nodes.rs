@@ -11,4 +11,4 @@ macro_rules! drop_free_nodes {
     };
 }
 
-drop_free_nodes!()
+drop_free_nodes!();

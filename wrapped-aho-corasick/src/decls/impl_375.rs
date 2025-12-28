@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        StartBytesBuilder!();
-        Config!();
-        RareBytesBuilder!();
-        Prefilter!();
-        MatchKind!();
-        MemmemBuilder!();
-        Builder!();
         Packed!();
+        Config!();
+        MatchKind!();
+        StartBytesBuilder!();
+        MemmemBuilder!();
+        Prefilter!();
+        RareBytesBuilder!();
+        Builder!();
     };
 }
 
@@ -35,4 +35,4 @@ macro_rules! impl_375 {
     };
 }
 
-impl_375!()
+impl_375!();

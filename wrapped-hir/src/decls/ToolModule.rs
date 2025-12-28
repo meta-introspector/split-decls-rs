@@ -11,4 +11,4 @@ macro_rules! ToolModule {
     };
 }
 
-ToolModule!()
+ToolModule!();

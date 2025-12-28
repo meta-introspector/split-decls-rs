@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ThreadLocal!();
+        CachedThreadLocal!();
     };
 }
 
 macro_rules! impl_7 {
     () => {
         deps!();
-        unsafe impl < T : Send > Sync for ThreadLocal < T > { }
+        impl < T : Send + UnwindSafe > UnwindSafe for CachedThreadLocal < T > { }
     };
 }
 

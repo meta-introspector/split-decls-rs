@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MetaType!();
         IntrospectionMode!();
         MetaDirective!();
-        MetaType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Registry {
     };
 }
 
-Registry!()
+Registry!();

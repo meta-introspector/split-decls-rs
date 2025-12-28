@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LinearMap!();
         LinearMapView!();
         VecInner!();
+        LinearMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LinearMapInner {
     };
 }
 
-LinearMapInner!()
+LinearMapInner!();

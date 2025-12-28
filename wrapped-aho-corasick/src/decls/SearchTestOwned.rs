@@ -4,4 +4,4 @@ macro_rules! SearchTestOwned {
     };
 }
 
-SearchTestOwned!()
+SearchTestOwned!();

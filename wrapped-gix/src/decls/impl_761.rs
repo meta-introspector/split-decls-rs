@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         Any!();
-        String!();
         Validate!();
+        Error!();
+        String!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_761 {
     };
 }
 
-impl_761!()
+impl_761!();

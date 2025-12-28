@@ -4,4 +4,4 @@ macro_rules! MARK_BIT {
     };
 }
 
-MARK_BIT!()
+MARK_BIT!();

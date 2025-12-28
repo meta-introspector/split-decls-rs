@@ -11,4 +11,4 @@ macro_rules! inner_type {
     };
 }
 
-inner_type!()
+inner_type!();

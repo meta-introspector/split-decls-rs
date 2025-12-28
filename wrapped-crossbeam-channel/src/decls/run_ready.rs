@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Timeout!();
-        SelectHandle!();
         Operation!();
+        SelectHandle!();
+        Timeout!();
         Context!();
         Selected!();
     };
@@ -15,4 +15,4 @@ macro_rules! run_ready {
     };
 }
 
-run_ready!()
+run_ready!();

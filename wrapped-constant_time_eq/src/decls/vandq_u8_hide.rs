@@ -4,4 +4,4 @@ macro_rules! vandq_u8_hide {
     };
 }
 
-vandq_u8_hide!()
+vandq_u8_hide!();

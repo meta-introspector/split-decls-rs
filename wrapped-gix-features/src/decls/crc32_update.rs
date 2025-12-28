@@ -4,4 +4,4 @@ macro_rules! crc32_update {
     };
 }
 
-crc32_update!()
+crc32_update!();

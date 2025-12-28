@@ -4,4 +4,4 @@ macro_rules! Decompress {
     };
 }
 
-Decompress!()
+Decompress!();

@@ -12,4 +12,4 @@ macro_rules! test_datetime_with_timezone {
     };
 }
 
-test_datetime_with_timezone!()
+test_datetime_with_timezone!();

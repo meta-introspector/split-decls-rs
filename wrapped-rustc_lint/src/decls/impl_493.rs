@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        NonLocalDefinitionsDiag!();
+    };
+}
+
+macro_rules! impl_493 {
+    () => {
+        deps!();
+        impl < 'a > LintDiagnostic < 'a , () > for NonLocalDefinitionsDiag { fn decorate_lint < 'b > (self , diag : & 'b mut Diag < 'a , () >) { match self { NonLocalDefinitionsDiag :: Impl { depth , body_kind_descr , body_name , cargo_update , const_anon , doctest , macro_to_change , } => { diag . primary_message (fluent :: lint_non_local_definitions_impl) ; diag . arg ("depth" , depth) ; diag . arg ("body_kind_descr" , body_kind_descr) ; diag . arg ("body_name" , body_name) ; if let Some ((macro_to_change , macro_kind)) = macro_to_change { diag . arg ("macro_to_change" , macro_to_change) ; diag . arg ("macro_kind" , macro_kind) ; diag . note (fluent :: lint_macro_to_change) ; } if let Some (cargo_update) = cargo_update { diag . subdiagnostic (cargo_update) ; } diag . note (fluent :: lint_non_local) ; if doctest { diag . help (fluent :: lint_doctest) ; } if let Some (const_anon) = const_anon { diag . note (fluent :: lint_exception) ; if let Some (const_anon) = const_anon { diag . span_suggestion (const_anon , fluent :: lint_const_anon , "_" , Applicability :: MachineApplicable ,) ; } } } NonLocalDefinitionsDiag :: MacroRules { depth , body_kind_descr , body_name , doctest , cargo_update , } => { diag . primary_message (fluent :: lint_non_local_definitions_macro_rules) ; diag . arg ("depth" , depth) ; diag . arg ("body_kind_descr" , body_kind_descr) ; diag . arg ("body_name" , body_name) ; if doctest { diag . help (fluent :: lint_help_doctest) ; } else { diag . help (fluent :: lint_help) ; } diag . note (fluent :: lint_non_local) ; if let Some (cargo_update) = cargo_update { diag . subdiagnostic (cargo_update) ; } } } } }
+    };
+}
+
+impl_493!()

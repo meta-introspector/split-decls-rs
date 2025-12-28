@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Term!();
-        Message!();
         Attribute!();
         Expression!();
+        Term!();
+        Message!();
         Entry!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! Identifier {
     };
 }
 
-Identifier!()
+Identifier!();

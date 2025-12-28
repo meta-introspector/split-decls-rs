@@ -1,8 +1,10 @@
 macro_rules! deps {
     () => {
-        Id!();
         LabelText!();
+        Edge!();
+        Node!();
         Style!();
+        Id!();
     };
 }
 

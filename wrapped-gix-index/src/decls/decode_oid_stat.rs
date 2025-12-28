@@ -11,4 +11,4 @@ macro_rules! decode_oid_stat {
     };
 }
 
-decode_oid_stat!()
+decode_oid_stat!();

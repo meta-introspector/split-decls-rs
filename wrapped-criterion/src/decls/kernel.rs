@@ -4,4 +4,4 @@ macro_rules! kernel {
     };
 }
 
-kernel!()
+kernel!();

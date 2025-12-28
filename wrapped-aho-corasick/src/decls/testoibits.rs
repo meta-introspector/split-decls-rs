@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
+        Searcher!();
+        Prefilter!();
+        BuildError!();
+        StartKind!();
+        OverlappingState!();
+        AhoCorasick!();
+        MatchKind!();
+        Config!();
+        Anchored!();
+        Input!();
+        Candidate!();
+        AhoCorasickKind!();
+        Match!();
+        MatchErrorKind!();
+        StreamFindIter!();
         FindIter!();
         FindOverlappingIter!();
-        MatchKind!();
-        MatchErrorKind!();
-        Candidate!();
-        AhoCorasickBuilder!();
-        Anchored!();
-        OverlappingState!();
-        Prefilter!();
-        StartKind!();
-        StreamFindIter!();
-        BuildError!();
-        Searcher!();
         DFA!();
-        Span!();
-        Config!();
-        Match!();
-        AhoCorasick!();
-        AhoCorasickKind!();
         Builder!();
-        Input!();
+        AhoCorasickBuilder!();
+        Span!();
         MatchError!();
     };
 }
@@ -32,4 +32,4 @@ macro_rules! testoibits {
     };
 }
 
-testoibits!()
+testoibits!();

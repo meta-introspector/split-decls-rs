@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ServerError!();
+        Query!();
+        Extensions!();
         Data!();
         CacheControl!();
-        Query!();
-        ServerError!();
-        Extensions!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Response {
     };
 }
 
-Response!()
+Response!();

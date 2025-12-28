@@ -11,4 +11,4 @@ macro_rules! parse_ignore_errors {
     };
 }
 
-parse_ignore_errors!()
+parse_ignore_errors!();

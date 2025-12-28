@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MetaTypeName!();
         Scope!();
+        MetaTypeName!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VariableInAllowedPosition {
     };
 }
 
-VariableInAllowedPosition!()
+VariableInAllowedPosition!();

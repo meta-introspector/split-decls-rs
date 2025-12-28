@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         NewDir!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_484 {
     };
 }
 
-impl_484!()
+impl_484!();

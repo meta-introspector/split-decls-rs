@@ -4,4 +4,4 @@ macro_rules! Any {
     };
 }
 
-Any!()
+Any!();

@@ -11,4 +11,4 @@ macro_rules! delegate_cas {
     };
 }
 
-delegate_cas!()
+delegate_cas!();

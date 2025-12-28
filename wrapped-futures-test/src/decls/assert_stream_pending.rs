@@ -4,4 +4,4 @@ macro_rules! assert_stream_pending {
     };
 }
 
-assert_stream_pending!()
+assert_stream_pending!();

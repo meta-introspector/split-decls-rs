@@ -4,4 +4,4 @@ macro_rules! TEST_CASES_MAX {
     };
 }
 
-TEST_CASES_MAX!()
+TEST_CASES_MAX!();

@@ -12,4 +12,4 @@ macro_rules! EUC_KR {
     };
 }
 
-EUC_KR!()
+EUC_KR!();

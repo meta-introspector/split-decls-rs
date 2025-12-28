@@ -11,4 +11,4 @@ macro_rules! fiat_p256_scalar_selectznz {
     };
 }
 
-fiat_p256_scalar_selectznz!()
+fiat_p256_scalar_selectznz!();

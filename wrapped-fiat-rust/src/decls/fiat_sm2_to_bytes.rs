@@ -11,4 +11,4 @@ macro_rules! fiat_sm2_to_bytes {
     };
 }
 
-fiat_sm2_to_bytes!()
+fiat_sm2_to_bytes!();

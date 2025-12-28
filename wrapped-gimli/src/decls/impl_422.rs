@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        FileEntryFormat!();
-        Format!();
-        DebugLineOffset!();
-        Encoding!();
-        Reader!();
-        Error!();
-        LineProgramHeader!();
-        FileEntry!();
-        ReaderOffset!();
         EndianSlice!();
-        LineEncoding!();
+        Reader!();
         LineInstructions!();
-        Result!();
+        FileEntry!();
+        Encoding!();
+        ReaderOffset!();
         AttributeValue!();
+        DebugLineOffset!();
+        Error!();
+        LineEncoding!();
+        Format!();
+        LineProgramHeader!();
+        Result!();
+        FileEntryFormat!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_422 {
     };
 }
 
-impl_422!()
+impl_422!();

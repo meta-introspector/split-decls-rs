@@ -11,4 +11,4 @@ macro_rules! convert_utf16_to_utf8_partial {
     };
 }
 
-convert_utf16_to_utf8_partial!()
+convert_utf16_to_utf8_partial!();

@@ -4,4 +4,4 @@ macro_rules! fiat_sm2_subborrowx_u32 {
     };
 }
 
-fiat_sm2_subborrowx_u32!()
+fiat_sm2_subborrowx_u32!();

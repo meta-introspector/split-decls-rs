@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         ForUser!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! expand_path {
     };
 }
 
-expand_path!()
+expand_path!();

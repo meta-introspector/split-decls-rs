@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ArgValueCandidates!();
-        ArgValueCompleter!();
         CompletionCandidate!();
+        ArgValueCompleter!();
+        ArgValueCandidates!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! complete_arg_value {
     };
 }
 
-complete_arg_value!()
+complete_arg_value!();

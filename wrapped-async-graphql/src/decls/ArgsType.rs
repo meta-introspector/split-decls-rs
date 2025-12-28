@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Field!();
         Directive!();
+        Field!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ArgsType {
     };
 }
 
-ArgsType!()
+ArgsType!();

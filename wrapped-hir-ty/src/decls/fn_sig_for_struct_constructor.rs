@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FnSig!();
-        EarlyBinder!();
-        HirDatabase!();
-        PolyFnSig!();
-        FnAbi!();
         Binder!();
+        EarlyBinder!();
+        PolyFnSig!();
+        FnSig!();
+        FnAbi!();
+        HirDatabase!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! fn_sig_for_struct_constructor {
     };
 }
 
-fn_sig_for_struct_constructor!()
+fn_sig_for_struct_constructor!();

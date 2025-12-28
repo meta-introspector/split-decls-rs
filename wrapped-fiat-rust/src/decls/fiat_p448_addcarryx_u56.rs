@@ -4,4 +4,4 @@ macro_rules! fiat_p448_addcarryx_u56 {
     };
 }
 
-fiat_p448_addcarryx_u56!()
+fiat_p448_addcarryx_u56!();

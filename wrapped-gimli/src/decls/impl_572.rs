@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Reader!();
         Error!();
+        RawRngListIter!();
+        Reader!();
         RawRngListEntry!();
         Result!();
-        RawRngListIter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_572 {
     };
 }
 
-impl_572!()
+impl_572!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         DebugStrOffsetsBase!();
         ReaderOffset!();
         DwarfFileType!();
+        Encoding!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_593 {
     };
 }
 
-impl_593!()
+impl_593!();

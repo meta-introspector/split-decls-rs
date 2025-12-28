@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HANDLE!();
         BOOL!();
+        HANDLE!();
         WAIT_EVENT!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_93 {
     };
 }
 
-macro_93!()
+macro_93!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Note!();
-        State!();
         Repository!();
+        State!();
+        Note!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_292 {
     };
 }
 
-impl_292!()
+impl_292!();

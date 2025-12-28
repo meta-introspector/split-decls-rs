@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Kind!();
         BinaryHeapInner!();
-        IntoIter!();
         Iter!();
+        IntoIter!();
+        Kind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_384 {
     };
 }
 
-impl_384!()
+impl_384!();

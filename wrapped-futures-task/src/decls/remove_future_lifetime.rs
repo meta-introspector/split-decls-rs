@@ -4,4 +4,4 @@ macro_rules! remove_future_lifetime {
     };
 }
 
-remove_future_lifetime!()
+remove_future_lifetime!();

@@ -4,4 +4,4 @@ macro_rules! MAX_PATH_LEN {
     };
 }
 
-MAX_PATH_LEN!()
+MAX_PATH_LEN!();

@@ -1,0 +1,7 @@
+macro_rules! weak_or_syscall {
+    () => {
+        # [doc = " A combination of `weakcall` and `syscall`. Use the libc function if it's"] # [doc = " available, and fall back to `libc::syscall` otherwise."] macro_rules ! weak_or_syscall { ($ vis : vis fn $ name : ident ($ ($ arg_name : ident : $ t : ty) ,*) via $ sys_name : ident -> $ ret : ty) => ($ vis unsafe fn $ name ($ ($ arg_name : $ t) ,*) -> $ ret { weak ! { fn $ name ($ ($ t) ,*) -> $ ret } if let Some (fun) = $ name . get () { fun ($ ($ arg_name) ,*) } else { syscall ! { fn $ name ($ ($ arg_name : $ t) ,*) via $ sys_name -> $ ret } $ name ($ ($ arg_name) ,*) } }) }
+    };
+}
+
+weak_or_syscall!()

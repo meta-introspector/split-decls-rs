@@ -11,4 +11,4 @@ macro_rules! low_bits {
     };
 }
 
-low_bits!()
+low_bits!();

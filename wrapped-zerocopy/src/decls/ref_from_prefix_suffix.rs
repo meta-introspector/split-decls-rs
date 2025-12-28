@@ -1,8 +1,11 @@
 macro_rules! deps {
     () => {
         PointerMetadata!();
-        FromBytes!();
+        CastError!();
+        BecauseImmutable!();
         Immutable!();
+        CastType!();
+        FromBytes!();
         KnownLayout!();
     };
 }

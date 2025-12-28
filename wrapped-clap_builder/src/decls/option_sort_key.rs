@@ -11,4 +11,4 @@ macro_rules! option_sort_key {
     };
 }
 
-option_sort_key!()
+option_sort_key!();

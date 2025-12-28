@@ -11,4 +11,4 @@ macro_rules! lock_and_then {
     };
 }
 
-lock_and_then!()
+lock_and_then!();

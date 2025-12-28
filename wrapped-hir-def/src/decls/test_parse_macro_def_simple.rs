@@ -10,4 +10,4 @@ fn bar() {}
     };
 }
 
-test_parse_macro_def_simple!()
+test_parse_macro_def_simple!();

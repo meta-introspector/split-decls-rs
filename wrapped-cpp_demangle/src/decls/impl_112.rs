@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        SubstitutionTable!();
-        Discriminator!();
-        ParseContext!();
-        OperatorName!();
+        UnnamedTypeName!();
+        SourceName!();
+        CtorDtorName!();
         ClosureTypeName!();
         AbiTags!();
-        UnnamedTypeName!();
-        UnqualifiedName!();
-        Parse!();
+        OperatorName!();
         IndexStr!();
+        Discriminator!();
         Result!();
-        CtorDtorName!();
-        SourceName!();
+        Parse!();
+        SubstitutionTable!();
+        ParseContext!();
+        UnqualifiedName!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

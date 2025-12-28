@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
         DefMap!();
+        DefDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! crate_def_map {
     };
 }
 
-crate_def_map!()
+crate_def_map!();

@@ -11,4 +11,4 @@ macro_rules! deref_forward_bufmut {
     };
 }
 
-deref_forward_bufmut!()
+deref_forward_bufmut!();

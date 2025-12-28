@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        IntoData!();
+        Assert!();
+    };
+}
+
+macro_rules! assert_data_eq {
+    () => {
+        deps!();
+        # [doc = " Check if a value is the same as an expected value"] # [doc = ""] # [doc = " By default [`filters`][crate::filter] are applied, including:"] # [doc = " - `...` is a line-wildcard when on a line by itself"] # [doc = " - `[..]` is a character-wildcard when inside a line"] # [doc = " - `[EXE]` matches `.exe` on Windows"] # [doc = " - `\"{...}\"` is a JSON value wildcard"] # [doc = " - `\"...\": \"{...}\"` is a JSON key-value wildcard"] # [doc = " - `\\` to `/`"] # [doc = " - Newlines"] # [doc = ""] # [doc = " To limit this to newline normalization for text, call [`Data::raw`][crate::Data] on `expected`."] # [doc = ""] # [doc = " # Effective signature"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use snapbox::IntoData;"] # [doc = " fn assert_data_eq(actual: impl IntoData, expected: impl IntoData) {"] # [doc = "     // ..."] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use snapbox::assert_data_eq;"] # [doc = " let output = \"something\";"] # [doc = " let expected = \"so[..]g\";"] # [doc = " assert_data_eq!(output, expected);"] # [doc = " ```"] # [doc = ""] # [doc = " Can combine this with [`file!`]"] # [doc = " ```rust,no_run"] # [doc = " # use snapbox::assert_data_eq;"] # [doc = " # use snapbox::file;"] # [doc = " let actual = \"something\";"] # [doc = " assert_data_eq!(actual, file![\"output.txt\"]);"] # [doc = " ```"] # [macro_export] macro_rules ! assert_data_eq { ($ actual : expr , $ expected : expr $ (,) ?) => { { let actual = $ crate :: IntoData :: into_data ($ actual) ; let expected = $ crate :: IntoData :: into_data ($ expected) ; $ crate :: Assert :: new () . action_env ($ crate :: assert :: DEFAULT_ACTION_ENV) . eq (actual , expected) ; } } ; }
+    };
+}
+
+assert_data_eq!()

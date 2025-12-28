@@ -11,4 +11,4 @@ macro_rules! trailing_junk {
     };
 }
 
-trailing_junk!()
+trailing_junk!();

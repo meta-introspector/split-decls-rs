@@ -4,4 +4,4 @@ macro_rules! test_left_subtree_len {
     };
 }
 
-test_left_subtree_len!()
+test_left_subtree_len!();

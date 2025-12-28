@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Align16!();
         AtomicMaybeUninit!();
+        Align16!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! private {
     };
 }
 
-private!()
+private!();

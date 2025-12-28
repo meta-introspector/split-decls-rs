@@ -4,4 +4,4 @@ macro_rules! debug_assert_dest_is_no_symlink {
     };
 }
 
-debug_assert_dest_is_no_symlink!()
+debug_assert_dest_is_no_symlink!();

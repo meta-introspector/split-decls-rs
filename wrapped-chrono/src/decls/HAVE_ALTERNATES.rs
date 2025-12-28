@@ -4,4 +4,4 @@ macro_rules! HAVE_ALTERNATES {
     };
 }
 
-HAVE_ALTERNATES!()
+HAVE_ALTERNATES!();

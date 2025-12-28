@@ -1,0 +1,7 @@
+macro_rules! macro_102 {
+    () => {
+        declare_lint ! { # [doc = " The `duplicate_macro_attributes` lint detects when a `#[test]`-like built-in macro"] # [doc = " attribute is duplicated on an item. This lint may trigger on `bench`, `cfg_eval`, `test`"] # [doc = " and `test_case`."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,ignore (needs --test)"] # [doc = " #[test]"] # [doc = " #[test]"] # [doc = " fn foo() {}"] # [doc = " ```"] # [doc = ""] # [doc = " This will produce:"] # [doc = ""] # [doc = " ```text"] # [doc = " warning: duplicated attribute"] # [doc = "  --> src/lib.rs:2:1"] # [doc = "   |"] # [doc = " 2 | #[test]"] # [doc = "   | ^^^^^^^"] # [doc = "   |"] # [doc = "   = note: `#[warn(duplicate_macro_attributes)]` on by default"] # [doc = " ```"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " A duplicated attribute may erroneously originate from a copy-paste and the effect of it"] # [doc = " being duplicated may not be obvious or desirable."] # [doc = ""] # [doc = " For instance, doubling the `#[test]` attributes registers the test to be run twice with no"] # [doc = " change to its environment."] # [doc = ""] # [doc = " [issue #90979]: https://github.com/rust-lang/rust/issues/90979"] pub DUPLICATE_MACRO_ATTRIBUTES , Warn , "duplicated attribute" }
+    };
+}
+
+macro_102!()

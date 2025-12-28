@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArgAction!();
         Command!();
+        ArgAction!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_user_help_flag {
     };
 }
 
-get_user_help_flag!()
+get_user_help_flag!();

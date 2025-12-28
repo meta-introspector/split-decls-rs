@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Signature!();
+        Error!();
         Oid!();
+        Transaction!();
         Reflog!();
         Commit!();
-        Signature!();
         Note!();
-        Error!();
-        Transaction!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_808 {
     };
 }
 
-impl_808!()
+impl_808!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Weekday!();
-        Month!();
-        IsoWeek!();
         NaiveDate!();
+        IsoWeek!();
+        Month!();
+        Weekday!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Datelike {
     };
 }
 
-Datelike!()
+Datelike!();

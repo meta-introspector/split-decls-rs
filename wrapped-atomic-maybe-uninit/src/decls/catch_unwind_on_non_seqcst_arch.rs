@@ -4,4 +4,4 @@ macro_rules! catch_unwind_on_non_seqcst_arch {
     };
 }
 
-catch_unwind_on_non_seqcst_arch!()
+catch_unwind_on_non_seqcst_arch!();

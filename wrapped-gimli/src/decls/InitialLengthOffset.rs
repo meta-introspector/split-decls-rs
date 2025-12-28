@@ -4,4 +4,4 @@ macro_rules! InitialLengthOffset {
     };
 }
 
-InitialLengthOffset!()
+InitialLengthOffset!();

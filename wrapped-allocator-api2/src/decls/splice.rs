@@ -4,4 +4,4 @@ macro_rules! splice {
     };
 }
 
-splice!()
+splice!();

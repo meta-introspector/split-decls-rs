@@ -4,4 +4,4 @@ macro_rules! home_dir_inner {
     };
 }
 
-home_dir_inner!()
+home_dir_inner!();

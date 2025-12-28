@@ -4,4 +4,4 @@ macro_rules! fiat_p434_montgomery_domain_field_element {
     };
 }
 
-fiat_p434_montgomery_domain_field_element!()
+fiat_p434_montgomery_domain_field_element!();

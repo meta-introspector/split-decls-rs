@@ -13,4 +13,4 @@ macro_rules! test_auto_conversion {
     };
 }
 
-test_auto_conversion!()
+test_auto_conversion!();

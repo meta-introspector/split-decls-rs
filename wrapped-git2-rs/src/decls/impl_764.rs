@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        SubmoduleIgnore!();
         Binding!();
         Submodule!();
+        SubmoduleUpdateOptions!();
         Oid!();
-        SubmoduleUpdate!();
-        Error!();
         Index!();
         Repository!();
-        SubmoduleUpdateOptions!();
+        Error!();
+        SubmoduleUpdate!();
+        SubmoduleIgnore!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_764 {
     };
 }
 
-impl_764!()
+impl_764!();

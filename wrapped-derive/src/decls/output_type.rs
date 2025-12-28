@@ -4,4 +4,4 @@ macro_rules! output_type {
     };
 }
 
-output_type!()
+output_type!();

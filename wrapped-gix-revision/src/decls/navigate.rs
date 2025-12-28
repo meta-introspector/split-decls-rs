@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         PeelTo!();
-        Navigate!();
-        Revision!();
         Kind!();
-        Error!();
-        Traversal!();
         Delegate!();
+        Error!();
+        Navigate!();
+        Traversal!();
+        Revision!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! navigate {
     };
 }
 
-navigate!()
+navigate!();

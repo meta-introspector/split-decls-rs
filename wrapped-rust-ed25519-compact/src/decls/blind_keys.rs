@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Hash!();
-        GeP3!();
         Seed!();
+        Noise!();
+        Hash!();
         PublicKey!();
         KeyPair!();
-        Signature!();
-        Noise!();
-        Error!();
         Mem!();
+        Signature!();
+        GeP3!();
+        Error!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! blind_keys {
     };
 }
 
-blind_keys!()
+blind_keys!();

@@ -4,4 +4,4 @@ macro_rules! SIGN_BIT {
     };
 }
 
-SIGN_BIT!()
+SIGN_BIT!();

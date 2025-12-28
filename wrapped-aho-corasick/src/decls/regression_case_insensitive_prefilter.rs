@@ -11,4 +11,4 @@ macro_rules! regression_case_insensitive_prefilter {
     };
 }
 
-regression_case_insensitive_prefilter!()
+regression_case_insensitive_prefilter!();

@@ -4,4 +4,4 @@ macro_rules! DecompressRead {
     };
 }
 
-DecompressRead!()
+DecompressRead!();

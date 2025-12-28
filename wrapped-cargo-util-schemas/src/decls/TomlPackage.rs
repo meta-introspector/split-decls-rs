@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        InheritableVecStringOrBool!();
-        InheritableString!();
-        InheritableSemverVersion!();
         InvalidCargoFeatures!();
-        InheritableStringOrBool!();
         StringOrVec!();
+        InheritableString!();
+        InheritableStringOrBool!();
+        InheritableVecStringOrBool!();
         InheritableRustVersion!();
         InheritableVecString!();
+        InheritableSemverVersion!();
         TomlPackageBuild!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! TomlPackage {
     };
 }
 
-TomlPackage!()
+TomlPackage!();

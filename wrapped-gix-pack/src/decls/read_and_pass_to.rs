@@ -11,4 +11,4 @@ macro_rules! read_and_pass_to {
     };
 }
 
-read_and_pass_to!()
+read_and_pass_to!();

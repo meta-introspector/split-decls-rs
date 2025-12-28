@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Blame!();
         BlameIter!();
         BlameHunk!();
-        Error!();
         Binding!();
+        Blame!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_201 {
     };
 }
 
-impl_201!()
+impl_201!();

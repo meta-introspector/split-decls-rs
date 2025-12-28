@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Signature!();
         VerifyingKey!();
+        Signature!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! new_verification_test {
     };
 }
 
-new_verification_test!()
+new_verification_test!();

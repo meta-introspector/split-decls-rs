@@ -12,4 +12,4 @@ macro_rules! encode_from_utf8 {
     };
 }
 
-encode_from_utf8!()
+encode_from_utf8!();

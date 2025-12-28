@@ -14,4 +14,4 @@ macro_rules! match_contains {
     };
 }
 
-match_contains!()
+match_contains!();

@@ -4,4 +4,4 @@ macro_rules! empty_depth_first {
     };
 }
 
-empty_depth_first!()
+empty_depth_first!();

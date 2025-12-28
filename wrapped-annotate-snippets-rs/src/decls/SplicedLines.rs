@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SubstitutionHighlight!();
         TrimmedPatch!();
+        SubstitutionHighlight!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SplicedLines {
     };
 }
 
-SplicedLines!()
+SplicedLines!();

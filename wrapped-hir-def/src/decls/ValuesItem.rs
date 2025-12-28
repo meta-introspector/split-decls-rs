@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Item!();
-        ModuleDefId!();
         ImportOrGlob!();
+        ModuleDefId!();
+        Item!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ValuesItem {
     };
 }
 
-ValuesItem!()
+ValuesItem!();

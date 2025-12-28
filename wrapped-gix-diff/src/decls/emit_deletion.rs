@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ChangeRef!();
         Action!();
         Error!();
+        ChangeRef!();
         Tracker!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! emit_deletion {
     };
 }
 
-emit_deletion!()
+emit_deletion!();

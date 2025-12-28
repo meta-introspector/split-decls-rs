@@ -4,4 +4,4 @@ macro_rules! delayed {
     };
 }
 
-delayed!()
+delayed!();

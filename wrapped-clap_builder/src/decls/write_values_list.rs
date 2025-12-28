@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Escape!();
         ContextValue!();
+        Escape!();
         StyledStr!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! write_values_list {
     };
 }
 
-write_values_list!()
+write_values_list!();

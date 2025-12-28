@@ -11,4 +11,4 @@ macro_rules! parse_complexity_expr {
     };
 }
 
-parse_complexity_expr!()
+parse_complexity_expr!();

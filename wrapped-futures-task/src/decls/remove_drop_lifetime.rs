@@ -4,4 +4,4 @@ macro_rules! remove_drop_lifetime {
     };
 }
 
-remove_drop_lifetime!()
+remove_drop_lifetime!();

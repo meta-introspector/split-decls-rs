@@ -4,4 +4,4 @@ macro_rules! Intensity {
     };
 }
 
-Intensity!()
+Intensity!();

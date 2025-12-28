@@ -4,4 +4,4 @@ macro_rules! is_generic_ty {
     };
 }
 
-is_generic_ty!()
+is_generic_ty!();

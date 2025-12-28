@@ -11,4 +11,4 @@ macro_rules! random_transformation_tests {
     };
 }
 
-random_transformation_tests!()
+random_transformation_tests!();

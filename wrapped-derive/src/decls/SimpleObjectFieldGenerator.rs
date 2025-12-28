@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SimpleObjectField!();
         DerivedFieldMetadata!();
+        SimpleObjectField!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SimpleObjectFieldGenerator {
     };
 }
 
-SimpleObjectFieldGenerator!()
+SimpleObjectFieldGenerator!();

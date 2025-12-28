@@ -4,4 +4,4 @@ macro_rules! select_biased {
     };
 }
 
-select_biased!()
+select_biased!();

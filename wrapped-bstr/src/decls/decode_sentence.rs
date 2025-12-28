@@ -4,4 +4,4 @@ macro_rules! decode_sentence {
     };
 }
 
-decode_sentence!()
+decode_sentence!();

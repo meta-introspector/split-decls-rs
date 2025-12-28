@@ -12,4 +12,4 @@ macro_rules! get_extensions {
     };
 }
 
-get_extensions!()
+get_extensions!();

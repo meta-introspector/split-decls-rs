@@ -4,4 +4,4 @@ macro_rules! acquire {
     };
 }
 
-acquire!()
+acquire!();

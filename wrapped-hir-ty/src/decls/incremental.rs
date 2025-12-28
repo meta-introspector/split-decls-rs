@@ -4,4 +4,4 @@ macro_rules! incremental {
     };
 }
 
-incremental!()
+incremental!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Visibility!();
-        VisibilityExplicitness!();
-        DefMap!();
-        ModuleId!();
-        DefDatabase!();
         ItemInNs!();
+        ModuleId!();
+        DefMap!();
+        DefDatabase!();
+        VisibilityExplicitness!();
+        Visibility!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! find_local_import_locations {
     };
 }
 
-find_local_import_locations!()
+find_local_import_locations!();

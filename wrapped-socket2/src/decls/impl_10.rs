@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Domain!();
+        SockAddr!();
     };
 }
 
 macro_rules! impl_10 {
     () => {
         deps!();
-        impl From < c_int > for Domain { fn from (d : c_int) -> Domain { Domain (d) } }
+        impl From < SocketAddr > for SockAddr { fn from (addr : SocketAddr) -> SockAddr { match addr { SocketAddr :: V4 (addr) => addr . into () , SocketAddr :: V6 (addr) => addr . into () , } } }
     };
 }
 

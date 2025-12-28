@@ -1,0 +1,7 @@
+macro_rules! MirPass {
+    () => {
+        # [doc = " A streamlined trait that you can implement to create a pass; the"] # [doc = " pass will be named after the type, and it will consist of a main"] # [doc = " loop that goes over each available MIR and applies `run_pass`."] pub (super) trait MirPass < 'tcx > { fn name (& self) -> & 'static str { const { simplify_pass_type_name (std :: any :: type_name :: < Self > ()) } } fn profiler_name (& self) -> & 'static str { to_profiler_name (self . name ()) } # [doc = " Returns `true` if this pass is enabled with the current combination of compiler flags."] fn is_enabled (& self , _sess : & Session) -> bool { true } # [doc = " Returns `true` if this pass can be overridden by `-Zenable-mir-passes`. This should be"] # [doc = " true for basically every pass other than those that are necessary for correctness."] fn can_be_overridden (& self) -> bool { true } fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) ; fn is_mir_dump_enabled (& self) -> bool { true } # [doc = " Returns `true` if this pass must be run (i.e. it is required for soundness)."] # [doc = " For passes which are strictly optimizations, this should return `false`."] # [doc = " If this is `false`, `#[optimize(none)]` will disable the pass."] fn is_required (& self) -> bool ; }
+    };
+}
+
+MirPass!()

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Binding!();
-        Buf!();
         Error!();
-        Config!();
-        ConfigEntries!();
-        ConfigLevel!();
-        IntoCString!();
         ConfigEntry!();
+        ConfigEntries!();
+        Buf!();
+        IntoCString!();
+        ConfigLevel!();
+        Binding!();
+        Config!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_268 {
     };
 }
 
-impl_268!()
+impl_268!();

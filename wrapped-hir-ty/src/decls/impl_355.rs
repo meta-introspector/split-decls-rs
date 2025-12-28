@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         AutoderefKind!();
-        AutoderefCtx!();
-        TrackAutoderefSteps!();
         GeneralAutoderef!();
+        TrackAutoderefSteps!();
+        AutoderefCtx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_355 {
     };
 }
 
-impl_355!()
+impl_355!();

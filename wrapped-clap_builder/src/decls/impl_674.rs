@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ColorChoice!();
         PossibleValue!();
         ValueEnum!();
-        ColorChoice!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_674 {
     };
 }
 
-impl_674!()
+impl_674!();

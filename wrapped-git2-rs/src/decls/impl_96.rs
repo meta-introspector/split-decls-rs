@@ -3,11 +3,11 @@ macro_rules! deps {
         CheckoutBuilder!();
         Error!();
         RepoBuilder!();
+        Remote!();
+        CloneLocal!();
+        FetchOptions!();
         Repository!();
         Binding!();
-        Remote!();
-        FetchOptions!();
-        CloneLocal!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_96 {
     };
 }
 
-impl_96!()
+impl_96!();

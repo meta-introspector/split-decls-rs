@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        AutoDiffWithoutEnable!();
+        Builder!();
+    };
+}
+
+macro_rules! codegen_autodiff {
+    () => {
+        deps!();
+        fn codegen_autodiff < 'll , 'tcx > (bx : & mut Builder < '_ , 'll , 'tcx > , tcx : TyCtxt < 'tcx > , instance : ty :: Instance < 'tcx > , args : & [OperandRef < 'tcx , & 'll Value >] , result : PlaceRef < 'tcx , & 'll Value > ,) { if ! tcx . sess . opts . unstable_opts . autodiff . contains (& rustc_session :: config :: AutoDiff :: Enable) { let _ = tcx . dcx () . emit_almost_fatal (AutoDiffWithoutEnable) ; } let fn_args = instance . args ; let callee_ty = instance . ty (tcx , bx . typing_env ()) ; let sig = callee_ty . fn_sig (tcx) . skip_binder () ; let ret_ty = sig . output () ; let llret_ty = bx . layout_of (ret_ty) . llvm_type (bx) ; let (source_id , source_args) = match fn_args . into_type_list (tcx) [0] . kind () { ty :: FnDef (def_id , source_params) => (def_id , source_params) , _ => bug ! ("invalid autodiff intrinsic args") , } ; let fn_source = match Instance :: try_resolve (tcx , bx . cx . typing_env () , * source_id , source_args) { Ok (Some (instance)) => instance , Ok (None) => bug ! ("could not resolve ({:?}, {:?}) to a specific autodiff instance" , source_id , source_args) , Err (_) => { return ; } } ; let source_symbol = symbol_name_for_instance_in_crate (tcx , fn_source . clone () , LOCAL_CRATE) ; let Some (fn_to_diff) = bx . cx . get_function (& source_symbol) else { bug ! ("could not find source function") } ; let (diff_id , diff_args) = match fn_args . into_type_list (tcx) [1] . kind () { ty :: FnDef (def_id , diff_args) => (def_id , diff_args) , _ => bug ! ("invalid args") , } ; let fn_diff = match Instance :: try_resolve (tcx , bx . cx . typing_env () , * diff_id , diff_args) { Ok (Some (instance)) => instance , Ok (None) => bug ! ("could not resolve ({:?}, {:?}) to a specific autodiff instance" , diff_id , diff_args) , Err (_) => { return ; } } ; let val_arr = get_args_from_tuple (bx , args [2] , fn_diff) ; let diff_symbol = symbol_name_for_instance_in_crate (tcx , fn_diff . clone () , LOCAL_CRATE) ; let Some (mut diff_attrs) = autodiff_attrs (tcx , fn_diff . def_id ()) else { bug ! ("could not find autodiff attrs") } ; adjust_activity_to_abi (tcx , fn_source . ty (tcx , TypingEnv :: fully_monomorphized ()) , & mut diff_attrs . input_activity ,) ; generate_enzyme_call (bx , bx . cx , fn_to_diff , & diff_symbol , llret_ty , & val_arr , diff_attrs . clone () , result ,) ; }
+    };
+}
+
+codegen_autodiff!()

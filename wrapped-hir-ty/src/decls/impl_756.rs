@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CandidateId!();
         HirDatabase!();
+        CandidateId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_756 {
     };
 }
 
-impl_756!()
+impl_756!();

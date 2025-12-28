@@ -4,4 +4,4 @@ macro_rules! TransformTtAction {
     };
 }
 
-TransformTtAction!()
+TransformTtAction!();

@@ -28,4 +28,4 @@ fn baz() -> bool {
     };
 }
 
-test_match_group_with_multichar_sep!()
+test_match_group_with_multichar_sep!();

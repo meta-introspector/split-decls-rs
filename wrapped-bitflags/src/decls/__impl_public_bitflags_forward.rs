@@ -4,4 +4,4 @@ macro_rules! __impl_public_bitflags_forward {
     };
 }
 
-__impl_public_bitflags_forward!()
+__impl_public_bitflags_forward!();

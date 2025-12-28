@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SelectHandle!();
         RecvError!();
+        SelectHandle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Select {
     };
 }
 
-Select!()
+Select!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExtendedBufRead!();
         MessageKind!();
+        ExtendedBufRead!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RequestWriter {
     };
 }
 
-RequestWriter!()
+RequestWriter!();

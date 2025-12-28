@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FunctionalSequence!();
         GenericSequence!();
+        FunctionalSequence!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

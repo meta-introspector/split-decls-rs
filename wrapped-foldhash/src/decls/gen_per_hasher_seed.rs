@@ -4,4 +4,4 @@ macro_rules! gen_per_hasher_seed {
     };
 }
 
-gen_per_hasher_seed!()
+gen_per_hasher_seed!();

@@ -1,0 +1,7 @@
+macro_rules! UnordItems {
+    () => {
+        # [doc = " `UnordItems` is the order-less version of `Iterator`. It only contains methods"] # [doc = " that don't (easily) expose an ordering of the underlying items."] # [doc = ""] # [doc = " Most methods take an `Fn` where the `Iterator`-version takes an `FnMut`. This"] # [doc = " is to reduce the risk of accidentally leaking the internal order via the closure"] # [doc = " environment. Otherwise one could easily do something like"] # [doc = ""] # [doc = " ```rust,ignore (pseudo code)"] # [doc = " let mut ordered = vec![];"] # [doc = " unordered_items.all(|x| ordered.push(x));"] # [doc = " ```"] # [doc = ""] # [doc = " It's still possible to do the same thing with an `Fn` by using interior mutability,"] # [doc = " but the chance of doing it accidentally is reduced."] # [derive (Clone)] pub struct UnordItems < T , I : Iterator < Item = T > > (I) ;
+    };
+}
+
+UnordItems!()

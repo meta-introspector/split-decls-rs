@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecodePaddingMode!();
         GeneralPurposeConfig!();
+        DecodePaddingMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! NO_PAD_INDIFFERENT {
     };
 }
 
-NO_PAD_INDIFFERENT!()
+NO_PAD_INDIFFERENT!();

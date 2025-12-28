@@ -1,0 +1,7 @@
+macro_rules! MLB_UNESCAPED {
+    () => {
+        # [doc = " `mlb-unescaped = wschar / %x21 / %x23-5B / %x5D-7E / non-ascii`"] # [allow (clippy :: type_complexity)] const MLB_UNESCAPED : ((u8 , u8) , u8 , RangeInclusive < u8 > , RangeInclusive < u8 > , RangeInclusive < u8 > ,) = (WSCHAR , 0x21 , 0x23 ..= 0x5B , 0x5D ..= 0x7E , NON_ASCII) ;
+    };
+}
+
+MLB_UNESCAPED!()

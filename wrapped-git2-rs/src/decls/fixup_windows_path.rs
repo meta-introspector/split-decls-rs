@@ -11,4 +11,4 @@ macro_rules! fixup_windows_path {
     };
 }
 
-fixup_windows_path!()
+fixup_windows_path!();

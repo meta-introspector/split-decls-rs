@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         MinNumTraits!();
+        ErrorKind!();
         ParseIntegerError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! to_signed_with_radix {
     };
 }
 
-to_signed_with_radix!()
+to_signed_with_radix!();

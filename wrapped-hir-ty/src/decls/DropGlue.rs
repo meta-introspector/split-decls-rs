@@ -4,4 +4,4 @@ macro_rules! DropGlue {
     };
 }
 
-DropGlue!()
+DropGlue!();

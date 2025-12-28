@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ExtensionContext!();
-        Any!();
         DataContext!();
+        Any!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_570 {
     };
 }
 
-impl_570!()
+impl_570!();

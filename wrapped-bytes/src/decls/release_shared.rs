@@ -11,4 +11,4 @@ macro_rules! release_shared {
     };
 }
 
-release_shared!()
+release_shared!();

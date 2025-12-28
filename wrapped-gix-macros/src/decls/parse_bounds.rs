@@ -11,4 +11,4 @@ macro_rules! parse_bounds {
     };
 }
 
-parse_bounds!()
+parse_bounds!();

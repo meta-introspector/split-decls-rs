@@ -11,4 +11,4 @@ macro_rules! _assert_send_sync {
     };
 }
 
-_assert_send_sync!()
+_assert_send_sync!();

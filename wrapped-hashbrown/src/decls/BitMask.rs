@@ -4,4 +4,4 @@ macro_rules! BitMask {
     };
 }
 
-BitMask!()
+BitMask!();

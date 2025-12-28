@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Platform!();
         Iter!();
         Error!();
-        Platform!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_257 {
     };
 }
 
-impl_257!()
+impl_257!();

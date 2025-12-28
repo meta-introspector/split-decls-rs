@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Repository!();
         Id!();
         Mailmap!();
         Snapshot!();
-        Error!();
-        Repository!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_352 {
     };
 }
 
-impl_352!()
+impl_352!();

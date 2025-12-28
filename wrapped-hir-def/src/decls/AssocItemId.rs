@@ -4,4 +4,4 @@ macro_rules! AssocItemId {
     };
 }
 
-AssocItemId!()
+AssocItemId!();

@@ -4,4 +4,4 @@ macro_rules! SyntheticSyntax {
     };
 }
 
-SyntheticSyntax!()
+SyntheticSyntax!();

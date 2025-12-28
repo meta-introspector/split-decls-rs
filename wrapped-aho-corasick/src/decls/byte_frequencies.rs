@@ -4,4 +4,4 @@ macro_rules! byte_frequencies {
     };
 }
 
-byte_frequencies!()
+byte_frequencies!();

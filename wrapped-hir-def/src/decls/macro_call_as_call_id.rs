@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnresolvedMacro!();
         MacroCall!();
+        UnresolvedMacro!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_call_as_call_id {
     };
 }
 
-macro_call_as_call_id!()
+macro_call_as_call_id!();

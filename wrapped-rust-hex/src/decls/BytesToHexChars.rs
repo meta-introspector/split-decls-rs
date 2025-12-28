@@ -4,4 +4,4 @@ macro_rules! BytesToHexChars {
     };
 }
 
-BytesToHexChars!()
+BytesToHexChars!();

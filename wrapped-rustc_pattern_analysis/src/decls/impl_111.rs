@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        PlaceCtxt!();
+        MatrixRow!();
+        PlaceInfo!();
+        PlaceValidity!();
+        Constructor!();
+        PatOrWild!();
+        Matrix!();
+        PatCx!();
+        MatchArm!();
+    };
+}
+
+macro_rules! impl_111 {
+    () => {
+        deps!();
+        impl < 'p , Cx : PatCx > Matrix < 'p , Cx > { # [doc = " Pushes a new row to the matrix. Internal method, prefer [`Matrix::new`]."] fn push (& mut self , mut row : MatrixRow < 'p , Cx >) { row . intersects_at_least = DenseBitSet :: new_empty (self . rows . len ()) ; self . rows . push (row) ; } # [doc = " Build a new matrix from an iterator of `MatchArm`s."] fn new (arms : & [MatchArm < 'p , Cx >] , scrut_ty : Cx :: Ty , scrut_validity : PlaceValidity) -> Self { let place_info = PlaceInfo { ty : scrut_ty , private_uninhabited : false , validity : scrut_validity , is_scrutinee : true , } ; let mut matrix = Matrix { rows : Vec :: with_capacity (arms . len ()) , place_info : smallvec ! [place_info] , wildcard_row_is_relevant : true , } ; for (arm_id , arm) in arms . iter () . enumerate () { matrix . push (MatrixRow :: new (arm , arm_id)) ; } matrix } fn head_place (& self) -> Option < & PlaceInfo < Cx > > { self . place_info . first () } fn column_count (& self) -> usize { self . place_info . len () } fn rows (& self ,) -> impl Iterator < Item = & MatrixRow < 'p , Cx > > + Clone + DoubleEndedIterator + ExactSizeIterator { self . rows . iter () } fn rows_mut (& mut self ,) -> impl Iterator < Item = & mut MatrixRow < 'p , Cx > > + DoubleEndedIterator + ExactSizeIterator { self . rows . iter_mut () } # [doc = " Iterate over the first pattern of each row."] fn heads (& self) -> impl Iterator < Item = PatOrWild < 'p , Cx > > + Clone { self . rows () . map (| r | r . head ()) } # [doc = " This computes `specialize(ctor, self)`. See top of the file for explanations."] fn specialize_constructor (& self , pcx : & PlaceCtxt < '_ , Cx > , ctor : & Constructor < Cx > , ctor_is_relevant : bool ,) -> Result < Matrix < 'p , Cx > , Cx :: Error > { if matches ! (ctor , Constructor :: Or) { let mut matrix = Matrix { rows : Vec :: new () , place_info : self . place_info . clone () , wildcard_row_is_relevant : self . wildcard_row_is_relevant , } ; for (i , row) in self . rows () . enumerate () { for new_row in row . expand_or_pat (i) { matrix . push (new_row) ; } } Ok (matrix) } else { let subfield_place_info = self . place_info [0] . specialize (pcx . cx , ctor) ; let arity = subfield_place_info . len () ; let specialized_place_info = subfield_place_info . chain (self . place_info [1 ..] . iter () . cloned ()) . collect () ; let mut matrix = Matrix { rows : Vec :: new () , place_info : specialized_place_info , wildcard_row_is_relevant : self . wildcard_row_is_relevant && ctor_is_relevant , } ; for (i , row) in self . rows () . enumerate () { if ctor . is_covered_by (pcx . cx , row . head () . ctor ()) ? { let new_row = row . pop_head_constructor (pcx . cx , ctor , arity , ctor_is_relevant , i) ? ; matrix . push (new_row) ; } } Ok (matrix) } } # [doc = " Recover row usefulness and intersection information from a processed specialized matrix."] # [doc = " `specialized` must come from `self.specialize_constructor`."] fn unspecialize (& mut self , specialized : Self) { for child_row in specialized . rows () { let parent_row_id = child_row . parent_row ; let parent_row = & mut self . rows [parent_row_id] ; parent_row . useful |= child_row . useful ; for child_intersection in child_row . intersects_at_least . iter () { let parent_intersection = specialized . rows [child_intersection] . parent_row ; if parent_intersection != parent_row_id { parent_row . intersects_at_least . insert (parent_intersection) ; } } } } }
+    };
+}
+
+impl_111!()

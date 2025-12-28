@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ArgScopeStack!();
-        DemangleWrite!();
-        Result!();
         UnnamedTypeName!();
         DemangleContext!();
+        Result!();
         Demangle!();
+        DemangleWrite!();
+        ArgScopeStack!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_205 {
     };
 }
 
-impl_205!()
+impl_205!();

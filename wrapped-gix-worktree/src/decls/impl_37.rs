@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        State!();
-        Source!();
-        Ignore!();
-        Attributes!();
         PathIdMapping!();
+        Ignore!();
+        State!();
+        Attributes!();
+        Source!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

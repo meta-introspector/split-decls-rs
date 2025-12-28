@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Default!();
         ApplyLeniencyDefault!();
+        Default!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_551 {
     };
 }
 
-impl_551!()
+impl_551!();

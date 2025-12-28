@@ -4,4 +4,4 @@ macro_rules! fallback_hash {
     };
 }
 
-fallback_hash!()
+fallback_hash!();

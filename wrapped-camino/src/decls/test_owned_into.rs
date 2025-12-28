@@ -11,4 +11,4 @@ macro_rules! test_owned_into {
     };
 }
 
-test_owned_into!()
+test_owned_into!();

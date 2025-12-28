@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Min!();
+        Kind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_359 {
     };
 }
 
-impl_359!()
+impl_359!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Cred!();
-        Config!();
-        CredentialHelper!();
         Binding!();
+        Config!();
+        Cred!();
+        Error!();
+        CredentialHelper!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_281 {
     };
 }
 
-impl_281!()
+impl_281!();

@@ -4,4 +4,4 @@ macro_rules! Profiler {
     };
 }
 
-Profiler!()
+Profiler!();

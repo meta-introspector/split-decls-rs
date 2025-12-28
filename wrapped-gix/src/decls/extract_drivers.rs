@@ -13,4 +13,4 @@ macro_rules! extract_drivers {
     };
 }
 
-extract_drivers!()
+extract_drivers!();

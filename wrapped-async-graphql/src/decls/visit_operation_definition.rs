@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Query!();
         Mutation!();
-        Visitor!();
         Subscription!();
+        Visitor!();
+        Query!();
         Schema!();
         VisitorContext!();
     };
@@ -16,4 +16,4 @@ macro_rules! visit_operation_definition {
     };
 }
 
-visit_operation_definition!()
+visit_operation_definition!();

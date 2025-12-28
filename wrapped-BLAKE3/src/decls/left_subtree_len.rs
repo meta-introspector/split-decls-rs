@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Mode!();
-        Hash!();
         HasherExt!();
+        Hash!();
+        Mode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! left_subtree_len {
     };
 }
 
-left_subtree_len!()
+left_subtree_len!();

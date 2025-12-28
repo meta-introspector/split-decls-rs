@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         AttributeSpecification!();
-        Attributes!();
-        Reader!();
-        Abbreviation!();
         Result!();
+        Abbreviation!();
+        Reader!();
+        Attributes!();
         Error!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_344 {
     };
 }
 
-impl_344!()
+impl_344!();

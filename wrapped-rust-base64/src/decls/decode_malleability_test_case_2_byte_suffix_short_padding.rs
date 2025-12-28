@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecodeError!();
         EngineWrapper!();
+        DecodeError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode_malleability_test_case_2_byte_suffix_short_padding {
     };
 }
 
-decode_malleability_test_case_2_byte_suffix_short_padding!()
+decode_malleability_test_case_2_byte_suffix_short_padding!();

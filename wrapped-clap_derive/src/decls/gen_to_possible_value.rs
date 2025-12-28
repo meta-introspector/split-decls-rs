@@ -11,4 +11,4 @@ macro_rules! gen_to_possible_value {
     };
 }
 
-gen_to_possible_value!()
+gen_to_possible_value!();

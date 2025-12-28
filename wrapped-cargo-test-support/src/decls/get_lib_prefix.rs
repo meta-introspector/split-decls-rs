@@ -4,4 +4,4 @@ macro_rules! get_lib_prefix {
     };
 }
 
-get_lib_prefix!()
+get_lib_prefix!();

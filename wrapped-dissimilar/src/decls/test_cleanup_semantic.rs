@@ -4,4 +4,4 @@ macro_rules! test_cleanup_semantic {
     };
 }
 
-test_cleanup_semantic!()
+test_cleanup_semantic!();

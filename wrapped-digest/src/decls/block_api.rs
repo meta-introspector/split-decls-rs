@@ -4,4 +4,4 @@ macro_rules! block_api {
     };
 }
 
-block_api!()
+block_api!();

@@ -4,4 +4,4 @@ macro_rules! MAX_LINE_LEN {
     };
 }
 
-MAX_LINE_LEN!()
+MAX_LINE_LEN!();

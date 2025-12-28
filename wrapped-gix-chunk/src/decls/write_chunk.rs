@@ -12,4 +12,4 @@ macro_rules! write_chunk {
     };
 }
 
-write_chunk!()
+write_chunk!();

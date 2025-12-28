@@ -11,4 +11,4 @@ macro_rules! global_setting {
     };
 }
 
-global_setting!()
+global_setting!();

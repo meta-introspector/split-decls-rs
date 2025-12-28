@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConflictIndexEntry!();
         Entry!();
+        ConflictIndexEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

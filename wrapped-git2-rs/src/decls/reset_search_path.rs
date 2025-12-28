@@ -12,4 +12,4 @@ macro_rules! reset_search_path {
     };
 }
 
-reset_search_path!()
+reset_search_path!();

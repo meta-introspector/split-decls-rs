@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TargetLoadError!();
         TargetData!();
+        TargetLoadError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TargetLoadResult {
     };
 }
 
-TargetLoadResult!()
+TargetLoadResult!();

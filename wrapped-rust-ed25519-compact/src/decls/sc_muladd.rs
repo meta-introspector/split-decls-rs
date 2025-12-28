@@ -4,4 +4,4 @@ macro_rules! sc_muladd {
     };
 }
 
-sc_muladd!()
+sc_muladd!();

@@ -4,4 +4,4 @@ macro_rules! DECODED_CHUNK_SIZE {
     };
 }
 
-DECODED_CHUNK_SIZE!()
+DECODED_CHUNK_SIZE!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NameRef!();
         AssignmentRef!();
-        Assignment!();
+        NameRef!();
         StateRef!();
+        Assignment!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_0 {
     };
 }
 
-impl_0!()
+impl_0!();

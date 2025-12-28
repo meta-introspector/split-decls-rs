@@ -4,4 +4,4 @@ macro_rules! CtorDtorName {
     };
 }
 
-CtorDtorName!()
+CtorDtorName!();

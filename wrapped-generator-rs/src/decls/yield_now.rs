@@ -11,4 +11,4 @@ macro_rules! yield_now {
     };
 }
 
-yield_now!()
+yield_now!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Atomic!();
-        Shared!();
-        Owned!();
         Pointable!();
+        Shared!();
+        Atomic!();
+        Owned!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

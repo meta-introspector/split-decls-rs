@@ -4,4 +4,4 @@ macro_rules! setup_config {
     };
 }
 
-setup_config!()
+setup_config!();

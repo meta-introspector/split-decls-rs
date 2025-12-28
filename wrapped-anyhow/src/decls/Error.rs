@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ErrorImpl!();
-        Result!();
-        Ok!();
         Own!();
+        ErrorImpl!();
+        Ok!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Error {
     };
 }
 
-Error!()
+Error!();

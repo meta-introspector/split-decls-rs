@@ -4,4 +4,4 @@ macro_rules! SECONDS_PER_HOUR {
     };
 }
 
-SECONDS_PER_HOUR!()
+SECONDS_PER_HOUR!();

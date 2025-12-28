@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Sealed!();
         Eager!();
+        Sealed!();
         Block!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

@@ -4,4 +4,4 @@ macro_rules! COINIT {
     };
 }
 
-COINIT!()
+COINIT!();

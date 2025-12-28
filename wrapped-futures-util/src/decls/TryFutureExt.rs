@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Compat!();
-        TryStreamExt!();
         Sink!();
+        TryStreamExt!();
+        Compat!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TryFutureExt {
     };
 }
 
-TryFutureExt!()
+TryFutureExt!();

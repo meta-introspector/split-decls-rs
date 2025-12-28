@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Atomic!();
-        Shared!();
         Owned!();
+        Shared!();
         Queue!();
-        Guard!();
+        Atomic!();
         Node!();
+        Guard!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

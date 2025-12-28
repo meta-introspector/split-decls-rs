@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         BString!();
-        BStr!();
-        ByteSlice!();
         ByteVec!();
         Utf8Error!();
         FromUtf8Error!();
+        ByteSlice!();
+        BStr!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! bstring {
     };
 }
 
-bstring!()
+bstring!();

@@ -12,4 +12,4 @@ macro_rules! shallow_clone_vec {
     };
 }
 
-shallow_clone_vec!()
+shallow_clone_vec!();

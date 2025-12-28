@@ -4,4 +4,4 @@ macro_rules! generate_url {
     };
 }
 
-generate_url!()
+generate_url!();

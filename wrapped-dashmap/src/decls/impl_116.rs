@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DashSet!();
-        DashMap!();
-        Ref!();
         RwLock!();
         Iter!();
+        DashMap!();
+        Ref!();
+        DashSet!();
         HashMap!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

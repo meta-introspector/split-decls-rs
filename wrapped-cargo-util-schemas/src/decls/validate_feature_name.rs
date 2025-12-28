@@ -14,4 +14,4 @@ macro_rules! validate_feature_name {
     };
 }
 
-validate_feature_name!()
+validate_feature_name!();

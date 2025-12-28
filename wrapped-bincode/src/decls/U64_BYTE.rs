@@ -4,4 +4,4 @@ macro_rules! U64_BYTE {
     };
 }
 
-U64_BYTE!()
+U64_BYTE!();

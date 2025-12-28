@@ -4,4 +4,4 @@ macro_rules! BASE64_CHUNK_SIZE {
     };
 }
 
-BASE64_CHUNK_SIZE!()
+BASE64_CHUNK_SIZE!();

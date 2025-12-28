@@ -11,4 +11,4 @@ macro_rules! with_handle {
     };
 }
 
-with_handle!()
+with_handle!();

@@ -4,4 +4,4 @@ macro_rules! RoundTripCheck {
     };
 }
 
-RoundTripCheck!()
+RoundTripCheck!();

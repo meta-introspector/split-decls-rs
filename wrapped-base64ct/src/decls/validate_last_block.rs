@@ -12,4 +12,4 @@ macro_rules! validate_last_block {
     };
 }
 
-validate_last_block!()
+validate_last_block!();

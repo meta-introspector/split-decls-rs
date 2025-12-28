@@ -4,4 +4,4 @@ macro_rules! NameParameter {
     };
 }
 
-NameParameter!()
+NameParameter!();

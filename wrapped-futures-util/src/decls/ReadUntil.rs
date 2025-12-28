@@ -4,4 +4,4 @@ macro_rules! ReadUntil {
     };
 }
 
-ReadUntil!()
+ReadUntil!();

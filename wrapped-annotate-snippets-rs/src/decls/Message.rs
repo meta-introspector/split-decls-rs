@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Level!();
         Element!();
+        Level!();
         Group!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Message {
     };
 }
 
-Message!()
+Message!();

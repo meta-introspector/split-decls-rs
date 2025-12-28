@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Stats!();
-        Configuration!();
         AttributesDigest!();
+        Configuration!();
         Mode!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

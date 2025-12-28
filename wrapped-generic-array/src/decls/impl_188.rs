@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        GenericArray!();
         FallibleGenericSequence!();
         ArrayLength!();
-        GenericArray!();
         IntrusiveArrayBuilder!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

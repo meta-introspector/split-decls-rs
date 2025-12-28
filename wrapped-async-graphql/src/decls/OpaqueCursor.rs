@@ -4,4 +4,4 @@ macro_rules! OpaqueCursor {
     };
 }
 
-OpaqueCursor!()
+OpaqueCursor!();

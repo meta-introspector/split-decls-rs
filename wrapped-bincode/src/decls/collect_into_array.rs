@@ -4,4 +4,4 @@ macro_rules! collect_into_array {
     };
 }
 
-collect_into_array!()
+collect_into_array!();

@@ -4,4 +4,4 @@ macro_rules! is_eq {
     };
 }
 
-is_eq!()
+is_eq!();

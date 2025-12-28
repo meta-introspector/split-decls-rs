@@ -4,4 +4,4 @@ macro_rules! split_paragraphs {
     };
 }
 
-split_paragraphs!()
+split_paragraphs!();

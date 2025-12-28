@@ -4,4 +4,4 @@ macro_rules! lower_mutability {
     };
 }
 
-lower_mutability!()
+lower_mutability!();

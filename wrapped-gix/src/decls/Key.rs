@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        String!();
-        Link!();
+        Section!();
         Name!();
+        String!();
         Note!();
         SubSectionRequirement!();
-        Section!();
         Error!();
+        Link!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Key {
     };
 }
 
-Key!()
+Key!();

@@ -4,4 +4,4 @@ macro_rules! ASCII_MASK_U64 {
     };
 }
 
-ASCII_MASK_U64!()
+ASCII_MASK_U64!();

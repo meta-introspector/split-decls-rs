@@ -4,4 +4,4 @@ macro_rules! ReadToStringFuture {
     };
 }
 
-ReadToStringFuture!()
+ReadToStringFuture!();

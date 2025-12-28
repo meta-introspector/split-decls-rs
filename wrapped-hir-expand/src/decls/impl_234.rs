@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpandDatabase!();
         ExpandErrorKind!();
+        ExpandDatabase!();
         RenderedExpandError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_234 {
     };
 }
 
-impl_234!()
+impl_234!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DateTime!();
         Error!();
+        DateTime!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! serde {
     };
 }
 
-serde!()
+serde!();

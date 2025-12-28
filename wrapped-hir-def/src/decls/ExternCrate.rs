@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImportAlias!();
         RawVisibilityId!();
+        ImportAlias!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ExternCrate {
     };
 }
 
-ExternCrate!()
+ExternCrate!();

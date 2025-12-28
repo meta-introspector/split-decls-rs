@@ -4,4 +4,4 @@ macro_rules! write_generic_params {
     };
 }
 
-write_generic_params!()
+write_generic_params!();

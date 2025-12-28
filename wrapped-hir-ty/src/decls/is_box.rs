@@ -11,4 +11,4 @@ macro_rules! is_box {
     };
 }
 
-is_box!()
+is_box!();

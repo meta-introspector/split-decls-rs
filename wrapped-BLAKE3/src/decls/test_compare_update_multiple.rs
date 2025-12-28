@@ -11,4 +11,4 @@ macro_rules! test_compare_update_multiple {
     };
 }
 
-test_compare_update_multiple!()
+test_compare_update_multiple!();

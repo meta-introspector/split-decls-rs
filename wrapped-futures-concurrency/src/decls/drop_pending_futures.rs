@@ -4,4 +4,4 @@ macro_rules! drop_pending_futures {
     };
 }
 
-drop_pending_futures!()
+drop_pending_futures!();

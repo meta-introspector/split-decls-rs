@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorVTable!();
         Backtrace!();
+        ErrorVTable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ErrorImpl {
     };
 }
 
-ErrorImpl!()
+ErrorImpl!();

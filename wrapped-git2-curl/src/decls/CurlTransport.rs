@@ -4,4 +4,4 @@ macro_rules! CurlTransport {
     };
 }
 
-CurlTransport!()
+CurlTransport!();

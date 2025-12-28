@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Reader!();
-        PubNamesEntry!();
-        DebugInfoOffset!();
-        UnitOffset!();
         PubStuffEntry!();
+        PubNamesEntry!();
+        UnitOffset!();
+        DebugInfoOffset!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_529 {
     };
 }
 
-impl_529!()
+impl_529!();

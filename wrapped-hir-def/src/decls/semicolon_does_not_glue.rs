@@ -46,4 +46,4 @@ fn f() {
     };
 }
 
-semicolon_does_not_glue!()
+semicolon_does_not_glue!();

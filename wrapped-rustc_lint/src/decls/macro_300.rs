@@ -1,0 +1,7 @@
+macro_rules! macro_300 {
+    () => {
+        declare_tool_lint ! { # [doc = " The `symbol_intern_string_literal` detects `Symbol::intern` being called on a string literal"] pub rustc :: SYMBOL_INTERN_STRING_LITERAL , Allow , "Forbid uses of string literals in `Symbol::intern`, suggesting preinterning instead" , report_in_external_macro : true }
+    };
+}
+
+macro_300!()

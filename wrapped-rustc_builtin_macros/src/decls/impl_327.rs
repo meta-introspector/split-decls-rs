@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        ExportMacroRules!();
+        CollectProcMacros!();
+        AttributeOnlyUsableWithCrateType!();
+    };
+}
+
+macro_rules! impl_327 {
+    () => {
+        deps!();
+        impl < 'a > Visitor < 'a > for CollectProcMacros < 'a > { fn visit_item (& mut self , item : & 'a ast :: Item) { if let ast :: ItemKind :: MacroDef (..) = item . kind { if self . is_proc_macro_crate && attr :: contains_name (& item . attrs , sym :: macro_export) { self . dcx . emit_err (errors :: ExportMacroRules { span : self . source_map . guess_head_span (item . span) , }) ; } } let mut found_attr : Option < & 'a ast :: Attribute > = None ; for attr in & item . attrs { if attr . is_proc_macro_attr () { if let Some (prev_attr) = found_attr { let prev_item = prev_attr . get_normal_item () ; let item = attr . get_normal_item () ; let path_str = pprust :: path_to_string (& item . path) ; let msg = if item . path . segments [0] . ident . name == prev_item . path . segments [0] . ident . name { format ! ("only one `#[{path_str}]` attribute is allowed on any given function" ,) } else { format ! ("`#[{}]` and `#[{}]` attributes cannot both be applied
+                            to the same function" , path_str , pprust :: path_to_string (& prev_item . path) ,) } ; self . dcx . struct_span_err (attr . span , msg) . with_span_label (prev_attr . span , "previous attribute here") . emit () ; return ; } found_attr = Some (attr) ; } } let Some (attr) = found_attr else { self . check_not_pub_in_root (& item . vis , self . source_map . guess_head_span (item . span)) ; let prev_in_root = mem :: replace (& mut self . in_root , false) ; visit :: walk_item (self , item) ; self . in_root = prev_in_root ; return ; } ; let fn_ident = if let ast :: ItemKind :: Fn (fn_) = & item . kind { fn_ . ident } else { return ; } ; if self . is_test_crate { return ; } if ! self . is_proc_macro_crate { self . dcx . create_err (errors :: AttributeOnlyUsableWithCrateType { span : attr . span , path : & pprust :: path_to_string (& attr . get_normal_item () . path) , }) . emit () ; return ; } if attr . has_name (sym :: proc_macro_derive) { self . collect_custom_derive (item , fn_ident , attr) ; } else if attr . has_name (sym :: proc_macro_attribute) { self . collect_attr_proc_macro (item , fn_ident) ; } else if attr . has_name (sym :: proc_macro) { self . collect_bang_proc_macro (item , fn_ident) ; } ; let prev_in_root = mem :: replace (& mut self . in_root , false) ; visit :: walk_item (self , item) ; self . in_root = prev_in_root ; } }
+    };
+}
+
+impl_327!()

@@ -4,4 +4,4 @@ macro_rules! ptr_from_mut {
     };
 }
 
-ptr_from_mut!()
+ptr_from_mut!();

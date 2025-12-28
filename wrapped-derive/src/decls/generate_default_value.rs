@@ -11,4 +11,4 @@ macro_rules! generate_default_value {
     };
 }
 
-generate_default_value!()
+generate_default_value!();

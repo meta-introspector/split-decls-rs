@@ -11,4 +11,4 @@ macro_rules! internal_strategies {
     };
 }
 
-internal_strategies!()
+internal_strategies!();

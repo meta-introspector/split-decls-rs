@@ -4,4 +4,4 @@ macro_rules! escape_bytes {
     };
 }
 
-escape_bytes!()
+escape_bytes!();

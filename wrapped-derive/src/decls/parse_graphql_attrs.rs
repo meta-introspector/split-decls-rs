@@ -11,4 +11,4 @@ macro_rules! parse_graphql_attrs {
     };
 }
 
-parse_graphql_attrs!()
+parse_graphql_attrs!();

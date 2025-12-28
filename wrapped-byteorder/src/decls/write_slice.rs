@@ -4,4 +4,4 @@ macro_rules! write_slice {
     };
 }
 
-write_slice!()
+write_slice!();

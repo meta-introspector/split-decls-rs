@@ -11,4 +11,4 @@ macro_rules! RecvTimeoutError {
     };
 }
 
-RecvTimeoutError!()
+RecvTimeoutError!();

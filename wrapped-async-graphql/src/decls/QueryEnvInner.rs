@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Extensions!();
+        ServerError!();
         IntrospectionMode!();
         Data!();
-        ServerError!();
         UploadValue!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! QueryEnvInner {
     };
 }
 
-QueryEnvInner!()
+QueryEnvInner!();

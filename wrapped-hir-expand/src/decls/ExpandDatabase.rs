@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        CrateProcMacros!();
-        DeclarativeMacroExpander!();
-        HirFileId!();
-        SpanMap!();
-        ProcMacros!();
-        MacroArgResult!();
-        ExpansionSpanMap!();
-        TokenExpander!();
         ExpandResult!();
-        MacroCallLoc!();
-        MacroCallKind!();
-        AstId!();
+        MacroArgResult!();
+        HirFileId!();
         MacroCallId!();
+        ExpansionSpanMap!();
+        DeclarativeMacroExpander!();
+        SpanMap!();
+        MacroCallLoc!();
+        AstId!();
+        ProcMacros!();
         MacroDefId!();
+        CrateProcMacros!();
+        TokenExpander!();
+        MacroCallKind!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! ExpandDatabase {
     };
 }
 
-ExpandDatabase!()
+ExpandDatabase!();

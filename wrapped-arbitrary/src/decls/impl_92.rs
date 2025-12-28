@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MaxRecursionReached!();
-        Result!();
-        Unstructured!();
         Error!();
+        MaxRecursionReached!();
         Arbitrary!();
+        Unstructured!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_92 {
     };
 }
 
-impl_92!()
+impl_92!();

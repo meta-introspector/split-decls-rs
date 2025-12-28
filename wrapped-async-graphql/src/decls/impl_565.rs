@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Tracing!();
         Extension!();
-        ExtensionFactory!();
+        Tracing!();
         TracingExtension!();
+        ExtensionFactory!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_565 {
     };
 }
 
-impl_565!()
+impl_565!();

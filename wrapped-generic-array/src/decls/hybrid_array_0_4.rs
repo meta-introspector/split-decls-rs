@@ -4,4 +4,4 @@ macro_rules! hybrid_array_0_4 {
     };
 }
 
-hybrid_array_0_4!()
+hybrid_array_0_4!();

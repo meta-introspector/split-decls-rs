@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Delegate!();
-        Sorting!();
-        Path!();
-        Error!();
-        Replacements!();
-        Blob!();
         Default!();
-        Object!();
+        Path!();
         Tree!();
+        Delegate!();
+        Replacements!();
         Kind!();
+        Error!();
+        Object!();
+        Blob!();
+        Sorting!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_888 {
     };
 }
 
-impl_888!()
+impl_888!();

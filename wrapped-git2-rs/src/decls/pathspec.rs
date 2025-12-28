@@ -4,4 +4,4 @@ macro_rules! pathspec {
     };
 }
 
-pathspec!()
+pathspec!();

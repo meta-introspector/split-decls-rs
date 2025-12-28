@@ -4,4 +4,4 @@ macro_rules! InternedConstParamId {
     };
 }
 
-InternedConstParamId!()
+InternedConstParamId!();

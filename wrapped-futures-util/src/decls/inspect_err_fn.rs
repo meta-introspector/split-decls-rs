@@ -11,4 +11,4 @@ macro_rules! inspect_err_fn {
     };
 }
 
-inspect_err_fn!()
+inspect_err_fn!();

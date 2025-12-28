@@ -4,4 +4,4 @@ macro_rules! try_unlink_path_recursively {
     };
 }
 
-try_unlink_path_recursively!()
+try_unlink_path_recursively!();

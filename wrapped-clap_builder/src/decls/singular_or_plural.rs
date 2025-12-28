@@ -4,4 +4,4 @@ macro_rules! singular_or_plural {
     };
 }
 
-singular_or_plural!()
+singular_or_plural!();

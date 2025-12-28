@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Array!();
         AtomicMaybeUninit!();
         Align16!();
+        Array!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! __test_atomic {
     };
 }
 
-__test_atomic!()
+__test_atomic!();

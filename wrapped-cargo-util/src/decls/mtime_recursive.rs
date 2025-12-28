@@ -4,4 +4,4 @@ macro_rules! mtime_recursive {
     };
 }
 
-mtime_recursive!()
+mtime_recursive!();

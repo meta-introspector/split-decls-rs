@@ -4,4 +4,4 @@ macro_rules! system_prefix_from_exepath_var {
     };
 }
 
-system_prefix_from_exepath_var!()
+system_prefix_from_exepath_var!();

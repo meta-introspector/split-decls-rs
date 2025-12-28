@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DateTime!();
-        MappedLocalTime!();
+        FixedOffset!();
         TimeZone!();
         Utc!();
-        FixedOffset!();
+        DateTime!();
+        MappedLocalTime!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_676 {
     };
 }
 
-impl_676!()
+impl_676!();

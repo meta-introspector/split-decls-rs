@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FnOnce1!();
-        FnMut1!();
         Fn1!();
+        FnMut1!();
+        FnOnce1!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! trivial_fn_impls {
     };
 }
 
-trivial_fn_impls!()
+trivial_fn_impls!();

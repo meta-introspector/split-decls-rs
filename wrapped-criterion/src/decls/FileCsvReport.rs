@@ -4,4 +4,4 @@ macro_rules! FileCsvReport {
     };
 }
 
-FileCsvReport!()
+FileCsvReport!();

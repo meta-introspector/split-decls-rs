@@ -4,4 +4,4 @@ macro_rules! AutotagOption {
     };
 }
 
-AutotagOption!()
+AutotagOption!();

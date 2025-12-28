@@ -11,4 +11,4 @@ macro_rules! EnumVariants {
     };
 }
 
-EnumVariants!()
+EnumVariants!();

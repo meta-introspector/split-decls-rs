@@ -4,4 +4,4 @@ macro_rules! sse41 {
     };
 }
 
-sse41!()
+sse41!();

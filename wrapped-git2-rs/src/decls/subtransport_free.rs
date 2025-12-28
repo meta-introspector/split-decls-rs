@@ -11,4 +11,4 @@ macro_rules! subtransport_free {
     };
 }
 
-subtransport_free!()
+subtransport_free!();

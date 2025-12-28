@@ -4,4 +4,4 @@ macro_rules! QueryRoot {
     };
 }
 
-QueryRoot!()
+QueryRoot!();

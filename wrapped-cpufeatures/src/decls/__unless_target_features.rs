@@ -4,4 +4,4 @@ macro_rules! __unless_target_features {
     };
 }
 
-__unless_target_features!()
+__unless_target_features!();

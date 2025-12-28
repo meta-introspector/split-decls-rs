@@ -4,4 +4,4 @@ macro_rules! allow_std {
     };
 }
 
-allow_std!()
+allow_std!();

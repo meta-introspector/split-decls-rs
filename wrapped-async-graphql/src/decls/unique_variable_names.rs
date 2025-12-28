@@ -4,4 +4,4 @@ macro_rules! unique_variable_names {
     };
 }
 
-unique_variable_names!()
+unique_variable_names!();

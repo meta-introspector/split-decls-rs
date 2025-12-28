@@ -4,4 +4,4 @@ macro_rules! GBK_HANZI_BYTES {
     };
 }
 
-GBK_HANZI_BYTES!()
+GBK_HANZI_BYTES!();

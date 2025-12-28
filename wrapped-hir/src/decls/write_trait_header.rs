@@ -11,4 +11,4 @@ macro_rules! write_trait_header {
     };
 }
 
-write_trait_header!()
+write_trait_header!();

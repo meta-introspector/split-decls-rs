@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExpressionStore!();
         Binding!();
         BindingId!();
+        ExpressionStore!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_295 {
     };
 }
 
-impl_295!()
+impl_295!();

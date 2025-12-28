@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        VecStringOrBool!();
         StringOrBool!();
         RustVersion!();
+        VecStringOrBool!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InheritablePackage {
     };
 }
 
-InheritablePackage!()
+InheritablePackage!();

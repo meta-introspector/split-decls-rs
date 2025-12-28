@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TypedValueParser!();
-        Error!();
-        OsStr!();
-        Usage!();
-        NonEmptyStringValueParser!();
-        Arg!();
         Result!();
+        OsStr!();
+        Error!();
+        Arg!();
+        TypedValueParser!();
         Command!();
+        NonEmptyStringValueParser!();
+        Usage!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_313 {
     };
 }
 
-impl_313!()
+impl_313!();

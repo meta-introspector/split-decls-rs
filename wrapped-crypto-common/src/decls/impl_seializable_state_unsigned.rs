@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SerializedState!();
         DeserializeStateError!();
+        SerializedState!();
         SerializableState!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_seializable_state_unsigned {
     };
 }
 
-impl_seializable_state_unsigned!()
+impl_seializable_state_unsigned!();

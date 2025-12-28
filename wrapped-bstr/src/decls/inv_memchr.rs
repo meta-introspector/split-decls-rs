@@ -4,4 +4,4 @@ macro_rules! inv_memchr {
     };
 }
 
-inv_memchr!()
+inv_memchr!();

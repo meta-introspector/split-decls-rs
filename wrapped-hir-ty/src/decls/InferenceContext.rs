@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        InternedClosureId!();
-        HirDatabase!();
-        TargetFeatures!();
-        TyLoweringContext!();
-        BreakableContext!();
-        Diagnostics!();
         InternedStandardTypes!();
-        Diverges!();
+        HirDatabase!();
+        BreakableContext!();
         TargetFeatureIsSafeInTarget!();
-        InferenceResult!();
+        Diverges!();
         MethodResolutionUnstableFeatures!();
+        TargetFeatures!();
+        InferenceResult!();
+        Diagnostics!();
+        InternedClosureId!();
+        TyLoweringContext!();
         MirSpan!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! InferenceContext {
     };
 }
 
-InferenceContext!()
+InferenceContext!();

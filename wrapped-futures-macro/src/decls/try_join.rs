@@ -11,4 +11,4 @@ macro_rules! try_join {
     };
 }
 
-try_join!()
+try_join!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Vector!();
-        Mask!();
-        Match!();
         Slim!();
+        Mask!();
+        Vector!();
+        Match!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_156 {
     };
 }
 
-impl_156!()
+impl_156!();

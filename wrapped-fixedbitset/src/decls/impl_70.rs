@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FixedBitSet!();
         BitSetByteSerializer!();
+        FixedBitSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

@@ -4,4 +4,4 @@ macro_rules! time_primitive_date_time {
     };
 }
 
-time_primitive_date_time!()
+time_primitive_date_time!();

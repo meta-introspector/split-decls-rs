@@ -4,4 +4,4 @@ macro_rules! dir_does_not_contain_target_with_custom_target_dir {
     };
 }
 
-dir_does_not_contain_target_with_custom_target_dir!()
+dir_does_not_contain_target_with_custom_target_dir!();

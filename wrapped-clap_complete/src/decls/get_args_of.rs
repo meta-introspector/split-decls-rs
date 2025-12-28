@@ -4,4 +4,4 @@ macro_rules! get_args_of {
     };
 }
 
-get_args_of!()
+get_args_of!();

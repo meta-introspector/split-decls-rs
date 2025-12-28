@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Tree!();
         Path!();
-        Program!();
-        UnsignedInteger!();
-        Executable!();
-        Abbrev!();
-        Disambiguate!();
-        Core!();
+        Tree!();
         Boolean!();
-        CheckStat!();
-        Any!();
+        Program!();
+        Executable!();
+        Disambiguate!();
         LockTimeout!();
+        Core!();
+        Any!();
+        CheckStat!();
+        UnsignedInteger!();
         LogAllRefUpdates!();
+        Abbrev!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_608 {
     };
 }
 
-impl_608!()
+impl_608!();

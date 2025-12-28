@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         PartialVersion!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_spec {
     };
 }
 
-parse_spec!()
+parse_spec!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ready!();
         ReadExact!();
+        Ready!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1157 {
     };
 }
 
-impl_1157!()
+impl_1157!();

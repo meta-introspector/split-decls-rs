@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Extension!();
-        Str!();
-        OsStr!();
         ArgSettings!();
-        Arg!();
-        StyledStr!();
-        Id!();
-        ValueHint!();
-        PossibleValue!();
+        Str!();
         ValueRange!();
+        PossibleValue!();
+        OsStr!();
+        StyledStr!();
+        Extension!();
+        ValueHint!();
+        Arg!();
+        ArgExt!();
         ValueParser!();
         AnyValueId!();
         ArgAction!();
-        ArgExt!();
+        Id!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FlushCompress!();
         Status!();
-        Write!();
         Compress!();
+        Write!();
+        FlushCompress!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impls {
     };
 }
 
-impls!()
+impls!();

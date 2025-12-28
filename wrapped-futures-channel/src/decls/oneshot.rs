@@ -4,4 +4,4 @@ macro_rules! oneshot {
     };
 }
 
-oneshot!()
+oneshot!();

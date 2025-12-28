@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Own!();
         ErrorImpl!();
+        Own!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! object_drop {
     };
 }
 
-object_drop!()
+object_drop!();

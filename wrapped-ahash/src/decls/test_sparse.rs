@@ -4,4 +4,4 @@ macro_rules! test_sparse {
     };
 }
 
-test_sparse!()
+test_sparse!();

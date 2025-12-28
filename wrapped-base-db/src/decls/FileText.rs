@@ -4,4 +4,4 @@ macro_rules! FileText {
     };
 }
 
-FileText!()
+FileText!();

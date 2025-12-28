@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SelectHandle!();
-        Operation!();
         Token!();
         Receiver!();
+        Operation!();
         Context!();
+        SelectHandle!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

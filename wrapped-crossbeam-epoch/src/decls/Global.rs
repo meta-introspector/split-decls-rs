@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         List!();
-        SealedBag!();
         Local!();
-        Queue!();
+        SealedBag!();
         AtomicEpoch!();
+        Queue!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Global {
     };
 }
 
-Global!()
+Global!();

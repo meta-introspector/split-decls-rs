@@ -4,4 +4,4 @@ macro_rules! HmacCore {
     };
 }
 
-HmacCore!()
+HmacCore!();

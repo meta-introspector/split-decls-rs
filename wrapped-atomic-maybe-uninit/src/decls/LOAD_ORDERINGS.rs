@@ -4,4 +4,4 @@ macro_rules! LOAD_ORDERINGS {
     };
 }
 
-LOAD_ORDERINGS!()
+LOAD_ORDERINGS!();

@@ -4,4 +4,4 @@ macro_rules! decode_last_lossy {
     };
 }
 
-decode_last_lossy!()
+decode_last_lossy!();

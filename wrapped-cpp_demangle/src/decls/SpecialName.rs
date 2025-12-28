@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CallOffset!();
-        Encoding!();
         Name!();
+        Encoding!();
         ResourceName!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! SpecialName {
     };
 }
 
-SpecialName!()
+SpecialName!();

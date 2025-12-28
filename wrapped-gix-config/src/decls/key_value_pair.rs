@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Whitespace!();
-        ParseNode!();
         Event!();
+        ParseNode!();
+        Whitespace!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! key_value_pair {
     };
 }
 
-key_value_pair!()
+key_value_pair!();

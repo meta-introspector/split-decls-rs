@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ConstValue!();
-        DeserializerError!();
-        EnumDeserializer!();
         Name!();
+        EnumDeserializer!();
+        DeserializerError!();
         Value!();
+        ConstValue!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

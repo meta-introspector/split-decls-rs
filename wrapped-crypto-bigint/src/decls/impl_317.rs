@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MultiExponentiate!();
-        MultiExponentiateBoundedExp!();
         Bounded!();
+        MultiExponentiateBoundedExp!();
+        MultiExponentiate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_317 {
     };
 }
 
-impl_317!()
+impl_317!();

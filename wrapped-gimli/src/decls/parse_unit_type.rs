@@ -12,4 +12,4 @@ macro_rules! parse_unit_type {
     };
 }
 
-parse_unit_type!()
+parse_unit_type!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Note!();
         Change!();
         Repository!();
         Extensions!();
+        Note!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TreeDiffChangeExt {
     };
 }
 
-TreeDiffChangeExt!()
+TreeDiffChangeExt!();

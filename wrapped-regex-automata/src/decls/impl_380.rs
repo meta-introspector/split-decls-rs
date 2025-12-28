@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        PrefilterI!();
+        Strategy!();
+        GroupInfo!();
+        Pre!();
+    };
+}
+
+macro_rules! impl_380 {
+    () => {
+        deps!();
+        impl < P : PrefilterI > Pre < P > { fn new (pre : P) -> Arc < dyn Strategy > { let group_info = GroupInfo :: new ([[None :: < & str >]]) . unwrap () ; Arc :: new (Pre { pre , group_info }) } }
+    };
+}
+
+impl_380!()

@@ -4,4 +4,4 @@ macro_rules! SecondsTimestampVisitor {
     };
 }
 
-SecondsTimestampVisitor!()
+SecondsTimestampVisitor!();

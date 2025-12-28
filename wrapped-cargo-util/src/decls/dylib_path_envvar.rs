@@ -4,4 +4,4 @@ macro_rules! dylib_path_envvar {
     };
 }
 
-dylib_path_envvar!()
+dylib_path_envvar!();

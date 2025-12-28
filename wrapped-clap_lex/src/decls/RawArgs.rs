@@ -4,4 +4,4 @@ macro_rules! RawArgs {
     };
 }
 
-RawArgs!()
+RawArgs!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParentIds!();
         Either!();
+        ParentIds!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! collect_parents {
     };
 }
 
-collect_parents!()
+collect_parents!();

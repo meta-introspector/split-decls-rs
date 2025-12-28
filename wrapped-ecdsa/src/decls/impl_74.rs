@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Signature!();
-        DigestAlgorithm!();
         EcdsaCurve!();
-        MaxSize!();
-        SigningKey!();
         SignatureSize!();
+        SigningKey!();
+        MaxSize!();
+        Signature!();
         MaxOverhead!();
+        DigestAlgorithm!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_74 {
     };
 }
 
-impl_74!()
+impl_74!();

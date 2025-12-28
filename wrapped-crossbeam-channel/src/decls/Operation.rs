@@ -4,4 +4,4 @@ macro_rules! Operation {
     };
 }
 
-Operation!()
+Operation!();

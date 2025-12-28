@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        SubstitutionTable!();
-        ArgScopeStack!();
-        DemangleAsInner!();
-        DemangleState!();
-        Result!();
-        DemangleWrite!();
         DemangleContext!();
-        DemangleNodeType!();
         DemangleOptions!();
+        DemangleAsInner!();
+        Result!();
+        DemangleState!();
+        ArgScopeStack!();
+        DemangleNodeType!();
+        DemangleWrite!();
+        SubstitutionTable!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

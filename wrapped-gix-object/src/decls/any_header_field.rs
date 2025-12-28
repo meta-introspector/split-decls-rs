@@ -4,4 +4,4 @@ macro_rules! any_header_field {
     };
 }
 
-any_header_field!()
+any_header_field!();

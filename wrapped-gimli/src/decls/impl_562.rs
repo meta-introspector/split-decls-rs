@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         DwarfFileType!();
+        RngListsHeader!();
         DebugRngListsBase!();
         ReaderOffset!();
         Encoding!();
-        RngListsHeader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_562 {
     };
 }
 
-impl_562!()
+impl_562!();

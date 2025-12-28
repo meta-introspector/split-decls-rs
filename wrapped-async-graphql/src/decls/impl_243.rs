@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PossibleFragmentSpreads!();
-        VisitorContext!();
         Visitor!();
+        VisitorContext!();
+        PossibleFragmentSpreads!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_243 {
     };
 }
 
-impl_243!()
+impl_243!();

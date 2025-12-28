@@ -11,4 +11,4 @@ macro_rules! DirEntry {
     };
 }
 
-DirEntry!()
+DirEntry!();

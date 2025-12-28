@@ -12,4 +12,4 @@ fn foo() {
     };
 }
 
-test_tt_block!()
+test_tt_block!();

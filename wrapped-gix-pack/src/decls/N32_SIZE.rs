@@ -4,4 +4,4 @@ macro_rules! N32_SIZE {
     };
 }
 
-N32_SIZE!()
+N32_SIZE!();

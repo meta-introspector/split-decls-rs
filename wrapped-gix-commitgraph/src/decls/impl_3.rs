@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Position!();
-        Commit!();
         File!();
         Graph!();
+        Commit!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

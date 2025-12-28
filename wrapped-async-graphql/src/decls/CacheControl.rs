@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        EmptyMutation!();
         Query!();
         EmptySubscription!();
         Scope!();
-        EmptyMutation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CacheControl {
     };
 }
 
-CacheControl!()
+CacheControl!();

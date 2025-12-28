@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ItemContainerId!();
         ModuleId!();
+        ItemContainerId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_689 {
     };
 }
 
-macro_689!()
+macro_689!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefWithBodyId!();
         VariantId!();
+        DefWithBodyId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_704 {
     };
 }
 
-impl_704!()
+impl_704!();

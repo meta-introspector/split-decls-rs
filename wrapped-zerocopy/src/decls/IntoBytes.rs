@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
         KnownLayout!();
-        FromBytes!();
+        SizeError!();
         Immutable!();
+        FromBytes!();
     };
 }
 

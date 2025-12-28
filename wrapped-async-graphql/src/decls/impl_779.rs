@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ContextSelectionSet!();
-        Json!();
-        OutputType!();
-        MetaType!();
-        Field!();
         Registry!();
         Scalar!();
+        OutputType!();
+        MetaType!();
+        Json!();
+        Field!();
         ServerResult!();
         MetaTypeId!();
+        ContextSelectionSet!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_779 {
     };
 }
 
-impl_779!()
+impl_779!();

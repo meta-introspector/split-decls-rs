@@ -12,4 +12,4 @@ macro_rules! select_inner {
     };
 }
 
-select_inner!()
+select_inner!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PacketLineRef!();
         Error!();
+        PacketLineRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ExhaustiveOutcome {
     };
 }
 
-ExhaustiveOutcome!()
+ExhaustiveOutcome!();

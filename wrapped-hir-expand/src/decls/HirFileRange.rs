@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileRangeWrapper!();
         HirFileId!();
+        FileRangeWrapper!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HirFileRange {
     };
 }
 
-HirFileRange!()
+HirFileRange!();

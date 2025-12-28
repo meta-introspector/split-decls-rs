@@ -4,4 +4,4 @@ macro_rules! strict_object_creation {
     };
 }
 
-strict_object_creation!()
+strict_object_creation!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Size!();
         SectionMut!();
-        Error!();
+        Section!();
         Event!();
         Whitespace!();
-        Size!();
+        Error!();
         Index!();
-        Section!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

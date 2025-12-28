@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Response!();
-        Action!();
-        Ref!();
-        Arguments!();
-        Mapping!();
         Error!();
+        Action!();
+        Mapping!();
+        Arguments!();
+        Response!();
         Round!();
+        Ref!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! with_fetch {
     };
 }
 
-with_fetch!()
+with_fetch!();

@@ -4,4 +4,4 @@ macro_rules! GIT_CORE_DIR {
     };
 }
 
-GIT_CORE_DIR!()
+GIT_CORE_DIR!();

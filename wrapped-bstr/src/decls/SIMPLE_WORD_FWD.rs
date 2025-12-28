@@ -4,4 +4,4 @@ macro_rules! SIMPLE_WORD_FWD {
     };
 }
 
-SIMPLE_WORD_FWD!()
+SIMPLE_WORD_FWD!();

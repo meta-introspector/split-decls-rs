@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         AutoRevertToPreviousCWD!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_current_dir {
     };
 }
 
-set_current_dir!()
+set_current_dir!();

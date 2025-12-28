@@ -4,4 +4,4 @@ macro_rules! HAS_WAITERS {
     };
 }
 
-HAS_WAITERS!()
+HAS_WAITERS!();

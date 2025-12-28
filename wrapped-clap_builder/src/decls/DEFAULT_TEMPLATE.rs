@@ -9,4 +9,4 @@ macro_rules! DEFAULT_TEMPLATE {
     };
 }
 
-DEFAULT_TEMPLATE!()
+DEFAULT_TEMPLATE!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Data!();
         Error!();
+        Data!();
         Response!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ServerMessage {
     };
 }
 
-ServerMessage!()
+ServerMessage!();

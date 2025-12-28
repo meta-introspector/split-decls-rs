@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CommitRefIter!();
         State!();
+        CommitRefIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CommitRefIterRaw {
     };
 }
 
-CommitRefIterRaw!()
+CommitRefIterRaw!();

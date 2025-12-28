@@ -4,4 +4,4 @@ macro_rules! fiat_sm2_u2 {
     };
 }
 
-fiat_sm2_u2!()
+fiat_sm2_u2!();

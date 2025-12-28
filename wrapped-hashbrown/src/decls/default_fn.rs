@@ -4,4 +4,4 @@ macro_rules! default_fn {
     };
 }
 
-default_fn!()
+default_fn!();

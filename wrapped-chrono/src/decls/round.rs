@@ -4,4 +4,4 @@ macro_rules! round {
     };
 }
 
-round!()
+round!();

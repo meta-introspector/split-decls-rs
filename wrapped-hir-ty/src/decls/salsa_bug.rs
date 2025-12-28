@@ -56,4 +56,4 @@ macro_rules! salsa_bug {
     };
 }
 
-salsa_bug!()
+salsa_bug!();

@@ -4,4 +4,4 @@ macro_rules! fn_traits {
     };
 }
 
-fn_traits!()
+fn_traits!();

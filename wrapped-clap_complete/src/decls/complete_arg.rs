@@ -12,4 +12,4 @@ macro_rules! complete_arg {
     };
 }
 
-complete_arg!()
+complete_arg!();

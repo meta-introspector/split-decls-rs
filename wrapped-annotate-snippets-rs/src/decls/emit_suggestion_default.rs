@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         SourceMap!();
-        Snippet!();
-        SplicedLines!();
         Patch!();
+        SplicedLines!();
         Renderer!();
         ElementStyle!();
+        Snippet!();
         DisplaySuggestion!();
         StyledBuffer!();
     };
@@ -18,4 +18,4 @@ macro_rules! emit_suggestion_default {
     };
 }
 
-emit_suggestion_default!()
+emit_suggestion_default!();

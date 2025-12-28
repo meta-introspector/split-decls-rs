@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        VisitorContext!();
-        NoUnusedFragments!();
         Scope!();
         Visitor!();
+        NoUnusedFragments!();
+        VisitorContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_228 {
     };
 }
 
-impl_228!()
+impl_228!();

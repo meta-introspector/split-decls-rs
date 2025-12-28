@@ -12,4 +12,4 @@ macro_rules! borrowing_sub {
     };
 }
 
-borrowing_sub!()
+borrowing_sub!();

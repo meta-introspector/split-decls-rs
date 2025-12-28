@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Mode!();
         BytesToEntriesIter!();
-        Entry!();
+        Mode!();
         Item!();
+        Entry!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_145 {
     };
 }
 
-impl_145!()
+impl_145!();

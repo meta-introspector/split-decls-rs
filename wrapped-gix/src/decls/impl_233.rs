@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        Id!();
         Object!();
+        Entry!();
         Error!();
+        Id!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_233 {
     };
 }
 
-impl_233!()
+impl_233!();

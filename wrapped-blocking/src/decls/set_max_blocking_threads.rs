@@ -11,4 +11,4 @@ macro_rules! set_max_blocking_threads {
     };
 }
 
-set_max_blocking_threads!()
+set_max_blocking_threads!();

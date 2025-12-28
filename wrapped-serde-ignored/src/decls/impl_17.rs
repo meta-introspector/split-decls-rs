@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MapAccess!();
-        CaptureKey!();
         Deserializer!();
+        MapAccess!();
         SeqAccess!();
+        CaptureKey!();
     };
 }
 

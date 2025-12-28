@@ -11,4 +11,4 @@ macro_rules! apply_change {
     };
 }
 
-apply_change!()
+apply_change!();

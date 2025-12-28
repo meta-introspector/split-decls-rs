@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        VisitorContext!();
-        Field!();
-        Directive!();
         VisitorCons!();
-        VisitMode!();
         Visitor!();
+        VisitMode!();
+        VisitorContext!();
+        Directive!();
+        Field!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_293 {
     };
 }
 
-impl_293!()
+impl_293!();

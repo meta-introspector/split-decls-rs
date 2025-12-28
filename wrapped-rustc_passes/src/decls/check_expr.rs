@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Liveness!();
+    };
+}
+
+macro_rules! check_expr {
+    () => {
+        deps!();
+        fn check_expr < 'tcx > (this : & mut Liveness < '_ , 'tcx > , expr : & 'tcx Expr < 'tcx >) { match expr . kind { hir :: ExprKind :: Assign (ref l , ..) => { this . check_place (l) ; } hir :: ExprKind :: AssignOp (_ , ref l , _) => { if ! this . typeck_results . is_method_call (expr) { this . check_place (l) ; } } hir :: ExprKind :: InlineAsm (asm) => { for (op , _op_sp) in asm . operands { match op { hir :: InlineAsmOperand :: Out { expr , .. } => { if let Some (expr) = expr { this . check_place (expr) ; } } hir :: InlineAsmOperand :: InOut { expr , .. } => { this . check_place (expr) ; } hir :: InlineAsmOperand :: SplitInOut { out_expr , .. } => { if let Some (out_expr) = out_expr { this . check_place (out_expr) ; } } _ => { } } } } hir :: ExprKind :: Let (let_expr) => { this . check_unused_vars_in_pat (let_expr . pat , None , None , | _ , _ , _ , _ | { }) ; } hir :: ExprKind :: Call (..) | hir :: ExprKind :: MethodCall (..) | hir :: ExprKind :: Use (..) | hir :: ExprKind :: Match (..) | hir :: ExprKind :: Loop (..) | hir :: ExprKind :: Index (..) | hir :: ExprKind :: Field (..) | hir :: ExprKind :: Array (..) | hir :: ExprKind :: Tup (..) | hir :: ExprKind :: Binary (..) | hir :: ExprKind :: Cast (..) | hir :: ExprKind :: If (..) | hir :: ExprKind :: DropTemps (..) | hir :: ExprKind :: Unary (..) | hir :: ExprKind :: Ret (..) | hir :: ExprKind :: Become (..) | hir :: ExprKind :: Break (..) | hir :: ExprKind :: Continue (..) | hir :: ExprKind :: Lit (_) | hir :: ExprKind :: ConstBlock (..) | hir :: ExprKind :: Block (..) | hir :: ExprKind :: AddrOf (..) | hir :: ExprKind :: OffsetOf (..) | hir :: ExprKind :: Struct (..) | hir :: ExprKind :: Repeat (..) | hir :: ExprKind :: Closure { .. } | hir :: ExprKind :: Path (_) | hir :: ExprKind :: Yield (..) | hir :: ExprKind :: Type (..) | hir :: ExprKind :: UnsafeBinderCast (..) | hir :: ExprKind :: Err (_) => { } } }
+    };
+}
+
+check_expr!()

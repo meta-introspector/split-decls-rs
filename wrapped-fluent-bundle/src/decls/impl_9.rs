@@ -2,15 +2,15 @@ macro_rules! deps {
     () => {
         FluentMessage!();
         NUMBER!();
+        FluentResource!();
+        Scope!();
         FluentArgs!();
+        MemoizerKind!();
+        FluentValue!();
+        Entry!();
         FluentError!();
         EntryKind!();
-        Scope!();
         FluentBundle!();
-        FluentResource!();
-        Entry!();
-        FluentValue!();
-        MemoizerKind!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

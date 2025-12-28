@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
         NaiveDate!();
         SecondsFormat!();
+        FixedOffset!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_rfc3339_opts {
     };
 }
 
-test_rfc3339_opts!()
+test_rfc3339_opts!();

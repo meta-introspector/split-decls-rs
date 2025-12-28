@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Ident!();
-        IdentIsRaw!();
+        SubtreeView!();
+        TokenTreesView!();
     };
 }
 
 macro_rules! impl_40 {
     () => {
         deps!();
-        impl < S > Ident < S > { pub fn new (text : & str , span : S) -> Self { let (is_raw , text) = IdentIsRaw :: split_from_symbol (text) ; Ident { sym : Symbol :: intern (text) , span , is_raw } } }
+        impl < S : Copy > fmt :: Display for SubtreeView < '_ , S > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt :: Display :: fmt (& TokenTreesView (self . 0) , f) } }
     };
 }
 

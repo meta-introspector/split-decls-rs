@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Result!();
+        Error!();
+        Function!();
+    };
+}
+
+macro_rules! throw {
+    () => {
+        deps!();
+        pub fn throw (args : & HashMap < String , Value >) -> Result < Value > { match args . get ("message") { Some (val) => match from_value :: < String > (val . clone ()) { Ok (v) => Err (Error :: msg (v)) , Err (_) => Err (Error :: msg (format ! ("Function `throw` received message={} but `message` can only be a string" , val))) , } , None => Err (Error :: msg ("Function `throw` was called without a `message` argument")) , } }
+    };
+}
+
+throw!()

@@ -4,4 +4,4 @@ macro_rules! subsection_subset {
     };
 }
 
-subsection_subset!()
+subsection_subset!();

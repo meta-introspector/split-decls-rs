@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DecodeSliceError!();
-        EngineWrapper!();
         DecodePaddingMode!();
+        EngineWrapper!();
+        DecodeSliceError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! decode_slice_checked_fails_gracefully_at_all_output_lengths {
     };
 }
 
-decode_slice_checked_fails_gracefully_at_all_output_lengths!()
+decode_slice_checked_fails_gracefully_at_all_output_lengths!();

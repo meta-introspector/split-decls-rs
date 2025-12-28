@@ -4,4 +4,4 @@ macro_rules! once_lock {
     };
 }
 
-once_lock!()
+once_lock!();

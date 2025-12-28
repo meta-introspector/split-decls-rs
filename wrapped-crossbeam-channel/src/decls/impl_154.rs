@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
         Channel!();
-        Selected!();
-        Inner!();
-        Timeout!();
         TrySendError!();
-        SendTimeoutError!();
-        Receiver!();
-        Operation!();
-        Sender!();
-        Packet!();
-        Context!();
         Token!();
-        Waker!();
+        SendTimeoutError!();
+        Inner!();
+        Receiver!();
+        Sender!();
+        Timeout!();
+        Context!();
+        Operation!();
+        Packet!();
+        Selected!();
         TryRecvError!();
+        Waker!();
         RecvTimeoutError!();
     };
 }
@@ -25,4 +25,4 @@ macro_rules! impl_154 {
     };
 }
 
-impl_154!()
+impl_154!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         RawEntryMut!();
-        HashMap!();
         RawTable!();
+        HashMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RawVacantEntryMut {
     };
 }
 
-RawVacantEntryMut!()
+RawVacantEntryMut!();

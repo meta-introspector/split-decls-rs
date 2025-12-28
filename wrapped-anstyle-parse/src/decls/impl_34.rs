@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Action!();
-        Perform!();
-        State!();
-        CharAccumulator!();
         Params!();
+        State!();
+        Perform!();
         Parser!();
+        CharAccumulator!();
+        Action!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

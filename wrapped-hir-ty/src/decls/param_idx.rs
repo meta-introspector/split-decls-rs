@@ -11,4 +11,4 @@ macro_rules! param_idx {
     };
 }
 
-param_idx!()
+param_idx!();

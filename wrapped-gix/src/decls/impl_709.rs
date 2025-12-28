@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Key!();
-        Section!();
         Protocol!();
+        Section!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_709 {
     };
 }
 
-impl_709!()
+impl_709!();

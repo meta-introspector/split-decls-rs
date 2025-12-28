@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Buf!();
+        Error!();
+        Tree!();
         Oid!();
+        Binding!();
+        Describe!();
+        Object!();
+        Buf!();
         ObjectType!();
         Tag!();
-        Commit!();
-        Tree!();
-        Blob!();
-        Error!();
-        Binding!();
-        Object!();
-        Describe!();
         DescribeOptions!();
+        Blob!();
+        Commit!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_478 {
     };
 }
 
-impl_478!()
+impl_478!();

@@ -4,4 +4,4 @@ macro_rules! NL {
     };
 }
 
-NL!()
+NL!();

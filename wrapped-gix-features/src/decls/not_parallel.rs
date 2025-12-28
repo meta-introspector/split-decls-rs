@@ -11,4 +11,4 @@ macro_rules! not_parallel {
     };
 }
 
-not_parallel!()
+not_parallel!();

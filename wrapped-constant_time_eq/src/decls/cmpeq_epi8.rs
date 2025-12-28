@@ -4,4 +4,4 @@ macro_rules! cmpeq_epi8 {
     };
 }
 
-cmpeq_epi8!()
+cmpeq_epi8!();

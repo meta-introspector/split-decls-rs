@@ -4,4 +4,4 @@ macro_rules! read_data {
     };
 }
 
-read_data!()
+read_data!();

@@ -14,4 +14,4 @@ macro_rules! foo {
     };
 }
 
-test_match_is_not_greedy!()
+test_match_is_not_greedy!();

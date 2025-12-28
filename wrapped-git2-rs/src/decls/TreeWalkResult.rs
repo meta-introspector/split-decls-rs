@@ -4,4 +4,4 @@ macro_rules! TreeWalkResult {
     };
 }
 
-TreeWalkResult!()
+TreeWalkResult!();

@@ -11,4 +11,4 @@ macro_rules! convert_progress {
     };
 }
 
-convert_progress!()
+convert_progress!();

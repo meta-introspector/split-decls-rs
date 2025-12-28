@@ -4,4 +4,4 @@ macro_rules! PersistedQuery {
     };
 }
 
-PersistedQuery!()
+PersistedQuery!();

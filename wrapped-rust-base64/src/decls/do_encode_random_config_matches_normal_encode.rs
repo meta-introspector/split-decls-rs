@@ -11,4 +11,4 @@ macro_rules! do_encode_random_config_matches_normal_encode {
     };
 }
 
-do_encode_random_config_matches_normal_encode!()
+do_encode_random_config_matches_normal_encode!();

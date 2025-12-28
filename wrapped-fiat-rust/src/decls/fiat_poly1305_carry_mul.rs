@@ -11,4 +11,4 @@ macro_rules! fiat_poly1305_carry_mul {
     };
 }
 
-fiat_poly1305_carry_mul!()
+fiat_poly1305_carry_mul!();

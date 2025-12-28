@@ -11,4 +11,4 @@ macro_rules! static_clone {
     };
 }
 
-static_clone!()
+static_clone!();

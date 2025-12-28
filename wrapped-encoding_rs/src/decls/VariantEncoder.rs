@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Gb18030Encoder!();
-        SingleByteEncoder!();
         ShiftJisEncoder!();
-        EucKrEncoder!();
-        UserDefinedEncoder!();
-        EucJpEncoder!();
-        Iso2022JpEncoder!();
         Utf8Encoder!();
+        Iso2022JpEncoder!();
+        EucKrEncoder!();
+        Gb18030Encoder!();
+        EucJpEncoder!();
+        UserDefinedEncoder!();
         Big5Encoder!();
+        SingleByteEncoder!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! VariantEncoder {
     };
 }
 
-VariantEncoder!()
+VariantEncoder!();

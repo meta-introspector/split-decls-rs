@@ -11,4 +11,4 @@ macro_rules! test_rkyv_validation {
     };
 }
 
-test_rkyv_validation!()
+test_rkyv_validation!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        Size!();
-        PointerSpec!();
         Integer!();
+        PointerSpec!();
+        Endian!();
         AbiAlign!();
+        Size!();
         AddressSpace!();
     };
 }

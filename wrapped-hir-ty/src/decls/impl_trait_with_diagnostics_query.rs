@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TyLoweringContext!();
-        HirDatabase!();
-        Diagnostics!();
-        LifetimeElisionKind!();
         EarlyBinder!();
+        Diagnostics!();
+        TyLoweringContext!();
+        LifetimeElisionKind!();
+        HirDatabase!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_trait_with_diagnostics_query {
     };
 }
 
-impl_trait_with_diagnostics_query!()
+impl_trait_with_diagnostics_query!();

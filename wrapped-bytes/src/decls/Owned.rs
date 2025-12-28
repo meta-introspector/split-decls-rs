@@ -4,4 +4,4 @@ macro_rules! Owned {
     };
 }
 
-Owned!()
+Owned!();

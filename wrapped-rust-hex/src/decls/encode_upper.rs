@@ -4,4 +4,4 @@ macro_rules! encode_upper {
     };
 }
 
-encode_upper!()
+encode_upper!();

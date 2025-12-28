@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Change!();
         Relation!();
+        Change!();
         ChangeKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! change_impls {
     };
 }
 
-change_impls!()
+change_impls!();

@@ -4,4 +4,4 @@ macro_rules! MAX_TITLE_LEN {
     };
 }
 
-MAX_TITLE_LEN!()
+MAX_TITLE_LEN!();

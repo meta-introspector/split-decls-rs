@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Formatter!();
         RecordFormat!();
         ConfigurableFormat!();
-        Formatter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_80 {
     };
 }
 
-impl_80!()
+impl_80!();

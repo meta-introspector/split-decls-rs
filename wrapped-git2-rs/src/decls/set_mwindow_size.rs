@@ -11,4 +11,4 @@ macro_rules! set_mwindow_size {
     };
 }
 
-set_mwindow_size!()
+set_mwindow_size!();

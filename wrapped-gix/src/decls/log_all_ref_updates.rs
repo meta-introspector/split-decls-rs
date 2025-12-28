@@ -12,4 +12,4 @@ macro_rules! log_all_ref_updates {
     };
 }
 
-log_all_ref_updates!()
+log_all_ref_updates!();

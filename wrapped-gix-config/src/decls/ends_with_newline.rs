@@ -11,4 +11,4 @@ macro_rules! ends_with_newline {
     };
 }
 
-ends_with_newline!()
+ends_with_newline!();

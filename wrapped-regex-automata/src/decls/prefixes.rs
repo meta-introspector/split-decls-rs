@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        MatchKind!();
+    };
+}
+
+macro_rules! prefixes {
+    () => {
+        deps!();
+        # [doc = " Extracts all of the prefix literals from the given HIR expressions into a"] # [doc = " single `Seq`. The literals in the sequence are ordered with respect to the"] # [doc = " order of the given HIR expressions and consistent with the match semantics"] # [doc = " given."] # [doc = ""] # [doc = " The sequence returned is \"optimized.\" That is, they may be shrunk or even"] # [doc = " truncated according to heuristics with the intent of making them more"] # [doc = " useful as a prefilter. (Which translates to both using faster algorithms"] # [doc = " and minimizing the false positive rate.)"] # [doc = ""] # [doc = " Note that this erases any connection between the literals and which pattern"] # [doc = " (or patterns) they came from."] # [doc = ""] # [doc = " The match kind given must correspond to the match semantics of the regex"] # [doc = " that is represented by the HIRs given. The match semantics may change the"] # [doc = " literal sequence returned."] # [cfg (feature = "syntax")] pub (crate) fn prefixes < H > (kind : MatchKind , hirs : & [H]) -> literal :: Seq where H : core :: borrow :: Borrow < Hir > , { let mut extractor = literal :: Extractor :: new () ; extractor . kind (literal :: ExtractKind :: Prefix) ; let mut prefixes = literal :: Seq :: empty () ; for hir in hirs { prefixes . union (& mut extractor . extract (hir . borrow ())) ; } debug ! ("prefixes (len={:?}, exact={:?}) extracted before optimization: {:?}" , prefixes . len () , prefixes . is_exact () , prefixes) ; match kind { MatchKind :: All => { prefixes . sort () ; prefixes . dedup () ; } MatchKind :: LeftmostFirst => { prefixes . optimize_for_prefix_by_preference () ; } } debug ! ("prefixes (len={:?}, exact={:?}) extracted after optimization: {:?}" , prefixes . len () , prefixes . is_exact () , prefixes) ; prefixes }
+    };
+}
+
+prefixes!()

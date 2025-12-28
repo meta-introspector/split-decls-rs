@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         SymlinkBuilder!();
         Project!();
-        FileBuilder!();
         ProjectBuilder!();
+        FileBuilder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

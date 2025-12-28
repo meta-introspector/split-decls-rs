@@ -1,0 +1,7 @@
+macro_rules! macro_25 {
+    () => {
+        declare_lint ! { # [doc = " The `unused_macros` lint detects macros that were not used."] # [doc = ""] # [doc = " Note that this lint is distinct from the `unused_macro_rules` lint,"] # [doc = " which checks for single rules that never match of an otherwise used"] # [doc = " macro, and thus never expand."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " macro_rules! unused {"] # [doc = "     () => {};"] # [doc = " }"] # [doc = ""] # [doc = " fn main() {"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Unused macros may signal a mistake or unfinished code. To silence the"] # [doc = " warning for the individual macro, prefix the name with an underscore"] # [doc = " such as `_my_macro`. If you intended to export the macro to make it"] # [doc = " available outside of the crate, use the [`macro_export` attribute]."] # [doc = ""] # [doc = " [`macro_export` attribute]: https://doc.rust-lang.org/reference/macros-by-example.html#path-based-scope"] pub UNUSED_MACROS , Warn , "detects macros that were not used" }
+    };
+}
+
+macro_25!()

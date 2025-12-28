@@ -11,4 +11,4 @@ macro_rules! fiat_secp256k1_montgomery_nonzero {
     };
 }
 
-fiat_secp256k1_montgomery_nonzero!()
+fiat_secp256k1_montgomery_nonzero!();

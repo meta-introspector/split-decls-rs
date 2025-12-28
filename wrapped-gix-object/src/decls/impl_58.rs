@@ -3,10 +3,10 @@ macro_rules! deps {
         Commit!();
         Error!();
         Object!();
+        ObjectRef!();
         Tree!();
         Blob!();
         Tag!();
-        ObjectRef!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Attributes!();
         Error!();
+        Attributes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! checkout_options {
     };
 }
 
-checkout_options!()
+checkout_options!();

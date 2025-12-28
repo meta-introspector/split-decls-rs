@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Hash!();
-        PublicKey!();
-        GeP2!();
-        GeP3!();
-        Signature!();
         VerifyingState!();
         Error!();
+        GeP3!();
+        Signature!();
+        PublicKey!();
+        GeP2!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

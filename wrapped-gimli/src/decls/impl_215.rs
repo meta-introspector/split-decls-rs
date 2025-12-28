@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         UnwindContextStorage!();
         ReaderOffset!();
+        Result!();
         UnwindContext!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_215 {
     };
 }
 
-impl_215!()
+impl_215!();

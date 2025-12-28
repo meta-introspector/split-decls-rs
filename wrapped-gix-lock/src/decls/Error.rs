@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Fail!();
         Marker!();
         File!();
+        Fail!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Error {
     };
 }
 
-Error!()
+Error!();

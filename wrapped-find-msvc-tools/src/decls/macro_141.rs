@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ULONG!();
         HRESULT!();
+        ULONG!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_141 {
     };
 }
 
-macro_141!()
+macro_141!();

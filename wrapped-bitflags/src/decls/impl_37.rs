@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Flags!();
         IterNames!();
-        BitFlags!();
         Iter!();
+        Flags!();
+        BitFlags!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

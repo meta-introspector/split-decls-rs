@@ -4,4 +4,4 @@ macro_rules! Adhoc {
     };
 }
 
-Adhoc!()
+Adhoc!();

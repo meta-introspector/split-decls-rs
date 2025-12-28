@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Note!();
         TagOpt!();
+        Note!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tag_opts {
     };
 }
 
-tag_opts!()
+tag_opts!();

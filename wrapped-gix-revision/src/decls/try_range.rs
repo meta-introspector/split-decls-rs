@@ -11,4 +11,4 @@ macro_rules! try_range {
     };
 }
 
-try_range!()
+try_range!();

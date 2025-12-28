@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HANDLE!();
         ADDRESS64!();
+        HANDLE!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PTRANSLATE_ADDRESS_ROUTINE64 {
     };
 }
 
-PTRANSLATE_ADDRESS_ROUTINE64!()
+PTRANSLATE_ADDRESS_ROUTINE64!();

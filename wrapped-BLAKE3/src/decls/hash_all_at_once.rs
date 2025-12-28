@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Join!();
-        Output!();
         Platform!();
-        ChunkState!();
         CVWords!();
+        ChunkState!();
+        Output!();
+        Join!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! hash_all_at_once {
     };
 }
 
-hash_all_at_once!()
+hash_all_at_once!();

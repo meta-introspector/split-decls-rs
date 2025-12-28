@@ -4,4 +4,4 @@ macro_rules! Lock {
     };
 }
 
-Lock!()
+Lock!();

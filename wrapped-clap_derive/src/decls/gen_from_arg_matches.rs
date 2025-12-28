@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Item!();
+        Kind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! gen_from_arg_matches {
     };
 }
 
-gen_from_arg_matches!()
+gen_from_arg_matches!();

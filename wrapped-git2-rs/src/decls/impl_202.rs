@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Oid!();
         BlameHunk!();
         Signature!();
-        Oid!();
         Note!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_202 {
     };
 }
 
-impl_202!()
+impl_202!();

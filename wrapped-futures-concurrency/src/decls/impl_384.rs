@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WaitUntil!();
         State!();
+        WaitUntil!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_384 {
     };
 }
 
-impl_384!()
+impl_384!();

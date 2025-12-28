@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Connection!();
         Action!();
+        Connection!();
         Any!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_936 {
     };
 }
 
-impl_936!()
+impl_936!();

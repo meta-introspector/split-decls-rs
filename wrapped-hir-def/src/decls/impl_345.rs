@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HasResolver!();
         Resolver!();
         DefDatabase!();
+        HasResolver!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_345 {
     };
 }
 
-impl_345!()
+impl_345!();

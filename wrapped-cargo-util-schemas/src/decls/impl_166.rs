@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         InheritableLints!();
-        UnresolvedError!();
+        Result!();
         TomlLints!();
+        UnresolvedError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

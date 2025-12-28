@@ -4,4 +4,4 @@ macro_rules! DOT_GIT_DIR {
     };
 }
 
-DOT_GIT_DIR!()
+DOT_GIT_DIR!();

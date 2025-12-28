@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         ReaderAddress!();
         Error!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_322 {
     };
 }
 
-impl_322!()
+impl_322!();

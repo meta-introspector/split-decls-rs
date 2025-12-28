@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Any!();
-        Change!();
+        Object!();
         Error!();
         Repository!();
-        Object!();
+        Change!();
+        Any!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! update_head {
     };
 }
 
-update_head!()
+update_head!();

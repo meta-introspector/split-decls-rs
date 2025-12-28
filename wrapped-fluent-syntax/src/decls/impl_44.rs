@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Resource!();
-        Result!();
-        Parser!();
-        Message!();
-        Term!();
         Entry!();
+        Parser!();
         Slice!();
+        Term!();
+        Result!();
+        Resource!();
+        Message!();
         ParserError!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

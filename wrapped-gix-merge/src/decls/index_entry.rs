@@ -11,4 +11,4 @@ macro_rules! index_entry {
     };
 }
 
-index_entry!()
+index_entry!();

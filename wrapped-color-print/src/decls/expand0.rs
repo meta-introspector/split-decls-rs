@@ -4,4 +4,4 @@ macro_rules! expand0 {
     };
 }
 
-expand0!()
+expand0!();

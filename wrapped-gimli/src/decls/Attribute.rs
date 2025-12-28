@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebuggingInformationEntry!();
         AttributeValue!();
+        DebuggingInformationEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Attribute {
     };
 }
 
-Attribute!()
+Attribute!();

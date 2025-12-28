@@ -4,4 +4,4 @@ macro_rules! windows_console {
     };
 }
 
-windows_console!()
+windows_console!();

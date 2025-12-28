@@ -4,4 +4,4 @@ macro_rules! test_compare_exchange_ordering {
     };
 }
 
-test_compare_exchange_ordering!()
+test_compare_exchange_ordering!();

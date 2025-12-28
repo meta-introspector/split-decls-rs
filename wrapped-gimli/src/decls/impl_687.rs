@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endianity!();
         EndianVec!();
+        Endianity!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_687 {
     };
 }
 
-impl_687!()
+impl_687!();

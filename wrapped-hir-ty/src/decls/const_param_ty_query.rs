@@ -11,4 +11,4 @@ macro_rules! const_param_ty_query {
     };
 }
 
-const_param_ty_query!()
+const_param_ty_query!();

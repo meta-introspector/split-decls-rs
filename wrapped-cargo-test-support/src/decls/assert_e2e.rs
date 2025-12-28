@@ -4,4 +4,4 @@ macro_rules! assert_e2e {
     };
 }
 
-assert_e2e!()
+assert_e2e!();

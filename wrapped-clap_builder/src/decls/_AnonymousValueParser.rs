@@ -11,4 +11,4 @@ macro_rules! _AnonymousValueParser {
     };
 }
 
-_AnonymousValueParser!()
+_AnonymousValueParser!();

@@ -4,4 +4,4 @@ macro_rules! loadu {
     };
 }
 
-loadu!()
+loadu!();

@@ -11,4 +11,4 @@ macro_rules! shorten_path_with_cwd {
     };
 }
 
-shorten_path_with_cwd!()
+shorten_path_with_cwd!();

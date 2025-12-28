@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EntryRange!();
         File!();
         Offset!();
-        Kind!();
+        EntryRange!();
         Version!();
+        Kind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_192 {
     };
 }
 
-impl_192!()
+impl_192!();

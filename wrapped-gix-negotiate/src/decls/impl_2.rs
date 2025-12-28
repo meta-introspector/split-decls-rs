@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ancestors!();
         Algorithm!();
         Error!();
-        Ancestors!();
         Mark!();
         Graph!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

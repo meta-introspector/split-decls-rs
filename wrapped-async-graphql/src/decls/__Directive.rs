@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Directive!();
         Registry!();
         MetaDirective!();
+        Directive!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! __Directive {
     };
 }
 
-__Directive!()
+__Directive!();

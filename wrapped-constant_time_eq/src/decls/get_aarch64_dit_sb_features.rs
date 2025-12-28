@@ -11,4 +11,4 @@ macro_rules! get_aarch64_dit_sb_features {
     };
 }
 
-get_aarch64_dit_sb_features!()
+get_aarch64_dit_sb_features!();

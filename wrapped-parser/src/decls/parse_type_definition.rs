@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        UnionType!();
-        Result!();
-        TypeKind!();
-        Rule!();
-        InterfaceType!();
-        EnumType!();
-        PositionCalculator!();
-        TypeDefinition!();
         Positioned!();
         EnumValueDefinition!();
-        ObjectType!();
+        Result!();
+        TypeDefinition!();
+        Rule!();
         InputObjectType!();
+        InterfaceType!();
+        PositionCalculator!();
+        TypeKind!();
+        EnumType!();
+        UnionType!();
+        ObjectType!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! parse_type_definition {
     };
 }
 
-parse_type_definition!()
+parse_type_definition!();

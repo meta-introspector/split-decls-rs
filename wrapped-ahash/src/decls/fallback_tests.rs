@@ -11,4 +11,4 @@ macro_rules! fallback_tests {
     };
 }
 
-fallback_tests!()
+fallback_tests!();

@@ -4,4 +4,4 @@ macro_rules! value_unexpected {
     };
 }
 
-value_unexpected!()
+value_unexpected!();

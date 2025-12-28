@@ -4,4 +4,4 @@ macro_rules! MAX_DIRECTORY_NAME_LEN {
     };
 }
 
-MAX_DIRECTORY_NAME_LEN!()
+MAX_DIRECTORY_NAME_LEN!();

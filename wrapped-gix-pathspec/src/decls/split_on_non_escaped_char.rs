@@ -11,4 +11,4 @@ macro_rules! split_on_non_escaped_char {
     };
 }
 
-split_on_non_escaped_char!()
+split_on_non_escaped_char!();

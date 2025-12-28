@@ -1,6 +1,6 @@
 macro_rules! macros {
     () => {
-        # [macro_use] mod macros ;
+        mod macros ;
     };
 }
 

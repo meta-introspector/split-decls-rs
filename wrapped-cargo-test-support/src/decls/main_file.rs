@@ -4,4 +4,4 @@ macro_rules! main_file {
     };
 }
 
-main_file!()
+main_file!();

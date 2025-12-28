@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IndexThreads!();
-        Index!();
         Boolean!();
+        Index!();
         Tree!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_673 {
     };
 }
 
-impl_673!()
+impl_673!();

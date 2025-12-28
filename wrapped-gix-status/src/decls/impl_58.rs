@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SymlinkCheck!();
-        Error!();
         Delegate!();
+        Error!();
+        SymlinkCheck!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

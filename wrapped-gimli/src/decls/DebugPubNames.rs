@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Reader!();
-        DebugLookup!();
         PubNamesEntry!();
+        Reader!();
         PubStuffParser!();
+        DebugLookup!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DebugPubNames {
     };
 }
 
-DebugPubNames!()
+DebugPubNames!();

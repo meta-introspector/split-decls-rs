@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Context!();
+        Options!();
         Kind!();
         Outcome!();
-        Options!();
+        Context!();
         Error!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! root {
     };
 }
 
-root!()
+root!();

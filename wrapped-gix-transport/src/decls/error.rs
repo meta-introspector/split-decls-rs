@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Http!();
         Error!();
         Capabilities!();
-        Http!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! error {
     };
 }
 
-error!()
+error!();

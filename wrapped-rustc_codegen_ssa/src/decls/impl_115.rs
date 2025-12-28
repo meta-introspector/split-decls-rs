@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Ld64UnimplementedModifier!();
+        GccLinker!();
+        LinkerUnsupportedModifier!();
+    };
+}
+
+macro_rules! impl_115 {
+    () => {
+        deps!();
+        impl < 'a > GccLinker < 'a > { fn takes_hints (& self) -> bool { ! self . sess . target . is_like_darwin && ! self . sess . target . is_like_wasm } fn hint_static (& mut self) { if ! self . takes_hints () { return ; } if self . hinted_static != Some (true) { self . link_arg ("-Bstatic") ; self . hinted_static = Some (true) ; } } fn hint_dynamic (& mut self) { if ! self . takes_hints () { return ; } if self . hinted_static != Some (false) { self . link_arg ("-Bdynamic") ; self . hinted_static = Some (false) ; } } fn push_linker_plugin_lto_args (& mut self , plugin_path : Option < & OsStr >) { if let Some (plugin_path) = plugin_path { let mut arg = OsString :: from ("-plugin=") ; arg . push (plugin_path) ; self . link_arg (& arg) ; } let opt_level = match self . sess . opts . optimize { config :: OptLevel :: No => "O0" , config :: OptLevel :: Less => "O1" , config :: OptLevel :: More | config :: OptLevel :: Size | config :: OptLevel :: SizeMin => "O2" , config :: OptLevel :: Aggressive => "O3" , } ; if let Some (path) = & self . sess . opts . unstable_opts . profile_sample_use { self . link_arg (& format ! ("-plugin-opt=sample-profile={}" , path . display ())) ; } ; self . link_args (& [& format ! ("-plugin-opt={opt_level}") , & format ! ("-plugin-opt=mcpu={}" , self . target_cpu) ,]) ; } fn build_dylib (& mut self , crate_type : CrateType , out_filename : & Path) { if self . sess . target . is_like_darwin { if self . is_cc () { self . cc_arg ("-dynamiclib") ; } else { self . link_arg ("-dylib") ; } if self . sess . opts . cg . rpath || self . sess . opts . unstable_opts . osx_rpath_install_name { let mut rpath = OsString :: from ("@rpath/") ; rpath . push (out_filename . file_name () . unwrap ()) ; self . link_arg ("-install_name") . link_arg (rpath) ; } } else { self . link_or_cc_arg ("-shared") ; if let Some (name) = out_filename . file_name () { if self . sess . target . is_like_windows { let (prefix , suffix) = self . sess . staticlib_components (false) ; let mut implib_name = OsString :: from (prefix) ; implib_name . push (name) ; implib_name . push (suffix) ; let mut out_implib = OsString :: from ("--out-implib=") ; out_implib . push (out_filename . with_file_name (implib_name)) ; self . link_arg (out_implib) ; } else if crate_type == CrateType :: Dylib { let mut soname = OsString :: from ("-soname=") ; soname . push (name) ; self . link_arg (soname) ; } } } } fn with_as_needed (& mut self , as_needed : bool , f : impl FnOnce (& mut Self)) { if ! as_needed { if self . sess . target . is_like_darwin { self . sess . dcx () . emit_warn (errors :: Ld64UnimplementedModifier) ; } else if self . is_gnu && ! self . sess . target . is_like_windows { self . link_arg ("--no-as-needed") ; } else { self . sess . dcx () . emit_warn (errors :: LinkerUnsupportedModifier) ; } } f (self) ; if ! as_needed { if self . sess . target . is_like_darwin { } else if self . is_gnu && ! self . sess . target . is_like_windows { self . link_arg ("--as-needed") ; } } } }
+    };
+}
+
+impl_115!()

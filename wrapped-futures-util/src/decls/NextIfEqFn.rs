@@ -4,4 +4,4 @@ macro_rules! NextIfEqFn {
     };
 }
 
-NextIfEqFn!()
+NextIfEqFn!();

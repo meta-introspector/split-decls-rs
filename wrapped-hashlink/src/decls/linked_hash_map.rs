@@ -4,4 +4,4 @@ macro_rules! linked_hash_map {
     };
 }
 
-linked_hash_map!()
+linked_hash_map!();

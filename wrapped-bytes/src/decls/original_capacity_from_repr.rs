@@ -4,4 +4,4 @@ macro_rules! original_capacity_from_repr {
     };
 }
 
-original_capacity_from_repr!()
+original_capacity_from_repr!();

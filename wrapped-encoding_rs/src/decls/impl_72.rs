@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         VariantDecoder!();
+        EucJpPending!();
         DecoderResult!();
         EucJpDecoder!();
-        EucJpPending!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_72 {
     };
 }
 
-impl_72!()
+impl_72!();

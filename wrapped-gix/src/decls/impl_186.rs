@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Item!();
-        Error!();
+        Path!();
         Entry!();
+        EntryRef!();
         Note!();
         Tree!();
         Id!();
-        EntryRef!();
-        Path!();
+        Error!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SectionId!();
         Section!();
+        SectionId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RelocationTarget {
     };
 }
 
-RelocationTarget!()
+RelocationTarget!();

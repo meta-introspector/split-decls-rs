@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Debt!();
-        HybridProtection!();
-        RefCnt!();
         LocalNode!();
+        HybridProtection!();
+        Debt!();
+        RefCnt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

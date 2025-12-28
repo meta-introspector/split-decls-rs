@@ -4,4 +4,4 @@ macro_rules! min_by_key {
     };
 }
 
-min_by_key!()
+min_by_key!();

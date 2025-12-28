@@ -4,4 +4,4 @@ macro_rules! blame {
     };
 }
 
-blame!()
+blame!();

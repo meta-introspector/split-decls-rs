@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Decode!();
         DecodeError!();
+        Decode!();
         AllowedEnumVariants!();
         Decoder!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_375 {
     };
 }
 
-impl_375!()
+impl_375!();

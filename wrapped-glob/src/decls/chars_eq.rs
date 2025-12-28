@@ -4,4 +4,4 @@ macro_rules! chars_eq {
     };
 }
 
-chars_eq!()
+chars_eq!();

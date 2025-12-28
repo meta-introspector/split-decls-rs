@@ -4,4 +4,4 @@ macro_rules! golden {
     };
 }
 
-golden!()
+golden!();

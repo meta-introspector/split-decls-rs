@@ -4,4 +4,4 @@ macro_rules! freelist {
     };
 }
 
-freelist!()
+freelist!();

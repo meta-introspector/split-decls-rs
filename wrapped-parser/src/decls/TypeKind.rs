@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        InputObjectType!();
-        UnionType!();
-        ObjectType!();
         EnumType!();
         InterfaceType!();
+        ObjectType!();
+        InputObjectType!();
+        UnionType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! TypeKind {
     };
 }
 
-TypeKind!()
+TypeKind!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        GenericDef!();
         LifetimeParam!();
         Module!();
-        GenericDef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_371 {
     };
 }
 
-impl_371!()
+impl_371!();

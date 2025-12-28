@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Bom!();
+    };
+}
+
+macro_rules! impl_16 {
+    () => {
+        deps!();
+        impl Display for Bom { # [doc = " Formats the BOM type as a `String`."] fn fmt (& self , formatter : & mut Formatter) -> fmt :: Result { write ! (formatter , "{}" , AsRef ::< str >:: as_ref (self)) } }
+    };
+}
+
+impl_16!()

@@ -4,4 +4,4 @@ macro_rules! page_info {
     };
 }
 
-page_info!()
+page_info!();

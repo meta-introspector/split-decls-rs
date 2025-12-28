@@ -4,4 +4,4 @@ macro_rules! prepare_merge {
     };
 }
 
-prepare_merge!()
+prepare_merge!();

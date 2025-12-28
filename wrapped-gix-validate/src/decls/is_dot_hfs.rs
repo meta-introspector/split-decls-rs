@@ -4,4 +4,4 @@ macro_rules! is_dot_hfs {
     };
 }
 
-is_dot_hfs!()
+is_dot_hfs!();

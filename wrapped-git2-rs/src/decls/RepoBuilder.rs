@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Error!();
+        FetchOptions!();
+        RemoteCallbacks!();
         RemoteCreate!();
         CheckoutBuilder!();
-        RemoteCallbacks!();
-        FetchOptions!();
         CloneLocal!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! RepoBuilder {
     };
 }
 
-RepoBuilder!()
+RepoBuilder!();

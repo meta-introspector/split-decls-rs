@@ -4,4 +4,4 @@ macro_rules! BIG5_LOW_BITS {
     };
 }
 
-BIG5_LOW_BITS!()
+BIG5_LOW_BITS!();

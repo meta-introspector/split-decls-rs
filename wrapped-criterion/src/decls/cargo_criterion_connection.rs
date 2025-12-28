@@ -11,4 +11,4 @@ macro_rules! cargo_criterion_connection {
     };
 }
 
-cargo_criterion_connection!()
+cargo_criterion_connection!();

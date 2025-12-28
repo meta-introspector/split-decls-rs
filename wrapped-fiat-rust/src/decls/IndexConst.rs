@@ -4,4 +4,4 @@ macro_rules! IndexConst {
     };
 }
 
-IndexConst!()
+IndexConst!();

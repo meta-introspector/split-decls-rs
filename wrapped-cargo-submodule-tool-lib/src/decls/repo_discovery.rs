@@ -4,4 +4,4 @@ macro_rules! repo_discovery {
     };
 }
 
-repo_discovery!()
+repo_discovery!();

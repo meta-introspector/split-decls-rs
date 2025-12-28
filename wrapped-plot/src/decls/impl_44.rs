@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Properties!();
         Set!();
         LineType!();
-        Properties!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

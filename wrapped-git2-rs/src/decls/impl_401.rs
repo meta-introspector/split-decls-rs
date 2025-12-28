@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ProgressState!();
         Convert!();
         Progress!();
+        ProgressState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_401 {
     };
 }
 
-impl_401!()
+impl_401!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ShortRead!();
         DecoderReader!();
+        ShortRead!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! internal_padding_anywhere_error {
     };
 }
 
-internal_padding_anywhere_error!()
+internal_padding_anywhere_error!();

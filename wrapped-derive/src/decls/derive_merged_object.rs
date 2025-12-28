@@ -11,4 +11,4 @@ macro_rules! derive_merged_object {
     };
 }
 
-derive_merged_object!()
+derive_merged_object!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Directive!();
         Filter!();
+        Directive!();
         FilterOp!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Builder {
     };
 }
 
-Builder!()
+Builder!();

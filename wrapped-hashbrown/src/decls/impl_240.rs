@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        VacantEntry!();
-        OccupiedError!();
-        Entry!();
         Bucket!();
-        VacantEntryRef!();
-        TryReserveError!();
-        EntryRef!();
-        OccupiedEntry!();
-        Equivalent!();
+        OccupiedError!();
         HashMap!();
+        Entry!();
+        EntryRef!();
+        Equivalent!();
+        VacantEntry!();
+        OccupiedEntry!();
+        TryReserveError!();
+        VacantEntryRef!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_240 {
     };
 }
 
-impl_240!()
+impl_240!();

@@ -4,4 +4,4 @@ macro_rules! Bandwidth {
     };
 }
 
-Bandwidth!()
+Bandwidth!();

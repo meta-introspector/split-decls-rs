@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         ObjectId!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode {
     };
 }
 
-decode!()
+decode!();

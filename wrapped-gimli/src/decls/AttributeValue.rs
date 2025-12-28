@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        UnitRef!();
+        Expression!();
+        Endianity!();
+        DebugTypeSignature!();
         Section!();
         Address!();
-        DebugInfoRef!();
-        Endianity!();
-        DebugMacroOffset!();
-        DebugTypeSignature!();
-        DebugStrOffset!();
         DebugInfoOffset!();
-        Encoding!();
-        DebugMacinfoOffset!();
-        Expression!();
+        DebugStrOffset!();
         DebuggingInformationEntry!();
+        DebugInfoRef!();
+        DebugMacinfoOffset!();
+        DebugMacroOffset!();
+        Encoding!();
+        UnitRef!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! AttributeValue {
     };
 }
 
-AttributeValue!()
+AttributeValue!();

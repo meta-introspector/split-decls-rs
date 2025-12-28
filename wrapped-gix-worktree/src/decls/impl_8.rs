@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         Statistics!();
+        State!();
         Stack!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

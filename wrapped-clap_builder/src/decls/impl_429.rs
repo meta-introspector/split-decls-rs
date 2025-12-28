@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        ValueSource!();
-        ArgMatches!();
-        Id!();
-        ArgMatcher!();
-        AnyValue!();
-        Arg!();
-        Entry!();
-        Command!();
-        ArgPredicate!();
-        MatchedArg!();
-        Identifier!();
-        Iter!();
         SubCommand!();
+        ValueSource!();
+        Identifier!();
+        AnyValue!();
+        Entry!();
+        MatchedArg!();
         PendingArg!();
+        Command!();
+        ArgMatches!();
+        Arg!();
         FlatMap!();
+        Iter!();
+        Id!();
+        ArgPredicate!();
+        ArgMatcher!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_429 {
     };
 }
 
-impl_429!()
+impl_429!();

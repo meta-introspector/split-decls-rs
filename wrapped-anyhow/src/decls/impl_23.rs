@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        StdError!();
         Context!();
-        Ok!();
-        Error!();
+        StdError!();
         Result!();
+        Error!();
+        Ok!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

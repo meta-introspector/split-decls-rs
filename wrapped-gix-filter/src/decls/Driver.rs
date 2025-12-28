@@ -4,4 +4,4 @@ macro_rules! Driver {
     };
 }
 
-Driver!()
+Driver!();

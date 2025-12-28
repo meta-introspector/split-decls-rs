@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Reader!();
+        AttributeSpecification!();
         Result!();
         Error!();
-        AttributeSpecification!();
         UnitHeader!();
+        Reader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_355 {
     };
 }
 
-impl_355!()
+impl_355!();

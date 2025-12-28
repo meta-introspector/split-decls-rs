@@ -4,4 +4,4 @@ macro_rules! undo {
     };
 }
 
-undo!()
+undo!();

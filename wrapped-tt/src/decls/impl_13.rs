@@ -1,16 +1,17 @@
 macro_rules! deps {
     () => {
-        Literal!();
-        Ident!();
+        TtIter!();
+        TtElement!();
         Leaf!();
-        Punct!();
+        TokenTree!();
+        Subtree!();
     };
 }
 
 macro_rules! impl_13 {
     () => {
         deps!();
-        impl < S > Leaf < S > { pub fn span (& self) -> & S { match self { Leaf :: Literal (it) => & it . span , Leaf :: Punct (it) => & it . span , Leaf :: Ident (it) => & it . span , } } }
+        impl < 'a , S > Iterator for TtIter < 'a , S > { type Item = TtElement < 'a , S > ; fn next (& mut self) -> Option < Self :: Item > { match self . inner . next () ? { TokenTree :: Leaf (leaf) => Some (TtElement :: Leaf (leaf)) , TokenTree :: Subtree (subtree) => { let nested_iter = TtIter { inner : self . inner . as_slice () [.. subtree . usize_len ()] . iter () } ; self . inner = self . inner . as_slice () [subtree . usize_len () ..] . iter () ; Some (TtElement :: Subtree (subtree , nested_iter)) } } } }
     };
 }
 

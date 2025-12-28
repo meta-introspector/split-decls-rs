@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Enumerate!();
-        Take!();
-        FromConcurrentStream!();
-        Consumer!();
-        Limit!();
         Map!();
-        ForEachConsumer!();
+        Consumer!();
         TryForEachConsumer!();
+        Take!();
+        ForEachConsumer!();
+        FromConcurrentStream!();
+        Limit!();
+        Enumerate!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! ConcurrentStream {
     };
 }
 
-ConcurrentStream!()
+ConcurrentStream!();

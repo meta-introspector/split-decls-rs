@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Closed!();
-        ContainingDirectory!();
-        AutoRemove!();
-        Mode!();
         ForksafeTempfile!();
+        Closed!();
+        AutoRemove!();
+        ContainingDirectory!();
+        Mode!();
         Handle!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

@@ -11,4 +11,4 @@ macro_rules! fiat_p434_from_bytes {
     };
 }
 
-fiat_p434_from_bytes!()
+fiat_p434_from_bytes!();

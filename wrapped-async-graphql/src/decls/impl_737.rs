@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Connection!();
         ConnectionNameType!();
-        OutputType!();
         DefaultConnectionName!();
+        OutputType!();
+        Connection!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_737 {
     };
 }
 
-impl_737!()
+impl_737!();

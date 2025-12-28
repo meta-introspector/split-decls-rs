@@ -1,0 +1,7 @@
+macro_rules! DEFLATE_BLOCK_OVERHEAD {
+    () => {
+        const DEFLATE_BLOCK_OVERHEAD : usize = (DEFLATE_HEADER_BITS + DEFLATE_EOBS_BITS + DEFLATE_PAD_BITS) >> 3 ;
+    };
+}
+
+DEFLATE_BLOCK_OVERHEAD!()

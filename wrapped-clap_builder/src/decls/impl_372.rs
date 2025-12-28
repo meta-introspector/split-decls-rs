@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Usage!();
-        Error!();
         Styles!();
+        Error!();
+        Usage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_372 {
     };
 }
 
-impl_372!()
+impl_372!();

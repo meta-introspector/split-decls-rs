@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FutureIncompatibleInfo!();
+        FutureIncompatibilityReason!();
+    };
+}
+
+macro_rules! macro_77 {
+    () => {
+        deps!();
+        declare_lint ! { # [doc = " The `legacy_derive_helpers` lint detects derive helper attributes"] # [doc = " that are used before they are introduced."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,ignore (needs extern crate)"] # [doc = " #[serde(rename_all = \"camelCase\")]"] # [doc = " #[derive(Deserialize)]"] # [doc = " struct S { /* fields */ }"] # [doc = " ```"] # [doc = ""] # [doc = " produces:"] # [doc = ""] # [doc = " ```text"] # [doc = " warning: derive helper attribute is used before it is introduced"] # [doc = "   --> $DIR/legacy-derive-helpers.rs:1:3"] # [doc = "    |"] # [doc = "  1 | #[serde(rename_all = \"camelCase\")]"] # [doc = "    |   ^^^^^"] # [doc = " ..."] # [doc = "  2 | #[derive(Deserialize)]"] # [doc = "    |          ----------- the attribute is introduced here"] # [doc = " ```"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Attributes like this work for historical reasons, but attribute expansion works in"] # [doc = " left-to-right order in general, so, to resolve `#[serde]`, compiler has to try to \"look"] # [doc = " into the future\" at not yet expanded part of the item , but such attempts are not always"] # [doc = " reliable."] # [doc = ""] # [doc = " To fix the warning place the helper attribute after its corresponding derive."] # [doc = " ```rust,ignore (needs extern crate)"] # [doc = " #[derive(Deserialize)]"] # [doc = " #[serde(rename_all = \"camelCase\")]"] # [doc = " struct S { /* fields */ }"] # [doc = " ```"] pub LEGACY_DERIVE_HELPERS , Deny , "detects derive helper attributes that are used before they are introduced" , @ future_incompatible = FutureIncompatibleInfo { reason : FutureIncompatibilityReason :: FutureReleaseError , reference : "issue #79202 <https://github.com/rust-lang/rust/issues/79202>" , report_in_deps : true , } ; }
+    };
+}
+
+macro_77!()

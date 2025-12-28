@@ -11,4 +11,4 @@ macro_rules! BASE_PARAMETER {
     };
 }
 
-BASE_PARAMETER!()
+BASE_PARAMETER!();

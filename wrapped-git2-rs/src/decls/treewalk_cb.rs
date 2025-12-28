@@ -11,4 +11,4 @@ macro_rules! treewalk_cb {
     };
 }
 
-treewalk_cb!()
+treewalk_cb!();

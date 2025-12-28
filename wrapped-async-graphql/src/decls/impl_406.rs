@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Object!();
-        Field!();
         BaseContainer!();
+        Field!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_406 {
     };
 }
 
-impl_406!()
+impl_406!();

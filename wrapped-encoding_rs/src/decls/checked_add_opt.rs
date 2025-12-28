@@ -4,4 +4,4 @@ macro_rules! checked_add_opt {
     };
 }
 
-checked_add_opt!()
+checked_add_opt!();

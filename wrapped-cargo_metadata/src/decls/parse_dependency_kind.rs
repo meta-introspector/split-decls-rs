@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         DependencyKind!();
+        Error!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! parse_dependency_kind {
     };
 }
 
-parse_dependency_kind!()
+parse_dependency_kind!();

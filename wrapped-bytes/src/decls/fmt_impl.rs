@@ -11,4 +11,4 @@ macro_rules! fmt_impl {
     };
 }
 
-fmt_impl!()
+fmt_impl!();

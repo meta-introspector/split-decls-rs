@@ -11,4 +11,4 @@ macro_rules! distribute_conj {
     };
 }
 
-distribute_conj!()
+distribute_conj!();

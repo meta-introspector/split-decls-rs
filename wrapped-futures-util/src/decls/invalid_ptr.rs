@@ -4,4 +4,4 @@ macro_rules! invalid_ptr {
     };
 }
 
-invalid_ptr!()
+invalid_ptr!();

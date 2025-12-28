@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        BatchResponse!();
-        Schema!();
-        EmptyMutation!();
-        IntrospectionMode!();
-        Data!();
-        SchemaBuilder!();
-        ContextBase!();
-        ValidationMode!();
         QueryEnv!();
         EmptySubscription!();
         Extensions!();
-        Request!();
-        Mutation!();
-        ServerError!();
-        Subscription!();
-        QueryRoot!();
-        SubscriptionType!();
+        ContextBase!();
         ObjectType!();
-        Registry!();
-        Query!();
-        BatchRequest!();
+        Request!();
         SDLExportOptions!();
+        ValidationMode!();
+        Registry!();
+        BatchResponse!();
+        Query!();
+        ServerError!();
+        SubscriptionType!();
+        EmptyMutation!();
+        Subscription!();
+        SchemaBuilder!();
+        Data!();
         Response!();
+        Mutation!();
+        BatchRequest!();
+        Schema!();
+        QueryRoot!();
+        IntrospectionMode!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

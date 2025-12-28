@@ -4,4 +4,4 @@ macro_rules! GraphiQLPlugin {
     };
 }
 
-GraphiQLPlugin!()
+GraphiQLPlugin!();

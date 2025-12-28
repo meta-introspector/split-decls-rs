@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Outcome!();
         WorktreeRoots!();
-        Driver!();
         Options!();
+        Driver!();
+        Outcome!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Pipeline {
     };
 }
 
-Pipeline!()
+Pipeline!();

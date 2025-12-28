@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DelayedFormat!();
-        Item!();
-        DateTime!();
-        StrftimeItems!();
-        TimeZone!();
         Offset!();
+        TimeZone!();
+        DateTime!();
+        Item!();
+        DelayedFormat!();
+        StrftimeItems!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_157 {
     };
 }
 
-impl_157!()
+impl_157!();

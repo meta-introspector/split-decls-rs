@@ -4,4 +4,4 @@ macro_rules! POISONED {
     };
 }
 
-POISONED!()
+POISONED!();

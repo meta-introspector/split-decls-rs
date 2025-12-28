@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        TypedValueParser!();
-        Command!();
-        AnyValue!();
-        Result!();
-        Error!();
-        ValueSource!();
-        AnyValueParser!();
         AnyValueId!();
-        OsStr!();
-        PossibleValue!();
+        Command!();
+        AnyValueParser!();
+        AnyValue!();
+        TypedValueParser!();
         Arg!();
+        Error!();
+        OsStr!();
+        ValueSource!();
+        Result!();
+        PossibleValue!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_266 {
     };
 }
 
-impl_266!()
+impl_266!();

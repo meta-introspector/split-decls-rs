@@ -4,4 +4,4 @@ macro_rules! IndexRange {
     };
 }
 
-IndexRange!()
+IndexRange!();

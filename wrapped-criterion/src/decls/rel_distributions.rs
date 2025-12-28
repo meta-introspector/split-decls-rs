@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         ComparisonData!();
         BenchmarkId!();
-        MeasurementData!();
         ReportContext!();
+        MeasurementData!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! rel_distributions {
     };
 }
 
-rel_distributions!()
+rel_distributions!();

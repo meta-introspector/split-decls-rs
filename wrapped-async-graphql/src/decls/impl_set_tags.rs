@@ -4,4 +4,4 @@ macro_rules! impl_set_tags {
     };
 }
 
-impl_set_tags!()
+impl_set_tags!();

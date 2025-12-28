@@ -4,4 +4,4 @@ macro_rules! ComplexObject {
     };
 }
 
-ComplexObject!()
+ComplexObject!();

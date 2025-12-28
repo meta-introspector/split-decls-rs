@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ArangeEntry!();
-        Reader!();
-        Result!();
         Encoding!();
+        ArangeEntry!();
+        Result!();
         Range!();
+        Reader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_374 {
     };
 }
 
-impl_374!()
+impl_374!();

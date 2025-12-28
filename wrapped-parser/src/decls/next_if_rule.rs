@@ -11,4 +11,4 @@ macro_rules! next_if_rule {
     };
 }
 
-next_if_rule!()
+next_if_rule!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Clone!();
         Blob!();
         Commit!();
         Tree!();
+        Clone!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ObjectKindHint {
     };
 }
 
-ObjectKindHint!()
+ObjectKindHint!();

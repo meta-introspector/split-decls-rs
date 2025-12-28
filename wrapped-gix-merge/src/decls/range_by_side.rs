@@ -12,4 +12,4 @@ macro_rules! range_by_side {
     };
 }
 
-range_by_side!()
+range_by_side!();

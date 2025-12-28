@@ -11,4 +11,4 @@ macro_rules! push_transfer_progress_cb {
     };
 }
 
-push_transfer_progress_cb!()
+push_transfer_progress_cb!();

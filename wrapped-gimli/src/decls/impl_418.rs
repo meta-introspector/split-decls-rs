@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ColumnType!();
         FileEntry!();
+        ColumnType!();
         LineInstruction!();
+        Result!();
         Reader!();
-        Section!();
-        LineProgram!();
         LineProgramHeader!();
+        Section!();
         LineRow!();
+        LineProgram!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_418 {
     };
 }
 
-impl_418!()
+impl_418!();

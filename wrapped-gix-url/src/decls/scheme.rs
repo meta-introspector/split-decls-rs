@@ -4,4 +4,4 @@ macro_rules! scheme {
     };
 }
 
-scheme!()
+scheme!();

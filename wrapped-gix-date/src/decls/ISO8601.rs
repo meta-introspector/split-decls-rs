@@ -11,4 +11,4 @@ macro_rules! ISO8601 {
     };
 }
 
-ISO8601!()
+ISO8601!();

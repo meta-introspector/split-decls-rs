@@ -4,4 +4,4 @@ macro_rules! MAX_SYM_NAME {
     };
 }
 
-MAX_SYM_NAME!()
+MAX_SYM_NAME!();

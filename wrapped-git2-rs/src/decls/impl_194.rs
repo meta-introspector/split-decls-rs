@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HunkCB!();
-        DiffHunk!();
         DeltaCB!();
-        DiffDelta!();
+        HunkCB!();
         ApplyOptions!();
+        DiffDelta!();
+        DiffHunk!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

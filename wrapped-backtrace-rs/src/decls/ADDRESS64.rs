@@ -11,4 +11,4 @@ macro_rules! ADDRESS64 {
     };
 }
 
-ADDRESS64!()
+ADDRESS64!();

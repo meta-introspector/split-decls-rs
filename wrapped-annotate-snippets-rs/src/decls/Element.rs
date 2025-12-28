@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Snippet!();
-        Patch!();
-        Padding!();
-        Origin!();
-        Annotation!();
-        Group!();
         Message!();
+        Patch!();
+        Annotation!();
+        Snippet!();
+        Origin!();
+        Group!();
+        Padding!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Element {
     };
 }
 
-Element!()
+Element!();

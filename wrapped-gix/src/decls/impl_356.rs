@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Editor!();
         Tree!();
         Repository!();
-        Editor!();
         Error!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_356 {
     };
 }
 
-impl_356!()
+impl_356!();

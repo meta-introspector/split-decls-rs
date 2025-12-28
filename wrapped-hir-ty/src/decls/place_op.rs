@@ -4,4 +4,4 @@ macro_rules! place_op {
     };
 }
 
-place_op!()
+place_op!();

@@ -11,4 +11,4 @@ macro_rules! dump_manifest_schema {
     };
 }
 
-dump_manifest_schema!()
+dump_manifest_schema!();

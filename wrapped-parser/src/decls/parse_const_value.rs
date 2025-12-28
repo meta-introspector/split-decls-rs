@@ -14,4 +14,4 @@ macro_rules! parse_const_value {
     };
 }
 
-parse_const_value!()
+parse_const_value!();

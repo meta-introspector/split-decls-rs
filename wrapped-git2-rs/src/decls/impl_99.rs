@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        IntoCString!();
+        CheckoutBuilder!();
         DiffFile!();
         Notify!();
-        CheckoutBuilder!();
-        IntoCString!();
         Progress!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_99 {
     };
 }
 
-impl_99!()
+impl_99!();

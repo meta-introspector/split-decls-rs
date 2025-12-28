@@ -4,4 +4,4 @@ macro_rules! ChangePointEstimates {
     };
 }
 
-ChangePointEstimates!()
+ChangePointEstimates!();

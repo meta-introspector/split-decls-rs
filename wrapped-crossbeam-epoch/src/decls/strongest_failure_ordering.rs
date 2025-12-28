@@ -4,4 +4,4 @@ macro_rules! strongest_failure_ordering {
     };
 }
 
-strongest_failure_ordering!()
+strongest_failure_ordering!();

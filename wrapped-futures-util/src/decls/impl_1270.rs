@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BiLockGuard!();
         Send!();
+        BiLockGuard!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1270 {
     };
 }
 
-impl_1270!()
+impl_1270!();

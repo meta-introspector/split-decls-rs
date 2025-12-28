@@ -13,4 +13,4 @@ macro_rules! STACKFRAME64 {
     };
 }
 
-STACKFRAME64!()
+STACKFRAME64!();

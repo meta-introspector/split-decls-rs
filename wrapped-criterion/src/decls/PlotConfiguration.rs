@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Criterion!();
         AxisScale!();
+        Criterion!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PlotConfiguration {
     };
 }
 
-PlotConfiguration!()
+PlotConfiguration!();

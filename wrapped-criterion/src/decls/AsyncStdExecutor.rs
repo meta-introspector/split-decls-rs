@@ -4,4 +4,4 @@ macro_rules! AsyncStdExecutor {
     };
 }
 
-AsyncStdExecutor!()
+AsyncStdExecutor!();

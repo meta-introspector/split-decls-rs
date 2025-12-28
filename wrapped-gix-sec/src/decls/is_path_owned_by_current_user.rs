@@ -4,4 +4,4 @@ macro_rules! is_path_owned_by_current_user {
     };
 }
 
-is_path_owned_by_current_user!()
+is_path_owned_by_current_user!();

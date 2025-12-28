@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Outcome!();
+        Data!();
         Pipeline!();
+        ResourceKind!();
         Mode!();
         Error!();
-        Data!();
-        ResourceKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_51 {
     };
 }
 
-impl_51!()
+impl_51!();

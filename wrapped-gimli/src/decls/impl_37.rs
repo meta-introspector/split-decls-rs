@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        DebugPubTypes!();
         DebugLocLists!();
-        DebugStr!();
-        DebugLineStr!();
-        DebugFrame!();
-        DebugRanges!();
-        SectionId!();
-        EhFrame!();
         DebugLoc!();
-        DebugInfo!();
-        DebugMacro!();
-        DebugLine!();
-        DebugTypes!();
-        DebugTuIndex!();
-        DebugAbbrev!();
-        DebugMacinfo!();
-        DebugRngLists!();
-        DebugCuIndex!();
-        DebugAranges!();
-        DebugAddr!();
+        DebugLineStr!();
         DebugPubNames!();
-        DebugStrOffsets!();
+        DebugCuIndex!();
+        DebugLine!();
+        DebugFrame!();
+        DebugAranges!();
+        DebugRngLists!();
+        DebugAbbrev!();
+        DebugPubTypes!();
         EhFrameHdr!();
+        DebugInfo!();
+        DebugRanges!();
+        DebugStr!();
+        DebugStrOffsets!();
+        DebugTuIndex!();
+        SectionId!();
+        DebugAddr!();
+        DebugMacro!();
+        DebugMacinfo!();
+        EhFrame!();
+        DebugTypes!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

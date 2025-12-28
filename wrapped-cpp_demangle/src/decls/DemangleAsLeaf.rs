@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Demangle!();
         DemangleWrite!();
-        DemangleContext!();
+        Demangle!();
         Result!();
+        DemangleContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DemangleAsLeaf {
     };
 }
 
-DemangleAsLeaf!()
+DemangleAsLeaf!();

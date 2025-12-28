@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ModuleId!();
-        AdtId!();
-        ModuleDefId!();
         ImportOrGlob!();
-        PerNs!();
+        AdtId!();
         MacroId!();
-        BuiltinType!();
+        ModuleId!();
         ValueNs!();
+        PerNs!();
+        ModuleDefId!();
+        BuiltinType!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! to_value_ns {
     };
 }
 
-to_value_ns!()
+to_value_ns!();

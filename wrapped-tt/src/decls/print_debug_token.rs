@@ -2,10 +2,11 @@ macro_rules! deps {
     () => {
         Ident!();
         Literal!();
-        Spacing!();
         Leaf!();
         Subtree!();
         Punct!();
+        TtElement!();
+        Spacing!();
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! SyntaxContextWrapper {
     };
 }
 
-SyntaxContextWrapper!()
+SyntaxContextWrapper!();

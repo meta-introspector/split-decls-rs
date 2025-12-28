@@ -11,4 +11,4 @@ macro_rules! other_23 {
     };
 }
 
-other_23!()
+other_23!();

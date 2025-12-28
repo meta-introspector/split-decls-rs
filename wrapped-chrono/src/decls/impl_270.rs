@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Numeric!();
+        Item!();
         Fixed!();
         Error!();
-        Item!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_270 {
     };
 }
 
-impl_270!()
+impl_270!();

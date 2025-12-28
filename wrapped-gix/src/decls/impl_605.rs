@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Key!();
         Committer!();
+        Key!();
         Section!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_605 {
     };
 }
 
-impl_605!()
+impl_605!();

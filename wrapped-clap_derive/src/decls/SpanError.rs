@@ -4,4 +4,4 @@ macro_rules! SpanError {
     };
 }
 
-SpanError!()
+SpanError!();

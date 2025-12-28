@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Executor!();
-        ObjectType!();
-        Request!();
-        Data!();
-        Mutation!();
-        Subscription!();
         Response!();
-        Query!();
         Schema!();
+        Request!();
+        Mutation!();
+        ObjectType!();
+        Data!();
+        Subscription!();
+        Executor!();
+        Query!();
         SubscriptionType!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

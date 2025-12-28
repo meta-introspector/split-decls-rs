@@ -4,4 +4,4 @@ macro_rules! RealDepGraphDataMerger {
     };
 }
 
-RealDepGraphDataMerger!()
+RealDepGraphDataMerger!();

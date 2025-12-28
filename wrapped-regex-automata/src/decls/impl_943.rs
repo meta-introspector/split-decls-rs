@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        StateID!();
+        SparseSet!();
+        DFA!();
+        SparseSetIter!();
+    };
+}
+
+macro_rules! impl_943 {
+    () => {
+        deps!();
+        impl SparseSet { # [doc = " Create a new sparse set with the given capacity."] # [doc = ""] # [doc = " Sparse sets have a fixed size and they cannot grow. Attempting to"] # [doc = " insert more distinct elements than the total capacity of the set will"] # [doc = " result in a panic."] # [doc = ""] # [doc = " This panics if the capacity given is bigger than `StateID::LIMIT`."] # [inline] pub (crate) fn new (capacity : usize) -> SparseSet { let mut set = SparseSet { len : 0 , dense : vec ! [] , sparse : vec ! [] } ; set . resize (capacity) ; set } # [doc = " Resizes this sparse set to have the new capacity given."] # [doc = ""] # [doc = " This set is automatically cleared."] # [doc = ""] # [doc = " This panics if the capacity given is bigger than `StateID::LIMIT`."] # [inline] pub (crate) fn resize (& mut self , new_capacity : usize) { assert ! (new_capacity <= StateID :: LIMIT , "sparse set capacity cannot exceed {:?}" , StateID :: LIMIT) ; self . clear () ; self . dense . resize (new_capacity , StateID :: ZERO) ; self . sparse . resize (new_capacity , StateID :: ZERO) ; } # [doc = " Returns the capacity of this set."] # [doc = ""] # [doc = " The capacity represents a fixed limit on the number of distinct"] # [doc = " elements that are allowed in this set. The capacity cannot be changed."] # [inline] pub (crate) fn capacity (& self) -> usize { self . dense . len () } # [doc = " Returns the number of elements in this set."] # [inline] pub (crate) fn len (& self) -> usize { self . len } # [doc = " Returns true if and only if this set is empty."] # [inline] pub (crate) fn is_empty (& self) -> bool { self . len () == 0 } # [doc = " Insert the state ID value into this set and return true if the given"] # [doc = " state ID was not previously in this set."] # [doc = ""] # [doc = " This operation is idempotent. If the given value is already in this"] # [doc = " set, then this is a no-op."] # [doc = ""] # [doc = " If more than `capacity` ids are inserted, then this panics."] # [doc = ""] # [doc = " This is marked as inline(always) since the compiler won't inline it"] # [doc = " otherwise, and it's a fairly hot piece of code in DFA determinization."] # [cfg_attr (feature = "perf-inline" , inline (always))] pub (crate) fn insert (& mut self , id : StateID) -> bool { if self . contains (id) { return false ; } let i = self . len () ; assert ! (i < self . capacity () , "{:?} exceeds capacity of {:?} when inserting {:?}" , i , self . capacity () , id ,) ; let index = StateID :: new_unchecked (i) ; self . dense [index] = id ; self . sparse [id] = index ; self . len += 1 ; true } # [doc = " Returns true if and only if this set contains the given value."] # [inline] pub (crate) fn contains (& self , id : StateID) -> bool { let index = self . sparse [id] ; index . as_usize () < self . len () && self . dense [index] == id } # [doc = " Clear this set such that it has no members."] # [inline] pub (crate) fn clear (& mut self) { self . len = 0 ; } # [inline] pub (crate) fn iter (& self) -> SparseSetIter < '_ > { SparseSetIter (self . dense [.. self . len ()] . iter ()) } # [doc = " Returns the heap memory usage, in bytes, used by this sparse set."] # [inline] pub (crate) fn memory_usage (& self) -> usize { self . dense . len () * StateID :: SIZE + self . sparse . len () * StateID :: SIZE } }
+    };
+}
+
+impl_943!()

@@ -4,4 +4,4 @@ macro_rules! cwriteln {
     };
 }
 
-cwriteln!()
+cwriteln!();

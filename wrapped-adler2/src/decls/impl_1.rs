@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U32X4!();
         Adler32!();
+        U32X4!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1 {
     };
 }
 
-impl_1!()
+impl_1!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        NaiveTime!();
         ParseResult!();
-        Pad!();
-        Fixed!();
         Numeric!();
+        Pad!();
         ParseError!();
+        NaiveTime!();
         Item!();
+        Fixed!();
         Parsed!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_522 {
     };
 }
 
-impl_522!()
+impl_522!();

@@ -4,4 +4,4 @@ macro_rules! tuple_len {
     };
 }
 
-tuple_len!()
+tuple_len!();

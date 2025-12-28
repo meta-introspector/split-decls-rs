@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Buf!();
-        BytesMut!();
         IntoIter!();
         Bytes!();
+        Buf!();
+        BytesMut!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

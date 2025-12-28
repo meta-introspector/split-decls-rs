@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnSig!();
         Binder!();
+        FnSig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PolyFnSig {
     };
 }
 
-PolyFnSig!()
+PolyFnSig!();

@@ -4,4 +4,4 @@ macro_rules! poll_stream {
     };
 }
 
-poll_stream!()
+poll_stream!();

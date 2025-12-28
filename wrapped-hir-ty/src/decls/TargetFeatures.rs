@@ -4,4 +4,4 @@ macro_rules! TargetFeatures {
     };
 }
 
-TargetFeatures!()
+TargetFeatures!();

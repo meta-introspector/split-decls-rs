@@ -4,4 +4,4 @@ macro_rules! Arc {
     };
 }
 
-Arc!()
+Arc!();

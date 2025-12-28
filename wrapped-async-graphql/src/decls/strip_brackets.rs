@@ -4,4 +4,4 @@ macro_rules! strip_brackets {
     };
 }
 
-strip_brackets!()
+strip_brackets!();

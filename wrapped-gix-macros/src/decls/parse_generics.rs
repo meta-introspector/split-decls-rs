@@ -11,4 +11,4 @@ macro_rules! parse_generics {
     };
 }
 
-parse_generics!()
+parse_generics!();

@@ -11,4 +11,4 @@ macro_rules! open_modules_file {
     };
 }
 
-open_modules_file!()
+open_modules_file!();

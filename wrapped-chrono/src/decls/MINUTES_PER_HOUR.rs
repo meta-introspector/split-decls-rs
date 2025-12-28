@@ -4,4 +4,4 @@ macro_rules! MINUTES_PER_HOUR {
     };
 }
 
-MINUTES_PER_HOUR!()
+MINUTES_PER_HOUR!();

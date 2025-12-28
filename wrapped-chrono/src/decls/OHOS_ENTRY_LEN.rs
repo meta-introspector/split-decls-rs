@@ -4,4 +4,4 @@ macro_rules! OHOS_ENTRY_LEN {
     };
 }
 
-OHOS_ENTRY_LEN!()
+OHOS_ENTRY_LEN!();

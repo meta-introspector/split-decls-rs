@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ignore!();
         Clone!();
+        Ignore!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Submodule {
     };
 }
 
-Submodule!()
+Submodule!();

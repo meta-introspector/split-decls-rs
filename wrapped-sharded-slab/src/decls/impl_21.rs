@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Entry!();
+        Clear!();
+        Ref!();
+        Config!();
     };
 }
 
 macro_rules! impl_21 {
     () => {
         deps!();
-        impl < T , C : cfg :: Config > std :: ops :: Deref for Entry < '_ , T , C > { type Target = T ; fn deref (& self) -> & Self :: Target { self . value () } }
+        impl < T , C > PartialEq < T > for Ref < '_ , T , C > where T : PartialEq < T > + Clear + Default , C : cfg :: Config , { fn eq (& self , other : & T) -> bool { * self . value () == * other } }
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! CasingStyle {
     };
 }
 
-CasingStyle!()
+CasingStyle!();

@@ -4,4 +4,4 @@ macro_rules! UNKNOWN_CHAR {
     };
 }
 
-UNKNOWN_CHAR!()
+UNKNOWN_CHAR!();

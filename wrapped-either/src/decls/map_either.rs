@@ -4,4 +4,4 @@ macro_rules! map_either {
     };
 }
 
-map_either!()
+map_either!();

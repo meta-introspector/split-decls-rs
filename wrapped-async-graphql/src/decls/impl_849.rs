@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        InputType!();
-        Result!();
-        MetaTypeId!();
-        Registry!();
-        MetaType!();
         Object!();
+        MetaType!();
         InputValueResult!();
+        MetaTypeId!();
         InputValueError!();
         Scalar!();
+        InputType!();
+        Result!();
+        Registry!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_849 {
     };
 }
 
-impl_849!()
+impl_849!();

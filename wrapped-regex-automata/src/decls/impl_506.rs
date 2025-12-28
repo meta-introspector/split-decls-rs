@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Utf8BoundedMap!();
+        NFA!();
+        Utf8BoundedEntry!();
+        StateID!();
+        Transition!();
+    };
+}
+
+macro_rules! impl_506 {
+    () => {
+        deps!();
+        impl Utf8BoundedMap { # [doc = " Create a new bounded map with the given capacity. The map will never"] # [doc = " grow beyond the given size."] # [doc = ""] # [doc = " Note that this does not allocate. Instead, callers must call `clear`"] # [doc = " before using this map. `clear` will allocate space if necessary."] # [doc = ""] # [doc = " This avoids the need to pay for the allocation of this map when"] # [doc = " compiling regexes that lack large Unicode character classes."] pub fn new (capacity : usize) -> Utf8BoundedMap { assert ! (capacity > 0) ; Utf8BoundedMap { version : 0 , capacity , map : vec ! [] } } # [doc = " Clear this map of all entries, but permit the reuse of allocation"] # [doc = " if possible."] # [doc = ""] # [doc = " This must be called before the map can be used."] pub fn clear (& mut self) { if self . map . is_empty () { self . map = vec ! [Utf8BoundedEntry :: default () ; self . capacity] ; } else { self . version = self . version . wrapping_add (1) ; if self . version == 0 { self . map = vec ! [Utf8BoundedEntry :: default () ; self . capacity] ; } } } # [doc = " Return a hash of the given transitions."] pub fn hash (& self , key : & [Transition]) -> usize { let mut h = INIT ; for t in key { h = (h ^ u64 :: from (t . start)) . wrapping_mul (PRIME) ; h = (h ^ u64 :: from (t . end)) . wrapping_mul (PRIME) ; h = (h ^ t . next . as_u64 ()) . wrapping_mul (PRIME) ; } (h % self . map . len () . as_u64 ()) . as_usize () } # [doc = " Retrieve the cached state ID corresponding to the given key. The hash"] # [doc = " given must have been computed with `hash` using the same key value."] # [doc = ""] # [doc = " If there is no cached state with the given transitions, then None is"] # [doc = " returned."] pub fn get (& mut self , key : & [Transition] , hash : usize) -> Option < StateID > { let entry = & self . map [hash] ; if entry . version != self . version { return None ; } if entry . key != key { return None ; } Some (entry . val) } # [doc = " Add a cached state to this map with the given key. Callers should"] # [doc = " ensure that `state_id` points to a state that contains precisely the"] # [doc = " NFA transitions given."] # [doc = ""] # [doc = " `hash` must have been computed using the `hash` method with the same"] # [doc = " key."] pub fn set (& mut self , key : Vec < Transition > , hash : usize , state_id : StateID ,) { self . map [hash] = Utf8BoundedEntry { version : self . version , key , val : state_id } ; } }
+    };
+}
+
+impl_506!()

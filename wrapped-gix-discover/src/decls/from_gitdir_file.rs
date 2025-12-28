@@ -12,4 +12,4 @@ macro_rules! from_gitdir_file {
     };
 }
 
-from_gitdir_file!()
+from_gitdir_file!();

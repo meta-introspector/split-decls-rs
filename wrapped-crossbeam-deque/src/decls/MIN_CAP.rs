@@ -4,4 +4,4 @@ macro_rules! MIN_CAP {
     };
 }
 
-MIN_CAP!()
+MIN_CAP!();

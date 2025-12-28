@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stack!();
         Context!();
+        Stack!();
         Func!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! GeneratorImpl {
     };
 }
 
-GeneratorImpl!()
+GeneratorImpl!();

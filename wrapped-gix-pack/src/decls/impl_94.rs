@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        Error!();
         Header!();
-        Tree!();
+        Error!();
         ResolvedBase!();
+        Entry!();
         Outcome!();
         File!();
+        Tree!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

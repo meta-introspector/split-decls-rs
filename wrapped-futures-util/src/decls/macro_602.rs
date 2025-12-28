@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MapOkFn!();
         Sink!();
+        MapOkFn!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_602 {
     };
 }
 
-macro_602!()
+macro_602!();

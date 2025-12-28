@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Action!();
         ValueParser!();
+        Action!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MagicAttrName {
     };
 }
 
-MagicAttrName!()
+MagicAttrName!();

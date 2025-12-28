@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Type!();
+        SockAddr!();
     };
 }
 
 macro_rules! impl_13 {
     () => {
         deps!();
-        impl Type { # [doc = " Type corresponding to `SOCK_STREAM`."] # [doc = ""] # [doc = " Used for protocols such as TCP."] pub const STREAM : Type = Type (sys :: SOCK_STREAM) ; # [doc = " Type corresponding to `SOCK_DGRAM`."] # [doc = ""] # [doc = " Used for protocols such as UDP."] pub const DGRAM : Type = Type (sys :: SOCK_DGRAM) ; # [doc = " Type corresponding to `SOCK_DCCP`."] # [doc = ""] # [doc = " Used for the DCCP protocol."] # [cfg (all (feature = "all" , target_os = "linux"))] pub const DCCP : Type = Type (sys :: SOCK_DCCP) ; # [doc = " Type corresponding to `SOCK_SEQPACKET`."] # [cfg (all (feature = "all" , not (target_os = "espidf")))] pub const SEQPACKET : Type = Type (sys :: SOCK_SEQPACKET) ; # [doc = " Type corresponding to `SOCK_RAW`."] # [cfg (all (feature = "all" , not (any (target_os = "redox" , target_os = "espidf"))))] pub const RAW : Type = Type (sys :: SOCK_RAW) ; }
+        impl fmt :: Debug for SockAddr { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let mut f = fmt . debug_struct ("SockAddr") ; # [cfg (any (target_os = "dragonfly" , target_os = "freebsd" , target_os = "haiku" , target_os = "hermit" , target_os = "ios" , target_os = "visionos" , target_os = "macos" , target_os = "netbsd" , target_os = "nto" , target_os = "openbsd" , target_os = "tvos" , target_os = "vxworks" , target_os = "watchos" ,))] f . field ("ss_len" , & self . storage . ss_len) ; f . field ("ss_family" , & self . storage . ss_family) . field ("len" , & self . len) . finish () } }
     };
 }
 

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StreamGroup!();
         Keyed!();
+        StreamGroup!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_397 {
     };
 }
 
-impl_397!()
+impl_397!();

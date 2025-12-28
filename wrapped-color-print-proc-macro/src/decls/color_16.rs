@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Parser!();
         Intensity!();
+        Parser!();
         Case!();
         Color16!();
     };
@@ -14,4 +14,4 @@ macro_rules! color_16 {
     };
 }
 
-color_16!()
+color_16!();

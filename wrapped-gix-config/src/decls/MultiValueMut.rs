@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EntryData!();
         SectionId!();
         Section!();
+        EntryData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MultiValueMut {
     };
 }
 
-MultiValueMut!()
+MultiValueMut!();

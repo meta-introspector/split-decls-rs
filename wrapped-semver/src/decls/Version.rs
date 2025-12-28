@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Prerelease!();
         BuildMetadata!();
+        Prerelease!();
     };
 }
 

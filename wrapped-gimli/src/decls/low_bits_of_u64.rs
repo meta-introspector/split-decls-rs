@@ -4,4 +4,4 @@ macro_rules! low_bits_of_u64 {
     };
 }
 
-low_bits_of_u64!()
+low_bits_of_u64!();

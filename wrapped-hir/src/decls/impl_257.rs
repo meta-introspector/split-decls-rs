@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Field!();
         TypeNs!();
-        InstantiatedStruct!();
         InstantiatedField!();
+        InstantiatedStruct!();
+        Field!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_257 {
     };
 }
 
-impl_257!()
+impl_257!();

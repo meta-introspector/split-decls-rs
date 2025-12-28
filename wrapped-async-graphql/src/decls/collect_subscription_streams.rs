@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        PathSegment!();
         ServerResult!();
         Field!();
         ServerError!();
+        ContextSelectionSet!();
+        PathSegment!();
+        Response!();
         SubscriptionType!();
         BoxFieldStream!();
-        Response!();
-        ContextSelectionSet!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! collect_subscription_streams {
     };
 }
 
-collect_subscription_streams!()
+collect_subscription_streams!();

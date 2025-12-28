@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Sign!();
         DebugHex!();
         Count!();
         Alignment!();
-        Sign!();
     };
 }
 

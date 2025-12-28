@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MutableIndexAndPack!();
         Options!();
+        Slots!();
+        SlotMapIndex!();
         Store!();
         Error!();
         PackId!();
-        Slots!();
-        SlotMapIndex!();
+        MutableIndexAndPack!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

@@ -4,4 +4,4 @@ macro_rules! styled_buffer {
     };
 }
 
-styled_buffer!()
+styled_buffer!();

@@ -4,4 +4,4 @@ macro_rules! DECODE_TABLE {
     };
 }
 
-DECODE_TABLE!()
+DECODE_TABLE!();

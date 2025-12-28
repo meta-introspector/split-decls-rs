@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Scope!();
         Generator!();
+        Scope!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

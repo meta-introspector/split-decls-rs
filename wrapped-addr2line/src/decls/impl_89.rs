@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        LocationRangeIter!();
         Error!();
         Location!();
+        LocationRangeIter!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

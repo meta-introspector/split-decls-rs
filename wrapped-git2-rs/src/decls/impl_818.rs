@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Error!();
-        TreeWalkCbData!();
-        TreeEntry!();
         TreeIter!();
-        Tree!();
-        Oid!();
         TreeWalkResult!();
-        Object!();
+        Error!();
+        TreeEntry!();
+        Tree!();
         Binding!();
         TreeWalkMode!();
+        Oid!();
+        Object!();
+        TreeWalkCbData!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_818 {
     };
 }
 
-impl_818!()
+impl_818!();

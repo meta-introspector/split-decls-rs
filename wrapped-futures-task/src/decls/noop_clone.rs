@@ -4,4 +4,4 @@ macro_rules! noop_clone {
     };
 }
 
-noop_clone!()
+noop_clone!();

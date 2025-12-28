@@ -4,4 +4,4 @@ macro_rules! shared_to_vec {
     };
 }
 
-shared_to_vec!()
+shared_to_vec!();

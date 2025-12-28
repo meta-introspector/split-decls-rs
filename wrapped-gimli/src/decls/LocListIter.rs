@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Reader!();
         RawLocListIter!();
-        DebugAddrBase!();
         DebugAddr!();
+        DebugAddrBase!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! LocListIter {
     };
 }
 
-LocListIter!()
+LocListIter!();

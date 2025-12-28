@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
         TraitEnvironment!();
+        HirDatabase!();
         TypingMode!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! lookup_impl_method_query {
     };
 }
 
-lookup_impl_method_query!()
+lookup_impl_method_query!();

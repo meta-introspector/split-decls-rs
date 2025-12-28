@@ -11,4 +11,4 @@ macro_rules! positional_sort_key {
     };
 }
 
-positional_sort_key!()
+positional_sort_key!();

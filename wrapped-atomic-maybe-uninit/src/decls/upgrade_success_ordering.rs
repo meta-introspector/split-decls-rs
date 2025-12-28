@@ -4,4 +4,4 @@ macro_rules! upgrade_success_ordering {
     };
 }
 
-upgrade_success_ordering!()
+upgrade_success_ordering!();

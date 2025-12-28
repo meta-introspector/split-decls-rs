@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CacheStorage!();
         ResSender!();
         Loader!();
+        CacheStorage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Requests {
     };
 }
 
-Requests!()
+Requests!();

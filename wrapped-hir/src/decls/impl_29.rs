@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Const!();
         Variant!();
-        Function!();
-        DefWithBody!();
         Static!();
+        DefWithBody!();
+        Function!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

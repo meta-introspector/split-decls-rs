@@ -4,4 +4,4 @@ macro_rules! Gb18030Encoder {
     };
 }
 
-Gb18030Encoder!()
+Gb18030Encoder!();

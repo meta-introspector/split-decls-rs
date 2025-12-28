@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TimeDelta!();
-        DateTime!();
-        TimeZone!();
-        RoundingError!();
         DurationRound!();
+        DateTime!();
+        TimeDelta!();
+        RoundingError!();
+        TimeZone!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_685 {
     };
 }
 
-impl_685!()
+impl_685!();

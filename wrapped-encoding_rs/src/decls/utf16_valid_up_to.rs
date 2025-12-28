@@ -4,4 +4,4 @@ macro_rules! utf16_valid_up_to {
     };
 }
 
-utf16_valid_up_to!()
+utf16_valid_up_to!();

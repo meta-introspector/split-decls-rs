@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ByteArray!();
         Encoding!();
         Unsigned!();
-        ByteArray!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ArrayEncoding {
     };
 }
 
-ArrayEncoding!()
+ArrayEncoding!();

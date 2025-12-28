@@ -4,4 +4,4 @@ macro_rules! gbk_encode_non_unified {
     };
 }
 
-gbk_encode_non_unified!()
+gbk_encode_non_unified!();

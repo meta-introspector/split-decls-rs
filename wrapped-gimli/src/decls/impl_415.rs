@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Reader!();
         LineInstructions!();
+        Reader!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_415 {
     };
 }
 
-impl_415!()
+impl_415!();

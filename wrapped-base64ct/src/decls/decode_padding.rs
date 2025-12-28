@@ -11,4 +11,4 @@ macro_rules! decode_padding {
     };
 }
 
-decode_padding!()
+decode_padding!();

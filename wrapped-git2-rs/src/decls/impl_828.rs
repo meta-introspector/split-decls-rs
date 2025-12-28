@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Convert!();
-        ObjectType!();
-        Oid!();
-        TreeEntry!();
-        Binding!();
-        Repository!();
         Object!();
+        Error!();
+        ObjectType!();
+        Repository!();
+        Oid!();
+        Binding!();
+        TreeEntry!();
+        Convert!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_828 {
     };
 }
 
-impl_828!()
+impl_828!();

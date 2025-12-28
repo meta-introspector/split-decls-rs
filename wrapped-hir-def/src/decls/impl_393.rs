@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
         HasChildSource!();
+        DefDatabase!();
         GenericDefId!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_393 {
     };
 }
 
-impl_393!()
+impl_393!();

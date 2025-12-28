@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Registry!();
         SchemaError!();
         MetaType!();
+        Registry!();
+        Result!();
         Scalar!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_478 {
     };
 }
 
-impl_478!()
+impl_478!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParKeys!();
         ParValues!();
+        ParKeys!();
         HashMap!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_148 {
     };
 }
 
-impl_148!()
+impl_148!();

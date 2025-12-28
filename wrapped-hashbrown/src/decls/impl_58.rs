@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        RawIter!();
-        RawTable!();
-        Bucket!();
+        Fallibility!();
         TableLayout!();
-        FullBucketsIndices!();
+        RawTable!();
+        Tag!();
+        Bucket!();
+        ProbeSeq!();
         TryReserveError!();
-        RawIterRange!();
         RawTableInner!();
         ScopeGuard!();
-        Fallibility!();
-        ProbeSeq!();
-        Tag!();
+        RawIter!();
+        FullBucketsIndices!();
+        RawIterRange!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_58 {
     };
 }
 
-impl_58!()
+impl_58!();

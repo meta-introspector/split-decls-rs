@@ -4,4 +4,4 @@ macro_rules! atomic_is_lock_free {
     };
 }
 
-atomic_is_lock_free!()
+atomic_is_lock_free!();

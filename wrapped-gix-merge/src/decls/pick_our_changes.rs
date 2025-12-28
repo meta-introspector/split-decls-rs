@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ChangeListRef!();
         ConflictMapping!();
+        ChangeListRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! pick_our_changes {
     };
 }
 
-pick_our_changes!()
+pick_our_changes!();

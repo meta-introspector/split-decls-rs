@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnboundedSenderInner!();
         Sender!();
+        UnboundedSenderInner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

@@ -4,4 +4,4 @@ macro_rules! parallel {
     };
 }
 
-parallel!()
+parallel!();

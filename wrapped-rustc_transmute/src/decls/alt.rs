@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Def!();
+        MaybeTransmutableQuery!();
+        Tree!();
+        Answer!();
+        Assume!();
+    };
+}
+
+macro_rules! alt {
+    () => {
+        deps!();
+        mod alt { use super :: * ; use crate :: Answer ; # [test] fn should_permit_identity_transmutation () { type Tree = layout :: Tree < Def , ! , ! > ; let x = Tree :: Seq (vec ! [Tree :: byte (0) , Tree :: byte (0)]) ; let y = Tree :: Seq (vec ! [Tree :: bool () , Tree :: byte (1)]) ; let layout = Tree :: Alt (vec ! [x , y]) ; let answer = crate :: maybe_transmutable :: MaybeTransmutableQuery :: new (layout . clone () , layout . clone () , crate :: Assume :: default () , UltraMinimal :: default () ,) . answer () ; assert_eq ! (answer , Answer :: Yes , "layout:{:#?}" , layout) ; } }
+    };
+}
+
+alt!()

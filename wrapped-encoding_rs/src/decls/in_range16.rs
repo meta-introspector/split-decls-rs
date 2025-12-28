@@ -4,4 +4,4 @@ macro_rules! in_range16 {
     };
 }
 
-in_range16!()
+in_range16!();

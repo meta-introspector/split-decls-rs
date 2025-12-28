@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        CompType!();
         Bash!();
         EnvCompleter!();
-        CompType!();
     };
 }
 
@@ -46,4 +46,4 @@ fi
     };
 }
 
-impl_128!()
+impl_128!();

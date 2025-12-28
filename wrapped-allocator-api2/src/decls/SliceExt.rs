@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Box!();
-        Global!();
-        Vec!();
         Allocator!();
+        Vec!();
+        Global!();
+        Box!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SliceExt {
     };
 }
 
-SliceExt!()
+SliceExt!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Kind!();
+        Path!();
+        Error!();
+        Options!();
+        ThreadSafeRepository!();
         PrepareFetch!();
         Url!();
-        Kind!();
-        Options!();
         Note!();
-        ThreadSafeRepository!();
-        Path!();
         Default!();
-        Error!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

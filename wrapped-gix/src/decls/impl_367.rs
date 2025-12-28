@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Id!();
-        Spec!();
-        ObjectIdExt!();
-        Platform!();
-        Item!();
-        Default!();
         Error!();
+        Item!();
+        Id!();
         Commit!();
-        Options!();
+        Default!();
         Repository!();
+        Options!();
+        ObjectIdExt!();
+        Spec!();
+        Platform!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_367 {
     };
 }
 
-impl_367!()
+impl_367!();

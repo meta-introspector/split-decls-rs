@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnboundedSender!();
         TrySendError!();
+        UnboundedSender!();
         SendError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

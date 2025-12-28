@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         RollupLock!();
         SubmoduleManager!();
-        Result!();
         GitWrapperLibTrait!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

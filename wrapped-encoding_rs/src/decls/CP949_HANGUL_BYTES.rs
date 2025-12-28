@@ -4,4 +4,4 @@ macro_rules! CP949_HANGUL_BYTES {
     };
 }
 
-CP949_HANGUL_BYTES!()
+CP949_HANGUL_BYTES!();

@@ -4,4 +4,4 @@ macro_rules! rsplit_delimiter {
     };
 }
 
-rsplit_delimiter!()
+rsplit_delimiter!();

@@ -4,4 +4,4 @@ macro_rules! big_decimal {
     };
 }
 
-big_decimal!()
+big_decimal!();

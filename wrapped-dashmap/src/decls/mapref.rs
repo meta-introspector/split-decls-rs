@@ -4,4 +4,4 @@ macro_rules! mapref {
     };
 }
 
-mapref!()
+mapref!();

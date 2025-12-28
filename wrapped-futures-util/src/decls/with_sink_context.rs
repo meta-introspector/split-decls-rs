@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompatSink!();
         Current!();
+        CompatSink!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! with_sink_context {
     };
 }
 
-with_sink_context!()
+with_sink_context!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ArgMatches!();
-        Parser!();
-        Result!();
-        Error!();
         Args!();
+        ArgMatches!();
+        Result!();
         Subcommand!();
+        Error!();
+        Parser!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! FromArgMatches {
     };
 }
 
-FromArgMatches!()
+FromArgMatches!();

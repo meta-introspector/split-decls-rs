@@ -5,4 +5,4 @@ macro_rules! INTERNAL_ERROR_MSG {
     };
 }
 
-INTERNAL_ERROR_MSG!()
+INTERNAL_ERROR_MSG!();

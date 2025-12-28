@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Scale!();
         Row!();
         Data!();
+        Scale!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

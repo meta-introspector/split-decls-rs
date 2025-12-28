@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AssertUnmoved!();
         InterleavePending!();
+        AssertUnmoved!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StreamTestExt {
     };
 }
 
-StreamTestExt!()
+StreamTestExt!();

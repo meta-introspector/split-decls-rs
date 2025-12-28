@@ -4,4 +4,4 @@ macro_rules! cfg_io_safety {
     };
 }
 
-cfg_io_safety!()
+cfg_io_safety!();

@@ -4,4 +4,4 @@ macro_rules! CLSCTX {
     };
 }
 
-CLSCTX!()
+CLSCTX!();

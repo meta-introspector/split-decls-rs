@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Names!();
-        Direction!();
         Push!();
-        Repository!();
+        Names!();
         Remote!();
+        Repository!();
+        Direction!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_301 {
     };
 }
 
-impl_301!()
+impl_301!();

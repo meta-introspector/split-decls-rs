@@ -12,4 +12,4 @@ macro_rules! KOI8_U_INIT {
     };
 }
 
-KOI8_U_INIT!()
+KOI8_U_INIT!();

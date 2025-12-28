@@ -4,4 +4,4 @@ macro_rules! ReadinessVec {
     };
 }
 
-ReadinessVec!()
+ReadinessVec!();

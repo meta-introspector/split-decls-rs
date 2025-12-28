@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ArgAction!();
-        Command!();
-        Subcommand!();
         ArgMatches!();
         Arg!();
+        Command!();
+        ArgAction!();
+        Subcommand!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_440 {
     };
 }
 
-impl_440!()
+impl_440!();

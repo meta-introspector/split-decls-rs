@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Reader!();
         DebugTypesUnitHeadersIter!();
         DebugTypes!();
+        Reader!();
         LittleEndian!();
         UnitSectionOffset!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_659 {
     };
 }
 
-impl_659!()
+impl_659!();

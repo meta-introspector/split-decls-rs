@@ -4,4 +4,4 @@ macro_rules! gen_boxed_trait {
     };
 }
 
-gen_boxed_trait!()
+gen_boxed_trait!();

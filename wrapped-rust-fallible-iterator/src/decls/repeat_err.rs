@@ -11,4 +11,4 @@ macro_rules! repeat_err {
     };
 }
 
-repeat_err!()
+repeat_err!();

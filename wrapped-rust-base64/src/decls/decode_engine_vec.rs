@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecodeError!();
         Engine!();
+        DecodeError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decode_engine_vec {
     };
 }
 
-decode_engine_vec!()
+decode_engine_vec!();

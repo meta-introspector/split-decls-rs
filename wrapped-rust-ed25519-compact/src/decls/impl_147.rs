@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SecretKey!();
-        KeyPair!();
         Fe!();
         Error!();
+        SecretKey!();
+        KeyPair!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_147 {
     };
 }
 
-impl_147!()
+impl_147!();

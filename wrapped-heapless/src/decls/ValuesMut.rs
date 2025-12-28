@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IndexMap!();
         IterMut!();
         Bucket!();
+        IndexMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ValuesMut {
     };
 }
 
-ValuesMut!()
+ValuesMut!();

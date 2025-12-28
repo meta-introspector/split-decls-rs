@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Local!();
-        Epoch!();
         Global!();
-        LocalHandle!();
-        AtomicEpoch!();
-        Guard!();
-        Bag!();
         Collector!();
-        Entry!();
-        Owned!();
+        Bag!();
+        AtomicEpoch!();
+        Local!();
         Deferred!();
+        Guard!();
+        Owned!();
+        Epoch!();
+        Entry!();
+        LocalHandle!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

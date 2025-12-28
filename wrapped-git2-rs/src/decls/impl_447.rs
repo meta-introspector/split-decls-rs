@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MessageTrailersIterator!();
         MessageTrailers!();
         Binding!();
+        MessageTrailersIterator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_447 {
     };
 }
 
-impl_447!()
+impl_447!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EnvCompleter!();
         Elvish!();
+        EnvCompleter!();
     };
 }
 
@@ -19,4 +19,4 @@ set edit:completion:arg-completer[BIN] = { |@words|
     };
 }
 
-impl_133!()
+impl_133!();

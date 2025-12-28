@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        HuffmanTable!();
+    };
+}
+
+macro_rules! impl_347 {
+    () => {
+        deps!();
+        impl HuffmanTable { pub fn build_from_data (data : & [u8]) -> Self { let mut counts = [0 ; 256] ; let mut max = 0 ; for x in data { counts [* x as usize] += 1 ; max = max . max (* x) ; } Self :: build_from_counts (& counts [..= max as usize]) } pub fn build_from_counts (counts : & [usize]) -> Self { assert ! (counts . len () <= 256) ; let zeros = counts . iter () . filter (| x | * * x == 0) . count () ; let mut weights = distribute_weights (counts . len () - zeros) ; let limit = weights . len () . ilog2 () as usize + 2 ; redistribute_weights (& mut weights , limit) ; weights . reverse () ; let mut counts_sorted = counts . iter () . enumerate () . collect :: < Vec < _ > > () ; counts_sorted . sort_by (| (_ , c1) , (_ , c2) | c1 . cmp (c2)) ; let mut weights_distributed = alloc :: vec ! [0 ; counts . len ()] ; for (idx , count) in counts_sorted { if * count == 0 { weights_distributed [idx] = 0 ; } else { weights_distributed [idx] = weights . pop () . unwrap () ; } } Self :: build_from_weights (& weights_distributed) } pub fn build_from_weights (weights : & [usize]) -> Self { let mut sorted = Vec :: with_capacity (weights . len ()) ; struct SortEntry { symbol : u8 , weight : usize , } for (symbol , weight) in weights . iter () . copied () . enumerate () { if weight > 0 { sorted . push (SortEntry { symbol : symbol as u8 , weight , }) ; } } sorted . sort_by (| left , right | match left . weight . cmp (& right . weight) { Ordering :: Equal => left . symbol . cmp (& right . symbol) , other => other , }) ; let mut table = HuffmanTable { codes : Vec :: with_capacity (weights . len ()) , } ; for _ in 0 .. weights . len () { table . codes . push ((0 , 0)) ; } let weight_sum = sorted . iter () . map (| e | 1 << (e . weight - 1)) . sum :: < usize > () ; if ! weight_sum . is_power_of_two () { panic ! ("This is an internal error") ; } let max_num_bits = highest_bit_set (weight_sum) - 1 ; let mut current_code = 0 ; let mut current_weight = 0 ; let mut current_num_bits = 0 ; for entry in sorted . iter () { if current_weight != entry . weight { current_code >>= entry . weight - current_weight ; current_num_bits = max_num_bits - entry . weight + 1 ; current_weight = entry . weight ; } table . codes [entry . symbol as usize] = (current_code as u32 , current_num_bits as u8) ; current_code += 1 ; } table } pub fn can_encode (& self , other : & Self) -> Option < usize > { if other . codes . len () > self . codes . len () { return None ; } let mut sum = 0 ; for ((_ , other_num_bits) , (_ , self_num_bits)) in other . codes . iter () . zip (self . codes . iter ()) { if * other_num_bits != 0 && * self_num_bits == 0 { return None ; } sum += other_num_bits . abs_diff (* self_num_bits) as usize ; } Some (sum) } }
+    };
+}
+
+impl_347!()

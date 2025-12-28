@@ -4,4 +4,4 @@ macro_rules! assert_encode_sanity {
     };
 }
 
-assert_encode_sanity!()
+assert_encode_sanity!();

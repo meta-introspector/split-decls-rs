@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         VariantEncoding!();
+        Encoding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! X_MAC_CYRILLIC_INIT {
     };
 }
 
-X_MAC_CYRILLIC_INIT!()
+X_MAC_CYRILLIC_INIT!();

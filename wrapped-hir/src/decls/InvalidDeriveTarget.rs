@@ -4,4 +4,4 @@ macro_rules! InvalidDeriveTarget {
     };
 }
 
-InvalidDeriveTarget!()
+InvalidDeriveTarget!();

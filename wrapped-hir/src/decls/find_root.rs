@@ -4,4 +4,4 @@ macro_rules! find_root {
     };
 }
 
-find_root!()
+find_root!();

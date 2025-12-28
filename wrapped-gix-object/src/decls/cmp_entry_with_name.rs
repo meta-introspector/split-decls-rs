@@ -11,4 +11,4 @@ macro_rules! cmp_entry_with_name {
     };
 }
 
-cmp_entry_with_name!()
+cmp_entry_with_name!();

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        UncoveredTyParamCollector!();
+    };
+}
+
+macro_rules! orphan_check {
+    () => {
+        deps!();
+        # [doc = " Checks the coherence orphan rules."] # [doc = ""] # [doc = " `impl_def_id` should be the `DefId` of a trait impl."] # [doc = ""] # [doc = " To pass, either the trait must be local, or else two conditions must be satisfied:"] # [doc = ""] # [doc = " 1. All type parameters in `Self` must be \"covered\" by some local type constructor."] # [doc = " 2. Some local type must appear in `Self`."] # [instrument (level = "debug" , skip (tcx) , ret)] fn orphan_check < 'tcx > (tcx : TyCtxt < 'tcx > , impl_def_id : LocalDefId , mode : OrphanCheckMode ,) -> Result < () , OrphanCheckErr < TyCtxt < 'tcx > , FxIndexSet < DefId > > > { let trait_ref = tcx . impl_trait_ref (impl_def_id) . unwrap () ; debug ! (trait_ref = ? trait_ref . skip_binder ()) ; if let Some (def_id) = trait_ref . skip_binder () . def_id . as_local () { debug ! ("trait {def_id:?} is local to current crate") ; return Ok (()) ; } let infcx = tcx . infer_ctxt () . build (TypingMode :: Coherence) ; let cause = traits :: ObligationCause :: dummy () ; let args = infcx . fresh_args_for_item (cause . span , impl_def_id . to_def_id ()) ; let trait_ref = trait_ref . instantiate (tcx , args) ; let lazily_normalize_ty = | user_ty : Ty < 'tcx > | { let ty :: Alias (..) = user_ty . kind () else { return Ok (user_ty) } ; let ocx = traits :: ObligationCtxt :: new (& infcx) ; let ty = ocx . normalize (& cause , ty :: ParamEnv :: empty () , user_ty) ; let ty = infcx . resolve_vars_if_possible (ty) ; let errors = ocx . select_where_possible () ; if ! errors . is_empty () { return Ok (user_ty) ; } let ty = if infcx . next_trait_solver () { ocx . structurally_normalize_ty (& cause , ty :: ParamEnv :: empty () , infcx . resolve_vars_if_possible (ty) ,) . unwrap_or (ty) } else { ty } ; Ok :: < _ , ! > (ty) } ; let result = traits :: orphan_check_trait_ref (& infcx , trait_ref , traits :: InCrate :: Local { mode } , lazily_normalize_ty ,) . into_ok () ; result . map_err (| err | match err { OrphanCheckErr :: UncoveredTyParams (UncoveredTyParams { uncovered , local_ty }) => { let mut collector = UncoveredTyParamCollector { infcx : & infcx , uncovered_params : Default :: default () } ; uncovered . visit_with (& mut collector) ; debug_assert ! (! collector . uncovered_params . is_empty ()) ; OrphanCheckErr :: UncoveredTyParams (UncoveredTyParams { uncovered : collector . uncovered_params , local_ty , }) } OrphanCheckErr :: NonLocalInputType (tys) => { let tys = infcx . probe (| _ | { for (arg , id_arg) in std :: iter :: zip (args , ty :: GenericArgs :: identity_for_item (tcx , impl_def_id)) { let _ = infcx . at (& cause , ty :: ParamEnv :: empty ()) . eq (DefineOpaqueTypes :: No , arg , id_arg ,) ; } infcx . resolve_vars_if_possible (tys) }) ; OrphanCheckErr :: NonLocalInputType (tys) } }) }
+    };
+}
+
+orphan_check!()

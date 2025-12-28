@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Repository!();
         Pathspec!();
-        OdbHandleArc!();
         Clone!();
+        OdbHandleArc!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! PathspecDetached {
     };
 }
 
-PathspecDetached!()
+PathspecDetached!();

@@ -11,4 +11,4 @@ macro_rules! test_compare_reference_impl_long_xof {
     };
 }
 
-test_compare_reference_impl_long_xof!()
+test_compare_reference_impl_long_xof!();

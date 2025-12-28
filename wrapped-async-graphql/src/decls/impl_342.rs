@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueryPathNode!();
         Parents!();
+        QueryPathNode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_342 {
     };
 }
 
-impl_342!()
+impl_342!();

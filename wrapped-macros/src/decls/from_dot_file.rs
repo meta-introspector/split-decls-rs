@@ -4,4 +4,4 @@ macro_rules! from_dot_file {
     };
 }
 
-from_dot_file!()
+from_dot_file!();

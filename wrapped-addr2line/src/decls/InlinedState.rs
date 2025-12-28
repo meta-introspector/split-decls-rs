@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        InlinedFunctionAddress!();
         InlinedFunction!();
-        UnitRef!();
-        Context!();
         DebugFile!();
+        InlinedFunctionAddress!();
+        Context!();
+        UnitRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! InlinedState {
     };
 }
 
-InlinedState!()
+InlinedState!();

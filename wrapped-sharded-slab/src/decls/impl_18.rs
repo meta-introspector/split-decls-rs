@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Slab!();
+        Clear!();
+        Ref!();
+        Config!();
     };
 }
 
 macro_rules! impl_18 {
     () => {
         deps!();
-        unsafe impl < T : Send , C : cfg :: Config > Send for Slab < T , C > { }
+        impl < T , C > std :: ops :: Deref for Ref < '_ , T , C > where T : Clear + Default , C : cfg :: Config , { type Target = T ; fn deref (& self) -> & Self :: Target { self . value () } }
     };
 }
 

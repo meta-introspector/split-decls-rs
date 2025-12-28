@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OwnedStorage!();
-        SealedStorage!();
+        Queue!();
         Storage!();
         QueueView!();
         QueueInner!();
-        Queue!();
+        SealedStorage!();
+        OwnedStorage!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_202 {
     };
 }
 
-impl_202!()
+impl_202!();

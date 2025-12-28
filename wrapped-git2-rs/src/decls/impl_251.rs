@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Commit!();
         Binding!();
+        Commit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GitExecutor!();
-        Execv!();
-        GitAdapter!();
         GhExecutor!();
+        GitExecutor!();
         GitRepositoryOperations!();
+        GitAdapter!();
+        Execv!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! GitWrapperLibTrait {
     };
 }
 
-GitWrapperLibTrait!()
+GitWrapperLibTrait!();

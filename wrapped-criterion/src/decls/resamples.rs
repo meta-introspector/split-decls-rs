@@ -4,4 +4,4 @@ macro_rules! resamples {
     };
 }
 
-resamples!()
+resamples!();

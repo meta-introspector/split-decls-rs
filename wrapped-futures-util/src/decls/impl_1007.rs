@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WakerToHandle!();
         Compat01As03!();
+        WakerToHandle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1007 {
     };
 }
 
-impl_1007!()
+impl_1007!();

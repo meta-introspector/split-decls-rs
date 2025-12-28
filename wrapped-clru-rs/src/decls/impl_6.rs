@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FixedSizeListNode!();
         FixedSizeListIterMut!();
         FixedSizeList!();
+        FixedSizeListNode!();
         FixedSizeListIter!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashMap!();
         RawEntryMut!();
+        HashMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_map {
     };
 }
 
-test_map!()
+test_map!();

@@ -22,4 +22,4 @@ macro_rules! m {
     };
 }
 
-test_meta_doc_comments_non_latin!()
+test_meta_doc_comments_non_latin!();

@@ -1,13 +1,16 @@
 macro_rules! deps {
     () => {
-        TokenTreesView!();
+        Punct!();
+        Ident!();
+        Leaf!();
+        Literal!();
     };
 }
 
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl < S : fmt :: Debug + Copy > fmt :: Debug for TokenTreesView < '_ , S > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let mut iter = self . iter () ; while let Some (tt) = iter . next () { print_debug_token (f , 0 , tt) ? ; if ! iter . is_empty () { writeln ! (f) ? ; } } Ok (()) } }
+        impl < S > Leaf < S > { pub fn span (& self) -> & S { match self { Leaf :: Literal (it) => & it . span , Leaf :: Punct (it) => & it . span , Leaf :: Ident (it) => & it . span , } } }
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! unsafe_poll {
     };
 }
 
-unsafe_poll!()
+unsafe_poll!();

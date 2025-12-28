@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RandomState!();
         RandomSource!();
         DefaultRandomSource!();
+        RandomState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_79 {
     };
 }
 
-macro_79!()
+macro_79!();

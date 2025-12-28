@@ -4,4 +4,4 @@ macro_rules! CVBytes {
     };
 }
 
-CVBytes!()
+CVBytes!();

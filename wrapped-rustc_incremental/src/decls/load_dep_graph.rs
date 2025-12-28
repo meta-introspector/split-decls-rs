@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Ok!();
+        LoadResult!();
+        SerializedWorkProduct!();
+        CorruptFile!();
+        LoadDepGraph!();
+    };
+}
+
+macro_rules! load_dep_graph {
+    () => {
+        deps!();
+        fn load_dep_graph (sess : & Session , deps : & DepsType ,) -> LoadResult < (Arc < SerializedDepGraph > , WorkProductMap) > { let prof = sess . prof . clone () ; if sess . opts . incremental . is_none () { return LoadResult :: Ok { data : Default :: default () } ; } let _timer = sess . prof . generic_activity ("incr_comp_prepare_load_dep_graph") ; let path = dep_graph_path (sess) ; let expected_hash = sess . opts . dep_tracking_hash (false) ; let mut prev_work_products = UnordMap :: default () ; if sess . incr_comp_session_dir_opt () . is_some () { let work_products_path = work_products_path (sess) ; let load_result = load_data (& work_products_path , sess) ; if let LoadResult :: Ok { data : (work_products_data , start_pos) } = load_result { let Ok (mut work_product_decoder) = MemDecoder :: new (& work_products_data [..] , start_pos) else { sess . dcx () . emit_warn (errors :: CorruptFile { path : & work_products_path }) ; return LoadResult :: DataOutOfDate ; } ; let work_products : Vec < SerializedWorkProduct > = Decodable :: decode (& mut work_product_decoder) ; for swp in work_products { let all_files_exist = swp . work_product . saved_files . items () . all (| (_ , path) | { let exists = in_incr_comp_dir_sess (sess , path) . exists () ; if ! exists && sess . opts . unstable_opts . incremental_info { eprintln ! ("incremental: could not find file for work product: {path}" ,) ; } exists }) ; if all_files_exist { debug ! ("reconcile_work_products: all files for {:?} exist" , swp) ; prev_work_products . insert (swp . id , swp . work_product) ; } else { debug ! ("reconcile_work_products: some file for {:?} does not exist" , swp) ; delete_dirty_work_product (sess , swp) ; } } } } let _prof_timer = prof . generic_activity ("incr_comp_load_dep_graph") ; match load_data (& path , sess) { LoadResult :: DataOutOfDate => LoadResult :: DataOutOfDate , LoadResult :: LoadDepGraph (path , err) => LoadResult :: LoadDepGraph (path , err) , LoadResult :: Ok { data : (bytes , start_pos) } => { let Ok (mut decoder) = MemDecoder :: new (& bytes , start_pos) else { sess . dcx () . emit_warn (errors :: CorruptFile { path : & path }) ; return LoadResult :: DataOutOfDate ; } ; let prev_commandline_args_hash = Hash64 :: decode (& mut decoder) ; if prev_commandline_args_hash != expected_hash { if sess . opts . unstable_opts . incremental_info { eprintln ! ("[incremental] completely ignoring cache because of \
+                                    differing commandline arguments") ; } debug ! ("load_dep_graph_new: differing commandline arg hashes") ; return LoadResult :: DataOutOfDate ; } let dep_graph = SerializedDepGraph :: decode :: < DepsType > (& mut decoder , deps) ; LoadResult :: Ok { data : (dep_graph , prev_work_products) } } } }
+    };
+}
+
+load_dep_graph!()

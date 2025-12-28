@@ -11,4 +11,4 @@ macro_rules! from_lt_id {
     };
 }
 
-from_lt_id!()
+from_lt_id!();

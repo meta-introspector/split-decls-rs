@@ -11,4 +11,4 @@ macro_rules! hex_check_neon_with_case {
     };
 }
 
-hex_check_neon_with_case!()
+hex_check_neon_with_case!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WideWord!();
         Word!();
+        WideWord!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! carrying_add {
     };
 }
 
-carrying_add!()
+carrying_add!();

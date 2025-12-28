@@ -11,4 +11,4 @@ macro_rules! derive_input_object {
     };
 }
 
-derive_input_object!()
+derive_input_object!();

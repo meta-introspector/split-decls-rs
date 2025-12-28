@@ -4,4 +4,4 @@ macro_rules! CloneLocal {
     };
 }
 
-CloneLocal!()
+CloneLocal!();

@@ -11,4 +11,4 @@ macro_rules! pattern_idx_matching_relative_path {
     };
 }
 
-pattern_idx_matching_relative_path!()
+pattern_idx_matching_relative_path!();

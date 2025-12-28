@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        DisplaySourceCodeError!();
         Diagnostics!();
         DisplayKind!();
-        DisplayTarget!();
-        DisplaySourceCodeError!();
         ClosureStyle!();
-        DisplayLifetime!();
-        HirDatabase!();
+        DisplayTarget!();
         HirDisplayWrapper!();
+        DisplayLifetime!();
         HirDisplayError!();
         HirFormatter!();
+        HirDatabase!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! HirDisplay {
     };
 }
 
-HirDisplay!()
+HirDisplay!();

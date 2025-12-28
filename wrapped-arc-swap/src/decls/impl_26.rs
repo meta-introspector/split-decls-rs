@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConstantDeref!();
+        Guard!();
         Access!();
         Constant!();
-        Guard!();
+        ConstantDeref!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

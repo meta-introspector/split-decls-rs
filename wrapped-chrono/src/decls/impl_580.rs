@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         TimeZoneRef!();
+        OutOfRange!();
+        TimeZone!();
+        LocalTimeType!();
+        Error!();
+        NaiveDateTime!();
+        MappedLocalTime!();
         Transition!();
         LeapSecond!();
-        LocalTimeType!();
-        TimeZone!();
-        OutOfRange!();
-        MappedLocalTime!();
-        NaiveDateTime!();
-        Error!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_580 {
     };
 }
 
-impl_580!()
+impl_580!();

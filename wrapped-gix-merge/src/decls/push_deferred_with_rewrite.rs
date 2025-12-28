@@ -12,4 +12,4 @@ macro_rules! push_deferred_with_rewrite {
     };
 }
 
-push_deferred_with_rewrite!()
+push_deferred_with_rewrite!();

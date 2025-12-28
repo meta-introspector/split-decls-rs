@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Update!();
-        HashMarker!();
         FixedOutput!();
+        Update!();
         FixedOutputReset!();
+        HashMarker!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Digest {
     };
 }
 
-Digest!()
+Digest!();

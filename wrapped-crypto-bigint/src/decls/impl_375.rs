@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Bounded!();
         Uint!();
+        Bounded!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_375 {
     };
 }
 
-impl_375!()
+impl_375!();

@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        ImportOrGlob!();
-        MacroId!();
-        Visibility!();
-        ImportOrDef!();
-        ItemInNs!();
-        MacroCall!();
-        ModuleDefId!();
-        DefDatabase!();
         ItemScope!();
-        ImportOrExternCrate!();
-        ModuleId!();
+        Visibility!();
+        MacroId!();
         ImportId!();
         PerNs!();
+        ModuleId!();
+        ModuleDefId!();
+        ImportOrGlob!();
+        ImportOrExternCrate!();
+        MacroCall!();
         Item!();
+        ImportOrDef!();
+        DefDatabase!();
+        ItemInNs!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Error!();
         Note!();
         Committer!();
         Repository!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_324 {
     };
 }
 
-impl_324!()
+impl_324!();

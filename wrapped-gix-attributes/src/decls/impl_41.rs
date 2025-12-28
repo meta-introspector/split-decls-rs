@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Assignment!();
+        TrackedAssignment!();
         MetadataCollection!();
         Assignments!();
         Metadata!();
         AttributeId!();
-        Assignment!();
-        TrackedAssignment!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

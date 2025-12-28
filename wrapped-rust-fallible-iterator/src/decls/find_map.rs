@@ -4,4 +4,4 @@ macro_rules! find_map {
     };
 }
 
-find_map!()
+find_map!();

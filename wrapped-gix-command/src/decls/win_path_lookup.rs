@@ -4,4 +4,4 @@ macro_rules! win_path_lookup {
     };
 }
 
-win_path_lookup!()
+win_path_lookup!();

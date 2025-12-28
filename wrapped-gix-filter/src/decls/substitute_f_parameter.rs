@@ -4,4 +4,4 @@ macro_rules! substitute_f_parameter {
     };
 }
 
-substitute_f_parameter!()
+substitute_f_parameter!();

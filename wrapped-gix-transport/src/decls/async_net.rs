@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Connection!();
-        Error!();
         Protocol!();
+        Error!();
         ConnectMode!();
+        Connection!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! async_net {
     };
 }
 
-async_net!()
+async_net!();

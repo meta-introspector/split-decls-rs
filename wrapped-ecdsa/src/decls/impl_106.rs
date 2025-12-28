@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         VerifyingKey!();
-        MaxOverhead!();
         MaxSize!();
-        EcdsaCurve!();
         Signature!();
+        MaxOverhead!();
         SignatureSize!();
+        EcdsaCurve!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_106 {
     };
 }
 
-impl_106!()
+impl_106!();

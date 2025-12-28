@@ -4,4 +4,4 @@ macro_rules! TreatNotYetDefinedOpaques {
     };
 }
 
-TreatNotYetDefinedOpaques!()
+TreatNotYetDefinedOpaques!();

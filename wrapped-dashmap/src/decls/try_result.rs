@@ -4,4 +4,4 @@ macro_rules! try_result {
     };
 }
 
-try_result!()
+try_result!();

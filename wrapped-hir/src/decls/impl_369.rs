@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        GenericDef!();
         Type!();
+        Module!();
+        TypeOrConstParam!();
         Trait!();
         TypeParam!();
-        GenericDef!();
-        TypeOrConstParam!();
-        Module!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_369 {
     };
 }
 
-impl_369!()
+impl_369!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ItemContainer!();
-        TypeAlias!();
         HasContainer!();
+        TypeAlias!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_437 {
     };
 }
 
-impl_437!()
+impl_437!();

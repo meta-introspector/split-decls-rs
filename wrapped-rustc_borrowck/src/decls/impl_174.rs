@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        BorrowedContentSource!();
+    };
+}
+
+macro_rules! impl_174 {
+    () => {
+        deps!();
+        impl < 'tcx > BorrowedContentSource < 'tcx > { pub (super) fn describe_for_unnamed_place (& self , tcx : TyCtxt < '_ >) -> String { match * self { BorrowedContentSource :: DerefRawPointer => "a raw pointer" . to_string () , BorrowedContentSource :: DerefSharedRef => "a shared reference" . to_string () , BorrowedContentSource :: DerefMutableRef => "a mutable reference" . to_string () , BorrowedContentSource :: OverloadedDeref (ty) => ty . ty_adt_def () . and_then (| adt | match tcx . get_diagnostic_name (adt . did ()) ? { name @ (sym :: Rc | sym :: Arc) => Some (format ! ("an `{name}`")) , _ => None , }) . unwrap_or_else (| | format ! ("dereference of `{ty}`")) , BorrowedContentSource :: OverloadedIndex (ty) => format ! ("index of `{ty}`") , } } pub (super) fn describe_for_named_place (& self) -> Option < & 'static str > { match * self { BorrowedContentSource :: DerefRawPointer => Some ("raw pointer") , BorrowedContentSource :: DerefSharedRef => Some ("shared reference") , BorrowedContentSource :: DerefMutableRef => Some ("mutable reference") , BorrowedContentSource :: OverloadedDeref (_) | BorrowedContentSource :: OverloadedIndex (_) => None , } } pub (super) fn describe_for_immutable_place (& self , tcx : TyCtxt < '_ >) -> String { match * self { BorrowedContentSource :: DerefRawPointer => "a `*const` pointer" . to_string () , BorrowedContentSource :: DerefSharedRef => "a `&` reference" . to_string () , BorrowedContentSource :: DerefMutableRef => { bug ! ("describe_for_immutable_place: DerefMutableRef isn't immutable") } BorrowedContentSource :: OverloadedDeref (ty) => ty . ty_adt_def () . and_then (| adt | match tcx . get_diagnostic_name (adt . did ()) ? { name @ (sym :: Rc | sym :: Arc) => Some (format ! ("an `{name}`")) , _ => None , }) . unwrap_or_else (| | format ! ("dereference of `{ty}`")) , BorrowedContentSource :: OverloadedIndex (ty) => format ! ("an index of `{ty}`") , } } fn from_call (func : Ty < 'tcx > , tcx : TyCtxt < 'tcx >) -> Option < Self > { match * func . kind () { ty :: FnDef (def_id , args) => { let trait_id = tcx . trait_of_assoc (def_id) ? ; if tcx . is_lang_item (trait_id , LangItem :: Deref) || tcx . is_lang_item (trait_id , LangItem :: DerefMut) { Some (BorrowedContentSource :: OverloadedDeref (args . type_at (0))) } else if tcx . is_lang_item (trait_id , LangItem :: Index) || tcx . is_lang_item (trait_id , LangItem :: IndexMut) { Some (BorrowedContentSource :: OverloadedIndex (args . type_at (0))) } else { None } } _ => None , } } }
+    };
+}
+
+impl_174!()

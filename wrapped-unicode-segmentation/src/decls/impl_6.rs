@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        UnicodeSegmentation!();
+        Graphemes!();
     };
 }
 
 macro_rules! impl_6 {
     () => {
         deps!();
-        impl UnicodeSegmentation for str { # [inline] fn graphemes (& self , is_extended : bool) -> Graphemes < '_ > { grapheme :: new_graphemes (self , is_extended) } # [inline] fn grapheme_indices (& self , is_extended : bool) -> GraphemeIndices { grapheme :: new_grapheme_indices (self , is_extended) } # [inline] fn unicode_words (& self) -> UnicodeWords < '_ > { word :: new_unicode_words (self) } # [inline] fn unicode_word_indices (& self) -> UnicodeWordIndices < '_ > { word :: new_unicode_word_indices (self) } # [inline] fn split_word_bounds (& self) -> UWordBounds < '_ > { word :: new_word_bounds (self) } # [inline] fn split_word_bound_indices (& self) -> UWordBoundIndices < '_ > { word :: new_word_bound_indices (self) } # [inline] fn unicode_sentences (& self) -> UnicodeSentences < '_ > { sentence :: new_unicode_sentences (self) } # [inline] fn split_sentence_bounds (& self) -> USentenceBounds < '_ > { sentence :: new_sentence_bounds (self) } # [inline] fn split_sentence_bound_indices (& self) -> USentenceBoundIndices { sentence :: new_sentence_bound_indices (self) } }
+        impl < 'a > Graphemes < 'a > { # [inline] # [doc = " View the underlying data (the part yet to be iterated) as a slice of the original string."] # [doc = ""] # [doc = " ```rust"] # [doc = " # use unicode_segmentation::UnicodeSegmentation;"] # [doc = " let mut iter = \"abc\".graphemes(true);"] # [doc = " assert_eq!(iter.as_str(), \"abc\");"] # [doc = " iter.next();"] # [doc = " assert_eq!(iter.as_str(), \"bc\");"] # [doc = " iter.next();"] # [doc = " iter.next();"] # [doc = " assert_eq!(iter.as_str(), \"\");"] # [doc = " ```"] pub fn as_str (& self) -> & 'a str { & self . string [self . cursor . cur_cursor () .. self . cursor_back . cur_cursor ()] } }
     };
 }
 

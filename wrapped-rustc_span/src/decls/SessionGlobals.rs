@@ -1,5 +1,10 @@
 macro_rules! deps {
     () => {
+        SourceMap!();
+        HygieneData!();
+        Interner!();
+        Span!();
+        SpanInterner!();
         MetavarSpansMap!();
     };
 }

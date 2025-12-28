@@ -4,4 +4,4 @@ macro_rules! is_mapped_for_two_byte_encode {
     };
 }
 
-is_mapped_for_two_byte_encode!()
+is_mapped_for_two_byte_encode!();

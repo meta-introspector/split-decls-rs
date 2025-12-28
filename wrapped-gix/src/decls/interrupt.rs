@@ -4,4 +4,4 @@ macro_rules! interrupt {
     };
 }
 
-interrupt!()
+interrupt!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Empty!();
         Ready!();
+        Empty!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_763 {
     };
 }
 
-impl_763!()
+impl_763!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ChildGraph!();
+        Command!();
         Usage!();
+        ChildGraph!();
         StyledStr!();
         Id!();
-        Command!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_572 {
     };
 }
 
-impl_572!()
+impl_572!();

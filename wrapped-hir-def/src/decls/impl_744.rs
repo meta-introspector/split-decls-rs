@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
         ModuleDefId!();
-        MacroId!();
-        AdtId!();
-        BuiltinType!();
         ModuleId!();
+        AdtId!();
+        MacroId!();
+        DefDatabase!();
+        BuiltinType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_744 {
     };
 }
 
-impl_744!()
+impl_744!();

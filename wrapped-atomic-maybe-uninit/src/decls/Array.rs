@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Primitive!();
         Align16!();
         AtomicMaybeUninit!();
-        Primitive!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Array {
     };
 }
 
-Array!()
+Array!();

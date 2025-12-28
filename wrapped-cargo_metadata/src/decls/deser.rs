@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SuiteEvent!();
-        TestEvent!();
         TestMessage!();
+        TestEvent!();
+        SuiteEvent!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! deser {
     };
 }
 
-deser!()
+deser!();

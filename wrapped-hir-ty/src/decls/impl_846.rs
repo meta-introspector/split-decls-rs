@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
         GenericDefaults!();
+        EarlyBinder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_846 {
     };
 }
 
-impl_846!()
+impl_846!();

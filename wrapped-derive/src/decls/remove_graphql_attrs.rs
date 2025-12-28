@@ -4,4 +4,4 @@ macro_rules! remove_graphql_attrs {
     };
 }
 
-remove_graphql_attrs!()
+remove_graphql_attrs!();

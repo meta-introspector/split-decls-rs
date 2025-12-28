@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SeekResult!();
-        InfoType!();
-        Callbacks!();
-        ReadError!();
-        Error!();
         Transfer!();
+        ReadError!();
+        InfoType!();
+        SeekResult!();
+        Callbacks!();
         WriteError!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

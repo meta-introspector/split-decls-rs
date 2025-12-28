@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Inner!();
         Handler!();
+        Inner!();
         InfoType!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! debug_cb {
     };
 }
 
-debug_cb!()
+debug_cb!();

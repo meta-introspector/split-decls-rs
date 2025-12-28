@@ -4,4 +4,4 @@ macro_rules! KDHELP64 {
     };
 }
 
-KDHELP64!()
+KDHELP64!();

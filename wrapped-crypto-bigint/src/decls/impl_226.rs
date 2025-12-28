@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Odd!();
         Uint!();
+        Odd!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_226 {
     };
 }
 
-impl_226!()
+impl_226!();

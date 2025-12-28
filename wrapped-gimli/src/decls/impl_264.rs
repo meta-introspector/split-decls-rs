@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Dwarf!();
         DwarfFileType!();
+        Dwarf!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_264 {
     };
 }
 
-impl_264!()
+impl_264!();

@@ -4,4 +4,4 @@ macro_rules! Debt {
     };
 }
 
-Debt!()
+Debt!();

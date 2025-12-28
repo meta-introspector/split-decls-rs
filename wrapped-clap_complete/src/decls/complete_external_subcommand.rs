@@ -12,4 +12,4 @@ macro_rules! complete_external_subcommand {
     };
 }
 
-complete_external_subcommand!()
+complete_external_subcommand!();

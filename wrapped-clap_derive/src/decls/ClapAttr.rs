@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         MagicAttrName!();
         Sp!();
-        AttrKind!();
         AttrValue!();
+        AttrKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ClapAttr {
     };
 }
 
-ClapAttr!()
+ClapAttr!();

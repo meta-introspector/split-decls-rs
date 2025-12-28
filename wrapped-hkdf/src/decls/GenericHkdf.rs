@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HmacImpl!();
         SimpleHkdf!();
         Hkdf!();
+        HmacImpl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! GenericHkdf {
     };
 }
 
-GenericHkdf!()
+GenericHkdf!();

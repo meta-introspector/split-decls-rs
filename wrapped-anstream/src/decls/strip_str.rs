@@ -12,4 +12,4 @@ macro_rules! strip_str {
     };
 }
 
-strip_str!()
+strip_str!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NextTraitSolveResult!();
         Canonical!();
+        NextTraitSolveResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! next_trait_solve_canonical_in_ctxt {
     };
 }
 
-next_trait_solve_canonical_in_ctxt!()
+next_trait_solve_canonical_in_ctxt!();

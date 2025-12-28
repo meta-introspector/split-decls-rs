@@ -1,0 +1,7 @@
+macro_rules! macro_80 {
+    () => {
+        declare_lint ! { # [doc = " The `explicit_builtin_cfgs_in_flags` lint detects builtin cfgs set via the `--cfg` flag."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```text"] # [doc = " rustc --cfg unix"] # [doc = " ```"] # [doc = ""] # [doc = " ```rust,ignore (needs command line option)"] # [doc = " fn main() {}"] # [doc = " ```"] # [doc = ""] # [doc = " This will produce:"] # [doc = ""] # [doc = " ```text"] # [doc = " error: unexpected `--cfg unix` flag"] # [doc = "   |"] # [doc = "   = note: config `unix` is only supposed to be controlled by `--target`"] # [doc = "   = note: manually setting a built-in cfg can and does create incoherent behaviors"] # [doc = "   = note: `#[deny(explicit_builtin_cfgs_in_flags)]` on by default"] # [doc = " ```"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Setting builtin cfgs can and does produce incoherent behavior, it's better to the use"] # [doc = " the appropriate `rustc` flag that controls the config. For example setting the `windows`"] # [doc = " cfg but on Linux based target."] pub EXPLICIT_BUILTIN_CFGS_IN_FLAGS , Deny , "detects builtin cfgs set via the `--cfg`" }
+    };
+}
+
+macro_80!()

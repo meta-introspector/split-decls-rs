@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Opaque!();
+        IntegerLength!();
     };
 }
 
 macro_rules! impl_35 {
     () => {
         deps!();
-        impl std :: fmt :: Debug for Opaque { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { write ! (f , "{}" , self . 0) } }
+        impl IntegerLength { pub fn bits (self) -> usize { match self { IntegerLength :: I8 => 8 , IntegerLength :: I16 => 16 , IntegerLength :: I32 => 32 , IntegerLength :: I64 => 64 , IntegerLength :: I128 => 128 , } } }
     };
 }
 

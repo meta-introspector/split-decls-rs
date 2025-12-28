@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         MaybeUndefined!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_788 {
     };
 }
 
-impl_788!()
+impl_788!();

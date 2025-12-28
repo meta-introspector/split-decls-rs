@@ -4,4 +4,4 @@ macro_rules! strftime {
     };
 }
 
-strftime!()
+strftime!();

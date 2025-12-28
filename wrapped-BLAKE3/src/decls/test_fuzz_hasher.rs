@@ -11,4 +11,4 @@ macro_rules! test_fuzz_hasher {
     };
 }
 
-test_fuzz_hasher!()
+test_fuzz_hasher!();

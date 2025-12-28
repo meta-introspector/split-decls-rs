@@ -4,4 +4,4 @@ macro_rules! C_ATTR {
     };
 }
 
-C_ATTR!()
+C_ATTR!();

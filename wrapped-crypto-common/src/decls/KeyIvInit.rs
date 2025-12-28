@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IvSizeUser!();
-        Iv!();
-        KeySizeUser!();
-        Key!();
         InvalidLength!();
+        Key!();
+        Iv!();
+        IvSizeUser!();
         WeakKeyError!();
+        KeySizeUser!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! KeyIvInit {
     };
 }
 
-KeyIvInit!()
+KeyIvInit!();

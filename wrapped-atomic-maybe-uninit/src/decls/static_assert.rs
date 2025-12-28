@@ -4,4 +4,4 @@ macro_rules! static_assert {
     };
 }
 
-static_assert!()
+static_assert!();

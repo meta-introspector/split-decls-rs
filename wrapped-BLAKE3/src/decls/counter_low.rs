@@ -4,4 +4,4 @@ macro_rules! counter_low {
     };
 }
 
-counter_low!()
+counter_low!();

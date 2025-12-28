@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MappedGenericSequence!();
-        GenericSequence!();
         Mapped!();
+        GenericSequence!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_106 {
     };
 }
 
-impl_106!()
+impl_106!();

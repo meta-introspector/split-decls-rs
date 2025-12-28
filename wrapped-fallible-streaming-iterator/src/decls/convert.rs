@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Convert!();
         FallibleStreamingIterator!();
+        Convert!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! convert {
     };
 }
 
-convert!()
+convert!();

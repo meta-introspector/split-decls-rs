@@ -4,4 +4,4 @@ macro_rules! NANOS_PER_MICRO {
     };
 }
 
-NANOS_PER_MICRO!()
+NANOS_PER_MICRO!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        NaiveTime!();
-        Offset!();
         TimeZone!();
+        Offset!();
         Utc!();
+        NaiveTime!();
+        TimeDelta!();
+        NaiveDate!();
         DateTime!();
         Date!();
-        NaiveDate!();
-        TimeDelta!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Relation!();
+        Error!();
         Visit!();
-        Change!();
         ChangeId!();
         TreeInfoTuple!();
-        Error!();
-        Relation!();
+        Change!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! delete_entry_schedule_recursion {
     };
 }
 
-delete_entry_schedule_recursion!()
+delete_entry_schedule_recursion!();

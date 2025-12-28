@@ -4,4 +4,4 @@ macro_rules! dep_path_impl {
     };
 }
 
-dep_path_impl!()
+dep_path_impl!();

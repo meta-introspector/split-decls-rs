@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ChunkState!();
-        OutputReader!();
-        Output!();
-        Hash!();
         Platform!();
+        Hash!();
         Hasher!();
+        OutputReader!();
+        ChunkState!();
+        Output!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! test_zeroize {
     };
 }
 
-test_zeroize!()
+test_zeroize!();

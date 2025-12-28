@@ -11,4 +11,4 @@ macro_rules! fiat_sm2_to_montgomery {
     };
 }
 
-fiat_sm2_to_montgomery!()
+fiat_sm2_to_montgomery!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         BindingMode!();
-        TypeMismatch!();
-        CandidateId!();
-        InferenceDiagnostic!();
-        Adjustment!();
-        InternedOpaqueTyId!();
         InternedClosureId!();
+        TypeMismatch!();
         FnTrait!();
+        CandidateId!();
         InferenceContext!();
+        InternedOpaqueTyId!();
+        Adjustment!();
+        InferenceDiagnostic!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! InferenceResult {
     };
 }
 
-InferenceResult!()
+InferenceResult!();

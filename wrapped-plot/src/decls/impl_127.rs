@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Key!();
         Properties!();
-        Configure!();
         Figure!();
+        Configure!();
         Default!();
+        Key!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_127 {
     };
 }
 
-impl_127!()
+impl_127!();

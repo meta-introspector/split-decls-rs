@@ -4,4 +4,4 @@ macro_rules! DummyWaker {
     };
 }
 
-DummyWaker!()
+DummyWaker!();

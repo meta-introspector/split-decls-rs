@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ParseContext!();
         SubstitutionTable!();
-        Result!();
-        Discriminator!();
-        Parse!();
         IndexStr!();
+        Parse!();
+        ParseContext!();
+        Result!();
         Error!();
+        Discriminator!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_277 {
     };
 }
 
-impl_277!()
+impl_277!();

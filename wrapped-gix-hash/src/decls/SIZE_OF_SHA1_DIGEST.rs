@@ -4,4 +4,4 @@ macro_rules! SIZE_OF_SHA1_DIGEST {
     };
 }
 
-SIZE_OF_SHA1_DIGEST!()
+SIZE_OF_SHA1_DIGEST!();

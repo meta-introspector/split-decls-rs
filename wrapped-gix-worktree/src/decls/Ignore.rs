@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IgnoreMatchGroup!();
         Source!();
         State!();
-        IgnoreMatchGroup!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Ignore {
     };
 }
 
-Ignore!()
+Ignore!();

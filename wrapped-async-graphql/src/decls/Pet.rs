@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Dog!();
         Interface!();
+        Dog!();
         Cat!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Pet {
     };
 }
 
-Pet!()
+Pet!();

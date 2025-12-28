@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Owned!();
         Shared!();
         Pointable!();
-        Owned!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Pointer {
     };
 }
 
-Pointer!()
+Pointer!();

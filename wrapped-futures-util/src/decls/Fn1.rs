@@ -11,4 +11,4 @@ macro_rules! Fn1 {
     };
 }
 
-Fn1!()
+Fn1!();

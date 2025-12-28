@@ -4,4 +4,4 @@ macro_rules! and_all {
     };
 }
 
-and_all!()
+and_all!();

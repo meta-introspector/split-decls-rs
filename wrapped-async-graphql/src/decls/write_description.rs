@@ -11,4 +11,4 @@ macro_rules! write_description {
     };
 }
 
-write_description!()
+write_description!();

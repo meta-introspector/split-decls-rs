@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         StyledStr!();
-        Command!();
         Styles!();
+        Command!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! format_error_message {
     };
 }
 
-format_error_message!()
+format_error_message!();

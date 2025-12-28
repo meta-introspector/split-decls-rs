@@ -11,4 +11,4 @@ macro_rules! encode_one_then_two_bytes {
     };
 }
 
-encode_one_then_two_bytes!()
+encode_one_then_two_bytes!();

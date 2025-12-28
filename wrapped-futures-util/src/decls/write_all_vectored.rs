@@ -4,4 +4,4 @@ macro_rules! write_all_vectored {
     };
 }
 
-write_all_vectored!()
+write_all_vectored!();

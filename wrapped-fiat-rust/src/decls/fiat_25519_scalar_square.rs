@@ -11,4 +11,4 @@ macro_rules! fiat_25519_scalar_square {
     };
 }
 
-fiat_25519_scalar_square!()
+fiat_25519_scalar_square!();

@@ -4,4 +4,4 @@ macro_rules! MatchOptions {
     };
 }
 
-MatchOptions!()
+MatchOptions!();

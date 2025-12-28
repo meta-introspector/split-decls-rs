@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        I32!();
-        FatVector!();
         I64!();
-        I8!();
         Vector!();
+        FatVector!();
+        I8!();
+        I32!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! x86_64_avx2 {
     };
 }
 
-x86_64_avx2!()
+x86_64_avx2!();

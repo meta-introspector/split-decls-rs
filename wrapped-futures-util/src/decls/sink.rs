@@ -4,4 +4,4 @@ macro_rules! sink {
     };
 }
 
-sink!()
+sink!();

@@ -4,4 +4,4 @@ macro_rules! blend_epi16 {
     };
 }
 
-blend_epi16!()
+blend_epi16!();

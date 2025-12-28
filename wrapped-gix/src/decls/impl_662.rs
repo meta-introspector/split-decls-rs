@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        Path!();
+        String!();
+        SslVersion!();
+        Tree!();
+        Http!();
         UnsignedInteger!();
         ExtraHeader!();
         ProxyAuthMethod!();
-        FollowRedirects!();
-        SslVersion!();
-        String!();
-        Http!();
-        Tree!();
-        Path!();
-        Boolean!();
         Version!();
+        Boolean!();
+        FollowRedirects!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_662 {
     };
 }
 
-impl_662!()
+impl_662!();

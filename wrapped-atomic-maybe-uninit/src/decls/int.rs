@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Primitive!();
         AtomicMaybeUninit!();
+        Primitive!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! int {
     };
 }
 
-int!()
+int!();

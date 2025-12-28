@@ -4,4 +4,4 @@ macro_rules! vld1q_u8_safe {
     };
 }
 
-vld1q_u8_safe!()
+vld1q_u8_safe!();

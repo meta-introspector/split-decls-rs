@@ -11,4 +11,4 @@ macro_rules! index_from_tree {
     };
 }
 
-index_from_tree!()
+index_from_tree!();

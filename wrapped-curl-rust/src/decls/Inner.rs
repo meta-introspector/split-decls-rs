@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Form!();
         List!();
+        Form!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Inner {
     };
 }
 
-Inner!()
+Inner!();

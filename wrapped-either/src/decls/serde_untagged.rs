@@ -4,4 +4,4 @@ macro_rules! serde_untagged {
     };
 }
 
-serde_untagged!()
+serde_untagged!();

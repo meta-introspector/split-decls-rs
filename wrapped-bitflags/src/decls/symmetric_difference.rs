@@ -4,4 +4,4 @@ macro_rules! symmetric_difference {
     };
 }
 
-symmetric_difference!()
+symmetric_difference!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Eager!();
         BlockBuffer!();
+        Eager!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EagerBuffer {
     };
 }
 
-EagerBuffer!()
+EagerBuffer!();

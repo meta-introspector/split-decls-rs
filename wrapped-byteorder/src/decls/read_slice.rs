@@ -4,4 +4,4 @@ macro_rules! read_slice {
     };
 }
 
-read_slice!()
+read_slice!();

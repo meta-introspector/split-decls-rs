@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        EarlyBinder!();
         HirDatabase!();
         UninhabitedFrom!();
-        VisiblyUninhabited!();
-        EarlyBinder!();
         TraitEnvironment!();
+        VisiblyUninhabited!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_99 {
     };
 }
 
-impl_99!()
+impl_99!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SeqAccess!();
         TrackedSeed!();
         Path!();
+        SeqAccess!();
     };
 }
 

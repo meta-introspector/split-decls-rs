@@ -4,4 +4,4 @@ macro_rules! Inserted {
     };
 }
 
-Inserted!()
+Inserted!();

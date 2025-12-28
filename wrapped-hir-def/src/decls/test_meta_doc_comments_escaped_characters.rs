@@ -16,4 +16,4 @@ macro_rules! m {
     };
 }
 
-test_meta_doc_comments_escaped_characters!()
+test_meta_doc_comments_escaped_characters!();

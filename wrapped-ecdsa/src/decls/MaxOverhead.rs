@@ -4,4 +4,4 @@ macro_rules! MaxOverhead {
     };
 }
 
-MaxOverhead!()
+MaxOverhead!();

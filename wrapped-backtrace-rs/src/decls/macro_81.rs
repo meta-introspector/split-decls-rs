@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FARPROC!();
-        PCSTR!();
         HMODULE!();
+        PCSTR!();
+        FARPROC!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_81 {
     };
 }
 
-macro_81!()
+macro_81!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        ContextBase!();
+        ContextSelectionSet!();
+        Fields!();
+        Field!();
+        ContainerType!();
         ServerResult!();
         ResolveInfo!();
-        Fields!();
         ServerError!();
-        Field!();
-        ContextSelectionSet!();
-        ContainerType!();
-        ContextBase!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_688 {
     };
 }
 
-impl_688!()
+impl_688!();

@@ -4,4 +4,4 @@ macro_rules! levenshtein_distance {
     };
 }
 
-levenshtein_distance!()
+levenshtein_distance!();

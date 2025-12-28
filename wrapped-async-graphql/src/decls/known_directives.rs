@@ -4,4 +4,4 @@ macro_rules! known_directives {
     };
 }
 
-known_directives!()
+known_directives!();

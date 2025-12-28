@@ -4,4 +4,4 @@ macro_rules! derive_struct {
     };
 }
 
-derive_struct!()
+derive_struct!();

@@ -4,4 +4,4 @@ macro_rules! split_file_name {
     };
 }
 
-split_file_name!()
+split_file_name!();

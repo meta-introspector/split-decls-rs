@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Protocol!();
         ReadlineBufRead!();
         Error!();
+        Protocol!();
         Capabilities!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! blocking_recv {
     };
 }
 
-blocking_recv!()
+blocking_recv!();

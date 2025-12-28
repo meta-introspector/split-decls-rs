@@ -11,4 +11,4 @@ macro_rules! process_has_attrs_with_possible_comma {
     };
 }
 
-process_has_attrs_with_possible_comma!()
+process_has_attrs_with_possible_comma!();

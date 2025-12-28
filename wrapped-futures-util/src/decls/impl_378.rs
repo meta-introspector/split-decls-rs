@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StreamFuture!();
         Ready!();
+        StreamFuture!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_378 {
     };
 }
 
-impl_378!()
+impl_378!();

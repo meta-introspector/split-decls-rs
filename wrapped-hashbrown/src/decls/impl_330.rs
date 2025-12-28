@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Entry!();
+        VacantEntry!();
         HashMap!();
         OccupiedEntry!();
-        VacantEntry!();
+        Entry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_330 {
     };
 }
 
-impl_330!()
+impl_330!();

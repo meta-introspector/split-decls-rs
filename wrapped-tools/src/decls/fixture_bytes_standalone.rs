@@ -11,4 +11,4 @@ macro_rules! fixture_bytes_standalone {
     };
 }
 
-fixture_bytes_standalone!()
+fixture_bytes_standalone!();

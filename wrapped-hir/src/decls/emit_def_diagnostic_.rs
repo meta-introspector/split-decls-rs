@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        MacroError!();
-        UnresolvedModule!();
-        InvalidDeriveTarget!();
-        InactiveCode!();
-        UnresolvedMacroCall!();
-        MalformedDerive!();
         UnimplementedBuiltinMacro!();
-        UnresolvedImport!();
+        MalformedDerive!();
+        UnresolvedModule!();
+        InactiveCode!();
         UnresolvedExternCrate!();
+        MacroError!();
         MacroDefError!();
+        UnresolvedImport!();
+        UnresolvedMacroCall!();
+        InvalidDeriveTarget!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! emit_def_diagnostic_ {
     };
 }
 
-emit_def_diagnostic_!()
+emit_def_diagnostic_!();

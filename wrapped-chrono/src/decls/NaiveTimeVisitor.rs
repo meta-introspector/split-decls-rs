@@ -4,4 +4,4 @@ macro_rules! NaiveTimeVisitor {
     };
 }
 
-NaiveTimeVisitor!()
+NaiveTimeVisitor!();

@@ -4,4 +4,4 @@ macro_rules! UuidVersionValidation {
     };
 }
 
-UuidVersionValidation!()
+UuidVersionValidation!();

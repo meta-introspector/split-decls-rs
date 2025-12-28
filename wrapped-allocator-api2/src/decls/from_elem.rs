@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Vec!();
         ExtendElement!();
+        Vec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! from_elem {
     };
 }
 
-from_elem!()
+from_elem!();

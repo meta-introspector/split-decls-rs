@@ -4,4 +4,4 @@ macro_rules! test_finish_is_consistent {
     };
 }
 
-test_finish_is_consistent!()
+test_finish_is_consistent!();

@@ -4,4 +4,4 @@ macro_rules! Substitution {
     };
 }
 
-Substitution!()
+Substitution!();

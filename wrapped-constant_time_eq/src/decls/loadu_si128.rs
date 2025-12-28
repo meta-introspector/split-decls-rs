@@ -4,4 +4,4 @@ macro_rules! loadu_si128 {
     };
 }
 
-loadu_si128!()
+loadu_si128!();

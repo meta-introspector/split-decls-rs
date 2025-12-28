@@ -4,4 +4,4 @@ macro_rules! is_excluded {
     };
 }
 
-is_excluded!()
+is_excluded!();

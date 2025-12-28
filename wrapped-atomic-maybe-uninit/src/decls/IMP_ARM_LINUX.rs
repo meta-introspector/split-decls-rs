@@ -4,4 +4,4 @@ macro_rules! IMP_ARM_LINUX {
     };
 }
 
-IMP_ARM_LINUX!()
+IMP_ARM_LINUX!();

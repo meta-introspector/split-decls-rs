@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SectionId!();
-        Result!();
-        Reader!();
         DwarfPackage!();
-        Error!();
-        DwarfPackageSections!();
+        Reader!();
+        SectionId!();
         Section!();
+        Result!();
+        DwarfPackageSections!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_266 {
     };
 }
 
-impl_266!()
+impl_266!();

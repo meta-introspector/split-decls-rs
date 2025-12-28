@@ -4,4 +4,4 @@ macro_rules! fiat_poly1305_subborrowx_u26 {
     };
 }
 
-fiat_poly1305_subborrowx_u26!()
+fiat_poly1305_subborrowx_u26!();

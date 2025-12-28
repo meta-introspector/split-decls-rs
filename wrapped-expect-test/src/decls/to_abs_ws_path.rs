@@ -4,4 +4,4 @@ macro_rules! to_abs_ws_path {
     };
 }
 
-to_abs_ws_path!()
+to_abs_ws_path!();

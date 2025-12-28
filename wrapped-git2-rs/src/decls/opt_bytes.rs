@@ -4,4 +4,4 @@ macro_rules! opt_bytes {
     };
 }
 
-opt_bytes!()
+opt_bytes!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UploadFile!();
-        Mutation!();
         Visitor!();
-        Upload!();
         VisitorContext!();
+        UploadFile!();
+        Upload!();
+        Mutation!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_263 {
     };
 }
 
-impl_263!()
+impl_263!();

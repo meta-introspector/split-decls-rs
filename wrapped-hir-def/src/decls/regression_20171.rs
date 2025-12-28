@@ -4,4 +4,4 @@ macro_rules! regression_20171 {
     };
 }
 
-regression_20171!()
+regression_20171!();

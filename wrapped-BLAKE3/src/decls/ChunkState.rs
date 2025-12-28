@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Platform!();
         CVWords!();
+        Platform!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ChunkState {
     };
 }
 
-ChunkState!()
+ChunkState!();

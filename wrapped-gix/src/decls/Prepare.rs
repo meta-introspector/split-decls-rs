@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         RefLogMessage!();
         WritePackedRefs!();
-        Connection!();
         DryRun!();
+        Connection!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Prepare {
     };
 }
 
-Prepare!()
+Prepare!();

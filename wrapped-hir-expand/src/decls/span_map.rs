@@ -4,4 +4,4 @@ macro_rules! span_map {
     };
 }
 
-span_map!()
+span_map!();

@@ -4,4 +4,4 @@ macro_rules! _unsized_std_propagation {
     };
 }
 
-_unsized_std_propagation!()
+_unsized_std_propagation!();

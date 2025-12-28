@@ -4,4 +4,4 @@ macro_rules! scheme_permission {
     };
 }
 
-scheme_permission!()
+scheme_permission!();

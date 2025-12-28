@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LCID!();
         LPFILETIME!();
+        BSTR!();
+        LCID!();
         HRESULT!();
         LPCOLESTR!();
-        BSTR!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! macro_139 {
     };
 }
 
-macro_139!()
+macro_139!();

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Utf8BoundedEntry!();
+        NFA!();
+    };
+}
+
+macro_rules! Utf8BoundedMap {
+    () => {
+        deps!();
+        # [doc = " A bounded hash map where the key is a sequence of NFA transitions and the"] # [doc = " value is a pre-existing NFA state ID."] # [doc = ""] # [doc = " std's hashmap can be used for this, however, this map has two important"] # [doc = " advantages. Firstly, it has lower overhead. Secondly, it permits us to"] # [doc = " control our memory usage by limited the number of slots. In general, the"] # [doc = " cost here is that this map acts as a cache. That is, inserting a new entry"] # [doc = " may remove an old entry. We are okay with this, since it does not impact"] # [doc = " correctness in the cases where it is used. The only effect that dropping"] # [doc = " states from the cache has is that the resulting NFA generated may be bigger"] # [doc = " than it otherwise would be."] # [doc = ""] # [doc = " This improves benchmarks that compile large Unicode character classes,"] # [doc = " since it makes the generation of (almost) minimal UTF-8 automaton faster."] # [doc = " Specifically, one could observe the difference with std's hashmap via"] # [doc = " something like the following benchmark:"] # [doc = ""] # [doc = "   hyperfine \"regex-cli debug thompson -qr --captures none '\\w{90} ecurB'\""] # [doc = ""] # [doc = " But to observe that difference, you'd have to modify the code to use"] # [doc = " std's hashmap."] # [doc = ""] # [doc = " It is quite possible that there is a better way to approach this problem."] # [doc = " For example, if there happens to be a very common state that collides with"] # [doc = " a lot of less frequent states, then we could wind up with very poor caching"] # [doc = " behavior. Alas, the effectiveness of this cache has not been measured."] # [doc = " Instead, ad hoc experiments suggest that it is \"good enough.\" Additional"] # [doc = " smarts (such as an LRU eviction policy) have to be weighed against the"] # [doc = " amount of extra time they cost."] # [derive (Clone , Debug)] pub struct Utf8BoundedMap { # [doc = " The current version of this map. Only entries with matching versions"] # [doc = " are considered during lookups. If an entry is found with a mismatched"] # [doc = " version, then the map behaves as if the entry does not exist."] # [doc = ""] # [doc = " This makes it possible to clear the map by simply incrementing the"] # [doc = " version number instead of actually deallocating any storage."] version : u16 , # [doc = " The total number of entries this map can store."] capacity : usize , # [doc = " The actual entries, keyed by hash. Collisions between different states"] # [doc = " result in the old state being dropped."] map : Vec < Utf8BoundedEntry > , }
+    };
+}
+
+Utf8BoundedMap!()

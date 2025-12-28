@@ -4,4 +4,4 @@ macro_rules! Big5Decoder {
     };
 }
 
-Big5Decoder!()
+Big5Decoder!();

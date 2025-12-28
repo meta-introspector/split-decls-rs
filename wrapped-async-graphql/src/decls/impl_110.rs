@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Response!();
+        CacheControl!();
         ServerError!();
         Result!();
-        CacheControl!();
+        Response!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

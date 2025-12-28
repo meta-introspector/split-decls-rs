@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ArrayLength!();
-        IntrusiveArrayBuilder!();
         GenericArray!();
+        IntrusiveArrayBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ArrayBuilder {
     };
 }
 
-ArrayBuilder!()
+ArrayBuilder!();

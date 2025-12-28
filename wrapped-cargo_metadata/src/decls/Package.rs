@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Edition!();
-        Target!();
         Dependency!();
         PackageId!();
         Source!();
+        Target!();
+        Edition!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Package {
     };
 }
 
-Package!()
+Package!();

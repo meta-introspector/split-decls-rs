@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AttributeId!();
-        Slot!();
         Assignment!();
         RefMap!();
+        AttributeId!();
+        Slot!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Outcome {
     };
 }
 
-Outcome!()
+Outcome!();

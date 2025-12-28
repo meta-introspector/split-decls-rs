@@ -4,4 +4,4 @@ macro_rules! write_atomic {
     };
 }
 
-write_atomic!()
+write_atomic!();

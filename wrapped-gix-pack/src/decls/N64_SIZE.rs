@@ -4,4 +4,4 @@ macro_rules! N64_SIZE {
     };
 }
 
-N64_SIZE!()
+N64_SIZE!();

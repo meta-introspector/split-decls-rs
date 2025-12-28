@@ -4,4 +4,4 @@ macro_rules! Fe {
     };
 }
 
-Fe!()
+Fe!();

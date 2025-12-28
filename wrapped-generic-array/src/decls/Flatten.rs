@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         GenericSequence!();
-        ArrayLength!();
         GenericArray!();
+        ArrayLength!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Flatten {
     };
 }
 
-Flatten!()
+Flatten!();

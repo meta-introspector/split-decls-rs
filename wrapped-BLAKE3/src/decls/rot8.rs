@@ -4,4 +4,4 @@ macro_rules! rot8 {
     };
 }
 
-rot8!()
+rot8!();

@@ -4,4 +4,4 @@ macro_rules! PAD_BYTE {
     };
 }
 
-PAD_BYTE!()
+PAD_BYTE!();

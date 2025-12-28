@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Key!();
-        Section!();
         Clone!();
+        Section!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_601 {
     };
 }
 
-impl_601!()
+impl_601!();

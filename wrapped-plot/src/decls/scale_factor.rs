@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Axes!();
-        ScaleFactorTrait!();
         Axis!();
         Properties!();
+        ScaleFactorTrait!();
+        Axes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! scale_factor {
     };
 }
 
-scale_factor!()
+scale_factor!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TrackClosed!();
-        InterleavePending!();
         AssertUnmoved!();
+        InterleavePending!();
         Limited!();
+        TrackClosed!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! AsyncWriteTestExt {
     };
 }
 
-AsyncWriteTestExt!()
+AsyncWriteTestExt!();

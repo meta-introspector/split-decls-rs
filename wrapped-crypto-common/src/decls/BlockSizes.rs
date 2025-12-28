@@ -4,4 +4,4 @@ macro_rules! BlockSizes {
     };
 }
 
-BlockSizes!()
+BlockSizes!();

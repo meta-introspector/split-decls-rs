@@ -1,30 +1,30 @@
 macro_rules! deps {
     () => {
+        TypeParam!();
+        Variant!();
+        Impl!();
         Static!();
-        Local!();
         Trait!();
-        Function!();
-        ExternBlock!();
-        Adt!();
-        TupleField!();
-        Union!();
-        Const!();
-        Struct!();
+        Field!();
+        SelfParam!();
         Module!();
         TypeAlias!();
-        Label!();
-        ExternCrateDecl!();
-        ConstParam!();
-        TypeParam!();
-        SelfParam!();
-        InlineAsmOperand!();
-        Variant!();
         Enum!();
         LifetimeParam!();
-        GenericParam!();
+        Function!();
+        ConstParam!();
+        ExternBlock!();
         Macro!();
-        Field!();
-        Impl!();
+        InlineAsmOperand!();
+        Const!();
+        Adt!();
+        Union!();
+        Struct!();
+        GenericParam!();
+        Label!();
+        ExternCrateDecl!();
+        TupleField!();
+        Local!();
     };
 }
 
@@ -35,4 +35,4 @@ macro_rules! macro_91 {
     };
 }
 
-macro_91!()
+macro_91!();

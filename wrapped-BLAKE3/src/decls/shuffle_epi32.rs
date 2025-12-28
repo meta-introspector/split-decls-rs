@@ -4,4 +4,4 @@ macro_rules! shuffle_epi32 {
     };
 }
 
-shuffle_epi32!()
+shuffle_epi32!();

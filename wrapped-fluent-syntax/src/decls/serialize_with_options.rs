@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Resource!();
+        Options!();
         Serializer!();
         Slice!();
-        Options!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! serialize_with_options {
     };
 }
 
-serialize_with_options!()
+serialize_with_options!();

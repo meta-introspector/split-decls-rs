@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         DemangleContext!();
-        ArgScopeStack!();
         MangledName!();
-        Result!();
-        Encoding!();
-        DemangleWrite!();
-        Type!();
         GlobalCtorDtor!();
         Demangle!();
+        Result!();
+        DemangleWrite!();
+        Type!();
+        Encoding!();
+        ArgScopeStack!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

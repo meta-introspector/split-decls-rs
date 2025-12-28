@@ -4,4 +4,4 @@ macro_rules! ceprint {
     };
 }
 
-ceprint!()
+ceprint!();

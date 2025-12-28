@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Find!();
         Entry!();
         TreeRefIter!();
+        Error!();
+        Find!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

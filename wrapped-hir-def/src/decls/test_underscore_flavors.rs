@@ -16,4 +16,4 @@ ok!();
     };
 }
 
-test_underscore_flavors!()
+test_underscore_flavors!();

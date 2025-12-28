@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        EhFrameOffset!();
         EhHdrTable!();
-        EhFrame!();
-        Reader!();
-        UnwindTableRow!();
-        FrameDescriptionEntry!();
-        Pointer!();
-        UnwindSection!();
-        PointerEncodingParameters!();
-        Result!();
-        ParsedEhFrameHdr!();
-        EndianSlice!();
-        CommonInformationEntry!();
-        UnwindContext!();
-        UnwindContextStorage!();
-        BaseAddresses!();
-        EhHdrTableIter!();
         Error!();
+        EhFrame!();
+        ParsedEhFrameHdr!();
+        PointerEncodingParameters!();
+        EndianSlice!();
+        FrameDescriptionEntry!();
+        Result!();
+        CommonInformationEntry!();
+        Pointer!();
+        EhHdrTableIter!();
+        EhFrameOffset!();
+        BaseAddresses!();
+        UnwindContextStorage!();
+        Reader!();
+        UnwindSection!();
+        UnwindContext!();
+        UnwindTableRow!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_174 {
     };
 }
 
-impl_174!()
+impl_174!();

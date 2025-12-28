@@ -11,4 +11,4 @@ macro_rules! InheritableBtreeMap {
     };
 }
 
-InheritableBtreeMap!()
+InheritableBtreeMap!();

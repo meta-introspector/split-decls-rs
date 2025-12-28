@@ -4,4 +4,4 @@ macro_rules! symlink_metadata {
     };
 }
 
-symlink_metadata!()
+symlink_metadata!();

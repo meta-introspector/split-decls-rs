@@ -4,4 +4,4 @@ macro_rules! ReadLineFuture {
     };
 }
 
-ReadLineFuture!()
+ReadLineFuture!();

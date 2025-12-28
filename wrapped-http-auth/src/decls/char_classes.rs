@@ -4,4 +4,4 @@ macro_rules! char_classes {
     };
 }
 
-char_classes!()
+char_classes!();

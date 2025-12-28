@@ -4,4 +4,4 @@ macro_rules! LangCrateOrigin {
     };
 }
 
-LangCrateOrigin!()
+LangCrateOrigin!();

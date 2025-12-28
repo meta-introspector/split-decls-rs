@@ -4,4 +4,4 @@ macro_rules! LABELS_SORTED {
     };
 }
 
-LABELS_SORTED!()
+LABELS_SORTED!();

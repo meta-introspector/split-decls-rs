@@ -4,4 +4,4 @@ macro_rules! time_delta {
     };
 }
 
-time_delta!()
+time_delta!();

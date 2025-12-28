@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Platform!();
-        Options!();
-        Error!();
+        Pipeline!();
         ApplyLeniency!();
         Renames!();
-        Note!();
-        Diff!();
         UnsignedInteger!();
-        Pipeline!();
+        Note!();
+        Error!();
+        Diff!();
+        Platform!();
+        Options!();
         Repository!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! utils {
     };
 }
 
-utils!()
+utils!();

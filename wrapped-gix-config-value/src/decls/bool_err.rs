@@ -11,4 +11,4 @@ macro_rules! bool_err {
     };
 }
 
-bool_err!()
+bool_err!();

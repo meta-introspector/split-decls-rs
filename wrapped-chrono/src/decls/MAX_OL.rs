@@ -4,4 +4,4 @@ macro_rules! MAX_OL {
     };
 }
 
-MAX_OL!()
+MAX_OL!();

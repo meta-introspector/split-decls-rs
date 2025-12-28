@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TreeNodes!();
-        PossibleConflict!();
         ChangeLocation!();
         TreeNode!();
         ChangeListRef!();
+        TreeNodes!();
+        PossibleConflict!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_142 {
     };
 }
 
-impl_142!()
+impl_142!();

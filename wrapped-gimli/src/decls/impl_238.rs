@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Register!();
         CfaRule!();
         ReaderOffset!();
-        Register!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_238 {
     };
 }
 
-impl_238!()
+impl_238!();

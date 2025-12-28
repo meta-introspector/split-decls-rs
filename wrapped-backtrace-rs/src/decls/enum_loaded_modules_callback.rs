@@ -13,4 +13,4 @@ macro_rules! enum_loaded_modules_callback {
     };
 }
 
-enum_loaded_modules_callback!()
+enum_loaded_modules_callback!();

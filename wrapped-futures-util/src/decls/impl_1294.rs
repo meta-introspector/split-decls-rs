@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Waiter!();
-        Ready!();
         Pending!();
         OwnedMutexGuard!();
         OwnedMutexLockFuture!();
+        Ready!();
+        Waiter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1294 {
     };
 }
 
-impl_1294!()
+impl_1294!();

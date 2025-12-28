@@ -4,4 +4,4 @@ macro_rules! from_utf8_unchecked {
     };
 }
 
-from_utf8_unchecked!()
+from_utf8_unchecked!();

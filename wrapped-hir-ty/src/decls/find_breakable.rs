@@ -12,4 +12,4 @@ macro_rules! find_breakable {
     };
 }
 
-find_breakable!()
+find_breakable!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         EncodingVisitor!();
+        Encoding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_507 {
     };
 }
 
-impl_507!()
+impl_507!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Allocator!();
         Vec!();
+        Allocator!();
         ExtendElement!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! from_elem_in {
     };
 }
 
-from_elem_in!()
+from_elem_in!();

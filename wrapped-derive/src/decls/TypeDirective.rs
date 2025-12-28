@@ -4,4 +4,4 @@ macro_rules! TypeDirective {
     };
 }
 
-TypeDirective!()
+TypeDirective!();

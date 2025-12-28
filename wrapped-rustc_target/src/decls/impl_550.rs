@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        TargetTuple!();
+    };
+}
+
+macro_rules! impl_550 {
+    () => {
+        deps!();
+        impl TargetTuple { # [doc = " Creates a target tuple from the passed target tuple string."] pub fn from_tuple (tuple : & str) -> Self { TargetTuple :: TargetTuple (tuple . into ()) } # [doc = " Creates a target tuple from the passed target path."] pub fn from_path (path : & Path) -> Result < Self , io :: Error > { let canonicalized_path = try_canonicalize (path) ? ; let contents = std :: fs :: read_to_string (& canonicalized_path) . map_err (| err | { io :: Error :: new (io :: ErrorKind :: InvalidInput , format ! ("target path {canonicalized_path:?} is not a valid file: {err}") ,) }) ? ; let tuple = canonicalized_path . file_stem () . expect ("target path must not be empty") . to_str () . expect ("target path must be valid unicode") . to_owned () ; Ok (TargetTuple :: TargetJson { path_for_rustdoc : canonicalized_path , tuple , contents }) } # [doc = " Returns a string tuple for this target."] # [doc = ""] # [doc = " If this target is a path, the file name (without extension) is returned."] pub fn tuple (& self) -> & str { match * self { TargetTuple :: TargetTuple (ref tuple) | TargetTuple :: TargetJson { ref tuple , .. } => { tuple } } } # [doc = " Returns an extended string tuple for this target."] # [doc = ""] # [doc = " If this target is a path, a hash of the path is appended to the tuple returned"] # [doc = " by `tuple()`."] pub fn debug_tuple (& self) -> String { use std :: hash :: DefaultHasher ; match self { TargetTuple :: TargetTuple (tuple) => tuple . to_owned () , TargetTuple :: TargetJson { path_for_rustdoc : _ , tuple , contents : content } => { let mut hasher = DefaultHasher :: new () ; content . hash (& mut hasher) ; let hash = hasher . finish () ; format ! ("{tuple}-{hash}") } } } }
+    };
+}
+
+impl_550!()

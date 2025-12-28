@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Resamples!();
-        Distributions!();
-        Sample!();
-        Tuple!();
-        Data!();
         Float!();
+        Resamples!();
+        Tuple!();
+        Sample!();
+        Data!();
+        Distributions!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_307 {
     };
 }
 
-impl_307!()
+impl_307!();

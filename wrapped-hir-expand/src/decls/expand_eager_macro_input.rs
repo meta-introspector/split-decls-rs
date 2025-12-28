@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        ExpandDatabase!();
+        MacroCallLoc!();
+        InFile!();
         MacroCallId!();
+        MacroCallKind!();
+        AstId!();
         ExpandResult!();
         ModPath!();
-        MacroDefId!();
-        EagerCallBackFn!();
-        EagerCallInfo!();
-        MacroCallKind!();
-        InFile!();
-        AstId!();
         ExpansionSpanMap!();
-        MacroCallLoc!();
+        EagerCallInfo!();
+        EagerCallBackFn!();
+        MacroDefId!();
         ExpandTo!();
-        ExpandDatabase!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! expand_eager_macro_input {
     };
 }
 
-expand_eager_macro_input!()
+expand_eager_macro_input!();

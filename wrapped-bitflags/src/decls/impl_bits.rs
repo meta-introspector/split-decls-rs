@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ParseError!();
         Bits!();
+        ParseError!();
         ParseHex!();
-        Primitive!();
         WriteHex!();
+        Primitive!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_bits {
     };
 }
 
-impl_bits!()
+impl_bits!();

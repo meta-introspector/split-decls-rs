@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
         DisplayTarget!();
+        HirDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_485 {
     };
 }
 
-impl_485!()
+impl_485!();

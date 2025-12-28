@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         AnyValueId!();
         Extensions!();
-        AnyValue!();
         Extension!();
+        AnyValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_100 {
     };
 }
 
-impl_100!()
+impl_100!();

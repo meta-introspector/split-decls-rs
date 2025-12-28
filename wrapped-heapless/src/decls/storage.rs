@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LenType!();
-        Node!();
         SortedLinkedListView!();
+        LenType!();
         SortedLinkedList!();
         SortedLinkedListInner!();
+        Node!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! storage {
     };
 }
 
-storage!()
+storage!();

@@ -4,4 +4,4 @@ macro_rules! signed_short {
     };
 }
 
-signed_short!()
+signed_short!();

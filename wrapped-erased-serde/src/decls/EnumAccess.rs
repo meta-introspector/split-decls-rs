@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Error!();
         DeserializeSeed!();
         Result!();
         Out!();
         Variant!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! EnumAccess {
     };
 }
 
-EnumAccess!()
+EnumAccess!();

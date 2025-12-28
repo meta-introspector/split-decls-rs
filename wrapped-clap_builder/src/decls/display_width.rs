@@ -4,4 +4,4 @@ macro_rules! display_width {
     };
 }
 
-display_width!()
+display_width!();

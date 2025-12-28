@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
         PredicateFilter!();
+        EarlyBinder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! named_associated_type_shorthand_candidates {
     };
 }
 
-named_associated_type_shorthand_candidates!()
+named_associated_type_shorthand_candidates!();

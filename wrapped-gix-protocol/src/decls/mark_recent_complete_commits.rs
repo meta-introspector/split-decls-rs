@@ -12,4 +12,4 @@ macro_rules! mark_recent_complete_commits {
     };
 }
 
-mark_recent_complete_commits!()
+mark_recent_complete_commits!();

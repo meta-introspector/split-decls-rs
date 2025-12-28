@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Response!();
-        Feature!();
-        Error!();
         Acknowledgement!();
         WantedRef!();
+        Error!();
+        Feature!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

@@ -4,4 +4,4 @@ macro_rules! SET_FOREGROUND {
     };
 }
 
-SET_FOREGROUND!()
+SET_FOREGROUND!();

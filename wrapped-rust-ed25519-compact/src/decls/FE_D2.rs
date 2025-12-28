@@ -11,4 +11,4 @@ macro_rules! FE_D2 {
     };
 }
 
-FE_D2!()
+FE_D2!();

@@ -4,4 +4,4 @@ macro_rules! BLINK {
     };
 }
 
-BLINK!()
+BLINK!();

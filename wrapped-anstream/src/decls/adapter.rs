@@ -4,4 +4,4 @@ macro_rules! adapter {
     };
 }
 
-adapter!()
+adapter!();

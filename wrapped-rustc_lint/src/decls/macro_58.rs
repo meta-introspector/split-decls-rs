@@ -1,0 +1,7 @@
+macro_rules! macro_58 {
+    () => {
+        declare_lint_pass ! (# [doc = " Explains corresponding feature flag must be enabled for the `#[track_caller]` attribute to"] # [doc = " do anything"] UngatedAsyncFnTrackCaller => [UNGATED_ASYNC_FN_TRACK_CALLER]) ;
+    };
+}
+
+macro_58!()

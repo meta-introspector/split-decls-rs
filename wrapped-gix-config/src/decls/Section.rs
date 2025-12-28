@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Event!();
         Header!();
+        Event!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Section {
     };
 }
 
-Section!()
+Section!();

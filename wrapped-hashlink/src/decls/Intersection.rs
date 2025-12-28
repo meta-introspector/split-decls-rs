@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Iter!();
         LinkedHashSet!();
+        Iter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Intersection {
     };
 }
 
-Intersection!()
+Intersection!();

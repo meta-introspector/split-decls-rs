@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Token!();
+        Cfg!();
+        Parser!();
+        Ident!();
+        Tokenizer!();
         ParseError!();
         CfgExpr!();
-        Parser!();
-        Cfg!();
-        Tokenizer!();
-        Ident!();
-        Token!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

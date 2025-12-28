@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HistoryBuf!();
         HistoryBufView!();
+        HistoryBuf!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HistoryBufInner {
     };
 }
 
-HistoryBufInner!()
+HistoryBufInner!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SubSectionRequirement!();
-        Repository!();
-        Key!();
         CommitAutoRollback!();
-        SnapshotMut!();
+        Key!();
+        SubSectionRequirement!();
         Error!();
-        Note!();
+        SnapshotMut!();
         Item!();
+        Note!();
+        Repository!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_568 {
     };
 }
 
-impl_568!()
+impl_568!();

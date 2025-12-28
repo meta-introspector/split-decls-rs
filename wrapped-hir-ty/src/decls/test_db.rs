@@ -4,4 +4,4 @@ macro_rules! test_db {
     };
 }
 
-test_db!()
+test_db!();

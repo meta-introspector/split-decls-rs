@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SectionId!();
         Section!();
         EhFrame!();
         Reader!();
+        SectionId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_178 {
     };
 }
 
-impl_178!()
+impl_178!();

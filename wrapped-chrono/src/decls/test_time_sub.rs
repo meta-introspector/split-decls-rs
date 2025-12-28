@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TimeDelta!();
         NaiveTime!();
+        TimeDelta!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_time_sub {
     };
 }
 
-test_time_sub!()
+test_time_sub!();

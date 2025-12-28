@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        CommitRefIter!();
-        Tree!();
-        ExtraHeaders!();
-        Error!();
         State!();
+        Error!();
         SignatureKind!();
+        Tree!();
+        CommitRefIter!();
         Token!();
+        ExtraHeaders!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

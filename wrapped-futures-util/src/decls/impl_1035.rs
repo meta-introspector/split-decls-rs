@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Pending!();
-        Compat!();
         Ready!();
+        Compat!();
+        Pending!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1035 {
     };
 }
 
-impl_1035!()
+impl_1035!();

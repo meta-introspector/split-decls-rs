@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ParseContextState!();
-        ParseOptions!();
-        ParseContext!();
         Result!();
         Error!();
+        ParseContext!();
+        ParseOptions!();
+        ParseContextState!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

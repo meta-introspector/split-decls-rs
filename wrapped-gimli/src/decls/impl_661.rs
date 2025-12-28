@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        UnitHeader!();
-        Result!();
+        SectionId!();
+        DebugTypesUnitHeadersIter!();
         Reader!();
         DebugTypes!();
-        DebugTypesUnitHeadersIter!();
-        SectionId!();
+        UnitHeader!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_661 {
     };
 }
 
-impl_661!()
+impl_661!();

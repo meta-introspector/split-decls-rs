@@ -12,4 +12,4 @@ macro_rules! UTF_16LE {
     };
 }
 
-UTF_16LE!()
+UTF_16LE!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StateRef!();
         State!();
         Value!();
+        StateRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

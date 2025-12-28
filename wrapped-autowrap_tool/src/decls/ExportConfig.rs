@@ -4,4 +4,4 @@ macro_rules! ExportConfig {
     };
 }
 
-ExportConfig!()
+ExportConfig!();

@@ -4,4 +4,4 @@ macro_rules! stream_group {
     };
 }
 
-stream_group!()
+stream_group!();

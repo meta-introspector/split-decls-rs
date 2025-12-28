@@ -4,4 +4,4 @@ macro_rules! dimensions {
     };
 }
 
-dimensions!()
+dimensions!();

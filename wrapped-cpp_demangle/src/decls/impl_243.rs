@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        FunctionParam!();
-        FoldExpr!();
-        UnresolvedName!();
-        SubobjectExpr!();
-        Expression!();
-        TemplateArg!();
+        Error!();
         Parse!();
         TemplateParam!();
-        SubstitutionTable!();
-        MemberName!();
-        Error!();
-        Result!();
-        IndexStr!();
-        OperatorName!();
-        ParseContext!();
+        Expression!();
         Initializer!();
+        UnresolvedName!();
+        Result!();
+        MemberName!();
+        ParseContext!();
+        IndexStr!();
+        FoldExpr!();
+        OperatorName!();
+        TemplateArg!();
+        SubstitutionTable!();
         ExprPrimary!();
+        SubobjectExpr!();
+        FunctionParam!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_243 {
     };
 }
 
-impl_243!()
+impl_243!();

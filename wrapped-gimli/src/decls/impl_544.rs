@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PubTypesEntryIter!();
-        LittleEndian!();
-        Reader!();
-        DebugPubTypes!();
         EndianSlice!();
+        DebugPubTypes!();
+        LittleEndian!();
+        PubTypesEntryIter!();
+        Reader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_544 {
     };
 }
 
-impl_544!()
+impl_544!();

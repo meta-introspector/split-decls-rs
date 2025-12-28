@@ -4,4 +4,4 @@ macro_rules! catch_unwind {
     };
 }
 
-catch_unwind!()
+catch_unwind!();

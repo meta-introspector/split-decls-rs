@@ -4,4 +4,4 @@ macro_rules! PathStorageRef {
     };
 }
 
-PathStorageRef!()
+PathStorageRef!();

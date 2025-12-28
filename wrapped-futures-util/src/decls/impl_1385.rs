@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InspectOkFn!();
         Fn1!();
+        InspectOkFn!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1385 {
     };
 }
 
-impl_1385!()
+impl_1385!();

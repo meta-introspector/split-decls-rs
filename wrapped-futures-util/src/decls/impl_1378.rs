@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnOnce1!();
         MapErrFn!();
+        FnOnce1!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1378 {
     };
 }
 
-impl_1378!()
+impl_1378!();

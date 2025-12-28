@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        EntryData!();
+        SectionId!();
+        Body!();
         Error!();
         Whitespace!();
-        Body!();
-        MultiValueMut!();
-        SectionId!();
         Event!();
+        MultiValueMut!();
+        EntryData!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

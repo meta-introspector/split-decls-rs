@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Lines!();
         ByteSlice!();
+        Lines!();
         LinesWithTerminator!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

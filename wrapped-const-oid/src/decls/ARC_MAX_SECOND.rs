@@ -11,4 +11,4 @@ macro_rules! ARC_MAX_SECOND {
     };
 }
 
-ARC_MAX_SECOND!()
+ARC_MAX_SECOND!();

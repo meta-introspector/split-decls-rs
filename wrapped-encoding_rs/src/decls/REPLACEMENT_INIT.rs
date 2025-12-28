@@ -12,4 +12,4 @@ macro_rules! REPLACEMENT_INIT {
     };
 }
 
-REPLACEMENT_INIT!()
+REPLACEMENT_INIT!();

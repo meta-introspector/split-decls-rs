@@ -4,4 +4,4 @@ macro_rules! first_non_ascii_byte_sse2 {
     };
 }
 
-first_non_ascii_byte_sse2!()
+first_non_ascii_byte_sse2!();

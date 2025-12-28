@@ -4,4 +4,4 @@ macro_rules! MaxNumDigits {
     };
 }
 
-MaxNumDigits!()
+MaxNumDigits!();

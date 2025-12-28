@@ -11,4 +11,4 @@ macro_rules! FromRadix16Checked {
     };
 }
 
-FromRadix16Checked!()
+FromRadix16Checked!();

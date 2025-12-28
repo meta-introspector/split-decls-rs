@@ -11,4 +11,4 @@ macro_rules! checked_sub {
     };
 }
 
-checked_sub!()
+checked_sub!();

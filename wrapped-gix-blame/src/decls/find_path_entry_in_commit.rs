@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Statistics!();
         Error!();
+        Statistics!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! find_path_entry_in_commit {
     };
 }
 
-find_path_entry_in_commit!()
+find_path_entry_in_commit!();

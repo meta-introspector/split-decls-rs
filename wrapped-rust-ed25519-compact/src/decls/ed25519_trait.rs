@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Error!();
+        PublicKey!();
         Signature!();
         SecretKey!();
-        PublicKey!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ed25519_trait {
     };
 }
 
-ed25519_trait!()
+ed25519_trait!();

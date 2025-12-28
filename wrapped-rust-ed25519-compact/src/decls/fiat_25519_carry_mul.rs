@@ -4,4 +4,4 @@ macro_rules! fiat_25519_carry_mul {
     };
 }
 
-fiat_25519_carry_mul!()
+fiat_25519_carry_mul!();

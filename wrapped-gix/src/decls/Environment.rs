@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Permissions!();
-        Note!();
         Clone!();
+        Note!();
+        Permissions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Environment {
     };
 }
 
-Environment!()
+Environment!();

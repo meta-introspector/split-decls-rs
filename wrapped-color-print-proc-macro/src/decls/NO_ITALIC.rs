@@ -4,4 +4,4 @@ macro_rules! NO_ITALIC {
     };
 }
 
-NO_ITALIC!()
+NO_ITALIC!();

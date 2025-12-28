@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Format!();
+        SecondsSinceUnixEpoch!();
+        OffsetInSeconds!();
         Error!();
         Time!();
-        OffsetInSeconds!();
-        SecondsSinceUnixEpoch!();
+        Format!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! function {
     };
 }
 
-function!()
+function!();

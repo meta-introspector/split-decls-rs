@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        ValueParser!();
+        AppSettings!();
         Arg!();
         ErrorKind!();
-        ValueParser!();
-        ArgAction!();
-        AppSettings!();
-        ArgMatches!();
-        Command!();
-        Str!();
         Usage!();
+        Str!();
+        ArgAction!();
+        Command!();
         IntoResettable!();
+        ArgMatches!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_80 {
     };
 }
 
-impl_80!()
+impl_80!();

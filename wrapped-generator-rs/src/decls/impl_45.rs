@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Generator!();
         Scope!();
         ContextStack!();
+        Generator!();
+        Error!();
         Context!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

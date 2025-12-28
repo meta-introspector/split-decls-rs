@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        NvOffset!();
-        Parse!();
-        IndexStr!();
-        Error!();
-        ParseContext!();
-        CallOffset!();
         Result!();
         SubstitutionTable!();
+        Error!();
+        Parse!();
+        NvOffset!();
+        IndexStr!();
         VOffset!();
+        ParseContext!();
+        CallOffset!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

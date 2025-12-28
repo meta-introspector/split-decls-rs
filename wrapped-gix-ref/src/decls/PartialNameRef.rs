@@ -4,4 +4,4 @@ macro_rules! PartialNameRef {
     };
 }
 
-PartialNameRef!()
+PartialNameRef!();

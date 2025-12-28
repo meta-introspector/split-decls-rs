@@ -11,4 +11,4 @@ macro_rules! impl_atomic {
     };
 }
 
-impl_atomic!()
+impl_atomic!();

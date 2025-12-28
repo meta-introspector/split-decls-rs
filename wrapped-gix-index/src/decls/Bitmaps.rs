@@ -4,4 +4,4 @@ macro_rules! Bitmaps {
     };
 }
 
-Bitmaps!()
+Bitmaps!();

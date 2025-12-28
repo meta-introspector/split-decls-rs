@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InlineAsmRegOrRegClass!();
-        Label!();
-        ExprId!();
         Const!();
+        ExprId!();
+        Label!();
+        InlineAsmRegOrRegClass!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! AsmOperand {
     };
 }
 
-AsmOperand!()
+AsmOperand!();

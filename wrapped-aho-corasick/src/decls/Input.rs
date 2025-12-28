@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Anchored!();
-        StartKind!();
         Match!();
-        MatchKind!();
+        StartKind!();
         Span!();
+        MatchKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Input {
     };
 }
 
-Input!()
+Input!();

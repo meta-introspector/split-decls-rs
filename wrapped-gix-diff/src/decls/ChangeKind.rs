@@ -4,4 +4,4 @@ macro_rules! ChangeKind {
     };
 }
 
-ChangeKind!()
+ChangeKind!();

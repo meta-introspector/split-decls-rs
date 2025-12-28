@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Registry!();
+        Object!();
+        InputValueResult!();
         Result!();
         InputType!();
-        InputValueResult!();
         InputValueError!();
-        Object!();
-        Registry!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_846 {
     };
 }
 
-impl_846!()
+impl_846!();

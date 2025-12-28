@@ -4,4 +4,4 @@ macro_rules! convert_utf16_to_str {
     };
 }
 
-convert_utf16_to_str!()
+convert_utf16_to_str!();

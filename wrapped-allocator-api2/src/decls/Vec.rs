@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RawVec!();
         Global!();
         Allocator!();
-        RawVec!();
         Box!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Vec {
     };
 }
 
-Vec!()
+Vec!();

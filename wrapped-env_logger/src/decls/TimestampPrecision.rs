@@ -4,4 +4,4 @@ macro_rules! TimestampPrecision {
     };
 }
 
-TimestampPrecision!()
+TimestampPrecision!();

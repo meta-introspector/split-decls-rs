@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Source!();
-        Action!();
-        Mapping!();
         Error!();
-        Shallow!();
+        Action!();
         Queue!();
+        Shallow!();
+        Source!();
+        Mapping!();
         Ref!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! mark_complete_and_common_ref {
     };
 }
 
-mark_complete_and_common_ref!()
+mark_complete_and_common_ref!();

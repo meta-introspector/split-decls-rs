@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MacroCallId!();
-        ExpansionSpanMap!();
         ExpandDatabase!();
+        ExpansionSpanMap!();
+        MacroCallId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! expansion_span_map {
     };
 }
 
-expansion_span_map!()
+expansion_span_map!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ServerError!();
-        InputType!();
-        InputValueError!();
         Any!();
+        InputValueError!();
         ErrorExtensionValues!();
+        InputType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

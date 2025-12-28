@@ -10,4 +10,4 @@ ok!();
     };
 }
 
-test_underscore!()
+test_underscore!();

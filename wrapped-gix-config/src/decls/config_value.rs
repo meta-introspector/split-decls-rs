@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Whitespace!();
         Event!();
+        Whitespace!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! config_value {
     };
 }
 
-config_value!()
+config_value!();

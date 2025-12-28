@@ -1,11 +1,13 @@
 macro_rules! deps {
     () => {
-        AcquireThreadHandler!();
-        StartHandler!();
+        DefaultSpawn!();
         DeadlockHandler!();
-        ReleaseThreadHandler!();
-        ExitHandler!();
+        StartHandler!();
         PanicHandler!();
+        AcquireThreadHandler!();
+        ReleaseThreadHandler!();
+        ThreadPool!();
+        ExitHandler!();
     };
 }
 

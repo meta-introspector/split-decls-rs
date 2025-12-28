@@ -4,4 +4,4 @@ macro_rules! NUM_COLORS {
     };
 }
 
-NUM_COLORS!()
+NUM_COLORS!();

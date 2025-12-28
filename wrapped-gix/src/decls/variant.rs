@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ssh!();
         Variant!();
+        Ssh!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! variant {
     };
 }
 
-variant!()
+variant!();

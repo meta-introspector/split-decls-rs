@@ -4,4 +4,4 @@ macro_rules! IBM_SYMBOL_END {
     };
 }
 
-IBM_SYMBOL_END!()
+IBM_SYMBOL_END!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RustcEnumVariantIdx!();
         RustcFieldIdx!();
+        RustcEnumVariantIdx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Variants {
     };
 }
 
-Variants!()
+Variants!();

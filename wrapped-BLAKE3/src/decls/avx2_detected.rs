@@ -4,4 +4,4 @@ macro_rules! avx2_detected {
     };
 }
 
-avx2_detected!()
+avx2_detected!();

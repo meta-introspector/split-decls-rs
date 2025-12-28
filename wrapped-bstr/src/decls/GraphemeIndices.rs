@@ -4,4 +4,4 @@ macro_rules! GraphemeIndices {
     };
 }
 
-GraphemeIndices!()
+GraphemeIndices!();

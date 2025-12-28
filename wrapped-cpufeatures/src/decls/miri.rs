@@ -4,4 +4,4 @@ macro_rules! miri {
     };
 }
 
-miri!()
+miri!();

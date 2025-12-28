@@ -4,4 +4,4 @@ macro_rules! GB2312_PINYIN {
     };
 }
 
-GB2312_PINYIN!()
+GB2312_PINYIN!();

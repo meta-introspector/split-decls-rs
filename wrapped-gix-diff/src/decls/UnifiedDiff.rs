@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ConsumeHunk!();
         DiffLineKind!();
         Error!();
+        ConsumeHunk!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UnifiedDiff {
     };
 }
 
-UnifiedDiff!()
+UnifiedDiff!();

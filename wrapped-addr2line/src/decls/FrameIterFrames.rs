@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Function!();
         InlinedFunction!();
         ResUnit!();
+        Function!();
         Location!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! FrameIterFrames {
     };
 }
 
-FrameIterFrames!()
+FrameIterFrames!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Input!();
-        Color256!();
-        Specified!();
-        Parser!();
         Result!();
+        Parser!();
+        Specified!();
+        Color256!();
+        Input!();
         ColorKind!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! color_256 {
     };
 }
 
-color_256!()
+color_256!();

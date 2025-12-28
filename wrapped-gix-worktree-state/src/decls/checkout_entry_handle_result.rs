@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ErrorRecord!();
+        Error!();
         Outcome!();
         Context!();
         Collision!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! checkout_entry_handle_result {
     };
 }
 
-checkout_entry_handle_result!()
+checkout_entry_handle_result!();

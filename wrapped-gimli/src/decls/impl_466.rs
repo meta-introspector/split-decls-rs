@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        LocationListEntry!();
         Result!();
+        Error!();
         Reader!();
         LocListIter!();
-        LocationListEntry!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_466 {
     };
 }
 
-impl_466!()
+impl_466!();

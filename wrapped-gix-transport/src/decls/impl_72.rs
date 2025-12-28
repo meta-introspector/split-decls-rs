@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PostResponse!();
         Error!();
-        Response!();
         PostBodyDataKind!();
-        Remote!();
+        PostResponse!();
         Request!();
+        Remote!();
+        Response!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_72 {
     };
 }
 
-impl_72!()
+impl_72!();

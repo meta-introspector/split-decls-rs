@@ -4,4 +4,4 @@ macro_rules! test_common_prefix {
     };
 }
 
-test_common_prefix!()
+test_common_prefix!();

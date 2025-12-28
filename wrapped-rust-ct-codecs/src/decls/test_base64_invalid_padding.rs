@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Base64!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_base64_invalid_padding {
     };
 }
 
-test_base64_invalid_padding!()
+test_base64_invalid_padding!();

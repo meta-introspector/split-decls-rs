@@ -11,4 +11,4 @@ macro_rules! owned_drop_impl {
     };
 }
 
-owned_drop_impl!()
+owned_drop_impl!();

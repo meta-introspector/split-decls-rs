@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Requests!();
         CacheFactory!();
-        Loader!();
         KeysAndSender!();
+        Loader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_381 {
     };
 }
 
-impl_381!()
+impl_381!();

@@ -11,4 +11,4 @@ macro_rules! section_header {
     };
 }
 
-section_header!()
+section_header!();

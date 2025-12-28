@@ -4,4 +4,4 @@ macro_rules! unknown_const {
     };
 }
 
-unknown_const!()
+unknown_const!();

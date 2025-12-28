@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FutureIncompatibleInfo!();
+        FutureIncompatibilityReason!();
+    };
+}
+
+macro_rules! macro_81 {
+    () => {
+        deps!();
+        declare_lint ! { # [doc = " The `repr_transparent_external_private_fields` lint"] # [doc = " detects types marked `#[repr(transparent)]` that (transitively)"] # [doc = " contain an external ZST type marked `#[non_exhaustive]` or containing"] # [doc = " private fields"] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,ignore (needs external crate)"] # [doc = " #![deny(repr_transparent_external_private_fields)]"] # [doc = " use foo::NonExhaustiveZst;"] # [doc = ""] # [doc = " #[repr(transparent)]"] # [doc = " struct Bar(u32, ([u32; 0], NonExhaustiveZst));"] # [doc = " ```"] # [doc = ""] # [doc = " This will produce:"] # [doc = ""] # [doc = " ```text"] # [doc = " error: zero-sized fields in repr(transparent) cannot contain external non-exhaustive types"] # [doc = "  --> src/main.rs:5:28"] # [doc = "   |"] # [doc = " 5 | struct Bar(u32, ([u32; 0], NonExhaustiveZst));"] # [doc = "   |                            ^^^^^^^^^^^^^^^^"] # [doc = "   |"] # [doc = " note: the lint level is defined here"] # [doc = "  --> src/main.rs:1:9"] # [doc = "   |"] # [doc = " 1 | #![deny(repr_transparent_external_private_fields)]"] # [doc = "   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"] # [doc = "   = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!"] # [doc = "   = note: for more information, see issue #78586 <https://github.com/rust-lang/rust/issues/78586>"] # [doc = "   = note: this struct contains `NonExhaustiveZst`, which is marked with `#[non_exhaustive]`, and makes it not a breaking change to become non-zero-sized in the future."] # [doc = " ```"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Previous, Rust accepted fields that contain external private zero-sized types,"] # [doc = " even though it should not be a breaking change to add a non-zero-sized field to"] # [doc = " that private type."] # [doc = ""] # [doc = " This is a [future-incompatible] lint to transition this"] # [doc = " to a hard error in the future. See [issue #78586] for more details."] # [doc = ""] # [doc = " [issue #78586]: https://github.com/rust-lang/rust/issues/78586"] # [doc = " [future-incompatible]: ../index.md#future-incompatible-lints"] pub REPR_TRANSPARENT_EXTERNAL_PRIVATE_FIELDS , Warn , "transparent type contains an external ZST that is marked #[non_exhaustive] or contains private fields" , @ future_incompatible = FutureIncompatibleInfo { reason : FutureIncompatibilityReason :: FutureReleaseError , reference : "issue #78586 <https://github.com/rust-lang/rust/issues/78586>" , } ; }
+    };
+}
+
+macro_81!()

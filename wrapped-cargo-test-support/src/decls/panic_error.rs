@@ -4,4 +4,4 @@ macro_rules! panic_error {
     };
 }
 
-panic_error!()
+panic_error!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AstIdLoc!();
         HasSource!();
         DefDatabase!();
-        AstIdLoc!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_387 {
     };
 }
 
-impl_387!()
+impl_387!();

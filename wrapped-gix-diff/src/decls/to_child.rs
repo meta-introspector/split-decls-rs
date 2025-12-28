@@ -11,4 +11,4 @@ macro_rules! to_child {
     };
 }
 
-to_child!()
+to_child!();

@@ -4,4 +4,4 @@ macro_rules! SysStack {
     };
 }
 
-SysStack!()
+SysStack!();

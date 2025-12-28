@@ -4,4 +4,4 @@ macro_rules! SECONDS_PER_MINUTE {
     };
 }
 
-SECONDS_PER_MINUTE!()
+SECONDS_PER_MINUTE!();

@@ -38,4 +38,4 @@ fn y() -> u8 {
     };
 }
 
-test_inner_macro_rules!()
+test_inner_macro_rules!();

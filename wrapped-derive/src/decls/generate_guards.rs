@@ -11,4 +11,4 @@ macro_rules! generate_guards {
     };
 }
 
-generate_guards!()
+generate_guards!();

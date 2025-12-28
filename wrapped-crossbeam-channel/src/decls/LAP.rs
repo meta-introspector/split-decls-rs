@@ -4,4 +4,4 @@ macro_rules! LAP {
     };
 }
 
-LAP!()
+LAP!();

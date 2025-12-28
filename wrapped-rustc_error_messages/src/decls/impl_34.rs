@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        DiagArgValue!();
-        IntoDiagArg!();
+        TranslationBundleError!();
     };
 }
 
 macro_rules! impl_34 {
     () => {
         deps!();
-        impl IntoDiagArg for DiagArgValue { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { self } }
+        impl From < (FluentResource , Vec < ParserError >) > for TranslationBundleError { fn from ((_ , mut errs) : (FluentResource , Vec < ParserError >)) -> Self { TranslationBundleError :: ParseFtl (errs . pop () . expect ("failed ftl parse with no errors")) } }
     };
 }
 

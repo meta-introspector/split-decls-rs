@@ -4,4 +4,4 @@ macro_rules! CacheStorage {
     };
 }
 
-CacheStorage!()
+CacheStorage!();

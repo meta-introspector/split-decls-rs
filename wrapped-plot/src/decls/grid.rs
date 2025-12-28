@@ -4,4 +4,4 @@ macro_rules! grid {
     };
 }
 
-grid!()
+grid!();

@@ -4,4 +4,4 @@ macro_rules! div_uint {
     };
 }
 
-div_uint!()
+div_uint!();

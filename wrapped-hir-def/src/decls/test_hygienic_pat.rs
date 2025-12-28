@@ -76,4 +76,4 @@ match 0 {
     };
 }
 
-test_hygienic_pat!()
+test_hygienic_pat!();

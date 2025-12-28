@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        RefLogMessage!();
-        Change!();
-        Algorithm!();
-        Prepare!();
-        Fetch!();
-        Note!();
-        DryRun!();
-        Negotiate!();
-        Protocol!();
-        Clone!();
-        Error!();
-        Options!();
         Direction!();
+        RefLogMessage!();
         Status!();
         Outcome!();
+        Note!();
+        Clone!();
+        Prepare!();
+        DryRun!();
+        Fetch!();
+        Algorithm!();
+        Change!();
+        Error!();
+        Options!();
+        Protocol!();
         Pack!();
+        Negotiate!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_959 {
     };
 }
 
-impl_959!()
+impl_959!();

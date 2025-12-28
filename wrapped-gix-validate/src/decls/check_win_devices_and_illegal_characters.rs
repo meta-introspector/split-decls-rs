@@ -4,4 +4,4 @@ macro_rules! check_win_devices_and_illegal_characters {
     };
 }
 
-check_win_devices_and_illegal_characters!()
+check_win_devices_and_illegal_characters!();

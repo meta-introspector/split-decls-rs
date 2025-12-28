@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ErrorImpl!();
         Mut!();
         StdError!();
+        ErrorImpl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! object_mut {
     };
 }
 
-object_mut!()
+object_mut!();

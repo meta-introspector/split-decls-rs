@@ -1,0 +1,7 @@
+macro_rules! macro_41 {
+    () => {
+        def_regs ! { Hexagon HexagonInlineAsmReg HexagonInlineAsmRegClass { r0 : reg = ["r0"] , r1 : reg = ["r1"] , r2 : reg = ["r2"] , r3 : reg = ["r3"] , r4 : reg = ["r4"] , r5 : reg = ["r5"] , r6 : reg = ["r6"] , r7 : reg = ["r7"] , r8 : reg = ["r8"] , r9 : reg = ["r9"] , r10 : reg = ["r10"] , r11 : reg = ["r11"] , r12 : reg = ["r12"] , r13 : reg = ["r13"] , r14 : reg = ["r14"] , r15 : reg = ["r15"] , r16 : reg = ["r16"] , r17 : reg = ["r17"] , r18 : reg = ["r18"] , r20 : reg = ["r20"] , r21 : reg = ["r21"] , r22 : reg = ["r22"] , r23 : reg = ["r23"] , r24 : reg = ["r24"] , r25 : reg = ["r25"] , r26 : reg = ["r26"] , r27 : reg = ["r27"] , r28 : reg = ["r28"] , p0 : preg = ["p0"] , p1 : preg = ["p1"] , p2 : preg = ["p2"] , p3 : preg = ["p3"] , # error = ["r19"] => "r19 is used internally by LLVM and cannot be used as an operand for inline asm" , # error = ["r29" , "sp"] => "the stack pointer cannot be used as an operand for inline asm" , # error = ["r30" , "fr"] => "the frame register cannot be used as an operand for inline asm" , # error = ["r31" , "lr"] => "the link register cannot be used as an operand for inline asm" , } }
+    };
+}
+
+macro_41!()

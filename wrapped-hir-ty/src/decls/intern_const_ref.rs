@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MemoryMap!();
-        HirDatabase!();
         TraitEnvironment!();
+        HirDatabase!();
+        MemoryMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! intern_const_ref {
     };
 }
 
-intern_const_ref!()
+intern_const_ref!();

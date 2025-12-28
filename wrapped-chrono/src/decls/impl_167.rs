@@ -3,8 +3,8 @@ macro_rules! deps {
         NaiveDateTime!();
         Duration!();
         TimeZone!();
-        TimeDelta!();
         DateTime!();
+        TimeDelta!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

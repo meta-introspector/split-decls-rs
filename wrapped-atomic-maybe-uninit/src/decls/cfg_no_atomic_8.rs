@@ -4,4 +4,4 @@ macro_rules! cfg_no_atomic_8 {
     };
 }
 
-cfg_no_atomic_8!()
+cfg_no_atomic_8!();

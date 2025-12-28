@@ -4,4 +4,4 @@ macro_rules! USE_WINDOWS_COLORS {
     };
 }
 
-USE_WINDOWS_COLORS!()
+USE_WINDOWS_COLORS!();

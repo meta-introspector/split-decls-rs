@@ -4,4 +4,4 @@ macro_rules! macro_call_to_macro_id {
     };
 }
 
-macro_call_to_macro_id!()
+macro_call_to_macro_id!();

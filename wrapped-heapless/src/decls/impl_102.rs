@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        VacantEntry!();
-        IndexMap!();
-        OccupiedEntry!();
         FnvIndexMap!();
+        IndexMap!();
+        VacantEntry!();
         Insert!();
+        OccupiedEntry!();
         Entry!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

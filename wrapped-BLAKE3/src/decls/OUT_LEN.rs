@@ -4,4 +4,4 @@ macro_rules! OUT_LEN {
     };
 }
 
-OUT_LEN!()
+OUT_LEN!();

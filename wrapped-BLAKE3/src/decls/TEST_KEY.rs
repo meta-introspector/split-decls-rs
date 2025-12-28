@@ -11,4 +11,4 @@ macro_rules! TEST_KEY {
     };
 }
 
-TEST_KEY!()
+TEST_KEY!();

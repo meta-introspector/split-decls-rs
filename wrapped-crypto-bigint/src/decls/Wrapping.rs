@@ -4,4 +4,4 @@ macro_rules! Wrapping {
     };
 }
 
-Wrapping!()
+Wrapping!();

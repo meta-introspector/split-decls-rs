@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CfgAtom!();
         CfgOptions!();
+        CfgAtom!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_46 {
     };
 }
 
-impl_46!()
+impl_46!();

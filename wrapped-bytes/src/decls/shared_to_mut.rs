@@ -11,4 +11,4 @@ macro_rules! shared_to_mut {
     };
 }
 
-shared_to_mut!()
+shared_to_mut!();

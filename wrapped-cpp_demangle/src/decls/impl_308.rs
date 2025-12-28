@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        ParseContext!();
         IndexStr!();
         Expression!();
-        Result!();
-        Parse!();
-        ParseContext!();
-        FoldExpr!();
-        SubstitutionTable!();
         Error!();
+        FoldExpr!();
+        Result!();
+        SubstitutionTable!();
+        Parse!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_308 {
     };
 }
 
-impl_308!()
+impl_308!();

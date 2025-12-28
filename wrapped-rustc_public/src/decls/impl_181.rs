@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        BoundRegionKind!();
+        Stable!();
+        BridgeTys!();
+    };
+}
+
+macro_rules! impl_181 {
+    () => {
+        deps!();
+        impl < 'tcx > Stable < 'tcx > for ty :: BoundRegionKind { type T = crate :: ty :: BoundRegionKind ; fn stable < 'cx > (& self , tables : & mut Tables < 'cx , BridgeTys > , cx : & CompilerCtxt < 'cx , BridgeTys > ,) -> Self :: T { use crate :: ty :: BoundRegionKind ; match self { ty :: BoundRegionKind :: Anon => BoundRegionKind :: BrAnon , ty :: BoundRegionKind :: Named (def_id) => BoundRegionKind :: BrNamed (tables . br_named_def (* def_id) , cx . tcx . item_name (* def_id) . to_string () ,) , ty :: BoundRegionKind :: ClosureEnv => BoundRegionKind :: BrEnv , ty :: BoundRegionKind :: NamedAnon (_) => bug ! ("only used for pretty printing") , } } }
+    };
+}
+
+impl_181!()

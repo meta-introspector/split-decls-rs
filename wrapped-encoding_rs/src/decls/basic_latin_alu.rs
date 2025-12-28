@@ -4,4 +4,4 @@ macro_rules! basic_latin_alu {
     };
 }
 
-basic_latin_alu!()
+basic_latin_alu!();

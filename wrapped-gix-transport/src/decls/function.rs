@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Options!();
+        Http!();
+        Curl!();
+        Remote!();
         Transport!();
         Error!();
-        Curl!();
-        Http!();
-        Remote!();
+        Options!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! function {
     };
 }
 
-function!()
+function!();

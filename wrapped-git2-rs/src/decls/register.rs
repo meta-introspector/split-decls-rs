@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Transport!();
+        Error!();
         TransportData!();
         Remote!();
-        Error!();
-        Transport!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! register {
     };
 }
 
-register!()
+register!();

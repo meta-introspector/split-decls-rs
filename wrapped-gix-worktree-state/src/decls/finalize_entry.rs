@@ -11,4 +11,4 @@ macro_rules! finalize_entry {
     };
 }
 
-finalize_entry!()
+finalize_entry!();

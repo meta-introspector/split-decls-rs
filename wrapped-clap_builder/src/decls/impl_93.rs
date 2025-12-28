@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TermWidth!();
         AppExt!();
+        TermWidth!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

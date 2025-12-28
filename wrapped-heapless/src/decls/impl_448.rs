@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Kind!();
         SortedLinkedListInner!();
         LenType!();
+        Kind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_448 {
     };
 }
 
-impl_448!()
+impl_448!();

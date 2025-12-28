@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Object!();
-        Repository!();
         ObjectDetached!();
+        Repository!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

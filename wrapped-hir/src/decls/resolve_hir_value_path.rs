@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Function!();
-        GenericParam!();
-        PathResolution!();
         Struct!();
-        Variant!();
-        Const!();
-        ConstParam!();
-        Local!();
+        PathResolution!();
+        Function!();
         Static!();
+        Const!();
+        GenericParam!();
+        Local!();
+        Variant!();
+        ConstParam!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! resolve_hir_value_path {
     };
 }
 
-resolve_hir_value_path!()
+resolve_hir_value_path!();

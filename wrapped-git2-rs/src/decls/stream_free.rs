@@ -11,4 +11,4 @@ macro_rules! stream_free {
     };
 }
 
-stream_free!()
+stream_free!();

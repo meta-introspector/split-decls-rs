@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         Automaton!();
-        Match!();
-        SmallIndex!();
-        MatchKind!();
-        Special!();
-        Input!();
-        StateID!();
         PatternID!();
         ByteClasses!();
         Prefilter!();
+        Input!();
+        SmallIndex!();
+        Special!();
+        Match!();
+        StateID!();
+        MatchKind!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! DFA {
     };
 }
 
-DFA!()
+DFA!();

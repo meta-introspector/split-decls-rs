@@ -4,4 +4,4 @@ macro_rules! MismatchedArgCount {
     };
 }
 
-MismatchedArgCount!()
+MismatchedArgCount!();

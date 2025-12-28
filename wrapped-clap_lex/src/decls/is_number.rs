@@ -4,4 +4,4 @@ macro_rules! is_number {
     };
 }
 
-is_number!()
+is_number!();

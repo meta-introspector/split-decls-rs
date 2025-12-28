@@ -12,4 +12,4 @@ macro_rules! implicitly_sized_clauses {
     };
 }
 
-implicitly_sized_clauses!()
+implicitly_sized_clauses!();

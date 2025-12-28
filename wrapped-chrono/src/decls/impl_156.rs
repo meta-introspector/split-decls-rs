@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        FixedOffset!();
         DateTime!();
-        Item!();
-        ParseResult!();
         TimeZone!();
-        Fixed!();
-        NaiveDate!();
-        Parsed!();
         StrftimeItems!();
+        NaiveDate!();
+        Fixed!();
+        FixedOffset!();
+        ParseResult!();
+        Item!();
+        Parsed!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_156 {
     };
 }
 
-impl_156!()
+impl_156!();

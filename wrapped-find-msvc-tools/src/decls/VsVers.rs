@@ -4,4 +4,4 @@ macro_rules! VsVers {
     };
 }
 
-VsVers!()
+VsVers!();

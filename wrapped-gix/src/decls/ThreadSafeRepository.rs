@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Note!();
         CommitsStorage!();
-        RefStore!();
-        Options!();
-        Clone!();
+        Note!();
         Cache!();
-        IndexStorage!();
+        Options!();
         ModulesFileStorage!();
+        RefStore!();
+        Clone!();
+        IndexStorage!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! ThreadSafeRepository {
     };
 }
 
-ThreadSafeRepository!()
+ThreadSafeRepository!();

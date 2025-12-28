@@ -4,4 +4,4 @@ macro_rules! ScopeExitGuard {
     };
 }
 
-ScopeExitGuard!()
+ScopeExitGuard!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Field!();
-        Object!();
-        Schema!();
         Registry!();
-        EmptyMutation!();
-        OutputType!();
-        ServerResult!();
-        ServerError!();
-        MetaType!();
         MetaTypeId!();
+        OutputType!();
+        Field!();
+        ServerError!();
+        EmptyMutation!();
+        Object!();
+        ServerResult!();
+        Schema!();
         ContextSelectionSet!();
+        MetaType!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_754 {
     };
 }
 
-impl_754!()
+impl_754!();

@@ -12,4 +12,4 @@ macro_rules! BAD_FORMAT {
     };
 }
 
-BAD_FORMAT!()
+BAD_FORMAT!();

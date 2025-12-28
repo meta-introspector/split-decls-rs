@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TomlLockfileMetadata!();
         TomlLockfilePackageId!();
+        TomlLockfileMetadata!();
         TomlLockfileSourceId!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TomlLockfileDependency {
     };
 }
 
-TomlLockfileDependency!()
+TomlLockfileDependency!();

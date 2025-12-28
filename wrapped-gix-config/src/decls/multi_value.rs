@@ -4,4 +4,4 @@ macro_rules! multi_value {
     };
 }
 
-multi_value!()
+multi_value!();

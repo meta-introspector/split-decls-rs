@@ -4,4 +4,4 @@ macro_rules! refs {
     };
 }
 
-refs!()
+refs!();

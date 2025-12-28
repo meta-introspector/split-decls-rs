@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SliceWriter!();
         Endianness!();
+        SliceWriter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_encode_i16 {
     };
 }
 
-test_encode_i16!()
+test_encode_i16!();

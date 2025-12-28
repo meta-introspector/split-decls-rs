@@ -4,4 +4,4 @@ macro_rules! max_items {
     };
 }
 
-max_items!()
+max_items!();

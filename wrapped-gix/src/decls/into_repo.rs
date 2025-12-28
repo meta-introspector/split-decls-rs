@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Worktree!();
         Error!();
+        Worktree!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! into_repo {
     };
 }
 
-into_repo!()
+into_repo!();

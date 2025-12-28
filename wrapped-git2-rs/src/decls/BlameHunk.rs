@@ -4,4 +4,4 @@ macro_rules! BlameHunk {
     };
 }
 
-BlameHunk!()
+BlameHunk!();

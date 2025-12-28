@@ -4,4 +4,4 @@ macro_rules! MergeFileOptions {
     };
 }
 
-MergeFileOptions!()
+MergeFileOptions!();

@@ -11,4 +11,4 @@ macro_rules! DATA_WORDS {
     };
 }
 
-DATA_WORDS!()
+DATA_WORDS!();

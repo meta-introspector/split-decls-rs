@@ -4,4 +4,4 @@ macro_rules! expand_partial_name {
     };
 }
 
-expand_partial_name!()
+expand_partial_name!();

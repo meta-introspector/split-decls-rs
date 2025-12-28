@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        DebugTypesUnitHeadersIter!();
         Error!();
         Reader!();
         Result!();
         UnitHeader!();
-        DebugTypesUnitHeadersIter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_662 {
     };
 }
 
-impl_662!()
+impl_662!();

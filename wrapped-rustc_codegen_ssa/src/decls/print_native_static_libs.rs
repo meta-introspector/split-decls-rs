@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        NativeLib!();
+        StaticLibraryNativeArtifacts!();
+        StaticLibraryNativeArtifactsToFile!();
+    };
+}
+
+macro_rules! print_native_static_libs {
+    () => {
+        deps!();
+        fn print_native_static_libs (sess : & Session , out : & OutFileName , all_native_libs : & [NativeLib] , all_rust_dylibs : & [& Path] ,) { let mut lib_args : Vec < _ > = all_native_libs . iter () . filter (| l | relevant_lib (sess , l)) . filter_map (| lib | { let name = lib . name ; match lib . kind { NativeLibKind :: Static { bundle : Some (false) , .. } | NativeLibKind :: Dylib { .. } | NativeLibKind :: Unspecified => { let verbatim = lib . verbatim ; if sess . target . is_like_msvc { let (prefix , suffix) = sess . staticlib_components (verbatim) ; Some (format ! ("{prefix}{name}{suffix}")) } else if sess . target . linker_flavor . is_gnu () { Some (format ! ("-l{}{}" , if verbatim { ":" } else { "" } , name)) } else { Some (format ! ("-l{name}")) } } NativeLibKind :: Framework { .. } => { Some (format ! ("-framework {name}")) } NativeLibKind :: Static { bundle : None | Some (true) , .. } | NativeLibKind :: LinkArg | NativeLibKind :: WasmImportModule | NativeLibKind :: RawDylib => None , } }) . dedup () . collect () ; for path in all_rust_dylibs { let parent = path . parent () ; if let Some (dir) = parent { let dir = fix_windows_verbatim_for_gcc (dir) ; if sess . target . is_like_msvc { let mut arg = String :: from ("/LIBPATH:") ; arg . push_str (& dir . display () . to_string ()) ; lib_args . push (arg) ; } else { lib_args . push ("-L" . to_owned ()) ; lib_args . push (dir . display () . to_string ()) ; } } let stem = path . file_stem () . unwrap () . to_str () . unwrap () ; let lib = if let Some (lib) = stem . strip_prefix ("lib") && ! sess . target . is_like_windows { lib } else { stem } ; let path = parent . unwrap_or_else (| | Path :: new ("")) ; if sess . target . is_like_msvc { let name = format ! ("{lib}.dll.lib") ; if path . join (& name) . exists () { lib_args . push (name) ; } } else { lib_args . push (format ! ("-l{lib}")) ; } } match out { OutFileName :: Real (path) => { out . overwrite (& lib_args . join (" ") , sess) ; sess . dcx () . emit_note (errors :: StaticLibraryNativeArtifactsToFile { path }) ; } OutFileName :: Stdout => { sess . dcx () . emit_note (errors :: StaticLibraryNativeArtifacts) ; sess . dcx () . note (format ! ("native-static-libs: {}" , lib_args . join (" "))) ; } } }
+    };
+}
+
+print_native_static_libs!()

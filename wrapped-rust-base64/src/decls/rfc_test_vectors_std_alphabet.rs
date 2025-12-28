@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecodeError!();
         EngineWrapper!();
+        DecodeError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! rfc_test_vectors_std_alphabet {
     };
 }
 
-rfc_test_vectors_std_alphabet!()
+rfc_test_vectors_std_alphabet!();

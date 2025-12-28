@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Signature!();
         SignatureRef!();
+        Signature!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! write {
     };
 }
 
-write!()
+write!();

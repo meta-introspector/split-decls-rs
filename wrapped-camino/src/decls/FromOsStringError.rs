@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf8PathBuf!();
         FromOsStrError!();
+        Utf8PathBuf!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FromOsStringError {
     };
 }
 
-FromOsStringError!()
+FromOsStringError!();

@@ -4,4 +4,4 @@ macro_rules! cfg_no_atomic_cas {
     };
 }
 
-cfg_no_atomic_cas!()
+cfg_no_atomic_cas!();

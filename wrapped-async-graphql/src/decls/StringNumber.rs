@@ -4,4 +4,4 @@ macro_rules! StringNumber {
     };
 }
 
-StringNumber!()
+StringNumber!();

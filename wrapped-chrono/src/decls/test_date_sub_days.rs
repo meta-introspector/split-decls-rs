@@ -12,4 +12,4 @@ macro_rules! test_date_sub_days {
     };
 }
 
-test_date_sub_days!()
+test_date_sub_days!();

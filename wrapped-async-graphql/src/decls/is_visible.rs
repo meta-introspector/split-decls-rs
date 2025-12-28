@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MetaVisibleFn!();
         Context!();
+        MetaVisibleFn!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! is_visible {
     };
 }
 
-is_visible!()
+is_visible!();

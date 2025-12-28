@@ -4,4 +4,4 @@ macro_rules! GenericSubstitution {
     };
 }
 
-GenericSubstitution!()
+GenericSubstitution!();

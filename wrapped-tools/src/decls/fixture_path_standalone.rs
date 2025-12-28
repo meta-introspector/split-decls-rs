@@ -11,4 +11,4 @@ macro_rules! fixture_path_standalone {
     };
 }
 
-fixture_path_standalone!()
+fixture_path_standalone!();

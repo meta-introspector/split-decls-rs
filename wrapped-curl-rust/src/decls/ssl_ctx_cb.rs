@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Inner!();
         Handler!();
+        Inner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ssl_ctx_cb {
     };
 }
 
-ssl_ctx_cb!()
+ssl_ctx_cb!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        EcdsaCurve!();
+        SignatureSize!();
         Signature!();
         RecoveryId!();
-        SignatureSize!();
-        EcdsaCurve!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! sign_prehashed_rfc6979 {
     };
 }
 
-sign_prehashed_rfc6979!()
+sign_prehashed_rfc6979!();

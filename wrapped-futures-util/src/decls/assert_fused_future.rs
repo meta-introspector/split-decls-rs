@@ -4,4 +4,4 @@ macro_rules! assert_fused_future {
     };
 }
 
-assert_fused_future!()
+assert_fused_future!();

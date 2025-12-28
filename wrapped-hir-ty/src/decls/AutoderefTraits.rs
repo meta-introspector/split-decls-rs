@@ -4,4 +4,4 @@ macro_rules! AutoderefTraits {
     };
 }
 
-AutoderefTraits!()
+AutoderefTraits!();

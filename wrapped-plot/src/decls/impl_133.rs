@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Set!();
-        Terminal!();
         Figure!();
+        Terminal!();
+        Set!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_133 {
     };
 }
 
-impl_133!()
+impl_133!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Data!();
-        Find!();
-        Error!();
         FindObjectOrHeader!();
-        Exists!();
+        Error!();
         Header!();
+        Data!();
+        Exists!();
+        Find!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! _impls {
     };
 }
 
-_impls!()
+_impls!();

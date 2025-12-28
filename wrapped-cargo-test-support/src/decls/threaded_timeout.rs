@@ -4,4 +4,4 @@ macro_rules! threaded_timeout {
     };
 }
 
-threaded_timeout!()
+threaded_timeout!();

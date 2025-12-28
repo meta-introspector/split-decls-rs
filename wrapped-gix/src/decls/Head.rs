@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Clone!();
         Note!();
         Reference!();
         Kind!();
+        Clone!();
         Repository!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! Head {
     };
 }
 
-Head!()
+Head!();

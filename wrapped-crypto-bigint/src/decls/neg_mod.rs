@@ -4,4 +4,4 @@ macro_rules! neg_mod {
     };
 }
 
-neg_mod!()
+neg_mod!();

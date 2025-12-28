@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         PackBuilder!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_537 {
     };
 }
 
-impl_537!()
+impl_537!();

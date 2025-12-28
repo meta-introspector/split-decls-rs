@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Request!();
-        Extension!();
-        SchemaEnv!();
         Data!();
         Registry!();
+        SchemaEnv!();
+        Extension!();
         Context!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! ExtensionContext {
     };
 }
 
-ExtensionContext!()
+ExtensionContext!();

@@ -11,4 +11,4 @@ macro_rules! read_line_internal {
     };
 }
 
-read_line_internal!()
+read_line_internal!();

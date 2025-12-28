@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Expect!();
         Position!();
+        Expect!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! expect {
     };
 }
 
-expect!()
+expect!();

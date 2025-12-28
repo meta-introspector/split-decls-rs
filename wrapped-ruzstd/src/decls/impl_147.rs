@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        HuffmanScratch!();
+        DictionaryDecodeError!();
+        FSEScratch!();
+        Dictionary!();
+    };
+}
+
+macro_rules! impl_147 {
+    () => {
+        deps!();
+        impl Dictionary { # [doc = " Parses the dictionary from `raw` and set the tables"] # [doc = " it returns the dict_id for checking with the frame's `dict_id``"] pub fn decode_dict (raw : & [u8]) -> Result < Dictionary , DictionaryDecodeError > { let mut new_dict = Dictionary { id : 0 , fse : FSEScratch :: new () , huf : HuffmanScratch :: new () , dict_content : Vec :: new () , offset_hist : [2 , 4 , 8] , } ; let magic_num : [u8 ; 4] = raw [.. 4] . try_into () . expect ("optimized away") ; if magic_num != MAGIC_NUM { return Err (DictionaryDecodeError :: BadMagicNum { got : magic_num }) ; } let dict_id = raw [4 .. 8] . try_into () . expect ("optimized away") ; let dict_id = u32 :: from_le_bytes (dict_id) ; new_dict . id = dict_id ; let raw_tables = & raw [8 ..] ; let huf_size = new_dict . huf . table . build_decoder (raw_tables) ? ; let raw_tables = & raw_tables [huf_size as usize ..] ; let of_size = new_dict . fse . offsets . build_decoder (raw_tables , crate :: decoding :: sequence_section_decoder :: OF_MAX_LOG ,) ? ; let raw_tables = & raw_tables [of_size ..] ; let ml_size = new_dict . fse . match_lengths . build_decoder (raw_tables , crate :: decoding :: sequence_section_decoder :: ML_MAX_LOG ,) ? ; let raw_tables = & raw_tables [ml_size ..] ; let ll_size = new_dict . fse . literal_lengths . build_decoder (raw_tables , crate :: decoding :: sequence_section_decoder :: LL_MAX_LOG ,) ? ; let raw_tables = & raw_tables [ll_size ..] ; let offset1 = raw_tables [0 .. 4] . try_into () . expect ("optimized away") ; let offset1 = u32 :: from_le_bytes (offset1) ; let offset2 = raw_tables [4 .. 8] . try_into () . expect ("optimized away") ; let offset2 = u32 :: from_le_bytes (offset2) ; let offset3 = raw_tables [8 .. 12] . try_into () . expect ("optimized away") ; let offset3 = u32 :: from_le_bytes (offset3) ; new_dict . offset_hist [0] = offset1 ; new_dict . offset_hist [1] = offset2 ; new_dict . offset_hist [2] = offset3 ; let raw_content = & raw_tables [12 ..] ; new_dict . dict_content . extend (raw_content) ; Ok (new_dict) } }
+    };
+}
+
+impl_147!()

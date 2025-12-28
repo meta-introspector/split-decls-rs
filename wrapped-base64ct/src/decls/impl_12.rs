@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        LineReader!();
-        Encoding!();
+        BlockBuffer!();
         Decoder!();
         Line!();
         Error!();
-        BlockBuffer!();
+        Encoding!();
+        LineReader!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

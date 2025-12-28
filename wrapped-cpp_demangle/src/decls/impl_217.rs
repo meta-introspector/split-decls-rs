@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ParseContext!();
-        IndexStr!();
-        Parse!();
-        PointerToMemberType!();
         SubstitutionTable!();
+        IndexStr!();
+        PointerToMemberType!();
+        Parse!();
+        ParseContext!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_217 {
     };
 }
 
-impl_217!()
+impl_217!();

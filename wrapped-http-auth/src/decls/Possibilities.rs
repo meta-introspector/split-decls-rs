@@ -4,4 +4,4 @@ macro_rules! Possibilities {
     };
 }
 
-Possibilities!()
+Possibilities!();

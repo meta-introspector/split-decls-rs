@@ -4,4 +4,4 @@ macro_rules! fs_writer {
     };
 }
 
-fs_writer!()
+fs_writer!();

@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        ResUnit!();
-        DebugFile!();
-        Function!();
-        Context!();
-        LookupResult!();
-        Lines!();
         UnitRef!();
-        LookupContinuation!();
-        Functions!();
-        LineLocationRangeIter!();
-        Result!();
         DwoUnit!();
-        SplitDwarfLoad!();
-        SimpleLookup!();
+        LookupContinuation!();
+        DebugFile!();
         Error!();
+        ResUnit!();
+        SimpleLookup!();
+        Functions!();
+        Result!();
+        Lines!();
         Location!();
+        LookupResult!();
+        Function!();
+        LineLocationRangeIter!();
+        SplitDwarfLoad!();
+        Context!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

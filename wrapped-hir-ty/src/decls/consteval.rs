@@ -4,4 +4,4 @@ macro_rules! consteval {
     };
 }
 
-consteval!()
+consteval!();

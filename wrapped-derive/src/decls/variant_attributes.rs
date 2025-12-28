@@ -4,4 +4,4 @@ macro_rules! variant_attributes {
     };
 }
 
-variant_attributes!()
+variant_attributes!();

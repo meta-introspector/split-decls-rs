@@ -11,4 +11,4 @@ macro_rules! trace_unsynchronized {
     };
 }
 
-trace_unsynchronized!()
+trace_unsynchronized!();

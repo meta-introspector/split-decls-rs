@@ -12,4 +12,4 @@ macro_rules! fmt_state_indicator {
     };
 }
 
-fmt_state_indicator!()
+fmt_state_indicator!();

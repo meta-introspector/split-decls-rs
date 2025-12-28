@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Sample!();
-        AxisScale!();
         BenchmarkId!();
+        Sample!();
         ValueFormatter!();
+        AxisScale!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! violin {
     };
 }
 
-violin!()
+violin!();

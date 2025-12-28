@@ -4,4 +4,4 @@ macro_rules! Package {
     };
 }
 
-Package!()
+Package!();

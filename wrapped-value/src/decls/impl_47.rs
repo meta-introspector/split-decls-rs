@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        SerializeTuple!();
-        SerializeTupleVariant!();
-        SerializeSeq!();
-        ConstValue!();
-        Name!();
         SerializeStruct!();
+        SerializeSeq!();
         SerializeMap!();
-        SerializeTupleStruct!();
+        SerializeTupleVariant!();
+        SerializeTuple!();
         SerializerError!();
-        Serializer!();
+        SerializeTupleStruct!();
         SerializeStructVariant!();
+        Name!();
+        ConstValue!();
+        Serializer!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

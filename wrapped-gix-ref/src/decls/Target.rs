@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FullName!();
         Kind!();
+        FullName!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Target {
     };
 }
 
-Target!()
+Target!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Compat01As03Sink!();
-        WakerToHandle!();
         Sink!();
+        WakerToHandle!();
+        Compat01As03Sink!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1019 {
     };
 }
 
-impl_1019!()
+impl_1019!();

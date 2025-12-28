@@ -12,4 +12,4 @@ macro_rules! collect_attrs {
     };
 }
 
-collect_attrs!()
+collect_attrs!();

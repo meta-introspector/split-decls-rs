@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Result!();
-        Rule!();
         PositionCalculator!();
-        ConstDirective!();
         Positioned!();
+        Rule!();
+        ConstDirective!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_const_directive {
     };
 }
 
-parse_const_directive!()
+parse_const_directive!();

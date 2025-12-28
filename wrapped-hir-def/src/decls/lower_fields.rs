@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ExpressionStoreSourceMap!();
         Attrs!();
-        ModuleId!();
-        FieldData!();
         ExpressionStore!();
-        Visibility!();
+        ModuleId!();
         ExpressionStoreDiagnostics!();
-        DefDatabase!();
-        RawVisibility!();
+        ExpressionStoreSourceMap!();
         Item!();
+        DefDatabase!();
+        Visibility!();
+        FieldData!();
+        RawVisibility!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! lower_fields {
     };
 }
 
-lower_fields!()
+lower_fields!();

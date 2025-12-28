@@ -4,4 +4,4 @@ macro_rules! BString {
     };
 }
 
-BString!()
+BString!();

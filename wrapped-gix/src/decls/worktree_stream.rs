@@ -12,4 +12,4 @@ macro_rules! worktree_stream {
     };
 }
 
-worktree_stream!()
+worktree_stream!();

@@ -4,4 +4,4 @@ macro_rules! add_submodules {
     };
 }
 
-add_submodules!()
+add_submodules!();

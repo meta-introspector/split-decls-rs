@@ -4,4 +4,4 @@ macro_rules! plotters_backend {
     };
 }
 
-plotters_backend!()
+plotters_backend!();

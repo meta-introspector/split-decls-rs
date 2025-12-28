@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reader!();
         DebugLineStr!();
+        Reader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_597 {
     };
 }
 
-impl_597!()
+impl_597!();

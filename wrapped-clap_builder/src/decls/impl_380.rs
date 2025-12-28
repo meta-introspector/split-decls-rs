@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Subcommand!();
-        Command!();
-        Usage!();
         ContextKind!();
+        Command!();
+        Subcommand!();
         Values!();
+        Usage!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_380 {
     };
 }
 
-impl_380!()
+impl_380!();

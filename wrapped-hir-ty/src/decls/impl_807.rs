@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EarlyBinder!();
         ImplTraitId!();
         HirDatabase!();
+        EarlyBinder!();
         ImplTraits!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_807 {
     };
 }
 
-impl_807!()
+impl_807!();

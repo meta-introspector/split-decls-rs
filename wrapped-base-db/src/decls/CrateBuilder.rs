@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ExtraCrateData!();
         CrateWorkspaceData!();
         Env!();
         CrateDataBuilder!();
-        ExtraCrateData!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CrateBuilder {
     };
 }
 
-CrateBuilder!()
+CrateBuilder!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Function!();
-        Bencher!();
         Measurement!();
+        Bencher!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_289 {
     };
 }
 
-impl_289!()
+impl_289!();

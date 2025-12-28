@@ -6,4 +6,4 @@ macro_rules! check_command {
     };
 }
 
-check_command!()
+check_command!();

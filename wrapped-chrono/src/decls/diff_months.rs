@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Months!();
         NaiveDate!();
+        Months!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! diff_months {
     };
 }
 
-diff_months!()
+diff_months!();

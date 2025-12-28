@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Match!();
+        Automaton!();
         MatchError!();
         Input!();
-        Automaton!();
         FindIter!();
-        Match!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

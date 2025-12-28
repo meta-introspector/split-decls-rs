@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        BoxWidth!();
         Figure!();
         Set!();
-        BoxWidth!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

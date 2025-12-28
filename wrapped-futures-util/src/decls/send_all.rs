@@ -4,4 +4,4 @@ macro_rules! send_all {
     };
 }
 
-send_all!()
+send_all!();

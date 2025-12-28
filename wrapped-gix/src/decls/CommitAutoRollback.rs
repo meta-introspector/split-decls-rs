@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         Repository!();
+        Config!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CommitAutoRollback {
     };
 }
 
-CommitAutoRollback!()
+CommitAutoRollback!();

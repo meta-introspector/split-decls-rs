@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Graph!();
         Commit!();
         Either!();
-        Graph!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LazyCommit {
     };
 }
 
-LazyCommit!()
+LazyCommit!();

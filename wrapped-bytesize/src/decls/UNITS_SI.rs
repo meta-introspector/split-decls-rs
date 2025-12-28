@@ -4,4 +4,4 @@ macro_rules! UNITS_SI {
     };
 }
 
-UNITS_SI!()
+UNITS_SI!();

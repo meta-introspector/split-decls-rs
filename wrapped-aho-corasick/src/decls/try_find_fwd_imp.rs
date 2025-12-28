@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         Prefilter!();
         Automaton!();
-        Anchored!();
-        Candidate!();
-        Span!();
-        Input!();
-        Match!();
         MatchError!();
+        Input!();
+        Span!();
+        Anchored!();
+        Match!();
+        Candidate!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! try_find_fwd_imp {
     };
 }
 
-try_find_fwd_imp!()
+try_find_fwd_imp!();

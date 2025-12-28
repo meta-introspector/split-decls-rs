@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ready!();
-        Select!();
         Either!();
+        Select!();
+        Ready!();
         Pending!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_228 {
     };
 }
 
-impl_228!()
+impl_228!();

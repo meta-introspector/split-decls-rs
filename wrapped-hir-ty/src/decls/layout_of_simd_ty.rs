@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Layout!();
-        HirDatabase!();
-        TraitEnvironment!();
-        LayoutError!();
         LayoutCx!();
+        TraitEnvironment!();
+        HirDatabase!();
+        LayoutError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! layout_of_simd_ty {
     };
 }
 
-layout_of_simd_ty!()
+layout_of_simd_ty!();

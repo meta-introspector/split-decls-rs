@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ContextKind!();
         Message!();
-        FlatMap!();
         ContextValue!();
-        ColorChoice!();
-        Styles!();
         Backtrace!();
+        FlatMap!();
+        ContextKind!();
+        ColorChoice!();
+        Error!();
         ErrorKind!();
+        Styles!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! ErrorInner {
     };
 }
 
-ErrorInner!()
+ErrorInner!();

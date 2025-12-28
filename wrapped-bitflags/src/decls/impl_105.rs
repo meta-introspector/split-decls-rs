@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Flags!();
         IterNames!();
+        Flags!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

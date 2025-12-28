@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TimeDelta!();
         NaiveDateTime!();
         NaiveDate!();
-        TimeDelta!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_431 {
     };
 }
 
-impl_431!()
+impl_431!();

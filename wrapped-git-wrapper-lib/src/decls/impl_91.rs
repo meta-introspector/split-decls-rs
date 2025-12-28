@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GitAdapter!();
-        Result!();
-        GitExecutor!();
-        SubmoduleStat!();
         SystemGitExecutor!();
+        SubmoduleStat!();
+        Result!();
+        GitAdapter!();
+        GitExecutor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

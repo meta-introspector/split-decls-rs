@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NotifyActor!();
         Message!();
         NotifyHandle!();
+        NotifyActor!();
     };
 }
 

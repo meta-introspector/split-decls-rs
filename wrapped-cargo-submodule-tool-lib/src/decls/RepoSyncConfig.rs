@@ -4,4 +4,4 @@ macro_rules! RepoSyncConfig {
     };
 }
 
-RepoSyncConfig!()
+RepoSyncConfig!();

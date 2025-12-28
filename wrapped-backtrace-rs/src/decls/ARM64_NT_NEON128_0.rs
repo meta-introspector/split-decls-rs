@@ -4,4 +4,4 @@ macro_rules! ARM64_NT_NEON128_0 {
     };
 }
 
-ARM64_NT_NEON128_0!()
+ARM64_NT_NEON128_0!();

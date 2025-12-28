@@ -11,4 +11,4 @@ macro_rules! find_insert_pos_by_order {
     };
 }
 
-find_insert_pos_by_order!()
+find_insert_pos_by_order!();

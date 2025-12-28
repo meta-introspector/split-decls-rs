@@ -18,4 +18,4 @@ fn bar() {
     };
 }
 
-test_expr!()
+test_expr!();

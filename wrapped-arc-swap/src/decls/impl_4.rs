@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Guard!();
-        DynGuard!();
         Access!();
+        DynGuard!();
         DynAccess!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

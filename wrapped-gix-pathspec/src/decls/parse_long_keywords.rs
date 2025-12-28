@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        Pattern!();
         SearchMode!();
+        Pattern!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_long_keywords {
     };
 }
 
-parse_long_keywords!()
+parse_long_keywords!();

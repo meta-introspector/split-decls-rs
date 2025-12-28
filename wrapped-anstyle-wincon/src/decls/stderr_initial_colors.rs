@@ -12,4 +12,4 @@ macro_rules! stderr_initial_colors {
     };
 }
 
-stderr_initial_colors!()
+stderr_initial_colors!();

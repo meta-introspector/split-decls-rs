@@ -4,4 +4,4 @@ macro_rules! assert_read {
     };
 }
 
-assert_read!()
+assert_read!();

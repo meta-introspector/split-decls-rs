@@ -4,4 +4,4 @@ macro_rules! ExtendElement {
     };
 }
 
-ExtendElement!()
+ExtendElement!();

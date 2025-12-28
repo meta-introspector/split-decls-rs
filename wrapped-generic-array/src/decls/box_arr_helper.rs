@@ -4,4 +4,4 @@ macro_rules! box_arr_helper {
     };
 }
 
-box_arr_helper!()
+box_arr_helper!();

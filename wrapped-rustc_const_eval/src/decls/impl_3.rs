@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Qualifs!();
+        ConstCx!();
+        FlowSensitiveAnalysis!();
+        NeedsNonConstDrop!();
+        HasMutInterior!();
+        NeedsDrop!();
+    };
+}
+
+macro_rules! impl_3 {
+    () => {
+        deps!();
+        impl < 'mir , 'tcx > Qualifs < 'mir , 'tcx > { # [doc = " Returns `true` if `local` is `NeedsDrop` at the given `Location`."] # [doc = ""] # [doc = " Only updates the cursor if absolutely necessary"] pub (crate) fn needs_drop (& mut self , ccx : & 'mir ConstCx < 'mir , 'tcx > , local : Local , location : Location ,) -> bool { let ty = ccx . body . local_decls [local] . ty ; if ! ty . has_opaque_types () && ! NeedsDrop :: in_any_value_of_ty (ccx , ty) { return false ; } let needs_drop = self . needs_drop . get_or_insert_with (| | { let ConstCx { tcx , body , .. } = * ccx ; FlowSensitiveAnalysis :: new (NeedsDrop , ccx) . iterate_to_fixpoint (tcx , body , None) . into_results_cursor (body) }) ; needs_drop . seek_before_primary_effect (location) ; needs_drop . get () . contains (local) } # [doc = " Returns `true` if `local` is `NeedsNonConstDrop` at the given `Location`."] # [doc = ""] # [doc = " Only updates the cursor if absolutely necessary"] pub (crate) fn needs_non_const_drop (& mut self , ccx : & 'mir ConstCx < 'mir , 'tcx > , local : Local , location : Location ,) -> bool { let ty = ccx . body . local_decls [local] . ty ; if ! ty . has_opaque_types () && ! NeedsNonConstDrop :: in_any_value_of_ty (ccx , ty) { return false ; } let needs_non_const_drop = self . needs_non_const_drop . get_or_insert_with (| | { let ConstCx { tcx , body , .. } = * ccx ; FlowSensitiveAnalysis :: new (NeedsNonConstDrop , ccx) . iterate_to_fixpoint (tcx , body , None) . into_results_cursor (body) }) ; needs_non_const_drop . seek_before_primary_effect (location) ; needs_non_const_drop . get () . contains (local) } # [doc = " Returns `true` if `local` is `HasMutInterior` at the given `Location`."] # [doc = ""] # [doc = " Only updates the cursor if absolutely necessary."] fn has_mut_interior (& mut self , ccx : & 'mir ConstCx < 'mir , 'tcx > , local : Local , location : Location ,) -> bool { let ty = ccx . body . local_decls [local] . ty ; if ! ty . has_opaque_types () && ! HasMutInterior :: in_any_value_of_ty (ccx , ty) { return false ; } let has_mut_interior = self . has_mut_interior . get_or_insert_with (| | { let ConstCx { tcx , body , .. } = * ccx ; FlowSensitiveAnalysis :: new (HasMutInterior , ccx) . iterate_to_fixpoint (tcx , body , None) . into_results_cursor (body) }) ; has_mut_interior . seek_before_primary_effect (location) ; has_mut_interior . get () . contains (local) } fn in_return_place (& mut self , ccx : & 'mir ConstCx < 'mir , 'tcx > , tainted_by_errors : Option < ErrorGuaranteed > ,) -> ConstQualifs { let return_block = ccx . body . basic_blocks . iter_enumerated () . find (| (_ , block) | matches ! (block . terminator () . kind , TerminatorKind :: Return)) . map (| (bb , _) | bb) ; let Some (return_block) = return_block else { return qualifs :: in_any_value_of_ty (ccx , ccx . body . return_ty () , tainted_by_errors) ; } ; let return_loc = ccx . body . terminator_loc (return_block) ; ConstQualifs { needs_drop : self . needs_drop (ccx , RETURN_PLACE , return_loc) , needs_non_const_drop : self . needs_non_const_drop (ccx , RETURN_PLACE , return_loc) , has_mut_interior : self . has_mut_interior (ccx , RETURN_PLACE , return_loc) , tainted_by_errors , } } }
+    };
+}
+
+impl_3!()

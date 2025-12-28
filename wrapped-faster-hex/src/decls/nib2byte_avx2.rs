@@ -4,4 +4,4 @@ macro_rules! nib2byte_avx2 {
     };
 }
 
-nib2byte_avx2!()
+nib2byte_avx2!();

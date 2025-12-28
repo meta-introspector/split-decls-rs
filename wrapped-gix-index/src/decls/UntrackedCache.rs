@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stat!();
         Directory!();
+        Stat!();
         OidStat!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! UntrackedCache {
     };
 }
 
-UntrackedCache!()
+UntrackedCache!();

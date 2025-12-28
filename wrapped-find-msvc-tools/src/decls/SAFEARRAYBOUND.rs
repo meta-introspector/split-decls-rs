@@ -4,4 +4,4 @@ macro_rules! SAFEARRAYBOUND {
     };
 }
 
-SAFEARRAYBOUND!()
+SAFEARRAYBOUND!();

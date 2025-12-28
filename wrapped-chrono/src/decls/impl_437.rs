@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        NaiveDateTime!();
+        NaiveDate!();
+        ParseError!();
+        Item!();
         Month!();
         Pad!();
-        ParseError!();
-        Numeric!();
-        ParseResult!();
-        NaiveDateTime!();
         Fixed!();
-        Item!();
+        ParseResult!();
         Parsed!();
-        NaiveDate!();
+        Numeric!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_437 {
     };
 }
 
-impl_437!()
+impl_437!();

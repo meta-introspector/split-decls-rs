@@ -4,4 +4,4 @@ macro_rules! AnyEq {
     };
 }
 
-AnyEq!()
+AnyEq!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        Pick!();
         ResourceKind!();
         Resolution!();
+        Labels!();
+        Command!();
+        PlatformRef!();
+        BuiltinDriver!();
+        Conflict!();
+        Options!();
+        Data!();
         Error!();
         Driver!();
-        BuiltinDriver!();
-        PlatformRef!();
-        Pick!();
-        Labels!();
-        Data!();
         DriverChoice!();
-        Command!();
-        Options!();
-        Conflict!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! inner {
     };
 }
 
-inner!()
+inner!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Endianness!();
         DecodeError!();
         Reader!();
-        Endianness!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! varint_decode_i64 {
     };
 }
 
-varint_decode_i64!()
+varint_decode_i64!();

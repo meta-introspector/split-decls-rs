@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstValue!();
         Name!();
+        ConstValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SerializeStructVariant {
     };
 }
 
-SerializeStructVariant!()
+SerializeStructVariant!();

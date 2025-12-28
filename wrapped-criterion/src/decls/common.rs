@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Measurement!();
-        BenchmarkId!();
-        Data!();
-        ReportContext!();
-        Criterion!();
-        Throughput!();
-        Tails!();
-        Sample!();
-        Routine!();
-        OutgoingMessage!();
         Baseline!();
-        Error!();
-        MeasurementData!();
         SavedSample!();
-        BenchmarkConfig!();
+        Data!();
+        Sample!();
+        Tails!();
+        ReportContext!();
+        Throughput!();
         ComparisonData!();
+        OutgoingMessage!();
+        Routine!();
+        MeasurementData!();
+        BenchmarkConfig!();
+        Criterion!();
+        Error!();
+        BenchmarkId!();
+        Measurement!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! common {
     };
 }
 
-common!()
+common!();

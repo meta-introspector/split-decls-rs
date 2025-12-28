@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ExecuteSequencesError!();
+        Sequence!();
+    };
+}
+
+macro_rules! impl_83 {
+    () => {
+        deps!();
+        impl core :: fmt :: Display for ExecuteSequencesError { fn fmt (& self , f : & mut core :: fmt :: Formatter < '_ >) -> core :: fmt :: Result { match self { ExecuteSequencesError :: DecodebufferError (e) => { write ! (f , "{e:?}") } ExecuteSequencesError :: NotEnoughBytesForSequence { wanted , have } => { write ! (f , "Sequence wants to copy up to byte {wanted}. Bytes in literalsbuffer: {have}") } ExecuteSequencesError :: ZeroOffset => { write ! (f , "Illegal offset: 0 found") } } } }
+    };
+}
+
+impl_83!()

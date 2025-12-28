@@ -11,4 +11,4 @@ macro_rules! zero_extend64 {
     };
 }
 
-zero_extend64!()
+zero_extend64!();

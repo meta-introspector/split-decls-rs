@@ -4,4 +4,4 @@ macro_rules! MacroCall {
     };
 }
 
-MacroCall!()
+MacroCall!();

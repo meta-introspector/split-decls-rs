@@ -4,4 +4,4 @@ macro_rules! GlobError {
     };
 }
 
-GlobError!()
+GlobError!();

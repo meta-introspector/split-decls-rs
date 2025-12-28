@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Repository!();
-        Reference!();
-        Id!();
-        Merge!();
-        Note!();
         Spec!();
+        Merge!();
+        Id!();
+        Reference!();
+        Note!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_896 {
     };
 }
 
-impl_896!()
+impl_896!();

@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        ClosureOutlivesSubjectTy!();
+        ConstraintGraphDirection!();
+        RegionGraph!();
     };
 }
 
 macro_rules! impl_34 {
     () => {
         deps!();
-        impl < 'tcx , I > ! TypeFoldable < I > for ClosureOutlivesSubjectTy < 'tcx > { }
+        impl < 'a , 'tcx , D : ConstraintGraphDirection > graph :: DirectedGraph for RegionGraph < 'a , 'tcx , D > { type Node = RegionVid ; fn num_nodes (& self) -> usize { self . constraint_graph . first_constraints . len () } }
     };
 }
 

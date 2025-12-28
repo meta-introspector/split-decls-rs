@@ -11,4 +11,4 @@ macro_rules! shared_to_vec_impl {
     };
 }
 
-shared_to_vec_impl!()
+shared_to_vec_impl!();

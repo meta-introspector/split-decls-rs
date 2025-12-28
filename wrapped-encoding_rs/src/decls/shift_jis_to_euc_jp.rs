@@ -4,4 +4,4 @@ macro_rules! shift_jis_to_euc_jp {
     };
 }
 
-shift_jis_to_euc_jp!()
+shift_jis_to_euc_jp!();

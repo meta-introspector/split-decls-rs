@@ -4,4 +4,4 @@ macro_rules! words_from_le_bytes_64 {
     };
 }
 
-words_from_le_bytes_64!()
+words_from_le_bytes_64!();

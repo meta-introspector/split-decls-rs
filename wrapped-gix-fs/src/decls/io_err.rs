@@ -4,4 +4,4 @@ macro_rules! io_err {
     };
 }
 
-io_err!()
+io_err!();

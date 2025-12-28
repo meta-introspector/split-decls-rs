@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        UnicodeWordBoundaryError!();
+        GroupInfoError!();
+        Captures!();
+        NFA!();
+    };
+}
+
+macro_rules! BuildErrorKind {
+    () => {
+        deps!();
+        # [doc = " The kind of error that occurred during the construction of a thompson NFA."] # [derive (Clone , Debug)] enum BuildErrorKind { # [doc = " An error that occurred while parsing a regular expression. Note that"] # [doc = " this error may be printed over multiple lines, and is generally"] # [doc = " intended to be end user readable on its own."] # [cfg (feature = "syntax")] Syntax (regex_syntax :: Error) , # [doc = " An error that occurs if the capturing groups provided to an NFA builder"] # [doc = " do not satisfy the documented invariants. For example, things like"] # [doc = " too many groups, missing groups, having the first (zeroth) group be"] # [doc = " named or duplicate group names within the same pattern."] Captures (captures :: GroupInfoError) , # [doc = " An error that occurs when an NFA contains a Unicode word boundary, but"] # [doc = " where the crate was compiled without the necessary data for dealing"] # [doc = " with Unicode word boundaries."] Word (look :: UnicodeWordBoundaryError) , # [doc = " An error that occurs if too many patterns were given to the NFA"] # [doc = " compiler."] TooManyPatterns { # [doc = " The number of patterns given, which exceeds the limit."] given : usize , # [doc = " The limit on the number of patterns."] limit : usize , } , # [doc = " An error that occurs if too states are produced while building an NFA."] TooManyStates { # [doc = " The minimum number of states that are desired, which exceeds the"] # [doc = " limit."] given : usize , # [doc = " The limit on the number of states."] limit : usize , } , # [doc = " An error that occurs when NFA compilation exceeds a configured heap"] # [doc = " limit."] ExceededSizeLimit { # [doc = " The configured limit, in bytes."] limit : usize , } , # [doc = " An error that occurs when an invalid capture group index is added to"] # [doc = " the NFA. An \"invalid\" index can be one that would otherwise overflow"] # [doc = " a `usize` on the current target."] InvalidCaptureIndex { # [doc = " The invalid index that was given."] index : u32 , } , # [doc = " An error that occurs when one tries to build a reverse NFA with"] # [doc = " captures enabled. Currently, this isn't supported, but we probably"] # [doc = " should support it at some point."] # [cfg (feature = "syntax")] UnsupportedCaptures , }
+    };
+}
+
+BuildErrorKind!()

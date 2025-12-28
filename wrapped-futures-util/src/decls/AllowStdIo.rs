@@ -4,4 +4,4 @@ macro_rules! AllowStdIo {
     };
 }
 
-AllowStdIo!()
+AllowStdIo!();

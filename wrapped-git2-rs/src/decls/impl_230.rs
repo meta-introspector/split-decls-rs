@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Reference!();
+        Binding!();
         Error!();
         Branch!();
-        Binding!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_230 {
     };
 }
 
-impl_230!()
+impl_230!();

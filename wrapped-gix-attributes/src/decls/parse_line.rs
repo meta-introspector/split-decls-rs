@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Kind!();
         Error!();
         Iter!();
-        Kind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_line {
     };
 }
 
-parse_line!()
+parse_line!();

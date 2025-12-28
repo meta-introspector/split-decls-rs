@@ -4,4 +4,4 @@ macro_rules! size_hint {
     };
 }
 
-size_hint!()
+size_hint!();

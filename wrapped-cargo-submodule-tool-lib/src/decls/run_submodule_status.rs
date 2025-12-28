@@ -11,4 +11,4 @@ macro_rules! run_submodule_status {
     };
 }
 
-run_submodule_status!()
+run_submodule_status!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         CustomDirective!();
         Registry!();
-        ContextDirective!();
         ServerResult!();
+        ContextDirective!();
         Directive!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! CustomDirectiveFactory {
     };
 }
 
-CustomDirectiveFactory!()
+CustomDirectiveFactory!();

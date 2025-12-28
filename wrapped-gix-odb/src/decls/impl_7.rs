@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Error!();
         Handle!();
         Store!();
         Header!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

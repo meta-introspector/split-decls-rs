@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         AbbreviationsCache!();
-        Abbreviations!();
-        DebugAbbrev!();
-        AbbreviationsCacheStrategy!();
         DebugAbbrevOffset!();
         Result!();
-        Reader!();
         DebugInfoUnitHeadersIter!();
+        DebugAbbrev!();
+        Abbreviations!();
+        Reader!();
+        AbbreviationsCacheStrategy!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_340 {
     };
 }
 
-impl_340!()
+impl_340!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Default!();
         Outcome!();
         Note!();
-        Platform!();
-        Action!();
-        Tree!();
-        Error!();
         Change!();
+        Tree!();
+        Action!();
+        Error!();
+        Platform!();
+        Default!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

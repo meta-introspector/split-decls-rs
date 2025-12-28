@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SymbolName!();
-        BytesOrWideString!();
-        PrintFmt!();
+        Symbol!();
         BacktraceFrameFmt!();
         Frame!();
-        Symbol!();
+        BytesOrWideString!();
+        SymbolName!();
+        PrintFmt!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

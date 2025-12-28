@@ -4,4 +4,4 @@ macro_rules! fiat_25519_cmovznz_u64 {
     };
 }
 
-fiat_25519_cmovznz_u64!()
+fiat_25519_cmovznz_u64!();

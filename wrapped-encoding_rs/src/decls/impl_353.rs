@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ByteDestination!();
-        ByteTwoHandle!();
-        ByteFourHandle!();
-        Space!();
         ByteOneHandle!();
+        ByteTwoHandle!();
         ByteThreeHandle!();
+        ByteDestination!();
+        Space!();
+        ByteFourHandle!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_353 {
     };
 }
 
-impl_353!()
+impl_353!();

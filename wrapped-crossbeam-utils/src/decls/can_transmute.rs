@@ -4,4 +4,4 @@ macro_rules! can_transmute {
     };
 }
 
-can_transmute!()
+can_transmute!();

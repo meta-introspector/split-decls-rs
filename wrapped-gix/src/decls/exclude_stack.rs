@@ -11,4 +11,4 @@ macro_rules! exclude_stack {
     };
 }
 
-exclude_stack!()
+exclude_stack!();

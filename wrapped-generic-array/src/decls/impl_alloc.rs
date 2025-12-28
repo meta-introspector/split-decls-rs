@@ -4,4 +4,4 @@ macro_rules! impl_alloc {
     };
 }
 
-impl_alloc!()
+impl_alloc!();

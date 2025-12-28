@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Parse!();
-        UnresolvedType!();
-        TemplateParam!();
         ParseContext!();
         SubstitutionTable!();
+        Result!();
+        TemplateParam!();
+        IndexStr!();
         Decltype!();
+        Substitution!();
+        Parse!();
         Substitutable!();
         TemplateArgs!();
-        Substitution!();
-        IndexStr!();
-        Result!();
+        UnresolvedType!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

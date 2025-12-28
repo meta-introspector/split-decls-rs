@@ -11,4 +11,4 @@ macro_rules! attribute_stack {
     };
 }
 
-attribute_stack!()
+attribute_stack!();

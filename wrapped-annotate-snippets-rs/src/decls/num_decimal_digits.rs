@@ -4,4 +4,4 @@ macro_rules! num_decimal_digits {
     };
 }
 
-num_decimal_digits!()
+num_decimal_digits!();

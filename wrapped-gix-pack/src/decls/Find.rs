@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Entry!();
         DecodeEntry!();
         Offset!();
-        Entry!();
-        Error!();
         Never!();
         Location!();
     };
@@ -16,4 +16,4 @@ macro_rules! Find {
     };
 }
 
-Find!()
+Find!();

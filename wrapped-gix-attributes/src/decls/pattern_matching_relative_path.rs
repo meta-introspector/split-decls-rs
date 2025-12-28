@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Outcome!();
-        Attributes!();
-        Value!();
         Assignments!();
+        Value!();
+        Attributes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! pattern_matching_relative_path {
     };
 }
 
-pattern_matching_relative_path!()
+pattern_matching_relative_path!();

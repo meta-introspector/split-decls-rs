@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Min!();
         Sealed!();
+        Min!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_427 {
     };
 }
 
-impl_427!()
+impl_427!();

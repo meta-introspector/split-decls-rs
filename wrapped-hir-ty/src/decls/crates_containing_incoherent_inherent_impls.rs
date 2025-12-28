@@ -11,4 +11,4 @@ macro_rules! crates_containing_incoherent_inherent_impls {
     };
 }
 
-crates_containing_incoherent_inherent_impls!()
+crates_containing_incoherent_inherent_impls!();

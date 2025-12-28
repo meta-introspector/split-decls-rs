@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Refspec!();
         Refspecs!();
+        Refspec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_649 {
     };
 }
 
-impl_649!()
+impl_649!();

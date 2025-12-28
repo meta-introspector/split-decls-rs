@@ -11,4 +11,4 @@ macro_rules! strip_bytes {
     };
 }
 
-strip_bytes!()
+strip_bytes!();

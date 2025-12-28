@@ -4,4 +4,4 @@ macro_rules! cascade {
     };
 }
 
-cascade!()
+cascade!();

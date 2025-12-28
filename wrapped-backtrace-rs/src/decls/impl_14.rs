@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ResolveWhat!();
         Frame!();
+        ResolveWhat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

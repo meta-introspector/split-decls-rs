@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RefSpecRef!();
         Needle!();
+        RefSpecRef!();
         Matcher!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_49 {
     };
 }
 
-impl_49!()
+impl_49!();

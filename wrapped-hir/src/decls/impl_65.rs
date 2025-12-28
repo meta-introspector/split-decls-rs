@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Callee!();
+        Param!();
         Closure!();
+        HasSource!();
+        Callee!();
         Function!();
         SelfParam!();
-        HasSource!();
-        Param!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

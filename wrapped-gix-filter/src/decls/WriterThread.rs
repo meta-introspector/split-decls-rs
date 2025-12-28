@@ -4,4 +4,4 @@ macro_rules! WriterThread {
     };
 }
 
-WriterThread!()
+WriterThread!();

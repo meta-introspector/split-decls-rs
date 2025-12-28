@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MacroDefKind!();
-        InFile!();
         MacroCallKind!();
-        Attr!();
+        InFile!();
         InRealFile!();
-        HirFileId!();
         ExpandDatabase!();
+        MacroDefKind!();
+        Attr!();
+        HirFileId!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_242 {
     };
 }
 
-impl_242!()
+impl_242!();

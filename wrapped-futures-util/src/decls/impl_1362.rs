@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Fn1!();
         ChainFn!();
+        Fn1!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1362 {
     };
 }
 
-impl_1362!()
+impl_1362!();

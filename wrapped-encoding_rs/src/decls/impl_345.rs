@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ByteOneHandle!();
         ByteDestination!();
+        ByteOneHandle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_345 {
     };
 }
 
-impl_345!()
+impl_345!();

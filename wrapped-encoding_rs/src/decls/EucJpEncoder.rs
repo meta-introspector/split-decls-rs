@@ -4,4 +4,4 @@ macro_rules! EucJpEncoder {
     };
 }
 
-EucJpEncoder!()
+EucJpEncoder!();

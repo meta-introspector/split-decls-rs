@@ -4,4 +4,4 @@ macro_rules! FactoryBlockGetName {
     };
 }
 
-FactoryBlockGetName!()
+FactoryBlockGetName!();

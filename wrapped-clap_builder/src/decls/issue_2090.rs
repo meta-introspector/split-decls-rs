@@ -11,4 +11,4 @@ macro_rules! issue_2090 {
     };
 }
 
-issue_2090!()
+issue_2090!();

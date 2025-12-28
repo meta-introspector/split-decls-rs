@@ -4,4 +4,4 @@ macro_rules! subgraph_free {
     };
 }
 
-subgraph_free!()
+subgraph_free!();

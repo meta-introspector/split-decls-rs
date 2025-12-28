@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Parse!();
+    };
+}
+
+macro_rules! pro {
+    () => {
+        deps!();
+        # [doc = " N00b level: Simple, intuitive macros for beginners."] # [doc = ""] # [doc = " These macros provide a gentle introduction to syntax manipulation with"] # [doc = " sensible defaults and minimal complexity."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " // Simple parsing"] # [doc = " n00b_parse! { struct MyStruct { field: String } }"] # [doc = ""] # [doc = " // Easy code generation"] # [doc = " n00b_gen! { impl Debug for $type { ... } }"] # [doc = " ```"] # [doc = " Pro level: More control and flexibility for experienced users."] # [doc = ""] # [doc = " These macros provide additional options and customization while"] # [doc = " maintaining a relatively approachable interface."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " // Advanced parsing with custom validation"] # [doc = " pro_parse! {"] # [doc = "     struct MyStruct {"] # [doc = "         #[validate(non_empty)]"] # [doc = "         field: String,"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " // Template-based code generation"] # [doc = " pro_gen! {"] # [doc = "     trait Bound,"] # [doc = "     type Output = Self,"] # [doc = "     |self_| {"] # [doc = "         fn process(&self) -> Output { /* implementation */ }"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] mod pro { # [doc = " Parse tokens with additional options and validation."] # [doc = ""] # [doc = " This macro provides more control over the parsing process, including"] # [doc = " custom validation attributes and error handling."] # [macro_export] macro_rules ! parse { ($ struct : ident $ name : ident { $ ($ (# [$ meta : meta]) * $ field : ident : $ ty : ty) ,* }) => { $ crate :: parse_quote ! { struct $ name { $ ($ ($ meta) * $ field : $ ty ,) * } } } ; } # [doc = " Generate code with templates and type parameters."] # [doc = ""] # [doc = " This macro supports more sophisticated code generation patterns"] # [doc = " with type parameters and trait bounds."] # [macro_export] macro_rules ! gen { ($ ($ bound : ident) ,*; type $ output : ident = $ default : ty ; |$ self_ : ident | $ body : block) => { $ crate :: quote :: quote ! { # (where T : # bound) * type $ output = $ default ; fn process (&$ self_) $ body } } ; } # [doc = " Pattern matching with guards and more complex logic."] # [doc = ""] # [doc = " This macro supports pattern matching with additional conditions"] # [doc = " and more sophisticated handling."] # [macro_export] macro_rules ! r#match { ($ expr : expr , |$ guard : ident | { $ ($ pattern : pat if $ cond : expr => $ result : expr) ,* }) => { match $ expr { $ ($ pattern if $ cond => $ result ,) * _ => panic ! ("No matching pattern found or guard failed") } } ; } }
+    };
+}
+
+pro!()

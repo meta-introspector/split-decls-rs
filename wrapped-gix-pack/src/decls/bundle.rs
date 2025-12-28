@@ -4,4 +4,4 @@ macro_rules! bundle {
     };
 }
 
-bundle!()
+bundle!();

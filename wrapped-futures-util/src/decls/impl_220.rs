@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        JoinAllKind!();
         JoinAll!();
+        JoinAllKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

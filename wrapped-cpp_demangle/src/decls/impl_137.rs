@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IndexStr!();
-        Parse!();
-        Result!();
-        SeqId!();
-        SubstitutionTable!();
         ParseContext!();
+        IndexStr!();
+        Result!();
+        SubstitutionTable!();
+        Parse!();
+        SeqId!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_137 {
     };
 }
 
-impl_137!()
+impl_137!();

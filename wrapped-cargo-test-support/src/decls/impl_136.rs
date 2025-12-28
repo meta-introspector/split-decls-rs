@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         HttpServerHandle!();
-        Response!();
-        Request!();
-        Token!();
-        Mutation!();
         RequestCallback!();
+        Token!();
+        Request!();
         HttpServer!();
+        Mutation!();
+        Response!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_136 {
     };
 }
 
-impl_136!()
+impl_136!();

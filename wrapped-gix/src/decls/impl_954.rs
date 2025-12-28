@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Default!();
-        Note!();
-        Connection!();
-        Prepare!();
-        Fetch!();
-        Direction!();
         DryRun!();
         WritePackedRefs!();
         Options!();
+        Connection!();
+        Direction!();
+        Default!();
+        Note!();
+        Error!();
+        Prepare!();
+        Fetch!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_954 {
     };
 }
 
-impl_954!()
+impl_954!();

@@ -1,0 +1,7 @@
+macro_rules! IMAGE_FILE_CHARACTERISTICS {
+    () => {
+        pub type IMAGE_FILE_CHARACTERISTICS = u16 ;
+    };
+}
+
+IMAGE_FILE_CHARACTERISTICS!()

@@ -1,9 +1,5 @@
 macro_rules! deps {
     () => {
-        SubtreeView!();
-        TokenTreesView!();
-        DelimiterKind!();
-        TokenTree!();
         Subtree!();
     };
 }
@@ -11,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_27 {
     () => {
         deps!();
-        impl < 'a , S : Copy > SubtreeView < 'a , S > { pub fn new (tts : & 'a [TokenTree < S >]) -> Self { if cfg ! (debug_assertions) { let TokenTree :: Subtree (subtree) = & tts [0] else { panic ! ("first token tree must be a subtree in `SubtreeView`") ; } ; assert_eq ! (subtree . usize_len () , tts . len () - 1 , "subtree must cover the entire `SubtreeView`") ; } Self (tts) } pub fn as_token_trees (self) -> TokenTreesView < 'a , S > { TokenTreesView :: new (self . 0) } pub fn iter (& self) -> TtIter < 'a , S > { TtIter :: new (& self . 0 [1 ..]) } pub fn top_subtree (& self) -> & 'a Subtree < S > { let TokenTree :: Subtree (subtree) = & self . 0 [0] else { unreachable ! ("the first token tree is always the top subtree") ; } ; subtree } pub fn strip_invisible (& self) -> TokenTreesView < 'a , S > { if self . top_subtree () . delimiter . kind == DelimiterKind :: Invisible { TokenTreesView :: new (& self . 0 [1 ..]) } else { TokenTreesView :: new (self . 0) } } pub fn token_trees (& self) -> TokenTreesView < 'a , S > { TokenTreesView :: new (& self . 0 [1 ..]) } }
+        impl < S > Subtree < S > { pub fn usize_len (& self) -> usize { self . len as usize } }
     };
 }
 

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utc!();
         Months!();
+        Utc!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_add_sub_months {
     };
 }
 
-test_add_sub_months!()
+test_add_sub_months!();

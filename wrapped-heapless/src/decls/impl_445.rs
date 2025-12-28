@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FindMutView!();
         Kind!();
         LenType!();
+        FindMutView!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_445 {
     };
 }
 
-impl_445!()
+impl_445!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DynamicRequest!();
         FieldValue!();
+        DynamicRequest!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DynamicRequestExt {
     };
 }
 
-DynamicRequestExt!()
+DynamicRequestExt!();

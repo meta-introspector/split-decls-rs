@@ -4,4 +4,4 @@ macro_rules! hash_quality_test {
     };
 }
 
-hash_quality_test!()
+hash_quality_test!();

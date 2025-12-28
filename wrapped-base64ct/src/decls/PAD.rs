@@ -4,4 +4,4 @@ macro_rules! PAD {
     };
 }
 
-PAD!()
+PAD!();

@@ -4,4 +4,4 @@ macro_rules! PathIdMapping {
     };
 }
 
-PathIdMapping!()
+PathIdMapping!();

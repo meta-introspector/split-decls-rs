@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Loader!();
         Error!();
+        Loader!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ResSender {
     };
 }
 
-ResSender!()
+ResSender!();

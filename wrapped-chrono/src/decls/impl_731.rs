@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParseMonthError!();
         Error!();
+        ParseMonthError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_731 {
     };
 }
 
-impl_731!()
+impl_731!();

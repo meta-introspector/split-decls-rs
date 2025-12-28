@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DeriveEnum!();
-        ContainerAttributes!();
         DeriveStruct!();
+        ContainerAttributes!();
+        DeriveEnum!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! derive_encode_inner {
     };
 }
 
-derive_encode_inner!()
+derive_encode_inner!();

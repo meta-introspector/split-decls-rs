@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ModuleId!();
         CrateRootModuleId!();
+        ModuleId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_666 {
     };
 }
 
-impl_666!()
+impl_666!();

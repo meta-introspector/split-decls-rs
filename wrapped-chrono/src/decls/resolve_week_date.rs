@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NaiveDate!();
         Weekday!();
+        NaiveDate!();
         ParseResult!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! resolve_week_date {
     };
 }
 
-resolve_week_date!()
+resolve_week_date!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ConstParam!();
         TypeParam!();
         LifetimeParam!();
         GenericParam!();
-        ConstParam!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_363 {
     };
 }
 
-macro_363!()
+macro_363!();

@@ -11,4 +11,4 @@ macro_rules! tokens_for_side {
     };
 }
 
-tokens_for_side!()
+tokens_for_side!();

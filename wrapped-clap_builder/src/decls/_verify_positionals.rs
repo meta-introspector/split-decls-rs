@@ -21,4 +21,4 @@ macro_rules! _verify_positionals {
     };
 }
 
-_verify_positionals!()
+_verify_positionals!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         CheckCase!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! internal {
     };
 }
 
-internal!()
+internal!();

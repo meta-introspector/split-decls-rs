@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RepositoryInitOptions!();
         Repository!();
+        RepositoryInitOptions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! repo_init {
     };
 }
 
-repo_init!()
+repo_init!();

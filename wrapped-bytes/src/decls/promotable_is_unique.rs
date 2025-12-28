@@ -11,4 +11,4 @@ macro_rules! promotable_is_unique {
     };
 }
 
-promotable_is_unique!()
+promotable_is_unique!();

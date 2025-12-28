@@ -4,4 +4,4 @@ macro_rules! Bounded {
     };
 }
 
-Bounded!()
+Bounded!();

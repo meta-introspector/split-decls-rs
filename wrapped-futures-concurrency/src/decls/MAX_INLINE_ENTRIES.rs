@@ -4,4 +4,4 @@ macro_rules! MAX_INLINE_ENTRIES {
     };
 }
 
-MAX_INLINE_ENTRIES!()
+MAX_INLINE_ENTRIES!();

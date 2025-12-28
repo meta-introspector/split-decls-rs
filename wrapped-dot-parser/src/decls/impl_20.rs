@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AList!();
         ParseError!();
         Graphs!();
         Graph!();
+        AList!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

@@ -4,4 +4,4 @@ macro_rules! FlushDecompress {
     };
 }
 
-FlushDecompress!()
+FlushDecompress!();

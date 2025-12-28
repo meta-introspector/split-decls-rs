@@ -4,4 +4,4 @@ macro_rules! remove_possible_comma {
     };
 }
 
-remove_possible_comma!()
+remove_possible_comma!();

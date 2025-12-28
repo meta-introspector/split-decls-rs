@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Signature!();
         EcdsaCurve!();
         SigningKey!();
-        Signature!();
         SignatureSize!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

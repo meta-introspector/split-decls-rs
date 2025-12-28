@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Path!();
         Section!();
+        Path!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_786 {
     };
 }
 
-impl_786!()
+impl_786!();

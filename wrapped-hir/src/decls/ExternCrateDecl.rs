@@ -4,4 +4,4 @@ macro_rules! ExternCrateDecl {
     };
 }
 
-ExternCrateDecl!()
+ExternCrateDecl!();

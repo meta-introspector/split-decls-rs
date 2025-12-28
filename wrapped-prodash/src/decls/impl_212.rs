@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Task!();
+        Throughput!();
+        Key!();
+        Value!();
+        State!();
+    };
+}
+
+macro_rules! impl_212 {
+    () => {
+        deps!();
+        impl Throughput { # [doc = " Called at the beginning of the drawing of a renderer to remember at which time progress values are"] # [doc = " going to be updated with [`update_and_get(…)`][Throughput::update_and_get()]."] pub fn update_elapsed (& mut self) { let now = SystemTime :: now () ; self . elapsed = self . updated_at . and_then (| then | now . duration_since (then) . ok ()) ; self . updated_at = Some (now) ; } # [doc = " Lookup or create the progress value at `key` and set its current `progress`, returning its computed"] # [doc = " throughput."] pub fn update_and_get (& mut self , key : & progress :: Key , progress : Option < & progress :: Value > ,) -> Option < unit :: display :: Throughput > { progress . and_then (| progress | { self . elapsed . and_then (| elapsed | match self . sorted_by_key . binary_search_by_key (key , | t | t . 0) { Ok (index) => self . sorted_by_key [index] . 1 . update (progress . step . load (Ordering :: SeqCst) , elapsed) , Err (index) => { let state = State :: new (progress . step . load (Ordering :: SeqCst) , elapsed) ; let tp = state . throughput () ; self . sorted_by_key . insert (index , (* key , state)) ; tp } }) }) } # [doc = " Compare the keys in `sorted_values` with our internal state and remove all missing tasks from it."] # [doc = ""] # [doc = " This should be called after [`update_and_get(…)`][Throughput::update_and_get()] to pick up removed/finished"] # [doc = " progress."] pub fn reconcile (& mut self , sorted_values : & [(progress :: Key , progress :: Task)]) { self . sorted_by_key . retain (| (key , _) | sorted_values . binary_search_by_key (key , | e | e . 0) . is_ok ()) ; } }
+    };
+}
+
+impl_212!()

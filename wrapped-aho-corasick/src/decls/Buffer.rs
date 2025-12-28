@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Match!();
         StreamChunkIter!();
+        Match!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Buffer {
     };
 }
 
-Buffer!()
+Buffer!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ScopedJoinHandle!();
         Scope!();
+        ScopedJoinHandle!();
         ScopedThreadBuilder!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_157 {
     };
 }
 
-impl_157!()
+impl_157!();

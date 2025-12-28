@@ -4,4 +4,4 @@ macro_rules! get_cfg_attrs {
     };
 }
 
-get_cfg_attrs!()
+get_cfg_attrs!();

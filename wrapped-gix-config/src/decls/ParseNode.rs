@@ -4,4 +4,4 @@ macro_rules! ParseNode {
     };
 }
 
-ParseNode!()
+ParseNode!();

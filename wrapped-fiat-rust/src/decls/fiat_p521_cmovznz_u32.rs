@@ -4,4 +4,4 @@ macro_rules! fiat_p521_cmovznz_u32 {
     };
 }
 
-fiat_p521_cmovznz_u32!()
+fiat_p521_cmovznz_u32!();

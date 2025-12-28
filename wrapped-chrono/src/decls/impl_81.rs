@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         TimeZone!();
-        TimeDelta!();
         NaiveDateTime!();
+        TimeDelta!();
+        DstTester!();
+        FixedOffset!();
         MappedLocalTime!();
         Offset!();
-        FixedOffset!();
         NaiveDate!();
-        DstTester!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

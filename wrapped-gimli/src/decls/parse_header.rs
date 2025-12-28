@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Reader!();
         Result!();
         ListsHeader!();
+        Reader!();
         Encoding!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_header {
     };
 }
 
-parse_header!()
+parse_header!();

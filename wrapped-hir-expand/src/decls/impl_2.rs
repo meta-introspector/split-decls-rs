@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Attr!();
+        AttrInput!();
+        Name!();
+        AttrId!();
         ExpandDatabase!();
         RawAttrs!();
-        AttrInput!();
-        AttrId!();
-        Attr!();
-        ProcMacro!();
-        Name!();
         SpanMapRef!();
         ModPath!();
+        ProcMacro!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

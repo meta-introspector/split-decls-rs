@@ -4,4 +4,4 @@ macro_rules! DefaultConfig {
     };
 }
 
-DefaultConfig!()
+DefaultConfig!();

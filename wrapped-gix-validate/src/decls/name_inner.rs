@@ -11,4 +11,4 @@ macro_rules! name_inner {
     };
 }
 
-name_inner!()
+name_inner!();

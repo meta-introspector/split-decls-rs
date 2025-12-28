@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LruCache!();
         Iter!();
         IntoIter!();
-        LruCache!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

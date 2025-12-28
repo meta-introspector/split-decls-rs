@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        TypeAlias!();
+        Enum!();
+        Function!();
+        Union!();
+        Adt!();
         Struct!();
+        Impl!();
+        Const!();
         Static!();
         GenericDef!();
         Trait!();
-        Adt!();
-        Enum!();
-        Union!();
-        TypeAlias!();
-        Const!();
-        Function!();
-        Impl!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! macro_344 {
     };
 }
 
-macro_344!()
+macro_344!();

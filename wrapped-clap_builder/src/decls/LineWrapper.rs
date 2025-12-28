@@ -4,4 +4,4 @@ macro_rules! LineWrapper {
     };
 }
 
-LineWrapper!()
+LineWrapper!();

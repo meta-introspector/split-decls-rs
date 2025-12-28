@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Url!();
         Push!();
+        Url!();
+        Name!();
+        Remote!();
+        Direction!();
+        Fetch!();
         Note!();
         Repository!();
-        Fetch!();
-        Remote!();
-        Name!();
-        Direction!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_972 {
     };
 }
 
-impl_972!()
+impl_972!();

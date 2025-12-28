@@ -11,4 +11,4 @@ macro_rules! hir_database_is_dyn_compatible {
     };
 }
 
-hir_database_is_dyn_compatible!()
+hir_database_is_dyn_compatible!();

@@ -11,4 +11,4 @@ macro_rules! check_parser_before_failure {
     };
 }
 
-check_parser_before_failure!()
+check_parser_before_failure!();

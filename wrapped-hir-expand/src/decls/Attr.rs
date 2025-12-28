@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ModPath!();
         AttrId!();
+        ModPath!();
         AttrInput!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Attr {
     };
 }
 
-Attr!()
+Attr!();

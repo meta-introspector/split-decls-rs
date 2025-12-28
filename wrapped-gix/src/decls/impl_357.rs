@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Tag!();
+        Kind!();
+        Repository!();
         Error!();
         Commit!();
+        Note!();
         Object!();
         Tree!();
         Blob!();
-        Note!();
-        Kind!();
-        Tag!();
-        Repository!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_357 {
     };
 }
 
-impl_357!()
+impl_357!();

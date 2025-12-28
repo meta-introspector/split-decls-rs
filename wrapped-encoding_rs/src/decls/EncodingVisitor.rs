@@ -4,4 +4,4 @@ macro_rules! EncodingVisitor {
     };
 }
 
-EncodingVisitor!()
+EncodingVisitor!();

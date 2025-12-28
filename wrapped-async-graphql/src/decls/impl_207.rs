@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        KnownFragmentNames!();
         Visitor!();
         VisitorContext!();
+        KnownFragmentNames!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_207 {
     };
 }
 
-impl_207!()
+impl_207!();

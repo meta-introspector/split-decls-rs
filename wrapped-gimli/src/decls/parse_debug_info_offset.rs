@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         Reader!();
-        DebugInfoOffset!();
         Format!();
+        Result!();
+        DebugInfoOffset!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_debug_info_offset {
     };
 }
 
-parse_debug_info_offset!()
+parse_debug_info_offset!();

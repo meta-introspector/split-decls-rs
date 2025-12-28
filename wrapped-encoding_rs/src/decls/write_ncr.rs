@@ -4,4 +4,4 @@ macro_rules! write_ncr {
     };
 }
 
-write_ncr!()
+write_ncr!();

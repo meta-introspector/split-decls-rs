@@ -12,4 +12,4 @@ macro_rules! __Schema {
     };
 }
 
-__Schema!()
+__Schema!();

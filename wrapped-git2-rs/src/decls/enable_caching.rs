@@ -4,4 +4,4 @@ macro_rules! enable_caching {
     };
 }
 
-enable_caching!()
+enable_caching!();

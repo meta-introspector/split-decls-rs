@@ -4,4 +4,4 @@ macro_rules! gb2312_level2_hanzi_encode {
     };
 }
 
-gb2312_level2_hanzi_encode!()
+gb2312_level2_hanzi_encode!();

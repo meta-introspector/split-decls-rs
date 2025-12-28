@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Vec!();
-        SliceExt!();
         Global!();
+        SliceExt!();
         Allocator!();
+        Vec!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_202 {
     };
 }
 
-impl_202!()
+impl_202!();

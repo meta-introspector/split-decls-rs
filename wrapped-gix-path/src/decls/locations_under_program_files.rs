@@ -4,4 +4,4 @@ macro_rules! locations_under_program_files {
     };
 }
 
-locations_under_program_files!()
+locations_under_program_files!();

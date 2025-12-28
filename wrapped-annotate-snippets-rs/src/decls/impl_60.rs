@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LineAnnotation!();
         LineAnnotationType!();
-        MultilineAnnotation!();
+        LineAnnotation!();
         Loc!();
+        MultilineAnnotation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_60 {
     };
 }
 
-impl_60!()
+impl_60!();

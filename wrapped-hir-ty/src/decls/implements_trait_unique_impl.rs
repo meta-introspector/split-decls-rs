@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TypingMode!();
-        HirDatabase!();
         TraitEnvironment!();
+        HirDatabase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! implements_trait_unique_impl {
     };
 }
 
-implements_trait_unique_impl!()
+implements_trait_unique_impl!();

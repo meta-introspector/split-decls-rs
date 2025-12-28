@@ -4,4 +4,4 @@ macro_rules! UnsafeLint {
     };
 }
 
-UnsafeLint!()
+UnsafeLint!();

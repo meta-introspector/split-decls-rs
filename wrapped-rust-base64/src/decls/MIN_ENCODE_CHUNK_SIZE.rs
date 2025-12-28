@@ -4,4 +4,4 @@ macro_rules! MIN_ENCODE_CHUNK_SIZE {
     };
 }
 
-MIN_ENCODE_CHUNK_SIZE!()
+MIN_ENCODE_CHUNK_SIZE!();

@@ -4,4 +4,4 @@ macro_rules! NvOffset {
     };
 }
 
-NvOffset!()
+NvOffset!();

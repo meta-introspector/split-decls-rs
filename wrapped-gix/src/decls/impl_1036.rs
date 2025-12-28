@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         BuiltinSubmoduleStatus!();
+        Collect!();
         Entry!();
         Item!();
-        Collect!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1036 {
     };
 }
 
-impl_1036!()
+impl_1036!();

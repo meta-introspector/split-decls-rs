@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SliceWriter!();
         EncodeError!();
         Writer!();
+        SliceWriter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_490 {
     };
 }
 
-impl_490!()
+impl_490!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Message!();
+        Error!();
         Easy2Handle!();
         EasyHandle!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_142 {
     };
 }
 
-impl_142!()
+impl_142!();

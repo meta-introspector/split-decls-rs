@@ -4,4 +4,4 @@ macro_rules! impl_set_external {
     };
 }
 
-impl_set_external!()
+impl_set_external!();

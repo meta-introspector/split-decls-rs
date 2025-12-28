@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TomlLints!();
         TomlDependency!();
         InheritablePackage!();
-        TomlLints!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TomlWorkspace {
     };
 }
 
-TomlWorkspace!()
+TomlWorkspace!();

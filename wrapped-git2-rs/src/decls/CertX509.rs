@@ -4,4 +4,4 @@ macro_rules! CertX509 {
     };
 }
 
-CertX509!()
+CertX509!();

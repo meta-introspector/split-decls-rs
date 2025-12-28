@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        DebugStrOffsets!();
-        DebugRanges!();
         Dwarf!();
-        DebugLoc!();
-        DebugMacinfo!();
-        DebugLocLists!();
-        DebugAranges!();
-        DebugMacro!();
-        DebugRngLists!();
-        Reader!();
-        DebugLineStr!();
-        DebugLine!();
         DebugAbbrev!();
-        DebugTypes!();
-        Result!();
+        DebugAranges!();
         DebugInfo!();
-        DebugAddr!();
+        Reader!();
+        DebugMacro!();
         DebugStr!();
+        DebugLoc!();
+        DebugRanges!();
+        Result!();
+        DebugTypes!();
+        DebugLocLists!();
+        DebugStrOffsets!();
+        DebugRngLists!();
+        DebugMacinfo!();
+        DebugAddr!();
+        DebugLine!();
+        DebugLineStr!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! DwarfSections {
     };
 }
 
-DwarfSections!()
+DwarfSections!();

@@ -11,4 +11,4 @@ macro_rules! log_error {
     };
 }
 
-log_error!()
+log_error!();

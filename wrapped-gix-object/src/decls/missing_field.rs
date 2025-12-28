@@ -11,4 +11,4 @@ macro_rules! missing_field {
     };
 }
 
-missing_field!()
+missing_field!();

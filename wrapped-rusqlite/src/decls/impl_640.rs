@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        VTabCursor!();
+        Filters!();
+        SeriesTabCursor!();
+        Null!();
+        Result!();
+        Type!();
+        Context!();
+    };
+}
+
+macro_rules! impl_640 {
+    () => {
+        deps!();
+        unsafe impl VTabCursor for SeriesTabCursor < '_ > { fn filter (& mut self , idx_num : c_int , _idx_str : Option < & str > , args : & Filters < '_ >) -> Result < () > { let mut idx_num = QueryPlanFlags :: from_bits_truncate (idx_num) ; let mut i = 0 ; if idx_num . contains (QueryPlanFlags :: START) { self . min_value = args . get :: < Option < _ > > (i) ? . unwrap_or_default () ; i += 1 ; } else { self . min_value = 0 ; } if idx_num . contains (QueryPlanFlags :: STOP) { self . max_value = args . get :: < Option < _ > > (i) ? . unwrap_or_default () ; i += 1 ; } else { self . max_value = 0xffff_ffff ; } if idx_num . contains (QueryPlanFlags :: STEP) { self . step = args . get :: < Option < _ > > (i) ? . unwrap_or_default () ; if self . step == 0 { self . step = 1 ; } else if self . step < 0 { self . step = - self . step ; if ! idx_num . contains (QueryPlanFlags :: ASC) { idx_num |= QueryPlanFlags :: DESC ; } } } else { self . step = 1 ; } ; for arg in args . iter () { if arg . data_type () == Type :: Null { self . min_value = 1 ; self . max_value = 0 ; break ; } } self . is_desc = idx_num . contains (QueryPlanFlags :: DESC) ; if self . is_desc { self . value = self . max_value ; if self . step > 0 { self . value -= (self . max_value - self . min_value) % self . step ; } } else { self . value = self . min_value ; } self . row_id = 1 ; Ok (()) } fn next (& mut self) -> Result < () > { if self . is_desc { self . value -= self . step ; } else { self . value += self . step ; } self . row_id += 1 ; Ok (()) } fn eof (& self) -> bool { if self . is_desc { self . value < self . min_value } else { self . value > self . max_value } } fn column (& self , ctx : & mut Context , i : c_int) -> Result < () > { let x = match i { SERIES_COLUMN_START => self . min_value , SERIES_COLUMN_STOP => self . max_value , SERIES_COLUMN_STEP => self . step , _ => self . value , } ; ctx . set_result (& x) } fn rowid (& self) -> Result < i64 > { Ok (self . row_id) } }
+    };
+}
+
+impl_640!()

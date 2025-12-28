@@ -4,4 +4,4 @@ macro_rules! NODE_COOLDOWN {
     };
 }
 
-NODE_COOLDOWN!()
+NODE_COOLDOWN!();

@@ -12,4 +12,4 @@ macro_rules! try_set_prefix {
     };
 }
 
-try_set_prefix!()
+try_set_prefix!();

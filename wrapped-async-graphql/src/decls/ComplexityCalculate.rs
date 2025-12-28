@@ -4,4 +4,4 @@ macro_rules! ComplexityCalculate {
     };
 }
 
-ComplexityCalculate!()
+ComplexityCalculate!();

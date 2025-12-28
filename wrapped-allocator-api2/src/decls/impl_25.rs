@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Box!();
         Allocator!();
         Unique!();
-        Box!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

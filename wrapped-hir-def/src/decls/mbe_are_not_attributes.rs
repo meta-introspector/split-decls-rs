@@ -18,4 +18,4 @@ struct Foo;
     };
 }
 
-mbe_are_not_attributes!()
+mbe_are_not_attributes!();

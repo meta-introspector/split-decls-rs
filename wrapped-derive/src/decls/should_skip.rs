@@ -4,4 +4,4 @@ macro_rules! should_skip {
     };
 }
 
-should_skip!()
+should_skip!();

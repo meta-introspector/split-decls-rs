@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        Error!();
-        DirEntryAttr!();
         DirEntryValue!();
         Result!();
+        Error!();
+        ErrorKind!();
+        DirEntryAttr!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! get_details_entry_with_meta {
     };
 }
 
-get_details_entry_with_meta!()
+get_details_entry_with_meta!();

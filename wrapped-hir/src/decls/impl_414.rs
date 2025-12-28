@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HasCrate!();
-        AssocItem!();
         Crate!();
+        AssocItem!();
+        HasCrate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_414 {
     };
 }
 
-impl_414!()
+impl_414!();

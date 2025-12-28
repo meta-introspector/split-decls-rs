@@ -4,4 +4,4 @@ macro_rules! swap_tails {
     };
 }
 
-swap_tails!()
+swap_tails!();

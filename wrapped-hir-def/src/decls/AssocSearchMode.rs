@@ -4,4 +4,4 @@ macro_rules! AssocSearchMode {
     };
 }
 
-AssocSearchMode!()
+AssocSearchMode!();

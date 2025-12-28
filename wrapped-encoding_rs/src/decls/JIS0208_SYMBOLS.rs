@@ -4,4 +4,4 @@ macro_rules! JIS0208_SYMBOLS {
     };
 }
 
-JIS0208_SYMBOLS!()
+JIS0208_SYMBOLS!();

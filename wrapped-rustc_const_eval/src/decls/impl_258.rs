@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        AllocRef!();
+        AllocRefMut!();
+    };
+}
+
+macro_rules! impl_258 {
+    () => {
+        deps!();
+        # [doc = " Reading and writing."] impl < 'a , 'tcx , Prov : Provenance , Extra , Bytes : AllocBytes > AllocRefMut < 'a , 'tcx , Prov , Extra , Bytes > { pub fn as_ref < 'b > (& 'b self) -> AllocRef < 'b , 'tcx , Prov , Extra , Bytes > { AllocRef { alloc : self . alloc , range : self . range , tcx : self . tcx , alloc_id : self . alloc_id } } # [doc = " `range` is relative to this allocation reference, not the base of the allocation."] pub fn write_scalar (& mut self , range : AllocRange , val : Scalar < Prov >) -> InterpResult < 'tcx > { let range = self . range . subrange (range) ; debug ! ("write_scalar at {:?}{range:?}: {val:?}" , self . alloc_id) ; self . alloc . write_scalar (& self . tcx , range , val) . map_err (| e | e . to_interp_error (self . alloc_id)) . into () } # [doc = " `offset` is relative to this allocation reference, not the base of the allocation."] pub fn write_ptr_sized (& mut self , offset : Size , val : Scalar < Prov >) -> InterpResult < 'tcx > { self . write_scalar (alloc_range (offset , self . tcx . data_layout () . pointer_size ()) , val) } # [doc = " Mark the given sub-range (relative to this allocation reference) as uninitialized."] pub fn write_uninit (& mut self , range : AllocRange) { let range = self . range . subrange (range) ; self . alloc . write_uninit (& self . tcx , range) ; } # [doc = " Mark the entire referenced range as uninitialized"] pub fn write_uninit_full (& mut self) { self . alloc . write_uninit (& self . tcx , self . range) ; } # [doc = " Remove all provenance in the reference range."] pub fn clear_provenance (& mut self) { self . alloc . clear_provenance (& self . tcx , self . range) ; } }
+    };
+}
+
+impl_258!()

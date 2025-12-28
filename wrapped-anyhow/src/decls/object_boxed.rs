@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         StdError!();
-        ErrorImpl!();
         Own!();
+        ErrorImpl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! object_boxed {
     };
 }
 
-object_boxed!()
+object_boxed!();

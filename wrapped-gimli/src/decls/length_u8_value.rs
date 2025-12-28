@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reader!();
         Result!();
+        Reader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! length_u8_value {
     };
 }
 
-length_u8_value!()
+length_u8_value!();

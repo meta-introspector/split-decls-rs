@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FluentNumberType!();
+        PluralRules!();
+        FluentBundle!();
         Scope!();
         FluentResource!();
-        FluentValue!();
         MemoizerKind!();
-        FluentBundle!();
+        FluentNumberType!();
         FluentNumber!();
-        PluralRules!();
+        FluentValue!();
         FluentNumberOptions!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_99 {
     };
 }
 
-impl_99!()
+impl_99!();

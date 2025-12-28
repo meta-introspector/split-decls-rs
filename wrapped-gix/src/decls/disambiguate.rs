@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Disambiguate!();
-        ObjectKindHint!();
-        Commit!();
-        Tree!();
         Blob!();
+        Commit!();
+        Disambiguate!();
+        Tree!();
+        ObjectKindHint!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! disambiguate {
     };
 }
 
-disambiguate!()
+disambiguate!();

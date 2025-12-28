@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DiagnosticLevel!();
-        DiagnosticCode!();
         DiagnosticSpan!();
+        DiagnosticCode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Diagnostic {
     };
 }
 
-Diagnostic!()
+Diagnostic!();

@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        UnwindTable!();
-        Section!();
-        CommonInformationEntry!();
-        Result!();
-        UnwindContextStorage!();
-        UnwindContext!();
         RegisterRule!();
-        ReaderOffset!();
         Register!();
-        Error!();
+        ReaderOffset!();
         Reader!();
-        UnwindSection!();
-        CfaRule!();
+        Section!();
+        UnwindTable!();
+        UnwindContext!();
+        UnwindContextStorage!();
         UnwindTableRow!();
+        CommonInformationEntry!();
+        Error!();
+        CfaRule!();
         BaseAddresses!();
+        Result!();
+        UnwindSection!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_218 {
     };
 }
 
-impl_218!()
+impl_218!();

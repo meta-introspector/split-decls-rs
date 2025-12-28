@@ -4,4 +4,4 @@ macro_rules! aarch64 {
     };
 }
 
-aarch64!()
+aarch64!();

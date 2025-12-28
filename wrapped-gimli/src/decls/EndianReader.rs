@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SubRange!();
         Endianity!();
         Reader!();
+        SubRange!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EndianReader {
     };
 }
 
-EndianReader!()
+EndianReader!();

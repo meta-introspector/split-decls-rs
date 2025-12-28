@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PublicKey!();
         DHOutput!();
+        PublicKey!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

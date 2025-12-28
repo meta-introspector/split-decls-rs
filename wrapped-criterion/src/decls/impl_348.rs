@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Float!();
-        Estimates!();
-        Kde!();
         Sample!();
-        Kernel!();
         Bandwidth!();
+        Kde!();
+        Estimates!();
+        Kernel!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_348 {
     };
 }
 
-impl_348!()
+impl_348!();

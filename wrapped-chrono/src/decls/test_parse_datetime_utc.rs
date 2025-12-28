@@ -12,4 +12,4 @@ macro_rules! test_parse_datetime_utc {
     };
 }
 
-test_parse_datetime_utc!()
+test_parse_datetime_utc!();

@@ -4,4 +4,4 @@ macro_rules! proptest_impls {
     };
 }
 
-proptest_impls!()
+proptest_impls!();

@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
-        UnitRef!();
+        AttributeValue!();
         Error!();
         UnitHeader!();
+        Abbreviations!();
         EntriesTree!();
+        DebugAddrBase!();
+        EntriesCursor!();
+        Reader!();
+        UnitRef!();
+        Encoding!();
         DebugRngListsBase!();
         DwoId!();
-        DebugStrOffsetsBase!();
-        DebugAddrBase!();
-        EntriesRaw!();
-        Reader!();
-        Abbreviations!();
-        DebuggingInformationEntry!();
-        UnitOffset!();
-        DebugLocListsBase!();
-        Result!();
-        Encoding!();
-        Dwarf!();
-        EntriesCursor!();
         Unit!();
-        AttributeValue!();
+        DebugLocListsBase!();
+        DebugStrOffsetsBase!();
+        UnitOffset!();
+        Result!();
         UnitType!();
+        DebuggingInformationEntry!();
+        Dwarf!();
+        EntriesRaw!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        VariantDecoder!();
         Space!();
         Iso2022JpDecoderState!();
-        Iso2022JpDecoder!();
         DecoderResult!();
+        VariantDecoder!();
+        Iso2022JpDecoder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_106 {
     };
 }
 
-impl_106!()
+impl_106!();

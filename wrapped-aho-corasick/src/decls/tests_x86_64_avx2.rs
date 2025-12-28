@@ -12,4 +12,4 @@ macro_rules! tests_x86_64_avx2 {
     };
 }
 
-tests_x86_64_avx2!()
+tests_x86_64_avx2!();

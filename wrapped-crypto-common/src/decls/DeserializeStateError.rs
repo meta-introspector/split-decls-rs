@@ -4,4 +4,4 @@ macro_rules! DeserializeStateError {
     };
 }
 
-DeserializeStateError!()
+DeserializeStateError!();

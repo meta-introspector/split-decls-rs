@@ -11,4 +11,4 @@ macro_rules! __stress_test_seqcst {
     };
 }
 
-__stress_test_seqcst!()
+__stress_test_seqcst!();

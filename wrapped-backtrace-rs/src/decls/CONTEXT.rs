@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FLOATING_SAVE_AREA!();
         CONTEXT_FLAGS!();
+        FLOATING_SAVE_AREA!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CONTEXT {
     };
 }
 
-CONTEXT!()
+CONTEXT!();

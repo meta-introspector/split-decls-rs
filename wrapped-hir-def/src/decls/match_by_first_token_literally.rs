@@ -22,4 +22,4 @@ struct Baz;
     };
 }
 
-match_by_first_token_literally!()
+match_by_first_token_literally!();

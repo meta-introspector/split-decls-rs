@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Month!();
-        RuleDay!();
         Error!();
         Cursor!();
+        RuleDay!();
         TransitionRule!();
+        Month!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_621 {
     };
 }
 
-impl_621!()
+impl_621!();

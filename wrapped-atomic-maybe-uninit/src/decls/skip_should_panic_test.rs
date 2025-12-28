@@ -4,4 +4,4 @@ macro_rules! skip_should_panic_test {
     };
 }
 
-skip_should_panic_test!()
+skip_should_panic_test!();

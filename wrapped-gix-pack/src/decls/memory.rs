@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Kind!();
-        Object!();
         Entry!();
+        Object!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! memory {
     };
 }
 
-memory!()
+memory!();

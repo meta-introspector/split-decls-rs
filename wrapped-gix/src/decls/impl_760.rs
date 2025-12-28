@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Validate!();
         Any!();
+        Validate!();
         Link!();
-        Key!();
         Note!();
+        Key!();
         SubSectionRequirement!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_760 {
     };
 }
 
-impl_760!()
+impl_760!();

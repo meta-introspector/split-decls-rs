@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        VisitorContext!();
+        Directive!();
+        Field!();
+        Visitor!();
+        ArgumentsOfCorrectType!();
         QueryPathNode!();
         QueryPathSegment!();
-        Directive!();
-        ArgumentsOfCorrectType!();
-        Visitor!();
-        VisitorContext!();
-        Field!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

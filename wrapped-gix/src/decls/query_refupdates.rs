@@ -12,4 +12,4 @@ macro_rules! query_refupdates {
     };
 }
 
-query_refupdates!()
+query_refupdates!();

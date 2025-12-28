@@ -4,4 +4,4 @@ macro_rules! and_then {
     };
 }
 
-and_then!()
+and_then!();

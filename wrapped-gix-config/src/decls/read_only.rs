@@ -4,4 +4,4 @@ macro_rules! read_only {
     };
 }
 
-read_only!()
+read_only!();

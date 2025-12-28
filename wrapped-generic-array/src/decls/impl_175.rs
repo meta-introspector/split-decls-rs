@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MaxArrayLengthP1!();
         IsWithinUsizeBound!();
+        MaxArrayLengthP1!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_175 {
     };
 }
 
-impl_175!()
+impl_175!();

@@ -4,4 +4,4 @@ macro_rules! bytes_mut {
     };
 }
 
-bytes_mut!()
+bytes_mut!();

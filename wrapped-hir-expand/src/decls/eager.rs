@@ -4,4 +4,4 @@ macro_rules! eager {
     };
 }
 
-eager!()
+eager!();

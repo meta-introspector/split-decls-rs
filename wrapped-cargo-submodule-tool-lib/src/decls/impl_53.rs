@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WorkspaceRemover!();
         RealWorkspaceRemover!();
+        WorkspaceRemover!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

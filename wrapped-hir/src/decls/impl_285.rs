@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SelfParam!();
         Macro!();
+        Callee!();
+        Function!();
         Param!();
         Module!();
-        Callee!();
-        ExternBlock!();
-        Function!();
         Type!();
+        SelfParam!();
+        ExternBlock!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_285 {
     };
 }
 
-impl_285!()
+impl_285!();

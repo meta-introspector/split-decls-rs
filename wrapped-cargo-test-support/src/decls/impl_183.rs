@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Execs!();
         ArgLineCommandExt!();
+        Execs!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_183 {
     };
 }
 
-impl_183!()
+impl_183!();

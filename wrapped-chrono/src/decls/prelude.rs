@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Month!();
-        FixedOffset!();
-        Date!();
-        Local!();
-        Offset!();
-        TimeZone!();
-        Datelike!();
-        SubsecRound!();
-        Utc!();
-        NaiveDate!();
-        Timelike!();
         SecondsFormat!();
-        NaiveTime!();
-        DateTime!();
         NaiveDateTime!();
+        Date!();
         Weekday!();
+        NaiveDate!();
+        Utc!();
+        Month!();
+        Local!();
+        SubsecRound!();
+        Timelike!();
+        NaiveTime!();
+        Offset!();
+        Datelike!();
+        DateTime!();
+        TimeZone!();
+        FixedOffset!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! prelude {
     };
 }
 
-prelude!()
+prelude!();

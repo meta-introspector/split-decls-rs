@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Fetch!();
-        Item!();
-        Push!();
         MatchGroup!();
         Operation!();
         RefSpecRef!();
+        Push!();
+        Fetch!();
+        Item!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
-        HasModule!();
         Attrs!();
+        DefDatabase!();
         AstIdLoc!();
+        HasModule!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! attrs_from_ast_id_loc {
     };
 }
 
-attrs_from_ast_id_loc!()
+attrs_from_ast_id_loc!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Inner!();
+        Extension!();
         ExtensionFactory!();
         ApolloTracing!();
-        Extension!();
         ApolloTracingExtension!();
-        Inner!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_541 {
     };
 }
 
-impl_541!()
+impl_541!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Compress!();
         FlushCompress!();
         CompressError!();
+        Compress!();
         Status!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

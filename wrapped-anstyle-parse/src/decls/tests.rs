@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         Action!();
+        State!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

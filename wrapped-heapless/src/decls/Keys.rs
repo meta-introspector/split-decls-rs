@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexMap!();
         Iter!();
+        IndexMap!();
         Bucket!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Keys {
     };
 }
 
-Keys!()
+Keys!();

@@ -11,4 +11,4 @@ macro_rules! promotable_even_to_mut {
     };
 }
 
-promotable_even_to_mut!()
+promotable_even_to_mut!();

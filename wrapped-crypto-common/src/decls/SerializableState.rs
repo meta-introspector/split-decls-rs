@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SerializedState!();
         DeserializeStateError!();
+        SerializedState!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SerializableState {
     };
 }
 
-SerializableState!()
+SerializableState!();

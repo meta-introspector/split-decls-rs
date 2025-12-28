@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ByteVec!();
         Utf8Error!();
+        ByteVec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FromUtf8Error {
     };
 }
 
-FromUtf8Error!()
+FromUtf8Error!();

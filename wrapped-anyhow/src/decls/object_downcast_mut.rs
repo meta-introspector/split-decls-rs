@@ -12,4 +12,4 @@ macro_rules! object_downcast_mut {
     };
 }
 
-object_downcast_mut!()
+object_downcast_mut!();

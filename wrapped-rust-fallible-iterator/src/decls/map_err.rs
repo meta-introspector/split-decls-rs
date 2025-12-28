@@ -4,4 +4,4 @@ macro_rules! map_err {
     };
 }
 
-map_err!()
+map_err!();

@@ -4,4 +4,4 @@ macro_rules! SeekRelative {
     };
 }
 
-SeekRelative!()
+SeekRelative!();

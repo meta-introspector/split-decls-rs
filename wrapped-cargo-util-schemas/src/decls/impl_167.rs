@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TomlLints!();
         WorkspaceValue!();
         InheritableLints!();
-        TomlLints!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

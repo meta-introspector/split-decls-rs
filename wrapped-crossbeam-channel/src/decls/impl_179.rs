@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Select!();
+        SelectedOperation!();
+        Receiver!();
         TryReadyError!();
+        Timeout!();
+        ReadyTimeoutError!();
+        SelectTimeoutError!();
         TrySelectError!();
         Sender!();
-        Timeout!();
-        SelectTimeoutError!();
-        Receiver!();
-        SelectedOperation!();
-        ReadyTimeoutError!();
+        Select!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_179 {
     };
 }
 
-impl_179!()
+impl_179!();

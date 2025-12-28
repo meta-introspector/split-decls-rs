@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        SendPtr!();
+        IntoParallelIterator!();
+        Iter!();
+        IntoIter!();
     };
 }
 
 macro_rules! impl_19 {
     () => {
         deps!();
-        unsafe impl < T : Send > Send for SendPtr < T > { }
+        impl < T : Send , const N : usize > IntoParallelIterator for [T ; N] { type Item = T ; type Iter = IntoIter < T , N > ; fn into_par_iter (self) -> Self :: Iter { IntoIter { array : self } } }
     };
 }
 

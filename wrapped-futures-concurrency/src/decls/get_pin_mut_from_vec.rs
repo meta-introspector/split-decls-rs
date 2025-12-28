@@ -4,4 +4,4 @@ macro_rules! get_pin_mut_from_vec {
     };
 }
 
-get_pin_mut_from_vec!()
+get_pin_mut_from_vec!();

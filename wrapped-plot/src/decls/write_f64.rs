@@ -4,4 +4,4 @@ macro_rules! write_f64 {
     };
 }
 
-write_f64!()
+write_f64!();

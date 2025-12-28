@@ -2,13 +2,13 @@ macro_rules! deps {
     () => {
         Command!();
         Arg!();
-        OsStr!();
-        ValueSource!();
-        AnyValueId!();
-        AnyValue!();
         ArgPredicate!();
+        ValueSource!();
         MatchedArg!();
+        AnyValue!();
+        OsStr!();
         Iter!();
+        AnyValueId!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_500 {
     };
 }
 
-impl_500!()
+impl_500!();

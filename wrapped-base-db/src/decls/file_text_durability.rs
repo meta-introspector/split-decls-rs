@@ -11,4 +11,4 @@ macro_rules! file_text_durability {
     };
 }
 
-file_text_durability!()
+file_text_durability!();

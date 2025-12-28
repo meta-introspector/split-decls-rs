@@ -4,4 +4,4 @@ macro_rules! Dog {
     };
 }
 
-Dog!()
+Dog!();

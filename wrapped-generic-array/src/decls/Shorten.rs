@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Lengthen!();
         GenericSequence!();
+        Lengthen!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Shorten {
     };
 }
 
-Shorten!()
+Shorten!();

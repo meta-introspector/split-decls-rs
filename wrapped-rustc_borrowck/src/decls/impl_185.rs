@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        RegionTracker!();
+        RegionDefinition!();
+        Representative!();
+        PlaceholderReachability!();
+    };
+}
+
+macro_rules! impl_185 {
+    () => {
+        deps!();
+        impl RegionTracker { pub (crate) fn new (rvid : RegionVid , definition : & RegionDefinition < '_ >) -> Self { let reachable_placeholders = if matches ! (definition . origin , NllRegionVariableOrigin :: Placeholder (_)) { PlaceholderReachability :: Placeholders { max_universe : (definition . universe , rvid) , min_placeholder : rvid , max_placeholder : rvid , } } else { PlaceholderReachability :: NoPlaceholders } ; Self { reachable_placeholders , max_nameable_universe : (definition . universe , rvid) , representative : Representative :: new (rvid , definition) , } } # [doc = " The largest universe this SCC can name. It's the smallest"] # [doc = " largest nameable universe of any reachable region, or"] # [doc = " `max_nameable(r) = min (max_nameable(r') for r' reachable from r)`"] pub (crate) fn max_nameable_universe (self) -> UniverseIndex { self . max_nameable_universe . 0 } pub (crate) fn max_placeholder_universe_reached (self) -> UniverseIndex { if let Some ((universe , _)) = self . reachable_placeholders . max_universe () { universe } else { UniverseIndex :: ROOT } } # [doc = " Determine if the tracked universes of the two SCCs are compatible."] pub (crate) fn universe_compatible_with (& self , other : Self) -> bool { self . max_nameable_universe () . can_name (other . max_nameable_universe ()) || other . reachable_placeholders . can_be_named_by (self . max_nameable_universe ()) } # [doc = " If this SCC reaches a placeholder it can't name, return it."] fn unnameable_placeholder (& self) -> Option < (UniverseIndex , RegionVid) > { self . reachable_placeholders . max_universe () . filter (| & (placeholder_universe , _) | { ! self . max_nameable_universe () . can_name (placeholder_universe) }) } }
+    };
+}
+
+impl_185!()

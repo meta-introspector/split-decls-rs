@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Vertical!();
         Display!();
+        Vertical!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

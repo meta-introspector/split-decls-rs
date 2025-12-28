@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        SetServiceResponse!();
-        Http!();
-        Protocol!();
-        RequestWriter!();
-        PostResponse!();
-        Service!();
-        Transport!();
-        Error!();
-        MessageKind!();
         GetResponse!();
-        WriteMode!();
+        SetServiceResponse!();
         HeadersThenBody!();
+        Http!();
+        Service!();
+        WriteMode!();
+        MessageKind!();
+        PostResponse!();
+        RequestWriter!();
+        Error!();
+        Protocol!();
+        Transport!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

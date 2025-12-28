@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        StateID!();
-        State!();
-        Match!();
-        MatchKind!();
         SmallIndex!();
-        MatchError!();
-        Prefilter!();
-        NFA!();
         PatternID!();
+        Match!();
+        MatchError!();
+        MatchKind!();
+        Prefilter!();
+        State!();
+        NFA!();
         Transition!();
         Automaton!();
+        StateID!();
         Anchored!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ViewStorage!();
-        QueueInner!();
         Queue!();
+        ViewStorage!();
         Storage!();
         SealedStorage!();
         QueueView!();
+        QueueInner!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_205 {
     };
 }
 
-impl_205!()
+impl_205!();

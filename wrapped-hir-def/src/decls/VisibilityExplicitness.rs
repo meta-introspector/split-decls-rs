@@ -4,4 +4,4 @@ macro_rules! VisibilityExplicitness {
     };
 }
 
-VisibilityExplicitness!()
+VisibilityExplicitness!();

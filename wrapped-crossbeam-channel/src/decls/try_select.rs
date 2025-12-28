@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Timeout!();
         TrySelectError!();
-        SelectHandle!();
         SelectedOperation!();
+        SelectHandle!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! try_select {
     };
 }
 
-try_select!()
+try_select!();

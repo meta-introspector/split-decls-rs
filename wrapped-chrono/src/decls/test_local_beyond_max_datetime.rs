@@ -12,4 +12,4 @@ macro_rules! test_local_beyond_max_datetime {
     };
 }
 
-test_local_beyond_max_datetime!()
+test_local_beyond_max_datetime!();

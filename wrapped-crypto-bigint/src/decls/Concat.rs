@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Integer!();
         ConcatMixed!();
+        Integer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Concat {
     };
 }
 
-Concat!()
+Concat!();

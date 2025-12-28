@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Error!();
         Request!();
-        Response!();
         Options!();
+        Response!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Curl {
     };
 }
 
-Curl!()
+Curl!();

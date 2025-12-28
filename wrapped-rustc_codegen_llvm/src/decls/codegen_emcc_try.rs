@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        IntPredicate!();
+        Builder!();
+    };
+}
+
+macro_rules! codegen_emcc_try {
+    () => {
+        deps!();
+        fn codegen_emcc_try < 'll , 'tcx > (bx : & mut Builder < '_ , 'll , 'tcx > , try_func : & 'll Value , data : & 'll Value , catch_func : & 'll Value , dest : PlaceRef < 'tcx , & 'll Value > ,) { let (llty , llfn) = get_rust_try_fn (bx , & mut | mut bx | { let then = bx . append_sibling_block ("then") ; let catch = bx . append_sibling_block ("catch") ; let try_func = llvm :: get_param (bx . llfn () , 0) ; let data = llvm :: get_param (bx . llfn () , 1) ; let catch_func = llvm :: get_param (bx . llfn () , 2) ; let try_func_ty = bx . type_func (& [bx . type_ptr ()] , bx . type_void ()) ; bx . invoke (try_func_ty , None , None , try_func , & [data] , then , catch , None , None) ; bx . switch_to_block (then) ; bx . ret (bx . const_i32 (0)) ; bx . switch_to_block (catch) ; let tydesc = bx . eh_catch_typeinfo () ; let lpad_ty = bx . type_struct (& [bx . type_ptr () , bx . type_i32 ()] , false) ; let vals = bx . landing_pad (lpad_ty , bx . eh_personality () , 2) ; bx . add_clause (vals , tydesc) ; bx . add_clause (vals , bx . const_null (bx . type_ptr ())) ; let ptr = bx . extract_value (vals , 0) ; let selector = bx . extract_value (vals , 1) ; let rust_typeid = bx . call_intrinsic ("llvm.eh.typeid.for" , & [bx . val_ty (tydesc)] , & [tydesc]) ; let is_rust_panic = bx . icmp (IntPredicate :: IntEQ , selector , rust_typeid) ; let is_rust_panic = bx . zext (is_rust_panic , bx . type_bool ()) ; let ptr_size = bx . tcx () . data_layout . pointer_size () ; let ptr_align = bx . tcx () . data_layout . pointer_align () . abi ; let i8_align = bx . tcx () . data_layout . i8_align . abi ; assert ! (i8_align <= ptr_align) ; let catch_data = bx . alloca (2 * ptr_size , ptr_align) ; bx . store (ptr , catch_data , ptr_align) ; let catch_data_1 = bx . inbounds_ptradd (catch_data , bx . const_usize (ptr_size . bytes ())) ; bx . store (is_rust_panic , catch_data_1 , i8_align) ; let catch_ty = bx . type_func (& [bx . type_ptr () , bx . type_ptr ()] , bx . type_void ()) ; bx . call (catch_ty , None , None , catch_func , & [data , catch_data] , None , None) ; bx . ret (bx . const_i32 (1)) ; }) ; let ret = bx . call (llty , None , None , llfn , & [try_func , data , catch_func] , None , None) ; OperandValue :: Immediate (ret) . store (bx , dest) ; }
+    };
+}
+
+codegen_emcc_try!()

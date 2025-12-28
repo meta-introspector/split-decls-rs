@@ -4,4 +4,4 @@ macro_rules! FLOATING_SAVE_AREA {
     };
 }
 
-FLOATING_SAVE_AREA!()
+FLOATING_SAVE_AREA!();

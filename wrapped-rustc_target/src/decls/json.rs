@@ -1,6 +1,6 @@
 macro_rules! json {
     () => {
-        pub mod json ;
+        mod json ;
     };
 }
 

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Scope!();
         SharedVec!();
+        Scope!();
         WaitGroup!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! scope {
     };
 }
 
-scope!()
+scope!();

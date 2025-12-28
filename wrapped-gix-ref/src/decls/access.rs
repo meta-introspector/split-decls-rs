@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        Target!();
-        FullNameRef!();
         Reference!();
         Namespace!();
+        FullNameRef!();
+        Target!();
+        Kind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! access {
     };
 }
 
-access!()
+access!();

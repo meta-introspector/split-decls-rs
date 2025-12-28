@@ -11,4 +11,4 @@ macro_rules! validate_last_component {
     };
 }
 
-validate_last_component!()
+validate_last_component!();

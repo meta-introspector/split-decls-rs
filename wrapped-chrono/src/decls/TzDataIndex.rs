@@ -4,4 +4,4 @@ macro_rules! TzDataIndex {
     };
 }
 
-TzDataIndex!()
+TzDataIndex!();

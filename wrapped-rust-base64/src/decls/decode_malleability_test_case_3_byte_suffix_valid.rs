@@ -11,4 +11,4 @@ macro_rules! decode_malleability_test_case_3_byte_suffix_valid {
     };
 }
 
-decode_malleability_test_case_3_byte_suffix_valid!()
+decode_malleability_test_case_3_byte_suffix_valid!();

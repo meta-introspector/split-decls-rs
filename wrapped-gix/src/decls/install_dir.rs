@@ -11,4 +11,4 @@ macro_rules! install_dir {
     };
 }
 
-install_dir!()
+install_dir!();

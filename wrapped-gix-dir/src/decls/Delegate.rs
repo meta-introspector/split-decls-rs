@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Status!();
         Action!();
+        Status!();
         EntryRef!();
         ForDeletionMode!();
     };
@@ -14,4 +14,4 @@ macro_rules! Delegate {
     };
 }
 
-Delegate!()
+Delegate!();

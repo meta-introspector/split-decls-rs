@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Mutation!();
-        Object!();
         TestInput!();
+        Object!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_165 {
     };
 }
 
-impl_165!()
+impl_165!();

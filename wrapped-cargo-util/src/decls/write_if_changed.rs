@@ -4,4 +4,4 @@ macro_rules! write_if_changed {
     };
 }
 
-write_if_changed!()
+write_if_changed!();

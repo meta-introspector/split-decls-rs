@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IndexConflict!();
         IndexConflicts!();
-        Error!();
+        IndexConflict!();
         IndexEntry!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_394 {
     };
 }
 
-impl_394!()
+impl_394!();

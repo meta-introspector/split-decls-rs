@@ -11,4 +11,4 @@ macro_rules! test_date_to_mdf_to_date {
     };
 }
 
-test_date_to_mdf_to_date!()
+test_date_to_mdf_to_date!();

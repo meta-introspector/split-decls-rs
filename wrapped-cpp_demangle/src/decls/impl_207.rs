@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        LeafName!();
-        Result!();
-        UnnamedTypeName!();
-        ArgScope!();
-        TemplateArg!();
-        Error!();
         Type!();
+        ArgScope!();
+        UnnamedTypeName!();
+        LeafName!();
+        Error!();
         TemplateArgs!();
+        TemplateArg!();
+        Result!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_207 {
     };
 }
 
-impl_207!()
+impl_207!();

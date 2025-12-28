@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ByteSize!();
         Format!();
+        ByteSize!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Display {
     };
 }
 
-Display!()
+Display!();

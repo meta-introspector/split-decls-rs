@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Use!();
         UseTree!();
         DefDatabase!();
+        Use!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! use_tree_source_map {
     };
 }
 
-use_tree_source_map!()
+use_tree_source_map!();

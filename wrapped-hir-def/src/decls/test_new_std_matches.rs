@@ -30,4 +30,4 @@ fn main() {
     };
 }
 
-test_new_std_matches!()
+test_new_std_matches!();

@@ -11,4 +11,4 @@ macro_rules! test_date_with_ordinal {
     };
 }
 
-test_date_with_ordinal!()
+test_date_with_ordinal!();

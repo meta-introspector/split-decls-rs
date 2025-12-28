@@ -4,4 +4,4 @@ macro_rules! CapacityError {
     };
 }
 
-CapacityError!()
+CapacityError!();

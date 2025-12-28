@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MessageKind!();
         RequestWriter!();
         ExtendedBufRead!();
+        MessageKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_13 {
     };
 }
 
-macro_13!()
+macro_13!();

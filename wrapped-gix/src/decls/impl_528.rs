@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        Options!();
-        Init!();
-        User!();
-        Error!();
-        Config!();
         Core!();
-        StageOne!();
-        Environment!();
-        Path!();
-        Attributes!();
+        Kind!();
         Note!();
-        Default!();
+        Error!();
+        Attributes!();
         Cache!();
+        Environment!();
+        StageOne!();
+        Config!();
+        Path!();
+        Default!();
+        Options!();
+        User!();
+        Init!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_528 {
     };
 }
 
-impl_528!()
+impl_528!();

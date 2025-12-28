@@ -11,4 +11,4 @@ macro_rules! extern_block_abi {
     };
 }
 
-extern_block_abi!()
+extern_block_abi!();

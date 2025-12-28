@@ -11,4 +11,4 @@ macro_rules! Queue {
     };
 }
 
-Queue!()
+Queue!();

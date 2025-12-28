@@ -13,4 +13,4 @@ macro_rules! internal_padding_error_with_short_read_concatenated_texts_invalid_b
     };
 }
 
-internal_padding_error_with_short_read_concatenated_texts_invalid_byte_error!()
+internal_padding_error_with_short_read_concatenated_texts_invalid_byte_error!();

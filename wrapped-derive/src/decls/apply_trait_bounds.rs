@@ -11,4 +11,4 @@ macro_rules! apply_trait_bounds {
     };
 }
 
-apply_trait_bounds!()
+apply_trait_bounds!();

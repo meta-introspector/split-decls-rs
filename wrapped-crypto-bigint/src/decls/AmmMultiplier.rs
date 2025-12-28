@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Monty!();
         MontyMultiplier!();
+        Monty!();
         Integer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! AmmMultiplier {
     };
 }
 
-AmmMultiplier!()
+AmmMultiplier!();

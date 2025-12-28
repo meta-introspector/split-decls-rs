@@ -4,4 +4,4 @@ macro_rules! clicolor_force {
     };
 }
 
-clicolor_force!()
+clicolor_force!();

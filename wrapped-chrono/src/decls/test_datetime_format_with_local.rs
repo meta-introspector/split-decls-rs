@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utc!();
         Local!();
+        Utc!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_datetime_format_with_local {
     };
 }
 
-test_datetime_format_with_local!()
+test_datetime_format_with_local!();

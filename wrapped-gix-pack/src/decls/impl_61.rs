@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        EntryRange!();
-        ItemSliceSync!();
-        Error!();
-        State!();
-        Tree!();
         Options!();
+        Tree!();
         Context!();
         Outcome!();
+        Error!();
+        State!();
+        EntryRange!();
+        ItemSliceSync!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

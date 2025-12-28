@@ -4,4 +4,4 @@ macro_rules! read_unaligned_usize {
     };
 }
 
-read_unaligned_usize!()
+read_unaligned_usize!();

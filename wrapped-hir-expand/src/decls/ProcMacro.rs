@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProcMacroExpander!();
         ProcMacroKind!();
+        ProcMacroExpander!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ProcMacro {
     };
 }
 
-ProcMacro!()
+ProcMacro!();

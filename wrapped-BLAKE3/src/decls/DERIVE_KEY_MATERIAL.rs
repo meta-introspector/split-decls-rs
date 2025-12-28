@@ -4,4 +4,4 @@ macro_rules! DERIVE_KEY_MATERIAL {
     };
 }
 
-DERIVE_KEY_MATERIAL!()
+DERIVE_KEY_MATERIAL!();

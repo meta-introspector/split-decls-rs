@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InputValue!();
         TypeRef!();
+        InputValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BaseField {
     };
 }
 
-BaseField!()
+BaseField!();

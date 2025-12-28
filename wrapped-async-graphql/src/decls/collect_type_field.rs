@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BoxFieldFuture!();
-        OutputType!();
         ContextSelectionSet!();
         Field!();
+        OutputType!();
+        BoxFieldFuture!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! collect_type_field {
     };
 }
 
-collect_type_field!()
+collect_type_field!();

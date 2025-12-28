@@ -4,4 +4,4 @@ macro_rules! write_list {
     };
 }
 
-write_list!()
+write_list!();

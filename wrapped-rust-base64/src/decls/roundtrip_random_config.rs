@@ -4,4 +4,4 @@ macro_rules! roundtrip_random_config {
     };
 }
 
-roundtrip_random_config!()
+roundtrip_random_config!();

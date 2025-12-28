@@ -4,4 +4,4 @@ macro_rules! RustcFieldIdx {
     };
 }
 
-RustcFieldIdx!()
+RustcFieldIdx!();

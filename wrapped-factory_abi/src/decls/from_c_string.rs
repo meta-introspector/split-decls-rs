@@ -4,4 +4,4 @@ macro_rules! from_c_string {
     };
 }
 
-from_c_string!()
+from_c_string!();

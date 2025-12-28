@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IsActivePlatform!();
         Error!();
+        IsActivePlatform!();
         File!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_1 {
     };
 }
 
-impl_1!()
+impl_1!();

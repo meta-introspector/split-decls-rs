@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SpanError!();
-        Result!();
-        FormatArg!();
         Error!();
+        Result!();
+        SpanError!();
+        FormatArg!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_args {
     };
 }
 
-parse_args!()
+parse_args!();

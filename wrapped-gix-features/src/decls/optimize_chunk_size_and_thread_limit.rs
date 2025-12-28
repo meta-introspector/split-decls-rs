@@ -4,4 +4,4 @@ macro_rules! optimize_chunk_size_and_thread_limit {
     };
 }
 
-optimize_chunk_size_and_thread_limit!()
+optimize_chunk_size_and_thread_limit!();

@@ -4,4 +4,4 @@ macro_rules! ReadLine {
     };
 }
 
-ReadLine!()
+ReadLine!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Vendor!();
-        CieOffsetEncoding!();
-        Format!();
         Reader!();
+        Vendor!();
+        Format!();
+        CieOffsetEncoding!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! _UnwindSectionPrivate {
     };
 }
 
-_UnwindSectionPrivate!()
+_UnwindSectionPrivate!();

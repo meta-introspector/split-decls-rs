@@ -11,4 +11,4 @@ macro_rules! variances_of_cycle_initial {
     };
 }
 
-variances_of_cycle_initial!()
+variances_of_cycle_initial!();

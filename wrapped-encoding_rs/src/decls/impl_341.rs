@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Utf8Source!();
         Unicode!();
-        Utf8ReadHandle!();
         Utf8UnreadHandle!();
+        Utf8ReadHandle!();
+        Utf8Source!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_341 {
     };
 }
 
-impl_341!()
+impl_341!();

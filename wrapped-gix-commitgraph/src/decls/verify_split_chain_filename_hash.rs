@@ -4,4 +4,4 @@ macro_rules! verify_split_chain_filename_hash {
     };
 }
 
-verify_split_chain_filename_hash!()
+verify_split_chain_filename_hash!();

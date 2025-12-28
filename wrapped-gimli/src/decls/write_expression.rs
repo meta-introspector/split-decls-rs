@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         UnitOffsets!();
-        Expression!();
         DebugInfoFixup!();
-        Result!();
         Writer!();
+        Result!();
+        Expression!();
+        Encoding!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! write_expression {
     };
 }
 
-write_expression!()
+write_expression!();

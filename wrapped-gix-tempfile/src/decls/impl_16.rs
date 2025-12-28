@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ContainingDirectory!();
         Writable!();
-        AutoRemove!();
         Mode!();
+        ContainingDirectory!();
         Closed!();
+        AutoRemove!();
         Handle!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

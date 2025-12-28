@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParDrainProducer!();
         RawParDrain!();
+        ParDrainProducer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_173 {
     };
 }
 
-impl_173!()
+impl_173!();

@@ -4,4 +4,4 @@ macro_rules! AltairAuthorizationProviderInput {
     };
 }
 
-AltairAuthorizationProviderInput!()
+AltairAuthorizationProviderInput!();

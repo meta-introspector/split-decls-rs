@@ -4,4 +4,4 @@ macro_rules! VecStringOrBool {
     };
 }
 
-VecStringOrBool!()
+VecStringOrBool!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BoxResolverFn!();
         TypeRef!();
-        InputValue!();
+        BoxResolverFn!();
         Deprecation!();
+        InputValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SubscriptionField {
     };
 }
 
-SubscriptionField!()
+SubscriptionField!();

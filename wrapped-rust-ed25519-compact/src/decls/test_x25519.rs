@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SecretKey!();
         KeyPair!();
         PublicKey!();
-        SecretKey!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_x25519 {
     };
 }
 
-test_x25519!()
+test_x25519!();

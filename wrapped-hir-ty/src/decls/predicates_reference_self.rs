@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HirDatabase!();
         GenericPredicates!();
         AllowSelfProjection!();
+        HirDatabase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! predicates_reference_self {
     };
 }
 
-predicates_reference_self!()
+predicates_reference_self!();

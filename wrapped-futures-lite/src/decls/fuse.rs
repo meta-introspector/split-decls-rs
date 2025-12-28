@@ -4,4 +4,4 @@ macro_rules! fuse {
     };
 }
 
-fuse!()
+fuse!();

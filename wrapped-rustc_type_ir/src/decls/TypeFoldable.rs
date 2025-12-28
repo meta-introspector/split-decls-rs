@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        FallibleTypeFolder!();
+        Interner!();
+        TypeVisitableExt!();
+        TypeFolder!();
+        Ty!();
+        TypeVisitable!();
+    };
+}
+
+macro_rules! TypeFoldable {
+    () => {
+        deps!();
+        # [doc = " This trait is implemented for every type that can be folded,"] # [doc = " providing the skeleton of the traversal."] # [doc = ""] # [doc = " To implement this conveniently, use the derive macro located in"] # [doc = " `rustc_macros`."] # [doc = ""] # [doc = " This trait is a sub-trait of `TypeVisitable`. This is because many"] # [doc = " `TypeFolder` instances use the methods in `TypeVisitableExt` while folding,"] # [doc = " which means in practice almost every foldable type needs to also be"] # [doc = " visitable. (However, there are some types that are visitable without being"] # [doc = " foldable.)"] pub trait TypeFoldable < I : Interner > : TypeVisitable < I > + Clone { # [doc = " The entry point for folding. To fold a value `t` with a folder `f`"] # [doc = " call: `t.try_fold_with(f)`."] # [doc = ""] # [doc = " For most types, this just traverses the value, calling `try_fold_with`"] # [doc = " on each field/element."] # [doc = ""] # [doc = " For types of interest (such as `Ty`), the implementation of this method"] # [doc = " calls a folder method specifically for that type (such as"] # [doc = " `F::try_fold_ty`). This is where control transfers from [`TypeFoldable`]"] # [doc = " to [`FallibleTypeFolder`]."] fn try_fold_with < F : FallibleTypeFolder < I > > (self , folder : & mut F) -> Result < Self , F :: Error > ; # [doc = " The entry point for folding. To fold a value `t` with a folder `f`"] # [doc = " call: `t.fold_with(f)`."] # [doc = ""] # [doc = " For most types, this just traverses the value, calling `fold_with`"] # [doc = " on each field/element."] # [doc = ""] # [doc = " For types of interest (such as `Ty`), the implementation of this method"] # [doc = " calls a folder method specifically for that type (such as"] # [doc = " `F::fold_ty`). This is where control transfers from `TypeFoldable`"] # [doc = " to `TypeFolder`."] # [doc = ""] # [doc = " Same as [`TypeFoldable::try_fold_with`], but not fallible. Make sure to keep"] # [doc = " the behavior in sync across functions."] fn fold_with < F : TypeFolder < I > > (self , folder : & mut F) -> Self ; }
+    };
+}
+
+TypeFoldable!()

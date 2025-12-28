@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MetaField!();
-        Result!();
-        MetaType!();
-        Field!();
-        SchemaError!();
         Interface!();
+        Result!();
+        SchemaError!();
+        MetaType!();
         Registry!();
+        Field!();
+        MetaField!();
         InterfaceField!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_450 {
     };
 }
 
-impl_450!()
+impl_450!();

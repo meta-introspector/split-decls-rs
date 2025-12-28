@@ -4,4 +4,4 @@ macro_rules! any_value {
     };
 }
 
-any_value!()
+any_value!();

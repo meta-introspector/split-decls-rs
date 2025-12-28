@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         HirDatabase!();
-        Diagnostics!();
         EarlyBinder!();
+        Diagnostics!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! type_for_type_alias_with_diagnostics_cycle_result {
     };
 }
 
-type_for_type_alias_with_diagnostics_cycle_result!()
+type_for_type_alias_with_diagnostics_cycle_result!();

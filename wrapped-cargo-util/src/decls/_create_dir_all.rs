@@ -4,4 +4,4 @@ macro_rules! _create_dir_all {
     };
 }
 
-_create_dir_all!()
+_create_dir_all!();

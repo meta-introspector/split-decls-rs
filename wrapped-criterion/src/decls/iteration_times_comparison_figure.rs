@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ComparisonData!();
-        MeasurementData!();
         ValueFormatter!();
+        MeasurementData!();
+        ComparisonData!();
         Sample!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! iteration_times_comparison_figure {
     };
 }
 
-iteration_times_comparison_figure!()
+iteration_times_comparison_figure!();

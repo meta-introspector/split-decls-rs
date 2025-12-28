@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ServerResult!();
         Field!();
         ServerError!();
-        ServerResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_recursive_depth {
     };
 }
 
-check_recursive_depth!()
+check_recursive_depth!();

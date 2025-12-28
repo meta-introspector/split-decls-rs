@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        LlvmError!();
+        ModuleLlvm!();
+        LlvmCodegenBackend!();
+    };
+}
+
+macro_rules! optimize_thin_module {
+    () => {
+        deps!();
+        pub (crate) fn optimize_thin_module (thin_module : ThinModule < LlvmCodegenBackend > , cgcx : & CodegenContext < LlvmCodegenBackend > ,) -> ModuleCodegen < ModuleLlvm > { let dcx = cgcx . create_dcx () ; let dcx = dcx . handle () ; let module_name = & thin_module . shared . module_names [thin_module . idx] ; let module_llvm = ModuleLlvm :: parse (cgcx , module_name , thin_module . data () , dcx) ; let mut module = ModuleCodegen :: new_regular (thin_module . name () , module_llvm) ; if cgcx . module_config . embed_bitcode () { module . thin_lto_buffer = Some (thin_module . data () . to_vec ()) ; } { let target = & * module . module_llvm . tm ; let llmod = module . module_llvm . llmod () ; save_temp_bitcode (cgcx , & module , "thin-lto-input") ; { let _timer = cgcx . prof . generic_activity_with_arg ("LLVM_thin_lto_rename" , thin_module . name ()) ; unsafe { llvm :: LLVMRustPrepareThinLTORename (thin_module . shared . data . 0 , llmod , target . raw ()) } ; save_temp_bitcode (cgcx , & module , "thin-lto-after-rename") ; } { let _timer = cgcx . prof . generic_activity_with_arg ("LLVM_thin_lto_resolve_weak" , thin_module . name ()) ; if unsafe { ! llvm :: LLVMRustPrepareThinLTOResolveWeak (thin_module . shared . data . 0 , llmod) } { write :: llvm_err (dcx , LlvmError :: PrepareThinLtoModule) ; } save_temp_bitcode (cgcx , & module , "thin-lto-after-resolve") ; } { let _timer = cgcx . prof . generic_activity_with_arg ("LLVM_thin_lto_internalize" , thin_module . name ()) ; if unsafe { ! llvm :: LLVMRustPrepareThinLTOInternalize (thin_module . shared . data . 0 , llmod) } { write :: llvm_err (dcx , LlvmError :: PrepareThinLtoModule) ; } save_temp_bitcode (cgcx , & module , "thin-lto-after-internalize") ; } { let _timer = cgcx . prof . generic_activity_with_arg ("LLVM_thin_lto_import" , thin_module . name ()) ; if unsafe { ! llvm :: LLVMRustPrepareThinLTOImport (thin_module . shared . data . 0 , llmod , target . raw ()) } { write :: llvm_err (dcx , LlvmError :: PrepareThinLtoModule) ; } save_temp_bitcode (cgcx , & module , "thin-lto-after-import") ; } { info ! ("running thin lto passes over {}" , module . name) ; run_pass_manager (cgcx , dcx , & mut module , true) ; save_temp_bitcode (cgcx , & module , "thin-lto-after-pm") ; } } module }
+    };
+}
+
+optimize_thin_module!()

@@ -11,4 +11,4 @@ macro_rules! __impl_external_bitflags {
     };
 }
 
-__impl_external_bitflags!()
+__impl_external_bitflags!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AutoRemove!();
         ContainingDirectory!();
+        AutoRemove!();
         Mode!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! handler {
     };
 }
 
-handler!()
+handler!();

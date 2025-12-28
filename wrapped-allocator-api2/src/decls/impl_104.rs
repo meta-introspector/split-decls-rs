@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Splice!();
         Allocator!();
+        Splice!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

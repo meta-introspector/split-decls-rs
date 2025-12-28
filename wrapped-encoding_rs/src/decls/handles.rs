@@ -4,4 +4,4 @@ macro_rules! handles {
     };
 }
 
-handles!()
+handles!();

@@ -4,4 +4,4 @@ macro_rules! Adapter {
     };
 }
 
-Adapter!()
+Adapter!();

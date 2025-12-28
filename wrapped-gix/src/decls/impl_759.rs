@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Any!();
-        SubSectionRequirement!();
         Init!();
         Section!();
+        SubSectionRequirement!();
         Validate!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_759 {
     };
 }
 
-impl_759!()
+impl_759!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DirEntry!();
         GlobWalker!();
-        GlobWalkerBuilder!();
         GlobError!();
+        GlobWalkerBuilder!();
+        DirEntry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

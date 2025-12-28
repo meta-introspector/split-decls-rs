@@ -4,4 +4,4 @@ macro_rules! invalid_mut {
     };
 }
 
-invalid_mut!()
+invalid_mut!();

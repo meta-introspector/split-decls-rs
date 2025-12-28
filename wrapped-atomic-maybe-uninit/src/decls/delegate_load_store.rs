@@ -12,4 +12,4 @@ macro_rules! delegate_load_store {
     };
 }
 
-delegate_load_store!()
+delegate_load_store!();

@@ -11,4 +11,4 @@ macro_rules! crate_supports_no_std {
     };
 }
 
-crate_supports_no_std!()
+crate_supports_no_std!();

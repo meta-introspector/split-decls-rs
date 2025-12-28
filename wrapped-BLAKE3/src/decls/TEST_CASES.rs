@@ -4,4 +4,4 @@ macro_rules! TEST_CASES {
     };
 }
 
-TEST_CASES!()
+TEST_CASES!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Push!();
-        Direction!();
-        Note!();
         Fetch!();
-        Repository!();
+        Push!();
+        Error!();
         Validate!();
-        Default!();
-        Any!();
         Remote!();
         Url!();
+        Any!();
+        Default!();
+        Repository!();
+        Note!();
+        Direction!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_365 {
     };
 }
 
-impl_365!()
+impl_365!();

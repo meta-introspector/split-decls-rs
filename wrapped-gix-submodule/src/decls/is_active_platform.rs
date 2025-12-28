@@ -4,4 +4,4 @@ macro_rules! is_active_platform {
     };
 }
 
-is_active_platform!()
+is_active_platform!();

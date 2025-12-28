@@ -4,4 +4,4 @@ macro_rules! encode_unsigned {
     };
 }
 
-encode_unsigned!()
+encode_unsigned!();

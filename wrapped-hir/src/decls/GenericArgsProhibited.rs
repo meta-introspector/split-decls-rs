@@ -4,4 +4,4 @@ macro_rules! GenericArgsProhibited {
     };
 }
 
-GenericArgsProhibited!()
+GenericArgsProhibited!();

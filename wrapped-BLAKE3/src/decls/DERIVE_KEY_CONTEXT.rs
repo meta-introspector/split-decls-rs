@@ -4,4 +4,4 @@ macro_rules! DERIVE_KEY_CONTEXT {
     };
 }
 
-DERIVE_KEY_CONTEXT!()
+DERIVE_KEY_CONTEXT!();

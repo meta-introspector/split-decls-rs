@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArrayDecoding!();
         ArrayEncoding!();
+        ArrayDecoding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! prelude {
     };
 }
 
-prelude!()
+prelude!();

@@ -4,4 +4,4 @@ macro_rules! wait_until {
     };
 }
 
-wait_until!()
+wait_until!();

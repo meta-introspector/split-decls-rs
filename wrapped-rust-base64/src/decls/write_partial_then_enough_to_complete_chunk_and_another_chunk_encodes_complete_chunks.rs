@@ -11,4 +11,4 @@ macro_rules! write_partial_then_enough_to_complete_chunk_and_another_chunk_encod
     };
 }
 
-write_partial_then_enough_to_complete_chunk_and_another_chunk_encodes_complete_chunks!()
+write_partial_then_enough_to_complete_chunk_and_another_chunk_encodes_complete_chunks!();

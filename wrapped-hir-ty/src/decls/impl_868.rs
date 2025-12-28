@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Operand!();
-        MemoryMap!();
         OperandKind!();
+        MemoryMap!();
         HirDatabase!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_868 {
     };
 }
 
-impl_868!()
+impl_868!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Zero!();
         CheckedMul!();
-        Limb!();
-        NonZero!();
+        CheckedAdd!();
+        Zero!();
         CheckedSub!();
-        ConstantTimeSelect!();
         One!();
         ShlVartime!();
+        Limb!();
+        ConstantTimeSelect!();
         CheckedDiv!();
+        NonZero!();
         ShrVartime!();
-        CheckedAdd!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! Integer {
     };
 }
 
-Integer!()
+Integer!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DateTimeVisitor!();
         FixedOffset!();
         Error!();
+        DateTimeVisitor!();
         DateTime!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

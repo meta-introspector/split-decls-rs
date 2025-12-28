@@ -11,4 +11,4 @@ macro_rules! init_root {
     };
 }
 
-init_root!()
+init_root!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Token!();
+        Kind!();
+        TagRefIter!();
         State!();
         Error!();
-        Kind!();
-        Token!();
-        TagRefIter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_95 {
     };
 }
 
-impl_95!()
+impl_95!();

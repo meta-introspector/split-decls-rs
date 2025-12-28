@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TomlDependency!();
-        TomlInheritedDependency!();
         InheritableDependency!();
         Result!();
+        TomlInheritedDependency!();
+        TomlDependency!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_111 {
     };
 }
 
-impl_111!()
+impl_111!();

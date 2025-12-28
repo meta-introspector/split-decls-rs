@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Macro2Loc!();
         ModuleId!();
+        Macro2Loc!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_651 {
     };
 }
 
-macro_651!()
+macro_651!();

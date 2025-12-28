@@ -4,4 +4,4 @@ macro_rules! addr {
     };
 }
 
-addr!()
+addr!();

@@ -4,4 +4,4 @@ macro_rules! DummyCargoTomlParser {
     };
 }
 
-DummyCargoTomlParser!()
+DummyCargoTomlParser!();

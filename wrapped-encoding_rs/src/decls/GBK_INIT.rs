@@ -12,4 +12,4 @@ macro_rules! GBK_INIT {
     };
 }
 
-GBK_INIT!()
+GBK_INIT!();

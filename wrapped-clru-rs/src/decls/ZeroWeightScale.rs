@@ -4,4 +4,4 @@ macro_rules! ZeroWeightScale {
     };
 }
 
-ZeroWeightScale!()
+ZeroWeightScale!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        LookupEntryIter!();
         LookupParser!();
         Reader!();
         Result!();
-        LookupEntryIter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_475 {
     };
 }
 
-impl_475!()
+impl_475!();

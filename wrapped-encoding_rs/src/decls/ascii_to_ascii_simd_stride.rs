@@ -4,4 +4,4 @@ macro_rules! ascii_to_ascii_simd_stride {
     };
 }
 
-ascii_to_ascii_simd_stride!()
+ascii_to_ascii_simd_stride!();

@@ -4,4 +4,4 @@ macro_rules! Scheme {
     };
 }
 
-Scheme!()
+Scheme!();

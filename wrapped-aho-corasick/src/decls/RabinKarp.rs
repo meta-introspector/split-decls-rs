@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PatternID!();
         Hash!();
+        PatternID!();
         Patterns!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! RabinKarp {
     };
 }
 
-RabinKarp!()
+RabinKarp!();

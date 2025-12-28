@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Substitutable!();
+        LeafName!();
+        SubstitutionTable!();
+        UnscopedTemplateName!();
         GetLeafName!();
         Type!();
         Prefix!();
-        UnscopedTemplateName!();
-        LeafName!();
-        SubstitutionTable!();
-        Substitutable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_333 {
     };
 }
 
-impl_333!()
+impl_333!();

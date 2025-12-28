@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Boolean!();
         Binary!();
+        Boolean!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! binary {
     };
 }
 
-binary!()
+binary!();

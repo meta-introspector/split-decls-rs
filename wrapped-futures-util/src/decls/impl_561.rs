@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SplitStream!();
-        Sink!();
         ReuniteError!();
+        Sink!();
         SplitSink!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_561 {
     };
 }
 
-impl_561!()
+impl_561!();

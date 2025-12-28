@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        DefDatabase!();
+        HasModule!();
         ModuleId!();
         AstIdLoc!();
-        HasModule!();
-        DefDatabase!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_loc {
     };
 }
 
-impl_loc!()
+impl_loc!();

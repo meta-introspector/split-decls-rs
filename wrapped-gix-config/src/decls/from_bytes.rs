@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ParseNode!();
+        Comment!();
         Whitespace!();
         Error!();
         Event!();
-        ParseNode!();
-        Comment!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! from_bytes {
     };
 }
 
-from_bytes!()
+from_bytes!();

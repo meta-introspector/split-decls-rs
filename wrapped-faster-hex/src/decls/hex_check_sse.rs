@@ -11,4 +11,4 @@ macro_rules! hex_check_sse {
     };
 }
 
-hex_check_sse!()
+hex_check_sse!();

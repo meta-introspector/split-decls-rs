@@ -4,4 +4,4 @@ macro_rules! KIND_ARC {
     };
 }
 
-KIND_ARC!()
+KIND_ARC!();

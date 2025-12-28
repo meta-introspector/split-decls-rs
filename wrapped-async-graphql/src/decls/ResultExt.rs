@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorExtensionValues!();
         Result!();
+        ErrorExtensionValues!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ResultExt {
     };
 }
 
-ResultExt!()
+ResultExt!();

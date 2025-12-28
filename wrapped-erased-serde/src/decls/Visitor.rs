@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         EnumAccess!();
-        SeqAccess!();
-        Deserializer!();
         Result!();
-        MapAccess!();
         Out!();
+        Deserializer!();
+        SeqAccess!();
+        MapAccess!();
         Error!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! Visitor {
     };
 }
 
-Visitor!()
+Visitor!();

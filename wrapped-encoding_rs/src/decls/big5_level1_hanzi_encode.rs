@@ -4,4 +4,4 @@ macro_rules! big5_level1_hanzi_encode {
     };
 }
 
-big5_level1_hanzi_encode!()
+big5_level1_hanzi_encode!();

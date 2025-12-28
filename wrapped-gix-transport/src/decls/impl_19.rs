@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Service!();
-        WriteMode!();
-        Transport!();
-        SetServiceResponse!();
-        MessageKind!();
         RequestWriter!();
+        SetServiceResponse!();
         Error!();
+        Transport!();
+        WriteMode!();
+        Service!();
+        MessageKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

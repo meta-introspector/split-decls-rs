@@ -4,4 +4,4 @@ macro_rules! test_length_extension {
     };
 }
 
-test_length_extension!()
+test_length_extension!();

@@ -4,4 +4,4 @@ macro_rules! safe {
     };
 }
 
-safe!()
+safe!();

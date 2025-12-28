@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        CvQualifiers!();
-        Result!();
-        Parse!();
-        Error!();
-        IndexStr!();
-        SubstitutionTable!();
         ParseContext!();
-        NonSubstitution!();
-        Substitutable!();
         Prefix!();
         NestedName!();
+        IndexStr!();
+        Result!();
+        Parse!();
+        NonSubstitution!();
+        Error!();
+        Substitutable!();
+        SubstitutionTable!();
+        CvQualifiers!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_95 {
     };
 }
 
-impl_95!()
+impl_95!();

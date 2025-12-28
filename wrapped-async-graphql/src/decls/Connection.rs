@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ObjectType!();
-        ConnectionNameType!();
-        NodesFieldSwitcherSealed!();
-        CursorType!();
         Edge!();
-        EnableNodesField!();
         EmptyFields!();
-        OutputType!();
-        DefaultConnectionName!();
-        DefaultEdgeName!();
+        NodesFieldSwitcherSealed!();
+        ConnectionNameType!();
         EdgeNameType!();
+        EnableNodesField!();
+        DefaultConnectionName!();
+        OutputType!();
+        ObjectType!();
+        DefaultEdgeName!();
+        CursorType!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! Connection {
     };
 }
 
-Connection!()
+Connection!();

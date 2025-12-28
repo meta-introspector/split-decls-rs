@@ -4,4 +4,4 @@ macro_rules! ERROR_INVALID_RANGE {
     };
 }
 
-ERROR_INVALID_RANGE!()
+ERROR_INVALID_RANGE!();

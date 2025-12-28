@@ -4,4 +4,4 @@ macro_rules! format_chunks {
     };
 }
 
-format_chunks!()
+format_chunks!();

@@ -4,4 +4,4 @@ macro_rules! constant_time_eq_neon {
     };
 }
 
-constant_time_eq_neon!()
+constant_time_eq_neon!();

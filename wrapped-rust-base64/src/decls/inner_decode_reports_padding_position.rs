@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DecodeSliceError!();
-        DecodeMetadata!();
-        EngineWrapper!();
         DecodeError!();
+        EngineWrapper!();
+        DecodeMetadata!();
+        DecodeSliceError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! inner_decode_reports_padding_position {
     };
 }
 
-inner_decode_reports_padding_position!()
+inner_decode_reports_padding_position!();

@@ -4,4 +4,4 @@ macro_rules! CONTEXT_FLAGS {
     };
 }
 
-CONTEXT_FLAGS!()
+CONTEXT_FLAGS!();

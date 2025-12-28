@@ -4,4 +4,4 @@ macro_rules! expect_none {
     };
 }
 
-expect_none!()
+expect_none!();

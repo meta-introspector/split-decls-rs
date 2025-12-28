@@ -4,4 +4,4 @@ macro_rules! SCRIPT_IDENTITY {
     };
 }
 
-SCRIPT_IDENTITY!()
+SCRIPT_IDENTITY!();

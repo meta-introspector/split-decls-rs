@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ExtendedBufRead!();
-        Error!();
-        TransportV2Ext!();
-        MessageKind!();
-        Transport!();
         WriteMode!();
+        TransportV2Ext!();
+        Transport!();
+        Error!();
+        MessageKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_145 {
     };
 }
 
-impl_145!()
+impl_145!();

@@ -4,4 +4,4 @@ macro_rules! IMP_EMU_SUB_WORD_CAS {
     };
 }
 
-IMP_EMU_SUB_WORD_CAS!()
+IMP_EMU_SUB_WORD_CAS!();

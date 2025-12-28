@@ -4,4 +4,4 @@ macro_rules! SmallIndexError {
     };
 }
 
-SmallIndexError!()
+SmallIndexError!();

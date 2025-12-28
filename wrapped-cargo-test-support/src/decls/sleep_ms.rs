@@ -4,4 +4,4 @@ macro_rules! sleep_ms {
     };
 }
 
-sleep_ms!()
+sleep_ms!();

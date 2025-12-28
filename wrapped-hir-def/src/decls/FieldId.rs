@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LocalFieldId!();
         VariantId!();
+        LocalFieldId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FieldId {
     };
 }
 
-FieldId!()
+FieldId!();

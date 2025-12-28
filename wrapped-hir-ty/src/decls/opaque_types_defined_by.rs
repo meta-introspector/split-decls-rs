@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ImplTraitId!();
+        ImplTraits!();
         HirDatabase!();
+        ImplTraitId!();
         EarlyBinder!();
         InternedOpaqueTyId!();
         ImplTraitIdx!();
-        ImplTraits!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! opaque_types_defined_by {
     };
 }
 
-opaque_types_defined_by!()
+opaque_types_defined_by!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         RemoteCallbacks!();
-        Remote!();
         ProxyOptions!();
+        Remote!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RemoteConnection {
     };
 }
 
-RemoteConnection!()
+RemoteConnection!();

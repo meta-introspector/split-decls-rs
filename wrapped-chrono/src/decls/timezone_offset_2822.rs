@@ -11,4 +11,4 @@ macro_rules! timezone_offset_2822 {
     };
 }
 
-timezone_offset_2822!()
+timezone_offset_2822!();

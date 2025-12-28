@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Pending!();
         Compat01As03Sink!();
         Ready!();
-        Pending!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1021 {
     };
 }
 
-impl_1021!()
+impl_1021!();

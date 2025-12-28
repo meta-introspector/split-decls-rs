@@ -4,4 +4,4 @@ macro_rules! get_lib_extension {
     };
 }
 
-get_lib_extension!()
+get_lib_extension!();

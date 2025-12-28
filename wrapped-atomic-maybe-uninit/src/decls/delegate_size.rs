@@ -4,4 +4,4 @@ macro_rules! delegate_size {
     };
 }
 
-delegate_size!()
+delegate_size!();

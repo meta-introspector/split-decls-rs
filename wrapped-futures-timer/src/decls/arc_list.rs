@@ -4,4 +4,4 @@ macro_rules! arc_list {
     };
 }
 
-arc_list!()
+arc_list!();

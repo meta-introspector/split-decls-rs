@@ -4,4 +4,4 @@ macro_rules! extend_sign128 {
     };
 }
 
-extend_sign128!()
+extend_sign128!();

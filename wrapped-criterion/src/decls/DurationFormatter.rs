@@ -4,4 +4,4 @@ macro_rules! DurationFormatter {
     };
 }
 
-DurationFormatter!()
+DurationFormatter!();

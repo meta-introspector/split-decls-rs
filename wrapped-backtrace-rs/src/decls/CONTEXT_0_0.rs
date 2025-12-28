@@ -11,4 +11,4 @@ macro_rules! CONTEXT_0_0 {
     };
 }
 
-CONTEXT_0_0!()
+CONTEXT_0_0!();

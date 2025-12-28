@@ -4,4 +4,4 @@ macro_rules! test_cleanup_merge {
     };
 }
 
-test_cleanup_merge!()
+test_cleanup_merge!();

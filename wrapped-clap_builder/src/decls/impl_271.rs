@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Command!();
-        OsStr!();
-        StringValueParser!();
-        Result!();
-        Arg!();
-        Usage!();
         TypedValueParser!();
+        Arg!();
+        OsStr!();
+        Result!();
+        Error!();
+        StringValueParser!();
+        Usage!();
+        Command!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

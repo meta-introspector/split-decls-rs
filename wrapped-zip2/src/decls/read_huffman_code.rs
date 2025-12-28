@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        HuffmanDecoder!();
+    };
+}
+
+macro_rules! read_huffman_code {
+    () => {
+        deps!();
+        # [doc = " Initialize the Huffman decoder d with num_lens codeword lengths read from is."] # [doc = " Returns false if the input is invalid."] fn read_huffman_code < T : std :: io :: Read , E : Endianness > (is : & mut BitReader < T , E > , num_lens : usize ,) -> std :: io :: Result < Box < HuffmanDecoder > > { let mut lens = [0 ; MAX_HUFFMAN_SYMBOLS] ; let mut len_count = [0 ; CODE_LENGTH_COUNT_SIZE] ; let byte = is . read :: < 8 , u8 > () ? ; let num_bytes = (byte + 1) as usize ; let mut codeword_idx = 0 ; for _byte_idx in 0 .. num_bytes { let byte = is . read :: < 8 , u16 > () ? ; let codeword_len = (byte & 0xf) + 1 ; let run_length = (byte >> 4) + 1 ; debug_assert ! ((1 ..= 16) . contains (& codeword_len)) ; len_count [codeword_len as usize - 1] += run_length ; if (codeword_idx + run_length) as usize > num_lens { return Err (Error :: new (io :: ErrorKind :: InvalidData , "too many codeword lengths" ,)) ; } for _ in 0 .. run_length { debug_assert ! ((codeword_idx as usize) < num_lens) ; lens [codeword_idx as usize] = codeword_len as u8 ; codeword_idx += 1 ; } } debug_assert ! (codeword_idx as usize <= num_lens) ; if (codeword_idx as usize) < num_lens { return Err (Error :: new (io :: ErrorKind :: InvalidData , "not enough codeword lengths" ,)) ; } let mut avail_codewords = 1 ; for i in 1 ..= 16 { debug_assert ! (avail_codewords >= 0) ; avail_codewords *= 2 ; avail_codewords -= len_count [i - 1] as i32 ; if avail_codewords < 0 { return Err (Error :: new (io :: ErrorKind :: InvalidData , "huffman tree is not full" ,)) ; } } if avail_codewords != 0 { return Err (Error :: new (io :: ErrorKind :: InvalidData , "not all codewords were used" ,)) ; } let mut d = Box :: new (HuffmanDecoder :: default ()) ; d . init (& lens , num_lens) ? ; Ok (d) }
+    };
+}
+
+read_huffman_code!()

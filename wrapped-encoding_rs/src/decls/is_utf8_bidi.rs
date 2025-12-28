@@ -11,4 +11,4 @@ macro_rules! is_utf8_bidi {
     };
 }
 
-is_utf8_bidi!()
+is_utf8_bidi!();

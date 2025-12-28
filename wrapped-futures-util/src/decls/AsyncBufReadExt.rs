@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TryStreamExt!();
         ReadUntil!();
         Cursor!();
         FillBuf!();
         ReadLine!();
+        TryStreamExt!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! AsyncBufReadExt {
     };
 }
 
-AsyncBufReadExt!()
+AsyncBufReadExt!();

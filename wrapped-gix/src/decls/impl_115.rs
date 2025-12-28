@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Repository!();
-        Error!();
-        Iter!();
-        OwnedOrStaticAtomicBool!();
         Options!();
-        Collect!();
+        Iter!();
         IndexPersistedOrInMemory!();
+        OwnedOrStaticAtomicBool!();
+        Error!();
         Outcome!();
+        Collect!();
+        Repository!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

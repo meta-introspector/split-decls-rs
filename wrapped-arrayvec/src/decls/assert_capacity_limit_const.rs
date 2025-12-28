@@ -11,4 +11,4 @@ macro_rules! assert_capacity_limit_const {
     };
 }
 
-assert_capacity_limit_const!()
+assert_capacity_limit_const!();

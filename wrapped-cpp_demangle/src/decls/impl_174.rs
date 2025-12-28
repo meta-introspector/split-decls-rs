@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ArgScopeStack!();
-        ParametricBuiltinType!();
         DemangleWrite!();
         DemangleContext!();
+        ArgScopeStack!();
+        Result!();
         Demangle!();
+        ParametricBuiltinType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_174 {
     };
 }
 
-impl_174!()
+impl_174!();

@@ -4,4 +4,4 @@ macro_rules! invert_mod {
     };
 }
 
-invert_mod!()
+invert_mod!();

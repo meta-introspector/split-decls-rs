@@ -4,4 +4,4 @@ macro_rules! rustc_host {
     };
 }
 
-rustc_host!()
+rustc_host!();

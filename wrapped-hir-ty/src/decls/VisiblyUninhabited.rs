@@ -4,4 +4,4 @@ macro_rules! VisiblyUninhabited {
     };
 }
 
-VisiblyUninhabited!()
+VisiblyUninhabited!();

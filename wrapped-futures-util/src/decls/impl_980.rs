@@ -11,4 +11,4 @@ macro_rules! impl_980 {
     };
 }
 
-impl_980!()
+impl_980!();

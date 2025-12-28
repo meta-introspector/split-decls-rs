@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Snapshot!();
         Note!();
-        Path!();
+        Snapshot!();
         Error!();
+        Path!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_566 {
     };
 }
 
-impl_566!()
+impl_566!();

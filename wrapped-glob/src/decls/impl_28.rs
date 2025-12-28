@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MatchOptions!();
-        MatchResult!();
-        Pattern!();
         PatternError!();
+        MatchResult!();
+        MatchOptions!();
+        Pattern!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

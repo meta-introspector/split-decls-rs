@@ -4,4 +4,4 @@ macro_rules! ResolveWith {
     };
 }
 
-ResolveWith!()
+ResolveWith!();

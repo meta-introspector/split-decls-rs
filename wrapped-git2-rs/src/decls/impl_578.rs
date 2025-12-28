@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         ProxyOptions!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_578 {
     };
 }
 
-impl_578!()
+impl_578!();

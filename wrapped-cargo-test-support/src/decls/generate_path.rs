@@ -4,4 +4,4 @@ macro_rules! generate_path {
     };
 }
 
-generate_path!()
+generate_path!();

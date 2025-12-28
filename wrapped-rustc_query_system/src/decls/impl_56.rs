@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        DepGraph!();
+        DepContext!();
+        Deps!();
+        DepNode!();
+        DepNodeColor!();
+    };
+}
+
+macro_rules! impl_56 {
+    () => {
+        deps!();
+        impl < D : Deps > DepGraph < D > { # [doc = " Returns true if the given node has been marked as red during the"] # [doc = " current compilation session. Used in various assertions"] pub fn is_red (& self , dep_node : & DepNode) -> bool { matches ! (self . node_color (dep_node) , Some (DepNodeColor :: Red)) } # [doc = " Returns true if the given node has been marked as green during the"] # [doc = " current compilation session. Used in various assertions"] pub fn is_green (& self , dep_node : & DepNode) -> bool { self . node_color (dep_node) . is_some_and (| c | c . is_green ()) } pub fn assert_dep_node_not_yet_allocated_in_current_session < S : std :: fmt :: Display > (& self , dep_node : & DepNode , msg : impl FnOnce () -> S ,) { if let Some (data) = & self . data { data . assert_dep_node_not_yet_allocated_in_current_session (dep_node , msg) } } # [doc = " This method loads all on-disk cacheable query results into memory, so"] # [doc = " they can be written out to the new cache file again. Most query results"] # [doc = " will already be in memory but in the case where we marked something as"] # [doc = " green but then did not need the value, that value will never have been"] # [doc = " loaded from disk."] # [doc = ""] # [doc = " This method will only load queries that will end up in the disk cache."] # [doc = " Other queries will not be executed."] pub fn exec_cache_promotions < Tcx : DepContext > (& self , tcx : Tcx) { let _prof_timer = tcx . profiler () . generic_activity ("incr_comp_query_cache_promotion") ; let data = self . data . as_ref () . unwrap () ; for prev_index in data . colors . values . indices () { match data . colors . get (prev_index) { Some (DepNodeColor :: Green (_)) => { let dep_node = data . previous . index_to_node (prev_index) ; tcx . try_load_from_on_disk_cache (dep_node) ; } None | Some (DepNodeColor :: Red) => { } } } } pub fn finish_encoding (& self) -> FileEncodeResult { if let Some (data) = & self . data { data . current . encoder . finish (& data . current) } else { Ok (0) } } pub (crate) fn next_virtual_depnode_index (& self) -> DepNodeIndex { debug_assert ! (self . data . is_none ()) ; let index = self . virtual_dep_node_index . fetch_add (1 , Ordering :: Relaxed) ; DepNodeIndex :: from_u32 (index) } }
+    };
+}
+
+impl_56!()

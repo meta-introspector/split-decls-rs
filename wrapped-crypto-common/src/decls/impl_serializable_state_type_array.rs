@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SerializedState!();
-        SerializableState!();
         DeserializeStateError!();
+        SerializableState!();
+        SerializedState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_serializable_state_type_array {
     };
 }
 
-impl_serializable_state_type_array!()
+impl_serializable_state_type_array!();

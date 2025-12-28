@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Limit!();
-        NoLimit!();
         Configuration!();
         LittleEndian!();
         Varint!();
-        BigEndian!();
         Fixint!();
+        BigEndian!();
+        NoLimit!();
+        Limit!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

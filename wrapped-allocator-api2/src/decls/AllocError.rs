@@ -4,4 +4,4 @@ macro_rules! AllocError {
     };
 }
 
-AllocError!()
+AllocError!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SmallIndex!();
-        SmallIndexIter!();
         SmallIndexError!();
+        SmallIndexIter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! index_type_impls {
     };
 }
 
-index_type_impls!()
+index_type_impls!();

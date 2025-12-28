@@ -13,4 +13,4 @@ macro_rules! compress_parents_parallel {
     };
 }
 
-compress_parents_parallel!()
+compress_parents_parallel!();

@@ -11,4 +11,4 @@ macro_rules! inspect_ok_fn {
     };
 }
 
-inspect_ok_fn!()
+inspect_ok_fn!();

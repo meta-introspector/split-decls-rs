@@ -11,4 +11,4 @@ macro_rules! associated_type_shorthand_candidates {
     };
 }
 
-associated_type_shorthand_candidates!()
+associated_type_shorthand_candidates!();

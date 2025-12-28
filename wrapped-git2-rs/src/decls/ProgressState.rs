@@ -4,4 +4,4 @@ macro_rules! ProgressState {
     };
 }
 
-ProgressState!()
+ProgressState!();

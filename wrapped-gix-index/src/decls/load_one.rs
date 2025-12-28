@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Entry!();
-        Stat!();
         Mode!();
         Time!();
+        Entry!();
+        Stat!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! load_one {
     };
 }
 
-load_one!()
+load_one!();

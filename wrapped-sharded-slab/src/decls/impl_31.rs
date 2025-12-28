@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        OwnedEntry!();
+        Clear!();
+        Config!();
+        OwnedRef!();
     };
 }
 
 macro_rules! impl_31 {
     () => {
         deps!();
-        impl < T , C > PartialEq < T > for OwnedEntry < T , C > where T : PartialEq < T > , C : cfg :: Config , { fn eq (& self , other : & T) -> bool { * self . value () == * other } }
+        impl < T , C > fmt :: Debug for OwnedRef < T , C > where T : fmt :: Debug + Clear + Default , C : cfg :: Config , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt :: Debug :: fmt (self . value () , f) } }
     };
 }
 

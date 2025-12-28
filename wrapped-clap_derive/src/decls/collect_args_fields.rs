@@ -11,4 +11,4 @@ macro_rules! collect_args_fields {
     };
 }
 
-collect_args_fields!()
+collect_args_fields!();

@@ -11,4 +11,4 @@ macro_rules! compress_in_place {
     };
 }
 
-compress_in_place!()
+compress_in_place!();

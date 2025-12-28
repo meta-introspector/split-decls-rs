@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
-        Scope!();
-        DefMap!();
-        LocalModuleId!();
-        LocalDefMap!();
         BuiltinShadowMode!();
-        Resolver!();
-        PerNs!();
         Item!();
+        PerNs!();
+        LocalModuleId!();
+        Scope!();
+        Resolver!();
+        DefDatabase!();
+        DefMap!();
+        LocalDefMap!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_315 {
     };
 }
 
-impl_315!()
+impl_315!();

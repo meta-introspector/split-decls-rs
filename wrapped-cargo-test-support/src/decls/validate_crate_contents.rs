@@ -11,4 +11,4 @@ macro_rules! validate_crate_contents {
     };
 }
 
-validate_crate_contents!()
+validate_crate_contents!();

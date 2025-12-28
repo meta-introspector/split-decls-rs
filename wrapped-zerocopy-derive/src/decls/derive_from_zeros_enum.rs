@@ -3,6 +3,9 @@ macro_rules! deps {
         ImplBlockBuilder!();
         Trait!();
         FieldBounds!();
+        EnumRepr!();
+        Repr!();
+        CompoundRepr!();
     };
 }
 

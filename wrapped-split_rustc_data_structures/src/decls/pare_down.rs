@@ -1,0 +1,7 @@
+macro_rules! pare_down {
+    () => {
+        # [doc = " Pare down is used as a step in the LUB computation. It edits the"] # [doc = " candidates array in place by removing any element j for which"] # [doc = " there exists an earlier element i<j such that i -> j. That is,"] # [doc = " after you run `pare_down`, you know that for all elements that"] # [doc = " remain in candidates, they cannot reach any of the elements that"] # [doc = " come after them."] # [doc = ""] # [doc = " Examples follow. Assume that a -> b -> c and x -> y -> z."] # [doc = ""] # [doc = " - Input: `[a, b, x]`. Output: `[a, x]`."] # [doc = " - Input: `[b, a, x]`. Output: `[b, a, x]`."] # [doc = " - Input: `[a, x, b, y]`. Output: `[a, x]`."] fn pare_down (candidates : & mut Vec < usize > , closure : & BitMatrix < usize , usize >) { let mut i = 0 ; while let Some (& candidate_i) = candidates . get (i) { i += 1 ; let mut j = i ; let mut dead = 0 ; while let Some (& candidate_j) = candidates . get (j) { if closure . contains (candidate_i , candidate_j) { dead += 1 ; } else { candidates [j - dead] = candidate_j ; } j += 1 ; } candidates . truncate (j - dead) ; } }
+    };
+}
+
+pare_down!()

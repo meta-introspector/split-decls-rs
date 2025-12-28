@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HirFormatter!();
+        PolyFnSig!();
+        FnSig!();
         HirDisplayError!();
         HirDisplay!();
-        FnSig!();
-        PolyFnSig!();
+        HirFormatter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_510 {
     };
 }
 
-impl_510!()
+impl_510!();

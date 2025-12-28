@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Layout!();
-        LayoutError!();
         TypingMode!();
+        Layout!();
         LayoutCx!();
         HirDatabase!();
+        LayoutError!();
         TraitEnvironment!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! layout_of_ty_query {
     };
 }
 
-layout_of_ty_query!()
+layout_of_ty_query!();

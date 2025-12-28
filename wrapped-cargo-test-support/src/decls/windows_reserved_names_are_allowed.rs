@@ -4,4 +4,4 @@ macro_rules! windows_reserved_names_are_allowed {
     };
 }
 
-windows_reserved_names_are_allowed!()
+windows_reserved_names_are_allowed!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OdbWriter!();
         Binding!();
+        OdbWriter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_504 {
     };
 }
 
-impl_504!()
+impl_504!();

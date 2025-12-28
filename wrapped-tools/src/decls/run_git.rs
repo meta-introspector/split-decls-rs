@@ -11,4 +11,4 @@ macro_rules! run_git {
     };
 }
 
-run_git!()
+run_git!();

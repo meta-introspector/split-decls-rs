@@ -11,4 +11,4 @@ macro_rules! take_intersecting {
     };
 }
 
-take_intersecting!()
+take_intersecting!();

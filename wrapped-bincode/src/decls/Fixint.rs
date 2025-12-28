@@ -4,4 +4,4 @@ macro_rules! Fixint {
     };
 }
 
-Fixint!()
+Fixint!();

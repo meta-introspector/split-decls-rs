@@ -13,4 +13,4 @@ macro_rules! new_commit {
     };
 }
 
-new_commit!()
+new_commit!();

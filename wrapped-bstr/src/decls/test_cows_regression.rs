@@ -11,4 +11,4 @@ macro_rules! test_cows_regression {
     };
 }
 
-test_cows_regression!()
+test_cows_regression!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Result!();
-        LsResult!();
-        DirEntryAttr!();
         ErrorKind!();
+        DirEntryAttr!();
+        LsResult!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ls {
     };
 }
 
-ls!()
+ls!();

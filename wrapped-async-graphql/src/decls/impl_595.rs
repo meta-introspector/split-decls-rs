@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        Response!();
-        NextExecute!();
+        Extension!();
         ResolveInfo!();
-        Extensions!();
-        NextValidation!();
-        ValidationFut!();
-        NextRequest!();
+        Response!();
+        NextParseQuery!();
         ResolveFut!();
         ServerError!();
         NextPrepareRequest!();
-        Extension!();
-        RequestFut!();
-        Request!();
-        NextSubscribe!();
-        ServerResult!();
-        ValidationResult!();
-        NextParseQuery!();
         SchemaEnv!();
-        Data!();
-        ParseFut!();
-        Result!();
+        ServerResult!();
+        Extensions!();
+        NextValidation!();
         NextResolve!();
+        ValidationResult!();
+        Data!();
+        RequestFut!();
+        NextExecute!();
         ExtensionContext!();
+        NextRequest!();
+        Request!();
+        ValidationFut!();
+        NextSubscribe!();
+        Result!();
+        ParseFut!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_595 {
     };
 }
 
-impl_595!()
+impl_595!();

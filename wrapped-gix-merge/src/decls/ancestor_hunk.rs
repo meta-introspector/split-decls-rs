@@ -12,4 +12,4 @@ macro_rules! ancestor_hunk {
     };
 }
 
-ancestor_hunk!()
+ancestor_hunk!();

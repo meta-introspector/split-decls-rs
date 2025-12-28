@@ -11,4 +11,4 @@ macro_rules! validate_path_base_name {
     };
 }
 
-validate_path_base_name!()
+validate_path_base_name!();

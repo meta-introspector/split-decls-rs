@@ -11,4 +11,4 @@ macro_rules! encode_without_padding {
     };
 }
 
-encode_without_padding!()
+encode_without_padding!();

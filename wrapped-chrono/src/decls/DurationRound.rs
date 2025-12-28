@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TimeDelta!();
+        NaiveDate!();
         DateTime!();
         Error!();
-        NaiveDate!();
+        TimeDelta!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DurationRound {
     };
 }
 
-DurationRound!()
+DurationRound!();

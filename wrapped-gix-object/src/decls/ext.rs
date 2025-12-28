@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        Kind!();
-        TreeRefIter!();
-        Tag!();
-        BlobRef!();
-        CommitRefIter!();
-        Commit!();
+        TreeRef!();
         Find!();
-        Error!();
+        TreeRefIter!();
         CommitRef!();
+        Commit!();
+        ObjectRef!();
+        Kind!();
         Blob!();
+        CommitRefIter!();
+        Error!();
+        Tag!();
         Tree!();
         Data!();
+        BlobRef!();
         TagRef!();
         TagRefIter!();
-        ObjectRef!();
         Header!();
-        TreeRef!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! ext {
     };
 }
 
-ext!()
+ext!();

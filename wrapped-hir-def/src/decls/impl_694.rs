@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefDatabase!();
         MacroId!();
+        DefDatabase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_694 {
     };
 }
 
-impl_694!()
+impl_694!();

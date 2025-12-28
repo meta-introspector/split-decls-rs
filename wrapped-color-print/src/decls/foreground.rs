@@ -4,4 +4,4 @@ macro_rules! foreground {
     };
 }
 
-foreground!()
+foreground!();

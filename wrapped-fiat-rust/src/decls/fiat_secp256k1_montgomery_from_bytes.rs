@@ -11,4 +11,4 @@ macro_rules! fiat_secp256k1_montgomery_from_bytes {
     };
 }
 
-fiat_secp256k1_montgomery_from_bytes!()
+fiat_secp256k1_montgomery_from_bytes!();

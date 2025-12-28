@@ -4,4 +4,4 @@ macro_rules! build_thread {
     };
 }
 
-build_thread!()
+build_thread!();

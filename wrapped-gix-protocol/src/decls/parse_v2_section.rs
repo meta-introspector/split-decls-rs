@@ -11,4 +11,4 @@ macro_rules! parse_v2_section {
     };
 }
 
-parse_v2_section!()
+parse_v2_section!();

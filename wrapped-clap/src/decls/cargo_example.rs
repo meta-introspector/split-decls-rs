@@ -4,4 +4,4 @@ macro_rules! cargo_example {
     };
 }
 
-cargo_example!()
+cargo_example!();

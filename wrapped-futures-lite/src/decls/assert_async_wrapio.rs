@@ -4,4 +4,4 @@ macro_rules! assert_async_wrapio {
     };
 }
 
-assert_async_wrapio!()
+assert_async_wrapio!();

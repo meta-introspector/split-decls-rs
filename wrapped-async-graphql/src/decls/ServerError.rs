@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PathSegment!();
-        ErrorExtensionValues!();
-        Any!();
         Extensions!();
+        ErrorExtensionValues!();
+        PathSegment!();
+        Any!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ServerError {
     };
 }
 
-ServerError!()
+ServerError!();

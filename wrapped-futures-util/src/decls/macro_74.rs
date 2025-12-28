@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RemoteHandle!();
         SendMsg!();
+        RemoteHandle!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_74 {
     };
 }
 
-macro_74!()
+macro_74!();

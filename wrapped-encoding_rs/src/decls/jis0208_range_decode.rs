@@ -4,4 +4,4 @@ macro_rules! jis0208_range_decode {
     };
 }
 
-jis0208_range_decode!()
+jis0208_range_decode!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Enum!();
+        LocalModuleId!();
+        LocalDefMap!();
+        ModuleId!();
+        MacroId!();
         DefDatabase!();
+        BuiltinShadowMode!();
+        DefMap!();
         MacroSubNs!();
         PerNs!();
-        MacroId!();
-        LocalModuleId!();
-        BuiltinShadowMode!();
-        LocalDefMap!();
-        Enum!();
-        ModuleId!();
-        DefMap!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_378 {
     };
 }
 
-impl_378!()
+impl_378!();

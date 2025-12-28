@@ -4,4 +4,4 @@ macro_rules! RUNNER_MAGIC_NUMBER {
     };
 }
 
-RUNNER_MAGIC_NUMBER!()
+RUNNER_MAGIC_NUMBER!();

@@ -4,4 +4,4 @@ macro_rules! ImportAlias {
     };
 }
 
-ImportAlias!()
+ImportAlias!();

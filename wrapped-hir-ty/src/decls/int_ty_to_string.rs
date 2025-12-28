@@ -4,4 +4,4 @@ macro_rules! int_ty_to_string {
     };
 }
 
-int_ty_to_string!()
+int_ty_to_string!();

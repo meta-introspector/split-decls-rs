@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Layer!();
+        DynFilterFn!();
+        SubscriberExt!();
+        Context!();
+    };
+}
+
+macro_rules! dynamic_filter_fn {
+    () => {
+        deps!();
+        # [doc = " Constructs a [`DynFilterFn`] from a function or closure that returns `true`"] # [doc = " if a span or event should be enabled within a particular [span context][`Context`]."] # [doc = ""] # [doc = " This is equivalent to calling [`DynFilterFn::new`]."] # [doc = ""] # [doc = " Unlike [`filter_fn`], this function takes a closure or function pointer"] # [doc = " taking the [`Metadata`] for a span or event *and* the current [`Context`]."] # [doc = " This means that a [`DynFilterFn`] can choose whether to enable spans or"] # [doc = " events based on information about the _current_ span (or its parents)."] # [doc = ""] # [doc = " If this is *not* necessary, use [`filter_fn`] instead."] # [doc = ""] # [doc = " The returned [`DynFilterFn`] can be used for both [per-layer filtering][plf]"] # [doc = " (using its [`Filter`] implementation) and [global filtering][global] (using"] # [doc = " its  [`Layer`] implementation)."] # [doc = ""] # [doc = " See the [documentation on filtering with layers][filtering] for details."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use tracing_subscriber::{"] # [doc = "     layer::{Layer, SubscriberExt},"] # [doc = "     filter,"] # [doc = "     util::SubscriberInitExt,"] # [doc = " };"] # [doc = ""] # [doc = " // Only enable spans or events within a span named \"interesting_span\"."] # [doc = " let my_filter = filter::dynamic_filter_fn(|metadata, cx| {"] # [doc = "     // If this *is* \"interesting_span\", make sure to enable it."] # [doc = "     if metadata.is_span() && metadata.name() == \"interesting_span\" {"] # [doc = "         return true;"] # [doc = "     }"] # [doc = ""] # [doc = "     // Otherwise, are we in an interesting span?"] # [doc = "     if let Some(current_span) = cx.lookup_current() {"] # [doc = "         return current_span.name() == \"interesting_span\";"] # [doc = "     }"] # [doc = ""] # [doc = "     false"] # [doc = " });"] # [doc = ""] # [doc = " let my_layer = tracing_subscriber::fmt::layer();"] # [doc = ""] # [doc = " tracing_subscriber::registry()"] # [doc = "     .with(my_layer.with_filter(my_filter))"] # [doc = "     .init();"] # [doc = ""] # [doc = " // This event will not be enabled."] # [doc = " tracing::info!(\"something happened\");"] # [doc = ""] # [doc = " tracing::info_span!(\"interesting_span\").in_scope(|| {"] # [doc = "     // This event will be enabled."] # [doc = "     tracing::debug!(\"something else happened\");"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [doc = " [`Filter`]: crate::layer::Filter"] # [doc = " [`Layer`]: crate::layer::Layer"] # [doc = " [plf]: crate::layer#per-layer-filtering"] # [doc = " [global]: crate::layer#global-filtering"] # [doc = " [filtering]: crate::layer#filtering-with-layers"] # [doc = " [`Context`]: crate::layer::Context"] # [doc = " [`Metadata`]: tracing_core::Metadata"] pub fn dynamic_filter_fn < S , F > (f : F) -> DynFilterFn < S , F > where F : Fn (& Metadata < '_ > , & Context < '_ , S >) -> bool , { DynFilterFn :: new (f) }
+    };
+}
+
+dynamic_filter_fn!()

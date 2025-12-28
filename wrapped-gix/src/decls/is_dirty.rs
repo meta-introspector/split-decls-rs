@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TrackRenames!();
         Note!();
-        Error!();
+        TrackRenames!();
         Submodule!();
-        Action!();
         Repository!();
+        Action!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! is_dirty {
     };
 }
 
-is_dirty!()
+is_dirty!();

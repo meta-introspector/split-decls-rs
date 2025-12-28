@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        HasDataLayout!();
-        TargetDataLayout!();
+        ExternAbi!();
     };
 }
 
 macro_rules! impl_21 {
     () => {
         deps!();
-        impl HasDataLayout for & TargetDataLayout { # [inline] fn data_layout (& self) -> & TargetDataLayout { (* * self) . data_layout () } }
+        impl Eq for ExternAbi { }
     };
 }
 

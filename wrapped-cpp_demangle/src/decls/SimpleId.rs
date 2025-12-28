@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SourceName!();
         TemplateArgs!();
+        SourceName!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SimpleId {
     };
 }
 
-SimpleId!()
+SimpleId!();

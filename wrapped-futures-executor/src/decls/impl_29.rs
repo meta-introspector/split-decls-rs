@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        UnparkMutex!();
-        Message!();
         ThreadPoolBuilder!();
+        UnparkMutex!();
         Task!();
-        ThreadPool!();
         WakeHandle!();
+        Message!();
+        ThreadPool!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

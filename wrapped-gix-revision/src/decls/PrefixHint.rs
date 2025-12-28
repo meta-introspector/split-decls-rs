@@ -4,4 +4,4 @@ macro_rules! PrefixHint {
     };
 }
 
-PrefixHint!()
+PrefixHint!();

@@ -11,4 +11,4 @@ macro_rules! fiat_secp256k1_dettman_square {
     };
 }
 
-fiat_secp256k1_dettman_square!()
+fiat_secp256k1_dettman_square!();

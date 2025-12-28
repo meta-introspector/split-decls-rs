@@ -4,4 +4,4 @@ macro_rules! depthfirst {
     };
 }
 
-depthfirst!()
+depthfirst!();

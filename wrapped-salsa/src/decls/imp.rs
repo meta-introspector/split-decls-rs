@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Ingredient!();
+        Nonce!();
+        StorageNonce!();
+        IngredientIndex!();
+        Zalsa!();
+    };
+}
+
+macro_rules! imp {
+    () => {
+        deps!();
+        # [cfg (not (feature = "inventory"))] mod imp { use crate :: IngredientIndex ; use crate :: nonce :: Nonce ; use crate :: plumbing :: Ingredient ; use crate :: sync :: atomic :: { AtomicU64 , Ordering } ; use crate :: zalsa :: { StorageNonce , Zalsa } ; use std :: marker :: PhantomData ; use std :: mem ; # [doc = " Caches an ingredient index."] # [doc = ""] # [doc = " With manual registration, ingredient indices can vary across databases,"] # [doc = " but we can retain most of the benefit by optimizing for the the case of"] # [doc = " a single database."] pub struct IngredientCache < I > where I : Ingredient , { cached_data : AtomicU64 , phantom : PhantomData < fn () -> I > , } impl < I > Default for IngredientCache < I > where I : Ingredient , { fn default () -> Self { Self :: new () } } impl < I > IngredientCache < I > where I : Ingredient , { const UNINITIALIZED : u64 = 0 ; # [doc = " Create a new cache"] pub const fn new () -> Self { Self { cached_data : AtomicU64 :: new (Self :: UNINITIALIZED) , phantom : PhantomData , } } # [doc = " Get a reference to the ingredient in the database."] # [doc = ""] # [doc = " If the ingredient is not already in the cache, it will be created."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The `IngredientIndex` returned by the closure must reference a valid ingredient of"] # [doc = " type `I` in the provided zalsa database."] # [inline (always)] pub unsafe fn get_or_create < 'db > (& self , zalsa : & 'db Zalsa , create_index : impl Fn () -> IngredientIndex ,) -> & 'db I { let index = self . get_or_create_index (zalsa , create_index) ; unsafe { zalsa . lookup_ingredient_unchecked (index) . assert_type_unchecked :: < I > () } } pub fn get_or_create_index (& self , zalsa : & Zalsa , create_index : impl Fn () -> IngredientIndex ,) -> IngredientIndex { const _ : () = assert ! (mem :: size_of ::< (Nonce < StorageNonce >, IngredientIndex) > () == mem :: size_of ::< u64 > ()) ; let cached_data = self . cached_data . load (Ordering :: Acquire) ; if cached_data == Self :: UNINITIALIZED { return self . get_or_create_index_slow (zalsa , create_index) ; } ; let index = unsafe { IngredientIndex :: new_unchecked (cached_data as u32) } ; let nonce = crate :: nonce :: Nonce :: < StorageNonce > :: from_u32 (unsafe { std :: num :: NonZeroU32 :: new_unchecked ((cached_data >> u32 :: BITS) as u32) }) ; if zalsa . nonce () != nonce { return create_index () ; } index } # [cold] # [inline (never)] fn get_or_create_index_slow (& self , zalsa : & Zalsa , create_index : impl Fn () -> IngredientIndex ,) -> IngredientIndex { let index = create_index () ; let nonce = zalsa . nonce () . into_u32 () . get () as u64 ; let packed = (nonce << u32 :: BITS) | (index . as_u32 () as u64) ; debug_assert_ne ! (packed , IngredientCache ::< I >:: UNINITIALIZED) ; _ = self . cached_data . compare_exchange (IngredientCache :: < I > :: UNINITIALIZED , packed , Ordering :: Release , Ordering :: Relaxed ,) ; index } } }
+    };
+}
+
+imp!()

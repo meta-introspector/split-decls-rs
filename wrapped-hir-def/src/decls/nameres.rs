@@ -4,4 +4,4 @@ macro_rules! nameres {
     };
 }
 
-nameres!()
+nameres!();

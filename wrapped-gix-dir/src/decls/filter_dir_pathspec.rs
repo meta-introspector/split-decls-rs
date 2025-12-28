@@ -11,4 +11,4 @@ macro_rules! filter_dir_pathspec {
     };
 }
 
-filter_dir_pathspec!()
+filter_dir_pathspec!();

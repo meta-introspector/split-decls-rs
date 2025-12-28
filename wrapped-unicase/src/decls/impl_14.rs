@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        UniCase!();
+        Ascii!();
     };
 }
 
 macro_rules! impl_14 {
     () => {
         deps!();
-        impl < S > Deref for UniCase < S > { type Target = S ; # [inline] fn deref < 'a > (& 'a self) -> & 'a S { inner ! (self . 0) } }
+        impl < S : FromStr > FromStr for Ascii < S > { type Err = < S as FromStr > :: Err ; fn from_str (s : & str) -> Result < Ascii < S > , < S as FromStr > :: Err > { s . parse () . map (Ascii) } }
     };
 }
 

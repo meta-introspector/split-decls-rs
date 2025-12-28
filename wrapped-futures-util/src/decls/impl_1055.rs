@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AllowStdIo!();
-        Ready!();
         Seek!();
+        Ready!();
+        AllowStdIo!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1055 {
     };
 }
 
-impl_1055!()
+impl_1055!();

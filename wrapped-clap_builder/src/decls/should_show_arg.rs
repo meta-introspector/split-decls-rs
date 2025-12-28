@@ -11,4 +11,4 @@ macro_rules! should_show_arg {
     };
 }
 
-should_show_arg!()
+should_show_arg!();

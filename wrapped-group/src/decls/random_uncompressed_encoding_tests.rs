@@ -12,4 +12,4 @@ macro_rules! random_uncompressed_encoding_tests {
     };
 }
 
-random_uncompressed_encoding_tests!()
+random_uncompressed_encoding_tests!();

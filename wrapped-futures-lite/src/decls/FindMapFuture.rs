@@ -4,4 +4,4 @@ macro_rules! FindMapFuture {
     };
 }
 
-FindMapFuture!()
+FindMapFuture!();

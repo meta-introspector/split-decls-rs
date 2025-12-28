@@ -4,4 +4,4 @@ macro_rules! add_by_64s {
     };
 }
 
-add_by_64s!()
+add_by_64s!();

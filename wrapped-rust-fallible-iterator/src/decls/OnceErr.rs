@@ -4,4 +4,4 @@ macro_rules! OnceErr {
     };
 }
 
-OnceErr!()
+OnceErr!();

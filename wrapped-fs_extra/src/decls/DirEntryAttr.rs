@@ -4,4 +4,4 @@ macro_rules! DirEntryAttr {
     };
 }
 
-DirEntryAttr!()
+DirEntryAttr!();

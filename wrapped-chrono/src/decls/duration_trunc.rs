@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TimeDelta!();
         Timelike!();
-        NaiveDateTime!();
         RoundingError!();
+        TimeDelta!();
+        NaiveDateTime!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! duration_trunc {
     };
 }
 
-duration_trunc!()
+duration_trunc!();

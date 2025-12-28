@@ -4,4 +4,4 @@ macro_rules! LOOP_SIZE {
     };
 }
 
-LOOP_SIZE!()
+LOOP_SIZE!();

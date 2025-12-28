@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Options!();
         TextWriter!();
         State!();
-        Options!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Serializer {
     };
 }
 
-Serializer!()
+Serializer!();

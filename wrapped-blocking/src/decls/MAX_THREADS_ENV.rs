@@ -4,4 +4,4 @@ macro_rules! MAX_THREADS_ENV {
     };
 }
 
-MAX_THREADS_ENV!()
+MAX_THREADS_ENV!();

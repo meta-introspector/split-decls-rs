@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        WriteTo!();
-        Write!();
-        Kind!();
-        Blob!();
         BlobRef!();
+        Kind!();
+        Write!();
+        Blob!();
+        WriteTo!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_147 {
     };
 }
 
-impl_147!()
+impl_147!();

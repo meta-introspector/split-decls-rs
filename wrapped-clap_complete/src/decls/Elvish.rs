@@ -4,4 +4,4 @@ macro_rules! Elvish {
     };
 }
 
-Elvish!()
+Elvish!();

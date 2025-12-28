@@ -11,4 +11,4 @@ macro_rules! inner_u64 {
     };
 }
 
-inner_u64!()
+inner_u64!();

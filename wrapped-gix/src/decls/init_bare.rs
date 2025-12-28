@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Path!();
-        ThreadSafeRepository!();
-        Error!();
-        Options!();
-        Kind!();
         Repository!();
+        Path!();
+        Error!();
+        Kind!();
+        Options!();
+        ThreadSafeRepository!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! init_bare {
     };
 }
 
-init_bare!()
+init_bare!();

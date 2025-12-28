@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tag!();
         Tree!();
+        Tag!();
         Blob!();
         Commit!();
         Kind!();
@@ -15,4 +15,4 @@ macro_rules! impl_207 {
     };
 }
 
-impl_207!()
+impl_207!();

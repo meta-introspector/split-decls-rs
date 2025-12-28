@@ -11,4 +11,4 @@ macro_rules! shared_clone {
     };
 }
 
-shared_clone!()
+shared_clone!();

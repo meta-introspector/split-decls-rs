@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        YearFlags!();
         Mdf!();
+        YearFlags!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_473 {
     };
 }
 
-impl_473!()
+impl_473!();

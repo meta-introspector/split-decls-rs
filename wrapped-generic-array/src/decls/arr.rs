@@ -4,4 +4,4 @@ macro_rules! arr {
     };
 }
 
-arr!()
+arr!();

@@ -11,4 +11,4 @@ macro_rules! LocalBoxFuture {
     };
 }
 
-LocalBoxFuture!()
+LocalBoxFuture!();

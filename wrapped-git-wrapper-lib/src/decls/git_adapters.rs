@@ -4,4 +4,4 @@ macro_rules! git_adapters {
     };
 }
 
-git_adapters!()
+git_adapters!();

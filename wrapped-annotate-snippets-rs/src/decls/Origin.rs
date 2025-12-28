@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Element!();
-        AnnotationKind!();
         Group!();
+        AnnotationKind!();
+        Element!();
         Snippet!();
         Level!();
     };
@@ -15,4 +15,4 @@ macro_rules! Origin {
     };
 }
 
-Origin!()
+Origin!();

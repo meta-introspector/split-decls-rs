@@ -4,4 +4,4 @@ macro_rules! SHUFFLE_MASK {
     };
 }
 
-SHUFFLE_MASK!()
+SHUFFLE_MASK!();

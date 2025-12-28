@@ -11,4 +11,4 @@ macro_rules! impl_set_deprecation {
     };
 }
 
-impl_set_deprecation!()
+impl_set_deprecation!();

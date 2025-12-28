@@ -4,4 +4,4 @@ macro_rules! fill_buf {
     };
 }
 
-fill_buf!()
+fill_buf!();

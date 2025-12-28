@@ -4,4 +4,4 @@ macro_rules! BytesOrWideString {
     };
 }
 
-BytesOrWideString!()
+BytesOrWideString!();

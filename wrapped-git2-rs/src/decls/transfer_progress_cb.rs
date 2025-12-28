@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         RemoteCallbacks!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! transfer_progress_cb {
     };
 }
 
-transfer_progress_cb!()
+transfer_progress_cb!();

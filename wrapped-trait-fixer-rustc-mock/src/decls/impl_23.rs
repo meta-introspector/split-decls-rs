@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MockInferCtxtBuilder!();
-        MockInferCtxt!();
         MockTypingMode!();
+        MockInferCtxt!();
+        MockInferCtxtBuilder!();
     };
 }
 

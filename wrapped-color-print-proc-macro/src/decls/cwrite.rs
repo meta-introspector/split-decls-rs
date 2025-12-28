@@ -4,4 +4,4 @@ macro_rules! cwrite {
     };
 }
 
-cwrite!()
+cwrite!();

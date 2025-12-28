@@ -11,4 +11,4 @@ macro_rules! Deque {
     };
 }
 
-Deque!()
+Deque!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         AutoBuffer!();
-        AutoThinVec!();
-        ThinVec!();
         Header!();
+        ThinVec!();
+        AutoThinVec!();
     };
 }
 

@@ -4,4 +4,4 @@ macro_rules! expand1_string {
     };
 }
 
-expand1_string!()
+expand1_string!();

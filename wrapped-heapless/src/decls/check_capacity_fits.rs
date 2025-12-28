@@ -11,4 +11,4 @@ macro_rules! check_capacity_fits {
     };
 }
 
-check_capacity_fits!()
+check_capacity_fits!();

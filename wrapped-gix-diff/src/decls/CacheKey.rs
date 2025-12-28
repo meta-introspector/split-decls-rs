@@ -4,4 +4,4 @@ macro_rules! CacheKey {
     };
 }
 
-CacheKey!()
+CacheKey!();

@@ -14,4 +14,4 @@ macro_rules! deserialize_varint_cold_usize {
     };
 }
 
-deserialize_varint_cold_usize!()
+deserialize_varint_cold_usize!();

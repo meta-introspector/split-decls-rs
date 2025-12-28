@@ -11,4 +11,4 @@ macro_rules! encode_three_bytes {
     };
 }
 
-encode_three_bytes!()
+encode_three_bytes!();

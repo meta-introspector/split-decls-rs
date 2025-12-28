@@ -4,4 +4,4 @@ macro_rules! CompType {
     };
 }
 
-CompType!()
+CompType!();

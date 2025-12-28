@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Fingerprint!();
+        FingerprintComponent!();
+    };
+}
+
+macro_rules! impl_31 {
+    () => {
+        deps!();
+        impl Fingerprint { pub const ZERO : Fingerprint = Fingerprint (0 , 0) ; # [inline] pub fn new < A , B > (_0 : A , _1 : B) -> Fingerprint where A : FingerprintComponent , B : FingerprintComponent , { Fingerprint (_0 . as_u64 () , _1 . as_u64 ()) } # [inline] pub fn to_smaller_hash (& self) -> Hash64 { Hash64 :: new (self . 0 . wrapping_mul (3) . wrapping_add (self . 1)) } # [inline] pub fn split (& self) -> (Hash64 , Hash64) { (Hash64 :: new (self . 0) , Hash64 :: new (self . 1)) } # [inline] pub fn combine (self , other : Fingerprint) -> Fingerprint { Fingerprint (self . 0 . wrapping_mul (3) . wrapping_add (other . 0) , self . 1 . wrapping_mul (3) . wrapping_add (other . 1) ,) } # [inline] pub (crate) fn as_u128 (self) -> u128 { u128 :: from (self . 1) << 64 | u128 :: from (self . 0) } # [inline] pub fn combine_commutative (self , other : Fingerprint) -> Fingerprint { let a = u128 :: from (self . 1) << 64 | u128 :: from (self . 0) ; let b = u128 :: from (other . 1) << 64 | u128 :: from (other . 0) ; let c = a . wrapping_add (b) ; Fingerprint (c as u64 , (c >> 64) as u64) } pub fn to_hex (& self) -> String { format ! ("{:x}{:x}" , self . 0 , self . 1) } # [inline] pub fn to_le_bytes (& self) -> [u8 ; 16] { let mut result = [0u8 ; 16] ; let first_half : & mut [u8 ; 8] = (& mut result [0 .. 8]) . try_into () . unwrap () ; * first_half = self . 0 . to_le_bytes () ; let second_half : & mut [u8 ; 8] = (& mut result [8 .. 16]) . try_into () . unwrap () ; * second_half = self . 1 . to_le_bytes () ; result } # [inline] pub fn from_le_bytes (bytes : [u8 ; 16]) -> Fingerprint { Fingerprint (u64 :: from_le_bytes (bytes [0 .. 8] . try_into () . unwrap ()) , u64 :: from_le_bytes (bytes [8 .. 16] . try_into () . unwrap ()) ,) } }
+    };
+}
+
+impl_31!()

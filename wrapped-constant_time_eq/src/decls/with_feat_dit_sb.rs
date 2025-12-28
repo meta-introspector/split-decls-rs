@@ -4,4 +4,4 @@ macro_rules! with_feat_dit_sb {
     };
 }
 
-with_feat_dit_sb!()
+with_feat_dit_sb!();

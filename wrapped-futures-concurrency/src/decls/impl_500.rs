@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PollVec!();
         WakerVec!();
         Zip!();
+        PollVec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_500 {
     };
 }
 
-impl_500!()
+impl_500!();

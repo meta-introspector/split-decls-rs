@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Section!();
-        Error!();
         UnsignedInteger!();
+        Error!();
+        Section!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! workers {
     };
 }
 
-workers!()
+workers!();

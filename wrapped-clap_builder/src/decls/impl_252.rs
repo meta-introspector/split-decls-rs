@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        AnyValue!();
-        ValueParser!();
-        Result!();
-        Command!();
-        OsStringValueParser!();
-        ValueParserInner!();
-        StringValueParser!();
-        AnyValueParser!();
-        OsStr!();
         PossibleValue!();
-        Error!();
-        Arg!();
+        AnyValueParser!();
+        ValueParser!();
+        OsStringValueParser!();
         ValueSource!();
-        BoolValueParser!();
+        Result!();
+        OsStr!();
+        Command!();
+        AnyValue!();
+        Error!();
         PathBufValueParser!();
+        StringValueParser!();
         AnyValueId!();
+        ValueParserInner!();
+        Arg!();
+        BoolValueParser!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_252 {
     };
 }
 
-impl_252!()
+impl_252!();

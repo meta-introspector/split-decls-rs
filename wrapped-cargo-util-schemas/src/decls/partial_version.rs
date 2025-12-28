@@ -4,4 +4,4 @@ macro_rules! partial_version {
     };
 }
 
-partial_version!()
+partial_version!();

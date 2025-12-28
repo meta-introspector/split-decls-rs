@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CertX509!();
         CertHostkey!();
+        CertX509!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Cert {
     };
 }
 
-Cert!()
+Cert!();

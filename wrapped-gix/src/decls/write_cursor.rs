@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Cursor!();
         Id!();
         Error!();
+        Cursor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_cursor {
     };
 }
 
-write_cursor!()
+write_cursor!();

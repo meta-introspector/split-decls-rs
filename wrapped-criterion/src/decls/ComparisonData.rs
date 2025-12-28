@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ChangeEstimates!();
+        Distribution!();
         Estimates!();
         ChangeDistributions!();
-        Distribution!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ComparisonData {
     };
 }
 
-ComparisonData!()
+ComparisonData!();

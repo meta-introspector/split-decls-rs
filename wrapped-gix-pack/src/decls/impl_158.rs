@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Find!();
         Item!();
-        Entry!();
-        Header!();
         LookupRefDeltaObjectsIter!();
+        Find!();
+        Header!();
+        Error!();
+        Entry!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

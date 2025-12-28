@@ -4,4 +4,4 @@ macro_rules! join_bstr_unix_pathsep {
     };
 }
 
-join_bstr_unix_pathsep!()
+join_bstr_unix_pathsep!();

@@ -11,4 +11,4 @@ macro_rules! extract_newline {
     };
 }
 
-extract_newline!()
+extract_newline!();

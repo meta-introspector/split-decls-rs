@@ -4,4 +4,4 @@ macro_rules! SHA256_OID {
     };
 }
 
-SHA256_OID!()
+SHA256_OID!();

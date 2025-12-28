@@ -12,4 +12,4 @@ macro_rules! message_prettify {
     };
 }
 
-message_prettify!()
+message_prettify!();

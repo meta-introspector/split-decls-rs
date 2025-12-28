@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        LazyFunction!();
         Function!();
+        Error!();
+        LazyResult!();
         Context!();
         UnitRef!();
-        LazyResult!();
-        Error!();
-        Result!();
-        LazyFunction!();
         DebugFile!();
+        Result!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

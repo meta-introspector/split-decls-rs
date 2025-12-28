@@ -4,4 +4,4 @@ macro_rules! store8_aligned {
     };
 }
 
-store8_aligned!()
+store8_aligned!();

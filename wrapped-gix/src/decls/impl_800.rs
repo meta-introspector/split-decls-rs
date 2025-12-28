@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Section!();
         Key!();
+        Section!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_800 {
     };
 }
 
-impl_800!()
+impl_800!();

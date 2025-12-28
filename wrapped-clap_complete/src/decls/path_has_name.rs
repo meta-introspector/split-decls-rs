@@ -4,4 +4,4 @@ macro_rules! path_has_name {
     };
 }
 
-path_has_name!()
+path_has_name!();

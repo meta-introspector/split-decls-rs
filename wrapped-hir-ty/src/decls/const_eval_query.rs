@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ConstEvalError!();
-        TraitEnvironment!();
         HirDatabase!();
+        TraitEnvironment!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! const_eval_query {
     };
 }
 
-const_eval_query!()
+const_eval_query!();

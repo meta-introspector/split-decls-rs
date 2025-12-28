@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PendingArg!();
         ArgMatches!();
+        PendingArg!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ArgMatcher {
     };
 }
 
-ArgMatcher!()
+ArgMatcher!();

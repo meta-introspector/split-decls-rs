@@ -4,4 +4,4 @@ macro_rules! GlobWalker {
     };
 }
 
-GlobWalker!()
+GlobWalker!();

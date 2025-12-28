@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        AsTrace!();
+        AsLog!();
     };
 }
 
 macro_rules! impl_33 {
     () => {
         deps!();
-        impl AsTrace for log :: LevelFilter { type Trace = tracing_core :: LevelFilter ; # [inline] fn as_trace (& self) -> tracing_core :: LevelFilter { match self { log :: LevelFilter :: Off => tracing_core :: LevelFilter :: OFF , log :: LevelFilter :: Error => tracing_core :: LevelFilter :: ERROR , log :: LevelFilter :: Warn => tracing_core :: LevelFilter :: WARN , log :: LevelFilter :: Info => tracing_core :: LevelFilter :: INFO , log :: LevelFilter :: Debug => tracing_core :: LevelFilter :: DEBUG , log :: LevelFilter :: Trace => tracing_core :: LevelFilter :: TRACE , } } }
+        impl < 'a > AsLog for Metadata < 'a > { type Log = log :: Metadata < 'a > ; fn as_log (& self) -> Self :: Log { log :: Metadata :: builder () . level (self . level () . as_log ()) . target (self . target ()) . build () } }
     };
 }
 

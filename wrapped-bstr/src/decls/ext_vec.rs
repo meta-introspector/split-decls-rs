@@ -4,4 +4,4 @@ macro_rules! ext_vec {
     };
 }
 
-ext_vec!()
+ext_vec!();

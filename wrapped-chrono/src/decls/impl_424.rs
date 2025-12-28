@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Months!();
-        NaiveDate!();
         NaiveDateTime!();
+        NaiveDate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_424 {
     };
 }
 
-impl_424!()
+impl_424!();

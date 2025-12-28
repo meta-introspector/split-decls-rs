@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        AnyValue!();
-        Arg!();
-        ArgPredicate!();
-        ParseState!();
-        Error!();
-        ValueSource!();
-        Result!();
-        Identifier!();
-        ParseResult!();
-        CountType!();
-        Id!();
-        SubCommand!();
-        Usage!();
-        Parser!();
         Validator!();
+        Arg!();
+        ParseState!();
+        ParseResult!();
+        Error!();
+        Parser!();
         OsStr!();
+        ArgPredicate!();
+        SubCommand!();
+        AnyValue!();
+        ValueSource!();
+        Id!();
         ArgMatcher!();
+        Identifier!();
         ArgAction!();
+        Usage!();
+        Result!();
+        CountType!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_511 {
     };
 }
 
-impl_511!()
+impl_511!();

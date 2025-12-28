@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Channel!();
         TryRecvError!();
         SelectHandle!();
-        Context!();
+        Channel!();
         Operation!();
+        Context!();
         Token!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        UnitOffsets!();
+        LineProgram!();
+        DebuggingInformationEntry!();
+        RangeListTable!();
+        BaseId!();
         LocationListTable!();
         Encoding!();
-        LineProgram!();
-        UnitOffsets!();
-        RangeListTable!();
-        DebuggingInformationEntry!();
-        BaseId!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Unit {
     };
 }
 
-Unit!()
+Unit!();

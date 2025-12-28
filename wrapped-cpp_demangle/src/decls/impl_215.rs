@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        VectorType!();
+        Result!();
+        DemangleContext!();
+        ArgScopeStack!();
         DemangleAsInner!();
         DemangleWrite!();
-        DemangleContext!();
-        Result!();
-        ArgScopeStack!();
-        VectorType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_215 {
     };
 }
 
-impl_215!()
+impl_215!();

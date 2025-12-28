@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TupledDistributionsBuilder!();
         Distribution!();
+        TupledDistributionsBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_319 {
     };
 }
 
-impl_319!()
+impl_319!();

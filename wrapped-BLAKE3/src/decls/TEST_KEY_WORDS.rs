@@ -11,4 +11,4 @@ macro_rules! TEST_KEY_WORDS {
     };
 }
 
-TEST_KEY_WORDS!()
+TEST_KEY_WORDS!();

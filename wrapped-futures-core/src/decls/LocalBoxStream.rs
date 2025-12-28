@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BoxStream!();
         Stream!();
+        BoxStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LocalBoxStream {
     };
 }
 
-LocalBoxStream!()
+LocalBoxStream!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HasSource!();
         Variant!();
+        HasSource!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

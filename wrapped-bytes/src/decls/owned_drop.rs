@@ -4,4 +4,4 @@ macro_rules! owned_drop {
     };
 }
 
-owned_drop!()
+owned_drop!();

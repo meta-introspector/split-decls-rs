@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Guard!();
+        ArcSwap!();
         ArcSwapAny!();
         ArcSwapOption!();
-        ArcSwap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! t {
     };
 }
 
-t!()
+t!();

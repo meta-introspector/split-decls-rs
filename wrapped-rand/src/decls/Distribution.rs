@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Rng!();
+        Uniform!();
+        Iter!();
+        Map!();
+        StandardUniform!();
+        Alphanumeric!();
+    };
+}
+
+macro_rules! Distribution {
+    () => {
+        deps!();
+        # [doc = " Types (distributions) that can be used to create a random instance of `T`."] # [doc = ""] # [doc = " It is possible to sample from a distribution through both the"] # [doc = " `Distribution` and [`Rng`] traits, via `distr.sample(&mut rng)` and"] # [doc = " `rng.sample(distr)`. They also both offer the [`sample_iter`] method, which"] # [doc = " produces an iterator that samples from the distribution."] # [doc = ""] # [doc = " All implementations are expected to be immutable; this has the significant"] # [doc = " advantage of not needing to consider thread safety, and for most"] # [doc = " distributions efficient state-less sampling algorithms are available."] # [doc = ""] # [doc = " Implementations are typically expected to be portable with reproducible"] # [doc = " results when used with a PRNG with fixed seed; see the"] # [doc = " [portability chapter](https://rust-random.github.io/book/portability.html)"] # [doc = " of The Rust Rand Book. In some cases this does not apply, e.g. the `usize`"] # [doc = " type requires different sampling on 32-bit and 64-bit machines."] # [doc = ""] # [doc = " [`sample_iter`]: Distribution::sample_iter"] pub trait Distribution < T > { # [doc = " Generate a random value of `T`, using `rng` as the source of randomness."] fn sample < R : Rng + ? Sized > (& self , rng : & mut R) -> T ; # [doc = " Create an iterator that generates random values of `T`, using `rng` as"] # [doc = " the source of randomness."] # [doc = ""] # [doc = " Note that this function takes `self` by value. This works since"] # [doc = " `Distribution<T>` is impl'd for `&D` where `D: Distribution<T>`,"] # [doc = " however borrowing is not automatic hence `distr.sample_iter(...)` may"] # [doc = " need to be replaced with `(&distr).sample_iter(...)` to borrow or"] # [doc = " `(&*distr).sample_iter(...)` to reborrow an existing reference."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use rand::distr::{Distribution, Alphanumeric, Uniform, StandardUniform};"] # [doc = ""] # [doc = " let mut rng = rand::rng();"] # [doc = ""] # [doc = " // Vec of 16 x f32:"] # [doc = " let v: Vec<f32> = StandardUniform.sample_iter(&mut rng).take(16).collect();"] # [doc = ""] # [doc = " // String:"] # [doc = " let s: String = Alphanumeric"] # [doc = "     .sample_iter(&mut rng)"] # [doc = "     .take(7)"] # [doc = "     .map(char::from)"] # [doc = "     .collect();"] # [doc = ""] # [doc = " // Dice-rolling:"] # [doc = " let die_range = Uniform::new_inclusive(1, 6).unwrap();"] # [doc = " let mut roll_die = die_range.sample_iter(&mut rng);"] # [doc = " while roll_die.next().unwrap() != 6 {"] # [doc = "     println!(\"Not a 6; rolling again!\");"] # [doc = " }"] # [doc = " ```"] fn sample_iter < R > (self , rng : R) -> Iter < Self , R , T > where R : Rng , Self : Sized , { Iter { distr : self , rng , phantom : core :: marker :: PhantomData , } } # [doc = " Map sampled values to type `S`"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use rand::distr::{Distribution, Uniform};"] # [doc = ""] # [doc = " let die = Uniform::new_inclusive(1, 6).unwrap();"] # [doc = " let even_number = die.map(|num| num % 2 == 0);"] # [doc = " while !even_number.sample(&mut rand::rng()) {"] # [doc = "     println!(\"Still odd; rolling again!\");"] # [doc = " }"] # [doc = " ```"] fn map < F , S > (self , func : F) -> Map < Self , F , T , S > where F : Fn (T) -> S , Self : Sized , { Map { distr : self , func , phantom : core :: marker :: PhantomData , } } }
+    };
+}
+
+Distribution!()

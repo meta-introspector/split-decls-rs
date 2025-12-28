@@ -4,4 +4,4 @@ macro_rules! cache_control {
     };
 }
 
-cache_control!()
+cache_control!();

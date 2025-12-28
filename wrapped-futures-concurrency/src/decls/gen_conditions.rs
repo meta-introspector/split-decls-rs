@@ -4,4 +4,4 @@ macro_rules! gen_conditions {
     };
 }
 
-gen_conditions!()
+gen_conditions!();

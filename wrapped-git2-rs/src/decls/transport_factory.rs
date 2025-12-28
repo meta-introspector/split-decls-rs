@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Binding!();
         TransportData!();
         Remote!();
-        Binding!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! transport_factory {
     };
 }
 
-transport_factory!()
+transport_factory!();

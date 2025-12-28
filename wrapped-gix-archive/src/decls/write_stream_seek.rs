@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Options!();
-        Error!();
         Format!();
+        Error!();
+        Options!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_stream_seek {
     };
 }
 
-write_stream_seek!()
+write_stream_seek!();

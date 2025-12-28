@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        MetaTypeName!();
-        Scalar!();
-        QueryPathSegment!();
-        Object!();
-        MetaType!();
-        QueryPathNode!();
         Registry!();
+        QueryPathSegment!();
+        Scalar!();
+        QueryPathNode!();
+        MetaTypeName!();
+        MetaType!();
         InputObject!();
+        Object!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! is_valid_input_value {
     };
 }
 
-is_valid_input_value!()
+is_valid_input_value!();

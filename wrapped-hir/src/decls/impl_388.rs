@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        CaptureUsages!();
         CaptureUsageSource!();
         SelfParam!();
-        CaptureUsages!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_388 {
     };
 }
 
-impl_388!()
+impl_388!();

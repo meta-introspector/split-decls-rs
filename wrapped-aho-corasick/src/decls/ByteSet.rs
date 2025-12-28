@@ -11,4 +11,4 @@ macro_rules! ByteSet {
     };
 }
 
-ByteSet!()
+ByteSet!();

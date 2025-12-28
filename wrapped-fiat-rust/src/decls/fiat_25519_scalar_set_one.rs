@@ -11,4 +11,4 @@ macro_rules! fiat_25519_scalar_set_one {
     };
 }
 
-fiat_25519_scalar_set_one!()
+fiat_25519_scalar_set_one!();

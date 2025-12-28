@@ -4,4 +4,4 @@ macro_rules! ReadToString {
     };
 }
 
-ReadToString!()
+ReadToString!();

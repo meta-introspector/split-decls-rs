@@ -4,4 +4,4 @@ macro_rules! arg_settings {
     };
 }
 
-arg_settings!()
+arg_settings!();

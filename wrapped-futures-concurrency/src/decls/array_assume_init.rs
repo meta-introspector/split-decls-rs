@@ -4,4 +4,4 @@ macro_rules! array_assume_init {
     };
 }
 
-array_assume_init!()
+array_assume_init!();

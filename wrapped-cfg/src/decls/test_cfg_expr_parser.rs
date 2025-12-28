@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CfgExpr!();
         CfgAtom!();
+        CfgExpr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_cfg_expr_parser {
     };
 }
 
-test_cfg_expr_parser!()
+test_cfg_expr_parser!();

@@ -12,4 +12,4 @@ macro_rules! gen_for_enum {
     };
 }
 
-gen_for_enum!()
+gen_for_enum!();

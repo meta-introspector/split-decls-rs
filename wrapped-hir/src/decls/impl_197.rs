@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Struct!();
         Field!();
         StructKind!();
+        Struct!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

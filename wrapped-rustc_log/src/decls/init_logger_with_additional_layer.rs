@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BacktraceFormatter!();
-        LoggerConfig!();
-        Error!();
         BuildSubscriberRet!();
+        LoggerConfig!();
+        BacktraceFormatter!();
+        Error!();
     };
 }
 

@@ -11,4 +11,4 @@ macro_rules! provide_ref_backtrace {
     };
 }
 
-provide_ref_backtrace!()
+provide_ref_backtrace!();

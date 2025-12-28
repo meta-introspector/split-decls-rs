@@ -4,4 +4,4 @@ macro_rules! Mutation {
     };
 }
 
-Mutation!()
+Mutation!();

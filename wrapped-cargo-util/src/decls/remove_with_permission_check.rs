@@ -4,4 +4,4 @@ macro_rules! remove_with_permission_check {
     };
 }
 
-remove_with_permission_check!()
+remove_with_permission_check!();

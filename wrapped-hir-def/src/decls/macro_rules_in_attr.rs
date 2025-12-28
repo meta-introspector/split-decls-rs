@@ -30,4 +30,4 @@ macro_rules! id {
     };
 }
 
-macro_rules_in_attr!()
+macro_rules_in_attr!();

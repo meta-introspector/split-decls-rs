@@ -12,4 +12,4 @@ macro_rules! test_deref_mut {
     };
 }
 
-test_deref_mut!()
+test_deref_mut!();

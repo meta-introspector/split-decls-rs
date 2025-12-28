@@ -11,4 +11,4 @@ macro_rules! random_negation_tests {
     };
 }
 
-random_negation_tests!()
+random_negation_tests!();

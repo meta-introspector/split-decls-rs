@@ -11,4 +11,4 @@ macro_rules! convert_to_mergeable {
     };
 }
 
-convert_to_mergeable!()
+convert_to_mergeable!();

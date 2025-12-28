@@ -13,4 +13,4 @@ macro_rules! Decode {
     };
 }
 
-Decode!()
+Decode!();

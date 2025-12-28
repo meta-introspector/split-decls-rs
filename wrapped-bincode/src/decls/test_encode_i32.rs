@@ -12,4 +12,4 @@ macro_rules! test_encode_i32 {
     };
 }
 
-test_encode_i32!()
+test_encode_i32!();

@@ -4,4 +4,4 @@ macro_rules! CopyOptions {
     };
 }
 
-CopyOptions!()
+CopyOptions!();

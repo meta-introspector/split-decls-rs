@@ -4,4 +4,4 @@ macro_rules! line_ending {
     };
 }
 
-line_ending!()
+line_ending!();

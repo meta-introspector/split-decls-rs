@@ -11,4 +11,4 @@ macro_rules! referenced_variables_to_vec {
     };
 }
 
-referenced_variables_to_vec!()
+referenced_variables_to_vec!();

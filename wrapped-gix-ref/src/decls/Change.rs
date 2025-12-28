@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LogChange!();
-        RefLog!();
-        PreviousValue!();
         Target!();
+        PreviousValue!();
+        RefLog!();
+        LogChange!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Change {
     };
 }
 
-Change!()
+Change!();

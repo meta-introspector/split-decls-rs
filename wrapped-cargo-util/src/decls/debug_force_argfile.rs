@@ -4,4 +4,4 @@ macro_rules! debug_force_argfile {
     };
 }
 
-debug_force_argfile!()
+debug_force_argfile!();

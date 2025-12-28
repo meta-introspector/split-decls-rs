@@ -4,4 +4,4 @@ macro_rules! MapErrFn {
     };
 }
 
-MapErrFn!()
+MapErrFn!();

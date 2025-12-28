@@ -4,4 +4,4 @@ macro_rules! local_size {
     };
 }
 
-local_size!()
+local_size!();

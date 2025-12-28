@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RustVersion!();
         RegistryDependency!();
+        RustVersion!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IndexPackage {
     };
 }
 
-IndexPackage!()
+IndexPackage!();

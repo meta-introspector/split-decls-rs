@@ -4,4 +4,4 @@ macro_rules! measurement {
     };
 }
 
-measurement!()
+measurement!();

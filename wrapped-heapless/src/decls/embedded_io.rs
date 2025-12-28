@@ -4,4 +4,4 @@ macro_rules! embedded_io {
     };
 }
 
-embedded_io!()
+embedded_io!();

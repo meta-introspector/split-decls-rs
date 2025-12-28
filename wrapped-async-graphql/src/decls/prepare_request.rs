@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        ValidationMode!();
+        ServerError!();
+        Extensions!();
+        CacheControl!();
         QueryEnvInner!();
         Data!();
-        Request!();
-        Result!();
-        QueryEnv!();
-        ValidationMode!();
-        Extensions!();
         Registry!();
-        CacheControl!();
-        ServerError!();
+        QueryEnv!();
+        Result!();
+        Request!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! prepare_request {
     };
 }
 
-prepare_request!()
+prepare_request!();

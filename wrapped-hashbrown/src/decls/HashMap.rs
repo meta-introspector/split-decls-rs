@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DefaultHashBuilder!();
-        RawTable!();
         Entry!();
+        RawTable!();
+        DefaultHashBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! HashMap {
     };
 }
 
-HashMap!()
+HashMap!();

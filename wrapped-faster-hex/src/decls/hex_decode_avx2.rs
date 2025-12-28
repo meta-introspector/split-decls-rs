@@ -4,4 +4,4 @@ macro_rules! hex_decode_avx2 {
     };
 }
 
-hex_decode_avx2!()
+hex_decode_avx2!();

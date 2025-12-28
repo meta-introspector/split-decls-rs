@@ -4,4 +4,4 @@ macro_rules! predicate {
     };
 }
 
-predicate!()
+predicate!();

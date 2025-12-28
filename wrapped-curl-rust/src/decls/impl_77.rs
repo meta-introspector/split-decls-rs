@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        HttpVersion!();
-        Easy2!();
-        TimeCondition!();
         Form!();
-        Auth!();
-        SslOpt!();
-        SslVersion!();
-        Error!();
-        List!();
-        NetRc!();
-        Transfer!();
+        HttpVersion!();
         IpResolve!();
+        Transfer!();
+        NetRc!();
+        List!();
         ProxyType!();
+        Auth!();
+        TimeCondition!();
+        Error!();
+        Easy2!();
+        SslVersion!();
+        SslOpt!();
         PostRedirections!();
     };
 }
@@ -24,4 +24,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

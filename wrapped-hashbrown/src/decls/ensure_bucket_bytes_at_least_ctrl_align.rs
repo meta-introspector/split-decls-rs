@@ -11,4 +11,4 @@ macro_rules! ensure_bucket_bytes_at_least_ctrl_align {
     };
 }
 
-ensure_bucket_bytes_at_least_ctrl_align!()
+ensure_bucket_bytes_at_least_ctrl_align!();

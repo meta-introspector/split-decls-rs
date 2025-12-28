@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
+        Impl!();
+        TypeOrConstParam!();
         Adt!();
         GenericParam!();
-        Trait!();
-        LifetimeParam!();
-        Function!();
-        Impl!();
         Struct!();
-        Union!();
-        TypeOrConstParam!();
-        TypeParam!();
-        TypeAlias!();
-        Const!();
         GenericDef!();
         ConstParam!();
+        Const!();
+        LifetimeParam!();
+        TypeParam!();
         Enum!();
         Static!();
+        Function!();
+        TypeAlias!();
+        Union!();
+        Trait!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_345 {
     };
 }
 
-impl_345!()
+impl_345!();

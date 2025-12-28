@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BytesToEntriesIter!();
-        EntryDataMode!();
         Mode!();
+        EntryDataMode!();
         File!();
         Error!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_150 {
     };
 }
 
-impl_150!()
+impl_150!();

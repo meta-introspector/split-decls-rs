@@ -4,4 +4,4 @@ macro_rules! build_table {
     };
 }
 
-build_table!()
+build_table!();

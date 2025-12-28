@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Location!();
         LocationRangeIter!();
+        Location!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_90 {
     };
 }
 
-impl_90!()
+impl_90!();

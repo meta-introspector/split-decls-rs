@@ -1,6 +1,18 @@
 macro_rules! deps {
     () => {
+        Warnings!();
         ArgKind!();
+        Config!();
+        TypeTree!();
+        Reader!();
+        File!();
+        ReferenceStage!();
+        TypeMap!();
+        Filter!();
+        Derive!();
+        Reference!();
+        WarningBuilder!();
+        References!();
     };
 }
 

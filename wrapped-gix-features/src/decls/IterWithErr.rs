@@ -4,4 +4,4 @@ macro_rules! IterWithErr {
     };
 }
 
-IterWithErr!()
+IterWithErr!();

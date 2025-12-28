@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Error!();
+        Deserializer!();
+        Out!();
         DeserializeSeed!();
         Result!();
-        Out!();
-        Deserializer!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

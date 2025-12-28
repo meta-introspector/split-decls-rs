@@ -4,4 +4,4 @@ macro_rules! PushTransferProgress {
     };
 }
 
-PushTransferProgress!()
+PushTransferProgress!();

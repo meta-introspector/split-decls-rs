@@ -12,4 +12,4 @@ macro_rules! SHIFT_JIS_INIT {
     };
 }
 
-SHIFT_JIS_INIT!()
+SHIFT_JIS_INIT!();

@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Value!();
+        Unexpected!();
+        DeserializerError!();
     };
 }
 
 macro_rules! impl_4 {
     () => {
         deps!();
-        impl PartialEq for Value { fn eq (& self , rhs : & Self) -> bool { match (self , rhs) { (& Value :: Bool (v0) , & Value :: Bool (v1)) if v0 == v1 => true , (& Value :: U8 (v0) , & Value :: U8 (v1)) if v0 == v1 => true , (& Value :: U16 (v0) , & Value :: U16 (v1)) if v0 == v1 => true , (& Value :: U32 (v0) , & Value :: U32 (v1)) if v0 == v1 => true , (& Value :: U64 (v0) , & Value :: U64 (v1)) if v0 == v1 => true , (& Value :: I8 (v0) , & Value :: I8 (v1)) if v0 == v1 => true , (& Value :: I16 (v0) , & Value :: I16 (v1)) if v0 == v1 => true , (& Value :: I32 (v0) , & Value :: I32 (v1)) if v0 == v1 => true , (& Value :: I64 (v0) , & Value :: I64 (v1)) if v0 == v1 => true , (& Value :: F32 (v0) , & Value :: F32 (v1)) if OrderedFloat (v0) == OrderedFloat (v1) => true , (& Value :: F64 (v0) , & Value :: F64 (v1)) if OrderedFloat (v0) == OrderedFloat (v1) => true , (& Value :: Char (v0) , & Value :: Char (v1)) if v0 == v1 => true , (& Value :: String (ref v0) , & Value :: String (ref v1)) if v0 == v1 => true , (& Value :: Unit , & Value :: Unit) => true , (& Value :: Option (ref v0) , & Value :: Option (ref v1)) if v0 == v1 => true , (& Value :: Newtype (ref v0) , & Value :: Newtype (ref v1)) if v0 == v1 => true , (& Value :: Seq (ref v0) , & Value :: Seq (ref v1)) if v0 == v1 => true , (& Value :: Map (ref v0) , & Value :: Map (ref v1)) if v0 == v1 => true , (& Value :: Bytes (ref v0) , & Value :: Bytes (ref v1)) if v0 == v1 => true , _ => false , } } }
+        impl de :: Error for DeserializerError { fn custom < T : fmt :: Display > (msg : T) -> Self { DeserializerError :: Custom (msg . to_string ()) } fn invalid_type (unexp : de :: Unexpected , exp : & dyn de :: Expected) -> Self { DeserializerError :: InvalidType (unexp . into () , exp . to_string ()) } fn invalid_value (unexp : de :: Unexpected , exp : & dyn de :: Expected) -> Self { DeserializerError :: InvalidValue (unexp . into () , exp . to_string ()) } fn invalid_length (len : usize , exp : & dyn de :: Expected) -> Self { DeserializerError :: InvalidLength (len , exp . to_string ()) } fn unknown_variant (field : & str , expected : & 'static [& 'static str]) -> Self { DeserializerError :: UnknownVariant (field . into () , expected) } fn unknown_field (field : & str , expected : & 'static [& 'static str]) -> Self { DeserializerError :: UnknownField (field . into () , expected) } fn missing_field (field : & 'static str) -> Self { DeserializerError :: MissingField (field) } fn duplicate_field (field : & 'static str) -> Self { DeserializerError :: DuplicateField (field) } }
     };
 }
 

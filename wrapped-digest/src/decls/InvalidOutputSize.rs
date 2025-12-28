@@ -4,4 +4,4 @@ macro_rules! InvalidOutputSize {
     };
 }
 
-InvalidOutputSize!()
+InvalidOutputSize!();

@@ -13,4 +13,4 @@ struct S;
     };
 }
 
-attribute_macro_attr_censoring!()
+attribute_macro_attr_censoring!();

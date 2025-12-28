@@ -4,4 +4,4 @@ macro_rules! FromFn {
     };
 }
 
-FromFn!()
+FromFn!();

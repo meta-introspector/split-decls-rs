@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Conflict!();
         Options!();
+        Conflict!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! with_extra_markers {
     };
 }
 
-with_extra_markers!()
+with_extra_markers!();

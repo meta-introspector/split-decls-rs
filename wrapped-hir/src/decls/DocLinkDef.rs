@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Trait!();
         ModuleDef!();
         Field!();
-        Trait!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DocLinkDef {
     };
 }
 
-DocLinkDef!()
+DocLinkDef!();

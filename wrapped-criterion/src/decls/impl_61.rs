@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Result!();
-        Error!();
-        MessageError!();
         OutgoingMessage!();
+        Error!();
         IncomingMessage!();
+        MessageError!();
         InnerConnection!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

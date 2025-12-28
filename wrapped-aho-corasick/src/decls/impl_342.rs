@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BuildError!();
-        SmallIndex!();
         ErrorKind!();
+        SmallIndex!();
+        BuildError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_342 {
     };
 }
 
-impl_342!()
+impl_342!();

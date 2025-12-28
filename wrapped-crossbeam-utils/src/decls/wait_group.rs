@@ -4,4 +4,4 @@ macro_rules! wait_group {
     };
 }
 
-wait_group!()
+wait_group!();

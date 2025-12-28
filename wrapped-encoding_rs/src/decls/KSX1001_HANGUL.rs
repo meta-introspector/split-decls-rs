@@ -4,4 +4,4 @@ macro_rules! KSX1001_HANGUL {
     };
 }
 
-KSX1001_HANGUL!()
+KSX1001_HANGUL!();

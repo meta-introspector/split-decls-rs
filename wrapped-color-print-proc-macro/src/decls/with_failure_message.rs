@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Parser!();
         Input!();
-        Error!();
         ErrorDetail!();
+        Parser!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! with_failure_message {
     };
 }
 
-with_failure_message!()
+with_failure_message!();

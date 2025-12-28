@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AppSettings!();
         Command!();
+        AppSettings!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! assert_app_flags {
     };
 }
 
-assert_app_flags!()
+assert_app_flags!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        GenericPredicates!();
-        Binder!();
-        HirDatabase!();
         EarlyBinder!();
-        FnSig!();
+        Binder!();
+        GenericPredicates!();
+        HirDatabase!();
         TypingMode!();
+        FnSig!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! receiver_is_dispatchable {
     };
 }
 
-receiver_is_dispatchable!()
+receiver_is_dispatchable!();

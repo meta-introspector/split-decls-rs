@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Table!();
+        MapEnumDeserializer!();
+        Value!();
+        Array!();
+        Deserializer!();
+        Error!();
+    };
+}
+
+macro_rules! impl_97 {
+    () => {
+        deps!();
+        impl < 'de > de :: VariantAccess < 'de > for MapEnumDeserializer { type Error = crate :: de :: Error ; fn unit_variant (self) -> Result < () , Self :: Error > { use de :: Error ; match self . value { Value :: Array (values) => { if values . is_empty () { Ok (()) } else { Err (Error :: custom ("expected empty array")) } } Value :: Table (values) => { if values . is_empty () { Ok (()) } else { Err (Error :: custom ("expected empty table")) } } e => Err (Error :: custom (format ! ("expected table, found {}" , e . type_str ()))) , } } fn newtype_variant_seed < T > (self , seed : T) -> Result < T :: Value , Self :: Error > where T : de :: DeserializeSeed < 'de > , { seed . deserialize (self . value . into_deserializer ()) } fn tuple_variant < V > (self , len : usize , visitor : V) -> Result < V :: Value , Self :: Error > where V : de :: Visitor < 'de > , { use de :: Error ; match self . value { Value :: Array (values) => { if values . len () == len { de :: Deserializer :: deserialize_seq (values . into_deserializer () , visitor) } else { Err (Error :: custom (format ! ("expected tuple with length {len}"))) } } Value :: Table (values) => { let tuple_values : Result < Vec < _ > , _ > = values . into_iter () . enumerate () . map (| (index , (key , value)) | match key . parse :: < usize > () { Ok (key_index) if key_index == index => Ok (value) , Ok (_) | Err (_) => Err (Error :: custom (format ! ("expected table key `{index}`, but was `{key}`"))) , }) . collect () ; let tuple_values = tuple_values ? ; if tuple_values . len () == len { de :: Deserializer :: deserialize_seq (tuple_values . into_deserializer () , visitor) } else { Err (Error :: custom (format ! ("expected tuple with length {len}"))) } } e => Err (Error :: custom (format ! ("expected table, found {}" , e . type_str ()))) , } } fn struct_variant < V > (self , fields : & 'static [& 'static str] , visitor : V ,) -> Result < V :: Value , Self :: Error > where V : de :: Visitor < 'de > , { de :: Deserializer :: deserialize_struct (self . value . into_deserializer () , "" , fields , visitor ,) } }
+    };
+}
+
+impl_97!()

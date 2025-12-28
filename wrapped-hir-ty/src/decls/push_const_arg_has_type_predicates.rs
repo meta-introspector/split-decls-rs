@@ -12,4 +12,4 @@ macro_rules! push_const_arg_has_type_predicates {
     };
 }
 
-push_const_arg_has_type_predicates!()
+push_const_arg_has_type_predicates!();

@@ -11,4 +11,4 @@ macro_rules! URL_SAFE_ENGINE {
     };
 }
 
-URL_SAFE_ENGINE!()
+URL_SAFE_ENGINE!();

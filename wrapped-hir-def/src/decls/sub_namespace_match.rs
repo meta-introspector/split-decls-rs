@@ -11,4 +11,4 @@ macro_rules! sub_namespace_match {
     };
 }
 
-sub_namespace_match!()
+sub_namespace_match!();

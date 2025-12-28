@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FieldBounds!();
         ImplBlockBuilder!();
         Trait!();
+        FieldBounds!();
     };
 }
 

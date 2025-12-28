@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DigestClient!();
         Algorithm!();
         Qop!();
-        QopSet!();
+        DigestClient!();
         PasswordParams!();
+        QopSet!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

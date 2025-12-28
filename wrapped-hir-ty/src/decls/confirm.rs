@@ -4,4 +4,4 @@ macro_rules! confirm {
     };
 }
 
-confirm!()
+confirm!();

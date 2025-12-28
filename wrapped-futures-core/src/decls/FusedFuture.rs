@@ -4,4 +4,4 @@ macro_rules! FusedFuture {
     };
 }
 
-FusedFuture!()
+FusedFuture!();

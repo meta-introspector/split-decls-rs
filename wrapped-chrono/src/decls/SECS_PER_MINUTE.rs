@@ -4,4 +4,4 @@ macro_rules! SECS_PER_MINUTE {
     };
 }
 
-SECS_PER_MINUTE!()
+SECS_PER_MINUTE!();

@@ -4,4 +4,4 @@ macro_rules! TYPE_HINT_TRUNCATION {
     };
 }
 
-TYPE_HINT_TRUNCATION!()
+TYPE_HINT_TRUNCATION!();

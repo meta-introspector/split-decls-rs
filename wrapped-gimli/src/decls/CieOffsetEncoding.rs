@@ -4,4 +4,4 @@ macro_rules! CieOffsetEncoding {
     };
 }
 
-CieOffsetEncoding!()
+CieOffsetEncoding!();

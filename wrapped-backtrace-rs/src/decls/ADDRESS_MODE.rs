@@ -4,4 +4,4 @@ macro_rules! ADDRESS_MODE {
     };
 }
 
-ADDRESS_MODE!()
+ADDRESS_MODE!();

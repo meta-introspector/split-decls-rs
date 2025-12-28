@@ -4,4 +4,4 @@ macro_rules! AList {
     };
 }
 
-AList!()
+AList!();

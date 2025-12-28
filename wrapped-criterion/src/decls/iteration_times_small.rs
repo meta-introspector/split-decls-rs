@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         MeasurementData!();
         BenchmarkId!();
-        ReportContext!();
         ValueFormatter!();
+        ReportContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! iteration_times_small {
     };
 }
 
-iteration_times_small!()
+iteration_times_small!();

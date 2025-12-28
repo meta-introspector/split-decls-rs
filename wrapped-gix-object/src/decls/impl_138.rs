@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         EntryMode!();
-        Tree!();
-        EntryKind!();
         Commit!();
+        Tree!();
         Blob!();
+        EntryKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

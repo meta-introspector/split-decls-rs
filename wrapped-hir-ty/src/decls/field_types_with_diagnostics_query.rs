@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TyLoweringContext!();
-        EarlyBinder!();
-        LifetimeElisionKind!();
         HirDatabase!();
+        LifetimeElisionKind!();
+        TyLoweringContext!();
         Diagnostics!();
+        EarlyBinder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! field_types_with_diagnostics_query {
     };
 }
 
-field_types_with_diagnostics_query!()
+field_types_with_diagnostics_query!();

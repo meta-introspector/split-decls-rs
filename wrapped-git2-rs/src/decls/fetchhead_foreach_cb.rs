@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Binding!();
         FetchheadForeachCbData!();
+        Binding!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fetchhead_foreach_cb {
     };
 }
 
-fetchhead_foreach_cb!()
+fetchhead_foreach_cb!();

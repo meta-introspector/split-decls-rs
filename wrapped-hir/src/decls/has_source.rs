@@ -4,4 +4,4 @@ macro_rules! has_source {
     };
 }
 
-has_source!()
+has_source!();

@@ -4,4 +4,4 @@ macro_rules! deserializer {
     };
 }
 
-deserializer!()
+deserializer!();

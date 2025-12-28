@@ -11,4 +11,4 @@ macro_rules! document_select_macro {
     };
 }
 
-document_select_macro!()
+document_select_macro!();

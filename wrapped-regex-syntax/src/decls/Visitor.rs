@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Result!();
+        Hir!();
+    };
+}
+
+macro_rules! Visitor {
+    () => {
+        deps!();
+        # [doc = " A trait for visiting the high-level IR (HIR) in depth first order."] # [doc = ""] # [doc = " The principle aim of this trait is to enable callers to perform case"] # [doc = " analysis on a high-level intermediate representation of a regular"] # [doc = " expression without necessarily using recursion. In particular, this permits"] # [doc = " callers to do case analysis with constant stack usage, which can be"] # [doc = " important since the size of an HIR may be proportional to end user input."] # [doc = ""] # [doc = " Typical usage of this trait involves providing an implementation and then"] # [doc = " running it using the [`visit`] function."] pub trait Visitor { # [doc = " The result of visiting an HIR."] type Output ; # [doc = " An error that visiting an HIR might return."] type Err ; # [doc = " All implementors of `Visitor` must provide a `finish` method, which"] # [doc = " yields the result of visiting the HIR or an error."] fn finish (self) -> Result < Self :: Output , Self :: Err > ; # [doc = " This method is called before beginning traversal of the HIR."] fn start (& mut self) { } # [doc = " This method is called on an `Hir` before descending into child `Hir`"] # [doc = " nodes."] fn visit_pre (& mut self , _hir : & Hir) -> Result < () , Self :: Err > { Ok (()) } # [doc = " This method is called on an `Hir` after descending all of its child"] # [doc = " `Hir` nodes."] fn visit_post (& mut self , _hir : & Hir) -> Result < () , Self :: Err > { Ok (()) } # [doc = " This method is called between child nodes of an alternation."] fn visit_alternation_in (& mut self) -> Result < () , Self :: Err > { Ok (()) } # [doc = " This method is called between child nodes of a concatenation."] fn visit_concat_in (& mut self) -> Result < () , Self :: Err > { Ok (()) } }
+    };
+}
+
+Visitor!()

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ProgramKind!();
         Error!();
+        ProgramKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! determine_client_kind {
     };
 }
 
-determine_client_kind!()
+determine_client_kind!();

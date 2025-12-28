@@ -4,4 +4,4 @@ macro_rules! ptr_map {
     };
 }
 
-ptr_map!()
+ptr_map!();

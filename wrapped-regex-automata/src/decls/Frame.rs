@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Transition!();
+        NFA!();
+        StateChunksIter!();
+        StateID!();
+    };
+}
+
+macro_rules! Frame {
+    () => {
+        deps!();
+        # [doc = " An explicit stack frame used for traversing the trie without using"] # [doc = " recursion."] # [doc = ""] # [doc = " Each frame is tied to the traversal of a single trie state. The frame is"] # [doc = " dropped once the entire state (and all of its children) have been visited."] # [doc = " The \"output\" of compiling a state is the 'union' vector, which is turn"] # [doc = " converted to a NFA union state. Each branch of the union corresponds to a"] # [doc = " chunk in the trie state."] # [doc = ""] # [doc = " 'sparse' corresponds to the set of transitions for a particular chunk in a"] # [doc = " trie state. It is ultimately converted to an NFA sparse state. The 'sparse'"] # [doc = " field, after being converted to a sparse NFA state, is reused for any"] # [doc = " subsequent chunks in the trie state, if any exist."] # [derive (Debug)] struct Frame < 'a > { # [doc = " The remaining chunks to visit for a trie state."] chunks : StateChunksIter < 'a > , # [doc = " The transitions of the current chunk that we're iterating over. Since"] # [doc = " every trie state has at least one chunk, every frame is initialized"] # [doc = " with the first chunk's transitions ready to be consumed."] transitions : core :: slice :: Iter < 'a , Transition > , # [doc = " The NFA state IDs pointing to the start of each chunk compiled by"] # [doc = " this trie state. This ultimately gets converted to an NFA union once"] # [doc = " the entire trie state (and all of its children) have been compiled."] # [doc = " The order of these matters for leftmost-first match semantics, since"] # [doc = " earlier matches in the union are preferred over later ones."] union : Vec < StateID > , # [doc = " The actual NFA transitions for a single chunk in a trie state. This"] # [doc = " gets converted to an NFA sparse state, and its corresponding NFA state"] # [doc = " ID should get added to 'union'."] sparse : Vec < thompson :: Transition > , }
+    };
+}
+
+Frame!()

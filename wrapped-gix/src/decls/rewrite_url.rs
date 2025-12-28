@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
+        Push!();
         Cache!();
         Direction!();
         Url!();
+        Error!();
         Fetch!();
-        Push!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! rewrite_url {
     };
 }
 
-rewrite_url!()
+rewrite_url!();

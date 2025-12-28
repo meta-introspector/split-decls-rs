@@ -4,4 +4,4 @@ macro_rules! impl_set_provides {
     };
 }
 
-impl_set_provides!()
+impl_set_provides!();

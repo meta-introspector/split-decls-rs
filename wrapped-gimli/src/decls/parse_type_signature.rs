@@ -13,4 +13,4 @@ macro_rules! parse_type_signature {
     };
 }
 
-parse_type_signature!()
+parse_type_signature!();

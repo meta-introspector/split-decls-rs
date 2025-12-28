@@ -11,4 +11,4 @@ macro_rules! is_dyn_method {
     };
 }
 
-is_dyn_method!()
+is_dyn_method!();

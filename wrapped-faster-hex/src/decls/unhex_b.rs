@@ -4,4 +4,4 @@ macro_rules! unhex_b {
     };
 }
 
-unhex_b!()
+unhex_b!();

@@ -4,4 +4,4 @@ macro_rules! value_expect_expr_comma {
     };
 }
 
-value_expect_expr_comma!()
+value_expect_expr_comma!();

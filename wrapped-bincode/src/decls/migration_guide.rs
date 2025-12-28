@@ -4,4 +4,4 @@ macro_rules! migration_guide {
     };
 }
 
-migration_guide!()
+migration_guide!();

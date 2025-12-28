@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NonZero!();
         Integer!();
+        NonZero!();
         Unsigned!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Signed {
     };
 }
 
-Signed!()
+Signed!();

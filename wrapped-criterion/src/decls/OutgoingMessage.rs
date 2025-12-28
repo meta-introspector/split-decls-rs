@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PlotConfiguration!();
-        RawBenchmarkId!();
         BenchmarkConfig!();
+        RawBenchmarkId!();
+        PlotConfiguration!();
         SamplingMethod!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! OutgoingMessage {
     };
 }
 
-OutgoingMessage!()
+OutgoingMessage!();

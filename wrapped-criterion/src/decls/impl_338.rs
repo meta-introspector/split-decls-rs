@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Error!();
         Resamples!();
         Sample!();
-        Percentiles!();
-        Float!();
-        Result!();
         Tuple!();
+        Error!();
+        Float!();
+        Percentiles!();
         Distributions!();
+        Result!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_338 {
     };
 }
 
-impl_338!()
+impl_338!();

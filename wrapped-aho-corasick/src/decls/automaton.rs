@@ -4,4 +4,4 @@ macro_rules! automaton {
     };
 }
 
-automaton!()
+automaton!();

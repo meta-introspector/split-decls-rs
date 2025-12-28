@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Any!();
         Result!();
         ContextBase!();
         DataContext!();
-        Any!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_350 {
     };
 }
 
-impl_350!()
+impl_350!();

@@ -4,4 +4,4 @@ macro_rules! ENV_VARS_TO_REMOVE {
     };
 }
 
-ENV_VARS_TO_REMOVE!()
+ENV_VARS_TO_REMOVE!();

@@ -4,4 +4,4 @@ macro_rules! cfg_alloc {
     };
 }
 
-cfg_alloc!()
+cfg_alloc!();

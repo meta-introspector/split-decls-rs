@@ -4,4 +4,4 @@ macro_rules! location_traits {
     };
 }
 
-location_traits!()
+location_traits!();

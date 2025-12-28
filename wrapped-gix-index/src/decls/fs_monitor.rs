@@ -4,4 +4,4 @@ macro_rules! fs_monitor {
     };
 }
 
-fs_monitor!()
+fs_monitor!();

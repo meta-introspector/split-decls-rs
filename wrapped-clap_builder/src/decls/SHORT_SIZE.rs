@@ -4,4 +4,4 @@ macro_rules! SHORT_SIZE {
     };
 }
 
-SHORT_SIZE!()
+SHORT_SIZE!();

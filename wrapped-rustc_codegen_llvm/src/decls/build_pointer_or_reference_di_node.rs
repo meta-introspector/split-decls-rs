@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        CodegenCx!();
+        DIB!();
+        WidePtrKind!();
+    };
+}
+
+macro_rules! build_pointer_or_reference_di_node {
+    () => {
+        deps!();
+        # [doc = " Creates debuginfo for built-in pointer-like things:"] # [doc = ""] # [doc = "  - ty::Ref"] # [doc = "  - ty::RawPtr"] # [doc = "  - ty::Adt in the case it's Box"] # [doc = ""] # [doc = " At some point we might want to remove the special handling of Box"] # [doc = " and treat it the same as other smart pointers (like Rc, Arc, ...)."] fn build_pointer_or_reference_di_node < 'll , 'tcx > (cx : & CodegenCx < 'll , 'tcx > , ptr_type : Ty < 'tcx > , pointee_type : Ty < 'tcx > , unique_type_id : UniqueTypeId < 'tcx > ,) -> DINodeCreationResult < 'll > { assert_eq ! (cx . size_and_align_of (ptr_type) , cx . size_and_align_of (Ty :: new_mut_ptr (cx . tcx , pointee_type))) ; let pointee_type_di_node = type_di_node (cx , pointee_type) ; return_if_di_node_created_in_meantime ! (cx , unique_type_id) ; let data_layout = & cx . tcx . data_layout ; let pointer_size = data_layout . pointer_size () ; let pointer_align = data_layout . pointer_align () ; let ptr_type_debuginfo_name = compute_debuginfo_type_name (cx . tcx , ptr_type , true) ; match wide_pointer_kind (cx , pointee_type) { None => { assert_eq ! ((pointer_size , pointer_align . abi) , cx . size_and_align_of (ptr_type) , "ptr_type={ptr_type}, pointee_type={pointee_type}" ,) ; let di_node = unsafe { llvm :: LLVMRustDIBuilderCreatePointerType (DIB (cx) , pointee_type_di_node , pointer_size . bits () , pointer_align . abi . bits () as u32 , 0 , ptr_type_debuginfo_name . as_c_char_ptr () , ptr_type_debuginfo_name . len () ,) } ; DINodeCreationResult { di_node , already_stored_in_typemap : false } } Some (wide_pointer_kind) => { type_map :: build_type_with_children (cx , type_map :: stub (cx , Stub :: Struct , unique_type_id , & ptr_type_debuginfo_name , None , cx . size_and_align_of (ptr_type) , NO_SCOPE_METADATA , DIFlags :: FlagZero ,) , | cx , owner | { let layout_type = if ptr_type . is_box () { Ty :: new_mut_ptr (cx . tcx , pointee_type) } else { ptr_type } ; let layout = cx . layout_of (layout_type) ; let addr_field = layout . field (cx , WIDE_PTR_ADDR) ; let extra_field = layout . field (cx , WIDE_PTR_EXTRA) ; let (addr_field_name , extra_field_name) = match wide_pointer_kind { WidePtrKind :: Dyn => ("pointer" , "vtable") , WidePtrKind :: Slice => ("data_ptr" , "length") , } ; assert_eq ! (WIDE_PTR_ADDR , 0) ; assert_eq ! (WIDE_PTR_EXTRA , 1) ; let data_ptr_type_di_node = unsafe { llvm :: LLVMRustDIBuilderCreatePointerType (DIB (cx) , pointee_type_di_node , addr_field . size . bits () , addr_field . align . abi . bits () as u32 , 0 , std :: ptr :: null () , 0 ,) } ; smallvec ! [build_field_di_node (cx , owner , addr_field_name , addr_field , layout . fields . offset (WIDE_PTR_ADDR) , DIFlags :: FlagZero , data_ptr_type_di_node , None ,) , build_field_di_node (cx , owner , extra_field_name , extra_field , layout . fields . offset (WIDE_PTR_EXTRA) , DIFlags :: FlagZero , type_di_node (cx , extra_field . ty) , None ,) ,] } , NO_GENERICS ,) } } }
+    };
+}
+
+build_pointer_or_reference_di_node!()

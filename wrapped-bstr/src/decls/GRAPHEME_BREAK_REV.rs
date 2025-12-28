@@ -4,4 +4,4 @@ macro_rules! GRAPHEME_BREAK_REV {
     };
 }
 
-GRAPHEME_BREAK_REV!()
+GRAPHEME_BREAK_REV!();

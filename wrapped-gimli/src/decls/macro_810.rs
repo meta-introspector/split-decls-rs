@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugInfo!();
         DebugInfoOffset!();
+        DebugInfo!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_810 {
     };
 }
 
-macro_810!()
+macro_810!();

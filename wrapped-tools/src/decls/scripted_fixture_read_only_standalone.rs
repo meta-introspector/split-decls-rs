@@ -11,4 +11,4 @@ macro_rules! scripted_fixture_read_only_standalone {
     };
 }
 
-scripted_fixture_read_only_standalone!()
+scripted_fixture_read_only_standalone!();

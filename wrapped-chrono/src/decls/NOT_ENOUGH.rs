@@ -12,4 +12,4 @@ macro_rules! NOT_ENOUGH {
     };
 }
 
-NOT_ENOUGH!()
+NOT_ENOUGH!();

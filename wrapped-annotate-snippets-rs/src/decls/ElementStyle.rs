@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LevelInner!();
         Level!();
+        LevelInner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ElementStyle {
     };
 }
 
-ElementStyle!()
+ElementStyle!();

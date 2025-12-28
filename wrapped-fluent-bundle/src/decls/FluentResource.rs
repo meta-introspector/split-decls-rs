@@ -4,4 +4,4 @@ macro_rules! FluentResource {
     };
 }
 
-FluentResource!()
+FluentResource!();

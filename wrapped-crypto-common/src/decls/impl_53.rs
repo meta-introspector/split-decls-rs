@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         KeyInit!();
+        InnerInit!();
         WeakKeyError!();
         Key!();
         InvalidLength!();
-        InnerInit!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

@@ -11,4 +11,4 @@ macro_rules! sideband_progress_cb {
     };
 }
 
-sideband_progress_cb!()
+sideband_progress_cb!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Canonical!();
-        Binder!();
         CanonicalVarKind!();
+        Binder!();
+        Canonical!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! replace_errors_with_variables {
     };
 }
 
-replace_errors_with_variables!()
+replace_errors_with_variables!();

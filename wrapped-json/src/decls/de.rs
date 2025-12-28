@@ -1,6 +1,6 @@
 macro_rules! de {
     () => {
-        pub mod de ;
+        mod de ;
     };
 }
 

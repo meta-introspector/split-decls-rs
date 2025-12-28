@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Logger!();
-        Builder!();
-        Env!();
-        WriteStyle!();
-        TimestampPrecision!();
         Target!();
         Formatter!();
+        Builder!();
+        Env!();
+        TimestampPrecision!();
+        WriteStyle!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

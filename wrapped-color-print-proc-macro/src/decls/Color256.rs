@@ -4,4 +4,4 @@ macro_rules! Color256 {
     };
 }
 
-Color256!()
+Color256!();

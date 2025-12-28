@@ -4,4 +4,4 @@ macro_rules! DecoderReaderEngineWrapper {
     };
 }
 
-DecoderReaderEngineWrapper!()
+DecoderReaderEngineWrapper!();

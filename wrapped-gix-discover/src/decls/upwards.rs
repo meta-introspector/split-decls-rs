@@ -4,4 +4,4 @@ macro_rules! upwards {
     };
 }
 
-upwards!()
+upwards!();

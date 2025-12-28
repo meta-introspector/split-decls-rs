@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Platform!();
-        Error!();
         Change!();
+        Error!();
+        Platform!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

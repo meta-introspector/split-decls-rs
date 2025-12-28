@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FieldDefinition!();
         Positioned!();
+        FieldDefinition!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InterfaceType {
     };
 }
 
-InterfaceType!()
+InterfaceType!();

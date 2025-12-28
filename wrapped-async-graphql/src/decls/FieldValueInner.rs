@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Field!();
         Any!();
+        Field!();
         FieldValue!();
         Object!();
     };
@@ -14,4 +14,4 @@ macro_rules! FieldValueInner {
     };
 }
 
-FieldValueInner!()
+FieldValueInner!();

@@ -4,4 +4,4 @@ macro_rules! to_native_separators {
     };
 }
 
-to_native_separators!()
+to_native_separators!();

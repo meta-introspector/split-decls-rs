@@ -4,4 +4,4 @@ macro_rules! KnownFragmentNames {
     };
 }
 
-KnownFragmentNames!()
+KnownFragmentNames!();

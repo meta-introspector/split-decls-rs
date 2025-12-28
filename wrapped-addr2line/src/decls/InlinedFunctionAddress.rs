@@ -4,4 +4,4 @@ macro_rules! InlinedFunctionAddress {
     };
 }
 
-InlinedFunctionAddress!()
+InlinedFunctionAddress!();

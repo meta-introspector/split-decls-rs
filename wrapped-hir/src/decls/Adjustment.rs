@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Type!();
         Adjust!();
+        Type!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Adjustment {
     };
 }
 
-Adjustment!()
+Adjustment!();

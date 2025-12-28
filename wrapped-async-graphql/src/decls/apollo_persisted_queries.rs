@@ -4,4 +4,4 @@ macro_rules! apollo_persisted_queries {
     };
 }
 
-apollo_persisted_queries!()
+apollo_persisted_queries!();

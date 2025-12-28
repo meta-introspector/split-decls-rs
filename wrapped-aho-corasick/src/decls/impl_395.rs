@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RareBytesThree!();
         PrefilterI!();
-        Candidate!();
         Span!();
+        RareBytesThree!();
+        Candidate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_395 {
     };
 }
 
-impl_395!()
+impl_395!();

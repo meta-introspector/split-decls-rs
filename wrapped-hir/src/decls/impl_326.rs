@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExternAssocItem!();
         Static!();
+        ExternAssocItem!();
         AsExternAssocItem!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_326 {
     };
 }
 
-impl_326!()
+impl_326!();

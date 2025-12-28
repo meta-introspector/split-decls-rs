@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Int!();
-        ConstCtOption!();
         Uint!();
         NonZeroInt!();
         NonZero!();
+        ConstCtOption!();
         ConstChoice!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_190 {
     };
 }
 
-impl_190!()
+impl_190!();

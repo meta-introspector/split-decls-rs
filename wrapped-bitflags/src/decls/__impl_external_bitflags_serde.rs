@@ -11,4 +11,4 @@ macro_rules! __impl_external_bitflags_serde {
     };
 }
 
-__impl_external_bitflags_serde!()
+__impl_external_bitflags_serde!();

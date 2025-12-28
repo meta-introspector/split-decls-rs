@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        DebugLocLists!();
-        IndexSectionId!();
-        DebugInfo!();
-        DebugMacro!();
-        DebugTypes!();
-        DebugLine!();
-        DebugMacinfo!();
-        DebugLoc!();
-        SectionId!();
         DebugRngLists!();
+        SectionId!();
+        DebugLine!();
+        DebugLoc!();
+        IndexSectionId!();
+        DebugLocLists!();
+        DebugMacro!();
+        DebugInfo!();
         DebugStrOffsets!();
+        DebugMacinfo!();
+        DebugTypes!();
         DebugAbbrev!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! impl_396 {
     };
 }
 
-impl_396!()
+impl_396!();

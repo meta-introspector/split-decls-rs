@@ -11,4 +11,4 @@ macro_rules! decode_table {
     };
 }
 
-decode_table!()
+decode_table!();

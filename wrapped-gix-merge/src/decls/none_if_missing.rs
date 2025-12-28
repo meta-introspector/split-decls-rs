@@ -4,4 +4,4 @@ macro_rules! none_if_missing {
     };
 }
 
-none_if_missing!()
+none_if_missing!();

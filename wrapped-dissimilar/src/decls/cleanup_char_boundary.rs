@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Solution!();
         Range!();
         Diff!();
+        Solution!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! cleanup_char_boundary {
     };
 }
 
-cleanup_char_boundary!()
+cleanup_char_boundary!();

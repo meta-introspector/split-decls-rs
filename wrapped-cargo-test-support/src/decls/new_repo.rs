@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Project!();
         Repository!();
+        Project!();
         ProjectBuilder!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! new_repo {
     };
 }
 
-new_repo!()
+new_repo!();

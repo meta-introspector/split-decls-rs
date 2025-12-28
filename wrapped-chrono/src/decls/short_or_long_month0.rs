@@ -11,4 +11,4 @@ macro_rules! short_or_long_month0 {
     };
 }
 
-short_or_long_month0!()
+short_or_long_month0!();

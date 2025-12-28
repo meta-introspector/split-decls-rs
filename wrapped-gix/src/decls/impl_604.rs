@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Any!();
         Committer!();
+        Any!();
         Tree!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_604 {
     };
 }
 
-impl_604!()
+impl_604!();

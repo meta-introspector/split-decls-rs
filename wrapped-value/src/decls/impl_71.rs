@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SerdeVariable!();
-        Value!();
         Serializer!();
+        Value!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

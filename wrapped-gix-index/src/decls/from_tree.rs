@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Version!();
-        PathStorage!();
-        Tree!();
-        Stat!();
-        Options!();
-        Error!();
-        Mode!();
         Entry!();
-        Link!();
+        Options!();
+        Tree!();
+        Version!();
+        Mode!();
         State!();
+        Stat!();
+        Error!();
+        PathStorage!();
+        Link!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! from_tree {
     };
 }
 
-from_tree!()
+from_tree!();

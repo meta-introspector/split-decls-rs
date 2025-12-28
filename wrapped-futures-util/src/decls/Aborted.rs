@@ -4,4 +4,4 @@ macro_rules! Aborted {
     };
 }
 
-Aborted!()
+Aborted!();

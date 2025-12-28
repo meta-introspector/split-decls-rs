@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Delegate!();
+        Error!();
         ReflogLookup!();
         SiblingBranch!();
-        Error!();
         Navigate!();
+        Delegate!();
         Revision!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! revision {
     };
 }
 
-revision!()
+revision!();

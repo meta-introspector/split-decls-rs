@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Rebase!();
-        Error!();
         RebaseOperation!();
+        Error!();
+        Rebase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_589 {
     };
 }
 
-impl_589!()
+impl_589!();

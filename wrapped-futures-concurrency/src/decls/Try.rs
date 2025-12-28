@@ -4,4 +4,4 @@ macro_rules! Try {
     };
 }
 
-Try!()
+Try!();

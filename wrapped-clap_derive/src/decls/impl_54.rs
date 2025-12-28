@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Method!();
-        CasingStyle!();
-        Sp!();
-        Action!();
-        ClapAttr!();
-        Name!();
-        AttrKind!();
         Kind!();
+        Action!();
+        Name!();
         MagicAttrName!();
-        Ty!();
-        Item!();
-        Deprecation!();
+        ClapAttr!();
         AttrValue!();
+        Sp!();
+        CasingStyle!();
+        Ty!();
+        AttrKind!();
         ValueParser!();
+        Deprecation!();
+        Method!();
+        Item!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

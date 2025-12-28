@@ -4,4 +4,4 @@ macro_rules! Square {
     };
 }
 
-Square!()
+Square!();

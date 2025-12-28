@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PreviousValue!();
-        Change!();
         TargetRef!();
+        Change!();
+        PreviousValue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();
