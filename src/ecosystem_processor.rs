@@ -5,6 +5,7 @@ use walkdir::WalkDir; // Added for finding Cargo.toml files
 use rayon::prelude::*; // Re-enabled for parallel processing
 use crate::setup_crate_paths;
 use crate::eager_splitter; // Added eager_splitter and CratePaths
+use std::process::Command;
 //use crate::paths::{CratePaths, setup_crate_paths};
 
 pub fn process_ecosystem(
@@ -41,33 +42,63 @@ pub fn process_ecosystem(
 
     if verbose {
         println!("Found {} Cargo.toml files.", cargo_toml_paths.len());
+        println!("Splitting into 20 processes for parallel processing");
     }
 
-    // Configure rayon to use 1 thread to avoid stack overflow
-    rayon::ThreadPoolBuilder::new()
-        .num_threads(1)
-        .build_global()
-        .context("Failed to initialize thread pool")?;
+    // Split cargo_toml_paths into 20 chunks for separate processes
+    let chunk_size = (cargo_toml_paths.len() + 19) / 20; // Round up division
+    let chunks: Vec<Vec<PathBuf>> = cargo_toml_paths
+        .chunks(chunk_size)
+        .map(|chunk| chunk.to_vec())
+        .collect();
 
     if verbose {
-        println!("Using {} threads for parallel processing", rayon::current_num_threads());
+        for (i, chunk) in chunks.iter().enumerate() {
+            println!("Process {}: {} crates", i + 1, chunk.len());
+        }
     }
 
-    // Parallel processing with 1 thread (sequential to avoid stack overflow)
-    cargo_toml_paths.iter().try_for_each(|cargo_toml_path| {
-        let crate_path = cargo_toml_path.parent().unwrap().to_path_buf();
-        if verbose {
-            println!("Processing crate: {}", crate_path.display());
+    // Spawn 20 processes to handle the chunks
+    let mut handles = Vec::new();
+    for (process_id, chunk) in chunks.into_iter().enumerate() {
+        if chunk.is_empty() {
+            continue;
         }
 
-        // Setup crate paths
-        let paths = setup_crate_paths(&crate_path)?;
+        let global_config = global_config.clone();
+        let handle = std::thread::spawn(move || -> Result<()> {
+            println!("Process {} starting with {} crates", process_id + 1, chunk.len());
+            
+            chunk.iter().try_for_each(|cargo_toml_path| {
+                let crate_path = cargo_toml_path.parent().unwrap().to_path_buf();
+                println!("Process {}: Processing crate: {}", process_id + 1, crate_path.display());
 
-        // Perform eager splitting
-        eager_splitter::eager_split_crate(&paths, global_config)?;
+                // Setup crate paths
+                let paths = setup_crate_paths(&crate_path)?;
 
-        Ok::<(), anyhow::Error>(())
-    })?;
+                // Perform eager splitting
+                eager_splitter::eager_split_crate(&paths, &global_config)?;
+
+                Ok::<(), anyhow::Error>(())
+            })
+        });
+        
+        handles.push(handle);
+    }
+
+    // Wait for all processes to complete
+    for (i, handle) in handles.into_iter().enumerate() {
+        match handle.join() {
+            Ok(result) => {
+                if let Err(e) = result {
+                    eprintln!("Process {} failed: {}", i + 1, e);
+                }
+            }
+            Err(_) => {
+                eprintln!("Process {} panicked", i + 1);
+            }
+        }
+    }
 
 
     Ok(())
