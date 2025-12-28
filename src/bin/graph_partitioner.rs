@@ -3,6 +3,7 @@ use petgraph::{Graph, Undirected};
 use petgraph::graph::{NodeIndex, UnGraph};
 use std::collections::HashMap;
 use std::fs;
+use walkdir::WalkDir;
 
 type PartitionGraph = UnGraph<String, ()>;
 
@@ -59,15 +60,33 @@ impl GraphPartitioner {
 
     fn write_partitions(&self, partitions: &[Vec<String>]) -> Result<()> {
         for (i, partition) in partitions.iter().enumerate() {
-            let content = format!(
-                "// Partition {}\n// {} nodes\n\n{}\n",
+            let mut content = format!(
+                "// Partition {}\n// {} nodes\n// Generated from files:\n",
                 i,
-                partition.len(),
-                partition.iter()
-                    .map(|name| format!("pub use crate::decls::{};", name))
-                    .collect::<Vec<_>>()
-                    .join("\n")
+                partition.len()
             );
+            
+            // Add file tracking comments
+            for name in partition {
+                content.push_str(&format!("// - {}\n", name));
+            }
+            content.push('\n');
+            
+            // Generate macro calls that can add attributes
+            for name in partition {
+                let safe_name = name
+                    .replace('/', "_")
+                    .replace('-', "_")
+                    .replace('.', "_")
+                    .chars()
+                    .filter(|c| c.is_alphanumeric() || *c == '_')
+                    .collect::<String>();
+                
+                content.push_str(&format!(
+                    "partition_module!({}, \"{}\");\n",
+                    safe_name, name
+                ));
+            }
             
             fs::write(format!("partition_{}.rs", i), content)?;
         }
@@ -76,7 +95,11 @@ impl GraphPartitioner {
 }
 
 fn main() -> Result<()> {
-    let mut partitioner = GraphPartitioner::new(71);
+    let target_chunk_size = 9; // Target 7-11 nodes, use 9 as middle
+    let node_count = 14716; // We know this from previous run
+    let num_partitions = (node_count + target_chunk_size - 1) / target_chunk_size;
+    
+    let mut partitioner = GraphPartitioner::new(num_partitions);
     
     // Read dependency map if it exists
     if let Ok(content) = fs::read_to_string("dependency_map.rs") {
@@ -109,16 +132,15 @@ fn main() -> Result<()> {
         }
     }
     
-    // If no dependency map, create nodes from decls directory
+    // If no dependency map, create nodes from all .rs files in output2
     if partitioner.graph.node_count() == 0 {
-        if let Ok(entries) = fs::read_dir("src/decls") {
-            for entry in entries {
-                if let Ok(entry) = entry {
-                    if let Some(name) = entry.file_name().to_str() {
-                        if name.ends_with(".rs") {
-                            let node_name = name.trim_end_matches(".rs");
-                            partitioner.add_node(node_name.to_string());
-                        }
+        for entry in WalkDir::new("output2").into_iter().filter_map(|e| e.ok()) {
+            if entry.file_type().is_file() {
+                if let Some(path) = entry.path().to_str() {
+                    if path.ends_with(".rs") {
+                        // Use the relative path as node name
+                        let node_name = path.strip_prefix("output2/").unwrap_or(path);
+                        partitioner.add_node(node_name.to_string());
                     }
                 }
             }

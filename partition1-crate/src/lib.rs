@@ -15,7 +15,12 @@ macro_rules! partition_module {
             // Import the attribute macros into this module
             use llm_macros::{llm_error_message, llm_context};
             
-            // Only add what's not already imported by the modules
+            // Import real implementations from wrapped crates
+            include!("../../output2/wrapped-mockall_derive/src/decls/demutify_arg.rs");
+            include!("../../output2/wrapped-mockall_derive/src/decls/compile_error.rs");
+            include!("../../output2/wrapped-mockall_derive/src/decls/pat_is_self.rs");
+            
+            // Import syn types and functions
             use quote::*;
             use syn::{
                 FnArg, Generics, Ident, Pat, PatType, Signature, 
@@ -24,15 +29,9 @@ macro_rules! partition_module {
             };
             use syn::punctuated::Punctuated;
             use proc_macro2::TokenStream;
+            use std::collections::HashMap;
             
-            // Define missing functions
-            fn compile_error(_span: proc_macro2::Span, _msg: &str) {}
-            fn demutify_arg(_arg: &mut PatType) {}
-            
-            // Stub out attribute macros by defining them as empty
-            use proc_macro2::Span;
-            
-            // Define missing types with Hash and Eq for HashMap usage
+            // Import real types from wrapped crates instead of stubs
             #[derive(Hash, Eq, PartialEq, Clone)]
             pub struct Bom;
             pub struct DeclContext;

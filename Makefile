@@ -193,3 +193,24 @@ build_directory_analysis:
 run_directory_analysis:
 	@cargo run --bin directory_analysis 2>directory_analysis_run.log || true
 	@cat directory_analysis_run.log
+
+# Split syn crate using simple splitter
+simple_split_syn:
+	@echo "Splitting syn crate..." && cargo run --bin simple_split -- ../syn --output-dir output2 > simple_split_syn.log 2>&1 && echo "✅ syn split complete" || echo "❌ syn split failed"
+
+# Split quote crate using simple splitter  
+simple_split_quote:
+	@echo "Splitting quote crate..." && cargo run --bin simple_split -- ../quote --output-dir output2 > simple_split_quote.log 2>&1 && echo "✅ quote split complete" || echo "❌ quote split failed"
+
+# Split both syn and quote
+simple_split_both: simple_split_syn simple_split_quote
+	@echo "✅ Both syn and quote split complete"
+
+# Split hir-ty with detailed output
+simple_split_hir_ty:
+	@echo "Splitting hir-ty crate..." && cargo run --bin simple_split -- ../rust-analyzer/crates/hir-ty --output-dir output2 > simple_split_hir_ty.log 2>&1 && echo "✅ hir-ty split complete" || echo "❌ hir-ty split failed"
+
+# Split all crates from split-decls-rs.toml
+simple_split_all:
+	@echo "🚀 Splitting all crates from config..."
+	@cargo run --bin simple_split_all_crates > simple_split_all.log 2>&1 && echo "✅ All crates split complete" || echo "❌ Some crates failed - check simple_split_all.log"

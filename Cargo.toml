@@ -123,6 +123,7 @@ log = { workspace = true }
 env_logger = { workspace = true }
 lib-cargo = { path = "lib-cargo" }
 petgraph = { workspace = true }
+regex = "1.0"
 
 
 
