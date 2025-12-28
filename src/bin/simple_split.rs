@@ -1,0 +1,56 @@
+use anyhow::Result;
+use std::fs;
+use std::path::Path;
+use syn::{File, Item};
+use quote::ToTokens;
+
+fn main() -> Result<()> {
+    let args: Vec<String> = std::env::args().collect();
+    let crate_path = if args.len() > 1 { &args[1] } else { "." };
+    
+    println!("🔍 Splitting crate: {}", crate_path);
+    
+    let lib_rs = Path::new(crate_path).join("src/lib.rs");
+    if !lib_rs.exists() {
+        println!("❌ No src/lib.rs found");
+        return Ok(());
+    }
+    
+    let content = fs::read_to_string(&lib_rs)?;
+    let parsed: File = syn::parse_file(&content)?;
+    
+    let output_dir = Path::new(crate_path).join("src/decls");
+    fs::create_dir_all(&output_dir)?;
+    
+    let mut count = 0;
+    for item in parsed.items {
+        let name = match &item {
+            Item::Fn(f) => f.sig.ident.to_string(),
+            Item::Struct(s) => s.ident.to_string(),
+            Item::Enum(e) => e.ident.to_string(),
+            Item::Trait(t) => t.ident.to_string(),
+            Item::Impl(i) => format!("impl_{}", count),
+            _ => continue,
+        };
+        
+        let wrapped = format!(
+            "use super::*;\n\n{}",
+            item.to_token_stream()
+        );
+        
+        let file_path = output_dir.join(format!("{}.rs", name));
+        fs::write(file_path, wrapped)?;
+        count += 1;
+    }
+    
+    // Generate new lib.rs
+    let new_lib = format!(
+        "pub mod decls;\npub use decls::*;\n"
+    );
+    
+    fs::rename(&lib_rs, Path::new(crate_path).join("src/lib_old.rs"))?;
+    fs::write(&lib_rs, new_lib)?;
+    
+    println!("✅ Split {} items", count);
+    Ok(())
+}
